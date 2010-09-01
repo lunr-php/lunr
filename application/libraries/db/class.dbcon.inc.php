@@ -96,10 +96,10 @@ class DBCon
      */
     public function __construct($db)
     {
-        $this->host = $db['host'];
-        $this->user = $db['user'];
+        $this->host = $db['hostname'];
+        $this->user = $db['username'];
         $this->pwd = $db['password'];
-        $this->db = $db['db'];
+        $this->db = $db['database'];
         $this->where = "";
         $this->order = "";
         $this->group = "";
