@@ -1,6 +1,7 @@
 <?php
 
-abstract class Controller {
+abstract class Controller
+{
 
     public function __construct()
     {

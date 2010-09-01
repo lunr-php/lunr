@@ -1,6 +1,7 @@
 <?php
 
-abstract class Model {
+abstract class Model
+{
 
     public function __construct()
     {
