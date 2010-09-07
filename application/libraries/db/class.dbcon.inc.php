@@ -194,6 +194,51 @@ class DBCon
     }
 
     /**
+     * Return the preliminary query, that would be executed by query() at this point
+     * **DEBUG**
+     * @param String $from Where to get the data from
+     * @return String SQL query
+     */
+    public function preliminary_query($from)
+    {
+        $sql_command = "";
+
+        if ($this->select != "")
+        {
+            $sql_command .= $this->select;
+        }
+
+        $sql_command .= "FROM " . $this->escape_as($from);
+
+        if ($this->join != "")
+        {
+            $sql_command .= $this->join;
+        }
+
+        if ($this->where != "")
+        {
+            $sql_command .= $this->where;
+        }
+
+        if ($this->group != "")
+        {
+            $sql_command .= $this->group;
+        }
+
+        if ($this->order != "")
+        {
+            $sql_command .= $this->order;
+        }
+
+        if ($this->limit != "")
+        {
+            $sql_command .= $this->limit;
+        }
+
+        return $sql_command;
+    }
+
+    /**
      * Executes a defined SQL query
      * @param String $sql_command Predefined SQL query
      * @param Boolean $return Return a Query Result
