@@ -118,6 +118,8 @@ class DBCon
         $this->order = "";
         $this->group = "";
         $this->limit = "";
+        $this->last_query = "";
+        $this->connected = FALSE;
     }
 
     /**
@@ -201,11 +203,13 @@ class DBCon
      */
     public function preliminary_query($from)
     {
-        $sql_command = "";
-
         if ($this->select != "")
         {
-            $sql_command .= $this->select;
+            $sql_command = $this->select;
+        }
+        else
+        {
+            $sql_command = "SELECT * ";
         }
 
         $sql_command .= "FROM " . $this->escape_as($from);
@@ -633,7 +637,7 @@ class DBCon
         $col = "";
         foreach ($parts AS $part)
         {
-            $col .= "`$part`.";
+            $col .= "`" . trim($part) . "`.";
         }
         $col = substr_replace($col, " ", strripos($col, "."));
         return $col;
@@ -653,16 +657,16 @@ class DBCon
             if (strpos($value, " AS "))
             {
                 $col = explode(" AS ",$value);
-                $string .= " `" . $this->escape_columns($col[0]) . "` AS `" . $col[1] . "`, ";
+                $string .= $this->escape_columns($col[0]) . " AS `" . trim($col[1]) . "`, ";
             }
             elseif (strpos($value, " as "))
             {
                 $col = explode(" as ",$value);
-                $string .= " `" . $this->escape_columns($col[0]) . "` AS `" . $col[1] . "`, ";
+                $string .= $this->escape_columns($col[0]) . " AS `" . trim($col[1]) . "`, ";
             }
             else
             {
-                $string .= " `$value`,";
+                $string .= " `" . trim($value) . "`,";
             }
         }
         $string = substr_replace($string, " ", strripos($string, ","));
