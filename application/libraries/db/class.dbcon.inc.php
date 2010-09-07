@@ -261,12 +261,6 @@ class DBCon
             $this->where = "";
         }
 
-        if ($this->group != "")
-        {
-            $sql_command = $sql_command . $this->group;
-            $this->group = "";
-        }
-
         if ($this->order != "")
         {
             $sql_command = $sql_command . $this->order;
@@ -289,6 +283,66 @@ class DBCon
         else{
             mysqli_query($this->res, $sql_command);
         }
+    }
+
+    /**
+     * Execute the defined SQL query and return the result set
+     * @param String $from Where to get the data from
+     * @return Object Query result
+     */
+    public function get($from)
+    {
+        if (!$this->connected)
+        {
+            $this->connect();
+        }
+
+        if ($this->select != "")
+        {
+            $sql_command = $this->select;
+            $this->select = "";
+        }
+        else
+        {
+            $sql_command = "SELECT * ";
+        }
+
+        $sql_command .= "FROM " . $this->escape_as($from);
+
+        if ($this->join != "")
+        {
+            $sql_command .= $this->join;
+            $this->join = "";
+        }
+
+        if ($this->where != "")
+        {
+            $sql_command .= $this->where;
+            $this->where = "";
+        }
+
+        if ($this->group != "")
+        {
+            $sql_command .= $this->group;
+            $this->group = "";
+        }
+
+        if ($this->order != "")
+        {
+            $sql_command .= $this->order;
+            $this->order = "";
+        }
+
+        if ($this->limit != "")
+        {
+            $sql_command .= $this->limit;
+            $this->limit = "";
+        }
+
+        $this->last_query = $sql_command;
+
+        $output = mysqli_query($this->res, $sql_command);
+        return new Query($output, $this->res);
     }
 
     /**
