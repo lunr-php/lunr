@@ -27,7 +27,7 @@ class DateTime
      * Return today's date (YYYY-MM-DD)
      * @return String Today's date
      */
-    public function today()
+    public static function today()
     {
         return date('Y-m-d');
     }
@@ -36,7 +36,7 @@ class DateTime
      * Return tomorrow's date (YYYY-MM-DD)
      * @return String Tomorrow's date
      */
-    public function tomorrow()
+    public static function tomorrow()
     {
         return date('Y-m-d', strtotime("+1 day"));
     }
