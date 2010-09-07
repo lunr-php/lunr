@@ -245,9 +245,10 @@ class DBCon
     /**
      * Define a SELECT statement
      * @param String $select The columns to select
+     * @param String $escape Whether to escape the select statement or not. Default to "TRUE"
      * @return void
      */
-    public function select($select)
+    public function select($select, $escape = TRUE)
     {
         if ($this->select == "")
         {
@@ -258,7 +259,14 @@ class DBCon
             $this->select .= ", ";
         }
 
-        $this->select .= $this->escape_as($select);
+        if ($escape)
+        {
+            $this->select .= $this->escape_as($select);
+        }
+        else
+        {
+            $this->select .= $select . " ";
+        }
     }
 
     /**
