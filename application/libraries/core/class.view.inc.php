@@ -15,7 +15,7 @@ abstract class View
 
     /**
      * Reference to the Controller who instantiated the View
-     * @var Object
+     * @var Controller
      */
     protected $controller;
 
