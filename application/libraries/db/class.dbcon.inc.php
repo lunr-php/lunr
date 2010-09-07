@@ -67,6 +67,18 @@ class DBCon
     private $last_query;
 
     /**
+     * SQL Query part: SELECT statement
+     * @var String
+     */
+    private $select;
+
+    /**
+     * SQL Query part: JOIN clause
+     * @var String
+     */
+    private $join;
+
+    /**
      * SQL Query part: WHERE clause
      * @var String
      */
@@ -100,6 +112,8 @@ class DBCon
         $this->user = $db['username'];
         $this->pwd = $db['password'];
         $this->db = $db['database'];
+        $this->select = "";
+        $this->join = "";
         $this->where = "";
         $this->order = "";
         $this->group = "";
@@ -123,6 +137,8 @@ class DBCon
         unset($this->res);
         unset($this->connected);
         unset($this->last_query);
+        unset($this->select);
+        unset($this->join);
         unset($this->where);
         unset($this->order);
         unset($this->group);
@@ -224,6 +240,37 @@ class DBCon
         else{
             mysqli_query($this->res, $sql_command);
         }
+    }
+
+    /**
+     * Define a SELECT statement
+     * @param String $select The columns to select
+     * @return void
+     */
+    public function select($select)
+    {
+        if ($this->select == "")
+        {
+            $this->select = "SELECT ";
+        }
+        else
+        {
+            $this->select .= ", ";
+        }
+
+        $this->select .= $this->escape_as($select);
+    }
+
+    /**
+     * Define a JOIN clause
+     * @param String $table The table name to join with
+     * @param String $on Base information on what the join should be done
+     * @param String $sort Sort of JOIN operation to be done (INNER JOIN by default)
+     * @return void
+     */
+    public function join($table, $on, $sort = "INNER")
+    {
+        $this->join .= "$sort JOIN " . $this->escape_as($table) . " ON " . $this->escape_on($on) . " ";
     }
 
     /**
@@ -524,7 +571,7 @@ class DBCon
 
     /**
      * Escape column names
-     * @param String $col Column(s)
+     * @param String $col Column
      * @return String escaped column list
      */
     private function escape_columns($col)
@@ -537,6 +584,48 @@ class DBCon
         }
         $col = substr_replace($col, " ", strripos($col, "."));
         return $col;
+    }
+
+    /**
+     * Escape column names for statements using the "AS" operator
+     * @param String $cols Column(s)
+     * @return String escaped column list
+     */
+    private function escape_as($cols)
+    {
+        $cols = explode(",", $cols);
+        $string = "";
+        foreach ($cols AS $value)
+        {
+            if (strpos($value, " AS "))
+            {
+                $col = explode(" AS ",$value);
+                $string .= " `" . $this->escape_columns($col[0]) . "` AS `" . $col[1] . "`, ";
+            }
+            elseif (strpos($value, " as "))
+            {
+                $col = explode(" as ",$value);
+                $string .= " `" . $this->escape_columns($col[0]) . "` AS `" . $col[1] . "`, ";
+            }
+            else
+            {
+                $string .= " `$value`,";
+            }
+        }
+        $string = substr_replace($string, " ", strripos($string, ","));
+        return $string;
+    }
+
+    /**
+     * Escape column names for "ON"-using statements
+     * @param String $string comparison string
+     * @return String escaped column list
+     */
+    private function escape_on($string)
+    {
+        $parts = explode("=", $string);
+        $return = $this->escape_columns($parts[0]) . " = " . $this->escape_columns($parts[1]);
+        return $return;
     }
 }
 
