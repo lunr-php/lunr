@@ -25,6 +25,8 @@ class Fork
 
     /**
      * Start multiple parallel child processes
+     * WARNING: make sure to not reuse an already existing DB-Connection established by the parent
+     * in the children. Best would be to not establish a DB-Connection in the parent at all.
      * @param Integer $number Amount of child processes to start
      * @param Mixed $call The call that should be executed by the child processes
      *      either "function" or "array('class','method')"
