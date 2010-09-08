@@ -61,6 +61,12 @@ class DBCon
     private $connected;
 
     /**
+     * Transaction status
+     * @var Boolean
+     */
+    private $transaction;
+
+    /**
      * Last executed query
      * @var String
      */
@@ -120,6 +126,7 @@ class DBCon
         $this->limit = "";
         $this->last_query = "";
         $this->connected = FALSE;
+        $this->transaction = FALSE;
     }
 
     /**
@@ -128,6 +135,10 @@ class DBCon
      */
     public function __destruct()
     {
+        if ($this->transaction)
+        {
+            $this->rollback();
+        }
         if ($this->connected)
         {
             $this->disconnect();
@@ -138,6 +149,7 @@ class DBCon
         unset($this->db);
         unset($this->res);
         unset($this->connected);
+        unset($this->transaction);
         unset($this->last_query);
         unset($this->select);
         unset($this->join);
@@ -626,6 +638,80 @@ class DBCon
     {
         $sql = "DELETE FROM `$table`";
         $this->query($sql,false);
+    }
+
+    /**
+     * Start Transaction mode by disabling autocommit
+     * @return Boolean True on success and false on failure
+     */
+    public function begin_transaction()
+    {
+        if(mysqli_autocommit($this->res,FALSE))
+        {
+            $this->transaction = TRUE;
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    /**
+     * Commit previous queries of a transaction
+     * @return Boolean True on success and False on failure
+     */
+    public function commit()
+    {
+        if (mysqli_commit($this->res))
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    /**
+     * Rollback to the state of the database of the last commit or before the begin
+     * of the transaction
+     * @return Boolean True on success and False on failure
+     */
+    public function rollback()
+    {
+        if (mysqli_rollback($this->res))
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    /**
+     * End Transaction, commit remaining uncommitted queries
+     * @return Boolean True on success and False on failure
+     */
+    public function end_transaction()
+    {
+        if ($this->commit())
+        {
+            if (mysqli_autocommit($this->res,TRUE))
+            {
+                $this->transaction = FALSE;
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
+        else
+        {
+            return FALSE;
+        }
     }
 
     /**
