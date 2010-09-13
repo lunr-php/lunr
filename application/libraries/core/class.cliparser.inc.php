@@ -31,8 +31,8 @@ class CliParser
     private $short;
 
     /**
-     * String defining all possible long options
-     * @var String
+     * Array containing all possible long options
+     * @var array
      */
     private $long;
 
