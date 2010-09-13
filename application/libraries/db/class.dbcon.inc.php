@@ -109,6 +109,12 @@ class DBCon
     private $limit;
 
     /**
+     * SQL Query part: UNION statement
+     * @var String
+     */
+    private $union;
+
+    /**
      * Constructor
      * automatically sets up mysql server-vars
      */
@@ -124,6 +130,7 @@ class DBCon
         $this->order = "";
         $this->group = "";
         $this->limit = "";
+        $this->union = "";
         $this->last_query = "";
         $this->connected = FALSE;
         $this->transaction = FALSE;
@@ -157,6 +164,7 @@ class DBCon
         unset($this->order);
         unset($this->group);
         unset($this->limit);
+        unset($this->union);
     }
 
     /**
@@ -215,13 +223,19 @@ class DBCon
      */
     public function preliminary_query($from)
     {
+        $sql_command = "";
+
+        if ($this->union != "")
+        {
+            $sql_command .= $this->union;
+        }
         if ($this->select != "")
         {
-            $sql_command = $this->select;
+            $sql_command .= $this->select;
         }
         else
         {
-            $sql_command = "SELECT * ";
+            $sql_command .= "SELECT * ";
         }
 
         $sql_command .= "FROM " . $this->escape_as($from);
@@ -309,14 +323,22 @@ class DBCon
             $this->connect();
         }
 
+        $sql_command = "";
+
+        if ($this->union != "")
+        {
+            $sql_command .= $this->union;
+            $this->union = "";
+        }
+
         if ($this->select != "")
         {
-            $sql_command = $this->select;
+            $sql_command .= $this->select;
             $this->select = "";
         }
         else
         {
-            $sql_command = "SELECT * ";
+            $sql_command .= "SELECT * ";
         }
 
         $sql_command .= "FROM " . $this->escape_as($from);
@@ -594,6 +616,16 @@ class DBCon
         {
             $this->limit = " LIMIT $start,$count";
         }
+    }
+
+    /**
+     * Define a UNION statement
+     * @param String $from table name to select from for the first query
+     * @return void
+     */
+    public function union($from)
+    {
+        $this->union = $this->preliminary_query($from) . " UNION ";
     }
 
     /**
