@@ -278,7 +278,7 @@ class DBCon
      * Executes a defined SQL query
      * @param String $sql_command Predefined SQL query
      * @param Boolean $return Return a Query Result
-     * @return Mixed Query Result, or FALSE on connection failure
+     * @return Mixed Query Result, TRUE on successful query or FALSE on connection failure
      */
     public function query($sql_command, $return = true)
     {
@@ -316,6 +316,7 @@ class DBCon
             }
             else{
                 mysqli_query($this->res, $sql_command);
+                return TRUE;
             }
         }
         else
@@ -698,7 +699,12 @@ class DBCon
      */
     public function begin_transaction()
     {
-        if(mysqli_autocommit($this->res,FALSE))
+        if (!$this->connected)
+        {
+            $this->connect();
+        }
+
+        if ($this->connected && mysqli_autocommit($this->res,FALSE))
         {
             $this->transaction = TRUE;
             return TRUE;
@@ -715,7 +721,12 @@ class DBCon
      */
     public function commit()
     {
-        if (mysqli_commit($this->res))
+        if (!$this->connected)
+        {
+            $this->connect();
+        }
+
+        if ($this->connected && mysqli_commit($this->res))
         {
             return TRUE;
         }
@@ -732,7 +743,12 @@ class DBCon
      */
     public function rollback()
     {
-        if (mysqli_rollback($this->res))
+        if (!$this->connected)
+        {
+            $this->connect();
+        }
+
+        if ($this->connected && mysqli_rollback($this->res))
         {
             return TRUE;
         }
@@ -748,22 +764,61 @@ class DBCon
      */
     public function end_transaction()
     {
-        if ($this->commit())
+        if ($this->commit() && mysqli_autocommit($this->res,TRUE))
         {
-            if (mysqli_autocommit($this->res,TRUE))
-            {
-                $this->transaction = FALSE;
-                return TRUE;
-            }
-            else
-            {
-                return FALSE;
-            }
+            $this->transaction = FALSE;
+            return TRUE;
         }
         else
         {
             return FALSE;
         }
+    }
+
+    /**
+     * Change the default database for the current connection
+     * @param String $db New default database
+     * @return Boolean True on success, False on Failure
+     */
+    public function change_database($db)
+    {
+        if (!$this->connected)
+        {
+            $this->connect();
+        }
+
+        if ($this->connected && mysqli_select_db($this->res,$db))
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    /**
+     * Delete a view in the database
+     * @param String $view Name of the view
+     * @return Boolean TRUE on successful query or FALSE on connection failure
+     */
+    public function drop_view($view)
+    {
+        $sql = "DROP VIEW " . $this->escape_string($view);
+        return $this->query($sql);
+    }
+
+    /**
+     * Create a view in the database
+     * @param String $name Name of the view
+     * @param String $from Name of the first table used in the from clause for the view definition
+     * @return Boolean TRUE on successful query or FALSE on connection failure
+     */
+    public function create_view($name, $from)
+    {
+        $sql = "CREATE VIEW " . $this->escape_string($name) . " AS ";
+        $sql .= $this->preliminary_query($from);
+        return $this->query($sql);
     }
 
     /**
