@@ -174,8 +174,11 @@ class DBCon
     public function connect()
     {
         $this->res = mysqli_connect($this->host, $this->user, $this->pwd, $this->db);
-        mysqli_set_charset($this->res, "utf8");
-        $this->connected = TRUE;
+        if ($this->res)
+        {
+            mysqli_set_charset($this->res, "utf8");
+            $this->connected = TRUE;
+        }
     }
 
     /**
@@ -184,8 +187,11 @@ class DBCon
      */
     public function disconnect()
     {
-        mysqli_close($this->res);
-        $this->connected = FALSE;
+        if ($this->connected)
+        {
+            mysqli_close($this->res);
+            $this->connected = FALSE;
+        }
     }
 
     /**
@@ -272,7 +278,7 @@ class DBCon
      * Executes a defined SQL query
      * @param String $sql_command Predefined SQL query
      * @param Boolean $return Return a Query Result
-     * @return Mixed Query Result
+     * @return Mixed Query Result, or FALSE on connection failure
      */
     public function query($sql_command, $return = true)
     {
@@ -281,40 +287,47 @@ class DBCon
             $this->connect();
         }
 
-        if ($this->where != "")
+        if ($this->connected)
         {
-            $sql_command = $sql_command . $this->where;
-            $this->where = "";
-        }
+            if ($this->where != "")
+            {
+                $sql_command = $sql_command . $this->where;
+                $this->where = "";
+            }
 
-        if ($this->order != "")
+            if ($this->order != "")
+            {
+                $sql_command = $sql_command . $this->order;
+                $this->order = "";
+            }
+
+            if ($this->limit != "")
+            {
+                $sql_command = $sql_command . $this->limit;
+                $this->limit = "";
+            }
+
+            $this->last_query = $sql_command;
+
+            if ($return)
+            {
+                $output = mysqli_query($this->res, $sql_command);
+                return new Query($output, $this->res);
+            }
+            else{
+                mysqli_query($this->res, $sql_command);
+            }
+        }
+        else
         {
-            $sql_command = $sql_command . $this->order;
-            $this->order = "";
-        }
-
-        if ($this->limit != "")
-        {
-            $sql_command = $sql_command . $this->limit;
-            $this->limit = "";
-        }
-
-        $this->last_query = $sql_command;
-
-        if ($return)
-        {
-            $output = mysqli_query($this->res, $sql_command);
-            return new Query($output, $this->res);
-        }
-        else{
-            mysqli_query($this->res, $sql_command);
+            return FALSE;
         }
     }
 
     /**
      * Execute the defined SQL query and return the result set
      * @param String $from Where to get the data from
-     * @return Object Query result
+     * @return Query Query result, or False on connection failure
      */
     public function get($from)
     {
@@ -323,60 +336,67 @@ class DBCon
             $this->connect();
         }
 
-        $sql_command = "";
-
-        if ($this->union != "")
+        if ($this->connected)
         {
-            $sql_command .= $this->union;
-            $this->union = "";
-        }
+            $sql_command = "";
 
-        if ($this->select != "")
-        {
-            $sql_command .= $this->select;
-            $this->select = "";
+            if ($this->union != "")
+            {
+                $sql_command .= $this->union;
+                $this->union = "";
+            }
+
+            if ($this->select != "")
+            {
+                $sql_command .= $this->select;
+                $this->select = "";
+            }
+            else
+            {
+                $sql_command .= "SELECT * ";
+            }
+
+            $sql_command .= "FROM " . $this->escape_as($from);
+
+            if ($this->join != "")
+            {
+                $sql_command .= $this->join;
+                $this->join = "";
+            }
+
+            if ($this->where != "")
+            {
+                $sql_command .= $this->where;
+                $this->where = "";
+            }
+
+            if ($this->group != "")
+            {
+                $sql_command .= $this->group;
+                $this->group = "";
+            }
+
+            if ($this->order != "")
+            {
+                $sql_command .= $this->order;
+                $this->order = "";
+            }
+
+            if ($this->limit != "")
+            {
+                $sql_command .= $this->limit;
+                $this->limit = "";
+            }
+
+            $this->last_query = $sql_command;
+
+            $output = mysqli_query($this->res, $sql_command);
+            return new Query($output, $this->res);
         }
         else
         {
-            $sql_command .= "SELECT * ";
+            return FALSE;
         }
-
-        $sql_command .= "FROM " . $this->escape_as($from);
-
-        if ($this->join != "")
-        {
-            $sql_command .= $this->join;
-            $this->join = "";
-        }
-
-        if ($this->where != "")
-        {
-            $sql_command .= $this->where;
-            $this->where = "";
-        }
-
-        if ($this->group != "")
-        {
-            $sql_command .= $this->group;
-            $this->group = "";
-        }
-
-        if ($this->order != "")
-        {
-            $sql_command .= $this->order;
-            $this->order = "";
-        }
-
-        if ($this->limit != "")
-        {
-            $sql_command .= $this->limit;
-            $this->limit = "";
-        }
-
-        $this->last_query = $sql_command;
-
-        $output = mysqli_query($this->res, $sql_command);
-        return new Query($output, $this->res);
     }
 
     /**
@@ -787,7 +807,7 @@ class DBCon
     /**
      * Escape a string to be used in a SQL query
      * @param String $string The string to escape
-     * @return String the escaped string
+     * @return Mixed the escaped string, False on connection error
      */
     private function escape_string($string)
     {
@@ -795,7 +815,14 @@ class DBCon
         {
             $this->connect();
         }
-        return mysqli_real_escape_string($this->res, $string);
+        if ($this->connected)
+        {
+            return mysqli_real_escape_string($this->res, $string);
+        }
+        else
+        {
+            return FALSE;
+        }
     }
 
     /**
