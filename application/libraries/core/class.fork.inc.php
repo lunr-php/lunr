@@ -34,7 +34,7 @@ class Fork
      *      this array should be size() = $number
      * @return Mixed Either false if run out of CLI context or an array of child process statuses
      */
-    public static function fork($number, $call, $data)
+    public static function doFork($number, $call, &$data)
     {
         global $cli;
         if ($cli)
@@ -46,12 +46,23 @@ class Fork
                 if(!$pids[$i])
                 {
                     // child process
-                    call_user_func_array($call,$data[$i]);
+                    if (is_array($data[$i]))
+                    {
+                        call_user_func_array($call,$data[$i]);
+                    }
+                    elseif (is_object($data[$i]) && ($data[$i] instanceof SplFixedArray))
+                    {
+                        call_user_func_array($call,$data[$i]->toArray());
+                    }
+                    else
+                    {
+                        call_user_func($call,$data[$i]);
+                    }
                     exit();
                 }
             }
 
-            $result = SplFixedArray($number);
+            $result = new SplFixedArray($number);
 
             for($i = 0; $i < $number; ++$i)
             {
