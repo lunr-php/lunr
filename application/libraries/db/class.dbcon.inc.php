@@ -91,6 +91,12 @@ class DBCon
     private $where;
 
     /**
+     * SQL Query part: Where () clause
+     * @var Boolean
+     */
+    private $where_group;
+
+    /**
      * SQL Query part: ORDER BY clause
      * @var String
      */
@@ -127,6 +133,7 @@ class DBCon
         $this->select = "";
         $this->join = "";
         $this->where = "";
+        $this->where_group = false;
         $this->order = "";
         $this->group = "";
         $this->limit = "";
@@ -165,6 +172,7 @@ class DBCon
         unset($this->group);
         unset($this->limit);
         unset($this->union);
+        unset($this->where_group);
     }
 
     /**
@@ -439,6 +447,24 @@ class DBCon
         $this->join .= "$sort JOIN " . $this->escape_as($table) . " ON " . $this->escape_on($on) . " ";
     }
 
+    public function start_where_group($connector = "")
+    {
+        if ($this->where == "")
+        {
+            $this->where = " WHERE ( ";
+        }
+        else
+        {
+            $this->where .= " $connector ( ";
+        }
+        $this->where_group = TRUE;
+    }
+
+    public function end_where_group()
+    {
+        $this->where .= " ) ";
+    }
+
     /**
      * Define a WHERE clause
      * @param String $col Column name
@@ -452,6 +478,11 @@ class DBCon
         if ($this->where == "")
         {
             $this->where = " WHERE ";
+        }
+        elseif ($this->where_group)
+        {
+            $this->where .= "";
+            $this->where_group = FALSE;
         }
         else
         {
@@ -484,9 +515,50 @@ class DBCon
         {
             $this->where = " WHERE ";
         }
+        elseif ($this->where_group)
+        {
+            $this->where .= "";
+            $this->where_group = FALSE;
+        }
         else
         {
             $this->where .= " AND ";
+        }
+
+        if ($collate == "")
+        {
+            $base_charset = "";
+        }
+        else
+        {
+            $base_charset = "_utf8 ";
+            $collate = " COLLATE $collate";
+        }
+
+        $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "%'" .$collate;
+    }
+
+    /**
+     * Define an alternative LIKE clause
+     * @param String $col Column name
+     * @param String $val Value that should be matched
+     * @param String $collate Specific collate used for comparison (optional)
+     * @return void
+     */
+    public function or_like($col, $val, $collate = "")
+    {
+        if ($this->where == "")
+        {
+            $this->where = " WHERE ";
+        }
+        elseif ($this->where_group)
+        {
+            $this->where .= "";
+            $this->where_group = FALSE;
+        }
+        else
+        {
+            $this->where .= " OR ";
         }
 
         if ($collate == "")
@@ -514,6 +586,11 @@ class DBCon
         if ($this->where == "")
         {
             $this->where = " WHERE ";
+        }
+        elseif ($this->where_group)
+        {
+            $this->where .= "";
+            $this->where_group = FALSE;
         }
         else
         {
@@ -545,6 +622,11 @@ class DBCon
         if ($this->where == "")
         {
             $this->where = " WHERE ";
+        }
+        elseif ($this->where_group)
+        {
+            $this->where .= "";
+            $this->where_group = FALSE;
         }
         else
         {
