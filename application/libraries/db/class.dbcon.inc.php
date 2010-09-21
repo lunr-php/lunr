@@ -443,10 +443,11 @@ class DBCon
      * Define a WHERE clause
      * @param String $col Column name
      * @param String $val Value that should be matched
+     * @param String $operator Comparison operator that should be used (optional, '=' by default)
      * @param String $collate Specific collate used for comparison (optional)
      * @return void
      */
-    public function where($col, $val, $collate = "")
+    public function where($col, $val, $operator = "=", $collate = "")
     {
         if ($this->where == "")
         {
@@ -467,38 +468,7 @@ class DBCon
             $collate = " COLLATE $collate";
         }
 
-        $this->where .= $this->escape_columns($col) . "= " . $base_charset . "'" . $this->escape_string($val) . "'" . $collate;
-    }
-
-    /**
-     * Define a WHERE NOT clause
-     * @param String $col Column name
-     * @param String $val Value that should be matched
-     * @param String $collate Specific collate used for comparison (optional)
-     * @return void
-     */
-    public function where_not($col, $val, $collate = "")
-    {
-        if ($this->where == "")
-        {
-            $this->where = " WHERE ";
-        }
-        else
-        {
-            $this->where .= " AND ";
-        }
-
-        if ($collate == "")
-        {
-            $base_charset = "";
-        }
-        else
-        {
-            $base_charset = "_utf8 ";
-            $collate = " COLLATE $collate";
-        }
-
-        $this->where .= $this->escape_columns($col) . "<> " . $base_charset . "'" . $this->escape_string($val) . "'" . $collate;
+        $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "'" . $this->escape_string($val) . "'" . $collate;
     }
 
     /**
