@@ -447,6 +447,11 @@ class DBCon
         $this->join .= "$sort JOIN " . $this->escape_as($table) . " ON " . $this->escape_on($on) . " ";
     }
 
+    /**
+     * Start a WHERE clause group
+     * @param String $connector Logical connector to use (optional, empty by default)
+     * @return void
+     */
     public function start_where_group($connector = "")
     {
         if ($this->where == "")
@@ -460,6 +465,10 @@ class DBCon
         $this->where_group = TRUE;
     }
 
+    /**
+     * End a where group
+     * @return void
+     */
     public function end_where_group()
     {
         $this->where .= " ) ";
