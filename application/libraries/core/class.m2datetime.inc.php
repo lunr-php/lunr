@@ -4,7 +4,7 @@
  * Date/Time related functions
  * @author M2Mobi, Heinz Wiesinger
  */
-class DateTime
+class M2DateTime
 {
 
     /**
@@ -39,6 +39,15 @@ class DateTime
     public static function tomorrow()
     {
         return date('Y-m-d', strtotime("+1 day"));
+    }
+
+    /**
+     * Return the current time (HH:MM:SS)
+     * @return String current time
+     */
+    public static function now()
+    {
+        return strftime("%H:%M:%S", time());
     }
 
 }
