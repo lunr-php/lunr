@@ -622,7 +622,7 @@ class DBCon
     /**
      * Define a WHERE IN clause
      * @param String $col Column name
-     * @param String $val Value that should be matched
+     * @param Mixed $val Value that should be matched
      * @param String $collate Specific collate used for comparison (optional)
      * @return void
      */
