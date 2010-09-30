@@ -230,6 +230,24 @@ class DBCon
     }
 
     /**
+     * Get the calculated amount of total rows for the last executed query
+     * @return mixed $return The amount of rows on success, False on failure
+     */
+    public function found_rows()
+    {
+        $sql = "SELECT FOUND_ROWS() AS total;";
+        $query = $this->query($sql, TRUE);
+        if ($query)
+        {
+            return $query->field('total');
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    /**
      * Return the preliminary query, that would be executed by query() at this point
      * **DEBUG**
      * @param String $from Where to get the data from
