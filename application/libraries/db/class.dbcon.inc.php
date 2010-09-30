@@ -436,6 +436,28 @@ class DBCon
     }
 
     /**
+     * Define a special SELECT statement.
+     * WARNING: This overwrites previously defined select criterias
+     * @param String $select The columns to select
+     * @param String $special The special criteria for the select statement
+     * @param String $escape Whether to escape the select statement or not. Default to "TRUE"
+     * @return void
+     */
+    public function select_special($select, $special, $escape = TRUE)
+    {
+        $this->select = "SELECT " . $special . " ";
+
+        if ($escape)
+        {
+            $this->select .= $this->escape_as($select);
+        }
+        else
+        {
+            $this->select .= $select . " ";
+        }
+    }
+
+    /**
      * Define a JOIN clause
      * @param String $table The table name to join with
      * @param String $on Base information on what the join should be done
