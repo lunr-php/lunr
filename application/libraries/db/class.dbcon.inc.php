@@ -727,6 +727,22 @@ class DBCon
     }
 
     /**
+     * Define a REPLACE statement
+     * @param String $table The table to insert into
+     * @param Mixed $data The data to insert
+     * @return void
+     */
+    public function replace($table, $data)
+    {
+        $sql  = "REPLACE INTO `$table` ";
+        $sql .= $this->prepare_data($data,"keys");
+        $sql .= "VALUES ";
+        $sql .= $this->prepare_data($data,"values");
+        $sql .= ";";
+        $this->query($sql,false);
+    }
+
+    /**
      * Define an UPDATE statement
      * @param String $table The table to update
      * @param Mixed $data The updated data
