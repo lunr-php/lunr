@@ -121,6 +121,12 @@ class DBCon
     private $union;
 
     /**
+     * Determine whether we are locking a table row or not
+     * @var Boolean
+     */
+    private $for_update;
+
+    /**
      * Constructor
      * automatically sets up mysql server-vars
      */
@@ -141,6 +147,7 @@ class DBCon
         $this->last_query = "";
         $this->connected = FALSE;
         $this->transaction = FALSE;
+        $this->for_update = FALSE;
     }
 
     /**
@@ -173,6 +180,7 @@ class DBCon
         unset($this->limit);
         unset($this->union);
         unset($this->where_group);
+        unset($this->for_update);
     }
 
     /**
@@ -297,6 +305,11 @@ class DBCon
             $sql_command .= $this->limit;
         }
 
+        if ($this->for_update)
+        {
+            $sql_command .= " FOR UPDATE";
+        }
+
         return $sql_command;
     }
 
@@ -414,6 +427,12 @@ class DBCon
                 $this->limit = "";
             }
 
+            if ($this->for_update)
+            {
+                $sql_command .= " FOR UPDATE";
+                $this->for_update = FALSE;
+            }
+
             $this->last_query = $sql_command;
 
             $output = mysqli_query($this->res, $sql_command);
@@ -471,6 +490,21 @@ class DBCon
         else
         {
             $this->select .= $select . " ";
+        }
+    }
+
+    /**
+     * SELECT a row for a subsequent UPDATE, locking the row
+     * @param String $select The columns to select
+     * @param String $escape Whether to escape the select statement or not. Default to "TRUE"
+     * @return void
+     */
+    public function select_for_update($select, $escape = TRUE)
+    {
+        $this->select($select, $escape);
+        if ($this->transaction)
+        {
+            $this->for_update = TRUE;
         }
     }
 
