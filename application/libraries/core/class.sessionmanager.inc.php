@@ -44,7 +44,8 @@ class SessionManager
      */
     public function __destruct()
     {
-
+        unset($this->umodel);
+        unset($this->lifetime);
     }
 
     /**
