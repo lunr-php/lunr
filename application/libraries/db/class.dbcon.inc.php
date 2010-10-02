@@ -304,7 +304,7 @@ class DBCon
      * Executes a defined SQL query
      * @param String $sql_command Predefined SQL query
      * @param Boolean $return Return a Query Result
-     * @return Mixed Query Result, TRUE on successful query or FALSE on connection failure
+     * @return Mixed Query Result, TRUE on successful query or FALSE on connection failure/failed query
      */
     public function query($sql_command, $return = true)
     {
@@ -341,8 +341,7 @@ class DBCon
                 return new Query($output, $this->res);
             }
             else{
-                mysqli_query($this->res, $sql_command);
-                return TRUE;
+                return mysqli_query($this->res, $sql_command);
             }
         }
         else
@@ -754,7 +753,7 @@ class DBCon
      * Define an INSERT statement
      * @param String $table The table to insert into
      * @param Mixed $data The data to insert
-     * @return void
+     * @return Boolean $return TRUE on success, FALSE on failure
      */
     public function insert($table, $data)
     {
@@ -763,14 +762,14 @@ class DBCon
         $sql .= "VALUES ";
         $sql .= $this->prepare_data($data,"values");
         $sql .= ";";
-        $this->query($sql,false);
+        return $this->query($sql,false);
     }
 
     /**
      * Define a REPLACE statement
      * @param String $table The table to insert into
      * @param Mixed $data The data to insert
-     * @return void
+     * @return Boolean $return TRUE on success, FALSE on failure
      */
     public function replace($table, $data)
     {
@@ -779,14 +778,14 @@ class DBCon
         $sql .= "VALUES ";
         $sql .= $this->prepare_data($data,"values");
         $sql .= ";";
-        $this->query($sql,false);
+        return $this->query($sql,false);
     }
 
     /**
      * Define an UPDATE statement
      * @param String $table The table to update
      * @param Mixed $data The updated data
-     * @return void
+     * @return Boolean $return TRUE on success, FALSE on failure
      */
     public function update($table, $data)
     {
@@ -796,18 +795,18 @@ class DBCon
             $sql .= "`$key` = '" . $this->escape_string($value) . "',";
         }
         $sql = substr_replace($sql, " ", strripos($sql, ","));
-        $this->query($sql, false);
+        return $this->query($sql, false);
     }
 
     /**
      * Define a DELETE statement
      * @param String $table The table to update
-     * @return void
+     * @return Boolean $return TRUE on success, FALSE on failure
      */
     public function delete($table)
     {
         $sql = "DELETE FROM `$table`";
-        $this->query($sql,false);
+        return $this->query($sql,false);
     }
 
     /**
