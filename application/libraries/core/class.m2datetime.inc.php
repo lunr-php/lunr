@@ -50,6 +50,25 @@ class M2DateTime
         return strftime("%H:%M:%S", time());
     }
 
+    /**
+     * Returns a MySQL compatible date definition
+     * @param Integer $timestamp PHP-like Unix Timestamp
+     * @return String $date Date as a string
+     */
+    public static function get_date($timestamp)
+    {
+        return date('Y-m-d', $timestamp);
+    }
+
+    /**
+     * Returns a MySQL compatible time definition
+     * @param Integer $timestamp PHP-like Unix Timestamp
+     * @return String $time Time as a string
+     */
+    public static function get_time($timestamp)
+    {
+        return strftime("%H:%M:%S", $timestamp);
+    }
 }
 
 ?>
