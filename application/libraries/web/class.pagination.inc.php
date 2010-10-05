@@ -180,7 +180,7 @@ class Pagination{
         if (($amount < $this->cursor) && ($amount > 0))
         {
             $html = "";
-            for($i = ($this->cursor - $this->amount) ; $i < $this->cursor ; ++$i)
+            for($i = ($this->cursor - $amount) ; $i < $this->cursor ; ++$i)
             {
                 $html .= '<a class="paginator_page" href="' . $this->base_url . $i . '">' . ($i) . '</a>' . "\n";
             }
@@ -199,7 +199,7 @@ class Pagination{
      */
     private function build_next($amount)
     {
-        if (($amount < $this->total) && ($amount > 0))
+        if (($amount < $this->pages_total) && ($amount > 0))
         {
             $html = "";
             for($i = $this->cursor + 1 ; $i <= $this->cursor + $amount ; ++$i)
@@ -241,10 +241,12 @@ class Pagination{
 
         if ($this->buttons[$type]['enabled'])
         {
+            // these divs wrap the the test (or image) for the buttons: first, last, previous and second
             $html = "<div class='paginator_$type'><a href='" . $this->base_url . $target . "'>" . $this->buttons[$type]['text'] . "</a></div>\n";
         }
         else
         {
+            // the same as above but to allow the divs being showed as disabled
             $html = "<div class='paginator_$type paginator_${type}_disabled'>" . $this->buttons[$type]['text'] . "</div>\n";
         }
 
@@ -292,7 +294,7 @@ class Pagination{
         // increase the amount of previous pages shown
         if ($this->cursor > $this->pages_total - $this->range)
         {
-            $nnext = $this->pages_total - $this->range;
+            $nnext = $this->pages_total - $this->cursor;
             if (!isset($nprevious))
             {
                 $nprevious = $this->range + $this->range - $nnext;
@@ -300,14 +302,17 @@ class Pagination{
         }
         else
         {
-            $nnext = $this->range;
+            if (!isset($nnext))
+            {
+                $nnext = $this->range;
+            }
             if (!isset($nprevious))
             {
                 $nprevious = $this->range;
             }
         }
 
-        if ($this->cursor == 0)
+        if ($this->cursor == 1)
         {
             $this->buttons['first']['enabled'] = FALSE;
             $this->buttons['previous']['enabled'] = FALSE;
@@ -320,9 +325,14 @@ class Pagination{
 
         $html  = $this->build_button("first");
         $html .= $this->build_button("previous");
+        // paginator_numbers class div wraps the cursors shown as numbers. This wrapping div allow us to show
+        // the numbers centered in screen
+        $html .= "<div class='paginator_numbers'>\n";
         $html .= $this->build_previous($nprevious);
+        // using the span we set the style for the current cursor
         $html .= '<span class="paginator_page paginator_page_sel">' . ($this->cursor) . "</span>\n";
         $html .= $this->build_next($nnext);
+        $html .= "</div>\n"; // closes <div class='paginator_numbers'>
         $html .= $this->build_button("next");
         $html .= $this->build_button("last");
 
