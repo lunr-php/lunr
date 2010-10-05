@@ -14,10 +14,10 @@ class SessionManager
     private $lifetime;
 
     /**
-     * Reference to UsersModel
-     * @var UsersModel
+     * Reference to SessionModel
+     * @var SessionModel
      */
-    private $umodel;
+    private $smodel;
 
     /**
      * Constructor
@@ -35,8 +35,12 @@ class SessionManager
             array(&$this, 'gc')
         );
 
-        require_once("model.users.inc.php");
-        $this->umodel = new UsersModel();
+        set_include_path(
+            get_include_path() .
+            ":" . dirname(__FILE__) . "/application/models/core"
+        );
+        require_once("model.session.inc.php");
+        $this->smodel = new SessionModel();
     }
 
     /**
@@ -44,7 +48,7 @@ class SessionManager
      */
     public function __destruct()
     {
-        unset($this->umodel);
+        unset($this->smodel);
         unset($this->lifetime);
     }
 
@@ -81,7 +85,7 @@ class SessionManager
      */
     public function read($id)
     {
-        return $this->umodel->read_session_data($id);
+        return $this->smodel->read_session_data($id);
     }
 
     /**
@@ -92,7 +96,7 @@ class SessionManager
      */
     public function write($id, $data)
     {
-        $this->umodel->write_session_data($id, $data, time() + $this->lifetime);
+        $this->smodel->write_session_data($id, $data, time() + $this->lifetime);
         return TRUE;
     }
 
@@ -103,7 +107,7 @@ class SessionManager
      */
     public function destroy($id)
     {
-        $this->umodel->delete_session($id);
+        $this->smodel->delete_session($id);
         return TRUE;
     }
 
@@ -113,7 +117,7 @@ class SessionManager
      */
     public function gc()
     {
-        $this->umodel->session_gc();
+        $this->smodel->session_gc();
         return TRUE;
     }
 
