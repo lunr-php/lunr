@@ -69,6 +69,24 @@ class M2DateTime
     {
         return strftime("%H:%M:%S", $timestamp);
     }
+
+    /**
+     * Checks whether a given input string is a valid time definition
+     * @param String $string Input String
+     * @return Boolean $return True if it is valid, False otherwise
+     */
+    public static function is_time($string)
+    {
+        // accepts HHHH:MM:SS, e.g. 23:59:30 or 12:30 or 120:17
+        if ( ! preg_match("/^(\-)?[0-9]{1,4}:[0-9]{1,2}(:[0-9]{1,2})?$/", $string) )
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }
 
 ?>

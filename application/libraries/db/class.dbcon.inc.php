@@ -551,49 +551,14 @@ class DBCon
     }
 
     /**
-     * Define a LIKE clause
+     * Define a OR WHERE clause
      * @param String $col Column name
      * @param String $val Value that should be matched
+     * @param String $operator Comparison operator that should be used (optional, '=' by default)
      * @param String $collate Specific collate used for comparison (optional)
      * @return void
      */
-    public function like($col, $val, $collate = "")
-    {
-        if ($this->where == "")
-        {
-            $this->where = " WHERE ";
-        }
-        elseif ($this->where_group)
-        {
-            $this->where .= "";
-            $this->where_group = FALSE;
-        }
-        else
-        {
-            $this->where .= " AND ";
-        }
-
-        if ($collate == "")
-        {
-            $base_charset = "";
-        }
-        else
-        {
-            $base_charset = "_utf8 ";
-            $collate = " COLLATE $collate";
-        }
-
-        $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "%'" .$collate;
-    }
-
-    /**
-     * Define an alternative LIKE clause
-     * @param String $col Column name
-     * @param String $val Value that should be matched
-     * @param String $collate Specific collate used for comparison (optional)
-     * @return void
-     */
-    public function or_like($col, $val, $collate = "")
+    public function or_where($col, $val, $operator = "=", $collate = "")
     {
         if ($this->where == "")
         {
@@ -619,17 +584,17 @@ class DBCon
             $collate = " COLLATE $collate";
         }
 
-        $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "%'" .$collate;
+        $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "'" . $this->escape_string($val) . "'" . $collate;
     }
 
     /**
-     * Define a NOT LIKE clause
+     * Define a LIKE clause
      * @param String $col Column name
      * @param String $val Value that should be matched
      * @param String $collate Specific collate used for comparison (optional)
      * @return void
      */
-    public function not_like($col, $val, $collate = "")
+    public function like($col, $val, $match = "both", $collate = "")
     {
         if ($this->where == "")
         {
@@ -655,7 +620,112 @@ class DBCon
             $collate = " COLLATE $collate";
         }
 
-        $this->where .= $this->escape_columns($col) . " NOT LIKE " . $base_charset . "'%" . $this->escape_string($val) . "%'" .$collate;
+        switch ($match)
+        {
+            case "forward":
+                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'" . $this->escape_string($val) . "%'" .$collate;
+                break;
+            case "backward":
+                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "'" .$collate;
+                break;
+            default:
+                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "%'" .$collate;
+                break;
+        }
+    }
+
+    /**
+     * Define an alternative LIKE clause
+     * @param String $col Column name
+     * @param String $val Value that should be matched
+     * @param String $collate Specific collate used for comparison (optional)
+     * @return void
+     */
+    public function or_like($col, $val, $match = "both", $collate = "")
+    {
+        if ($this->where == "")
+        {
+            $this->where = " WHERE ";
+        }
+        elseif ($this->where_group)
+        {
+            $this->where .= "";
+            $this->where_group = FALSE;
+        }
+        else
+        {
+            $this->where .= " OR ";
+        }
+
+        if ($collate == "")
+        {
+            $base_charset = "";
+        }
+        else
+        {
+            $base_charset = "_utf8 ";
+            $collate = " COLLATE $collate";
+        }
+
+        switch ($match)
+        {
+            case "forward":
+                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'" . $this->escape_string($val) . "%'" .$collate;
+                break;
+            case "backward":
+                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "'" .$collate;
+                break;
+            default:
+                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "%'" .$collate;
+                break;
+        }
+    }
+
+    /**
+     * Define a NOT LIKE clause
+     * @param String $col Column name
+     * @param String $val Value that should be matched
+     * @param String $collate Specific collate used for comparison (optional)
+     * @return void
+     */
+    public function not_like($col, $val, $match = "both", $collate = "")
+    {
+        if ($this->where == "")
+        {
+            $this->where = " WHERE ";
+        }
+        elseif ($this->where_group)
+        {
+            $this->where .= "";
+            $this->where_group = FALSE;
+        }
+        else
+        {
+            $this->where .= " AND ";
+        }
+
+        if ($collate == "")
+        {
+            $base_charset = "";
+        }
+        else
+        {
+            $base_charset = "_utf8 ";
+            $collate = " COLLATE $collate";
+        }
+
+        switch ($match)
+        {
+            case "forward":
+                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'" . $this->escape_string($val) . "%'" .$collate;
+                break;
+            case "backward":
+                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "'" .$collate;
+                break;
+            default:
+                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "%'" .$collate;
+                break;
+        }
     }
 
     /**
