@@ -817,6 +817,11 @@ class DBCon
     public function union($from)
     {
         $this->union = $this->preliminary_query($from) . " UNION ";
+        $this->limit = "";
+        $this->where = "";
+        $this->select = "";
+        $this->order = "";
+        $this->group = "";
     }
 
     /**
