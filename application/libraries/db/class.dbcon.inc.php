@@ -127,6 +127,12 @@ class DBCon
     private $for_update;
 
     /**
+     * Command to generate a UUID
+     * @var String
+     */
+    private $gen_uuid;
+
+    /**
      * Constructor
      * automatically sets up mysql server-vars
      */
@@ -148,6 +154,7 @@ class DBCon
         $this->connected = FALSE;
         $this->transaction = FALSE;
         $this->for_update = FALSE;
+        $this->gen_uuid = "UNHEX(REPLACE(UUID(),'-',''))";
     }
 
     /**
@@ -181,6 +188,7 @@ class DBCon
         unset($this->union);
         unset($this->where_group);
         unset($this->for_update);
+        unset($this->gen_uuid);
     }
 
     /**
@@ -1143,9 +1151,17 @@ class DBCon
                 $col = explode(" as ",$value);
                 $string .= $this->escape_columns($col[0]) . " AS `" . trim($col[1]) . "`, ";
             }
+            elseif (trim($value) == "*")
+            {
+                $string .= trim($value) . ", ";
+            }
+            elseif (trim($value) == "NEW_UUID")
+            {
+                $string .= $this->gen_uuid . ", ";
+            }
             else
             {
-                $string .= " `" . trim($value) . "`,";
+                $string .= " `" . trim($value) . "`, ";
             }
         }
         $string = substr_replace($string, " ", strripos($string, ","));
