@@ -139,6 +139,16 @@ class Mail
     }
 
     /**
+     * Define the subject of the email
+     * @param String $subject The subject
+     * @return void
+     */
+    public function set_subject($subject)
+    {
+        $this->subject = $subject;
+    }
+
+    /**
      * Send email
      * @return Boolean $return TRUE on success, FALSE if something went wrong
      */
@@ -150,7 +160,7 @@ class Mail
             $ok = TRUE;
             foreach ($this->to AS $value)
             {
-                $sent = mail($this->to, $this->subject, $headers);
+                $sent = mail($value, $this->subject, $this->msg, $headers);
                 if (!$sent)
                 {
                     $ok = FALSE;
