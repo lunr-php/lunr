@@ -89,6 +89,17 @@ class Query
     }
 
     /**
+     * Return the first row of results
+     * @return Array One data row
+     */
+    public function result_row()
+    {
+        $output = array();
+        $output[0] = mysqli_fetch_assoc($this->query);
+        return $output;
+    }
+
+    /**
      * Return one field for the first row
      * @param String $col The field to return
      * @return mixed Field value
