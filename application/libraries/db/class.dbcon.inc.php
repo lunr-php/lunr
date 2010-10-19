@@ -1085,7 +1085,14 @@ class DBCon
 
         foreach ($array as $value)
         {
-            $list .= $char . $this->escape_string($value) . $char . ",";
+            if (($type != "keys") && ($value == "NEW_UUID"))
+            {
+                $list .= $this->gen_uuid . " ,";
+            }
+            else
+            {
+                $list .= $char . $this->escape_string($value) . $char . ",";
+            }
         }
 
         $list = substr_replace($list, ") ", strripos($list, ","));
@@ -1154,10 +1161,6 @@ class DBCon
             elseif (trim($value) == "*")
             {
                 $string .= trim($value) . ", ";
-            }
-            elseif (trim($value) == "NEW_UUID")
-            {
-                $string .= $this->gen_uuid . ", ";
             }
             else
             {
