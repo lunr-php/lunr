@@ -94,8 +94,7 @@ class Query
      */
     public function result_row()
     {
-        $output = array();
-        $output[0] = mysqli_fetch_assoc($this->query);
+        $output = mysqli_fetch_assoc($this->query);
         return $output;
     }
 
