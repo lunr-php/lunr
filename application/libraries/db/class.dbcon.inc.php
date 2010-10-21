@@ -593,6 +593,43 @@ class DBCon
     }
 
     /**
+     * Define a WHERE clause, which deals with hex->binary
+     * @param String $col Column name
+     * @param String $val Value that should be matched
+     * @param String $operator Comparison operator that should be used (optional, '=' by default)
+     * @param String $collate Specific collate used for comparison (optional)
+     * @return void
+     */
+    public function where_hex($col, $val, $operator = "=", $collate = "")
+    {
+        if ($this->where == "")
+        {
+            $this->where = " WHERE ";
+        }
+        elseif ($this->where_group)
+        {
+            $this->where .= "";
+            $this->where_group = FALSE;
+        }
+        else
+        {
+            $this->where .= " AND ";
+        }
+
+        if ($collate == "")
+        {
+            $base_charset = "";
+        }
+        else
+        {
+            $base_charset = "_utf8 ";
+            $collate = " COLLATE $collate";
+        }
+
+        $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "UNHEX(" . $this->escape_string($val) . ")" . $collate;
+    }
+
+    /**
      * Define a OR WHERE clause
      * @param String $col Column name
      * @param String $val Value that should be matched
