@@ -14,6 +14,12 @@ class Session
     private $manager;
 
     /**
+     * Check whether session is already closed
+     * @var Boolean
+     */
+    private $closed;
+
+    /**
      * Constructor
      * @param Boolean $database Whether to use the database based
      *   SessionManager class or not
@@ -28,6 +34,7 @@ class Session
 
         // kill autostarted sessions
         session_write_close();
+        $this->closed = FALSE;
     }
 
     /**
@@ -36,6 +43,7 @@ class Session
     public function __destruct()
     {
         unset($this->manager);
+        unset($this->closed);
     }
 
     /**
@@ -46,7 +54,10 @@ class Session
      */
     public function set($key, $value)
     {
-        $_SESSION[$key] = $value;
+        if (!$this->closed)
+        {
+            $_SESSION[$key] = $value;
+        }
     }
 
     /**
@@ -56,7 +67,10 @@ class Session
      */
     public function delete($key)
     {
-        unset($_SESSION[$key]);
+        if (!$this->closed)
+        {
+            unset($_SESSION[$key]);
+        }
     }
 
     /**
@@ -97,6 +111,16 @@ class Session
             session_id($id);
         }
         session_start();
+    }
+
+    /**
+     * Close the session and write data
+     * @return void
+     */
+    public function close()
+    {
+        session_write_close();
+        $this->closed = TRUE;
     }
 
     /**
