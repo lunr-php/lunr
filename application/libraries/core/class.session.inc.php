@@ -20,6 +20,12 @@ class Session
     private $closed;
 
     /**
+     * Check whether session is already started
+     * @var Boolean
+     */
+    private $started;
+
+    /**
      * Constructor
      * @param Boolean $database Whether to use the database based
      *   SessionManager class or not
@@ -32,9 +38,11 @@ class Session
             $this->manager = new SessionManager();
         }
 
+        $this->closed = FALSE;
+        $this->started = FALSE;
+
         // kill autostarted sessions
         session_write_close();
-        $this->closed = FALSE;
     }
 
     /**
@@ -44,6 +52,7 @@ class Session
     {
         unset($this->manager);
         unset($this->closed);
+        unset($this->started);
     }
 
     /**
@@ -54,7 +63,7 @@ class Session
      */
     public function set($key, $value)
     {
-        if (!$this->closed)
+        if (!$this->closed && $this->started)
         {
             $_SESSION[$key] = $value;
         }
@@ -67,7 +76,7 @@ class Session
      */
     public function delete($key)
     {
-        if (!$this->closed)
+        if (!$this->closed && $this->started)
         {
             unset($_SESSION[$key]);
         }
@@ -80,7 +89,7 @@ class Session
      */
     public function get($key)
     {
-        if (isset($_SESSION[$key]))
+        if ($this->started && isset($_SESSION[$key]))
         {
             return $_SESSION[$key];
         }
@@ -106,11 +115,15 @@ class Session
      */
     public function start($id = "")
     {
-        if ($id != "")
+        if (!$this->started)
         {
-            session_id($id);
+            if ($id != "")
+            {
+                session_id($id);
+            }
+            session_start();
+            $this->started = TRUE;
         }
-        session_start();
     }
 
     /**
@@ -129,8 +142,11 @@ class Session
      */
     public function destroy()
     {
-        $_SESSION = array();
-        session_destroy();
+        if ($this->started)
+        {
+            $_SESSION = array();
+            session_destroy();
+        }
     }
 
 }
