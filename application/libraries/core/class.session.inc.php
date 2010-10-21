@@ -50,6 +50,10 @@ class Session
      */
     public function __destruct()
     {
+        if (!$this->closed)
+        {
+            $this->close();
+        }
         unset($this->manager);
         unset($this->closed);
         unset($this->started);
