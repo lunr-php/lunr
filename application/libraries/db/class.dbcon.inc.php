@@ -700,7 +700,7 @@ class DBCon
             $collate = " COLLATE $collate";
         }
 
-        $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "UNHEX(" . $this->escape_string($val) . ")" . $collate;
+        $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "UNHEX('" . $this->escape_string($val) . "')" . $collate;
     }
 
     /**
