@@ -977,7 +977,9 @@ class DBCon
 
         $sqlHexValues = $this->prepare_data($data,"values");
         $sqlHexValues = str_replace("'UNHEX(", "UNHEX('", $sqlHexValues);
-        $sqlHexValues = str_replace(")',", "'),", $sqlHexValues);
+        $ending = array(")',", ")')");
+        $desired_ending = array("'),", "'))");
+        $sqlHexValues = str_replace($ending, $desired_ending, $sqlHexValues);
 
         $sql = $sql.$sqlHexValues;
         $sql .= ";";
