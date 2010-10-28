@@ -1186,6 +1186,8 @@ class DBCon
         }
 
         $list = "(";
+        $unhex_start = "UNHEX('";
+        $unhex_end = "') ";
 
         foreach ($array as $value)
         {
@@ -1193,12 +1195,19 @@ class DBCon
             {
                 $list .= $this->gen_uuid . " ,";
             }
+            elseif(($type != "keys") && (($start_pos = strpos($value, $unhex_start)) !== false))
+            {
+                $end_pos = strpos($value,$unhex_end,$start_pos) + sizeof($unhex_end)+1;
+                $value_start = $start_pos+strlen($unhex_start);
+                $value_end = $end_pos-$start_pos-strlen($unhex_start)-strlen($unhex_end);
+                $hex_value = substr($value, $value_start, $value_end);
+                $list .= "UNHEX(".$char . $this->escape_string($hex_value) . $char . "),";
+            }
             else
             {
                 $list .= $char . $this->escape_string($value) . $char . ",";
             }
         }
-
         $list = substr_replace($list, ") ", strripos($list, ","));
         return $list;
     }
