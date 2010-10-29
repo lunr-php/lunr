@@ -49,6 +49,11 @@ class DBCon
     private $db;
 
     /**
+     * Path to the UNIX socket for localhost connection
+     */
+    private $socket;
+
+    /**
      * Resource handler for the (established) database connection
      * @var Resource
      */
@@ -142,6 +147,16 @@ class DBCon
         $this->user = $db['username'];
         $this->pwd = $db['password'];
         $this->db = $db['database'];
+
+        if (isset($db['socket']))
+        {
+            $this->socket = $db['socket'];
+        }
+        else
+        {
+            $this->socket = ini_get("mysqli.default_socket");
+        }
+
         $this->select = "";
         $this->join = "";
         $this->where = "";
@@ -189,6 +204,7 @@ class DBCon
         unset($this->where_group);
         unset($this->for_update);
         unset($this->gen_uuid);
+        unset($this->socket);
     }
 
     /**
@@ -197,7 +213,7 @@ class DBCon
      */
     public function connect()
     {
-        $this->res = mysqli_connect($this->host, $this->user, $this->pwd, $this->db);
+        $this->res = mysqli_connect($this->host, $this->user, $this->pwd, $this->db, ini_get("mysqli.default_port"), $this->socket);
         if ($this->res)
         {
             mysqli_set_charset($this->res, "utf8");
