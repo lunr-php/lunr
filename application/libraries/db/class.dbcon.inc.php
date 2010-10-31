@@ -132,12 +132,6 @@ class DBCon
     private $for_update;
 
     /**
-     * Command to generate a UUID
-     * @var String
-     */
-    private $gen_uuid;
-
-    /**
      * Command to generate an hexadecimal UUID
      * @var String
      */
@@ -175,7 +169,6 @@ class DBCon
         $this->connected = FALSE;
         $this->transaction = FALSE;
         $this->for_update = FALSE;
-        $this->gen_uuid = "UNHEX(REPLACE(UUID(),'-',''))";
         $this->gen_uuid_hex = "REPLACE(UUID(),'-','')";
     }
 
@@ -210,7 +203,6 @@ class DBCon
         unset($this->union);
         unset($this->where_group);
         unset($this->for_update);
-        unset($this->gen_uuid);
         unset($this->gen_uuid_hex);
         unset($this->socket);
     }
@@ -1214,11 +1206,7 @@ class DBCon
 
         foreach ($array as $value)
         {
-            if (($type != "keys") && ($value == "NEW_UUID"))
-            {
-                $list .= $this->gen_uuid . " ,";
-            }
-            elseif(($type != "keys") && (preg_match($unhex_pattern, $value)) != FALSE)
+            if(($type != "keys") && (preg_match($unhex_pattern, $value)) != FALSE)
             {
                 $list .= $value." ,";
             }
