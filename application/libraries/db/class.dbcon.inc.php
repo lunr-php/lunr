@@ -1202,8 +1202,7 @@ class DBCon
         }
 
         $list = "(";
-        $unhex_start = "UNHEX('";
-        $unhex_end = "') ";
+        $unhex_pattern = "/UNHEX\('[0-9a-fA-F]{32}'\)/";    //The value must be a proper hexadecimal value well formatted -> "UNHEX('hex_value')"
 
         foreach ($array as $value)
         {
@@ -1211,13 +1210,9 @@ class DBCon
             {
                 $list .= $this->gen_uuid . " ,";
             }
-            elseif(($type != "keys") && (($start_pos = strpos($value, $unhex_start)) !== false))
+            elseif(($type != "keys") && (preg_match($unhex_pattern, $value)) != FALSE)
             {
-                $end_pos = strpos($value,$unhex_end,$start_pos) + sizeof($unhex_end)+1;
-                $value_start = $start_pos+strlen($unhex_start);
-                $value_end = $end_pos-$start_pos-strlen($unhex_start)-strlen($unhex_end);
-                $hex_value = substr($value, $value_start, $value_end);
-                $list .= "UNHEX(".$char . $this->escape_string($hex_value) . $char . "),";
+                $list .= $value." ,";
             }
             else
             {
