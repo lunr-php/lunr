@@ -138,6 +138,12 @@ class DBCon
     private $gen_uuid_hex;
 
     /**
+     * Command to generate an hexadecimal UUID
+     * @var String
+     */
+    private $gen_uuid_hex;
+
+    /**
      * Constructor
      * automatically sets up mysql server-vars
      */
