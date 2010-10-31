@@ -138,6 +138,12 @@ class DBCon
     private $gen_uuid;
 
     /**
+     * Command to generate an hexadecimal UUID
+     * @var String
+     */
+    private $gen_uuid_hex;
+
+    /**
      * Constructor
      * automatically sets up mysql server-vars
      */
@@ -170,6 +176,7 @@ class DBCon
         $this->transaction = FALSE;
         $this->for_update = FALSE;
         $this->gen_uuid = "UNHEX(REPLACE(UUID(),'-',''))";
+        $this->gen_uuid_hex = "REPLACE(UUID(),'-','')";
     }
 
     /**
@@ -204,6 +211,7 @@ class DBCon
         unset($this->where_group);
         unset($this->for_update);
         unset($this->gen_uuid);
+        unset($this->gen_uuid_hex);
         unset($this->socket);
     }
 
@@ -1305,6 +1313,24 @@ class DBCon
         $parts = explode("=", $string);
         $return = $this->escape_columns($parts[0]) . " = " . $this->escape_columns($parts[1]);
         return $return;
+    }
+
+     /**
+     * Generates and returns UUID
+     * @return Mixed $return hex UUID on success, FALSE on failure
+     */
+    public function generate_uuid()
+    {
+        $sql = "SELECT ".$this->gen_uuid_hex." AS UUID;";
+        $query = $this->query($sql, TRUE);
+        if ($query)
+        {
+            return $query->field('UUID');
+        }
+        else
+        {
+            return FALSE;
+        }
     }
 }
 
