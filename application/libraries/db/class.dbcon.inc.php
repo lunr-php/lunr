@@ -1300,7 +1300,7 @@ class DBCon
                 $col = explode(" AS ",$value);
                 if ($hex)
                 {
-                    $string .= "HEX('" . $this->escape_columns($col[0]) . "') AS `" . trim($col[1]) . "`, ";
+                    $string .= "HEX(" . $this->escape_columns($col[0]) . ") AS `" . trim($col[1]) . "`, ";
                 }
                 else
                 {
