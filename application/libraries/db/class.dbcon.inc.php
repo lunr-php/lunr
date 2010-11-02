@@ -496,6 +496,33 @@ class DBCon
     }
 
     /**
+     * Select columns as hex values
+     * @param String $select The columns to select
+     * @param String $escape Whether to escape the select statement or not. Default to "TRUE"
+     * @return void
+     */
+    public function select_hex($select, $escape = TRUE)
+    {
+        if ($this->select == "")
+        {
+            $this->select = "SELECT ";
+        }
+        else
+        {
+            $this->select .= ", ";
+        }
+
+        if ($escape)
+        {
+            $this->select .= $this->escape_as($select, TRUE);
+        }
+        else
+        {
+            $this->select .= $select . " ";
+        }
+    }
+
+    /**
      * Define a special SELECT statement.
      * WARNING: This overwrites previously defined select criterias
      * @param String $select The columns to select
@@ -1262,7 +1289,7 @@ class DBCon
      * @param String $cols Column(s)
      * @return String escaped column list
      */
-    private function escape_as($cols)
+    private function escape_as($cols, $hex = FALSE)
     {
         $cols = explode(",", $cols);
         $string = "";
@@ -1271,12 +1298,26 @@ class DBCon
             if (strpos($value, " AS "))
             {
                 $col = explode(" AS ",$value);
-                $string .= $this->escape_columns($col[0]) . " AS `" . trim($col[1]) . "`, ";
+                if ($hex)
+                {
+                    $string .= "HEX('" . $this->escape_columns($col[0]) . "') AS `" . trim($col[1]) . "`, ";
+                }
+                else
+                {
+                    $string .= $this->escape_columns($col[0]) . " AS `" . trim($col[1]) . "`, ";
+                }
             }
             elseif (strpos($value, " as "))
             {
                 $col = explode(" as ",$value);
-                $string .= $this->escape_columns($col[0]) . " AS `" . trim($col[1]) . "`, ";
+                if ($hex)
+                {
+                    $string .= "HEX(" . $this->escape_columns($col[0]) . ") AS `" . trim($col[1]) . "`, ";
+                }
+                else
+                {
+                    $string .= $this->escape_columns($col[0]) . " AS `" . trim($col[1]) . "`, ";
+                }
             }
             elseif (trim($value) == "*")
             {
@@ -1284,7 +1325,14 @@ class DBCon
             }
             else
             {
-                $string .= " `" . trim($value) . "`, ";
+                if ($hex)
+                {
+                    $string .= " HEX(`" . trim($value) . "`), ";
+                }
+                else
+                {
+                    $string .= " `" . trim($value) . "`, ";
+                }
             }
         }
         $string = substr_replace($string, " ", strripos($string, ","));
