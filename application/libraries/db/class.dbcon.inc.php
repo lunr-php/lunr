@@ -1341,11 +1341,11 @@ class DBCon
             {
                 if ($hex)
                 {
-                    $string .= " HEX(`" . $this->escape_columns(trim($value)) . "`), ";
+                    $string .= " HEX(" . $this->escape_columns(trim($value)) . "), ";
                 }
                 else
                 {
-                    $string .= " `" . $this->escape_columns(trim($value)) . "`, ";
+                    $string .= $this->escape_columns(trim($value)) . ", ";
                 }
             }
         }
