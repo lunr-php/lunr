@@ -1327,11 +1327,11 @@ class DBCon
             {
                 if ($hex)
                 {
-                    $string .= " HEX(`" . trim($value) . "`), ";
+                    $string .= " HEX(`" . $this->escape_columns(trim($value)) . "`), ";
                 }
                 else
                 {
-                    $string .= " `" . trim($value) . "`, ";
+                    $string .= " `" . $this->escape_columns(trim($value)) . "`, ";
                 }
             }
         }
