@@ -632,7 +632,14 @@ class DBCon
             $collate = " COLLATE $collate";
         }
 
-        $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "'" . $this->escape_string($val) . "'" . $collate;
+        if (substr($val,0,2) == "IS")
+        {
+            $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . $this->escape_string($val) . $collate;
+        }
+        else
+        {
+            $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "'" . $this->escape_string($val) . "'" . $collate;
+        }
     }
 
     /**
@@ -706,7 +713,14 @@ class DBCon
             $collate = " COLLATE $collate";
         }
 
-        $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "'" . $this->escape_string($val) . "'" . $collate;
+        if (substr($val,0,2) == "IS")
+        {
+            $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . $this->escape_string($val) . $collate;
+        }
+        else
+        {
+            $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "'" . $this->escape_string($val) . "'" . $collate;
+        }
     }
 
     /**
