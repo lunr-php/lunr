@@ -244,6 +244,15 @@ class DBCon
     }
 
     /**
+     * Returns last mysql error number
+     * @return Integer Error number
+     */
+    public function last_error_number()
+    {
+        return mysqli_errno($this->res);
+    }
+
+    /**
      * Returns the last executed query
      * @return String SQL Query
      */
