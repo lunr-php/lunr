@@ -905,7 +905,6 @@ class DBCon
      * Define a WHERE IN clause
      * @param String $col Column name
      * @param Mixed $val Value that should be matched
-     * @param String $collate Specific collate used for comparison (optional)
      * @return void
      */
     public function where_in($col, $values)
@@ -923,6 +922,43 @@ class DBCon
         {
             $this->where .= " AND ";
         }
+        $this->where .= $this->escape_columns($col) . "IN ";
+        $this->where .= $this->prepare_data($values, "values");
+    }
+
+    /**
+     * Define a WHERE IN clause that deals with hex->binary conversion
+     * @param String $col Column name
+     * @param Mixed $val Value that should be matched
+     * @return void
+     */
+    public function where_in_hex($col, $values)
+    {
+        if ($this->where == "")
+        {
+            $this->where = " WHERE ";
+        }
+        elseif ($this->where_group)
+        {
+            $this->where .= "";
+            $this->where_group = FALSE;
+        }
+        else
+        {
+            $this->where .= " AND ";
+        }
+
+        if (!is_array($values))
+        {
+            $values = array($values);
+        }
+
+        # prepare hex data for database
+        foreach ($values AS $key=>$value)
+        {
+            $value = "UNHEX('$value')";
+        }
+
         $this->where .= $this->escape_columns($col) . "IN ";
         $this->where .= $this->prepare_data($values, "values");
     }
@@ -1247,7 +1283,7 @@ class DBCon
 
         foreach ($array as $value)
         {
-            if(($type != "keys") && (preg_match($unhex_pattern, $value)) != FALSE)
+            if(($type != "keys") && (preg_match($unhex_pattern, $value) != FALSE))
             {
                 $list .= $value." ,";
             }
