@@ -505,7 +505,8 @@ class DBCon
     }
 
     /**
-     * Select columns as hex values
+     * Select columns as hex values, if not new name assignment done
+     * it returns as a column name given (without HEX() surrounding)
      * @param String $select The columns to select
      * @return void
      */
@@ -1051,36 +1052,6 @@ class DBCon
     }
 
     /**
-    * Define an INSERT statement with some keys needing to be converted to binary
-    * @param String $table The table to insert into
-    * @param Mixed $data The data to insert
-    * @param Array $hex The keys that should be converted to binary
-    * @return Boolean $return TRUE on success, FALSE on failure
-    */
-    public function insert_hex($table, $data, $hex)
-    {
-        $sql  = "INSERT INTO `$table` ";
-        $sql .= $this->prepare_data($data,"keys");
-        $sql .= "VALUES ";
-
-        foreach($hex as $key) {
-            $hexData = "UNHEX(".$data[$key].")";
-            $data[$key]=$hexData;
-            unset($hexData);
-        }
-
-        $sqlHexValues = $this->prepare_data($data,"values");
-        $sqlHexValues = str_replace("'UNHEX(", "UNHEX('", $sqlHexValues);
-        $ending = array(")',", ")')");
-        $desired_ending = array("'),", "'))");
-        $sqlHexValues = str_replace($ending, $desired_ending, $sqlHexValues);
-
-        $sql = $sql.$sqlHexValues;
-        $sql .= ";";
-        return $this->query($sql,false);
-    }
-
-    /**
      * Define a REPLACE statement
      * @param String $table The table to insert into
      * @param Mixed $data The data to insert
@@ -1378,7 +1349,7 @@ class DBCon
             {
                 if ($hex)
                 {
-                    $string .= " HEX(" . $this->escape_columns(trim($value)) . "), ";
+                    $string .= " HEX(" . $this->escape_columns(trim($value)) . ") AS `" . trim($value) . "`, ";
                 }
                 else
                 {
