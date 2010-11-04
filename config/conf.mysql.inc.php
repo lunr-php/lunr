@@ -1,0 +1,6 @@
+<?php
+
+define("DUPLICATE_PRIMARY_KEY", 1062);
+define("FOREING_KEY_CONTRAINT_FAILED", 1216);
+
+?>
