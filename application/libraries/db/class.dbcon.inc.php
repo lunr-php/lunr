@@ -956,10 +956,11 @@ class DBCon
         }
 
         # prepare hex data for database
-        foreach ($values AS $key=>$value)
+        foreach ($values AS &$value)
         {
             $value = "UNHEX('$value')";
         }
+        unset($value);
 
         $this->where .= $this->escape_columns($col) . "IN ";
         $this->where .= $this->prepare_data($values, "values");
