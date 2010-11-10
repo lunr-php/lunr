@@ -508,9 +508,10 @@ class DBCon
      * Select columns as hex values, if not new name assignment done
      * it returns as a column name given (without HEX() surrounding)
      * @param String $select The columns to select
+     * @param String $escape Whether to escape the select statement or not. Default to "TRUE"
      * @return void
      */
-    public function select_hex($select)
+    public function select_hex($select, $escape = TRUE)
     {
         if ($this->select == "")
         {
@@ -521,7 +522,14 @@ class DBCon
             $this->select .= ", ";
         }
 
-        $this->select .= $this->escape_as($select, TRUE);
+        if ($escape)
+        {
+            $this->select .= $this->escape_as($select, TRUE);
+        }
+        else
+        {
+            $this->select .= $select . " ";
+        }
     }
 
     /**
