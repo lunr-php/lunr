@@ -118,7 +118,7 @@ class Session
      */
     public function get_new_session_id()
     {
-        session_regenerate_id(TRUE);
+        session_regenerate_id();
         return $this->get_session_id();
     }
 
@@ -148,6 +148,7 @@ class Session
     {
         session_write_close();
         $this->closed = TRUE;
+        $this->started = FALSE;
     }
 
     /**
