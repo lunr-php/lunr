@@ -113,6 +113,16 @@ class Session
     }
 
     /**
+     * Replace the current sessionid with a new one
+     * @return String $session_id
+     */
+    public function get_new_session_id()
+    {
+        session_regenerate_id(TRUE);
+        return $this->get_session_id();
+    }
+
+    /**
      * Start a new session or continure an existing one
      * @param String $id Predefined Session ID
      * @return void
