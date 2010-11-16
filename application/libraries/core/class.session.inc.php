@@ -135,9 +135,9 @@ class Session
             {
                 session_id($id);
             }
+            session_start();
+            $this->started = TRUE;
         }
-        session_start();
-        $this->started = TRUE;
     }
 
     /**
