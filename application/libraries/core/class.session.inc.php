@@ -137,6 +137,7 @@ class Session
             }
             session_start();
             $this->started = TRUE;
+            $this->closed = FALSE;
         }
     }
 
