@@ -33,12 +33,31 @@ class M2DateTime
     }
 
     /**
+     * Return yesterday's date (YYYY-MM-DD)
+     * @return String Tomorrow's date
+     */
+    public static function yesterday()
+    {
+        return date('Y-m-d', strtotime("-1 day"));
+    }
+
+    /**
      * Return tomorrow's date (YYYY-MM-DD)
      * @return String Tomorrow's date
      */
     public static function tomorrow()
     {
         return date('Y-m-d', strtotime("+1 day"));
+    }
+
+    /**
+     * Return a date of a certain timeframe in the past/future
+     * @param String $delay Definition for a timeframe ("+1 day", "-10 minutes")
+     * @return String Delayed date
+     */
+    public static function delayed_date($delay)
+    {
+        return date('Y-m-d', strtotime($delay));
     }
 
     /**
