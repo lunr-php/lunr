@@ -1383,7 +1383,7 @@ class DBCon
     }
 
      /**
-     * Generates and returns UUID
+     * Generate and return UUID
      * @return Mixed $return hex UUID on success, FALSE on failure
      */
     public function generate_uuid()
