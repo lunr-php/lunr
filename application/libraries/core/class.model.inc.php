@@ -31,6 +31,15 @@ abstract class Model
         unset($this->db);
     }
 
+    /**
+     * Get write access for the database
+     * @return Boolean $return TRUE if successful, FALSE if there's already a connection established
+     */
+    public function get_write_access()
+    {
+        return $this->db->set_writeable();
+    }
+
 }
 
 ?>
