@@ -66,6 +66,12 @@ class DBCon
     private $res;
 
     /**
+     * Whether there's write access to the database or not
+     * @var Boolean
+     */
+    private $readonly;
+
+    /**
      * Connection status
      * @var Boolean
      */
@@ -164,10 +170,11 @@ class DBCon
             $this->socket = ini_get("mysqli.default_socket");
         }
 
+        $this->readonly = TRUE;
         $this->select = "";
         $this->join = "";
         $this->where = "";
-        $this->where_group = false;
+        $this->where_group = FALSE;
         $this->order = "";
         $this->group = "";
         $this->limit = "";
@@ -213,6 +220,7 @@ class DBCon
         unset($this->for_update);
         unset($this->gen_uuid_hex);
         unset($this->socket);
+        unset($this->readonly);
     }
 
     /**
@@ -221,7 +229,14 @@ class DBCon
      */
     public function connect()
     {
-        $this->res = mysqli_connect($this->rw_host, $this->user, $this->pwd, $this->db, ini_get("mysqli.default_port"), $this->socket);
+        if ($this->readonly)
+        {
+            $this->res = mysqli_connect($this->ro_host, $this->user, $this->pwd, $this->db, ini_get("mysqli.default_port"), $this->socket);
+        }
+        else
+        {
+            $this->res = mysqli_connect($this->rw_host, $this->user, $this->pwd, $this->db, ini_get("mysqli.default_port"), $this->socket);
+        }
         if ($this->res)
         {
             mysqli_set_charset($this->res, "utf8");
@@ -239,6 +254,24 @@ class DBCon
         {
             mysqli_close($this->res);
             $this->connected = FALSE;
+        }
+    }
+
+    /**
+     * Define whether write access is needed or not
+     * NOTE: this can onl be done before the first query is executed
+     * @return Boolean $return TRUE if successful, FALSE if there's already a connection established
+     */
+    public function set_writeable()
+    {
+        if ($this->connected)
+        {
+            return FALSE;
+        }
+        else
+        {
+            $this->readonly = FALSE;
+            return TRUE;
         }
     }
 
