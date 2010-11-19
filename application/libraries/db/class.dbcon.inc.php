@@ -25,10 +25,16 @@ class DBCon
 {
 
     /**
-     * Hostname of the database server
+     * Hostname of the database server (read/write access)
      * @var String
      */
-    private $host;
+    private $rw_host;
+
+    /**
+     * Hostname of the database server (readonly access)
+     * @var String
+     */
+    private $ro_host;
 
     /**
      * Username of the user used to connect to the database
@@ -143,7 +149,8 @@ class DBCon
      */
     public function __construct($db)
     {
-        $this->host = $db['hostname'];
+        $this->rw_host = $db['rw_host'];
+        $this->ro_host = $db['ro_host'];
         $this->user = $db['username'];
         $this->pwd = $db['password'];
         $this->db = $db['database'];
@@ -186,7 +193,8 @@ class DBCon
         {
             $this->disconnect();
         }
-        unset($this->host);
+        unset($this->ro_host);
+        unset($this->rw_host);
         unset($this->user);
         unset($this->pwd);
         unset($this->db);
@@ -213,7 +221,7 @@ class DBCon
      */
     public function connect()
     {
-        $this->res = mysqli_connect($this->host, $this->user, $this->pwd, $this->db, ini_get("mysqli.default_port"), $this->socket);
+        $this->res = mysqli_connect($this->rw_host, $this->user, $this->pwd, $this->db, ini_get("mysqli.default_port"), $this->socket);
         if ($this->res)
         {
             mysqli_set_charset($this->res, "utf8");
