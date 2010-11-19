@@ -198,7 +198,7 @@ class DBCon
      */
     public function __destruct()
     {
-        if (isset(self::$instance))
+        if (self::$instance !== NULL)
         {
             if ($this->transaction)
             {
@@ -230,7 +230,6 @@ class DBCon
             unset($this->socket);
             unset($this->readonly);
             self::$instance = NULL;
-            unset(self::$instance);
         }
     }
 
