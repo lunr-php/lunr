@@ -25,6 +25,12 @@ class DBCon
 {
 
     /**
+     * Instance of the dbcon class (self reference)
+     * @var DBCon
+     */
+    private static $instance;
+
+    /**
      * Hostname of the database server (read/write access)
      * @var String
      */
@@ -153,7 +159,7 @@ class DBCon
      * Constructor
      * automatically sets up mysql server-vars
      */
-    public function __construct($db)
+    private function __construct($db)
     {
         $this->rw_host = $db['rw_host'];
         $this->ro_host = $db['ro_host'];
@@ -192,35 +198,56 @@ class DBCon
      */
     public function __destruct()
     {
-        if ($this->transaction)
+        if (isset(self::$instance))
         {
-            $this->rollback();
+            if ($this->transaction)
+            {
+                $this->rollback();
+            }
+            if ($this->connected)
+            {
+                $this->disconnect();
+            }
+            unset($this->ro_host);
+            unset($this->rw_host);
+            unset($this->user);
+            unset($this->pwd);
+            unset($this->db);
+            unset($this->res);
+            unset($this->connected);
+            unset($this->transaction);
+            unset($this->last_query);
+            unset($this->select);
+            unset($this->join);
+            unset($this->where);
+            unset($this->order);
+            unset($this->group);
+            unset($this->limit);
+            unset($this->union);
+            unset($this->where_group);
+            unset($this->for_update);
+            unset($this->gen_uuid_hex);
+            unset($this->socket);
+            unset($this->readonly);
+            self::$instance = NULL;
+            unset(self::$instance);
         }
-        if ($this->connected)
+    }
+
+    /**
+     * Return an instance of dbcon
+     * @param array $db Database configuration values
+     * @return DBCon Reference to the DBCon Singleton
+     */
+    public static function get_db_connection($db)
+    {
+        if (!isset(self::$instance))
         {
-            $this->disconnect();
+            $c = __CLASS__;
+            self::$instance = new $c($db);
         }
-        unset($this->ro_host);
-        unset($this->rw_host);
-        unset($this->user);
-        unset($this->pwd);
-        unset($this->db);
-        unset($this->res);
-        unset($this->connected);
-        unset($this->transaction);
-        unset($this->last_query);
-        unset($this->select);
-        unset($this->join);
-        unset($this->where);
-        unset($this->order);
-        unset($this->group);
-        unset($this->limit);
-        unset($this->union);
-        unset($this->where_group);
-        unset($this->for_update);
-        unset($this->gen_uuid_hex);
-        unset($this->socket);
-        unset($this->readonly);
+
+        return self::$instance;
     }
 
     /**
