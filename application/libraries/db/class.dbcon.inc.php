@@ -25,12 +25,6 @@ class DBCon
 {
 
     /**
-     * Instance of the dbcon class (self reference)
-     * @var DBCon
-     */
-    private static $instance;
-
-    /**
      * Hostname of the database server (read/write access)
      * @var String
      */
@@ -159,7 +153,7 @@ class DBCon
      * Constructor
      * automatically sets up mysql server-vars
      */
-    private function __construct($db)
+    public function __construct($db, $readonly = TRUE)
     {
         $this->rw_host = $db['rw_host'];
         $this->ro_host = $db['ro_host'];
@@ -176,7 +170,7 @@ class DBCon
             $this->socket = ini_get("mysqli.default_socket");
         }
 
-        $this->readonly = TRUE;
+        $this->readonly = $readonly;
         $this->select = "";
         $this->join = "";
         $this->where = "";
@@ -198,55 +192,35 @@ class DBCon
      */
     public function __destruct()
     {
-        if (self::$instance !== NULL)
+        if ($this->transaction)
         {
-            if ($this->transaction)
-            {
-                $this->rollback();
-            }
-            if ($this->connected)
-            {
-                $this->disconnect();
-            }
-            unset($this->ro_host);
-            unset($this->rw_host);
-            unset($this->user);
-            unset($this->pwd);
-            unset($this->db);
-            unset($this->res);
-            unset($this->connected);
-            unset($this->transaction);
-            unset($this->last_query);
-            unset($this->select);
-            unset($this->join);
-            unset($this->where);
-            unset($this->order);
-            unset($this->group);
-            unset($this->limit);
-            unset($this->union);
-            unset($this->where_group);
-            unset($this->for_update);
-            unset($this->gen_uuid_hex);
-            unset($this->socket);
-            unset($this->readonly);
-            self::$instance = NULL;
+            $this->rollback();
         }
-    }
-
-    /**
-     * Return an instance of dbcon
-     * @param array $db Database configuration values
-     * @return DBCon Reference to the DBCon Singleton
-     */
-    public static function get_db_connection($db)
-    {
-        if (!isset(self::$instance))
+        if ($this->connected)
         {
-            $c = __CLASS__;
-            self::$instance = new $c($db);
+            $this->disconnect();
         }
-
-        return self::$instance;
+        unset($this->ro_host);
+        unset($this->rw_host);
+        unset($this->user);
+        unset($this->pwd);
+        unset($this->db);
+        unset($this->res);
+        unset($this->connected);
+        unset($this->transaction);
+        unset($this->last_query);
+        unset($this->select);
+        unset($this->join);
+        unset($this->where);
+        unset($this->order);
+        unset($this->group);
+        unset($this->limit);
+        unset($this->union);
+        unset($this->where_group);
+        unset($this->for_update);
+        unset($this->gen_uuid_hex);
+        unset($this->socket);
+        unset($this->readonly);
     }
 
     /**
@@ -280,24 +254,6 @@ class DBCon
         {
             mysqli_close($this->res);
             $this->connected = FALSE;
-        }
-    }
-
-    /**
-     * Define whether write access is needed or not
-     * NOTE: this can onl be done before the first query is executed
-     * @return Boolean $return TRUE if successful, FALSE if there's already a connection established
-     */
-    public function set_writeable()
-    {
-        if ($this->connected)
-        {
-            return FALSE;
-        }
-        else
-        {
-            $this->readonly = FALSE;
-            return TRUE;
         }
     }
 

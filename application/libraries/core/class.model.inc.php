@@ -14,13 +14,19 @@ abstract class Model
     protected $db;
 
     /**
+     * The db configuration given on construction
+     * @var array
+     */
+    private $db_config;
+
+    /**
      * Constructor
      */
     public function __construct($db)
     {
-        require_once("class.dbcon.inc.php");
-        require_once("class.query.inc.php");
-        $this->db = DBCon::get_db_connection($db);
+        require_once("class.dbman.inc.php");
+        $this->db = DBMan::get_db_connection($db);
+        $this->db_config = $db;
     }
 
     /**
@@ -37,7 +43,7 @@ abstract class Model
      */
     public function get_write_access()
     {
-        return $this->db->set_writeable();
+        $this->db = DBMan::get_db_connection($this->db_config, FALSE);
     }
 
 }
