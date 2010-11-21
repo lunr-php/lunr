@@ -409,7 +409,12 @@ class DBCon
                 $output = mysqli_query($this->res, $sql_command);
                 return new Query($output, $this->res);
             }
-            else{
+            elseif ($this->readonly === TRUE)
+            {
+                return FALSE;
+            }
+            else
+            {
                 return mysqli_query($this->res, $sql_command);
             }
         }
@@ -1075,12 +1080,19 @@ class DBCon
      */
     public function insert($table, $data)
     {
-        $sql  = "INSERT INTO `$table` ";
-        $sql .= $this->prepare_data($data,"keys");
-        $sql .= "VALUES ";
-        $sql .= $this->prepare_data($data,"values");
-        $sql .= ";";
-        return $this->query($sql,false);
+        if ($this->readonly === TRUE)
+        {
+            return FALSE;
+        }
+        else
+        {
+            $sql  = "INSERT INTO `$table` ";
+            $sql .= $this->prepare_data($data,"keys");
+            $sql .= "VALUES ";
+            $sql .= $this->prepare_data($data,"values");
+            $sql .= ";";
+            return $this->query($sql,false);
+        }
     }
 
     /**
@@ -1091,12 +1103,19 @@ class DBCon
      */
     public function replace($table, $data)
     {
-        $sql  = "REPLACE INTO `$table` ";
-        $sql .= $this->prepare_data($data,"keys");
-        $sql .= "VALUES ";
-        $sql .= $this->prepare_data($data,"values");
-        $sql .= ";";
-        return $this->query($sql,false);
+        if ($this->readonly === TRUE)
+        {
+            return FALSE;
+        }
+        else
+        {
+            $sql  = "REPLACE INTO `$table` ";
+            $sql .= $this->prepare_data($data,"keys");
+            $sql .= "VALUES ";
+            $sql .= $this->prepare_data($data,"values");
+            $sql .= ";";
+            return $this->query($sql,false);
+        }
     }
 
     /**
@@ -1107,13 +1126,20 @@ class DBCon
      */
     public function update($table, $data)
     {
-        $sql = "UPDATE `$table` SET ";
-        foreach ($data as $key => $value)
+        if ($this->readonly === TRUE)
         {
-            $sql .= "`$key` = '" . $this->escape_string($value) . "',";
+            return FALSE;
         }
-        $sql = substr_replace($sql, " ", strripos($sql, ","));
-        return $this->query($sql, false);
+        else
+        {
+            $sql = "UPDATE `$table` SET ";
+            foreach ($data as $key => $value)
+            {
+                $sql .= "`$key` = '" . $this->escape_string($value) . "',";
+            }
+            $sql = substr_replace($sql, " ", strripos($sql, ","));
+            return $this->query($sql, false);
+        }
     }
 
     /**
@@ -1123,8 +1149,15 @@ class DBCon
      */
     public function delete($table)
     {
-        $sql = "DELETE FROM `$table`";
-        return $this->query($sql,false);
+        if ($this->readonly === TRUE)
+        {
+            return FALSE;
+        }
+        else
+        {
+            $sql = "DELETE FROM `$table`";
+            return $this->query($sql,false);
+        }
     }
 
     /**
@@ -1238,8 +1271,15 @@ class DBCon
      */
     public function drop_view($view)
     {
-        $sql = "DROP VIEW " . $this->escape_string($view);
-        return $this->query($sql);
+        if ($this->readonly === TRUE)
+        {
+            return FALSE;
+        }
+        else
+        {
+            $sql = "DROP VIEW " . $this->escape_string($view);
+            return $this->query($sql);
+        }
     }
 
     /**
@@ -1250,9 +1290,16 @@ class DBCon
      */
     public function create_view($name, $from)
     {
-        $sql = "CREATE VIEW " . $this->escape_string($name) . " AS ";
-        $sql .= $this->preliminary_query($from);
-        return $this->query($sql);
+        if ($this->readonly === TRUE)
+        {
+            return FALSE;
+        }
+        else
+        {
+            $sql = "CREATE VIEW " . $this->escape_string($name) . " AS ";
+            $sql .= $this->preliminary_query($from);
+            return $this->query($sql);
+        }
     }
 
     /**
