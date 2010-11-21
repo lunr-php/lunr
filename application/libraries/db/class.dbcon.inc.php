@@ -1330,11 +1330,12 @@ class DBCon
         }
 
         $list = "(";
-        $unhex_pattern = "/UNHEX\('[0-9a-fA-F]{32}'\)/";    //The value must be a proper hexadecimal value well formatted -> "UNHEX('hex_value')"
+        //The value must be a proper hexadecimal value well formatted -> "UNHEX('hex_value')"
+        $unhex_pattern = "/UNHEX\('[0-9a-fA-F]{32}'\)/";
 
         foreach ($array as $value)
         {
-            if(($type != "keys") && (preg_match($unhex_pattern, $value) != FALSE))
+            if(($type != "keys") && ((preg_match($unhex_pattern, $value) != FALSE) || $value === NULL))
             {
                 $list .= $value." ,";
             }
