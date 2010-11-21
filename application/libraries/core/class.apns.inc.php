@@ -101,6 +101,7 @@ class APNS
     * we shouldn't keep sending them push notifications. Otherwise Steve Jobs
     * will become angry and will rape your family and kill your pets!!!
     * WARNING: NOT FINISHED (NEITHER USED) YET!
+    * TODO: Add a cli function for removing the device ID of the users who uninstall the app
     * @return Array, An array with all the device tokens that should be removed
     */
     public function get_apple_feedback()
