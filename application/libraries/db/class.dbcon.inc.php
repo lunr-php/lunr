@@ -1335,9 +1335,13 @@ class DBCon
 
         foreach ($array as $value)
         {
-            if(($type != "keys") && ((preg_match($unhex_pattern, $value) != FALSE) || $value === NULL))
+            if(($type != "keys") && (preg_match($unhex_pattern, $value) != FALSE))
             {
                 $list .= $value." ,";
+            }
+            elseif ($value === NULL)
+            {
+                $list .= "NULL ,";
             }
             else
             {
