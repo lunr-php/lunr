@@ -849,6 +849,7 @@ class DBCon
      * Define an alternative LIKE clause
      * @param String $col Column name
      * @param String $val Value that should be matched
+     * @param String $match Side of the $val where '%' should be placed (optional, both by default)
      * @param String $collate Specific collate used for comparison (optional)
      * @return void
      */
