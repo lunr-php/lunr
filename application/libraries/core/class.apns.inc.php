@@ -18,7 +18,7 @@ class APNS
      */
     public function __construct()
     {
-        require_once("conf.notifications.inc.php");
+        require("conf.notifications.inc.php");
         $this->config_notifications =& $config;
     }
 
@@ -45,7 +45,6 @@ class APNS
         stream_context_set_option($ctx, 'ssl', 'passphrase', $this->config_notifications['apns']['cert']['test_pass']);
 //         stream_context_set_option($ctx, 'ssl', 'local_cert', $this->config_notifications['apns']['cert']['live']);
 //         stream_context_set_option($ctx, 'ssl', 'passphrase', $this->config_notifications['apns']['cert']['live_pass']);
-
         $fp = stream_socket_client($this->config_notifications['apns']['push']['test'], $err, $err_str, 60, STREAM_CLIENT_CONNECT, $ctx);
 //         $fp = stream_socket_client($this->config_notifications['apns']['push']['live'], $err, $errstr, 60, STREAM_CLIENT_CONNECT, $ctx);
         if(!$fp)
@@ -53,7 +52,6 @@ class APNS
             error_log(date('Y-m-d H:i') . " - Error while opening socket: $err $err_str\n\n", 3, $this->config_notifications['apns']['log']);
             return FALSE;
         }
-
         $json_payload = json_encode($payload);
 //         $identifier = '0011';
 //         $expiry_date = '';
@@ -84,7 +82,7 @@ class APNS
 //             echo "Response from Apple: ";
 //             var_dump($response);
 //             $result[] = unpack("C1/n1status/N4identifier", $response);
-//             var_dump($result);
+// //             var_dump($result);
 //         }
 //         else
 //         {
