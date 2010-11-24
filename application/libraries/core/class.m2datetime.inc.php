@@ -90,6 +90,23 @@ class M2DateTime
     }
 
     /**
+     * Returns a MySQL compatible Date & Time definition
+     * @param Integer $timestamp PHP-like Unix Timestamp
+     * @return String $datetime Date & Time as a string
+     */
+    public static function get_datetime($timestamp = FALSE)
+    {
+        if ($timestamp === FALSE)
+        {
+            return date('Y-m-d H:i', time());
+        }
+        else
+        {
+            return date('Y-m-d H:i', $timestamp);
+        }
+    }
+
+    /**
      * Checks whether a given input string is a valid time definition
      * @param String $string Input String
      * @return Boolean $return True if it is valid, False otherwise
