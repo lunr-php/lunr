@@ -407,6 +407,10 @@ class DBCon
             if ($return)
             {
                 $output = mysqli_query($this->res, $sql_command);
+                if (is_bool($output))
+                {
+                    Output::error($this->last_query());
+                }
                 return new Query($output, $this->res);
             }
             elseif ($this->readonly === TRUE)
@@ -497,6 +501,10 @@ class DBCon
             $this->last_query = $sql_command;
 
             $output = mysqli_query($this->res, $sql_command);
+            if (is_bool($output))
+            {
+                Output::error($this->last_query());
+            }
             return new Query($output, $this->res);
         }
         else
