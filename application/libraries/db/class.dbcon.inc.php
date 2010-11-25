@@ -670,7 +670,7 @@ class DBCon
             $collate = " COLLATE $collate";
         }
 
-        if (substr($val,0,2) == "IS")
+        if (substr($val,0,3) == "IS ")
         {
             $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . $this->escape_string($val) . $collate;
         }
