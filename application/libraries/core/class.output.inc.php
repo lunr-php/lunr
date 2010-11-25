@@ -63,6 +63,23 @@ class Output
         echo M2DateTime::get_datetime() . ": " . $msg . "\n";
     }
 
+    /**
+     * Trigger a PHP error
+     * @param String $info The error string that should be printed
+     * @return void
+     */
+    public static function error($info)
+    {
+        if (isset($_GET['controller']) && isset($_GET['method']))
+        {
+            trigger_error($_GET['controller'] . "/" . $_GET['method'] . ": " . $info);
+        }
+        else
+        {
+            trigger_error($info);
+        }
+    }
+
 }
 
 ?>
