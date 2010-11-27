@@ -219,10 +219,9 @@ class CliParser
      * @param Integer $index The index of the argument within $this->args
      * @param Integer $pos Index of the last option character within the longopts or shortopts String
      * @param String $a The option the argument belongs too
-     * @param Integer $depth The depth of the call (ie, the number of arguments passed to the option)
      * @return boolean $return Success or Failure
      */
-    private function check_argument($opt,$index,$pos,$a,$depth=1)
+    private function check_argument($opt,$index,$pos,$a)
     {
         $next = $index+1;
         if($pos+1<strlen($a))
@@ -236,9 +235,9 @@ class CliParser
                         array_push($this->ast[$opt],$this->args[$next]);
                         if ($pos+2<strlen($a))
                         {
-                            if ($depth<3 && ($a{$pos+2}==":" || $a{$pos+2}==";"))
+                            if ($a{$pos+2}==":" || $a{$pos+2}==";")
                             {
-                                return $this->check_argument($opt,$next,$pos+1,$a,$depth+1);
+                                return $this->check_argument($opt,$next,$pos+1,$a);
                             }
                             else
                             {
@@ -271,9 +270,9 @@ class CliParser
                         array_push($this->ast[$opt],$this->args[$next]);
                         if ($pos+2<strlen($a))
                         {
-                            if ($depth<2 && $a{$pos+2}==";")
+                            if ($a{$pos+2}==";")
                             {
-                                return $this->check_argument($opt,$next,$pos+1,$a,$depth+1);
+                                return $this->check_argument($opt,$next,$pos+1,$a);
                             }
                             else
                             {
