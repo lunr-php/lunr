@@ -1400,7 +1400,14 @@ class DBCon
         $col = "";
         foreach ($parts AS $part)
         {
-            $col .= "`" . trim($part) . "`.";
+            if (trim($part) == "*")
+            {
+                $col .= trim($part) . ".";
+            }
+            else
+            {
+                $col .= "`" . trim($part) . "`.";
+            }
         }
         $col = substr_replace($col, " ", strripos($col, "."));
         return $col;
