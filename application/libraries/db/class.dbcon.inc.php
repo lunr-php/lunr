@@ -1144,7 +1144,14 @@ class DBCon
             $sql = "UPDATE `$table` SET ";
             foreach ($data as $key => $value)
             {
-                $sql .= "`$key` = '" . $this->escape_string($value) . "',";
+                if (is_null($value))
+                {
+                    $sql .= "`$key` = NULL,";
+                }
+                else
+                {
+                    $sql .= "`$key` = '" . $this->escape_string($value) . "',";
+                }
             }
             $sql = substr_replace($sql, " ", strripos($sql, ","));
             return $this->query($sql, false);
