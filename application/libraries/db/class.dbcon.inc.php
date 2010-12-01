@@ -1294,7 +1294,7 @@ class DBCon
         else
         {
             $sql = "DROP VIEW " . $this->escape_string($view);
-            return $this->query($sql);
+            return $this->query($sql, FALSE);
         }
     }
 
@@ -1314,7 +1314,7 @@ class DBCon
         {
             $sql = "CREATE VIEW " . $this->escape_string($name) . " AS ";
             $sql .= $this->preliminary_query($from);
-            return $this->query($sql);
+            return $this->query($sql, FALSE);
         }
     }
 
