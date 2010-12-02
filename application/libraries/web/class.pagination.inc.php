@@ -177,12 +177,12 @@ class Pagination{
      */
     private function build_previous($amount)
     {
-        if (($amount < $this->cursor) && ($amount > 0))
+        if ($amount > 0)
         {
             $html = "";
-            for($i = ($this->cursor - $amount) ; $i < $this->cursor ; ++$i)
+            for($i = ($this->cursor - 1) ; (($i >= $this->cursor - $amount) && ($i > 0)) ; --$i)
             {
-                $html .= '<a class="paginator_page" href="' . $this->base_url . $i . '">' . ($i) . '</a>' . "\n";
+                $html = '<a class="paginator_page" href="' . $this->base_url . $i . '">' . ($i) . '</a>' . "\n" . $html;
             }
             return $html;
         }
@@ -199,10 +199,10 @@ class Pagination{
      */
     private function build_next($amount)
     {
-        if (($amount < $this->pages_total) && ($amount > 0))
+        if ($amount > 0)
         {
             $html = "";
-            for($i = $this->cursor + 1 ; $i <= $this->cursor + $amount ; ++$i)
+            for($i = $this->cursor + 1 ; (($i <= $this->cursor + $amount) && ($i <= $this->pages_total)) ; ++$i)
             {
                 $html .= '<a class="paginator_page" href="' . $this->base_url . $i . '">' . ($i) . "</a>\n";
             }
