@@ -91,7 +91,7 @@ class M2DateTime
 
     /**
      * Returns a MySQL compatible Date & Time definition
-     * @param Integer $timestamp PHP-like Unix Timestamp
+     * @param Integer $timestamp PHP-like Unix Timestamp (optional)
      * @return String $datetime Date & Time as a string
      */
     public static function get_datetime($timestamp = FALSE)
@@ -103,6 +103,25 @@ class M2DateTime
         else
         {
             return date('Y-m-d H:i', $timestamp);
+        }
+    }
+
+    /**
+     * Return a date formatted as "DD MMM" (eg 05 Dec)
+     * @param Integer $timestamp PHP-like Unix Timestamp (optional)
+     * @param String $locale The locale that should be used for the month names (optional, en_US by default)
+     * @return String $date Date as a string
+     */
+    public static function get_human_readable_date_short($timestamp = FALSE, $locale = "en_US")
+    {
+        setlocale(LC_ALL, $locale);
+        if ($timestamp === FALSE)
+        {
+            return strtoupper(strftime('%d %b', time()));
+        }
+        else
+        {
+            return strtoupper(strftime('%d %b', $timestamp));
         }
     }
 
