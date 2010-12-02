@@ -142,6 +142,22 @@ class M2DateTime
             return true;
         }
     }
+
+   /**
+    * Function to convert a MySQL datetime (YYYY-MM-DD HH:MM:SS) into a Unix timestamp
+    * @param String datetime The string to be formatted
+    * @return Integer Unix Timestamp
+    */
+    public static function get_timestamp_from_datetime($datetime)
+    {
+        list($date, $time) = explode(' ', $datetime);
+        list($year, $month, $day) = explode('-', $date);
+        list($hour, $minute, $second) = explode(':', $time);
+
+        $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
+
+        return $timestamp;
+    }
 }
 
 ?>
