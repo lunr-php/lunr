@@ -41,12 +41,12 @@ class APNS
         global $config, $JSON;
 
         $ctx = stream_context_create();
-        stream_context_set_option($ctx, 'ssl', 'local_cert', $this->config_notifications['apns']['cert']['test']);
-        stream_context_set_option($ctx, 'ssl', 'passphrase', $this->config_notifications['apns']['cert']['test_pass']);
-//         stream_context_set_option($ctx, 'ssl', 'local_cert', $this->config_notifications['apns']['cert']['live']);
-//         stream_context_set_option($ctx, 'ssl', 'passphrase', $this->config_notifications['apns']['cert']['live_pass']);
-        $fp = stream_socket_client($this->config_notifications['apns']['push']['test'], $err, $err_str, 60, STREAM_CLIENT_CONNECT, $ctx);
-//         $fp = stream_socket_client($this->config_notifications['apns']['push']['live'], $err, $errstr, 60, STREAM_CLIENT_CONNECT, $ctx);
+//       stream_context_set_option($ctx, 'ssl', 'local_cert', $this->config_notifications['apns']['cert']['test']);
+//        stream_context_set_option($ctx, 'ssl', 'passphrase', $this->config_notifications['apns']['cert']['test_pass']);
+        stream_context_set_option($ctx, 'ssl', 'local_cert', $this->config_notifications['apns']['cert']['live']);
+        stream_context_set_option($ctx, 'ssl', 'passphrase', $this->config_notifications['apns']['cert']['live_pass']);
+//        $fp = stream_socket_client($this->config_notifications['apns']['push']['test'], $err, $err_str, 60, STREAM_CLIENT_CONNECT, $ctx);
+         $fp = stream_socket_client($this->config_notifications['apns']['push']['live'], $err, $errstr, 60, STREAM_CLIENT_CONNECT, $ctx);
         if(!$fp)
         {
             error_log(date('Y-m-d H:i') . " - Error while opening socket: $err $err_str\n\n", 3, $this->config_notifications['apns']['log']);
