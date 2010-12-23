@@ -49,7 +49,7 @@ class APNS
          $fp = stream_socket_client($this->config_notifications['apns']['push']['live'], $err, $errstr, 60, STREAM_CLIENT_CONNECT, $ctx);
         if(!$fp)
         {
-            error_log(date('Y-m-d H:i') . " - Error while opening socket: $err $err_str\n\n", 3, $this->config_notifications['apns']['log']);
+            error_log(date('Y-m-d H:i') . " - Error while opening socket: $err\n\n", 3, $this->config_notifications['apns']['log']);
             return FALSE;
         }
         $json_payload = json_encode($payload);
