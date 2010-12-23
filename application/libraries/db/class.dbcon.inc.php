@@ -410,6 +410,7 @@ class DBCon
                 if (is_bool($output))
                 {
                     Output::error($this->last_query());
+                    Output::error($this->last_error());
                 }
                 return new Query($output, $this->res);
             }
