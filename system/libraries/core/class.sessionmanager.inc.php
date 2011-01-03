@@ -35,10 +35,6 @@ class SessionManager
             array(&$this, 'gc')
         );
 
-        set_include_path(
-            get_include_path() .
-            ":" . dirname(__FILE__) . "/../../models/core"
-        );
         require_once("model.session.inc.php");
         $this->smodel = new SessionModel();
     }
