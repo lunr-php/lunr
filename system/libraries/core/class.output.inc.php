@@ -66,17 +66,32 @@ class Output
     /**
      * Trigger a PHP error
      * @param String $info The error string that should be printed
+     * @param String $file The log file the error should be logged to (optional)
      * @return void
      */
-    public static function error($info)
+    public static function error($info, $file = "")
     {
         if (isset($_GET['controller']) && isset($_GET['method']))
         {
-            trigger_error($_GET['controller'] . "/" . $_GET['method'] . ": " . $info);
+            if ($file == "")
+            {
+                trigger_error($_GET['controller'] . "/" . $_GET['method'] . ": " . $info);
+            }
+            else
+            {
+                error_log("[" . M2DateTime::get_datetime() . "]: " . $_GET['controller'] . "/" . $_GET['method'] . ": " . $info, 3, $file);
+            }
         }
         else
         {
-            trigger_error($info);
+            if ($file == "")
+            {
+                trigger_error($info);
+            }
+            else
+            {
+                error_log("[" . M2DateTime::get_datetime() . "]: " . $info, 3, $file);
+            }
         }
     }
 

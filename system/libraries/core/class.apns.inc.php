@@ -2,16 +2,16 @@
 
 /**
  * Apple Push Notifications System Library
- * @author M2Mobi, Julio Foulquié
+ * @author M2Mobi, Julio Foulquié, Heinz Wiesinger
  */
 class APNS
 {
 
     /**
-    * Whatever weird thing is this for, it saves a few strings of memory when notifications not used
-    * @var config
-    */
-    private $config_notifications;
+     * APNS response codes
+     * @var SplFixedArray
+     */
+    private $error;
 
     /**
      * Constructor
@@ -19,7 +19,17 @@ class APNS
     public function __construct()
     {
         require("conf.notifications.inc.php");
-        $this->config_notifications =& $config;
+        $this->error = SplFixedArray(10);
+        $this->error[0] = "UNDEFINED"; //SUCCESS?
+        $this->error[1] = "PROCESSING ERROR";
+        $this->error[2] = "MISSING DEVICE TOKEN";
+        $this->error[3] = "MISSING TOPIC";
+        $this->error[4] = "MISSING PAYLOAD";
+        $this->error[5] = "INVALID TOKEN SIZE";
+        $this->error[6] = "INVALID TOPIC SIZE";
+        $this->error[7] = "INVALID PAYLOAD SIZE";
+        $this->error[8] = "INVALID TOKEN";
+        $this->error[9] = "UNKNOWN ERROR";
     }
 
     /**
@@ -41,15 +51,12 @@ class APNS
         global $config, $JSON;
 
         $ctx = stream_context_create();
-//       stream_context_set_option($ctx, 'ssl', 'local_cert', $this->config_notifications['apns']['cert']['test']);
-//        stream_context_set_option($ctx, 'ssl', 'passphrase', $this->config_notifications['apns']['cert']['test_pass']);
-        stream_context_set_option($ctx, 'ssl', 'local_cert', $this->config_notifications['apns']['cert']['live']);
-        stream_context_set_option($ctx, 'ssl', 'passphrase', $this->config_notifications['apns']['cert']['live_pass']);
-//        $fp = stream_socket_client($this->config_notifications['apns']['push']['test'], $err, $err_str, 60, STREAM_CLIENT_CONNECT, $ctx);
-         $fp = stream_socket_client($this->config_notifications['apns']['push']['live'], $err, $errstr, 60, STREAM_CLIENT_CONNECT, $ctx);
+        stream_context_set_option($ctx, 'ssl', 'local_cert', $config['apns']['cert']);
+        stream_context_set_option($ctx, 'ssl', 'passphrase', $config['apns']['cert']['pass']);
+        $fp = stream_socket_client($config['apns']['push'], $err, $errstr, 60, STREAM_CLIENT_CONNECT, $ctx);
         if(!$fp)
         {
-            error_log(date('Y-m-d H:i') . " - Error while opening socket: $err\n\n", 3, $this->config_notifications['apns']['log']);
+            Output::error("Error while opening socket: $err\n\n", $config['apns']['log']);
             return FALSE;
         }
         $json_payload = json_encode($payload);
@@ -63,7 +70,7 @@ class APNS
 
         if(!fwrite($fp, $msg))
         {
-            error_log(date('Y-m-d H:i') . " - Error while unserializing\n\n", 3, $this->config_notifications['apns']['log']);
+            Output::error("Error while unserializing\n\n", $config['apns']['log']);
             return FALSE;
         }
 //         $response = "";
@@ -73,7 +80,7 @@ class APNS
 //         }
         if(!fclose($fp))
         {
-            error_log(date('Y-m-d H:i') . " - Error while closing socket\n\n", 3, $this->config_notifications['apns']['log']);
+            Output::error("Error while closing socket\n\n", $config['apns']['log']);
 //             return FALSE;
         }
 //         if(!strlen($res;ponse))
@@ -98,7 +105,7 @@ class APNS
 // //             $this->process_apple_error($response);
 //             return FALSE;
 //         }
-        error_log(date('Y-m-d H:i') . " - Notification sent: $json_payload \n\n", 3, $this->config_notifications['apns']['log']);
+        Output::error("Notification sent: $json_payload \n\n", $config['apns']['log']);
         return TRUE;
     }
 
@@ -115,14 +122,11 @@ class APNS
         //connect to the APNS feedback servers
         //make sure you're using the right dev/production server & cert combo!
         $ctx = stream_context_create();
-        stream_context_set_option($ctx, 'ssl', 'local_cert', $this->config_notifications['apns']['cert']['test']);
-        stream_context_set_option($ctx, 'ssl', 'passphrase', $this->config_notifications['apns']['cert']['test_pass']);
-//         stream_context_set_option($ctx, 'ssl', 'local_cert', $this->config_notifications['apns']['cert']['live']);
-//         stream_context_set_option($ctx, 'ssl', 'passphrase', $this->config_notifications['apns']['cert']['live_pass']);
+        stream_context_set_option($ctx, 'ssl', 'local_cert', $config['apns']['cert']);
+        stream_context_set_option($ctx, 'ssl', 'passphrase', $config['apns']['cert']['pass']);
 
         echo "CONNECTING TO FEEDBACK APNS\t\t";
-        $apns = stream_socket_client($this->config_notifications['apns']['feedback']['test'], $errcode, $errstr, 60, STREAM_CLIENT_CONNECT, $ctx);
-//         $apns = stream_socket_client($this->config_notifications['apns']['feedback']['live'], $errcode, $errstr, 60, STREAM_CLIENT_CONNECT, $ctx );
+        $apns = stream_socket_client($config['apns']['feedback'], $errcode, $errstr, 60, STREAM_CLIENT_CONNECT, $ctx);
         if (!$apns)
         {
             echo "[FAIL]\nError $errcode: $errstr\n";
@@ -153,36 +157,11 @@ class APNS
     */
     public function process_apple_error($response)
     {
-        switch($response[1])
+        if ($response[1] < 0 && $response[1] > 8)
         {
-            case 1:
-                error_log(date('Y-m-d H:i') . " - Push notification '$response' rejected by APNS. Reason: PROCESSING ERROR\n\n", 3, $this->config_notifications['apns']['log']);
-                break;
-            case 2:
-                error_log(date('Y-m-d H:i') . " - Push notification '$response' rejected by APNS. Reason: MISSING DEVICE TOKEN\n\n", 3, $this->config_notifications['apns']['log']);
-                break;
-            case 3:
-                error_log(date('Y-m-d H:i') . " - Push notification '$response' rejected by APNS. Reason: MISSING TOPIC\n\n", 3, $this->config_notifications['apns']['log']);
-                break;
-            case 4:
-                error_log(date('Y-m-d H:i') . " - Push notification '$response' rejected by APNS. Reason: MISSING PAYLOAD\n\n", 3, $this->config_notifications['apns']['log']);
-                break;
-            case 5:
-                error_log(date('Y-m-d H:i') . " - Push notification '$response' rejected by APNS. Reason: INVALID TOKEN SIZE\n\n", 3, $this->config_notifications['apns']['log']);
-                break;
-            case 6:
-                error_log(date('Y-m-d H:i') . " - Push notification '$response' rejected by APNS. Reason: INVALID TOPIC SIZE\n\n", 3, $this->config_notifications['apns']['log']);
-                break;
-            case 7:
-                error_log(date('Y-m-d H:i') . " - Push notification '$response' rejected by APNS. Reason: INVALID PAYLOAD SIZE\n\n", 3, $this->config_notifications['apns']['log']);
-                break;
-            case 8:
-                error_log(date('Y-m-d H:i') . " - Push notification '$response' rejected by APNS. Reason: INVALID TOKEN\n\n", 3, $this->config_notifications['apns']['log']);
-                break;
-            default:
-                error_log(date('Y-m-d H:i') . " - Push notification '$response' rejected by APNS. Reason: UNKNOWN ERROR\n\n", 3, $this->config_notifications['apns']['log']);
-                break;
+            $response[1] = 9;
         }
+        Output::error("Push notification '$response' rejected by APNS. Reason: " . $this->error[$response[1]], $config['apns']['log']);
     }
 }
 
