@@ -24,6 +24,70 @@ class Process
     }
 
     /**
+     * Run a system command from inside PHP
+     * @param String $cmd The command to run
+     * @param String $out The location where output should be redirected too
+     * @param Boolean $append Whether to append to the output location, or to replace it
+     * @param Boolean $error_redirect Whether to redirect STDERR to STDOUT
+     * @return mixed $return STDOUT output of the command, or TRUE if command is run in background
+     */
+    public static function run($cmd, $out = "", $append = FALSE, $error_redirect = TRUE)
+    {
+        if ($error_redirect === TRUE)
+        {
+            $cmd .= " 2&>1";
+        }
+        if ($out != "")
+        {
+            if ($append === TRUE)
+            {
+                $cmd .= " >> $out";
+            }
+            else
+            {
+                $cmd .= " > $out";
+            }
+        }
+
+        return exec($cmd);
+    }
+
+    /**
+     * Run a system command from inside PHP in background
+     * @param String $cmd The command to run
+     * @param String $out The location where output should be redirected too
+     * @param Boolean $append Whether to append to the output location, or to replace it
+     * @param Boolean $error_redirect Whether to redirect STDERR to STDOUT
+     * @return mixed $return STDOUT output of the command, or TRUE if command is run in background
+     */
+    public static function run_bg($cmd, $out = "", $append = FALSE, $error_redirect = TRUE)
+    {
+        if ($error_redirect === TRUE)
+        {
+            $cmd .= " 2&>1";
+        }
+
+        if ($out == "")
+        {
+            $out = "/dev/null";
+        }
+
+        if (($append === TRUE) && ($out != "/dev/null"))
+        {
+            $cmd .= " >> $out";
+        }
+        else
+        {
+            $cmd .= " > $out";
+        }
+
+        // run in background
+        $cmd .= " &";
+
+        exec($cmd);
+    }
+
+    /**
      * Start multiple parallel child processes
      * WARNING: make sure to not reuse an already existing DB-Connection established by the parent
      * in the children. Best would be to not establish a DB-Connection in the parent at all.
