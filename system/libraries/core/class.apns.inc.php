@@ -157,7 +157,7 @@ class APNS
     */
     public function process_apple_error($response)
     {
-        if ($response[1] < 0 && $response[1] > 8)
+        if ($response[1] < 0 || $response[1] > 8)
         {
             $response[1] = 9;
         }
