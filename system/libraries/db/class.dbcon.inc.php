@@ -1382,6 +1382,13 @@ class DBCon
         }
         if ($this->connected)
         {
+            if (is_array($string))
+            {
+                require_once("class.output.inc.php");
+                $input = print_r($string, TRUE);
+                Output::error("Wrong input for escape_string()! Array given: $input");
+                return FALSE;
+            }
             return mysqli_real_escape_string($this->res, $string);
         }
         else
