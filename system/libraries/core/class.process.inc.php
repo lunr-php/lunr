@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Process forking implementation
+ * Process control class
  * @author M2Mobi, Heinz Wiesinger
  */
-class Fork
+class Process
 {
 
     /**
@@ -27,6 +27,7 @@ class Fork
      * Start multiple parallel child processes
      * WARNING: make sure to not reuse an already existing DB-Connection established by the parent
      * in the children. Best would be to not establish a DB-Connection in the parent at all.
+     * WARNING: Do NOT use this for a web process!!!!
      * @param Integer $number Amount of child processes to start
      * @param Mixed $call The call that should be executed by the child processes
      *      either "function" or "array('class','method')"
@@ -34,7 +35,7 @@ class Fork
      *      this array should be size() = $number
      * @return Mixed Either false if run out of CLI context or an array of child process statuses
      */
-    public static function doFork($number, $call, &$data)
+    public static function fork($number, $call, &$data)
     {
         global $cli;
         if ($cli)
