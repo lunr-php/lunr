@@ -3,6 +3,7 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [S=40]
+RewriteRule ([^/]+)/statics/[.]*$ - [PT]
 RewriteRule ([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ /index.php?controller=$1&method=$2&param1=$3&param2=$4&param3=$5 [QSA,L]
 RewriteRule ([^/]+)/([^/]+)/([^/]+)/([^/]+)/?$ /index.php?controller=$1&method=$2&param1=$3&param2=$4 [QSA,L]
 RewriteRule ([^/]+)/([^/]+)/([^/]+)/?$ /index.php?controller=$1&method=$2&param1=$3 [QSA,L]
