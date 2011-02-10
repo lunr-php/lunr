@@ -41,7 +41,6 @@ class Output
      */
     public static function cli_print_status($bool)
     {
-        require_once("class.m2datetime.inc.php");
         if ($bool === TRUE)
         {
             echo "[ok]\n";
@@ -71,6 +70,7 @@ class Output
      */
     public static function error($info, $file = "")
     {
+        require_once("class.m2datetime.inc.php");
         if (isset($_GET['controller']) && isset($_GET['method']))
         {
             if ($file == "")
