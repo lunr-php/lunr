@@ -40,6 +40,26 @@ class L10nProviderPHP extends L10nProvider
         return $identifier;
     }
 
+    /**
+     * Return a translated string, with proper singular/plural
+     * form
+     * @param String $singular Identifier for the singular version of the string
+     * @param String $plural Identifier for the plural version of the string
+     * @param Integer $amount The amount the translation should be based on
+     * @return String $string Translated string, identifier by default
+     */
+    public function nlang($singular, $plural, $amount)
+    {
+        if ($amount == 1)
+        {
+            return $singular;
+        }
+        else
+        {
+            return $plural;
+        }
+    }
+
 }
 
 ?>
