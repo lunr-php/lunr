@@ -48,9 +48,15 @@ class L10nProviderGettext extends L10nProvider
      */
     public function lang($identifier, $context = "")
     {
+        require_once("class.output.inc.php");
         if ($context == "")
         {
-            return gettext($identifier);
+            $output = gettext($identifier);
+            if ($output == $identifier)
+            {
+                Output::error("No translation found for string: $identifier");
+            }
+            return $output;
         }
         else
         {
@@ -60,6 +66,7 @@ class L10nProviderGettext extends L10nProvider
             $output = dcgettext($config['l10n']['domain'], $composed, LC_MESSAGES);
             if ($output == $composed)
             {
+                Output::error("No translation found for string: $identifier");
                 return $identifier;
             }
             else
@@ -80,9 +87,15 @@ class L10nProviderGettext extends L10nProvider
      */
     public function nlang($singular, $plural, $amount, $context = "")
     {
+        require_once("class.output.inc.php");
         if ($context == "")
         {
-            return ngettext($singular, $plural, $amount);
+            $output = ngettext($singular, $plural, $amount);
+            if (($output == $singular) || ($output == $plural))
+            {
+                Output::error("No translation found for string: $singular");
+            }
+            return $output;
         }
         else
         {
@@ -92,6 +105,7 @@ class L10nProviderGettext extends L10nProvider
             $output = dcngettext($config['l10n']['domain'], $composed, $plural, $amount, LC_MESSAGES);
             if (($output == $composed) || ($output == $plural))
             {
+                Output::error("No translation found for string: $singular");
                 return ($amount == 1 ? $singular : $plural);
             }
             else
