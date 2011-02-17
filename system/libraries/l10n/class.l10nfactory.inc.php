@@ -33,7 +33,7 @@ class L10nFactory
      * This method returns an object with the appropriate localization
      * implementation provider
      * @param String $provider The localization implementation requested
-     * @param String $language ISO-639-1 definition for the requested language (short code)
+     * @param String $language POSIX locale definition
      * @return L10nProvider $return Instance of the localization provider requested
      */
     public static function get_localization($provider, $language)

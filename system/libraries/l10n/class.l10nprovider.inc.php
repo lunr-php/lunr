@@ -5,7 +5,7 @@ abstract class L10nProvider
 
     /**
      * Constructor
-     * @param String $language ISO-639-1 definition for the requested language (short code)
+     * @param String $language POSIX locale definition
      */
     abstract public function __construct($language);
 
@@ -16,7 +16,7 @@ abstract class L10nProvider
 
     /**
      * Initialization method for setting up the provider
-     * @param String $language ISO-639-1 definition for the requested language (short code)
+     * @param String $language POSIX locale definition
      * @return void
      */
     abstract private function init($language);
