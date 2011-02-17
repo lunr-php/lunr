@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Abstract Localization Provider class
+ * @author M2Mobi, Heinz Wiesinger
+ */
 abstract class L10nProvider
 {
 

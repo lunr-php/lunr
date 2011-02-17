@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * PHP (array) Localization Provider class
+ * @author M2Mobi, Heinz Wiesinger
+ */
 class L10nProviderPHP extends L10nProvider
 {
 

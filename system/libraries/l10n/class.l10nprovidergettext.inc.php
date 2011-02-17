@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Gettext Localization Provider class
+ * @author M2Mobi, Heinz Wiesinger
+ */
 class L10nProviderGettext extends L10nProvider
 {
 
