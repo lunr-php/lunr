@@ -28,9 +28,10 @@ abstract class L10nProvider
     /**
      * Return a translated string
      * @param String $identifier Identifier for the requested string
+     * @param String $context Context information fot the requested string
      * @return String $string Translated string, identifier by default
      */
-    abstract public function lang($identifier);
+    abstract public function lang($identifier, $context = "");
 
     /**
      * Return a translated string, with proper singular/plural
@@ -38,9 +39,10 @@ abstract class L10nProvider
      * @param String $singular Identifier for the singular version of the string
      * @param String $plural Identifier for the plural version of the string
      * @param Integer $amount The amount the translation should be based on
+     * @param String $context Context information fot the requested string
      * @return String $string Translated string, identifier by default
      */
-    abstract public function nlang($singular, $plural, $amount);
+    abstract public function nlang($singular, $plural, $amount, $context = "");
 
 }
 

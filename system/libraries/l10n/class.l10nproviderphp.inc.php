@@ -37,9 +37,10 @@ class L10nProviderPHP extends L10nProvider
     /**
      * Return a translated string
      * @param String $identifier Identifier for the requested string
+     * @param String $context Context information fot the requested string
      * @return String $string Translated string, identifier by default
      */
-    public function lang($identifier)
+    public function lang($identifier, $context = "")
     {
         return $identifier;
     }
@@ -50,18 +51,12 @@ class L10nProviderPHP extends L10nProvider
      * @param String $singular Identifier for the singular version of the string
      * @param String $plural Identifier for the plural version of the string
      * @param Integer $amount The amount the translation should be based on
+     * @param String $context Context information fot the requested string
      * @return String $string Translated string, identifier by default
      */
-    public function nlang($singular, $plural, $amount)
+    public function nlang($singular, $plural, $amount, $context = "")
     {
-        if ($amount == 1)
-        {
-            return $singular;
-        }
-        else
-        {
-            return $plural;
-        }
+        return ($amount == 1 ? $singular : $plural);
     }
 
 }
