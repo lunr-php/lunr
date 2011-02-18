@@ -14,6 +14,12 @@ abstract class View
     protected $data;
 
     /**
+     * Reference to the Localization provider
+     * @var L10nProvider
+     */
+    protected $l10n;
+
+    /**
      * Reference to the Controller who instantiated the View
      * @var Controller
      */
@@ -47,10 +53,21 @@ abstract class View
      * the print_page() function.
      * @param Mixed $key Identifier for the data
      * @param Mixed $value The data
+     * @return void
      */
     public function add_data($key, &$value)
     {
         $this->data[$key] = &$value;
+    }
+
+    /**
+     * Set the localization provider that should be used by the view
+     * @param L10nProvider $provider Reference to the localization provider
+     * @return void
+     */
+    public function set_l10n_provider(&$provider)
+    {
+        $this->l10n = &$provider;
     }
 
     /**
