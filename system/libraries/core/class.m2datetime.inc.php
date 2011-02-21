@@ -61,6 +61,16 @@ class M2DateTime
     }
 
     /**
+     * Return a timestamp of a certain timeframe in the past/future
+     * @param String $delay Definition for a timeframe ("+1 day", "-10 minutes")
+     * @return Integer Delayed timestamp
+     */
+    public static function delayed_timestamp($delay)
+    {
+        return strtotime($delay);
+    }
+
+    /**
      * Return the current time (HH:MM:SS)
      * @return String current time
      */
