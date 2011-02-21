@@ -23,7 +23,7 @@ abstract class L10nProvider
      * @param String $language POSIX locale definition
      * @return void
      */
-    abstract private function init($language);
+    abstract protected function init($language);
 
     /**
      * Return a translated string

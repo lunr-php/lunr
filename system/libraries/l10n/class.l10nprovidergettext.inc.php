@@ -29,7 +29,7 @@ class L10nProviderGettext extends L10nProvider
      * @param String $language POSIX locale definition
      * @return void
      */
-    private function init($language)
+    protected function init($language)
     {
         global $config;
         putenv('LANG=' . $language);
