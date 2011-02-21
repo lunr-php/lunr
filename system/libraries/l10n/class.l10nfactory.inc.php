@@ -43,7 +43,7 @@ class L10nFactory
             case "php":
                 if (!isset(self::$lprovider[$provider]))
                 {
-                    require_once("class.class.l10nproviderphp.inc.php");
+                    require_once("class.l10nproviderphp.inc.php");
                     self::$lprovider[$provider] = new L10nProviderPHP($language);
                 }
 
@@ -53,7 +53,7 @@ class L10nFactory
             default:
                 if (!isset(self::$lprovider[$provider]))
                 {
-                    require_once("class.class.l10nprovidergettext.inc.php");
+                    require_once("class.l10nprovidergettext.inc.php");
                     self::$lprovider[$provider] = new L10nProviderGettext($language);
                 }
 
