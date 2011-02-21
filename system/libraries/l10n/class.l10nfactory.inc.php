@@ -38,6 +38,7 @@ class L10nFactory
      */
     public static function get_localization($provider, $language)
     {
+        require_once("class.l10nprovider.inc.php");
         switch($provider)
         {
             case "php":
