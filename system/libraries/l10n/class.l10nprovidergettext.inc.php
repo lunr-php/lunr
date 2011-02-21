@@ -36,7 +36,7 @@ class L10nProviderGettext extends L10nProvider
         setlocale(LC_ALL, "");
         setlocale(LC_MESSAGES, $language);
         setlocale(LC_CTYPE, $language);
-        bindtextdomain($config['l10n']['domain'], $language);
+        bindtextdomain($config['l10n']['domain'], $config['l10n']['locales']);
         textdomain($config['l10n']['domain']);
     }
 
