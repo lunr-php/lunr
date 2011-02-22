@@ -29,7 +29,7 @@ class Process
      * @param String $out The location where output should be redirected too
      * @param Boolean $append Whether to append to the output location, or to replace it
      * @param Boolean $error_redirect Whether to redirect STDERR to STDOUT
-     * @return mixed $return STDOUT output of the command, or TRUE if command is run in background
+     * @return String $return Last line of the STDOUT output of the command
      */
     public static function run($cmd, $out = "", $append = FALSE, $error_redirect = TRUE)
     {
@@ -58,7 +58,7 @@ class Process
      * @param String $out The location where output should be redirected too
      * @param Boolean $append Whether to append to the output location, or to replace it
      * @param Boolean $error_redirect Whether to redirect STDERR to STDOUT
-     * @return mixed $return STDOUT output of the command, or TRUE if command is run in background
+     * @return void
      */
     public static function run_bg($cmd, $out = "", $append = FALSE, $error_redirect = TRUE)
     {
