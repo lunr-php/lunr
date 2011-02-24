@@ -35,7 +35,7 @@ class Process
     {
         if ($error_redirect === TRUE)
         {
-            $cmd .= " 2&>1";
+            $cmd .= " 2>&1";
         }
         if ($out != "")
         {
@@ -64,7 +64,7 @@ class Process
     {
         if ($error_redirect === TRUE)
         {
-            $cmd .= " 2&>1";
+            $cmd .= " 2>&1";
         }
 
         if ($out == "")
