@@ -13,7 +13,7 @@ class L10nProviderGettext extends L10nProvider
      */
     public function __construct($language)
     {
-        $this->init($language);
+        $this->language = $language;
     }
 
     /**
@@ -32,11 +32,7 @@ class L10nProviderGettext extends L10nProvider
     protected function init($language)
     {
         global $config;
-        $this->language = $language;
-        putenv('LANG=' . $language);
-        setlocale(LC_ALL, "");
         setlocale(LC_MESSAGES, $language);
-        setlocale(LC_CTYPE, $language);
         bindtextdomain($config['l10n']['domain'], $config['l10n']['locales']);
         textdomain($config['l10n']['domain']);
     }
@@ -51,6 +47,7 @@ class L10nProviderGettext extends L10nProvider
     {
         global $config;
         require_once("class.output.inc.php");
+        $this->init($this->language);
         if ($context == "")
         {
             $output = gettext($identifier);
@@ -89,6 +86,7 @@ class L10nProviderGettext extends L10nProvider
     public function nlang($singular, $plural, $amount, $context = "")
     {
         require_once("class.output.inc.php");
+        $this->init($this->language);
         if ($context == "")
         {
             $output = ngettext($singular, $plural, $amount);
