@@ -70,6 +70,7 @@ class L10n
         $supported = self::get_supported_languages();
 
         $language = locale_lookup($supported, $language, $config['l10n']['default_language']);
+        $language = locale_get_primary_language($language) . "_" . strtoupper(locale_get_region($language));
         setcookie('lang', $language, M2DateTime::delayed_timestamp("+1year"), '/');
         return $language;
     }
