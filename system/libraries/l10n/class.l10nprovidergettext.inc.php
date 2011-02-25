@@ -51,10 +51,6 @@ class L10nProviderGettext extends L10nProvider
         if ($context == "")
         {
             $output = gettext($identifier);
-            if ($output == $identifier && $this->language != strtolower($config['l10n']['default_language']))
-            {
-                Output::error("No translation found for string: $identifier");
-            }
             return $output;
         }
         else
@@ -62,9 +58,8 @@ class L10nProviderGettext extends L10nProvider
             // Glue msgctxt and msgid together, with ASCII character 4 (EOT, End Of Text)
             $composed = "{$context}\004{$identifier}";
             $output = dcgettext($config['l10n']['domain'], $composed, LC_MESSAGES);
-            if ($output == $composed && $this->language != strtolower($config['l10n']['default_language']))
+            if ($output == $composed && $this->language != $config['l10n']['default_language'])
             {
-                Output::error("No translation found for string: $identifier");
                 return $identifier;
             }
             else
@@ -90,10 +85,6 @@ class L10nProviderGettext extends L10nProvider
         if ($context == "")
         {
             $output = ngettext($singular, $plural, $amount);
-            if ((($output == $singular) || ($output == $plural)) && $this->language != strtolower($config['l10n']['default_language']))
-            {
-                Output::error("No translation found for string: $singular");
-            }
             return $output;
         }
         else
@@ -102,9 +93,8 @@ class L10nProviderGettext extends L10nProvider
             // Glue msgctxt and msgid together, with ASCII character 4 (EOT, End Of Text)
             $composed = "{$context}\004{$singular}";
             $output = dcngettext($config['l10n']['domain'], $composed, $plural, $amount, LC_MESSAGES);
-            if ((($output == $composed) || ($output == $plural)) && $this->language != strtolower($config['l10n']['default_language']))
+            if ((($output == $composed) || ($output == $plural)) && $this->language != $config['l10n']['default_language'])
             {
-                Output::error("No translation found for string: $singular");
                 return ($amount == 1 ? $singular : $plural);
             }
             else
