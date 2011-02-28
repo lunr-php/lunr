@@ -142,14 +142,14 @@ class M2DateTime
      */
     public static function is_time($string)
     {
-        // accepts HHHH:MM:SS, e.g. 23:59:30 or 12:30 or 120:17
-        if ( ! preg_match("/^(\-)?[0-9]{1,4}:[0-9]{1,2}(:[0-9]{1,2})?$/", $string) )
+        // accepts HHH:MM:SS, e.g. 23:59:30 or 12:30 or 120:17
+        if ( ! preg_match("/^(\-)?[0-9]{1,3}(:[0-9]{2})+$/", $string) )
         {
-            return false;
+            return FALSE;
         }
         else
         {
-            return true;
+            return TRUE;
         }
     }
 
@@ -194,8 +194,6 @@ class M2DateTime
             return FALSE;
         }
     }
-
-
 
    /**
     * Function to convert a MySQL datetime (YYYY-MM-DD HH:MM:SS) into a Unix timestamp
