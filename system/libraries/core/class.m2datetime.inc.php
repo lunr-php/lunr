@@ -227,13 +227,10 @@ class M2DateTime
     */
     public static function get_timestamp_from_datetime($datetime)
     {
-        list($date, $time) = explode(' ', $datetime);
-        list($year, $month, $day) = explode('-', $date);
-        list($hour, $minute, $second) = explode(':', $time);
+        $matches = array();
+        preg_match("/^([0-9]{4})-([0-9]{2})-([0-9]{2})[ ]([0-9]{2}):([0-9]{2}):([0-9]{2})$/", $datetime, $matches);
 
-        $timestamp = mktime($hour, $minute, $second, $month, $day, $year);
-
-        return $timestamp;
+        return mktime($matches[4], $matches[5], $matches[6], $matches[2], $matches[3], $matches[1]);
     }
 }
 
