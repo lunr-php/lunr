@@ -1294,7 +1294,7 @@ class DBCon
         }
         else
         {
-            $sql = "DROP VIEW " . $this->escape_string($view);
+            $sql = "DROP VIEW IF EXISTS " . $this->escape_string($view);
             return $this->query($sql, FALSE);
         }
     }
