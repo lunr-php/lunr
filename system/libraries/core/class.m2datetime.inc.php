@@ -53,21 +53,46 @@ class M2DateTime
     /**
      * Return a date of a certain timeframe in the past/future
      * @param String $delay Definition for a timeframe ("+1 day", "-10 minutes")
+     * @param Integer $timestamp Base timestamp, now by default (optional)
      * @return String Delayed date
      */
-    public static function delayed_date($delay)
+    public static function delayed_date($delay, $timestamp = 0)
     {
-        return date('Y-m-d', strtotime($delay));
+        if ($timestamp === 0)
+        {
+            $timestamp = time();
+        }
+        return date('Y-m-d', strtotime($delay, $timestamp));
     }
 
     /**
      * Return a timestamp of a certain timeframe in the past/future
      * @param String $delay Definition for a timeframe ("+1 day", "-10 minutes")
+     * @param Integer $timestamp Base timestamp, now by default (optional)
      * @return Integer Delayed timestamp
      */
-    public static function delayed_timestamp($delay)
+    public static function delayed_timestamp($delay, $timestamp = 0)
     {
-        return strtotime($delay);
+        if ($timestamp === 0)
+        {
+            $timestamp = time();
+        }
+        return strtotime($delay, $timestamp);
+    }
+
+    /**
+     * Return a delayed datetime string
+     * @param String $delay Definition for a timeframe ("+1 day", "-10 minutes")
+     * @param Integer $timestamp Base timestamp, now by default (optional)
+     * @return String $return DateTime definition, format YYYY-MM-DD HH:MM:SS
+     */
+    public static function delayed_datetime($delay, $timestamp = 0)
+    {
+        if ($timestamp === 0)
+        {
+            $timestamp = time();
+        }
+        return date('Y-m-d H:i:s', strtotime($delay, $timestamp));
     }
 
     /**
