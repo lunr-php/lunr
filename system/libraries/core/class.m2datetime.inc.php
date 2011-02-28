@@ -220,6 +220,22 @@ class M2DateTime
         }
     }
 
+    /**
+     * Compares two datetime strings and returns smaller or bigger
+     * This function can be used for PHP's sorting functions
+     * @param String $a DateTime String 1
+     * @param String $b DateTime String 2
+     * @return Integer -1 if $a < $b, 1 otherwise
+     */
+    public static function sort_compare_datetime($a, $b)
+    {
+        $a = strtotime($a);
+        $b = strtotime($b);
+
+        return ($a < $b) ? -1 : 1;
+    }
+
+
 }
 
 ?>
