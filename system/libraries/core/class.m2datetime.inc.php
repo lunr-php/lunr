@@ -168,51 +168,26 @@ class M2DateTime
     public static function is_time($string)
     {
         // accepts HHH:MM:SS, e.g. 23:59:30 or 12:30 or 120:17
-        if ( ! preg_match("/^(\-)?[0-9]{1,3}(:[0-9]{2})+$/", $string) )
+        if (preg_match("/^(\-)?[0-9]{1,3}(:[0-9]{2})+$/", $string))
         {
-            return FALSE;
+            return TRUE;
         }
         else
         {
-            return TRUE;
+            return FALSE;
         }
     }
 
     /**
-     * Checks whether a given input string is a valid time definition
-     * or not and in case it is, it returns the proper date to look on the db (YYYY-MM-DD)
+     * Checks whether a given input string is a valid date definition
      * @param String $string Input String
-     * @return Mixed The string properly formatted for db consults if it is valid, False otherwise
+     * @return Boolean $return True if it is a proper date String, False otherwise
      */
     public static function is_date($string)
     {
-        // accepts YYY-MM-DD and YYYY/MM/DD, e.g. 2010/10/25 or 2003-01-28
-        if(strlen($string) == 10)
+        if (preg_match("/^[0-9]{4}([\/-\.][0-9]{2}){2}$/", $string))
         {
-            $try1 = explode('/',$string);
-            if(count($try1) == 3 && strlen($try1[0]) == 4 &&
-                strlen($try1[1]) == 2 && strlen($try1[2]) == 2 &&
-                $try1[1] <= 12 && $try1[2] <= 31)
-            {
-                $date = $string;
-                $date = str_replace("/","-", $date);
-                return $date;
-            }
-            else
-            {
-                $try2 = explode('-',$string);
-
-                if(count($try2) == 3 && strlen($try2[0]) == 4 &&
-                    strlen($try2[1]) == 2 && strlen($try2[2]) == 2 &&
-                    $try2[1] <= 12 && $try2[2] <= 31)
-                {
-                    return $string;
-                }
-                else
-                {
-                    return FALSE;
-                }
-            }
+            return TRUE;
         }
         else
         {
