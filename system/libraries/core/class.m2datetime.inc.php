@@ -232,7 +232,14 @@ class M2DateTime
         $a = strtotime($a);
         $b = strtotime($b);
 
-        return ($a < $b) ? -1 : 1;
+        if ($a == $b)
+        {
+            return 0;
+        }
+        else
+        {
+            return ($a < $b) ? -1 : 1;
+        }
     }
 
 
