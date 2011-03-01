@@ -2,3 +2,6 @@
 *.kdev4
 *.swp
 *~
+
+# ignore test results
+coverage

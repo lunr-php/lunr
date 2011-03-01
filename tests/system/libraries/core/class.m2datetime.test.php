@@ -1,10 +1,9 @@
 <?php
 
-require_once(str_replace("tests", "", dirname(__FILE__)) . "/class.m2datetime.inc.php");
+require_once("class.m2datetime.inc.php");
 
 /**
  * This tests Lunr's M2DateTime class
- * @author Heinz Wiesinger
  * @covers M2DateTime
  */
 class M2DateTimeTest extends PHPUnit_Framework_TestCase
