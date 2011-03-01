@@ -69,27 +69,34 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function get_date()
      * @depends testDelayedTimestamp
+     * @dataProvider timestampProvider
      * @covers M2DateTime::get_date
      */
-    public function testGetDate()
+    public function testGetDate($timestamp)
     {
-        $timestamp = M2DateTime::delayed_timestamp("+30 minutes");
-        $timestamp2 = M2DateTime::delayed_timestamp("+1 week");
         $this->assertEquals(M2DateTime::get_date($timestamp), date("Y-m-d", $timestamp));
-        $this->assertEquals(M2DateTime::get_date($timestamp2), date("Y-m-d", $timestamp2));
     }
 
     /**
      * Test the static function get_time()
      * @depends testDelayedTimestamp
+     * @dataProvider timestampProvider
      * @covers M2DateTime::get_time
      */
-    public function testGetTime()
+    public function testGetTime($timestamp)
     {
-        $timestamp = M2DateTime::delayed_timestamp("+30 minutes");
-        $timestamp2 = M2DateTime::delayed_timestamp("+1 week");
         $this->assertEquals(M2DateTime::get_time($timestamp), strftime("%H:%M:%S", $timestamp));
-        $this->assertEquals(M2DateTime::get_time($timestamp2), strftime("%H:%M:%S", $timestamp2));
+    }
+
+    /**
+     * Test the static function get_datetime()
+     * @depends testDelayedTimestamp
+     * @dataProvider timestampProvider
+     * @covers M2DateTime::get_datetime
+     */
+    public function testGetDatetimeTimestamp($timestamp)
+    {
+        $this->assertEquals(M2DateTime::get_datetime($timestamp), date("Y-m-d H:i", $timestamp));
     }
 
     /**
@@ -97,13 +104,9 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      * @depends testDelayedTimestamp
      * @covers M2DateTime::get_datetime
      */
-    public function testGetDateTime()
+    public function testGetDatetimeNow()
     {
-        $timestamp = M2DateTime::delayed_timestamp("+30 minutes");
-        $timestamp2 = M2DateTime::delayed_timestamp("+1 week");
         $this->assertEquals(M2DateTime::get_datetime(), date("Y-m-d H:i"));
-        $this->assertEquals(M2DateTime::get_datetime($timestamp), date("Y-m-d H:i", $timestamp));
-        $this->assertEquals(M2DateTime::get_datetime($timestamp2), date("Y-m-d H:i", $timestamp2));
     }
 
     /**
@@ -121,26 +124,40 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test the static function is_time()
+     * @dataProvider validTimeProvider
      * @covers M2DateTime::is_time
      */
-    public function testIsValidTime()
+    public function testIsValidTime($time)
     {
-        $this->assertTrue(M2DateTime::is_time("23:30"));
-        $this->assertTrue(M2DateTime::is_time("23:30:01"));
-        $this->assertTrue(M2DateTime::is_time("23:30:21"));
+        $this->assertTrue(M2DateTime::is_time($time));
     }
 
     /**
      * Test the static function is_time()
+     * @dataProvider invalidTimeProvider
      * @covers M2DateTime::is_time
      */
-    public function testIsInvalidTime()
+    public function testIsInvalidTime($time)
     {
-        $this->assertFalse(M2DateTime::is_time("23:20:67"));
-        $this->assertFalse(M2DateTime::is_time("23:61"));
-        $this->assertFalse(M2DateTime::is_time("30:61"));
-        $this->assertFalse(M2DateTime::is_time("30:61:10"));
-        $this->assertFalse(M2DateTime::is_time("30:10"));
+        $this->assertFalse(M2DateTime::is_time($time));
+    }
+
+    public function timestampProvider()
+    {
+        return array(
+                array(M2DateTime::delayed_timestamp("+30 minutes")),
+                array(M2DateTime::delayed_timestamp("+1 week"))
+                );
+    }
+
+    public function validTimeProvider()
+    {
+        return array(array("23:30"), array("23:30:01"), array("23:30:21"));
+    }
+
+    public function invalidTimeProvider()
+    {
+        return array(array("23:20:67"), array("23:61"), array("30:61"), array("30:61:10"), array("30:10"));
     }
 }
 
