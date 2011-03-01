@@ -46,6 +46,15 @@ abstract class Model
         $this->db = DBMan::get_db_connection($this->db_config, FALSE);
     }
 
+    /**
+     * Disconnect from the database
+     * @return void
+     */
+    public function disconnect()
+    {
+        $this->db->disconnect();
+    }
+
 }
 
 ?>
