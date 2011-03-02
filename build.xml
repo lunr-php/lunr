@@ -31,6 +31,13 @@
         </exec>
     </target>
 
+    <target name="phpcpd"
+            description="Generate pmd-cpd.xml using PHPCPD">
+        <exec executable="phpcpd">
+            <arg line="--log-pmd ${basedir}/build/logs/pmd-cpd.xml --suffixes php --verbose ${basedir}" />
+        </exec>
+    </target>
+
     <target name="phploc"
          description="Generate phploc.csv">
         <exec executable="phploc">
@@ -38,5 +45,5 @@
         </exec>
     </target>
 
-    <target name="build" depends="clean,phpunit,phpdoc,phploc" />
+    <target name="build" depends="clean,phpunit,phpcpd,phpdoc,phploc" />
 </project>
