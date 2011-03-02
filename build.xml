@@ -21,5 +21,14 @@
         </exec>
     </target>
 
-    <target name="build" depends="clean,phpunit" />
+    <!-- Generate API documentation -->
+    <target name="phpdoc">
+        <exec executable="phpdoc">
+            <arg line="--directory ${system},${application},${config}
+                 --output HTML:Smarty:HandS
+                 --target ${basedir}/build/api" />
+        </exec>
+    </target>
+
+    <target name="build" depends="clean,phpunit,phpdoc" />
 </project>
