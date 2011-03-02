@@ -18,30 +18,37 @@
     <target name="phpunit"
             description="Run unit tests and generate junit.xml and clover.xml">
         <exec executable="phpunit" failonerror="true">
-            <arg line="-c tests/MidSchipTests.xml" />
+            <arg line=" -c tests/MidSchipTests.xml" />
         </exec>
     </target>
 
     <target name="phpdoc"
             description="Generate API documentation">
         <exec executable="phpdoc">
-            <arg line="--directory ${system},${application},${config}
-                 --output HTML:Smarty:HandS
-                 --target ${basedir}/build/api" />
+            <arg line=" --directory ${system},${application},${config}
+                        --output HTML:Smarty:HandS
+                        --target ${basedir}/build/api" />
         </exec>
     </target>
 
     <target name="phpcpd"
             description="Generate pmd-cpd.xml using PHPCPD">
         <exec executable="phpcpd">
-            <arg line="--log-pmd ${basedir}/build/logs/pmd-cpd.xml --suffixes php --verbose ${basedir}" />
+            <arg line=" --log-pmd ${basedir}/build/logs/pmd-cpd.xml
+                        --suffixes php
+                        --verbose
+                        ${basedir}" />
         </exec>
     </target>
 
     <target name="phploc"
          description="Generate phploc.csv">
         <exec executable="phploc">
-            <arg line="--log-csv ${basedir}/build/logs/phploc.csv --suffixes php --verbose --count-tests ${basedir}" />
+            <arg line=" --log-csv ${basedir}/build/logs/phploc.csv
+                        --suffixes php
+                        --verbose
+                        --count-tests
+                        ${basedir}" />
         </exec>
     </target>
 
