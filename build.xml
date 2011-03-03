@@ -25,10 +25,21 @@
         </exec>
     </target>
 
+    <target name="phpmd"
+            description="Generate pmd.xml using PHPMD">
+        <exec executable="phpmd">
+            <arg line=" ${basedir}
+                        xml
+                        tests/phpmd.xml
+                        --reportfile ${basedir}/build/logs/pmd.xml
+                        --suffixes php" />
+        </exec>
+    </target>
+
     <target name="phpunit"
             description="Run unit tests and generate junit.xml and clover.xml">
         <exec executable="phpunit" failonerror="true">
-            <arg line=" -c tests/MidSchipTests.xml" />
+            <arg line=" -c tests/phpunit.xml" />
         </exec>
     </target>
 
@@ -73,5 +84,5 @@
         </exec>
     </target>
 
-    <target name="build" depends="clean,pdepend,phpunit,phpcpd,phpdoc,phploc,phpcb" />
+    <target name="build" depends="clean,pdepend,phpmd,phpunit,phpcpd,phpdoc,phploc,phpcb" />
 </project>
