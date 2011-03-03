@@ -27,22 +27,6 @@ class M2DateTime
 {
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
-     * Destructor
-     */
-    public function __destruct()
-    {
-
-    }
-
-    /**
      * Return today's date (YYYY-MM-DD)
      *
      * @return String Today's date
