@@ -168,7 +168,7 @@ class M2DateTime
     public static function is_time($string)
     {
         // accepts HHH:MM:SS, e.g. 23:59:30 or 12:30 or 120:17
-        if (preg_match("/^(\-)?[0-9]{1,3}(:[0-9]{2})+$/", $string))
+        if (preg_match("/^(\-)?[0-9]{1,3}(:[0-5][0-9]){1,2}$/", $string))
         {
             return TRUE;
         }

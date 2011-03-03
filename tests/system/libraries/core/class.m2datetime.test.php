@@ -152,12 +152,12 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
 
     public function validTimeProvider()
     {
-        return array(array("23:30"), array("23:30:01"), array("23:30:21"));
+        return array(array("23:30"), array("23:30:01"), array("23:30:21"), array("30:10"), array("124:10:23"));
     }
 
     public function invalidTimeProvider()
     {
-        return array(array("23:20:67"), array("23:61"), array("30:61"), array("30:61:10"), array("30:10"));
+        return array(array("23:20:67"), array("23:61"), array("30:61"), array("30:61:10"), array("1345:10"));
     }
 }
 
