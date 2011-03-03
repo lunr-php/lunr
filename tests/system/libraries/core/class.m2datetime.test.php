@@ -142,6 +142,26 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(M2DateTime::is_time($time));
     }
 
+    /**
+     * Test the static function is_date()
+     * @dataProvider validDateProvider
+     * @covers M2DateTime::is_date
+     */
+    public function testIsValidDate($date)
+    {
+        $this->assertTrue(M2DateTime::is_date($date));
+    }
+
+    /**
+     * Test the static function is_date()
+     * @dataProvider invalidDateProvider
+     * @covers M2DateTime::is_date
+     */
+    public function testIsInvalidDate($date)
+    {
+        $this->assertFalse(M2DateTime::is_date($date));
+    }
+
     public function timestampProvider()
     {
         return array(
@@ -158,6 +178,16 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     public function invalidTimeProvider()
     {
         return array(array("23:20:67"), array("23:61"), array("30:61"), array("30:61:10"), array("1345:10"));
+    }
+
+    public function validDateProvider()
+    {
+        return array(array("2010-02-10"), array("923-01-02"));
+    }
+
+    public function invalidDateProvider()
+    {
+        return array(array("string"), array("1020367"), array(FALSE), array("2010-02-30"), array("2010-13-10"));
     }
 }
 

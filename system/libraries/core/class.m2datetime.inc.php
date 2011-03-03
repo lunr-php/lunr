@@ -185,7 +185,7 @@ class M2DateTime
      */
     public static function is_date($string)
     {
-        if (preg_match("/^[0-9]{4}([\/-\.][0-9]{2}){2}$/", $string))
+        if (preg_match("/^(\d{1,4})[\- \/ \.]((01|0[3-9]|1[012])[\- \/ \.](0[1-9]|[12][0-9]|3[01])|02[\- \/ \.](0[1-9]|1[0-9]|2[0-9]))$/", $string))
         {
             return TRUE;
         }
