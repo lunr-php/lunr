@@ -15,6 +15,16 @@
         <mkdir dir="${basedir}/build/pdepend" />
     </target>
 
+    <target name="pdepend"
+            description="Generate jdepend.xml and software metrics charts using PHP_Depend">
+        <exec executable="pdepend">
+            <arg line=" --jdepend-xml=${basedir}/build/logs/jdepend.xml
+                        --jdepend-chart=${basedir}/build/pdepend/dependencies.svg
+                        --overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg
+                        ${basedir}" />
+        </exec>
+    </target>
+
     <target name="phpunit"
             description="Run unit tests and generate junit.xml and clover.xml">
         <exec executable="phpunit" failonerror="true">
@@ -26,16 +36,16 @@
             description="Generate API documentation">
         <exec executable="phpdoc">
             <arg line=" --directory ${system},${application},${config}
-                        --output HTML:Smarty:HandS
-                        --target ${basedir}/build/api" />
+                        --output    HTML:Smarty:HandS
+                        --target    ${basedir}/build/api" />
         </exec>
     </target>
 
     <target name="phpcpd"
             description="Generate pmd-cpd.xml using PHPCPD">
         <exec executable="phpcpd">
-            <arg line=" --log-pmd ${basedir}/build/logs/pmd-cpd.xml
-                        --suffixes php
+            <arg line=" --log-pmd   ${basedir}/build/logs/pmd-cpd.xml
+                        --suffixes  php
                         --verbose
                         ${basedir}" />
         </exec>
@@ -44,13 +54,24 @@
     <target name="phploc"
          description="Generate phploc.csv">
         <exec executable="phploc">
-            <arg line=" --log-csv ${basedir}/build/logs/phploc.csv
-                        --suffixes php
+            <arg line=" --log-csv   ${basedir}/build/logs/phploc.csv
+                        --suffixes  php
                         --verbose
                         --count-tests
                         ${basedir}" />
         </exec>
     </target>
 
-    <target name="build" depends="clean,phpunit,phpcpd,phpdoc,phploc" />
+    <target name="phpcb"
+            description="Aggregate tool output with PHP_CodeBrowser">
+        <exec executable="phpcb">
+            <arg line=" --log    ${basedir}/build/logs
+                        --source ${system}
+                        --source ${application}
+                        --source ${config}
+                        --output ${basedir}/build/code-browser" />
+        </exec>
+    </target>
+
+    <target name="build" depends="clean,pdepend,phpunit,phpcpd,phpdoc,phploc,phpcb" />
 </project>
