@@ -162,6 +162,36 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(M2DateTime::is_date($date));
     }
 
+    /**
+     * Test the static function sort_compare_datetime()
+     * @dataProvider equalDatetimeProvider
+     * @covers M2DateTime::sort_compare_datetime
+     */
+    public function testDatetimeIsEqual($date1, $date2)
+    {
+        $this->assertEquals(M2DateTime::sort_compare_datetime($date1, $date2), 0);
+    }
+
+    /**
+     * Test the static function sort_compare_datetime()
+     * @dataProvider datetimeProvider
+     * @covers M2DateTime::sort_compare_datetime
+     */
+    public function testDatetimeIsLower($date1, $date2)
+    {
+        $this->assertEquals(M2DateTime::sort_compare_datetime($date1, $date2), -1);
+    }
+
+    /**
+     * Test the static function sort_compare_datetime()
+     * @dataProvider datetimeProvider
+     * @covers M2DateTime::sort_compare_datetime
+     */
+    public function testDatetimeIsGreater($date1, $date2)
+    {
+        $this->assertEquals(M2DateTime::sort_compare_datetime($date2, $date1), 1);
+    }
+
     public function timestampProvider()
     {
         return array(
@@ -189,6 +219,17 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     {
         return array(array("string"), array("1020367"), array(FALSE), array("2010-02-30"), array("2010-13-10"));
     }
+
+    public function equalDatetimeProvider()
+    {
+        return array(array("2010-02-02", "2010-02-02"), array("13:20","13:20"));
+    }
+
+    public function datetimeProvider()
+    {
+        return array(array("2010-02-02", "2010-02-03"), array("10:20", "15:15"), array("2010-02-02 13:10", "2010-02-02-15:10"));
+    }
+
 }
 
 ?>
