@@ -119,7 +119,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
         $timestamp = M2DateTime::delayed_timestamp("2011-02-28 10:00:00");
         $this->assertEquals(M2DateTime::get_human_readable_date_short(), strtoupper(strftime('%d %b')));
         $this->assertEquals(M2DateTime::get_human_readable_date_short($timestamp), "28 FEB");
-        $this->assertEquals(M2DateTime::get_human_readable_date_short($timestamp, "fr_FR.utf8"), "28 FéVR.");
+        $this->assertEquals(M2DateTime::get_human_readable_date_short($timestamp, "pl_PL"), "28 LUT");
     }
 
     /**
