@@ -2,7 +2,13 @@
 
 /**
  * Date/Time related functions
- * @author M2Mobi, Heinz Wiesinger
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ *
  */
 class M2DateTime
 {
