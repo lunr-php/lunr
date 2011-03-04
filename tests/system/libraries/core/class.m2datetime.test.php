@@ -110,16 +110,16 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the static function get_human_readable_date_short()
+     * Test the static function get_short_date()
      * @depends testDelayedTimestamp
-     * @covers M2DateTime::get_human_readable_date_short
+     * @covers M2DateTime::get_short_date
      */
     public function testGetHumanReadableDateShort()
     {
         $timestamp = M2DateTime::delayed_timestamp("2011-02-28 10:00:00");
-        $this->assertEquals(M2DateTime::get_human_readable_date_short(), strtoupper(strftime('%d %b')));
-        $this->assertEquals(M2DateTime::get_human_readable_date_short($timestamp), "28 FEB");
-        $this->assertEquals(M2DateTime::get_human_readable_date_short($timestamp, "pl_PL"), "28 LUT");
+        $this->assertEquals(M2DateTime::get_short_date(), strtoupper(strftime('%d %b')));
+        $this->assertEquals(M2DateTime::get_short_date($timestamp), "28 FEB");
+        $this->assertEquals(M2DateTime::get_short_date($timestamp, "pl_PL"), "28 LUT");
     }
 
     /**

@@ -172,7 +172,7 @@ class M2DateTime
      *
      * @return String $date Date as a string
      */
-    public static function get_human_readable_date_short($timestamp = FALSE, $locale = "en_US")
+    public static function get_short_date($timestamp = FALSE, $locale = "en_US")
     {
         setlocale(LC_ALL, $locale);
         if ($timestamp === FALSE)
