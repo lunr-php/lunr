@@ -58,6 +58,18 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test the static function delayed_datetime()
+     * @depends testDelayedTimestamp
+     * @covers M2DateTime::delayed_datetime
+     */
+    public function testDelayedDatetime()
+    {
+        $timestamp = M2DateTime::delayed_timestamp("+1 day");
+        $this->assertEquals(M2DateTime::delayed_datetime("+1 day"), date('Y-m-d H:i:s', strtotime("+1 day", time())));
+        $this->assertEquals(M2DateTime::delayed_datetime("+1 day", $timestamp), date('Y-m-d H:i:s', strtotime("+2 days")));
+    }
+
+    /**
      * Test the static function now()
      * @covers M2DateTime::now
      */
