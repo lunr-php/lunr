@@ -32,7 +32,8 @@
                         xml
                         tests/phpmd.xml
                         --reportfile ${basedir}/build/logs/pmd.xml
-                        --suffixes php" />
+                        --exclude    third-party
+                        --suffixes   php" />
         </exec>
     </target>
 
@@ -47,7 +48,7 @@
             description="Generate API documentation">
         <exec executable="phpdoc">
             <arg line=" --directory ${system},${application},${config}
-                        --output    HTML:Smarty:HandS
+                        --output    HTML:Smarty/Evolve:default
                         --target    ${basedir}/build/api" />
         </exec>
     </target>
@@ -58,6 +59,7 @@
             <arg line=" --report=checkstyle
                         --report-file=${basedir}/build/logs/checkstyle.xml
                         --standard=Lunr
+                        --ignore=third-party
                         ${system} ${application} ${config}" />
         </exec>
     </target>
