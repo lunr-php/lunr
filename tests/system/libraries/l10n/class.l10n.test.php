@@ -10,30 +10,59 @@ require_once("conf.l10n.inc.php");
 class L10nTest extends PHPUnit_Framework_TestCase
 {
 
-    /**
-     * Test the static function get_supported_languages()
-     * @covers L10n::get_supported_languages
-     */
-    public function testGetSupportedLanguages()
+    protected $languages;
+
+    protected function setUp()
     {
         global $config;
-        $languages = array();
+        $this->languages = array();
         if ($handle = opendir($config['l10n']['locales']))
         {
             while (FALSE !== ($file = readdir($handle)))
             {
                 if ($file != "." && $file != ".." && $file != ".gitignore")
                 {
-                    $languages[] = $file;
+                    $this->languages[] = $file;
                 }
             }
         }
         closedir($handle);
-        $languages[] = $config['l10n']['default_language'];
-        $this->assertEquals(L10n::get_supported_languages(), $languages);
-        return $languages;
+        $this->languages[] = $config['l10n']['default_language'];
     }
 
+    /**
+     * Test the static function get_supported_languages()
+     * @covers L10n::get_supported_languages
+     */
+    public function testGetSupportedLanguages()
+    {
+        $this->assertEquals($this->languages, L10n::get_supported_languages());
+    }
+
+    /**
+     * Test the static function set_language()
+     * @depends M2DateTimeTest::testDelayedTimestamp
+     * @depends testGetSupportedLanguages
+     * @dataProvider languageProvider
+     * @covers L10n::set_language
+     */
+    public function testSetLanguage($locale, $language)
+    {
+        if (in_array($locale, $this->languages))
+        {
+            $this->assertEquals($locale, L10n::set_language($language));
+        }
+        else
+        {
+            global $config;
+            $this->assertEquals($config['l10n']['default_language'], L10n::set_language($language));
+        }
+    }
+
+    public function languageProvider()
+    {
+        return array(array("en_GB", "en"), array("nl_NL", "nl"), array("de_DE", "de"));
+    }
 }
 
 ?>
