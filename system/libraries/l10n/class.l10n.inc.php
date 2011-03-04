@@ -45,7 +45,7 @@ class L10n
             {
                 while (FALSE !== ($file = readdir($handle)))
                 {
-                    if ($file != "." && $file != "..")
+                    if ($file != "." && $file != ".." && $file != ".gitignore")
                     {
                         self::$languages[] = $file;
                     }
