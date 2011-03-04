@@ -15,7 +15,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testToday()
     {
-        $this->assertEquals(M2DateTime::today(), date("Y-m-d"));
+        $this->assertEquals(date("Y-m-d"), M2DateTime::today());
     }
 
     /**
@@ -24,7 +24,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testYesterday()
     {
-        $this->assertEquals(M2DateTime::yesterday(), date("Y-m-d", strtotime("-1 day")));
+        $this->assertEquals(date("Y-m-d", strtotime("-1 day")), M2DateTime::yesterday());
     }
 
     /**
@@ -33,7 +33,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testTomorrow()
     {
-        $this->assertEquals(M2DateTime::tomorrow(), date("Y-m-d", strtotime("+1 day")));
+        $this->assertEquals(date("Y-m-d", strtotime("+1 day")), M2DateTime::tomorrow());
     }
 
     /**
@@ -44,8 +44,8 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testDelayedDate()
     {
-        $this->assertEquals(M2DateTime::delayed_date("-1 day"), M2DateTime::yesterday());
-        $this->assertEquals(M2DateTime::delayed_date("+1 day"), M2DateTime::tomorrow());
+        $this->assertEquals(M2DateTime::yesterday(), M2DateTime::delayed_date("-1 day"));
+        $this->assertEquals(M2DateTime::tomorrow(), M2DateTime::delayed_date("+1 day"));
     }
 
     /**
@@ -54,7 +54,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testDelayedTimestamp()
     {
-        $this->assertEquals(M2DateTime::delayed_timestamp("+1 day"), strtotime("+1 day"));
+        $this->assertEquals(strtotime("+1 day"), M2DateTime::delayed_timestamp("+1 day"));
     }
 
     /**
@@ -65,8 +65,8 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     public function testDelayedDatetime()
     {
         $timestamp = M2DateTime::delayed_timestamp("+1 day");
-        $this->assertEquals(M2DateTime::delayed_datetime("+1 day"), date('Y-m-d H:i:s', strtotime("+1 day", time())));
-        $this->assertEquals(M2DateTime::delayed_datetime("+1 day", $timestamp), date('Y-m-d H:i:s', strtotime("+2 days")));
+        $this->assertEquals(date('Y-m-d H:i:s', strtotime("+1 day", time())), M2DateTime::delayed_datetime("+1 day"));
+        $this->assertEquals(date('Y-m-d H:i:s', strtotime("+2 days")), M2DateTime::delayed_datetime("+1 day", $timestamp));
     }
 
     /**
@@ -75,7 +75,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testNow()
     {
-        $this->assertEquals(M2DateTime::now(), strftime("%H:%M:%S", time()));
+        $this->assertEquals(strftime("%H:%M:%S", time()), M2DateTime::now());
     }
 
     /**
@@ -86,7 +86,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testGetDate($timestamp)
     {
-        $this->assertEquals(M2DateTime::get_date($timestamp), date("Y-m-d", $timestamp));
+        $this->assertEquals(date("Y-m-d", $timestamp), M2DateTime::get_date($timestamp));
     }
 
     /**
@@ -97,7 +97,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testGetTime($timestamp)
     {
-        $this->assertEquals(M2DateTime::get_time($timestamp), strftime("%H:%M:%S", $timestamp));
+        $this->assertEquals(strftime("%H:%M:%S", $timestamp), M2DateTime::get_time($timestamp));
     }
 
     /**
@@ -108,7 +108,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testGetDatetimeTimestamp($timestamp)
     {
-        $this->assertEquals(M2DateTime::get_datetime($timestamp), date("Y-m-d H:i", $timestamp));
+        $this->assertEquals(date("Y-m-d H:i", $timestamp), M2DateTime::get_datetime($timestamp));
     }
 
     /**
@@ -118,7 +118,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testGetDatetimeNow()
     {
-        $this->assertEquals(M2DateTime::get_datetime(), date("Y-m-d H:i"));
+        $this->assertEquals(date("Y-m-d H:i"), M2DateTime::get_datetime());
     }
 
     /**
@@ -126,12 +126,12 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      * @depends testDelayedTimestamp
      * @covers M2DateTime::get_short_date
      */
-    public function testGetHumanReadableDateShort()
+    public function testGetShortDate()
     {
         $timestamp = M2DateTime::delayed_timestamp("2011-02-28 10:00:00");
-        $this->assertEquals(M2DateTime::get_short_date(), strtoupper(strftime('%d %b')));
-        $this->assertEquals(M2DateTime::get_short_date($timestamp), "28 FEB");
-        $this->assertEquals(M2DateTime::get_short_date($timestamp, "pl_PL"), "28 LUT");
+        $this->assertEquals(strtoupper(strftime('%d %b')), M2DateTime::get_short_date());
+        $this->assertEquals("28 FEB", M2DateTime::get_short_date($timestamp));
+        $this->assertEquals("28 LUT", M2DateTime::get_short_date($timestamp, "pl_PL"));
     }
 
     /**
@@ -181,7 +181,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testDatetimeIsEqual($date1, $date2)
     {
-        $this->assertEquals(M2DateTime::sort_compare_datetime($date1, $date2), 0);
+        $this->assertEquals(0, M2DateTime::sort_compare_datetime($date1, $date2));
     }
 
     /**
@@ -191,7 +191,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testDatetimeIsLower($date1, $date2)
     {
-        $this->assertEquals(M2DateTime::sort_compare_datetime($date1, $date2), -1);
+        $this->assertEquals(-1, M2DateTime::sort_compare_datetime($date1, $date2));
     }
 
     /**
@@ -201,7 +201,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function testDatetimeIsGreater($date1, $date2)
     {
-        $this->assertEquals(M2DateTime::sort_compare_datetime($date2, $date1), 1);
+        $this->assertEquals(1, M2DateTime::sort_compare_datetime($date2, $date1));
     }
 
     public function timestampProvider()
