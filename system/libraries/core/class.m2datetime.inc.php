@@ -4,7 +4,7 @@
  * This file contains the class M2DateTime, which is a collection
  * of commonly used Date and Time methods.
  *
- * PHP Version 5
+ * PHP Version 5.3
  *
  * @category   Libraries
  * @package    Core
