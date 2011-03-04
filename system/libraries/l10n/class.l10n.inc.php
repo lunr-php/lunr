@@ -1,8 +1,24 @@
 <?php
 
 /**
+ * This file contains the Localization helper class. It includes functions to
+ * handle language definition, get supported languages of a project, etc
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    L10n
+ * @subpackage Libraries
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
+/**
  * Localization support class
- * @author Heinz Wiesinger
+ *
+ * @category   Libraries
+ * @package    L10n
+ * @subpackage Libraries
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class L10n
 {
@@ -33,6 +49,7 @@ class L10n
      * Get list of supported languages from the filesystem
      * Storing the values in a static attribute ensures the
      * filesystem is never parsed more than once per request
+     *
      * @return array Supported languages
      */
     public static function get_supported_languages()
@@ -59,8 +76,11 @@ class L10n
 
     /**
      * Set a cookie with the language information used for displaying strings
+     *
      * @param String $language The language to set
-     * @return String $language The POSIX locale that has been deemed most appropriate
+     *
+     * @return String $language The POSIX locale that has been deemed most
+     *                          appropriate
      */
     public static function set_language($language)
     {
