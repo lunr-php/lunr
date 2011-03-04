@@ -51,8 +51,8 @@ class L10n
                         self::$languages[] = $file;
                     }
                 }
+                closedir($handle);
             }
-            closedir($handle);
             self::$languages[] = $config['l10n']['default_language'];
         }
         return self::$languages;
