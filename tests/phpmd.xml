@@ -15,10 +15,7 @@
 
     <!-- Import the entire naming rule set -->
     <rule ref="rulesets/naming.xml">
-        <priority>1</priority>
-        <properties>
-            <property name="minimum" value="2" />
-        </properties>
+        <exclude name="ShortVariable" />
     </rule>
 
     <!-- Import the entire design rule set -->
