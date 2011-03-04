@@ -67,13 +67,21 @@ class L10n
         global $config;
         require_once("class.m2datetime.inc.php");
 
-        $supported = self::get_supported_languages();
+        $supported = self::get_supported_languages($language);
 
-        $language = locale_lookup($supported, $language, $config['l10n']['default_language']);
-        $language = locale_get_primary_language($language) . "_" . strtoupper(locale_get_region($language));
-        setcookie('lang', $language, M2DateTime::delayed_timestamp("+1year"), '/');
-        return $language;
+        $lang = $config['l10n']['default_language'];
+        foreach ($supported as $locale)
+        {
+            if (locale_filter_matches($locale, $language, false))
+            {
+                $lang = $locale;
+            }
+        }
+
+        setcookie('lang', $lang, M2DateTime::delayed_timestamp("+1year"), '/');
+        return $lang;
     }
+
 }
 
 ?>
