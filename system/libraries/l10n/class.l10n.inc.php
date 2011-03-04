@@ -30,22 +30,6 @@ class L10n
     private static $languages;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
-     * Destructor
-     */
-    public function __destruct()
-    {
-
-    }
-
-    /**
      * Get list of supported languages from the filesystem
      * Storing the values in a static attribute ensures the
      * filesystem is never parsed more than once per request
