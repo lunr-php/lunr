@@ -1,8 +1,26 @@
 <?php
 
 /**
+ * This file contains the model for storing php session information
+ * in the database
+ *
+ * PHP Version 5.3
+ *
+ * @category   Models
+ * @package    Core
+ * @subpackage Models
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
+/**
  * Core Session Model
- * @author M2Mobi, Heinz Wiesinger
+ *
+ * @category   Models
+ * @package    Core
+ * @subpackage Models
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class SessionModel extends Model
 {
@@ -27,7 +45,9 @@ class SessionModel extends Model
 
     /**
      * Read session data from the database
+     *
      * @param String $id Session ID
+     *
      * @return mixed The Session Data on success, False on failure
      */
     public function read_session_data($id)
@@ -55,9 +75,11 @@ class SessionModel extends Model
 
     /**
      * Save session data into the database
-     * @param String $id Session ID
-     * @param String $session_data Session data
-     * @param Integer $time expiration timestamp
+     *
+     * @param String  $id           Session ID
+     * @param String  $session_data Session data
+     * @param Integer $time         expiration timestamp
+     *
      * @return void
      */
     public function write_session_data($id, $session_data, $time)
@@ -85,7 +107,9 @@ class SessionModel extends Model
 
     /**
      * Remove a no-longer active session
+     *
      * @param String $id Session ID
+     *
      * @return void
      */
     public function delete_session($id)
@@ -116,6 +140,7 @@ class SessionModel extends Model
 
     /**
      * Remove expired sessions
+     *
      * @return void
      */
     public function session_gc()
