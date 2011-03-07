@@ -31,7 +31,7 @@ abstract class L10nProvider
      * The language the provider has been initialized with
      * @var String
      */
-    private $language;
+    protected $language;
 
     /**
      * Constructor
