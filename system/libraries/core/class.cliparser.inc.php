@@ -1,26 +1,37 @@
 <?php
 
-# Copyright 2009-2010 Heinz Wiesinger, Amsterdam, The Netherlands
-# Copyright 2010 M2Mobi BV, Amsterdam, The Netherlands
-# All rights reserved.
-#
-# Redistribution and use of this script, with or without modification, is
-# permitted provided that the following conditions are met:
-#
-# 1. Redistributions of this script must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-#
-# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
-# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
-# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/**
+ * This file contains another implementation of a
+ * command line argument parser, like getopt.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     M2Mobi <info@m2mobi.com>
+ * @copyright  2009-2011, Heinz Wiesinger, Amsterdam, The Netherlands
+ * @copyright  2010-2011, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://opensource.org/licenses/bsd-license BSD License
+ */
 
+/**
+ * Getopt like command line argument parser. However, it
+ * does a few things different from getopt. While getopt
+ * only allows one argument per command line option, this
+ * class allows more than one argument, as well as optional
+ * and obligatory arguments mixed
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     M2Mobi <info@m2mobi.com>
+ * @copyright  2009-2011, Heinz Wiesinger, Amsterdam, The Netherlands
+ * @copyright  2010-2011, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://opensource.org/licenses/bsd-license BSD License
+ */
 class CliParser
 {
 
@@ -62,10 +73,11 @@ class CliParser
 
     /**
      * Constructor
+     *
      * @param array $shortopts List of supported short arguments
-     * @param array $longopts List of supported long arguments (optional)
+     * @param array $longopts  List of supported long arguments (optional)
      */
-    public function __construct($shortopts,$longopts="")
+    public function __construct($shortopts, $longopts="")
     {
         $this->short = $shortopts;
         $this->long = $longopts;
@@ -89,7 +101,9 @@ class CliParser
 
     /**
      * Parse given arguments
+     *
      * @param array $args The arguments given on command line
+     *
      * @return array $ast The ast of the parsed arguments
      */
     public function parse_argv($args)
@@ -97,9 +111,9 @@ class CliParser
         $this->args = $args;
         foreach($args as $index=>$arg)
         {
-            if(!in_array($arg,$this->checked) && $index!=0)
+            if(!in_array($arg, $this->checked) && $index != 0)
             {
-                $this->is_opt($arg,$index,true);
+                $this->is_opt($arg, $index, TRUE);
             }
         }
         return $this->ast;
@@ -107,6 +121,7 @@ class CliParser
 
     /**
      * Parse error information
+     *
      * @return boolean $error Whether there was a parse error or not
      */
     public function parse_error()
@@ -116,33 +131,36 @@ class CliParser
 
     /**
      * Check for command line arguments
-     * @param String $opt The command line argument
-     * @param Integer $index The index of the argument within $this->args
-     * @param boolean $toplevel Whether we run it from the top or from further down in the stack
+     *
+     * @param String  $opt      The command line argument
+     * @param Integer $index    The index of the argument within $this->args
+     * @param boolean $toplevel Whether we run it from the top or from
+     *                          further down in the stack
+     *
      * @return boolean $return Success or Failure
      */
-    private function is_opt($opt,$index,$toplevel=false)
+    private function is_opt($opt, $index, $toplevel = FALSE)
     {
-        array_push($this->checked,$opt);
-        if (strlen($opt)!=0)
+        array_push($this->checked, $opt);
+        if (strlen($opt) != 0)
         {
-            if ($opt{0}=="-")
+            if ($opt{0} == "-")
             {
-                $param = substr($opt,1);
-                if (strlen($param)!=0)
+                $param = substr($opt, 1);
+                if (strlen($param) != 0)
                 {
-                    if($param{0}=="-")
+                    if($param{0} == "-")
                     {
-                        return $this->is_valid_long(substr($param,1),$index);
+                        return $this->is_valid_long(substr($param, 1), $index);
                     }
                     else
                     {
-                        return $this->is_valid($param,$index);
+                        return $this->is_valid($param, $index);
                     }
                 }
                 else
                 {
-                    return $this->is_valid($param,$index);
+                    return $this->is_valid($param, $index);
                 }
             }
             elseif($toplevel)
@@ -155,21 +173,28 @@ class CliParser
 
     /**
      * Check whether the given argument is a valid short option
-     * @param String $opt The command line argument
+     *
+     * @param String  $opt   The command line argument
      * @param Integer $index The index of the argument within $this->args
+     *
      * @return boolean $return Success or Failure
      */
     private function is_valid($opt,$index)
     {
-        $pos=strpos($this->short,$opt);
+        $pos=strpos($this->short, $opt);
         if($pos!==false)
         {
             $this->ast[$opt] = array();
-            return $this->check_argument($opt,$index,$pos,$this->short);
+            return $this->check_argument(
+                $opt,
+                $index,
+                $pos,
+                $this->short
+            );
         }
         else
         {
-            echo "Invalid parameter given: -".$opt."\n";
+            echo "Invalid parameter given: -" . $opt . "\n";
             $this->error = true;
         }
         return false;
@@ -177,23 +202,26 @@ class CliParser
 
     /**
      * Check whether the given argument is a valid long option
-     * @param String $opt The command line argument
+     *
+     * @param String  $opt   The command line argument
      * @param Integer $index The index of the argument within $this->args
+     *
      * @return boolean $return Success or Failure
      */
-    private function is_valid_long($opt,$index)
+    private function is_valid_long($opt, $index)
     {
         $match = false;
-        foreach($this->long as $key=>$arg)
+        foreach($this->long as $key => $arg)
         {
-            if($opt==substr($arg,0,strlen($opt)))
+            if($opt==substr($arg, 0, strlen($opt)))
             {
-                if (strlen($arg)==strlen($opt))
+                if (strlen($arg) == strlen($opt))
                 {
                     $match = true;
                     $args = $key;
                 }
-                elseif ($arg{strlen($opt)}==":" || $arg{strlen($opt)}==";")
+                elseif ($arg{strlen($opt)} == ":"
+                    || $arg{strlen($opt)} == ";")
                 {
                     $match = true;
                     $args = $key;
@@ -203,41 +231,56 @@ class CliParser
         if($match)
         {
             $this->ast[$opt] = array();
-            return $this->check_argument($opt,$index,strlen($opt)-1,$this->long[$args]);
+            return $this->check_argument(
+                $opt,
+                $index,
+                strlen($opt) - 1,
+                $this->long[$args]
+            );
         }
         else
         {
-            echo "Invalid parameter given: --".$opt."\n";
+            echo "Invalid parameter given: --" . $opt . "\n";
             $this->error = true;
             return false;
         }
     }
 
     /**
-     * Check whether the given string is a valid argument for either a short or long option
-     * @param String $opt The command line argument
+     * Check whether the given string is a valid argument for either a short
+     * or long option
+     *
+     * @param String  $opt   The command line argument
      * @param Integer $index The index of the argument within $this->args
-     * @param Integer $pos Index of the last option character within the longopts or shortopts String
-     * @param String $a The option the argument belongs too
+     * @param Integer $pos   Index of the last option character within the
+     *                       longopts or shortopts String
+     * @param String  $a     The option the argument belongs too
+     *
      * @return boolean $return Success or Failure
      */
     private function check_argument($opt,$index,$pos,$a)
     {
-        $next = $index+1;
-        if($pos+1<strlen($a))
+        $next = $index + 1;
+        if($pos+1 < strlen($a))
         {
-            if($a{$pos+1}==":")
+            if($a{$pos+1} == ":")
             {
                 if (count($this->args)>$next)
                 {
-                    if (!$this->is_opt($this->args[$next],$next) && $this->args[$next]{0}!="-")
+                    if (!$this->is_opt($this->args[$next], $next)
+                        && $this->args[$next]{0} != "-")
                     {
-                        array_push($this->ast[$opt],$this->args[$next]);
+                        array_push($this->ast[$opt], $this->args[$next]);
                         if ($pos+2<strlen($a))
                         {
-                            if ($a{$pos+2}==":" || $a{$pos+2}==";")
+                            if ($a{$pos+2} == ":" || $a{$pos+2} == ";")
                             {
-                                return $this->check_argument($opt,$next,$pos+1,$a);
+                                return $this->check_argument(
+                                    $opt,
+                                    $next,
+                                    $pos + 1,
+                                    $a
+                                );
                             }
                             else
                             {
@@ -251,28 +294,35 @@ class CliParser
                     }
                     else
                     {
-                        echo "Missing argument for -".$opt."\n";
+                        echo "Missing argument for -" . $opt . "\n";
                         $this->error = true;
                     }
                 }
                 else
                 {
-                    echo "Missing argument for -".$opt."\n";
+                    echo "Missing argument for -" . $opt . "\n";
                     $this->error = true;
                 }
             }
-            elseif($a{$pos+1}==";")
+            elseif($a{$pos+1} == ";")
             {
-                if (count($this->args)>$next && strlen($this->args[$next])!=0)
+                if (count($this->args) > $next
+                    && strlen($this->args[$next]) != 0)
                 {
-                    if (!$this->is_opt($this->args[$next],$next) && $this->args[$next]{0}!="-")
+                    if (!$this->is_opt($this->args[$next], $next)
+                        && $this->args[$next]{0} != "-")
                     {
-                        array_push($this->ast[$opt],$this->args[$next]);
+                        array_push($this->ast[$opt], $this->args[$next]);
                         if ($pos+2<strlen($a))
                         {
-                            if ($a{$pos+2}==";")
+                            if ($a{$pos+2} == ";")
                             {
-                                return $this->check_argument($opt,$next,$pos+1,$a);
+                                return $this->check_argument(
+                                    $opt,
+                                    $next,
+                                    $pos + 1,
+                                    $a
+                                );
                             }
                             else
                             {
@@ -290,11 +340,11 @@ class CliParser
                     //echo "Missing optional argument for -".$opt."\n";
                 }
             }
-            elseif (count($this->args)>$next && !strpos($a,$opt))
+            elseif (count($this->args) > $next && !strpos($a, $opt))
             {
-                if (!$this->is_opt($this->args[$next],$next))
+                if (!$this->is_opt($this->args[$next], $next))
                 {
-                    echo "Superfluos argument: ".$this->args[$next]."\n";
+                    echo "Superfluos argument: " . $this->args[$next] . "\n";
                 }
                 return true;
             }

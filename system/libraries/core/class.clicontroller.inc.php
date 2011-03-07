@@ -45,8 +45,8 @@ abstract class CliController extends Controller
     /**
      * Handle unimplemented calls
      *
-     * @param String $name Method name
-     * @param array $arguments Arguments passed to the method
+     * @param String $name      Method name
+     * @param array  $arguments Arguments passed to the method
      *
      * @return String JSON encoded error String
      */
@@ -57,6 +57,7 @@ abstract class CliController extends Controller
 
     /**
      * Default method as defined in conf.application.inc.php
+     *
      * @return void
      */
     abstract public function index();
