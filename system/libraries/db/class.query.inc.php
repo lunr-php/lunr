@@ -1,26 +1,33 @@
 <?php
 
-# Copyright 2009-2010 Heinz Wiesinger, Amsterdam, The Netherlands
-# Copyright 2010 M2Mobi BV, Amsterdam, The Netherlands
-# All rights reserved.
-#
-# Redistribution and use of this script, with or without modification, is
-# permitted provided that the following conditions are met:
-#
-# 1. Redistributions of this script must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-#
-# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
-# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
-# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/**
+ * This file contains an abstraction class for a database
+ * result set.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Database
+ * @subpackage Libraries
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     M2Mobi <info@m2mobi.com>
+ * @copyright  2009-2011, Heinz Wiesinger, Amsterdam, The Netherlands
+ * @copyright  2010-2011, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://opensource.org/licenses/bsd-license BSD License
+ */
 
+/**
+ * Database result set abstraction class
+ *
+ * @category   Libraries
+ * @package    Database
+ * @subpackage Libraries
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     M2Mobi <info@m2mobi.com>
+ * @copyright  2009-2011, Heinz Wiesinger, Amsterdam, The Netherlands
+ * @copyright  2010-2011, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://opensource.org/licenses/bsd-license BSD License
+ */
 class Query
 {
 
@@ -38,8 +45,9 @@ class Query
 
     /**
      * Constructor
-     * @param Mixed $query The Query result
-     * @param Resource $res Resource handler for the db connection
+     *
+     * @param Mixed    $query The Query result
+     * @param Resource $res   Resource handler for the db connection
      */
     public function __construct($query, $res)
     {
@@ -58,6 +66,7 @@ class Query
 
     /**
      * Returns the number of affected rows
+     *
      * @return Integer number of affected rows
      */
     public function affected_rows()
@@ -67,6 +76,7 @@ class Query
 
     /**
      * Returns the number of result rows
+     *
      * @return Integer number of result rows
      */
     public function num_rows()
@@ -85,6 +95,7 @@ class Query
 
     /**
      * Return an array of results
+     *
      * @return Array Array of Results
      */
     public function result_array()
@@ -99,6 +110,7 @@ class Query
 
     /**
      * Return the first row of results
+     *
      * @return Array One data row
      */
     public function result_row()
@@ -109,7 +121,9 @@ class Query
 
     /**
      * Return one field for the first row
+     *
      * @param String $col The field to return
+     *
      * @return mixed Field value
      */
     public function field($col)
@@ -120,7 +134,9 @@ class Query
 
     /**
      * Return a column of results
+     *
      * @param String $col The column to return
+     *
      * @return Array Query Results
      */
     public function col($col)
