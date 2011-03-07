@@ -1,26 +1,33 @@
 <?php
 
-# Copyright 2009-2010 Heinz Wiesinger, Amsterdam, The Netherlands
-# Copyright 2010 M2Mobi BV, Amsterdam, The Netherlands
-# All rights reserved.
-#
-# Redistribution and use of this script, with or without modification, is
-# permitted provided that the following conditions are met:
-#
-# 1. Redistributions of this script must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-#
-# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
-# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
-# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/**
+ * This file contains database access methods for accessing
+ * a MySQL/MariaDB database
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Database
+ * @subpackage Libraries
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     M2Mobi <info@m2mobi.com>
+ * @copyright  2009-2011, Heinz Wiesinger, Amsterdam, The Netherlands
+ * @copyright  2010-2011, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://opensource.org/licenses/bsd-license BSD License
+ */
 
+/**
+ * MySQL/MariaDB database access class
+ *
+ * @category   Libraries
+ * @package    Database
+ * @subpackage Libraries
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     M2Mobi <info@m2mobi.com>
+ * @copyright  2009-2011, Heinz Wiesinger, Amsterdam, The Netherlands
+ * @copyright  2010-2011, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://opensource.org/licenses/bsd-license BSD License
+ */
 class DBCon
 {
 
@@ -152,6 +159,10 @@ class DBCon
     /**
      * Constructor
      * automatically sets up mysql server-vars
+     *
+     * @param array   $db       Database access information
+     * @param Boolean $readonly Whether the database access should
+     *                          be established readonly
      */
     public function __construct($db, $readonly = TRUE)
     {
@@ -225,17 +236,32 @@ class DBCon
 
     /**
      * Establishes a connection to the defined mysql-server
+     *
      * @return void
      */
     public function connect()
     {
         if ($this->readonly)
         {
-            $this->res = mysqli_connect($this->ro_host, $this->user, $this->pwd, $this->db, ini_get("mysqli.default_port"), $this->socket);
+            $this->res = mysqli_connect(
+                $this->ro_host,
+                $this->user,
+                $this->pwd,
+                $this->db,
+                ini_get("mysqli.default_port"),
+                $this->socket
+            );
         }
         else
         {
-            $this->res = mysqli_connect($this->rw_host, $this->user, $this->pwd, $this->db, ini_get("mysqli.default_port"), $this->socket);
+            $this->res = mysqli_connect(
+                $this->rw_host,
+                $this->user,
+                $this->pwd,
+                $this->db,
+                ini_get("mysqli.default_port"),
+                $this->socket
+            );
         }
         if ($this->res)
         {
@@ -246,6 +272,7 @@ class DBCon
 
     /**
      * Disconnects from mysql-server
+     *
      * @return void
      */
     public function disconnect()
@@ -259,6 +286,7 @@ class DBCon
 
     /**
      * Returns last mysql error
+     *
      * @return String Error message
      */
     public function last_error()
@@ -268,6 +296,7 @@ class DBCon
 
     /**
      * Returns last mysql error number
+     *
      * @return Integer Error number
      */
     public function last_error_number()
@@ -277,6 +306,7 @@ class DBCon
 
     /**
      * Returns the last executed query
+     *
      * @return String SQL Query
      */
     public function last_query()
@@ -286,6 +316,7 @@ class DBCon
 
     /**
      * Returns the id given for the last insert statement
+     *
      * @return Mixed Insert ID
      */
     public function last_id()
@@ -295,6 +326,7 @@ class DBCon
 
     /**
      * Get the calculated amount of total rows for the last executed query
+     *
      * @return mixed $return The amount of rows on success, False on failure
      */
     public function found_rows()
@@ -312,9 +344,12 @@ class DBCon
     }
 
     /**
-     * Return the preliminary query, that would be executed by query() at this point
+     * Return the preliminary query, that would be executed by query() at
+     * this point
      * **DEBUG**
+     *
      * @param String $from Where to get the data from
+     *
      * @return String SQL query
      */
     public function preliminary_query($from)
@@ -371,9 +406,12 @@ class DBCon
 
     /**
      * Executes a defined SQL query
-     * @param String $sql_command Predefined SQL query
-     * @param Boolean $return Return a Query Result
-     * @return Mixed Query Result, TRUE on successful query or FALSE on connection failure/failed query
+     *
+     * @param String  $sql_command Predefined SQL query
+     * @param Boolean $return      Return a Query Result
+     *
+     * @return Mixed $result Query Result, TRUE on successful query or
+     *                       FALSE on connection failure/failed query
      */
     public function query($sql_command, $return = true)
     {
@@ -431,7 +469,9 @@ class DBCon
 
     /**
      * Execute the defined SQL query and return the result set
+     *
      * @param String $from Where to get the data from
+     *
      * @return Query Query result, or False on connection failure
      */
     public function get($from)
@@ -516,8 +556,11 @@ class DBCon
 
     /**
      * Define a SELECT statement
+     *
      * @param String $select The columns to select
-     * @param String $escape Whether to escape the select statement or not. Default to "TRUE"
+     * @param String $escape Whether to escape the select statement or not.
+     *                       Default to "TRUE"
+     *
      * @return void
      */
     public function select($select, $escape = TRUE)
@@ -544,8 +587,11 @@ class DBCon
     /**
      * Select columns as hex values, if not new name assignment done
      * it returns as a column name given (without HEX() surrounding)
+     *
      * @param String $select The columns to select
-     * @param String $escape Whether to escape the select statement or not. Default to "TRUE"
+     * @param String $escape Whether to escape the select statement or not.
+     *                       Default to "TRUE"
+     *
      * @return void
      */
     public function select_hex($select, $escape = TRUE)
@@ -572,9 +618,12 @@ class DBCon
     /**
      * Define a special SELECT statement.
      * WARNING: This overwrites previously defined select criterias
-     * @param String $select The columns to select
+     *
+     * @param String $select  The columns to select
      * @param String $special The special criteria for the select statement
-     * @param String $escape Whether to escape the select statement or not. Default to "TRUE"
+     * @param String $escape  Whether to escape the select statement or not.
+     *                        Default to "TRUE"
+     *
      * @return void
      */
     public function select_special($select, $special, $escape = TRUE)
@@ -593,8 +642,11 @@ class DBCon
 
     /**
      * SELECT a row for a subsequent UPDATE, locking the row
+     *
      * @param String $select The columns to select
-     * @param String $escape Whether to escape the select statement or not. Default to "TRUE"
+     * @param String $escape Whether to escape the select statement or not.
+     *                       Default to "TRUE"
+     *
      * @return void
      */
     public function select_for_update($select, $escape = TRUE)
@@ -608,19 +660,26 @@ class DBCon
 
     /**
      * Define a JOIN clause
+     *
      * @param String $table The table name to join with
-     * @param String $on Base information on what the join should be done
-     * @param String $sort Sort of JOIN operation to be done (INNER JOIN by default)
+     * @param String $on    Base information on what the join should be done
+     * @param String $sort  Sort of JOIN operation to be done
+     *                      (INNER JOIN by default)
+     *
      * @return void
      */
     public function join($table, $on, $sort = "INNER")
     {
-        $this->join .= "$sort JOIN " . $this->escape_as($table) . " ON " . $this->escape_on($on) . " ";
+        $this->join .= "$sort JOIN " . $this->escape_as($table);
+        $this->join .= " ON " . $this->escape_on($on) . " ";
     }
 
     /**
      * Start a WHERE clause group
-     * @param String $connector Logical connector to use (optional, empty by default)
+     *
+     * @param String $connector Logical connector to use
+     *                          (optional, empty by default)
+     *
      * @return void
      */
     public function start_where_group($connector = "")
@@ -638,6 +697,7 @@ class DBCon
 
     /**
      * End a where group
+     *
      * @return void
      */
     public function end_where_group()
@@ -647,10 +707,13 @@ class DBCon
 
     /**
      * Define a WHERE clause
-     * @param String $col Column name
-     * @param String $val Value that should be matched
-     * @param String $operator Comparison operator that should be used (optional, '=' by default)
-     * @param String $collate Specific collate used for comparison (optional)
+     *
+     * @param String $col      Column name
+     * @param String $val      Value that should be matched
+     * @param String $operator Comparison operator that should be used
+     *                         (optional, '=' by default)
+     * @param String $collate  Specific collate used for comparison (optional)
+     *
      * @return void
      */
     public function where($col, $val, $operator = "=", $collate = "")
@@ -679,22 +742,28 @@ class DBCon
             $collate = " COLLATE $collate";
         }
 
-        if (substr($val,0,3) == "IS ")
+        if (substr($val, 0, 3) == "IS ")
         {
-            $this->where .= $this->escape_columns($col) . " " . $base_charset . $this->escape_string($val) . $collate;
+            $this->where .= $this->escape_columns($col) . " " . $base_charset;
+            $this->where .= $this->escape_string($val) . $collate;
         }
         else
         {
-            $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "'" . $this->escape_string($val) . "'" . $collate;
+            $this->where .= $this->escape_columns($col) . $operator . " ";
+            $this->where .= $base_charset;
+            $this->where .= "'" . $this->escape_string($val) . "'" . $collate;
         }
     }
 
     /**
      * Define a WHERE clause, which deals with hex->binary
-     * @param String $col Column name
-     * @param String $val Value that should be matched
-     * @param String $operator Comparison operator that should be used (optional, '=' by default)
-     * @param String $collate Specific collate used for comparison (optional)
+     *
+     * @param String $col      Column name
+     * @param String $val      Value that should be matched
+     * @param String $operator Comparison operator that should be used
+     *                         (optional, '=' by default)
+     * @param String $collate  Specific collate used for comparison (optional)
+     *
      * @return void
      */
     public function where_hex($col, $val, $operator = "=", $collate = "")
@@ -723,15 +792,21 @@ class DBCon
             $collate = " COLLATE $collate";
         }
 
-        $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "UNHEX('" . $this->escape_string($val) . "')" . $collate;
+        $this->where .= $this->escape_columns($col) . $operator . " ";
+        $this->where .= $base_charset;
+        $this->where .= "UNHEX('" . $this->escape_string($val) . "')";
+        $this->where .= $collate;
     }
 
     /**
      * Define a OR WHERE clause
-     * @param String $col Column name
-     * @param String $val Value that should be matched
-     * @param String $operator Comparison operator that should be used (optional, '=' by default)
-     * @param String $collate Specific collate used for comparison (optional)
+     *
+     * @param String $col      Column name
+     * @param String $val      Value that should be matched
+     * @param String $operator Comparison operator that should be used
+     *                         (optional, '=' by default)
+     * @param String $collate  Specific collate used for comparison (optional)
+     *
      * @return void
      */
     public function or_where($col, $val, $operator = "=", $collate = "")
@@ -760,22 +835,29 @@ class DBCon
             $collate = " COLLATE $collate";
         }
 
-        if (substr($val,0,2) == "IS")
+        if (substr($val, 0, 2) == "IS")
         {
-            $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . $this->escape_string($val) . $collate;
+            $this->where .= $this->escape_columns($col) . $operator . " ";
+            $this->where .= $base_charset . $this->escape_string($val);
+            $this->where .= $collate;
         }
         else
         {
-            $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "'" . $this->escape_string($val) . "'" . $collate;
+            $this->where .= $this->escape_columns($col) . $operator . " ";
+            $this->where .= $base_charset;
+            $this->where .= "'" . $this->escape_string($val) . "'" . $collate;
         }
     }
 
     /**
      * Define a OR WHERE clause, which deals with hex->binary
-     * @param String $col Column name
-     * @param String $val Value that should be matched
-     * @param String $operator Comparison operator that should be used (optional, '=' by default)
-     * @param String $collate Specific collate used for comparison (optional)
+     *
+     * @param String $col      Column name
+     * @param String $val      Value that should be matched
+     * @param String $operator Comparison operator that should be used
+     *                         (optional, '=' by default)
+     * @param String $collate  Specific collate used for comparison (optional)
+     *
      * @return void
      */
     public function or_where_hex($col, $val, $operator = "=", $collate = "")
@@ -804,14 +886,20 @@ class DBCon
             $collate = " COLLATE $collate";
         }
 
-        $this->where .= $this->escape_columns($col) . $operator . " " . $base_charset . "UNHEX('" . $this->escape_string($val) . "')" . $collate;
+        $this->where .= $this->escape_columns($col) . $operator . " ";
+        $this->where .= $base_charset . "UNHEX('";
+        $this->where .= $this->escape_string($val) . "')" . $collate;
     }
 
     /**
      * Define a LIKE clause
-     * @param String $col Column name
-     * @param String $val Value that should be matched
+     *
+     * @param String $col     Column name
+     * @param String $val     Value that should be matched
+     * @param String $match   Side of the $val where '%' should be placed
+     *                        (optional, both by default)
      * @param String $collate Specific collate used for comparison (optional)
+     *
      * @return void
      */
     public function like($col, $val, $match = "both", $collate = "")
@@ -843,23 +931,32 @@ class DBCon
         switch ($match)
         {
             case "forward":
-                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'" . $this->escape_string($val) . "%'" .$collate;
+                $this->where .= $this->escape_columns($col);
+                $this->where .= " LIKE ".$base_charset . "'";
+                $this->where .= $this->escape_string($val) . "%'" .$collate;
                 break;
             case "backward":
-                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "'" .$collate;
+                $this->where .= $this->escape_columns($col);
+                $this->where .= " LIKE ".$base_charset . "'%";
+                $this->where .= $this->escape_string($val) . "'" .$collate;
                 break;
             default:
-                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "%'" .$collate;
+                $this->where .= $this->escape_columns($col);
+                $this->where .= " LIKE ".$base_charset . "'%";
+                $this->where .= $this->escape_string($val) . "%'" .$collate;
                 break;
         }
     }
 
     /**
      * Define an alternative LIKE clause
-     * @param String $col Column name
-     * @param String $val Value that should be matched
-     * @param String $match Side of the $val where '%' should be placed (optional, both by default)
+     *
+     * @param String $col     Column name
+     * @param String $val     Value that should be matched
+     * @param String $match   Side of the $val where '%' should be placed
+     *                        (optional, both by default)
      * @param String $collate Specific collate used for comparison (optional)
+     *
      * @return void
      */
     public function or_like($col, $val, $match = "both", $collate = "")
@@ -891,22 +988,32 @@ class DBCon
         switch ($match)
         {
             case "forward":
-                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'" . $this->escape_string($val) . "%'" .$collate;
+                $this->where .= $this->escape_columns($col);
+                $this->where .= " LIKE ".$base_charset . "'";
+                $this->where .= $this->escape_string($val) . "%'" .$collate;
                 break;
             case "backward":
-                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "'" .$collate;
+                $this->where .= $this->escape_columns($col);
+                $this->where .= " LIKE ".$base_charset . "'%";
+                $this->where .= $this->escape_string($val) . "'" .$collate;
                 break;
             default:
-                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "%'" .$collate;
+                $this->where .= $this->escape_columns($col);
+                $this->where .= " LIKE ".$base_charset . "'%";
+                $this->where .= $this->escape_string($val) . "%'" .$collate;
                 break;
         }
     }
 
     /**
      * Define a NOT LIKE clause
-     * @param String $col Column name
-     * @param String $val Value that should be matched
+     *
+     * @param String $col     Column name
+     * @param String $val     Value that should be matched
+     * @param String $match   Side of the $val where '%' should be placed
+     *                        (optional, both by default)
      * @param String $collate Specific collate used for comparison (optional)
+     *
      * @return void
      */
     public function not_like($col, $val, $match = "both", $collate = "")
@@ -938,21 +1045,29 @@ class DBCon
         switch ($match)
         {
             case "forward":
-                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'" . $this->escape_string($val) . "%'" .$collate;
+                $this->where .= $this->escape_columns($col);
+                $this->where .= " LIKE ".$base_charset . "'";
+                $this->where .= $this->escape_string($val) . "%'" .$collate;
                 break;
             case "backward":
-                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "'" .$collate;
+                $this->where .= $this->escape_columns($col);
+                $this->where .= " LIKE ".$base_charset . "'%";
+                $this->where .= $this->escape_string($val) . "'" .$collate;
                 break;
             default:
-                $this->where .= $this->escape_columns($col) . " LIKE ".$base_charset . "'%" . $this->escape_string($val) . "%'" .$collate;
+                $this->where .= $this->escape_columns($col);
+                $this->where .= " LIKE ".$base_charset . "'%";
+                $this->where .= $this->escape_string($val) . "%'" .$collate;
                 break;
         }
     }
 
     /**
      * Define a WHERE IN clause
-     * @param String $col Column name
-     * @param Mixed $val Value that should be matched
+     *
+     * @param String $col    Column name
+     * @param Mixed  $values Values that should be matched
+     *
      * @return void
      */
     public function where_in($col, $values)
@@ -976,8 +1091,10 @@ class DBCon
 
     /**
      * Define a WHERE IN clause that deals with hex->binary conversion
-     * @param String $col Column name
-     * @param Mixed $val Value that should be matched
+     *
+     * @param String $col    Column name
+     * @param Mixed  $values Values that should be matched
+     *
      * @return void
      */
     public function where_in_hex($col, $values)
@@ -1014,8 +1131,10 @@ class DBCon
 
     /**
      * Define a ORDER BY clause
-     * @param String $col Column name
+     *
+     * @param String $col   Column name
      * @param String $order Order ASCending or DESCending
+     *
      * @return void
      */
     public function order_by($col, $order = "ASC")
@@ -1033,7 +1152,9 @@ class DBCon
 
     /**
      * Define a GROUP BY clause
+     *
      * @param String $group Column to group
+     *
      * @return void
      */
     public function group_by($group)
@@ -1051,8 +1172,10 @@ class DBCon
 
     /**
      * Define a LIMIT clause
+     *
      * @param String $count The amount of elements to retrieve
      * @param String $start Start retrieving elements from a sepcific index
+     *
      * @return void
      */
     public function limit($count, $start = "")
@@ -1069,7 +1192,9 @@ class DBCon
 
     /**
      * Define a UNION statement
+     *
      * @param String $from table name to select from for the first query
+     *
      * @return void
      */
     public function union($from)
@@ -1084,8 +1209,10 @@ class DBCon
 
     /**
      * Define an INSERT statement
+     *
      * @param String $table The table to insert into
-     * @param Mixed $data The data to insert
+     * @param Mixed  $data  The data to insert
+     *
      * @return Boolean $return TRUE on success, FALSE on failure
      */
     public function insert($table, $data)
@@ -1097,18 +1224,20 @@ class DBCon
         else
         {
             $sql  = "INSERT INTO `$table` ";
-            $sql .= $this->prepare_data($data,"keys");
+            $sql .= $this->prepare_data($data, "keys");
             $sql .= "VALUES ";
-            $sql .= $this->prepare_data($data,"values");
+            $sql .= $this->prepare_data($data, "values");
             $sql .= ";";
-            return $this->query($sql,false);
+            return $this->query($sql, FALSE);
         }
     }
 
     /**
      * Define a REPLACE statement
+     *
      * @param String $table The table to insert into
-     * @param Mixed $data The data to insert
+     * @param Mixed  $data  The data to insert
+     *
      * @return Boolean $return TRUE on success, FALSE on failure
      */
     public function replace($table, $data)
@@ -1120,18 +1249,20 @@ class DBCon
         else
         {
             $sql  = "REPLACE INTO `$table` ";
-            $sql .= $this->prepare_data($data,"keys");
+            $sql .= $this->prepare_data($data, "keys");
             $sql .= "VALUES ";
-            $sql .= $this->prepare_data($data,"values");
+            $sql .= $this->prepare_data($data, "values");
             $sql .= ";";
-            return $this->query($sql,false);
+            return $this->query($sql, FALSE);
         }
     }
 
     /**
      * Define an UPDATE statement
+     *
      * @param String $table The table to update
-     * @param Mixed $data The updated data
+     * @param Mixed  $data  The updated data
+     *
      * @return Boolean $return TRUE on success, FALSE on failure
      */
     public function update($table, $data)
@@ -1155,13 +1286,15 @@ class DBCon
                 }
             }
             $sql = substr_replace($sql, " ", strripos($sql, ","));
-            return $this->query($sql, false);
+            return $this->query($sql, FALSE);
         }
     }
 
     /**
      * Define a DELETE statement
+     *
      * @param String $table The table to update
+     *
      * @return Boolean $return TRUE on success, FALSE on failure
      */
     public function delete($table)
@@ -1173,12 +1306,13 @@ class DBCon
         else
         {
             $sql = "DELETE FROM `$table`";
-            return $this->query($sql,false);
+            return $this->query($sql, FALSE);
         }
     }
 
     /**
      * Start Transaction mode by disabling autocommit
+     *
      * @return Boolean True on success and false on failure
      */
     public function begin_transaction()
@@ -1188,7 +1322,7 @@ class DBCon
             $this->connect();
         }
 
-        if ($this->connected && mysqli_autocommit($this->res,FALSE))
+        if ($this->connected && mysqli_autocommit($this->res, FALSE))
         {
             $this->transaction = TRUE;
             return TRUE;
@@ -1201,6 +1335,7 @@ class DBCon
 
     /**
      * Commit previous queries of a transaction
+     *
      * @return Boolean True on success and False on failure
      */
     public function commit()
@@ -1221,8 +1356,9 @@ class DBCon
     }
 
     /**
-     * Rollback to the state of the database of the last commit or before the begin
-     * of the transaction
+     * Rollback to the state of the database of the last commit or
+     * before the begin of the transaction
+     *
      * @return Boolean True on success and False on failure
      */
     public function rollback()
@@ -1244,11 +1380,12 @@ class DBCon
 
     /**
      * End Transaction, commit remaining uncommitted queries
+     *
      * @return Boolean True on success and False on failure
      */
     public function end_transaction()
     {
-        if ($this->commit() && mysqli_autocommit($this->res,TRUE))
+        if ($this->commit() && mysqli_autocommit($this->res, TRUE))
         {
             $this->transaction = FALSE;
             return TRUE;
@@ -1261,7 +1398,9 @@ class DBCon
 
     /**
      * Change the default database for the current connection
+     *
      * @param String $db New default database
+     *
      * @return Boolean True on success, False on Failure
      */
     public function change_database($db)
@@ -1271,7 +1410,7 @@ class DBCon
             $this->connect();
         }
 
-        if ($this->connected && mysqli_select_db($this->res,$db))
+        if ($this->connected && mysqli_select_db($this->res, $db))
         {
             return TRUE;
         }
@@ -1283,7 +1422,9 @@ class DBCon
 
     /**
      * Delete a view in the database
+     *
      * @param String $view Name of the view
+     *
      * @return Boolean TRUE on successful query or FALSE on connection failure
      */
     public function drop_view($view)
@@ -1301,8 +1442,11 @@ class DBCon
 
     /**
      * Create a view in the database
+     *
      * @param String $name Name of the view
-     * @param String $from Name of the first table used in the from clause for the view definition
+     * @param String $from Name of the first table used in the from clause for
+     *                     the view definition
+     *
      * @return Boolean TRUE on successful query or FALSE on connection failure
      */
     public function create_view($name, $from)
@@ -1320,9 +1464,12 @@ class DBCon
     }
 
     /**
-     * Prepare, escape, error-check the values we are about to use in a SQL query
-     * @param Mixed $data The data to prepare
+     * Prepare, escape, error-check the values we are about to use in a
+     * SQL query
+     *
+     * @param Mixed  $data The data to prepare
      * @param String $type Whether we prepare 'keys' or 'values'
+     *
      * @return String key/value list
      */
     private function prepare_data($data,$type)
@@ -1347,12 +1494,14 @@ class DBCon
         }
 
         $list = "(";
-        //The value must be a proper hexadecimal value well formatted -> "UNHEX('hex_value')"
+        // The value must be a proper hexadecimal value well formatted
+        // -> "UNHEX('hex_value')"
         $unhex_pattern = "/UNHEX\('[0-9a-fA-F]{32}'\)/";
 
         foreach ($array as $value)
         {
-            if(($type != "keys") && (preg_match($unhex_pattern, $value) != FALSE))
+            if(($type != "keys")
+                && (preg_match($unhex_pattern, $value) != FALSE))
             {
                 $list .= $value." ,";
             }
@@ -1371,7 +1520,9 @@ class DBCon
 
     /**
      * Escape a string to be used in a SQL query
+     *
      * @param String $string The string to escape
+     *
      * @return Mixed the escaped string, False on connection error
      */
     private function escape_string($string)
@@ -1386,7 +1537,8 @@ class DBCon
             {
                 require_once("class.output.inc.php");
                 $input = print_r($string, TRUE);
-                Output::error("Wrong input for escape_string()! Array given: $input");
+                $msg = "Wrong input for escape_string()! Array given: $input";
+                Output::error($msg);
                 return FALSE;
             }
             return mysqli_real_escape_string($this->res, $string);
@@ -1399,7 +1551,9 @@ class DBCon
 
     /**
      * Escape column names
+     *
      * @param String $col Column
+     *
      * @return String escaped column list
      */
     private function escape_columns($col)
@@ -1423,7 +1577,11 @@ class DBCon
 
     /**
      * Escape column names for statements using the "AS" operator
-     * @param String $cols Column(s)
+     *
+     * @param String  $cols Column(s)
+     * @param Boolean $hex  Whether we should consider the values
+     *                      as hexadecimal or not.
+     *
      * @return String escaped column list
      */
     private function escape_as($cols, $hex = FALSE)
@@ -1434,26 +1592,30 @@ class DBCon
         {
             if (strpos($value, " AS "))
             {
-                $col = explode(" AS ",$value);
+                $col = explode(" AS ", $value);
                 if ($hex)
                 {
-                    $string .= "HEX(" . $this->escape_columns($col[0]) . ") AS `" . trim($col[1]) . "`, ";
+                    $string .= "HEX(" . $this->escape_columns($col[0]) . ")";
+                    $string .= " AS `" . trim($col[1]) . "`, ";
                 }
                 else
                 {
-                    $string .= $this->escape_columns($col[0]) . " AS `" . trim($col[1]) . "`, ";
+                    $string .= $this->escape_columns($col[0]);
+                    $string .= " AS `" . trim($col[1]) . "`, ";
                 }
             }
             elseif (strpos($value, " as "))
             {
-                $col = explode(" as ",$value);
+                $col = explode(" as ", $value);
                 if ($hex)
                 {
-                    $string .= "HEX(" . $this->escape_columns($col[0]) . ") AS `" . trim($col[1]) . "`, ";
+                    $string .= "HEX(" . $this->escape_columns($col[0]) . ")";
+                    $string .= " AS `" . trim($col[1]) . "`, ";
                 }
                 else
                 {
-                    $string .= $this->escape_columns($col[0]) . " AS `" . trim($col[1]) . "`, ";
+                    $string .= $this->escape_columns($col[0]);
+                    $string .= " AS `" . trim($col[1]) . "`, ";
                 }
             }
             elseif (trim($value) == "*")
@@ -1464,7 +1626,8 @@ class DBCon
             {
                 if ($hex)
                 {
-                    $string .= " HEX(" . $this->escape_columns(trim($value)) . ") AS `" . trim($value) . "`, ";
+                    $string .= " HEX(" . $this->escape_columns(trim($value));
+                    $string .= ") AS `" . trim($value) . "`, ";
                 }
                 else
                 {
@@ -1478,18 +1641,22 @@ class DBCon
 
     /**
      * Escape column names for "ON"-using statements
+     *
      * @param String $string comparison string
+     *
      * @return String escaped column list
      */
     private function escape_on($string)
     {
         $parts = explode("=", $string);
-        $return = $this->escape_columns($parts[0]) . " = " . $this->escape_columns($parts[1]);
+        $return  = $this->escape_columns($parts[0]) . " = ";
+        $return .= $this->escape_columns($parts[1]);
         return $return;
     }
 
      /**
      * Generate and return UUID
+     *
      * @return Mixed $return hex UUID on success, FALSE on failure
      */
     public function generate_uuid()
