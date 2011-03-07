@@ -14,22 +14,6 @@ class L10nFactory
     private static $lprovider;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
-     * Destructor
-     */
-    public function __destruct()
-    {
-
-    }
-
-    /**
      * This method returns an object with the appropriate localization
      * implementation provider
      * @param String $provider The localization implementation requested
