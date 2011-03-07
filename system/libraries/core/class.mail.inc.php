@@ -1,8 +1,26 @@
 <?php
 
 /**
+ * This file contains a simple mail construction
+ * and sending class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
+/**
  * Mail sender library
- * @author M2Mobi, Heinz Wiesinger
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class Mail
 {
@@ -71,14 +89,18 @@ class Mail
 
     /**
      * Validate a given input String for a correct email format
+     *
      * @param String $email Email address to validate
+     *
      * @return Boolean $return TRUE if it is an email, false otherwise
      */
     public static function validate_email($email)
     {
-        // filter_var accepts "username" as a valid email, since @domain.com might be implied.
-        // so we check for a present domain by checking the presence of the '@' character
-        if((filter_var($email, FILTER_VALIDATE_EMAIL) === FALSE) || (strpos($email, "@") === FALSE))
+        // filter_var accepts "username" as a valid email, since @domain.com
+        // might be implied. So we check for a present domain by checking the
+        // presence of the '@' character
+        if((filter_var($email, FILTER_VALIDATE_EMAIL) === FALSE)
+            || (strpos($email, "@") === FALSE))
         {
             return FALSE;
         }
@@ -90,7 +112,9 @@ class Mail
 
     /**
      * Set sender email address
+     *
      * @param String $from Email address
+     *
      * @return void
      */
     public function set_from($from)
@@ -100,7 +124,9 @@ class Mail
 
     /**
      * Add an email address to the "TO:" header
+     *
      * @param String $to Email address
+     *
      * @return void
      */
     public function add_to($to)
@@ -110,7 +136,9 @@ class Mail
 
     /**
      * Add an email address to the "CC:" header
+     *
      * @param String $cc Email address
+     *
      * @return void
      */
     public function add_cc($cc)
@@ -120,7 +148,9 @@ class Mail
 
     /**
      * Add an email address to the "BCC:" header
+     *
      * @param String $bcc Email address
+     *
      * @return void
      */
     public function add_bcc($bcc)
@@ -130,7 +160,9 @@ class Mail
 
     /**
      * Define the text that should be sent over email
+     *
      * @param String $msg The message
+     *
      * @return void
      */
     public function set_message($msg)
@@ -140,7 +172,9 @@ class Mail
 
     /**
      * Define the subject of the email
+     *
      * @param String $subject The subject
+     *
      * @return void
      */
     public function set_subject($subject)
@@ -150,6 +184,7 @@ class Mail
 
     /**
      * Send email
+     *
      * @return Boolean $return TRUE on success, FALSE if something went wrong
      */
     public function send()
@@ -177,6 +212,7 @@ class Mail
     /**
      * Generate Non-Default headers for sending the email
      * (FROM, CC, BCC, X-Mailer)
+     *
      * @return mixed $header Headers on success, FALSE on failure
      */
     private function headers()
