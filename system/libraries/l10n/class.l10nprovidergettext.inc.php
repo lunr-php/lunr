@@ -32,7 +32,6 @@ class L10nProviderGettext extends L10nProvider
      */
     public function __construct($language)
     {
-        parent::__construct();
         $this->language = $language;
     }
 
