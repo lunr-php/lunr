@@ -1,8 +1,29 @@
 <?php
 
 /**
+ * This file contains the Pagination class. Pagination takes an
+ * array of data items, splits them among multiple HTML pages
+ * and makes them accessible via a navigation interface.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Web
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Javier Negre <javi@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
+/**
  * Pagination class
- * @author M2Mobi, Javier Negre, Heinz Wiesinger
+ *
+ * @category   Libraries
+ * @package    Web
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Javier Negre <javi@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class Pagination{
 
@@ -93,24 +114,40 @@ class Pagination{
     }
 
     /**
-     * Initializes the Pagination, calculates number of pages and builds the Pagination
-     * @param config Array
+     * Initializes the Pagination, calculates number of pages and builds the
+     * Pagination
+     *
+     * @param array $config The configuration parameters for the Pagination
+     *                      The array keys and values data types are the
+     *                      following:
+     *                      <ul>
+     *                        <li>'current_page', Integer (Mandatory)</li>
+     *                        <li>'base_url', String (Mandatory)</li>
+     *                        <li>'total', Integer (Mandatory, total number
+     *                              of items queried)</li>
+     *                        <li>'per_page', Integer (Optional, items shown
+     *                              per page, set to 25 by default)</li>
+     *                        <li>'range', Integer (Optional, cursors lesser
+     *                              and bigger shown before and after the
+     *                              current cursor, set to 2 by default)</li>
+     *                        <li>'text_previous', String (Optional, text
+     *                              shown in previous button, set to "&lt;" by
+     *                              default)</li>
+     *                        <li>'text_separator', String (Optional, text
+     *                              shown in separators, set to "..." by
+     *                              default)</li>
+     *                        <li>'text_next', String (Optional, text shown in
+     *                              next button, set to "&gt;" by default)</li>
+     *                      </ul>
+     *
      * @return void
-     * The array keys and values data types are the following:
-     *   -) 'current_page', Integer (Mandatory)
-     *   -) 'base_url', String (Mandatory)
-     *   -) 'total', Integer (Mandatory, total number of items queried)
-     *   -) 'per_page', Integer (Optional, items shown per page, set to 25 by default)
-     *   -) 'range', Integer (Optional, cursors lesser and bigger shown before and after the
-     *                        current cursor, set to 2 by default)
-     *   -) 'text_previous', String (Optional, text shown in previous button, set to "&lt;" by default)
-     *   -) 'text_separator', String (Optional, text shown in separators, set to "..." by default)
-     *   -) 'text_next', String (Optional, text shown in next button, set to "&gt;" by default)
      */
     public function initialize($config)
     {
         // empty(0) is true and be want to avoid it, so we check if cursor is 0
-        if ($config['current_page'] == 0 || (isset($config['current_page']) && !empty($config['current_page'])))
+        if ($config['current_page'] == 0
+            || (isset($config['current_page'])
+                && !empty($config['current_page'])))
         {
             $this->cursor = $config['current_page'];
         }
@@ -119,7 +156,7 @@ class Pagination{
             return FALSE;
         }
 
-        if (isset($config['base_url']) and !empty($config['base_url']))
+        if (isset($config['base_url']) && !empty($config['base_url']))
         {
             $this->base_url = $config['base_url'];
         }
@@ -128,7 +165,7 @@ class Pagination{
             return FALSE;
         }
 
-        if (isset($config['total']) and !empty($config['total']))
+        if (isset($config['total']) && !empty($config['total']))
         {
             $this->total = $config['total'];
         }
@@ -137,32 +174,32 @@ class Pagination{
             return FALSE;
         }
 
-        if (isset($config['per_page']) and !empty($config['per_page']))
+        if (isset($config['per_page']) && !empty($config['per_page']))
         {
             $this->per_page = $config['per_page'];
         }
 
-        if (isset($config['range']) and !empty($config['range']))
+        if (isset($config['range']) && !empty($config['range']))
         {
             $this->range = $config['range'];
         }
 
-        if (isset($config['text_previous']) and !empty($config['text_previous']))
+        if (isset($config['text_previous']) && !empty($config['text_previous']))
         {
             $this->buttons['previous']['text'] = $config['text_previous'];
         }
 
-        if (isset($config['text_first']) and !empty($config['text_first']))
+        if (isset($config['text_first']) && !empty($config['text_first']))
         {
             $this->buttons['first']['text'] = $config['text_first'];
         }
 
-        if (isset($config['text_last']) and !empty($config['text_last']))
+        if (isset($config['text_last']) && !empty($config['text_last']))
         {
             $this->buttons['last']['text'] = $config['text_last'];
         }
 
-        if (isset($config['text_next']) and !empty($config['text_next']))
+        if (isset($config['text_next']) && !empty($config['text_next']))
         {
             $this->buttons['next']['text'] = $config['text_next'];
         }
@@ -171,18 +208,24 @@ class Pagination{
     }
 
     /**
-     * Creates the cursors that will link to previous pages, also controlling the visibility of first
-     * and previous buttons
+     * Creates the cursors that will link to previous pages, also
+     * controlling the visibility of first and previous buttons
+     *
+     * @param Integer $amount The amount of previous pages
+     *
      * @return void
      */
     private function build_previous($amount)
     {
         if ($amount > 0)
         {
-            $html = "";
-            for($i = ($this->cursor - 1) ; (($i >= $this->cursor - $amount) && ($i > 0)) ; --$i)
+            $html  = "";
+            $start = $this->cursor - 1;
+            $end   = $this->cursor - $amount;
+            for($i = $start; (($i >= $end) && ($i > 0)); --$i)
             {
-                $html = '<a class="paginator_page" href="' . $this->base_url . $i . '">' . ($i) . '</a>' . "\n" . $html;
+                $html .= '<a class="paginator_page" href="';
+                $html .= $this->base_url . $i . '">' . $i . "</a>\n";
             }
             return $html;
         }
@@ -193,18 +236,24 @@ class Pagination{
     }
 
     /**
-     * Creates the cursors that will link to next pages, also controlling the visibility of last
-     * and next buttons
+     * Creates the cursors that will link to next pages, also controlling
+     * the visibility of last and next buttons
+     *
+     * @param Integer $amount The amount of next pages
+     *
      * @return void
      */
     private function build_next($amount)
     {
         if ($amount > 0)
         {
-            $html = "";
-            for($i = $this->cursor + 1 ; (($i <= $this->cursor + $amount) && ($i <= $this->pages_total)) ; ++$i)
+            $html  = "";
+            $start = $this->cursor + 1;
+            $end   = $this->cursor + $amount;
+            for($i = $start; (($i <= $end) && ($i <= $this->pages_total)); ++$i)
             {
-                $html .= '<a class="paginator_page" href="' . $this->base_url . $i . '">' . ($i) . "</a>\n";
+                $html .= '<a class="paginator_page" href="';
+                $html .= $this->base_url . $i . '">' . $i . "</a>\n";
             }
             return $html;
         }
@@ -216,8 +265,11 @@ class Pagination{
 
     /**
      * Build a special pagination button
+     *
      * @param String $type ENUM: previous|next|first|last
-     * @return mixed $return The html code if we could generate a button, FALSE if an invalid type was passed
+     *
+     * @return mixed $return The html code if we could generate a button,
+     *                       FALSE if an invalid type was passed
      */
     private function build_button($type)
     {
@@ -241,13 +293,17 @@ class Pagination{
 
         if ($this->buttons[$type]['enabled'])
         {
-            // these divs wrap the the test (or image) for the buttons: first, last, previous and second
-            $html = "<div class='paginator_$type'><a href='" . $this->base_url . $target . "'>" . $this->buttons[$type]['text'] . "</a></div>\n";
+            // these divs wrap the the test (or image) for the buttons:
+            // first, last, previous and second
+            $html  = "<div class='paginator_$type'><a href='";
+            $html .= $this->base_url . $target . "'>";
+            $html .= $this->buttons[$type]['text'] . "</a></div>\n";
         }
         else
         {
             // the same as above but to allow the divs being showed as disabled
-            $html = "<div class='paginator_$type paginator_${type}_disabled'>" . $this->buttons[$type]['text'] . "</div>\n";
+            $html  = "<div class='paginator_$type paginator_${type}_disabled'>";
+            $html .= $this->buttons[$type]['text'] . "</div>\n";
         }
 
         return $html;
@@ -256,20 +312,22 @@ class Pagination{
     /**
      * Builds the Pagination html using the following template:
      *
-     *    +------------------------------------------ first button (enabled or disabled)
-     *    |    +------------------------------------- previous button (shown or hidden)
-     *    |    |   +--+------------------------------ previous cursors (number depends on $range)
-     *    |    |   |  |   +-------------------------- current cursor (does not link anywhere)
-     *    |    |   |  |   |   +--+------------------- next cursors (number depends on $range)
-     *    |    |   |  |   |   |  |   +--------------- next button (shown or hidden)
-     *    |    |   |  |   |   |  |   |   +----------- last button (enabled or disabled)
-     *    v    v   v  v   v   v  v   v   v
-     *   [<<] [<] [2][3]  4  [5][6] [>] [>>]
+     * <ul>
+     * <li>[<<]   first button (enabled or disabled)</li>
+     * <li>[<]    previous button (shown or hidden)</li>
+     * <li>[2][3] previous cursors (number depends on $range)</li>
+     * <li>4      current cursor (does not link anywhere)</li>
+     * <li>[5][6] next cursors (number depends on $range)</li>
+     * <li>[>]    next button (shown or hidden)</li>
+     * <li>[>>]   last button (enabled or disabled)</li>
+     * </ul>
+     *
      * @return String
      */
     public function create_links()
     {
-        // If base_url is empty it is because the initialize method has not been called
+        // If base_url is empty it is because the initialize method has
+        // not been called
         if(empty($this->base_url))
         {
             return FALSE;
@@ -325,12 +383,13 @@ class Pagination{
 
         $html  = $this->build_button("first");
         $html .= $this->build_button("previous");
-        // paginator_numbers class div wraps the cursors shown as numbers. This wrapping div allow us to show
-        // the numbers centered in screen
+        // paginator_numbers class div wraps the cursors shown as numbers.
+        // This wrapping div allow us to show the numbers centered in screen
         $html .= "<div class='paginator_numbers'>\n";
         $html .= $this->build_previous($nprevious);
         // using the span we set the style for the current cursor
-        $html .= '<span class="paginator_page paginator_page_sel">' . ($this->cursor) . "</span>\n";
+        $html .= '<span class="paginator_page paginator_page_sel">';
+        $html .= $this->cursor . "</span>\n";
         $html .= $this->build_next($nnext);
         $html .= "</div>\n"; // closes <div class='paginator_numbers'>
         $html .= $this->build_button("next");
