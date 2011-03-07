@@ -2,7 +2,7 @@
 
 /**
  * This file contains the abstract definition for the
- * Localization Provider.
+ * Gettext Localization Provider.
  *
  * PHP Version 5.3
  *
