@@ -1,8 +1,25 @@
 <?php
 
 /**
+ * This file contains the base Model class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
+/**
  * Base Model class
- * @author M2Mobi, Heinz Wiesinger
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 abstract class Model
 {
@@ -21,6 +38,8 @@ abstract class Model
 
     /**
      * Constructor
+     *
+     * @param array $db The database configuration parameters
      */
     public function __construct($db)
     {
@@ -39,7 +58,9 @@ abstract class Model
 
     /**
      * Get write access for the database
-     * @return Boolean $return TRUE if successful, FALSE if there's already a connection established
+     *
+     * @return Boolean $return TRUE if successful, FALSE if there's already a
+     *                         connection established
      */
     public function get_write_access()
     {
@@ -48,6 +69,7 @@ abstract class Model
 
     /**
      * Disconnect from the database
+     *
      * @return void
      */
     public function disconnect()
