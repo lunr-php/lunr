@@ -1,8 +1,25 @@
 <?php
 
 /**
+ * This file contains a PHP session handling wrapper class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
+/**
  * Session Wrapper Class
- * @author M2Mobi, Heinz Wiesinger
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class Session
 {
@@ -27,8 +44,9 @@ class Session
 
     /**
      * Constructor
+     *
      * @param Boolean $database Whether to use the database based
-     *   SessionManager class or not
+     *                          SessionManager class or not
      */
     public function __construct($database = TRUE)
     {
@@ -61,8 +79,10 @@ class Session
 
     /**
      * Store a key->value pair in the current session
-     * @param mixed $key Identifier
+     *
+     * @param mixed $key   Identifier
      * @param mixed $value Value
+     *
      * @return void
      */
     public function set($key, $value)
@@ -75,7 +95,9 @@ class Session
 
     /**
      * Remove a key->value pair from the current session
+     *
      * @param mixed $key Identifier
+     *
      * @return void
      */
     public function delete($key)
@@ -88,7 +110,9 @@ class Session
 
     /**
      * Get a key->value pair from the current session
+     *
      * @param mixed $key Identifier
+     *
      * @return void
      */
     public function get($key)
@@ -105,6 +129,7 @@ class Session
 
     /**
      * Get the current session ID
+     *
      * @return String $session_id
      */
     public function get_session_id()
@@ -114,6 +139,7 @@ class Session
 
     /**
      * Replace the current sessionid with a new one
+     *
      * @return String $session_id
      */
     public function get_new_session_id()
@@ -124,7 +150,9 @@ class Session
 
     /**
      * Start a new session or continure an existing one
+     *
      * @param String $id Predefined Session ID
+     *
      * @return void
      */
     public function start($id = "")
@@ -143,6 +171,7 @@ class Session
 
     /**
      * Close the session and write data
+     *
      * @return void
      */
     public function close()
@@ -154,6 +183,7 @@ class Session
 
     /**
      * End the currently active session
+     *
      * @return void
      */
     public function destroy()
