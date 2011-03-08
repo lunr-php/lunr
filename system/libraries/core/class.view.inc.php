@@ -1,8 +1,25 @@
 <?php
 
 /**
+ * This file contains a view class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
+/**
  * View class used by the Website
- * @author M2Mobi, Heinz Wiesinger
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 abstract class View
 {
@@ -27,7 +44,8 @@ abstract class View
 
     /**
      * Constructor
-     * @param Object $controller Reference to the controller
+     *
+     * @param Controller &$controller Reference to the controller
      */
     public function __construct(&$controller)
     {
@@ -45,14 +63,18 @@ abstract class View
 
     /**
      * Build the actual display and print it
+     *
+     * @return void
      */
     abstract public function print_page();
 
     /**
      * Add data to the view, which is then accessible from within
      * the print_page() function.
-     * @param Mixed $key Identifier for the data
-     * @param Mixed $value The data
+     *
+     * @param Mixed $key    Identifier for the data
+     * @param Mixed &$value The data
+     *
      * @return void
      */
     public function add_data($key, &$value)
@@ -62,7 +84,9 @@ abstract class View
 
     /**
      * Set the localization provider that should be used by the view
-     * @param L10nProvider $provider Reference to the localization provider
+     *
+     * @param L10nProvider &$provider Reference to the localization provider
+     *
      * @return void
      */
     public function set_l10n_provider(&$provider)
@@ -72,7 +96,9 @@ abstract class View
 
     /**
      * Return base_url or attach given path to base_url
+     *
      * @param String $path Path that should be attached to base_url (optional)
+     *
      * @return String $return base_url (+ the given path, if given)
      */
     protected function base_url($path = "")
@@ -82,7 +108,10 @@ abstract class View
 
     /**
      * Return path to statics or attach given path to it
-     * @param String $path Path that should be attached to the statics path (optional)
+     *
+     * @param String $path Path that should be attached to the statics path
+     *                     (optional)
+     *
      * @return String $return path to statics (+ the given path, if given)
      */
     protected function statics($path = "")
@@ -92,9 +121,14 @@ abstract class View
 
     /**
      * Return an alternating (eg. odd/even) CSS class name
-     * @param String $basename CSS base class name (without ending underscore or suffix)
-     * @param Integer $alternation_hint Integer counter indicating the alternation state
-     * @param String $suffix An alternative suffix if you don't want odd/even
+     *
+     * @param String  $basename         CSS base class name (without
+     *                                  ending underscore or suffix)
+     * @param Integer $alternation_hint Integer counter indicating the
+     *                                  alternation state
+     * @param String  $suffix           An alternative suffix if you
+     *                                  don't want odd/even
+     *
      * @return String $return The constructed CSS class name
      */
     protected function css_alternate($basename, $alternation_hint, $suffix = "")
@@ -107,7 +141,7 @@ abstract class View
             }
             else
             {
-               $basename . '_odd';
+                $basename . '_odd';
             }
         }
         else
