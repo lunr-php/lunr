@@ -1,8 +1,27 @@
 <?php
 
 /**
+ * This file contains the implementation of an alternative
+ * session handler for PHP, using the database instead of
+ * the local filesystem for session storage.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
+/**
  * Background Session Management
- * @author M2Mobi, Heinz Wiesinger
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class SessionManager
 {
@@ -26,7 +45,7 @@ class SessionManager
     {
         $this->lifetime = ini_get("session.gc_maxlifetime");
 
-        session_set_save_handler (
+        session_set_save_handler(
             array(&$this, 'open'),
             array(&$this, 'close'),
             array(&$this, 'read'),
@@ -52,8 +71,10 @@ class SessionManager
      * Prepare for session usage.
      * Since we use a database to store the data, we
      * don't really need to do anything here.
+     *
      * @param String $path Path to store the session file
      * @param String $name Session name
+     *
      * @return Boolean $return Returns always true
      */
     public function open($path, $name)
@@ -67,6 +88,7 @@ class SessionManager
      * Close access to session file.
      * Sine we do not use file for session dara storage
      * we don't need to do anything here.
+     *
      * @return Boolean $return Returns always true
      */
     public function close()
@@ -76,7 +98,9 @@ class SessionManager
 
     /**
      * Read session data from the database
+     *
      * @param String $id Session ID
+     *
      * @return mixed $return Session data on success, False on failure
      */
     public function read($id)
@@ -86,8 +110,10 @@ class SessionManager
 
     /**
      * Save session data into the database
-     * @param String $id Session ID
+     *
+     * @param String $id   Session ID
      * @param String $data Session Data
+     *
      * @return Boolean $return Returns always true
      */
     public function write($id, $data)
@@ -98,7 +124,9 @@ class SessionManager
 
     /**
      * End currently active session
+     *
      * @param String $id Session ID
+     *
      * @return Boolean $return Returns always true
      */
     public function destroy($id)
@@ -109,6 +137,7 @@ class SessionManager
 
     /**
      * Clean up expired sessions
+     *
      * @return Boolean $return Returns always true
      */
     public function gc()
