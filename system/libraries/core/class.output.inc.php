@@ -27,22 +27,6 @@ class Output
 {
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
-     * Destructor
-     */
-    public function __destruct()
-    {
-
-    }
-
-    /**
      * Print given message immediatly
      *
      * @param String $msg Message to print
