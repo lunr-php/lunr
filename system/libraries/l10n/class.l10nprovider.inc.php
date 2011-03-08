@@ -55,6 +55,16 @@ abstract class L10nProvider
     abstract protected function init($language);
 
     /**
+     * Get the language the provider has been initialized with
+     *
+     * @return String $string Provider language
+     */
+    public function get_language()
+    {
+        return $this->language;
+    }
+
+    /**
      * Return a translated string
      *
      * @param String $identifier Identifier for the requested string
