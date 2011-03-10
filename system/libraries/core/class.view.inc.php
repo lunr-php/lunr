@@ -103,7 +103,8 @@ abstract class View
      */
     protected function base_url($path = "")
     {
-        return $this->config['base_url'] . $path;
+        global $config;
+        return $config['base_url'] . $path;
     }
 
     /**
