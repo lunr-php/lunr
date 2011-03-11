@@ -43,6 +43,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
      * Test the static function set_language()
      * @depends M2DateTimeTest::testDelayedTimestamp
      * @depends testGetSupportedLanguages
+     * @depends testIsoToPosix
      * @dataProvider languageProvider
      * @covers L10n::set_language
      */
@@ -56,6 +57,25 @@ class L10nTest extends PHPUnit_Framework_TestCase
         {
             global $config;
             $this->assertEquals($config['l10n']['default_language'], L10n::set_language($language));
+        }
+    }
+
+    /**
+    * Test the static function iso_to_posix()
+    * @depends testGetSupportedLanguages
+    * @dataProvider languageProvider
+    * @covers L10n::iso_to_posix
+    */
+    public function testIsoToPosix($posix, $iso)
+    {
+        if (in_array($posix, $this->languages))
+        {
+            $this->assertEquals($posix, L10n::iso_to_posix($iso));
+        }
+        else
+        {
+            global $config;
+            $this->assertEquals($config['l10n']['default_language'], L10n::iso_to_posix($iso));
         }
     }
 
