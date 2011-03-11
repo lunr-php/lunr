@@ -19,6 +19,7 @@
  * @package    L10n
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Julio Foulquié <julio@m2mobi.com>
  */
 class L10n
 {
@@ -73,17 +74,33 @@ class L10n
 
         $supported = self::get_supported_languages($language);
 
-        $lang = $config['l10n']['default_language'];
+        $lang = self::iso_to_posix($language);
+
+        setcookie('lang', $lang, M2DateTime::delayed_timestamp("+1year"), '/');
+        return $lang;
+    }
+
+   /**
+    * Convert a language (if supported) from ISO 639-1 to POSIC locale format
+    *
+    * @param String $language The language to convert on ISO 639-1 format
+    *
+    * @return String $locale The POSIX locale that has been deemed most
+    *                          appropriate or the default if not found
+    */
+    public static function iso_to_posix($language)
+    {
+        global $config;
+        $supported = self::get_supported_languages($language);
+
         foreach ($supported as $locale)
         {
             if (locale_filter_matches($locale, $language, false))
             {
-                $lang = $locale;
+                return $locale;
             }
         }
-
-        setcookie('lang', $lang, M2DateTime::delayed_timestamp("+1year"), '/');
-        return $lang;
+        return $config['l10n']['default_language'];
     }
 
 }
