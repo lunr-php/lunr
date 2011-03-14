@@ -69,10 +69,7 @@ class L10n
      */
     public static function set_language($language)
     {
-        global $config;
         require_once("class.m2datetime.inc.php");
-
-        $supported = self::get_supported_languages($language);
 
         $lang = self::iso_to_posix($language);
 
