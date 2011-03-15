@@ -24,7 +24,7 @@
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-class Autoload
+class Autoloader
 {
 
     /**
