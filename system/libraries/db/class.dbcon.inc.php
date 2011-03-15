@@ -1541,7 +1541,6 @@ class DBCon
         {
             if (is_array($string))
             {
-                require_once("class.output.inc.php");
                 $input = print_r($string, TRUE);
                 $msg = "Wrong input for escape_string()! Array given: $input";
                 Output::error($msg);

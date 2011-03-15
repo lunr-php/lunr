@@ -52,7 +52,6 @@ class Session
     {
         if ($database)
         {
-            require_once("class.sessionmanager.inc.php");
             $this->manager = new SessionManager();
         }
 

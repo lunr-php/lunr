@@ -43,7 +43,6 @@ abstract class Model
      */
     public function __construct($db)
     {
-        require_once("class.dbman.inc.php");
         $this->db = DBMan::get_db_connection($db);
         $this->db_config = $db;
     }

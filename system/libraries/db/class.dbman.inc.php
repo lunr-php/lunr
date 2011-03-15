@@ -47,8 +47,6 @@ class DBMan
      */
     public static function get_db_connection($db, $readonly = TRUE)
     {
-        require_once("class.dbcon.inc.php");
-        require_once("class.query.inc.php");
         if ($readonly === TRUE)
         {
             if (!isset(self::$ro_instance))

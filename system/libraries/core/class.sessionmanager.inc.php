@@ -54,7 +54,6 @@ class SessionManager
             array(&$this, 'gc')
         );
 
-        require_once("model.session.inc.php");
         $this->smodel = new SessionModel();
     }
 

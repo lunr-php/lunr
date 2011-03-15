@@ -70,8 +70,6 @@ class L10n
      */
     public static function set_language($language)
     {
-        require_once("class.m2datetime.inc.php");
-
         $lang = self::iso_to_posix($language);
 
         setcookie('lang', $lang, M2DateTime::delayed_timestamp("+1year"), '/');

@@ -83,7 +83,6 @@ class Query
     {
         if (is_bool($this->query))
         {
-            require_once("class.output.inc.php");
             Output::error("Num rows called on failed query!");
             return 0;
         }

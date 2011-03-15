@@ -35,7 +35,6 @@ class Output
      */
     public static function cli_print($msg)
     {
-        require_once("class.m2datetime.inc.php");
         echo M2DateTime::get_datetime() . ": " . $msg;
     }
 
@@ -67,7 +66,6 @@ class Output
      */
     public static function cli_println($msg)
     {
-        require_once("class.m2datetime.inc.php");
         echo M2DateTime::get_datetime() . ": " . $msg . "\n";
     }
 
@@ -81,7 +79,6 @@ class Output
      */
     public static function error($info, $file = "")
     {
-        require_once("class.m2datetime.inc.php");
         if (isset($_GET['controller']) && isset($_GET['method']))
         {
             if ($file == "")

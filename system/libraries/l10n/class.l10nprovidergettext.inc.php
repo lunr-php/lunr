@@ -69,7 +69,6 @@ class L10nProviderGettext extends L10nProvider
     public function lang($identifier, $context = "")
     {
         global $config;
-        require_once("class.output.inc.php");
         $this->init($this->language);
         if ($context == "")
         {
@@ -113,7 +112,6 @@ class L10nProviderGettext extends L10nProvider
      */
     public function nlang($singular, $plural, $amount, $context = "")
     {
-        require_once("class.output.inc.php");
         $this->init($this->language);
         if ($context == "")
         {
