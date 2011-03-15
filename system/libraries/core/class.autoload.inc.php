@@ -31,7 +31,18 @@ class Autoload
      * The include path used for class lookup
      * @var String
      */
-    private static include_path;
+    private static $include_path;
+
+    /**
+     * List of controller prefixes of abstract controllers
+     * that extend from the base Controller class.
+     * @var array
+     */
+    private static $controllers = array(
+        "web",
+        "scripts",
+        "cli"
+    );
 
     /**
      * Try to load the given class file from the include path
@@ -42,7 +53,36 @@ class Autoload
      */
     public static function load($class)
     {
-
+        if (strpos($class, "Controller") !== FALSE
+            && $class !== "Controller")
+        {
+            $controller = strtolower(str_replace("Controller", "", $class));
+            if (in_array($controller, self::$controllers))
+            {
+                require_once "class.${controller}controller.inc.php";
+            }
+            else
+            {
+                require_once "controller.$controller.inc.php";
+            }
+        }
+        elseif (strpos($class, "Model") !== FALSE
+            && $class !== "Model")
+        {
+            $class = strtolower(str_replace("Model", "", $class));
+            require_once "model.$class.inc.php";
+        }
+        elseif (strpos($class, "View") !== FALSE
+            && $class !== "View")
+        {
+            $class = strtolower(str_replace("View", "", $class));
+            require_once "view.$class.inc.php";
+        }
+        else
+        {
+            $class = strtolower($class);
+            require_once "class.$class.inc.php";
+        }
     }
 
     /**
@@ -54,7 +94,22 @@ class Autoload
      */
     public static function add_include_path($path)
     {
+        set_include_path(
+            get_include_path() . ":" .
+            $path
+        );
+    }
 
+    /**
+     * register a project specific controller
+     *
+     * @param String $controller Controller Prefix
+     *
+     * @return void
+     */
+    public static function register_project_controller($controller)
+    {
+        self::$controllers[] = strtolower($controller);
     }
 
 }
