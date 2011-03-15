@@ -55,13 +55,6 @@ abstract class WebController extends Controller
         return "<h1>Not implemented</h1>";
     }
 
-    /**
-     * Default method as defined in conf.application.inc.php
-     *
-     * @return void
-     */
-    abstract public function index();
-
 }
 
 ?>
