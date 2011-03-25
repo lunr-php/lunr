@@ -43,7 +43,7 @@ abstract class View
     protected $controller;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Controller &$controller Reference to the controller
      */
@@ -54,7 +54,7 @@ abstract class View
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -62,15 +62,16 @@ abstract class View
     }
 
     /**
-     * Build the actual display and print it
+     * Build the actual display and print it.
      *
      * @return void
      */
     abstract public function print_page();
 
     /**
-     * Add data to the view, which is then accessible from within
-     * the print_page() function.
+     * Add data to the view.
+     *
+     * This is then accessible from within the print_page() function.
      *
      * @param Mixed $key    Identifier for the data
      * @param Mixed &$value The data
@@ -83,7 +84,7 @@ abstract class View
     }
 
     /**
-     * Set the localization provider that should be used by the view
+     * Set the localization provider that should be used by the view.
      *
      * @param L10nProvider &$provider Reference to the localization provider
      *
@@ -95,7 +96,7 @@ abstract class View
     }
 
     /**
-     * Return base_url or attach given path to base_url
+     * Return base_url or attach given path to base_url.
      *
      * @param String $path Path that should be attached to base_url (optional)
      *
@@ -108,7 +109,7 @@ abstract class View
     }
 
     /**
-     * Return path to statics or attach given path to it
+     * Return path to statics or attach given path to it.
      *
      * @param String $path Path that should be attached to the statics path
      *                     (optional)
@@ -121,7 +122,7 @@ abstract class View
     }
 
     /**
-     * Return an alternating (eg. odd/even) CSS class name
+     * Return an alternating (eg. odd/even) CSS class name.
      *
      * @param String  $basename         CSS base class name (without
      *                                  ending underscore or suffix)
