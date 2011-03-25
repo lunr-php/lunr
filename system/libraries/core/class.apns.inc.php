@@ -36,7 +36,7 @@ class APNS
     private $error;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -55,7 +55,7 @@ class APNS
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -63,7 +63,7 @@ class APNS
     }
 
     /**
-     * Send a push notification to device based on the given device token
+     * Send a push notification to device based on the given device token.
      *
      * @param String $device_token The device token which identifies the device
      * @param Array  $payload      The payload that'll be sent already
@@ -157,8 +157,9 @@ class APNS
     }
 
     /**
-    * Get a list with the devices that have no longer the application installed
-    * so we shouldn't keep sending them push notifications. Otherwise Steve Jobs
+    * Get a list with the devices that have no longer the application installed.
+    *
+    * We shouldn't keep sending them push notifications, otherwise Steve Jobs
     * will become angry and will rape your family and kill your pets!!!
     *
     * WARNING: NOT FINISHED (NEITHER USED) YET!
@@ -210,7 +211,7 @@ class APNS
     }
 
     /**
-    * Reads the response from APNS and logs the error accordingly
+    * Reads the response from APNS and logs the error accordingly.
     *
     * @param String $response The response from APNS
     *
@@ -227,6 +228,7 @@ class APNS
             . $this->error[$response[1]], $config['apns']['log']
         );
     }
+
 }
 
 ?>
