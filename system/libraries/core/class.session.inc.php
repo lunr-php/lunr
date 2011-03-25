@@ -43,7 +43,7 @@ class Session
     private $started;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Boolean $database Whether to use the database based
      *                          SessionManager class or not
@@ -64,7 +64,7 @@ class Session
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -78,7 +78,7 @@ class Session
     }
 
     /**
-     * Store a key->value pair in the current session
+     * Store a key->value pair in the current session.
      *
      * @param mixed $key   Identifier
      * @param mixed $value Value
@@ -94,7 +94,7 @@ class Session
     }
 
     /**
-     * Remove a key->value pair from the current session
+     * Remove a key->value pair from the current session.
      *
      * @param mixed $key Identifier
      *
@@ -109,7 +109,7 @@ class Session
     }
 
     /**
-     * Get a key->value pair from the current session
+     * Get a key->value pair from the current session.
      *
      * @param mixed $key Identifier
      *
@@ -128,7 +128,7 @@ class Session
     }
 
     /**
-     * Get the current session ID
+     * Get the current session ID.
      *
      * @return String $session_id
      */
@@ -138,7 +138,7 @@ class Session
     }
 
     /**
-     * Replace the current sessionid with a new one
+     * Replace the current sessionid with a new one.
      *
      * @return String $session_id
      */
@@ -149,7 +149,7 @@ class Session
     }
 
     /**
-     * Start a new session or continure an existing one
+     * Start a new session or continure an existing one.
      *
      * @param String $id Predefined Session ID
      *
@@ -170,7 +170,7 @@ class Session
     }
 
     /**
-     * Close the session and write data
+     * Close the session and write data.
      *
      * @return void
      */
@@ -182,7 +182,7 @@ class Session
     }
 
     /**
-     * End the currently active session
+     * End the currently active session.
      *
      * @return void
      */
