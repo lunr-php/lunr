@@ -31,8 +31,7 @@ class L10nFactory
     private static $lprovider;
 
     /**
-     * This method returns an object with the appropriate localization
-     * implementation provider.
+     * Returns an object with the appropriate localization implementation provider.
      *
      * @param String $provider The localization implementation requested
      * @param String $language POSIX locale definition
@@ -68,6 +67,7 @@ class L10nFactory
                 break;
         }
     }
+
 }
 
 ?>
