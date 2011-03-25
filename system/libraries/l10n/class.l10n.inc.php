@@ -31,7 +31,8 @@ class L10n
     private static $languages;
 
     /**
-     * Get list of supported languages from the filesystem
+     * Get list of supported languages from the filesystem.
+     *
      * Storing the values in a static attribute ensures the
      * filesystem is never parsed more than once per request
      *
@@ -60,7 +61,7 @@ class L10n
     }
 
     /**
-     * Set a cookie with the language information used for displaying strings
+     * Set a cookie with the language information used for displaying strings.
      *
      * @param String $language The language to set
      *
@@ -78,7 +79,7 @@ class L10n
     }
 
    /**
-    * Convert a language (if supported) from ISO 639-1 to POSIC locale format
+    * Convert a language (if supported) from ISO 639-1 to POSIC locale format.
     *
     * @param String $language The language to convert on ISO 639-1 format
     *
@@ -92,7 +93,7 @@ class L10n
 
         foreach ($supported as $locale)
         {
-            if (locale_filter_matches($locale, $language, false))
+            if (locale_filter_matches($locale, $language, FALSE))
             {
                 return $locale;
             }
