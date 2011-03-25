@@ -72,22 +72,22 @@ class CliParser
     private $error;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $shortopts List of supported short arguments
      * @param array $longopts  List of supported long arguments (optional)
      */
-    public function __construct($shortopts, $longopts="")
+    public function __construct($shortopts, $longopts = "")
     {
         $this->short = $shortopts;
         $this->long = $longopts;
         $this->checked = array();
         $this->ast = array();
-        $this->error = false;
+        $this->error = FALSE;
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -100,7 +100,7 @@ class CliParser
     }
 
     /**
-     * Parse given arguments
+     * Parse given arguments.
      *
      * @param array $args The arguments given on command line
      *
@@ -120,7 +120,7 @@ class CliParser
     }
 
     /**
-     * Parse error information
+     * Parse error information.
      *
      * @return boolean $error Whether there was a parse error or not
      */
@@ -130,7 +130,7 @@ class CliParser
     }
 
     /**
-     * Check for command line arguments
+     * Check for command line arguments.
      *
      * @param String  $opt      The command line argument
      * @param Integer $index    The index of the argument within $this->args
@@ -168,11 +168,11 @@ class CliParser
                 echo "Superfluos argument: $opt\n";
             }
         }
-        return false;
+        return FALSE;
     }
 
     /**
-     * Check whether the given argument is a valid short option
+     * Check whether the given argument is a valid short option.
      *
      * @param String  $opt   The command line argument
      * @param Integer $index The index of the argument within $this->args
@@ -182,7 +182,7 @@ class CliParser
     private function is_valid($opt,$index)
     {
         $pos=strpos($this->short, $opt);
-        if($pos!==false)
+        if($pos!==FALSE)
         {
             $this->ast[$opt] = array();
             return $this->check_argument(
@@ -195,13 +195,13 @@ class CliParser
         else
         {
             echo "Invalid parameter given: -" . $opt . "\n";
-            $this->error = true;
+            $this->error = TRUE;
         }
-        return false;
+        return FALSE;
     }
 
     /**
-     * Check whether the given argument is a valid long option
+     * Check whether the given argument is a valid long option.
      *
      * @param String  $opt   The command line argument
      * @param Integer $index The index of the argument within $this->args
@@ -210,20 +210,20 @@ class CliParser
      */
     private function is_valid_long($opt, $index)
     {
-        $match = false;
+        $match = FALSE;
         foreach($this->long as $key => $arg)
         {
             if($opt==substr($arg, 0, strlen($opt)))
             {
                 if (strlen($arg) == strlen($opt))
                 {
-                    $match = true;
+                    $match = TRUE;
                     $args = $key;
                 }
                 elseif ($arg{strlen($opt)} == ":"
                     || $arg{strlen($opt)} == ";")
                 {
-                    $match = true;
+                    $match = TRUE;
                     $args = $key;
                 }
             }
@@ -241,14 +241,13 @@ class CliParser
         else
         {
             echo "Invalid parameter given: --" . $opt . "\n";
-            $this->error = true;
-            return false;
+            $this->error = TRUE;
+            return FALSE;
         }
     }
 
     /**
-     * Check whether the given string is a valid argument for either a short
-     * or long option
+     * Check whether the given string is a valid argument.
      *
      * @param String  $opt   The command line argument
      * @param Integer $index The index of the argument within $this->args
@@ -284,24 +283,24 @@ class CliParser
                             }
                             else
                             {
-                                return true;
+                                return TRUE;
                             }
                         }
                         else
                         {
-                            return true;
+                            return TRUE;
                         }
                     }
                     else
                     {
                         echo "Missing argument for -" . $opt . "\n";
-                        $this->error = true;
+                        $this->error = TRUE;
                     }
                 }
                 else
                 {
                     echo "Missing argument for -" . $opt . "\n";
-                    $this->error = true;
+                    $this->error = TRUE;
                 }
             }
             elseif($a{$pos+1} == ";")
@@ -326,7 +325,7 @@ class CliParser
                             }
                             else
                             {
-                                return true;
+                                return TRUE;
                             }
                         }
                     }
@@ -346,10 +345,10 @@ class CliParser
                 {
                     echo "Superfluos argument: " . $this->args[$next] . "\n";
                 }
-                return true;
+                return TRUE;
             }
         }
-        return false;
+        return FALSE;
     }
 
 }
