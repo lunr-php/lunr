@@ -97,5 +97,10 @@
         </exec>
     </target>
 
+    <target name="l10n"
+            description="Generate gettext language files">
+        <exec executable="l10n/gen_l10n.sh" />
+    </target>
+
     <target name="build" depends="clean,pdepend,phpmd,phpunit,phpcs,phpcpd,phpdoc,phploc,phpcb" />
 </project>
