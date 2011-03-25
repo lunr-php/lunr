@@ -20,7 +20,8 @@ class L10nTest extends PHPUnit_Framework_TestCase
         {
             while (FALSE !== ($file = readdir($handle)))
             {
-                if ($file != "." && $file != ".." && $file != ".gitignore")
+                $path = $config['l10n']['locales'] . "/$file";
+                if ($file != "." && $file != ".." && is_dir($path))
                 {
                     $this->languages[] = $file;
                 }
