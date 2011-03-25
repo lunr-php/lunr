@@ -34,19 +34,19 @@ abstract class L10nProvider
     protected $language;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param String $language POSIX locale definition
      */
     abstract public function __construct($language);
 
     /**
-     * Destructor
+     * Destructor.
      */
     abstract public function __destruct();
 
     /**
-     * Initialization method for setting up the provider
+     * Initialization method for setting up the provider.
      *
      * @param String $language POSIX locale definition
      *
@@ -55,7 +55,7 @@ abstract class L10nProvider
     abstract protected function init($language);
 
     /**
-     * Get the language the provider has been initialized with
+     * Get the language the provider has been initialized with.
      *
      * @return String $string Provider language
      */
@@ -65,7 +65,7 @@ abstract class L10nProvider
     }
 
     /**
-     * Return a translated string
+     * Return a translated string.
      *
      * @param String $identifier Identifier for the requested string
      * @param String $context    Context information fot the requested string
@@ -75,7 +75,7 @@ abstract class L10nProvider
     abstract public function lang($identifier, $context = "");
 
     /**
-     * Return a translated string, with proper singular/plural form
+     * Return a translated string, with proper singular/plural form.
      *
      * @param String  $singular Identifier for the singular version of the
      *                          string
