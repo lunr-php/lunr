@@ -62,7 +62,7 @@ class Mail
     private $subject;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -75,7 +75,7 @@ class Mail
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -88,7 +88,7 @@ class Mail
     }
 
     /**
-     * Validate a given input String for a correct email format
+     * Validate a given input String for a correct email format.
      *
      * @param String $email Email address to validate
      *
@@ -111,7 +111,7 @@ class Mail
     }
 
     /**
-     * Set sender email address
+     * Set sender email address.
      *
      * @param String $from Email address
      *
@@ -123,7 +123,7 @@ class Mail
     }
 
     /**
-     * Add an email address to the "TO:" header
+     * Add an email address to the "TO:" header.
      *
      * @param String $to Email address
      *
@@ -135,7 +135,7 @@ class Mail
     }
 
     /**
-     * Add an email address to the "CC:" header
+     * Add an email address to the "CC:" header.
      *
      * @param String $cc Email address
      *
@@ -147,7 +147,7 @@ class Mail
     }
 
     /**
-     * Add an email address to the "BCC:" header
+     * Add an email address to the "BCC:" header.
      *
      * @param String $bcc Email address
      *
@@ -159,7 +159,7 @@ class Mail
     }
 
     /**
-     * Define the text that should be sent over email
+     * Define the text that should be sent over email.
      *
      * @param String $msg The message
      *
@@ -171,7 +171,7 @@ class Mail
     }
 
     /**
-     * Define the subject of the email
+     * Define the subject of the email.
      *
      * @param String $subject The subject
      *
@@ -183,7 +183,7 @@ class Mail
     }
 
     /**
-     * Send email
+     * Send email.
      *
      * @return Boolean $return TRUE on success, FALSE if something went wrong
      */
@@ -210,7 +210,8 @@ class Mail
     }
 
     /**
-     * Generate Non-Default headers for sending the email
+     * Generate Non-Default headers for sending the email.
+     *
      * (FROM, CC, BCC, X-Mailer)
      *
      * @return mixed $header Headers on success, FALSE on failure
