@@ -37,7 +37,7 @@ abstract class Model
     private $db_config;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $db The database configuration parameters
      */
@@ -49,7 +49,7 @@ abstract class Model
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -57,7 +57,7 @@ abstract class Model
     }
 
     /**
-     * Get write access for the database
+     * Get write access for the database.
      *
      * @return Boolean $return TRUE if successful, FALSE if there's already a
      *                         connection established
@@ -68,7 +68,7 @@ abstract class Model
     }
 
     /**
-     * Disconnect from the database
+     * Disconnect from the database.
      *
      * @return void
      */
