@@ -27,7 +27,7 @@ class M2DateTime
 {
 
     /**
-     * Return today's date (YYYY-MM-DD)
+     * Return today's date (YYYY-MM-DD).
      *
      * @return String Today's date
      */
@@ -37,7 +37,7 @@ class M2DateTime
     }
 
     /**
-     * Return yesterday's date (YYYY-MM-DD)
+     * Return yesterday's date (YYYY-MM-DD).
      *
      * @return String Tomorrow's date
      */
@@ -47,7 +47,7 @@ class M2DateTime
     }
 
     /**
-     * Return tomorrow's date (YYYY-MM-DD)
+     * Return tomorrow's date (YYYY-MM-DD).
      *
      * @return String Tomorrow's date
      */
@@ -57,7 +57,7 @@ class M2DateTime
     }
 
     /**
-     * Return a date of a certain timeframe in the past/future
+     * Return a date of a certain timeframe in the past/future.
      *
      * @param String  $delay     Definition for a timeframe
      *                           ("+1 day", "-10 minutes")
@@ -75,7 +75,7 @@ class M2DateTime
     }
 
     /**
-     * Return a timestamp of a certain timeframe in the past/future
+     * Return a timestamp of a certain timeframe in the past/future.
      *
      * @param String  $delay     Definition for a timeframe
      *                           ("+1 day", "-10 minutes")
@@ -93,7 +93,7 @@ class M2DateTime
     }
 
     /**
-     * Return a delayed datetime string
+     * Return a delayed datetime string.
      *
      * @param String  $delay     Definition for a timeframe
      *                           ("+1 day", "-10 minutes")
@@ -111,7 +111,7 @@ class M2DateTime
     }
 
     /**
-     * Return the current time (HH:MM:SS)
+     * Return the current time (HH:MM:SS).
      *
      * @return String current time
      */
@@ -121,7 +121,7 @@ class M2DateTime
     }
 
     /**
-     * Returns a MySQL compatible date definition
+     * Returns a MySQL compatible date definition.
      *
      * @param Integer $timestamp PHP-like Unix Timestamp
      *
@@ -133,7 +133,7 @@ class M2DateTime
     }
 
     /**
-     * Returns a MySQL compatible time definition
+     * Returns a MySQL compatible time definition.
      *
      * @param Integer $timestamp PHP-like Unix Timestamp
      *
@@ -145,7 +145,7 @@ class M2DateTime
     }
 
     /**
-     * Returns a MySQL compatible Date & Time definition
+     * Returns a MySQL compatible Date & Time definition.
      *
      * @param Integer $timestamp PHP-like Unix Timestamp (optional)
      *
@@ -164,7 +164,7 @@ class M2DateTime
     }
 
     /**
-     * Return a date formatted as "DD MMM" (eg 05 Dec)
+     * Return a date formatted as "DD MMM" (eg 05 Dec).
      *
      * @param Integer $timestamp PHP-like Unix Timestamp (optional)
      * @param String  $locale    The locale that should be used for the month
@@ -186,7 +186,7 @@ class M2DateTime
     }
 
     /**
-     * Checks whether a given input string is a valid time definition
+     * Checks whether a given input string is a valid time definition.
      *
      * @param String $string Input String
      *
@@ -206,7 +206,7 @@ class M2DateTime
     }
 
     /**
-     * Checks whether a given input string is a valid date definition
+     * Checks whether a given input string is a valid date definition.
      *
      * @param String $string Input String
      *
@@ -229,8 +229,9 @@ class M2DateTime
     }
 
     /**
-     * Compares two datetime strings and returns smaller or bigger
-     * This function can be used for PHP's sorting functions
+     * Compares two datetime strings and returns smaller or bigger.
+     *
+     * This function can be used for PHP's sorting functions.
      *
      * @param String $a DateTime String 1
      * @param String $b DateTime String 2
@@ -251,7 +252,6 @@ class M2DateTime
             return ($a < $b) ? -1 : 1;
         }
     }
-
 
 }
 
