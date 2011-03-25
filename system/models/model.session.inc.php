@@ -26,7 +26,7 @@ class SessionModel extends Model
 {
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -36,7 +36,7 @@ class SessionModel extends Model
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -44,7 +44,7 @@ class SessionModel extends Model
     }
 
     /**
-     * Read session data from the database
+     * Read session data from the database.
      *
      * @param String $id Session ID
      *
@@ -74,7 +74,7 @@ class SessionModel extends Model
     }
 
     /**
-     * Save session data into the database
+     * Save session data into the database.
      *
      * @param String  $id           Session ID
      * @param String  $session_data Session data
@@ -106,7 +106,7 @@ class SessionModel extends Model
     }
 
     /**
-     * Remove a no-longer active session
+     * Remove a no-longer active session.
      *
      * @param String $id Session ID
      *
@@ -139,7 +139,7 @@ class SessionModel extends Model
     }
 
     /**
-     * Remove expired sessions
+     * Remove expired sessions.
      *
      * @return void
      */
