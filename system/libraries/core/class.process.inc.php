@@ -27,7 +27,7 @@ class Process
 {
 
     /**
-     * Run a system command from inside PHP
+     * Run a system command from inside PHP.
      *
      * @param String  $cmd            The command to run
      * @param String  $out            The location where output should
@@ -60,7 +60,7 @@ class Process
     }
 
     /**
-     * Run a system command from inside PHP in background
+     * Run a system command from inside PHP in background.
      *
      * @param String  $cmd            The command to run
      * @param String  $out            The location where output should
@@ -99,7 +99,8 @@ class Process
     }
 
     /**
-     * Start multiple parallel child processes
+     * Start multiple parallel child processes.
+     *
      * WARNING: make sure to not reuse an already existing DB-Connection
      * established by the parent in the children. Best would be to not
      * establish a DB-Connection in the parent at all.
