@@ -27,7 +27,7 @@ class Output
 {
 
     /**
-     * Print given message immediatly
+     * Print given message immediatly.
      *
      * @param String $msg Message to print
      *
@@ -40,7 +40,7 @@ class Output
     }
 
     /**
-     * Print status information ([ok] or [failed])
+     * Print status information ([ok] or [failed]).
      *
      * @param Boolean $bool Whether to print a good or bad status
      *
@@ -59,7 +59,7 @@ class Output
     }
 
     /**
-     * Print given message immediatly
+     * Print given message immediatly.
      *
      * @param String $msg Message to print
      *
@@ -72,7 +72,7 @@ class Output
     }
 
     /**
-     * Trigger a PHP error
+     * Trigger a PHP error.
      *
      * @param String $info The error string that should be printed
      * @param String $file The log file the error should be logged to (optional)
