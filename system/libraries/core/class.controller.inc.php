@@ -25,7 +25,7 @@ abstract class Controller
 {
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -33,7 +33,7 @@ abstract class Controller
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -41,7 +41,7 @@ abstract class Controller
     }
 
     /**
-     * Handle unimplemented calls
+     * Handle unimplemented calls.
      *
      * @param String $name      Method name
      * @param array  $arguments Arguments passed to the method
@@ -54,7 +54,7 @@ abstract class Controller
     }
 
     /**
-     * Default method as defined in conf.application.inc.php
+     * Default method as defined in conf.application.inc.php.
      *
      * @return void
      */
