@@ -38,7 +38,7 @@ class DBMan
     private static $rw_instance;
 
     /**
-     * Return an instance of dbcon
+     * Return an instance of dbcon.
      *
      * @param array   $db       Database configuration values
      * @param Boolean $readonly Whether to return a readonly connection or not
