@@ -70,7 +70,7 @@ class Pagination{
     private $buttons;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -98,7 +98,7 @@ class Pagination{
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -114,8 +114,9 @@ class Pagination{
     }
 
     /**
-     * Initializes the Pagination, calculates number of pages and builds the
-     * Pagination
+     * Initializes the Pagination.
+     *
+     * calculates number of pages and builds the Pagination
      *
      * @param array $config The configuration parameters for the Pagination
      *                      The array keys and values data types are the
@@ -208,8 +209,9 @@ class Pagination{
     }
 
     /**
-     * Creates the cursors that will link to previous pages, also
-     * controlling the visibility of first and previous buttons
+     * Creates the cursors that will link to previous pages.
+     *
+     * Also controlling the visibility of first and previous buttons.
      *
      * @param Integer $amount The amount of previous pages
      *
@@ -236,8 +238,9 @@ class Pagination{
     }
 
     /**
-     * Creates the cursors that will link to next pages, also controlling
-     * the visibility of last and next buttons
+     * Creates the cursors that will link to next pages.
+     *
+     * Also controlling the visibility of last and next buttons
      *
      * @param Integer $amount The amount of next pages
      *
@@ -264,7 +267,7 @@ class Pagination{
     }
 
     /**
-     * Build a special pagination button
+     * Build a special pagination button.
      *
      * @param String $type ENUM: previous|next|first|last
      *
@@ -310,7 +313,7 @@ class Pagination{
     }
 
     /**
-     * Builds the Pagination html using the following template:
+     * Builds the Pagination html using the following template.
      *
      * <ul>
      * <li>[<<]   first button (enabled or disabled)</li>
@@ -397,6 +400,7 @@ class Pagination{
 
         return $html;
     }
+
 }
 
 ?>
