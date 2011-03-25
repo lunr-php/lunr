@@ -27,7 +27,7 @@ abstract class WebController extends Controller
 {
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -35,7 +35,7 @@ abstract class WebController extends Controller
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -43,7 +43,7 @@ abstract class WebController extends Controller
     }
 
     /**
-     * Handle unimplemented calls
+     * Handle unimplemented calls.
      *
      * @param String $name      Method name
      * @param array  $arguments Arguments passed to the method
