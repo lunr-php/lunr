@@ -157,8 +157,9 @@ class DBCon
     private $gen_uuid_hex;
 
     /**
-     * Constructor
-     * automatically sets up mysql server-vars
+     * Constructor.
+     *
+     * Automatically sets up mysql server-vars
      *
      * @param array   $db       Database access information
      * @param Boolean $readonly Whether the database access should
@@ -198,7 +199,8 @@ class DBCon
     }
 
     /**
-     * Destructor
+     * Destructor.
+     *
      * closes database connection if there is still one established
      */
     public function __destruct()
@@ -235,7 +237,7 @@ class DBCon
     }
 
     /**
-     * Establishes a connection to the defined mysql-server
+     * Establishes a connection to the defined mysql-server.
      *
      * @return void
      */
@@ -271,7 +273,7 @@ class DBCon
     }
 
     /**
-     * Disconnects from mysql-server
+     * Disconnects from mysql-server.
      *
      * @return void
      */
@@ -285,7 +287,7 @@ class DBCon
     }
 
     /**
-     * Returns last mysql error
+     * Returns last mysql error.
      *
      * @return String Error message
      */
@@ -295,7 +297,7 @@ class DBCon
     }
 
     /**
-     * Returns last mysql error number
+     * Returns last mysql error number.
      *
      * @return Integer Error number
      */
@@ -305,7 +307,7 @@ class DBCon
     }
 
     /**
-     * Returns the last executed query
+     * Returns the last executed query.
      *
      * @return String SQL Query
      */
@@ -315,7 +317,7 @@ class DBCon
     }
 
     /**
-     * Returns the id given for the last insert statement
+     * Returns the id given for the last insert statement.
      *
      * @return Mixed Insert ID
      */
@@ -325,7 +327,7 @@ class DBCon
     }
 
     /**
-     * Get the calculated amount of total rows for the last executed query
+     * Get the calculated amount of total rows for the last executed query.
      *
      * @return mixed $return The amount of rows on success, False on failure
      */
@@ -344,8 +346,9 @@ class DBCon
     }
 
     /**
-     * Return the preliminary query, that would be executed by query() at
-     * this point
+     * Return the preliminary query.
+     *
+     * Query like it would be executed by query() at this point
      * **DEBUG**
      *
      * @param String $from Where to get the data from
@@ -405,7 +408,7 @@ class DBCon
     }
 
     /**
-     * Executes a defined SQL query
+     * Executes a defined SQL query.
      *
      * @param String  $sql_command Predefined SQL query
      * @param Boolean $return      Return a Query Result
@@ -413,7 +416,7 @@ class DBCon
      * @return Mixed $result Query Result, TRUE on successful query or
      *                       FALSE on connection failure/failed query
      */
-    public function query($sql_command, $return = true)
+    public function query($sql_command, $return = TRUE)
     {
         if (!$this->connected)
         {
@@ -468,7 +471,7 @@ class DBCon
     }
 
     /**
-     * Execute the defined SQL query and return the result set
+     * Execute the defined SQL query and return the result set.
      *
      * @param String $from Where to get the data from
      *
@@ -555,7 +558,7 @@ class DBCon
     }
 
     /**
-     * Define a SELECT statement
+     * Define a SELECT statement.
      *
      * @param String $select The columns to select
      * @param String $escape Whether to escape the select statement or not.
@@ -585,8 +588,10 @@ class DBCon
     }
 
     /**
-     * Select columns as hex values, if not new name assignment done
-     * it returns as a column name given (without HEX() surrounding)
+     * Select columns as hex values.
+     *
+     * If no column name is specified the original column name minus
+     * the surrounding HEX() is taken.
      *
      * @param String $select The columns to select
      * @param String $escape Whether to escape the select statement or not.
@@ -617,6 +622,7 @@ class DBCon
 
     /**
      * Define a special SELECT statement.
+     *
      * WARNING: This overwrites previously defined select criterias
      *
      * @param String $select  The columns to select
@@ -641,7 +647,7 @@ class DBCon
     }
 
     /**
-     * SELECT a row for a subsequent UPDATE, locking the row
+     * SELECT a row for a subsequent UPDATE, locking the row.
      *
      * @param String $select The columns to select
      * @param String $escape Whether to escape the select statement or not.
@@ -659,7 +665,7 @@ class DBCon
     }
 
     /**
-     * Define a JOIN clause
+     * Define a JOIN clause.
      *
      * @param String $table The table name to join with
      * @param String $on    Base information on what the join should be done
@@ -675,7 +681,7 @@ class DBCon
     }
 
     /**
-     * Start a WHERE clause group
+     * Start a WHERE clause group.
      *
      * @param String $connector Logical connector to use
      *                          (optional, empty by default)
@@ -696,7 +702,7 @@ class DBCon
     }
 
     /**
-     * End a where group
+     * End a where group.
      *
      * @return void
      */
@@ -706,7 +712,7 @@ class DBCon
     }
 
     /**
-     * Define a WHERE clause
+     * Define a WHERE clause.
      *
      * @param String $col      Column name
      * @param String $val      Value that should be matched
@@ -756,7 +762,7 @@ class DBCon
     }
 
     /**
-     * Define a WHERE clause, which deals with hex->binary
+     * Define a WHERE clause, which deals with hex->binary.
      *
      * @param String $col      Column name
      * @param String $val      Value that should be matched
@@ -799,7 +805,7 @@ class DBCon
     }
 
     /**
-     * Define a OR WHERE clause
+     * Define a OR WHERE clause.
      *
      * @param String $col      Column name
      * @param String $val      Value that should be matched
@@ -850,7 +856,7 @@ class DBCon
     }
 
     /**
-     * Define a OR WHERE clause, which deals with hex->binary
+     * Define a OR WHERE clause, which deals with hex->binary.
      *
      * @param String $col      Column name
      * @param String $val      Value that should be matched
@@ -892,7 +898,7 @@ class DBCon
     }
 
     /**
-     * Define a LIKE clause
+     * Define a LIKE clause.
      *
      * @param String $col     Column name
      * @param String $val     Value that should be matched
@@ -949,7 +955,7 @@ class DBCon
     }
 
     /**
-     * Define an alternative LIKE clause
+     * Define an alternative LIKE clause.
      *
      * @param String $col     Column name
      * @param String $val     Value that should be matched
@@ -1006,7 +1012,7 @@ class DBCon
     }
 
     /**
-     * Define a NOT LIKE clause
+     * Define a NOT LIKE clause.
      *
      * @param String $col     Column name
      * @param String $val     Value that should be matched
@@ -1063,7 +1069,7 @@ class DBCon
     }
 
     /**
-     * Define a WHERE IN clause
+     * Define a WHERE IN clause.
      *
      * @param String $col    Column name
      * @param Mixed  $values Values that should be matched
@@ -1090,7 +1096,7 @@ class DBCon
     }
 
     /**
-     * Define a WHERE IN clause that deals with hex->binary conversion
+     * Define a WHERE IN clause that deals with hex->binary conversion.
      *
      * @param String $col    Column name
      * @param Mixed  $values Values that should be matched
@@ -1130,7 +1136,7 @@ class DBCon
     }
 
     /**
-     * Define a ORDER BY clause
+     * Define a ORDER BY clause.
      *
      * @param String $col   Column name
      * @param String $order Order ASCending or DESCending
@@ -1151,7 +1157,7 @@ class DBCon
     }
 
     /**
-     * Define a GROUP BY clause
+     * Define a GROUP BY clause.
      *
      * @param String $group Column to group
      *
@@ -1171,7 +1177,7 @@ class DBCon
     }
 
     /**
-     * Define a LIMIT clause
+     * Define a LIMIT clause.
      *
      * @param String $count The amount of elements to retrieve
      * @param String $start Start retrieving elements from a sepcific index
@@ -1191,7 +1197,7 @@ class DBCon
     }
 
     /**
-     * Define a UNION statement
+     * Define a UNION statement.
      *
      * @param String $from table name to select from for the first query
      *
@@ -1208,7 +1214,7 @@ class DBCon
     }
 
     /**
-     * Define an INSERT statement
+     * Define an INSERT statement.
      *
      * @param String $table The table to insert into
      * @param Mixed  $data  The data to insert
@@ -1233,7 +1239,7 @@ class DBCon
     }
 
     /**
-     * Define a REPLACE statement
+     * Define a REPLACE statement.
      *
      * @param String $table The table to insert into
      * @param Mixed  $data  The data to insert
@@ -1258,7 +1264,7 @@ class DBCon
     }
 
     /**
-     * Define an UPDATE statement
+     * Define an UPDATE statement.
      *
      * @param String $table The table to update
      * @param Mixed  $data  The updated data
@@ -1291,7 +1297,7 @@ class DBCon
     }
 
     /**
-     * Define a DELETE statement
+     * Define a DELETE statement.
      *
      * @param String $table The table to update
      *
@@ -1311,7 +1317,7 @@ class DBCon
     }
 
     /**
-     * Start Transaction mode by disabling autocommit
+     * Start Transaction mode by disabling autocommit.
      *
      * @return Boolean True on success and false on failure
      */
@@ -1334,7 +1340,7 @@ class DBCon
     }
 
     /**
-     * Commit previous queries of a transaction
+     * Commit previous queries of a transaction.
      *
      * @return Boolean True on success and False on failure
      */
@@ -1356,8 +1362,9 @@ class DBCon
     }
 
     /**
-     * Rollback to the state of the database of the last commit or
-     * before the begin of the transaction
+     * Rollback to the state of the database.
+     *
+     * This is usually the beginning of the transaction.
      *
      * @return Boolean True on success and False on failure
      */
@@ -1379,7 +1386,7 @@ class DBCon
     }
 
     /**
-     * End Transaction, commit remaining uncommitted queries
+     * End Transaction, commit remaining uncommitted queries.
      *
      * @return Boolean True on success and False on failure
      */
@@ -1397,7 +1404,7 @@ class DBCon
     }
 
     /**
-     * Change the default database for the current connection
+     * Change the default database for the current connection.
      *
      * @param String $db New default database
      *
@@ -1421,7 +1428,7 @@ class DBCon
     }
 
     /**
-     * Delete a view in the database
+     * Delete a view in the database.
      *
      * @param String $view Name of the view
      *
@@ -1441,7 +1448,7 @@ class DBCon
     }
 
     /**
-     * Create a view in the database
+     * Create a view in the database.
      *
      * @param String $name Name of the view
      * @param String $from Name of the first table used in the from clause for
@@ -1464,8 +1471,7 @@ class DBCon
     }
 
     /**
-     * Prepare, escape, error-check the values we are about to use in a
-     * SQL query
+     * Prepare, escape, error-check the values we are about to use.
      *
      * @param Mixed  $data The data to prepare
      * @param String $type Whether we prepare 'keys' or 'values'
@@ -1519,7 +1525,7 @@ class DBCon
     }
 
     /**
-     * Escape a string to be used in a SQL query
+     * Escape a string to be used in a SQL query.
      *
      * @param String $string The string to escape
      *
@@ -1550,7 +1556,7 @@ class DBCon
     }
 
     /**
-     * Escape column names
+     * Escape column names.
      *
      * @param String $col Column
      *
@@ -1576,7 +1582,7 @@ class DBCon
     }
 
     /**
-     * Escape column names for statements using the "AS" operator
+     * Escape column names for statements using the "AS" operator.
      *
      * @param String  $cols Column(s)
      * @param Boolean $hex  Whether we should consider the values
@@ -1640,7 +1646,7 @@ class DBCon
     }
 
     /**
-     * Escape column names for "ON"-using statements
+     * Escape column names for "ON"-using statements.
      *
      * @param String $string comparison string
      *
@@ -1655,7 +1661,7 @@ class DBCon
     }
 
      /**
-     * Generate and return UUID
+     * Generate and return UUID.
      *
      * @return Mixed $return hex UUID on success, FALSE on failure
      */
@@ -1672,6 +1678,7 @@ class DBCon
             return FALSE;
         }
     }
+
 }
 
 ?>
