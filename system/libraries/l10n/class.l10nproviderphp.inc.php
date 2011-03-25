@@ -26,7 +26,7 @@ class L10nProviderPHP extends L10nProvider
 {
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param String $language POSIX locale definition
      */
@@ -36,7 +36,7 @@ class L10nProviderPHP extends L10nProvider
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -44,7 +44,7 @@ class L10nProviderPHP extends L10nProvider
     }
 
     /**
-     * Initialization method for setting up the provider
+     * Initialization method for setting up the provider.
      *
      * @param String $language POSIX locale definition
      *
@@ -56,7 +56,7 @@ class L10nProviderPHP extends L10nProvider
     }
 
     /**
-     * Return a translated string
+     * Return a translated string.
      *
      * @param String $identifier Identifier for the requested string
      * @param String $context    Context information fot the requested string
@@ -69,7 +69,7 @@ class L10nProviderPHP extends L10nProvider
     }
 
     /**
-     * Return a translated string, with proper singular/plural form
+     * Return a translated string, with proper singular/plural form.
      *
      * @param String  $singular Identifier for the singular version of
      *                          the string
