@@ -27,7 +27,7 @@ abstract class CliController extends Controller
 {
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -35,7 +35,7 @@ abstract class CliController extends Controller
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -43,7 +43,7 @@ abstract class CliController extends Controller
     }
 
     /**
-     * Handle unimplemented calls
+     * Handle unimplemented calls.
      *
      * @param String $name      Method name
      * @param array  $arguments Arguments passed to the method
@@ -56,7 +56,7 @@ abstract class CliController extends Controller
     }
 
     /**
-     * Default method as defined in conf.application.inc.php
+     * Default method as defined in conf.application.inc.php.
      *
      * @return void
      */
