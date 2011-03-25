@@ -39,7 +39,7 @@ class SessionManager
     private $smodel;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -59,7 +59,7 @@ class SessionManager
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -69,6 +69,7 @@ class SessionManager
 
     /**
      * Prepare for session usage.
+     *
      * Since we use a database to store the data, we
      * don't really need to do anything here.
      *
@@ -86,6 +87,7 @@ class SessionManager
 
     /**
      * Close access to session file.
+     *
      * Sine we do not use file for session dara storage
      * we don't need to do anything here.
      *
@@ -97,7 +99,7 @@ class SessionManager
     }
 
     /**
-     * Read session data from the database
+     * Read session data from the database.
      *
      * @param String $id Session ID
      *
@@ -109,7 +111,7 @@ class SessionManager
     }
 
     /**
-     * Save session data into the database
+     * Save session data into the database.
      *
      * @param String $id   Session ID
      * @param String $data Session Data
@@ -123,7 +125,7 @@ class SessionManager
     }
 
     /**
-     * End currently active session
+     * End currently active session.
      *
      * @param String $id Session ID
      *
@@ -136,7 +138,7 @@ class SessionManager
     }
 
     /**
-     * Clean up expired sessions
+     * Clean up expired sessions.
      *
      * @return Boolean $return Returns always true
      */
