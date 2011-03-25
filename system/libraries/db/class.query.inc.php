@@ -44,7 +44,7 @@ class Query
     private $res;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Mixed    $query The Query result
      * @param Resource $res   Resource handler for the db connection
@@ -56,7 +56,7 @@ class Query
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -65,7 +65,7 @@ class Query
     }
 
     /**
-     * Returns the number of affected rows
+     * Returns the number of affected rows.
      *
      * @return Integer number of affected rows
      */
@@ -75,7 +75,7 @@ class Query
     }
 
     /**
-     * Returns the number of result rows
+     * Returns the number of result rows.
      *
      * @return Integer number of result rows
      */
@@ -94,7 +94,7 @@ class Query
     }
 
     /**
-     * Return an array of results
+     * Return an array of results.
      *
      * @return Array Array of Results
      */
@@ -109,7 +109,7 @@ class Query
     }
 
     /**
-     * Return the first row of results
+     * Return the first row of results.
      *
      * @return Array One data row
      */
@@ -120,7 +120,7 @@ class Query
     }
 
     /**
-     * Return one field for the first row
+     * Return one field for the first row.
      *
      * @param String $col The field to return
      *
@@ -133,7 +133,7 @@ class Query
     }
 
     /**
-     * Return a column of results
+     * Return a column of results.
      *
      * @param String $col The column to return
      *
@@ -148,6 +148,7 @@ class Query
         }
         return $output;
     }
+
 }
 
 ?>
