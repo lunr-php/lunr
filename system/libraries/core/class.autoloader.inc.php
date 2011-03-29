@@ -78,6 +78,12 @@ class Autoloader
             $class = strtolower(str_replace("View", "", $class));
             require_once "view.$class.inc.php";
         }
+        elseif (strpos($class, "Interface") !== FALSE
+            && $class !== "Interface")
+        {
+            $class = strtolower(str_replace("Interface", "", $class));
+            require_once "interface.$class.inc.php";
+        }
         else
         {
             $class = strtolower($class);
