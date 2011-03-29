@@ -45,7 +45,7 @@ class Autoloader
     );
 
     /**
-     * Try to load the given class file from the include path
+     * Try to load the given class file from the include path.
      *
      * @param String $class The Class name of the Class to load
      *
@@ -86,7 +86,7 @@ class Autoloader
     }
 
     /**
-     * Add a path to the include path
+     * Add a path to the include path.
      *
      * @param String $path New path that should be added to the include path
      *
@@ -101,7 +101,7 @@ class Autoloader
     }
 
     /**
-     * register a project specific controller
+     * Register a project specific controller.
      *
      * @param String $controller Controller Prefix
      *
