@@ -237,6 +237,16 @@ class DBCon
     }
 
     /**
+     * Return information whether we use a readonly or a read-write connection.
+     *
+     * @return Boolean $readonly
+     */
+    public function is_readonly()
+    {
+        return $this->readonly;
+    }
+
+    /**
      * Establishes a connection to the defined mysql-server.
      *
      * @return void
