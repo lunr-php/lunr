@@ -9,11 +9,8 @@
             colors="true">
     <testsuites>
         <testsuite name="MidSchip Testsuite">
-            <filter>
-                <whitelist>
-                    <directory suffix=".php">system</directory>
-                </whitelist>
-            </filter>
+            <file>tests/system/libraries/core/class.m2datetime.test.php</file>
+            <file>tests/system/libraries/l10n/class.l10n.test.php</file>
         </testsuite>
     </testsuites>
     <logging>

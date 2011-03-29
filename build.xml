@@ -40,7 +40,7 @@
     <target name="phpunit"
             description="Run unit tests and generate junit.xml and clover.xml">
         <exec executable="phpunit" failonerror="true">
-            <arg line=" -c tests/phpunit.xml" />
+            <arg line=" -c tests/phpunit.xml --verbose" />
         </exec>
     </target>
 
