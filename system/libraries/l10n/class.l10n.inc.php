@@ -78,7 +78,7 @@ class L10n
     }
 
    /**
-    * Convert a language (if supported) from ISO 639-1 to POSIC locale format.
+    * Convert a language (if supported) from ISO 639-1 to POSIX locale format.
     *
     * @param String $language The language to convert on ISO 639-1 format
     *
