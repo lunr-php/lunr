@@ -44,11 +44,13 @@ class Curl
 
     /**
      * Curl error number
+     * @var Integer
      */
     private $errno;
 
     /**
      * Curl error message
+     * @var String
      */
     private $errmsg;
 
@@ -58,6 +60,10 @@ class Curl
     public function __construct()
     {
         $options = array();
+
+        // default: no error
+        $this->errno  = 0;
+        $this->errmsg = '';
 
         // set default curl options
         $this->options[CURLOPT_TIMEOUT]        = 30;
@@ -72,6 +78,27 @@ class Curl
     public function __destruct()
     {
         unset($this->options);
+    }
+
+    /**
+     * Get access to certain private attributes.
+     *
+     * This gives access to errno, errmsg and info.
+     *
+     * @param String $name Attribute name
+     *
+     * @return mixed $return Value of the chosen attribute
+     */
+    public function __get($name)
+    {
+        switch ($name)
+        {
+            case "errno":
+            case "errmsg":
+            case "info":
+                return $this->{$name};
+                break;
+        }
     }
 
     /**
