@@ -146,7 +146,7 @@ class Curl
     }
 
     /**
-     * Initialize the curl request
+     * Initialize the curl request.
      *
      * @param String $url URL for the request
      *
