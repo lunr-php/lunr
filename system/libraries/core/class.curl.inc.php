@@ -65,6 +65,9 @@ class Curl
         $this->errno  = 0;
         $this->errmsg = '';
 
+        // default: no info
+        $this->info   = array();
+
         // set default curl options
         $this->options[CURLOPT_TIMEOUT]        = 30;
         $this->options[CURLOPT_RETURNTRANSFER] = TRUE;
@@ -78,6 +81,9 @@ class Curl
     public function __destruct()
     {
         unset($this->options);
+        unset($this->errno);
+        unset($this->errmsg);
+        unset($this->info);
     }
 
     /**
@@ -140,15 +146,16 @@ class Curl
     }
 
     /**
-     * Temporary simple call to retrieve remote content.
+     * Initialize the curl request
      *
-     * @param String $location remote location
+     * @param String $url URL for the request
      *
-     * @return mixed $return Return value
+     * @return Boolean $return TRUE if the initialization was successful,
+     *                         FALSE otherwise
      */
-    public function simple_get($location)
+    private function init($url)
     {
-        $this->handle = curl_init($location);
+        $this->handle = curl_init($url);
 
         if (!curl_setopt_array($this->handle, $this->options))
         {
@@ -156,7 +163,7 @@ class Curl
             return FALSE;
         }
 
-        return $this->execute();
+        return TRUE;
     }
 
     /**
@@ -174,6 +181,7 @@ class Curl
             $this->errmsg = curl_error($this->handle);
 
             curl_close($this->handle);
+            $this->handle = NULL;
 
             return $return;
         }
@@ -182,9 +190,27 @@ class Curl
             $this->info = curl_getinfo($this->handle);
 
             curl_close($this->handle);
+            $this->handle = NULL;
 
             return $return;
         }
+    }
+
+    /**
+     * Retrieve remote content.
+     *
+     * @param String $location remote location
+     *
+     * @return mixed $return Return value
+     */
+    public function simple_get($location)
+    {
+        if ($this->init($location) === FALSE)
+        {
+            return FALSE;
+        }
+
+        return $this->execute();
     }
 
 }
