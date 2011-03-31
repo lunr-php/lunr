@@ -199,7 +199,7 @@ class Curl
     /**
      * Retrieve remote content.
      *
-     * @param String $location remote location
+     * @param String $location Remote location
      *
      * @return mixed $return Return value
      */
@@ -209,6 +209,28 @@ class Curl
         {
             return FALSE;
         }
+
+        return $this->execute();
+    }
+
+    /**
+     * Post data to a remote service.
+     *
+     * @param String $location Remote service
+     * @param mixed  $data     Data to post
+     *
+     * @return mixed $return Return value
+     */
+    public function simple_post($location, $data)
+    {
+        if ($this->init($location) === FALSE)
+        {
+            return FALSE;
+        }
+
+        $this->options[CURLOPT_CUSTOMREQUEST] = "POST";
+        $this->options[CURLOPT_POST]          = TRUE;
+        $this->options[CURLOPT_POSTFIELDS]    = $data;
 
         return $this->execute();
     }
