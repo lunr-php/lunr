@@ -31,6 +31,12 @@ class Curl
     private $options;
 
     /**
+     * Curl request resource handle
+     * @var resource
+     */
+    private $handle;
+
+    /**
      * Information about a successfully completed request
      * @var array
      */
@@ -111,34 +117,44 @@ class Curl
      *
      * @param String $location remote location
      *
-     * @return mixed $return Value
+     * @return mixed $return Return value
      */
     public function simple_get($location)
     {
-        $res = curl_init($location);
+        $this->handle = curl_init($location);
 
-        if (!curl_setopt_array($res, $this->options))
+        if (!curl_setopt_array($this->handle, $this->options))
         {
             $this->errmsg = "Could not set curl options!";
             return FALSE;
         }
 
-        $return = curl_exec($res);
+        return $this->execute();
+    }
+
+    /**
+     * Execute a curl request.
+     *
+     * @return mixed $return Return value
+     */
+    private function execute()
+    {
+        $return = curl_exec($this->handle);
 
         if ($return === FALSE)
         {
-            $this->errno  = curl_errno($res);
-            $this->errmsg = curl_error($res);
+            $this->errno  = curl_errno($this->handle);
+            $this->errmsg = curl_error($this->handle);
 
-            curl_close($res);
+            curl_close($this->handle);
 
             return $return;
         }
         else
         {
-            $this->info = curl_getinfo($res);
+            $this->info = curl_getinfo($this->handle);
 
-            curl_close($res);
+            curl_close($this->handle);
 
             return $return;
         }
