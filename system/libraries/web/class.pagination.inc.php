@@ -221,13 +221,16 @@ class Pagination{
     {
         if ($amount > 0)
         {
-            $html  = '';
-            $start = $this->cursor - 1;
-            $end   = $this->cursor - $amount;
-            for($i = $start; (($i >= $end) && ($i > 0)); --$i)
+            $html  = "";
+            $start = $this->cursor - $amount;
+            $end   = $this->cursor - 1;
+            for($i = $start; $i <= $end; ++$i)
             {
-                $html .= '<a class="paginator_page" href="';
-                $html .= $this->base_url . $i . '">' . $i . "</a>\n";
+                if ($i > 0)
+                {
+                    $html .= '<a class="paginator_page" href="';
+                    $html .= $this->base_url . $i . '">' . $i . "</a>\n";
+                }
             }
             return $html;
         }
