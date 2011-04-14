@@ -25,6 +25,8 @@
 class L10nProviderGettext extends L10nProvider
 {
 
+    const GETTEXT_MAX_MSGID_LENGTH = 4096;
+
     /**
      * Constructor.
      *
@@ -68,7 +70,11 @@ class L10nProviderGettext extends L10nProvider
      */
     public function lang($identifier, $context = "")
     {
-        global $config;
+        if (strlen($identifier) + strlen($context) + 1 > self::GETTEXT_MAX_MSGID_LENGTH)
+        {
+            Output::error("Identifier too long: " . $identifier);
+        }
+
         $this->init($this->language);
         if ($context == "")
         {
@@ -77,6 +83,7 @@ class L10nProviderGettext extends L10nProvider
         }
         else
         {
+            global $config;
             // Glue msgctxt and msgid together, with ASCII character 4
             // (EOT, End Of Text)
             $composed = "{$context}\004{$identifier}";
@@ -112,6 +119,11 @@ class L10nProviderGettext extends L10nProvider
      */
     public function nlang($singular, $plural, $amount, $context = "")
     {
+        if (strlen($singular) + strlen($context) + 1 > self::GETTEXT_MAX_MSGID_LENGTH)
+        {
+            Output::error("Identifier too long: " . $identifier);
+        }
+
         $this->init($this->language);
         if ($context == "")
         {
