@@ -25,6 +25,10 @@
 class L10nProviderGettext extends L10nProvider
 {
 
+    /**
+     * Define gettext msgid size limit
+     * @var Integer
+     */
     const GETTEXT_MAX_MSGID_LENGTH = 4096;
 
     /**
