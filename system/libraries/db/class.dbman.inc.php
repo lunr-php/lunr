@@ -51,7 +51,7 @@ class DBMan
         {
             if (!isset(self::$ro_instance))
             {
-                self::$ro_instance = new DBCon($db, TRUE);
+                self::$ro_instance = DBConFactory::get_db_connection($db, $readonly);
             }
 
             return self::$ro_instance;
@@ -60,7 +60,7 @@ class DBMan
         {
             if (!isset(self::$rw_instance))
             {
-                self::$rw_instance = new DBCon($db, FALSE);
+                self::$rw_instance = DBConFactory::get_db_connection($db, $readonly);
             }
 
             return self::$rw_instance;

@@ -2,6 +2,8 @@
 
 require_once("class.dbman.inc.php");
 require_once("class.dbcon.inc.php");
+require_once("class.dbconmysql.inc.php");
+require_once("class.dbconfactory.inc.php");
 require_once("conf.database.inc.php");
 
 /**
