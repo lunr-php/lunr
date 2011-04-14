@@ -465,7 +465,7 @@ class DBConMySQL extends DBCon
                     Output::error($this->last_query());
                     Output::error($this->last_error());
                 }
-                return new Query($output, $this->res);
+                return new QueryMySQL($output, $this->res);
             }
             elseif ($this->readonly === TRUE)
             {
@@ -487,7 +487,7 @@ class DBConMySQL extends DBCon
      *
      * @param String $from Where to get the data from
      *
-     * @return Query Query result, or False on connection failure
+     * @return QueryMySQL $result Query result, or False on connection failure
      */
     public function get($from)
     {
@@ -561,7 +561,7 @@ class DBConMySQL extends DBCon
             {
                 Output::error($this->last_query());
             }
-            return new Query($output, $this->res);
+            return new QueryMySQL($output, $this->res);
         }
         else
         {

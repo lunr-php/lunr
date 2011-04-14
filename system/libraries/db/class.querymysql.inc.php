@@ -28,7 +28,7 @@
  * @copyright  2010-2011, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://opensource.org/licenses/bsd-license BSD License
  */
-class Query
+class QueryMySQL implements QueryInterface
 {
 
     /**
