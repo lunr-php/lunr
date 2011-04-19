@@ -25,11 +25,80 @@ abstract class DBCon
 {
 
     /**
+     * Resource handler for the (established) database connection
+     * @var Resource
+     */
+    protected $res;
+
+    /**
+     * Whether there's write access to the database or not
+     * @var Boolean
+     */
+    protected $readonly;
+
+    /**
+     * Connection status
+     * @var Boolean
+     */
+    protected $connected;
+
+    /**
+     * SQL Query part: SELECT statement
+     * @var String
+     */
+    protected $select;
+
+    /**
+     * SQL Query part: JOIN clause
+     * @var String
+     */
+    protected $join;
+
+    /**
+     * SQL Query part: WHERE clause
+     * @var String
+     */
+    protected $where;
+
+    /**
+     * SQL Query part: ORDER BY clause
+     * @var String
+     */
+    protected $order;
+
+    /**
+     * SQL Query part: GROUP BY clause
+     * @var String
+     */
+    protected $group;
+
+    /**
+     * SQL Query part: LIMIT clause
+     * @var String
+     */
+    protected $limit;
+
+    /**
+     * SQL Query part: UNION statement
+     * @var String
+     */
+    protected $union;
+
+    /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct($readonly)
     {
-        // Nothing to do yet
+        $this->readonly  = $readonly;
+        $this->connected = FALSE;
+
+        $this->select = "";
+        $this->join   = "";
+        $this->where  = "";
+        $this->order  = "";
+        $this->group  = "";
+        $this->limit  = "";
+        $this->union  = "";
     }
 
     /**
@@ -37,7 +106,17 @@ abstract class DBCon
      */
     public function __destruct()
     {
-        // Nothing to do yet
+        unset($this->res);
+        unset($this->readonly);
+        unset($this->connected);
+
+        unset($this->select);
+        unset($this->join);
+        unset($this->where);
+        unset($this->order);
+        unset($this->group);
+        unset($this->limit);
+        unset($this->union);
     }
 
     /**
@@ -45,7 +124,10 @@ abstract class DBCon
      *
      * @return Boolean $readonly
      */
-    public abstract function is_readonly();
+    public function is_readonly()
+    {
+        return $this->readonly;
+    }
 
     /**
      * Establishes a connection to the defined database-server.
@@ -97,6 +179,82 @@ abstract class DBCon
     public abstract function found_rows();
 
     /**
+     * construct SQL query.
+     *
+     * @param String  $from  Where to get the data from
+     * @param Boolean $clear Whether to clear individual SQL-query parts after joining them
+     * @param Boolean $limit Whether to construct only a part of the query
+     *
+     * @return String $query The constructed SQL query (part)
+     */
+    protected function construct_query($from, $clear = TRUE, $limit = FALSE)
+    {
+        $sql_command = "";
+
+        if (!$limit)
+        {
+            if ($this->union != "")
+            {
+                $sql_command .= $this->union;
+            }
+            if ($this->select != "")
+            {
+                $sql_command .= $this->select;
+            }
+            else
+            {
+                $sql_command .= "SELECT * ";
+            }
+
+            $sql_command .= "FROM " . $this->escape_as($from);
+
+            if ($this->join != "")
+            {
+                $sql_command .= $this->join;
+            }
+        }
+
+        if ($this->where != "")
+        {
+            $sql_command .= $this->where;
+        }
+
+        if ($this->group != "")
+        {
+            $sql_command .= $this->group;
+        }
+
+        if ($this->order != "")
+        {
+            $sql_command .= $this->order;
+        }
+
+        if ($this->limit != "")
+        {
+            $sql_command .= $this->limit;
+        }
+
+//         if ($this->for_update && !$limit)
+//         {
+//             $sql_command .= " FOR UPDATE";
+//         }
+
+        if ($clear == TRUE)
+        {
+            $this->union = "";
+            $this->select = "";
+            $this->join = "";
+            $this->where = "";
+            $this->group = "";
+            $this->order = "";
+            $this->limit = "";
+//             $this->for_update = FALSE;
+        }
+
+        return $sql_command;
+    }
+
+    /**
      * Return the preliminary query.
      *
      * Query like it would be executed by query() at this point
@@ -106,7 +264,10 @@ abstract class DBCon
      *
      * @return String SQL query
      */
-    public abstract function preliminary_query($from);
+    public function preliminary_query($from)
+    {
+        return $this->construct_query($from, FALSE);
+    }
 
     /**
      * Executes a defined SQL query.
@@ -460,6 +621,161 @@ abstract class DBCon
      * @return Mixed $return hex UUID on success, FALSE on failure
      */
     public abstract function generate_uuid();
+
+    /**
+     * Escape a string to be used in a SQL query.
+     *
+     * @param String $string The string to escape
+     *
+     * @return Mixed the escaped string, False on connection error
+     */
+    protected abstract function escape_string($string);
+
+    /**
+     * Prepare, escape, error-check the values we are about to use.
+     *
+     * @param Mixed  $data The data to prepare
+     * @param String $type Whether we prepare 'keys' or 'values'
+     *
+     * @return String key/value list
+     */
+    protected function prepare_data($data,$type)
+    {
+        if (is_array($data))
+        {
+            if ($type == "keys")
+            {
+                $array = array_keys($data);
+                $char = "`";
+            }
+            else
+            {
+                $array = array_values($data);
+                $char = "'";
+            }
+        }
+        else
+        {
+            $array['0'] = $data;
+            $char = "'";
+        }
+
+        $list = "(";
+        // The value must be a proper hexadecimal value well formatted
+        // -> "UNHEX('hex_value')"
+        $unhex_pattern = "/UNHEX\('[0-9a-fA-F]{32}'\)/";
+
+        foreach ($array as $value)
+        {
+            if(($type != "keys")
+                && (preg_match($unhex_pattern, $value) != FALSE))
+            {
+                ///TODO: Does not work that way for SQLite3
+                $list .= $value." ,";
+            }
+            elseif ($value === NULL)
+            {
+                $list .= "NULL ,";
+            }
+            else
+            {
+                $list .= $char . $this->escape_string($value) . $char . ",";
+            }
+        }
+        $list = trim($list, ",") . ") ";
+        return $list;
+    }
+
+    /**
+     * Escape column names.
+     *
+     * @param String $col Column
+     *
+     * @return String escaped column list
+     */
+    protected function escape_columns($col)
+    {
+        $parts = explode(".", $col);
+        $col = "";
+        foreach ($parts as $part)
+        {
+            $part = trim($part);
+            if ($part == "*")
+            {
+                $col .= $part . ".";
+            }
+            else
+            {
+                $col .= "`" . $part . "`.";
+            }
+        }
+        $col = trim($col, ".") . " ";
+        return $col;
+    }
+
+    /**
+     * Escape column names for statements using the "AS" operator.
+     *
+     * @param String  $cols Column(s)
+     * @param Boolean $hex  Whether we should consider the values
+     *                      as hexadecimal or not.
+     *
+     * @return String escaped column list
+     */
+    protected function escape_as($cols, $hex = FALSE)
+    {
+        $cols = explode(",", $cols);
+        $string = "";
+        foreach ($cols AS $value)
+        {
+            if (strpos($value, " AS "))
+            {
+                $col = explode(" AS ", $value);
+                if ($hex)
+                {
+                    $string .= "HEX(" . $this->escape_columns($col[0]) . ")";
+                    $string .= " AS `" . trim($col[1]) . "`, ";
+                }
+                else
+                {
+                    $string .= $this->escape_columns($col[0]);
+                    $string .= " AS `" . trim($col[1]) . "`, ";
+                }
+            }
+            elseif (strpos($value, " as "))
+            {
+                $col = explode(" as ", $value);
+                if ($hex)
+                {
+                    $string .= "HEX(" . $this->escape_columns($col[0]) . ")";
+                    $string .= " AS `" . trim($col[1]) . "`, ";
+                }
+                else
+                {
+                    $string .= $this->escape_columns($col[0]);
+                    $string .= " AS `" . trim($col[1]) . "`, ";
+                }
+            }
+            elseif (trim($value) == "*")
+            {
+                $string .= trim($value) . ", ";
+            }
+            else
+            {
+                if ($hex)
+                {
+                    $string .= " HEX(" . $this->escape_columns(trim($value));
+                    $string .= ") AS `" . trim($value) . "`, ";
+                }
+                else
+                {
+                    $string .= $this->escape_columns(trim($value)) . ", ";
+                }
+            }
+        }
+        $string = trim($string, ",") . " ";
+        return $string;
+    }
 
 }
 

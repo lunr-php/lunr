@@ -67,24 +67,6 @@ class DBConMySQL extends DBCon
     private $socket;
 
     /**
-     * Resource handler for the (established) database connection
-     * @var Resource
-     */
-    private $res;
-
-    /**
-     * Whether there's write access to the database or not
-     * @var Boolean
-     */
-    private $readonly;
-
-    /**
-     * Connection status
-     * @var Boolean
-     */
-    private $connected;
-
-    /**
      * Transaction status
      * @var Boolean
      */
@@ -97,52 +79,10 @@ class DBConMySQL extends DBCon
     private $last_query;
 
     /**
-     * SQL Query part: SELECT statement
-     * @var String
-     */
-    private $select;
-
-    /**
-     * SQL Query part: JOIN clause
-     * @var String
-     */
-    private $join;
-
-    /**
-     * SQL Query part: WHERE clause
-     * @var String
-     */
-    private $where;
-
-    /**
      * SQL Query part: Where () clause
      * @var Boolean
      */
     private $where_group;
-
-    /**
-     * SQL Query part: ORDER BY clause
-     * @var String
-     */
-    private $order;
-
-    /**
-     * SQL Query part: GROUP BY clause
-     * @var String
-     */
-    private $group;
-
-    /**
-     * SQL Query part: LIMIT clause
-     * @var String
-     */
-    private $limit;
-
-    /**
-     * SQL Query part: UNION statement
-     * @var String
-     */
-    private $union;
 
     /**
      * Determine whether we are locking a table row or not
@@ -167,7 +107,7 @@ class DBConMySQL extends DBCon
      */
     public function __construct($db, $readonly = TRUE)
     {
-        parent::__construct();
+        parent::__construct($readonly);
         $this->rw_host = $db['rw_host'];
         $this->ro_host = $db['ro_host'];
         $this->user = $db['username'];
@@ -183,17 +123,8 @@ class DBConMySQL extends DBCon
             $this->socket = ini_get("mysqli.default_socket");
         }
 
-        $this->readonly = $readonly;
-        $this->select = "";
-        $this->join = "";
-        $this->where = "";
         $this->where_group = FALSE;
-        $this->order = "";
-        $this->group = "";
-        $this->limit = "";
-        $this->union = "";
         $this->last_query = "";
-        $this->connected = FALSE;
         $this->transaction = FALSE;
         $this->for_update = FALSE;
         $this->gen_uuid_hex = "REPLACE(UUID(),'-','')";
@@ -219,33 +150,13 @@ class DBConMySQL extends DBCon
         unset($this->user);
         unset($this->pwd);
         unset($this->db);
-        unset($this->res);
-        unset($this->connected);
         unset($this->transaction);
         unset($this->last_query);
-        unset($this->select);
-        unset($this->join);
-        unset($this->where);
-        unset($this->order);
-        unset($this->group);
-        unset($this->limit);
-        unset($this->union);
         unset($this->where_group);
         unset($this->for_update);
         unset($this->gen_uuid_hex);
         unset($this->socket);
-        unset($this->readonly);
         parent::__destruct();
-    }
-
-    /**
-     * Return information whether we use a readonly or a read-write connection.
-     *
-     * @return Boolean $readonly
-     */
-    public function is_readonly()
-    {
-        return $this->readonly;
     }
 
     /**
@@ -1483,67 +1394,13 @@ class DBConMySQL extends DBCon
     }
 
     /**
-     * Prepare, escape, error-check the values we are about to use.
-     *
-     * @param Mixed  $data The data to prepare
-     * @param String $type Whether we prepare 'keys' or 'values'
-     *
-     * @return String key/value list
-     */
-    private function prepare_data($data,$type)
-    {
-        if (is_array($data))
-        {
-            if ($type == "keys")
-            {
-                $array = array_keys($data);
-                $char = "`";
-            }
-            else
-            {
-                $array = array_values($data);
-                $char = "'";
-            }
-        }
-        else
-        {
-            $array['0'] = $data;
-            $char = "'";
-        }
-
-        $list = "(";
-        // The value must be a proper hexadecimal value well formatted
-        // -> "UNHEX('hex_value')"
-        $unhex_pattern = "/UNHEX\('[0-9a-fA-F]{32}'\)/";
-
-        foreach ($array as $value)
-        {
-            if(($type != "keys")
-                && (preg_match($unhex_pattern, $value) != FALSE))
-            {
-                $list .= $value." ,";
-            }
-            elseif ($value === NULL)
-            {
-                $list .= "NULL ,";
-            }
-            else
-            {
-                $list .= $char . $this->escape_string($value) . $char . ",";
-            }
-        }
-        $list = substr_replace($list, ") ", strripos($list, ","));
-        return $list;
-    }
-
-    /**
      * Escape a string to be used in a SQL query.
      *
      * @param String $string The string to escape
      *
      * @return Mixed the escaped string, False on connection error
      */
-    private function escape_string($string)
+    protected function escape_string($string)
     {
         if (!$this->connected)
         {
@@ -1564,96 +1421,6 @@ class DBConMySQL extends DBCon
         {
             return FALSE;
         }
-    }
-
-    /**
-     * Escape column names.
-     *
-     * @param String $col Column
-     *
-     * @return String escaped column list
-     */
-    private function escape_columns($col)
-    {
-        $parts = explode(".", $col);
-        $col = "";
-        foreach ($parts AS $part)
-        {
-            if (trim($part) == "*")
-            {
-                $col .= trim($part) . ".";
-            }
-            else
-            {
-                $col .= "`" . trim($part) . "`.";
-            }
-        }
-        $col = substr_replace($col, " ", strripos($col, "."));
-        return $col;
-    }
-
-    /**
-     * Escape column names for statements using the "AS" operator.
-     *
-     * @param String  $cols Column(s)
-     * @param Boolean $hex  Whether we should consider the values
-     *                      as hexadecimal or not.
-     *
-     * @return String escaped column list
-     */
-    private function escape_as($cols, $hex = FALSE)
-    {
-        $cols = explode(",", $cols);
-        $string = "";
-        foreach ($cols AS $value)
-        {
-            if (strpos($value, " AS "))
-            {
-                $col = explode(" AS ", $value);
-                if ($hex)
-                {
-                    $string .= "HEX(" . $this->escape_columns($col[0]) . ")";
-                    $string .= " AS `" . trim($col[1]) . "`, ";
-                }
-                else
-                {
-                    $string .= $this->escape_columns($col[0]);
-                    $string .= " AS `" . trim($col[1]) . "`, ";
-                }
-            }
-            elseif (strpos($value, " as "))
-            {
-                $col = explode(" as ", $value);
-                if ($hex)
-                {
-                    $string .= "HEX(" . $this->escape_columns($col[0]) . ")";
-                    $string .= " AS `" . trim($col[1]) . "`, ";
-                }
-                else
-                {
-                    $string .= $this->escape_columns($col[0]);
-                    $string .= " AS `" . trim($col[1]) . "`, ";
-                }
-            }
-            elseif (trim($value) == "*")
-            {
-                $string .= trim($value) . ", ";
-            }
-            else
-            {
-                if ($hex)
-                {
-                    $string .= " HEX(" . $this->escape_columns(trim($value));
-                    $string .= ") AS `" . trim($value) . "`, ";
-                }
-                else
-                {
-                    $string .= $this->escape_columns(trim($value)) . ", ";
-                }
-            }
-        }
-        $string = substr_replace($string, " ", strripos($string, ","));
-        return $string;
     }
 
     /**
