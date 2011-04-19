@@ -773,7 +773,7 @@ abstract class DBCon
                 }
             }
         }
-        $string = trim($string, ",") . " ";
+        $string = trim($string, ", ") . " ";
         return $string;
     }
 
