@@ -27,13 +27,13 @@ class DBMan
 
     /**
      * Instance of the dbcon class (readonly)
-     * @var DBCon
+     * @var array
      */
     private static $ro_instance;
 
     /**
      * Instance of the dbcon class (read+write)
-     * @var DBCon
+     * @var array
      */
     private static $rw_instance;
 
@@ -49,21 +49,21 @@ class DBMan
     {
         if ($readonly === TRUE)
         {
-            if (!isset(self::$ro_instance))
+            if (!isset(self::$ro_instance[$db['driver']]))
             {
-                self::$ro_instance = DBConFactory::get_db_connection($db, $readonly);
+                self::$ro_instance[$db['driver']] = DBConFactory::get_db_connection($db, $readonly);
             }
 
-            return self::$ro_instance;
+            return self::$ro_instance[$db['driver']];
         }
         else
         {
-            if (!isset(self::$rw_instance))
+            if (!isset(self::$rw_instance[$db['driver']]))
             {
-                self::$rw_instance = DBConFactory::get_db_connection($db, $readonly);
+                self::$rw_instance[$db['driver']] = DBConFactory::get_db_connection($db, $readonly);
             }
 
-            return self::$rw_instance;
+            return self::$rw_instance[$db['driver']];
         }
     }
 
