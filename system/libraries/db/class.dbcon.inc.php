@@ -86,6 +86,9 @@ abstract class DBCon
 
     /**
      * Constructor.
+     *
+     * @param Boolean $readonly Whether the database access should
+     *                          be established readonly
      */
     public function __construct($readonly)
     {
@@ -179,7 +182,7 @@ abstract class DBCon
     public abstract function found_rows();
 
     /**
-     * construct SQL query.
+     * Construct SQL query.
      *
      * @param String  $from  Where to get the data from
      * @param Boolean $clear Whether to clear individual SQL-query parts after joining them

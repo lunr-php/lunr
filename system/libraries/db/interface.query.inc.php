@@ -23,6 +23,7 @@
  */
 interface QueryInterface
 {
+
     /**
      * Returns the number of affected rows.
      *
