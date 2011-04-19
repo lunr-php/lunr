@@ -42,6 +42,9 @@ class DBConFactory
 
         switch ($db['driver'])
         {
+            case "sqlite":
+                return new DBConSqlite($db, $readonly);
+                break;
             case "mysql":
             default:
                 return new DBConMySQL($db, $readonly);
