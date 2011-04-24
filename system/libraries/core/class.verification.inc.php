@@ -149,6 +149,46 @@ class Verification
         }
     }
 
+    /**
+     * Check that an input is not empty.
+     *
+     * Note that 0 and "0" are also considered empty.
+     *
+     * @param mixed &$value The input to check
+     *
+     * @return Boolean $return TRUE if not empty, FALSE otherwise.
+     */
+    public static function check_not_empty(&$value)
+    {
+        if (empty($value))
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+
+    /**
+     * Check that input is either 0 or 1.
+     *
+     * @param mixed &$value The input to check
+     *
+     * @return Boolean $return TRUE if input is a numeric boolean, FALSE otherwise.
+     */
+    public static function check_numerical_boolean(&$value)
+    {
+        if (($value == 1) || ($value == 0))
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
 }
 
 ?>
