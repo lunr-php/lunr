@@ -41,6 +41,10 @@ class Verification
             $length = substr($method, 12);
             return self::check_length($length, $arguments[0]);
         }
+        elseif (substr($method, 0, 12) == "check_ignore")
+        {
+            return TRUE;
+        }
         else
         {
             return FALSE;
