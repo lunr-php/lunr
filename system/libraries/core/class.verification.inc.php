@@ -154,11 +154,11 @@ class Verification
      *
      * Note that 0 and "0" are also considered empty.
      *
-     * @param mixed &$value The input to check
+     * @param mixed $value The input to check
      *
      * @return Boolean $return TRUE if not empty, FALSE otherwise.
      */
-    public static function check_not_empty(&$value)
+    public static function check_not_empty($value)
     {
         if (empty($value))
         {
@@ -173,11 +173,11 @@ class Verification
     /**
      * Check that input is either 0 or 1.
      *
-     * @param mixed &$value The input to check
+     * @param mixed $value The input to check
      *
      * @return Boolean $return TRUE if input is a numeric boolean, FALSE otherwise.
      */
-    public static function check_numerical_boolean(&$value)
+    public static function check_numerical_boolean($value)
     {
         if (($value == 1) || ($value == 0))
         {
