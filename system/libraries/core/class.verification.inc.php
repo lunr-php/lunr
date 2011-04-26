@@ -57,23 +57,33 @@ class Verification
      * @param String $identifier Identifier for the rule-checking
      * @param array  &$input     Input array
      * @param array  &$ruleset   Ruleset to check against
+     * @param String $file       The log file to send errors to. By default this will
+     *                           be the invalid input log.
      *
      * @return Boolean $return TRUE if the input matches against the ruleset,
      *                         FALSE otherwise.
      */
-    public static function verify_array_ruleset($identifier, &$input, &$ruleset)
+    public static function verify_array_ruleset($identifier, &$input, &$ruleset, $file = "")
     {
+        if ($file == "")
+        {
+            $file  = $config['log']['invalid_input'];
+            $file .= "midschip_invalid_input." . CLIENT_OS . ".log";
+        }
+
         if (trim($identifier) == "")
         {
-            Output::error("Can't verify input. Empty Identifier!'");
+            Output::error("Can't verify input. Empty Identifier!'", $file);
             return FALSE;
         }
 
         if (!is_array($input) || !is_array($ruleset))
         {
-            Output::error("Can't verify input. Invalid input!'");
+            Output::error("Can't verify input. Invalid input!'", $file);
             return FALSE;
         }
+
+        $error_prefix = "Input validation '$identifier': ";
 
         // Check that input matches with the defined ruleset
         $input_elements = array_keys($input);
@@ -84,7 +94,7 @@ class Verification
         {
             foreach ($unhandled_elements as $value)
             {
-                Output::error("Input validation '$identifier': Ruleset for non-existing key '$value'!");
+                Output::error($error_prefix . "Ruleset for non-existing key '$value'!", $file);
             }
             return FALSE;
         }
@@ -103,7 +113,7 @@ class Verification
                     {
                         if (call_user_func("self::check_" . $rule, $value) === FALSE)
                         {
-                            Output::error("Input validation '$identifier': Rule '$rule' failed for '$key'!");
+                            Output::error($error_prefix . "Rule '$rule' failed for '$key'!", $file);
                             return FALSE;
                         }
                     }
@@ -113,14 +123,14 @@ class Verification
                 {
                     if (call_user_func("self::check_" . $ruleset[$key], $value) === FALSE)
                     {
-                        Output::error("Input validation '$identifier': Rule '" . $ruleset[$key] . "' failed for '$key'!");
+                        Output::error($error_prefix . "Rule '" . $ruleset[$key] . "' failed for '$key'!", $file);
                         return FALSE;
                     }
                 }
             }
             else
             {
-                Output::error("Input validation '$identifier': Unhandled Array Element '$key'!");
+                Output::error($error_prefix . "Unhandled Array Element '$key'!", $file);
                 return FALSE;
             }
         }
