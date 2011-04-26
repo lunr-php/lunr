@@ -37,9 +37,9 @@ class MySQLndQueryLogger extends MySQLndUhConnection {
     {
         $id = $this->get_function_call_hierarchy(xdebug_get_function_stack());
 
-        $start = microtime();
+        $start = microtime(TRUE);
         $return = parent::query($connection, $query);
-        $time = microtime() - $start;
+        $time = microtime(TRUE) - $start;
 
         $this->record_query_stats($id, $time);
 
