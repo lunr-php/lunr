@@ -67,6 +67,7 @@ class Verification
     {
         if ($file == "")
         {
+            global $config;
             $file  = $config['log']['invalid_input'];
             $file .= "midschip_invalid_input." . CLIENT_OS . ".log";
         }
