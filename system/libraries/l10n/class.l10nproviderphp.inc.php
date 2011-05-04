@@ -44,6 +44,12 @@ class L10nProviderPHP extends L10nProvider
     }
 
     /**
+     * Attribute that stores the language array
+     * @var array
+     */
+    private $lang_array;
+
+    /**
      * Initialization method for setting up the provider.
      *
      * @param String $language POSIX locale definition
@@ -52,19 +58,57 @@ class L10nProviderPHP extends L10nProvider
      */
     protected function init($language)
     {
+        global $config;
+        $this->language = $language;
 
+        if ($this->language != $config['l10n']['default_language'])
+        {
+            include_once($config['l10n']['php_lang_file']);
+            $this->lang_array = $lang;
+        }
     }
 
     /**
      * Return a translated string.
      *
      * @param String $identifier Identifier for the requested string
-     * @param String $context    Context information fot the requested string
+     * @param String $context    Context information for the requested string
      *
      * @return String $string Translated string, identifier by default
      */
     public function lang($identifier, $context = "")
     {
+        global $config;
+
+        //Check if it's necessary to translate the identifier
+        if ($this->language != $config['l10n']['default_language'])
+        {
+
+                if ($context == "")
+                {
+
+                    //Check if the identifier is contained in the language array
+                    if (array_key_exists($identifier, $this->lang_array))
+                    {
+                       return $this->lang_array[$identifier];
+                    }
+
+                    return $identifier;
+
+                }
+
+                else //Check if the identifier is contained in the language array and if the context string is contained in the second dimension of the array
+                {
+                   if (array_key_exists($identifier, $this->lang_array) && array_key_exists($context, $this->lang_array[$identifier]))
+                   {
+                        return $this->lang_array[$identifier][$context];
+                   }
+
+                   return $identifier;
+                }
+
+         }
+
         return $identifier;
     }
 
@@ -81,7 +125,40 @@ class L10nProviderPHP extends L10nProvider
      */
     public function nlang($singular, $plural, $amount, $context = "")
     {
-        return ($amount == 1 ? $singular : $plural);
+
+
+            if($context =="")
+            {
+                        //Check if singular and plural identifiers are contained in the language array
+                        if (array_key_exists($singular, $this->lang_array) && array_key_exists($plural, $this->lang_array) )
+                        {
+                            return ($amount == 1 ? $this->lang_array[$singular] : $this->lang_array[$plural]);
+                        }
+
+                        return $singular;
+            }
+            else
+            {
+
+                if (
+                    //Check if singular and plural identifiers are contained in the language array
+                    (array_key_exists($singular, $this->lang_array) && array_key_exists($plural, $this->lang_array)) &&
+
+                    //and if context is contained in singular and plural sub arrays
+                    (array_key_exists($context, $this->lang_array[$singular]) && array_key_exists($context, $this->lang_array[$plural]))
+                   )
+                {
+                    return ($amount == 1 ? $this->lang_array[$singular][$context] : $this->lang_array[$plural][$context]);
+                }
+                else
+                {
+                    return $singular;
+                }
+
+
+            }
+
+        //return ($amount == 1 ? $singular : $plural);
     }
 
 }
