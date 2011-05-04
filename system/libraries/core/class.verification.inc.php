@@ -150,14 +150,7 @@ class Verification
      */
     public static function check_length($length, &$value)
     {
-        if (strlen($value) == $length)
-        {
-            return TRUE;
-        }
-        else
-        {
-            return FALSE;
-        }
+        return (strlen($value) == $length);
     }
 
     /**
@@ -171,14 +164,7 @@ class Verification
      */
     public static function check_not_empty($value)
     {
-        if (empty($value))
-        {
-            return FALSE;
-        }
-        else
-        {
-            return TRUE;
-        }
+        return !empty($value);
     }
 
     /**
@@ -190,14 +176,7 @@ class Verification
      */
     public static function check_numerical_boolean($value)
     {
-        if (($value == 1) || ($value == 0))
-        {
-            return TRUE;
-        }
-        else
-        {
-            return FALSE;
-        }
+        return ($value == 1) || ($value == 0);
     }
 
 }
