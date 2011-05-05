@@ -23,7 +23,7 @@
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-abstract class CliController extends Controller
+abstract class CliController implements ControllerInterface
 {
 
     /**
