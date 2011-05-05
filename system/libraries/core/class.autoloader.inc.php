@@ -40,7 +40,7 @@ class Autoloader
      */
     private static $controllers = array(
         "web",
-        "scripts",
+        "webservice",
         "cli"
     );
 
@@ -53,8 +53,13 @@ class Autoloader
      */
     public static function load($class)
     {
-        if (strpos($class, "Controller") !== FALSE
-            && $class !== "Controller")
+        if (strpos($class, "Interface") !== FALSE
+            && $class !== "Interface")
+        {
+            $class = strtolower(str_replace("Interface", "", $class));
+            require_once "interface.$class.inc.php";
+        }
+        elseif (strpos($class, "Controller") !== FALSE)
         {
             $controller = strtolower(str_replace("Controller", "", $class));
             if (in_array($controller, self::$controllers))
@@ -77,12 +82,6 @@ class Autoloader
         {
             $class = strtolower(str_replace("View", "", $class));
             require_once "view.$class.inc.php";
-        }
-        elseif (strpos($class, "Interface") !== FALSE
-            && $class !== "Interface")
-        {
-            $class = strtolower(str_replace("Interface", "", $class));
-            require_once "interface.$class.inc.php";
         }
         else
         {

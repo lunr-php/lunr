@@ -18,6 +18,7 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
         );
         require_once("class.view.inc.php");
         require_once("class.model.inc.php");
+        require_once("interface.controller.inc.php");
     }
 
     /**
@@ -76,12 +77,12 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     public function fileProvider()
     {
         return array(
-                    array("HomeView", "application/views/view.home.inc.php"),
-                    array("Controller", "system/libraries/core/class.controller.inc.php"),
-                    array("WebController", "system/libraries/core/class.webcontroller.inc.php"),
-                    array("JsonInterface", "system/libraries/core/interface.json.inc.php"),
-                    array("SessionModel", "system/models/model.session.inc.php"),
-                    array("NewsController", "application/controllers/controller.news.inc.php")
+            array("HomeView", "application/views/view.home.inc.php"),
+            array("WebServiceController", "system/libraries/core/class.webservicecontroller.inc.php"),
+            array("WebController", "system/libraries/core/class.webcontroller.inc.php"),
+            array("JsonInterface", "system/libraries/core/interface.json.inc.php"),
+            array("SessionModel", "system/models/model.session.inc.php"),
+            array("NewsController", "application/controllers/controller.news.inc.php")
         );
     }
 
