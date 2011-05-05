@@ -1,8 +1,9 @@
 <project name="MidSchip" default="build" basedir=".">
 
-    <property name="system" value="system"/>
-    <property name="application" value="application"/>
-    <property name="config" value="config"/>
+    <property name="system" value="system" />
+    <property name="application" value="application" />
+    <property name="config" value="config" />
+    <property name="tests" value="tests" />
 
     <target name="clean"
             description="Cleanup and create build directories">
@@ -21,6 +22,7 @@
             <arg line=" --jdepend-xml=${basedir}/build/logs/jdepend.xml
                         --jdepend-chart=${basedir}/build/pdepend/dependencies.svg
                         --overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg
+                        --ignore=${tests},${application}/libraries/third-party
                         ${basedir}" />
         </exec>
     </target>
