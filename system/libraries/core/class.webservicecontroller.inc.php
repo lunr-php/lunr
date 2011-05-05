@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the base abstract controller class.
+ * This file contains an abstract webservice controller class.
  *
  * PHP Version 5.3
  *
@@ -13,7 +13,7 @@
  */
 
 /**
- * Base Controller class
+ * Webservice Controller class
  *
  * @category   Libraries
  * @package    Core
@@ -21,7 +21,7 @@
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-abstract class Controller
+abstract class WebServiceController
 {
 
     /**
@@ -50,7 +50,7 @@ abstract class Controller
      */
     public function __call($name, $arguments)
     {
-        return Json::error("not_implemented");
+        return json_encode(array("error" => "not implemented"));
     }
 
     /**
