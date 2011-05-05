@@ -110,6 +110,19 @@ class Output
         }
     }
 
+    /**
+     * Trigger a PHP error (with linebreak at the end).
+     *
+     * @param String $info The error string that should be printed
+     * @param String $file The log file the error should be logged to (optional)
+     *
+     * @return void
+     */
+    public static function errorln($info, $file = "")
+    {
+        return self::error($info . "\n", $file);
+    }
+
 }
 
 ?>
