@@ -26,6 +26,12 @@ class L10nProviderPHP extends L10nProvider
 {
 
     /**
+     * Attribute that stores the language array
+     * @var array
+     */
+    private $lang_array;
+
+    /**
      * Constructor.
      *
      * @param String $language POSIX locale definition
@@ -44,12 +50,6 @@ class L10nProviderPHP extends L10nProvider
     }
 
     /**
-     * Attribute that stores the language array
-     * @var array
-     */
-    private $lang_array;
-
-    /**
      * Initialization method for setting up the provider.
      *
      * @param String $language POSIX locale definition
@@ -64,7 +64,7 @@ class L10nProviderPHP extends L10nProvider
         if ($this->language != $config['l10n']['default_language'])
         {
             include_once($config['l10n']['php_lang_file']);
-            $this->lang_array = $lang;
+            $this->lang_array = &$lang;
         }
     }
 
@@ -87,8 +87,8 @@ class L10nProviderPHP extends L10nProvider
                 if ($context == "")
                 {
 
-                    //Check if the identifier is contained in the language array
-                    if (array_key_exists($identifier, $this->lang_array))
+                    //Check if the identifier is contained in the language array and is a correct translated string
+                    if (array_key_exists($identifier, $this->lang_array) && !is_array($this->lang_array[$identifier]) )
                     {
                        return $this->lang_array[$identifier];
                     }
@@ -126,11 +126,16 @@ class L10nProviderPHP extends L10nProvider
     public function nlang($singular, $plural, $amount, $context = "")
     {
 
-
             if($context =="")
             {
-                        //Check if singular and plural identifiers are contained in the language array
-                        if (array_key_exists($singular, $this->lang_array) && array_key_exists($plural, $this->lang_array) )
+
+                        if (
+                            //Check if singular and plural identifiers are contained in the language array
+                            array_key_exists($singular, $this->lang_array) && array_key_exists($plural, $this->lang_array) &&
+
+                            //and are correct translated strings
+                            !is_array($this->lang_array[$singular]) && !is_array($this->lang_array[$plural])
+                            )
                         {
                             return ($amount == 1 ? $this->lang_array[$singular] : $this->lang_array[$plural]);
                         }
@@ -158,7 +163,6 @@ class L10nProviderPHP extends L10nProvider
 
             }
 
-        //return ($amount == 1 ? $singular : $plural);
     }
 
 }
