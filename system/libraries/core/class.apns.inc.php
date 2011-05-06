@@ -77,7 +77,7 @@ class APNS
 
         $ctx = stream_context_create();
         stream_context_set_option(
-            $ctx, 'ssl', 'local_cert', $config['apns']['cert']
+            $ctx, 'ssl', 'local_cert', $config['apns']['cert']['path']
         );
         stream_context_set_option(
             $ctx, 'ssl', 'passphrase', $config['apns']['cert']['pass']
@@ -174,7 +174,7 @@ class APNS
         //make sure you're using the right dev/production server & cert combo!
         $ctx = stream_context_create();
         stream_context_set_option(
-            $ctx, 'ssl', 'local_cert', $config['apns']['cert']
+            $ctx, 'ssl', 'local_cert', $config['apns']['cert']['path']
         );
         stream_context_set_option(
             $ctx, 'ssl', 'passphrase', $config['apns']['cert']['pass']
