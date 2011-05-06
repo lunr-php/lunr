@@ -63,7 +63,8 @@ class L10nProviderPHP extends L10nProvider
 
         if ($this->language != $config['l10n']['default_language'])
         {
-            include_once($config['l10n']['php_lang_file']);
+            include_once ($config['l10n']['locales']. "/" . $this->language . "_lang.php");
+
             $this->lang_array = &$lang;
         }
     }
@@ -84,32 +85,47 @@ class L10nProviderPHP extends L10nProvider
         if ($this->language != $config['l10n']['default_language'])
         {
 
-                if ($context == "")
-                {
+            //Check if the identifier is not contained in the language array
+            if (!array_key_exists($identifier, $this->lang_array))
+            {
+                Output::error("Identifier not contained in the language array: " . $identifier);
+            }
 
-                    //Check if the identifier is contained in the language array and is a correct translated string
-                    if (array_key_exists($identifier, $this->lang_array) && !is_array($this->lang_array[$identifier]) )
+            elseif ($context == "")
+            {
+                    //Check if the key have context asociated in the array
+                    if (is_array($this->lang_array[$identifier]))
                     {
-                       return $this->lang_array[$identifier];
+                        Output::error("Identifier with context: " . $identifier);
+
+                    }
+                    else // No exceptions
+                    {
+                        return $this->lang_array[$identifier];
                     }
 
-                    return $identifier;
+            }
 
-                }
-
-                else //Check if the identifier is contained in the language array and if the context string is contained in the second dimension of the array
+                else //If there is context information
                 {
-                   if (array_key_exists($identifier, $this->lang_array) && array_key_exists($context, $this->lang_array[$identifier]))
-                   {
-                        return $this->lang_array[$identifier][$context];
-                   }
 
-                   return $identifier;
+                  //Check if the context is not contained in the language array
+                  if (!array_key_exists($context, $this->lang_array[$identifier]))
+                  {
+                      Output::error("Identifier not included in the language array: " . $identifier);
+
+                  }
+                  else // No exceptions
+                  {
+                      return $this->lang_array[$identifier][$context];
+                  }
+
                 }
 
          }
 
         return $identifier;
+
     }
 
     /**
@@ -126,44 +142,60 @@ class L10nProviderPHP extends L10nProvider
     public function nlang($singular, $plural, $amount, $context = "")
     {
 
-            if($context =="")
+     //Check if the singular key is not in the language array
+     if(!array_key_exists($singular, $this->lang_array))
+     {
+        Output::error("Identifier for the singular key not included in the language array: " . $singular);
+     }
+
+     //Check if the plural key is not in the language array
+     elseif ( !array_key_exists($plural, $this->lang_array))
+     {
+        Output::error("Identifier for the plural key not included in the language array: " . $plural);
+     }
+     else
+     {
+
+        if($context =="")
+        {
+            if (is_array($this->lang_array[$singular]))
+            {
+                Output::error("Identifier with context: " . $singular);
+            }
+            elseif (is_array($this->lang_array[$plural]))
+            {
+                 Output::error("Identifier with context: " . $plural);
+            }
+            else // No exceptions
+            {
+                return ($amount == 1 ? $this->lang_array[$singular] : $this->lang_array[$plural]);
+            }
+        }
+        else
+        {
+
+            if(!is_array($this->lang_array[$singular]) || !array_key_exists($context, $this->lang_array[$singular]))
             {
 
-                        if (
-                            //Check if singular and plural identifiers are contained in the language array
-                            array_key_exists($singular, $this->lang_array) && array_key_exists($plural, $this->lang_array) &&
-
-                            //and are correct translated strings
-                            !is_array($this->lang_array[$singular]) && !is_array($this->lang_array[$plural])
-                            )
-                        {
-                            return ($amount == 1 ? $this->lang_array[$singular] : $this->lang_array[$plural]);
-                        }
-
-                        return $singular;
+                Output::error("Context not included in the singular array: " . $singular);
             }
-            else
+            elseif (!is_array($this->lang_array[$plural]) || !array_key_exists($context, $this->lang_array[$plural]) )
             {
-
-                if (
-                    //Check if singular and plural identifiers are contained in the language array
-                    (array_key_exists($singular, $this->lang_array) && array_key_exists($plural, $this->lang_array)) &&
-
-                    //and if context is contained in singular and plural sub arrays
-                    (array_key_exists($context, $this->lang_array[$singular]) && array_key_exists($context, $this->lang_array[$plural]))
-                   )
-                {
-                    return ($amount == 1 ? $this->lang_array[$singular][$context] : $this->lang_array[$plural][$context]);
-                }
-                else
-                {
-                    return $singular;
-                }
-
+                Output::error("Context not included in the plural array: " . $plural);
 
             }
+
+            else // No exceptions
+            {
+                return ($amount == 1 ? $this->lang_array[$singular][$context] : $this->lang_array[$plural][$context]);
+            }
+
+        }
+
+     }
 
     }
+
 
 }
 
