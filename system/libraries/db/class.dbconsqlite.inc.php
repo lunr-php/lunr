@@ -49,13 +49,13 @@ class DBConSqlite extends DBCon
     public function __construct($db, $readonly = TRUE)
     {
         parent::__construct($readonly);
-        $this->db_file = dirname(__FILE__) . "/../../../" . $db['file'];
+        $this->db_file = dirname(__FILE__) . '/../../../' . $db['file'];
 
-/*        $this->last_query = "";
+/*        $this->last_query = '';
         $this->where_group = FALSE;
         $this->transaction = FALSE;
         $this->for_update = FALSE;
-        $this->gen_uuid_hex = "REPLACE(UUID(),'-','')";*/
+        $this->gen_uuid_hex = 'REPLACE(UUID(),'-','')';*/
     }
 
     /**
@@ -102,7 +102,7 @@ class DBConSqlite extends DBCon
             $flag
         );
 
-        if (is_a($this->res, "SQLite3"))
+        if (is_a($this->res, 'SQLite3'))
         {
             $this->connected = TRUE;
         }
@@ -149,7 +149,7 @@ class DBConSqlite extends DBCon
      */
     public function last_query()
     {
-        return "";
+        return '';
     }
 
     /**
@@ -190,22 +190,22 @@ class DBConSqlite extends DBCon
 
         if ($this->connected)
         {
-            $sql_command .= $this->construct_query("", TRUE, TRUE);
+            $sql_command .= $this->construct_query('', TRUE, TRUE);
 
             $this->last_query = $sql_command;
 
-            if (substr($sql_command, 0, 6) == "SELECT")
+            if (substr($sql_command, 0, 6) == 'SELECT')
             {
                 if ($this->readonly === TRUE)
                 {
                     return FALSE;
                 }
 
-                $cmd = "query";
+                $cmd = 'query';
             }
             else
             {
-                $cmd = "exec";
+                $cmd = 'exec';
             }
 
             $output = $this->res->{$cmd}($sql_command);
@@ -314,7 +314,7 @@ class DBConSqlite extends DBCon
      *
      * @return void
      */
-    public function join($table, $on, $sort = "INNER")
+    public function join($table, $on, $sort = 'INNER')
     {
 
     }
@@ -327,7 +327,7 @@ class DBConSqlite extends DBCon
      *
      * @return void
      */
-    public function start_where_group($connector = "")
+    public function start_where_group($connector = '')
     {
 
     }
@@ -353,7 +353,7 @@ class DBConSqlite extends DBCon
      *
      * @return void
      */
-    public function where($col, $val, $operator = "=", $collate = "")
+    public function where($col, $val, $operator = '=', $collate = '')
     {
 
     }
@@ -369,7 +369,7 @@ class DBConSqlite extends DBCon
      *
      * @return void
      */
-    public function where_hex($col, $val, $operator = "=", $collate = "")
+    public function where_hex($col, $val, $operator = '=', $collate = '')
     {
 
     }
@@ -385,7 +385,7 @@ class DBConSqlite extends DBCon
      *
      * @return void
      */
-    public function or_where($col, $val, $operator = "=", $collate = "")
+    public function or_where($col, $val, $operator = '=', $collate = '')
     {
 
     }
@@ -401,7 +401,7 @@ class DBConSqlite extends DBCon
      *
      * @return void
      */
-    public function or_where_hex($col, $val, $operator = "=", $collate = "")
+    public function or_where_hex($col, $val, $operator = '=', $collate = '')
     {
 
     }
@@ -417,7 +417,7 @@ class DBConSqlite extends DBCon
      *
      * @return void
      */
-    public function like($col, $val, $match = "both", $collate = "")
+    public function like($col, $val, $match = 'both', $collate = '')
     {
 
     }
@@ -433,7 +433,7 @@ class DBConSqlite extends DBCon
      *
      * @return void
      */
-    public function or_like($col, $val, $match = "both", $collate = "")
+    public function or_like($col, $val, $match = 'both', $collate = '')
     {
 
     }
@@ -449,7 +449,7 @@ class DBConSqlite extends DBCon
      *
      * @return void
      */
-    public function not_like($col, $val, $match = "both", $collate = "")
+    public function not_like($col, $val, $match = 'both', $collate = '')
     {
 
     }
@@ -488,7 +488,7 @@ class DBConSqlite extends DBCon
      *
      * @return void
      */
-    public function order_by($col, $order = "ASC")
+    public function order_by($col, $order = 'ASC')
     {
 
     }
@@ -513,7 +513,7 @@ class DBConSqlite extends DBCon
      *
      * @return void
      */
-    public function limit($count, $start = "")
+    public function limit($count, $start = '')
     {
 
     }
@@ -547,10 +547,10 @@ class DBConSqlite extends DBCon
         else
         {
             $sql  = "INSERT INTO `$table` ";
-            $sql .= $this->prepare_data($data, "keys");
-            $sql .= "VALUES ";
-            $sql .= $this->prepare_data($data, "values");
-            $sql .= ";";
+            $sql .= $this->prepare_data($data, 'keys');
+            $sql .= 'VALUES ';
+            $sql .= $this->prepare_data($data, 'values');
+            $sql .= ';';
             return $this->query($sql, FALSE);
         }
     }
@@ -702,7 +702,7 @@ class DBConSqlite extends DBCon
             if (is_array($string))
             {
                 $input = print_r($string, TRUE);
-                $msg = "Wrong input for escape_string()! Array given: $input";
+                $msg = 'Wrong input for escape_string()! Array given: ' . $input;
                 Output::error($msg);
                 return FALSE;
             }

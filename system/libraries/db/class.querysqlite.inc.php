@@ -113,7 +113,7 @@ class QuerySqlite implements QueryInterface
      */
     public function field($col)
     {
-        return "";
+        return '';
     }
 
     /**

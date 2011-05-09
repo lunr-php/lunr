@@ -83,7 +83,7 @@ class QueryMySQL implements QueryInterface
     {
         if (is_bool($this->query))
         {
-            Output::error("Num rows called on failed query!");
+            Output::error('Num rows called on failed query!');
             return 0;
         }
         else

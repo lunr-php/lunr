@@ -37,15 +37,15 @@ class DBConFactory
     {
         if (!isset($db['driver']))
         {
-            $db['driver'] = "";
+            $db['driver'] = '';
         }
 
         switch ($db['driver'])
         {
-            case "sqlite":
+            case 'sqlite':
                 return new DBConSqlite($db, $readonly);
                 break;
-            case "mysql":
+            case 'mysql':
             default:
                 return new DBConMySQL($db, $readonly);
                 break;

@@ -95,13 +95,13 @@ abstract class DBCon
         $this->readonly  = $readonly;
         $this->connected = FALSE;
 
-        $this->select = "";
-        $this->join   = "";
-        $this->where  = "";
-        $this->order  = "";
-        $this->group  = "";
-        $this->limit  = "";
-        $this->union  = "";
+        $this->select = '';
+        $this->join   = '';
+        $this->where  = '';
+        $this->order  = '';
+        $this->group  = '';
+        $this->limit  = '';
+        $this->union  = '';
     }
 
     /**
@@ -192,65 +192,65 @@ abstract class DBCon
      */
     protected function construct_query($from, $clear = TRUE, $limit = FALSE)
     {
-        $sql_command = "";
+        $sql_command = '';
 
         if (!$limit)
         {
-            if ($this->union != "")
+            if ($this->union != '')
             {
                 $sql_command .= $this->union;
             }
-            if ($this->select != "")
+            if ($this->select != '')
             {
                 $sql_command .= $this->select;
             }
             else
             {
-                $sql_command .= "SELECT * ";
+                $sql_command .= 'SELECT * ';
             }
 
-            $sql_command .= "FROM " . $this->escape_as($from);
+            $sql_command .= 'FROM ' . $this->escape_as($from);
 
-            if ($this->join != "")
+            if ($this->join != '')
             {
                 $sql_command .= $this->join;
             }
         }
 
-        if ($this->where != "")
+        if ($this->where != '')
         {
             $sql_command .= $this->where;
         }
 
-        if ($this->group != "")
+        if ($this->group != '')
         {
             $sql_command .= $this->group;
         }
 
-        if ($this->order != "")
+        if ($this->order != '')
         {
             $sql_command .= $this->order;
         }
 
-        if ($this->limit != "")
+        if ($this->limit != '')
         {
             $sql_command .= $this->limit;
         }
 
 //         if ($this->for_update && !$limit)
 //         {
-//             $sql_command .= " FOR UPDATE";
+//             $sql_command .= ' FOR UPDATE';
 //         }
 
         if ($clear == TRUE)
         {
-            $this->union = "";
-            $this->select = "";
-            $this->join = "";
-            $this->where = "";
-            $this->group = "";
-            $this->order = "";
-            $this->limit = "";
+            $this->union = '';
+            $this->select = '';
+            $this->join = '';
+            $this->where = '';
+            $this->group = '';
+            $this->order = '';
+            $this->limit = '';
 //             $this->for_update = FALSE;
         }
 
@@ -352,7 +352,7 @@ abstract class DBCon
      *
      * @return void
      */
-    public abstract function join($table, $on, $sort = "INNER");
+    public abstract function join($table, $on, $sort = 'INNER');
 
     /**
      * Start a WHERE clause group.
@@ -362,7 +362,7 @@ abstract class DBCon
      *
      * @return void
      */
-    public abstract function start_where_group($connector = "");
+    public abstract function start_where_group($connector ='');
 
     /**
      * End a where group.
@@ -382,7 +382,7 @@ abstract class DBCon
      *
      * @return void
      */
-    public abstract function where($col, $val, $operator = "=", $collate = "");
+    public abstract function where($col, $val, $operator = '=', $collate = '');
 
     /**
      * Define a WHERE clause, which deals with hex->binary.
@@ -395,7 +395,7 @@ abstract class DBCon
      *
      * @return void
      */
-    public abstract function where_hex($col, $val, $operator = "=", $collate = "");
+    public abstract function where_hex($col, $val, $operator = '=', $collate = '');
 
     /**
      * Define a OR WHERE clause.
@@ -408,7 +408,7 @@ abstract class DBCon
      *
      * @return void
      */
-    public abstract function or_where($col, $val, $operator = "=", $collate = "");
+    public abstract function or_where($col, $val, $operator = '=', $collate = '');
 
     /**
      * Define a OR WHERE clause, which deals with hex->binary.
@@ -421,7 +421,7 @@ abstract class DBCon
      *
      * @return void
      */
-    public abstract function or_where_hex($col, $val, $operator = "=", $collate = "");
+    public abstract function or_where_hex($col, $val, $operator = '=', $collate = '');
 
     /**
      * Define a LIKE clause.
@@ -434,7 +434,7 @@ abstract class DBCon
      *
      * @return void
      */
-    public abstract function like($col, $val, $match = "both", $collate = "");
+    public abstract function like($col, $val, $match = 'both', $collate = '');
 
     /**
      * Define an alternative LIKE clause.
@@ -447,7 +447,7 @@ abstract class DBCon
      *
      * @return void
      */
-    public abstract function or_like($col, $val, $match = "both", $collate = "");
+    public abstract function or_like($col, $val, $match = 'both', $collate = '');
 
     /**
      * Define a NOT LIKE clause.
@@ -460,7 +460,7 @@ abstract class DBCon
      *
      * @return void
      */
-    public abstract function not_like($col, $val, $match = "both", $collate = "");
+    public abstract function not_like($col, $val, $match = 'both', $collate = '');
 
     /**
      * Define a WHERE IN clause.
@@ -490,7 +490,7 @@ abstract class DBCon
      *
      * @return void
      */
-    public abstract function order_by($col, $order = "ASC");
+    public abstract function order_by($col, $order = 'ASC');
 
     /**
      * Define a GROUP BY clause.
@@ -509,7 +509,7 @@ abstract class DBCon
      *
      * @return void
      */
-    public abstract function limit($count, $start = "");
+    public abstract function limit($count, $start = '');
 
     /**
      * Define a UNION statement.
@@ -646,10 +646,10 @@ abstract class DBCon
     {
         if (is_array($data))
         {
-            if ($type == "keys")
+            if ($type == 'keys')
             {
                 $array = array_keys($data);
-                $char = "`";
+                $char = '`';
             }
             else
             {
@@ -663,29 +663,29 @@ abstract class DBCon
             $char = "'";
         }
 
-        $list = "(";
+        $list = '(';
         // The value must be a proper hexadecimal value well formatted
-        // -> "UNHEX('hex_value')"
+        // -> 'UNHEX('hex_value')'
         $unhex_pattern = "/UNHEX\('[0-9a-fA-F]{32}'\)/";
 
         foreach ($array as $value)
         {
-            if(($type != "keys")
+            if(($type != 'keys')
                 && (preg_match($unhex_pattern, $value) != FALSE))
             {
                 ///TODO: Does not work that way for SQLite3
-                $list .= $value." ,";
+                $list .= $value.' ,';
             }
             elseif ($value === NULL)
             {
-                $list .= "NULL ,";
+                $list .= 'NULL ,';
             }
             else
             {
-                $list .= $char . $this->escape_string($value) . $char . ",";
+                $list .= $char . $this->escape_string($value) . $char . ',';
             }
         }
-        $list = trim($list, ",") . ") ";
+        $list = trim($list, ',') . ') ';
         return $list;
     }
 
@@ -698,21 +698,21 @@ abstract class DBCon
      */
     protected function escape_columns($col)
     {
-        $parts = explode(".", $col);
-        $col = "";
+        $parts = explode('.', $col);
+        $col = '';
         foreach ($parts as $part)
         {
             $part = trim($part);
-            if ($part == "*")
+            if ($part == '*')
             {
-                $col .= $part . ".";
+                $col .= $part . '.';
             }
             else
             {
-                $col .= "`" . $part . "`.";
+                $col .= '`' . $part . '`.';
             }
         }
-        $col = trim($col, ".") . " ";
+        $col = trim($col, '.') . ' ';
         return $col;
     }
 
@@ -727,56 +727,56 @@ abstract class DBCon
      */
     protected function escape_as($cols, $hex = FALSE)
     {
-        $cols = explode(",", $cols);
-        $string = "";
+        $cols = explode(',', $cols);
+        $string = '';
         foreach ($cols AS $value)
         {
-            if (strpos($value, " AS "))
+            if (strpos($value, ' AS '))
             {
-                $col = explode(" AS ", $value);
+                $col = explode(' AS ', $value);
                 if ($hex)
                 {
-                    $string .= "HEX(" . $this->escape_columns($col[0]) . ")";
-                    $string .= " AS `" . trim($col[1]) . "`, ";
+                    $string .= 'HEX(' . $this->escape_columns($col[0]) . ')';
+                    $string .= ' AS `' . trim($col[1]) . '`, ';
                 }
                 else
                 {
                     $string .= $this->escape_columns($col[0]);
-                    $string .= " AS `" . trim($col[1]) . "`, ";
+                    $string .= ' AS `' . trim($col[1]) . '`, ';
                 }
             }
-            elseif (strpos($value, " as "))
+            elseif (strpos($value, ' as '))
             {
-                $col = explode(" as ", $value);
+                $col = explode(' as ', $value);
                 if ($hex)
                 {
-                    $string .= "HEX(" . $this->escape_columns($col[0]) . ")";
-                    $string .= " AS `" . trim($col[1]) . "`, ";
+                    $string .= 'HEX(' . $this->escape_columns($col[0]) . ')';
+                    $string .= ' AS `' . trim($col[1]) . '`, ';
                 }
                 else
                 {
                     $string .= $this->escape_columns($col[0]);
-                    $string .= " AS `" . trim($col[1]) . "`, ";
+                    $string .= ' AS `' . trim($col[1]) . '`, ';
                 }
             }
-            elseif (trim($value) == "*")
+            elseif (trim($value) == '*')
             {
-                $string .= trim($value) . ", ";
+                $string .= trim($value) . ', ';
             }
             else
             {
                 if ($hex)
                 {
-                    $string .= " HEX(" . $this->escape_columns(trim($value));
-                    $string .= ") AS `" . trim($value) . "`, ";
+                    $string .= ' HEX(' . $this->escape_columns(trim($value));
+                    $string .= ') AS `' . trim($value) . '`, ';
                 }
                 else
                 {
-                    $string .= $this->escape_columns(trim($value)) . ", ";
+                    $string .= $this->escape_columns(trim($value)) . ', ';
                 }
             }
         }
-        $string = trim($string, ", ") . " ";
+        $string = trim($string, ', ') . ' ';
         return $string;
     }
 
