@@ -63,8 +63,7 @@ class L10nProviderPHP extends L10nProvider
 
         if ($this->language != $config['l10n']['default_language'])
         {
-            include_once ($config['l10n']['locales']. "/" . $this->language . "_lang.php");
-
+            include_once ($config['l10n']['locales']. "/" . $this->language . "/" . $config['l10n']['domain'] . ".php");
             $this->lang_array = &$lang;
         }
     }
@@ -84,44 +83,35 @@ class L10nProviderPHP extends L10nProvider
         //Check if it's necessary to translate the identifier
         if ($this->language != $config['l10n']['default_language'])
         {
-
             //Check if the identifier is not contained in the language array
             if (!array_key_exists($identifier, $this->lang_array))
             {
                 Output::error("Identifier not contained in the language array: " . $identifier);
             }
-
             elseif ($context == "")
             {
                     //Check if the key have context asociated in the array
                     if (is_array($this->lang_array[$identifier]))
                     {
                         Output::error("Identifier with context: " . $identifier);
-
                     }
                     else // No exceptions
                     {
                         return $this->lang_array[$identifier];
                     }
-
             }
-
-                else //If there is context information
+            else //If there is context information
+            {
+                //Check if the context is not contained in the language array
+                if (!array_key_exists($context, $this->lang_array[$identifier]))
                 {
-
-                  //Check if the context is not contained in the language array
-                  if (!array_key_exists($context, $this->lang_array[$identifier]))
-                  {
-                      Output::error("Identifier not included in the language array: " . $identifier);
-
-                  }
-                  else // No exceptions
-                  {
-                      return $this->lang_array[$identifier][$context];
-                  }
-
+                    Output::error("Identifier not included in the language array: " . $identifier);
                 }
-
+                else // No exceptions
+                {
+                    return $this->lang_array[$identifier][$context];
+                }
+            }
          }
 
         return $identifier;
@@ -155,7 +145,6 @@ class L10nProviderPHP extends L10nProvider
      }
      else
      {
-
         if($context =="")
         {
             if (is_array($this->lang_array[$singular]))
@@ -173,25 +162,19 @@ class L10nProviderPHP extends L10nProvider
         }
         else
         {
-
             if(!is_array($this->lang_array[$singular]) || !array_key_exists($context, $this->lang_array[$singular]))
             {
-
                 Output::error("Context not included in the singular array: " . $singular);
             }
             elseif (!is_array($this->lang_array[$plural]) || !array_key_exists($context, $this->lang_array[$plural]) )
             {
                 Output::error("Context not included in the plural array: " . $plural);
-
             }
-
             else // No exceptions
             {
                 return ($amount == 1 ? $this->lang_array[$singular][$context] : $this->lang_array[$plural][$context]);
             }
-
         }
-
      }
 
     }
