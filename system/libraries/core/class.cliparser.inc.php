@@ -77,7 +77,7 @@ class CliParser
      * @param array $shortopts List of supported short arguments
      * @param array $longopts  List of supported long arguments (optional)
      */
-    public function __construct($shortopts, $longopts = "")
+    public function __construct($shortopts, $longopts = '')
     {
         $this->short = $shortopts;
         $this->long = $longopts;
@@ -144,12 +144,12 @@ class CliParser
         array_push($this->checked, $opt);
         if (strlen($opt) != 0)
         {
-            if ($opt{0} == "-")
+            if ($opt{0} == '-')
             {
                 $param = substr($opt, 1);
                 if (strlen($param) != 0)
                 {
-                    if($param{0} == "-")
+                    if($param{0} == '-')
                     {
                         return $this->is_valid_long(substr($param, 1), $index);
                     }
@@ -194,7 +194,7 @@ class CliParser
         }
         else
         {
-            echo "Invalid parameter given: -" . $opt . "\n";
+            echo 'Invalid parameter given: -' . $opt . "\n";
             $this->error = TRUE;
         }
         return FALSE;
@@ -220,8 +220,8 @@ class CliParser
                     $match = TRUE;
                     $args = $key;
                 }
-                elseif ($arg{strlen($opt)} == ":"
-                    || $arg{strlen($opt)} == ";")
+                elseif ($arg{strlen($opt)} == ':'
+                    || $arg{strlen($opt)} == ';')
                 {
                     $match = TRUE;
                     $args = $key;
@@ -240,7 +240,7 @@ class CliParser
         }
         else
         {
-            echo "Invalid parameter given: --" . $opt . "\n";
+            echo 'Invalid parameter given: --' . $opt . "\n";
             $this->error = TRUE;
             return FALSE;
         }
@@ -262,17 +262,17 @@ class CliParser
         $next = $index + 1;
         if($pos+1 < strlen($a))
         {
-            if($a{$pos+1} == ":")
+            if($a{$pos+1} == ':')
             {
                 if (count($this->args)>$next)
                 {
                     if (!$this->is_opt($this->args[$next], $next)
-                        && $this->args[$next]{0} != "-")
+                        && $this->args[$next]{0} != '-')
                     {
                         array_push($this->ast[$opt], $this->args[$next]);
                         if ($pos+2<strlen($a))
                         {
-                            if ($a{$pos+2} == ":" || $a{$pos+2} == ";")
+                            if ($a{$pos+2} == ':' || $a{$pos+2} == ';')
                             {
                                 return $this->check_argument(
                                     $opt,
@@ -293,28 +293,28 @@ class CliParser
                     }
                     else
                     {
-                        echo "Missing argument for -" . $opt . "\n";
+                        echo 'Missing argument for -' . $opt . "\n";
                         $this->error = TRUE;
                     }
                 }
                 else
                 {
-                    echo "Missing argument for -" . $opt . "\n";
+                    echo 'Missing argument for -' . $opt . "\n";
                     $this->error = TRUE;
                 }
             }
-            elseif($a{$pos+1} == ";")
+            elseif($a{$pos+1} == ';')
             {
                 if (count($this->args) > $next
                     && strlen($this->args[$next]) != 0)
                 {
                     if (!$this->is_opt($this->args[$next], $next)
-                        && $this->args[$next]{0} != "-")
+                        && $this->args[$next]{0} != '-')
                     {
                         array_push($this->ast[$opt], $this->args[$next]);
                         if ($pos+2<strlen($a))
                         {
-                            if ($a{$pos+2} == ";")
+                            if ($a{$pos+2} == ';')
                             {
                                 return $this->check_argument(
                                     $opt,
@@ -343,7 +343,7 @@ class CliParser
             {
                 if (!$this->is_opt($this->args[$next], $next))
                 {
-                    echo "Superfluos argument: " . $this->args[$next] . "\n";
+                    echo 'Superfluos argument: ' . $this->args[$next] . "\n";
                 }
                 return TRUE;
             }

@@ -52,19 +52,19 @@ class SessionModel extends Model
      */
     public function read_session_data($id)
     {
-        $this->db->select("sessionData");
-        $this->db->where("sessionID", $id);
-        $this->db->where("expires", time(), ">");
-        $query = $this->db->get("user_sessions");
+        $this->db->select('sessionData');
+        $this->db->where('sessionID', $id);
+        $this->db->where('expires', time(), '>');
+        $query = $this->db->get('user_sessions');
         if ($query)
         {
             if ($query->num_rows() > 0)
             {
-                return base64_decode($query->field("sessionData"));
+                return base64_decode($query->field('sessionData'));
             }
             else
             {
-                return "";
+                return '';
             }
         }
         else
@@ -85,17 +85,17 @@ class SessionModel extends Model
     public function write_session_data($id, $session_data, $time)
     {
         $this->db->begin_transaction();
-        $this->db->select_for_update("*", FALSE);
-        $this->db->where("sessionID", $id);
-        $query = $this->db->get("user_sessions");
+        $this->db->select_for_update('*', FALSE);
+        $this->db->where('sessionID', $id);
+        $query = $this->db->get('user_sessions');
         if ($query)
         {
             $data = array(
-                        "sessionID" => $id,
-                        "sessionData" => base64_encode($session_data),
-                        "expires" => $time
+                        'sessionID' => $id,
+                        'sessionData' => base64_encode($session_data),
+                        'expires' => $time
                     );
-            $this->db->replace("user_sessions", $data);
+            $this->db->replace('user_sessions', $data);
             $this->db->commit();
         }
         else
@@ -115,15 +115,15 @@ class SessionModel extends Model
     public function delete_session($id)
     {
         $this->db->begin_transaction();
-        $this->db->select_for_update("*", FALSE);
-        $this->db->where("sessionID", $id);
-        $query = $this->db->get("user_sessions");
+        $this->db->select_for_update('*', FALSE);
+        $this->db->where('sessionID', $id);
+        $query = $this->db->get('user_sessions');
         if ($query)
         {
             if ($query->num_rows() > 0)
             {
-                $this->db->where("sessionID", $id);
-                $this->db->delete("user_sessions");
+                $this->db->where('sessionID', $id);
+                $this->db->delete('user_sessions');
                 $this->db->commit();
             }
             else
@@ -145,8 +145,8 @@ class SessionModel extends Model
      */
     public function session_gc()
     {
-        $this->db->where("expires", time(), "<");
-        $this->db->delete("user_sessions");
+        $this->db->where('expires', time(), '<');
+        $this->db->delete('user_sessions');
     }
 
 }

@@ -40,18 +40,18 @@ class APNS
      */
     public function __construct()
     {
-        require_once("conf.notifications.inc.php");
+        include_once 'conf.notifications.inc.php';
         $this->error = new SplFixedArray(10);
-        $this->error[0] = "UNDEFINED"; //SUCCESS?
-        $this->error[1] = "PROCESSING ERROR";
-        $this->error[2] = "MISSING DEVICE TOKEN";
-        $this->error[3] = "MISSING TOPIC";
-        $this->error[4] = "MISSING PAYLOAD";
-        $this->error[5] = "INVALID TOKEN SIZE";
-        $this->error[6] = "INVALID TOPIC SIZE";
-        $this->error[7] = "INVALID PAYLOAD SIZE";
-        $this->error[8] = "INVALID TOKEN";
-        $this->error[9] = "UNKNOWN ERROR";
+        $this->error[0] = 'UNDEFINED'; //SUCCESS?
+        $this->error[1] = 'PROCESSING ERROR';
+        $this->error[2] = 'MISSING DEVICE TOKEN';
+        $this->error[3] = 'MISSING TOPIC';
+        $this->error[4] = 'MISSING PAYLOAD';
+        $this->error[5] = 'INVALID TOKEN SIZE';
+        $this->error[6] = 'INVALID TOPIC SIZE';
+        $this->error[7] = 'INVALID PAYLOAD SIZE';
+        $this->error[8] = 'INVALID TOKEN';
+        $this->error[9] = 'UNKNOWN ERROR';
     }
 
     /**
@@ -97,9 +97,9 @@ class APNS
         //$expiry_date = '';
         //Simple notification format
         $msg = chr(0)
-            . pack("n", 32)
+            . pack('n', 32)
             . pack('H*', str_replace(' ', '', $device_token))
-            . pack("n", strlen($json_payload)) . $json_payload;
+            . pack('n', strlen($json_payload)) . $json_payload;
 
         //Enhanced notification format
         //$msg = chr(0)
@@ -203,7 +203,7 @@ class APNS
             if (strlen($data))
             {
                 $feedback_tokens[] =
-                    unpack("N1timestamp/n1length/H*devtoken", $data);
+                    unpack('N1timestamp/n1length/H*devtoken', $data);
             }
         }
         fclose($apns);

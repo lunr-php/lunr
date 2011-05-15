@@ -42,7 +42,7 @@ interface JsonInterface
      *
      * @return String $return json encoded error
      */
-    public static function error($error, $info = "");
+    public static function error($error, $info = '');
 
     /**
      * Return a json encoded internal server error.

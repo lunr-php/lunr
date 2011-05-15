@@ -49,7 +49,7 @@ class L10n
                 while (FALSE !== ($file = readdir($handle)))
                 {
                     $path = $config['l10n']['locales'] . "/$file";
-                    if ($file != "." && $file != ".." && is_dir($path))
+                    if ($file != '.' && $file != '..' && is_dir($path))
                     {
                         self::$languages[] = $file;
                     }
@@ -73,7 +73,7 @@ class L10n
     {
         $lang = self::iso_to_posix($language);
 
-        setcookie('lang', $lang, M2DateTime::delayed_timestamp("+1year"), '/');
+        setcookie('lang', $lang, M2DateTime::delayed_timestamp('+1year'), '/');
         return $lang;
     }
 

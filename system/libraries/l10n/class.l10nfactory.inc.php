@@ -43,7 +43,7 @@ class L10nFactory
     {
         switch($provider)
         {
-            case "php":
+            case 'php':
                 if (!isset(self::$lprovider[$provider]))
                 {
                     self::$lprovider[$provider] =
@@ -52,7 +52,7 @@ class L10nFactory
 
                 return self::$lprovider[$provider];
                 break;
-            case "gettext":
+            case 'gettext':
             default:
                 if (!isset(self::$lprovider[$provider]))
                 {

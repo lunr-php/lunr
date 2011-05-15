@@ -66,12 +66,12 @@ class Mail
      */
     public function __construct()
     {
-        $this->from = "";
+        $this->from = '';
         $this->to = array();
         $this->cc = array();
         $this->bcc = array();
-        $this->msg = "";
-        $this->subject = "";
+        $this->msg = '';
+        $this->subject = '';
     }
 
     /**
@@ -100,7 +100,7 @@ class Mail
         // might be implied. So we check for a present domain by checking the
         // presence of the '@' character
         if((filter_var($email, FILTER_VALIDATE_EMAIL) === FALSE)
-            || (strpos($email, "@") === FALSE))
+            || (strpos($email, '@') === FALSE))
         {
             return FALSE;
         }
@@ -190,7 +190,7 @@ class Mail
     public function send()
     {
         $headers = $this->headers();
-        if ($headers && !empty($this->to) && ($this->subject != ""))
+        if ($headers && !empty($this->to) && ($this->subject != ''))
         {
             $ok = TRUE;
             foreach ($this->to AS $value)
@@ -218,19 +218,19 @@ class Mail
      */
     private function headers()
     {
-        if ($this->from != "")
+        if ($this->from != '')
         {
-            $header  = "From: " . $this->from . "\r\n";
+            $header  = 'From: ' . $this->from . "\r\n";
 
             if (!empty($this->cc))
             {
-                $header .= "CC: ";
+                $header .= 'CC: ';
                 foreach ($this->cc as $key=>$value)
                 {
                     $header .= $value;
                     if (isset($this->cc[$key + 1]))
                     {
-                        $header .= ", ";
+                        $header .= ', ';
                     }
                     else
                     {
@@ -241,13 +241,13 @@ class Mail
 
             if (!empty($this->bcc))
             {
-                $header .= "BCC: ";
+                $header .= 'BCC: ';
                 foreach ($this->bcc as $key=>$value)
                 {
                     $header .= $value;
                     if (isset($this->bcc[$key + 1]))
                     {
-                        $header .= ", ";
+                        $header .= ', ';
                     }
                     else
                     {
@@ -256,7 +256,7 @@ class Mail
                 }
             }
 
-            $header .= "X-Mailer: PHP/" . phpversion();
+            $header .= 'X-Mailer: PHP/' . phpversion();
             return $header;
         }
         else

@@ -102,7 +102,7 @@ abstract class View
      *
      * @return String $return base_url (+ the given path, if given)
      */
-    protected function base_url($path = "")
+    protected function base_url($path = '')
     {
         global $config;
         return $config['base_url'] . $path;
@@ -116,9 +116,9 @@ abstract class View
      *
      * @return String $return path to statics (+ the given path, if given)
      */
-    protected function statics($path = "")
+    protected function statics($path = '')
     {
-        return $this->base_url("statics/" . $path);
+        return $this->base_url('statics/' . $path);
     }
 
     /**
@@ -133,9 +133,9 @@ abstract class View
      *
      * @return String $return The constructed CSS class name
      */
-    protected function css_alternate($basename, $alternation_hint, $suffix = "")
+    protected function css_alternate($basename, $alternation_hint, $suffix = '')
     {
-        if ($suffix == "")
+        if ($suffix == '')
         {
             if ( $alternation_hint % 2 == 0 )
             {

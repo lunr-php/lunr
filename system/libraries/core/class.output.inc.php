@@ -35,7 +35,7 @@ class Output
      */
     public static function cli_print($msg)
     {
-        echo M2DateTime::get_datetime() . ": " . $msg;
+        echo M2DateTime::get_datetime() . ': ' . $msg;
     }
 
     /**
@@ -66,7 +66,7 @@ class Output
      */
     public static function cli_println($msg)
     {
-        echo M2DateTime::get_datetime() . ": " . $msg . "\n";
+        echo M2DateTime::get_datetime() . ': ' . $msg . "\n";
     }
 
     /**
@@ -77,34 +77,34 @@ class Output
      *
      * @return void
      */
-    public static function error($info, $file = "")
+    public static function error($info, $file = '')
     {
         if (isset($_GET['controller']) && isset($_GET['method']))
         {
-            if ($file == "")
+            if ($file == '')
             {
                 trigger_error(
-                    $_GET['controller'] . "/" . $_GET['method'] . ": " . $info
+                    $_GET['controller'] . '/' . $_GET['method'] . ': ' . $info
                 );
             }
             else
             {
-                $prefix = "[" . M2DateTime::get_datetime() . "]: ";
+                $prefix = '[' . M2DateTime::get_datetime() . ']: ';
                 error_log(
-                    $prefix . $_GET['controller'] . "/" . $_GET['method']
-                    . ": " . $info, 3, $file
+                    $prefix . $_GET['controller'] . '/' . $_GET['method']
+                    . ': ' . $info, 3, $file
                 );
             }
         }
         else
         {
-            if ($file == "")
+            if ($file == '')
             {
                 trigger_error($info);
             }
             else
             {
-                $prefix = "[" . M2DateTime::get_datetime() . "]: ";
+                $prefix = '[' . M2DateTime::get_datetime() . ']: ';
                 error_log($prefix . $info, 3, $file);
             }
         }
@@ -118,7 +118,7 @@ class Output
      *
      * @return void
      */
-    public static function errorln($info, $file = "")
+    public static function errorln($info, $file = '')
     {
         return self::error($info . "\n", $file);
     }

@@ -43,7 +43,7 @@ class SessionManager
      */
     public function __construct()
     {
-        $this->lifetime = ini_get("session.gc_maxlifetime");
+        $this->lifetime = ini_get('session.gc_maxlifetime');
 
         session_set_save_handler(
             array(&$this, 'open'),

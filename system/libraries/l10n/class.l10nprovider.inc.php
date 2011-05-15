@@ -72,7 +72,7 @@ abstract class L10nProvider
      *
      * @return String $string Translated string, identifier by default
      */
-    abstract public function lang($identifier, $context = "");
+    abstract public function lang($identifier, $context = '');
 
     /**
      * Return a translated string, with proper singular/plural form.
@@ -85,7 +85,7 @@ abstract class L10nProvider
      *
      * @return String $string Translated string, identifier by default
      */
-    abstract public function nlang($singular, $plural, $amount, $context = "");
+    abstract public function nlang($singular, $plural, $amount, $context = '');
 
 }
 

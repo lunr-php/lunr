@@ -36,12 +36,12 @@ class Verification
      */
     public static function __callStatic($method, $arguments)
     {
-        if (substr($method, 0, 12) == "check_length")
+        if (substr($method, 0, 12) == 'check_length')
         {
             $length = substr($method, 12);
             return self::check_length($length, $arguments[0]);
         }
-        elseif (substr($method, 0, 12) == "check_ignore")
+        elseif (substr($method, 0, 12) == 'check_ignore')
         {
             return TRUE;
         }
@@ -63,16 +63,16 @@ class Verification
      * @return Boolean $return TRUE if the input matches against the ruleset,
      *                         FALSE otherwise.
      */
-    public static function verify_array_ruleset($identifier, &$input, &$ruleset, $file = "")
+    public static function verify_array_ruleset($identifier, &$input, &$ruleset, $file = '')
     {
-        if ($file == "")
+        if ($file == '')
         {
             global $config;
             $file  = $config['log']['invalid_input'];
-            $file .= "midschip_invalid_input." . CLIENT_OS . ".log";
+            $file .= 'midschip_invalid_input.' . CLIENT_OS . '.log';
         }
 
-        if (trim($identifier) == "")
+        if (trim($identifier) == '')
         {
             Output::error("Can't verify input. Empty Identifier!'", $file);
             return FALSE;
@@ -112,7 +112,7 @@ class Verification
                 {
                     foreach ($ruleset[$key] as &$rule)
                     {
-                        if (call_user_func("self::check_" . $rule, $value) === FALSE)
+                        if (call_user_func('self::check_' . $rule, $value) === FALSE)
                         {
                             Output::error($error_prefix . "Rule '$rule' failed for '$key'!", $file);
                             return FALSE;
@@ -122,7 +122,7 @@ class Verification
                 }
                 else
                 {
-                    if (call_user_func("self::check_" . $ruleset[$key], $value) === FALSE)
+                    if (call_user_func('self::check_' . $ruleset[$key], $value) === FALSE)
                     {
                         Output::error($error_prefix . "Rule '" . $ruleset[$key] . "' failed for '$key'!", $file);
                         return FALSE;

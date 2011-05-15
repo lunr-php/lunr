@@ -43,7 +43,7 @@ class M2DateTime
      */
     public static function yesterday()
     {
-        return date('Y-m-d', strtotime("-1 day"));
+        return date('Y-m-d', strtotime('-1 day'));
     }
 
     /**
@@ -53,7 +53,7 @@ class M2DateTime
      */
     public static function tomorrow()
     {
-        return date('Y-m-d', strtotime("+1 day"));
+        return date('Y-m-d', strtotime('+1 day'));
     }
 
     /**
@@ -117,7 +117,7 @@ class M2DateTime
      */
     public static function now()
     {
-        return strftime("%H:%M:%S", time());
+        return strftime('%H:%M:%S', time());
     }
 
     /**
@@ -141,7 +141,7 @@ class M2DateTime
      */
     public static function get_time($timestamp)
     {
-        return strftime("%H:%M:%S", $timestamp);
+        return strftime('%H:%M:%S', $timestamp);
     }
 
     /**
@@ -172,7 +172,7 @@ class M2DateTime
      *
      * @return String $date Date as a string
      */
-    public static function get_short_date($timestamp = FALSE, $locale = "en_US")
+    public static function get_short_date($timestamp = FALSE, $locale = 'en_US')
     {
         setlocale(LC_ALL, $locale);
         if ($timestamp === FALSE)
@@ -195,7 +195,7 @@ class M2DateTime
     public static function is_time($string)
     {
         // accepts HHH:MM:SS, e.g. 23:59:30 or 12:30 or 120:17
-        if (preg_match("/^(\-)?[0-9]{1,3}(:[0-5][0-9]){1,2}$/", $string))
+        if (preg_match('/^(\-)?[0-9]{1,3}(:[0-5][0-9]){1,2}$/', $string))
         {
             return TRUE;
         }
@@ -215,8 +215,8 @@ class M2DateTime
      */
     public static function is_date($string)
     {
-        $feb    = "02[\- \/ \.](0[1-9]|1[0-9]|2[0-9])";
-        $others = "(01|0[3-9]|1[012])[\- \/ \.](0[1-9]|[12][0-9]|3[01])";
+        $feb    = '02[\- \/ \.](0[1-9]|1[0-9]|2[0-9])';
+        $others = '(01|0[3-9]|1[012])[\- \/ \.](0[1-9]|[12][0-9]|3[01])';
 
         if (preg_match("/^(\d{1,4})[\- \/ \.]($others|$feb)$/", $string))
         {

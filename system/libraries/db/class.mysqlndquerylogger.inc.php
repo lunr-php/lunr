@@ -58,21 +58,21 @@ class MySQLndQueryLogger extends MySQLndUhConnection {
      */
     private function get_function_call_hierarchy($stack)
     {
-        $hierarchy = "";
+        $hierarchy = '';
         foreach ($stack as &$value)
         {
             if (isset($value['class']))
             {
-                $hierarchy .= $value['class'] . "->" . $value['function'] . "()=>";
+                $hierarchy .= $value['class'] . '->' . $value['function'] . '()=>';
             }
             else
             {
-                $hierarchy .= $value['function'] . "()=>";
+                $hierarchy .= $value['function'] . '()=>';
             }
         }
         unset($value);
 
-        $hierarchy = trim($hierarchy,"=>");
+        $hierarchy = trim($hierarchy,'=>');
         return $hierarchy;
     }
 
@@ -90,11 +90,11 @@ class MySQLndQueryLogger extends MySQLndUhConnection {
         $sqlite = DBMan::get_db_connection($stats_db, FALSE);
 
         $data = array(
-                    "queryIdentifier" => $identifier,
-                    "execTime" => $time,
-                    "execDate" => M2DateTime::get_datetime()
+                    'queryIdentifier' => $identifier,
+                    'execTime' => $time,
+                    'execDate' => M2DateTime::get_datetime()
                 );
-        $sqlite->insert("query_stats", $data);
+        $sqlite->insert('query_stats', $data);
     }
 
 }

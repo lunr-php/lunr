@@ -38,13 +38,13 @@ class Process
      *
      * @return String $return Last line of the STDOUT output of the command
      */
-    public static function run($cmd, $out = "", $append = FALSE, $error_redirect = TRUE)
+    public static function run($cmd, $out = '', $append = FALSE, $error_redirect = TRUE)
     {
         if ($error_redirect === TRUE)
         {
-            $cmd .= " 2>&1";
+            $cmd .= ' 2>&1';
         }
-        if ($out != "")
+        if ($out != '')
         {
             if ($append === TRUE)
             {
@@ -71,19 +71,19 @@ class Process
      *
      * @return void
      */
-    public static function run_bg($cmd, $out = "", $append = FALSE, $error_redirect = TRUE)
+    public static function run_bg($cmd, $out = '', $append = FALSE, $error_redirect = TRUE)
     {
         if ($error_redirect === TRUE)
         {
-            $cmd .= " 2>&1";
+            $cmd .= ' 2>&1';
         }
 
-        if ($out == "")
+        if ($out == '')
         {
-            $out = "/dev/null";
+            $out = '/dev/null';
         }
 
-        if (($append === TRUE) && ($out != "/dev/null"))
+        if (($append === TRUE) && ($out != '/dev/null'))
         {
             $cmd .= " >> $out";
         }
@@ -93,7 +93,7 @@ class Process
         }
 
         // run in background
-        $cmd .= " &";
+        $cmd .= ' &';
 
         exec($cmd);
     }

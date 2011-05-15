@@ -52,7 +52,7 @@ abstract class WebController implements ControllerInterface
      */
     public function __call($name, $arguments)
     {
-        return "<h1>Not implemented</h1>";
+        return '<h1>Not implemented</h1>';
     }
 
 }

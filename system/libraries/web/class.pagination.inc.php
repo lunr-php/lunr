@@ -221,7 +221,7 @@ class Pagination{
     {
         if ($amount > 0)
         {
-            $html  = "";
+            $html  = '';
             $start = $this->cursor - 1;
             $end   = $this->cursor - $amount;
             for($i = $start; (($i >= $end) && ($i > 0)); --$i)
@@ -250,7 +250,7 @@ class Pagination{
     {
         if ($amount > 0)
         {
-            $html  = "";
+            $html  = '';
             $start = $this->cursor + 1;
             $end   = $this->cursor + $amount;
             for($i = $start; (($i <= $end) && ($i <= $this->pages_total)); ++$i)
@@ -278,16 +278,16 @@ class Pagination{
     {
         switch ($type)
         {
-            case "previous":
+            case 'previous':
                 $target = $this->cursor -1;
                 break;
-            case "next":
+            case 'next':
                 $target = $this->cursor +1;
                 break;
-            case "first":
+            case 'first':
                 $target = 1;
                 break;
-            case "last":
+            case 'last':
                 $target = $this->pages_total;
                 break;
             default:
@@ -384,8 +384,8 @@ class Pagination{
             $this->buttons['last']['enabled'] = FALSE;
         }
 
-        $html  = $this->build_button("first");
-        $html .= $this->build_button("previous");
+        $html  = $this->build_button('first');
+        $html .= $this->build_button('previous');
         // paginator_numbers class div wraps the cursors shown as numbers.
         // This wrapping div allow us to show the numbers centered in screen
         $html .= "<div class='paginator_numbers'>\n";
@@ -395,8 +395,8 @@ class Pagination{
         $html .= $this->cursor . "</span>\n";
         $html .= $this->build_next($nnext);
         $html .= "</div>\n"; // closes <div class='paginator_numbers'>
-        $html .= $this->build_button("next");
-        $html .= $this->build_button("last");
+        $html .= $this->build_button('next');
+        $html .= $this->build_button('last');
 
         return $html;
     }

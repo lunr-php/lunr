@@ -154,11 +154,11 @@ class Session
      *
      * @return void
      */
-    public function start($id = "")
+    public function start($id = '')
     {
         if (!$this->started)
         {
-            if ($id != "")
+            if ($id != '')
             {
                 session_id($id);
             }

@@ -50,7 +50,7 @@ abstract class WebServiceController implements ControllerInterface
      */
     public function __call($name, $arguments)
     {
-        return json_encode(array("error" => "not implemented"));
+        return json_encode(array('error' => 'not implemented'));
     }
 
     /**

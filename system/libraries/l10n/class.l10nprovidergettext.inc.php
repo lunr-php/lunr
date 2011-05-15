@@ -72,15 +72,15 @@ class L10nProviderGettext extends L10nProvider
      *
      * @return String $string Translated string, identifier by default
      */
-    public function lang($identifier, $context = "")
+    public function lang($identifier, $context = '')
     {
         if (strlen($identifier) + strlen($context) + 1 > self::GETTEXT_MAX_MSGID_LENGTH)
         {
-            Output::error("Identifier too long: " . $identifier);
+            Output::error('Identifier too long: ' . $identifier);
         }
 
         $this->init($this->language);
-        if ($context == "")
+        if ($context == '')
         {
             $output = gettext($identifier);
             return $output;
@@ -121,15 +121,15 @@ class L10nProviderGettext extends L10nProvider
      *
      * @return String $string Translated string, identifier by default
      */
-    public function nlang($singular, $plural, $amount, $context = "")
+    public function nlang($singular, $plural, $amount, $context = '')
     {
         if (strlen($singular) + strlen($context) + 1 > self::GETTEXT_MAX_MSGID_LENGTH)
         {
-            Output::error("Identifier too long: " . $identifier);
+            Output::error('Identifier too long: ' . $identifier);
         }
 
         $this->init($this->language);
-        if ($context == "")
+        if ($context == '')
         {
             $output = ngettext($singular, $plural, $amount);
             return $output;

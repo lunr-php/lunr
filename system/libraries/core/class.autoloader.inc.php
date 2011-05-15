@@ -39,9 +39,9 @@ class Autoloader
      * @var array
      */
     private static $controllers = array(
-        "web",
-        "webservice",
-        "cli"
+        'web',
+        'webservice',
+        'cli'
     );
 
     /**
@@ -53,40 +53,40 @@ class Autoloader
      */
     public static function load($class)
     {
-        if (strpos($class, "Interface") !== FALSE
-            && $class !== "Interface")
+        if (strpos($class, 'Interface') !== FALSE
+            && $class !== 'Interface')
         {
-            $class = strtolower(str_replace("Interface", "", $class));
-            require_once "interface.$class.inc.php";
+            $class = strtolower(str_replace('Interface', '', $class));
+            include_once "interface.$class.inc.php";
         }
-        elseif (strpos($class, "Controller") !== FALSE)
+        elseif (strpos($class, 'Controller') !== FALSE)
         {
-            $controller = strtolower(str_replace("Controller", "", $class));
+            $controller = strtolower(str_replace('Controller', '', $class));
             if (in_array($controller, self::$controllers))
             {
-                require_once "class.${controller}controller.inc.php";
+                include_once "class.${controller}controller.inc.php";
             }
             else
             {
-                require_once "controller.$controller.inc.php";
+                include_once "controller.$controller.inc.php";
             }
         }
-        elseif (strpos($class, "Model") !== FALSE
-            && $class !== "Model")
+        elseif (strpos($class, 'Model') !== FALSE
+            && $class !== 'Model')
         {
-            $class = strtolower(str_replace("Model", "", $class));
-            require_once "model.$class.inc.php";
+            $class = strtolower(str_replace('Model', '', $class));
+            include_once "model.$class.inc.php";
         }
-        elseif (strpos($class, "View") !== FALSE
-            && $class !== "View")
+        elseif (strpos($class, 'View') !== FALSE
+            && $class !== 'View')
         {
-            $class = strtolower(str_replace("View", "", $class));
-            require_once "view.$class.inc.php";
+            $class = strtolower(str_replace('View', '', $class));
+            include_once "view.$class.inc.php";
         }
         else
         {
             $class = strtolower($class);
-            require_once "class.$class.inc.php";
+            include_once "class.$class.inc.php";
         }
     }
 
@@ -100,7 +100,7 @@ class Autoloader
     public static function add_include_path($path)
     {
         set_include_path(
-            get_include_path() . ":" .
+            get_include_path() . ':' .
             $path
         );
     }

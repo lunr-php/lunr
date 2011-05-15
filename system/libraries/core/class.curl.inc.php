@@ -99,9 +99,9 @@ class Curl
     {
         switch ($name)
         {
-            case "errno":
-            case "errmsg":
-            case "info":
+            case 'errno':
+            case 'errmsg':
+            case 'info':
                 return $this->{$name};
                 break;
         }
@@ -159,7 +159,7 @@ class Curl
 
         if (!curl_setopt_array($this->handle, $this->options))
         {
-            $this->errmsg = "Could not set curl options!";
+            $this->errmsg = 'Could not set curl options!';
             return FALSE;
         }
 
@@ -228,7 +228,7 @@ class Curl
             return FALSE;
         }
 
-        $this->options[CURLOPT_CUSTOMREQUEST] = "POST";
+        $this->options[CURLOPT_CUSTOMREQUEST] = 'POST';
         $this->options[CURLOPT_POST]          = TRUE;
         $this->options[CURLOPT_POSTFIELDS]    = $data;
 
