@@ -54,16 +54,18 @@ class Verification
     /**
      * Verify an input array against a defined ruleset.
      *
-     * @param String $identifier Identifier for the rule-checking
-     * @param array  &$input     Input array
-     * @param array  &$ruleset   Ruleset to check against
-     * @param String $file       The log file to send errors to. By default this will
-     *                           be the invalid input log.
+     * @param String  $identifier Identifier for the rule-checking
+     * @param array   &$input     Input array
+     * @param array   &$ruleset   Ruleset to check against
+     * @param boolean $soft       Whether to perform soft checking or not.
+     *                            Soft checking allows to have rules defined for non-existing keys
+     * @param String  $file       The log file to send errors to. By default this will
+     *                            be the invalid input log.
      *
      * @return Boolean $return TRUE if the input matches against the ruleset,
      *                         FALSE otherwise.
      */
-    public static function verify_array_ruleset($identifier, &$input, &$ruleset, $file = '')
+    public static function verify_array_ruleset($identifier, &$input, &$ruleset, $soft = FALSE, $file = '')
     {
         if ($file == '')
         {
@@ -86,18 +88,21 @@ class Verification
 
         $error_prefix = "Input validation '$identifier': ";
 
-        // Check that input matches with the defined ruleset
-        $input_elements = array_keys($input);
-        $ruleset_elements = array_keys($ruleset);
-        $unhandled_elements = array_diff($ruleset_elements, $input_elements);
-
-        if ($unhandled_elements != array())
+        if ($soft !== TRUE)
         {
-            foreach ($unhandled_elements as $value)
+            // Check that input matches with the defined ruleset
+            $input_elements = array_keys($input);
+            $ruleset_elements = array_keys($ruleset);
+            $unhandled_elements = array_diff($ruleset_elements, $input_elements);
+
+            if ($unhandled_elements != array())
             {
-                Output::error($error_prefix . "Ruleset for non-existing key '$value'!", $file);
+                foreach ($unhandled_elements as $value)
+                {
+                    Output::error($error_prefix . "Ruleset for non-existing key '$value'!", $file);
+                }
+                return FALSE;
             }
-            return FALSE;
         }
 
         // Go over the input array and check key by key
