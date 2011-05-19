@@ -222,15 +222,19 @@ class Pagination{
         if ($amount > 0)
         {
             $html  = "";
-            $start = $this->cursor - $amount;
+            if (($this->cursor - $amount) > 0)
+            {
+                $start = $this->cursor - $amount;
+            }
+            else
+            {
+                $start = 1;
+            }
             $end   = $this->cursor - 1;
             for($i = $start; $i <= $end; ++$i)
             {
-                if ($i > 0)
-                {
-                    $html .= '<a class="paginator_page" href="';
-                    $html .= $this->base_url . $i . '">' . $i . "</a>\n";
-                }
+                $html .= '<a class="paginator_page" href="';
+                $html .= $this->base_url . $i . '">' . $i . "</a>\n";
             }
             return $html;
         }
