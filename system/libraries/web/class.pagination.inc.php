@@ -221,7 +221,7 @@ class Pagination{
     {
         if ($amount > 0)
         {
-            $html  = "";
+            $html  = '';
             if (($this->cursor - $amount) > 0)
             {
                 $start = $this->cursor - $amount;
