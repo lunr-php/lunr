@@ -31,7 +31,7 @@ abstract class WebController implements ControllerInterface
      */
     public function __construct()
     {
-        parent::__construct();
+
     }
 
     /**
@@ -39,7 +39,7 @@ abstract class WebController implements ControllerInterface
      */
     public function __destruct()
     {
-        parent::__destruct();
+
     }
 
     /**
