@@ -90,15 +90,15 @@ class L10nProviderPHP extends L10nProvider
             }
             elseif ($context == '')
             {
-                    //Check if the key have context asociated in the array
-                    if (is_array($this->lang_array[$identifier]))
-                    {
-                        Output::error('Identifier with context: ' . $identifier);
-                    }
-                    else // No exceptions
-                    {
-                        return $this->lang_array[$identifier];
-                    }
+                //Check if the key have context asociated in the array
+                if (is_array($this->lang_array[$identifier]))
+                {
+                    Output::error('Identifier with context: ' . $identifier);
+                }
+                else // No exceptions
+                {
+                    return $this->lang_array[$identifier];
+                }
             }
             else //If there is context information
             {
@@ -131,38 +131,35 @@ class L10nProviderPHP extends L10nProvider
      */
     public function nlang($singular, $plural, $amount, $context = '')
     {
-
-     //Check if the singular key is not in the language array
-     if(!array_key_exists($singular, $this->lang_array))
-     {
-        Output::error('Identifier for the singular key not included in the language array: ' . $singular);
-     }
-
-     //Check if the plural key is not in the language array
-     elseif ( !array_key_exists($plural, $this->lang_array))
-     {
-        Output::error('Identifier for the plural key not included in the language array: ' . $plural);
-     }
-     else
-     {
-        if($context == '')
+        //Check if the singular key is not in the language array
+        if(!array_key_exists($singular, $this->lang_array))
         {
-            if (is_array($this->lang_array[$singular]))
-            {
-                Output::error('Identifier with context: ' . $singular);
-            }
-            elseif (is_array($this->lang_array[$plural]))
-            {
-                 Output::error('Identifier with context: ' . $plural);
-            }
-            else // No exceptions
-            {
-                return ($amount == 1 ? $this->lang_array[$singular] : $this->lang_array[$plural]);
-            }
+            Output::error('Identifier for the singular key not included in the language array: ' . $singular);
+        }
+
+        //Check if the plural key is not in the language array
+        elseif ( !array_key_exists($plural, $this->lang_array))
+        {
+            Output::error('Identifier for the plural key not included in the language array: ' . $plural);
         }
         else
         {
-            if(!is_array($this->lang_array[$singular]) || !array_key_exists($context, $this->lang_array[$singular]))
+            if($context == '')
+            {
+                if (is_array($this->lang_array[$singular]))
+                {
+                    Output::error('Identifier with context: ' . $singular);
+                }
+                elseif (is_array($this->lang_array[$plural]))
+                {
+                        Output::error('Identifier with context: ' . $plural);
+                }
+                else // No exceptions
+                {
+                    return ($amount == 1 ? $this->lang_array[$singular] : $this->lang_array[$plural]);
+                }
+            }
+            elseif(!is_array($this->lang_array[$singular]) || !array_key_exists($context, $this->lang_array[$singular]))
             {
                 Output::error('Context not included in the singular array: ' . $singular);
             }
@@ -175,8 +172,6 @@ class L10nProviderPHP extends L10nProvider
                 return ($amount == 1 ? $this->lang_array[$singular][$context] : $this->lang_array[$plural][$context]);
             }
         }
-     }
-
     }
 
 }

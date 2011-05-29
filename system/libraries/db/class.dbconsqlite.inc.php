@@ -51,7 +51,7 @@ class DBConSqlite extends DBCon
         parent::__construct($readonly);
         $this->db_file = dirname(__FILE__) . '/../../../' . $db['file'];
 
-/*        $this->last_query = '';
+        /*$this->last_query = '';
         $this->where_group = FALSE;
         $this->transaction = FALSE;
         $this->for_update = FALSE;
@@ -72,7 +72,7 @@ class DBConSqlite extends DBCon
 
         unset($this->db_file);
         unset($this->res);
-/*        unset($this->transaction);
+        /*unset($this->transaction);
         unset($this->last_query);
         unset($this->where_group);
         unset($this->for_update);

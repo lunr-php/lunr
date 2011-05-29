@@ -237,10 +237,10 @@ abstract class DBCon
             $sql_command .= $this->limit;
         }
 
-//         if ($this->for_update && !$limit)
-//         {
-//             $sql_command .= ' FOR UPDATE';
-//         }
+        /*if ($this->for_update && !$limit)
+        {
+            $sql_command .= ' FOR UPDATE';
+        }*/
 
         if ($clear == TRUE)
         {
@@ -251,7 +251,7 @@ abstract class DBCon
             $this->group = '';
             $this->order = '';
             $this->limit = '';
-//             $this->for_update = FALSE;
+            //$this->for_update = FALSE;
         }
 
         return $sql_command;

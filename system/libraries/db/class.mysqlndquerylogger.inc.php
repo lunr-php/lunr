@@ -72,7 +72,7 @@ class MySQLndQueryLogger extends MySQLndUhConnection {
         }
         unset($value);
 
-        $hierarchy = trim($hierarchy,'=>');
+        $hierarchy = trim($hierarchy, '=>');
         return $hierarchy;
     }
 
