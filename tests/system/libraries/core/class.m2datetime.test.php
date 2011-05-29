@@ -1,13 +1,16 @@
 <?php
 
-require_once("class.m2datetime.inc.php");
-
 /**
  * This tests Lunr's M2DateTime class
  * @covers M2DateTime
  */
 class M2DateTimeTest extends PHPUnit_Framework_TestCase
 {
+
+    protected function setUp()
+    {
+        include_once("class.m2datetime.inc.php");
+    }
 
     /**
      * Test the static function today()
@@ -207,8 +210,8 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     public function timestampProvider()
     {
         return array(
-                array(M2DateTime::delayed_timestamp("+30 minutes")),
-                array(M2DateTime::delayed_timestamp("+1 week"))
+                array(strtotime("+30 minutes")),
+                array(strtotime("+1 week"))
                 );
     }
 

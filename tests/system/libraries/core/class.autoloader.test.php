@@ -1,7 +1,5 @@
 <?php
 
-require_once("class.autoloader.inc.php");
-
 /**
  * This tests Lunr's Autoloader class
  * @covers Autoloader
@@ -16,9 +14,10 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
             "application/controllers:" .
             "application/views"
         );
-        require_once("class.view.inc.php");
-        require_once("class.model.inc.php");
-        require_once("interface.controller.inc.php");
+        include_once("class.autoloader.inc.php");
+        include_once("class.view.inc.php");
+        include_once("class.model.inc.php");
+        include_once("interface.controller.inc.php");
     }
 
     /**
@@ -77,6 +76,7 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     public function fileProvider()
     {
         return array(
+            array("M2DateTime", "system/libraries/core/class.m2datetime.inc.php"),
             array("HomeView", "application/views/view.home.inc.php"),
             array("WebServiceController", "system/libraries/core/class.webservicecontroller.inc.php"),
             array("WebController", "system/libraries/core/class.webcontroller.inc.php"),

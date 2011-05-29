@@ -1,10 +1,6 @@
 <?php
 
-require_once("class.dbman.inc.php");
-require_once("class.dbcon.inc.php");
-require_once("class.dbconmysql.inc.php");
-require_once("class.dbconfactory.inc.php");
-require_once("conf.database.inc.php");
+include_once("conf.database.inc.php");
 
 /**
  * This tests Lunr's DBMan class
@@ -12,6 +8,14 @@ require_once("conf.database.inc.php");
  */
 class DBManTest extends PHPUnit_Framework_TestCase
 {
+
+    protected function setUp()
+    {
+        include_once("class.dbman.inc.php");
+        include_once("class.dbcon.inc.php");
+        include_once("class.dbconmysql.inc.php");
+        include_once("class.dbconfactory.inc.php");
+    }
 
     /**
      * Test the static function get_db_connection()

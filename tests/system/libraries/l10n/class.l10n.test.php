@@ -1,7 +1,6 @@
 <?php
 
-require_once("class.l10n.inc.php");
-require_once("conf.l10n.inc.php");
+include_once("conf.l10n.inc.php");
 
 /**
  * This tests Lunr's L10n class
@@ -15,6 +14,8 @@ class L10nTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         global $config;
+        include_once("class.l10n.inc.php");
+
         $this->languages = array();
         if ($handle = opendir($config['l10n']['locales']))
         {
