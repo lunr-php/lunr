@@ -7,19 +7,6 @@
 class AutoloaderTest extends PHPUnit_Framework_TestCase
 {
 
-    protected function setUp()
-    {
-        set_include_path(
-            get_include_path() . ":" .
-            "application/controllers:" .
-            "application/views"
-        );
-        include_once("class.autoloader.inc.php");
-        include_once("class.view.inc.php");
-        include_once("class.model.inc.php");
-        include_once("interface.controller.inc.php");
-    }
-
     /**
      * Test the static function add_include_path()
      * @covers Autoloader::add_include_path

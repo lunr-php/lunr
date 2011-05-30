@@ -7,11 +7,6 @@
 class M2DateTimeTest extends PHPUnit_Framework_TestCase
 {
 
-    protected function setUp()
-    {
-        include_once("class.m2datetime.inc.php");
-    }
-
     /**
      * Test the static function today()
      * @covers M2DateTime::today

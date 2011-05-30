@@ -16,8 +16,14 @@ set_include_path(
     $base . "/application/libraries/db:" .
     $base . "/application/controllers:" .
     $base . "/application/models:" .
-    $base . "/application/libraries" .
+    $base . "/application/libraries:" .
+    $base . "/application/views:" .
     get_include_path()
 );
+
+// Load and setup class file autloader
+include_once("class.autoloader.inc.php");
+spl_autoload_register("Autoloader::load");
+
 
 ?>

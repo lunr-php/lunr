@@ -9,14 +9,6 @@ include_once("conf.database.inc.php");
 class DBManTest extends PHPUnit_Framework_TestCase
 {
 
-    protected function setUp()
-    {
-        include_once("class.dbman.inc.php");
-        include_once("class.dbcon.inc.php");
-        include_once("class.dbconmysql.inc.php");
-        include_once("class.dbconfactory.inc.php");
-    }
-
     /**
      * Test the static function get_db_connection()
      * @covers DBMan::get_db_connection
