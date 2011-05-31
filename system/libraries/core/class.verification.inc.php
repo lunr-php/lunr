@@ -36,12 +36,12 @@ class Verification
      */
     public static function __callStatic($method, $arguments)
     {
-        if (substr($method, 0, 12) == 'check_length')
+        if (substr($method, 0, 12) == 'is_length')
         {
             $length = substr($method, 12);
             return self::check_length($length, $arguments[0]);
         }
-        elseif (substr($method, 0, 12) == 'check_ignore')
+        elseif (substr($method, 0, 12) == 'is_ignore')
         {
             return TRUE;
         }
@@ -117,7 +117,7 @@ class Verification
                 {
                     foreach ($ruleset[$key] as &$rule)
                     {
-                        if (call_user_func('self::check_' . $rule, $value) === FALSE)
+                        if (call_user_func('self::is_' . $rule, $value) === FALSE)
                         {
                             Output::error($error_prefix . "Rule '$rule' failed for '$key'!", $file);
                             return FALSE;
@@ -127,7 +127,7 @@ class Verification
                 }
                 else
                 {
-                    if (call_user_func('self::check_' . $ruleset[$key], $value) === FALSE)
+                    if (call_user_func('self::is_' . $ruleset[$key], $value) === FALSE)
                     {
                         Output::error($error_prefix . "Rule '" . $ruleset[$key] . "' failed for '$key'!", $file);
                         return FALSE;
@@ -153,7 +153,7 @@ class Verification
      *
      * @return Boolean $return TRUE if size matches, FALSE otherwise.
      */
-    public static function check_length($length, &$value)
+    public static function is_length($length, &$value)
     {
         return (strlen($value) == $length);
     }
@@ -167,7 +167,7 @@ class Verification
      *
      * @return Boolean $return TRUE if not empty, FALSE otherwise.
      */
-    public static function check_not_empty($value)
+    public static function is_not_empty($value)
     {
         return !empty($value);
     }
@@ -179,7 +179,7 @@ class Verification
      *
      * @return Boolean $return TRUE if input is a numeric boolean, FALSE otherwise.
      */
-    public static function check_numerical_boolean($value)
+    public static function is_numerical_boolean($value)
     {
         return ($value == 1) || ($value == 0);
     }
