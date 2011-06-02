@@ -13,6 +13,7 @@
  */
 
 namespace Lunr\Libraries\L10n;
+use Lunr\Libraries\Core\M2DateTime;
 
 /**
  * Localization support class
