@@ -1,10 +1,13 @@
 <?php
 
+use Lunr\Libraries\L10n\L10n;
+use Lunr\Libraries\Core\M2DateTime;
+
 include_once("conf.l10n.inc.php");
 
 /**
  * This tests Lunr's L10n class
- * @covers L10n
+ * @covers Lunr\Libraries\L10n\L10n
  */
 class L10nTest extends PHPUnit_Framework_TestCase
 {
@@ -33,7 +36,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test the static function get_supported_languages()
-     * @covers L10n::get_supported_languages
+     * @covers Lunr\Libraries\L10n\L10n::get_supported_languages
      */
     public function testGetSupportedLanguages()
     {
@@ -44,7 +47,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
     * Test the static function iso_to_posix()
     * @depends testGetSupportedLanguages
     * @dataProvider languageProvider
-    * @covers L10n::iso_to_posix
+    * @covers Lunr\Libraries\L10n\L10n::iso_to_posix
     */
     public function testIsoToPosix($posix, $iso)
     {
@@ -65,7 +68,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
      * @depends testGetSupportedLanguages
      * @depends testIsoToPosix
      * @dataProvider languageProvider
-     * @covers L10n::set_language
+     * @covers Lunr\Libraries\L10n\L10n::set_language
      */
     public function testSetLanguage($locale, $language)
     {

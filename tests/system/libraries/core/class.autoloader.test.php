@@ -1,15 +1,17 @@
 <?php
 
+use Lunr\Libraries\Core\Autoloader;
+
 /**
  * This tests Lunr's Autoloader class
- * @covers Autoloader
+ * @covers Lunr\Libraries\Core\Autoloader
  */
 class AutoloaderTest extends PHPUnit_Framework_TestCase
 {
 
     /**
      * Test the static function add_include_path()
-     * @covers Autoloader::add_include_path
+     * @covers Lunr\Libraries\Core\Autoloader::add_include_path
      */
     public function testAddIncludePath()
     {
@@ -22,11 +24,11 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function register_project_controller()
      * @dataProvider controllerProvider
-     * @covers Autoloader::register_project_controller
+     * @covers Lunr\Libraries\Core\Autoloader::register_project_controller
      */
     public function testRegisterProjectController($input, $expected)
     {
-        $autoloader_reflection = new ReflectionClass("Autoloader");
+        $autoloader_reflection = new ReflectionClass("Lunr\Libraries\Core\Autoloader");
 
         $properties = $autoloader_reflection->getStaticProperties();
         $controllers_base = $properties["controllers"];
@@ -43,7 +45,7 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function load to autoload classes
      * @dataProvider fileProvider
-     * @covers Autoloader::load
+     * @covers Lunr\Libraries\Core\Autoloader::load
      */
     public function testLoad($file, $filename)
     {
@@ -63,12 +65,12 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     public function fileProvider()
     {
         return array(
-            array("M2DateTime", "system/libraries/core/class.m2datetime.inc.php"),
+            array("Lunr\Libraries\Core\M2DateTime", "system/libraries/core/class.m2datetime.inc.php"),
             array("HomeView", "application/views/view.home.inc.php"),
-            array("WebServiceController", "system/libraries/core/class.webservicecontroller.inc.php"),
-            array("WebController", "system/libraries/core/class.webcontroller.inc.php"),
-            array("JsonInterface", "system/libraries/core/interface.json.inc.php"),
-            array("SessionModel", "system/models/model.session.inc.php"),
+            array("Lunr\Libraries\Core\WebServiceController", "system/libraries/core/class.webservicecontroller.inc.php"),
+            array("Lunr\Libraries\Core\WebController", "system/libraries/core/class.webcontroller.inc.php"),
+            array("Lunr\Libraries\Core\JsonInterface", "system/libraries/core/interface.json.inc.php"),
+            array("Lunr\Models\Core\SessionModel", "system/models/core/model.session.inc.php"),
             array("NewsController", "application/controllers/controller.news.inc.php")
         );
     }

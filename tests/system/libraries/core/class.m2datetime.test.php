@@ -1,15 +1,17 @@
 <?php
 
+use Lunr\Libraries\Core\M2DateTime;
+
 /**
  * This tests Lunr's M2DateTime class
- * @covers M2DateTime
+ * @covers Lunr\Libraries\Core\M2DateTime
  */
 class M2DateTimeTest extends PHPUnit_Framework_TestCase
 {
 
     /**
      * Test the static function today()
-     * @covers M2DateTime::today
+     * @covers Lunr\Libraries\Core\M2DateTime::today
      */
     public function testToday()
     {
@@ -18,7 +20,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test the static function yesterday()
-     * @covers M2DateTime::yesterday
+     * @covers Lunr\Libraries\Core\M2DateTime::yesterday
      */
     public function testYesterday()
     {
@@ -27,7 +29,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test the static function tomorrow()
-     * @covers M2DateTime::tomorrow
+     * @covers Lunr\Libraries\Core\M2DateTime::tomorrow
      */
     public function testTomorrow()
     {
@@ -38,7 +40,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      * Test the static function delayed_date()
      * @depends testTomorrow
      * @depends testYesterday
-     * @covers M2DateTime::delayed_date
+     * @covers Lunr\Libraries\Core\M2DateTime::delayed_date
      */
     public function testDelayedDate()
     {
@@ -48,7 +50,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test the static function delayed_timestamp()
-     * @covers M2DateTime::delayed_timestamp
+     * @covers Lunr\Libraries\Core\M2DateTime::delayed_timestamp
      */
     public function testDelayedTimestamp()
     {
@@ -58,7 +60,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function delayed_datetime()
      * @depends testDelayedTimestamp
-     * @covers M2DateTime::delayed_datetime
+     * @covers Lunr\Libraries\Core\M2DateTime::delayed_datetime
      */
     public function testDelayedDatetime()
     {
@@ -69,7 +71,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test the static function now()
-     * @covers M2DateTime::now
+     * @covers Lunr\Libraries\Core\M2DateTime::now
      */
     public function testNow()
     {
@@ -80,7 +82,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      * Test the static function get_date()
      * @depends testDelayedTimestamp
      * @dataProvider timestampProvider
-     * @covers M2DateTime::get_date
+     * @covers Lunr\Libraries\Core\M2DateTime::get_date
      */
     public function testGetDate($timestamp)
     {
@@ -91,7 +93,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      * Test the static function get_time()
      * @depends testDelayedTimestamp
      * @dataProvider timestampProvider
-     * @covers M2DateTime::get_time
+     * @covers Lunr\Libraries\Core\M2DateTime::get_time
      */
     public function testGetTime($timestamp)
     {
@@ -102,7 +104,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      * Test the static function get_datetime()
      * @depends testDelayedTimestamp
      * @dataProvider timestampProvider
-     * @covers M2DateTime::get_datetime
+     * @covers Lunr\Libraries\Core\M2DateTime::get_datetime
      */
     public function testGetDatetimeTimestamp($timestamp)
     {
@@ -112,7 +114,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function get_datetime()
      * @depends testDelayedTimestamp
-     * @covers M2DateTime::get_datetime
+     * @covers Lunr\Libraries\Core\M2DateTime::get_datetime
      */
     public function testGetDatetimeNow()
     {
@@ -122,7 +124,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function get_short_date()
      * @depends testDelayedTimestamp
-     * @covers M2DateTime::get_short_date
+     * @covers Lunr\Libraries\Core\M2DateTime::get_short_date
      */
     public function testGetShortDate()
     {
@@ -135,7 +137,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function is_time()
      * @dataProvider validTimeProvider
-     * @covers M2DateTime::is_time
+     * @covers Lunr\Libraries\Core\M2DateTime::is_time
      */
     public function testIsValidTime($time)
     {
@@ -145,7 +147,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function is_time()
      * @dataProvider invalidTimeProvider
-     * @covers M2DateTime::is_time
+     * @covers Lunr\Libraries\Core\M2DateTime::is_time
      */
     public function testIsInvalidTime($time)
     {
@@ -155,7 +157,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function is_date()
      * @dataProvider validDateProvider
-     * @covers M2DateTime::is_date
+     * @covers Lunr\Libraries\Core\M2DateTime::is_date
      */
     public function testIsValidDate($date)
     {
@@ -165,7 +167,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function is_date()
      * @dataProvider invalidDateProvider
-     * @covers M2DateTime::is_date
+     * @covers Lunr\Libraries\Core\M2DateTime::is_date
      */
     public function testIsInvalidDate($date)
     {
@@ -175,7 +177,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function sort_compare_datetime()
      * @dataProvider equalDatetimeProvider
-     * @covers M2DateTime::sort_compare_datetime
+     * @covers Lunr\Libraries\Core\M2DateTime::sort_compare_datetime
      */
     public function testDatetimeIsEqual($date1, $date2)
     {
@@ -185,7 +187,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function sort_compare_datetime()
      * @dataProvider datetimeProvider
-     * @covers M2DateTime::sort_compare_datetime
+     * @covers Lunr\Libraries\Core\M2DateTime::sort_compare_datetime
      */
     public function testDatetimeIsLower($date1, $date2)
     {
@@ -195,7 +197,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     /**
      * Test the static function sort_compare_datetime()
      * @dataProvider datetimeProvider
-     * @covers M2DateTime::sort_compare_datetime
+     * @covers Lunr\Libraries\Core\M2DateTime::sort_compare_datetime
      */
     public function testDatetimeIsGreater($date1, $date2)
     {
