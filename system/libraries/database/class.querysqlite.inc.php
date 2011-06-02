@@ -16,6 +16,8 @@
  * @license    http://opensource.org/licenses/bsd-license BSD License
  */
 
+namespace Lunr\Libraries\Database;
+
 /**
  * Database result set abstraction class
  *

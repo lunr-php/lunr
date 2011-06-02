@@ -12,6 +12,8 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Libraries\L10n;
+
 /**
  * Factory class for providing Localization implementations
  *

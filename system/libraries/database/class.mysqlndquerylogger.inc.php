@@ -13,6 +13,8 @@
  * @author     M2Mobi <info@m2mobi.com>
  */
 
+namespace Lunr\Libraries\Database;
+
 /**
  * MySQLnd Userspace Handler to log Query Statistics.
  * Stats are logged into a sqlite database.

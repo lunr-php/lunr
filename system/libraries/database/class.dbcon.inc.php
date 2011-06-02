@@ -12,6 +12,8 @@
  * @author     M2Mobi <info@m2mobi.com>
  */
 
+namespace Lunr\Libraries\Database;
+
 /**
  * This class defines abstract database access.
  *

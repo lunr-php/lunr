@@ -16,6 +16,8 @@
 *
 */
 
+namespace Lunr\Libraries\Core;
+
 /**
  * Apple Push Notifications System Library
  *
@@ -41,7 +43,7 @@ class APNS
     public function __construct()
     {
         include_once 'conf.notifications.inc.php';
-        $this->error = new SplFixedArray(10);
+        $this->error = new \SplFixedArray(10);
         $this->error[0] = 'UNDEFINED'; //SUCCESS?
         $this->error[1] = 'PROCESSING ERROR';
         $this->error[2] = 'MISSING DEVICE TOKEN';

@@ -16,6 +16,8 @@
  * @license    http://opensource.org/licenses/bsd-license BSD License
  */
 
+namespace Lunr\Libraries\Database;
+
 /**
  * MySQL/MariaDB database access class
  *

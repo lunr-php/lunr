@@ -13,6 +13,8 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Libraries\L10n;
+
 /**
  * PHP (array) Localization Provider class
  *

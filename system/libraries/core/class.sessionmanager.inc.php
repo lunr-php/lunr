@@ -14,6 +14,9 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Libraries\Core;
+use Lunr\Models\Core\SessionModel;
+
 /**
  * Background Session Management
  *

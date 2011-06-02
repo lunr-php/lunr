@@ -13,6 +13,9 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Models\Core;
+use Lunr\Libraries\Core\Model;
+
 /**
  * Core Session Model
  *

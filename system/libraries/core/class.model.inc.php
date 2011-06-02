@@ -12,6 +12,9 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Libraries\Core;
+use Lunr\Libraries\Database\DBMan;
+
 /**
  * Base Model class
  *

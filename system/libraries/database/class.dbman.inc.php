@@ -13,6 +13,8 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Libraries\Database;
+
 /**
  * Database connection manager class
  *

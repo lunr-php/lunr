@@ -16,6 +16,8 @@
  * @license    http://opensource.org/licenses/bsd-license BSD License
  */
 
+namespace Lunr\Libraries\Core;
+
 /**
  * Getopt like command line argument parser. However, it
  * does a few things different from getopt. While getopt

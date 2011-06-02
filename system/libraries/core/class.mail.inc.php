@@ -13,6 +13,8 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Libraries\Core;
+
 /**
  * Mail sender library
  *

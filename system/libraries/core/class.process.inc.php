@@ -14,6 +14,8 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Libraries\Core;
+
 /**
  * Process control class
  *
@@ -134,7 +136,7 @@ class Process
                         call_user_func_array($call, $data[$i]);
                     }
                     elseif (is_object($data[$i])
-                        && ($data[$i] instanceof SplFixedArray))
+                        && ($data[$i] instanceof \SplFixedArray))
                     {
                         call_user_func_array($call, $data[$i]->toArray());
                     }
@@ -146,7 +148,7 @@ class Process
                 }
             }
 
-            $result = new SplFixedArray($number);
+            $result = new \SplFixedArray($number);
 
             for($i = 0; $i < $number; ++$i)
             {

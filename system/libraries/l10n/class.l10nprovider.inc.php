@@ -15,6 +15,8 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Libraries\L10n;
+
 /**
  * Abstract Localization Provider class
  *

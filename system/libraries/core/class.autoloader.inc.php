@@ -15,6 +15,8 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Libraries\Core;
+
 /**
  * PHP Class Autoloader
  *
@@ -53,40 +55,46 @@ class Autoloader
      */
     public static function load($class)
     {
+        $class = str_replace('\\', '/', $class);
+        $path  = strtolower(dirname($class));
+        $path  = substr($path, strpos($path, "/")+1);
+        $path  = empty($path) ? "" : $path . "/";
+        $class = basename($class);
+
         if (strpos($class, 'Interface') !== FALSE
             && $class !== 'Interface')
         {
             $class = strtolower(str_replace('Interface', '', $class));
-            include_once "interface.$class.inc.php";
+            include_once $path . "interface.$class.inc.php";
         }
         elseif (strpos($class, 'Controller') !== FALSE)
         {
             $controller = strtolower(str_replace('Controller', '', $class));
             if (in_array($controller, self::$controllers))
             {
-                include_once "class.${controller}controller.inc.php";
+                include_once $path . "class.${controller}controller.inc.php";
             }
             else
             {
-                include_once "controller.$controller.inc.php";
+                include_once $path . "controller.$controller.inc.php";
             }
         }
         elseif (strpos($class, 'Model') !== FALSE
             && $class !== 'Model')
         {
             $class = strtolower(str_replace('Model', '', $class));
-            include_once "model.$class.inc.php";
+            include_once $path . "model.$class.inc.php";
         }
         elseif (strpos($class, 'View') !== FALSE
             && $class !== 'View')
         {
             $class = strtolower(str_replace('View', '', $class));
-            include_once "view.$class.inc.php";
+            include_once $path . "view.$class.inc.php";
         }
         else
         {
             $class = strtolower($class);
-            include_once "class.$class.inc.php";
+            include_once $path . "class.$class.inc.php";
         }
     }
 

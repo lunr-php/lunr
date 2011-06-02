@@ -12,6 +12,8 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Libraries\Core;
+
 /**
  * Abstract definition for a Json wrapper
  *

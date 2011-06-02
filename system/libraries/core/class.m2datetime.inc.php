@@ -14,6 +14,8 @@
  *
  */
 
+namespace Lunr\Libraries\Core;
+
 /**
  * Date/Time related functions
  *
