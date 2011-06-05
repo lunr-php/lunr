@@ -134,6 +134,14 @@
         </exec>
     </target>
 
+    <target name="apidoc-ws-pdf-dblatex"
+            description="Generate WebService API Specification (PDF)">
+        <exec executable="dblatex">
+            <arg line=" -o build/apidoc/webservice-api.tex.pdf
+                        ${ws-apidoc}/webservice-api.xml" />
+        </exec>
+    </target>
+
     <target name="apidoc"
             description="Generate Documentation"
             depends="apidoc-ws-html" />
