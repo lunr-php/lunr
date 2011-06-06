@@ -37,7 +37,7 @@ abstract class Model
      * The db configuration given on construction
      * @var array
      */
-    private $db_config;
+    protected $db_config;
 
     /**
      * Constructor.
