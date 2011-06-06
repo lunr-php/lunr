@@ -17,6 +17,7 @@
  */
 
 namespace Lunr\Libraries\Database;
+use Lunr\Libraries\Core\Output;
 
 /**
  * Database result set abstraction class
