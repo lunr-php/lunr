@@ -49,6 +49,12 @@ class DBMan
      */
     public static function get_db_connection($db, $readonly = TRUE)
     {
+        if (!isset($db['driver']))
+        {
+            Output::error("Missing driver for '" . $db['database'] . "'! Defaulting to 'mysql'!");
+            $db['driver'] = 'mysql';
+        }
+
         if ($readonly === TRUE)
         {
             if (!isset(self::$ro_instance[$db['driver']]))
