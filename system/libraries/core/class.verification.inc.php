@@ -38,12 +38,12 @@ class Verification
      */
     public static function __callStatic($method, $arguments)
     {
-        if (substr($method, 0, 12) == 'is_length')
+        if (substr($method, 0, 9) == 'is_length')
         {
-            $length = substr($method, 12);
+            $length = substr($method, 9);
             return self::is_length($length, $arguments[0]);
         }
-        elseif (substr($method, 0, 12) == 'is_ignore')
+        elseif (substr($method, 0, 9) == 'is_ignore')
         {
             return TRUE;
         }
