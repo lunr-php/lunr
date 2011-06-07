@@ -11,6 +11,7 @@
         <testsuite name="MidSchip Testsuite">
             <file>tests/system/libraries/core/class.autoloader.test.php</file>
             <file>tests/system/libraries/core/class.m2datetime.test.php</file>
+            <file>tests/system/libraries/core/class.verification.test.php</file>
             <file>tests/system/libraries/l10n/class.l10n.test.php</file>
             <file>tests/system/libraries/db/class.dbman.test.php</file>
         </testsuite>
