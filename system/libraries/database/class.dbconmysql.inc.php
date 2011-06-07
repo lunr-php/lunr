@@ -378,6 +378,7 @@ class DBConMySQL extends DBCon
                 {
                     Output::error($this->last_query());
                     Output::error($this->last_error());
+                    return FALSE;
                 }
                 return new QueryMySQL($output, $this->res);
             }
@@ -474,6 +475,8 @@ class DBConMySQL extends DBCon
             if (is_bool($output))
             {
                 Output::error($this->last_query());
+                Output::error($this->last_error());
+                return FALSE;
             }
             return new QueryMySQL($output, $this->res);
         }
