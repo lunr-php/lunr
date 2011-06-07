@@ -41,7 +41,7 @@ class Verification
         if (substr($method, 0, 12) == 'is_length')
         {
             $length = substr($method, 12);
-            return self::check_length($length, $arguments[0]);
+            return self::is_length($length, $arguments[0]);
         }
         elseif (substr($method, 0, 12) == 'is_ignore')
         {
