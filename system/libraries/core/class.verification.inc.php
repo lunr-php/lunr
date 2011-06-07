@@ -183,7 +183,7 @@ class Verification
      */
     public static function is_numerical_boolean($value)
     {
-        return ($value == 1) || ($value == 0);
+        return ($value === 1) || ($value === 0) || ($value === "0") || ($value === "1");
     }
 
 }
