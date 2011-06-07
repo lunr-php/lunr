@@ -61,6 +61,26 @@ class VerificationTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($result);
     }
 
+    /**
+     * Test the static function is_nulerical_boolean()
+     * @dataProvider validNumericalBooleanProvider
+     * @covers Lunr\Libraries\Core\Verification::is_numerical_boolean
+     */
+    public function testValidIsNumericBoolean($value)
+    {
+        $this->assertTrue(Verification::is_numerical_boolean($value));
+    }
+
+    /**
+     * Test the static function is_nulerical_boolean()
+     * @dataProvider invalidNumericalBooleanProvider
+     * @covers Lunr\Libraries\Core\Verification::is_numerical_boolean
+     */
+    public function testInvalidIsNumericBoolean($value)
+    {
+        $this->assertFalse(Verification::is_numerical_boolean($value));
+    }
+
     public function validLengthProvider()
     {
         return array(array(1,"a"), array(5,"heinz"), array(10,"transcript"));
@@ -69,6 +89,16 @@ class VerificationTest extends PHPUnit_Framework_TestCase
     public function invalidLengthProvider()
     {
         return array(array(2,"a"), array(3,"heinz"), array(76,"transcript"));
+    }
+
+    public function validNumericalBooleanProvider()
+    {
+        return array(array(0), array(1), array("0"), array("1"));
+    }
+
+    public function invalidNumericalBooleanProvider()
+    {
+        return array(array(2), array("2"), array(true), array(false));
     }
 
 }
