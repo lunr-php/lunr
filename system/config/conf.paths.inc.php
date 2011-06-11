@@ -55,7 +55,4 @@ $config['log']['invalid_input'] = '/var/log/httpd/';
  */
 $config['log']['performance'] = '/var/log/httpd/';
 
-
-
-
 ?>
