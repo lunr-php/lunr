@@ -42,7 +42,6 @@ class APNS
      */
     public function __construct()
     {
-        include_once 'conf.notifications.inc.php';
         $this->error = new \SplFixedArray(10);
         $this->error[0] = 'UNDEFINED'; //SUCCESS?
         $this->error[1] = 'PROCESSING ERROR';
