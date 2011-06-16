@@ -66,12 +66,12 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     {
         return array(
             array("Lunr\Libraries\Core\M2DateTime", "system/libraries/core/class.m2datetime.inc.php"),
-            array("HomeView", "application/views/view.home.inc.php"),
+            array("StubView", "application/views/view.stub.inc.php"),
             array("Lunr\Libraries\Core\WebServiceController", "system/libraries/core/class.webservicecontroller.inc.php"),
             array("Lunr\Libraries\Core\WebController", "system/libraries/core/class.webcontroller.inc.php"),
             array("Lunr\Libraries\Core\JsonInterface", "system/libraries/core/interface.json.inc.php"),
             array("Lunr\Models\Core\SessionModel", "system/models/core/model.session.inc.php"),
-            array("NewsController", "application/controllers/controller.news.inc.php")
+            array("StubController", "application/controllers/controller.stub.inc.php")
         );
     }
 
