@@ -2,7 +2,6 @@
 
     <property name="system" value="system" />
     <property name="application" value="application" />
-    <property name="config" value="config" />
     <property name="tests" value="tests" />
 
     <target name="clean"
@@ -49,7 +48,7 @@
     <target name="phpdoc"
             description="Generate API documentation">
         <exec executable="phpdoc">
-            <arg line=" --directory ${system},${application},${config}
+            <arg line=" --directory ${system},${application}
                         --output    HTML:Smarty/Evolve:default
                         --target    ${basedir}/build/api
                         --parseprivate" />
@@ -63,7 +62,7 @@
                         --report-file=${basedir}/build/logs/checkstyle.xml
                         --standard=Lunr
                         --ignore=third-party,html.*
-                        ${system} ${application} ${config}" />
+                        ${system} ${application}" />
         </exec>
     </target>
 
@@ -94,7 +93,6 @@
             <arg line=" --log    ${basedir}/build/logs
                         --source ${system}
                         --source ${application}
-                        --source ${config}
                         --output ${basedir}/build/code-browser" />
         </exec>
     </target>
