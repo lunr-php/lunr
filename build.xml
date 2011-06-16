@@ -1,10 +1,9 @@
-<project name="MidSchip" default="build" basedir=".">
+<project name="Lunr" default="build" basedir=".">
 
     <property name="system" value="system" />
     <property name="application" value="application" />
     <property name="config" value="config" />
     <property name="tests" value="tests" />
-    <property name="ws-apidoc" value="docs/webservice-apidoc" />
 
     <target name="clean"
             description="Cleanup and create build directories">
@@ -15,7 +14,6 @@
         <mkdir dir="${basedir}/build/coverage" />
         <mkdir dir="${basedir}/build/logs" />
         <mkdir dir="${basedir}/build/pdepend" />
-        <mkdir dir="${basedir}/build/apidoc/images" />
     </target>
 
     <target name="pdepend"
@@ -105,46 +103,6 @@
             description="Generate gettext language files">
         <exec executable="l10n/gen_l10n.sh" />
     </target>
-
-    <target name="apidoc-ws-html"
-            description="Generate WebService API Specification (HTML)">
-        <copy file="${ws-apidoc}/stylesheets/webservice-api.css" todir="build/apidoc" />
-        <copy todir="build/apidoc/images">
-            <fileset dir="${ws-apidoc}/images" />
-        </copy>
-        <exec executable="xsltproc">
-            <arg line=" -xinclude
-                        --output build/apidoc/webservice-api.html
-                        ${ws-apidoc}/stylesheets/html.xsl
-                        ${ws-apidoc}/webservice-api.xml" />
-        </exec>
-    </target>
-
-    <target name="apidoc-ws-pdf-fop"
-            description="Generate WebService API Specification (PDF)">
-        <exec executable="xsltproc">
-            <arg line=" -xinclude
-                        --output build/apidoc/webservice-api.fo
-                        ${ws-apidoc}/stylesheets/fo-pdf.xsl
-                        ${ws-apidoc}/webservice-api.xml" />
-        </exec>
-        <exec executable="fop">
-            <arg line=" -fo build/apidoc/webservice-api.fo
-                        -pdf build/apidoc/webservice-api.pdf" />
-        </exec>
-    </target>
-
-    <target name="apidoc-ws-pdf-dblatex"
-            description="Generate WebService API Specification (PDF)">
-        <exec executable="dblatex">
-            <arg line=" -o build/apidoc/webservice-api.tex.pdf
-                        ${ws-apidoc}/webservice-api.xml" />
-        </exec>
-    </target>
-
-    <target name="apidoc"
-            description="Generate Documentation"
-            depends="apidoc-ws-html" />
 
     <target name="build" depends="clean,pdepend,phpmd,phpunit,phpcs,phpcpd,phpdoc,phploc,phpcb" />
 </project>
