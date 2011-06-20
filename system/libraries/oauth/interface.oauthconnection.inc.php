@@ -24,12 +24,14 @@
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-interface OAuthConnection
+interface OAuthConnectionInterface
 {
 
-    private $token;
-
     public function __construct($token);
+
+    public function get_request_token($callback);
+
+    public function get_access_token($oauth_token, $request_token_secret);
 
     public function login();
 
