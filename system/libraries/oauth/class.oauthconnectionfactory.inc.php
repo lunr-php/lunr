@@ -39,7 +39,11 @@ class OAuthConnectionFactory
         switch ($provider)
         {
             case "twitter":
+                return new TwitterConnection($token);
+                break;
             case "linkedin":
+                return new LinkedinConnection($token);
+                break;
             case "facebook":
             default:
                 return new FacebookConnection($token);
