@@ -198,6 +198,18 @@ class Verification
         return Mail::validate_email($value);
     }
 
+    /**
+     * Check whether input is a numerical troolean (values 0,1,2)
+     *
+     * @param mixed $value The input to check
+     *
+     * @return Boolean $return TRUE if input is a numeric troolean, FALSE otherwise.
+     */
+    public static function is_numerical_troolean($value)
+    {
+        return ($value == 0) || ($value == 1) || ($value == 2);
+    }
+
 }
 
 ?>
