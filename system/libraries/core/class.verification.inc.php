@@ -186,6 +186,18 @@ class Verification
         return ($value === 1) || ($value === 0) || ($value === "0") || ($value === "1");
     }
 
+    /**
+     * Check that input is a valid email.
+     *
+     * @param mixed $value The input to check
+     *
+     * @return Boolean $return TRUE if input is a valid email, FALSE otherwise.
+     */
+    public static function is_mail($value)
+    {
+        return Mail::validate_email($value);
+    }
+
 }
 
 ?>
