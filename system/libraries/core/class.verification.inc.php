@@ -41,7 +41,7 @@ class Verification
         if (substr($method, 0, 9) == 'is_length')
         {
             $length = substr($method, 9);
-            return self::is_length($length, $arguments[0]);
+            return static::is_length($length, $arguments[0]);
         }
         elseif (substr($method, 0, 9) == 'is_ignore')
         {
@@ -119,7 +119,7 @@ class Verification
                 {
                     foreach ($ruleset[$key] as &$rule)
                     {
-                        if (call_user_func('self::is_' . $rule, $value) === FALSE)
+                        if (call_user_func('static::is_' . $rule, $value) === FALSE)
                         {
                             Output::error($error_prefix . "Rule '$rule' failed for '$key'!", $file);
                             return FALSE;
@@ -129,7 +129,7 @@ class Verification
                 }
                 else
                 {
-                    if (call_user_func('self::is_' . $ruleset[$key], $value) === FALSE)
+                    if (call_user_func('static::is_' . $ruleset[$key], $value) === FALSE)
                     {
                         Output::error($error_prefix . "Rule '" . $ruleset[$key] . "' failed for '$key'!", $file);
                         return FALSE;
