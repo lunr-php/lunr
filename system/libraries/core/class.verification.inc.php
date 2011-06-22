@@ -78,13 +78,13 @@ class Verification
 
         if (trim($identifier) == '')
         {
-            Output::error("Can't verify input. Empty Identifier!'", $file);
+            Output::errorln("Can't verify input. Empty Identifier!'", $file);
             return FALSE;
         }
 
         if (!is_array($input) || !is_array($ruleset))
         {
-            Output::error("Can't verify input. Invalid input!'", $file);
+            Output::errorln("Can't verify input. Invalid input!'", $file);
             return FALSE;
         }
 
@@ -101,7 +101,7 @@ class Verification
             {
                 foreach ($unhandled_elements as $value)
                 {
-                    Output::error($error_prefix . "Ruleset for non-existing key '$value'!", $file);
+                    Output::errorln($error_prefix . "Ruleset for non-existing key '$value'!", $file);
                 }
                 return FALSE;
             }
@@ -121,7 +121,7 @@ class Verification
                     {
                         if (call_user_func('static::is_' . $rule, $value) === FALSE)
                         {
-                            Output::error($error_prefix . "Rule '$rule' failed for '$key'!", $file);
+                            Output::errorln($error_prefix . "Rule '$rule' failed for '$key'!", $file);
                             return FALSE;
                         }
                     }
@@ -131,14 +131,14 @@ class Verification
                 {
                     if (call_user_func('static::is_' . $ruleset[$key], $value) === FALSE)
                     {
-                        Output::error($error_prefix . "Rule '" . $ruleset[$key] . "' failed for '$key'!", $file);
+                        Output::errorln($error_prefix . "Rule '" . $ruleset[$key] . "' failed for '$key'!", $file);
                         return FALSE;
                     }
                 }
             }
             else
             {
-                Output::error($error_prefix . "Unhandled Array Element '$key'!", $file);
+                Output::errorln($error_prefix . "Unhandled Array Element '$key'!", $file);
                 return FALSE;
             }
         }
