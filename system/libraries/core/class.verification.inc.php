@@ -38,14 +38,19 @@ class Verification
      */
     public static function __callStatic($method, $arguments)
     {
-        if (substr($method, 0, 9) == 'is_length')
+        if (substr($method, 0, 9) == 'is_ignore')
+        {
+            return TRUE;
+        }
+        elseif (substr($method, 0, 7) == "is_type")
+        {
+            $type = substr($method,8);
+            return static::is_type($type,$arguments[0]);
+        }
+        elseif (substr($method, 0, 9) == 'is_length')
         {
             $length = substr($method, 9);
             return static::is_length($length, $arguments[0]);
-        }
-        elseif (substr($method, 0, 9) == 'is_ignore')
-        {
-            return TRUE;
         }
         else
         {
@@ -158,6 +163,20 @@ class Verification
     public static function is_length($length, &$value)
     {
         return (strlen($value) == $length);
+    }
+
+    /**
+     * Check that input is of the type provided as parameter
+     *
+     * @param mixed $type  The type to check for
+     * @param mixed $value The input to check
+     *
+     * @return Boolean $return TRUE if input is of the specified type, FALSE otherwise.
+     */
+    public static function is_type($type, $value)
+    {
+       $f = "is_" . $type;
+       return $f($value);
     }
 
     /**
