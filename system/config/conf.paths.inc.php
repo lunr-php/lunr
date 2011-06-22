@@ -19,8 +19,6 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
-$config['log'] = array();
-
 /**
  * The path of the called script
  * @global String $config['base_path']
@@ -42,6 +40,12 @@ $config['protocol'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
 $config['base_url']  = $config['protocol'] . '://'.$_SERVER['SERVER_NAME'];
 //$config['base_url'] .= ":" . $_SERVER['SERVER_PORT'];
 $config['base_url'] .= $config['base_path'];
+
+/**
+ * Array of logfile paths
+ * @global Array $config['log']
+ */
+$config['log'] = array();
 
 /**
  * Default path to invalid input logs
