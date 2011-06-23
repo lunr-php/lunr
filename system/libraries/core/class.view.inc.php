@@ -120,7 +120,8 @@ abstract class View
      */
     protected function statics($path = '')
     {
-        return $this->base_url('statics/' . $path);
+        global $config;
+        return $config['base_path'] . $config['path']['statics'] . '/' . $path;
     }
 
     /**

@@ -42,6 +42,12 @@ $config['base_url']  = $config['protocol'] . '://'.$_SERVER['SERVER_NAME'];
 $config['base_url'] .= $config['base_path'];
 
 /**
+ * Directory containing static files (javascript, css, images, etc)
+ * @global String $config['path']['statics']
+ */
+$config['path']['statics'] = "/statics";
+
+/**
  * Array of logfile paths
  * @global Array $config['log']
  */
