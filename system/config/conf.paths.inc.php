@@ -45,7 +45,7 @@ $config['base_url'] .= $config['base_path'];
  * Directory containing static files (javascript, css, images, etc)
  * @global String $config['path']['statics']
  */
-$config['path']['statics'] = "/statics";
+$config['path']['statics'] = '/statics';
 
 /**
  * Array of logfile paths
