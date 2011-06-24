@@ -127,7 +127,7 @@ class L10nProviderGettext extends L10nProvider
     {
         if (strlen($singular) + strlen($context) + 1 > self::GETTEXT_MAX_MSGID_LENGTH)
         {
-            Output::error('Identifier too long: ' . $identifier);
+            Output::error('Identifier too long: ' . $singular);
         }
 
         $this->init($this->language);
