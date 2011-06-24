@@ -61,7 +61,7 @@ class Curl
      */
     public function __construct()
     {
-        $options = array();
+        $this->options = array();
 
         // default: no error
         $this->errno  = 0;
