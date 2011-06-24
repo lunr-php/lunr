@@ -42,10 +42,10 @@ class Verification
         {
             return TRUE;
         }
-        elseif (substr($method, 0, 7) == "is_type")
+        elseif (substr($method, 0, 7) == 'is_type')
         {
-            $type = substr($method,8);
-            return static::is_type($type,$arguments[0]);
+            $type = substr($method, 8);
+            return static::is_type($type, $arguments[0]);
         }
         elseif (substr($method, 0, 9) == 'is_length')
         {
@@ -166,7 +166,7 @@ class Verification
     }
 
     /**
-     * Check that input is of the type provided as parameter
+     * Check that input is of the type provided as parameter.
      *
      * @param mixed $type  The type to check for
      * @param mixed $value The input to check
@@ -175,8 +175,8 @@ class Verification
      */
     public static function is_type($type, $value)
     {
-       $f = "is_" . $type;
-       return $f($value);
+        $f = 'is_' . $type;
+        return $f($value);
     }
 
     /**
@@ -202,7 +202,7 @@ class Verification
      */
     public static function is_numerical_boolean($value)
     {
-        return ($value === 1) || ($value === 0) || ($value === "0") || ($value === "1");
+        return ($value === 1) || ($value === 0) || ($value === '0') || ($value === '1');
     }
 
     /**
@@ -218,7 +218,7 @@ class Verification
     }
 
     /**
-     * Check whether input is a numerical troolean (values 0,1,2)
+     * Check whether input is a numerical troolean (values 0,1,2).
      *
      * @param mixed $value The input to check
      *
