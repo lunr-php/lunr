@@ -69,6 +69,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
      * @depends testIsoToPosix
      * @dataProvider languageProvider
      * @covers Lunr\Libraries\L10n\L10n::set_language
+     * @runInSeparateProcess
      */
     public function testSetLanguage($locale, $language)
     {
