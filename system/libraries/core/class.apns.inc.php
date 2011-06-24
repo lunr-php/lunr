@@ -74,7 +74,7 @@ class APNS
      */
     public function send_apple_push($device_token, $payload)
     {
-        global $config, $JSON;
+        global $config;
 
         $ctx = stream_context_create();
         stream_context_set_option(
@@ -220,6 +220,7 @@ class APNS
     */
     public function process_apple_error($response)
     {
+        global $config;
         if ($response[1] < 0 || $response[1] > 8)
         {
             $response[1] = 9;
