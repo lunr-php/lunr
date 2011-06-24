@@ -30,12 +30,6 @@ class Autoloader
 {
 
     /**
-     * The include path used for class lookup
-     * @var String
-     */
-    private static $include_path;
-
-    /**
      * List of controller prefixes of abstract controllers
      * that extend from the base Controller class.
      * @var array
