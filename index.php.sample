@@ -1,0 +1,164 @@
+<?php
+
+/**
+ * index.php is meant to setup basic library lookup paths as well as
+ * load your configuration. After the setup is done the request will
+ * be handled and forwarded to the respective controller.
+ *
+ * Lunr's preferred Controller setup uses URL based controller, method
+ * and parameter definitions. From the client (browser) side this could
+ * look like this:
+ *
+ *  http://www.example.org/controller/method/parameter1/parameter2/....
+ *
+ * URL rewriting rules (for apache, lighttpd, etc) should take care of
+ * transforming the URL to something resembling this pattern:
+ *
+ *  http://www.example.org/index.php?controller=controller&method=method&param1=parameter1&....
+ *
+ * This makes the those values available from PHP over the $_GET super global.
+ */
+
+    // SECURITY: do not allow html tags as URL parameters
+    foreach($_GET AS $get=>$val)
+    {
+        $_GET[$get] = htmlspecialchars(strip_tags($val));
+    }
+
+    // Define application config lookup path
+    set_include_path(
+        dirname(__FILE__) . "/config"
+    );
+
+    // Include framework config
+    // The most important part of this file should be the definition of
+    // $config['path']['system'] which defines the location of the Lunr
+    // framework. An example config file is available under docs/example-config
+    require_once 'conf.lunr.inc.php';
+
+    // Add system config paths to lookup path
+    set_include_path(
+        get_include_path() . ":" .
+        $config['path']['system'] . ":" .
+        $config['path']['system'] . "/system/config"
+    );
+
+    // Include system config files
+    require_once 'conf.paths.inc.php';
+    require_once 'system/config/conf.database.inc.php';
+    require_once 'system/config/conf.l10n.inc.php';
+
+    // Include application config files
+    require_once("conf.application.inc.php");
+    require_once("config/conf.database.inc.php");
+    require_once("config/conf.l10n.inc.php");
+
+    // If not controller is specified set it to the default controller,
+    // similar for the method. This allows for a default Homepage
+    // when calling a URL like http://www.example.org/
+    if (!isset($_GET['controller']) || $_GET['controller'] == "")
+    {
+        $_GET['controller'] = $config['default_controller'];
+    }
+
+    if (!isset($_GET['method']))
+    {
+        $_GET['method'] = $config['default_method'];
+    }
+
+    // Set the controller filename according to the input we got
+    $page_filename = "controller." . $_GET['controller'] . ".inc.php";
+
+    // Retrieve all available controllers from the filesystem.
+    // There can be multiple locations for controllers, but you need
+    // to perform below code for each of them and store the results
+    // separately.
+    $dir_handle = opendir($config['path']['controllers']);
+    $scripts = array();
+    while (false !== ($filename = readdir($dir_handle)))
+    {
+        // ignore dot files
+        if(!(preg_match("/^\./", $filename)))
+        {
+            $scripts[] = $filename;
+        }
+    }
+
+    // Check whether the specified controller exists or not
+    $is_scripts = FALSE;
+    if (in_array($page_filename, $scripts))
+    {
+        $is_scripts = TRUE;
+    }
+
+    // Add system-lib paths to lookup path
+    // You can do this earlier of you don't have conflicting
+    // config file names in your application.
+    set_include_path(
+        get_include_path() . ":" .
+        $config['path']['system'] . "/system:"
+    );
+
+    // Load and setup class file autloader
+    // This is an optional step. Without the autoloader you have to
+    // take care of including the necessary files yourself though,
+    // for both your application and Lunr
+    require_once("libraries/core/class.autoloader.inc.php");
+    spl_autoload_register("Lunr\Libraries\Core\Autoloader::load");
+    Lunr\Libraries\Core\Autoloader::register_project_controller("schiphol");
+
+    // Define common application include path
+    // Those are example paths and may differ in your application.
+    // The only reason to keep this separate from the system paths
+    // is for easy maintenance. Feel free to combine them if it
+    // makes things easier for you.
+    set_include_path(
+        get_include_path() . ":" .
+        dirname(__FILE__) . "/application/libraries/enums:" .
+        dirname(__FILE__) . "/application/libraries/core:" .
+        dirname(__FILE__) . "/application/libraries/db:" .
+        dirname(__FILE__) . "/application/libraries/third-party:" .
+        dirname(__FILE__) . "/application/models:" .
+        dirname(__FILE__) . "/application/libraries"
+    );
+
+    // Enable mysqlnd query logger
+    // The Query Logger is an easy way to keep track of slow queries
+    // from within PHP. Optional step
+    if (extension_loaded('mysqlnd_uh') && $config['query_stats'])
+    {
+        mysqlnd_uh_set_connection_proxy(new MySQLndQueryLogger());
+    }
+
+    if($is_scripts)
+    {
+        // Load the specified Controller class
+        $controller = ucfirst($_GET['controller']) . "Controller";
+        $controller = new $controller();
+
+        ob_start();
+        if (!isset($_GET['param1']))
+        {
+            echo call_user_func(array($controller, strtolower($_GET['method'])));
+        }
+        elseif (!isset($_GET['param2']))
+        {
+            echo call_user_func(array($controller, strtolower($_GET['method'])), $_GET['param1']);
+        }
+        elseif (!isset($_GET['param3']))
+        {
+            echo call_user_func(array($controller, strtolower($_GET['method'])), $_GET['param1'], $_GET['param2']);
+        }
+        else
+        {
+            echo call_user_func(array($controller, strtolower($_GET['method'])), $_GET['param1'], $_GET['param2'], $_GET['param3']);
+        }
+        ob_get_flush();
+    }
+    else
+    {
+        // 404 NOT FOUND or invalid controller
+        // You can define yourself how you want to handle that case.
+    }
+
+?>
