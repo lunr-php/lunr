@@ -16,7 +16,7 @@
  *
  *  http://www.example.org/index.php?controller=controller&method=method&param1=parameter1&....
  *
- * This makes the those values available from PHP over the $_GET super global.
+ * This makes those values available from PHP over the $_GET super global.
  */
 
     // SECURITY: do not allow html tags as URL parameters
@@ -53,7 +53,7 @@
     require_once("config/conf.database.inc.php");
     require_once("config/conf.l10n.inc.php");
 
-    // If not controller is specified set it to the default controller,
+    // If no controller is specified set it to the default controller,
     // similar for the method. This allows for a default Homepage
     // when calling a URL like http://www.example.org/
     if (!isset($_GET['controller']) || $_GET['controller'] == "")
@@ -92,7 +92,7 @@
     }
 
     // Add system-lib paths to lookup path
-    // You can do this earlier of you don't have conflicting
+    // You can do this earlier if you don't have conflicting
     // config file names in your application.
     set_include_path(
         get_include_path() . ":" .
