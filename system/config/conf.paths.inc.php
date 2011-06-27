@@ -23,23 +23,40 @@
  * The path of the called script
  * @global String $config['base_path']
  */
-$config['base_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
+$config['base_path'] = '';
 
 /**
  * The protocol used by the request (HTTP|HTTPS)
  * @global String $config['protocol']
  */
-$config['protocol'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
-                      ? 'https'
-                      : 'http';
+$config['protocol'] = '';
 
 /**
  * The fully qualified domain name used for the call
  * @global String $config['base_url']
  */
-$config['base_url']  = $config['protocol'] . '://'.$_SERVER['SERVER_NAME'];
-//$config['base_url'] .= ":" . $_SERVER['SERVER_PORT'];
-$config['base_url'] .= $config['base_path'];
+$config['base_url']  = '';
+
+// Note: This check does not work if one calls php-cgi from the commandline
+if (PHP_SAPI === 'cli')
+{
+    $config['base_path'] = $config['default_webpath'];
+    $config['protocol']  = $config['default_protocol'];
+    $config['base_url']  = $config['default_url'];
+}
+else
+{
+    $config['base_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
+
+    $config['protocol']  = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
+                         ? 'https'
+                         : 'http';
+
+    $config['base_url']  = $config['protocol'] . '://'.$_SERVER['SERVER_NAME'];
+    //$config['base_url'] .= ":" . $_SERVER['SERVER_PORT'];
+    $config['base_url'] .= $config['base_path'];
+}
+
 
 /**
  * Directory containing static files (javascript, css, images, etc)

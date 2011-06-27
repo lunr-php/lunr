@@ -51,6 +51,24 @@ $config['protocol_enforce'] = FALSE;
 $config['query_stats'] = FALSE;
 
 /**
+ * Default protocol for web queries
+ * @global String $config['default_protocol']
+ */
+$config['default_protocol'] = 'http';
+
+/**
+ * Default URL for web queries
+ * @global String $config['default_url']
+ */
+$config['default_url'] = 'http://www.example.org/';
+
+/**
+ * Default sub-path for web queries
+ * @global String $config['default_webpath']
+ */
+$config['default_webpath'] = '/';
+
+/**
  * Load local configuration value adjustments, if they exist
  */
 $local_lunr_conf = dirname(__FILE__) . '/conf.lunr.local.inc.php';
