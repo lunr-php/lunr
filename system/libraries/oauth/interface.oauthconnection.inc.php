@@ -23,6 +23,7 @@
  * @subpackage Libraries
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Julio Foulquié <julio@m2mobi.com>
  */
 interface OAuthConnectionInterface
 {
@@ -33,11 +34,9 @@ interface OAuthConnectionInterface
 
     public function get_access_token($oauth_token, $request_token_secret);
 
-    public function login();
+    public function get_user_info($access_oauth_token, $access_token_secret);
 
-    public function get_user_info();
-
-    public function post_message();
+    public function post_message($access_oauth_token, $access_token_secret, $message);
 
 }
 
