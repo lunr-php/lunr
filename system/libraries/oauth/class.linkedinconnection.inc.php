@@ -48,20 +48,38 @@ class LinkedinConnection extends OAuthConnection
     }
 
     /**
-     * Get the request token.
+     * Get user profile info from LinkedIn.
      *
-     * @param String $callback Url to redirect back
+     * @param String $access_oauth_token  Oauth token
+     * @param String $access_token_secret Request token secret
      *
-     * @return Array Array containing the 'oauth token secret' and the 'request token secret'
+     * @return Array Array containing the user profile information, FALSE otherwise
      */
-    public function get_request_token($callback)
+    public function get_user_info($access_oauth_token, $access_token_secret)
     {
-        global $config;
+        $this->handler->setToken($access_oauth_token, $access_token_secret);
 
-        return $this->handler->getRequestToken(
-                $config['social']['linkedin']['request_token_url'],
-                $callback
+        try
+        {
+            $data = $this->handler->fetch(
+                $config['social'][NETWORK]['own_profile_url'],
+                NULL,
+                OAUTH_HTTP_METHOD_GET
             );
+
+            return $this->handler->getLastResponse();
+
+        }
+        catch(OAuthException $e)
+        {
+            Output::error('Oauth Exception retrieving user profile from ' . NETWORK .
+                             'Error code : ' .$e.getCode() .
+                             '; Message: ' . $e.getMessage(),
+                             $config['oauth']['log']
+                );
+
+            return FALSE;
+        }
     }
 
     /**
