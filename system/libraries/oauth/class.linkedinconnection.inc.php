@@ -108,8 +108,24 @@ class LinkedinConnection extends OAuthConnection
 
     }
 
-    public function post_message()
+    private function generate_linkedin_share_xml($message)
     {
+        global $config;
 
+        $xml = new SimpleXMLElement("<?xml version=\"1.0\" encoding=\"utf-8\" ?><share></share>");
+        $xml->addChild('comment', $message->comment);
+        $xml->addChild('content');
+        $xml->addChild('visibility');
+
+        $xml->content->addChild('title', $message->message);
+        $xml->content->addChild('submitted-url', $message->url);
+        $xml->content->addChild('submitted-image-url', $message->image_url);
+
+        $xml->visibility->addChild('code', $config['social']['linkedin']['visibility']);
+
+        return $xml;
     }
+
 }
+
+?>
