@@ -77,34 +77,44 @@ class TwitterConnection extends OAuthConnection
     }
 
     /**
-     * Get access token.
+     * Post a message to Twitter
      *
      * @param String $oauth_token          Oauth token
      * @param String $request_token_secret Request token secret
+     * @param String $msg                  SocialMessage object already filled
      *
-     * @return Array containing the 'oauth token' and the 'oauth token secret'
+     * @return Array Array containing the 'oauth token' and the 'oauth token secret',
+     *               FALSE otherwise.
      */
-    public function get_access_token($oauth_token, $request_token_secret)
+    public function post_message($access_oauth_token, $access_token_secret, $msg)
     {
         global $config;
 
-        $this->handler->setToken($oauth_token, $request_token_secret);
-        return $this->handler->getAccessToken($config['social']['twitter']['access_token_url']);
-    }
+        if(!$this->handler->setAuthType(OAUTH_AUTH_TYPE_FORM))
+        {
+            return FALSE;
+        }
+        if(!$this->handler->setToken($access_oauth_token, $access_token_secret))
+        {
+            return FALSE;
+        }
+        try
+        {
+            $response = $this->handler->fetch(
+                    $config['social']['twitter']['publish_url'],
+                    array('status' => $msg->message)
+                );
+        } catch (OAuthException $e)
+        {
+            Output::error('OauthException posting a message to Twitter.' .
+                            'Error code : ' . $e.getCode() .
+                            '; Message: ' . $e.getMessage(),
+                            $config['oauth']['log']
+                );
 
-    public function login()
-    {
-
-    }
-
-    public function get_user_info()
-    {
-
-    }
-
-    public function post_message()
-    {
-
+            return FALSE;
+        }
+        return Json::decode($this->handler->getLastResponse());
     }
 }
 
