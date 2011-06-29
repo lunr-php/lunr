@@ -83,29 +83,51 @@ class LinkedinConnection extends OAuthConnection
     }
 
     /**
-     * Get access token.
+     * Post a message to LinkedIn
      *
-     * @param String $oauth_token          Oauth token
+     * @param String $oauth_token          Oauth access token
      * @param String $request_token_secret Request token secret
+     * @param String $message              SocialMessage object already filled
      *
-     * @return Array containing the 'oauth token' and the 'oauth token secret'
+     * @return Array Array containing the 'oauth token' and the 'oauth token secret',
+     *               FALSE otherwise.
      */
-    public function get_access_token($oauth_token, $request_token_secret)
+    public function post_message($access_oauth_token, $access_token_secret, $message)
     {
         global $config;
 
-        $this->handler->setToken($oauth_token, $request_token_secret);
-        return $this->handler->getAccessToken($config['social']['linkedin']['access_token_url']);
-    }
+        $this->handler->setToken($access_oauth_token, $access_token_secret);
 
-    public function login()
-    {
+        if (file_exists($config['social'][NETWORK]['share_template']))
+        {
 
-    }
+        }
+        else
+        {
+            return FALSE;
+        }
 
-    public function get_user_info()
-    {
+        $xml = $this->generate_linkedin_share_xml($message);
 
+        try
+        {
+            $data = $this->handler->fetch(
+                        $config['social'][NETWORK]['publish_url'],
+                        $xml->asXML(),
+                        OAUTH_HTTP_METHOD_POST,
+                        array('Content-Type' => 'text/xml')
+                );
+            return $data;
+        }
+        catch(OAuthException $e)
+        {
+            Output::error('Oauth Exception posting a message to ' . NETWORK .
+                            'Error code : ' . $e.getCode() .
+                            '; Message: ' . $e.getMessage(),
+                            $config['oauth']['log']
+                );
+            return FALSE;
+        }
     }
 
     private function generate_linkedin_share_xml($message)
