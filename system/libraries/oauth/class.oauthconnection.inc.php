@@ -1,8 +1,8 @@
 <?php
 
 /**
- * This file contains an OAuth Connection Parent Class
- * for Twitter.
+ * This file contains an abstract OAuth Connection Parent Class
+ * for grouping the common code between the children.
  *
  * PHP Version 5.3
  *
@@ -83,7 +83,7 @@ abstract class OAuthConnection implements OAuthConnectionInterface
             try
             {
                 return $this->handler->getRequestToken(
-                        $config['oauth']['twitter']['request_token_url'],
+                        $config['oauth'][NETWORK]['request_token_url'],
                         $callback
                     );
             }
@@ -121,7 +121,7 @@ abstract class OAuthConnection implements OAuthConnectionInterface
             try
             {
                 $this->handler->setToken($oauth_token, $request_token_secret);
-                return $this->handler->getAccessToken($config['oauth']['twitter']['access_token_url']);
+                return $this->handler->getAccessToken($config['oauth'][NETWORK]['access_token_url']);
             }
             catch(OAuthException $e)
             {
