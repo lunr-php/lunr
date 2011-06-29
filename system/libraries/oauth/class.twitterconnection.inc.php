@@ -22,20 +22,11 @@
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Javier Negre <javi@m2mobi.com>
+ * @author     Julio Foulquié <julio@m2mobi.com>
  */
-class TwitterConnection implements OAuthConnectionInterface
+class TwitterConnection extends OAuthConnection
 {
-    /**
-     * Object to handle the API connection
-     * @var Object
-     */
-    private $handler;
-
-    /**
-     * API access token
-     * @var String
-     */
-    private $token;
+    const NETWORK = 'twitter';
 
     /**
      * Constructor.
@@ -44,23 +35,7 @@ class TwitterConnection implements OAuthConnectionInterface
      */
     public function __construct($token)
     {
-        global $config;
-
-        $this->token = $token;
-
-        try
-        {
-            $this->handler = new OAuth(
-                    $config['social']['twitter']['consumer_key'],
-                    $config['social']['twitter']['consumer_secret'],
-                    OAUTH_SIG_METHOD_HMACSHA1,
-                    OAUTH_AUTH_TYPE_URI
-                );
-        }
-        catch (Exception $e)
-        {
-           $this->handler = FALSE;
-        }
+        parent::__construct($token);
     }
 
     /**
@@ -68,8 +43,7 @@ class TwitterConnection implements OAuthConnectionInterface
      */
     public function __destruct()
     {
-        unset($this->token);
-        unset($this->handler);
+        parent::__destruct();
     }
 
     /**
