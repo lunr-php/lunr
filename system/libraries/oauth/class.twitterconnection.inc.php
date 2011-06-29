@@ -47,25 +47,31 @@ class TwitterConnection extends OAuthConnection
     }
 
     /**
-     * Get the request token.
+     * Get user profile info from Twitter
      *
-     * @param String $callback Url to redirect back
+     * @param String $access_oauth_token  Oauth token
+     * @param String $access_token_secret Request token secret
      *
-     * @return Array Array containing the 'oauth token secret' and the 'request token secret'
+     * @return Array Array containing the user profile information, FALSE otherwise
      */
-    public function get_request_token($callback)
+    public function get_user_info($access_oauth_token, $access_token_secret)
     {
-        if ($this->handler)
-        {
-            global $config;
+        global $config;
 
-            return $this->handler->getRequestToken(
-                    $config['social']['twitter']['request_token_url'],
-                    $callback
-                );
-        }
-        else
+        $this->handler->setToken($access_oauth_token, $access_token_secret);
+        try
         {
+            $data = $this->handler->fetch($config['social']['twitter']['verify_url']);
+            return $this->handler->getLastResponse();
+        }
+        catch (OAuthException $e)
+        {
+            Output::error('OauthException retrieving user info from Twitter.' .
+                            'Error code : ' . $e.getCode() .
+                            '; Message: ' . $e.getMessage(),
+                            $config['oauth']['log']
+                );
+
             return FALSE;
         }
     }
