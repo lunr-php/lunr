@@ -225,14 +225,15 @@ class Curl
      */
     public function simple_post($location, $data)
     {
-        if ($this->init($location) === FALSE)
-        {
-            return FALSE;
-        }
 
         $this->options[CURLOPT_CUSTOMREQUEST] = 'POST';
         $this->options[CURLOPT_POST]          = TRUE;
         $this->options[CURLOPT_POSTFIELDS]    = $data;
+
+        if ($this->init($location) === FALSE)
+        {
+            return FALSE;
+        }
 
         return $this->execute();
     }
