@@ -55,7 +55,7 @@ class LinkedinConnection extends OAuthConnection
      *
      * @return Array Array containing the user profile information, FALSE otherwise
      */
-    public function get_user_info($access_oauth_token, $access_token_secret)
+    public function get_user_info($access_oauth_token, $access_token_secret = '')
     {
         $this->handler->setToken($access_oauth_token, $access_token_secret);
 
@@ -85,14 +85,14 @@ class LinkedinConnection extends OAuthConnection
     /**
      * Post a message to LinkedIn
      *
-     * @param String $oauth_token          Oauth access token
-     * @param String $request_token_secret Request token secret
-     * @param String $message              SocialMessage object already filled
+     * @param String $oauth_token         Oauth access token
+     * @param String $message             SocialMessage object already filled
+     * @param String $access_token_secret Access token secret
      *
      * @return Array Array containing the 'oauth token' and the 'oauth token secret',
      *               FALSE otherwise.
      */
-    public function post_message($access_oauth_token, $access_token_secret, $message)
+    public function post_message($access_oauth_token, SocialMessage $message, $access_token_secret = '')
     {
         global $config;
 
@@ -130,7 +130,14 @@ class LinkedinConnection extends OAuthConnection
         }
     }
 
-    private function generate_linkedin_share_xml($message)
+    /**
+     * Generate the XML needed to share a message on LinkedIn
+     *
+     * @param String $message SocialMessage object already filled
+     *
+     * @return SimpleXMLElement SimpleXML object with the proper info
+     */
+    private function generate_linkedin_share_xml(SocialMessage $message)
     {
         global $config;
 
