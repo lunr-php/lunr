@@ -14,7 +14,7 @@
  */
 
 /**
- * Twitter OAuth Connection Class
+ * OAuth Connection Class
  *
  * @category   Libraries
  * @package    OAuth
