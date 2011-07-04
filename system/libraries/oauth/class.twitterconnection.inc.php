@@ -54,7 +54,7 @@ class TwitterConnection extends OAuthConnection
      *
      * @return Array Array containing the user profile information, FALSE otherwise
      */
-    public function get_user_info($access_oauth_token, $access_token_secret)
+    public function get_user_info($access_oauth_token, $access_token_secret = '')
     {
         global $config;
 
@@ -79,14 +79,14 @@ class TwitterConnection extends OAuthConnection
     /**
      * Post a message to Twitter
      *
-     * @param String $oauth_token          Oauth token
-     * @param String $request_token_secret Request token secret
-     * @param String $msg                  SocialMessage object already filled
+     * @param String $oauth_token         Oauth token
+     * @param String $msg                 SocialMessage object already filled
+     * @param String $access_token_secret Access token secret
      *
      * @return Array Array containing the 'oauth token' and the 'oauth token secret',
      *               FALSE otherwise.
      */
-    public function post_message($access_oauth_token, $access_token_secret, $msg)
+    public function post_message($access_oauth_token, SocialMessage $msg, $access_token_secret = '')
     {
         global $config;
 
