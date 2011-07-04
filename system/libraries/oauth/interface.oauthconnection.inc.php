@@ -32,11 +32,11 @@ interface OAuthConnectionInterface
 
     public function get_request_token($callback);
 
-    public function get_access_token($oauth_token, $request_token_secret);
+    public function get_access_token($oauth_token, $oauth_addon);
 
-    public function get_user_info($access_oauth_token, $access_token_secret);
+    public function get_user_info($access_oauth_token, $access_token_secret = '');
 
-    public function post_message($access_oauth_token, $access_token_secret, $message);
+    public function post_message($access_oauth_token, SocialMessage $message, $access_token_secret = '');
 
 }
 
