@@ -123,6 +123,28 @@ class M2DateTime
     }
 
     /**
+     * Return a date formatted as "MMM" (DEC).
+     *
+     * @param Integer $timestamp PHP-like Unix Timestamp (optional)
+     * @param String  $locale    The locale that should be used for the month
+     *                           names (optional, en_US by default)
+     *
+     * @return String $date Date as a string
+     */
+    public static function get_short_textmonth($timestamp = FALSE, $locale = 'en_US')
+    {
+        setlocale(LC_ALL, $locale);
+        if ($timestamp === FALSE)
+        {
+            return strtoupper(strftime('%b', time()));
+        }
+        else
+        {
+            return strtoupper(strftime('%b', $timestamp));
+        }
+    }
+
+    /**
      * Returns a MySQL compatible date definition.
      *
      * @param Integer $timestamp PHP-like Unix Timestamp
