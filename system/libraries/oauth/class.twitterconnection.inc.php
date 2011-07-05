@@ -61,11 +61,11 @@ class TwitterConnection extends OAuthConnection
         $this->handler->setToken($access_oauth_token, $access_token_secret);
         try
         {
-            $data = $this->handler->fetch($config['social']['twitter']['verify_url']);
+            $data = $this->handler->fetch($config['oauth'][NETWORK]['verify_url']);
         }
         catch (OAuthException $e)
         {
-            Output::error('OauthException retrieving user info from Twitter.' .
+            Output::error('OauthException retrieving user info from ' . NETWORK .
                             'Error code : ' . $e.getCode() .
                             '; Message: ' . $e.getMessage(),
                             $config['oauth']['log']
@@ -114,12 +114,12 @@ class TwitterConnection extends OAuthConnection
         try
         {
             $response = $this->handler->fetch(
-                    $config['social']['twitter']['publish_url'],
+                    $config['oauth'][NETWORK]['publish_url'],
                     array('status' => $msg->message)
                 );
         } catch (OAuthException $e)
         {
-            Output::error('OauthException posting a message to Twitter.' .
+            Output::error('OauthException posting a message to ' . NETWORK .
                             'Error code : ' . $e.getCode() .
                             '; Message: ' . $e.getMessage(),
                             $config['oauth']['log']
