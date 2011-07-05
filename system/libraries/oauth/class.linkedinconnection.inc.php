@@ -155,6 +155,39 @@ class LinkedinConnection extends OAuthConnection
         return $xml;
     }
 
+    /**
+     * Parse a LinkedIn profile object and returns a filled SocialProfile object
+     *
+     * @param Array $user_info Array with the user information coming from Facebook
+     *
+     * @return SocialProfile Object containing the facebook profile info.
+     */
+    private function parse_linkedin_profile($user_info)
+    {
+        $xml_profile = new SimpleXMLElement($user_info);
+
+        $user_profile = new SocialProfile();
+
+        foreach($xml_profile as $key=>$field)
+        {
+            switch ($key)
+            {
+                case 'id':
+                    $user_profile->id = (string)$xml_profile->$key;
+                    break;
+                case 'first-name':
+                    $user_profile->given_name = (string)$xml_profile->$key;
+                    break;
+                case 'last-name':
+                    $user_profile->last_name = (string)$xml_profile->$key;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return $user_profile;
+    }
+
 }
 
 ?>
