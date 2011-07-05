@@ -118,7 +118,20 @@ class FacebookConnection implements OAuthConnectionInterface
         global $config;
 
         $url = $config['social'][NETWORK]['own_profile_url'] . $access_token;
-        return file_get_contents($url);
+        $response = file_get_contents($url);
+        if($response === FALSE)
+        {
+            return FALSE;
+        }
+        else
+        {
+            $user_info = Json::decode($response);
+            if(!$user_info)
+            {
+                return FALSE;
+            }
+        }
+        return $this->parse_facebook_profile($user_info);
     }
 
     /**
