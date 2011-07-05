@@ -62,7 +62,7 @@ class LinkedinConnection extends OAuthConnection
         try
         {
             $data = $this->handler->fetch(
-                $config['social'][NETWORK]['own_profile_url'],
+                $config['oauth'][NETWORK]['own_profile_url'],
                 NULL,
                 OAUTH_HTTP_METHOD_GET
             );
@@ -97,7 +97,7 @@ class LinkedinConnection extends OAuthConnection
 
         $this->handler->setToken($access_oauth_token, $access_token_secret);
 
-        if (file_exists($config['social'][NETWORK]['share_template']))
+        if (file_exists($config['oauth'][NETWORK]['share_template']))
         {
 
         }
@@ -111,7 +111,7 @@ class LinkedinConnection extends OAuthConnection
         try
         {
             $data = $this->handler->fetch(
-                        $config['social'][NETWORK]['publish_url'],
+                        $config['oauth'][NETWORK]['publish_url'],
                         $xml->asXML(),
                         OAUTH_HTTP_METHOD_POST,
                         array('Content-Type' => 'text/xml')
@@ -149,7 +149,7 @@ class LinkedinConnection extends OAuthConnection
         $xml->content->addChild('submitted-url', $message->url);
         $xml->content->addChild('submitted-image-url', $message->image_url);
 
-        $xml->visibility->addChild('code', $config['social']['linkedin']['visibility']);
+        $xml->visibility->addChild('code', $config['oauth'][NETWORK]['visibility']);
 
         return $xml;
     }
