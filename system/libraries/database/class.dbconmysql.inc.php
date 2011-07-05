@@ -1377,6 +1377,29 @@ class DBConMySQL extends DBCon
     }
 
     /**
+     * Alter a view in the database.
+     *
+     * @param String $name Name of the view
+     * @param String $from Name of the first table used in the from clause for
+     *                     the view definition
+     *
+     * @return Boolean TRUE on successful query or FALSE on connection failure
+     */
+    public function alter_view($name, $from)
+    {
+        if ($this->readonly === TRUE)
+        {
+            return FALSE;
+        }
+        else
+        {
+            $sql = 'ALTER VIEW ' . $this->escape_string($name) . ' AS ';
+            $sql .= $this->preliminary_query($from);
+            return $this->query($sql, FALSE);
+        }
+    }
+
+    /**
      * Create a view in the database.
      *
      * @param String $name Name of the view

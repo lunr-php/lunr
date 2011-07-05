@@ -610,6 +610,17 @@ abstract class DBCon
     public abstract function drop_view($view);
 
     /**
+     * Alter a view in the database.
+     *
+     * @param String $name Name of the view
+     * @param String $from Name of the first table used in the from clause for
+     *                     the view definition
+     *
+     * @return Boolean TRUE on successful query or FALSE on connection failure
+     */
+    public abstract function alter_view($name, $from);
+
+    /**
      * Create a view in the database.
      *
      * @param String $name Name of the view
