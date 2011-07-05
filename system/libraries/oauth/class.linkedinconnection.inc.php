@@ -66,9 +66,6 @@ class LinkedinConnection extends OAuthConnection
                 NULL,
                 OAUTH_HTTP_METHOD_GET
             );
-
-            return $this->handler->getLastResponse();
-
         }
         catch(OAuthException $e)
         {
@@ -80,6 +77,8 @@ class LinkedinConnection extends OAuthConnection
 
             return FALSE;
         }
+        $response = $this->handler->getLastResponse();
+        return $this->parse_linkedin_profile($response);
     }
 
     /**
