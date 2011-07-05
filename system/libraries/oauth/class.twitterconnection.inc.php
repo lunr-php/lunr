@@ -62,7 +62,6 @@ class TwitterConnection extends OAuthConnection
         try
         {
             $data = $this->handler->fetch($config['social']['twitter']['verify_url']);
-            return $this->handler->getLastResponse();
         }
         catch (OAuthException $e)
         {
@@ -74,6 +73,20 @@ class TwitterConnection extends OAuthConnection
 
             return FALSE;
         }
+        $response = $this->handler->getLastResponse();
+        if($response === FALSE)
+        {
+            return FALSE;
+        }
+        else
+        {
+            $user_info = Json::decode($response);
+            if(!$user_info)
+            {
+                return FALSE;
+            }
+        }
+        return $this->parse_twitter_profile($user_info);
     }
 
     /**
