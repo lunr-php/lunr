@@ -116,6 +116,34 @@ class TwitterConnection extends OAuthConnection
         }
         return Json::decode($this->handler->getLastResponse());
     }
+
+    /**
+     * Parse a Twitter profile array and returns a Social Profile
+     *
+     * @param Array $user_info Array with the user information coming from Facebook
+     *
+     * @return SocialProfile Object containing the facebook profile info.
+     */
+    private function parse_twitter_profile($user_info)
+    {
+        $user_profile = new SocialProfile();
+
+        foreach($user_info as $key=>$field)
+        {
+            switch ($key)
+            {
+                case 'id':
+                    $user_profile->id = $field;
+                    break;
+                case 'name':
+                    $user_profile->given_name = $field;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return $user_profile;
+    }
 }
 
 ?>
