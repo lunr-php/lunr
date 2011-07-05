@@ -131,13 +131,13 @@ $config['oauth']['linkedin']['authurl'] = 'https://api.linkedin.com/uas/oauth/au
  * URL where to verify and retrieve the user's credentials on LinkedIn
  * @global array $config['oauth']['linkedin']['verify_url']
  */
-$config['social']['linkedin']['verify_url'] = 'http://api.linkedin.com/v1/people/~';
+$config['oauth']['linkedin']['verify_url'] = 'http://api.linkedin.com/v1/people/~';
 
 /**
  * URL where to publish on LinkedIn
  * @global array $config['oauth']['linkedin']['publish_url']
  */
-$config['social']['linkedin']['publish_url'] = 'http://api.linkedin.com/v1/people/~/shares';
+$config['oauth']['linkedin']['publish_url'] = 'http://api.linkedin.com/v1/people/~/shares';
 
 /**
  * Default visibility value for your LinkedIn messages
@@ -145,6 +145,6 @@ $config['social']['linkedin']['publish_url'] = 'http://api.linkedin.com/v1/peopl
  * The default value is 'anyone'
  * @global array $config['oauth']['linkedin']['visibility']
  */
-$config['social']['linkedin']['visibility'] = 'anyone';
+$config['oauth']['linkedin']['visibility'] = 'anyone';
 
 ?>
