@@ -11,6 +11,7 @@
  * @subpackage Libraries
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Jose Viso <jose@m2mobi.com>
  *
  */
 
@@ -23,6 +24,7 @@ namespace Lunr\Libraries\Core;
  * @package    Core
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Jose Viso <jose@m2mobi.com>
  *
  */
 class M2DateTime
