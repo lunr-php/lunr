@@ -79,15 +79,16 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the static function get_short_month()
+     * Test the static function get_short_textmonth()
      * @covers Lunr\Libraries\Core\M2DateTime::get_short_textmonth
+     * @runInSeparateProcess
      */
     public function testGetShortTextMonth()
     {
         $timestamp = strtotime('2011-09-29');
         $this->assertEquals(strtoupper(strftime('%b')), M2DateTime::get_short_textmonth());
         $this->assertEquals('SEP', M2DateTime::get_short_textmonth($timestamp));
-        $this->assertEquals('SEP', M2DateTime::get_short_textmonth($timestamp, "es_ES"));
+        $this->assertEquals('WRZ', M2DateTime::get_short_textmonth($timestamp, 'pl_PL'));
     }
 
     /**
@@ -137,6 +138,7 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
      * Test the static function get_short_date()
      * @depends testDelayedTimestamp
      * @covers Lunr\Libraries\Core\M2DateTime::get_short_date
+     * @runInSeparateProcess
      */
     public function testGetShortDate()
     {
