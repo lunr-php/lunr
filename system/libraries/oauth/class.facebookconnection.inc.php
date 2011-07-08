@@ -98,10 +98,11 @@ class FacebookConnection implements OAuthConnectionInterface
             . "&client_secret=" . $config['social'][NETWORK]['app_secret']
             . "&code=" . $oauth_token;
 
-        $response = file_get_contents($token_url);
-        $params = null;
+        $curl = new Curl();
+        $response = $curl->simple_get($token_url);
+        $params = NULL;
         parse_str($response, $params);
-
+        unset($curl);
         return $params;
     }
 
@@ -117,8 +118,9 @@ class FacebookConnection implements OAuthConnectionInterface
     {
         global $config;
 
-        $url = $config['social'][NETWORK]['own_profile_url'] . $access_token;
-        $response = file_get_contents($url);
+        $url = $config['oauth'][NETWORK]['verify_url'] . $access_token;
+        $curl = new Curl();
+        $response = $curl->simple_get($url);
         if($response === FALSE)
         {
             return FALSE;
