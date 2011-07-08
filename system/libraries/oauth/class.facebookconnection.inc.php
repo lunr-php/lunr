@@ -54,12 +54,12 @@ class FacebookConnection implements OAuthConnectionInterface
     }
 
     /**
-     * Get the request token from the Facebook.
+     * Get the '' from the Facebook.
      *
      * @param String $callback URL to receive the callback from the OAuth provider
      *
-     * @return Array Array containing the 'oauth_token_secret' and the
-     *              'request_token_secret' on success and FALSE otherwise
+     * @return Array Array containing the 'state' and the
+     *              'url for Facebook' on success and FALSE otherwise
      */
     public function get_request_token($callback)
     {
@@ -67,23 +67,23 @@ class FacebookConnection implements OAuthConnectionInterface
 
         $state = md5(uniqid(rand(), TRUE));
 
-        $url = $config['social'][NETWORK]['request_token_url']
-            . '?client_id=' . $config['social']['facebook']['client_id']
+        $url = $config['oauth'][NETWORK]['request_token_url']
+            . '?client_id=' . $config['oauth']['facebook']['client_id']
             . '&redirect_uri=' . urlencode($callback)
             . '&state=' . $state
             . '&display=wap';
 
         return array(
-                'state' => $state,
-                'url' => $url
-            );
+            'state' => $state,
+            'url' => $url
+        );
     }
 
     /**
      * Get access token from Facebook.
      *
-     * @param String $oauth_token          Oauth token
-     * @param String $request_token_secret Request token secret
+     * @param String $oauth_token Oauth token
+     * @param String $url_back    URL to callback after a request
      *
      * @return Array Array containing the 'oauth token' and the 'oauth token secret',
      *               FALSE on failure.
@@ -92,10 +92,10 @@ class FacebookConnection implements OAuthConnectionInterface
     {
         global $config;
 
-        $token_url = $config['social'][NETWORK]['access_token_url']
-            . "?client_id=" . $config['social'][NETWORK]['client_id']
+        $token_url = $config['oauth'][NETWORK]['access_token_url']
+            . "?client_id=" . $config['oauth'][NETWORK]['client_id']
             . "&redirect_uri=" . urlencode($url_back)
-            . "&client_secret=" . $config['social'][NETWORK]['app_secret']
+            . "&client_secret=" . $config['oauth'][NETWORK]['app_secret']
             . "&code=" . $oauth_token;
 
         $curl = new Curl();
@@ -153,7 +153,7 @@ class FacebookConnection implements OAuthConnectionInterface
         $curl = new Curl();
         $params = array('access_token' => $access_token, 'message' => $message->message);
 
-        return $curl->simple_post($config['social'][NETWORK]['share_url'], $params);
+        return $curl->simple_post($config['oauth'][NETWORK]['publish_url'], $params);
     }
 
     /**
