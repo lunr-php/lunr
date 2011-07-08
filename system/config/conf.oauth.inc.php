@@ -136,4 +136,52 @@ $config['oauth']['linkedin']['publish_url'] = 'http://api.linkedin.com/v1/people
  */
 $config['oauth']['linkedin']['visibility'] = 'anyone';
 
+/**
+ * Facebook Service Settings
+ * @global Array $config['oauth']['facebook']
+ */
+$config['oauth']['facebook'] = array();
+
+/**
+ * Facebook Client ID
+ * @global String $config['oauth']['facebook']['client_id']
+ */
+$config['oauth']['facebook']['client_id'] = '';
+
+/**
+ * Facebook API Key
+ * @global String $config['oauth']['facebook']['api_key']
+ */
+$config['oauth']['facebook']['api_key'] = '';
+
+/**
+ * Facebook Application Secret
+ * @global String $config['oauth']['facebook']['app_secret']
+ */
+$config['oauth']['facebook']['app_secret'] = '';
+
+/**
+ * URL where to request the 'request token' for Facebook
+ * @global String $config['oauth']['facebook']['request_token_url']
+ */
+$config['oauth']['facebook']['request_token_url'] = 'http://www.facebook.com/dialog/oauth';
+
+/**
+ * URL where to request the 'access token' for Facebook
+ * @global String $config['oauth']['facebook']['access_token_url']
+ */
+$config['oauth']['facebook']['access_token_url']  = 'https://graph.facebook.com/oauth/access_token';
+
+/**
+ * URL where to verify and retrieve the user's credentials on Facebook
+ * @global String $config['oauth']['facebook']['verify_url']
+ */
+$config['oauth']['facebook']['verify_url']  = 'https://graph.facebook.com/me/?access_token=';
+
+/**
+ * URL where to publish on Facebook
+ * @global String $config['oauth']['facebook']['share_url']
+ */
+$config['oauth']['facebook']['publish_url']  = 'https://graph.facebook.com/me/feed';
+
 ?>
