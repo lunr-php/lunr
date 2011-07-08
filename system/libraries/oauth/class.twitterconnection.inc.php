@@ -56,6 +56,11 @@ class TwitterConnection extends OAuthConnection
      */
     public function get_user_info($access_oauth_token, $access_token_secret = '')
     {
+        if(!$this->handler)
+        {
+            return FALSE;
+        }
+
         global $config;
 
         $this->handler->setToken($access_oauth_token, $access_token_secret);
@@ -66,10 +71,10 @@ class TwitterConnection extends OAuthConnection
         catch (OAuthException $e)
         {
             Output::error('OauthException retrieving user info from ' . NETWORK .
-                            'Error code : ' . $e.getCode() .
-                            '; Message: ' . $e.getMessage(),
-                            $config['oauth']['log']
-                );
+                ' Error code : ' . $e.getCode() .
+                '; Message: ' . $e.getMessage(),
+                $config['oauth']['log']
+            );
 
             return FALSE;
         }
@@ -78,13 +83,11 @@ class TwitterConnection extends OAuthConnection
         {
             return FALSE;
         }
-        else
+
+        $user_info = Json::decode($response);
+        if(!$user_info)
         {
-            $user_info = Json::decode($response);
-            if(!$user_info)
-            {
-                return FALSE;
-            }
+            return FALSE;
         }
         return $this->parse_twitter_profile($user_info);
     }
@@ -101,6 +104,11 @@ class TwitterConnection extends OAuthConnection
      */
     public function post_message($access_oauth_token, SocialMessage $msg, $access_token_secret = '')
     {
+        if(!$this->handler)
+        {
+            return FALSE;
+        }
+
         global $config;
 
         if(!$this->handler->setAuthType(OAUTH_AUTH_TYPE_FORM))
@@ -114,16 +122,17 @@ class TwitterConnection extends OAuthConnection
         try
         {
             $response = $this->handler->fetch(
-                    $config['oauth'][NETWORK]['publish_url'],
-                    array('status' => $msg->message)
-                );
-        } catch (OAuthException $e)
+                $config['oauth'][NETWORK]['publish_url'],
+                array('status' => $msg->message)
+            );
+        }
+        catch (OAuthException $e)
         {
             Output::error('OauthException posting a message to ' . NETWORK .
-                            'Error code : ' . $e.getCode() .
-                            '; Message: ' . $e.getMessage(),
-                            $config['oauth']['log']
-                );
+                ' Error code : ' . $e.getCode() .
+                '; Message: ' . $e.getMessage(),
+                $config['oauth']['log']
+            );
 
             return FALSE;
         }
