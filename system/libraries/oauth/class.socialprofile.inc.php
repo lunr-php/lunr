@@ -117,11 +117,26 @@ class SocialProfile
         unset($this->phone);
     }
 
+    /**
+     * Set the value of the private properties of the class.
+     *
+     * @param $key Name of the parameter that will be modified
+     * @param $val Value that will be set
+     *
+     * @return void
+     */
     public function __set($key, $val)
     {
         $this->$key = $val;
     }
 
+    /**
+     * Get the value of the private properties of the class.
+     *
+     * @param $key Name of the property that will be retrieved
+     *
+     * @return Mixed Value of the key on the class
+     */
     public function __get($key)
     {
         return $this->$key;
