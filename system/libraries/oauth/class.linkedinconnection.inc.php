@@ -57,10 +57,16 @@ class LinkedinConnection extends OAuthConnection
      */
     public function get_user_info($access_oauth_token, $access_token_secret = '')
     {
-        $this->handler->setToken($access_oauth_token, $access_token_secret);
+        if(!$this->handler)
+        {
+            return FALSE;
+        }
 
+        global $config;
+        $this->handler->setToken($access_oauth_token, $access_token_secret);
         try
         {
+
             $data = $this->handler->fetch(
                 $config['oauth'][NETWORK]['own_profile_url'],
                 NULL,
@@ -70,10 +76,10 @@ class LinkedinConnection extends OAuthConnection
         catch(OAuthException $e)
         {
             Output::error('Oauth Exception retrieving user profile from ' . NETWORK .
-                             'Error code : ' .$e.getCode() .
-                             '; Message: ' . $e.getMessage(),
-                             $config['oauth']['log']
-                );
+                ' Error code : ' .$e.getCode() .
+                '; Message: ' . $e.getMessage(),
+                $config['oauth']['log']
+            );
 
             return FALSE;
         }
@@ -93,38 +99,33 @@ class LinkedinConnection extends OAuthConnection
      */
     public function post_message($access_oauth_token, SocialMessage $message, $access_token_secret = '')
     {
-        global $config;
-
-        $this->handler->setToken($access_oauth_token, $access_token_secret);
-
-        if (file_exists($config['oauth'][NETWORK]['share_template']))
-        {
-
-        }
-        else
+        if(!$this->handler)
         {
             return FALSE;
         }
+
+        global $config;
+        $this->handler->setToken($access_oauth_token, $access_token_secret);
 
         $xml = $this->generate_linkedin_share_xml($message);
 
         try
         {
             $data = $this->handler->fetch(
-                        $config['oauth'][NETWORK]['publish_url'],
-                        $xml->asXML(),
-                        OAUTH_HTTP_METHOD_POST,
-                        array('Content-Type' => 'text/xml')
-                );
+                $config['oauth'][NETWORK]['publish_url'],
+                $xml->asXML(),
+                OAUTH_HTTP_METHOD_POST,
+                array('Content-Type' => 'text/xml')
+            );
             return $data;
         }
         catch(OAuthException $e)
         {
             Output::error('Oauth Exception posting a message to ' . NETWORK .
-                            'Error code : ' . $e.getCode() .
-                            '; Message: ' . $e.getMessage(),
-                            $config['oauth']['log']
-                );
+                ' Error code : ' . $e.getCode() .
+                '; Message: ' . $e.getMessage(),
+                $config['oauth']['log']
+            );
             return FALSE;
         }
     }
