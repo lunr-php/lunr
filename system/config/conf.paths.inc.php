@@ -82,4 +82,10 @@ $config['log']['invalid_input'] = '/var/log/httpd/';
  */
 $config['log']['performance'] = '/var/log/httpd/';
 
+/**
+ * Default path for cli errors (STDERR)
+ * @global $config['log']['cli']
+ */
+$config['log']['cli'] = '/var/log/httpd';
+
 ?>
