@@ -33,6 +33,12 @@ class Curl
     private $options;
 
     /**
+     * HTTP Headers used by the Curl request
+     * @var array
+     */
+    private $headers;
+
+    /**
      * Curl request resource handle
      * @var resource
      */
@@ -62,6 +68,7 @@ class Curl
     public function __construct()
     {
         $this->options = array();
+        $this->headers = array();
 
         // default: no error
         $this->errno  = 0;
@@ -83,6 +90,7 @@ class Curl
     public function __destruct()
     {
         unset($this->options);
+        unset($this->headers);
         unset($this->errno);
         unset($this->errmsg);
         unset($this->info);
@@ -148,6 +156,38 @@ class Curl
     }
 
     /**
+     * Set multiple additional HTTP headers to be used by the request.
+     *
+     * @param array $headers Array of HTTP Header Strings
+     *
+     * @return Boolean $return TRUE if it was stored successfully
+     *                         FALSE if the input is not an array
+     */
+    public function set_http_headers($headers)
+    {
+        if (!is_array($options))
+        {
+            return FALSE;
+        }
+
+        $this->headers = $headers + $this->headers;
+
+        return TRUE;
+    }
+
+    /**
+     * Set additional HTTP headers to be used by the request.
+     *
+     * @param String $header Header String
+     *
+     * @return void
+     */
+    public function set_http_header($header)
+    {
+        $this->headers[] = $header;
+    }
+
+    /**
      * Initialize the curl request.
      *
      * @param String $url URL for the request
@@ -158,6 +198,11 @@ class Curl
     private function init($url)
     {
         $this->handle = curl_init($url);
+
+        if (!empty($this->headers))
+        {
+            $this->set_option('HTTPHEADER', $this->headers);
+        }
 
         if (!curl_setopt_array($this->handle, $this->options))
         {
