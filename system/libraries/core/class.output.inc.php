@@ -122,7 +122,7 @@ class Output
      */
     public static function errorln($info, $file = '')
     {
-        return self::error($info . "\n", $file);
+        return static::error($info . "\n", $file);
     }
 
 }
