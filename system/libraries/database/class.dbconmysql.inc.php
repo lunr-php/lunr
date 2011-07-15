@@ -1140,6 +1140,7 @@ class DBConMySQL extends DBCon
         $this->select = '';
         $this->order = '';
         $this->group = '';
+        $this->join = '';
     }
 
     /**
