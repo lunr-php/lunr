@@ -49,7 +49,7 @@ class Timer
      * @return Mixed $return Returns the Specified ID, or the assigned numeric ID,
      *                       or FALSE if a Timer for the chosen ID already exists.
      */
-    public static function start_new_timer($id, $threshold)
+    public static function start_new_timer($id, $threshold = 0.0)
     {
         if (!isset(self::$backend))
         {
