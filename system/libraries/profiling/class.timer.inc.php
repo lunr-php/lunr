@@ -28,25 +28,69 @@ namespace Lunr\Libraries\Profiling;
 class Timer
 {
 
+    /**
+     * Reference to the Timer Backend in use
+     * @var TimerBackend
+     */
     private static $backend;
 
+    /**
+     * Type of the backend in use
+     * @var String
+     */
     private static $backend_type;
 
-    public static function start_new_timer()
+    /**
+     * Start a new Timer.
+     *
+     * @param Mixed $id        Identifier of the Timer, Numeric by default
+     * @param Float $threshold Threshold of the Timer. Depending on the backend.
+     *
+     * @return Mixed $return Returns the Specified ID, or the assigned numeric ID,
+     *                       or FALSE if a Timer for the chosen ID already exists.
+     */
+    public static function start_new_timer($id, $threshold)
     {
+        if (!isset(self::$backend))
+        {
+            self::set_backend('file');
+        }
 
+        return self::$backend->start_new_timer($id, $threshold);
     }
 
-    public static function stop_timer()
+    /**
+     * Stop a specified Timer.
+     *
+     * @param Mixed $id Identifier of the Timer
+     *
+     * @return Boolean $return FALSE if the Timer doesn't exist, TRUE otherwise
+     */
+    public static function stop_timer($id)
     {
-
+        return self::$backend->stop_timer($id);
     }
 
+    /**
+     * Stop all running Timers.
+     *
+     * @return void
+     */
     public static function stop_all_timers()
     {
-
+        self::$backend->stop_all_timers();
     }
 
+    /**
+     * Set a backend to use for the Timers.
+     *
+     * Used for calculation and result storage
+     *
+     * @param String $backend The backend you'd like to use
+     *
+     * @return Boolean $return TRUE if the specified backend is used,
+     *                         FALSE otherwise;
+     */
     public static function set_backend($backend)
     {
         if (!isset(self::$backend))

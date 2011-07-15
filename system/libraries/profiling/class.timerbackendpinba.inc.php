@@ -46,6 +46,42 @@ class TimerBackendPinba extends TimerBackend
 
     }
 
+    /**
+     * Start a new Timer.
+     *
+     * @param Mixed $id        Identifier of the Timer, Numeric by default
+     * @param Float $threshold Threshold of the Timer. Ignored for Pinba
+     *
+     * @return Mixed $return Returns the Specified ID, or the assigned numeric ID,
+     *                       or FALSE if a Timer for the chosen ID already exists.
+     */
+    public function start_new_timer($id = '', $threshold = 0.0)
+    {
+        return FALSE;
+    }
+
+    /**
+     * Stop a specified Timer.
+     *
+     * @param Mixed $id Identifier of the Timer
+     *
+     * @return Boolean $return FALSE if the Timer doesn't exist, TRUE otherwise
+     */
+    public function stop_timer($id)
+    {
+        return FALSE;
+    }
+
+    /**
+     * Stop all running Timers.
+     *
+     * @return void
+     */
+    public function stop_all_timers()
+    {
+
+    }
+
 }
 
 ?>

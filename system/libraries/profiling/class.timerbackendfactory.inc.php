@@ -43,7 +43,7 @@ class TimerBackendFactory
     {
         switch ($backend)
         {
-            case "file":
+            case 'file':
             default:
                 if (!isset(self::$backend))
                 {
