@@ -75,11 +75,6 @@ class Process
      */
     public static function run_bg($cmd, $out = '', $append = FALSE, $error_redirect = TRUE)
     {
-        if ($error_redirect === TRUE)
-        {
-            $cmd .= ' 2>&1';
-        }
-
         if ($out == '')
         {
             $out = '/dev/null';
@@ -88,6 +83,11 @@ class Process
         if (($append === TRUE) && ($out != '/dev/null'))
         {
             $cmd .= " >> $out";
+        }
+        elseif ($error_redirect === TRUE)
+        {
+            $cmd .= " 1 > $out";
+            $cmd .= " 2 > $out";
         }
         else
         {
