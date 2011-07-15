@@ -175,7 +175,7 @@ class TimerBackendFile extends TimerBackend
         }
         else
         {
-            $output = "Timer 'id': $result";
+            $output = "Timer '$id': $result";
         }
 
         Output::errorln($output, $this->file);
