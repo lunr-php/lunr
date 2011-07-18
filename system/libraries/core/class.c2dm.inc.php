@@ -1,106 +1,119 @@
 <?php
 
-namespace Lunr\Libraries\Core;
+/**
+* This file contains the class C2DM which stands for Android Push Notifications
+* System. This class allows to send push notifications to Android devices.
+*
+* PHP Version 5.3
+*
+* @category   Libraries
+* @package    Core
+* @subpackage Libraries
+* @author     M2Mobi <info@m2mobi.com>
+* @author     Jose Viso <jose@m2mobi.com>
+*
+*/
 
+namespace Lunr\Libraries\Core;
 use Lunr\Libraries\Core\Curl;
 
+/**
+ * Android Push Notifications System Library
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Jose Viso <jose@m2mobi.com>
+ */
 class C2DM
 {
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
 
     }
 
+    /**
+     * Destructor.
+     */
     public function __destruct()
     {
 
     }
 
-    private function get_auth_token($username, $password, $source="test", $service="ac2dm")
+    /**
+     * Get authorization token.
+     *
+     * @param String $username User's email address
+     * @param String $password User's password
+     * @param String $source Text to identify the application, for login purpose
+     * @param String $service Name of the Google service it's requesting authorization for
+     *
+     * @return String authToken, FALSE otherwise
+     */
+    private function get_auth_token($username, $password, $source='test', $service='ac2dm')
     {
-        //session_start();
-        //if( isset($_SESSION['google_auth_id']) && $_SESSION['google_auth_id'] != null)
-        //{
-        //    return $_SESSION['google_auth_id'];
-        //}
-
-        $url = "https://www.google.com/accounts/ClientLogin";
-
-        $post_fields = "accountType=" . urlencode('HOSTED_OR_GOOGLE')
-            . "&Email=" . urlencode($username)
-            . "&Passwd=" . urlencode($password)
-            . "&source=" . urlencode($source)
-            . "&service=" . urlencode($service);
-
-
-        //curl_setopt($ch, CURLOPT_HEADER, true);
-        //curl_setopt($ch, CURLOPT_POST, true);
-        //curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
-        //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        //curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
-        //curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-        //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-        // for debugging the request
-        //curl_setopt($ch, CURLINFO_HEADER_OUT, true); // for debugging the request
-
-        //$response = curl_exec($ch);
-
-        //var_dump(curl_getinfo($ch)); //for debugging the request
-        //var_dump($response);
+        $url = 'https://www.google.com/accounts/ClientLogin';
+        $post_fields = 'accountType=' . urlencode('HOSTED_OR_GOOGLE')
+            . '&Email=' . urlencode($username)
+            . '&Passwd=' . urlencode($password)
+            . '&source=' . urlencode($source)
+            . '&service=' . urlencode($service);
 
         $curl = new Curl();
-
         $response = $curl->simple_post($url, $post_fields);
 
         if (strpos($response, '200 OK') === false)
         {
-            return false;
+            return FALSE;
         }
 
-        // find the auth code
-        preg_match("/(Auth=)([\w|-]+)/", $response, $matches);
+        // Look for the auth code
+        preg_match('/(Auth=)([\w|-]+)/', $response, $matches);
 
         if (!$matches[2])
         {
-            return false;
+            unset($curl);
+            return FALSE;
         }
 
-        //$_SESSION['google_auth_id'] = $matches[2];
+        unset($curl);
         return $matches[2];
-
     }
 
+    /**
+     * Send Android push notification based on registration ID and authToken.
+     *
+     * @param String $registrationID The registration ID retrieved from the app on the phone
+     * @param String $authToken The authorization token
+     * @param String $message The message that will be sent.
+     *
+     * @return mixed The message ID on success, FALSE otherwise
+     */
     public function send_android_push($registrationID, $authToken, $message)
     {
-        # C2DM server URL
-        $url = "https://android.apis.google.com/c2dm/send";
-
-        $message = "Test Android PUSH notification";
+        $url = 'https://android.apis.google.com/c2dm/send';
         $msgtype = "important";
 
-        //$authToken = get_auth_token('userTest','passTest');
-
         $headers = array('Authorization: GoogleLogin auth=' . $authToken);
-
         $data = array(
-        	'registration_id' => $registrationID,
-        	'collapse_key' => $msgType,
-        	'data.message' => $message
-            );
+                    'registration_id' => $registrationID,
+                    'collapse_key' => $msgType,
+                    'data.message' => $message
+                );
 
         $curl = new Curl();
-
         $curl->set_option('HTTPHEADER', $headers);
-        //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        //curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 
         $returned_data = $curl->simple_post($url, $data);
 
         if ($returned_data === FALSE)
         {
-            echo "FAILED posting to $url\n\n";
+            echo 'FAILED posting to $url\n\n'';
             unset($curl);
 
             return FALSE;
