@@ -127,7 +127,7 @@ class FacebookConnection implements OAuthConnectionInterface
     }
 
     /**
-     * Get the '' from the Facebook.
+     * Get the "request token" from the Facebook.
      *
      * @param String $callback URL to receive the callback from the OAuth provider
      *
