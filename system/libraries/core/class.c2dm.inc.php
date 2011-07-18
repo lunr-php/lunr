@@ -55,7 +55,7 @@ class C2DM
      *
      * @return String authToken, FALSE otherwise
      */
-    private function get_auth_token($username, $password, $source='test', $service='ac2dm')
+    public function get_auth_token($username, $password, $source='test', $service='ac2dm')
     {
         $url = 'https://www.google.com/accounts/ClientLogin';
         $post_fields = 'accountType=' . urlencode('HOSTED_OR_GOOGLE')
@@ -65,6 +65,7 @@ class C2DM
             . '&service=' . urlencode($service);
 
         $curl = new Curl();
+        $curl->set_option('HEADER', TRUE);
         $response = $curl->simple_post($url, $post_fields);
 
         if (strpos($response, '200 OK') === false)
@@ -83,6 +84,7 @@ class C2DM
 
         unset($curl);
         return $matches[2];
+
     }
 
     /**
@@ -97,7 +99,7 @@ class C2DM
     public function send_android_push($registrationID, $authToken, $message)
     {
         $url = 'https://android.apis.google.com/c2dm/send';
-        $msgtype = "important";
+        $msgType = "important";
 
         $headers = array('Authorization: GoogleLogin auth=' . $authToken);
         $data = array(
@@ -113,7 +115,7 @@ class C2DM
 
         if ($returned_data === FALSE)
         {
-            echo 'FAILED posting to $url\n\n'';
+            echo "FAILED posting to $url\n\n";
             unset($curl);
 
             return FALSE;
