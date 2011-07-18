@@ -109,13 +109,30 @@ class C2DM
                 );
 
         $curl = new Curl();
+        $curl->set_option('HEADER', TRUE);
         $curl->set_option('HTTPHEADER', $headers);
 
         $returned_data = $curl->simple_post($url, $data);
 
         if ($returned_data === FALSE)
         {
-            echo "FAILED posting to $url\n\n";
+            //var_dump($curl->errno);
+            //var_dump($curl->errmsg);
+            if($curl->http_code == 401)
+            {
+                echo "Auth token invalid";
+                //$authToken = $this->get_auth_token();
+            }
+            if($curl->http_code == 503)
+            {
+                echo "Server temporarily unavailable";
+            }
+            else
+            {
+                echo "FAILED posting to $url\n\n";
+            }
+
+
             unset($curl);
 
             return FALSE;
