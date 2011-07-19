@@ -63,6 +63,12 @@ class Curl
     private $errmsg;
 
     /**
+     * Curl http code
+     * @var Integer
+     */
+    private $http_code;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -94,6 +100,7 @@ class Curl
         unset($this->errno);
         unset($this->errmsg);
         unset($this->info);
+        unset($this->http_code);
     }
 
     /**
@@ -112,6 +119,7 @@ class Curl
             case 'errno':
             case 'errmsg':
             case 'info':
+            case 'http_code':
                 return $this->{$name};
                 break;
         }
@@ -226,6 +234,7 @@ class Curl
         {
             $this->errno  = curl_errno($this->handle);
             $this->errmsg = curl_error($this->handle);
+            $this->http_code = curl_getinfo($this->handle, CURLINFO_HTTP_CODE);
 
             curl_close($this->handle);
             $this->handle = NULL;
