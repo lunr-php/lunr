@@ -1,11 +1,8 @@
 <?php
 
 /**
- * This file contains Android Push Notifcation Service configuration
- * values, like:
- * <ul>
- * <li></li>
- * </ul>
+ * This file contains Android Push Notification Service configuration
+ * values.
  *
  * PHP Version 5.3
  *
