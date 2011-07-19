@@ -29,12 +29,6 @@ $config['c2dm'] = array();
 $config['c2dm']['request_token_url'] = 'https://www.google.com/accounts/ClientLogin';
 
 /**
- * Token file location
- * @global String $config['c2dm']['token_file']
- */
-$config['c2dm']['token_file'] = '';
-
-/**
  * Account type
  * @global String $config['c2dm']['account_type']
  */
