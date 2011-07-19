@@ -35,7 +35,7 @@ class C2DM
     public function __construct()
     {
         global $config;
-        require_once('conf.c2dm.inc.php');
+        include_once 'conf.c2dm.inc.php';
     }
 
     /**
@@ -51,8 +51,8 @@ class C2DM
      *
      * @param String $username User's email address
      * @param String $password User's password
-     * @param String $source Text to identify the application, for login purpose
-     * @param String $service Name of the Google service it's requesting authorization for
+     * @param String $source   Text to identify the application, for login purpose
+     * @param String $service  Name of the Google service it's requesting authorization for
      *
      * @return String authToken, FALSE otherwise
      */
@@ -70,7 +70,7 @@ class C2DM
         $curl->set_option('HEADER', TRUE);
         $response = $curl->simple_post($config['c2dm']['request_token_url'], $post_fields);
 
-        if (strpos($response, '200 OK') === false)
+        if (strpos($response, '200 OK') === FALSE)
         {
             return FALSE;
         }
@@ -92,8 +92,8 @@ class C2DM
      * Send Android push notification based on registration ID and authToken.
      *
      * @param String $registrationID The registration ID retrieved from the app on the phone.
-     * @param String $authToken The authorization token.
-     * @param String $message The message that will be sent.
+     * @param String $authToken      The authorization token.
+     * @param String $message        The message that will be sent.
      *
      * @return mixed The message ID on success, 401 if the authorization token is invalid,
      *               503 if the server is temporarily unavailable and  FALSE otherwise
@@ -119,11 +119,11 @@ class C2DM
 
         if ($returned_data === FALSE)
         {
-            if($curl->http_code == 401) //Auth token invalid
+            if($curl->http_code == 401)
             {
                 return $curl->http_code;
             }
-            if($curl->http_code == 503) //Server temporarily unavailable
+            if($curl->http_code == 503)
             {
                 return $curl->http_code;
             }
