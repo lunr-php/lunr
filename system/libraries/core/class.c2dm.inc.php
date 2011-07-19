@@ -84,11 +84,6 @@ class C2DM
             return FALSE;
         }
 
-        // Store in a file the authToken
-        $reffile = fopen(dirname(__FILE__) . "/../../../token_string.txt", "w");
-        fwrite ($reffile, $matches[2]);
-        fclose($reffile);
-
         unset($curl);
         return $matches[2];
     }
@@ -96,21 +91,16 @@ class C2DM
     /**
      * Send Android push notification based on registration ID and authToken.
      *
-     * @param String $registrationID The registration ID retrieved from the app on the phone
+     * @param String $registrationID The registration ID retrieved from the app on the phone.
+     * @param String $authToken The authorization token.
      * @param String $message The message that will be sent.
      *
-     * @return mixed The message ID on success, FALSE otherwise
+     * @return mixed The message ID on success, 401 if the authorization token is invalid,
+     *               503 if the server is temporarily unavailable and  FALSE otherwise
      */
-    public function send_android_push($registrationID, $message)
+    public function send_android_push($registrationID, $authToken, $message)
     {
         global $config;
-
-        $authToken = $this->revocer_auth_token();
-
-        if(!$authToken)
-        {
-            $authToken = $this->get_auth_token($config['c2dm']['username'], $config['c2dm']['password']);
-        }
 
         $headers = array('Authorization: GoogleLogin auth=' . $authToken);
         $msgType = $config['c2dm']['msg_type'];
@@ -131,18 +121,17 @@ class C2DM
         {
             if($curl->http_code == 401) //Auth token invalid
             {
-                $authToken = $this->get_auth_token($config['c2dm']['username'], $config['c2dm']['password']);
-                return FALSE;
+                return $curl->http_code;
             }
-            if($curl->http_code == 503)
+            if($curl->http_code == 503) //Server temporarily unavailable
             {
-                echo "Server temporarily unavailable";
                 return $curl->http_code;
             }
             else
             {
                 echo "FAILED posting to $url\n\n";
                 unset($curl);
+                return FALSE;
             }
 
             return FALSE;
@@ -152,13 +141,6 @@ class C2DM
             unset($curl);
             return $returned_data;
         }
-    }
-
-    public function recover_auth_token()
-    {
-        $content = implode('', file(dirname(__FILE__) . "/../../../token_string.txt"));
-
-        return $content;
     }
 
 }
