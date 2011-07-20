@@ -71,7 +71,7 @@ class TwitterConnection extends OAuthConnection
         $this->handler->setToken($access_token, $access_token_secret);
         try
         {
-            $data = $this->handler->fetch($config['oauth'][NETWORK]['verify_url']);
+            $this->handler->fetch($config['oauth'][NETWORK]['verify_url']);
         }
         catch (OAuthException $e)
         {
@@ -120,13 +120,13 @@ class TwitterConnection extends OAuthConnection
         {
             return FALSE;
         }
-        if(!$this->handler->setToken($access_oauth_token, $access_token_secret))
+        if(!$this->handler->setToken($access_token, $access_token_secret))
         {
             return FALSE;
         }
         try
         {
-            $response = $this->handler->fetch(
+            $this->handler->fetch(
                 $config['oauth'][NETWORK]['publish_url'],
                 array('status' => $message->message)
             );

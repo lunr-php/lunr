@@ -71,7 +71,7 @@ class LinkedinConnection extends OAuthConnection
         try
         {
 
-            $data = $this->handler->fetch(
+            $this->handler->fetch(
                 $config['oauth'][NETWORK]['own_profile_url'],
                 NULL,
                 OAUTH_HTTP_METHOD_GET
