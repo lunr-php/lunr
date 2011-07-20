@@ -27,6 +27,10 @@
 class FacebookConnection implements OAuthConnectionInterface
 {
 
+    /**
+     * Name of the OAuth Service to connect to.
+     * @var String
+     */
     const NETWORK = 'facebook';
 
     /**
@@ -93,10 +97,10 @@ class FacebookConnection implements OAuthConnectionInterface
         global $config;
 
         $token_url = $config['oauth'][NETWORK]['access_token_url']
-            . "?client_id=" . $config['oauth'][NETWORK]['client_id']
-            . "&redirect_uri=" . urlencode($url_back)
-            . "&client_secret=" . $config['oauth'][NETWORK]['app_secret']
-            . "&code=" . $oauth_token;
+            . '?client_id=' . $config['oauth'][NETWORK]['client_id']
+            . '&redirect_uri=' . urlencode($url_back)
+            . '&client_secret=' . $config['oauth'][NETWORK]['app_secret']
+            . '&code=' . $oauth_token;
 
         $curl = new Curl();
         $response = $curl->simple_get($token_url);
@@ -109,7 +113,7 @@ class FacebookConnection implements OAuthConnectionInterface
     /**
      * Get user profile info from Facebook.
      *
-     * @param String $access_oauth_token  Oauth token
+     * @param String $access_token        OAuth token
      * @param String $access_token_secret Unused for Facebook
      *
      * @return Array Array containing the user profile information, FALSE otherwise
@@ -137,16 +141,16 @@ class FacebookConnection implements OAuthConnectionInterface
     }
 
     /**
-     * Post a message to Facebook
+     * Post a message to Facebook.
      *
-     * @param String $oauth_token         Oauth token
-     * @param String $msg                 SocialMessage object already filled
-     * @param String $access_token_secret Unused for Facebook
+     * @param String        $access_token        OAuth token
+     * @param SocialMessage $message             SocialMessage object already filled
+     * @param String        $access_token_secret Unused for Facebook
      *
      * @return Array Array containing the 'oauth token' and the 'oauth token secret',
      *               FALSE otherwise.
      */
-    public function post_message($access_token, $message, $access_token_secret = '')
+    public function post_message($access_token, SocialMessage $message, $access_token_secret = '')
     {
         global $config;
 
@@ -157,7 +161,7 @@ class FacebookConnection implements OAuthConnectionInterface
     }
 
     /**
-     * Parse a Facebook profile array and returns a Social Profile
+     * Parse a Facebook profile array and returns a Social Profile.
      *
      * @param Array $user_info Array with the user information coming from Facebook
      *
@@ -191,6 +195,7 @@ class FacebookConnection implements OAuthConnectionInterface
         }
         return $user_profile;
     }
+
 }
 
 ?>

@@ -26,6 +26,11 @@
  */
 class TwitterConnection extends OAuthConnection
 {
+
+    /**
+     * Name of the OAuth Service to connect to.
+     * @var String
+     */
     const NETWORK = 'twitter';
 
     /**
@@ -47,14 +52,14 @@ class TwitterConnection extends OAuthConnection
     }
 
     /**
-     * Get user profile info from Twitter
+     * Get user profile info from Twitter.
      *
-     * @param String $access_oauth_token  Oauth token
+     * @param String $access_token        OAuth token
      * @param String $access_token_secret Request token secret
      *
      * @return Array Array containing the user profile information, FALSE otherwise
      */
-    public function get_user_info($access_oauth_token, $access_token_secret = '')
+    public function get_user_info($access_token, $access_token_secret = '')
     {
         if(!$this->handler)
         {
@@ -63,7 +68,7 @@ class TwitterConnection extends OAuthConnection
 
         global $config;
 
-        $this->handler->setToken($access_oauth_token, $access_token_secret);
+        $this->handler->setToken($access_token, $access_token_secret);
         try
         {
             $data = $this->handler->fetch($config['oauth'][NETWORK]['verify_url']);
@@ -93,16 +98,16 @@ class TwitterConnection extends OAuthConnection
     }
 
     /**
-     * Post a message to Twitter
+     * Post a message to Twitter.
      *
-     * @param String $oauth_token         Oauth token
-     * @param String $msg                 SocialMessage object already filled
-     * @param String $access_token_secret Access token secret
+     * @param String        $access_token        OAuth token
+     * @param SocialMessage $message             SocialMessage object already filled
+     * @param String        $access_token_secret Access token secret
      *
      * @return Array Array containing the 'oauth token' and the 'oauth token secret',
      *               FALSE otherwise.
      */
-    public function post_message($access_oauth_token, SocialMessage $msg, $access_token_secret = '')
+    public function post_message($access_token, SocialMessage $message, $access_token_secret = '')
     {
         if(!$this->handler)
         {
@@ -123,7 +128,7 @@ class TwitterConnection extends OAuthConnection
         {
             $response = $this->handler->fetch(
                 $config['oauth'][NETWORK]['publish_url'],
-                array('status' => $msg->message)
+                array('status' => $message->message)
             );
         }
         catch (OAuthException $e)
@@ -140,7 +145,7 @@ class TwitterConnection extends OAuthConnection
     }
 
     /**
-     * Parse a Twitter profile array and returns a Social Profile
+     * Parse a Twitter profile array and returns a Social Profile.
      *
      * @param Array $user_info Array with the user information coming from Facebook
      *
@@ -166,6 +171,7 @@ class TwitterConnection extends OAuthConnection
         }
         return $user_profile;
     }
+
 }
 
 ?>

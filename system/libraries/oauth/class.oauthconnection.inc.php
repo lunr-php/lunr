@@ -37,8 +37,17 @@ abstract class OAuthConnection implements OAuthConnectionInterface
      */
     protected $token;
 
+    /**
+     * Name of the OAuth Service to connect to.
+     * @var String
+     */
     const NETWORK = 'unknown';
 
+    /**
+     * Constructor.
+     *
+     * @param String $token User access token
+     */
     public function __construct($token)
     {
         global $config;
@@ -56,10 +65,13 @@ abstract class OAuthConnection implements OAuthConnectionInterface
         }
         catch (Exception $e)
         {
-           $this->handler = FALSE;
+            $this->handler = FALSE;
         }
     }
 
+    /**
+     * Destructor.
+     */
     public function __destruct()
     {
         unset($this->token);
@@ -105,7 +117,7 @@ abstract class OAuthConnection implements OAuthConnectionInterface
     /**
      * Get access token from the OAuth provider.
      *
-     * @param String $oauth_token          Oauth token
+     * @param String $oauth_token          OAuth token
      * @param String $request_token_secret Request token secret
      *
      * @return Array Array containing the 'oauth token' and the 'oauth token secret',

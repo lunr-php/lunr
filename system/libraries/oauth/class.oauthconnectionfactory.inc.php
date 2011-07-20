@@ -30,6 +30,7 @@ class OAuthConnectionFactory
      * Return a OauthConnection for the specified provider.
      *
      * @param String $provider lowercase name of the OAuth Provider
+     * @param String $token    User access token
      *
      * @return OAuthConnection $connection An OAuth connection to the specified
      *                                     Service
@@ -38,13 +39,13 @@ class OAuthConnectionFactory
     {
         switch ($provider)
         {
-            case "twitter":
+            case 'twitter':
                 return new TwitterConnection($token);
                 break;
-            case "linkedin":
+            case 'linkedin':
                 return new LinkedinConnection($token);
                 break;
-            case "facebook":
+            case 'facebook':
             default:
                 return new FacebookConnection($token);
                 break;

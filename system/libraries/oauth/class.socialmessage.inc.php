@@ -55,9 +55,10 @@ class SocialMessage
      */
     private $visibility;
 
-
     /**
      * Constructor.
+     *
+     * @param String $msg Main message string (empty by default)
      */
     public function __construct($msg = '')
     {
@@ -79,8 +80,8 @@ class SocialMessage
     /**
      * Set the value of the private properties of the class.
      *
-     * @param $key Name of the parameter that will be modified
-     * @param $val Value that will be set
+     * @param String $key Name of the parameter that will be modified
+     * @param String $val Value that will be set
      *
      * @return void
      */
@@ -92,7 +93,7 @@ class SocialMessage
     /**
      * Get the value of the private properties of the class.
      *
-     * @param $key Name of the property that will be retrieved
+     * @param String $key Name of the property that will be retrieved
      *
      * @return Mixed Value of the key on the class
      */

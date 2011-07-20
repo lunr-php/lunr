@@ -28,15 +28,55 @@
 interface OAuthConnectionInterface
 {
 
+    /**
+     * Constructor.
+     *
+     * @param String $token User access token
+     */
     public function __construct($token);
 
+    /**
+     * Get the request token from the OAuth provider.
+     *
+     * @param String $callback URL to receive the callback from the OAuth provider
+     *
+     * @return Array $return Array containing the 'oauth_token_secret' and the
+     *                       'request_token_secret' on success and FALSE otherwise
+     */
     public function get_request_token($callback);
 
+    /**
+     * Get access token from the OAuth provider.
+     *
+     * @param String $oauth_token OAuth token
+     * @param String $oauth_addon Request token secret
+     *
+     * @return Array $return Array containing the 'oauth token' and the 'oauth token secret',
+     *                       FALSE on failure.
+     */
     public function get_access_token($oauth_token, $oauth_addon);
 
-    public function get_user_info($access_oauth_token, $access_token_secret = '');
+    /**
+     * Get user profile info from OAuth Service Provider.
+     *
+     * @param String $access_token        OAuth token
+     * @param String $access_token_secret Request token secret
+     *
+     * @return Array $return Array containing the user profile information, FALSE otherwise
+     */
+    public function get_user_info($access_token, $access_token_secret = '');
 
-    public function post_message($access_oauth_token, SocialMessage $message, $access_token_secret = '');
+    /**
+     * Post a message to OAuth Service Provider.
+     *
+     * @param String        $access_token        OAuth access token
+     * @param SocialMessage $message             SocialMessage object already filled
+     * @param String        $access_token_secret Access token secret
+     *
+     * @return Array $return Array containing the 'oauth token' and the 'oauth token secret',
+     *                       FALSE otherwise.
+     */
+    public function post_message($access_token, SocialMessage $message, $access_token_secret = '');
 
 }
 
