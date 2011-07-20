@@ -60,11 +60,12 @@ class C2DM
     {
         global $config;
 
-        $post_fields = 'accountType=' . urlencode($config['c2dm']['account_type'])
-            . '&Email=' . urlencode($username)
-            . '&Passwd=' . urlencode($password)
-            . '&source=' . urlencode($source)
-            . '&service=' . urlencode($service);
+        $post_fields = array();
+        $post_fields['accountType'] = urlencode($config['c2dm']['account_type']);
+        $post_fields['Email'] = urlencode($username);
+        $post_fields['Passwd'] = urlencode($password);
+        $post_fields['source'] = urlencode($source);
+        $post_fields['service'] = urlencode($service);
 
         $curl = new Curl();
         $curl->set_option('HEADER', TRUE);
