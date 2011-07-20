@@ -165,7 +165,7 @@ class Curl
      */
     public function set_http_headers($headers)
     {
-        if (!is_array($options))
+        if (!is_array($headers))
         {
             return FALSE;
         }
