@@ -103,7 +103,7 @@ class C2DM
     {
         global $config;
 
-        $headers = array('Authorization: GoogleLogin auth=' . $authToken);
+        $header = 'Authorization: GoogleLogin auth=' . $authToken;
         $msgType = $config['c2dm']['msg_type'];
 
         $data = array(
@@ -114,7 +114,7 @@ class C2DM
 
         $curl = new Curl();
         $curl->set_option('HEADER', TRUE);
-        $curl->set_option('HTTPHEADER', $headers);
+        $curl->set_http_header($header);
 
         $returned_data = $curl->simple_post($config['c2dm']['google_send_url'], $data);
 
