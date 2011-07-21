@@ -60,12 +60,12 @@ class C2DM
     {
         global $config;
 
-        $post_fields = array();
+        $post_fields                = array();
         $post_fields['accountType'] = urlencode($config['c2dm']['account_type']);
-        $post_fields['Email'] = urlencode($username);
-        $post_fields['Passwd'] = urlencode($password);
-        $post_fields['source'] = urlencode($source);
-        $post_fields['service'] = urlencode($service);
+        $post_fields['Email']       = urlencode($username);
+        $post_fields['Passwd']      = urlencode($password);
+        $post_fields['source']      = urlencode($source);
+        $post_fields['service']     = urlencode($service);
 
         $curl = new Curl();
         $curl->set_option('HEADER', TRUE);
@@ -96,14 +96,13 @@ class C2DM
      * @param String $authToken      The authorization token.
      * @param String $message        The message that will be sent.
      *
-     * @return mixed The message ID on success, 401 if the authorization token is invalid,
-     *               503 if the server is temporarily unavailable and  FALSE otherwise
+     * @return Boolean, TRUE on success and FALSE otherwise
      */
     public function send_android_push($registrationID, $authToken, $message)
     {
         global $config;
 
-        $header = 'Authorization: GoogleLogin auth=' . $authToken;
+        $header  = 'Authorization: GoogleLogin auth=' . $authToken;
         $msgType = $config['c2dm']['msg_type'];
 
         $data = array(
@@ -122,15 +121,26 @@ class C2DM
         {
             if($curl->http_code == 401)
             {
-                return $curl->http_code;
+                unset($curl);
+                Output::error(
+                "Authorization token invalid\n\n", $config['c2dm']['log']
+                );
+                return FALSE;
             }
             if($curl->http_code == 503)
             {
-                return $curl->http_code;
+                unset($curl);
+                Output::error(
+                "Server temporarily unavailable\n\n", $config['c2dm']['log']
+                );
+                return FALSE;
             }
             else
             {
                 unset($curl);
+                Output::error(
+                "Error sending notification\n\n", $config['c2dm']['log']
+                );
                 return FALSE;
             }
 
@@ -139,7 +149,10 @@ class C2DM
         else
         {
             unset($curl);
-            return $returned_data;
+            Output::error(
+            "Notification sent: $message\n\n", $config['c2dm']['log']
+            );
+            return TRUE;
         }
     }
 
