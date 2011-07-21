@@ -232,8 +232,8 @@ class Curl
 
         if ($return === FALSE)
         {
-            $this->errno  = curl_errno($this->handle);
-            $this->errmsg = curl_error($this->handle);
+            $this->errno     = curl_errno($this->handle);
+            $this->errmsg    = curl_error($this->handle);
             $this->http_code = curl_getinfo($this->handle, CURLINFO_HTTP_CODE);
 
             curl_close($this->handle);
