@@ -130,7 +130,6 @@ class C2DM
             }
             else
             {
-                echo "FAILED posting to $url\n\n";
                 unset($curl);
                 return FALSE;
             }
