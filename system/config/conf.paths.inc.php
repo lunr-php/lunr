@@ -20,7 +20,7 @@
  */
 
 /**
- * The path of the called script
+ * The path of the called script (with ending slash)
  * @global String $config['base_path']
  */
 $config['base_path'] = '';
@@ -60,9 +60,10 @@ else
 
 /**
  * Directory containing static files (javascript, css, images, etc)
+ * (no leading slash!)
  * @global String $config['path']['statics']
  */
-$config['path']['statics'] = '/statics';
+$config['path']['statics'] = 'statics';
 
 /**
  * Array of logfile paths
