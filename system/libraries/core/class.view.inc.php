@@ -121,7 +121,24 @@ abstract class View
     protected function statics($path = '')
     {
         global $config;
-        return $config['base_path'] . $config['path']['statics'] . '/' . $path;
+
+        $output  = '';
+        $base    = '/' . trim($config['base_path'], '/');
+        $statics = '/' . trim($config['path']['statics'], '/');
+        $path    = '/' . trim($path, '/');
+
+        if ($base != '/')
+        {
+            $output .= $base;
+        }
+
+        if ($statics != '/')
+        {
+            $output .= $statics;
+        }
+
+        $output .= $path;
+        return $output;
     }
 
     /**

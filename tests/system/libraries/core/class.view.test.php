@@ -131,7 +131,9 @@ class ViewTest extends PHPUnit_Framework_TestCase
     {
         $values   = array();
         $values[] = array('/', 'statics', 'image/test.jpg', '/statics/image/test.jpg');
+        $values[] = array('/', '/statics', 'image/test.jpg', '/statics/image/test.jpg');
         $values[] = array('/test/', 'statics', 'image/test.jpg', '/test/statics/image/test.jpg');
+        $values[] = array('/test/', '/statics', 'image/test.jpg', '/test/statics/image/test.jpg');
         return $values;
     }
 
