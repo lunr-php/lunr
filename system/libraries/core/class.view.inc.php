@@ -142,16 +142,16 @@ abstract class View
         {
             if ( $alternation_hint % 2 == 0 )
             {
-                $basename . '_even';
+                $basename .= '_even';
             }
             else
             {
-                $basename . '_odd';
+                $basename .= '_odd';
             }
         }
         else
         {
-            $basename . '_' . $suffix;
+            $basename .= '_' . $suffix;
         }
         return $basename;
     }
