@@ -71,7 +71,8 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
             array("Lunr\Libraries\Core\WebController", "system/libraries/core/class.webcontroller.inc.php"),
             array("Lunr\Libraries\Core\JsonInterface", "system/libraries/core/interface.json.inc.php"),
             array("Lunr\Models\Core\SessionModel", "system/models/core/model.session.inc.php"),
-            array("StubController", "application/controllers/controller.stub.inc.php")
+            array("StubController", "application/controllers/controller.stub.inc.php"),
+            array("Lunr\Mocks\Libraries\Core\MockWebController", "tests/mocks/libraries/core/class.webcontroller.mock.php")
         );
     }
 

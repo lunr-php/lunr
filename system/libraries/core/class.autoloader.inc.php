@@ -61,6 +61,11 @@ class Autoloader
             $class = strtolower(str_replace('Interface', '', $class));
             include_once $path . "interface.$class.inc.php";
         }
+        elseif (strpos($class, 'Mock') !== FALSE)
+        {
+            $class = strtolower(str_replace('Mock', '', $class));
+            include_once $path . "class.$class.mock.php";
+        }
         elseif (strpos($class, 'Controller') !== FALSE)
         {
             $controller = strtolower(str_replace('Controller', '', $class));
