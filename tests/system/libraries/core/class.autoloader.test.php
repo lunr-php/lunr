@@ -52,9 +52,9 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
         $basename = str_replace("tests/system/libraries/core", "", dirname(__FILE__));
         $filename = $basename . $filename;
 
-        $this->assertFalse(in_array($filename, get_included_files()));
+        $this->assertNotContains($filename, get_included_files());
         Autoloader::load($file);
-        $this->assertTrue(in_array($filename, get_included_files()));
+        $this->assertContains($filename, get_included_files());
     }
 
     public function controllerProvider()
