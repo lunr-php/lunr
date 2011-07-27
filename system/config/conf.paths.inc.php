@@ -85,7 +85,7 @@ $config['log']['performance'] = '/var/log/httpd/';
 
 /**
  * Default path for cli errors (STDERR)
- * @global $config['log']['cli']
+ * @global String $config['log']['cli']
  */
 $config['log']['cli'] = '/var/log/httpd';
 

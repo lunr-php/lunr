@@ -180,7 +180,7 @@ $config['oauth']['facebook']['verify_url']  = 'https://graph.facebook.com/me/?ac
 
 /**
  * URL where to publish on Facebook
- * @global String $config['oauth']['facebook']['share_url']
+ * @global String $config['oauth']['facebook']['publish_url']
  */
 $config['oauth']['facebook']['publish_url']  = 'https://graph.facebook.com/me/feed';
 
