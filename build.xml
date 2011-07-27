@@ -15,6 +15,20 @@
         <mkdir dir="${basedir}/build/pdepend" />
     </target>
 
+    <target name="parallelTasks"
+            description="Run the pdepend, phpmd, phpcpd, phpcs, phpdoc and phploc tasks in parallel using a maximum of 2 threads.">
+        <parallel threadCount="2">
+            <sequential>
+                <antcall target="pdepend"/>
+                <antcall target="phpmd"/>
+            </sequential>
+            <antcall target="phpcpd"/>
+            <antcall target="phpcs"/>
+            <antcall target="phpdoc"/>
+            <antcall target="phploc"/>
+        </parallel>
+    </target>
+
     <target name="pdepend"
             description="Generate jdepend.xml and software metrics charts using PHP_Depend">
         <exec executable="pdepend">
@@ -119,5 +133,5 @@
         <exec executable="l10n/gen_l10n.sh" />
     </target>
 
-    <target name="build" depends="clean,pdepend,phpmd,phpunit,phpcs,phpcpd,phpdoc,phploc,phpcb" />
+    <target name="build" depends="clean,parallelTasks,phpunit,phpcb" />
 </project>
