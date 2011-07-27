@@ -18,82 +18,99 @@
     <target name="pdepend"
             description="Generate jdepend.xml and software metrics charts using PHP_Depend">
         <exec executable="pdepend">
-            <arg line=" --jdepend-xml=${basedir}/build/logs/jdepend.xml
-                        --jdepend-chart=${basedir}/build/pdepend/dependencies.svg
-                        --overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg
-                        --ignore=${tests},${application}/libraries/third-party
-                        ${basedir}" />
+            <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
+            <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
+            <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+            <arg value="--ignore=${tests},${application}/libraries/third-party" />
+            <arg path="${basedir}" />
         </exec>
     </target>
 
     <target name="phpmd"
             description="Generate pmd.xml using PHPMD">
         <exec executable="phpmd">
-            <arg line=" ${basedir}
-                        xml
-                        tests/phpmd.xml
-                        --reportfile ${basedir}/build/logs/pmd.xml
-                        --exclude    third-party
-                        --suffixes   php" />
+            <arg path="${basedir}" />
+            <arg value="xml" />
+            <arg value="tests/phpmd.xml" />
+            <arg value="--reportfile" />
+            <arg value="${basedir}/build/logs/pmd.xml" />
+            <arg value="--exclude" />
+            <arg value="third-party" />
+            <arg value="--suffixes" />
+            <arg value="php" />
         </exec>
     </target>
 
     <target name="phpunit"
             description="Run unit tests and generate junit.xml and clover.xml">
         <exec executable="phpunit" failonerror="true">
-            <arg line=" -c tests/phpunit.xml --verbose" />
+            <arg value="-c" />
+            <arg path="tests/phpunit.xml" />
+            <arg value="--verbose" />
         </exec>
     </target>
 
     <target name="phpdoc"
             description="Generate API documentation">
         <exec executable="phpdoc">
-            <arg line=" --directory ${system},${application}
-                        --output    HTML:Smarty/Evolve:default
-                        --target    ${basedir}/build/api
-                        --parseprivate" />
+            <arg value="--directory" />
+            <arg value="${system},${application}" />
+            <arg value="--output" />
+            <arg value="HTML:Smarty/Evolve:default" />
+            <arg value="--target" />
+            <arg path="${basedir}/build/api" />
+            <arg value="--parseprivate" />
         </exec>
     </target>
 
     <target name="phpcs"
             description="Generate checkstyle.xml using PHP_CodeSniffer">
         <exec executable="phpcs" output="/dev/null">
-            <arg line=" --report=checkstyle
-                        --report-file=${basedir}/build/logs/checkstyle.xml
-                        --standard=Lunr
-                        --ignore=third-party,html.*
-                        ${system} ${application}" />
+            <arg value="--report=checkstyle" />
+            <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
+            <arg value="--standard=Lunr" />
+            <arg value="--ignore=third-party,html.*" />
+            <arg path="${system}" />
+            <arg path="${application}" />
         </exec>
     </target>
 
     <target name="phpcpd"
             description="Generate pmd-cpd.xml using PHPCPD">
         <exec executable="phpcpd">
-            <arg line=" --log-pmd   ${basedir}/build/logs/pmd-cpd.xml
-                        --suffixes  php
-                        --verbose
-                        ${basedir}" />
+            <arg value="--log-pmd" />
+            <arg value="${basedir}/build/logs/pmd-cpd.xml" />
+            <arg value="--suffixes" />
+            <arg value="php" />
+            <arg value="--verbose" />
+            <arg path="${basedir}" />
         </exec>
     </target>
 
     <target name="phploc"
          description="Generate phploc.csv">
         <exec executable="phploc">
-            <arg line=" --log-csv   ${basedir}/build/logs/phploc.csv
-                        --suffixes  php
-                        --verbose
-                        --count-tests
-                        ${basedir}" />
+            <arg value="--log-csv" />
+            <arg value="${basedir}/build/logs/phploc.csv" />
+            <arg value="--suffixes" />
+            <arg value="php" />
+            <arg value="--verbose" />
+            <arg value="--count-tests" />
+            <arg path="${basedir}" />
         </exec>
     </target>
 
     <target name="phpcb"
             description="Aggregate tool output with PHP_CodeBrowser">
         <exec executable="phpcb">
-            <arg line=" --log    ${basedir}/build/logs
-                        --source ${system}
-                        --source ${application}
-                        --output ${basedir}/build/code-browser" />
+            <arg value="--log" />
+            <arg path="${basedir}/build/logs" />
+            <arg value="--source" />
+            <arg path="${system}" />
+            <arg value="--source" />
+            <arg path="${application}" />
+            <arg value="--output" />
+            <arg path="${basedir}/build/code-browser" />
         </exec>
     </target>
 
