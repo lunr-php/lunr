@@ -83,6 +83,9 @@ class Curl
         // default: no info
         $this->info   = array();
 
+        //default: http_code
+        $this->http_code = 0;
+
         // set default curl options
         $this->options[CURLOPT_TIMEOUT]        = 30;
         $this->options[CURLOPT_RETURNTRANSFER] = TRUE;
