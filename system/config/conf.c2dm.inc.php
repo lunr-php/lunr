@@ -26,7 +26,13 @@ $config['c2dm'] = array();
 $config['c2dm']['request_token_url'] = 'https://www.google.com/accounts/ClientLogin';
 
 /**
- * Account type
+ * Account type.
+ * Possible options are:
+ * <ul>
+ * <li>GOOGLE</li>
+ * <li>HOSTED</li>
+ * <li>HOSTED_OR_GOOGLE</li>
+ * </ul>
  * @global String $config['c2dm']['account_type']
  */
 $config['c2dm']['account_type'] = 'HOSTED_OR_GOOGLE';
