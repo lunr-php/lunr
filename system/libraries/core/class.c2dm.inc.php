@@ -103,11 +103,11 @@ class C2DM
         global $config;
 
         $header  = 'Authorization: GoogleLogin auth=' . $authToken;
-        $msgType = $config['c2dm']['msg_type'];
+        $collapse_key = $config['c2dm']['collapse_key'];
 
         $data = array(
                     'registration_id' => $registrationID,
-                    'collapse_key' => $msgType,
+                    'collapse_key' => $collapse_key,
                     'data.message' => $message
                 );
 
