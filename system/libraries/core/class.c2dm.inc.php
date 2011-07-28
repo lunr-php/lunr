@@ -56,7 +56,7 @@ class C2DM
      *
      * @return String authToken, FALSE otherwise
      */
-    public function get_auth_token($username, $password, $source='', $service='ac2dm')
+    public function get_auth_token($username, $password, $source='')
     {
         global $config;
 
@@ -65,7 +65,7 @@ class C2DM
         $post_fields['Email']       = urlencode($username);
         $post_fields['Passwd']      = urlencode($password);
         $post_fields['source']      = urlencode($source);
-        $post_fields['service']     = urlencode($service);
+        $post_fields['service']     = 'ac2dm';
 
         $curl = new Curl();
         $curl->set_option('HEADER', TRUE);
