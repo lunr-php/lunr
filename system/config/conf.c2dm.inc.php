@@ -45,9 +45,9 @@ $config['c2dm']['google_send_url'] = 'https://android.apis.google.com/c2dm/send'
 
 /**
  * Message type
- * @global String $config['c2dm']['msg_type']
+ * @global String $config['c2dm']['collapse_key']
  */
-$config['c2dm']['msg_type'] = '';
+$config['c2dm']['collapse_key'] = '';
 
 /**
  * Username
