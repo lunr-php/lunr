@@ -65,6 +65,6 @@ $config['c2dm']['password'] = '';
  * Path to log-file for logging PUSH errors
  * @global String $config['c2dm']['log']
  */
-$config['c2dm']['log'] = '';
+$config['c2dm']['log'] = '/var/log/';
 
 ?>
