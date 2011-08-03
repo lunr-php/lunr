@@ -607,7 +607,7 @@ class DBConMySQL extends DBCon
     {
         $this->join .= "$sort JOIN " . $this->escape_as($table) . ' ';
 
-        if ($sort != 'NATURAL')
+        if (substr($sort, 0, 7) != 'NATURAL')
         {
             $this->join .= 'ON ' . $this->escape_on($on) . ' ';
         }
