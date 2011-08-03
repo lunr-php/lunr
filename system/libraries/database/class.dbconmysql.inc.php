@@ -605,8 +605,12 @@ class DBConMySQL extends DBCon
      */
     public function join($table, $on, $sort = 'INNER')
     {
-        $this->join .= "$sort JOIN " . $this->escape_as($table);
-        $this->join .= ' ON ' . $this->escape_on($on) . ' ';
+        $this->join .= "$sort JOIN " . $this->escape_as($table) . ' ';
+
+        if ($sort != 'NATURAL')
+        {
+            $this->join .= 'ON ' . $this->escape_on($on) . ' ';
+        }
     }
 
     /**
