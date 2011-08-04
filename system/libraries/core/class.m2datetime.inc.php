@@ -212,6 +212,28 @@ class M2DateTime
     }
 
     /**
+     * Return a date formatted as "DD Month, YYYY" (eg 04 August, 2011).
+     *
+     * @param Integer $timestamp PHP-like Unix Timestamp (optional)
+     * @param String  $locale    The locale that should be used for the month
+     *                           names (optional, en_US by default)
+     *
+     * @return String $date Date as a string
+     */
+    public static function get_text_date($timestamp = FALSE, $locale = 'en_US')
+    {
+        setlocale(LC_ALL, $locale);
+        if ($timestamp === FALSE)
+        {
+            return ucwords(strftime('%d %B, %Y', time()));
+        }
+        else
+        {
+            return ucwords(strftime('%d %B, %Y', $timestamp));
+        }
+    }
+
+    /**
      * Checks whether a given input string is a valid time definition.
      *
      * @param String $string Input String
