@@ -149,6 +149,20 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test the static function get_text_date()
+     * @depends testDelayedTimestamp
+     * @covers Lunr\Libraries\Core\M2DateTime::get_text_date
+     * @runInSeparateProcess
+     */
+    public function testGetTextDate()
+    {
+        $timestamp = M2DateTime::delayed_timestamp("2011-08-04 15:00:00");
+        $this->assertEquals(ucwords(strftime('%d %B, %Y')), M2DateTime::get_text_date());
+        $this->assertEquals("04 August, 2011", M2DateTime::get_text_date($timestamp));
+        $this->assertEquals("04 Agost, 2011", M2DateTime::get_text_date($timestamp, "ca_ES"));
+    }
+
+    /**
      * Test the static function is_time()
      * @dataProvider validTimeProvider
      * @covers Lunr\Libraries\Core\M2DateTime::is_time
