@@ -14,6 +14,8 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Libraries\OAuth;
+
 /**
  * Oauth Connection Factory class
  *

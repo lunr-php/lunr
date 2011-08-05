@@ -13,6 +13,9 @@
  * @author     Javier Negre <javi@m2mobi.com>
  */
 
+namespace Lunr\Libraries\OAuth;
+use Lunr\Libraries\OAuth\OAuthConnection;
+
 /**
  * Linkedin OAuth Connection Class
  *
@@ -168,7 +171,7 @@ class LinkedinConnection extends OAuthConnection
      */
     private function parse_linkedin_profile($user_info)
     {
-        $xml_profile = new SimpleXMLElement($user_info);
+        $xml_profile = new \SimpleXMLElement($user_info);
 
         $user_profile = new SocialProfile();
 

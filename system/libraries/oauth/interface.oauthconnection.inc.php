@@ -15,6 +15,8 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
+namespace Lunr\Libraries\OAuth;
+
 /**
  * OAuth connection interface
  *

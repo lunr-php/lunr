@@ -13,6 +13,8 @@
  * @author     Julio Foulquié <julio@m2mobi.com>
  */
 
+namespace Lunr\Libraries\OAuth;
+
 /**
  * Social Profile Class
  *

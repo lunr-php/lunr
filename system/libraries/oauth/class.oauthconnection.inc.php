@@ -13,6 +13,9 @@
  * @author     Julio Foulquié <julio@m2mobi.com>
  */
 
+namespace Lunr\Libraries\OAuth;
+use Lunr\Libraries\OAuth\OAuthConnectionInterface;
+
 /**
  * OAuth Connection Class
  *
@@ -56,7 +59,7 @@ abstract class OAuthConnection implements OAuthConnectionInterface
 
         try
         {
-            $this->handler = new OAuth(
+            $this->handler = new \OAuth(
                 $config['oauth'][NETWORK]['consumer_key'],
                 $config['oauth'][NETWORK]['consumer_secret'],
                 OAUTH_SIG_METHOD_HMACSHA1,

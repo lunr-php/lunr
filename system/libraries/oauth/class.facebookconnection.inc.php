@@ -14,6 +14,9 @@
  * @author     Julio Foulquié <julio@m2mobi.com>
  */
 
+namespace Lunr\Libraries\OAuth;
+use Lunr\Libraries\Core\Curl;
+
 /**
  * Facebook OAuth Connection Class
  *
