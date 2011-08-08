@@ -12,6 +12,9 @@
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Javier Negre <javi@m2mobi.com>
  */
+namespace Lunr\Libraries\OAuth;
+use Lunr\Libraries\OAuth\OAuthConnection;
+use Lunr\Libraries\OAuth\SocialProfile;
 
 /**
  * Twitter OAuth Connection Class
@@ -32,6 +35,7 @@ class TwitterConnection extends OAuthConnection
      * @var String
      */
     const NETWORK = 'twitter';
+
 
     /**
      * Constructor.
@@ -71,7 +75,7 @@ class TwitterConnection extends OAuthConnection
         $this->handler->setToken($access_token, $access_token_secret);
         try
         {
-            $this->handler->fetch($config['oauth'][NETWORK]['verify_url']);
+            $this->handler->fetch($config['oauth'][static::NETWORK]['verify_url']);
         }
         catch (OAuthException $e)
         {
@@ -89,7 +93,7 @@ class TwitterConnection extends OAuthConnection
             return FALSE;
         }
 
-        $user_info = Json::decode($response);
+        $user_info = json_decode($response);
         if(!$user_info)
         {
             return FALSE;
@@ -127,7 +131,7 @@ class TwitterConnection extends OAuthConnection
         try
         {
             $this->handler->fetch(
-                $config['oauth'][NETWORK]['publish_url'],
+                $config['oauth']['twitter']['publish_url'],
                 array('status' => $message->message)
             );
         }
