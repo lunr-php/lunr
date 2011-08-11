@@ -79,7 +79,7 @@ class TwitterConnection extends OAuthConnection
         }
         catch (OAuthException $e)
         {
-            Output::error('OauthException retrieving user info from ' . NETWORK .
+            Output::error('OauthException retrieving user info from ' . static::NETWORK .
                 ' Error code : ' . $e.getCode() .
                 '; Message: ' . $e.getMessage(),
                 $config['oauth']['log']
@@ -131,13 +131,13 @@ class TwitterConnection extends OAuthConnection
         try
         {
             $this->handler->fetch(
-                $config['oauth']['twitter']['publish_url'],
+                $config['oauth'][static::NETWORK]['publish_url'],
                 array('status' => $message->message)
             );
         }
         catch (OAuthException $e)
         {
-            Output::error('OauthException posting a message to ' . NETWORK .
+            Output::error('OauthException posting a message to ' . static::NETWORK .
                 ' Error code : ' . $e.getCode() .
                 '; Message: ' . $e.getMessage(),
                 $config['oauth']['log']

@@ -74,7 +74,7 @@ class FacebookConnection implements OAuthConnectionInterface
 
         $state = md5(uniqid(rand(), TRUE));
 
-        $url = $config['oauth'][NETWORK]['request_token_url']
+        $url = $config['oauth'][static::NETWORK]['request_token_url']
             . '?client_id=' . $config['oauth']['facebook']['client_id']
             . '&redirect_uri=' . urlencode($callback)
             . '&state=' . $state
@@ -99,10 +99,10 @@ class FacebookConnection implements OAuthConnectionInterface
     {
         global $config;
 
-        $token_url = $config['oauth'][NETWORK]['access_token_url']
-            . '?client_id=' . $config['oauth'][NETWORK]['client_id']
+        $token_url = $config['oauth'][static::NETWORK]['access_token_url']
+            . '?client_id=' . $config['oauth'][static::NETWORK]['client_id']
             . '&redirect_uri=' . urlencode($url_back)
-            . '&client_secret=' . $config['oauth'][NETWORK]['app_secret']
+            . '&client_secret=' . $config['oauth'][static::NETWORK]['app_secret']
             . '&code=' . $oauth_token;
 
         $curl = new Curl();
@@ -125,7 +125,7 @@ class FacebookConnection implements OAuthConnectionInterface
     {
         global $config;
 
-        $url = $config['oauth'][NETWORK]['verify_url'] . $access_token;
+        $url = $config['oauth'][static::NETWORK]['verify_url'] . $access_token;
         $curl = new Curl();
         $response = $curl->simple_get($url);
         if($response === FALSE)
@@ -160,7 +160,7 @@ class FacebookConnection implements OAuthConnectionInterface
         $curl = new Curl();
         $params = array('access_token' => $access_token, 'message' => $message->message);
 
-        return $curl->simple_post($config['oauth'][NETWORK]['publish_url'], $params);
+        return $curl->simple_post($config['oauth'][static::NETWORK]['publish_url'], $params);
     }
 
     /**

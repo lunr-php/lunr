@@ -60,8 +60,8 @@ abstract class OAuthConnection implements OAuthConnectionInterface
         try
         {
             $this->handler = new \OAuth(
-                $config['oauth'][NETWORK]['consumer_key'],
-                $config['oauth'][NETWORK]['consumer_secret'],
+                $config['oauth'][static::NETWORK]['consumerkey'],
+                $config['oauth'][static::NETWORK]['consumersecret'],
                 OAUTH_SIG_METHOD_HMACSHA1,
                 OAUTH_AUTH_TYPE_URI
             );
@@ -101,13 +101,13 @@ abstract class OAuthConnection implements OAuthConnectionInterface
         try
         {
             return $this->handler->getRequestToken(
-                $config['oauth'][NETWORK]['request_token_url'],
+                $config['oauth'][static::NETWORK]['requesttokenurl'],
                 $callback
             );
         }
         catch (OAuthException $e)
         {
-            Output::error('OauthException getting request token from ' . NETWORK .
+            Output::error('OauthException getting request token from ' . static::NETWORK .
                 ' Error code : ' . $e.getCode() .
                 '; Message: ' . $e.getMessage(),
                 $config['oauth']['log']
@@ -138,11 +138,11 @@ abstract class OAuthConnection implements OAuthConnectionInterface
         try
         {
             $this->handler->setToken($oauth_token, $request_token_secret);
-            return $this->handler->getAccessToken($config['oauth'][NETWORK]['access_token_url']);
+            return $this->handler->getAccessToken($config['oauth'][static::NETWORK]['accesstokenurl']);
         }
         catch(OAuthException $e)
         {
-            Output::error('OauthException getting access token from ' . NETWORK .
+            Output::error('OauthException getting access token from ' . static::NETWORK .
                 ' Error code : ' . $e.getCode() .
                 '; Message: ' . $e.getMessage(),
                 $config['oauth']['log']

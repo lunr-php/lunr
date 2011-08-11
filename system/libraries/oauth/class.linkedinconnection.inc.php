@@ -75,14 +75,14 @@ class LinkedinConnection extends OAuthConnection
         {
 
             $this->handler->fetch(
-                $config['oauth'][NETWORK]['own_profile_url'],
+                $config['oauth'][static::NETWORK]['verify_url'],
                 NULL,
                 OAUTH_HTTP_METHOD_GET
             );
         }
         catch(OAuthException $e)
         {
-            Output::error('Oauth Exception retrieving user profile from ' . NETWORK .
+            Output::error('Oauth Exception retrieving user profile from ' . static::NETWORK .
                 ' Error code : ' .$e.getCode() .
                 '; Message: ' . $e.getMessage(),
                 $config['oauth']['log']
@@ -119,7 +119,7 @@ class LinkedinConnection extends OAuthConnection
         try
         {
             $data = $this->handler->fetch(
-                $config['oauth'][NETWORK]['publish_url'],
+                $config['oauth'][static::NETWORK]['publish_url'],
                 $xml->asXML(),
                 OAUTH_HTTP_METHOD_POST,
                 array('Content-Type' => 'text/xml')
@@ -128,7 +128,7 @@ class LinkedinConnection extends OAuthConnection
         }
         catch(OAuthException $e)
         {
-            Output::error('Oauth Exception posting a message to ' . NETWORK .
+            Output::error('Oauth Exception posting a message to ' . static::NETWORK .
                 ' Error code : ' . $e.getCode() .
                 '; Message: ' . $e.getMessage(),
                 $config['oauth']['log']
@@ -157,7 +157,7 @@ class LinkedinConnection extends OAuthConnection
         $xml->content->addChild('submitted-url', $message->url);
         $xml->content->addChild('submitted-image-url', $message->image_url);
 
-        $xml->visibility->addChild('code', $config['oauth'][NETWORK]['visibility']);
+        $xml->visibility->addChild('code', $config['oauth'][static::NETWORK]['visibility']);
 
         return $xml;
     }
