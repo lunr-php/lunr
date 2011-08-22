@@ -78,7 +78,7 @@ class FacebookConnection implements OAuthConnectionInterface
             . '?client_id=' . $config['oauth']['facebook']['client_id']
             . '&redirect_uri=' . urlencode($callback)
             . '&state=' . $state
-            . '&display=wap';
+            . '&display=wap&scope=email,publish_stream';
 
         return array(
             'state' => $state,
@@ -126,6 +126,7 @@ class FacebookConnection implements OAuthConnectionInterface
         global $config;
 
         $url = $config['oauth'][static::NETWORK]['verify_url'] . $access_token;
+
         $curl = new Curl();
         $response = $curl->simple_get($url);
         if($response === FALSE)
@@ -134,7 +135,8 @@ class FacebookConnection implements OAuthConnectionInterface
         }
         else
         {
-            $user_info = Json::decode($response);
+            //$user_info = Json::decode($response);
+            $user_info = json_decode($response);
             if(!$user_info)
             {
                 return FALSE;
@@ -189,6 +191,7 @@ class FacebookConnection implements OAuthConnectionInterface
                     break;
                 case 'gender':
                     $user_profile->gender = $field;
+                    break;
                 case 'email':
                     $user_profile->email = $field;
                     break;
