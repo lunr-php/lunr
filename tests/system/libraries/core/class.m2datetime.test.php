@@ -69,6 +69,20 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(date('Y-m-d H:i:s', strtotime("+2 days")), M2DateTime::delayed_datetime("+1 day", $timestamp));
     }
 
+   /**
+    * Test the static function delayed_text_date()
+    * @depends testDelayedTimestamp
+    * @covers Lunr\Libraries\Core\M2DateTime::delayed_text_date
+    */
+    public function testDelayedTextDate()
+    {
+        $timestamp = M2DateTime::delayed_timestamp("+1 day");
+        $this->assertEquals(ucwords(strftime('%d %B, %Y', strtotime("+1 day", time()))), M2DateTime::delayed_text_date("+1 day"));
+        $this->assertEquals(ucwords(strftime('%d %B, %Y', strtotime("+2 days"))), M2DateTime::delayed_text_date("+1 day", 'en_US', $timestamp));
+        $timestamp = M2DateTime::delayed_timestamp("2011-10-07 15:00:00");
+        $this->assertEquals("07 Settembre, 2011", M2DateTime::delayed_text_date("-1 month", "it_IT", $timestamp));
+    }
+
     /**
      * Test the static function now()
      * @covers Lunr\Libraries\Core\M2DateTime::now
