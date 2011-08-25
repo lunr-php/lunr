@@ -43,7 +43,23 @@ class LinkedinConnection extends OAuthConnection
      */
     public function __construct($token)
     {
-        parent::__construct($token);
+        global $config;
+
+        $this->token = $token;
+
+        try
+        {
+            $this->handler = new \OAuth(
+                $config['oauth'][static::NETWORK]['consumerkey'],
+                $config['oauth'][static::NETWORK]['consumersecret'],
+                OAUTH_SIG_METHOD_HMACSHA1,
+                OAUTH_AUTH_TYPE_AUTHORIZATION
+            );
+        }
+        catch (Exception $e)
+        {
+            $this->handler = FALSE;
+        }
     }
 
     /**
@@ -101,8 +117,7 @@ class LinkedinConnection extends OAuthConnection
      * @param SocialMessage $message             SocialMessage object already filled
      * @param String        $access_token_secret Access token secret
      *
-     * @return Array Array containing the 'oauth token' and the 'oauth token secret',
-     *               FALSE otherwise.
+     * @return Array Linkedin response information.
      */
     public function post_message($access_token, SocialMessage $message, $access_token_secret = '')
     {
@@ -118,13 +133,14 @@ class LinkedinConnection extends OAuthConnection
 
         try
         {
-            $data = $this->handler->fetch(
+            $this->handler->fetch(
                 $config['oauth'][static::NETWORK]['publish_url'],
                 $xml->asXML(),
                 OAUTH_HTTP_METHOD_POST,
                 array('Content-Type' => 'text/xml')
             );
-            return $data;
+
+            return $this->handler->getLastResponseInfo();
         }
         catch(OAuthException $e)
         {
@@ -133,6 +149,7 @@ class LinkedinConnection extends OAuthConnection
                 '; Message: ' . $e.getMessage(),
                 $config['oauth']['log']
             );
+
             return FALSE;
         }
     }
@@ -148,7 +165,7 @@ class LinkedinConnection extends OAuthConnection
     {
         global $config;
 
-        $xml = new SimpleXMLElement('<?xml version="1.0" encoding="utf-8" ?><share></share>');
+        $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><share></share>');
         $xml->addChild('comment', $message->comment);
         $xml->addChild('content');
         $xml->addChild('visibility');
