@@ -115,14 +115,13 @@ class M2DateTime
     }
 
     /**
-    * Return a delayed datetime string formatted as "DD Month, YYYY" (eg 05 Dec 2011).
+    * Return a delayed date string formatted as "DD Month, YYYY" (eg 05 December, 2011).
     *
-    * @param String  $delay     Definition for a timeframe
-    *                           ("+1 day", "-10 minutes")
+    * @param String  $delay     Definition for a timeframe ("+1 day", "-10 minutes")
     * @param String  $locale    The locale that should be used for the month
     * @param Integer $timestamp Base timestamp, now by default (optional)
     *
-    * @return String $return DateTime definition, format DD Month, YYYY
+    * @return String $return Delayed date, format "DD Month, YYYY"
     */
     public static function delayed_text_date($delay, $locale = 'en_US', $timestamp = 0)
     {
