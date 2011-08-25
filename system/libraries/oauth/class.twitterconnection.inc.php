@@ -93,7 +93,8 @@ class TwitterConnection extends OAuthConnection
             return FALSE;
         }
 
-        $user_info = json_decode($response);
+        ///TODO: find a better way to do that
+        $user_info = json_decode($response, TRUE);
         if(!$user_info)
         {
             return FALSE;
@@ -145,7 +146,9 @@ class TwitterConnection extends OAuthConnection
 
             return FALSE;
         }
-        return Json::decode($this->handler->getLastResponse());
+
+        ///TODO: find a better way to do that
+        return json_decode($this->handler->getLastResponse(), TRUE);
     }
 
     /**

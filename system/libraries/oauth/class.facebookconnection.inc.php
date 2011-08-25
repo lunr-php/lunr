@@ -135,8 +135,8 @@ class FacebookConnection implements OAuthConnectionInterface
         }
         else
         {
-            //$user_info = Json::decode($response);
-            $user_info = json_decode($response);
+            ///TODO: find a better way to do that
+            $user_info = json_decode($response, TRUE);
             if(!$user_info)
             {
                 return FALSE;
