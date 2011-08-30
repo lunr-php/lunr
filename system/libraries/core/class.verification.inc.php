@@ -229,6 +229,30 @@ class Verification
         return ($value == 0) || ($value == 1) || ($value == 2);
     }
 
+    /**
+     * Check whether input is a valid date definition.
+     *
+     * @param mixed $value The input to check
+     *
+     * @return Boolean $return TRUE if input is a valid date, FALSE otherwise.
+     */
+    public static function is_date($value)
+    {
+        return M2DateTime::is_date($value);
+    }
+
+    /**
+     * Check whether input is a valid time definition.
+     *
+     * @param mixed $value The input to check
+     *
+     * @return Boolean $return TRUE if input is a valid time, FALSE otherwise.
+     */
+    public static function is_time($value)
+    {
+        return M2DateTime::is_time($value);
+    }
+
 }
 
 ?>
