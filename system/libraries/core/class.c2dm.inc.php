@@ -122,25 +122,19 @@ class C2DM
             if($curl->http_code == 401)
             {
                 unset($curl);
-                Output::error(
-                "Authorization token invalid\n\n", $config['c2dm']['log']
-                );
+                Output::error("Authorization token invalid\n\n", $config['c2dm']['log']);
                 return FALSE;
             }
             if($curl->http_code == 503)
             {
                 unset($curl);
-                Output::error(
-                "Server temporarily unavailable\n\n", $config['c2dm']['log']
-                );
+                Output::error("Server temporarily unavailable\n\n", $config['c2dm']['log']);
                 return FALSE;
             }
             else
             {
                 unset($curl);
-                Output::error(
-                "Error sending notification\n\n", $config['c2dm']['log']
-                );
+                Output::error("Error sending notification\n\n", $config['c2dm']['log']);
                 return FALSE;
             }
 
