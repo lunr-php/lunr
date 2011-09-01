@@ -63,7 +63,7 @@ class Curl
     private $errmsg;
 
     /**
-     * Curl http code
+     * HTTP status code of the request made
      * @var Integer
      */
     private $http_code;
@@ -83,7 +83,7 @@ class Curl
         // default: no info
         $this->info   = array();
 
-        //default: http_code
+        // set http_code to zero to indicate we haven't made a request yet
         $this->http_code = 0;
 
         // set default curl options
