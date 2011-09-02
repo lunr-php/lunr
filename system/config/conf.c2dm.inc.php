@@ -44,7 +44,8 @@ $config['c2dm']['account_type'] = 'HOSTED_OR_GOOGLE';
 $config['c2dm']['google_send_url'] = 'https://android.apis.google.com/c2dm/send';
 
 /**
- * Message type
+ * Collapse key (Arbitrary string used to collapse a group of like messages when
+ *  the device is offline, so that only the last message gets sent to the client)
  * @global String $config['c2dm']['collapse_key']
  */
 $config['c2dm']['collapse_key'] = '';
