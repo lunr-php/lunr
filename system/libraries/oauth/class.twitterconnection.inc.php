@@ -137,11 +137,11 @@ class TwitterConnection extends OAuthConnection
                 array('status' => $message->message)
             );
         }
-        catch (OAuthException $e)
+        catch (\OAuthException $e)
         {
             Output::error('OauthException posting a message to ' . static::NETWORK .
-                ' Error code : ' . $e.getCode() .
-                '; Message: ' . $e.getMessage(),
+                ' Error code : ' . $e->getCode() .
+                '; Message: ' . $e->getMessage(),
                 $config['oauth']['log']
             );
 
