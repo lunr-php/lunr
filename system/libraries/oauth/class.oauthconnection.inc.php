@@ -105,11 +105,11 @@ abstract class OAuthConnection implements OAuthConnectionInterface
                 $callback
             );
         }
-        catch (OAuthException $e)
+        catch (\OAuthException $e)
         {
             Output::error('OauthException getting request token from ' . static::NETWORK .
-                ' Error code : ' . $e.getCode() .
-                '; Message: ' . $e.getMessage(),
+                ' Error code : ' . $e->getCode() .
+                '; Message: ' . $e->getMessage(),
                 $config['oauth']['log']
             );
 
@@ -140,11 +140,11 @@ abstract class OAuthConnection implements OAuthConnectionInterface
             $this->handler->setToken($oauth_token, $request_token_secret);
             return $this->handler->getAccessToken($config['oauth'][static::NETWORK]['accesstokenurl']);
         }
-        catch(OAuthException $e)
+        catch(\OAuthException $e)
         {
             Output::error('OauthException getting access token from ' . static::NETWORK .
-                ' Error code : ' . $e.getCode() .
-                '; Message: ' . $e.getMessage(),
+                ' Error code : ' . $e->getCode() .
+                '; Message: ' . $e->getMessage(),
                 $config['oauth']['log']
             );
 
