@@ -15,6 +15,7 @@
 
 namespace Lunr\Libraries\OAuth;
 use Lunr\Libraries\OAuth\OAuthConnection;
+use Lunr\Libraries\Core\Output;
 
 /**
  * Linkedin OAuth Connection Class
@@ -96,11 +97,11 @@ class LinkedinConnection extends OAuthConnection
                 OAUTH_HTTP_METHOD_GET
             );
         }
-        catch(OAuthException $e)
+        catch(\OAuthException $e)
         {
             Output::error('Oauth Exception retrieving user profile from ' . static::NETWORK .
-                ' Error code : ' .$e.getCode() .
-                '; Message: ' . $e.getMessage(),
+                ' Error code : ' .$e->getCode() .
+                '; Message: ' . $e->getMessage(),
                 $config['oauth']['log']
             );
 
@@ -142,11 +143,11 @@ class LinkedinConnection extends OAuthConnection
 
             return $this->handler->getLastResponseInfo();
         }
-        catch(OAuthException $e)
+        catch(\OAuthException $e)
         {
             Output::error('Oauth Exception posting a message to ' . static::NETWORK .
-                ' Error code : ' . $e.getCode() .
-                '; Message: ' . $e.getMessage(),
+                ' Error code : ' . $e->getCode() .
+                '; Message: ' . $e->getMessage(),
                 $config['oauth']['log']
             );
 
