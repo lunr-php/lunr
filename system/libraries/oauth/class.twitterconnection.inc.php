@@ -15,6 +15,7 @@
 namespace Lunr\Libraries\OAuth;
 use Lunr\Libraries\OAuth\OAuthConnection;
 use Lunr\Libraries\OAuth\SocialProfile;
+use Lunr\Libraries\Core\Output;
 
 /**
  * Twitter OAuth Connection Class
@@ -77,11 +78,11 @@ class TwitterConnection extends OAuthConnection
         {
             $this->handler->fetch($config['oauth'][static::NETWORK]['verify_url']);
         }
-        catch (OAuthException $e)
+        catch (\OAuthException $e)
         {
             Output::error('OauthException retrieving user info from ' . static::NETWORK .
-                ' Error code : ' . $e.getCode() .
-                '; Message: ' . $e.getMessage(),
+                ' Error code : ' . $e->getCode() .
+                '; Message: ' . $e->getMessage(),
                 $config['oauth']['log']
             );
 
