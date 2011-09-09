@@ -52,7 +52,6 @@ class C2DM
      * @param String $username User's email address
      * @param String $password User's password
      * @param String $source   Text to identify the application, for login purpose
-     * @param String $service  Name of the Google service it's requesting authorization for
      *
      * @return String authToken, FALSE otherwise
      */
@@ -106,10 +105,10 @@ class C2DM
         $collapse_key = $config['c2dm']['collapse_key'];
 
         $data = array(
-                    'registration_id' => $registrationID,
-                    'collapse_key' => $collapse_key,
-                    'data.message' => $message
-                );
+            'registration_id' => $registrationID,
+            'collapse_key' => $collapse_key,
+            'data.message' => $message
+        );
 
         $curl = new Curl();
         $curl->set_option('HEADER', TRUE);
@@ -121,31 +120,24 @@ class C2DM
         {
             if($curl->http_code == 401)
             {
-                unset($curl);
                 Output::error("Authorization token invalid\n\n", $config['c2dm']['log']);
-                return FALSE;
             }
             if($curl->http_code == 503)
             {
-                unset($curl);
                 Output::error("Server temporarily unavailable\n\n", $config['c2dm']['log']);
-                return FALSE;
             }
             else
             {
-                unset($curl);
                 Output::error("Error sending notification\n\n", $config['c2dm']['log']);
-                return FALSE;
             }
 
+            unset($curl);
             return FALSE;
         }
         else
         {
             unset($curl);
-            Output::error(
-            "Notification sent: $message\n\n", $config['c2dm']['log']
-            );
+            Output::error("Notification sent: $message\n\n", $config['c2dm']['log']);
             return TRUE;
         }
     }
