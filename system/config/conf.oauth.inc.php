@@ -120,7 +120,7 @@ $config['oauth']['linkedin']['authurl'] = 'https://api.linkedin.com/uas/oauth/au
  * URL where to verify and retrieve the user's credentials on LinkedIn
  * @global String $config['oauth']['linkedin']['verify_url']
  */
-$config['oauth']['linkedin']['verify_url'] = 'http://api.linkedin.com/v1/people/~';
+$config['oauth']['linkedin']['verify_url'] = 'http://api.linkedin.com/v1/people/~:(id,first-name,last-name)';
 
 /**
  * URL where to publish on LinkedIn
