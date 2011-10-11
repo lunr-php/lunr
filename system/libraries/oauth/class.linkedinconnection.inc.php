@@ -168,13 +168,7 @@ class LinkedinConnection extends OAuthConnection
 
         $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><share></share>');
         $xml->addChild('comment', $message->comment);
-        $xml->addChild('content');
         $xml->addChild('visibility');
-
-        $xml->content->addChild('title', $message->message);
-        $xml->content->addChild('submitted-url', $message->url);
-        $xml->content->addChild('submitted-image-url', $message->image_url);
-
         $xml->visibility->addChild('code', $config['oauth'][static::NETWORK]['visibility']);
 
         return $xml;
