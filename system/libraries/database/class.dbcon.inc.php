@@ -655,7 +655,7 @@ abstract class DBCon
      *
      * @return String key/value list
      */
-    protected function prepare_data($data,$type)
+    protected function prepare_data($data, $type)
     {
         if (is_array($data))
         {
