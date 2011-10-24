@@ -670,6 +670,10 @@ abstract class DBCon
                 $char = "'";
             }
         }
+        elseif ($type == 'keys')
+        {
+            return "";
+        }
         else
         {
             $array['0'] = $data;
