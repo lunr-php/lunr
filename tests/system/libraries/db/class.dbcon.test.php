@@ -77,6 +77,21 @@ class DBConReadonlyTest extends PHPUnit_Framework_TestCase
         );
 
         $data[] = array(
+            array(
+                array(
+                    "key1" => "value1",
+                    "key2" => "value2"
+                ),
+                array(
+                    "key1" => "value3",
+                    "key2" => "value4"
+                )
+            ),
+            "(`key1`,`key2`) ",
+            "('value1','value2') ,('value3','value4') "
+        );
+
+        $data[] = array(
             "value1",
             "",
             "('value1') "
