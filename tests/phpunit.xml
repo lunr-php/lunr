@@ -15,6 +15,7 @@
             <file>tests/system/libraries/core/class.verification.test.php</file>
             <file>tests/system/libraries/l10n/class.l10n.test.php</file>
             <file>tests/system/libraries/db/class.dbman.test.php</file>
+            <file>tests/system/libraries/db/class.dbcon.test.php</file>
         </testsuite>
     </testsuites>
     <filter>
