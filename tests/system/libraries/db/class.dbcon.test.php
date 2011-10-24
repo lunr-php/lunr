@@ -27,6 +27,12 @@ class DBConReadonlyTest extends PHPUnit_Framework_TestCase
         $this->dbcon = new MockDBConReadonly();
     }
 
+    protected function tearDown()
+    {
+        unset($this->dbcon);
+        unset($this->dbcon_reflection);
+    }
+
     /**
      * Tests the escaping and preparation of key names for SQL queries
      * @dataProvider datasetProvider
