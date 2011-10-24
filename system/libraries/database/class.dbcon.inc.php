@@ -659,7 +659,24 @@ abstract class DBCon
     {
         if (is_array($data))
         {
-            if ($type == 'keys')
+            if (is_array(current($data)))
+            {
+                if ($type == 'keys')
+                {
+                    $array = array_keys(current($data));
+                    $char = '`';
+                }
+                else
+                {
+                    $list = "";
+                    foreach ($data as $entry)
+                    {
+                        $list .= $this->prepare_data($entry, $type) . ",";
+                    }
+                    return trim($list, ',');
+                }
+            }
+            elseif ($type == 'keys')
             {
                 $array = array_keys($data);
                 $char = '`';
