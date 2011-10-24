@@ -32,11 +32,23 @@ class DBConReadonlyTest extends PHPUnit_Framework_TestCase
      * @dataProvider datasetProvider
      * @covers Lunr\Libraries\Database\DBCon::prepare_data
      */
-    public function testPrepareDataKeys($data, $result)
+    public function testPrepareDataKeys($data, $result, $ignore)
     {
         $method = $this->dbcon_reflection->getMethod('prepare_data');
         $method->setAccessible(TRUE);
         $this->assertEquals($result, $method->invokeArgs($this->dbcon, array($data, 'keys')));
+    }
+
+    /**
+     * Tests the escaping and preparation of values for SQL queries
+     * @dataProvider datasetProvider
+     * @covers Lunr\Libraries\Database\DBCon::prepare_data
+     */
+    public function testPrepareDataValues($data, $ignore, $result)
+    {
+        $method = $this->dbcon_reflection->getMethod('prepare_data');
+        $method->setAccessible(TRUE);
+        $this->assertEquals($result, $method->invokeArgs($this->dbcon, array($data, 'values')));
     }
 
     public function datasetProvider()
@@ -45,7 +57,8 @@ class DBConReadonlyTest extends PHPUnit_Framework_TestCase
             array(
                 "key" => "value"
             ),
-            "(`key`) "
+            "(`key`) ",
+            "('value') "
         );
 
         $data[] = array(
@@ -53,12 +66,30 @@ class DBConReadonlyTest extends PHPUnit_Framework_TestCase
                 "key1" => "value1",
                 "key2" => "value2"
             ),
-            "(`key1`,`key2`) "
+            "(`key1`,`key2`) ",
+            "('value1','value2') "
         );
 
         $data[] = array(
             "value1",
-            ""
+            "",
+            "('value1') "
+        );
+
+        $data[] = array(
+            array(
+                "key" => NULL
+            ),
+            "(`key`) ",
+            "(NULL ) "
+        );
+
+        $data[] = array(
+            array(
+                "key" => "UNHEX('0056eac2c19411e0826a0050568476fa')"
+            ),
+            "(`key`) ",
+            "(UNHEX('0056eac2c19411e0826a0050568476fa') ) "
         );
 
         return $data;
