@@ -281,16 +281,27 @@ class M2DateTime
      */
     public static function is_date($string)
     {
-        $feb    = '02[\- \/ \.](0[1-9]|1[0-9]|2[0-9])';
-        $others = '(01|0[3-9]|1[012])[\- \/ \.](0[1-9]|[12][0-9]|3[01])';
+        $leap_day = '/^(\d{1,4})[\- \/ \.]02[\- \/ \.]29$/';
 
-        if (preg_match("/^(\d{1,4})[\- \/ \.]($others|$feb)$/", $string))
+        if (preg_match($leap_day, $string))
         {
-            return TRUE;
+            $year = preg_replace('/[\- \/ \.]02[\- \/ \.]29$/', '', $string);
+            return ((($year % 4) == 0) && ((($year % 100) != 0) || (($year %400) == 0)));
         }
         else
         {
-            return FALSE;
+            $feb     = '02[\- \/ \.](0[1-9]|1[0-9]|2[0-8])';
+            $_30days = '(0[469]|11)[\- \/ \.](0[1-9]|[12][0-9]|30)';
+            $_31days = '(0[13578]|1[02])[\- \/ \.](0[1-9]|[12][0-9]|3[01])';
+
+            if (preg_match("/^(\d{1,4})[\- \/ \.]($_31days|$_30days|$feb)$/", $string))
+            {
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
         }
     }
 
