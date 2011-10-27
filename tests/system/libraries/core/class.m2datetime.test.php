@@ -266,12 +266,16 @@ class M2DateTimeTest extends PHPUnit_Framework_TestCase
 
     public function validDateProvider()
     {
-        return array(array("2010-02-10"), array("923-01-02"));
+        return array(array("2010-02-10"), array("1-01-02"), array("2096-02-29"), array("2011-01-31"),
+                    array("2400-02-29")
+                    );
     }
 
     public function invalidDateProvider()
     {
-        return array(array("string"), array("1020367"), array(FALSE), array("2010-02-30"), array("2010-13-10"));
+        return array(array("string"), array("1020367"), array(FALSE), array("2010-02-30"), array("2010-13-10"),
+                    array("2011-04-31"), array("2095-02-29"), array("2100-02-29"), array("2200-02-29")
+                    );
     }
 
     public function equalDatetimeProvider()
