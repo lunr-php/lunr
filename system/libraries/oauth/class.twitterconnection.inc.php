@@ -132,10 +132,13 @@ class TwitterConnection extends OAuthConnection
         }
         try
         {
-            $this->handler->fetch(
+            $result = $this->handler->fetch(
                 $config['oauth'][static::NETWORK]['publish_url'],
                 array('status' => $message->message)
             );
+
+            $result = $this->handler->getLastResponseInfo();
+            return $result['http_code'];
         }
         catch (\OAuthException $e)
         {
@@ -145,11 +148,8 @@ class TwitterConnection extends OAuthConnection
                 $config['oauth']['log']
             );
 
-            return FALSE;
+            return $e->getCode();
         }
-
-        ///TODO: find a better way to do that
-        return json_decode($this->handler->getLastResponse(), TRUE);
     }
 
     /**
