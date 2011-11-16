@@ -162,7 +162,16 @@ class FacebookConnection implements OAuthConnectionInterface
         $curl = new Curl();
         $params = array('access_token' => $access_token, 'message' => $message->message);
 
-        return $curl->simple_post($config['oauth'][static::NETWORK]['publish_url'], $params);
+        $curl->simple_post($config['oauth'][static::NETWORK]['publish_url'], $params);
+
+        if (isset($curl->info['http_code']))
+        {
+            return $curl->info['http_code'];
+        }
+        else
+        {
+            return $curl->http_code;
+        }
     }
 
     /**
