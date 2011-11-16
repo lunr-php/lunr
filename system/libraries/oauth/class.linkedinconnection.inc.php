@@ -141,7 +141,8 @@ class LinkedinConnection extends OAuthConnection
                 array('Content-Type' => 'text/xml')
             );
 
-            return $this->handler->getLastResponseInfo();
+            $result = $this->handler->getLastResponseInfo();
+            return $result['http_code'];
         }
         catch(\OAuthException $e)
         {
@@ -151,7 +152,7 @@ class LinkedinConnection extends OAuthConnection
                 $config['oauth']['log']
             );
 
-            return FALSE;
+            return $e->getCode();
         }
     }
 
