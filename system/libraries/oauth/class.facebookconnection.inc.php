@@ -35,6 +35,11 @@ class FacebookConnection implements OAuthConnectionInterface
      * @var String
      */
     const NETWORK = 'facebook';
+
+    /**
+     * Strings for checking the access token status
+     * @var String
+     */
     const EXPIRED = 'Session has expired';
     const VALID = 'data';
     const PWD_CHANGED = 'changed the password';
@@ -216,6 +221,17 @@ class FacebookConnection implements OAuthConnectionInterface
         return $user_profile;
     }
 
+    /**
+     * Check the state of the access token.
+     *
+     * @param String $access_token Access token to check status
+     *
+     * @return String 'expired' if the token has expired, 'pwd_changed' if the user has
+     *                changed the account password, 'app_not_authorized' if the application
+     *                has been deauthorized, 'user_logged_out' in case the token was
+     *                requested without offline_access parameter and the user has logged
+     *                out, 'valid' if the token is valid and 'other_error' otherwise.
+     */
     public function check_access_token_state($access_token)
     {
         global $config;
