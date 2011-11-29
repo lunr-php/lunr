@@ -239,23 +239,23 @@ class FacebookConnection implements OAuthConnectionInterface
         $url = $config['oauth']['facebook']['publish_url'] . "?access_token=" . $access_token;
         $info = file_get_contents($url);
 
-        if (strpos($info, self::EXPIRED))
+        if (strpos($info, self::EXPIRED) !== FALSE)
         {
             return "expired";
         }
-        elseif (strpos($info, self::PWD_CHANGED))
+        elseif (strpos($info, self::PWD_CHANGED)!== FALSE)
         {
             return "pwd_changed";
         }
-        elseif (strpos($info, self::APP_NOT_AUTH))
+        elseif (strpos($info, self::APP_NOT_AUTH)!== FALSE)
         {
             return "app_not_authorized";
         }
-        elseif (strpos($info, self::LOGGED_OUT))
+        elseif (strpos($info, self::LOGGED_OUT)!== FALSE)
         {
             return "user_logged_out";
         }
-        elseif (strpos($info, self::VALID))
+        elseif (strpos($info, self::VALID)!== FALSE)
         {
             return "valid";
         }
