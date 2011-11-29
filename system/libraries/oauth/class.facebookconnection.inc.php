@@ -35,6 +35,11 @@ class FacebookConnection implements OAuthConnectionInterface
      * @var String
      */
     const NETWORK = 'facebook';
+    const EXPIRED = 'Session has expired';
+    const VALID = 'data';
+    const PWD_CHANGED = 'changed the password';
+    const APP_NOT_AUTH = 'has not authorized application';
+    const LOGGED_OUT = 'The session is invalid because the user logged out.';
 
     /**
      * API access token
@@ -209,6 +214,39 @@ class FacebookConnection implements OAuthConnectionInterface
             }
         }
         return $user_profile;
+    }
+
+    public function check_access_token_state($access_token)
+    {
+        global $config;
+
+        $url = $config['oauth']['facebook']['publish_url'] . "?access_token=" . $access_token;
+        $info = file_get_contents($url);
+
+        if (strpos($info, self::EXPIRED))
+        {
+            return "expired";
+        }
+        elseif (strpos($info, self::PWD_CHANGED))
+        {
+            return "pwd_changed";
+        }
+        elseif (strpos($info, self::APP_NOT_AUTH))
+        {
+            return "app_not_authorized";
+        }
+        elseif (strpos($info, self::LOGGED_OUT))
+        {
+            return "user_logged_out";
+        }
+        elseif (strpos($info, self::VALID))
+        {
+            return "valid";
+        }
+        else
+        {
+            return "other_error";
+        }
     }
 
 }
