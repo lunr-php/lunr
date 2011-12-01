@@ -143,6 +143,10 @@ class TwitterConnection extends OAuthConnection
             {
                 return 'ok';
             }
+            else
+            {
+                return $result['http_code'];
+            }
         }
         catch (\OAuthException $e)
         {
