@@ -174,9 +174,9 @@ class FacebookConnection implements OAuthConnectionInterface
 
         $curl->simple_post($config['oauth'][static::NETWORK]['publish_url'], $params);
 
-        if (isset($curl->info['http_code']))
+        if (isset($curl->info['http_code']) && ($curl->info['http_code'] == '200'))
         {
-            return $curl->info['http_code'];
+            return 'ok';
         }
         else
         {
@@ -184,17 +184,15 @@ class FacebookConnection implements OAuthConnectionInterface
             {
                 $result = $this->check_access_token_state($access_token);
 
-                if ($result == 'expired')
+                if ($result === 'expired')
                 {
-                    return '401';
+                    return 'token_expired';
                 }
-                elseif ($result == 'other_error')
+                else
                 {
-                    # TODO: find a way to check if the posting fails for a duplicated message,
-                    #       assuming that is the reason, because is the most common cause.
-                    return '403';
+                    # TODO: find a way to check if the posting fails for a duplicated message
+                    return $curl->http_code;
                 }
-                return FALSE;
             }
         }
     }
