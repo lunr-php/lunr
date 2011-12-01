@@ -142,18 +142,31 @@ class LinkedinConnection extends OAuthConnection
             );
 
             $result = $this->handler->getLastResponseInfo();
-            //return $result['http_code'];
-            return '200';
+
+            if ($result['http_code'] == '201')
+            {
+                return 'ok';
+
+            }
         }
         catch(\OAuthException $e)
         {
+            $error_code = $e->getCode();
+
             Output::error('Oauth Exception posting a message to ' . static::NETWORK .
-                ' Error code : ' . $e->getCode() .
+                ' Error code : ' . $error_code .
                 '; Message: ' . $e->getMessage(),
                 $config['oauth']['log']
             );
 
-            return $e->getCode();
+            if ($error_code == '401')
+            {
+                return 'token_expired';
+            }
+            else
+            {
+                return $error_code;
+            }
         }
     }
 
