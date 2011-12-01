@@ -142,7 +142,8 @@ class LinkedinConnection extends OAuthConnection
             );
 
             $result = $this->handler->getLastResponseInfo();
-            return $result['http_code'];
+            //return $result['http_code'];
+            return '200';
         }
         catch(\OAuthException $e)
         {
