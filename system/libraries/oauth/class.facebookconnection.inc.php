@@ -37,13 +37,34 @@ class FacebookConnection implements OAuthConnectionInterface
     const NETWORK = 'facebook';
 
     /**
-     * Strings for checking the access token status
+     * Strings for checking if the access token has expired
      * @var String
      */
     const EXPIRED = 'Session has expired';
+
+    /**
+     * Strings for checking if the access token is valid
+     * @var String
+     */
     const VALID = 'data';
+
+    /**
+     * Strings for checking if the user has changed his password
+     * @var String
+     */
     const PWD_CHANGED = 'changed the password';
+
+    /**
+     * Strings for checking if the user has deauthorized the application
+     * @var String
+     */
     const APP_NOT_AUTH = 'has not authorized application';
+
+    /**
+     * Strings for checking if the user has logged out (for the case where offline_access
+     * wasn't requierd)
+     * @var String
+     */
     const LOGGED_OUT = 'The session is invalid because the user logged out.';
 
     /**
@@ -172,27 +193,20 @@ class FacebookConnection implements OAuthConnectionInterface
         $curl = new Curl();
         $params = array('access_token' => $access_token, 'message' => $message->message);
 
-        $curl->simple_post($config['oauth'][static::NETWORK]['publish_url'], $params);
-
-        if (isset($curl->info['http_code']) && ($curl->info['http_code'] == '200'))
+        if ($curl->simple_post($config['oauth'][static::NETWORK]['publish_url'], $params))
         {
             return 'ok';
         }
         else
         {
-            if ($curl->http_code == '400')
+            if ($this->check_access_token_state($access_token) === 'expired')
             {
-                $result = $this->check_access_token_state($access_token);
-
-                if ($result === 'expired')
-                {
-                    return 'token_expired';
-                }
-                else
-                {
-                    # TODO: find a way to check if the posting fails for a duplicated message
-                    return $curl->http_code;
-                }
+                return 'token_expired';
+            }
+            else
+            {
+                # TODO: find a way to check if the posting fails for a duplicated message
+                return $curl->http_code;
             }
         }
     }
