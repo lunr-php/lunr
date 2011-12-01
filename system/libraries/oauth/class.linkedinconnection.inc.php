@@ -146,7 +146,6 @@ class LinkedinConnection extends OAuthConnection
             if ($result['http_code'] == '201')
             {
                 return 'ok';
-
             }
         }
         catch(\OAuthException $e)
