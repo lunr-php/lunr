@@ -132,23 +132,40 @@ class TwitterConnection extends OAuthConnection
         }
         try
         {
-            $result = $this->handler->fetch(
+            $this->handler->fetch(
                 $config['oauth'][static::NETWORK]['publish_url'],
                 array('status' => $message->message)
             );
 
             $result = $this->handler->getLastResponseInfo();
-            return $result['http_code'];
+
+            if ($result['http_code'] == '200')
+            {
+                return 'ok';
+            }
         }
         catch (\OAuthException $e)
         {
+            $error_code = $e->getCode();
+
             Output::error('OauthException posting a message to ' . static::NETWORK .
-                ' Error code : ' . $e->getCode() .
+                ' Error code : ' . $error_code .
                 '; Message: ' . $e->getMessage(),
                 $config['oauth']['log']
             );
 
-            return $e->getCode();
+            if ($error_code == '401')
+            {
+                return 'token_expired';
+            }
+            elseif ($error_code == '403')
+            {
+                return 'duplicated_message';
+            }
+            else
+            {
+                return $error_code;
+            }
         }
     }
 
