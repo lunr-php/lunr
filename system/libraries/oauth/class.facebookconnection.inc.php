@@ -180,7 +180,22 @@ class FacebookConnection implements OAuthConnectionInterface
         }
         else
         {
-            return $curl->http_code;
+            if ($curl->http_code == '400')
+            {
+                $result = $this->check_access_token_state($access_token);
+
+                if ($result == 'expired')
+                {
+                    return '401';
+                }
+                elseif ($result == 'other_error')
+                {
+                    # TODO: find a way to check if the posting fails for a duplicated message,
+                    #       assuming that is the reason, because is the most common cause.
+                    return '403';
+                }
+                return FALSE;
+            }
         }
     }
 
