@@ -30,12 +30,38 @@ class C2DM
 {
 
     /**
+     * Id of sent push notification
+     * @var String
+     */
+    private $id;
+
+    /**
+     * Curl error message
+     * @var String
+     */
+    private $errmsg;
+
+    /**
+     * HTTP status code of the request made
+     * @var Integer
+     */
+    private $http_code;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         global $config;
         include_once 'conf.c2dm.inc.php';
+        // default: no error
+        $this->errmsg = '';
+
+        // default: no ID
+        $this->id   = '';
+
+        // set http_code to zero to indicate we haven't made a request yet
+        $this->http_code = 0;
     }
 
     /**
@@ -43,7 +69,30 @@ class C2DM
      */
     public function __destruct()
     {
+        unset($this->errmsg);
+        unset($this->id);
+        unset($this->http_code);
+    }
 
+    /**
+     * Get access to certain private attributes.
+     *
+     * This gives access to errno, errmsg and info.
+     *
+     * @param String $name Attribute name
+     *
+     * @return mixed $return Value of the chosen attribute
+     */
+    public function __get($name)
+    {
+        switch ($name)
+        {
+            case 'errmsg':
+            case 'id':
+            case 'http_code':
+                return $this->{$name};
+                break;
+        }
     }
 
     /**
@@ -115,31 +164,46 @@ class C2DM
         $curl->set_http_header($header);
 
         $returned_data = $curl->simple_post($config['c2dm']['google_send_url'], $data);
+        $this->http_code = $curl->http_code;
 
         if ($returned_data === FALSE)
         {
             if($curl->http_code == 401)
             {
                 Output::error("Authorization token invalid\n\n", $config['c2dm']['log']);
+                $this->errmsg = "Authorization token invalid";
             }
             if($curl->http_code == 503)
             {
                 Output::error("Server temporarily unavailable\n\n", $config['c2dm']['log']);
+                $this->errmsg = "Server temporarily unavailable";
             }
             else
             {
                 Output::error("Error sending notification\n\n", $config['c2dm']['log']);
+                $this->errmsg = "Error sending notification";
             }
 
             unset($curl);
-            return FALSE;
         }
         else
         {
-            unset($curl);
-            Output::error("Notification sent: $message\n\n", $config['c2dm']['log']);
-            return TRUE;
+            $result = substr($returned_data, $curl->info['header_size']);
+            if(stripos($result, "id") !== FALSE){
+                unset($curl);
+                Output::error("Notification sent: $message\n\n", $config['c2dm']['log']);
+                $result = str_replace("id=", "", $result);
+                $this->id = $result;
+                return TRUE;
+            }
+            else
+            {
+                $result = str_replace("Error=", "", $result);
+                Output::error("Error sending notification:  $result\n\n", $config['c2dm']['log']);
+                $this->errmsg = $result;
+            }
         }
+        return FALSE;
     }
 
 }
