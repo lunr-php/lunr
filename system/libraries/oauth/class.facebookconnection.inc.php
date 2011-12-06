@@ -197,17 +197,14 @@ class FacebookConnection implements OAuthConnectionInterface
         {
             return 'ok';
         }
+        elseif ($this->check_access_token_state($access_token) === 'expired')
+        {
+            return 'token_expired';
+        }
         else
         {
-            if ($this->check_access_token_state($access_token) === 'expired')
-            {
-                return 'token_expired';
-            }
-            else
-            {
-                # TODO: find a way to check if the posting fails for a duplicated message
-                return $curl->http_code;
-            }
+            # TODO: find a way to check if the posting fails for a duplicated message
+            return $curl->http_code;
         }
     }
 
