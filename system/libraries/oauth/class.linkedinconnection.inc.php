@@ -38,38 +38,6 @@ class LinkedinConnection extends OAuthConnection
     const NETWORK = 'linkedin';
 
     /**
-     * Linkedin error number
-     * @var Integer
-     */
-    private $errno;
-
-    /**
-     * Linkedin error message
-     * @var String
-     */
-    private $errmsg;
-
-    /**
-     * Get access to certain private attributes.
-     *
-     * This gives access to errno, errmsg.
-     *
-     * @param String $name Attribute name
-     *
-     * @return mixed $return Value of the chosen attribute
-     */
-    public function __get($name)
-    {
-        switch ($name)
-        {
-            case 'errno':
-            case 'errmsg':
-                return $this->{$name};
-                break;
-        }
-    }
-
-    /**
      * Constructor.
      *
      * @param String $token User access token
