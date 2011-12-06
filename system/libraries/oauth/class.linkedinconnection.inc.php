@@ -38,6 +38,38 @@ class LinkedinConnection extends OAuthConnection
     const NETWORK = 'linkedin';
 
     /**
+     * Linkedin error number
+     * @var Integer
+     */
+    private $errno;
+
+    /**
+     * Linkedin error message
+     * @var String
+     */
+    private $errmsg;
+
+    /**
+     * Get access to certain private attributes.
+     *
+     * This gives access to errno, errmsg.
+     *
+     * @param String $name Attribute name
+     *
+     * @return mixed $return Value of the chosen attribute
+     */
+    public function __get($name)
+    {
+        switch ($name)
+        {
+            case 'errno':
+            case 'errmsg':
+                return $this->{$name};
+                break;
+        }
+    }
+
+    /**
      * Constructor.
      *
      * @param String $token User access token
@@ -145,27 +177,29 @@ class LinkedinConnection extends OAuthConnection
 
             if ($result['http_code'] == '201')
             {
-                return 'ok';
+                return TRUE;
             }
         }
         catch(\OAuthException $e)
         {
-            $error_code = $e->getCode();
+            $this->errno = $e->getCode();
+            $message = $e->getMessage();
 
             Output::error('Oauth Exception posting a message to ' . static::NETWORK .
-                ' Error code : ' . $error_code .
-                '; Message: ' . $e->getMessage(),
+                ' Error code : ' . $this->errno .
+                '; Message: ' . $message,
                 $config['oauth']['log']
             );
 
-            if ($error_code == '401')
+            if ($this->errno == '401')
             {
-                return 'token_expired';
+                $this->errmsg = 'Token expired or invalid';
             }
             else
             {
-                return $error_code;
+                $this->errmsg = $message;
             }
+            return FALSE;
         }
     }
 
