@@ -42,6 +42,18 @@ abstract class OAuthConnection implements OAuthConnectionInterface
     protected $token;
 
     /**
+     * Error number
+     * @var Integer
+     */
+    protected $errno;
+
+    /**
+     * Error message
+     * @var String
+     */
+    protected $errmsg;
+
+    /**
      * Name of the OAuth Service to connect to.
      * @var String
      */
@@ -80,6 +92,26 @@ abstract class OAuthConnection implements OAuthConnectionInterface
     {
         unset($this->token);
         unset($this->handler);
+    }
+
+    /**
+     * Get access to certain private attributes.
+     *
+     * This gives access to errno, errmsg.
+     *
+     * @param String $name Attribute name
+     *
+     * @return mixed $return Value of the chosen attribute
+     */
+    public function __get($name)
+    {
+        switch ($name)
+        {
+            case 'errno':
+            case 'errmsg':
+                return $this->{$name};
+                break;
+        }
     }
 
     /**
