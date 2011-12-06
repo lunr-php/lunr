@@ -74,6 +74,18 @@ class FacebookConnection implements OAuthConnectionInterface
     private $token;
 
     /**
+     * Facebook error number
+     * @var Integer
+     */
+    private $errno;
+
+    /**
+     * Facebook error number
+     * @var String
+     */
+    private $errmsg;
+
+    /**
      * Constructor.
      *
      * @param String $token User access token
@@ -89,6 +101,26 @@ class FacebookConnection implements OAuthConnectionInterface
     public function __destruct()
     {
         unset($this->token);
+    }
+
+    /**
+     * Get access to certain private attributes.
+     *
+     * This gives access to errno, errmsg.
+     *
+     * @param String $name Attribute name
+     *
+     * @return mixed $return Value of the chosen attribute
+     */
+    public function __get($name)
+    {
+        switch ($name)
+        {
+            case 'errno':
+            case 'errmsg':
+                return $this->{$name};
+                break;
+        }
     }
 
     /**
@@ -195,16 +227,20 @@ class FacebookConnection implements OAuthConnectionInterface
 
         if ($curl->simple_post($config['oauth'][static::NETWORK]['publish_url'], $params))
         {
-            return 'ok';
+            return TRUE;
         }
         elseif ($this->check_access_token_state($access_token) === 'expired')
         {
-            return 'token_expired';
+            $this->errno = '401';
+            $this->errmsg = 'Token expired';
+            return FALSE;
         }
         else
         {
             # TODO: find a way to check if the posting fails for a duplicated message
-            return $curl->http_code;
+            $this->errno = $curl->http_code;
+            $this->errmsg = 'Unknown error';
+            return FALSE;
         }
     }
 
