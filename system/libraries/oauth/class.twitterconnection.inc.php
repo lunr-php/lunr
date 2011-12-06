@@ -37,6 +37,37 @@ class TwitterConnection extends OAuthConnection
      */
     const NETWORK = 'twitter';
 
+    /**
+     * Twittter error number
+     * @var Integer
+     */
+    private $errno;
+
+    /**
+     * Twitter error message
+     * @var String
+     */
+    private $errmsg;
+
+    /**
+     * Get access to certain private attributes.
+     *
+     * This gives access to errno, errmsg.
+     *
+     * @param String $name Attribute name
+     *
+     * @return mixed $return Value of the chosen attribute
+     */
+    public function __get($name)
+    {
+        switch ($name)
+        {
+            case 'errno':
+            case 'errmsg':
+                return $this->{$name};
+                break;
+        }
+    }
 
     /**
      * Constructor.
@@ -141,35 +172,38 @@ class TwitterConnection extends OAuthConnection
 
             if ($result['http_code'] == '200')
             {
-                return 'ok';
+                return TRUE;
             }
             else
             {
-                return $result['http_code'];
+                $this->errno = $result['http_code'];
+                $this->errmsg = 'Unknown response';
+                return FALSE;
             }
         }
         catch (\OAuthException $e)
         {
-            $error_code = $e->getCode();
+            $this->errno = $e->getCode();
 
             Output::error('OauthException posting a message to ' . static::NETWORK .
-                ' Error code : ' . $error_code .
+                ' Error code : ' . $this->errno .
                 '; Message: ' . $e->getMessage(),
                 $config['oauth']['log']
             );
 
-            if ($error_code == '401')
+            if ($this->errno == '401')
             {
-                return 'token_expired';
+                $this->errmsg = 'Token expired or invalid';
             }
-            elseif ($error_code == '403')
+            elseif ($this->errno == '403')
             {
-                return 'duplicated_message';
+                $this->errmsg = 'Message duplicated';
             }
             else
             {
-                return $error_code;
+                $this->errmsg = 'Unknown error';
             }
+            return FALSE;
         }
     }
 
