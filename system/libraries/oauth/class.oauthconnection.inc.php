@@ -42,7 +42,7 @@ abstract class OAuthConnection implements OAuthConnectionInterface
     protected $token;
 
     /**
-     * Error number
+     * Error number (401 when token expired, 403 if message duplicated, another number otherwise)
      * @var Integer
      */
     protected $errno;
