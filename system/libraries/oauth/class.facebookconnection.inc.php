@@ -74,13 +74,13 @@ class FacebookConnection implements OAuthConnectionInterface
     private $token;
 
     /**
-     * Facebook error number
+     * Facebook error number (401 when token expired, another number otherwise)
      * @var Integer
      */
     private $errno;
 
     /**
-     * Facebook error number
+     * Facebook error message
      * @var String
      */
     private $errmsg;
@@ -215,8 +215,7 @@ class FacebookConnection implements OAuthConnectionInterface
      * @param SocialMessage $message             SocialMessage object already filled
      * @param String        $access_token_secret Unused for Facebook
      *
-     * @return Array Array containing the 'oauth token' and the 'oauth token secret',
-     *               FALSE otherwise.
+     * @return Boolean TRUE if the post to Facebook was done properly FALSE otherwise.
      */
     public function post_message($access_token, SocialMessage $message, $access_token_secret = '')
     {
