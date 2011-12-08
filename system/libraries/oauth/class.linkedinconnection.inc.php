@@ -118,7 +118,7 @@ class LinkedinConnection extends OAuthConnection
      * @param SocialMessage $message             SocialMessage object already filled
      * @param String        $access_token_secret Access token secret
      *
-     * @return Array Linkedin response information.
+     * @return Boolean TRUE if the post to Linkedin was done properly FALSE otherwise.
      */
     public function post_message($access_token, SocialMessage $message, $access_token_secret = '')
     {
