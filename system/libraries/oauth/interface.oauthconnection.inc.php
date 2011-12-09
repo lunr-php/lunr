@@ -75,8 +75,11 @@ interface OAuthConnectionInterface
      * @param SocialMessage $message             SocialMessage object already filled
      * @param String        $access_token_secret Access token secret
      *
-     * @return Array $return Array containing the 'oauth token' and the 'oauth token secret',
-     *                       FALSE otherwise.
+     * @return Boolean TRUE if the post to the Social Network was done properly, FALSE otherwise.
+     *                 When it's FALSE, additionally is stored an error number (errno) and error
+     *                 message (errmsg).
+     *                 Possible error numbers: 401 for token expired or invalid, 403 for message
+     *                 duplicated or other number for specific errors.
      */
     public function post_message($access_token, SocialMessage $message, $access_token_secret = '');
 
