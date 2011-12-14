@@ -92,6 +92,9 @@ class C2DM
             case 'http_code':
                 return $this->{$name};
                 break;
+            default:
+                return NULL;
+                break;
         }
     }
 
@@ -170,39 +173,34 @@ class C2DM
         {
             if($curl->http_code == 401)
             {
-                Output::error("Authorization token invalid\n\n", $config['c2dm']['log']);
                 $this->errmsg = "Authorization token invalid";
             }
             if($curl->http_code == 503)
             {
-                Output::error("Server temporarily unavailable\n\n", $config['c2dm']['log']);
                 $this->errmsg = "Server temporarily unavailable";
             }
             else
             {
-                Output::error("Error sending notification\n\n", $config['c2dm']['log']);
                 $this->errmsg = "Error sending notification";
             }
 
-            unset($curl);
         }
         else
         {
             $result = substr($returned_data, $curl->info['header_size']);
             if(stripos($result, "id") !== FALSE){
-                unset($curl);
-                Output::error("Notification sent: $message\n\n", $config['c2dm']['log']);
                 $result = str_replace("id=", "", $result);
                 $this->id = $result;
+                unset($curl);
                 return TRUE;
             }
             else
             {
                 $result = str_replace("Error=", "", $result);
-                Output::error("Error sending notification:  $result\n\n", $config['c2dm']['log']);
                 $this->errmsg = $result;
             }
         }
+        unset($curl);
         return FALSE;
     }
 

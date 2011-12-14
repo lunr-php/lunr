@@ -125,6 +125,9 @@ class Curl
             case 'http_code':
                 return $this->{$name};
                 break;
+            default:
+                return NULL;
+                break;
         }
     }
 
