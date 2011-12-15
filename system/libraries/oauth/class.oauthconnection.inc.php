@@ -111,6 +111,9 @@ abstract class OAuthConnection implements OAuthConnectionInterface
             case 'errmsg':
                 return $this->{$name};
                 break;
+            default:
+                return NULL;
+                break;
         }
     }
 
