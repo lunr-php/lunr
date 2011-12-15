@@ -294,7 +294,7 @@ class FacebookConnection implements OAuthConnectionInterface
      *                requested without offline_access parameter and the user has logged
      *                out, 'valid' if the token is valid and 'other_error' otherwise.
      */
-    public function check_access_token_state($access_token)
+    private function check_access_token_state($access_token)
     {
         global $config;
 
