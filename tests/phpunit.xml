@@ -26,6 +26,7 @@
             <file>tests/system/libraries/core/class.configuration.arrayaccess.test.php</file>
             <file>tests/system/libraries/core/class.configuration.loadfile.test.php</file>
             <file>tests/system/libraries/core/class.configuration.arrayusage.test.php</file>
+            <file>tests/system/libraries/core/class.locator.test.php</file>
             <file>tests/system/libraries/core/class.verification.base.test.php</file>
             <file>tests/system/libraries/core/class.verification.nullpointer.test.php</file>
             <file>tests/system/libraries/core/class.verification.checks.test.php</file>
