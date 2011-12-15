@@ -77,7 +77,7 @@ class C2DM
     /**
      * Get access to certain private attributes.
      *
-     * This gives access to errno, errmsg and info.
+     * This gives access to errmsg, id and http_code.
      *
      * @param String $name Attribute name
      *
