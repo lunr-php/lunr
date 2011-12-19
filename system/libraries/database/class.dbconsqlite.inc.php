@@ -487,10 +487,12 @@ class DBConSqlite extends DBCon
      *
      * @param String $col   Column name
      * @param String $order Order ASCending or DESCending
+     * @param String $escape Whether to escape the select statement or not.
+     *                       Default to "TRUE"
      *
      * @return void
      */
-    public function order_by($col, $order = 'ASC')
+    public function order_by($col, $order = 'ASC', $escape = TRUE)
     {
 
     }

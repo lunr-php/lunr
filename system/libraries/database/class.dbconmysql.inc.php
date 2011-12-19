@@ -1073,10 +1073,12 @@ class DBConMySQL extends DBCon
      *
      * @param String $col   Column name
      * @param String $order Order ASCending or DESCending
+     * @param String $escape Whether to escape the select statement or not.
+     *                       Default to "TRUE"
      *
      * @return void
      */
-    public function order_by($col, $order = 'ASC')
+    public function order_by($col, $order = 'ASC', $escape = TRUE)
     {
         if ($this->order == '')
         {
@@ -1086,7 +1088,15 @@ class DBConMySQL extends DBCon
         {
             $this->order .= ', ';
         }
-        $this->order .= $this->escape_columns($col) . $order;
+
+        if ($escape === TRUE)
+        {
+            $this->order .= $this->escape_columns($col) . $order;
+        }
+        else
+        {
+            $this->order .= $col . ' ' . $order;
+        }
     }
 
     /**
