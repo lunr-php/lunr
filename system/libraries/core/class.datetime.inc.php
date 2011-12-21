@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the class M2DateTime, which is a collection
+ * This file contains the class DateTime, which is a collection
  * of commonly used Date and Time methods.
  *
  * PHP Version 5.3
@@ -31,11 +31,27 @@ class DateTime
 {
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+
+    }
+
+    /**
+     * Destructor
+     */
+    public function __destruct()
+    {
+
+    }
+
+    /**
      * Return today's date (YYYY-MM-DD).
      *
      * @return String Today's date
      */
-    public static function today()
+    public function today()
     {
         return date('Y-m-d');
     }
@@ -45,7 +61,7 @@ class DateTime
      *
      * @return String Tomorrow's date
      */
-    public static function yesterday()
+    public function yesterday()
     {
         return date('Y-m-d', strtotime('-1 day'));
     }
@@ -55,7 +71,7 @@ class DateTime
      *
      * @return String Tomorrow's date
      */
-    public static function tomorrow()
+    public function tomorrow()
     {
         return date('Y-m-d', strtotime('+1 day'));
     }
@@ -69,7 +85,7 @@ class DateTime
      *
      * @return String Delayed date
      */
-    public static function delayed_date($delay, $timestamp = 0)
+    public function delayed_date($delay, $timestamp = 0)
     {
         if ($timestamp === 0)
         {
@@ -87,7 +103,7 @@ class DateTime
      *
      * @return Integer Delayed timestamp
      */
-    public static function delayed_timestamp($delay, $timestamp = 0)
+    public function delayed_timestamp($delay, $timestamp = 0)
     {
         if ($timestamp === 0)
         {
@@ -105,7 +121,7 @@ class DateTime
      *
      * @return String $return DateTime definition, format YYYY-MM-DD HH:MM:SS
      */
-    public static function delayed_datetime($delay, $timestamp = 0)
+    public function delayed_datetime($delay, $timestamp = 0)
     {
         if ($timestamp === 0)
         {
@@ -123,7 +139,7 @@ class DateTime
     *
     * @return String $return Delayed date, format "DD Month, YYYY"
     */
-    public static function delayed_text_date($delay, $locale = 'en_US', $timestamp = 0)
+    public function delayed_text_date($delay, $locale = 'en_US', $timestamp = 0)
     {
         if ($timestamp === 0)
         {
@@ -137,7 +153,7 @@ class DateTime
      *
      * @return String current time
      */
-    public static function now()
+    public function now()
     {
         return strftime('%H:%M:%S', time());
     }
@@ -151,7 +167,7 @@ class DateTime
      *
      * @return String $date Date as a string
      */
-    public static function get_short_textmonth($timestamp = FALSE, $locale = 'en_US')
+    public function get_short_textmonth($timestamp = FALSE, $locale = 'en_US')
     {
         setlocale(LC_ALL, $locale);
         if ($timestamp === FALSE)
@@ -171,7 +187,7 @@ class DateTime
      *
      * @return String $date Date as a string
      */
-    public static function get_date($timestamp)
+    public function get_date($timestamp)
     {
         return date('Y-m-d', $timestamp);
     }
@@ -183,7 +199,7 @@ class DateTime
      *
      * @return String $time Time as a string
      */
-    public static function get_time($timestamp)
+    public function get_time($timestamp)
     {
         return strftime('%H:%M:%S', $timestamp);
     }
@@ -195,7 +211,7 @@ class DateTime
      *
      * @return String $datetime Date & Time as a string
      */
-    public static function get_datetime($timestamp = FALSE)
+    public function get_datetime($timestamp = FALSE)
     {
         if ($timestamp === FALSE)
         {
@@ -216,7 +232,7 @@ class DateTime
      *
      * @return String $date Date as a string
      */
-    public static function get_short_date($timestamp = FALSE, $locale = 'en_US')
+    public function get_short_date($timestamp = FALSE, $locale = 'en_US')
     {
         setlocale(LC_ALL, $locale);
         if ($timestamp === FALSE)
@@ -238,7 +254,7 @@ class DateTime
      *
      * @return String $date Date as a string
      */
-    public static function get_text_date($timestamp = FALSE, $locale = 'en_US')
+    public function get_text_date($timestamp = FALSE, $locale = 'en_US')
     {
         setlocale(LC_ALL, $locale);
         if ($timestamp === FALSE)
@@ -258,7 +274,7 @@ class DateTime
      *
      * @return Boolean $return True if it is valid, False otherwise
      */
-    public static function is_time($string)
+    public function is_time($string)
     {
         // accepts HHH:MM:SS, e.g. 23:59:30 or 12:30 or 120:17
         if (preg_match('/^(\-)?[0-9]{1,3}(:[0-5][0-9]){1,2}$/', $string))
@@ -279,7 +295,7 @@ class DateTime
      * @return Boolean $return True if it is a proper date String,
      *                         False otherwise
      */
-    public static function is_date($string)
+    public function is_date($string)
     {
         $leap_day = '/^(\d{1,4})[\- \/ \.]02[\- \/ \.]29$/';
 
@@ -315,7 +331,7 @@ class DateTime
      *
      * @return Integer -1 if $a < $b, 1 otherwise
      */
-    public static function sort_compare_datetime($a, $b)
+    public function sort_compare_datetime($a, $b)
     {
         $a = strtotime($a);
         $b = strtotime($b);
