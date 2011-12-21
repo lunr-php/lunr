@@ -245,7 +245,28 @@ class Verification
      */
     public static function is_date($value)
     {
-        return M2DateTime::is_date($value);
+        $leap_day = '/^(\d{1,4})[\- \/ \.]02[\- \/ \.]29$/';
+
+        if (preg_match($leap_day, $string))
+        {
+            $year = preg_replace('/[\- \/ \.]02[\- \/ \.]29$/', '', $string);
+            return ((($year % 4) == 0) && ((($year % 100) != 0) || (($year %400) == 0)));
+        }
+        else
+        {
+            $feb     = '02[\- \/ \.](0[1-9]|1[0-9]|2[0-8])';
+            $_30days = '(0[469]|11)[\- \/ \.](0[1-9]|[12][0-9]|30)';
+            $_31days = '(0[13578]|1[02])[\- \/ \.](0[1-9]|[12][0-9]|3[01])';
+
+            if (preg_match("/^(\d{1,4})[\- \/ \.]($_31days|$_30days|$feb)$/", $string))
+            {
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
     }
 
     /**
@@ -257,7 +278,15 @@ class Verification
      */
     public static function is_time($value)
     {
-        return M2DateTime::is_time($value);
+        // accepts HHH:MM:SS, e.g. 23:59:30 or 12:30 or 120:17
+        if (preg_match('/^(\-)?[0-9]{1,3}(:[0-5][0-9]){1,2}$/', $string))
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
     }
 
 }
