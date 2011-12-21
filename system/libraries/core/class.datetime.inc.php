@@ -31,11 +31,27 @@ class DateTime
 {
 
     /**
+     * Date/Time format used for function calls.
+     * @var String
+     */
+    private $datetime_format;
+
+    /**
+     * Posix Locale used for text representations.
+     * @var String
+     */
+    private $locale;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
+        // set a default DateTime format
+        $this->datetime_format = 'Y-m-d';
 
+        // set a default POSIX locale
+        $this->locale = 'en_US';
     }
 
     /**
@@ -43,73 +59,96 @@ class DateTime
      */
     public function __destruct()
     {
-
+        unset($this->datetime_format);
+        unset($this->locale);
     }
 
     /**
-     * Return today's date (YYYY-MM-DD).
+     * Set used Date/Time format.
      *
-     * @return String Today's date
+     * @param String $format Date/Time format to use
+     *
+     * @return DateTime $self Reference to the class instance.
+     */
+    public function set_datetime_format($format)
+    {
+        $this->datetime_format = $format;
+        return $this;
+    }
+
+    /**
+     * Set used POSIX locale format.
+     *
+     * @param String $locale  POSIX locale to use
+     * @param String $charset Default charset to be used (optional, UTF-8 by default)
+     *
+     * @return DateTime $self Reference to the class instance.
+     */
+    public function set_locale($locale, $charset = 'UTF-8')
+    {
+        $this->locale = $locale . '.' . $charset;
+        setlocale(LC_ALL, $this->locale);
+
+        return $this;
+    }
+
+    /**
+     * Return today's date/time.
+     *
+     * @return String Current Date/Time
      */
     public function today()
     {
-        return date('Y-m-d');
+        return strftime($this->datetime_format);
     }
 
     /**
-     * Return yesterday's date (YYYY-MM-DD).
+     * Alias for today().
+     *
+     * @return String Current Date/Time
+     */
+    public function now()
+    {
+        return $this->today();
+    }
+
+    /**
+     * Return yesterday's date.
      *
      * @return String Tomorrow's date
      */
     public function yesterday()
     {
-        return date('Y-m-d', strtotime('-1 day'));
+        return strftime($this->datetime_format, strtotime('-1 day'));
     }
 
     /**
-     * Return tomorrow's date (YYYY-MM-DD).
+     * Return tomorrow's date.
      *
      * @return String Tomorrow's date
      */
     public function tomorrow()
     {
-        return date('Y-m-d', strtotime('+1 day'));
+        return strftime($this->datetime_format, strtotime('+1 day'));
     }
 
     /**
-     * Return a date of a certain timeframe in the past/future.
+     * Returns a MySQL compatible Date & Time definition.
      *
-     * @param String  $delay     Definition for a timeframe
-     *                           ("+1 day", "-10 minutes")
-     * @param Integer $timestamp Base timestamp, now by default (optional)
+     * @param Integer $timestamp PHP-like Unix Timestamp (optional)
      *
-     * @return String Delayed date
+     * @return String $datetime Date & Time as a string
      */
-    public function delayed_date($delay, $timestamp = 0)
+    public function get_datetime($timestamp = FALSE)
     {
-        if ($timestamp === 0)
+        if ($timestamp === FALSE)
         {
-            $timestamp = time();
+            return strftime($this->datetime_format, time());
         }
-        return date('Y-m-d', strtotime($delay, $timestamp));
-    }
-
-    /**
-     * Return a timestamp of a certain timeframe in the past/future.
-     *
-     * @param String  $delay     Definition for a timeframe
-     *                           ("+1 day", "-10 minutes")
-     * @param Integer $timestamp Base timestamp, now by default (optional)
-     *
-     * @return Integer Delayed timestamp
-     */
-    public function delayed_timestamp($delay, $timestamp = 0)
-    {
-        if ($timestamp === 0)
+        else
         {
-            $timestamp = time();
+            return strftime($this->datetime_format, $timestamp);
         }
-        return strtotime($delay, $timestamp);
     }
 
     /**
@@ -127,144 +166,27 @@ class DateTime
         {
             $timestamp = time();
         }
-        return date('Y-m-d H:i:s', strtotime($delay, $timestamp));
+
+        return strftime($this->datetime_format, strtotime($delay, $timestamp));
     }
 
     /**
-    * Return a delayed date string formatted as "DD Month, YYYY" (eg 05 December, 2011).
-    *
-    * @param String  $delay     Definition for a timeframe ("+1 day", "-10 minutes")
-    * @param String  $locale    The locale that should be used for the month
-    * @param Integer $timestamp Base timestamp, now by default (optional)
-    *
-    * @return String $return Delayed date, format "DD Month, YYYY"
-    */
-    public function delayed_text_date($delay, $locale = 'en_US', $timestamp = 0)
+     * Return a timestamp of a certain timeframe in the past/future.
+     *
+     * @param String  $delay     Definition for a timeframe
+     *                           ("+1 day", "-10 minutes")
+     * @param Integer $timestamp Base timestamp, now by default (optional)
+     *
+     * @return Integer Delayed timestamp
+     */
+    public function delayed_timestamp($delay, $timestamp = 0)
     {
         if ($timestamp === 0)
         {
             $timestamp = time();
         }
-        return M2DateTime::get_text_date(strtotime($delay, $timestamp), $locale);
-    }
 
-    /**
-     * Return the current time (HH:MM:SS).
-     *
-     * @return String current time
-     */
-    public function now()
-    {
-        return strftime('%H:%M:%S', time());
-    }
-
-    /**
-     * Return a date formatted as "MMM" (DEC).
-     *
-     * @param Integer $timestamp PHP-like Unix Timestamp (optional)
-     * @param String  $locale    The locale that should be used for the month
-     *                           names (optional, en_US by default)
-     *
-     * @return String $date Date as a string
-     */
-    public function get_short_textmonth($timestamp = FALSE, $locale = 'en_US')
-    {
-        setlocale(LC_ALL, $locale);
-        if ($timestamp === FALSE)
-        {
-            return strtoupper(strftime('%b', time()));
-        }
-        else
-        {
-            return strtoupper(strftime('%b', $timestamp));
-        }
-    }
-
-    /**
-     * Returns a MySQL compatible date definition.
-     *
-     * @param Integer $timestamp PHP-like Unix Timestamp
-     *
-     * @return String $date Date as a string
-     */
-    public function get_date($timestamp)
-    {
-        return date('Y-m-d', $timestamp);
-    }
-
-    /**
-     * Returns a MySQL compatible time definition.
-     *
-     * @param Integer $timestamp PHP-like Unix Timestamp
-     *
-     * @return String $time Time as a string
-     */
-    public function get_time($timestamp)
-    {
-        return strftime('%H:%M:%S', $timestamp);
-    }
-
-    /**
-     * Returns a MySQL compatible Date & Time definition.
-     *
-     * @param Integer $timestamp PHP-like Unix Timestamp (optional)
-     *
-     * @return String $datetime Date & Time as a string
-     */
-    public function get_datetime($timestamp = FALSE)
-    {
-        if ($timestamp === FALSE)
-        {
-            return date('Y-m-d H:i', time());
-        }
-        else
-        {
-            return date('Y-m-d H:i', $timestamp);
-        }
-    }
-
-    /**
-     * Return a date formatted as "DD MMM" (eg 05 Dec).
-     *
-     * @param Integer $timestamp PHP-like Unix Timestamp (optional)
-     * @param String  $locale    The locale that should be used for the month
-     *                           names (optional, en_US by default)
-     *
-     * @return String $date Date as a string
-     */
-    public function get_short_date($timestamp = FALSE, $locale = 'en_US')
-    {
-        setlocale(LC_ALL, $locale);
-        if ($timestamp === FALSE)
-        {
-            return strtoupper(strftime('%d %b', time()));
-        }
-        else
-        {
-            return strtoupper(strftime('%d %b', $timestamp));
-        }
-    }
-
-    /**
-     * Return a date formatted as "DD Month, YYYY" (eg 04 August, 2011).
-     *
-     * @param Integer $timestamp PHP-like Unix Timestamp (optional)
-     * @param String  $locale    The locale that should be used for the month
-     *                           names (optional, en_US by default)
-     *
-     * @return String $date Date as a string
-     */
-    public function get_text_date($timestamp = FALSE, $locale = 'en_US')
-    {
-        setlocale(LC_ALL, $locale);
-        if ($timestamp === FALSE)
-        {
-            return ucwords(strftime('%d %B, %Y', time()));
-        }
-        else
-        {
-            return ucwords(strftime('%d %B, %Y', $timestamp));
-        }
+        return strtotime($delay, $timestamp);
     }
 
     /**
