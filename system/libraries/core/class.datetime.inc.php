@@ -27,7 +27,7 @@ namespace Lunr\Libraries\Core;
  * @author     Jose Viso <jose@m2mobi.com>
  *
  */
-class M2DateTime
+class DateTime
 {
 
     /**
