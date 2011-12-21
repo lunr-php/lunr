@@ -46,7 +46,7 @@ class DateTime
     public function __construct()
     {
         // set a default DateTime format
-        $this->datetime_format = 'Y-m-d';
+        $this->datetime_format = '%Y-%m-%d';
 
         // set a default POSIX locale
         $this->locale = 'en_US';
