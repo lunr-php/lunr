@@ -12,7 +12,6 @@
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Jose Viso <jose@m2mobi.com>
- *
  */
 
 namespace Lunr\Libraries\Core;
@@ -25,7 +24,6 @@ namespace Lunr\Libraries\Core;
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Jose Viso <jose@m2mobi.com>
- *
  */
 class DateTime
 {
@@ -43,7 +41,7 @@ class DateTime
     private $locale;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -55,7 +53,7 @@ class DateTime
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
