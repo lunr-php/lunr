@@ -1071,8 +1071,8 @@ class DBConMySQL extends DBCon
     /**
      * Define a ORDER BY clause.
      *
-     * @param String $col   Column name
-     * @param String $order Order ASCending or DESCending
+     * @param String $col    Column name
+     * @param String $order  Order ASCending or DESCending
      * @param String $escape Whether to escape the select statement or not.
      *                       Default to "TRUE"
      *

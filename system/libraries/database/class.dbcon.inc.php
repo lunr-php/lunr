@@ -487,8 +487,8 @@ abstract class DBCon
     /**
      * Define a ORDER BY clause.
      *
-     * @param String $col   Column name
-     * @param String $order Order ASCending or DESCending
+     * @param String $col    Column name
+     * @param String $order  Order ASCending or DESCending
      * @param String $escape Whether to escape the select statement or not.
      *                       Default to "TRUE"
      *
@@ -670,10 +670,10 @@ abstract class DBCon
                 }
                 else
                 {
-                    $list = "";
+                    $list = '';
                     foreach ($data as $entry)
                     {
-                        $list .= $this->prepare_data($entry, $type) . ",";
+                        $list .= $this->prepare_data($entry, $type) . ',';
                     }
                     return trim($list, ',');
                 }
@@ -691,7 +691,7 @@ abstract class DBCon
         }
         elseif ($type == 'keys')
         {
-            return "";
+            return '';
         }
         else
         {
