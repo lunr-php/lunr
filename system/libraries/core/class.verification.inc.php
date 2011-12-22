@@ -126,7 +126,7 @@ class Verification
                     {
                         if (call_user_func('static::is_' . $rule, $value) === FALSE)
                         {
-                            $val = print_r($value,TRUE);
+                            $val = print_r($value, TRUE);
                             $type  = gettype($value);
                             $msg   = "Rule '$rule' failed for '$key' with value '$val' of type '$type'!";
                             Output::errorln($error_prefix . $msg, $file);
@@ -140,7 +140,7 @@ class Verification
                     if (call_user_func('static::is_' . $ruleset[$key], $value) === FALSE)
                     {
                         $rule  = $ruleset[$key];
-                        $val = print_r($value,TRUE);
+                        $val = print_r($value, TRUE);
                         $type  = gettype($value);
                         $msg   = "Rule '$rule' failed for '$key' with value '$val' of type '$type'!";
                         Output::errorln($error_prefix . $msg, $file);
