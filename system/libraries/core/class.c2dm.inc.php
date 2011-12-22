@@ -173,30 +173,31 @@ class C2DM
         {
             if($curl->http_code == 401)
             {
-                $this->errmsg = "Authorization token invalid";
+                $this->errmsg = 'Authorization token invalid';
             }
             if($curl->http_code == 503)
             {
-                $this->errmsg = "Server temporarily unavailable";
+                $this->errmsg = 'Server temporarily unavailable';
             }
             else
             {
-                $this->errmsg = "Error sending notification";
+                $this->errmsg = 'Error sending notification';
             }
 
         }
         else
         {
             $result = substr($returned_data, $curl->info['header_size']);
-            if(stripos($result, "id") !== FALSE){
-                $result = str_replace("id=", "", $result);
+            if(stripos($result, 'id') !== FALSE)
+            {
+                $result = str_replace('id=', '', $result);
                 $this->id = $result;
                 unset($curl);
                 return TRUE;
             }
             else
             {
-                $result = str_replace("Error=", "", $result);
+                $result = str_replace('Error=', '', $result);
                 $this->errmsg = $result;
             }
         }
