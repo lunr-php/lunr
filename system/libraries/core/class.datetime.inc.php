@@ -49,7 +49,7 @@ class DateTime
         $this->datetime_format = '%Y-%m-%d';
 
         // set a default POSIX locale
-        $this->locale = 'en_US';
+        $this->set_locale('en_US');
     }
 
     /**
@@ -84,8 +84,12 @@ class DateTime
      */
     public function set_locale($locale, $charset = 'UTF-8')
     {
-        $this->locale = $locale . '.' . $charset;
-        setlocale(LC_ALL, $this->locale);
+        $locale = $locale . '.' . $charset;
+        setlocale(LC_ALL, $locale);
+        if (setlocale(LC_ALL, 0) == $locale)
+        {
+            $this->locale = $locale;
+        }
 
         return $this;
     }
@@ -137,16 +141,18 @@ class DateTime
      *
      * @return String $datetime Date & Time as a string
      */
-    public function get_datetime($timestamp = FALSE)
+    public function get_datetime($timestamp = 0)
     {
-        if ($timestamp === FALSE)
+        if ($timestamp === 0)
         {
-            return strftime($this->datetime_format, time());
+            $timestamp = time();
         }
-        else
+        elseif (!is_numeric($timestamp))
         {
-            return strftime($this->datetime_format, $timestamp);
+            return FALSE;
         }
+
+        return strftime($this->datetime_format, $timestamp);
     }
 
     /**
@@ -164,8 +170,12 @@ class DateTime
         {
             $timestamp = time();
         }
+        elseif (!is_numeric($timestamp))
+        {
+            return FALSE;
+        }
 
-        return strftime($this->datetime_format, strtotime($delay, $timestamp));
+        return $this->get_datetime(strtotime($delay, $timestamp));
     }
 
     /**
@@ -182,6 +192,10 @@ class DateTime
         if ($timestamp === 0)
         {
             $timestamp = time();
+        }
+        elseif (!is_numeric($timestamp))
+        {
+            return FALSE;
         }
 
         return strtotime($delay, $timestamp);
