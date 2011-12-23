@@ -37,7 +37,8 @@ class Output
      */
     public static function cli_print($msg)
     {
-        echo M2DateTime::get_datetime() . ': ' . $msg;
+        $datetime = new DateTime();
+        echo $datetime->set_datetime_format('%Y-%m-%d %H-%M-%S')->get_datetime() . ': ' . $msg;
     }
 
     /**
@@ -68,7 +69,8 @@ class Output
      */
     public static function cli_println($msg)
     {
-        echo M2DateTime::get_datetime() . ': ' . $msg . "\n";
+        $datetime = new DateTime();
+        echo $datetime->set_datetime_format('%Y-%m-%d %H-%M-%S')->get_datetime() . ': ' . $msg . "\n";
     }
 
     /**
@@ -81,6 +83,7 @@ class Output
      */
     public static function error($info, $file = '')
     {
+        $datetime = new DateTime();
         if (isset($_GET['controller']) && isset($_GET['method']))
         {
             if ($file == '')
@@ -91,7 +94,7 @@ class Output
             }
             else
             {
-                $prefix = '[' . M2DateTime::get_datetime() . ']: ';
+                $prefix = '[' . $datetime->set_datetime_format('%Y-%m-%d %H-%M-%S')->get_datetime() . ']: ';
                 error_log(
                     $prefix . $_GET['controller'] . '/' . $_GET['method']
                     . ': ' . $info, 3, $file
@@ -106,7 +109,7 @@ class Output
             }
             else
             {
-                $prefix = '[' . M2DateTime::get_datetime() . ']: ';
+                $prefix = '[' . $datetime->set_datetime_format('%Y-%m-%d %H-%M-%S')->get_datetime() . ']: ';
                 error_log($prefix . $info, 3, $file);
             }
         }
