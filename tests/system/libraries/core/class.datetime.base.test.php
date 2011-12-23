@@ -104,7 +104,7 @@ class DateTimeBaseTest extends DateTimeTest
 
     /**
      * Test the static function sort_compare_datetime()
-     * @dataProvider datetimeProvider
+     * @dataProvider inequalDatetimeProvider
      * @covers Lunr\Libraries\Core\DateTime::sort_compare_datetime
      */
     public function testDatetimeIsLower($date1, $date2)
@@ -114,7 +114,7 @@ class DateTimeBaseTest extends DateTimeTest
 
     /**
      * Test the static function sort_compare_datetime()
-     * @dataProvider datetimeProvider
+     * @dataProvider inequalDatetimeProvider
      * @covers Lunr\Libraries\Core\DateTime::sort_compare_datetime
      */
     public function testDatetimeIsGreater($date1, $date2)

@@ -61,7 +61,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
     /**
      * Test get_datetime() with the default datetime format and a custom timestamp as base.
      *
-     * @dataProvider timestampProvider
+     * @dataProvider validTimestampProvider
      * @covers Lunr\Libraries\Core\DateTime::get_datetime
      */
     public function testGetDatetimeWithCustomTimestampAsBase($timestamp)

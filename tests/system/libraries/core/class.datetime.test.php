@@ -1,13 +1,31 @@
 <?php
 
+/**
+ * This file contains the DateTimeTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
 namespace Lunr\Libraries\Core;
 use Lunr\Libraries\Core\DateTime;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
 /**
- * This tests Lunr's DateTime class
- * @covers Lunr\Libraries\Core\DateTime
+ * This class contains common setup routines, providers
+ * and shared attributes for testing the DateTime class.
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\Core\DateTime
  */
 abstract class DateTimeTest extends PHPUnit_Framework_TestCase
 {
@@ -24,18 +42,34 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
      */
     protected $reflection_datetime;
 
+    /**
+     * TestCase Constructor.
+     */
     public function setUp()
     {
         $this->reflection_datetime = new ReflectionClass('Lunr\Libraries\Core\DateTime');
         $this->datetime = new DateTime();
     }
 
+    /**
+     * TestCase Destructor.
+     */
     public function tearDown()
     {
         unset($this->datetime);
         unset($this->reflection_datetime);
     }
 
+    /**
+     * Assert that a day name is localized correctly.
+     *
+     * This checks against the German localized day names.
+     *
+     * @param String $day           Day name to check against
+     * @param String $localized_day Day name to check
+     *
+     * @return Boolean $return TRUE on known values, FALSE on unknown values
+     */
     protected function check_localized_day($day, $localized_day)
     {
         switch ($day)
@@ -67,17 +101,26 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
         return TRUE;
     }
 
-
-    public function timestampProvider()
+    /**
+     * Unit Test Data Provider for valid Timestamps.
+     *
+     * @return array $timestamps Set of valid timestamps
+     */
+    public function validTimestampProvider()
     {
         $timestamps   = array();
         $timestamps[] = array(time());
-        $timestamps[] = array(strtotime("+30 minutes"));
-        $timestamps[] = array(strtotime("+1 week"));
+        $timestamps[] = array(strtotime('+30 minutes'));
+        $timestamps[] = array(strtotime('+1 week'));
 
         return $timestamps;
     }
 
+    /**
+     * Unit Test Data Provider for invalid Timestamps.
+     *
+     * @return array $timestamps Set of invalid timestamps
+     */
     public function invalidTimestampProvider()
     {
         $timestamps   = array();
@@ -88,6 +131,11 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
         return $timestamps;
     }
 
+    /**
+     * Unit Test Data Provider for valid delay specifiers.
+     *
+     * @return array $delay Set of valid delay specifiers
+     */
     public function validDelayProvider()
     {
         $delay   = array();
@@ -100,6 +148,11 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
         return $delay;
     }
 
+    /**
+     * Unit Test Data Provider for invalid delay specifiers.
+     *
+     * @return array $delay Set of invalid delay specifiers
+     */
     public function invalidDelayProvider()
     {
         $delay   = array();
@@ -111,16 +164,42 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
         return $delay;
     }
 
+    /**
+     * Unit Test Data Provider for equal dates.
+     *
+     * @return array $delay Set of equal dates
+     */
     public function equalDatetimeProvider()
     {
-        return array(array("2010-02-02", "2010-02-02"), array("13:20","13:20"));
+        $datetimes   = array();
+        $datetimes[] = array('2010-02-02', '2010-02-02');
+        $datetimes[] = array('13:20', '13:20');
+
+        return $datetimes;
     }
 
-    public function datetimeProvider()
+    /**
+     * Unit Test Data Provider for inequal dates.
+     *
+     * @return array $delay Set of inequal dates
+     */
+    public function inequalDatetimeProvider()
     {
-        return array(array("2010-02-02", "2010-02-03"), array("10:20", "15:15"), array("2010-02-02 13:10", "2010-02-02-15:10"));
+        $datetimes   = array();
+        $datetimes[] = array('2010-02-02', '2010-02-03');
+        $datetimes[] = array('10:20', '15:15');
+        $datetimes[] = array('2010-02-02 13:10', '2010-02-02 15:10');
+
+        return $datetimes;
     }
 
+    /**
+     * Unit Test Data Provider for valid and invalid datetime formats.
+     *
+     * strftime() compatible
+     *
+     * @return array $delay Set of datetime formats
+     */
     public function datetimeFormatProvider()
     {
         $formats = $this->invalidDatetimeFormatProvider();
@@ -129,6 +208,13 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
         return $formats;
     }
 
+    /**
+     * Unit Test Data Provider for invalid datetime formats.
+     *
+     * strftime() compatible
+     *
+     * @return array $delay Set of invalid datetime formats
+     */
     public function invalidDatetimeFormatProvider()
     {
         $formats   = array();
@@ -141,6 +227,11 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
         return $formats;
     }
 
+    /**
+     * Unit Test Data Provider for invalid POSIX locale definitions.
+     *
+     * @return array $delay Set of invalid POSIX locale definitions
+     */
     public function invalidLocaleProvider()
     {
         $locales   = array();
