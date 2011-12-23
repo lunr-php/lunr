@@ -65,7 +65,7 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     public function fileProvider()
     {
         return array(
-            array("Lunr\Libraries\Core\M2DateTime", "system/libraries/core/class.m2datetime.inc.php"),
+            array("Lunr\Libraries\Core\DateTime", "system/libraries/core/class.datetime.inc.php"),
             array("StubView", "application/views/view.stub.inc.php"),
             array("Lunr\Libraries\Core\WebServiceController", "system/libraries/core/class.webservicecontroller.inc.php"),
             array("Lunr\Libraries\Core\WebController", "system/libraries/core/class.webcontroller.inc.php"),
