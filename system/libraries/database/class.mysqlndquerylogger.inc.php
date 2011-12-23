@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Database;
+use Lunr\Libraries\Core\DateTime;
 
 /**
  * MySQLnd Userspace Handler to log Query Statistics.
@@ -25,7 +26,32 @@ namespace Lunr\Libraries\Database;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     M2Mobi <info@m2mobi.com>
  */
-class MySQLndQueryLogger extends MySQLndUhConnection {
+class MySQLndQueryLogger extends MySQLndUhConnection
+{
+
+    /**
+     * Instance of the DateTime class.
+     * @var DateTime
+     */
+    private $datetime;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->datetime = new DateTime();
+    }
+
+    /**
+     * Destructor.
+     */
+    public function __destruct()
+    {
+        unset($this->datetime);
+        parent::__destruct();
+    }
 
     /**
      * Intercept MySQL queries.
@@ -92,10 +118,10 @@ class MySQLndQueryLogger extends MySQLndUhConnection {
         $sqlite = DBMan::get_db_connection($stats_db, FALSE);
 
         $data = array(
-                    'queryIdentifier' => $identifier,
-                    'execTime' => $time,
-                    'execDate' => M2DateTime::get_datetime()
-                );
+            'queryIdentifier' => $identifier,
+            'execTime' => $time,
+            'execDate' => $this->datetime->set_datetime_format('%Y-%m-%d %H-%M-%S')->get_datetime()
+        );
         $sqlite->insert('query_stats', $data);
     }
 
