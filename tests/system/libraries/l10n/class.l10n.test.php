@@ -1,7 +1,7 @@
 <?php
 
 use Lunr\Libraries\L10n\L10n;
-use Lunr\Libraries\Core\M2DateTime;
+use Lunr\Libraries\Core\DateTime;
 
 include_once("conf.l10n.inc.php");
 
@@ -64,7 +64,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test the static function set_language()
-     * @depends M2DateTimeTest::testDelayedTimestamp
+     * @depends DateTimeTest::testDelayedTimestampWithValidDelay
      * @depends testGetSupportedLanguages
      * @depends testIsoToPosix
      * @dataProvider languageProvider

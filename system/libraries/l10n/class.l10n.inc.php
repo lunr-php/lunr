@@ -13,7 +13,7 @@
  */
 
 namespace Lunr\Libraries\L10n;
-use Lunr\Libraries\Core\M2DateTime;
+use Lunr\Libraries\Core\DateTime;
 
 /**
  * Localization support class
@@ -75,8 +75,10 @@ class L10n
     public static function set_language($language)
     {
         $lang = self::iso_to_posix($language);
+        $datetime = new DateTime();
 
-        setcookie('lang', $lang, M2DateTime::delayed_timestamp('+1year'), '/');
+        setcookie('lang', $lang, $datetime->delayed_timestamp('+1year'), '/');
+        unset($datetime);
         return $lang;
     }
 
