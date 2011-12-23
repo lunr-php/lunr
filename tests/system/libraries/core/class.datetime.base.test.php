@@ -1,17 +1,37 @@
 <?php
 
+/**
+ * This file contains the DateTimeBaseTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
 namespace Lunr\Libraries\Core;
 use Lunr\Libraries\Core\DateTime;
 
 /**
- * This tests Lunr's DateTime class
- * @covers Lunr\Libraries\Core\DateTime
+ * This class contains the tests for the setters and the
+ * sorting method.
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\Core\DateTime
  */
 class DateTimeBaseTest extends DateTimeTest
 {
 
     /**
      * Check that default DateTime format is as expected.
+     *
+     * @return void
      */
     public function testDefaultDatetimeFormat()
     {
@@ -23,8 +43,12 @@ class DateTimeBaseTest extends DateTimeTest
     /**
      * Test the set_datetime_format() method.
      *
+     * @param mixed $format DateTime format definition
+     *
      * @dataProvider datetimeFormatProvider
-     * @covers Lunr\Libraries\Core\DateTime::set_datetime_format
+     * @covers       Lunr\Libraries\Core\DateTime::set_datetime_format
+     *
+     * @return void
      */
     public function testSetCustomDatetimeFormat($format)
     {
@@ -36,6 +60,8 @@ class DateTimeBaseTest extends DateTimeTest
 
     /**
      * Check that default Locale is as expected.
+     *
+     * @return void
      */
     public function testDefaultLocale()
     {
@@ -49,7 +75,10 @@ class DateTimeBaseTest extends DateTimeTest
      * Test the set_locale() method, without charset supplied.
      *
      * @runInSeparateProcess
+     *
      * @covers Lunr\Libraries\Core\DateTime::set_locale
+     *
+     * @return void
      */
     public function testSetCustomLocaleWithDefaultCharset()
     {
@@ -64,7 +93,10 @@ class DateTimeBaseTest extends DateTimeTest
      * Test the set_locale() method, with charset supplied.
      *
      * @runInSeparateProcess
+     *
      * @covers Lunr\Libraries\Core\DateTime::set_locale
+     *
+     * @return void
      */
     public function testSetCustomLocaleWithCustomCharset()
     {
@@ -78,10 +110,15 @@ class DateTimeBaseTest extends DateTimeTest
     /**
      * Test the set_locale() method with invalid locale values, without charset supplied.
      *
+     * @param mixed $value POSIX locale definition
+     *
      * @runInSeparateProcess
-     * @depends testDefaultLocale
+     *
+     * @depends      testDefaultLocale
      * @dataProvider invalidLocaleProvider
-     * @covers Lunr\Libraries\Core\DateTime::set_locale
+     * @covers       Lunr\Libraries\Core\DateTime::set_locale
+     *
+     * @return void
      */
     public function testSetCustomInvalidLocaleWithDefaultCharset($value)
     {
@@ -93,9 +130,15 @@ class DateTimeBaseTest extends DateTimeTest
     }
 
     /**
-     * Test the static function sort_compare_datetime()
+     * Test the static function sort_compare_datetime().
+     *
+     * @param String $date1 Date/Time string
+     * @param String $date2 Date/Time string
+     *
      * @dataProvider equalDatetimeProvider
-     * @covers Lunr\Libraries\Core\DateTime::sort_compare_datetime
+     * @covers       Lunr\Libraries\Core\DateTime::sort_compare_datetime
+     *
+     * @return void
      */
     public function testDatetimeIsEqual($date1, $date2)
     {
@@ -103,9 +146,15 @@ class DateTimeBaseTest extends DateTimeTest
     }
 
     /**
-     * Test the static function sort_compare_datetime()
+     * Test the static function sort_compare_datetime().
+     *
+     * @param String $date1 Date/Time string
+     * @param String $date2 Date/Time string
+     *
      * @dataProvider inequalDatetimeProvider
-     * @covers Lunr\Libraries\Core\DateTime::sort_compare_datetime
+     * @covers       Lunr\Libraries\Core\DateTime::sort_compare_datetime
+     *
+     * @return void
      */
     public function testDatetimeIsLower($date1, $date2)
     {
@@ -113,9 +162,15 @@ class DateTimeBaseTest extends DateTimeTest
     }
 
     /**
-     * Test the static function sort_compare_datetime()
+     * Test the static function sort_compare_datetime().
+     *
+     * @param String $date1 Date/Time string
+     * @param String $date2 Date/Time string
+     *
      * @dataProvider inequalDatetimeProvider
-     * @covers Lunr\Libraries\Core\DateTime::sort_compare_datetime
+     * @covers       Lunr\Libraries\Core\DateTime::sort_compare_datetime
+     *
+     * @return void
      */
     public function testDatetimeIsGreater($date1, $date2)
     {
