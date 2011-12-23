@@ -81,6 +81,46 @@ class VerificationTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(Verification::is_numerical_boolean($value));
     }
 
+    /**
+     * Test the static function is_time()
+     * @dataProvider validTimeProvider
+     * @covers Lunr\Libraries\Core\Verification::is_time
+     */
+    public function testIsValidTime($time)
+    {
+        $this->assertTrue(Verification::is_time($time));
+    }
+
+    /**
+     * Test the static function is_time()
+     * @dataProvider invalidTimeProvider
+     * @covers Lunr\Libraries\Core\Verification::is_time
+     */
+    public function testIsInvalidTime($time)
+    {
+        $this->assertFalse(Verification::is_time($time));
+    }
+
+    /**
+     * Test the static function is_date()
+     * @dataProvider validDateProvider
+     * @covers Lunr\Libraries\Core\Verification::is_date
+     */
+    public function testIsValidDate($date)
+    {
+        $this->assertTrue(Verification::is_date($date));
+    }
+
+    /**
+     * Test the static function is_date()
+     * @dataProvider invalidDateProvider
+     * @covers Lunr\Libraries\Core\Verification::is_date
+     */
+    public function testIsInvalidDate($date)
+    {
+        $this->assertFalse(Verification::is_date($date));
+    }
+
     public function validLengthProvider()
     {
         return array(array(1,"a"), array(5,"heinz"), array(10,"transcript"));
@@ -100,6 +140,31 @@ class VerificationTest extends PHPUnit_Framework_TestCase
     {
         return array(array(2), array("2"), array(true), array(false));
     }
+
+    public function validTimeProvider()
+    {
+        return array(array("23:30"), array("23:30:01"), array("23:30:21"), array("30:10"), array("124:10:23"));
+    }
+
+    public function invalidTimeProvider()
+    {
+        return array(array("23:20:67"), array("23:61"), array("30:61"), array("30:61:10"), array("1345:10"));
+    }
+
+    public function validDateProvider()
+    {
+        return array(array("2010-02-10"), array("1-01-02"), array("2096-02-29"), array("2011-01-31"),
+                    array("2400-02-29")
+                    );
+    }
+
+    public function invalidDateProvider()
+    {
+        return array(array("string"), array("1020367"), array(FALSE), array("2010-02-30"), array("2010-13-10"),
+                    array("2011-04-31"), array("2095-02-29"), array("2100-02-29"), array("2200-02-29")
+                    );
+    }
+
 
 }
 
