@@ -247,9 +247,9 @@ class Verification
     {
         $leap_day = '/^(\d{1,4})[\- \/ \.]02[\- \/ \.]29$/';
 
-        if (preg_match($leap_day, $string))
+        if (preg_match($leap_day, $value))
         {
-            $year = preg_replace('/[\- \/ \.]02[\- \/ \.]29$/', '', $string);
+            $year = preg_replace('/[\- \/ \.]02[\- \/ \.]29$/', '', $value);
             return ((($year % 4) == 0) && ((($year % 100) != 0) || (($year %400) == 0)));
         }
         else
@@ -258,7 +258,7 @@ class Verification
             $_30days = '(0[469]|11)[\- \/ \.](0[1-9]|[12][0-9]|30)';
             $_31days = '(0[13578]|1[02])[\- \/ \.](0[1-9]|[12][0-9]|3[01])';
 
-            if (preg_match("/^(\d{1,4})[\- \/ \.]($_31days|$_30days|$feb)$/", $string))
+            if (preg_match("/^(\d{1,4})[\- \/ \.]($_31days|$_30days|$feb)$/", $value))
             {
                 return TRUE;
             }
@@ -279,7 +279,7 @@ class Verification
     public static function is_time($value)
     {
         // accepts HHH:MM:SS, e.g. 23:59:30 or 12:30 or 120:17
-        if (preg_match('/^(\-)?[0-9]{1,3}(:[0-5][0-9]){1,2}$/', $string))
+        if (preg_match('/^(\-)?[0-9]{1,3}(:[0-5][0-9]){1,2}$/', $value))
         {
             return TRUE;
         }
