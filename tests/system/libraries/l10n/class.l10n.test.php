@@ -64,7 +64,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test the static function set_language()
-     * @depends DateTimeTest::testGetDelayedTimestampWithValidDelay
+     * @depends Lunr\Libraries\Core\DateTimeGetDelayedTimestampTest::testGetDelayedTimestampWithValidDelay
      * @depends testGetSupportedLanguages
      * @depends testIsoToPosix
      * @dataProvider languageProvider

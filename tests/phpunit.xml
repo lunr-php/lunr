@@ -11,7 +11,13 @@
         <testsuite name="MidSchip Testsuite">
             <file>tests/system/libraries/core/class.autoloader.test.php</file>
             <file>tests/system/libraries/core/class.view.test.php</file>
-            <file>tests/system/libraries/core/class.datetime.test.php</file>
+            <file>tests/system/libraries/core/class.datetime.base.test.php</file>
+            <file>tests/system/libraries/core/class.datetime.getdatetime.test.php</file>
+            <file>tests/system/libraries/core/class.datetime.getdelayeddatetime.test.php</file>
+            <file>tests/system/libraries/core/class.datetime.getdelayedtimestamp.test.php</file>
+            <file>tests/system/libraries/core/class.datetime.today.test.php</file>
+            <file>tests/system/libraries/core/class.datetime.tomorrow.test.php</file>
+            <file>tests/system/libraries/core/class.datetime.yesterday.test.php</file>
             <file>tests/system/libraries/core/class.verification.test.php</file>
             <file>tests/system/libraries/l10n/class.l10n.test.php</file>
             <file>tests/system/libraries/db/class.dbman.test.php</file>
