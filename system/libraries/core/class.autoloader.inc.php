@@ -66,6 +66,11 @@ class Autoloader
             $class = strtolower(str_replace('Mock', '', $class));
             include_once $path . "class.$class.mock.php";
         }
+        elseif (strpos($class, 'Test') !== FALSE)
+        {
+            $class = strtolower(str_replace('Test', '', $class));
+            include_once $path . "class.$class.test.php";
+        }
         elseif (strpos($class, 'Controller') !== FALSE)
         {
             $controller = strtolower(str_replace('Controller', '', $class));
