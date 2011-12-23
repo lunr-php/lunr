@@ -312,57 +312,57 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test delayed_timestamp() with the current timestamp as base.
+     * Test get_delayed_timestamp() with the current timestamp as base.
      *
-     * @covers Lunr\Libraries\Core\DateTime::delayed_timestamp
+     * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
      */
-    public function testDelayedTimestampWithCurrentTimestampAsBase()
+    public function testGetDelayedTimestampWithCurrentTimestampAsBase()
     {
-        $this->assertEquals(strtotime("+1 day"), $this->datetime->delayed_timestamp("+1 day"));
+        $this->assertEquals(strtotime("+1 day"), $this->datetime->get_delayed_timestamp("+1 day"));
     }
 
     /**
-     * Test delayed_timestamp() with a custom timestamp as base.
+     * Test get_delayed_timestamp() with a custom timestamp as base.
      *
      * @dataProvider timestampProvider
-     * @covers Lunr\Libraries\Core\DateTime::delayed_timestamp
+     * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
      */
-    public function testDelayedTimestampWithCustomTimestampAsBase($base)
+    public function testGetDelayedTimestampWithCustomTimestampAsBase($base)
     {
-        $this->assertEquals(strtotime("+1 day", $base), $this->datetime->delayed_timestamp("+1 day", $base));
+        $this->assertEquals(strtotime("+1 day", $base), $this->datetime->get_delayed_timestamp("+1 day", $base));
     }
 
     /**
-     * Test delayed_timestamp() with a custom but invalid timestamp as base.
+     * Test get_delayed_timestamp() with a custom but invalid timestamp as base.
      *
      * @dataProvider invalidTimestampProvider
-     * @covers Lunr\Libraries\Core\DateTime::delayed_timestamp
+     * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
      */
-    public function testDelayedTimestampWithCustomInvalidTimestampAsBase($base)
+    public function testGetDelayedTimestampWithCustomInvalidTimestampAsBase($base)
     {
-        $this->assertFalse($this->datetime->delayed_timestamp("+1 day", $base));
+        $this->assertFalse($this->datetime->get_delayed_timestamp("+1 day", $base));
     }
 
     /**
-     * Test delayed_timestamp() with a valid delay and current timestamp as base.
+     * Test get_delayed_timestamp() with a valid delay and current timestamp as base.
      *
      * @dataProvider validDelayProvider
-     * @covers Lunr\Libraries\Core\DateTime::delayed_timestamp
+     * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
      */
-    public function testDelayedTimestampWithValidDelay($delay)
+    public function testGetDelayedTimestampWithValidDelay($delay)
     {
-        $this->assertEquals(strtotime($delay), $this->datetime->delayed_timestamp($delay));
+        $this->assertEquals(strtotime($delay), $this->datetime->get_delayed_timestamp($delay));
     }
 
     /**
-     * Test delayed_timestamp() with an invalid delay and current timestamp as base.
+     * Test get_delayed_timestamp() with an invalid delay and current timestamp as base.
      *
      * @dataProvider invalidDelayProvider
-     * @covers Lunr\Libraries\Core\DateTime::delayed_timestamp
+     * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
      */
-    public function testDelayedTimestampWithInvalidDelay($delay)
+    public function testGetDelayedTimestampWithInvalidDelay($delay)
     {
-        $this->assertFalse($this->datetime->delayed_timestamp($delay));
+        $this->assertFalse($this->datetime->get_delayed_timestamp($delay));
     }
 
     /**
@@ -436,48 +436,48 @@ class DateTimeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test delayed_datetime() with the default datetime format and a custom timestamp as base.
+     * Test get_delayed_datetime() with the default datetime format and a custom timestamp as base.
      *
      * @dataProvider timestampProvider
-     * @covers Lunr\Libraries\Core\DateTime::delayed_datetime
+     * @covers Lunr\Libraries\Core\DateTime::get_delayed_datetime
      */
-    public function testDelayedDatetimeWithCustomTimestampAsBase($timestamp)
+    public function testGetDelayedDatetimeWithCustomTimestampAsBase($timestamp)
     {
-        $this->assertEquals(strftime('%Y-%m-%d', strtotime("+1 day", $timestamp)), $this->datetime->delayed_datetime("+1 day", $timestamp));
+        $this->assertEquals(strftime('%Y-%m-%d', strtotime("+1 day", $timestamp)), $this->datetime->get_delayed_datetime("+1 day", $timestamp));
     }
 
     /**
-     * Test delayed_datetime() with the default datetime format and a custom but invalid timestamp as base.
+     * Test get_delayed_datetime() with the default datetime format and a custom but invalid timestamp as base.
      *
      * @dataProvider invalidTimestampProvider
-     * @covers Lunr\Libraries\Core\DateTime::delayed_datetime
+     * @covers Lunr\Libraries\Core\DateTime::get_delayed_datetime
      */
-    public function testDelayedDatetimeWithCustomInvalidTimestampAsBase($timestamp)
+    public function testGetDelayedDatetimeWithCustomInvalidTimestampAsBase($timestamp)
     {
-        $this->assertFalse($this->datetime->delayed_datetime("+1 day", $timestamp));
+        $this->assertFalse($this->datetime->get_delayed_datetime("+1 day", $timestamp));
     }
 
     /**
-     * Test delayed_datetime() with a valid delay, default datetime format and current timestamp as base.
+     * Test get_delayed_datetime() with a valid delay, default datetime format and current timestamp as base.
      *
      * @depends testDefaultDatetimeFormat
      * @dataProvider validDelayProvider
-     * @covers Lunr\Libraries\Core\DateTime::delayed_datetime
+     * @covers Lunr\Libraries\Core\DateTime::get_delayed_datetime
      */
-    public function testDelayedDatetimeWithValidDelay($delay)
+    public function testGetDelayedDatetimeWithValidDelay($delay)
     {
-        $this->assertEquals(strftime('%Y-%m-%d', strtotime($delay)), $this->datetime->delayed_datetime($delay));
+        $this->assertEquals(strftime('%Y-%m-%d', strtotime($delay)), $this->datetime->get_delayed_datetime($delay));
     }
 
     /**
-     * Test delayed_datetime() with an invalid delay, default datetime format and current timestamp as base.
+     * Test get_delayed_datetime() with an invalid delay, default datetime format and current timestamp as base.
      *
      * @dataProvider invalidDelayProvider
-     * @covers Lunr\Libraries\Core\DateTime::delayed_datetime
+     * @covers Lunr\Libraries\Core\DateTime::get_delayed_datetime
      */
-    public function testDelayedDatetimeWithInvalidDelay($delay)
+    public function testGetDelayedDatetimeWithInvalidDelay($delay)
     {
-        $this->assertFalse($this->datetime->delayed_datetime($delay));
+        $this->assertFalse($this->datetime->get_delayed_datetime($delay));
     }
 
     /**

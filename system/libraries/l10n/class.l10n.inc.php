@@ -77,7 +77,7 @@ class L10n
         $lang = self::iso_to_posix($language);
         $datetime = new DateTime();
 
-        setcookie('lang', $lang, $datetime->delayed_timestamp('+1year'), '/');
+        setcookie('lang', $lang, $datetime->get_delayed_timestamp('+1year'), '/');
         unset($datetime);
         return $lang;
     }

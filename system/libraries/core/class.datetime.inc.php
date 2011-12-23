@@ -164,7 +164,7 @@ class DateTime
      *
      * @return String $return DateTime definition, format YYYY-MM-DD HH:MM:SS
      */
-    public function delayed_datetime($delay, $timestamp = 0)
+    public function get_delayed_datetime($delay, $timestamp = 0)
     {
         if ($timestamp === 0)
         {
@@ -187,7 +187,7 @@ class DateTime
      *
      * @return Integer Delayed timestamp
      */
-    public function delayed_timestamp($delay, $timestamp = 0)
+    public function get_delayed_timestamp($delay, $timestamp = 0)
     {
         if ($timestamp === 0)
         {
