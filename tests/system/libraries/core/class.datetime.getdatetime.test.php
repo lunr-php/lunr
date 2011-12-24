@@ -43,7 +43,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * Test get_datetime() with a custom datetime format and current timestamp as base.
      *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
-     * @covers Lunr\Libraries\Core\DateTime::get_datetime
+     * @covers  Lunr\Libraries\Core\DateTime::get_datetime
      *
      * @return void
      */
@@ -56,11 +56,11 @@ class DateTimeGetDateTimeTest extends DateTimeTest
     /**
      * Test get_datetime() with a custom but invalid datetime format and current timestamp as base.
      *
-     * @param String $format DateTime format
+     * @param mixed $format DateTime format
      *
-     * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
+     * @depends      Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @dataProvider invalidDatetimeFormatProvider
-     * @covers Lunr\Libraries\Core\DateTime::get_datetime
+     * @covers       Lunr\Libraries\Core\DateTime::get_datetime
      *
      * @return void
      */
@@ -73,9 +73,10 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * Test get_datetime() with a custom datetime format, custom locale and current timestamp as base.
      *
      * @runInSeparateProcess
+     *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
-     * @covers Lunr\Libraries\Core\DateTime::get_datetime
+     * @covers  Lunr\Libraries\Core\DateTime::get_datetime
      *
      * @return void
      */
@@ -92,7 +93,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * @param Integer $timestamp UNIX Timestamp
      *
      * @dataProvider validTimestampProvider
-     * @covers Lunr\Libraries\Core\DateTime::get_datetime
+     * @covers       Lunr\Libraries\Core\DateTime::get_datetime
      *
      * @return void
      */
@@ -107,7 +108,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * @param mixed $timestamp Various invalid timestamp values
      *
      * @dataProvider invalidTimestampProvider
-     * @covers Lunr\Libraries\Core\DateTime::get_datetime
+     * @covers       Lunr\Libraries\Core\DateTime::get_datetime
      *
      * @return void
      */

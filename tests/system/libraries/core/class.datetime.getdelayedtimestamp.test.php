@@ -45,7 +45,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      * @param Integer $base UNIX Timestamp
      *
      * @dataProvider validTimestampProvider
-     * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
+     * @covers       Lunr\Libraries\Core\DateTime::get_delayed_timestamp
      *
      * @return void
      */
@@ -60,7 +60,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      * @param mixed $base Various invalid timestamp values
      *
      * @dataProvider invalidTimestampProvider
-     * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
+     * @covers       Lunr\Libraries\Core\DateTime::get_delayed_timestamp
      *
      * @return void
      */
@@ -75,7 +75,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      * @param String $delay Various valid delay definitions
      *
      * @dataProvider validDelayProvider
-     * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
+     * @covers       Lunr\Libraries\Core\DateTime::get_delayed_timestamp
      *
      * @return void
      */
@@ -90,7 +90,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      * @param mixed $delay Various invalid delay definitions
      *
      * @dataProvider invalidDelayProvider
-     * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
+     * @covers       Lunr\Libraries\Core\DateTime::get_delayed_timestamp
      *
      * @return void
      */
