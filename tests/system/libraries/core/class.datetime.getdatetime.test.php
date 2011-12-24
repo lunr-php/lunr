@@ -13,7 +13,6 @@
  */
 
 namespace Lunr\Libraries\Core;
-use Lunr\Libraries\Core\DateTime;
 
 /**
  * This class contains the tests for the get_datetime() method
