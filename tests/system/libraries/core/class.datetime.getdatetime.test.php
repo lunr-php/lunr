@@ -1,11 +1,28 @@
 <?php
 
+/**
+ * This file contains the DateTimeGetDateTimeTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
 namespace Lunr\Libraries\Core;
 use Lunr\Libraries\Core\DateTime;
 
 /**
- * This tests Lunr's DateTime class
- * @covers Lunr\Libraries\Core\DateTime
+ * This class contains the tests for the get_datetime() method
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\Core\DateTime
  */
 class DateTimeGetDateTimeTest extends DateTimeTest
 {
@@ -14,6 +31,8 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * Test get_datetime() with the default datetime format and current timestamp as base.
      *
      * @covers Lunr\Libraries\Core\DateTime::get_datetime
+     *
+     * @return void
      */
     public function testGetDatetimeWithDefaultDatetimeFormat()
     {
@@ -25,18 +44,25 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @covers Lunr\Libraries\Core\DateTime::get_datetime
+     *
+     * @return void
      */
     public function testGetDatetimeWithCustomDatetimeFormat()
     {
-        $this->assertEquals(strftime('%A. %d.%m.%Y'), $this->datetime->set_datetime_format('%A. %d.%m.%Y')->get_datetime());
+        $value = $this->datetime->set_datetime_format('%A. %d.%m.%Y')->get_datetime();
+        $this->assertEquals(strftime('%A. %d.%m.%Y'), $value);
     }
 
     /**
      * Test get_datetime() with a custom but invalid datetime format and current timestamp as base.
      *
+     * @param String $format DateTime format
+     *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @dataProvider invalidDatetimeFormatProvider
      * @covers Lunr\Libraries\Core\DateTime::get_datetime
+     *
+     * @return void
      */
     public function testGetDatetimeWithCustomInvalidDatetimeFormat($format)
     {
@@ -50,6 +76,8 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers Lunr\Libraries\Core\DateTime::get_datetime
+     *
+     * @return void
      */
     public function testGetDatetimeWithLocalizedCustomDatetimeFormat()
     {
@@ -61,8 +89,12 @@ class DateTimeGetDateTimeTest extends DateTimeTest
     /**
      * Test get_datetime() with the default datetime format and a custom timestamp as base.
      *
+     * @param Integer $timestamp UNIX Timestamp
+     *
      * @dataProvider validTimestampProvider
      * @covers Lunr\Libraries\Core\DateTime::get_datetime
+     *
+     * @return void
      */
     public function testGetDatetimeWithCustomTimestampAsBase($timestamp)
     {
@@ -72,8 +104,12 @@ class DateTimeGetDateTimeTest extends DateTimeTest
     /**
      * Test get_datetime() with the default datetime format and a custom but invalid timestamp as base.
      *
+     * @param mixed $timestamp Various invalid timestamp values
+     *
      * @dataProvider invalidTimestampProvider
      * @covers Lunr\Libraries\Core\DateTime::get_datetime
+     *
+     * @return void
      */
     public function testGetDatetimeWithCustomInvalidTimestampAsBase($timestamp)
     {
