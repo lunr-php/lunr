@@ -22,7 +22,7 @@ use Lunr\Libraries\Core\DateTime;
  * @package    Core
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers Lunr\Libraries\Core\DateTime
+ * @covers     Lunr\Libraries\Core\DateTime
  */
 class DateTimeGetDelayedDatetimeTest extends DateTimeTest
 {

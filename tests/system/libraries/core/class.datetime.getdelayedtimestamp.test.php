@@ -1,11 +1,28 @@
 <?php
 
+/**
+ * This file contains the DateTimeGetDelayedTimestampTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
 namespace Lunr\Libraries\Core;
 use Lunr\Libraries\Core\DateTime;
 
 /**
- * This tests Lunr's DateTime class
- * @covers Lunr\Libraries\Core\DateTime
+ * This class contains the tests for the get_delayed_timestamp() method
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\Core\DateTime
  */
 class DateTimeGetDelayedTimestampTest extends DateTimeTest
 {
@@ -14,39 +31,53 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      * Test get_delayed_timestamp() with the current timestamp as base.
      *
      * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
+     *
+     * @return void
      */
     public function testGetDelayedTimestampWithCurrentTimestampAsBase()
     {
-        $this->assertEquals(strtotime("+1 day"), $this->datetime->get_delayed_timestamp("+1 day"));
+        $this->assertEquals(strtotime('+1 day'), $this->datetime->get_delayed_timestamp('+1 day'));
     }
 
     /**
      * Test get_delayed_timestamp() with a custom timestamp as base.
      *
+     * @param Integer $base UNIX Timestamp
+     *
      * @dataProvider validTimestampProvider
      * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
+     *
+     * @return void
      */
     public function testGetDelayedTimestampWithCustomTimestampAsBase($base)
     {
-        $this->assertEquals(strtotime("+1 day", $base), $this->datetime->get_delayed_timestamp("+1 day", $base));
+        $this->assertEquals(strtotime('+1 day', $base), $this->datetime->get_delayed_timestamp('+1 day', $base));
     }
 
     /**
      * Test get_delayed_timestamp() with a custom but invalid timestamp as base.
      *
+     * @param mixed $base Various invalid timestamp values
+     *
      * @dataProvider invalidTimestampProvider
      * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
+     *
+     * @return void
      */
     public function testGetDelayedTimestampWithCustomInvalidTimestampAsBase($base)
     {
-        $this->assertFalse($this->datetime->get_delayed_timestamp("+1 day", $base));
+        $this->assertFalse($this->datetime->get_delayed_timestamp('+1 day', $base));
     }
 
     /**
      * Test get_delayed_timestamp() with a valid delay and current timestamp as base.
      *
+     * @param String $delay Various valid delay definitions
+     *
      * @dataProvider validDelayProvider
      * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
+     *
+     * @return void
      */
     public function testGetDelayedTimestampWithValidDelay($delay)
     {
@@ -56,8 +87,12 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
     /**
      * Test get_delayed_timestamp() with an invalid delay and current timestamp as base.
      *
+     * @param mixed $delay Various invalid delay definitions
+     *
      * @dataProvider invalidDelayProvider
      * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
+     *
+     * @return void
      */
     public function testGetDelayedTimestampWithInvalidDelay($delay)
     {
