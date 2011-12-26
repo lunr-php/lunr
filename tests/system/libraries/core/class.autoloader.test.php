@@ -60,8 +60,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test the default values for the controller array.
-     *
-     * @return void
      */
     public function testDefaultControllers()
     {
@@ -72,8 +70,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test that the array of loaded files is empty by default.
-     *
-     * @return void
      */
     public function testLoadedIsEmpty()
     {
@@ -86,8 +82,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
      * Test the static function add_include_path().
      *
      * @covers Lunr\Libraries\Core\Autoloader::add_include_path
-     *
-     * @return void
      */
     public function testAddIncludePath()
     {
@@ -105,8 +99,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider normalClassProvider
      * @covers       Lunr\Libraries\Core\Autoloader::get_class_filename
-     *
-     * @return void
      */
     public function testGetClassFileName($class, $filename)
     {
@@ -123,8 +115,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider controllerProvider
      * @covers       Lunr\Libraries\Core\Autoloader::register_project_controller
-     *
-     * @return void
      */
     public function testRegisterProjectController($input, $expected)
     {
@@ -151,8 +141,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
      * @depends      testRegisterProjectController
      * @dataProvider controllerProvider
      * @covers       Lunr\Libraries\Core\Autoloader::get_class_filename
-     *
-     * @return void
      */
     public function testGetClassFileNameForRegisteredProjectController($basename, $normalized)
     {
@@ -173,8 +161,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
      * @depends      testGetClassFileName
      * @dataProvider namespacedClassProvider
      * @covers       Lunr\Libraries\Core\Autoloader::get_class_filepath
-     *
-     * @return void
      */
     public function testGetClassFilePath($class, $filepath)
     {
@@ -191,8 +177,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider fileProvider
      * @covers       Lunr\Libraries\Core\Autoloader::load
-     *
-     * @return void
      */
     public function testLoad($file, $filename)
     {
