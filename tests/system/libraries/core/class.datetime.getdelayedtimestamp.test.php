@@ -19,7 +19,7 @@ namespace Lunr\Libraries\Core;
  *
  * @category   Libraries
  * @package    Core
- * @subpackage Libraries
+ * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Libraries\Core\DateTime
  */
@@ -30,8 +30,6 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      * Test get_delayed_timestamp() with the current timestamp as base.
      *
      * @covers Lunr\Libraries\Core\DateTime::get_delayed_timestamp
-     *
-     * @return void
      */
     public function testGetDelayedTimestampWithCurrentTimestampAsBase()
     {
@@ -45,8 +43,6 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      *
      * @dataProvider validTimestampProvider
      * @covers       Lunr\Libraries\Core\DateTime::get_delayed_timestamp
-     *
-     * @return void
      */
     public function testGetDelayedTimestampWithCustomTimestampAsBase($base)
     {
@@ -60,8 +56,6 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      *
      * @dataProvider invalidTimestampProvider
      * @covers       Lunr\Libraries\Core\DateTime::get_delayed_timestamp
-     *
-     * @return void
      */
     public function testGetDelayedTimestampWithCustomInvalidTimestampAsBase($base)
     {
@@ -75,8 +69,6 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      *
      * @dataProvider validDelayProvider
      * @covers       Lunr\Libraries\Core\DateTime::get_delayed_timestamp
-     *
-     * @return void
      */
     public function testGetDelayedTimestampWithValidDelay($delay)
     {
@@ -90,8 +82,6 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      *
      * @dataProvider invalidDelayProvider
      * @covers       Lunr\Libraries\Core\DateTime::get_delayed_timestamp
-     *
-     * @return void
      */
     public function testGetDelayedTimestampWithInvalidDelay($delay)
     {

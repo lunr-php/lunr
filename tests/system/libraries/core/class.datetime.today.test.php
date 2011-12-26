@@ -19,7 +19,7 @@ namespace Lunr\Libraries\Core;
  *
  * @category   Libraries
  * @package    Core
- * @subpackage Libraries
+ * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Libraries\Core\DateTime
  */
@@ -31,8 +31,6 @@ class DateTimeTodayTest extends DateTimeTest
      *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testDefaultDatetimeFormat
      * @covers  Lunr\Libraries\Core\DateTime::today
-     *
-     * @return void
      */
     public function testTodayWithDefaultDatetimeFormat()
     {
@@ -44,8 +42,6 @@ class DateTimeTodayTest extends DateTimeTest
      *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @covers  Lunr\Libraries\Core\DateTime::today
-     *
-     * @return void
      */
     public function testTodayWithCustomDatetimeFormat()
     {
@@ -60,8 +56,6 @@ class DateTimeTodayTest extends DateTimeTest
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Libraries\Core\DateTime::today
-     *
-     * @return void
      */
     public function testTodayWithLocalizedCustomDatetimeFormat()
     {
@@ -78,8 +72,6 @@ class DateTimeTodayTest extends DateTimeTest
      * @depends      Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @dataProvider invalidDatetimeFormatProvider
      * @covers       Lunr\Libraries\Core\DateTime::today
-     *
-     * @return void
      */
     public function testTodayWithCustomInvalidDatetimeFormat($format)
     {
@@ -91,8 +83,6 @@ class DateTimeTodayTest extends DateTimeTest
      *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testDefaultDatetimeFormat
      * @covers  Lunr\Libraries\Core\DateTime::now
-     *
-     * @return void
      */
     public function testNowWithDefaultDatetimeFormat()
     {
@@ -104,8 +94,6 @@ class DateTimeTodayTest extends DateTimeTest
      *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @covers  Lunr\Libraries\Core\DateTime::now
-     *
-     * @return void
      */
     public function testNowWithCustomDatetimeFormat()
     {
@@ -120,8 +108,6 @@ class DateTimeTodayTest extends DateTimeTest
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Libraries\Core\DateTime::now
-     *
-     * @return void
      */
     public function testNowWithLocalizedCustomDatetimeFormat()
     {
@@ -138,8 +124,6 @@ class DateTimeTodayTest extends DateTimeTest
      * @depends      Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @dataProvider invalidDatetimeFormatProvider
      * @covers       Lunr\Libraries\Core\DateTime::now
-     *
-     * @return void
      */
     public function testNowWithCustomInvalidDatetimeFormat($format)
     {

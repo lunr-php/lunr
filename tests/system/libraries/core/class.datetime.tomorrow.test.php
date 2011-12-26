@@ -19,7 +19,7 @@ namespace Lunr\Libraries\Core;
  *
  * @category   Libraries
  * @package    Core
- * @subpackage Libraries
+ * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Libraries\Core\DateTime
  */
@@ -31,8 +31,6 @@ class DateTimeTomorrowTest extends DateTimeTest
      *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testDefaultDatetimeFormat
      * @covers  Lunr\Libraries\Core\DateTime::tomorrow
-     *
-     * @return void
      */
     public function testTomorrowWithDefaultDatetimeFormat()
     {
@@ -44,8 +42,6 @@ class DateTimeTomorrowTest extends DateTimeTest
      *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @covers  Lunr\Libraries\Core\DateTime::tomorrow
-     *
-     * @return void
      */
     public function testTomorrowWithCustomDatetimeFormat()
     {
@@ -61,8 +57,6 @@ class DateTimeTomorrowTest extends DateTimeTest
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Libraries\Core\DateTime::tomorrow
-     *
-     * @return void
      */
     public function testTomorrowWithLocalizedCustomDatetimeFormat()
     {
@@ -79,8 +73,6 @@ class DateTimeTomorrowTest extends DateTimeTest
      * @depends      Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @dataProvider invalidDatetimeFormatProvider
      * @covers       Lunr\Libraries\Core\DateTime::tomorrow
-     *
-     * @return void
      */
     public function testTomorrowWithCustomInvalidDatetimeFormat($format)
     {

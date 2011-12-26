@@ -19,7 +19,7 @@ namespace Lunr\Libraries\Core;
  *
  * @category   Libraries
  * @package    Core
- * @subpackage Libraries
+ * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Libraries\Core\DateTime
  */
@@ -30,8 +30,6 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * Test get_datetime() with the default datetime format and current timestamp as base.
      *
      * @covers Lunr\Libraries\Core\DateTime::get_datetime
-     *
-     * @return void
      */
     public function testGetDatetimeWithDefaultDatetimeFormat()
     {
@@ -43,8 +41,6 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @covers  Lunr\Libraries\Core\DateTime::get_datetime
-     *
-     * @return void
      */
     public function testGetDatetimeWithCustomDatetimeFormat()
     {
@@ -60,8 +56,6 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * @depends      Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @dataProvider invalidDatetimeFormatProvider
      * @covers       Lunr\Libraries\Core\DateTime::get_datetime
-     *
-     * @return void
      */
     public function testGetDatetimeWithCustomInvalidDatetimeFormat($format)
     {
@@ -76,8 +70,6 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Libraries\Core\DateTime::get_datetime
-     *
-     * @return void
      */
     public function testGetDatetimeWithLocalizedCustomDatetimeFormat()
     {
@@ -93,8 +85,6 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      *
      * @dataProvider validTimestampProvider
      * @covers       Lunr\Libraries\Core\DateTime::get_datetime
-     *
-     * @return void
      */
     public function testGetDatetimeWithCustomTimestampAsBase($timestamp)
     {
@@ -108,8 +98,6 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      *
      * @dataProvider invalidTimestampProvider
      * @covers       Lunr\Libraries\Core\DateTime::get_datetime
-     *
-     * @return void
      */
     public function testGetDatetimeWithCustomInvalidTimestampAsBase($timestamp)
     {

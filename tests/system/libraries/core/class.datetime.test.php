@@ -23,7 +23,7 @@ use ReflectionClass;
  *
  * @category   Libraries
  * @package    Core
- * @subpackage Libraries
+ * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Libraries\Core\DateTime
  */

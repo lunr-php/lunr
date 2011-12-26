@@ -31,8 +31,6 @@ class DateTimeYesterdayTest extends DateTimeTest
      *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testDefaultDatetimeFormat
      * @covers  Lunr\Libraries\Core\DateTime::yesterday
-     *
-     * @return void
      */
     public function testYesterdayWithDefaultDatetimeFormat()
     {
@@ -44,8 +42,6 @@ class DateTimeYesterdayTest extends DateTimeTest
      *
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @covers  Lunr\Libraries\Core\DateTime::yesterday
-     *
-     * @return void
      */
     public function testYesterdayWithCustomDatetimeFormat()
     {
@@ -61,8 +57,6 @@ class DateTimeYesterdayTest extends DateTimeTest
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @depends Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Libraries\Core\DateTime::yesterday
-     *
-     * @return void
      */
     public function testYesterdayWithLocalizedCustomDatetimeFormat()
     {
@@ -79,8 +73,6 @@ class DateTimeYesterdayTest extends DateTimeTest
      * @depends      Lunr\Libraries\Core\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @dataProvider invalidDatetimeFormatProvider
      * @covers       Lunr\Libraries\Core\DateTime::yesterday
-     *
-     * @return void
      */
     public function testYesterdayWithCustomInvalidDatetimeFormat($format)
     {

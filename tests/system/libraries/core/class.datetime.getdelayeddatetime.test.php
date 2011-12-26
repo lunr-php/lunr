@@ -19,7 +19,7 @@ namespace Lunr\Libraries\Core;
  *
  * @category   Libraries
  * @package    Core
- * @subpackage Libraries
+ * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Libraries\Core\DateTime
  */
@@ -31,11 +31,9 @@ class DateTimeGetDelayedDatetimeTest extends DateTimeTest
      *
      * @param Integer $timestamp UNIX Timestamp
      *
-     * @depends Lunr\Libraries\Core\DateTimeGetDateTimeTest::testGetDatetimeWithCustomTimestampAsBase
+     * @depends      Lunr\Libraries\Core\DateTimeGetDateTimeTest::testGetDatetimeWithCustomTimestampAsBase
      * @dataProvider validTimestampProvider
-     * @covers Lunr\Libraries\Core\DateTime::get_delayed_datetime
-     *
-     * @return void
+     * @covers       Lunr\Libraries\Core\DateTime::get_delayed_datetime
      */
     public function testGetDelayedDatetimeWithCustomTimestampAsBase($timestamp)
     {
@@ -49,9 +47,7 @@ class DateTimeGetDelayedDatetimeTest extends DateTimeTest
      * @param mixed $timestamp Various invalid timestamp values
      *
      * @dataProvider invalidTimestampProvider
-     * @covers Lunr\Libraries\Core\DateTime::get_delayed_datetime
-     *
-     * @return void
+     * @covers       Lunr\Libraries\Core\DateTime::get_delayed_datetime
      */
     public function testGetDelayedDatetimeWithCustomInvalidTimestampAsBase($timestamp)
     {
@@ -63,12 +59,10 @@ class DateTimeGetDelayedDatetimeTest extends DateTimeTest
      *
      * @param String $delay Various valid delay definitions
      *
-     * @depends Lunr\Libraries\Core\DateTimeBaseTest::testDefaultDatetimeFormat
-     * @depends Lunr\Libraries\Core\DateTimeGetDateTimeTest::testGetDatetimeWithCustomTimestampAsBase
+     * @depends      Lunr\Libraries\Core\DateTimeBaseTest::testDefaultDatetimeFormat
+     * @depends      Lunr\Libraries\Core\DateTimeGetDateTimeTest::testGetDatetimeWithCustomTimestampAsBase
      * @dataProvider validDelayProvider
-     * @covers Lunr\Libraries\Core\DateTime::get_delayed_datetime
-     *
-     * @return void
+     * @covers       Lunr\Libraries\Core\DateTime::get_delayed_datetime
      */
     public function testGetDelayedDatetimeWithValidDelay($delay)
     {
@@ -80,11 +74,9 @@ class DateTimeGetDelayedDatetimeTest extends DateTimeTest
      *
      * @param mixed $delay Various invalid delay definitions
      *
-     * @depends Lunr\Libraries\Core\DateTimeGetDateTimeTest::testGetDatetimeWithCustomTimestampAsBase
+     * @depends      Lunr\Libraries\Core\DateTimeGetDateTimeTest::testGetDatetimeWithCustomTimestampAsBase
      * @dataProvider invalidDelayProvider
-     * @covers Lunr\Libraries\Core\DateTime::get_delayed_datetime
-     *
-     * @return void
+     * @covers       Lunr\Libraries\Core\DateTime::get_delayed_datetime
      */
     public function testGetDelayedDatetimeWithInvalidDelay($delay)
     {

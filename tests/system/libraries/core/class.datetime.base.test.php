@@ -20,7 +20,7 @@ namespace Lunr\Libraries\Core;
  *
  * @category   Libraries
  * @package    Core
- * @subpackage Libraries
+ * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Libraries\Core\DateTime
  */
@@ -29,8 +29,6 @@ class DateTimeBaseTest extends DateTimeTest
 
     /**
      * Check that default DateTime format is as expected.
-     *
-     * @return void
      */
     public function testDefaultDatetimeFormat()
     {
@@ -46,8 +44,6 @@ class DateTimeBaseTest extends DateTimeTest
      *
      * @dataProvider datetimeFormatProvider
      * @covers       Lunr\Libraries\Core\DateTime::set_datetime_format
-     *
-     * @return void
      */
     public function testSetCustomDatetimeFormat($format)
     {
@@ -59,8 +55,6 @@ class DateTimeBaseTest extends DateTimeTest
 
     /**
      * Check that default Locale is as expected.
-     *
-     * @return void
      */
     public function testDefaultLocale()
     {
@@ -76,8 +70,6 @@ class DateTimeBaseTest extends DateTimeTest
      * @runInSeparateProcess
      *
      * @covers Lunr\Libraries\Core\DateTime::set_locale
-     *
-     * @return void
      */
     public function testSetCustomLocaleWithDefaultCharset()
     {
@@ -94,8 +86,6 @@ class DateTimeBaseTest extends DateTimeTest
      * @runInSeparateProcess
      *
      * @covers Lunr\Libraries\Core\DateTime::set_locale
-     *
-     * @return void
      */
     public function testSetCustomLocaleWithCustomCharset()
     {
@@ -116,8 +106,6 @@ class DateTimeBaseTest extends DateTimeTest
      * @depends      testDefaultLocale
      * @dataProvider invalidLocaleProvider
      * @covers       Lunr\Libraries\Core\DateTime::set_locale
-     *
-     * @return void
      */
     public function testSetCustomInvalidLocaleWithDefaultCharset($value)
     {
@@ -136,8 +124,6 @@ class DateTimeBaseTest extends DateTimeTest
      *
      * @dataProvider equalDatetimeProvider
      * @covers       Lunr\Libraries\Core\DateTime::sort_compare_datetime
-     *
-     * @return void
      */
     public function testDatetimeIsEqual($date1, $date2)
     {
@@ -152,8 +138,6 @@ class DateTimeBaseTest extends DateTimeTest
      *
      * @dataProvider inequalDatetimeProvider
      * @covers       Lunr\Libraries\Core\DateTime::sort_compare_datetime
-     *
-     * @return void
      */
     public function testDatetimeIsLower($date1, $date2)
     {
@@ -168,8 +152,6 @@ class DateTimeBaseTest extends DateTimeTest
      *
      * @dataProvider inequalDatetimeProvider
      * @covers       Lunr\Libraries\Core\DateTime::sort_compare_datetime
-     *
-     * @return void
      */
     public function testDatetimeIsGreater($date1, $date2)
     {
