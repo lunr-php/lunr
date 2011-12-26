@@ -1,10 +1,7 @@
 <?php
 
 /**
- * This file contains a PHP Class autoloader, which
- * on class instantiation tries to load the required
- * source file automatically without the need to
- * explicitely use a "require" or "include" statement
+ * This file contains a PHP Class autoloader.
  *
  * PHP Version 5.3
  *
@@ -18,7 +15,9 @@
 namespace Lunr\Libraries\Core;
 
 /**
- * PHP Class Autoloader
+ * PHP Class Autoloader, which on class instantiation tries
+ * to load the required source file automatically without the
+ * need to explicitely use a "require" or "include" statement.
  *
  * @category   Libraries
  * @package    Core
@@ -34,11 +33,31 @@ class Autoloader
      * that extend from the base Controller class.
      * @var array
      */
-    private static $controllers = array(
-        'web',
-        'webservice',
-        'cli'
-    );
+    private $controllers;
+
+    /**
+     * List of included files.
+     * @var array
+     */
+    private $loaded;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->controllers = array('web', 'webservice', 'cli');
+        $this->loaded = array();
+    }
+
+    /**
+     * Destructor.
+     */
+    public function __destruct()
+    {
+        unset($this->controllers);
+        unset($this->loaded);
+    }
 
     /**
      * Try to load the given class file from the include path.
@@ -47,58 +66,14 @@ class Autoloader
      *
      * @return void
      */
-    public static function load($class)
+    public function load($class)
     {
-        $class = str_replace('\\', '/', $class);
-        $path  = strtolower(dirname($class));
-        $path  = substr($path, strpos($path, '/')+1);
-        $path  = empty($path) ? '' : $path . '/';
-        $class = basename($class);
+        $file = $this->get_class_filepath($class);
 
-        if (strpos($class, 'Interface') !== FALSE
-            && $class !== 'Interface')
+        if (!in_array($file, $this->loaded))
         {
-            $class = strtolower(str_replace('Interface', '', $class));
-            include_once $path . "interface.$class.inc.php";
-        }
-        elseif (strpos($class, 'Mock') !== FALSE)
-        {
-            $class = strtolower(str_replace('Mock', '', $class));
-            include_once $path . "class.$class.mock.php";
-        }
-        elseif (strpos($class, 'Test') !== FALSE)
-        {
-            $class = strtolower(str_replace('Test', '', $class));
-            include_once $path . "class.$class.test.php";
-        }
-        elseif (strpos($class, 'Controller') !== FALSE)
-        {
-            $controller = strtolower(str_replace('Controller', '', $class));
-            if (in_array($controller, self::$controllers))
-            {
-                include_once $path . "class.${controller}controller.inc.php";
-            }
-            else
-            {
-                include_once $path . "controller.$controller.inc.php";
-            }
-        }
-        elseif (strpos($class, 'Model') !== FALSE
-            && $class !== 'Model')
-        {
-            $class = strtolower(str_replace('Model', '', $class));
-            include_once $path . "model.$class.inc.php";
-        }
-        elseif (strpos($class, 'View') !== FALSE
-            && $class !== 'View')
-        {
-            $class = strtolower(str_replace('View', '', $class));
-            include_once $path . "view.$class.inc.php";
-        }
-        else
-        {
-            $class = strtolower($class);
-            include_once $path . "class.$class.inc.php";
+            include_once $file;
+            $this->loaded[] = $file;
         }
     }
 
@@ -109,7 +84,7 @@ class Autoloader
      *
      * @return void
      */
-    public static function add_include_path($path)
+    public function add_include_path($path)
     {
         set_include_path(
             get_include_path() . ':' .
@@ -124,9 +99,83 @@ class Autoloader
      *
      * @return void
      */
-    public static function register_project_controller($controller)
+    public function register_project_controller($controller)
     {
-        self::$controllers[] = strtolower($controller);
+        $this->controllers[] = strtolower($controller);
+    }
+
+    /**
+     * Convert namespaced classname to filepath.
+     *
+     * @param String $class namespaced classname
+     *
+     * @return String $filepath Path and filename
+     */
+    private function get_class_filepath($class)
+    {
+        $class = str_replace('\\', '/', $class);
+        $path  = strtolower(dirname($class));
+        $path  = substr($path, strpos($path, '/')+1);
+        $path  = empty($path) ? '' : $path . '/';
+        $class = basename($class);
+
+        return $path . $this->get_class_filename($class);
+    }
+
+    /**
+     * Construct the expected filename for a class.
+     *
+     * @param String $class Classname
+     *
+     * @return String $filename Expected filename
+     */
+    private function get_class_filename($class)
+    {
+        $normalized_name = trim(preg_replace('/([a-z0-9])?([A-Z])/','$1 $2',$class));
+        $split_name = explode(' ', $normalized_name);
+
+        if ($split_name[0] == 'Mock')
+        {
+            $class = strtolower(str_replace('Mock', '', $class));
+            return "class.$class.mock.php";
+        }
+
+        $index = sizeof($split_name)-1;
+
+        if ($index == 0)
+        {
+            $class = strtolower($class);
+            return "class.$class.inc.php";
+        }
+
+        switch ($split_name[$index])
+        {
+            case 'Controller':
+                $class = strtolower(str_replace($split_name[$index], '', $class));
+                if (in_array($class, $this->controllers))
+                {
+                    return "class.${class}controller.inc.php";
+                }
+                else
+                {
+                    return "controller.$class.inc.php";
+                }
+                break;
+            case 'Model':
+            case 'View':
+            case 'Interface':
+                $class = strtolower(str_replace($split_name[$index], '', $class));
+                return strtolower($split_name[$index]) . ".$class.inc.php";
+                break;
+            case 'Test':
+                $class = strtolower(str_replace('Test', '', $class));
+                return "class.$class.test.php";
+                break;
+            default:
+                $class = strtolower($class);
+                return "class.$class.inc.php";
+                break;
+        }
     }
 
 }
