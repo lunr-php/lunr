@@ -1,92 +1,247 @@
 <?php
 
-use Lunr\Libraries\L10n\L10n;
-use Lunr\Libraries\Core\DateTime;
+/**
+ * This file contains the L10nTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    L10n
+ * @subpackage Tests
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
 
-include_once("conf.l10n.inc.php");
+namespace Lunr\Libraries\L10n;
+use Lunr\Libraries\Core\DateTime;
+use Lunr\Libraries\Core\Configuration;
+use PHPUnit_Framework_TestCase;
+use ReflectionClass;
 
 /**
- * This tests Lunr's L10n class
- * @covers Lunr\Libraries\L10n\L10n
+ * This class contains test methods for the L10n class.
+ *
+ * @category   Libraries
+ * @package    L10n
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\L10n\L10n
  */
 class L10nTest extends PHPUnit_Framework_TestCase
 {
 
-    protected $languages;
-
-    protected function setUp()
-    {
-        global $config;
-
-        $this->languages = array();
-        if ($handle = opendir($config['l10n']['locales']))
-        {
-            while (FALSE !== ($file = readdir($handle)))
-            {
-                $path = $config['l10n']['locales'] . "/$file";
-                if ($file != "." && $file != ".." && is_dir($path))
-                {
-                    $this->languages[] = $file;
-                }
-            }
-        }
-        closedir($handle);
-        $this->languages[] = $config['l10n']['default_language'];
-    }
-
     /**
-     * Test the static function get_supported_languages()
-     * @covers Lunr\Libraries\L10n\L10n::get_supported_languages
+     * Instance of the L10n class.
+     * @var L10n
      */
-    public function testGetSupportedLanguages()
+    private $l10n;
+
+    /**
+     * Reflection Instance of the L10n class.
+     */
+    private $l10n_reflection;
+
+    /**
+     * Array of supported languages.
+     * @var array
+     */
+    private $languages;
+
+    /**
+     * Default language to test with.
+     * @var String
+     */
+    const DEFAULT_LANG = 'nl_NL';
+
+    /**
+     * TestCase Constructor.
+     */
+    public function setUp()
     {
-        $this->assertEquals($this->languages, L10n::get_supported_languages());
+        $config = new Configuration(array());
+        $config['l10n'] = array();
+        $config['l10n']['default_language'] = self::DEFAULT_LANG;
+        $config['l10n']['locales'] = dirname(__FILE__) . '/../../../statics/l10n';
+
+        $datetime = $this->getMock('Lunr\Libraries\Core\DateTime');
+        $datetime->expects($this->any())
+                 ->method('get_delayed_timestamp')
+                 ->will($this->returnValue(strtotime('+1 year')));
+
+        $this->l10n = new L10n($datetime, $config);
+
+        $this->l10n_reflection = new ReflectionClass("Lunr\Libraries\L10n\L10n");
+
+        $this->languages = array('en_GB', 'nl_NL');
     }
 
     /**
-    * Test the static function iso_to_posix()
-    * @depends testGetSupportedLanguages
-    * @dataProvider languageProvider
-    * @covers Lunr\Libraries\L10n\L10n::iso_to_posix
-    */
-    public function testIsoToPosix($posix, $iso)
+     * TestCase Destructor.
+     */
+    public function tearDown()
     {
-        if (in_array($posix, $this->languages))
-        {
-            $this->assertEquals($posix, L10n::iso_to_posix($iso));
-        }
-        else
-        {
-            global $config;
-            $this->assertEquals($config['l10n']['default_language'], L10n::iso_to_posix($iso));
-        }
+        unset($this->l10n);
+        unset($this->l10n_reflection);
+        unset($this->languages);
     }
 
     /**
-     * Test the static function set_language()
-     * @depends Lunr\Libraries\Core\DateTimeGetDelayedTimestampTest::testGetDelayedTimestampWithValidDelay
-     * @depends testGetSupportedLanguages
-     * @depends testIsoToPosix
-     * @dataProvider languageProvider
-     * @covers Lunr\Libraries\L10n\L10n::set_language
+     * Test that $languages is initially empty.
+     */
+    public function testLanguagesEmpty()
+    {
+        $properties = $this->l10n_reflection->getStaticProperties();
+        $languages  = $properties['languages'];
+        $this->assertEmpty($languages);
+    }
+
+    /**
+     * Test initial call to get_supported_languages().
+     *
+     * @depends testLanguagesEmpty
+     * @covers  Lunr\Libraries\L10n\L10n::get_supported_languages
+     */
+    public function testInitialGetSupportedLanguages()
+    {
+        $this->assertEquals($this->languages, $this->l10n->get_supported_languages());
+    }
+
+    /**
+     * Test that get_supported_languages() populated $languages.
+     *
+     * @depends testInitialGetSupportedLanguages
+     */
+    public function testLanguagesPopulated()
+    {
+        $properties = $this->l10n_reflection->getStaticProperties();
+        $languages  = $properties['languages'];
+        $this->assertEquals($this->languages, $languages);
+    }
+
+    /**
+     * Test get_supported_languages() when it was already executed before.
+     *
+     * @depends testLanguagesPopulated
+     * @covers  Lunr\Libraries\L10n\L10n::get_supported_languages
+     */
+    public function testCachedGetSupportedLanguages()
+    {
+        $this->assertEquals($this->languages, $this->l10n->get_supported_languages());
+    }
+
+    /**
+     * Test iso_to_posix() with supported languages.
+     *
+     * @param String $iso   ISO language definition
+     * @param String $posix POSIX language definition
+     *
+     * @depends      testCachedGetSupportedLanguages
+     * @dataProvider supportedLanguagesProvider
+     * @covers       Lunr\Libraries\L10n\L10n::iso_to_posix
+     */
+    public function testIsoToPosixForSupportedLanguages($iso, $posix)
+    {
+        $this->assertEquals($posix, $this->l10n->iso_to_posix($iso));
+    }
+
+    /**
+     * Test iso_to_posix() with unsupported languages.
+     *
+     * @param String $iso   ISO language definition
+     *
+     * @depends      testCachedGetSupportedLanguages
+     * @dataProvider unsupportedLanguagesProvider
+     * @covers       Lunr\Libraries\L10n\L10n::iso_to_posix
+     */
+    public function testIsoToPosixForUnsupportedLanguages($iso)
+    {
+        $this->assertEquals(self::DEFAULT_LANG, $this->l10n->iso_to_posix($iso));
+    }
+
+    /**
+     * Test that we do not have an existing cookie polluting this test.
+     */
+    public function testCookieNotSet()
+    {
+        $this->assertFalse(isset($_COOKIE['lang']));
+    }
+
+    /**
+     * Test set_language for supported languages.
+     *
+     * @param String $language ISO language definition
+     * @param String $locale   POSIX language definition
+     *
      * @runInSeparateProcess
+     *
+     * @depends      testIsoToPosixForSupportedLanguages
+     * @dataProvider supportedLanguagesProvider
+     * @covers       Lunr\Libraries\L10n\L10n::set_language
      */
-    public function testSetLanguage($locale, $language)
+    public function testSetLanguageForSupportedLanguages($language, $locale)
     {
-        if (in_array($locale, $this->languages))
-        {
-            $this->assertEquals($locale, L10n::set_language($language));
-        }
-        else
-        {
-            global $config;
-            $this->assertEquals($config['l10n']['default_language'], L10n::set_language($language));
-        }
+        $this->assertEquals($locale, $this->l10n->set_language($language));
     }
 
-    public function languageProvider()
+    /**
+     * Test set_language for unsupported languages.
+     *
+     * @param String $language ISO language definition
+     *
+     * @runInSeparateProcess
+     *
+     * @depends      testIsoToPosixForUnsupportedLanguages
+     * @dataProvider unsupportedLanguagesProvider
+     * @covers       Lunr\Libraries\L10n\L10n::set_language
+     */
+    public function testSetLanguageForUnsupportedLanguages($language)
     {
-        return array(array("en_GB", "en"), array("nl_NL", "nl"), array("de_DE", "de"));
+        $this->assertEquals(self::DEFAULT_LANG, $this->l10n->set_language($language));
+    }
+
+    /**
+     * Test set_language sets a cookie correctly.
+     *
+     * @param String $language ISO language definition
+     * @param String $locale   POSIX language definition
+     *
+     * @runInSeparateProcess
+     *
+     * @depends      testCookieNotSet
+     * @depends      testIsoToPosixForSupportedLanguages
+     * @dataProvider supportedLanguagesProvider
+     * @covers       Lunr\Libraries\L10n\L10n::set_language
+     */
+    public function testSetLanguageSetsCookie($language, $locale)
+    {
+        ///TODO: Requires a cookie class
+    }
+
+    /**
+     * Unit Test Data Provider for supported languages.
+     *
+     * @return array $languages Array of supported languages
+     */
+    public function supportedLanguagesProvider()
+    {
+        $languages   = array();
+        $languages[] = array('en', 'en_GB');
+        $languages[] = array('nl', 'nl_NL');
+
+        return $languages;
+    }
+
+    /**
+     * Unit Test Data Provider for unsupported languages.
+     *
+     * @return array $languages Array of unsupported languages
+     */
+    public function unsupportedLanguagesProvider()
+    {
+        $languages   = array();
+        $languages[] = array('de', 'de_DE');
+
+        return $languages;
     }
 }
 
