@@ -14,6 +14,8 @@
 
 namespace Lunr\Libraries\L10n;
 use Lunr\Libraries\Core\DateTime;
+use UnexpectedValueException;
+use DirectoryIterator;
 
 /**
  * Localization support class
@@ -28,10 +30,40 @@ class L10n
 {
 
     /**
+     * Instance of the DateTime class.
+     * @var DateTime
+     */
+    private $datetime;
+
+    /**
+     * Reference to the Configuration class.
+     * @var Configuration
+     */
+    private $configuration;
+
+    /**
      * Static list of supported languages
      * @var array
      */
     private static $languages;
+
+    /**
+     * Constructor.
+     */
+    public function __construct($datetime, &$configuration)
+    {
+        $this->datetime = $datetime;
+        $this->configuration =& $configuration;
+    }
+
+    /**
+     * Destructor.
+     */
+    public function __destruct()
+    {
+        unset($this->datetime);
+        $this->configuration = NULL;
+    }
 
     /**
      * Get list of supported languages from the filesystem.
@@ -41,26 +73,34 @@ class L10n
      *
      * @return array Supported languages
      */
-    public static function get_supported_languages()
+    public function get_supported_languages()
     {
-        if (!isset(self::$languages))
+        if (isset(self::$languages))
         {
-            global $config;
-            self::$languages = array();
-            if ($handle = opendir($config['l10n']['locales']))
-            {
-                while (FALSE !== ($file = readdir($handle)))
-                {
-                    $path = $config['l10n']['locales'] . "/$file";
-                    if ($file != '.' && $file != '..' && is_dir($path))
-                    {
-                        self::$languages[] = $file;
-                    }
-                }
-                closedir($handle);
-            }
-            self::$languages[] = $config['l10n']['default_language'];
+            return self::$languages;
         }
+
+        self::$languages = array();
+
+        try
+        {
+            $dir = new DirectoryIterator($this->configuration['l10n']['locales']);
+            foreach ($dir as $file)
+            {
+                if (!$file->isDot() && $file->isDir())
+                {
+                    self::$languages[] = $dir->getFilename();
+                }
+            }
+        }
+        catch(UnexpectedValueException $e)
+        {
+            //Nothing to do
+        }
+
+        self::$languages[] = $this->configuration['l10n']['default_language'];
+        self::$languages   = array_unique(self::$languages);
+
         return self::$languages;
     }
 
@@ -69,16 +109,13 @@ class L10n
      *
      * @param String $language The language to set
      *
-     * @return String $language The POSIX locale that has been deemed most
-     *                          appropriate
+     * @return String $lang The POSIX locale that has been deemed most
+     *                      appropriate
      */
-    public static function set_language($language)
+    public function set_language($language)
     {
-        $lang = self::iso_to_posix($language);
-        $datetime = new DateTime();
-
-        setcookie('lang', $lang, $datetime->get_delayed_timestamp('+1year'), '/');
-        unset($datetime);
+        $lang = $this->iso_to_posix($language);
+        setcookie('lang', $lang, $this->datetime->get_delayed_timestamp('+1year'), '/');
         return $lang;
     }
 
@@ -90,10 +127,9 @@ class L10n
      * @return String $locale The POSIX locale that has been deemed most
      *                          appropriate or the default if not found
      */
-    public static function iso_to_posix($language)
+    public function iso_to_posix($language)
     {
-        global $config;
-        $supported = self::get_supported_languages($language);
+        $supported = $this->get_supported_languages();
 
         foreach ($supported as $locale)
         {
@@ -102,7 +138,7 @@ class L10n
                 return $locale;
             }
         }
-        return $config['l10n']['default_language'];
+        return $this->configuration['l10n']['default_language'];
     }
 
 }
