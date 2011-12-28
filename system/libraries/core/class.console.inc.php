@@ -37,11 +37,13 @@ class Console
 
     /**
      * Constructor.
+     *
+     * @param DateTime $datetime Instance of the DateTime class.
      */
     public function __construct($datetime)
     {
         $this->datetime = $datetime;
-        $this->datetime->set_datetime_format('%Y-%m-%d %H-%M-%S');
+        $this->datetime->set_datetime_format('%Y-%m-%d %H:%M:%S');
     }
 
     /**
