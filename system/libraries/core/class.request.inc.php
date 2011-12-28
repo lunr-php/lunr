@@ -154,7 +154,7 @@ class Request
 
         foreach ($_GET as $key => $value)
         {
-            if (substr(0,5,$key) == 'param')
+            if (substr($key,0,5) == 'param')
             {
                 $this->request['params'][] = $value;
             }
