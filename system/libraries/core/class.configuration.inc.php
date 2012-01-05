@@ -61,12 +61,18 @@ class Configuration implements ArrayAccess, Iterator, Countable
      * @param array $bootstrap Bootstrap config values, aka config values used before
      *                         the class has been instantiated.
      */
-    public function __construct($bootstrap)
+    public function __construct($bootstrap = FALSE)
     {
+        if (!is_array($bootstrap))
+        {
+            $bootstrap = array();
+        }
+
         if (!empty($bootstrap))
         {
             $bootstrap = $this->convert_array_to_class($bootstrap);
         }
+
         $this->config = $bootstrap;
         $this->rewind();
         $this->size_invalid = TRUE;
@@ -96,6 +102,8 @@ class Configuration implements ArrayAccess, Iterator, Countable
                 $this[$key] = clone $value;
             }
         }
+
+        $this->count();
     }
 
     /**
@@ -124,7 +132,16 @@ class Configuration implements ArrayAccess, Iterator, Countable
 
         include_once 'conf.' . $identifier . '.inc.php';
 
-        $config = $this->convert_array_to_class($config);
+        if (!is_array($config))
+        {
+            $config = array();
+        }
+
+        if (!empty($config))
+        {
+            $config = $this->convert_array_to_class($config);
+        }
+
         $this->config = array_merge_recursive($this->config, $config);
         $this->size_invalid = TRUE;
     }
@@ -328,6 +345,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
         if ($this->size_invalid === TRUE)
         {
             $this->size = count($this->config);
+            $this->size_invalid = FALSE;
         }
         return $this->size;
     }
