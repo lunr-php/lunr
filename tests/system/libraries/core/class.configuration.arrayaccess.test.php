@@ -54,7 +54,7 @@ class ConfigurationArrayAccessTest extends ConfigurationTest
      *
      * @dataProvider nonExistingConfigPairProvider
      */
-    public function testOffsetDoesNotExists($offset)
+    public function testOffsetDoesNotExist($offset)
     {
         $this->assertFalse($this->configuration->offsetExists($offset));
     }

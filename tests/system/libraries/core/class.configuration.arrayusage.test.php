@@ -85,7 +85,7 @@ class ConfigurationArrayUsageTest extends ConfigurationTest
      * @param mixed $offset Offset
      *
      * @dataProvider nonExistingConfigPairProvider
-     * @depends      Lunr\Libraries\Core\ConfigurationArrayAccessTest::testOffsetNotExists
+     * @depends      Lunr\Libraries\Core\ConfigurationArrayAccessTest::testOffsetDoesNotExist
      */
     public function testIssetOnNonExistingOffset($offset)
     {
@@ -96,7 +96,7 @@ class ConfigurationArrayUsageTest extends ConfigurationTest
      * Test correct foreach behavior.
      *
      * @depends Lunr\Libraries\Core\ConfigurationArrayAccessTest::testOffsetExists
-     * @depends Lunr\Libraries\Core\ConfigurationArrayAccessTest::testOffsetNotExists
+     * @depends Lunr\Libraries\Core\ConfigurationArrayAccessTest::testOffsetDoesNotExist
      * @depends Lunr\Libraries\Core\ConfigurationArrayAccessTest::testOffsetGetWithExistingOffset
      * @depends Lunr\Libraries\Core\ConfigurationArrayConstructorTest::testRewindRewindsPointer
      * @depends Lunr\Libraries\Core\ConfigurationArrayConstructorTest::testValidIsTrueForExistingElement
@@ -118,6 +118,7 @@ class ConfigurationArrayUsageTest extends ConfigurationTest
         foreach($this->configuration as $key => $value)
         {
             $this->assertEquals($config[$key], $value);
+            ++$iteration;
         }
 
         $this->assertEquals($iteration, count($this->configuration));
