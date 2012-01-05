@@ -41,6 +41,11 @@ class Request
     private $get;
 
     /**
+     * Stored $_COOKIE values
+     */
+    private $cookie;
+
+    /**
      * Request parameters:
      *  'protocol'  The protocol used for the request
      *  'domain'    The domain used for the request
@@ -76,6 +81,7 @@ class Request
 
         $this->store_post();
         $this->store_get();
+        $this->store_cookie();
         $this->store_url($configuration);
     }
 
@@ -86,6 +92,7 @@ class Request
     {
         unset($this->post);
         unset($this->get);
+        unset($this->cookie);
         unset($this->request);
         unset($this->json_enums);
     }
@@ -177,6 +184,27 @@ class Request
     }
 
     /**
+     * Store $_COOKIE values locally and reset it globally.
+     *
+     * @return void
+     */
+    private function store_cookie()
+    {
+        if (!is_array($_COOKIE) || empty($_COOKIE))
+        {
+            return;
+        }
+
+        foreach ($_COOKIE as $key => $value)
+        {
+            $this->cookie[$key] = $value;
+        }
+
+        //reset global COOKIE array
+        $_COOKIE = array();
+    }
+
+    /**
      * Store url request values locally.
      *
      * @param Configuration &$configuration Reference to the Configuration class
@@ -235,6 +263,18 @@ class Request
     public function get_post_data($key)
     {
         return isset($this->post[$key]) ? $this->post[$key] : NULL;
+    }
+
+    /**
+     * Retrieve a stored COOKIE value.
+     *
+     * @param mixed $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function get_cookie_data($key)
+    {
+        return isset($this->cookie[$key]) ? $this->cookie[$key] : NULL;
     }
 
     /**
