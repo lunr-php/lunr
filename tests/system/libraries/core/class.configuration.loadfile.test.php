@@ -80,11 +80,22 @@ class ConfigurationLoadFileTest extends ConfigurationTest
      * Test loading a non-existing file.
      *
      * @runInSeparateProcess
+     *
+     * @expectedException PHPUnit_Framework_Error
      */
-//     public function testLoadNonExistingFile()
-//     {
-//         $this->configuration->load_file('not_exists');
-//     }
+    public function testLoadNonExistingFile()
+    {
+        $property = $this->configuration_reflection->getProperty('config');
+        $property->setAccessible(TRUE);
+
+        $before = $property->getValue($this->configuration);
+
+        $this->configuration->load_file('not_exists');
+
+        $after  = $property->getValue($this->configuration);
+
+        $this->assertEquals($before, $after);
+    }
 
     /**
      * Test that loading a file invalidates the cached size value.
