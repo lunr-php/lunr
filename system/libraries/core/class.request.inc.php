@@ -156,6 +156,9 @@ class Request
     {
         if (!is_array($_GET) || empty($_GET))
         {
+            $this->request['controller'] = NULL;
+            $this->request['method']     = NULL;
+            $this->request['params']     = array();
             return;
         }
 
@@ -177,6 +180,21 @@ class Request
             {
                 $this->get[$key] = $value;
             }
+        }
+
+        if (!isset($this->request['controller']))
+        {
+            $this->request['controller'] = NULL;
+        }
+
+        if (!isset($this->request['method']))
+        {
+            $this->request['method'] = NULL;
+        }
+
+        if (!isset($this->request['params']))
+        {
+            $this->request['params'] = array();
         }
 
         //reset global GET array
@@ -213,7 +231,7 @@ class Request
      */
     private function store_url(&$configuration)
     {
-        if (PHP_SAPI == 'cli')
+        if ($configuration['php_sapi'] == 'cli')
         {
             $this->request['base_path'] = $configuration['default_webpath'];
             $this->request['protocol']  = $configuration['default_protocol'];
@@ -229,7 +247,7 @@ class Request
                 (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
 
             $this->request['domain'] = $_SERVER['SERVER_NAME'];
-            $this->request['port'] = $_SERVER['SERVER_PORT'];
+            $this->request['port']   = $_SERVER['SERVER_PORT'];
 
             $baseurl = $this->request['protocol'] . '://' . $this->request['domain'];
             if ((($this->request['protocol'] == 'http') && ($this->request['port'] != 80))
