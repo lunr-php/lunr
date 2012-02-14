@@ -4,4 +4,4 @@
 REPOSITORY = "Lunr"
 
 # ReviewBoard Server URL
-REVIEWBOARD_URL = "http://reviews.m2mobi.com"
+REVIEWBOARD_URL = "http://reviews.m2mobi.nl"
