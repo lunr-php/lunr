@@ -42,6 +42,7 @@ class Request
 
     /**
      * Stored $_COOKIE values
+     * @var array
      */
     private $cookie;
 
