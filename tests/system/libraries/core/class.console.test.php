@@ -97,11 +97,8 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
         $msg = 'Test';
         $output = self::DATETIME_STRING . ': ' . $msg;
 
-        ob_start();
+        $this->expectOutputString($output);
         $this->console->cli_print($msg);
-        $return = ob_get_clean();
-
-        $this->assertEquals($output, $return);
     }
 
     /**
@@ -114,11 +111,8 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
         $msg = 'Test';
         $output = self::DATETIME_STRING . ': ' . $msg . "\n";
 
-        ob_start();
+        $this->expectOutputString($output);
         $this->console->cli_println($msg);
-        $return = ob_get_clean();
-
-        $this->assertEquals($output, $return);
     }
 
     /**
@@ -130,11 +124,8 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
     {
         $output = "[ok]\n";
 
-        ob_start();
+        $this->expectOutputString($output);
         $this->console->cli_print_status(TRUE);
-        $return = ob_get_clean();
-
-        $this->assertEquals($output, $return);
     }
 
     /**
@@ -146,11 +137,8 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
     {
         $output = "[failed]\n";
 
-        ob_start();
+        $this->expectOutputString($output);
         $this->console->cli_print_status(FALSE);
-        $return = ob_get_clean();
-
-        $this->assertEquals($output, $return);
     }
 
 }
