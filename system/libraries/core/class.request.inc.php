@@ -54,6 +54,8 @@ class Request
      *  'base_path' The path on the server to the application
      *  'base_url'  All of the above combined
      *
+     *  'sapi'      The PHP SAPI invoking the code
+     *
      *  'controller' The controller requested
      *  'method'     The method requested of that controller
      *  'params'     The parameters for that method
@@ -79,6 +81,8 @@ class Request
         $this->get  = array();
         $this->request = array();
         $this->json_enums = array();
+
+        $this->request['sapi'] = PHP_SAPI;
 
         $this->store_post();
         $this->store_get();
@@ -119,6 +123,7 @@ class Request
             case 'controller':
             case 'method':
             case 'params':
+            case 'sapi':
                 return $this->request[$name];
                 break;
             default:
@@ -232,7 +237,7 @@ class Request
      */
     private function store_url(&$configuration)
     {
-        if ($configuration['php_sapi'] == 'cli')
+        if ($this->request['sapi'] == 'cli')
         {
             $this->request['base_path'] = $configuration['default_webpath'];
             $this->request['protocol']  = $configuration['default_protocol'];

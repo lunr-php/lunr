@@ -184,6 +184,8 @@ class RequestStoreTest extends RequestTest
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
 
+        $this->set_request_sapi_non_cli($stored);
+
         $method = $this->reflection_request->getMethod('store_url');
         $method->setAccessible(TRUE);
 
@@ -206,6 +208,8 @@ class RequestStoreTest extends RequestTest
     {
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
+
+        $this->set_request_sapi_non_cli($stored);
 
         $method = $this->reflection_request->getMethod('store_url');
         $method->setAccessible(TRUE);
@@ -230,6 +234,8 @@ class RequestStoreTest extends RequestTest
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
 
+        $this->set_request_sapi_non_cli($stored);
+
         $method = $this->reflection_request->getMethod('store_url');
         $method->setAccessible(TRUE);
 
@@ -252,6 +258,8 @@ class RequestStoreTest extends RequestTest
     {
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
+
+        $this->set_request_sapi_non_cli($stored);
 
         $method = $this->reflection_request->getMethod('store_url');
         $method->setAccessible(TRUE);
@@ -282,6 +290,8 @@ class RequestStoreTest extends RequestTest
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
 
+        $this->set_request_sapi_non_cli($stored);
+
         $method = $this->reflection_request->getMethod('store_url');
         $method->setAccessible(TRUE);
 
@@ -311,6 +321,8 @@ class RequestStoreTest extends RequestTest
     {
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
+
+        $this->set_request_sapi_non_cli($stored);
 
         $method = $this->reflection_request->getMethod('store_url');
         $method->setAccessible(TRUE);

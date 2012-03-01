@@ -48,39 +48,15 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
     protected $configuration;
 
     /**
-     * Mock of the Configuration class, with PHP_SAPI set to cli.
-     * @var Configuration
-     */
-    protected $configuration_cli;
-
-    /**
      * Shared TestCase Constructor code.
      *
      * @return void
      */
     public function setUpShared()
     {
-        $configuration_cli = $this->getMock('Lunr\Libraries\Core\Configuration');
-
-        $map = array(
-            array('php_sapi', 'cli'),
-            array('default_webpath', '/path'),
-            array('default_protocol', 'http'),
-            array('default_domain', 'www.domain.com'),
-            array('default_port', 666),
-            array('default_url', 'http://www.domain.com:666/path/')
-        );
-
-        $configuration_cli->expects($this->any())
-                      ->method('offsetGet')
-                      ->will($this->returnValueMap($map));
-
-        $this->configuration_cli = $configuration_cli;
-
         $configuration = $this->getMock('Lunr\Libraries\Core\Configuration');
 
         $map = array(
-            array('php_sapi', 'apache'),
             array('default_webpath', '/path'),
             array('default_protocol', 'http'),
             array('default_domain', 'www.domain.com'),
@@ -119,7 +95,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
 
         $_SERVER = $this->setup_server_superglobal();
 
-        $this->request = new Request($this->configuration_cli);
+        $this->request = new Request($this->configuration);
 
         $this->request->set_json_enums($enums);
     }
@@ -137,7 +113,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
         $_GET    = array();
         $_COOKIE = array();
 
-        $this->request = new Request($this->configuration_cli);
+        $this->request = new Request($this->configuration);
     }
 
     /**
@@ -148,7 +124,6 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
         unset($this->request);
         unset($this->reflection_request);
         unset($this->configuration);
-        unset($this->configuration_cli);
     }
 
     /**
@@ -164,6 +139,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
         $values[] = array('port', '666');
         $values[] = array('base_path', '/path');
         $values[] = array('base_url', 'http://www.domain.com:666/path/');
+        $values[] = array('sapi', 'cli');
         $values[] = array('controller', NULL);
         $values[] = array('method', NULL);
         $values[] = array('params', array());
@@ -184,6 +160,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
         $values[] = array('port', '666');
         $values[] = array('base_path', '/path');
         $values[] = array('base_url', 'http://www.domain.com:666/path/');
+        $values[] = array('sapi', 'cli');
         $values[] = array('controller', 'controller');
         $values[] = array('method', 'method');
         $values[] = array('params', array('param1', 'param2'));
@@ -339,6 +316,23 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
         $server['SERVER_PORT'] = '443';
 
         return $server;
+    }
+
+    /**
+     * Set the stored sapi value to 'apache'
+     *
+     * @param ReflectionProperty &$reflection_property Reference to the ReflectionProperty class
+     *                                                 for the private request attribute
+     *
+     * @return void
+     */
+    protected function set_request_sapi_non_cli(&$reflection_property)
+    {
+        $reflection_property->setAccessible(TRUE);
+        $request = $reflection_property->getValue($this->request);
+        $request['sapi'] = 'apache';
+
+        $reflection_property->setValue($this->request, $request);
     }
 
 }
