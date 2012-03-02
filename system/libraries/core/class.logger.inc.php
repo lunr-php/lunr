@@ -60,15 +60,15 @@ class Logger
         $this->request = NULL;
     }
 
+
     /**
-     * Trigger a PHP warning.
+     * Construct an error message according to the input.
      *
      * @param String $info The error string that should be printed
-     * @param String $file The log file the error should be logged to (optional)
      *
-     * @return void
+     * @return array $msg The error message, once with prefix, and once without
      */
-    public function log_error($info, $file = '')
+    private function construct_error_message($info)
     {
         $prefix = '[' . $this->datetime->get_datetime() . ']: ';
 
@@ -81,17 +81,36 @@ class Logger
             $infix = '';
         }
 
+        $msg = array();
+        $msg[0] = $infix . $info;
+        $msg[1] = $prefix . $msg[0];
+
+        return $msg;
+    }
+
+    /**
+     * Trigger a PHP warning.
+     *
+     * @param String $info The error string that should be printed
+     * @param String $file The log file the error should be logged to (optional)
+     *
+     * @return void
+     */
+    public function log_error($info, $file = '')
+    {
+        $msg = $this->construct_error_message($info);
+
         if ($file == '')
         {
-            trigger_error($infix . $info, E_USER_WARNING);
+            trigger_error($msg[0], E_USER_WARNING);
         }
         else
         {
             if (function_exists('xdebug_print_function_stack') === TRUE)
             {
-                xdebug_print_function_stack($infix . $info);
+                xdebug_print_function_stack($msg[0]);
             }
-            error_log($prefix . $infix . $info, 3, $file);
+            error_log($msg[1], 3, $file);
         }
     }
 
