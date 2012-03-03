@@ -11,6 +11,7 @@
  * @subpackage Libraries
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Jose Viso <jose@m2mobi.com>
  */
 
 namespace Lunr\Libraries\L10n;
@@ -23,9 +24,22 @@ namespace Lunr\Libraries\L10n;
  * @subpackage Libraries
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Jose Viso <jose@m2mobi.com>
  */
 class L10nProviderPHP extends L10nProvider
 {
+
+    /**
+     * Reference to the Configuration class.
+     * @var Configuration
+     */
+    private $configuration;
+
+    /**
+     * Reference to the Logger class.
+     * @var Logger
+     */
+    private $logger;
 
     /**
      * Attribute that stores the language array
@@ -36,10 +50,17 @@ class L10nProviderPHP extends L10nProvider
     /**
      * Constructor.
      *
-     * @param String $language POSIX locale definition
+     * @param String        $language       POSIX locale definition
+     * @param Configuration &$configuration Reference to the Configuration class
+     * @param Logger        &$logger        Reference to the Logger class
      */
-    public function __construct($language)
+    public function __construct($language, &$configuration, &$logger)
     {
+        parent::__construct($language);
+
+        $this->configuration =& $configuration;
+        $this->logger =& $logger;
+
         $this->init($language);
     }
 
@@ -48,7 +69,10 @@ class L10nProviderPHP extends L10nProvider
      */
     public function __destruct()
     {
-
+        $this->configuration = NULL;
+        $this->logger = NULL;
+        unset($this->lang_array);
+        parent::__destruct();
     }
 
     /**
@@ -60,12 +84,10 @@ class L10nProviderPHP extends L10nProvider
      */
     protected function init($language)
     {
-        global $config;
-        $this->language = $language;
-
-        if ($this->language != $config['l10n']['default_language'])
+        if ($this->language != $this->configuration['l10n']['default_language'])
         {
-            include_once $config['l10n']['locales']. '/' . $this->language . '/' . $config['l10n']['domain'] . '.php';
+            $lang = array();
+            include_once $this->configuration['l10n']['locales']. '/' . $this->language . '/' . $this->configuration['l10n']['domain'] . '.php';
             $this->lang_array = &$lang;
         }
     }
@@ -80,44 +102,39 @@ class L10nProviderPHP extends L10nProvider
      */
     public function lang($identifier, $context = '')
     {
-        global $config;
-
         //Check if it's necessary to translate the identifier
-        if ($this->language != $config['l10n']['default_language'])
+        if ($this->language == $this->configuration['l10n']['default_language'])
         {
-            //Check if the identifier is not contained in the language array
-            if (!array_key_exists($identifier, $this->lang_array))
+            return $identifier;
+        }
+
+        //Check if the identifier is not contained in the language array
+        if (!array_key_exists($identifier, $this->lang_array))
+        {
+            $this->logger->log_error('Identifier not contained in the language array: ' . $identifier);
+        }
+        elseif ($context == '')
+        {
+            //Check if the key have context asociated in the array
+            if (is_array($this->lang_array[$identifier]))
             {
-                Output::error('Identifier not contained in the language array: ' . $identifier);
+                $this->logger->log_error('Identifier with context: ' . $identifier);
             }
-            elseif ($context == '')
+            else
             {
-                //Check if the key have context asociated in the array
-                if (is_array($this->lang_array[$identifier]))
-                {
-                    Output::error('Identifier with context: ' . $identifier);
-                }
-                else // No exceptions
-                {
-                    return $this->lang_array[$identifier];
-                }
+                return $this->lang_array[$identifier];
             }
-            else //If there is context information
-            {
-                //Check if the context is not contained in the language array
-                if (!array_key_exists($context, $this->lang_array[$identifier]))
-                {
-                    Output::error('Identifier not included in the language array: ' . $identifier);
-                }
-                else // No exceptions
-                {
-                    return $this->lang_array[$identifier][$context];
-                }
-            }
-         }
+        }
+        elseif (!array_key_exists($context, $this->lang_array[$identifier]))
+        {
+            $this->logger->log_error('Identifier not included in the language array: ' . $identifier);
+        }
+        else
+        {
+            return $this->lang_array[$identifier][$context];
+        }
 
         return $identifier;
-
     }
 
     /**
@@ -134,45 +151,40 @@ class L10nProviderPHP extends L10nProvider
     public function nlang($singular, $plural, $amount, $context = '')
     {
         //Check if the singular key is not in the language array
-        if(!array_key_exists($singular, $this->lang_array))
+        if (!array_key_exists($singular, $this->lang_array))
         {
-            Output::error('Identifier for the singular key not included in the language array: ' . $singular);
+            $this->logger->log_error('Identifier for the singular key not included in the language array: ' . $singular);
         }
-
-        //Check if the plural key is not in the language array
-        elseif ( !array_key_exists($plural, $this->lang_array))
+        elseif (!array_key_exists($plural, $this->lang_array))
         {
-            Output::error('Identifier for the plural key not included in the language array: ' . $plural);
+            $this->logger->log_error('Identifier for the plural key not included in the language array: ' . $plural);
         }
-        else
+        elseif ($context == '')
         {
-            if($context == '')
+            if (is_array($this->lang_array[$singular]))
             {
-                if (is_array($this->lang_array[$singular]))
-                {
-                    Output::error('Identifier with context: ' . $singular);
-                }
-                elseif (is_array($this->lang_array[$plural]))
-                {
-                        Output::error('Identifier with context: ' . $plural);
-                }
-                else // No exceptions
-                {
-                    return ($amount == 1 ? $this->lang_array[$singular] : $this->lang_array[$plural]);
-                }
+                $this->logger->log_error('Identifier with context: ' . $singular);
             }
-            elseif(!is_array($this->lang_array[$singular]) || !array_key_exists($context, $this->lang_array[$singular]))
+            elseif (is_array($this->lang_array[$plural]))
             {
-                Output::error('Context not included in the singular array: ' . $singular);
+                $this->logger->log_error('Identifier with context: ' . $plural);
             }
-            elseif (!is_array($this->lang_array[$plural]) || !array_key_exists($context, $this->lang_array[$plural]) )
+            else
             {
-                Output::error('Context not included in the plural array: ' . $plural);
+                return ($amount == 1 ? $this->lang_array[$singular] : $this->lang_array[$plural]);
             }
-            else // No exceptions
-            {
-                return ($amount == 1 ? $this->lang_array[$singular][$context] : $this->lang_array[$plural][$context]);
-            }
+        }
+        elseif(!is_array($this->lang_array[$singular]) || !array_key_exists($context, $this->lang_array[$singular]))
+        {
+            $this->logger->log_error('Context not included in the singular array: ' . $singular);
+        }
+        elseif (!is_array($this->lang_array[$plural]) || !array_key_exists($context, $this->lang_array[$plural]) )
+        {
+            $this->logger->log_error('Context not included in the plural array: ' . $plural);
+        }
+        else // No exceptions
+        {
+            return ($amount == 1 ? $this->lang_array[$singular][$context] : $this->lang_array[$plural][$context]);
         }
     }
 

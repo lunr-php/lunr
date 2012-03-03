@@ -28,6 +28,18 @@ class L10nProviderGettext extends L10nProvider
 {
 
     /**
+     * Reference to the Configuration class.
+     * @var Configuration
+     */
+    private $configuration;
+
+    /**
+     * Reference to the Logger class.
+     * @var Logger
+     */
+    private $logger;
+
+    /**
      * Define gettext msgid size limit
      * @var Integer
      */
@@ -36,11 +48,16 @@ class L10nProviderGettext extends L10nProvider
     /**
      * Constructor.
      *
-     * @param String $language POSIX locale definition
+     * @param String        $language       POSIX locale definition
+     * @param Configuration &$configuration Reference to the Configuration class
+     * @param Logger        &$logger        Reference to the Logger class
      */
-    public function __construct($language)
+    public function __construct($language, &$configuration, &$logger)
     {
-        $this->language = $language;
+        parent::__construct($language);
+
+        $this->configuration =& $configuration;
+        $this->logger =& $logger;
     }
 
     /**
@@ -48,7 +65,9 @@ class L10nProviderGettext extends L10nProvider
      */
     public function __destruct()
     {
-
+        $this->configuration = NULL;
+        $this->logger = NULL;
+        parent::__destruct();
     }
 
     /**
@@ -60,10 +79,9 @@ class L10nProviderGettext extends L10nProvider
      */
     protected function init($language)
     {
-        global $config;
         setlocale(LC_MESSAGES, $language);
-        bindtextdomain($config['l10n']['domain'], $config['l10n']['locales']);
-        textdomain($config['l10n']['domain']);
+        bindtextdomain($this->configuration['l10n']['domain'], $this->configuration['l10n']['locales']);
+        textdomain($this->configuration['l10n']['domain']);
     }
 
     /**
@@ -78,36 +96,28 @@ class L10nProviderGettext extends L10nProvider
     {
         if (strlen($identifier) + strlen($context) + 1 > self::GETTEXT_MAX_MSGID_LENGTH)
         {
-            Output::error('Identifier too long: ' . $identifier);
+            $this->logger->log_error('Identifier too long: ' . $identifier);
         }
 
         $this->init($this->language);
+
         if ($context == '')
         {
-            $output = gettext($identifier);
-            return $output;
+            return gettext($identifier);
+        }
+
+        // Glue msgctxt and msgid together, with ASCII character 4
+        // (EOT, End Of Text)
+        $composed = "{$context}\004{$identifier}";
+        $output = dcgettext($this->configuration['l10n']['domain'], $composed, LC_MESSAGES);
+
+        if (($output == $composed) && ($this->language != $this->configuration['l10n']['default_language']))
+        {
+            return $identifier;
         }
         else
         {
-            global $config;
-            // Glue msgctxt and msgid together, with ASCII character 4
-            // (EOT, End Of Text)
-            $composed = "{$context}\004{$identifier}";
-            $output = dcgettext(
-                $config['l10n']['domain'],
-                $composed,
-                LC_MESSAGES
-            );
-
-            if ($output == $composed
-                && $this->language != $config['l10n']['default_language'])
-            {
-                return $identifier;
-            }
-            else
-            {
-                return $output;
-            }
+            return $output;
         }
     }
 
@@ -127,38 +137,29 @@ class L10nProviderGettext extends L10nProvider
     {
         if (strlen($singular) + strlen($context) + 1 > self::GETTEXT_MAX_MSGID_LENGTH)
         {
-            Output::error('Identifier too long: ' . $singular);
+            $this->logger->log_error('Identifier too long: ' . $singular);
         }
 
         $this->init($this->language);
+
         if ($context == '')
         {
-            $output = ngettext($singular, $plural, $amount);
-            return $output;
+            return ngettext($singular, $plural, $amount);
+        }
+
+        // Glue msgctxt and msgid together, with ASCII character 4
+        // (EOT, End Of Text)
+        $composed = "{$context}\004{$singular}";
+        $output = dcngettext($this->configuration['l10n']['domain'], $composed, $plural, $amount, LC_MESSAGES);
+
+        if ((($output == $composed) || ($output == $plural))
+            && ($this->language != $this->configuration['l10n']['default_language']))
+        {
+            return ($amount == 1 ? $singular : $plural);
         }
         else
         {
-            global $config;
-            // Glue msgctxt and msgid together, with ASCII character 4
-            // (EOT, End Of Text)
-            $composed = "{$context}\004{$singular}";
-            $output = dcngettext(
-                $config['l10n']['domain'],
-                $composed,
-                $plural,
-                $amount,
-                LC_MESSAGES
-            );
-
-            if ((($output == $composed) || ($output == $plural))
-                && $this->language != $config['l10n']['default_language'])
-            {
-                return ($amount == 1 ? $singular : $plural);
-            }
-            else
-            {
-                return $output;
-            }
+            return $output;
         }
     }
 

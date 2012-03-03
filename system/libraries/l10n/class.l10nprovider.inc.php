@@ -40,12 +40,18 @@ abstract class L10nProvider
      *
      * @param String $language POSIX locale definition
      */
-    abstract public function __construct($language);
+    public function __construct($language)
+    {
+        $this->language = $language;
+    }
 
     /**
      * Destructor.
      */
-    abstract public function __destruct();
+    public function __destruct()
+    {
+        unset($this->language);
+    }
 
     /**
      * Initialization method for setting up the provider.
