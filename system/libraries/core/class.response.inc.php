@@ -34,10 +34,10 @@ class Response
     private $data;
 
     /**
-     * Error number
+     * Return code
      * @var int
      */
-    private $errno;
+    private $return_code;
 
     /**
      * Error message
@@ -58,7 +58,7 @@ class Response
     {
         $this->data = array();
         $this->errmsg = '';
-        $this->errno = 0;
+        $this->return_code = 0;
         $this->errinfo = '';
     }
 
@@ -69,8 +69,57 @@ class Response
     {
         unset($this->data);
         unset($this->errmsg);
-        unset($this->errno);
+        unset($this->return_code);
         unset($this->errinfo);
+    }
+
+    /**
+     * Get access to certain private attributes.
+     *
+     * This gives access to the error information and the return code.
+     *
+     * @param String $name Attribute name
+     *
+     * @return mixed $return Value of the chosen attribute
+     */
+    public function __get($name)
+    {
+        switch ($name)
+        {
+            case 'return_code':
+            case 'errmsg':
+            case 'errinfo':
+                return $this->$name;
+            default:
+                return NULL;
+        }
+    }
+
+    /**
+     * Set values for return code and error information.
+     *
+     * @param String $name  Attribute name
+     * @param String $value Attribute value to set
+     *
+     * @return void
+     */
+    public function __set($name, $value)
+    {
+        switch ($name)
+        {
+            case 'return_code':
+                if (is_int($value))
+                {
+                    $this->return_code = $value;
+                }
+                return;
+            case 'errmsg':
+            case 'errinfo':
+                $this->$name = $value;
+                return;
+            default:
+                return;
+        }
     }
 
     /**
@@ -96,75 +145,6 @@ class Response
     public function get_response_data($key)
     {
         return isset($this->data[$key]) ? $this->data[$key] : NULL;
-    }
-
-    /**
-     * Set a return code.
-     *
-     * @param int $code The return code to set
-     *
-     * @return void
-     */
-    public function set_return_code($code)
-    {
-        if (is_int($code))
-        {
-            $this->errno = $code;
-        }
-    }
-
-    /**
-     * Get the stored return code.
-     *
-     * @return int $errno The stored return code
-     */
-    public function get_return_code()
-    {
-        return $this->errno;
-    }
-
-    /**
-     * Set an error message.
-     *
-     * @param String $msg The error message to store
-     *
-     * @return void
-     */
-    public function set_error_message($msg)
-    {
-        $this->errmsg = $msg;
-    }
-
-    /**
-     * Get the stored error message.
-     *
-     * @return String $errmsg The stored error message
-     */
-    public function get_error_message()
-    {
-        return $this->errmsg;
-    }
-
-    /**
-     * Set additional error info.
-     *
-     * @param String $info Additional info about an error
-     *
-     * @return void
-     */
-    public function set_error_info($info)
-    {
-        $this->errinfo = $info;
-    }
-
-    /**
-     * Get additional error info,
-     *
-     * @return String $errinfo Additional error info
-     */
-    public function get_error_info()
-    {
-        return $this->errinfo;
     }
 
 }
