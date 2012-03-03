@@ -26,7 +26,7 @@ namespace Lunr\Libraries\L10n;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Jose Viso <jose@m2mobi.com>
  */
-class L10nProviderPHP extends L10nProvider
+class PHPL10nProvider extends L10nProvider
 {
 
     /**

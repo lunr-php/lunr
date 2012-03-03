@@ -24,7 +24,7 @@ namespace Lunr\Libraries\L10n;
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-class L10nProviderGettext extends L10nProvider
+class GettextL10nProvider extends L10nProvider
 {
 
     /**

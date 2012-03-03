@@ -49,7 +49,7 @@ class L10nFactory
                 if (!isset(self::$lprovider[$provider]))
                 {
                     self::$lprovider[$provider] =
-                        new L10nProviderPHP($language);
+                        new PHPL10nProvider($language);
                 }
 
                 return self::$lprovider[$provider];
@@ -59,7 +59,7 @@ class L10nFactory
                 if (!isset(self::$lprovider[$provider]))
                 {
                     self::$lprovider[$provider] =
-                        new L10nProviderGettext($language);
+                        new GettextL10nProvider($language);
                 }
 
                 return self::$lprovider[$provider];
