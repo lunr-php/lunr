@@ -27,10 +27,22 @@ abstract class View
 {
 
     /**
-     * Shared data variable
-     * @var array
+     * Reference to the Request class
+     * @var Request
      */
-    protected $data;
+    protected $request;
+
+    /**
+     * Reference to the Response class
+     * @var Response
+     */
+    protected $response;
+
+    /**
+     * Reference to the Configuration class
+     * @var Configuration
+     */
+    protected $configuration;
 
     /**
      * Reference to the Localization provider
@@ -39,20 +51,19 @@ abstract class View
     protected $l10n;
 
     /**
-     * Reference to the Controller who instantiated the View
-     * @var Controller
-     */
-    protected $controller;
-
-    /**
      * Constructor.
      *
-     * @param Controller &$controller Reference to the controller
+     * @param Request       &$request       Reference to the Request class
+     * @param Response      &$response      Reference to the Response class
+     * @param Configuration &$configuration Reference to the Configuration class
+     * @param L10nProvider  &$l10nprovider  Reference to the L10nProvider class
      */
-    public function __construct(&$controller)
+    public function __construct(&$request, &$response, &$configuration, &$l10nprovider)
     {
-        $this->data = array();
-        $this->controller = &$controller;
+        $this->request =& $request;
+        $this->response =& $response;
+        $this->configuration =& $configuration;
+        $this->l10n =& $l10nprovider;
     }
 
     /**
@@ -60,7 +71,10 @@ abstract class View
      */
     public function __destruct()
     {
-        unset($this->data);
+        $this->request = NULL;
+        $this->response = NULL;
+        $this->configuration = NULL;
+        $this->l10n = NULL;
     }
 
     /**
@@ -71,33 +85,6 @@ abstract class View
     abstract public function print_page();
 
     /**
-     * Add data to the view.
-     *
-     * This is then accessible from within the print_page() function.
-     *
-     * @param Mixed $key    Identifier for the data
-     * @param Mixed &$value The data
-     *
-     * @return void
-     */
-    public function add_data($key, &$value)
-    {
-        $this->data[$key] = &$value;
-    }
-
-    /**
-     * Set the localization provider that should be used by the view.
-     *
-     * @param L10nProvider &$provider Reference to the localization provider
-     *
-     * @return void
-     */
-    public function set_l10n_provider(&$provider)
-    {
-        $this->l10n = &$provider;
-    }
-
-    /**
      * Return base_url or attach given path to base_url.
      *
      * @param String $path Path that should be attached to base_url (optional)
@@ -106,8 +93,7 @@ abstract class View
      */
     protected function base_url($path = '')
     {
-        global $config;
-        return $config['base_url'] . $path;
+        return $this->request->base_url . $path;
     }
 
     /**
@@ -120,11 +106,9 @@ abstract class View
      */
     protected function statics($path = '')
     {
-        global $config;
-
         $output  = '';
-        $base    = '/' . trim($config['base_path'], '/');
-        $statics = '/' . trim($config['path']['statics'], '/');
+        $base    = '/' . trim($this->request->base_path, '/');
+        $statics = '/' . trim($this->configuration['path']['statics'], '/');
         $path    = '/' . trim($path, '/');
 
         if ($base != '/')
@@ -157,7 +141,7 @@ abstract class View
     {
         if ($suffix == '')
         {
-            if ( $alternation_hint % 2 == 0 )
+            if ($alternation_hint % 2 == 0)
             {
                 $basename .= '_even';
             }
