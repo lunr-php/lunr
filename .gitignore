@@ -8,3 +8,6 @@ build
 
 # ignore sqlite databases
 *.db
+
+# ignore compiled gettext language files
+*.mo
