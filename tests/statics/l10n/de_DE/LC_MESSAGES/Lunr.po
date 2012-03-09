@@ -1,0 +1,6 @@
+msgid "table"
+msgstr "Tisch"
+
+msgctxt "finance"
+msgid "bank"
+msgstr "Bank"
