@@ -38,7 +38,7 @@ class L10nProviderTest extends PHPUnit_Framework_TestCase
      * The language used for testing.
      * @var String
      */
-    const LANGUAGE = "de";
+    const LANGUAGE = "de_DE";
 
     /**
      * TestCase Constructor.
