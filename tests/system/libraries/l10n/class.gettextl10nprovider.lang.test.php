@@ -98,7 +98,6 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
         $this->assertEquals("bank", $this->provider->lang('bank'));
     }
 
-
     /**
      * Test that lang() without specifying context and given a too long identifier returns the identifier.
      *
