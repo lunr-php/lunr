@@ -97,6 +97,7 @@ class GettextL10nProvider extends L10nProvider
         if (strlen($identifier) + strlen($context) + 1 > self::GETTEXT_MAX_MSGID_LENGTH)
         {
             $this->logger->log_error('Identifier too long: ' . $identifier);
+            return $identifier;
         }
 
         $this->init($this->language);
@@ -138,6 +139,7 @@ class GettextL10nProvider extends L10nProvider
         if (strlen($singular) + strlen($context) + 1 > self::GETTEXT_MAX_MSGID_LENGTH)
         {
             $this->logger->log_error('Identifier too long: ' . $singular);
+            return $singular;
         }
 
         $this->init($this->language);

@@ -33,6 +33,8 @@
             <file>tests/system/libraries/core/class.logger.test.php</file>
             <file>tests/system/libraries/l10n/class.l10n.test.php</file>
             <file>tests/system/libraries/l10n/class.l10nprovider.test.php</file>
+            <file>tests/system/libraries/l10n/class.gettextl10nprovider.base.test.php</file>
+            <file>tests/system/libraries/l10n/class.gettextl10nprovider.lang.test.php</file>
             <file>tests/system/libraries/db/class.dbman.test.php</file>
             <file>tests/system/libraries/db/class.dbcon.test.php</file>
         </testsuite>
