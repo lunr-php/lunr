@@ -72,7 +72,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
 
         $this->l10n_reflection = new ReflectionClass("Lunr\Libraries\L10n\L10n");
 
-        $this->languages = array('en_GB', 'nl_NL');
+        $this->languages = array('en_GB', 'de_DE', 'nl_NL');
     }
 
     /**
@@ -239,7 +239,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
     public function unsupportedLanguagesProvider()
     {
         $languages   = array();
-        $languages[] = array('de', 'de_DE');
+        $languages[] = array('fr', 'fr_FR');
 
         return $languages;
     }
