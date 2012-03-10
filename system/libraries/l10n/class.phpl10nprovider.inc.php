@@ -123,6 +123,13 @@ class PHPL10nProvider extends L10nProvider
             //Check if the key have context asociated in the array
             if (is_array($this->lang_array[$identifier]))
             {
+                foreach($this->lang_array[$identifier] as $value)
+                {
+                    if (is_array($value) && isset($value[0]))
+                    {
+                        return $value[0];
+                    }
+                }
                 return $identifier;
             }
             else
@@ -130,7 +137,8 @@ class PHPL10nProvider extends L10nProvider
                 return $this->lang_array[$identifier];
             }
         }
-        elseif (!is_array($this->lang_array[$identifier]) || !array_key_exists($context, $this->lang_array[$identifier]))
+
+        if (!is_array($this->lang_array[$identifier]) || !array_key_exists($context, $this->lang_array[$identifier]))
         {
             return $identifier;
         }
@@ -159,41 +167,67 @@ class PHPL10nProvider extends L10nProvider
             return ($amount == 1 ? $singular : $plural);
         }
 
-        //Check if the singular key is not in the language array
+        //Check if there is a translation available
         if (!array_key_exists($singular, $this->lang_array))
         {
-            $this->logger->log_error('Identifier for the singular key not included in the language array: ' . $singular);
+            return ($amount == 1 ? $singular : $plural);
         }
-        elseif (!array_key_exists($plural, $this->lang_array))
+
+        // Check if the base string actually has plural forms available
+        if (!is_array($this->lang_array[$singular]))
         {
-            $this->logger->log_error('Identifier for the plural key not included in the language array: ' . $plural);
+            return $this->lang_array[$singular];
         }
-        elseif ($context == '')
+
+        // Check if we have a simple translation with the given context
+        if (($context != '')
+            && !array_key_exists($plural, $this->lang_array[$singular])
+            && array_key_exists($context, $this->lang_array[$singular])
+            && !is_array($this->lang_array[$singular][$context]))
         {
-            if (is_array($this->lang_array[$singular]))
+            return $this->lang_array[$singular][$context];
+        }
+
+        // Check if we have plural forms available
+        if (!array_key_exists($plural, $this->lang_array[$singular]))
+        {
+            return ($amount == 1 ? $singular : $plural);
+        }
+
+        if ($context == '')
+        {
+            if (!is_array($this->lang_array[$singular][$plural])
+                || !isset($this->lang_array[$singular][$plural][0])
+                || !isset($this->lang_array[$singular][$plural][1]))
             {
-                $this->logger->log_error('Identifier with context: ' . $singular);
+                return ($amount == 1 ? $singular : $plural);
             }
-            elseif (is_array($this->lang_array[$plural]))
+
+            if ($amount == 1)
             {
-                $this->logger->log_error('Identifier with context: ' . $plural);
+                return $this->lang_array[$singular][$plural][0];
             }
             else
             {
-                return ($amount == 1 ? $this->lang_array[$singular] : $this->lang_array[$plural]);
+                return $this->lang_array[$singular][$plural][1];
             }
         }
-        elseif(!is_array($this->lang_array[$singular]) || !array_key_exists($context, $this->lang_array[$singular]))
+
+        // Check whether we have the given context available
+        if (!is_array($this->lang_array[$singular][$plural])
+            || !isset($this->lang_array[$singular][$plural][$context])
+            || !is_array($this->lang_array[$singular][$plural][$context]))
         {
-            $this->logger->log_error('Context not included in the singular array: ' . $singular);
+            return ($amount == 1 ? $singular : $plural);
         }
-        elseif (!is_array($this->lang_array[$plural]) || !array_key_exists($context, $this->lang_array[$plural]) )
+
+        if ($amount == 1)
         {
-            $this->logger->log_error('Context not included in the plural array: ' . $plural);
+            return $this->lang_array[$singular][$plural][$context][0];
         }
-        else // No exceptions
+        else
         {
-            return ($amount == 1 ? $this->lang_array[$singular][$context] : $this->lang_array[$plural][$context]);
+            return $this->lang_array[$singular][$plural][$context][1];
         }
     }
 
