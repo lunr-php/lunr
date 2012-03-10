@@ -94,6 +94,46 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
         $this->assertEquals("bank", $this->provider->lang('bank'));
     }
 
+    /**
+     * Test lang() accessing a plural value with singular.
+     *
+     * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
+     */
+    public function test_lang_accessing_plural_with_singular_translates_singular()
+    {
+        $this->assertEquals("%d Mann", $this->provider->lang('%d man'));
+    }
+
+    /**
+     * Test lang() accessing a plural value with plural.
+     *
+     * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
+     */
+    public function test_lang_accessing_plural_with_plural_returns_identifier()
+    {
+        $this->assertEquals("%d men", $this->provider->lang('%d men'));
+    }
+
+    /**
+     * Test lang() accessing a plural value with singular.
+     *
+     * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
+     */
+    public function test_lang_accessing_plural_with_singular_and_context_translates_singular()
+    {
+        $this->assertEquals("%d Ei", $this->provider->lang('%d egg', 'food'));
+    }
+
+    /**
+     * Test lang() accessing a plural value with plural.
+     *
+     * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
+     */
+    public function test_lang_accessing_plural_with_plural_and_context_returns_identifier()
+    {
+        $this->assertEquals("%d eggs", $this->provider->lang('%d eggs', 'food'));
+    }
+
 }
 
 ?>
