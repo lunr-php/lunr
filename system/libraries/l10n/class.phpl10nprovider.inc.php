@@ -84,11 +84,15 @@ class PHPL10nProvider extends L10nProvider
      */
     protected function init($language)
     {
-        if ($this->language != $this->configuration['l10n']['default_language'])
+        if ($language != $this->configuration['l10n']['default_language'])
         {
             $lang = array();
-            include_once $this->configuration['l10n']['locales']. '/' . $this->language . '/' . $this->configuration['l10n']['domain'] . '.php';
-            $this->lang_array = &$lang;
+            include_once $this->configuration['l10n']['locales']. '/' . $language . '/' . $this->configuration['l10n']['domain'] . '.php';
+            $this->lang_array =& $lang;
+        }
+        else
+        {
+            $this->lang_array = array();
         }
     }
 
@@ -150,6 +154,12 @@ class PHPL10nProvider extends L10nProvider
      */
     public function nlang($singular, $plural, $amount, $context = '')
     {
+        //Check if it's necessary to translate
+        if ($this->language == $this->configuration['l10n']['default_language'])
+        {
+            return ($amount == 1 ? $singular : $plural);
+        }
+
         //Check if the singular key is not in the language array
         if (!array_key_exists($singular, $this->lang_array))
         {
