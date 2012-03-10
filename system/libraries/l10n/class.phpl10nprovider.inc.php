@@ -87,7 +87,7 @@ class PHPL10nProvider extends L10nProvider
         if ($language != $this->configuration['l10n']['default_language'])
         {
             $lang = array();
-            include_once $this->configuration['l10n']['locales']. '/' . $language . '/' . $this->configuration['l10n']['domain'] . '.php';
+            include $this->configuration['l10n']['locales']. '/' . $language . '/' . $this->configuration['l10n']['domain'] . '.php';
             $this->lang_array =& $lang;
         }
         else
@@ -115,30 +115,29 @@ class PHPL10nProvider extends L10nProvider
         //Check if the identifier is not contained in the language array
         if (!array_key_exists($identifier, $this->lang_array))
         {
-            $this->logger->log_error('Identifier not contained in the language array: ' . $identifier);
+            return $identifier;
         }
-        elseif ($context == '')
+
+        if ($context == '')
         {
             //Check if the key have context asociated in the array
             if (is_array($this->lang_array[$identifier]))
             {
-                $this->logger->log_error('Identifier with context: ' . $identifier);
+                return $identifier;
             }
             else
             {
                 return $this->lang_array[$identifier];
             }
         }
-        elseif (!array_key_exists($context, $this->lang_array[$identifier]))
+        elseif (!is_array($this->lang_array[$identifier]) || !array_key_exists($context, $this->lang_array[$identifier]))
         {
-            $this->logger->log_error('Identifier not included in the language array: ' . $identifier);
+            return $identifier;
         }
         else
         {
             return $this->lang_array[$identifier][$context];
         }
-
-        return $identifier;
     }
 
     /**
