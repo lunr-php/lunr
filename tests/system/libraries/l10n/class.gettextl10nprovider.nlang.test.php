@@ -171,6 +171,66 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     }
 
     /**
+     * Test nlang() with context missing and fake plural.
+     *
+     * @runInSeparateProcess
+     *
+     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     */
+    public function test_nlang_singular_without_context_and_fake_plural_translates_singular()
+    {
+        $this->assertEquals("Tisch", $this->provider->nlang('table', 'tables', 1));
+    }
+
+    /**
+     * Test nlang() with context missing and fake plural.
+     *
+     * @runInSeparateProcess
+     *
+     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     */
+    public function test_nlang_plural_without_context_and_fake_plural_translates_singular()
+    {
+        $this->assertEquals("Tisch", $this->provider->nlang('table', 'tables', 2));
+    }
+
+    /**
+     * Test nlang() with context missing and fake plural.
+     *
+     * @runInSeparateProcess
+     *
+     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     */
+    public function test_nlang_plural_with_context_missing_and_fake_plural_returns_plural()
+    {
+        $this->assertEquals("banks", $this->provider->nlang('bank', 'banks', 2));
+    }
+
+    /**
+     * Test nlang() with context missing and fake plural.
+     *
+     * @runInSeparateProcess
+     *
+     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     */
+    public function test_nlang_singular_with_context_and_fake_plural_translates_singular()
+    {
+        $this->assertEquals("Bank", $this->provider->nlang('bank', 'banks', 1, 'finance'));
+    }
+
+    /**
+     * Test nlang() with context missing and fake plural.
+     *
+     * @runInSeparateProcess
+     *
+     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     */
+    public function test_nlang_plural_with_context_and_fake_plural_translates_singular()
+    {
+        $this->assertEquals("Bank", $this->provider->nlang('bank', 'banks', 2, 'finance'));
+    }
+
+    /**
      * Test that nlang() without specifying context and given a too long identifier returns the identifier.
      *
      * @runInSeparateProcess

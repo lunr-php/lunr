@@ -123,6 +123,30 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
     }
 
     /**
+     * Test lang() accessing a plural value with singular.
+     *
+     * @runInSeparateProcess
+     *
+     * @covers Lunr\Libraries\L10n\GettextL10nProvider::lang
+     */
+    public function test_lang_accessing_plural_with_singular_and_context_translates_singular()
+    {
+        $this->assertEquals("%d Ei", $this->provider->lang('%d egg', 'food'));
+    }
+
+    /**
+     * Test lang() accessing a plural value with plural.
+     *
+     * @runInSeparateProcess
+     *
+     * @covers Lunr\Libraries\L10n\GettextL10nProvider::lang
+     */
+    public function test_lang_accessing_plural_with_plural_and_context_returns_identifier()
+    {
+        $this->assertEquals("%d eggs", $this->provider->lang('%d eggs', 'food'));
+    }
+
+    /**
      * Test that lang() without specifying context and given a too long identifier returns the identifier.
      *
      * @runInSeparateProcess
