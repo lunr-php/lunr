@@ -13,7 +13,6 @@
  */
 
 namespace Lunr\Libraries\L10n;
-use Lunr\Libraries\Core\DateTime;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
