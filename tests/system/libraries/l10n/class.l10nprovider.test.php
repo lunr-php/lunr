@@ -64,7 +64,7 @@ class L10nProviderTest extends PHPUnit_Framework_TestCase
     /**
      * Test that the language is correctly stored in the object.
      */
-    public function test_language_set_correctly()
+    public function testLanguageSetCorrectly()
     {
         $property = $this->provider_reflection->getProperty('language');
         $property->setAccessible(TRUE);
@@ -77,7 +77,7 @@ class L10nProviderTest extends PHPUnit_Framework_TestCase
      *
      * @covers Lunr\Libraries\L10n\L10nProvider::get_language
      */
-    public function test_get_language_returns_language()
+    public function testGetLanguageReturnsLanguage()
     {
         $this->assertEquals(self::LANGUAGE, $this->provider->get_language());
     }

@@ -31,9 +31,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_singular_without_context()
+    public function testNlangSingularWithoutContext()
     {
         $this->assertEquals("%d Mann", $this->provider->nlang('%d man', '%d men', 1));
     }
@@ -43,9 +44,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_plural_without_context()
+    public function testNlangPluralWithoutContext()
     {
         $this->assertEquals("%d Männer", $this->provider->nlang('%d man', '%d men', 2));
     }
@@ -55,9 +57,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_singular_untranslated_without_context_returns_singular()
+    public function testNlangSingularUntranslatedWithoutContextReturnsSingular()
     {
         $this->assertEquals("chair", $this->provider->nlang('chair', 'chairs', 1));
     }
@@ -67,9 +70,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_plural_untranslated_without_context_returns_plural()
+    public function testNlangPluralUntranslatedWithoutContextReturnsPlural()
     {
         $this->assertEquals("chairs", $this->provider->nlang('chair', 'chairs', 2));
     }
@@ -79,9 +83,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_singular_with_context()
+    public function testNlangSingularWithContext()
     {
         $this->assertEquals("%d Ei", $this->provider->nlang('%d egg', '%d eggs', 1, 'food'));
     }
@@ -91,9 +96,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_plural_with_context()
+    public function testNlangPluralWithContext()
     {
         $this->assertEquals("%d Eier", $this->provider->nlang('%d egg', '%d eggs', 2, 'food'));
     }
@@ -103,9 +109,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_untranslated_singular_with_context_returns_singular()
+    public function testNlangUntranslatedSingularWithContextReturnsSingular()
     {
         $this->assertEquals("%d chair", $this->provider->nlang('%d chair', '%d chairs', 1, 'kitchen'));
     }
@@ -115,9 +122,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_untranslated_plural_with_context_returns_plural()
+    public function testNlangUntranslatedPluralWithContextReturnsPlural()
     {
         $this->assertEquals("%d chairs", $this->provider->nlang('%d chair', '%d chairs', 2, 'kitchen'));
     }
@@ -127,9 +135,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_singular_with_superfluous_context_returns_singular()
+    public function testNlangSingularWithSuperfluousContextReturnsSingular()
     {
         $this->assertEquals("%d man", $this->provider->nlang('%d man', '%d men', 1, 'people'));
     }
@@ -139,9 +148,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_plural_with_superfluous_context_returns_plural()
+    public function testNlangPluralWithSuperfluousContextReturnsPlural()
     {
         $this->assertEquals("%d men", $this->provider->nlang('%d man', '%d men', 2, 'people'));
     }
@@ -151,9 +161,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_singular_with_context_missing_returns_singular()
+    public function testNlangSingularWithContextMissingReturnsSingular()
     {
         $this->assertEquals("%d egg", $this->provider->nlang('%d egg', '%d eggs', 1));
     }
@@ -163,9 +174,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_plural_with_context_missing_returns_plural()
+    public function testNlangPluralWithContextMissingReturnsPlural()
     {
         $this->assertEquals("%d eggs", $this->provider->nlang('%d egg', '%d eggs', 2));
     }
@@ -175,9 +187,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_singular_without_context_and_fake_plural_translates_singular()
+    public function testNlangSingularWithoutContextAndFakePluralTranslatesSingular()
     {
         $this->assertEquals("Tisch", $this->provider->nlang('table', 'tables', 1));
     }
@@ -187,9 +200,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_plural_without_context_and_fake_plural_translates_singular()
+    public function testNlangPluralWithoutContextAndFakePluralTranslatesSingular()
     {
         $this->assertEquals("Tisch", $this->provider->nlang('table', 'tables', 2));
     }
@@ -199,9 +213,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_plural_with_context_missing_and_fake_plural_returns_plural()
+    public function testNlangPluralWithContextMissingAndFakePluralReturnsPlural()
     {
         $this->assertEquals("banks", $this->provider->nlang('bank', 'banks', 2));
     }
@@ -211,9 +226,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_singular_with_context_and_fake_plural_translates_singular()
+    public function testNlangSingularWithContextAndFakePluralTranslatesSingular()
     {
         $this->assertEquals("Bank", $this->provider->nlang('bank', 'banks', 1, 'finance'));
     }
@@ -223,9 +239,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_plural_with_context_and_fake_plural_translates_singular()
+    public function testNlangPluralWithContextAndFakePluralTranslatesSingular()
     {
         $this->assertEquals("Bank", $this->provider->nlang('bank', 'banks', 2, 'finance'));
     }
@@ -235,9 +252,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_without_context_and_too_long_identifier_returns_identifier()
+    public function testNlangWithoutContextAndTooLongIdentifierReturnsIdentifier()
     {
         $identifier = "";
         for ($i=0; $i<4102; $i++)
@@ -253,9 +270,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\GettextL10nProvider::nlang
+     * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
-    public function test_nlang_with_context_and_too_long_identifier_returns_identifier()
+    public function testNlangWithContextAndTooLongIdentifierReturnsIdentifier()
     {
         $identifier = "";
         for ($i=0; $i<4096; $i++)

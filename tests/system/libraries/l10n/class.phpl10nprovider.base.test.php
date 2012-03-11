@@ -38,7 +38,7 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
     /**
      * Test that the lang_array attribute is empty when the class is initialized with the default language.
      */
-    public function test_lang_array_empty_for_default_language()
+    public function testLangArrayEmptyForDefaultLanguage()
     {
         $property = $this->provider_reflection->getProperty('lang_array');
         $property->setAccessible(TRUE);
@@ -53,9 +53,10 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\L10n\PHPL10nProvider::init
+     * @depends testLangArrayEmptyForDefaultLanguage
+     * @covers  Lunr\Libraries\L10n\PHPL10nProvider::init
      */
-    public function test_init()
+    public function testInit()
     {
         $method = $this->provider_reflection->getMethod('init');
         $method->setAccessible(TRUE);
@@ -75,7 +76,7 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
      *
      * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_lang_without_context_returns_identifier_when_language_is_default()
+    public function testLangWithoutContextReturnsIdentifierWhenLanguageIsDefault()
     {
         $this->assertEquals('table', $this->provider->lang('table'));
     }
@@ -85,7 +86,7 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
      *
      * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_lang_with_context_returns_identifier_when_language_is_default()
+    public function testLangWithContextReturnsIdentifierWhenLanguageIsDefault()
     {
         $this->assertEquals('table', $this->provider->lang('table', 'kitchen'));
     }
@@ -95,7 +96,7 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
      *
      * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_nlang_singular_without_context_returns_singular_when_language_is_default()
+    public function testNlangSingularWithoutContextReturnsSingularWhenLanguageIsDefault()
     {
         $this->assertEquals('%d man', $this->provider->nlang('%d man', '%d men', 1));
     }
@@ -105,7 +106,7 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
      *
      * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_nlang_plural_without_context_returns_plural_when_language_is_default()
+    public function testNlangPluralWithoutContextReturnsPluralWhenLanguageIsDefault()
     {
         $this->assertEquals('%d men', $this->provider->nlang('%d man', '%d men', 2));
     }
@@ -115,7 +116,7 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
      *
      * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_nlang_singular_with_context_returns_singular_when_language_is_default()
+    public function testNlangSingularWithContextReturnsSingularWhenLanguageIsDefault()
     {
         $this->assertEquals('%d man', $this->provider->nlang('%d man', '%d men', 1, 'people'));
     }
@@ -125,7 +126,7 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
      *
      * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_nlang_plural_with_context_returns_plural_when_language_is_default()
+    public function testNlangPluralWithContextReturnsPluralWhenLanguageIsDefault()
     {
         $this->assertEquals('%d men', $this->provider->nlang('%d man', '%d men', 2, 'people'));
     }

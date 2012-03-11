@@ -33,7 +33,7 @@ class GettextL10nProviderBaseTest extends GettextL10nProviderTest
      *
      * @covers Lunr\Libraries\L10n\GettextL10nProvider::init
      */
-    public function test_init()
+    public function testInit()
     {
         $method = $this->provider_reflection->getMethod('init');
         $method->setAccessible(TRUE);

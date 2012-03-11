@@ -37,9 +37,10 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
     /**
      * Test lang() without context.
      *
-     * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
+     * @depends Lunr\Libraries\L10n\PHPL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_lang_without_context()
+    public function testLangWithoutContext()
     {
         $this->assertEquals("Tisch", $this->provider->lang('table'));
     }
@@ -49,7 +50,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      *
      * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_lang_untranslated_without_context_returns_identifier()
+    public function testLangUntranslatedWithoutContextReturnsIdentifier()
     {
         $this->assertEquals("chair", $this->provider->lang('chair'));
     }
@@ -57,9 +58,10 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
     /**
      * Test lang() with context.
      *
-     * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
+     * @depends Lunr\Libraries\L10n\PHPL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_lang_with_context()
+    public function testLangWithContext()
     {
         $this->assertEquals("Bank", $this->provider->lang('bank', 'finance'));
     }
@@ -69,7 +71,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      *
      * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_lang_untranslated_with_context_returns_identifier()
+    public function testLangUntranslatedWithContextReturnsIdentifier()
     {
         $this->assertEquals("chair", $this->provider->lang('chair', 'kitchen'));
     }
@@ -77,9 +79,10 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
     /**
      * Test lang() with superfluous context.
      *
-     * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
+     * @depends Lunr\Libraries\L10n\PHPL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_lang_with_superfluous_context_returns_identifier()
+    public function testLangWithSuperfluousContextReturnsIdentifier()
     {
         $this->assertEquals("table", $this->provider->lang('table', 'kitchen'));
     }
@@ -87,9 +90,10 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
     /**
      * Test lang() with context missing.
      *
-     * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
+     * @depends Lunr\Libraries\L10n\PHPL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_lang_with_context_missing_returns_identifier()
+    public function testLangWithContextMissingReturnsIdentifier()
     {
         $this->assertEquals("bank", $this->provider->lang('bank'));
     }
@@ -97,9 +101,10 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
     /**
      * Test lang() accessing a plural value with singular.
      *
-     * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
+     * @depends Lunr\Libraries\L10n\PHPL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_lang_accessing_plural_with_singular_translates_singular()
+    public function testLangAccessingPluralWithSingularTranslatesSingular()
     {
         $this->assertEquals("%d Mann", $this->provider->lang('%d man'));
     }
@@ -107,9 +112,10 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
     /**
      * Test lang() accessing a plural value with plural.
      *
-     * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
+     * @depends Lunr\Libraries\L10n\PHPL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_lang_accessing_plural_with_plural_returns_identifier()
+    public function testLangAccessingPluralWithPluralReturnsIdentifier()
     {
         $this->assertEquals("%d men", $this->provider->lang('%d men'));
     }
@@ -117,9 +123,10 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
     /**
      * Test lang() accessing a plural value with singular.
      *
-     * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
+     * @depends Lunr\Libraries\L10n\PHPL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_lang_accessing_plural_with_singular_and_context_translates_singular()
+    public function testLangAccessingPluralWithSingularAndContextTranslatesSingular()
     {
         $this->assertEquals("%d Ei", $this->provider->lang('%d egg', 'food'));
     }
@@ -127,9 +134,10 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
     /**
      * Test lang() accessing a plural value with plural.
      *
-     * @covers Lunr\Libraries\L10n\PHPL10nProvider::lang
+     * @depends Lunr\Libraries\L10n\PHPL10nProviderBaseTest::testInit
+     * @covers  Lunr\Libraries\L10n\PHPL10nProvider::lang
      */
-    public function test_lang_accessing_plural_with_plural_and_context_returns_identifier()
+    public function testLangAccessingPluralWithPluralAndContextReturnsIdentifier()
     {
         $this->assertEquals("%d eggs", $this->provider->lang('%d eggs', 'food'));
     }
