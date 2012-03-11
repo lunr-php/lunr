@@ -71,7 +71,7 @@ class Request
     private $json_enums;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Configuration &$configuration Reference to the Configuration class
      */
@@ -91,7 +91,7 @@ class Request
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -170,7 +170,7 @@ class Request
 
         foreach ($_GET as $key => $value)
         {
-            if (substr($key,0,5) == 'param')
+            if (substr($key, 0, 5) == 'param')
             {
                 $this->request['params'][] = $value;
             }
