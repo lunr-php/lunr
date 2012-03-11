@@ -42,7 +42,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      */
     public function testLangWithoutContext()
     {
-        $this->assertEquals("Tisch", $this->provider->lang('table'));
+        $this->assertEquals('Tisch', $this->provider->lang('table'));
     }
 
     /**
@@ -52,7 +52,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      */
     public function testLangUntranslatedWithoutContextReturnsIdentifier()
     {
-        $this->assertEquals("chair", $this->provider->lang('chair'));
+        $this->assertEquals('chair', $this->provider->lang('chair'));
     }
 
     /**
@@ -63,7 +63,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      */
     public function testLangWithContext()
     {
-        $this->assertEquals("Bank", $this->provider->lang('bank', 'finance'));
+        $this->assertEquals('Bank', $this->provider->lang('bank', 'finance'));
     }
 
     /**
@@ -73,7 +73,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      */
     public function testLangUntranslatedWithContextReturnsIdentifier()
     {
-        $this->assertEquals("chair", $this->provider->lang('chair', 'kitchen'));
+        $this->assertEquals('chair', $this->provider->lang('chair', 'kitchen'));
     }
 
     /**
@@ -84,7 +84,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      */
     public function testLangWithSuperfluousContextReturnsIdentifier()
     {
-        $this->assertEquals("table", $this->provider->lang('table', 'kitchen'));
+        $this->assertEquals('table', $this->provider->lang('table', 'kitchen'));
     }
 
     /**
@@ -95,7 +95,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      */
     public function testLangWithContextMissingReturnsIdentifier()
     {
-        $this->assertEquals("bank", $this->provider->lang('bank'));
+        $this->assertEquals('bank', $this->provider->lang('bank'));
     }
 
     /**
@@ -106,7 +106,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      */
     public function testLangAccessingPluralWithSingularTranslatesSingular()
     {
-        $this->assertEquals("%d Mann", $this->provider->lang('%d man'));
+        $this->assertEquals('%d Mann', $this->provider->lang('%d man'));
     }
 
     /**
@@ -117,7 +117,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      */
     public function testLangAccessingPluralWithPluralReturnsIdentifier()
     {
-        $this->assertEquals("%d men", $this->provider->lang('%d men'));
+        $this->assertEquals('%d men', $this->provider->lang('%d men'));
     }
 
     /**
@@ -128,7 +128,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      */
     public function testLangAccessingPluralWithSingularAndContextTranslatesSingular()
     {
-        $this->assertEquals("%d Ei", $this->provider->lang('%d egg', 'food'));
+        $this->assertEquals('%d Ei', $this->provider->lang('%d egg', 'food'));
     }
 
     /**
@@ -139,7 +139,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      */
     public function testLangAccessingPluralWithPluralAndContextReturnsIdentifier()
     {
-        $this->assertEquals("%d eggs", $this->provider->lang('%d eggs', 'food'));
+        $this->assertEquals('%d eggs', $this->provider->lang('%d eggs', 'food'));
     }
 
 }

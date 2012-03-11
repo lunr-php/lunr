@@ -70,7 +70,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
 
         $this->l10n = new L10n($datetime, $config);
 
-        $this->l10n_reflection = new ReflectionClass("Lunr\Libraries\L10n\L10n");
+        $this->l10n_reflection = new ReflectionClass('Lunr\Libraries\L10n\L10n');
 
         $this->languages = array('en_GB', 'de_DE', 'nl_NL');
     }
@@ -147,7 +147,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
     /**
      * Test iso_to_posix() with unsupported languages.
      *
-     * @param String $iso   ISO language definition
+     * @param String $iso ISO language definition
      *
      * @depends      testCachedGetSupportedLanguages
      * @dataProvider unsupportedLanguagesProvider
@@ -243,6 +243,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
 
         return $languages;
     }
+
 }
 
 ?>

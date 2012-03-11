@@ -42,7 +42,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangSingularWithoutContext()
     {
-       $this->assertEquals("%d Mann", $this->provider->nlang('%d man', '%d men', 1));
+        $this->assertEquals('%d Mann', $this->provider->nlang('%d man', '%d men', 1));
     }
 
     /**
@@ -53,7 +53,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangPluralWithoutContext()
     {
-        $this->assertEquals("%d Männer", $this->provider->nlang('%d man', '%d men', 2));
+        $this->assertEquals('%d Männer', $this->provider->nlang('%d man', '%d men', 2));
     }
 
     /**
@@ -63,7 +63,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangSingularUntranslatedWithoutContextReturnsSingular()
     {
-        $this->assertEquals("chair", $this->provider->nlang('chair', 'chairs', 1));
+        $this->assertEquals('chair', $this->provider->nlang('chair', 'chairs', 1));
     }
 
     /**
@@ -73,7 +73,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangPluralUntranslatedWithoutContextReturnsPlural()
     {
-        $this->assertEquals("chairs", $this->provider->nlang('chair', 'chairs', 2));
+        $this->assertEquals('chairs', $this->provider->nlang('chair', 'chairs', 2));
     }
 
     /**
@@ -84,7 +84,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangSingularWithContext()
     {
-        $this->assertEquals("%d Ei", $this->provider->nlang('%d egg', '%d eggs', 1, 'food'));
+        $this->assertEquals('%d Ei', $this->provider->nlang('%d egg', '%d eggs', 1, 'food'));
     }
 
     /**
@@ -95,7 +95,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangPluralWithContext()
     {
-        $this->assertEquals("%d Eier", $this->provider->nlang('%d egg', '%d eggs', 2, 'food'));
+        $this->assertEquals('%d Eier', $this->provider->nlang('%d egg', '%d eggs', 2, 'food'));
     }
 
     /**
@@ -105,7 +105,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangUntranslatedSingularWithContextReturnsSingular()
     {
-        $this->assertEquals("%d chair", $this->provider->nlang('%d chair', '%d chairs', 1, 'kitchen'));
+        $this->assertEquals('%d chair', $this->provider->nlang('%d chair', '%d chairs', 1, 'kitchen'));
     }
 
     /**
@@ -115,7 +115,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangUntranslatedPluralWithContextReturnsPlural()
     {
-        $this->assertEquals("%d chairs", $this->provider->nlang('%d chair', '%d chairs', 2, 'kitchen'));
+        $this->assertEquals('%d chairs', $this->provider->nlang('%d chair', '%d chairs', 2, 'kitchen'));
     }
 
     /**
@@ -126,7 +126,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangSingularWithSuperfluousContextReturnsSingular()
     {
-        $this->assertEquals("%d man", $this->provider->nlang('%d man', '%d men', 1, 'people'));
+        $this->assertEquals('%d man', $this->provider->nlang('%d man', '%d men', 1, 'people'));
     }
 
     /**
@@ -137,7 +137,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangPluralWithSuperfluousContextReturnsPlural()
     {
-        $this->assertEquals("%d men", $this->provider->nlang('%d man', '%d men', 2, 'people'));
+        $this->assertEquals('%d men', $this->provider->nlang('%d man', '%d men', 2, 'people'));
     }
 
     /**
@@ -148,7 +148,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangSingularWithContextMissingReturnsSingular()
     {
-        $this->assertEquals("%d egg", $this->provider->nlang('%d egg', '%d eggs', 1));
+        $this->assertEquals('%d egg', $this->provider->nlang('%d egg', '%d eggs', 1));
     }
 
     /**
@@ -159,7 +159,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangPluralWithContextMissingReturnsPlural()
     {
-        $this->assertEquals("%d eggs", $this->provider->nlang('%d egg', '%d eggs', 2));
+        $this->assertEquals('%d eggs', $this->provider->nlang('%d egg', '%d eggs', 2));
     }
 
     /**
@@ -170,7 +170,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangSingularWithoutContextAndFakePluralTranslatesSingular()
     {
-        $this->assertEquals("Tisch", $this->provider->nlang('table', 'tables', 1));
+        $this->assertEquals('Tisch', $this->provider->nlang('table', 'tables', 1));
     }
 
     /**
@@ -181,7 +181,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangPluralWithoutContextAndFakePluralTranslatesSingular()
     {
-        $this->assertEquals("Tisch", $this->provider->nlang('table', 'tables', 2));
+        $this->assertEquals('Tisch', $this->provider->nlang('table', 'tables', 2));
     }
 
     /**
@@ -192,7 +192,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangPluralWithContextMissingAndFakePluralReturnsPlural()
     {
-        $this->assertEquals("banks", $this->provider->nlang('bank', 'banks', 2));
+        $this->assertEquals('banks', $this->provider->nlang('bank', 'banks', 2));
     }
 
     /**
@@ -203,7 +203,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangSingularWithContextAndFakePluralTranslatesSingular()
     {
-        $this->assertEquals("Bank", $this->provider->nlang('bank', 'banks', 1, 'finance'));
+        $this->assertEquals('Bank', $this->provider->nlang('bank', 'banks', 1, 'finance'));
     }
 
     /**
@@ -214,7 +214,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
      */
     public function testNlangPluralWithContextAndFakePluralTranslatesSingular()
     {
-        $this->assertEquals("Bank", $this->provider->nlang('bank', 'banks', 2, 'finance'));
+        $this->assertEquals('Bank', $this->provider->nlang('bank', 'banks', 2, 'finance'));
     }
 
 }

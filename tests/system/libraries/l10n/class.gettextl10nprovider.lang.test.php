@@ -36,7 +36,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangWithoutContext()
     {
-        $this->assertEquals("Tisch", $this->provider->lang('table'));
+        $this->assertEquals('Tisch', $this->provider->lang('table'));
     }
 
     /**
@@ -49,7 +49,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangUntranslatedWithoutContextReturnsIdentifier()
     {
-        $this->assertEquals("chair", $this->provider->lang('chair'));
+        $this->assertEquals('chair', $this->provider->lang('chair'));
     }
 
     /**
@@ -62,7 +62,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangWithContext()
     {
-        $this->assertEquals("Bank", $this->provider->lang('bank', 'finance'));
+        $this->assertEquals('Bank', $this->provider->lang('bank', 'finance'));
     }
 
     /**
@@ -75,7 +75,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangUntranslatedWithContextReturnsIdentifier()
     {
-        $this->assertEquals("chair", $this->provider->lang('chair', 'kitchen'));
+        $this->assertEquals('chair', $this->provider->lang('chair', 'kitchen'));
     }
 
     /**
@@ -88,7 +88,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangWithSuperfluousContextReturnsIdentifier()
     {
-        $this->assertEquals("table", $this->provider->lang('table', 'kitchen'));
+        $this->assertEquals('table', $this->provider->lang('table', 'kitchen'));
     }
 
     /**
@@ -101,7 +101,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangWithContextMissingReturnsIdentifier()
     {
-        $this->assertEquals("bank", $this->provider->lang('bank'));
+        $this->assertEquals('bank', $this->provider->lang('bank'));
     }
 
     /**
@@ -114,7 +114,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangAccessingPluralWithSingularTranslatesSingular()
     {
-        $this->assertEquals("%d Mann", $this->provider->lang('%d man'));
+        $this->assertEquals('%d Mann', $this->provider->lang('%d man'));
     }
 
     /**
@@ -127,7 +127,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangAccessingPluralWithPluralReturnsIdentifier()
     {
-        $this->assertEquals("%d men", $this->provider->lang('%d men'));
+        $this->assertEquals('%d men', $this->provider->lang('%d men'));
     }
 
     /**
@@ -140,7 +140,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangAccessingPluralWithSingularAndContextTranslatesSingular()
     {
-        $this->assertEquals("%d Ei", $this->provider->lang('%d egg', 'food'));
+        $this->assertEquals('%d Ei', $this->provider->lang('%d egg', 'food'));
     }
 
     /**
@@ -153,7 +153,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangAccessingPluralWithPluralAndContextReturnsIdentifier()
     {
-        $this->assertEquals("%d eggs", $this->provider->lang('%d eggs', 'food'));
+        $this->assertEquals('%d eggs', $this->provider->lang('%d eggs', 'food'));
     }
 
     /**
@@ -165,10 +165,10 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangWithoutContextAndTooLongIdentifierReturnsIdentifier()
     {
-        $identifier = "";
+        $identifier = '';
         for ($i=0; $i<4102; $i++)
         {
-            $identifier .= "a";
+            $identifier .= 'a';
         }
 
         $this->assertEquals($identifier, $this->provider->lang($identifier));
@@ -183,10 +183,10 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangWithContextAndTooLongIdentifierReturnsIdentifier()
     {
-        $identifier = "";
+        $identifier = '';
         for ($i=0; $i<4096; $i++)
         {
-            $identifier .= "a";
+            $identifier .= 'a';
         }
 
         $this->assertEquals($identifier, $this->provider->lang($identifier, 'aaaaaa'));

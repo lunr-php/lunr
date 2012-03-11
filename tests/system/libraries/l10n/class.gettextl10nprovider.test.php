@@ -51,7 +51,7 @@ abstract class GettextL10nProviderTest extends PHPUnit_Framework_TestCase
      * The language used for testing.
      * @var String
      */
-    const LANGUAGE = "de_DE";
+    const LANGUAGE = 'de_DE';
 
     /**
      * TestCase Constructor.
@@ -62,7 +62,7 @@ abstract class GettextL10nProviderTest extends PHPUnit_Framework_TestCase
 
         $map = array(
             array('domain', 'Lunr'),
-            array('locales', dirname(__FILE__) . "/../../../statics/l10n"),
+            array('locales', dirname(__FILE__) . '/../../../statics/l10n'),
             array('default_language', 'nl_NL'),
         );
 
