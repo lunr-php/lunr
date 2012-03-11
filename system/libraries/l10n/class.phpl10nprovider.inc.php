@@ -87,7 +87,8 @@ class PHPL10nProvider extends L10nProvider
         if ($language != $this->configuration['l10n']['default_language'])
         {
             $lang = array();
-            include $this->configuration['l10n']['locales']. '/' . $language . '/' . $this->configuration['l10n']['domain'] . '.php';
+            $langpath = $this->configuration['l10n']['locales']. '/' . $language . '/';
+            include $langpath . $this->configuration['l10n']['domain'] . '.php';
             $this->lang_array =& $lang;
         }
         else

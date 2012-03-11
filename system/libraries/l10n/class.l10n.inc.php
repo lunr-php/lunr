@@ -49,6 +49,9 @@ class L10n
 
     /**
      * Constructor.
+     *
+     * @param DateTime      $datetime       Instance of the DateTime class
+     * @param Configuration &$configuration Reference to the Configuration class
      */
     public function __construct($datetime, &$configuration)
     {
