@@ -56,7 +56,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
     private $size_invalid;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $bootstrap Bootstrap config values, aka config values used before
      *                         the class has been instantiated.
@@ -80,7 +80,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -92,6 +92,8 @@ class Configuration implements ArrayAccess, Iterator, Countable
 
     /**
      * Called when cloning the object.
+     *
+     * @return void
      */
     public function __clone()
     {
@@ -119,7 +121,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
     }
 
     /**
-     * Load a config file
+     * Load a config file.
      *
      * @param String $identifier Identifier string for the config file to load.
      *                           e.g.: For conf.lunr.inc.php the identifier would be 'lunr'
@@ -147,7 +149,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
     }
 
     /**
-     * Convert an input array recursively into a Configuration class hierarchy
+     * Convert an input array recursively into a Configuration class hierarchy.
      *
      * @param array $array Input array
      *
@@ -245,7 +247,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
      */
     public function offsetGet($offset)
     {
-        return isset($this->config[$offset]) ? $this->config[$offset] : null;
+        return isset($this->config[$offset]) ? $this->config[$offset] : NULL;
     }
 
     /**
