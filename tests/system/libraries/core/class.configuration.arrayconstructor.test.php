@@ -123,7 +123,7 @@ class ConfigurationArrayConstructorTest extends ConfigurationTest
     }
 
     /**
-     * Test that current() does not advance the internal position pointer
+     * Test that current() does not advance the internal position pointer.
      *
      * @depends testConfig
      * @depends testPositionIsZero
@@ -141,7 +141,7 @@ class ConfigurationArrayConstructorTest extends ConfigurationTest
     }
 
     /**
-     * Test that key() does not advance the internal position pointer
+     * Test that key() does not advance the internal position pointer.
      *
      * @depends testConfig
      * @depends testPositionIsZero
@@ -159,7 +159,7 @@ class ConfigurationArrayConstructorTest extends ConfigurationTest
     }
 
     /**
-     * Test that next() does advance the internal position pointer by one
+     * Test that next() does advance the internal position pointer by one.
      *
      * @depends testConfig
      * @depends testPositionIsZero

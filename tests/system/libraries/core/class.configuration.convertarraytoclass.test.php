@@ -38,6 +38,8 @@ class ConfigurationConvertArrayToClassTest extends ConfigurationTest
     /**
      * Test convert_array_to_class() with non-array input values.
      *
+     * @param mixed $input Various invalid values
+     *
      * @dataProvider nonArrayValueProvider
      * @covers       Lunr\Libraries\Core\Configuration::convert_array_to_class
      */

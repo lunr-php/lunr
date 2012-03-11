@@ -465,7 +465,6 @@ class RequestStoreTest extends RequestTest
         $this->assertEmpty($_GET);
     }
 
-
 }
 
 ?>

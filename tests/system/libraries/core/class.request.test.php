@@ -127,7 +127,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Unit Test Data Provider for request values,
+     * Unit Test Data Provider for request values.
      *
      * @return array $values Set of request values
      */
@@ -148,7 +148,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Unit Test Data Provider for request values,
+     * Unit Test Data Provider for request values.
      *
      * @return array $values Set of request values
      */
@@ -220,7 +220,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
     public function unhandledMagicGetKeysProvider()
     {
         $keys = array();
-        $keys[] = array("Unhandled");
+        $keys[] = array('Unhandled');
 
         return $keys;
     }
@@ -319,7 +319,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Set the stored sapi value to 'apache'
+     * Set the stored sapi value to 'apache'.
      *
      * @param ReflectionProperty &$reflection_property Reference to the ReflectionProperty class
      *                                                 for the private request attribute

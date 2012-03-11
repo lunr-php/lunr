@@ -35,8 +35,7 @@ class ConfigurationArrayUsageTest extends ConfigurationTest
     }
 
     /**
-     * Test accessing the Configuration class as an array for
-     * read operations.
+     * Test accessing the Configuration class as an array for read operations.
      *
      * @depends Lunr\Libraries\Core\ConfigurationArrayAccessTest::testOffsetGetWithExistingOffset
      */
@@ -46,8 +45,7 @@ class ConfigurationArrayUsageTest extends ConfigurationTest
     }
 
     /**
-     * Test accessing the Configuration class as an array for
-     * write operations.
+     * Test accessing the Configuration class as an array for write operations.
      *
      * @depends Lunr\Libraries\Core\ConfigurationArrayAccessTest::testOffsetSetWithGivenOffset
      */
