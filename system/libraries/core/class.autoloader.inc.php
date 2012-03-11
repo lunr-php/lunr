@@ -131,7 +131,7 @@ class Autoloader
      */
     private function get_class_filename($class)
     {
-        $normalized_name = trim(preg_replace('/([a-z0-9])?([A-Z])/','$1 $2',$class));
+        $normalized_name = trim(preg_replace('/([a-z0-9])?([A-Z])/', '$1 $2', $class));
         $split_name = explode(' ', $normalized_name);
 
         if ($split_name[0] == 'Mock')
