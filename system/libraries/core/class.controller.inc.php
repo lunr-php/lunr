@@ -81,7 +81,7 @@ abstract class Controller
      *
      * @return void
      */
-    public function set_error_enums($enums)
+    public function set_error_enums(&$enums)
     {
         $this->error =& $enums;
     }
