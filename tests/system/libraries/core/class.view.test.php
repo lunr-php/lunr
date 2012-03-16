@@ -111,6 +111,10 @@ class ViewTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->configuration);
+        unset($this->request);
+        unset($this->response);
+        unset($this->l10nprovider);
         unset($this->view);
         unset($this->view_reflection);
     }
