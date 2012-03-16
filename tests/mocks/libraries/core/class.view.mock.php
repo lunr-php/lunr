@@ -30,10 +30,15 @@ class MockView extends View
 
     /**
      * Constructor.
+     *
+     * @param Request       &$request       Reference to the Request class
+     * @param Response      &$response      Reference to the Response class
+     * @param Configuration &$configuration Reference to the Configuration class
+     * @param L10nProvider  &$l10nprovider  Reference to the L10nProvider class
      */
-    public function __construct()
+    public function __construct(&$request, &$response, &$configuration, &$l10nprovider)
     {
-        parent::__construct(new MockWebController());
+        parent::__construct($request, $response, $configuration, $l10nprovider);
     }
 
     /**

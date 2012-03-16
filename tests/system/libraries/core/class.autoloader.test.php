@@ -217,7 +217,7 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
         $classes[] = array('JsonInterface', 'interface.json.inc.php');
         $classes[] = array('SessionModel', 'model.session.inc.php');
         $classes[] = array('StubController', 'controller.stub.inc.php');
-        $classes[] = array('MockWebController', 'class.webcontroller.mock.php');
+        $classes[] = array('MockView', 'class.view.mock.php');
         $classes[] = array('DateTimeTest', 'class.datetime.test.php');
         $classes[] = array('View', 'class.view.inc.php');
 
