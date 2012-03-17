@@ -106,7 +106,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test adding response data,
+     * Test adding response data.
      *
      * @depends testDataEmptyByDefault
      * @covers  Lunr\Libraries\Core\Response::add_response_data
@@ -285,6 +285,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
         return $attrs;
     }
+
 }
 
 ?>
