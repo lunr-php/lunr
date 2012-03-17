@@ -7,6 +7,9 @@
     <target name="clean"
             description="Cleanup and create build directories">
         <delete dir="${basedir}/build" />
+        <delete>
+            <fileset dir="tests/statics/l10n" includes="**/*.mo"/>
+        </delete>
 
         <mkdir dir="${basedir}/build/api" />
         <mkdir dir="${basedir}/build/code-browser" />
@@ -26,6 +29,7 @@
             <antcall target="phpcs"/>
             <antcall target="phpdoc"/>
             <antcall target="phploc"/>
+            <antcall target="l10n"/>
         </parallel>
     </target>
 
@@ -130,7 +134,7 @@
 
     <target name="l10n"
             description="Generate gettext language files">
-        <exec executable="l10n/gen_l10n.sh" />
+        <exec executable="tests/statics/l10n/gen_l10n.sh" />
     </target>
 
     <target name="build" depends="clean,parallelTasks,phpunit,phpcb" />

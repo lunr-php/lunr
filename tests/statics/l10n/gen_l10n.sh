@@ -3,7 +3,7 @@
 if [ "$(basename $(pwd))" = "l10n" ]; then
   dir="."
 else
-  dir="l10n"
+  dir="tests/statics/l10n"
 fi
 
 for i in $dir/*; do

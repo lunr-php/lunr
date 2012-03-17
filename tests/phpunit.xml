@@ -8,7 +8,7 @@
             mapTestClassNameToCoveredClassName="true"
             colors="true">
     <testsuites>
-        <testsuite name="MidSchip Testsuite">
+        <testsuite name="Lunr Testsuite">
             <file>tests/system/libraries/core/class.autoloader.test.php</file>
             <file>tests/system/libraries/core/class.view.test.php</file>
             <file>tests/system/libraries/core/class.datetime.base.test.php</file>
@@ -51,7 +51,7 @@
     <logging>
         <log    type="coverage-html"
                 target="../build/coverage"
-                title="MidSchip"
+                title="Lunr"
                 charset="UTF-8"
                 yui="true"
                 highlight="true"
