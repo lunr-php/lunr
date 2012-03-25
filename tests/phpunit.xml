@@ -9,8 +9,8 @@
             colors="true">
     <testsuites>
         <testsuite name="Lunr Testsuite">
-            <file>tests/system/libraries/core/class.autoloader.test.php</file>
-            <file>tests/system/libraries/core/class.datetime.base.test.php</file>
+           <file>tests/system/libraries/core/class.autoloader.test.php</file>
+             <file>tests/system/libraries/core/class.datetime.base.test.php</file>
             <file>tests/system/libraries/core/class.datetime.getdatetime.test.php</file>
             <file>tests/system/libraries/core/class.datetime.getdelayeddatetime.test.php</file>
             <file>tests/system/libraries/core/class.datetime.getdelayedtimestamp.test.php</file>
@@ -41,6 +41,10 @@
             <file>tests/system/libraries/l10n/class.phpl10nprovider.base.test.php</file>
             <file>tests/system/libraries/l10n/class.phpl10nprovider.lang.test.php</file>
             <file>tests/system/libraries/l10n/class.phpl10nprovider.nlang.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.base.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.escape.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.queryparts.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.mysqldmlquerybuilder.select.test.php</file>
             <file>tests/system/libraries/db/class.dbman.test.php</file>
             <file>tests/system/libraries/db/class.dbcon.test.php</file>
         </testsuite>
