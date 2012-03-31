@@ -28,162 +28,394 @@ class Verification
 {
 
     /**
-     * Catch unimplemented static functions.
-     *
-     * @param String $method    Method name
-     * @param array  $arguments Arguments to that static method
-     *
-     * @return Boolean $return Return value of the forwarded check,
-     *                         or FALSE if check not implemented.
+     * Reference to the Configuration class.
+     * @var Configuration
      */
-    public static function __callStatic($method, $arguments)
+    private $configuration;
+
+    /**
+     * Reference to the Logger class.
+     * @var Logger
+     */
+    private $logger;
+
+    /**
+     * The dataset to verify.
+     * @var array
+     */
+    private $data;
+
+    /**
+     * Pointer to the element in the dataset to inspect.
+     * @var mixed
+     */
+    protected $pointer;
+
+    /**
+     * Set of results for all checks performed on the input dataset
+     * @var array
+     */
+    protected $result;
+
+    /**
+     * Set of rulesets for non-existing keys.
+     * @var array
+     */
+    private $superfluous;
+
+    /**
+     * Log file to store verification errors.
+     * @var string
+     */
+    private $logfile;
+
+    /**
+     * Identifier for the verification process.
+     * Used in the log file.
+     * @var String
+     */
+    private $identifier;
+
+    /**
+     * Flag whether to check for superfluous rules or not.
+     * @var Boolean
+     */
+    private $check_superfluous;
+
+    /**
+     * Flag whether to check for unchecked indexes or not.
+     * @var Boolean
+     */
+    private $check_remaining;
+
+    /**
+     * Constructor.
+     *
+     * @param Configuration &$configuration Reference to the Configuration class
+     * @param Logger        &$logger        Reference to the Logger class
+     */
+    public function __construct(&$configuration, &$logger)
     {
-        if (substr($method, 0, 9) == 'is_ignore')
-        {
-            return TRUE;
-        }
-        elseif (substr($method, 0, 7) == 'is_type')
-        {
-            $type = substr($method, 8);
-            return static::is_type($type, $arguments[0]);
-        }
-        elseif (substr($method, 0, 9) == 'is_length')
-        {
-            $length = substr($method, 9);
-            return static::is_length($length, $arguments[0]);
-        }
-        else
-        {
-            return FALSE;
-        }
+        $this->configuration =& $configuration;
+        $this->logger =& $logger;
+
+        $this->data    = array();
+        $this->result  = array();
+        $this->pointer = NULL;
+
+        $this->superfluous = array();
+        $this->logfile     = '';
+        $this->identifier  = '';
+
+        $this->check_remaining   = TRUE;
+        $this->check_superfluous = FALSE;
     }
 
     /**
-     * Verify an input array against a defined ruleset.
-     *
-     * @param String  $identifier Identifier for the rule-checking
-     * @param array   &$input     Input array
-     * @param array   &$ruleset   Ruleset to check against
-     * @param boolean $soft       Whether to perform soft checking or not.
-     *                            Soft checking allows to have rules defined for non-existing keys
-     * @param String  $file       The log file to send errors to. By default this will
-     *                            be the invalid input log.
-     *
-     * @return Boolean $return TRUE if the input matches against the ruleset,
-     *                         FALSE otherwise.
+     * Destructor.
      */
-    public static function verify_array_ruleset($identifier, &$input, &$ruleset, $soft = FALSE, $file = '')
+    public function __destruct()
     {
-        if ($file == '')
+        $this->configuration = NULL;
+        $this->logger = NULL;
+        $this->data   = NULL;
+
+        unset($this->pointer);
+        unset($this->superfluous);
+        unset($this->result);
+        unset($this->logfile);
+        unset($this->identifier);
+        unset($this->check_remaining);
+        unset($this->check_superfluous);
+    }
+
+    /**
+     * Catch unimplemented functions.
+     *
+     * @param String $method    Method name
+     * @param array  $arguments Arguments to that method
+     *
+     * @return Verification $self Self reference
+     */
+    public function __call($method, $arguments)
+    {
+        if ($this->pointer === NULL)
         {
-            global $config;
-            $file  = $config['log']['invalid_input'];
-            $file .= 'midschip_invalid_input.' . CLIENT_OS . '.log';
+            return $this;
         }
 
-        if (trim($identifier) == '')
+        $this->result[$this->pointer][$method] = FALSE;
+
+        return $this;
+    }
+
+    /**
+     * Set the data we want to verify.
+     *
+     * @param array &$dataset The dataset we are going to verify
+     *
+     * @return Verification $self Self reference
+     */
+    public function set_data(&$dataset)
+    {
+        if (is_array($dataset) && !empty($dataset))
         {
-            Output::errorln("Can't verify input. Empty Identifier!'", $file);
-            return FALSE;
+            $this->data =& $dataset;
         }
-
-        if (!is_array($input) || !is_array($ruleset))
+        else
         {
-            Output::errorln("Can't verify input. Invalid input!'", $file);
-            return FALSE;
-        }
+            $this->logger->log_error("Can't verify input dataset!");
 
-        $error_prefix = "Input validation '$identifier': ";
-
-        if ($soft !== TRUE)
-        {
-            // Check that input matches with the defined ruleset
-            $input_elements = array_keys($input);
-            $ruleset_elements = array_keys($ruleset);
-            $unhandled_elements = array_diff($ruleset_elements, $input_elements);
-
-            if ($unhandled_elements != array())
+            # don't verify stale input against new ruleset
+            if (!empty($this->data))
             {
-                foreach ($unhandled_elements as $value)
-                {
-                    Output::errorln($error_prefix . "Ruleset for non-existing key '$value'!", $file);
-                }
+                $this->data = array();
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set a log-file for error output.
+     *
+     * @param String $file Full path to log-file
+     *
+     * @return Verification $self Self reference
+     */
+    public function set_log_file($file)
+    {
+        $this->logfile = $file;
+        return $this;
+    }
+
+    /**
+     * Set an identifier for the verification process.
+     *
+     * This idenitifier is used in the error log and can be used
+     * to distinguish errors from multiple verification runs
+     * from each other.
+     *
+     * @param String $idenitifier Identifier for the Verification process
+     *
+     * @return Verification $self Self reference
+     */
+    public function set_identifier($identifier)
+    {
+        $this->identifier = $identifier;
+        return $this;
+    }
+
+    /**
+     * Don't check for unchecked indexes.
+     *
+     * @return Verification $self Self reference
+     */
+    public function ignore_unchecked_indexes()
+    {
+        $this->check_remaining = FALSE;
+        return $this;
+    }
+
+    /**
+     * Check for checks performed on non-existing indexes.
+     *
+     * @return Verification $self Self reference
+     */
+    public function check_superfluous_checks()
+    {
+        $this->check_superfluous = TRUE;
+        return $this;
+    }
+
+    /**
+     * Set the index of the dataset to inspect.
+     *
+     * @param mixed $index Dataset index
+     *
+     * @return Verification $self Self reference
+     */
+    public function inspect($index)
+    {
+        if (isset($this->data[$index]))
+        {
+            $this->pointer = $index;
+        }
+        else
+        {
+            $this->pointer = NULL;
+            $this->superfluous[] = $index;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Go over the results and check whether the input dataset can be verified or not.
+     *
+     * @return Boolean $return TRUE if the input dataset is valid, FALSE otherwise
+     */
+    public function is_valid()
+    {
+        if (trim($this->identifier) == '')
+        {
+            $this->logger->log_errorln("Can't verify input. Empty Identifier!'", $this->logfile);
+            return FALSE;
+        }
+
+        $valid = TRUE;
+
+        $error_prefix = "Input validation '" . $this->identifier . "': ";
+
+        # Check for superfluous checks
+        if ($this->check_superfluous === TRUE)
+        {
+            $result = $this->is_overchecked($error_prefix);
+            if ($result === FALSE)
+            {
                 return FALSE;
             }
         }
 
-        // Go over the input array and check key by key
-        foreach ($input as $key => $value)
+        # Check for unchecked indexes
+        if ($this->check_remaining === TRUE)
         {
-            // Check that we have a rule and it is not empty
-            if (isset($ruleset[$key]) && !empty($ruleset[$key]))
+            $result = $this->is_fully_checked();
+            if ($result === FALSE)
             {
-                // Check whether there is more than one rule for the current
-                // element or not
-                if (is_array($ruleset[$key]))
-                {
-                    foreach ($ruleset[$key] as &$rule)
-                    {
-                        if (call_user_func('static::is_' . $rule, $value) === FALSE)
-                        {
-                            $val = print_r($value, TRUE);
-                            $type  = gettype($value);
-                            $msg   = "Rule '$rule' failed for '$key' with value '$val' of type '$type'!";
-                            Output::errorln($error_prefix . $msg, $file);
-                            return FALSE;
-                        }
-                    }
-                    unset($rule);
-                }
-                else
-                {
-                    if (call_user_func('static::is_' . $ruleset[$key], $value) === FALSE)
-                    {
-                        $rule  = $ruleset[$key];
-                        $val = print_r($value, TRUE);
-                        $type  = gettype($value);
-                        $msg   = "Rule '$rule' failed for '$key' with value '$val' of type '$type'!";
-                        Output::errorln($error_prefix . $msg, $file);
-                        return FALSE;
-                    }
-                }
-            }
-            else
-            {
-                Output::errorln($error_prefix . "Unhandled Array Element '$key'!", $file);
                 return FALSE;
             }
         }
 
-        //Everything looks good
-        return TRUE;
+        foreach($this->result as $index=>$checks)
+        {
+            # check if index was ignored
+            if ($checks === TRUE)
+            {
+                continue;
+            }
+
+            foreach ($checks as $rule=>$result)
+            {
+                if ($result !== TRUE)
+                {
+                    $val  = print_r($this->data[$index], TRUE);
+                    $type = gettype($this->data[$index]);
+                    $msg  = "Rule '$rule' failed for '$index' with value '$val' of type '$type'!";
+                    $this->logger->log_errorln($error_prefix . $msg, $this->logfile);
+
+                    $valid = FALSE;
+                }
+            }
+        }
+
+        return $valid;
+    }
+
+    /**
+     * Verify that there are no checks for non-existing indexes.
+     *
+     * @param String $error_prefix Prefix string for the error logging
+     *
+     * @return Boolean $return TRUE if no non-existing indexes have been checked, FALSE otherwise
+     */
+    private function is_overchecked($error_prefix)
+    {
+        if (empty($this->superfluous))
+        {
+            return TRUE;
+        }
+
+        foreach ($this->superfluous as &$value)
+        {
+            $this->logger->log_errorln($error_prefix . "Ruleset for non-existing key '$value'!", $this->logfile);
+        }
+        unset($value);
+
+        return FALSE;
+    }
+
+    /**
+     * Verify that every index in the input set has been checked.
+     *
+     * @param String $error_prefix Prefix string for the error logging
+     *
+     * @return Boolean $return TRUE if everything has been checked, FALSE otherwise
+     */
+    private function is_fully_checked($error_prefix)
+    {
+        // Check that input matches with the defined ruleset
+        $data_indexes    = array_keys($this->data);
+        $checked_indexes = array_keys($this->result);
+        $unhandled_elements = array_diff($data_indexes, $checked_indexes);
+
+        if ($unhandled_elements == array())
+        {
+            return TRUE;
+        }
+
+        foreach ($unhandled_elements as $value)
+        {
+            $this->logger->log_errorln($error_prefix . "Unhandled Index '$value'!", $this->logfile);
+        }
+        return FALSE;
+    }
+
+    /**
+     * Don't perform specific checks on the selected index.
+     *
+     * @return Verification $self Self reference
+     */
+    public function ignore()
+    {
+        if ($this->pointer === NULL)
+        {
+            return $this;
+        }
+
+        $this->result[$this->pointer] = TRUE;
+        $this->pointer = NULL;
+
+        return $this;
     }
 
     /**
      * Check character length of an input.
      *
      * @param Integer $length The length to check for
-     * @param mixed   &$value The input to check
      *
-     * @return Boolean $return TRUE if size matches, FALSE otherwise.
+     * @return Verification $self Self reference
      */
-    public static function is_length($length, &$value)
+    public function is_length($length)
     {
-        return (strlen($value) == $length);
+        if ($this->pointer === NULL)
+        {
+            return $this;
+        }
+
+        $this->result[$this->pointer]['is_length_' . $length] = (strlen($this->data[$this->pointer]) === $length);
+
+        return $this;
     }
 
     /**
      * Check that input is of the type provided as parameter.
      *
      * @param mixed $type  The type to check for
-     * @param mixed $value The input to check
      *
-     * @return Boolean $return TRUE if input is of the specified type, FALSE otherwise.
+     * @return Verification $self Self reference
      */
-    public static function is_type($type, $value)
+    public function is_type($type)
     {
+        if ($this->pointer === NULL)
+        {
+            return $this;
+        }
+
         $f = 'is_' . $type;
-        return $f($value);
+        $this->result[$this->pointer]['is_type_' . $type] = $f($this->data[$this->pointer]);
+
+        return $this;
     }
 
     /**
@@ -191,102 +423,114 @@ class Verification
      *
      * Note that 0 and "0" are also considered empty.
      *
-     * @param mixed $value The input to check
-     *
-     * @return Boolean $return TRUE if not empty, FALSE otherwise.
+     * @return Verification $self Self reference
      */
-    public static function is_not_empty($value)
+    public function is_not_empty()
     {
-        return !empty($value);
+        if ($this->pointer === NULL)
+        {
+            return $this;
+        }
+
+        $this->result[$this->pointer]['is_not_empty'] = !empty($this->data[$this->pointer]);
+
+        return $this;
     }
 
     /**
      * Check that input is either 0 or 1.
      *
-     * @param mixed $value The input to check
-     *
-     * @return Boolean $return TRUE if input is a numeric boolean, FALSE otherwise.
+     * @return Verification $self Self reference
      */
-    public static function is_numerical_boolean($value)
+    public function is_numerical_boolean()
     {
-        return ($value === 1) || ($value === 0) || ($value === '0') || ($value === '1');
+        if ($this->pointer === NULL)
+        {
+            return $this;
+        }
+
+        $this->result[$this->pointer]['is_numerical_boolean'] =
+            ($this->data[$this->pointer] === 1)   || ($this->data[$this->pointer] === 0) ||
+            ($this->data[$this->pointer] === '0') || ($this->data[$this->pointer] === '1');
+
+        return $this;
     }
 
     /**
      * Check that input is a valid email.
      *
-     * @param mixed $value The input to check
+     * @param Mail $mail Instance of the Mail class
      *
-     * @return Boolean $return TRUE if input is a valid email, FALSE otherwise.
+     * @return Verification $self Self reference
      */
-    public static function is_mail($value)
+    public function is_mail($mail)
     {
-        return Mail::validate_email($value);
+        if ($this->pointer === NULL)
+        {
+            return $this;
+        }
+
+        $this->result[$this->pointer]['is_mail'] = $mail->is_valid($this->data[$this->pointer]);
+
+        return $this;
     }
 
     /**
      * Check whether input is a numerical troolean (values 0,1,2).
      *
-     * @param mixed $value The input to check
-     *
-     * @return Boolean $return TRUE if input is a numeric troolean, FALSE otherwise.
+     * @return Verification $self Self reference
      */
-    public static function is_numerical_troolean($value)
+    public function is_numerical_troolean()
     {
-        return ($value == 0) || ($value == 1) || ($value == 2);
+        if ($this->pointer === NULL)
+        {
+            return $this;
+        }
+
+        $this->result[$this->pointer]['is_numerical_troolean'] =
+            ($this->data[$this->pointer] === 0)   || ($this->data[$this->pointer] === 1)   ||
+            ($this->data[$this->pointer] === 2)   || ($this->data[$this->pointer] === '0') ||
+            ($this->data[$this->pointer] === '1') || ($this->data[$this->pointer] === '2');
+
+        return $this;
     }
 
     /**
      * Check whether input is a valid date definition.
      *
-     * @param mixed $value The input to check
+     * @param DateTime $datetime Instance of the DateTime class
      *
-     * @return Boolean $return TRUE if input is a valid date, FALSE otherwise.
+     * @return Verification $self Self reference
      */
-    public static function is_date($value)
+    public function is_date($datetime)
     {
-        $leap_day = '/^(\d{1,4})[\- \/ \.]02[\- \/ \.]29$/';
-
-        if (preg_match($leap_day, $value))
+        if ($this->pointer === NULL)
         {
-            $year = preg_replace('/[\- \/ \.]02[\- \/ \.]29$/', '', $value);
-            return ((($year % 4) == 0) && ((($year % 100) != 0) || (($year %400) == 0)));
+            return $this;
         }
-        else
-        {
-            $feb     = '02[\- \/ \.](0[1-9]|1[0-9]|2[0-8])';
-            $_30days = '(0[469]|11)[\- \/ \.](0[1-9]|[12][0-9]|30)';
-            $_31days = '(0[13578]|1[02])[\- \/ \.](0[1-9]|[12][0-9]|3[01])';
 
-            if (preg_match("/^(\d{1,4})[\- \/ \.]($_31days|$_30days|$feb)$/", $value))
-            {
-                return TRUE;
-            }
-            else
-            {
-                return FALSE;
-            }
-        }
+        $this->result[$this->pointer]['is_date'] = $datetime->is_date($this->data[$this->pointer]);
+
+        return $this;
     }
 
     /**
      * Check whether input is a valid time definition.
      *
-     * @param mixed $value The input to check
+     * @param DateTime $datetime Instance of the DateTime class
      *
-     * @return Boolean $return TRUE if input is a valid time, FALSE otherwise.
+     * @return Verification $self Self reference
      */
-    public static function is_time($value)
+    public function is_time($datetime)
     {
-        // accepts HHH:MM:SS, e.g. 23:59:30 or 12:30 or 120:17
-        if (preg_match('/^(\-)?[0-9]{1,3}(:[0-5][0-9]){1,2}$/', $value))
+        if ($this->pointer === NULL)
         {
-            return TRUE;
+            return $this;
         }
-        else
-        {
-            return FALSE;
-        }
+
+        $this->result[$this->pointer]['is_time'] = $datetime->is_time($this->data[$this->pointer]);
+
+        return $this;
     }
 
 }
