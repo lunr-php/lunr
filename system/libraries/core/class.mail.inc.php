@@ -117,11 +117,12 @@ class Mail
      *
      * @param String $from Email address
      *
-     * @return void
+     * @return Mail $self Self reference
      */
     public function set_from($from)
     {
         $this->from = $from;
+        return $this;
     }
 
     /**
@@ -129,11 +130,12 @@ class Mail
      *
      * @param String $to Email address
      *
-     * @return void
+     * @return Mail $self Self reference
      */
     public function add_to($to)
     {
         $this->to[] = $to;
+        return $this;
     }
 
     /**
@@ -141,11 +143,12 @@ class Mail
      *
      * @param String $cc Email address
      *
-     * @return void
+     * @return Mail $self Self reference
      */
     public function add_cc($cc)
     {
         $this->cc[] = $cc;
+        return $this;
     }
 
     /**
@@ -153,11 +156,12 @@ class Mail
      *
      * @param String $bcc Email address
      *
-     * @return void
+     * @return Mail $self Self reference
      */
     public function add_bcc($bcc)
     {
         $this->bcc[] = $bcc;
+        return $this;
     }
 
     /**
@@ -165,11 +169,12 @@ class Mail
      *
      * @param String $msg The message
      *
-     * @return void
+     * @return Mail $self Self reference
      */
     public function set_message($msg)
     {
         $this->msg = $msg;
+        return $this;
     }
 
     /**
@@ -177,11 +182,12 @@ class Mail
      *
      * @param String $subject The subject
      *
-     * @return void
+     * @return Mail $self Self reference
      */
     public function set_subject($subject)
     {
         $this->subject = $subject;
+        return $this;
     }
 
     /**
@@ -192,23 +198,23 @@ class Mail
     public function send()
     {
         $headers = $this->headers();
-        if ($headers && !empty($this->to) && ($this->subject != ''))
-        {
-            $ok = TRUE;
-            foreach ($this->to AS $value)
-            {
-                $sent = mail($value, $this->subject, $this->msg, $headers);
-                if (!$sent)
-                {
-                    $ok = FALSE;
-                }
-            }
-            return $ok;
-        }
-        else
+
+        if (($headers === FALSE) || empty($this->to) || ($this->subject == ''))
         {
             return FALSE;
         }
+
+        $ok = TRUE;
+        foreach ($this->to AS $value)
+        {
+            $sent = mail($value, $this->subject, $this->msg, $headers);
+            if (!$sent)
+            {
+                $ok = FALSE;
+            }
+        }
+
+        return $ok;
     }
 
     /**
