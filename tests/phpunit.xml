@@ -33,6 +33,7 @@
             <file>tests/system/libraries/core/class.logger.test.php</file>
             <file>tests/system/libraries/core/class.controller.test.php</file>
             <file>tests/system/libraries/core/class.view.test.php</file>
+            <file>tests/system/libraries/core/class.mail.base.test.php</file>
             <file>tests/system/libraries/l10n/class.l10n.test.php</file>
             <file>tests/system/libraries/l10n/class.l10nprovider.test.php</file>
             <file>tests/system/libraries/l10n/class.gettextl10nprovider.base.test.php</file>
