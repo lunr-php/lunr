@@ -226,6 +226,71 @@ class DateTime
         }
     }
 
+    /**
+     * Check whether input is a valid date definition.
+     *
+     * @param mixed $value The input to check
+     *
+     * @return Boolean $return TRUE if input is a valid date, FALSE otherwise.
+     */
+    public function is_date($value)
+    {
+        $leap_day = '/^(\d{1,4})[\- \/ \.]02[\- \/ \.]29$/';
+
+        if (preg_match($leap_day, $value))
+        {
+            $year = preg_replace('/[\- \/ \.]02[\- \/ \.]29$/', '', $value);
+            return $this->is_leap_year($year);
+        }
+        else
+        {
+            $feb     = '02[\- \/ \.](0[1-9]|1[0-9]|2[0-8])';
+            $_30days = '(0[469]|11)[\- \/ \.](0[1-9]|[12][0-9]|30)';
+            $_31days = '(0[13578]|1[02])[\- \/ \.](0[1-9]|[12][0-9]|3[01])';
+
+            if (preg_match("/^(\d{1,4})[\- \/ \.]($_31days|$_30days|$feb)$/", $value))
+            {
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
+    }
+
+    /**
+     * Check whether input is a leap year.
+     *
+     * @param integer $value The input to check
+     *
+     * @return Boolean $return TRUE if input is a valid date, FALSE otherwise.
+     */
+    public function is_leap_year($value)
+    {
+        return ((($value % 4) == 0) && ((($value % 100) != 0) || (($value %400) == 0)));
+    }
+
+    /**
+     * Check whether input is a valid time definition.
+     *
+     * @param mixed $value The input to check
+     *
+     * @return Boolean $return TRUE if input is a valid time, FALSE otherwise.
+     */
+    public function is_time($value)
+    {
+        // accepts HHH:MM:SS, e.g. 23:59:30 or 12:30 or 120:17
+        if (preg_match('/^(\-)?[0-9]{1,3}(:[0-5][0-9]){1,2}$/', $value))
+        {
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
 }
 
 ?>
