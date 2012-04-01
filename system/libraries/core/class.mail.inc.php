@@ -96,7 +96,7 @@ class Mail
      *
      * @return Boolean $return TRUE if it is an email, false otherwise
      */
-    public static function validate_email($email)
+    public function is_valid($email)
     {
         // filter_var accepts "username" as a valid email, since @domain.com
         // might be implied. So we check for a present domain by checking the
@@ -121,7 +121,10 @@ class Mail
      */
     public function set_from($from)
     {
-        $this->from = $from;
+        if ($this->is_valid($from) === TRUE)
+        {
+            $this->from = $from;
+        }
         return $this;
     }
 
@@ -134,7 +137,10 @@ class Mail
      */
     public function add_to($to)
     {
-        $this->to[] = $to;
+        if ($this->is_valid($to) === TRUE)
+        {
+            $this->to[] = $to;
+        }
         return $this;
     }
 
@@ -147,7 +153,10 @@ class Mail
      */
     public function add_cc($cc)
     {
-        $this->cc[] = $cc;
+        if ($this->is_valid($cc) === TRUE)
+        {
+            $this->cc[] = $cc;
+        }
         return $this;
     }
 
@@ -160,7 +169,10 @@ class Mail
      */
     public function add_bcc($bcc)
     {
-        $this->bcc[] = $bcc;
+        if ($this->is_valid($bcc) === TRUE)
+        {
+            $this->bcc[] = $bcc;
+        }
         return $this;
     }
 
