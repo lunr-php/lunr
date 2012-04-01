@@ -209,7 +209,7 @@ class Mail
      */
     public function send()
     {
-        $headers = $this->headers();
+        $headers = $this->generate_headers();
 
         if (($headers === FALSE) || empty($this->to) || ($this->subject == ''))
         {
@@ -220,7 +220,7 @@ class Mail
         foreach ($this->to AS $value)
         {
             $sent = mail($value, $this->subject, $this->msg, $headers);
-            if (!$sent)
+            if ($sent !== TRUE)
             {
                 $ok = FALSE;
             }
@@ -236,53 +236,40 @@ class Mail
      *
      * @return mixed $header Headers on success, FALSE on failure
      */
-    private function headers()
+    private function generate_headers()
     {
-        if ($this->from != '')
-        {
-            $header  = 'From: ' . $this->from . "\r\n";
-
-            if (!empty($this->cc))
-            {
-                $header .= 'CC: ';
-                foreach ($this->cc as $key=>$value)
-                {
-                    $header .= $value;
-                    if (isset($this->cc[$key + 1]))
-                    {
-                        $header .= ', ';
-                    }
-                    else
-                    {
-                        $header .= "\r\n";
-                    }
-                }
-            }
-
-            if (!empty($this->bcc))
-            {
-                $header .= 'BCC: ';
-                foreach ($this->bcc as $key=>$value)
-                {
-                    $header .= $value;
-                    if (isset($this->bcc[$key + 1]))
-                    {
-                        $header .= ', ';
-                    }
-                    else
-                    {
-                        $header .= "\r\n";
-                    }
-                }
-            }
-
-            $header .= 'X-Mailer: PHP/' . phpversion();
-            return $header;
-        }
-        else
+        if ($this->from == '')
         {
             return FALSE;
         }
+
+        $header  = 'From: ' . $this->from . "\r\n";
+
+        $header .= $this->generate_carbon_copy_header();
+        $header .= $this->generate_carbon_copy_header('bcc');
+
+        $header .= 'X-Mailer: PHP/' . phpversion();
+        return $header;
+    }
+
+    /**
+     * Generate the (blind) carbon copy headers for a mail.
+     *
+     * @param String $type Type of carbon copy headers to generate, 'cc' or 'bcc'
+     *
+     * @return String $headers The generated header
+     */
+    private function generate_carbon_copy_header($type = 'cc')
+    {
+        $header = '';
+        if ((($type == 'cc') || ($type == 'bcc')) && !empty($this->$type))
+        {
+            $header .= strtoupper($type) . ': ';
+            $header .= implode(', ', $this->$type);
+            $header .= "\r\n";
+        }
+
+        return $header;
     }
 
 }
