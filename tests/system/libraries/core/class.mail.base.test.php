@@ -103,6 +103,32 @@ class MailBaseTest extends MailTest
         $this->assertEquals('', $property->getValue($this->mail));
     }
 
+    /**
+     * Test that a valid email is correctly marked as valid.
+     *
+     * @param String $email An email to test
+     *
+     * @dataProvider validEmailProvider
+     * @covers       Lunr\Libraries\Core\Mail::is_valid
+     */
+    public function testValidEmailIsValid($email)
+    {
+        $this->assertTrue($this->mail->is_valid($email));
+    }
+
+    /**
+     * Test that an invalid email is correctly marked as invalid.
+     *
+     * @param String $email An email to test
+     *
+     * @dataProvider invalidEmailProvider
+     * @covers       Lunr\Libraries\Core\Mail::is_valid
+     */
+    public function testInvalidEmailIsNotValid($email)
+    {
+        $this->assertFalse($this->mail->is_valid($email));
+    }
+
 }
 
 ?>

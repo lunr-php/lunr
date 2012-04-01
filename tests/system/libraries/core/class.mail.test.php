@@ -58,6 +58,39 @@ abstract class MailTest extends PHPUnit_Framework_TestCase
         unset($this->mail_reflection);
     }
 
+    /**
+     * Unit Test Data Provider for valid email addresses.
+     *
+     * @return array $base Array of email addresses
+     */
+    public function validEmailProvider()
+    {
+        $emails   = array();
+        $emails[] = array('info@m2mobi.com');
+        $emails[] = array('info.jobs@m2mobi.com');
+        $emails[] = array('info-jobs@m2mobi.com');
+        $emails[] = array('INFO@m2mobi.com');
+        $emails[] = array('INFO@m2-mobi.com');
+
+        return $emails;
+    }
+
+    /**
+     * Unit Test Data Provider for invalid email addresses.
+     *
+     * @return array $base Array of email addresses
+     */
+    public function invalidEmailProvider()
+    {
+        $emails   = array();
+        $emails[] = array(FALSE);
+        $emails[] = array(NULL);
+        $emails[] = array('info');
+        $emails[] = array(100);
+        $emails[] = array('info@m2mobi');
+
+        return $emails;
+    }
 }
 
 ?>
