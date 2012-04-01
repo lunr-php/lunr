@@ -41,6 +41,18 @@ abstract class MailTest extends PHPUnit_Framework_TestCase
     protected $mail_reflection;
 
     /**
+     * Runkit simulation code for working email sending.
+     * @var string
+     */
+    const SEND_MAIL_WORKS = 'return TRUE;';
+
+    /**
+     * Runkit simulation code for failing email sending.
+     * @var string
+     */
+    const SEND_MAIL_FAILS = 'return FALSE;';
+
+    /**
      * TestCase Constructor.
      */
     public function setUp()
@@ -91,6 +103,7 @@ abstract class MailTest extends PHPUnit_Framework_TestCase
 
         return $emails;
     }
+
 }
 
 ?>
