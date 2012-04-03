@@ -149,6 +149,26 @@ class Configuration implements ArrayAccess, Iterator, Countable
     }
 
     /**
+     * Load the database config file.
+     *
+     * @return void
+     */
+    public function load_database_config()
+    {
+        $db = array();
+
+        include_once 'conf.database.inc.php';
+
+        if (!is_array($db))
+        {
+            $db = array();
+        }
+
+        $this->config['db'] = new self($db);
+        $this->size_invalid = TRUE;
+    }
+
+    /**
      * Convert an input array recursively into a Configuration class hierarchy.
      *
      * @param array $array Input array
