@@ -17,6 +17,7 @@
             <file>tests/system/libraries/core/class.datetime.today.test.php</file>
             <file>tests/system/libraries/core/class.datetime.tomorrow.test.php</file>
             <file>tests/system/libraries/core/class.datetime.yesterday.test.php</file>
+            <file>tests/system/libraries/core/class.datetime.verify.test.php</file>
             <file>tests/system/libraries/core/class.configuration.base.test.php</file>
             <file>tests/system/libraries/core/class.configuration.convertarraytoclass.test.php</file>
             <file>tests/system/libraries/core/class.configuration.nonarrayconstructor.test.php</file>

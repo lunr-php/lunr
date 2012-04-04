@@ -244,6 +244,106 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
         return $locales;
     }
 
+    /**
+     * Unit Test Data Provider for valid Time definitions.
+     *
+     * @return array $times Set of valid time definitions
+     */
+    public function validTimeProvider()
+    {
+        $times   = array();
+        $times[] = array("23:30");
+        $times[] = array("23:30:01");
+        $times[] = array("23:30:21");
+        $times[] = array("30:10");
+        $times[] = array("124:10:23");
+
+        return $times;
+    }
+
+    /**
+     * Unit Test Data Provider for invalid Time definitions.
+     *
+     * @return array $times Set of invalid time definitions
+     */
+    public function invalidTimeProvider()
+    {
+        $times   = array();
+        $times[] = array("23:20:67");
+        $times[] = array("23:61");
+        $times[] = array("30:61");
+        $times[] = array("30:61:10");
+        $times[] = array("1345:10");
+
+        return $times;
+    }
+
+    /**
+     * Unit Test Data Provider for valid Leapyear definitions.
+     *
+     * @return array $years Set of valid leap definitions
+     */
+    public function validLeapYearProvider()
+    {
+        $years   = array();
+        $years[] = array(1996);
+        $years[] = array(2000);
+
+        return $years;
+    }
+
+    /**
+     * Unit Test Data Provider for invalid Leapyear definitions.
+     *
+     * @return array $years Set of invalid leap definitions
+     */
+    public function invalidLeapYearProvider()
+    {
+        $years   = array();
+        $years[] = array(1998);
+        $years[] = array(2001);
+        $years[] = array(3000);
+
+        return $years;
+    }
+
+    /**
+     * Unit Test Data Provider for valid Date definitions.
+     *
+     * @return array $dates Set of valid date definitions
+     */
+    public function validDateProvider()
+    {
+        $dates   = array();
+        $dates[] = array("2010-02-10");
+        $dates[] = array("1-01-02");
+        $dates[] = array("2096-02-29");
+        $dates[] = array("2011-01-31");
+        $dates[] = array("2400-02-29");
+
+        return $dates;
+    }
+
+    /**
+     * Unit Test Data Provider for invalid Date definitions.
+     *
+     * @return array $dates Set of invalid date definitions
+     */
+    public function invalidDateProvider()
+    {
+        $dates   = array();
+        $dates[] = array("string");
+        $dates[] = array("1020367");
+        $dates[] = array(FALSE);
+        $dates[] = array("2010-02-30");
+        $dates[] = array("2010-13-10");
+        $dates[] = array("2011-04-31");
+        $dates[] = array("2095-02-29");
+        $dates[] = array("2100-02-29");
+        $dates[] = array("2200-02-29");
+
+        return $dates;
+    }
 }
 
 ?>
