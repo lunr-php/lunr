@@ -173,6 +173,14 @@ class Verification
             }
         }
 
+        $this->check_remaining   = TRUE;
+        $this->check_superfluous = FALSE;
+
+        $this->superfluous = array();
+        $this->result      = array();
+        $this->pointer     = NULL;
+        $this->identifier  = '';
+
         return $this;
     }
 
@@ -181,12 +189,11 @@ class Verification
      *
      * @param String $file Full path to log-file
      *
-     * @return Verification $self Self reference
+     * @return void
      */
     public function set_log_file($file)
     {
         $this->logfile = $file;
-        return $this;
     }
 
     /**
