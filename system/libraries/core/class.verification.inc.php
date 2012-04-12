@@ -420,7 +420,14 @@ class Verification
         }
 
         $f = 'is_' . $type;
-        $this->result[$this->pointer]['is_type_' . $type] = $f($this->data[$this->pointer]);
+        if (function_exists($f))
+        {
+            $this->result[$this->pointer]['is_type_' . $type] = $f($this->data[$this->pointer]);
+        }
+        else
+        {
+            $this->result[$this->pointer]['is_type_' . $type] = FALSE;
+        }
 
         return $this;
     }
