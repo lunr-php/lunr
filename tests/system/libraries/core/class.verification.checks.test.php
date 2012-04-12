@@ -27,6 +27,49 @@ namespace Lunr\Libraries\Core;
 class VerificationChecksTest extends VerificationTest
 {
 
+    public function setUp()
+    {
+        parent::setUp();
+
+        $property = $this->verification_reflection->getProperty('pointer');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->verification, 'test');
+    }
+
+    /**
+     * Test that an unimplemented check returns FALSE.
+     *
+     * @covers Lunr\Libraries\Core\Verification::__call
+     */
+    public function testUnimplementedStoresFalse()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $this->verification->unimplemented();
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('unimplemented', $value['test']);
+        $this->assertFalse($value['test']['unimplemented']);
+    }
+
+    /**
+     * Test the fluid interface of an unimplemented call (2).
+     *
+     * @covers Lunr\Libraries\Core\Verification::__call
+     */
+    public function testUnimplementedReturnsSelfReference()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $value = $this->verification->unimplemented();
+
+        $this->assertInstanceOf('Lunr\Libraries\Core\Verification', $value);
+        $this->assertSame($this->verification, $value);
+    }
+
     /**
      * Test that ignore() sets the whole element as TRUE in result.
      *
@@ -34,10 +77,6 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIgnoreSetsResultTrue()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->verification, 'test');
-
         $result = $this->verification_reflection->getProperty('result');
         $result->setAccessible(TRUE);
 
@@ -55,10 +94,6 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIgnoreReturnsSelfReference()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->verification, 'test');
-
         $result = $this->verification_reflection->getProperty('result');
         $result->setAccessible(TRUE);
 
@@ -77,160 +112,660 @@ class VerificationChecksTest extends VerificationTest
     {
         $property = $this->verification_reflection->getProperty('pointer');
         $property->setAccessible(TRUE);
-        $property->setValue($this->verification, 'test');
 
         $this->verification->ignore();
 
         $this->assertNull($property->getValue($this->verification));
     }
 
-//     /**
-//      * Test the not implemented part of __callStatic
-//      * @covers Lunr\Libraries\Core\Verification::__callStatic
-//      */
-//     public function testIsNotImplemented()
-//     {
-//         $this->assertFalse(Verification::graftznwiq3rz89());
-//     }
-//
-//     /**
-//      * Test the static function is_length()
-//      * @dataProvider validLengthProvider
-//      * @covers Lunr\Libraries\Core\Verification::is_length
-//      */
-//     public function testValidIsLength($length, $value)
-//     {
-//         $result = Verification::is_length($length, $value);
-//
-//         $this->assertTrue($result);
-//
-//         $method = "is_length" . $length;
-//         $result = Verification::$method($value);
-//
-//         $this->assertTrue($result);
-//     }
-//
-//     /**
-//      * Test the static function is_length()
-//      * @dataProvider invalidLengthProvider
-//      * @covers Lunr\Libraries\Core\Verification::is_length
-//      */
-//     public function testInvalidIsLength($length, $value)
-//     {
-//         $result = Verification::is_length($length, $value);
-//
-//         $this->assertFalse($result);
-//
-//         $method = "is_length" . $length;
-//         $result = Verification::$method($value);
-//
-//         $this->assertFalse($result);
-//     }
-//
-//     /**
-//      * Test the static function is_nulerical_boolean()
-//      * @dataProvider validNumericalBooleanProvider
-//      * @covers Lunr\Libraries\Core\Verification::is_numerical_boolean
-//      */
-//     public function testValidIsNumericBoolean($value)
-//     {
-//         $this->assertTrue(Verification::is_numerical_boolean($value));
-//     }
-//
-//     /**
-//      * Test the static function is_nulerical_boolean()
-//      * @dataProvider invalidNumericalBooleanProvider
-//      * @covers Lunr\Libraries\Core\Verification::is_numerical_boolean
-//      */
-//     public function testInvalidIsNumericBoolean($value)
-//     {
-//         $this->assertFalse(Verification::is_numerical_boolean($value));
-//     }
-//
-//     /**
-//      * Test the static function is_time()
-//      * @dataProvider validTimeProvider
-//      * @covers Lunr\Libraries\Core\Verification::is_time
-//      */
-//     public function testIsValidTime($time)
-//     {
-//         $this->assertTrue(Verification::is_time($time));
-//     }
-//
-//     /**
-//      * Test the static function is_time()
-//      * @dataProvider invalidTimeProvider
-//      * @covers Lunr\Libraries\Core\Verification::is_time
-//      */
-//     public function testIsInvalidTime($time)
-//     {
-//         $this->assertFalse(Verification::is_time($time));
-//     }
-//
-//     /**
-//      * Test the static function is_date()
-//      * @dataProvider validDateProvider
-//      * @covers Lunr\Libraries\Core\Verification::is_date
-//      */
-//     public function testIsValidDate($date)
-//     {
-//         $this->assertTrue(Verification::is_date($date));
-//     }
-//
-//     /**
-//      * Test the static function is_date()
-//      * @dataProvider invalidDateProvider
-//      * @covers Lunr\Libraries\Core\Verification::is_date
-//      */
-//     public function testIsInvalidDate($date)
-//     {
-//         $this->assertFalse(Verification::is_date($date));
-//     }
-//
-//     public function validLengthProvider()
-//     {
-//         return array(array(1,"a"), array(5,"heinz"), array(10,"transcript"));
-//     }
-//
-//     public function invalidLengthProvider()
-//     {
-//         return array(array(2,"a"), array(3,"heinz"), array(76,"transcript"));
-//     }
-//
-//     public function validNumericalBooleanProvider()
-//     {
-//         return array(array(0), array(1), array("0"), array("1"));
-//     }
-//
-//     public function invalidNumericalBooleanProvider()
-//     {
-//         return array(array(2), array("2"), array(true), array(false));
-//     }
-//
-//     public function validTimeProvider()
-//     {
-//         return array(array("23:30"), array("23:30:01"), array("23:30:21"), array("30:10"), array("124:10:23"));
-//     }
-//
-//     public function invalidTimeProvider()
-//     {
-//         return array(array("23:20:67"), array("23:61"), array("30:61"), array("30:61:10"), array("1345:10"));
-//     }
-//
-//     public function validDateProvider()
-//     {
-//         return array(array("2010-02-10"), array("1-01-02"), array("2096-02-29"), array("2011-01-31"),
-//                     array("2400-02-29")
-//                     );
-//     }
-//
-//     public function invalidDateProvider()
-//     {
-//         return array(array("string"), array("1020367"), array(FALSE), array("2010-02-30"), array("2010-13-10"),
-//                     array("2011-04-31"), array("2095-02-29"), array("2100-02-29"), array("2200-02-29")
-//                     );
-//     }
+    /**
+     * Test that is_length stores TRUE when the length is correct.
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_length
+     */
+    public function testIsLengthStoresTrueForCorrectLength()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
 
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $this->verification->is_length(5);
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_length_5', $value['test']);
+        $this->assertTrue($value['test']['is_length_5']);
+    }
+
+    /**
+     * Test that is_length stores FALSE when the length is incorrect.
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_length
+     */
+    public function testIsLengthStoresFalseForIncorrectLength()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $this->verification->is_length(1);
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_length_1', $value['test']);
+        $this->assertFalse($value['test']['is_length_1']);
+    }
+
+    /**
+     * Test the fluid interface of is_length() (2).
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_length
+     */
+    public function testIsLengthReturnsSelfReference()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $value = $this->verification->is_length(5);
+
+        $this->assertInstanceOf('Lunr\Libraries\Core\Verification', $value);
+        $this->assertSame($this->verification, $value);
+    }
+
+    /**
+     * Test that is_type stores TRUE for valid type matches.
+     *
+     * @param String $type  Type definition
+     * @param mixed  $value Value of that type
+     *
+     * @dataProvider validTypeProvider
+     * @covers       Lunr\Libraries\Core\Verification::is_type
+     */
+    public function testIsTypeStoresTrueForValidTypesAndValidValues($type, $value)
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => $value);
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $this->verification->is_type($type);
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_type_' . $type, $value['test']);
+        $this->assertTrue($value['test']['is_type_' . $type]);
+    }
+
+    /**
+     * Test that is_type stores FALSE for invalid type matches.
+     *
+     * @param String $type  Type definition
+     * @param mixed  $value Value not of that type
+     *
+     * @dataProvider invalidTypeProvider
+     * @covers Lunr\Libraries\Core\Verification::is_type
+     */
+    public function testIsTypeStoresFalseForValidTypesAndInvalidValues($type, $value)
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => $value);
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $this->verification->is_type($type);
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_type_' . $type, $value['test']);
+        $this->assertFalse($value['test']['is_type_' . $type]);
+    }
+
+    /**
+     * Test that is_type stores FALSE for types that don't have check functions.
+     *
+     * @covers       Lunr\Libraries\Core\Verification::is_type
+     */
+    public function testIsTypeStoresFalseForInvalidTypes()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $this->verification->is_type('type');
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_type_type', $value['test']);
+        $this->assertFalse($value['test']['is_type_type']);
+    }
+
+    /**
+     * Test the fluid interface of is_type() (2).
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_type
+     */
+    public function testIsTypeReturnsSelfReference()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $value = $this->verification->is_type('string');
+
+        $this->assertInstanceOf('Lunr\Libraries\Core\Verification', $value);
+        $this->assertSame($this->verification, $value);
+    }
+
+    /**
+     * Test that is_not_empty() stores TRUE for non-empty values.
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_not_empty
+     */
+    public function testIsNotEmptyStoresTrueForNonEmptyValues()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $this->verification->is_not_empty();
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_not_empty', $value['test']);
+        $this->assertTrue($value['test']['is_not_empty']);
+    }
+
+    /**
+     * Test that is_not_empty() stores FALSE for empty values.
+     *
+     * @param mixed  $value non-empty-value
+     *
+     * @dataProvider emptyValueProvider
+     * @covers       Lunr\Libraries\Core\Verification::is_not_empty
+     */
+    public function testIsNotEmptyStoresFalseForEmptyValues($value)
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => $value);
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $this->verification->is_not_empty();
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_not_empty', $value['test']);
+        $this->assertFalse($value['test']['is_not_empty']);
+    }
+
+    /**
+     * Test the fluid interface of is_not_empty() (2).
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_not_empty
+     */
+    public function testIsNotEmptyReturnsSelfReference()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $value = $this->verification->is_not_empty();
+
+        $this->assertInstanceOf('Lunr\Libraries\Core\Verification', $value);
+        $this->assertSame($this->verification, $value);
+    }
+
+    /**
+     * Test that is_numerical_boolean stores TRUE for valid values.
+     *
+     * @param mixed $value Valid numerical boolean
+     *
+     * @dataProvider validNumericalBooleanProvider
+     * @covers       Lunr\Libraries\Core\Verification::is_numerical_boolean
+     */
+    public function testIsNumericalBooleanStoresTrueForValidValues($value)
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => $value);
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $this->verification->is_numerical_boolean();
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_numerical_boolean', $value['test']);
+        $this->assertTrue($value['test']['is_numerical_boolean']);
+    }
+
+    /**
+     * Test that is_numerical_boolean stores FALSE for invalid values.
+     *
+     * @param mixed $value Invalid numerical boolean
+     *
+     * @dataProvider invalidNumericalBooleanProvider
+     * @covers       Lunr\Libraries\Core\Verification::is_numerical_boolean
+     */
+    public function testIsNumericalBooleanStoresFalseForInvalidValues($value)
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => $value);
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $this->verification->is_numerical_boolean();
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_numerical_boolean', $value['test']);
+        $this->assertFalse($value['test']['is_numerical_boolean']);
+    }
+
+    /**
+     * Test the fluid interface of is_numerical_boolean() (2).
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_numerical_boolean
+     */
+    public function testIsNumericalBooleanReturnsSelfReference()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $value = $this->verification->is_numerical_boolean();
+
+        $this->assertInstanceOf('Lunr\Libraries\Core\Verification', $value);
+        $this->assertSame($this->verification, $value);
+    }
+
+    /**
+     * Test that is_numerical_troolean stores TRUE for valid values.
+     *
+     * @param mixed $value Valid numerical troolean
+     *
+     * @dataProvider validNumericalTrooleanProvider
+     * @covers       Lunr\Libraries\Core\Verification::is_numerical_troolean
+     */
+    public function testIsNumericalTrooleanStoresTrueForValidValues($value)
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => $value);
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $this->verification->is_numerical_troolean();
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_numerical_troolean', $value['test']);
+        $this->assertTrue($value['test']['is_numerical_troolean']);
+    }
+
+    /**
+     * Test that is_numerical_troolean stores FALSE for invalid values.
+     *
+     * @param mixed $value Valid numerical troolean
+     *
+     * @dataProvider invalidNumericalTrooleanProvider
+     * @covers       Lunr\Libraries\Core\Verification::is_numerical_troolean
+     */
+    public function testIsNumericalTrooleanStoresFalseForInvalidValues($value)
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => $value);
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $this->verification->is_numerical_troolean();
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_numerical_troolean', $value['test']);
+        $this->assertFalse($value['test']['is_numerical_troolean']);
+    }
+
+    /**
+     * Test the fluid interface of is_numerical_troolean() (2).
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_numerical_troolean
+     */
+    public function testIsNumericalTrooleanReturnsSelfReference()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $value = $this->verification->is_numerical_troolean();
+
+        $this->assertInstanceOf('Lunr\Libraries\Core\Verification', $value);
+        $this->assertSame($this->verification, $value);
+    }
+
+    /**
+     * Test that is_mail() stores TRUE for valid emails.
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_mail
+     */
+    public function testIsMailStoresTrueForValidEmails()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $mail = $this->getMock('Lunr\Libraries\Core\Mail');
+        $mail->expects($this->once())
+             ->method('is_valid')
+             ->will($this->returnValue(TRUE));
+
+        $this->verification->is_mail($mail);
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_mail', $value['test']);
+        $this->assertTrue($value['test']['is_mail']);
+    }
+
+    /**
+     * Test that is_mail() stores FALSE for invalid emails.
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_mail
+     */
+    public function testIsMailStoresFalseForInvalidEmails()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $mail = $this->getMock('Lunr\Libraries\Core\Mail');
+        $mail->expects($this->once())
+             ->method('is_valid')
+             ->will($this->returnValue(FALSE));
+
+        $this->verification->is_mail($mail);
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_mail', $value['test']);
+        $this->assertFalse($value['test']['is_mail']);
+    }
+
+    /**
+     * Test the fluid interface of is_mail() (2).
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_mail
+     */
+    public function testIsMailReturnsSelfReference()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $mail = $this->getMock('Lunr\Libraries\Core\Mail');
+        $mail->expects($this->once())
+             ->method('is_valid');
+
+        $value = $this->verification->is_mail($mail);
+
+        $this->assertInstanceOf('Lunr\Libraries\Core\Verification', $value);
+        $this->assertSame($this->verification, $value);
+    }
+
+    /**
+     * Test that is_date() stores TRUE for valid dates.
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_date
+     */
+    public function testIsDateStoresTrueForValidDates()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $date = $this->getMock('Lunr\Libraries\Core\DateTime');
+        $date->expects($this->once())
+             ->method('is_date')
+             ->will($this->returnValue(TRUE));
+
+        $this->verification->is_date($date);
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_date', $value['test']);
+        $this->assertTrue($value['test']['is_date']);
+    }
+
+    /**
+     * Test that is_date() stores FALSE for invalid dates.
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_date
+     */
+    public function testIsDateStoresFalseForInvalidDates()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $date = $this->getMock('Lunr\Libraries\Core\DateTime');
+        $date->expects($this->once())
+             ->method('is_date')
+             ->will($this->returnValue(FALSE));
+
+        $this->verification->is_date($date);
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_date', $value['test']);
+        $this->assertFalse($value['test']['is_date']);
+    }
+
+    /**
+     * Test the fluid interface of is_date() (2).
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_date
+     */
+    public function testIsDateReturnsSelfReference()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $date = $this->getMock('Lunr\Libraries\Core\DateTime');
+        $date->expects($this->once())
+             ->method('is_date');
+
+        $value = $this->verification->is_date($date);
+
+        $this->assertInstanceOf('Lunr\Libraries\Core\Verification', $value);
+        $this->assertSame($this->verification, $value);
+    }
+
+    /**
+     * Test that is_time() stores TRUE for valid times.
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_time
+     */
+    public function testIsTimeStoresTrueForValidTimes()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $date = $this->getMock('Lunr\Libraries\Core\DateTime');
+        $date->expects($this->once())
+             ->method('is_time')
+             ->will($this->returnValue(TRUE));
+
+        $this->verification->is_time($date);
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_time', $value['test']);
+        $this->assertTrue($value['test']['is_time']);
+    }
+
+    /**
+     * Test that is_time() stores FALSE for invalid times.
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_time
+     */
+    public function testIsTimeStoresFalseForInvalidTimes()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $date = $this->getMock('Lunr\Libraries\Core\DateTime');
+        $date->expects($this->once())
+             ->method('is_time')
+             ->will($this->returnValue(FALSE));
+
+        $this->verification->is_time($date);
+
+        $value = $result->getValue($this->verification);
+        $this->assertArrayHasKey('test', $value);
+        $this->assertArrayHasKey('is_time', $value['test']);
+        $this->assertFalse($value['test']['is_time']);
+    }
+
+    /**
+     * Test the fluid interface of is_time() (2).
+     *
+     * @covers Lunr\Libraries\Core\Verification::is_time
+     */
+    public function testIsTimeReturnsSelfReference()
+    {
+        $result = $this->verification_reflection->getProperty('result');
+        $result->setAccessible(TRUE);
+
+        $test = array('test' => 'value');
+
+        $data = $this->verification_reflection->getProperty('data');
+        $data->setAccessible(TRUE);
+        $data->setValue($this->verification, $test);
+
+        $date = $this->getMock('Lunr\Libraries\Core\DateTime');
+        $date->expects($this->once())
+             ->method('is_time');
+
+        $value = $this->verification->is_time($date);
+
+        $this->assertInstanceOf('Lunr\Libraries\Core\Verification', $value);
+        $this->assertSame($this->verification, $value);
+    }
 
 }
 

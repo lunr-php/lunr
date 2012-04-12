@@ -9,8 +9,8 @@
             colors="true">
     <testsuites>
         <testsuite name="Lunr Testsuite">
-           <file>tests/system/libraries/core/class.autoloader.test.php</file>
-             <file>tests/system/libraries/core/class.datetime.base.test.php</file>
+            <file>tests/system/libraries/core/class.autoloader.test.php</file>
+            <file>tests/system/libraries/core/class.datetime.base.test.php</file>
             <file>tests/system/libraries/core/class.datetime.getdatetime.test.php</file>
             <file>tests/system/libraries/core/class.datetime.getdelayeddatetime.test.php</file>
             <file>tests/system/libraries/core/class.datetime.getdelayedtimestamp.test.php</file>
