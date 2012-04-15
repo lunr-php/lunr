@@ -42,6 +42,7 @@ class Logger
      * Constructor.
      *
      * @param DateTime $datetime Instance of the DateTime class.
+     * @param Request  &$request Reference to the Request class.
      */
     public function __construct($datetime, &$request)
     {
@@ -59,7 +60,6 @@ class Logger
         unset($this->datetime);
         $this->request = NULL;
     }
-
 
     /**
      * Construct an error message according to the input.
