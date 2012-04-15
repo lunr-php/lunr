@@ -62,7 +62,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
     }
 
     /**
-     * Test fluid interface of the select method
+     * Test fluid interface of the select method.
      *
      * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::select
      */
