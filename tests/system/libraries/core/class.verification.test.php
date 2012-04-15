@@ -225,6 +225,34 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
         return $sets;
     }
 
+    /**
+     * Unit Test Data Provider for datasets that have been fully checked.
+     *
+     * @return array $data Set of data and results
+     */
+    public function isFullyCheckedProvider()
+    {
+        $data   = array();
+        $data[] = array(array(), array());
+        $data[] = array(array('test' => 'value'), array('test' => TRUE));
+
+        return $data;
+    }
+
+    /**
+     * Unit Test Data Provider for datasets that have not been fully checked.
+     *
+     * @return array $data Set of data and results
+     */
+    public function isNotFullyCheckedProvider()
+    {
+        $data   = array();
+        $data[] = array(array('test' => 'value'), array());
+        $data[] = array(array('test' => 'value', 'ing' => 'string'), array('test' => TRUE));
+
+        return $data;
+    }
+
 }
 
 ?>
