@@ -278,7 +278,7 @@ class Verification
         if ($this->check_superfluous === TRUE)
         {
             $result = $this->is_overchecked($error_prefix);
-            if ($result === FALSE)
+            if ($result === TRUE)
             {
                 return FALSE;
             }
@@ -287,7 +287,7 @@ class Verification
         # Check for unchecked indexes
         if ($this->check_remaining === TRUE)
         {
-            $result = $this->is_fully_checked();
+            $result = $this->is_fully_checked($error_prefix);
             if ($result === FALSE)
             {
                 return FALSE;
@@ -330,7 +330,7 @@ class Verification
     {
         if (empty($this->superfluous))
         {
-            return TRUE;
+            return FALSE;
         }
 
         foreach ($this->superfluous as &$value)
@@ -339,7 +339,7 @@ class Verification
         }
         unset($value);
 
-        return FALSE;
+        return TRUE;
     }
 
     /**
