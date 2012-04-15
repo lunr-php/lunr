@@ -40,6 +40,8 @@ abstract class Controller
 
     /**
      * Constructor.
+     *
+     * @param Response &$response Reference to the Response class
      */
     public function __construct(&$response)
     {
@@ -71,7 +73,7 @@ abstract class Controller
             $this->response->errno = $this->error['not_implemented'];
         }
 
-        $this->response->errmsg = "Not implemented!";
+        $this->response->errmsg = 'Not implemented!';
     }
 
     /**
