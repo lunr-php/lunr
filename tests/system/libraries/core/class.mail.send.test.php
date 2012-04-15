@@ -181,7 +181,7 @@ class MailSendTest extends MailTest
         $property->setValue($this->mail, 'info@m2mobi.com');
 
         $expected  = "From: info@m2mobi.com\r\n";
-        $expected .= "X-Mailer: PHP/" . phpversion();
+        $expected .= 'X-Mailer: PHP/' . phpversion();
 
         $this->assertEquals($expected, $method->invoke($this->mail));
     }
@@ -209,7 +209,7 @@ class MailSendTest extends MailTest
 
         $expected  = "From: info@m2mobi.com\r\n";
         $expected .= "CC: jobs@m2mobi.com\r\n";
-        $expected .= "X-Mailer: PHP/" . phpversion();
+        $expected .= 'X-Mailer: PHP/' . phpversion();
 
         $this->assertEquals($expected, $method->invoke($this->mail));
     }
@@ -237,7 +237,7 @@ class MailSendTest extends MailTest
 
         $expected  = "From: info@m2mobi.com\r\n";
         $expected .= "BCC: jobs@m2mobi.com\r\n";
-        $expected .= "X-Mailer: PHP/" . phpversion();
+        $expected .= 'X-Mailer: PHP/' . phpversion();
 
         $this->assertEquals($expected, $method->invoke($this->mail));
     }
@@ -271,7 +271,7 @@ class MailSendTest extends MailTest
         $expected  = "From: info@m2mobi.com\r\n";
         $expected .= "CC: jobs@m2mobi.com\r\n";
         $expected .= "BCC: jobs@m2mobi.com\r\n";
-        $expected .= "X-Mailer: PHP/" . phpversion();
+        $expected .= 'X-Mailer: PHP/' . phpversion();
 
         $this->assertEquals($expected, $method->invoke($this->mail));
     }

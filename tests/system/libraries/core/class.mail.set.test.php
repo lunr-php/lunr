@@ -42,7 +42,7 @@ class MailSetTest extends MailTest
     }
 
     /**
-     * Test that trying to set an invalid email as From will not do anything
+     * Test that trying to set an invalid email as From will not do anything.
      *
      * @depends Lunr\Libraries\Core\MailBaseTest::testFromEmptyByDefault
      * @depends Lunr\Libraries\Core\MailBaseTest::testInvalidEmailIsNotValid
@@ -59,7 +59,7 @@ class MailSetTest extends MailTest
     }
 
     /**
-     * Test setting a valid email as From
+     * Test setting a valid email as From.
      *
      * @depends Lunr\Libraries\Core\MailBaseTest::testFromEmptyByDefault
      * @depends Lunr\Libraries\Core\MailBaseTest::testInvalidEmailIsNotValid
@@ -89,7 +89,7 @@ class MailSetTest extends MailTest
     }
 
     /**
-     * Test that trying to add an invalid email as To will not do anything
+     * Test that trying to add an invalid email as To will not do anything.
      *
      * @depends Lunr\Libraries\Core\MailBaseTest::testToEmptyByDefault
      * @depends Lunr\Libraries\Core\MailBaseTest::testInvalidEmailIsNotValid
@@ -109,7 +109,7 @@ class MailSetTest extends MailTest
     }
 
     /**
-     * Test adding a valid email as To
+     * Test adding a valid email as To.
      *
      * @depends Lunr\Libraries\Core\MailBaseTest::testToEmptyByDefault
      * @depends Lunr\Libraries\Core\MailBaseTest::testInvalidEmailIsNotValid
@@ -130,7 +130,7 @@ class MailSetTest extends MailTest
     }
 
     /**
-     * Test adding more than one valid email as To
+     * Test adding more than one valid email as To.
      *
      * @depends Lunr\Libraries\Core\MailBaseTest::testToEmptyByDefault
      * @depends Lunr\Libraries\Core\MailBaseTest::testInvalidEmailIsNotValid
@@ -166,7 +166,7 @@ class MailSetTest extends MailTest
     }
 
     /**
-     * Test that trying to add an invalid email as CC will not do anything
+     * Test that trying to add an invalid email as CC will not do anything.
      *
      * @depends Lunr\Libraries\Core\MailBaseTest::testCCEmptyByDefault
      * @depends Lunr\Libraries\Core\MailBaseTest::testInvalidEmailIsNotValid
@@ -186,7 +186,7 @@ class MailSetTest extends MailTest
     }
 
     /**
-     * Test adding a valid email as CC
+     * Test adding a valid email as CC.
      *
      * @depends Lunr\Libraries\Core\MailBaseTest::testCCEmptyByDefault
      * @depends Lunr\Libraries\Core\MailBaseTest::testInvalidEmailIsNotValid
@@ -207,7 +207,7 @@ class MailSetTest extends MailTest
     }
 
     /**
-     * Test adding more than one valid email as CC
+     * Test adding more than one valid email as CC.
      *
      * @depends Lunr\Libraries\Core\MailBaseTest::testCCEmptyByDefault
      * @depends Lunr\Libraries\Core\MailBaseTest::testInvalidEmailIsNotValid
@@ -243,7 +243,7 @@ class MailSetTest extends MailTest
     }
 
     /**
-     * Test that trying to add an invalid email as BCC will not do anything
+     * Test that trying to add an invalid email as BCC will not do anything.
      *
      * @depends Lunr\Libraries\Core\MailBaseTest::testBCCEmptyByDefault
      * @depends Lunr\Libraries\Core\MailBaseTest::testInvalidEmailIsNotValid
@@ -263,7 +263,7 @@ class MailSetTest extends MailTest
     }
 
     /**
-     * Test adding a valid email as BCC
+     * Test adding a valid email as BCC.
      *
      * @depends Lunr\Libraries\Core\MailBaseTest::testBCCEmptyByDefault
      * @depends Lunr\Libraries\Core\MailBaseTest::testInvalidEmailIsNotValid
@@ -284,7 +284,7 @@ class MailSetTest extends MailTest
     }
 
     /**
-     * Test adding more than one valid email as BCC
+     * Test adding more than one valid email as BCC.
      *
      * @depends Lunr\Libraries\Core\MailBaseTest::testBCCEmptyByDefault
      * @depends Lunr\Libraries\Core\MailBaseTest::testInvalidEmailIsNotValid
