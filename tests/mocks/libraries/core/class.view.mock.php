@@ -56,8 +56,9 @@ class MockView extends View
      */
     public function print_page()
     {
-        echo "HTML Output";
+        echo 'HTML Output';
     }
+
 }
 
 ?>
