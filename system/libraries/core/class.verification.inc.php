@@ -199,11 +199,11 @@ class Verification
     /**
      * Set an identifier for the verification process.
      *
-     * This idenitifier is used in the error log and can be used
+     * This identifier is used in the error log and can be used
      * to distinguish errors from multiple verification runs
      * from each other.
      *
-     * @param String $idenitifier Identifier for the Verification process
+     * @param String $identifier Identifier for the Verification process
      *
      * @return Verification $self Self reference
      */
@@ -408,7 +408,7 @@ class Verification
     /**
      * Check that input is of the type provided as parameter.
      *
-     * @param mixed $type  The type to check for
+     * @param mixed $type The type to check for
      *
      * @return Verification $self Self reference
      */
