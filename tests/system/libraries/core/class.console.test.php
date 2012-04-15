@@ -61,7 +61,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
 
         $this->console = new Console($datetime);
 
-        $this->console_reflection = new ReflectionClass("Lunr\Libraries\Core\Console");
+        $this->console_reflection = new ReflectionClass('Lunr\Libraries\Core\Console');
     }
 
     /**
