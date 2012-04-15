@@ -132,7 +132,7 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Unit Test Data Provider for empty values,
+     * Unit Test Data Provider for empty values.
      *
      * @return array $values Set of empty values
      */
@@ -160,8 +160,8 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
         $bools   = array();
         $bools[] = array(0);
         $bools[] = array(1);
-        $bools[] = array("0");
-        $bools[] = array("1");
+        $bools[] = array('0');
+        $bools[] = array('1');
 
         return $bools;
     }
@@ -175,7 +175,7 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
     {
         $bools   = $this->validNumericalBooleanProvider();
         $bools[] = array(2);
-        $bools[] = array("2");
+        $bools[] = array('2');
 
         return $bools;
     }
@@ -189,7 +189,7 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
     {
         $trools   = array();
         $trools[] = array(3);
-        $trools[] = array("3");
+        $trools[] = array('3');
         $trools[] = array(TRUE);
         $trools[] = array(FALSE);
 
@@ -205,7 +205,7 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
     {
         $bools   = $this->invalidNumericalTrooleanProvider();
         $bools[] = array(2);
-        $bools[] = array("2");
+        $bools[] = array('2');
 
         return $bools;
     }

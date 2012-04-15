@@ -84,7 +84,7 @@ class VerificationSetTest extends VerificationTest
     }
 
     /**
-     * Test that set_data resets the verification state
+     * Test that set_data resets the verification state.
      *
      * @covers Lunr\Libraries\Core\Verification::set_data
      */
@@ -234,7 +234,7 @@ class VerificationSetTest extends VerificationTest
     }
 
     /**
-     * Test the fluid interface of inspect()
+     * Test the fluid interface of inspect().
      *
      * @covers Lunr\Libraries\Core\Verification::inspect
      */
@@ -299,6 +299,7 @@ class VerificationSetTest extends VerificationTest
         $this->assertInternalType('array', $value);
         $this->assertContains('test', $value);
     }
+
 }
 
 ?>

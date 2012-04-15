@@ -27,6 +27,9 @@ namespace Lunr\Libraries\Core;
 class VerificationChecksTest extends VerificationTest
 {
 
+    /**
+     * TestCase Constructor.
+     */
     public function setUp()
     {
         parent::setUp();
@@ -317,7 +320,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test that is_not_empty() stores FALSE for empty values.
      *
-     * @param mixed  $value non-empty-value
+     * @param mixed $value non-empty-value
      *
      * @dataProvider emptyValueProvider
      * @covers       Lunr\Libraries\Core\Verification::is_not_empty
