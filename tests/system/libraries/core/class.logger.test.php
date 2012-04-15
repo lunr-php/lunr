@@ -65,7 +65,7 @@ class LoggerTest extends PHPUnit_Framework_TestCase
 
         $this->logger = new Logger($datetime, $request);
 
-        $this->logger_reflection = new ReflectionClass("Lunr\Libraries\Core\Logger");
+        $this->logger_reflection = new ReflectionClass('Lunr\Libraries\Core\Logger');
     }
 
     /**
@@ -84,9 +84,9 @@ class LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function test_construct_error_message_from_prefix_and_message()
     {
-        $info = "Info";
+        $info = 'Info';
 
-        $output = "[" . self::DATETIME_STRING . "]: " . $info;
+        $output = '[' . self::DATETIME_STRING . ']: ' . $info;
 
         $method = $this->logger_reflection->getMethod('construct_error_message');
         $method->setAccessible(TRUE);
@@ -105,9 +105,9 @@ class LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function test_construct_error_message_with_controller_available()
     {
-        $info = "Info";
+        $info = 'Info';
 
-        $output = "[" . self::DATETIME_STRING . "]: " . $info;
+        $output = '[' . self::DATETIME_STRING . ']: ' . $info;
 
         $method = $this->logger_reflection->getMethod('construct_error_message');
         $method->setAccessible(TRUE);
@@ -142,9 +142,9 @@ class LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function test_construct_error_message_with_method_available()
     {
-        $info = "Info";
+        $info = 'Info';
 
-        $output = "[" . self::DATETIME_STRING . "]: " . $info;
+        $output = '[' . self::DATETIME_STRING . ']: ' . $info;
 
         $method = $this->logger_reflection->getMethod('construct_error_message');
         $method->setAccessible(TRUE);
@@ -174,9 +174,9 @@ class LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function test_construct_error_message_with_controller_and_method_available()
     {
-        $info = "Info";
+        $info = 'Info';
 
-        $output = "[" . self::DATETIME_STRING . "]: controller/method: " . $info;
+        $output = '[' . self::DATETIME_STRING . ']: controller/method: ' . $info;
 
         $method = $this->logger_reflection->getMethod('construct_error_message');
         $method->setAccessible(TRUE);
@@ -195,7 +195,7 @@ class LoggerTest extends PHPUnit_Framework_TestCase
         $msg = $method->invokeArgs($this->logger, array($info));
 
         $this->assertInternalType('array', $msg);
-        $this->assertEquals("controller/method: " . $info, $msg[0]);
+        $this->assertEquals('controller/method: ' . $info, $msg[0]);
         $this->assertEquals($output, $msg[1]);
     }
 
@@ -230,7 +230,7 @@ class LoggerTest extends PHPUnit_Framework_TestCase
     public function test_log_error_to_file_prints_error()
     {
         $this->expectOutputRegex('/Xdebug: Foo(.)*/');
-        $this->logger->log_error('Foo','/dev/null');
+        $this->logger->log_error('Foo', '/dev/null');
     }
 
     /**
@@ -242,11 +242,11 @@ class LoggerTest extends PHPUnit_Framework_TestCase
     public function test_log_errorln_to_file_prints_error()
     {
         $this->expectOutputRegex('/Xdebug: Foo(.)*/');
-        $this->logger->log_errorln('Foo','/dev/null');
+        $this->logger->log_errorln('Foo', '/dev/null');
     }
 
     /**
-     * Test that log_error() logs correctly to a file
+     * Test that log_error() logs correctly to a file.
      *
      * @depends test_construct_error_message_from_prefix_and_message
      * @depends test_log_error_to_file_prints_error
@@ -263,7 +263,7 @@ class LoggerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that log_errorln() logs correctly to a file
+     * Test that log_errorln() logs correctly to a file.
      *
      * @depends test_construct_error_message_from_prefix_and_message
      * @depends test_log_errorln_to_file_prints_error
@@ -278,6 +278,7 @@ class LoggerTest extends PHPUnit_Framework_TestCase
 
         $this->assertFileEquals(dirname(__FILE__) . '/../../../statics/logs/errorln.log', $file);
     }
+
 }
 
 ?>
