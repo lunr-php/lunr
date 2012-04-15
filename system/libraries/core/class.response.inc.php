@@ -52,7 +52,7 @@ class Response
     private $errinfo;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -63,7 +63,7 @@ class Response
     }
 
     /**
-     * Destructor
+     * Destructor.
      */
     public function __destruct()
     {
@@ -123,10 +123,10 @@ class Response
     }
 
     /**
-     * Add response data for later processing by a view
+     * Add response data for later processing by a view.
      *
-     * @param mixed $key    Identifier for the data
-     * @param mixed $value  The data
+     * @param mixed $key   Identifier for the data
+     * @param mixed $value The data
      *
      * @return void
      */
