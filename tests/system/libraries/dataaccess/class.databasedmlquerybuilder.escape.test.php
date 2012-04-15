@@ -29,6 +29,9 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test escaping column names.
      *
+     * @param String $col     Raw column name
+     * @param String $escaped Expected escaped column name
+     *
      * @dataProvider columnNameProvider
      * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::escape_column_name
      */
@@ -51,8 +54,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "col";
-        $expected = "`col`";
+        $input = 'col';
+        $expected = '`col`';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input)));
     }
@@ -68,8 +71,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "col1, col2, col3";
-        $expected = "`col1`, `col2`, `col3`";
+        $input = 'col1, col2, col3';
+        $expected = '`col1`, `col2`, `col3`';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input)));
     }
@@ -85,8 +88,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "col";
-        $expected = "HEX(`col`) AS `col`";
+        $input = 'col';
+        $expected = 'HEX(`col`) AS `col`';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input, TRUE)));
     }
@@ -102,8 +105,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "col1, col2, col3";
-        $expected = "HEX(`col1`) AS `col1`, HEX(`col2`) AS `col2`, HEX(`col3`) AS `col3`";
+        $input = 'col1, col2, col3';
+        $expected = 'HEX(`col1`) AS `col1`, HEX(`col2`) AS `col2`, HEX(`col3`) AS `col3`';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input, TRUE)));
     }
@@ -119,8 +122,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "col AS alias";
-        $expected = "`col` AS `alias`";
+        $input = 'col AS alias';
+        $expected = '`col` AS `alias`';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input)));
     }
@@ -136,8 +139,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "col AS alias";
-        $expected = "HEX(`col`) AS `alias`";
+        $input = 'col AS alias';
+        $expected = 'HEX(`col`) AS `alias`';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input, TRUE)));
     }
@@ -153,8 +156,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "col1 AS alias1, col2 AS alias2, col3 AS alias3";
-        $expected = "`col1` AS `alias1`, `col2` AS `alias2`, `col3` AS `alias3`";
+        $input = 'col1 AS alias1, col2 AS alias2, col3 AS alias3';
+        $expected = '`col1` AS `alias1`, `col2` AS `alias2`, `col3` AS `alias3`';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input)));
     }
@@ -170,8 +173,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "col1 AS alias1, col2 AS alias2, col3 AS alias3";
-        $expected = "HEX(`col1`) AS `alias1`, HEX(`col2`) AS `alias2`, HEX(`col3`) AS `alias3`";
+        $input = 'col1 AS alias1, col2 AS alias2, col3 AS alias3';
+        $expected = 'HEX(`col1`) AS `alias1`, HEX(`col2`) AS `alias2`, HEX(`col3`) AS `alias3`';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input, TRUE)));
     }
@@ -187,8 +190,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "col as alias";
-        $expected = "`col` AS `alias`";
+        $input = 'col as alias';
+        $expected = '`col` AS `alias`';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input)));
     }
@@ -204,8 +207,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "col as alias";
-        $expected = "HEX(`col`) AS `alias`";
+        $input = 'col as alias';
+        $expected = 'HEX(`col`) AS `alias`';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input, TRUE)));
     }
@@ -221,8 +224,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "col1 as alias1, col2 as alias2, col3 as alias3";
-        $expected = "`col1` AS `alias1`, `col2` AS `alias2`, `col3` AS `alias3`";
+        $input = 'col1 as alias1, col2 as alias2, col3 as alias3';
+        $expected = '`col1` AS `alias1`, `col2` AS `alias2`, `col3` AS `alias3`';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input)));
     }
@@ -238,8 +241,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "col1 as alias1, col2 as alias2, col3 as alias3";
-        $expected = "HEX(`col1`) AS `alias1`, HEX(`col2`) AS `alias2`, HEX(`col3`) AS `alias3`";
+        $input = 'col1 as alias1, col2 as alias2, col3 as alias3';
+        $expected = 'HEX(`col1`) AS `alias1`, HEX(`col2`) AS `alias2`, HEX(`col3`) AS `alias3`';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input, TRUE)));
     }
@@ -255,8 +258,8 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('escape_alias');
         $method->setAccessible(TRUE);
 
-        $input = "*";
-        $expected = "*";
+        $input = '*';
+        $expected = '*';
 
         $this->assertEquals($expected, $method->invokeArgs($this->builder, array($input)));
     }
