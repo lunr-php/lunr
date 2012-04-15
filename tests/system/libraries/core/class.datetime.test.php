@@ -252,11 +252,11 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
     public function validTimeProvider()
     {
         $times   = array();
-        $times[] = array("23:30");
-        $times[] = array("23:30:01");
-        $times[] = array("23:30:21");
-        $times[] = array("30:10");
-        $times[] = array("124:10:23");
+        $times[] = array('23:30');
+        $times[] = array('23:30:01');
+        $times[] = array('23:30:21');
+        $times[] = array('30:10');
+        $times[] = array('124:10:23');
 
         return $times;
     }
@@ -269,11 +269,11 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
     public function invalidTimeProvider()
     {
         $times   = array();
-        $times[] = array("23:20:67");
-        $times[] = array("23:61");
-        $times[] = array("30:61");
-        $times[] = array("30:61:10");
-        $times[] = array("1345:10");
+        $times[] = array('23:20:67');
+        $times[] = array('23:61');
+        $times[] = array('30:61');
+        $times[] = array('30:61:10');
+        $times[] = array('1345:10');
 
         return $times;
     }
@@ -315,11 +315,11 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
     public function validDateProvider()
     {
         $dates   = array();
-        $dates[] = array("2010-02-10");
-        $dates[] = array("1-01-02");
-        $dates[] = array("2096-02-29");
-        $dates[] = array("2011-01-31");
-        $dates[] = array("2400-02-29");
+        $dates[] = array('2010-02-10');
+        $dates[] = array('1-01-02');
+        $dates[] = array('2096-02-29');
+        $dates[] = array('2011-01-31');
+        $dates[] = array('2400-02-29');
 
         return $dates;
     }
@@ -332,18 +332,19 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
     public function invalidDateProvider()
     {
         $dates   = array();
-        $dates[] = array("string");
-        $dates[] = array("1020367");
+        $dates[] = array('string');
+        $dates[] = array('1020367');
         $dates[] = array(FALSE);
-        $dates[] = array("2010-02-30");
-        $dates[] = array("2010-13-10");
-        $dates[] = array("2011-04-31");
-        $dates[] = array("2095-02-29");
-        $dates[] = array("2100-02-29");
-        $dates[] = array("2200-02-29");
+        $dates[] = array('2010-02-30');
+        $dates[] = array('2010-13-10');
+        $dates[] = array('2011-04-31');
+        $dates[] = array('2095-02-29');
+        $dates[] = array('2100-02-29');
+        $dates[] = array('2200-02-29');
 
         return $dates;
     }
+
 }
 
 ?>

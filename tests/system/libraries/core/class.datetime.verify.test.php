@@ -27,7 +27,9 @@ class DateTimeVerifyTest extends DateTimeTest
 {
 
     /**
-     * Test the function is_time()
+     * Test the function is_time().
+     *
+     * @param String $time Valid time definition
      *
      * @dataProvider validTimeProvider
      * @covers       Lunr\Libraries\Core\DateTime::is_time
@@ -38,7 +40,9 @@ class DateTimeVerifyTest extends DateTimeTest
     }
 
     /**
-     * Test the function is_time()
+     * Test the function is_time().
+     *
+     * @param String $time Inalid time definition
      *
      * @dataProvider invalidTimeProvider
      * @covers       Lunr\Libraries\Core\DateTime::is_time
@@ -51,6 +55,8 @@ class DateTimeVerifyTest extends DateTimeTest
     /**
      * Test is_leap_year() with valid leap year values.
      *
+     * @param String $year Valid leap-year definition
+     *
      * @dataProvider validLeapYearProvider
      * @covers       Lunr\Libraries\Core\DateTime::is_leap_year
      */
@@ -62,6 +68,8 @@ class DateTimeVerifyTest extends DateTimeTest
     /**
      * Test is_leap_year() with invalid leap year values.
      *
+     * @param String $year Invalid leap-year definition
+     *
      * @dataProvider invalidLeapYearProvider
      * @covers       Lunr\Libraries\Core\DateTime::is_leap_year
      */
@@ -71,7 +79,9 @@ class DateTimeVerifyTest extends DateTimeTest
     }
 
     /**
-     * Test the function is_date()
+     * Test the function is_date().
+     *
+     * @param String $date Valid date definition
      *
      * @dataProvider validDateProvider
      * @depends      testIsValidLeapYear
@@ -84,7 +94,9 @@ class DateTimeVerifyTest extends DateTimeTest
     }
 
     /**
-     * Test the function is_date()
+     * Test the function is_date().
+     *
+     * @param String $date Invalid date definition
      *
      * @dataProvider invalidDateProvider
      * @depends      testIsValidLeapYear
