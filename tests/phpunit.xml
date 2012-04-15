@@ -28,6 +28,7 @@
             <file>tests/system/libraries/core/class.verification.base.test.php</file>
             <file>tests/system/libraries/core/class.verification.nullpointer.test.php</file>
             <file>tests/system/libraries/core/class.verification.checks.test.php</file>
+            <file>tests/system/libraries/core/class.verification.set.test.php</file>
             <file>tests/system/libraries/core/class.request.base.test.php</file>
             <file>tests/system/libraries/core/class.request.store.test.php</file>
             <file>tests/system/libraries/core/class.request.get.test.php</file>

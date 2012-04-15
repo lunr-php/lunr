@@ -210,6 +210,21 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
         return $bools;
     }
 
+    /**
+     * Unit Test Data Provider for invalid datasets.
+     *
+     * @return array $set Set of invalid dataset values
+     */
+    public function invalidDatasetProvider()
+    {
+        $sets   = array();
+        $sets[] = array(FALSE);
+        $sets[] = array(array());
+        $sets[] = array('string');
+
+        return $sets;
+    }
+
 }
 
 ?>
