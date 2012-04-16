@@ -43,12 +43,6 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
     protected $verification_reflection;
 
     /**
-     * Mock instance of the Configuration class.
-     * @var Configuration
-     */
-    protected $configuration;
-
-    /**
      * Mock instance of the Logger class.
      * @var Logger
      */
@@ -59,13 +53,11 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->configuration = $this->getMock('Lunr\Libraries\Core\Configuration');
-
         $this->logger = $this->getMockBuilder('Lunr\Libraries\Core\Logger')
                              ->disableOriginalConstructor()
                              ->getMock();
 
-        $this->verification = new Verification($this->configuration, $this->logger);
+        $this->verification = new Verification($this->logger);
 
         $this->verification_reflection = new ReflectionClass('Lunr\Libraries\Core\Verification');
     }
@@ -77,7 +69,6 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
     {
         unset($this->verification);
         unset($this->verification_reflection);
-        unset($this->configuration);
         unset($this->logger);
     }
 

@@ -27,20 +27,6 @@ class VerificationBaseTest extends VerificationTest
 {
 
     /**
-     * Test that the configuration object is passed by reference.
-     */
-    public function testConfigurationPassedByReference()
-    {
-        $property = $this->verification_reflection->getProperty('configuration');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->verification);
-
-        $this->assertInstanceOf('Lunr\Libraries\Core\Configuration', $value);
-        $this->assertSame($this->configuration, $value);
-    }
-
-    /**
      * Test that the logger object is passed by reference.
      */
     public function testLoggerPassedByReference()
