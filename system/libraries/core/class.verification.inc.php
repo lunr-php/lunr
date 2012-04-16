@@ -28,12 +28,6 @@ class Verification
 {
 
     /**
-     * Reference to the Configuration class.
-     * @var Configuration
-     */
-    private $configuration;
-
-    /**
      * Reference to the Logger class.
      * @var Logger
      */
@@ -91,12 +85,10 @@ class Verification
     /**
      * Constructor.
      *
-     * @param Configuration &$configuration Reference to the Configuration class
-     * @param Logger        &$logger        Reference to the Logger class
+     * @param Logger &$logger Reference to the Logger class
      */
-    public function __construct(&$configuration, &$logger)
+    public function __construct(&$logger)
     {
-        $this->configuration =& $configuration;
         $this->logger =& $logger;
 
         $this->data    = array();
@@ -116,7 +108,6 @@ class Verification
      */
     public function __destruct()
     {
-        $this->configuration = NULL;
         $this->logger = NULL;
         $this->data   = NULL;
 
