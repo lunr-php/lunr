@@ -219,11 +219,36 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Return a new instance of a QueryBuilder object.
      *
-     * @return DatabaseDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
+     * @return MySQLDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
      */
     public function get_new_dml_query_builder_object()
     {
         return new MySQLDMLQueryBuilder();
+    }
+
+    /**
+     * Run a SQL query.
+     *
+     * @param String $sql_query The SQL query to run on the database
+     *
+     * @return MySQLQueryResult $result Query Result
+     */
+    public function query($sql_query)
+    {
+        return new MySQLQueryResult($this->mysqli->query($sql_query), $this->mysqli);
+    }
+
+    /**
+     * Run an asynchronous SQL query.
+     *
+     * @param String $sql_query The SQL query to run on the database
+     *
+     * @return MySQLAsyncQueryResult $result Query Result
+     */
+    public function async_query($sql_query)
+    {
+        $this->mysqli->query($sql_query, MYSQLI_ASYNC);
+        return new MySQLAsyncQueryResult($this->mysqli);
     }
 
 }
