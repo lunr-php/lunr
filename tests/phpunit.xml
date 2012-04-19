@@ -53,8 +53,8 @@
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.escape.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.queryparts.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqldmlquerybuilder.select.test.php</file>
-            <file>tests/system/libraries/db/class.dbman.test.php</file>
-            <file>tests/system/libraries/db/class.dbcon.test.php</file>
+<!--            <file>tests/system/libraries/db/class.dbman.test.php</file>
+            <file>tests/system/libraries/db/class.dbcon.test.php</file>-->
         </testsuite>
     </testsuites>
     <filter>
