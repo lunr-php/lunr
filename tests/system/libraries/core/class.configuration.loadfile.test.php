@@ -114,6 +114,94 @@ class ConfigurationLoadFileTest extends ConfigurationTest
         $this->assertTrue($property->getValue($this->configuration));
     }
 
+    /**
+     * Test loading a correct database config file.
+     *
+     * @runInSeparateProcess
+     *
+     * @depends Lunr\Libraries\Core\ConfigurationArrayConstructorTest::testToArrayEqualsInput
+     */
+    public function testLoadCorrectDatabaseConfig()
+    {
+        set_include_path(dirname(__FILE__) . '/../../../statics/configuration/valid:' . get_include_path());
+
+        $this->configuration->load_database_config();
+
+        $this->config['db'] = array();
+        $this->config['db']['rw_host']  = '10.0.0.22';
+        $this->config['db']['ro_host']  = '10.0.0.10';
+        $this->config['db']['username'] = 'schiphol';
+        $this->config['db']['password'] = '@Sch1ph0l';
+        $this->config['db']['database'] = 'MidSchipDB';
+        $this->config['db']['driver']   = 'mysql';
+
+        $property = $this->configuration_reflection->getProperty('config');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals($this->config, $this->configuration->toArray());
+    }
+
+    /**
+     * Test loading an invalid config file.
+     *
+     * @runInSeparateProcess
+     */
+    public function testLoadInvalidDatabaseConfig()
+    {
+        set_include_path(dirname(__FILE__) . '/../../../statics/configuration/invalid:' . get_include_path());
+
+        $property = $this->configuration_reflection->getProperty('config');
+        $property->setAccessible(TRUE);
+
+        $before = $property->getValue($this->configuration);
+
+        $this->configuration->load_database_config();
+
+        $after  = $property->getValue($this->configuration);
+
+        $this->assertEquals($before, $after);
+    }
+
+    /**
+     * Test loading a non-existing database config file.
+     *
+     * @runInSeparateProcess
+     *
+     * @expectedException PHPUnit_Framework_Error
+     */
+    public function testLoadNonExistingDatabaseConfig()
+    {
+        $property = $this->configuration_reflection->getProperty('config');
+        $property->setAccessible(TRUE);
+
+        $before = $property->getValue($this->configuration);
+
+        $this->configuration->load_database_config();
+
+        $after  = $property->getValue($this->configuration);
+
+        $this->assertEquals($before, $after);
+    }
+
+    /**
+     * Test that loading a database config file invalidates the cached size value.
+     *
+     * @runInSeparateProcess
+     */
+    public function testLoadDatabaseConfigInvalidatesSize()
+    {
+        set_include_path(dirname(__FILE__) . '/../../../statics/configuration/valid:' . get_include_path());
+
+        $property = $this->configuration_reflection->getProperty('size_invalid');
+        $property->setAccessible(TRUE);
+
+        $this->assertFalse($property->getValue($this->configuration));
+
+        $this->configuration->load_database_config();
+
+        $this->assertTrue($property->getValue($this->configuration));
+    }
+
 }
 
 ?>
