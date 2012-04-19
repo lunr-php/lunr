@@ -164,7 +164,11 @@ class Configuration implements ArrayAccess, Iterator, Countable
             $db = array();
         }
 
-        $this->config['db'] = new self($db);
+        if (!empty($db))
+        {
+            $this->config['db'] = new self($db);
+        }
+
         $this->size_invalid = TRUE;
     }
 
