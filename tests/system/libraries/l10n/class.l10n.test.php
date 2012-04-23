@@ -115,7 +115,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
     {
         $properties = $this->l10n_reflection->getStaticProperties();
         $languages  = $properties['languages'];
-        $this->assertEquals($this->languages, $languages);
+        $this->assertEquals(sort($this->languages), sort($languages));
     }
 
     /**
