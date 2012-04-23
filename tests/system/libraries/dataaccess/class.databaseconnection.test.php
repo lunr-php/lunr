@@ -1,0 +1,152 @@
+<?php
+
+/**
+ * This file contains the DatabaseConnectionTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    DataAccess
+ * @subpackage Tests
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
+namespace Lunr\Libraries\DataAccess;
+use PHPUnit_Framework_TestCase;
+use ReflectionClass;
+
+/**
+ * This class contains the tests for the DatabaseConnection class.
+ *
+ * @category   Libraries
+ * @package    DataAccess
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\DataAccess\DatabaseConnection
+ */
+class DatabaseConnectionTest extends PHPUnit_Framework_TestCase
+{
+
+    /**
+     * Mock instance of the Configuration class.
+     * @var Configuration
+     */
+    private $configuration;
+
+    /**
+     * Mock instance of the Logger class.
+     * @var Logger
+     */
+    private $logger;
+
+    /**
+     * Mock instance of the DatabaseConnection class.
+     * @var DatabaseConnection
+     */
+    private $db;
+
+    /**
+     * Reflection instance of the DatabaseConnection class.
+     * @var ReflectionClass
+     */
+    private $db_reflection;
+
+    /**
+     * TestCase Constructor.
+     */
+    public function setUp()
+    {
+        $this->configuration = $this->getMock('Lunr\Libraries\Core\Configuration');
+
+        $this->logger = $this->getMockBuilder('Lunr\Libraries\Core\Logger')
+                             ->disableOriginalConstructor()
+                             ->getMock();
+
+        $this->db = $this->getMockBuilder('Lunr\Libraries\DataAccess\DatabaseConnection')
+                         ->setConstructorArgs(array(&$this->configuration, &$this->logger))
+                         ->getMockForAbstractClass();
+
+        $this->db_reflection = new ReflectionClass('Lunr\Libraries\DataAccess\DatabaseConnection');
+    }
+
+    /**
+     * TestCase Destructor,
+     */
+    public function tearDown()
+    {
+        unset($this->configuration);
+        unset($this->logger);
+        unset($this->db);
+        unset($this->db_reflection);
+    }
+
+    /**
+     * Test that the Configuration class is passed by reference.
+     */
+    public function testConfigurationIsPassedByReference()
+    {
+        $property = $this->db_reflection->getProperty('configuration');
+        $property->setAccessible(TRUE);
+
+        $value = $property->getValue($this->db);
+
+        $this->assertInstanceOf('Lunr\Libraries\Core\Configuration', $value);
+        $this->assertSame($this->configuration, $value);
+    }
+
+    /**
+     * Test that the Logger class is passed by reference.
+     */
+    public function testLoggerIsPassedByReference()
+    {
+        $property = $this->db_reflection->getProperty('logger');
+        $property->setAccessible(TRUE);
+
+        $value = $property->getValue($this->db);
+
+        $this->assertInstanceOf('Lunr\Libraries\Core\Logger', $value);
+        $this->assertSame($this->logger, $value);
+    }
+
+    /**
+     * Test that the connected flag is set to FALSE by default.
+     */
+    public function testConnectedIsFalse()
+    {
+        $property = $this->db_reflection->getProperty('connected');
+        $property->setAccessible(TRUE);
+
+        $this->assertFalse($property->getValue($this->db));
+    }
+
+    /**
+     * Test that the readonly flag is set to TRUE by default.
+     */
+    public function testReadonlyIsTrue()
+    {
+        $property = $this->db_reflection->getProperty('readonly');
+        $property->setAccessible(TRUE);
+
+        $this->assertTrue($property->getValue($this->db));
+    }
+
+    /**
+     * Test that the readonly flag is FALSE when passed as such to the constructor.
+     */
+    public function testReadOnlyIsFalseIfPassedAsSuchInTheConstructor()
+    {
+        $db = $this->getMockBuilder('Lunr\Libraries\DataAccess\DatabaseConnection')
+                   ->setConstructorArgs(array(&$this->configuration, &$this->logger, FALSE))
+                   ->getMockForAbstractClass();
+
+        $property = $this->db_reflection->getProperty('readonly');
+        $property->setAccessible(TRUE);
+
+        $this->assertFalse($property->getValue($db));
+
+        unset($db);
+    }
+}
+
+?>
