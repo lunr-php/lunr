@@ -72,7 +72,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
 
         $this->l10n_reflection = new ReflectionClass('Lunr\Libraries\L10n\L10n');
 
-        $this->languages = array('en_GB', 'de_DE', 'nl_NL');
+        $this->languages = array('de_DE', 'en_GB', 'nl_NL');
     }
 
     /**
@@ -103,7 +103,9 @@ class L10nTest extends PHPUnit_Framework_TestCase
      */
     public function testInitialGetSupportedLanguages()
     {
-        $this->assertEquals($this->languages, $this->l10n->get_supported_languages());
+        $languages = $this->l10n->get_supported_languages();
+        sort($languages);
+        $this->assertEquals($this->languages, $languages);
     }
 
     /**
@@ -115,7 +117,8 @@ class L10nTest extends PHPUnit_Framework_TestCase
     {
         $properties = $this->l10n_reflection->getStaticProperties();
         $languages  = $properties['languages'];
-        $this->assertEquals(sort($this->languages), sort($languages));
+        sort($languages);
+        $this->assertEquals($this->languages, $languages);
     }
 
     /**
@@ -126,7 +129,9 @@ class L10nTest extends PHPUnit_Framework_TestCase
      */
     public function testCachedGetSupportedLanguages()
     {
-        $this->assertEquals($this->languages, $this->l10n->get_supported_languages());
+        $languages = $this->l10n->get_supported_languages();
+        sort($languages);
+        $this->assertEquals($this->languages, $languages);
     }
 
     /**
