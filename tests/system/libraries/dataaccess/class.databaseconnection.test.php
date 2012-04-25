@@ -123,30 +123,50 @@ class DatabaseConnectionTest extends PHPUnit_Framework_TestCase
     /**
      * Test that the readonly flag is set to TRUE by default.
      */
-    public function testReadonlyIsTrue()
+    public function testReadonlyIsFalseByDefault()
     {
         $property = $this->db_reflection->getProperty('readonly');
         $property->setAccessible(TRUE);
+
+        $this->assertFalse($property->getValue($this->db));
+    }
+
+    /**
+     * Test that set_readonly sets the readonly flag when passed TRUE.
+     *
+     * @depends testReadonlyIsFalseByDefault
+     * @covers  Lunr\Libraries\DataAccess\DatabaseConnection::set_readonly
+     */
+    public function testSetReadonlySetsReadonlyWhenPassedTrue()
+    {
+        $property = $this->db_reflection->getProperty('readonly');
+        $property->setAccessible(TRUE);
+
+        $this->db->set_readonly(TRUE);
 
         $this->assertTrue($property->getValue($this->db));
     }
 
     /**
-     * Test that the readonly flag is FALSE when passed as such to the constructor.
+     * Test that set_readonly unsets the readonly flag when passed FALSE.
+     *
+     * @depends testSetReadonlySetsReadonlyWhenPassedTrue
+     * @covers  Lunr\Libraries\DataAccess\DatabaseConnection::set_readonly
      */
-    public function testReadOnlyIsFalseIfPassedAsSuchInTheConstructor()
+    public function testSetReadonlySetsReadwriteWhenPassedFalse()
     {
-        $db = $this->getMockBuilder('Lunr\Libraries\DataAccess\DatabaseConnection')
-                   ->setConstructorArgs(array(&$this->configuration, &$this->logger, FALSE))
-                   ->getMockForAbstractClass();
-
         $property = $this->db_reflection->getProperty('readonly');
         $property->setAccessible(TRUE);
 
-        $this->assertFalse($property->getValue($db));
+        $this->db->set_readonly(TRUE);
 
-        unset($db);
+        $this->assertTrue($property->getValue($this->db));
+
+        $this->db->set_readonly(FALSE);
+
+        $this->assertFalse($property->getValue($this->db));
     }
+
 }
 
 ?>
