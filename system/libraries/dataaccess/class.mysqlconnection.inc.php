@@ -80,46 +80,14 @@ class MySQLConnection extends DatabaseConnection
      * @param Configuration &$configuration Reference to the configuration class
      * @param Logger        &$logger        Reference to the logger class
      * @param mysqli        $mysqli         Instance of the mysqli class
-     * @param Boolean       $readonly       Whether the database access should
-     *                                      be established readonly
      */
-    public function __construct(&$configuration, &$logger, $mysqli, $readonly = TRUE)
+    public function __construct(&$configuration, &$logger, $mysqli)
     {
-        parent::__construct($configuration, $logger, $readonly);
+        parent::__construct($configuration, $logger);
 
         $this->mysqli =& $mysqli;
 
-        $this->rw_host = $configuration['db']['rw_host'];
-        $this->user    = $configuration['db']['username'];
-        $this->pwd     = $configuration['db']['password'];
-        $this->db      = $configuration['db']['database'];
-
-        if (isset($configuration['db']['ro_host']) || empty($configuration['db']['ro_host']))
-        {
-            $this->ro_host = $this->rw_host;
-        }
-        else
-        {
-            $this->ro_host = $configuration['db']['ro_host'];
-        }
-
-        if (isset($configuration['db']['port']))
-        {
-            $this->port = $configuration['db']['port'];
-        }
-        else
-        {
-            $this->port = ini_get('mysqli.default_port');
-        }
-
-        if (isset($configuration['db']['socket']))
-        {
-            $this->socket = $configuration['db']['socket'];
-        }
-        else
-        {
-            $this->socket = ini_get('mysqli.default_socket');
-        }
+        $this->set_configuration();
     }
 
     /**
@@ -142,6 +110,46 @@ class MySQLConnection extends DatabaseConnection
         unset($this->socket);
 
         parent::__destruct();
+    }
+
+    /**
+     * Set the configuration values.
+     *
+     * @return void
+     */
+    private function set_configuration()
+    {
+        $this->rw_host = $this->configuration['db']['rw_host'];
+        $this->user    = $this->configuration['db']['username'];
+        $this->pwd     = $this->configuration['db']['password'];
+        $this->db      = $this->configuration['db']['database'];
+
+        if (isset($this->configuration['db']['ro_host']) || empty($this->configuration['db']['ro_host']))
+        {
+            $this->ro_host = $this->rw_host;
+        }
+        else
+        {
+            $this->ro_host = $this->configuration['db']['ro_host'];
+        }
+
+        if (isset($this->configuration['db']['port']))
+        {
+            $this->port = $this->configuration['db']['port'];
+        }
+        else
+        {
+            $this->port = ini_get('mysqli.default_port');
+        }
+
+        if (isset($this->configuration['db']['socket']))
+        {
+            $this->socket = $this->configuration['db']['socket'];
+        }
+        else
+        {
+            $this->socket = ini_get('mysqli.default_socket');
+        }
     }
 
     /**

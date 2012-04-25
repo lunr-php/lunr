@@ -55,13 +55,11 @@ abstract class DatabaseConnection
      *
      * @param Configuration &$configuration Reference to the configuration class
      * @param Logger        &$logger        Reference to the logger class
-     * @param Boolean       $readonly Whether the database access should
-     *                                be established readonly
      */
-    public function __construct(&$configuration, &$logger, $readonly = TRUE)
+    public function __construct(&$configuration, &$logger)
     {
         $this->connected = FALSE;
-        $this->readonly  = $readonly;
+        $this->readonly  = FALSE;
 
         $this->configuration =& $configuration;
         $this->logger        =& $logger;
@@ -77,6 +75,16 @@ abstract class DatabaseConnection
 
         unset($this->readonly);
         unset($this->connected);
+    }
+
+    /**
+     * Toggle readonly flag on the connection.
+     *
+     * @param Boolean $switch Whether to make the connection readonly or not
+     */
+    public function set_readonly($switch)
+    {
+        $this->readonly = $switch;
     }
 
     /**
