@@ -124,7 +124,7 @@ class MySQLConnection extends DatabaseConnection
         $this->pwd     = $this->configuration['db']['password'];
         $this->db      = $this->configuration['db']['database'];
 
-        if (isset($this->configuration['db']['ro_host']) || empty($this->configuration['db']['ro_host']))
+        if (!isset($this->configuration['db']['ro_host']) || empty($this->configuration['db']['ro_host']))
         {
             $this->ro_host = $this->rw_host;
         }
