@@ -45,7 +45,7 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
      * Mock instance of the sub Configuration class.
      * @var Configuration
      */
-    private $sub_configuration;
+    protected $sub_configuration;
 
     /**
      * Mock instance of the Configuration class.
@@ -62,7 +62,33 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
     /**
      * TestCase Constructor.
      */
-    public function __construct()
+    public function emptySetUp()
+    {
+        $this->sub_configuration = $this->getMock('Lunr\Libraries\Core\Configuration');
+
+        $this->configuration = $this->getMock('Lunr\Libraries\Core\Configuration');
+
+        $map = array(
+            array('db', $this->sub_configuration),
+        );
+
+        $this->configuration->expects($this->any())
+                      ->method('offsetGet')
+                      ->will($this->returnValueMap($map));
+
+        $this->logger = $this->getMockBuilder('Lunr\Libraries\Core\Logger')
+                             ->disableOriginalConstructor()
+                             ->getMock();
+
+        $this->db = new MySQLConnection($this->configuration, $this->logger, $this->getMock('\mysqli'));
+
+        $this->db_reflection = new ReflectionClass('Lunr\Libraries\DataAccess\MySQLConnection');
+    }
+
+    /**
+     * TestCase Constructor.
+     */
+    public function SetUp()
     {
         $this->sub_configuration = $this->getMock('Lunr\Libraries\Core\Configuration');
 
@@ -100,7 +126,7 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
     /**
      * TestCase Destructor.
      */
-    public function __destruct()
+    public function tearDown()
     {
         unset($this->db);
         unset($this->db_reflection);
