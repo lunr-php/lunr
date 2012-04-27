@@ -95,10 +95,7 @@ class MySQLConnection extends DatabaseConnection
      */
     public function __destruct()
     {
-        if ($this->connected === TRUE)
-        {
-            $this->disconnect();
-        }
+        $this->disconnect();
 
         unset($this->mysqli);
         unset($this->rw_host);
@@ -124,7 +121,7 @@ class MySQLConnection extends DatabaseConnection
         $this->pwd     = $this->configuration['db']['password'];
         $this->db      = $this->configuration['db']['database'];
 
-        if (!isset($this->configuration['db']['ro_host']) || empty($this->configuration['db']['ro_host']))
+        if (empty($this->configuration['db']['ro_host']))
         {
             $this->ro_host = $this->rw_host;
         }
@@ -133,7 +130,7 @@ class MySQLConnection extends DatabaseConnection
             $this->ro_host = $this->configuration['db']['ro_host'];
         }
 
-        if (isset($this->configuration['db']['port']))
+        if ($this->configuration['db']['port'] != NULL)
         {
             $this->port = $this->configuration['db']['port'];
         }
@@ -142,7 +139,7 @@ class MySQLConnection extends DatabaseConnection
             $this->port = ini_get('mysqli.default_port');
         }
 
-        if (isset($this->configuration['db']['socket']))
+        if ($this->configuration['db']['socket'] != NULL)
         {
             $this->socket = $this->configuration['db']['socket'];
         }
@@ -159,6 +156,11 @@ class MySQLConnection extends DatabaseConnection
      */
     public function connect()
     {
+        if ($this->connected === TRUE)
+        {
+            return;
+        }
+
         if ($this->configuration['db']['driver'] != 'mysql')
         {
             $this->logger->log_error('Cannot connect to a non-mysql database connection!');
@@ -202,10 +204,7 @@ class MySQLConnection extends DatabaseConnection
      */
     public function change_database($db)
     {
-        if ($this->connected !== TRUE)
-        {
-            $this->connect();
-        }
+        $this->connect();
 
         if ($this->connected === TRUE)
         {
