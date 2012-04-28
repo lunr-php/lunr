@@ -67,6 +67,8 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
 
     /**
      * TestCase Constructor.
+     *
+     * @return void
      */
     public function emptySetUp()
     {
@@ -96,7 +98,7 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
     /**
      * TestCase Constructor.
      */
-    public function SetUp()
+    public function setUp()
     {
         $this->sub_configuration = $this->getMock('Lunr\Libraries\Core\Configuration');
 

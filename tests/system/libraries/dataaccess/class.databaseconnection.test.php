@@ -71,7 +71,7 @@ class DatabaseConnectionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * TestCase Destructor,
+     * TestCase Destructor.
      */
     public function tearDown()
     {

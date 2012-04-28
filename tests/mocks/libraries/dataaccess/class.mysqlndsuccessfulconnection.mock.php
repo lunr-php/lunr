@@ -62,7 +62,7 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
      * Fake setting charset.
      *
      * @param mysqlnd_connection $connection Mysqlnd connection handle
-     * @param string             $host       Hostname or IP address
+     * @param string             $charset    Hostname or IP address
      *
      * @return boolean $return Whether setting the charset was successful or not.
      */
