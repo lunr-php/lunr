@@ -60,6 +60,12 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
     protected $logger;
 
     /**
+     * Mock instance of the mysqli class.
+     * @var mysqli
+     */
+    protected $mysqli;
+
+    /**
      * TestCase Constructor.
      */
     public function emptySetUp()
@@ -80,7 +86,9 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
                              ->disableOriginalConstructor()
                              ->getMock();
 
-        $this->db = new MySQLConnection($this->configuration, $this->logger, $this->getMock('\mysqli'));
+        $this->mysqli = $this->getMock('\mysqli');
+
+        $this->db = new MySQLConnection($this->configuration, $this->logger, $this->mysqli);
 
         $this->db_reflection = new ReflectionClass('Lunr\Libraries\DataAccess\MySQLConnection');
     }
@@ -118,7 +126,9 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
                              ->disableOriginalConstructor()
                              ->getMock();
 
-        $this->db = new MySQLConnection($this->configuration, $this->logger, $this->getMock('\mysqli'));
+        $this->mysqli = $this->getMock('\mysqli');
+
+        $this->db = new MySQLConnection($this->configuration, $this->logger, $this->mysqli);
 
         $this->db_reflection = new ReflectionClass('Lunr\Libraries\DataAccess\MySQLConnection');
     }
