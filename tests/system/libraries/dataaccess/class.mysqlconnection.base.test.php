@@ -115,6 +115,20 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
 
         $this->assertEquals(ini_get('mysqli.default_socket'), $property->getValue($this->db));
     }
+
+    /**
+     * Test that get_new_dml_query_builder_object() returns a new object.
+     *
+     * @covers Lunr\Libraries\DataAccess\MySQLConnection::get_new_dml_query_builder_object
+     */
+    public function testGetNewDMLQueryBuilderObjectReturnsObject()
+    {
+        $value = $this->db->get_new_dml_query_builder_object();
+
+        $this->assertInstanceOf('Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder', $value);
+        $this->assertInstanceOf('Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder', $value);
+    }
+
 }
 
 ?>
