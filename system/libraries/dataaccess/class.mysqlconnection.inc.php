@@ -235,7 +235,16 @@ class MySQLConnection extends DatabaseConnection
      */
     public function query($sql_query)
     {
-        return new MySQLQueryResult($this->mysqli->query($sql_query), $this->mysqli);
+        $this->connect();
+
+        if ($this->connected === TRUE)
+        {
+            return new MySQLQueryResult($this->mysqli->query($sql_query), $this->mysqli);
+        }
+        else
+        {
+            return new MySQLQueryResult(FALSE, $this->mysqli);
+        }
     }
 
     /**
@@ -247,7 +256,13 @@ class MySQLConnection extends DatabaseConnection
      */
     public function async_query($sql_query)
     {
-        $this->mysqli->query($sql_query, MYSQLI_ASYNC);
+        $this->connect();
+
+        if ($this->connected === TRUE)
+        {
+            $this->mysqli->query($sql_query, MYSQLI_ASYNC);
+        }
+
         return new MySQLAsyncQueryResult($this->mysqli);
     }
 
