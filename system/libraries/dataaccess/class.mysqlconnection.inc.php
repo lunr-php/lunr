@@ -227,6 +227,28 @@ class MySQLConnection extends DatabaseConnection
     }
 
     /**
+     * Escape a string to be used in a SQL query.
+     *
+     * @param String $string The string to escape
+     *
+     * @return Mixed $return The escaped string on success, FALSE on error
+     */
+    public function escape_string($string)
+    {
+        $this->connect();
+
+        if ($this->connected === TRUE)
+        {
+            $string = $this->mysqli->escape_string($string);
+            return addcslashes($string, '%_');
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    /**
      * Run a SQL query.
      *
      * @param String $sql_query The SQL query to run on the database

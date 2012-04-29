@@ -118,6 +118,15 @@ abstract class DatabaseConnection
     public abstract function get_new_dml_query_builder_object();
 
     /**
+     * Escape a string to be used in a SQL query.
+     *
+     * @param String $string The string to escape
+     *
+     * @return Mixed $return The escaped string on success, FALSE on error
+     */
+    public abstract function escape_string($string);
+
+    /**
      * Run a SQL query.
      *
      * @param String $sql_query The SQL query to run on the database
