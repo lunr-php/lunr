@@ -42,11 +42,21 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
     protected $builder_reflection;
 
     /**
+     * Mock instance of the MySQlConnection class.
+     * @var MySQlConnection
+     */
+    protected $db;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp()
     {
-        $this->builder = new MySQLDMLQueryBuilder();
+        $this->db = $this->getMockBuilder('Lunr\Libraries\DataAccess\MySQlConnection')
+                         ->disableOriginalConstructor()
+                         ->getMock();
+
+        $this->builder = new MySQLDMLQueryBuilder($this->db);
 
         $this->builder_reflection = new ReflectionClass('Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder');
     }
@@ -58,6 +68,7 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
     {
         unset($this->builder);
         unset($this->builder_reflection);
+        unset($this->db);
     }
 
     /**
