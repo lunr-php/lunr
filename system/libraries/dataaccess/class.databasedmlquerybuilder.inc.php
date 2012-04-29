@@ -45,6 +45,24 @@ abstract class DatabaseDMLQueryBuilder
     protected $from;
 
     /**
+     * SQL Query part: WHERE clause
+     * @var String
+     */
+    protected $where;
+
+    /**
+     * SQL Query part: HAVING clause
+     * @var String
+     */
+    protected $having;
+
+    /**
+     * SQL Query part: Logical connector of expressions
+     * @var String
+     */
+    protected $connector;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -52,6 +70,9 @@ abstract class DatabaseDMLQueryBuilder
         $this->select = '';
         $this->select_mode = array();
         $this->from   = '';
+        $this->where  = '';
+        $this->having = '';
+        $this->connector = '';
     }
 
     /**
@@ -62,6 +83,9 @@ abstract class DatabaseDMLQueryBuilder
         unset($this->select);
         unset($this->select_mode);
         unset($this->from);
+        unset($this->where);
+        unset($this->having);
+        unset($this->connector);
     }
 
     /**
@@ -75,6 +99,8 @@ abstract class DatabaseDMLQueryBuilder
         $components[] = 'select_mode';
         $components[] = 'select';
         $components[] = 'from';
+        $components[] = 'where';
+        $components[] = 'having';
 
         if ($this->from == '')
         {
@@ -82,6 +108,39 @@ abstract class DatabaseDMLQueryBuilder
         }
 
         return 'SELECT ' . $this->implode_query($components);
+    }
+
+    /**
+     * Define and escape input as column.
+     *
+     * @param mixed  $name      Input
+     * @param String $collation Collation name
+     *
+     * @return String $return Defined and escaped column name
+     */
+    public function column($name, $collation = '')
+    {
+        return trim($this->collate($this->escape_column_name($name), $collation));
+    }
+
+    /**
+     * Define a special collation.
+     *
+     * @param mixed  $value     Input
+     * @param String $collation Collation name
+     *
+     * @return String $return Value with collation definition.
+     */
+    protected function collate($value, $collation)
+    {
+        if ($collation == '')
+        {
+           return $value;
+        }
+        else
+        {
+            return $value . ' COLLATE ' . $collation;
+        }
     }
 
     /**
@@ -126,6 +185,49 @@ abstract class DatabaseDMLQueryBuilder
     protected function sql_from($table)
     {
         $this->from = 'FROM ' . $this->escape_alias($table);
+    }
+
+    /**
+     * Define a conditional clause for the SQL statement.
+     *
+     * @param String  $left     Left expression
+     * @param String  $right    Right expression
+     * @param String  $operator Comparison operator
+     * @param Boolean $where    whether to construct WHERE or HAVING
+     *
+     * @return void
+     */
+    protected function sql_condition($left, $right, $operator = '=', $where = TRUE)
+    {
+        $condition = ($where === TRUE) ? 'where' : 'having';
+
+        if ($this->$condition == '')
+        {
+            $this->$condition = strtoupper($condition);
+        }
+        elseif ($this->connector != '')
+        {
+            $this->$condition .= ' ' . $this->connector;
+            $this->connector   = '';
+        }
+        else
+        {
+            $this->$condition .= ' AND';
+        }
+
+        $this->$condition .= " $left $operator $right";
+    }
+
+    /**
+     * Set a logical connector.
+     *
+     * @param String $connector Logical connector to set
+     *
+     * @return void
+     */
+    protected function sql_connector($connector)
+    {
+        $this->connector = $connector;
     }
 
     /**
@@ -250,6 +352,49 @@ abstract class DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define and escape input as value.
+     *
+     * @param mixed  $value     Input
+     * @param String $collation Collation name
+     * @param String $charset   Charset name
+     *
+     * @return String $return Defined and escaped value
+     */
+    public abstract function value($value, $collation = '', $charset = '');
+
+    /**
+     * Define and escape input as a hexadecimal value.
+     *
+     * @param mixed  $value     Input
+     * @param String $collation Collation name
+     * @param String $charset   Charset name
+     *
+     * @return String $return Defined, escaped and unhexed value
+     */
+    public abstract function hexvalue($value, $collation = '', $charset = '');
+
+    /**
+     * Define and escape input as a hexadecimal value.
+     *
+     * @param mixed  $value     Input
+     * @param String $match     Whether to match forward, backward or both
+     * @param String $collation Collation name
+     * @param String $charset   Charset name
+     *
+     * @return String $return Defined, escaped and unhexed value
+     */
+    public abstract function likevalue($value, $match = 'both', $collation = '', $charset = '');
+
+    /**
+     * Escape a string to be used in a SQL query.
+     *
+     * @param String $string The string to escape
+     *
+     * @return Mixed $return The escaped string on success, FALSE on error
+     */
+    protected abstract function escape_string($string);
+
+    /**
      * Define the mode of the SELECT clause.
      *
      * @param String $mode The select mode you want to use
@@ -291,6 +436,50 @@ abstract class DatabaseDMLQueryBuilder
      * @return DatabaseDMLQueryBuilder $self Self reference
      */
     public abstract function from($table);
+
+    /**
+     * Define WHERE clause of the SQL statement.
+     *
+     * @param String $left     Left expression
+     * @param String $right    Right expression
+     * @param String $operator Comparison operator
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function where($left, $right, $operator = '=');
+
+    /**
+     * Define WHERE clause with LIKE comparator of the SQL statement.
+     *
+     * @param String $left   Left expression
+     * @param String $right  Right expression
+     * @param String $negate Whether to negate the comparison or not
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function where_like($left, $right, $negate = FALSE);
+
+    /**
+     * Define HAVING clause of the SQL statement.
+     *
+     * @param String $left     Left expression
+     * @param String $right    Right expression
+     * @param String $operator Comparison operator
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function having($left, $right, $operator = '=');
+
+    /**
+     * Define WHERE clause with LIKE comparator of the SQL statement.
+     *
+     * @param String $left   Left expression
+     * @param String $right  Right expression
+     * @param String $negate Whether to negate the comparison or not
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function having_like($left, $right, $negate = FALSE);
 
 }
 

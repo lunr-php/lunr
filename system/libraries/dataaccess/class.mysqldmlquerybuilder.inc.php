@@ -28,11 +28,21 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
 {
 
     /**
-     * Constructor.
+     * Reference to the MySQLConnection class.
+     * @var MySQLConnection
      */
-    public function __construct()
+    protected $db;
+
+    /**
+     * Constructor.
+     *
+     * @param MySQLConnection &$db Reference to the MySQLConnection class.
+     */
+    public function __construct(&$db)
     {
         parent::__construct();
+
+        $this->db =& $db;
     }
 
     /**
@@ -40,7 +50,78 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function __destruct()
     {
+        $this->db = NULL;
+
         parent::__destruct();
+    }
+
+    /**
+     * Define and escape input as value.
+     *
+     * @param mixed  $value     Input
+     * @param String $collation Collation name
+     * @param String $charset   Charset name
+     *
+     * @return String $return Defined and escaped value
+     */
+    public function value($value, $collation = '', $charset = '')
+    {
+        return trim($charset . ' ' . $this->collate('\'' . $this->escape_string($value) . '\'', $collation));
+    }
+
+    /**
+     * Define and escape input as a hexadecimal value.
+     *
+     * @param mixed  $value     Input
+     * @param String $collation Collation name
+     * @param String $charset   Charset name
+     *
+     * @return String $return Defined, escaped and unhexed value
+     */
+    public function hexvalue($value, $collation = '', $charset = '')
+    {
+        return trim($charset . ' ' . $this->collate('UNHEX(\'' . $this->escape_string($value) . ')\'', $collation));
+    }
+
+    /**
+     * Define and escape input as a hexadecimal value.
+     *
+     * @param mixed  $value     Input
+     * @param String $match     Whether to match forward, backward or both
+     * @param String $collation Collation name
+     * @param String $charset   Charset name
+     *
+     * @return String $return Defined, escaped and unhexed value
+     */
+    public function likevalue($value, $match = 'both', $collation = '', $charset = '')
+    {
+        switch ($match)
+        {
+            case 'forward':
+                $string = '\'' . $this->escape_string($value) . '%\'';
+                break;
+            case 'backward':
+                $string = '\'%' . $this->escape_string($value) . '\'';
+                break;
+            case 'both':
+            default:
+                $string = '\'%' . $this->escape_string($value) . '%\'';
+                break;
+        }
+
+        return trim($charset . ' ' . $this->collate($string, $collation));
+    }
+
+    /**
+     * Escape a string to be used in a SQL query.
+     *
+     * @param String $string The string to escape
+     *
+     * @return Mixed $return The escaped string on success, FALSE on error
+     */
+    protected function escape_string($string)
+    {
+        return $this->db->escape_string();
     }
 
     /**
@@ -122,6 +203,101 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     public function from($table)
     {
         $this->sql_from($table);
+        return $this;
+    }
+
+    /**
+     * Define WHERE clause of the SQL statement.
+     *
+     * @param String $left     Left expression
+     * @param String $right    Right expression
+     * @param String $operator Comparison operator
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function where($left, $right, $operator = '=')
+    {
+        $this->sql_condition($left, $right, $operator);
+        return $this;
+    }
+
+    /**
+     * Define WHERE clause with LIKE comparator of the SQL statement.
+     *
+     * @param String $left   Left expression
+     * @param String $right  Right expression
+     * @param String $negate Whether to negate the comparison or not
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function where_like($left, $right, $negate = FALSE)
+    {
+        $operator = ($negate === FALSE) ? 'LIKE' : 'NOT LIKE';
+        $this->sql_condition($left, $right, $operator);
+        return $this;
+    }
+
+    /**
+     * Define HAVING clause of the SQL statement.
+     *
+     * @param String $left     Left expression
+     * @param String $right    Right expression
+     * @param String $operator Comparison operator
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function having($left, $right, $operator = '=')
+    {
+        $this->sql_condition($left, $right, $operator, FALSE);
+        return $this;
+    }
+
+    /**
+     * Define WHERE clause with LIKE comparator of the SQL statement.
+     *
+     * @param String $left   Left expression
+     * @param String $right  Right expression
+     * @param String $negate Whether to negate the comparison or not
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function having_like($left, $right, $negate = FALSE)
+    {
+        $operator = ($negate === FALSE) ? 'LIKE' : 'NOT LIKE';
+        $this->sql_condition($left, $right, $operator, FALSE);
+        return $this;
+    }
+
+    /**
+     * Set logical connector 'AND'.
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function sql_and()
+    {
+        $this->sql_connector('AND');
+        return $this;
+    }
+
+    /**
+     * Set logical connector 'OR'.
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function sql_or()
+    {
+        $this->sql_connector('OR');
+        return $this;
+    }
+
+    /**
+     * Set logical connector 'XOR'.
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function sql_xor()
+    {
+        $this->sql_connector('XOR');
         return $this;
     }
 

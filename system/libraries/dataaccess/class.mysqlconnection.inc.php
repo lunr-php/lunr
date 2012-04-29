@@ -223,7 +223,7 @@ class MySQLConnection extends DatabaseConnection
      */
     public function get_new_dml_query_builder_object()
     {
-        return new MySQLDMLQueryBuilder();
+        return new MySQLDMLQueryBuilder($this);
     }
 
     /**
