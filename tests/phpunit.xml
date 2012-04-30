@@ -51,6 +51,7 @@
             <file>tests/system/libraries/l10n/class.phpl10nprovider.nlang.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqlqueryresult.base.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqlqueryresult.failed.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.mysqlqueryresult.success.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.base.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.escape.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.queryparts.test.php</file>
