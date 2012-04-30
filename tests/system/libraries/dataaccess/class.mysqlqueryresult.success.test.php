@@ -51,7 +51,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      */
     public function testResultIsTrue()
     {
-        $property = $this->result_reflection->getProperty('success');
+        $property = $this->result_reflection->getProperty('result');
         $property->setAccessible(TRUE);
 
         $this->assertTrue($property->getValue($this->result));
@@ -121,7 +121,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
     /**
      * Test that result_cell() returns NULL.
      *
-     * @covers Lunr\Libraries\DataAccess\MySQLQueryResult::result_column
+     * @covers Lunr\Libraries\DataAccess\MySQLQueryResult::result_cell
      */
     public function testResultCellReturnsNull()
     {
