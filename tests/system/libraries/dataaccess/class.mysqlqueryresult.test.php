@@ -16,6 +16,7 @@ namespace Lunr\Libraries\DataAccess;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use mysqli;
+use mysqli_result;
 
 /**
  * This class contains common constructors/destructors and data providers
@@ -61,11 +62,13 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
      */
     public function resultSetSetup()
     {
-        $this->query_result = $this->getMock('\mysqli_result');
-
         mysqlnd_uh_set_connection_proxy(new MockMySQLndSuccessfulConnection());
         $this->mysqli = new mysqli();
         $this->mysqli->connect('host', 'user', 'pwd', 'db');
+
+        $this->query_result = $this->getMockBuilder('mysqli_result')
+                                   ->setConstructorArgs(array($this->mysqli))
+                                   ->getMock();
 
         $this->result = new MySQLQueryResult($this->query_result, $this->mysqli);
 
