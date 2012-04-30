@@ -13,6 +13,7 @@
  */
 
 namespace Lunr\Libraries\DataAccess;
+use MySQLi_Result;
 
 /**
  * MySQL/MariaDB query result class.
