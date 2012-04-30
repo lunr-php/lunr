@@ -59,6 +59,18 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
     }
 
     /**
+     * Return a fake number of affected rows.
+     *
+     * @param mysqlnd_connection $connection Mysqlnd connection handle
+     *
+     * @return int $return Fake number of affected rows
+     */
+    public function getAffectedRows($connection)
+    {
+        return 10;
+    }
+
+    /**
      * Fake setting charset.
      *
      * @param mysqlnd_connection $connection Mysqlnd connection handle
