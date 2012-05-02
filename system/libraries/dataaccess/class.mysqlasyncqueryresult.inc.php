@@ -49,6 +49,12 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     public function __destruct()
     {
         unset($this->fetched);
+
+        if (!is_bool($this->result))
+        {
+            $this->result->free();
+        }
+
         parent::__destruct();
     }
 
@@ -124,7 +130,12 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     {
         $this->fetch_result();
         $output = parent::result_array();
-        $this->result->free();
+
+        if (!is_bool($this->result))
+        {
+            $this->result->free();
+        }
+
         return $output;
     }
 
@@ -137,7 +148,12 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     {
         $this->fetch_result();
         $output = parent::result_row();
-        $this->result->free();
+
+        if (!is_bool($this->result))
+        {
+            $this->result->free();
+        }
+
         return $output;
     }
 
@@ -152,7 +168,12 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     {
         $this->fetch_result();
         $output = parent::result_column($column);
-        $this->result->free();
+
+        if (!is_bool($this->result))
+        {
+            $this->result->free();
+        }
+
         return $output;
     }
 
@@ -167,7 +188,12 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     {
         $this->fetch_result();
         $output = parent::result_cell($column);
-        $this->result->free();
+
+        if (!is_bool($this->result))
+        {
+            $this->result->free();
+        }
+
         return $output;
     }
 
