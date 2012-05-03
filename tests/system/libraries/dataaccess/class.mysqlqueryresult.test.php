@@ -94,7 +94,9 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * TestCase Constructor passing TRUE as query result
+     * TestCase Constructor passing TRUE as query result.
+     *
+     * @return void
      */
     public function successfulSetup()
     {
@@ -119,6 +121,7 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
         unset($this->result);
         unset($this->result_reflection);
     }
+
 }
 
 ?>

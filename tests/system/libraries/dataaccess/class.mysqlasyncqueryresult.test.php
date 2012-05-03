@@ -49,7 +49,7 @@ abstract class MySQLAsyncQueryResultTest extends PHPUnit_Framework_TestCase
     protected $mysqli;
 
     /**
-     * TestCase Constructor passing TRUE as query result
+     * TestCase Constructor passing TRUE as query result.
      */
     public function setUp()
     {
@@ -69,6 +69,7 @@ abstract class MySQLAsyncQueryResultTest extends PHPUnit_Framework_TestCase
         unset($this->result);
         unset($this->result_reflection);
     }
+
 }
 
 ?>
