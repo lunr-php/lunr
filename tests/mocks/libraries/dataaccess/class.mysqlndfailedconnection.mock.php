@@ -58,6 +58,18 @@ class MockMySQLndFailedConnection extends MySQLndUhConnection
         return 666;
     }
 
+    /**
+     * Assume failed query.
+     *
+     * @param mysqlnd_connection $connection Mysqlnd connection handle
+     *
+     * @return int $return Assume failed query
+     */
+    public function reapQuery($connection)
+    {
+        return FALSE;
+    }
+
 }
 
 ?>
