@@ -12,7 +12,7 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 
-namespace Lunr\Libraries\Core;
+namespace Lunr\Libraries\Network;
 
 /**
  * Curl Class

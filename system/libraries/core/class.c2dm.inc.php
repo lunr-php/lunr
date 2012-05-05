@@ -15,7 +15,7 @@
 */
 
 namespace Lunr\Libraries\Core;
-use Lunr\Libraries\Core\Curl;
+use Lunr\Libraries\Network\Curl;
 
 /**
  * Android (C2DM) Push Notifications System Library

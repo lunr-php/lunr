@@ -15,7 +15,7 @@
  */
 
 namespace Lunr\Libraries\OAuth;
-use Lunr\Libraries\Core\Curl;
+use Lunr\Libraries\Network\Curl;
 
 /**
  * Facebook OAuth Connection Class
