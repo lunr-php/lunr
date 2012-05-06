@@ -58,6 +58,17 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
     }
 
     /**
+     * Test that the freed flasg is TRUE.
+     */
+    public function testFreedIsTrue()
+    {
+        $property = $this->result_reflection->getProperty('freed');
+        $property->setAccessible(TRUE);
+
+        $this->assertTrue($property->getValue($this->result));
+    }
+
+    /**
      * Test that the has_failed() method returns FALSE.
      *
      * @covers Lunr\Libraries\DataAccess\MySQLQueryResult::has_failed

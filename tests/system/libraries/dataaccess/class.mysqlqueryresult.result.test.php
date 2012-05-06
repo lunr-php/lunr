@@ -47,6 +47,17 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
     }
 
     /**
+     * Test that the freed flasg is FALSE.
+     */
+    public function testFreedIsFalse()
+    {
+        $property = $this->result_reflection->getProperty('freed');
+        $property->setAccessible(TRUE);
+
+        $this->assertFalse($property->getValue($this->result));
+    }
+
+    /**
      * Test that the result value is TRUE.
      */
     public function testResultIsMysqliResult()
