@@ -46,6 +46,12 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     protected $success;
 
     /**
+     * Flag whether the memory has been freed or not.
+     * @var Boolean
+     */
+    protected $freed;
+
+    /**
      * Constructor.
      *
      * @param mixed  $result  Query result
@@ -56,10 +62,12 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
         if ($result instanceof MySQLi_Result)
         {
             $this->success = TRUE;
+            $this->freed   = FALSE;
         }
         else
         {
             $this->success = $result;
+            $this->freed   = TRUE;
         }
 
         $this->result =  $result;
@@ -71,10 +79,27 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      */
     public function __destruct()
     {
+        $this->free_result();
+
         $this->mysqli = NULL;
 
         unset($this->result);
         unset($this->success);
+        unset($this->freed);
+    }
+
+    /**
+     * Free memory associated with a result.
+     *
+     * @return void
+     */
+    protected function free_result()
+    {
+        if ($this->freed === FALSE)
+        {
+            $this->result->free();
+            $this->freed = TRUE;
+        }
     }
 
     /**
@@ -137,6 +162,8 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
             $output[] = $row;
         }
 
+        $this->free_result();
+
         return $output;
     }
 
@@ -147,7 +174,11 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      */
     public function result_row()
     {
-        return is_bool($this->result) ? array() : $this->result->fetch_assoc();
+        $output = is_bool($this->result) ? array() : $this->result->fetch_assoc();
+
+        $this->free_result();
+
+        return $output;
     }
 
     /**
@@ -171,6 +202,8 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
             $output[] = $row[$column];
         }
 
+        $this->free_result();
+
         return $output;
     }
 
@@ -189,6 +222,9 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
         }
 
         $line = $this->result->fetch_assoc();
+
+        $this->free_result();
+
         return isset($line[$column]) ? $line[$column] : NULL;
     }
 

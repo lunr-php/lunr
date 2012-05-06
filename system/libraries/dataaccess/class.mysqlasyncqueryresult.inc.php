@@ -51,11 +51,6 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     {
         unset($this->fetched);
 
-        if (!is_bool($this->result))
-        {
-            $this->result->free();
-        }
-
         parent::__destruct();
     }
 
@@ -76,10 +71,12 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
         if ($this->result instanceof MySQLi_Result)
         {
             $this->success = TRUE;
+            $this->freed   = FALSE;
         }
         else
         {
             $this->success = $this->result;
+            $this->freed   = TRUE;
         }
 
         $this->fetched = TRUE;
@@ -130,14 +127,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     public function result_array()
     {
         $this->fetch_result();
-        $output = parent::result_array();
-
-        if (!is_bool($this->result))
-        {
-            $this->result->free();
-        }
-
-        return $output;
+        return parent::result_array();
     }
 
     /**
@@ -148,14 +138,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     public function result_row()
     {
         $this->fetch_result();
-        $output = parent::result_row();
-
-        if (!is_bool($this->result))
-        {
-            $this->result->free();
-        }
-
-        return $output;
+        return parent::result_row();
     }
 
     /**
@@ -168,14 +151,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     public function result_column($column)
     {
         $this->fetch_result();
-        $output = parent::result_column($column);
-
-        if (!is_bool($this->result))
-        {
-            $this->result->free();
-        }
-
-        return $output;
+        return parent::result_column($column);
     }
 
     /**
@@ -188,14 +164,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     public function result_cell($column)
     {
         $this->fetch_result();
-        $output = parent::result_cell($column);
-
-        if (!is_bool($this->result))
-        {
-            $this->result->free();
-        }
-
-        return $output;
+        return parent::result_cell($column);
     }
 
 }
