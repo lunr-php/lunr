@@ -15,7 +15,7 @@
 namespace Lunr\Libraries\Network;
 
 /**
- * Curl Class
+ * Curl wrapper class.
  *
  * @category   Libraries
  * @package    Core
@@ -23,7 +23,7 @@ namespace Lunr\Libraries\Network;
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-class Curl
+class Curl implements HttpRequestInterface
 {
 
     /**
@@ -204,14 +204,14 @@ class Curl
     /**
      * Initialize the curl request.
      *
-     * @param String $url URL for the request
+     * @param String $uri URI for the request
      *
      * @return Boolean $return TRUE if the initialization was successful,
      *                         FALSE otherwise
      */
-    private function init($url)
+    private function init($uri)
     {
-        $this->handle = curl_init($url);
+        $this->handle = curl_init($uri);
 
         if (!empty($this->headers))
         {
@@ -221,6 +221,7 @@ class Curl
         if (!curl_setopt_array($this->handle, $this->options))
         {
             $this->errmsg = 'Could not set curl options!';
+            $this->errno  = -1;
             return FALSE;
         }
 
@@ -241,33 +242,28 @@ class Curl
             $this->errno     = curl_errno($this->handle);
             $this->errmsg    = curl_error($this->handle);
             $this->http_code = curl_getinfo($this->handle, CURLINFO_HTTP_CODE);
-
-            curl_close($this->handle);
-            $this->handle = NULL;
-
-            return $return;
         }
         else
         {
             $this->info = curl_getinfo($this->handle);
-
-            curl_close($this->handle);
-            $this->handle = NULL;
-
-            return $return;
         }
+
+        curl_close($this->handle);
+        $this->handle = NULL;
+
+        return $return;
     }
 
     /**
      * Retrieve remote content.
      *
-     * @param String $location Remote location
+     * @param String $uri Remote URI
      *
      * @return mixed $return Return value
      */
-    public function simple_get($location)
+    public function simple_get($uri)
     {
-        if ($this->init($location) === FALSE)
+        if ($this->init($uri) === FALSE)
         {
             return FALSE;
         }
@@ -278,18 +274,18 @@ class Curl
     /**
      * Post data to a remote service.
      *
-     * @param String $location Remote service
-     * @param mixed  $data     Data to post
+     * @param String $uri  Remote URI
+     * @param mixed  $data Data to post
      *
      * @return mixed $return Return value
      */
-    public function simple_post($location, $data)
+    public function simple_post($uri, $data)
     {
         $this->options[CURLOPT_CUSTOMREQUEST] = 'POST';
         $this->options[CURLOPT_POST]          = TRUE;
         $this->options[CURLOPT_POSTFIELDS]    = $data;
 
-        if ($this->init($location) === FALSE)
+        if ($this->init($uri) === FALSE)
         {
             return FALSE;
         }
