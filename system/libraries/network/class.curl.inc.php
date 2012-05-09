@@ -128,10 +128,8 @@ class Curl implements HttpRequestInterface
             case 'info':
             case 'http_code':
                 return $this->{$name};
-                break;
             default:
                 return NULL;
-                break;
         }
     }
 
