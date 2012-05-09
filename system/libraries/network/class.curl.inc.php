@@ -136,19 +136,16 @@ class Curl implements HttpRequestInterface
      *
      * @param array $options Array of curl config options
      *
-     * @return Boolean $return TRUE if it was stored successfully
-     *                         FALSE if the input is not an array
+     * @return Curl $self Self-reference
      */
     public function set_options($options)
     {
-        if (!is_array($options))
+        if (is_array($options))
         {
-            return FALSE;
+            $this->options = $options + $this->options;
         }
 
-        $this->options = $options + $this->options;
-
-        return TRUE;
+        return $this;
     }
 
     /**
@@ -157,7 +154,7 @@ class Curl implements HttpRequestInterface
      * @param String $key   Name of a curl config key (minus 'CURLOPT_')
      * @param mixed  $value Value of that config options
      *
-     * @return void
+     * @return Curl $self Self-reference
      */
     public function set_option($key, $value)
     {
@@ -167,6 +164,8 @@ class Curl implements HttpRequestInterface
         }
 
         $this->options[$key] = $value;
+
+        return $this;
     }
 
     /**
@@ -174,19 +173,16 @@ class Curl implements HttpRequestInterface
      *
      * @param array $headers Array of HTTP Header Strings
      *
-     * @return Boolean $return TRUE if it was stored successfully
-     *                         FALSE if the input is not an array
+     * @return Curl $self Self-reference
      */
     public function set_http_headers($headers)
     {
-        if (!is_array($headers))
+        if (is_array($headers))
         {
-            return FALSE;
+            $this->headers = $headers + $this->headers;
         }
 
-        $this->headers = $headers + $this->headers;
-
-        return TRUE;
+        return $this;
     }
 
     /**
@@ -194,11 +190,12 @@ class Curl implements HttpRequestInterface
      *
      * @param String $header Header String
      *
-     * @return void
+     * @return Curl $self Self-reference
      */
     public function set_http_header($header)
     {
         $this->headers[] = $header;
+        return $this;
     }
 
     /**
@@ -261,7 +258,7 @@ class Curl implements HttpRequestInterface
      *
      * @return mixed $return Return value
      */
-    public function simple_get($uri)
+    public function get_request($uri)
     {
         if ($this->init($uri) === FALSE)
         {
@@ -279,7 +276,7 @@ class Curl implements HttpRequestInterface
      *
      * @return mixed $return Return value
      */
-    public function simple_post($uri, $data)
+    public function post_request($uri, $data)
     {
         $this->options[CURLOPT_CUSTOMREQUEST] = 'POST';
         $this->options[CURLOPT_POST]          = TRUE;
