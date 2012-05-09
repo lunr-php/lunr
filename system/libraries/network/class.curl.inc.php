@@ -91,6 +91,9 @@ class Curl implements HttpRequestInterface
         $this->options[CURLOPT_RETURNTRANSFER] = TRUE;
         $this->options[CURLOPT_FOLLOWLOCATION] = TRUE;
         $this->options[CURLOPT_FAILONERROR]    = TRUE;
+
+        // pre-initialization
+        $this->handle = NULL;
     }
 
     /**
@@ -104,6 +107,7 @@ class Curl implements HttpRequestInterface
         unset($this->errmsg);
         unset($this->info);
         unset($this->http_code);
+        unset($this->handle);
     }
 
     /**
