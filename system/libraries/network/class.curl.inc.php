@@ -219,7 +219,7 @@ class Curl implements HttpRequestInterface
             $this->set_option('HTTPHEADER', $this->headers);
         }
 
-        if (!curl_setopt_array($this->handle, $this->options))
+        if (curl_setopt_array($this->handle, $this->options) !== TRUE)
         {
             $this->errmsg = 'Could not set curl options!';
             $this->errno  = -1;
@@ -291,7 +291,13 @@ class Curl implements HttpRequestInterface
             return FALSE;
         }
 
-        return $this->execute();
+        $output = $this->execute();
+
+        unset($this->options[CURLOPT_CUSTOMREQUEST]);
+        unset($this->options[CURLOPT_POST]);
+        unset($this->options[CURLOPT_POSTFIELDS]);
+
+        return $output;
     }
 
 }
