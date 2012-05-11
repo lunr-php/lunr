@@ -142,9 +142,14 @@ class Curl implements HttpRequestInterface
      */
     public function set_options($options)
     {
-        if (is_array($options))
+        if (!is_array($options))
         {
-            $this->options = $options + $this->options;
+            return $this;
+        }
+
+        foreach ($options as $key=>$value)
+        {
+            $this->set_option($key, $value);
         }
 
         return $this;
@@ -153,19 +158,24 @@ class Curl implements HttpRequestInterface
     /**
      * Set a curl config option.
      *
-     * @param String $key   Name of a curl config key (minus 'CURLOPT_')
+     * @param String $key   Name of a curl config key
      * @param mixed  $value Value of that config options
      *
      * @return Curl $self Self-reference
      */
     public function set_option($key, $value)
     {
-        if (is_string($key) && !is_numeric($key))
+        if (substr($key, 0, 4) !== 'CURL')
         {
-            $key = constant('CURLOPT_' . strtoupper($key));
+            return $this;
         }
 
-        $this->options[$key] = $value;
+        if (defined($key) === FALSE)
+        {
+            return $this;
+        }
+
+        $this->options[constant($key)] = $value;
 
         return $this;
     }
