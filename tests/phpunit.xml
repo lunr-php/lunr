@@ -52,6 +52,7 @@
             <file>tests/system/libraries/network/class.curl.base.test.php</file>
             <file>tests/system/libraries/network/class.curl.setget.test.php</file>
             <file>tests/system/libraries/network/class.curl.execute.test.php</file>
+            <file>tests/system/libraries/network/class.curl.request.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqlqueryresult.base.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqlqueryresult.failed.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqlqueryresult.success.test.php</file>
