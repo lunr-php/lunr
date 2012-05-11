@@ -172,7 +172,7 @@ class FacebookConnection implements OAuthConnectionInterface
             . '&code=' . $oauth_token;
 
         $curl = new Curl();
-        $response = $curl->simple_get($token_url);
+        $response = $curl->get_request($token_url);
         $params = NULL;
         parse_str($response, $params);
         unset($curl);
@@ -194,7 +194,7 @@ class FacebookConnection implements OAuthConnectionInterface
         $url = $config['oauth'][static::NETWORK]['verify_url'] . $access_token;
 
         $curl = new Curl();
-        $response = $curl->simple_get($url);
+        $response = $curl->get_request($url);
         if($response === FALSE)
         {
             return FALSE;
@@ -227,7 +227,7 @@ class FacebookConnection implements OAuthConnectionInterface
         $curl = new Curl();
         $params = array('access_token' => $access_token, 'message' => $message->message);
 
-        if ($curl->simple_post($config['oauth'][static::NETWORK]['publish_url'], $params))
+        if ($curl->post_request($config['oauth'][static::NETWORK]['publish_url'], $params))
         {
             return TRUE;
         }
