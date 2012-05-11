@@ -224,7 +224,7 @@ class Curl implements HttpRequestInterface
 
         if (!empty($this->headers))
         {
-            $this->set_option('HTTPHEADER', $this->headers);
+            $this->set_option('CURLOPT_HTTPHEADER', $this->headers);
         }
 
         if (curl_setopt_array($this->handle, $this->options) !== TRUE)
