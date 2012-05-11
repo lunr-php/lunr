@@ -35,7 +35,6 @@ interface HttpRequestInterface
      */
     public function set_http_headers($headers);
 
-
     /**
      * Set additional HTTP headers to be used by the request.
      *
