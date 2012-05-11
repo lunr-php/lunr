@@ -31,6 +31,9 @@ class CurlSetGetTest extends CurlTest
     /**
      * Test that the value of valid properties can be retrieved correctly.
      *
+     * @param String $property Property name
+     * @param mixed  $value    Property value
+     *
      * @dataProvider validPropertyProvider
      * @covers       Lunr\Libraries\Network\Curl::__get
      */
@@ -51,6 +54,8 @@ class CurlSetGetTest extends CurlTest
 
     /**
      * Test that an option that does not start with 'CURL' is not set.
+     *
+     * @param String $option Option name
      *
      * @dataProvider invalidOptionProvider
      * @covers       Lunr\Libraries\Network\Curl::set_option
