@@ -119,8 +119,8 @@ class C2DM
         $post_fields['service']     = 'ac2dm';
 
         $curl = new Curl();
-        $curl->set_option('HEADER', TRUE);
-        $response = $curl->simple_post($config['c2dm']['request_token_url'], $post_fields);
+        $curl->set_option('CURLOPT_HEADER', TRUE);
+        $response = $curl->post_request($config['c2dm']['request_token_url'], $post_fields);
 
         if (strpos($response, '200 OK') === FALSE)
         {
@@ -163,10 +163,10 @@ class C2DM
         );
 
         $curl = new Curl();
-        $curl->set_option('HEADER', TRUE);
+        $curl->set_option('CURLOPT_HEADER', TRUE);
         $curl->set_http_header($header);
 
-        $returned_data = $curl->simple_post($config['c2dm']['google_send_url'], $data);
+        $returned_data = $curl->post_request($config['c2dm']['google_send_url'], $data);
         $this->http_code = $curl->http_code;
 
         if ($returned_data === FALSE)
