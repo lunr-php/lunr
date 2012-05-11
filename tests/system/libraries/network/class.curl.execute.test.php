@@ -205,6 +205,8 @@ class CurlExecuteTest extends CurlTest
     /**
      * Test that execute sets handle NULL.
      *
+     * @runInSeparateProcess
+     *
      * @covers Lunr\Libraries\Network\Curl::execute
      */
     public function testExecuteSetsHandleNull()
@@ -228,6 +230,8 @@ class CurlExecuteTest extends CurlTest
     /**
      * Test that execute sets info on success.
      *
+     * @runInSeparateProcess
+     *
      * @covers Lunr\Libraries\Network\Curl::execute
      */
     public function testExecuteSetsInfoOnSuccess()
@@ -249,6 +253,8 @@ class CurlExecuteTest extends CurlTest
     /**
      * Test that execute return FALSE on error.
      *
+     * @runInSeparateProcess
+     *
      * @covers Lunr\Libraries\Network\Curl::execute
      */
     public function testExecuteReturnsFalseOnError()
@@ -268,6 +274,8 @@ class CurlExecuteTest extends CurlTest
 
     /**
      * Test that execute returns value on success.
+     *
+     * @runInSeparateProcess
      *
      * @covers Lunr\Libraries\Network\Curl::execute
      */
