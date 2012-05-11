@@ -41,6 +41,48 @@ abstract class CurlTest extends PHPUnit_Framework_TestCase
     protected $curl_reflection;
 
     /**
+     * Runkit simulation code for returning FALSE.
+     * @var string
+     */
+    const CURL_RETURN_FALSE = 'return FALSE;';
+
+    /**
+     * Runkit simulation code for returning TRUE.
+     * @var string
+     */
+    const CURL_RETURN_TRUE = 'return TRUE;';
+
+    /**
+     * Runkit simulation code for returning error message.
+     * @var string
+     */
+    const CURL_RETURN_ERRMSG = 'return "error";';
+
+    /**
+     * Runkit simulation code for returning error code.
+     * @var string
+     */
+    const CURL_RETURN_ERRNO = 'return 10;';
+
+    /**
+     * Runkit simulation code for returning the http code.
+     * @var string
+     */
+    const CURL_RETURN_CODE = 'return 404;';
+
+    /**
+     * Runkit simulation code for returning info.
+     * @var string
+     */
+    const CURL_RETURN_INFO = 'return "info";';
+
+    /**
+     * Runkit simulation code for returning a value.
+     * @var string
+     */
+    const CURL_RETURN_VALUE = 'return "value";';
+
+    /**
      * TestCase Constructor.
      */
     public function setUp()
