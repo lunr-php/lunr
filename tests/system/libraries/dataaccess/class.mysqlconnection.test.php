@@ -146,6 +146,22 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
         unset($this->logger);
     }
 
+    /**
+     * Unit Test Data Provider for strings to escape.
+     *
+     * @return array $strings Array of strings and their expected escaped value
+     */
+    public function escapeStringProvider()
+    {
+        $strings   = array();
+        $strings[] = array("'--", "\'--", "\'--");
+        $strings[] = array("\'--", "\\\'--", "\\\'--");
+        $strings[] = array('70%', '70%', "70\%");
+        $strings[] = array('test_name', 'test_name', "test\_name");
+
+        return $strings;
+    }
+
 }
 
 ?>
