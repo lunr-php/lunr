@@ -66,7 +66,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function value($value, $collation = '', $charset = '')
     {
-        return trim($charset . ' ' . $this->collate('\'' . $this->escape_string($value) . '\'', $collation));
+        return trim($charset . ' ' . $this->collate('\'' . $this->db->escape_string($value) . '\'', $collation));
     }
 
     /**
@@ -80,7 +80,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function hexvalue($value, $collation = '', $charset = '')
     {
-        return trim($charset . ' ' . $this->collate('UNHEX(\'' . $this->escape_string($value) . ')\'', $collation));
+        return trim($charset . ' ' . $this->collate('UNHEX(\'' . $this->db->escape_string($value) . ')\'', $collation));
     }
 
     /**
@@ -98,30 +98,18 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
         switch ($match)
         {
             case 'forward':
-                $string = '\'' . $this->escape_string($value) . '%\'';
+                $string = '\'' . $this->db->escape_string($value) . '%\'';
                 break;
             case 'backward':
-                $string = '\'%' . $this->escape_string($value) . '\'';
+                $string = '\'%' . $this->db->escape_string($value) . '\'';
                 break;
             case 'both':
             default:
-                $string = '\'%' . $this->escape_string($value) . '%\'';
+                $string = '\'%' . $this->db->escape_string($value) . '%\'';
                 break;
         }
 
         return trim($charset . ' ' . $this->collate($string, $collation));
-    }
-
-    /**
-     * Escape a string to be used in a SQL query.
-     *
-     * @param String $string The string to escape
-     *
-     * @return Mixed $return The escaped string on success, FALSE on error
-     */
-    protected function escape_string($string)
-    {
-        return $this->db->escape_string();
     }
 
     /**

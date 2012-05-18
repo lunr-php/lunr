@@ -386,15 +386,6 @@ abstract class DatabaseDMLQueryBuilder
     public abstract function likevalue($value, $match = 'both', $collation = '', $charset = '');
 
     /**
-     * Escape a string to be used in a SQL query.
-     *
-     * @param String $string The string to escape
-     *
-     * @return Mixed $return The escaped string on success, FALSE on error
-     */
-    protected abstract function escape_string($string);
-
-    /**
      * Define the mode of the SELECT clause.
      *
      * @param String $mode The select mode you want to use
