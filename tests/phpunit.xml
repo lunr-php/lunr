@@ -157,6 +157,9 @@
             <file>src/Lunr/Ticks/Tests/FileTimerNoRequestTest.php</file>
             <file>src/Lunr/Ticks/Tests/FileTimerStartTest.php</file>
             <file>src/Lunr/Ticks/Tests/FileTimerStopTest.php</file>
+            <file>src/Lunr/Surface/Tests/PaginationNoCursorTest.php</file>
+            <file>src/Lunr/Surface/Tests/PaginationSettersTest.php</file>
+            <file>src/Lunr/Surface/Tests/PaginationHTMLTest.php</file>
 <!--            <file>src/Lunr/Database/Tests/DBManTest.php</file>
             <file>src/Lunr/Database/Tests/DBConTest.php</file>-->
         </testsuite>
