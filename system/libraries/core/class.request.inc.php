@@ -190,12 +190,12 @@ class Request
 
         if (!isset($this->request['controller']))
         {
-            $this->request['controller'] = NULL;
+            $this->request['controller'] = $configuration['default_controller'];
         }
 
         if (!isset($this->request['method']))
         {
-            $this->request['method'] = NULL;
+            $this->request['method'] = $configuration['default_method'];
         }
 
         if (!isset($this->request['params']))
