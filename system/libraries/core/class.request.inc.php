@@ -156,14 +156,16 @@ class Request
     /**
      * Store $_GET values locally and reset it globally.
      *
+     * @param Configuration &$configuration Reference to the Configuration class
+     *
      * @return void
      */
-    private function store_get()
+    private function store_get(&$configuration)
     {
         if (!is_array($_GET) || empty($_GET))
         {
-            $this->request['controller'] = NULL;
-            $this->request['method']     = NULL;
+            $this->request['controller'] = $configuration['default_controller'];
+            $this->request['method']     = $configuration['default_method'];
             $this->request['params']     = array();
             return;
         }
