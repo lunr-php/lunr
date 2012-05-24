@@ -62,8 +62,8 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
             array('default_domain', 'www.domain.com'),
             array('default_port', 666),
             array('default_url', 'http://www.domain.com:666/path/'),
-            array('default_controller', 'HomeController'),
-            array('default_method', 'index')
+            array('default_controller', 'DefaultController'),
+            array('default_method', 'default_method')
         );
 
         $configuration->expects($this->any())
@@ -142,8 +142,8 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
         $values[] = array('base_path', '/path');
         $values[] = array('base_url', 'http://www.domain.com:666/path/');
         $values[] = array('sapi', 'cli');
-        $values[] = array('controller', NULL);
-        $values[] = array('method', NULL);
+        $values[] = array('controller', 'DefaultController');
+        $values[] = array('method', 'default_method');
         $values[] = array('params', array());
 
         return $values;
