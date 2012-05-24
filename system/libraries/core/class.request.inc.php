@@ -85,7 +85,7 @@ class Request
         $this->request['sapi'] = PHP_SAPI;
 
         $this->store_post();
-        $this->store_get();
+        $this->store_get($configuration);
         $this->store_cookie();
         $this->store_url($configuration);
     }
