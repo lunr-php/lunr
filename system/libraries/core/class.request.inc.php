@@ -167,6 +167,10 @@ class Request
             $this->request['controller'] = $configuration['default_controller'];
             $this->request['method']     = $configuration['default_method'];
             $this->request['params']     = array();
+
+            //reset global GET array
+            $_GET = array();
+
             return;
         }
 
