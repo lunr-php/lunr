@@ -61,7 +61,9 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
             array('default_protocol', 'http'),
             array('default_domain', 'www.domain.com'),
             array('default_port', 666),
-            array('default_url', 'http://www.domain.com:666/path/')
+            array('default_url', 'http://www.domain.com:666/path/'),
+            array('default_controller', 'HomeController'),
+            array('default_method', 'index')
         );
 
         $configuration->expects($this->any())
