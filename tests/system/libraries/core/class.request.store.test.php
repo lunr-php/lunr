@@ -357,7 +357,7 @@ class RequestStoreTest extends RequestTest
 
         $_GET = $get;
 
-        $method->invoke($this->request);
+        $method->invokeArgs($this->request, array(&$this->configuration));
 
         $this->assertEmpty($stored->getValue($this->request));
     }
@@ -380,7 +380,7 @@ class RequestStoreTest extends RequestTest
         $_GET['test2'] = 'value2';
         $cache = $_GET;
 
-        $method->invoke($this->request);
+        $method->invokeArgs($this->request, array(&$this->configuration));
 
         $this->assertEquals($cache, $stored->getValue($this->request));
     }
@@ -406,7 +406,7 @@ class RequestStoreTest extends RequestTest
         $_GET['param2'] = 'param2';
         $cache = $_GET;
 
-        $method->invoke($this->request);
+        $method->invokeArgs($this->request, array(&$this->configuration));
 
         $request = $stored->getValue($this->request);
         $this->assertEquals($cache['controller'], $request['controller']);
@@ -434,7 +434,7 @@ class RequestStoreTest extends RequestTest
         $_GET['test2'] = 'value2';
         $cache = $_GET;
 
-        $method->invoke($this->request);
+        $method->invokeArgs($this->request, array(&$this->configuration));
 
         $request = $stored->getValue($this->request);
         $this->assertNull($request['controller']);
@@ -460,7 +460,7 @@ class RequestStoreTest extends RequestTest
         $_GET['test1'] = 'value1';
         $_GET['test2'] = 'value2';
 
-        $method->invoke($this->request);
+        $method->invokeArgs($this->request, array(&$this->configuration));
 
         $this->assertEmpty($_GET);
     }
