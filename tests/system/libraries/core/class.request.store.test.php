@@ -377,7 +377,7 @@ class RequestStoreTest extends RequestTest
     * @dataProvider invalidSuperglobalValueProvider
     * @covers       Lunr\Libraries\Core\Request::store_get
     */
-    public function testStoreInvalidGetValuesLeavesGlobalGetEmpty($get)
+    public function testStoreInvalidGetValuesLeavesSuperglobalGetEmpty($get)
     {
         //$stored = $this->reflection_request->getProperty('get');
         //$stored->setAccessible(TRUE);
