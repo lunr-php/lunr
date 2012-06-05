@@ -44,7 +44,7 @@ class RequestStoreTest extends RequestTest
      * @dataProvider invalidSuperglobalValueProvider
      * @covers       Lunr\Libraries\Core\Request::store_cookie
      */
-    public function test_store_invalid_cookie_values($cookie)
+    public function testStoreInvalidCookieValuesLeavesLocalCookieEmpty($cookie)
     {
         $stored = $this->reflection_request->getProperty('cookie');
         $stored->setAccessible(TRUE);
@@ -57,6 +57,30 @@ class RequestStoreTest extends RequestTest
         $method->invoke($this->request);
 
         $this->assertEmpty($stored->getValue($this->request));
+    }
+
+    /**
+    * Test storing invalid $_COOKIE values.
+    *
+    * Checks whether the superglobal $_COOKIE is empty after passing
+    * invalid cookie values.
+    *
+    * @param mixed $cookie Invalid $_COOKIE values
+    *
+    * @depends      Lunr\Libraries\Core\RequestBaseTest::test_cookie_empty
+    * @dataProvider invalidSuperglobalValueProvider
+    * @covers       Lunr\Libraries\Core\Request::store_cookie
+    */
+    public function testStoreInvalidCookieValuesLeavesSuperglobalCookieEmpty($cookie)
+    {
+        $method = $this->reflection_request->getMethod('store_cookie');
+        $method->setAccessible(TRUE);
+
+        $_COOKIE = $cookie;
+
+        $method->invoke($this->request);
+
+        $this->assertEmpty($_COOKIE);
     }
 
     /**
