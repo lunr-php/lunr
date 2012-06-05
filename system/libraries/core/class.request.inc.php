@@ -225,6 +225,9 @@ class Request
     {
         if (!is_array($_COOKIE) || empty($_COOKIE))
         {
+            //reset global COOKIE array
+            $_COOKIE = array();
+
             return;
         }
 
