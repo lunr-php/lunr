@@ -141,6 +141,9 @@ class Request
     {
         if (!is_array($_POST) || empty($_POST))
         {
+            //reset global POST array
+            $_POST = array();
+
             return;
         }
 
