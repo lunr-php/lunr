@@ -113,7 +113,7 @@ class RequestStoreTest extends RequestTest
      * @dataProvider invalidSuperglobalValueProvider
      * @covers       Lunr\Libraries\Core\Request::store_post
      */
-    public function test_store_invalid_post_values($post)
+    public function testStoreInvalidPostValuesLeavesLocalPostEmpty($post)
     {
         $stored = $this->reflection_request->getProperty('post');
         $stored->setAccessible(TRUE);
@@ -126,6 +126,30 @@ class RequestStoreTest extends RequestTest
         $method->invoke($this->request);
 
         $this->assertEmpty($stored->getValue($this->request));
+    }
+
+    /**
+    * Test storing invalid $_POST values.
+    *
+    * Checks whether the superglobal $_POST is empty after passing invalid
+    * $_POST values.
+    *
+    * @param mixed $post Invalid $_POST values
+    *
+    * @depends      Lunr\Libraries\Core\RequestBaseTest::test_post_empty
+    * @dataProvider invalidSuperglobalValueProvider
+    * @covers       Lunr\Libraries\Core\Request::store_post
+    */
+    public function testStoreInvalidPostValuesLeavesSuperglobalPostEmpty($post)
+    {
+        $method = $this->reflection_request->getMethod('store_post');
+        $method->setAccessible(TRUE);
+
+        $_POST = $post;
+
+        $method->invoke($this->request);
+
+        $this->assertEmpty($_POST);
     }
 
     /**
@@ -483,7 +507,7 @@ class RequestStoreTest extends RequestTest
      * @depends      Lunr\Libraries\Core\RequestBaseTest::test_get_empty
      * @covers       Lunr\Libraries\Core\Request::store_get
      */
-    public function test_store_special_get_values_if_not_set()
+    public function testStoreSpecialGetValuesIfNotSet()
     {
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
