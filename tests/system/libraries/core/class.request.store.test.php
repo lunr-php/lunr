@@ -393,6 +393,38 @@ class RequestStoreTest extends RequestTest
     }
 
     /**
+    * Test storing invalid $_GET values.
+    *
+    * After providing invalid get values to the store_get function, it checks
+    * whether the method and controller fields have the default values and the
+    * params array is empty.
+    *
+    * @param mixed $get Invalid $_GET values
+    *
+    * @depends      Lunr\Libraries\Core\RequestBaseTest::test_get_empty
+    * @dataProvider invalidSuperglobalValueProvider
+    * @covers       Lunr\Libraries\Core\Request::store_get
+    */
+    public function testStoreInvalidGetValuesGetsDefaultControllerAndMethodWithEmptyParams($get)
+    {
+        $stored = $this->reflection_request->getProperty('request');
+        $stored->setAccessible(TRUE);
+
+        $method = $this->reflection_request->getMethod('store_get');
+        $method->setAccessible(TRUE);
+
+        $_GET = $get;
+
+        $method->invokeArgs($this->request, array(&$this->configuration));
+
+        $request = $stored->getValue($this->request);
+
+        $this->assertEquals('DefaultController', $request['controller']);
+        $this->assertEquals('default_method', $request['method']);
+        $this->assertEmpty($request['params']);
+    }
+
+    /**
      * Test storing valid $_GET values.
      *
      * @depends      Lunr\Libraries\Core\RequestBaseTest::test_get_empty
