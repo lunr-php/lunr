@@ -89,7 +89,7 @@ class RequestStoreTest extends RequestTest
      * @depends      Lunr\Libraries\Core\RequestBaseTest::test_cookie_empty
      * @covers       Lunr\Libraries\Core\Request::store_cookie
      */
-    public function test_store_valid_cookie_values()
+    public function testStoreValidCookieValues()
     {
         $stored = $this->reflection_request->getProperty('cookie');
         $stored->setAccessible(TRUE);
@@ -112,7 +112,7 @@ class RequestStoreTest extends RequestTest
      * @depends Lunr\Libraries\Core\RequestBaseTest::test_cookie_empty
      * @covers  Lunr\Libraries\Core\Request::store_cookie
      */
-    public function test_superglobal_cookie_empty_after_store()
+    public function testSuperglobalCookieEmptyAfterStore()
     {
         $stored = $this->reflection_request->getProperty('cookie');
         $stored->setAccessible(TRUE);
@@ -182,7 +182,7 @@ class RequestStoreTest extends RequestTest
      * @depends      Lunr\Libraries\Core\RequestBaseTest::test_post_empty
      * @covers       Lunr\Libraries\Core\Request::store_post
      */
-    public function test_store_valid_post_values()
+    public function testStoreValidPostValues()
     {
         $stored = $this->reflection_request->getProperty('post');
         $stored->setAccessible(TRUE);
@@ -205,7 +205,7 @@ class RequestStoreTest extends RequestTest
      * @depends Lunr\Libraries\Core\RequestBaseTest::test_post_empty
      * @covers  Lunr\Libraries\Core\Request::store_post
      */
-    public function test_superglobal_post_empty_after_store()
+    public function testSuperglobalPostEmptyAfterStore()
     {
         $stored = $this->reflection_request->getProperty('post');
         $stored->setAccessible(TRUE);
@@ -227,7 +227,7 @@ class RequestStoreTest extends RequestTest
      * @runInSeparateProcess
      * @covers Lunr\Libraries\Core\Request::store_url
      */
-    public function test_store_base_path()
+    public function testStoreBasePath()
     {
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
@@ -252,7 +252,7 @@ class RequestStoreTest extends RequestTest
      * @runInSeparateProcess
      * @covers Lunr\Libraries\Core\Request::store_url
      */
-    public function test_store_domain()
+    public function testStoreDomain()
     {
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
@@ -277,7 +277,7 @@ class RequestStoreTest extends RequestTest
      * @runInSeparateProcess
      * @covers Lunr\Libraries\Core\Request::store_url
      */
-    public function test_store_port()
+    public function testStorePort()
     {
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
@@ -302,7 +302,7 @@ class RequestStoreTest extends RequestTest
      * @runInSeparateProcess
      * @covers Lunr\Libraries\Core\Request::store_url
      */
-    public function test_store_port_if_https_unset()
+    public function testStorePortIfHttpsUnset()
     {
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
@@ -333,7 +333,7 @@ class RequestStoreTest extends RequestTest
      * @dataProvider httpsServerSuperglobalValueProvider
      * @covers Lunr\Libraries\Core\Request::store_url
      */
-    public function test_store_port_if_https_isset($value, $protocol)
+    public function testStorePortIfHttpsIsset($value, $protocol)
     {
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
@@ -365,7 +365,7 @@ class RequestStoreTest extends RequestTest
      * @dataProvider baseurlProvider
      * @covers Lunr\Libraries\Core\Request::store_url
      */
-    public function test_store_base_url($https, $port, $value)
+    public function testStoreBaseUrl($https, $port, $value)
     {
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
@@ -478,7 +478,7 @@ class RequestStoreTest extends RequestTest
      * @depends      Lunr\Libraries\Core\RequestBaseTest::test_get_empty
      * @covers       Lunr\Libraries\Core\Request::store_get
      */
-    public function test_store_valid_get_values()
+    public function testStoreValidGetValues()
     {
         $stored = $this->reflection_request->getProperty('get');
         $stored->setAccessible(TRUE);
@@ -501,7 +501,7 @@ class RequestStoreTest extends RequestTest
      * @depends      Lunr\Libraries\Core\RequestBaseTest::test_get_empty
      * @covers       Lunr\Libraries\Core\Request::store_get
      */
-    public function test_store_special_get_values()
+    public function testStoreSpecialGetValues()
     {
         $stored = $this->reflection_request->getProperty('request');
         $stored->setAccessible(TRUE);
@@ -559,7 +559,7 @@ class RequestStoreTest extends RequestTest
      * @depends Lunr\Libraries\Core\RequestBaseTest::test_get_empty
      * @covers  Lunr\Libraries\Core\Request::store_get
      */
-    public function test_superglobal_get_empty_after_store()
+    public function testSuperglobalGetEmptyAfterStore()
     {
         $stored = $this->reflection_request->getProperty('get');
         $stored->setAccessible(TRUE);
