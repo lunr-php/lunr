@@ -10,6 +10,7 @@
  * @subpackage Tests
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */
 
 namespace Lunr\Libraries\Core;
@@ -24,6 +25,7 @@ use ReflectionClass;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @covers     Lunr\Libraries\Core\Request
  */
 abstract class RequestTest extends PHPUnit_Framework_TestCase
