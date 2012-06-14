@@ -10,6 +10,7 @@
  * @subpackage Libraries
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */
 
 namespace Lunr\Libraries\Core;
@@ -24,6 +25,7 @@ namespace Lunr\Libraries\Core;
  * @subpackage Libraries
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */
 class Request
 {
