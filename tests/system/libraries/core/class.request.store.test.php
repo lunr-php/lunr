@@ -64,8 +64,8 @@ class RequestStoreTest extends RequestTest
     /**
     * Test storing invalid $_COOKIE values.
     *
-    * Checks whether the superglobal $_COOKIE is empty after passing
-    * invalid cookie values.
+    * Checks whether the superglobal $_COOKIE is reset after passing
+    * invalid cookie values in it.
     *
     * @param mixed $cookie Invalid $_COOKIE values
     *
@@ -73,7 +73,7 @@ class RequestStoreTest extends RequestTest
     * @dataProvider invalidSuperglobalValueProvider
     * @covers       Lunr\Libraries\Core\Request::store_cookie
     */
-    public function testStoreInvalidCookieValuesLeavesSuperglobalCookieEmpty($cookie)
+    public function testStoreInvalidCookieValuesResetsSuperglobalCookie($cookie)
     {
         $method = $this->reflection_request->getMethod('store_cookie');
         $method->setAccessible(TRUE);
@@ -157,8 +157,8 @@ class RequestStoreTest extends RequestTest
     /**
     * Test storing invalid $_POST values.
     *
-    * Checks whether the superglobal $_POST is empty after passing invalid
-    * $_POST values.
+    * Checks whether the superglobal $_POST is reset to being empty after
+    * passing invalid $_POST values in it.
     *
     * @param mixed $post Invalid $_POST values
     *
@@ -166,7 +166,7 @@ class RequestStoreTest extends RequestTest
     * @dataProvider invalidSuperglobalValueProvider
     * @covers       Lunr\Libraries\Core\Request::store_post
     */
-    public function testStoreInvalidPostValuesLeavesSuperglobalPostEmpty($post)
+    public function testStoreInvalidPostValuesResetsSuperglobalPost($post)
     {
         $method = $this->reflection_request->getMethod('store_post');
         $method->setAccessible(TRUE);
@@ -419,7 +419,7 @@ class RequestStoreTest extends RequestTest
     * Test storing invalid $_GET values.
     *
     * After providing invalid get values to the store_get function, it checks
-    * whether the global GET is empty.
+    * whether the global GET is reset to being empty.
     *
     * @param mixed $get Invalid $_GET values
     *
@@ -427,7 +427,7 @@ class RequestStoreTest extends RequestTest
     * @dataProvider invalidSuperglobalValueProvider
     * @covers       Lunr\Libraries\Core\Request::store_get
     */
-    public function testStoreInvalidGetValuesLeavesSuperglobalGetEmpty($get)
+    public function testStoreInvalidGetValuesResetsSuperglobalGet($get)
     {
         $method = $this->reflection_request->getMethod('store_get');
         $method->setAccessible(TRUE);
