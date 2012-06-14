@@ -10,6 +10,7 @@
  * @subpackage Tests
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */
 
 namespace Lunr\Libraries\Core;
@@ -22,6 +23,7 @@ use \ReflectionClass;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @covers     Lunr\Libraries\Core\Request
  */
 class RequestGetTest extends RequestTest
@@ -43,12 +45,12 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::test_store_base_path
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::test_store_domain
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::test_store_port
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::test_store_port_if_https_isset
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::test_store_base_url
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::test_store_special_get_values
+     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreBasePath
+     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreDomain
+     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStorePort
+     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStorePortIfHttpsIsset
+     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreBaseUrl
+     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreSpecialGetValues
      * @dataProvider properRequestValueProvider
      * @covers       Lunr\Libraries\Core\Request::__get
      */
@@ -65,7 +67,7 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::test_store_valid_get_values
+     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreValidGetValues
      * @dataProvider validJsonEnumProvider
      * @covers       Lunr\Libraries\Core\Request::get_get_data
      */
@@ -82,7 +84,7 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::test_store_valid_post_values
+     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreValidPostValues
      * @dataProvider validJsonEnumProvider
      * @covers       Lunr\Libraries\Core\Request::get_post_data
      */
@@ -99,7 +101,7 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestStoreTest::test_store_valid_cookie_values
+     * @depends      Lunr\Libraries\Core\RequestStoreTest::testStoreValidCookieValues
      * @dataProvider validJsonEnumProvider
      * @covers       Lunr\Libraries\Core\Request::get_cookie_data
      */
