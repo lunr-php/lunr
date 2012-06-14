@@ -429,9 +429,6 @@ class RequestStoreTest extends RequestTest
     */
     public function testStoreInvalidGetValuesLeavesSuperglobalGetEmpty($get)
     {
-        //$stored = $this->reflection_request->getProperty('get');
-        //$stored->setAccessible(TRUE);
-
         $method = $this->reflection_request->getMethod('store_get');
         $method->setAccessible(TRUE);
 
