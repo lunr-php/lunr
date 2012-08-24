@@ -67,11 +67,12 @@
     <target name="phpdoc"
             description="Generate API documentation">
         <exec executable="phpdoc">
-            <arg value="--directory" />
+            <arg value="run" />
+            <arg value="-d" />
             <arg value="${system},${application}" />
-            <arg value="--output" />
-            <arg value="HTML:Smarty/Evolve:default" />
-            <arg value="--target" />
+            <arg value="--template" />
+            <arg value="new-black" />
+            <arg value="-t" />
             <arg path="${basedir}/build/api" />
             <arg value="--parseprivate" />
         </exec>
