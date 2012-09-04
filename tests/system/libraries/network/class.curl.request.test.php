@@ -33,6 +33,7 @@ class CurlRequestTest extends CurlTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testRunkit
      * @depends Lunr\Libraries\Network\CurlExecuteTest::testInitReturnsFalseOnError
      * @covers  Lunr\Libraries\Network\Curl::get_request
      */
@@ -49,6 +50,7 @@ class CurlRequestTest extends CurlTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testRunkit
      * @depends Lunr\Libraries\Network\CurlExecuteTest::testExecuteReturnsFalseOnError
      * @covers  Lunr\Libraries\Network\Curl::get_request
      */
@@ -70,6 +72,7 @@ class CurlRequestTest extends CurlTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testRunkit
      * @depends Lunr\Libraries\Network\CurlExecuteTest::testExecuteReturnsValueOnSuccess
      * @covers  Lunr\Libraries\Network\Curl::get_request
      */
@@ -89,6 +92,7 @@ class CurlRequestTest extends CurlTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testRunkit
      * @depends Lunr\Libraries\Network\CurlExecuteTest::testInitReturnsFalseOnError
      * @covers  Lunr\Libraries\Network\Curl::post_request
      */
@@ -105,6 +109,7 @@ class CurlRequestTest extends CurlTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testRunkit
      * @depends Lunr\Libraries\Network\CurlExecuteTest::testExecuteReturnsFalseOnError
      * @covers  Lunr\Libraries\Network\Curl::post_request
      */
@@ -126,6 +131,7 @@ class CurlRequestTest extends CurlTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testRunkit
      * @depends Lunr\Libraries\Network\CurlExecuteTest::testExecuteReturnsValueOnSuccess
      * @covers  Lunr\Libraries\Network\Curl::post_request
      */
@@ -145,6 +151,7 @@ class CurlRequestTest extends CurlTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testRunkit
      * @covers  Lunr\Libraries\Network\Curl::get_request
      */
     Public function testPostOptionsAreNotPersistant()

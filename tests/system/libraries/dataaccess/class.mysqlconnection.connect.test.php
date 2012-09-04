@@ -94,7 +94,8 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\DataAccess\MySQLConnection::connect
+     * @depends Lunr\EnvironmentTest::testMysqlndUh
+     * @covers  Lunr\Libraries\DataAccess\MySQLConnection::connect
      */
     public function testFailedConnect()
     {
@@ -201,7 +202,8 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\DataAccess\MySQLConnection::disconnect
+     * @depends Lunr\EnvironmentTest::testMysqlndUh
+     * @covers  Lunr\Libraries\DataAccess\MySQLConnection::disconnect
      */
     public function testDisconnect()
     {
@@ -228,7 +230,8 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test that change_database() returns FALSE when we couldn't connect.
      *
-     * @covers Lunr\Libraries\DataAccess\MySQLConnection::change_database
+     * @depends Lunr\EnvironmentTest::testMysqlndUh
+     * @covers  Lunr\Libraries\DataAccess\MySQLConnection::change_database
      */
     public function testChangeDatabaseReturnsFalseWhenNotConnected()
     {

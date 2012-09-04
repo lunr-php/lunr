@@ -31,6 +31,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testL10nFiles
      * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
@@ -44,6 +45,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testL10nFiles
      * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
@@ -83,6 +85,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testL10nFiles
      * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
@@ -96,6 +99,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testL10nFiles
      * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
@@ -187,6 +191,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testL10nFiles
      * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
@@ -200,6 +205,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testL10nFiles
      * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
@@ -226,6 +232,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testL10nFiles
      * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */
@@ -239,6 +246,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
+     * @depends Lunr\EnvironmentTest::testL10nFiles
      * @depends Lunr\Libraries\L10n\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\Libraries\L10n\GettextL10nProvider::nlang
      */

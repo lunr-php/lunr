@@ -62,17 +62,24 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
      */
     public function resultSetSetup()
     {
-        mysqlnd_uh_set_connection_proxy(new MockMySQLndSuccessfulConnection());
-        $this->mysqli = new mysqli();
-        $this->mysqli->connect('host', 'user', 'pwd', 'db');
+        if (function_exists('mysqlnd_uh_set_connection_proxy'))
+        {
+            mysqlnd_uh_set_connection_proxy(new MockMySQLndSuccessfulConnection());
+            $this->mysqli = new mysqli();
+            $this->mysqli->connect('host', 'user', 'pwd', 'db');
 
-        $this->query_result = $this->getMockBuilder('mysqli_result')
-                                   ->setConstructorArgs(array($this->mysqli))
-                                   ->getMock();
+            $this->query_result = $this->getMockBuilder('mysqli_result')
+                                    ->setConstructorArgs(array($this->mysqli))
+                                    ->getMock();
 
-        $this->result = new MySQLQueryResult($this->query_result, $this->mysqli);
+            $this->result = new MySQLQueryResult($this->query_result, $this->mysqli);
 
-        $this->result_reflection = new ReflectionClass('Lunr\Libraries\DataAccess\MySQLQueryResult');
+            $this->result_reflection = new ReflectionClass('Lunr\Libraries\DataAccess\MySQLQueryResult');
+        }
+        else
+        {
+            $this->markTestSkipped();
+        }
     }
 
     /**
@@ -82,15 +89,22 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
      */
     public function failedSetup()
     {
-        $this->query_result = FALSE;
+        if (function_exists('mysqlnd_uh_set_connection_proxy'))
+        {
+            $this->query_result = FALSE;
 
-        mysqlnd_uh_set_connection_proxy(new MockMySQLndSuccessfulConnection());
-        $this->mysqli = new mysqli();
-        $this->mysqli->connect('host', 'user', 'pwd', 'db');
+            mysqlnd_uh_set_connection_proxy(new MockMySQLndSuccessfulConnection());
+            $this->mysqli = new mysqli();
+            $this->mysqli->connect('host', 'user', 'pwd', 'db');
 
-        $this->result = new MySQLQueryResult($this->query_result, $this->mysqli);
+            $this->result = new MySQLQueryResult($this->query_result, $this->mysqli);
 
-        $this->result_reflection = new ReflectionClass('Lunr\Libraries\DataAccess\MySQLQueryResult');
+            $this->result_reflection = new ReflectionClass('Lunr\Libraries\DataAccess\MySQLQueryResult');
+        }
+        else
+        {
+            $this->markTestSkipped();
+        }
     }
 
     /**
@@ -100,15 +114,22 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
      */
     public function successfulSetup()
     {
-        $this->query_result = TRUE;
+        if (function_exists('mysqlnd_uh_set_connection_proxy'))
+        {
+            $this->query_result = TRUE;
 
-        mysqlnd_uh_set_connection_proxy(new MockMySQLndSuccessfulConnection());
-        $this->mysqli = new mysqli();
-        $this->mysqli->connect('host', 'user', 'pwd', 'db');
+            mysqlnd_uh_set_connection_proxy(new MockMySQLndSuccessfulConnection());
+            $this->mysqli = new mysqli();
+            $this->mysqli->connect('host', 'user', 'pwd', 'db');
 
-        $this->result = new MySQLQueryResult($this->query_result, $this->mysqli);
+            $this->result = new MySQLQueryResult($this->query_result, $this->mysqli);
 
-        $this->result_reflection = new ReflectionClass('Lunr\Libraries\DataAccess\MySQLQueryResult');
+            $this->result_reflection = new ReflectionClass('Lunr\Libraries\DataAccess\MySQLQueryResult');
+        }
+        else
+        {
+            $this->markTestSkipped();
+        }
     }
 
     /**

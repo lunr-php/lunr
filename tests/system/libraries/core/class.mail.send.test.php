@@ -325,6 +325,7 @@ class MailSendTest extends MailTest
     /**
      * Test that send returns FALSE when sending fails.
      *
+     * @depends Lunr\EnvironmentTest::testRunkit
      * @depends Lunr\Libraries\Core\MailSetTest::testSetSubject
      * @depends Lunr\Libraries\Core\MailSetTest::testAddValidEmailAsTo
      * @depends Lunr\Libraries\Core\MailSetTest::testSetValidEmailAsFrom
@@ -344,6 +345,7 @@ class MailSendTest extends MailTest
     /**
      * Test that send returns TRUE when sending works.
      *
+     * @depends Lunr\EnvironmentTest::testRunkit
      * @depends Lunr\Libraries\Core\MailSetTest::testSetSubject
      * @depends Lunr\Libraries\Core\MailSetTest::testAddValidEmailAsTo
      * @depends Lunr\Libraries\Core\MailSetTest::testSetValidEmailAsFrom

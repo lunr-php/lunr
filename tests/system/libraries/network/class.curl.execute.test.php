@@ -33,7 +33,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\Network\Curl::init
+     * @depends Lunr\EnvironmentTest::testRunkit
+     * @covers  Lunr\Libraries\Network\Curl::init
      */
     public function testInitSetsHeaderOptionIfHeadersNotEmpty()
     {
@@ -61,7 +62,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\Network\Curl::init
+     * @depends Lunr\EnvironmentTest::testRunkit
+     * @covers  Lunr\Libraries\Network\Curl::init
      */
     public function testInitDoesNotSetHeaderOptionIfHeadersEmpty()
     {
@@ -85,7 +87,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\Network\Curl::init
+     * @depends Lunr\EnvironmentTest::testRunkit
+     * @covers  Lunr\Libraries\Network\Curl::init
      */
     public function testInitSetsHandle()
     {
@@ -107,7 +110,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\Network\Curl::init
+     * @depends Lunr\EnvironmentTest::testRunkit
+     * @covers  Lunr\Libraries\Network\Curl::init
      */
     public function testInitReturnsTrueOnSuccess()
     {
@@ -126,7 +130,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\Network\Curl::init
+     * @depends Lunr\EnvironmentTest::testRunkit
+     * @covers  Lunr\Libraries\Network\Curl::init
      */
     public function testInitReturnsFalseOnError()
     {
@@ -145,7 +150,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\Network\Curl::init
+     * @depends Lunr\EnvironmentTest::testRunkit
+     * @covers  Lunr\Libraries\Network\Curl::init
      */
     public function testInitSetsErrorInfoOnError()
     {
@@ -172,7 +178,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\Network\Curl::execute
+     * @depends Lunr\EnvironmentTest::testRunkit
+     * @covers  Lunr\Libraries\Network\Curl::execute
      */
     public function testExecuteSetsErrorInfoOnError()
     {
@@ -207,7 +214,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\Network\Curl::execute
+     * @depends Lunr\EnvironmentTest::testRunkit
+     * @covers  Lunr\Libraries\Network\Curl::execute
      */
     public function testExecuteSetsHandleNull()
     {
@@ -232,7 +240,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\Network\Curl::execute
+     * @depends Lunr\EnvironmentTest::testRunkit
+     * @covers  Lunr\Libraries\Network\Curl::execute
      */
     public function testExecuteSetsInfoOnSuccess()
     {
@@ -255,7 +264,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\Network\Curl::execute
+     * @depends Lunr\EnvironmentTest::testRunkit
+     * @covers  Lunr\Libraries\Network\Curl::execute
      */
     public function testExecuteReturnsFalseOnError()
     {
@@ -277,7 +287,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\Libraries\Network\Curl::execute
+     * @depends Lunr\EnvironmentTest::testRunkit
+     * @covers  Lunr\Libraries\Network\Curl::execute
      */
     public function testExecuteReturnsValueOnSuccess()
     {

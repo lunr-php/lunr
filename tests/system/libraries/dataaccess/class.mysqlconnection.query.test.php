@@ -29,7 +29,8 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     /**
      * Test that query() returns a QueryResult that indicates a failed query when not connected.
      *
-     * @covers Lunr\Libraries\DataAccess\MySQLConnection::query
+     * @depends Lunr\EnvironmentTest::testMysqlndUh
+     * @covers  Lunr\Libraries\DataAccess\MySQLConnection::query
      */
     public function testQueryReturnsFailedQueryResultWhenNotConnected()
     {
@@ -73,7 +74,8 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     /**
      * Test that async_query() returns an AsyncQueryResult that indicates a failed query when not connected.
      *
-     * @covers Lunr\Libraries\DataAccess\MySQLConnection::async_query
+     * @depends Lunr\EnvironmentTest::testMysqlndUh
+     * @covers  Lunr\Libraries\DataAccess\MySQLConnection::async_query
      */
     public function testAsyncQueryReturnsFailedQueryResultWhenNotConnected()
     {
