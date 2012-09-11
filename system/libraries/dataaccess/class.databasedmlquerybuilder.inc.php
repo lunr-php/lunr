@@ -204,6 +204,7 @@ abstract class DatabaseDMLQueryBuilder
         if ($this->$condition == '')
         {
             $this->$condition = strtoupper($condition);
+            $this->connector  = '';
         }
         elseif ($this->connector != '')
         {
