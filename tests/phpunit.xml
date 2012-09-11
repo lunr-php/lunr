@@ -63,6 +63,7 @@
             <file>tests/system/libraries/dataaccess/class.mysqlasyncqueryresult.free.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.base.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.escape.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.escapevalues.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.queryparts.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqldmlquerybuilder.select.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databaseconnection.test.php</file>
