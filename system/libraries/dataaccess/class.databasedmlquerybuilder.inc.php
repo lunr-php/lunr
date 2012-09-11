@@ -135,7 +135,7 @@ abstract class DatabaseDMLQueryBuilder
     {
         if ($collation == '')
         {
-           return $value;
+            return $value;
         }
         else
         {

@@ -222,6 +222,130 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
         $this->assertEquals($string, $property->getValue($this->builder));
     }
 
+    /**
+     * Test specifying a logical connector for the query.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_connector
+     */
+    public function testConnector()
+    {
+        $method = $this->builder_reflection->getMethod('sql_connector');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('connector');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('AND'));
+
+        $this->assertEquals('AND', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test creating a simple where/having statement.
+     *
+     * @param Boolean $where   Whether to test where or having
+     * @param String  $keyword The expected statement keyword
+     *
+     * @dataProvider whereOrHavingProvider
+     * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_condition
+     */
+    public function testConditionCreatesSimpleStatement($where, $keyword)
+    {
+        $method = $this->builder_reflection->getMethod('sql_condition');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty(strtolower($keyword));
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('a', 'b', '=', $where));
+
+        $string = "$keyword a = b";
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test creating a where/having statement with non-default operator.
+     *
+     * @param Boolean $where   Whether to test where or having
+     * @param String  $keyword The expected statement keyword
+     *
+     * @dataProvider whereOrHavingProvider
+     * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_condition
+     */
+    public function testConditionWithNonDefaultOperator($where, $keyword)
+    {
+        $method = $this->builder_reflection->getMethod('sql_condition');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty(strtolower($keyword));
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('a', 'b', '<', $where));
+
+        $string = "$keyword a < b";
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test extending a where/having statement with default connector.
+     *
+     * @param Boolean $where   Whether to test where or having
+     * @param String  $keyword The expected statement keyword
+     *
+     * @dataProvider whereOrHavingProvider
+     * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_condition
+     */
+    public function testConditionExtendingWithDefaultConnector($where, $keyword)
+    {
+        $string = "$keyword a = b";
+
+        $method = $this->builder_reflection->getMethod('sql_condition');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty(strtolower($keyword));
+        $property->setAccessible(TRUE);
+        $property->setValue($this->builder, $string);
+
+        $method->invokeArgs($this->builder, array('c', 'd', '=', $where));
+
+        $string = "$keyword a = b AND c = d";
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test extending a where/having statement with a specified connector.
+     *
+     * @param Boolean $where   Whether to test where or having
+     * @param String  $keyword The expected statement keyword
+     *
+     * @dataProvider whereOrHavingProvider
+     * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_condition
+     */
+    public function testConditionExtendingWithSpecifiedConnector($where, $keyword)
+    {
+        $string = "$keyword a = b";
+
+        $method = $this->builder_reflection->getMethod('sql_condition');
+        $method->setAccessible(TRUE);
+
+        $connector = $this->builder_reflection->getProperty('connector');
+        $connector->setAccessible(TRUE);
+        $connector->setValue($this->builder, 'OR');
+
+        $property = $this->builder_reflection->getProperty(strtolower($keyword));
+        $property->setAccessible(TRUE);
+        $property->setValue($this->builder, $string);
+
+        $method->invokeArgs($this->builder, array('c', 'd', '=', $where));
+
+        $string = "$keyword a = b OR c = d";
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
 }
 
 ?>

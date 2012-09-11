@@ -77,6 +77,20 @@ abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
         return $cols;
     }
 
+    /**
+     * Unit test data provider for where or having statements.
+     *
+     * @return array $variants Array of statement variants
+     */
+    public function whereOrHavingProvider()
+    {
+        $variants   = array();
+        $variants[] = array(TRUE, 'WHERE');
+        $variants[] = array(FALSE, 'HAVING');
+
+        return $variants;
+    }
+
 }
 
 ?>
