@@ -67,6 +67,7 @@
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.queryparts.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqldmlquerybuilder.select.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqldmlquerybuilder.escape.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.mysqldmlquerybuilder.condition.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databaseconnection.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqlconnection.base.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqlconnection.set.test.php</file>
