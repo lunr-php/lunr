@@ -90,7 +90,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      * Test escaping a hex value.
      *
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeValuesTest::testCollateWithValueOnly
-     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::value
+     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::hexvalue
      */
     public function testEscapingHexValue()
     {
@@ -105,7 +105,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      * Test escaping a hex value with a collation specified.
      *
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeValuesTest::testCollateWithCollation
-     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::value
+     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::hexvalue
      */
     public function testEscapingHexValueWithCollation()
     {
@@ -120,7 +120,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      * Test escaping a hex value with charset specified.
      *
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeValuesTest::testCollateWithValueOnly
-     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::value
+     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::hexvalue
      */
     public function testEscapingHexValueWithCharset()
     {
@@ -135,7 +135,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      * Test escaping a hex value with a collation and charset specified.
      *
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeValuesTest::testCollateWithCollation
-     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::value
+     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::hexvalue
      */
     public function testEscapingHexValueWithCollationAndCharset()
     {
@@ -150,7 +150,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      * Test escaping a default like value.
      *
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeValuesTest::testCollateWithValueOnly
-     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::value
+     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::likevalue
      */
     public function testEscapingLikeValue()
     {
@@ -165,7 +165,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      * Test escaping a default like value with a collation specified.
      *
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeValuesTest::testCollateWithCollation
-     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::value
+     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::likevalue
      */
     public function testEscapingLikeValueWithCollation()
     {
@@ -180,7 +180,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      * Test escaping a default like value with charset specified.
      *
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeValuesTest::testCollateWithValueOnly
-     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::value
+     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::likevalue
      */
     public function testEscapingLikeValueWithCharset()
     {
@@ -195,7 +195,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      * Test escaping a default like value with a collation and charset specified.
      *
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeValuesTest::testCollateWithCollation
-     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::value
+     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::likevalue
      */
     public function testEscapingLikeValueWithCollationAndCharset()
     {
@@ -210,7 +210,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      * Test escaping a forward like value.
      *
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeValuesTest::testCollateWithValueOnly
-     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::value
+     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::likevalue
      */
     public function testEscapingLikeValueForward()
     {
@@ -225,7 +225,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      * Test escaping a backward like value.
      *
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeValuesTest::testCollateWithValueOnly
-     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::value
+     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::likevalue
      */
     public function testEscapingLikeValueBackward()
     {
