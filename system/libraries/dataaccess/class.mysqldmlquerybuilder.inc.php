@@ -80,7 +80,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function hexvalue($value, $collation = '', $charset = '')
     {
-        return trim($charset . ' ' . $this->collate('UNHEX(\'' . $this->db->escape_string($value) . ')\'', $collation));
+        return trim($charset . ' ' . $this->collate('UNHEX(\'' . $this->db->escape_string($value) . '\')', $collation));
     }
 
     /**
