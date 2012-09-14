@@ -82,14 +82,6 @@
         </exec>
     </target>
 
-    <target name="docblox"
-            description="Generate API documentation">
-        <exec executable="docblox">
-            <arg value="-c" />
-            <arg value="tests/docblox.xml" />
-        </exec>
-    </target>
-
     <target name="phpcs"
             description="Generate checkstyle.xml using PHP_CodeSniffer">
         <exec executable="phpcs" output="/dev/null">
