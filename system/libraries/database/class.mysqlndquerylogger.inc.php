@@ -15,6 +15,7 @@
 
 namespace Lunr\Libraries\Database;
 use Lunr\Libraries\Core\DateTime;
+use \MySQLndUhConnection;
 
 /**
  * MySQLnd Userspace Handler to log Query Statistics.
