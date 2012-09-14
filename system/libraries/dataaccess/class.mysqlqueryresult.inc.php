@@ -154,7 +154,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
 
         if (is_bool($this->result))
         {
-           return $output;
+            return $output;
         }
 
         while ($row = $this->result->fetch_assoc())
@@ -194,7 +194,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
 
         if (is_bool($this->result))
         {
-           return $output;
+            return $output;
         }
 
         while ($row = $this->result->fetch_assoc())

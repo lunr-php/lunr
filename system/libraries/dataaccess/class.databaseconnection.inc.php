@@ -81,6 +81,8 @@ abstract class DatabaseConnection
      * Toggle readonly flag on the connection.
      *
      * @param Boolean $switch Whether to make the connection readonly or not
+     *
+     * @return void
      */
     public function set_readonly($switch)
     {
