@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="MidSchip PHPMD ruleset"
+<ruleset name="Lunr PHPMD ruleset"
          xmlns="http://pmd.sf.net/ruleset/1.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0
@@ -7,7 +7,7 @@
          xsi:noNamespaceSchemaLocation="
                      http://pmd.sf.net/ruleset_xml_schema.xsd">
     <description>
-        This ruleset checks the MidSchip Code for potential problem cases
+        This ruleset checks the Lunr Code for potential problem cases
     </description>
 
     <!-- Import the entire unused code rule set -->
@@ -22,5 +22,16 @@
     <rule ref="rulesets/design.xml" />
 
     <!-- Import the entire code size rule set -->
-    <rule ref="rulesets/codesize.xml" />
+    <rule ref="rulesets/codesize.xml">
+        <exclude name="CyclomaticComplexity" />
+    </rule>
+
+    <!-- Customized Cyclomatic Complexity rule -->
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
+        <priority>1</priority>
+        <properties>
+            <property name="reportLevel" value="15" />
+        </properties>
+    </rule>
+
 </ruleset>
