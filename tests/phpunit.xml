@@ -82,6 +82,9 @@
         <whitelist>
             <directory>../system/libraries/</directory>
             <directory>../system/models/</directory>
+            <exclude>
+                <file>../system/libraries/database/class.mysqlndquerylogger.inc.php</file>
+            </exclude>
         </whitelist>
     </filter>
     <logging>
