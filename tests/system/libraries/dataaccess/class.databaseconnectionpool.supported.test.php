@@ -1,0 +1,233 @@
+<?php
+
+/**
+ * This file contains the DatabaseConnectionPoolSupportedTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    DataAccess
+ * @subpackage Tests
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
+namespace Lunr\Libraries\DataAccess;
+use \ReflectionClass;
+
+/**
+ * This class contains tests for the DatabaseConnectionPool class.
+ * Specifically for the case when there is a supported database configuration present.
+ *
+ * @category   Libraries
+ * @package    DataAccess
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\DataAccess\DatabaseConnectionPool
+ */
+class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
+{
+
+    /**
+     * TestCase Constructor.
+     */
+    public function setUp()
+    {
+        $this->supportedSetup();
+    }
+
+    /**
+     * Test that get_connection() returns a new MySQLConnection.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
+     */
+    public function testGetNewAndReadonlyConnectionReturnsMysqlConnection()
+    {
+        $method = $this->pool_reflection->getMethod('get_connection');
+        $method->setAccessible(TRUE);
+
+        $dbr = new ReflectionClass('Lunr\Libraries\DataAccess\MySQLConnection');
+
+        $property = $dbr->getProperty('readonly');
+        $property->setAccessible(TRUE);
+
+        $value = $method->invokeArgs($this->pool, array(TRUE, TRUE));
+
+        $this->assertInstanceOf('Lunr\Libraries\DataAccess\MySQLConnection', $value);
+        $this->assertTrue($property->getValue($value));
+   }
+
+    /**
+     * Test that get_connection() returns a new MySQLConnection.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
+     */
+    public function testGetNewAndReadWriteConnectionReturnsMysqlConnection()
+    {
+        $method = $this->pool_reflection->getMethod('get_connection');
+        $method->setAccessible(TRUE);
+
+        $dbr = new ReflectionClass('Lunr\Libraries\DataAccess\MySQLConnection');
+
+        $property = $dbr->getProperty('readonly');
+        $property->setAccessible(TRUE);
+
+        $value = $method->invokeArgs($this->pool, array(TRUE, FALSE));
+
+        $this->assertInstanceOf('Lunr\Libraries\DataAccess\MySQLConnection', $value);
+        $this->assertFalse($property->getValue($value));
+    }
+
+    /**
+     * Test that get_connection() populates pool with new connections.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
+     */
+    public function testGetNewAndReadonlyConnectionIncreasesPoolByOne()
+    {
+        $method = $this->pool_reflection->getMethod('get_connection');
+        $method->setAccessible(TRUE);
+
+        $property = $this->pool_reflection->getProperty('ro_pool');
+        $property->setAccessible(TRUE);
+
+        $this->assertEmpty($property->getValue($this->pool));
+
+        $value = $method->invokeArgs($this->pool, array(TRUE, TRUE));
+
+        $stored = $property->getValue($this->pool);
+
+        $this->assertCount(1, $stored);
+        $this->assertSame($value, $stored[0]);
+    }
+
+    /**
+     * Test that get_connection() populates pool with new connections.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
+     */
+    public function testGetNewAndReadWriteConnectionIncreasesPoolByOne()
+    {
+        $method = $this->pool_reflection->getMethod('get_connection');
+        $method->setAccessible(TRUE);
+
+        $property = $this->pool_reflection->getProperty('rw_pool');
+        $property->setAccessible(TRUE);
+
+        $this->assertEmpty($property->getValue($this->pool));
+
+        $value = $method->invokeArgs($this->pool, array(TRUE, FALSE));
+
+        $stored = $property->getValue($this->pool);
+
+        $this->assertCount(1, $stored);
+        $this->assertSame($value, $stored[0]);
+    }
+
+    /**
+     * Test that get_connection() populates the pool if it is empty.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
+     */
+    public function testGetReadonlyConnectionReturnsNewConnectionIfPoolEmpty()
+    {
+        $method = $this->pool_reflection->getMethod('get_connection');
+        $method->setAccessible(TRUE);
+
+        $property = $this->pool_reflection->getProperty('ro_pool');
+        $property->setAccessible(TRUE);
+
+        $this->assertEmpty($property->getValue($this->pool));
+
+        $value = $method->invokeArgs($this->pool, array(FALSE, TRUE));
+
+        $stored = $property->getValue($this->pool);
+
+        $this->assertCount(1, $stored);
+        $this->assertSame($value, $stored[0]);
+    }
+
+    /**
+     * Test that get_connection() populates the pool if it is empty.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
+     */
+    public function testGetReadWriteConnectionReturnsNewConnectionIfPoolEmpty()
+    {
+        $method = $this->pool_reflection->getMethod('get_connection');
+        $method->setAccessible(TRUE);
+
+        $property = $this->pool_reflection->getProperty('rw_pool');
+        $property->setAccessible(TRUE);
+
+        $this->assertEmpty($property->getValue($this->pool));
+
+        $value = $method->invokeArgs($this->pool, array(FALSE, FALSE));
+
+        $stored = $property->getValue($this->pool);
+
+        $this->assertCount(1, $stored);
+        $this->assertSame($value, $stored[0]);
+    }
+
+    /**
+     * Test that get_connection() returns pooled connetion if requested.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
+     */
+    public function testGetReadonlyConnectionReturnsPooledConnection()
+    {
+        $method = $this->pool_reflection->getMethod('get_connection');
+        $method->setAccessible(TRUE);
+
+        $property = $this->pool_reflection->getProperty('ro_pool');
+        $property->setAccessible(TRUE);
+
+        $this->assertEmpty($property->getValue($this->pool));
+
+        $method->invokeArgs($this->pool, array(FALSE, TRUE));
+
+        $stored = $property->getValue($this->pool);
+
+        $this->assertCount(1, $stored);
+
+        $value = $method->invokeArgs($this->pool, array(FALSE, TRUE));
+
+        $stored = $property->getValue($this->pool);
+
+        $this->assertCount(1, $stored);
+        $this->assertSame($value, $stored[0]);
+    }
+
+    /**
+     * Test that get_connection() returns pooled connetion if requested.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
+     */
+    public function testGetReadWriteConnectionReturnsPooledConnection()
+    {
+        $method = $this->pool_reflection->getMethod('get_connection');
+        $method->setAccessible(TRUE);
+
+        $property = $this->pool_reflection->getProperty('rw_pool');
+        $property->setAccessible(TRUE);
+
+        $this->assertEmpty($property->getValue($this->pool));
+
+        $method->invokeArgs($this->pool, array(FALSE, FALSE));
+
+        $stored = $property->getValue($this->pool);
+
+        $this->assertCount(1, $stored);
+
+        $value = $method->invokeArgs($this->pool, array(FALSE, FALSE));
+
+        $stored = $property->getValue($this->pool);
+
+        $this->assertCount(1, $stored);
+        $this->assertSame($value, $stored[0]);
+    }
+
+}
+
+?>

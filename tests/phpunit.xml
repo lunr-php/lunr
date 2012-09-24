@@ -10,7 +10,7 @@
     <testsuites>
         <testsuite name="Lunr Testsuite">
             <file>tests/system/class.environment.test.php</file>
-            <file>tests/system/libraries/core/class.autoloader.test.php</file>
+            <!--<file>tests/system/libraries/core/class.autoloader.test.php</file>
             <file>tests/system/libraries/core/class.datetime.base.test.php</file>
             <file>tests/system/libraries/core/class.datetime.getdatetime.test.php</file>
             <file>tests/system/libraries/core/class.datetime.getdelayeddatetime.test.php</file>
@@ -74,10 +74,11 @@
             <file>tests/system/libraries/dataaccess/class.mysqlconnection.set.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqlconnection.connect.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqlconnection.query.test.php</file>
-            <file>tests/system/libraries/dataaccess/class.mysqlconnection.escape.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.mysqlconnection.escape.test.php</file>-->
             <file>tests/system/libraries/dataaccess/class.databaseconnectionpool.base.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databaseconnectionpool.empty.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databaseconnectionpool.unsupported.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.databaseconnectionpool.supported.test.php</file>
 <!--            <file>tests/system/libraries/db/class.dbman.test.php</file>
             <file>tests/system/libraries/db/class.dbcon.test.php</file>-->
         </testsuite>
