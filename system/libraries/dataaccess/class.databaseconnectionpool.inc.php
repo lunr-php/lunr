@@ -149,7 +149,7 @@ class DatabaseConnectionPool
                 $connection->set_readonly(TRUE);
             }
 
-            $this->$store[] =& $connection;
+            $this->{$store}[] =& $connection;
         }
         else
         {
