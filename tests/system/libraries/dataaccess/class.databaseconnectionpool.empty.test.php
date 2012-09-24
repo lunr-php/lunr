@@ -178,7 +178,8 @@ class DatabaseConnectionPoolEmptyTest extends DatabaseConnectionPoolTest
     /**
      * Test that get_new_ro_connection returns NULL.
      *
-     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_new_ro_connection
+     * @depends testGetNewAndReadonlyConnectionReturnsNull
+     * @covers  Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_new_ro_connection
      */
     public function testGetNewRoConnectionReturnsNull()
     {
@@ -188,7 +189,8 @@ class DatabaseConnectionPoolEmptyTest extends DatabaseConnectionPoolTest
     /**
      * Test that get_new_rw_connection returns NULL.
      *
-     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_new_rw_connection
+     * @depends testGetNewAndReadWriteConnectionReturnsNull
+     * @covers  Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_new_rw_connection
      */
     public function testGetNewRwConnectionReturnsNull()
     {
@@ -198,7 +200,8 @@ class DatabaseConnectionPoolEmptyTest extends DatabaseConnectionPoolTest
     /**
      * Test that get_ro_connection returns NULL.
      *
-     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_ro_connection
+     * @depends testGetReadonlyConnectionReturnsNull
+     * @covers  Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_ro_connection
      */
     public function testGetRoConnectionReturnsNull()
     {
@@ -208,7 +211,8 @@ class DatabaseConnectionPoolEmptyTest extends DatabaseConnectionPoolTest
     /**
      * Test that get_rw_connection returns NULL.
      *
-     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_rw_connection
+     * @depends testGetReadwriteConnectionReturnsNull
+     * @covers  Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_rw_connection
      */
     public function testGetRwConnectionReturnsNull()
     {
@@ -218,7 +222,8 @@ class DatabaseConnectionPoolEmptyTest extends DatabaseConnectionPoolTest
     /**
      * Test that get_connection() with empty db config does not alter rw_pool.
      *
-     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
+     * @depends testGetNewAndReadonlyConnectionDoesNotAlterPool
+     * @covers  Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
      */
     public function testGetNewRoConnectionDoesNotAlterPool()
     {
@@ -237,6 +242,7 @@ class DatabaseConnectionPoolEmptyTest extends DatabaseConnectionPoolTest
     /**
      * Test that get_connection() with empty db config does not alter rw_pool.
      *
+     * @depends testGetNewAndReadWriteConnectionDoesNotAlterPool
      * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
      */
     public function testGetNewRwConnectionDoesNotAlterPool()
@@ -256,7 +262,8 @@ class DatabaseConnectionPoolEmptyTest extends DatabaseConnectionPoolTest
     /**
      * Test that get_connection() with empty db config does not alter rw_pool.
      *
-     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
+     * @depends testGetReadonlyConnectionDoesNotAlterPool
+     * @covers  Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
      */
     public function testGetRoConnectionDoesNotAlterPool()
     {
@@ -275,7 +282,8 @@ class DatabaseConnectionPoolEmptyTest extends DatabaseConnectionPoolTest
     /**
      * Test that get_connection() with empty db config does not alter rw_pool.
      *
-     * @covers Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
+     * @depends testGetReadWriteConnectionDoesNotAlterPool
+     * @covers  Lunr\Libraries\DataAccess\DatabaseConnectionPool::get_connection
      */
     public function testGetRwConnectionDoesNotAlterPool()
     {
