@@ -13,6 +13,7 @@
  */
 
 namespace Lunr\Libraries\DataAccess;
+use \MySQLi;
 
 /**
  * This class implements a simple database connection pool.
@@ -132,7 +133,9 @@ class DatabaseConnectionPool
         switch ($this->configuration['db']['driver'])
         {
             case 'mysql':
-                $type  = 'MySQLConnection';
+                // Specifying the full namespace here is necessary because of a restriction
+                // in PHP with regards to resolving dynamic class names.
+                $type  = 'Lunr\Libraries\DataAccess\MySQLConnection';
                 $extra = new MySQLi();
                 break;
             default:
@@ -153,7 +156,7 @@ class DatabaseConnectionPool
         }
         else
         {
-            $connection =& $this->$store[0];
+            $connection =& $this->{$store}[0];
         }
 
         return $connection;
