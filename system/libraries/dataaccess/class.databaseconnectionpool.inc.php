@@ -140,7 +140,7 @@ class DatabaseConnectionPool
                 break;
         }
 
-        if ($new === TRUE)
+        if (($new === TRUE) || (sizeof($this->$store) == 0))
         {
             $connection = new $type($this->configuration, $this->logger, $extra);
 
