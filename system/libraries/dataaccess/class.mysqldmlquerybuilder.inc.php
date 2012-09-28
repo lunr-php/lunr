@@ -257,6 +257,20 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define ORDER BY clause in the SQL statement
+     *
+     * @param String  $expr Expression to order by
+     * @param Boolean $asc  Order ASCending/TRUE or DESCending/FALSE
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function order_by($expr, $asc = TRUE)
+    {
+        $this->sql_order_by($expr, $asc);
+        return $this;
+    }
+
+    /**
      * Set logical connector 'AND'.
      *
      * @return MySQLDMLQueryBuilder $self Self reference

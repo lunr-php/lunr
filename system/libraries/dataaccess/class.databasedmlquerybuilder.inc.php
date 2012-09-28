@@ -57,6 +57,12 @@ abstract class DatabaseDMLQueryBuilder
     protected $having;
 
     /**
+     * SQL Query part: ORDER BY clause
+     * @var String
+     */
+    protected $order_by;
+
+    /**
      * SQL Query part: Logical connector of expressions
      * @var String
      */
@@ -72,6 +78,7 @@ abstract class DatabaseDMLQueryBuilder
         $this->from   = '';
         $this->where  = '';
         $this->having = '';
+        $this->order_by  = '';
         $this->connector = '';
     }
 
@@ -85,6 +92,7 @@ abstract class DatabaseDMLQueryBuilder
         unset($this->from);
         unset($this->where);
         unset($this->having);
+        unset($this->order_by);
         unset($this->connector);
     }
 
@@ -101,6 +109,7 @@ abstract class DatabaseDMLQueryBuilder
         $components[] = 'from';
         $components[] = 'where';
         $components[] = 'having';
+        $components[] = 'order_by';
 
         if ($this->from == '')
         {
@@ -217,6 +226,30 @@ abstract class DatabaseDMLQueryBuilder
         }
 
         $this->$condition .= " $left $operator $right";
+    }
+
+    /**
+     * Define a ORDER BY clause of the SQL statement.
+     *
+     * @param String  $expr Expression to order by
+     * @param Boolean $asc  Order ASCending/TRUE or DESCending/FALSE
+     *
+     * @return void
+     */
+    protected function sql_order_by($expr, $asc = TRUE)
+    {
+        $direction = ($asc === TRUE) ? 'ASC' : 'DESC';
+
+        if ($this->order_by == '')
+        {
+            $this->order_by = 'ORDER BY ';
+        }
+        else
+        {
+            $this->order_by .= ', ';
+        }
+
+        $this->order_by .= $expr . ' ' . $direction;
     }
 
     /**
@@ -472,6 +505,16 @@ abstract class DatabaseDMLQueryBuilder
      * @return DatabaseDMLQueryBuilder $self Self reference
      */
     public abstract function having_like($left, $right, $negate = FALSE);
+
+    /**
+     * Define a ORDER BY clause of the SQL statement.
+     *
+     * @param String  $expr Expression to order by
+     * @param Boolean $asc  Order ASCending/TRUE or DESCending/FALSE
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function order_by($expr, $asc = TRUE);
 
 }
 
