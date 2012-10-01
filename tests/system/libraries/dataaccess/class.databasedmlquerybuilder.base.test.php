@@ -21,6 +21,7 @@ namespace Lunr\Libraries\DataAccess;
  * @package    DataAccess
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Olivier Wizen <olivier@m2mobi.com>
  * @covers     Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder
  */
 class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
@@ -192,6 +193,17 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
         $select->setValue($this->builder, 'col');
 
         $this->assertEquals('', $this->builder->get_select_query());
+    }
+
+    /**
+     * Test that order_by is an empty string by default.
+     */
+    public function testOrderByEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('order_by');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals('', $property->getValue($this->builder));
     }
 
 }

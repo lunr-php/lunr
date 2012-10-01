@@ -346,6 +346,70 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
         $this->assertEquals($string, $property->getValue($this->builder));
     }
 
+    /**
+     * Test creating a simple order by statement.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_order_by
+     */
+    public function testOrderByWithDefaultOrder()
+    {
+        $string = "ORDER BY col1 ASC";
+
+        $method = $this->builder_reflection->getMethod('sql_order_by');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('order_by');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('col1'));
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test creating a order by statement with custom order.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_order_by
+     */
+    public function testOrderByWithCustomOrder()
+    {
+        $string = "ORDER BY col1 DESC";
+
+        $method = $this->builder_reflection->getMethod('sql_order_by');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('order_by');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('col1', FALSE));
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test creating and extending a order by statement.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_order_by
+     */
+    public function testOrderByWithExtendedStatement()
+    {
+        $value = "ORDER BY col1 DESC";
+
+        $method = $this->builder_reflection->getMethod('sql_order_by');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('order_by');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->builder, $value );
+
+        $method->invokeArgs($this->builder, array('col2', FALSE));
+
+        $string = "ORDER BY col1 DESC, col2 DESC";
+
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
 }
 
 ?>
