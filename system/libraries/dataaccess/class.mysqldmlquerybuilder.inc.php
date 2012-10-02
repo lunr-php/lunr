@@ -227,6 +227,26 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define GROUP BY clause of the SQL statement.
+     *
+     * @param String  $expr  Expression to group by
+     * @param Boolean $order Order ASCending/TRUE or DESCending/FALSE, default no order/NULL
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function group_by($expr, $order = NULL)
+    {
+        $this->sql_group_by($expr);
+
+        if( $order !== NULL && is_bool($order) )
+        {
+            $direction = ($order === TRUE) ? " ASC" : " DESC";
+            $this->group_by .= $direction;
+        }
+        return $this;
+    }
+
+    /**
      * Define HAVING clause of the SQL statement.
      *
      * @param String $left     Left expression

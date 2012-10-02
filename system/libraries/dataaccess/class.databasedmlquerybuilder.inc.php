@@ -52,6 +52,12 @@ abstract class DatabaseDMLQueryBuilder
     protected $where;
 
     /**
+     * SQL Query part: GROUP BY clause
+     * @var String
+     */
+    protected $group_by;
+
+    /**
      * SQL Query part: HAVING clause
      * @var String
      */
@@ -78,6 +84,7 @@ abstract class DatabaseDMLQueryBuilder
         $this->select_mode = array();
         $this->from   = '';
         $this->where  = '';
+        $this->group_by = '';
         $this->having = '';
         $this->order_by  = '';
         $this->connector = '';
@@ -92,6 +99,7 @@ abstract class DatabaseDMLQueryBuilder
         unset($this->select_mode);
         unset($this->from);
         unset($this->where);
+        unset($this->group_by);
         unset($this->having);
         unset($this->order_by);
         unset($this->connector);
@@ -109,6 +117,7 @@ abstract class DatabaseDMLQueryBuilder
         $components[] = 'select';
         $components[] = 'from';
         $components[] = 'where';
+        $components[] = 'group_by';
         $components[] = 'having';
         $components[] = 'order_by';
 
@@ -263,6 +272,26 @@ abstract class DatabaseDMLQueryBuilder
     protected function sql_connector($connector)
     {
         $this->connector = $connector;
+    }
+
+    /**
+     * Define a GROUP BY clause of the SQL statement.
+     *
+     * @param String $expr Expression to group by
+     *
+     * @return void
+     */
+    protected function sql_group_by($expr)
+    {
+        if ($this->group_by == '')
+        {
+            $this->group_by = 'GROUP BY ';
+        }
+        else
+        {
+            $this->group_by .= ', ';
+        }
+        $this->group_by .= $expr;
     }
 
     /**
@@ -516,6 +545,15 @@ abstract class DatabaseDMLQueryBuilder
      * @return DatabaseDMLQueryBuilder $self Self reference
      */
     public abstract function order_by($expr, $asc = TRUE);
+
+    /**
+     * Define a GROUP BY clause of the SQL statement.
+     *
+     * @param String $expr Expression to group by
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function group_by($expr);
 
 }
 
