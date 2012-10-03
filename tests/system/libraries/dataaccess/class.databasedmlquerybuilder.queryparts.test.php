@@ -454,6 +454,46 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
         $this->assertEquals($string, $property->getValue($this->builder));
     }
 
+    /**
+     * Test creating a limit statement with default offset.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_limit
+     */
+    public function testLimitWithDefaultOffset()
+    {
+        $string = "LIMIT 10";
+
+        $method = $this->builder_reflection->getMethod('sql_limit');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('limit');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('10'));
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test creating a limit statement with custom offset.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_limit
+     */
+    public function testLimitWithCustomOffset()
+    {
+        $string = "LIMIT 10 OFFSET 20";
+
+        $method = $this->builder_reflection->getMethod('sql_limit');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('limit');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('10', '20'));
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
 }
 
 ?>

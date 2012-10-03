@@ -118,6 +118,45 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
         return $modes;
     }
 
+    /**
+     * Unit Test Data Provider for legal input values to be escaped as integer.
+     *
+     *  @return array $expecteds array of value to be escaped and their result
+     */
+    public function expectedIntegerProvider()
+    {
+        $expecteds = array() ;
+        $expecteds[] = array('1', 1);
+        $expecteds[] = array('10', 10);
+        $expecteds[] = array('37', 37);
+
+        return $expecteds;
+    }
+
+    /**
+     * Unit Test Data Provider for illegalinput values to be escaped as integer.
+     *
+     *  @return array $illegals array of value to be escaped and their result
+     */
+    public function illegalIntegerProvider()
+    {
+        $illegals = array() ;
+        $illegals[] = array(3.3, 3);
+
+        $illegals[] = array(NULL, 0);
+
+        $illegals[] = array(FALSE, 0);
+        $illegals[] = array(TRUE, 1);
+
+        $illegals[] = array("value", 0);
+        $illegals[] = array("1e10", 1);
+
+        $illegals[] = array(array(), 0);
+        $illegals[] = array(array("a", "b"), 1);
+
+        return $illegals;
+    }
+
 }
 
 ?>

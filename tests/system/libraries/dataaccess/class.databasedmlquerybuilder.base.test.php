@@ -217,6 +217,17 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
         $this->assertEquals('', $property->getValue($this->builder));
     }
 
+    /**
+     * Test that limit is an empty string by default.
+     */
+    public function testLimitEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('limit');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals('', $property->getValue($this->builder));
+    }
+
 }
 
 ?>
