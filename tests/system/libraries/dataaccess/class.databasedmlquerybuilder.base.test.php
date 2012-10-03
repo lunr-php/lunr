@@ -206,6 +206,17 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
         $this->assertEquals('', $property->getValue($this->builder));
     }
 
+    /**
+     * Test that group_by is an empty string by default.
+     */
+    public function testGroupByEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('group_by');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals('', $property->getValue($this->builder));
+    }
+
 }
 
 ?>

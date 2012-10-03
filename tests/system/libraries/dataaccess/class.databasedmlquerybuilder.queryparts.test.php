@@ -411,6 +411,49 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
         $this->assertEquals($string, $property->getValue($this->builder));
     }
 
+    /**
+     * Test creating a simple group by statement.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_group_by
+     */
+    public function testGroupBy()
+    {
+        $string = "GROUP BY group1";
+
+        $method = $this->builder_reflection->getMethod('sql_group_by');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('group_by');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('group1'));
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test creating and extending a group by statement.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_group_by
+     */
+    public function testGroupByExtending()
+    {
+        $value = "GROUP BY group1";
+
+        $method = $this->builder_reflection->getMethod('sql_group_by');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('group_by');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->builder, $value);
+
+        $method->invokeArgs($this->builder, array('group2'));
+
+        $string = "GROUP BY group1, group2";
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
 }
 
 ?>
