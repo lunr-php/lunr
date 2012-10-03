@@ -114,6 +114,18 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define and escape input as integer value.
+     *
+     * @param mixed $value Input to escape as integer
+     *
+     * @return Integer Defined and escaped Integer value
+     */
+    public function intvalue($value)
+    {
+        return intval($value);
+    }
+
+    /**
      * Define the mode of the SELECT clause.
      *
      * @param String $mode The select mode you want to use
@@ -288,6 +300,20 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     public function order_by($expr, $asc = TRUE)
     {
         $this->sql_order_by($expr, $asc);
+        return $this;
+    }
+
+    /**
+     * Define a LIMIT clause of the SQL statement.
+     *
+     * @param Integer $amount The amount of elements to retrieve
+     * @param Integer $offset Start retrieving elements from a specific index
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function limit($amount, $offset = -1)
+    {
+        $this->sql_limit($amount, $offset);
         return $this;
     }
 

@@ -70,6 +70,12 @@ abstract class DatabaseDMLQueryBuilder
     protected $order_by;
 
     /**
+     * SQL Query part: LIMIT clause
+     * @var String
+     */
+    protected $limit;
+
+    /**
      * SQL Query part: Logical connector of expressions
      * @var String
      */
@@ -87,6 +93,7 @@ abstract class DatabaseDMLQueryBuilder
         $this->group_by = '';
         $this->having = '';
         $this->order_by  = '';
+        $this->limit  = '';
         $this->connector = '';
     }
 
@@ -102,6 +109,7 @@ abstract class DatabaseDMLQueryBuilder
         unset($this->group_by);
         unset($this->having);
         unset($this->order_by);
+        unset($this->limit);
         unset($this->connector);
     }
 
@@ -120,6 +128,7 @@ abstract class DatabaseDMLQueryBuilder
         $components[] = 'group_by';
         $components[] = 'having';
         $components[] = 'order_by';
+        $components[] = 'limit';
 
         if ($this->from == '')
         {
@@ -260,6 +269,24 @@ abstract class DatabaseDMLQueryBuilder
         }
 
         $this->order_by .= $expr . ' ' . $direction;
+    }
+
+    /**
+     * Define a LIMIT clause for the SQL statement.
+     *
+     * @param Integer $amount The amount of elements to retrieve
+     * @param Integer $offset Start retrieving elements from a sepcific index
+     *
+     * @return void
+     */
+    protected function sql_limit($amount, $offset = -1)
+    {
+        $this->limit = "LIMIT $amount";
+
+        if($offset > -1)
+        {
+            $this->limit .= " OFFSET $offset" ;
+        }
     }
 
     /**
@@ -554,6 +581,16 @@ abstract class DatabaseDMLQueryBuilder
      * @return DatabaseDMLQueryBuilder $self Self reference
      */
     public abstract function group_by($expr);
+
+    /**
+     * Define a LIMIT clause of the SQL statement.
+     *
+     * @param Integer $amount The amount of elements to retrieve
+     * @param Integer $offset Start retrieving elements from a specific index
+     *
+     * @return void
+     */
+    public abstract function limit($amount, $offset = -1);
 
 }
 
