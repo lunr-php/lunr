@@ -21,6 +21,7 @@ namespace Lunr\Libraries\DataAccess;
  * @package    DataAccess
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Olivier Wizen <olivier@m2mobi.com>
  * @covers     Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder
  */
 class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest

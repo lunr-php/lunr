@@ -22,6 +22,7 @@ namespace Lunr\Libraries\DataAccess;
  * @package    DataAccess
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Olivier Wizen <olivier@m2mobi.com>
  * @author     M2Mobi <info@m2mobi.com>
  */
 class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
