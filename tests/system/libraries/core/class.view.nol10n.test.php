@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * This file contains the ViewNoL10nTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     M2Mobi <info@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+
+namespace Lunr\Libraries\Core;
+
+/**
+ * Base tests for the view class when there is no L10nProvider.
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\Core\View
+ */
+class ViewNoL10nTest extends ViewTest
+{
+
+    /**
+     * Testcase Constructor.
+     */
+    public function setUp()
+    {
+        $this->setUpNoL10n();
+    }
+
+    /**
+     * Test that the L10nProvider is NULL if not specified.
+     */
+    public function testL10nProviderIsNull()
+    {
+        $property = $this->view_reflection->getProperty('l10n');
+        $property->setAccessible(TRUE);
+
+        $this->assertNull($property->getValue($this->view));
+    }
+
+}
+
+?>

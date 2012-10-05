@@ -38,7 +38,9 @@
             <file>tests/system/libraries/core/class.console.test.php</file>
             <file>tests/system/libraries/core/class.logger.test.php</file>
             <file>tests/system/libraries/core/class.controller.test.php</file>
-            <file>tests/system/libraries/core/class.view.test.php</file>
+            <file>tests/system/libraries/core/class.view.l10n.test.php</file>
+            <file>tests/system/libraries/core/class.view.nol10n.test.php</file>
+            <file>tests/system/libraries/core/class.view.helpers.test.php</file>
             <file>tests/system/libraries/core/class.mail.base.test.php</file>
             <file>tests/system/libraries/core/class.mail.set.test.php</file>
             <file>tests/system/libraries/core/class.mail.send.test.php</file>
