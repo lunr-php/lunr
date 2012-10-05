@@ -93,7 +93,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
             return FALSE;
         }
 
-        if ($query->num_rows() == 0)
+        if ($query->number_of_rows() == 0)
         {
             return array();
         }
@@ -117,7 +117,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
             return FALSE;
         }
 
-        if ($query->num_rows() == 0)
+        if ($query->number_of_rows() == 0)
         {
             return array();
         }
@@ -142,7 +142,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
             return FALSE;
         }
 
-        if ($query->num_rows() == 0)
+        if ($query->number_of_rows() == 0)
         {
             return array();
         }
@@ -167,7 +167,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
             return FALSE;
         }
 
-        if ($query->num_rows() == 0)
+        if ($query->number_of_rows() == 0)
         {
             return '';
         }
