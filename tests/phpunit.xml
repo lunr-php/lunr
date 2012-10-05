@@ -84,6 +84,8 @@
             <file>tests/system/libraries/dataaccess/class.databaseconnectionpool.unsupported.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databaseconnectionpool.supported.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databaseconnectionpool.public.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.databaseaccessobject.nopool.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.databaseaccessobject.pool.test.php</file>
 <!--            <file>tests/system/libraries/db/class.dbman.test.php</file>
             <file>tests/system/libraries/db/class.dbcon.test.php</file>-->
         </testsuite>
