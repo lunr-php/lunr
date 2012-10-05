@@ -58,12 +58,20 @@ abstract class View
      * @param Configuration &$configuration Reference to the Configuration class
      * @param L10nProvider  &$l10nprovider  Reference to the L10nProvider class
      */
-    public function __construct(&$request, &$response, &$configuration, &$l10nprovider)
+    public function __construct(&$request, &$response, &$configuration, &$l10nprovider = NULL)
     {
         $this->request =& $request;
         $this->response =& $response;
         $this->configuration =& $configuration;
-        $this->l10n =& $l10nprovider;
+
+        if ($l10nprovider === NULL)
+        {
+            $this->l10n = NULL;
+        }
+        else
+        {
+            $this->l10n =& $l10nprovider;
+        }
     }
 
     /**
