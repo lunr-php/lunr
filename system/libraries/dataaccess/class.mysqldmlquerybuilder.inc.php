@@ -51,8 +51,6 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function __destruct()
     {
-        $this->db = NULL;
-
         parent::__destruct();
     }
 

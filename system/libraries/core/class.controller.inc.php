@@ -55,7 +55,6 @@ abstract class Controller
     public function __destruct()
     {
         unset($this->error);
-        $this->response = NULL;
     }
 
     /**

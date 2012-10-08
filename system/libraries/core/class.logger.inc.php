@@ -58,7 +58,6 @@ class Logger
     public function __destruct()
     {
         unset($this->datetime);
-        $this->request = NULL;
     }
 
     /**

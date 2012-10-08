@@ -71,9 +71,6 @@ class DatabaseConnectionPool
      */
     public function __destruct()
     {
-        $this->configuration = NULL;
-        $this->logger        = NULL;
-
         unset($this->ro_pool);
         unset($this->rw_pool);
     }

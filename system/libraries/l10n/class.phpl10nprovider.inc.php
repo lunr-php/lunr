@@ -69,8 +69,6 @@ class PHPL10nProvider extends L10nProvider
      */
     public function __destruct()
     {
-        $this->configuration = NULL;
-        $this->logger = NULL;
         unset($this->lang_array);
         parent::__destruct();
     }

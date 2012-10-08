@@ -108,9 +108,6 @@ class Verification
      */
     public function __destruct()
     {
-        $this->logger = NULL;
-        $this->data   = NULL;
-
         unset($this->pointer);
         unset($this->superfluous);
         unset($this->result);

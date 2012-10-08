@@ -65,8 +65,6 @@ class GettextL10nProvider extends L10nProvider
      */
     public function __destruct()
     {
-        $this->configuration = NULL;
-        $this->logger = NULL;
         parent::__destruct();
     }
 

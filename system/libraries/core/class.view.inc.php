@@ -71,10 +71,7 @@ abstract class View
      */
     public function __destruct()
     {
-        $this->request = NULL;
-        $this->response = NULL;
-        $this->configuration = NULL;
-        $this->l10n = NULL;
+        # Nothing do be done yet
     }
 
     /**

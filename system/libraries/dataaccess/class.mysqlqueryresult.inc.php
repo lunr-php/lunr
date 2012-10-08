@@ -81,8 +81,6 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     {
         $this->free_result();
 
-        $this->mysqli = NULL;
-
         unset($this->result);
         unset($this->success);
         unset($this->freed);

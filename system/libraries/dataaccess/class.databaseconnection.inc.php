@@ -70,9 +70,6 @@ abstract class DatabaseConnection
      */
     public function __destruct()
     {
-        $this->configuration = NULL;
-        $this->logger        = NULL;
-
         unset($this->readonly);
         unset($this->connected);
     }

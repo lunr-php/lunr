@@ -65,7 +65,6 @@ class L10n
     public function __destruct()
     {
         unset($this->datetime);
-        $this->configuration = NULL;
     }
 
     /**
