@@ -105,7 +105,8 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     public function testNonImplementedCallWithoutEnumsSet()
     {
         $this->response->expects($this->once())
-                       ->method('__set');
+                       ->method('__set')
+                       ->with($this->equalTo('errmsg'));
 
         $this->controller->unimplemented();
     }
@@ -138,8 +139,13 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      */
     public function testNonImplementedCallWithEnumsSet()
     {
-        $this->response->expects($this->exactly(2))
-                       ->method('__set');
+        $this->response->expects($this->at(0))
+                       ->method('__set')
+                       ->with($this->equalTo('return_code'));
+
+        $this->response->expects($this->at(1))
+                       ->method('__set')
+                       ->with($this->equalTo('errmsg'));
 
         $ERROR['not_implemented'] = 503;
 
