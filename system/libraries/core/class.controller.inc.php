@@ -70,7 +70,7 @@ abstract class Controller
     {
         if (isset($this->error['not_implemented']))
         {
-            $this->response->errno = $this->error['not_implemented'];
+            $this->response->return_code = $this->error['not_implemented'];
         }
 
         $this->response->errmsg = 'Not implemented!';
