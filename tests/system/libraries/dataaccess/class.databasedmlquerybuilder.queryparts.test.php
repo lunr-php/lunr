@@ -159,6 +159,50 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+     * Test specifying more than one table in FROM (cartesian product).
+     *
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_from
+     */
+    public function testIncrementalFromWithoutIndeces()
+    {
+        $method = $this->builder_reflection->getMethod('sql_from');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('from');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('table'));
+        $method->invokeArgs($this->builder, array('table'));
+
+        $string = 'FROM table, table';
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying more than one table in FROM (cartesian product).
+     *
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_from
+     */
+    public function testIncrementalFromWithIndeces()
+    {
+        $method = $this->builder_reflection->getMethod('sql_from');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('from');
+        $property->setAccessible(TRUE);
+
+        $hints = array('index_hint');
+
+        $method->invokeArgs($this->builder, array('table', $hints));
+        $method->invokeArgs($this->builder, array('table', $hints));
+
+        $string = 'FROM table index_hint, table index_hint';
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
      * Test specifying a logical connector for the query.
      *
      * @covers Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_connector
