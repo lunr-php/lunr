@@ -79,6 +79,20 @@ abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Unit test data provider for table names.
+     *
+     * @return array $cols Array of table names and expected escaped values.
+     */
+    public function tableNameProvider()
+    {
+        $cols   = array();
+        $cols[] = array('table', '`table`');
+        $cols[] = array('db.table', '`db`.`table`');
+
+        return $cols;
+    }
+
+    /**
      * Unit test data provider for where or having statements.
      *
      * @return array $variants Array of statement variants

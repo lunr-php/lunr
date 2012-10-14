@@ -278,6 +278,92 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
         $this->assertEquals($illegal , $this->builder->intvalue($value));
     }
 
+    /**
+     * Test escaping an index hint with invalid indeces.
+     *
+     * @param mixed $indeces Invalid indeces value
+     *
+     * @dataProvider invalidIndecesProvider
+     * @covers       Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::index_hint
+     */
+    public function testEscapingIndexHintWithInvalidIndeces($indeces)
+    {
+        $this->assertNull($this->builder->index_hint('', '', $indeces));
+    }
+
+    /**
+     * Test escaping an index hint with valid keywords.
+     *
+     * @param String $keyword Valid index keyword
+     *
+     * @dataProvider validIndexKeywordProvider
+     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @covers       Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::index_hint
+     */
+    public function testEscapingIndexHintWithValidKeyword($keyword)
+    {
+        $indeces = array('index', 'index');
+
+        $value = $this->builder->index_hint($keyword, $indeces);
+
+        $this->assertEquals($keyword . ' INDEX (`index`, `index`)', $value);
+    }
+
+    /**
+     * Test escaping an index hint with an invalid keyword.
+     *
+     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @covers       Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::index_hint
+     */
+    public function testEscapingIndexHintWithInvalidKeyword()
+    {
+        $indeces = array('index', 'index');
+
+        $value = $this->builder->index_hint('invalid', $indeces);
+
+        $this->assertEquals('USE INDEX (`index`, `index`)', $value);
+    }
+
+    /**
+     * Test escaping an index hint with valid use definition.
+     *
+     * @param String $for Valid use definition
+     *
+     * @dataProvider validIndexForProvider
+     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @covers       Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::index_hint
+     */
+    public function testEscapingIndexHintWithValidFor($for)
+    {
+        $indeces = array('index', 'index');
+
+        $value = $this->builder->index_hint('USE', $indeces, $for);
+
+        if ($for === '')
+        {
+            $this->assertEquals('USE INDEX (`index`, `index`)', $value);
+        }
+        else
+        {
+            $this->assertEquals('USE INDEX FOR ' . $for . ' (`index`, `index`)', $value);
+        }
+    }
+
+    /**
+     * Test escaping an index hint with an invalid use definition.
+     *
+     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @covers       Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::index_hint
+     */
+    public function testEscapingIndexHintWithInvalidFor()
+    {
+        $indeces = array('index', 'index');
+
+        $value = $this->builder->index_hint('invalid', $indeces, 'invalid');
+
+        $this->assertEquals('USE INDEX (`index`, `index`)', $value);
+    }
+
 }
 
 ?>

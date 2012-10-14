@@ -31,35 +31,18 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the SELECT part of a query.
      *
-     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testInitialSelectNoEscapeNoHex
-     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testIncrementalSelectNoEscapeNoHex
+     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testInitialSelect
+     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testIncrementalSelect
      * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::select
      */
-    public function testSelectNoEscape()
-    {
-        $property = $this->builder_reflection->getProperty('select');
-        $property->setAccessible(TRUE);
-
-        $this->builder->select('col', FALSE);
-
-        $this->assertEquals('col', $property->getValue($this->builder));
-    }
-
-    /**
-     * Test specifying the SELECT part of a query.
-     *
-     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testInitialSelectEscapeNoHex
-     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testIncrementalSelectEscapeNoHex
-     * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::select
-     */
-    public function testSelectEscape()
+    public function testSelect()
     {
         $property = $this->builder_reflection->getProperty('select');
         $property->setAccessible(TRUE);
 
         $this->builder->select('col');
 
-        $this->assertEquals('`col`', $property->getValue($this->builder));
+        $this->assertEquals('col', $property->getValue($this->builder));
     }
 
     /**
@@ -76,66 +59,38 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
     }
 
     /**
-     * Test specifying the SELECT part of a query.
+     * Test specifying the FROM part of a query.
      *
-     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testInitialSelectNoEscapeHex
-     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testIncrementalSelectNoEscapeHex
-     * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::select_hex
-     */
-    public function testSelectHexNoEscape()
-    {
-        $property = $this->builder_reflection->getProperty('select');
-        $property->setAccessible(TRUE);
-
-        $this->builder->select_hex('col', FALSE);
-
-        $this->assertEquals('HEX(col) AS col', $property->getValue($this->builder));
-    }
-
-    /**
-     * Test specifying the SELECT part of a query.
-     *
-     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testInitialSelectEscapeHex
-     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testIncrementalSelectEscapeHex
-     * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::select_hex
-     */
-    public function testSelectHexEscape()
-    {
-        $property = $this->builder_reflection->getProperty('select');
-        $property->setAccessible(TRUE);
-
-        $this->builder->select_hex('col');
-
-        $this->assertEquals('HEX(`col`) AS `col`', $property->getValue($this->builder));
-    }
-
-    /**
-     * Test fluid interface of the select_hex mathod.
-     *
-     * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::select_hex
-     */
-    public function testSelectHexReturnsSelfReference()
-    {
-        $return = $this->builder->select_hex('col');
-
-        $this->assertInstanceOf('Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder', $return);
-        $this->assertSame($this->builder, $return);
-    }
-
-    /**
-     * Test specifying the SELECT part of a query.
-     *
-     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testFrom
+     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testFromWithoutIndexHints
      * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::from
      */
-    public function testFrom()
+    public function testFromWithoutIndexHints()
     {
         $property = $this->builder_reflection->getProperty('from');
         $property->setAccessible(TRUE);
 
         $this->builder->from('table');
 
-        $this->assertEquals('FROM `table`', $property->getValue($this->builder));
+        $this->assertEquals('FROM table', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the FROM part of a query.
+     *
+     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testFromWithSingleIndexHint
+     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderQueryPartsTest::testFromWithMultipleIndexHints
+     * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::from
+     */
+    public function testFromWithIndexHints()
+    {
+        $property = $this->builder_reflection->getProperty('from');
+        $property->setAccessible(TRUE);
+
+        $hints = array('index_hint');
+
+        $this->builder->from('table', $hints);
+
+        $this->assertEquals('FROM table index_hint', $property->getValue($this->builder));
     }
 
     /**
@@ -145,7 +100,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
      */
     public function testFromReturnsSelfReference()
     {
-        $return = $this->builder->select_hex('col');
+        $return = $this->builder->from('table');
 
         $this->assertInstanceOf('Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder', $return);
         $this->assertSame($this->builder, $return);

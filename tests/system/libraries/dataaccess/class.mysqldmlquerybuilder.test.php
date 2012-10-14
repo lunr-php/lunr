@@ -158,6 +158,54 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
         return $illegals;
     }
 
+    /**
+     * Unit Test Data Provider for invalid indeces.
+     *
+     * @return array $indeces Array of invalid indeces
+     */
+    public function invalidIndecesProvider()
+    {
+        $indeces   = array();
+        $indeces[] = array(NULL);
+        $indeces[] = array(FALSE);
+        $indeces[] = array('string');
+        $indeces[] = array(new \stdClass());
+        $indeces[] = array(array());
+
+        return $indeces;
+    }
+
+    /**
+     * Unit Test Data Provider for valid Index Keywords.
+     *
+     * @return array $keywords Array of valid index keywords.
+     */
+    public function validIndexKeywordProvider()
+    {
+        $keywords   = array();
+        $keywords[] = array('USE');
+        $keywords[] = array('IGNORE');
+        $keywords[] = array('FORCE');
+
+        return $keywords;
+    }
+
+    /**
+     * Unit Test Data Provider for valid Index use definitions.
+     *
+     * @return array $for Array of valid index use definitions.
+     */
+    public function validIndexForProvider()
+    {
+        $for   = array();
+        $for[] = array('JOIN');
+        $for[] = array('ORDER BY');
+        $for[] = array('GROUP BY');
+        $for[] = array('');
+
+        return $for;
+    }
+
 }
 
 ?>
