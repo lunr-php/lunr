@@ -142,7 +142,7 @@ abstract class DatabaseDMLQueryBuilder
     /**
      * Define and escape input as column.
      *
-     * @param mixed  $name      Input
+     * @param String $name      Input
      * @param String $collation Collation name
      *
      * @return String $return Defined and escaped column name
@@ -150,6 +150,64 @@ abstract class DatabaseDMLQueryBuilder
     public function column($name, $collation = '')
     {
         return trim($this->collate($this->escape_column_name($name), $collation));
+    }
+
+    /**
+     * Define and escape input as a result column.
+     *
+     * @param String $column Result column name
+     * @param String $alias  Alias
+     *
+     * @return String $return Defined and escaped result column
+     */
+    public function result_column($column, $alias = '')
+    {
+        $column = $this->escape_column_name($column);
+
+        if ($alias === '' || $column === '*')
+        {
+            return $column;
+        }
+        else
+        {
+            return $column .  ' AS `' . $alias . '`';
+        }
+    }
+
+    /**
+     * Define and escape input as a result column and transform values to hexadecimal.
+     *
+     * @param String $column Result column name
+     * @param String $alias  Alias
+     *
+     * @return String $return Defined and escaped result column
+     */
+    public function hex_result_column($column, $alias = '')
+    {
+        $alias = ($alias === '') ? $column : $alias;
+        return 'HEX(' . $this->escape_column_name($column) .  ') AS `' . $alias . '`';
+    }
+
+    /**
+     * Define and escape input as table.
+     *
+     * @param String $table Table name
+     * @param String $alias Alias
+     *
+     * @return String $return Defined and escaped table
+     */
+    public function table($table, $alias = '')
+    {
+        $table = $this->escape_column_name($table);
+
+        if ($alias === '')
+        {
+            return $table;
+        }
+        else
+        {
+            return $table .  ' AS `' . $alias . '`';
+        }
     }
 
     /**
@@ -175,45 +233,41 @@ abstract class DatabaseDMLQueryBuilder
     /**
      * Define a SELECT clause.
      *
-     * @param String  $select The columns to select
-     * @param Boolean $escape Whether to escape the select statement or not.
-     *                        Default to TRUE
-     * @param Boolean $hex    Whether to represent the selected column data as hexadecimal or not.
-     *                        Default to FALSE
+     * @param String $select The columns to select
      *
      * @return void
      */
-    protected function sql_select($select, $escape = TRUE, $hex = FALSE)
+    protected function sql_select($select)
     {
         if ($this->select != '')
         {
             $this->select .= ', ';
         }
 
-        if ($escape === TRUE)
-        {
-            $this->select .= $this->escape_alias($select, $hex);
-        }
-        elseif ($hex === TRUE)
-        {
-            $this->select .= 'HEX(' . $select . ') AS ' . $select;
-        }
-        else
-        {
-            $this->select .= $select;
-        }
+        $this->select .= $select;
     }
 
     /**
      * Define FROM clause of the SQL statement.
      *
-     * @param String $table Table name
+     * @param String $table       Table reference
+     * @param array  $index_hints Array of Index Hints
      *
      * @return void
      */
-    protected function sql_from($table)
+    protected function sql_from($table, $index_hints = NULL)
     {
-        $this->from = 'FROM ' . $this->escape_alias($table);
+        if (is_array($index_hints) && !empty($index_hints))
+        {
+            $index_hints = array_diff($index_hints, array(NULL));
+            $hints = ' ' . implode(', ', $index_hints);
+        }
+        else
+        {
+            $hints = '';
+        }
+
+        $this->from = 'FROM ' . $table . $hints;
     }
 
     /**
@@ -384,66 +438,6 @@ abstract class DatabaseDMLQueryBuilder
     }
 
     /**
-     * Escape column names for statements using the "AS" operator.
-     *
-     * @param String  $cols Column(s)
-     * @param Boolean $hex  Whether we should consider the values
-     *                      as hexadecimal or not.
-     *
-     * @return String escaped column list
-     */
-    protected function escape_alias($cols, $hex = FALSE)
-    {
-        $cols = explode(',', $cols);
-        $string = '';
-
-        foreach ($cols AS $value)
-        {
-            $name = trim($value);
-            $alias = $name;
-
-            if (strpos($value, ' AS '))
-            {
-                $col   = explode(' AS ', $value);
-                $name  = trim($col[0]);
-                $alias = trim($col[1]);
-            }
-            elseif (strpos($value, ' as '))
-            {
-                $col   = explode(' as ', $value);
-                $name  = trim($col[0]);
-                $alias = trim($col[1]);
-            }
-            elseif ($name == '*')
-            {
-                $string .= $name . ', ';
-                continue;
-            }
-
-            if ($hex === TRUE)
-            {
-                $string .= 'HEX(' . $this->escape_column_name($name) . ')';
-                $string .= ' AS `' . $alias . '`, ';
-            }
-            else
-            {
-                $string .= $this->escape_column_name($name);
-
-                if ($name != $alias)
-                {
-                    $string .= ' AS `' . $alias . '`, ';
-                }
-                else
-                {
-                    $string .= ', ';
-                }
-            }
-        }
-
-        return trim($string, ', ');
-    }
-
-    /**
      * Define and escape input as value.
      *
      * @param mixed  $value     Input
@@ -490,26 +484,10 @@ abstract class DatabaseDMLQueryBuilder
      * Define a SELECT clause.
      *
      * @param String $select The columns to select
-     * @param String $escape Whether to escape the select statement or not.
-     *                       Default to "TRUE"
      *
      * @return DatabaseDMLQueryBuilder $self Self reference
      */
-    public abstract function select($select, $escape = TRUE);
-
-    /**
-     * Define a SELECT clause, converting the column data to HEX values.
-     *
-     * If no alias name is specified the original column name minus
-     * the surrounding HEX() is taken.
-     *
-     * @param String $select The columns to select
-     * @param String $escape Whether to escape the select statement or not.
-     *                       Default to "TRUE"
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function select_hex($select, $escape = TRUE);
+    public abstract function select($select);
 
     /**
      * Define FROM clause of the SQL statement.

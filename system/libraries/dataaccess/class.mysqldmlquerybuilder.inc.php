@@ -125,6 +125,50 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define and escape input as index hint.
+     *
+     * @param String $keyword Whether to USE, FORCE or IGNORE the index/indeces
+     * @param array  $indeces Array of indeces
+     * @param String $for     Whether to use the index hint for JOIN, ORDER BY or GROUP BY
+     *
+     * @return mixed $return NULL for invalid indeces, escaped string otherwise.
+     */
+    public function index_hint($keyword, $indeces, $for = '')
+    {
+        if (!is_array($indeces) || empty($indeces))
+        {
+            return NULL;
+        }
+
+        $keyword = strtoupper($keyword);
+
+        $valid_keywords = array('USE', 'IGNORE', 'FORCE');
+        $valid_for = array('JOIN', 'ORDER BY', 'GROUP BY', '');
+
+        if (!in_array($keyword, $valid_keywords))
+        {
+            $keyword = 'USE';
+        }
+
+        if (!in_array($for, $valid_for))
+        {
+            $for = '';
+        }
+
+        $indeces = array_map(array($this, 'escape_column_name'), $indeces);
+        $indeces = implode(', ', $indeces);
+
+        if ($for === '')
+        {
+            return $keyword . ' INDEX (' . $indeces . ')';
+        }
+        else
+        {
+            return $keyword . ' INDEX FOR ' . $for . ' (' . $indeces . ')';
+        }
+    }
+
+    /**
      * Define the mode of the SELECT clause.
      *
      * @param String $mode The select mode you want to use
@@ -163,46 +207,27 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a SELECT clause.
      *
-     * @param String $select The columns to select
-     * @param String $escape Whether to escape the select statement or not.
-     *                       Default to "TRUE"
+     * @param String $select The column(s) to select
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
-    public function select($select, $escape = TRUE)
+    public function select($select)
     {
-        $this->sql_select($select, $escape);
-        return $this;
-    }
-
-    /**
-     * Define a SELECT clause, converting the column data to HEX values.
-     *
-     * If no alias name is specified the original column name minus
-     * the surrounding HEX() is taken.
-     *
-     * @param String $select The columns to select
-     * @param String $escape Whether to escape the select statement or not.
-     *                       Default to "TRUE"
-     *
-     * @return MySQLDMLQueryBuilder $self Self reference
-     */
-    public function select_hex($select, $escape = TRUE)
-    {
-        $this->sql_select($select, $escape, TRUE);
+        $this->sql_select($select);
         return $this;
     }
 
     /**
      * Define FROM clause of the SQL statement.
      *
-     * @param String $table Table name
+     * @param String $table       Table reference
+     * @param array  $index_hints Array of Index Hints
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
-    public function from($table)
+    public function from($table, $index_hints = NULL)
     {
-        $this->sql_from($table);
+        $this->sql_from($table, $index_hints);
         return $this;
     }
 
