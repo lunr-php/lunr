@@ -267,7 +267,16 @@ abstract class DatabaseDMLQueryBuilder
             $hints = '';
         }
 
-        $this->from = 'FROM ' . $table . $hints;
+        if ($this->from == '')
+        {
+            $this->from = 'FROM ';
+        }
+        else
+        {
+            $this->from .= ', ';
+        }
+
+        $this->from .= $table . $hints;
     }
 
     /**
