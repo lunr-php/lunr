@@ -335,11 +335,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
     }
 
     /**
-     * Test that result_cell() returns an array of values if query has results.
+     * Test that result_cell() returns a value if query has results.
      *
      * @covers Lunr\Libraries\DataAccess\DatabaseAccessObject::result_cell
      */
-    public function testResultCellReturnsArrayIfQueryHasResults()
+    public function testResultCellReturnsValueIfQueryHasResults()
     {
         $query = $this->getMockBuilder('Lunr\Libraries\DataAccess\MySQLQueryResult')
                       ->disableOriginalConstructor()
