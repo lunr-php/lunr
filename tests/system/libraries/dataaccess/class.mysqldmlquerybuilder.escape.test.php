@@ -279,16 +279,16 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
     }
 
     /**
-     * Test escaping an index hint with invalid indeces.
+     * Test escaping an index hint with invalid indices.
      *
-     * @param mixed $indeces Invalid indeces value
+     * @param mixed $indices Invalid indices value
      *
-     * @dataProvider invalidIndecesProvider
+     * @dataProvider invalidIndicesProvider
      * @covers       Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::index_hint
      */
-    public function testEscapingIndexHintWithInvalidIndeces($indeces)
+    public function testEscapingIndexHintWithInvalidIndices($indices)
     {
-        $this->assertNull($this->builder->index_hint('', '', $indeces));
+        $this->assertNull($this->builder->index_hint('', '', $indices));
     }
 
     /**
@@ -302,9 +302,9 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      */
     public function testEscapingIndexHintWithValidKeyword($keyword)
     {
-        $indeces = array('index', 'index');
+        $indices = array('index', 'index');
 
-        $value = $this->builder->index_hint($keyword, $indeces);
+        $value = $this->builder->index_hint($keyword, $indices);
 
         $this->assertEquals($keyword . ' INDEX (`index`, `index`)', $value);
     }
@@ -317,9 +317,9 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      */
     public function testEscapingIndexHintWithInvalidKeyword()
     {
-        $indeces = array('index', 'index');
+        $indices = array('index', 'index');
 
-        $value = $this->builder->index_hint('invalid', $indeces);
+        $value = $this->builder->index_hint('invalid', $indices);
 
         $this->assertEquals('USE INDEX (`index`, `index`)', $value);
     }
@@ -335,9 +335,9 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      */
     public function testEscapingIndexHintWithValidFor($for)
     {
-        $indeces = array('index', 'index');
+        $indices = array('index', 'index');
 
-        $value = $this->builder->index_hint('USE', $indeces, $for);
+        $value = $this->builder->index_hint('USE', $indices, $for);
 
         if ($for === '')
         {
@@ -357,9 +357,9 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      */
     public function testEscapingIndexHintWithInvalidFor()
     {
-        $indeces = array('index', 'index');
+        $indices = array('index', 'index');
 
-        $value = $this->builder->index_hint('invalid', $indeces, 'invalid');
+        $value = $this->builder->index_hint('invalid', $indices, 'invalid');
 
         $this->assertEquals('USE INDEX (`index`, `index`)', $value);
     }

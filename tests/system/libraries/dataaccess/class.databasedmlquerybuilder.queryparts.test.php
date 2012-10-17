@@ -163,7 +163,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      *
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_from
      */
-    public function testIncrementalFromWithoutIndeces()
+    public function testIncrementalFromWithoutIndices()
     {
         $method = $this->builder_reflection->getMethod('sql_from');
         $method->setAccessible(TRUE);
@@ -184,7 +184,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      *
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_from
      */
-    public function testIncrementalFromWithIndeces()
+    public function testIncrementalFromWithIndices()
     {
         $method = $this->builder_reflection->getMethod('sql_from');
         $method->setAccessible(TRUE);

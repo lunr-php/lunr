@@ -159,20 +159,20 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Unit Test Data Provider for invalid indeces.
+     * Unit Test Data Provider for invalid indices.
      *
-     * @return array $indeces Array of invalid indeces
+     * @return array $indices Array of invalid indices
      */
-    public function invalidIndecesProvider()
+    public function invalidIndicesProvider()
     {
-        $indeces   = array();
-        $indeces[] = array(NULL);
-        $indeces[] = array(FALSE);
-        $indeces[] = array('string');
-        $indeces[] = array(new \stdClass());
-        $indeces[] = array(array());
+        $indices   = array();
+        $indices[] = array(NULL);
+        $indices[] = array(FALSE);
+        $indices[] = array('string');
+        $indices[] = array(new \stdClass());
+        $indices[] = array(array());
 
-        return $indeces;
+        return $indices;
     }
 
     /**
