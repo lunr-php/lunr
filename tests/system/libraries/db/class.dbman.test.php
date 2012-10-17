@@ -1,12 +1,30 @@
 <?php
 
+/**
+ * This file contains the DBManTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    DB
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright  2011-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
+ */
+
 use Lunr\Libraries\Database\DBMan;
 
 include_once("conf.database.inc.php");
 
 /**
  * This tests Lunr's DBMan class
- * @covers Lunr\Libraries\Database\DBMan
+ *
+ * @category   Libraries
+ * @package    DB
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\Database\DBMan
  */
 class DBManTest extends PHPUnit_Framework_TestCase
 {

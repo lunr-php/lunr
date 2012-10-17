@@ -8,8 +8,9 @@
  * @category   Libraries
  * @package    DataAccess
  * @subpackage Tests
- * @author     M2Mobi <info@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Libraries\DataAccess;
@@ -21,7 +22,7 @@ namespace Lunr\Libraries\DataAccess;
  * @category   Libraries
  * @package    DataAccess
  * @subpackage Tests
- * @author     M2Mobi <info@m2mobi.com>
+ * @author     Olivier Wizen <olivier@m2mobi.com>
  * @covers     Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder
  */
 class MySQLDMLQueryBuilderLimitTest extends MySQLDMLQueryBuilderTest
