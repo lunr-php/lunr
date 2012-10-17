@@ -63,8 +63,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     public function __destruct()
     {
-        $this->db   = NULL;
-        $this->pool = NULL;
+        # Nothing to do here yet.
     }
 
     /**
