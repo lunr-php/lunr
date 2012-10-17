@@ -9,8 +9,9 @@
  * @category   Libraries
  * @package    OAuth
  * @subpackage Libraries
- * @author     M2Mobi <info@m2mobi.com>
  * @author     Julio Foulquié <julio@m2mobi.com>
+ * @copyright  2011-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Libraries\OAuth;
@@ -21,7 +22,6 @@ namespace Lunr\Libraries\OAuth;
  * @category   Libraries
  * @package    OAuth
  * @subpackage Libraries
- * @author     M2Mobi <info@m2mobi.com>
  * @author     Julio Foulquié <julio@m2mobi.com>
  */
 class SocialMessage

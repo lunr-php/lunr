@@ -9,7 +9,8 @@
  * @package    DataAccess
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     M2Mobi <info@m2mobi.com>
+ * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Libraries\DataAccess;
@@ -21,7 +22,6 @@ namespace Lunr\Libraries\DataAccess;
  * @package    DataAccess
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     M2Mobi <info@m2mobi.com>
  */
 interface DatabaseQueryResultInterface
 {

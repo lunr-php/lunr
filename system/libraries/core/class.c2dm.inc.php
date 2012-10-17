@@ -1,18 +1,18 @@
 <?php
 
 /**
-* This file contains the class C2DM which stands for Android Cloud To Device Messaging
-* framework. This class allows to send push notifications to Android devices.
-*
-* PHP Version 5.3
-*
-* @category   Libraries
-* @package    Core
-* @subpackage Libraries
-* @author     M2Mobi <info@m2mobi.com>
-* @author     Jose Viso <jose@m2mobi.com>
-*
-*/
+ * This file contains the class C2DM which stands for Android Cloud To Device Messaging
+ * framework. This class allows to send push notifications to Android devices.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     Jose Viso <jose@m2mobi.com>
+ * @copyright  2011-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
+ */
 
 namespace Lunr\Libraries\Core;
 use Lunr\Libraries\Network\Curl;
@@ -23,7 +23,6 @@ use Lunr\Libraries\Network\Curl;
  * @category   Libraries
  * @package    Core
  * @subpackage Libraries
- * @author     M2Mobi <info@m2mobi.com>
  * @author     Jose Viso <jose@m2mobi.com>
  */
 class C2DM

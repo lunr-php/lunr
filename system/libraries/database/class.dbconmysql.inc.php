@@ -10,10 +10,9 @@
  * @package    Database
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     M2Mobi <info@m2mobi.com>
- * @copyright  2009-2011, Heinz Wiesinger, Amsterdam, The Netherlands
- * @copyright  2010-2011, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://opensource.org/licenses/bsd-license BSD License
+ * @copyright  2009-2012, Heinz Wiesinger, Amsterdam, The Netherlands
+ * @copyright  2010-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Libraries\Database;
@@ -26,10 +25,6 @@ use Lunr\Libraries\Core\Output;
  * @package    Database
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     M2Mobi <info@m2mobi.com>
- * @copyright  2009-2011, Heinz Wiesinger, Amsterdam, The Netherlands
- * @copyright  2010-2011, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://opensource.org/licenses/bsd-license BSD License
  */
 class DBConMySQL extends DBCon
 {
