@@ -127,15 +127,15 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define and escape input as index hint.
      *
-     * @param String $keyword Whether to USE, FORCE or IGNORE the index/indeces
-     * @param array  $indeces Array of indeces
+     * @param String $keyword Whether to USE, FORCE or IGNORE the index/indices
+     * @param array  $indices Array of indices
      * @param String $for     Whether to use the index hint for JOIN, ORDER BY or GROUP BY
      *
-     * @return mixed $return NULL for invalid indeces, escaped string otherwise.
+     * @return mixed $return NULL for invalid indices, escaped string otherwise.
      */
-    public function index_hint($keyword, $indeces, $for = '')
+    public function index_hint($keyword, $indices, $for = '')
     {
-        if (!is_array($indeces) || empty($indeces))
+        if (!is_array($indices) || empty($indices))
         {
             return NULL;
         }
@@ -155,16 +155,16 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
             $for = '';
         }
 
-        $indeces = array_map(array($this, 'escape_column_name'), $indeces);
-        $indeces = implode(', ', $indeces);
+        $indices = array_map(array($this, 'escape_column_name'), $indices);
+        $indices = implode(', ', $indices);
 
         if ($for === '')
         {
-            return $keyword . ' INDEX (' . $indeces . ')';
+            return $keyword . ' INDEX (' . $indices . ')';
         }
         else
         {
-            return $keyword . ' INDEX FOR ' . $for . ' (' . $indeces . ')';
+            return $keyword . ' INDEX FOR ' . $for . ' (' . $indices . ')';
         }
     }
 
