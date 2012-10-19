@@ -631,6 +631,26 @@ class DBConMySQL extends DBCon
     }
 
     /**
+     * Define a JOIN clause.
+     *
+     * @param String $query The table name to join with
+     * @param String $on    Base information on what the join should be done
+     * @param String $sort  Sort of JOIN operation to be done
+     *                      (INNER JOIN by default)
+     *
+     * @return void
+     */
+    public function join_query($query, $on, $sort = 'INNER')
+    {
+        $this->join .= "$sort JOIN " . $query . ' ';
+
+        if (substr($sort, 0, 7) != 'NATURAL')
+        {
+            $this->join .= 'ON ' . $this->escape_on($on) . ' ';
+        }
+    }
+
+    /**
      * Start a WHERE clause group.
      *
      * @param String $connector Logical connector to use
