@@ -281,7 +281,7 @@ class DBConMySQL extends DBCon
      *
      * @return String SQL query
      */
-    public function preliminary_query($from)
+    public function preliminary_query($from, $union = FALSE)
     {
         $sql_command = '';
 
@@ -289,6 +289,12 @@ class DBConMySQL extends DBCon
         {
             $sql_command .= $this->union;
         }
+
+        if (($union === TRUE) || ($this->union != ''))
+        {
+            $sql_command .= '(';
+        }
+
         if ($this->select != '')
         {
             $sql_command .= $this->select;
@@ -328,6 +334,11 @@ class DBConMySQL extends DBCon
         if ($this->for_update)
         {
             $sql_command .= ' FOR UPDATE';
+        }
+
+        if (($union === TRUE) || ($this->union != ''))
+        {
+            $sql_command .= ')';
         }
 
         return $sql_command;
@@ -418,7 +429,7 @@ class DBConMySQL extends DBCon
             if ($this->union != '')
             {
                 $sql_command .= $this->union;
-                $this->union = '';
+                $sql_command .= '(';
             }
 
             if ($this->select != '')
@@ -467,6 +478,12 @@ class DBConMySQL extends DBCon
             {
                 $sql_command .= ' FOR UPDATE';
                 $this->for_update = FALSE;
+            }
+
+            if ($this->union != '')
+            {
+                $sql_command .= ')';
+                $this->union = '';
             }
 
             $this->last_query = $sql_command;
@@ -1148,7 +1165,7 @@ class DBConMySQL extends DBCon
      */
     public function union($from)
     {
-        $this->union = $this->preliminary_query($from) . ' UNION ';
+        $this->union = $this->preliminary_query($from, TRUE) . ' UNION ';
         $this->limit = '';
         $this->where = '';
         $this->select = '';
