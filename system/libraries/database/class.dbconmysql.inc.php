@@ -1493,9 +1493,26 @@ class DBConMySQL extends DBCon
      */
     private function escape_on($string)
     {
-        $parts = explode('=', $string);
-        $return  = $this->escape_columns($parts[0]) . ' = ';
-        $return .= $this->escape_columns($parts[1]);
+        if (strpos($string, ' AND '))
+        {
+            $clauses = explode(' AND ', $string);
+        }
+        else
+        {
+            $clauses[0] = $string;
+        }
+
+        $return = '';
+
+        foreach ($clauses AS $part)
+        {
+            $parts = explode('=', $part);
+            $return .= $this->escape_columns($parts[0]) . ' = ';
+            $return .= $this->escape_columns($parts[1]);
+            $return .= ' AND ';
+        }
+
+        $return = trim($return, ' AND ');
         return $return;
     }
 
