@@ -1,10 +1,28 @@
 <?php
 
+/**
+ * This file contains the DateTimeTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright  2011-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
+ */
+
 use Lunr\Libraries\Core\M2DateTime;
 
 /**
  * This tests Lunr's M2DateTime class
- * @covers Lunr\Libraries\Core\M2DateTime
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\Core\DateTime
  */
 class M2DateTimeTest extends PHPUnit_Framework_TestCase
 {

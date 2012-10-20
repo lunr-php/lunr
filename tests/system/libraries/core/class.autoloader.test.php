@@ -1,10 +1,28 @@
 <?php
 
+/**
+ * This file contains the AutoloaderTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright  2011-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
+ */
+
 use Lunr\Libraries\Core\Autoloader;
 
 /**
- * This tests Lunr's Autoloader class
- * @covers Lunr\Libraries\Core\Autoloader
+ * This class contains the tests for the autoloader class.
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\Core\Autoloader
  */
 class AutoloaderTest extends PHPUnit_Framework_TestCase
 {

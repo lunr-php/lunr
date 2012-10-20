@@ -1,13 +1,31 @@
 <?php
 
+/**
+ * This file contains the L10nTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    L10n
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright  2011-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
+ */
+
 use Lunr\Libraries\L10n\L10n;
 use Lunr\Libraries\Core\M2DateTime;
 
 include_once("conf.l10n.inc.php");
 
 /**
- * This tests Lunr's L10n class
- * @covers Lunr\Libraries\L10n\L10n
+ * This class contains test methods for the L10n class.
+ *
+ * @category   Libraries
+ * @package    L10n
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\L10n\L10n
  */
 class L10nTest extends PHPUnit_Framework_TestCase
 {

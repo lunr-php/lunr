@@ -1,11 +1,29 @@
 <?php
 
+/**
+ * This file contains the ViewTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright  2011-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
+ */
+
 use Lunr\Mocks\Libraries\Core\MockView;
 use Lunr\Mocks\Libraries\L10n\MockL10nProvider;
 
 /**
- * This tests Lunr's View class
- * @covers Lunr\Libraries\Core\View
+ * This class tests for the view class.
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\Core\View
  */
 class ViewTest extends PHPUnit_Framework_TestCase
 {

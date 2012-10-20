@@ -1,10 +1,28 @@
 <?php
 
+/**
+ * This file contains the VerificationTest class.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright  2011-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
+ */
+
 use Lunr\Libraries\Core\Verification;
 
 /**
  * This tests Lunr's Verification class
- * @covers Lunr\Libraries\Core\Verification
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Libraries\Core\Verification
  */
 class VerificationTest extends PHPUnit_Framework_TestCase
 {
