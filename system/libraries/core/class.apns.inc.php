@@ -1,20 +1,20 @@
 <?php
 
 /**
-* This file contains the class APNS which stands for Apple Push Notifications
-* System. This class allows to send push notifications to Apple devices and
-* manage the list of devices which are recorded.
-*
-* PHP Version 5.3
-*
-* @category   Libraries
-* @package    Core
-* @subpackage Libraries
-* @author     M2Mobi <info@m2mobi.com>
-* @author     Julio Foulquié <julio@m2mobi.com>
-* @author     Heinz Wiesinger <heinz@m2mobi.com>
-*
-*/
+ * This file contains the class APNS which stands for Apple Push Notifications
+ * System. This class allows to send push notifications to Apple devices and
+ * manage the list of devices which are recorded.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Libraries
+ * @package    Core
+ * @subpackage Libraries
+ * @author     Julio Foulquié <julio@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright  2010-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
+ */
 
 namespace Lunr\Libraries\Core;
 
@@ -24,7 +24,6 @@ namespace Lunr\Libraries\Core;
  * @category   Libraries
  * @package    Core
  * @subpackage Libraries
- * @author     M2Mobi <info@m2mobi.com>
  * @author     Julio Foulquié <julio@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */

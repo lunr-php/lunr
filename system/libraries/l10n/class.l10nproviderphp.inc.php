@@ -9,8 +9,10 @@
  * @category   Libraries
  * @package    L10n
  * @subpackage Libraries
- * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Jose Viso <jose@m2mobi.com>
+ * @copyright  2011-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Libraries\L10n;
@@ -21,8 +23,8 @@ namespace Lunr\Libraries\L10n;
  * @category   Libraries
  * @package    L10n
  * @subpackage Libraries
- * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Jose Viso <jose@m2mobi.com>
  */
 class L10nProviderPHP extends L10nProvider
 {

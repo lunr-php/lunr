@@ -9,10 +9,10 @@
  * @category   Libraries
  * @package    Core
  * @subpackage Libraries
- * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Jose Viso <jose@m2mobi.com>
- *
+ * @copyright  2010-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Libraries\Core;
@@ -25,7 +25,6 @@ namespace Lunr\Libraries\Core;
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Jose Viso <jose@m2mobi.com>
- *
  */
 class M2DateTime
 {
