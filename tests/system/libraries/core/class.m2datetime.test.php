@@ -22,7 +22,7 @@ use Lunr\Libraries\Core\M2DateTime;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Libraries\Core\DateTime
+ * @covers     Lunr\Libraries\Core\M2DateTime
  */
 class M2DateTimeTest extends PHPUnit_Framework_TestCase
 {
