@@ -61,7 +61,7 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
      *
      * @dataProvider columnNameProvider
      * @depends      testCollateWithValueOnly
-     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::column
      */
     public function testColumnWithoutCollation($col, $escaped)
@@ -79,7 +79,7 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
      *
      * @dataProvider columnNameProvider
      * @depends      testCollateWithCollation
-     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::column
      */
     public function testColumnWithCollation($col, $escaped)
@@ -96,7 +96,7 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
      * @param String $escaped Expected escaped column name
      *
      * @dataProvider columnNameProvider
-     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::result_column
      */
     public function testResultColumnWithoutAlias($col, $escaped)
@@ -113,7 +113,7 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
      * @param String $escaped Expected escaped column name
      *
      * @dataProvider columnNameProvider
-     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::result_column
      */
     public function testResultColumnWithAlias($col, $escaped)
@@ -138,7 +138,7 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
      * @param String $escaped Expected escaped column name
      *
      * @dataProvider columnNameProvider
-     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::hex_result_column
      */
     public function testHexResultColumnWithoutAlias($col, $escaped)
@@ -155,7 +155,7 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
      * @param String $escaped Expected escaped column name
      *
      * @dataProvider columnNameProvider
-     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::hex_result_column
      */
     public function testHexResultColumnWithAlias($col, $escaped)
@@ -173,7 +173,7 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
      * @param String $escaped Expected escaped table name
      *
      * @dataProvider tableNameProvider
-     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::table
      */
     public function testTableWithoutAlias($table, $escaped)
@@ -190,7 +190,7 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
      * @param String $escaped Expected escaped table name
      *
      * @dataProvider tableNameProvider
-     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::table
      */
     public function testTableWithAlias($table, $escaped)

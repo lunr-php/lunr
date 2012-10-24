@@ -34,11 +34,11 @@ class DatabaseDMLQueryBuilderEscapeTest extends DatabaseDMLQueryBuilderTest
      * @param String $escaped Expected escaped column name
      *
      * @dataProvider columnNameProvider
-     * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::escape_column_name
+     * @covers       Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::escape_location_reference
      */
-    public function testEscapeColumnName($col, $escaped)
+    public function testEscapeLocationReference($col, $escaped)
     {
-        $method = $this->builder_reflection->getMethod('escape_column_name');
+        $method = $this->builder_reflection->getMethod('escape_location_reference');
         $method->setAccessible(TRUE);
 
         $this->assertEquals($escaped, $method->invokeArgs($this->builder, array($col)));

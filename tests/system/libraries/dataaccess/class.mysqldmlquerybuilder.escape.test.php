@@ -297,7 +297,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      * @param String $keyword Valid index keyword
      *
      * @dataProvider validIndexKeywordProvider
-     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::index_hint
      */
     public function testEscapingIndexHintWithValidKeyword($keyword)
@@ -312,7 +312,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
     /**
      * Test escaping an index hint with an invalid keyword.
      *
-     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::index_hint
      */
     public function testEscapingIndexHintWithInvalidKeyword()
@@ -330,7 +330,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      * @param String $for Valid use definition
      *
      * @dataProvider validIndexForProvider
-     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @depends      Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::index_hint
      */
     public function testEscapingIndexHintWithValidFor($for)
@@ -352,7 +352,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
     /**
      * Test escaping an index hint with an invalid use definition.
      *
-     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeColumnName
+     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::index_hint
      */
     public function testEscapingIndexHintWithInvalidFor()
