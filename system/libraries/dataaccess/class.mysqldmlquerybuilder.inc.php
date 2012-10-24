@@ -155,7 +155,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
             $for = '';
         }
 
-        $indices = array_map(array($this, 'escape_column_name'), $indices);
+        $indices = array_map(array($this, 'escape_location_reference'), $indices);
         $indices = implode(', ', $indices);
 
         if ($for === '')

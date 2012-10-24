@@ -149,7 +149,7 @@ abstract class DatabaseDMLQueryBuilder
      */
     public function column($name, $collation = '')
     {
-        return trim($this->collate($this->escape_column_name($name), $collation));
+        return trim($this->collate($this->escape_location_reference($name), $collation));
     }
 
     /**
@@ -162,7 +162,7 @@ abstract class DatabaseDMLQueryBuilder
      */
     public function result_column($column, $alias = '')
     {
-        $column = $this->escape_column_name($column);
+        $column = $this->escape_location_reference($column);
 
         if ($alias === '' || $column === '*')
         {
@@ -185,7 +185,7 @@ abstract class DatabaseDMLQueryBuilder
     public function hex_result_column($column, $alias = '')
     {
         $alias = ($alias === '') ? $column : $alias;
-        return 'HEX(' . $this->escape_column_name($column) .  ') AS `' . $alias . '`';
+        return 'HEX(' . $this->escape_location_reference($column) .  ') AS `' . $alias . '`';
     }
 
     /**
@@ -198,7 +198,7 @@ abstract class DatabaseDMLQueryBuilder
      */
     public function table($table, $alias = '')
     {
-        $table = $this->escape_column_name($table);
+        $table = $this->escape_location_reference($table);
 
         if ($alias === '')
         {
@@ -420,13 +420,13 @@ abstract class DatabaseDMLQueryBuilder
     }
 
     /**
-     * Escape a result column name.
+     * Escape a location reference (database, table, column).
      *
      * @param String $col Column
      *
      * @return String escaped column list
      */
-    protected function escape_column_name($col)
+    protected function escape_location_reference($col)
     {
         $parts = explode('.', $col);
         $col = '';
