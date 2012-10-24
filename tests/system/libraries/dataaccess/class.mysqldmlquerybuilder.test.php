@@ -9,6 +9,7 @@
  * @package    DataAccess
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -117,6 +118,36 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
         $modes[] = array('SQL_CALC_FOUND_ROWS');
 
         return $modes;
+    }
+
+    /**
+     * Unit Test Data Provider for Delete modes
+     *
+     * @return array $modes Array of select modes
+     */
+    public function deleteModesStandardProvider()
+    {
+        $modes   = array();
+        $modes[] = array('LOW_PRIORITY');
+        $modes[] = array('QUICK');
+        $modes[] = array('IGNORE');
+
+        return $modes;
+    }
+
+    /**
+     * Unit Test Data Provider for Delete modes uppercasing
+     *
+     * @return array $expectedmodes Array of delete modes and their expected result
+     */
+    public function expectedDeleteModesProvider()
+    {
+        $expectedmodes   = array();
+        $expectedmodes[] = array('low_priority','LOW_PRIORITY');
+        $expectedmodes[] = array('QuIcK','QUICK');
+        $expectedmodes[] = array('IGNORE','IGNORE');
+
+        return $expectedmodes;
     }
 
     /**

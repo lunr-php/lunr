@@ -10,6 +10,7 @@
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -24,6 +25,7 @@ namespace Lunr\Libraries\DataAccess;
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  */
 abstract class DatabaseDMLQueryBuilder
 {
@@ -39,6 +41,18 @@ abstract class DatabaseDMLQueryBuilder
      * @var array
      */
     protected $select_mode;
+
+    /**
+     * SQL Query part: DELETE clause
+     * @var String
+     */
+    protected $delete;
+
+    /**
+     * SQL Query part: DELETE mode
+     * @var array
+     */
+    protected $delete_mode;
 
     /**
      * SQL Query part: FROM clause
@@ -89,6 +103,8 @@ abstract class DatabaseDMLQueryBuilder
     {
         $this->select = '';
         $this->select_mode = array();
+        $this->delete = '';
+        $this->delete_mode = array();
         $this->from   = '';
         $this->where  = '';
         $this->group_by = '';
@@ -105,6 +121,8 @@ abstract class DatabaseDMLQueryBuilder
     {
         unset($this->select);
         unset($this->select_mode);
+        unset($this->delete);
+        unset($this->delete_mode);
         unset($this->from);
         unset($this->where);
         unset($this->group_by);
@@ -137,6 +155,34 @@ abstract class DatabaseDMLQueryBuilder
         }
 
         return 'SELECT ' . $this->implode_query($components);
+    }
+
+    /**
+     * Construct and return a DELETE query.
+     *
+     * @return String $query The constructed query string.
+     */
+    public function get_delete_query()
+    {
+        $components   = array();
+        $components[] = 'delete_mode';
+        if($this->delete != ''){
+            $components[] = 'delete';
+            $components[] = 'from';
+            $components[] = 'where';
+        }else{
+            $components[] = 'from';
+            $components[] = 'where';
+            $components[] = 'order_by';
+            $components[] = 'limit';
+        }
+
+        if ($this->from == '')
+        {
+            return '';
+        }
+
+        return 'DELETE ' . $this->implode_query($components);
     }
 
     /**
@@ -246,6 +292,24 @@ abstract class DatabaseDMLQueryBuilder
 
         $this->select .= $select;
     }
+
+    /**
+     * Define a DELETE clause.
+     *
+     * @param String $delete The tables to delete from
+     *
+     * @return void
+     */
+    protected function sql_delete($delete)
+    {
+        if ($this->delete != '')
+        {
+            $this->delete .= ', ';
+        }
+
+        $this->delete .= $delete;
+    }
+
 
     /**
      * Define FROM clause of the SQL statement.
@@ -400,7 +464,7 @@ abstract class DatabaseDMLQueryBuilder
         {
             if (isset($this->$component) && ($this->$component != ''))
             {
-                if ($component === 'select_mode')
+                if (($component === 'select_mode') || ($component === 'delete_mode'))
                 {
                     $sql .= implode(' ', array_unique($this->$component)) . ' ';
                 }
@@ -497,6 +561,24 @@ abstract class DatabaseDMLQueryBuilder
      * @return DatabaseDMLQueryBuilder $self Self reference
      */
     public abstract function select($select);
+
+    /**
+     * Define the mode of the DELETE clause.
+     *
+     * @param String $mode The delete mode you want to use
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function delete_mode($mode);
+
+    /**
+     * Define a DELETE clause.
+     *
+     * @param String $delete The table references to delete from
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function delete($delete);
 
     /**
      * Define FROM clause of the SQL statement.

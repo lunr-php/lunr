@@ -10,6 +10,7 @@
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -24,6 +25,7 @@ namespace Lunr\Libraries\DataAccess;
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  * @covers     Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder
  */
 class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
@@ -46,6 +48,31 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     public function testSelectModeEmptyByDefault()
     {
         $property = $this->builder_reflection->getProperty('select_mode');
+        $property->setAccessible(TRUE);
+
+        $value = $property->getValue($this->builder);
+
+        $this->assertInternalType('array', $value);
+        $this->assertEmpty($value);
+    }
+
+    /**
+     * Test that delete is an empty string by default.
+     */
+    public function testDeleteEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('delete');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals('', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test that delete_mode is an empty array by default.
+     */
+    public function testDeleteModeEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('delete_mode');
         $property->setAccessible(TRUE);
 
         $value = $property->getValue($this->builder);
@@ -153,6 +180,29 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+     * Test imploding a query with dupliacte delete_mode values.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::implode_query
+     */
+    public function testImplodeQueryWithDuplicateDeleteModes()
+    {
+        $method = $this->builder_reflection->getMethod('implode_query');
+        $method->setAccessible(TRUE);
+
+        $from = $this->builder_reflection->getProperty('from');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'FROM table');
+
+        $select_mode = $this->builder_reflection->getProperty('delete_mode');
+        $select_mode->setAccessible(TRUE);
+        $select_mode->setValue($this->builder, array('QUICK', 'IGNORE', 'QUICK'));
+
+        $components = array('delete_mode', 'from');
+
+        $this->assertEquals('QUICK IGNORE FROM table', $method->invokeArgs($this->builder, array($components)));
+    }
+
+    /**
      * Test getting a select query.
      *
      * @depends testImplodeQueryWithEmptySelectComponent
@@ -175,6 +225,102 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
 
         $string = 'SELECT DISTINCT SQL_CACHE col FROM table';
         $this->assertEquals($string, $this->builder->get_select_query());
+    }
+
+    /**
+     * Test getting a delete query.
+     *
+     * @depends testImplodeQueryWithDuplicateDeleteModes
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_delete_query
+     */
+    public function testGetDeleteQuery()
+    {
+        $from = $this->builder_reflection->getProperty('from');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'FROM table');
+
+        $select_mode = $this->builder_reflection->getProperty('delete_mode');
+        $select_mode->setAccessible(TRUE);
+        $select_mode->setValue($this->builder, array('QUICK', 'IGNORE'));
+
+        $select = $this->builder_reflection->getProperty('delete');
+        $select->setAccessible(TRUE);
+        $select->setValue($this->builder, 'table.*');
+
+        $string = 'DELETE QUICK IGNORE table.* FROM table';
+        $this->assertEquals($string, $this->builder->get_delete_query());
+    }
+
+    /**
+     * Test getting a delete query with empty selection
+     *
+     * @depends testImplodeQueryWithDuplicateDeleteModes
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_delete_query
+     */
+    public function testGetEmptyDeleteQuery()
+    {
+        $from = $this->builder_reflection->getProperty('from');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'FROM table');
+
+        $select_mode = $this->builder_reflection->getProperty('delete_mode');
+        $select_mode->setAccessible(TRUE);
+        $select_mode->setValue($this->builder, array('QUICK', 'IGNORE'));
+
+        $string = 'DELETE QUICK IGNORE FROM table';
+        $this->assertEquals($string, $this->builder->get_delete_query());
+    }
+
+    /**
+     * Test getting a delete query with limit and orderBy
+     *
+     * @depends testImplodeQueryWithDuplicateDeleteModes
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_delete_query
+     */
+    public function testGetEmptyDeleteLimitOrderQuery()
+    {
+        $from = $this->builder_reflection->getProperty('from');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'FROM table');
+
+        $from = $this->builder_reflection->getProperty('limit');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'LIMIT 10 OFFSET 0');
+
+        $from = $this->builder_reflection->getProperty('order_by');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'ORDER BY col ASC');
+
+        $string = 'DELETE FROM table ORDER BY col ASC LIMIT 10 OFFSET 0';
+        $this->assertEquals($string, $this->builder->get_delete_query());
+    }
+
+    /**
+     * Test it is not possible to get a delete query with limit and orderBy when delete is not ''
+     *
+     * @depends testImplodeQueryWithDuplicateDeleteModes
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_delete_query
+     */
+    public function testGetDeleteLimitOrderQuery()
+    {
+        $from = $this->builder_reflection->getProperty('delete');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'table.*');
+
+        $from = $this->builder_reflection->getProperty('from');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'FROM table');
+
+        $from = $this->builder_reflection->getProperty('limit');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'LIMIT 10 OFFSET 0');
+
+        $from = $this->builder_reflection->getProperty('order_by');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'ORDER BY col ASC');
+
+        $string = 'DELETE table.* FROM table';
+        $this->assertEquals($string, $this->builder->get_delete_query());
     }
 
     /**

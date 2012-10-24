@@ -10,6 +10,7 @@
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -25,6 +26,7 @@ namespace Lunr\Libraries\DataAccess;
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  */
 class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
 {
@@ -214,6 +216,43 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     public function select($select)
     {
         $this->sql_select($select);
+        return $this;
+    }
+
+    /**
+     * Define the mode of the DELETE clause.
+     *
+     * @param String $mode The delete mode you want to use
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function delete_mode($mode)
+    {
+        $mode = strtoupper($mode);
+
+        switch ($mode)
+        {
+            case 'LOW_PRIORITY':
+            case 'QUICK':
+            case 'IGNORE':
+                $this->delete_mode[] = $mode;
+            default:
+                break;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Define a DELETE clause.
+     *
+     * @param String $delete The tables to delete from
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function delete($delete = '')
+    {
+        $this->sql_delete($delete);
         return $this;
     }
 
