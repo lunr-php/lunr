@@ -55,7 +55,7 @@ class RequestGetTest extends RequestTest
      * @dataProvider properRequestValueProvider
      * @covers       Lunr\Libraries\Core\Request::__get
      */
-    public function test_magic_get_method($key, $value)
+    public function testMagicGetMethod($key, $value)
     {
         $this->assertEquals($value, $this->request->$key);
     }
@@ -84,7 +84,7 @@ class RequestGetTest extends RequestTest
      * @dataProvider validJsonEnumProvider
      * @covers       Lunr\Libraries\Core\Request::get_get_data
      */
-    public function test_get_get_data($value, $key)
+    public function testGetGetData($value, $key)
     {
         $this->assertEquals($value, $this->request->get_get_data($key));
     }
@@ -101,7 +101,7 @@ class RequestGetTest extends RequestTest
      * @dataProvider validJsonEnumProvider
      * @covers       Lunr\Libraries\Core\Request::get_post_data
      */
-    public function test_get_post_data($value, $key)
+    public function testGetPostData($value, $key)
     {
         $this->assertEquals($value, $this->request->get_post_data($key));
     }
@@ -118,7 +118,7 @@ class RequestGetTest extends RequestTest
      * @dataProvider validJsonEnumProvider
      * @covers       Lunr\Libraries\Core\Request::get_cookie_data
      */
-    public function test_get_cookie_data($value, $key)
+    public function testGetCookieData($value, $key)
     {
         $this->assertEquals($value, $this->request->get_cookie_data($key));
     }
@@ -131,11 +131,11 @@ class RequestGetTest extends RequestTest
      * @runInSeparateProcess
      *
      * @depends      Lunr\Libraries\Core\RequestBaseTest::testSetJsonEnums
-     * @depends      test_get_post_data
+     * @depends      testGetPostData
      * @dataProvider validJsonEnumProvider
      * @covers       Lunr\Libraries\Core\Request::get_json_from_post
      */
-    public function test_get_valid_json_from_post($index)
+    public function testGetValidJsonFromPost($index)
     {
         $this->assertEquals($index, $this->request->get_json_from_post($index));
     }
@@ -148,11 +148,11 @@ class RequestGetTest extends RequestTest
      * @runInSeparateProcess
      *
      * @depends      Lunr\Libraries\Core\RequestBaseTest::testSetJsonEnums
-     * @depends      test_get_post_data
+     * @depends      testGetPostData
      * @dataProvider invalidKeyProvider
      * @covers       Lunr\Libraries\Core\Request::get_json_from_post
      */
-    public function test_get_non_existing_json_from_post_is_null($index)
+    public function testGetNonExistingJsonFromPostIsNull($index)
     {
         $this->assertNull($this->request->get_json_from_post($index));
     }
@@ -165,11 +165,11 @@ class RequestGetTest extends RequestTest
      * @runInSeparateProcess
      *
      * @depends      Lunr\Libraries\Core\RequestBaseTest::testSetJsonEnums
-     * @depends      test_get_get_data
+     * @depends      testGetGetData
      * @dataProvider validJsonEnumProvider
      * @covers       Lunr\Libraries\Core\Request::get_json_from_get
      */
-    public function test_get_valid_json_from_get($index)
+    public function testGetValidJsonFromGet($index)
     {
         $this->assertEquals($index, $this->request->get_json_from_get($index));
     }
@@ -182,11 +182,11 @@ class RequestGetTest extends RequestTest
      * @runInSeparateProcess
      *
      * @depends      Lunr\Libraries\Core\RequestBaseTest::testSetJsonEnums
-     * @depends      test_get_get_data
+     * @depends      testGetGetData
      * @dataProvider invalidKeyProvider
      * @covers       Lunr\Libraries\Core\Request::get_json_from_get
      */
-    public function test_get_non_existing_json_from_get_is_null($index)
+    public function testGetNonExistingJsonFromGetIsNull($index)
     {
         $this->assertNull($this->request->get_json_from_get($index));
     }
