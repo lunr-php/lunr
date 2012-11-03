@@ -118,7 +118,7 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::test_set_json_enums
+     * @depends      Lunr\Libraries\Core\RequestBaseTest::testSetJsonEnums
      * @depends      test_get_post_data
      * @dataProvider validJsonEnumProvider
      * @covers       Lunr\Libraries\Core\Request::get_json_from_post
@@ -135,7 +135,7 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::test_set_json_enums
+     * @depends      Lunr\Libraries\Core\RequestBaseTest::testSetJsonEnums
      * @depends      test_get_post_data
      * @dataProvider invalidKeyProvider
      * @covers       Lunr\Libraries\Core\Request::get_json_from_post
@@ -152,7 +152,7 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::test_set_json_enums
+     * @depends      Lunr\Libraries\Core\RequestBaseTest::testSetJsonEnums
      * @depends      test_get_get_data
      * @dataProvider validJsonEnumProvider
      * @covers       Lunr\Libraries\Core\Request::get_json_from_get
@@ -169,7 +169,7 @@ class RequestGetTest extends RequestTest
      *
      * @runInSeparateProcess
      *
-     * @depends      Lunr\Libraries\Core\RequestBaseTest::test_set_json_enums
+     * @depends      Lunr\Libraries\Core\RequestBaseTest::testSetJsonEnums
      * @depends      test_get_get_data
      * @dataProvider invalidKeyProvider
      * @covers       Lunr\Libraries\Core\Request::get_json_from_get

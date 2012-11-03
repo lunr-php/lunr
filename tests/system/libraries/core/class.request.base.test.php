@@ -39,7 +39,7 @@ class RequestBaseTest extends RequestTest
     /**
      * Check that post is empty if $_POST is empty.
      */
-    public function test_post_empty()
+    public function testPostEmpty()
     {
         $post = $this->reflection_request->getProperty('post');
         $post->setAccessible(TRUE);
@@ -49,7 +49,7 @@ class RequestBaseTest extends RequestTest
     /**
      * Check that get is empty if $_GET is empty.
      */
-    public function test_get_empty()
+    public function testGetEmpty()
     {
         $get = $this->reflection_request->getProperty('get');
         $get->setAccessible(TRUE);
@@ -59,7 +59,7 @@ class RequestBaseTest extends RequestTest
     /**
      * Check that cookie is empty if $_COOKIE is empty.
      */
-    public function test_cookie_empty()
+    public function testCookieEmpty()
     {
         $cookie = $this->reflection_request->getProperty('cookie');
         $cookie->setAccessible(TRUE);
@@ -69,7 +69,7 @@ class RequestBaseTest extends RequestTest
     /**
      * Check that json_enums is empty by default.
      */
-    public function test_json_enums_empty()
+    public function testJsonEnumsEmpty()
     {
         $json_enums = $this->reflection_request->getProperty('json_enums');
         $json_enums->setAccessible(TRUE);
@@ -84,7 +84,7 @@ class RequestBaseTest extends RequestTest
      *
      * @dataProvider requestValueProvider
      */
-    public function test_request_default_values($key, $value)
+    public function testRequestDefaultValues($key, $value)
     {
         $request = $this->reflection_request->getProperty('request');
         $request->setAccessible(TRUE);
@@ -95,10 +95,10 @@ class RequestBaseTest extends RequestTest
     /**
      * Test setting json enums.
      *
-     * @depends test_json_enums_empty
+     * @depends testJsonEnumsEmpty
      * @covers  Lunr\Libraries\Core\Request::set_json_enums
      */
-    public function test_set_json_enums()
+    public function testSetJsonEnums()
     {
         $JSON = $this->get_json_enums();
         $this->request->set_json_enums($JSON);
@@ -113,11 +113,11 @@ class RequestBaseTest extends RequestTest
      *
      * @param String $key key for a GET value
      *
-     * @depends      test_get_empty
+     * @depends      testGetEmpty
      * @dataProvider invalidKeyProvider
      * @covers       Lunr\Libraries\Core\Request::get_get_data
      */
-    public function test_get_get_data_when_get_empty($key)
+    public function testGetGetDataWhenGetEmpty($key)
     {
         $this->assertNull($this->request->get_get_data($key));
     }
@@ -127,11 +127,11 @@ class RequestBaseTest extends RequestTest
      *
      * @param String $key key for a POST value
      *
-     * @depends      test_post_empty
+     * @depends      testPostEmpty
      * @dataProvider invalidKeyProvider
      * @covers       Lunr\Libraries\Core\Request::get_post_data
      */
-    public function test_get_post_data_when_get_empty($key)
+    public function testGetPostDataWhenPostEmpty($key)
     {
         $this->assertNull($this->request->get_post_data($key));
     }
@@ -141,11 +141,11 @@ class RequestBaseTest extends RequestTest
      *
      * @param String $key key for a COOKIE value
      *
-     * @depends      test_cookie_empty
+     * @depends      testCookieEmpty
      * @dataProvider invalidKeyProvider
      * @covers       Lunr\Libraries\Core\Request::get_cookie_data
      */
-    public function test_get_cookie_data_when_get_empty($key)
+    public function testGetCookieDataWhenCookieEmpty($key)
     {
         $this->assertNull($this->request->get_cookie_data($key));
     }
@@ -156,11 +156,11 @@ class RequestBaseTest extends RequestTest
      * @param String $key   key for a request value
      * @param mixed  $value value of a request value
      *
-     * @depends      test_request_default_values
+     * @depends      testRequestDefaultValues
      * @dataProvider requestValueProvider
      * @covers       Lunr\Libraries\Core\Request::__get
      */
-    public function test_magic_get_method_when_get_empty($key, $value)
+    public function testMagicGetMethodWhenGetEmpty($key, $value)
     {
         $this->assertEquals($value, $this->request->$key);
     }
@@ -173,7 +173,7 @@ class RequestBaseTest extends RequestTest
      * @dataProvider unhandledMagicGetKeysProvider
      * @covers       Lunr\Libraries\Core\Request::__get
      */
-    public function test_magic_get_null_for_unhandled_keys($key)
+    public function testMagicGetIsNullForUnhandledKeys($key)
     {
         $this->assertNull($this->request->$key);
     }
