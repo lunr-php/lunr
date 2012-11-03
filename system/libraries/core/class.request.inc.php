@@ -50,13 +50,14 @@ class Request
 
     /**
      * Request parameters:
-     *  'protocol'  The protocol used for the request
-     *  'domain'    The domain used for the request
-     *  'port'      The port used for the request
-     *  'base_path' The path on the server to the application
-     *  'base_url'  All of the above combined
+     *  'protocol'   The protocol used for the request
+     *  'domain'     The domain used for the request
+     *  'port'       The port used for the request
+     *  'base_path'  The path on the server to the application
+     *  'base_url'   All of the above combined
      *
-     *  'sapi'      The PHP SAPI invoking the code
+     *  'sapi'       The PHP SAPI invoking the code
+     *  'host'       The hostname of the server the script is running on
      *
      *  'controller' The controller requested
      *  'method'     The method requested of that controller
@@ -85,6 +86,7 @@ class Request
         $this->json_enums = array();
 
         $this->request['sapi'] = PHP_SAPI;
+        $this->request['host'] = gethostname();
 
         $this->store_post();
         $this->store_get($configuration);
@@ -126,6 +128,7 @@ class Request
             case 'method':
             case 'params':
             case 'sapi':
+            case 'host':
                 return $this->request[$name];
                 break;
             default:

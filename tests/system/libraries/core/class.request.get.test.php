@@ -61,6 +61,18 @@ class RequestGetTest extends RequestTest
     }
 
     /**
+     * Test that the hostname value is returned correctly by the magic get method.
+     *
+     * @runInSeparateProcess
+     *
+     * @depends Lunr\EnvironmentTest::testRunkit
+     */
+    public function testGetHostname()
+    {
+        $this->assertEquals('Lunr', $this->request->host);
+    }
+
+    /**
      * Test getting GET data.
      *
      * @param String $value the expected value

@@ -51,12 +51,23 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
     protected $configuration;
 
     /**
+     * Runkit simulation code for getting the hostname.
+     * @var string
+     */
+    const GET_HOSTNAME = 'return "Lunr";';
+
+    /**
      * Shared TestCase Constructor code.
      *
      * @return void
      */
     public function setUpShared()
     {
+        if (function_exists('runkit_function_redefine'))
+        {
+            runkit_function_redefine('gethostname', '', self::GET_HOSTNAME);
+        }
+
         $configuration = $this->getMock('Lunr\Libraries\Core\Configuration');
 
         $map = array(

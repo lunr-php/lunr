@@ -93,6 +93,19 @@ class RequestBaseTest extends RequestTest
     }
 
     /**
+     * Test that the hostname is stored correctly in the constructor.
+     *
+     * @depends Lunr\EnvironmentTest::testRunkit
+     */
+    public function testHostnameIsSet()
+    {
+        $request = $this->reflection_request->getProperty('request');
+        $request->setAccessible(TRUE);
+        $request = $request->getValue($this->request);
+        $this->assertEquals('Lunr', $request['host']);
+    }
+
+    /**
      * Test setting json enums.
      *
      * @depends testJsonEnumsEmpty
