@@ -28,8 +28,8 @@ class Verification
 {
 
     /**
-     * Shared instance of the Logger class.
-     * @var Logger
+     * Shared instance of a Logger class.
+     * @var LoggerInterface
      */
     private $logger;
 
@@ -85,7 +85,7 @@ class Verification
     /**
      * Constructor.
      *
-     * @param Logger $logger Shared instance of the Logger class
+     * @param LoggerInterface $logger Shared instance of a Logger class
      */
     public function __construct($logger)
     {
@@ -153,7 +153,7 @@ class Verification
         }
         else
         {
-            $this->logger->log_error("Can't verify input dataset!");
+            $this->logger->error("Can't verify input dataset! Invalid dataset format.");
 
             # don't verify stale input against new ruleset
             if (!empty($this->data))
@@ -255,7 +255,7 @@ class Verification
     {
         if (trim($this->identifier) == '')
         {
-            $this->logger->log_errorln("Can't verify input. Empty Identifier!'", $this->logfile);
+            $this->logger->error("Can't verify input. Empty Identifier!'");
             return FALSE;
         }
 
@@ -295,10 +295,14 @@ class Verification
             {
                 if ($result !== TRUE)
                 {
-                    $val  = print_r($this->data[$index], TRUE);
-                    $type = gettype($this->data[$index]);
-                    $msg  = "Rule '$rule' failed for '$index' with value '$val' of type '$type'!";
-                    $this->logger->log_errorln($error_prefix . $msg, $this->logfile);
+                    $context['rule']  = $rule;
+                    $context['index'] = $index;
+                    $context['val']   = print_r($this->data[$index], TRUE);
+                    $context['type']  = gettype($this->data[$index]);
+
+                    $message = "Rule '{rule}' failed for '{index}' with value '{val}' of type '{type}'!";
+
+                    $this->logger->error($message, $context);
 
                     $valid = FALSE;
                 }
@@ -324,7 +328,9 @@ class Verification
 
         foreach ($this->superfluous as &$value)
         {
-            $this->logger->log_errorln($error_prefix . "Ruleset for non-existing key '$value'!", $this->logfile);
+            $context['key'] = $value;
+
+            $this->logger->error($error_prefix . "Ruleset for non-existing key '{key}'!", $context);
         }
 
         unset($value);
@@ -353,7 +359,9 @@ class Verification
 
         foreach ($unhandled_elements as $value)
         {
-            $this->logger->log_errorln($error_prefix . "Unhandled Index '$value'!", $this->logfile);
+            $context['index'] = $value;
+
+            $this->logger->error($error_prefix . "Unhandled Index '{index}'!", $context);
         }
 
         return FALSE;

@@ -30,16 +30,16 @@ class VerificationBaseTest extends VerificationTest
 {
 
     /**
-     * Test that the logger object is passed by reference.
+     * Test that the logger object is passed.
      */
-    public function testLoggerPassedByReference()
+    public function testLoggerPassed()
     {
         $property = $this->verification_reflection->getProperty('logger');
         $property->setAccessible(TRUE);
 
         $value = $property->getValue($this->verification);
 
-        $this->assertInstanceOf('Lunr\Core\Logger', $value);
+        $this->assertInstanceOf('Psr\Log\LoggerInterface', $value);
         $this->assertSame($this->logger, $value);
     }
 

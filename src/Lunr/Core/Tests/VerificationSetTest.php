@@ -36,7 +36,7 @@ class VerificationSetTest extends VerificationTest
      */
     public function testSetDataReturnsSelfReference()
     {
-        $set   = array();
+        $set   = array('1');
         $value = $this->verification->set_data($set);
 
         $this->assertInstanceOf('Lunr\Core\Verification', $value);
@@ -71,7 +71,7 @@ class VerificationSetTest extends VerificationTest
     public function testSetDataSetsEmptyArrayAsDataIfDatasetIsInvalid($value)
     {
         $this->logger->expects($this->once())
-                     ->method('log_error');
+                     ->method('error');
 
         $property = $this->verification_reflection->getProperty('data');
         $property->setAccessible(TRUE);
@@ -111,7 +111,7 @@ class VerificationSetTest extends VerificationTest
         $properties['pointer']->setValue($this->verification, 'test');
         $properties['identifier']->setValue($this->verification, 'Testing');
 
-        $set = array();
+        $set = array('1');
         $this->verification->set_data($set);
 
 

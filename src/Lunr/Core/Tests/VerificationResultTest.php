@@ -58,7 +58,7 @@ class VerificationResultTest extends VerificationTest
         $property->setValue($this->verification, array('test1', 'test2'));
 
         $this->logger->expects($this->exactly(2))
-                     ->method('log_errorln');
+                     ->method('error');
 
         $this->assertTrue($method->invokeArgs($this->verification, array('')));
     }
@@ -111,7 +111,7 @@ class VerificationResultTest extends VerificationTest
         $method->setAccessible(TRUE);
 
         $this->logger->expects($this->exactly(sizeof($data) - sizeof($result)))
-                     ->method('log_errorln');
+                     ->method('error');
 
         $this->assertFalse($method->invokeArgs($this->verification, array('')));
     }
@@ -124,6 +124,9 @@ class VerificationResultTest extends VerificationTest
      */
     public function testIsValidReturnsFalseIfIdentifierIsEmpty()
     {
+        $this->logger->expects($this->once())
+                     ->method('error');
+
         $this->assertFalse($this->verification->is_valid());
     }
 
@@ -135,6 +138,9 @@ class VerificationResultTest extends VerificationTest
      */
     public function testIsValidReturnsFalseIfCheckSuperfluousEnabledAndIsOvercheckedTrue()
     {
+        $this->logger->expects($this->exactly(2))
+                     ->method('error');
+
         $identifier = $this->verification_reflection->getProperty('identifier');
         $identifier->setAccessible(TRUE);
         $identifier->setValue($this->verification, 'testrun');
@@ -158,6 +164,9 @@ class VerificationResultTest extends VerificationTest
      */
     public function testIsValidReturnsFalseIfCheckRemainingEnabledAndIsFullyCheckedFalse()
     {
+        $this->logger->expects($this->once())
+                     ->method('error');
+
         $identifier = $this->verification_reflection->getProperty('identifier');
         $identifier->setAccessible(TRUE);
         $identifier->setValue($this->verification, 'testrun');
@@ -198,7 +207,7 @@ class VerificationResultTest extends VerificationTest
         $results->setValue($this->verification, array('test1' => $value, 'test2' => $value));
 
         $this->logger->expects($this->exactly(2))
-                     ->method('log_errorln');
+                     ->method('error');
 
         $this->assertFalse($this->verification->is_valid());
     }

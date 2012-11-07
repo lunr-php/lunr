@@ -56,9 +56,7 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->logger = $this->getMockBuilder('Lunr\Core\Logger')
-                             ->disableOriginalConstructor()
-                             ->getMock();
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->verification = new Verification($this->logger);
 
