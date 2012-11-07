@@ -61,6 +61,48 @@ abstract class DatabaseDMLQueryBuilder
     protected $from;
 
     /**
+     * SQL Query part: INTO clause
+     * @var String
+     */
+    protected $into;
+
+    /**
+     * SQL Query part: INSERT modes
+     * @var Array
+     */
+    protected $insert_mode;
+
+    /**
+     * SQL Query part: REPLACE modes
+     * @var String
+     */
+    protected $replace_mode;
+
+    /**
+     * SQL Query part: SET clause
+     * @var String
+     */
+    protected $set;
+
+    /**
+     * SQL Query part: Column names
+     * @var String
+     */
+    protected $column_names;
+
+    /**
+     * SQL Query part: VALUES
+     * @var String
+     */
+    protected $values;
+
+    /**
+     * SQL Query part: SELECT statement
+     * @var String
+     */
+    protected $select_statement;
+
+    /**
      * SQL Query part: WHERE clause
      * @var String
      */
@@ -112,6 +154,13 @@ abstract class DatabaseDMLQueryBuilder
         $this->order_by  = '';
         $this->limit  = '';
         $this->connector = '';
+        $this->into   = '';
+        $this->insert_mode  = array();
+        $this->replace_mode = '';
+        $this->set = '';
+        $this->column_names  = '';
+        $this->values  = '';
+        $this->select_statement = '';
     }
 
     /**
@@ -130,6 +179,13 @@ abstract class DatabaseDMLQueryBuilder
         unset($this->order_by);
         unset($this->limit);
         unset($this->connector);
+        unset($this->into);
+        unset($this->insert_mode);
+        unset($this->replace_mode);
+        unset($this->set);
+        unset($this->column_names);
+        unset($this->values);
+        unset($this->select_statement);
     }
 
     /**
@@ -184,6 +240,65 @@ abstract class DatabaseDMLQueryBuilder
 
         return 'DELETE ' . $this->implode_query($components);
     }
+
+    /**
+     * Construct and return a INSERT query.
+     *
+     * @return String $query The constructed query string.
+     */
+    public function get_insert_query()
+    {
+        $components   = array();
+        $components[] = 'insert_mode';
+        $components[] = 'into';
+        if($this->select_statement != '')
+        {
+            $components[] = 'select_statement';
+        }else if($this->set != '')
+        {
+            $components[] = 'set';
+        }else{
+            $components[] = 'column_names';
+            $components[] = 'values';
+        }
+
+        if ($this->into == '')
+        {
+            return '';
+        }
+
+        return 'INSERT ' . $this->implode_query($components);
+    }
+
+    /**
+     * Construct and return a REPLACE query.
+     *
+     * @return String $query The constructed query string.
+     */
+    public function get_replace_query()
+    {
+        $components   = array();
+        $components[] = 'replace_mode';
+        $components[] = 'into';
+        if($this->select_statement != '')
+        {
+            $components[] = 'select_statement';
+        }else if($this->set != '')
+        {
+            $components[] = 'set';
+        }else{
+            $components[] = 'column_names';
+            $components[] = 'values';
+        }
+
+        if ($this->into == '')
+        {
+            return '';
+        }
+
+        return 'REPLACE ' . $this->implode_query($components);
+    }
+
 
     /**
      * Define and escape input as column.
@@ -344,6 +459,103 @@ abstract class DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define INTO clause of the SQL statement.
+     *
+     * @param String $table       Table reference
+     *
+     * @return void
+     */
+    protected function sql_into($table)
+    {
+        $this->into = 'INTO '.$table;
+    }
+
+    /**
+     * Define SET clause of the SQL statement.
+     *
+     * @param Array $set Array containing escaped key->value pairs to be set
+     *
+     * @return void
+     */
+    protected function sql_set($set)
+    {
+        if($this->set == '')
+        {
+            $this->set = 'SET ';
+        }else{
+            $this->set .= ', ';
+        }
+        $coma = FALSE;
+        foreach ($set as $key => $value)
+        {
+            if($coma){
+                $this->set .= ', ';
+            }
+            $this->set .= $key.'='.$value;
+            $coma = TRUE;
+        }
+    }
+
+    /**
+     * Define Column names of the affected by Insert or Update SQL statement.
+     *
+     * @param Array $keys Array containing escaped field names to be set
+     *
+     * @return void
+     */
+    protected function sql_column_names($keys)
+    {
+        $this->column_names = '('.implode(',', $keys).') ';
+    }
+
+    /**
+     * Define Values for Insert or Update SQL statement.
+     *
+     * @param Array $values Array containing escaped values to be set, can be either an array or an array of arrays
+     *
+     * @return void
+     */
+    protected function sql_values($values)
+    {
+        if($this->values == '')
+        {
+            $this->values = 'VALUES ';
+        }else{
+            $this->values .= ', ';
+        }
+        if(!empty($values)){
+            if(is_array($values[0]))
+            {
+                for($i = 0; $i<count($values); $i++)
+                {
+                    if($i > 0)
+                    {
+                        $this->values .= ', ';
+                    }
+                    $this->values .= '('.implode(',', $values[$i]).')';
+                }
+            }else{
+                $this->values .= '('.implode(',', $values).')';
+            }
+        }
+    }
+
+    /**
+     * Define a Select statement for Insert statement.
+     *
+     * @param String $select SQL Select statement to be used in Insert
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public function sql_select_statement($select)
+    {
+        if(strpos($select, 'SELECT') === 0)
+        {
+            $this->select_statement = $select;
+        }
+    }
+
+    /**
      * Define a conditional clause for the SQL statement.
      *
      * @param String  $left     Left expression
@@ -464,7 +676,7 @@ abstract class DatabaseDMLQueryBuilder
         {
             if (isset($this->$component) && ($this->$component != ''))
             {
-                if (($component === 'select_mode') || ($component === 'delete_mode'))
+                if (($component === 'select_mode') || ($component === 'delete_mode') || ($component === 'insert_mode'))
                 {
                     $sql .= implode(' ', array_unique($this->$component)) . ' ';
                 }
@@ -588,6 +800,51 @@ abstract class DatabaseDMLQueryBuilder
      * @return DatabaseDMLQueryBuilder $self Self reference
      */
     public abstract function from($table);
+
+    /**
+     * Define INTO clause of the SQL statement.
+     *
+     * @param String $table Table name
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function into($table);
+
+    /**
+     * Define SET clause of the SQL statement.
+     *
+     * @param Array $set Array containing escaped key->value pairs to be set
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function set($set);
+
+    /**
+     * Define Column names of the affected by Insert or Update SQL statement.
+     *
+     * @param Array $keys Array containing escaped field names to be set
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function column_names($keys);
+
+    /**
+     * Define Values for Insert or Update SQL statement.
+     *
+     * @param Array $values Array containing escaped values to be set
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function values($values);
+
+    /**
+     * Define a Select statement for Insert statement.
+     *
+     * @param String $select SQL Select statement to be used in Insert
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function select_statement($select);
 
     /**
      * Define WHERE clause of the SQL statement.

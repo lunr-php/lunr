@@ -257,6 +257,57 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define the mode of the INSERT clause.
+     *
+     * @param String $mode The insert mode you want to use
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function insert_mode($mode)
+    {
+        $mode = strtoupper($mode);
+
+        switch ($mode)
+        {
+            case 'IGNORE':
+                $this->insert_mode['errors'] = $mode;
+                break;
+            case 'HIGH_PRIORITY':
+            case 'LOW_PRIORITY':
+            case 'DELAYED':
+                $this->insert_mode['priority'] = $mode;
+            default:
+                break;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Define the mode of the REPLACE clause.
+     *
+     * @param String $mode The replace mode you want to use
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function replace_mode($mode)
+    {
+        $mode = strtoupper($mode);
+
+        switch ($mode)
+        {
+            case 'LOW_PRIORITY':
+            case 'DELAYED':
+                $this->replace_mode = $mode;
+            default:
+                break;
+        }
+
+        return $this;
+    }
+
+
+    /**
      * Define FROM clause of the SQL statement.
      *
      * @param String $table       Table reference
@@ -267,6 +318,71 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     public function from($table, $index_hints = NULL)
     {
         $this->sql_from($table, $index_hints);
+        return $this;
+    }
+
+    /**
+     * Define INTO clause of the SQL statement.
+     *
+     * @param String $table       Table reference
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function into($table)
+    {
+        $this->sql_into($table);
+        return $this;
+    }
+
+    /**
+     * Define SET clause of the SQL statement.
+     *
+     * @param Array $set Array containing escaped key->value pairs to be set
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function set($set)
+    {
+        $this->sql_set($set);
+        return $this;
+    }
+
+    /**
+     * Define Column names of the affected by Insert or Update SQL statement.
+     *
+     * @param Array $keys Array containing escaped field names to be set
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public function column_names($keys)
+    {
+        $this->sql_column_names($keys);
+        return $this;
+    }
+
+    /**
+     * Define Values for Insert or Update SQL statement.
+     *
+     * @param Array $values Array containing escaped values to be set
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public function values($values)
+    {
+        $this->sql_values($values);
+        return $this;
+    }
+
+    /**
+     * Define a Select statement for Insert statement.
+     *
+     * @param String $select SQL Select statement to be used in Insert
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public function select_statement($select)
+    {
+        $this->sql_select_statement($select);
         return $this;
     }
 
