@@ -259,8 +259,8 @@ class LoggerTest extends PHPUnit_Framework_TestCase
     {
         $file = tempnam('/tmp', 'phpunit_');
 
-        $this->expectOutputRegex('/Xdebug: Foo(.)*/');
-        $this->logger->log_error('Foo', $file);
+        $this->expectOutputRegex('/^\nXdebug: WARNING: Foo/');
+        $this->logger->log_error('WARNING: Foo', $file);
 
         $this->assertFileEquals(dirname(__FILE__) . '/../../../../tests/statics/logs/error.log', $file);
     }
@@ -276,8 +276,8 @@ class LoggerTest extends PHPUnit_Framework_TestCase
     {
         $file = tempnam('/tmp', 'phpunit_');
 
-        $this->expectOutputRegex('/Xdebug: Foo(.)*/');
-        $this->logger->log_errorln('Foo', $file);
+        $this->expectOutputRegex('/^\nXdebug: WARNING: Foo/');
+        $this->logger->log_errorln('WARNING: Foo', $file);
 
         $this->assertFileEquals(dirname(__FILE__) . '/../../../../tests/statics/logs/errorln.log', $file);
     }

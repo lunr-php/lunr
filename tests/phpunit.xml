@@ -38,6 +38,9 @@
             <file>src/Lunr/Core/Tests/ResponseTest.php</file>
             <file>src/Lunr/Core/Tests/ConsoleTest.php</file>
             <file>src/Lunr/Core/Tests/LoggerTest.php</file>
+            <file>src/Lunr/Fdbk/Tests/PSR3LoggerTest.php</file>
+            <file>src/Lunr/Fdbk/Tests/PHPLoggerTest.php</file>
+            <file>src/Lunr/Fdbk/Tests/FileLoggerTest.php</file>
             <file>src/Lunr/Core/Tests/ControllerTest.php</file>
             <file>src/Lunr/Core/Tests/ViewL10nTest.php</file>
             <file>src/Lunr/Core/Tests/ViewNoL10nTest.php</file>
@@ -105,6 +108,7 @@
                 <directory>../src/Lunr/Core/Tests/</directory>
                 <directory>../src/Lunr/DataAccess/Tests/</directory>
                 <directory>../src/Lunr/Database/Tests/</directory>
+                <directory>../src/Lunr/Fdbk/Tests/</directory>
                 <directory>../src/Lunr/L10n/Tests/</directory>
                 <directory>../src/Lunr/Network/Tests/</directory>
                 <directory>../src/Lunr/Sprk/Tests/</directory>
