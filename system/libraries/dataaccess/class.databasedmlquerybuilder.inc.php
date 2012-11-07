@@ -147,19 +147,19 @@ abstract class DatabaseDMLQueryBuilder
         $this->select_mode = array();
         $this->delete = '';
         $this->delete_mode = array();
-        $this->from   = '';
-        $this->where  = '';
+        $this->from = '';
+        $this->where = '';
         $this->group_by = '';
         $this->having = '';
-        $this->order_by  = '';
-        $this->limit  = '';
+        $this->order_by = '';
+        $this->limit = '';
         $this->connector = '';
-        $this->into   = '';
-        $this->insert_mode  = array();
+        $this->into = '';
+        $this->insert_mode = array();
         $this->replace_mode = '';
         $this->set = '';
-        $this->column_names  = '';
-        $this->values  = '';
+        $this->column_names = '';
+        $this->values = '';
         $this->select_statement = '';
     }
 
@@ -222,11 +222,14 @@ abstract class DatabaseDMLQueryBuilder
     {
         $components   = array();
         $components[] = 'delete_mode';
-        if($this->delete != ''){
+        if ($this->delete != '')
+        {
             $components[] = 'delete';
             $components[] = 'from';
             $components[] = 'where';
-        }else{
+        }
+        else
+        {
             $components[] = 'from';
             $components[] = 'where';
             $components[] = 'order_by';
@@ -251,13 +254,18 @@ abstract class DatabaseDMLQueryBuilder
         $components   = array();
         $components[] = 'insert_mode';
         $components[] = 'into';
-        if($this->select_statement != '')
+        if ($this->select_statement != '')
         {
             $components[] = 'select_statement';
-        }else if($this->set != '')
+        }
+        else if ($this->set != '')
         {
             $components[] = 'set';
-        }else{
+            $valid = array('HIGH_PRIORITY','LOW_PRIORITY');
+            $this->insert_mode = array_intersect($this->insert_mode, $valid);
+        }
+        else
+        {
             $components[] = 'column_names';
             $components[] = 'values';
         }
@@ -280,13 +288,16 @@ abstract class DatabaseDMLQueryBuilder
         $components   = array();
         $components[] = 'replace_mode';
         $components[] = 'into';
-        if($this->select_statement != '')
+        if ($this->select_statement != '')
         {
             $components[] = 'select_statement';
-        }else if($this->set != '')
+        }
+        else if ($this->set != '')
         {
             $components[] = 'set';
-        }else{
+        }
+        else
+        {
             $components[] = 'column_names';
             $components[] = 'values';
         }
@@ -298,7 +309,6 @@ abstract class DatabaseDMLQueryBuilder
 
         return 'REPLACE ' . $this->implode_query($components);
     }
-
 
     /**
      * Define and escape input as column.
@@ -331,7 +341,7 @@ abstract class DatabaseDMLQueryBuilder
         }
         else
         {
-            return $column .  ' AS `' . $alias . '`';
+            return $column . ' AS `' . $alias . '`';
         }
     }
 
@@ -346,7 +356,7 @@ abstract class DatabaseDMLQueryBuilder
     public function hex_result_column($column, $alias = '')
     {
         $alias = ($alias === '') ? $column : $alias;
-        return 'HEX(' . $this->escape_location_reference($column) .  ') AS `' . $alias . '`';
+        return 'HEX(' . $this->escape_location_reference($column) . ') AS `' . $alias . '`';
     }
 
     /**
@@ -367,7 +377,7 @@ abstract class DatabaseDMLQueryBuilder
         }
         else
         {
-            return $table .  ' AS `' . $alias . '`';
+            return $table . ' AS `' . $alias . '`';
         }
     }
 
@@ -425,7 +435,6 @@ abstract class DatabaseDMLQueryBuilder
         $this->delete .= $delete;
     }
 
-
     /**
      * Define FROM clause of the SQL statement.
      *
@@ -467,7 +476,7 @@ abstract class DatabaseDMLQueryBuilder
      */
     protected function sql_into($table)
     {
-        $this->into = 'INTO '.$table;
+        $this->into = 'INTO ' . $table;
     }
 
     /**
@@ -479,21 +488,19 @@ abstract class DatabaseDMLQueryBuilder
      */
     protected function sql_set($set)
     {
-        if($this->set == '')
+        if ($this->set == '')
         {
             $this->set = 'SET ';
-        }else{
+        }
+        else
+        {
             $this->set .= ', ';
         }
-        $coma = FALSE;
-        foreach ($set as $key => $value)
+        foreach ($set as $key=>$value)
         {
-            if($coma){
-                $this->set .= ', ';
-            }
-            $this->set .= $key.'='.$value;
-            $coma = TRUE;
+            $this->set .= $key . '=' . $value . ', ';
         }
+        $this->set = trim($this->set, ', ');
     }
 
     /**
@@ -505,39 +512,43 @@ abstract class DatabaseDMLQueryBuilder
      */
     protected function sql_column_names($keys)
     {
-        $this->column_names = '('.implode(',', $keys).') ';
+        $this->column_names = '(' . implode(',', $keys) . ') ';
     }
 
     /**
      * Define Values for Insert or Update SQL statement.
      *
-     * @param Array $values Array containing escaped values to be set, can be either an array or an array of arrays
+     * @param Array $values Array containing escaped values to be set, can be either an
+     * array or an array of arrays
      *
      * @return void
      */
     protected function sql_values($values)
     {
-        if($this->values == '')
+        if (empty($values))
+        {
+            return;
+        }
+        if ($this->values == '')
         {
             $this->values = 'VALUES ';
-        }else{
+        }
+        else
+        {
             $this->values .= ', ';
         }
-        if(!empty($values)){
-            if(is_array($values[0]))
+        if (is_array($values[0]))
+        {
+            for ($i = 0; $i < count($values); $i++)
             {
-                for($i = 0; $i<count($values); $i++)
-                {
-                    if($i > 0)
-                    {
-                        $this->values .= ', ';
-                    }
-                    $this->values .= '('.implode(',', $values[$i]).')';
-                }
-            }else{
-                $this->values .= '('.implode(',', $values).')';
+                $this->values .= '(' . implode(',', $values[$i]) . '), ';
             }
         }
+        else
+        {
+            $this->values .= '(' . implode(',', $values) . ')';
+        }
+        $this->values = trim($this->values, ', ');
     }
 
     /**
@@ -549,7 +560,7 @@ abstract class DatabaseDMLQueryBuilder
      */
     public function sql_select_statement($select)
     {
-        if(strpos($select, 'SELECT') === 0)
+        if (strpos($select, 'SELECT') === 0)
         {
             $this->select_statement = $select;
         }
@@ -623,9 +634,9 @@ abstract class DatabaseDMLQueryBuilder
     {
         $this->limit = "LIMIT $amount";
 
-        if($offset > -1)
+        if ($offset > -1)
         {
-            $this->limit .= " OFFSET $offset" ;
+            $this->limit .= " OFFSET $offset";
         }
     }
 
@@ -664,7 +675,8 @@ abstract class DatabaseDMLQueryBuilder
     /**
      * Construct SQL query string.
      *
-     * @param array $components Array of SQL query components to use to construct the query.
+     * @param array $components Array of SQL query components to use to construct the
+     * query.
      *
      * @return String $sql The constructed SQL query
      */
