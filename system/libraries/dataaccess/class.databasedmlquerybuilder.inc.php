@@ -261,7 +261,10 @@ abstract class DatabaseDMLQueryBuilder
         else if ($this->set != '')
         {
             $components[] = 'set';
-            $valid = array('HIGH_PRIORITY','LOW_PRIORITY');
+            $valid = array(
+                'HIGH_PRIORITY',
+                'LOW_PRIORITY'
+            );
             $this->insert_mode = array_intersect($this->insert_mode, $valid);
         }
         else
@@ -529,6 +532,7 @@ abstract class DatabaseDMLQueryBuilder
         {
             return;
         }
+
         if ($this->values == '')
         {
             $this->values = 'VALUES ';
@@ -537,16 +541,13 @@ abstract class DatabaseDMLQueryBuilder
         {
             $this->values .= ', ';
         }
-        if (is_array($values[0]))
+        if (!is_array($values[0]))
         {
-            for ($i = 0; $i < count($values); $i++)
-            {
-                $this->values .= '(' . implode(',', $values[$i]) . '), ';
-            }
+            $values = array($values);
         }
-        else
+        foreach ($values as $value)
         {
-            $this->values .= '(' . implode(',', $values) . ')';
+            $this->values .= '(' . implode(',', $value) . '), ';
         }
         $this->values = trim($this->values, ', ');
     }
@@ -675,8 +676,7 @@ abstract class DatabaseDMLQueryBuilder
     /**
      * Construct SQL query string.
      *
-     * @param array $components Array of SQL query components to use to construct the
-     * query.
+     * @param array $components Array of SQL query components to use to construct the query.
      *
      * @return String $sql The constructed SQL query
      */
