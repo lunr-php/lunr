@@ -292,17 +292,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function replace_mode($mode)
     {
-        $mode = strtoupper($mode);
-
-        switch ($mode)
-        {
-            case 'LOW_PRIORITY':
-            case 'DELAYED':
-                $this->replace_mode = $mode;
-            default:
-                break;
-        }
-
+        $this->insert_mode($mode);
         return $this;
     }
 
