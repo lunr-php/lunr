@@ -82,6 +82,75 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+     * Test that insert_mode is an empty array by default.
+     */
+    public function testInsertModeEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('insert_mode');
+        $property->setAccessible(TRUE);
+
+        $value = $property->getValue($this->builder);
+
+        $this->assertInternalType('array', $value);
+        $this->assertEmpty($value);
+    }
+
+    /**
+     * Test that into is an empty string by default.
+     */
+    public function testIntoEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('into');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals('', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test that set is an empty string by default.
+     */
+    public function testSetEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('set');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals('', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test that column_names is an empty string by default.
+     */
+    public function testColumnNamesEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('column_names');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals('', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test that values is an empty string by default.
+     */
+    public function testValuesEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('values');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals('', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test that select_statement is an empty string by default.
+     */
+    public function testSelectStatementEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('select_statement');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals('', $property->getValue($this->builder));
+    }
+
+    /**
      * Test that from is an empty string by default.
      */
     public function testFromEmptyByDefault()
@@ -132,7 +201,11 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
         $method = $this->builder_reflection->getMethod('implode_query');
         $method->setAccessible(TRUE);
 
-        $components = array('select_mode', 'select', 'from');
+        $components = array(
+            'select_mode',
+            'select',
+            'from'
+        );
 
         $this->assertEquals('', $method->invokeArgs($this->builder, array($components)));
     }
@@ -151,7 +224,10 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
         $from->setAccessible(TRUE);
         $from->setValue($this->builder, 'FROM table');
 
-        $components = array('select', 'from');
+        $components = array(
+            'select',
+            'from'
+        );
 
         $this->assertEquals('* FROM table', $method->invokeArgs($this->builder, array($components)));
     }
@@ -172,9 +248,17 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
 
         $select_mode = $this->builder_reflection->getProperty('select_mode');
         $select_mode->setAccessible(TRUE);
-        $select_mode->setValue($this->builder, array('DISTINCT', 'DISTINCT', 'SQL_CACHE'));
+        $select_mode->setValue($this->builder, array(
+            'DISTINCT',
+            'DISTINCT',
+            'SQL_CACHE'
+        ));
 
-        $components = array('select_mode', 'select', 'from');
+        $components = array(
+            'select_mode',
+            'select',
+            'from'
+        );
 
         $this->assertEquals('DISTINCT SQL_CACHE * FROM table', $method->invokeArgs($this->builder, array($components)));
     }
@@ -195,11 +279,48 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
 
         $select_mode = $this->builder_reflection->getProperty('delete_mode');
         $select_mode->setAccessible(TRUE);
-        $select_mode->setValue($this->builder, array('QUICK', 'IGNORE', 'QUICK'));
+        $select_mode->setValue($this->builder, array(
+            'QUICK',
+            'IGNORE',
+            'QUICK'
+        ));
 
-        $components = array('delete_mode', 'from');
+        $components = array(
+            'delete_mode',
+            'from'
+        );
 
         $this->assertEquals('QUICK IGNORE FROM table', $method->invokeArgs($this->builder, array($components)));
+    }
+
+    /**
+     * Test imploding a query with dupliacte insert_mode values.
+     *
+     * @covers Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::implode_query
+     */
+    public function testImplodeQueryWithDuplicateInsertModes()
+    {
+        $method = $this->builder_reflection->getMethod('implode_query');
+        $method->setAccessible(TRUE);
+
+        $from = $this->builder_reflection->getProperty('into');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'INTO table');
+
+        $select_mode = $this->builder_reflection->getProperty('insert_mode');
+        $select_mode->setAccessible(TRUE);
+        $select_mode->setValue($this->builder, array(
+            'DELAYED',
+            'IGNORE',
+            'DELAYED'
+        ));
+
+        $components = array(
+            'insert_mode',
+            'into'
+        );
+
+        $this->assertEquals('DELAYED IGNORE INTO table', $method->invokeArgs($this->builder, array($components)));
     }
 
     /**
@@ -217,7 +338,10 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
 
         $select_mode = $this->builder_reflection->getProperty('select_mode');
         $select_mode->setAccessible(TRUE);
-        $select_mode->setValue($this->builder, array('DISTINCT', 'SQL_CACHE'));
+        $select_mode->setValue($this->builder, array(
+            'DISTINCT',
+            'SQL_CACHE'
+        ));
 
         $select = $this->builder_reflection->getProperty('select');
         $select->setAccessible(TRUE);
@@ -241,7 +365,10 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
 
         $select_mode = $this->builder_reflection->getProperty('delete_mode');
         $select_mode->setAccessible(TRUE);
-        $select_mode->setValue($this->builder, array('QUICK', 'IGNORE'));
+        $select_mode->setValue($this->builder, array(
+            'QUICK',
+            'IGNORE'
+        ));
 
         $select = $this->builder_reflection->getProperty('delete');
         $select->setAccessible(TRUE);
@@ -265,7 +392,10 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
 
         $select_mode = $this->builder_reflection->getProperty('delete_mode');
         $select_mode->setAccessible(TRUE);
-        $select_mode->setValue($this->builder, array('QUICK', 'IGNORE'));
+        $select_mode->setValue($this->builder, array(
+            'QUICK',
+            'IGNORE'
+        ));
 
         $string = 'DELETE QUICK IGNORE FROM table';
         $this->assertEquals($string, $this->builder->get_delete_query());
@@ -324,6 +454,182 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+     * Test get insert query using column names and values
+     *
+     * @depends testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_insert_query
+     */
+    public function testGetInsertValuesQuery()
+    {
+        $from = $this->builder_reflection->getProperty('into');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'INTO table');
+
+        $from = $this->builder_reflection->getProperty('column_names');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, '(column1, column2)');
+
+        $from = $this->builder_reflection->getProperty('values');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'VALUES (1,2), (3,4)');
+
+        $string = 'INSERT INTO table (column1, column2) VALUES (1,2), (3,4)';
+        $this->assertEquals($string, $this->builder->get_insert_query());
+    }
+
+    /**
+     * Test get insert query using SET
+     *
+     * @depends testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_insert_query
+     */
+    public function testGetInsertSetQuery()
+    {
+        $from = $this->builder_reflection->getProperty('into');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'INTO table');
+
+        $from = $this->builder_reflection->getProperty('set');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'SET column1 = 1');
+
+        $string = 'INSERT INTO table SET column1 = 1';
+        $this->assertEquals($string, $this->builder->get_insert_query());
+    }
+
+    /**
+     * Test get insert query using SELECT
+     *
+     * @depends testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_insert_query
+     */
+    public function testGetInsertSelectQuery()
+    {
+        $from = $this->builder_reflection->getProperty('into');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'INTO table');
+
+        $from = $this->builder_reflection->getProperty('select_statement');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'SELECT column1, column2 FROM table');
+
+        $string = 'INSERT INTO table SELECT column1, column2 FROM table';
+        $this->assertEquals($string, $this->builder->get_insert_query());
+    }
+
+    /**
+     * Test get insert query using SELECT with ColumnNames
+     *
+     * @depends testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_insert_query
+     */
+    public function testGetInsertSelectColumnsQuery()
+    {
+        $from = $this->builder_reflection->getProperty('into');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'INTO table');
+
+        $from = $this->builder_reflection->getProperty('column_names');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, '(column1, column2)');
+
+        $from = $this->builder_reflection->getProperty('select_statement');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'SELECT column1, column2 FROM table');
+
+        $string = 'INSERT INTO table (column1, column2) SELECT column1, column2 FROM table';
+        $this->assertEquals($string, $this->builder->get_insert_query());
+    }
+
+    /**
+     * Test get replace query using column names and values
+     *
+     * @depends testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_replace_query
+     */
+    public function testGetReplaceValuesQuery()
+    {
+        $from = $this->builder_reflection->getProperty('into');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'INTO table');
+
+        $from = $this->builder_reflection->getProperty('column_names');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, '(column1, column2)');
+
+        $from = $this->builder_reflection->getProperty('values');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'VALUES (1,2), (3,4)');
+
+        $string = 'REPLACE INTO table (column1, column2) VALUES (1,2), (3,4)';
+        $this->assertEquals($string, $this->builder->get_replace_query());
+    }
+
+    /**
+     * Test get replace query using SET
+     *
+     * @depends testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_replace_query
+     */
+    public function testGetReplaceSetQuery()
+    {
+        $from = $this->builder_reflection->getProperty('into');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'INTO table');
+
+        $from = $this->builder_reflection->getProperty('set');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'SET column1 = 1');
+
+        $string = 'REPLACE INTO table SET column1 = 1';
+        $this->assertEquals($string, $this->builder->get_replace_query());
+    }
+
+    /**
+     * Test get replace query using SELECT
+     *
+     * @depends testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_replace_query
+     */
+    public function testGetReplaceSelectQuery()
+    {
+        $from = $this->builder_reflection->getProperty('into');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'INTO table');
+
+        $from = $this->builder_reflection->getProperty('select_statement');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'SELECT column1, column2 FROM table');
+
+        $string = 'REPLACE INTO table SELECT column1, column2 FROM table';
+        $this->assertEquals($string, $this->builder->get_replace_query());
+    }
+
+    /**
+     * Test get replace query using SELECT with ColumnNames
+     *
+     * @depends testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_replace_query
+     */
+    public function testGetReplaceSelectColumnsQuery()
+    {
+        $from = $this->builder_reflection->getProperty('into');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'INTO table');
+
+        $from = $this->builder_reflection->getProperty('column_names');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, '(column1, column2)');
+
+        $from = $this->builder_reflection->getProperty('select_statement');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'SELECT column1, column2 FROM table');
+
+        $string = 'REPLACE INTO table (column1, column2) SELECT column1, column2 FROM table';
+        $this->assertEquals($string, $this->builder->get_replace_query());
+    }
+
+    /**
      * Test getting a select query with undefined from clause.
      *
      * @depends testImplodeQueryWithEmptySelectComponent
@@ -334,7 +640,10 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     {
         $select_mode = $this->builder_reflection->getProperty('select_mode');
         $select_mode->setAccessible(TRUE);
-        $select_mode->setValue($this->builder, array('DISTINCT', 'SQL_CACHE'));
+        $select_mode->setValue($this->builder, array(
+            'DISTINCT',
+            'SQL_CACHE'
+        ));
 
         $select = $this->builder_reflection->getProperty('select');
         $select->setAccessible(TRUE);
@@ -376,6 +685,67 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
         $this->assertEquals('', $property->getValue($this->builder));
     }
 
-}
+    /**
+     * Test get insert query using SELECT with an invalid insert mode
+     *
+     * @depends testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::get_insert_query
+     */
+    public function testGetInsertSelectInvalidInsertModeQuery()
+    {
+        $from = $this->builder_reflection->getProperty('into');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'INTO table');
 
+        $from = $this->builder_reflection->getProperty('column_names');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, '(column1, column2)');
+
+        $from = $this->builder_reflection->getProperty('select_statement');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'SELECT column1, column2 FROM table');
+
+        $from = $this->builder_reflection->getProperty('insert_mode');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, array(
+            'DELAYED',
+            'IGNORE'
+        ));
+
+        $string = 'INSERT IGNORE INTO table (column1, column2) SELECT column1, column2 FROM table';
+        $this->assertEquals($string, $this->builder->get_insert_query());
+    }
+
+    /**
+     * Test get replace query using SELECT with an invalid replace mode
+     *
+     * @depends testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::get_replace_query
+     */
+    public function testGetReplaceSelectInvalidInsertModeQuery()
+    {
+        $from = $this->builder_reflection->getProperty('into');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'INTO table');
+
+        $from = $this->builder_reflection->getProperty('column_names');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, '(column1, column2)');
+
+        $from = $this->builder_reflection->getProperty('select_statement');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'SELECT column1, column2 FROM table');
+
+        $from = $this->builder_reflection->getProperty('insert_mode');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, array(
+            'DELAYED',
+            'IGNORE'
+        ));
+
+        $string = 'REPLACE DELAYED INTO table (column1, column2) SELECT column1, column2 FROM table';
+        $this->assertEquals($string, $this->builder->get_replace_query());
+    }
+
+}
 ?>

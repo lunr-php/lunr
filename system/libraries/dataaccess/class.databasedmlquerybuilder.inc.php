@@ -73,12 +73,6 @@ abstract class DatabaseDMLQueryBuilder
     protected $insert_mode;
 
     /**
-     * SQL Query part: REPLACE modes
-     * @var String
-     */
-    protected $replace_mode;
-
-    /**
      * SQL Query part: SET clause
      * @var String
      */
@@ -256,16 +250,18 @@ abstract class DatabaseDMLQueryBuilder
         $components[] = 'into';
         if ($this->select_statement != '')
         {
+            $components[] = 'column_names';
             $components[] = 'select_statement';
+            $valid = array(
+                'HIGH_PRIORITY',
+                'LOW_PRIORITY',
+                'IGNORE'
+            );
+            $this->insert_mode = array_intersect($this->insert_mode, $valid);
         }
         else if ($this->set != '')
         {
             $components[] = 'set';
-            $valid = array(
-                'HIGH_PRIORITY',
-                'LOW_PRIORITY'
-            );
-            $this->insert_mode = array_intersect($this->insert_mode, $valid);
         }
         else
         {
@@ -298,6 +294,7 @@ abstract class DatabaseDMLQueryBuilder
         $components[] = 'into';
         if ($this->select_statement != '')
         {
+            $components[] = 'column_names';
             $components[] = 'select_statement';
         }
         else if ($this->set != '')
@@ -506,7 +503,7 @@ abstract class DatabaseDMLQueryBuilder
         }
         foreach ($set as $key=>$value)
         {
-            $this->set .= $key . '=' . $value . ', ';
+            $this->set .= $key . ' = ' . $value . ', ';
         }
         $this->set = trim($this->set, ', ');
     }
@@ -520,7 +517,7 @@ abstract class DatabaseDMLQueryBuilder
      */
     protected function sql_column_names($keys)
     {
-        $this->column_names = '(' . implode(',', $keys) . ') ';
+        $this->column_names = '(' . implode(', ', $keys) . ')';
     }
 
     /**
@@ -552,7 +549,7 @@ abstract class DatabaseDMLQueryBuilder
         }
         foreach ($values as $value)
         {
-            $this->values .= '(' . implode(',', $value) . '), ';
+            $this->values .= '(' . implode(', ', $value) . '), ';
         }
         $this->values = trim($this->values, ', ');
     }
@@ -564,7 +561,7 @@ abstract class DatabaseDMLQueryBuilder
      *
      * @return DatabaseDMLQueryBuilder $self Self reference
      */
-    public function sql_select_statement($select)
+    protected function sql_select_statement($select)
     {
         if (strpos($select, 'SELECT') === 0)
         {
@@ -819,6 +816,24 @@ abstract class DatabaseDMLQueryBuilder
     public abstract function from($table);
 
     /**
+     * Define the mode of the INSERT clause.
+     *
+     * @param String $mode The insert mode you want to use
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function insert_mode($mode);
+
+    /**
+     * Define the mode of the REPLACE clause.
+     *
+     * @param String $mode The replace mode you want to use
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function replace_mode($mode);
+
+    /**
      * Define INTO clause of the SQL statement.
      *
      * @param String $table Table name
@@ -937,5 +952,4 @@ abstract class DatabaseDMLQueryBuilder
     public abstract function limit($amount, $offset = -1);
 
 }
-
 ?>

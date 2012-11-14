@@ -67,9 +67,11 @@
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.escape.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.escapevalues.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.queryparts.delete.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.queryparts.insert.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databasedmlquerybuilder.queryparts.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqldmlquerybuilder.select.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqldmlquerybuilder.delete.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.mysqldmlquerybuilder.insert.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqldmlquerybuilder.limit.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqldmlquerybuilder.escape.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqldmlquerybuilder.condition.test.php</file>

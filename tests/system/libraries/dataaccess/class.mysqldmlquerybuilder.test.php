@@ -123,7 +123,7 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
     /**
      * Unit Test Data Provider for Delete modes
      *
-     * @return array $modes Array of select modes
+     * @return array $modes Array of delete modes
      */
     public function deleteModesStandardProvider()
     {
@@ -145,6 +145,37 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
         $expectedmodes   = array();
         $expectedmodes[] = array('low_priority','LOW_PRIORITY');
         $expectedmodes[] = array('QuIcK','QUICK');
+        $expectedmodes[] = array('IGNORE','IGNORE');
+
+        return $expectedmodes;
+    }
+
+    /**
+     * Unit Test Data Provider for Insert modes
+     *
+     * @return array $modes Array of Insert modes
+     */
+    public function insertModesStandardProvider()
+    {
+        $modes   = array();
+        $modes[] = array('LOW_PRIORITY');
+        $modes[] = array('DELAYED');
+        $modes[] = array('HIGH_PRIORITY');
+        $modes[] = array('IGNORE');
+
+        return $modes;
+    }
+
+    /**
+     * Unit Test Data Provider for Insert modes uppercasing
+     *
+     * @return array $expectedmodes Array of insert modes and their expected result
+     */
+    public function expectedInsertModesProvider()
+    {
+        $expectedmodes   = array();
+        $expectedmodes[] = array('low_priority','LOW_PRIORITY');
+        $expectedmodes[] = array('DeLayeD','DELAYED');
         $expectedmodes[] = array('IGNORE','IGNORE');
 
         return $expectedmodes;
