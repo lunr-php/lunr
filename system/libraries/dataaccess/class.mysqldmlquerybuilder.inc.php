@@ -292,8 +292,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function replace_mode($mode)
     {
-        $this->insert_mode($mode);
-        return $this;
+        return $this->insert_mode($mode);
     }
 
 

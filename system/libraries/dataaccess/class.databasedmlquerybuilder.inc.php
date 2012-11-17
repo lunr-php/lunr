@@ -150,7 +150,6 @@ abstract class DatabaseDMLQueryBuilder
         $this->connector = '';
         $this->into = '';
         $this->insert_mode = array();
-        $this->replace_mode = '';
         $this->set = '';
         $this->column_names = '';
         $this->values = '';
@@ -175,7 +174,6 @@ abstract class DatabaseDMLQueryBuilder
         unset($this->connector);
         unset($this->into);
         unset($this->insert_mode);
-        unset($this->replace_mode);
         unset($this->set);
         unset($this->column_names);
         unset($this->values);
