@@ -41,7 +41,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
         $property = $this->builder_reflection->getProperty('set');
         $property->setAccessible(TRUE);
 
-        $method->invokeArgs($this->builder, array( array('column1'=>'value1')));
+        $method->invokeArgs($this->builder, array( array('column1' => 'value1')));
 
         $string = 'SET column1 = value1';
 
@@ -62,8 +62,8 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
         $property = $this->builder_reflection->getProperty('set');
         $property->setAccessible(TRUE);
 
-        $method->invokeArgs($this->builder, array( array('column1'=>'value1')));
-        $method->invokeArgs($this->builder, array( array('column2'=>'value2')));
+        $method->invokeArgs($this->builder, array( array('column1' => 'value1')));
+        $method->invokeArgs($this->builder, array( array('column2' => 'value2')));
 
         $string = 'SET column1 = value1, column2 = value2';
 
@@ -84,11 +84,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
         $property = $this->builder_reflection->getProperty('values');
         $property->setAccessible(TRUE);
 
-        $method->invokeArgs($this->builder, array( array(
-                'value1',
-                'value2',
-                'value3'
-            )));
+        $method->invokeArgs($this->builder, array(array('value1', 'value2', 'value3')));
 
         $string = 'VALUES (value1, value2, value3)';
 
@@ -109,23 +105,13 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
         $property = $this->builder_reflection->getProperty('values');
         $property->setAccessible(TRUE);
 
-        $method->invokeArgs($this->builder, array( array(
-                'value1',
-                'value2',
-                'value3'
-            )));
-        $method->invokeArgs($this->builder, array( array(
-                array(
-                    'value4',
-                    'value5',
-                    'value6'
-                ),
-                array(
-                    'value7',
-                    'value8',
-                    'value9'
-                )
-            )));
+        $method->invokeArgs($this->builder, array(array('value1', 'value2', 'value3')));
+
+        $values   = array();
+        $values[] = array('value4', 'value5', 'value6');
+        $values[] = array('value7', 'value8', 'value9');
+
+        $method->invokeArgs($this->builder, array($values));
 
         $string = 'VALUES (value1, value2, value3), (value4, value5, value6), (value7, value8, value9)';
 
@@ -146,11 +132,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
         $property = $this->builder_reflection->getProperty('column_names');
         $property->setAccessible(TRUE);
 
-        $method->invokeArgs($this->builder, array( array(
-                'column1',
-                'column2',
-                'column3'
-            )));
+        $method->invokeArgs($this->builder, array(array('column1', 'column2', 'column3')));
 
         $string = '(column1, column2, column3)';
 

@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\DataAccess;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -157,8 +158,8 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
         $strings   = array();
         $strings[] = array("'--", "\'--", "\'--");
         $strings[] = array("\'--", "\\\'--", "\\\'--");
-        $strings[] = array('70%', '70%', "70\%");
-        $strings[] = array('test_name', 'test_name', "test\_name");
+        $strings[] = array('70%', '70%', '70\%');
+        $strings[] = array('test_name', 'test_name', 'test\_name');
 
         return $strings;
     }

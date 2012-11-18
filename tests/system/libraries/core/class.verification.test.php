@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use stdClass;

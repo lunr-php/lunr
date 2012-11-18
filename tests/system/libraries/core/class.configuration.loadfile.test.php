@@ -48,7 +48,7 @@ class ConfigurationLoadFileTest extends ConfigurationTest
     {
         $this->configuration->load_file('correct');
 
-        $this->config['load'] = array();
+        $this->config['load']        = array();
         $this->config['load']['one'] = 'Value';
         $this->config['load']['two'] = 'String';
 
@@ -72,7 +72,7 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
         $this->configuration->load_file('not_array');
 
-        $after  = $property->getValue($this->configuration);
+        $after = $property->getValue($this->configuration);
 
         $this->assertEquals($before, $after);
     }
@@ -93,7 +93,7 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
         $this->configuration->load_file('not_exists');
 
-        $after  = $property->getValue($this->configuration);
+        $after = $property->getValue($this->configuration);
 
         $this->assertEquals($before, $after);
     }
@@ -128,7 +128,7 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
         $this->configuration->load_database_config();
 
-        $this->config['db'] = array();
+        $this->config['db']             = array();
         $this->config['db']['rw_host']  = '10.0.0.22';
         $this->config['db']['ro_host']  = '10.0.0.10';
         $this->config['db']['username'] = 'schiphol';
@@ -158,7 +158,7 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
         $this->configuration->load_database_config();
 
-        $after  = $property->getValue($this->configuration);
+        $after = $property->getValue($this->configuration);
 
         $this->assertEquals($before, $after);
     }
@@ -179,7 +179,7 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
         $this->configuration->load_database_config();
 
-        $after  = $property->getValue($this->configuration);
+        $after = $property->getValue($this->configuration);
 
         $this->assertEquals($before, $after);
     }

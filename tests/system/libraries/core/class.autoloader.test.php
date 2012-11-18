@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -46,7 +47,7 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->autoloader = new Autoloader();
+        $this->autoloader            = new Autoloader();
         $this->autoloader_reflection = new ReflectionClass('Lunr\Libraries\Core\Autoloader');
     }
 

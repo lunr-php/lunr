@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use \ReflectionClass;
 
 /**

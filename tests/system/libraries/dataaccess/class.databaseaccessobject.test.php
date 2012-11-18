@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\DataAccess;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 

@@ -74,7 +74,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      */
     public function testGetDatetimeWithLocalizedCustomDatetimeFormat()
     {
-        $day = strftime('%u');
+        $day           = strftime('%u');
         $localized_day = $this->datetime->set_datetime_format('%A')->set_locale('de_DE')->get_datetime();
         $this->assertTrue($this->check_localized_day($day, $localized_day));
     }

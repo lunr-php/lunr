@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\L10n;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 

@@ -15,7 +15,7 @@
 
 use Lunr\Libraries\Database\DBMan;
 
-include_once("conf.database.inc.php");
+require_once 'conf.database.inc.php';
 
 /**
  * This tests Lunr's DBMan class
@@ -30,7 +30,8 @@ class DBManTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * Test the static function get_db_connection()
+     * Test the static function get_db_connection().
+     *
      * @covers Lunr\Libraries\Database\DBMan::get_db_connection
      */
     public function testGetDbConnection()

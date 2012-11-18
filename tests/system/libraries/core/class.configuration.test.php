@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use stdClass;
@@ -56,7 +57,7 @@ abstract class ConfigurationTest extends PHPUnit_Framework_TestCase
      */
     protected function setUpNonArray()
     {
-        $this->configuration = new Configuration();
+        $this->configuration            = new Configuration();
         $this->configuration_reflection = new ReflectionClass('Lunr\Libraries\Core\Configuration');
     }
 
@@ -69,8 +70,8 @@ abstract class ConfigurationTest extends PHPUnit_Framework_TestCase
      */
     protected function setUpArray($config)
     {
-        $this->config = $config;
-        $this->configuration = new Configuration($config);
+        $this->config                   = $config;
+        $this->configuration            = new Configuration($config);
         $this->configuration_reflection = new ReflectionClass('Lunr\Libraries\Core\Configuration');
     }
 
@@ -91,9 +92,9 @@ abstract class ConfigurationTest extends PHPUnit_Framework_TestCase
      */
     protected function construct_test_array()
     {
-        $config = array();
-        $config['test1'] = 'String';
-        $config['test2'] = array();
+        $config                   = array();
+        $config['test1']          = 'String';
+        $config['test2']          = array();
         $config['test2']['test3'] = 1;
         $config['test2']['test4'] = FALSE;
 
@@ -107,7 +108,7 @@ abstract class ConfigurationTest extends PHPUnit_Framework_TestCase
      */
     public function nonArrayValueProvider()
     {
-        $values = array();
+        $values   = array();
         $values[] = array('String');
         $values[] = array(1);
         $values[] = array(NULL);

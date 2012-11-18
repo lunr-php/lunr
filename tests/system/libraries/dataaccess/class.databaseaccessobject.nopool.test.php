@@ -60,7 +60,7 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
     }
 
     /**
-     * Test that swap_connection() swaps database connections
+     * Test that swap_connection() swaps database connections.
      *
      * @covers Lunr\Libraries\DataAccess\DatabaseAccessObject::swap_connection
      */

@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -96,6 +97,7 @@ abstract class ViewTest extends PHPUnit_Framework_TestCase
                               ->getMock();
 
         $this->response = $this->getMock('Lunr\Libraries\Core\Response');
+
         $this->l10nprovider = $this->getMockBuilder('Lunr\Libraries\L10n\L10nProvider')
                                    ->disableOriginalConstructor()
                                    ->getMockForAbstractClass();
@@ -133,6 +135,7 @@ abstract class ViewTest extends PHPUnit_Framework_TestCase
                               ->getMock();
 
         $this->response = $this->getMock('Lunr\Libraries\Core\Response');
+
         $this->l10nprovider = NULL;
 
         $this->view = $this->getMockBuilder('Lunr\Libraries\Core\View')

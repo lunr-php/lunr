@@ -15,6 +15,7 @@
  */
 
 namespace Lunr\Mocks\Libraries\Database;
+
 use Lunr\Libraries\Database\DBCon;
 
 /**
@@ -225,7 +226,7 @@ class MockDBConReadonly extends DBCon
      *
      * @return void
      */
-    public function start_where_group($connector ='')
+    public function start_where_group($connector = '')
     {
         return;
     }

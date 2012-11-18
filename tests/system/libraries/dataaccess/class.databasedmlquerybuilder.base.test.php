@@ -379,7 +379,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test getting a delete query with empty selection
+     * Test getting a delete query with empty selection.
      *
      * @depends testImplodeQueryWithDuplicateDeleteModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_delete_query
@@ -402,7 +402,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test getting a delete query with limit and orderBy
+     * Test getting a delete query with limit and orderBy.
      *
      * @depends testImplodeQueryWithDuplicateDeleteModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_delete_query
@@ -426,7 +426,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test it is not possible to get a delete query with limit and orderBy when delete is not ''
+     * Test it is not possible to get a delete query with limit and orderBy when delete is not ''.
      *
      * @depends testImplodeQueryWithDuplicateDeleteModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_delete_query
@@ -454,7 +454,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get insert query using column names and values
+     * Test get insert query using column names and values.
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_insert_query
@@ -478,7 +478,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get insert query using SET
+     * Test get insert query using SET.
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_insert_query
@@ -498,7 +498,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get insert query using SELECT
+     * Test get insert query using SELECT.
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_insert_query
@@ -518,7 +518,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get insert query using SELECT with ColumnNames
+     * Test get insert query using SELECT with ColumnNames.
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_insert_query
@@ -542,7 +542,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get replace query using column names and values
+     * Test get replace query using column names and values.
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_replace_query
@@ -566,7 +566,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get replace query using SET
+     * Test get replace query using SET.
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_replace_query
@@ -586,7 +586,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get replace query using SELECT
+     * Test get replace query using SELECT.
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_replace_query
@@ -606,7 +606,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get replace query using SELECT with ColumnNames
+     * Test get replace query using SELECT with ColumnNames.
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_replace_query
@@ -686,7 +686,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get insert query using SELECT with an invalid insert mode
+     * Test get insert query using SELECT with an invalid insert mode.
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::get_insert_query
@@ -717,7 +717,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get replace query using SELECT with an invalid replace mode
+     * Test get replace query using SELECT with an invalid replace mode.
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::get_replace_query

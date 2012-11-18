@@ -15,6 +15,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -99,7 +100,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
         $this->setUpShared();
 
         $enums = $this->get_json_enums();
-        $_POST   = array_flip($enums);
+        $_POST = array_flip($enums);
 
         $_GET               = array_flip($enums);
         $_GET['controller'] = 'controller';
@@ -205,7 +206,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function invalidKeyProvider()
     {
-        $keys = array();
+        $keys   = array();
         $keys[] = array('invalid');
 
         return $keys;
@@ -218,7 +219,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function invalidSuperglobalValueProvider()
     {
-        $values = array();
+        $values   = array();
         $values[] = array(array());
         $values[] = array(0);
         $values[] = array('String');
@@ -235,7 +236,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function unhandledMagicGetKeysProvider()
     {
-        $keys = array();
+        $keys   = array();
         $keys[] = array('Unhandled');
 
         return $keys;
@@ -262,7 +263,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function baseurlProvider()
     {
-        $base = array();
+        $base   = array();
         $base[] = array('on', '443', 'https://www.domain.com/path/to/');
         $base[] = array('on', '80', 'https://www.domain.com:80/path/to/');
         $base[] = array('off', '80', 'http://www.domain.com/path/to/');
@@ -300,7 +301,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
     public function check_default_request_values($request_values)
     {
         $values = $this->requestValueProvider();
-        $array = array();
+        $array  = array();
 
         foreach ($values as $value)
         {
@@ -327,7 +328,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
         $server = array();
 
         $server['SCRIPT_NAME'] = '/path/to/index.php';
-        $server['HTTPS'] = 'on';
+        $server['HTTPS']       = 'on';
         $server['SERVER_NAME'] = 'www.domain.com';
         $server['SERVER_PORT'] = '443';
 
@@ -345,7 +346,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
     protected function set_request_sapi_non_cli(&$reflection_property)
     {
         $reflection_property->setAccessible(TRUE);
-        $request = $reflection_property->getValue($this->request);
+        $request         = $reflection_property->getValue($this->request);
         $request['sapi'] = 'apache';
 
         $reflection_property->setValue($this->request, $request);

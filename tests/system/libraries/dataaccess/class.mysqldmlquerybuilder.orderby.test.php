@@ -27,6 +27,7 @@ namespace Lunr\Libraries\DataAccess;
  */
 class MySQLDMLQueryBuilderOrderByTest extends MySQLDMLQueryBuilderTest
 {
+
     /**
      * Test specifying the order by part of a query.
      *

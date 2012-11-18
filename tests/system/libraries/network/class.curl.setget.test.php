@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Network;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -146,9 +147,9 @@ class CurlSetGetTest extends CurlTest
         $this->assertArrayNotHasKey('CURLOPT_TIMEVALUE', $old);
         $this->assertArrayNotHasKey('CURLOPT_PUT', $old);
 
-        $options = array();
+        $options                      = array();
         $options['CURLOPT_TIMEVALUE'] = 1;
-        $options['CURLOPT_PUT'] = 1;
+        $options['CURLOPT_PUT']       = 1;
 
         $return = $this->curl->set_options($options);
 

@@ -61,7 +61,7 @@ class DateTimeTomorrowTest extends DateTimeTest
      */
     public function testTomorrowWithLocalizedCustomDatetimeFormat()
     {
-        $day = strftime('%u', strtotime('+1 day'));
+        $day           = strftime('%u', strtotime('+1 day'));
         $localized_day = $this->datetime->set_datetime_format('%A')->set_locale('de_DE')->tomorrow();
         $this->assertTrue($this->check_localized_day($day, $localized_day));
     }

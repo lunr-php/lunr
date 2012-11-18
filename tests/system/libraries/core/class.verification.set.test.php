@@ -34,7 +34,7 @@ class VerificationSetTest extends VerificationTest
      */
     public function testSetDataReturnsSelfReference()
     {
-        $set = array();
+        $set   = array();
         $value = $this->verification->set_data($set);
 
         $this->assertInstanceOf('Lunr\Libraries\Core\Verification', $value);
@@ -91,7 +91,7 @@ class VerificationSetTest extends VerificationTest
      */
     public function testSetDataResetsVerificationState()
     {
-        $props = $this->verification_reflection->getProperties();
+        $props      = $this->verification_reflection->getProperties();
         $properties = array();
 
         foreach ($props as &$value)
@@ -99,6 +99,7 @@ class VerificationSetTest extends VerificationTest
             $value->setAccessible(TRUE);
             $properties[$value->getName()] = $value;
         }
+
         unset($value);
 
         $properties['check_remaining']->setValue($this->verification, FALSE);
@@ -117,8 +118,8 @@ class VerificationSetTest extends VerificationTest
         $this->assertNull($properties['pointer']->getValue($this->verification));
 
         $superfluous = $properties['superfluous']->getValue($this->verification);
-        $result = $properties['result']->getValue($this->verification);
-        $identifier = $properties['identifier']->getValue($this->verification);
+        $result      = $properties['result']->getValue($this->verification);
+        $identifier  = $properties['identifier']->getValue($this->verification);
 
         $this->assertInternalType('array', $superfluous);
         $this->assertInternalType('array', $result);

@@ -86,7 +86,9 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
                  ->method('escape_string')
                  ->will($this->returnValue('value'));
 
-        $this->assertEquals('ascii \'value\' COLLATE utf8_general_ci', $this->builder->value('value', 'utf8_general_ci', 'ascii'));
+        $string = 'ascii \'value\' COLLATE utf8_general_ci';
+
+        $this->assertEquals($string, $this->builder->value('value', 'utf8_general_ci', 'ascii'));
     }
 
     /**
@@ -116,7 +118,9 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
                  ->method('escape_string')
                  ->will($this->returnValue('value'));
 
-        $this->assertEquals('UNHEX(\'value\') COLLATE utf8_general_ci', $this->builder->hexvalue('value', 'utf8_general_ci'));
+        $string = 'UNHEX(\'value\') COLLATE utf8_general_ci';
+
+        $this->assertEquals($string, $this->builder->hexvalue('value', 'utf8_general_ci'));
     }
 
     /**
@@ -146,7 +150,9 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
                  ->method('escape_string')
                  ->will($this->returnValue('value'));
 
-        $this->assertEquals('ascii UNHEX(\'value\') COLLATE utf8_general_ci', $this->builder->hexvalue('value', 'utf8_general_ci', 'ascii'));
+        $string = 'ascii UNHEX(\'value\') COLLATE utf8_general_ci';
+
+        $this->assertEquals($string, $this->builder->hexvalue('value', 'utf8_general_ci', 'ascii'));
     }
 
     /**
@@ -176,7 +182,9 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
                  ->method('escape_string')
                  ->will($this->returnValue('value'));
 
-        $this->assertEquals('\'%value%\' COLLATE utf8_general_ci', $this->builder->likevalue('value', 'both', 'utf8_general_ci'));
+        $string = '\'%value%\' COLLATE utf8_general_ci';
+
+        $this->assertEquals($string, $this->builder->likevalue('value', 'both', 'utf8_general_ci'));
     }
 
     /**
@@ -206,7 +214,9 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
                  ->method('escape_string')
                  ->will($this->returnValue('value'));
 
-        $this->assertEquals('ascii \'%value%\' COLLATE utf8_general_ci', $this->builder->likevalue('value', 'both', 'utf8_general_ci', 'ascii'));
+        $string = 'ascii \'%value%\' COLLATE utf8_general_ci';
+
+        $this->assertEquals($string, $this->builder->likevalue('value', 'both', 'utf8_general_ci', 'ascii'));
     }
 
     /**
@@ -250,11 +260,11 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      */
     public function testEscapeIntValue($value, $expected)
     {
-        $this->assertEquals($expected , $this->builder->intvalue($value));
+        $this->assertEquals($expected, $this->builder->intvalue($value));
     }
 
     /**
-     * Test escaping an object as integer
+     * Test escaping an object as integer.
      *
      * @expectedException PHPUnit_Framework_Error_Notice
      * @covers            Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::intvalue
@@ -265,7 +275,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
     }
 
     /**
-     * Test escaping illegal value as integer
+     * Test escaping illegal value as integer.
      *
      * @param mixed   $value   The input value to be escaped
      * @param integer $illegal The illegal escaped integer
@@ -275,7 +285,7 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
      */
     public function testEscapeIllegalAsIntValue($value, $illegal)
     {
-        $this->assertEquals($illegal , $this->builder->intvalue($value));
+        $this->assertEquals($illegal, $this->builder->intvalue($value));
     }
 
     /**

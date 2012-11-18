@@ -171,7 +171,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
     public function testLangWithoutContextAndTooLongIdentifierReturnsIdentifier()
     {
         $identifier = '';
-        for ($i=0; $i<4102; $i++)
+        for ($i = 0; $i < 4102; $i++)
         {
             $identifier .= 'a';
         }
@@ -189,7 +189,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
     public function testLangWithContextAndTooLongIdentifierReturnsIdentifier()
     {
         $identifier = '';
-        for ($i=0; $i<4096; $i++)
+        for ($i = 0; $i < 4096; $i++)
         {
             $identifier .= 'a';
         }

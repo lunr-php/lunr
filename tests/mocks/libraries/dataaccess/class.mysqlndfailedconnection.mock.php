@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\DataAccess;
+
 use \MySQLndUhConnection;
 
 /**
@@ -42,7 +43,7 @@ class MockMySQLndFailedConnection extends MySQLndUhConnection
      *
      * @return boolean $return Whether the connection was successful or not.
      */
-    public function connect($connection , $host , $user , $password , $database , $port , $socket , $mysql_flags)
+    public function connect($connection, $host, $user, $password, $database, $port, $socket, $mysql_flags)
     {
         return TRUE;
     }

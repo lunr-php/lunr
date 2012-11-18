@@ -15,6 +15,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use \ReflectionClass;
 
 /**
@@ -102,7 +103,7 @@ class RequestStoreTest extends RequestTest
 
         $_COOKIE['test1'] = 'value1';
         $_COOKIE['test2'] = 'value2';
-        $cache = $_COOKIE;
+        $cache            = $_COOKIE;
 
         $method->invoke($this->request);
 
@@ -195,7 +196,7 @@ class RequestStoreTest extends RequestTest
 
         $_POST['test1'] = 'value1';
         $_POST['test2'] = 'value2';
-        $cache = $_POST;
+        $cache          = $_POST;
 
         $method->invoke($this->request);
 
@@ -346,7 +347,7 @@ class RequestStoreTest extends RequestTest
         $method = $this->reflection_request->getMethod('store_url');
         $method->setAccessible(TRUE);
 
-        $_SERVER = $this->setup_server_superglobal();
+        $_SERVER          = $this->setup_server_superglobal();
         $_SERVER['HTTPS'] = $value;
 
         $method->invokeArgs($this->request, array(&$this->configuration));
@@ -378,8 +379,8 @@ class RequestStoreTest extends RequestTest
         $method = $this->reflection_request->getMethod('store_url');
         $method->setAccessible(TRUE);
 
-        $_SERVER = $this->setup_server_superglobal();
-        $_SERVER['HTTPS'] = $https;
+        $_SERVER                = $this->setup_server_superglobal();
+        $_SERVER['HTTPS']       = $https;
         $_SERVER['SERVER_PORT'] = $port;
 
         $method->invokeArgs($this->request, array(&$this->configuration));
@@ -488,7 +489,7 @@ class RequestStoreTest extends RequestTest
 
         $_GET['test1'] = 'value1';
         $_GET['test2'] = 'value2';
-        $cache = $_GET;
+        $cache         = $_GET;
 
         $method->invokeArgs($this->request, array(&$this->configuration));
 
@@ -511,10 +512,10 @@ class RequestStoreTest extends RequestTest
         $method->setAccessible(TRUE);
 
         $_GET['controller'] = 'controller';
-        $_GET['method'] = 'method';
-        $_GET['param1'] = 'param1';
-        $_GET['param2'] = 'param2';
-        $cache = $_GET;
+        $_GET['method']     = 'method';
+        $_GET['param1']     = 'param1';
+        $_GET['param2']     = 'param2';
+        $cache              = $_GET;
 
         $method->invokeArgs($this->request, array(&$this->configuration));
 
@@ -542,7 +543,7 @@ class RequestStoreTest extends RequestTest
 
         $_GET['test1'] = 'value1';
         $_GET['test2'] = 'value2';
-        $cache = $_GET;
+        $cache         = $_GET;
 
         $method->invokeArgs($this->request, array(&$this->configuration));
 

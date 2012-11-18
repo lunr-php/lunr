@@ -333,7 +333,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      */
     public function testOrderByWithDefaultOrder()
     {
-        $string = "ORDER BY col1 ASC";
+        $string = 'ORDER BY col1 ASC';
 
         $method = $this->builder_reflection->getMethod('sql_order_by');
         $method->setAccessible(TRUE);
@@ -353,7 +353,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      */
     public function testOrderByWithCustomOrder()
     {
-        $string = "ORDER BY col1 DESC";
+        $string = 'ORDER BY col1 DESC';
 
         $method = $this->builder_reflection->getMethod('sql_order_by');
         $method->setAccessible(TRUE);
@@ -373,7 +373,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      */
     public function testOrderByWithExtendedStatement()
     {
-        $value = "ORDER BY col1 DESC";
+        $value = 'ORDER BY col1 DESC';
 
         $method = $this->builder_reflection->getMethod('sql_order_by');
         $method->setAccessible(TRUE);
@@ -384,7 +384,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
 
         $method->invokeArgs($this->builder, array('col2', FALSE));
 
-        $string = "ORDER BY col1 DESC, col2 DESC";
+        $string = 'ORDER BY col1 DESC, col2 DESC';
 
 
         $this->assertEquals($string, $property->getValue($this->builder));
@@ -397,7 +397,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      */
     public function testGroupBy()
     {
-        $string = "GROUP BY group1";
+        $string = 'GROUP BY group1';
 
         $method = $this->builder_reflection->getMethod('sql_group_by');
         $method->setAccessible(TRUE);
@@ -417,7 +417,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      */
     public function testGroupByExtending()
     {
-        $value = "GROUP BY group1";
+        $value = 'GROUP BY group1';
 
         $method = $this->builder_reflection->getMethod('sql_group_by');
         $method->setAccessible(TRUE);
@@ -428,7 +428,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
 
         $method->invokeArgs($this->builder, array('group2'));
 
-        $string = "GROUP BY group1, group2";
+        $string = 'GROUP BY group1, group2';
 
         $this->assertEquals($string, $property->getValue($this->builder));
     }
@@ -440,7 +440,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      */
     public function testLimitWithDefaultOffset()
     {
-        $string = "LIMIT 10";
+        $string = 'LIMIT 10';
 
         $method = $this->builder_reflection->getMethod('sql_limit');
         $method->setAccessible(TRUE);
@@ -460,7 +460,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      */
     public function testLimitWithCustomOffset()
     {
-        $string = "LIMIT 10 OFFSET 20";
+        $string = 'LIMIT 10 OFFSET 20';
 
         $method = $this->builder_reflection->getMethod('sql_limit');
         $method->setAccessible(TRUE);

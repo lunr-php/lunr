@@ -108,7 +108,10 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
     }
 
     /**
-     * Test delete modes get uppercased properly
+     * Test delete modes get uppercased properly.
+     *
+     * @param String $value    Delete mode to set
+     * @param String $expected Expected built query part
      *
      * @dataProvider expectedDeleteModesProvider
      * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::delete_mode
@@ -122,6 +125,7 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
 
         $this->assertContains($expected, $property->getValue($this->builder));
     }
+
 }
 
 ?>

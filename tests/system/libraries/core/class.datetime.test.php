@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use Lunr\Libraries\Core\DateTime;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
@@ -49,7 +50,7 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->reflection_datetime = new ReflectionClass('Lunr\Libraries\Core\DateTime');
-        $this->datetime = new DateTime();
+        $this->datetime            = new DateTime();
     }
 
     /**
@@ -99,6 +100,7 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
             default:
                 return FALSE;
         }
+
         return TRUE;
     }
 
@@ -203,7 +205,7 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function datetimeFormatProvider()
     {
-        $formats = $this->invalidDatetimeFormatProvider();
+        $formats   = $this->invalidDatetimeFormatProvider();
         $formats[] = array('%A');
 
         return $formats;

@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -46,7 +47,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->response = new Response();
+        $this->response            = new Response();
         $this->response_reflection = new ReflectionClass('Lunr\Libraries\Core\Response');
     }
 

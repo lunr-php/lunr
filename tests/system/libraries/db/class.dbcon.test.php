@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Mocks\Libraries\Database;
+
 use Lunr\Mocks\Libraries\Database\MockDBConReadonly;
 
 /**
@@ -40,12 +41,18 @@ class DBConReadonlyTest extends PHPUnit_Framework_TestCase
      */
     private $dbcon_reflection;
 
+    /**
+     * Testcase Constructor.
+     */
     protected function setUp()
     {
         $this->dbcon_reflection = new ReflectionClass('Lunr\Libraries\Database\DBCon');
-        $this->dbcon = new MockDBConReadonly();
+        $this->dbcon            = new MockDBConReadonly();
     }
 
+    /**
+     * Testcase Destructor.
+     */
     protected function tearDown()
     {
         unset($this->dbcon);
@@ -53,9 +60,10 @@ class DBConReadonlyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests the escaping and preparation of key names for SQL queries
+     * Tests the escaping and preparation of key names for SQL queries.
+     *
      * @dataProvider datasetProvider
-     * @covers Lunr\Libraries\Database\DBCon::prepare_data
+     * @covers       Lunr\Libraries\Database\DBCon::prepare_data
      */
     public function testPrepareDataKeys($data, $result, $ignore)
     {
@@ -65,9 +73,10 @@ class DBConReadonlyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests the escaping and preparation of values for SQL queries
+     * Tests the escaping and preparation of values for SQL queries.
+     *
      * @dataProvider datasetProvider
-     * @covers Lunr\Libraries\Database\DBCon::prepare_data
+     * @covers       Lunr\Libraries\Database\DBCon::prepare_data
      */
     public function testPrepareDataValues($data, $ignore, $result)
     {
@@ -76,59 +85,62 @@ class DBConReadonlyTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($result, $method->invokeArgs($this->dbcon, array($data, 'values')));
     }
 
+    /**
+     * Unit Test Data Provider for datasets.
+     *
+     * @return array $data Array of datasets.
+     */
     public function datasetProvider()
     {
         $data[] = array(
-            array(
-                "key" => "value"
-            ),
-            "(`key`) ",
+            array('key' => 'value'),
+            '(`key`) ',
             "('value') "
         );
 
         $data[] = array(
             array(
-                "key1" => "value1",
-                "key2" => "value2"
+                'key1' => 'value1',
+                'key2' => 'value2'
             ),
-            "(`key1`,`key2`) ",
+            '(`key1`,`key2`) ',
             "('value1','value2') "
         );
 
         $data[] = array(
             array(
                 array(
-                    "key1" => "value1",
-                    "key2" => "value2"
+                    'key1' => 'value1',
+                    'key2' => 'value2'
                 ),
                 array(
-                    "key1" => "value3",
-                    "key2" => "value4"
+                    'key1' => 'value3',
+                    'key2' => 'value4'
                 )
             ),
-            "(`key1`,`key2`) ",
+            '(`key1`,`key2`) ',
             "('value1','value2') ,('value3','value4') "
         );
 
         $data[] = array(
-            "value1",
-            "",
+            'value1',
+            '',
             "('value1') "
         );
 
         $data[] = array(
             array(
-                "key" => NULL
+                'key' => NULL
             ),
-            "(`key`) ",
-            "(NULL ) "
+            '(`key`) ',
+            '(NULL ) '
         );
 
         $data[] = array(
             array(
-                "key" => "UNHEX('0056eac2c19411e0826a0050568476fa')"
+                'key' => "UNHEX('0056eac2c19411e0826a0050568476fa')"
             ),
-            "(`key`) ",
+            '(`key`) ',
             "(UNHEX('0056eac2c19411e0826a0050568476fa') ) "
         );
 

@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -58,7 +59,7 @@ abstract class MailTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->mail = new Mail();
+        $this->mail            = new Mail();
         $this->mail_reflection = new ReflectionClass('Lunr\Libraries\Core\Mail');
     }
 

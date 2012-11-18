@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -83,7 +84,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
     {
         $method = $this->console_reflection->getMethod('build_cli_output');
         $method->setAccessible(TRUE);
-        $msg = 'Test';
+        $msg    = 'Test';
         $output = self::DATETIME_STRING . ': ' . $msg;
         $this->assertEquals($output, $method->invokeArgs($this->console, array($msg)));
     }
@@ -95,7 +96,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
      */
     public function testCliPrint()
     {
-        $msg = 'Test';
+        $msg    = 'Test';
         $output = self::DATETIME_STRING . ': ' . $msg;
 
         $this->expectOutputString($output);
@@ -109,7 +110,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
      */
     public function testCliPrintln()
     {
-        $msg = 'Test';
+        $msg    = 'Test';
         $output = self::DATETIME_STRING . ': ' . $msg . "\n";
 
         $this->expectOutputString($output);

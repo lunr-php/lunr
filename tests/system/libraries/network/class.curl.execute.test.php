@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Network;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 

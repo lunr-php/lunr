@@ -15,6 +15,7 @@
  */
 
 namespace Lunr\Mocks\Libraries\Core;
+
 use Lunr\Libraries\Core\View;
 
 /**

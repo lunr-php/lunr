@@ -74,7 +74,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
      */
     public function testSetReturnsSelfReference()
     {
-        $return = $this->builder->set(array('column1'=>'value1'));
+        $return = $this->builder->set(array('column1' => 'value1'));
 
         $this->assertInstanceOf('Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder', $return);
         $this->assertSame($this->builder, $return);
@@ -156,7 +156,10 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
     }
 
     /**
-     * Test insert modes get uppercased properly
+     * Test insert modes get uppercased properly.
+     *
+     * @param String $value    Insert mode to set
+     * @param String $expected Expected built query part
      *
      * @dataProvider expectedInsertModesProvider
      * @covers  Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::insert_mode

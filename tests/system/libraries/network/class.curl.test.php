@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Network;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -89,7 +90,7 @@ abstract class CurlTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->curl_reflection = new ReflectionClass('Lunr\Libraries\Network\Curl');
-        $this->curl = new Curl();
+        $this->curl            = new Curl();
     }
 
     /**

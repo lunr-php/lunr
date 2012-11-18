@@ -82,7 +82,7 @@ class ConfigurationConvertArrayToClassTest extends ConfigurationTest
      */
     public function testConvertArrayToClassWithArrayValue()
     {
-        $input = array();
+        $input          = array();
         $input['test']  = 'String';
         $input['test1'] = 1;
 
@@ -101,9 +101,9 @@ class ConfigurationConvertArrayToClassTest extends ConfigurationTest
      */
     public function testConvertArrayToClassWithMultidimensionalArrayValue()
     {
-        $config = array();
-        $config['test1'] = 'String';
-        $config['test2'] = array();
+        $config                   = array();
+        $config['test1']          = 'String';
+        $config['test2']          = array();
         $config['test2']['test3'] = 1;
         $config['test2']['test4'] = FALSE;
 

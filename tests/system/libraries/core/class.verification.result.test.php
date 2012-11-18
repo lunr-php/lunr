@@ -108,7 +108,7 @@ class VerificationResultTest extends VerificationTest
         $method = $this->verification_reflection->getMethod('is_fully_checked');
         $method->setAccessible(TRUE);
 
-        $this->logger->expects($this->exactly(sizeof($data)-sizeof($result)))
+        $this->logger->expects($this->exactly(sizeof($data) - sizeof($result)))
                      ->method('log_errorln');
 
         $this->assertFalse($method->invokeArgs($this->verification, array('')));

@@ -15,6 +15,7 @@
  */
 
 namespace Lunr\Libraries\DataAccess;
+
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -121,7 +122,7 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Unit Test Data Provider for Delete modes
+     * Unit Test Data Provider for Delete modes.
      *
      * @return array $modes Array of delete modes
      */
@@ -136,22 +137,22 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Unit Test Data Provider for Delete modes uppercasing
+     * Unit Test Data Provider for Delete modes uppercasing.
      *
      * @return array $expectedmodes Array of delete modes and their expected result
      */
     public function expectedDeleteModesProvider()
     {
         $expectedmodes   = array();
-        $expectedmodes[] = array('low_priority','LOW_PRIORITY');
-        $expectedmodes[] = array('QuIcK','QUICK');
-        $expectedmodes[] = array('IGNORE','IGNORE');
+        $expectedmodes[] = array('low_priority', 'LOW_PRIORITY');
+        $expectedmodes[] = array('QuIcK', 'QUICK');
+        $expectedmodes[] = array('IGNORE', 'IGNORE');
 
         return $expectedmodes;
     }
 
     /**
-     * Unit Test Data Provider for Insert modes
+     * Unit Test Data Provider for Insert modes.
      *
      * @return array $modes Array of Insert modes
      */
@@ -167,16 +168,16 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Unit Test Data Provider for Insert modes uppercasing
+     * Unit Test Data Provider for Insert modes uppercasing.
      *
      * @return array $expectedmodes Array of insert modes and their expected result
      */
     public function expectedInsertModesProvider()
     {
         $expectedmodes   = array();
-        $expectedmodes[] = array('low_priority','LOW_PRIORITY');
-        $expectedmodes[] = array('DeLayeD','DELAYED');
-        $expectedmodes[] = array('IGNORE','IGNORE');
+        $expectedmodes[] = array('low_priority', 'LOW_PRIORITY');
+        $expectedmodes[] = array('DeLayeD', 'DELAYED');
+        $expectedmodes[] = array('IGNORE', 'IGNORE');
 
         return $expectedmodes;
     }
@@ -188,7 +189,7 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
      */
     public function expectedIntegerProvider()
     {
-        $expecteds = array() ;
+        $expecteds   = array();
         $expecteds[] = array('1', 1);
         $expecteds[] = array('10', 10);
         $expecteds[] = array('37', 37);
@@ -203,7 +204,7 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
      */
     public function illegalIntegerProvider()
     {
-        $illegals = array() ;
+        $illegals   = array();
         $illegals[] = array(3.3, 3);
 
         $illegals[] = array(NULL, 0);
@@ -211,11 +212,11 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
         $illegals[] = array(FALSE, 0);
         $illegals[] = array(TRUE, 1);
 
-        $illegals[] = array("value", 0);
-        $illegals[] = array("1e10", 1);
+        $illegals[] = array('value', 0);
+        $illegals[] = array('1e10', 1);
 
         $illegals[] = array(array(), 0);
-        $illegals[] = array(array("a", "b"), 1);
+        $illegals[] = array(array('a', 'b'), 1);
 
         return $illegals;
     }

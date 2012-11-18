@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\DataAccess;
+
 use MySQLi_Result;
 
 /**
@@ -61,7 +62,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
     {
         $property = $this->result_reflection->getProperty('freed');
         $property->setAccessible(TRUE);
-        $property-setValue($this->result, TRUE);
+        $property->setValue($this->result, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('free');
@@ -71,7 +72,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
 
         $method->invoke($this->result);
 
-        $property-setValue($this->result, FALSE);
+        $property->setValue($this->result, FALSE);
     }
 
     /**

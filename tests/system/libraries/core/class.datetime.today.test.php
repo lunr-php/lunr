@@ -60,7 +60,7 @@ class DateTimeTodayTest extends DateTimeTest
      */
     public function testTodayWithLocalizedCustomDatetimeFormat()
     {
-        $day = strftime('%u');
+        $day           = strftime('%u');
         $localized_day = $this->datetime->set_datetime_format('%A')->set_locale('de_DE')->today();
         $this->assertTrue($this->check_localized_day($day, $localized_day));
     }
@@ -112,7 +112,7 @@ class DateTimeTodayTest extends DateTimeTest
      */
     public function testNowWithLocalizedCustomDatetimeFormat()
     {
-        $day = strftime('%u');
+        $day           = strftime('%u');
         $localized_day = $this->datetime->set_datetime_format('%A')->set_locale('de_DE')->now();
         $this->assertTrue($this->check_localized_day($day, $localized_day));
     }

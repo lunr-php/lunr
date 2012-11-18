@@ -50,7 +50,9 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
         $method = $this->builder_reflection->getMethod('collate');
         $method->setAccessible(TRUE);
 
-        $this->assertEquals('value COLLATE utf8_general_ci', $method->invokeArgs($this->builder, array('value', 'utf8_general_ci')));
+        $string = 'value COLLATE utf8_general_ci';
+
+        $this->assertEquals($string, $method->invokeArgs($this->builder, array('value', 'utf8_general_ci')));
     }
 
     /**
@@ -200,7 +202,6 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
 
         $this->assertEquals($escaped . ' AS `alias`', $value);
     }
-
 
 }
 

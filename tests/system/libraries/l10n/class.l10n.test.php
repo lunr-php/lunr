@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\L10n;
+
 use Lunr\Libraries\Core\DateTime;
 use Lunr\Libraries\Core\Configuration;
 use PHPUnit_Framework_TestCase;
@@ -59,10 +60,10 @@ class L10nTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $config = new Configuration(array());
-        $config['l10n'] = array();
+        $config                             = new Configuration(array());
+        $config['l10n']                     = array();
         $config['l10n']['default_language'] = self::DEFAULT_LANG;
-        $config['l10n']['locales'] = dirname(__FILE__) . '/../../../statics/l10n';
+        $config['l10n']['locales']          = dirname(__FILE__) . '/../../../statics/l10n';
 
         $datetime = $this->getMock('Lunr\Libraries\Core\DateTime');
         $datetime->expects($this->any())

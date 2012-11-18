@@ -27,6 +27,7 @@ namespace Lunr\Libraries\DataAccess;
  */
 class MySQLDMLQueryBuilderLimitTest extends MySQLDMLQueryBuilderTest
 {
+
     /**
      * Test specifying the limit part of a query with default offset.
      *
@@ -42,7 +43,7 @@ class MySQLDMLQueryBuilderLimitTest extends MySQLDMLQueryBuilderTest
         $this->assertEquals('LIMIT 10', $property->getValue($this->builder));
     }
 
-	/**
+    /**
      * Test specifying the limit part of a query with custom offset.
      *
      * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::limit
