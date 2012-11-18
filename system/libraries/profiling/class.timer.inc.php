@@ -94,7 +94,7 @@ class Timer
     {
         if (!isset(self::$backend))
         {
-            self::$backend = TimerBackendFactory::get_backend($backend);
+            self::$backend      = TimerBackendFactory::get_backend($backend);
             self::$backend_type = $backend;
             return TRUE;
         }
