@@ -171,18 +171,18 @@ $config['oauth']['facebook']['request_token_url'] = 'http://www.facebook.com/dia
  * URL where to request the 'access token' for Facebook
  * @global String $config['oauth']['facebook']['access_token_url']
  */
-$config['oauth']['facebook']['access_token_url']  = 'https://graph.facebook.com/oauth/access_token';
+$config['oauth']['facebook']['access_token_url'] = 'https://graph.facebook.com/oauth/access_token';
 
 /**
  * URL where to verify and retrieve the user's credentials on Facebook
  * @global String $config['oauth']['facebook']['verify_url']
  */
-$config['oauth']['facebook']['verify_url']  = 'https://graph.facebook.com/me/?access_token=';
+$config['oauth']['facebook']['verify_url'] = 'https://graph.facebook.com/me/?access_token=';
 
 /**
  * URL where to publish on Facebook
  * @global String $config['oauth']['facebook']['publish_url']
  */
-$config['oauth']['facebook']['publish_url']  = 'https://graph.facebook.com/me/feed';
+$config['oauth']['facebook']['publish_url'] = 'https://graph.facebook.com/me/feed';
 
 ?>
