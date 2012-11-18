@@ -15,6 +15,7 @@
  */
 
 namespace Lunr\Libraries\Database;
+
 use Lunr\Libraries\Core\DateTime;
 use \MySQLndUhConnection;
 
@@ -66,9 +67,9 @@ class MySQLndQueryLogger extends MySQLndUhConnection
     {
         $id = $this->get_function_call_hierarchy(xdebug_get_function_stack());
 
-        $start = microtime(TRUE);
+        $start  = microtime(TRUE);
         $return = parent::query($connection, $query);
-        $time = microtime(TRUE) - $start;
+        $time   = microtime(TRUE) - $start;
 
         $this->record_query_stats($id, $time);
 
@@ -99,6 +100,7 @@ class MySQLndQueryLogger extends MySQLndUhConnection
                 $hierarchy .= $value['function'] . '()=>';
             }
         }
+
         unset($value);
 
         $hierarchy = trim($hierarchy, '=>');
@@ -120,8 +122,8 @@ class MySQLndQueryLogger extends MySQLndUhConnection
 
         $data = array(
             'queryIdentifier' => $identifier,
-            'execTime' => $time,
-            'execDate' => $this->datetime->set_datetime_format('%Y-%m-%d %H-%M-%S')->get_datetime()
+            'execTime'        => $time,
+            'execDate'        => $this->datetime->set_datetime_format('%Y-%m-%d %H-%M-%S')->get_datetime()
         );
         $sqlite->insert('query_stats', $data);
     }

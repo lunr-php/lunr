@@ -16,6 +16,7 @@
  */
 
 namespace Lunr\Libraries\Database;
+
 use Lunr\Libraries\Core\Output;
 
 /**
@@ -108,9 +109,9 @@ class DBConMySQL extends DBCon
         parent::__construct($readonly);
         $this->rw_host = $db['rw_host'];
         $this->ro_host = $db['ro_host'];
-        $this->user = $db['username'];
-        $this->pwd = $db['password'];
-        $this->db = $db['database'];
+        $this->user    = $db['username'];
+        $this->pwd     = $db['password'];
+        $this->db      = $db['database'];
 
         if (isset($db['socket']))
         {
@@ -121,10 +122,10 @@ class DBConMySQL extends DBCon
             $this->socket = ini_get('mysqli.default_socket');
         }
 
-        $this->where_group = FALSE;
-        $this->last_query = '';
-        $this->transaction = FALSE;
-        $this->for_update = FALSE;
+        $this->where_group  = FALSE;
+        $this->last_query   = '';
+        $this->transaction  = FALSE;
+        $this->for_update   = FALSE;
         $this->gen_uuid_hex = "REPLACE(UUID(),'-','')";
     }
 
@@ -139,10 +140,12 @@ class DBConMySQL extends DBCon
         {
             $this->rollback();
         }
+
         if ($this->connected)
         {
             $this->disconnect();
         }
+
         unset($this->ro_host);
         unset($this->rw_host);
         unset($this->user);
@@ -186,6 +189,7 @@ class DBConMySQL extends DBCon
                 $this->socket
             );
         }
+
         if ($this->res)
         {
             mysqli_set_charset($this->res, 'utf8');
@@ -254,7 +258,7 @@ class DBConMySQL extends DBCon
      */
     public function found_rows()
     {
-        $sql = 'SELECT FOUND_ROWS() AS total;';
+        $sql   = 'SELECT FOUND_ROWS() AS total;';
         $query = $this->query($sql, TRUE);
         if ($query)
         {
@@ -272,7 +276,8 @@ class DBConMySQL extends DBCon
      * Query like it would be executed by query() at this point
      * **DEBUG**
      *
-     * @param String $from Where to get the data from
+     * @param String  $from  Where to get the data from
+     * @param Boolean $union Wether this is used to create a union query or not.
      *
      * @return String SQL query
      */
@@ -386,6 +391,7 @@ class DBConMySQL extends DBCon
                     Output::error($this->last_error());
                     return FALSE;
                 }
+
                 return new QueryMySQL($output, $this->res);
             }
             elseif ($this->readonly === TRUE)
@@ -442,43 +448,43 @@ class DBConMySQL extends DBCon
             if ($this->join != '')
             {
                 $sql_command .= $this->join;
-                $this->join = '';
+                $this->join   = '';
             }
 
             if ($this->where != '')
             {
                 $sql_command .= $this->where;
-                $this->where = '';
+                $this->where  = '';
             }
 
             if ($this->group != '')
             {
                 $sql_command .= $this->group;
-                $this->group = '';
+                $this->group  = '';
             }
 
             if ($this->order != '')
             {
                 $sql_command .= $this->order;
-                $this->order = '';
+                $this->order  = '';
             }
 
             if ($this->limit != '')
             {
                 $sql_command .= $this->limit;
-                $this->limit = '';
+                $this->limit  = '';
             }
 
             if ($this->for_update)
             {
-                $sql_command .= ' FOR UPDATE';
+                $sql_command     .= ' FOR UPDATE';
                 $this->for_update = FALSE;
             }
 
             if ($this->union != '')
             {
                 $sql_command .= ')';
-                $this->union = '';
+                $this->union  = '';
             }
 
             $this->last_query = $sql_command;
@@ -490,6 +496,7 @@ class DBConMySQL extends DBCon
                 Output::error($this->last_error());
                 return FALSE;
             }
+
             return new QueryMySQL($output, $this->res);
         }
         else
@@ -663,6 +670,7 @@ class DBConMySQL extends DBCon
         {
             $this->where .= " $connector ( ";
         }
+
         $this->where_group = TRUE;
     }
 
@@ -695,7 +703,7 @@ class DBConMySQL extends DBCon
         }
         elseif ($this->where_group)
         {
-            $this->where .= '';
+            $this->where      .= '';
             $this->where_group = FALSE;
         }
         else
@@ -710,7 +718,7 @@ class DBConMySQL extends DBCon
         else
         {
             $base_charset = '_utf8 ';
-            $collate = " COLLATE $collate";
+            $collate      = " COLLATE $collate";
         }
 
         if (substr($val, 0, 3) == 'IS ')
@@ -745,7 +753,7 @@ class DBConMySQL extends DBCon
         }
         elseif ($this->where_group)
         {
-            $this->where .= '';
+            $this->where      .= '';
             $this->where_group = FALSE;
         }
         else
@@ -760,7 +768,7 @@ class DBConMySQL extends DBCon
         else
         {
             $base_charset = '_utf8 ';
-            $collate = " COLLATE $collate";
+            $collate      = " COLLATE $collate";
         }
 
         $this->where .= $this->escape_columns($col) . $operator . ' ';
@@ -788,7 +796,7 @@ class DBConMySQL extends DBCon
         }
         elseif ($this->where_group)
         {
-            $this->where .= '';
+            $this->where      .= '';
             $this->where_group = FALSE;
         }
         else
@@ -803,7 +811,7 @@ class DBConMySQL extends DBCon
         else
         {
             $base_charset = '_utf8 ';
-            $collate = " COLLATE $collate";
+            $collate      = " COLLATE $collate";
         }
 
         if (substr($val, 0, 2) == 'IS')
@@ -839,7 +847,7 @@ class DBConMySQL extends DBCon
         }
         elseif ($this->where_group)
         {
-            $this->where .= '';
+            $this->where      .= '';
             $this->where_group = FALSE;
         }
         else
@@ -854,7 +862,7 @@ class DBConMySQL extends DBCon
         else
         {
             $base_charset = '_utf8 ';
-            $collate = " COLLATE $collate";
+            $collate      = " COLLATE $collate";
         }
 
         $this->where .= $this->escape_columns($col) . $operator . ' ';
@@ -881,7 +889,7 @@ class DBConMySQL extends DBCon
         }
         elseif ($this->where_group)
         {
-            $this->where .= '';
+            $this->where      .= '';
             $this->where_group = FALSE;
         }
         else
@@ -896,25 +904,25 @@ class DBConMySQL extends DBCon
         else
         {
             $base_charset = '_utf8 ';
-            $collate = " COLLATE $collate";
+            $collate      = " COLLATE $collate";
         }
 
         switch ($match)
         {
             case 'forward':
                 $this->where .= $this->escape_columns($col);
-                $this->where .= ' LIKE '.$base_charset . "'";
-                $this->where .= $this->escape_string($val) . "%'" .$collate;
+                $this->where .= ' LIKE ' . $base_charset . "'";
+                $this->where .= $this->escape_string($val) . "%'" . $collate;
                 break;
             case 'backward':
                 $this->where .= $this->escape_columns($col);
-                $this->where .= ' LIKE '.$base_charset . "'%";
-                $this->where .= $this->escape_string($val) . "'" .$collate;
+                $this->where .= ' LIKE ' . $base_charset . "'%";
+                $this->where .= $this->escape_string($val) . "'" . $collate;
                 break;
             default:
                 $this->where .= $this->escape_columns($col);
-                $this->where .= ' LIKE '.$base_charset . "'%";
-                $this->where .= $this->escape_string($val) . "%'" .$collate;
+                $this->where .= ' LIKE ' . $base_charset . "'%";
+                $this->where .= $this->escape_string($val) . "%'" . $collate;
                 break;
         }
     }
@@ -938,7 +946,7 @@ class DBConMySQL extends DBCon
         }
         elseif ($this->where_group)
         {
-            $this->where .= '';
+            $this->where      .= '';
             $this->where_group = FALSE;
         }
         else
@@ -953,25 +961,25 @@ class DBConMySQL extends DBCon
         else
         {
             $base_charset = '_utf8 ';
-            $collate = " COLLATE $collate";
+            $collate      = " COLLATE $collate";
         }
 
         switch ($match)
         {
             case 'forward':
                 $this->where .= $this->escape_columns($col);
-                $this->where .= ' LIKE '.$base_charset . "'";
-                $this->where .= $this->escape_string($val) . "%'" .$collate;
+                $this->where .= ' LIKE ' . $base_charset . "'";
+                $this->where .= $this->escape_string($val) . "%'" . $collate;
                 break;
             case 'backward':
                 $this->where .= $this->escape_columns($col);
-                $this->where .= ' LIKE '.$base_charset . "'%";
-                $this->where .= $this->escape_string($val) . "'" .$collate;
+                $this->where .= ' LIKE ' . $base_charset . "'%";
+                $this->where .= $this->escape_string($val) . "'" . $collate;
                 break;
             default:
                 $this->where .= $this->escape_columns($col);
-                $this->where .= ' LIKE '.$base_charset . "'%";
-                $this->where .= $this->escape_string($val) . "%'" .$collate;
+                $this->where .= ' LIKE ' . $base_charset . "'%";
+                $this->where .= $this->escape_string($val) . "%'" . $collate;
                 break;
         }
     }
@@ -995,7 +1003,7 @@ class DBConMySQL extends DBCon
         }
         elseif ($this->where_group)
         {
-            $this->where .= '';
+            $this->where      .= '';
             $this->where_group = FALSE;
         }
         else
@@ -1010,25 +1018,25 @@ class DBConMySQL extends DBCon
         else
         {
             $base_charset = '_utf8 ';
-            $collate = " COLLATE $collate";
+            $collate      = " COLLATE $collate";
         }
 
         switch ($match)
         {
             case 'forward':
                 $this->where .= $this->escape_columns($col);
-                $this->where .= ' LIKE '.$base_charset . "'";
-                $this->where .= $this->escape_string($val) . "%'" .$collate;
+                $this->where .= ' LIKE ' . $base_charset . "'";
+                $this->where .= $this->escape_string($val) . "%'" . $collate;
                 break;
             case 'backward':
                 $this->where .= $this->escape_columns($col);
-                $this->where .= ' LIKE '.$base_charset . "'%";
-                $this->where .= $this->escape_string($val) . "'" .$collate;
+                $this->where .= ' LIKE ' . $base_charset . "'%";
+                $this->where .= $this->escape_string($val) . "'" . $collate;
                 break;
             default:
                 $this->where .= $this->escape_columns($col);
-                $this->where .= ' LIKE '.$base_charset . "'%";
-                $this->where .= $this->escape_string($val) . "%'" .$collate;
+                $this->where .= ' LIKE ' . $base_charset . "'%";
+                $this->where .= $this->escape_string($val) . "%'" . $collate;
                 break;
         }
     }
@@ -1049,13 +1057,14 @@ class DBConMySQL extends DBCon
         }
         elseif ($this->where_group)
         {
-            $this->where .= '';
+            $this->where      .= '';
             $this->where_group = FALSE;
         }
         else
         {
             $this->where .= ' AND ';
         }
+
         $this->where .= $this->escape_columns($col) . 'IN ';
         $this->where .= $this->prepare_data($values, 'values');
     }
@@ -1076,7 +1085,7 @@ class DBConMySQL extends DBCon
         }
         elseif ($this->where_group)
         {
-            $this->where .= '';
+            $this->where      .= '';
             $this->where_group = FALSE;
         }
         else
@@ -1094,6 +1103,7 @@ class DBConMySQL extends DBCon
         {
             $value = "UNHEX('$value')";
         }
+
         unset($value);
 
         $this->where .= $this->escape_columns($col) . 'IN ';
@@ -1148,6 +1158,7 @@ class DBConMySQL extends DBCon
         {
             $this->group .= ', ';
         }
+
         $this->group .= $this->escape_columns($group);
     }
 
@@ -1180,13 +1191,13 @@ class DBConMySQL extends DBCon
      */
     public function union($from)
     {
-        $this->union = $this->preliminary_query($from, TRUE) . ' UNION ';
-        $this->limit = '';
-        $this->where = '';
+        $this->union  = $this->preliminary_query($from, TRUE) . ' UNION ';
+        $this->limit  = '';
+        $this->where  = '';
         $this->select = '';
-        $this->order = '';
-        $this->group = '';
-        $this->join = '';
+        $this->order  = '';
+        $this->group  = '';
+        $this->join   = '';
     }
 
     /**
@@ -1267,6 +1278,7 @@ class DBConMySQL extends DBCon
                     $sql .= "`$key` = '" . $this->escape_string($value) . "',";
                 }
             }
+
             $sql = substr_replace($sql, ' ', strripos($sql, ','));
             return $this->query($sql, FALSE);
         }
@@ -1440,7 +1452,7 @@ class DBConMySQL extends DBCon
         }
         else
         {
-            $sql = 'ALTER VIEW ' . $this->escape_string($name) . ' AS ';
+            $sql  = 'ALTER VIEW ' . $this->escape_string($name) . ' AS ';
             $sql .= $this->preliminary_query($from);
             return $this->query($sql, FALSE);
         }
@@ -1463,7 +1475,7 @@ class DBConMySQL extends DBCon
         }
         else
         {
-            $sql = 'CREATE VIEW ' . $this->escape_string($name) . ' AS ';
+            $sql  = 'CREATE VIEW ' . $this->escape_string($name) . ' AS ';
             $sql .= $this->preliminary_query($from);
             return $this->query($sql, FALSE);
         }
@@ -1482,15 +1494,17 @@ class DBConMySQL extends DBCon
         {
             $this->connect();
         }
+
         if ($this->connected)
         {
             if (is_array($string))
             {
                 $input = print_r($string, TRUE);
-                $msg = "Wrong input for escape_string()! Array given: $input";
+                $msg   = "Wrong input for escape_string()! Array given: $input";
                 Output::error($msg);
                 return FALSE;
             }
+
             return mysqli_real_escape_string($this->res, $string);
         }
         else
@@ -1521,7 +1535,7 @@ class DBConMySQL extends DBCon
 
         foreach ($clauses AS $part)
         {
-            $parts = explode('=', $part);
+            $parts   = explode('=', $part);
             $return .= $this->escape_columns($parts[0]) . ' = ';
             $return .= $this->escape_columns($parts[1]);
             $return .= ' AND ';
@@ -1538,7 +1552,7 @@ class DBConMySQL extends DBCon
      */
     public function generate_uuid()
     {
-        $sql = 'SELECT '.$this->gen_uuid_hex.' AS UUID;';
+        $sql   = 'SELECT ' . $this->gen_uuid_hex . ' AS UUID;';
         $query = $this->query($sql, TRUE);
         if ($query)
         {
