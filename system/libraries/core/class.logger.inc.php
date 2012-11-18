@@ -80,7 +80,7 @@ class Logger
             $infix = '';
         }
 
-        $msg = array();
+        $msg    = array();
         $msg[0] = $infix . $info;
         $msg[1] = $prefix . $msg[0];
 
@@ -109,6 +109,7 @@ class Logger
             {
                 xdebug_print_function_stack($msg[0]);
             }
+
             error_log($msg[1], 3, $file);
         }
     }

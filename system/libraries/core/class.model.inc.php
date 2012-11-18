@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use Lunr\Libraries\Database\DBMan;
 
 /**
@@ -46,7 +47,7 @@ abstract class Model
      */
     public function __construct($db)
     {
-        $this->db = DBMan::get_db_connection($db);
+        $this->db        = DBMan::get_db_connection($db);
         $this->db_config = $db;
     }
 

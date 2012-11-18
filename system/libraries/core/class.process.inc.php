@@ -46,6 +46,7 @@ class Process
         {
             $cmd .= ' 2>&1';
         }
+
         if ($out != '')
         {
             if ($append === TRUE)
@@ -144,6 +145,7 @@ class Process
                     {
                         call_user_func($call, $data[$i]);
                     }
+
                     exit();
                 }
             }

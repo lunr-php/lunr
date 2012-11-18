@@ -76,11 +76,11 @@ class CliParser
      */
     public function __construct($shortopts, $longopts = '')
     {
-        $this->short = $shortopts;
-        $this->long = $longopts;
+        $this->short   = $shortopts;
+        $this->long    = $longopts;
         $this->checked = array();
-        $this->ast = array();
-        $this->error = FALSE;
+        $this->ast     = array();
+        $this->error   = FALSE;
     }
 
     /**
@@ -106,13 +106,14 @@ class CliParser
     public function parse_argv($args)
     {
         $this->args = $args;
-        foreach($args as $index=>$arg)
+        foreach($args as $index => $arg)
         {
             if(!in_array($arg, $this->checked) && $index != 0)
             {
                 $this->is_opt($arg, $index, TRUE);
             }
         }
+
         return $this->ast;
     }
 
@@ -165,6 +166,7 @@ class CliParser
                 echo "Superfluos argument: $opt\n";
             }
         }
+
         return FALSE;
     }
 
@@ -176,10 +178,10 @@ class CliParser
      *
      * @return boolean $return Success or Failure
      */
-    private function is_valid($opt,$index)
+    private function is_valid($opt, $index)
     {
-        $pos=strpos($this->short, $opt);
-        if($pos!==FALSE)
+        $pos = strpos($this->short, $opt);
+        if($pos !== FALSE)
         {
             $this->ast[$opt] = array();
             return $this->check_argument(
@@ -194,6 +196,7 @@ class CliParser
             echo 'Invalid parameter given: -' . $opt . "\n";
             $this->error = TRUE;
         }
+
         return FALSE;
     }
 
@@ -210,21 +213,22 @@ class CliParser
         $match = FALSE;
         foreach($this->long as $key => $arg)
         {
-            if($opt==substr($arg, 0, strlen($opt)))
+            if($opt == substr($arg, 0, strlen($opt)))
             {
                 if (strlen($arg) == strlen($opt))
                 {
                     $match = TRUE;
-                    $args = $key;
+                    $args  = $key;
                 }
                 elseif ($arg{strlen($opt)} == ':'
                     || $arg{strlen($opt)} == ';')
                 {
                     $match = TRUE;
-                    $args = $key;
+                    $args  = $key;
                 }
             }
         }
+
         if($match)
         {
             $this->ast[$opt] = array();
@@ -254,22 +258,22 @@ class CliParser
      *
      * @return boolean $return Success or Failure
      */
-    private function check_argument($opt,$index,$pos,$a)
+    private function check_argument($opt, $index, $pos, $a)
     {
         $next = $index + 1;
-        if($pos+1 < strlen($a))
+        if($pos + 1 < strlen($a))
         {
-            if($a{$pos+1} == ':')
+            if($a{$pos + 1} == ':')
             {
-                if (count($this->args)>$next)
+                if (count($this->args) > $next)
                 {
                     if (!$this->is_opt($this->args[$next], $next)
                         && $this->args[$next]{0} != '-')
                     {
                         array_push($this->ast[$opt], $this->args[$next]);
-                        if ($pos+2<strlen($a))
+                        if ($pos + 2 < strlen($a))
                         {
-                            if ($a{$pos+2} == ':' || $a{$pos+2} == ';')
+                            if ($a{$pos + 2} == ':' || $a{$pos + 2} == ';')
                             {
                                 return $this->check_argument(
                                     $opt,
@@ -300,7 +304,7 @@ class CliParser
                     $this->error = TRUE;
                 }
             }
-            elseif($a{$pos+1} == ';')
+            elseif($a{$pos + 1} == ';')
             {
                 if (count($this->args) > $next
                     && strlen($this->args[$next]) != 0)
@@ -309,9 +313,9 @@ class CliParser
                         && $this->args[$next]{0} != '-')
                     {
                         array_push($this->ast[$opt], $this->args[$next]);
-                        if ($pos+2<strlen($a))
+                        if ($pos + 2 < strlen($a))
                         {
-                            if ($a{$pos+2} == ';')
+                            if ($a{$pos + 2} == ';')
                             {
                                 return $this->check_argument(
                                     $opt,
@@ -342,9 +346,11 @@ class CliParser
                 {
                     echo 'Superfluos argument: ' . $this->args[$next] . "\n";
                 }
+
                 return TRUE;
             }
         }
+
         return FALSE;
     }
 

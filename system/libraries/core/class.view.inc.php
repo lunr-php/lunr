@@ -60,8 +60,8 @@ abstract class View
      */
     public function __construct(&$request, &$response, &$configuration, &$l10nprovider = NULL)
     {
-        $this->request =& $request;
-        $this->response =& $response;
+        $this->request       =& $request;
+        $this->response      =& $response;
         $this->configuration =& $configuration;
 
         if ($l10nprovider === NULL)
@@ -159,6 +159,7 @@ abstract class View
         {
             $basename .= '_' . $suffix;
         }
+
         return $basename;
     }
 

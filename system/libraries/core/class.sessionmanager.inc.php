@@ -16,6 +16,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use Lunr\Models\Core\SessionModel;
 
 /**

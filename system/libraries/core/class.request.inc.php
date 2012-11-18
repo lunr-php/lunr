@@ -80,9 +80,9 @@ class Request
      */
     public function __construct(&$configuration)
     {
-        $this->post = array();
-        $this->get  = array();
-        $this->request = array();
+        $this->post       = array();
+        $this->get        = array();
+        $this->request    = array();
         $this->json_enums = array();
 
         $this->request['sapi'] = PHP_SAPI;
@@ -266,7 +266,7 @@ class Request
         {
             $this->request['base_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
-            $this->request['protocol']  =
+            $this->request['protocol'] =
                 (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
 
             $this->request['domain'] = $_SERVER['SERVER_NAME'];
@@ -278,6 +278,7 @@ class Request
             {
                 $baseurl .= ':' . $this->request['port'];
             }
+
             $this->request['base_url'] = $baseurl . $this->request['base_path'];
         }
     }

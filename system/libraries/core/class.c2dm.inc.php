@@ -15,6 +15,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use Lunr\Libraries\Network\Curl;
 
 /**
@@ -57,7 +58,7 @@ class C2DM
         $this->errmsg = '';
 
         // default: no ID
-        $this->id   = '';
+        $this->id = '';
 
         // set http_code to zero to indicate we haven't made a request yet
         $this->http_code = 0;
@@ -106,7 +107,7 @@ class C2DM
      *
      * @return String authToken, FALSE otherwise
      */
-    public function get_auth_token($username, $password, $source='')
+    public function get_auth_token($username, $password, $source = '')
     {
         global $config;
 
@@ -152,20 +153,20 @@ class C2DM
     {
         global $config;
 
-        $header  = 'Authorization: GoogleLogin auth=' . $authToken;
+        $header       = 'Authorization: GoogleLogin auth=' . $authToken;
         $collapse_key = $config['c2dm']['collapse_key'];
 
         $data = array(
             'registration_id' => $registrationID,
-            'collapse_key' => $collapse_key,
-            'data.message' => $message
+            'collapse_key'    => $collapse_key,
+            'data.message'    => $message
         );
 
         $curl = new Curl();
         $curl->set_option('CURLOPT_HEADER', TRUE);
         $curl->set_http_header($header);
 
-        $returned_data = $curl->post_request($config['c2dm']['google_send_url'], $data);
+        $returned_data   = $curl->post_request($config['c2dm']['google_send_url'], $data);
         $this->http_code = $curl->http_code;
 
         if ($returned_data === FALSE)
@@ -174,6 +175,7 @@ class C2DM
             {
                 $this->errmsg = 'Authorization token invalid';
             }
+
             if($curl->http_code == 503)
             {
                 $this->errmsg = 'Server temporarily unavailable';
@@ -182,24 +184,24 @@ class C2DM
             {
                 $this->errmsg = 'Error sending notification';
             }
-
         }
         else
         {
             $result = substr($returned_data, $curl->info['header_size']);
             if(stripos($result, 'id') !== FALSE)
             {
-                $result = str_replace('id=', '', $result);
+                $result   = str_replace('id=', '', $result);
                 $this->id = $result;
                 unset($curl);
                 return TRUE;
             }
             else
             {
-                $result = str_replace('Error=', '', $result);
+                $result       = str_replace('Error=', '', $result);
                 $this->errmsg = $result;
             }
         }
+
         unset($curl);
         return FALSE;
     }

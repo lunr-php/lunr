@@ -56,10 +56,10 @@ class Response
      */
     public function __construct()
     {
-        $this->data = array();
-        $this->errmsg = '';
+        $this->data        = array();
+        $this->errmsg      = '';
         $this->return_code = 0;
-        $this->errinfo = '';
+        $this->errinfo     = '';
     }
 
     /**
@@ -112,6 +112,7 @@ class Response
                 {
                     $this->return_code = $value;
                 }
+
                 return;
             case 'errmsg':
             case 'errinfo':

@@ -68,11 +68,11 @@ class Mail
      */
     public function __construct()
     {
-        $this->from = '';
-        $this->to = array();
-        $this->cc = array();
-        $this->bcc = array();
-        $this->msg = '';
+        $this->from    = '';
+        $this->to      = array();
+        $this->cc      = array();
+        $this->bcc     = array();
+        $this->msg     = '';
         $this->subject = '';
     }
 
@@ -125,6 +125,7 @@ class Mail
         {
             $this->from = $from;
         }
+
         return $this;
     }
 
@@ -141,6 +142,7 @@ class Mail
         {
             $this->to[] = $to;
         }
+
         return $this;
     }
 
@@ -157,6 +159,7 @@ class Mail
         {
             $this->cc[] = $cc;
         }
+
         return $this;
     }
 
@@ -173,6 +176,7 @@ class Mail
         {
             $this->bcc[] = $bcc;
         }
+
         return $this;
     }
 
@@ -243,7 +247,7 @@ class Mail
             return FALSE;
         }
 
-        $header  = 'From: ' . $this->from . "\r\n";
+        $header = 'From: ' . $this->from . "\r\n";
 
         $header .= $this->generate_carbon_copy_header();
         $header .= $this->generate_carbon_copy_header('bcc');

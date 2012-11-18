@@ -41,7 +41,7 @@ class APNS
      */
     public function __construct()
     {
-        $this->error = new \SplFixedArray(10);
+        $this->error    = new \SplFixedArray(10);
         $this->error[0] = 'UNDEFINED'; //SUCCESS?
         $this->error[1] = 'PROCESSING ERROR';
         $this->error[2] = 'MISSING DEVICE TOKEN';
@@ -92,6 +92,7 @@ class APNS
             );
             return FALSE;
         }
+
         $json_payload = json_encode($payload);
         //$identifier = '0011';
         //$expiry_date = '';
@@ -116,6 +117,7 @@ class APNS
             );
             return FALSE;
         }
+
         //$response = "";
         //while (!feof($fp))
         //{
@@ -128,6 +130,7 @@ class APNS
             );
             //return FALSE;
         }
+
         //if(!strlen($res;ponse))
         //{
         ////TODO: Check this unpack
@@ -195,7 +198,7 @@ class APNS
             echo "[OK]\n";
         }
 
-        $feedback_tokens = array ();
+        $feedback_tokens = array();
         //and read the data on the connection:
         while (!feof($apns))
         {
@@ -206,6 +209,7 @@ class APNS
                     unpack('N1timestamp/n1length/H*devtoken', $data);
             }
         }
+
         fclose($apns);
         //var_dump($feedback_tokens);
     }
@@ -224,6 +228,7 @@ class APNS
         {
             $response[1] = 9;
         }
+
         Output::error(
             "Push notification '$response' rejected by APNS. Reason: "
             . $this->error[$response[1]], $config['apns']['log']

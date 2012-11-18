@@ -46,7 +46,7 @@ abstract class Controller
     public function __construct(&$response)
     {
         $this->response =& $response;
-        $this->error = array();
+        $this->error    = array();
     }
 
     /**

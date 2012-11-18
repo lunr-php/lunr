@@ -238,7 +238,7 @@ class Verification
         }
         else
         {
-            $this->pointer = NULL;
+            $this->pointer       = NULL;
             $this->superfluous[] = $index;
         }
 
@@ -282,7 +282,7 @@ class Verification
             }
         }
 
-        foreach($this->result as $index=>$checks)
+        foreach($this->result as $index => $checks)
         {
             # check if index was ignored
             if ($checks === TRUE)
@@ -290,7 +290,7 @@ class Verification
                 continue;
             }
 
-            foreach ($checks as $rule=>$result)
+            foreach ($checks as $rule => $result)
             {
                 if ($result !== TRUE)
                 {
@@ -325,6 +325,7 @@ class Verification
         {
             $this->logger->log_errorln($error_prefix . "Ruleset for non-existing key '$value'!", $this->logfile);
         }
+
         unset($value);
 
         return TRUE;
@@ -340,8 +341,8 @@ class Verification
     private function is_fully_checked($error_prefix)
     {
         // Check that input matches with the defined ruleset
-        $data_indexes    = array_keys($this->data);
-        $checked_indexes = array_keys($this->result);
+        $data_indexes       = array_keys($this->data);
+        $checked_indexes    = array_keys($this->result);
         $unhandled_elements = array_diff($data_indexes, $checked_indexes);
 
         if ($unhandled_elements == array())
@@ -353,6 +354,7 @@ class Verification
         {
             $this->logger->log_errorln($error_prefix . "Unhandled Index '$value'!", $this->logfile);
         }
+
         return FALSE;
     }
 
@@ -369,7 +371,7 @@ class Verification
         }
 
         $this->result[$this->pointer] = TRUE;
-        $this->pointer = NULL;
+        $this->pointer                = NULL;
 
         return $this;
     }
@@ -452,7 +454,7 @@ class Verification
         }
 
         $this->result[$this->pointer]['is_numerical_boolean'] =
-            ($this->data[$this->pointer] === 1)   || ($this->data[$this->pointer] === 0) ||
+            ($this->data[$this->pointer] === 1) || ($this->data[$this->pointer] === 0) ||
             ($this->data[$this->pointer] === '0') || ($this->data[$this->pointer] === '1');
 
         return $this;
@@ -490,8 +492,8 @@ class Verification
         }
 
         $this->result[$this->pointer]['is_numerical_troolean'] =
-            ($this->data[$this->pointer] === 0)   || ($this->data[$this->pointer] === 1)   ||
-            ($this->data[$this->pointer] === 2)   || ($this->data[$this->pointer] === '0') ||
+            ($this->data[$this->pointer] === 0) || ($this->data[$this->pointer] === 1) ||
+            ($this->data[$this->pointer] === 2) || ($this->data[$this->pointer] === '0') ||
             ($this->data[$this->pointer] === '1') || ($this->data[$this->pointer] === '2');
 
         return $this;

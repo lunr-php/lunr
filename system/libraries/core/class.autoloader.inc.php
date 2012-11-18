@@ -47,7 +47,7 @@ class Autoloader
     public function __construct()
     {
         $this->controllers = array('web', 'webservice', 'cli');
-        $this->loaded = array();
+        $this->loaded      = array();
     }
 
     /**
@@ -115,7 +115,7 @@ class Autoloader
     {
         $class = str_replace('\\', '/', $class);
         $path  = strtolower(dirname($class));
-        $path  = substr($path, strpos($path, '/')+1);
+        $path  = substr($path, strpos($path, '/') + 1);
         $path  = empty($path) ? '' : $path . '/';
         $class = basename($class);
 
@@ -132,7 +132,7 @@ class Autoloader
     private function get_class_filename($class)
     {
         $normalized_name = trim(preg_replace('/([a-z0-9])?([A-Z])/', '$1 $2', $class));
-        $split_name = explode(' ', $normalized_name);
+        $split_name      = explode(' ', $normalized_name);
 
         if ($split_name[0] == 'Mock')
         {
@@ -140,7 +140,7 @@ class Autoloader
             return "class.$class.mock.php";
         }
 
-        $index = sizeof($split_name)-1;
+        $index = sizeof($split_name) - 1;
 
         if ($index == 0)
         {

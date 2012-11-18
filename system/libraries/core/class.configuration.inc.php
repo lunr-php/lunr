@@ -16,6 +16,7 @@
  */
 
 namespace Lunr\Libraries\Core;
+
 use ArrayAccess;
 use Iterator;
 use Countable;
@@ -144,7 +145,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
             $config = $this->convert_array_to_class($config);
         }
 
-        $this->config = array_merge_recursive($this->config, $config);
+        $this->config       = array_merge_recursive($this->config, $config);
         $this->size_invalid = TRUE;
     }
 
@@ -224,6 +225,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
         {
             $this->config[$offset] = $value;
         }
+
         $this->size_invalid = TRUE;
     }
 
@@ -289,6 +291,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
                 $data[$key] = $value->toArray();
             }
         }
+
         return $data;
     }
 
@@ -352,10 +355,11 @@ class Configuration implements ArrayAccess, Iterator, Countable
     public function valid()
     {
         $return = $this->current();
-        if (($return === FALSE) && ($this->position+1 <= $this->count()))
+        if (($return === FALSE) && ($this->position + 1 <= $this->count()))
         {
             $return = TRUE;
         }
+
         return $return !== FALSE;
     }
 
@@ -370,9 +374,10 @@ class Configuration implements ArrayAccess, Iterator, Countable
     {
         if ($this->size_invalid === TRUE)
         {
-            $this->size = count($this->config);
+            $this->size         = count($this->config);
             $this->size_invalid = FALSE;
         }
+
         return $this->size;
     }
 
