@@ -473,7 +473,7 @@ abstract class DatabaseDMLQueryBuilder
     /**
      * Define INTO clause of the SQL statement.
      *
-     * @param String $table       Table reference
+     * @param String $table Table reference
      *
      * @return void
      */

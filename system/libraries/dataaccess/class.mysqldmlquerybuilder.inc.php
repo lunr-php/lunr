@@ -295,7 +295,6 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
         return $this->insert_mode($mode);
     }
 
-
     /**
      * Define FROM clause of the SQL statement.
      *
@@ -313,7 +312,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define INTO clause of the SQL statement.
      *
-     * @param String $table       Table reference
+     * @param String $table Table reference
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -420,7 +419,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
 
         if( $order !== NULL && is_bool($order) )
         {
-            $direction = ($order === TRUE) ? " ASC" : " DESC";
+            $direction = ($order === TRUE) ? ' ASC' : ' DESC';
             $this->group_by .= $direction;
         }
         return $this;
@@ -458,7 +457,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Define ORDER BY clause in the SQL statement
+     * Define ORDER BY clause in the SQL statement.
      *
      * @param String  $expr Expression to order by
      * @param Boolean $asc  Order ASCending/TRUE or DESCending/FALSE
