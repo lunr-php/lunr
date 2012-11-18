@@ -145,7 +145,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
         $keyword = strtoupper($keyword);
 
         $valid_keywords = array('USE', 'IGNORE', 'FORCE');
-        $valid_for = array('JOIN', 'ORDER BY', 'GROUP BY', '');
+        $valid_for      = array('JOIN', 'ORDER BY', 'GROUP BY', '');
 
         if (!in_array($keyword, $valid_keywords))
         {
@@ -417,11 +417,12 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     {
         $this->sql_group_by($expr);
 
-        if( $order !== NULL && is_bool($order) )
+        if($order !== NULL && is_bool($order))
         {
-            $direction = ($order === TRUE) ? ' ASC' : ' DESC';
+            $direction       = ($order === TRUE) ? ' ASC' : ' DESC';
             $this->group_by .= $direction;
         }
+
         return $this;
     }
 

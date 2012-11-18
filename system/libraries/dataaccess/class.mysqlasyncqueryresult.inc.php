@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\DataAccess;
+
 use MySQLi_Result;
 
 /**
@@ -41,7 +42,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     public function __construct(&$mysqli)
     {
         parent::__construct(FALSE, $mysqli);
-        $this->fetched =  FALSE;
+        $this->fetched = FALSE;
     }
 
     /**

@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\DataAccess;
+
 use MySQLi_Result;
 
 /**
@@ -70,7 +71,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
             $this->freed   = TRUE;
         }
 
-        $this->result =  $result;
+        $this->result = $result;
         $this->mysqli =& $mysqli;
     }
 

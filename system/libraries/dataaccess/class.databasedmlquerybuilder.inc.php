@@ -137,22 +137,22 @@ abstract class DatabaseDMLQueryBuilder
      */
     public function __construct()
     {
-        $this->select = '';
-        $this->select_mode = array();
-        $this->delete = '';
-        $this->delete_mode = array();
-        $this->from = '';
-        $this->where = '';
-        $this->group_by = '';
-        $this->having = '';
-        $this->order_by = '';
-        $this->limit = '';
-        $this->connector = '';
-        $this->into = '';
-        $this->insert_mode = array();
-        $this->set = '';
-        $this->column_names = '';
-        $this->values = '';
+        $this->select           = '';
+        $this->select_mode      = array();
+        $this->delete           = '';
+        $this->delete_mode      = array();
+        $this->from             = '';
+        $this->where            = '';
+        $this->group_by         = '';
+        $this->having           = '';
+        $this->order_by         = '';
+        $this->limit            = '';
+        $this->connector        = '';
+        $this->into             = '';
+        $this->insert_mode      = array();
+        $this->set              = '';
+        $this->column_names     = '';
+        $this->values           = '';
         $this->select_statement = '';
     }
 
@@ -246,15 +246,18 @@ abstract class DatabaseDMLQueryBuilder
         $components   = array();
         $components[] = 'insert_mode';
         $components[] = 'into';
+
         if ($this->select_statement != '')
         {
             $components[] = 'column_names';
             $components[] = 'select_statement';
+
             $valid = array(
                 'HIGH_PRIORITY',
                 'LOW_PRIORITY',
                 'IGNORE'
             );
+
             $this->insert_mode = array_intersect($this->insert_mode, $valid);
         }
         else if ($this->set != '')
@@ -283,13 +286,17 @@ abstract class DatabaseDMLQueryBuilder
     public function get_replace_query()
     {
         $components = array();
+
         $valid = array(
             'LOW_PRIORITY',
             'DELAYED'
         );
+
         $this->insert_mode = array_intersect($this->insert_mode, $valid);
+
         $components[] = 'insert_mode';
         $components[] = 'into';
+
         if ($this->select_statement != '')
         {
             $components[] = 'column_names';
@@ -451,7 +458,7 @@ abstract class DatabaseDMLQueryBuilder
         if (is_array($index_hints) && !empty($index_hints))
         {
             $index_hints = array_diff($index_hints, array(NULL));
-            $hints = ' ' . implode(', ', $index_hints);
+            $hints       = ' ' . implode(', ', $index_hints);
         }
         else
         {
@@ -499,10 +506,12 @@ abstract class DatabaseDMLQueryBuilder
         {
             $this->set .= ', ';
         }
-        foreach ($set as $key=>$value)
+
+        foreach ($set as $key => $value)
         {
             $this->set .= $key . ' = ' . $value . ', ';
         }
+
         $this->set = trim($this->set, ', ');
     }
 
@@ -541,14 +550,17 @@ abstract class DatabaseDMLQueryBuilder
         {
             $this->values .= ', ';
         }
+
         if (!is_array($values[0]))
         {
             $values = array($values);
         }
+
         foreach ($values as $value)
         {
             $this->values .= '(' . implode(', ', $value) . '), ';
         }
+
         $this->values = trim($this->values, ', ');
     }
 
@@ -670,6 +682,7 @@ abstract class DatabaseDMLQueryBuilder
         {
             $this->group_by .= ', ';
         }
+
         $this->group_by .= $expr;
     }
 
@@ -702,6 +715,7 @@ abstract class DatabaseDMLQueryBuilder
                 $sql .= '* ';
             }
         }
+
         $sql = trim($sql);
 
         return ($sql == '*') ? '' : $sql;
@@ -717,7 +731,7 @@ abstract class DatabaseDMLQueryBuilder
     protected function escape_location_reference($col)
     {
         $parts = explode('.', $col);
-        $col = '';
+        $col   = '';
         foreach ($parts as $part)
         {
             $part = trim($part);
