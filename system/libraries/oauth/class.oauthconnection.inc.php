@@ -15,6 +15,7 @@
  */
 
 namespace Lunr\Libraries\OAuth;
+
 use Lunr\Libraries\OAuth\OAuthConnectionInterface;
 use Lunr\Libraries\Core\Output;
 
