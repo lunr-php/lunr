@@ -16,6 +16,7 @@
  */
 
 namespace Lunr\Libraries\L10n;
+
 use Lunr\Libraries\Core\DateTime;
 use UnexpectedValueException;
 use DirectoryIterator;
@@ -58,7 +59,7 @@ class L10n
      */
     public function __construct($datetime, &$configuration)
     {
-        $this->datetime = $datetime;
+        $this->datetime      = $datetime;
         $this->configuration =& $configuration;
     }
 
@@ -143,6 +144,7 @@ class L10n
                 return $locale;
             }
         }
+
         return $this->configuration['l10n']['default_language'];
     }
 

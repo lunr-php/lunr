@@ -57,7 +57,7 @@ class GettextL10nProvider extends L10nProvider
         parent::__construct($language);
 
         $this->configuration =& $configuration;
-        $this->logger =& $logger;
+        $this->logger        =& $logger;
     }
 
     /**
@@ -108,7 +108,7 @@ class GettextL10nProvider extends L10nProvider
         // Glue msgctxt and msgid together, with ASCII character 4
         // (EOT, End Of Text)
         $composed = "{$context}\004{$identifier}";
-        $output = dcgettext($this->configuration['l10n']['domain'], $composed, LC_MESSAGES);
+        $output   = dcgettext($this->configuration['l10n']['domain'], $composed, LC_MESSAGES);
 
         if (($output == $composed) && ($this->language != $this->configuration['l10n']['default_language']))
         {
@@ -150,7 +150,7 @@ class GettextL10nProvider extends L10nProvider
         // Glue msgctxt and msgid together, with ASCII character 4
         // (EOT, End Of Text)
         $composed = "{$context}\004{$singular}";
-        $output = dcngettext($this->configuration['l10n']['domain'], $composed, $plural, $amount, LC_MESSAGES);
+        $output   = dcngettext($this->configuration['l10n']['domain'], $composed, $plural, $amount, LC_MESSAGES);
 
         if ((($output == $composed) || ($output == $plural))
             && ($this->language != $this->configuration['l10n']['default_language']))
