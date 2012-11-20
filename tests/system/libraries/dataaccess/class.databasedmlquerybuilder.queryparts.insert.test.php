@@ -71,6 +71,27 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     }
 
     /**
+     * Test specifying empty Values for a query
+     *
+     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderBaseTest::testValuesEmptyByDefault
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_values
+     */
+    public function testUndefinedValues()
+    {
+        $method = $this->builder_reflection->getMethod('sql_values');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('values');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array(array()));
+
+        $string = '';
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
      * Test specifying the Values part of a query.
      *
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderBaseTest::testValuesEmptyByDefault

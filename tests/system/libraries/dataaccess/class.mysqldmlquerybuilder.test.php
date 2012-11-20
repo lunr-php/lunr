@@ -122,6 +122,20 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Unit Test Data Provider for standard lock modes.
+     *
+     * @return array $modes Array of lock modes
+     */
+    public function lockModesStandardProvider()
+    {
+        $modes   = array();
+        $modes[] = array('FOR UPDATE');
+        $modes[] = array('LOCK IN SHARE MODE');
+
+        return $modes;
+    }
+
+    /**
      * Unit Test Data Provider for Delete modes.
      *
      * @return array $modes Array of delete modes

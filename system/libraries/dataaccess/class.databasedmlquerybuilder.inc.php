@@ -43,6 +43,12 @@ abstract class DatabaseDMLQueryBuilder
     protected $select_mode;
 
     /**
+     * SQL Query part: lock mode
+     * @var String
+     */
+    protected $lock_mode;
+
+    /**
      * SQL Query part: DELETE clause
      * @var String
      */
@@ -196,6 +202,7 @@ abstract class DatabaseDMLQueryBuilder
         $components[] = 'having';
         $components[] = 'order_by';
         $components[] = 'limit';
+        $components[] = 'lock_mode';
 
         if ($this->from == '')
         {
@@ -790,6 +797,15 @@ abstract class DatabaseDMLQueryBuilder
      * @return DatabaseDMLQueryBuilder $self Self reference
      */
     public abstract function select_mode($mode);
+
+    /**
+     * Define the lock mode for a transaction.
+     *
+     * @param String $mode The lock mode you want to use
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public abstract function lock_mode($mode);
 
     /**
      * Define a SELECT clause.

@@ -142,12 +142,12 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::insert_mode
      */
-    public function testDeleteModeSetsIgnoresUnknownValues()
+    public function testInsertModeSetsIgnoresUnknownValues()
     {
         $property = $this->builder_reflection->getProperty('insert_mode');
         $property->setAccessible(TRUE);
 
-        $this->builder->delete_mode('UNSUPPORTED');
+        $this->builder->insert_mode('UNSUPPORTED');
 
         $value = $property->getValue($this->builder);
 

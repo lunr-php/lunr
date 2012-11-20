@@ -379,7 +379,30 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test getting a delete query with empty selection.
+     * Test getting a delete query with undefined FROM
+     *
+     * @depends testFromEmptyByDefault
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_delete_query
+     */
+    public function testGetDeleteQueryWithUndefinedFrom()
+    {
+        $select_mode = $this->builder_reflection->getProperty('delete_mode');
+        $select_mode->setAccessible(TRUE);
+        $select_mode->setValue($this->builder, array(
+            'QUICK',
+            'IGNORE'
+        ));
+
+        $select = $this->builder_reflection->getProperty('delete');
+        $select->setAccessible(TRUE);
+        $select->setValue($this->builder, 'table.*');
+
+        $string = '';
+        $this->assertEquals($string, $this->builder->get_delete_query());
+    }
+
+    /**
+     * Test getting a delete query with empty selection
      *
      * @depends testImplodeQueryWithDuplicateDeleteModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_delete_query
@@ -454,7 +477,28 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get insert query using column names and values.
+     * Test get insert query with undefined INTO clause
+     *
+     * @depends testIntoEmptyByDefault
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_insert_query
+     */
+    public function testGetInsertQueryWithUndefinedInto()
+    {
+
+        $from = $this->builder_reflection->getProperty('column_names');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, '(column1, column2)');
+
+        $from = $this->builder_reflection->getProperty('values');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'VALUES (1,2), (3,4)');
+
+        $string = '';
+        $this->assertEquals($string, $this->builder->get_insert_query());
+    }
+
+    /**
+     * Test get insert query using column names and values
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_insert_query
@@ -542,7 +586,27 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get replace query using column names and values.
+     * Test get replace query with undefined INTO clause
+     *
+     * @depends testIntoEmptyByDefault
+     * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_replace_query
+     */
+    public function testGetReplaceQueryWithUndefinedInto()
+    {
+        $from = $this->builder_reflection->getProperty('column_names');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, '(column1, column2)');
+
+        $from = $this->builder_reflection->getProperty('values');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'VALUES (1,2), (3,4)');
+
+        $string = '';
+        $this->assertEquals($string, $this->builder->get_replace_query());
+    }
+
+    /**
+     * Test get replace query using column names and values
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_replace_query

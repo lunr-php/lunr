@@ -183,6 +183,41 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
     }
 
     /**
+     * Test that standard lock modes are handled correctly.
+     *
+     * @param String $mode valid select modes.
+     *
+     * @dataProvider lockModesStandardProvider
+     * @covers       Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::lock_mode
+     */
+    public function testLockModeSetsStandardCorrectly($mode)
+    {
+        $property = $this->builder_reflection->getProperty('lock_mode');
+        $property->setAccessible(TRUE);
+
+        $this->builder->lock_mode($mode);
+
+        $this->assertContains($mode, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test that unknown lock modes are ignored.
+     *
+     * @covers Lunr\Libraries\DataAccess\MySQLDMLQueryBuilder::lock_mode
+     */
+    public function testLockModeSetsIgnoresUnknownValues()
+    {
+        $property = $this->builder_reflection->getProperty('lock_mode');
+        $property->setAccessible(TRUE);
+
+        $this->builder->lock_mode('UNSUPPORTED');
+
+        $value = $property->getValue($this->builder);
+
+        $this->assertEmpty($value);
+    }
+
+    /**
      * Test that there can be only one duplicate handling select mode set.
      *
      * @depends testSelectModeSetsDuplicatesCorrectly
