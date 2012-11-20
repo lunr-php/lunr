@@ -250,6 +250,21 @@ class MySQLDMLQueryBuilderEscapeTest extends MySQLDMLQueryBuilderTest
     }
 
     /**
+     * Test escaping a unsupported like value.
+     *
+     * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderEscapeValuesTest::testCollateWithValueOnly
+     * @covers  Lunr\Libraries\DataAccess\MysqlDMLQueryBuilder::likevalue
+     */
+    public function testEscapingLikeValueUnsupported()
+    {
+        $this->db->expects($this->once())
+                 ->method('escape_string')
+                 ->will($this->returnValue('value'));
+
+        $this->assertEquals('\'%value%\'', $this->builder->likevalue('value', 'unsupported'));
+    }
+
+    /**
      * Test escaping an integer.
      *
      * @param mixed   $value    The input value to be escaped
