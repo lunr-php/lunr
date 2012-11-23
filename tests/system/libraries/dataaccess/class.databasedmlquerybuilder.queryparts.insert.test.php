@@ -76,7 +76,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderBaseTest::testValuesEmptyByDefault
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_values
      */
-    public function testUndefinedValues()
+    public function testUndefinedValuesQueryPart()
     {
         $method = $this->builder_reflection->getMethod('sql_values');
         $method->setAccessible(TRUE);
@@ -97,7 +97,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderBaseTest::testValuesEmptyByDefault
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_values
      */
-    public function testInitialValues()
+    public function testInitialValuesQueryPart()
     {
         $method = $this->builder_reflection->getMethod('sql_values');
         $method->setAccessible(TRUE);
