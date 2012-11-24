@@ -46,7 +46,7 @@ class Autoloader
      */
     public function __construct()
     {
-        $this->controllers = array('web', 'webservice', 'cli');
+        $this->controllers = array();
         $this->loaded      = array();
     }
 
@@ -68,7 +68,7 @@ class Autoloader
      */
     public function load($class)
     {
-        $file = $this->get_class_filepath($class);
+        $file = $this->get_legacy_class_filepath($class);
 
         if (!in_array($file, $this->loaded))
         {
@@ -111,15 +111,15 @@ class Autoloader
      *
      * @return String $filepath Path and filename
      */
-    private function get_class_filepath($class)
+    private function get_legacy_class_filepath($class)
     {
-        $class = str_replace('\\', '/', $class);
+        $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
         $path  = strtolower(dirname($class));
-        $path  = substr($path, strpos($path, '/') + 1);
-        $path  = empty($path) ? '' : $path . '/';
+        $path  = substr($path, strpos($path, DIRECTORY_SEPARATOR) + 1);
+        $path  = empty($path) ? '' : $path . DIRECTORY_SEPARATOR;
         $class = basename($class);
 
-        return $path . $this->get_class_filename($class);
+        return $path . $this->get_legacy_class_filename($class);
     }
 
     /**
@@ -129,7 +129,7 @@ class Autoloader
      *
      * @return String $filename Expected filename
      */
-    private function get_class_filename($class)
+    private function get_legacy_class_filename($class)
     {
         $normalized_name = trim(preg_replace('/([a-z0-9])?([A-Z])/', '$1 $2', $class));
         $split_name      = explode(' ', $normalized_name);

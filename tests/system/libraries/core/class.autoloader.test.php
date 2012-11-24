@@ -67,7 +67,11 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     {
         $controllers = $this->autoloader_reflection->getProperty('controllers');
         $controllers->setAccessible(TRUE);
-        $this->assertEquals(array('web', 'webservice', 'cli'), $controllers->getValue($this->autoloader));
+
+        $value = $controllers->getValue($this->autoloader);
+
+        $this->assertInternalType('array', $value);
+        $this->assertEmpty($value);
     }
 
     /**
@@ -94,17 +98,17 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the function get_class_filename().
+     * Test the function get_legacy_class_filename().
      *
      * @param String $class    classname (not namespaced)
      * @param String $filename name of the file that contains the class
      *
      * @dataProvider normalClassProvider
-     * @covers       Lunr\Libraries\Core\Autoloader::get_class_filename
+     * @covers       Lunr\Libraries\Core\Autoloader::get_legacy_class_filename
      */
-    public function testGetClassFileName($class, $filename)
+    public function testGetLegacyClassFileName($class, $filename)
     {
-        $method = $this->autoloader_reflection->getMethod('get_class_filename');
+        $method = $this->autoloader_reflection->getMethod('get_legacy_class_filename');
         $method->setAccessible(TRUE);
         $this->assertEquals($filename, $method->invokeArgs($this->autoloader, array($class)));
     }
@@ -135,38 +139,38 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the function get_class_filename() with registered project controllers.
+     * Test the function get_legacy_class_filename() with registered project controllers.
      *
      * @param String $basename   Base Controller name (with 'Controller')
      * @param String $normalized Normalied Controller name (lowercase)
      *
      * @depends      testRegisterProjectController
      * @dataProvider controllerProvider
-     * @covers       Lunr\Libraries\Core\Autoloader::get_class_filename
+     * @covers       Lunr\Libraries\Core\Autoloader::get_legacy_class_filename
      */
-    public function testGetClassFileNameForRegisteredProjectController($basename, $normalized)
+    public function testGetLegacyClassFileNameForRegisteredProjectController($basename, $normalized)
     {
         $class    = $basename . 'Controller';
         $filename = 'class.' . $normalized . 'controller.inc.php';
         $this->autoloader->register_project_controller($basename);
-        $method = $this->autoloader_reflection->getMethod('get_class_filename');
+        $method = $this->autoloader_reflection->getMethod('get_legacy_class_filename');
         $method->setAccessible(TRUE);
         $this->assertEquals($filename, $method->invokeArgs($this->autoloader, array($class)));
     }
 
     /**
-     * Test the function get_class_filepath().
+     * Test the function get_legacy_class_filepath().
      *
      * @param String $class    namespaced classname
      * @param String $filepath exptected filepath
      *
-     * @depends      testGetClassFileName
+     * @depends      testGetLegacyClassFileName
      * @dataProvider namespacedClassProvider
-     * @covers       Lunr\Libraries\Core\Autoloader::get_class_filepath
+     * @covers       Lunr\Libraries\Core\Autoloader::get_legacy_class_filepath
      */
-    public function testGetClassFilePath($class, $filepath)
+    public function testGetLegacyClassFilePath($class, $filepath)
     {
-        $method = $this->autoloader_reflection->getMethod('get_class_filepath');
+        $method = $this->autoloader_reflection->getMethod('get_legacy_class_filepath');
         $method->setAccessible(TRUE);
         $this->assertEquals($filepath, $method->invokeArgs($this->autoloader, array($class)));
     }
@@ -214,7 +218,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
         $classes   = array();
         $classes[] = array('DateTime', 'class.datetime.inc.php');
         $classes[] = array('StubView', 'view.stub.inc.php');
-        $classes[] = array('WebServiceController', 'class.webservicecontroller.inc.php');
         $classes[] = array('DateTime', 'class.datetime.inc.php');
         $classes[] = array('JsonInterface', 'interface.json.inc.php');
         $classes[] = array('SessionModel', 'model.session.inc.php');
