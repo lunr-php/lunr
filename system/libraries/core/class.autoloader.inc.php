@@ -68,9 +68,18 @@ class Autoloader
      */
     public function load($class)
     {
+        $file = $this->get_class_filepath($class);
+
+        if (!in_array($file, $this->loaded) && stream_resolve_include_path($file))
+        {
+            include_once $file;
+            $this->loaded[] = $file;
+            return;
+        }
+
         $file = $this->get_legacy_class_filepath($class);
 
-        if (!in_array($file, $this->loaded))
+        if (!in_array($file, $this->loaded) && stream_resolve_include_path($file))
         {
             include_once $file;
             $this->loaded[] = $file;
@@ -106,6 +115,30 @@ class Autoloader
 
     /**
      * Convert namespaced classname to filepath.
+     *
+     * Rules according to PSR-0.
+     *
+     * @param String $class namespaced classname
+     *
+     * @return String $filepath Path and filename
+     */
+    public function get_class_filepath($class)
+    {
+        $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+
+        $path = dirname($class);
+        $path = empty($path) ? '' : $path . DIRECTORY_SEPARATOR;
+
+        $class = basename($class);
+        $class = str_replace('_', DIRECTORY_SEPARATOR, $class);
+
+        return ltrim($path, '/') . $class . '.php';
+    }
+
+    /**
+     * Convert namespaced classname to filepath.
+     *
+     * Rules according to Lunr 0.1 specifics.
      *
      * @param String $class namespaced classname
      *

@@ -110,6 +110,24 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     {
         $method = $this->autoloader_reflection->getMethod('get_legacy_class_filename');
         $method->setAccessible(TRUE);
+
+        $this->assertEquals($filename, $method->invokeArgs($this->autoloader, array($class)));
+    }
+
+    /**
+     * Test that get_file_path() returns filepaths according to PSR-0.
+     *
+     * @param String $class    classname (not namespaced)
+     * @param String $filename name of the file that contains the class
+     *
+     * @dataProvider psr0Provider
+     * @covers       Lunr\Libraries\Core\Autoloader::get_class_filepath
+     */
+    public function testGetFilePath($class, $filename)
+    {
+        $method = $this->autoloader_reflection->getMethod('get_class_filepath');
+        $method->setAccessible(TRUE);
+
         $this->assertEquals($filename, $method->invokeArgs($this->autoloader, array($class)));
     }
 
@@ -176,21 +194,42 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the static function load to autoload classes.
+     * Test loading of classes according to Lunr-0.1 specifics.
      *
-     * @param String $file     namespaced classname
-     * @param String $filename expected filepath
+     * @runInSeparateProcess
      *
-     * @dataProvider fileProvider
-     * @covers       Lunr\Libraries\Core\Autoloader::load
+     * @covers Lunr\Libraries\Core\Autoloader::load
      */
-    public function testLoad($file, $filename)
+    public function testLoadOfLunr01Classes()
     {
-        $basename = str_replace('tests/system/libraries/core', '', dirname(__FILE__));
+        $filename = 'libraries/core/class.datetime.inc.php';
+        $class    = 'Lunr\Libraries\Core\DateTime';
+
+        $basename = str_replace('tests/system/libraries/core', 'system/', dirname(__FILE__));
         $filename = $basename . $filename;
 
         $this->assertNotContains($filename, get_included_files());
-        $this->autoloader->load($file);
+        $this->autoloader->load($class);
+        $this->assertContains($filename, get_included_files());
+    }
+
+    /**
+     * Test loading of classes according to PSR-0 specifics.
+     *
+     * @runInSeparateProcess
+     *
+     * @covers       Lunr\Libraries\Core\Autoloader::load
+     */
+    public function testLoadOfPSR0Classes()
+    {
+        $filename = 'Lunr/Libraries/Core/Tests/PSR0TestFile.php';
+        $class    = 'Lunr\Libraries\Core\Tests\PSR0TestFile';
+
+        $basename = str_replace('tests/system/libraries/core', 'src/', dirname(__FILE__));
+        $filename = $basename . $filename;
+
+        $this->assertNotContains($filename, get_included_files());
+        $this->autoloader->load($class);
         $this->assertContains($filename, get_included_files());
     }
 
@@ -238,6 +277,25 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     {
         $classes   = array();
         $classes[] = array('Lunr\Libraries\Core\DateTime', 'libraries/core/class.datetime.inc.php');
+
+        return $classes;
+    }
+
+    /**
+     * Unit Test Data Provider for PSR-0 compliant classnames.
+     *
+     * @return array $classes Array of classes and their expected filenames.
+     */
+    public function psr0Provider()
+    {
+        $classes   = array();
+        $classes[] = array('\Doctrine\Common\IsolatedClassLoader', 'Doctrine/Common/IsolatedClassLoader.php');
+        $classes[] = array('\Symfony\Core\Request', 'Symfony/Core/Request.php');
+        $classes[] = array('\Zend\Acl', 'Zend/Acl.php');
+        $classes[] = array('\Zend\Mail\Message', 'Zend/Mail/Message.php');
+        $classes[] = array('\namespace\package\Class_Name', 'namespace/package/Class/Name.php');
+        $classes[] = array('\namespace\package_name\Class_Name', 'namespace/package_name/Class/Name.php');
+        $classes[] = array('Lunr\Libraries\Core\Tests\PSR0TestFile', 'Lunr/Libraries/Core/Tests/PSR0TestFile.php');
 
         return $classes;
     }

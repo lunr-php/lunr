@@ -18,6 +18,7 @@
 $base = dirname(__FILE__) . '/..';
 
 set_include_path(
+    $base . '/src:' .
     $base . '/config:' .
     $base . '/system/config:' .
     $base . '/system:' .
