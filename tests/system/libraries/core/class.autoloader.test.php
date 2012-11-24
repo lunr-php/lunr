@@ -75,16 +75,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test that the array of loaded files is empty by default.
-     */
-    public function testLoadedIsEmpty()
-    {
-        $loaded = $this->autoloader_reflection->getProperty('loaded');
-        $loaded->setAccessible(TRUE);
-        $this->assertEmpty($loaded->getValue($this->autoloader));
-    }
-
-    /**
      * Test the static function add_include_path().
      *
      * @covers Lunr\Libraries\Core\Autoloader::add_include_path

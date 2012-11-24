@@ -36,18 +36,11 @@ class Autoloader
     private $controllers;
 
     /**
-     * List of included files.
-     * @var array
-     */
-    private $loaded;
-
-    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->controllers = array();
-        $this->loaded      = array();
     }
 
     /**
@@ -56,7 +49,6 @@ class Autoloader
     public function __destruct()
     {
         unset($this->controllers);
-        unset($this->loaded);
     }
 
     /**
@@ -70,19 +62,17 @@ class Autoloader
     {
         $file = $this->get_class_filepath($class);
 
-        if (!in_array($file, $this->loaded) && stream_resolve_include_path($file))
+        if (stream_resolve_include_path($file))
         {
             include_once $file;
-            $this->loaded[] = $file;
             return;
         }
 
         $file = $this->get_legacy_class_filepath($class);
 
-        if (!in_array($file, $this->loaded) && stream_resolve_include_path($file))
+        if (stream_resolve_include_path($file))
         {
             include_once $file;
-            $this->loaded[] = $file;
         }
     }
 
