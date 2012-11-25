@@ -94,20 +94,15 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test a failed connection attempt.
      *
-     * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testMysqlndUh
      * @covers  Lunr\Libraries\DataAccess\MySQLConnection::connect
      */
     public function testFailedConnect()
     {
-        $mysqli = new \mysqli();
+        $mysqli = new MockMySQLiFailedConnection();
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
         $class->setValue($this->db, $mysqli);
-
-        mysqlnd_uh_set_connection_proxy(new MockMySQLndFailedConnection());
 
         $this->db->connect();
 
@@ -202,20 +197,15 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test that disconnect() works correctly.
      *
-     * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testMysqlndUh
      * @covers  Lunr\Libraries\DataAccess\MySQLConnection::disconnect
      */
     public function testDisconnect()
     {
-        $mysqli = new \mysqli();
+        $mysqli = new MockMySQLiSuccessfulConnection();
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
         $class->setValue($this->db, $mysqli);
-
-        mysqlnd_uh_set_connection_proxy(new MockMySQLndSuccessfulConnection());
 
         $this->db->connect();
 
@@ -232,18 +222,15 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test that change_database() returns FALSE when we couldn't connect.
      *
-     * @depends Lunr\EnvironmentTest::testMysqlndUh
      * @covers  Lunr\Libraries\DataAccess\MySQLConnection::change_database
      */
     public function testChangeDatabaseReturnsFalseWhenNotConnected()
     {
-        $mysqli = new \mysqli();
+        $mysqli = new MockMySQLiFailedConnection();
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
         $class->setValue($this->db, $mysqli);
-
-        mysqlnd_uh_set_connection_proxy(new MockMySQLndFailedConnection());
 
         $this->assertFalse($this->db->change_database('new_db'));
     }

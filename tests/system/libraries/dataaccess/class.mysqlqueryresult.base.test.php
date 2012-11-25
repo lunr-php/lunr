@@ -56,6 +56,12 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testAffectedRowsReturnsNumber()
     {
+        $mysqli = new MockMySQLiSuccessfulConnection();
+
+        $class = $this->result_reflection->getProperty('mysqli');
+        $class->setAccessible(TRUE);
+        $class->setValue($this->result, $mysqli);
+
         $value = $this->result->affected_rows();
         $this->assertInternalType('int', $value);
         $this->assertEquals(10, $value);

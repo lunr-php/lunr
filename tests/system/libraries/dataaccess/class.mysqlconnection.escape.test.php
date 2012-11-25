@@ -30,18 +30,15 @@ class MySQLConnectionEscapeTest extends MySQLConnectionTest
     /**
      * Test that escape_string() returns FALSE when there is no active connection.
      *
-     * @depends Lunr\EnvironmentTest::testMysqlndUh
      * @covers  Lunr\Libraries\DataAccess\MySQLConnection::escape_string
      */
     public function testEscapeStringReturnsFalseWhenNotConnected()
     {
-        $mysqli = new \mysqli();
+        $mysqli = new MockMySQLiFailedConnection();
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
         $class->setValue($this->db, $mysqli);
-
-        mysqlnd_uh_set_connection_proxy(new MockMySQLndFailedConnection());
 
         $this->assertFalse($this->db->escape_string('string'));
     }

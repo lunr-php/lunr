@@ -44,8 +44,8 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      */
     public function testFreeResultFreesIfFreedIsFalse()
     {
-        $this->mysqli->expects($this->once())
-                     ->method('free');
+        $this->query_result->expects($this->once())
+                           ->method('free');
 
         $method = $this->result_reflection->getMethod('free_result');
         $method->setAccessible(TRUE);
@@ -95,6 +95,10 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      */
     public function testResultArrayDoesNotFreeDataIfFreedIsTrue()
     {
+        $property = $this->result_reflection->getProperty('freed');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->result, TRUE);
+
         $this->query_result->expects($this->never())
                            ->method('free');
 
@@ -121,6 +125,10 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      */
     public function testResultRowDoesNotFreeDataIfFreedIsTrue()
     {
+        $property = $this->result_reflection->getProperty('freed');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->result, TRUE);
+
         $this->query_result->expects($this->never())
                            ->method('free');
 
@@ -147,6 +155,10 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      */
     public function testResultColumnDoesNotFreeDataIfFreedIsTrue()
     {
+        $property = $this->result_reflection->getProperty('freed');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->result, TRUE);
+
         $this->query_result->expects($this->never())
                            ->method('free');
 
@@ -173,6 +185,10 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      */
     public function testResultCellDoesNotFreeDataIfFreedIsTrue()
     {
+        $property = $this->result_reflection->getProperty('freed');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->result, TRUE);
+
         $this->query_result->expects($this->never())
                            ->method('free');
 

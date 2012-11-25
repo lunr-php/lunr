@@ -39,14 +39,6 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test whether we have the mysqlnd_uh_set_connection_proxy method available.
-     */
-    public function testMysqlndUh()
-    {
-        $this->assertTrue(function_exists('mysqlnd_uh_set_connection_proxy'));
-    }
-
-    /**
      * Test whether we have language files available.
      */
     public function testL10nFiles()

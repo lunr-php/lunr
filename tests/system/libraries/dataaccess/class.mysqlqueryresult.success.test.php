@@ -86,6 +86,12 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      */
     public function testNumberOfRowsReturnsNumber()
     {
+        $mysqli = new MockMySQLiSuccessfulConnection();
+
+        $class = $this->result_reflection->getProperty('mysqli');
+        $class->setAccessible(TRUE);
+        $class->setValue($this->result, $mysqli);
+
         $value = $this->result->number_of_rows();
         $this->assertInternalType('int', $value);
         $this->assertEquals(10, $value);

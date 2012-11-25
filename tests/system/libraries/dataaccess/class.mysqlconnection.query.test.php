@@ -30,18 +30,15 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     /**
      * Test that query() returns a QueryResult that indicates a failed query when not connected.
      *
-     * @depends Lunr\EnvironmentTest::testMysqlndUh
      * @covers  Lunr\Libraries\DataAccess\MySQLConnection::query
      */
     public function testQueryReturnsFailedQueryResultWhenNotConnected()
     {
-        $mysqli = new \mysqli();
+        $mysqli = new MockMySQLiFailedConnection();
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
         $class->setValue($this->db, $mysqli);
-
-        mysqlnd_uh_set_connection_proxy(new MockMySQLndFailedConnection());
 
         $query = $this->db->query('query');
 
@@ -75,18 +72,15 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     /**
      * Test that async_query() returns an AsyncQueryResult that indicates a failed query when not connected.
      *
-     * @depends Lunr\EnvironmentTest::testMysqlndUh
      * @covers  Lunr\Libraries\DataAccess\MySQLConnection::async_query
      */
     public function testAsyncQueryReturnsFailedQueryResultWhenNotConnected()
     {
-        $mysqli = new \mysqli();
+        $mysqli = new MockMySQLiFailedConnection();
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
         $class->setValue($this->db, $mysqli);
-
-        mysqlnd_uh_set_connection_proxy(new MockMySQLndFailedConnection());
 
         $query = $this->db->async_query('query');
 
