@@ -88,6 +88,48 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test registering the autoloader class.
+     *
+     * @runInSeparateProcess
+     *
+     * @covers Lunr\Libraries\Core\Autoloader::register
+     */
+    public function testRegisterAutoloader()
+    {
+        $this->assertEquals(1, $this->check_spl_autoload_stack(spl_autoload_functions()));
+
+        $value = $this->autoloader->register();
+
+        $this->assertTrue($value);
+        $this->assertEquals(2, $this->check_spl_autoload_stack(spl_autoload_functions()));
+    }
+
+    /**
+     * Test unregistering the autoloader class.
+     *
+     * @runInSeparateProcess
+     *
+     * @depends testRegisterAutoloader
+     * @covers  Lunr\Libraries\Core\Autoloader::unregister
+     */
+    public function testUnregisterAutoloader()
+    {
+        $this->assertEquals(1, $this->check_spl_autoload_stack(spl_autoload_functions()));
+
+        $value = $this->autoloader->register();
+
+        $this->assertTrue($value);
+
+        $this->assertEquals(2, $this->check_spl_autoload_stack(spl_autoload_functions()));
+
+        $value = $this->autoloader->unregister();
+
+        $this->assertTrue($value);
+
+        $this->assertEquals(1, $this->check_spl_autoload_stack(spl_autoload_functions()));
+    }
+
+    /**
      * Test the function get_legacy_class_filename().
      *
      * @param String $class    classname (not namespaced)
@@ -301,6 +343,30 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
         $files[] = array('Lunr\Libraries\Core\DateTime', 'system/libraries/core/class.datetime.inc.php');
 
         return $files;
+    }
+
+    /**
+     * Check how often the Lunr autoloader is on the spl autoload stack.
+     *
+     * @return Integer $contains Number of instances of the Lunr autloader on the stack.
+     */
+    public function check_spl_autoload_stack($stack)
+    {
+        $contains = 0;
+        foreach ($stack as $value)
+        {
+            if (!is_array($value))
+            {
+                continue;
+            }
+
+            if ($value[0] === $this->autoloader);
+            {
+                $contains += 1;
+            }
+        }
+
+        return $contains;
     }
 
 }

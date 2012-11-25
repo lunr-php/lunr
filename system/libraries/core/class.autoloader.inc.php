@@ -104,6 +104,26 @@ class Autoloader
     }
 
     /**
+     * Register a function with the spl provided __autoload stack.
+     *
+     * @return Boolean $return TRUE on success, FALSE on failure.
+     */
+    public function register()
+    {
+        return spl_autoload_register(array($this, 'load'));
+    }
+
+    /**
+     * Register a function with the spl provided __autoload stack.
+     *
+     * @return Boolean $return TRUE on success, FALSE on failure.
+     */
+    public function unregister()
+    {
+        return spl_autoload_unregister(array($this, 'load'));
+    }
+
+    /**
      * Convert namespaced classname to filepath.
      *
      * Rules according to PSR-0.
