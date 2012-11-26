@@ -71,7 +71,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     }
 
     /**
-     * Test specifying empty Values for a query
+     * Test specifying empty Values for a query.
      *
      * @depends Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilderBaseTest::testValuesEmptyByDefault
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::sql_values

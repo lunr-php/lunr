@@ -220,7 +220,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Define the lock mode for a transaction
+     * Define the lock mode for a transaction.
      *
      * @param String $mode The lock mode you want to use
      *

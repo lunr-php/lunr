@@ -379,7 +379,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test getting a delete query with undefined FROM
+     * Test getting a delete query with undefined FROM.
      *
      * @depends testFromEmptyByDefault
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_delete_query
@@ -402,7 +402,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test getting a delete query with empty selection
+     * Test getting a delete query with empty selection.
      *
      * @depends testImplodeQueryWithDuplicateDeleteModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_delete_query
@@ -477,7 +477,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get insert query with undefined INTO clause
+     * Test get insert query with undefined INTO clause.
      *
      * @depends testIntoEmptyByDefault
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_insert_query
@@ -498,7 +498,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get insert query using column names and values
+     * Test get insert query using column names and values.
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_insert_query
@@ -586,7 +586,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get replace query with undefined INTO clause
+     * Test get replace query with undefined INTO clause.
      *
      * @depends testIntoEmptyByDefault
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_replace_query
@@ -606,7 +606,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test get replace query using column names and values
+     * Test get replace query using column names and values.
      *
      * @depends testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Libraries\DataAccess\DatabaseDMLQueryBuilder::get_replace_query
