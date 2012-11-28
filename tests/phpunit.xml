@@ -83,6 +83,7 @@
             <file>tests/system/libraries/dataaccess/class.mysqlconnection.connect.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqlconnection.query.test.php</file>
             <file>tests/system/libraries/dataaccess/class.mysqlconnection.escape.test.php</file>
+            <file>tests/system/libraries/dataaccess/class.mysqlconnection.transaction.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databaseconnectionpool.base.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databaseconnectionpool.empty.test.php</file>
             <file>tests/system/libraries/dataaccess/class.databaseconnectionpool.unsupported.test.php</file>

@@ -95,6 +95,7 @@ class MySQLConnection extends DatabaseConnection
      */
     public function __destruct()
     {
+        $this->rollback();
         $this->disconnect();
 
         unset($this->mysqli);
@@ -286,6 +287,74 @@ class MySQLConnection extends DatabaseConnection
         }
 
         return new MySQLAsyncQueryResult($this->mysqli);
+    }
+
+    /**
+     * Begins a transaction.
+     *
+     * @return Boolean
+     */
+    public function begin_transaction()
+    {
+        $this->connect();
+
+        if ($this->connected === TRUE)
+        {
+            return $this->mysqli->autocommit(FALSE);
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * Commits a transaction.
+     *
+     * @return Boolean
+     */
+    public function commit()
+    {
+        $this->connect();
+
+        if ($this->connected === TRUE)
+        {
+            return $this->mysqli->commit();
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * Rolls back a transaction.
+     *
+     * @return Boolean
+     */
+    public function rollback()
+    {
+        $this->connect();
+
+        if ($this->connected === TRUE)
+        {
+            return $this->mysqli->rollback();
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * Ends a transaction.
+     *
+     * @return Boolean
+     */
+    public function end_transaction()
+    {
+        $this->connect();
+
+        if ($this->connected === TRUE)
+        {
+            return $this->mysqli->autocommit(TRUE);
+        }
+
+        return FALSE;
     }
 
 }

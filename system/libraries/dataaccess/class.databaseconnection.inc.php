@@ -134,6 +134,34 @@ abstract class DatabaseConnection
      */
     public abstract function query($sql_query);
 
+    /**
+     * Begin a transaction.
+     *
+     * @return void
+     */
+    public abstract function begin_transaction();
+
+    /**
+     * Commit a transaction.
+     *
+     * @return void
+     */
+    public abstract function commit();
+
+    /**
+     * Roll back a transaction.
+     *
+     * @return void
+     */
+    public abstract function rollback();
+
+    /**
+     * Ends a transaction.
+     *
+     * @return void
+     */
+    public abstract function end_transaction();
+
 }
 
 ?>
