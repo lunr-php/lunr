@@ -12,6 +12,7 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Javier Negre <javi@m2mobi.com>
  * @author     Julio Foulquié <julio@m2mobi.com>
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2011-2012, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -28,10 +29,10 @@ use Lunr\Libraries\Core\Output;
  * @category   Libraries
  * @package    OAuth
  * @subpackage Libraries
- * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Javier Negre <javi@m2mobi.com>
  * @author     Julio Foulquié <julio@m2mobi.com>
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  */
 class TwitterConnection extends OAuthConnection
 {
@@ -77,7 +78,16 @@ class TwitterConnection extends OAuthConnection
 
         global $config;
 
-        $this->handler->setToken($access_token, $access_token_secret);
+        if(!$this->handler->setAuthType(OAUTH_AUTH_TYPE_AUTHORIZATION))
+        {
+            return FALSE;
+        }
+
+        if(!$this->handler->setToken($access_token, $access_token_secret))
+        {
+            return FALSE;
+        }
+
         try
         {
             $this->handler->fetch($config['oauth'][static::NETWORK]['verify_url']);
@@ -126,7 +136,7 @@ class TwitterConnection extends OAuthConnection
 
         global $config;
 
-        if(!$this->handler->setAuthType(OAUTH_AUTH_TYPE_FORM))
+        if(!$this->handler->setAuthType(OAUTH_AUTH_TYPE_AUTHORIZATION))
         {
             return FALSE;
         }
@@ -140,7 +150,8 @@ class TwitterConnection extends OAuthConnection
         {
             $this->handler->fetch(
                 $config['oauth'][static::NETWORK]['publish_url'],
-                array('status' => $message->message)
+                array('status' => $message->message),
+                OAUTH_HTTP_METHOD_POST
             );
 
             $result = $this->handler->getLastResponseInfo();
