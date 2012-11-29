@@ -55,31 +55,31 @@ $config['oauth']['twitter']['consumerkey'] = '';
  * URL where to request the 'request token' for Twitter
  * @global String $config['oauth']['twitter']['requesttokenurl']
  */
-$config['oauth']['twitter']['requesttokenurl'] = 'http://twitter.com/oauth/request_token';
+$config['oauth']['twitter']['requesttokenurl'] = 'https://api.twitter.com/oauth/request_token';
 
 /**
  * URL where to request the 'access token' for Twitter
  * @global String $config['oauth']['twitter']['accesstokenurl']
  */
-$config['oauth']['twitter']['accesstokenurl'] = 'http://twitter.com/oauth/access_token';
+$config['oauth']['twitter']['accesstokenurl'] = 'https://api.twitter.com/oauth/access_token';
 
 /**
  * URL where to send the user for authorization on Twitter
  * @global String $config['oauth']['twitter']['authurl']
  */
-$config['oauth']['twitter']['authurl'] = 'http://twitter.com/oauth/authorize';
+$config['oauth']['twitter']['authurl'] = 'https://api.twitter.com/oauth/authorize';
 
 /**
  * URL where to verify and retrieve the user's credentials on Twitter
  * @global String $config['oauth']['twitter']['verify_url']
  */
-$config['oauth']['twitter']['verify_url'] = 'http://twitter.com/account/verify_credentials.json';
+$config['oauth']['twitter']['verify_url'] = 'https://api.twitter.com/1.1/account/verify_credentials.json';
 
 /**
  * URL where to publish on Twitter
  * @global String $config['oauth']['twitter']['publish_url']
  */
-$config['oauth']['twitter']['publish_url'] = 'http://twitter.com/statuses/update.json';
+$config['oauth']['twitter']['publish_url'] = 'https://api.twitter.com/1.1/statuses/update.json';
 
 /**
  * Linkedin Service Settings
