@@ -43,7 +43,7 @@ class MockMySQLiFailedConnection
     }
 
     /**
-     * Destructor,
+     * Destructor.
      */
     public function __destruct()
     {

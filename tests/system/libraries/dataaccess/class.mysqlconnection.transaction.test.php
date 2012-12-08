@@ -30,7 +30,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
 {
 
     /**
-     * Test a successful call to Begin Transaction
+     * Test a successful call to Begin Transaction.
      *
      * @covers Lunr\Libraries\DataAccess\MySQLConnection::begin_transaction
      */
@@ -50,7 +50,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     }
 
     /**
-     * Test a call to Begin Transaction with no connection
+     * Test a call to Begin Transaction with no connection.
      *
      * @covers Lunr\Libraries\DataAccess\MySQLConnection::begin_transaction
      */
@@ -66,7 +66,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     }
 
     /**
-     * Test a successful call to Commit
+     * Test a successful call to Commit.
      *
      * @covers Lunr\Libraries\DataAccess\MySQLConnection::commit
      */
@@ -86,7 +86,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     }
 
     /**
-     * Test a call to Commit with no connection
+     * Test a call to Commit with no connection.
      *
      * @covers Lunr\Libraries\DataAccess\MySQLConnection::commit
      */
@@ -102,7 +102,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     }
 
     /**
-     * Test a successful call to rollback
+     * Test a successful call to rollback.
      *
      * @covers Lunr\Libraries\DataAccess\MySQLConnection::rollback
      */
@@ -122,7 +122,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     }
 
     /**
-     * Test a call to Commit with no connection
+     * Test a call to Commit with no connection.
      *
      * @covers Lunr\Libraries\DataAccess\MySQLConnection::commit
      */
@@ -138,7 +138,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     }
 
     /**
-     * Test a successful call to rollback
+     * Test a successful call to rollback.
      *
      * @covers Lunr\Libraries\DataAccess\MySQLConnection::rollback
      */
@@ -158,7 +158,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     }
 
     /**
-     * Test a call to Commit with no connection
+     * Test a call to Commit with no connection.
      *
      * @covers Lunr\Libraries\DataAccess\MySQLConnection::commit
      */
@@ -172,5 +172,6 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
 
         $this->assertFalse($this->db->end_transaction());
     }
+
 }
 ?>
