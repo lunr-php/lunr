@@ -37,9 +37,9 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Constructor.
      *
-     * @param MySQLi &$mysqli Reference to the MySQLi class
+     * @param MySQLi $mysqli Shared instance of the MySQLi class
      */
-    public function __construct(&$mysqli)
+    public function __construct($mysqli)
     {
         parent::__construct(FALSE, $mysqli);
         $this->fetched = FALSE;

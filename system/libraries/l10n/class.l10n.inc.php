@@ -40,7 +40,7 @@ class L10n
     private $datetime;
 
     /**
-     * Reference to the Configuration class.
+     * Shared instance of the Configuration class.
      * @var Configuration
      */
     private $configuration;
@@ -54,13 +54,13 @@ class L10n
     /**
      * Constructor.
      *
-     * @param DateTime      $datetime       Instance of the DateTime class
-     * @param Configuration &$configuration Reference to the Configuration class
+     * @param DateTime      $datetime      Instance of the DateTime class
+     * @param Configuration $configuration Shared instance of the Configuration class
      */
-    public function __construct($datetime, &$configuration)
+    public function __construct($datetime, $configuration)
     {
         $this->datetime      = $datetime;
-        $this->configuration =& $configuration;
+        $this->configuration = $configuration;
     }
 
     /**
@@ -69,6 +69,7 @@ class L10n
     public function __destruct()
     {
         unset($this->datetime);
+        unset($this->configuration);
     }
 
     /**

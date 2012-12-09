@@ -33,7 +33,7 @@ class Logger
     private $datetime;
 
     /**
-     * Reference to the Request class.
+     * Shared instance of the Request class.
      * @var Request
      */
     private $request;
@@ -42,14 +42,14 @@ class Logger
      * Constructor.
      *
      * @param DateTime $datetime Instance of the DateTime class.
-     * @param Request  &$request Reference to the Request class.
+     * @param Request  $request  Shared instance of the Request class.
      */
-    public function __construct($datetime, &$request)
+    public function __construct($datetime, $request)
     {
         $this->datetime = $datetime;
         $this->datetime->set_datetime_format('%Y-%m-%d %H:%M:%S');
 
-        $this->request =& $request;
+        $this->request = $request;
     }
 
     /**
@@ -58,6 +58,7 @@ class Logger
     public function __destruct()
     {
         unset($this->datetime);
+        unset($this->request);
     }
 
     /**

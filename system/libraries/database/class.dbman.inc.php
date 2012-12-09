@@ -45,7 +45,7 @@ class DBMan
      * @param array   $db       Database configuration values
      * @param Boolean $readonly Whether to return a readonly connection or not
      *
-     * @return DBCon Reference to the DBCon Singleton
+     * @return DBCon Instance of the DBCon Singleton
      */
     public static function get_db_connection($db, $readonly = TRUE)
     {

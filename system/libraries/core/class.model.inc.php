@@ -29,7 +29,7 @@ abstract class Model
 {
 
     /**
-     * Reference to the database connection
+     * Instance of the database connection
      * @var DBCon
      */
     protected $db;

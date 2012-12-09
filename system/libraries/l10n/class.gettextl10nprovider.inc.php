@@ -28,13 +28,13 @@ class GettextL10nProvider extends L10nProvider
 {
 
     /**
-     * Reference to the Configuration class.
+     * Shared instance of the Configuration class.
      * @var Configuration
      */
     private $configuration;
 
     /**
-     * Reference to the Logger class.
+     * Shared instance of the Logger class.
      * @var Logger
      */
     private $logger;
@@ -48,16 +48,16 @@ class GettextL10nProvider extends L10nProvider
     /**
      * Constructor.
      *
-     * @param String        $language       POSIX locale definition
-     * @param Configuration &$configuration Reference to the Configuration class
-     * @param Logger        &$logger        Reference to the Logger class
+     * @param String        $language      POSIX locale definition
+     * @param Configuration $configuration Shared instance of the Configuration class
+     * @param Logger        $logger        Shared instance of the Logger class
      */
-    public function __construct($language, &$configuration, &$logger)
+    public function __construct($language, $configuration, $logger)
     {
         parent::__construct($language);
 
-        $this->configuration =& $configuration;
-        $this->logger        =& $logger;
+        $this->configuration = $configuration;
+        $this->logger        = $logger;
     }
 
     /**
@@ -65,6 +65,9 @@ class GettextL10nProvider extends L10nProvider
      */
     public function __destruct()
     {
+        unset($this->configuration);
+        unset($this->logger);
+
         parent::__destruct();
     }
 

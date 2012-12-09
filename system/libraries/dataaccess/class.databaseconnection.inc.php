@@ -39,13 +39,13 @@ abstract class DatabaseConnection
     protected $readonly;
 
     /**
-     * Reference to the Configuration class
+     * Shared instance of the Configuration class
      * @var Configuration
      */
     protected $configuration;
 
     /**
-     * Reference to the Logger class
+     * Shared instance of the Logger class
      * @var Logger
      */
     protected $logger;
@@ -53,16 +53,16 @@ abstract class DatabaseConnection
     /**
      * Constructor.
      *
-     * @param Configuration &$configuration Reference to the configuration class
-     * @param Logger        &$logger        Reference to the logger class
+     * @param Configuration $configuration Shared instance of the configuration class
+     * @param Logger        $logger        Shared instance of the logger class
      */
-    public function __construct(&$configuration, &$logger)
+    public function __construct($configuration, $logger)
     {
         $this->connected = FALSE;
         $this->readonly  = FALSE;
 
-        $this->configuration =& $configuration;
-        $this->logger        =& $logger;
+        $this->configuration = $configuration;
+        $this->logger        = $logger;
     }
 
     /**
@@ -70,6 +70,8 @@ abstract class DatabaseConnection
      */
     public function __destruct()
     {
+        unset($this->configuration);
+        unset($this->logger);
         unset($this->readonly);
         unset($this->connected);
     }

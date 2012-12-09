@@ -28,7 +28,7 @@ class Timer
 {
 
     /**
-     * Reference to the Timer Backend in use
+     * Instance of the Timer Backend in use
      * @var TimerBackend
      */
     private static $backend;

@@ -35,7 +35,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     protected $result;
 
     /**
-     * Reference to the mysqli class.
+     * Shared instance of the mysqli class.
      * @var MySQLi
      */
     protected $mysqli;
@@ -55,10 +55,10 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     /**
      * Constructor.
      *
-     * @param mixed  $result  Query result
-     * @param MySQLi &$mysqli Reference to the MySQLi class
+     * @param mixed  $result Query result
+     * @param MySQLi $mysqli Shared instance of the MySQLi class
      */
-    public function __construct($result, &$mysqli)
+    public function __construct($result, $mysqli)
     {
         if ($result instanceof MySQLi_Result)
         {
@@ -72,7 +72,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
         }
 
         $this->result = $result;
-        $this->mysqli =& $mysqli;
+        $this->mysqli = $mysqli;
     }
 
     /**
@@ -82,6 +82,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     {
         $this->free_result();
 
+        unset($this->mysqli);
         unset($this->result);
         unset($this->success);
         unset($this->freed);

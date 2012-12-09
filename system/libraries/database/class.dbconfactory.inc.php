@@ -33,7 +33,7 @@ class DBConFactory
      * @param array   $db       Database configuration values
      * @param Boolean $readonly Whether to return a readonly connection or not
      *
-     * @return DBCon $db Reference to a new database connection driver
+     * @return DBCon $db Instance of a new database connection driver
      */
     public static function get_db_connection($db, $readonly)
     {

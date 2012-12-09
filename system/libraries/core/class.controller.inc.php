@@ -27,7 +27,7 @@ abstract class Controller
 {
 
     /**
-     * Reference to the Response class.
+     * Shared instance of the Response class.
      * @var Response
      */
     protected $response;
@@ -41,11 +41,11 @@ abstract class Controller
     /**
      * Constructor.
      *
-     * @param Response &$response Reference to the Response class
+     * @param Response $response Shared instance of the Response class
      */
-    public function __construct(&$response)
+    public function __construct($response)
     {
-        $this->response =& $response;
+        $this->response = $response;
         $this->error    = array();
     }
 
@@ -55,6 +55,7 @@ abstract class Controller
     public function __destruct()
     {
         unset($this->error);
+        unset($this->response);
     }
 
     /**

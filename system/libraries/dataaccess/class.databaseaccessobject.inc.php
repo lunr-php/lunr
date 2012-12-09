@@ -41,21 +41,13 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Constructor.
      *
-     * @param DatabaseConnection     &$connection Reference to a database connection class
-     * @param DatabaseConnectionPool &$pool       Reference to a database connection pool, NULL by default
+     * @param DatabaseConnection     $connection Shared instance of a database connection class
+     * @param DatabaseConnectionPool $pool       Shared instance of a database connection pool, NULL by default
      */
-    public function __construct(&$connection, &$pool = NULL)
+    public function __construct($connection, $pool = NULL)
     {
-        $this->db =& $connection;
-
-        if (!is_null($pool))
-        {
-            $this->pool =& $pool;
-        }
-        else
-        {
-            $this->pool = NULL;
-        }
+        $this->db   = $connection;
+        $this->pool = $pool;
     }
 
     /**
@@ -63,29 +55,30 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     public function __destruct()
     {
-        # Nothing to do here yet.
+        unset($this->db);
+        unset($this->pool);
     }
 
     /**
      * Swap the currently used database connection with a new one.
      *
-     * @param DatabaseConnection &$connection Reference to a database connection class
+     * @param DatabaseConnection $connection Shared instance of a database connection class
      *
      * @return void
      */
-    public function swap_connection(&$connection)
+    public function swap_connection($connection)
     {
-        $this->db =& $connection;
+        $this->db = $connection;
     }
 
     /**
      * Get query result as array.
      *
-     * @param DatabaseQueryResult &$query The result of the run query
+     * @param DatabaseQueryResult $query The result of the run query
      *
      * @return mixed $return FALSE on failure, array otherwise
      */
-    protected function result_array(&$query)
+    protected function result_array($query)
     {
         if ($query->has_failed() === TRUE)
         {
@@ -105,11 +98,11 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Get first row of query result.
      *
-     * @param DatabaseQueryResult &$query The result of the run query
+     * @param DatabaseQueryResult $query The result of the run query
      *
      * @return mixed $return FALSE on failure, array otherwise
      */
-    protected function result_row(&$query)
+    protected function result_row($query)
     {
         if ($query->has_failed() === TRUE)
         {
@@ -129,12 +122,12 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Get specific column of query result.
      *
-     * @param DatabaseQueryResult &$query The result of the run query
+     * @param DatabaseQueryResult $query  The result of the run query
      * @param String              $column The title of the requested column
      *
      * @return mixed $return FALSE on failure, array otherwise
      */
-    protected function result_column(&$query, $column)
+    protected function result_column($query, $column)
     {
         if ($query->has_failed() === TRUE)
         {
@@ -154,12 +147,12 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Get specific cell of the first row of the query result.
      *
-     * @param DatabaseQueryResult &$query The result of the run query
-     * @param String              $cell   The title of the requested cell
+     * @param DatabaseQueryResult $query The result of the run query
+     * @param String              $cell  The title of the requested cell
      *
      * @return mixed $return FALSE on failure, mixed otherwise
      */
-    protected function result_cell(&$query, $cell)
+    protected function result_cell($query, $cell)
     {
         if ($query->has_failed() === TRUE)
         {

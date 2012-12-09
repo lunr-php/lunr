@@ -29,13 +29,13 @@ class DatabaseConnectionPool
 {
 
     /**
-     * Reference to the Configuration class
+     * Shared instance of the Configuration class
      * @var Configuration
      */
     protected $configuration;
 
     /**
-     * Reference to the Logger class
+     * Shared instance of the Logger class
      * @var Logger
      */
     protected $logger;
@@ -55,13 +55,13 @@ class DatabaseConnectionPool
     /**
      * Constructor.
      *
-     * @param Configuration &$configuration Reference to the configuration class
-     * @param Logger        &$logger        Reference to the logger class
+     * @param Configuration $configuration Shared instance of the configuration class
+     * @param Logger        $logger        Shared instance of the logger class
      */
-    public function __construct(&$configuration, &$logger)
+    public function __construct($configuration, $logger)
     {
-        $this->configuration =& $configuration;
-        $this->logger        =& $logger;
+        $this->configuration = $configuration;
+        $this->logger        = $logger;
 
         $this->ro_pool = array();
         $this->rw_pool = array();
@@ -72,6 +72,8 @@ class DatabaseConnectionPool
      */
     public function __destruct()
     {
+        unset($this->configuration);
+        unset($this->logger);
         unset($this->ro_pool);
         unset($this->rw_pool);
     }

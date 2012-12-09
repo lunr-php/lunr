@@ -77,11 +77,11 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Constructor.
      *
-     * @param Configuration &$configuration Reference to the configuration class
-     * @param Logger        &$logger        Reference to the logger class
-     * @param mysqli        $mysqli         Instance of the mysqli class
+     * @param Configuration $configuration Shared instance of the configuration class
+     * @param Logger        $logger        Shared instance of the logger class
+     * @param mysqli        $mysqli        Instance of the mysqli class
      */
-    public function __construct(&$configuration, &$logger, $mysqli)
+    public function __construct($configuration, $logger, $mysqli)
     {
         parent::__construct($configuration, $logger);
 

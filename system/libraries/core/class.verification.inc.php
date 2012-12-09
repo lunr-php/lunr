@@ -28,7 +28,7 @@ class Verification
 {
 
     /**
-     * Reference to the Logger class.
+     * Shared instance of the Logger class.
      * @var Logger
      */
     private $logger;
@@ -85,11 +85,11 @@ class Verification
     /**
      * Constructor.
      *
-     * @param Logger &$logger Reference to the Logger class
+     * @param Logger $logger Shared instance of the Logger class
      */
-    public function __construct(&$logger)
+    public function __construct($logger)
     {
-        $this->logger =& $logger;
+        $this->logger = $logger;
 
         $this->data    = array();
         $this->result  = array();
@@ -108,6 +108,7 @@ class Verification
      */
     public function __destruct()
     {
+        unset($this->logger);
         unset($this->pointer);
         unset($this->superfluous);
         unset($this->result);

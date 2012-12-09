@@ -76,9 +76,9 @@ class Request
     /**
      * Constructor.
      *
-     * @param Configuration &$configuration Reference to the Configuration class
+     * @param Configuration $configuration Shared instance of the Configuration class
      */
-    public function __construct(&$configuration)
+    public function __construct($configuration)
     {
         $this->post       = array();
         $this->get        = array();
@@ -164,11 +164,11 @@ class Request
     /**
      * Store $_GET values locally and reset it globally.
      *
-     * @param Configuration &$configuration Reference to the Configuration class
+     * @param Configuration $configuration Shared instance of the Configuration class
      *
      * @return void
      */
-    private function store_get(&$configuration)
+    private function store_get($configuration)
     {
         if (!is_array($_GET) || empty($_GET))
         {
@@ -248,11 +248,11 @@ class Request
     /**
      * Store url request values locally.
      *
-     * @param Configuration &$configuration Reference to the Configuration class
+     * @param Configuration $configuration Shared instance of the Configuration class
      *
      * @return void
      */
-    private function store_url(&$configuration)
+    private function store_url($configuration)
     {
         if ($this->request['sapi'] == 'cli')
         {

@@ -37,7 +37,7 @@ class SessionManager
     private $lifetime;
 
     /**
-     * Reference to SessionModel
+     * Instance of SessionModel
      * @var SessionModel
      */
     private $smodel;

@@ -27,7 +27,7 @@ class Session
 {
 
     /**
-     * Reference to low-level session manager
+     * Instance of the low-level session manager
      * @var SessionManager
      */
     private $manager;

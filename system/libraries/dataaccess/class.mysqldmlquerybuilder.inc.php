@@ -32,7 +32,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
 {
 
     /**
-     * Reference to the MySQLConnection class.
+     * Shared instance of the MySQLConnection class.
      * @var MySQLConnection
      */
     protected $db;
@@ -40,13 +40,13 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Constructor.
      *
-     * @param MySQLConnection &$db Reference to the MySQLConnection class.
+     * @param MySQLConnection $db Shared instance of the MySQLConnection class.
      */
-    public function __construct(&$db)
+    public function __construct($db)
     {
         parent::__construct();
 
-        $this->db =& $db;
+        $this->db = $db;
     }
 
     /**
@@ -54,6 +54,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function __destruct()
     {
+        unset($this->db);
         parent::__destruct();
     }
 

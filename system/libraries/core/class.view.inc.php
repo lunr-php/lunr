@@ -27,25 +27,25 @@ abstract class View
 {
 
     /**
-     * Reference to the Request class
+     * Shared instance of the Request class
      * @var Request
      */
     protected $request;
 
     /**
-     * Reference to the Response class
+     * Shared instance of the Response class
      * @var Response
      */
     protected $response;
 
     /**
-     * Reference to the Configuration class
+     * Shared instance of the Configuration class
      * @var Configuration
      */
     protected $configuration;
 
     /**
-     * Reference to the Localization provider
+     * Shared instance of the Localization provider
      * @var L10nProvider
      */
     protected $l10n;
@@ -53,25 +53,17 @@ abstract class View
     /**
      * Constructor.
      *
-     * @param Request       &$request       Reference to the Request class
-     * @param Response      &$response      Reference to the Response class
-     * @param Configuration &$configuration Reference to the Configuration class
-     * @param L10nProvider  &$l10nprovider  Reference to the L10nProvider class
+     * @param Request       $request       Shared instance of the Request class
+     * @param Response      $response      Shared instance of the Response class
+     * @param Configuration $configuration Shared instance of to the Configuration class
+     * @param L10nProvider  $l10nprovider  Shared instance of the L10nProvider class (optional)
      */
-    public function __construct(&$request, &$response, &$configuration, &$l10nprovider = NULL)
+    public function __construct($request, $response, $configuration, $l10nprovider = NULL)
     {
-        $this->request       =& $request;
-        $this->response      =& $response;
-        $this->configuration =& $configuration;
-
-        if ($l10nprovider === NULL)
-        {
-            $this->l10n = NULL;
-        }
-        else
-        {
-            $this->l10n =& $l10nprovider;
-        }
+        $this->request       = $request;
+        $this->response      = $response;
+        $this->configuration = $configuration;
+        $this->l10n          = $l10nprovider;
     }
 
     /**
@@ -79,7 +71,10 @@ abstract class View
      */
     public function __destruct()
     {
-        # Nothing do be done yet
+        unset($this->request);
+        unset($this->response);
+        unset($this->configuration);
+        unset($this->l10n);
     }
 
     /**
