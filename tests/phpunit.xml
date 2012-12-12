@@ -11,6 +11,7 @@
         <testsuite name="Lunr Testsuite">
             <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/Core/Tests/AutoloaderTest.php</file>
+            <file>src/Lunr/Core/Tests/DatabaseSessionHandlerBaseTest.php</file>
             <file>src/Lunr/Core/Tests/DateTimeBaseTest.php</file>
             <file>src/Lunr/Core/Tests/DateTimeGetDateTimeTest.php</file>
             <file>src/Lunr/Core/Tests/DateTimeGetDelayedDatetimeTest.php</file>

@@ -14,7 +14,7 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Models\Core;
+namespace Lunr\Core;
 
 use Lunr\Core\Model;
 

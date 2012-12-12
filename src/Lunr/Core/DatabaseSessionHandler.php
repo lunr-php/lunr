@@ -5,11 +5,12 @@
  * session handler for PHP, using the database instead of
  * the local filesystem for session storage.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Core
  * @subpackage Libraries
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2010-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,17 +18,18 @@
 
 namespace Lunr\Core;
 
-use Lunr\Models\Core\SessionModel;
+use SessionHandlerInterface;
 
 /**
- * Background Session Management
+ * Database Session Handler Interface implementation
  *
  * @category   Libraries
  * @package    Core
  * @subpackage Libraries
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-class SessionManager
+class DatabaseSessionHandler implements SessionHandlerInterface
 {
 
     /**
@@ -37,36 +39,30 @@ class SessionManager
     private $lifetime;
 
     /**
-     * Instance of SessionModel
-     * @var SessionModel
+     * Instance of SessionDatabaseAccessObject
+     * @var SessionDatabaseAccessObject
      */
-    private $smodel;
+    private $sdao;
 
     /**
      * Constructor.
+     *
+     * @param SessionDAO $session_dao Session Database Access Object
      */
-    public function __construct()
+    public function __construct($session_dao)
     {
         $this->lifetime = ini_get('session.gc_maxlifetime');
-
-        session_set_save_handler(
-            array(&$this, 'open'),
-            array(&$this, 'close'),
-            array(&$this, 'read'),
-            array(&$this, 'write'),
-            array(&$this, 'destroy'),
-            array(&$this, 'gc')
-        );
-
-        $this->smodel = new SessionModel();
+        $this->sdao     = $session_dao;
     }
 
     /**
      * Destructor.
+     *
+     * @return void
      */
     public function __destruct()
     {
-        unset($this->smodel);
+        unset($this->sdao);
         unset($this->lifetime);
     }
 
@@ -83,8 +79,6 @@ class SessionManager
      */
     public function open($path, $name)
     {
-        global $session_save_path;
-        $session_save_path = $path;
         return TRUE;
     }
 
@@ -110,7 +104,7 @@ class SessionManager
      */
     public function read($id)
     {
-        return $this->smodel->read_session_data($id);
+        return $this->sdao->read_session_data($id);
     }
 
     /**
@@ -123,7 +117,7 @@ class SessionManager
      */
     public function write($id, $data)
     {
-        $this->smodel->write_session_data($id, $data, time() + $this->lifetime);
+        $this->sdao->write_session_data($id, $data, time() + $this->lifetime);
         return TRUE;
     }
 
@@ -136,18 +130,20 @@ class SessionManager
      */
     public function destroy($id)
     {
-        $this->smodel->delete_session($id);
+        $this->sdao->delete_session($id);
         return TRUE;
     }
 
     /**
      * Clean up expired sessions.
      *
+     * @param int $maxlifetime Sessions that have not updated for the last maxlifetime seconds will be removed.
+     *
      * @return Boolean $return Returns always true
      */
-    public function gc()
+    public function gc($maxlifetime)
     {
-        $this->smodel->session_gc();
+        $this->sdao->session_gc($maxlifetime);
         return TRUE;
     }
 
