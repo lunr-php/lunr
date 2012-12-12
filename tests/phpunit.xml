@@ -47,6 +47,8 @@
             <file>src/Lunr/Core/Tests/MailBaseTest.php</file>
             <file>src/Lunr/Core/Tests/MailSetTest.php</file>
             <file>src/Lunr/Core/Tests/MailSendTest.php</file>
+            <file>src/Lunr/Core/Tests/SessionTest.php</file>
+            <file>src/Lunr/Core/Tests/SessionBaseTest.php</file>
             <file>src/Lunr/L10n/Tests/L10nTest.php</file>
             <file>src/Lunr/L10n/Tests/L10nProviderBaseTest.php</file>
             <file>src/Lunr/L10n/Tests/GettextL10nProviderBaseTest.php</file>

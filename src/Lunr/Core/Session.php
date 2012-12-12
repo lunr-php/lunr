@@ -3,13 +3,14 @@
 /**
  * This file contains a PHP session handling wrapper class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Core
  * @subpackage Libraries
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2010-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2010-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
@@ -21,16 +22,11 @@ namespace Lunr\Core;
  * @category   Libraries
  * @package    Core
  * @subpackage Libraries
+ * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class Session
 {
-
-    /**
-     * Instance of the low-level session manager
-     * @var SessionManager
-     */
-    private $manager;
 
     /**
      * Check whether session is already closed
@@ -46,17 +42,9 @@ class Session
 
     /**
      * Constructor.
-     *
-     * @param Boolean $database Whether to use the database based
-     *                          SessionManager class or not
      */
-    public function __construct($database = TRUE)
+    public function __construct()
     {
-        if ($database)
-        {
-            $this->manager = new SessionManager();
-        }
-
         $this->closed  = FALSE;
         $this->started = FALSE;
 
@@ -74,9 +62,20 @@ class Session
             $this->close();
         }
 
-        unset($this->manager);
         unset($this->closed);
         unset($this->started);
+    }
+
+    /**
+     * Set SessionHandler.
+     *
+     * @param SessionHandlerInterface $session_handler Session handler
+     *
+     * @return boolean
+     */
+    public function set_session_handler($session_handler)
+    {
+        return session_set_save_handler($session_handler, TRUE);
     }
 
     /**
@@ -115,7 +114,7 @@ class Session
      *
      * @param mixed $key Identifier
      *
-     * @return void
+     * @return mixed
      */
     public function get($key)
     {
@@ -125,7 +124,7 @@ class Session
         }
         else
         {
-            return FALSE;
+            return NULL;
         }
     }
 
@@ -159,17 +158,19 @@ class Session
      */
     public function start($id = '')
     {
-        if (!$this->started)
+        if ($this->started)
         {
-            if ($id != '')
-            {
-                session_id($id);
-            }
-
-            session_start();
-            $this->started = TRUE;
-            $this->closed  = FALSE;
+            return;
         }
+
+        if ($id != '')
+        {
+            session_id($id);
+        }
+
+        session_start();
+        $this->started = TRUE;
+        $this->closed  = FALSE;
     }
 
     /**
