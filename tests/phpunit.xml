@@ -95,6 +95,7 @@
             <file>src/Lunr/DataAccess/Tests/DatabaseAccessObjectNoPoolTest.php</file>
             <file>src/Lunr/DataAccess/Tests/DatabaseAccessObjectPoolTest.php</file>
             <file>src/Lunr/DataAccess/Tests/DatabaseAccessObjectResultsTest.php</file>
+            <file>src/Lunr/Spwn/Tests/ResqueJobDispatcherTest.php</file>
 <!--            <file>src/Lunr/Database/Tests/DBManTest.php</file>
             <file>src/Lunr/Database/Tests/DBConTest.php</file>-->
         </testsuite>

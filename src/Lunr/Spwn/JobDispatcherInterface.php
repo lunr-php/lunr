@@ -36,6 +36,13 @@ interface JobDispatcherInterface
      */
     public function dispatch($job, $args);
 
+    /**
+     * Returns the job ID of the last background job dispatchin, if any.
+     *
+     * @return String $result The result of the last dispatching if any
+     */
+    public function get_job_id();
+
 }
 
 ?>
