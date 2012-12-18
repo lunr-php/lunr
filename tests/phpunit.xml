@@ -16,6 +16,7 @@
             <file>tests/system/libraries/l10n/class.l10n.test.php</file>
             <file>tests/system/libraries/db/class.dbman.test.php</file>
             <file>tests/system/libraries/db/class.dbcon.test.php</file>
+            <file>tests/system/libraries/spwn/class.resquejobdispatcher.test.php</file>
         </testsuite>
     </testsuites>
     <filter>
