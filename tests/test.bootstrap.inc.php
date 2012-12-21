@@ -36,9 +36,9 @@ set_include_path(
 );
 
 // Load and setup class file autloader
-require_once 'libraries/core/class.autoloader.inc.php';
+require_once 'Lunr/Core/Autoloader.php';
 
-$autoloader = new Lunr\Libraries\Core\Autoloader();
+$autoloader = new Lunr\Core\Autoloader();
 $autoloader->register();
 
 ?>
