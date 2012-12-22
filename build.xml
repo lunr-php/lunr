@@ -1,6 +1,6 @@
 <project name="Lunr" default="build" basedir=".">
 
-    <property name="system" value="system" />
+    <property name="system" value="src/Lunr" />
     <property name="application" value="application" />
     <property name="tests" value="tests" />
 
@@ -39,7 +39,7 @@
             <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
             <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
             <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
-            <arg value="--ignore=${tests},${application}/libraries/third-party" />
+            <arg value="--ignore=${tests}" />
             <arg path="${basedir}" />
         </exec>
     </target>
@@ -52,8 +52,6 @@
             <arg value="tests/phpmd.xml" />
             <arg value="--reportfile" />
             <arg value="${basedir}/build/logs/pmd.xml" />
-            <arg value="--exclude" />
-            <arg value="third-party" />
             <arg value="--suffixes" />
             <arg value="php" />
         </exec>
@@ -88,7 +86,7 @@
             <arg value="--report=checkstyle" />
             <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
             <arg value="--standard=Lunr" />
-            <arg value="--ignore=third-party,html.*" />
+            <arg value="--ignore=html.*" />
             <arg path="${system}" />
             <arg path="${application}" />
         </exec>
