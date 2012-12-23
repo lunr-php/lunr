@@ -7,6 +7,7 @@
     <target name="clean"
             description="Cleanup and create build directories">
         <delete dir="${basedir}/build" />
+        <delete dir="${basedir}/tmp" />
         <delete>
             <fileset dir="tests/statics/l10n" includes="**/*.mo"/>
         </delete>
@@ -127,8 +128,13 @@
 
     <target name="l10n"
             description="Generate gettext language files">
-        <exec executable="tests/statics/l10n/gen_l10n.sh" />
+        <exec executable="support/gen_l10n.sh" />
     </target>
 
-    <target name="build" depends="clean,parallelTasks,phpunit,phpcb" />
+    <target name="setup"
+            description="Setup runtime environment">
+        <exec executable="support/setup.sh" />
+    </target>
+
+    <target name="build" depends="clean,setup,parallelTasks,phpunit,phpcb" />
 </project>

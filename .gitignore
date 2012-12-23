@@ -11,3 +11,7 @@ build
 
 # ignore compiled gettext language files
 *.mo
+
+# ignore external interactions
+src/Psr
+src/Resque

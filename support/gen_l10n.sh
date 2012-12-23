@@ -1,12 +1,9 @@
 #!/bin/sh
 
-if [ "$(basename $(pwd))" = "l10n" ]; then
-  dir="."
-else
-  dir="tests/statics/l10n"
-fi
+CWD=$(pwd)
+DESTDIR=${DESTDIR:-tests/statics/l10n}
 
-for i in $dir/*; do
+for i in "$DESTDIR"/*; do
   if [ -d "$i" ]; then
     if [ -e "$i/LC_MESSAGES/Lunr.po" ]; then
       echo "Generating translation file for $i:"
