@@ -40,15 +40,14 @@
             <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
             <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
             <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
-            <arg value="--ignore=${tests}" />
-            <arg path="${basedir}" />
+            <arg path="${system}" />
         </exec>
     </target>
 
     <target name="phpmd"
             description="Generate pmd.xml using PHPMD">
         <exec executable="phpmd">
-            <arg path="${basedir}" />
+            <arg path="${system}" />
             <arg value="xml" />
             <arg value="tests/phpmd.xml" />
             <arg value="--reportfile" />
@@ -98,7 +97,7 @@
         <exec executable="phpcpd">
             <arg value="--log-pmd" />
             <arg value="${basedir}/build/logs/pmd-cpd.xml" />
-            <arg path="${basedir}" />
+            <arg path="${system}" />
         </exec>
     </target>
 
@@ -108,7 +107,7 @@
             <arg value="--log-csv" />
             <arg value="${basedir}/build/logs/phploc.csv" />
             <arg value="--count-tests" />
-            <arg path="${basedir}" />
+            <arg path="${system}" />
         </exec>
     </target>
 
