@@ -38,8 +38,8 @@ class DatabaseConnectionTest extends PHPUnit_Framework_TestCase
     private $configuration;
 
     /**
-     * Mock instance of the Logger class.
-     * @var Logger
+     * Mock instance of a Logger class.
+     * @var LoggerInterface
      */
     private $logger;
 
@@ -62,9 +62,7 @@ class DatabaseConnectionTest extends PHPUnit_Framework_TestCase
     {
         $this->configuration = $this->getMock('Lunr\Core\Configuration');
 
-        $this->logger = $this->getMockBuilder('Lunr\Core\Logger')
-                             ->disableOriginalConstructor()
-                             ->getMock();
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->db = $this->getMockBuilder('Lunr\DataAccess\DatabaseConnection')
                          ->setConstructorArgs(array(&$this->configuration, &$this->logger))
@@ -108,7 +106,7 @@ class DatabaseConnectionTest extends PHPUnit_Framework_TestCase
 
         $value = $property->getValue($this->db);
 
-        $this->assertInstanceOf('Lunr\Core\Logger', $value);
+        $this->assertInstanceOf('Psr\Log\LoggerInterface', $value);
         $this->assertSame($this->logger, $value);
     }
 

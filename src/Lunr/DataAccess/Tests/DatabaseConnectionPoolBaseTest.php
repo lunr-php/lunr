@@ -61,7 +61,7 @@ class DatabaseConnectionPoolBaseTest extends DatabaseConnectionPoolTest
 
         $value = $property->getValue($this->pool);
 
-        $this->assertInstanceOf('Lunr\Core\Logger', $value);
+        $this->assertInstanceOf('Psr\Log\LoggerInterface', $value);
         $this->assertSame($this->logger, $value);
     }
 

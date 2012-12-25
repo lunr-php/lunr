@@ -77,9 +77,9 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Constructor.
      *
-     * @param Configuration $configuration Shared instance of the configuration class
-     * @param Logger        $logger        Shared instance of the logger class
-     * @param mysqli        $mysqli        Instance of the mysqli class
+     * @param Configuration   $configuration Shared instance of the configuration class
+     * @param LoggerInterface $logger        Shared instance of a logger class
+     * @param mysqli          $mysqli        Instance of the mysqli class
      */
     public function __construct($configuration, $logger, $mysqli)
     {
@@ -164,7 +164,7 @@ class MySQLConnection extends DatabaseConnection
 
         if ($this->configuration['db']['driver'] != 'mysql')
         {
-            $this->logger->log_error('Cannot connect to a non-mysql database connection!');
+            $this->logger->error('Cannot connect to a non-mysql database connection!');
             return;
         }
 

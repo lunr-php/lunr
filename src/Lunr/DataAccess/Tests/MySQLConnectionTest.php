@@ -58,7 +58,7 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
 
     /**
      * Mock instance of the Logger class.
-     * @var Logger
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -87,9 +87,7 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->logger = $this->getMockBuilder('Lunr\Core\Logger')
-                             ->disableOriginalConstructor()
-                             ->getMock();
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->mysqli = $this->getMock('\mysqli');
 
@@ -127,9 +125,7 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->logger = $this->getMockBuilder('Lunr\Core\Logger')
-                             ->disableOriginalConstructor()
-                             ->getMock();
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->mysqli = $this->getMock('\mysqli');
 

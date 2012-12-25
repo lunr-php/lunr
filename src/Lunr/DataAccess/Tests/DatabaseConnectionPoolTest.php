@@ -57,8 +57,8 @@ abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
     protected $configuration;
 
     /**
-     * Mock instance of the Logger class.
-     * @var Logger
+     * Mock instance of a Logger class.
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -81,9 +81,7 @@ abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->logger = $this->getMockBuilder('Lunr\Core\Logger')
-                             ->disableOriginalConstructor()
-                             ->getMock();
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->pool = new DatabaseConnectionPool($this->configuration, $this->logger);
 
@@ -121,9 +119,7 @@ abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->logger = $this->getMockBuilder('Lunr\Core\Logger')
-                             ->disableOriginalConstructor()
-                             ->getMock();
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->pool = new DatabaseConnectionPool($this->configuration, $this->logger);
 
@@ -161,9 +157,7 @@ abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->logger = $this->getMockBuilder('Lunr\Core\Logger')
-                             ->disableOriginalConstructor()
-                             ->getMock();
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->pool = new DatabaseConnectionPool($this->configuration, $this->logger);
 

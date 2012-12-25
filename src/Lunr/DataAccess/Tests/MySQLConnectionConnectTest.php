@@ -170,7 +170,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
         $config->setValue($this->db, $configuration);
 
         $this->logger->expects($this->once())
-                     ->method('log_error');
+                     ->method('error');
 
         $this->db->connect();
     }

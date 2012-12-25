@@ -35,8 +35,8 @@ class DatabaseConnectionPool
     protected $configuration;
 
     /**
-     * Shared instance of the Logger class
-     * @var Logger
+     * Shared instance of a Logger class
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -55,8 +55,8 @@ class DatabaseConnectionPool
     /**
      * Constructor.
      *
-     * @param Configuration $configuration Shared instance of the configuration class
-     * @param Logger        $logger        Shared instance of the logger class
+     * @param Configuration   $configuration Shared instance of the configuration class
+     * @param LoggerInterface $logger        Shared instance of a logger class
      */
     public function __construct($configuration, $logger)
     {
