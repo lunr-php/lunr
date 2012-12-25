@@ -58,12 +58,6 @@ class Verification
     private $superfluous;
 
     /**
-     * Log file to store verification errors.
-     * @var string
-     */
-    private $logfile;
-
-    /**
      * Identifier for the verification process.
      * Used in the log file.
      * @var String
@@ -96,7 +90,6 @@ class Verification
         $this->pointer = NULL;
 
         $this->superfluous = array();
-        $this->logfile     = '';
         $this->identifier  = '';
 
         $this->check_remaining   = TRUE;
@@ -112,7 +105,6 @@ class Verification
         unset($this->pointer);
         unset($this->superfluous);
         unset($this->result);
-        unset($this->logfile);
         unset($this->identifier);
         unset($this->check_remaining);
         unset($this->check_superfluous);
@@ -171,18 +163,6 @@ class Verification
         $this->identifier  = '';
 
         return $this;
-    }
-
-    /**
-     * Set a log-file for error output.
-     *
-     * @param String $file Full path to log-file
-     *
-     * @return void
-     */
-    public function set_log_file($file)
-    {
-        $this->logfile = $file;
     }
 
     /**

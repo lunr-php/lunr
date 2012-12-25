@@ -97,17 +97,6 @@ class VerificationBaseTest extends VerificationTest
     }
 
     /**
-     * Test that the logfile is not set by default.
-     */
-    public function testLogfileIsEmptyStringByDefault()
-    {
-        $property = $this->verification_reflection->getProperty('logfile');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('', $property->getValue($this->verification));
-    }
-
-    /**
      * Test that the identifier is an empty string by default.
      */
     public function testIdentifierIsEmptyStringByDefault()

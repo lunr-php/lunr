@@ -133,23 +133,6 @@ class VerificationSetTest extends VerificationTest
     }
 
     /**
-     * Test setting a log file.
-     *
-     * @covers  Lunr\Core\Verification::set_log_file
-     */
-    public function testSetLogFileSetsLogfile()
-    {
-        $property = $this->verification_reflection->getProperty('logfile');
-        $property->setAccessible(TRUE);
-
-        $logfile = '/path/to/logfile';
-
-        $this->verification->set_log_file($logfile);
-
-        $this->assertEquals($logfile, $property->getValue($this->verification));
-    }
-
-    /**
      * Test setting an identifier.
      *
      * @covers Lunr\Core\Verification::set_identifier
