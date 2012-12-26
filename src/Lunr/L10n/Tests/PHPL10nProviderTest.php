@@ -45,10 +45,10 @@ abstract class PHPL10nProviderTest extends PHPUnit_Framework_TestCase
     protected $provider_reflection;
 
     /**
-     * Mock Object for the Configuration class.
-     * @var Configuration
+     * Mock Object for a Logger class.
+     * @var LoggerInterface
      */
-    protected $configuration;
+    protected $logger;
 
     /**
      * The language used for testing.
@@ -57,69 +57,26 @@ abstract class PHPL10nProviderTest extends PHPUnit_Framework_TestCase
     const LANGUAGE = 'de_DE';
 
     /**
-     * Default language used for plain setup.
+     * The domain used for testing.
      * @var String
      */
-    const DEFAULT_LANGUAGE = 'nl_NL';
+    const DOMAIN = 'Lunr';
 
     /**
-     * Common setup routines for all constructors.
+     * TestCase Constructor.
+     *
+     * Setup a plain (empty) PHPL10nProvider
      *
      * @return void
      */
-    public function setUpCommon()
+    public function setUp()
     {
-        $sub_configuration = $this->getMock('Lunr\Core\Configuration');
-
-        $map = array(
-            array('domain', 'Lunr'),
-            array('locales', dirname(__FILE__) . '/../../../../tests/statics/l10n'),
-            array('default_language', self::DEFAULT_LANGUAGE),
-        );
-
-        $sub_configuration->expects($this->any())
-                          ->method('offsetGet')
-                          ->will($this->returnValueMap($map));
-
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
-
-        $map = array(
-            array('l10n', $sub_configuration),
-        );
-
-        $this->configuration->expects($this->any())
-                      ->method('offsetGet')
-                      ->will($this->returnValueMap($map));
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->provider_reflection = new ReflectionClass('Lunr\L10n\PHPL10nProvider');
-    }
 
-    /**
-     * TestCase Constructor.
-     *
-     * Setup a plain (empty) PHPL10nProvider
-     *
-     * @return void
-     */
-    public function setUpPlain()
-    {
-        $this->setUpCommon();
-
-        $this->provider = new PHPL10nProvider(self::DEFAULT_LANGUAGE, $this->configuration);
-    }
-
-    /**
-     * TestCase Constructor.
-     *
-     * Setup a plain (empty) PHPL10nProvider
-     *
-     * @return void
-     */
-    public function setUpFull()
-    {
-        $this->setUpCommon();
-
-        $this->provider = new PHPL10nProvider(self::LANGUAGE, $this->configuration);
+        $this->provider = new PHPL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger);
+        $this->provider->set_locales_location(dirname(__FILE__) . '/../../../../tests/statics/l10n');
     }
 
     /**
@@ -129,7 +86,7 @@ abstract class PHPL10nProviderTest extends PHPUnit_Framework_TestCase
     {
         unset($this->provider);
         unset($this->provider_reflection);
-        unset($this->configuration);
+        unset($this->logger);
     }
 
 }

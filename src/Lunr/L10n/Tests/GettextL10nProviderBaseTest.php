@@ -30,34 +30,6 @@ class GettextL10nProviderBaseTest extends GettextL10nProviderTest
 {
 
     /**
-     * Test that the Configuration class is passed correctly.
-     */
-    public function testConfigurationIsPassedCorrectly()
-    {
-        $property = $this->provider_reflection->getProperty('configuration');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->provider);
-
-        $this->assertInstanceOf('Lunr\Core\Configuration', $value);
-        $this->assertSame($this->configuration, $value);
-    }
-
-    /**
-     * Test that the Logger class is passed correctly.
-     */
-    public function testLoggerIsPassedCorrectly()
-    {
-        $property = $this->provider_reflection->getProperty('logger');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->provider);
-
-        $this->assertInstanceOf('Psr\Log\LoggerInterface', $value);
-        $this->assertSame($this->logger, $value);
-    }
-
-    /**
      * Test that init() works correctly.
      *
      * @runInSeparateProcess
@@ -72,7 +44,7 @@ class GettextL10nProviderBaseTest extends GettextL10nProviderTest
         $method->invokeArgs($this->provider, array(self::LANGUAGE));
 
         $this->assertEquals(self::LANGUAGE, setlocale(LC_MESSAGES, 0));
-        $this->assertEquals($this->configuration['l10n']['domain'], textdomain(NULL));
+        $this->assertEquals(self::DOMAIN, textdomain(NULL));
     }
 
 }

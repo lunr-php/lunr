@@ -30,19 +30,50 @@ abstract class L10nProvider
 {
 
     /**
+     * Default language.
+     * @var String
+     */
+    protected $default_language;
+
+    /**
+     * Locales location.
+     * @var String
+     */
+    protected $locales_location;
+
+    /**
      * The language the provider has been initialized with
      * @var String
      */
     protected $language;
 
     /**
+     * Localization domain.
+     * @var String
+     */
+    protected $domain;
+
+    /**
+     * Shared instance of a Logger class.
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * Constructor.
      *
-     * @param String $language POSIX locale definition
+     * @param String          $language POSIX locale definition
+     * @param String          $domain   Localization domain
+     * @param LoggerInterface $logger   Shared instance of a logger class
      */
-    public function __construct($language)
+    public function __construct($language, $domain, $logger)
     {
         $this->language = $language;
+        $this->domain   = $domain;
+        $this->logger   = $logger;
+
+        $this->default_language = 'en_US';
+        $this->locales_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
     }
 
     /**
@@ -51,6 +82,10 @@ abstract class L10nProvider
     public function __destruct()
     {
         unset($this->language);
+        unset($this->default_language);
+        unset($this->locales_location);
+        unset($this->domain);
+        unset($this->logger);
     }
 
     /**
@@ -70,6 +105,43 @@ abstract class L10nProvider
     public function get_language()
     {
         return $this->language;
+    }
+
+    /**
+     * Set the default language.
+     *
+     * @return void
+     */
+    public function set_default_language($language)
+    {
+        $current = setlocale(LC_MESSAGES, 0);
+
+        if (setlocale(LC_MESSAGES, $language) !== FALSE)
+        {
+            $this->default_language = $language;
+            setlocale(LC_MESSAGES, $current);
+        }
+        else
+        {
+            $this->logger->warning('Invalid default language: ' . $language);
+        }
+    }
+
+    /**
+     * Set the location for language files.
+     *
+     * @return void
+     */
+    public function set_locales_location($location)
+    {
+        if (file_exists($location) === TRUE)
+        {
+            $this->locales_location = $location;
+        }
+        else
+        {
+            $this->logger->warning('Invalid locales location: ' . $location);
+        }
     }
 
     /**

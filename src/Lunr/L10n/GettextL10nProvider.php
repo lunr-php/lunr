@@ -28,18 +28,6 @@ class GettextL10nProvider extends L10nProvider
 {
 
     /**
-     * Shared instance of the Configuration class.
-     * @var Configuration
-     */
-    private $configuration;
-
-    /**
-     * Shared instance of a Logger class.
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * Define gettext msgid size limit
      * @var Integer
      */
@@ -48,16 +36,13 @@ class GettextL10nProvider extends L10nProvider
     /**
      * Constructor.
      *
-     * @param String          $language      POSIX locale definition
-     * @param Configuration   $configuration Shared instance of the Configuration class
-     * @param LoggerInterface $logger        Shared instance of a Logger class
+     * @param String          $language POSIX locale definition
+     * @param String          $domain   Localization domain
+     * @param LoggerInterface $logger   Shared instance of a logger class
      */
-    public function __construct($language, $configuration, $logger)
+    public function __construct($language, $domain, $logger)
     {
-        parent::__construct($language);
-
-        $this->configuration = $configuration;
-        $this->logger        = $logger;
+        parent::__construct($language, $domain, $logger);
     }
 
     /**
@@ -65,9 +50,6 @@ class GettextL10nProvider extends L10nProvider
      */
     public function __destruct()
     {
-        unset($this->configuration);
-        unset($this->logger);
-
         parent::__destruct();
     }
 
@@ -81,8 +63,8 @@ class GettextL10nProvider extends L10nProvider
     protected function init($language)
     {
         setlocale(LC_MESSAGES, $language);
-        bindtextdomain($this->configuration['l10n']['domain'], $this->configuration['l10n']['locales']);
-        textdomain($this->configuration['l10n']['domain']);
+        bindtextdomain($this->domain, $this->locales_location);
+        textdomain($this->domain);
     }
 
     /**
@@ -112,9 +94,9 @@ class GettextL10nProvider extends L10nProvider
         // Glue msgctxt and msgid together, with ASCII character 4
         // (EOT, End Of Text)
         $composed = "{$context}\004{$identifier}";
-        $output   = dcgettext($this->configuration['l10n']['domain'], $composed, LC_MESSAGES);
+        $output   = dcgettext($this->domain, $composed, LC_MESSAGES);
 
-        if (($output == $composed) && ($this->language != $this->configuration['l10n']['default_language']))
+        if (($output == $composed) && ($this->language != $this->default_language))
         {
             return $identifier;
         }
@@ -155,10 +137,10 @@ class GettextL10nProvider extends L10nProvider
         // Glue msgctxt and msgid together, with ASCII character 4
         // (EOT, End Of Text)
         $composed = "{$context}\004{$singular}";
-        $output   = dcngettext($this->configuration['l10n']['domain'], $composed, $plural, $amount, LC_MESSAGES);
+        $output   = dcngettext($this->domain, $composed, $plural, $amount, LC_MESSAGES);
 
         if ((($output == $composed) || ($output == $plural))
-            && ($this->language != $this->configuration['l10n']['default_language']))
+            && ($this->language != $this->default_language))
         {
             return ($amount == 1 ? $singular : $plural);
         }

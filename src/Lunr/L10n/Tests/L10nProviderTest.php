@@ -28,14 +28,20 @@ use ReflectionClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\L10n\L10nProvider
  */
-class L10nProviderTest extends PHPUnit_Framework_TestCase
+abstract class L10nProviderTest extends PHPUnit_Framework_TestCase
 {
 
     /**
      * Instance of the L10nProvider class.
      * @var L10nProvider
      */
-    private $provider;
+    protected $provider;
+
+    /**
+     * Mock Object for a Logger class.
+     * @var LoggerInterface
+     */
+    protected $logger;
 
     /**
      * The language used for testing.
@@ -44,12 +50,20 @@ class L10nProviderTest extends PHPUnit_Framework_TestCase
     const LANGUAGE = 'de_DE';
 
     /**
+     * The domain used for testing.
+     * @var String
+     */
+    const DOMAIN = 'Lunr';
+
+    /**
      * TestCase Constructor.
      */
     public function setUp()
     {
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+
         $this->provider = $this->getMockBuilder('Lunr\L10n\L10nProvider')
-                               ->setConstructorArgs(array(self::LANGUAGE))
+                               ->setConstructorArgs(array(self::LANGUAGE, self::DOMAIN, $this->logger))
                                ->getMockForAbstractClass();
 
         $this->provider_reflection = new ReflectionClass('Lunr\L10n\L10nProvider');
@@ -62,27 +76,7 @@ class L10nProviderTest extends PHPUnit_Framework_TestCase
     {
         unset($this->provider);
         unset($this->provider_reflection);
-    }
-
-    /**
-     * Test that the language is correctly stored in the object.
-     */
-    public function testLanguageSetCorrectly()
-    {
-        $property = $this->provider_reflection->getProperty('language');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(self::LANGUAGE, $property->getValue($this->provider));
-    }
-
-    /**
-     * Test that get_language() returns the set language.
-     *
-     * @covers Lunr\L10n\L10nProvider::get_language
-     */
-    public function testGetLanguageReturnsLanguage()
-    {
-        $this->assertEquals(self::LANGUAGE, $this->provider->get_language());
+        unset($this->logger);
     }
 
 }

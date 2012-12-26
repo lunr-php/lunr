@@ -30,30 +30,30 @@ class PHPL10nProvider extends L10nProvider
 {
 
     /**
-     * Shared instance of the Configuration class.
-     * @var Configuration
-     */
-    private $configuration;
-
-    /**
      * Attribute that stores the language array
      * @var array
      */
     private $lang_array;
 
     /**
+     * Whether the lang_array was initialized already or not.
+     * @var Boolean
+     */
+    private $initialized;
+
+    /**
      * Constructor.
      *
-     * @param String        $language      POSIX locale definition
-     * @param Configuration $configuration Shared instance of the Configuration class
+     * @param String          $language POSIX locale definition
+     * @param String          $domain   Localization domain
+     * @param LoggerInterface $logger   Shared instance of a logger class
      */
-    public function __construct($language, $configuration)
+    public function __construct($language, $domain, $logger)
     {
-        parent::__construct($language);
+        parent::__construct($language, $domain, $logger);
 
-        $this->configuration = $configuration;
-
-        $this->init($language);
+        $this->initialized = FALSE;
+        $this->lang_array  = array();
     }
 
     /**
@@ -62,7 +62,6 @@ class PHPL10nProvider extends L10nProvider
     public function __destruct()
     {
         unset($this->lang_array);
-        unset($this->configuration);
 
         parent::__destruct();
     }
@@ -76,17 +75,20 @@ class PHPL10nProvider extends L10nProvider
      */
     protected function init($language)
     {
-        if ($language != $this->configuration['l10n']['default_language'])
+        if ($this->initialized === TRUE)
+        {
+            return;
+        }
+
+        if ($language != $this->default_language)
         {
             $lang     = array();
-            $langpath = $this->configuration['l10n']['locales'] . '/' . $language . '/';
-            include $langpath . $this->configuration['l10n']['domain'] . '.php';
+            $langpath = $this->locales_location . '/' . $language . '/';
+            include $langpath . $this->domain . '.php';
             $this->lang_array =& $lang;
         }
-        else
-        {
-            $this->lang_array = array();
-        }
+
+        $this->initialized = TRUE;
     }
 
     /**
@@ -100,10 +102,12 @@ class PHPL10nProvider extends L10nProvider
     public function lang($identifier, $context = '')
     {
         //Check if it's necessary to translate the identifier
-        if ($this->language == $this->configuration['l10n']['default_language'])
+        if ($this->language == $this->default_language)
         {
             return $identifier;
         }
+
+        $this->init($this->language);
 
         //Check if the identifier is not contained in the language array
         if (!array_key_exists($identifier, $this->lang_array))
@@ -156,10 +160,12 @@ class PHPL10nProvider extends L10nProvider
     public function nlang($singular, $plural, $amount, $context = '')
     {
         //Check if it's necessary to translate
-        if ($this->language == $this->configuration['l10n']['default_language'])
+        if ($this->language == $this->default_language)
         {
             return ($amount == 1 ? $singular : $plural);
         }
+
+        $this->init($this->language);
 
         //Check if there is a translation available
         if (!array_key_exists($singular, $this->lang_array))

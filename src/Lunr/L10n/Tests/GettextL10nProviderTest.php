@@ -46,12 +46,6 @@ abstract class GettextL10nProviderTest extends PHPUnit_Framework_TestCase
     protected $provider_reflection;
 
     /**
-     * Mock Object for the Configuration class.
-     * @var Configuration
-     */
-    protected $configuration;
-
-    /**
      * Mock Object for a Logger class.
      * @var LoggerInterface
      */
@@ -64,35 +58,21 @@ abstract class GettextL10nProviderTest extends PHPUnit_Framework_TestCase
     const LANGUAGE = 'de_DE';
 
     /**
+     * The domain used for testing.
+     * @var String
+     */
+    const DOMAIN = 'Lunr';
+
+    /**
      * TestCase Constructor.
      */
     public function setUp()
     {
-        $sub_configuration = $this->getMock('Lunr\Core\Configuration');
-
-        $map = array(
-            array('domain', 'Lunr'),
-            array('locales', dirname(__FILE__) . '/../../../../tests/statics/l10n'),
-            array('default_language', 'nl_NL'),
-        );
-
-        $sub_configuration->expects($this->any())
-                          ->method('offsetGet')
-                          ->will($this->returnValueMap($map));
-
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
-
-        $map = array(
-            array('l10n', $sub_configuration),
-        );
-
-        $this->configuration->expects($this->any())
-                      ->method('offsetGet')
-                      ->will($this->returnValueMap($map));
-
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->provider = new GettextL10nProvider(self::LANGUAGE, $this->configuration, $this->logger);
+        $this->provider = new GettextL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger);
+        $this->provider->set_default_language('nl_NL');
+        $this->provider->set_locales_location(dirname(__FILE__) . '/../../../../tests/statics/l10n');
 
         $this->provider_reflection = new ReflectionClass('Lunr\L10n\GettextL10nProvider');
     }
@@ -104,7 +84,6 @@ abstract class GettextL10nProviderTest extends PHPUnit_Framework_TestCase
     {
         unset($this->provider);
         unset($this->provider_reflection);
-        unset($this->configuration);
         unset($this->logger);
     }
 

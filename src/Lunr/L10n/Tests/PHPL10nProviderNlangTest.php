@@ -30,17 +30,9 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
 {
 
     /**
-     * TestCase Constructor.
-     */
-    public function setUp()
-    {
-        $this->setUpFull();
-    }
-
-    /**
      * Test nlang() without context and singular value.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangSingularWithoutContext()
@@ -51,7 +43,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
     /**
      * Test nlang() without context and plural value.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangPluralWithoutContext()
@@ -82,7 +74,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
     /**
      * Test nlang() with context and singular value.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangSingularWithContext()
@@ -93,7 +85,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
     /**
      * Test nlang() with context and plural value.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangPluralWithContext()
@@ -124,7 +116,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
     /**
      * Test nlang() with superfluous context and singular value.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangSingularWithSuperfluousContextReturnsSingular()
@@ -135,7 +127,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
     /**
      * Test nlang() with superfluous context and plural value.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangPluralWithSuperfluousContextReturnsPlural()
@@ -146,7 +138,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
     /**
      * Test nlang() with context missing and singular value.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangSingularWithContextMissingReturnsSingular()
@@ -157,7 +149,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
     /**
      * Test nlang() with context missing and singular value.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangPluralWithContextMissingReturnsPlural()
@@ -168,7 +160,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
     /**
      * Test nlang() with context missing and fake plural.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangSingularWithoutContextAndFakePluralTranslatesSingular()
@@ -179,7 +171,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
     /**
      * Test nlang() with context missing and fake plural.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangPluralWithoutContextAndFakePluralTranslatesSingular()
@@ -190,7 +182,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
     /**
      * Test nlang() with context missing and fake plural.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangPluralWithContextMissingAndFakePluralReturnsPlural()
@@ -201,7 +193,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
     /**
      * Test nlang() with context missing and fake plural.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangSingularWithContextAndFakePluralTranslatesSingular()
@@ -212,7 +204,7 @@ class PHPL10nProviderNlangTest extends PHPL10nProviderTest
     /**
      * Test nlang() with context missing and fake plural.
      *
-     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInit
+     * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::nlang
      */
     public function testNlangPluralWithContextAndFakePluralTranslatesSingular()

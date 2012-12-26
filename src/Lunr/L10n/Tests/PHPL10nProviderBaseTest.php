@@ -31,17 +31,9 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
 {
 
     /**
-     * TestCase Constructor.
+     * Test that the lang_array attribute is empty by default.
      */
-    public function setUp()
-    {
-        $this->setUpPlain();
-    }
-
-    /**
-     * Test that the lang_array attribute is empty when the class is initialized with the default language.
-     */
-    public function testLangArrayEmptyForDefaultLanguage()
+    public function testLangArrayIsEmptyByDefault()
     {
         $property = $this->provider_reflection->getProperty('lang_array');
         $property->setAccessible(TRUE);
@@ -52,14 +44,46 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
     }
 
     /**
-     * Test that init() works correctly.
+     * Test that the lang_array is not initialized by default.
+     */
+    public function testInitializedIsFalseByDefault()
+    {
+        $property = $this->provider_reflection->getProperty('initialized');
+        $property->setAccessible(TRUE);
+
+        $this->assertFalse($property->getValue($this->provider));
+    }
+
+    /**
+     * Test that init() sets initialized to TRUE.
      *
      * @runInSeparateProcess
      *
-     * @depends testLangArrayEmptyForDefaultLanguage
+     * @depends testLangArrayIsEmptyByDefault
      * @covers  Lunr\L10n\PHPL10nProvider::init
      */
-    public function testInit()
+    public function testInitSetsInitializedTrue()
+    {
+        $method = $this->provider_reflection->getMethod('init');
+        $method->setAccessible(TRUE);
+
+        $method->invokeArgs($this->provider, array(self::LANGUAGE));
+
+        $property = $this->provider_reflection->getProperty('initialized');
+        $property->setAccessible(TRUE);
+
+        $this->assertTrue($property->getValue($this->provider));
+    }
+
+    /**
+     * Test that init() populates the lang_array for a non-default language.
+     *
+     * @runInSeparateProcess
+     *
+     * @depends testLangArrayIsEmptyByDefault
+     * @covers  Lunr\L10n\PHPL10nProvider::init
+     */
+    public function testInitForNonDefaultLanguageSetsLangArray()
     {
         $method = $this->provider_reflection->getMethod('init');
         $method->setAccessible(TRUE);
@@ -75,12 +99,68 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
     }
 
     /**
+     * Test that init() does not populate the lang_array with the default language.
+     *
+     * @runInSeparateProcess
+     *
+     * @depends testLangArrayIsEmptyByDefault
+     * @covers  Lunr\L10n\PHPL10nProvider::init
+     */
+    public function testInitForDefaultLanguageDoesNotSetLangArray()
+    {
+        $method = $this->provider_reflection->getMethod('init');
+        $method->setAccessible(TRUE);
+
+        $method->invokeArgs($this->provider, array('en_US'));
+
+        $property = $this->provider_reflection->getProperty('lang_array');
+        $property->setAccessible(TRUE);
+
+        $value = $property->getValue($this->provider);
+        $this->assertInternalType('array', $value);
+        $this->assertEmpty($value);
+    }
+
+    /**
+     * Test that init() does not re-populate the lang_array if already initialized.
+     *
+     * @runInSeparateProcess
+     *
+     * @depends testLangArrayIsEmptyByDefault
+     * @covers  Lunr\L10n\PHPL10nProvider::init
+     */
+    public function testInitForDefaultLanguageDoesNotRepopulate()
+    {
+        $property = $this->provider_reflection->getProperty('lang_array');
+        $property->setAccessible(TRUE);
+
+        $method = $this->provider_reflection->getMethod('init');
+        $method->setAccessible(TRUE);
+
+        $method->invokeArgs($this->provider, array(self::LANGUAGE));
+
+        $value = $property->getValue($this->provider);
+        $this->assertInternalType('array', $value);
+        $this->assertNotEmpty($value);
+
+        $method->invokeArgs($this->provider, array('en_US'));
+
+        $value = $property->getValue($this->provider);
+        $this->assertInternalType('array', $value);
+        $this->assertNotEmpty($value);
+    }
+
+    /**
      * Test that the lang() function returns the identifier when the set language is the default language.
      *
      * @covers Lunr\L10n\PHPL10nProvider::lang
      */
     public function testLangWithoutContextReturnsIdentifierWhenLanguageIsDefault()
     {
+        $property = $this->provider_reflection->getProperty('language');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->provider, 'en_US');
+
         $this->assertEquals('table', $this->provider->lang('table'));
     }
 
@@ -91,6 +171,10 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
      */
     public function testLangWithContextReturnsIdentifierWhenLanguageIsDefault()
     {
+        $property = $this->provider_reflection->getProperty('language');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->provider, 'en_US');
+
         $this->assertEquals('table', $this->provider->lang('table', 'kitchen'));
     }
 
@@ -101,6 +185,10 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
      */
     public function testNlangSingularWithoutContextReturnsSingularWhenLanguageIsDefault()
     {
+        $property = $this->provider_reflection->getProperty('language');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->provider, 'en_US');
+
         $this->assertEquals('%d man', $this->provider->nlang('%d man', '%d men', 1));
     }
 
@@ -111,6 +199,10 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
      */
     public function testNlangPluralWithoutContextReturnsPluralWhenLanguageIsDefault()
     {
+        $property = $this->provider_reflection->getProperty('language');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->provider, 'en_US');
+
         $this->assertEquals('%d men', $this->provider->nlang('%d man', '%d men', 2));
     }
 
@@ -121,6 +213,10 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
      */
     public function testNlangSingularWithContextReturnsSingularWhenLanguageIsDefault()
     {
+        $property = $this->provider_reflection->getProperty('language');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->provider, 'en_US');
+
         $this->assertEquals('%d man', $this->provider->nlang('%d man', '%d men', 1, 'people'));
     }
 
@@ -131,6 +227,10 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
      */
     public function testNlangPluralWithContextReturnsPluralWhenLanguageIsDefault()
     {
+        $property = $this->provider_reflection->getProperty('language');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->provider, 'en_US');
+
         $this->assertEquals('%d men', $this->provider->nlang('%d man', '%d men', 2, 'people'));
     }
 
