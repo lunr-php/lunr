@@ -51,12 +51,6 @@ abstract class PHPL10nProviderTest extends PHPUnit_Framework_TestCase
     protected $configuration;
 
     /**
-     * Mock Object for the Logger class.
-     * @var Logger
-     */
-    protected $logger;
-
-    /**
      * The language used for testing.
      * @var String
      */
@@ -97,10 +91,6 @@ abstract class PHPL10nProviderTest extends PHPUnit_Framework_TestCase
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->logger = $this->getMockBuilder('Lunr\Core\Logger')
-                       ->disableOriginalConstructor()
-                       ->getMock();
-
         $this->provider_reflection = new ReflectionClass('Lunr\L10n\PHPL10nProvider');
     }
 
@@ -115,7 +105,7 @@ abstract class PHPL10nProviderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpCommon();
 
-        $this->provider = new PHPL10nProvider(self::DEFAULT_LANGUAGE, $this->configuration, $this->logger);
+        $this->provider = new PHPL10nProvider(self::DEFAULT_LANGUAGE, $this->configuration);
     }
 
     /**
@@ -129,7 +119,7 @@ abstract class PHPL10nProviderTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpCommon();
 
-        $this->provider = new PHPL10nProvider(self::LANGUAGE, $this->configuration, $this->logger);
+        $this->provider = new PHPL10nProvider(self::LANGUAGE, $this->configuration);
     }
 
     /**
@@ -140,7 +130,6 @@ abstract class PHPL10nProviderTest extends PHPUnit_Framework_TestCase
         unset($this->provider);
         unset($this->provider_reflection);
         unset($this->configuration);
-        unset($this->logger);
     }
 
 }

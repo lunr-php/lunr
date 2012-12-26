@@ -273,6 +273,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
             $identifier .= 'a';
         }
 
+        $this->logger->expects($this->once())
+                     ->method('warning');
+
         $this->assertEquals($identifier, $this->provider->nlang($identifier, 'plural', 1));
     }
 
@@ -290,6 +293,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
         {
             $identifier .= 'a';
         }
+
+        $this->logger->expects($this->once())
+                     ->method('warning');
 
         $this->assertEquals($identifier, $this->provider->nlang($identifier, 'plural', 1, 'aaaaaa'));
     }

@@ -52,6 +52,12 @@ abstract class GettextL10nProviderTest extends PHPUnit_Framework_TestCase
     protected $configuration;
 
     /**
+     * Mock Object for a Logger class.
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * The language used for testing.
      * @var String
      */
@@ -84,11 +90,9 @@ abstract class GettextL10nProviderTest extends PHPUnit_Framework_TestCase
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $logger = $this->getMockBuilder('Lunr\Core\Logger')
-                       ->disableOriginalConstructor()
-                       ->getMock();
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->provider = new GettextL10nProvider(self::LANGUAGE, $this->configuration, $logger);
+        $this->provider = new GettextL10nProvider(self::LANGUAGE, $this->configuration, $this->logger);
 
         $this->provider_reflection = new ReflectionClass('Lunr\L10n\GettextL10nProvider');
     }
@@ -101,6 +105,7 @@ abstract class GettextL10nProviderTest extends PHPUnit_Framework_TestCase
         unset($this->provider);
         unset($this->provider_reflection);
         unset($this->configuration);
+        unset($this->logger);
     }
 
 }

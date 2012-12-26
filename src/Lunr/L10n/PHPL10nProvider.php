@@ -36,12 +36,6 @@ class PHPL10nProvider extends L10nProvider
     private $configuration;
 
     /**
-     * Shared instance of the Logger class.
-     * @var Logger
-     */
-    private $logger;
-
-    /**
      * Attribute that stores the language array
      * @var array
      */
@@ -52,14 +46,12 @@ class PHPL10nProvider extends L10nProvider
      *
      * @param String        $language      POSIX locale definition
      * @param Configuration $configuration Shared instance of the Configuration class
-     * @param Logger        $logger        Shared instance of the Logger class
      */
-    public function __construct($language, $configuration, $logger)
+    public function __construct($language, $configuration)
     {
         parent::__construct($language);
 
         $this->configuration = $configuration;
-        $this->logger        = $logger;
 
         $this->init($language);
     }
@@ -71,7 +63,6 @@ class PHPL10nProvider extends L10nProvider
     {
         unset($this->lang_array);
         unset($this->configuration);
-        unset($this->logger);
 
         parent::__destruct();
     }

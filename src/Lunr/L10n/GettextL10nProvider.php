@@ -34,8 +34,8 @@ class GettextL10nProvider extends L10nProvider
     private $configuration;
 
     /**
-     * Shared instance of the Logger class.
-     * @var Logger
+     * Shared instance of a Logger class.
+     * @var LoggerInterface
      */
     private $logger;
 
@@ -48,9 +48,9 @@ class GettextL10nProvider extends L10nProvider
     /**
      * Constructor.
      *
-     * @param String        $language      POSIX locale definition
-     * @param Configuration $configuration Shared instance of the Configuration class
-     * @param Logger        $logger        Shared instance of the Logger class
+     * @param String          $language      POSIX locale definition
+     * @param Configuration   $configuration Shared instance of the Configuration class
+     * @param LoggerInterface $logger        Shared instance of a Logger class
      */
     public function __construct($language, $configuration, $logger)
     {
@@ -97,7 +97,8 @@ class GettextL10nProvider extends L10nProvider
     {
         if (strlen($identifier) + strlen($context) + 1 > self::GETTEXT_MAX_MSGID_LENGTH)
         {
-            $this->logger->log_error('Identifier too long: ' . $identifier);
+            $this->logger->warning('Identifier too long: ' . $identifier);
+
             return $identifier;
         }
 
@@ -139,7 +140,8 @@ class GettextL10nProvider extends L10nProvider
     {
         if (strlen($singular) + strlen($context) + 1 > self::GETTEXT_MAX_MSGID_LENGTH)
         {
-            $this->logger->log_error('Identifier too long: ' . $singular);
+            $this->logger->warning('Identifier too long: ' . $singular);
+
             return $singular;
         }
 

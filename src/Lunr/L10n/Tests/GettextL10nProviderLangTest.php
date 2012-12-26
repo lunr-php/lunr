@@ -178,6 +178,9 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
             $identifier .= 'a';
         }
 
+        $this->logger->expects($this->once())
+                     ->method('warning');
+
         $this->assertEquals($identifier, $this->provider->lang($identifier));
     }
 
@@ -195,6 +198,9 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
         {
             $identifier .= 'a';
         }
+
+        $this->logger->expects($this->once())
+                     ->method('warning');
 
         $this->assertEquals($identifier, $this->provider->lang($identifier, 'aaaaaa'));
     }
