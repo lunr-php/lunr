@@ -37,7 +37,6 @@
             <file>src/Lunr/Core/Tests/RequestGetTest.php</file>
             <file>src/Lunr/Core/Tests/ResponseTest.php</file>
             <file>src/Lunr/Core/Tests/ConsoleTest.php</file>
-            <file>src/Lunr/Core/Tests/LoggerTest.php</file>
             <file>src/Lunr/Fdbk/Tests/PSR3LoggerTest.php</file>
             <file>src/Lunr/Fdbk/Tests/PHPLoggerTest.php</file>
             <file>src/Lunr/Fdbk/Tests/FileLoggerTest.php</file>
