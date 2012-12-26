@@ -263,6 +263,9 @@ class Verification
             }
         }
 
+        $message = "Rule '{rule}' failed for '{index}' with value '{val}' of type '{type}'!";
+        $context = array();
+
         foreach($this->result as $index => $checks)
         {
             # check if index was ignored
@@ -279,8 +282,6 @@ class Verification
                     $context['index'] = $index;
                     $context['val']   = print_r($this->data[$index], TRUE);
                     $context['type']  = gettype($this->data[$index]);
-
-                    $message = "Rule '{rule}' failed for '{index}' with value '{val}' of type '{type}'!";
 
                     $this->logger->error($message, $context);
 
@@ -306,11 +307,14 @@ class Verification
             return FALSE;
         }
 
+        $message = $error_prefix . "Ruleset for non-existing key '{key}'!";
+        $context = array();
+
         foreach ($this->superfluous as &$value)
         {
             $context['key'] = $value;
 
-            $this->logger->error($error_prefix . "Ruleset for non-existing key '{key}'!", $context);
+            $this->logger->error($message, $context);
         }
 
         unset($value);
@@ -337,11 +341,14 @@ class Verification
             return TRUE;
         }
 
+        $message = $error_prefix . "Unhandled Index '{index}'!";
+        $context = array();
+
         foreach ($unhandled_elements as $value)
         {
             $context['index'] = $value;
 
-            $this->logger->error($error_prefix . "Unhandled Index '{index}'!", $context);
+            $this->logger->error($message, $context);
         }
 
         return FALSE;
