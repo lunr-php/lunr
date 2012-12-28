@@ -27,7 +27,7 @@ namespace Lunr\DataAccess;
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @author     Felipe Martinez <felipe@m2mobi.com>
  */
-abstract class DatabaseDMLQueryBuilder
+abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, QueryEscaperInterface
 {
 
     /**
@@ -399,6 +399,18 @@ abstract class DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define and escape input as integer value.
+     *
+     * @param mixed $value Input to escape as integer
+     *
+     * @return Integer Defined and escaped Integer value
+     */
+    public function intvalue($value)
+    {
+        return intval($value);
+    }
+
+    /**
      * Define a special collation.
      *
      * @param mixed  $value     Input
@@ -755,229 +767,6 @@ abstract class DatabaseDMLQueryBuilder
         return trim($col, '.');
     }
 
-    /**
-     * Define and escape input as value.
-     *
-     * @param mixed  $value     Input
-     * @param String $collation Collation name
-     * @param String $charset   Charset name
-     *
-     * @return String $return Defined and escaped value
-     */
-    public abstract function value($value, $collation = '', $charset = '');
-
-    /**
-     * Define and escape input as a hexadecimal value.
-     *
-     * @param mixed  $value     Input
-     * @param String $collation Collation name
-     * @param String $charset   Charset name
-     *
-     * @return String $return Defined, escaped and unhexed value
-     */
-    public abstract function hexvalue($value, $collation = '', $charset = '');
-
-    /**
-     * Define and escape input as a hexadecimal value.
-     *
-     * @param mixed  $value     Input
-     * @param String $match     Whether to match forward, backward or both
-     * @param String $collation Collation name
-     * @param String $charset   Charset name
-     *
-     * @return String $return Defined, escaped and unhexed value
-     */
-    public abstract function likevalue($value, $match = 'both', $collation = '', $charset = '');
-
-    /**
-     * Define the mode of the SELECT clause.
-     *
-     * @param String $mode The select mode you want to use
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function select_mode($mode);
-
-    /**
-     * Define the lock mode for a transaction.
-     *
-     * @param String $mode The lock mode you want to use
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function lock_mode($mode);
-
-    /**
-     * Define a SELECT clause.
-     *
-     * @param String $select The columns to select
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function select($select);
-
-    /**
-     * Define the mode of the DELETE clause.
-     *
-     * @param String $mode The delete mode you want to use
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function delete_mode($mode);
-
-    /**
-     * Define a DELETE clause.
-     *
-     * @param String $delete The table references to delete from
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function delete($delete);
-
-    /**
-     * Define FROM clause of the SQL statement.
-     *
-     * @param String $table Table name
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function from($table);
-
-    /**
-     * Define the mode of the INSERT clause.
-     *
-     * @param String $mode The insert mode you want to use
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function insert_mode($mode);
-
-    /**
-     * Define the mode of the REPLACE clause.
-     *
-     * @param String $mode The replace mode you want to use
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function replace_mode($mode);
-
-    /**
-     * Define INTO clause of the SQL statement.
-     *
-     * @param String $table Table name
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function into($table);
-
-    /**
-     * Define SET clause of the SQL statement.
-     *
-     * @param Array $set Array containing escaped key->value pairs to be set
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function set($set);
-
-    /**
-     * Define Column names of the affected by Insert or Update SQL statement.
-     *
-     * @param Array $keys Array containing escaped field names to be set
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function column_names($keys);
-
-    /**
-     * Define Values for Insert or Update SQL statement.
-     *
-     * @param Array $values Array containing escaped values to be set
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function values($values);
-
-    /**
-     * Define a Select statement for Insert statement.
-     *
-     * @param String $select SQL Select statement to be used in Insert
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function select_statement($select);
-
-    /**
-     * Define WHERE clause of the SQL statement.
-     *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function where($left, $right, $operator = '=');
-
-    /**
-     * Define WHERE clause with LIKE comparator of the SQL statement.
-     *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function where_like($left, $right, $negate = FALSE);
-
-    /**
-     * Define HAVING clause of the SQL statement.
-     *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function having($left, $right, $operator = '=');
-
-    /**
-     * Define WHERE clause with LIKE comparator of the SQL statement.
-     *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function having_like($left, $right, $negate = FALSE);
-
-    /**
-     * Define a ORDER BY clause of the SQL statement.
-     *
-     * @param String  $expr Expression to order by
-     * @param Boolean $asc  Order ASCending/TRUE or DESCending/FALSE
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function order_by($expr, $asc = TRUE);
-
-    /**
-     * Define a GROUP BY clause of the SQL statement.
-     *
-     * @param String $expr Expression to group by
-     *
-     * @return DatabaseDMLQueryBuilder $self Self reference
-     */
-    public abstract function group_by($expr);
-
-    /**
-     * Define a LIMIT clause of the SQL statement.
-     *
-     * @param Integer $amount The amount of elements to retrieve
-     * @param Integer $offset Start retrieving elements from a specific index
-     *
-     * @return void
-     */
-    public abstract function limit($amount, $offset = -1);
-
 }
+
 ?>

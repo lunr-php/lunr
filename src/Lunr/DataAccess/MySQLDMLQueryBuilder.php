@@ -116,18 +116,6 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Define and escape input as integer value.
-     *
-     * @param mixed $value Input to escape as integer
-     *
-     * @return Integer Defined and escaped Integer value
-     */
-    public function intvalue($value)
-    {
-        return intval($value);
-    }
-
-    /**
      * Define and escape input as index hint.
      *
      * @param String $keyword Whether to USE, FORCE or IGNORE the index/indices
@@ -169,78 +157,6 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
         {
             return $keyword . ' INDEX FOR ' . $for . ' (' . $indices . ')';
         }
-    }
-
-    /**
-     * Define the mode of the SELECT clause.
-     *
-     * @param String $mode The select mode you want to use
-     *
-     * @return MySQLDMLQueryBuilder $self Self reference
-     */
-    public function select_mode($mode)
-    {
-        $mode = strtoupper($mode);
-
-        switch ($mode)
-        {
-            case 'ALL':
-            case 'DISTINCT':
-            case 'DISTINCTROW':
-                $this->select_mode['duplicates'] = $mode;
-                break;
-            case 'SQL_CACHE':
-            case 'SQL_NO_CACHE':
-                $this->select_mode['cache'] = $mode;
-                break;
-            case 'HIGH_PRIORITY':
-            case 'STRAIGHT_JOIN':
-            case 'SQL_SMALL_RESULT':
-            case 'SQL_BIG_RESULT':
-            case 'SQL_BUFFER_RESULT':
-            case 'SQL_CALC_FOUND_ROWS':
-                $this->select_mode[] = $mode;
-            default:
-                break;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Define a SELECT clause.
-     *
-     * @param String $select The column(s) to select
-     *
-     * @return MySQLDMLQueryBuilder $self Self reference
-     */
-    public function select($select)
-    {
-        $this->sql_select($select);
-        return $this;
-    }
-
-    /**
-     * Define the lock mode for a transaction.
-     *
-     * @param String $mode The lock mode you want to use
-     *
-     * @return MySQLDMLQueryBuilder $self Self reference
-     */
-    public function lock_mode($mode)
-    {
-        $mode = strtoupper($mode);
-
-        switch ($mode)
-        {
-            case 'FOR UPDATE':
-            case 'LOCK IN SHARE MODE':
-                $this->lock_mode = $mode;
-            default:
-                break;
-        }
-
-        return $this;
     }
 
     /**
@@ -320,20 +236,6 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Define FROM clause of the SQL statement.
-     *
-     * @param String $table       Table reference
-     * @param array  $index_hints Array of Index Hints
-     *
-     * @return MySQLDMLQueryBuilder $self Self reference
-     */
-    public function from($table, $index_hints = NULL)
-    {
-        $this->sql_from($table, $index_hints);
-        return $this;
-    }
-
-    /**
      * Define INTO clause of the SQL statement.
      *
      * @param String $table Table reference
@@ -343,6 +245,19 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     public function into($table)
     {
         $this->sql_into($table);
+        return $this;
+    }
+
+    /**
+     * Define a Select statement for Insert statement.
+     *
+     * @param String $select SQL Select statement to be used in Insert
+     *
+     * @return DatabaseDMLQueryBuilder $self Self reference
+     */
+    public function select_statement($select)
+    {
+        $this->sql_select_statement($select);
         return $this;
     }
 
@@ -386,15 +301,65 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Define a Select statement for Insert statement.
+     * Define the mode of the SELECT clause.
      *
-     * @param String $select SQL Select statement to be used in Insert
+     * @param String $mode The select mode you want to use
      *
-     * @return DatabaseDMLQueryBuilder $self Self reference
+     * @return MySQLDMLQueryBuilder $self Self reference
      */
-    public function select_statement($select)
+    public function select_mode($mode)
     {
-        $this->sql_select_statement($select);
+        $mode = strtoupper($mode);
+
+        switch ($mode)
+        {
+            case 'ALL':
+            case 'DISTINCT':
+            case 'DISTINCTROW':
+                $this->select_mode['duplicates'] = $mode;
+                break;
+            case 'SQL_CACHE':
+            case 'SQL_NO_CACHE':
+                $this->select_mode['cache'] = $mode;
+                break;
+            case 'HIGH_PRIORITY':
+            case 'STRAIGHT_JOIN':
+            case 'SQL_SMALL_RESULT':
+            case 'SQL_BIG_RESULT':
+            case 'SQL_BUFFER_RESULT':
+            case 'SQL_CALC_FOUND_ROWS':
+                $this->select_mode[] = $mode;
+            default:
+                break;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Define a SELECT clause.
+     *
+     * @param String $select The column(s) to select
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function select($select)
+    {
+        $this->sql_select($select);
+        return $this;
+    }
+
+    /**
+     * Define FROM clause of the SQL statement.
+     *
+     * @param String $table       Table reference
+     * @param array  $index_hints Array of Index Hints
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function from($table, $index_hints = NULL)
+    {
+        $this->sql_from($table, $index_hints);
         return $this;
     }
 
@@ -506,6 +471,29 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     public function limit($amount, $offset = -1)
     {
         $this->sql_limit($amount, $offset);
+        return $this;
+    }
+
+    /**
+     * Define the lock mode for a transaction.
+     *
+     * @param String $mode The lock mode you want to use
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function lock_mode($mode)
+    {
+        $mode = strtoupper($mode);
+
+        switch ($mode)
+        {
+            case 'FOR UPDATE':
+            case 'LOCK IN SHARE MODE':
+                $this->lock_mode = $mode;
+            default:
+                break;
+        }
+
         return $this;
     }
 
