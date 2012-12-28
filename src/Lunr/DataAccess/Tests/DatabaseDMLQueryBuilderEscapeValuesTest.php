@@ -205,6 +205,45 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
         $this->assertEquals($escaped . ' AS `alias`', $value);
     }
 
+    /**
+     * Test escaping an integer.
+     *
+     * @param mixed   $value    The input value to be escaped
+     * @param Integer $expected The expected escaped integer
+     *
+     * @dataProvider expectedIntegerProvider
+     * @covers       Lunr\DataAccess\MysqlDMLQueryBuilder::intvalue
+     */
+    public function testEscapeIntValue($value, $expected)
+    {
+        $this->assertEquals($expected, $this->builder->intvalue($value));
+    }
+
+    /**
+     * Test escaping an object as integer.
+     *
+     * @expectedException PHPUnit_Framework_Error_Notice
+     * @covers            Lunr\DataAccess\MysqlDMLQueryBuilder::intvalue
+     */
+    public function testEscapeObjectAsIntValue()
+    {
+        $this->builder->intvalue($this->builder);
+    }
+
+    /**
+     * Test escaping illegal value as integer.
+     *
+     * @param mixed   $value   The input value to be escaped
+     * @param integer $illegal The illegal escaped integer
+     *
+     * @dataProvider illegalIntegerProvider
+     * @covers       Lunr\DataAccess\MysqlDMLQueryBuilder::intvalue
+     */
+    public function testEscapeIllegalAsIntValue($value, $illegal)
+    {
+        $this->assertEquals($illegal, $this->builder->intvalue($value));
+    }
+
 }
 
 ?>

@@ -193,21 +193,15 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
      */
     public function get_select_query()
     {
-        $components   = array();
-        $components[] = 'select_mode';
-        $components[] = 'select';
-        $components[] = 'from';
-        $components[] = 'where';
-        $components[] = 'group_by';
-        $components[] = 'having';
-        $components[] = 'order_by';
-        $components[] = 'limit';
-        $components[] = 'lock_mode';
-
         if ($this->from == '')
         {
             return '';
         }
+
+        $components   = array();
+
+        array_push($components, 'select_mode', 'select', 'from', 'where', 'group_by');
+        array_push($components, 'having', 'order_by', 'limit', 'lock_mode');
 
         return 'SELECT ' . $this->implode_query($components);
     }
@@ -219,25 +213,21 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
      */
     public function get_delete_query()
     {
-        $components   = array();
-        $components[] = 'delete_mode';
-        if ($this->delete != '')
-        {
-            $components[] = 'delete';
-            $components[] = 'from';
-            $components[] = 'where';
-        }
-        else
-        {
-            $components[] = 'from';
-            $components[] = 'where';
-            $components[] = 'order_by';
-            $components[] = 'limit';
-        }
-
         if ($this->from == '')
         {
             return '';
+        }
+
+        $components   = array();
+        $components[] = 'delete_mode';
+
+        if ($this->delete != '')
+        {
+            array_push($components, 'delete', 'from', 'where');
+        }
+        else
+        {
+            array_push($components, 'from', 'where', 'order_by', 'limit');
         }
 
         return 'DELETE ' . $this->implode_query($components);
@@ -250,6 +240,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
      */
     public function get_insert_query()
     {
+        if ($this->into == '')
+        {
+            return '';
+        }
+
         $components   = array();
         $components[] = 'insert_mode';
         $components[] = 'into';
@@ -259,15 +254,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
             $components[] = 'column_names';
             $components[] = 'select_statement';
 
-            $valid = array(
-                'HIGH_PRIORITY',
-                'LOW_PRIORITY',
-                'IGNORE'
-            );
+            $valid = array('HIGH_PRIORITY', 'LOW_PRIORITY', 'IGNORE');
 
             $this->insert_mode = array_intersect($this->insert_mode, $valid);
         }
-        else if ($this->set != '')
+        elseif ($this->set != '')
         {
             $components[] = 'set';
         }
@@ -275,11 +266,6 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         {
             $components[] = 'column_names';
             $components[] = 'values';
-        }
-
-        if ($this->into == '')
-        {
-            return '';
         }
 
         return 'INSERT ' . $this->implode_query($components);
@@ -292,15 +278,16 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
      */
     public function get_replace_query()
     {
-        $components = array();
+        if ($this->into == '')
+        {
+            return '';
+        }
 
-        $valid = array(
-            'LOW_PRIORITY',
-            'DELAYED'
-        );
+        $valid = array('LOW_PRIORITY', 'DELAYED');
 
         $this->insert_mode = array_intersect($this->insert_mode, $valid);
 
+        $components   = array();
         $components[] = 'insert_mode';
         $components[] = 'into';
 
@@ -309,7 +296,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
             $components[] = 'column_names';
             $components[] = 'select_statement';
         }
-        else if ($this->set != '')
+        elseif ($this->set != '')
         {
             $components[] = 'set';
         }
@@ -317,11 +304,6 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         {
             $components[] = 'column_names';
             $components[] = 'values';
-        }
-
-        if ($this->into == '')
-        {
-            return '';
         }
 
         return 'REPLACE ' . $this->implode_query($components);
