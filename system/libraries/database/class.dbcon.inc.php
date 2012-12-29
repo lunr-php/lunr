@@ -202,6 +202,7 @@ abstract class DBCon
             {
                 $sql_command .= $this->union;
             }
+
             if ($this->select != '')
             {
                 $sql_command .= $this->select;
@@ -246,13 +247,13 @@ abstract class DBCon
 
         if ($clear == TRUE)
         {
-            $this->union = '';
+            $this->union  = '';
             $this->select = '';
-            $this->join = '';
-            $this->where = '';
-            $this->group = '';
-            $this->order = '';
-            $this->limit = '';
+            $this->join   = '';
+            $this->where  = '';
+            $this->group  = '';
+            $this->order  = '';
+            $this->limit  = '';
             //$this->for_update = FALSE;
         }
 
@@ -364,7 +365,7 @@ abstract class DBCon
      *
      * @return void
      */
-    public abstract function start_where_group($connector ='');
+    public abstract function start_where_group($connector = '');
 
     /**
      * End a where group.
@@ -666,7 +667,7 @@ abstract class DBCon
                 if ($type == 'keys')
                 {
                     $array = array_keys(current($data));
-                    $char = '`';
+                    $char  = '`';
                 }
                 else
                 {
@@ -675,18 +676,19 @@ abstract class DBCon
                     {
                         $list .= $this->prepare_data($entry, $type) . ',';
                     }
+
                     return trim($list, ',');
                 }
             }
             elseif ($type == 'keys')
             {
                 $array = array_keys($data);
-                $char = '`';
+                $char  = '`';
             }
             else
             {
                 $array = array_values($data);
-                $char = "'";
+                $char  = "'";
             }
         }
         elseif ($type == 'keys')
@@ -696,7 +698,7 @@ abstract class DBCon
         else
         {
             $array['0'] = $data;
-            $char = "'";
+            $char       = "'";
         }
 
         $list = '(';
@@ -710,7 +712,7 @@ abstract class DBCon
                 && (preg_match($unhex_pattern, $value) != FALSE))
             {
                 ///TODO: Does not work that way for SQLite3
-                $list .= $value.' ,';
+                $list .= $value . ' ,';
             }
             elseif ($value === NULL)
             {
@@ -721,6 +723,7 @@ abstract class DBCon
                 $list .= $char . $this->escape_string($value) . $char . ',';
             }
         }
+
         $list = trim($list, ',') . ') ';
         return $list;
     }
@@ -735,7 +738,7 @@ abstract class DBCon
     protected function escape_columns($col)
     {
         $parts = explode('.', $col);
-        $col = '';
+        $col   = '';
         foreach ($parts as $part)
         {
             $part = trim($part);
@@ -748,6 +751,7 @@ abstract class DBCon
                 $col .= '`' . $part . '`.';
             }
         }
+
         $col = trim($col, '.') . ' ';
         return $col;
     }
@@ -763,7 +767,7 @@ abstract class DBCon
      */
     protected function escape_as($cols, $hex = FALSE)
     {
-        $cols = explode(',', $cols);
+        $cols   = explode(',', $cols);
         $string = '';
         foreach ($cols AS $value)
         {
@@ -812,6 +816,7 @@ abstract class DBCon
                 }
             }
         }
+
         $string = trim($string, ', ') . ' ';
         return $string;
     }

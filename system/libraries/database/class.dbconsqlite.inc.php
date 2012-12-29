@@ -219,6 +219,7 @@ class DBConSqlite extends DBCon
                     Output::error($this->last_query());
                     Output::error($this->last_error());
                 }
+
                 return new QuerySqlite($output, $this->res);
             }
             else
@@ -720,10 +721,11 @@ class DBConSqlite extends DBCon
             if (is_array($string))
             {
                 $input = print_r($string, TRUE);
-                $msg = 'Wrong input for escape_string()! Array given: ' . $input;
+                $msg   = 'Wrong input for escape_string()! Array given: ' . $input;
                 Output::error($msg);
                 return FALSE;
             }
+
             return $this->res->escapeString($string);
         }
         else

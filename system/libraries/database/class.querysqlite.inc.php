@@ -49,7 +49,7 @@ class QuerySqlite implements QueryInterface
     public function __construct(&$query, &$res)
     {
         $this->query =& $query;
-        $this->res =& $res;
+        $this->res   =& $res;
     }
 
     /**

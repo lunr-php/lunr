@@ -16,6 +16,7 @@
  */
 
 namespace Lunr\Libraries\Database;
+
 use Lunr\Libraries\Core\Output;
 
 /**
@@ -50,7 +51,7 @@ class QueryMySQL implements QueryInterface
     public function __construct($query, $res)
     {
         $this->query = $query;
-        $this->res = $res;
+        $this->res   = $res;
     }
 
     /**
@@ -102,6 +103,7 @@ class QueryMySQL implements QueryInterface
         {
             $output[] = $row;
         }
+
         return $output;
     }
 
@@ -143,6 +145,7 @@ class QueryMySQL implements QueryInterface
         {
             $output[] = $row[$col];
         }
+
         return $output;
     }
 

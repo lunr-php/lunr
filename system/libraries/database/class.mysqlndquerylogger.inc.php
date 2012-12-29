@@ -25,7 +25,8 @@ namespace Lunr\Libraries\Database;
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-class MySQLndQueryLogger extends MySQLndUhConnection {
+class MySQLndQueryLogger extends MySQLndUhConnection
+{
 
     /**
      * Intercept MySQL queries.
@@ -39,9 +40,9 @@ class MySQLndQueryLogger extends MySQLndUhConnection {
     {
         $id = $this->get_function_call_hierarchy(xdebug_get_function_stack());
 
-        $start = microtime(TRUE);
+        $start  = microtime(TRUE);
         $return = parent::query($connection, $query);
-        $time = microtime(TRUE) - $start;
+        $time   = microtime(TRUE) - $start;
 
         $this->record_query_stats($id, $time);
 
@@ -72,6 +73,7 @@ class MySQLndQueryLogger extends MySQLndUhConnection {
                 $hierarchy .= $value['function'] . '()=>';
             }
         }
+
         unset($value);
 
         $hierarchy = trim($hierarchy, '=>');
@@ -92,10 +94,11 @@ class MySQLndQueryLogger extends MySQLndUhConnection {
         $sqlite = DBMan::get_db_connection($stats_db, FALSE);
 
         $data = array(
-                    'queryIdentifier' => $identifier,
-                    'execTime' => $time,
-                    'execDate' => M2DateTime::get_datetime()
-                );
+            'queryIdentifier' => $identifier,
+            'execTime'        => $time,
+            'execDate'        => M2DateTime::get_datetime()
+        );
+
         $sqlite->insert('query_stats', $data);
     }
 
