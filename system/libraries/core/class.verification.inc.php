@@ -98,8 +98,8 @@ class Verification
         if ($soft !== TRUE)
         {
             // Check that input matches with the defined ruleset
-            $input_elements = array_keys($input);
-            $ruleset_elements = array_keys($ruleset);
+            $input_elements     = array_keys($input);
+            $ruleset_elements   = array_keys($ruleset);
             $unhandled_elements = array_diff($ruleset_elements, $input_elements);
 
             if ($unhandled_elements != array())
@@ -108,6 +108,7 @@ class Verification
                 {
                     Output::errorln($error_prefix . "Ruleset for non-existing key '$value'!", $file);
                 }
+
                 return FALSE;
             }
         }
@@ -126,23 +127,24 @@ class Verification
                     {
                         if (call_user_func('static::is_' . $rule, $value) === FALSE)
                         {
-                            $val = print_r($value, TRUE);
-                            $type  = gettype($value);
-                            $msg   = "Rule '$rule' failed for '$key' with value '$val' of type '$type'!";
+                            $val  = print_r($value, TRUE);
+                            $type = gettype($value);
+                            $msg  = "Rule '$rule' failed for '$key' with value '$val' of type '$type'!";
                             Output::errorln($error_prefix . $msg, $file);
                             return FALSE;
                         }
                     }
+
                     unset($rule);
                 }
                 else
                 {
                     if (call_user_func('static::is_' . $ruleset[$key], $value) === FALSE)
                     {
-                        $rule  = $ruleset[$key];
-                        $val = print_r($value, TRUE);
-                        $type  = gettype($value);
-                        $msg   = "Rule '$rule' failed for '$key' with value '$val' of type '$type'!";
+                        $rule = $ruleset[$key];
+                        $val  = print_r($value, TRUE);
+                        $type = gettype($value);
+                        $msg  = "Rule '$rule' failed for '$key' with value '$val' of type '$type'!";
                         Output::errorln($error_prefix . $msg, $file);
                         return FALSE;
                     }

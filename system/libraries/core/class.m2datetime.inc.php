@@ -74,6 +74,7 @@ class M2DateTime
         {
             $timestamp = time();
         }
+
         return date('Y-m-d', strtotime($delay, $timestamp));
     }
 
@@ -92,6 +93,7 @@ class M2DateTime
         {
             $timestamp = time();
         }
+
         return strtotime($delay, $timestamp);
     }
 
@@ -110,6 +112,7 @@ class M2DateTime
         {
             $timestamp = time();
         }
+
         return date('Y-m-d H:i:s', strtotime($delay, $timestamp));
     }
 
@@ -128,6 +131,7 @@ class M2DateTime
         {
             $timestamp = time();
         }
+
         return M2DateTime::get_text_date(strtotime($delay, $timestamp), $locale);
     }
 
@@ -285,7 +289,7 @@ class M2DateTime
         if (preg_match($leap_day, $string))
         {
             $year = preg_replace('/[\- \/ \.]02[\- \/ \.]29$/', '', $string);
-            return ((($year % 4) == 0) && ((($year % 100) != 0) || (($year %400) == 0)));
+            return ((($year % 4) == 0) && ((($year % 100) != 0) || (($year % 400) == 0)));
         }
         else
         {

@@ -52,7 +52,7 @@ abstract class View
      */
     public function __construct(&$controller)
     {
-        $this->data = array();
+        $this->data       = array();
         $this->controller = &$controller;
     }
 
@@ -158,7 +158,7 @@ abstract class View
     {
         if ($suffix == '')
         {
-            if ( $alternation_hint % 2 == 0 )
+            if ($alternation_hint % 2 == 0)
             {
                 $basename .= '_even';
             }
@@ -171,6 +171,7 @@ abstract class View
         {
             $basename .= '_' . $suffix;
         }
+
         return $basename;
     }
 

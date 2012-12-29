@@ -57,7 +57,7 @@ class Session
             $this->manager = new SessionManager();
         }
 
-        $this->closed = FALSE;
+        $this->closed  = FALSE;
         $this->started = FALSE;
 
         // kill autostarted sessions
@@ -73,6 +73,7 @@ class Session
         {
             $this->close();
         }
+
         unset($this->manager);
         unset($this->closed);
         unset($this->started);
@@ -164,9 +165,10 @@ class Session
             {
                 session_id($id);
             }
+
             session_start();
             $this->started = TRUE;
-            $this->closed = FALSE;
+            $this->closed  = FALSE;
         }
     }
 
@@ -178,7 +180,7 @@ class Session
     public function close()
     {
         session_write_close();
-        $this->closed = TRUE;
+        $this->closed  = TRUE;
         $this->started = FALSE;
     }
 

@@ -15,6 +15,7 @@
  */
 
 namespace Lunr\Models\Core;
+
 use Lunr\Libraries\Core\Model;
 
 /**
@@ -94,10 +95,10 @@ class SessionModel extends Model
         if ($query)
         {
             $data = array(
-                        'sessionID' => $id,
-                        'sessionData' => base64_encode($session_data),
-                        'expires' => $time
-                    );
+                'sessionID'   => $id,
+                'sessionData' => base64_encode($session_data),
+                'expires'     => $time
+            );
             $this->db->replace('user_sessions', $data);
             $this->db->commit();
         }
@@ -105,6 +106,7 @@ class SessionModel extends Model
         {
             $this->db->rollback();
         }
+
         $this->db->end_transaction();
     }
 
@@ -138,6 +140,7 @@ class SessionModel extends Model
         {
             $this->db->rollback();
         }
+
         $this->db->end_transaction();
     }
 

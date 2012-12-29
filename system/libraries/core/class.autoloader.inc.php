@@ -51,7 +51,7 @@ class Autoloader
     {
         $class = str_replace('\\', '/', $class);
         $path  = strtolower(dirname($class));
-        $path  = substr($path, strpos($path, '/')+1);
+        $path  = substr($path, strpos($path, '/') + 1);
         $path  = empty($path) ? '' : $path . '/';
         $class = basename($class);
 

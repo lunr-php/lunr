@@ -68,11 +68,11 @@ class Mail
      */
     public function __construct()
     {
-        $this->from = '';
-        $this->to = array();
-        $this->cc = array();
-        $this->bcc = array();
-        $this->msg = '';
+        $this->from    = '';
+        $this->to      = array();
+        $this->cc      = array();
+        $this->bcc     = array();
+        $this->msg     = '';
         $this->subject = '';
     }
 
@@ -203,6 +203,7 @@ class Mail
                     $ok = FALSE;
                 }
             }
+
             return $ok;
         }
         else
@@ -222,12 +223,12 @@ class Mail
     {
         if ($this->from != '')
         {
-            $header  = 'From: ' . $this->from . "\r\n";
+            $header = 'From: ' . $this->from . "\r\n";
 
             if (!empty($this->cc))
             {
                 $header .= 'CC: ';
-                foreach ($this->cc as $key=>$value)
+                foreach ($this->cc as $key => $value)
                 {
                     $header .= $value;
                     if (isset($this->cc[$key + 1]))
@@ -244,7 +245,7 @@ class Mail
             if (!empty($this->bcc))
             {
                 $header .= 'BCC: ';
-                foreach ($this->bcc as $key=>$value)
+                foreach ($this->bcc as $key => $value)
                 {
                     $header .= $value;
                     if (isset($this->bcc[$key + 1]))

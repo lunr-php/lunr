@@ -81,7 +81,7 @@ class Curl
         $this->errmsg = '';
 
         // default: no info
-        $this->info   = array();
+        $this->info = array();
 
         // set http_code to zero to indicate we haven't made a request yet
         $this->http_code = 0;
