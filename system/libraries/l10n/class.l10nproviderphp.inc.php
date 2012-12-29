@@ -67,7 +67,7 @@ class L10nProviderPHP extends L10nProvider
 
         if ($this->language != $config['l10n']['default_language'])
         {
-            include_once $config['l10n']['locales']. '/' . $this->language . '/' . $config['l10n']['domain'] . '.php';
+            include_once $config['l10n']['locales'] . '/' . $this->language . '/' . $config['l10n']['domain'] . '.php';
             $this->lang_array = &$lang;
         }
     }
@@ -142,7 +142,7 @@ class L10nProviderPHP extends L10nProvider
         }
 
         //Check if the plural key is not in the language array
-        elseif ( !array_key_exists($plural, $this->lang_array))
+        elseif (!array_key_exists($plural, $this->lang_array))
         {
             Output::error('Identifier for the plural key not included in the language array: ' . $plural);
         }
@@ -167,7 +167,7 @@ class L10nProviderPHP extends L10nProvider
             {
                 Output::error('Context not included in the singular array: ' . $singular);
             }
-            elseif (!is_array($this->lang_array[$plural]) || !array_key_exists($context, $this->lang_array[$plural]) )
+            elseif (!is_array($this->lang_array[$plural]) || !array_key_exists($context, $this->lang_array[$plural]))
             {
                 Output::error('Context not included in the plural array: ' . $plural);
             }

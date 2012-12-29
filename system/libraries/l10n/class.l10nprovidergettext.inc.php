@@ -93,7 +93,7 @@ class L10nProviderGettext extends L10nProvider
             // Glue msgctxt and msgid together, with ASCII character 4
             // (EOT, End Of Text)
             $composed = "{$context}\004{$identifier}";
-            $output = dcgettext(
+            $output   = dcgettext(
                 $config['l10n']['domain'],
                 $composed,
                 LC_MESSAGES
@@ -142,7 +142,7 @@ class L10nProviderGettext extends L10nProvider
             // Glue msgctxt and msgid together, with ASCII character 4
             // (EOT, End Of Text)
             $composed = "{$context}\004{$singular}";
-            $output = dcngettext(
+            $output   = dcngettext(
                 $config['l10n']['domain'],
                 $composed,
                 $plural,

@@ -16,6 +16,7 @@
  */
 
 namespace Lunr\Libraries\L10n;
+
 use Lunr\Libraries\Core\M2DateTime;
 
 /**
@@ -60,10 +61,13 @@ class L10n
                         self::$languages[] = $file;
                     }
                 }
+
                 closedir($handle);
             }
+
             self::$languages[] = $config['l10n']['default_language'];
         }
+
         return self::$languages;
     }
 
@@ -103,6 +107,7 @@ class L10n
                 return $locale;
             }
         }
+
         return $config['l10n']['default_language'];
     }
 
