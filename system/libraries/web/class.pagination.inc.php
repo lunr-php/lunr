@@ -27,7 +27,8 @@ namespace Lunr\Libraries\Web;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Javier Negre <javi@m2mobi.com>
  */
-class Pagination{
+class Pagination
+{
 
     /**
      * Cursor pointing to the currently displayed page
@@ -78,25 +79,24 @@ class Pagination{
     {
         // Default values
         $this->per_page = 25;
-        $this->range    =  2;
+        $this->range    = 2;
 
-        $this->buttons = array();
-        $this->buttons['first'] = array();
-        $this->buttons['first']['text'] = '&#8810;';
+        $this->buttons                     = array();
+        $this->buttons['first']            = array();
+        $this->buttons['first']['text']    = '&#8810;';
         $this->buttons['first']['enabled'] = TRUE;
 
-        $this->buttons['previous'] = array();
-        $this->buttons['previous']['text'] = '&lt;';
+        $this->buttons['previous']            = array();
+        $this->buttons['previous']['text']    = '&lt;';
         $this->buttons['previous']['enabled'] = TRUE;
 
-        $this->buttons['next'] = array();
-        $this->buttons['next']['text'] = '&gt;';
+        $this->buttons['next']            = array();
+        $this->buttons['next']['text']    = '&gt;';
         $this->buttons['next']['enabled'] = TRUE;
 
-        $this->buttons['last'] = array();
-        $this->buttons['last']['text'] = '&#8811;';
+        $this->buttons['last']            = array();
+        $this->buttons['last']['text']    = '&#8811;';
         $this->buttons['last']['enabled'] = TRUE;
-
     }
 
     /**
@@ -223,7 +223,7 @@ class Pagination{
     {
         if ($amount > 0)
         {
-            $html  = '';
+            $html = '';
             if (($this->cursor - $amount) > 0)
             {
                 $start = $this->cursor - $amount;
@@ -232,12 +232,14 @@ class Pagination{
             {
                 $start = 1;
             }
-            $end   = $this->cursor - 1;
+
+            $end = $this->cursor - 1;
             for($i = $start; $i <= $end; ++$i)
             {
                 $html .= '<a class="paginator_page" href="';
                 $html .= $this->base_url . $i . '">' . $i . "</a>\n";
             }
+
             return $html;
         }
         else
@@ -267,6 +269,7 @@ class Pagination{
                 $html .= '<a class="paginator_page" href="';
                 $html .= $this->base_url . $i . '">' . $i . "</a>\n";
             }
+
             return $html;
         }
         else
@@ -288,10 +291,10 @@ class Pagination{
         switch ($type)
         {
             case 'previous':
-                $target = $this->cursor -1;
+                $target = $this->cursor - 1;
                 break;
             case 'next':
-                $target = $this->cursor +1;
+                $target = $this->cursor + 1;
                 break;
             case 'first':
                 $target = 1;
@@ -356,7 +359,7 @@ class Pagination{
         if ($this->cursor <= $this->range)
         {
             $nprevious = $this->cursor - 1;
-            $nnext = $this->range + $this->range - $nprevious;
+            $nnext     = $this->range + $this->range - $nprevious;
         }
 
         // If range is bigger than the amount of next pages, check whether
@@ -376,6 +379,7 @@ class Pagination{
             {
                 $nnext = $this->range;
             }
+
             if (!isset($nprevious))
             {
                 $nprevious = $this->range;
@@ -384,9 +388,10 @@ class Pagination{
 
         if ($this->cursor == 1)
         {
-            $this->buttons['first']['enabled'] = FALSE;
+            $this->buttons['first']['enabled']    = FALSE;
             $this->buttons['previous']['enabled'] = FALSE;
         }
+
         if ($this->cursor == $this->pages_total)
         {
             $this->buttons['next']['enabled'] = FALSE;
