@@ -14,6 +14,7 @@
  */
 
 namespace Lunr\Libraries\Profiling;
+
 use Lunr\Libraries\Core\Output;
 
 /**
@@ -70,10 +71,10 @@ class TimerBackendFile extends TimerBackend
             $config['performance_log'] = 'performance.log';
         }
 
-        $this->file = $config['log']['performance'] . $config['performance_log'];
-        $this->timers = array();
+        $this->file       = $config['log']['performance'] . $config['performance_log'];
+        $this->timers     = array();
         $this->thresholds = array();
-        $this->counter = 0;
+        $this->counter    = 0;
     }
 
     /**
@@ -100,14 +101,14 @@ class TimerBackendFile extends TimerBackend
     {
         if ($id == '')
         {
-            $this->timers[$this->counter] = microtime(TRUE);
+            $this->timers[$this->counter]     = microtime(TRUE);
             $this->thresholds[$this->counter] = $threshold;
-            $id = $this->counter;
+            $id                               = $this->counter;
             ++$this->counter;
         }
         elseif(!isset($this->timers[$id]))
         {
-            $this->timers[$id] = microtime(TRUE);
+            $this->timers[$id]     = microtime(TRUE);
             $this->thresholds[$id] = $threshold;
         }
         else
