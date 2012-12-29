@@ -16,6 +16,7 @@
  */
 
 namespace Lunr\Libraries\OAuth;
+
 use Lunr\Libraries\Core\Curl;
 
 /**
@@ -148,7 +149,7 @@ class FacebookConnection implements OAuthConnectionInterface
 
         return array(
             'state' => $state,
-            'url' => $url
+            'url'   => $url
         );
     }
 
@@ -171,9 +172,9 @@ class FacebookConnection implements OAuthConnectionInterface
             . '&client_secret=' . $config['oauth'][static::NETWORK]['app_secret']
             . '&code=' . $oauth_token;
 
-        $curl = new Curl();
+        $curl     = new Curl();
         $response = $curl->simple_get($token_url);
-        $params = NULL;
+        $params   = NULL;
         parse_str($response, $params);
         unset($curl);
         return $params;
@@ -193,7 +194,7 @@ class FacebookConnection implements OAuthConnectionInterface
 
         $url = $config['oauth'][static::NETWORK]['verify_url'] . $access_token;
 
-        $curl = new Curl();
+        $curl     = new Curl();
         $response = $curl->simple_get($url);
         if($response === FALSE)
         {
@@ -208,6 +209,7 @@ class FacebookConnection implements OAuthConnectionInterface
                 return FALSE;
             }
         }
+
         return $this->parse_facebook_profile($user_info);
     }
 
@@ -224,7 +226,7 @@ class FacebookConnection implements OAuthConnectionInterface
     {
         global $config;
 
-        $curl = new Curl();
+        $curl   = new Curl();
         $params = array('access_token' => $access_token, 'message' => $message->message);
 
         if ($curl->simple_post($config['oauth'][static::NETWORK]['publish_url'], $params))
@@ -233,14 +235,14 @@ class FacebookConnection implements OAuthConnectionInterface
         }
         elseif ($this->check_access_token_state($access_token) === 'expired')
         {
-            $this->errno = '401';
+            $this->errno  = '401';
             $this->errmsg = 'Token expired';
             return FALSE;
         }
         else
         {
             # TODO: find a way to check if the posting fails for a duplicated message
-            $this->errno = $curl->http_code;
+            $this->errno  = $curl->http_code;
             $this->errmsg = 'Unknown error';
             return FALSE;
         }
@@ -257,7 +259,7 @@ class FacebookConnection implements OAuthConnectionInterface
     {
         $user_profile = new SocialProfile();
 
-        foreach($user_info as $key=>$field)
+        foreach($user_info as $key => $field)
         {
             switch ($key)
             {
@@ -280,6 +282,7 @@ class FacebookConnection implements OAuthConnectionInterface
                     break;
             }
         }
+
         return $user_profile;
     }
 
@@ -298,26 +301,26 @@ class FacebookConnection implements OAuthConnectionInterface
     {
         global $config;
 
-        $url = $config['oauth']['facebook']['publish_url'] . '?access_token=' . $access_token;
+        $url  = $config['oauth']['facebook']['publish_url'] . '?access_token=' . $access_token;
         $info = file_get_contents($url);
 
         if (strpos($info, self::EXPIRED) !== FALSE)
         {
             return 'expired';
         }
-        elseif (strpos($info, self::PWD_CHANGED)!== FALSE)
+        elseif (strpos($info, self::PWD_CHANGED) !== FALSE)
         {
             return 'pwd_changed';
         }
-        elseif (strpos($info, self::APP_NOT_AUTH)!== FALSE)
+        elseif (strpos($info, self::APP_NOT_AUTH) !== FALSE)
         {
             return 'app_not_authorized';
         }
-        elseif (strpos($info, self::LOGGED_OUT)!== FALSE)
+        elseif (strpos($info, self::LOGGED_OUT) !== FALSE)
         {
             return 'user_logged_out';
         }
-        elseif (strpos($info, self::VALID)!== FALSE)
+        elseif (strpos($info, self::VALID) !== FALSE)
         {
             return 'valid';
         }

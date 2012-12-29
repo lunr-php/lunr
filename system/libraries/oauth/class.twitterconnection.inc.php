@@ -13,8 +13,12 @@
  * @author     Javier Negre <javi@m2mobi.com>
  * @author     Julio Foulquié <julio@m2mobi.com>
  * @author     Felipe Martinez <felipe@m2mobi.com>
+ * @copyright  2011-2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
  */
+
 namespace Lunr\Libraries\OAuth;
+
 use Lunr\Libraries\OAuth\OAuthConnection;
 use Lunr\Libraries\OAuth\SocialProfile;
 use Lunr\Libraries\Core\Output;
@@ -110,6 +114,7 @@ class TwitterConnection extends OAuthConnection
         {
             return FALSE;
         }
+
         return $this->parse_twitter_profile($user_info);
     }
 
@@ -135,10 +140,12 @@ class TwitterConnection extends OAuthConnection
         {
             return FALSE;
         }
+
         if(!$this->handler->setToken($access_token, $access_token_secret))
         {
             return FALSE;
         }
+
         try
         {
             $this->handler->fetch(
@@ -155,7 +162,7 @@ class TwitterConnection extends OAuthConnection
             }
             else
             {
-                $this->errno = $result['http_code'];
+                $this->errno  = $result['http_code'];
                 $this->errmsg = 'Unknown response';
                 return FALSE;
             }
@@ -182,6 +189,7 @@ class TwitterConnection extends OAuthConnection
             {
                 $this->errmsg = 'Unknown error';
             }
+
             return FALSE;
         }
     }
@@ -197,7 +205,7 @@ class TwitterConnection extends OAuthConnection
     {
         $user_profile = new SocialProfile();
 
-        foreach($user_info as $key=>$field)
+        foreach($user_info as $key => $field)
         {
             switch ($key)
             {
@@ -211,6 +219,7 @@ class TwitterConnection extends OAuthConnection
                     break;
             }
         }
+
         return $user_profile;
     }
 
