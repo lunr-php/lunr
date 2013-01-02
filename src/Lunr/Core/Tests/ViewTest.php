@@ -57,12 +57,6 @@ abstract class ViewTest extends PHPUnit_Framework_TestCase
     protected $sub_configuration;
 
     /**
-     * Mock instance of the l10nprovider class.
-     * @var L10nProvider
-     */
-    protected $l10nprovider;
-
-    /**
      * Reflection instance of the View class.
      * @var ReflectionClass
      */
@@ -79,7 +73,7 @@ abstract class ViewTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    public function setUpL10n()
+    public function setUp()
     {
         $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
 
@@ -99,49 +93,9 @@ abstract class ViewTest extends PHPUnit_Framework_TestCase
 
         $this->response = $this->getMock('Lunr\Core\Response');
 
-        $this->l10nprovider = $this->getMockBuilder('Lunr\L10n\L10nProvider')
-                                   ->disableOriginalConstructor()
-                                   ->getMockForAbstractClass();
-
         $this->view = $this->getMockBuilder('Lunr\Core\View')
                            ->setConstructorArgs(
-                               array(&$this->request, &$this->response, &$this->configuration, &$this->l10nprovider)
-                             )
-                           ->getMockForAbstractClass();
-
-        $this->view_reflection = new ReflectionClass('Lunr\Core\View');
-    }
-
-    /**
-     * TestCase Constructor.
-     *
-     * @return void
-     */
-    public function setUpNoL10n()
-    {
-        $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
-
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
-
-        $map = array(
-            array('path', $this->sub_configuration),
-        );
-
-        $this->configuration->expects($this->any())
-                      ->method('offsetGet')
-                      ->will($this->returnValueMap($map));
-
-        $this->request = $this->getMockBuilder('Lunr\Core\Request')
-                              ->disableOriginalConstructor()
-                              ->getMock();
-
-        $this->response = $this->getMock('Lunr\Core\Response');
-
-        $this->l10nprovider = NULL;
-
-        $this->view = $this->getMockBuilder('Lunr\Core\View')
-                           ->setConstructorArgs(
-                               array(&$this->request, &$this->response, &$this->configuration)
+                               array($this->request, $this->response, $this->configuration)
                              )
                            ->getMockForAbstractClass();
 
@@ -156,7 +110,6 @@ abstract class ViewTest extends PHPUnit_Framework_TestCase
         unset($this->configuration);
         unset($this->request);
         unset($this->response);
-        unset($this->l10nprovider);
         unset($this->view);
         unset($this->view_reflection);
     }

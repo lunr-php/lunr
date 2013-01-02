@@ -45,25 +45,17 @@ abstract class View
     protected $configuration;
 
     /**
-     * Shared instance of the Localization provider
-     * @var L10nProvider
-     */
-    protected $l10n;
-
-    /**
      * Constructor.
      *
      * @param Request       $request       Shared instance of the Request class
      * @param Response      $response      Shared instance of the Response class
      * @param Configuration $configuration Shared instance of to the Configuration class
-     * @param L10nProvider  $l10nprovider  Shared instance of the L10nProvider class (optional)
      */
-    public function __construct($request, $response, $configuration, $l10nprovider = NULL)
+    public function __construct($request, $response, $configuration)
     {
         $this->request       = $request;
         $this->response      = $response;
         $this->configuration = $configuration;
-        $this->l10n          = $l10nprovider;
     }
 
     /**
@@ -74,7 +66,6 @@ abstract class View
         unset($this->request);
         unset($this->response);
         unset($this->configuration);
-        unset($this->l10n);
     }
 
     /**

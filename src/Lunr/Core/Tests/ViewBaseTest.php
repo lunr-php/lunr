@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the ViewL10nTest class.
+ * This file contains the ViewBaseTest class.
  *
  * PHP Version 5.3
  *
@@ -18,7 +18,7 @@ namespace Lunr\Core\Tests;
 use Lunr\Core\View;
 
 /**
- * Base tests for the view class when there is a L10nProvider.
+ * Base tests for the view class.
  *
  * @category   Libraries
  * @package    Core
@@ -26,16 +26,8 @@ use Lunr\Core\View;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Core\View
  */
-class ViewL10nTest extends ViewTest
+class ViewBaseTest extends ViewTest
 {
-
-    /**
-     * Testcase Constructor.
-     */
-    public function setUp()
-    {
-        $this->setUpL10n();
-    }
 
     /**
      * Test that the request class is set correctly.
@@ -71,18 +63,6 @@ class ViewL10nTest extends ViewTest
 
         $this->assertEquals($this->configuration, $property->getValue($this->view));
         $this->assertSame($this->configuration, $property->getValue($this->view));
-    }
-
-    /**
-     * Test that the l10nprovider class is set correctly.
-     */
-    public function testL10nProviderSetCorrectly()
-    {
-        $property = $this->view_reflection->getProperty('l10n');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->l10nprovider, $property->getValue($this->view));
-        $this->assertSame($this->l10nprovider, $property->getValue($this->view));
     }
 
 }

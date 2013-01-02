@@ -30,14 +30,6 @@ class ViewHelpersTest extends ViewTest
 {
 
     /**
-     * Testcase Constructor.
-     */
-    public function setUp()
-    {
-        $this->setUpL10n();
-    }
-
-    /**
      * Tests the base_url method of the View class.
      *
      * @param String $baseurl baseurl value
