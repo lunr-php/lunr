@@ -134,15 +134,16 @@ abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Unit test data provider for where or having statements.
+     * Unit test data provider for conditional statements.
      *
      * @return array $variants Array of statement variants
      */
-    public function whereOrHavingProvider()
+    public function ConditionalKeywordProvider()
     {
         $variants   = array();
-        $variants[] = array(TRUE, 'WHERE');
-        $variants[] = array(FALSE, 'HAVING');
+        $variants[] = array('WHERE', 'where');
+        $variants[] = array('HAVING', 'having');
+        $variants[] = array('ON', 'join');
 
         return $variants;
     }

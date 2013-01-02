@@ -115,6 +115,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
     protected $select_statement;
 
     /**
+     * SQL Query part: JOIN clause
+     */
+    protected $join;
+
+    /**
      * SQL Query part: WHERE clause
      * @var String
      */
@@ -162,6 +167,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         $this->delete           = '';
         $this->delete_mode      = array();
         $this->from             = '';
+        $this->join             = '';
         $this->where            = '';
         $this->group_by         = '';
         $this->having           = '';
@@ -188,6 +194,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         unset($this->delete);
         unset($this->delete_mode);
         unset($this->from);
+        unset($this->join);
         unset($this->where);
         unset($this->group_by);
         unset($this->having);
@@ -647,17 +654,17 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
      * @param String  $left     Left expression
      * @param String  $right    Right expression
      * @param String  $operator Comparison operator
-     * @param Boolean $where    whether to construct WHERE or HAVING
+     * @param String  $base     whether to construct WHERE, HAVING or ON
      *
      * @return void
      */
-    protected function sql_condition($left, $right, $operator = '=', $where = TRUE)
+    protected function sql_condition($left, $right, $operator = '=', $base = 'WHERE')
     {
-        $condition = ($where === TRUE) ? 'where' : 'having';
+        $condition = ($base === 'ON') ? 'join' : strtolower($base);
 
         if ($this->$condition == '')
         {
-            $this->$condition = strtoupper($condition);
+            $this->$condition = $base;
             $this->connector  = '';
         }
         elseif ($this->connector != '')

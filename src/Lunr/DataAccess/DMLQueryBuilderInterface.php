@@ -135,6 +135,17 @@ interface DMLQueryBuilderInterface
     public function from($table);
 
     /**
+     * Define ON part of a JOIN clause of the SQL statement.
+     *
+     * @param String $left     Left expression
+     * @param String $right    Right expression
+     * @param String $operator Comparison operator
+     *
+     * @return DMLQueryBuilder $self Self reference
+     */
+    public function on($left, $right, $operator = '=');
+
+    /**
      * Define WHERE clause of the SQL statement.
      *
      * @param String $left     Left expression

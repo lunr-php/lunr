@@ -225,21 +225,21 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test creating a simple where/having statement.
      *
-     * @param Boolean $where   Whether to test where or having
-     * @param String  $keyword The expected statement keyword
+     * @param String $keyword   The expected statement keyword
+     * @param String $attribute The name of the property where the statement is stored
      *
-     * @dataProvider whereOrHavingProvider
+     * @dataProvider ConditionalKeywordProvider
      * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testConditionCreatesSimpleStatement($where, $keyword)
+    public function testConditionCreatesSimpleStatement($keyword, $attribute)
     {
         $method = $this->builder_reflection->getMethod('sql_condition');
         $method->setAccessible(TRUE);
 
-        $property = $this->builder_reflection->getProperty(strtolower($keyword));
+        $property = $this->builder_reflection->getProperty($attribute);
         $property->setAccessible(TRUE);
 
-        $method->invokeArgs($this->builder, array('a', 'b', '=', $where));
+        $method->invokeArgs($this->builder, array('a', 'b', '=', $keyword));
 
         $string = "$keyword a = b";
 
@@ -249,21 +249,21 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test creating a where/having statement with non-default operator.
      *
-     * @param Boolean $where   Whether to test where or having
-     * @param String  $keyword The expected statement keyword
+     * @param String $keyword   The expected statement keyword
+     * @param String $attribute The name of the property where the statement is stored
      *
-     * @dataProvider whereOrHavingProvider
+     * @dataProvider ConditionalKeywordProvider
      * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testConditionWithNonDefaultOperator($where, $keyword)
+    public function testConditionWithNonDefaultOperator($keyword, $attribute)
     {
         $method = $this->builder_reflection->getMethod('sql_condition');
         $method->setAccessible(TRUE);
 
-        $property = $this->builder_reflection->getProperty(strtolower($keyword));
+        $property = $this->builder_reflection->getProperty($attribute);
         $property->setAccessible(TRUE);
 
-        $method->invokeArgs($this->builder, array('a', 'b', '<', $where));
+        $method->invokeArgs($this->builder, array('a', 'b', '<', $keyword));
 
         $string = "$keyword a < b";
 
@@ -273,24 +273,24 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test extending a where/having statement with default connector.
      *
-     * @param Boolean $where   Whether to test where or having
-     * @param String  $keyword The expected statement keyword
+     * @param String $keyword   The expected statement keyword
+     * @param String $attribute The name of the property where the statement is stored
      *
-     * @dataProvider whereOrHavingProvider
+     * @dataProvider ConditionalKeywordProvider
      * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testConditionExtendingWithDefaultConnector($where, $keyword)
+    public function testConditionExtendingWithDefaultConnector($keyword, $attribute)
     {
         $string = "$keyword a = b";
 
         $method = $this->builder_reflection->getMethod('sql_condition');
         $method->setAccessible(TRUE);
 
-        $property = $this->builder_reflection->getProperty(strtolower($keyword));
+        $property = $this->builder_reflection->getProperty($attribute);
         $property->setAccessible(TRUE);
         $property->setValue($this->builder, $string);
 
-        $method->invokeArgs($this->builder, array('c', 'd', '=', $where));
+        $method->invokeArgs($this->builder, array('c', 'd', '=', $keyword));
 
         $string = "$keyword a = b AND c = d";
 
@@ -300,13 +300,13 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test extending a where/having statement with a specified connector.
      *
-     * @param Boolean $where   Whether to test where or having
-     * @param String  $keyword The expected statement keyword
+     * @param String $keyword   The expected statement keyword
+     * @param String $attribute The name of the property where the statement is stored
      *
-     * @dataProvider whereOrHavingProvider
+     * @dataProvider ConditionalKeywordProvider
      * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testConditionExtendingWithSpecifiedConnector($where, $keyword)
+    public function testConditionExtendingWithSpecifiedConnector($keyword, $attribute)
     {
         $string = "$keyword a = b";
 
@@ -317,11 +317,11 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
         $connector->setAccessible(TRUE);
         $connector->setValue($this->builder, 'OR');
 
-        $property = $this->builder_reflection->getProperty(strtolower($keyword));
+        $property = $this->builder_reflection->getProperty($attribute);
         $property->setAccessible(TRUE);
         $property->setValue($this->builder, $string);
 
-        $method->invokeArgs($this->builder, array('c', 'd', '=', $where));
+        $method->invokeArgs($this->builder, array('c', 'd', '=', $keyword));
 
         $string = "$keyword a = b OR c = d";
 

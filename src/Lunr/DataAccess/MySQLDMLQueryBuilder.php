@@ -400,6 +400,21 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define ON part of a JOIN clause of the SQL statement.
+     *
+     * @param String $left     Left expression
+     * @param String $right    Right expression
+     * @param String $operator Comparison operator
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function on($left, $right, $operator = '=')
+    {
+        $this->sql_condition($left, $right, $operator, 'ON');
+        return $this;
+    }
+
+    /**
      * Define WHERE clause of the SQL statement.
      *
      * @param String $left     Left expression
@@ -462,7 +477,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function having($left, $right, $operator = '=')
     {
-        $this->sql_condition($left, $right, $operator, FALSE);
+        $this->sql_condition($left, $right, $operator, 'HAVING');
         return $this;
     }
 
@@ -478,7 +493,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     public function having_like($left, $right, $negate = FALSE)
     {
         $operator = ($negate === FALSE) ? 'LIKE' : 'NOT LIKE';
-        $this->sql_condition($left, $right, $operator, FALSE);
+        $this->sql_condition($left, $right, $operator, 'HAVING');
         return $this;
     }
 

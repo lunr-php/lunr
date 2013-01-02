@@ -31,6 +31,51 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
 {
 
     /**
+     * Test specifying the on part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::on
+     */
+    public function testOnWithDefaultOperator()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $this->builder->on('left', 'right');
+
+        $this->assertEquals('ON left = right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the on part of a query with non default operator.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::on
+     */
+    public function testOnWithCustomOperator()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $this->builder->on('left', 'right', '>');
+
+        $this->assertEquals('ON left > right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test fluid interface of the on method.
+     *
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::on
+     */
+    public function testOnReturnsSelfReference()
+    {
+        $return = $this->builder->on('left', 'right');
+
+        $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
+        $this->assertSame($this->builder, $return);
+    }
+
+    /**
      * Test specifying the where part of a query.
      *
      * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
