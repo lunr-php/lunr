@@ -121,10 +121,12 @@
             <directory>../src/Lunr/</directory>
             <exclude>
                 <file>../src/Lunr/Database/MySQLndQueryLogger.php</file>
+                <file>../src/Lunr/Halo/LunrBaseTest.php/</file>
                 <directory>../src/Lunr/Core/Tests/</directory>
                 <directory>../src/Lunr/DataAccess/Tests/</directory>
                 <directory>../src/Lunr/Database/Tests/</directory>
                 <directory>../src/Lunr/Fdbk/Tests/</directory>
+                <directory>../src/Lunr/Halo/Tests/</directory>
                 <directory>../src/Lunr/L10n/Tests/</directory>
                 <directory>../src/Lunr/Network/Tests/</directory>
                 <directory>../src/Lunr/Shadow/Tests/</directory>
