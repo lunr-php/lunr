@@ -15,8 +15,8 @@ RESQUE="https://github.com/chrisboulton/php-resque/archive/1.2.tar.gz"
 
 if ! [ -e "$DESTDIR/Psr/Log" ]; then
   cd "$TMP"
-    wget "$PSRLOG"
-    tar xvf 1.0.0.tar.gz
+    wget --content-disposition "$PSRLOG"
+    tar xvf log-1.0.0.tar.gz
 
     mv log-1.0.0/Psr "$DESTDIR/"
   cd -
@@ -24,8 +24,8 @@ fi
 
 if ! [ -e "$DESTDIR/Resque" ]; then
   cd "$TMP"
-    wget "$RESQUE"
-    tar xvf 1.2.tar.gz
+    wget --content-disposition "$RESQUE"
+    tar xvf php-resque-1.2.tar.gz
 
     mv php-resque-1.2/lib "$DESTDIR/Resque"
   cd -
