@@ -56,7 +56,7 @@ abstract class DatabaseSessionHandlerTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->sdao = $this->getMockBuilder('Lunr\Core\SessionModel')
+        $this->sdao = $this->getMockBuilder('Lunr\Core\SessionDAO')
                            ->disableOriginalConstructor()
                            ->getMock();
 
