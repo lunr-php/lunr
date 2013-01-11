@@ -33,6 +33,7 @@ class ResqueJobDispatcher implements JobDispatcherInterface
      */
     private $resque;
 
+
     /**
      * The token of the last enqueued job.
      * @var String

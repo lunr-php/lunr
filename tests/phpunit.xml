@@ -62,6 +62,14 @@
             <file>src/Lunr/Network/Tests/CurlSetGetTest.php</file>
             <file>src/Lunr/Network/Tests/CurlExecuteTest.php</file>
             <file>src/Lunr/Network/Tests/CurlRequestTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketBaseTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketContextTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketSetGetTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketStateTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketClientBaseTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketClientFlagsTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketClientHandleTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketClientReadWriteTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLQueryResultBaseTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLQueryResultFailedTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLQueryResultSuccessTest.php</file>
