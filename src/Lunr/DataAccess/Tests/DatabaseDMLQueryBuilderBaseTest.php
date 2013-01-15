@@ -59,6 +59,31 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+     * Test that update is an empty string by default.
+     */
+    public function testUpdateEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('update');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals('', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test that update_mode is an empty array by default.
+     */
+    public function testUpdateModeEmptyByDefault()
+    {
+        $property = $this->builder_reflection->getProperty('update_mode');
+        $property->setAccessible(TRUE);
+
+        $value = $property->getValue($this->builder);
+
+        $this->assertInternalType('array', $value);
+        $this->assertEmpty($value);
+    }
+
+    /**
      * Test that delete is an empty string by default.
      */
     public function testDeleteEmptyByDefault()
@@ -266,6 +291,36 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+     * Test imploding a query with dupliacte update_mode values.
+     *
+     * @covers Lunr\DataAccess\DatabaseDMLQueryBuilder::implode_query
+     */
+    public function testImplodeQueryWithDuplicateUpdateModes()
+    {
+        $method = $this->builder_reflection->getMethod('implode_query');
+        $method->setAccessible(TRUE);
+
+        $from = $this->builder_reflection->getProperty('update');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'table1');
+
+        $mode = $this->builder_reflection->getProperty('update_mode');
+        $mode->setAccessible(TRUE);
+        $mode->setValue($this->builder, array(
+            'LOW_PRIORITY',
+            'IGNORE',
+            'LOW_PRIORITY'
+        ));
+
+        $components = array(
+            'update_mode',
+            'update'
+        );
+
+        $this->assertEquals('LOW_PRIORITY IGNORE table1', $method->invokeArgs($this->builder, array($components)));
+    }
+
+    /**
      * Test imploding a query with dupliacte delete_mode values.
      *
      * @covers Lunr\DataAccess\DatabaseDMLQueryBuilder::implode_query
@@ -351,6 +406,120 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
 
         $string = 'SELECT DISTINCT SQL_CACHE col FROM table';
         $this->assertEquals($string, $this->builder->get_select_query());
+    }
+
+    /**
+     * Test getting an update query without specifying a table.
+     *
+     * @depends testImplodeQueryWithDuplicateUpdateModes
+     * @depends testUpdateEmptyByDefault
+     * @covers  Lunr\DataAccess\DatabaseDMLQueryBuilder::get_update_query
+     */
+    public function testGetUpdateQueryWithNoTable()
+    {
+        $update_mode = $this->builder_reflection->getProperty('update_mode');
+        $update_mode->setAccessible(TRUE);
+        $update_mode->setValue($this->builder, array(
+            'LOW_PRIORITY',
+            'IGNORE'
+        ));
+
+        $set = $this->builder_reflection->getProperty('set');
+        $set->setAccessible(TRUE);
+        $set->setValue($this->builder, 'SET col1 = val1, col2 = val2');
+
+        $where = $this->builder_reflection->getProperty('where');
+        $where->setAccessible(TRUE);
+        $where->setValue($this->builder, 'WHERE 1 = 1');
+
+        $order = $this->builder_reflection->getProperty('order_by');
+        $order->setAccessible(TRUE);
+        $order->setValue($this->builder, 'ORDER BY col1');
+
+        $limit = $this->builder_reflection->getProperty('limit');
+        $limit->setAccessible(TRUE);
+        $limit->setValue($this->builder, 'LIMIT 10');
+
+        $string = '';
+        $this->assertEquals($string, $this->builder->get_update_query());
+    }
+
+    /**
+     * Test getting an update query for single table.
+     *
+     * @depends testImplodeQueryWithDuplicateUpdateModes
+     * @covers  Lunr\DataAccess\DatabaseDMLQueryBuilder::get_update_query
+     */
+    public function testGetUpdateQueryForSingleTable()
+    {
+        $update = $this->builder_reflection->getProperty('update');
+        $update->setAccessible(TRUE);
+        $update->setValue($this->builder, 'table1');
+
+        $update_mode = $this->builder_reflection->getProperty('update_mode');
+        $update_mode->setAccessible(TRUE);
+        $update_mode->setValue($this->builder, array(
+            'LOW_PRIORITY',
+            'IGNORE'
+        ));
+
+        $set = $this->builder_reflection->getProperty('set');
+        $set->setAccessible(TRUE);
+        $set->setValue($this->builder, 'SET col1 = val1, col2 = val2');
+
+        $where = $this->builder_reflection->getProperty('where');
+        $where->setAccessible(TRUE);
+        $where->setValue($this->builder, 'WHERE 1 = 1');
+
+        $order = $this->builder_reflection->getProperty('order_by');
+        $order->setAccessible(TRUE);
+        $order->setValue($this->builder, 'ORDER BY col1');
+
+        $limit = $this->builder_reflection->getProperty('limit');
+        $limit->setAccessible(TRUE);
+        $limit->setValue($this->builder, 'LIMIT 10');
+
+        $string = 'UPDATE LOW_PRIORITY IGNORE table1 SET col1 = val1, col2 = val2 WHERE 1 = 1 ORDER BY col1 LIMIT 10';
+        $this->assertEquals($string, $this->builder->get_update_query());
+    }
+
+    /**
+     * Test getting an update query for multiple tables.
+     *
+     * @depends testImplodeQueryWithDuplicateUpdateModes
+     * @covers  Lunr\DataAccess\DatabaseDMLQueryBuilder::get_update_query
+     */
+    public function testGetUpdateQueryForMultipleTables()
+    {
+        $update = $this->builder_reflection->getProperty('update');
+        $update->setAccessible(TRUE);
+        $update->setValue($this->builder, 'table1, table2');
+
+        $update_mode = $this->builder_reflection->getProperty('update_mode');
+        $update_mode->setAccessible(TRUE);
+        $update_mode->setValue($this->builder, array(
+            'LOW_PRIORITY',
+            'IGNORE'
+        ));
+
+        $set = $this->builder_reflection->getProperty('set');
+        $set->setAccessible(TRUE);
+        $set->setValue($this->builder, 'SET col1 = val1, col2 = val2');
+
+        $where = $this->builder_reflection->getProperty('where');
+        $where->setAccessible(TRUE);
+        $where->setValue($this->builder, 'WHERE 1 = 1');
+
+        $order = $this->builder_reflection->getProperty('order_by');
+        $order->setAccessible(TRUE);
+        $order->setValue($this->builder, 'ORDER BY col1');
+
+        $limit = $this->builder_reflection->getProperty('limit');
+        $limit->setAccessible(TRUE);
+        $limit->setValue($this->builder, 'LIMIT 10');
+
+        $string = 'UPDATE LOW_PRIORITY IGNORE table1, table2 SET col1 = val1, col2 = val2 WHERE 1 = 1';
+        $this->assertEquals($string, $this->builder->get_update_query());
     }
 
     /**

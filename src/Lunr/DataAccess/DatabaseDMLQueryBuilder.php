@@ -78,6 +78,18 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
      */
     protected $insert_mode;
 
+        /**
+     * SQL Query part: UPDATE clause
+     * @var String
+     */
+    protected $update;
+
+    /**
+     * SQL Query part: UPDATE modes
+     * @var Array
+     */
+    protected $update_mode;
+
     /**
      * SQL Query part: SET clause
      * @var String
@@ -145,6 +157,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
     {
         $this->select           = '';
         $this->select_mode      = array();
+        $this->update           = '';
+        $this->update_mode      = array();
         $this->delete           = '';
         $this->delete_mode      = array();
         $this->from             = '';
@@ -169,6 +183,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
     {
         unset($this->select);
         unset($this->select_mode);
+        unset($this->update);
+        unset($this->update_mode);
         unset($this->delete);
         unset($this->delete_mode);
         unset($this->from);
@@ -198,7 +214,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
             return '';
         }
 
-        $components   = array();
+        $components = array();
 
         array_push($components, 'select_mode', 'select', 'from', 'where', 'group_by');
         array_push($components, 'having', 'order_by', 'limit', 'lock_mode');
@@ -307,6 +323,34 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         }
 
         return 'REPLACE ' . $this->implode_query($components);
+    }
+
+    /**
+     * Construct and return an UPDATE query.
+     *
+     * @return String $query The constructed query string.
+     */
+    public function get_update_query()
+    {
+        if ($this->update == '')
+        {
+            return '';
+        }
+
+        $valid = array('LOW_PRIORITY', 'IGNORE');
+
+        $this->update_mode = array_intersect($this->update_mode, $valid);
+
+        $components   = array();
+        array_push($components, 'update_mode', 'update', 'set', 'where');
+
+        if (strpos($this->update, ',') === FALSE)
+        {
+            $components[] = 'order_by';
+            $components[] = 'limit';
+        }
+
+        return 'UPDATE ' . $this->implode_query($components);
     }
 
     /**
@@ -427,6 +471,23 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         }
 
         $this->select .= $select;
+    }
+
+    /**
+     * Define a UPDATE clause.
+     *
+     * @param String $table The table to update
+     *
+     * @return void
+     */
+    protected function sql_update($table)
+    {
+        if ($this->update != '')
+        {
+            $this->update .= ', ';
+        }
+
+        $this->update .= $table;
     }
 
     /**
@@ -702,7 +763,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         {
             if (isset($this->$component) && ($this->$component != ''))
             {
-                if (($component === 'select_mode') || ($component === 'delete_mode') || ($component === 'insert_mode'))
+                if (($component === 'select_mode') || ($component === 'delete_mode')
+                    || ($component === 'insert_mode') || ($component === 'update_mode'))
                 {
                     $sql .= implode(' ', array_unique($this->$component)) . ' ';
                 }

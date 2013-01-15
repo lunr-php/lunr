@@ -83,10 +83,12 @@
             <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderEscapeValuesTest.php</file>
             <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderQueryPartsDeleteTest.php</file>
             <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderQueryPartsInsertTest.php</file>
+            <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderQueryPartsUpdateTest.php</file>
             <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderQueryPartsTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderSelectTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderDeleteTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderInsertTest.php</file>
+            <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderUpdateTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderLimitTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderEscapeTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderConditionTest.php</file>

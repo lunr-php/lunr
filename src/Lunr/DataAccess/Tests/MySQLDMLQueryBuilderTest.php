@@ -124,6 +124,20 @@ abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Unit Test Data Provider for standard Select modes.
+     *
+     * @return array $modes Array of select modes
+     */
+    public function updateModesStandardProvider()
+    {
+        $modes   = array();
+        $modes[] = array('LOW_PRIORITY');
+        $modes[] = array('IGNORE');
+
+        return $modes;
+    }
+
+    /**
      * Unit Test Data Provider for standard lock modes.
      *
      * @return array $modes Array of lock modes

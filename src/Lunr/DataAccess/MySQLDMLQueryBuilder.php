@@ -350,6 +350,42 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define the mode of the UPDATE clause.
+     *
+     * @param String $mode The update mode you want to use
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function update_mode($mode)
+    {
+        $mode = strtoupper($mode);
+
+        switch ($mode)
+        {
+            case 'LOW_PRIORITY':
+            case 'IGNORE':
+                $this->update_mode[] = $mode;
+            default:
+                break;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Define a UPDATE clause.
+     *
+     * @param String $table The table to update
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function update($table)
+    {
+        $this->sql_update($table);
+        return $this;
+    }
+
+    /**
      * Define FROM clause of the SQL statement.
      *
      * @param String $table       Table reference
