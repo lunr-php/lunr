@@ -388,14 +388,29 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define FROM clause of the SQL statement.
      *
-     * @param String $table       Table reference
-     * @param array  $index_hints Array of Index Hints
+     * @param String $table_reference Table reference
+     * @param array  $index_hints     Array of Index Hints
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
     public function from($table, $index_hints = NULL)
     {
         $this->sql_from($table, $index_hints);
+        return $this;
+    }
+
+    /**
+     * Define JOIN clause of the SQL statement,
+     *
+     * @param String $table_reference Table reference
+     * @param String $type            Type of JOIN operation to perform.
+     * @param array  $index_hints     Array of Index Hints
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function join($table_reference, $type = 'INNER', $index_hints = NULL)
+    {
+        $this->sql_join($table_reference, $type, $index_hints);
         return $this;
     }
 

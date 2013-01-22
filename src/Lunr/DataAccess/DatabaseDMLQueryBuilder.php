@@ -524,16 +524,6 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
      */
     protected function sql_from($table, $index_hints = NULL)
     {
-        if (is_array($index_hints) && !empty($index_hints))
-        {
-            $index_hints = array_diff($index_hints, array(NULL));
-            $hints       = ' ' . implode(', ', $index_hints);
-        }
-        else
-        {
-            $hints = '';
-        }
-
         if ($this->from == '')
         {
             $this->from = 'FROM ';
@@ -543,7 +533,29 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
             $this->from .= ', ';
         }
 
-        $this->from .= $table . $hints;
+        $this->from .= $table . $this->prepare_index_hints($index_hints);
+    }
+
+    /**
+     * Define JOIN clause of the SQL statement,
+     *
+     * @param String $table_reference Table reference
+     * @param String $type            Type of JOIN operation to perform.
+     * @param array  $index_hints     Array of Index Hints
+     *
+     * @return void
+     */
+    protected function sql_join($table_reference, $type, $index_hints = NULL)
+    {
+        $type = strtoupper($type);
+        $join = ($type == 'STRAIGHT') ? 'STRAIGHT_JOIN ' : ltrim($type . ' JOIN ');
+
+        if ($this->join != '')
+        {
+            $this->join .= ' ';
+        }
+
+        $this->join .= $join . $table_reference . $this->prepare_index_hints($index_hints);
     }
 
     /**
@@ -818,6 +830,27 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         return trim($col, '.');
     }
 
+    /**
+     * Prepare the list of index hints for a table reference.
+     *
+     * @param array $index_hints Array of Index Hints
+     *
+     * @return String $hints Comma separated list of index hints.
+     */
+    protected function prepare_index_hints($index_hints)
+    {
+        if (is_array($index_hints) && !empty($index_hints))
+        {
+            $index_hints = array_diff($index_hints, array(NULL));
+            $hints       = ' ' . implode(', ', $index_hints);
+        }
+        else
+        {
+            $hints = '';
+        }
+
+        return $hints;
+    }
 }
 
 ?>

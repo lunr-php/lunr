@@ -109,6 +109,86 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
     }
 
     /**
+     * Test specifying the JOIN part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testJoinWithoutIndexHints
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::join
+     */
+    public function testJoinWithDefaultJoinType()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $this->builder->join('table');
+
+        $this->assertEquals('INNER JOIN table', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the JOIN part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testJoinWithoutIndexHints
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::join
+     */
+    public function testJoinWithNonDefaultJoinType()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $this->builder->join('table', 'STRAIGHT');
+
+        $this->assertEquals('STRAIGHT_JOIN table', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the JOIN part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testJoinWithoutIndexHints
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::join
+     */
+    public function testJoinWithoutIndexHints()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $this->builder->join('table', 'STRAIGHT');
+
+        $this->assertEquals('STRAIGHT_JOIN table', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the JOIN part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testJoinWithSingleIndexHint
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testJoinWithMultipleIndexHints
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::join
+     */
+    public function testJoinWithIndexHints()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $hints = array('index_hint');
+
+        $this->builder->join('table', 'STRAIGHT', $hints);
+
+        $this->assertEquals('STRAIGHT_JOIN table index_hint', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test fluid interface of the join method.
+     *
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::join
+     */
+    public function testJoinReturnsSelfReference()
+    {
+        $return = $this->builder->join('table');
+
+        $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
+        $this->assertSame($this->builder, $return);
+    }
+
+    /**
      * Test that select modes for handling duplicate result entries are handled correctly.
      *
      * @param String $mode valid select mode for handling duplicate entries.

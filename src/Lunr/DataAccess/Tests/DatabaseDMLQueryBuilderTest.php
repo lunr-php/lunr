@@ -18,6 +18,7 @@ namespace Lunr\DataAccess\Tests;
 use Lunr\DataAccess\DatabaseDMLQueryBuilder;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
+use stdClass;
 
 /**
  * This class contains common setup routines, providers
@@ -138,7 +139,7 @@ abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
      *
      * @return array $variants Array of statement variants
      */
-    public function ConditionalKeywordProvider()
+    public function conditionalKeywordProvider()
     {
         $variants   = array();
         $variants[] = array('WHERE', 'where');
@@ -146,6 +147,56 @@ abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
         $variants[] = array('ON', 'join');
 
         return $variants;
+    }
+
+    /**
+     * Unit test data provider for common join types.
+     *
+     * @return array $variants Array of join types
+     */
+    public function commonJoinTypeProvider()
+    {
+        $types   = array();
+        $types[] = array('', 'JOIN');
+        $types[] = array('LEFT', 'LEFT JOIN');
+        $types[] = array('LEFT OUTER', 'LEFT OUTER JOIN');
+        $types[] = array('NATURAL LEFT OUTER', 'NATURAL LEFT OUTER JOIN');
+
+        return $types;
+    }
+
+    /**
+     * Unit test data provider for valid index hints.
+     *
+     * @return array $hints Array of valid index hints and exptected prepared values
+     */
+    public function validIndexHintProvider()
+    {
+        $hints   = array();
+        $hints[] = array(array('index_hint'), ' index_hint');
+        $hints[] = array(array('index_hint', 'index_hint'), ' index_hint, index_hint');
+        $hints[] = array(array(NULL), ' ');
+        $hints[] = array(array(NULL, NULL), ' ');
+
+        return $hints;
+    }
+
+    /**
+     * Unit test data provider for invalid index hints.
+     *
+     * @return array $hints Array of invalid index hints
+     */
+    public function invalidIndexHintProvider()
+    {
+        $hints   = array();
+        $hints[] = array(array());
+        $hints[] = array(NULL);
+        $hints[] = array(FALSE);
+        $hints[] = array(1);
+        $hints[] = array('string');
+        $hints[] = array(new stdClass());
+
+        return $hints;
     }
 
 }

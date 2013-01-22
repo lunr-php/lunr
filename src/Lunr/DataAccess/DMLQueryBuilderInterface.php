@@ -135,6 +135,16 @@ interface DMLQueryBuilderInterface
     public function from($table);
 
     /**
+     * Define JOIN clause of the SQL statement,
+     *
+     * @param String $table_reference Table reference to join with.
+     * @param String $type            Type of JOIN operation to perform.
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function join($table_reference, $type = 'INNER');
+
+    /**
      * Define ON part of a JOIN clause of the SQL statement.
      *
      * @param String $left     Left expression

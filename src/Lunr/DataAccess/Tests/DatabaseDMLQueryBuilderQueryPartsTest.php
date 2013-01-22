@@ -97,6 +97,8 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test specifying the from part of a query with single index hint.
      *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareValidIndexHints
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
      * @covers  Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_from
      */
     public function testFromWithSingleIndexHint()
@@ -119,6 +121,8 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test specifying the from part of a query with multiple index hints.
      *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareValidIndexHints
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
      * @covers  Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_from
      */
     public function testFromWithMultipleIndexHints()
@@ -141,6 +145,8 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test specifying the from part of a query with null index hints.
      *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareValidIndexHints
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
      * @covers  Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_from
      */
     public function testFromWithNullIndexHints()
@@ -184,6 +190,8 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test specifying more than one table in FROM (cartesian product).
      *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareValidIndexHints
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
      * @covers  Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_from
      */
     public function testIncrementalFromWithIndices()
@@ -200,6 +208,209 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
         $method->invokeArgs($this->builder, array('table', $hints));
 
         $string = 'FROM table index_hint, table index_hint';
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the JOIN part of a query.
+     *
+     * @param String $type Type of join to perform
+     * @param String $join The join operation to perform
+     *
+     * @dataProvider commonJoinTypeProvider
+     * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_join
+     */
+    public function testJoinWithoutIndexHints($type, $join)
+    {
+        $method = $this->builder_reflection->getMethod('sql_join');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('table', $type));
+
+        $string = trim($join . ' table');
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the JOIN part of a query.
+     *
+     * @param String $type Type of join to perform
+     * @param String $join The join operation to perform
+     *
+     * @dataProvider commonJoinTypeProvider
+     * @depends      Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareValidIndexHints
+     * @depends      Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
+     * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_join
+     */
+    public function testJoinWithSingleIndexHint($type, $join)
+    {
+        $method = $this->builder_reflection->getMethod('sql_join');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $hints = array('index_hint');
+
+        $method->invokeArgs($this->builder, array('table', $type, $hints));
+
+        $string = trim($join . ' table index_hint');
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the JOIN part of a query.
+     *
+     * @param String $type Type of join to perform
+     * @param String $join The join operation to perform
+     *
+     * @dataProvider commonJoinTypeProvider
+     * @depends      Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareValidIndexHints
+     * @depends      Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
+     * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_join
+     */
+    public function testJoinWithMultipleIndexHints($type, $join)
+    {
+        $method = $this->builder_reflection->getMethod('sql_join');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $hints = array('index_hint', 'index_hint');
+
+        $method->invokeArgs($this->builder, array('table', $type, $hints));
+
+        $string = trim($join . ' table index_hint, index_hint');
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the JOIN part of a query.
+     *
+     * @param String $type Type of join to perform
+     * @param String $join The join operation to perform
+     *
+     * @dataProvider commonJoinTypeProvider
+     * @depends      Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareValidIndexHints
+     * @depends      Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
+     * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_join
+     */
+    public function testJoinWithNULLIndexHints($type, $join)
+    {
+        $method = $this->builder_reflection->getMethod('sql_join');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $hints = array(NULL, NULL);
+
+        $method->invokeArgs($this->builder, array('table', $type, $hints));
+
+        $string = ltrim($join . ' table ');
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the JOIN part of a query.
+     *
+     * @param String $type Type of join to perform
+     * @param String $join The join operation to perform
+     *
+     * @dataProvider commonJoinTypeProvider
+     * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_join
+     */
+    public function testIncrementalJoinWithoutIndexes($type, $join)
+    {
+        $method = $this->builder_reflection->getMethod('sql_join');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('table', $type));
+        $method->invokeArgs($this->builder, array('table', $type));
+
+        $string = $join . ' table ' . $join . ' table';
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the JOIN part of a query.
+     *
+     * @param String $type Type of join to perform
+     * @param String $join The join operation to perform
+     *
+     * @dataProvider commonJoinTypeProvider
+     * @depends      Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareValidIndexHints
+     * @depends      Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
+     * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_join
+     */
+    public function testIncrementalJoinWithIndexes($type, $join)
+    {
+        $method = $this->builder_reflection->getMethod('sql_join');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $hints = array('index_hint');
+
+        $method->invokeArgs($this->builder, array('table', $type, $hints));
+        $method->invokeArgs($this->builder, array('table', $type, $hints));
+
+        $string = $join . ' table index_hint ' . $join . ' table index_hint';
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the JOIN part of a query with a STRAIGHT type.
+     *
+     * @covers Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_join
+     */
+    public function testStraightJoin()
+    {
+        $method = $this->builder_reflection->getMethod('sql_join');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('table', 'STRAIGHT'));
+
+        $string = 'STRAIGHT_JOIN table';
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the JOIN part of a query with a STRAIGHT type.
+     *
+     * @covers Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_join
+     */
+    public function testIncrementalStraightJoin()
+    {
+        $method = $this->builder_reflection->getMethod('sql_join');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('table', 'STRAIGHT'));
+        $method->invokeArgs($this->builder, array('table', 'STRAIGHT'));
+
+        $string = 'STRAIGHT_JOIN table STRAIGHT_JOIN table';
 
         $this->assertEquals($string, $property->getValue($this->builder));
     }

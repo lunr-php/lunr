@@ -982,5 +982,33 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
         $this->assertEquals($string, $this->builder->get_replace_query());
     }
 
+    /**
+     * Test that prepare_index_hints prepares valid index hints correctly.
+     *
+     * @dataProvider validIndexHintProvider
+     * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::prepare_index_hints
+     */
+    public function testPrepareValidIndexHints($hints, $expected)
+    {
+        $method = $this->builder_reflection->getMethod('prepare_index_hints');
+        $method->setAccessible(TRUE);
+
+        $this->assertEquals($expected, $method->invokeArgs($this->builder, array($hints)));
+    }
+
+    /**
+     * Test that prepare_index_hints returns an empty string for invalid input.
+     *
+     * @dataProvider invalidIndexHintProvider
+     * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::prepare_index_hints
+     */
+    public function testPrepareInvalidIndexHintsReturnsEmptyString($hints)
+    {
+        $method = $this->builder_reflection->getMethod('prepare_index_hints');
+        $method->setAccessible(TRUE);
+
+        $this->assertEquals('', $method->invokeArgs($this->builder, array($hints)));
+    }
+
 }
 ?>
