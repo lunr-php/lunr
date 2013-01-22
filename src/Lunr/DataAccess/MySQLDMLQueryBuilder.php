@@ -393,9 +393,9 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
-    public function from($table, $index_hints = NULL)
+    public function from($table_reference, $index_hints = NULL)
     {
-        $this->sql_from($table, $index_hints);
+        $this->sql_from($table_reference, $index_hints);
         return $this;
     }
 
@@ -425,6 +425,22 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function on($left, $right, $operator = '=')
     {
+        $this->sql_condition($left, $right, $operator, 'ON');
+        return $this;
+    }
+
+    /**
+     * Define ON part of a JOIN clause with LIKE comparator of the SQL statement.
+     *
+     * @param String $left   Left expression
+     * @param String $right  Right expression
+     * @param String $negate Whether to negate the comparison or not
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function on_like($left, $right, $negate = FALSE)
+    {
+        $operator = ($negate === FALSE) ? 'LIKE' : 'NOT LIKE';
         $this->sql_condition($left, $right, $operator, 'ON');
         return $this;
     }

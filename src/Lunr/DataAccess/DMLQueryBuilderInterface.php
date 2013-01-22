@@ -128,11 +128,11 @@ interface DMLQueryBuilderInterface
     /**
      * Define FROM clause of the SQL statement.
      *
-     * @param String $table Table name
+     * @param String $table_reference Table name
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
-    public function from($table);
+    public function from($table_reference);
 
     /**
      * Define JOIN clause of the SQL statement,
@@ -154,6 +154,17 @@ interface DMLQueryBuilderInterface
      * @return DMLQueryBuilder $self Self reference
      */
     public function on($left, $right, $operator = '=');
+
+    /**
+     * Define ON part of a JOIN clause with LIKE comparator of the SQL statement.
+     *
+     * @param String $left   Left expression
+     * @param String $right  Right expression
+     * @param String $negate Whether to negate the comparison or not
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function on_like($left, $right, $negate = FALSE);
 
     /**
      * Define WHERE clause of the SQL statement.
