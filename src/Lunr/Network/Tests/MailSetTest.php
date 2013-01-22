@@ -6,16 +6,16 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Network\Tests;
 
-use Lunr\Core\Mail;
+use Lunr\Network\Mail;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -23,10 +23,10 @@ use ReflectionClass;
  * This class contains test methods for the setters in the Mail class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Mail
+ * @covers     Lunr\Network\Mail
  */
 class MailSetTest extends MailTest
 {
@@ -34,22 +34,22 @@ class MailSetTest extends MailTest
     /**
      * Test the fluid interface of the set_from method.
      *
-     * @covers Lunr\Core\Mail::set_from
+     * @covers Lunr\Network\Mail::set_from
      */
     public function testSetFromReturnsSelfReference()
     {
         $result = $this->mail->set_from('info@m2mobi.com');
 
-        $this->assertInstanceOf('Lunr\Core\Mail', $result);
+        $this->assertInstanceOf('Lunr\Network\Mail', $result);
         $this->assertSame($this->mail, $result);
     }
 
     /**
      * Test that trying to set an invalid email as From will not do anything.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testFromEmptyByDefault
-     * @depends Lunr\Core\Tests\MailBaseTest::testInvalidEmailIsNotValid
-     * @covers  Lunr\Core\Mail::set_from
+     * @depends Lunr\Network\Tests\MailBaseTest::testFromEmptyByDefault
+     * @depends Lunr\Network\Tests\MailBaseTest::testInvalidEmailIsNotValid
+     * @covers  Lunr\Network\Mail::set_from
      */
     public function testSetInvalidEmailAsFromDoesNothing()
     {
@@ -64,9 +64,9 @@ class MailSetTest extends MailTest
     /**
      * Test setting a valid email as From.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testFromEmptyByDefault
-     * @depends Lunr\Core\Tests\MailBaseTest::testInvalidEmailIsNotValid
-     * @covers  Lunr\Core\Mail::set_from
+     * @depends Lunr\Network\Tests\MailBaseTest::testFromEmptyByDefault
+     * @depends Lunr\Network\Tests\MailBaseTest::testInvalidEmailIsNotValid
+     * @covers  Lunr\Network\Mail::set_from
      */
     public function testSetValidEmailAsFrom()
     {
@@ -81,22 +81,22 @@ class MailSetTest extends MailTest
     /**
      * Test the fluid interface of the add_to method.
      *
-     * @covers Lunr\Core\Mail::add_to
+     * @covers Lunr\Network\Mail::add_to
      */
     public function testAddToReturnsSelfReference()
     {
         $result = $this->mail->add_to('info@m2mobi.com');
 
-        $this->assertInstanceOf('Lunr\Core\Mail', $result);
+        $this->assertInstanceOf('Lunr\Network\Mail', $result);
         $this->assertSame($this->mail, $result);
     }
 
     /**
      * Test that trying to add an invalid email as To will not do anything.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testToEmptyByDefault
-     * @depends Lunr\Core\Tests\MailBaseTest::testInvalidEmailIsNotValid
-     * @covers  Lunr\Core\Mail::add_to
+     * @depends Lunr\Network\Tests\MailBaseTest::testToEmptyByDefault
+     * @depends Lunr\Network\Tests\MailBaseTest::testInvalidEmailIsNotValid
+     * @covers  Lunr\Network\Mail::add_to
      */
     public function testAddInvalidEmailAsToDoesNothing()
     {
@@ -114,9 +114,9 @@ class MailSetTest extends MailTest
     /**
      * Test adding a valid email as To.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testToEmptyByDefault
-     * @depends Lunr\Core\Tests\MailBaseTest::testInvalidEmailIsNotValid
-     * @covers  Lunr\Core\Mail::add_to
+     * @depends Lunr\Network\Tests\MailBaseTest::testToEmptyByDefault
+     * @depends Lunr\Network\Tests\MailBaseTest::testInvalidEmailIsNotValid
+     * @covers  Lunr\Network\Mail::add_to
      */
     public function testAddValidEmailAsTo()
     {
@@ -135,9 +135,9 @@ class MailSetTest extends MailTest
     /**
      * Test adding more than one valid email as To.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testToEmptyByDefault
-     * @depends Lunr\Core\Tests\MailBaseTest::testInvalidEmailIsNotValid
-     * @covers  Lunr\Core\Mail::add_to
+     * @depends Lunr\Network\Tests\MailBaseTest::testToEmptyByDefault
+     * @depends Lunr\Network\Tests\MailBaseTest::testInvalidEmailIsNotValid
+     * @covers  Lunr\Network\Mail::add_to
      */
     public function testAddAnotherEmailAsTo()
     {
@@ -158,22 +158,22 @@ class MailSetTest extends MailTest
     /**
      * Test the fluid interface of the add_cc method.
      *
-     * @covers Lunr\Core\Mail::add_cc
+     * @covers Lunr\Network\Mail::add_cc
      */
     public function testAddCCReturnsSelfReference()
     {
         $result = $this->mail->add_cc('info@m2mobi.com');
 
-        $this->assertInstanceOf('Lunr\Core\Mail', $result);
+        $this->assertInstanceOf('Lunr\Network\Mail', $result);
         $this->assertSame($this->mail, $result);
     }
 
     /**
      * Test that trying to add an invalid email as CC will not do anything.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testCCEmptyByDefault
-     * @depends Lunr\Core\Tests\MailBaseTest::testInvalidEmailIsNotValid
-     * @covers  Lunr\Core\Mail::add_cc
+     * @depends Lunr\Network\Tests\MailBaseTest::testCCEmptyByDefault
+     * @depends Lunr\Network\Tests\MailBaseTest::testInvalidEmailIsNotValid
+     * @covers  Lunr\Network\Mail::add_cc
      */
     public function testAddInvalidEmailAsCCDoesNothing()
     {
@@ -191,9 +191,9 @@ class MailSetTest extends MailTest
     /**
      * Test adding a valid email as CC.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testCCEmptyByDefault
-     * @depends Lunr\Core\Tests\MailBaseTest::testInvalidEmailIsNotValid
-     * @covers  Lunr\Core\Mail::add_cc
+     * @depends Lunr\Network\Tests\MailBaseTest::testCCEmptyByDefault
+     * @depends Lunr\Network\Tests\MailBaseTest::testInvalidEmailIsNotValid
+     * @covers  Lunr\Network\Mail::add_cc
      */
     public function testAddValidEmailAsCC()
     {
@@ -212,9 +212,9 @@ class MailSetTest extends MailTest
     /**
      * Test adding more than one valid email as CC.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testCCEmptyByDefault
-     * @depends Lunr\Core\Tests\MailBaseTest::testInvalidEmailIsNotValid
-     * @covers  Lunr\Core\Mail::add_cc
+     * @depends Lunr\Network\Tests\MailBaseTest::testCCEmptyByDefault
+     * @depends Lunr\Network\Tests\MailBaseTest::testInvalidEmailIsNotValid
+     * @covers  Lunr\Network\Mail::add_cc
      */
     public function testAddAnotherEmailAsCC()
     {
@@ -235,22 +235,22 @@ class MailSetTest extends MailTest
     /**
      * Test the fluid interface of the add_bcc method.
      *
-     * @covers Lunr\Core\Mail::add_bcc
+     * @covers Lunr\Network\Mail::add_bcc
      */
     public function testAddBCCReturnsSelfReference()
     {
         $result = $this->mail->add_bcc('info@m2mobi.com');
 
-        $this->assertInstanceOf('Lunr\Core\Mail', $result);
+        $this->assertInstanceOf('Lunr\Network\Mail', $result);
         $this->assertSame($this->mail, $result);
     }
 
     /**
      * Test that trying to add an invalid email as BCC will not do anything.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testBCCEmptyByDefault
-     * @depends Lunr\Core\Tests\MailBaseTest::testInvalidEmailIsNotValid
-     * @covers  Lunr\Core\Mail::add_bcc
+     * @depends Lunr\Network\Tests\MailBaseTest::testBCCEmptyByDefault
+     * @depends Lunr\Network\Tests\MailBaseTest::testInvalidEmailIsNotValid
+     * @covers  Lunr\Network\Mail::add_bcc
      */
     public function testAddInvalidEmailAsBCCDoesNothing()
     {
@@ -268,9 +268,9 @@ class MailSetTest extends MailTest
     /**
      * Test adding a valid email as BCC.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testBCCEmptyByDefault
-     * @depends Lunr\Core\Tests\MailBaseTest::testInvalidEmailIsNotValid
-     * @covers  Lunr\Core\Mail::add_bcc
+     * @depends Lunr\Network\Tests\MailBaseTest::testBCCEmptyByDefault
+     * @depends Lunr\Network\Tests\MailBaseTest::testInvalidEmailIsNotValid
+     * @covers  Lunr\Network\Mail::add_bcc
      */
     public function testAddValidEmailAsBCC()
     {
@@ -289,9 +289,9 @@ class MailSetTest extends MailTest
     /**
      * Test adding more than one valid email as BCC.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testBCCEmptyByDefault
-     * @depends Lunr\Core\Tests\MailBaseTest::testInvalidEmailIsNotValid
-     * @covers  Lunr\Core\Mail::add_bcc
+     * @depends Lunr\Network\Tests\MailBaseTest::testBCCEmptyByDefault
+     * @depends Lunr\Network\Tests\MailBaseTest::testInvalidEmailIsNotValid
+     * @covers  Lunr\Network\Mail::add_bcc
      */
     public function testAddAnotherEmailAsBCC()
     {
@@ -312,21 +312,21 @@ class MailSetTest extends MailTest
     /**
      * Test the fluid interface of the set_message method.
      *
-     * @covers Lunr\Core\Mail::set_message
+     * @covers Lunr\Network\Mail::set_message
      */
     public function testSetMessageReturnsSelfReference()
     {
         $result = $this->mail->set_message('Message');
 
-        $this->assertInstanceOf('Lunr\Core\Mail', $result);
+        $this->assertInstanceOf('Lunr\Network\Mail', $result);
         $this->assertSame($this->mail, $result);
     }
 
     /**
      * Test setting a message.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testMessageEmptyByDefault
-     * @covers  Lunr\Core\Mail::set_message
+     * @depends Lunr\Network\Tests\MailBaseTest::testMessageEmptyByDefault
+     * @covers  Lunr\Network\Mail::set_message
      */
     public function testSetMessage()
     {
@@ -341,21 +341,21 @@ class MailSetTest extends MailTest
     /**
      * Test the fluid interface of the set_subject method.
      *
-     * @covers Lunr\Core\Mail::set_subject
+     * @covers Lunr\Network\Mail::set_subject
      */
     public function testSetSubjectReturnsSelfReference()
     {
         $result = $this->mail->set_subject('Subject');
 
-        $this->assertInstanceOf('Lunr\Core\Mail', $result);
+        $this->assertInstanceOf('Lunr\Network\Mail', $result);
         $this->assertSame($this->mail, $result);
     }
 
     /**
      * Test setting a subject.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testMessageEmptyByDefault
-     * @covers  Lunr\Core\Mail::set_message
+     * @depends Lunr\Network\Tests\MailBaseTest::testMessageEmptyByDefault
+     * @covers  Lunr\Network\Mail::set_message
      */
     public function testSetSubject()
     {

@@ -6,16 +6,16 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Network\Tests;
 
-use Lunr\Core\Mail;
+use Lunr\Network\Mail;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -23,10 +23,10 @@ use ReflectionClass;
  * This class contains test methods for the Mail class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Mail
+ * @covers     Lunr\Network\Mail
  */
 abstract class MailTest extends PHPUnit_Framework_TestCase
 {
@@ -61,7 +61,7 @@ abstract class MailTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->mail            = new Mail();
-        $this->mail_reflection = new ReflectionClass('Lunr\Core\Mail');
+        $this->mail_reflection = new ReflectionClass('Lunr\Network\Mail');
     }
 
     /**

@@ -44,9 +44,6 @@
             <file>src/Lunr/Core/Tests/ControllerTest.php</file>
             <file>src/Lunr/Core/Tests/ViewBaseTest.php</file>
             <file>src/Lunr/Core/Tests/ViewHelpersTest.php</file>
-            <file>src/Lunr/Core/Tests/MailBaseTest.php</file>
-            <file>src/Lunr/Core/Tests/MailSetTest.php</file>
-            <file>src/Lunr/Core/Tests/MailSendTest.php</file>
             <file>src/Lunr/Core/Tests/SessionTest.php</file>
             <file>src/Lunr/Core/Tests/SessionBaseTest.php</file>
             <file>src/Lunr/Core/Tests/SessionDAOTest.php</file>
@@ -71,6 +68,9 @@
             <file>src/Lunr/Network/Tests/StreamSocketClientFlagsTest.php</file>
             <file>src/Lunr/Network/Tests/StreamSocketClientHandleTest.php</file>
             <file>src/Lunr/Network/Tests/StreamSocketClientReadWriteTest.php</file>
+            <file>src/Lunr/Network/Tests/MailBaseTest.php</file>
+            <file>src/Lunr/Network/Tests/MailSetTest.php</file>
+            <file>src/Lunr/Network/Tests/MailSendTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLQueryResultBaseTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLQueryResultFailedTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLQueryResultSuccessTest.php</file>

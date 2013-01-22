@@ -537,7 +537,7 @@ class VerificationChecksTest extends VerificationTest
         $data->setAccessible(TRUE);
         $data->setValue($this->verification, $test);
 
-        $mail = $this->getMock('Lunr\Core\Mail');
+        $mail = $this->getMock('Lunr\Network\Mail');
         $mail->expects($this->once())
              ->method('is_valid')
              ->will($this->returnValue(TRUE));
@@ -566,7 +566,7 @@ class VerificationChecksTest extends VerificationTest
         $data->setAccessible(TRUE);
         $data->setValue($this->verification, $test);
 
-        $mail = $this->getMock('Lunr\Core\Mail');
+        $mail = $this->getMock('Lunr\Network\Mail');
         $mail->expects($this->once())
              ->method('is_valid')
              ->will($this->returnValue(FALSE));
@@ -595,7 +595,7 @@ class VerificationChecksTest extends VerificationTest
         $data->setAccessible(TRUE);
         $data->setValue($this->verification, $test);
 
-        $mail = $this->getMock('Lunr\Core\Mail');
+        $mail = $this->getMock('Lunr\Network\Mail');
         $mail->expects($this->once())
              ->method('is_valid');
 

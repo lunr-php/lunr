@@ -6,16 +6,16 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Network\Tests;
 
-use Lunr\Core\Mail;
+use Lunr\Network\Mail;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -23,10 +23,10 @@ use ReflectionClass;
  * This class contains test methods for sending emails.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Mail
+ * @covers     Lunr\Network\Mail
  */
 class MailSendTest extends MailTest
 {
@@ -34,7 +34,7 @@ class MailSendTest extends MailTest
     /**
      * Test that generating carbon copy headers returns an empty string for invalid types.
      *
-     * @covers Lunr\Core\Mail::generate_carbon_copy_header
+     * @covers Lunr\Network\Mail::generate_carbon_copy_header
      */
     public function testGeneratingHeadersForInvalidCarbonCopyReturnsEmptyString()
     {
@@ -47,8 +47,8 @@ class MailSendTest extends MailTest
     /**
      * Test that generating CC headers when none are defined returns an empty string.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testCCEmptyByDefault
-     * @covers  Lunr\Core\Mail::generate_carbon_copy_header
+     * @depends Lunr\Network\Tests\MailBaseTest::testCCEmptyByDefault
+     * @covers  Lunr\Network\Mail::generate_carbon_copy_header
      */
     public function testGeneratingCCHeadersWhenEmptyReturnsEmptyString()
     {
@@ -62,8 +62,8 @@ class MailSendTest extends MailTest
     /**
      * Test that generating BCC headers when none are defined returns an empty string.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testBCCEmptyByDefault
-     * @covers  Lunr\Core\Mail::generate_carbon_copy_header
+     * @depends Lunr\Network\Tests\MailBaseTest::testBCCEmptyByDefault
+     * @covers  Lunr\Network\Mail::generate_carbon_copy_header
      */
     public function testGeneratingBCCHeadersWhenEmptyReturnsEmptyString()
     {
@@ -76,7 +76,7 @@ class MailSendTest extends MailTest
     /**
      * Test generating CC headers with one entry.
      *
-     * @covers  Lunr\Core\Mail::generate_carbon_copy_header
+     * @covers  Lunr\Network\Mail::generate_carbon_copy_header
      */
     public function testGeneratingCCHeadersWithOneEntry()
     {
@@ -96,7 +96,7 @@ class MailSendTest extends MailTest
     /**
      * Test generating CC headers with more than one entry.
      *
-     * @covers  Lunr\Core\Mail::generate_carbon_copy_header
+     * @covers  Lunr\Network\Mail::generate_carbon_copy_header
      */
     public function testGeneratingCCHeadersWithMoreEntries()
     {
@@ -116,7 +116,7 @@ class MailSendTest extends MailTest
     /**
      * Test generating BCC headers with one entry.
      *
-     * @covers  Lunr\Core\Mail::generate_carbon_copy_header
+     * @covers  Lunr\Network\Mail::generate_carbon_copy_header
      */
     public function testGeneratingBCCHeadersWithOneEntry()
     {
@@ -136,7 +136,7 @@ class MailSendTest extends MailTest
     /**
      * Test generating BCC headers with more than one entry.
      *
-     * @covers  Lunr\Core\Mail::generate_carbon_copy_header
+     * @covers  Lunr\Network\Mail::generate_carbon_copy_header
      */
     public function testGeneratingBCCHeadersWithMoreEntries()
     {
@@ -156,8 +156,8 @@ class MailSendTest extends MailTest
     /**
      * Test that headers returns FALSE when there is no From address set.
      *
-     * @depends Lunr\Core\Tests\MailBaseTest::testFromEmptyByDefault
-     * @covers  Lunr\Core\Mail::generate_headers
+     * @depends Lunr\Network\Tests\MailBaseTest::testFromEmptyByDefault
+     * @covers  Lunr\Network\Mail::generate_headers
      */
     public function testHeadersReturnsFalseWhenFromIsEmpty()
     {
@@ -172,7 +172,7 @@ class MailSendTest extends MailTest
      *
      * @depends testGeneratingCCHeadersWhenEmptyReturnsEmptyString
      * @depends testGeneratingBCCHeadersWhenEmptyReturnsEmptyString
-     * @covers  Lunr\Core\Mail::generate_headers
+     * @covers  Lunr\Network\Mail::generate_headers
      */
     public function testHeadersWithEmptyCCAndEmptyBCC()
     {
@@ -195,7 +195,7 @@ class MailSendTest extends MailTest
      * @depends testGeneratingCCHeadersWithOneEntry
      * @depends testGeneratingCCHeadersWithMoreEntries
      * @depends testGeneratingBCCHeadersWhenEmptyReturnsEmptyString
-     * @covers  Lunr\Core\Mail::generate_headers
+     * @covers  Lunr\Network\Mail::generate_headers
      */
     public function testHeadersWithCCAndEmptyBCC()
     {
@@ -223,7 +223,7 @@ class MailSendTest extends MailTest
      * @depends testGeneratingCCHeadersWhenEmptyReturnsEmptyString
      * @depends testGeneratingBCCHeadersWithOneEntry
      * @depends testGeneratingBCCHeadersWithMoreEntries
-     * @covers  Lunr\Core\Mail::generate_headers
+     * @covers  Lunr\Network\Mail::generate_headers
      */
     public function testHeadersWithEmptyCCAndBCC()
     {
@@ -252,7 +252,7 @@ class MailSendTest extends MailTest
      * @depends testGeneratingCCHeadersWithMoreEntries
      * @depends testGeneratingBCCHeadersWithOneEntry
      * @depends testGeneratingBCCHeadersWithMoreEntries
-     * @covers  Lunr\Core\Mail::generate_headers
+     * @covers  Lunr\Network\Mail::generate_headers
      */
     public function testHeaders()
     {
@@ -283,9 +283,9 @@ class MailSendTest extends MailTest
      * Test sending fails when from is empty.
      *
      * @depends testHeadersReturnsFalseWhenFromIsEmpty
-     * @depends Lunr\Core\Tests\MailSetTest::testSetSubject
-     * @depends Lunr\Core\Tests\MailSetTest::testAddValidEmailAsTo
-     * @covers  Lunr\Core\Mail::send
+     * @depends Lunr\Network\Tests\MailSetTest::testSetSubject
+     * @depends Lunr\Network\Tests\MailSetTest::testAddValidEmailAsTo
+     * @covers  Lunr\Network\Mail::send
      */
     public function testSendReturnsFalseWhenFromIsEmpty()
     {
@@ -298,9 +298,9 @@ class MailSendTest extends MailTest
     /**
      * Test sending fails when to is empty.
      *
-     * @depends Lunr\Core\Tests\MailSetTest::testSetSubject
-     * @depends Lunr\Core\Tests\MailSetTest::testSetValidEmailAsFrom
-     * @covers  Lunr\Core\Mail::send
+     * @depends Lunr\Network\Tests\MailSetTest::testSetSubject
+     * @depends Lunr\Network\Tests\MailSetTest::testSetValidEmailAsFrom
+     * @covers  Lunr\Network\Mail::send
      */
     public function testSendReturnsFalseWhenToIsEmpty()
     {
@@ -313,9 +313,9 @@ class MailSendTest extends MailTest
     /**
      * Test sending fails when to is empty.
      *
-     * @depends Lunr\Core\Tests\MailSetTest::testAddValidEmailAsTo
-     * @depends Lunr\Core\Tests\MailSetTest::testSetValidEmailAsFrom
-     * @covers  Lunr\Core\Mail::send
+     * @depends Lunr\Network\Tests\MailSetTest::testAddValidEmailAsTo
+     * @depends Lunr\Network\Tests\MailSetTest::testSetValidEmailAsFrom
+     * @covers  Lunr\Network\Mail::send
      */
     public function testSendReturnsFalseWhenSubjectIsEmpty()
     {
@@ -329,10 +329,10 @@ class MailSendTest extends MailTest
      * Test that send returns FALSE when sending fails.
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Core\Tests\MailSetTest::testSetSubject
-     * @depends Lunr\Core\Tests\MailSetTest::testAddValidEmailAsTo
-     * @depends Lunr\Core\Tests\MailSetTest::testSetValidEmailAsFrom
-     * @covers  Lunr\Core\Mail::send
+     * @depends Lunr\Network\Tests\MailSetTest::testSetSubject
+     * @depends Lunr\Network\Tests\MailSetTest::testAddValidEmailAsTo
+     * @depends Lunr\Network\Tests\MailSetTest::testSetValidEmailAsFrom
+     * @covers  Lunr\Network\Mail::send
      */
     public function testSendReturnsFalseWhenSendingFails()
     {
@@ -349,10 +349,10 @@ class MailSendTest extends MailTest
      * Test that send returns TRUE when sending works.
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Core\Tests\MailSetTest::testSetSubject
-     * @depends Lunr\Core\Tests\MailSetTest::testAddValidEmailAsTo
-     * @depends Lunr\Core\Tests\MailSetTest::testSetValidEmailAsFrom
-     * @covers  Lunr\Core\Mail::send
+     * @depends Lunr\Network\Tests\MailSetTest::testSetSubject
+     * @depends Lunr\Network\Tests\MailSetTest::testAddValidEmailAsTo
+     * @depends Lunr\Network\Tests\MailSetTest::testSetValidEmailAsFrom
+     * @covers  Lunr\Network\Mail::send
      */
     public function testSendReturnsTrueWhenSendingSucceeds()
     {
