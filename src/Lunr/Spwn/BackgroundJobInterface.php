@@ -38,7 +38,7 @@ interface BackgroundJobInterface
      *
      * @return void
      */
-    public function perfom();
+    public function perform();
 
     /**
      * Tears down the environment for this job.
