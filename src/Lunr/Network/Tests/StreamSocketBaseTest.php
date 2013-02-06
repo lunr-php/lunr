@@ -73,11 +73,11 @@ class StreamSocketBaseTest extends StreamSocketTest
     }
 
     /**
-     * Tests that errno equals 0 by default.
+     * Tests that error_number equals 0 by default.
      */
-    public function testErrnoIsZero()
+    public function testErrorNumberIsZero()
     {
-        $property = $this->stream_socket_reflection->getProperty('errno');
+        $property = $this->stream_socket_reflection->getProperty('error_number');
         $property->setAccessible(TRUE);
 
         $this->assertEquals(0, $property->getValue($this->stream_socket));
@@ -95,14 +95,14 @@ class StreamSocketBaseTest extends StreamSocketTest
     }
 
     /**
-     * Tests that errmsg is an empty string by default.
+     * Tests that error_message is an empty string by default.
      */
-    public function testErrmsgIsEmptyString()
+    public function testErrorMessageIsEmptyString()
     {
-        $property = $this->stream_socket_reflection->getProperty('errno');
+        $property = $this->stream_socket_reflection->getProperty('error_message');
         $property->setAccessible(TRUE);
 
-        $this->assertEquals(0, $property->getValue($this->stream_socket));
+        $this->assertEquals('', $property->getValue($this->stream_socket));
     }
 
     /**

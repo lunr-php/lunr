@@ -57,6 +57,7 @@
             <file>src/Lunr/L10n/Tests/PHPL10nProviderBaseTest.php</file>
             <file>src/Lunr/L10n/Tests/PHPL10nProviderLangTest.php</file>
             <file>src/Lunr/L10n/Tests/PHPL10nProviderNlangTest.php</file>
+            <file>src/Lunr/Network/Tests/NetworkErrorTraitTest.php</file>
             <file>src/Lunr/Network/Tests/CurlBaseTest.php</file>
             <file>src/Lunr/Network/Tests/CurlSetGetTest.php</file>
             <file>src/Lunr/Network/Tests/CurlExecuteTest.php</file>

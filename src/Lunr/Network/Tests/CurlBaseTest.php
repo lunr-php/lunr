@@ -46,11 +46,11 @@ class CurlBaseTest extends CurlTest
     }
 
     /**
-     * Test that errno is 0 by default.
+     * Test that error_number is 0 by default.
      */
-    public function testErrnoIsZero()
+    public function testErrorNumberIsZero()
     {
-        $property = $this->curl_reflection->getProperty('errno');
+        $property = $this->curl_reflection->getProperty('error_number');
         $property->setAccessible(TRUE);
 
         $this->assertEquals(0, $property->getValue($this->curl));
@@ -59,9 +59,9 @@ class CurlBaseTest extends CurlTest
     /**
      * Test that errmsg is an empty string by default.
      */
-    public function testErrmsgIsEmptyString()
+    public function testErrorMessageIsEmptyString()
     {
-        $property = $this->curl_reflection->getProperty('errmsg');
+        $property = $this->curl_reflection->getProperty('error_message');
         $property->setAccessible(TRUE);
 
         $this->assertEquals('', $property->getValue($this->curl));

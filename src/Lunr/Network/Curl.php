@@ -3,7 +3,7 @@
 /**
  * This file contains a Curl wrapper class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Core
@@ -25,6 +25,8 @@ namespace Lunr\Network;
  */
 class Curl implements HttpRequestInterface
 {
+
+    use NetworkErrorTrait;
 
     /**
      * Curl options array
@@ -51,18 +53,6 @@ class Curl implements HttpRequestInterface
     private $info;
 
     /**
-     * Curl error number
-     * @var Integer
-     */
-    private $errno;
-
-    /**
-     * Curl error message
-     * @var String
-     */
-    private $errmsg;
-
-    /**
      * HTTP status code of the request made
      * @var Integer
      */
@@ -77,8 +67,8 @@ class Curl implements HttpRequestInterface
         $this->headers = array();
 
         // default: no error
-        $this->errno  = 0;
-        $this->errmsg = '';
+        $this->error_number  = 0;
+        $this->error_message = '';
 
         // default: no info
         $this->info = array();
@@ -103,8 +93,8 @@ class Curl implements HttpRequestInterface
     {
         unset($this->options);
         unset($this->headers);
-        unset($this->errno);
-        unset($this->errmsg);
+        unset($this->error_number);
+        unset($this->error_message);
         unset($this->info);
         unset($this->http_code);
         unset($this->handle);
@@ -113,7 +103,7 @@ class Curl implements HttpRequestInterface
     /**
      * Get access to certain private attributes.
      *
-     * This gives access to errno, errmsg and info.
+     * This gives access to info and http_code.
      *
      * @param String $name Attribute name
      *
@@ -123,8 +113,6 @@ class Curl implements HttpRequestInterface
     {
         switch ($name)
         {
-            case 'errno':
-            case 'errmsg':
             case 'info':
             case 'http_code':
                 return $this->{$name};
@@ -229,8 +217,8 @@ class Curl implements HttpRequestInterface
 
         if (curl_setopt_array($this->handle, $this->options) !== TRUE)
         {
-            $this->errmsg = 'Could not set curl options!';
-            $this->errno  = -1;
+            $this->error_message = 'Could not set curl options!';
+            $this->error_number  = -1;
             return FALSE;
         }
 
@@ -248,9 +236,9 @@ class Curl implements HttpRequestInterface
 
         if ($return === FALSE)
         {
-            $this->errno     = curl_errno($this->handle);
-            $this->errmsg    = curl_error($this->handle);
-            $this->http_code = curl_getinfo($this->handle, CURLINFO_HTTP_CODE);
+            $this->error_number  = curl_errno($this->handle);
+            $this->error_message = curl_error($this->handle);
+            $this->http_code     = curl_getinfo($this->handle, CURLINFO_HTTP_CODE);
         }
         else
         {

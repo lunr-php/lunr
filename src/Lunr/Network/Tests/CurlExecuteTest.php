@@ -149,7 +149,7 @@ class CurlExecuteTest extends CurlTest
     }
 
     /**
-     * Test that init sets errmsg and errno on error.
+     * Test that init sets error_message and error_number on error.
      *
      * @runInSeparateProcess
      *
@@ -165,12 +165,12 @@ class CurlExecuteTest extends CurlTest
         $method->setAccessible(TRUE);
         $method->invokeArgs($this->curl, array('http://localhost/'));
 
-        $errmsg = $this->curl_reflection->getProperty('errmsg');
+        $errmsg = $this->curl_reflection->getProperty('error_message');
         $errmsg->setAccessible(TRUE);
 
         $this->assertEquals('Could not set curl options!', $errmsg->getValue($this->curl));
 
-        $errno = $this->curl_reflection->getProperty('errno');
+        $errno = $this->curl_reflection->getProperty('error_number');
         $errno->setAccessible(TRUE);
 
         $this->assertEquals(-1, $errno->getValue($this->curl));
@@ -196,12 +196,12 @@ class CurlExecuteTest extends CurlTest
         $method->setAccessible(TRUE);
         $method->invoke($this->curl);
 
-        $errno = $this->curl_reflection->getProperty('errno');
+        $errno = $this->curl_reflection->getProperty('error_number');
         $errno->setAccessible(TRUE);
 
         $this->assertEquals(10, $errno->getValue($this->curl));
 
-        $errmsg = $this->curl_reflection->getProperty('errmsg');
+        $errmsg = $this->curl_reflection->getProperty('error_message');
         $errmsg->setAccessible(TRUE);
 
         $this->assertEquals('error', $errmsg->getValue($this->curl));

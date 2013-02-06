@@ -3,7 +3,7 @@
 /**
  * This file contains an abstract stream socket wrapper class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
@@ -25,6 +25,9 @@ namespace Lunr\Network;
  */
 abstract class StreamSocket
 {
+
+    use NetworkErrorTrait;
+
     /**
      * Stream socket context options array
      * @var array
@@ -48,18 +51,6 @@ abstract class StreamSocket
      * @var array
      */
     protected $meta_data;
-
-    /**
-     * Stream socket error number
-     * @var Integer
-     */
-    protected $errno;
-
-    /**
-     * Stream socket error message
-     * @var String
-     */
-    protected $errmsg;
 
     /**
      * Blocking mode of the stream
@@ -99,8 +90,8 @@ abstract class StreamSocket
         $this->context_options = array();
 
         // default: no error
-        $this->errno  = 0;
-        $this->errmsg = '';
+        $this->error_number  = 0;
+        $this->error_message = '';
 
         // default no callback function
         $this->notification = NULL;
@@ -134,8 +125,8 @@ abstract class StreamSocket
 
         unset($this->context_options);
         unset($this->meta_data);
-        unset($this->errno);
-        unset($this->errmsg);
+        unset($this->error_number);
+        unset($this->error_message);
         unset($this->blocking);
         unset($this->notification);
         unset($this->flag);
@@ -148,7 +139,7 @@ abstract class StreamSocket
     /**
      * Get access to certain private attributes.
      *
-     * This gives access to errno, errmsg and meta_data.
+     * This gives access to meta_data.
      *
      * @param String $name Attribute name
      *
@@ -159,8 +150,6 @@ abstract class StreamSocket
         switch ($name)
         {
             case 'meta_data':
-            case 'errno':
-            case 'errmsg':
                 return $this->{$name};
             default:
                 return NULL;
