@@ -167,6 +167,39 @@ interface DMLQueryBuilderInterface
     public function on_like($left, $right, $negate = FALSE);
 
     /**
+    * Define ON part of a JOIN clause with IN comparator of the SQL statement.
+    *
+    * @param String $left   Left expression
+    * @param String $right  Right expression
+    * @param String $negate Whether to negate the comparison or not
+    *
+    * @return MySQLDMLQueryBuilder $self Self reference
+    */
+    public function on_in($left, $right, $negate = FALSE);
+
+    /**
+    * Define ON part of a JOIN clause with BETWEEN comparator of the SQL statement.
+    *
+    * @param String $left   Left expression
+    * @param String $right  Right expression
+    * @param String $negate Whether to negate the comparison or not
+    *
+    * @return MySQLDMLQueryBuilder $self Self reference
+    */
+    public function on_between($left, $right, $negate = FALSE);
+
+    /**
+    * Define ON part of a JOIN clause with REGEXP comparator of the SQL statement.
+    *
+    * @param String $left   Left expression
+    * @param String $right  Right expression
+    * @param String $negate Whether to negate the comparison or not
+    *
+    * @return MySQLDMLQueryBuilder $self Self reference
+    */
+    public function on_regexp($left, $right, $negate = FALSE);
+
+    /**
      * Define WHERE clause of the SQL statement.
      *
      * @param String $left     Left expression
@@ -189,6 +222,39 @@ interface DMLQueryBuilderInterface
     public function where_like($left, $right, $negate = FALSE);
 
     /**
+    * Define WHERE clause with the IN condition of the SQL statement.
+    *
+    * @param String $left   Left expression
+    * @param String $right  Right expression
+    * @param String $negate Whether to negate the condition or not
+    *
+    * @return MySQLDMLQueryBuilder $self Self reference
+    */
+    public function where_in($left, $right, $negate = FALSE);
+
+    /**
+    * Define WHERE clause with the BETWEEN condition of the SQL statement.
+    *
+    * @param String $left   Left expression
+    * @param String $right  Right expression
+    * @param String $negate Whether to negate the condition or not
+    *
+    * @return MySQLDMLQueryBuilder $self Self reference
+    */
+    public function where_between($left, $right, $negate = FALSE);
+
+    /**
+    * Define WHERE clause with the REGEXP condition of the SQL statement.
+    *
+    * @param String $left   Left expression
+    * @param String $right  Right expression
+    * @param String $negate Whether to negate the condition or not
+    *
+    * @return MySQLDMLQueryBuilder $self Self reference
+    */
+    public function where_regexp($left, $right, $negate = FALSE);
+
+    /**
      * Define a GROUP BY clause of the SQL statement.
      *
      * @param String $expr Expression to group by
@@ -209,7 +275,7 @@ interface DMLQueryBuilderInterface
     public function having($left, $right, $operator = '=');
 
     /**
-     * Define WHERE clause with LIKE comparator of the SQL statement.
+     * Define HAVING clause with LIKE comparator of the SQL statement.
      *
      * @param String $left   Left expression
      * @param String $right  Right expression
@@ -218,6 +284,39 @@ interface DMLQueryBuilderInterface
      * @return DMLQueryBuilderInterface $self Self reference
      */
     public function having_like($left, $right, $negate = FALSE);
+
+    /**
+    * Define HAVING clause with IN comparator of the SQL statement.
+    *
+    * @param String $left   Left expression
+    * @param String $right  Right expression
+    * @param String $negate Whether to negate the comparison or not
+    *
+    * @return MySQLDMLQueryBuilder $self Self reference
+    */
+    public function having_in($left, $right, $negate = FALSE);
+
+    /**
+    * Define HAVING clause with BETWEEN comparator of the SQL statement.
+    *
+    * @param String $left   Left expression
+    * @param String $right  Right expression
+    * @param String $negate Whether to negate the comparison or not
+    *
+    * @return MySQLDMLQueryBuilder $self Self reference
+    */
+    public function having_between($left, $right, $negate = FALSE);
+
+    /**
+    * Define HAVING clause with REGEXP comparator of the SQL statement.
+    *
+    * @param String $left   Left expression
+    * @param String $right  Right expression
+    * @param String $negate Whether to negate the comparison or not
+    *
+    * @return MySQLDMLQueryBuilder $self Self reference
+    */
+    public function having_regexp($left, $right, $negate = FALSE);
 
     /**
      * Define a ORDER BY clause of the SQL statement.

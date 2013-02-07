@@ -244,6 +244,40 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
         $this->assertEquals($illegal, $this->builder->intvalue($value));
     }
 
+    /**
+     * Test prepending and apending parentheses to a value.
+     *
+     * @covers       Lunr\DataAccess\MysqlDMLQueryBuilder::query_value
+     */
+    public function testEscapeQueryValue()
+    {
+        $this->assertEquals('(value)', $this->builder->query_value('value'));
+    }
+
+    /**
+     * Test prepending and apending parentheses to a list of values,
+     * extracted from an array.
+     *
+     * @covers       Lunr\DataAccess\MysqlDMLQueryBuilder::list_value
+     */
+    public function testEscapeListValueSimpleArray()
+    {
+        $values = array('value1', 'value2');
+        $this->assertEquals('(value1,value2)', $this->builder->list_value($values));
+    }
+
+    /**
+     * Test prepending and apending parentheses to a list of values,
+     * extracted from an array that contains a single value.
+     *
+     * @covers       Lunr\DataAccess\MysqlDMLQueryBuilder::list_value
+     */
+    public function testEscapeListValueSimpleArrayOne()
+    {
+        $values = array('value1');
+        $this->assertEquals('(value1)', $this->builder->list_value($values));
+    }
+
 }
 
 ?>
