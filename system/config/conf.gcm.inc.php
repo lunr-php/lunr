@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * This file contains Android Push Notification Service configuration
+ * values.
+ *
+ * PHP Version 5.3
+ *
+ * @category   Config
+ * @package    Core
+ * @subpackage Config
+ * @author     Jose viso <jose@m2mobi.com>
+ * @author     Leonidas Diamantis <leonidas@m2mobi.com>
+ * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
+ */
+
+/**
+ * Android Push Notification Service Settings
+ * @global array $config['gcm']
+ */
+$config['gcm'] = array();
+
+/**
+ * API key for GCM which replaces the Google Authentication Token of C2DM
+ * @global String $config['gcm']['api_key']
+ */
+$config['gcm']['api_key'] = '';
+
+/**
+ * Account type.
+ * Possible options are:
+ * <ul>
+ * <li>GOOGLE</li>
+ * <li>HOSTED</li>
+ * <li>HOSTED_OR_GOOGLE</li>
+ * </ul>
+ * @global String $config['gcm']['account_type']
+ */
+$config['gcm']['account_type'] = 'HOSTED_OR_GOOGLE';
+
+/**
+ * Google servers URL for sending the push notification to the device
+ * @global String $config['gcm']['google_send_url']
+ */
+$config['gcm']['google_send_url'] = 'https://android.googleapis.com/gcm/send';
+
+/**
+ * Collapse key (Arbitrary string used to collapse a group of like messages when
+ *  the device is offline, so that only the last message gets sent to the client)
+ * @global String $config['gcm']['collapse_key']
+ */
+$config['gcm']['collapse_key'] = '';
+
+/**
+ * Username
+ * @global String $config['gcm']['username']
+ */
+$config['gcm']['username'] = '';
+
+/**
+ * Password
+ * @global String $config['gcm']['password']
+ */
+$config['gcm']['password'] = '';
+
+/**
+ * Path to log-file for logging PUSH errors
+ * @global String $config['gcm']['log']
+ */
+$config['gcm']['log'] = '/var/log/httpd';
+
+?>
