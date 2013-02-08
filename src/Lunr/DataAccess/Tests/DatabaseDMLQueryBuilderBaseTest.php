@@ -1118,5 +1118,32 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
         $this->assertEquals('', $method->invokeArgs($this->builder, array($hints)));
     }
 
+    /**
+    * Test getting a select query when the compound property
+    * (UNION, INTERSECT or EXCEPT) is set.
+    *
+    * @depends testImplodeQueryWithEmptySelectComponent
+    * @depends testImplodeQueryWithDuplicateSelectModes
+    * @covers  Lunr\DataAccess\DatabaseDMLQueryBuilder::get_select_query
+    */
+
+    public function testGetSelectQueryWithCompoundConnector()
+    {
+        $from = $this->builder_reflection->getProperty('from');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'FROM table');
+
+        $select = $this->builder_reflection->getProperty('select');
+        $select->setAccessible(TRUE);
+        $select->setValue($this->builder, 'col');
+
+        $compound = $this->builder_reflection->getProperty('compound');
+        $compound->setAccessible(TRUE);
+        $compound->setValue($this->builder, 'UNION (SELECT col2 FROM table2)');
+
+        $string = '(SELECT col FROM table) UNION (SELECT col2 FROM table2)';
+        $this->assertEquals($string, $this->builder->get_select_query());
+    }
+
 }
 ?>

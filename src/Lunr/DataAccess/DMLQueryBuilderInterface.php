@@ -342,6 +342,16 @@ interface DMLQueryBuilderInterface
     public function limit($amount, $offset = -1);
 
     /**
+     * Define a UNION or UNION ALL clause of the SQL statement
+     *
+     * @param String $sql_query   sql query reference
+     * @param Boolean $all   True for ALL or False for empty (default).
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function union($sql_query, $all = FALSE);
+
+    /**
      * Define the lock mode for a transaction.
      *
      * @param String $mode The lock mode you want to use

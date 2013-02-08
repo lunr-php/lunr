@@ -199,6 +199,22 @@ abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
         return $hints;
     }
 
+    /**
+    * Unit test data provider for common compound queries.
+    *
+    * @return array $compound Array of compound types
+    */
+    public function compoundQueryTypeProvider()
+    {
+        $types   = array();
+        $types[] = array('UNION');
+        $types[] = array('UNION ALL');
+        $types[] = array('EXCEPT');
+        $types[] = array('INTERSECT');
+
+        return $types;
+    }
+
 }
 
 ?>

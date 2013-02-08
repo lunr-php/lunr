@@ -151,6 +151,12 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
     protected $limit;
 
     /**
+     * SQL Query part: WHERE clause
+     * @var String
+     */
+    protected $compound;
+
+    /**
      * SQL Query part: Logical connector of expressions
      * @var String
      */
@@ -181,6 +187,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         $this->column_names     = '';
         $this->values           = '';
         $this->select_statement = '';
+        $this->compound         = '';
     }
 
     /**
@@ -201,6 +208,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         unset($this->having);
         unset($this->order_by);
         unset($this->limit);
+        unset($this->compound);
         unset($this->connector);
         unset($this->into);
         unset($this->insert_mode);
@@ -227,7 +235,16 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         array_push($components, 'select_mode', 'select', 'from', 'join', 'where');
         array_push($components,  'group_by', 'having', 'order_by', 'limit', 'lock_mode');
 
-        return 'SELECT ' . $this->implode_query($components);
+        $standard = 'SELECT ' . $this->implode_query($components);
+        if ($this->compound == '')
+        {
+            return $standard;
+        }
+
+        $components   = array();
+        $components[] = 'compound';
+
+        return '(' . $standard . ') ' . $this->implode_query($components);
     }
 
     /**
@@ -715,6 +732,24 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         }
 
         $this->$condition .= " $left $operator $right";
+    }
+
+    /**
+     * Define a compound clause for the SQL statement.
+     *
+     * @param String  $sql_query  Left expression
+     * @param String  $base       Whether to construct UNION, EXCEPT or INTERSECT
+     *
+     * @return void
+     */
+    protected function sql_compound($sql_query, $base)
+    {
+        if ($this->compound != '')
+        {
+            $this->compound .= ' ';
+        }
+
+        $this->compound .= $base . ' ' . $sql_query;
     }
 
     /**

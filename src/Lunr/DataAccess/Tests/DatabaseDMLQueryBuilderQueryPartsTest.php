@@ -434,14 +434,34 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-     * Test creating a simple where/having statement.
+     * Test specifying the UNION part of a query.
      *
-     * @param String $keyword   The expected statement keyword
-     * @param String $attribute The name of the property where the statement is stored
-     *
-     * @dataProvider ConditionalKeywordProvider
-     * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_condition
+     * @dataProvider compoundQueryTypeProvider
+     * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_compound
      */
+    public function testCompoundQuery($types)
+    {
+        $method = $this->builder_reflection->getMethod('sql_compound');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('compound');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('(sql query)', $types));
+
+        $string = $types . ' (sql query)';
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+    * Test creating a simple where/having statement.
+    *
+    * @param String $keyword   The expected statement keyword
+    * @param String $attribute The name of the property where the statement is stored
+    *
+    * @dataProvider ConditionalKeywordProvider
+    * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_condition
+    */
     public function testConditionCreatesSimpleStatement($keyword, $attribute)
     {
         $method = $this->builder_reflection->getMethod('sql_condition');
@@ -685,7 +705,6 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
 
         $this->assertEquals($string, $property->getValue($this->builder));
     }
-
 }
 
 ?>
