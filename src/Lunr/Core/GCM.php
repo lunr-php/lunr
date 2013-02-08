@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the class C2DM which stands for Android Cloud To Device Messaging
+ * This file contains the class GCM which stands for Google Cloud Messaging
  * framework. This class allows to send push notifications to Android devices.
  *
  * PHP Version 5.3
@@ -10,7 +10,8 @@
  * @package    Core
  * @subpackage Libraries
  * @author     Jose Viso <jose@m2mobi.com>
- * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
+ * @author     Leonidas Diamantis <leonidas@m2mobi.com>
+ * @copyright  2010-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
@@ -19,14 +20,15 @@ namespace Lunr\Core;
 use Lunr\Network\Curl;
 
 /**
- * Android (C2DM) Push Notifications System Library
+ * Android (GCM) Push Notifications System Library
  *
  * @category   Libraries
  * @package    Core
  * @subpackage Libraries
  * @author     Jose Viso <jose@m2mobi.com>
+ * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */
-class C2DM
+class GCM
 {
 
     /**
@@ -53,7 +55,7 @@ class C2DM
     public function __construct()
     {
         global $config;
-        include_once 'conf.c2dm.inc.php';
+        include_once 'conf.gcm.inc.php';
         // default: no error
         $this->errmsg = '';
 
@@ -99,99 +101,62 @@ class C2DM
     }
 
     /**
-     * Get authorization token.
-     *
-     * @param String $username User's email address
-     * @param String $password User's password
-     * @param String $source   Text to identify the application, for login purpose
-     *
-     * @return String authToken, FALSE otherwise
-     */
-    public function get_auth_token($username, $password, $source = '')
-    {
-        global $config;
-
-        $post_fields                = array();
-        $post_fields['accountType'] = urlencode($config['c2dm']['account_type']);
-        $post_fields['Email']       = urlencode($username);
-        $post_fields['Passwd']      = urlencode($password);
-        $post_fields['source']      = urlencode($source);
-        $post_fields['service']     = 'ac2dm';
-
-        $curl = new Curl();
-        $curl->set_option('CURLOPT_HEADER', TRUE);
-        $response = $curl->post_request($config['c2dm']['request_token_url'], $post_fields);
-
-        if (strpos($response, '200 OK') === FALSE)
-        {
-            return FALSE;
-        }
-
-        // Look for the authToken
-        preg_match('/(Auth=)([\w|-]+)/', $response, $matches);
-
-        if (!$matches[2])
-        {
-            unset($curl);
-            return FALSE;
-        }
-
-        unset($curl);
-        return $matches[2];
-    }
-
-    /**
      * Send Android push notification based on registration ID and authToken.
      *
-     * @param String $registrationID The registration ID retrieved from the app on the phone.
-     * @param String $authToken      The authorization token.
-     * @param String $message        The message that will be sent.
+     * @param String $registrationID    The registration ID retrieved from the app on the phone.
+     * @param String $authToken         The authorization token, now the GCM API key.
+     * @param String $notification_info An associative array which holds any information about
+     *                                  the notification to be sent to the user (message, id etc)
      *
      * @return Boolean, TRUE on success and FALSE otherwise
      */
-    public function send_android_push($registrationID, $authToken, $message)
+    public function send_android_push($registrationID, $authToken, $notification_info)
     {
         global $config;
 
-        $header       = 'Authorization: GoogleLogin auth=' . $authToken;
-        $collapse_key = $config['c2dm']['collapse_key'];
+        $headers      = array('Content-Type:application/json', 'Authorization:key=' . $authToken);
+        $collapse_key = $config['gcm']['collapse_key'];
 
-        $data = array(
-            'registration_id' => $registrationID,
-            'collapse_key'    => $collapse_key,
-            'data.message'    => $message
+        $payload = array(
+            'registration_ids' => array($registrationID),
+            'collapse_key'     => $collapse_key,
+            'data'             => $notification_info
         );
 
         $curl = new Curl();
-        $curl->set_option('CURLOPT_HEADER', TRUE);
-        $curl->set_http_header($header);
+        $curl->set_option('HEADER', TRUE);
+        $curl->set_http_headers($headers);
 
-        $returned_data   = $curl->post_request($config['c2dm']['google_send_url'], $data);
+        $returned_data   = $curl->simple_post($config['gcm']['google_send_url'], json_encode($payload));
         $this->http_code = $curl->http_code;
 
         if ($returned_data === FALSE)
         {
-            if($curl->http_code == 401)
+            if($this->http_code == 401)
             {
                 $this->errmsg = 'Authorization token invalid';
             }
-
-            if($curl->http_code == 503)
+            elseif ($this->http_code == 400)
+            {
+                $this->errmsg = 'Bad request';
+            }
+            elseif($this->http_code == 503)
             {
                 $this->errmsg = 'Server temporarily unavailable';
             }
             else
             {
-                $this->errmsg = 'Error sending notification';
+                $this->errmsg = 'Error sending notification' . 'Code: ' . $this->http_code . "\n";
             }
         }
         else
         {
             $result = substr($returned_data, $curl->info['header_size']);
-            if(stripos($result, 'id') !== FALSE)
+            if(stripos($result, 'multicast_id') !== FALSE)
             {
-                $result   = str_replace('id=', '', $result);
-                $this->id = $result;
+                $decoded_result = json_decode($result);
+                $this->id       = $decoded_result->multicast_id;
+
                 unset($curl);
                 return TRUE;
             }

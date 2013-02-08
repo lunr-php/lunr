@@ -10,21 +10,22 @@
  * @package    Core
  * @subpackage Config
  * @author     Jose viso <jose@m2mobi.com>
+ * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 /**
  * Android Push Notification Service Settings
- * @global array $config['c2dm']
+ * @global array $config['gcm']
  */
-$config['c2dm'] = array();
+$config['gcm'] = array();
 
 /**
- * URL for request authorization token
- * @global String $config['c2dm']['request_token_url']
+ * API key for GCM which replaces the Google Authentication Token of C2DM
+ * @global String $config['gcm']['api_key']
  */
-$config['c2dm']['request_token_url'] = 'https://www.google.com/accounts/ClientLogin';
+$config['gcm']['api_key'] = '';
 
 /**
  * Account type.
@@ -34,39 +35,39 @@ $config['c2dm']['request_token_url'] = 'https://www.google.com/accounts/ClientLo
  * <li>HOSTED</li>
  * <li>HOSTED_OR_GOOGLE</li>
  * </ul>
- * @global String $config['c2dm']['account_type']
+ * @global String $config['gcm']['account_type']
  */
-$config['c2dm']['account_type'] = 'HOSTED_OR_GOOGLE';
+$config['gcm']['account_type'] = 'HOSTED_OR_GOOGLE';
 
 /**
  * Google servers URL for sending the push notification to the device
- * @global String $config['c2dm']['google_send_url']
+ * @global String $config['gcm']['google_send_url']
  */
-$config['c2dm']['google_send_url'] = 'https://android.apis.google.com/c2dm/send';
+$config['gcm']['google_send_url'] = 'https://android.googleapis.com/gcm/send';
 
 /**
  * Collapse key (Arbitrary string used to collapse a group of like messages when
  *  the device is offline, so that only the last message gets sent to the client)
- * @global String $config['c2dm']['collapse_key']
+ * @global String $config['gcm']['collapse_key']
  */
-$config['c2dm']['collapse_key'] = '';
+$config['gcm']['collapse_key'] = '';
 
 /**
  * Username
- * @global String $config['c2dm']['username']
+ * @global String $config['gcm']['username']
  */
-$config['c2dm']['username'] = '';
+$config['gcm']['username'] = '';
 
 /**
  * Password
- * @global String $config['c2dm']['password']
+ * @global String $config['gcm']['password']
  */
-$config['c2dm']['password'] = '';
+$config['gcm']['password'] = '';
 
 /**
  * Path to log-file for logging PUSH errors
- * @global String $config['c2dm']['log']
+ * @global String $config['gcm']['log']
  */
-$config['c2dm']['log'] = '/var/log/httpd';
+$config['gcm']['log'] = '/var/log/httpd';
 
 ?>
