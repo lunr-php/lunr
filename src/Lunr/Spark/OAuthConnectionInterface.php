@@ -9,7 +9,7 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Sprk
+ * @package    Spark
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Julio Foulquié <julio@m2mobi.com>
@@ -17,13 +17,13 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Sprk;
+namespace Lunr\Spark;
 
 /**
  * OAuth connection interface
  *
  * @category   Libraries
- * @package    Sprk
+ * @package    Spark
  * @subpackage Libraries
  * @author     M2Mobi <info@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>

@@ -2,44 +2,42 @@
 
 /**
  * This file contains an OAuth Connection Class
- * for Twitter.
+ * for Linkedin.
  *
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Sprk
+ * @package    Spark
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Javier Negre <javi@m2mobi.com>
  * @author     Julio Foulquié <julio@m2mobi.com>
- * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Sprk;
+namespace Lunr\Spark;
 
 use Lunr\Core\Output;
 
 /**
- * Twitter OAuth Connection Class
+ * Linkedin OAuth Connection Class
  *
  * @category   Libraries
- * @package    Sprk
+ * @package    Spark
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Javier Negre <javi@m2mobi.com>
  * @author     Julio Foulquié <julio@m2mobi.com>
- * @author     Felipe Martinez <felipe@m2mobi.com>
  */
-class TwitterConnection extends OAuthConnection
+class LinkedinConnection extends OAuthConnection
 {
 
     /**
      * Name of the OAuth Service to connect to.
      * @var String
      */
-    const NETWORK = 'twitter';
+    const NETWORK = 'linkedin';
 
     /**
      * Constructor.
@@ -48,7 +46,23 @@ class TwitterConnection extends OAuthConnection
      */
     public function __construct($token)
     {
-        parent::__construct($token);
+        global $config;
+
+        $this->token = $token;
+
+        try
+        {
+            $this->handler = new \OAuth(
+                $config['oauth'][static::NETWORK]['consumerkey'],
+                $config['oauth'][static::NETWORK]['consumersecret'],
+                OAUTH_SIG_METHOD_HMACSHA1,
+                OAUTH_AUTH_TYPE_AUTHORIZATION
+            );
+        }
+        catch (Exception $e)
+        {
+            $this->handler = FALSE;
+        }
     }
 
     /**
@@ -60,7 +74,7 @@ class TwitterConnection extends OAuthConnection
     }
 
     /**
-     * Get user profile info from Twitter.
+     * Get user profile info from LinkedIn.
      *
      * @param String $access_token        OAuth token
      * @param String $access_token_secret Request token secret
@@ -75,24 +89,19 @@ class TwitterConnection extends OAuthConnection
         }
 
         global $config;
-
-        if(!$this->handler->setAuthType(OAUTH_AUTH_TYPE_AUTHORIZATION))
-        {
-            return FALSE;
-        }
-
-        if(!$this->handler->setToken($access_token, $access_token_secret))
-        {
-            return FALSE;
-        }
-
+        $this->handler->setToken($access_token, $access_token_secret);
         try
         {
-            $this->handler->fetch($config['oauth'][static::NETWORK]['verify_url']);
+
+            $this->handler->fetch(
+                $config['oauth'][static::NETWORK]['verify_url'],
+                NULL,
+                OAUTH_HTTP_METHOD_GET
+            );
         }
-        catch (\OAuthException $e)
+        catch(\OAuthException $e)
         {
-            Output::error('OauthException retrieving user info from ' . static::NETWORK .
+            Output::error('Oauth Exception retrieving user profile from ' . static::NETWORK .
                 ' Error code : ' . $e->getCode() .
                 '; Message: ' . $e->getMessage(),
                 $config['oauth']['log']
@@ -101,29 +110,17 @@ class TwitterConnection extends OAuthConnection
             return FALSE;
         }
         $response = $this->handler->getLastResponse();
-        if($response === FALSE)
-        {
-            return FALSE;
-        }
-
-        ///TODO: find a better way to do that
-        $user_info = json_decode($response, TRUE);
-        if(!$user_info)
-        {
-            return FALSE;
-        }
-
-        return $this->parse_twitter_profile($user_info);
+        return $this->parse_linkedin_profile($response);
     }
 
     /**
-     * Post a message to Twitter.
+     * Post a message to LinkedIn.
      *
-     * @param String        $access_token        OAuth token
+     * @param String        $access_token        OAuth access token
      * @param SocialMessage $message             SocialMessage object already filled
      * @param String        $access_token_secret Access token secret
      *
-     * @return Boolean TRUE if the post to Twitter was done properly FALSE otherwise.
+     * @return Boolean TRUE if the post to Linkedin was done properly FALSE otherwise.
      */
     public function post_message($access_token, SocialMessage $message, $access_token_secret = '')
     {
@@ -133,45 +130,34 @@ class TwitterConnection extends OAuthConnection
         }
 
         global $config;
+        $this->handler->setToken($access_token, $access_token_secret);
 
-        if(!$this->handler->setAuthType(OAUTH_AUTH_TYPE_AUTHORIZATION))
-        {
-            return FALSE;
-        }
-
-        if(!$this->handler->setToken($access_token, $access_token_secret))
-        {
-            return FALSE;
-        }
+        $xml = $this->generate_linkedin_share_xml($message);
 
         try
         {
             $this->handler->fetch(
                 $config['oauth'][static::NETWORK]['publish_url'],
-                array('status' => $message->message),
-                OAUTH_HTTP_METHOD_POST
+                $xml->asXML(),
+                OAUTH_HTTP_METHOD_POST,
+                array('Content-Type' => 'text/xml')
             );
 
             $result = $this->handler->getLastResponseInfo();
 
-            if ($result['http_code'] == '200')
+            if ($result['http_code'] == '201')
             {
                 return TRUE;
             }
-            else
-            {
-                $this->errno  = $result['http_code'];
-                $this->errmsg = 'Unknown response';
-                return FALSE;
-            }
         }
-        catch (\OAuthException $e)
+        catch(\OAuthException $e)
         {
             $this->errno = $e->getCode();
+            $message     = $e->getMessage();
 
-            Output::error('OauthException posting a message to ' . static::NETWORK .
+            Output::error('Oauth Exception posting a message to ' . static::NETWORK .
                 ' Error code : ' . $this->errno .
-                '; Message: ' . $e->getMessage(),
+                '; Message: ' . $message,
                 $config['oauth']['log']
             );
 
@@ -179,13 +165,9 @@ class TwitterConnection extends OAuthConnection
             {
                 $this->errmsg = 'Token expired or invalid';
             }
-            elseif ($this->errno == '403')
-            {
-                $this->errmsg = 'Message duplicated';
-            }
             else
             {
-                $this->errmsg = 'Unknown error';
+                $this->errmsg = $message;
             }
 
             return FALSE;
@@ -193,25 +175,49 @@ class TwitterConnection extends OAuthConnection
     }
 
     /**
-     * Parse a Twitter profile array and returns a Social Profile.
+     * Generate the XML needed to share a message on LinkedIn.
+     *
+     * @param String $message SocialMessage object already filled
+     *
+     * @return SimpleXMLElement SimpleXML object with the proper info
+     */
+    private function generate_linkedin_share_xml(SocialMessage $message)
+    {
+        global $config;
+
+        $xml = new \SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><share></share>');
+        $xml->addChild('comment', $message->comment);
+        $xml->addChild('visibility');
+        $xml->visibility->addChild('code', $config['oauth'][static::NETWORK]['visibility']);
+
+        return $xml;
+    }
+
+    /**
+     * Parse a LinkedIn profile object and returns a filled SocialProfile object.
      *
      * @param Array $user_info Array with the user information coming from Facebook
      *
      * @return SocialProfile Object containing the facebook profile info.
      */
-    private function parse_twitter_profile($user_info)
+    private function parse_linkedin_profile($user_info)
     {
+        $xml_profile = new \SimpleXMLElement($user_info);
+
         $user_profile = new SocialProfile();
 
-        foreach($user_info as $key => $field)
+        foreach($xml_profile as $key => $field)
         {
             switch ($key)
             {
                 case 'id':
-                    $user_profile->id = $field;
+                    $user_profile->id = (string)$xml_profile->$key;
                     break;
-                case 'name':
-                    $user_profile->given_name = $field;
+                case 'first-name':
+                    $user_profile->given_name = (string)$xml_profile->$key;
+                    break;
+                case 'last-name':
+                    $user_profile->last_name = (string)$xml_profile->$key;
                     break;
                 default:
                     break;

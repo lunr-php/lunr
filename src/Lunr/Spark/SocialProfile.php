@@ -7,20 +7,20 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Sprk
+ * @package    Spark
  * @subpackage Libraries
  * @author     Julio Foulquié <julio@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Sprk;
+namespace Lunr\Spark;
 
 /**
  * Social Profile Class
  *
  * @category   Libraries
- * @package    Sprk
+ * @package    Spark
  * @subpackage Libraries
  * @author     Julio Foulquié <julio@m2mobi.com>
  */

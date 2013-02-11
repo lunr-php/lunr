@@ -8,20 +8,20 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Sprk
+ * @package    Spark
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Sprk;
+namespace Lunr\Spark;
 
 /**
  * Oauth Connection Factory class
  *
  * @category   Libraries
- * @package    Sprk
+ * @package    Spark
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
