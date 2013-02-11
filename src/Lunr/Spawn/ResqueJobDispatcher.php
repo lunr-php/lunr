@@ -6,14 +6,14 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Spwn
+ * @package    Spawn
  * @subpackage Libraries
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Spwn;
+namespace Lunr\Spawn;
 
 use \Resque;
 
@@ -21,7 +21,7 @@ use \Resque;
  * Resque job dispatcher class.
  *
  * @category   Libraries
- * @package    Spwn
+ * @package    Spawn
  * @subpackage Libraries
  * @author     Olivier Wizen <olivier@m2mobi.com>
  */

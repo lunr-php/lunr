@@ -6,27 +6,27 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Spwn
+ * @package    Spawn
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Spwn\Tests;
+namespace Lunr\Spawn\Tests;
 
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
-use Lunr\Spwn\ResqueJobDispatcher;
+use Lunr\Spawn\ResqueJobDispatcher;
 
 /**
  * This class contains test methods for the ResqueJobDispatcher class.
  *
  * @category   Libraries
- * @package    Spwn
+ * @package    Spawn
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @covers     Lunr\Spwn\ResqueJobDispatcher
+ * @covers     Lunr\Spawn\ResqueJobDispatcher
  */
 class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
 {
@@ -56,7 +56,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
     {
         $this->resque = $this->getMock('Resque', array('enqueue'));
 
-        $this->dispatcher_reflection = new ReflectionClass('Lunr\Spwn\ResqueJobDispatcher');
+        $this->dispatcher_reflection = new ReflectionClass('Lunr\Spawn\ResqueJobDispatcher');
         $this->dispatcher            = new ResqueJobDispatcher($this->resque);
     }
 
@@ -122,7 +122,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
     /**
      * Tests that __construct() inits the resque with the given parameter.
      *
-     * @covers Lunr\Spwn\ResqueJobDispatcher::__construct
+     * @covers Lunr\Spawn\ResqueJobDispatcher::__construct
      */
     public function testResqueInitsWithValue()
     {
@@ -136,7 +136,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
     /**
      * Tests that __construct() inits the queue with the 'default_queue' value.
      *
-     * @covers Lunr\Spwn\ResqueJobDispatcher::__construct
+     * @covers Lunr\Spawn\ResqueJobDispatcher::__construct
      */
     public function testQueueInitsWithDefaultValue()
     {
@@ -150,7 +150,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
     /**
      * Tests that __construct() inits the track status to FALSE.
      *
-     * @covers Lunr\Spwn\ResqueJobDispatcher::__construct
+     * @covers Lunr\Spawn\ResqueJobDispatcher::__construct
      */
     public function testTrackStatusInitsWithDefaultValue()
     {
@@ -164,7 +164,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
     /**
      * Tests that the token propery is NULL by default.
      *
-     * @covers Lunr\Spwn\ResqueJobDispatcher::__construct
+     * @covers Lunr\Spawn\ResqueJobDispatcher::__construct
      */
     public function testTokenIsNullBydefault()
     {
@@ -177,7 +177,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
     /**
      * Test that dispatch() returns a string if queue is set.
      *
-     * @covers Lunr\Spwn\ResqueJobDispatcher::dispatch
+     * @covers Lunr\Spawn\ResqueJobDispatcher::dispatch
      */
     public function testDispatchUpdateToken()
     {
@@ -196,7 +196,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
     /**
      * Tests that the get_job_id() method retrieves the token.
      *
-     * @covers Lunr\Spwn\ResqueJobDispatcher::get_job_id
+     * @covers Lunr\Spawn\ResqueJobDispatcher::get_job_id
      */
     public function testGetJobIdReturnsToken()
     {
@@ -215,7 +215,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
     /**
      * Tests that set_queue() modifies the queue property with a valid value.
      *
-     * @covers Lunr\Spwn\ResqueJobDispatcher::set_queue
+     * @covers Lunr\Spawn\ResqueJobDispatcher::set_queue
      */
     public function testSetQueue()
     {
@@ -235,7 +235,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
      * @param mixed $value the value to test
      *
      * @dataProvider invalidQueueProvider
-     * @covers       Lunr\Spwn\ResqueJobDispatcher::set_queue
+     * @covers       Lunr\Spawn\ResqueJobDispatcher::set_queue
      */
     public function testSetQueueWithInvalidValue($value)
     {
@@ -253,7 +253,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
      * @param Boolean $value the value to test
      *
      * @dataProvider validTrackStatusProvider
-     * @covers       Lunr\Spwn\ResqueJobDispatcher::set_track_status
+     * @covers       Lunr\Spawn\ResqueJobDispatcher::set_track_status
      */
     public function testSetTrackStatusWithValidValue($value)
     {
@@ -272,7 +272,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
      * @param mixed $value the value to test
      *
      * @dataProvider invalidTrackStatusProvider
-     * @covers       Lunr\Spwn\ResqueJobDispatcher::set_track_status
+     * @covers       Lunr\Spawn\ResqueJobDispatcher::set_track_status
      */
     public function testSetTrackStatusWithInvalidValue($value)
     {
@@ -287,7 +287,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
     /**
      * Test fluid interface of the set_queue method.
      *
-     * @covers Lunr\Spwn\ResqueJobDispatcher::set_queue
+     * @covers Lunr\Spawn\ResqueJobDispatcher::set_queue
      */
     public function testSetQueueReturnsSelfReference()
     {
@@ -297,7 +297,7 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
     /**
      * Test fluid interface of the set_track_status method.
      *
-     * @covers Lunr\Spwn\ResqueJobDispatcher::set_track_status
+     * @covers Lunr\Spawn\ResqueJobDispatcher::set_track_status
      */
     public function testSetTrackStatusReturnsSelfReference()
     {

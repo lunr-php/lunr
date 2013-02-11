@@ -119,7 +119,7 @@
             <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectListFilesTest.php</file>
             <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectDirectoryTest.php</file>
             <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectFindTest.php</file>
-            <file>src/Lunr/Spwn/Tests/ResqueJobDispatcherTest.php</file>
+            <file>src/Lunr/Spawn/Tests/ResqueJobDispatcherTest.php</file>
 <!--            <file>src/Lunr/Database/Tests/DBManTest.php</file>
             <file>src/Lunr/Database/Tests/DBConTest.php</file>-->
         </testsuite>
@@ -138,9 +138,9 @@
                 <directory>../src/Lunr/L10n/Tests/</directory>
                 <directory>../src/Lunr/Network/Tests/</directory>
                 <directory>../src/Lunr/Shadow/Tests/</directory>
+                <directory>../src/Lunr/Spawn/Tests/</directory>
                 <directory>../src/Lunr/Sphere/Tests/</directory>
                 <directory>../src/Lunr/Sprk/Tests/</directory>
-                <directory>../src/Lunr/Spwn/Tests/</directory>
                 <directory>../src/Lunr/Surface/Tests/</directory>
                 <directory>../src/Lunr/Tcks/Tests/</directory>
             </exclude>
