@@ -6,20 +6,20 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Tcks
+ * @package    Ticks
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Tcks;
+namespace Lunr\Ticks;
 
 /**
  * Factory class for providing a timer backend
  *
  * @category   Libraries
- * @package    Tcks
+ * @package    Ticks
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */

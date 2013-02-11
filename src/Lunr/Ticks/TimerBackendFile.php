@@ -6,14 +6,14 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Tcks
+ * @package    Ticks
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Tcks;
+namespace Lunr\Ticks;
 
 use Lunr\Core\Output;
 
@@ -23,7 +23,7 @@ use Lunr\Core\Output;
  * and stores it into a log file on the server.
  *
  * @category   Libraries
- * @package    Tcks
+ * @package    Ticks
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */

@@ -152,7 +152,7 @@
                 <directory>../src/Lunr/Sphere/Tests/</directory>
                 <directory>../src/Lunr/Sprk/Tests/</directory>
                 <directory>../src/Lunr/Surface/Tests/</directory>
-                <directory>../src/Lunr/Tcks/Tests/</directory>
+                <directory>../src/Lunr/Ticks/Tests/</directory>
             </exclude>
         </whitelist>
     </filter>
