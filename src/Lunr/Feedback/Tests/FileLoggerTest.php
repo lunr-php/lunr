@@ -6,16 +6,16 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Fdbk
+ * @package    Feedback
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Fdbk\Tests;
+namespace Lunr\Feedback\Tests;
 
-use Lunr\Fdbk\FileLogger;
+use Lunr\Feedback\FileLogger;
 use Psr\Log\LogLevel;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
@@ -24,10 +24,10 @@ use ReflectionClass;
  * This class contains test methods for the FileLogger class.
  *
  * @category   Libraries
- * @package    Fdbk
+ * @package    Feedback
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Fdbk\FileLogger
+ * @covers     Lunr\Feedback\FileLogger
  */
 class FileLoggerTest extends PHPUnit_Framework_TestCase
 {
@@ -73,7 +73,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->logger_reflection = new ReflectionClass('Lunr\Fdbk\FileLogger');
+        $this->logger_reflection = new ReflectionClass('Lunr\Feedback\FileLogger');
 
         $this->request = $this->getMockBuilder('Lunr\Core\Request')
                               ->disableOriginalConstructor()
@@ -138,7 +138,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that log() returns a PHP Warning if xdebug is installed.
      *
-     * @covers  Lunr\Fdbk\FileLogger::log
+     * @covers  Lunr\Feedback\FileLogger::log
      */
     public function testLogThrowsErrorIfXdebugIsPresent()
     {
@@ -155,7 +155,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
      * Test that log() logs correctly to a file.
      *
      * @depends testLogThrowsErrorIfXdebugIsPresent
-     * @covers  Lunr\Fdbk\FileLogger::log
+     * @covers  Lunr\Feedback\FileLogger::log
      */
     public function testLogPutsMessageInFile()
     {
@@ -173,7 +173,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
      * Test that log() returns a string when an object is passed as message.
      *
      * @depends testLogThrowsErrorIfXdebugIsPresent
-     * @covers  Lunr\Fdbk\PHPLogger::log
+     * @covers  Lunr\Feedback\PHPLogger::log
      */
     public function testLogReturnsStringWhenObjectPassedAsMessage()
     {

@@ -36,10 +36,10 @@
             <file>src/Lunr/Core/Tests/RequestStoreTest.php</file>
             <file>src/Lunr/Core/Tests/RequestGetTest.php</file>
             <file>src/Lunr/Core/Tests/ResponseTest.php</file>
-            <file>src/Lunr/Fdbk/Tests/PSR3LoggerTest.php</file>
-            <file>src/Lunr/Fdbk/Tests/PHPLoggerTest.php</file>
-            <file>src/Lunr/Fdbk/Tests/FileLoggerTest.php</file>
             <file>src/Lunr/Core/Tests/ErrorEnumTraitTest.php</file>
+            <file>src/Lunr/Feedback/Tests/PSR3LoggerTest.php</file>
+            <file>src/Lunr/Feedback/Tests/PHPLoggerTest.php</file>
+            <file>src/Lunr/Feedback/Tests/FileLoggerTest.php</file>
             <file>src/Lunr/Core/Tests/ControllerTest.php</file>
             <file>src/Lunr/Core/Tests/FrontControllerBaseTest.php</file>
             <file>src/Lunr/Core/Tests/FrontControllerGetTest.php</file>
@@ -143,7 +143,7 @@
                 <directory>../src/Lunr/Core/Tests/</directory>
                 <directory>../src/Lunr/DataAccess/Tests/</directory>
                 <directory>../src/Lunr/Database/Tests/</directory>
-                <directory>../src/Lunr/Fdbk/Tests/</directory>
+                <directory>../src/Lunr/Feedback/Tests/</directory>
                 <directory>../src/Lunr/Halo/Tests/</directory>
                 <directory>../src/Lunr/L10n/Tests/</directory>
                 <directory>../src/Lunr/Network/Tests/</directory>

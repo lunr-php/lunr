@@ -6,20 +6,20 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Fdbk
+ * @package    Feedback
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Fdbk\Tests;
+namespace Lunr\Feedback\Tests;
 
 /**
  * This class contains a mock for a simple log message class.
  *
  * @category   Libraries
- * @package    Fdbk
+ * @package    Feedback
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */

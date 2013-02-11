@@ -6,16 +6,16 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Fdbk
+ * @package    Feedback
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Fdbk\Tests;
+namespace Lunr\Feedback\Tests;
 
-use Lunr\Fdbk\PHPLogger;
+use Lunr\Feedback\PHPLogger;
 use Psr\Log\LogLevel;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
@@ -24,10 +24,10 @@ use ReflectionClass;
  * This class contains test methods for the PHPLogger class.
  *
  * @category   Libraries
- * @package    Fdbk
+ * @package    Feedback
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Fdbk\PHPLogger
+ * @covers     Lunr\Feedback\PHPLogger
  */
 class PHPLoggerTest extends PHPUnit_Framework_TestCase
 {
@@ -55,7 +55,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->logger_reflection = new ReflectionClass('Lunr\Fdbk\PHPLogger');
+        $this->logger_reflection = new ReflectionClass('Lunr\Feedback\PHPLogger');
 
         $this->request = $this->getMockBuilder('Lunr\Core\Request')
                               ->disableOriginalConstructor()
@@ -94,7 +94,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      * @param String $expected Expected log message after replacing
      *
      * @dataProvider messageProvider
-     * @covers       Lunr\Fdbk\PHPLogger::interpolate_message
+     * @covers       Lunr\Feedback\PHPLogger::interpolate_message
      */
     public function testInterpolateMessageReplacesPlaceholders($message, $context, $expected)
     {
@@ -115,7 +115,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      *
      * @depends      testInterpolateMessageReplacesPlaceholders
      * @dataProvider messageProvider
-     * @covers       Lunr\Fdbk\PHPLogger::compose_message
+     * @covers       Lunr\Feedback\PHPLogger::compose_message
      */
     public function testComposeMessageWithoutRequestAndFileInformationReturnsInterpolatedMessage($message, $context, $expected)
     {
@@ -136,7 +136,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      *
      * @depends      testInterpolateMessageReplacesPlaceholders
      * @dataProvider messageProvider
-     * @covers       Lunr\Fdbk\PHPLogger::compose_message
+     * @covers       Lunr\Feedback\PHPLogger::compose_message
      */
     public function testComposeMessageWithControllerAvailable($message, $context, $expected)
     {
@@ -166,7 +166,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      *
      * @depends      testInterpolateMessageReplacesPlaceholders
      * @dataProvider messageProvider
-     * @covers       Lunr\Fdbk\PHPLogger::compose_message
+     * @covers       Lunr\Feedback\PHPLogger::compose_message
      */
     public function testComposeMessageWithMethodAvailable($message, $context, $expected)
     {
@@ -192,7 +192,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      *
      * @depends      testInterpolateMessageReplacesPlaceholders
      * @dataProvider messageProvider
-     * @covers       Lunr\Fdbk\PHPLogger::compose_message
+     * @covers       Lunr\Feedback\PHPLogger::compose_message
      */
     public function testComposeMessageWithControllerAndMethodAvailable($message, $context, $expected)
     {
@@ -217,7 +217,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      *
      * @depends      testInterpolateMessageReplacesPlaceholders
      * @dataProvider messageProvider
-     * @covers       Lunr\Fdbk\PHPLogger::compose_message
+     * @covers       Lunr\Feedback\PHPLogger::compose_message
      */
     public function testComposeMessageWithFileAvailable($message, $context, $expected)
     {
@@ -240,7 +240,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      *
      * @depends      testInterpolateMessageReplacesPlaceholders
      * @dataProvider messageProvider
-     * @covers       Lunr\Fdbk\PHPLogger::compose_message
+     * @covers       Lunr\Feedback\PHPLogger::compose_message
      */
     public function testComposeMessageWithLineAvailable($message, $context, $expected)
     {
@@ -263,7 +263,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      *
      * @depends      testInterpolateMessageReplacesPlaceholders
      * @dataProvider messageProvider
-     * @covers       Lunr\Fdbk\PHPLogger::compose_message
+     * @covers       Lunr\Feedback\PHPLogger::compose_message
      */
     public function testComposeMessageWithFileAndLineAvailable($message, $context, $expected)
     {
@@ -285,7 +285,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      * @param String $expected_exception Expected PHPUnit Exception as string
      *
      * @dataProvider logLevelProvider
-     * @covers       Lunr\Fdbk\PHPLogger::log
+     * @covers       Lunr\Feedback\PHPLogger::log
      */
     public function testLogReturnsError($level, $expected_exception)
     {
@@ -298,7 +298,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      * Test that log() returns a string when an object is passed as message.
      *
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @covers            Lunr\Fdbk\PHPLogger::log
+     * @covers            Lunr\Feedback\PHPLogger::log
      */
     public function testLogReturnsStringWhenObjectPassedAsMessage()
     {

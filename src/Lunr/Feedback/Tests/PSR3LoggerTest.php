@@ -6,16 +6,16 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Fdbk
+ * @package    Feedback
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Fdbk\Tests;
+namespace Lunr\Feedback\Tests;
 
-use Lunr\Fdbk\PSR3Logger;
+use Lunr\Feedback\PSR3Logger;
 use Psr\Log\LogLevel;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
@@ -24,10 +24,10 @@ use ReflectionClass;
  * This class contains test methods for the PSR3Logger class.
  *
  * @category   Libraries
- * @package    Fdbk
+ * @package    Feedback
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Fdbk\PSR3Logger
+ * @covers     Lunr\Feedback\PSR3Logger
  */
 class PSR3LoggerTest extends PHPUnit_Framework_TestCase
 {
@@ -49,9 +49,9 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->logger_reflection = new ReflectionClass('Lunr\Fdbk\PSR3Logger');
+        $this->logger_reflection = new ReflectionClass('Lunr\Feedback\PSR3Logger');
 
-        $this->logger = $this->getMockForAbstractClass('Lunr\Fdbk\PSR3Logger');
+        $this->logger = $this->getMockForAbstractClass('Lunr\Feedback\PSR3Logger');
     }
 
     /**
@@ -66,7 +66,7 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that emergency forwards the parameters to log correctly.
      *
-     * @covers Lunr\Fdbk\PSR3Logger::emergency
+     * @covers Lunr\Feedback\PSR3Logger::emergency
      */
     public function testEmergency()
     {
@@ -83,7 +83,7 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that alert forwards the parameters to log correctly.
      *
-     * @covers Lunr\Fdbk\PSR3Logger::alert
+     * @covers Lunr\Feedback\PSR3Logger::alert
      */
     public function testAlert()
     {
@@ -100,7 +100,7 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that critical forwards the parameters to log correctly.
      *
-     * @covers Lunr\Fdbk\PSR3Logger::critical
+     * @covers Lunr\Feedback\PSR3Logger::critical
      */
     public function testCritical()
     {
@@ -117,7 +117,7 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that error forwards the parameters to log correctly.
      *
-     * @covers Lunr\Fdbk\PSR3Logger::error
+     * @covers Lunr\Feedback\PSR3Logger::error
      */
     public function testError()
     {
@@ -134,7 +134,7 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that warning forwards the parameters to log correctly.
      *
-     * @covers Lunr\Fdbk\PSR3Logger::warning
+     * @covers Lunr\Feedback\PSR3Logger::warning
      */
     public function testWarning()
     {
@@ -151,7 +151,7 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that notice forwards the parameters to log correctly.
      *
-     * @covers Lunr\Fdbk\PSR3Logger::notice
+     * @covers Lunr\Feedback\PSR3Logger::notice
      */
     public function testNotice()
     {
@@ -168,7 +168,7 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that info forwards the parameters to log correctly.
      *
-     * @covers Lunr\Fdbk\PSR3Logger::info
+     * @covers Lunr\Feedback\PSR3Logger::info
      */
     public function testInfo()
     {
@@ -185,7 +185,7 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that debug forwards the parameters to log correctly.
      *
-     * @covers Lunr\Fdbk\PSR3Logger::debug
+     * @covers Lunr\Feedback\PSR3Logger::debug
      */
     public function testDebug()
     {

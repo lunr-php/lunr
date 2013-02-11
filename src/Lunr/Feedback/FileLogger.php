@@ -6,20 +6,20 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Fdbk
+ * @package    Feedback
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Fdbk;
+namespace Lunr\Feedback;
 
 /**
  * Class for logging messages in files.
  *
  * @category   Libraries
- * @package    Fdbk
+ * @package    Feedback
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
