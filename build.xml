@@ -1,7 +1,6 @@
 <project name="Lunr" default="build" basedir=".">
 
     <property name="system" value="src/Lunr" />
-    <property name="application" value="application" />
     <property name="tests" value="tests" />
 
     <target name="clean"
@@ -71,7 +70,7 @@
         <exec executable="phpdoc">
             <arg value="run" />
             <arg value="-d" />
-            <arg value="${system},${application}" />
+            <arg value="${system}" />
             <arg value="--template" />
             <arg value="new-black" />
             <arg value="-t" />
@@ -88,7 +87,6 @@
             <arg value="--standard=Lunr" />
             <arg value="--ignore=html.*" />
             <arg path="${system}" />
-            <arg path="${application}" />
         </exec>
     </target>
 
@@ -118,8 +116,6 @@
             <arg path="${basedir}/build/logs" />
             <arg value="--source" />
             <arg path="${system}" />
-            <arg value="--source" />
-            <arg path="${application}" />
             <arg value="--output" />
             <arg path="${basedir}/build/code-browser" />
         </exec>
