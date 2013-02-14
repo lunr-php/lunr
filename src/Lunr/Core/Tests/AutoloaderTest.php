@@ -290,9 +290,8 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
         $classes   = array();
         $classes[] = array('DateTime', 'class.datetime.inc.php');
         $classes[] = array('StubView', 'view.stub.inc.php');
-        $classes[] = array('DateTime', 'class.datetime.inc.php');
         $classes[] = array('JsonInterface', 'interface.json.inc.php');
-        $classes[] = array('SessionModel', 'model.session.inc.php');
+        $classes[] = array('StubModel', 'model.stub.inc.php');
         $classes[] = array('StubController', 'controller.stub.inc.php');
         $classes[] = array('MockView', 'class.view.mock.php');
         $classes[] = array('DateTimeTest', 'class.datetime.test.php');
