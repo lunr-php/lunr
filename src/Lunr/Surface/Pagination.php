@@ -8,7 +8,7 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Web
+ * @package    Surface
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Javier Negre <javi@m2mobi.com>
@@ -16,13 +16,13 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Web;
+namespace Lunr\Surface;
 
 /**
  * Pagination class
  *
  * @category   Libraries
- * @package    Web
+ * @package    Surface
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Javier Negre <javi@m2mobi.com>

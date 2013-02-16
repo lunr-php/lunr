@@ -128,8 +128,8 @@
                 <directory>../src/Lunr/Network/Tests/</directory>
                 <directory>../src/Lunr/Sprk/Tests/</directory>
                 <directory>../src/Lunr/Spwn/Tests/</directory>
+                <directory>../src/Lunr/Surface/Tests/</directory>
                 <directory>../src/Lunr/Tcks/Tests/</directory>
-                <directory>../src/Lunr/Web/Tests/</directory>
             </exclude>
         </whitelist>
     </filter>
