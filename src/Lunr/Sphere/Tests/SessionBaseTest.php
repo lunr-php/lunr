@@ -398,6 +398,26 @@ class SessionClassBaseTest extends SessionTest
     }
 
     /**
+     * Test that start works properly.
+     *
+     * @covers  Lunr\Sphere\Session::start
+     */
+    public function testStartIfAlreadyStarted()
+    {
+        $started = $this->session_reflection->getProperty('started');
+        $started->setAccessible(TRUE);
+        $started->setValue($this->session, TRUE);
+
+        $closed = $this->session_reflection->getProperty('closed');
+        $closed->setAccessible(TRUE);
+
+        $this->session->start();
+
+        $this->assertTrue($started->getValue($this->session));
+        $this->assertFalse($closed->getValue($this->session));
+    }
+
+    /**
      * Test that start works properly setting an id.
      *
      * @depends Lunr\EnvironmentTest::testRunkit
