@@ -6,29 +6,29 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Sphere\Tests;
 
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use stdClass;
-use Lunr\Core\DatabaseSessionHandler;
+use Lunr\Sphere\DatabaseSessionHandler;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the DataBaseSessionHandler class.
+ * and shared attributes for testing the DatabaseSessionHandler class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
- * @covers     Lunr\Core\DataBaseSessionHandler
+ * @covers     Lunr\Sphere\DatabaseSessionHandler
  */
 abstract class DatabaseSessionHandlerTest extends PHPUnit_Framework_TestCase
 {
@@ -56,13 +56,13 @@ abstract class DatabaseSessionHandlerTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->sdao = $this->getMockBuilder('Lunr\Core\SessionDAO')
+        $this->sdao = $this->getMockBuilder('Lunr\Sphere\SessionDAO')
                            ->disableOriginalConstructor()
                            ->getMock();
 
-        $this->dsh = new DataBaseSessionHandler($this->sdao);
+        $this->dsh = new DatabaseSessionHandler($this->sdao);
 
-        $this->dsh_reflection = new ReflectionClass('Lunr\Core\DatabaseSessionHandler');
+        $this->dsh_reflection = new ReflectionClass('Lunr\Sphere\DatabaseSessionHandler');
     }
 
     /**

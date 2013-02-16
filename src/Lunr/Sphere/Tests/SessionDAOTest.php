@@ -6,19 +6,19 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Sphere\Tests;
 
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use stdClass;
-use Lunr\Core\SessionDAO;
+use Lunr\Sphere\SessionDAO;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -26,10 +26,10 @@ use Psr\Log\LoggerInterface;
  * and shared attributes for testing the SessionDAO class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
- * @covers     Lunr\Core\SessionDAO
+ * @covers     Lunr\Sphere\SessionDAO
  */
 class SessionDAOTest extends PHPUnit_Framework_TestCase
 {
@@ -103,7 +103,7 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
                                    ->getMock();
 
         $this->session_dao            = new SessionDAO($this->db);
-        $this->session_dao_reflection = new ReflectionClass('Lunr\Core\SessionDAO');
+        $this->session_dao_reflection = new ReflectionClass('Lunr\Sphere\SessionDAO');
 
     }
 
@@ -125,7 +125,7 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
     /**
      * Test that Read Session Data returns false if there is no session.
      *
-     * @covers     Lunr\Core\SessionDAO::read_session_data
+     * @covers     Lunr\Sphere\SessionDAO::read_session_data
      */
     public function testReadSessionDataReturnsFalseIfSessionNotExists()
     {
@@ -177,7 +177,7 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
     /**
      * Test that Read Session Data returns Session.
      *
-     * @covers     Lunr\Core\SessionDAO::read_session_data
+     * @covers     Lunr\Sphere\SessionDAO::read_session_data
      */
     public function testReadSessionDataReturnsSession()
     {
@@ -235,7 +235,7 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
     /**
      * Test that Write Session Data rollsback if there is no session.
      *
-     * @covers     Lunr\Core\SessionDAO::write_session_data
+     * @covers     Lunr\Sphere\SessionDAO::write_session_data
      */
     public function testWriteSessionDataRollsBackIfNoSession()
     {
@@ -285,7 +285,7 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
     /**
      * Test that Write Session Data.
      *
-     * @covers     Lunr\Core\SessionDAO::write_session_data
+     * @covers     Lunr\Sphere\SessionDAO::write_session_data
      */
     public function testWriteSessionData()
     {
@@ -360,7 +360,7 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
     /**
      * Test that Delete Session rollsback if there is no session.
      *
-     * @covers     Lunr\Core\SessionDAO::delete_session
+     * @covers     Lunr\Sphere\SessionDAO::delete_session
      */
     public function testDeleteSessionRollsBackIfQueryFails()
     {
@@ -410,7 +410,7 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
     /**
      * Test that Delete Session rollsback if there is no session.
      *
-     * @covers     Lunr\Core\SessionDAO::delete_session
+     * @covers     Lunr\Sphere\SessionDAO::delete_session
      */
     public function testDeleteSessionRollsBackIfQueryHasNoResults()
     {
@@ -463,7 +463,7 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
     /**
      * Test Delete Session.
      *
-     * @covers     Lunr\Core\SessionDAO::delete_session
+     * @covers     Lunr\Sphere\SessionDAO::delete_session
      */
     public function testDeleteSession()
     {
@@ -519,7 +519,7 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
     /**
      * Test Session GC.
      *
-     * @covers     Lunr\Core\SessionDAO::session_gc
+     * @covers     Lunr\Sphere\SessionDAO::session_gc
      */
     public function testSessionGC()
     {

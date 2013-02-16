@@ -1,34 +1,34 @@
 <?php
 
 /**
- * This file contains the DatabaseSessionHandlerTest class.
+ * This file contains the SessionTest class.
  *
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Sphere\Tests;
 
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use stdClass;
-use Lunr\Core\Session;
+use Lunr\Sphere\Session;
 
 /**
  * This class contains common setup routines, providers
  * and shared attributes for testing the Session class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
- * @covers     Lunr\Core\Session
+ * @covers     Lunr\Sphere\Session
  */
 abstract class SessionTest extends PHPUnit_Framework_TestCase
 {
@@ -73,7 +73,7 @@ abstract class SessionTest extends PHPUnit_Framework_TestCase
     {
         $this->session = new Session();
 
-        $this->session_reflection = new ReflectionClass('Lunr\Core\Session');
+        $this->session_reflection = new ReflectionClass('Lunr\Sphere\Session');
     }
 
     /**

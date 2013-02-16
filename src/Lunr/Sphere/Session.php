@@ -6,7 +6,7 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Libraries
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -14,13 +14,13 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core;
+namespace Lunr\Sphere;
 
 /**
  * Session Wrapper Class
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Libraries
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>

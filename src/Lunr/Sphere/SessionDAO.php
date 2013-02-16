@@ -7,22 +7,22 @@
  * PHP Version 5.3
  *
  * @category   DAO
- * @package    Core
+ * @package    Sphere
  * @subpackage DAO
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2010-2012, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core;
+namespace Lunr\Sphere;
 
 use Lunr\DataAccess\DatabaseAccessObject;
 
 /**
- * Core Session DAO
+ * Sphere Session DAO
  *
  * @category   DAO
- * @package    Core
+ * @package    Sphere
  * @subpackage DAO
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */

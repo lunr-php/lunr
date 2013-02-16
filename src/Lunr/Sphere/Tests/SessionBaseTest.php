@@ -6,23 +6,23 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Sphere\Tests;
 
 /**
  * This class contains tests for the Session class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
- * @covers     Lunr\Core\Session
+ * @covers     Lunr\Sphere\Session
  */
 class SessionClassBaseTest extends SessionTest
 {
@@ -56,7 +56,7 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that setSessionHandler returns true when receives a SessionHandlerInterface.
      *
-     * @covers  Lunr\Core\Session::set_session_handler
+     * @covers  Lunr\Sphere\Session::set_session_handler
      */
     public function testSetSessionHandlerReturnsTrueWithSessionHandlerInterface()
     {
@@ -72,7 +72,7 @@ class SessionClassBaseTest extends SessionTest
      *
      * @dataProvider      invalidSessionHandlerProvider
      * @expectedException PHPUnit_Framework_Error_Warning
-     * @covers            Lunr\Core\Session::set_session_handler
+     * @covers            Lunr\Sphere\Session::set_session_handler
      */
     public function testSetSessionHandlerReturnsFalseWithInvalidData($handler)
     {
@@ -84,7 +84,7 @@ class SessionClassBaseTest extends SessionTest
      *
      * @runInSeparateProcess
      *
-     *  @covers  Lunr\Core\Session::set
+     *  @covers  Lunr\Sphere\Session::set
      */
     public function testSetIsIgnoredWhenClosedAndNotStarted()
     {
@@ -109,7 +109,7 @@ class SessionClassBaseTest extends SessionTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\Core\Session::set
+     * @covers  Lunr\Sphere\Session::set
      */
     public function testSetIsIgnoredWhenNotClosedAndNotStarted()
     {
@@ -134,7 +134,7 @@ class SessionClassBaseTest extends SessionTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\Core\Session::set
+     * @covers  Lunr\Sphere\Session::set
      */
     public function testSetIsIgnoredWhenClosedAndStarted()
     {
@@ -159,7 +159,7 @@ class SessionClassBaseTest extends SessionTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\Core\Session::set
+     * @covers  Lunr\Sphere\Session::set
      */
     public function testSetWorksWhenNotClosedAndStarted()
     {
@@ -184,7 +184,7 @@ class SessionClassBaseTest extends SessionTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\Core\Session::delete
+     * @covers  Lunr\Sphere\Session::delete
      */
     public function testDeleteIsIgnoredWhenClosedAndNotStarted()
     {
@@ -210,7 +210,7 @@ class SessionClassBaseTest extends SessionTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\Core\Session::delete
+     * @covers  Lunr\Sphere\Session::delete
      */
     public function testDeleteIsIgnoredWhenNotClosedAndNotStarted()
     {
@@ -236,7 +236,7 @@ class SessionClassBaseTest extends SessionTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\Core\Session::delete
+     * @covers  Lunr\Sphere\Session::delete
      */
     public function testDeleteIsIgnoredWhenClosedAndStarted()
     {
@@ -262,7 +262,7 @@ class SessionClassBaseTest extends SessionTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\Core\Session::delete
+     * @covers  Lunr\Sphere\Session::delete
      */
     public function testDeleteWorksWhenNotClosedAndStarted()
     {
@@ -289,7 +289,7 @@ class SessionClassBaseTest extends SessionTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\Core\Session::get
+     * @covers  Lunr\Sphere\Session::get
      */
     public function testGetReturnsNullWhenNotStarted()
     {
@@ -307,7 +307,7 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that get doesn't do anything when key is not stored in SESSION.
      *
-     * @covers  Lunr\Core\Session::get
+     * @covers  Lunr\Sphere\Session::get
      */
     public function testGetReturnsNullWhenNoKey()
     {
@@ -325,7 +325,7 @@ class SessionClassBaseTest extends SessionTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\Core\Session::get
+     * @covers  Lunr\Sphere\Session::get
      */
     public function testGetWorksWhenStarted()
     {
@@ -343,7 +343,7 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that get_session_id works properly.
      *
-     * @covers  Lunr\Core\Session::get_session_id
+     * @covers  Lunr\Sphere\Session::get_session_id
      */
     public function testGetSessionId()
     {
@@ -355,7 +355,7 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that get_new_session_id works properly.
      *
-     * @covers  Lunr\Core\Session::get_new_session_id
+     * @covers  Lunr\Sphere\Session::get_new_session_id
      */
     public function testGetNewSessionId()
     {
@@ -374,7 +374,7 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that start works properly.
      *
-     * @covers  Lunr\Core\Session::start
+     * @covers  Lunr\Sphere\Session::start
      */
     public function testStart()
     {
@@ -397,7 +397,7 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that start works properly setting an id.
      *
-     * @covers  Lunr\Core\Session::start
+     * @covers  Lunr\Sphere\Session::start
      */
     public function testStartSetsId()
     {
@@ -422,7 +422,7 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that destroy works properly when started.
      *
-     * @covers  Lunr\Core\Session::destroy
+     * @covers  Lunr\Sphere\Session::destroy
      */
     public function testDestroyWorksWhenStarted()
     {
@@ -444,7 +444,7 @@ class SessionClassBaseTest extends SessionTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\Core\Session::destroy
+     * @covers  Lunr\Sphere\Session::destroy
      */
     public function testDestroyDoesNothingWhenNotStarted()
     {
@@ -462,7 +462,7 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that close.
      *
-     * @covers  Lunr\Core\Session::close
+     * @covers  Lunr\Sphere\Session::close
      */
     public function testCloseSetsParameters()
     {

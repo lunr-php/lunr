@@ -6,23 +6,23 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Sphere\Tests;
 
 /**
  * This class contains tests for the constructor of the DatabaseSessionHandler class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
- * @covers     Lunr\Core\DataBaseSessionHandler
+ * @covers     Lunr\Sphere\DatabaseSessionHandler
  */
 class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
 {
@@ -43,7 +43,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
     /**
      * Test open function.
      *
-     * @covers Lunr\Core\DataBaseSessionHandler::open
+     * @covers Lunr\Sphere\DatabaseSessionHandler::open
      */
     public function testOpenPath()
     {
@@ -53,7 +53,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
     /**
      * Test close function.
      *
-     * @covers Lunr\Core\DataBaseSessionHandler::close
+     * @covers Lunr\Sphere\DatabaseSessionHandler::close
      */
     public function testCloseReturnsTrue()
     {
@@ -63,7 +63,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
     /**
      * Test read function.
      *
-     * @covers Lunr\Core\DataBaseSessionHandler::read
+     * @covers Lunr\Sphere\DatabaseSessionHandler::read
      */
     public function testReadReadsFromDatabase()
     {
@@ -77,7 +77,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
     /**
      * Test write function.
      *
-     * @covers Lunr\Core\DataBaseSessionHandler::write
+     * @covers Lunr\Sphere\DatabaseSessionHandler::write
      */
     public function testWriteWritesInDatabase()
     {
@@ -91,7 +91,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
     /**
      * Test destroy function.
      *
-     * @covers Lunr\Core\DataBaseSessionHandler::destroy
+     * @covers Lunr\Sphere\DatabaseSessionHandler::destroy
      */
     public function testDestroyDeletesSession()
     {
@@ -105,7 +105,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
     /**
      * Test gc function.
      *
-     * @covers Lunr\Core\DataBaseSessionHandler::gc
+     * @covers Lunr\Sphere\DatabaseSessionHandler::gc
      */
     public function testGcCollectsSession()
     {

@@ -8,7 +8,7 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Libraries
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -16,7 +16,7 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core;
+namespace Lunr\Sphere;
 
 use SessionHandlerInterface;
 
@@ -24,7 +24,7 @@ use SessionHandlerInterface;
  * Database Session Handler Interface implementation
  *
  * @category   Libraries
- * @package    Core
+ * @package    Sphere
  * @subpackage Libraries
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -39,8 +39,8 @@ class DatabaseSessionHandler implements SessionHandlerInterface
     private $lifetime;
 
     /**
-     * Instance of SessionDatabaseAccessObject
-     * @var SessionDatabaseAccessObject
+     * Instance of SessionDAO
+     * @var SessionDAO
      */
     private $sdao;
 
