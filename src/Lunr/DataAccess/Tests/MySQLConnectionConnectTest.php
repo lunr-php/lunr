@@ -99,7 +99,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testFailedConnect()
     {
-        $mysqli = new MockMySQLiFailedConnection();
+        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
@@ -202,7 +202,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testDisconnect()
     {
-        $mysqli = new MockMySQLiSuccessfulConnection();
+        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
@@ -227,7 +227,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testChangeDatabaseReturnsFalseWhenNotConnected()
     {
-        $mysqli = new MockMySQLiFailedConnection();
+        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);

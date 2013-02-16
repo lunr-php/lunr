@@ -88,7 +88,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testNumberOfRowsReturnsNumber()
     {
-        $mysqli = new MockMySQLiSuccessfulConnection();
+        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
 
         $class = $this->result_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);

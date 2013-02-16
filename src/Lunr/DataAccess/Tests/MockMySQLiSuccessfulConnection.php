@@ -37,9 +37,9 @@ class MockMySQLiSuccessfulConnection
     /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct($mysqli)
     {
-        $this->mysqli = new MySQLi();
+        $this->mysqli = $mysqli;
     }
 
     /**
@@ -79,6 +79,10 @@ class MockMySQLiSuccessfulConnection
             case 'affected_rows':
                 return 10;
             case 'errno':
+                return 0;
+            case 'error':
+                return '';
+            case 'insert_id':
                 return 0;
             default:
                 return $this->mysqli->{$name};

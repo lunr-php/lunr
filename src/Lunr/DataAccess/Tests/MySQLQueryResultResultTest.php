@@ -68,7 +68,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
         $property = $this->result_reflection->getProperty('result');
         $property->setAccessible(TRUE);
 
-        $this->assertInstanceOf('mysqli_result', $property->getValue($this->result));
+        $this->assertInstanceOf('Lunr\DataAccess\Tests\MockMySQLiResult', $property->getValue($this->result));
     }
 
     /**

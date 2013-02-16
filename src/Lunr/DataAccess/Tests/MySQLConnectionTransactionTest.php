@@ -57,7 +57,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      */
     public function testBeginTransactionDoesNothingWhenNotConnected()
     {
-        $mysqli = new MockMySQLiFailedConnection();
+        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
@@ -93,7 +93,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      */
     public function testCommitDoesNothingWhenNotConnected()
     {
-        $mysqli = new MockMySQLiFailedConnection();
+        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
@@ -129,7 +129,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      */
     public function testRollbackDoesNothingWhenNotConnected()
     {
-        $mysqli = new MockMySQLiFailedConnection();
+        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
@@ -165,7 +165,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      */
     public function testEndTransactionDoesNothingWhenNotConnected()
     {
-        $mysqli = new MockMySQLiFailedConnection();
+        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);

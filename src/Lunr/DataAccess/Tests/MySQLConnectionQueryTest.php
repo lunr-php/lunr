@@ -36,7 +36,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testQueryReturnsFailedQueryResultWhenNotConnected()
     {
-        $mysqli = new MockMySQLiFailedConnection();
+        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
@@ -55,20 +55,24 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testQueryReturnsQueryResultWhenConnected()
     {
+        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+
+        $class = $this->db_reflection->getProperty('mysqli');
+        $class->setAccessible(TRUE);
+        $class->setValue($this->db, $mysqli);
+
         $property = $this->db_reflection->getProperty('connected');
         $property->setAccessible(TRUE);
         $property->setValue($this->db, TRUE);
 
-        $this->mysqli->expects($this->once())
-                     ->method('query')
-                     ->will($this->returnValue(TRUE));
+        $mysqli->expects($this->once())
+               ->method('query')
+               ->will($this->returnValue(TRUE));
 
         $query = $this->db->query('query');
 
         $this->assertInstanceOf('Lunr\DataAccess\MySQLQueryResult', $query);
         $this->assertFalse($query->has_failed());
-
-        $property->setValue($this->db, FALSE);
     }
 
     /**
@@ -78,7 +82,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testAsyncQueryReturnsFailedQueryResultWhenNotConnected()
     {
-        $mysqli = new MockMySQLiFailedConnection();
+        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
         $class = $this->db_reflection->getProperty('mysqli');
         $class->setAccessible(TRUE);
@@ -97,16 +101,22 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testAsyncQueryReturnsQueryResultWhenConnected()
     {
+        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+
+        $class = $this->db_reflection->getProperty('mysqli');
+        $class->setAccessible(TRUE);
+        $class->setValue($this->db, $mysqli);
+
         $property = $this->db_reflection->getProperty('connected');
         $property->setAccessible(TRUE);
         $property->setValue($this->db, TRUE);
 
-        $this->mysqli->expects($this->once())
-                     ->method('query');
+        $mysqli->expects($this->once())
+               ->method('query');
 
-        $this->mysqli->expects($this->once())
-                     ->method('reap_async_query')
-                     ->will($this->returnValue(TRUE));
+        $mysqli->expects($this->once())
+               ->method('reap_async_query')
+               ->will($this->returnValue(TRUE));
 
         $query = $this->db->async_query('query');
 

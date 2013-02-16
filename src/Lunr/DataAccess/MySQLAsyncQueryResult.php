@@ -69,7 +69,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
 
         $this->result = $this->mysqli->reap_async_query();
 
-        if ($this->result instanceof MySQLi_Result)
+        if (is_object($this->result))
         {
             $this->success = TRUE;
             $this->freed   = FALSE;

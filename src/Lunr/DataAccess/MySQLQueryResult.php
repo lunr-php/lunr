@@ -60,7 +60,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      */
     public function __construct($result, $mysqli)
     {
-        if ($result instanceof MySQLi_Result)
+        if (is_object($result))
         {
             $this->success = TRUE;
             $this->freed   = FALSE;
@@ -133,13 +133,13 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      */
     public function number_of_rows()
     {
-        if (is_bool($this->result))
+        if (is_object($this->result))
         {
-            return $this->mysqli->affected_rows;
+            return $this->result->num_rows;
         }
         else
         {
-            return $this->result->num_rows;
+            return $this->mysqli->affected_rows;
         }
     }
 
@@ -152,7 +152,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     {
         $output = array();
 
-        if (is_bool($this->result))
+        if (!is_object($this->result))
         {
             return $output;
         }
@@ -174,7 +174,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      */
     public function result_row()
     {
-        $output = is_bool($this->result) ? array() : $this->result->fetch_assoc();
+        $output = is_object($this->result) ? $this->result->fetch_assoc() : array();
 
         $this->free_result();
 
@@ -192,7 +192,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     {
         $output = array();
 
-        if (is_bool($this->result))
+        if (!is_object($this->result))
         {
             return $output;
         }
@@ -216,7 +216,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      */
     public function result_cell($column)
     {
-        if (is_bool($this->result))
+        if (!is_object($this->result))
         {
             return NULL;
         }

@@ -67,8 +67,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that affected_rows() tries to fetch data if it isn't already fetched.
      *
-     * @expectedException PHPUnit_Framework_Error
-     * @covers            Lunr\DataAccess\MySQLAsyncQueryResult::affected_rows
+     * @covers Lunr\DataAccess\MySQLAsyncQueryResult::affected_rows
      */
     public function testAffectedRowsFetchesDataIfFetchedIsFalse()
     {
@@ -82,8 +81,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that affected_rows() doesn't try to fetch data if it is already fetched.
      *
-     * @expectedException PHPUnit_Framework_Error
-     * @covers            Lunr\DataAccess\MySQLAsyncQueryResult::affected_rows
+     * @covers Lunr\DataAccess\MySQLAsyncQueryResult::affected_rows
      */
     public function testAffectedRowsDoesNotFetchDataIfFetchedIsTrue()
     {
@@ -103,8 +101,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that number_of_rows() tries to fetch data if it isn't already fetched.
      *
-     * @expectedException PHPUnit_Framework_Error
-     * @covers            Lunr\DataAccess\MySQLAsyncQueryResult::number_of_rows
+     * @covers Lunr\DataAccess\MySQLAsyncQueryResult::number_of_rows
      */
     public function testNumberOfRowsRowsFetchesDataIfFetchedIsFalse()
     {
@@ -118,8 +115,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that number_of_rows() doesn't try to fetch data if it is already fetched.
      *
-     * @expectedException PHPUnit_Framework_Error
-     * @covers            Lunr\DataAccess\MySQLAsyncQueryResult::number_of_rows
+     * @covers Lunr\DataAccess\MySQLAsyncQueryResult::number_of_rows
      */
     public function testNumberOfRowsDoesNotFetchDataIfFetchedIsTrue()
     {

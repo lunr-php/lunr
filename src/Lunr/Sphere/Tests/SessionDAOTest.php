@@ -15,11 +15,13 @@
 
 namespace Lunr\Sphere\Tests;
 
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
-use stdClass;
 use Lunr\Sphere\SessionDAO;
+use Lunr\DataAccess\Tests\MockMySQLiResult;
+use Lunr\DataAccess\Tests\MockMySQLiSuccessfulConnection;
 use Psr\Log\LoggerInterface;
+use \PHPUnit_Framework_TestCase;
+use \ReflectionClass;
+use \stdClass;
 
 /**
  * This class contains common setup routines, providers
@@ -85,10 +87,10 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
 
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $mysqli_mock        = $this->getMock('MySQLi');
-        $mysqli_result_mock = $this->getMockBuilder('mysqli_result')
-                                   ->disableOriginalConstructor()
-                                   ->getMock();
+        $mysqli_mock        = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $mysqli_result_mock = new MockMySQLiResult($this->getMockBuilder('mysqli_result')
+                                                        ->disableOriginalConstructor()
+                                                        ->getMock());
 
         $this->db = $this->getMockBuilder('Lunr\DataAccess\MySQLConnection')
                          ->setConstructorArgs(array(&$this->configuration, &$this->logger, $mysqli_mock))

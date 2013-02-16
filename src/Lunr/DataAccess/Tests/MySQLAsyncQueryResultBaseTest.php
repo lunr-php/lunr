@@ -40,7 +40,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
 
         $value = $property->getValue($this->result);
 
-        $this->assertInstanceOf('\mysqli', $value);
+        $this->assertInstanceOf('Lunr\DataAccess\Tests\MockMySQLiSuccessfulConnection', $value);
         $this->assertSame($this->mysqli, $value);
     }
 
@@ -84,9 +84,9 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testFetchResultStoresResult()
     {
-        $result = $this->getMockBuilder('mysqli_result')
-                       ->disableOriginalConstructor()
-                       ->getMock();
+        $result = new MockMySQLiResult($this->getMockBuilder('mysqli_result')
+                                            ->disableOriginalConstructor()
+                                            ->getMock());
 
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -100,7 +100,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
         $property = $this->result_reflection->getProperty('result');
         $property->setAccessible(TRUE);
 
-        $this->assertInstanceOf('mysqli_result', $property->getValue($this->result));
+        $this->assertInstanceOf('Lunr\DataAccess\Tests\MockMySQLiResult', $property->getValue($this->result));
     }
 
     /**
@@ -176,9 +176,9 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testFetchedResultSetsSuccessTrueIfResultIsMysqliResult()
     {
-        $result = $this->getMockBuilder('MySQLi_Result')
-                       ->disableOriginalConstructor()
-                       ->getMock();
+        $result = new MockMySQLiResult($this->getMockBuilder('mysqli_result')
+                                            ->disableOriginalConstructor()
+                                            ->getMock());
 
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')

@@ -47,7 +47,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
 
         $value = $property->getValue($this->result);
 
-        $this->assertInstanceOf('\mysqli', $value);
+        $this->assertInstanceOf('Lunr\DataAccess\Tests\MockMySQLiSuccessfulConnection', $value);
         $this->assertSame($this->mysqli, $value);
     }
 
@@ -58,12 +58,6 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testAffectedRowsReturnsNumber()
     {
-        $mysqli = new MockMySQLiSuccessfulConnection();
-
-        $class = $this->result_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->result, $mysqli);
-
         $value = $this->result->affected_rows();
         $this->assertInternalType('int', $value);
         $this->assertEquals(10, $value);
