@@ -404,7 +404,36 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
         $select->setAccessible(TRUE);
         $select->setValue($this->builder, 'col');
 
-        $string = 'SELECT DISTINCT SQL_CACHE col FROM table';
+        $join = $this->builder_reflection->getProperty('join');
+        $join->setAccessible(TRUE);
+        $join->setValue($this->builder, 'INNER JOIN table1');
+
+        $where = $this->builder_reflection->getProperty('where');
+        $where->setAccessible(TRUE);
+        $where->setValue($this->builder, 'WHERE a = b');
+
+        $orderby = $this->builder_reflection->getProperty('order_by');
+        $orderby->setAccessible(TRUE);
+        $orderby->setValue($this->builder, 'ORDER BY col ASC');
+
+        $groupby = $this->builder_reflection->getProperty('group_by');
+        $groupby->setAccessible(TRUE);
+        $groupby->setValue($this->builder, 'GROUP BY col');
+
+        $having = $this->builder_reflection->getProperty('having');
+        $having->setAccessible(TRUE);
+        $having->setValue($this->builder, 'HAVING a = b');
+
+        $limit = $this->builder_reflection->getProperty('limit');
+        $limit->setAccessible(TRUE);
+        $limit->setValue($this->builder, 'LIMIT 1');
+
+        $lock = $this->builder_reflection->getProperty('lock_mode');
+        $lock->setAccessible(TRUE);
+        $lock->setValue($this->builder, 'FOR UPDATE');
+
+        $string  = 'SELECT DISTINCT SQL_CACHE col FROM table INNER JOIN table1 WHERE a = b ';
+        $string .= 'GROUP BY col HAVING a = b ORDER BY col ASC LIMIT 1 FOR UPDATE';
         $this->assertEquals($string, $this->builder->get_select_query());
     }
 
@@ -523,6 +552,49 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+     * Test getting an update query for multiple tables using JOIN.
+     *
+     * @depends testImplodeQueryWithDuplicateUpdateModes
+     * @covers  Lunr\DataAccess\DatabaseDMLQueryBuilder::get_update_query
+     */
+    public function testGetUpdateQueryForMultipleTablesWithJoin()
+    {
+        $update = $this->builder_reflection->getProperty('update');
+        $update->setAccessible(TRUE);
+        $update->setValue($this->builder, 'table1');
+
+        $join = $this->builder_reflection->getProperty('join');
+        $join->setAccessible(TRUE);
+        $join->setValue($this->builder, 'INNER JOIN table2');
+
+        $update_mode = $this->builder_reflection->getProperty('update_mode');
+        $update_mode->setAccessible(TRUE);
+        $update_mode->setValue($this->builder, array(
+            'LOW_PRIORITY',
+            'IGNORE'
+        ));
+
+        $set = $this->builder_reflection->getProperty('set');
+        $set->setAccessible(TRUE);
+        $set->setValue($this->builder, 'SET col1 = val1, col2 = val2');
+
+        $where = $this->builder_reflection->getProperty('where');
+        $where->setAccessible(TRUE);
+        $where->setValue($this->builder, 'WHERE 1 = 1');
+
+        $order = $this->builder_reflection->getProperty('order_by');
+        $order->setAccessible(TRUE);
+        $order->setValue($this->builder, 'ORDER BY col1');
+
+        $limit = $this->builder_reflection->getProperty('limit');
+        $limit->setAccessible(TRUE);
+        $limit->setValue($this->builder, 'LIMIT 10');
+
+        $string = 'UPDATE LOW_PRIORITY IGNORE table1 INNER JOIN table2 SET col1 = val1, col2 = val2 WHERE 1 = 1';
+        $this->assertEquals($string, $this->builder->get_update_query());
+    }
+
+    /**
      * Test getting a delete query.
      *
      * @depends testImplodeQueryWithDuplicateDeleteModes
@@ -545,7 +617,15 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
         $select->setAccessible(TRUE);
         $select->setValue($this->builder, 'table.*');
 
-        $string = 'DELETE QUICK IGNORE table.* FROM table';
+        $join = $this->builder_reflection->getProperty('join');
+        $join->setAccessible(TRUE);
+        $join->setValue($this->builder, 'INNER JOIN table1');
+
+        $where = $this->builder_reflection->getProperty('where');
+        $where->setAccessible(TRUE);
+        $where->setValue($this->builder, 'WHERE a = b');
+
+        $string = 'DELETE QUICK IGNORE table.* FROM table INNER JOIN table1 WHERE a = b';
         $this->assertEquals($string, $this->builder->get_delete_query());
     }
 
@@ -644,6 +724,34 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
         $from->setValue($this->builder, 'ORDER BY col ASC');
 
         $string = 'DELETE table.* FROM table';
+        $this->assertEquals($string, $this->builder->get_delete_query());
+    }
+
+    /**
+     * Test it is not possible to get a delete query with limit and orderBy when join is not ''.
+     *
+     * @depends testImplodeQueryWithDuplicateDeleteModes
+     * @covers  Lunr\DataAccess\DatabaseDMLQueryBuilder::get_delete_query
+     */
+    public function testGetDeleteLimitOrderQueryWithJoin()
+    {
+        $from = $this->builder_reflection->getProperty('join');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'INNER JOIN table1');
+
+        $from = $this->builder_reflection->getProperty('from');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'FROM table');
+
+        $from = $this->builder_reflection->getProperty('limit');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'LIMIT 10 OFFSET 0');
+
+        $from = $this->builder_reflection->getProperty('order_by');
+        $from->setAccessible(TRUE);
+        $from->setValue($this->builder, 'ORDER BY col ASC');
+
+        $string = 'DELETE FROM table INNER JOIN table1';
         $this->assertEquals($string, $this->builder->get_delete_query());
     }
 

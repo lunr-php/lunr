@@ -116,6 +116,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
 
     /**
      * SQL Query part: JOIN clause
+     * @var String
      */
     protected $join;
 
@@ -223,8 +224,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
 
         $components = array();
 
-        array_push($components, 'select_mode', 'select', 'from', 'where', 'group_by');
-        array_push($components, 'having', 'order_by', 'limit', 'lock_mode');
+        array_push($components, 'select_mode', 'select', 'from', 'join', 'where');
+        array_push($components,  'group_by', 'having', 'order_by', 'limit', 'lock_mode');
 
         return 'SELECT ' . $this->implode_query($components);
     }
@@ -242,15 +243,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         }
 
         $components   = array();
-        $components[] = 'delete_mode';
+        array_push($components, 'delete_mode', 'delete', 'from', 'join', 'where');
 
-        if ($this->delete != '')
+        if (($this->delete == '') && ($this->join == ''))
         {
-            array_push($components, 'delete', 'from', 'where');
-        }
-        else
-        {
-            array_push($components, 'from', 'where', 'order_by', 'limit');
+            array_push($components, 'order_by', 'limit');
         }
 
         return 'DELETE ' . $this->implode_query($components);
@@ -349,9 +346,9 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         $this->update_mode = array_intersect($this->update_mode, $valid);
 
         $components   = array();
-        array_push($components, 'update_mode', 'update', 'set', 'where');
+        array_push($components, 'update_mode', 'update', 'join', 'set', 'where');
 
-        if (strpos($this->update, ',') === FALSE)
+        if ((strpos($this->update, ',') === FALSE) && $this->join == '')
         {
             $components[] = 'order_by';
             $components[] = 'limit';
