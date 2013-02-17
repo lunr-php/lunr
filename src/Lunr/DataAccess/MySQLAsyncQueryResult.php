@@ -15,7 +15,7 @@
 
 namespace Lunr\DataAccess;
 
-use MySQLi_Result;
+use \MySQLi_Result;
 
 /**
  * MySQL/MariaDB asynchronous query result class.
@@ -37,11 +37,12 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Constructor.
      *
+     * @param String $query  Executed query
      * @param MySQLi $mysqli Shared instance of the MySQLi class
      */
-    public function __construct($mysqli)
+    public function __construct($query, $mysqli)
     {
-        parent::__construct(FALSE, $mysqli);
+        parent::__construct($query, FALSE, $mysqli, TRUE);
         $this->fetched = FALSE;
     }
 
@@ -81,6 +82,12 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
         }
 
         $this->fetched = TRUE;
+
+        $this->error_message = $this->mysqli->error;
+        $this->error_number  = $this->mysqli->errno;
+        $this->insert_id     = $this->mysqli->insert_id;
+        $this->affected_rows = $this->mysqli->affected_rows;
+        $this->num_rows      = is_object($this->result) ? $this->result->num_rows : $this->affected_rows;
     }
 
     /**
@@ -92,6 +99,40 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     {
         $this->fetch_result();
         return parent::has_failed();
+    }
+
+    /**
+     * Get string description of the error, if there was one.
+     *
+     * @return String $message Error Message
+     */
+    public function error_message()
+    {
+        $this->fetch_result();
+        return parent::error_message();
+    }
+
+    /**
+     * Get numerical error code of the error, if there was one.
+     *
+     * @return Integer $code Error Code
+     */
+    public function error_number()
+    {
+        $this->fetch_result();
+        return parent::error_number();
+    }
+
+    /**
+     * Get autoincremented ID generated on last insert.
+     *
+     * @return mixed $id If the number is greater than maximal int value it's a String
+     *                   otherwise an Integer
+     */
+    public function insert_id()
+    {
+        $this->fetch_result();
+        return parent::insert_id();
     }
 
     /**

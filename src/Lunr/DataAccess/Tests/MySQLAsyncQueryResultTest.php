@@ -52,13 +52,21 @@ abstract class MySQLAsyncQueryResultTest extends PHPUnit_Framework_TestCase
     protected $mysqli;
 
     /**
+     * The executed query.
+     * @var String
+     */
+    protected $query;
+
+    /**
      * TestCase Constructor passing TRUE as query result.
      */
     public function setUp()
     {
         $this->mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
 
-        $this->result = new MySQLAsyncQueryResult($this->mysqli);
+        $this->query = 'SELECT * FROM table';
+
+        $this->result = new MySQLAsyncQueryResult($this->query, $this->mysqli);
 
         $this->result_reflection = new ReflectionClass('Lunr\DataAccess\MySQLAsyncQueryResult');
     }
@@ -71,6 +79,7 @@ abstract class MySQLAsyncQueryResultTest extends PHPUnit_Framework_TestCase
         unset($this->mysqli);
         unset($this->result);
         unset($this->result_reflection);
+        unset($this->query);
     }
 
 }

@@ -133,6 +133,108 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     }
 
     /**
+     * Test that error_message() tries to fetch data if it isn't already fetched.
+     *
+     * @covers Lunr\DataAccess\MySQLAsyncQueryResult::error_message
+     */
+    public function testErrorMessageFetchesDataIfFetchedIsFalse()
+    {
+        $this->mysqli->expects($this->once())
+                     ->method('reap_async_query')
+                     ->will($this->returnValue(FALSE));
+
+        $this->result->error_message();
+    }
+
+    /**
+     * Test that error_message() doesn't try to fetch data if it is already fetched.
+     *
+     * @covers Lunr\DataAccess\MySQLAsyncQueryResult::error_message
+     */
+    public function testErrorMessageDoesNotFetchDataIfFetchedIsTrue()
+    {
+        $property = $this->result_reflection->getProperty('fetched');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->result, TRUE);
+
+        $this->mysqli->expects($this->never())
+                     ->method('reap_async_query')
+                     ->will($this->returnValue(FALSE));
+
+        $this->result->error_message();
+
+        $property->setValue($this->result, FALSE);
+    }
+
+    /**
+     * Test that error_number() tries to fetch data if it isn't already fetched.
+     *
+     * @covers Lunr\DataAccess\MySQLAsyncQueryResult::error_message
+     */
+    public function testErrorNumberFetchesDataIfFetchedIsFalse()
+    {
+        $this->mysqli->expects($this->once())
+                     ->method('reap_async_query')
+                     ->will($this->returnValue(FALSE));
+
+        $this->result->error_number();
+    }
+
+    /**
+     * Test that error_number() doesn't try to fetch data if it is already fetched.
+     *
+     * @covers Lunr\DataAccess\MySQLAsyncQueryResult::error_message
+     */
+    public function testErrorNumberDoesNotFetchDataIfFetchedIsTrue()
+    {
+        $property = $this->result_reflection->getProperty('fetched');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->result, TRUE);
+
+        $this->mysqli->expects($this->never())
+                     ->method('reap_async_query')
+                     ->will($this->returnValue(FALSE));
+
+        $this->result->error_number();
+
+        $property->setValue($this->result, FALSE);
+    }
+
+    /**
+     * Test that insert_id() tries to fetch data if it isn't already fetched.
+     *
+     * @covers Lunr\DataAccess\MySQLAsyncQueryResult::error_message
+     */
+    public function testInsertIDFetchesDataIfFetchedIsFalse()
+    {
+        $this->mysqli->expects($this->once())
+                     ->method('reap_async_query')
+                     ->will($this->returnValue(FALSE));
+
+        $this->result->insert_id();
+    }
+
+    /**
+     * Test that insert_id() doesn't try to fetch data if it is already fetched.
+     *
+     * @covers Lunr\DataAccess\MySQLAsyncQueryResult::error_message
+     */
+    public function testInsertIDDoesNotFetchDataIfFetchedIsTrue()
+    {
+        $property = $this->result_reflection->getProperty('fetched');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->result, TRUE);
+
+        $this->mysqli->expects($this->never())
+                     ->method('reap_async_query')
+                     ->will($this->returnValue(FALSE));
+
+        $this->result->insert_id();
+
+        $property->setValue($this->result, FALSE);
+    }
+
+    /**
      * Test that result_array() tries to fetch data if it isn't already fetched.
      *
      * @covers Lunr\DataAccess\MySQLAsyncQueryResult::result_array

@@ -262,11 +262,11 @@ class MySQLConnection extends DatabaseConnection
 
         if ($this->connected === TRUE)
         {
-            return new MySQLQueryResult($this->mysqli->query($sql_query), $this->mysqli);
+            return new MySQLQueryResult($sql_query, $this->mysqli->query($sql_query), $this->mysqli);
         }
         else
         {
-            return new MySQLQueryResult(FALSE, $this->mysqli);
+            return new MySQLQueryResult($sql_query, FALSE, $this->mysqli);
         }
     }
 
@@ -286,7 +286,7 @@ class MySQLConnection extends DatabaseConnection
             $this->mysqli->query($sql_query, MYSQLI_ASYNC);
         }
 
-        return new MySQLAsyncQueryResult($this->mysqli);
+        return new MySQLAsyncQueryResult($sql_query, $this->mysqli);
     }
 
     /**

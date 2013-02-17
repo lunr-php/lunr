@@ -82,21 +82,74 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
     }
 
     /**
+     * Test that error message is a string on failed query.
+     */
+    public function testErrorMessageIsString()
+    {
+        $property = $this->result_reflection->getProperty('error_message');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals('bad', $property->getValue($this->result));
+    }
+
+    /**
+     * Test that error number is a number on a failed query.
+     */
+    public function testErrorNumberIsNumber()
+    {
+        $property = $this->result_reflection->getProperty('error_number');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals(666, $property->getValue($this->result));
+    }
+
+    /**
+     * Test that error number is zero on successful query.
+     */
+    public function testInsertIDIsZero()
+    {
+        $property = $this->result_reflection->getProperty('insert_id');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals(0, $property->getValue($this->result));
+    }
+
+    /**
+     * Test that affected rows is a number on successful query.
+     */
+    public function testAffectedRowsIsNumber()
+    {
+        $property = $this->result_reflection->getProperty('affected_rows');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals(10, $property->getValue($this->result));
+    }
+
+    /**
+     * Test that number of rows is a number on successful query.
+     */
+    public function testNumberOfRowsIsNumber()
+    {
+        $property = $this->result_reflection->getProperty('num_rows');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals(10, $property->getValue($this->result));
+    }
+
+    /**
      * Test that number_of_rows() returns a number.
      *
      * @covers Lunr\DataAccess\MySQLQueryResult::number_of_rows
      */
     public function testNumberOfRowsReturnsNumber()
     {
-        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
-
-        $class = $this->result_reflection->getProperty('mysqli');
+        $class = $this->result_reflection->getProperty('num_rows');
         $class->setAccessible(TRUE);
-        $class->setValue($this->result, $mysqli);
+        $class->setValue($this->result, 666);
 
         $value = $this->result->number_of_rows();
         $this->assertInternalType('int', $value);
-        $this->assertEquals(10, $value);
+        $this->assertEquals(666, $value);
     }
 
     /**

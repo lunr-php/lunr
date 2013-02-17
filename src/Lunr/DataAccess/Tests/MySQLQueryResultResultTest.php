@@ -61,17 +61,6 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
     }
 
     /**
-     * Test that the result value is TRUE.
-     */
-    public function testResultIsMysqliResult()
-    {
-        $property = $this->result_reflection->getProperty('result');
-        $property->setAccessible(TRUE);
-
-        $this->assertInstanceOf('Lunr\DataAccess\Tests\MockMySQLiResult', $property->getValue($this->result));
-    }
-
-    /**
      * Test that the has_failed() method returns FALSE.
      *
      * @covers Lunr\DataAccess\MySQLQueryResult::has_failed
@@ -79,6 +68,22 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
     public function testHasFailedReturnsFalse()
     {
         $this->assertFalse($this->result->has_failed());
+    }
+
+    /**
+     * Test that number_of_rows() returns a number.
+     *
+     * @covers Lunr\DataAccess\MySQLQueryResult::number_of_rows
+     */
+    public function testNumberOfRowsReturnsNumber()
+    {
+        $class = $this->result_reflection->getProperty('num_rows');
+        $class->setAccessible(TRUE);
+        $class->setValue($this->result, 5);
+
+        $value = $this->result->number_of_rows();
+        $this->assertInternalType('int', $value);
+        $this->assertEquals(5, $value);
     }
 
     /**

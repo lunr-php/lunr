@@ -15,7 +15,7 @@
 
 namespace Lunr\DataAccess;
 
-use MySQLi_Result;
+use \MySQLi_Result;
 
 /**
  * MySQL/MariaDB query result class.
@@ -27,6 +27,12 @@ use MySQLi_Result;
  */
 class MySQLQueryResult implements DatabaseQueryResultInterface
 {
+
+    /**
+     * The query string that was executed.
+     * @var String
+     */
+    protected $query;
 
     /**
      * Return value from mysqli->query().
@@ -53,17 +59,49 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     protected $freed;
 
     /**
+     * Description of the error.
+     * @var String
+     */
+    protected $error_message;
+
+    /**
+     * Error code.
+     * @var Integer
+     */
+    protected $error_number;
+
+    /**
+     * Autoincremented ID generated on last insert.
+     * @var mixed
+     */
+    protected $insert_id;
+
+    /**
+     * Number of affected rows.
+     * @var Integer
+     */
+    protected $affected_rows;
+
+    /**
+     * Number of rows in the result set.
+     * @var Integer
+     */
+    protected $num_rows;
+
+    /**
      * Constructor.
      *
-     * @param mixed  $result Query result
-     * @param MySQLi $mysqli Shared instance of the MySQLi class
+     * @param String  $query  Executed query
+     * @param mixed   $result Query result
+     * @param MySQLi  $mysqli Shared instance of the MySQLi class
+     * @param Boolean $async  Whether this query was run asynchronous or not
      */
-    public function __construct($result, $mysqli)
+    public function __construct($query, $result, $mysqli, $async = FALSE)
     {
         if (is_object($result))
         {
-            $this->success = TRUE;
-            $this->freed   = FALSE;
+            $this->success  = TRUE;
+            $this->freed    = FALSE;
         }
         else
         {
@@ -73,6 +111,16 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
 
         $this->result = $result;
         $this->mysqli = $mysqli;
+        $this->query  = $query;
+
+        if ($async === FALSE)
+        {
+            $this->error_message = $mysqli->error;
+            $this->error_number  = $mysqli->errno;
+            $this->insert_id     = $mysqli->insert_id;
+            $this->affected_rows = $mysqli->affected_rows;
+            $this->num_rows      = is_object($this->result) ? $this->result->num_rows : $this->affected_rows;
+        }
     }
 
     /**
@@ -86,6 +134,10 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
         unset($this->result);
         unset($this->success);
         unset($this->freed);
+        unset($this->error_message);
+        unset($this->error_number);
+        unset($this->insert_id);
+        unset($this->query);
     }
 
     /**
@@ -113,6 +165,47 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     }
 
     /**
+     * Get string description of the error, if there was one.
+     *
+     * @return String $message Error Message
+     */
+    public function error_message()
+    {
+        return $this->error_message;
+    }
+
+    /**
+     * Get numerical error code of the error, if there was one.
+     *
+     * @return Integer $code Error Code
+     */
+    public function error_number()
+    {
+        return $this->error_number;
+    }
+
+    /**
+     * Get autoincremented ID generated on last insert.
+     *
+     * @return mixed $id If the number is greater than maximal int value it's a String
+     *                   otherwise an Integer
+     */
+    public function insert_id()
+    {
+        return $this->insert_id;
+    }
+
+    /**
+     * Get the executed query.
+     *
+     * @return String $query The executed query
+     */
+    public function query()
+    {
+        return $this->query;
+    }
+
+    /**
      * Returns the number of rows affected by the last query.
      *
      * @return mixed $number Number of rows in the result set.
@@ -121,7 +214,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      */
     public function affected_rows()
     {
-        return $this->mysqli->affected_rows;
+        return $this->affected_rows;
     }
 
     /**
@@ -133,14 +226,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      */
     public function number_of_rows()
     {
-        if (is_object($this->result))
-        {
-            return $this->result->num_rows;
-        }
-        else
-        {
-            return $this->mysqli->affected_rows;
-        }
+        return $this->num_rows;
     }
 
     /**

@@ -16,10 +16,10 @@
 namespace Lunr\DataAccess\Tests;
 
 use Lunr\DataAccess\MySQLQueryResult;
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
-use mysqli;
-use mysqli_result;
+use \PHPUnit_Framework_TestCase;
+use \ReflectionClass;
+use \mysqli;
+use \mysqli_result;
 
 /**
  * This class contains common constructors/destructors and data providers
@@ -59,6 +59,12 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
     protected $mysqli;
 
     /**
+     * The executed query.
+     * @var String
+     */
+    protected $query;
+
+    /**
      * TestCase Constructor passing a MySQLi_result object.
      *
      * @return void
@@ -71,7 +77,9 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
                                                         ->disableOriginalConstructor()
                                                         ->getMock());
 
-        $this->result = new MySQLQueryResult($this->query_result, $this->mysqli);
+        $this->query = 'SELECT * FROM table';
+
+        $this->result = new MySQLQueryResult($this->query, $this->query_result, $this->mysqli);
 
         $this->result_reflection = new ReflectionClass('Lunr\DataAccess\MySQLQueryResult');
     }
@@ -87,7 +95,9 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
 
         $this->mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
-        $this->result = new MySQLQueryResult($this->query_result, $this->mysqli);
+        $this->query = 'SELECT * FROM table';
+
+        $this->result = new MySQLQueryResult($this->query, $this->query_result, $this->mysqli);
 
         $this->result_reflection = new ReflectionClass('Lunr\DataAccess\MySQLQueryResult');
     }
@@ -103,7 +113,9 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
 
         $this->mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
 
-        $this->result = new MySQLQueryResult($this->query_result, $this->mysqli);
+        $this->query = 'SELECT * FROM table';
+
+        $this->result = new MySQLQueryResult($this->query, $this->query_result, $this->mysqli);
 
         $this->result_reflection = new ReflectionClass('Lunr\DataAccess\MySQLQueryResult');
     }
@@ -117,6 +129,7 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
         unset($this->query_result);
         unset($this->result);
         unset($this->result_reflection);
+        unset($this->query);
     }
 
 }

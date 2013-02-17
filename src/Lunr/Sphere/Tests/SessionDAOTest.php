@@ -61,6 +61,12 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
     private $query_builder;
 
     /**
+     * Query string.
+     * @var String
+     */
+    private $query;
+
+    /**
      * Mock instance of the DatabaseConnection class.
      * @var DatabaseQueryResultInterface
      */
@@ -100,8 +106,10 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
                                     ->setConstructorArgs(array(&$this->db))
                                     ->getMock();
 
+        $this->query = 'SELECT * FROM table';
+
         $this->query_result = $this->getMockBuilder('Lunr\DataAccess\MySQLQueryResult')
-                                   ->setConstructorArgs(array($mysqli_result_mock, $mysqli_mock))
+                                   ->setConstructorArgs(array($this->query, $mysqli_result_mock, $mysqli_mock))
                                    ->getMock();
 
         $this->session_dao            = new SessionDAO($this->db);
@@ -118,6 +126,7 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
         unset($this->logger);
         unset($this->db);
         unset($this->query_builder);
+        unset($this->query);
         unset($this->query_result);
         unset($this->session_dao);
         unset($this->session_dao_reflection);

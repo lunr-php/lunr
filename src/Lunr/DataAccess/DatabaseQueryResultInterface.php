@@ -34,6 +34,35 @@ interface DatabaseQueryResultInterface
     public function has_failed();
 
     /**
+     * Get string description of the error, if there was one.
+     *
+     * @return String $message Error Message
+     */
+    public function error_message();
+
+    /**
+     * Get numerical error code of the error, if there was one.
+     *
+     * @return Integer $code Error Code
+     */
+    public function error_number();
+
+    /**
+     * Get autoincremented ID generated on last insert.
+     *
+     * @return mixed $id If the number is greater than maximal int value it's a String
+     *                   otherwise an Integer
+     */
+    public function insert_id();
+
+    /**
+     * Get the executed query.
+     *
+     * @return String $query The executed query
+     */
+    public function query();
+
+    /**
      * Returns the number of rows affected by the last query.
      *
      * @return mixed $number Number of rows in the result set.
