@@ -3,7 +3,7 @@
 /**
  * This file contains the DatabaseAccessObjectResultsTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    DataAccess
@@ -53,6 +53,18 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $query->expects($this->once())
               ->method('has_failed')
               ->will($this->returnValue(TRUE));
+
+        $query->expects($this->once())
+              ->method('error_message')
+              ->will($this->returnValue('message'));
+
+        $query->expects($this->once())
+              ->method('query')
+              ->will($this->returnValue('query'));
+
+        $this->logger->expects($this->once())
+                     ->method('error')
+                     ->with('{query}; failed with error: {error}', array('query' => 'query', 'error' => 'message'));
 
         $method = $this->reflection_dao->getMethod('result_array');
         $method->setAccessible(TRUE);
@@ -137,6 +149,18 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('has_failed')
               ->will($this->returnValue(TRUE));
 
+        $query->expects($this->once())
+              ->method('error_message')
+              ->will($this->returnValue('message'));
+
+        $query->expects($this->once())
+              ->method('query')
+              ->will($this->returnValue('query'));
+
+        $this->logger->expects($this->once())
+                     ->method('error')
+                     ->with('{query}; failed with error: {error}', array('query' => 'query', 'error' => 'message'));
+
         $method = $this->reflection_dao->getMethod('result_row');
         $method->setAccessible(TRUE);
 
@@ -220,6 +244,18 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('has_failed')
               ->will($this->returnValue(TRUE));
 
+        $query->expects($this->once())
+              ->method('error_message')
+              ->will($this->returnValue('message'));
+
+        $query->expects($this->once())
+              ->method('query')
+              ->will($this->returnValue('query'));
+
+        $this->logger->expects($this->once())
+                     ->method('error')
+                     ->with('{query}; failed with error: {error}', array('query' => 'query', 'error' => 'message'));
+
         $method = $this->reflection_dao->getMethod('result_column');
         $method->setAccessible(TRUE);
 
@@ -302,6 +338,18 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $query->expects($this->once())
               ->method('has_failed')
               ->will($this->returnValue(TRUE));
+
+        $query->expects($this->once())
+              ->method('error_message')
+              ->will($this->returnValue('message'));
+
+        $query->expects($this->once())
+              ->method('query')
+              ->will($this->returnValue('query'));
+
+        $this->logger->expects($this->once())
+                     ->method('error')
+                     ->with('{query}; failed with error: {error}', array('query' => 'query', 'error' => 'message'));
 
         $method = $this->reflection_dao->getMethod('result_cell');
         $method->setAccessible(TRUE);

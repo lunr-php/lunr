@@ -3,7 +3,7 @@
 /**
  * This file contains the DatabaseAccessObjectTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    DataAccess
@@ -44,6 +44,12 @@ abstract class DatabaseAccessObjectTest extends PHPUnit_Framework_TestCase
     protected $db;
 
     /**
+     * Mock instance of the Logger class.
+     * @var Logger
+     */
+    protected $logger;
+
+    /**
      * Instance of the DatabaseAccessObject
      * @var DatabaseAccessObject
      */
@@ -64,12 +70,14 @@ abstract class DatabaseAccessObjectTest extends PHPUnit_Framework_TestCase
     {
         $this->pool = NULL;
 
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+
         $this->db = $this->getMockBuilder('Lunr\DataAccess\MySQLConnection')
                          ->disableOriginalConstructor()
                          ->getMock();
 
         $this->dao = $this->getMockBuilder('Lunr\DataAccess\DatabaseAccessObject')
-                          ->setConstructorArgs(array(&$this->db))
+                          ->setConstructorArgs(array($this->db, $this->logger))
                           ->getMockForAbstractClass();
 
         $this->reflection_dao = new ReflectionClass('Lunr\DataAccess\DatabaseAccessObject');
@@ -86,12 +94,14 @@ abstract class DatabaseAccessObjectTest extends PHPUnit_Framework_TestCase
                            ->disableOriginalConstructor()
                            ->getMock();
 
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+
         $this->db = $this->getMockBuilder('Lunr\DataAccess\MySQLConnection')
                          ->disableOriginalConstructor()
                          ->getMock();
 
         $this->dao = $this->getMockBuilder('Lunr\DataAccess\DatabaseAccessObject')
-                          ->setConstructorArgs(array(&$this->db, &$this->pool))
+                          ->setConstructorArgs(array($this->db, $this->logger, $this->pool))
                           ->getMockForAbstractClass();
 
         $this->reflection_dao = new ReflectionClass('Lunr\DataAccess\DatabaseAccessObject');
@@ -104,6 +114,7 @@ abstract class DatabaseAccessObjectTest extends PHPUnit_Framework_TestCase
     {
         unset($this->pool);
         unset($this->db);
+        unset($this->logger);
         unset($this->dao);
         unset($this->reflection_dao);
     }

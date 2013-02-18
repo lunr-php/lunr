@@ -3,7 +3,7 @@
 /**
  * This file contains the DatabaseAccessObjectPoolTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    DataAccess
@@ -40,9 +40,9 @@ class DatabaseAccessObjectPoolTest extends DatabaseAccessObjectTest
     }
 
     /**
-     * Test that DatabaseConnection class is passed by reference.
+     * Test that DatabaseConnection class is passed.
      */
-    public function testDatabaseConnectionIsPassedByReference()
+    public function testDatabaseConnectionIsPassed()
     {
         $property = $this->reflection_dao->getProperty('db');
         $property->setAccessible(TRUE);
@@ -51,9 +51,20 @@ class DatabaseAccessObjectPoolTest extends DatabaseAccessObjectTest
     }
 
     /**
-     * Test that DatabaseConnectionPool is passed by reference.
+     * Test that Logger class is passed.
      */
-    public function testDatabaseConnectionPoolIsPassedByReference()
+    public function testLoggerIsPassed()
+    {
+        $property = $this->reflection_dao->getProperty('logger');
+        $property->setAccessible(TRUE);
+
+        $this->assertSame($this->logger, $property->getValue($this->dao));
+    }
+
+    /**
+     * Test that DatabaseConnectionPool is passed.
+     */
+    public function testDatabaseConnectionPoolIsPassed()
     {
         $property = $this->reflection_dao->getProperty('pool');
         $property->setAccessible(TRUE);

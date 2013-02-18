@@ -4,7 +4,7 @@
  * This file contains the DAO for storing php session information
  * in the database
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   DAO
  * @package    Sphere
@@ -33,10 +33,11 @@ class SessionDAO extends DatabaseAccessObject
      * Constructor.
      *
      * @param DatabaseConnection $connection Shared instance of a database connection class
+     * @param LoggerInterface    $logger     Shared instance of a Logger class
      */
-    public function __construct($connection)
+    public function __construct($connection, $logger)
     {
-        parent::__construct($connection);
+        parent::__construct($connection, $logger);
     }
 
     /**

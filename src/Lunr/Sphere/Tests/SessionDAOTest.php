@@ -3,7 +3,7 @@
 /**
  * This file contains the SessionDAOTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Sphere
@@ -99,11 +99,11 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
                                                         ->getMock());
 
         $this->db = $this->getMockBuilder('Lunr\DataAccess\MySQLConnection')
-                         ->setConstructorArgs(array(&$this->configuration, &$this->logger, $mysqli_mock))
+                         ->setConstructorArgs(array($this->configuration, $this->logger, $mysqli_mock))
                          ->getMock();
 
         $this->query_builder = $this->getMockBuilder('Lunr\DataAccess\MySQLDMLQueryBuilder')
-                                    ->setConstructorArgs(array(&$this->db))
+                                    ->setConstructorArgs(array($this->db))
                                     ->getMock();
 
         $this->query = 'SELECT * FROM table';
@@ -112,7 +112,7 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
                                    ->setConstructorArgs(array($this->query, $mysqli_result_mock, $mysqli_mock))
                                    ->getMock();
 
-        $this->session_dao            = new SessionDAO($this->db);
+        $this->session_dao            = new SessionDAO($this->db, $this->logger);
         $this->session_dao_reflection = new ReflectionClass('Lunr\Sphere\SessionDAO');
 
     }
