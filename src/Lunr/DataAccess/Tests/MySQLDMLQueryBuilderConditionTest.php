@@ -121,6 +121,140 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     }
 
     /**
+     * Test specifying the on part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::on_in
+     */
+    public function testOnIn()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $this->builder->on_in('left', 'right');
+
+        $this->assertEquals('ON left IN right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the on part of a query with non default operator.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::on_like
+     */
+    public function testOnNotIn()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $this->builder->on_in('left', 'right', TRUE);
+
+        $this->assertEquals('ON left NOT IN right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test fluid interface of the on_in method.
+     *
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::on_in
+     */
+    public function testOnInReturnsSelfReference()
+    {
+        $return = $this->builder->on_in('left', 'right');
+
+        $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
+        $this->assertSame($this->builder, $return);
+    }
+
+    /**
+     * Test specifying the on part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::on_between
+     */
+    public function testOnBetween()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $this->builder->on_between('left', 'right');
+
+        $this->assertEquals('ON left BETWEEN right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the on part of a query with non default operator.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::on_between
+     */
+    public function testOnNotBetween()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $this->builder->on_between('left', 'right', TRUE);
+
+        $this->assertEquals('ON left NOT BETWEEN right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test fluid interface of the on_between method.
+     *
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::on_between
+     */
+    public function testOnBetweenReturnsSelfReference()
+    {
+        $return = $this->builder->on_between('left', 'right');
+
+        $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
+        $this->assertSame($this->builder, $return);
+    }
+    /**
+     * Test specifying the on part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::on_regexp
+     */
+    public function testOnRegexp()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $this->builder->on_regexp('left', 'right');
+
+        $this->assertEquals('ON left REGEXP right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the on part of a query with non default operator.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::on_regexp
+     */
+    public function testOnNotRegexp()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $this->builder->on_regexp('left', 'right', TRUE);
+
+        $this->assertEquals('ON left NOT REGEXP right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test fluid interface of the on_regexp method.
+     *
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::on_regexp
+     */
+    public function testOnRegexpReturnsSelfReference()
+    {
+        $return = $this->builder->on_regexp('left', 'right');
+
+        $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
+        $this->assertSame($this->builder, $return);
+    }
+
+    /**
      * Test specifying the where part of a query.
      *
      * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
@@ -211,6 +345,141 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     }
 
     /**
+     * Test specifying the where part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::where_in
+     */
+    public function testWhereIn()
+    {
+        $property = $this->builder_reflection->getProperty('where');
+        $property->setAccessible(TRUE);
+
+        $this->builder->where_in('left', 'right');
+
+        $this->assertEquals('WHERE left IN right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the where part of a query with non default operator.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::where_in
+     */
+    public function testWhereNotIn()
+    {
+        $property = $this->builder_reflection->getProperty('where');
+        $property->setAccessible(TRUE);
+
+        $this->builder->where_in('left', 'right', TRUE);
+
+        $this->assertEquals('WHERE left NOT IN right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test fluid interface of the where_in method.
+     *
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::where_in
+     */
+    public function testWhereInReturnsSelfReference()
+    {
+        $return = $this->builder->where_in('left', 'right');
+
+        $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
+        $this->assertSame($this->builder, $return);
+    }
+
+    /**
+     * Test specifying the where part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::where_between
+     */
+    public function testWhereBetween()
+    {
+        $property = $this->builder_reflection->getProperty('where');
+        $property->setAccessible(TRUE);
+
+        $this->builder->where_between('left', 'right');
+
+        $this->assertEquals('WHERE left BETWEEN right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the where part of a query with non default operator.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::where_between
+     */
+    public function testWhereNotBetween()
+    {
+        $property = $this->builder_reflection->getProperty('where');
+        $property->setAccessible(TRUE);
+
+        $this->builder->where_between('left', 'right', TRUE);
+
+        $this->assertEquals('WHERE left NOT BETWEEN right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test fluid interface of the where_between method.
+     *
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::where_between
+     */
+    public function testWhereBetweenReturnsSelfReference()
+    {
+        $return = $this->builder->where_between('left', 'right');
+
+        $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
+        $this->assertSame($this->builder, $return);
+    }
+
+    /**
+     * Test specifying the where part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::where_regexp
+     */
+    public function testWhereRegexp()
+    {
+        $property = $this->builder_reflection->getProperty('where');
+        $property->setAccessible(TRUE);
+
+        $this->builder->where_regexp('left', 'right');
+
+        $this->assertEquals('WHERE left REGEXP right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the where part of a query with non default operator.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::where_regexp
+     */
+    public function testWhereNotRegexp()
+    {
+        $property = $this->builder_reflection->getProperty('where');
+        $property->setAccessible(TRUE);
+
+        $this->builder->where_regexp('left', 'right', TRUE);
+
+        $this->assertEquals('WHERE left NOT REGEXP right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test fluid interface of the where_regexp method.
+     *
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::where_regexp
+     */
+    public function testWhereRegexpReturnsSelfReference()
+    {
+        $return = $this->builder->where_regexp('left', 'right');
+
+        $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
+        $this->assertSame($this->builder, $return);
+    }
+
+    /**
      * Test specifying the having part of a query.
      *
      * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
@@ -275,7 +544,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      * Test specifying the having part of a query with non default operator.
      *
      * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
-     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::where_like
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::having_like
      */
     public function testHavingNotLike()
     {
@@ -295,6 +564,141 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     public function testHavingLikeReturnsSelfReference()
     {
         $return = $this->builder->having_like('left', 'right');
+
+        $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
+        $this->assertSame($this->builder, $return);
+    }
+
+    /**
+     * Test specifying the having part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::having_in
+     */
+    public function testHavingIn()
+    {
+        $property = $this->builder_reflection->getProperty('having');
+        $property->setAccessible(TRUE);
+
+        $this->builder->having_in('left', 'right');
+
+        $this->assertEquals('HAVING left IN right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the having part of a query with non default operator.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::having_in
+     */
+    public function testHavingNotIn()
+    {
+        $property = $this->builder_reflection->getProperty('having');
+        $property->setAccessible(TRUE);
+
+        $this->builder->having_in('left', 'right', TRUE);
+
+        $this->assertEquals('HAVING left NOT IN right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test fluid interface of the having_in method.
+     *
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::having_in
+     */
+    public function testHavingInReturnsSelfReference()
+    {
+        $return = $this->builder->having_in('left', 'right');
+
+        $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
+        $this->assertSame($this->builder, $return);
+    }
+
+    /**
+     * Test specifying the having part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::having_between
+     */
+    public function testHavingBetween()
+    {
+        $property = $this->builder_reflection->getProperty('having');
+        $property->setAccessible(TRUE);
+
+        $this->builder->having_between('left', 'right');
+
+        $this->assertEquals('HAVING left BETWEEN right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the having part of a query with non default operator.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::having_between
+     */
+    public function testHavingNotBetween()
+    {
+        $property = $this->builder_reflection->getProperty('having');
+        $property->setAccessible(TRUE);
+
+        $this->builder->having_between('left', 'right', TRUE);
+
+        $this->assertEquals('HAVING left NOT BETWEEN right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test fluid interface of the having_between method.
+     *
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::having_between
+     */
+    public function testHavingBetweenReturnsSelfReference()
+    {
+        $return = $this->builder->having_between('left', 'right');
+
+        $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
+        $this->assertSame($this->builder, $return);
+    }
+
+    /**
+     * Test specifying the having part of a query.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::having_regexp
+     */
+    public function testHavingRegexp()
+    {
+        $property = $this->builder_reflection->getProperty('having');
+        $property->setAccessible(TRUE);
+
+        $this->builder->having_regexp('left', 'right');
+
+        $this->assertEquals('HAVING left REGEXP right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test specifying the having part of a query with non default operator.
+     *
+     * @depends Lunr\DataAccess\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\DataAccess\MysqlDMLQueryBuilder::having_regexp
+     */
+    public function testHavingNotRegexp()
+    {
+        $property = $this->builder_reflection->getProperty('having');
+        $property->setAccessible(TRUE);
+
+        $this->builder->having_regexp('left', 'right', TRUE);
+
+        $this->assertEquals('HAVING left NOT REGEXP right', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test fluid interface of the having_regexp method.
+     *
+     * @covers  Lunr\DataAccess\MySQLDMLQueryBuilder::having_regexp
+     */
+    public function testHavingRegexpReturnsSelfReference()
+    {
+        $return = $this->builder->having_regexp('left', 'right');
 
         $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
         $this->assertSame($this->builder, $return);

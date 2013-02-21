@@ -444,9 +444,37 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
     }
 
     /**
+    * Define input as a query within parentheses.
+    *
+    * @param String $value Input
+    *
+    * @return String $return Defined within parentheses
+    */
+    public function query_value($value)
+    {
+        return empty($value) ? '' : '(' . $value . ')';
+    }
+
+    /**
+     * Define input as a csv from an array within parentheses
+     *
+     * @param array $value Input
+     *
+     * @return String $output Defined, escaped and within parentheses
+     */
+    public function list_value($array_values)
+    {
+        if(is_array($array_values) === FALSE)
+        {
+            return '';
+        }
+        return '(' . implode(',', $array_values) . ')';
+    }
+
+    /**
      * Define a special collation.
      *
-     * @param mixed  $value     Input
+     * @param mixed $value Input
      * @param String $collation Collation name
      *
      * @return String $return Value with collation definition.

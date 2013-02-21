@@ -109,6 +109,23 @@ interface QueryEscaperInterface
      */
     public function intvalue($value);
 
+    /**
+    * Define input as a query within parentheses.
+    *
+    * @param String $value Input
+    *
+    * @return String $return Defined within parentheses
+    */
+    public function query_value($value);
+
+    /**
+    * Define input as a csv from an array within parentheses
+    *
+    * @param array $value Input
+    *
+    * @return String $return Defined, escaped and within parentheses
+    */
+    public function list_value($value);
 }
 
 ?>
