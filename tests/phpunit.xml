@@ -110,6 +110,12 @@
             <file>src/Lunr/DataAccess/Tests/DatabaseAccessObjectNoPoolTest.php</file>
             <file>src/Lunr/DataAccess/Tests/DatabaseAccessObjectPoolTest.php</file>
             <file>src/Lunr/DataAccess/Tests/DatabaseAccessObjectResultsTest.php</file>
+            <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectBaseTest.php</file>
+            <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectFileTest.php</file>
+            <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectListDirectoriesTest.php</file>
+            <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectListFilesTest.php</file>
+            <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectDirectoryTest.php</file>
+            <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectFindTest.php</file>
             <file>src/Lunr/Spwn/Tests/ResqueJobDispatcherTest.php</file>
 <!--            <file>src/Lunr/Database/Tests/DBManTest.php</file>
             <file>src/Lunr/Database/Tests/DBConTest.php</file>-->
