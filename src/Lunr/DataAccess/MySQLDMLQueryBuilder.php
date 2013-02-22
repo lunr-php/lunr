@@ -465,13 +465,15 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      * Define ON part of a JOIN clause with BETWEEN comparator of the SQL statement.
      *
      * @param String $left   Left expression
-     * @param String $right  Right expression
+     * @param String $lower  The lower bound of the between condition
+     * @param String $upper  The upper bound of the between condition
      * @param String $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
-    public function on_between($left, $right, $negate = FALSE)
+    public function on_between($left, $lower, $upper, $negate = FALSE)
     {
+        $right = $lower . ' AND ' . $upper;
         $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
         $this->sql_condition($left, $right, $operator, 'ON');
         return $this;
@@ -544,13 +546,15 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      * Define WHERE clause with the BETWEEN condition of the SQL statement.
      *
      * @param String $left   Left expression
-     * @param String $right  Right expression
+     * @param String $lower  The lower bound of the between condition
+     * @param String $upper  The upper bound of the between condition
      * @param String $negate Whether to negate the condition or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
-    public function where_between($left, $right, $negate = FALSE)
+    public function where_between($left, $lower, $upper, $negate = FALSE)
     {
+        $right = $lower . ' AND ' . $upper;
         $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
         $this->sql_condition($left, $right, $operator);
         return $this;
@@ -644,13 +648,15 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      * Define HAVING clause with BETWEEN comparator of the SQL statement.
      *
      * @param String $left   Left expression
-     * @param String $right  Right expression
+     * @param String $lower  The lower bound of the between condition
+     * @param String $upper  The upper bound of the between condition
      * @param String $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
-    public function having_between($left, $right, $negate = FALSE)
+    public function having_between($left, $lower, $upper, $negate = FALSE)
     {
+        $right = $lower . ' AND ' . $upper;
         $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
         $this->sql_condition($left, $right, $operator, 'HAVING');
         return $this;

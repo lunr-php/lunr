@@ -140,7 +140,7 @@ interface DMLQueryBuilderInterface
      * @param String $table_reference Table reference to join with.
      * @param String $type            Type of JOIN operation to perform.
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return DMLQueryBuilderInterface $self Self reference
      */
     public function join($table_reference, $type = 'INNER');
 
@@ -173,20 +173,21 @@ interface DMLQueryBuilderInterface
     * @param String $right  Right expression
     * @param String $negate Whether to negate the comparison or not
     *
-    * @return MySQLDMLQueryBuilder $self Self reference
+    * @return DMLQueryBuilderInterface $self Self reference
     */
     public function on_in($left, $right, $negate = FALSE);
 
     /**
-    * Define ON part of a JOIN clause with BETWEEN comparator of the SQL statement.
-    *
-    * @param String $left   Left expression
-    * @param String $right  Right expression
-    * @param String $negate Whether to negate the comparison or not
-    *
-    * @return MySQLDMLQueryBuilder $self Self reference
-    */
-    public function on_between($left, $right, $negate = FALSE);
+     * Define ON part of a JOIN clause with BETWEEN comparator of the SQL statement.
+     *
+     * @param String $left   Left expression
+     * @param String $lower  The lower bound of the between condition
+     * @param String $upper  The upper bound of the between condition
+     * @param String $negate Whether to negate the comparison or not
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function on_between($left, $lower, $upper, $negate = FALSE);
 
     /**
     * Define ON part of a JOIN clause with REGEXP comparator of the SQL statement.
@@ -195,7 +196,7 @@ interface DMLQueryBuilderInterface
     * @param String $right  Right expression
     * @param String $negate Whether to negate the comparison or not
     *
-    * @return MySQLDMLQueryBuilder $self Self reference
+    * @return DMLQueryBuilderInterface $self Self reference
     */
     public function on_regexp($left, $right, $negate = FALSE);
 
@@ -228,20 +229,21 @@ interface DMLQueryBuilderInterface
     * @param String $right  Right expression
     * @param String $negate Whether to negate the condition or not
     *
-    * @return MySQLDMLQueryBuilder $self Self reference
+    * @return DMLQueryBuilderInterface $self Self reference
     */
     public function where_in($left, $right, $negate = FALSE);
 
     /**
-    * Define WHERE clause with the BETWEEN condition of the SQL statement.
-    *
-    * @param String $left   Left expression
-    * @param String $right  Right expression
-    * @param String $negate Whether to negate the condition or not
-    *
-    * @return MySQLDMLQueryBuilder $self Self reference
-    */
-    public function where_between($left, $right, $negate = FALSE);
+     * Define WHERE clause with the BETWEEN condition of the SQL statement.
+     *
+     * @param String $left   Left expression
+     * @param String $lower  The lower bound of the between condition
+     * @param String $upper  The upper bound of the between condition
+     * @param String $negate Whether to negate the condition or not
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function where_between($left, $lower, $upper, $negate = FALSE);
 
     /**
     * Define WHERE clause with the REGEXP condition of the SQL statement.
@@ -250,7 +252,7 @@ interface DMLQueryBuilderInterface
     * @param String $right  Right expression
     * @param String $negate Whether to negate the condition or not
     *
-    * @return MySQLDMLQueryBuilder $self Self reference
+    * @return DMLQueryBuilderInterface $self Self reference
     */
     public function where_regexp($left, $right, $negate = FALSE);
 
@@ -292,20 +294,21 @@ interface DMLQueryBuilderInterface
     * @param String $right  Right expression
     * @param String $negate Whether to negate the comparison or not
     *
-    * @return MySQLDMLQueryBuilder $self Self reference
+    * @return DMLQueryBuilderInterface $self Self reference
     */
     public function having_in($left, $right, $negate = FALSE);
 
     /**
-    * Define HAVING clause with BETWEEN comparator of the SQL statement.
-    *
-    * @param String $left   Left expression
-    * @param String $right  Right expression
-    * @param String $negate Whether to negate the comparison or not
-    *
-    * @return MySQLDMLQueryBuilder $self Self reference
-    */
-    public function having_between($left, $right, $negate = FALSE);
+     * Define HAVING clause with BETWEEN comparator of the SQL statement.
+     *
+     * @param String $left   Left expression
+     * @param String $lower  The lower bound of the between condition
+     * @param String $upper  The upper bound of the between condition
+     * @param String $negate Whether to negate the comparison or not
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function having_between($left, $lower, $upper, $negate = FALSE);
 
     /**
     * Define HAVING clause with REGEXP comparator of the SQL statement.
@@ -314,7 +317,7 @@ interface DMLQueryBuilderInterface
     * @param String $right  Right expression
     * @param String $negate Whether to negate the comparison or not
     *
-    * @return MySQLDMLQueryBuilder $self Self reference
+    * @return DMLQueryBuilderInterface $self Self reference
     */
     public function having_regexp($left, $right, $negate = FALSE);
 

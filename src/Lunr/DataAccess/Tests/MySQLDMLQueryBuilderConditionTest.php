@@ -176,9 +176,9 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
         $property = $this->builder_reflection->getProperty('join');
         $property->setAccessible(TRUE);
 
-        $this->builder->on_between('left', 'right');
+        $this->builder->on_between('left', 'lower', 'upper');
 
-        $this->assertEquals('ON left BETWEEN right', $property->getValue($this->builder));
+        $this->assertEquals('ON left BETWEEN lower AND upper', $property->getValue($this->builder));
     }
 
     /**
@@ -192,9 +192,9 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
         $property = $this->builder_reflection->getProperty('join');
         $property->setAccessible(TRUE);
 
-        $this->builder->on_between('left', 'right', TRUE);
+        $this->builder->on_between('left', 'lower', 'upper', TRUE);
 
-        $this->assertEquals('ON left NOT BETWEEN right', $property->getValue($this->builder));
+        $this->assertEquals('ON left NOT BETWEEN lower AND upper', $property->getValue($this->builder));
     }
 
     /**
@@ -204,7 +204,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      */
     public function testOnBetweenReturnsSelfReference()
     {
-        $return = $this->builder->on_between('left', 'right');
+        $return = $this->builder->on_between('left', 'lower', 'upper');
 
         $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
         $this->assertSame($this->builder, $return);
@@ -400,9 +400,9 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
         $property = $this->builder_reflection->getProperty('where');
         $property->setAccessible(TRUE);
 
-        $this->builder->where_between('left', 'right');
+        $this->builder->where_between('left', 'lower', 'upper');
 
-        $this->assertEquals('WHERE left BETWEEN right', $property->getValue($this->builder));
+        $this->assertEquals('WHERE left BETWEEN lower AND upper', $property->getValue($this->builder));
     }
 
     /**
@@ -416,9 +416,9 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
         $property = $this->builder_reflection->getProperty('where');
         $property->setAccessible(TRUE);
 
-        $this->builder->where_between('left', 'right', TRUE);
+        $this->builder->where_between('left', 'lower', 'upper', TRUE);
 
-        $this->assertEquals('WHERE left NOT BETWEEN right', $property->getValue($this->builder));
+        $this->assertEquals('WHERE left NOT BETWEEN lower AND upper', $property->getValue($this->builder));
     }
 
     /**
@@ -428,7 +428,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      */
     public function testWhereBetweenReturnsSelfReference()
     {
-        $return = $this->builder->where_between('left', 'right');
+        $return = $this->builder->where_between('left', 'lower', 'upper');
 
         $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
         $this->assertSame($this->builder, $return);
@@ -625,9 +625,9 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
         $property = $this->builder_reflection->getProperty('having');
         $property->setAccessible(TRUE);
 
-        $this->builder->having_between('left', 'right');
+        $this->builder->having_between('left', 'lower', 'upper');
 
-        $this->assertEquals('HAVING left BETWEEN right', $property->getValue($this->builder));
+        $this->assertEquals('HAVING left BETWEEN lower AND upper', $property->getValue($this->builder));
     }
 
     /**
@@ -641,9 +641,9 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
         $property = $this->builder_reflection->getProperty('having');
         $property->setAccessible(TRUE);
 
-        $this->builder->having_between('left', 'right', TRUE);
+        $this->builder->having_between('left', 'lower', 'upper', TRUE);
 
-        $this->assertEquals('HAVING left NOT BETWEEN right', $property->getValue($this->builder));
+        $this->assertEquals('HAVING left NOT BETWEEN lower AND upper', $property->getValue($this->builder));
     }
 
     /**
@@ -653,7 +653,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      */
     public function testHavingBetweenReturnsSelfReference()
     {
-        $return = $this->builder->having_between('left', 'right');
+        $return = $this->builder->having_between('left', 'lower', 'upper');
 
         $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
         $this->assertSame($this->builder, $return);
