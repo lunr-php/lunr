@@ -8,7 +8,7 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Vortex
  * @subpackage Libraries
  * @author     Julio Foulquié <julio@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -16,13 +16,13 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core;
+namespace Lunr\Vortex;
 
 /**
  * Apple Push Notifications System Library
  *
  * @category   Libraries
- * @package    Core
+ * @package    Vortex
  * @subpackage Libraries
  * @author     Julio Foulquié <julio@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>

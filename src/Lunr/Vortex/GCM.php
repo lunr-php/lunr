@@ -7,7 +7,7 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Vortex
  * @subpackage Libraries
  * @author     Jose Viso <jose@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
@@ -15,7 +15,7 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core;
+namespace Lunr\Vortex;
 
 use Lunr\Network\Curl;
 
@@ -23,7 +23,7 @@ use Lunr\Network\Curl;
  * Android (GCM) Push Notifications System Library
  *
  * @category   Libraries
- * @package    Core
+ * @package    Vortex
  * @subpackage Libraries
  * @author     Jose Viso <jose@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
