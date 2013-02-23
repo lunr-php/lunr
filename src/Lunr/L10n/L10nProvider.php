@@ -6,7 +6,7 @@
  * is a class accessing a low-level localization
  * infrastructure.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    L10n
@@ -29,17 +29,7 @@ namespace Lunr\L10n;
 abstract class L10nProvider
 {
 
-    /**
-     * Default language.
-     * @var String
-     */
-    protected $default_language;
-
-    /**
-     * Locales location.
-     * @var String
-     */
-    protected $locales_location;
+    use L10nTrait;
 
     /**
      * The language the provider has been initialized with
@@ -52,12 +42,6 @@ abstract class L10nProvider
      * @var String
      */
     protected $domain;
-
-    /**
-     * Shared instance of a Logger class.
-     * @var LoggerInterface
-     */
-    protected $logger;
 
     /**
      * Constructor.
@@ -105,43 +89,6 @@ abstract class L10nProvider
     public function get_language()
     {
         return $this->language;
-    }
-
-    /**
-     * Set the default language.
-     *
-     * @return void
-     */
-    public function set_default_language($language)
-    {
-        $current = setlocale(LC_MESSAGES, 0);
-
-        if (setlocale(LC_MESSAGES, $language) !== FALSE)
-        {
-            $this->default_language = $language;
-            setlocale(LC_MESSAGES, $current);
-        }
-        else
-        {
-            $this->logger->warning('Invalid default language: ' . $language);
-        }
-    }
-
-    /**
-     * Set the location for language files.
-     *
-     * @return void
-     */
-    public function set_locales_location($location)
-    {
-        if (file_exists($location) === TRUE)
-        {
-            $this->locales_location = $location;
-        }
-        else
-        {
-            $this->logger->warning('Invalid locales location: ' . $location);
-        }
     }
 
     /**

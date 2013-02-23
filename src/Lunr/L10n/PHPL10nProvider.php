@@ -4,7 +4,7 @@
  * This file contains the abstract definition for the
  * PHP array Localization Provider.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    L10n
