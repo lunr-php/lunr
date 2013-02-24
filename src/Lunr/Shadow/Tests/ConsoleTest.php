@@ -6,16 +6,16 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Shadow\Tests;
 
-use Lunr\Core\Console;
+use Lunr\Shadow\Console;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -23,10 +23,10 @@ use ReflectionClass;
  * This class contains test methods for the Console class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Console
+ * @covers     Lunr\Shadow\Console
  */
 class ConsoleTest extends PHPUnit_Framework_TestCase
 {
@@ -64,7 +64,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
 
         $this->console = new Console($datetime);
 
-        $this->console_reflection = new ReflectionClass('Lunr\Core\Console');
+        $this->console_reflection = new ReflectionClass('Lunr\Shadow\Console');
     }
 
     /**
@@ -79,7 +79,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
     /**
      * Test the building of an output string.
      *
-     * @covers Lunr\Core\Console::build_cli_output
+     * @covers Lunr\Shadow\Console::build_cli_output
      */
     public function testBuildCliOutput()
     {
@@ -93,7 +93,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
     /**
      * Test the normal output of a string.
      *
-     * @covers Lunr\Core\Console::cli_print
+     * @covers Lunr\Shadow\Console::cli_print
      */
     public function testCliPrint()
     {
@@ -107,7 +107,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
     /**
      * Test the output of a string with a linebreak at the end.
      *
-     * @covers Lunr\Core\Console::cli_println
+     * @covers Lunr\Shadow\Console::cli_println
      */
     public function testCliPrintln()
     {
@@ -121,7 +121,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
     /**
      * Test printing an ok status.
      *
-     * @covers Lunr\Core\Console::cli_print_status
+     * @covers Lunr\Shadow\Console::cli_print_status
      */
     public function testCliPrintStatusOK()
     {
@@ -134,7 +134,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
     /**
      * Test printing a failed status.
      *
-     * @covers Lunr\Core\Console::cli_print_status
+     * @covers Lunr\Shadow\Console::cli_print_status
      */
     public function testCliPrintStatusFailed()
     {

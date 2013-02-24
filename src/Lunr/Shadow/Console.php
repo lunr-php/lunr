@@ -6,14 +6,14 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Shadow
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core;
+namespace Lunr\Shadow;
 
 /**
  * The Console class provides function to immediatly
@@ -22,7 +22,7 @@ namespace Lunr\Core;
  * it's primary usecase lies.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Shadow
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
