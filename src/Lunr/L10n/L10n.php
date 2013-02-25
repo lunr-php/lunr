@@ -17,10 +17,6 @@
 
 namespace Lunr\L10n;
 
-use Lunr\Core\DateTime;
-use UnexpectedValueException;
-use DirectoryIterator;
-
 /**
  * Localization support class
  *
@@ -33,17 +29,13 @@ use DirectoryIterator;
 class L10n
 {
 
-    /**
-     * Instance of the DateTime class.
-     * @var DateTime
-     */
-    private $datetime;
+    use L10nTrait;
 
     /**
-     * Shared instance of the Configuration class.
-     * @var Configuration
+     * Shared instance of a FilesystemAccessObject class.
+     * @var FilesystemAccessObjectInterface
      */
-    private $configuration;
+    private $fao;
 
     /**
      * Static list of supported languages
@@ -54,13 +46,16 @@ class L10n
     /**
      * Constructor.
      *
-     * @param DateTime      $datetime      Instance of the DateTime class
-     * @param Configuration $configuration Shared instance of the Configuration class
+     * @param LoggerInterface                 $logger Shared instance of a Logger class.
+     * @param FilesystemAccessObjectInterface $fao    Shared instance of a FilesystemAccessObject class.
      */
-    public function __construct($datetime, $configuration)
+    public function __construct($logger, $fao)
     {
-        $this->datetime      = $datetime;
-        $this->configuration = $configuration;
+        $this->logger   = $logger;
+        $this->fao      = $fao;
+
+        $this->default_language = 'en_US';
+        $this->locales_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
     }
 
     /**
@@ -68,8 +63,8 @@ class L10n
      */
     public function __destruct()
     {
-        unset($this->datetime);
-        unset($this->configuration);
+        unset($this->logger);
+        unset($this->fao);
     }
 
     /**
@@ -87,43 +82,12 @@ class L10n
             return self::$languages;
         }
 
-        self::$languages = array();
+        self::$languages = $this->fao->get_list_of_directories($this->locales_location);
 
-        try
-        {
-            $dir = new DirectoryIterator($this->configuration['l10n']['locales']);
-            foreach ($dir as $file)
-            {
-                if (!$file->isDot() && $file->isDir())
-                {
-                    self::$languages[] = $dir->getFilename();
-                }
-            }
-        }
-        catch(UnexpectedValueException $e)
-        {
-            //Nothing to do
-        }
-
-        self::$languages[] = $this->configuration['l10n']['default_language'];
+        self::$languages[] = $this->default_language;
         self::$languages   = array_unique(self::$languages);
 
         return self::$languages;
-    }
-
-    /**
-     * Set a cookie with the language information used for displaying strings.
-     *
-     * @param String $language The language to set
-     *
-     * @return String $lang The POSIX locale that has been deemed most
-     *                      appropriate
-     */
-    public function set_language($language)
-    {
-        $lang = $this->iso_to_posix($language);
-        setcookie('lang', $lang, $this->datetime->get_delayed_timestamp('+1year'), '/');
-        return $lang;
     }
 
     /**
@@ -146,7 +110,7 @@ class L10n
             }
         }
 
-        return $this->configuration['l10n']['default_language'];
+        return $this->default_language;
     }
 
 }

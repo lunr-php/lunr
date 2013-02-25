@@ -16,8 +16,6 @@
 namespace Lunr\L10n\Tests;
 
 use Lunr\L10n\L10n;
-use Lunr\Core\DateTime;
-use Lunr\Core\Configuration;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -37,45 +35,44 @@ class L10nTest extends PHPUnit_Framework_TestCase
      * Instance of the L10n class.
      * @var L10n
      */
-    private $l10n;
+    protected $class;
 
     /**
      * Reflection Instance of the L10n class.
      */
-    private $l10n_reflection;
+    protected $reflection;
+
+    /**
+     * Mock instance of a Logger class.
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
+     * Mock instance of a FilesystemAccessObject class.
+     * @var FilesystemAccessObjectInterface
+     */
+    protected $fao;
 
     /**
      * Array of supported languages.
      * @var array
      */
-    private $languages;
-
-    /**
-     * Default language to test with.
-     * @var String
-     */
-    const DEFAULT_LANG = 'nl_NL';
+    protected $languages;
 
     /**
      * TestCase Constructor.
      */
     public function setUp()
     {
-        $config                             = new Configuration(array());
-        $config['l10n']                     = array();
-        $config['l10n']['default_language'] = self::DEFAULT_LANG;
-        $config['l10n']['locales']          = dirname(__FILE__) . '/../../../../tests/statics/l10n';
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->fao    = $this->getMock('Lunr\DataAccess\FilesystemAccessObjectInterface');
 
-        $datetime = $this->getMock('Lunr\Core\DateTime');
-        $datetime->expects($this->any())
-                 ->method('get_delayed_timestamp')
-                 ->will($this->returnValue(strtotime('+1 year')));
+        $this->class = new L10n($this->logger, $this->fao);
 
-        $this->l10n = new L10n($datetime, $config);
+        $this->reflection = new ReflectionClass('Lunr\L10n\L10n');
 
-        $this->l10n_reflection = new ReflectionClass('Lunr\L10n\L10n');
-
-        $this->languages = array('de_DE', 'en_GB', 'nl_NL');
+        $this->languages = array('de_DE', 'en_US', 'nl_NL');
     }
 
     /**
@@ -83,8 +80,10 @@ class L10nTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->l10n);
-        unset($this->l10n_reflection);
+        unset($this->logger);
+        unset($this->fao);
+        unset($this->class);
+        unset($this->reflection);
         unset($this->languages);
     }
 
@@ -93,9 +92,62 @@ class L10nTest extends PHPUnit_Framework_TestCase
      */
     public function testLanguagesEmpty()
     {
-        $properties = $this->l10n_reflection->getStaticProperties();
+        $properties = $this->reflection->getStaticProperties();
         $languages  = $properties['languages'];
         $this->assertEmpty($languages);
+    }
+
+    /**
+     * Test that the Logger class is passed correctly.
+     */
+    public function testLoggerIsPassedCorrectly()
+    {
+        $property = $this->reflection->getProperty('logger');
+        $property->setAccessible(TRUE);
+
+        $value = $property->getValue($this->class);
+
+        $this->assertInstanceOf('Psr\Log\LoggerInterface', $value);
+        $this->assertSame($this->logger, $value);
+    }
+
+    /**
+     * Test that the FilesystemAccessObject class is passed correctly.
+     */
+    public function testFAOIsPassedCorrectly()
+    {
+        $property = $this->reflection->getProperty('fao');
+        $property->setAccessible(TRUE);
+
+        $value = $property->getValue($this->class);
+
+        $this->assertInstanceOf('Lunr\DataAccess\FilesystemAccessObjectInterface', $value);
+        $this->assertSame($this->fao, $value);
+    }
+
+    /**
+     * Test that the language is correctly stored in the object.
+     */
+    public function testDefaultLanguageSetCorrectly()
+    {
+        $property = $this->reflection->getProperty('default_language');
+        $property->setAccessible(TRUE);
+
+        $this->assertEquals('en_US', $property->getValue($this->class));
+    }
+
+    /**
+     * Test that the language is correctly stored in the object.
+     */
+    public function testLocaleLocationSetCorrectly()
+    {
+        $property = $this->reflection->getProperty('locales_location');
+        $property->setAccessible(TRUE);
+
+        // /usr/bin/l10n by default
+        $default_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
+
+        $this->assertEquals($default_location, $property->getValue($this->class));
     }
 
     /**
@@ -106,7 +158,12 @@ class L10nTest extends PHPUnit_Framework_TestCase
      */
     public function testInitialGetSupportedLanguages()
     {
-        $languages = $this->l10n->get_supported_languages();
+        $this->fao->expects($this->once())
+                  ->method('get_list_of_directories')
+                  ->with(dirname($_SERVER['PHP_SELF']) . '/l10n')
+                  ->will($this->returnValue(array('de_DE', 'nl_NL')));
+
+        $languages = $this->class->get_supported_languages();
         sort($languages);
         $this->assertEquals($this->languages, $languages);
     }
@@ -118,7 +175,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
      */
     public function testLanguagesPopulated()
     {
-        $properties = $this->l10n_reflection->getStaticProperties();
+        $properties = $this->reflection->getStaticProperties();
         $languages  = $properties['languages'];
         sort($languages);
         $this->assertEquals($this->languages, $languages);
@@ -132,7 +189,10 @@ class L10nTest extends PHPUnit_Framework_TestCase
      */
     public function testCachedGetSupportedLanguages()
     {
-        $languages = $this->l10n->get_supported_languages();
+        $this->fao->expects($this->never())
+                  ->method('get_list_of_directories');
+
+        $languages = $this->class->get_supported_languages();
         sort($languages);
         $this->assertEquals($this->languages, $languages);
     }
@@ -149,7 +209,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
      */
     public function testIsoToPosixForSupportedLanguages($iso, $posix)
     {
-        $this->assertEquals($posix, $this->l10n->iso_to_posix($iso));
+        $this->assertEquals($posix, $this->class->iso_to_posix($iso));
     }
 
     /**
@@ -163,66 +223,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
      */
     public function testIsoToPosixForUnsupportedLanguages($iso)
     {
-        $this->assertEquals(self::DEFAULT_LANG, $this->l10n->iso_to_posix($iso));
-    }
-
-    /**
-     * Test that we do not have an existing cookie polluting this test.
-     */
-    public function testCookieNotSet()
-    {
-        $this->assertFalse(isset($_COOKIE['lang']));
-    }
-
-    /**
-     * Test set_language for supported languages.
-     *
-     * @param String $language ISO language definition
-     * @param String $locale   POSIX language definition
-     *
-     * @runInSeparateProcess
-     *
-     * @depends      testIsoToPosixForSupportedLanguages
-     * @dataProvider supportedLanguagesProvider
-     * @covers       Lunr\L10n\L10n::set_language
-     */
-    public function testSetLanguageForSupportedLanguages($language, $locale)
-    {
-        $this->assertEquals($locale, $this->l10n->set_language($language));
-    }
-
-    /**
-     * Test set_language for unsupported languages.
-     *
-     * @param String $language ISO language definition
-     *
-     * @runInSeparateProcess
-     *
-     * @depends      testIsoToPosixForUnsupportedLanguages
-     * @dataProvider unsupportedLanguagesProvider
-     * @covers       Lunr\L10n\L10n::set_language
-     */
-    public function testSetLanguageForUnsupportedLanguages($language)
-    {
-        $this->assertEquals(self::DEFAULT_LANG, $this->l10n->set_language($language));
-    }
-
-    /**
-     * Test set_language sets a cookie correctly.
-     *
-     * @param String $language ISO language definition
-     * @param String $locale   POSIX language definition
-     *
-     * @runInSeparateProcess
-     *
-     * @depends      testCookieNotSet
-     * @depends      testIsoToPosixForSupportedLanguages
-     * @dataProvider supportedLanguagesProvider
-     * @covers       Lunr\L10n\L10n::set_language
-     */
-    public function testSetLanguageSetsCookie($language, $locale)
-    {
-        ///TODO: Requires a cookie class
+        $this->assertEquals('en_US', $this->class->iso_to_posix($iso));
     }
 
     /**
@@ -233,7 +234,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
     public function supportedLanguagesProvider()
     {
         $languages   = array();
-        $languages[] = array('en', 'en_GB');
+        $languages[] = array('en', 'en_US');
         $languages[] = array('nl', 'nl_NL');
 
         return $languages;
