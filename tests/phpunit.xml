@@ -41,6 +41,7 @@
             <file>src/Lunr/Fdbk/Tests/PSR3LoggerTest.php</file>
             <file>src/Lunr/Fdbk/Tests/PHPLoggerTest.php</file>
             <file>src/Lunr/Fdbk/Tests/FileLoggerTest.php</file>
+            <file>src/Lunr/Core/Tests/ErrorEnumTraitTest.php</file>
             <file>src/Lunr/Core/Tests/ControllerTest.php</file>
             <file>src/Lunr/Core/Tests/ViewBaseTest.php</file>
             <file>src/Lunr/Core/Tests/ViewHelpersTest.php</file>

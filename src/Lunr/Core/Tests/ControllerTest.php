@@ -115,33 +115,18 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test setting error enums.
-     *
-     * @covers Lunr\Core\Controller::set_error_enums
-     */
-    public function testSetErrorEnums()
-    {
-        $ERROR['not_implemented'] = 503;
-
-        $this->controller->set_error_enums($ERROR);
-
-        $property = $this->controller_reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->controller);
-
-        $this->assertEquals($ERROR, $value);
-        $this->assertSame($ERROR, $value);
-    }
-
-    /**
      * Test calling unimplemented methods with error enums set.
      *
-     * @depends testSetErrorEnums
      * @covers  Lunr\Core\Controller::__call
      */
     public function testNonImplementedCallWithEnumsSet()
     {
+        $ERROR['not_implemented'] = 503;
+
+        $property = $this->controller_reflection->getProperty('error');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->controller, $ERROR);
+
         $this->response->expects($this->at(0))
                        ->method('__set')
                        ->with($this->equalTo('return_code'));
@@ -149,10 +134,6 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         $this->response->expects($this->at(1))
                        ->method('__set')
                        ->with($this->equalTo('errmsg'));
-
-        $ERROR['not_implemented'] = 503;
-
-        $this->controller->set_error_enums($ERROR);
 
         $this->controller->unimplemented();
     }

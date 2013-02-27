@@ -26,17 +26,13 @@ namespace Lunr\Core;
 abstract class Controller
 {
 
+    use ErrorEnumTrait;
+
     /**
      * Shared instance of the Response class.
      * @var Response
      */
     protected $response;
-
-    /**
-     * Set of error enums.
-     * @var array
-     */
-    protected $error;
 
     /**
      * Constructor.
@@ -74,18 +70,6 @@ abstract class Controller
         }
 
         $this->response->errmsg = 'Not implemented!';
-    }
-
-    /**
-     * Store a set of error enums.
-     *
-     * @param array &$enums An array of error enums
-     *
-     * @return void
-     */
-    public function set_error_enums(&$enums)
-    {
-        $this->error =& $enums;
     }
 
 }
