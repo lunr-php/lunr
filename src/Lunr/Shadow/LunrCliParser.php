@@ -4,7 +4,7 @@
  * This file contains another implementation of a
  * command line argument parser, like getopt.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Shadow
@@ -29,7 +29,7 @@ namespace Lunr\Shadow;
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-class CliParser
+class LunrCliParser
 {
 
     /**
@@ -69,18 +69,27 @@ class CliParser
     private $error;
 
     /**
+     * Shared instance of a logger class.
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * Constructor.
      *
-     * @param array $shortopts List of supported short arguments
-     * @param array $longopts  List of supported long arguments (optional)
+     * @param LoggerInterface $logger    Shared instance of a Logger class
+     * @param array           $shortopts List of supported short arguments
+     * @param array           $longopts  List of supported long arguments (optional)
      */
-    public function __construct($shortopts, $longopts = '')
+    public function __construct($logger, $shortopts, $longopts = '')
     {
         $this->short   = $shortopts;
         $this->long    = $longopts;
+        $this->args    = array();
         $this->checked = array();
         $this->ast     = array();
         $this->error   = FALSE;
+        $this->logger  = $logger;
     }
 
     /**
@@ -94,6 +103,7 @@ class CliParser
         unset($this->checked);
         unset($this->ast);
         unset($this->error);
+        unset($this->logger);
     }
 
     /**
@@ -122,7 +132,7 @@ class CliParser
      *
      * @return boolean $error Whether there was a parse error or not
      */
-    public function parse_error()
+    public function is_invalid_commandline()
     {
         return $this->error;
     }
@@ -140,31 +150,38 @@ class CliParser
     private function is_opt($opt, $index, $toplevel = FALSE)
     {
         array_push($this->checked, $opt);
-        if (strlen($opt) != 0)
+
+        if ($opt{0} == '-')
         {
-            if ($opt{0} == '-')
+            $param = substr($opt, 1);
+            if ($param !== FALSE)
             {
-                $param = substr($opt, 1);
-                if (strlen($param) != 0)
+                if($param{0} == '-')
                 {
-                    if($param{0} == '-')
+                    if (strlen($param) > 1)
                     {
                         return $this->is_valid_long(substr($param, 1), $index);
                     }
                     else
                     {
-                        return $this->is_valid($param, $index);
+                        return $this->is_valid_long($opt, $index);
                     }
+
                 }
                 else
                 {
-                    return $this->is_valid($param, $index);
+                    return $this->is_valid_short($param, $index);
                 }
             }
-            elseif($toplevel)
+            else
             {
-                echo "Superfluos argument: $opt\n";
+                return $this->is_valid_short($opt, $index);
             }
+        }
+        elseif($toplevel)
+        {
+            $context = [ 'parameter' => $opt ];
+            $this->logger->notice('Superfluous argument: {parameter}', $context);
         }
 
         return FALSE;
@@ -178,22 +195,18 @@ class CliParser
      *
      * @return boolean $return Success or Failure
      */
-    private function is_valid($opt, $index)
+    private function is_valid_short($opt, $index)
     {
         $pos = strpos($this->short, $opt);
         if($pos !== FALSE)
         {
             $this->ast[$opt] = array();
-            return $this->check_argument(
-                $opt,
-                $index,
-                $pos,
-                $this->short
-            );
+            return $this->check_argument($opt, $index, $pos, $this->short);
         }
         else
         {
-            echo 'Invalid parameter given: -' . $opt . "\n";
+            $context = [ 'parameter' => $opt ];
+            $this->logger->error('Invalid parameter given: {parameter}', $context);
             $this->error = TRUE;
         }
 
@@ -220,8 +233,7 @@ class CliParser
                     $match = TRUE;
                     $args  = $key;
                 }
-                elseif ($arg{strlen($opt)} == ':'
-                    || $arg{strlen($opt)} == ';')
+                elseif ($arg{strlen($opt)} == ':' || $arg{strlen($opt)} == ';')
                 {
                     $match = TRUE;
                     $args  = $key;
@@ -232,16 +244,12 @@ class CliParser
         if($match)
         {
             $this->ast[$opt] = array();
-            return $this->check_argument(
-                $opt,
-                $index,
-                strlen($opt) - 1,
-                $this->long[$args]
-            );
+            return $this->check_argument($opt, $index, strlen($opt) - 1, $this->long[$args]);
         }
         else
         {
-            echo 'Invalid parameter given: --' . $opt . "\n";
+            $context = [ 'parameter' => $opt ];
+            $this->logger->error('Invalid parameter given: {parameter}', $context);
             $this->error = TRUE;
             return FALSE;
         }
@@ -263,29 +271,23 @@ class CliParser
         $next = $index + 1;
         if($pos + 1 < strlen($a))
         {
-            if($a{$pos + 1} == ':')
+            if(!in_array($a{$pos + 1}, array(':', ';')))
             {
-                if (count($this->args) > $next)
+                return FALSE;
+            }
+
+            $type = $a{$pos + 1} == ':' ? ':' : ';';
+
+            if (count($this->args) > $next && strlen($this->args[$next]) != 0)
+            {
+                if (!$this->is_opt($this->args[$next], $next) && $this->args[$next]{0} != '-')
                 {
-                    if (!$this->is_opt($this->args[$next], $next)
-                        && $this->args[$next]{0} != '-')
+                    array_push($this->ast[$opt], $this->args[$next]);
+                    if ($pos + 2 < strlen($a))
                     {
-                        array_push($this->ast[$opt], $this->args[$next]);
-                        if ($pos + 2 < strlen($a))
+                        if (($type == ':' && $a{$pos + 2} == ':') || $a{$pos + 2} == ';')
                         {
-                            if ($a{$pos + 2} == ':' || $a{$pos + 2} == ';')
-                            {
-                                return $this->check_argument(
-                                    $opt,
-                                    $next,
-                                    $pos + 1,
-                                    $a
-                                );
-                            }
-                            else
-                            {
-                                return TRUE;
-                            }
+                            return $this->check_argument($opt, $next, $pos + 1, $a);
                         }
                         else
                         {
@@ -294,61 +296,29 @@ class CliParser
                     }
                     else
                     {
-                        echo 'Missing argument for -' . $opt . "\n";
-                        $this->error = TRUE;
+                        return TRUE;
                     }
                 }
-                else
+                elseif ($type == ':')
                 {
-                    echo 'Missing argument for -' . $opt . "\n";
+                    $context = [ 'parameter' => $opt ];
+                    $this->logger->error('Missing argument for -{parameter}', $context);
                     $this->error = TRUE;
                 }
             }
-            elseif($a{$pos + 1} == ';')
+            elseif ($type == ':')
             {
-                if (count($this->args) > $next
-                    && strlen($this->args[$next]) != 0)
-                {
-                    if (!$this->is_opt($this->args[$next], $next)
-                        && $this->args[$next]{0} != '-')
-                    {
-                        array_push($this->ast[$opt], $this->args[$next]);
-                        if ($pos + 2 < strlen($a))
-                        {
-                            if ($a{$pos + 2} == ';')
-                            {
-                                return $this->check_argument(
-                                    $opt,
-                                    $next,
-                                    $pos + 1,
-                                    $a
-                                );
-                            }
-                            else
-                            {
-                                return TRUE;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        //echo "Missing optional argument for -".$opt."\n";
-                    }
-                }
-                else
-                {
-                    //echo "Missing optional argument for -".$opt."\n";
-                }
+                $context = [ 'parameter' => $opt ];
+                $this->logger->error('Missing argument for -{parameter}', $context);
+                $this->error = TRUE;
             }
-            elseif (count($this->args) > $next && !strpos($a, $opt))
-            {
-                if (!$this->is_opt($this->args[$next], $next))
-                {
-                    echo 'Superfluos argument: ' . $this->args[$next] . "\n";
-                }
+        }
+        elseif (count($this->args) > $next && !strpos($a, $opt))
+        {
+            $context = [ 'argument' => $this->args[$next] ];
+            $this->logger->notice('Superfluous argument: {argument}', $context);
 
-                return TRUE;
-            }
+            return TRUE;
         }
 
         return FALSE;

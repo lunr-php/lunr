@@ -36,7 +36,6 @@
             <file>src/Lunr/Core/Tests/RequestStoreTest.php</file>
             <file>src/Lunr/Core/Tests/RequestGetTest.php</file>
             <file>src/Lunr/Core/Tests/ResponseTest.php</file>
-            <file>src/Lunr/Shadow/Tests/ConsoleTest.php</file>
             <file>src/Lunr/Fdbk/Tests/PSR3LoggerTest.php</file>
             <file>src/Lunr/Fdbk/Tests/PHPLoggerTest.php</file>
             <file>src/Lunr/Fdbk/Tests/FileLoggerTest.php</file>
@@ -82,7 +81,6 @@
             <file>src/Lunr/DataAccess/Tests/MySQLQueryResultResultTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLAsyncQueryResultBaseTest.php</file>
             <file>src/Lunr/DataAccess/Tests/MySQLAsyncQueryResultFetchTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/class.mysqlasyncqueryresult.free.test.php</file>
             <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderBaseTest.php</file>
             <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderEscapeTest.php</file>
             <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderEscapeValuesTest.php</file>
@@ -121,6 +119,15 @@
             <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectDirectoryTest.php</file>
             <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectFindTest.php</file>
             <file>src/Lunr/Spawn/Tests/ResqueJobDispatcherTest.php</file>
+            <file>src/Lunr/Shadow/Tests/ConsoleTest.php</file>
+            <file>src/Lunr/Shadow/Tests/LunrCliParserBaseTest.php</file>
+            <file>src/Lunr/Shadow/Tests/LunrCliParserCheckArgumentTest.php</file>
+            <file>src/Lunr/Shadow/Tests/LunrCliParserCheckObligatoryArgumentTest.php</file>
+            <file>src/Lunr/Shadow/Tests/LunrCliParserCheckOptionalArgumentTest.php</file>
+            <file>src/Lunr/Shadow/Tests/LunrCliParserValidShortTest.php</file>
+            <file>src/Lunr/Shadow/Tests/LunrCliParserValidLongTest.php</file>
+            <file>src/Lunr/Shadow/Tests/LunrCliParserIsOptTest.php</file>
+            <file>src/Lunr/Shadow/Tests/LunrCliParserParseArgvTest.php</file>
 <!--            <file>src/Lunr/Database/Tests/DBManTest.php</file>
             <file>src/Lunr/Database/Tests/DBConTest.php</file>-->
         </testsuite>
