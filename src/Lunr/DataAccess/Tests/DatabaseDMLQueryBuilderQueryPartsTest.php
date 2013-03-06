@@ -416,6 +416,27 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+     * Test that specifying a join clause sets the property is_join.
+     *
+     * @covers Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_join
+     */
+    public function testJoinSetsIsJoin()
+    {
+        $method = $this->builder_reflection->getMethod('sql_join');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('is_join');
+        $property->setAccessible(TRUE);
+
+        $method->invokeArgs($this->builder, array('table', 'INNER'));
+
+        $this->assertTrue($property->getValue($this->builder));
+    }
+
+    /**
      * Test specifying a logical connector for the query.
      *
      * @covers Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_connector
@@ -473,6 +494,31 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
         $method->invokeArgs($this->builder, array('a', 'b', '=', $keyword));
 
         $string = "$keyword a = b";
+
+        $this->assertEquals($string, $property->getValue($this->builder));
+    }
+
+    /**
+    * Test creating a simple JOIN ON statement.
+    *
+    * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_condition
+    */
+    public function testConditionCreatesSimpleJoinStatement()
+    {
+        $method = $this->builder_reflection->getMethod('sql_condition');
+        $method->setAccessible(TRUE);
+
+        $property = $this->builder_reflection->getProperty('is_join');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->builder, TRUE);
+
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->builder, 'JOIN table');
+
+        $method->invokeArgs($this->builder, array('a', 'b', '=', 'ON'));
+
+        $string = 'JOIN table ON a = b';
 
         $this->assertEquals($string, $property->getValue($this->builder));
     }

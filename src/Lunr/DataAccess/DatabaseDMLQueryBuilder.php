@@ -163,6 +163,12 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
     protected $connector;
 
     /**
+     * SQL Query part: Boolean identifying if we are joining tables
+     * @var Boolean
+     */
+    protected $is_join;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -188,6 +194,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         $this->values           = '';
         $this->select_statement = '';
         $this->compound         = '';
+        $this->is_join          = FALSE;
     }
 
     /**
@@ -216,6 +223,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         unset($this->column_names);
         unset($this->values);
         unset($this->select_statement);
+        unset($this->is_join);
     }
 
     /**
@@ -598,6 +606,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         }
 
         $this->join .= $join . $table_reference . $this->prepare_index_hints($index_hints);
+
+        $this->is_join = TRUE;
     }
 
     /**
@@ -716,10 +726,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
     {
         $condition = ($base === 'ON') ? 'join' : strtolower($base);
 
-        if ($this->$condition == '')
+        if ($this->$condition == '' || $this->is_join)
         {
-            $this->$condition = $base;
+            $this->$condition = ltrim($this->$condition . ' ' . $base);
             $this->connector  = '';
+            $this->is_join    = FALSE;
         }
         elseif ($this->connector != '')
         {
