@@ -148,7 +148,7 @@ class Pagination
      */
     public function initialize($config)
     {
-        // empty(0) is true and be want to avoid it, so we check if cursor is 0
+        // empty(0) is true and we want to avoid it, so we check if cursor is 0
         if ($config['current_page'] == 0
             || (isset($config['current_page'])
                 && !empty($config['current_page'])))
@@ -218,7 +218,7 @@ class Pagination
      *
      * @param Integer $amount The amount of previous pages
      *
-     * @return void
+     * @return mixed $html HTML string on success, FALSE on failure
      */
     private function build_previous($amount)
     {
@@ -256,7 +256,7 @@ class Pagination
      *
      * @param Integer $amount The amount of next pages
      *
-     * @return void
+     * @return mixed $html HTML string on success, FALSE on failure
      */
     private function build_next($amount)
     {
@@ -309,7 +309,7 @@ class Pagination
 
         if ($this->buttons[$type]['enabled'])
         {
-            // these divs wrap the the test (or image) for the buttons:
+            // these divs wrap the test (or image) for the buttons:
             // first, last, previous and second
             $html  = "<div class='paginator_$type'><a href='";
             $html .= $this->base_url . $target . "'>";
