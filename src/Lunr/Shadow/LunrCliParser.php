@@ -116,6 +116,7 @@ class LunrCliParser
     public function parse_argv($args)
     {
         $this->args = $args;
+
         foreach($args as $index => $arg)
         {
             if(!in_array($arg, $this->checked) && $index != 0)
@@ -154,28 +155,24 @@ class LunrCliParser
         if ($opt{0} == '-')
         {
             $param = substr($opt, 1);
-            if ($param !== FALSE)
-            {
-                if($param{0} == '-')
-                {
-                    if (strlen($param) > 1)
-                    {
-                        return $this->is_valid_long(substr($param, 1), $index);
-                    }
-                    else
-                    {
-                        return $this->is_valid_long($opt, $index);
-                    }
 
-                }
-                else
-                {
-                    return $this->is_valid_short($param, $index);
-                }
+            if ($param === FALSE)
+            {
+                return $this->is_valid_short($opt, $index);
+            }
+
+            if($param{0} != '-')
+            {
+                return $this->is_valid_short($param, $index);
+            }
+
+            if (strlen($param) > 1)
+            {
+                return $this->is_valid_long(substr($param, 1), $index);
             }
             else
             {
-                return $this->is_valid_short($opt, $index);
+                return $this->is_valid_long($opt, $index);
             }
         }
         elseif($toplevel)
@@ -198,19 +195,18 @@ class LunrCliParser
     private function is_valid_short($opt, $index)
     {
         $pos = strpos($this->short, $opt);
-        if($pos !== FALSE)
-        {
-            $this->ast[$opt] = array();
-            return $this->check_argument($opt, $index, $pos, $this->short);
-        }
-        else
+
+        if($pos === FALSE)
         {
             $context = [ 'parameter' => $opt ];
             $this->logger->error('Invalid parameter given: {parameter}', $context);
             $this->error = TRUE;
+            return FALSE;
         }
 
-        return FALSE;
+        $this->ast[$opt] = array();
+
+        return $this->check_argument($opt, $index, $pos, $this->short);
     }
 
     /**
@@ -224,6 +220,7 @@ class LunrCliParser
     private function is_valid_long($opt, $index)
     {
         $match = FALSE;
+
         foreach($this->long as $key => $arg)
         {
             if($opt == substr($arg, 0, strlen($opt)))
@@ -241,18 +238,17 @@ class LunrCliParser
             }
         }
 
-        if($match)
-        {
-            $this->ast[$opt] = array();
-            return $this->check_argument($opt, $index, strlen($opt) - 1, $this->long[$args]);
-        }
-        else
+        if($match === FALSE)
         {
             $context = [ 'parameter' => $opt ];
             $this->logger->error('Invalid parameter given: {parameter}', $context);
             $this->error = TRUE;
             return FALSE;
         }
+
+        $this->ast[$opt] = array();
+
+        return $this->check_argument($opt, $index, strlen($opt) - 1, $this->long[$args]);
     }
 
     /**
@@ -269,6 +265,7 @@ class LunrCliParser
     private function check_argument($opt, $index, $pos, $a)
     {
         $next = $index + 1;
+
         if($pos + 1 < strlen($a))
         {
             if(!in_array($a{$pos + 1}, array(':', ';')))
@@ -283,16 +280,15 @@ class LunrCliParser
                 if (!$this->is_opt($this->args[$next], $next) && $this->args[$next]{0} != '-')
                 {
                     array_push($this->ast[$opt], $this->args[$next]);
-                    if ($pos + 2 < strlen($a))
+
+                    if ($pos + 2 >= strlen($a))
                     {
-                        if (($type == ':' && $a{$pos + 2} == ':') || $a{$pos + 2} == ';')
-                        {
-                            return $this->check_argument($opt, $next, $pos + 1, $a);
-                        }
-                        else
-                        {
-                            return TRUE;
-                        }
+                        return TRUE;
+                    }
+
+                    if (($type == ':' && $a{$pos + 2} == ':') || $a{$pos + 2} == ';')
+                    {
+                        return $this->check_argument($opt, $next, $pos + 1, $a);
                     }
                     else
                     {
