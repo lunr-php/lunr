@@ -29,7 +29,7 @@ namespace Lunr\Shadow;
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-class LunrCliParser
+class LunrCliParser implements CliParserInterface
 {
 
     /**
@@ -107,17 +107,15 @@ class LunrCliParser
     }
 
     /**
-     * Parse given arguments.
+     * Parse command line parameters.
      *
-     * @param array $args The arguments given on command line
-     *
-     * @return array $ast The ast of the parsed arguments
+     * @return array $ast Array of parameters and their arguments
      */
-    public function parse_argv($args)
+    public function parse()
     {
-        $this->args = $args;
+        $this->args = $_SERVER["argv"];
 
-        foreach($args as $index => $arg)
+        foreach($this->args as $index => $arg)
         {
             if(!in_array($arg, $this->checked) && $index != 0)
             {
@@ -129,9 +127,9 @@ class LunrCliParser
     }
 
     /**
-     * Parse error information.
+     * Check whether the parsed command line was valid or not.
      *
-     * @return boolean $error Whether there was a parse error or not
+     * @return boolean $invalid TRUE if the command line was invalid, FALSE otherwise
      */
     public function is_invalid_commandline()
     {

@@ -127,7 +127,7 @@
             <file>src/Lunr/Shadow/Tests/LunrCliParserValidShortTest.php</file>
             <file>src/Lunr/Shadow/Tests/LunrCliParserValidLongTest.php</file>
             <file>src/Lunr/Shadow/Tests/LunrCliParserIsOptTest.php</file>
-            <file>src/Lunr/Shadow/Tests/LunrCliParserParseArgvTest.php</file>
+            <file>src/Lunr/Shadow/Tests/LunrCliParserParseTest.php</file>
 <!--            <file>src/Lunr/Database/Tests/DBManTest.php</file>
             <file>src/Lunr/Database/Tests/DBConTest.php</file>-->
         </testsuite>

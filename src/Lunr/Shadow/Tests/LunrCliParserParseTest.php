@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the LunrCliParserParseArgvTest class.
+ * This file contains the LunrCliParserParseTest class.
  *
  * PHP Version 5.4
  *
@@ -16,7 +16,7 @@
 namespace Lunr\Shadow\Tests;
 
 /**
- * This class contains test methods for parse_argv() in the LunrCliParser class.
+ * This class contains test methods for parse() in the LunrCliParser class.
  *
  * @category   Libraries
  * @package    Shadow
@@ -24,19 +24,19 @@ namespace Lunr\Shadow\Tests;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Shadow\LunrCliParser
  */
-class LunrCliParserParseArgvTest extends LunrCliParserTest
+class LunrCliParserParseTest extends LunrCliParserTest
 {
 
     /**
      * Test that parsing no arguments returns an empty array.
      *
-     * @covers Lunr\Shadow\LunrCliParser::parse_argv
+     * @covers Lunr\Shadow\LunrCliParser::parse
      */
     public function testParseArgvWithNoArgumentsReturnsEmptyArray()
     {
-        $args = array('script.php');
+        $_SERVER['argv'] = array('script.php');
 
-        $value = $this->class->parse_argv($args);
+        $value = $this->class->parse();
 
         $this->assertInternalType('array', $value);
         $this->assertEmpty($value);
@@ -49,17 +49,17 @@ class LunrCliParserParseArgvTest extends LunrCliParserTest
      *
      * @dataProvider invalidParameterProvider
      * @depends      Lunr\Shadow\Tests\LunrCliParserIsOptTest::testIsOptReturnsFalseForInvalidParameter
-     * @covers       Lunr\Shadow\LunrCliParser::parse_argv
+     * @covers       Lunr\Shadow\LunrCliParser::parse
      */
     public function testParseArgvWithIncompleteArguments($param)
     {
-        $args = array('script.php', $param);
+        $_SERVER['argv'] = array('script.php', $param);
 
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with('Invalid parameter given: {parameter}', array('parameter' => $param));
 
-        $value = $this->class->parse_argv($args);
+        $value = $this->class->parse();
 
         $this->assertInternalType('array', $value);
         $this->assertEmpty($value);
@@ -72,20 +72,20 @@ class LunrCliParserParseArgvTest extends LunrCliParserTest
      *
      * @dataProvider invalidParameterProvider
      * @depends      Lunr\Shadow\Tests\LunrCliParserIsOptTest::testIsOptSetsErrorTrueForInvalidParameter
-     * @covers       Lunr\Shadow\LunrCliParser::parse_argv
+     * @covers       Lunr\Shadow\LunrCliParser::parse
      */
     public function testParseArgvWithIncompleteArgumentsSetsErrorTrue($param)
     {
         $property = $this->reflection->getProperty('error');
         $property->setAccessible(TRUE);
 
-        $args = array('script.php', $param);
+        $_SERVER['argv'] = array('script.php', $param);
 
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with('Invalid parameter given: {parameter}', array('parameter' => $param));
 
-        $this->class->parse_argv($args);
+        $this->class->parse();
 
         $this->assertTrue($property->getValue($this->class));
     }
@@ -98,7 +98,7 @@ class LunrCliParserParseArgvTest extends LunrCliParserTest
      * @param array  $ast      Array of expected parsed ast
      *
      * @dataProvider validShortParameterProvider
-     * @covers       Lunr\Shadow\LunrCliParser::parse_argv
+     * @covers       Lunr\Shadow\LunrCliParser::parse
      */
     public function testParseValidShortParameters($shortopt, $params, $ast)
     {
@@ -109,7 +109,9 @@ class LunrCliParserParseArgvTest extends LunrCliParserTest
         $this->logger->expects($this->never())
                      ->method('error');
 
-        $value = $this->class->parse_argv($params);
+        $_SERVER['argv'] = $params;
+
+        $value = $this->class->parse();
 
         $this->assertInternalType('array', $value);
         $this->assertEquals($ast, $value);
@@ -123,7 +125,7 @@ class LunrCliParserParseArgvTest extends LunrCliParserTest
      * @param array  $ast      Array of expected parsed ast
      *
      * @dataProvider validLongParameterProvider
-     * @covers       Lunr\Shadow\LunrCliParser::parse_argv
+     * @covers       Lunr\Shadow\LunrCliParser::parse
      */
     public function testParseValidLongParameters($longopt, $params, $ast)
     {
@@ -134,7 +136,9 @@ class LunrCliParserParseArgvTest extends LunrCliParserTest
         $this->logger->expects($this->never())
                      ->method('error');
 
-        $value = $this->class->parse_argv($params);
+        $_SERVER['argv'] = $params;
+
+        $value = $this->class->parse();
 
         $this->assertInternalType('array', $value);
         $this->assertEquals($ast, $value);
