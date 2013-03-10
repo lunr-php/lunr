@@ -66,7 +66,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
-        $this->fao    = $this->getMock('Lunr\DataAccess\FilesystemAccessObjectInterface');
+        $this->fao    = $this->getMock('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface');
 
         $this->class = new L10n($this->logger, $this->fao);
 
@@ -121,7 +121,7 @@ class L10nTest extends PHPUnit_Framework_TestCase
 
         $value = $property->getValue($this->class);
 
-        $this->assertInstanceOf('Lunr\DataAccess\FilesystemAccessObjectInterface', $value);
+        $this->assertInstanceOf('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface', $value);
         $this->assertSame($this->fao, $value);
     }
 

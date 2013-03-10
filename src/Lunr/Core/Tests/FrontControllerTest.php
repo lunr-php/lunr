@@ -73,7 +73,7 @@ abstract class FrontControllerTest extends PHPUnit_Framework_TestCase
 
         $this->response = $this->getMock('Lunr\Core\Response');
 
-        $this->fao = $this->getMock('Lunr\DataAccess\FilesystemAccessObjectInterface');
+        $this->fao = $this->getMock('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface');
 
         $this->class = new FrontController($this->request, $this->response, $this->fao);
 

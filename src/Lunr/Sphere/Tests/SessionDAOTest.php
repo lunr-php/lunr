@@ -16,8 +16,8 @@
 namespace Lunr\Sphere\Tests;
 
 use Lunr\Sphere\SessionDAO;
-use Lunr\DataAccess\Tests\MockMySQLiResult;
-use Lunr\DataAccess\Tests\MockMySQLiSuccessfulConnection;
+use Lunr\Gravity\Database\MySQL\Tests\MockMySQLiResult;
+use Lunr\Gravity\Database\MySQL\Tests\MockMySQLiSuccessfulConnection;
 use Psr\Log\LoggerInterface;
 use \PHPUnit_Framework_TestCase;
 use \ReflectionClass;
@@ -98,17 +98,17 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
                                                         ->disableOriginalConstructor()
                                                         ->getMock());
 
-        $this->db = $this->getMockBuilder('Lunr\DataAccess\MySQLConnection')
+        $this->db = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLConnection')
                          ->setConstructorArgs(array($this->configuration, $this->logger, $mysqli_mock))
                          ->getMock();
 
-        $this->query_builder = $this->getMockBuilder('Lunr\DataAccess\MySQLDMLQueryBuilder')
+        $this->query_builder = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder')
                                     ->setConstructorArgs(array($this->db))
                                     ->getMock();
 
         $this->query = 'SELECT * FROM table';
 
-        $this->query_result = $this->getMockBuilder('Lunr\DataAccess\MySQLQueryResult')
+        $this->query_result = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                                    ->setConstructorArgs(array($this->query, $mysqli_result_mock, $mysqli_mock))
                                    ->getMock();
 

@@ -69,7 +69,7 @@ class FrontControllerBaseTest extends FrontControllerTest
 
         $value = $property->getValue($this->class);
 
-        $this->assertInstanceOf('Lunr\DataAccess\FilesystemAccessObjectInterface', $value);
+        $this->assertInstanceOf('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface', $value);
         $this->assertSame($this->fao, $value);
     }
 

@@ -75,49 +75,49 @@
             <file>src/Lunr/Network/Tests/MailBaseTest.php</file>
             <file>src/Lunr/Network/Tests/MailSetTest.php</file>
             <file>src/Lunr/Network/Tests/MailSendTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLQueryResultBaseTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLQueryResultFailedTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLQueryResultSuccessTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLQueryResultResultTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLAsyncQueryResultBaseTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLAsyncQueryResultFetchTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderBaseTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderEscapeTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderEscapeValuesTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderQueryPartsDeleteTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderQueryPartsInsertTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderQueryPartsUpdateTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseDMLQueryBuilderQueryPartsTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderSelectTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderDeleteTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderInsertTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderUpdateTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderLimitTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderEscapeTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderConditionTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderOrderByTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLDMLQueryBuilderGroupByTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseConnectionTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLConnectionBaseTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLConnectionSetTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLConnectionConnectTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLConnectionQueryTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLConnectionEscapeTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/MySQLConnectionTransactionTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseConnectionPoolBaseTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseConnectionPoolEmptyTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseConnectionPoolUnsupportedTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseConnectionPoolSupportedTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseConnectionPoolPublicTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseAccessObjectNoPoolTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseAccessObjectPoolTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/DatabaseAccessObjectResultsTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectBaseTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectFileTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectListDirectoriesTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectListFilesTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectDirectoryTest.php</file>
-            <file>src/Lunr/DataAccess/Tests/PhysicalFilesystemAccessObjectFindTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultBaseTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultFailedTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultSuccessTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultResultTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLAsyncQueryResultBaseTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLAsyncQueryResultFetchTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderBaseTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderEscapeTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderEscapeValuesTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsDeleteTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsInsertTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsUpdateTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderSelectTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderDeleteTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderInsertTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderUpdateTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderLimitTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderEscapeTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderConditionTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderOrderByTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderGroupByTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionBaseTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionSetTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionConnectTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionQueryTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionEscapeTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionTransactionTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolBaseTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolEmptyTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolUnsupportedTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolSupportedTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolPublicTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectNoPoolTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectPoolTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectResultsTest.php</file>
+            <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectBaseTest.php</file>
+            <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectFileTest.php</file>
+            <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectListDirectoriesTest.php</file>
+            <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectListFilesTest.php</file>
+            <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectDirectoryTest.php</file>
+            <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectFindTest.php</file>
             <file>src/Lunr/Spawn/Tests/ResqueJobDispatcherTest.php</file>
             <file>src/Lunr/Shadow/Tests/ConsoleTest.php</file>
             <file>src/Lunr/Shadow/Tests/LunrCliParserBaseTest.php</file>
@@ -144,10 +144,13 @@
                 <file>../src/Lunr/Database/MySQLndQueryLogger.php</file>
                 <file>../src/Lunr/Halo/LunrBaseTest.php</file>
                 <directory>../src/Lunr/Core/Tests/</directory>
-                <directory>../src/Lunr/DataAccess/Tests/</directory>
                 <directory>../src/Lunr/Database/Tests/</directory>
                 <directory>../src/Lunr/Feedback/Tests/</directory>
                 <directory>../src/Lunr/Halo/Tests/</directory>
+                <directory>../src/Lunr/Gravity/Tests/</directory>
+                <directory>../src/Lunr/Gravity/Database/Tests/</directory>
+                <directory>../src/Lunr/Gravity/Database/MySQL/Tests/</directory>
+                <directory>../src/Lunr/Gravity/Filesystem/Tests/</directory>
                 <directory>../src/Lunr/L10n/Tests/</directory>
                 <directory>../src/Lunr/Network/Tests/</directory>
                 <directory>../src/Lunr/Shadow/Tests/</directory>

@@ -16,7 +16,7 @@
 
 namespace Lunr\Sphere;
 
-use Lunr\DataAccess\DatabaseAccessObject;
+use Lunr\Gravity\Database\DatabaseAccessObject;
 
 /**
  * Sphere Session DAO
