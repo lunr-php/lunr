@@ -153,6 +153,10 @@
             <file>src/Lunr/Shadow/Tests/CliRequestBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestGetTest.php</file>
             <file>src/Lunr/Core/Tests/InterRequestTest.php</file>
+            <file>src/Lunr/Ticks/Tests/FileTimerRequestTest.php</file>
+            <file>src/Lunr/Ticks/Tests/FileTimerNoRequestTest.php</file>
+            <file>src/Lunr/Ticks/Tests/FileTimerStartTest.php</file>
+            <file>src/Lunr/Ticks/Tests/FileTimerStopTest.php</file>
 <!--            <file>src/Lunr/Database/Tests/DBManTest.php</file>
             <file>src/Lunr/Database/Tests/DBConTest.php</file>-->
         </testsuite>
