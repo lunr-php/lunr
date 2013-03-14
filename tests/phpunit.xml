@@ -120,7 +120,7 @@
             <directory>../src/Lunr/</directory>
             <exclude>
                 <file>../src/Lunr/Database/MySQLndQueryLogger.php</file>
-                <file>../src/Lunr/Halo/LunrBaseTest.php/</file>
+                <file>../src/Lunr/Halo/LunrBaseTest.php</file>
                 <directory>../src/Lunr/Core/Tests/</directory>
                 <directory>../src/Lunr/DataAccess/Tests/</directory>
                 <directory>../src/Lunr/Database/Tests/</directory>
