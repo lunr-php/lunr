@@ -400,7 +400,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Define JOIN clause of the SQL statement,
+     * Define JOIN clause of the SQL statement.
      *
      * @param String $table_reference Table reference
      * @param String $type            Type of JOIN operation to perform.
@@ -473,7 +473,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function on_between($left, $lower, $upper, $negate = FALSE)
     {
-        $right = $lower . ' AND ' . $upper;
+        $right    = $lower . ' AND ' . $upper;
         $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
         $this->sql_condition($left, $right, $operator, 'ON');
         return $this;
@@ -554,7 +554,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function where_between($left, $lower, $upper, $negate = FALSE)
     {
-        $right = $lower . ' AND ' . $upper;
+        $right    = $lower . ' AND ' . $upper;
         $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
         $this->sql_condition($left, $right, $operator);
         return $this;
@@ -656,7 +656,7 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function having_between($left, $lower, $upper, $negate = FALSE)
     {
-        $right = $lower . ' AND ' . $upper;
+        $right    = $lower . ' AND ' . $upper;
         $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
         $this->sql_condition($left, $right, $operator, 'HAVING');
         return $this;
@@ -707,10 +707,10 @@ class MySQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Define a UNION or UNION ALL clause of the SQL statement
+     * Define a UNION or UNION ALL clause of the SQL statement.
      *
-     * @param String $sql_query   sql query reference
-     * @param Boolean $all   True for ALL or False for empty (default).
+     * @param String  $sql_query sql query reference
+     * @param Boolean $all       True for ALL or False for empty (default).
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */

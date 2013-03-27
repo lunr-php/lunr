@@ -457,6 +457,8 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test specifying the UNION part of a query.
      *
+     * @param String $types Compound query operator
+     *
      * @dataProvider compoundQueryTypeProvider
      * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::sql_compound
      */
@@ -751,6 +753,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
 
         $this->assertEquals($string, $property->getValue($this->builder));
     }
+
 }
 
 ?>

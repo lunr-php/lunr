@@ -38,7 +38,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = __DIR__ . '/../../../../tests/statics/logs/error.log';
 
-        $content = "[2011-11-10 10:30:22]: WARNING: Foo";
+        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
 
         $fetched = $this->class->get_file_content($file);
 
@@ -92,6 +92,8 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that get_file_content() with invalid file names.
      *
+     * @param mixed $file Invalid filename
+     *
      * @expectedException PHPUnit_Framework_Error_Warning
      * @dataProvider      invalidNameProvider
      * @covers            Lunr\DataAccess\PhysicalFilesystemAccessObject::get_file_content
@@ -105,6 +107,8 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
     /**
      * Test that get_file_content() with invalid file names.
+     *
+     * @param Boolean $file Boolean filename
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\DataAccess\PhysicalFilesystemAccessObject::get_file_content
@@ -125,7 +129,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = tempnam('/tmp', 'phpunit_');
 
-        $content = "[2011-11-10 10:30:22]: WARNING: Foo";
+        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
 
         $written = $this->class->put_file_content($file, $content);
 
@@ -143,7 +147,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = '/root/ab45cd89';
 
-        $content = "[2011-11-10 10:30:22]: WARNING: Foo";
+        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
 
         $written = $this->class->put_file_content($file, $content);
 
@@ -159,7 +163,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = '/tmp/ab65cd89';
 
-        $content = "[2011-11-10 10:30:22]: WARNING: Foo";
+        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
 
         $written = $this->class->put_file_content($file, $content);
 
@@ -177,7 +181,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = '/tmp';
 
-        $content = "[2011-11-10 10:30:22]: WARNING: Foo";
+        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
 
         $written = $this->class->put_file_content($file, $content);
 
@@ -187,13 +191,15 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() with invalid file names.
      *
+     * @param mixed $file Invalid filename
+     *
      * @expectedException PHPUnit_Framework_Error_Warning
      * @dataProvider      invalidNameProvider
      * @covers            Lunr\DataAccess\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentWithInvalidFilenames($file)
     {
-        $content = "[2011-11-10 10:30:22]: WARNING: Foo";
+        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
 
         $written = $this->class->put_file_content($file, $content);
 
@@ -203,12 +209,14 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() with boolean file names.
      *
+     * @param Boolean $file Boolean filename
+     *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\DataAccess\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentWithBooleanFilenames($file)
     {
-        $content = "[2011-11-10 10:30:22]: WARNING: Foo";
+        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
 
         $written = $this->class->put_file_content($file, $content);
 
@@ -232,6 +240,9 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test getting a SplFileObject for an accessible file with invalid mode.
      *
+     * @param mixed  $mode    Invalid mode
+     * @param String $message Expected error message
+     *
      * @runInSeparateProcess
      *
      * @dataProvider invalidModesProvider
@@ -245,7 +256,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with("{message}", array('message' => "SplFileObject::__construct($filename)$message"));
+                     ->with('{message}', array('message' => "SplFileObject::__construct($filename)$message"));
 
         $value = $this->class->get_file_object($file, $mode);
 
@@ -265,7 +276,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with("{message}", array('message' => $error));
+                     ->with('{message}', array('message' => $error));
 
         $value = $this->class->get_file_object($file);
 
@@ -295,11 +306,11 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = '/tmp';
 
-        $error = "Cannot use SplFileObject with directories";
+        $error = 'Cannot use SplFileObject with directories';
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with("{message}", array('message' => $error));
+                     ->with('{message}', array('message' => $error));
 
         $value = $this->class->get_file_object($file);
 
@@ -309,6 +320,9 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test getting a SplFileObject for invalid file names.
      *
+     * @param mixed  $file    Invalid filename
+     * @param String $message Expected error message
+     *
      * @dataProvider invalidNameProvider
      * @covers       Lunr\DataAccess\PhysicalFilesystemAccessObject::get_file_object
      */
@@ -316,7 +330,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with("{message}", array('message' => $message));
+                     ->with('{message}', array('message' => $message));
 
         $value = $this->class->get_file_object($file);
 
@@ -325,6 +339,8 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
     /**
      * Test getting a SplFileObject for boolean file names.
+     *
+     * @param Boolean $file Boolean filename
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\DataAccess\PhysicalFilesystemAccessObject::get_file_object

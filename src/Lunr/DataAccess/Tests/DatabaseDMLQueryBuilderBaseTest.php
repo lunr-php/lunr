@@ -1093,6 +1093,9 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that prepare_index_hints prepares valid index hints correctly.
      *
+     * @param Array  $hints    Array of index hints
+     * @param String $expected Expected escaped string
+     *
      * @dataProvider validIndexHintProvider
      * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::prepare_index_hints
      */
@@ -1107,6 +1110,8 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that prepare_index_hints returns an empty string for invalid input.
      *
+     * @param mixed $hints Invalid value
+     *
      * @dataProvider invalidIndexHintProvider
      * @covers       Lunr\DataAccess\DatabaseDMLQueryBuilder::prepare_index_hints
      */
@@ -1119,8 +1124,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
-    * Test getting a select query when the compound property
-    * (UNION, INTERSECT or EXCEPT) is set.
+    * Test getting a select query when the compound property (UNION, INTERSECT or EXCEPT) is set.
     *
     * @depends testImplodeQueryWithEmptySelectComponent
     * @depends testImplodeQueryWithDuplicateSelectModes

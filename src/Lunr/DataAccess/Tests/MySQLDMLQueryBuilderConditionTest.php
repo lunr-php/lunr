@@ -209,6 +209,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
         $this->assertInstanceOf('Lunr\DataAccess\MySQLDMLQueryBuilder', $return);
         $this->assertSame($this->builder, $return);
     }
+
     /**
      * Test specifying the on part of a query.
      *

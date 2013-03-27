@@ -96,7 +96,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
         catch(RuntimeException $runtime)
         {
             $context = [ 'message' => $runtime->getMessage() ];
-            $this->logger->warning("{message}", $context);
+            $this->logger->warning('{message}', $context);
         }
 
         return $directories;
@@ -137,7 +137,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
         catch(RuntimeException $runtime)
         {
             $context = [ 'message' => $runtime->getMessage() ];
-            $this->logger->warning("{message}", $context);
+            $this->logger->warning('{message}', $context);
         }
 
         return $files;
@@ -188,13 +188,13 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
         catch(InvalidArgumentException $invalid)
         {
             $context = [ 'message' => $invalid->getMessage() ];
-            $this->logger->error("{message}", $context);
+            $this->logger->error('{message}', $context);
             return FALSE;
         }
         catch(RuntimeException $runtime)
         {
             $context = [ 'message' => $runtime->getMessage() ];
-            $this->logger->warning("{message}", $context);
+            $this->logger->warning('{message}', $context);
             return array();
         }
 
@@ -218,14 +218,14 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
         catch(RuntimeException $runtime)
         {
             $context = [ 'message' => $runtime->getMessage() ];
-            $this->logger->error("{message}", $context);
+            $this->logger->error('{message}', $context);
 
             return FALSE;
         }
         catch(LogicException $logic)
         {
             $context = [ 'message' => $logic->getMessage() ];
-            $this->logger->error("{message}", $context);
+            $this->logger->error('{message}', $context);
 
             return FALSE;
         }

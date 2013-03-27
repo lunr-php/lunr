@@ -241,7 +241,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         $components = array();
 
         array_push($components, 'select_mode', 'select', 'from', 'join', 'where');
-        array_push($components,  'group_by', 'having', 'order_by', 'limit', 'lock_mode');
+        array_push($components, 'group_by', 'having', 'order_by', 'limit', 'lock_mode');
 
         $standard = 'SELECT ' . $this->implode_query($components);
         if ($this->compound == '')
@@ -267,7 +267,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
             return '';
         }
 
-        $components   = array();
+        $components = array();
         array_push($components, 'delete_mode', 'delete', 'from', 'join', 'where');
 
         if (($this->delete == '') && ($this->join == ''))
@@ -370,7 +370,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
 
         $this->update_mode = array_intersect($this->update_mode, $valid);
 
-        $components   = array();
+        $components = array();
         array_push($components, 'update_mode', 'update', 'join', 'set', 'where');
 
         if ((strpos($this->update, ',') === FALSE) && $this->join == '')
@@ -478,9 +478,9 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
     }
 
     /**
-     * Define input as a csv from an array within parentheses
+     * Define input as a csv from an array within parentheses.
      *
-     * @param array $value Input
+     * @param array $array_values Input
      *
      * @return String $output Defined, escaped and within parentheses
      */
@@ -490,13 +490,14 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         {
             return '';
         }
+
         return '(' . implode(',', $array_values) . ')';
     }
 
     /**
      * Define a special collation.
      *
-     * @param mixed $value Input
+     * @param mixed  $value     Input
      * @param String $collation Collation name
      *
      * @return String $return Value with collation definition.
@@ -587,7 +588,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
     }
 
     /**
-     * Define JOIN clause of the SQL statement,
+     * Define JOIN clause of the SQL statement.
      *
      * @param String $table_reference Table reference
      * @param String $type            Type of JOIN operation to perform.
@@ -715,10 +716,10 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
     /**
      * Define a conditional clause for the SQL statement.
      *
-     * @param String  $left     Left expression
-     * @param String  $right    Right expression
-     * @param String  $operator Comparison operator
-     * @param String  $base     whether to construct WHERE, HAVING or ON
+     * @param String $left     Left expression
+     * @param String $right    Right expression
+     * @param String $operator Comparison operator
+     * @param String $base     whether to construct WHERE, HAVING or ON
      *
      * @return void
      */
@@ -748,8 +749,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
     /**
      * Define a compound clause for the SQL statement.
      *
-     * @param String  $sql_query  Left expression
-     * @param String  $base       Whether to construct UNION, EXCEPT or INTERSECT
+     * @param String $sql_query Left expression
+     * @param String $base      Whether to construct UNION, EXCEPT or INTERSECT
      *
      * @return void
      */
@@ -922,6 +923,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
 
         return $hints;
     }
+
 }
 
 ?>

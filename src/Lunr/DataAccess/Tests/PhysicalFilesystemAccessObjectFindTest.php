@@ -54,11 +54,11 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      */
     public function testGetMatchesOfAccessibleDirectoryWithNullNeedle()
     {
-        $error = "RegexIterator::__construct(): Empty regular expression";
+        $error = 'RegexIterator::__construct(): Empty regular expression';
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with("{message}", array('message' => $error)
+                     ->with('{message}', array('message' => $error)
                      );
 
         $value = $this->class->find_matches(NULL, $this->find_location);
@@ -73,11 +73,11 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      */
     public function testGetMatchesOfAccessibleDirectoryWithObjectNeedle()
     {
-        $error = "RegexIterator::__construct() expects parameter 2 to be string, object given";
+        $error = 'RegexIterator::__construct() expects parameter 2 to be string, object given';
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with("{message}", array('message' => $error)
+                     ->with('{message}', array('message' => $error)
                      );
 
         $value = $this->class->find_matches(new \stdClass(), $this->find_location);
@@ -87,6 +87,8 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
 
     /**
      * Test finding in an accessible directory with an boolean needle.
+     *
+     * @param Boolean $needle Boolean needle
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\DataAccess\PhysicalFilesystemAccessObject::find_matches
@@ -116,8 +118,9 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array('message'   => $error,
-                              'directory' => $directory
+                        array(
+                            'message'   => $error,
+                            'directory' => $directory
                         )
                      );
 
@@ -140,8 +143,9 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array('message'   => $error,
-                              'directory' => $directory
+                        array(
+                            'message'   => $error,
+                            'directory' => $directory
                         )
                      );
 
@@ -164,8 +168,9 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array('message'   => $error,
-                              'directory' => $directory
+                        array(
+                            'message'   => $error,
+                            'directory' => $directory
                         )
                      );
 
@@ -183,7 +188,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     {
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with("{message}", array('message' => 'Directory name must not be empty.'));
+                     ->with('{message}', array('message' => 'Directory name must not be empty.'));
 
         $value = $this->class->find_matches('/^.+pattern/i', NULL);
 
@@ -200,13 +205,14 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     {
         $directory = new \stdClass();
 
-        $error = "RecursiveDirectoryIterator::__construct() expects parameter 1 to be string, object given";
+        $error = 'RecursiveDirectoryIterator::__construct() expects parameter 1 to be string, object given';
 
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array('message'   => $error,
-                              'directory' => $directory
+                        array(
+                            'message'   => $error,
+                            'directory' => $directory
                         )
                      );
 
@@ -217,6 +223,8 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
 
     /**
      * Test finding in an boolean directory.
+     *
+     * @param Boolean $directory Boolean directory value
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\DataAccess\PhysicalFilesystemAccessObject::find_matches
@@ -231,6 +239,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
         $this->assertInternalType('array', $value);
         $this->assertEmpty($value);
     }
+
 }
 
 ?>

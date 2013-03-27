@@ -255,8 +255,7 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
     }
 
     /**
-     * Test prepending and apending parentheses to a list of values,
-     * extracted from an array.
+     * Test prepending and apending parentheses to a list of values, extracted from an array.
      *
      * @covers       Lunr\DataAccess\MysqlDMLQueryBuilder::list_value
      */
@@ -267,8 +266,7 @@ class DatabaseDMLQueryBuilderEscapeValuesTest extends DatabaseDMLQueryBuilderTes
     }
 
     /**
-     * Test prepending and apending parentheses to a list of values,
-     * extracted from an array that contains a single value.
+     * Test prepending and apending parentheses to a list of values.
      *
      * @covers       Lunr\DataAccess\MysqlDMLQueryBuilder::list_value
      */

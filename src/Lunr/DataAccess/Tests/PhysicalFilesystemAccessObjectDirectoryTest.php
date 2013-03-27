@@ -98,6 +98,8 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
     /**
      * Test listing an invalid directory.
      *
+     * @param mixed $directory Invalid directory value
+     *
      * @expectedException PHPUnit_Framework_Error_Warning
      * @dataProvider      invalidNameProvider
      * @covers            Lunr\DataAccess\PhysicalFilesystemAccessObject::get_directory_listing
@@ -112,6 +114,8 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
 
     /**
      * Test listing an boolean directory.
+     *
+     * @param Boolean $directory Boolean directory value
      *
      * @expectedException PHPUnit_Framework_Error_Warning
      * @dataProvider      booleanNameProvider

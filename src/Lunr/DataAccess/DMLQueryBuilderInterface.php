@@ -135,7 +135,7 @@ interface DMLQueryBuilderInterface
     public function from($table_reference);
 
     /**
-     * Define JOIN clause of the SQL statement,
+     * Define JOIN clause of the SQL statement.
      *
      * @param String $table_reference Table reference to join with.
      * @param String $type            Type of JOIN operation to perform.
@@ -342,10 +342,10 @@ interface DMLQueryBuilderInterface
     public function limit($amount, $offset = -1);
 
     /**
-     * Define a UNION or UNION ALL clause of the SQL statement
+     * Define a UNION or UNION ALL clause of the SQL statement.
      *
-     * @param String $sql_query   sql query reference
-     * @param Boolean $all   True for ALL or False for empty (default).
+     * @param String  $sql_query sql query reference
+     * @param Boolean $all       True for ALL or False for empty (default).
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */

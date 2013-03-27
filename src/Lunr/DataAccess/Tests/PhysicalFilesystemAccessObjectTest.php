@@ -88,8 +88,8 @@ abstract class PhysicalFilesystemAccessObjectTest extends PHPUnit_Framework_Test
     public function invalidNameProvider()
     {
         $names   = array();
-        $names[] = array(NULL, "SplFileObject::__construct(): Filename cannot be empty");
-        $names[] = array(new stdClass(), "SplFileObject::__construct() expects parameter 1 to be a valid path, object given");
+        $names[] = array(NULL, 'SplFileObject::__construct(): Filename cannot be empty');
+        $names[] = array(new stdClass(), 'SplFileObject::__construct() expects parameter 1 to be a valid path, object given');
 
         return $names;
     }
@@ -116,10 +116,10 @@ abstract class PhysicalFilesystemAccessObjectTest extends PHPUnit_Framework_Test
     public function invalidModesProvider()
     {
         $modes   = array();
-        $modes[] = array(NULL, ": failed to open stream: No such file or directory");
+        $modes[] = array(NULL, ': failed to open stream: No such file or directory');
         $modes[] = array(new stdClass(), ' expects parameter 2 to be string, object given');
-        $modes[] = array(TRUE, ": failed to open stream: No such file or directory");
-        $modes[] = array(FALSE, ": failed to open stream: No such file or directory");
+        $modes[] = array(TRUE, ': failed to open stream: No such file or directory');
+        $modes[] = array(FALSE, ': failed to open stream: No such file or directory');
 
         return $modes;
     }

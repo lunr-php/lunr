@@ -56,11 +56,14 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
     {
         $directory = '/root';
 
+        $error = "DirectoryIterator::__construct($directory): failed to open dir: Permission denied";
+
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array('message'   => "DirectoryIterator::__construct($directory): failed to open dir: Permission denied",
-                              'directory' => $directory
+                        array(
+                            'message'   => $error,
+                            'directory' => $directory
                         )
                      );
 
@@ -84,8 +87,9 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array('message'   => $error,
-                              'directory' => $directory
+                        array(
+                            'message'   => $error,
+                            'directory' => $directory
                         )
                      );
 
@@ -102,13 +106,16 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      */
     public function testGetListOfFilesInFile()
     {
-        $directory = tempnam('/tmp', 'phpunit_');;
+        $directory = tempnam('/tmp', 'phpunit_');
+
+        $error = "DirectoryIterator::__construct($directory): failed to open dir: Not a directory";
 
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array('message'   => "DirectoryIterator::__construct($directory): failed to open dir: Not a directory",
-                              'directory' => $directory
+                        array(
+                            'message'   => $error,
+                            'directory' => $directory
                         )
                      );
 
@@ -143,11 +150,14 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
     {
         $directory = new \stdClass();
 
+        $error = 'DirectoryIterator::__construct() expects parameter 1 to be string, object given';
+
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array('message'   => "DirectoryIterator::__construct() expects parameter 1 to be string, object given",
-                              'directory' => $directory
+                        array(
+                            'message'   => $error,
+                            'directory' => $directory
                         )
                      );
 
@@ -159,6 +169,8 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
 
     /**
      * Test listing files in an boolean directory.
+     *
+     * @param Boolean $directory Boolean directory value
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\DataAccess\PhysicalFilesystemAccessObject::get_list_of_files
