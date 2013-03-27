@@ -116,7 +116,7 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
     protected function assertPropertyEquals($property, $expected)
     {
         $property = $this->get_accessible_reflection_property($property);
-        $this->assertEquals(0, $property->getValue($this->class));
+        $this->assertEquals($expected, $property->getValue($this->class));
     }
 
     /**
