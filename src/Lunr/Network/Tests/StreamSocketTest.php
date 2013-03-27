@@ -149,7 +149,7 @@ abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
      */
     public function invalidOptionsProvider()
     {
-        $option    = array();
+        $options   = array();
         $options[] = array('str');
         $options[] = array(0);
         $options[] = array(1);
