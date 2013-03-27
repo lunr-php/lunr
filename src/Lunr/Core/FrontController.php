@@ -81,7 +81,7 @@ class FrontController
      */
     public function get_controller($src)
     {
-        $name = $this->request->controller . "controller";
+        $name = $this->request->controller . 'controller';
 
         $matches = $this->fao->find_matches("/^.+$name.php/i", $src);
 

@@ -44,11 +44,11 @@ class FrontControllerDispatchTest extends FrontControllerTest
         $this->request->expects($this->at(1))
                       ->method('__get')
                       ->with('params')
-                      ->will($this->returnValue(array(1,2)));
+                      ->will($this->returnValue(array(1, 2)));
 
         $controller->expects($this->once())
                    ->method('foo')
-                   ->with(1,2);
+                   ->with(1, 2);
 
         $this->class->dispatch($controller);
     }
@@ -70,7 +70,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
         $this->request->expects($this->at(1))
                       ->method('__get')
                       ->with('params')
-                      ->will($this->returnValue(array(1,2)));
+                      ->will($this->returnValue(array(1, 2)));
 
         $this->class->dispatch($controller);
     }

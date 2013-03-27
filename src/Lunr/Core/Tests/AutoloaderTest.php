@@ -348,6 +348,8 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     /**
      * Check how often the Lunr autoloader is on the spl autoload stack.
      *
+     * @param array $stack Autoloader stack
+     *
      * @return Integer $contains Number of instances of the Lunr autloader on the stack.
      */
     public function check_spl_autoload_stack($stack)

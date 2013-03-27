@@ -47,6 +47,8 @@ class MockController extends Controller
 
     /**
      * Mock method that does nothing.
+     *
+     * @return void
      */
     public function foo()
     {
@@ -55,6 +57,8 @@ class MockController extends Controller
 
     /**
      * Mock static method that does nothing.
+     *
+     * @return void
      */
     public static function bar()
     {

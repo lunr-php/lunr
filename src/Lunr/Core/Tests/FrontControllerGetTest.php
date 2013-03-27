@@ -45,7 +45,7 @@ class FrontControllerGetTest extends FrontControllerTest
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
-                  ->with("/^.+functioncontroller.php/i", $dir)
+                  ->with('/^.+functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array($result)));
 
         $this->response->expects($this->never())
@@ -63,7 +63,7 @@ class FrontControllerGetTest extends FrontControllerTest
      */
     public function testGetControllerReturnsEmptyStringForNonExistingController()
     {
-        $dir    = __DIR__;
+        $dir = __DIR__;
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -72,7 +72,7 @@ class FrontControllerGetTest extends FrontControllerTest
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
-                  ->with("/^.+functioncontroller.php/i", $dir)
+                  ->with('/^.+functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array()));
 
         $this->response->expects($this->at(0))
@@ -91,7 +91,7 @@ class FrontControllerGetTest extends FrontControllerTest
      */
     public function testGetControllerReturnsEmptyStringIfFindFailed()
     {
-        $dir    = __DIR__;
+        $dir = __DIR__;
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -100,7 +100,7 @@ class FrontControllerGetTest extends FrontControllerTest
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
-                  ->with("/^.+functioncontroller.php/i", $dir)
+                  ->with('/^.+functioncontroller.php/i', $dir)
                   ->will($this->returnValue(FALSE));
 
         $this->response->expects($this->at(0))
@@ -125,7 +125,7 @@ class FrontControllerGetTest extends FrontControllerTest
         $property->setAccessible(TRUE);
         $property->setValue($this->class, $ERROR);
 
-        $dir    = __DIR__;
+        $dir = __DIR__;
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -134,7 +134,7 @@ class FrontControllerGetTest extends FrontControllerTest
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
-                  ->with("/^.+functioncontroller.php/i", $dir)
+                  ->with('/^.+functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array()));
 
         $this->response->expects($this->at(0))
@@ -168,7 +168,7 @@ class FrontControllerGetTest extends FrontControllerTest
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
-                  ->with("/^.+functioncontroller.php/i", $dir)
+                  ->with('/^.+functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array($result, 'nr2')));
 
         $this->response->expects($this->never())

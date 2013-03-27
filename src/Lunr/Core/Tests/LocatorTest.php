@@ -79,6 +79,8 @@ class LocatorTest extends PHPUnit_Framework_TestCase
     /**
      * Test that storing values that are not callable does not work.
      *
+     * @param mixed $value Invalid value
+     *
      * @dataProvider nonClosureValueProvider
      * @covers       Lunr\Core\Locator::__set
      */
@@ -145,6 +147,8 @@ class LocatorTest extends PHPUnit_Framework_TestCase
     /**
      * Test that declaring a non-closure value singleton returns NULL.
      *
+     * @param mixed $value Non-callable value
+     *
      * @dataProvider nonClosureValueProvider
      * @covers       Lunr\Core\Locator::as_singleton
      */
@@ -190,7 +194,7 @@ class LocatorTest extends PHPUnit_Framework_TestCase
         $closure = function () { return new stdClass(); };
         $value   = $this->locator->as_singleton($closure);
 
-        $class1 = $value();
+        $class1       = $value();
         $class1->test = 'value';
 
         $class2 = $value();
