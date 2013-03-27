@@ -51,8 +51,8 @@ class L10n
      */
     public function __construct($logger, $fao)
     {
-        $this->logger   = $logger;
-        $this->fao      = $fao;
+        $this->logger = $logger;
+        $this->fao    = $fao;
 
         $this->default_language = 'en_US';
         $this->locales_location = dirname($_SERVER['PHP_SELF']) . '/l10n';

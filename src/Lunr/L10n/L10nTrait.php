@@ -50,6 +50,8 @@ trait L10nTrait
     /**
      * Set the default language.
      *
+     * @param String $language POSIX locale definition
+     *
      * @return void
      */
     public function set_default_language($language)
@@ -69,6 +71,8 @@ trait L10nTrait
 
     /**
      * Set the location for language files.
+     *
+     * @param String $location Path to locale files
      *
      * @return void
      */
