@@ -146,7 +146,7 @@ class GCM
             }
             else
             {
-                $this->errmsg = 'Error sending notification' . 'Code: ' . $this->http_code . "\n";
+                $this->errmsg = 'Error sending notification! Code: ' . $this->http_code . "\n";
             }
         }
         else
