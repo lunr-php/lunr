@@ -32,7 +32,7 @@ class SessionDAO extends DatabaseAccessObject
     /**
      * Constructor.
      *
-     * @param DatabaseConnection     $connection Shared instance of a database connection class
+     * @param DatabaseConnection $connection Shared instance of a database connection class
      */
     public function __construct($connection)
     {

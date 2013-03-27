@@ -85,7 +85,7 @@ class SessionDAOTest extends PHPUnit_Framework_TestCase
 
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $mysqli_mock = $this->getMock('MySQLi');
+        $mysqli_mock        = $this->getMock('MySQLi');
         $mysqli_result_mock = $this->getMockBuilder('mysqli_result')
                                    ->disableOriginalConstructor()
                                    ->getMock();
