@@ -544,7 +544,6 @@ class RequestStoreTest extends RequestTest
 
         $_GET['test1'] = 'value1';
         $_GET['test2'] = 'value2';
-        $cache         = $_GET;
 
         $method->invokeArgs($this->request, array(&$this->configuration));
 
