@@ -95,6 +95,8 @@ class MockMySQLiFailedConnection
      * @param int    $port     Port
      * @param string $socket   Socket
      *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     *
      * @return boolean $return Whether the connection was successful or not.
      */
     public function connect($host, $user, $password, $database, $port, $socket)
@@ -125,6 +127,8 @@ class MockMySQLiFailedConnection
      * Fake setting charset.
      *
      * @param string $charset Hostname or IP address
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
      * @return boolean $return Whether setting the charset was successful or not.
      */

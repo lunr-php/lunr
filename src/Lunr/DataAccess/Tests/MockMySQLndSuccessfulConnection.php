@@ -41,6 +41,8 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
      * @param string             $socket      Socket
      * @param int                $mysql_flags Connection options
      *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     *
      * @return boolean $return Whether the connection was successful or not.
      */
     public function connect($connection, $host, $user, $password, $database, $port, $socket, $mysql_flags)
@@ -52,6 +54,8 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
      * Return a fake thread ID.
      *
      * @param mysqlnd_connection $connection Mysqlnd connection handle
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
      * @return int $return Fake thread ID
      */
@@ -65,6 +69,8 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
      *
      * @param mysqlnd_connection $connection Mysqlnd connection handle
      *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     *
      * @return int $return Fake number of affected rows
      */
     public function getAffectedRows($connection)
@@ -77,6 +83,8 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
      *
      * @param mysqlnd_connection $connection Mysqlnd connection handle
      * @param string             $charset    Hostname or IP address
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
      * @return boolean $return Whether setting the charset was successful or not.
      */
