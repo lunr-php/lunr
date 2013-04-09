@@ -145,7 +145,7 @@ class FacebookConnection implements OAuthConnectionInterface
             . '?client_id=' . $config['oauth']['facebook']['client_id']
             . '&redirect_uri=' . urlencode($callback)
             . '&state=' . $state
-            . '&display=wap&scope=email,publish_stream';
+            . '&display=touch&scope=email,publish_stream';
 
         return array(
             'state' => $state,
