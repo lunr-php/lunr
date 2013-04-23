@@ -172,6 +172,18 @@ class CliRequestGetTest extends CliRequestTest
         $this->assertNull($this->class->get_json_from_get('foo'));
     }
 
+    /**
+     * Tests that get_new_inter_request_object returns an InterRequest object.
+     *
+     * @covers Lunr\Shadow\CliRequest::get_new_inter_request_object
+     */
+    public function testGetNewInterRequestObject()
+    {
+        $value = $this->class->get_new_inter_request_object(array());
+
+        $this->assertInstanceOf('Lunr\Core\InterRequest', $value);
+    }
+
 }
 
 ?>

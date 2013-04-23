@@ -369,6 +369,18 @@ class Request
         }
     }
 
+    /**
+     * Returns a new inter request object.
+     *
+     * @param array $params the parameters to set the inter request with
+     *
+     * @return InterRequest $request The set inter request object
+     */
+    public function get_new_inter_request_object($params)
+    {
+        return new InterRequest($this, $params);
+    }
+
 }
 
 ?>

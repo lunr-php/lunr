@@ -193,6 +193,20 @@ class RequestGetTest extends RequestTest
         $this->assertNull($this->request->get_json_from_get($index));
     }
 
+    /**
+     * Tests that get_new_inter_request_object returns an InterRequest object.
+     *
+     * @runInSeparateProcess
+     *
+     * @covers Lunr\Core\Request::get_new_inter_request_object
+     */
+    public function testGetNewInterRequestObject()
+    {
+        $value = $this->request->get_new_inter_request_object(array());
+
+        $this->assertInstanceOf('Lunr\Core\InterRequest', $value);
+    }
+
 }
 
 ?>

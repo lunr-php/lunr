@@ -132,6 +132,7 @@
             <file>src/Lunr/Shadow/Tests/GetoptCliParserParseTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestGetTest.php</file>
+            <file>src/Lunr/Core/Tests/InterRequestTest.php</file>
 <!--            <file>src/Lunr/Database/Tests/DBManTest.php</file>
             <file>src/Lunr/Database/Tests/DBConTest.php</file>-->
         </testsuite>
