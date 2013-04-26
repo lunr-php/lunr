@@ -78,7 +78,7 @@ class LunrCliParser implements CliParserInterface
      * Constructor.
      *
      * @param LoggerInterface $logger    Shared instance of a Logger class
-     * @param array           $shortopts List of supported short arguments
+     * @param String          $shortopts List of supported short arguments
      * @param array           $longopts  List of supported long arguments (optional)
      */
     public function __construct($logger, $shortopts, $longopts = '')
