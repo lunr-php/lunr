@@ -102,7 +102,7 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
      */
     protected function get_reflection_property_value($property)
     {
-        $this->get_accessible_reflection_property($property)->getValue($this->class);
+        return $this->get_accessible_reflection_property($property)->getValue($this->class);
     }
 
     /**
