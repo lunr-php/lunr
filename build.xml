@@ -72,6 +72,8 @@
         <exec executable="phpunit" failonerror="true">
             <arg value="-c" />
             <arg path="tests/phpunit.xml" />
+            <arg value="-d" />
+            <arg value="zend.enable_gc=0" />
             <arg value="--verbose" />
         </exec>
     </target>
