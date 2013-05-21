@@ -31,6 +31,18 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
 {
 
     /**
+     * The left identifier delimiter.
+     * @var String
+     */
+    const IDENTIFIER_DELIMITER_L = '`';
+
+    /**
+     * The right identifier delimiter.
+     * @var String
+     */
+    const IDENTIFIER_DELIMITER_R = '`';
+
+    /**
      * SQL Query part: SELECT clause
      * @var String
      */
@@ -413,7 +425,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         }
         else
         {
-            return $column . ' AS `' . $alias . '`';
+            return $column . ' AS ' . static::IDENTIFIER_DELIMITER_L . $alias . static::IDENTIFIER_DELIMITER_R;
         }
     }
 
@@ -428,7 +440,9 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
     public function hex_result_column($column, $alias = '')
     {
         $alias = ($alias === '') ? $column : $alias;
-        return 'HEX(' . $this->escape_location_reference($column) . ') AS `' . $alias . '`';
+        $alias = static::IDENTIFIER_DELIMITER_L . $alias . static::IDENTIFIER_DELIMITER_R;
+
+        return 'HEX(' . $this->escape_location_reference($column) . ') AS ' . $alias;
     }
 
     /**
@@ -449,7 +463,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
         }
         else
         {
-            return $table . ' AS `' . $alias . '`';
+            return $table . ' AS ' . static::IDENTIFIER_DELIMITER_L . $alias . static::IDENTIFIER_DELIMITER_R;
         }
     }
 
@@ -895,7 +909,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface, Quer
             }
             else
             {
-                $col .= '`' . $part . '`.';
+                $col .= static::IDENTIFIER_DELIMITER_L . $part . static::IDENTIFIER_DELIMITER_L . '.';
             }
         }
 
