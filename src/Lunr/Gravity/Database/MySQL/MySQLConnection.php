@@ -242,8 +242,7 @@ class MySQLConnection extends DatabaseConnection
 
         if ($this->connected === TRUE)
         {
-            $string = $this->mysqli->escape_string($string);
-            return addcslashes($string, '%_');
+            return $this->mysqli->escape_string($string);
         }
         else
         {
