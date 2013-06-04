@@ -119,7 +119,7 @@
             <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectListFilesTest.php</file>
             <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectDirectoryTest.php</file>
             <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectFindTest.php</file>
-            <file>src/Lunr/Spawn/Tests/ResqueJobDispatcherTest.php</file>
+            <file>src/Lunr/Spawn/Tests/ResqueJobDispatcherBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/ConsoleTest.php</file>
             <file>src/Lunr/Shadow/Tests/LunrCliParserBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/LunrCliParserCheckArgumentTest.php</file>

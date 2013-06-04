@@ -15,12 +15,12 @@
 
 namespace Lunr\Spawn\Tests;
 
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 use Lunr\Spawn\ResqueJobDispatcher;
 
 /**
- * This class contains test methods for the ResqueJobDispatcher class.
+ * This class contains test set up and the data providers for the ResqueJobDispatcher class.
  *
  * @category   Libraries
  * @package    Spawn
@@ -28,20 +28,20 @@ use Lunr\Spawn\ResqueJobDispatcher;
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @covers     Lunr\Spawn\ResqueJobDispatcher
  */
-class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
+class ResqueJobDispatcherTest extends LunrBaseTest
 {
 
     /**
-     * Instance of the ResqueJobdispatcher class.
+     * Instance of the LunrBaseTest class.
      * @var ResqueJobDispatcher
      */
-    protected $dispatcher;
+    protected $class;
 
     /**
-     * Reflection instance of the ResqueJobdispatcher class.
+     * Reflection instance of the LunrBaseTest class.
      * @var ReflectionClass
      */
-    protected $dispatcher_reflection;
+    protected $reflection;
 
     /**
      * The resque instance of this test case.
@@ -56,8 +56,8 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
     {
         $this->resque = $this->getMock('Resque', array('enqueue'));
 
-        $this->dispatcher_reflection = new ReflectionClass('Lunr\Spawn\ResqueJobDispatcher');
-        $this->dispatcher            = new ResqueJobDispatcher($this->resque);
+        $this->reflection = new ReflectionClass('Lunr\Spawn\ResqueJobDispatcher');
+        $this->class      = new ResqueJobDispatcher($this->resque);
     }
 
     /**
@@ -65,8 +65,8 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->dispatcher_reflection);
-        unset($this->dispatcher);
+        unset($this->reflection);
+        unset($this->class);
         unset($this->resque);
     }
 
@@ -84,6 +84,9 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
         $queues[] = array(FALSE);
         $queues[] = array(NULL);
         $queues[] = array(25.89);
+        $queues[] = array(array(123));
+        $queues[] = array(array(TRUE));
+        $queues[] = array(array(NULL));
 
         return $queues;
     }
@@ -117,191 +120,6 @@ class ResqueJobDispatcherTest extends PHPUnit_Framework_TestCase
         $statuses[] = array(25.89);
 
         return $statuses;
-    }
-
-    /**
-     * Tests that __construct() inits the resque with the given parameter.
-     *
-     * @covers Lunr\Spawn\ResqueJobDispatcher::__construct
-     */
-    public function testResqueInitsWithValue()
-    {
-        $property = $this->dispatcher_reflection->getProperty('resque');
-        $property->setAccessible(TRUE);
-
-        $this->assertSame($this->resque, $property->getValue($this->dispatcher));
-
-    }
-
-    /**
-     * Tests that __construct() inits the queue with the 'default_queue' value.
-     *
-     * @covers Lunr\Spawn\ResqueJobDispatcher::__construct
-     */
-    public function testQueueInitsWithDefaultValue()
-    {
-        $property = $this->dispatcher_reflection->getProperty('queue');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('default_queue', $property->getValue($this->dispatcher));
-
-    }
-
-    /**
-     * Tests that __construct() inits the track status to FALSE.
-     *
-     * @covers Lunr\Spawn\ResqueJobDispatcher::__construct
-     */
-    public function testTrackStatusInitsWithDefaultValue()
-    {
-        $property = $this->dispatcher_reflection->getProperty('track_status');
-        $property->setAccessible(TRUE);
-
-        $this->assertTrue(FALSE === $property->getValue($this->dispatcher));
-
-    }
-
-    /**
-     * Tests that the token propery is NULL by default.
-     *
-     * @covers Lunr\Spawn\ResqueJobDispatcher::__construct
-     */
-    public function testTokenIsNullBydefault()
-    {
-        $property = $this->dispatcher_reflection->getProperty('token');
-        $property->setAccessible(TRUE);
-
-        $this->assertNull($property->getValue($this->dispatcher));
-    }
-
-    /**
-     * Test that dispatch() returns a string if queue is set.
-     *
-     * @covers Lunr\Spawn\ResqueJobDispatcher::dispatch
-     */
-    public function testDispatchUpdateToken()
-    {
-        $this->resque->expects($this->any())
-             ->method('enqueue')
-             ->will($this->returnValue('TOKEN'));
-
-        $property = $this->dispatcher_reflection->getProperty('token');
-        $property->setAccessible(TRUE);
-
-        $this->dispatcher->dispatch('job', array());
-
-        $this->assertNotNull($property->getValue($this->dispatcher));
-    }
-
-    /**
-     * Tests that the get_job_id() method retrieves the token.
-     *
-     * @covers Lunr\Spawn\ResqueJobDispatcher::get_job_id
-     */
-    public function testGetJobIdReturnsToken()
-    {
-        $this->resque->expects($this->any())
-             ->method('enqueue')
-             ->will($this->returnValue('TOKEN'));
-
-        $property = $this->dispatcher_reflection->getProperty('token');
-        $property->setAccessible(TRUE);
-
-        $this->dispatcher->dispatch('job', array());
-
-        $this->assertSame($property->getValue($this->dispatcher), $this->dispatcher->get_job_id());
-    }
-
-    /**
-     * Tests that set_queue() modifies the queue property with a valid value.
-     *
-     * @covers Lunr\Spawn\ResqueJobDispatcher::set_queue
-     */
-    public function testSetQueue()
-    {
-        $property = $this->dispatcher_reflection->getProperty('queue');
-        $property->setAccessible(TRUE);
-
-        $value = 'queue';
-
-        $this->dispatcher->set_queue($value);
-
-        $this->assertSame($value, $property->getValue($this->dispatcher));
-    }
-
-    /**
-     * Tests that set_queue() does not modify the queue property with invalid value.
-     *
-     * @param mixed $value the value to test
-     *
-     * @dataProvider invalidQueueProvider
-     * @covers       Lunr\Spawn\ResqueJobDispatcher::set_queue
-     */
-    public function testSetQueueWithInvalidValue($value)
-    {
-        $property = $this->dispatcher_reflection->getProperty('queue');
-        $property->setAccessible(TRUE);
-
-        $this->dispatcher->set_queue($value);
-
-        $this->assertNotSame($value, $property->getValue($this->dispatcher));
-    }
-
-    /**
-     * Tests that set_track_status() modifies the track status property with valid value.
-     *
-     * @param Boolean $value the value to test
-     *
-     * @dataProvider validTrackStatusProvider
-     * @covers       Lunr\Spawn\ResqueJobDispatcher::set_track_status
-     */
-    public function testSetTrackStatusWithValidValue($value)
-    {
-        $property = $this->dispatcher_reflection->getProperty('track_status');
-        $property->setAccessible(TRUE);
-
-        $value = TRUE;
-        $this->dispatcher->set_track_status($value);
-
-        $this->assertSame($value, $property->getValue($this->dispatcher));
-    }
-
-    /**
-     * Tests that set_track_status() does not modify the track status property with invalid value.
-     *
-     * @param mixed $value the value to test
-     *
-     * @dataProvider invalidTrackStatusProvider
-     * @covers       Lunr\Spawn\ResqueJobDispatcher::set_track_status
-     */
-    public function testSetTrackStatusWithInvalidValue($value)
-    {
-        $property = $this->dispatcher_reflection->getProperty('track_status');
-        $property->setAccessible(TRUE);
-
-        $this->dispatcher->set_track_status($value);
-
-        $this->assertNotSame($value, $property->getValue($this->dispatcher));
-    }
-
-    /**
-     * Test fluid interface of the set_queue method.
-     *
-     * @covers Lunr\Spawn\ResqueJobDispatcher::set_queue
-     */
-    public function testSetQueueReturnsSelfReference()
-    {
-        $this->assertSame($this->dispatcher, $this->dispatcher->set_queue('queue'));
-    }
-
-    /**
-     * Test fluid interface of the set_track_status method.
-     *
-     * @covers Lunr\Spawn\ResqueJobDispatcher::set_track_status
-     */
-    public function testSetTrackStatusReturnsSelfReference()
-    {
-        $this->assertSame($this->dispatcher, $this->dispatcher->set_track_status(TRUE));
     }
 
 }

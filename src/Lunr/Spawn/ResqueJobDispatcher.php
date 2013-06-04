@@ -31,26 +31,25 @@ class ResqueJobDispatcher implements JobDispatcherInterface
      * The Resque instance of this dispatcher.
      * @var Resque
      */
-    private $resque;
-
+    protected $resque;
 
     /**
      * The token of the last enqueued job.
      * @var String
      */
-    private $token;
+    protected $token;
 
     /**
-     * The queue to enqueue in.
-     * @var String
+     * The queue(s) to enqueue in.
+     * @var Array
      */
-    private $queue;
+    protected $queue;
 
     /**
      * The status tracking ability of enqueued jobs.
      * @var String
      */
-    private $track_status;
+    protected $track_status;
 
     /**
      * Constructor.
@@ -61,7 +60,7 @@ class ResqueJobDispatcher implements JobDispatcherInterface
     {
         $this->resque       = $resque;
         $this->token        = NULL;
-        $this->queue        = 'default_queue';
+        $this->queue        = array('default_queue');
         $this->track_status = FALSE;
     }
 
@@ -79,6 +78,9 @@ class ResqueJobDispatcher implements JobDispatcherInterface
     /**
      * Enqueue a job in php-resque.
      *
+     * It is possible to dispatch the same job into multiple queues, if
+     * more than one queues are set.
+     *
      * @param String $job  The job to execute
      * @param array  $args The arguments for the job execution
      *
@@ -86,7 +88,10 @@ class ResqueJobDispatcher implements JobDispatcherInterface
      */
     public function dispatch($job, $args = NULL)
     {
-        $this->token = $this->resque->enqueue($this->queue, $job, $args, $this->track_status);
+        foreach($this->queue as $queue)
+        {
+            $this->token = $this->resque->enqueue($queue, $job, $args, $this->track_status);
+        }
     }
 
     /**
@@ -101,17 +106,30 @@ class ResqueJobDispatcher implements JobDispatcherInterface
     }
 
     /**
-     * Sets the queue to dispatch to for this dispatcher.
+     * Sets the queue(s) to dispatch to for this dispatcher.
      *
-     * @param String $queue The queue to set for this dispatcher
+     * @param mixed $queue The queue or the queues to set for this dispatcher.
      *
      * @return ResqueJobDispatcher $self Self-reference
      */
     public function set_queue($queue)
     {
+        $error = array();
+
         if(is_string($queue))
         {
-            $this->queue = $queue;
+            $this->queue = array($queue);
+        }
+        elseif(is_array($queue))
+        {
+            $this->queue = array();
+            foreach($queue as $value)
+            {
+                if(is_string($value))
+                {
+                    $this->queue[] = $value;
+                }
+            }
         }
 
         return $this;
