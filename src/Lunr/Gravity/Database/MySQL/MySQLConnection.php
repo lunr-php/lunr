@@ -97,8 +97,11 @@ class MySQLConnection extends DatabaseConnection
      */
     public function __destruct()
     {
-        $this->rollback();
-        $this->disconnect();
+        if ($this->connected === TRUE)
+        {
+            $this->rollback();
+            $this->disconnect();
+        }
 
         unset($this->mysqli);
         unset($this->rw_host);
