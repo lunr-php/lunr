@@ -27,6 +27,10 @@
             <file>src/Lunr/Core/Tests/ConfigurationLoadFileTest.php</file>
             <file>src/Lunr/Core/Tests/ConfigurationArrayUsageTest.php</file>
             <file>src/Lunr/Core/Tests/LocatorTest.php</file>
+            <file>src/Lunr/Core/Tests/ConfigServiceLocatorBaseTest.php</file>
+            <file>src/Lunr/Core/Tests/ConfigServiceLocatorSupportTest.php</file>
+            <file>src/Lunr/Core/Tests/ConfigServiceLocatorGetInstanceTest.php</file>
+            <file>src/Lunr/Core/Tests/ConfigServiceLocatorLocateTest.php</file>
             <file>src/Lunr/Core/Tests/VerificationBaseTest.php</file>
             <file>src/Lunr/Core/Tests/VerificationNullPointerTest.php</file>
             <file>src/Lunr/Core/Tests/VerificationChecksTest.php</file>

@@ -24,6 +24,7 @@ set_include_path(
     $base . '/system:' .
     $base . '/tests:' .
     $base . '/tests/mocks:' .
+    $base . '/tests/statics:' .
     $base . '/tests/system:' .
     $base . '/application/libraries/enums:' .
     $base . '/application/libraries/core:' .
