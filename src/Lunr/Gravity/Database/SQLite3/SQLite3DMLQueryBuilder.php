@@ -275,7 +275,19 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function select_mode($mode)
     {
+        $mode = strtoupper($mode);
 
+        switch ($mode)
+        {
+            case 'ALL':
+            case 'DISTINCT':
+                $this->select_mode['duplicates'] = $mode;
+                break;
+            default:
+                break;
+        }
+
+        return $this;
     }
 
     /**
@@ -287,7 +299,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function select($select)
     {
-
+        $this->sql_select($select);
+        return $this;
     }
 
     /**
@@ -324,7 +337,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function from($table_reference, $index_hints = NULL)
     {
-
+        $this->sql_from($table_reference, $index_hints);
+        return $this;
     }
 
     /**
@@ -338,7 +352,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function join($table_reference, $type = 'INNER', $index_hints = NULL)
     {
-
+        $this->sql_join($table_reference, $type, $index_hints);
+        return $this;
     }
 
     /**
