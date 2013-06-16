@@ -110,6 +110,7 @@
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionConnectTest.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionEscapeTest.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionTransactionTest.php</file>
+            <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderEscapeTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolBaseTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolEmptyTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolUnsupportedTest.php</file>
@@ -156,6 +157,7 @@
                 <directory>../src/Lunr/Gravity/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/MySQL/Tests/</directory>
+                <directory>../src/Lunr/Gravity/Database/SQLite3/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Filesystem/Tests/</directory>
                 <directory>../src/Lunr/L10n/Tests/</directory>
                 <directory>../src/Lunr/Network/Tests/</directory>

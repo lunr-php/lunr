@@ -78,7 +78,7 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function value($value, $collation = '', $charset = '')
     {
-
+        return trim($this->collate('\'' . $this->db->escape_string($value) . '\'', $collation));
     }
 
     /**
@@ -92,7 +92,7 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function hexvalue($value, $collation = '', $charset = '')
     {
-
+        return $this->value($value, $collation, $charset);
     }
 
     /**
@@ -107,7 +107,21 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function likevalue($value, $match = 'both', $collation = '', $charset = '')
     {
+        switch ($match)
+        {
+            case 'forward':
+                $string = '\'' . $this->db->escape_string($value) . '%\'';
+                break;
+            case 'backward':
+                $string = '\'%' . $this->db->escape_string($value) . '\'';
+                break;
+            case 'both':
+            default:
+                $string = '\'%' . $this->db->escape_string($value) . '%\'';
+                break;
+        }
 
+        return trim($this->collate($string, $collation));
     }
 
     /**
@@ -121,7 +135,24 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function index_hint($keyword, $indices, $for = '')
     {
+        if (!is_array($indices) || empty($indices))
+        {
+            return NULL;
+        }
 
+        $keyword = strtoupper($keyword);
+
+        $valid_keywords = array('INDEXED BY', 'NOT INDEXED');
+
+        if (!in_array($keyword, $valid_keywords))
+        {
+            $keyword = 'INDEXED BY';
+        }
+
+        $indices = array_map(array($this, 'escape_location_reference'), $indices);
+        $indices = implode(', ', $indices);
+
+        return $keyword . ' ' . $indices;
     }
 
     /**
