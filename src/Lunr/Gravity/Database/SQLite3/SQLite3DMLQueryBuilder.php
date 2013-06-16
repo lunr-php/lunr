@@ -164,7 +164,7 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function delete_mode($mode)
     {
-
+        return $this;
     }
 
     /**
@@ -176,7 +176,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function delete($delete = '')
     {
-
+        $this->sql_delete($delete);
+        return $this;
     }
 
     /**
