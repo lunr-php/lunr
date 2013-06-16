@@ -314,7 +314,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function set($set)
     {
-
+        $this->sql_set($set);
+        return $this;
     }
 
     /**
@@ -389,7 +390,21 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function update_mode($mode)
     {
+        $mode = strtoupper($mode);
 
+        switch ($mode)
+        {
+            case 'OR ROLLBACK':
+            case 'OR ABORT':
+            case 'OR REPLACE':
+            case 'OR FAIL':
+            case 'OR IGNORE':
+                $this->update_mode['mode'] = $mode;
+            default:
+                break;
+        }
+
+        return $this;
     }
 
     /**
@@ -401,7 +416,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function update($table)
     {
-
+        $this->sql_update($table);
+        return $this;
     }
 
     /**
