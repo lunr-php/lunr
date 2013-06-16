@@ -352,7 +352,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function on($left, $right, $operator = '=')
     {
-
+        $this->sql_condition($left, $right, $operator, 'ON');
+        return $this;
     }
 
     /**
@@ -366,7 +367,9 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function on_like($left, $right, $negate = FALSE)
     {
-
+        $operator = ($negate === FALSE) ? 'LIKE' : 'NOT LIKE';
+        $this->sql_condition($left, $right, $operator, 'ON');
+        return $this;
     }
 
     /**
@@ -380,7 +383,9 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function on_in($left, $right, $negate = FALSE)
     {
-
+        $operator = ($negate === FALSE) ? 'IN' : 'NOT IN';
+        $this->sql_condition($left, $right, $operator, 'ON');
+        return $this;
     }
 
     /**
@@ -395,7 +400,10 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function on_between($left, $lower, $upper, $negate = FALSE)
     {
-
+        $right = $lower . ' AND ' . $upper;
+        $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
+        $this->sql_condition($left, $right, $operator, 'ON');
+        return $this;
     }
 
     /**
@@ -409,7 +417,9 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function on_regexp($left, $right, $negate = FALSE)
     {
-
+        $operator = ($negate === FALSE) ? 'REGEXP' : 'NOT REGEXP';
+        $this->sql_condition($left, $right, $operator, 'ON');
+        return $this;
     }
 
     /**
@@ -423,7 +433,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function where($left, $right, $operator = '=')
     {
-
+        $this->sql_condition($left, $right, $operator);
+        return $this;
     }
 
     /**
@@ -437,7 +448,9 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function where_like($left, $right, $negate = FALSE)
     {
-
+        $operator = ($negate === FALSE) ? 'LIKE' : 'NOT LIKE';
+        $this->sql_condition($left, $right, $operator);
+        return $this;
     }
 
     /**
@@ -451,7 +464,9 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function where_in($left, $right, $negate = FALSE)
     {
-
+        $operator = ($negate === FALSE) ? 'IN' : 'NOT IN';
+        $this->sql_condition($left, $right, $operator);
+        return $this;
     }
 
     /**
@@ -466,7 +481,10 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function where_between($left, $lower, $upper, $negate = FALSE)
     {
-
+        $right = $lower . ' AND ' . $upper;
+        $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
+        $this->sql_condition($left, $right, $operator);
+        return $this;
     }
 
     /**
@@ -480,7 +498,9 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function where_regexp($left, $right, $negate = FALSE)
     {
-
+        $operator = ($negate === FALSE) ? 'REGEXP' : 'NOT REGEXP';
+        $this->sql_condition($left, $right, $operator);
+        return $this;
     }
 
     /**
@@ -507,7 +527,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function having($left, $right, $operator = '=')
     {
-
+        $this->sql_condition($left, $right, $operator, 'HAVING');
+        return $this;
     }
 
     /**
@@ -521,7 +542,9 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function having_like($left, $right, $negate = FALSE)
     {
-
+        $operator = ($negate === FALSE) ? 'LIKE' : 'NOT LIKE';
+        $this->sql_condition($left, $right, $operator, 'HAVING');
+        return $this;
     }
 
     /**
@@ -535,7 +558,9 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function having_in($left, $right, $negate = FALSE)
     {
-
+        $operator = ($negate === FALSE) ? 'IN' : 'NOT IN';
+        $this->sql_condition($left, $right, $operator, 'HAVING');
+        return $this;
     }
 
     /**
@@ -550,7 +575,10 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function having_between($left, $lower, $upper, $negate = FALSE)
     {
-
+        $right = $lower . ' AND ' . $upper;
+        $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
+        $this->sql_condition($left, $right, $operator, 'HAVING');
+        return $this;
     }
 
     /**
@@ -564,7 +592,9 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function having_regexp($left, $right, $negate = FALSE)
     {
-
+        $operator = ($negate === FALSE) ? 'REGEXP' : 'NOT REGEXP';
+        $this->sql_condition($left, $right, $operator, 'HAVING');
+        return $this;
     }
 
     /**
@@ -625,7 +655,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function sql_and()
     {
-
+        $this->sql_connector('AND');
+        return $this;
     }
 
     /**
@@ -635,7 +666,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function sql_or()
     {
-
+        $this->sql_connector('OR');
+        return $this;
     }
 
 }
