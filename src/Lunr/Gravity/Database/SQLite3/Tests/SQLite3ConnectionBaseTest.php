@@ -56,7 +56,8 @@ class SQLite3ConnectionBaseTest extends SQLite3ConnectionTest
      */
     public function testGetNewDMLQueryBuilderObjectReturnsObject()
     {
-        $this->assertNull($this->class->get_new_dml_query_builder_object());
+        $instance = 'Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder';
+        $this->assertInstanceOf($instance, $this->class->get_new_dml_query_builder_object());
     }
 
 }

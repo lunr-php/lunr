@@ -5,7 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   SQLite
+ * @category   SQLite3
  * @package    Gravity
  * @subpackage Database
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -21,7 +21,7 @@ use Lunr\Gravity\Database\DatabaseConnection;
 /**
  * SQLite database access class.
  *
- * @category   SQLite
+ * @category   SQLite3
  * @package    Gravity
  * @subpackage Database
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -147,11 +147,11 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Return a new instance of a QueryBuilder object.
      *
-     * @return SQLiteDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
+     * @return SQLite3DMLQueryBuilder $builder New SQLite3DMLQueryBuilder object instance
      */
     public function get_new_dml_query_builder_object()
     {
-        return NULL;
+        return new SQLite3DMLQueryBuilder($this);
     }
 
     /**

@@ -374,13 +374,6 @@ interface DMLQueryBuilderInterface
      */
     public function sql_or();
 
-    /**
-     * Set logical connector 'XOR'.
-     *
-     * @return DMLQueryBuilderInterface $self Self reference
-     */
-    public function sql_xor();
-
 }
 
 ?>
