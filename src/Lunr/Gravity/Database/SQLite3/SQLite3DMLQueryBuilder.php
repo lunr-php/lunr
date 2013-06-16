@@ -68,6 +68,63 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Construct and return a INSERT query.
+     *
+     * @return String $query The constructed query string.
+     */
+    public function get_insert_query()
+    {
+        if ($this->into == '')
+        {
+            return '';
+        }
+
+        $components   = array();
+        $components[] = 'insert_mode';
+        $components[] = 'into';
+        $components[] = 'column_names';
+
+        if ($this->select_statement != '')
+        {
+            $components[] = 'select_statement';
+        }
+        else
+        {
+            $components[] = 'values';
+        }
+
+        return 'INSERT ' . $this->implode_query($components);
+    }
+
+    /**
+     * Construct and return a REPLACE query.
+     *
+     * @return String $query The constructed query string.
+     */
+    public function get_replace_query()
+    {
+        if ($this->into == '')
+        {
+            return '';
+        }
+
+        $components   = array();
+        $components[] = 'into';
+        $components[] = 'column_names';
+
+        if ($this->select_statement != '')
+        {
+            $components[] = 'select_statement';
+        }
+        else
+        {
+            $components[] = 'values';
+        }
+
+        return 'REPLACE ' . $this->implode_query($components);
+    }
+
+    /**
      * Define and escape input as value.
      *
      * @param mixed  $value     Input
@@ -189,7 +246,22 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function insert_mode($mode)
     {
+        $mode = strtoupper($mode);
 
+        switch ($mode)
+        {
+            case 'OR ROLLBACK':
+            case 'OR ABORT':
+            case 'OR REPLACE':
+            case 'OR FAIL':
+            case 'OR IGNORE':
+                $this->insert_mode['mode'] = $mode;
+                break;
+            default:
+                break;
+        }
+
+        return $this;
     }
 
     /**
@@ -201,7 +273,7 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function replace_mode($mode)
     {
-
+        return $this;
     }
 
     /**
@@ -213,7 +285,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function into($table)
     {
-
+        $this->sql_into($table);
+        return $this;
     }
 
     /**
@@ -225,7 +298,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function select_statement($select)
     {
-
+        $this->sql_select_statement($select);
+        return $this;
     }
 
     /**
@@ -252,7 +326,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function column_names($keys)
     {
-
+        $this->sql_column_names($keys);
+        return $this;
     }
 
     /**
@@ -264,7 +339,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function values($values)
     {
-
+        $this->sql_values($values);
+        return $this;
     }
 
     /**

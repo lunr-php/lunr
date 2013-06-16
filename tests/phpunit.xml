@@ -117,6 +117,8 @@
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderLimitTest.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderSelectTest.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderDeleteTest.php</file>
+            <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderInsertTest.php</file>
+            <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderQueryTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolBaseTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolEmptyTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolUnsupportedTest.php</file>
