@@ -513,7 +513,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function group_by($expr, $order = NULL)
     {
-
+        $this->sql_group_by($expr);
+        return $this;
     }
 
     /**
@@ -607,7 +608,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function order_by($expr, $asc = TRUE)
     {
-
+        $this->sql_order_by($expr, $asc);
+        return $this;
     }
 
     /**
@@ -620,7 +622,8 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function limit($amount, $offset = -1)
     {
-
+        $this->sql_limit($amount, $offset);
+        return $this;
     }
 
     /**
