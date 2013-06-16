@@ -744,7 +744,9 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function union($sql_query, $all = FALSE)
     {
-
+        $base = ($all === TRUE) ? 'UNION ALL' : 'UNION';
+        $this->sql_compound($sql_query, $base);
+        return $this;
     }
 
     /**
@@ -756,7 +758,7 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function lock_mode($mode)
     {
-
+        return $this;
     }
 
     /**

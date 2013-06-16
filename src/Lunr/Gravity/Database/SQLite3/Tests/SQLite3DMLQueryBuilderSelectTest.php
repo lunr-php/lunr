@@ -233,4 +233,30 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
         $this->assertSame($this->class, $return);
     }
 
+    /**
+     * Test fluid interface of the lock_mode method.
+     *
+     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::lock_mode
+     */
+    public function testLockModeReturnsSelfReference()
+    {
+        $return = $this->class->lock_mode('');
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $return);
+        $this->assertSame($this->class, $return);
+    }
+
+    /**
+     * Test fluid interface of the union method.
+     *
+     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::union
+     */
+    public function testUnionReturnsSelfReference()
+    {
+        $return = $this->class->union('QUERY');
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $return);
+        $this->assertSame($this->class, $return);
+    }
+
 }
