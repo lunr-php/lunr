@@ -160,18 +160,14 @@
             <file>src/Lunr/Surface/Tests/PaginationNoCursorTest.php</file>
             <file>src/Lunr/Surface/Tests/PaginationSettersTest.php</file>
             <file>src/Lunr/Surface/Tests/PaginationHTMLTest.php</file>
-<!--            <file>src/Lunr/Database/Tests/DBManTest.php</file>
-            <file>src/Lunr/Database/Tests/DBConTest.php</file>-->
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
             <directory>../src/Lunr/</directory>
             <exclude>
-                <file>../src/Lunr/Database/MySQLndQueryLogger.php</file>
                 <file>../src/Lunr/Halo/LunrBaseTest.php</file>
                 <directory>../src/Lunr/Core/Tests/</directory>
-                <directory>../src/Lunr/Database/Tests/</directory>
                 <directory>../src/Lunr/Feedback/Tests/</directory>
                 <directory>../src/Lunr/Halo/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Tests/</directory>
