@@ -132,6 +132,49 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder', $value);
     }
 
+    /**
+     * Test that get_query_escaper_object() returns a new object.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_query_escaper_object
+     */
+    public function testGetQueryEscaperObjectReturnsObject()
+    {
+        $value = $this->db->get_query_escaper_object();
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseQueryEscaper', $value);
+        $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper', $value);
+    }
+
+    /**
+     * Test that get_query_escaper_object() returns a new object.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_query_escaper_object
+     */
+    public function testGetQueryEscaperObjectCachesObject()
+    {
+        $property = $this->db_reflection->getProperty('escaper');
+        $property->setAccessible(TRUE);
+        $this->assertNull($property->getValue($this->db));
+
+        $this->db->get_query_escaper_object();
+
+        $instance = 'Lunr\Gravity\Database\MySQL\MySQLQueryEscaper';
+        $this->assertInstanceOf($instance, $property->getValue($this->db));
+    }
+
+    /**
+     * Test that get_query_escaper_object() returns a new object.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_query_escaper_object
+     */
+    public function testGetQueryEscaperObjectReturnsCachedObject()
+    {
+        $value1 = $this->db->get_query_escaper_object();
+        $value2 = $this->db->get_query_escaper_object();
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper', $value1);
+        $this->assertSame($value1, $value2);
+    }
 }
 
 ?>

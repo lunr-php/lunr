@@ -56,8 +56,53 @@ class SQLite3ConnectionBaseTest extends SQLite3ConnectionTest
      */
     public function testGetNewDMLQueryBuilderObjectReturnsObject()
     {
-        $instance = 'Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder';
-        $this->assertInstanceOf($instance, $this->class->get_new_dml_query_builder_object());
+        $value = $this->class->get_new_dml_query_builder_object();
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseDMLQueryBuilder', $value);
+        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $value);
+    }
+
+    /**
+     * Test that get_query_escaper_object() returns a new object.
+     *
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::get_query_escaper_object
+     */
+    public function testGetQueryEscaperObjectReturnsObject()
+    {
+        $value = $this->class->get_query_escaper_object();
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseQueryEscaper', $value);
+        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper', $value);
+    }
+
+    /**
+     * Test that get_query_escaper_object() returns a new object.
+     *
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::get_query_escaper_object
+     */
+    public function testGetQueryEscaperObjectCachesObject()
+    {
+        $property = $this->get_accessible_reflection_property('escaper');
+        $this->assertNull($property->getValue($this->class));
+
+        $this->class->get_query_escaper_object();
+
+        $instance = 'Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper';
+        $this->assertInstanceOf($instance, $property->getValue($this->class));
+    }
+
+    /**
+     * Test that get_query_escaper_object() returns a new object.
+     *
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::get_query_escaper_object
+     */
+    public function testGetQueryEscaperObjectReturnsCachedObject()
+    {
+        $value1 = $this->class->get_query_escaper_object();
+        $value2 = $this->class->get_query_escaper_object();
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper', $value1);
+        $this->assertSame($value1, $value2);
     }
 
 }

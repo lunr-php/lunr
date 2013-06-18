@@ -35,6 +35,12 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     protected $db;
 
     /**
+     * Query Escaper for the main connection.
+     * @var DatabaseQueryEscaper
+     */
+    protected $escaper;
+
+    /**
      * Shared instance of a Logger class.
      * @var LoggerInterface
      */
@@ -55,9 +61,10 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     public function __construct($connection, $logger, $pool = NULL)
     {
-        $this->db     = $connection;
-        $this->logger = $logger;
-        $this->pool   = $pool;
+        $this->db      = $connection;
+        $this->escaper = $this->db->get_query_escaper_object();
+        $this->logger  = $logger;
+        $this->pool    = $pool;
     }
 
     /**
@@ -66,6 +73,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     public function __destruct()
     {
         unset($this->db);
+        unset($this->escaper);
         unset($this->logger);
         unset($this->pool);
     }
@@ -79,7 +87,8 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     public function swap_connection($connection)
     {
-        $this->db = $connection;
+        $this->db      = $connection;
+        $this->escaper = $this->db->get_query_escaper_object();
     }
 
     /**

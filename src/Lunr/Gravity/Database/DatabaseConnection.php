@@ -51,6 +51,12 @@ abstract class DatabaseConnection
     protected $logger;
 
     /**
+     * Instance of the DatabaseQueryEscaper
+     * @var DatabaseQueryEscaper
+     */
+    protected $escaper;
+
+    /**
      * Constructor.
      *
      * @param Configuration   $configuration Shared instance of the configuration class
@@ -63,6 +69,7 @@ abstract class DatabaseConnection
 
         $this->configuration = $configuration;
         $this->logger        = $logger;
+        $this->escaper       = NULL;
     }
 
     /**
@@ -72,6 +79,7 @@ abstract class DatabaseConnection
     {
         unset($this->configuration);
         unset($this->logger);
+        unset($this->escaper);
         unset($this->readonly);
         unset($this->connected);
     }
@@ -117,6 +125,13 @@ abstract class DatabaseConnection
      * @return DatabaseDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
      */
     public abstract function get_new_dml_query_builder_object();
+
+    /**
+     * Return a new instance of a QueryEscaper object.
+     *
+     * @return DatabaseQueryEscaper $escaper New DatabaseQueryEscaper object instance
+     */
+    public abstract function get_query_escaper_object();
 
     /**
      * Escape a string to be used in a SQL query.

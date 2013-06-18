@@ -51,6 +51,17 @@ class DatabaseAccessObjectPoolTest extends DatabaseAccessObjectTest
     }
 
     /**
+     * Test that DatabaseConnection class is passed.
+     */
+    public function testQueryEscaperIsStored()
+    {
+        $property = $this->reflection_dao->getProperty('escaper');
+        $property->setAccessible(TRUE);
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseQueryEscaper', $property->getValue($this->dao));
+    }
+
+    /**
      * Test that Logger class is passed.
      */
     public function testLoggerIsPassed()

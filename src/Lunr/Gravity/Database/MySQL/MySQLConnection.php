@@ -233,6 +233,21 @@ class MySQLConnection extends DatabaseConnection
     }
 
     /**
+     * Return a new instance of a QueryEscaper object.
+     *
+     * @return MySQLQueryEscaper $escaper New MySQLQueryEscaper object instance
+     */
+    public function get_query_escaper_object()
+    {
+        if (isset($this->escaper) === FALSE)
+        {
+            $this->escaper = new MySQLQueryEscaper();
+        }
+
+        return $this->escaper;
+    }
+
+    /**
      * Escape a string to be used in a SQL query.
      *
      * @param String $string The string to escape

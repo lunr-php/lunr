@@ -62,6 +62,17 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
     }
 
     /**
+     * Test that DatabaseConnection class is passed.
+     */
+    public function testQueryEscaperIsStored()
+    {
+        $property = $this->reflection_dao->getProperty('escaper');
+        $property->setAccessible(TRUE);
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseQueryEscaper', $property->getValue($this->dao));
+    }
+
+    /**
      * Test that $pool is NULL.
      */
     public function testDatabaseConnectionPoolIsNull()
@@ -80,8 +91,8 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
     public function testSwapConnectionSwapsConnection()
     {
         $db = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLConnection')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+                   ->disableOriginalConstructor()
+                   ->getMock();
 
         $property = $this->reflection_dao->getProperty('db');
         $property->setAccessible(TRUE);
@@ -91,6 +102,38 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
         $this->dao->swap_connection($db);
 
         $this->assertSame($db, $property->getValue($this->dao));
+    }
+
+    /**
+     * Test that swap_connection() swaps query escaper.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::swap_connection
+     */
+    public function testSwapConnectionSwapsQueryEscaper()
+    {
+        $db = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLConnection')
+                   ->disableOriginalConstructor()
+                   ->getMock();
+
+        $escaper = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper')
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $property = $this->reflection_dao->getProperty('escaper');
+        $property->setAccessible(TRUE);
+
+        $old = $property->getValue($this->dao);
+
+        $db->expects($this->once())
+           ->method('get_query_escaper_object')
+           ->will($this->returnValue($escaper));
+
+        $this->dao->swap_connection($db);
+
+        $new = $property->getValue($this->dao);
+
+        $this->assertNotSame($old, $new);
+        $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseQueryEscaper', $new);
     }
 
 }

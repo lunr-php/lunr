@@ -133,6 +133,17 @@ class DatabaseConnectionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test that by default we don't have a QueryEscaper instance.
+     */
+    public function testEscaperIsNull()
+    {
+        $property = $this->db_reflection->getProperty('escaper');
+        $property->setAccessible(TRUE);
+
+        $this->assertNull($property->getValue($this->db));
+    }
+
+    /**
      * Test that set_readonly sets the readonly flag when passed TRUE.
      *
      * @depends testReadonlyIsFalseByDefault

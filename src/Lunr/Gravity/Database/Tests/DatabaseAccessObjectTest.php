@@ -76,6 +76,14 @@ abstract class DatabaseAccessObjectTest extends PHPUnit_Framework_TestCase
                          ->disableOriginalConstructor()
                          ->getMock();
 
+        $escaper = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper')
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $this->db->expects($this->once())
+                 ->method('get_query_escaper_object')
+                 ->will($this->returnValue($escaper));
+
         $this->dao = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseAccessObject')
                           ->setConstructorArgs(array($this->db, $this->logger))
                           ->getMockForAbstractClass();
@@ -99,6 +107,14 @@ abstract class DatabaseAccessObjectTest extends PHPUnit_Framework_TestCase
         $this->db = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLConnection')
                          ->disableOriginalConstructor()
                          ->getMock();
+
+        $escaper = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper')
+                        ->disableOriginalConstructor()
+                        ->getMock();
+
+        $this->db->expects($this->once())
+                 ->method('get_query_escaper_object')
+                 ->will($this->returnValue($escaper));
 
         $this->dao = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseAccessObject')
                           ->setConstructorArgs(array($this->db, $this->logger, $this->pool))
