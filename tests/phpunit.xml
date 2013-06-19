@@ -52,7 +52,7 @@
             <file>src/Lunr/Core/Tests/ViewHelpersTest.php</file>
             <file>src/Lunr/Sphere/Tests/SessionBaseTest.php</file>
             <file>src/Lunr/Sphere/Tests/DatabaseSessionHandlerBaseTest.php</file>
-            <file>src/Lunr/Sphere/Tests/SessionDAOTest.php</file>
+            <file>src/Lunr/Sphere/Tests/SessionDAOBaseTest.php</file>
             <file>src/Lunr/L10n/Tests/L10nViewBaseTest.php</file>
             <file>src/Lunr/L10n/Tests/L10nTraitTest.php</file>
             <file>src/Lunr/L10n/Tests/L10nTest.php</file>

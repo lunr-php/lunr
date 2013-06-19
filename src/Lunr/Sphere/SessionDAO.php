@@ -58,13 +58,15 @@ class SessionDAO extends DatabaseAccessObject
     public function read_session_data($id)
     {
         $builder = $this->db->get_new_dml_query_builder_object();
-        $builder->select($builder->result_column('sessionData'));
-        $builder->from($builder->table('user_sessions'));
-        $builder->where($builder->column('sessionID'), $builder->value($id));
-        $builder->where($builder->column('expires'), $builder->intvalue(time()), '>');
+
+        $builder->select($this->escaper->result_column('sessionData'))
+                ->from($this->escaper->table('user_sessions'))
+                ->where($this->escaper->column('sessionID'), $this->escaper->value($id))
+                ->where($this->escaper->column('expires'), $this->escaper->intvalue(time()), '>');
 
         $query  = $this->db->query($builder->get_select_query());
         $result = $this->result_cell($query, 'sessionData');
+
         if($result != FALSE)
         {
             return base64_decode($result);
@@ -86,29 +88,34 @@ class SessionDAO extends DatabaseAccessObject
      */
     public function write_session_data($id, $session_data, $time)
     {
-        $builder_select = $this->db->get_new_dml_query_builder_object();
         $this->db->begin_transaction();
-        $builder_select->from($builder_select->table('user_sessions'));
-        $builder_select->where($builder_select->column('sessionID'), $builder_select->value($id));
-        $builder_select->lock_mode('FOR UPDATE');
+
+        $builder_select = $this->db->get_new_dml_query_builder_object();
+
+        $builder_select->from($this->escaper->table('user_sessions'))
+                       ->where($this->escaper->column('sessionID'), $this->escaper->value($id))
+                       ->lock_mode('FOR UPDATE');
 
         $query = $this->db->query($builder_select->get_select_query());
+
         if ($query->has_failed())
         {
             $this->db->rollback();
         }
         else
         {
-            $builder_replace = $this->db->get_new_dml_query_builder_object();
-            $builder_replace->into('user_sessions');
             $data = array(
-                $builder_replace->column('sessionID')   => $builder_replace->value($id),
-                $builder_replace->column('sessionData') => $builder_replace->value(base64_encode($session_data)),
-                $builder_replace->column('expires')     => $builder_replace->value($time)
+                $this->escaper->column('sessionID')   => $this->escaper->value($id),
+                $this->escaper->column('sessionData') => $this->escaper->value(base64_encode($session_data)),
+                $this->escaper->column('expires')     => $this->escaper->intvalue($time)
             );
-            $builder_replace->set($data);
+
+            $builder_replace = $this->db->get_new_dml_query_builder_object();
+            $builder_replace->into($this->escaper->table('user_sessions'))
+                            ->set($data);
 
             $query = $this->db->query($builder_replace->get_replace_query());
+
             $this->db->commit();
         }
 
@@ -124,32 +131,29 @@ class SessionDAO extends DatabaseAccessObject
      */
     public function delete_session($id)
     {
-        $builder_select = $this->db->get_new_dml_query_builder_object();
         $this->db->begin_transaction();
-        $builder_select->from($builder_select->table('user_sessions'));
-        $builder_select->where($builder_select->column('sessionID'), $builder_select->value($id));
-        $builder_select->lock_mode('FOR UPDATE');
+
+        $builder_select = $this->db->get_new_dml_query_builder_object();
+
+        $builder_select->from($this->escaper->table('user_sessions'))
+                       ->where($this->escaper->column('sessionID'), $this->escaper->value($id))
+                       ->lock_mode('FOR UPDATE');
 
         $query = $this->db->query($builder_select->get_select_query());
-        if ($query->has_failed())
+
+        if ($query->number_of_rows() > 0)
         {
-            $this->db->rollback();
+            $builder_delete = $this->db->get_new_dml_query_builder_object();
+
+            $builder_delete->from($this->escaper->table('user_sessions'))
+                           ->where($this->escaper->column('sessionID'), $this->escaper->value($id));
+
+            $query = $this->db->query($builder_delete->get_delete_query());
+            $this->db->commit();
         }
         else
         {
-            if ($query->number_of_rows() > 0)
-            {
-                $builder_delete = $this->db->get_new_dml_query_builder_object();
-                $builder_delete->from($builder_delete->table('user_sessions'));
-                $builder_delete->where($builder_delete->column('sessionID'), $builder_delete->value($id));
-
-                $query = $this->db->query($builder_delete->get_delete_query());
-                $this->db->commit();
-            }
-            else
-            {
-                $this->db->rollback();
-            }
+            $this->db->rollback();
         }
 
         $this->db->end_transaction();
@@ -163,8 +167,9 @@ class SessionDAO extends DatabaseAccessObject
     public function session_gc()
     {
         $builder = $this->db->get_new_dml_query_builder_object();
-        $builder->from($builder->table('user_sessions'));
-        $builder->where($builder->column('expires'), $builder->intvalue(time()), '<');
+
+        $builder->from($this->escaper->table('user_sessions'))
+                ->where($this->escaper->column('expires'), $this->escaper->intvalue(time()), '<');
 
         $this->db->query($builder->get_delete_query());
     }
