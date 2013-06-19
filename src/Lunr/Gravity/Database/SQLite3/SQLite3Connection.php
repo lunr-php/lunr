@@ -151,7 +151,7 @@ class SQLite3Connection extends DatabaseConnection
      */
     public function get_new_dml_query_builder_object()
     {
-        return new SQLite3DMLQueryBuilder($this);
+        return new SQLite3DMLQueryBuilder();
     }
 
     /**
