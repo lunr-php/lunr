@@ -241,7 +241,7 @@ class MySQLConnection extends DatabaseConnection
     {
         if (isset($this->escaper) === FALSE)
         {
-            $this->escaper = new MySQLQueryEscaper();
+            $this->escaper = new MySQLQueryEscaper($this);
         }
 
         return $this->escaper;

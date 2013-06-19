@@ -163,7 +163,7 @@ class SQLite3Connection extends DatabaseConnection
     {
         if (isset($this->escaper) === FALSE)
         {
-            $this->escaper = new SQLite3QueryEscaper();
+            $this->escaper = new SQLite3QueryEscaper($this);
         }
 
         return $this->escaper;
