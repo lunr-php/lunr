@@ -26,7 +26,7 @@ namespace Lunr\Core;
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-class Locator
+class ClosureServiceLocator
 {
 
     /**
