@@ -124,12 +124,27 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_new_dml_query_builder_object
      */
-    public function testGetNewDMLQueryBuilderObjectReturnsObject()
+    public function testGetNewDMLQueryBuilderObjectSimpleReturnsObject()
     {
         $value = $this->db->get_new_dml_query_builder_object();
 
         $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseDMLQueryBuilder', $value);
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder', $value);
+        $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder', $value);
+    }
+
+    /**
+     * Test that get_new_dml_query_builder_object() returns a new object.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_new_dml_query_builder_object
+     */
+    public function testGetNewDMLQueryBuilderObjectReturnsObject()
+    {
+        $value = $this->db->get_new_dml_query_builder_object(FALSE);
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseDMLQueryBuilder', $value);
+        $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder', $value);
+        $this->assertNotInstanceOf('Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder', $value);
     }
 
     /**
@@ -175,6 +190,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper', $value1);
         $this->assertSame($value1, $value2);
     }
+
 }
 
 ?>

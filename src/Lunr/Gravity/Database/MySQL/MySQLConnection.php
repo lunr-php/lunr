@@ -227,9 +227,16 @@ class MySQLConnection extends DatabaseConnection
      *
      * @return MySQLDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
      */
-    public function get_new_dml_query_builder_object()
+    public function get_new_dml_query_builder_object($simple = TRUE)
     {
-        return new MySQLDMLQueryBuilder();
+        if ($simple === TRUE)
+        {
+            return new MySQLSimpleDMLQueryBuilder($this->get_query_escaper_object());
+        }
+        else
+        {
+            return new MySQLDMLQueryBuilder();
+        }
     }
 
     /**

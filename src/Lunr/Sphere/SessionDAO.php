@@ -57,7 +57,7 @@ class SessionDAO extends DatabaseAccessObject
      */
     public function read_session_data($id)
     {
-        $builder = $this->db->get_new_dml_query_builder_object();
+        $builder = $this->db->get_new_dml_query_builder_object(FALSE);
 
         $builder->select($this->escaper->result_column('sessionData'))
                 ->from($this->escaper->table('user_sessions'))
@@ -90,7 +90,7 @@ class SessionDAO extends DatabaseAccessObject
     {
         $this->db->begin_transaction();
 
-        $builder_select = $this->db->get_new_dml_query_builder_object();
+        $builder_select = $this->db->get_new_dml_query_builder_object(FALSE);
 
         $builder_select->from($this->escaper->table('user_sessions'))
                        ->where($this->escaper->column('sessionID'), $this->escaper->value($id))
@@ -110,7 +110,7 @@ class SessionDAO extends DatabaseAccessObject
                 $this->escaper->column('expires')     => $this->escaper->intvalue($time)
             );
 
-            $builder_replace = $this->db->get_new_dml_query_builder_object();
+            $builder_replace = $this->db->get_new_dml_query_builder_object(FALSE);
             $builder_replace->into($this->escaper->table('user_sessions'))
                             ->set($data);
 
@@ -133,7 +133,7 @@ class SessionDAO extends DatabaseAccessObject
     {
         $this->db->begin_transaction();
 
-        $builder_select = $this->db->get_new_dml_query_builder_object();
+        $builder_select = $this->db->get_new_dml_query_builder_object(FALSE);
 
         $builder_select->from($this->escaper->table('user_sessions'))
                        ->where($this->escaper->column('sessionID'), $this->escaper->value($id))
@@ -143,7 +143,7 @@ class SessionDAO extends DatabaseAccessObject
 
         if ($query->number_of_rows() > 0)
         {
-            $builder_delete = $this->db->get_new_dml_query_builder_object();
+            $builder_delete = $this->db->get_new_dml_query_builder_object(FALSE);
 
             $builder_delete->from($this->escaper->table('user_sessions'))
                            ->where($this->escaper->column('sessionID'), $this->escaper->value($id));
@@ -166,7 +166,7 @@ class SessionDAO extends DatabaseAccessObject
      */
     public function session_gc()
     {
-        $builder = $this->db->get_new_dml_query_builder_object();
+        $builder = $this->db->get_new_dml_query_builder_object(FALSE);
 
         $builder->from($this->escaper->table('user_sessions'))
                 ->where($this->escaper->column('expires'), $this->escaper->intvalue(time()), '<');
