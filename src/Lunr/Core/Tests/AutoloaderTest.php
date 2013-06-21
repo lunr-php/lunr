@@ -328,6 +328,7 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
         $classes[] = array('\namespace\package\Class_Name', 'namespace/package/Class/Name.php');
         $classes[] = array('\namespace\package_name\Class_Name', 'namespace/package_name/Class/Name.php');
         $classes[] = array('Lunr\Core\Tests\PSR0TestFile', 'Lunr/Core/Tests/PSR0TestFile.php');
+        $classes[] = array('Resque', 'Resque.php');
 
         return $classes;
     }

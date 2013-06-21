@@ -137,7 +137,7 @@ class Autoloader
         $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
 
         $path = dirname($class);
-        $path = empty($path) ? '' : $path . DIRECTORY_SEPARATOR;
+        $path = ($path === '.') ? '' : $path . DIRECTORY_SEPARATOR;
 
         $class = basename($class);
         $class = str_replace('_', DIRECTORY_SEPARATOR, $class);
