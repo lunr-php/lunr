@@ -13,9 +13,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Flare\Tests;
 
-use Lunr\Core\Verification;
+use Lunr\Flare\Verification;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use stdClass;
@@ -28,7 +28,7 @@ use stdClass;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Verification
+ * @covers     Lunr\Flare\Verification
  */
 abstract class VerificationTest extends PHPUnit_Framework_TestCase
 {
@@ -60,7 +60,7 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
 
         $this->verification = new Verification($this->logger);
 
-        $this->verification_reflection = new ReflectionClass('Lunr\Core\Verification');
+        $this->verification_reflection = new ReflectionClass('Lunr\Flare\Verification');
     }
 
     /**

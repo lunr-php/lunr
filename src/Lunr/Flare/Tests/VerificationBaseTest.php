@@ -6,25 +6,25 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Flare
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Flare\Tests;
 
-use Lunr\Core\Verification;
+use Lunr\Flare\Verification;
 
 /**
  * This class contains tests for the constructor of the Verification class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Flare
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Verification
+ * @covers     Lunr\Flare\Verification
  */
 class VerificationBaseTest extends VerificationTest
 {

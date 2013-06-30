@@ -13,9 +13,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Flare\Tests;
 
-use Lunr\Core\Verification;
+use Lunr\Flare\Verification;
 
 /**
  * This class contains the tests for result checking methods.
@@ -24,7 +24,7 @@ use Lunr\Core\Verification;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Verification
+ * @covers     Lunr\Flare\Verification
  */
 class VerificationResultTest extends VerificationTest
 {
@@ -32,8 +32,8 @@ class VerificationResultTest extends VerificationTest
     /**
      * Test that is_overchecked() returns FALSE when there are no superfluous elements being checked.
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testSuperfluousIsEmptyByDefault
-     * @covers  Lunr\Core\Verification::is_overchecked
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testSuperfluousIsEmptyByDefault
+     * @covers  Lunr\Flare\Verification::is_overchecked
      */
     public function testIsOvercheckedReturnsFalseWhenSuperfluousIsEmpty()
     {
@@ -46,7 +46,7 @@ class VerificationResultTest extends VerificationTest
     /**
      * Test that is_overchecked() returns TRUE when there are superfluous elements being checked.
      *
-     * @covers Lunr\Core\Verification::is_overchecked
+     * @covers Lunr\Flare\Verification::is_overchecked
      */
     public function testIsOvercheckedReturnsTrueWhenSuperfluousIsNotEmpty()
     {
@@ -70,7 +70,7 @@ class VerificationResultTest extends VerificationTest
      * @param array $result check results
      *
      * @dataProvider isFullyCheckedProvider
-     * @covers       Lunr\Core\Verification::is_fully_checked
+     * @covers       Lunr\Flare\Verification::is_fully_checked
      */
     public function testIsFullyCheckedReturnsTrueWhenAllDataKeysHaveBeenChecked($data, $result)
     {
@@ -95,7 +95,7 @@ class VerificationResultTest extends VerificationTest
      * @param array $result check results
      *
      * @dataProvider isNotFullyCheckedProvider
-     * @covers       Lunr\Core\Verification::is_fully_checked
+     * @covers       Lunr\Flare\Verification::is_fully_checked
      */
     public function testIsFullyCheckedReturnsFalseWhenNotAllDataKeysHaveBeenChecked($data, $result)
     {
@@ -119,8 +119,8 @@ class VerificationResultTest extends VerificationTest
     /**
      * Test that is_valid() returns FALSE if there is no identifier set.
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testIdentifierIsEmptyStringByDefault
-     * @covers  Lunr\Core\Verification::is_valid
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testIdentifierIsEmptyStringByDefault
+     * @covers  Lunr\Flare\Verification::is_valid
      */
     public function testIsValidReturnsFalseIfIdentifierIsEmpty()
     {
@@ -134,7 +134,7 @@ class VerificationResultTest extends VerificationTest
      * Test that is_valid() returns FALSE when check_superfluous is TRUE and is_overchecked Returnes TRUE.
      *
      * @depends testIsOvercheckedReturnsTrueWhenSuperfluousIsNotEmpty
-     * @covers  Lunr\Core\Verification::is_valid
+     * @covers  Lunr\Flare\Verification::is_valid
      */
     public function testIsValidReturnsFalseIfCheckSuperfluousEnabledAndIsOvercheckedTrue()
     {
@@ -160,7 +160,7 @@ class VerificationResultTest extends VerificationTest
      * Test that is_valid() returns FALSE when check_remaining is TRUE and is_fully_checked Returnes FALSE.
      *
      * @depends testIsFullyCheckedReturnsFalseWhenNotAllDataKeysHaveBeenChecked
-     * @covers  Lunr\Core\Verification::is_valid
+     * @covers  Lunr\Flare\Verification::is_valid
      */
     public function testIsValidReturnsFalseIfCheckRemainingEnabledAndIsFullyCheckedFalse()
     {
@@ -185,7 +185,7 @@ class VerificationResultTest extends VerificationTest
     /**
      * Test that is_valid() returns FALSE if a check failed.
      *
-     * @covers Lunr\Core\Verification::is_valid
+     * @covers Lunr\Flare\Verification::is_valid
      */
     public function testIsValidReturnsFalseIfACheckFailed()
     {
@@ -215,7 +215,7 @@ class VerificationResultTest extends VerificationTest
     /**
      * Test that is_valid() returns TRUE if no check failed.
      *
-     * @covers Lunr\Core\Verification::is_valid
+     * @covers Lunr\Flare\Verification::is_valid
      */
     public function testIsValidReturnsTrueIfNoCheckFailed()
     {
@@ -243,7 +243,7 @@ class VerificationResultTest extends VerificationTest
      * Test that is_valid() returns TRUE if no check failed and is_overchecked returns FALSE.
      *
      * @depends testIsOvercheckedReturnsFalseWhenSuperfluousIsEmpty
-     * @covers  Lunr\Core\Verification::is_valid
+     * @covers  Lunr\Flare\Verification::is_valid
      */
     public function testIsValidReturnsTrueIfNoCheckFailedAndIsOvercheckedIsFalse()
     {
@@ -275,7 +275,7 @@ class VerificationResultTest extends VerificationTest
      * Test that is_valid() returns TRUE if no check failed and is_fully_checked returns TRUE.
      *
      * @depends testIsFullyCheckedReturnsTrueWhenAllDataKeysHaveBeenChecked
-     * @covers  Lunr\Core\Verification::is_valid
+     * @covers  Lunr\Flare\Verification::is_valid
      */
     public function testIsValidReturnsTrueIfNoCheckFailedAndIsFullyCheckedIsTrue()
     {

@@ -38,11 +38,6 @@
             <file>src/Lunr/Core/Tests/ConfigServiceLocatorSupportTest.php</file>
             <file>src/Lunr/Core/Tests/ConfigServiceLocatorGetInstanceTest.php</file>
             <file>src/Lunr/Core/Tests/ConfigServiceLocatorLocateTest.php</file>
-            <file>src/Lunr/Core/Tests/VerificationBaseTest.php</file>
-            <file>src/Lunr/Core/Tests/VerificationNullPointerTest.php</file>
-            <file>src/Lunr/Core/Tests/VerificationChecksTest.php</file>
-            <file>src/Lunr/Core/Tests/VerificationSetTest.php</file>
-            <file>src/Lunr/Core/Tests/VerificationResultTest.php</file>
             <file>src/Lunr/Core/Tests/RequestBaseTest.php</file>
             <file>src/Lunr/Core/Tests/RequestStoreTest.php</file>
             <file>src/Lunr/Core/Tests/RequestGetTest.php</file>
@@ -63,6 +58,13 @@
             <file>src/Lunr/Feedback/Tests/PSR3LoggerTest.php</file>
             <file>src/Lunr/Feedback/Tests/PHPLoggerTest.php</file>
             <file>src/Lunr/Feedback/Tests/FileLoggerTest.php</file>
+        </testsuite>
+        <testsuite name="Flare">
+            <file>src/Lunr/Flare/Tests/VerificationBaseTest.php</file>
+            <file>src/Lunr/Flare/Tests/VerificationNullPointerTest.php</file>
+            <file>src/Lunr/Flare/Tests/VerificationChecksTest.php</file>
+            <file>src/Lunr/Flare/Tests/VerificationSetTest.php</file>
+            <file>src/Lunr/Flare/Tests/VerificationResultTest.php</file>
         </testsuite>
         <testsuite name="Gravity">
             <file>src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperBaseTest.php</file>
@@ -205,6 +207,7 @@
                 <file>../src/Lunr/Halo/LunrBaseTest.php</file>
                 <directory>../src/Lunr/Core/Tests/</directory>
                 <directory>../src/Lunr/Feedback/Tests/</directory>
+                <directory>../src/Lunr/Flare/Tests/</directory>
                 <directory>../src/Lunr/Halo/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/Tests/</directory>

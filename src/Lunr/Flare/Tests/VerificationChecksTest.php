@@ -13,9 +13,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Flare\Tests;
 
-use Lunr\Core\Verification;
+use Lunr\Flare\Verification;
 
 /**
  * This class contains the tests for the check functions
@@ -25,7 +25,7 @@ use Lunr\Core\Verification;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Verification
+ * @covers     Lunr\Flare\Verification
  */
 class VerificationChecksTest extends VerificationTest
 {
@@ -45,7 +45,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test that an unimplemented check returns FALSE.
      *
-     * @covers Lunr\Core\Verification::__call
+     * @covers Lunr\Flare\Verification::__call
      */
     public function testUnimplementedStoresFalse()
     {
@@ -63,7 +63,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test the fluid interface of an unimplemented call (2).
      *
-     * @covers Lunr\Core\Verification::__call
+     * @covers Lunr\Flare\Verification::__call
      */
     public function testUnimplementedReturnsSelfReference()
     {
@@ -72,14 +72,14 @@ class VerificationChecksTest extends VerificationTest
 
         $value = $this->verification->unimplemented();
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that ignore() sets the whole element as TRUE in result.
      *
-     * @covers  Lunr\Core\Verification::ignore
+     * @covers  Lunr\Flare\Verification::ignore
      */
     public function testIgnoreSetsResultTrue()
     {
@@ -96,7 +96,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test the fluid interface of ignore() (2).
      *
-     * @covers Lunr\Core\Verification::ignore
+     * @covers Lunr\Flare\Verification::ignore
      */
     public function testIgnoreReturnsSelfReference()
     {
@@ -105,14 +105,14 @@ class VerificationChecksTest extends VerificationTest
 
         $value = $this->verification->ignore();
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that ignore resets the pointer on successful ignore.
      *
-     * @covers Lunr\Core\Verification::ignore
+     * @covers Lunr\Flare\Verification::ignore
      */
     public function testIgnoreResetsPointer()
     {
@@ -127,7 +127,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test that is_length stores TRUE when the length is correct.
      *
-     * @covers Lunr\Core\Verification::is_length
+     * @covers Lunr\Flare\Verification::is_length
      */
     public function testIsLengthStoresTrueForCorrectLength()
     {
@@ -151,7 +151,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test that is_length stores FALSE when the length is incorrect.
      *
-     * @covers Lunr\Core\Verification::is_length
+     * @covers Lunr\Flare\Verification::is_length
      */
     public function testIsLengthStoresFalseForIncorrectLength()
     {
@@ -175,7 +175,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test the fluid interface of is_length() (2).
      *
-     * @covers Lunr\Core\Verification::is_length
+     * @covers Lunr\Flare\Verification::is_length
      */
     public function testIsLengthReturnsSelfReference()
     {
@@ -190,7 +190,7 @@ class VerificationChecksTest extends VerificationTest
 
         $value = $this->verification->is_length(5);
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
@@ -201,7 +201,7 @@ class VerificationChecksTest extends VerificationTest
      * @param mixed  $value Value of that type
      *
      * @dataProvider validTypeProvider
-     * @covers       Lunr\Core\Verification::is_type
+     * @covers       Lunr\Flare\Verification::is_type
      */
     public function testIsTypeStoresTrueForValidTypesAndValidValues($type, $value)
     {
@@ -229,7 +229,7 @@ class VerificationChecksTest extends VerificationTest
      * @param mixed  $value Value not of that type
      *
      * @dataProvider invalidTypeProvider
-     * @covers Lunr\Core\Verification::is_type
+     * @covers Lunr\Flare\Verification::is_type
      */
     public function testIsTypeStoresFalseForValidTypesAndInvalidValues($type, $value)
     {
@@ -253,7 +253,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test that is_type stores FALSE for types that don't have check functions.
      *
-     * @covers       Lunr\Core\Verification::is_type
+     * @covers       Lunr\Flare\Verification::is_type
      */
     public function testIsTypeStoresFalseForInvalidTypes()
     {
@@ -277,7 +277,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test the fluid interface of is_type() (2).
      *
-     * @covers Lunr\Core\Verification::is_type
+     * @covers Lunr\Flare\Verification::is_type
      */
     public function testIsTypeReturnsSelfReference()
     {
@@ -292,14 +292,14 @@ class VerificationChecksTest extends VerificationTest
 
         $value = $this->verification->is_type('string');
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that is_not_empty() stores TRUE for non-empty values.
      *
-     * @covers Lunr\Core\Verification::is_not_empty
+     * @covers Lunr\Flare\Verification::is_not_empty
      */
     public function testIsNotEmptyStoresTrueForNonEmptyValues()
     {
@@ -326,7 +326,7 @@ class VerificationChecksTest extends VerificationTest
      * @param mixed $value non-empty-value
      *
      * @dataProvider emptyValueProvider
-     * @covers       Lunr\Core\Verification::is_not_empty
+     * @covers       Lunr\Flare\Verification::is_not_empty
      */
     public function testIsNotEmptyStoresFalseForEmptyValues($value)
     {
@@ -350,7 +350,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test the fluid interface of is_not_empty() (2).
      *
-     * @covers Lunr\Core\Verification::is_not_empty
+     * @covers Lunr\Flare\Verification::is_not_empty
      */
     public function testIsNotEmptyReturnsSelfReference()
     {
@@ -365,7 +365,7 @@ class VerificationChecksTest extends VerificationTest
 
         $value = $this->verification->is_not_empty();
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
@@ -375,7 +375,7 @@ class VerificationChecksTest extends VerificationTest
      * @param mixed $value Valid numerical boolean
      *
      * @dataProvider validNumericalBooleanProvider
-     * @covers       Lunr\Core\Verification::is_numerical_boolean
+     * @covers       Lunr\Flare\Verification::is_numerical_boolean
      */
     public function testIsNumericalBooleanStoresTrueForValidValues($value)
     {
@@ -402,7 +402,7 @@ class VerificationChecksTest extends VerificationTest
      * @param mixed $value Invalid numerical boolean
      *
      * @dataProvider invalidNumericalBooleanProvider
-     * @covers       Lunr\Core\Verification::is_numerical_boolean
+     * @covers       Lunr\Flare\Verification::is_numerical_boolean
      */
     public function testIsNumericalBooleanStoresFalseForInvalidValues($value)
     {
@@ -426,7 +426,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test the fluid interface of is_numerical_boolean() (2).
      *
-     * @covers Lunr\Core\Verification::is_numerical_boolean
+     * @covers Lunr\Flare\Verification::is_numerical_boolean
      */
     public function testIsNumericalBooleanReturnsSelfReference()
     {
@@ -441,7 +441,7 @@ class VerificationChecksTest extends VerificationTest
 
         $value = $this->verification->is_numerical_boolean();
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
@@ -451,7 +451,7 @@ class VerificationChecksTest extends VerificationTest
      * @param mixed $value Valid numerical troolean
      *
      * @dataProvider validNumericalTrooleanProvider
-     * @covers       Lunr\Core\Verification::is_numerical_troolean
+     * @covers       Lunr\Flare\Verification::is_numerical_troolean
      */
     public function testIsNumericalTrooleanStoresTrueForValidValues($value)
     {
@@ -478,7 +478,7 @@ class VerificationChecksTest extends VerificationTest
      * @param mixed $value Valid numerical troolean
      *
      * @dataProvider invalidNumericalTrooleanProvider
-     * @covers       Lunr\Core\Verification::is_numerical_troolean
+     * @covers       Lunr\Flare\Verification::is_numerical_troolean
      */
     public function testIsNumericalTrooleanStoresFalseForInvalidValues($value)
     {
@@ -502,7 +502,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test the fluid interface of is_numerical_troolean() (2).
      *
-     * @covers Lunr\Core\Verification::is_numerical_troolean
+     * @covers Lunr\Flare\Verification::is_numerical_troolean
      */
     public function testIsNumericalTrooleanReturnsSelfReference()
     {
@@ -517,14 +517,14 @@ class VerificationChecksTest extends VerificationTest
 
         $value = $this->verification->is_numerical_troolean();
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that is_mail() stores TRUE for valid emails.
      *
-     * @covers Lunr\Core\Verification::is_mail
+     * @covers Lunr\Flare\Verification::is_mail
      */
     public function testIsMailStoresTrueForValidEmails()
     {
@@ -553,7 +553,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test that is_mail() stores FALSE for invalid emails.
      *
-     * @covers Lunr\Core\Verification::is_mail
+     * @covers Lunr\Flare\Verification::is_mail
      */
     public function testIsMailStoresFalseForInvalidEmails()
     {
@@ -582,7 +582,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test the fluid interface of is_mail() (2).
      *
-     * @covers Lunr\Core\Verification::is_mail
+     * @covers Lunr\Flare\Verification::is_mail
      */
     public function testIsMailReturnsSelfReference()
     {
@@ -601,14 +601,14 @@ class VerificationChecksTest extends VerificationTest
 
         $value = $this->verification->is_mail($mail);
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that is_date() stores TRUE for valid dates.
      *
-     * @covers Lunr\Core\Verification::is_date
+     * @covers Lunr\Flare\Verification::is_date
      */
     public function testIsDateStoresTrueForValidDates()
     {
@@ -637,7 +637,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test that is_date() stores FALSE for invalid dates.
      *
-     * @covers Lunr\Core\Verification::is_date
+     * @covers Lunr\Flare\Verification::is_date
      */
     public function testIsDateStoresFalseForInvalidDates()
     {
@@ -666,7 +666,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test the fluid interface of is_date() (2).
      *
-     * @covers Lunr\Core\Verification::is_date
+     * @covers Lunr\Flare\Verification::is_date
      */
     public function testIsDateReturnsSelfReference()
     {
@@ -685,14 +685,14 @@ class VerificationChecksTest extends VerificationTest
 
         $value = $this->verification->is_date($date);
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that is_time() stores TRUE for valid times.
      *
-     * @covers Lunr\Core\Verification::is_time
+     * @covers Lunr\Flare\Verification::is_time
      */
     public function testIsTimeStoresTrueForValidTimes()
     {
@@ -721,7 +721,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test that is_time() stores FALSE for invalid times.
      *
-     * @covers Lunr\Core\Verification::is_time
+     * @covers Lunr\Flare\Verification::is_time
      */
     public function testIsTimeStoresFalseForInvalidTimes()
     {
@@ -750,7 +750,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test the fluid interface of is_time() (2).
      *
-     * @covers Lunr\Core\Verification::is_time
+     * @covers Lunr\Flare\Verification::is_time
      */
     public function testIsTimeReturnsSelfReference()
     {
@@ -769,7 +769,7 @@ class VerificationChecksTest extends VerificationTest
 
         $value = $this->verification->is_time($date);
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 

@@ -13,9 +13,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Flare\Tests;
 
-use Lunr\Core\Verification;
+use Lunr\Flare\Verification;
 
 /**
  * This class contains the tests for the setters of the verification class.
@@ -24,7 +24,7 @@ use Lunr\Core\Verification;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Verification
+ * @covers     Lunr\Flare\Verification
  */
 class VerificationSetTest extends VerificationTest
 {
@@ -32,21 +32,21 @@ class VerificationSetTest extends VerificationTest
     /**
      * Test the fluid interface of set_data().
      *
-     * @covers Lunr\Core\Verification::set_data
+     * @covers Lunr\Flare\Verification::set_data
      */
     public function testSetDataReturnsSelfReference()
     {
         $set   = array('1');
         $value = $this->verification->set_data($set);
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that set_data() populates the data array.
      *
-     * @covers  Lunr\Core\Verification::set_data
+     * @covers  Lunr\Flare\Verification::set_data
      */
     public function testSetDataSetsData()
     {
@@ -66,7 +66,7 @@ class VerificationSetTest extends VerificationTest
      * @param mixed $value Dataset for population
      *
      * @dataProvider invalidDatasetProvider
-     * @covers       Lunr\Core\Verification::set_data
+     * @covers       Lunr\Flare\Verification::set_data
      */
     public function testSetDataSetsEmptyArrayAsDataIfDatasetIsInvalid($value)
     {
@@ -89,7 +89,7 @@ class VerificationSetTest extends VerificationTest
     /**
      * Test that set_data resets the verification state.
      *
-     * @covers Lunr\Core\Verification::set_data
+     * @covers Lunr\Flare\Verification::set_data
      */
     public function testSetDataResetsVerificationState()
     {
@@ -135,7 +135,7 @@ class VerificationSetTest extends VerificationTest
     /**
      * Test setting an identifier.
      *
-     * @covers Lunr\Core\Verification::set_identifier
+     * @covers Lunr\Flare\Verification::set_identifier
      */
     public function testSetIdentifierSetsIdentifier()
     {
@@ -152,7 +152,7 @@ class VerificationSetTest extends VerificationTest
     /**
      * Test the fluid interface of set_identifier.
      *
-     * @covers Lunr\Core\Verification::set_identifier
+     * @covers Lunr\Flare\Verification::set_identifier
      */
     public function testSetIdentifierReturnsSelfReference()
     {
@@ -160,14 +160,14 @@ class VerificationSetTest extends VerificationTest
 
         $value = $this->verification->set_identifier($id);
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that ignore_unchecked_indexes() sets check_remaining to FALSE.
      *
-     * @covers Lunr\Core\Verification::ignore_unchecked_indexes
+     * @covers Lunr\Flare\Verification::ignore_unchecked_indexes
      */
     public function testIgnoreUncheckedIndexesSetsCheckRemainingFalse()
     {
@@ -182,20 +182,20 @@ class VerificationSetTest extends VerificationTest
     /**
      * Test the fluid interface of ignore_unchecked_indexes.
      *
-     * @covers Lunr\Core\Verification::ignore_unchecked_indexes
+     * @covers Lunr\Flare\Verification::ignore_unchecked_indexes
      */
     public function testIgnoreUncheckedIndexesReturnsSelfReference()
     {
         $value = $this->verification->ignore_unchecked_indexes();
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that check_superfluous_checks() sets check_superfluous to TRUE.
      *
-     * @covers Lunr\Core\Verification::ignore_unchecked_indexes
+     * @covers Lunr\Flare\Verification::ignore_unchecked_indexes
      */
     public function testCheckSuperfluousChecksSetsCheckSuperfluousTrue()
     {
@@ -210,33 +210,33 @@ class VerificationSetTest extends VerificationTest
     /**
      * Test the fluid interface of check_superfluous_checks.
      *
-     * @covers Lunr\Core\Verification::check_superfluous_checks
+     * @covers Lunr\Flare\Verification::check_superfluous_checks
      */
     public function testCheckSuperfluousChecksReturnsSelfReference()
     {
         $value = $this->verification->check_superfluous_checks();
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test the fluid interface of inspect().
      *
-     * @covers Lunr\Core\Verification::inspect
+     * @covers Lunr\Flare\Verification::inspect
      */
     public function testInspectReturnsSelfReference()
     {
         $value = $this->verification->inspect('test');
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that inspect() sets the pointer if the passed index exists.
      *
-     * @covers Lunr\Core\Verification::inspect
+     * @covers Lunr\Flare\Verification::inspect
      */
     public function testInspectSetsPointerIfIndexExists()
     {
@@ -257,7 +257,7 @@ class VerificationSetTest extends VerificationTest
     /**
      * Test that inspect() sets the pointer NULL if the passed index does not exist.
      *
-     * @covers Lunr\Core\Verification::inspect
+     * @covers Lunr\Flare\Verification::inspect
      */
     public function testInspectSetsPointerNullIfIndexDoesNotExist()
     {
@@ -272,7 +272,7 @@ class VerificationSetTest extends VerificationTest
     /**
      * Test that inspect() adds the passed index to superfluous if it does not exist.
      *
-     * @covers Lunr\Core\Verification::inspect
+     * @covers Lunr\Flare\Verification::inspect
      */
     public function testInspectAddsIndexToSuperfluousIfItDoesNotExist()
     {

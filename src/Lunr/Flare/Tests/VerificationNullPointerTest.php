@@ -13,9 +13,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Flare\Tests;
 
-use Lunr\Core\Verification;
+use Lunr\Flare\Verification;
 
 /**
  * This class contains the tests for the check functions
@@ -25,7 +25,7 @@ use Lunr\Core\Verification;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Verification
+ * @covers     Lunr\Flare\Verification
  */
 class VerificationNullPointerTest extends VerificationTest
 {
@@ -33,8 +33,8 @@ class VerificationNullPointerTest extends VerificationTest
     /**
      * Test that ignore() does nothing when no element is being inspected.
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::ignore
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::ignore
      */
     public function testIgnoreDoesNothingWhenPointerIsNull()
     {
@@ -57,22 +57,22 @@ class VerificationNullPointerTest extends VerificationTest
     /**
      * Test the fluid interface of ignore() (1).
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::ignore
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::ignore
      */
     public function testIgnoreReturnsSelfReferenceWhenPointerIsNull()
     {
         $value = $this->verification->ignore();
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that is_length() does nothing when no element is being inspected.
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_length
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_length
      */
     public function testIsLengthDoesNothingWhenPointerIsNull()
     {
@@ -95,22 +95,22 @@ class VerificationNullPointerTest extends VerificationTest
     /**
      * Test the fluid interface of is_length() (1).
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_length
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_length
      */
     public function testIsLengthReturnsSelfReferenceWhenPointerIsNull()
     {
         $value = $this->verification->is_length(0);
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that is_type() does nothing when no element is being inspected.
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_type
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_type
      */
     public function testIsTypeDoesNothingWhenPointerIsNull()
     {
@@ -133,22 +133,22 @@ class VerificationNullPointerTest extends VerificationTest
     /**
      * Test the fluid interface of is_type() (1).
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_type
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_type
      */
     public function testIsTypeReturnsSelfReferenceWhenPointerIsNull()
     {
         $value = $this->verification->is_type('null');
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that is_not_empty() does nothing when no element is being inspected.
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_not_empty
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_not_empty
      */
     public function testIsNotEmptyDoesNothingWhenPointerIsNull()
     {
@@ -171,22 +171,22 @@ class VerificationNullPointerTest extends VerificationTest
     /**
      * Test the fluid interface of is_not_empty() (1).
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_not_empty
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_not_empty
      */
     public function testIsNotEmptyReturnsSelfReferenceWhenPointerIsNull()
     {
         $value = $this->verification->is_not_empty();
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that is_mail() does nothing when no element is being inspected.
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_mail
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_mail
      */
     public function testIsMailDoesNothingWhenPointerIsNull()
     {
@@ -209,22 +209,22 @@ class VerificationNullPointerTest extends VerificationTest
     /**
      * Test the fluid interface of is_mail() (1).
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_mail
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_mail
      */
     public function testIsMailReturnsSelfReferenceWhenPointerIsNull()
     {
         $value = $this->verification->is_mail(NULL);
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that is_numerical_boolean() does nothing when no element is being inspected.
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_numerical_boolean
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_numerical_boolean
      */
     public function testIsNumericalBooleanDoesNothingWhenPointerIsNull()
     {
@@ -247,22 +247,22 @@ class VerificationNullPointerTest extends VerificationTest
     /**
      * Test the fluid interface of is_numerical_boolean() (1).
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_numerical_boolean
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_numerical_boolean
      */
     public function testIsNumericalBooleanReturnsSelfReferenceWhenPointerIsNull()
     {
         $value = $this->verification->is_numerical_boolean();
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that is_numerical_troolean() does nothing when no element is being inspected.
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_numerical_troolean
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_numerical_troolean
      */
     public function testIsNumericalTrooleanDoesNothingWhenPointerIsNull()
     {
@@ -285,22 +285,22 @@ class VerificationNullPointerTest extends VerificationTest
     /**
      * Test the fluid interface of is_numerical_troolean() (1).
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_numerical_troolean
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_numerical_troolean
      */
     public function testIsNumericalTrooleanReturnsSelfReferenceWhenPointerIsNull()
     {
         $value = $this->verification->is_numerical_troolean();
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that is_date() does nothing when no element is being inspected.
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_date
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_date
      */
     public function testIsDateDoesNothingWhenPointerIsNull()
     {
@@ -323,22 +323,22 @@ class VerificationNullPointerTest extends VerificationTest
     /**
      * Test the fluid interface of is_date() (1).
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_date
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_date
      */
     public function testIsDateReturnsSelfReferenceWhenPointerIsNull()
     {
         $value = $this->verification->is_date(NULL);
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that is_time() does nothing when no element is being inspected.
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_time
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_time
      */
     public function testIsTimeDoesNothingWhenPointerIsNull()
     {
@@ -361,22 +361,22 @@ class VerificationNullPointerTest extends VerificationTest
     /**
      * Test the fluid interface of is_time() (1).
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::is_time
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::is_time
      */
     public function testIsTimeReturnsSelfReferenceWhenPointerIsNull()
     {
         $value = $this->verification->is_time(NULL);
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
     /**
      * Test that an unimplemented check does nothing when no element is being inspected.
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::__call
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::__call
      */
     public function testUnimplementedDoesNothingWhenPointerIsNull()
     {
@@ -399,14 +399,14 @@ class VerificationNullPointerTest extends VerificationTest
     /**
      * Test the fluid interface of an unimplemented call (1).
      *
-     * @depends Lunr\Core\Tests\VerificationBaseTest::testPointerIsNullByDefault
-     * @covers  Lunr\Core\Verification::__call
+     * @depends Lunr\Flare\Tests\VerificationBaseTest::testPointerIsNullByDefault
+     * @covers  Lunr\Flare\Verification::__call
      */
     public function testUnimplementedReturnsSelfReferenceWhenPointerIsNull()
     {
         $value = $this->verification->unimplemented();
 
-        $this->assertInstanceOf('Lunr\Core\Verification', $value);
+        $this->assertInstanceOf('Lunr\Flare\Verification', $value);
         $this->assertSame($this->verification, $value);
     }
 
