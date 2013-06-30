@@ -39,12 +39,15 @@
             <file>src/Lunr/Core/Tests/RequestBaseTest.php</file>
             <file>src/Lunr/Core/Tests/RequestStoreTest.php</file>
             <file>src/Lunr/Core/Tests/RequestGetTest.php</file>
-            <file>src/Lunr/Core/Tests/ResponseTest.php</file>
+            <file>src/Lunr/Core/Tests/ResponseBaseTest.php</file>
+            <file>src/Lunr/Core/Tests/ResponseGetTest.php</file>
+            <file>src/Lunr/Core/Tests/ResponseSetTest.php</file>
             <file>src/Lunr/Core/Tests/ErrorEnumTraitTest.php</file>
             <file>src/Lunr/Feedback/Tests/PSR3LoggerTest.php</file>
             <file>src/Lunr/Feedback/Tests/PHPLoggerTest.php</file>
             <file>src/Lunr/Feedback/Tests/FileLoggerTest.php</file>
-            <file>src/Lunr/Core/Tests/ControllerTest.php</file>
+            <file>src/Lunr/Core/Tests/ControllerBaseTest.php</file>
+            <file>src/Lunr/Core/Tests/ControllerResultTest.php</file>
             <file>src/Lunr/Core/Tests/FrontControllerBaseTest.php</file>
             <file>src/Lunr/Core/Tests/FrontControllerGetTest.php</file>
             <file>src/Lunr/Core/Tests/FrontControllerDispatchTest.php</file>

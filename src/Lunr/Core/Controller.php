@@ -29,6 +29,12 @@ abstract class Controller
     use ErrorEnumTrait;
 
     /**
+     * Shared instance of the Request class.
+     * @var Request
+     */
+    protected $request;
+
+    /**
      * Shared instance of the Response class.
      * @var Response
      */
@@ -37,10 +43,12 @@ abstract class Controller
     /**
      * Constructor.
      *
+     * @param Request  $request  Shared instance of the Request class
      * @param Response $response Shared instance of the Response class
      */
-    public function __construct($response)
+    public function __construct($request, $response)
     {
+        $this->request  = $request;
         $this->response = $response;
         $this->error    = array();
     }
@@ -52,6 +60,7 @@ abstract class Controller
     {
         unset($this->error);
         unset($this->response);
+        unset($this->request);
     }
 
     /**
@@ -64,12 +73,34 @@ abstract class Controller
      */
     public function __call($name, $arguments)
     {
-        if (isset($this->error['not_implemented']))
+        $this->set_result('not_implemented', 'Not implemented!');
+    }
+
+    /**
+     * Store result of the call in the response object.
+     *
+     * @param String $code_index Index of the return code in the ERROR enum
+     * @param String $message    Error Message
+     * @param mixed  $info       Additional error information
+     *
+     * @return void
+     */
+    protected function set_result($code_index, $message = NULL, $info = NULL)
+    {
+        if (isset($this->error[$code_index]) === TRUE)
         {
-            $this->response->return_code = $this->error['not_implemented'];
+            $this->response->set_return_code($this->request->call, $this->error[$code_index]);
         }
 
-        $this->response->errmsg = 'Not implemented!';
+        if ($message !== NULL)
+        {
+            $this->response->set_error_message($this->request->call, $message);
+        }
+
+        if ($info !== NULL)
+        {
+            $this->response->set_error_info($this->request->call, $info);
+        }
     }
 
 }

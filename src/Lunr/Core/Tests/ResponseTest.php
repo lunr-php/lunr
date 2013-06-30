@@ -3,7 +3,7 @@
 /**
  * This file contains the ResponseTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Core
@@ -16,7 +16,7 @@
 namespace Lunr\Core\Tests;
 
 use Lunr\Core\Response;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -28,28 +28,16 @@ use ReflectionClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Core\Response
  */
-class ResponseTest extends PHPUnit_Framework_TestCase
+class ResponseTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the response object.
-     * @var Response
-     */
-    private $response;
-
-    /**
-     * Reflection instance of the response object.
-     * @var ReflectionClass
-     */
-    private $response_reflection;
 
     /**
      * TestCase Constructor.
      */
     public function setUp()
     {
-        $this->response            = new Response();
-        $this->response_reflection = new ReflectionClass('Lunr\Core\Response');
+        $this->class      = new Response();
+        $this->reflection = new ReflectionClass('Lunr\Core\Response');
     }
 
     /**
@@ -57,205 +45,8 @@ class ResponseTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->response);
-        unset($this->response_reflection);
-    }
-
-    /**
-     * Test that the data array is empty by default.
-     */
-    public function testDataEmptyByDefault()
-    {
-        $property = $this->response_reflection->getProperty('data');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->response);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
-    }
-
-    /**
-     * Test that there is no error message set by default.
-     */
-    public function testErrorMessageEmptyByDefault()
-    {
-        $property = $this->response_reflection->getProperty('errmsg');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('', $property->getValue($this->response));
-    }
-
-    /**
-     * Test that there is no error information set by default.
-     */
-    public function testErrorInfoEmptyByDefault()
-    {
-        $property = $this->response_reflection->getProperty('errinfo');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('', $property->getValue($this->response));
-    }
-
-    /**
-     * Test that the default return code is zero.
-     */
-    public function testReturnCodeIsZeroByDefault()
-    {
-        $property = $this->response_reflection->getProperty('return_code');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(0, $property->getValue($this->response));
-    }
-
-    /**
-     * Test adding response data.
-     *
-     * @depends testDataEmptyByDefault
-     * @covers  Lunr\Core\Response::add_response_data
-     */
-    public function testAddResponseData()
-    {
-        $property = $this->response_reflection->getProperty('data');
-        $property->setAccessible(TRUE);
-
-        $this->response->add_response_data('key', 'value');
-
-        $value = $property->getValue($this->response);
-
-        $this->assertArrayHasKey('key', $value);
-        $this->assertEquals('value', $value['key']);
-    }
-
-    /**
-     * Test getting existing response data.
-     *
-     * @depends testAddResponseData
-     * @covers  Lunr\Core\Response::get_response_data
-     */
-    public function testGetResponseDataWithExistingKey()
-    {
-        $this->response->add_response_data('key', 'value');
-
-        $this->assertEquals('value', $this->response->get_response_data('key'));
-    }
-
-    /**
-     * Test getting non-existing response data.
-     *
-     * @covers  Lunr\Core\Response::get_response_data
-     */
-    public function testGetResponseDataWithNonExistingKey()
-    {
-        $this->assertNull($this->response->get_response_data('non-existing'));
-    }
-
-    /**
-     * Test setting an error message.
-     *
-     * @covers Lunr\Core\Response::__set
-     */
-    public function testSetErrorMessage()
-    {
-        $property = $this->response_reflection->getProperty('errmsg');
-        $property->setAccessible(TRUE);
-
-        $this->response->errmsg = 'Message';
-
-        $this->assertEquals('Message', $property->getValue($this->response));
-    }
-
-    /**
-     * Test setting an error information.
-     *
-     * @covers Lunr\Core\Response::__set
-     */
-    public function testSetErrorInformation()
-    {
-        $property = $this->response_reflection->getProperty('errinfo');
-        $property->setAccessible(TRUE);
-
-        $this->response->errinfo = 'Info';
-
-        $this->assertEquals('Info', $property->getValue($this->response));
-    }
-
-    /**
-     * Test setting a valid return code.
-     *
-     * @covers Lunr\Core\Response::__set
-     */
-    public function testSetValidReturnCode()
-    {
-        $property = $this->response_reflection->getProperty('return_code');
-        $property->setAccessible(TRUE);
-
-        $this->response->return_code = 503;
-
-        $this->assertEquals(503, $property->getValue($this->response));
-    }
-
-    /**
-     * Test setting a valid return code.
-     *
-     * @param mixed $code Invalid return code value.
-     *
-     * @dataProvider invalidReturnCodeProvider
-     * @covers       Lunr\Core\Response::__set
-     */
-    public function testSetInvalidReturnCode($code)
-    {
-        $property = $this->response_reflection->getProperty('return_code');
-        $property->setAccessible(TRUE);
-
-        $this->response->return_code = $code;
-
-        $this->assertEquals(0, $property->getValue($this->response));
-    }
-
-    /**
-     * Test that setting data directly does not work.
-     *
-     * @covers Lunr\Core\Response::__set
-     */
-    public function testSetDataDirectlyDoesNotWork()
-    {
-        $property = $this->response_reflection->getProperty('data');
-        $property->setAccessible(TRUE);
-
-        $this->response->data = 'value';
-
-        $value = $property->getValue($this->response);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
-    }
-
-    /**
-     * Test getting existing attributes via __get.
-     *
-     * @param String $attr  Attribute name
-     * @param mixed  $value Expected attribute value
-     *
-     * @depends      testErrorInfoEmptyByDefault
-     * @depends      testErrorMessageEmptyByDefault
-     * @depends      testReturnCodeIsZeroByDefault
-     * @dataProvider validResponseAttributesProvider
-     * @covers       Lunr\Core\Response::__get
-     */
-    public function testGettingExistingAttributes($attr, $value)
-    {
-        $this->assertEquals($value, $this->response->$attr);
-    }
-
-    /**
-     * Test that getting data does not work.
-     *
-     * @covers Lunr\Core\Response::__get
-     */
-    public function testGettingDataDoesNotWork()
-    {
-        $this->assertNull($this->response->data);
+        unset($this->class);
+        unset($this->reflection);
     }
 
     /**
@@ -265,11 +56,11 @@ class ResponseTest extends PHPUnit_Framework_TestCase
      */
     public function invalidReturnCodeProvider()
     {
-        $codes   = array();
-        $codes[] = array('502');
-        $codes[] = array(4.5);
-        $codes[] = array(TRUE);
-        $codes[] = array(array());
+        $codes   = [];
+        $codes[] = ['502'];
+        $codes[] = [4.5];
+        $codes[] = [TRUE];
+        $codes[] = [[]];
 
         return $codes;
     }
@@ -281,10 +72,24 @@ class ResponseTest extends PHPUnit_Framework_TestCase
      */
     public function validResponseAttributesProvider()
     {
-        $attrs   = array();
-        $attrs[] = array('errmsg', '');
-        $attrs[] = array('errinfo', '');
-        $attrs[] = array('return_code', 0);
+        $attrs   = [];
+        $attrs[] = ['view', ''];
+
+        return $attrs;
+    }
+
+    /**
+     * Unit test data provider for attributes inaccessible over __get.
+     *
+     * @return array $attrs Array of attribute names.
+     */
+    public function invalidResponseAttributesProvider()
+    {
+        $attrs   = [];
+        $attrs[] = ['data'];
+        $attrs[] = ['errmsg'];
+        $attrs[] = ['errinfo'];
+        $attrs[] = ['return_code'];
 
         return $attrs;
     }

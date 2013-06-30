@@ -35,31 +35,38 @@ class Response
 
     /**
      * Return code
-     * @var int
+     * @var array
      */
     private $return_code;
 
     /**
      * Error message
-     * @var String
+     * @var array
      */
     private $errmsg;
 
     /**
      * Additional error info
-     * @var String
+     * @var array
      */
     private $errinfo;
+
+    /**
+     * The selected view to display the data.
+     * @var String
+     */
+    private $view;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->data        = array();
-        $this->errmsg      = '';
-        $this->return_code = 0;
-        $this->errinfo     = '';
+        $this->data        = [];
+        $this->errmsg      = [];
+        $this->return_code = [];
+        $this->errinfo     = [];
+        $this->view        = '';
     }
 
     /**
@@ -71,6 +78,7 @@ class Response
         unset($this->errmsg);
         unset($this->return_code);
         unset($this->errinfo);
+        unset($this->view);
     }
 
     /**
@@ -86,9 +94,7 @@ class Response
     {
         switch ($name)
         {
-            case 'return_code':
-            case 'errmsg':
-            case 'errinfo':
+            case 'view':
                 return $this->$name;
             default:
                 return NULL;
@@ -107,15 +113,7 @@ class Response
     {
         switch ($name)
         {
-            case 'return_code':
-                if (is_int($value))
-                {
-                    $this->return_code = $value;
-                }
-
-                return;
-            case 'errmsg':
-            case 'errinfo':
+            case 'view':
                 $this->$name = $value;
                 return;
             default:
@@ -137,6 +135,48 @@ class Response
     }
 
     /**
+     * Set an error message for the given call identifier.
+     *
+     * @param String $identifier Call identifier
+     * @param String $value      Error message
+     *
+     * @return void
+     */
+    public function set_error_message($identifier, $value)
+    {
+        $this->errmsg[$identifier] = $value;
+    }
+
+    /**
+     * Set additional error information for the given call identifier.
+     *
+     * @param String $identifier Call identifier
+     * @param mixed  $value      Additional error information
+     *
+     * @return void
+     */
+    public function set_error_info($identifier, $value)
+    {
+        $this->errinfo[$identifier] = $value;
+    }
+
+    /**
+     * Set a return code for the given call identifier.
+     *
+     * @param String  $identifier Call identifier
+     * @param Integer $value      Return code
+     *
+     * @return void
+     */
+    public function set_return_code($identifier, $value)
+    {
+        if (is_int($value) === TRUE)
+        {
+            $this->return_code[$identifier] = $value;
+        }
+    }
+
+    /**
      * Get a specific response data.
      *
      * @param mixed $key Identifier for the data
@@ -146,6 +186,47 @@ class Response
     public function get_response_data($key)
     {
         return isset($this->data[$key]) ? $this->data[$key] : NULL;
+    }
+
+    /**
+     * Get error message for a call identifier.
+     *
+     * @param mixed $identifier Call identifier
+     *
+     * @return mixed $value The matching error message on success, or NULL on failure
+     */
+    public function get_error_message($identifier)
+    {
+        return isset($this->errmsg[$identifier]) ? $this->errmsg[$identifier] : NULL;
+    }
+
+    /**
+     * Get error info for a call identifier.
+     *
+     * @param mixed $identifier Call identifier
+     *
+     * @return mixed $value The matching error info on success, or NULL on failure
+     */
+    public function get_error_info($identifier)
+    {
+        return isset($this->errinfo[$identifier]) ? $this->errinfo[$identifier] : NULL;
+    }
+
+    /**
+     * Get return code for most severe error, or for call identifier if given.
+     *
+     * @param mixed $identifier Call identifier
+     *
+     * @return mixed $value The matching return code on success, or NULL on failure
+     */
+    public function get_return_code($identifier = NULL)
+    {
+        if ($identifier === NULL)
+        {
+            $identifier = array_search(max($this->return_code), $this->return_code);
+        }
+
+        return isset($this->return_code[$identifier]) ? $this->return_code[$identifier] : NULL;
     }
 
 }

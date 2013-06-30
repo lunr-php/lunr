@@ -3,7 +3,7 @@
 /**
  * This file contains the ControllerTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Core
@@ -15,8 +15,7 @@
 
 namespace Lunr\Core\Tests;
 
-use Lunr\Libraries\Controller;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -28,26 +27,20 @@ use ReflectionClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Core\Controller
  */
-class ControllerTest extends PHPUnit_Framework_TestCase
+abstract class ControllerTest extends LunrBaseTest
 {
 
     /**
      * Mock instance of the response class.
      * @var Response
      */
-    private $response;
+    protected $response;
 
     /**
-     * Instance of the controller class.
-     * @var Controller
+     * Mock instance of the request class.
+     * @var Request
      */
-    private $controller;
-
-    /**
-     * Reflection instance of the controller class.
-     * @var ReflectionClass
-     */
-    private $controller_reflection;
+    protected $request;
 
     /**
      * TestCase Constructor.
@@ -55,12 +48,15 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->response = $this->getMock('Lunr\Core\Response');
+        $this->request  = $this->getMockBuilder('Lunr\Core\Request')
+                               ->disableOriginalConstructor()
+                               ->getMock();
 
-        $this->controller = $this->getMockBuilder('Lunr\Core\Controller')
-                                 ->setConstructorArgs(array(&$this->response))
-                                 ->getMockForAbstractClass();
+        $this->class = $this->getMockBuilder('Lunr\Core\Controller')
+                            ->setConstructorArgs([$this->request, $this->response])
+                            ->getMockForAbstractClass();
 
-        $this->controller_reflection = new ReflectionClass('Lunr\Core\Controller');
+        $this->reflection = new ReflectionClass('Lunr\Core\Controller');
     }
 
     /**
@@ -69,73 +65,9 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->response);
-        unset($this->controller);
-        unset($this->controller_reflection);
-    }
-
-    /**
-     * Test that there are no error enums set by default.
-     */
-    public function testErrorEmptyByDefault()
-    {
-        $property = $this->controller_reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->controller);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
-    }
-
-    /**
-     * Test that the response class is set correctly.
-     */
-    public function testResponseSetCorrectly()
-    {
-        $property = $this->controller_reflection->getProperty('response');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->response, $property->getValue($this->controller));
-        $this->assertSame($this->response, $property->getValue($this->controller));
-    }
-
-    /**
-     * Test calling unimplemented methods without error enums set.
-     *
-     * @depends testErrorEmptyByDefault
-     * @covers  Lunr\Core\Controller::__call
-     */
-    public function testNonImplementedCallWithoutEnumsSet()
-    {
-        $this->response->expects($this->once())
-                       ->method('__set')
-                       ->with($this->equalTo('errmsg'));
-
-        $this->controller->unimplemented();
-    }
-
-    /**
-     * Test calling unimplemented methods with error enums set.
-     *
-     * @covers  Lunr\Core\Controller::__call
-     */
-    public function testNonImplementedCallWithEnumsSet()
-    {
-        $ERROR['not_implemented'] = 503;
-
-        $property = $this->controller_reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->controller, $ERROR);
-
-        $this->response->expects($this->at(0))
-                       ->method('__set')
-                       ->with($this->equalTo('return_code'));
-
-        $this->response->expects($this->at(1))
-                       ->method('__set')
-                       ->with($this->equalTo('errmsg'));
-
-        $this->controller->unimplemented();
+        unset($this->request);
+        unset($this->class);
+        unset($this->reflection);
     }
 
 }

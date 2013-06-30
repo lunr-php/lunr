@@ -34,7 +34,7 @@ class MockController extends Controller
      */
     public function __construct()
     {
-        parent::__construct(NULL);
+        parent::__construct(NULL, NULL);
     }
 
     /**
