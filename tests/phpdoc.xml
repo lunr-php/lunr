@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <title>Lunr</title>
+    <parser>
+        <target>../build/api</target>
+        <markers>
+            <item>TODO</item>
+            <item>FIXME</item>
+        </markers>
+        <extensions>
+            <extension>php</extension>
+        </extensions>
+        <visibility></visibility>
+    </parser>
+    <transformer>
+        <target>../build/api</target>
+    </transformer>
+    <logging>
+        <level>warn</level>
+    </logging>
+    <transformations>
+        <template name="new-black" />
+    </transformations>
+    <files>
+        <directory>../src/Lunr</directory>
+        <ignore>*/Tests/*</ignore>
+    </files>
+</phpdoc>

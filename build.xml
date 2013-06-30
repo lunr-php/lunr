@@ -78,13 +78,8 @@
     <target name="phpdoc"
             description="Generate API documentation">
         <exec executable="phpdoc">
-            <arg value="run" />
-            <arg value="-d" />
-            <arg value="${system}" />
-            <arg value="--template" />
-            <arg value="new-black" />
-            <arg value="-t" />
-            <arg path="${basedir}/build/api" />
+            <arg value="-c" />
+            <arg value="tests/phpdoc.xml" />
             <arg value="--parseprivate" />
         </exec>
     </target>
