@@ -475,6 +475,69 @@ class RequestStoreTest extends RequestTest
     }
 
     /**
+    * Test storing invalid $_GET values.
+    *
+    * If we have default values for controller and method, construct the
+    * call value.
+    *
+    * @param mixed $get Invalid $_GET values
+    *
+    * @depends      Lunr\Core\Tests\RequestBaseTest::testGetEmpty
+    * @dataProvider invalidSuperglobalValueProvider
+    * @covers       Lunr\Core\Request::store_get
+    */
+    public function testStoreInvalidGetValuesStoresCallIfDefaultsSet($get)
+    {
+        $stored = $this->reflection_request->getProperty('request');
+        $stored->setAccessible(TRUE);
+
+        $method = $this->reflection_request->getMethod('store_get');
+        $method->setAccessible(TRUE);
+
+        $_GET = $get;
+
+        $method->invokeArgs($this->request, array(&$this->configuration));
+
+        $request = $stored->getValue($this->request);
+
+        $call = 'DefaultController/default_method';
+
+        $this->assertEquals($call, $request['call']);
+    }
+
+    /**
+    * Test storing invalid $_GET values.
+    *
+    * If we don't have default values for controller and method, skip
+    * construction of the call value.
+    *
+    * @param mixed $get Invalid $_GET values
+    *
+    * @depends      Lunr\Core\Tests\RequestBaseTest::testGetEmpty
+    * @dataProvider invalidSuperglobalValueProvider
+    * @covers       Lunr\Core\Request::store_get
+    */
+    public function testStoreInvalidGetValuesDoesNotStoreCallIfDefaultsNotSet($get)
+    {
+        $stored = $this->reflection_request->getProperty('request');
+        $stored->setAccessible(TRUE);
+        $stored->setValue($this->request, array());
+
+        $method = $this->reflection_request->getMethod('store_get');
+        $method->setAccessible(TRUE);
+
+        $_GET = $get;
+
+        $configuration = $this->getMock('Lunr\Core\Configuration');
+
+        $method->invokeArgs($this->request, array($configuration));
+
+        $request = $stored->getValue($this->request);
+
+        $this->assertNull($request['call']);
+    }
+
+    /**
      * Test storing valid $_GET values.
      *
      * @depends      Lunr\Core\Tests\RequestBaseTest::testGetEmpty
@@ -517,6 +580,7 @@ class RequestStoreTest extends RequestTest
         $_GET['param1']     = 'param1';
         $_GET['param2']     = 'param2';
         $cache              = $_GET;
+        $call               = 'controller/method';
 
         $method->invokeArgs($this->request, array(&$this->configuration));
 
@@ -525,6 +589,7 @@ class RequestStoreTest extends RequestTest
         $this->assertEquals($cache['method'], $request['method']);
         $this->assertEquals($cache['param1'], $request['params'][0]);
         $this->assertEquals($cache['param2'], $request['params'][1]);
+        $this->assertEquals($call, $request['call']);
     }
 
     /**
@@ -544,6 +609,7 @@ class RequestStoreTest extends RequestTest
 
         $_GET['test1'] = 'value1';
         $_GET['test2'] = 'value2';
+        $call          = 'DefaultController/default_method';
 
         $method->invokeArgs($this->request, array(&$this->configuration));
 
@@ -552,6 +618,33 @@ class RequestStoreTest extends RequestTest
         $this->assertEquals('default_method', $request['method']);
         $this->assertInternalType('array', $request['params']);
         $this->assertEmpty($request['params']);
+        $this->assertEquals($call, $request['call']);
+    }
+
+    /**
+     * Test storing the call value if default values are not set.
+     *
+     * @depends      Lunr\Core\Tests\RequestBaseTest::testGetEmpty
+     * @covers       Lunr\Core\Request::store_get
+     */
+    public function testStoreCallIfDefaultsNotSet()
+    {
+        $stored = $this->reflection_request->getProperty('request');
+        $stored->setAccessible(TRUE);
+        $stored->setValue($this->request, array());
+
+        $method = $this->reflection_request->getMethod('store_get');
+        $method->setAccessible(TRUE);
+
+        $_GET['test1'] = 'value1';
+        $_GET['test2'] = 'value2';
+
+        $configuration = $this->getMock('Lunr\Core\Configuration');
+
+        $method->invokeArgs($this->request, array($configuration));
+
+        $request = $stored->getValue($this->request);
+        $this->assertNull($request['call']);
     }
 
     /**

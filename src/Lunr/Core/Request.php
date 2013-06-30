@@ -62,6 +62,7 @@ class Request
      *  'controller' The controller requested
      *  'method'     The method requested of that controller
      *  'params'     The parameters for that method
+     *  'call'       The call identifier, combining controller and method
      *
      * @var array
      */
@@ -129,6 +130,7 @@ class Request
             case 'params':
             case 'sapi':
             case 'host':
+            case 'call':
                 return $this->request[$name];
                 break;
             default:
@@ -176,6 +178,15 @@ class Request
             $this->request['method']     = $configuration['default_method'];
             $this->request['params']     = array();
 
+            if (isset($this->request['controller'], $this->request['method']) === TRUE)
+            {
+                $this->request['call'] = $this->request['controller'] . '/' . $this->request['method'];
+            }
+            else
+            {
+                $this->request['call'] = NULL;
+            }
+
             //reset global GET array
             $_GET = array();
 
@@ -215,6 +226,15 @@ class Request
         if (!isset($this->request['params']))
         {
             $this->request['params'] = array();
+        }
+
+        if (isset($this->request['controller'], $this->request['method']) === TRUE)
+        {
+            $this->request['call'] = $this->request['controller'] . '/' . $this->request['method'];
+        }
+        else
+        {
+            $this->request['call'] = NULL;
         }
 
         //reset global GET array

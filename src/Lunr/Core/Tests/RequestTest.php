@@ -161,6 +161,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
         $values[] = array('controller', 'DefaultController');
         $values[] = array('method', 'default_method');
         $values[] = array('params', array());
+        $values[] = array('call', 'DefaultController/default_method');
 
         return $values;
     }
@@ -182,6 +183,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
         $values[] = array('controller', 'controller');
         $values[] = array('method', 'method');
         $values[] = array('params', array('param1', 'param2'));
+        $values[] = array('call', 'controller/method');
 
         return $values;
     }
