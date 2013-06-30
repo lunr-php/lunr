@@ -6,9 +6,16 @@
             syntaxCheck="false"
             forceCoversAnnotation="true"
             mapTestClassNameToCoveredClassName="true"
-            colors="true">
+            colors="true"
+            verbose="true">
+    <php>
+        <ini name="zend.enable_gc" value="0" />
+    </php>
     <testsuites>
-        <testsuite name="Lunr Testsuite">
+        <testsuite name="Environment Tests">
+            <file>tests/system/EnvironmentTest.php</file>
+        </testsuite>
+        <testsuite name="Core">
             <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/Core/Tests/AutoloaderTest.php</file>
             <file>src/Lunr/Core/Tests/DateTimeBaseTest.php</file>
@@ -43,9 +50,6 @@
             <file>src/Lunr/Core/Tests/ResponseGetTest.php</file>
             <file>src/Lunr/Core/Tests/ResponseSetTest.php</file>
             <file>src/Lunr/Core/Tests/ErrorEnumTraitTest.php</file>
-            <file>src/Lunr/Feedback/Tests/PSR3LoggerTest.php</file>
-            <file>src/Lunr/Feedback/Tests/PHPLoggerTest.php</file>
-            <file>src/Lunr/Feedback/Tests/FileLoggerTest.php</file>
             <file>src/Lunr/Core/Tests/ControllerBaseTest.php</file>
             <file>src/Lunr/Core/Tests/ControllerResultTest.php</file>
             <file>src/Lunr/Core/Tests/FrontControllerBaseTest.php</file>
@@ -53,35 +57,14 @@
             <file>src/Lunr/Core/Tests/FrontControllerDispatchTest.php</file>
             <file>src/Lunr/Core/Tests/ViewBaseTest.php</file>
             <file>src/Lunr/Core/Tests/ViewHelpersTest.php</file>
-            <file>src/Lunr/Sphere/Tests/SessionBaseTest.php</file>
-            <file>src/Lunr/Sphere/Tests/DatabaseSessionHandlerBaseTest.php</file>
-            <file>src/Lunr/Sphere/Tests/SessionDAOBaseTest.php</file>
-            <file>src/Lunr/L10n/Tests/L10nViewBaseTest.php</file>
-            <file>src/Lunr/L10n/Tests/L10nTraitTest.php</file>
-            <file>src/Lunr/L10n/Tests/L10nTest.php</file>
-            <file>src/Lunr/L10n/Tests/L10nProviderBaseTest.php</file>
-            <file>src/Lunr/L10n/Tests/GettextL10nProviderBaseTest.php</file>
-            <file>src/Lunr/L10n/Tests/GettextL10nProviderLangTest.php</file>
-            <file>src/Lunr/L10n/Tests/GettextL10nProviderNlangTest.php</file>
-            <file>src/Lunr/L10n/Tests/PHPL10nProviderBaseTest.php</file>
-            <file>src/Lunr/L10n/Tests/PHPL10nProviderLangTest.php</file>
-            <file>src/Lunr/L10n/Tests/PHPL10nProviderNlangTest.php</file>
-            <file>src/Lunr/Network/Tests/NetworkErrorTraitTest.php</file>
-            <file>src/Lunr/Network/Tests/CurlBaseTest.php</file>
-            <file>src/Lunr/Network/Tests/CurlSetGetTest.php</file>
-            <file>src/Lunr/Network/Tests/CurlExecuteTest.php</file>
-            <file>src/Lunr/Network/Tests/CurlRequestTest.php</file>
-            <file>src/Lunr/Network/Tests/StreamSocketBaseTest.php</file>
-            <file>src/Lunr/Network/Tests/StreamSocketContextTest.php</file>
-            <file>src/Lunr/Network/Tests/StreamSocketSetGetTest.php</file>
-            <file>src/Lunr/Network/Tests/StreamSocketStateTest.php</file>
-            <file>src/Lunr/Network/Tests/StreamSocketClientBaseTest.php</file>
-            <file>src/Lunr/Network/Tests/StreamSocketClientFlagsTest.php</file>
-            <file>src/Lunr/Network/Tests/StreamSocketClientHandleTest.php</file>
-            <file>src/Lunr/Network/Tests/StreamSocketClientReadWriteTest.php</file>
-            <file>src/Lunr/Network/Tests/MailBaseTest.php</file>
-            <file>src/Lunr/Network/Tests/MailSetTest.php</file>
-            <file>src/Lunr/Network/Tests/MailSendTest.php</file>
+            <file>src/Lunr/Core/Tests/InterRequestTest.php</file>
+        </testsuite>
+        <testsuite name="Feedback">
+            <file>src/Lunr/Feedback/Tests/PSR3LoggerTest.php</file>
+            <file>src/Lunr/Feedback/Tests/PHPLoggerTest.php</file>
+            <file>src/Lunr/Feedback/Tests/FileLoggerTest.php</file>
+        </testsuite>
+        <testsuite name="Gravity">
             <file>src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperBaseTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperEscapeTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryEscaperEscapeTest.php</file>
@@ -145,7 +128,41 @@
             <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectListFilesTest.php</file>
             <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectDirectoryTest.php</file>
             <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectFindTest.php</file>
-            <file>src/Lunr/Spawn/Tests/ResqueJobDispatcherBaseTest.php</file>
+        </testsuite>
+        <testsuite name="L10n">
+            <file>tests/system/EnvironmentTest.php</file>
+            <file>src/Lunr/L10n/Tests/L10nViewBaseTest.php</file>
+            <file>src/Lunr/L10n/Tests/L10nTraitTest.php</file>
+            <file>src/Lunr/L10n/Tests/L10nTest.php</file>
+            <file>src/Lunr/L10n/Tests/L10nProviderBaseTest.php</file>
+            <file>src/Lunr/L10n/Tests/GettextL10nProviderBaseTest.php</file>
+            <file>src/Lunr/L10n/Tests/GettextL10nProviderLangTest.php</file>
+            <file>src/Lunr/L10n/Tests/GettextL10nProviderNlangTest.php</file>
+            <file>src/Lunr/L10n/Tests/PHPL10nProviderBaseTest.php</file>
+            <file>src/Lunr/L10n/Tests/PHPL10nProviderLangTest.php</file>
+            <file>src/Lunr/L10n/Tests/PHPL10nProviderNlangTest.php</file>
+        </testsuite>
+        <testsuite name="Network">
+            <file>tests/system/EnvironmentTest.php</file>
+            <file>src/Lunr/Network/Tests/NetworkErrorTraitTest.php</file>
+            <file>src/Lunr/Network/Tests/CurlBaseTest.php</file>
+            <file>src/Lunr/Network/Tests/CurlSetGetTest.php</file>
+            <file>src/Lunr/Network/Tests/CurlExecuteTest.php</file>
+            <file>src/Lunr/Network/Tests/CurlRequestTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketBaseTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketContextTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketSetGetTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketStateTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketClientBaseTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketClientFlagsTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketClientHandleTest.php</file>
+            <file>src/Lunr/Network/Tests/StreamSocketClientReadWriteTest.php</file>
+            <file>src/Lunr/Network/Tests/MailBaseTest.php</file>
+            <file>src/Lunr/Network/Tests/MailSetTest.php</file>
+            <file>src/Lunr/Network/Tests/MailSendTest.php</file>
+        </testsuite>
+        <testsuite name="Shadow">
+            <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/Shadow/Tests/ConsoleTest.php</file>
             <file>src/Lunr/Shadow/Tests/LunrCliParserBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/LunrCliParserCheckArgumentTest.php</file>
@@ -159,14 +176,26 @@
             <file>src/Lunr/Shadow/Tests/GetoptCliParserParseTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestGetTest.php</file>
-            <file>src/Lunr/Core/Tests/InterRequestTest.php</file>
+        </testsuite>
+        <testsuite name="Spawn">
+            <file>src/Lunr/Spawn/Tests/ResqueJobDispatcherBaseTest.php</file>
+        </testsuite>
+        <testsuite name="Sphere">
+            <file>tests/system/EnvironmentTest.php</file>
+            <file>src/Lunr/Sphere/Tests/SessionBaseTest.php</file>
+            <file>src/Lunr/Sphere/Tests/DatabaseSessionHandlerBaseTest.php</file>
+            <file>src/Lunr/Sphere/Tests/SessionDAOBaseTest.php</file>
+        </testsuite>
+        <testsuite name="Surface">
+            <file>src/Lunr/Surface/Tests/PaginationNoCursorTest.php</file>
+            <file>src/Lunr/Surface/Tests/PaginationSettersTest.php</file>
+            <file>src/Lunr/Surface/Tests/PaginationHTMLTest.php</file>
+        </testsuite>
+        <testsuite name="Ticks">
             <file>src/Lunr/Ticks/Tests/FileTimerRequestTest.php</file>
             <file>src/Lunr/Ticks/Tests/FileTimerNoRequestTest.php</file>
             <file>src/Lunr/Ticks/Tests/FileTimerStartTest.php</file>
             <file>src/Lunr/Ticks/Tests/FileTimerStopTest.php</file>
-            <file>src/Lunr/Surface/Tests/PaginationNoCursorTest.php</file>
-            <file>src/Lunr/Surface/Tests/PaginationSettersTest.php</file>
-            <file>src/Lunr/Surface/Tests/PaginationHTMLTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
