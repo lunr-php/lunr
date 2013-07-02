@@ -6,26 +6,23 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
-
-use Lunr\Core\Request;
-use ReflectionClass;
+namespace Lunr\Corona\Tests;
 
 /**
  * Basic tests for the case of empty superglobals.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Request
+ * @covers     Lunr\Corona\Request
  */
 class RequestBaseTest extends RequestTest
 {
@@ -111,7 +108,7 @@ class RequestBaseTest extends RequestTest
      * Test setting json enums.
      *
      * @depends testJsonEnumsEmpty
-     * @covers  Lunr\Core\Request::set_json_enums
+     * @covers  Lunr\Corona\Request::set_json_enums
      */
     public function testSetJsonEnums()
     {
@@ -130,7 +127,7 @@ class RequestBaseTest extends RequestTest
      *
      * @depends      testGetEmpty
      * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Core\Request::get_get_data
+     * @covers       Lunr\Corona\Request::get_get_data
      */
     public function testGetGetDataWhenGetEmpty($key)
     {
@@ -144,7 +141,7 @@ class RequestBaseTest extends RequestTest
      *
      * @depends      testPostEmpty
      * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Core\Request::get_post_data
+     * @covers       Lunr\Corona\Request::get_post_data
      */
     public function testGetPostDataWhenPostEmpty($key)
     {
@@ -158,7 +155,7 @@ class RequestBaseTest extends RequestTest
      *
      * @depends      testCookieEmpty
      * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Core\Request::get_cookie_data
+     * @covers       Lunr\Corona\Request::get_cookie_data
      */
     public function testGetCookieDataWhenCookieEmpty($key)
     {
@@ -173,7 +170,7 @@ class RequestBaseTest extends RequestTest
      *
      * @depends      testRequestDefaultValues
      * @dataProvider requestValueProvider
-     * @covers       Lunr\Core\Request::__get
+     * @covers       Lunr\Corona\Request::__get
      */
     public function testMagicGetMethodWhenGetEmpty($key, $value)
     {
@@ -186,7 +183,7 @@ class RequestBaseTest extends RequestTest
      * @param String $key key for __get()
      *
      * @dataProvider unhandledMagicGetKeysProvider
-     * @covers       Lunr\Core\Request::__get
+     * @covers       Lunr\Corona\Request::__get
      */
     public function testMagicGetIsNullForUnhandledKeys($key)
     {

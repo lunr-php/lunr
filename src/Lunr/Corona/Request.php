@@ -6,15 +6,15 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
- * @subpackage Libraries
+ * @package    Corona
+ * @subpackage Request
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core;
+namespace Lunr\Corona;
 
 /**
  * Request abstraction class.
@@ -22,8 +22,8 @@ namespace Lunr\Core;
  * the request URL parameters
  *
  * @category   Libraries
- * @package    Core
- * @subpackage Libraries
+ * @package    Corona
+ * @subpackage Request
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */

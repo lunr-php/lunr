@@ -181,7 +181,7 @@ class CliRequestGetTest extends CliRequestTest
     {
         $value = $this->class->get_new_inter_request_object(array());
 
-        $this->assertInstanceOf('Lunr\Core\InterRequest', $value);
+        $this->assertInstanceOf('Lunr\Corona\InterRequest', $value);
     }
 
 }

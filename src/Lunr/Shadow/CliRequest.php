@@ -15,7 +15,7 @@
 
 namespace Lunr\Shadow;
 
-use Lunr\Core\InterRequest;
+use Lunr\Corona\InterRequest;
 
 /**
  * The CliRequest class.

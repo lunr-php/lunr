@@ -6,23 +6,23 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
 /**
  * This class contains test methods for the Response class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Response
+ * @covers     Lunr\Corona\Response
  */
 class ResponseGetTest extends ResponseTest
 {
@@ -34,7 +34,7 @@ class ResponseGetTest extends ResponseTest
      * @param mixed  $value Expected attribute value
      *
      * @dataProvider validResponseAttributesProvider
-     * @covers       Lunr\Core\Response::__get
+     * @covers       Lunr\Corona\Response::__get
      */
     public function testGettingExistingAttributes($attr, $value)
     {
@@ -47,7 +47,7 @@ class ResponseGetTest extends ResponseTest
      * @param String $attr  Attribute name
      *
      * @dataProvider invalidResponseAttributesProvider
-     * @covers       Lunr\Core\Response::__get
+     * @covers       Lunr\Corona\Response::__get
      */
     public function testGettingInaccessibleAttributes($attr)
     {
@@ -57,7 +57,7 @@ class ResponseGetTest extends ResponseTest
     /**
      * Test getting existing response data.
      *
-     * @covers Lunr\Core\Response::get_response_data
+     * @covers Lunr\Corona\Response::get_response_data
      */
     public function testGetResponseDataWithExistingKey()
     {
@@ -71,7 +71,7 @@ class ResponseGetTest extends ResponseTest
     /**
      * Test getting non-existing response data.
      *
-     * @covers Lunr\Core\Response::get_response_data
+     * @covers Lunr\Corona\Response::get_response_data
      */
     public function testGetResponseDataWithNonExistingKey()
     {
@@ -81,7 +81,7 @@ class ResponseGetTest extends ResponseTest
     /**
      * Test getting existing error message.
      *
-     * @covers Lunr\Core\Response::get_error_message
+     * @covers Lunr\Corona\Response::get_error_message
      */
     public function testGetExistingErrorMessage()
     {
@@ -95,7 +95,7 @@ class ResponseGetTest extends ResponseTest
     /**
      * Test getting non-existing error message.
      *
-     * @covers Lunr\Core\Response::get_error_message
+     * @covers Lunr\Corona\Response::get_error_message
      */
     public function testGetNonExistantErrorMessage()
     {
@@ -105,7 +105,7 @@ class ResponseGetTest extends ResponseTest
     /**
      * Test getting existing error information.
      *
-     * @covers Lunr\Core\Response::get_error_info
+     * @covers Lunr\Corona\Response::get_error_info
      */
     public function testGetExistingErrorInfo()
     {
@@ -119,7 +119,7 @@ class ResponseGetTest extends ResponseTest
     /**
      * Test getting non-existing error information.
      *
-     * @covers Lunr\Core\Response::get_error_info
+     * @covers Lunr\Corona\Response::get_error_info
      */
     public function testGetNonExistantErrorInfo()
     {
@@ -129,7 +129,7 @@ class ResponseGetTest extends ResponseTest
     /**
      * Test getting existing return code.
      *
-     * @covers Lunr\Core\Response::get_return_code
+     * @covers Lunr\Corona\Response::get_return_code
      */
     public function testGetExistingReturnCode()
     {
@@ -143,7 +143,7 @@ class ResponseGetTest extends ResponseTest
     /**
      * Test getting non-existing return code.
      *
-     * @covers Lunr\Core\Response::get_return_code
+     * @covers Lunr\Corona\Response::get_return_code
      */
     public function testGetNonExistantReturnCode()
     {
@@ -153,7 +153,7 @@ class ResponseGetTest extends ResponseTest
     /**
      * Test getting return code with highest error code.
      *
-     * @covers Lunr\Core\Response::get_return_code
+     * @covers Lunr\Corona\Response::get_return_code
      */
     public function testGetReturnCodeWithoutIdentifier()
     {

@@ -57,7 +57,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
     {
         $this->logger_reflection = new ReflectionClass('Lunr\Feedback\PHPLogger');
 
-        $this->request = $this->getMockBuilder('Lunr\Core\Request')
+        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
                               ->disableOriginalConstructor()
                               ->getMock();
 

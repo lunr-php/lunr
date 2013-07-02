@@ -15,7 +15,7 @@
 
 namespace Lunr\L10n;
 
-use Lunr\Core\View;
+use Lunr\Corona\View;
 
 /**
  * View class used by the Website

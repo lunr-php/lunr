@@ -6,18 +6,14 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
-
-use Lunr\Core\FrontController;
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
+namespace Lunr\Corona\Tests;
 
 /**
  * This class contains base tests for the FrontController class.
@@ -26,7 +22,7 @@ use ReflectionClass;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\FrontController
+ * @covers     Lunr\Corona\FrontController
  */
 class FrontControllerBaseTest extends FrontControllerTest
 {
@@ -41,7 +37,7 @@ class FrontControllerBaseTest extends FrontControllerTest
 
         $value = $property->getValue($this->class);
 
-        $this->assertInstanceOf('Lunr\Core\Request', $value);
+        $this->assertInstanceOf('Lunr\Corona\Request', $value);
         $this->assertSame($this->request, $value);
     }
 
@@ -55,7 +51,7 @@ class FrontControllerBaseTest extends FrontControllerTest
 
         $value = $property->getValue($this->class);
 
-        $this->assertInstanceOf('Lunr\Core\Response', $value);
+        $this->assertInstanceOf('Lunr\Corona\Response', $value);
         $this->assertSame($this->response, $value);
     }
 

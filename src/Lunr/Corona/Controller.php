@@ -6,21 +6,21 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
- * @subpackage Libraries
+ * @package    Corona
+ * @subpackage MVC
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2010-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core;
+namespace Lunr\Corona;
 
 /**
  * Controller class
  *
  * @category   Libraries
- * @package    Core
- * @subpackage Libraries
+ * @package    Corona
+ * @subpackage MVC
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 abstract class Controller

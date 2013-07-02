@@ -7,22 +7,22 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Mocks
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
-use Lunr\Core\View;
+use Lunr\Corona\View;
 
 /**
  * View Mock class
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Mocks
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */

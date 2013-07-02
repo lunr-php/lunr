@@ -6,23 +6,23 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
 /**
  * This class contains test methods for the Response class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Response
+ * @covers     Lunr\Corona\Response
  */
 class ResponseBaseTest extends ResponseTest
 {

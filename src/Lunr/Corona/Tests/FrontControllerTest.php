@@ -6,16 +6,16 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
-use Lunr\Core\FrontController;
+use Lunr\Corona\FrontController;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -27,7 +27,7 @@ use ReflectionClass;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\FrontController
+ * @covers     Lunr\Corona\FrontController
  */
 abstract class FrontControllerTest extends PHPUnit_Framework_TestCase
 {
@@ -67,17 +67,17 @@ abstract class FrontControllerTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->request = $this->getMockBuilder('Lunr\Core\Request')
+        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
                               ->disableOriginalConstructor()
                               ->getMock();
 
-        $this->response = $this->getMock('Lunr\Core\Response');
+        $this->response = $this->getMock('Lunr\Corona\Response');
 
         $this->fao = $this->getMock('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface');
 
         $this->class = new FrontController($this->request, $this->response, $this->fao);
 
-        $this->reflection = new ReflectionClass('Lunr\Core\FrontController');
+        $this->reflection = new ReflectionClass('Lunr\Corona\FrontController');
     }
 
     /**

@@ -6,23 +6,23 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
 /**
  * This class contains test methods for the Controller class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Controller
+ * @covers     Lunr\Corona\Controller
  */
 class ControllerResultTest extends ControllerTest
 {
@@ -30,7 +30,7 @@ class ControllerResultTest extends ControllerTest
     /**
      * Test calling unimplemented methods without error enums set.
      *
-     * @covers Lunr\Core\Controller::__call
+     * @covers Lunr\Corona\Controller::__call
      */
     public function testNonImplementedCallWithoutEnumsSet()
     {
@@ -52,7 +52,7 @@ class ControllerResultTest extends ControllerTest
     /**
      * Test calling unimplemented methods with error enums set.
      *
-     * @covers Lunr\Core\Controller::__call
+     * @covers Lunr\Corona\Controller::__call
      */
     public function testNonImplementedCallWithEnumsSet()
     {
@@ -79,7 +79,7 @@ class ControllerResultTest extends ControllerTest
     /**
      * Test setting a result return code with error enums set.
      *
-     * @covers Lunr\Core\Controller::set_result
+     * @covers Lunr\Corona\Controller::set_result
      */
     public function testSetResultReturnCodeWithEnumsSet()
     {
@@ -104,7 +104,7 @@ class ControllerResultTest extends ControllerTest
     /**
      * Test setting a result return code with error enums not set.
      *
-     * @covers Lunr\Core\Controller::set_result
+     * @covers Lunr\Corona\Controller::set_result
      */
     public function testSetResultReturnCodeWithoutEnumsSet()
     {
@@ -122,7 +122,7 @@ class ControllerResultTest extends ControllerTest
     /**
      * Test setting a result without error message.
      *
-     * @covers Lunr\Core\Controller::set_result
+     * @covers Lunr\Corona\Controller::set_result
      */
     public function testSetResultErrorMessageNull()
     {
@@ -140,7 +140,7 @@ class ControllerResultTest extends ControllerTest
     /**
      * Test setting a result error message.
      *
-     * @covers Lunr\Core\Controller::set_result
+     * @covers Lunr\Corona\Controller::set_result
      */
     public function testSetResultErrorMessage()
     {
@@ -161,7 +161,7 @@ class ControllerResultTest extends ControllerTest
     /**
      * Test setting a result without error information.
      *
-     * @covers Lunr\Core\Controller::set_result
+     * @covers Lunr\Corona\Controller::set_result
      */
     public function testSetResultErrorInfoNull()
     {
@@ -179,7 +179,7 @@ class ControllerResultTest extends ControllerTest
     /**
      * Test setting result error information.
      *
-     * @covers Lunr\Core\Controller::set_result
+     * @covers Lunr\Corona\Controller::set_result
      */
     public function testSetResultErrorInfoNotNull()
     {

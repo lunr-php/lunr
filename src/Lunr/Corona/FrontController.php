@@ -6,21 +6,21 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
- * @subpackage Libraries
+ * @package    Corona
+ * @subpackage MVC
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core;
+namespace Lunr\Corona;
 
 /**
  * Controller class
  *
  * @category   Libraries
- * @package    Core
- * @subpackage Libraries
+ * @package    Corona
+ * @subpackage MVC
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class FrontController

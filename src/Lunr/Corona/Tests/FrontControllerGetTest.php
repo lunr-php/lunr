@@ -6,23 +6,23 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
 /**
  * This class contains tests for getting controllers from the FrontController class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\FrontController
+ * @covers     Lunr\Corona\FrontController
  */
 class FrontControllerGetTest extends FrontControllerTest
 {
@@ -30,7 +30,7 @@ class FrontControllerGetTest extends FrontControllerTest
     /**
      * Test that get_controller() returns a FQCN.
      *
-     * @covers Lunr\Core\FrontController::get_controller
+     * @covers Lunr\Corona\FrontController::get_controller
      */
     public function testGetControllerReturnsFQCNForExistingController()
     {
@@ -59,7 +59,7 @@ class FrontControllerGetTest extends FrontControllerTest
     /**
      * Test that get_controller() returns an emoty string if controller not found.
      *
-     * @covers Lunr\Core\FrontController::get_controller
+     * @covers Lunr\Corona\FrontController::get_controller
      */
     public function testGetControllerReturnsEmptyStringForNonExistingController()
     {
@@ -87,7 +87,7 @@ class FrontControllerGetTest extends FrontControllerTest
     /**
      * Test that get_controller() returns an emoty string if finding caused error.
      *
-     * @covers Lunr\Core\FrontController::get_controller
+     * @covers Lunr\Corona\FrontController::get_controller
      */
     public function testGetControllerReturnsEmptyStringIfFindFailed()
     {
@@ -115,7 +115,7 @@ class FrontControllerGetTest extends FrontControllerTest
     /**
      * Test that get_controller() sets an error number if controller not found and enums are set.
      *
-     * @covers Lunr\Core\FrontController::get_controller
+     * @covers Lunr\Corona\FrontController::get_controller
      */
     public function testGetControllerSetsErrorNumberIfPresentAndNonExistingController()
     {
@@ -153,7 +153,7 @@ class FrontControllerGetTest extends FrontControllerTest
     /**
      * Test that get_controller() returns the first result if more than one exists.
      *
-     * @covers Lunr\Core\FrontController::get_controller
+     * @covers Lunr\Corona\FrontController::get_controller
      */
     public function testGetControllerReturnsFirstMatchIfMultipleFound()
     {

@@ -6,25 +6,23 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
-
-use Lunr\Core\View;
+namespace Lunr\Corona\Tests;
 
 /**
  * This class tests the helper methods of the view class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\View
+ * @covers     Lunr\Corona\View
  */
 class ViewHelpersTest extends ViewTest
 {
@@ -37,7 +35,7 @@ class ViewHelpersTest extends ViewTest
      * @param String $result  expected combined result
      *
      * @dataProvider baseUrlProvider
-     * @covers       Lunr\Core\View::base_url
+     * @covers       Lunr\Corona\View::base_url
      */
     public function testBaseUrl($baseurl, $path, $result)
     {
@@ -60,7 +58,7 @@ class ViewHelpersTest extends ViewTest
      * @param String $result  expected combined result
      *
      * @dataProvider staticsProvider
-     * @covers       Lunr\Core\View::statics
+     * @covers       Lunr\Corona\View::statics
      */
     public function testStatics($base, $statics, $path, $result)
     {
@@ -86,7 +84,7 @@ class ViewHelpersTest extends ViewTest
      * @param String $result           expected combined result
      *
      * @dataProvider cssAlternateProvider
-     * @covers       Lunr\Core\View::css_alternate
+     * @covers       Lunr\Corona\View::css_alternate
      */
     public function testCssAlternate($basename, $alternation_hint, $suffix, $result)
     {

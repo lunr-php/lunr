@@ -13,11 +13,11 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
-use Lunr\Core\InterRequest;
 use Lunr\Core\Configuration;
-use Lunr\Core\Request;
+use Lunr\Corona\InterRequest;
+use Lunr\Corona\Request;
 use ReflectionClass;
 use Lunr\Halo\LunrBaseTest;
 
@@ -28,7 +28,7 @@ use Lunr\Halo\LunrBaseTest;
  * @package    Core
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @covers     Lunr\Core\InterRequest
+ * @covers     Lunr\Corona\InterRequest
  */
 class InterRequestTest extends LunrBaseTest
 {
@@ -50,7 +50,7 @@ class InterRequestTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->request = $this->getMockBuilder('Lunr\Core\Request')
+        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
                         ->disableOriginalConstructor()
                         ->getMock();
 
@@ -61,7 +61,7 @@ class InterRequestTest extends LunrBaseTest
         );
 
         $this->class      = new InterRequest($this->request, $this->overridden);
-        $this->reflection = new ReflectionClass('Lunr\Core\InterRequest');
+        $this->reflection = new ReflectionClass('Lunr\Corona\InterRequest');
     }
 
     /**
@@ -125,7 +125,7 @@ class InterRequestTest extends LunrBaseTest
     /**
      * Test that request property inits with given parameter in constructor.
      *
-     * @covers Lunr\Core\InterRequest::__construct
+     * @covers Lunr\Corona\InterRequest::__construct
      */
     public function testRequestIsPassedCorrectly()
     {
@@ -137,7 +137,7 @@ class InterRequestTest extends LunrBaseTest
     /**
      * Test that request property inits with given parameter in constructor.
      *
-     * @covers Lunr\Core\InterRequest::__construct
+     * @covers Lunr\Corona\InterRequest::__construct
      */
     public function testOverriddenIsPassedCorrectly()
     {
@@ -152,7 +152,7 @@ class InterRequestTest extends LunrBaseTest
      * @param String $key The key to test
      *
      * @dataProvider valuesProvider
-     * @covers       Lunr\Core\InterRequest::__get
+     * @covers       Lunr\Corona\InterRequest::__get
      */
     public function testMagicGetReturnsOverriddenValues($key)
     {
@@ -165,7 +165,7 @@ class InterRequestTest extends LunrBaseTest
      * @param String $key The key to test
      *
      * @dataProvider requestKeyProvider
-     * @covers Lunr\Core\InterRequest::__get
+     * @covers Lunr\Corona\InterRequest::__get
      */
     public function testMagicGetForwardsNonOverriddenValues($key)
     {
@@ -182,7 +182,7 @@ class InterRequestTest extends LunrBaseTest
      * @param String $method The method to call
      *
      * @dataProvider methodCallProvider
-     * @covers       Lunr\Core\InterRequest::__call
+     * @covers       Lunr\Corona\InterRequest::__call
      */
     public function testMagicCallForwardsCalls($method)
     {

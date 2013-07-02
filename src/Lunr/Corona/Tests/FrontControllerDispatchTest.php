@@ -6,23 +6,23 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
 /**
  * This class contains tests for dispatching controllers with the FrontController class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\FrontController
+ * @covers     Lunr\Corona\FrontController
  */
 class FrontControllerDispatchTest extends FrontControllerTest
 {
@@ -30,11 +30,11 @@ class FrontControllerDispatchTest extends FrontControllerTest
     /**
      * Test that dispatch works correctly with an already instantiated controller.
      *
-     * @covers Lunr\Core\FrontController::dispatch
+     * @covers Lunr\Corona\FrontController::dispatch
      */
     function testDispatchWithInstantiatedController()
     {
-        $controller = $this->getMock('Lunr\Core\Tests\MockController');
+        $controller = $this->getMock('Lunr\Corona\Tests\MockController');
 
         $this->request->expects($this->at(0))
                       ->method('__get')
@@ -56,11 +56,11 @@ class FrontControllerDispatchTest extends FrontControllerTest
     /**
      * Test that dispatch works correctly with a controller name as string.
      *
-     * @covers Lunr\Core\FrontController::dispatch
+     * @covers Lunr\Corona\FrontController::dispatch
      */
     function testDispatchWithControllerAsString()
     {
-        $controller = 'Lunr\Core\Tests\MockController';
+        $controller = 'Lunr\Corona\Tests\MockController';
 
         $this->request->expects($this->at(0))
                       ->method('__get')
@@ -82,7 +82,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
      *
      * @expectedException PHPUnit_Framework_Error
      * @dataProvider      invalidControllerNameProvider
-     * @covers            Lunr\Core\FrontController::dispatch
+     * @covers            Lunr\Corona\FrontController::dispatch
      */
     function testDispatchWithInvalidControllerValues($value)
     {

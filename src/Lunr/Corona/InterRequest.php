@@ -6,21 +6,21 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
- * @subpackage Libraries
+ * @package    Corona
+ * @subpackage Request
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core;
+namespace Lunr\Corona;
 
 /**
  * InterRequest class.
  *
  * @category   Libraries
- * @package    Core
- * @subpackage Libraries
+ * @package    Corona
+ * @subpackage Request
  * @author     Olivier Wizen <olivier@m2mobi.com>
  */
 class InterRequest

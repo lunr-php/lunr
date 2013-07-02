@@ -38,21 +38,24 @@
             <file>src/Lunr/Core/Tests/ConfigServiceLocatorSupportTest.php</file>
             <file>src/Lunr/Core/Tests/ConfigServiceLocatorGetInstanceTest.php</file>
             <file>src/Lunr/Core/Tests/ConfigServiceLocatorLocateTest.php</file>
-            <file>src/Lunr/Core/Tests/RequestBaseTest.php</file>
-            <file>src/Lunr/Core/Tests/RequestStoreTest.php</file>
-            <file>src/Lunr/Core/Tests/RequestGetTest.php</file>
-            <file>src/Lunr/Core/Tests/ResponseBaseTest.php</file>
-            <file>src/Lunr/Core/Tests/ResponseGetTest.php</file>
-            <file>src/Lunr/Core/Tests/ResponseSetTest.php</file>
-            <file>src/Lunr/Core/Tests/ErrorEnumTraitTest.php</file>
-            <file>src/Lunr/Core/Tests/ControllerBaseTest.php</file>
-            <file>src/Lunr/Core/Tests/ControllerResultTest.php</file>
-            <file>src/Lunr/Core/Tests/FrontControllerBaseTest.php</file>
-            <file>src/Lunr/Core/Tests/FrontControllerGetTest.php</file>
-            <file>src/Lunr/Core/Tests/FrontControllerDispatchTest.php</file>
-            <file>src/Lunr/Core/Tests/ViewBaseTest.php</file>
-            <file>src/Lunr/Core/Tests/ViewHelpersTest.php</file>
-            <file>src/Lunr/Core/Tests/InterRequestTest.php</file>
+        </testsuite>
+        <testsuite name="Corona">
+            <file>tests/system/EnvironmentTest.php</file>
+            <file>src/Lunr/Corona/Tests/ControllerBaseTest.php</file>
+            <file>src/Lunr/Corona/Tests/ControllerResultTest.php</file>
+            <file>src/Lunr/Corona/Tests/ErrorEnumTraitTest.php</file>
+            <file>src/Lunr/Corona/Tests/FrontControllerBaseTest.php</file>
+            <file>src/Lunr/Corona/Tests/FrontControllerGetTest.php</file>
+            <file>src/Lunr/Corona/Tests/FrontControllerDispatchTest.php</file>
+            <file>src/Lunr/Corona/Tests/InterRequestTest.php</file>
+            <file>src/Lunr/Corona/Tests/RequestBaseTest.php</file>
+            <file>src/Lunr/Corona/Tests/RequestStoreTest.php</file>
+            <file>src/Lunr/Corona/Tests/RequestGetTest.php</file>
+            <file>src/Lunr/Corona/Tests/ResponseBaseTest.php</file>
+            <file>src/Lunr/Corona/Tests/ResponseGetTest.php</file>
+            <file>src/Lunr/Corona/Tests/ResponseSetTest.php</file>
+            <file>src/Lunr/Corona/Tests/ViewBaseTest.php</file>
+            <file>src/Lunr/Corona/Tests/ViewHelpersTest.php</file>
         </testsuite>
         <testsuite name="Feedback">
             <file>src/Lunr/Feedback/Tests/PSR3LoggerTest.php</file>

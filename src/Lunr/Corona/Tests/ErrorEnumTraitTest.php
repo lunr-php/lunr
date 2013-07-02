@@ -6,16 +6,16 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
-use Lunr\Core\ErrorEnumTrait;
+use Lunr\Corona\ErrorEnumTrait;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -23,10 +23,10 @@ use ReflectionClass;
  * This class contains the tests for the ErrorEnumTrait.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\ErrorEnumTrait
+ * @covers     Lunr\Corona\ErrorEnumTrait
  */
 class ErrorEnumTraitTest extends PHPUnit_Framework_TestCase
 {
@@ -48,7 +48,7 @@ class ErrorEnumTraitTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->class      = $this->getObjectForTrait('Lunr\Core\ErrorEnumTrait');
+        $this->class      = $this->getObjectForTrait('Lunr\Corona\ErrorEnumTrait');
         $this->reflection = new ReflectionClass($this->class);
     }
 
@@ -77,7 +77,7 @@ class ErrorEnumTraitTest extends PHPUnit_Framework_TestCase
     /**
      * Test setting error enums.
      *
-     * @covers Lunr\Core\ErrorEnumTrait::set_error_enums
+     * @covers Lunr\Corona\ErrorEnumTrait::set_error_enums
      */
     public function testSetErrorEnums()
     {

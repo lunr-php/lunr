@@ -6,16 +6,16 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
-use Lunr\Core\View;
+use Lunr\Corona\View;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -24,10 +24,10 @@ use ReflectionClass;
  * as well as the helper methods.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\View
+ * @covers     Lunr\Corona\View
  */
 abstract class ViewTest extends PHPUnit_Framework_TestCase
 {
@@ -87,19 +87,19 @@ abstract class ViewTest extends PHPUnit_Framework_TestCase
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->request = $this->getMockBuilder('Lunr\Core\Request')
+        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
                               ->disableOriginalConstructor()
                               ->getMock();
 
-        $this->response = $this->getMock('Lunr\Core\Response');
+        $this->response = $this->getMock('Lunr\Corona\Response');
 
-        $this->view = $this->getMockBuilder('Lunr\Core\View')
+        $this->view = $this->getMockBuilder('Lunr\Corona\View')
                            ->setConstructorArgs(
                                array($this->request, $this->response, $this->configuration)
                              )
                            ->getMockForAbstractClass();
 
-        $this->view_reflection = new ReflectionClass('Lunr\Core\View');
+        $this->view_reflection = new ReflectionClass('Lunr\Corona\View');
     }
 
     /**

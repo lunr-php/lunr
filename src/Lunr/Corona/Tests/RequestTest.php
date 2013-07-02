@@ -6,7 +6,7 @@
  * PHP Version 5.3
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
@@ -14,9 +14,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
-use Lunr\Core\Request;
+use Lunr\Corona\Request;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -25,11 +25,11 @@ use ReflectionClass;
  * and shared attributes for testing the DateTime class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @covers     Lunr\Core\Request
+ * @covers     Lunr\Corona\Request
  */
 abstract class RequestTest extends PHPUnit_Framework_TestCase
 {
@@ -88,7 +88,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
 
         $this->configuration = $configuration;
 
-        $this->reflection_request = new ReflectionClass('Lunr\Core\Request');
+        $this->reflection_request = new ReflectionClass('Lunr\Corona\Request');
     }
 
     /**

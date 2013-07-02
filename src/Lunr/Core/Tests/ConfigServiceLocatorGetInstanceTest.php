@@ -34,7 +34,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      */
     public function testGetInstanceReturnsNullForNonInstantiableClass()
     {
-        $cache = [ 'controller' => [ 'name' => 'Lunr\Core\Controller' ] ];
+        $cache = [ 'controller' => [ 'name' => 'Lunr\Corona\Controller' ] ];
         $this->set_reflection_property_value('cache', $cache);
 
         $method = $this->get_accessible_reflection_method('get_instance');
@@ -64,7 +64,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      */
     public function testGetInstanceReturnsNullForTooLittleNumberOfConstructorArguments()
     {
-        $cache = [ 'request' => [ 'name' => 'Lunr\Core\Request', 'params' => [] ] ];
+        $cache = [ 'request' => [ 'name' => 'Lunr\Corona\Request', 'params' => [] ] ];
         $this->set_reflection_property_value('cache', $cache);
 
         $method = $this->get_accessible_reflection_method('get_instance');
@@ -79,12 +79,12 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      */
     public function testGetInstanceReturnsInstanceForConstructorWithArguments()
     {
-        $cache = [ 'request' => [ 'name' => 'Lunr\Core\Request', 'params' => [ 'config' ] ] ];
+        $cache = [ 'request' => [ 'name' => 'Lunr\Corona\Request', 'params' => [ 'config' ] ] ];
         $this->set_reflection_property_value('cache', $cache);
 
         $method = $this->get_accessible_reflection_method('get_instance');
 
-        $this->assertInstanceOf('Lunr\Core\Request', $method->invokeArgs($this->class, ['request']));
+        $this->assertInstanceOf('Lunr\Corona\Request', $method->invokeArgs($this->class, ['request']));
     }
 
     /**

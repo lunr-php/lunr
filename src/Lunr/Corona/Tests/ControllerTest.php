@@ -6,14 +6,14 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
 use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
@@ -22,10 +22,10 @@ use ReflectionClass;
  * This class contains test methods for the Controller class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Controller
+ * @covers     Lunr\Corona\Controller
  */
 abstract class ControllerTest extends LunrBaseTest
 {
@@ -47,16 +47,16 @@ abstract class ControllerTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->response = $this->getMock('Lunr\Core\Response');
-        $this->request  = $this->getMockBuilder('Lunr\Core\Request')
+        $this->response = $this->getMock('Lunr\Corona\Response');
+        $this->request  = $this->getMockBuilder('Lunr\Corona\Request')
                                ->disableOriginalConstructor()
                                ->getMock();
 
-        $this->class = $this->getMockBuilder('Lunr\Core\Controller')
+        $this->class = $this->getMockBuilder('Lunr\Corona\Controller')
                             ->setConstructorArgs([$this->request, $this->response])
                             ->getMockForAbstractClass();
 
-        $this->reflection = new ReflectionClass('Lunr\Core\Controller');
+        $this->reflection = new ReflectionClass('Lunr\Corona\Controller');
     }
 
     /**

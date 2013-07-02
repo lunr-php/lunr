@@ -6,23 +6,23 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Core\Tests;
+namespace Lunr\Corona\Tests;
 
 /**
  * This class contains test methods for the Response class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Core\Response
+ * @covers     Lunr\Corona\Response
  */
 class ResponseSetTest extends ResponseTest
 {
@@ -33,7 +33,7 @@ class ResponseSetTest extends ResponseTest
      * @param String $attr  Attribute name
      *
      * @dataProvider invalidResponseAttributesProvider
-     * @covers       Lunr\Core\Response::__set
+     * @covers       Lunr\Corona\Response::__set
      */
     public function testSetInaccessibleAttributesDoesNotWork($attr)
     {
@@ -45,7 +45,7 @@ class ResponseSetTest extends ResponseTest
     /**
      * Test setting a view.
      *
-     * @covers Lunr\Core\Response::__set
+     * @covers Lunr\Corona\Response::__set
      */
     public function testSetView()
     {
@@ -57,7 +57,7 @@ class ResponseSetTest extends ResponseTest
     /**
      * Test adding response data.
      *
-     * @covers  Lunr\Core\Response::add_response_data
+     * @covers  Lunr\Corona\Response::add_response_data
      */
     public function testAddResponseData()
     {
@@ -72,7 +72,7 @@ class ResponseSetTest extends ResponseTest
     /**
      * Test setting an error message.
      *
-     * @covers Lunr\Core\Response::set_error_message
+     * @covers Lunr\Corona\Response::set_error_message
      */
     public function testSetErrorMessage()
     {
@@ -87,7 +87,7 @@ class ResponseSetTest extends ResponseTest
     /**
      * Test setting an error information.
      *
-     * @covers Lunr\Core\Response::set_error_info
+     * @covers Lunr\Corona\Response::set_error_info
      */
     public function testSetErrorInformation()
     {
@@ -102,7 +102,7 @@ class ResponseSetTest extends ResponseTest
     /**
      * Test setting a valid return code.
      *
-     * @covers Lunr\Core\Response::set_return_code
+     * @covers Lunr\Corona\Response::set_return_code
      */
     public function testSetValidReturnCode()
     {
@@ -120,7 +120,7 @@ class ResponseSetTest extends ResponseTest
      * @param mixed $code Invalid return code value.
      *
      * @dataProvider invalidReturnCodeProvider
-     * @covers       Lunr\Core\Response::set_return_code
+     * @covers       Lunr\Corona\Response::set_return_code
      */
     public function testSetInvalidReturnCode($code)
     {

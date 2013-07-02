@@ -45,7 +45,7 @@ abstract class PaginationTest extends LunrBaseTest
      */
     public function setUpWithoutCursor()
     {
-        $this->request = $this->getMockBuilder('Lunr\Core\Request')
+        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
                               ->disableOriginalConstructor()
                               ->getMock();
 
@@ -72,7 +72,7 @@ abstract class PaginationTest extends LunrBaseTest
      */
     public function setUpWithCursor()
     {
-        $this->request = $this->getMockBuilder('Lunr\Core\Request')
+        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
                               ->disableOriginalConstructor()
                               ->getMock();
 
