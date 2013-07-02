@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wp:Notification xmlns:wp="WPNotification">
+<wp:Tile>
+<wp:BackgroundImage>BgImage</wp:BackgroundImage>
+</wp:Tile></wp:Notification>

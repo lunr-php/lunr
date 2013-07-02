@@ -204,6 +204,13 @@
             <file>src/Lunr/Ticks/Tests/FileTimerStartTest.php</file>
             <file>src/Lunr/Ticks/Tests/FileTimerStopTest.php</file>
         </testsuite>
+        <testsuite name="Vortex">
+            <file>src/Lunr/Vortex/MPNS/Tests/MPNSPayloadTest.php</file>
+            <file>src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadSetTest.php</file>
+            <file>src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadGetTest.php</file>
+            <file>src/Lunr/Vortex/MPNS/Tests/MPNSTilePayloadSetTest.php</file>
+            <file>src/Lunr/Vortex/MPNS/Tests/MPNSTilePayloadGetTest.php</file>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist>
@@ -227,6 +234,8 @@
                 <directory>../src/Lunr/Sphere/Tests/</directory>
                 <directory>../src/Lunr/Surface/Tests/</directory>
                 <directory>../src/Lunr/Ticks/Tests/</directory>
+                <directory>../src/Lunr/Vortex/Tests/</directory>
+                <directory>../src/Lunr/Vortex/MPNS/Tests/</directory>
             </exclude>
         </whitelist>
     </filter>

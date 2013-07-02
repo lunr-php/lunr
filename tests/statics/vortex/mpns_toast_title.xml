@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wp:Notification xmlns:wp="WPNotification">
+<wp:Toast>
+<wp:Text1>Title</wp:Text1>
+</wp:Toast>
+</wp:Notification>
