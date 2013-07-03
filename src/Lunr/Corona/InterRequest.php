@@ -28,7 +28,7 @@ class InterRequest
 
     /**
      * Reference to the wrapped request object
-     * @var Request
+     * @var RequestInterface
      */
     private $request;
 
@@ -41,8 +41,8 @@ class InterRequest
     /**
      * Constructor.
      *
-     * @param Request $request The wrapped request object
-     * @param array   $values  The values of the request to override
+     * @param RequestInterface $request The wrapped request object
+     * @param array            $values  The values of the request to override
      */
     public function __construct($request, $values)
     {

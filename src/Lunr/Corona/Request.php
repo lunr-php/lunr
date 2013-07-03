@@ -27,26 +27,26 @@ namespace Lunr\Corona;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */
-class Request
+class Request implements RequestInterface
 {
 
     /**
      * Stored $_POST values
      * @var array
      */
-    private $post;
+    protected $post;
 
     /**
      * Stored $_GET values
      * @var array
      */
-    private $get;
+    protected $get;
 
     /**
      * Stored $_COOKIE values
      * @var array
      */
-    private $cookie;
+    protected $cookie;
 
     /**
      * Request parameters:
@@ -66,7 +66,7 @@ class Request
      *
      * @var array
      */
-    private $request;
+    protected $request;
 
     /**
      * Stored json enums
@@ -144,7 +144,7 @@ class Request
      *
      * @return void
      */
-    private function store_post()
+    protected function store_post()
     {
         if (!is_array($_POST) || empty($_POST))
         {
@@ -170,7 +170,7 @@ class Request
      *
      * @return void
      */
-    private function store_get($configuration)
+    protected function store_get($configuration)
     {
         if (!is_array($_GET) || empty($_GET))
         {
@@ -246,7 +246,7 @@ class Request
      *
      * @return void
      */
-    private function store_cookie()
+    protected function store_cookie()
     {
         if (!is_array($_COOKIE) || empty($_COOKIE))
         {
@@ -272,7 +272,7 @@ class Request
      *
      * @return void
      */
-    private function store_url($configuration)
+    protected function store_url($configuration)
     {
         if ($this->request['sapi'] == 'cli')
         {

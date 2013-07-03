@@ -48,9 +48,7 @@ abstract class ControllerTest extends LunrBaseTest
     public function setUp()
     {
         $this->response = $this->getMock('Lunr\Corona\Response');
-        $this->request  = $this->getMockBuilder('Lunr\Corona\Request')
-                               ->disableOriginalConstructor()
-                               ->getMock();
+        $this->request  = $this->getMock('Lunr\Corona\RequestInterface');
 
         $this->class = $this->getMockBuilder('Lunr\Corona\Controller')
                             ->setConstructorArgs([$this->request, $this->response])

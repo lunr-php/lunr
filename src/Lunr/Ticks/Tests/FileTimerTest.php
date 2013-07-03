@@ -70,9 +70,7 @@ abstract class FileTimerTest extends LunrBaseTest
     {
         $this->setUpCommon();
 
-        $request = $this->getMockBuilder('Lunr\Corona\Request')
-                        ->disableOriginalConstructor()
-                        ->getMock();
+        $request = $this->getMock('Lunr\Corona\RequestInterface');
 
         $request->expects($this->once())
                 ->method('__get')
@@ -88,9 +86,7 @@ abstract class FileTimerTest extends LunrBaseTest
     {
         $this->setUpCommon();
 
-        $request = $this->getMockBuilder('Lunr\Corona\Request')
-                        ->disableOriginalConstructor()
-                        ->getMock();
+        $request = $this->getMock('Lunr\Corona\RequestInterface');
 
         $request->expects($this->exactly(2))
                 ->method('__get')

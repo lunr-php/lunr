@@ -77,9 +77,9 @@ class Pagination
     /**
      * Constructor.
      *
-     * @param Request &$request reference to the request class
+     * @param RequestInterface $request reference to the request class
      */
-    public function __construct(&$request)
+    public function __construct($request)
     {
         // Default values
         $this->per_page     = 25;

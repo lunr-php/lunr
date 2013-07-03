@@ -50,9 +50,7 @@ class InterRequestTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
-                        ->disableOriginalConstructor()
-                        ->getMock();
+        $this->request = $this->getMock('Lunr\Corona\RequestInterface');
 
         $this->overridden = array(
             'controller' => 'controller',

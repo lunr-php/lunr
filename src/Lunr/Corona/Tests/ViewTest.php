@@ -34,7 +34,7 @@ abstract class ViewTest extends PHPUnit_Framework_TestCase
 
     /**
      * Mock instance of the request class.
-     * @var Request
+     * @var RequestInterface
      */
     protected $request;
 
@@ -87,9 +87,7 @@ abstract class ViewTest extends PHPUnit_Framework_TestCase
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
-                              ->disableOriginalConstructor()
-                              ->getMock();
+        $this->request = $this->getMock('Lunr\Corona\RequestInterface');
 
         $this->response = $this->getMock('Lunr\Corona\Response');
 

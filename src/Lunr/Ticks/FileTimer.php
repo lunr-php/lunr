@@ -59,9 +59,9 @@ class FileTimer implements TimerInterface
     /**
      * Constructor.
      *
-     * @param Request       $request  Shared instance of the Request class.
-     * @param DateTime      $datetime Instance of the DateTime class.
-     * @param SplFileObject $file     File where the timer results should be stored in.
+     * @param RequestInterface $request  Shared instance of the Request class.
+     * @param DateTime         $datetime Instance of the DateTime class.
+     * @param SplFileObject    $file     File where the timer results should be stored in.
      */
     public function __construct($request, $datetime, $file)
     {

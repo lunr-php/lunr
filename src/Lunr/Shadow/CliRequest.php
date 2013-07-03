@@ -16,6 +16,7 @@
 namespace Lunr\Shadow;
 
 use Lunr\Corona\InterRequest;
+use Lunr\Corona\RequestInterface;
 
 /**
  * The CliRequest class.
@@ -25,32 +26,32 @@ use Lunr\Corona\InterRequest;
  * @subpackage Libraries
  * @author     Olivier Wizen <olivier@m2mobi.com>
  */
-class CliRequest
+class CliRequest implements RequestInterface
 {
 
     /**
      * Stored $_POST values
      * @var array
      */
-    private $post;
+    protected $post;
 
     /**
      * Stored $_GET values
      * @var array
      */
-    private $get;
+    protected $get;
 
     /**
      * Stored $_COOKIE values
      * @var array
      */
-    private $cookie;
+    protected $cookie;
 
     /**
      * "Abstract Syntax Tree" of the passed arguments
      * @var array
      */
-    private $ast;
+    protected $ast;
 
      /**
      * Request parameters:
@@ -70,7 +71,7 @@ class CliRequest
      *
      * @var array
      */
-    private $request;
+    protected $request;
 
     /**
      * Stored json enums
@@ -119,7 +120,7 @@ class CliRequest
      *
      * @return void
      */
-    private function store_default($configuration)
+    protected function store_default($configuration)
     {
         $this->request['controller'] = $configuration['default_controller'];
         $this->request['method']     = $configuration['default_method'];

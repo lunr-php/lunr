@@ -30,7 +30,7 @@ class FrontController
 
     /**
      * Instance of the Request class.
-     * @var Request
+     * @var RequestInterface
      */
     protected $request;
 
@@ -49,7 +49,7 @@ class FrontController
     /**
      * Constructor.
      *
-     * @param Request                         $request  Instance of the Request class.
+     * @param RequestInterface                $request  Instance of the Request class.
      * @param Response                        $response Instance of the Response class.
      * @param FilesystemAccessObjectInterface $fao      Instance of the FilesystemAccessObject class.
      */

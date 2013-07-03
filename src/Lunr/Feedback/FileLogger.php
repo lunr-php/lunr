@@ -41,9 +41,9 @@ class FileLogger extends PHPLogger
     /**
      * Constructor.
      *
-     * @param String   $filename Filename of the target log-file.
-     * @param DateTime $datetime Instance of the DateTime class.
-     * @param Request  $request  Reference to the Request class.
+     * @param String           $filename Filename of the target log-file.
+     * @param DateTime         $datetime Instance of the DateTime class.
+     * @param RequestInterface $request  Reference to the Request class.
      */
     public function __construct($filename, $datetime, $request)
     {

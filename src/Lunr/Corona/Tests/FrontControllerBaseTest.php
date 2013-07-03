@@ -37,7 +37,7 @@ class FrontControllerBaseTest extends FrontControllerTest
 
         $value = $property->getValue($this->class);
 
-        $this->assertInstanceOf('Lunr\Corona\Request', $value);
+        $this->assertInstanceOf('Lunr\Corona\RequestInterface', $value);
         $this->assertSame($this->request, $value);
     }
 

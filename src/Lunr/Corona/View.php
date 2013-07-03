@@ -28,7 +28,7 @@ abstract class View
 
     /**
      * Shared instance of the Request class
-     * @var Request
+     * @var RequestInterface
      */
     protected $request;
 
@@ -47,9 +47,9 @@ abstract class View
     /**
      * Constructor.
      *
-     * @param Request       $request       Shared instance of the Request class
-     * @param Response      $response      Shared instance of the Response class
-     * @param Configuration $configuration Shared instance of to the Configuration class
+     * @param RequestInterface $request       Shared instance of the Request class
+     * @param Response         $response      Shared instance of the Response class
+     * @param Configuration    $configuration Shared instance of to the Configuration class
      */
     public function __construct($request, $response, $configuration)
     {

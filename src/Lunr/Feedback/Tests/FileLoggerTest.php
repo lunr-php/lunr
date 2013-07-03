@@ -75,9 +75,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
     {
         $this->logger_reflection = new ReflectionClass('Lunr\Feedback\FileLogger');
 
-        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
-                              ->disableOriginalConstructor()
-                              ->getMock();
+        $this->request = $this->getMock('Lunr\Corona\RequestInterface');
 
         $this->datetime = $this->getMock('Lunr\Core\DateTime');
 

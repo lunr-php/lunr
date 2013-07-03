@@ -46,7 +46,7 @@ abstract class FrontControllerTest extends PHPUnit_Framework_TestCase
 
     /**
      * Mock instance of the Request class.
-     * @var Request
+     * @var RequestInterface
      */
     protected $request;
 
@@ -67,9 +67,7 @@ abstract class FrontControllerTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
-                              ->disableOriginalConstructor()
-                              ->getMock();
+        $this->request = $this->getMock('Lunr\Corona\RequestInterface');
 
         $this->response = $this->getMock('Lunr\Corona\Response');
 

@@ -30,14 +30,14 @@ class PHPLogger extends PSR3Logger
 
     /**
      * Reference to the Request class.
-     * @var Request
+     * @var RequestInterface
      */
     protected $request;
 
     /**
      * Constructor.
      *
-     * @param Request $request Reference to the Request class.
+     * @param RequestInterface $request Reference to the Request class.
      */
     public function __construct($request)
     {

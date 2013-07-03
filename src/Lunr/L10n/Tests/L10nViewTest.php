@@ -33,7 +33,7 @@ abstract class L10nViewTest extends PHPUnit_Framework_TestCase
 
     /**
      * Mock instance of the request class.
-     * @var Request
+     * @var RequestInterface
      */
     protected $request;
 
@@ -76,9 +76,7 @@ abstract class L10nViewTest extends PHPUnit_Framework_TestCase
     {
         $this->configuration = $this->getMock('Lunr\Core\Configuration');
 
-        $this->request = $this->getMockBuilder('Lunr\Core\Request')
-                              ->disableOriginalConstructor()
-                              ->getMock();
+        $this->request = $this->getMock('Lunr\Core\RequestInterface');
 
         $this->response = $this->getMock('Lunr\Core\Response');
 
