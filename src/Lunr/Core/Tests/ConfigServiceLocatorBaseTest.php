@@ -56,4 +56,48 @@ class ConfigServiceLocatorBaseTest extends ConfigServiceLocatorTest
         $this->assertSame($this->configuration, $this->get_reflection_property_value('config'));
     }
 
+    /**
+     * Test that override() returns FALSE when ID is already taken.
+     *
+     * @covers Lunr\Core\ConfigServiceLocator::override
+     */
+    public function testOverrideWhenIDAlreadyTaken()
+    {
+        $registry = [ 'id' => new \stdClass() ];
+
+        $this->set_reflection_property_value('registry', $registry);
+
+        $this->assertFalse($this->class->override('id', new \stdClass()));
+    }
+
+    /**
+     * Test that override() returns FALSE when trying to override with non-object.
+     *
+     * @param mixed $value Non-object value
+     *
+     * @dataProvider invalidObjectProvider
+     * @covers       Lunr\Core\ConfigServiceLocator::override
+     */
+    public function testOverrideWithInvalidObject($value)
+    {
+        $this->assertFalse($this->class->override('id', $value));
+    }
+
+    /**
+     * Test that override() returns TRUE when successful.
+     *
+     * @covers Lunr\Core\ConfigServiceLocator::override
+     */
+    public function testSuccessfulOverride()
+    {
+        $class = new \stdClass();
+
+        $this->assertTrue($this->class->override('id', $class));
+
+        $registry = $this->get_reflection_property_value('registry');
+
+        $this->assertArrayHasKey('id', $registry);
+        $this->assertSame($class, $registry['id']);
+    }
+
 }

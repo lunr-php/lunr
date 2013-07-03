@@ -76,6 +76,23 @@ abstract class ConfigServiceLocatorTest extends LunrBaseTest
         return $ids;
     }
 
+    /**
+     * Unit test data provider for non-objects.
+     *
+     * @return array $values Array of non-object values
+     */
+    public function invalidObjectProvider()
+    {
+        $values   = [];
+        $values[] = [ 'String' ];
+        $values[] = [ 1 ];
+        $values[] = [ 1.1 ];
+        $values[] = [ NULL ];
+        $values[] = [ TRUE ];
+
+        return $values;
+    }
+
 }
 
 ?>

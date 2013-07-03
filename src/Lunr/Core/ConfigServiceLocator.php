@@ -89,6 +89,30 @@ class ConfigServiceLocator
     }
 
     /**
+     * Override automatic location by preloading an object manually.
+     *
+     * This only works with objects that are treated like singletons
+     * and won't if the specified ID is already taken.
+     *
+     * @param String $id     ID for the preloaded object
+     * @param mixed  $object Instance of the object to preload
+     *
+     * @return Boolean $return TRUE if override successfully placed, FALSE otherwise
+     */
+    public function override($id, $object)
+    {
+        if (!isset($this->registry[$id]) && is_object($object))
+        {
+            $this->registry[$id] = $object;
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+
+    /**
      * Locate an object by ID.
      *
      * @param String $id ID of the object to locate.
