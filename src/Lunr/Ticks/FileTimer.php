@@ -72,9 +72,9 @@ class FileTimer implements TimerInterface
         $this->datetime = $datetime;
         $this->datetime->set_datetime_format('%Y-%m-%d %H:%M:%S');
 
-        if (($request->controller != NULL) && ($request->method != NULL))
+        if ($request->call != NULL)
         {
-            $this->request = $request->controller . '/' . $request->method . ': ';
+            $this->request = $request->call . ': ';
         }
         else
         {

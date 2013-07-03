@@ -92,9 +92,10 @@ abstract class FileTimerTest extends LunrBaseTest
                         ->disableOriginalConstructor()
                         ->getMock();
 
-        $request->expects($this->exactly(4))
+        $request->expects($this->exactly(2))
                 ->method('__get')
-                ->will($this->returnArgument(0));
+                ->with($this->equalTo('call'))
+                ->will($this->returnValue('controller/method'));
 
         $this->class = new FileTimer($request, $this->datetime, $this->file);
     }
