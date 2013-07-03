@@ -62,9 +62,9 @@ class PHPLogger extends PSR3Logger
      */
     protected function compose_message($message, $context)
     {
-        if (($this->request->controller != NULL) && ($this->request->method != NULL))
+        if ($this->request->call != NULL)
         {
-            $infix = $this->request->controller . '/' . $this->request->method . ': ';
+            $infix = $this->request->call . ': ';
         }
         else
         {

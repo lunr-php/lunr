@@ -128,7 +128,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test message composition when only controller is set.
+     * Test message composition when call is not set.
      *
      * @param String $message  The original log message
      * @param array  $context  Log message meta-data
@@ -138,44 +138,14 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      * @dataProvider messageProvider
      * @covers       Lunr\Feedback\PHPLogger::compose_message
      */
-    public function testComposeMessageWithControllerAvailable($message, $context, $expected)
-    {
-        $method = $this->logger_reflection->getMethod('compose_message');
-        $method->setAccessible(TRUE);
-
-        $this->request->expects($this->at(0))
-                      ->method('__get')
-                      ->with($this->equalTo('controller'))
-                      ->will($this->returnValue('controller'));
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with($this->equalTo('method'))
-                      ->will($this->returnValue(NULL));
-
-        $msg = $method->invokeArgs($this->logger, array($message, $context));
-
-        $this->assertEquals($expected, $msg);
-    }
-
-    /**
-     * Test message composition when only method is set.
-     *
-     * @param String $message  The original log message
-     * @param array  $context  Log message meta-data
-     * @param String $expected Expected log message after replacing
-     *
-     * @depends      testInterpolateMessageReplacesPlaceholders
-     * @dataProvider messageProvider
-     * @covers       Lunr\Feedback\PHPLogger::compose_message
-     */
-    public function testComposeMessageWithMethodAvailable($message, $context, $expected)
+    public function testComposeMessageWithCallUnAvailable($message, $context, $expected)
     {
         $method = $this->logger_reflection->getMethod('compose_message');
         $method->setAccessible(TRUE);
 
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('controller'))
+                      ->with($this->equalTo('call'))
                       ->will($this->returnValue(NULL));
 
         $msg = $method->invokeArgs($this->logger, array($message, $context));
@@ -184,7 +154,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test message composition when controller and method are set.
+     * Test message composition when call is set.
      *
      * @param String $message  The original log message
      * @param array  $context  Log message meta-data
@@ -194,14 +164,15 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      * @dataProvider messageProvider
      * @covers       Lunr\Feedback\PHPLogger::compose_message
      */
-    public function testComposeMessageWithControllerAndMethodAvailable($message, $context, $expected)
+    public function testComposeMessageWithCallAvailable($message, $context, $expected)
     {
         $method = $this->logger_reflection->getMethod('compose_message');
         $method->setAccessible(TRUE);
 
-        $this->request->expects($this->exactly(4))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->will($this->returnArgument(0));
+                      ->with($this->equalTo('call'))
+                      ->will($this->returnValue('controller/method'));
 
         $msg = $method->invokeArgs($this->logger, array($message, $context));
 
