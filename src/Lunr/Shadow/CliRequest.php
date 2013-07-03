@@ -66,6 +66,7 @@ class CliRequest
      *  'controller' The controller requested
      *  'method'     The method requested of that controller
      *  'params'     The parameters for that method
+     *  'call'       The call identifier, combining controller and method
      *
      * @var array
      */
@@ -129,6 +130,15 @@ class CliRequest
         $this->request['domain']    = $configuration['default_domain'];
         $this->request['port']      = $configuration['default_port'];
         $this->request['base_url']  = $configuration['default_url'];
+
+        if (isset($this->request['controller'], $this->request['method']) === TRUE)
+        {
+            $this->request['call'] = $this->request['controller'] . '/' . $this->request['method'];
+        }
+        else
+        {
+            $this->request['call'] = NULL;
+        }
     }
 
     /**
@@ -154,6 +164,7 @@ class CliRequest
             case 'params':
             case 'sapi':
             case 'host':
+            case 'call':
                 return $this->request[$name];
                 break;
             default:

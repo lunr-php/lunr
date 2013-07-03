@@ -29,8 +29,6 @@ class CliRequestBaseTest extends CliRequestTest
 
     /**
      * Tests that the ast inits with an array.
-     *
-     * @covers Lunr\Shadow\CliRequest::__construct
      */
     public function testAstInitsWithArray()
     {
@@ -41,8 +39,6 @@ class CliRequestBaseTest extends CliRequestTest
 
     /**
      * Tests that get inits with an empty array.
-     *
-     * @covers Lunr\Shadow\CliRequest::__construct
      */
     public function testGetInitsWithEmptyArray()
     {
@@ -53,8 +49,6 @@ class CliRequestBaseTest extends CliRequestTest
 
     /**
      * Tests that post inits with an empty array.
-     *
-     * @covers Lunr\Shadow\CliRequest::__construct
      */
     public function testPostInitsWithEmptyArray()
     {
@@ -65,8 +59,6 @@ class CliRequestBaseTest extends CliRequestTest
 
     /**
      * Tests that post inits with an empty array.
-     *
-     * @covers Lunr\Shadow\CliRequest::__construct
      */
     public function testCookieInitsWithEmptyArray()
     {
@@ -76,24 +68,34 @@ class CliRequestBaseTest extends CliRequestTest
     }
 
     /**
+     * Check that json_enums is empty by default.
+     */
+    public function testJsonEnumsEmpty()
+    {
+        $json_enums = $this->get_reflection_property_value('json_enums');
+
+        $this->assertArrayEmpty($json_enums);
+    }
+
+    /**
      * Tests that store_get stores default values.
      *
      * @param String $request_key The request key to test.
      * @param String $config_key  The configuration key to match.
      *
      * @depends      Lunr\EnvironmentTest::testRunkit
-     * @dataProvider requestConfigKeyProvider
+     * @dataProvider requestValueProvider
      * @covers       Lunr\Shadow\CliRequest::store_default
      */
-    public function testStoreDefaultInitsWithConfigurationValues($request_key, $config_key)
+    public function testStoreDefaultInitsWithConfigurationValues($request_key, $value)
     {
         $request = $this->get_reflection_property_value('request');
 
-        $this->assertEquals($request[$request_key], $this->configuration[$config_key]);
+        $this->assertEquals($request[$request_key], $value);
     }
 
     /**
-     * Tests that store_get inits params with empty array.
+     * Tests that store_default() inits params with empty array.
      *
      * @covers Lunr\Shadow\CliRequest::store_default
      */
@@ -105,15 +107,22 @@ class CliRequestBaseTest extends CliRequestTest
     }
 
     /**
-     * Check that json_enums is empty by default.
+     * Test that store_default() sets call NULL if controller and method not set.
      *
-     * @covers Lunr\Shadow\CliRequest::__construct
+     * @covers Lunr\Shadow\CliRequest::store_default
      */
-    public function testJsonEnumsEmpty()
+    public function testStoreDefaultsSetsCallNullIfDefaultValuesNotSet()
     {
-        $json_enums = $this->get_reflection_property_value('json_enums');
+        $configuration = $this->getMock('Lunr\Core\Configuration');
 
-        $this->assertArrayEmpty($json_enums);
+        $method = $this->get_accessible_reflection_method('store_default');
+
+        $method->invokeArgs($this->class, [ $configuration ]);
+
+        $request = $this->get_reflection_property_value('request');
+
+        $this->assertArrayHasKey('call', $request);
+        $this->assertNull($request['call']);
     }
 
     /**

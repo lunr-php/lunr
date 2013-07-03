@@ -110,15 +110,16 @@ abstract class CliRequestTest extends LunrBaseTest
     public function requestValueProvider()
     {
         $values   = array();
-        $values[] = array('sapi', 'cli');
-        $values[] = array('host', 'Lunr');
-        $values[] = array('base_path', '/path');
         $values[] = array('protocol', 'http');
         $values[] = array('domain', 'www.domain.com');
-        $values[] = array('port', 666);
+        $values[] = array('port', '666');
+        $values[] = array('base_path', '/path');
         $values[] = array('base_url', 'http://www.domain.com:666/path/');
+        $values[] = array('sapi', 'cli');
         $values[] = array('controller', 'DefaultController');
         $values[] = array('method', 'default_method');
+        $values[] = array('params', array());
+        $values[] = array('call', 'DefaultController/default_method');
 
         return $values;
     }
@@ -134,25 +135,6 @@ abstract class CliRequestTest extends LunrBaseTest
         $keys[] = array('Unhandled');
 
         return $keys;
-    }
-
-    /**
-     * Unit Test Data Provider for request initialization with default configuration values.
-     *
-     * @return array $values Set of request key and their configuration values to match
-     */
-    public function requestConfigKeyProvider()
-    {
-        $values   = array();
-        $values[] = array('controller', 'default_controller');
-        $values[] = array('method', 'default_method');
-        $values[] = array('base_path', 'default_webpath');
-        $values[] = array('protocol', 'default_protocol');
-        $values[] = array('domain', 'default_domain');
-        $values[] = array('port', 'default_port');
-        $values[] = array('base_url', 'default_url');
-
-        return $values;
     }
 
     /**
