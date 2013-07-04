@@ -6,8 +6,8 @@
  * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
- * @subpackage Libraries
+ * @package    Network
+ * @subpackage Curl
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -19,14 +19,12 @@ namespace Lunr\Network;
  * Curl wrapper class.
  *
  * @category   Libraries
- * @package    Core
- * @subpackage Libraries
+ * @package    Network
+ * @subpackage Curl
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class Curl implements HttpRequestInterface
 {
-
-    use NetworkErrorTrait;
 
     /**
      * Curl options array
@@ -41,49 +39,11 @@ class Curl implements HttpRequestInterface
     private $headers;
 
     /**
-     * Curl request resource handle
-     * @var resource
-     */
-    private $handle;
-
-    /**
-     * Information about a successfully completed request
-     * @var array
-     */
-    private $info;
-
-    /**
-     * HTTP status code of the request made
-     * @var Integer
-     */
-    private $http_code;
-
-    /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->options = array();
-        $this->headers = array();
-
-        // default: no error
-        $this->error_number  = 0;
-        $this->error_message = '';
-
-        // default: no info
-        $this->info = array();
-
-        // set http_code to zero to indicate we haven't made a request yet
-        $this->http_code = 0;
-
-        // set default curl options
-        $this->options[CURLOPT_TIMEOUT]        = 30;
-        $this->options[CURLOPT_RETURNTRANSFER] = TRUE;
-        $this->options[CURLOPT_FOLLOWLOCATION] = TRUE;
-        $this->options[CURLOPT_FAILONERROR]    = TRUE;
-
-        // pre-initialization
-        $this->handle = NULL;
+        $this->reset_options();
     }
 
     /**
@@ -93,32 +53,23 @@ class Curl implements HttpRequestInterface
     {
         unset($this->options);
         unset($this->headers);
-        unset($this->error_number);
-        unset($this->error_message);
-        unset($this->info);
-        unset($this->http_code);
-        unset($this->handle);
     }
 
     /**
-     * Get access to certain private attributes.
+     * Reset options to default after a request.
      *
-     * This gives access to info and http_code.
-     *
-     * @param String $name Attribute name
-     *
-     * @return mixed $return Value of the chosen attribute
+     * @return void
      */
-    public function __get($name)
+    private function reset_options()
     {
-        switch ($name)
-        {
-            case 'info':
-            case 'http_code':
-                return $this->{$name};
-            default:
-                return NULL;
-        }
+        $this->options = array();
+        $this->headers = array();
+
+        // set default curl options
+        $this->options[CURLOPT_TIMEOUT]        = 30;
+        $this->options[CURLOPT_RETURNTRANSFER] = TRUE;
+        $this->options[CURLOPT_FOLLOWLOCATION] = TRUE;
+        $this->options[CURLOPT_FAILONERROR]    = TRUE;
     }
 
     /**
@@ -199,56 +150,34 @@ class Curl implements HttpRequestInterface
     }
 
     /**
-     * Initialize the curl request.
+     * Execute a curl request.
      *
      * @param String $uri URI for the request
      *
-     * @return Boolean $return TRUE if the initialization was successful,
-     *                         FALSE otherwise
+     * @return mixed $return Return value
      */
-    private function init($uri)
+    private function execute($uri)
     {
-        $this->handle = curl_init($uri);
+        $handle = curl_init($uri);
 
         if (!empty($this->headers))
         {
             $this->set_option('CURLOPT_HTTPHEADER', $this->headers);
         }
 
-        if (curl_setopt_array($this->handle, $this->options) !== TRUE)
+        if (curl_setopt_array($handle, $this->options) !== TRUE)
         {
-            $this->error_message = 'Could not set curl options!';
-            $this->error_number  = -1;
-            return FALSE;
-        }
-
-        return TRUE;
-    }
-
-    /**
-     * Execute a curl request.
-     *
-     * @return mixed $return Return value
-     */
-    private function execute()
-    {
-        $return = curl_exec($this->handle);
-
-        if ($return === FALSE)
-        {
-            $this->error_number  = curl_errno($this->handle);
-            $this->error_message = curl_error($this->handle);
-            $this->http_code     = curl_getinfo($this->handle, CURLINFO_HTTP_CODE);
+            $result = new CurlResponse(NULL, $handle);
         }
         else
         {
-            $this->info = curl_getinfo($this->handle);
+            $result = new CurlResponse(curl_exec($handle), $handle);
         }
 
-        curl_close($this->handle);
-        $this->handle = NULL;
+        curl_close($handle);
+        $this->reset_options();
 
-        return $return;
+        return $result;
     }
 
     /**
@@ -260,12 +189,7 @@ class Curl implements HttpRequestInterface
      */
     public function get_request($uri)
     {
-        if ($this->init($uri) === FALSE)
-        {
-            return FALSE;
-        }
-
-        return $this->execute();
+        return $this->execute($uri);
     }
 
     /**
@@ -282,18 +206,7 @@ class Curl implements HttpRequestInterface
         $this->options[CURLOPT_POST]          = TRUE;
         $this->options[CURLOPT_POSTFIELDS]    = $data;
 
-        if ($this->init($uri) === FALSE)
-        {
-            return FALSE;
-        }
-
-        $output = $this->execute();
-
-        unset($this->options[CURLOPT_CUSTOMREQUEST]);
-        unset($this->options[CURLOPT_POST]);
-        unset($this->options[CURLOPT_POSTFIELDS]);
-
-        return $output;
+        return $this->execute($uri);
     }
 
 }

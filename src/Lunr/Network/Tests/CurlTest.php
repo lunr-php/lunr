@@ -3,10 +3,10 @@
 /**
  * This file contains the CurlTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
@@ -16,19 +16,19 @@
 namespace Lunr\Network\Tests;
 
 use Lunr\Network\Curl;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
  * This class contains test methods for the Curl class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Network\Curl
  */
-abstract class CurlTest extends PHPUnit_Framework_TestCase
+abstract class CurlTest extends LunrBaseTest
 {
 
     /**
@@ -77,7 +77,7 @@ abstract class CurlTest extends PHPUnit_Framework_TestCase
      * Runkit simulation code for returning info.
      * @var string
      */
-    const CURL_RETURN_INFO = 'return "info";';
+    const CURL_RETURN_INFO = 'return [];';
 
     /**
      * Runkit simulation code for returning a value.
@@ -90,8 +90,8 @@ abstract class CurlTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->curl_reflection = new ReflectionClass('Lunr\Network\Curl');
-        $this->curl            = new Curl();
+        $this->reflection = new ReflectionClass('Lunr\Network\Curl');
+        $this->class      = new Curl();
     }
 
     /**
@@ -99,24 +99,8 @@ abstract class CurlTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->curl_reflection);
-        unset($this->curl);
-    }
-
-    /**
-     * Unit Test Data Provider for valid property values.
-     *
-     * @return array $properties Array of valid properties of the Curl class
-     */
-    public function validPropertyProvider()
-    {
-        $properties   = array();
-        $properties[] = array('errno', 0);
-        $properties[] = array('errmsg', '');
-        $properties[] = array('info', array());
-        $properties[] = array('http_code', 0);
-
-        return $properties;
+        unset($this->reflection);
+        unset($this->class);
     }
 
     /**

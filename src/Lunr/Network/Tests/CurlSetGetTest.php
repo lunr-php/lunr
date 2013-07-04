@@ -3,10 +3,10 @@
 /**
  * This file contains the CurlSetGetTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
- * @package    Core
+ * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
@@ -15,45 +15,17 @@
 
 namespace Lunr\Network\Tests;
 
-use Lunr\Network\Curl;
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
-
 /**
  * This class contains test methods for the getters and setters of the Curl class.
  *
  * @category   Libraries
- * @package    Core
+ * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Network\Curl
  */
 class CurlSetGetTest extends CurlTest
 {
-
-    /**
-     * Test that the value of valid properties can be retrieved correctly.
-     *
-     * @param String $property Property name
-     * @param mixed  $value    Property value
-     *
-     * @dataProvider validPropertyProvider
-     * @covers       Lunr\Network\Curl::__get
-     */
-    public function testGetReturnsValuesForValidProperties($property, $value)
-    {
-        $this->assertEquals($value, $this->curl->$property);
-    }
-
-    /**
-     * Test that the value of invalid properties is retrieved as NULL.
-     *
-     * @covers Lunr\Network\Curl::__get
-     */
-    public function testGetReturnsNullForInvalidProperties()
-    {
-        $this->assertNull($this->curl->invalid_property);
-    }
 
     /**
      * Test that an option that does not start with 'CURL' is not set.
@@ -65,14 +37,13 @@ class CurlSetGetTest extends CurlTest
      */
     public function testSetOptionDoesNotSetIfNameDoesNotStartWithCurl($option)
     {
-        $property = $this->curl_reflection->getProperty('options');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('options');
 
-        $old = $property->getValue($this->curl);
+        $old = $property->getValue($this->class);
 
-        $return = $this->curl->set_option($option, 'value');
+        $return = $this->class->set_option($option, 'value');
 
-        $this->assertEquals($old, $property->getValue($this->curl));
+        $this->assertEquals($old, $property->getValue($this->class));
         $this->assertInstanceOf('Lunr\Network\Curl', $return);
     }
 
@@ -83,14 +54,13 @@ class CurlSetGetTest extends CurlTest
      */
     public function testSetOptionDoesNotSetIfCurlOptionDoesNotExist()
     {
-        $property = $this->curl_reflection->getProperty('options');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('options');
 
-        $old = $property->getValue($this->curl);
+        $old = $property->getValue($this->class);
 
-        $return = $this->curl->set_option('CURLOPT_WHATEVER', 'value');
+        $return = $this->class->set_option('CURLOPT_WHATEVER', 'value');
 
-        $this->assertEquals($old, $property->getValue($this->curl));
+        $this->assertEquals($old, $property->getValue($this->class));
         $this->assertInstanceOf('Lunr\Network\Curl', $return);
     }
 
@@ -101,14 +71,13 @@ class CurlSetGetTest extends CurlTest
      */
     public function testSetOptionSetsValidOption()
     {
-        $property = $this->curl_reflection->getProperty('options');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('options');
 
-        $this->assertArrayNotHasKey('CURLOPT_TIMEVALUE', $property->getValue($this->curl));
+        $this->assertArrayNotHasKey('CURLOPT_TIMEVALUE', $property->getValue($this->class));
 
-        $return = $this->curl->set_option('CURLOPT_TIMEVALUE', 1);
+        $return = $this->class->set_option('CURLOPT_TIMEVALUE', 1);
 
-        $value = $property->getValue($this->curl);
+        $value = $property->getValue($this->class);
 
         $this->assertArrayHasKey(CURLOPT_TIMEVALUE, $value);
         $this->assertEquals(1, $value[CURLOPT_TIMEVALUE]);
@@ -122,14 +91,13 @@ class CurlSetGetTest extends CurlTest
      */
     public function testSetOptionsDoesNotSetIfInputIsNotArray()
     {
-        $property = $this->curl_reflection->getProperty('options');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('options');
 
-        $old = $property->getValue($this->curl);
+        $old = $property->getValue($this->class);
 
-        $return = $this->curl->set_options('CURLOPT_TIMEVALUE', 1);
+        $return = $this->class->set_options('CURLOPT_TIMEVALUE', 1);
 
-        $this->assertEquals($old, $property->getValue($this->curl));
+        $this->assertEquals($old, $property->getValue($this->class));
         $this->assertInstanceOf('Lunr\Network\Curl', $return);
     }
 
@@ -140,10 +108,9 @@ class CurlSetGetTest extends CurlTest
      */
     public function testSetOptionsSetsValidOptions()
     {
-        $property = $this->curl_reflection->getProperty('options');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('options');
 
-        $old = $property->getValue($this->curl);
+        $old = $property->getValue($this->class);
 
         $this->assertArrayNotHasKey('CURLOPT_TIMEVALUE', $old);
         $this->assertArrayNotHasKey('CURLOPT_PUT', $old);
@@ -152,9 +119,9 @@ class CurlSetGetTest extends CurlTest
         $options['CURLOPT_TIMEVALUE'] = 1;
         $options['CURLOPT_PUT']       = 1;
 
-        $return = $this->curl->set_options($options);
+        $return = $this->class->set_options($options);
 
-        $value = $property->getValue($this->curl);
+        $value = $property->getValue($this->class);
 
         $this->assertArrayHasKey(CURLOPT_TIMEVALUE, $value);
         $this->assertArrayHasKey(CURLOPT_PUT, $value);
@@ -170,16 +137,15 @@ class CurlSetGetTest extends CurlTest
      */
     public function testSetHttpHeaderAppendsHeaderArray()
     {
-        $property = $this->curl_reflection->getProperty('headers');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('headers');
 
-        $old = $property->getValue($this->curl);
+        $old = $property->getValue($this->class);
 
         $this->assertNotContains('header', $old);
 
-        $this->curl->set_http_header('header');
+        $this->class->set_http_header('header');
 
-        $this->assertContains('header', $property->getValue($this->curl));
+        $this->assertContains('header', $property->getValue($this->class));
     }
 
     /**
@@ -189,7 +155,7 @@ class CurlSetGetTest extends CurlTest
      */
     public function testSetHttpHeaderReturnsSelfReference()
     {
-        $return = $this->curl->set_http_header('header');
+        $return = $this->class->set_http_header('header');
         $this->assertInstanceOf('Lunr\Network\Curl', $return);
     }
 
@@ -202,17 +168,16 @@ class CurlSetGetTest extends CurlTest
     {
         $headers = array('h1', 'h2');
 
-        $property = $this->curl_reflection->getProperty('headers');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('headers');
 
-        $old = $property->getValue($this->curl);
+        $old = $property->getValue($this->class);
 
         $this->assertNotContains('h1', $old);
         $this->assertNotContains('h2', $old);
 
-        $this->curl->set_http_headers($headers);
+        $this->class->set_http_headers($headers);
 
-        $new = $property->getValue($this->curl);
+        $new = $property->getValue($this->class);
 
         $this->assertContains('h1', $new);
         $this->assertContains('h2', $new);
@@ -225,14 +190,13 @@ class CurlSetGetTest extends CurlTest
      */
     public function testSetHttpHeadersDoesNotAppendHeaderArrayIfInputIsNotArray()
     {
-        $property = $this->curl_reflection->getProperty('headers');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('headers');
 
-        $old = $property->getValue($this->curl);
+        $old = $property->getValue($this->class);
 
-        $this->curl->set_http_headers('h1');
+        $this->class->set_http_headers('h1');
 
-        $this->assertEquals($old, $property->getValue($this->curl));
+        $this->assertEquals($old, $property->getValue($this->class));
     }
 
     /**
@@ -242,7 +206,7 @@ class CurlSetGetTest extends CurlTest
      */
     public function testSetHttpHeadersReturnsSelfReference()
     {
-        $return = $this->curl->set_http_header(array('header'));
+        $return = $this->class->set_http_header(array('header'));
         $this->assertInstanceOf('Lunr\Network\Curl', $return);
     }
 

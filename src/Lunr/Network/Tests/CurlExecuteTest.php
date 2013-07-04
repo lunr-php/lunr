@@ -32,278 +32,111 @@ class CurlExecuteTest extends CurlTest
 {
 
     /**
-     * Test that init() sets header option for curl if headers are not emoty.
+     * Test that execute() resets headers after a request.
      *
      * @runInSeparateProcess
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::init
+     * @covers  Lunr\Network\Curl::execute
      */
-    public function testInitSetsHeaderOptionIfHeadersNotEmpty()
+    public function testExecuteResetsHeaders()
     {
-        $property = $this->curl_reflection->getProperty('headers');
+        $property = $this->reflection->getProperty('headers');
         $property->setAccessible(TRUE);
-        $property->setValue($this->curl, array('h1'));
+        $property->setValue($this->class, ['h1']);
 
         runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
         runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_TRUE);
+        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_VALUE);
+        runkit_function_redefine('curl_errno', '', self::CURL_RETURN_ERRNO);
+        runkit_function_redefine('curl_error', '', self::CURL_RETURN_ERRMSG);
+        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_CODE);
+        runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
 
-        $method = $this->curl_reflection->getMethod('init');
-        $method->setAccessible(TRUE);
-        $method->invokeArgs($this->curl, array('http://localhost/'));
+        $method = $this->get_accessible_reflection_method('execute');
+        $method->invokeArgs($this->class, ['http://localhost/']);
 
-        $property = $this->curl_reflection->getProperty('options');
-        $property->setAccessible(TRUE);
-
-        $options = $property->getValue($this->curl);
-        $this->assertContains(CURLOPT_HTTPHEADER, $options);
-        $this->assertEquals(array('h1'), $options[CURLOPT_HTTPHEADER]);
+        $this->assertArrayEmpty($this->get_reflection_property_value('headers'));
     }
 
     /**
-     * Test that init() does not set header option for curl if headers are empty.
+     * Test that execute() resets options after a request.
      *
      * @runInSeparateProcess
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::init
+     * @covers  Lunr\Network\Curl::execute
      */
-    public function testInitDoesNotSetHeaderOptionIfHeadersEmpty()
-    {
-        $property = $this->curl_reflection->getProperty('options');
-        $property->setAccessible(TRUE);
-
-        $old = $property->getValue($this->curl);
-
-        runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
-        runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_TRUE);
-
-        $method = $this->curl_reflection->getMethod('init');
-        $method->setAccessible(TRUE);
-        $method->invokeArgs($this->curl, array('http://localhost/'));
-
-        $this->assertEquals($old, $property->getValue($this->curl));
-    }
-
-    /**
-     * Test that init() sets the handle.
-     *
-     * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::init
-     */
-    public function testInitSetsHandle()
+    public function testExecuteDoesNotSetHeaderOptionIfHeadersEmpty()
     {
         runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
         runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_TRUE);
+        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_VALUE);
+        runkit_function_redefine('curl_errno', '', self::CURL_RETURN_ERRNO);
+        runkit_function_redefine('curl_error', '', self::CURL_RETURN_ERRMSG);
+        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_CODE);
+        runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
 
-        $method = $this->curl_reflection->getMethod('init');
-        $method->setAccessible(TRUE);
-        $method->invokeArgs($this->curl, array('http://localhost/'));
+        $method = $this->get_accessible_reflection_method('execute');
+        $method->invokeArgs($this->class, ['http://localhost/']);
 
-        $property = $this->curl_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
+        $value = $this->get_reflection_property_value('options');
 
-        $this->assertTrue($property->getValue($this->curl));
+        $this->assertInternalType('array', $value);
+
+        $this->assertArrayHasKey(CURLOPT_TIMEOUT, $value);
+        $this->assertArrayHasKey(CURLOPT_RETURNTRANSFER, $value);
+        $this->assertArrayHasKey(CURLOPT_FOLLOWLOCATION, $value);
+        $this->assertArrayHasKey(CURLOPT_FAILONERROR, $value);
+
+        $this->assertEquals(30, $value[CURLOPT_TIMEOUT]);
+        $this->assertTrue($value[CURLOPT_RETURNTRANSFER]);
+        $this->assertTrue($value[CURLOPT_FOLLOWLOCATION]);
+        $this->assertTrue($value[CURLOPT_FAILONERROR]);
     }
 
     /**
-     * Test that init returns TRUE on success.
+     * Test that execute returns a CurlResponse object on successful request.
      *
      * @runInSeparateProcess
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::init
+     * @covers  Lunr\Network\Curl::execute
      */
-    public function testInitReturnsTrueOnSuccess()
+    public function testExecuteReturnsResponseObjectOnSuccess()
     {
         runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
         runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_TRUE);
+        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_VALUE);
+        runkit_function_redefine('curl_errno', '', self::CURL_RETURN_ERRNO);
+        runkit_function_redefine('curl_error', '', self::CURL_RETURN_ERRMSG);
+        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_CODE);
+        runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
 
-        $method = $this->curl_reflection->getMethod('init');
-        $method->setAccessible(TRUE);
-        $return = $method->invokeArgs($this->curl, array('http://localhost/'));
+        $method = $this->get_accessible_reflection_method('execute');
+        $return = $method->invokeArgs($this->class, ['http://localhost/']);
 
-        $this->assertTrue($return);
+        $this->assertInstanceOf('Lunr\Network\CurlResponse', $return);
     }
 
     /**
-     * Test that init returns FALSE on error.
+     * Test that execute returns a CurlResponse object on failed request.
      *
      * @runInSeparateProcess
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::init
+     * @covers  Lunr\Network\Curl::execute
      */
-    public function testInitReturnsFalseOnError()
+    public function testExecuteReturnsResponseObjectOnError()
     {
         runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
         runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_FALSE);
-
-        $method = $this->curl_reflection->getMethod('init');
-        $method->setAccessible(TRUE);
-        $return = $method->invokeArgs($this->curl, array('http://localhost/'));
-
-        $this->assertFalse($return);
-    }
-
-    /**
-     * Test that init sets error_message and error_number on error.
-     *
-     * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::init
-     */
-    public function testInitSetsErrorInfoOnError()
-    {
-        runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
-        runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_FALSE);
-
-        $method = $this->curl_reflection->getMethod('init');
-        $method->setAccessible(TRUE);
-        $method->invokeArgs($this->curl, array('http://localhost/'));
-
-        $errmsg = $this->curl_reflection->getProperty('error_message');
-        $errmsg->setAccessible(TRUE);
-
-        $this->assertEquals('Could not set curl options!', $errmsg->getValue($this->curl));
-
-        $errno = $this->curl_reflection->getProperty('error_number');
-        $errno->setAccessible(TRUE);
-
-        $this->assertEquals(-1, $errno->getValue($this->curl));
-    }
-
-    /**
-     * Test that execute sets errmsg, errno and http_code on error.
-     *
-     * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::execute
-     */
-    public function testExecuteSetsErrorInfoOnError()
-    {
-        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_FALSE);
-        runkit_function_redefine('curl_errno', '', self::CURL_RETURN_ERRNO);
-        runkit_function_redefine('curl_error', '', self::CURL_RETURN_ERRMSG);
-        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_CODE);
         runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
 
-        $method = $this->curl_reflection->getMethod('execute');
-        $method->setAccessible(TRUE);
-        $method->invoke($this->curl);
+        $method = $this->get_accessible_reflection_method('execute');
+        $return = $method->invokeArgs($this->class, ['http://localhost/']);
 
-        $errno = $this->curl_reflection->getProperty('error_number');
-        $errno->setAccessible(TRUE);
-
-        $this->assertEquals(10, $errno->getValue($this->curl));
-
-        $errmsg = $this->curl_reflection->getProperty('error_message');
-        $errmsg->setAccessible(TRUE);
-
-        $this->assertEquals('error', $errmsg->getValue($this->curl));
-
-        $code = $this->curl_reflection->getProperty('http_code');
-        $code->setAccessible(TRUE);
-
-        $this->assertEquals(404, $code->getValue($this->curl));
-    }
-
-    /**
-     * Test that execute sets handle NULL.
-     *
-     * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::execute
-     */
-    public function testExecuteSetsHandleNull()
-    {
-        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_FALSE);
-        runkit_function_redefine('curl_errno', '', self::CURL_RETURN_ERRNO);
-        runkit_function_redefine('curl_error', '', self::CURL_RETURN_ERRMSG);
-        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_CODE);
-        runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
-
-        $method = $this->curl_reflection->getMethod('execute');
-        $method->setAccessible(TRUE);
-        $method->invoke($this->curl);
-
-        $property = $this->curl_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
-
-        $this->assertNull($property->getValue($this->curl));
-    }
-
-    /**
-     * Test that execute sets info on success.
-     *
-     * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::execute
-     */
-    public function testExecuteSetsInfoOnSuccess()
-    {
-        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_VALUE);
-        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_INFO);
-        runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
-
-        $method = $this->curl_reflection->getMethod('execute');
-        $method->setAccessible(TRUE);
-        $method->invoke($this->curl);
-
-        $property = $this->curl_reflection->getProperty('info');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('info', $property->getValue($this->curl));
-    }
-
-    /**
-     * Test that execute return FALSE on error.
-     *
-     * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::execute
-     */
-    public function testExecuteReturnsFalseOnError()
-    {
-        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_FALSE);
-        runkit_function_redefine('curl_errno', '', self::CURL_RETURN_ERRNO);
-        runkit_function_redefine('curl_error', '', self::CURL_RETURN_ERRMSG);
-        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_CODE);
-        runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
-
-        $method = $this->curl_reflection->getMethod('execute');
-        $method->setAccessible(TRUE);
-        $return = $method->invoke($this->curl);
-
-        $this->assertFalse($return);
-    }
-
-    /**
-     * Test that execute returns value on success.
-     *
-     * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::execute
-     */
-    public function testExecuteReturnsValueOnSuccess()
-    {
-        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_VALUE);
-        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_INFO);
-        runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
-
-        $method = $this->curl_reflection->getMethod('execute');
-        $method->setAccessible(TRUE);
-        $return = $method->invoke($this->curl);
-
-        $this->assertEquals('value', $return);
+        $this->assertInstanceOf('Lunr\Network\CurlResponse', $return);
     }
 
 }

@@ -32,155 +32,99 @@ class CurlRequestTest extends CurlTest
 {
 
     /**
-     * Test that get_request() returns FALSE if init() fails.
+     * Test that get_request() returns response object on successful request.
      *
      * @runInSeparateProcess
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\CurlExecuteTest::testInitReturnsFalseOnError
+     * @depends Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnSuccess
      * @covers  Lunr\Network\Curl::get_request
      */
-    public function testGetRequestReturnsFalseIfInitFails()
-    {
-        runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
-        runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_FALSE);
-
-        $this->assertFalse($this->curl->get_request('http://localhost/'));
-    }
-
-    /**
-     * Test that get_request() returns FALSE if execute() fails.
-     *
-     * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsFalseOnError
-     * @covers  Lunr\Network\Curl::get_request
-     */
-    public function testGetRequestReturnsFalseIfExecuteFails()
+    public function testGetRequestReturnsResponseObjectOnSuccess()
     {
         runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
         runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_TRUE);
-        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_FALSE);
+        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_VALUE);
         runkit_function_redefine('curl_errno', '', self::CURL_RETURN_ERRNO);
         runkit_function_redefine('curl_error', '', self::CURL_RETURN_ERRMSG);
         runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_CODE);
         runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
 
-        $this->assertFalse($this->curl->get_request('http://localhost/'));
+        $return = $this->class->get_request('http://localhost/');
+
+        $this->assertInstanceOf('Lunr\Network\CurlResponse', $return);
     }
 
     /**
-     * Test that get_request() returns value on success.
+     * Test that get_request() returns response object on failed request.
      *
      * @runInSeparateProcess
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsValueOnSuccess
+     * @depends Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnError
      * @covers  Lunr\Network\Curl::get_request
      */
-    public function testGetRequestReturnsValueOnSuccess()
-    {
-        runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
-        runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_TRUE);
-        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_VALUE);
-        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_INFO);
-        runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
-
-        $this->assertEquals('value', $this->curl->get_request('http://localhost/'));
-    }
-
-    /**
-     * Test that post_request() returns FALSE if init() fails.
-     *
-     * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\CurlExecuteTest::testInitReturnsFalseOnError
-     * @covers  Lunr\Network\Curl::post_request
-     */
-    public function testPostRequestReturnsFalseIfInitFails()
+    public function testGetRequestReturnsResponseObjectOnError()
     {
         runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
         runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_FALSE);
-
-        $this->assertFalse($this->curl->post_request('http://localhost/', array()));
-    }
-
-    /**
-     * Test that post_request() returns FALSE if execute() fails.
-     *
-     * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsFalseOnError
-     * @covers  Lunr\Network\Curl::post_request
-     */
-    public function testPostRequestReturnsFalseIfExecuteFails()
-    {
-        runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
-        runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_TRUE);
-        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_FALSE);
+        runkit_function_redefine('curl_exec', '', self::CURL_RETURN_VALUE);
         runkit_function_redefine('curl_errno', '', self::CURL_RETURN_ERRNO);
         runkit_function_redefine('curl_error', '', self::CURL_RETURN_ERRMSG);
         runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_CODE);
         runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
 
-        $this->assertFalse($this->curl->post_request('http://localhost/', array()));
+        $return = $this->class->get_request('http://localhost/');
+
+        $this->assertInstanceOf('Lunr\Network\CurlResponse', $return);
     }
 
     /**
-     * Test that post_request() returns value on success.
+     * Test that post_request() returns response object on successful request.
      *
      * @runInSeparateProcess
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsValueOnSuccess
+     * @depends Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnSuccess
      * @covers  Lunr\Network\Curl::post_request
      */
-    public function testPostRequestReturnsValueOnSuccess()
+    public function testPostRequestReturnsResponseObjectOnSuccess()
     {
         runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
         runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_TRUE);
         runkit_function_redefine('curl_exec', '', self::CURL_RETURN_VALUE);
-        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_INFO);
+        runkit_function_redefine('curl_errno', '', self::CURL_RETURN_ERRNO);
+        runkit_function_redefine('curl_error', '', self::CURL_RETURN_ERRMSG);
+        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_CODE);
         runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
 
-        $this->assertEquals('value', $this->curl->post_request('http://localhost/', array()));
+        $return = $this->class->post_request('http://localhost/', []);
+
+        $this->assertInstanceOf('Lunr\Network\CurlResponse', $return);
     }
 
     /**
-     * Test that post options are not kept after the request.
+     * Test that post_request() returns response object on failed request.
      *
      * @runInSeparateProcess
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::get_request
+     * @depends Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnError
+     * @covers  Lunr\Network\Curl::post_request
      */
-    Public function testPostOptionsAreNotPersistant()
+    public function testPostRequestReturnsResponseObjectOnError()
     {
-        $property = $this->curl_reflection->getProperty('options');
-        $property->setAccessible(TRUE);
-
-        $old = $property->getValue($this->curl);
-
-        $this->assertArrayNotHasKey(CURLOPT_CUSTOMREQUEST, $old);
-        $this->assertArrayNotHasKey(CURLOPT_POST, $old);
-        $this->assertArrayNotHasKey(CURLOPT_POSTFIELDS, $old);
-
         runkit_function_redefine('curl_init', '', self::CURL_RETURN_TRUE);
-        runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_TRUE);
+        runkit_function_redefine('curl_setopt_array', '', self::CURL_RETURN_FALSE);
         runkit_function_redefine('curl_exec', '', self::CURL_RETURN_VALUE);
-        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_INFO);
+        runkit_function_redefine('curl_errno', '', self::CURL_RETURN_ERRNO);
+        runkit_function_redefine('curl_error', '', self::CURL_RETURN_ERRMSG);
+        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_CODE);
         runkit_function_redefine('curl_close', '', self::CURL_RETURN_TRUE);
 
-        $this->curl->post_request('http://localhost/', array());
+        $return = $this->class->post_request('http://localhost/', []);
 
-        $new = $property->getValue($this->curl);
-
-        $this->assertArrayNotHasKey(CURLOPT_CUSTOMREQUEST, $new);
-        $this->assertArrayNotHasKey(CURLOPT_POST, $new);
-        $this->assertArrayNotHasKey(CURLOPT_POSTFIELDS, $new);
+        $this->assertInstanceOf('Lunr\Network\CurlResponse', $return);
     }
 
 }

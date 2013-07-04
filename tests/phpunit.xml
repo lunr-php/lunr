@@ -151,6 +151,8 @@
             <file>src/Lunr/Network/Tests/CurlSetGetTest.php</file>
             <file>src/Lunr/Network/Tests/CurlExecuteTest.php</file>
             <file>src/Lunr/Network/Tests/CurlRequestTest.php</file>
+            <file>src/Lunr/Network/Tests/CurlResponseBaseTest.php</file>
+            <file>src/Lunr/Network/Tests/CurlResponseSuccessTest.php</file>
             <file>src/Lunr/Network/Tests/StreamSocketBaseTest.php</file>
             <file>src/Lunr/Network/Tests/StreamSocketContextTest.php</file>
             <file>src/Lunr/Network/Tests/StreamSocketSetGetTest.php</file>

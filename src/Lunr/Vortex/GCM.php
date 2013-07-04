@@ -124,11 +124,13 @@ class GCM
         );
 
         $curl = new Curl();
-        $curl->set_option('HEADER', TRUE);
+        $curl->set_option('CURLOPT_HEADER', TRUE);
         $curl->set_http_headers($headers);
 
-        $returned_data   = $curl->simple_post($config['gcm']['google_send_url'], json_encode($payload));
-        $this->http_code = $curl->http_code;
+        $result = $curl->post_request($config['gcm']['google_send_url'], json_encode($payload));
+
+        $returned_data   = $result->get_result();
+        $this->http_code = $result->http_code;
 
         if ($returned_data === FALSE)
         {
@@ -151,7 +153,7 @@ class GCM
         }
         else
         {
-            $result = substr($returned_data, $curl->info['header_size']);
+            $result = substr($returned_data, $result->header_size);
             if(stripos($result, 'multicast_id') !== FALSE)
             {
                 $decoded_result = json_decode($result);
@@ -168,6 +170,7 @@ class GCM
         }
 
         unset($curl);
+        unset($result);
         return FALSE;
     }
 
