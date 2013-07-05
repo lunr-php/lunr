@@ -210,6 +210,9 @@
             <file>src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadGetTest.php</file>
             <file>src/Lunr/Vortex/MPNS/Tests/MPNSTilePayloadSetTest.php</file>
             <file>src/Lunr/Vortex/MPNS/Tests/MPNSTilePayloadGetTest.php</file>
+            <file>src/Lunr/Vortex/MPNS/Tests/MPNSResponseErrorTest.php</file>
+            <file>src/Lunr/Vortex/MPNS/Tests/MPNSResponseSuccessTest.php</file>
+            <file>src/Lunr/Vortex/MPNS/Tests/MPNSResponseSetTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
