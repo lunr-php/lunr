@@ -153,7 +153,7 @@ class CliRequestGetTest extends CliRequestTest
      */
     public function testGetJsonFromPostReturnsNullForNonExistingKeys()
     {
-        $enum = $this->get_reflection_property_value('json_enums');
+        $enum = $this->get_reflection_property_value('json');
 
         $this->assertArrayNotHasKey('foo', $enum);
         $this->assertNull($this->class->get_json_from_post('foo'));
@@ -166,7 +166,7 @@ class CliRequestGetTest extends CliRequestTest
      */
     public function testGetJsonFromGetReturnsNullForNonExistingKeys()
     {
-        $enum = $this->get_reflection_property_value('json_enums');
+        $enum = $this->get_reflection_property_value('json');
 
         $this->assertArrayNotHasKey('foo', $enum);
         $this->assertNull($this->class->get_json_from_get('foo'));

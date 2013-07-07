@@ -70,11 +70,9 @@ class CliRequestBaseTest extends CliRequestTest
     /**
      * Check that json_enums is empty by default.
      */
-    public function testJsonEnumsEmpty()
+    public function testJsonIsEmptyArray()
     {
-        $json_enums = $this->get_reflection_property_value('json_enums');
-
-        $this->assertArrayEmpty($json_enums);
+        $this->assertArrayEmpty($this->get_reflection_property_value('json'));
     }
 
     /**
@@ -123,24 +121,6 @@ class CliRequestBaseTest extends CliRequestTest
 
         $this->assertArrayHasKey('call', $request);
         $this->assertNull($request['call']);
-    }
-
-    /**
-     * Test setting json enums.
-     *
-     * @depends testJsonEnumsEmpty
-     * @covers   Lunr\Shadow\CliRequest::set_json_enums
-     */
-    public function testSetJsonEnums()
-    {
-        $JSON = $this->get_json_enums();
-
-        $this->class->set_json_enums($JSON);
-
-        $json_enums = $this->get_reflection_property_value('json_enums');
-
-        $this->assertEquals($JSON, $json_enums);
-        $this->assertSame($JSON, $json_enums);
     }
 
 }

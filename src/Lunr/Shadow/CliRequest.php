@@ -17,6 +17,7 @@ namespace Lunr\Shadow;
 
 use Lunr\Corona\InterRequest;
 use Lunr\Corona\RequestInterface;
+use Lunr\Corona\JsonEnumTrait;
 
 /**
  * The CliRequest class.
@@ -28,6 +29,8 @@ use Lunr\Corona\RequestInterface;
  */
 class CliRequest implements RequestInterface
 {
+
+    use JsonEnumTrait;
 
     /**
      * Stored $_POST values
@@ -74,12 +77,6 @@ class CliRequest implements RequestInterface
     protected $request;
 
     /**
-     * Stored json enums
-     * @var array
-     */
-    private $json_enums;
-
-    /**
      * Constructor.
      *
      * @param Configuration      $configuration Shared instance of the Configuration class
@@ -87,12 +84,12 @@ class CliRequest implements RequestInterface
      */
     public function __construct($configuration, $parser)
     {
-        $this->ast        = $parser->parse();
-        $this->post       = array();
-        $this->get        = array();
-        $this->cookie     = array();
-        $this->request    = array();
-        $this->json_enums = array();
+        $this->ast     = $parser->parse();
+        $this->post    = array();
+        $this->get     = array();
+        $this->cookie  = array();
+        $this->request = array();
+        $this->json    = array();
 
         $this->request['sapi'] = PHP_SAPI;
         $this->request['host'] = gethostname();
@@ -110,7 +107,7 @@ class CliRequest implements RequestInterface
         unset($this->get);
         unset($this->cookie);
         unset($this->request);
-        unset($this->json_enums);
+        unset($this->json);
     }
 
     /**
@@ -211,18 +208,6 @@ class CliRequest implements RequestInterface
     public function get_new_inter_request_object($params)
     {
         return new InterRequest($this, $params);
-    }
-
-    /**
-     * Store a set of json enums.
-     *
-     * @param array &$enums An array of json enums
-     *
-     * @return void
-     */
-    public function set_json_enums(&$enums)
-    {
-        $this->json_enums =& $enums;
     }
 
     /**
