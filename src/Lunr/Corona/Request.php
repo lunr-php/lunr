@@ -3,7 +3,7 @@
 /**
  * This file contains the request abstraction class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Corona
@@ -29,6 +29,8 @@ namespace Lunr\Corona;
  */
 class Request implements RequestInterface
 {
+
+    use JsonEnumTrait;
 
     /**
      * Stored $_POST values
@@ -69,23 +71,17 @@ class Request implements RequestInterface
     protected $request;
 
     /**
-     * Stored json enums
-     * @var array
-     */
-    private $json_enums;
-
-    /**
      * Constructor.
      *
      * @param Configuration $configuration Shared instance of the Configuration class
      */
     public function __construct($configuration)
     {
-        $this->post       = array();
-        $this->get        = array();
-        $this->cookie     = array();
-        $this->request    = array();
-        $this->json_enums = array();
+        $this->post    = [];
+        $this->get     = [];
+        $this->cookie  = [];
+        $this->request = [];
+        $this->json    = [];
 
         $this->request['sapi'] = PHP_SAPI;
         $this->request['host'] = gethostname();
@@ -105,7 +101,7 @@ class Request implements RequestInterface
         unset($this->get);
         unset($this->cookie);
         unset($this->request);
-        unset($this->json_enums);
+        unset($this->json);
     }
 
     /**
@@ -150,7 +146,7 @@ class Request implements RequestInterface
         if (!is_array($_POST) || empty($_POST))
         {
             //reset global POST array
-            $_POST = array();
+            $_POST = [];
 
             return;
         }
@@ -161,7 +157,7 @@ class Request implements RequestInterface
         }
 
         //reset global POST array
-        $_POST = array();
+        $_POST = [];
     }
 
     /**
@@ -177,7 +173,7 @@ class Request implements RequestInterface
         {
             $this->request['controller'] = $configuration['default_controller'];
             $this->request['method']     = $configuration['default_method'];
-            $this->request['params']     = array();
+            $this->request['params']     = [];
 
             if (isset($this->request['controller'], $this->request['method']) === TRUE)
             {
@@ -189,7 +185,7 @@ class Request implements RequestInterface
             }
 
             //reset global GET array
-            $_GET = array();
+            $_GET = [];
 
             return;
         }
@@ -226,7 +222,7 @@ class Request implements RequestInterface
 
         if (!isset($this->request['params']))
         {
-            $this->request['params'] = array();
+            $this->request['params'] = [];
         }
 
         if (isset($this->request['controller'], $this->request['method']) === TRUE)
@@ -239,7 +235,7 @@ class Request implements RequestInterface
         }
 
         //reset global GET array
-        $_GET = array();
+        $_GET = [];
     }
 
     /**
@@ -252,7 +248,7 @@ class Request implements RequestInterface
         if (!is_array($_COOKIE) || empty($_COOKIE))
         {
             //reset global COOKIE array
-            $_COOKIE = array();
+            $_COOKIE = [];
 
             return;
         }
@@ -263,7 +259,7 @@ class Request implements RequestInterface
         }
 
         //reset global COOKIE array
-        $_COOKIE = array();
+        $_COOKIE = [];
     }
 
     /**
@@ -341,18 +337,6 @@ class Request implements RequestInterface
     }
 
     /**
-     * Store a set of json enums.
-     *
-     * @param array &$enums An array of json enums
-     *
-     * @return void
-     */
-    public function set_json_enums(&$enums)
-    {
-        $this->json_enums =& $enums;
-    }
-
-    /**
      * Retrieve a stored POST value using a json enum key.
      *
      * @param mixed $key Json enum key for the value to retrieve
@@ -361,13 +345,13 @@ class Request implements RequestInterface
      */
     public function get_json_from_post($key)
     {
-        if (empty($this->json_enums) || !isset($this->json_enums[$key]))
+        if (empty($this->json) || !isset($this->json[$key]))
         {
             return NULL;
         }
         else
         {
-            return $this->get_post_data($this->json_enums[$key]);
+            return $this->get_post_data($this->json[$key]);
         }
     }
 
@@ -380,13 +364,13 @@ class Request implements RequestInterface
      */
     public function get_json_from_get($key)
     {
-        if (empty($this->json_enums) || !isset($this->json_enums[$key]))
+        if (empty($this->json) || !isset($this->json[$key]))
         {
             return NULL;
         }
         else
         {
-            return $this->get_get_data($this->json_enums[$key]);
+            return $this->get_get_data($this->json[$key]);
         }
     }
 

@@ -100,6 +100,7 @@ class RequestGetTest extends RequestTest
      * @param String $index the expected value as well as the index
      *
      * @depends      testGetPostData
+     * @depends      Lunr\Corona\Tests\JsonEnumTraitTest::testSetJsonEnums
      * @dataProvider validJsonEnumProvider
      * @covers       Lunr\Corona\Request::get_json_from_post
      */
