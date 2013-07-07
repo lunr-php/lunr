@@ -183,9 +183,16 @@ class Response
      *
      * @return mixed $value The matching data on success, or NULL on failure
      */
-    public function get_response_data($key)
+    public function get_response_data($key = NULL)
     {
-        return isset($this->data[$key]) ? $this->data[$key] : NULL;
+        if ($key === NULL)
+        {
+            return $this->data;
+        }
+        else
+        {
+            return isset($this->data[$key]) ? $this->data[$key] : NULL;
+        }
     }
 
     /**

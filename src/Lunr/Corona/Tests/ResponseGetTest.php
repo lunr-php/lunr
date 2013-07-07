@@ -79,6 +79,20 @@ class ResponseGetTest extends ResponseTest
     }
 
     /**
+     * Test getting all the response data.
+     *
+     * @covers Lunr\Corona\Response::get_response_data
+     */
+    public function testGetResponseDataWithoutKey()
+    {
+        $data = [ 'key1' => 'value1', 'key2' => 'value2' ];
+
+        $this->set_reflection_property_value('data', $data);
+
+        $this->assertEquals($data, $this->class->get_response_data());
+    }
+
+    /**
      * Test getting existing error message.
      *
      * @covers Lunr\Corona\Response::get_error_message
