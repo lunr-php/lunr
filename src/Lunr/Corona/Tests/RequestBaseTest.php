@@ -3,7 +3,7 @@
 /**
  * This file contains the RequestBaseTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Corona
@@ -40,9 +40,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testPostEmpty()
     {
-        $post = $this->reflection_request->getProperty('post');
-        $post->setAccessible(TRUE);
-        $this->assertEmpty($post->getValue($this->request));
+        $this->assertArrayEmpty($this->get_reflection_property_value('post'));
     }
 
     /**
@@ -50,9 +48,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testGetEmpty()
     {
-        $get = $this->reflection_request->getProperty('get');
-        $get->setAccessible(TRUE);
-        $this->assertEmpty($get->getValue($this->request));
+        $this->assertArrayEmpty($this->get_reflection_property_value('get'));
     }
 
     /**
@@ -60,9 +56,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testCookieEmpty()
     {
-        $cookie = $this->reflection_request->getProperty('cookie');
-        $cookie->setAccessible(TRUE);
-        $this->assertEmpty($cookie->getValue($this->request));
+        $this->assertArrayEmpty($this->get_reflection_property_value('cookie'));
     }
 
     /**
@@ -70,9 +64,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testJsonEnumsEmpty()
     {
-        $json_enums = $this->reflection_request->getProperty('json_enums');
-        $json_enums->setAccessible(TRUE);
-        $this->assertEmpty($json_enums->getValue($this->request));
+        $this->assertArrayEmpty($this->get_reflection_property_value('json_enums'));
     }
 
     /**
@@ -85,23 +77,10 @@ class RequestBaseTest extends RequestTest
      */
     public function testRequestDefaultValues($key, $value)
     {
-        $request = $this->reflection_request->getProperty('request');
-        $request->setAccessible(TRUE);
-        $request = $request->getValue($this->request);
-        $this->assertEquals($value, $request[$key]);
-    }
+        $request = $this->get_reflection_property_value('request');
 
-    /**
-     * Test that the hostname is stored correctly in the constructor.
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     */
-    public function testHostnameIsSet()
-    {
-        $request = $this->reflection_request->getProperty('request');
-        $request->setAccessible(TRUE);
-        $request = $request->getValue($this->request);
-        $this->assertEquals('Lunr', $request['host']);
+        $this->assertArrayHasKey($key, $request);
+        $this->assertEquals($value, $request[$key]);
     }
 
     /**
@@ -113,11 +92,11 @@ class RequestBaseTest extends RequestTest
     public function testSetJsonEnums()
     {
         $JSON = $this->get_json_enums();
-        $this->request->set_json_enums($JSON);
-        $json_enums = $this->reflection_request->getProperty('json_enums');
-        $json_enums->setAccessible(TRUE);
-        $this->assertEquals($JSON, $json_enums->getValue($this->request));
-        $this->assertSame($JSON, $json_enums->getValue($this->request));
+        $this->class->set_json_enums($JSON);
+
+        $json_enums = $this->get_reflection_property_value('json_enums');
+
+        $this->assertSame($JSON, $json_enums);
     }
 
     /**
@@ -131,7 +110,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testGetGetDataWhenGetEmpty($key)
     {
-        $this->assertNull($this->request->get_get_data($key));
+        $this->assertNull($this->class->get_get_data($key));
     }
 
     /**
@@ -145,7 +124,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testGetPostDataWhenPostEmpty($key)
     {
-        $this->assertNull($this->request->get_post_data($key));
+        $this->assertNull($this->class->get_post_data($key));
     }
 
     /**
@@ -159,7 +138,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testGetCookieDataWhenCookieEmpty($key)
     {
-        $this->assertNull($this->request->get_cookie_data($key));
+        $this->assertNull($this->class->get_cookie_data($key));
     }
 
     /**
@@ -174,7 +153,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testMagicGetMethodWhenGetEmpty($key, $value)
     {
-        $this->assertEquals($value, $this->request->$key);
+        $this->assertEquals($value, $this->class->$key);
     }
 
     /**
@@ -187,7 +166,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testMagicGetIsNullForUnhandledKeys($key)
     {
-        $this->assertNull($this->request->$key);
+        $this->assertNull($this->class->$key);
     }
 
 }

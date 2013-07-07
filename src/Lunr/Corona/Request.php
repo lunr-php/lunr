@@ -83,6 +83,7 @@ class Request implements RequestInterface
     {
         $this->post       = array();
         $this->get        = array();
+        $this->cookie     = array();
         $this->request    = array();
         $this->json_enums = array();
 

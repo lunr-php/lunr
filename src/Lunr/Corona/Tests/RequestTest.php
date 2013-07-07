@@ -3,7 +3,7 @@
 /**
  * This file contains the RequestTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Corona
@@ -17,7 +17,7 @@
 namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\Request;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -31,20 +31,8 @@ use ReflectionClass;
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @covers     Lunr\Corona\Request
  */
-abstract class RequestTest extends PHPUnit_Framework_TestCase
+abstract class RequestTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the Request class.
-     * @var Request
-     */
-    protected $request;
-
-    /**
-     * Reflection instance of the Request class.
-     * @var ReflectionClass
-     */
-    protected $reflection_request;
 
     /**
      * Mock of the Configuration class.
@@ -65,22 +53,17 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function setUpShared()
     {
-        if (function_exists('runkit_function_redefine'))
-        {
-            runkit_function_redefine('gethostname', '', self::GET_HOSTNAME);
-        }
-
         $configuration = $this->getMock('Lunr\Core\Configuration');
 
-        $map = array(
-            array('default_webpath', '/path'),
-            array('default_protocol', 'http'),
-            array('default_domain', 'www.domain.com'),
-            array('default_port', 666),
-            array('default_url', 'http://www.domain.com:666/path/'),
-            array('default_controller', 'DefaultController'),
-            array('default_method', 'default_method')
-        );
+        $map = [
+            [ 'default_webpath', '/path' ],
+            [ 'default_protocol', 'http' ],
+            [ 'default_domain', 'www.domain.com' ],
+            [ 'default_port', 666 ],
+            [ 'default_url', 'http://www.domain.com:666/path/' ],
+            [ 'default_controller', 'DefaultController' ],
+            [ 'default_method', 'default_method' ]
+         ];
 
         $configuration->expects($this->any())
                       ->method('offsetGet')
@@ -88,7 +71,22 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
 
         $this->configuration = $configuration;
 
-        $this->reflection_request = new ReflectionClass('Lunr\Corona\Request');
+        $this->reflection = new ReflectionClass('Lunr\Corona\Request');
+    }
+
+    /**
+     * TestCase Constructor for filled superglobals.
+     *
+     * @return void
+     */
+    public function setUpRunkit()
+    {
+        if (function_exists('runkit_function_redefine'))
+        {
+            runkit_function_redefine('gethostname', '', self::GET_HOSTNAME);
+        }
+
+        $this->setUpFilled();
     }
 
     /**
@@ -113,9 +111,9 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
 
         $_SERVER = $this->setup_server_superglobal();
 
-        $this->request = new Request($this->configuration);
+        $this->class = new Request($this->configuration);
 
-        $this->request->set_json_enums($enums);
+        $this->class->set_json_enums($enums);
     }
 
     /**
@@ -127,11 +125,11 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
     {
         $this->setUpShared();
 
-        $_POST   = array();
-        $_GET    = array();
-        $_COOKIE = array();
+        $_POST   = [];
+        $_GET    = [];
+        $_COOKIE = [];
 
-        $this->request = new Request($this->configuration);
+        $this->class = new Request($this->configuration);
     }
 
     /**
@@ -139,8 +137,8 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->request);
-        unset($this->reflection_request);
+        unset($this->class);
+        unset($this->reflection);
         unset($this->configuration);
     }
 
@@ -151,17 +149,17 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function requestValueProvider()
     {
-        $values   = array();
-        $values[] = array('protocol', 'http');
-        $values[] = array('domain', 'www.domain.com');
-        $values[] = array('port', '666');
-        $values[] = array('base_path', '/path');
-        $values[] = array('base_url', 'http://www.domain.com:666/path/');
-        $values[] = array('sapi', 'cli');
-        $values[] = array('controller', 'DefaultController');
-        $values[] = array('method', 'default_method');
-        $values[] = array('params', array());
-        $values[] = array('call', 'DefaultController/default_method');
+        $values   = [];
+        $values[] = [ 'protocol', 'http' ];
+        $values[] = [ 'domain', 'www.domain.com' ];
+        $values[] = [ 'port', '666' ];
+        $values[] = [ 'base_path', '/path' ];
+        $values[] = [ 'base_url', 'http://www.domain.com:666/path/' ];
+        $values[] = [ 'sapi', 'cli' ];
+        $values[] = [ 'controller', 'DefaultController' ];
+        $values[] = [ 'method', 'default_method' ];
+        $values[] = [ 'params', [] ];
+        $values[] = [ 'call', 'DefaultController/default_method' ];
 
         return $values;
     }
@@ -173,17 +171,17 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function properRequestValueProvider()
     {
-        $values   = array();
-        $values[] = array('protocol', 'http');
-        $values[] = array('domain', 'www.domain.com');
-        $values[] = array('port', '666');
-        $values[] = array('base_path', '/path');
-        $values[] = array('base_url', 'http://www.domain.com:666/path/');
-        $values[] = array('sapi', 'cli');
-        $values[] = array('controller', 'controller');
-        $values[] = array('method', 'method');
-        $values[] = array('params', array('param1', 'param2'));
-        $values[] = array('call', 'controller/method');
+        $values   = [];
+        $values[] = [ 'protocol', 'http' ];
+        $values[] = [ 'domain', 'www.domain.com' ];
+        $values[] = [ 'port', '666' ];
+        $values[] = [ 'base_path', '/path' ];
+        $values[] = [ 'base_url', 'http://www.domain.com:666/path/' ];
+        $values[] = [ 'sapi', 'cli' ];
+        $values[] = [ 'controller', 'controller' ];
+        $values[] = [ 'method', 'method' ];
+        $values[] = [ 'params', [ 'param1', 'param2' ] ];
+        $values[] = [ 'call', 'controller/method' ];
 
         return $values;
     }
@@ -195,9 +193,9 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function validJsonEnumProvider()
     {
-        $json   = array();
-        $json[] = array('long_value', 'lv');
-        $json[] = array('short_value', 'sv');
+        $json   = [];
+        $json[] = [ 'long_value', 'lv' ];
+        $json[] = [ 'short_value', 'sv' ];
 
         return $json;
     }
@@ -209,8 +207,8 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function invalidKeyProvider()
     {
-        $keys   = array();
-        $keys[] = array('invalid');
+        $keys   = [];
+        $keys[] = [ 'invalid' ];
 
         return $keys;
     }
@@ -222,12 +220,12 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function invalidSuperglobalValueProvider()
     {
-        $values   = array();
-        $values[] = array(array());
-        $values[] = array(0);
-        $values[] = array('String');
-        $values[] = array(TRUE);
-        $values[] = array(NULL);
+        $values   = [];
+        $values[] = [ [] ];
+        $values[] = [ 0 ];
+        $values[] = [ 'String' ];
+        $values[] = [ TRUE ];
+        $values[] = [ NULL ];
 
         return $values;
     }
@@ -239,8 +237,8 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function unhandledMagicGetKeysProvider()
     {
-        $keys   = array();
-        $keys[] = array('Unhandled');
+        $keys   = [];
+        $keys[] = [ 'Unhandled' ];
 
         return $keys;
     }
@@ -252,9 +250,9 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function httpsServerSuperglobalValueProvider()
     {
-        $https   = array();
-        $https[] = array('on', 'https');
-        $https[] = array('off', 'http');
+        $https   = [];
+        $https[] = [ 'on', 'https' ];
+        $https[] = [ 'off', 'http' ];
 
         return $https;
     }
@@ -266,11 +264,11 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function baseurlProvider()
     {
-        $base   = array();
-        $base[] = array('on', '443', 'https://www.domain.com/path/to/');
-        $base[] = array('on', '80', 'https://www.domain.com:80/path/to/');
-        $base[] = array('off', '80', 'http://www.domain.com/path/to/');
-        $base[] = array('off', '443', 'http://www.domain.com:443/path/to/');
+        $base   = [];
+        $base[] = [ 'on', '443', 'https://www.domain.com/path/to/' ];
+        $base[] = [ 'on', '80', 'https://www.domain.com:80/path/to/' ];
+        $base[] = [ 'off', '80', 'http://www.domain.com/path/to/' ];
+        $base[] = [ 'off', '443', 'http://www.domain.com:443/path/to/' ];
 
         return $base;
     }
@@ -284,7 +282,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
     {
         $raw = $this->validJsonEnumProvider();
 
-        $JSON = array();
+        $JSON = [];
 
         foreach ($raw as $set)
         {
@@ -304,7 +302,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
     public function check_default_request_values($request_values)
     {
         $values = $this->requestValueProvider();
-        $array  = array();
+        $array  = [];
 
         foreach ($values as $value)
         {
@@ -328,7 +326,7 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
      */
     protected function setup_server_superglobal()
     {
-        $server = array();
+        $server = [];
 
         $server['SCRIPT_NAME'] = '/path/to/index.php';
         $server['HTTPS']       = 'on';
@@ -336,23 +334,6 @@ abstract class RequestTest extends PHPUnit_Framework_TestCase
         $server['SERVER_PORT'] = '443';
 
         return $server;
-    }
-
-    /**
-     * Set the stored sapi value to 'apache'.
-     *
-     * @param ReflectionProperty &$reflection_property Reference to the ReflectionProperty class
-     *                                                 for the private request attribute
-     *
-     * @return void
-     */
-    protected function set_request_sapi_non_cli(&$reflection_property)
-    {
-        $reflection_property->setAccessible(TRUE);
-        $request         = $reflection_property->getValue($this->request);
-        $request['sapi'] = 'apache';
-
-        $reflection_property->setValue($this->request, $request);
     }
 
 }
