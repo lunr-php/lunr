@@ -261,7 +261,7 @@ class SessionDAOBaseTest extends SessionDAOTest
             array('expires', '', 'expires'),
         );
 
-        $map_value  = array(
+        $map_value = array(
             array('myId', '', '', 'myId'),
             array(base64_encode('myData'), '', '', base64_encode('myData'))
         );
