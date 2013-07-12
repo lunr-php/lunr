@@ -49,12 +49,12 @@ class MPNSTilePayload extends MPNSPayload
      */
     public function get_payload()
     {
-        $xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-               . "<wp:Notification xmlns:wp=\"WPNotification\">\n";
+        $xml  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+        $xml .= "<wp:Notification xmlns:wp=\"WPNotification\">\n";
 
         if (isset($this->elements['id']) === TRUE)
         {
-            $xml .= "<wp:Tile Id=\"" . $this->elements['id'] . "\">\n";
+            $xml .= '<wp:Tile Id="' . $this->elements['id'] . "\">\n";
         }
         else
         {
@@ -63,32 +63,32 @@ class MPNSTilePayload extends MPNSPayload
 
         if (isset($this->elements['background_image']) === TRUE)
         {
-            $xml .= "<wp:BackgroundImage>" . $this->elements['background_image'] . "</wp:BackgroundImage>\n";
+            $xml .= '<wp:BackgroundImage>' . $this->elements['background_image'] . "</wp:BackgroundImage>\n";
         }
 
         if (isset($this->elements['count']) === TRUE)
         {
-            $xml .= "<wp:Count>" . $this->elements['count'] . "</wp:Count>\n";
+            $xml .= '<wp:Count>' . $this->elements['count'] . "</wp:Count>\n";
         }
 
         if (isset($this->elements['title']) === TRUE)
         {
-            $xml .= "<wp:Title>" . $this->elements['title'] . "</wp:Title>\n";
+            $xml .= '<wp:Title>' . $this->elements['title'] . "</wp:Title>\n";
         }
 
         if (isset($this->elements['back_background_image']) === TRUE)
         {
-            $xml .= "<wp:BackBackgroundImage>" . $this->elements['back_background_image'] . "</wp:BackBackgroundImage>\n";
+            $xml .= '<wp:BackBackgroundImage>' . $this->elements['back_background_image'] . "</wp:BackBackgroundImage>\n";
         }
 
         if (isset($this->elements['back_title']) === TRUE)
         {
-            $xml .= "<wp:BackTitle>" . $this->elements['back_title'] . "</wp:BackTitle>\n";
+            $xml .= '<wp:BackTitle>' . $this->elements['back_title'] . "</wp:BackTitle>\n";
         }
 
         if (isset($this->elements['back_content']) === TRUE)
         {
-            $xml .= "<wp:BackContent>" . $this->elements['back_content'] . "</wp:BackContent>\n";
+            $xml .= '<wp:BackContent>' . $this->elements['back_content'] . "</wp:BackContent>\n";
         }
 
         $xml .= "</wp:Tile></wp:Notification>\n";

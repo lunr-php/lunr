@@ -61,23 +61,23 @@ class MPNSToastPayload extends MPNSPayload
      */
     public function get_payload()
     {
-        $xml  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-                . "<wp:Notification xmlns:wp=\"WPNotification\">\n"
-                . "<wp:Toast>\n";
+        $xml  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+        $xml .= "<wp:Notification xmlns:wp=\"WPNotification\">\n";
+        $xml .= "<wp:Toast>\n";
 
         if (isset($this->elements['title']))
         {
-            $xml .= "<wp:Text1>" . $this->elements['title'] . "</wp:Text1>\n";
+            $xml .= '<wp:Text1>' . $this->elements['title'] . "</wp:Text1>\n";
         }
 
         if (isset($this->elements['message']))
         {
-            $xml .= "<wp:Text2>" . $this->elements['message'] . "</wp:Text2>\n";
+            $xml .= '<wp:Text2>' . $this->elements['message'] . "</wp:Text2>\n";
         }
 
         if (isset($this->elements['deeplink']))
         {
-            $xml .= "<wp:Param>" . $this->elements['deeplink'] . "</wp:Param>\n";
+            $xml .= '<wp:Param>' . $this->elements['deeplink'] . "</wp:Param>\n";
         }
 
         $xml .= "</wp:Toast>\n</wp:Notification>\n";

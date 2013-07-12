@@ -119,6 +119,7 @@ class MPNSResponseSetTest extends MPNSResponseTest
     public function testSetStatusForNonSuccessRequestStatus($code, $nstatus, $expected)
     {
         $headers = [];
+
         $headers['X-Notificationstatus']     = $nstatus;
         $headers['X-Deviceconnectionstatus'] = 'N/A';
         $headers['X-Subscriptionstatus']     = 'N/A';
@@ -128,9 +129,9 @@ class MPNSResponseSetTest extends MPNSResponseTest
 
         $context = [
             'endpoint' => 'URL',
-            'nstatus'  => $nstatus,
-            'dstatus'  => 'N/A',
-            'sstatus'  => 'N/A'
+            'nstatus' => $nstatus,
+            'dstatus' => 'N/A',
+            'sstatus' => 'N/A'
         ];
 
         $message  = 'Push notification delivery status for endpoint {endpoint}: ';

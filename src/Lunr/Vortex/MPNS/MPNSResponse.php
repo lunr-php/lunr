@@ -154,9 +154,9 @@ class MPNSResponse
         {
             $context = [
                 'endpoint' => $endpoint,
-                'nstatus'  => $this->headers['X-Notificationstatus'],
-                'dstatus'  => $this->headers['X-Deviceconnectionstatus'],
-                'sstatus'  => $this->headers['X-Subscriptionstatus']
+                'nstatus' => $this->headers['X-Notificationstatus'],
+                'dstatus' => $this->headers['X-Deviceconnectionstatus'],
+                'sstatus' => $this->headers['X-Subscriptionstatus']
             ];
 
             $message  = 'Push notification delivery status for endpoint {endpoint}: ';
@@ -175,8 +175,6 @@ class MPNSResponse
     {
         return $this->status;
     }
-
-
 
 }
 
