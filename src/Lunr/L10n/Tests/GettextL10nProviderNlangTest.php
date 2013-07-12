@@ -263,7 +263,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @covers Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangWithoutContextAndTooLongIdentifierReturnsIdentifier()
     {
@@ -284,7 +284,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @covers Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangWithContextAndTooLongIdentifierReturnsIdentifier()
     {
