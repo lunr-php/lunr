@@ -251,7 +251,7 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
      *
      * @runInSeparateProcess
      *
-     * @covers       Lunr\Core\Autoloader::load
+     * @covers Lunr\Core\Autoloader::load
      */
     public function testLoadOfPSR0Classes()
     {

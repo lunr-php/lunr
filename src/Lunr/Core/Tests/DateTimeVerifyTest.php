@@ -104,7 +104,7 @@ class DateTimeVerifyTest extends DateTimeTest
      * @dataProvider invalidDateProvider
      * @depends      testIsValidLeapYear
      * @depends      testIsInvalidLeapYear
-     * @covers Lunr\Core\DateTime::is_date
+     * @covers       Lunr\Core\DateTime::is_date
      */
     public function testIsInvalidDate($date)
     {

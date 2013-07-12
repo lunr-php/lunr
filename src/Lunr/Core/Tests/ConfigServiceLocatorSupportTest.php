@@ -92,7 +92,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      * @runInSeparateProcess
      *
      * @dataProvider invalidRecipeProvider
-     * @covers Lunr\Core\ConfigServiceLocator::load_recipe
+     * @covers       Lunr\Core\ConfigServiceLocator::load_recipe
      */
     public function testLoadRecipeDoesNotCacheWithInvalidRecipes($id)
     {

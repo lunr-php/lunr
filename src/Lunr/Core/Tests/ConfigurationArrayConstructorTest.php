@@ -85,7 +85,7 @@ class ConfigurationArrayConstructorTest extends ConfigurationTest
     /**
      * Test conversion to array when $config is not empty.
      *
-     * @covers  Lunr\Core\Configuration::toArray
+     * @covers Lunr\Core\Configuration::toArray
      */
     public function testToArrayEqualsInput()
     {
