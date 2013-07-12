@@ -33,7 +33,7 @@ class MySQLDMLQueryBuilderOrderByTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the order by part of a query.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::order_by
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::order_by
      */
     public function testOrderByWithDefaultOrder()
     {
@@ -48,7 +48,7 @@ class MySQLDMLQueryBuilderOrderByTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the order by part of a query.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::order_by
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::order_by
      */
     public function testOrderByWithCustomOrder()
     {
@@ -63,7 +63,7 @@ class MySQLDMLQueryBuilderOrderByTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the order_by method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::order_by
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::order_by
      */
     public function testOrderByReturnsSelfReference()
     {

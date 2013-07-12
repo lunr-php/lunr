@@ -77,7 +77,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test specifying the from part of a query without index hints.
      *
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_from
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_from
      */
     public function testFromWithoutIndexHints()
     {
@@ -169,7 +169,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test specifying more than one table in FROM (cartesian product).
      *
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_from
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_from
      */
     public function testIncrementalFromWithoutIndices()
     {
@@ -503,7 +503,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
     * Test creating a simple JOIN ON statement.
     *
-    * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
+    * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
     */
     public function testConditionCreatesSimpleJoinStatement()
     {

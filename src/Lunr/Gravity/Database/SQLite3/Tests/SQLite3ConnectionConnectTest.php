@@ -77,7 +77,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
     /**
      * Test a failed connection attempt.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3Connection::connect
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::connect
      */
     public function testFailedConnect()
     {
@@ -170,7 +170,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
     /**
      * Test that disconnect() works correctly.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3Connection::disconnect
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::disconnect
      */
     public function testDisconnect()
     {
@@ -187,7 +187,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
     /**
      * Test that change_database() returns TRUE when connected.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3Connection::change_database
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::change_database
      */
     public function testChangeDatabaseReturnsTrueWhenConnected()
     {
@@ -211,7 +211,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
     /**
      * Test that change_database() returns FALSE when we couldn't connect.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3Connection::change_database
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::change_database
      */
     public function testChangeDatabaseReturnsFalseWhenNotConnected()
     {
@@ -231,6 +231,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
 
         $this->assertFalse($return);
     }
+
 }
 
 ?>

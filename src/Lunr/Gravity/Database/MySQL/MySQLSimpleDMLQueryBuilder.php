@@ -369,9 +369,10 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Escape a table reference.
      *
-     * @param String $table_reference A table reference
+     * @param String  $location_reference A location reference
+     * @param Boolean $table              Whether to escape a table or a result_column
      *
-     * @return String $escaped Escaped table reference
+     * @return String $escaped Escaped location reference
      */
     protected function escape_alias($location_reference, $table = TRUE)
     {

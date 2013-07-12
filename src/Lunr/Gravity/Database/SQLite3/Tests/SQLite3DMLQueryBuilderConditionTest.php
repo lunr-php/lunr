@@ -61,7 +61,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the on method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on
      */
     public function testOnReturnsSelfReference()
     {
@@ -102,7 +102,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the on_like method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_like
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_like
      */
     public function testOnLikeReturnsSelfReference()
     {
@@ -143,7 +143,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the on_in method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_in
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_in
      */
     public function testOnInReturnsSelfReference()
     {
@@ -184,7 +184,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the on_between method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_between
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_between
      */
     public function testOnBetweenReturnsSelfReference()
     {
@@ -193,6 +193,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
         $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $return);
         $this->assertSame($this->class, $return);
     }
+
     /**
      * Test specifying the on part of a query.
      *
@@ -224,7 +225,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the on_regexp method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_regexp
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_regexp
      */
     public function testOnRegexpReturnsSelfReference()
     {
@@ -265,7 +266,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the where method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where
      */
     public function testWhereReturnsSelfReference()
     {
@@ -306,7 +307,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the where_like method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_like
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_like
      */
     public function testWhereLikeReturnsSelfReference()
     {
@@ -347,7 +348,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the where_in method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_in
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_in
      */
     public function testWhereInReturnsSelfReference()
     {
@@ -388,7 +389,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the where_between method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_between
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_between
      */
     public function testWhereBetweenReturnsSelfReference()
     {
@@ -429,7 +430,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the where_regexp method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_regexp
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_regexp
      */
     public function testWhereRegexpReturnsSelfReference()
     {
@@ -470,7 +471,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the having method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having
      */
     public function testHavingReturnsSelfReference()
     {
@@ -511,7 +512,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the having_like method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_like
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_like
      */
     public function testHavingLikeReturnsSelfReference()
     {
@@ -552,7 +553,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the having_in method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_in
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_in
      */
     public function testHavingInReturnsSelfReference()
     {
@@ -593,7 +594,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the having_between method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_between
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_between
      */
     public function testHavingBetweenReturnsSelfReference()
     {
@@ -634,7 +635,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the having_regexp method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_regexp
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_regexp
      */
     public function testHavingRegexpReturnsSelfReference()
     {
@@ -661,7 +662,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the sql_and method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::sql_and
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::sql_and
      */
     public function testSQLAndReturnsSelfReference()
     {
@@ -688,7 +689,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the sql_or method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::sql_or
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::sql_or
      */
     public function testSQLOrReturnsSelfReference()
     {

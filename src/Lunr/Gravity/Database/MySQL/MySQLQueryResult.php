@@ -101,8 +101,8 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     {
         if (is_object($result))
         {
-            $this->success  = TRUE;
-            $this->freed    = FALSE;
+            $this->success = TRUE;
+            $this->freed   = FALSE;
         }
         else
         {

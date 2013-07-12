@@ -48,7 +48,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the select method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::select
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::select
      */
     public function testSelectReturnsSelfReference()
     {
@@ -91,7 +91,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the from method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::from
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::from
      */
     public function testFromReturnsSelfReference()
     {
@@ -162,7 +162,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the join method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::join
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::join
      */
     public function testJoinReturnsSelfReference()
     {
@@ -236,7 +236,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the lock_mode method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::lock_mode
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::lock_mode
      */
     public function testLockModeReturnsSelfReference()
     {
@@ -249,7 +249,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the union method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::union
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::union
      */
     public function testUnionReturnsSelfReference()
     {

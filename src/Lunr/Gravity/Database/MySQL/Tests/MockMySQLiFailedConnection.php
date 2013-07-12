@@ -36,6 +36,8 @@ class MockMySQLiFailedConnection
 
     /**
      * Constructor.
+     *
+     * @param MySQLi $mysqli Instance of the mysqli class
      */
     public function __construct($mysqli)
     {

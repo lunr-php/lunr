@@ -33,7 +33,7 @@ class SQLite3DMLQueryBuilderGroupByTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the group by part of a query with default order.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::group_by
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::group_by
      */
     public function testGroupByWithDefaultOrder()
     {
@@ -46,7 +46,7 @@ class SQLite3DMLQueryBuilderGroupByTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the group by part of a query with custom order.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::group_by
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::group_by
      */
     public function testGroupByIgnoresCustomOrder()
     {
@@ -62,7 +62,7 @@ class SQLite3DMLQueryBuilderGroupByTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the group by method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::group_by
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::group_by
      */
     public function testGroupByReturnsSelfReference()
     {

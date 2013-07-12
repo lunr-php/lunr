@@ -48,7 +48,7 @@ class SQLite3DMLQueryBuilderUpdateTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the update method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::update
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::update
      */
     public function testUpdateReturnsSelfReference()
     {
@@ -93,7 +93,7 @@ class SQLite3DMLQueryBuilderUpdateTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the set method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::set
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::set
      */
     public function testSetReturnsSelfReference()
     {

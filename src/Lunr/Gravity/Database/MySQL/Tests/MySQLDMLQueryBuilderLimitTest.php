@@ -33,7 +33,7 @@ class MySQLDMLQueryBuilderLimitTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the limit part of a query with default offset.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::limit
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::limit
      */
     public function testLimitWithDefaultOffset()
     {
@@ -48,7 +48,7 @@ class MySQLDMLQueryBuilderLimitTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the limit part of a query with custom offset.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::limit
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::limit
      */
     public function testLimitWithCustomOffset()
     {
@@ -63,7 +63,7 @@ class MySQLDMLQueryBuilderLimitTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the limit method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::limit
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::limit
      */
     public function testLimitReturnsSelfReference()
     {

@@ -33,7 +33,7 @@ class SQLite3DMLQueryBuilderOrderByTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the order by part of a query.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::order_by
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::order_by
      */
     public function testOrderByWithDefaultOrder()
     {
@@ -46,7 +46,7 @@ class SQLite3DMLQueryBuilderOrderByTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the order by part of a query.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::order_by
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::order_by
      */
     public function testOrderByWithCustomOrder()
     {
@@ -59,7 +59,7 @@ class SQLite3DMLQueryBuilderOrderByTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the order_by method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::order_by
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::order_by
      */
     public function testOrderByReturnsSelfReference()
     {

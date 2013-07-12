@@ -92,6 +92,7 @@ class MySQLSimpleDMLQueryBuilderBaseTest extends MySQLSimpleDMLQueryBuilderTest
 
         $this->assertEquals($result, $expected);
     }
+
 }
 
 ?>

@@ -32,7 +32,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     /**
      * Test that query() returns a QueryResult that indicates a failed query when not connected.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLConnection::query
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::query
      */
     public function testQueryReturnsFailedQueryResultWhenNotConnected()
     {
@@ -78,7 +78,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     /**
      * Test that async_query() returns an AsyncQueryResult that indicates a failed query when not connected.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLConnection::async_query
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::async_query
      */
     public function testAsyncQueryReturnsFailedQueryResultWhenNotConnected()
     {

@@ -225,6 +225,8 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Return a new instance of a QueryBuilder object.
      *
+     * @param Boolean $simple Whether to return a simple query builder or an advanced one.
+     *
      * @return MySQLDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
      */
     public function get_new_dml_query_builder_object($simple = TRUE)

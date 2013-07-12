@@ -36,6 +36,8 @@ class MockMySQLiResult
 
     /**
      * Constructor.
+     *
+     * @param MySQLi_result $mysqli_result Instance of the MySQLi_result class
      */
     public function __construct($mysqli_result)
     {

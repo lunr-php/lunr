@@ -50,7 +50,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the select method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select
      */
     public function testSelectReturnsSelfReference()
     {
@@ -98,7 +98,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the from method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::from
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::from
      */
     public function testFromReturnsSelfReference()
     {
@@ -178,7 +178,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the join method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::join
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::join
      */
     public function testJoinReturnsSelfReference()
     {

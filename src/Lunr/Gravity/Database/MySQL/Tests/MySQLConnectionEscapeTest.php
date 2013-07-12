@@ -32,7 +32,7 @@ class MySQLConnectionEscapeTest extends MySQLConnectionTest
     /**
      * Test that escape_string() returns FALSE when there is no active connection.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLConnection::escape_string
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::escape_string
      */
     public function testEscapeStringReturnsFalseWhenNotConnected()
     {

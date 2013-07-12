@@ -50,7 +50,7 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the delete method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete
      */
     public function testDeleteReturnsSelfReference()
     {
@@ -99,7 +99,7 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the delete_mode method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete_mode
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete_mode
      */
     public function testDeleteModeReturnsSelfReference()
     {
@@ -116,7 +116,7 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
      * @param String $expected Expected built query part
      *
      * @dataProvider expectedDeleteModesProvider
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete_mode
+     * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete_mode
      */
     public function testDeleteModeCase($value, $expected)
     {

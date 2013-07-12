@@ -48,7 +48,7 @@ class SQLite3DMLQueryBuilderDeleteTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the delete method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::delete
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::delete
      */
     public function testDeleteReturnsSelfReference()
     {
@@ -75,7 +75,7 @@ class SQLite3DMLQueryBuilderDeleteTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the delete_mode method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::delete_mode
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::delete_mode
      */
     public function testDeleteModeReturnsSelfReference()
     {

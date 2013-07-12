@@ -73,7 +73,7 @@ class SQLite3QueryEscaper extends DatabaseQueryEscaper
     }
 
     /**
-     * Not supported by sqlite. Returns the same as value
+     * Not supported by sqlite. Returns the same as value.
      *
      * @param mixed  $value     Input
      * @param String $collation Collation name

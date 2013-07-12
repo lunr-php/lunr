@@ -33,7 +33,7 @@ class SQLite3DMLQueryBuilderInsertTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the select_statement method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::select_statement
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::select_statement
      */
     public function testSelectStatementReturnsSelfReference()
     {
@@ -46,7 +46,7 @@ class SQLite3DMLQueryBuilderInsertTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the into method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::into
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::into
      */
     public function testIntoReturnsSelfReference()
     {
@@ -59,7 +59,7 @@ class SQLite3DMLQueryBuilderInsertTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the column_names method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::column_names
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::column_names
      */
     public function testColumnNamesReturnsSelfReference()
     {
@@ -72,7 +72,7 @@ class SQLite3DMLQueryBuilderInsertTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the values method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::values
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::values
      */
     public function testValuesReturnsSelfReference()
     {
@@ -85,7 +85,7 @@ class SQLite3DMLQueryBuilderInsertTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the insert_mode method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::insert_mode
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::insert_mode
      */
     public function testInsertModeReturnsSelfReference()
     {
@@ -98,7 +98,7 @@ class SQLite3DMLQueryBuilderInsertTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the replace_mode method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::replace_mode
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::replace_mode
      */
     public function testReplaceModeReturnsSelfReference()
     {

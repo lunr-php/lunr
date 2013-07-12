@@ -95,7 +95,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test a failed connection attempt.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLConnection::connect
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::connect
      */
     public function testFailedConnect()
     {
@@ -198,7 +198,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test that disconnect() works correctly.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLConnection::disconnect
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::disconnect
      */
     public function testDisconnect()
     {
@@ -223,7 +223,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test that change_database() returns FALSE when we couldn't connect.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLConnection::change_database
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::change_database
      */
     public function testChangeDatabaseReturnsFalseWhenNotConnected()
     {

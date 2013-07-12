@@ -108,6 +108,7 @@ abstract class MySQLQueryEscaperTest extends LunrBaseTest
 
         return $for;
     }
+
 }
 
 ?>

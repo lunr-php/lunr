@@ -246,7 +246,7 @@ class DatabaseConnectionPoolEmptyTest extends DatabaseConnectionPoolTest
      * Test that get_connection() with empty db config does not alter rw_pool.
      *
      * @depends testGetNewAndReadWriteConnectionDoesNotAlterPool
-     * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
+     * @covers  Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
     public function testGetNewRwConnectionDoesNotAlterPool()
     {

@@ -144,6 +144,7 @@ class SQLite3DMLQueryBuilderQueryTest extends SQLite3DMLQueryBuilderTest
         $string = 'REPLACE INTO table (column1, column2) SELECT column1, column2 FROM table';
         $this->assertEquals($string, $this->class->get_replace_query());
     }
+
 }
 
 ?>

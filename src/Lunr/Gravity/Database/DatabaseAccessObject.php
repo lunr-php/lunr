@@ -103,7 +103,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         if ($query->has_failed() === TRUE)
         {
             $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
-            $this->logger->error("{query}; failed with error: {error}", $context);
+            $this->logger->error('{query}; failed with error: {error}', $context);
             return FALSE;
         }
 
@@ -129,7 +129,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         if ($query->has_failed() === TRUE)
         {
             $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
-            $this->logger->error("{query}; failed with error: {error}", $context);
+            $this->logger->error('{query}; failed with error: {error}', $context);
             return FALSE;
         }
 
@@ -156,7 +156,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         if ($query->has_failed() === TRUE)
         {
             $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
-            $this->logger->error("{query}; failed with error: {error}", $context);
+            $this->logger->error('{query}; failed with error: {error}', $context);
             return FALSE;
         }
 
@@ -183,7 +183,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         if ($query->has_failed() === TRUE)
         {
             $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
-            $this->logger->error("{query}; failed with error: {error}", $context);
+            $this->logger->error('{query}; failed with error: {error}', $context);
             return FALSE;
         }
 

@@ -33,7 +33,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the select_statement method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select_statement
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select_statement
      */
     public function testSelectStatementReturnsSelfReference()
     {
@@ -46,7 +46,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the into method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::into
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::into
      */
     public function testIntoReturnsSelfReference()
     {
@@ -59,7 +59,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the column_names method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::column_names
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::column_names
      */
     public function testColumnNamesReturnsSelfReference()
     {
@@ -72,7 +72,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the set method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::set
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::set
      */
     public function testSetReturnsSelfReference()
     {
@@ -85,7 +85,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the values method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::values
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::values
      */
     public function testValuesReturnsSelfReference()
     {
@@ -98,7 +98,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the insert_mode method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::insert_mode
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::insert_mode
      */
     public function testInsertModeReturnsSelfReference()
     {
@@ -111,7 +111,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the replace_mode method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::replace_mode
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::replace_mode
      */
     public function testReplaceModeReturnsSelfReference()
     {

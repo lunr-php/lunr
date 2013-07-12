@@ -50,7 +50,7 @@ class MySQLDMLQueryBuilderUpdateTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the update method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::update
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::update
      */
     public function testUpdateReturnsSelfReference()
     {

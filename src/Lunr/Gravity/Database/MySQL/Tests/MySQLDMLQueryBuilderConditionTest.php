@@ -65,7 +65,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the on method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on
      */
     public function testOnReturnsSelfReference()
     {
@@ -110,7 +110,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the on_like method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_like
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_like
      */
     public function testOnLikeReturnsSelfReference()
     {
@@ -155,7 +155,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the on_in method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_in
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_in
      */
     public function testOnInReturnsSelfReference()
     {
@@ -200,7 +200,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the on_between method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_between
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_between
      */
     public function testOnBetweenReturnsSelfReference()
     {
@@ -245,7 +245,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the on_regexp method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_regexp
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_regexp
      */
     public function testOnRegexpReturnsSelfReference()
     {
@@ -290,7 +290,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the where method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where
      */
     public function testWhereReturnsSelfReference()
     {
@@ -335,7 +335,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the where_like method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_like
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_like
      */
     public function testWhereLikeReturnsSelfReference()
     {
@@ -380,7 +380,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the where_in method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_in
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_in
      */
     public function testWhereInReturnsSelfReference()
     {
@@ -425,7 +425,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the where_between method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_between
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_between
      */
     public function testWhereBetweenReturnsSelfReference()
     {
@@ -470,7 +470,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the where_regexp method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_regexp
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_regexp
      */
     public function testWhereRegexpReturnsSelfReference()
     {
@@ -515,7 +515,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the having method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having
      */
     public function testHavingReturnsSelfReference()
     {
@@ -560,7 +560,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the having_like method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_like
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_like
      */
     public function testHavingLikeReturnsSelfReference()
     {
@@ -605,7 +605,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the having_in method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_in
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_in
      */
     public function testHavingInReturnsSelfReference()
     {
@@ -650,7 +650,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the having_between method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_between
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_between
      */
     public function testHavingBetweenReturnsSelfReference()
     {
@@ -695,7 +695,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the having_regexp method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_regexp
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_regexp
      */
     public function testHavingRegexpReturnsSelfReference()
     {
@@ -723,7 +723,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the sql_and method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::sql_and
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::sql_and
      */
     public function testSQLAndReturnsSelfReference()
     {
@@ -751,7 +751,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the sql_or method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::sql_or
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::sql_or
      */
     public function testSQLOrReturnsSelfReference()
     {
@@ -779,7 +779,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the sql_xor method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::sql_xor
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::sql_xor
      */
     public function testSQLXorReturnsSelfReference()
     {

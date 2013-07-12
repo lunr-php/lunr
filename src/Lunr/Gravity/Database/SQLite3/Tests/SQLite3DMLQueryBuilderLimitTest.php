@@ -33,7 +33,7 @@ class SQLite3DMLQueryBuilderLimitTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the limit part of a query with default offset.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::limit
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::limit
      */
     public function testLimitWithDefaultOffset()
     {
@@ -46,7 +46,7 @@ class SQLite3DMLQueryBuilderLimitTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the limit part of a query with custom offset.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::limit
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::limit
      */
     public function testLimitWithCustomOffset()
     {
@@ -59,7 +59,7 @@ class SQLite3DMLQueryBuilderLimitTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the limit method.
      *
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::limit
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::limit
      */
     public function testLimitReturnsSelfReference()
     {

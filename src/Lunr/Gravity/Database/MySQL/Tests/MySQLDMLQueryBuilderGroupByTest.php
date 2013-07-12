@@ -33,7 +33,7 @@ class MySQLDMLQueryBuilderGroupByTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the group by part of a query with default order.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::group_by
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::group_by
      */
     public function testGroupByWithDefaultOrder()
     {
@@ -48,7 +48,7 @@ class MySQLDMLQueryBuilderGroupByTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the group by part of a query with custom order.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::group_by
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::group_by
      */
     public function testGroupByWithCustomOrder()
     {
@@ -67,7 +67,7 @@ class MySQLDMLQueryBuilderGroupByTest extends MySQLDMLQueryBuilderTest
     /**
      * Test fluid interface of the group by method.
      *
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::group_by
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::group_by
      */
     public function testGroupByReturnsSelfReference()
     {

@@ -222,6 +222,7 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
 
         return trim($col, '.');
     }
+
 }
 
 ?>
