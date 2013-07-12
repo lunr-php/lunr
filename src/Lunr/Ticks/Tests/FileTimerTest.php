@@ -65,6 +65,8 @@ abstract class FileTimerTest extends LunrBaseTest
 
     /**
      * Test case constructor.
+     *
+     * @return void
      */
     public function setUpNoRequest()
     {
@@ -81,6 +83,8 @@ abstract class FileTimerTest extends LunrBaseTest
 
     /**
      * Test case constructor.
+     *
+     * @return void
      */
     public function setUpRequest()
     {
@@ -120,7 +124,7 @@ abstract class FileTimerTest extends LunrBaseTest
         $data['single']['start']   = 1371115612.4691;
         $data['single']['stop']    = 1372115612.4691;
         $data['single']['stopped'] = TRUE;
-        $data['single']['tags']    = [ "tag1", "tag2" ];
+        $data['single']['tags']    = [ 'tag1', 'tag2' ];
 
         $timer   = [];
         $timer[] = [ $data, "Timer 'single': 1000000 µs; Tags: tag1,tag2\n" ];
@@ -145,7 +149,7 @@ abstract class FileTimerTest extends LunrBaseTest
             $data[$i]['start']   = 1371115612.4691;
             $data[$i]['stop']    = 1372115612.4691;
             $data[$i]['stopped'] = TRUE;
-            $data[$i]['tags']    = [ "tag1", "tag2" ];
+            $data[$i]['tags']    = [ 'tag1', 'tag2' ];
 
             $expected[$i] = "Timer '$i': 1000000 µs; Tags: tag1,tag2\n";
         }
@@ -171,6 +175,7 @@ abstract class FileTimerTest extends LunrBaseTest
 
         return $tags;
     }
+
 }
 
 ?>

@@ -178,7 +178,7 @@ class FileTimerStartTest extends FileTimerTest
      * @param array $expected Expected Tags
      *
      * @dataProvider tagsProvider
-     * @covers Lunr\Ticks\FileTimer::add_tags
+     * @covers       Lunr\Ticks\FileTimer::add_tags
      */
     public function testAddTagsSetsTags($existing, $new, $expected)
     {
