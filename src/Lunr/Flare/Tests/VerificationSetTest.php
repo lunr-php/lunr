@@ -46,7 +46,7 @@ class VerificationSetTest extends VerificationTest
     /**
      * Test that set_data() populates the data array.
      *
-     * @covers  Lunr\Flare\Verification::set_data
+     * @covers Lunr\Flare\Verification::set_data
      */
     public function testSetDataSetsData()
     {

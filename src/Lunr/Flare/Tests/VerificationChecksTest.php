@@ -79,7 +79,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test that ignore() sets the whole element as TRUE in result.
      *
-     * @covers  Lunr\Flare\Verification::ignore
+     * @covers Lunr\Flare\Verification::ignore
      */
     public function testIgnoreSetsResultTrue()
     {
@@ -229,7 +229,7 @@ class VerificationChecksTest extends VerificationTest
      * @param mixed  $value Value not of that type
      *
      * @dataProvider invalidTypeProvider
-     * @covers Lunr\Flare\Verification::is_type
+     * @covers       Lunr\Flare\Verification::is_type
      */
     public function testIsTypeStoresFalseForValidTypesAndInvalidValues($type, $value)
     {
@@ -253,7 +253,7 @@ class VerificationChecksTest extends VerificationTest
     /**
      * Test that is_type stores FALSE for types that don't have check functions.
      *
-     * @covers       Lunr\Flare\Verification::is_type
+     * @covers Lunr\Flare\Verification::is_type
      */
     public function testIsTypeStoresFalseForInvalidTypes()
     {
