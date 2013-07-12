@@ -115,7 +115,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      * @dataProvider messageProvider
      * @covers       Lunr\Feedback\PHPLogger::compose_message
      */
-    public function testComposeMessageWithoutRequestAndFileInformationReturnsInterpolatedMessage($message, $context, $expected)
+    public function testComposeMessageWithoutRequestAndFileInfoReturnsInterpolatedMessage($message, $context, $expected)
     {
         $method = $this->logger_reflection->getMethod('compose_message');
         $method->setAccessible(TRUE);

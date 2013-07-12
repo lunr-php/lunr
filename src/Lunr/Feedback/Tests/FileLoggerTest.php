@@ -136,7 +136,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that log() returns a PHP Warning if xdebug is installed.
      *
-     * @covers  Lunr\Feedback\FileLogger::log
+     * @covers Lunr\Feedback\FileLogger::log
      */
     public function testLogThrowsErrorIfXdebugIsPresent()
     {
