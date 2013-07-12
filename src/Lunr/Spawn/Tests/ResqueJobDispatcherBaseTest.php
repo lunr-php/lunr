@@ -28,6 +28,7 @@ use Lunr\Spawn\Tests\ResqueJobDispatcherTest;
  */
 class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
 {
+
     /**
      * Tests that __construct() inits the resque with the given parameter.
      *
@@ -129,6 +130,11 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
         $this->assertSame(array($queue), $value);
     }
 
+    /**
+     * Tests that set_queue() with array input.
+     *
+     * @covers Lunr\Spawn\ResqueJobDispatcher::set_queue
+     */
     public function testSetQueueWithArray()
     {
         $queue = array('queue');
@@ -142,7 +148,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
     /**
      * Tests that set_queue() does not modify the queue property with invalid value.
      *
-     * @param mixed $value the value to test
+     * @param mixed $queue Invalid Queue value
      *
      * @dataProvider invalidQueueProvider
      * @covers       Lunr\Spawn\ResqueJobDispatcher::set_queue
