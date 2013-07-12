@@ -82,11 +82,11 @@ class Pagination
     public function __construct($request)
     {
         // Default values
-        $this->per_page     = 25;
-        $this->range        =  2;
-        $this->total        = -1;
-        $this->pages_total  =  0;
-        $this->cursor       =  1;
+        $this->per_page    = 25;
+        $this->range       = 2;
+        $this->total       = -1;
+        $this->pages_total = 0;
+        $this->cursor      = 1;
 
         $params = $request->params;
         if (!empty($params))
@@ -104,7 +104,7 @@ class Pagination
         }
 
         //Construct base url
-        $this->base_url = $request->base_url . '/' . $request->controller . '/' . $request->method . '/';
+        $this->base_url  = $request->base_url . '/' . $request->controller . '/' . $request->method . '/';
         $this->base_url .= implode('/', $params) . '/';
 
         $this->buttons = array();
@@ -155,6 +155,7 @@ class Pagination
         {
             $this->total = $nritems;
         }
+
         return $this;
     }
 
@@ -171,6 +172,7 @@ class Pagination
         {
             $this->base_url = $url;
         }
+
         return $this;
     }
 
@@ -189,6 +191,7 @@ class Pagination
         {
             $this->buttons[$key]['text'] = $label;
         }
+
         return $this;
     }
 
@@ -205,6 +208,7 @@ class Pagination
         {
             $this->range = $range;
         }
+
         return $this;
     }
 
@@ -221,6 +225,7 @@ class Pagination
         {
             $this->per_page = $per_page;
         }
+
         return $this;
     }
 

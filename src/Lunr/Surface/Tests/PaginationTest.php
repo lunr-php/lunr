@@ -110,7 +110,7 @@ abstract class PaginationTest extends LunrBaseTest
         $values[] = [ TRUE ];
         $values[] = [ NULL ];
         $values[] = [ new stdClass() ];
-        $values[] = [ "10" ];
+        $values[] = [ '10' ];
         $values[] = [ 0 ];
         $values[] = [ -10 ];
         $values[] = [ 2.5 ];
