@@ -76,7 +76,7 @@ class MailSendTest extends MailTest
     /**
      * Test generating CC headers with one entry.
      *
-     * @covers  Lunr\Network\Mail::generate_carbon_copy_header
+     * @covers Lunr\Network\Mail::generate_carbon_copy_header
      */
     public function testGeneratingCCHeadersWithOneEntry()
     {
@@ -96,7 +96,7 @@ class MailSendTest extends MailTest
     /**
      * Test generating CC headers with more than one entry.
      *
-     * @covers  Lunr\Network\Mail::generate_carbon_copy_header
+     * @covers Lunr\Network\Mail::generate_carbon_copy_header
      */
     public function testGeneratingCCHeadersWithMoreEntries()
     {
@@ -116,7 +116,7 @@ class MailSendTest extends MailTest
     /**
      * Test generating BCC headers with one entry.
      *
-     * @covers  Lunr\Network\Mail::generate_carbon_copy_header
+     * @covers Lunr\Network\Mail::generate_carbon_copy_header
      */
     public function testGeneratingBCCHeadersWithOneEntry()
     {
@@ -136,7 +136,7 @@ class MailSendTest extends MailTest
     /**
      * Test generating BCC headers with more than one entry.
      *
-     * @covers  Lunr\Network\Mail::generate_carbon_copy_header
+     * @covers Lunr\Network\Mail::generate_carbon_copy_header
      */
     public function testGeneratingBCCHeadersWithMoreEntries()
     {

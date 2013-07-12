@@ -34,7 +34,7 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      * Tests that the call of create_handle() sets the handle to a resource.
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers Lunr\Network\StreamSocketClient::create_handle
+     * @covers  Lunr\Network\StreamSocketClient::create_handle
      */
     public function testCreateHandle()
     {
@@ -59,7 +59,7 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      * Tests that create_handle() returns FALSE if error occurs.
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers Lunr\Network\StreamSocketClient::create_handle
+     * @covers  Lunr\Network\StreamSocketClient::create_handle
      */
     public function testCreateHandleReturnsFalseOnError()
     {
@@ -77,7 +77,7 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      * Tests that the call of connect creates the handle.
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers Lunr\Network\StreamSocketClient::connect
+     * @covers  Lunr\Network\StreamSocketClient::connect
      */
     public function testOpenCreatesHandle()
     {
@@ -99,7 +99,7 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      * Tests that the call of connect with a previously connected handle keeps it the same.
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers Lunr\Network\StreamSocketClient::connect
+     * @covers  Lunr\Network\StreamSocketClient::connect
      */
     public function testOpenTwiceKeepsSameHandle()
     {
@@ -129,7 +129,7 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      * Tests that connect() returns FALSE if error occurs.
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers Lunr\Network\StreamSocketClient::connect
+     * @covers  Lunr\Network\StreamSocketClient::connect
      */
     public function testOpenReturnsFalseOnError()
     {
@@ -144,8 +144,9 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      * Tests that the call of disconnect() method sets the handle to null.
      *
      * @runInSeparateProcess
+     *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers Lunr\Network\StreamSocketClient::disconnect
+     * @covers  Lunr\Network\StreamSocketClient::disconnect
      */
     public function testCloseDestroysHandle()
     {
@@ -181,8 +182,9 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      * Tests that the call of disconnect() returns FALSE if error occurs.
      *
      * @runInSeparateProcess
+     *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers Lunr\Network\StreamSocketClient::disconnect
+     * @covers  Lunr\Network\StreamSocketClient::disconnect
      */
     public function testCloseReturnsFalseIfError()
     {
@@ -209,8 +211,9 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      * Tests that the call of disconnect() return TRUE on success.
      *
      * @runInSeparateProcess
+     *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers Lunr\Network\StreamSocketClient::disconnect
+     * @covers  Lunr\Network\StreamSocketClient::disconnect
      */
     public function testCloseReturnsTrueOnSuccess()
     {
@@ -229,7 +232,7 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      * Tests that create_handle() updates the meta_data.
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers Lunr\Network\StreamSocketClient::create_handle
+     * @covers  Lunr\Network\StreamSocketClient::create_handle
      */
     public function testCreateHandleUpdatesMetaData()
     {
@@ -256,7 +259,7 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      * Tests that the addition of proper flags leads to a handle creation.
      *
      * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers Lunr\Network\StreamSocketClient::create_handle
+     * @covers  Lunr\Network\StreamSocketClient::create_handle
      */
     public function testCreateHandleWithFlags()
     {

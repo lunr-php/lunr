@@ -258,7 +258,7 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that changed() returns NULL if stream is not open for all type of watch.
      *
-     * @covers  Lunr\Network\StreamSocket::changed
+     * @covers Lunr\Network\StreamSocket::changed
      */
     public function testChangedReturnsNullIfStreamNotOpened()
     {

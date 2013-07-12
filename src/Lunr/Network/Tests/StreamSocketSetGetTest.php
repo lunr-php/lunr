@@ -216,7 +216,7 @@ class StreamSocketSetGetTest extends StreamSocketTest
      * @param mixed $value the invalid notification callback to test
      *
      * @dataProvider invalidNotificationCallBackProvider
-     * @covers Lunr\Network\StreamSocket::set_notification_callback
+     * @covers       Lunr\Network\StreamSocket::set_notification_callback
      */
     public function testSetNotificationCallBackWithInvalidValue($value)
     {

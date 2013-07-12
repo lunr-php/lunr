@@ -33,7 +33,7 @@ class StreamSocketContextTest extends StreamSocketTest
     /**
      * Tests that create_context() methods sets the stream context options.
      *
-     * @covers  Lunr\Network\StreamSocket::create_context
+     * @covers Lunr\Network\StreamSocket::create_context
      */
     public function testCreateContextSetsContextOptionsIfContextOptionsNotEmpty()
     {
@@ -58,7 +58,7 @@ class StreamSocketContextTest extends StreamSocketTest
     /**
      * Tests that create_context() methods sets nothing if no context options set.
      *
-     * @covers  Lunr\Network\StreamSocket::create_context
+     * @covers Lunr\Network\StreamSocket::create_context
      */
     public function testCreateContextDoesNotSetContextOptionsIfContextOptionsEmpty()
     {
@@ -76,7 +76,7 @@ class StreamSocketContextTest extends StreamSocketTest
     /**
      * Tests that create_context() methods sets the notification callback method.
      *
-     * @covers  Lunr\Network\StreamSocket::create_context
+     * @covers Lunr\Network\StreamSocket::create_context
      */
     public function testCreateContextSetsNotificationCallbackIfNotificationNotEmpty()
     {
@@ -101,7 +101,7 @@ class StreamSocketContextTest extends StreamSocketTest
     /**
      * Tests that create_context() does not set notification callback method if notification is empty.
      *
-     * @covers  Lunr\Network\StreamSocket::create_context
+     * @covers Lunr\Network\StreamSocket::create_context
      */
     public function testCreateContextDoesNotSetNotificationCallbackIfNotificationIsNull()
     {
@@ -121,7 +121,7 @@ class StreamSocketContextTest extends StreamSocketTest
     /**
      * Tests that the context is created with null notification callback.
      *
-     * @covers  Lunr\Network\StreamSocket::create_context
+     * @covers Lunr\Network\StreamSocket::create_context
      */
     public function testCreateContextIsCreatedWithNullNotification()
     {
@@ -140,7 +140,7 @@ class StreamSocketContextTest extends StreamSocketTest
     /**
      * Tests that create_context() method returns a context resource.
      *
-     * @covers  Lunr\Network\StreamSocket::create_context
+     * @covers Lunr\Network\StreamSocket::create_context
      */
     public function testCreateContextReturnsResource()
     {
