@@ -96,7 +96,7 @@ class RequestStoreCookieTest extends RequestTest
     /**
      * Test that $_COOKIE is empty after storing.
      *
-     * @covers  Lunr\Corona\Request::store_cookie
+     * @covers Lunr\Corona\Request::store_cookie
      */
     public function testSuperglobalCookieEmptyAfterStore()
     {

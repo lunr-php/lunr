@@ -96,7 +96,7 @@ class RequestStorePostTest extends RequestTest
     /**
      * Test that $_POST is empty after storing.
      *
-     * @covers  Lunr\Corona\Request::store_post
+     * @covers Lunr\Corona\Request::store_post
      */
     public function testSuperglobalPostEmptyAfterStore()
     {

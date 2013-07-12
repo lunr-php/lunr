@@ -30,7 +30,7 @@ class ResponseSetTest extends ResponseTest
     /**
      * Test that setting data directly does not work.
      *
-     * @param String $attr  Attribute name
+     * @param String $attr Attribute name
      *
      * @dataProvider invalidResponseAttributesProvider
      * @covers       Lunr\Corona\Response::__set
@@ -57,7 +57,7 @@ class ResponseSetTest extends ResponseTest
     /**
      * Test adding response data.
      *
-     * @covers  Lunr\Corona\Response::add_response_data
+     * @covers Lunr\Corona\Response::add_response_data
      */
     public function testAddResponseData()
     {

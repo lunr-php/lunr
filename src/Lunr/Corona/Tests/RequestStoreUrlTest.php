@@ -46,6 +46,7 @@ class RequestStoreUrlTest extends RequestTest
     protected function set_request_sapi_non_cli()
     {
         $request = $this->get_reflection_property_value('request');
+
         $request['sapi'] = 'apache';
 
         $this->set_reflection_property_value('request', $request);

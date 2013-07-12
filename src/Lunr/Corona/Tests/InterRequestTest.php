@@ -163,7 +163,7 @@ class InterRequestTest extends LunrBaseTest
      * @param String $key The key to test
      *
      * @dataProvider requestKeyProvider
-     * @covers Lunr\Corona\InterRequest::__get
+     * @covers       Lunr\Corona\InterRequest::__get
      */
     public function testMagicGetForwardsNonOverriddenValues($key)
     {
