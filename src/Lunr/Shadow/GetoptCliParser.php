@@ -52,9 +52,9 @@ class GetoptCliParser implements CliParserInterface
      */
     public function __construct($shortopts, $longopts = '')
     {
-        $this->short   = $shortopts;
-        $this->long    = $longopts;
-        $this->error   = FALSE;
+        $this->short = $shortopts;
+        $this->long  = $longopts;
+        $this->error = FALSE;
     }
 
     /**

@@ -103,7 +103,7 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
      * Test that is_valid_short() returns FALSE for a valid parameter without arguments.
      *
      * @depends Lunr\Shadow\Tests\LunrCliParserCheckArgumentTest::testCheckArgumentReturnsFalseForValidParameterWithoutArgs
-     * @covers Lunr\Shadow\LunrCliParser::is_valid_short
+     * @covers  Lunr\Shadow\LunrCliParser::is_valid_short
      */
     public function testIsValidShortReturnsFalseForValidParameterWithoutArguments()
     {

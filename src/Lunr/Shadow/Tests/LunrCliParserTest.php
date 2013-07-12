@@ -56,7 +56,7 @@ abstract class LunrCliParserTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->logger     = $this->getMock('Psr\Log\LoggerInterface');
-        $this->class      = new LunrCliParser($this->logger, 'ab:c;d:;e::', array('first', 'second:', 'third;', 'fourth:;', 'fifth::'));
+        $this->class      = new LunrCliParser($this->logger, 'ab:c;d:;e::', [ 'first', 'second:', 'third;', 'fourth:;', 'fifth::' ]);
         $this->reflection = new ReflectionClass('Lunr\Shadow\LunrCliParser');
     }
 
@@ -77,9 +77,9 @@ abstract class LunrCliParserTest extends PHPUnit_Framework_TestCase
      */
     public function invalidParameterProvider()
     {
-        $params   = array();
-        $params[] = array('-');
-        $params[] = array('--');
+        $params   = [];
+        $params[] = [ '-' ];
+        $params[] = [ '--' ];
 
         return $params;
     }
@@ -91,14 +91,14 @@ abstract class LunrCliParserTest extends PHPUnit_Framework_TestCase
      */
     public function validShortParameterProvider()
     {
-        $params   = array();
-        $params[] = array('a', array('test.php', '-a'), array('a' => array()));
-        $params[] = array('a:', array('test.php', '-a', 'arg'), array('a' => array('arg')));
-        $params[] = array('a::', array('test.php', '-a', 'arg1', 'arg2'), array('a' => array('arg1', 'arg2')));
-        $params[] = array('a:::', array('test.php', '-a', 'arg1', 'arg2', 'arg3'), array('a' => array('arg1', 'arg2', 'arg3')));
-        $params[] = array('b;', array('test.php', '-b', 'arg'), array('b' => array('arg')));
-        $params[] = array('b;;', array('test.php', '-b', 'arg1', 'arg2'), array('b' => array('arg1', 'arg2')));
-        $params[] = array('b;;;', array('test.php', '-b', 'arg1', 'arg2', 'arg3'), array('b' => array('arg1', 'arg2', 'arg3')));
+        $params   = [];
+        $params[] = [ 'a', [ 'test.php', '-a' ], [ 'a' => [] ] ];
+        $params[] = [ 'a:', [ 'test.php', '-a', 'arg' ], [ 'a' => [ 'arg' ] ] ];
+        $params[] = [ 'a::', [ 'test.php', '-a', 'arg1', 'arg2' ], [ 'a' => [ 'arg1', 'arg2' ] ] ];
+        $params[] = [ 'a:::', [ 'test.php', '-a', 'arg1', 'arg2', 'arg3' ], [ 'a' => [ 'arg1', 'arg2', 'arg3' ] ] ];
+        $params[] = [ 'b;', [ 'test.php', '-b', 'arg' ], [ 'b' => [ 'arg' ] ] ];
+        $params[] = [ 'b;;', [ 'test.php', '-b', 'arg1', 'arg2' ], [ 'b' => [ 'arg1', 'arg2' ] ] ];
+        $params[] = [ 'b;;;', [ 'test.php', '-b', 'arg1', 'arg2', 'arg3' ], [ 'b' => [ 'arg1', 'arg2', 'arg3' ] ] ];
 
         return $params;
     }
@@ -110,14 +110,14 @@ abstract class LunrCliParserTest extends PHPUnit_Framework_TestCase
      */
     public function validLongParameterProvider()
     {
-        $params   = array();
-        $params[] = array(array('first'), array('test.php', '--first'), array('first' => array()));
-        $params[] = array(array('first:'), array('test.php', '--first', 'arg'), array('first' => array('arg')));
-        $params[] = array(array('first::'), array('test.php', '--first', 'arg1', 'arg2'), array('first' => array('arg1', 'arg2')));
-        $params[] = array(array('first:::'), array('test.php', '--first', 'arg1', 'arg2', 'arg3'), array('first' => array('arg1', 'arg2', 'arg3')));
-        $params[] = array(array('second;'), array('test.php', '--second', 'arg'), array('second' => array('arg')));
-        $params[] = array(array('second;;'), array('test.php', '--second', 'arg1', 'arg2'), array('second' => array('arg1', 'arg2')));
-        $params[] = array(array('second;;;'), array('test.php', '--second', 'arg1', 'arg2', 'arg3'), array('second' => array('arg1', 'arg2', 'arg3')));
+        $params   = [];
+        $params[] = [ [ 'first' ], [ 'test.php', '--first' ], [ 'first' => [] ] ];
+        $params[] = [ [ 'first:' ], [ 'test.php', '--first', 'arg' ], [ 'first' => [ 'arg' ] ] ];
+        $params[] = [ [ 'first::' ], [ 'test.php', '--first', 'arg1', 'arg2' ], [ 'first' => [ 'arg1', 'arg2' ] ] ];
+        $params[] = [ [ 'first:::' ], [ 'test.php', '--first', 'arg1', 'arg2', 'arg3' ], [ 'first' => [ 'arg1', 'arg2', 'arg3' ] ] ];
+        $params[] = [ [ 'second;' ], [ 'test.php', '--second', 'arg' ], [ 'second' => [ 'arg' ] ] ];
+        $params[] = [ [ 'second;;' ], [ 'test.php', '--second', 'arg1', 'arg2' ], [ 'second' => [ 'arg1', 'arg2' ] ] ];
+        $params[] = [ [ 'second;;;' ], [ 'test.php', '--second', 'arg1', 'arg2', 'arg3' ], [ 'second' => [ 'arg1', 'arg2', 'arg3' ] ] ];
 
         return $params;
     }

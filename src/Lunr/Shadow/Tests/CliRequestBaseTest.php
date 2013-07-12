@@ -79,7 +79,7 @@ class CliRequestBaseTest extends CliRequestTest
      * Tests that store_get stores default values.
      *
      * @param String $request_key The request key to test.
-     * @param String $config_key  The configuration key to match.
+     * @param String $value       The configuration key to match.
      *
      * @depends      Lunr\EnvironmentTest::testRunkit
      * @dataProvider requestValueProvider

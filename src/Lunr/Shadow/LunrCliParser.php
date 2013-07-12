@@ -113,7 +113,7 @@ class LunrCliParser implements CliParserInterface
      */
     public function parse()
     {
-        $this->args = $_SERVER["argv"];
+        $this->args = $_SERVER['argv'];
 
         foreach($this->args as $index => $arg)
         {

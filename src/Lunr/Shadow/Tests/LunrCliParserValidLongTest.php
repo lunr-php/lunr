@@ -103,7 +103,7 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
      * Test that is_valid_long() returns FALSE for a valid parameter without arguments.
      *
      * @depends Lunr\Shadow\Tests\LunrCliParserCheckArgumentTest::testCheckArgumentReturnsFalseForValidParameterWithoutArgs
-     * @covers Lunr\Shadow\LunrCliParser::is_valid_long
+     * @covers  Lunr\Shadow\LunrCliParser::is_valid_long
      */
     public function testIsValidLongReturnsFalseForValidParameterWithoutArguments()
     {
