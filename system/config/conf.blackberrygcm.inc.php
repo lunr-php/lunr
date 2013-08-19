@@ -65,6 +65,12 @@ $config['blackberrygcm']['username'] = '';
 $config['blackberrygcm']['password'] = '';
 
 /**
+ * XML Request Template Path
+ * @global String $config['blackberrygcm']['xml_request_template']
+ */
+$config['blackberrygcm']['xml_request_template'] = '';
+
+/**
  * Path to log-file for logging PUSH errors
  * @global String $config['blackberrygcm']['log']
  */
