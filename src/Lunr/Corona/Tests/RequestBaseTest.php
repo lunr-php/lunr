@@ -52,6 +52,14 @@ class RequestBaseTest extends RequestTest
     }
 
     /**
+     * Check that files is empty if $_FILES is empty.
+     */
+    public function testFilesEmpty()
+    {
+        $this->assertArrayEmpty($this->get_reflection_property_value('files'));
+    }
+
+    /**
      * Check that cookie is empty if $_COOKIE is empty.
      */
     public function testCookieEmpty()
@@ -109,6 +117,20 @@ class RequestBaseTest extends RequestTest
     public function testGetPostDataWhenPostEmpty($key)
     {
         $this->assertNull($this->class->get_post_data($key));
+    }
+
+    /**
+     * Test getting FILE data when $_FILES is empty.
+     *
+     * @param String $key key for a POST value
+     *
+     * @depends      testFilesEmpty
+     * @dataProvider invalidKeyProvider
+     * @covers       Lunr\Corona\Request::get_files_data
+     */
+    public function testGetFilesDataWhenPostEmpty($key)
+    {
+        $this->assertNull($this->class->get_files_data($key));
     }
 
     /**

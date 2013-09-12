@@ -134,6 +134,19 @@ class CliRequestGetTest extends CliRequestTest
     }
 
     /**
+     * Tests that get_files_data() returns NULL for non-existing keys.
+     *
+     * @covers Lunr\Shadow\CliRequest::get_files_data
+     */
+    public function testGetFilesDataReturnsNullForNonExistingKeys()
+    {
+        $files = $this->get_reflection_property_value('files');
+
+        $this->assertArrayNotHasKey('foo', $files);
+        $this->assertNull($this->class->get_files_data('foo'));
+    }
+
+    /**
      * Tests that get_cookie_data() returns NULL for non-existing keys.
      *
      * @covers Lunr\Shadow\CliRequest::get_cookie_data

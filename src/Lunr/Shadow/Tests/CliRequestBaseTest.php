@@ -58,6 +58,16 @@ class CliRequestBaseTest extends CliRequestTest
     }
 
     /**
+     * Tests that files inits with an empty array.
+     */
+    public function testFilesInitsWithEmptyArray()
+    {
+        $value = $this->get_reflection_property_value('files');
+
+        $this->assertArrayEmpty($value);
+    }
+
+    /**
      * Tests that post inits with an empty array.
      */
     public function testCookieInitsWithEmptyArray()

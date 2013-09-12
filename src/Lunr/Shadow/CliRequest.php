@@ -56,6 +56,12 @@ class CliRequest implements RequestInterface
      */
     protected $ast;
 
+    /**
+     * Stored $_FILES values
+     * @var array
+     */
+    protected $files;
+
      /**
      * Request parameters:
      *  'protocol'   The protocol used for the request
@@ -90,6 +96,7 @@ class CliRequest implements RequestInterface
         $this->cookie  = array();
         $this->request = array();
         $this->json    = array();
+        $this->files   = array();
 
         $this->request['sapi'] = PHP_SAPI;
         $this->request['host'] = gethostname();
@@ -108,6 +115,7 @@ class CliRequest implements RequestInterface
         unset($this->cookie);
         unset($this->request);
         unset($this->json);
+        unset($this->files);
     }
 
     /**
@@ -230,6 +238,18 @@ class CliRequest implements RequestInterface
      * @return mixed $return The value of the key or NULL if not found
      */
     public function get_post_data($key)
+    {
+        return NULL;
+    }
+
+    /**
+     * Retrieve a stored FILES value.
+     *
+     * @param mixed $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function get_files_data($key)
     {
         return NULL;
     }

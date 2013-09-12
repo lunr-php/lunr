@@ -77,6 +77,15 @@ interface RequestInterface
     public function get_post_data($key);
 
     /**
+     * Retrieve a stored FILES value.
+     *
+     * @param mixed $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function get_files_data($key);
+
+    /**
      * Retrieve a stored COOKIE value.
      *
      * @param mixed $key Key for the value to retrieve

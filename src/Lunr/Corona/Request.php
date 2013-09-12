@@ -71,6 +71,12 @@ class Request implements RequestInterface
     protected $request;
 
     /**
+     * Stored $_FILES values
+     * @var array
+     */
+    protected $files;
+
+    /**
      * Constructor.
      *
      * @param Configuration $configuration Shared instance of the Configuration class
@@ -82,6 +88,7 @@ class Request implements RequestInterface
         $this->cookie  = [];
         $this->request = [];
         $this->json    = [];
+        $this->files   = [];
 
         $this->request['sapi'] = PHP_SAPI;
         $this->request['host'] = gethostname();
@@ -90,6 +97,7 @@ class Request implements RequestInterface
         $this->store_get($configuration);
         $this->store_cookie();
         $this->store_url($configuration);
+        $this->store_files();
     }
 
     /**
@@ -102,6 +110,7 @@ class Request implements RequestInterface
         unset($this->cookie);
         unset($this->request);
         unset($this->json);
+        unset($this->files);
     }
 
     /**
@@ -158,6 +167,30 @@ class Request implements RequestInterface
 
         //reset global POST array
         $_POST = [];
+    }
+
+    /**
+     * Store $_FILE values locally and reset it globally.
+     *
+     * @return void
+     */
+    protected function store_files()
+    {
+        if (!is_array($_FILES) || empty($_FILES))
+        {
+            //reset global FILE array
+            $_FILES = [];
+
+            return;
+        }
+
+        foreach ($_FILES as $key => $value)
+        {
+            $this->files[$key] = $value;
+        }
+
+        //reset global FILE array
+        $_FILES = [];
     }
 
     /**
@@ -384,6 +417,18 @@ class Request implements RequestInterface
     public function get_new_inter_request_object($params)
     {
         return new InterRequest($this, $params);
+    }
+
+    /**
+     * Retrieve a stored FILE value.
+     *
+     * @param mixed $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function get_files_data($key)
+    {
+        return isset($this->files[$key]) ? $this->files[$key] : NULL;
     }
 
 }

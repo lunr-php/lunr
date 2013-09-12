@@ -52,6 +52,7 @@
             <file>src/Lunr/Corona/Tests/RequestBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestStoreCookieTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestStoreGetTest.php</file>
+            <file>src/Lunr/Corona/Tests/RequestStoreFilesTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestStorePostTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestStoreUrlTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestGetTest.php</file>

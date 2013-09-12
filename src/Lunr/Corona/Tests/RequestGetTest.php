@@ -81,6 +81,26 @@ class RequestGetTest extends RequestTest
     }
 
     /**
+     * Test getting FILES data.
+     *
+     * @covers Lunr\Corona\Request::get_files_data
+     */
+    public function testGetFileData()
+    {
+        $value = [
+            'image' => [
+                'name' => 'Name',
+                'type' => 'Type',
+                'tmp_name' => 'Tmp',
+                'error' => 'Error',
+                'size' => 'Size'
+            ]
+        ];
+
+        $this->assertEquals($value['image'], $this->class->get_files_data('image'));
+    }
+
+    /**
      * Test getting GET data.
      *
      * @param String $value the expected value

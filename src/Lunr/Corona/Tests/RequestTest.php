@@ -98,8 +98,17 @@ abstract class RequestTest extends LunrBaseTest
     {
         $this->setUpShared();
 
-        $enums = $this->get_json_enums();
-        $_POST = array_flip($enums);
+        $enums  = $this->get_json_enums();
+        $_POST  = array_flip($enums);
+        $_FILES = [
+            'image' => [
+                'name' => 'Name',
+                'type' => 'Type',
+                'tmp_name' => 'Tmp',
+                'error' => 'Error',
+                'size' => 'Size'
+            ]
+        ];
 
         $_GET               = array_flip($enums);
         $_GET['controller'] = 'controller';
@@ -126,6 +135,7 @@ abstract class RequestTest extends LunrBaseTest
         $this->setUpShared();
 
         $_POST   = [];
+        $_FILES  = [];
         $_GET    = [];
         $_COOKIE = [];
 
