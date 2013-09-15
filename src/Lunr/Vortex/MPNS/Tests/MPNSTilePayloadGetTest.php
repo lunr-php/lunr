@@ -34,7 +34,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      */
     public function testGetPayloadWithTitle()
     {
-        $file     = TEST_STATICS . '/vortex/mpns_tile_title.xml';
+        $file     = TEST_STATICS . '/Vortex/mpns_tile_title.xml';
         $elements = [ 'title' => 'Title' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -49,7 +49,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      */
     public function testGetPayloadWithBackgroundImage()
     {
-        $file     = TEST_STATICS . '/vortex/mpns_tile_background_image.xml';
+        $file     = TEST_STATICS . '/Vortex/mpns_tile_background_image.xml';
         $elements = [ 'background_image' => 'BgImage' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -64,7 +64,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      */
     public function testGetPayloadWithCount()
     {
-        $file     = TEST_STATICS . '/vortex/mpns_tile_count.xml';
+        $file     = TEST_STATICS . '/Vortex/mpns_tile_count.xml';
         $elements = [ 'count' => 'Count' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -79,7 +79,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      */
     public function testGetPayloadWithBackBackgroundImage()
     {
-        $file     = TEST_STATICS . '/vortex/mpns_tile_back_background_image.xml';
+        $file     = TEST_STATICS . '/Vortex/mpns_tile_back_background_image.xml';
         $elements = [ 'back_background_image' => 'BkBgImage' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -94,7 +94,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      */
     public function testGetPayloadWithBackTitle()
     {
-        $file     = TEST_STATICS . '/vortex/mpns_tile_back_title.xml';
+        $file     = TEST_STATICS . '/Vortex/mpns_tile_back_title.xml';
         $elements = [ 'back_title' => 'Back Title' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -109,7 +109,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      */
     public function testGetPayloadWithBackContent()
     {
-        $file     = TEST_STATICS . '/vortex/mpns_tile_back_content.xml';
+        $file     = TEST_STATICS . '/Vortex/mpns_tile_back_content.xml';
         $elements = [ 'back_content' => 'Back Content' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -124,7 +124,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      */
     public function testGetPayloadWithId()
     {
-        $file     = TEST_STATICS . '/vortex/mpns_tile.xml';
+        $file     = TEST_STATICS . '/Vortex/mpns_tile.xml';
         $elements = [
             'title' => 'Title',
             'background_image' => 'BgImage',
@@ -146,7 +146,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      */
     public function testGetPayloadWithoutId()
     {
-        $file     = TEST_STATICS . '/vortex/mpns_tile_id.xml';
+        $file     = TEST_STATICS . '/Vortex/mpns_tile_id.xml';
         $elements = [
             'title' => 'Title',
             'background_image' => 'BgImage',

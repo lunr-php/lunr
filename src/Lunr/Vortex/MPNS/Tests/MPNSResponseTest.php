@@ -94,7 +94,7 @@ abstract class MPNSResponseTest extends LunrBaseTest
                  ->method('get_network_error_number')
                  ->will($this->returnValue(0));
 
-        $file = TEST_STATICS . '/vortex/mpns_response.txt';
+        $file = TEST_STATICS . '/Vortex/mpns_response.txt';
         $map  = [ [ 'http_code', 200 ], [ 'header_size', 129 ], [ 'url', 'http://localhost/' ] ];
 
         $response->expects($this->exactly(3))
