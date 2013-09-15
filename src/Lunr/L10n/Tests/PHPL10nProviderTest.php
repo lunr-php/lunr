@@ -3,7 +3,7 @@
 /**
  * This file contains the PHPL10nProviderTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    L10n
@@ -16,7 +16,7 @@
 namespace Lunr\L10n\Tests;
 
 use Lunr\L10n\PHPL10nProvider;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -29,20 +29,8 @@ use ReflectionClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\L10n\PHPL10nProvider
  */
-abstract class PHPL10nProviderTest extends PHPUnit_Framework_TestCase
+abstract class PHPL10nProviderTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the PHPL10nProvider class.
-     * @var PHPL10nProvider
-     */
-    protected $provider;
-
-    /**
-     * Reflection instance of the PHPL10nProvider class.
-     * @var ReflectionClass
-     */
-    protected $provider_reflection;
 
     /**
      * Mock Object for a Logger class.
@@ -73,10 +61,10 @@ abstract class PHPL10nProviderTest extends PHPUnit_Framework_TestCase
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->provider_reflection = new ReflectionClass('Lunr\L10n\PHPL10nProvider');
+        $this->reflection = new ReflectionClass('Lunr\L10n\PHPL10nProvider');
 
-        $this->provider = new PHPL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger);
-        $this->provider->set_locales_location(TEST_STATICS . '/l10n');
+        $this->class = new PHPL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger);
+        $this->class->set_locales_location(TEST_STATICS . '/l10n');
     }
 
     /**
@@ -84,8 +72,8 @@ abstract class PHPL10nProviderTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->provider);
-        unset($this->provider_reflection);
+        unset($this->class);
+        unset($this->reflection);
         unset($this->logger);
     }
 
