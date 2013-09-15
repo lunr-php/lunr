@@ -36,7 +36,6 @@ class ConfigurationLoadFileTest extends ConfigurationTest
     public function setUp()
     {
         $this->setUpArray($this->construct_test_array());
-        set_include_path(TEST_STATICS . '/configuration:' . get_include_path());
     }
 
     /**
@@ -126,7 +125,7 @@ class ConfigurationLoadFileTest extends ConfigurationTest
      */
     public function testLoadCorrectDatabaseConfig()
     {
-        set_include_path(TEST_STATICS . '/configuration/valid:' . get_include_path());
+        set_include_path(TEST_STATICS . '/Core/valid:' . get_include_path());
 
         $this->configuration->load_database_config();
 
@@ -151,7 +150,7 @@ class ConfigurationLoadFileTest extends ConfigurationTest
      */
     public function testLoadInvalidDatabaseConfig()
     {
-        set_include_path(TEST_STATICS . '/configuration/invalid:' . get_include_path());
+        set_include_path(TEST_STATICS . '/Core/invalid:' . get_include_path());
 
         $property = $this->configuration_reflection->getProperty('config');
         $property->setAccessible(TRUE);
@@ -193,7 +192,7 @@ class ConfigurationLoadFileTest extends ConfigurationTest
      */
     public function testLoadDatabaseConfigInvalidatesSize()
     {
-        set_include_path(TEST_STATICS . '/configuration/valid:' . get_include_path());
+        set_include_path(TEST_STATICS . '/Core/valid:' . get_include_path());
 
         $property = $this->configuration_reflection->getProperty('size_invalid');
         $property->setAccessible(TRUE);
