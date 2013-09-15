@@ -120,6 +120,20 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Assert that a property value equals the expected value.
+     *
+     * @param String $property Property name
+     * @param mixed  $expected Expected value of the property
+     *
+     * @return void
+     */
+    protected function assertPropertySame($property, $expected)
+    {
+        $property = $this->get_accessible_reflection_property($property);
+        $this->assertSame($expected, $property->getValue($this->class));
+    }
+
+    /**
      * Assert that a property value is empty.
      *
      * @param String $property Property name
