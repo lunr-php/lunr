@@ -36,7 +36,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testGetFileContentWithAccessibleFile()
     {
-        $file = __DIR__ . '/../../../../../tests/statics/logs/error.log';
+        $file = TEST_STATICS . '/logs/error.log';
 
         $content = '[2011-11-10 10:30:22]: WARNING: Foo';
 
@@ -133,7 +133,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $written = $this->class->put_file_content($file, $content);
 
-        $this->assertFileEquals(__DIR__ . '/../../../../../tests/statics/logs/error.log', $file);
+        $this->assertFileEquals(TEST_STATICS . '/logs/error.log', $file);
         $this->assertEquals(35, $written);
     }
 
@@ -167,7 +167,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $written = $this->class->put_file_content($file, $content);
 
-        $this->assertFileEquals(__DIR__ . '/../../../../../tests/statics/logs/error.log', $file);
+        $this->assertFileEquals(TEST_STATICS . '/logs/error.log', $file);
         $this->assertEquals(35, $written);
     }
 

@@ -53,7 +53,7 @@ class PaginationHTMLTest extends PaginationTest
      */
     public function testBuildPreviousButtons()
     {
-        $file   = __DIR__ . '/../../../../tests/statics/surface/pagination_buttons_previous.html';
+        $file   = TEST_STATICS . '/surface/pagination_buttons_previous.html';
         $method = $this->get_accessible_reflection_method('build_page_buttons');
         $this->assertStringMatchesFormatFile($file, $method->invokeArgs($this->class, [2, TRUE]));
     }
@@ -65,7 +65,7 @@ class PaginationHTMLTest extends PaginationTest
      */
     public function testBuildNextButtons()
     {
-        $file   = __DIR__ . '/../../../../tests/statics/surface/pagination_buttons_next.html';
+        $file   = TEST_STATICS . '/surface/pagination_buttons_next.html';
         $method = $this->get_accessible_reflection_method('build_page_buttons');
         $this->assertStringMatchesFormatFile($file, $method->invokeArgs($this->class, [2, FALSE]));
     }
@@ -80,7 +80,7 @@ class PaginationHTMLTest extends PaginationTest
      */
     public function testBuildButtonEnabled($button)
     {
-        $file   = __DIR__ . '/../../../../tests/statics/surface/pagination_button_' . $button . '_enabled.html';
+        $file   = TEST_STATICS . '/surface/pagination_button_' . $button . '_enabled.html';
         $method = $this->get_accessible_reflection_method('build_button');
         $this->assertStringMatchesFormatFile($file, $method->invokeArgs($this->class, [$button, 1]));
     }
@@ -101,7 +101,7 @@ class PaginationHTMLTest extends PaginationTest
 
         $this->set_reflection_property_value('buttons', $value);
 
-        $file   = __DIR__ . '/../../../../tests/statics/surface/pagination_button_' . $button . '_disabled.html';
+        $file   = TEST_STATICS . '/surface/pagination_button_' . $button . '_disabled.html';
         $method = $this->get_accessible_reflection_method('build_button');
         $this->assertStringMatchesFormatFile($file, $method->invokeArgs($this->class, [$button, 1]));
     }
@@ -127,7 +127,7 @@ class PaginationHTMLTest extends PaginationTest
         $this->set_reflection_property_value('total', 100);
         $this->set_reflection_property_value('per_page', 10);
 
-        $file = __DIR__ . '/../../../../tests/statics/surface/pagination_links_right_edge.html';
+        $file = TEST_STATICS . '/surface/pagination_links_right_edge.html';
         $this->assertStringMatchesFormatFile($file, $this->class->create_links());
     }
 
@@ -142,7 +142,7 @@ class PaginationHTMLTest extends PaginationTest
         $this->set_reflection_property_value('total', 100);
         $this->set_reflection_property_value('per_page', 10);
 
-        $file = __DIR__ . '/../../../../tests/statics/surface/pagination_links_middle.html';
+        $file = TEST_STATICS . '/surface/pagination_links_middle.html';
         $this->assertStringMatchesFormatFile($file, $this->class->create_links());
     }
 
@@ -157,7 +157,7 @@ class PaginationHTMLTest extends PaginationTest
         $this->set_reflection_property_value('total', 100);
         $this->set_reflection_property_value('per_page', 10);
 
-        $file = __DIR__ . '/../../../../tests/statics/surface/pagination_links_left_edge.html';
+        $file = TEST_STATICS . '/surface/pagination_links_left_edge.html';
         $this->assertStringMatchesFormatFile($file, $this->class->create_links());
     }
 
@@ -171,7 +171,7 @@ class PaginationHTMLTest extends PaginationTest
         $this->set_reflection_property_value('total', 100);
         $this->set_reflection_property_value('per_page', 10);
 
-        $file = __DIR__ . '/../../../../tests/statics/surface/pagination_links_right_edge.html';
+        $file = TEST_STATICS . '/surface/pagination_links_right_edge.html';
         $this->assertStringMatchesFormatFile($file, $this->class->create_links());
     }
 

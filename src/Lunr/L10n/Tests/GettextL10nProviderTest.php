@@ -72,7 +72,7 @@ abstract class GettextL10nProviderTest extends PHPUnit_Framework_TestCase
 
         $this->provider = new GettextL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger);
         $this->provider->set_default_language('nl_NL');
-        $this->provider->set_locales_location(dirname(__FILE__) . '/../../../../tests/statics/l10n');
+        $this->provider->set_locales_location(TEST_STATICS . '/l10n');
 
         $this->provider_reflection = new ReflectionClass('Lunr\L10n\GettextL10nProvider');
     }

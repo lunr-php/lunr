@@ -159,7 +159,7 @@ class L10nTraitTest extends PHPUnit_Framework_TestCase
         $property = $this->reflection->getProperty('locales_location');
         $property->setAccessible(TRUE);
 
-        $location = dirname(__FILE__) . '/../../../../tests/statics/l10n';
+        $location = TEST_STATICS . '/l10n';
 
         $this->class->set_locales_location($location);
 
@@ -176,7 +176,7 @@ class L10nTraitTest extends PHPUnit_Framework_TestCase
         $property = $this->reflection->getProperty('locales_location');
         $property->setAccessible(TRUE);
 
-        $location = dirname(__FILE__) . '/../../../tests/statics/l10n';
+        $location = TEST_STATICS . '/../l10n';
 
         $this->logger->expects($this->once())
                      ->method('warning')

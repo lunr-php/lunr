@@ -44,7 +44,7 @@ class MPNSResponseSetTest extends MPNSResponseTest
      */
     public function testParseHeadersWithPreconditionFailedStatus()
     {
-        $result = file_get_contents(__DIR__ . '/../../../../../tests/statics/vortex/mpns_response.txt');
+        $result = file_get_contents(TEST_STATICS . '/vortex/mpns_response.txt');
 
         $this->set_reflection_property_value('http_code', 412);
 
@@ -72,7 +72,7 @@ class MPNSResponseSetTest extends MPNSResponseTest
      */
     public function testParseHeadersWithSpecialStatusCodes($status)
     {
-        $result = file_get_contents(__DIR__ . '/../../../../../tests/statics/vortex/mpns_response.txt');
+        $result = file_get_contents(TEST_STATICS . '/vortex/mpns_response.txt');
 
         $this->set_reflection_property_value('http_code', $status);
 

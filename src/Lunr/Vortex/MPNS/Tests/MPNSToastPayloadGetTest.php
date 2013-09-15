@@ -34,7 +34,7 @@ class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
      */
     public function testGetPayloadWithTitle()
     {
-        $file     = __DIR__ . '/../../../../../tests/statics/vortex/mpns_toast_title.xml';
+        $file     = TEST_STATICS . '/vortex/mpns_toast_title.xml';
         $elements = [ 'title' => 'Title' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -49,7 +49,7 @@ class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
      */
     public function testGetPayloadWithMessage()
     {
-        $file     = __DIR__ . '/../../../../../tests/statics/vortex/mpns_toast_message.xml';
+        $file     = TEST_STATICS . '/vortex/mpns_toast_message.xml';
         $elements = [ 'message' => 'Message' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -64,7 +64,7 @@ class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
      */
     public function testGetPayloadWithDeeplink()
     {
-        $file     = __DIR__ . '/../../../../../tests/statics/vortex/mpns_toast_deeplink.xml';
+        $file     = TEST_STATICS . '/vortex/mpns_toast_deeplink.xml';
         $elements = [ 'deeplink' => 'Deeplink' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -79,7 +79,7 @@ class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
      */
     public function testGetPayload()
     {
-        $file     = __DIR__ . '/../../../../../tests/statics/vortex/mpns_toast.xml';
+        $file     = TEST_STATICS . '/vortex/mpns_toast.xml';
         $elements = [ 'title' => 'Title', 'message' => 'Message', 'deeplink' => 'Deeplink' ];
 
         $this->set_reflection_property_value('elements', $elements);

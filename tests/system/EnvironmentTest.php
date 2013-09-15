@@ -43,7 +43,7 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase
      */
     public function testL10nFiles()
     {
-        $file = dirname(__FILE__) . '/../statics/l10n/de_DE/LC_MESSAGES/Lunr.mo';
+        $file = TEST_STATICS . '/l10n/de_DE/LC_MESSAGES/Lunr.mo';
         $this->assertTrue(file_exists($file));
     }
 
