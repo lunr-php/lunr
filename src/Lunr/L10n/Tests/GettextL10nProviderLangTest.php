@@ -32,34 +32,28 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
     /**
      * Test lang() without context.
      *
-     * @runInSeparateProcess
-     *
      * @depends Lunr\EnvironmentTest::testL10nFiles
      * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\L10n\GettextL10nProvider::lang
      */
     public function testLangWithoutContext()
     {
-        $this->assertEquals('Tisch', $this->provider->lang('table'));
+        $this->assertEquals('Tisch', $this->class->lang('table'));
     }
 
     /**
      * Test lang() without context returns identifier for untranslated string.
-     *
-     * @runInSeparateProcess
      *
      * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\L10n\GettextL10nProvider::lang
      */
     public function testLangUntranslatedWithoutContextReturnsIdentifier()
     {
-        $this->assertEquals('chair', $this->provider->lang('chair'));
+        $this->assertEquals('chair', $this->class->lang('chair'));
     }
 
     /**
      * Test lang() with context.
-     *
-     * @runInSeparateProcess
      *
      * @depends Lunr\EnvironmentTest::testL10nFiles
      * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
@@ -67,52 +61,44 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangWithContext()
     {
-        $this->assertEquals('Bank', $this->provider->lang('bank', 'finance'));
+        $this->assertEquals('Bank', $this->class->lang('bank', 'finance'));
     }
 
     /**
      * Test lang() with context returns identifier for untranslated string.
-     *
-     * @runInSeparateProcess
      *
      * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\L10n\GettextL10nProvider::lang
      */
     public function testLangUntranslatedWithContextReturnsIdentifier()
     {
-        $this->assertEquals('chair', $this->provider->lang('chair', 'kitchen'));
+        $this->assertEquals('chair', $this->class->lang('chair', 'kitchen'));
     }
 
     /**
      * Test lang() with superfluous context.
-     *
-     * @runInSeparateProcess
      *
      * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\L10n\GettextL10nProvider::lang
      */
     public function testLangWithSuperfluousContextReturnsIdentifier()
     {
-        $this->assertEquals('table', $this->provider->lang('table', 'kitchen'));
+        $this->assertEquals('table', $this->class->lang('table', 'kitchen'));
     }
 
     /**
      * Test lang() with context missing.
-     *
-     * @runInSeparateProcess
      *
      * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\L10n\GettextL10nProvider::lang
      */
     public function testLangWithContextMissingReturnsIdentifier()
     {
-        $this->assertEquals('bank', $this->provider->lang('bank'));
+        $this->assertEquals('bank', $this->class->lang('bank'));
     }
 
     /**
      * Test lang() accessing a plural value with singular.
-     *
-     * @runInSeparateProcess
      *
      * @depends Lunr\EnvironmentTest::testL10nFiles
      * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
@@ -120,26 +106,22 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangAccessingPluralWithSingularTranslatesSingular()
     {
-        $this->assertEquals('%d Mann', $this->provider->lang('%d man'));
+        $this->assertEquals('%d Mann', $this->class->lang('%d man'));
     }
 
     /**
      * Test lang() accessing a plural value with plural.
-     *
-     * @runInSeparateProcess
      *
      * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\L10n\GettextL10nProvider::lang
      */
     public function testLangAccessingPluralWithPluralReturnsIdentifier()
     {
-        $this->assertEquals('%d men', $this->provider->lang('%d men'));
+        $this->assertEquals('%d men', $this->class->lang('%d men'));
     }
 
     /**
      * Test lang() accessing a plural value with singular.
-     *
-     * @runInSeparateProcess
      *
      * @depends Lunr\EnvironmentTest::testL10nFiles
      * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
@@ -147,26 +129,22 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      */
     public function testLangAccessingPluralWithSingularAndContextTranslatesSingular()
     {
-        $this->assertEquals('%d Ei', $this->provider->lang('%d egg', 'food'));
+        $this->assertEquals('%d Ei', $this->class->lang('%d egg', 'food'));
     }
 
     /**
      * Test lang() accessing a plural value with plural.
-     *
-     * @runInSeparateProcess
      *
      * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
      * @covers  Lunr\L10n\GettextL10nProvider::lang
      */
     public function testLangAccessingPluralWithPluralAndContextReturnsIdentifier()
     {
-        $this->assertEquals('%d eggs', $this->provider->lang('%d eggs', 'food'));
+        $this->assertEquals('%d eggs', $this->class->lang('%d eggs', 'food'));
     }
 
     /**
      * Test that lang() without specifying context and given a too long identifier returns the identifier.
-     *
-     * @runInSeparateProcess
      *
      * @covers Lunr\L10n\GettextL10nProvider::lang
      */
@@ -181,13 +159,11 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
         $this->logger->expects($this->once())
                      ->method('warning');
 
-        $this->assertEquals($identifier, $this->provider->lang($identifier));
+        $this->assertEquals($identifier, $this->class->lang($identifier));
     }
 
     /**
      * Test that lang() given context and identifier too long returns the identifier.
-     *
-     * @runInSeparateProcess
      *
      * @covers Lunr\L10n\GettextL10nProvider::lang
      */
@@ -202,7 +178,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
         $this->logger->expects($this->once())
                      ->method('warning');
 
-        $this->assertEquals($identifier, $this->provider->lang($identifier, 'aaaaaa'));
+        $this->assertEquals($identifier, $this->class->lang($identifier, 'aaaaaa'));
     }
 
 }

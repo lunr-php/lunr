@@ -16,8 +16,7 @@
 namespace Lunr\L10n\Tests;
 
 use Lunr\L10n\GettextL10nProvider;
-
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -30,20 +29,8 @@ use ReflectionClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\L10n\GettextL10nProvider
  */
-abstract class GettextL10nProviderTest extends PHPUnit_Framework_TestCase
+abstract class GettextL10nProviderTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the GettextL10nProvider class.
-     * @var GettextL10nProvider
-     */
-    protected $provider;
-
-    /**
-     * Reflection instance of the GettextL10nProvider class.
-     * @var ReflectionClass
-     */
-    protected $provider_reflection;
 
     /**
      * Mock Object for a Logger class.
@@ -70,11 +57,11 @@ abstract class GettextL10nProviderTest extends PHPUnit_Framework_TestCase
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->provider = new GettextL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger);
-        $this->provider->set_default_language('nl_NL');
-        $this->provider->set_locales_location(TEST_STATICS . '/l10n');
+        $this->class = new GettextL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger);
+        $this->class->set_default_language('nl_NL');
+        $this->class->set_locales_location(TEST_STATICS . '/l10n');
 
-        $this->provider_reflection = new ReflectionClass('Lunr\L10n\GettextL10nProvider');
+        $this->reflection = new ReflectionClass('Lunr\L10n\GettextL10nProvider');
     }
 
     /**
@@ -82,8 +69,8 @@ abstract class GettextL10nProviderTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->provider);
-        unset($this->provider_reflection);
+        unset($this->class);
+        unset($this->reflection);
         unset($this->logger);
     }
 
