@@ -34,7 +34,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      */
     public function testLoadRecipeDoesNotIncludeNonExistingFile()
     {
-        $filename = 'locator/locate.nonexisting.inc.php';
+        $filename = 'Core/locator/locate.nonexisting.inc.php';
 
         $basename = str_replace('src/Lunr/Core/Tests', 'tests/statics/', __DIR__);
         $filename = $basename . $filename;
@@ -55,7 +55,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      */
     public function testLoadRecipeIncludesExistingFile()
     {
-        $filename = 'locator/locate.valid.inc.php';
+        $filename = 'Core/locator/locate.valid.inc.php';
 
         $basename = str_replace('src/Lunr/Core/Tests', 'tests/statics/', __DIR__);
         $filename = $basename . $filename;
