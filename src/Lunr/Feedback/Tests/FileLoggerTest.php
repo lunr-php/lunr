@@ -164,7 +164,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
         $this->expectOutputRegex('/^\nXdebug: WARNING: Foo/');
         $this->logger->log(LogLevel::WARNING, 'Foo');
 
-        $this->assertFileEquals(TEST_STATICS . '/logs/errorln.log', $this->filename);
+        $this->assertFileEquals(TEST_STATICS . '/Feedback/errorln.log', $this->filename);
     }
 
     /**
