@@ -159,6 +159,19 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
         $this->assertEmpty($value);
     }
 
+    /**
+     * Assert that an array is not empty.
+     *
+     * @param mixed $value The value to test.
+     *
+     * @return void
+     */
+    protected function assertArrayNotEmpty($value)
+    {
+        $this->assertInternalType('array', $value);
+        $this->assertNotEmpty($value);
+    }
+
 }
 
 ?>
