@@ -140,20 +140,6 @@ abstract class ViewTest extends PHPUnit_Framework_TestCase
         return $values;
     }
 
-    /**
-     * Unit Test Data Provider for css alternating.
-     *
-     * @return array $values Set of test data.
-     */
-    public function cssAlternateProvider()
-    {
-        $values   = array();
-        $values[] = array('row', 0, '', 'row_even');
-        $values[] = array('row', 1, '', 'row_odd');
-        $values[] = array('row', 0, 'custom', 'row_custom');
-        return $values;
-    }
-
 }
 
 ?>

@@ -75,25 +75,6 @@ class ViewHelpersTest extends ViewTest
         $this->assertEquals($result, $method->invokeArgs($this->view, array($path)));
     }
 
-    /**
-     * Tests the css_alternate method of the View class.
-     *
-     * @param String $basename         css rule basename
-     * @param String $alternation_hint hint on whether to use 'even' or 'odd'
-     * @param String $suffix           custom suffix instead of 'even' or 'odd'
-     * @param String $result           expected combined result
-     *
-     * @dataProvider cssAlternateProvider
-     * @covers       Lunr\Corona\View::css_alternate
-     */
-    public function testCssAlternate($basename, $alternation_hint, $suffix, $result)
-    {
-        $method = $this->view_reflection->getMethod('css_alternate');
-        $method->setAccessible(TRUE);
-
-        $this->assertEquals($result, $method->invokeArgs($this->view, array($basename, $alternation_hint, $suffix)));
-    }
-
 }
 
 ?>

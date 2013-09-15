@@ -116,39 +116,6 @@ abstract class View
         return $output;
     }
 
-    /**
-     * Return an alternating (eg. odd/even) CSS class name.
-     *
-     * @param String  $basename         CSS base class name (without
-     *                                  ending underscore or suffix)
-     * @param Integer $alternation_hint Integer counter indicating the
-     *                                  alternation state
-     * @param String  $suffix           An alternative suffix if you
-     *                                  don't want odd/even
-     *
-     * @return String $return The constructed CSS class name
-     */
-    protected function css_alternate($basename, $alternation_hint, $suffix = '')
-    {
-        if ($suffix == '')
-        {
-            if ($alternation_hint % 2 == 0)
-            {
-                $basename .= '_even';
-            }
-            else
-            {
-                $basename .= '_odd';
-            }
-        }
-        else
-        {
-            $basename .= '_' . $suffix;
-        }
-
-        return $basename;
-    }
-
 }
 
 ?>
