@@ -66,7 +66,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends PHPUnit_Framework_Test
         $this->logger        = $this->getMock('Psr\Log\LoggerInterface');
         $this->class         = new PhysicalFilesystemAccessObject($this->logger);
         $this->reflection    = new ReflectionClass('Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject');
-        $this->find_location = TEST_STATICS . '/fao';
+        $this->find_location = TEST_STATICS . '/Gravity';
     }
 
     /**

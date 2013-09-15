@@ -36,7 +36,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testGetFileContentWithAccessibleFile()
     {
-        $file = TEST_STATICS . '/fao/file1';
+        $file = TEST_STATICS . '/Gravity/file1';
 
         $content = "Content\n";
 
@@ -133,7 +133,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $written = $this->class->put_file_content($file, $content);
 
-        $this->assertFileEquals(TEST_STATICS . '/fao/file1', $file);
+        $this->assertFileEquals(TEST_STATICS . '/Gravity/file1', $file);
         $this->assertEquals(8, $written);
     }
 
@@ -167,7 +167,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $written = $this->class->put_file_content($file, $content);
 
-        $this->assertFileEquals(TEST_STATICS . '/fao/file1', $file);
+        $this->assertFileEquals(TEST_STATICS . '/Gravity/file1', $file);
         $this->assertEquals(8, $written);
     }
 
