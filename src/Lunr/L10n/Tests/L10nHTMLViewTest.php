@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the L10nViewTest class.
+ * This file contains the L10nHTMLViewTest class.
  *
  * PHP Version 5.3
  *
@@ -15,7 +15,7 @@
 
 namespace Lunr\L10n\Tests;
 
-use Lunr\L10n\L10nView;
+use Lunr\L10n\L10nHTMLView;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
@@ -26,9 +26,9 @@ use ReflectionClass;
  * @package    L10n
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\L10n\L10nView
+ * @covers     Lunr\L10n\L10nHTMLView
  */
-abstract class L10nViewTest extends PHPUnit_Framework_TestCase
+abstract class L10nHTMLViewTest extends PHPUnit_Framework_TestCase
 {
 
     /**
@@ -84,13 +84,13 @@ abstract class L10nViewTest extends PHPUnit_Framework_TestCase
                                    ->disableOriginalConstructor()
                                    ->getMockForAbstractClass();
 
-        $this->view = $this->getMockBuilder('Lunr\L10n\L10nView')
+        $this->view = $this->getMockBuilder('Lunr\L10n\L10nHTMLView')
                            ->setConstructorArgs(
                                array($this->request, $this->response, $this->configuration, $this->l10nprovider)
                              )
                            ->getMockForAbstractClass();
 
-        $this->view_reflection = new ReflectionClass('Lunr\L10n\L10nView');
+        $this->view_reflection = new ReflectionClass('Lunr\L10n\L10nHTMLView');
     }
 
     /**

@@ -3,7 +3,7 @@
 /**
  * This file contains a view class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    L10n
@@ -15,7 +15,7 @@
 
 namespace Lunr\L10n;
 
-use Lunr\Corona\View;
+use Lunr\Corona\HTMLView;
 
 /**
  * View class used by the Website
@@ -25,7 +25,7 @@ use Lunr\Corona\View;
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-abstract class L10nView extends View
+abstract class L10nHTMLView extends HTMLView
 {
 
     /**

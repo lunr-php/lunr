@@ -144,7 +144,7 @@
         </testsuite>
         <testsuite name="L10n">
             <file>tests/system/EnvironmentTest.php</file>
-            <file>src/Lunr/L10n/Tests/L10nViewBaseTest.php</file>
+            <file>src/Lunr/L10n/Tests/L10nHTMLViewBaseTest.php</file>
             <file>src/Lunr/L10n/Tests/L10nTraitTest.php</file>
             <file>src/Lunr/L10n/Tests/L10nTest.php</file>
             <file>src/Lunr/L10n/Tests/L10nProviderBaseTest.php</file>

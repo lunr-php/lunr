@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the L10nViewBaseTest class.
+ * This file contains the L10nHTMLViewBaseTest class.
  *
  * PHP Version 5.3
  *
@@ -15,7 +15,7 @@
 
 namespace Lunr\L10n\Tests;
 
-use Lunr\L10n\L10nView;
+use Lunr\L10n\L10nHTMLView;
 
 /**
  * Base tests for the localized view class.
@@ -24,9 +24,9 @@ use Lunr\L10n\L10nView;
  * @package    L10n
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\L10n\L10nView
+ * @covers     Lunr\L10n\L10nHTMLView
  */
-class L10nViewBaseTest extends L10nViewTest
+class L10nHTMLViewBaseTest extends L10nHTMLViewTest
 {
 
     /**
