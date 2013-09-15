@@ -3,7 +3,7 @@
 /**
  * This file contains the L10nProviderTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    L10n
@@ -16,7 +16,7 @@
 namespace Lunr\L10n\Tests;
 
 use Lunr\L10n\L10nProvider;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -28,14 +28,8 @@ use ReflectionClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\L10n\L10nProvider
  */
-abstract class L10nProviderTest extends PHPUnit_Framework_TestCase
+abstract class L10nProviderTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the L10nProvider class.
-     * @var L10nProvider
-     */
-    protected $provider;
 
     /**
      * Mock Object for a Logger class.
@@ -62,11 +56,11 @@ abstract class L10nProviderTest extends PHPUnit_Framework_TestCase
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->provider = $this->getMockBuilder('Lunr\L10n\L10nProvider')
-                               ->setConstructorArgs(array(self::LANGUAGE, self::DOMAIN, $this->logger))
-                               ->getMockForAbstractClass();
+        $this->class = $this->getMockBuilder('Lunr\L10n\L10nProvider')
+                            ->setConstructorArgs([ self::LANGUAGE, self::DOMAIN, $this->logger ])
+                            ->getMockForAbstractClass();
 
-        $this->provider_reflection = new ReflectionClass('Lunr\L10n\L10nProvider');
+        $this->reflection = new ReflectionClass('Lunr\L10n\L10nProvider');
     }
 
     /**
@@ -74,8 +68,8 @@ abstract class L10nProviderTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->provider);
-        unset($this->provider_reflection);
+        unset($this->class);
+        unset($this->reflection);
         unset($this->logger);
     }
 

@@ -32,10 +32,7 @@ class L10nProviderBaseTest extends L10nProviderTest
      */
     public function testLanguageIsSetCorrectly()
     {
-        $property = $this->provider_reflection->getProperty('language');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(self::LANGUAGE, $property->getValue($this->provider));
+        $this->assertPropertyEquals('language', self::LANGUAGE);
     }
 
     /**
@@ -43,10 +40,7 @@ class L10nProviderBaseTest extends L10nProviderTest
      */
     public function testDomainIsSetCorrectly()
     {
-        $property = $this->provider_reflection->getProperty('domain');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(self::DOMAIN, $property->getValue($this->provider));
+        $this->assertPropertyEquals('domain', self::DOMAIN);
     }
 
     /**
@@ -54,10 +48,7 @@ class L10nProviderBaseTest extends L10nProviderTest
      */
     public function testDefaultLanguageSetCorrectly()
     {
-        $property = $this->provider_reflection->getProperty('default_language');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('en_US', $property->getValue($this->provider));
+        $this->assertPropertyEquals('default_language', 'en_US');
     }
 
     /**
@@ -65,13 +56,10 @@ class L10nProviderBaseTest extends L10nProviderTest
      */
     public function testLocaleLocationSetCorrectly()
     {
-        $property = $this->provider_reflection->getProperty('locales_location');
-        $property->setAccessible(TRUE);
-
         // /usr/bin/l10n by default
         $default_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
 
-        $this->assertEquals($default_location, $property->getValue($this->provider));
+        $this->assertPropertyEquals('locales_location', $default_location);
     }
 
     /**
@@ -79,13 +67,7 @@ class L10nProviderBaseTest extends L10nProviderTest
      */
     public function testLoggerIsPassedCorrectly()
     {
-        $property = $this->provider_reflection->getProperty('logger');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->provider);
-
-        $this->assertInstanceOf('Psr\Log\LoggerInterface', $value);
-        $this->assertSame($this->logger, $value);
+        $this->assertPropertySame('logger', $this->logger);
     }
 
     /**
@@ -95,7 +77,7 @@ class L10nProviderBaseTest extends L10nProviderTest
      */
     public function testGetLanguageReturnsLanguage()
     {
-        $this->assertEquals(self::LANGUAGE, $this->provider->get_language());
+        $this->assertEquals(self::LANGUAGE, $this->class->get_language());
     }
 
 }
