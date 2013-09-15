@@ -34,11 +34,7 @@ class L10nHTMLViewBaseTest extends L10nHTMLViewTest
      */
     public function testRequestSetCorrectly()
     {
-        $property = $this->view_reflection->getProperty('request');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->request, $property->getValue($this->view));
-        $this->assertSame($this->request, $property->getValue($this->view));
+        $this->assertPropertySame('request', $this->request);
     }
 
     /**
@@ -46,11 +42,7 @@ class L10nHTMLViewBaseTest extends L10nHTMLViewTest
      */
     public function testResponseSetCorrectly()
     {
-        $property = $this->view_reflection->getProperty('response');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->response, $property->getValue($this->view));
-        $this->assertSame($this->response, $property->getValue($this->view));
+        $this->assertPropertySame('response', $this->response);
     }
 
     /**
@@ -58,11 +50,7 @@ class L10nHTMLViewBaseTest extends L10nHTMLViewTest
      */
     public function testConfigurationSetCorrectly()
     {
-        $property = $this->view_reflection->getProperty('configuration');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->configuration, $property->getValue($this->view));
-        $this->assertSame($this->configuration, $property->getValue($this->view));
+        $this->assertPropertySame('configuration', $this->configuration);
     }
 
     /**
@@ -70,11 +58,7 @@ class L10nHTMLViewBaseTest extends L10nHTMLViewTest
      */
     public function testL10nProviderSetCorrectly()
     {
-        $property = $this->view_reflection->getProperty('l10n');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->l10nprovider, $property->getValue($this->view));
-        $this->assertSame($this->l10nprovider, $property->getValue($this->view));
+        $this->assertPropertySame('l10n', $this->l10nprovider);
     }
 
 }

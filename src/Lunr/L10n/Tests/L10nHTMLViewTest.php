@@ -3,7 +3,7 @@
 /**
  * This file contains the L10nHTMLViewTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    L10n
@@ -16,7 +16,7 @@
 namespace Lunr\L10n\Tests;
 
 use Lunr\L10n\L10nHTMLView;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -28,7 +28,7 @@ use ReflectionClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\L10n\L10nHTMLView
  */
-abstract class L10nHTMLViewTest extends PHPUnit_Framework_TestCase
+abstract class L10nHTMLViewTest extends LunrBaseTest
 {
 
     /**
@@ -56,18 +56,6 @@ abstract class L10nHTMLViewTest extends PHPUnit_Framework_TestCase
     protected $l10nprovider;
 
     /**
-     * Reflection instance of the View class.
-     * @var ReflectionClass
-     */
-    protected $view_reflection;
-
-    /**
-     * Mock instance of the View class.
-     * @var View
-     */
-    protected $view;
-
-    /**
      * TestCase Constructor.
      *
      * @return void
@@ -84,26 +72,24 @@ abstract class L10nHTMLViewTest extends PHPUnit_Framework_TestCase
                                    ->disableOriginalConstructor()
                                    ->getMockForAbstractClass();
 
-        $this->view = $this->getMockBuilder('Lunr\L10n\L10nHTMLView')
-                           ->setConstructorArgs(
-                               array($this->request, $this->response, $this->configuration, $this->l10nprovider)
-                             )
-                           ->getMockForAbstractClass();
+        $this->class = $this->getMockBuilder('Lunr\L10n\L10nHTMLView')
+                            ->setConstructorArgs([ $this->request, $this->response, $this->configuration, $this->l10nprovider ])
+                            ->getMockForAbstractClass();
 
-        $this->view_reflection = new ReflectionClass('Lunr\L10n\L10nHTMLView');
+        $this->reflection = new ReflectionClass('Lunr\L10n\L10nHTMLView');
     }
 
     /**
      * TestCase Destructor.
      */
-    protected function tearDown()
+    public function tearDown()
     {
         unset($this->configuration);
         unset($this->request);
         unset($this->response);
         unset($this->l10nprovider);
-        unset($this->view);
-        unset($this->view_reflection);
+        unset($this->class);
+        unset($this->reflection);
     }
 
 }
