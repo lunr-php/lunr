@@ -146,7 +146,7 @@
             <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/L10n/Tests/L10nHTMLViewBaseTest.php</file>
             <file>src/Lunr/L10n/Tests/L10nTraitTest.php</file>
-            <file>src/Lunr/L10n/Tests/L10nTest.php</file>
+            <file>src/Lunr/L10n/Tests/L10nBaseTest.php</file>
             <file>src/Lunr/L10n/Tests/L10nProviderBaseTest.php</file>
             <file>src/Lunr/L10n/Tests/GettextL10nProviderBaseTest.php</file>
             <file>src/Lunr/L10n/Tests/GettextL10nProviderLangTest.php</file>
