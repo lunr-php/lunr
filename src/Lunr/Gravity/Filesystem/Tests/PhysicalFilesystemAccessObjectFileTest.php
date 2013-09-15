@@ -36,9 +36,9 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testGetFileContentWithAccessibleFile()
     {
-        $file = TEST_STATICS . '/logs/error.log';
+        $file = TEST_STATICS . '/fao/file1';
 
-        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
+        $content = "Content\n";
 
         $fetched = $this->class->get_file_content($file);
 
@@ -129,12 +129,12 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = tempnam('/tmp', 'phpunit_');
 
-        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
+        $content = "Content\n";
 
         $written = $this->class->put_file_content($file, $content);
 
-        $this->assertFileEquals(TEST_STATICS . '/logs/error.log', $file);
-        $this->assertEquals(35, $written);
+        $this->assertFileEquals(TEST_STATICS . '/fao/file1', $file);
+        $this->assertEquals(8, $written);
     }
 
     /**
@@ -147,7 +147,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = '/root/ab45cd89';
 
-        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
+        $content = "Content\n";
 
         $written = $this->class->put_file_content($file, $content);
 
@@ -163,12 +163,12 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = '/tmp/ab65cd89';
 
-        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
+        $content = "Content\n";
 
         $written = $this->class->put_file_content($file, $content);
 
-        $this->assertFileEquals(TEST_STATICS . '/logs/error.log', $file);
-        $this->assertEquals(35, $written);
+        $this->assertFileEquals(TEST_STATICS . '/fao/file1', $file);
+        $this->assertEquals(8, $written);
     }
 
     /**
@@ -181,7 +181,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = '/tmp';
 
-        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
+        $content = "Content\n";
 
         $written = $this->class->put_file_content($file, $content);
 
@@ -199,7 +199,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testPutFileContentWithInvalidFilenames($file)
     {
-        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
+        $content = "Content\n";
 
         $written = $this->class->put_file_content($file, $content);
 
@@ -216,7 +216,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testPutFileContentWithBooleanFilenames($file)
     {
-        $content = '[2011-11-10 10:30:22]: WARNING: Foo';
+        $content = "Content\n";
 
         $written = $this->class->put_file_content($file, $content);
 
