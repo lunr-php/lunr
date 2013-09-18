@@ -53,7 +53,7 @@ class PaginationHTMLTest extends PaginationTest
      */
     public function testBuildPreviousButtons()
     {
-        $file = __DIR__ . '/../../../../tests/statics/surface/pagination_buttons_previous.html';
+        $file   = __DIR__ . '/../../../../tests/statics/surface/pagination_buttons_previous.html';
         $method = $this->get_accessible_reflection_method('build_page_buttons');
         $this->assertStringMatchesFormatFile($file, $method->invokeArgs($this->class, [2, TRUE]));
     }
@@ -65,7 +65,7 @@ class PaginationHTMLTest extends PaginationTest
      */
     public function testBuildNextButtons()
     {
-        $file = __DIR__ . '/../../../../tests/statics/surface/pagination_buttons_next.html';
+        $file   = __DIR__ . '/../../../../tests/statics/surface/pagination_buttons_next.html';
         $method = $this->get_accessible_reflection_method('build_page_buttons');
         $this->assertStringMatchesFormatFile($file, $method->invokeArgs($this->class, [2, FALSE]));
     }
@@ -80,7 +80,7 @@ class PaginationHTMLTest extends PaginationTest
      */
     public function testBuildButtonEnabled($button)
     {
-        $file = __DIR__ . '/../../../../tests/statics/surface/pagination_button_' . $button . '_enabled.html';
+        $file   = __DIR__ . '/../../../../tests/statics/surface/pagination_button_' . $button . '_enabled.html';
         $method = $this->get_accessible_reflection_method('build_button');
         $this->assertStringMatchesFormatFile($file, $method->invokeArgs($this->class, [$button, 1]));
     }
@@ -91,15 +91,17 @@ class PaginationHTMLTest extends PaginationTest
      * @param mixed $button Button ID
      *
      * @dataProvider validButtonProvider
-     * @covers Lunr\Surface\Pagination::build_button
+     * @covers       Lunr\Surface\Pagination::build_button
      */
     public function testBuildButtonDisabled($button)
     {
         $value = $this->get_reflection_property_value('buttons');
+
         $value[$button]['enabled'] = FALSE;
+
         $this->set_reflection_property_value('buttons', $value);
 
-        $file = __DIR__ . '/../../../../tests/statics/surface/pagination_button_' . $button . '_disabled.html';
+        $file   = __DIR__ . '/../../../../tests/statics/surface/pagination_button_' . $button . '_disabled.html';
         $method = $this->get_accessible_reflection_method('build_button');
         $this->assertStringMatchesFormatFile($file, $method->invokeArgs($this->class, [$button, 1]));
     }
