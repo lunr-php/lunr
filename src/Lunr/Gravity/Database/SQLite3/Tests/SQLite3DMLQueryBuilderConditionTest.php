@@ -33,7 +33,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the on part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on
      */
     public function testOnWithDefaultOperator()
@@ -47,7 +47,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the on part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on
      */
     public function testOnWithCustomOperator()
@@ -74,7 +74,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the on part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_like
      */
     public function testOnLike()
@@ -88,7 +88,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the on part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_like
      */
     public function testOnNotLike()
@@ -115,7 +115,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the on part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_in
      */
     public function testOnIn()
@@ -129,7 +129,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the on part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_in
      */
     public function testOnNotIn()
@@ -156,7 +156,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the on part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_between
      */
     public function testOnBetween()
@@ -170,7 +170,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the on part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_between
      */
     public function testOnNotBetween()
@@ -197,7 +197,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the on part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_regexp
      */
     public function testOnRegexp()
@@ -211,7 +211,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the on part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_regexp
      */
     public function testOnNotRegexp()
@@ -238,7 +238,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the where part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where
      */
     public function testWhereWithDefaultOperator()
@@ -252,7 +252,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the where part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where
      */
     public function testWhereWithCustomOperator()
@@ -279,7 +279,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the where part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_like
      */
     public function testWhereLike()
@@ -293,7 +293,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the where part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_like
      */
     public function testWhereNotLike()
@@ -320,7 +320,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the where part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_in
      */
     public function testWhereIn()
@@ -334,7 +334,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the where part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_in
      */
     public function testWhereNotIn()
@@ -361,7 +361,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the where part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_between
      */
     public function testWhereBetween()
@@ -375,7 +375,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the where part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_between
      */
     public function testWhereNotBetween()
@@ -402,7 +402,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the where part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_regexp
      */
     public function testWhereRegexp()
@@ -416,7 +416,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the where part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_regexp
      */
     public function testWhereNotRegexp()
@@ -443,7 +443,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the having part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having
      */
     public function testHavingWithDefaultOperator()
@@ -457,7 +457,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the having part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having
      */
     public function testHavingWithCustomOperator()
@@ -484,7 +484,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the having part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_like
      */
     public function testHavingLike()
@@ -498,7 +498,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the having part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_like
      */
     public function testHavingNotLike()
@@ -525,7 +525,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the having part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_in
      */
     public function testHavingIn()
@@ -539,7 +539,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the having part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_in
      */
     public function testHavingNotIn()
@@ -566,7 +566,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the having part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_between
      */
     public function testHavingBetween()
@@ -580,7 +580,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the having part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_between
      */
     public function testHavingNotBetween()
@@ -607,7 +607,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the having part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_regexp
      */
     public function testHavingRegexp()
@@ -621,7 +621,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the having part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_regexp
      */
     public function testHavingNotRegexp()

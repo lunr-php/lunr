@@ -32,44 +32,34 @@ class DatabaseDMLQueryBuilderQueryPartsDeleteTest extends DatabaseDMLQueryBuilde
     /**
      * Test specifying the delete part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testDeleteEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_delete
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_delete
      */
     public function testInitialDelete()
     {
-        $method = $this->builder_reflection->getMethod('sql_delete');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_delete');
 
-        $property = $this->builder_reflection->getProperty('delete');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array('table'));
+        $method->invokeArgs($this->class, [ 'table' ]);
 
         $string = 'table';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('delete', $string);
     }
 
     /**
      * Test specifying the select part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testDeleteEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_delete
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_delete
      */
     public function testIncrementalDelete()
     {
-        $method = $this->builder_reflection->getMethod('sql_delete');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_delete');
 
-        $property = $this->builder_reflection->getProperty('delete');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array('table'));
-        $method->invokeArgs($this->builder, array('table.*'));
+        $method->invokeArgs($this->class, [ 'table' ]);
+        $method->invokeArgs($this->class, [ 'table.*' ]);
 
         $string = 'table, table.*';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('delete', $string);
     }
 
 }

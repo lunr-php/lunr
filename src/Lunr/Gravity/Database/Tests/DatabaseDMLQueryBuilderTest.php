@@ -3,7 +3,7 @@
 /**
  * This file contains the DatabaseDMLQueryBuilderTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Database
  * @package    Gravity
@@ -16,7 +16,7 @@
 namespace Lunr\Gravity\Database\Tests;
 
 use Lunr\Gravity\Database\DatabaseDMLQueryBuilder;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 use stdClass;
 
@@ -30,29 +30,17 @@ use stdClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Gravity\Database\DatabaseDMLQueryBuilder
  */
-abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
+abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the DatabaseQueryBuilder class.
-     * @var DatabaseDMLQueryBuilder
-     */
-    protected $builder;
-
-    /**
-     * Reflection instance of the DatabaseDMLQueryBuilder class.
-     * @var ReflectionClass
-     */
-    protected $builder_reflection;
 
     /**
      * TestCase Constructor.
      */
     public function setUp()
     {
-        $this->builder = $this->getMockForAbstractClass('Lunr\Gravity\Database\DatabaseDMLQueryBuilder');
+        $this->class = $this->getMockForAbstractClass('Lunr\Gravity\Database\DatabaseDMLQueryBuilder');
 
-        $this->builder_reflection = new ReflectionClass('Lunr\Gravity\Database\DatabaseDMLQueryBuilder');
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\DatabaseDMLQueryBuilder');
     }
 
     /**
@@ -60,8 +48,8 @@ abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->builder);
-        unset($this->builder_reflection);
+        unset($this->class);
+        unset($this->reflection);
     }
 
     /**
@@ -71,10 +59,10 @@ abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
      */
     public function conditionalKeywordProvider()
     {
-        $variants   = array();
-        $variants[] = array('WHERE', 'where');
-        $variants[] = array('HAVING', 'having');
-        $variants[] = array('ON', 'join');
+        $variants   = [];
+        $variants[] = [ 'WHERE', 'where' ];
+        $variants[] = [ 'HAVING', 'having' ];
+        $variants[] = [ 'ON', 'join' ];
 
         return $variants;
     }
@@ -86,11 +74,11 @@ abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
      */
     public function commonJoinTypeProvider()
     {
-        $types   = array();
-        $types[] = array('', 'JOIN');
-        $types[] = array('LEFT', 'LEFT JOIN');
-        $types[] = array('LEFT OUTER', 'LEFT OUTER JOIN');
-        $types[] = array('NATURAL LEFT OUTER', 'NATURAL LEFT OUTER JOIN');
+        $types   = [];
+        $types[] = [ '', 'JOIN' ];
+        $types[] = [ 'LEFT', 'LEFT JOIN' ];
+        $types[] = [ 'LEFT OUTER', 'LEFT OUTER JOIN' ];
+        $types[] = [ 'NATURAL LEFT OUTER', 'NATURAL LEFT OUTER JOIN' ];
 
         return $types;
     }
@@ -102,11 +90,11 @@ abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
      */
     public function validIndexHintProvider()
     {
-        $hints   = array();
-        $hints[] = array(array('index_hint'), ' index_hint');
-        $hints[] = array(array('index_hint', 'index_hint'), ' index_hint, index_hint');
-        $hints[] = array(array(NULL), ' ');
-        $hints[] = array(array(NULL, NULL), ' ');
+        $hints   = [];
+        $hints[] = [ [ 'index_hint' ], ' index_hint' ];
+        $hints[] = [ [ 'index_hint', 'index_hint' ], ' index_hint, index_hint' ];
+        $hints[] = [ [ NULL ], ' ' ];
+        $hints[] = [ [ NULL, NULL ], ' ' ];
 
         return $hints;
     }
@@ -118,13 +106,13 @@ abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
      */
     public function invalidIndexHintProvider()
     {
-        $hints   = array();
-        $hints[] = array(array());
-        $hints[] = array(NULL);
-        $hints[] = array(FALSE);
-        $hints[] = array(1);
-        $hints[] = array('string');
-        $hints[] = array(new stdClass());
+        $hints   = [];
+        $hints[] = [[]];
+        $hints[] = [ NULL ];
+        $hints[] = [ FALSE ];
+        $hints[] = [ 1 ];
+        $hints[] = [ 'string' ];
+        $hints[] = [ new stdClass() ];
 
         return $hints;
     }
@@ -136,11 +124,11 @@ abstract class DatabaseDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
     */
     public function compoundQueryTypeProvider()
     {
-        $types   = array();
-        $types[] = array('UNION');
-        $types[] = array('UNION ALL');
-        $types[] = array('EXCEPT');
-        $types[] = array('INTERSECT');
+        $types   = [];
+        $types[] = [ 'UNION' ];
+        $types[] = [ 'UNION ALL' ];
+        $types[] = [ 'EXCEPT' ];
+        $types[] = [ 'INTERSECT' ];
 
         return $types;
     }

@@ -33,7 +33,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the on part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on
      */
     public function testOnWithDefaultOperator()
@@ -49,7 +49,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the on part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on
      */
     public function testOnWithCustomOperator()
@@ -78,7 +78,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the on part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_like
      */
     public function testOnLike()
@@ -94,7 +94,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the on part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_like
      */
     public function testOnNotLike()
@@ -123,7 +123,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the on part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_in
      */
     public function testOnIn()
@@ -139,7 +139,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the on part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_like
      */
     public function testOnNotIn()
@@ -168,7 +168,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the on part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_between
      */
     public function testOnBetween()
@@ -184,7 +184,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the on part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_between
      */
     public function testOnNotBetween()
@@ -213,7 +213,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the on part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_regexp
      */
     public function testOnRegexp()
@@ -229,7 +229,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the on part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_regexp
      */
     public function testOnNotRegexp()
@@ -258,7 +258,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the where part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where
      */
     public function testWhereWithDefaultOperator()
@@ -274,7 +274,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the where part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where
      */
     public function testWhereWithCustomOperator()
@@ -303,7 +303,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the where part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_like
      */
     public function testWhereLike()
@@ -319,7 +319,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the where part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_like
      */
     public function testWhereNotLike()
@@ -348,7 +348,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the where part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_in
      */
     public function testWhereIn()
@@ -364,7 +364,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the where part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_in
      */
     public function testWhereNotIn()
@@ -393,7 +393,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the where part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_between
      */
     public function testWhereBetween()
@@ -409,7 +409,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the where part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_between
      */
     public function testWhereNotBetween()
@@ -438,7 +438,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the where part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_regexp
      */
     public function testWhereRegexp()
@@ -454,7 +454,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the where part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_regexp
      */
     public function testWhereNotRegexp()
@@ -483,7 +483,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the having part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having
      */
     public function testHavingWithDefaultOperator()
@@ -499,7 +499,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the having part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having
      */
     public function testHavingWithCustomOperator()
@@ -528,7 +528,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the having part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_like
      */
     public function testHavingLike()
@@ -544,7 +544,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the having part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_like
      */
     public function testHavingNotLike()
@@ -573,7 +573,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the having part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_in
      */
     public function testHavingIn()
@@ -589,7 +589,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the having part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_in
      */
     public function testHavingNotIn()
@@ -618,7 +618,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the having part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_between
      */
     public function testHavingBetween()
@@ -634,7 +634,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the having part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_between
      */
     public function testHavingNotBetween()
@@ -663,7 +663,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the having part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionCreatesSimpleStatement
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_regexp
      */
     public function testHavingRegexp()
@@ -679,7 +679,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     /**
      * Test specifying the having part of a query with non default operator.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testConditionWithNonDefaultOperator
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_regexp
      */
     public function testHavingNotRegexp()

@@ -32,44 +32,34 @@ class DatabaseDMLQueryBuilderQueryPartsUpdateTest extends DatabaseDMLQueryBuilde
     /**
      * Test specifying the SET part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testUpdateEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_update
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_update
      */
     public function testInitialUpdate()
     {
-        $method = $this->builder_reflection->getMethod('sql_update');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_update');
 
-        $property = $this->builder_reflection->getProperty('update');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array('table1'));
+        $method->invokeArgs($this->class, [ 'table1' ]);
 
         $string = 'table1';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('update', $string);
     }
 
     /**
      * Test specifying the SET part of a query incrementally.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testUpdateEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_update
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_update
      */
     public function testIncrementalUpdate()
     {
-        $method = $this->builder_reflection->getMethod('sql_update');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_update');
 
-        $property = $this->builder_reflection->getProperty('update');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array('table1'));
-        $method->invokeArgs($this->builder, array('table2'));
+        $method->invokeArgs($this->class, [ 'table1' ]);
+        $method->invokeArgs($this->class, [ 'table2' ]);
 
         $string = 'table1, table2';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('update', $string);
     }
 
 }

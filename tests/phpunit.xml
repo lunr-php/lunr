@@ -89,10 +89,19 @@
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLAsyncQueryResultBaseTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLAsyncQueryResultFetchTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderBaseTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderImplodeQueryTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetSelectQueryTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetDeleteQueryTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetInsertQueryTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetReplaceQueryTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetUpdateQueryTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsFromTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsJoinTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsConditionTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsDeleteTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsInsertTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsUpdateTest.php</file>
-            <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderSelectTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderDeleteTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderInsertTest.php</file>

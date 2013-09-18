@@ -32,219 +32,169 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     /**
      * Test specifying the SET part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testSetEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_set
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_set
      */
     public function testInitialSet()
     {
-        $method = $this->builder_reflection->getMethod('sql_set');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_set');
 
-        $property = $this->builder_reflection->getProperty('set');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array( array('column1' => 'value1')));
+        $method->invokeArgs($this->class, [[ 'column1' => 'value1' ]]);
 
         $string = 'SET column1 = value1';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('set', $string);
     }
 
     /**
      * Test specifying the SET part of a query incrementally.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testSetEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_set
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_set
      */
     public function testIncrementalSet()
     {
-        $method = $this->builder_reflection->getMethod('sql_set');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_set');
 
-        $property = $this->builder_reflection->getProperty('set');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array( array('column1' => 'value1')));
-        $method->invokeArgs($this->builder, array( array('column2' => 'value2')));
+        $method->invokeArgs($this->class, [[ 'column1' => 'value1' ]]);
+        $method->invokeArgs($this->class, [[ 'column2' => 'value2' ]]);
 
         $string = 'SET column1 = value1, column2 = value2';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('set', $string);
     }
 
     /**
      * Test specifying empty Values for a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testValuesEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
      */
     public function testUndefinedValuesQueryPart()
     {
-        $method = $this->builder_reflection->getMethod('sql_values');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_values');
 
-        $property = $this->builder_reflection->getProperty('values');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array(array()));
+        $method->invokeArgs($this->class, [ [] ]);
 
         $string = '';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('values', $string);
     }
 
     /**
      * Test specifying the Values part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testValuesEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
      */
     public function testInitialValuesQueryPart()
     {
-        $method = $this->builder_reflection->getMethod('sql_values');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_values');
 
-        $property = $this->builder_reflection->getProperty('values');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array(array('value1', 'value2', 'value3')));
+        $method->invokeArgs($this->class, [[ 'value1', 'value2', 'value3' ]]);
 
         $string = 'VALUES (value1, value2, value3)';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('values', $string);
     }
 
     /**
      * Test specifying the Values part of a query incrementally.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testValuesEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
      */
     public function testIncrementalValues()
     {
-        $method = $this->builder_reflection->getMethod('sql_values');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_values');
 
-        $property = $this->builder_reflection->getProperty('values');
-        $property->setAccessible(TRUE);
+        $method->invokeArgs($this->class, [[ 'value1', 'value2', 'value3' ]]);
 
-        $method->invokeArgs($this->builder, array(array('value1', 'value2', 'value3')));
+        $values   = [];
+        $values[] = [ 'value4', 'value5', 'value6' ];
+        $values[] = [ 'value7', 'value8', 'value9' ];
 
-        $values   = array();
-        $values[] = array('value4', 'value5', 'value6');
-        $values[] = array('value7', 'value8', 'value9');
-
-        $method->invokeArgs($this->builder, array($values));
+        $method->invokeArgs($this->class, [ $values ]);
 
         $string = 'VALUES (value1, value2, value3), (value4, value5, value6), (value7, value8, value9)';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('values', $string);
     }
 
     /**
      * Test specifying the column_names part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testColumnNamesEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_column_names
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_column_names
      */
     public function testInitialColumnNames()
     {
-        $method = $this->builder_reflection->getMethod('sql_column_names');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_column_names');
 
-        $property = $this->builder_reflection->getProperty('column_names');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array(array('column1', 'column2', 'column3')));
+        $method->invokeArgs($this->class, [[ 'column1', 'column2', 'column3' ]]);
 
         $string = '(column1, column2, column3)';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('column_names', $string);
     }
 
     /**
      * Test specifying the select_statement part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testSelectStatementEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_select_statement
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_select_statement
      */
     public function testInitialSelectStatement()
     {
-        $method = $this->builder_reflection->getMethod('sql_select_statement');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_select_statement');
 
-        $property = $this->builder_reflection->getProperty('select_statement');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array('SELECT * FROM table1'));
+        $method->invokeArgs($this->class, [ 'SELECT * FROM table1' ]);
 
         $string = 'SELECT * FROM table1';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('select_statement', $string);
     }
 
     /**
      * Test specifying the select_statement part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testSelectStatementEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_select_statement
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_select_statement
      */
     public function testInvalidSelectStatement()
     {
-        $method = $this->builder_reflection->getMethod('sql_select_statement');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_select_statement');
 
-        $property = $this->builder_reflection->getProperty('select_statement');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array('INSERT INTO table1'));
+        $method->invokeArgs($this->class, [ 'INSERT INTO table1' ]);
 
         $string = '';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('select_statement', $string);
     }
 
     /**
      * Test specifying the INTO part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testIntoEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_into
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_into
      */
     public function testInitialInto()
     {
-        $method = $this->builder_reflection->getMethod('sql_into');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_into');
 
-        $property = $this->builder_reflection->getProperty('into');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array('table1'));
+        $method->invokeArgs($this->class, [ 'table1' ]);
 
         $string = 'INTO table1';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('into', $string);
     }
 
     /**
      * Test specifying the INTO part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testIntoEmptyByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_into
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_into
      */
     public function testIncrementalInto()
     {
-        $method = $this->builder_reflection->getMethod('sql_into');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('sql_into');
 
-        $property = $this->builder_reflection->getProperty('into');
-        $property->setAccessible(TRUE);
-
-        $method->invokeArgs($this->builder, array('table1'));
-        $method->invokeArgs($this->builder, array('table2'));
+        $method->invokeArgs($this->class, [ 'table1' ]);
+        $method->invokeArgs($this->class, [ 'table2' ]);
 
         $string = 'INTO table2';
 
-        $this->assertEquals($string, $property->getValue($this->builder));
+        $this->assertPropertyEquals('into', $string);
     }
 
 }

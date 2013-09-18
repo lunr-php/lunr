@@ -61,7 +61,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the FROM part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testFromWithoutIndexHints
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsFromTest::testFromWithoutIndexHints
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::from
      */
     public function testFromWithoutIndexHints()
@@ -75,8 +75,8 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the FROM part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testFromWithSingleIndexHint
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testFromWithMultipleIndexHints
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsFromTest::testFromWithSingleIndexHint
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsFromTest::testFromWithMultipleIndexHints
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::from
      */
     public function testFromWithIndexHints()
@@ -104,7 +104,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the JOIN part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testJoinWithoutIndexHints
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsJoinTest::testJoinWithoutIndexHints
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::join
      */
     public function testJoinWithDefaultJoinType()
@@ -118,7 +118,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the JOIN part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testJoinWithoutIndexHints
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsJoinTest::testJoinWithoutIndexHints
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::join
      */
     public function testJoinWithNonDefaultJoinType()
@@ -132,7 +132,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the JOIN part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testJoinWithoutIndexHints
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsJoinTest::testJoinWithoutIndexHints
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::join
      */
     public function testJoinWithoutIndexHints()
@@ -146,8 +146,8 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the JOIN part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testJoinWithSingleIndexHint
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testJoinWithMultipleIndexHints
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsJoinTest::testJoinWithSingleIndexHint
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsJoinTest::testJoinWithMultipleIndexHints
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::join
      */
     public function testJoinWithIndexHints()
