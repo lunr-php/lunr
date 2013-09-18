@@ -88,7 +88,7 @@
             description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
         <exec executable="phpcs">
             <arg value="--standard=Lunr" />
-            <arg value="--ignore=html.*" />
+            <arg value="--ignore=*/html\..*" />
             <arg path="${system}" />
         </exec>
     </target>
@@ -99,7 +99,7 @@
             <arg value="--report=checkstyle" />
             <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
             <arg value="--standard=Lunr" />
-            <arg value="--ignore=html.*" />
+            <arg value="--ignore=*/html\..*" />
             <arg path="${system}" />
         </exec>
     </target>
