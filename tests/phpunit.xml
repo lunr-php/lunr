@@ -211,6 +211,9 @@
             <file>src/Lunr/Ticks/Tests/FileTimerStopTest.php</file>
         </testsuite>
         <testsuite name="Vortex">
+            <file>src/Lunr/Vortex/GCM/Tests/GCMPayloadBaseTest.php</file>
+            <file>src/Lunr/Vortex/GCM/Tests/GCMPayloadGetTest.php</file>
+            <file>src/Lunr/Vortex/GCM/Tests/GCMPayloadSetTest.php</file>
             <file>src/Lunr/Vortex/MPNS/Tests/MPNSPayloadTest.php</file>
             <file>src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadSetTest.php</file>
             <file>src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadGetTest.php</file>
