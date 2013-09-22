@@ -196,6 +196,7 @@
         </testsuite>
         <testsuite name="Spark">
             <file>src/Lunr/Spark/Tests/CentralAuthenticationStoreBaseTest.php</file>
+            <file>src/Lunr/Spark/Facebook/Tests/ApiBaseTest.php</file>
         </testsuite>
         <testsuite name="Spawn">
             <file>src/Lunr/Spawn/Tests/ResqueJobDispatcherBaseTest.php</file>
@@ -254,6 +255,7 @@
                 <directory>../src/Lunr/Network/Tests/</directory>
                 <directory>../src/Lunr/Shadow/Tests/</directory>
                 <directory>../src/Lunr/Spark/Tests/</directory>
+                <directory>../src/Lunr/Spark/Facebook/Tests/</directory>
                 <directory>../src/Lunr/Spawn/Tests/</directory>
                 <directory>../src/Lunr/Sphere/Tests/</directory>
                 <directory>../src/Lunr/Surface/Tests/</directory>
