@@ -38,14 +38,37 @@ abstract class ApiTest extends LunrBaseTest
     protected $cas;
 
     /**
+     * Mock instance of the Curl class.
+     * @var Curl
+     */
+    protected $curl;
+
+    /**
+     * Mock instance of the Logger class
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
+     * Mock instance of the CurlResponse class.
+     * @var CurlResponse
+     */
+    protected $response;
+
+    /**
      * Testcase Constructor.
      */
     public function setUp()
     {
-        $this->cas = $this->getMock('Lunr\Spark\CentralAuthenticationStore');
+        $this->cas      = $this->getMock('Lunr\Spark\CentralAuthenticationStore');
+        $this->curl     = $this->getMock('Lunr\Network\Curl');
+        $this->logger   = $this->getMock('Psr\Log\LoggerInterface');
+        $this->response = $this->getMockBuilder('Lunr\Network\CurlResponse')
+                               ->disableOriginalConstructor()
+                               ->getMock();
 
         $this->class = $this->getMockBuilder('Lunr\Spark\Facebook\Api')
-                            ->setConstructorArgs([ $this->cas ])
+                            ->setConstructorArgs([ $this->cas, $this->logger, $this->curl ])
                             ->getMockForAbstractClass();
 
         $this->reflection = new ReflectionClass('Lunr\Spark\Facebook\Api');
@@ -59,6 +82,9 @@ abstract class ApiTest extends LunrBaseTest
         unset($this->class);
         unset($this->reflection);
         unset($this->cas);
+        unset($this->curl);
+        unset($this->logger);
+        unset($this->response);
     }
 
     /**
@@ -89,6 +115,20 @@ abstract class ApiTest extends LunrBaseTest
         $keys[] = [ 'app_secret' ];
 
         return $keys;
+    }
+
+    /**
+     * Unit test data provider for get methods.
+     *
+     * @return array $methods Array of get methods
+     */
+    public function getMethodProvider()
+    {
+        $methods   = [];
+        $methods[] = [ 'get' ];
+        $methods[] = [ 'GET' ];
+
+        return $methods;
     }
 
 }

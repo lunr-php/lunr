@@ -32,6 +32,30 @@ class ApiBaseTest extends ApiTest
 {
 
     /**
+     * Test that the CentralAuthenticationStore class is passed correctly.
+     */
+    public function testCasIsSetCorrectly()
+    {
+        $this->assertPropertySame('cas', $this->cas);
+    }
+
+    /**
+     * Test that the Curl class is passed correctly.
+     */
+    public function testCurlIsSetCorrectly()
+    {
+        $this->assertPropertySame('curl', $this->curl);
+    }
+
+    /**
+     * Test that the Logger class is passed correctly.
+     */
+    public function testLoggerIsSetCorrectly()
+    {
+        $this->assertPropertySame('logger', $this->logger);
+    }
+
+    /**
      * Test that __get() gets existing credential values from the CAS.
      *
      * @param String $key Credential key

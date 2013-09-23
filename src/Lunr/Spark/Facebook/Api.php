@@ -33,13 +33,29 @@ abstract class Api
     protected $cas;
 
     /**
+     * Shared instance of a Logger class.
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
+     * Shared instance of the Curl class.
+     * @var Curl
+     */
+    protected $curl;
+
+    /**
      * Constructor.
      *
-     * @param CentralAuthenticationStore $cas Shared instance of the credentials store
+     * @param CentralAuthenticationStore $cas    Shared instance of the credentials store
+     * @param LoggerInterface            $logger Shared instance of a Logger class.
+     * @param Curl                       $curl   Shared instance of the Curl class.
      */
-    public function __construct($cas)
+    public function __construct($cas, $logger, $curl)
     {
-        $this->cas = $cas;
+        $this->cas    = $cas;
+        $this->logger = $logger;
+        $this->curl   = $curl;
     }
 
     /**
@@ -48,6 +64,8 @@ abstract class Api
     public function __destruct()
     {
         unset($this->cas);
+        unset($this->logger);
+        unset($this->curl);
     }
 
     /**
@@ -94,6 +112,48 @@ abstract class Api
             default:
                 break;
         }
+    }
+
+    /**
+     * Fetch and parse results as though they were a query string.
+     *
+     * @param String $url    API URL
+     * @param Array  $params Array of parameters for the API request
+     * @param String $method Request method to use, either 'get' or 'post'
+     *
+     * @return Array $parts Array of return values
+     */
+    protected function get_url_results($url, $params = [], $method = 'get')
+    {
+        $this->curl->set_option('CURLOPT_FAILONERROR', FALSE);
+
+        if (strtolower($method) === 'get')
+        {
+            $response = $this->curl->get_request($url . '?' . http_build_query($params));
+        }
+        else
+        {
+            $response = $this->curl->post_request($url, $params);
+        }
+
+        $parts = NULL;
+
+        if ($response->http_code !== 200)
+        {
+            $parts   = [];
+            $message = json_decode($response->get_result(), TRUE);
+            $error   = $message['error'];
+            $context = [ 'message' => $error['message'], 'code' => $error['code'], 'type' => $error['type'], 'request' => $url ];
+            $this->logger->error('Facebook API Request ({request}) failed, {type} ({code}): {message}', $context);
+        }
+        else
+        {
+            parse_str($response->get_result(), $parts);
+        }
+
+        unset($response);
+
+        return $parts;
     }
 
 }
