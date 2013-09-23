@@ -235,6 +235,9 @@
             <file>src/Lunr/Vortex/GCM/Tests/GCMPayloadBaseTest.php</file>
             <file>src/Lunr/Vortex/GCM/Tests/GCMPayloadGetTest.php</file>
             <file>src/Lunr/Vortex/GCM/Tests/GCMPayloadSetTest.php</file>
+            <file>src/Lunr/Vortex/GCM/Tests/GCMResponseErrorTest.php</file>
+            <file>src/Lunr/Vortex/GCM/Tests/GCMResponseSetTest.php</file>
+            <file>src/Lunr/Vortex/GCM/Tests/GCMResponseSuccessTest.php</file>
             <file>src/Lunr/Vortex/MPNS/Tests/MPNSPayloadTest.php</file>
             <file>src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadSetTest.php</file>
             <file>src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadGetTest.php</file>
@@ -273,6 +276,7 @@
                 <directory>../src/Lunr/Surface/Tests/</directory>
                 <directory>../src/Lunr/Ticks/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Tests/</directory>
+                <directory>../src/Lunr/Vortex/GCM/Tests/</directory>
                 <directory>../src/Lunr/Vortex/MPNS/Tests/</directory>
             </exclude>
         </whitelist>
