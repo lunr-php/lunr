@@ -60,6 +60,53 @@ class ConfigurationLoadFileTest extends ConfigurationTest
     }
 
     /**
+     * Test loading a correct config file.
+     *
+     * @runInSeparateProcess
+     *
+     * @depends Lunr\Core\Tests\ConfigurationArrayConstructorTest::testToArrayEqualsInput
+     */
+    public function testLoadFileOverwritesValues()
+    {
+        $property = $this->configuration_reflection->getProperty('config');
+        $property->setAccessible(TRUE);
+
+        $this->configuration->load_file('overwrite');
+
+        $config                   = array();
+        $config['test1']          = 'Value';
+        $config['test2']          = array();
+        $config['test2']['test3'] = 1;
+        $config['test2']['test4'] = FALSE;
+
+        $this->assertEquals($config, $this->configuration->toArray());
+    }
+
+    /**
+     * Test loading a correct config file.
+     *
+     * @runInSeparateProcess
+     *
+     * @depends Lunr\Core\Tests\ConfigurationArrayConstructorTest::testToArrayEqualsInput
+     */
+    public function testLoadFileMergesArrays()
+    {
+        $property = $this->configuration_reflection->getProperty('config');
+        $property->setAccessible(TRUE);
+
+        $this->configuration->load_file('merge');
+
+        $config                   = array();
+        $config['test1']          = 'String';
+        $config['test2']          = array();
+        $config['test2']['test3'] = 1;
+        $config['test2']['test4'] = FALSE;
+        $config['test2']['test5'] = 'Value';
+
+        $this->assertEquals($config, $this->configuration->toArray());
+    }
+
+    /**
      * Test loading an invalid config file.
      *
      * @runInSeparateProcess

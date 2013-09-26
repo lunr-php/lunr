@@ -131,13 +131,14 @@ class Configuration implements ArrayAccess, Iterator, Countable
      */
     public function load_file($identifier)
     {
-        $config = array();
+        $config = $this->config;
 
         include_once 'conf.' . $identifier . '.inc.php';
 
         if (!is_array($config))
         {
             $config = array();
+            return;
         }
 
         if (!empty($config))
@@ -145,7 +146,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
             $config = $this->convert_array_to_class($config);
         }
 
-        $this->config       = array_merge_recursive($this->config, $config);
+        $this->config       = $config;
         $this->size_invalid = TRUE;
     }
 
