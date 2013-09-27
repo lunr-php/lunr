@@ -121,6 +121,11 @@ class ConfigServiceLocator
      */
     protected function locate($id)
     {
+        if (is_string($id) === FALSE)
+        {
+            return NULL;
+        }
+
         if (isset($this->registry[$id]) && is_object($this->registry[$id]))
         {
             return $this->registry[$id];

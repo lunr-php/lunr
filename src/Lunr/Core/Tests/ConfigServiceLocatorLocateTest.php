@@ -103,6 +103,21 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
     }
 
     /**
+     * Test that locate() returns NULL for a non-string ID.
+     *
+     * @param mixed $id Invalid ID
+     *
+     * @dataProvider invalidIDProvider
+     * @covers       Lunr\Core\ConfigServiceLocator::locate
+     */
+    public function testLocateReturnsNullForNonStringID($id)
+    {
+        $method = $this->get_accessible_reflection_method('locate');
+
+        $this->assertNull($method->invokeArgs($this->class, [ $id ]));
+    }
+
+    /**
      * Test that __call() returns an instance from the registry.
      *
      * @covers Lunr\Core\ConfigServiceLocator::__call
