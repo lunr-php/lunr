@@ -90,6 +90,11 @@ abstract class CurlTest extends LunrBaseTest
      */
     public function setUp()
     {
+        if (extension_loaded('curl') === FALSE)
+        {
+            $this->markTestSkipped('Extension curl is required.');
+        }
+
         $this->reflection = new ReflectionClass('Lunr\Network\Curl');
         $this->class      = new Curl();
     }

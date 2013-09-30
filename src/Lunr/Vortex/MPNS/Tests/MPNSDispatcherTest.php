@@ -51,7 +51,10 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->curl   = $this->getMock('Lunr\Network\Curl');
+        $this->curl = $this->getMockBuilder('Lunr\Network\Curl')
+                           ->disableOriginalConstructor()
+                           ->getMock();
+
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->class = new MPNSDispatcher($this->curl, $this->logger);
