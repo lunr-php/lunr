@@ -32,9 +32,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() without context and singular value.
      *
-     * @depends Lunr\EnvironmentTest::testL10nFiles
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\EnvironmentTest::testL10nFiles
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangSingularWithoutContext()
     {
@@ -44,9 +45,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() without context and plural value.
      *
-     * @depends Lunr\EnvironmentTest::testL10nFiles
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\EnvironmentTest::testL10nFiles
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangPluralWithoutContext()
     {
@@ -56,8 +58,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() without context returns singular for untranslated singular string.
      *
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangSingularUntranslatedWithoutContextReturnsSingular()
     {
@@ -67,8 +70,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() without context returns plural for untranslated plural string.
      *
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangPluralUntranslatedWithoutContextReturnsPlural()
     {
@@ -78,9 +82,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with context and singular value.
      *
-     * @depends Lunr\EnvironmentTest::testL10nFiles
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\EnvironmentTest::testL10nFiles
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangSingularWithContext()
     {
@@ -90,9 +95,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with context and plural value.
      *
-     * @depends Lunr\EnvironmentTest::testL10nFiles
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\EnvironmentTest::testL10nFiles
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangPluralWithContext()
     {
@@ -102,8 +108,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with context returns singular for untranslated singular string.
      *
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangUntranslatedSingularWithContextReturnsSingular()
     {
@@ -113,8 +120,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with context returns plural for untranslated plural string.
      *
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangUntranslatedPluralWithContextReturnsPlural()
     {
@@ -124,8 +132,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with superfluous context and singular value.
      *
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangSingularWithSuperfluousContextReturnsSingular()
     {
@@ -135,8 +144,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with superfluous context and plural value.
      *
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangPluralWithSuperfluousContextReturnsPlural()
     {
@@ -146,8 +156,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with context missing and singular value.
      *
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangSingularWithContextMissingReturnsSingular()
     {
@@ -157,8 +168,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with context missing and singular value.
      *
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangPluralWithContextMissingReturnsPlural()
     {
@@ -168,9 +180,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with context missing and fake plural.
      *
-     * @depends Lunr\EnvironmentTest::testL10nFiles
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\EnvironmentTest::testL10nFiles
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangSingularWithoutContextAndFakePluralTranslatesSingular()
     {
@@ -180,9 +193,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with context missing and fake plural.
      *
-     * @depends Lunr\EnvironmentTest::testL10nFiles
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\EnvironmentTest::testL10nFiles
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangPluralWithoutContextAndFakePluralTranslatesSingular()
     {
@@ -192,8 +206,9 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with context missing and fake plural.
      *
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangPluralWithContextMissingAndFakePluralReturnsPlural()
     {
@@ -203,9 +218,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with context missing and fake plural.
      *
-     * @depends Lunr\EnvironmentTest::testL10nFiles
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\EnvironmentTest::testL10nFiles
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangSingularWithContextAndFakePluralTranslatesSingular()
     {
@@ -215,9 +231,10 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
     /**
      * Test nlang() with context missing and fake plural.
      *
-     * @depends Lunr\EnvironmentTest::testL10nFiles
-     * @depends Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
-     * @covers  Lunr\L10n\GettextL10nProvider::nlang
+     * @depends  Lunr\EnvironmentTest::testL10nFiles
+     * @depends  Lunr\L10n\Tests\GettextL10nProviderBaseTest::testInit
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
     public function testNlangPluralWithContextAndFakePluralTranslatesSingular()
     {

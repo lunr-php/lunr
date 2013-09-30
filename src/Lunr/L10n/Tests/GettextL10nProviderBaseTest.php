@@ -34,7 +34,8 @@ class GettextL10nProviderBaseTest extends GettextL10nProviderTest
      *
      * @runInSeparateProcess
      *
-     * @covers Lunr\L10n\GettextL10nProvider::init
+     * @requires extension gettext
+     * @covers   Lunr\L10n\GettextL10nProvider::init
      */
     public function testInit()
     {
