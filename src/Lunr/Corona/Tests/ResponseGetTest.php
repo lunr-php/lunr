@@ -178,6 +178,34 @@ class ResponseGetTest extends ResponseTest
         $this->assertSame(500, $this->class->get_return_code());
     }
 
+    /**
+     * Test getting identifier of the highest return code.
+     *
+     * @covers Lunr\Corona\Response::get_return_code_identifiers
+     */
+    public function testGetMaximumReturnCodeIdentifier()
+    {
+        $data = ['controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
+
+        $this->set_reflection_property_value('return_code', $data);
+
+        $this->assertEquals('ID3', $this->class->get_return_code_identifiers(TRUE));
+    }
+
+    /**
+     * Test getting all return code identifiers.
+     *
+     * @covers Lunr\Corona\Response::get_return_code_identifiers
+     */
+    public function testGetAllReturnCodeIdentifiers()
+    {
+        $data = ['controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
+
+        $this->set_reflection_property_value('return_code', $data);
+
+        $this->assertSame([ 'controller/method', 'ID', 'ID3' ], $this->class->get_return_code_identifiers());
+    }
+
 }
 
 ?>

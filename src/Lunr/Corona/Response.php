@@ -236,6 +236,18 @@ class Response
         return isset($this->return_code[$identifier]) ? $this->return_code[$identifier] : NULL;
     }
 
+    /**
+     * Get the set of return code identifiers.
+     *
+     * @param Boolean $max Only return the identifier of the highest error code (FALSE by default)
+     *
+     * @return string|array $return Requested set of identifiers.
+     */
+    public function get_return_code_identifiers($max = FALSE)
+    {
+        return $max ? array_search(max($this->return_code), $this->return_code) : array_keys($this->return_code);
+    }
+
 }
 
 ?>
