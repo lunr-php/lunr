@@ -81,10 +81,12 @@ abstract class RequestTest extends LunrBaseTest
      */
     public function setUpRunkit()
     {
-        if (function_exists('runkit_function_redefine'))
+        if (extension_loaded('runkit') === FALSE)
         {
-            runkit_function_redefine('gethostname', '', self::GET_HOSTNAME);
+            $this->markTestSkipped('Extension runkit is required.');
         }
+
+        runkit_function_redefine('gethostname', '', self::GET_HOSTNAME);
 
         $this->setUpFilled();
     }

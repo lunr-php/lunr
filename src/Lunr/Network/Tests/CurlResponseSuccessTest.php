@@ -37,8 +37,6 @@ class CurlResponseSuccessTest extends CurlResponseTest
 
     /**
      * Test that error_number is 10 by default.
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
      */
     public function testErrorNumberIsTen()
     {
@@ -47,8 +45,6 @@ class CurlResponseSuccessTest extends CurlResponseTest
 
     /**
      * Test that errmsg is an empty string by default.
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
      */
     public function testErrorMessageIsString()
     {
@@ -57,8 +53,6 @@ class CurlResponseSuccessTest extends CurlResponseTest
 
     /**
      * Test that info is an empty array by default.
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
      */
     public function testInfoIsEmptyArray()
     {
@@ -67,8 +61,6 @@ class CurlResponseSuccessTest extends CurlResponseTest
 
     /**
      * Test that result is NULL by default.
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
      */
     public function testResultIsValue()
     {
@@ -78,8 +70,7 @@ class CurlResponseSuccessTest extends CurlResponseTest
     /**
      * Test getting the result.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\CurlResponse::get_result
+     * @covers Lunr\Network\CurlResponse::get_result
      */
     public function testGetResult()
     {

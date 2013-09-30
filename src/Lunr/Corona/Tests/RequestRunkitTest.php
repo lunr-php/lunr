@@ -39,8 +39,6 @@ class RequestRunkitTest extends RequestTest
      * Test that the hostname is stored correctly in the constructor.
      *
      * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
      */
     public function testHostnameIsSet()
     {
@@ -54,8 +52,6 @@ class RequestRunkitTest extends RequestTest
      * Test that the hostname value is returned correctly by the magic get method.
      *
      * @runInSeparateProcess
-     *
-     * @depends Lunr\EnvironmentTest::testRunkit
      */
     public function testGetHostname()
     {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the SessionClassBaseTest class.
+ * This file contains the SessionBaseTest class.
  *
  * PHP Version 5.4
  *
@@ -24,7 +24,7 @@ namespace Lunr\Sphere\Tests;
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @covers     Lunr\Sphere\Session
  */
-class SessionClassBaseTest extends SessionTest
+class SessionBaseTest extends SessionTest
 {
 
     /**
@@ -343,8 +343,8 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that get_session_id works properly.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Sphere\Session::get_session_id
+     * @requires extension runkit
+     * @covers   Lunr\Sphere\Session::get_session_id
      */
     public function testGetSessionId()
     {
@@ -356,8 +356,8 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that get_new_session_id works properly.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Sphere\Session::get_new_session_id
+     * @requires extension runkit
+     * @covers   Lunr\Sphere\Session::get_new_session_id
      */
     public function testGetNewSessionId()
     {
@@ -376,8 +376,8 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that start works properly.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Sphere\Session::start
+     * @requires extension runkit
+     * @covers   Lunr\Sphere\Session::start
      */
     public function testStart()
     {
@@ -420,8 +420,8 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that start works properly setting an id.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Sphere\Session::start
+     * @requires extension runkit
+     * @covers   Lunr\Sphere\Session::start
      */
     public function testStartSetsId()
     {
@@ -446,8 +446,8 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that destroy works properly when started.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Sphere\Session::destroy
+     * @requires extension runkit
+     * @covers   Lunr\Sphere\Session::destroy
      */
     public function testDestroyWorksWhenStarted()
     {
@@ -487,8 +487,8 @@ class SessionClassBaseTest extends SessionTest
     /**
      * Test that close.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Sphere\Session::close
+     * @requires extension runkit
+     * @covers   Lunr\Sphere\Session::close
      */
     public function testCloseSetsParameters()
     {

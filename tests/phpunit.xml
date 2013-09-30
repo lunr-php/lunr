@@ -12,11 +12,7 @@
         <ini name="zend.enable_gc" value="0" />
     </php>
     <testsuites>
-        <testsuite name="Environment Tests">
-            <file>tests/system/EnvironmentTest.php</file>
-        </testsuite>
         <testsuite name="Core">
-            <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/Core/Tests/AutoloaderTest.php</file>
             <file>src/Lunr/Core/Tests/DateTimeBaseTest.php</file>
             <file>src/Lunr/Core/Tests/DateTimeGetDateTimeTest.php</file>
@@ -40,7 +36,6 @@
             <file>src/Lunr/Core/Tests/ConfigServiceLocatorLocateTest.php</file>
         </testsuite>
         <testsuite name="Corona">
-            <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/Corona/Tests/ControllerBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/ControllerResultTest.php</file>
             <file>src/Lunr/Corona/Tests/ErrorEnumTraitTest.php</file>
@@ -165,7 +160,6 @@
             <file>src/Lunr/L10n/Tests/PHPL10nProviderNlangTest.php</file>
         </testsuite>
         <testsuite name="Network">
-            <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/Network/Tests/NetworkErrorTraitTest.php</file>
             <file>src/Lunr/Network/Tests/CurlBaseTest.php</file>
             <file>src/Lunr/Network/Tests/CurlSetGetTest.php</file>
@@ -186,7 +180,6 @@
             <file>src/Lunr/Network/Tests/MailSendTest.php</file>
         </testsuite>
         <testsuite name="Shadow">
-            <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/Shadow/Tests/ConsoleTest.php</file>
             <file>src/Lunr/Shadow/Tests/LunrCliParserBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/LunrCliParserCheckArgumentTest.php</file>
@@ -205,7 +198,6 @@
             <file>src/Lunr/Spawn/Tests/ResqueJobDispatcherBaseTest.php</file>
         </testsuite>
         <testsuite name="Sphere">
-            <file>tests/system/EnvironmentTest.php</file>
             <file>src/Lunr/Sphere/Tests/SessionBaseTest.php</file>
             <file>src/Lunr/Sphere/Tests/DatabaseSessionHandlerBaseTest.php</file>
             <file>src/Lunr/Sphere/Tests/SessionDAOBaseTest.php</file>

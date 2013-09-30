@@ -36,8 +36,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::execute
+     * @requires extension runkit
+     * @covers   Lunr\Network\Curl::execute
      */
     public function testExecuteResetsHeaders()
     {
@@ -64,8 +64,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::execute
+     * @requires extension runkit
+     * @covers   Lunr\Network\Curl::execute
      */
     public function testExecuteDoesNotSetHeaderOptionIfHeadersEmpty()
     {
@@ -100,8 +100,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::execute
+     * @requires extension runkit
+     * @covers   Lunr\Network\Curl::execute
      */
     public function testExecuteReturnsResponseObjectOnSuccess()
     {
@@ -124,8 +124,8 @@ class CurlExecuteTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\Curl::execute
+     * @requires extension runkit
+     * @covers   Lunr\Network\Curl::execute
      */
     public function testExecuteReturnsResponseObjectOnError()
     {

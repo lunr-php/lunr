@@ -31,14 +31,6 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase
 {
 
     /**
-     * Test whether we have the runkit_function_redefine method available.
-     */
-    public function testRunkit()
-    {
-        $this->assertTrue(function_exists('runkit_function_redefine'));
-    }
-
-    /**
      * Test whether we have language files available.
      */
     public function testL10nFiles()

@@ -33,8 +33,8 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that changed() method returns TRUE if the stream can be read.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocket::changed
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::changed
      */
     public function testChangedReturnsTrueOnReadWatchOfTheStreamIfChanged()
     {
@@ -58,8 +58,8 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that changed() method returns FALSE if the stream cannot be read.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocket::changed
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::changed
      */
     public function testChangedReturnsFalseOnReadWatchOfTheStreamIfNotChanged()
     {
@@ -83,8 +83,8 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that changed() returns NULL if error occurs while watching read availability of the stream.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocket::changed
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::changed
      */
     public function testChangedReturnsNullOnReadWatchOfTheStreamIfError()
     {
@@ -108,8 +108,8 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that changed() method returns TRUE if the stream can be written.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocket::changed
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::changed
      */
     public function testChangedReturnsTrueOnWriteWatchOfTheStreamIfChanged()
     {
@@ -133,8 +133,8 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that changed() method returns FALSE if the stream cannot be written.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocket::changed
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::changed
      */
     public function testChangedReturnsFalseOnWriteWatchOfTheStreamIfNotChanged()
     {
@@ -158,8 +158,8 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that changed() returns NULL if error occurs while watching write availability of the stream.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocket::changed
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::changed
      */
     public function testChangedReturnsNullOnWriteWatchOfTheStreamIfError()
     {
@@ -183,8 +183,8 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that changed() method returns TRUE if the stream has thrown an exception.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocket::changed
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::changed
      */
     public function testChangedReturnsTrueOnExceptionWatchOfTheStreamIfChanged()
     {
@@ -208,8 +208,8 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that changed() method returns FALSE if the stream has not thrown an exception.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocket::changed
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::changed
      */
     public function testChangedReturnsFalseOnExceptionWatchOfTheStreamIfNotChanged()
     {
@@ -233,8 +233,8 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that changed() returns NULL if error occurs while watching exception purpose of the stream.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocket::changed
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::changed
      */
     public function testChangedReturnsNullOnexceptionWatchOfTheStreamIfError()
     {
@@ -278,9 +278,9 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that is_ready_to_read() returns TRUE if the stream can be read.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsTrueOnReadWatchOfTheStreamIfChanged
-     * @covers  Lunr\Network\StreamSocket::is_ready_to_read
+     * @depends  Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsTrueOnReadWatchOfTheStreamIfChanged
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::is_ready_to_read
      */
     public function testIsReadyToReadReturnsTrueIfStreamChanged()
     {
@@ -304,9 +304,9 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that is_ready_to_read() method returns FALSE if the stream cannot be read.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsFalseOnReadWatchOfTheStreamIfNotChanged
-     * @covers  Lunr\Network\StreamSocket::is_ready_to_read
+     * @depends  Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsFalseOnReadWatchOfTheStreamIfNotChanged
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::is_ready_to_read
      */
     public function testIsReadyToReadReturnsFalseIfStreamNotChanged()
     {
@@ -330,9 +330,9 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that is_ready_to_read() returns NULL if error occurs while watching read availability of the stream.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsNullOnReadWatchOfTheStreamIfError
-     * @covers  Lunr\Network\StreamSocket::is_ready_to_read
+     * @depends  Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsNullOnReadWatchOfTheStreamIfError
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::is_ready_to_read
      */
     public function testIsReadyToReadReturnsNullIfError()
     {
@@ -356,9 +356,9 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that is_ready_to_write() method returns TRUE if the stream can be written.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsTrueOnWriteWatchOfTheStreamIfChanged
-     * @covers  Lunr\Network\StreamSocket::is_ready_to_write
+     * @depends  Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsTrueOnWriteWatchOfTheStreamIfChanged
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::is_ready_to_write
      */
     public function testIsReadyToWriteReturnsTrueIfStreamChanged()
     {
@@ -382,9 +382,9 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that is_ready_to_write() method returns FALSE if the stream cannot be written.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsFalseOnWriteWatchOfTheStreamIfNotChanged
-     * @covers  Lunr\Network\StreamSocket::is_ready_to_write
+     * @depends  Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsFalseOnWriteWatchOfTheStreamIfNotChanged
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::is_ready_to_write
      */
     public function testIsReadyToWriteReturnsFalseIfStreamNotChanged()
     {
@@ -408,9 +408,9 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that is_ready_to_write() returns NULL if error occurs while watching write availability of the stream.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsNullOnWriteWatchOfTheStreamIfError
-     * @covers  Lunr\Network\StreamSocket::is_ready_to_write
+     * @depends  Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsNullOnWriteWatchOfTheStreamIfError
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::is_ready_to_write
      */
     public function testIsReadyToWriteReturnsNullIfError()
     {
@@ -434,9 +434,9 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that is_ready_to_read_exceptional_data() returns TRUE if the stream has thrown an exception.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsTrueOnExceptionWatchOfTheStreamIfChanged
-     * @covers  Lunr\Network\StreamSocket::is_ready_to_read_exceptional_data
+     * @depends  Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsTrueOnExceptionWatchOfTheStreamIfChanged
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::is_ready_to_read_exceptional_data
      */
     public function testIsReadyToreadExceptionnalDataReturnsTrueIfStreamChanged()
     {
@@ -460,9 +460,9 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that is_ready_to_read_exceptional_data() returns FALSE if the stream has not exceptional data.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsFalseOnExceptionWatchOfTheStreamIfNotChanged
-     * @covers  Lunr\Network\StreamSocket::is_ready_to_read_exceptional_data
+     * @depends  Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsFalseOnExceptionWatchOfTheStreamIfNotChanged
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::is_ready_to_read_exceptional_data
      */
     public function testIsReadyToreadExceptionnalDataReturnsFalseIfStreamNotChanged()
     {
@@ -486,9 +486,9 @@ class StreamSocketStateTest extends StreamSocketTest
     /**
      * Tests that is_ready_to_read_exceptional_data() returns NULL if error occurs.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsNullOnexceptionWatchOfTheStreamIfError
-     * @covers  Lunr\Network\StreamSocket::is_ready_to_read_exceptional_data
+     * @depends  Lunr\Network\Tests\StreamSocketStateTest::testChangedReturnsNullOnexceptionWatchOfTheStreamIfError
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocket::is_ready_to_read_exceptional_data
      */
     public function testIsReadyToreadExceptionnalDataReturnsNullIfError()
     {

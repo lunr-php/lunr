@@ -56,6 +56,11 @@ abstract class CurlResponseTest extends LunrBaseTest
      */
     public function setUpSuccess()
     {
+        if (extension_loaded('runkit') === FALSE)
+        {
+            $this->markTestSkipped('Extension runkit is required.');
+        }
+
         runkit_function_redefine('curl_errno', '', self::CURL_RETURN_ERRNO);
         runkit_function_redefine('curl_error', '', self::CURL_RETURN_ERRMSG);
         runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_INFO);

@@ -91,7 +91,6 @@ class CliRequestBaseTest extends CliRequestTest
      * @param String $request_key The request key to test.
      * @param String $value       The configuration key to match.
      *
-     * @depends      Lunr\EnvironmentTest::testRunkit
      * @dataProvider requestValueProvider
      * @covers       Lunr\Shadow\CliRequest::store_default
      */

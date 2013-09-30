@@ -64,8 +64,8 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
     /**
      * Test that parse() returns an empty array on error.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Shadow\GetoptCliParser::parse
+     * @requires extension runkit
+     * @covers   Lunr\Shadow\GetoptCliParser::parse
      */
     public function testParseReturnsEmptyArrayOnError()
     {
@@ -80,8 +80,8 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
     /**
      * Test that parse() sets error to TRUE on error.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Shadow\GetoptCliParser::parse
+     * @requires extension runkit
+     * @covers   Lunr\Shadow\GetoptCliParser::parse
      */
     public function testParseSetsErrorTrueOnError()
     {
@@ -100,8 +100,8 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
     /**
      * Test that parse() returns an ast array on success.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Shadow\GetoptCliParser::parse
+     * @requires extension runkit
+     * @covers   Lunr\Shadow\GetoptCliParser::parse
      */
     public function testParseReturnsAstOnSuccess()
     {

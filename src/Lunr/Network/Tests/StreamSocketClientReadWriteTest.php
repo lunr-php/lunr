@@ -33,8 +33,8 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
     /**
      * Tests that read() returns a string on success.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocketClient::read
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocketClient::read
      */
     public function testReadReturnsStringOnSuccess()
     {
@@ -54,8 +54,8 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
      *
      * @runInSeparateProcess
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocketClient::read
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocketClient::read
      */
     public function testReadReturnsStringWithNoLengthSupplied()
     {
@@ -75,8 +75,8 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
      *
      * @runInSeparateProcess
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocketClient::read
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocketClient::read
      */
     public function testReadReturnsStringWithZeroLengthSupplied()
     {
@@ -96,8 +96,8 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
      *
      * @runInSeparateProcess
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocketClient::read
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocketClient::read
      */
     public function testReadReturnsFalseOnError()
     {
@@ -117,8 +117,8 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
      *
      * @runInSeparateProcess
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocketClient::read
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocketClient::read
      */
     public function testReadOpensHandle()
     {
@@ -143,8 +143,8 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
     /**
      * Tests that read() returns FALSE if cannot open stream.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocketClient::read
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocketClient::read
      */
     public function testReadReturnsFalseIfCannotOpenStream()
     {
@@ -163,8 +163,8 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
      *
      * @runInSeparateProcess
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocketClient::write
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocketClient::write
      */
     public function testWriteReturnsIntOnSuccess()
     {
@@ -182,8 +182,8 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
      *
      * @runInSeparateProcess
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocketClient::write
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocketClient::write
      */
     public function testWriteReturnsFalseOnError()
     {
@@ -203,8 +203,8 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
      *
      * @runInSeparateProcess
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocketClient::write
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocketClient::write
      */
     public function testWriteOpensHandle()
     {
@@ -229,8 +229,8 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
     /**
      * Tests that write() returns FALSE if cannot open stream.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @covers  Lunr\Network\StreamSocketClient::write
+     * @requires extension runkit
+     * @covers   Lunr\Network\StreamSocketClient::write
      */
     public function testWriteReturnsFalseIfCannotOpenStream()
     {

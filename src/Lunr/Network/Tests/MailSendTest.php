@@ -328,11 +328,11 @@ class MailSendTest extends MailTest
     /**
      * Test that send returns FALSE when sending fails.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\MailSetTest::testSetSubject
-     * @depends Lunr\Network\Tests\MailSetTest::testAddValidEmailAsTo
-     * @depends Lunr\Network\Tests\MailSetTest::testSetValidEmailAsFrom
-     * @covers  Lunr\Network\Mail::send
+     * @depends  Lunr\Network\Tests\MailSetTest::testSetSubject
+     * @depends  Lunr\Network\Tests\MailSetTest::testAddValidEmailAsTo
+     * @depends  Lunr\Network\Tests\MailSetTest::testSetValidEmailAsFrom
+     * @requires extension runkit
+     * @covers   Lunr\Network\Mail::send
      */
     public function testSendReturnsFalseWhenSendingFails()
     {
@@ -348,11 +348,11 @@ class MailSendTest extends MailTest
     /**
      * Test that send returns TRUE when sending works.
      *
-     * @depends Lunr\EnvironmentTest::testRunkit
-     * @depends Lunr\Network\Tests\MailSetTest::testSetSubject
-     * @depends Lunr\Network\Tests\MailSetTest::testAddValidEmailAsTo
-     * @depends Lunr\Network\Tests\MailSetTest::testSetValidEmailAsFrom
-     * @covers  Lunr\Network\Mail::send
+     * @depends  Lunr\Network\Tests\MailSetTest::testSetSubject
+     * @depends  Lunr\Network\Tests\MailSetTest::testAddValidEmailAsTo
+     * @depends  Lunr\Network\Tests\MailSetTest::testSetValidEmailAsFrom
+     * @requires extension runkit
+     * @covers   Lunr\Network\Mail::send
      */
     public function testSendReturnsTrueWhenSendingSucceeds()
     {
