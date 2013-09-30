@@ -109,6 +109,24 @@ class RequestStoreCookieTest extends RequestTest
         $this->assertArrayEmpty($_COOKIE);
     }
 
+    /**
+     * Test that $_COOKIE has only PHPSESSID after storing.
+     *
+     * @covers Lunr\Corona\Request::store_cookie
+     */
+    public function testSuperglobalCookieWithPHPSESSIDSet()
+    {
+        $_COOKIE['test1']     = 'value1';
+        $_COOKIE['test2']     = 'value2';
+        $_COOKIE['PHPSESSID'] = 'value3';
+
+        $method = $this->get_accessible_reflection_method('store_cookie');
+        $method->invoke($this->class);
+
+        $this->assertCount(1, $_COOKIE);
+        $this->assertArrayHasKey('PHPSESSID', $_COOKIE);
+    }
+
 }
 
 ?>

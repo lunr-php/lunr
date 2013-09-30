@@ -116,7 +116,8 @@ abstract class RequestTest extends LunrBaseTest
         $_GET['param1']     = 'param1';
         $_GET['param2']     = 'param2';
 
-        $_COOKIE = array_flip($enums);
+        $_COOKIE              = array_flip($enums);
+        $_COOKIE['PHPSESSID'] = 'value';
 
         $_SERVER = $this->setup_server_superglobal();
 

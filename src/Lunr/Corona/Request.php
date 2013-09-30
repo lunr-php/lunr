@@ -286,6 +286,11 @@ class Request implements RequestInterface
             return;
         }
 
+        if(isset($_COOKIE['PHPSESSID']))
+        {
+            $session_id = $_COOKIE['PHPSESSID'];
+        }
+
         foreach ($_COOKIE as $key => $value)
         {
             $this->cookie[$key] = $value;
@@ -293,6 +298,11 @@ class Request implements RequestInterface
 
         //reset global COOKIE array
         $_COOKIE = [];
+
+        if(isset($session_id))
+        {
+            $_COOKIE['PHPSESSID'] = $session_id;
+        }
     }
 
     /**
