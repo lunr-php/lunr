@@ -136,7 +136,8 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that log() returns a PHP Warning if xdebug is installed.
      *
-     * @covers Lunr\Feedback\FileLogger::log
+     * @requires extension xdebug
+     * @covers   Lunr\Feedback\FileLogger::log
      */
     public function testLogThrowsErrorIfXdebugIsPresent()
     {
@@ -152,8 +153,9 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that log() logs correctly to a file.
      *
-     * @depends testLogThrowsErrorIfXdebugIsPresent
-     * @covers  Lunr\Feedback\FileLogger::log
+     * @depends  testLogThrowsErrorIfXdebugIsPresent
+     * @requires extension xdebug
+     * @covers   Lunr\Feedback\FileLogger::log
      */
     public function testLogPutsMessageInFile()
     {
@@ -170,8 +172,9 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
     /**
      * Test that log() returns a string when an object is passed as message.
      *
-     * @depends testLogThrowsErrorIfXdebugIsPresent
-     * @covers  Lunr\Feedback\PHPLogger::log
+     * @depends  testLogThrowsErrorIfXdebugIsPresent
+     * @requires extension xdebug
+     * @covers   Lunr\Feedback\PHPLogger::log
      */
     public function testLogReturnsStringWhenObjectPassedAsMessage()
     {
