@@ -204,6 +204,9 @@
             <file>src/Lunr/Spark/Facebook/Tests/AuthenticationApiTest.php</file>
             <file>src/Lunr/Spark/Facebook/Tests/UserBaseTest.php</file>
             <file>src/Lunr/Spark/Facebook/Tests/UserPermissionsTest.php</file>
+            <file>src/Lunr/Spark/Facebook/Tests/UserProfileBaseTest.php</file>
+            <file>src/Lunr/Spark/Facebook/Tests/UserProfileGetDataTest.php</file>
+            <file>src/Lunr/Spark/Facebook/Tests/UserProfileGetProfileDataTest.php</file>
         </testsuite>
         <testsuite name="Spawn">
             <file>src/Lunr/Spawn/Tests/ResqueJobDispatcherBaseTest.php</file>

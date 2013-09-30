@@ -1,0 +1,259 @@
+<?php
+
+/**
+ * This file contains User Profile support for Facebook.
+ *
+ * PHP Version 5.4
+ *
+ * @category   Libraries
+ * @package    Spark
+ * @subpackage Facebook
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
+ * @license    http://lunr.nl/LICENSE MIT License
+ */
+
+namespace Lunr\Spark\Facebook;
+
+use Lunr\Spark\DataError;
+
+/**
+ * Facebook User Profile Support for Spark
+ *
+ * @category   Libraries
+ * @package    Spark
+ * @subpackage Facebook
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ */
+class UserProfile extends User
+{
+
+    /**
+     * Requested fields of the profile.
+     * @var Array
+     */
+    protected $fields;
+
+    /**
+     * User profile data.
+     * @var Array
+     */
+    protected $data;
+
+    /**
+     * Boolean flag whether an access token was used for retrieving profile data.
+     * @var Boolean
+     */
+    protected $used_access_token;
+
+    /**
+     * Constructor.
+     *
+     * @param CentralAuthenticationStore $cas    Shared instance of the CentralAuthenticationStore class.
+     * @param LoggerInterface            $logger Shared instance of a Logger class.
+     * @param Curl                       $curl   Shared instance of the Curl class.
+     */
+    public function __construct($cas, $logger, $curl)
+    {
+        parent::__construct($cas, $logger, $curl);
+
+        $this->data              = [];
+        $this->fields            = [];
+        $this->used_access_token = FALSE;
+    }
+
+    /**
+     * Destructor.
+     */
+    public function __destruct()
+    {
+        unset($this->data);
+        unset($this->fields);
+        unset($this->used_access_token);
+
+        parent::__destruct();
+    }
+
+    /**
+     * Retrieve user profile info.
+     *
+     * @param String $name      Name of the field to get
+     * @param Array  $arguments Arguments passed on call (Ignored)
+     *
+     * @return mixed $value Field value
+     */
+    public function __call($name, $arguments)
+    {
+        $item = str_replace('get_', '', $name);
+
+        if (!empty($this->fields) && !in_array($item, $this->fields))
+        {
+            return DataError::NOT_REQUESTED;
+        }
+
+        $permission = '';
+
+        switch ($item)
+        {
+            case 'id':
+            case 'name':
+            case 'first_name':
+            case 'middle_name':
+            case 'last_name':
+            case 'gender':
+            case 'locale':
+            case 'link':
+            case 'username':
+                return isset($this->data[$item]) ? $this->data[$item] : DataError::NOT_AVAILABLE;
+            case 'age_range':
+            case 'third_party_id':
+            case 'updated_time':
+            case 'timezone':
+            case 'installed':
+            case 'verified':
+            case 'currency':
+            case 'cover':
+            case 'devices':
+            case 'payment_pricepoints':
+            case 'payment_mobile_pricepoints':
+            case 'video_upload_limits':
+                if ($this->used_access_token === FALSE)
+                {
+                    $context = [ 'field' => $item ];
+                    $this->logger->warning('Access to "{field}" requires an access token.', $context);
+
+                    return DataError::ACCESS_DENIED;
+                }
+
+                return isset($this->data[$item]) ? $this->data[$item] : DataError::NOT_AVAILABLE;
+            case 'security_settings':
+                if ($this->profile_id !== 'me')
+                {
+                    $context = [ 'field' => $item ];
+                    $this->logger->warning('Access to "{field}" only allowed for current user.', $context);
+
+                    return DataError::ACCESS_DENIED;
+                }
+
+            case 'picture':
+                if (empty($this->fields))
+                {
+                    $context = [ 'field' => $item ];
+                    $this->logger->warning('Access to "{field}" needs to be requested specifically.', $context);
+
+                    return DataError::NOT_REQUESTED;
+                }
+
+                return isset($this->data[$item]) ? $this->data[$item] : DataError::NOT_AVAILABLE;
+            case 'languages':
+                $permission = [ 'user_likes' ];
+                break;
+            case 'bio':
+            case 'quotes':
+                $permission = [ 'user_about_me', 'friends_about_me' ];
+                break;
+            case 'birthday':
+                $permission = [ 'user_birthday', 'friends_birthday' ];
+                break;
+            case 'education':
+                $permission = [ 'user_education_history', 'friends_education_history' ];
+                break;
+            case 'email':
+                $permission = [ 'email' ];
+                break;
+            case 'hometown':
+                $permission = [ 'user_hometown', 'friends_hometown' ];
+                break;
+            case 'interested_in':
+                $permission = [ 'user_relationship_details', 'friends_relationship_details' ];
+                break;
+            case 'location':
+                $permission = [ 'user_location', 'friends_location' ];
+                break;
+            case 'political':
+            case 'religion':
+                $permission = [ 'user_religion_politics', 'friends_religion_politics' ];
+                break;
+            case 'favorite_athletes':
+            case 'favorite_teams':
+                $permission = [ 'user_likes', 'friends_likes' ];
+                break;
+            case 'relationship_status':
+            case 'significant_other':
+                $permission = [ 'user_relationships', 'friends_relationships' ];
+                break;
+            case 'website':
+                $permission = [ 'user_website', 'friends_website' ];
+                break;
+            case 'work':
+                $permission = [ 'user_work_history', 'friends_work_history' ];
+                break;
+            default:
+                return DataError::UNKNOWN_FIELD;
+        }
+
+        if ($this->is_permission_granted($permission) === FALSE)
+        {
+            $context = [ 'field' => $item, 'permission' => implode(' or ', $permission) ];
+            $this->logger->warning('Access to "{field}" requires "{permission}" permission.', $context);
+
+            return DataError::ACCESS_DENIED;
+        }
+
+        return isset($this->data[$item]) ? $this->data[$item] : DataError::NOT_AVAILABLE;
+    }
+
+    /**
+     * Fetch the user profile information from Facebook.
+     *
+     * @return void
+     */
+    public function get_data()
+    {
+        if ($this->access_token !== NULL)
+        {
+            $params = [
+                'access_token' => $this->access_token,
+                'appsecret_proof' => $this->app_secret_proof
+            ];
+
+            $this->used_access_token = TRUE;
+        }
+        else
+        {
+            $params                  = [];
+            $this->used_access_token = FALSE;
+        }
+
+        if (empty($this->fields) === FALSE)
+        {
+            $params['fields'] = implode(',', $this->fields);
+        }
+
+        $url = Domain::GRAPH . $this->profile_id;
+
+        $this->data = $this->get_json_results($url, $params);
+
+        $this->get_permissions();
+    }
+
+    /**
+     * Specify the user profile fields that should be retrieved.
+     *
+     * @param Array $fields Fields to retrieve
+     *
+     * @return void
+     */
+    public function set_fields($fields)
+    {
+        if (is_array($fields) === FALSE)
+        {
+            return;
+        }
+
+        $this->fields = $fields;
+    }
+
+}
+
+?>
