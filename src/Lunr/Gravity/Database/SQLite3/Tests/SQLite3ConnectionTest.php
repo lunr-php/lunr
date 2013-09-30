@@ -59,6 +59,11 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
      */
     public function emptySetUp()
     {
+        if (extension_loaded('sqlite3') === FALSE)
+        {
+            $this->markTestSkipped('Extension sqlite3 is required.');
+        }
+
         $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
 
         $this->configuration = $this->getMock('Lunr\Core\Configuration');
@@ -85,6 +90,11 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
      */
     public function setUp()
     {
+        if (extension_loaded('sqlite3') === FALSE)
+        {
+            $this->markTestSkipped('Extension sqlite3 is required.');
+        }
+
         $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
 
         $this->configuration = $this->getMock('Lunr\Core\Configuration');

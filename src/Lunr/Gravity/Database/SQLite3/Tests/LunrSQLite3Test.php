@@ -36,7 +36,10 @@ class LunrSQLite3Test extends LunrBaseTest
      */
     public function setUp()
     {
-        parent::setUp();
+        if (extension_loaded('sqlite3') === FALSE)
+        {
+            $this->markTestSkipped('Extension sqlite3 is required.');
+        }
 
         $this->class      = new LunrSQLite3();
         $this->reflection = new ReflectionClass('Lunr\Gravity\Database\SQLite3\LunrSQLite3');
