@@ -53,6 +53,7 @@ class MySQLConnectionEscapeTest extends MySQLConnectionTest
      * @param String $escaped      Expected escaped string
      *
      * @dataProvider escapeStringProvider
+     * @requires     extension mysqli
      * @covers       Lunr\Gravity\Database\MySQL\MySQLConnection::escape_string
      */
     public function testEscapeString($string, $part_escaped, $escaped)

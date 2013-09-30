@@ -51,7 +51,8 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     /**
      * Test that query() returns a QueryResult when connected.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::query
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::query
      */
     public function testQueryReturnsQueryResultWhenConnected()
     {
@@ -97,7 +98,8 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     /**
      * Test that async_query() returns a AsyncQueryResult when connected.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::async_query
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::async_query
      */
     public function testAsyncQueryReturnsQueryResultWhenConnected()
     {

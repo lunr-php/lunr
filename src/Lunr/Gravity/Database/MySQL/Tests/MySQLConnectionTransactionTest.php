@@ -33,7 +33,8 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     /**
      * Test a successful call to Begin Transaction.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::begin_transaction
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::begin_transaction
      */
     public function testBeginTransactionStartsTransactionWhenConnected()
     {
@@ -69,7 +70,8 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     /**
      * Test a successful call to Commit.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::commit
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::commit
      */
     public function testCommitWhenConnected()
     {
@@ -105,7 +107,8 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     /**
      * Test a successful call to rollback.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::rollback
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::rollback
      */
     public function testRollbackWhenConnected()
     {
@@ -141,7 +144,8 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     /**
      * Test a successful call to rollback.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::rollback
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::rollback
      */
     public function testEndTransactionWhenConnected()
     {

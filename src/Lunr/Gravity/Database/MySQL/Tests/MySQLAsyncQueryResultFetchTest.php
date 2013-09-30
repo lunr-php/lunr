@@ -33,7 +33,8 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that has_failed() tries to fetch data if it isn't already fetched.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::has_failed
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::has_failed
      */
     public function testHasFailedFetchesDataIfFetchedIsFalse()
     {
@@ -67,7 +68,8 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that affected_rows() tries to fetch data if it isn't already fetched.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::affected_rows
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::affected_rows
      */
     public function testAffectedRowsFetchesDataIfFetchedIsFalse()
     {
@@ -101,7 +103,8 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that number_of_rows() tries to fetch data if it isn't already fetched.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::number_of_rows
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::number_of_rows
      */
     public function testNumberOfRowsRowsFetchesDataIfFetchedIsFalse()
     {
@@ -135,7 +138,8 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that error_message() tries to fetch data if it isn't already fetched.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::error_message
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::error_message
      */
     public function testErrorMessageFetchesDataIfFetchedIsFalse()
     {
@@ -169,7 +173,8 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that error_number() tries to fetch data if it isn't already fetched.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::error_message
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::error_message
      */
     public function testErrorNumberFetchesDataIfFetchedIsFalse()
     {
@@ -203,7 +208,8 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that insert_id() tries to fetch data if it isn't already fetched.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::error_message
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::error_message
      */
     public function testInsertIDFetchesDataIfFetchedIsFalse()
     {
@@ -237,7 +243,8 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that result_array() tries to fetch data if it isn't already fetched.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_array
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_array
      */
     public function testResultArrayFetchesDataIfFetchedIsFalse()
     {
@@ -271,7 +278,8 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that result_row() tries to fetch data if it isn't already fetched.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_row
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_row
      */
     public function testResultRowFetchesDataIfFetchedIsFalse()
     {
@@ -305,7 +313,8 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that result_column() tries to fetch data if it isn't already fetched.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_column
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_column
      */
     public function testResultColumnFetchesDataIfFetchedIsFalse()
     {
@@ -339,7 +348,8 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
     /**
      * Test that result_cell() tries to fetch data if it isn't already fetched.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_cell
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_cell
      */
     public function testResultCellFetchesDataIfFetchedIsFalse()
     {

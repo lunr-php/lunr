@@ -33,7 +33,8 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test a successful readonly connection.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::connect
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::connect
      */
     public function testSuccessfulConnectReadonly()
     {
@@ -68,7 +69,8 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test a successful readwrite connection.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::connect
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::connect
      */
     public function testSuccessfulConnectReadwrite()
     {
@@ -95,7 +97,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test a failed connection attempt.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::connect
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::connect
      */
     public function testFailedConnect()
     {
@@ -198,7 +200,8 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test that disconnect() works correctly.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::disconnect
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::disconnect
      */
     public function testDisconnect()
     {
@@ -239,7 +242,8 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test that change_database() returns FALSE when select_db() fails.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::change_database
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::change_database
      */
     public function testChangeDatabaseReturnsFalseWhenSelectDBFailed()
     {
@@ -258,7 +262,8 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test that change_database() returns TRUE when select_db() works.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::change_database
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::change_database
      */
     public function testChangeDatabaseReturnsTrueWhenSelectDBWorked()
     {

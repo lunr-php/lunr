@@ -40,6 +40,8 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
 
     /**
      * Test that the success flag is TRUE.
+     *
+     * @requires extension mysqli
      */
     public function testSuccessIsTrue()
     {
@@ -51,6 +53,8 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
 
     /**
      * Test that the freed flasg is FALSE.
+     *
+     * @requires extension mysqli
      */
     public function testFreedIsFalse()
     {
@@ -63,7 +67,8 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
     /**
      * Test that the has_failed() method returns FALSE.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::has_failed
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::has_failed
      */
     public function testHasFailedReturnsFalse()
     {
@@ -73,7 +78,8 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
     /**
      * Test that number_of_rows() returns a number.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::number_of_rows
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::number_of_rows
      */
     public function testNumberOfRowsReturnsNumber()
     {
@@ -89,7 +95,8 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
     /**
      * Test that result_array() returns an multidimensional array.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_array
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_array
      */
     public function testResultArrayReturnsArray()
     {
@@ -113,7 +120,8 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
     /**
      * Test that result_row() returns an one-dimensional array.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_row
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_row
      */
     public function testResultRowReturnsArray()
     {
@@ -131,7 +139,8 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
     /**
      * Test that result_column() returns an one-dimensional array.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_column
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_column
      */
     public function testResultColumnReturnsArray()
     {
@@ -153,7 +162,8 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
     /**
      * Test that result_cell() returns value.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_cell
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_cell
      */
     public function testResultCellReturnsValue()
     {
@@ -167,7 +177,8 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
     /**
      * Test that result_cell() returns NULL if the column doesn't exist.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_cell
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_cell
      */
     public function testResultCellReturnsNullIfColumnDoesNotExist()
     {

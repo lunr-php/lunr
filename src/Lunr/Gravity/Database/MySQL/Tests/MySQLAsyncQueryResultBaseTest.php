@@ -146,7 +146,8 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that fetch_result() stores the result correctly.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
     public function testFetchResultStoresResult()
     {
@@ -172,7 +173,8 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that fetch_result() sets the fetched flag to TRUE.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
     public function testFetchResultSetsFetchedToTrue()
     {
@@ -194,7 +196,8 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that fetch_result() sets the success flag to TRUE if the result value is TRUE.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
     public function testFetchedResultSetsSuccessTrueIfResultIsTrue()
     {
@@ -216,7 +219,8 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that fetch_result() sets the success flag to FALSE if the result value is FALSE.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
     public function testFetchedResultSetsSuccessFalseIfResultIsFalse()
     {
@@ -238,7 +242,8 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that fetch_result() sets the success flag to TRUE if the result is of type MySQLi_Result.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
     public function testFetchedResultSetsSuccessTrueIfResultIsMysqliResult()
     {
@@ -264,7 +269,8 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that fetch_result() sets the error message.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
     public function testFetchResultSetsErrorMessage()
     {
@@ -286,7 +292,8 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that fetch_result() sets the error number.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
     public function testFetchResultSetsErrorNumber()
     {
@@ -308,7 +315,8 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that fetch_result() sets insert id.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
     public function testFetchResultSetsInsertID()
     {
@@ -330,7 +338,8 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that fetch_result() sets affected rows.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
     public function testFetchResultSetsAffectedRows()
     {
@@ -352,7 +361,8 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that fetch_result() sets number of rows.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
     public function testFetchResultSetsNumberOfRows()
     {
