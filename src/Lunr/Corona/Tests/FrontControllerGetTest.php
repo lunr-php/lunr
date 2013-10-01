@@ -65,19 +65,24 @@ class FrontControllerGetTest extends FrontControllerTest
     {
         $dir = __DIR__;
 
-        $this->request->expects($this->once())
+        $this->request->expects($this->at(0))
                       ->method('__get')
                       ->with('controller')
                       ->will($this->returnValue('function'));
+
+        $this->request->expects($this->at(1))
+                      ->method('__get')
+                      ->with('call')
+                      ->will($this->returnValue('controller/method'));
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array()));
 
-        $this->response->expects($this->at(0))
-                       ->method('__set')
-                       ->with('errmsg', 'Undefined controller');
+        $this->response->expects($this->once())
+                       ->method('set_error_message')
+                       ->with($this->equalTo('controller/method'), $this->equalTo('Undefined controller'));
 
         $value = $this->class->get_controller($dir);
 
@@ -85,7 +90,7 @@ class FrontControllerGetTest extends FrontControllerTest
     }
 
     /**
-     * Test that get_controller() returns an emoty string if finding caused error.
+     * Test that get_controller() returns an empty string if finding caused error.
      *
      * @covers Lunr\Corona\FrontController::get_controller
      */
@@ -93,19 +98,55 @@ class FrontControllerGetTest extends FrontControllerTest
     {
         $dir = __DIR__;
 
-        $this->request->expects($this->once())
+        $this->request->expects($this->at(0))
                       ->method('__get')
                       ->with('controller')
                       ->will($this->returnValue('function'));
+
+        $this->request->expects($this->at(1))
+                      ->method('__get')
+                      ->with('call')
+                      ->will($this->returnValue('controller/method'));
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+functioncontroller.php/i', $dir)
                   ->will($this->returnValue(FALSE));
 
-        $this->response->expects($this->at(0))
-                       ->method('__set')
-                       ->with('errmsg', 'Undefined controller');
+        $this->response->expects($this->once())
+                       ->method('set_error_message')
+                       ->with($this->equalTo('controller/method'), $this->equalTo('Undefined controller'));
+
+        $value = $this->class->get_controller($dir);
+
+        $this->assertEquals('', $value);
+    }
+
+    /**
+     * Test that get_controller() returns an empty string if there is no controller info available.
+     *
+     * @covers Lunr\Corona\FrontController::get_controller
+     */
+    public function testGetControllerReturnsEmptyStringIfNoControllerInfoAvailable()
+    {
+        $dir    = __DIR__;
+
+        $this->request->expects($this->at(0))
+                      ->method('__get')
+                      ->with('controller')
+                      ->will($this->returnValue(NULL));
+
+        $this->request->expects($this->at(1))
+                      ->method('__get')
+                      ->with('call')
+                      ->will($this->returnValue('/method'));
+
+        $this->fao->expects($this->never())
+                  ->method('find_matches');
+
+        $this->response->expects($this->once())
+                       ->method('set_error_message')
+                       ->with($this->equalTo('/method'), $this->equalTo('Undefined controller'));
 
         $value = $this->class->get_controller($dir);
 
@@ -127,23 +168,33 @@ class FrontControllerGetTest extends FrontControllerTest
 
         $dir = __DIR__;
 
-        $this->request->expects($this->once())
+        $this->request->expects($this->at(0))
                       ->method('__get')
                       ->with('controller')
                       ->will($this->returnValue('function'));
+
+        $this->request->expects($this->at(1))
+                      ->method('__get')
+                      ->with('call')
+                      ->will($this->returnValue('controller/method'));
+
+        $this->request->expects($this->at(2))
+                      ->method('__get')
+                      ->with('call')
+                      ->will($this->returnValue('controller/method'));
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array()));
 
-        $this->response->expects($this->at(0))
-                       ->method('__set')
-                       ->with('errmsg', 'Undefined controller');
+        $this->response->expects($this->once())
+                       ->method('set_error_message')
+                       ->with($this->equalTo('controller/method'), $this->equalTo('Undefined controller'));
 
-        $this->response->expects($this->at(1))
-                       ->method('__set')
-                       ->with('return_code', 503);
+        $this->response->expects($this->once())
+                       ->method('set_return_code')
+                       ->with($this->equalTo('controller/method'), $this->equalTo(503));
 
         $value = $this->class->get_controller($dir);
 

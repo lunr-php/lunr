@@ -83,15 +83,27 @@ class FrontController
     {
         $name = $this->request->controller . 'controller';
 
+        if ($name == 'controller')
+        {
+            $this->response->set_error_message($this->request->call, 'Undefined controller');
+
+            if (isset($this->error['not_implemented']))
+            {
+                $this->response->set_return_code($this->request->call, $this->error['not_implemented']);
+            }
+
+            return '';
+        }
+
         $matches = $this->fao->find_matches("/^.+$name.php/i", $src);
 
         if (empty($matches))
         {
-            $this->response->errmsg = 'Undefined controller';
+            $this->response->set_error_message($this->request->call, 'Undefined controller');
 
             if (isset($this->error['not_implemented']))
             {
-                $this->response->return_code = $this->error['not_implemented'];
+                $this->response->set_return_code($this->request->call, $this->error['not_implemented']);
             }
 
             return '';
