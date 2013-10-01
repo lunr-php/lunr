@@ -145,7 +145,7 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      *
      * @runInSeparateProcess
      *
-     * @covers  Lunr\Network\StreamSocketClient::disconnect
+     * @covers Lunr\Network\StreamSocketClient::disconnect
      */
     public function testCloseDestroysHandle()
     {

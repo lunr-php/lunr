@@ -36,8 +36,8 @@ class CurlRequestTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @depends  Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnSuccess
-     * @covers   Lunr\Network\Curl::get_request
+     * @depends Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnSuccess
+     * @covers  Lunr\Network\Curl::get_request
      */
     public function testGetRequestReturnsResponseObjectOnSuccess()
     {
@@ -59,8 +59,8 @@ class CurlRequestTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @depends  Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnError
-     * @covers   Lunr\Network\Curl::get_request
+     * @depends Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnError
+     * @covers  Lunr\Network\Curl::get_request
      */
     public function testGetRequestReturnsResponseObjectOnError()
     {
@@ -82,8 +82,8 @@ class CurlRequestTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @depends  Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnSuccess
-     * @covers   Lunr\Network\Curl::post_request
+     * @depends Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnSuccess
+     * @covers  Lunr\Network\Curl::post_request
      */
     public function testPostRequestReturnsResponseObjectOnSuccess()
     {
@@ -105,8 +105,8 @@ class CurlRequestTest extends CurlTest
      *
      * @runInSeparateProcess
      *
-     * @depends  Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnError
-     * @covers   Lunr\Network\Curl::post_request
+     * @depends Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnError
+     * @covers  Lunr\Network\Curl::post_request
      */
     public function testPostRequestReturnsResponseObjectOnError()
     {

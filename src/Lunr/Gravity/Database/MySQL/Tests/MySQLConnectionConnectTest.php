@@ -97,7 +97,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     /**
      * Test a failed connection attempt.
      *
-     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::connect
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::connect
      */
     public function testFailedConnect()
     {
