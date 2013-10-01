@@ -129,7 +129,7 @@ class FrontControllerGetTest extends FrontControllerTest
      */
     public function testGetControllerReturnsEmptyStringIfNoControllerInfoAvailable()
     {
-        $dir    = __DIR__;
+        $dir = __DIR__;
 
         $this->request->expects($this->at(0))
                       ->method('__get')
