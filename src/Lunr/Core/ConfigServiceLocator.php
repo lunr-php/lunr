@@ -101,7 +101,7 @@ class ConfigServiceLocator
      */
     public function override($id, $object)
     {
-        if (!isset($this->registry[$id]) && is_object($object))
+        if (is_object($object))
         {
             $this->registry[$id] = $object;
             return TRUE;

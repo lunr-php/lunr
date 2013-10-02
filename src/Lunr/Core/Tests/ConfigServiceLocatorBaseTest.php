@@ -57,17 +57,23 @@ class ConfigServiceLocatorBaseTest extends ConfigServiceLocatorTest
     }
 
     /**
-     * Test that override() returns FALSE when ID is already taken.
+     * Test that override() overwrites an index when ID is already taken.
      *
      * @covers Lunr\Core\ConfigServiceLocator::override
      */
     public function testOverrideWhenIDAlreadyTaken()
     {
-        $registry = [ 'id' => new \stdClass() ];
+        $registry = [ 'id' => 'Foo' ];
+        $class    = new \stdClass();
 
         $this->set_reflection_property_value('registry', $registry);
 
-        $this->assertFalse($this->class->override('id', new \stdClass()));
+        $this->assertTrue($this->class->override('id', $class));
+
+        $registry = $this->get_reflection_property_value('registry');
+
+        $this->assertArrayHasKey('id', $registry);
+        $this->assertSame($class, $registry['id']);
     }
 
     /**
