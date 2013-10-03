@@ -42,6 +42,12 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
     protected $reflection;
 
     /**
+     * Identifier string for backup functions.
+     * @var String
+     */
+    const FUNCTION_ID = '_lunrbackup';
+
+    /**
      * Testcase Destructor.
      */
     public function tearDown()
@@ -103,6 +109,33 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
     protected function get_reflection_property_value($property)
     {
         return $this->get_accessible_reflection_property($property)->getValue($this->class);
+    }
+
+    /**
+     * Mock a PHP function.
+     *
+     * @param String $name Function name
+     * @param String $mock Replacement code for the function
+     *
+     * @return void
+     */
+    protected function mock_function($name, $mock)
+    {
+        runkit_function_copy($name, $name . self::FUNCTION_ID);
+        runkit_function_redefine($name, '', $mock);
+    }
+
+    /**
+     * Unmock a PHP function.
+     *
+     * @param String $name Function name
+     *
+     * @return void
+     */
+    protected function unmock_function($name)
+    {
+        runkit_function_remove($name);
+        runkit_function_rename($name . self::FUNCTION_ID, $name);
     }
 
     /**
