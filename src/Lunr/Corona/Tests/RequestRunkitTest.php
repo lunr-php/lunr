@@ -18,11 +18,12 @@ namespace Lunr\Corona\Tests;
 /**
  * Tests for getting stored superglobal values.
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Corona\Request
+ * @category      Libraries
+ * @package       Corona
+ * @subpackage    Tests
+ * @author        Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers        Lunr\Corona\Request
+ * @backupGlobals enabled
  */
 class RequestRunkitTest extends RequestTest
 {
@@ -36,9 +37,15 @@ class RequestRunkitTest extends RequestTest
     }
 
     /**
+     * Testcase Destructor.
+     */
+    public function tearDown()
+    {
+        parent::tearDownRunkit();
+    }
+
+    /**
      * Test that the hostname is stored correctly in the constructor.
-     *
-     * @runInSeparateProcess
      */
     public function testHostnameIsSet()
     {
@@ -50,8 +57,6 @@ class RequestRunkitTest extends RequestTest
 
     /**
      * Test that the hostname value is returned correctly by the magic get method.
-     *
-     * @runInSeparateProcess
      */
     public function testGetHostname()
     {

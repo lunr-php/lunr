@@ -86,7 +86,7 @@ abstract class RequestTest extends LunrBaseTest
             $this->markTestSkipped('Extension runkit is required.');
         }
 
-        runkit_function_redefine('gethostname', '', self::GET_HOSTNAME);
+        $this->mock_function('gethostname', self::GET_HOSTNAME);
 
         $this->setUpFilled();
     }
@@ -150,6 +150,20 @@ abstract class RequestTest extends LunrBaseTest
      */
     public function tearDown()
     {
+        unset($this->class);
+        unset($this->reflection);
+        unset($this->configuration);
+    }
+
+    /**
+     * TestCase Destructor.
+     *
+     * @return void
+     */
+    public function tearDownRunkit()
+    {
+        $this->unmock_function('gethostname');
+
         unset($this->class);
         unset($this->reflection);
         unset($this->configuration);
