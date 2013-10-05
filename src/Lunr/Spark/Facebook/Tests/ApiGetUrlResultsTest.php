@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the ApiGetResultsTest class.
+ * This file contains the ApiGetUrlResultsTest class.
  *
  * PHP Version 5.4
  *
@@ -28,7 +28,7 @@ use ReflectionClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Spark\Facebook\Api
  */
-class ApiGetResultsTest extends ApiTest
+class ApiGetUrlResultsTest extends ApiTest
 {
 
     /**

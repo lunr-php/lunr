@@ -156,6 +156,43 @@ abstract class Api
         return $parts;
     }
 
+    /**
+     * Fetch and parse results as though they were a query string.
+     *
+     * @param String $url    API URL
+     * @param Array  $params Array of parameters for the API request
+     * @param String $method Request method to use, either 'get' or 'post'
+     *
+     * @return Array $parts Array of return values
+     */
+    protected function get_json_results($url, $params = [], $method = 'get')
+    {
+        $this->curl->set_option('CURLOPT_FAILONERROR', FALSE);
+
+        if (strtolower($method) === 'get')
+        {
+            $response = $this->curl->get_request($url . '?' . http_build_query($params));
+        }
+        else
+        {
+            $response = $this->curl->post_request($url, $params);
+        }
+
+        $result = json_decode($response->get_result(), TRUE);
+
+        if ($response->http_code !== 200)
+        {
+            $error   = $result['error'];
+            $result  = [];
+            $context = [ 'message' => $error['message'], 'code' => $error['code'], 'type' => $error['type'], 'request' => $url ];
+            $this->logger->error('Facebook API Request ({request}) failed, {type} ({code}): {message}', $context);
+        }
+
+        unset($response);
+
+        return $result;
+    }
+
 }
 
 ?>
