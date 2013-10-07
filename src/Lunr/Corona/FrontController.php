@@ -26,19 +26,11 @@ namespace Lunr\Corona;
 class FrontController
 {
 
-    use ErrorEnumTrait;
-
     /**
      * Instance of the Request class.
      * @var RequestInterface
      */
     protected $request;
-
-    /**
-     * Instance of the Response class.
-     * @var Response
-     */
-    protected $response;
 
     /**
      * Instance of the FilesystemAccessObject class.
@@ -50,15 +42,12 @@ class FrontController
      * Constructor.
      *
      * @param RequestInterface                $request  Instance of the Request class.
-     * @param Response                        $response Instance of the Response class.
      * @param FilesystemAccessObjectInterface $fao      Instance of the FilesystemAccessObject class.
      */
-    public function __construct($request, $response, $fao)
+    public function __construct($request, $fao)
     {
-        $this->request  = $request;
-        $this->response = $response;
-        $this->fao      = $fao;
-        $this->error    = array();
+        $this->request = $request;
+        $this->fao     = $fao;
     }
 
     /**
@@ -67,9 +56,7 @@ class FrontController
     public function __destruct()
     {
         unset($this->request);
-        unset($this->response);
         unset($this->fao);
-        unset($this->error);
     }
 
     /**
@@ -85,27 +72,13 @@ class FrontController
 
         if ($name == 'controller')
         {
-            $this->response->set_error_message($this->request->call, 'Undefined controller');
-
-            if (isset($this->error['not_implemented']))
-            {
-                $this->response->set_return_code($this->request->call, $this->error['not_implemented']);
-            }
-
             return '';
         }
 
         $matches = $this->fao->find_matches("/^.+$name.php/i", $src);
 
-        if (empty($matches))
+        if (empty($matches) === TRUE)
         {
-            $this->response->set_error_message($this->request->call, 'Undefined controller');
-
-            if (isset($this->error['not_implemented']))
-            {
-                $this->response->set_return_code($this->request->call, $this->error['not_implemented']);
-            }
-
             return '';
         }
 

@@ -51,12 +51,6 @@ abstract class FrontControllerTest extends PHPUnit_Framework_TestCase
     protected $request;
 
     /**
-     * Mock instance of the Response class.
-     * @var Response
-     */
-    protected $response;
-
-    /**
      * Mock instance of a FilesystemAccessObject class.
      * @var FilesystemAccessObjectInterface
      */
@@ -69,11 +63,9 @@ abstract class FrontControllerTest extends PHPUnit_Framework_TestCase
     {
         $this->request = $this->getMock('Lunr\Corona\RequestInterface');
 
-        $this->response = $this->getMock('Lunr\Corona\Response');
-
         $this->fao = $this->getMock('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface');
 
-        $this->class = new FrontController($this->request, $this->response, $this->fao);
+        $this->class = new FrontController($this->request, $this->fao);
 
         $this->reflection = new ReflectionClass('Lunr\Corona\FrontController');
     }
@@ -86,7 +78,6 @@ abstract class FrontControllerTest extends PHPUnit_Framework_TestCase
         unset($this->class);
         unset($this->reflection);
         unset($this->request);
-        unset($this->response);
         unset($this->fao);
     }
 

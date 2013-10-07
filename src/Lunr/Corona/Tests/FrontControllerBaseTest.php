@@ -42,20 +42,6 @@ class FrontControllerBaseTest extends FrontControllerTest
     }
 
     /**
-     * Test that the Response class was passed correctly.
-     */
-    public function testResponsePassedCorrectly()
-    {
-        $property = $this->reflection->getProperty('response');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertInstanceOf('Lunr\Corona\Response', $value);
-        $this->assertSame($this->response, $value);
-    }
-
-    /**
      * Test that the FilesystemAccessObject class was passed correctly.
      */
     public function testFAOPassedCorrectly()
@@ -67,20 +53,6 @@ class FrontControllerBaseTest extends FrontControllerTest
 
         $this->assertInstanceOf('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface', $value);
         $this->assertSame($this->fao, $value);
-    }
-
-    /**
-     * Test that there are no error enums set by default.
-     */
-    public function testErrorEmptyByDefault()
-    {
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
     }
 
 }

@@ -48,9 +48,6 @@ class FrontControllerGetTest extends FrontControllerTest
                   ->with('/^.+functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array($result)));
 
-        $this->response->expects($this->never())
-                       ->method('__set');
-
         $value = $this->class->get_controller($dir);
 
         $this->assertEquals($fqcn, $value);
@@ -70,19 +67,10 @@ class FrontControllerGetTest extends FrontControllerTest
                       ->with('controller')
                       ->will($this->returnValue('function'));
 
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('call')
-                      ->will($this->returnValue('controller/method'));
-
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array()));
-
-        $this->response->expects($this->once())
-                       ->method('set_error_message')
-                       ->with($this->equalTo('controller/method'), $this->equalTo('Undefined controller'));
 
         $value = $this->class->get_controller($dir);
 
@@ -103,19 +91,10 @@ class FrontControllerGetTest extends FrontControllerTest
                       ->with('controller')
                       ->will($this->returnValue('function'));
 
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('call')
-                      ->will($this->returnValue('controller/method'));
-
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+functioncontroller.php/i', $dir)
                   ->will($this->returnValue(FALSE));
-
-        $this->response->expects($this->once())
-                       ->method('set_error_message')
-                       ->with($this->equalTo('controller/method'), $this->equalTo('Undefined controller'));
 
         $value = $this->class->get_controller($dir);
 
@@ -136,65 +115,8 @@ class FrontControllerGetTest extends FrontControllerTest
                       ->with('controller')
                       ->will($this->returnValue(NULL));
 
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('call')
-                      ->will($this->returnValue('/method'));
-
         $this->fao->expects($this->never())
                   ->method('find_matches');
-
-        $this->response->expects($this->once())
-                       ->method('set_error_message')
-                       ->with($this->equalTo('/method'), $this->equalTo('Undefined controller'));
-
-        $value = $this->class->get_controller($dir);
-
-        $this->assertEquals('', $value);
-    }
-
-    /**
-     * Test that get_controller() sets an error number if controller not found and enums are set.
-     *
-     * @covers Lunr\Corona\FrontController::get_controller
-     */
-    public function testGetControllerSetsErrorNumberIfPresentAndNonExistingController()
-    {
-        $ERROR['not_implemented'] = 503;
-
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->class, $ERROR);
-
-        $dir = __DIR__;
-
-        $this->request->expects($this->at(0))
-                      ->method('__get')
-                      ->with('controller')
-                      ->will($this->returnValue('function'));
-
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('call')
-                      ->will($this->returnValue('controller/method'));
-
-        $this->request->expects($this->at(2))
-                      ->method('__get')
-                      ->with('call')
-                      ->will($this->returnValue('controller/method'));
-
-        $this->fao->expects($this->once())
-                  ->method('find_matches')
-                  ->with('/^.+functioncontroller.php/i', $dir)
-                  ->will($this->returnValue(array()));
-
-        $this->response->expects($this->once())
-                       ->method('set_error_message')
-                       ->with($this->equalTo('controller/method'), $this->equalTo('Undefined controller'));
-
-        $this->response->expects($this->once())
-                       ->method('set_return_code')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(503));
 
         $value = $this->class->get_controller($dir);
 
@@ -221,9 +143,6 @@ class FrontControllerGetTest extends FrontControllerTest
                   ->method('find_matches')
                   ->with('/^.+functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array($result, 'nr2')));
-
-        $this->response->expects($this->never())
-                       ->method('__set');
 
         $value = $this->class->get_controller($dir);
 
