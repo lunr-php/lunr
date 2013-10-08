@@ -41,8 +41,8 @@ class FrontController
     /**
      * Constructor.
      *
-     * @param RequestInterface                $request  Instance of the Request class.
-     * @param FilesystemAccessObjectInterface $fao      Instance of the FilesystemAccessObject class.
+     * @param RequestInterface                $request Instance of the Request class.
+     * @param FilesystemAccessObjectInterface $fao     Instance of the FilesystemAccessObject class.
      */
     public function __construct($request, $fao)
     {
