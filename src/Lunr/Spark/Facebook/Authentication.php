@@ -202,6 +202,34 @@ class Authentication extends Api
     }
 
     /**
+     * Get an application access token.
+     *
+     * @return String $access_token Access token
+     */
+    public function get_app_access_token()
+    {
+        $params = [
+            'client_id' => $this->app_id,
+            'client_secret' => $this->app_secret,
+            'grant_type' => 'client_credentials',
+        ];
+
+        $url = Domain::GRAPH . 'oauth/access_token';
+
+        $result = $this->get_url_results($url, $params);
+
+        if (empty($result) === TRUE)
+        {
+            return '';
+        }
+
+        $this->access_token  = $result['access_token'];
+        $this->token_expires = 0;
+
+        return $result['access_token'];
+    }
+
+    /**
      * Get expiry time for the access token.
      *
      * @return Integer $token_expires Expiry time for the access token.
