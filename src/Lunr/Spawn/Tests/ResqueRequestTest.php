@@ -39,12 +39,6 @@ abstract class ResqueRequestTest extends LunrBaseTest
     protected $configuration;
 
     /**
-     * Runkit simulation code for getting the hostname.
-     * @var string
-     */
-    const GET_HOSTNAME = 'return "Lunr";';
-
-    /**
      * Shared TestCase Constructor code.
      *
      * @return void

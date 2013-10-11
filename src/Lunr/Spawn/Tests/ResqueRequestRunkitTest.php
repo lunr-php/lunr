@@ -28,6 +28,12 @@ class ResqueRequestRunkitTest extends ResqueRequestTest
 {
 
     /**
+     * Runkit simulation code for getting the hostname.
+     * @var string
+     */
+    const GET_HOSTNAME = 'return "Lunr";';
+
+    /**
      * Testcase Constructor.
      */
     public function setUp()
@@ -37,15 +43,21 @@ class ResqueRequestRunkitTest extends ResqueRequestTest
             $this->markTestSkipped('Extension runkit is required.');
         }
 
-        runkit_function_redefine('gethostname', '', self::GET_HOSTNAME);
+        $this->mock_function('gethostname', self::GET_HOSTNAME);
 
         parent::setUp();
     }
 
     /**
+     * Testcase Destructor.
+     */
+    public function tearDown()
+    {
+        $this->unmock_function('gethostname');
+    }
+
+    /**
      * Test that the hostname is stored correctly in the constructor.
-     *
-     * @runInSeparateProcess
      */
     public function testHostnameIsSet()
     {
@@ -57,8 +69,6 @@ class ResqueRequestRunkitTest extends ResqueRequestTest
 
     /**
      * Test that the hostname value is returned correctly by the magic get method.
-     *
-     * @runInSeparateProcess
      */
     public function testGetHostname()
     {
