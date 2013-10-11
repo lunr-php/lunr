@@ -209,6 +209,9 @@
             <file>src/Lunr/Spark/Facebook/Tests/UserProfileBaseTest.php</file>
             <file>src/Lunr/Spark/Facebook/Tests/UserProfileGetDataTest.php</file>
             <file>src/Lunr/Spark/Facebook/Tests/UserProfileGetProfileDataTest.php</file>
+            <file>src/Lunr/Spark/Facebook/Tests/PageBaseTest.php</file>
+            <file>src/Lunr/Spark/Facebook/Tests/PageGetDataTest.php</file>
+            <file>src/Lunr/Spark/Facebook/Tests/PageGetPageDataTest.php</file>
             <file>src/Lunr/Spark/Twitter/Tests/ApiBaseTest.php</file>
             <file>src/Lunr/Spark/Twitter/Tests/ApiGetJsonResultsTest.php</file>
             <file>src/Lunr/Spark/Twitter/Tests/AuthenticationApiTest.php</file>
