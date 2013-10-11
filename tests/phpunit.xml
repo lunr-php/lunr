@@ -95,13 +95,18 @@
             <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsDeleteTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsInsertTest.php</file>
             <file>src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsUpdateTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderSelectTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderInsertTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderUpdateTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderDeleteTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderConditionTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderOrderByTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderLimitTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderSelectTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderDeleteTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderInsertTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderUpdateTest.php</file>
-            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderLimitTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderConditionTest.php</file>
-            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderOrderByTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderGroupByTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderBaseTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderConditionalTest.php</file>
@@ -121,9 +126,7 @@
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionEscapeTest.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionTransactionTest.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderConditionTest.php</file>
-            <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderOrderByTest.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderGroupByTest.php</file>
-            <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderLimitTest.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderSelectTest.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderDeleteTest.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderInsertTest.php</file>

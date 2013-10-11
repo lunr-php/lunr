@@ -31,34 +31,6 @@ class SQLite3DMLQueryBuilderUpdateTest extends SQLite3DMLQueryBuilderTest
 {
 
     /**
-     * Test specifying the SELECT part of a query.
-     *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsUpdateTest::testInitialUpdate
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsUpdateTest::testIncrementalUpdate
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::update
-     */
-    public function testUpdate()
-    {
-        $this->class->update('table');
-        $value = $this->get_reflection_property_value('update');
-
-        $this->assertEquals('table', $value);
-    }
-
-    /**
-     * Test fluid interface of the update method.
-     *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::update
-     */
-    public function testUpdateReturnsSelfReference()
-    {
-        $return = $this->class->update('table');
-
-        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $return);
-        $this->assertSame($this->class, $return);
-    }
-
-    /**
      * Test that standard update modes are handled correctly.
      *
      * @param String $mode valid update modes.
@@ -88,19 +60,6 @@ class SQLite3DMLQueryBuilderUpdateTest extends SQLite3DMLQueryBuilderTest
 
         $this->assertInternalType('array', $value);
         $this->assertEmpty($value);
-    }
-
-    /**
-     * Test fluid interface of the set method.
-     *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::set
-     */
-    public function testSetReturnsSelfReference()
-    {
-        $return = $this->class->set(array('column1' => 'value1'));
-
-        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $return);
-        $this->assertSame($this->class, $return);
     }
 
 }

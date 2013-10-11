@@ -31,36 +31,6 @@ class MySQLDMLQueryBuilderUpdateTest extends MySQLDMLQueryBuilderTest
 {
 
     /**
-     * Test specifying the SELECT part of a query.
-     *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsUpdateTest::testInitialUpdate
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsUpdateTest::testIncrementalUpdate
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::update
-     */
-    public function testUpdate()
-    {
-        $property = $this->builder_reflection->getProperty('update');
-        $property->setAccessible(TRUE);
-
-        $this->builder->update('table');
-
-        $this->assertEquals('table', $property->getValue($this->builder));
-    }
-
-    /**
-     * Test fluid interface of the update method.
-     *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::update
-     */
-    public function testUpdateReturnsSelfReference()
-    {
-        $return = $this->builder->update('table');
-
-        $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder', $return);
-        $this->assertSame($this->builder, $return);
-    }
-
-    /**
      * Test that standard update modes are handled correctly.
      *
      * @param String $mode valid update modes.

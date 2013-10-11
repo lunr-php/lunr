@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the SQLite3DMLQueryBuilderLimitTest class.
+ * This file contains the SQLDMLQueryBuilderLimitTest class.
  *
  * PHP Version 5.4
  *
@@ -13,9 +13,7 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Gravity\Database\SQLite3\Tests;
-
-use Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder;
+namespace Lunr\Gravity\Database\Tests;
 
 /**
  * This class contains the tests for the query parts necessary to build
@@ -25,15 +23,15 @@ use Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder;
  * @package    Gravity
  * @subpackage Database
  * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @covers     Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder
+ * @covers     Lunr\Gravity\Database\SQLDMLQueryBuilder
  */
-class SQLite3DMLQueryBuilderLimitTest extends SQLite3DMLQueryBuilderTest
+class SQLDMLQueryBuilderLimitTest extends SQLDMLQueryBuilderTest
 {
 
     /**
      * Test specifying the limit part of a query with default offset.
      *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::limit
+     * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::limit
      */
     public function testLimitWithDefaultOffset()
     {
@@ -46,7 +44,7 @@ class SQLite3DMLQueryBuilderLimitTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the limit part of a query with custom offset.
      *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::limit
+     * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::limit
      */
     public function testLimitWithCustomOffset()
     {
@@ -59,13 +57,13 @@ class SQLite3DMLQueryBuilderLimitTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the limit method.
      *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::limit
+     * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::limit
      */
     public function testLimitReturnsSelfReference()
     {
         $return = $this->class->limit(10);
 
-        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $return);
+        $this->assertInstanceOf('Lunr\Gravity\Database\SQLDMLQueryBuilder', $return);
         $this->assertSame($this->class, $return);
     }
 

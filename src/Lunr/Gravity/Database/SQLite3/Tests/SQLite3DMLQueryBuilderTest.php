@@ -31,22 +31,13 @@ use ReflectionClass;
  */
 abstract class SQLite3DMLQueryBuilderTest extends LunrBaseTest
 {
-    /**
-     * Mock instance of the SQLite3Connection class.
-     * @var SQLite3Connection
-     */
-    protected $connection;
 
     /**
      * TestCase Constructor.
      */
     public function setUp()
     {
-        $this->connection = $this->getMockBuilder('Lunr\Gravity\Database\SQLite3\SQLite3Connection')
-                                 ->disableOriginalConstructor()
-                                 ->getMock();
-
-        $this->class = new SQLite3DMLQueryBuilder($this->connection);
+        $this->class = new SQLite3DMLQueryBuilder();
 
         $this->reflection = new ReflectionClass('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder');
     }
@@ -58,7 +49,6 @@ abstract class SQLite3DMLQueryBuilderTest extends LunrBaseTest
     {
         unset($this->class);
         unset($this->reflection);
-        unset($this->connection);
     }
 
     /**

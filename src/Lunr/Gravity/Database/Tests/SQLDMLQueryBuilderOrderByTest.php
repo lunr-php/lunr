@@ -1,11 +1,11 @@
 <?php
 
 /**
- * This file contains the SQLite3DMLQueryBuilderOrderByTest class.
+ * This file contains the SQLDMLQueryBuilderOrderByTest class.
  *
  * PHP Version 5.4
  *
- * @category   SQLite3
+ * @category   SQL
  * @package    Gravity
  * @subpackage Database
  * @author     Dinos Theodorou <dinos@m2mobi.com>
@@ -13,27 +13,25 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Gravity\Database\SQLite3\Tests;
-
-use Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder;
+namespace Lunr\Gravity\Database\Tests;
 
 /**
  * This class contains the tests for the query parts necessary to build
  * order by statements.
  *
- * @category   SQLite3
+ * @category   SQL
  * @package    Gravity
  * @subpackage Database
  * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @covers     Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder
+ * @covers     Lunr\Gravity\Database\SQLDMLQueryBuilder
  */
-class SQLite3DMLQueryBuilderOrderByTest extends SQLite3DMLQueryBuilderTest
+class SQLDMLQueryBuilderOrderByTest extends SQLDMLQueryBuilderTest
 {
 
     /**
      * Test specifying the order by part of a query.
      *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::order_by
+     * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::order_by
      */
     public function testOrderByWithDefaultOrder()
     {
@@ -46,7 +44,7 @@ class SQLite3DMLQueryBuilderOrderByTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test specifying the order by part of a query.
      *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::order_by
+     * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::order_by
      */
     public function testOrderByWithCustomOrder()
     {
@@ -59,13 +57,13 @@ class SQLite3DMLQueryBuilderOrderByTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test fluid interface of the order_by method.
      *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::order_by
+     * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::order_by
      */
     public function testOrderByReturnsSelfReference()
     {
         $return = $this->class->order_by( 'col' );
 
-        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $return);
+        $this->assertInstanceOf('Lunr\Gravity\Database\SQLDMLQueryBuilder', $return);
         $this->assertSame($this->class, $return);
     }
 

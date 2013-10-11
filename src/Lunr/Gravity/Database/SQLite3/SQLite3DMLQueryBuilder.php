@@ -15,7 +15,7 @@
 
 namespace Lunr\Gravity\Database\SQLite3;
 
-use Lunr\Gravity\Database\DatabaseDMLQueryBuilder;
+use Lunr\Gravity\Database\SQLDMLQueryBuilder;
 
 /**
  * This is a SQL query builder class for generating queries suitable for SQLite3.
@@ -25,7 +25,7 @@ use Lunr\Gravity\Database\DatabaseDMLQueryBuilder;
  * @subpackage Database
  * @author     Olivier Wizen <olivier@m2mobi.com>
  */
-class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
+class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
 {
 
     /**
@@ -114,19 +114,6 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Define a DELETE clause.
-     *
-     * @param String $delete The tables to delete from
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function delete($delete = '')
-    {
-        $this->sql_delete($delete);
-        return $this;
-    }
-
-    /**
      * Define the mode of the INSERT clause.
      *
      * @param String $mode The insert mode you want to use
@@ -166,74 +153,6 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Define INTO clause of the SQL statement.
-     *
-     * @param String $table Table reference
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function into($table)
-    {
-        $this->sql_into($table);
-        return $this;
-    }
-
-    /**
-     * Define a Select statement for Insert statement.
-     *
-     * @param String $select SQL Select statement to be used in Insert
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function select_statement($select)
-    {
-        $this->sql_select_statement($select);
-        return $this;
-    }
-
-    /**
-     * Define SET clause of the SQL statement.
-     *
-     * For update only in SQLite.
-     * For insert use SQLite3DMLQueryBuilder::column_names and SQLite3DMLQueryBuilder::values
-     *
-     * @param Array $set Array containing escaped key->value pairs to be set
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function set($set)
-    {
-        $this->sql_set($set);
-        return $this;
-    }
-
-    /**
-     * Define Column names of the affected by Insert or Update SQL statement.
-     *
-     * @param Array $keys Array containing escaped field names to be set
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function column_names($keys)
-    {
-        $this->sql_column_names($keys);
-        return $this;
-    }
-
-    /**
-     * Define Values for Insert or Update SQL statement.
-     *
-     * @param Array $values Array containing escaped values to be set
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function values($values)
-    {
-        $this->sql_values($values);
-        return $this;
-    }
-
-    /**
      * Define the mode of the SELECT clause.
      *
      * @param String $mode The select mode you want to use
@@ -254,19 +173,6 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
                 break;
         }
 
-        return $this;
-    }
-
-    /**
-     * Define a SELECT clause.
-     *
-     * @param String $select The column(s) to select
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function select($select)
-    {
-        $this->sql_select($select);
         return $this;
     }
 
@@ -297,113 +203,6 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Define a UPDATE clause.
-     *
-     * @param String $table The table to update
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function update($table)
-    {
-        $this->sql_update($table);
-        return $this;
-    }
-
-    /**
-     * Define FROM clause of the SQL statement.
-     *
-     * @param String $table_reference Table reference
-     * @param array  $index_hints     Array of Index Hints
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function from($table_reference, $index_hints = NULL)
-    {
-        $this->sql_from($table_reference, $index_hints);
-        return $this;
-    }
-
-    /**
-     * Define JOIN clause of the SQL statement.
-     *
-     * @param String $table_reference Table reference
-     * @param String $type            Type of JOIN operation to perform.
-     * @param array  $index_hints     Array of Index Hints
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function join($table_reference, $type = 'INNER', $index_hints = NULL)
-    {
-        $this->sql_join($table_reference, $type, $index_hints);
-        return $this;
-    }
-
-    /**
-     * Define ON part of a JOIN clause of the SQL statement.
-     *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function on($left, $right, $operator = '=')
-    {
-        $this->sql_condition($left, $right, $operator, 'ON');
-        return $this;
-    }
-
-    /**
-     * Define ON part of a JOIN clause with LIKE comparator of the SQL statement.
-     *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function on_like($left, $right, $negate = FALSE)
-    {
-        $operator = ($negate === FALSE) ? 'LIKE' : 'NOT LIKE';
-        $this->sql_condition($left, $right, $operator, 'ON');
-        return $this;
-    }
-
-    /**
-     * Define ON part of a JOIN clause with IN comparator of the SQL statement.
-     *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function on_in($left, $right, $negate = FALSE)
-    {
-        $operator = ($negate === FALSE) ? 'IN' : 'NOT IN';
-        $this->sql_condition($left, $right, $operator, 'ON');
-        return $this;
-    }
-
-    /**
-     * Define ON part of a JOIN clause with BETWEEN comparator of the SQL statement.
-     *
-     * @param String $left   Left expression
-     * @param String $lower  The lower bound of the between condition
-     * @param String $upper  The upper bound of the between condition
-     * @param String $negate Whether to negate the comparison or not
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function on_between($left, $lower, $upper, $negate = FALSE)
-    {
-        $right    = $lower . ' AND ' . $upper;
-        $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
-        $this->sql_condition($left, $right, $operator, 'ON');
-        return $this;
-    }
-
-    /**
      * Define ON part of a JOIN clause with REGEXP comparator of the SQL statement.
      *
      * @param String $left   Left expression
@@ -416,93 +215,6 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
     {
         $operator = ($negate === FALSE) ? 'REGEXP' : 'NOT REGEXP';
         $this->sql_condition($left, $right, $operator, 'ON');
-        return $this;
-    }
-
-    /**
-     * Open ON group.
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function start_on_group()
-    {
-        $this->sql_group_start('ON');
-        return $this;
-    }
-
-    /**
-     * Close ON group.
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function end_on_group()
-    {
-        $this->sql_group_end('ON');
-        return $this;
-    }
-
-    /**
-     * Define WHERE clause of the SQL statement.
-     *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function where($left, $right, $operator = '=')
-    {
-        $this->sql_condition($left, $right, $operator);
-        return $this;
-    }
-
-    /**
-     * Define WHERE clause with LIKE comparator of the SQL statement.
-     *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function where_like($left, $right, $negate = FALSE)
-    {
-        $operator = ($negate === FALSE) ? 'LIKE' : 'NOT LIKE';
-        $this->sql_condition($left, $right, $operator);
-        return $this;
-    }
-
-    /**
-     * Define WHERE clause with the IN condition of the SQL statement.
-     *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the condition or not
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function where_in($left, $right, $negate = FALSE)
-    {
-        $operator = ($negate === FALSE) ? 'IN' : 'NOT IN';
-        $this->sql_condition($left, $right, $operator);
-        return $this;
-    }
-
-    /**
-     * Define WHERE clause with the BETWEEN condition of the SQL statement.
-     *
-     * @param String $left   Left expression
-     * @param String $lower  The lower bound of the between condition
-     * @param String $upper  The upper bound of the between condition
-     * @param String $negate Whether to negate the condition or not
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function where_between($left, $lower, $upper, $negate = FALSE)
-    {
-        $right    = $lower . ' AND ' . $upper;
-        $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
-        $this->sql_condition($left, $right, $operator);
         return $this;
     }
 
@@ -523,28 +235,6 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Open WHERE group.
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function start_where_group()
-    {
-        $this->sql_group_start();
-        return $this;
-    }
-
-    /**
-     * Close WHERE group.
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function end_where_group()
-    {
-        $this->sql_group_end();
-        return $this;
-    }
-
-    /**
      * Define GROUP BY clause of the SQL statement.
      *
      * @param String  $expr  Expression to group by
@@ -555,71 +245,6 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
     public function group_by($expr, $order = NULL)
     {
         $this->sql_group_by($expr);
-        return $this;
-    }
-
-    /**
-     * Define HAVING clause of the SQL statement.
-     *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function having($left, $right, $operator = '=')
-    {
-        $this->sql_condition($left, $right, $operator, 'HAVING');
-        return $this;
-    }
-
-    /**
-     * Define HAVING clause with LIKE comparator of the SQL statement.
-     *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function having_like($left, $right, $negate = FALSE)
-    {
-        $operator = ($negate === FALSE) ? 'LIKE' : 'NOT LIKE';
-        $this->sql_condition($left, $right, $operator, 'HAVING');
-        return $this;
-    }
-
-    /**
-     * Define HAVING clause with IN comparator of the SQL statement.
-     *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function having_in($left, $right, $negate = FALSE)
-    {
-        $operator = ($negate === FALSE) ? 'IN' : 'NOT IN';
-        $this->sql_condition($left, $right, $operator, 'HAVING');
-        return $this;
-    }
-
-    /**
-     * Define HAVING clause with BETWEEN comparator of the SQL statement.
-     *
-     * @param String $left   Left expression
-     * @param String $lower  The lower bound of the between condition
-     * @param String $upper  The upper bound of the between condition
-     * @param String $negate Whether to negate the comparison or not
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function having_between($left, $lower, $upper, $negate = FALSE)
-    {
-        $right    = $lower . ' AND ' . $upper;
-        $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
-        $this->sql_condition($left, $right, $operator, 'HAVING');
         return $this;
     }
 
@@ -640,71 +265,6 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Open HAVING group.
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function start_having_group()
-    {
-        $this->sql_group_start('HAVING');
-        return $this;
-    }
-
-    /**
-     * Close HAVING group.
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function end_having_group()
-    {
-        $this->sql_group_end('HAVING');
-        return $this;
-    }
-
-    /**
-     * Define ORDER BY clause in the SQL statement.
-     *
-     * @param String  $expr Expression to order by
-     * @param Boolean $asc  Order ASCending/TRUE or DESCending/FALSE
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function order_by($expr, $asc = TRUE)
-    {
-        $this->sql_order_by($expr, $asc);
-        return $this;
-    }
-
-    /**
-     * Define a LIMIT clause of the SQL statement.
-     *
-     * @param Integer $amount The amount of elements to retrieve
-     * @param Integer $offset Start retrieving elements from a specific index
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function limit($amount, $offset = -1)
-    {
-        $this->sql_limit($amount, $offset);
-        return $this;
-    }
-
-    /**
-     * Define a UNION or UNION ALL clause of the SQL statement.
-     *
-     * @param String  $sql_query sql query reference
-     * @param Boolean $all       True for ALL or False for empty (default).
-     *
-     * @return DMLQueryBuilderInterface $self Self reference
-     */
-    public function union($sql_query, $all = FALSE)
-    {
-        $base = ($all === TRUE) ? 'UNION ALL' : 'UNION';
-        $this->sql_compound($sql_query, $base);
-        return $this;
-    }
-
-    /**
      * Not supported by SQLite.
      *
      * @param String $mode The lock mode you want to use
@@ -713,28 +273,6 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
      */
     public function lock_mode($mode)
     {
-        return $this;
-    }
-
-    /**
-     * Set logical connector 'AND'.
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function sql_and()
-    {
-        $this->sql_connector('AND');
-        return $this;
-    }
-
-    /**
-     * Set logical connector 'OR'.
-     *
-     * @return SQLite3DMLQueryBuilder $self Self reference
-     */
-    public function sql_or()
-    {
-        $this->sql_connector('OR');
         return $this;
     }
 

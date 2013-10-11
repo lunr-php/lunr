@@ -31,58 +31,6 @@ class SQLite3DMLQueryBuilderInsertTest extends SQLite3DMLQueryBuilderTest
 {
 
     /**
-     * Test fluid interface of the select_statement method.
-     *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::select_statement
-     */
-    public function testSelectStatementReturnsSelfReference()
-    {
-        $return = $this->class->select_statement('SELECT * FROM table');
-
-        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $return);
-        $this->assertSame($this->class, $return);
-    }
-
-    /**
-     * Test fluid interface of the into method.
-     *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::into
-     */
-    public function testIntoReturnsSelfReference()
-    {
-        $return = $this->class->into('table');
-
-        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $return);
-        $this->assertSame($this->class, $return);
-    }
-
-    /**
-     * Test fluid interface of the column_names method.
-     *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::column_names
-     */
-    public function testColumnNamesReturnsSelfReference()
-    {
-        $return = $this->class->column_names(array('column1'));
-
-        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $return);
-        $this->assertSame($this->class, $return);
-    }
-
-    /**
-     * Test fluid interface of the values method.
-     *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::values
-     */
-    public function testValuesReturnsSelfReference()
-    {
-        $return = $this->class->values(array('value1'));
-
-        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $return);
-        $this->assertSame($this->class, $return);
-    }
-
-    /**
      * Test fluid interface of the insert_mode method.
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::insert_mode

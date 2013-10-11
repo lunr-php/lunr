@@ -31,36 +31,6 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
 {
 
     /**
-     * Test specifying the DELETE part of a query.
-     *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsDeleteTest::testInitialDelete
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsDeleteTest::testIncrementalDelete
-     * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete
-     */
-    public function testDelete()
-    {
-        $property = $this->builder_reflection->getProperty('delete');
-        $property->setAccessible(TRUE);
-
-        $this->builder->delete('table');
-
-        $this->assertEquals('table', $property->getValue($this->builder));
-    }
-
-    /**
-     * Test fluid interface of the delete method.
-     *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete
-     */
-    public function testDeleteReturnsSelfReference()
-    {
-        $return = $this->builder->delete('table');
-
-        $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder', $return);
-        $this->assertSame($this->builder, $return);
-    }
-
-    /**
      * Test that standard delete modes are handled correctly.
      *
      * @param String $mode valid delete mode.

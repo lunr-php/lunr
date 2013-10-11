@@ -31,34 +31,6 @@ class SQLite3DMLQueryBuilderDeleteTest extends SQLite3DMLQueryBuilderTest
 {
 
     /**
-     * Test specifying the DELETE part of a query.
-     *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsDeleteTest::testInitialDelete
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsDeleteTest::testIncrementalDelete
-     * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::delete
-     */
-    public function testDelete()
-    {
-        $this->class->delete('table');
-        $value = $this->get_reflection_property_value('delete');
-
-        $this->assertEquals('table', $value);
-    }
-
-    /**
-     * Test fluid interface of the delete method.
-     *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::delete
-     */
-    public function testDeleteReturnsSelfReference()
-    {
-        $return = $this->class->delete('table');
-
-        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder', $return);
-        $this->assertSame($this->class, $return);
-    }
-
-    /**
      * Test that unknown delete modes are ignored.
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::delete_mode
