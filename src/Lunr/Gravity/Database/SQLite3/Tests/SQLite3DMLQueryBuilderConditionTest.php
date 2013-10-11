@@ -31,6 +31,28 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
 {
 
     /**
+     * Test grouping of ON condition (start group).
+     *
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::start_on_group
+     */
+    public function testOpeningGroupOn()
+    {
+        $this->class->start_on_group();
+        $this->assertPropertyEquals('join', '(');
+    }
+
+    /**
+     * Test grouping of ON condition (close group).
+     *
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::end_on_group
+     */
+    public function testClosingGroupOn()
+    {
+        $this->class->end_on_group();
+        $this->assertPropertyEquals('join', ')');
+    }
+
+    /**
      * Test specifying the on part of a query.
      *
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
@@ -39,9 +61,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testOnWithDefaultOperator()
     {
         $this->class->on('left', 'right');
-        $value = $this->get_reflection_property_value('join');
-
-        $this->assertEquals('ON left = right', $value);
+        $this->assertPropertyEquals('join', 'ON left = right');
     }
 
     /**
@@ -53,9 +73,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testOnWithCustomOperator()
     {
         $this->class->on('left', 'right', '>');
-        $value = $this->get_reflection_property_value('join');
-
-        $this->assertEquals('ON left > right', $value);
+        $this->assertPropertyEquals('join', 'ON left > right');
     }
 
     /**
@@ -80,9 +98,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testOnLike()
     {
         $this->class->on_like('left', 'right');
-        $value = $this->get_reflection_property_value('join');
-
-        $this->assertEquals('ON left LIKE right', $value);
+        $this->assertPropertyEquals('join', 'ON left LIKE right');
     }
 
     /**
@@ -94,9 +110,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testOnNotLike()
     {
         $this->class->on_like('left', 'right', TRUE);
-        $value = $this->get_reflection_property_value('join');
-
-        $this->assertEquals('ON left NOT LIKE right', $value);
+        $this->assertPropertyEquals('join', 'ON left NOT LIKE right');
     }
 
     /**
@@ -121,9 +135,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testOnIn()
     {
         $this->class->on_in('left', 'right');
-        $value = $this->get_reflection_property_value('join');
-
-        $this->assertEquals('ON left IN right', $value);
+        $this->assertPropertyEquals('join', 'ON left IN right');
     }
 
     /**
@@ -135,9 +147,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testOnNotIn()
     {
         $this->class->on_in('left', 'right', TRUE);
-        $value = $this->get_reflection_property_value('join');
-
-        $this->assertEquals('ON left NOT IN right', $value);
+        $this->assertPropertyEquals('join', 'ON left NOT IN right');
     }
 
     /**
@@ -162,9 +172,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testOnBetween()
     {
         $this->class->on_between('left', 'lower', 'upper');
-        $value = $this->get_reflection_property_value('join');
-
-        $this->assertEquals('ON left BETWEEN lower AND upper', $value);
+        $this->assertPropertyEquals('join', 'ON left BETWEEN lower AND upper');
     }
 
     /**
@@ -176,9 +184,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testOnNotBetween()
     {
         $this->class->on_between('left', 'lower', 'upper', TRUE);
-        $value = $this->get_reflection_property_value('join');
-
-        $this->assertEquals('ON left NOT BETWEEN lower AND upper', $value);
+        $this->assertPropertyEquals('join', 'ON left NOT BETWEEN lower AND upper');
     }
 
     /**
@@ -203,9 +209,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testOnRegexp()
     {
         $this->class->on_regexp('left', 'right');
-        $value = $this->get_reflection_property_value('join');
-
-        $this->assertEquals('ON left REGEXP right', $value);
+        $this->assertPropertyEquals('join', 'ON left REGEXP right');
     }
 
     /**
@@ -217,9 +221,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testOnNotRegexp()
     {
         $this->class->on_regexp('left', 'right', TRUE);
-        $value = $this->get_reflection_property_value('join');
-
-        $this->assertEquals('ON left NOT REGEXP right', $value);
+        $this->assertPropertyEquals('join', 'ON left NOT REGEXP right');
     }
 
     /**
@@ -236,6 +238,28 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     }
 
     /**
+     * Test grouping of WHERE condition (start group).
+     *
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::start_where_group
+     */
+    public function testOpeningGroupWhere()
+    {
+        $this->class->start_where_group();
+        $this->assertPropertyEquals('where', '(');
+    }
+
+    /**
+     * Test grouping of WHERE condition (close group).
+     *
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::end_where_group
+     */
+    public function testClosingGroupWhere()
+    {
+        $this->class->end_where_group();
+        $this->assertPropertyEquals('where', ')');
+    }
+
+    /**
      * Test specifying the where part of a query.
      *
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
@@ -244,9 +268,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testWhereWithDefaultOperator()
     {
         $this->class->where('left', 'right');
-        $value = $this->get_reflection_property_value('where');
-
-        $this->assertEquals('WHERE left = right', $value);
+        $this->assertPropertyEquals('where', 'WHERE left = right');
     }
 
     /**
@@ -258,9 +280,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testWhereWithCustomOperator()
     {
         $this->class->where('left', 'right', '>');
-        $value = $this->get_reflection_property_value('where');
-
-        $this->assertEquals('WHERE left > right', $value);
+        $this->assertPropertyEquals('where', 'WHERE left > right');
     }
 
     /**
@@ -285,9 +305,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testWhereLike()
     {
         $this->class->where_like('left', 'right');
-        $value = $this->get_reflection_property_value('where');
-
-        $this->assertEquals('WHERE left LIKE right', $value);
+        $this->assertPropertyEquals('where', 'WHERE left LIKE right');
     }
 
     /**
@@ -299,9 +317,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testWhereNotLike()
     {
         $this->class->where_like('left', 'right', TRUE);
-        $value = $this->get_reflection_property_value('where');
-
-        $this->assertEquals('WHERE left NOT LIKE right', $value);
+        $this->assertPropertyEquals('where', 'WHERE left NOT LIKE right');
     }
 
     /**
@@ -326,9 +342,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testWhereIn()
     {
         $this->class->where_in('left', 'right');
-        $value = $this->get_reflection_property_value('where');
-
-        $this->assertEquals('WHERE left IN right', $value);
+        $this->assertPropertyEquals('where', 'WHERE left IN right');
     }
 
     /**
@@ -340,9 +354,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testWhereNotIn()
     {
         $this->class->where_in('left', 'right', TRUE);
-        $value = $this->get_reflection_property_value('where');
-
-        $this->assertEquals('WHERE left NOT IN right', $value);
+        $this->assertPropertyEquals('where', 'WHERE left NOT IN right');
     }
 
     /**
@@ -367,9 +379,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testWhereBetween()
     {
         $this->class->where_between('left', 'lower', 'upper');
-        $value = $this->get_reflection_property_value('where');
-
-        $this->assertEquals('WHERE left BETWEEN lower AND upper', $value);
+        $this->assertPropertyEquals('where', 'WHERE left BETWEEN lower AND upper');
     }
 
     /**
@@ -381,9 +391,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testWhereNotBetween()
     {
         $this->class->where_between('left', 'lower', 'upper', TRUE);
-        $value = $this->get_reflection_property_value('where');
-
-        $this->assertEquals('WHERE left NOT BETWEEN lower AND upper', $value);
+        $this->assertPropertyEquals('where', 'WHERE left NOT BETWEEN lower AND upper');
     }
 
     /**
@@ -408,9 +416,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testWhereRegexp()
     {
         $this->class->where_regexp('left', 'right');
-        $value = $this->get_reflection_property_value('where');
-
-        $this->assertEquals('WHERE left REGEXP right', $value);
+        $this->assertPropertyEquals('where', 'WHERE left REGEXP right');
     }
 
     /**
@@ -422,9 +428,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testWhereNotRegexp()
     {
         $this->class->where_regexp('left', 'right', TRUE);
-        $value = $this->get_reflection_property_value('where');
-
-        $this->assertEquals('WHERE left NOT REGEXP right', $value);
+        $this->assertPropertyEquals('where', 'WHERE left NOT REGEXP right');
     }
 
     /**
@@ -441,6 +445,28 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     }
 
     /**
+     * Test grouping of HAVING condition (start group).
+     *
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::start_having_group
+     */
+    public function testOpeningGroupHaving()
+    {
+        $this->class->start_having_group();
+        $this->assertPropertyEquals('having', '(');
+    }
+
+    /**
+     * Test grouping of HAVING condition (close group).
+     *
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::end_having_group
+     */
+    public function testClosingGroupHaving()
+    {
+        $this->class->end_having_group();
+        $this->assertPropertyEquals('having', ')');
+    }
+
+    /**
      * Test specifying the having part of a query.
      *
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
@@ -449,9 +475,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testHavingWithDefaultOperator()
     {
         $this->class->having('left', 'right');
-        $value = $this->get_reflection_property_value('having');
-
-        $this->assertEquals('HAVING left = right', $value);
+        $this->assertPropertyEquals('having', 'HAVING left = right');
     }
 
     /**
@@ -463,9 +487,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testHavingWithCustomOperator()
     {
         $this->class->having('left', 'right', '>');
-        $value = $this->get_reflection_property_value('having');
-
-        $this->assertEquals('HAVING left > right', $value);
+        $this->assertPropertyEquals('having', 'HAVING left > right');
     }
 
     /**
@@ -490,9 +512,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testHavingLike()
     {
         $this->class->having_like('left', 'right');
-        $value = $this->get_reflection_property_value('having');
-
-        $this->assertEquals('HAVING left LIKE right', $value);
+        $this->assertPropertyEquals('having', 'HAVING left LIKE right');
     }
 
     /**
@@ -504,9 +524,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testHavingNotLike()
     {
         $this->class->having_like('left', 'right', TRUE);
-        $value = $this->get_reflection_property_value('having');
-
-        $this->assertEquals('HAVING left NOT LIKE right', $value);
+        $this->assertPropertyEquals('having', 'HAVING left NOT LIKE right');
     }
 
     /**
@@ -531,9 +549,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testHavingIn()
     {
         $this->class->having_in('left', 'right');
-        $value = $this->get_reflection_property_value('having');
-
-        $this->assertEquals('HAVING left IN right', $value);
+        $this->assertPropertyEquals('having', 'HAVING left IN right');
     }
 
     /**
@@ -545,9 +561,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testHavingNotIn()
     {
         $this->class->having_in('left', 'right', TRUE);
-        $value = $this->get_reflection_property_value('having');
-
-        $this->assertEquals('HAVING left NOT IN right', $value);
+        $this->assertPropertyEquals('having', 'HAVING left NOT IN right');
     }
 
     /**
@@ -572,9 +586,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testHavingBetween()
     {
         $this->class->having_between('left', 'lower', 'upper');
-        $value = $this->get_reflection_property_value('having');
-
-        $this->assertEquals('HAVING left BETWEEN lower AND upper', $value);
+        $this->assertPropertyEquals('having', 'HAVING left BETWEEN lower AND upper');
     }
 
     /**
@@ -586,9 +598,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testHavingNotBetween()
     {
         $this->class->having_between('left', 'lower', 'upper', TRUE);
-        $value = $this->get_reflection_property_value('having');
-
-        $this->assertEquals('HAVING left NOT BETWEEN lower AND upper', $value);
+        $this->assertPropertyEquals('having', 'HAVING left NOT BETWEEN lower AND upper');
     }
 
     /**
@@ -613,9 +623,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testHavingRegexp()
     {
         $this->class->having_regexp('left', 'right');
-        $value = $this->get_reflection_property_value('having');
-
-        $this->assertEquals('HAVING left REGEXP right', $value);
+        $this->assertPropertyEquals('having', 'HAVING left REGEXP right');
     }
 
     /**
@@ -627,9 +635,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testHavingNotRegexp()
     {
         $this->class->having_regexp('left', 'right', TRUE);
-        $value = $this->get_reflection_property_value('having');
-
-        $this->assertEquals('HAVING left NOT REGEXP right', $value);
+        $this->assertPropertyEquals('having', 'HAVING left NOT REGEXP right');
     }
 
     /**
@@ -653,10 +659,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testSQLAnd()
     {
         $this->class->sql_and();
-
-        $value = $this->get_reflection_property_value('connector');
-
-        $this->assertEquals('AND', $value);
+        $this->assertPropertyEquals('connector', 'AND');
     }
 
     /**
@@ -680,10 +683,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
     public function testSQLOr()
     {
         $this->class->sql_or();
-
-        $value = $this->get_reflection_property_value('connector');
-
-        $this->assertEquals('OR', $value);
+        $this->assertPropertyEquals('connector', 'OR');
     }
 
     /**

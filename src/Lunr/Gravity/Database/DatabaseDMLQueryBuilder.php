@@ -595,23 +595,31 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     {
         $condition = ($base === 'ON') ? 'join' : strtolower($base);
 
-        if ($this->$condition == '' || $this->is_join)
+        if (rtrim($this->$condition, '(') == '' || $this->is_join)
         {
-            $this->$condition = ltrim($this->$condition . ' ' . $base);
-            $this->connector  = '';
-            $this->is_join    = FALSE;
+            if ($this->is_join)
+            {
+                $this->$condition .= ' ' . $base . ' ';
+            }
+            else
+            {
+                $this->$condition = $base . ' ' . $this->$condition;
+            }
+
+            $this->connector = '';
+            $this->is_join   = FALSE;
         }
         elseif ($this->connector != '')
         {
-            $this->$condition .= ' ' . $this->connector;
+            $this->$condition .= ' ' . $this->connector . ' ';
             $this->connector   = '';
         }
-        else
+        elseif (substr($this->$condition, -1) !== '(')
         {
-            $this->$condition .= ' AND';
+            $this->$condition .= ' AND ';
         }
 
-        $this->$condition .= " $left $operator $right";
+        $this->$condition .= "$left $operator $right";
     }
 
     /**
@@ -763,6 +771,41 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         }
 
         return $hints;
+    }
+
+    /**
+     * Open the parentheses for the sql condition.
+     *
+     * @param String $condition String indicationg Statement to group
+     *
+     * @return void
+     */
+    public function sql_group_start($condition = 'WHERE')
+    {
+        $condition = ($condition === 'ON') ? 'join' : strtolower($condition);
+        if ($this->is_join)
+        {
+            $this->$condition .= 'ON (';
+            $this->is_join     = FALSE;
+        }
+        else
+        {
+            $this->$condition .= '(';
+        }
+
+    }
+
+    /**
+     * Close the parentheses for the sql condition.
+     *
+     * @param String $condition String indicationg Statement to group
+     *
+     * @return void
+     */
+    public function sql_group_end($condition = 'WHERE')
+    {
+        $condition         = ($condition === 'ON') ? 'join' : strtolower($condition);
+        $this->$condition .= ')';
     }
 
 }

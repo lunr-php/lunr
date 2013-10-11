@@ -31,6 +31,39 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
 {
 
     /**
+     * Test grouping of ON condition (start group).
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::start_on_group
+     */
+    public function testOpeningGroupOn()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+
+        $method = $this->builder_reflection->getMethod('start_on_group');
+        $method->invoke($this->builder);
+
+        $this->assertEquals('(', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test grouping of ON condition (close group).
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::end_on_group
+     */
+    public function testClosingGroupOn()
+    {
+        $property = $this->builder_reflection->getProperty('join');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->builder, '');
+
+        $method = $this->builder_reflection->getMethod('end_on_group');
+        $method->invoke($this->builder);
+
+        $this->assertEquals(')', $property->getValue($this->builder));
+    }
+
+    /**
      * Test specifying the on part of a query.
      *
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
@@ -256,6 +289,39 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
     }
 
     /**
+     * Test grouping of WHERE condition (start group).
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::start_where_group
+     */
+    public function testOpeningGroupWhere()
+    {
+        $property = $this->builder_reflection->getProperty('where');
+        $property->setAccessible(TRUE);
+
+        $method = $this->builder_reflection->getMethod('start_where_group');
+        $method->invoke($this->builder);
+
+        $this->assertEquals('(', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test grouping of WHERE condition (close group).
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::end_where_group
+     */
+    public function testClosingGroupWhere()
+    {
+        $property = $this->builder_reflection->getProperty('where');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->builder, '');
+
+        $method = $this->builder_reflection->getMethod('end_where_group');
+        $method->invoke($this->builder);
+
+        $this->assertEquals(')', $property->getValue($this->builder));
+    }
+
+    /**
      * Test specifying the where part of a query.
      *
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
@@ -478,6 +544,39 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder', $return);
         $this->assertSame($this->builder, $return);
+    }
+
+    /**
+     * Test grouping of HAVING condition (start group).
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::start_having_group
+     */
+    public function testOpeningGroupHaving()
+    {
+        $property = $this->builder_reflection->getProperty('having');
+        $property->setAccessible(TRUE);
+
+        $method = $this->builder_reflection->getMethod('start_having_group');
+        $method->invoke($this->builder);
+
+        $this->assertEquals('(', $property->getValue($this->builder));
+    }
+
+    /**
+     * Test grouping of HAVING condition (close group).
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::end_having_group
+     */
+    public function testClosingGroupHaving()
+    {
+        $property = $this->builder_reflection->getProperty('having');
+        $property->setAccessible(TRUE);
+        $property->setValue($this->builder, '');
+
+        $method = $this->builder_reflection->getMethod('end_having_group');
+        $method->invoke($this->builder);
+
+        $this->assertEquals(')', $property->getValue($this->builder));
     }
 
     /**

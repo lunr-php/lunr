@@ -420,6 +420,28 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Open ON group.
+     *
+     * @return SQLite3DMLQueryBuilder $self Self reference
+     */
+    public function start_on_group()
+    {
+        $this->sql_group_start('ON');
+        return $this;
+    }
+
+    /**
+     * Close ON group.
+     *
+     * @return SQLite3DMLQueryBuilder $self Self reference
+     */
+    public function end_on_group()
+    {
+        $this->sql_group_end('ON');
+        return $this;
+    }
+
+    /**
      * Define WHERE clause of the SQL statement.
      *
      * @param String $left     Left expression
@@ -497,6 +519,28 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
     {
         $operator = ($negate === FALSE) ? 'REGEXP' : 'NOT REGEXP';
         $this->sql_condition($left, $right, $operator);
+        return $this;
+    }
+
+    /**
+     * Open WHERE group.
+     *
+     * @return SQLite3DMLQueryBuilder $self Self reference
+     */
+    public function start_where_group()
+    {
+        $this->sql_group_start();
+        return $this;
+    }
+
+    /**
+     * Close WHERE group.
+     *
+     * @return SQLite3DMLQueryBuilder $self Self reference
+     */
+    public function end_where_group()
+    {
+        $this->sql_group_end();
         return $this;
     }
 
@@ -592,6 +636,28 @@ class SQLite3DMLQueryBuilder extends DatabaseDMLQueryBuilder
     {
         $operator = ($negate === FALSE) ? 'REGEXP' : 'NOT REGEXP';
         $this->sql_condition($left, $right, $operator, 'HAVING');
+        return $this;
+    }
+
+    /**
+     * Open HAVING group.
+     *
+     * @return SQLite3DMLQueryBuilder $self Self reference
+     */
+    public function start_having_group()
+    {
+        $this->sql_group_start('HAVING');
+        return $this;
+    }
+
+    /**
+     * Close HAVING group.
+     *
+     * @return SQLite3DMLQueryBuilder $self Self reference
+     */
+    public function end_having_group()
+    {
+        $this->sql_group_end('HAVING');
         return $this;
     }
 

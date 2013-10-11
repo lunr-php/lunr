@@ -81,6 +81,26 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
     }
 
     /**
+    * Test creating a simple JOIN ON statement.
+    *
+    * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
+    */
+    public function testConditionCreatesGroupedJoinStatement()
+    {
+        $method = $this->get_accessible_reflection_method('sql_condition');
+
+        $this->set_reflection_property_value('is_join', FALSE);
+
+        $this->set_reflection_property_value('join', 'JOIN table ON (');
+
+        $method->invokeArgs($this->class, array('a', 'b', '=', 'ON'));
+
+        $string = 'JOIN table ON (a = b';
+
+        $this->assertEquals($string, $this->get_reflection_property_value('join'));
+    }
+
+    /**
      * Test creating a where/having statement with non-default operator.
      *
      * @param String $keyword   The expected statement keyword
@@ -145,6 +165,28 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
 
         $string = "$keyword a = b OR c = d";
 
+        $this->assertEquals($string, $this->get_reflection_property_value($attribute));
+    }
+
+    /**
+    * Test getting a select query with grouped condition.
+    *
+    * @param String $keyword   The expected statement keyword
+    * @param String $attribute The name of the property where the statement is stored
+    *
+    * @dataProvider conditionalKeywordProvider
+    * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
+    */
+    public function testGroupedSQLCondition($keyword, $attribute)
+    {
+        $method_cond = $this->get_accessible_reflection_method('sql_condition');
+
+        $arguments = array('a', 'b', '=', $keyword);
+
+        $this->set_reflection_property_value($attribute, '(');
+
+        $string = $keyword . ' (a = b';
+        $method_cond->invokeArgs($this->class, $arguments);
         $this->assertEquals($string, $this->get_reflection_property_value($attribute));
     }
 
