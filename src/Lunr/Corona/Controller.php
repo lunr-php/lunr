@@ -26,8 +26,6 @@ namespace Lunr\Corona;
 abstract class Controller
 {
 
-    use ErrorEnumTrait;
-
     /**
      * Shared instance of the Request class.
      * @var RequestInterface
@@ -50,7 +48,6 @@ abstract class Controller
     {
         $this->request  = $request;
         $this->response = $response;
-        $this->error    = array();
     }
 
     /**
@@ -58,7 +55,6 @@ abstract class Controller
      */
     public function __destruct()
     {
-        unset($this->error);
         unset($this->response);
         unset($this->request);
     }
@@ -73,24 +69,21 @@ abstract class Controller
      */
     public function __call($name, $arguments)
     {
-        $this->set_result('not_implemented', 'Not implemented!');
+        $this->set_result(HttpCode::NOT_IMPLEMENTED, 'Not implemented!');
     }
 
     /**
      * Store result of the call in the response object.
      *
-     * @param String $code_index Index of the return code in the ERROR enum
-     * @param String $message    Error Message
-     * @param mixed  $info       Additional error information
+     * @param Integer $code    Return Code
+     * @param String  $message Error Message
+     * @param mixed   $info    Additional error information
      *
      * @return void
      */
-    protected function set_result($code_index, $message = NULL, $info = NULL)
+    protected function set_result($code, $message = NULL, $info = NULL)
     {
-        if (isset($this->error[$code_index]) === TRUE)
-        {
-            $this->response->set_return_code($this->request->call, $this->error[$code_index]);
-        }
+        $this->response->set_return_code($this->request->call, $code);
 
         if ($message !== NULL)
         {

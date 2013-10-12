@@ -28,14 +28,6 @@ class ControllerBaseTest extends ControllerTest
 {
 
     /**
-     * Test that there are no error enums set by default.
-     */
-    public function testErrorEmptyByDefault()
-    {
-        $this->assertArrayEmpty($this->get_reflection_property_value('error'));
-    }
-
-    /**
      * Test that the response class is set correctly.
      */
     public function testResponseSetCorrectly()
