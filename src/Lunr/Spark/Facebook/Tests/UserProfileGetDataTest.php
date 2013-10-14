@@ -32,35 +32,6 @@ class UserProfileGetDataTest extends UserProfileTest
 {
 
     /**
-     * Test that set_fields() sets fields if given an array.
-     *
-     * @covers Lunr\Spark\Facebook\UserProfile::set_fields
-     */
-    public function testSetFieldsWithArraySetsFields()
-    {
-        $fields = [ 'email', 'first_name' ];
-
-        $this->class->set_fields($fields);
-
-        $this->assertPropertySame('fields', $fields);
-    }
-
-    /**
-     * Test that set_fields() does not set fields if not given an array.
-     *
-     * @param mixed $value Non array value
-     *
-     * @dataProvider nonArrayProvider
-     * @covers       Lunr\Spark\Facebook\UserProfile::set_fields
-     */
-    public function testSetFieldsWithNonArrayDoesNotSetFields($value)
-    {
-        $this->class->set_fields($value);
-
-        $this->assertArrayEmpty($this->get_reflection_property_value('fields'));
-    }
-
-    /**
      * Test get_data() sets used_access_token to TRUE when using an access token for the request.
      *
      * @covers Lunr\Spark\Facebook\UserProfile::get_data

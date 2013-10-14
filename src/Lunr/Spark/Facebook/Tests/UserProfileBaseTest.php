@@ -64,14 +64,6 @@ class UserProfileBaseTest extends UserProfileTest
     }
 
     /**
-     * Test that fields is empty.
-     */
-    public function testFieldsIsEmptyByDefault()
-    {
-        $this->assertArrayEmpty($this->get_reflection_property_value('fields'));
-    }
-
-    /**
      * Test that used_access_token is FALSE.
      */
     public function testUsedAccessTokenIsFalseByDefault()

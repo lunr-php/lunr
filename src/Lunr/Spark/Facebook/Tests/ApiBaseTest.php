@@ -56,6 +56,14 @@ class ApiBaseTest extends ApiTest
     }
 
     /**
+     * Test that fields is empty.
+     */
+    public function testFieldsIsEmptyByDefault()
+    {
+        $this->assertArrayEmpty($this->get_reflection_property_value('fields'));
+    }
+
+    /**
      * Test that __get() gets existing credential values from the CAS.
      *
      * @param String $key Credential key
@@ -149,6 +157,35 @@ class ApiBaseTest extends ApiTest
                   ->method('add');
 
         $this->class->invalid = 'value';
+    }
+
+    /**
+     * Test that set_fields() sets fields if given an array.
+     *
+     * @covers Lunr\Spark\Facebook\Api::set_fields
+     */
+    public function testSetFieldsWithArraySetsFields()
+    {
+        $fields = [ 'email', 'first_name' ];
+
+        $this->class->set_fields($fields);
+
+        $this->assertPropertySame('fields', $fields);
+    }
+
+    /**
+     * Test that set_fields() does not set fields if not given an array.
+     *
+     * @param mixed $value Non array value
+     *
+     * @dataProvider nonArrayProvider
+     * @covers       Lunr\Spark\Facebook\Api::set_fields
+     */
+    public function testSetFieldsWithNonArrayDoesNotSetFields($value)
+    {
+        $this->class->set_fields($value);
+
+        $this->assertArrayEmpty($this->get_reflection_property_value('fields'));
     }
 
 }

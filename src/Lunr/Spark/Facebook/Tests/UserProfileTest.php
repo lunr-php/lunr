@@ -88,24 +88,6 @@ abstract class UserProfileTest extends LunrBaseTest
     }
 
     /**
-     * Unit test data provider for non Array values.
-     *
-     * @return array $values Array of non array values
-     */
-    public function nonArrayProvider()
-    {
-        $values   = [];
-        $values[] = [ 'string' ];
-        $values[] = [ 0 ];
-        $values[] = [ 1.1 ];
-        $values[] = [ NULL ];
-        $values[] = [ FALSE ];
-        $values[] = [ new \stdClass() ];
-
-        return $values;
-    }
-
-    /**
      * Unit test data provider for public fields.
      *
      * @return array $fields Array of fields.

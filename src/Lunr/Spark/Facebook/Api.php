@@ -45,6 +45,12 @@ abstract class Api
     protected $curl;
 
     /**
+     * Requested fields of the profile.
+     * @var Array
+     */
+    protected $fields;
+
+    /**
      * Constructor.
      *
      * @param CentralAuthenticationStore $cas    Shared instance of the credentials store
@@ -56,6 +62,7 @@ abstract class Api
         $this->cas    = $cas;
         $this->logger = $logger;
         $this->curl   = $curl;
+        $this->fields = [];
     }
 
     /**
@@ -66,6 +73,7 @@ abstract class Api
         unset($this->cas);
         unset($this->logger);
         unset($this->curl);
+        unset($this->fields);
     }
 
     /**
@@ -112,6 +120,23 @@ abstract class Api
             default:
                 break;
         }
+    }
+
+    /**
+     * Specify the user profile fields that should be retrieved.
+     *
+     * @param Array $fields Fields to retrieve
+     *
+     * @return void
+     */
+    public function set_fields($fields)
+    {
+        if (is_array($fields) === FALSE)
+        {
+            return;
+        }
+
+        $this->fields = $fields;
     }
 
     /**

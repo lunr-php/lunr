@@ -29,12 +29,6 @@ class UserProfile extends User
 {
 
     /**
-     * Requested fields of the profile.
-     * @var Array
-     */
-    protected $fields;
-
-    /**
      * User profile data.
      * @var Array
      */
@@ -58,7 +52,6 @@ class UserProfile extends User
         parent::__construct($cas, $logger, $curl);
 
         $this->data              = [];
-        $this->fields            = [];
         $this->used_access_token = FALSE;
     }
 
@@ -68,7 +61,6 @@ class UserProfile extends User
     public function __destruct()
     {
         unset($this->data);
-        unset($this->fields);
         unset($this->used_access_token);
 
         parent::__destruct();
@@ -235,23 +227,6 @@ class UserProfile extends User
         $this->data = $this->get_json_results($url, $params);
 
         $this->get_permissions();
-    }
-
-    /**
-     * Specify the user profile fields that should be retrieved.
-     *
-     * @param Array $fields Fields to retrieve
-     *
-     * @return void
-     */
-    public function set_fields($fields)
-    {
-        if (is_array($fields) === FALSE)
-        {
-            return;
-        }
-
-        $this->fields = $fields;
     }
 
 }

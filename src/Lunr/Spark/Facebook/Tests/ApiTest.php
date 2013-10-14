@@ -131,6 +131,24 @@ abstract class ApiTest extends LunrBaseTest
         return $methods;
     }
 
+    /**
+     * Unit test data provider for non Array values.
+     *
+     * @return array $values Array of non array values
+     */
+    public function nonArrayProvider()
+    {
+        $values   = [];
+        $values[] = [ 'string' ];
+        $values[] = [ 0 ];
+        $values[] = [ 1.1 ];
+        $values[] = [ NULL ];
+        $values[] = [ FALSE ];
+        $values[] = [ new \stdClass() ];
+
+        return $values;
+    }
+
 }
 
 ?>
