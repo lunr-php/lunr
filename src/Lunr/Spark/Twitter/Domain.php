@@ -27,9 +27,27 @@ class Domain
 {
 
     /**
-     * API
+     * Twitter API
      * @var String
      */
     const API = 'https://api.twitter.com/';
+
+    /**
+     * Twitter public stream
+     * @var String
+     */
+    const STREAM = 'https://stream.twitter.com/';
+
+    /**
+     * Twitter user stream
+     * @var String
+     */
+    const USERSTREAM = 'https://userstream.twitter.com/';
+
+    /**
+     * Twitter site stream
+     * @var String
+     */
+    const SITESTREAM = 'https://sitestream.twitter.com/';
 
 }

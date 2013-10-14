@@ -277,6 +277,7 @@
                 <directory>../src/Lunr/Shadow/Tests/</directory>
                 <directory>../src/Lunr/Spark/Tests/</directory>
                 <directory>../src/Lunr/Spark/Facebook/Tests/</directory>
+                <directory>../src/Lunr/Spark/Twitter/Tests/</directory>
                 <directory>../src/Lunr/Spawn/Tests/</directory>
                 <directory>../src/Lunr/Sphere/Tests/</directory>
                 <directory>../src/Lunr/Surface/Tests/</directory>
