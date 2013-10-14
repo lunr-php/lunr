@@ -28,31 +28,6 @@ class GCMPayloadSetTest extends GCMPayloadTest
 {
 
     /**
-     * Test set_registration_ids() works correctly.
-     *
-     * @covers Lunr\Vortex\GCM\GCMPayload::set_registration_ids
-     */
-    public function testSetRegistrationIds()
-    {
-        $this->class->set_registration_ids([ 'one', 'two', 'three' ]);
-
-        $value = $this->get_reflection_property_value('elements');
-
-        $this->assertArrayHasKey('registration_ids', $value);
-        $this->assertEquals([ 'one', 'two', 'three' ], $value['registration_ids']);
-    }
-
-    /**
-     * Test fluid interface of set_registration_ids().
-     *
-     * @covers Lunr\Vortex\GCM\GCMPayload::set_registration_ids
-     */
-    public function testSetRegistrationIdsReturnsSelfReference()
-    {
-        $this->assertSame($this->class, $this->class->set_registration_ids('registration_ids'));
-    }
-
-    /**
      * Test set_collapse_key() works correctly.
      *
      * @covers Lunr\Vortex\GCM\GCMPayload::set_collapse_key

@@ -28,21 +28,6 @@ class GCMPayloadGetTest extends GCMPayloadTest
 {
 
     /**
-     * Test get_payload() with registration ids being present.
-     *
-     * @covers Lunr\Vortex\GCM\GCMPayload::get_payload
-     */
-    public function testGetPayloadWithRegistrationIds()
-    {
-        $file     = TEST_STATICS . '/Vortex/gcm_registration_ids.json';
-        $elements = [ 'registration_ids' => [ 'one', 'two', 'three' ] ];
-
-        $this->set_reflection_property_value('elements', $elements);
-
-        $this->assertStringMatchesFormatFile($file, $this->class->get_payload());
-    }
-
-    /**
      * Test get_payload() with collapse_key being present.
      *
      * @covers Lunr\Vortex\GCM\GCMPayload::get_payload

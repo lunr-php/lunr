@@ -59,22 +59,6 @@ class GCMPayload
     }
 
     /**
-     * Sets the payload key registration ids.
-     *
-     * A string array with the list of devices that will receive the message.
-     *
-     * @param array $ids An array with one, or more registration ids.
-     *
-     * @return GCMPayload $self Self Reference
-     */
-    public function set_registration_ids($ids)
-    {
-        $this->elements['registration_ids'] = $ids;
-
-        return $this;
-    }
-
-    /**
      * Sets the payload key collapse_key.
      *
      * An arbitrary string that is used to collapse a group of alike messages
