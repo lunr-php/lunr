@@ -56,39 +56,11 @@ class PageBaseTest extends PageTest
     }
 
     /**
-     * Test that the default page ID is an empty String.
-     */
-    public function testPageIDIsEmptyString()
-    {
-        $this->assertPropertySame('page_id', '');
-    }
-
-    /**
-     * Test that data is empty.
-     */
-    public function testDataIsEmptyByDefault()
-    {
-        $this->assertArrayEmpty($this->get_reflection_property_value('data'));
-    }
-
-    /**
      * Test that check_permissions is FALSE.
      */
     public function testCheckPermissionsIsFalseByDefault()
     {
         $this->assertFalse($this->get_reflection_property_value('check_permissions'));
-    }
-
-    /**
-     * Test that set_page_id() sets the page ID.
-     *
-     * @covers Lunr\Spark\Facebook\Page::set_page_id
-     */
-    public function testSetPageIdSetsPageId()
-    {
-        $this->class->set_page_id('Lunr');
-
-        $this->assertPropertyEquals('page_id', 'Lunr');
     }
 
     /**

@@ -54,10 +54,10 @@ class PageGetDataTest extends PageTest
      */
     public function testGetDataUsesFieldsIfSet()
     {
-        $this->set_reflection_property_value('page_id', 'page');
+        $this->set_reflection_property_value('id', 'page');
         $this->set_reflection_property_value('fields', [ 'email', 'user_likes' ]);
 
-        $this->cas->expects($this->once())
+        $this->cas->expects($this->exactly(2))
                   ->method('get')
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
@@ -77,9 +77,9 @@ class PageGetDataTest extends PageTest
      */
     public function testGetDataDoesNotUseFieldsIfNotSet()
     {
-        $this->set_reflection_property_value('page_id', 'page');
+        $this->set_reflection_property_value('id', 'page');
 
-        $this->cas->expects($this->once())
+        $this->cas->expects($this->exactly(2))
                   ->method('get')
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
@@ -99,7 +99,7 @@ class PageGetDataTest extends PageTest
      */
     public function testGetDataUsesAccessTokenIfPresent()
     {
-        $this->set_reflection_property_value('page_id', 'page');
+        $this->set_reflection_property_value('id', 'page');
 
         $this->cas->expects($this->at(0))
                   ->method('get')
@@ -131,9 +131,9 @@ class PageGetDataTest extends PageTest
      */
     public function testGetDataWhenAccessTokenNotPresent()
     {
-        $this->set_reflection_property_value('page_id', 'page');
+        $this->set_reflection_property_value('id', 'page');
 
-        $this->cas->expects($this->once())
+        $this->cas->expects($this->exactly(2))
                   ->method('get')
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
@@ -153,11 +153,11 @@ class PageGetDataTest extends PageTest
      */
     public function testGetDataSetsDataOnSuccessfulRequest()
     {
-        $this->set_reflection_property_value('page_id', 'page');
+        $this->set_reflection_property_value('id', 'page');
 
         $data = [ 'name' => 'Foo' ];
 
-        $this->cas->expects($this->once())
+        $this->cas->expects($this->exactly(2))
                   ->method('get')
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
@@ -188,9 +188,9 @@ class PageGetDataTest extends PageTest
      */
     public function testGetDataSetsDataOnFailedRequest()
     {
-        $this->set_reflection_property_value('page_id', 'page');
+        $this->set_reflection_property_value('id', 'page');
 
-        $this->cas->expects($this->once())
+        $this->cas->expects($this->exactly(2))
                   ->method('get')
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
@@ -217,7 +217,7 @@ class PageGetDataTest extends PageTest
      */
     public function testGetDataFetchesPermissionsIfCheckPermissionsTrue()
     {
-        $this->set_reflection_property_value('page_id', 'page');
+        $this->set_reflection_property_value('id', 'page');
         $this->set_reflection_property_value('check_permissions', TRUE);
 
         $data = [
@@ -258,9 +258,9 @@ class PageGetDataTest extends PageTest
      */
     public function testGetDataDoesNotFetchPermissionsIfCheckPermissionsFalse()
     {
-        $this->set_reflection_property_value('page_id', 'page');
+        $this->set_reflection_property_value('id', 'page');
 
-        $this->cas->expects($this->exactly(3))
+        $this->cas->expects($this->exactly(4))
                   ->method('get')
                   ->will($this->onConsecutiveCalls('Token', 'Token', 'Proof'));
 

@@ -55,22 +55,6 @@ class UserProfileBaseTest extends UserProfileTest
         $this->assertPropertySame('logger', $this->logger);
     }
 
-    /**
-     * Test that data is empty.
-     */
-    public function testDataIsEmptyByDefault()
-    {
-        $this->assertArrayEmpty($this->get_reflection_property_value('data'));
-    }
-
-    /**
-     * Test that used_access_token is FALSE.
-     */
-    public function testUsedAccessTokenIsFalseByDefault()
-    {
-        $this->assertFalse($this->get_reflection_property_value('used_access_token'));
-    }
-
 }
 
 ?>

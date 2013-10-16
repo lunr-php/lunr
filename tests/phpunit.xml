@@ -197,6 +197,7 @@
             <file>src/Lunr/Spark/Facebook/Tests/ApiBaseTest.php</file>
             <file>src/Lunr/Spark/Facebook/Tests/ApiGetUrlResultsTest.php</file>
             <file>src/Lunr/Spark/Facebook/Tests/ApiGetJsonResultsTest.php</file>
+            <file>src/Lunr/Spark/Facebook/Tests/ApiFetchDataTest.php</file>
             <file>src/Lunr/Spark/Facebook/Tests/AuthenticationBaseTest.php</file>
             <file>src/Lunr/Spark/Facebook/Tests/AuthenticationGetSetTest.php</file>
             <file>src/Lunr/Spark/Facebook/Tests/AuthenticationApiTest.php</file>

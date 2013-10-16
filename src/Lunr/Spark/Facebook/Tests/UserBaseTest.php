@@ -72,6 +72,14 @@ class UserBaseTest extends UserTest
     }
 
     /**
+     * Test that check_permissions is TRUE.
+     */
+    public function testCheckPermissionsIsTrueByDefault()
+    {
+        $this->assertTrue($this->get_reflection_property_value('check_permissions'));
+    }
+
+    /**
      * Test that set_profile_id() sets the profile ID.
      *
      * @covers Lunr\Spark\Facebook\User::set_profile_id

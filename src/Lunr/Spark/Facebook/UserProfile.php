@@ -29,18 +29,6 @@ class UserProfile extends User
 {
 
     /**
-     * User profile data.
-     * @var Array
-     */
-    protected $data;
-
-    /**
-     * Boolean flag whether an access token was used for retrieving profile data.
-     * @var Boolean
-     */
-    protected $used_access_token;
-
-    /**
      * Constructor.
      *
      * @param CentralAuthenticationStore $cas    Shared instance of the CentralAuthenticationStore class.
@@ -50,9 +38,6 @@ class UserProfile extends User
     public function __construct($cas, $logger, $curl)
     {
         parent::__construct($cas, $logger, $curl);
-
-        $this->data              = [];
-        $this->used_access_token = FALSE;
     }
 
     /**
@@ -60,9 +45,6 @@ class UserProfile extends User
      */
     public function __destruct()
     {
-        unset($this->data);
-        unset($this->used_access_token);
-
         parent::__destruct();
     }
 
@@ -202,29 +184,9 @@ class UserProfile extends User
      */
     public function get_data()
     {
-        if ($this->access_token !== NULL)
-        {
-            $params = [
-                'access_token' => $this->access_token,
-                'appsecret_proof' => $this->app_secret_proof
-            ];
-
-            $this->used_access_token = TRUE;
-        }
-        else
-        {
-            $params                  = [];
-            $this->used_access_token = FALSE;
-        }
-
-        if (empty($this->fields) === FALSE)
-        {
-            $params['fields'] = implode(',', $this->fields);
-        }
-
         $url = Domain::GRAPH . $this->profile_id;
 
-        $this->data = $this->get_json_results($url, $params);
+        $this->fetch_data($url);
 
         $this->get_permissions();
     }

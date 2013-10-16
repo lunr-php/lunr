@@ -39,6 +39,12 @@ abstract class User extends Api
     protected $permissions;
 
     /**
+     * Whether to check permissions or not.
+     * @var Boolean
+     */
+    protected $check_permissions;
+
+    /**
      * Constructor.
      *
      * @param CentralAuthenticationStore $cas    Shared instance of the credentials store
@@ -51,6 +57,8 @@ abstract class User extends Api
 
         $this->profile_id  = 'me';
         $this->permissions = [];
+
+        $this->check_permissions = TRUE;
     }
 
     /**
@@ -60,6 +68,7 @@ abstract class User extends Api
     {
         unset($this->profile_id);
         unset($this->permissions);
+        unset($this->check_permissions);
 
         parent::__destruct();
     }
@@ -83,7 +92,7 @@ abstract class User extends Api
      */
     protected function get_permissions()
     {
-        if ($this->access_token === NULL)
+        if (($this->access_token === NULL) || ($this->check_permissions === FALSE))
         {
             return;
         }

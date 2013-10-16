@@ -51,6 +51,24 @@ abstract class Api
     protected $fields;
 
     /**
+     * Facebook resource identifier
+     * @var String
+     */
+    protected $id;
+
+    /**
+     * Returned data.
+     * @var Array
+     */
+    protected $data;
+
+    /**
+     * Boolean flag whether an access token was used for the request.
+     * @var Boolean
+     */
+    protected $used_access_token;
+
+    /**
      * Constructor.
      *
      * @param CentralAuthenticationStore $cas    Shared instance of the credentials store
@@ -62,7 +80,11 @@ abstract class Api
         $this->cas    = $cas;
         $this->logger = $logger;
         $this->curl   = $curl;
+        $this->id     = '';
         $this->fields = [];
+        $this->data   = [];
+
+        $this->used_access_token = FALSE;
     }
 
     /**
@@ -73,7 +95,10 @@ abstract class Api
         unset($this->cas);
         unset($this->logger);
         unset($this->curl);
+        unset($this->id);
         unset($this->fields);
+        unset($this->data);
+        unset($this->used_access_token);
     }
 
     /**
@@ -120,6 +145,18 @@ abstract class Api
             default:
                 break;
         }
+    }
+
+    /**
+     * Set the resource ID.
+     *
+     * @param String $id Facebook resource ID
+     *
+     * @return void
+     */
+    public function set_id($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -216,6 +253,36 @@ abstract class Api
         unset($response);
 
         return $result;
+    }
+
+    /**
+     * Fetch the resource information from Facebook.
+     *
+     * @param String $url    API URL
+     * @param Array  $params Array of parameters for the API request
+     *
+     * @return void
+     */
+    protected function fetch_data($url, $params = [])
+    {
+        if ($this->access_token !== NULL)
+        {
+            $params['access_token']    = $this->access_token;
+            $params['appsecret_proof'] = $this->app_secret_proof;
+
+            $this->used_access_token = TRUE;
+        }
+        else
+        {
+            $this->used_access_token = FALSE;
+        }
+
+        if (empty($this->fields) === FALSE)
+        {
+            $params['fields'] = implode(',', $this->fields);
+        }
+
+        $this->data = $this->get_json_results($url, $params);
     }
 
 }

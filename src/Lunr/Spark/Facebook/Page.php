@@ -29,24 +29,6 @@ class Page extends User
 {
 
     /**
-     * ID of the page.
-     * @var String
-     */
-    protected $page_id;
-
-    /**
-     * Page data.
-     * @var Array
-     */
-    protected $data;
-
-    /**
-     * Whether to check permissions or not.
-     * @var Boolean
-     */
-    protected $check_permissions;
-
-    /**
      * Constructor.
      *
      * @param CentralAuthenticationStore $cas    Shared instance of the CentralAuthenticationStore class.
@@ -57,9 +39,6 @@ class Page extends User
     {
         parent::__construct($cas, $logger, $curl);
 
-        $this->data    = [];
-        $this->page_id = '';
-
         $this->check_permissions = FALSE;
     }
 
@@ -68,10 +47,6 @@ class Page extends User
      */
     public function __destruct()
     {
-        unset($this->data);
-        unset($this->page_id);
-        unset($this->check_permissions);
-
         parent::__destruct();
     }
 
@@ -142,18 +117,6 @@ class Page extends User
     }
 
     /**
-     * Set the page ID.
-     *
-     * @param String $id Facebook Page ID
-     *
-     * @return void
-     */
-    public function set_page_id($id)
-    {
-        $this->page_id = $id;
-    }
-
-    /**
      * Specify the user profile fields that should be retrieved.
      *
      * @param Array $fields Fields to retrieve
@@ -181,36 +144,16 @@ class Page extends User
      */
     public function get_data()
     {
-        if ($this->page_id === '')
+        if ($this->id === '')
         {
             return;
         }
 
-        if ($this->access_token !== NULL)
-        {
-            $params = [
-                'access_token' => $this->access_token,
-                'appsecret_proof' => $this->app_secret_proof
-            ];
-        }
-        else
-        {
-            $params = [];
-        }
+        $url = Domain::GRAPH . $this->id;
 
-        if (empty($this->fields) === FALSE)
-        {
-            $params['fields'] = implode(',', $this->fields);
-        }
+        $this->fetch_data($url);
 
-        $url = Domain::GRAPH . $this->page_id;
-
-        $this->data = $this->get_json_results($url, $params);
-
-        if ($this->check_permissions === TRUE)
-        {
-            $this->get_permissions();
-        }
+        $this->get_permissions();
     }
 
 }

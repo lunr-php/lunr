@@ -15,10 +15,6 @@
 
 namespace Lunr\Spark\Facebook\Tests;
 
-use Lunr\Spark\Facebook\Api;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
-
 /**
  * This class contains the tests for the Api.
  *
@@ -61,6 +57,30 @@ class ApiBaseTest extends ApiTest
     public function testFieldsIsEmptyByDefault()
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('fields'));
+    }
+
+    /**
+     * Test that data is empty.
+     */
+    public function testDataIsEmptyByDefault()
+    {
+        $this->assertArrayEmpty($this->get_reflection_property_value('data'));
+    }
+
+    /**
+     * Test that used_access_token is FALSE.
+     */
+    public function testUsedAccessTokenIsFalseByDefault()
+    {
+        $this->assertFalse($this->get_reflection_property_value('used_access_token'));
+    }
+
+    /**
+     * Test that the default resource ID is an empty String.
+     */
+    public function testIDIsEmptyString()
+    {
+        $this->assertPropertySame('id', '');
     }
 
     /**
@@ -157,6 +177,18 @@ class ApiBaseTest extends ApiTest
                   ->method('add');
 
         $this->class->invalid = 'value';
+    }
+
+    /**
+     * Test that set_id() sets the resource ID.
+     *
+     * @covers Lunr\Spark\Facebook\Api::set_id
+     */
+    public function testSetIdSetsResourceId()
+    {
+        $this->class->set_id('Lunr');
+
+        $this->assertPropertyEquals('id', 'Lunr');
     }
 
     /**
