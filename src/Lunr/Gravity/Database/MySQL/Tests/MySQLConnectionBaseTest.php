@@ -120,6 +120,30 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     }
 
     /**
+     * Test that database is set correctly.
+     */
+    public function testQueryHintIsEmpty()
+    {
+        $property = $this->db_reflection->getProperty('query_hint');
+        $property->setAccessible(TRUE);
+
+        $this->assertSame('', $property->getValue($this->db));
+    }
+
+    /**
+     * Test that database is set correctly.
+     *
+     * @requires extension mysqlnd_ms
+     */
+    public function testQoSPolicyIsSetToDefaultPolicy()
+    {
+        $property = $this->db_reflection->getProperty('qos_policy');
+        $property->setAccessible(TRUE);
+
+        $this->assertSame(MYSQLND_MS_QOS_CONSISTENCY_EVENTUAL, $property->getValue($this->db));
+    }
+
+    /**
      * Test that get_new_dml_query_builder_object() returns a new object.
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_new_dml_query_builder_object

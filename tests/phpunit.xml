@@ -119,6 +119,7 @@
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionQueryTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionEscapeTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionTransactionTest.php</file>
+            <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionMasterSlaveTest.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/LunrSQLite3Test.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionBaseTest.php</file>
             <file>src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionSetTest.php</file>

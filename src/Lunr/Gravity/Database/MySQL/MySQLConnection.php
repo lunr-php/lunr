@@ -77,6 +77,18 @@ class MySQLConnection extends DatabaseConnection
     protected $mysqli;
 
     /**
+     * SQL hint to send along with the query.
+     * @var String
+     */
+    protected $query_hint;
+
+    /**
+     * mysqlnd_ms QoS policy to use with the current connection.
+     * @var Integer
+     */
+    protected $qos_policy;
+
+    /**
      * Constructor.
      *
      * @param Configuration   $configuration Shared instance of the configuration class
@@ -88,6 +100,9 @@ class MySQLConnection extends DatabaseConnection
         parent::__construct($configuration, $logger);
 
         $this->mysqli =& $mysqli;
+
+        $this->query_hint = '';
+        $this->qos_policy = 2; //MYSQLND_MS_QOS_CONSISTENCY_EVENTUAL
 
         $this->set_configuration();
     }
@@ -111,6 +126,8 @@ class MySQLConnection extends DatabaseConnection
         unset($this->db);
         unset($this->port);
         unset($this->socket);
+        unset($this->qos_policy);
+        unset($this->query_hint);
 
         parent::__destruct();
     }
@@ -278,6 +295,61 @@ class MySQLConnection extends DatabaseConnection
     }
 
     /**
+     * When running the query on a replication setup, hint to run the next query on the master server.
+     *
+     * @return MySQLConnection $self Self reference
+     */
+    public function run_on_master()
+    {
+        $this->query_hint = '/*ms=master*/'; // MYSQLND_MS_MASTER_SWITCH
+        return $this;
+    }
+
+    /**
+     * When running the query on a replication setup, hint to run the next query on the slave server.
+     *
+     * @return MySQLConnection $self Self reference
+     */
+    public function run_on_slave()
+    {
+        $this->query_hint = '/*ms=slave*/'; // MYSQLND_MS_SLAVE_SWITCH
+        return $this;
+    }
+
+    /**
+     * When running the query on a replication setup, hint to run the next query on the last used server.
+     *
+     * @return MySQLConnection $self Self reference
+     */
+    public function run_on_last_used()
+    {
+        $this->query_hint = '/*ms=last_used*/'; // MYSQLND_MS_LAST_USED_SWITCH
+        return $this;
+    }
+
+    /**
+     * Set the Quality of Service policy to use in a replication setup.
+     *
+     * @param Integer $policy mysqlnd_ms QoS policy
+     *
+     * @return Boolean $return TRUE if policy was set correctly, FALSE otherwise
+     */
+    public function set_qos_policy($policy)
+    {
+        return mysqlnd_ms_set_qos($this->mysqli, $policy);
+    }
+
+    /**
+     * Get the currently configured Quality of Service policy.
+     *
+     * @return Integer $policy mysqlnd_ms QoS policy
+     */
+    public function get_qos_policy()
+    {
+        return $this->qos_policy;
+    }
+
+    /**
      * Run a SQL query.
      *
      * @param String $sql_query The SQL query to run on the database
@@ -287,6 +359,9 @@ class MySQLConnection extends DatabaseConnection
     public function query($sql_query)
     {
         $this->connect();
+
+        $sql_query        = $this->query_hint . $sql_query;
+        $this->query_hint = '';
 
         if ($this->connected === TRUE)
         {
@@ -308,6 +383,9 @@ class MySQLConnection extends DatabaseConnection
     public function async_query($sql_query)
     {
         $this->connect();
+
+        $sql_query        = $this->query_hint . $sql_query;
+        $this->query_hint = '';
 
         if ($this->connected === TRUE)
         {
