@@ -37,7 +37,7 @@ class DateTimeYesterdayTest extends DateTimeTest
      */
     public function testYesterdayWithDefaultDatetimeFormat()
     {
-        $this->assertEquals(strftime('%Y-%m-%d', strtotime('-1 day')), $this->datetime->yesterday());
+        $this->assertEquals(strftime('%Y-%m-%d', strtotime('-1 day')), $this->class->yesterday());
     }
 
     /**
@@ -48,7 +48,7 @@ class DateTimeYesterdayTest extends DateTimeTest
      */
     public function testYesterdayWithCustomDatetimeFormat()
     {
-        $value = $this->datetime->set_datetime_format('%A. %d.%m.%Y')->yesterday();
+        $value = $this->class->set_datetime_format('%A. %d.%m.%Y')->yesterday();
         $this->assertEquals(strftime('%A. %d.%m.%Y', strtotime('-1 day')), $value);
     }
 
@@ -64,7 +64,7 @@ class DateTimeYesterdayTest extends DateTimeTest
     public function testYesterdayWithLocalizedCustomDatetimeFormat()
     {
         $day           = strftime('%u', strtotime('-1 day'));
-        $localized_day = $this->datetime->set_datetime_format('%A')->set_locale('de_DE')->yesterday();
+        $localized_day = $this->class->set_datetime_format('%A')->set_locale('de_DE')->yesterday();
         $this->assertTrue($this->check_localized_day($day, $localized_day));
     }
 
@@ -79,7 +79,7 @@ class DateTimeYesterdayTest extends DateTimeTest
      */
     public function testYesterdayWithCustomInvalidDatetimeFormat($format)
     {
-        $this->assertEquals($format, $this->datetime->set_datetime_format($format)->yesterday());
+        $this->assertEquals($format, $this->class->set_datetime_format($format)->yesterday());
     }
 
 }

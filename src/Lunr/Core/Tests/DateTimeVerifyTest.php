@@ -39,7 +39,7 @@ class DateTimeVerifyTest extends DateTimeTest
      */
     public function testIsValidTime($time)
     {
-        $this->assertTrue($this->datetime->is_time($time));
+        $this->assertTrue($this->class->is_time($time));
     }
 
     /**
@@ -52,7 +52,7 @@ class DateTimeVerifyTest extends DateTimeTest
      */
     public function testIsInvalidTime($time)
     {
-        $this->assertFalse($this->datetime->is_time($time));
+        $this->assertFalse($this->class->is_time($time));
     }
 
     /**
@@ -65,7 +65,7 @@ class DateTimeVerifyTest extends DateTimeTest
      */
     public function testIsValidLeapYear($year)
     {
-        $this->assertTrue($this->datetime->is_leap_year($year));
+        $this->assertTrue($this->class->is_leap_year($year));
     }
 
     /**
@@ -78,7 +78,7 @@ class DateTimeVerifyTest extends DateTimeTest
      */
     public function testIsInvalidLeapYear($year)
     {
-        $this->assertFalse($this->datetime->is_leap_year($year));
+        $this->assertFalse($this->class->is_leap_year($year));
     }
 
     /**
@@ -93,7 +93,7 @@ class DateTimeVerifyTest extends DateTimeTest
      */
     public function testIsValidDate($date)
     {
-        $this->assertTrue($this->datetime->is_date($date));
+        $this->assertTrue($this->class->is_date($date));
     }
 
     /**
@@ -108,7 +108,7 @@ class DateTimeVerifyTest extends DateTimeTest
      */
     public function testIsInvalidDate($date)
     {
-        $this->assertFalse($this->datetime->is_date($date));
+        $this->assertFalse($this->class->is_date($date));
     }
 
 }

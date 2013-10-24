@@ -37,7 +37,7 @@ class DateTimeTodayTest extends DateTimeTest
      */
     public function testTodayWithDefaultDatetimeFormat()
     {
-        $this->assertEquals(strftime('%Y-%m-%d'), $this->datetime->today());
+        $this->assertEquals(strftime('%Y-%m-%d'), $this->class->today());
     }
 
     /**
@@ -48,7 +48,7 @@ class DateTimeTodayTest extends DateTimeTest
      */
     public function testTodayWithCustomDatetimeFormat()
     {
-        $this->assertEquals(strftime('%A. %d.%m.%Y'), $this->datetime->set_datetime_format('%A. %d.%m.%Y')->today());
+        $this->assertEquals(strftime('%A. %d.%m.%Y'), $this->class->set_datetime_format('%A. %d.%m.%Y')->today());
     }
 
     /**
@@ -63,7 +63,7 @@ class DateTimeTodayTest extends DateTimeTest
     public function testTodayWithLocalizedCustomDatetimeFormat()
     {
         $day           = strftime('%u');
-        $localized_day = $this->datetime->set_datetime_format('%A')->set_locale('de_DE')->today();
+        $localized_day = $this->class->set_datetime_format('%A')->set_locale('de_DE')->today();
         $this->assertTrue($this->check_localized_day($day, $localized_day));
     }
 
@@ -78,7 +78,7 @@ class DateTimeTodayTest extends DateTimeTest
      */
     public function testTodayWithCustomInvalidDatetimeFormat($format)
     {
-        $this->assertEquals($format, $this->datetime->set_datetime_format($format)->today());
+        $this->assertEquals($format, $this->class->set_datetime_format($format)->today());
     }
 
     /**
@@ -89,7 +89,7 @@ class DateTimeTodayTest extends DateTimeTest
      */
     public function testNowWithDefaultDatetimeFormat()
     {
-        $this->assertEquals(strftime('%Y-%m-%d'), $this->datetime->now());
+        $this->assertEquals(strftime('%Y-%m-%d'), $this->class->now());
     }
 
     /**
@@ -100,7 +100,7 @@ class DateTimeTodayTest extends DateTimeTest
      */
     public function testNowWithCustomDatetimeFormat()
     {
-        $this->assertEquals(strftime('%A. %d.%m.%Y'), $this->datetime->set_datetime_format('%A. %d.%m.%Y')->now());
+        $this->assertEquals(strftime('%A. %d.%m.%Y'), $this->class->set_datetime_format('%A. %d.%m.%Y')->now());
     }
 
     /**
@@ -115,7 +115,7 @@ class DateTimeTodayTest extends DateTimeTest
     public function testNowWithLocalizedCustomDatetimeFormat()
     {
         $day           = strftime('%u');
-        $localized_day = $this->datetime->set_datetime_format('%A')->set_locale('de_DE')->now();
+        $localized_day = $this->class->set_datetime_format('%A')->set_locale('de_DE')->now();
         $this->assertTrue($this->check_localized_day($day, $localized_day));
     }
 
@@ -130,7 +130,7 @@ class DateTimeTodayTest extends DateTimeTest
      */
     public function testNowWithCustomInvalidDatetimeFormat($format)
     {
-        $this->assertEquals($format, $this->datetime->set_datetime_format($format)->now());
+        $this->assertEquals($format, $this->class->set_datetime_format($format)->now());
     }
 
 }

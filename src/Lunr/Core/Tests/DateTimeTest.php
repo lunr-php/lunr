@@ -16,7 +16,7 @@
 namespace Lunr\Core\Tests;
 
 use Lunr\Core\DateTime;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -29,28 +29,16 @@ use ReflectionClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Core\DateTime
  */
-abstract class DateTimeTest extends PHPUnit_Framework_TestCase
+abstract class DateTimeTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the DateTime class.
-     * @var DateTime
-     */
-    protected $datetime;
-
-    /**
-     * Reflection instance of the DateTime class.
-     * @var ReflectionClass
-     */
-    protected $reflection_datetime;
 
     /**
      * TestCase Constructor.
      */
     public function setUp()
     {
-        $this->reflection_datetime = new ReflectionClass('Lunr\Core\DateTime');
-        $this->datetime            = new DateTime();
+        $this->class      = new DateTime();
+        $this->reflection = new ReflectionClass('Lunr\Core\DateTime');
     }
 
     /**
@@ -58,8 +46,8 @@ abstract class DateTimeTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->datetime);
-        unset($this->reflection_datetime);
+        unset($this->reflection);
+        unset($this->class);
     }
 
     /**

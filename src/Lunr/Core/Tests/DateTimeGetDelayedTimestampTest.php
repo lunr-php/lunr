@@ -36,7 +36,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      */
     public function testGetDelayedTimestampWithCurrentTimestampAsBase()
     {
-        $this->assertEquals(strtotime('+1 day'), $this->datetime->get_delayed_timestamp('+1 day'));
+        $this->assertEquals(strtotime('+1 day'), $this->class->get_delayed_timestamp('+1 day'));
     }
 
     /**
@@ -49,7 +49,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      */
     public function testGetDelayedTimestampWithCustomTimestampAsBase($base)
     {
-        $this->assertEquals(strtotime('+1 day', $base), $this->datetime->get_delayed_timestamp('+1 day', $base));
+        $this->assertEquals(strtotime('+1 day', $base), $this->class->get_delayed_timestamp('+1 day', $base));
     }
 
     /**
@@ -62,7 +62,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      */
     public function testGetDelayedTimestampWithCustomInvalidTimestampAsBase($base)
     {
-        $this->assertFalse($this->datetime->get_delayed_timestamp('+1 day', $base));
+        $this->assertFalse($this->class->get_delayed_timestamp('+1 day', $base));
     }
 
     /**
@@ -75,7 +75,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      */
     public function testGetDelayedTimestampWithValidDelay($delay)
     {
-        $this->assertEquals(strtotime($delay), $this->datetime->get_delayed_timestamp($delay));
+        $this->assertEquals(strtotime($delay), $this->class->get_delayed_timestamp($delay));
     }
 
     /**
@@ -88,7 +88,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      */
     public function testGetDelayedTimestampWithInvalidDelay($delay)
     {
-        $this->assertFalse($this->datetime->get_delayed_timestamp($delay));
+        $this->assertFalse($this->class->get_delayed_timestamp($delay));
     }
 
 }

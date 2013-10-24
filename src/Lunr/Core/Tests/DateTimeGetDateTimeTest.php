@@ -36,7 +36,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      */
     public function testGetDatetimeWithDefaultDatetimeFormat()
     {
-        $this->assertEquals(strftime('%Y-%m-%d'), $this->datetime->get_datetime());
+        $this->assertEquals(strftime('%Y-%m-%d'), $this->class->get_datetime());
     }
 
     /**
@@ -47,7 +47,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      */
     public function testGetDatetimeWithCustomDatetimeFormat()
     {
-        $value = $this->datetime->set_datetime_format('%A. %d.%m.%Y')->get_datetime();
+        $value = $this->class->set_datetime_format('%A. %d.%m.%Y')->get_datetime();
         $this->assertEquals(strftime('%A. %d.%m.%Y'), $value);
     }
 
@@ -62,7 +62,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      */
     public function testGetDatetimeWithCustomInvalidDatetimeFormat($format)
     {
-        $this->assertEquals($format, $this->datetime->set_datetime_format($format)->get_datetime());
+        $this->assertEquals($format, $this->class->set_datetime_format($format)->get_datetime());
     }
 
     /**
@@ -77,7 +77,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
     public function testGetDatetimeWithLocalizedCustomDatetimeFormat()
     {
         $day           = strftime('%u');
-        $localized_day = $this->datetime->set_datetime_format('%A')->set_locale('de_DE')->get_datetime();
+        $localized_day = $this->class->set_datetime_format('%A')->set_locale('de_DE')->get_datetime();
         $this->assertTrue($this->check_localized_day($day, $localized_day));
     }
 
@@ -91,7 +91,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      */
     public function testGetDatetimeWithCustomTimestampAsBase($timestamp)
     {
-        $this->assertEquals(strftime('%Y-%m-%d', $timestamp), $this->datetime->get_datetime($timestamp));
+        $this->assertEquals(strftime('%Y-%m-%d', $timestamp), $this->class->get_datetime($timestamp));
     }
 
     /**
@@ -104,7 +104,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      */
     public function testGetDatetimeWithCustomInvalidTimestampAsBase($timestamp)
     {
-        $this->assertFalse($this->datetime->get_datetime($timestamp));
+        $this->assertFalse($this->class->get_datetime($timestamp));
     }
 
 }

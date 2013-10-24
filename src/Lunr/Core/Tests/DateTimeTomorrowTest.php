@@ -37,7 +37,7 @@ class DateTimeTomorrowTest extends DateTimeTest
      */
     public function testTomorrowWithDefaultDatetimeFormat()
     {
-        $this->assertEquals(strftime('%Y-%m-%d', strtotime('+1 day')), $this->datetime->tomorrow());
+        $this->assertEquals(strftime('%Y-%m-%d', strtotime('+1 day')), $this->class->tomorrow());
     }
 
     /**
@@ -48,7 +48,7 @@ class DateTimeTomorrowTest extends DateTimeTest
      */
     public function testTomorrowWithCustomDatetimeFormat()
     {
-        $value = $this->datetime->set_datetime_format('%A. %d.%m.%Y')->tomorrow();
+        $value = $this->class->set_datetime_format('%A. %d.%m.%Y')->tomorrow();
         $this->assertEquals(strftime('%A. %d.%m.%Y', strtotime('+1 day')), $value);
     }
 
@@ -64,7 +64,7 @@ class DateTimeTomorrowTest extends DateTimeTest
     public function testTomorrowWithLocalizedCustomDatetimeFormat()
     {
         $day           = strftime('%u', strtotime('+1 day'));
-        $localized_day = $this->datetime->set_datetime_format('%A')->set_locale('de_DE')->tomorrow();
+        $localized_day = $this->class->set_datetime_format('%A')->set_locale('de_DE')->tomorrow();
         $this->assertTrue($this->check_localized_day($day, $localized_day));
     }
 
@@ -79,7 +79,7 @@ class DateTimeTomorrowTest extends DateTimeTest
      */
     public function testTomorrowWithCustomInvalidDatetimeFormat($format)
     {
-        $this->assertEquals($format, $this->datetime->set_datetime_format($format)->tomorrow());
+        $this->assertEquals($format, $this->class->set_datetime_format($format)->tomorrow());
     }
 
 }
