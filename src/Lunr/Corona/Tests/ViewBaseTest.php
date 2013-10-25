@@ -9,6 +9,7 @@
  * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Corona\Tests;
  * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Corona\View
  */
 class ViewBaseTest extends ViewTest
@@ -32,11 +34,7 @@ class ViewBaseTest extends ViewTest
      */
     public function testRequestSetCorrectly()
     {
-        $property = $this->view_reflection->getProperty('request');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->request, $property->getValue($this->view));
-        $this->assertSame($this->request, $property->getValue($this->view));
+        $this->assertPropertySame('request', $this->request);
     }
 
     /**
@@ -44,11 +42,7 @@ class ViewBaseTest extends ViewTest
      */
     public function testResponseSetCorrectly()
     {
-        $property = $this->view_reflection->getProperty('response');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->response, $property->getValue($this->view));
-        $this->assertSame($this->response, $property->getValue($this->view));
+        $this->assertPropertySame('response', $this->response);
     }
 
     /**
@@ -56,11 +50,7 @@ class ViewBaseTest extends ViewTest
      */
     public function testConfigurationSetCorrectly()
     {
-        $property = $this->view_reflection->getProperty('configuration');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->configuration, $property->getValue($this->view));
-        $this->assertSame($this->configuration, $property->getValue($this->view));
+        $this->assertPropertySame('configuration', $this->configuration);
     }
 
 }

@@ -9,6 +9,7 @@
  * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -16,7 +17,7 @@
 namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\View;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -27,9 +28,10 @@ use ReflectionClass;
  * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Corona\View
  */
-abstract class ViewTest extends PHPUnit_Framework_TestCase
+abstract class ViewTest extends LunrBaseTest
 {
 
     /**
@@ -57,18 +59,6 @@ abstract class ViewTest extends PHPUnit_Framework_TestCase
     protected $sub_configuration;
 
     /**
-     * Reflection instance of the View class.
-     * @var ReflectionClass
-     */
-    protected $view_reflection;
-
-    /**
-     * Mock instance of the View class.
-     * @var View
-     */
-    protected $view;
-
-    /**
      * TestCase Constructor.
      *
      * @return void
@@ -91,25 +81,25 @@ abstract class ViewTest extends PHPUnit_Framework_TestCase
 
         $this->response = $this->getMock('Lunr\Corona\Response');
 
-        $this->view = $this->getMockBuilder('Lunr\Corona\View')
+        $this->class = $this->getMockBuilder('Lunr\Corona\View')
                            ->setConstructorArgs(
                                array($this->request, $this->response, $this->configuration)
                              )
                            ->getMockForAbstractClass();
 
-        $this->view_reflection = new ReflectionClass('Lunr\Corona\View');
+        $this->reflection = new ReflectionClass('Lunr\Corona\View');
     }
 
     /**
      * TestCase Destructor.
      */
-    protected function tearDown()
+    public function tearDown()
     {
         unset($this->configuration);
         unset($this->request);
         unset($this->response);
-        unset($this->view);
-        unset($this->view_reflection);
+        unset($this->reflection);
+        unset($this->class);
     }
 
     /**

@@ -9,6 +9,7 @@
  * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Corona\Tests;
  * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Corona\View
  */
 class ViewHelpersTest extends ViewTest
@@ -43,10 +45,9 @@ class ViewHelpersTest extends ViewTest
                       ->method('__get')
                       ->will($this->returnValue($baseurl));
 
-        $method = $this->view_reflection->getMethod('base_url');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('base_url');
 
-        $this->assertEquals($result, $method->invokeArgs($this->view, array($path)));
+        $this->assertEquals($result, $method->invokeArgs($this->class, array($path)));
     }
 
     /**
@@ -69,10 +70,9 @@ class ViewHelpersTest extends ViewTest
                                 ->method('offsetGet')
                                 ->will($this->returnValue($statics));
 
-        $method = $this->view_reflection->getMethod('statics');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('statics');
 
-        $this->assertEquals($result, $method->invokeArgs($this->view, array($path)));
+        $this->assertEquals($result, $method->invokeArgs($this->class, array($path)));
     }
 
 }
