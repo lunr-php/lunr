@@ -9,6 +9,7 @@
  * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -16,7 +17,7 @@
 namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\FrontController;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -27,22 +28,11 @@ use ReflectionClass;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Corona\FrontController
  */
-abstract class FrontControllerTest extends PHPUnit_Framework_TestCase
+abstract class FrontControllerTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the FrontController class.
-     * @var FrontController
-     */
-    protected $class;
-
-    /**
-     * Reflection instance of the FrontController class.
-     * @var ReflectionClass
-     */
-    protected $reflection;
 
     /**
      * Mock instance of the Request class.

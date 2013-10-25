@@ -9,6 +9,7 @@
  * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Corona\Tests;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Corona\FrontController
  */
 class FrontControllerBaseTest extends FrontControllerTest
@@ -32,13 +34,7 @@ class FrontControllerBaseTest extends FrontControllerTest
      */
     public function testRequestPassedCorrectly()
     {
-        $property = $this->reflection->getProperty('request');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertInstanceOf('Lunr\Corona\RequestInterface', $value);
-        $this->assertSame($this->request, $value);
+        $this->assertPropertySame('request', $this->request);
     }
 
     /**
@@ -46,13 +42,7 @@ class FrontControllerBaseTest extends FrontControllerTest
      */
     public function testFAOPassedCorrectly()
     {
-        $property = $this->reflection->getProperty('fao');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertInstanceOf('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface', $value);
-        $this->assertSame($this->fao, $value);
+        $this->assertPropertySame('fao', $this->fao);
     }
 
 }
