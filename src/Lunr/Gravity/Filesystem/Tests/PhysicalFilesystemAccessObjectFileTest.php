@@ -163,12 +163,15 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = '/tmp/ab65cd89';
 
+        $this->assertFalse(file_exists($file));
+
         $content = "Content\n";
 
         $written = $this->class->put_file_content($file, $content);
 
         $this->assertFileEquals(TEST_STATICS . '/Gravity/file1', $file);
         $this->assertEquals(8, $written);
+        unlink($file);
     }
 
     /**
@@ -292,9 +295,17 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = '/tmp/ab65cd89';
 
+        $error = "SplFileObject::__construct($file): failed to open stream: No such file or directory";
+
+        $this->assertFalse(file_exists($file));
+
+        $this->logger->expects($this->once())
+                     ->method('error')
+                     ->with('{message}', array('message' => $error));
+
         $value = $this->class->get_file_object($file);
 
-        $this->assertInstanceOf('\SplFileObject', $value);
+        $this->assertFalse($value);
     }
 
     /**
