@@ -16,7 +16,7 @@
 namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\ErrorEnumTrait;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -26,22 +26,11 @@ use ReflectionClass;
  * @package    Corona
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Corona\ErrorEnumTrait
  */
-class ErrorEnumTraitTest extends PHPUnit_Framework_TestCase
+class ErrorEnumTraitTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the ErrorEnumTrait.
-     * @var ErrorEnumTrait
-     */
-    protected $class;
-
-    /**
-     * Reflection instance of the ErrorEnumTrait.
-     * @var ReflectionClass
-     */
-    protected $reflection;
 
     /**
      * Test case constructor.
@@ -66,12 +55,7 @@ class ErrorEnumTraitTest extends PHPUnit_Framework_TestCase
      */
     public function testErrorNullByDefault()
     {
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertNull($value);
+        $this->assertNull($this->get_reflection_property_value('error'));
     }
 
     /**
@@ -85,13 +69,7 @@ class ErrorEnumTraitTest extends PHPUnit_Framework_TestCase
 
         $this->class->set_error_enums($ERROR);
 
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertEquals($ERROR, $value);
-        $this->assertSame($ERROR, $value);
+        $this->assertPropertySame('error', $ERROR);
     }
 
 }
