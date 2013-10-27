@@ -160,32 +160,6 @@ class CliRequestGetTest extends CliRequestTest
     }
 
     /**
-     * Tests that get_json_from_post() returns NULL for non-existing keys.
-     *
-     * @covers Lunr\Shadow\CliRequest::get_json_from_post
-     */
-    public function testGetJsonFromPostReturnsNullForNonExistingKeys()
-    {
-        $enum = $this->get_reflection_property_value('json');
-
-        $this->assertArrayNotHasKey('foo', $enum);
-        $this->assertNull($this->class->get_json_from_post('foo'));
-    }
-
-    /**
-     * Tests that get_json_from_get() returns NULL for non-existing keys.
-     *
-     * @covers Lunr\Shadow\CliRequest::get_json_from_get
-     */
-    public function testGetJsonFromGetReturnsNullForNonExistingKeys()
-    {
-        $enum = $this->get_reflection_property_value('json');
-
-        $this->assertArrayNotHasKey('foo', $enum);
-        $this->assertNull($this->class->get_json_from_get('foo'));
-    }
-
-    /**
      * Tests that get_new_inter_request_object returns an InterRequest object.
      *
      * @covers Lunr\Shadow\CliRequest::get_new_inter_request_object

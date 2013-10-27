@@ -78,14 +78,6 @@ class CliRequestBaseTest extends CliRequestTest
     }
 
     /**
-     * Check that json_enums is empty by default.
-     */
-    public function testJsonIsEmptyArray()
-    {
-        $this->assertArrayEmpty($this->get_reflection_property_value('json'));
-    }
-
-    /**
      * Tests that store_get stores default values.
      *
      * @param String $request_key The request key to test.

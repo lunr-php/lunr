@@ -17,7 +17,6 @@ namespace Lunr\Shadow;
 
 use Lunr\Corona\InterRequest;
 use Lunr\Corona\RequestInterface;
-use Lunr\Corona\JsonEnumTrait;
 
 /**
  * The CliRequest class.
@@ -29,8 +28,6 @@ use Lunr\Corona\JsonEnumTrait;
  */
 class CliRequest implements RequestInterface
 {
-
-    use JsonEnumTrait;
 
     /**
      * Stored $_POST values
@@ -262,30 +259,6 @@ class CliRequest implements RequestInterface
      * @return mixed $return The value of the key or NULL if not found
      */
     public function get_cookie_data($key)
-    {
-        return NULL;
-    }
-
-    /**
-     * Retrieve a stored POST value using a json enum key.
-     *
-     * @param mixed $key Json enum key for the value to retrieve
-     *
-     * @return mixed $return The value of the key or NULL if not found
-     */
-    public function get_json_from_post($key)
-    {
-        return NULL;
-    }
-
-    /**
-     * Retrieve a stored GET value using a json enum key.
-     *
-     * @param mixed $key Json enum key for the value to retrieve
-     *
-     * @return mixed $return The value of the key or NULL if not found
-     */
-    public function get_json_from_get($key)
     {
         return NULL;
     }
