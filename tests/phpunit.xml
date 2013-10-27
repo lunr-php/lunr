@@ -38,7 +38,6 @@
         <testsuite name="Corona">
             <file>src/Lunr/Corona/Tests/ControllerBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/ControllerResultTest.php</file>
-            <file>src/Lunr/Corona/Tests/ErrorEnumTraitTest.php</file>
             <file>src/Lunr/Corona/Tests/FrontControllerBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/FrontControllerGetTest.php</file>
             <file>src/Lunr/Corona/Tests/FrontControllerDispatchTest.php</file>
