@@ -60,14 +60,6 @@ class ResqueRequestBaseTest extends ResqueRequestTest
     }
 
     /**
-     * Check that json_enums is empty by default.
-     */
-    public function testJsonIsEmptyArray()
-    {
-        $this->assertArrayEmpty($this->get_reflection_property_value('json'));
-    }
-
-    /**
      * Check that request is filled with sane default values.
      *
      * @param String $key   key for a request value
@@ -121,26 +113,6 @@ class ResqueRequestBaseTest extends ResqueRequestTest
     public function testGetCookieDataReturnsNull()
     {
         $this->assertNull($this->class->get_cookie_data('invalid'));
-    }
-
-    /**
-     * Test getting non existing json data from post returns NULL.
-     *
-     * @covers Lunr\Spawn\ResqueRequest::get_json_from_post
-     */
-    public function testGetJsonFromPostIsNull()
-    {
-        $this->assertNull($this->class->get_json_from_post('invalid'));
-    }
-
-    /**
-     * Test getting non existing json data from get returns NULL.
-     *
-     * @covers Lunr\Spawn\ResqueRequest::get_json_from_get
-     */
-    public function testGetJsonFromGetIsNull()
-    {
-        $this->assertNull($this->class->get_json_from_get('invalid'));
     }
 
     /**

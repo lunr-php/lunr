@@ -16,7 +16,6 @@
 namespace Lunr\Spawn;
 
 use Lunr\Corona\InterRequest;
-use Lunr\Corona\JsonEnumTrait;
 use Lunr\Corona\RequestInterface;
 
 /**
@@ -29,8 +28,6 @@ use Lunr\Corona\RequestInterface;
  */
 class ResqueRequest implements RequestInterface
 {
-
-    use JsonEnumTrait;
 
     /**
      * Stored $_POST values
@@ -220,30 +217,6 @@ class ResqueRequest implements RequestInterface
      * @return mixed $return The value of the key or NULL if not found
      */
     public function get_cookie_data($key)
-    {
-        return NULL;
-    }
-
-    /**
-     * Retrieve a stored POST value using a json enum key.
-     *
-     * @param mixed $key Json enum key for the value to retrieve
-     *
-     * @return mixed $return The value of the key or NULL if not found
-     */
-    public function get_json_from_post($key)
-    {
-        return NULL;
-    }
-
-    /**
-     * Retrieve a stored GET value using a json enum key.
-     *
-     * @param mixed $key Json enum key for the value to retrieve
-     *
-     * @return mixed $return The value of the key or NULL if not found
-     */
-    public function get_json_from_get($key)
     {
         return NULL;
     }
