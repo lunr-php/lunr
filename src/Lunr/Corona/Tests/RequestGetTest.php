@@ -115,63 +115,6 @@ class RequestGetTest extends RequestTest
     }
 
     /**
-     * Test getting valid json data from post.
-     *
-     * @param String $index the expected value as well as the index
-     *
-     * @depends      testGetPostData
-     * @depends      Lunr\Corona\Tests\JsonEnumTraitTest::testSetJsonEnums
-     * @dataProvider validJsonEnumProvider
-     * @covers       Lunr\Corona\Request::get_json_from_post
-     */
-    public function testGetValidJsonFromPost($index)
-    {
-        $this->assertEquals($index, $this->class->get_json_from_post($index));
-    }
-
-    /**
-     * Test getting non existing json data from post returns NULL.
-     *
-     * @param String $index the expected value as well as the index
-     *
-     * @depends      testGetPostData
-     * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Corona\Request::get_json_from_post
-     */
-    public function testGetNonExistingJsonFromPostIsNull($index)
-    {
-        $this->assertNull($this->class->get_json_from_post($index));
-    }
-
-    /**
-     * Test getting valid json data from get.
-     *
-     * @param String $index the expected value as well as the index
-     *
-     * @depends      testGetGetData
-     * @dataProvider validJsonEnumProvider
-     * @covers       Lunr\Corona\Request::get_json_from_get
-     */
-    public function testGetValidJsonFromGet($index)
-    {
-        $this->assertEquals($index, $this->class->get_json_from_get($index));
-    }
-
-    /**
-     * Test getting non existing json data from get returns NULL.
-     *
-     * @param String $index the expected value as well as the index
-     *
-     * @depends      testGetGetData
-     * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Corona\Request::get_json_from_get
-     */
-    public function testGetNonExistingJsonFromGetIsNull($index)
-    {
-        $this->assertNull($this->class->get_json_from_get($index));
-    }
-
-    /**
      * Tests that get_new_inter_request_object returns an InterRequest object.
      *
      * @covers Lunr\Corona\Request::get_new_inter_request_object

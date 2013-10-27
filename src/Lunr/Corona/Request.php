@@ -30,8 +30,6 @@ namespace Lunr\Corona;
 class Request implements RequestInterface
 {
 
-    use JsonEnumTrait;
-
     /**
      * Stored $_POST values
      * @var array
@@ -377,44 +375,6 @@ class Request implements RequestInterface
     public function get_cookie_data($key)
     {
         return isset($this->cookie[$key]) ? $this->cookie[$key] : NULL;
-    }
-
-    /**
-     * Retrieve a stored POST value using a json enum key.
-     *
-     * @param mixed $key Json enum key for the value to retrieve
-     *
-     * @return mixed $return The value of the key or NULL if not found
-     */
-    public function get_json_from_post($key)
-    {
-        if (empty($this->json) || !isset($this->json[$key]))
-        {
-            return NULL;
-        }
-        else
-        {
-            return $this->get_post_data($this->json[$key]);
-        }
-    }
-
-    /**
-     * Retrieve a stored GET value using a json enum key.
-     *
-     * @param mixed $key Json enum key for the value to retrieve
-     *
-     * @return mixed $return The value of the key or NULL if not found
-     */
-    public function get_json_from_get($key)
-    {
-        if (empty($this->json) || !isset($this->json[$key]))
-        {
-            return NULL;
-        }
-        else
-        {
-            return $this->get_get_data($this->json[$key]);
-        }
     }
 
     /**

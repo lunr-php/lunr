@@ -68,14 +68,6 @@ class RequestBaseTest extends RequestTest
     }
 
     /**
-     * Check that json_enums is empty by default.
-     */
-    public function testJsonIsEmptyArray()
-    {
-        $this->assertArrayEmpty($this->get_reflection_property_value('json'));
-    }
-
-    /**
      * Check that request is filled with sane default values.
      *
      * @param String $key   key for a request value

@@ -124,8 +124,6 @@ abstract class RequestTest extends LunrBaseTest
         $_SERVER = $this->setup_server_superglobal();
 
         $this->class = new Request($this->configuration);
-
-        $this->class->set_json_enums($enums);
     }
 
     /**
