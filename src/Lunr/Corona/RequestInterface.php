@@ -94,33 +94,6 @@ interface RequestInterface
      */
     public function get_cookie_data($key);
 
-    /**
-     * Store a set of json enums.
-     *
-     * @param array &$enums An array of json enums
-     *
-     * @return void
-     */
-    public function set_json_enums(&$enums);
-
-    /**
-     * Retrieve a stored POST value using a json enum key.
-     *
-     * @param mixed $key Json enum key for the value to retrieve
-     *
-     * @return mixed $return The value of the key or NULL if not found
-     */
-    public function get_json_from_post($key);
-
-    /**
-     * Retrieve a stored GET value using a json enum key.
-     *
-     * @param mixed $key Json enum key for the value to retrieve
-     *
-     * @return mixed $return The value of the key or NULL if not found
-     */
-    public function get_json_from_get($key);
-
 }
 
 ?>
