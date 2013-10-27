@@ -42,7 +42,6 @@
             <file>src/Lunr/Corona/Tests/FrontControllerGetTest.php</file>
             <file>src/Lunr/Corona/Tests/FrontControllerDispatchTest.php</file>
             <file>src/Lunr/Corona/Tests/InterRequestTest.php</file>
-            <file>src/Lunr/Corona/Tests/JsonEnumTraitTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestStoreCookieTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestStoreGetTest.php</file>
