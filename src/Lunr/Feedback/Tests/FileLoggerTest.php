@@ -9,6 +9,7 @@
  * @package    Feedback
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -17,7 +18,7 @@ namespace Lunr\Feedback\Tests;
 
 use Lunr\Feedback\FileLogger;
 use Psr\Log\LogLevel;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -27,9 +28,10 @@ use ReflectionClass;
  * @package    Feedback
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Feedback\FileLogger
  */
-class FileLoggerTest extends PHPUnit_Framework_TestCase
+class FileLoggerTest extends LunrBaseTest
 {
 
     /**
@@ -45,22 +47,10 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
     private $datetime;
 
     /**
-     * Instance of the PHPLogger class.
-     * @var PHPLogger
-     */
-    private $logger;
-
-    /**
      * Log-file name.
      * @var String
      */
     private $filename;
-
-    /**
-     * Reflection-instance of the PHPLogger class.
-     * @var ReflectionClass
-     */
-    private $logger_reflection;
 
     /**
      * DateTime string used for Logging Output.
@@ -73,7 +63,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->logger_reflection = new ReflectionClass('Lunr\Feedback\FileLogger');
+        $this->reflection = new ReflectionClass('Lunr\Feedback\FileLogger');
 
         $this->request = $this->getMock('Lunr\Corona\RequestInterface');
 
@@ -85,7 +75,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
 
         $this->filename = tempnam('/tmp', 'phpunit_');
 
-        $this->logger = new FileLogger($this->filename, $this->datetime, $this->request);
+        $this->class = new FileLogger($this->filename, $this->datetime, $this->request);
     }
 
     /**
@@ -93,10 +83,10 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->logger_reflection);
-        unset($this->logger);
         unset($this->request);
         unset($this->datetime);
+        unset($this->reflection);
+        unset($this->class);
     }
 
     /**
@@ -104,11 +94,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testRequestSetCorrectly()
     {
-        $property = $this->logger_reflection->getProperty('request');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->request, $property->getValue($this->logger));
-        $this->assertSame($this->request, $property->getValue($this->logger));
+        $this->assertPropertySame('request', $this->request);
     }
 
     /**
@@ -116,10 +102,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testDatetimeSetCorrectly()
     {
-        $property = $this->logger_reflection->getProperty('datetime');
-        $property->setAccessible(TRUE);
-
-        $this->assertInstanceOf('Lunr\Core\DateTime', $property->getValue($this->logger));
+        $this->assertPropertySame('datetime', $this->datetime);
     }
 
     /**
@@ -127,10 +110,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testFilenameSetCorrectly()
     {
-        $property = $this->logger_reflection->getProperty('filename');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->filename, $property->getValue($this->logger));
+        $this->assertPropertyEquals('filename', $this->filename);
     }
 
     /**
@@ -141,13 +121,10 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testLogThrowsErrorIfXdebugIsPresent()
     {
-        $property = $this->logger_reflection->getProperty('filename');
-        $property->setAccessible(TRUE);
-
-        $property->setValue($this->logger, '/dev/null');
+        $property = $this->set_reflection_property_value('filename', '/dev/null');
 
         $this->expectOutputRegex('/^\nXdebug: WARNING: Foo/');
-        $this->logger->log(LogLevel::WARNING, 'Foo');
+        $this->class->log(LogLevel::WARNING, 'Foo');
     }
 
     /**
@@ -164,7 +141,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
                        ->will($this->returnValue(self::DATETIME_STRING));
 
         $this->expectOutputRegex('/^\nXdebug: WARNING: Foo/');
-        $this->logger->log(LogLevel::WARNING, 'Foo');
+        $this->class->log(LogLevel::WARNING, 'Foo');
 
         $this->assertFileEquals(TEST_STATICS . '/Feedback/errorln.log', $this->filename);
     }
@@ -182,7 +159,7 @@ class FileLoggerTest extends PHPUnit_Framework_TestCase
 
         $this->expectOutputRegex('/^\nXdebug: WARNING: Foo/');
 
-        $this->logger->log(LogLevel::WARNING, $object);
+        $this->class->log(LogLevel::WARNING, $object);
     }
 
 }
