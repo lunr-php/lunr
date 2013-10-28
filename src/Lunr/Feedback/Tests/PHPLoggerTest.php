@@ -17,7 +17,7 @@ namespace Lunr\Feedback\Tests;
 
 use Lunr\Feedback\PHPLogger;
 use Psr\Log\LogLevel;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -29,7 +29,7 @@ use ReflectionClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Feedback\PHPLogger
  */
-class PHPLoggerTest extends PHPUnit_Framework_TestCase
+class PHPLoggerTest extends LunrBaseTest
 {
 
     /**
@@ -39,27 +39,14 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
     private $request;
 
     /**
-     * Instance of the PHPLogger class.
-     * @var PHPLogger
-     */
-    private $logger;
-
-    /**
-     * Reflection-instance of the PHPLogger class.
-     * @var ReflectionClass
-     */
-    private $logger_reflection;
-
-    /**
      * Testcase Constructor.
      */
     public function setUp()
     {
-        $this->logger_reflection = new ReflectionClass('Lunr\Feedback\PHPLogger');
-
         $this->request = $this->getMock('Lunr\Corona\RequestInterface');
 
-        $this->logger = new PHPLogger($this->request);
+        $this->class      = new PHPLogger($this->request);
+        $this->reflection = new ReflectionClass('Lunr\Feedback\PHPLogger');
     }
 
     /**
@@ -67,9 +54,9 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->logger_reflection);
-        unset($this->logger);
+        unset($this->reflection);
         unset($this->request);
+        unset($this->class);
     }
 
     /**
@@ -77,11 +64,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testRequestSetCorrectly()
     {
-        $property = $this->logger_reflection->getProperty('request');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->request, $property->getValue($this->logger));
-        $this->assertSame($this->request, $property->getValue($this->logger));
+        $this->assertPropertySame('request', $this->request);
     }
 
     /**
@@ -96,10 +79,9 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testInterpolateMessageReplacesPlaceholders($message, $context, $expected)
     {
-        $method = $this->logger_reflection->getMethod('interpolate_message');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('interpolate_message');
 
-        $msg = $method->invokeArgs($this->logger, array($message, $context));
+        $msg = $method->invokeArgs($this->class, array($message, $context));
 
         $this->assertEquals($expected, $msg);
     }
@@ -117,10 +99,9 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testComposeMessageWithoutRequestAndFileInfoReturnsInterpolatedMessage($message, $context, $expected)
     {
-        $method = $this->logger_reflection->getMethod('compose_message');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('compose_message');
 
-        $msg = $method->invokeArgs($this->logger, array($message, $context));
+        $msg = $method->invokeArgs($this->class, array($message, $context));
 
         $this->assertEquals($expected, $msg);
     }
@@ -138,15 +119,14 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testComposeMessageWithCallUnAvailable($message, $context, $expected)
     {
-        $method = $this->logger_reflection->getMethod('compose_message');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('compose_message');
 
         $this->request->expects($this->once())
                       ->method('__get')
                       ->with($this->equalTo('call'))
                       ->will($this->returnValue(NULL));
 
-        $msg = $method->invokeArgs($this->logger, array($message, $context));
+        $msg = $method->invokeArgs($this->class, array($message, $context));
 
         $this->assertEquals($expected, $msg);
     }
@@ -164,15 +144,14 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testComposeMessageWithCallAvailable($message, $context, $expected)
     {
-        $method = $this->logger_reflection->getMethod('compose_message');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('compose_message');
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with($this->equalTo('call'))
                       ->will($this->returnValue('controller/method'));
 
-        $msg = $method->invokeArgs($this->logger, array($message, $context));
+        $msg = $method->invokeArgs($this->class, array($message, $context));
 
         $this->assertEquals('controller/method: ' . $expected, $msg);
     }
@@ -192,10 +171,9 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
     {
         $context['file'] = 'Test.php';
 
-        $method = $this->logger_reflection->getMethod('compose_message');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('compose_message');
 
-        $msg = $method->invokeArgs($this->logger, array($message, $context));
+        $msg = $method->invokeArgs($this->class, array($message, $context));
 
         $this->assertEquals($expected, $msg);
     }
@@ -215,10 +193,9 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
     {
         $context['line'] = '223';
 
-        $method = $this->logger_reflection->getMethod('compose_message');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('compose_message');
 
-        $msg = $method->invokeArgs($this->logger, array($message, $context));
+        $msg = $method->invokeArgs($this->class, array($message, $context));
 
         $this->assertEquals($expected, $msg);
     }
@@ -239,10 +216,9 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
         $context['file'] = 'Test.php';
         $context['line'] = '223';
 
-        $method = $this->logger_reflection->getMethod('compose_message');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('compose_message');
 
-        $msg = $method->invokeArgs($this->logger, array($message, $context));
+        $msg = $method->invokeArgs($this->class, array($message, $context));
 
         $this->assertEquals($expected . ' (Test.php: 223)', $msg);
     }
@@ -260,7 +236,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException($expected_exception);
 
-        $this->logger->log($level, 'msg');
+        $this->class->log($level, 'msg');
     }
 
     /**
@@ -273,7 +249,7 @@ class PHPLoggerTest extends PHPUnit_Framework_TestCase
     {
         $object = new MockLogMessage();
 
-        $this->logger->log(LogLevel::WARNING, $object);
+        $this->class->log(LogLevel::WARNING, $object);
     }
 
     /**
