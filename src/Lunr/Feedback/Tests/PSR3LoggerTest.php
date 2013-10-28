@@ -9,6 +9,7 @@
  * @package    Feedback
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -17,7 +18,7 @@ namespace Lunr\Feedback\Tests;
 
 use Lunr\Feedback\PSR3Logger;
 use Psr\Log\LogLevel;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -27,31 +28,20 @@ use ReflectionClass;
  * @package    Feedback
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Feedback\PSR3Logger
  */
-class PSR3LoggerTest extends PHPUnit_Framework_TestCase
+class PSR3LoggerTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the PHPLogger class.
-     * @var PHPLogger
-     */
-    private $logger;
-
-    /**
-     * Reflection-instance of the PHPLogger class.
-     * @var ReflectionClass
-     */
-    private $logger_reflection;
 
     /**
      * Testcase Constructor.
      */
     public function setUp()
     {
-        $this->logger_reflection = new ReflectionClass('Lunr\Feedback\PSR3Logger');
+        $this->reflection = new ReflectionClass('Lunr\Feedback\PSR3Logger');
 
-        $this->logger = $this->getMockForAbstractClass('Lunr\Feedback\PSR3Logger');
+        $this->class = $this->getMockForAbstractClass('Lunr\Feedback\PSR3Logger');
     }
 
     /**
@@ -59,8 +49,8 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->logger_reflection);
-        unset($this->logger);
+        unset($this->reflection);
+        unset($this->class);
     }
 
     /**
@@ -70,14 +60,14 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testEmergency()
     {
-        $this->logger->expects($this->once())
+        $this->class->expects($this->once())
                      ->method('log')
                      ->with($this->equalTo(LogLevel::EMERGENCY),
                             $this->equalTo('msg'),
                             $this->equalTo(array('test' => 'value'))
                      );
 
-        $this->logger->emergency('msg', array('test' => 'value'));
+        $this->class->emergency('msg', array('test' => 'value'));
     }
 
     /**
@@ -87,14 +77,14 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testAlert()
     {
-        $this->logger->expects($this->once())
+        $this->class->expects($this->once())
                      ->method('log')
                      ->with($this->equalTo(LogLevel::ALERT),
                             $this->equalTo('msg'),
                             $this->equalTo(array('test' => 'value'))
                      );
 
-        $this->logger->alert('msg', array('test' => 'value'));
+        $this->class->alert('msg', array('test' => 'value'));
     }
 
     /**
@@ -104,14 +94,14 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testCritical()
     {
-        $this->logger->expects($this->once())
+        $this->class->expects($this->once())
                      ->method('log')
                      ->with($this->equalTo(LogLevel::CRITICAL),
                             $this->equalTo('msg'),
                             $this->equalTo(array('test' => 'value'))
                      );
 
-        $this->logger->critical('msg', array('test' => 'value'));
+        $this->class->critical('msg', array('test' => 'value'));
     }
 
     /**
@@ -121,14 +111,14 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testError()
     {
-        $this->logger->expects($this->once())
+        $this->class->expects($this->once())
                      ->method('log')
                      ->with($this->equalTo(LogLevel::ERROR),
                             $this->equalTo('msg'),
                             $this->equalTo(array('test' => 'value'))
                      );
 
-        $this->logger->error('msg', array('test' => 'value'));
+        $this->class->error('msg', array('test' => 'value'));
     }
 
     /**
@@ -138,14 +128,14 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testWarning()
     {
-        $this->logger->expects($this->once())
+        $this->class->expects($this->once())
                      ->method('log')
                      ->with($this->equalTo(LogLevel::WARNING),
                             $this->equalTo('msg'),
                             $this->equalTo(array('test' => 'value'))
                      );
 
-        $this->logger->warning('msg', array('test' => 'value'));
+        $this->class->warning('msg', array('test' => 'value'));
     }
 
     /**
@@ -155,14 +145,14 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testNotice()
     {
-        $this->logger->expects($this->once())
+        $this->class->expects($this->once())
                      ->method('log')
                      ->with($this->equalTo(LogLevel::NOTICE),
                             $this->equalTo('msg'),
                             $this->equalTo(array('test' => 'value'))
                      );
 
-        $this->logger->notice('msg', array('test' => 'value'));
+        $this->class->notice('msg', array('test' => 'value'));
     }
 
     /**
@@ -172,14 +162,14 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testInfo()
     {
-        $this->logger->expects($this->once())
+        $this->class->expects($this->once())
                      ->method('log')
                      ->with($this->equalTo(LogLevel::INFO),
                             $this->equalTo('msg'),
                             $this->equalTo(array('test' => 'value'))
                      );
 
-        $this->logger->info('msg', array('test' => 'value'));
+        $this->class->info('msg', array('test' => 'value'));
     }
 
     /**
@@ -189,14 +179,14 @@ class PSR3LoggerTest extends PHPUnit_Framework_TestCase
      */
     public function testDebug()
     {
-        $this->logger->expects($this->once())
+        $this->class->expects($this->once())
                      ->method('log')
                      ->with($this->equalTo(LogLevel::DEBUG),
                             $this->equalTo('msg'),
                             $this->equalTo(array('test' => 'value'))
                      );
 
-        $this->logger->debug('msg', array('test' => 'value'));
+        $this->class->debug('msg', array('test' => 'value'));
     }
 
 }
