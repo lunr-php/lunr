@@ -9,13 +9,14 @@
  * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
 
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -25,31 +26,20 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\NetworkErrorTrait
  */
-class NetworkErrorTraitTest extends PHPUnit_Framework_TestCase
+class NetworkErrorTraitTest extends LunrBaseTest
 {
-
-    /**
-     * Object instance using NetworkErrorTrait.
-     * @var NetworkErrorTrait
-     */
-    protected $network_error_trait;
-
-    /**
-     * Reflection instance of the Object using the NetworkErrorTrait.
-     * @var ReflectionClass
-     */
-    protected $network_error_trait_reflection;
 
     /**
      * Test case constructor.
      */
     public function setUp()
     {
-        $this->network_error_trait = $this->getObjectForTrait('Lunr\Network\NetworkErrorTrait');
+        $this->class = $this->getObjectForTrait('Lunr\Network\NetworkErrorTrait');
 
-        $this->network_error_trait_reflection = new ReflectionClass($this->network_error_trait);
+        $this->reflection = new ReflectionClass($this->class);
     }
 
     /**
@@ -57,8 +47,8 @@ class NetworkErrorTraitTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->network_error_trait);
-        unset($this->network_error_trait_reflection);
+        unset($this->reflection);
+        unset($this->class);
     }
 
     /**
@@ -68,11 +58,9 @@ class NetworkErrorTraitTest extends PHPUnit_Framework_TestCase
      */
     public function testReturnErrorMessage()
     {
-        $property = $this->network_error_trait_reflection->getProperty('error_message');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->network_error_trait, 'Message');
+        $this->set_reflection_property_value('error_message', 'Message');
 
-        $this->assertEquals('Message', $this->network_error_trait->get_network_error_message());
+        $this->assertEquals('Message', $this->class->get_network_error_message());
     }
 
     /**
@@ -82,11 +70,9 @@ class NetworkErrorTraitTest extends PHPUnit_Framework_TestCase
      */
     public function testReturnErrorNumber()
     {
-        $property = $this->network_error_trait_reflection->getProperty('error_number');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->network_error_trait, 100);
+        $this->set_reflection_property_value('error_number', 100);
 
-        $this->assertEquals(100, $this->network_error_trait->get_network_error_number());
+        $this->assertEquals(100, $this->class->get_network_error_number());
     }
 
 }
