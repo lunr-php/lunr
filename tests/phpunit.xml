@@ -218,6 +218,8 @@
             <file>src/Lunr/Spark/Twitter/Tests/ApiGetJsonResultsTest.php</file>
             <file>src/Lunr/Spark/Twitter/Tests/AuthenticationApiTest.php</file>
             <file>src/Lunr/Spark/Twitter/Tests/AuthenticationBaseTest.php</file>
+            <file>src/Lunr/Spark/Twitter/Tests/TweetBaseTest.php</file>
+            <file>src/Lunr/Spark/Twitter/Tests/TweetGetTweetDataTest.php</file>
         </testsuite>
         <testsuite name="Spawn">
             <file>src/Lunr/Spawn/Tests/ResqueJobDispatcherBaseTest.php</file>
