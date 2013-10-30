@@ -9,6 +9,7 @@
  * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Sphere\Tests;
  * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Sphere\DatabaseSessionHandler
  */
 class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
@@ -32,12 +34,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
      */
     public function testDefaultLifetimeValue()
     {
-        $property = $this->dsh_reflection->getProperty('lifetime');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->dsh);
-
-        $this->assertEquals(ini_get('session.gc_maxlifetime'), $value);
+        $this->assertPropertyEquals('lifetime', ini_get('session.gc_maxlifetime'));
     }
 
     /**
@@ -47,7 +44,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
      */
     public function testOpenPath()
     {
-        $this->assertTrue($this->dsh->open('myPath', ''));
+        $this->assertTrue($this->class->open('myPath', ''));
     }
 
     /**
@@ -57,7 +54,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
      */
     public function testCloseReturnsTrue()
     {
-        $this->assertTrue($this->dsh->close());
+        $this->assertTrue($this->class->close());
     }
 
     /**
@@ -71,7 +68,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
                    ->method('read_session_data')
                    ->with($this->equalTo('sessionid'))
                    ->will($this->returnValue(array()));
-        $this->assertSame(array(), $this->dsh->read('sessionid'));
+        $this->assertSame(array(), $this->class->read('sessionid'));
     }
 
     /**
@@ -85,7 +82,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
                    ->method('write_session_data')
                    ->with($this->equalTo('sessionid'), $this->equalTo('sessionData'))
                    ->will($this->returnValue(TRUE));
-        $this->assertTrue($this->dsh->write('sessionid', 'sessionData'));
+        $this->assertTrue($this->class->write('sessionid', 'sessionData'));
     }
 
     /**
@@ -99,7 +96,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
                    ->method('delete_session')
                    ->with($this->equalTo('sessionid'));
 
-        $this->assertTrue($this->dsh->destroy('sessionid'));
+        $this->assertTrue($this->class->destroy('sessionid'));
     }
 
     /**
@@ -113,7 +110,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
                    ->method('session_gc')
                    ->with($this->equalTo('10'));
 
-        $this->assertTrue($this->dsh->gc(10));
+        $this->assertTrue($this->class->gc(10));
     }
 
 }
