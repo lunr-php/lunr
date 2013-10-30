@@ -64,17 +64,20 @@ class Authentication extends Api
 
         $options = [
             'CURLOPT_USERPWD' => $this->consumer_key . ':' . $this->consumer_secret,
-            'CURLOPT_VERBOSE' => 1,
-            'CURLOPT_SSL_VERIFYPEER' => 1
+            'CURLOPT_VERBOSE' => TRUE,
+            'CURLOPT_SSL_VERIFYPEER' => TRUE
         ];
 
         $params = [
             'grant_type' => 'client_credentials'
         ];
 
+        $this->curl->set_http_headers($header);
+        $this->curl->set_options($options);
+
         $url = Domain::API . 'oauth2/token';
 
-        $result = $this->get_json_results($url, $header, $options, $params, 'post');
+        $result = $this->get_json_results($url, $params, 'post');
 
         if (empty($result) === TRUE)
         {

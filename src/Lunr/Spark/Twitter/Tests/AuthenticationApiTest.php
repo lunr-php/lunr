@@ -30,6 +30,36 @@ use ReflectionClass;
  */
 class AuthenticationApiTest extends AuthenticationTest
 {
+    /**
+     * A sample curl options array
+     * @var array
+     */
+    protected $options;
+
+    /**
+     * A sample curl header array
+     * @var array
+     */
+    protected $header;
+
+    /**
+     * AuthenticationApiTest constructor.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->options = [
+            'CURLOPT_USERPWD' => 'Key:Secret',
+            'CURLOPT_VERBOSE' => TRUE,
+            'CURLOPT_SSL_VERIFYPEER' => TRUE
+        ];
+
+        $this->header = [
+            'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
+            'User-Agent' => 'lunr.nl'
+        ];
+    }
 
     /**
      * Test that get_bearer_token() returns an empty string on request error.
@@ -55,6 +85,14 @@ class AuthenticationApiTest extends AuthenticationTest
                   ->method('get')
                   ->with($this->equalTo('twitter'), $this->equalTo('consumer_secret'))
                   ->will($this->returnValue('Secret'));
+
+        $this->curl->expects($this->once())
+                   ->method('set_options')
+                   ->with($this->equalTo($this->options));
+
+        $this->curl->expects($this->once())
+                   ->method('set_http_headers')
+                   ->with($this->equalTo($this->header));
 
         $this->curl->expects($this->once())
                    ->method('post_request')
@@ -96,6 +134,14 @@ class AuthenticationApiTest extends AuthenticationTest
                   ->method('get')
                   ->with($this->equalTo('twitter'), $this->equalTo('consumer_secret'))
                   ->will($this->returnValue('Secret'));
+
+        $this->curl->expects($this->once())
+                   ->method('set_options')
+                   ->with($this->equalTo($this->options));
+
+        $this->curl->expects($this->once())
+                   ->method('set_http_headers')
+                   ->with($this->equalTo($this->header));
 
         $this->curl->expects($this->once())
                    ->method('post_request')
@@ -141,6 +187,14 @@ class AuthenticationApiTest extends AuthenticationTest
                   ->method('get')
                   ->with($this->equalTo('twitter'), $this->equalTo('consumer_secret'))
                   ->will($this->returnValue('Secret'));
+
+        $this->curl->expects($this->once())
+                   ->method('set_options')
+                   ->with($this->equalTo($this->options));
+
+        $this->curl->expects($this->once())
+                   ->method('set_http_headers')
+                   ->with($this->equalTo($this->header));
 
         $this->curl->expects($this->once())
                    ->method('post_request')

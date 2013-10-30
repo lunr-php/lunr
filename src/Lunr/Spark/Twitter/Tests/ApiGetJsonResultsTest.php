@@ -32,37 +32,6 @@ class ApiGetJsonResultsTest extends ApiTest
 {
 
     /**
-     * A sample curl options array
-     * @var array
-     */
-    protected $options;
-
-    /**
-     * A sample curl header array
-     * @var array
-     */
-    protected $header;
-
-    /**
-     * ApiGetUrlResultsTest constructor.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->options = [
-            'CURLOPT_USERPWD' => 'consumer_key:consumer_secret',
-            'CURLOPT_VERBOSE' => 1,
-            'CURLOPT_SSL_VERIFYPEER' => 1
-        ];
-
-        $this->header = [
-            'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
-            'User-Agent' => 'user_agent'
-        ];
-    }
-
-    /**
      * Test that get_josn_results() does a correct get_request without params.
      *
      * @param String $http_method HTTP method to use for the request.
@@ -73,21 +42,13 @@ class ApiGetJsonResultsTest extends ApiTest
     public function testGetJsonResultsMakesGetRequestWithoutParams($http_method)
     {
         $this->curl->expects($this->once())
-                   ->method('set_options')
-                   ->with($this->equalTo($this->options));
-
-        $this->curl->expects($this->once())
-                   ->method('set_http_headers')
-                   ->with($this->equalTo($this->header));
-
-        $this->curl->expects($this->once())
                    ->method('get_request')
                    ->with($this->equalTo('http://localhost?'))
                    ->will($this->returnValue($this->response));
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
-        $method->invokeArgs($this->class, [ 'http://localhost', $this->header, $this->options, [], $http_method ]);
+        $method->invokeArgs($this->class, [ 'http://localhost', [], $http_method ]);
     }
 
     /**
@@ -101,21 +62,13 @@ class ApiGetJsonResultsTest extends ApiTest
     public function testGetJsonResultsMakesGetRequestWithParams($http_method)
     {
         $this->curl->expects($this->once())
-                   ->method('set_options')
-                   ->with($this->equalTo($this->options));
-
-        $this->curl->expects($this->once())
-                   ->method('set_http_headers')
-                   ->with($this->equalTo($this->header));
-
-        $this->curl->expects($this->once())
                    ->method('get_request')
                    ->with($this->equalTo('http://localhost?param1=1&param2=2'))
                    ->will($this->returnValue($this->response));
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
-        $method->invokeArgs($this->class, [ 'http://localhost', $this->header, $this->options, [ 'param1' => 1, 'param2' => 2 ], $http_method ]);
+        $method->invokeArgs($this->class, [ 'http://localhost', [ 'param1' => 1, 'param2' => 2 ], $http_method ]);
     }
 
     /**
@@ -126,21 +79,13 @@ class ApiGetJsonResultsTest extends ApiTest
     public function testGetJsonResultsMakesPostRequestWithoutParams()
     {
         $this->curl->expects($this->once())
-                   ->method('set_options')
-                   ->with($this->equalTo($this->options));
-
-        $this->curl->expects($this->once())
-                   ->method('set_http_headers')
-                   ->with($this->equalTo($this->header));
-
-        $this->curl->expects($this->once())
                    ->method('post_request')
                    ->with($this->equalTo('http://localhost'), $this->equalTo([]))
                    ->will($this->returnValue($this->response));
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
-        $method->invokeArgs($this->class, [ 'http://localhost', $this->header, $this->options, [], 'POST' ]);
+        $method->invokeArgs($this->class, [ 'http://localhost', [], 'POST' ]);
     }
 
     /**
@@ -151,21 +96,13 @@ class ApiGetJsonResultsTest extends ApiTest
     public function testGetJsonResultsMakesPostRequestWithParams()
     {
         $this->curl->expects($this->once())
-                   ->method('set_options')
-                   ->with($this->equalTo($this->options));
-
-        $this->curl->expects($this->once())
-                   ->method('set_http_headers')
-                   ->with($this->equalTo($this->header));
-
-        $this->curl->expects($this->once())
                    ->method('post_request')
                    ->with($this->equalTo('http://localhost'), $this->equalTo([ 'param1' => 1, 'param2' => 2 ]))
                    ->will($this->returnValue($this->response));
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
-        $method->invokeArgs($this->class, [ 'http://localhost', $this->header, $this->options, [ 'param1' => 1, 'param2' => 2 ], 'POST' ]);
+        $method->invokeArgs($this->class, [ 'http://localhost', [ 'param1' => 1, 'param2' => 2 ], 'POST' ]);
     }
 
     /**
@@ -204,7 +141,7 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
-        $method->invokeArgs($this->class, [ 'http://localhost', $this->header, $this->options ]);
+        $method->invokeArgs($this->class, [ 'http://localhost' ]);
     }
 
     /**
@@ -229,7 +166,7 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
-        $method->invokeArgs($this->class, [ 'http://localhost', $this->header, $this->options ]);
+        $method->invokeArgs($this->class, [ 'http://localhost' ]);
     }
 
     /**
@@ -239,14 +176,6 @@ class ApiGetJsonResultsTest extends ApiTest
      */
     public function testGetJsonResultsReturnsEmptyArrayOnRequestError()
     {
-        $this->curl->expects($this->once())
-                   ->method('set_options')
-                   ->with($this->equalTo($this->options));
-
-        $this->curl->expects($this->once())
-                   ->method('set_http_headers')
-                   ->with($this->equalTo($this->header));
-
         $this->curl->expects($this->once())
                    ->method('get_request')
                    ->with($this->equalTo('http://localhost?'))
@@ -262,7 +191,7 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
-        $this->assertEmpty($method->invokeArgs($this->class, [ 'http://localhost', $this->header, $this->options ]));
+        $this->assertEmpty($method->invokeArgs($this->class, [ 'http://localhost' ]));
     }
 
     /**
@@ -295,7 +224,7 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->assertEquals(
             [ 'param1' => 1, 'param2' => 2 ],
-            $method->invokeArgs($this->class, [ 'http://localhost', $this->header, $this->options ])
+            $method->invokeArgs($this->class, [ 'http://localhost' ])
         );
     }
 

@@ -115,19 +115,14 @@ abstract class Api
     /**
      * Fetch and parse results as though they were a query string.
      *
-     * @param String $url     API URL
-     * @param Array  $header  The header values for request
-     * @param Array  $options A number of curl options necessary for the specific request
-     * @param Array  $params  Array of parameters for the API request
-     * @param String $method  Request method to use, either 'get' or 'post'
+     * @param String $url    API URL
+     * @param Array  $params Array of parameters for the API request
+     * @param String $method Request method to use, either 'get' or 'post'
      *
      * @return Array $result Array of return values
      */
-    protected function get_json_results($url, $header, $options, $params = [], $method = 'get')
+    protected function get_json_results($url, $params = [], $method = 'get')
     {
-        $this->curl->set_http_headers($header);
-        $this->curl->set_options($options);
-
         if (strtolower($method) === 'get')
         {
             $response = $this->curl->get_request($url . '?' . http_build_query($params));
