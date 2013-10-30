@@ -9,6 +9,7 @@
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -16,7 +17,7 @@
 namespace Lunr\Shadow\Tests;
 
 use Lunr\Shadow\Console;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -26,22 +27,11 @@ use ReflectionClass;
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Shadow\Console
  */
-class ConsoleTest extends PHPUnit_Framework_TestCase
+class ConsoleTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the Console class.
-     * @var Console
-     */
-    private $console;
-
-    /**
-     * Reflection instance of the Console class.
-     * @var ReflectionClass
-     */
-    private $console_reflection;
 
     /**
      * DateTime string used for Console Output.
@@ -62,9 +52,9 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
                  ->method('get_datetime')
                  ->will($this->returnValue(self::DATETIME_STRING));
 
-        $this->console = new Console($datetime);
+        $this->class = new Console($datetime);
 
-        $this->console_reflection = new ReflectionClass('Lunr\Shadow\Console');
+        $this->reflection = new ReflectionClass('Lunr\Shadow\Console');
     }
 
     /**
@@ -72,8 +62,8 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->console);
-        unset($this->console_reflection);
+        unset($this->reflection);
+        unset($this->class);
     }
 
     /**
@@ -83,11 +73,10 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
      */
     public function testBuildCliOutput()
     {
-        $method = $this->console_reflection->getMethod('build_cli_output');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('build_cli_output');
         $msg    = 'Test';
         $output = self::DATETIME_STRING . ': ' . $msg;
-        $this->assertEquals($output, $method->invokeArgs($this->console, array($msg)));
+        $this->assertEquals($output, $method->invokeArgs($this->class, array($msg)));
     }
 
     /**
@@ -101,7 +90,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
         $output = self::DATETIME_STRING . ': ' . $msg;
 
         $this->expectOutputString($output);
-        $this->console->cli_print($msg);
+        $this->class->cli_print($msg);
     }
 
     /**
@@ -115,7 +104,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
         $output = self::DATETIME_STRING . ': ' . $msg . "\n";
 
         $this->expectOutputString($output);
-        $this->console->cli_println($msg);
+        $this->class->cli_println($msg);
     }
 
     /**
@@ -128,7 +117,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
         $output = "[ok]\n";
 
         $this->expectOutputString($output);
-        $this->console->cli_print_status(TRUE);
+        $this->class->cli_print_status(TRUE);
     }
 
     /**
@@ -141,7 +130,7 @@ class ConsoleTest extends PHPUnit_Framework_TestCase
         $output = "[failed]\n";
 
         $this->expectOutputString($output);
-        $this->console->cli_print_status(FALSE);
+        $this->class->cli_print_status(FALSE);
     }
 
 }
