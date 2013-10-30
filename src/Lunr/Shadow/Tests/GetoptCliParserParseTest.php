@@ -9,6 +9,7 @@
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Shadow\Tests;
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Shadow\GetoptCliParser
  */
 class GetoptCliParserParseTest extends GetoptCliParserTest
@@ -34,13 +36,11 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
      */
     public function testWrapArgumentReturnsEmptyArrayForFalse()
     {
-        $method = $this->reflection->getMethod('wrap_argument');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('wrap_argument');
 
         $value = $method->invokeArgs($this->class, array(FALSE));
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -53,8 +53,7 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
      */
     public function testWrapArgumentReturnsValueWrappedInArray($cli_value)
     {
-        $method = $this->reflection->getMethod('wrap_argument');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('wrap_argument');
 
         $value = $method->invokeArgs($this->class, array($cli_value));
 
@@ -73,8 +72,7 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
 
         $value = $this->class->parse();
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -85,16 +83,11 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
      */
     public function testParseSetsErrorTrueOnError()
     {
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-
         runkit_function_redefine('getopt', '', self::PARSE_FAILS);
 
         $this->class->parse();
 
-        $value = $property->getValue($this->class);
-
-        $this->assertTrue($value);
+        $this->assertTrue($this->get_reflection_property_value('error'));
     }
 
     /**

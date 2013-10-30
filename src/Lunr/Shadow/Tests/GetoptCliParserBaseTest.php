@@ -9,6 +9,7 @@
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Shadow\Tests;
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Shadow\GetoptCliParser
  */
 class GetoptCliParserBaseTest extends GetoptCliParserTest
@@ -32,12 +34,7 @@ class GetoptCliParserBaseTest extends GetoptCliParserTest
      */
     public function testShortOptsIsPassedCorrectly()
     {
-        $property = $this->reflection->getProperty('short');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertEquals('ab:c::', $value);
+        $this->assertPropertyEquals('short', 'ab:c::');
     }
 
     /**
@@ -45,12 +42,7 @@ class GetoptCliParserBaseTest extends GetoptCliParserTest
      */
     public function testLongOptsIsPassedCorrectly()
     {
-        $property = $this->reflection->getProperty('long');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertEquals(array('first', 'second:', 'third::'), $value);
+        $this->assertPropertyEquals('long', array('first', 'second:', 'third::'));
     }
 
     /**
@@ -58,12 +50,7 @@ class GetoptCliParserBaseTest extends GetoptCliParserTest
      */
     public function testErrorIsFalseByDefault()
     {
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertFalse($value);
+        $this->assertFalse($this->get_reflection_property_value('error'));
     }
 
     /**
@@ -73,12 +60,7 @@ class GetoptCliParserBaseTest extends GetoptCliParserTest
      */
     public function testIsInvalidCommandLineReturnsError()
     {
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertEquals($value, $this->class->is_invalid_commandline());
+        $this->assertPropertyEquals('error', $this->class->is_invalid_commandline());
     }
 
 }
