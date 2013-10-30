@@ -16,7 +16,7 @@
 
 namespace Lunr\Gravity\Filesystem\Tests;
 
-use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
+use Lunr\Halo\PsrLoggerTestTrait;
 
 /**
  * This class contains base tests for the PhysicalFilesystemAccessObject.
@@ -31,13 +31,7 @@ use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
 class PhysicalFilesystemAccessObjectBaseTest extends PhysicalFilesystemAccessObjectTest
 {
 
-    /**
-     * Test that the logger class is passed correctly.
-     */
-    public function testLoggerIsPassedCorrectly()
-    {
-        $this->assertPropertySame('logger', $this->logger);
-    }
+    use PsrLoggerTestTrait;
 
 }
 
