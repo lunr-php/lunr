@@ -9,6 +9,7 @@
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Shadow\Tests;
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Shadow\LunrCliParser
  */
 class LunrCliParserCheckObligatoryArgumentTest extends LunrCliParserTest
@@ -34,16 +36,11 @@ class LunrCliParserCheckObligatoryArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentReturnsTrueForValidParameterWithOneArg()
     {
-        $args = $this->reflection->getProperty('args');
-        $args->setAccessible(TRUE);
-        $args->setValue($this->class, array('test.php', '-b', 'arg'));
+        $this->set_reflection_property_value('args', array('test.php', '-b', 'arg'));
 
-        $ast = $this->reflection->getProperty('ast');
-        $ast->setAccessible(TRUE);
-        $ast->setValue($this->class, array('b' => array()));
+        $this->set_reflection_property_value('ast', array('b' => array()));
 
-        $method = $this->reflection->getMethod('check_argument');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('check_argument');
 
         $value = $method->invokeArgs($this->class, array('b', 1, 0, 'b:'));
 
@@ -57,16 +54,11 @@ class LunrCliParserCheckObligatoryArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentReturnsTrueForValidParameterWithTwoArgs()
     {
-        $args = $this->reflection->getProperty('args');
-        $args->setAccessible(TRUE);
-        $args->setValue($this->class, array('test.php', '-e', 'arg1', 'arg2'));
+        $args = $this->set_reflection_property_value('args', array('test.php', '-e', 'arg1', 'arg2'));
 
-        $ast = $this->reflection->getProperty('ast');
-        $ast->setAccessible(TRUE);
-        $ast->setValue($this->class, array('e' => array()));
+        $ast = $this->set_reflection_property_value('ast', array('e' => array()));
 
-        $method = $this->reflection->getMethod('check_argument');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('check_argument');
 
         $value = $method->invokeArgs($this->class, array('e', 1, 0, 'e::'));
 
@@ -80,20 +72,15 @@ class LunrCliParserCheckObligatoryArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentAppendsFirstArgumentToAst()
     {
-        $args = $this->reflection->getProperty('args');
-        $args->setAccessible(TRUE);
-        $args->setValue($this->class, array('test.php', '-b', 'arg'));
+        $this->set_reflection_property_value('args', array('test.php', '-b', 'arg'));
 
-        $ast = $this->reflection->getProperty('ast');
-        $ast->setAccessible(TRUE);
-        $ast->setValue($this->class, array('b' => array()));
+        $this->set_reflection_property_value('ast', array('b' => array()));
 
-        $method = $this->reflection->getMethod('check_argument');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('check_argument');
 
         $method->invokeArgs($this->class, array('b', 1, 0, 'b:'));
 
-        $value = $ast->getValue($this->class);
+        $value = $this->get_reflection_property_value('ast');
 
         $this->assertCount(1, $value['b']);
         $this->assertEquals(array('arg'), $value['b']);
@@ -106,20 +93,15 @@ class LunrCliParserCheckObligatoryArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentAppendsSecondArgumentToAst()
     {
-        $args = $this->reflection->getProperty('args');
-        $args->setAccessible(TRUE);
-        $args->setValue($this->class, array('test.php', '-e', 'arg1', 'arg2'));
+        $this->set_reflection_property_value('args', array('test.php', '-e', 'arg1', 'arg2'));
 
-        $ast = $this->reflection->getProperty('ast');
-        $ast->setAccessible(TRUE);
-        $ast->setValue($this->class, array('e' => array()));
+        $this->set_reflection_property_value('ast', array('e' => array()));
 
-        $method = $this->reflection->getMethod('check_argument');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('check_argument');
 
         $method->invokeArgs($this->class, array('e', 1, 0, 'e::'));
 
-        $value = $ast->getValue($this->class);
+        $value = $this->get_reflection_property_value('ast');
 
         $this->assertCount(2, $value['e']);
         $this->assertEquals(array('arg1', 'arg2'), $value['e']);
@@ -132,16 +114,11 @@ class LunrCliParserCheckObligatoryArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentReturnsFalseForArgumentMissing()
     {
-        $args = $this->reflection->getProperty('args');
-        $args->setAccessible(TRUE);
-        $args->setValue($this->class, array('test.php', '-b'));
+        $args = $this->set_reflection_property_value('args', array('test.php', '-b'));
 
-        $ast = $this->reflection->getProperty('ast');
-        $ast->setAccessible(TRUE);
-        $ast->setValue($this->class, array('b' => array()));
+        $ast = $this->set_reflection_property_value('ast', array('b' => array()));
 
-        $method = $this->reflection->getMethod('check_argument');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('check_argument');
 
         $this->logger->expects($this->once())
                      ->method('error')
@@ -159,16 +136,11 @@ class LunrCliParserCheckObligatoryArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentReturnsFalseForArgumentMissingWithAnotherParameterAfter()
     {
-        $args = $this->reflection->getProperty('args');
-        $args->setAccessible(TRUE);
-        $args->setValue($this->class, array('test.php', '-b', '-c'));
+        $this->set_reflection_property_value('args', array('test.php', '-b', '-c'));
 
-        $ast = $this->reflection->getProperty('ast');
-        $ast->setAccessible(TRUE);
-        $ast->setValue($this->class, array('b' => array()));
+        $this->set_reflection_property_value('ast', array('b' => array()));
 
-        $method = $this->reflection->getMethod('check_argument');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('check_argument');
 
         $this->logger->expects($this->once())
                      ->method('error')

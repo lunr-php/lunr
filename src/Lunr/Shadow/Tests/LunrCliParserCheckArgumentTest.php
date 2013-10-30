@@ -9,6 +9,7 @@
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Shadow\Tests;
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Shadow\LunrCliParser
  */
 class LunrCliParserCheckArgumentTest extends LunrCliParserTest
@@ -34,8 +36,7 @@ class LunrCliParserCheckArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentReturnsFalseForValidParameterWithoutArgs()
     {
-        $method = $this->reflection->getMethod('check_argument');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('check_argument');
 
         $value = $method->invokeArgs($this->class, array('a', 1, 0, 'a'));
 
@@ -49,12 +50,9 @@ class LunrCliParserCheckArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentReturnsTrueForSuperfluousArgument()
     {
-        $args = $this->reflection->getProperty('args');
-        $args->setAccessible(TRUE);
-        $args->setValue($this->class, array('test.php', '-a', 'arg'));
+        $this->set_reflection_property_value('args', array('test.php', '-a', 'arg'));
 
-        $method = $this->reflection->getMethod('check_argument');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('check_argument');
 
         $this->logger->expects($this->once())
                      ->method('notice')

@@ -9,6 +9,7 @@
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Shadow\Tests;
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Shadow\LunrCliParser
  */
 class LunrCliParserIsOptTest extends LunrCliParserTest
@@ -34,15 +36,11 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      */
     public function testIsOptPushesInitialArgumentIntoChecked()
     {
-        $property = $this->reflection->getProperty('checked');
-        $property->setAccessible(TRUE);
-
-        $method = $this->reflection->getMethod('is_opt');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_opt');
 
         $method->invokeArgs($this->class, array('1', 2));
 
-        $this->assertEquals(array('1'), $property->getValue($this->class));
+        $this->assertPropertyEquals('checked', array('1'));
     }
 
     /**
@@ -52,16 +50,12 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      */
     public function testIsOptPushesNonInitialArgumentAtTheEndOfChecked()
     {
-        $property = $this->reflection->getProperty('checked');
-        $property->setAccessible(TRUE);
-
-        $method = $this->reflection->getMethod('is_opt');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_opt');
 
         $method->invokeArgs($this->class, array('1', 2));
         $method->invokeArgs($this->class, array('2', 2));
 
-        $this->assertEquals(array('1', '2'), $property->getValue($this->class));
+        $this->assertPropertyEquals('checked', array('1', '2'));
     }
 
     /**
@@ -75,8 +69,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      */
     public function testIsOptReturnsFalseForInvalidParameter($param)
     {
-        $method = $this->reflection->getMethod('is_opt');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_opt');
 
         $this->logger->expects($this->once())
                      ->method('error')
@@ -98,11 +91,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      */
     public function testIsOptSetsErrorTrueForInvalidParameter($param)
     {
-        $method = $this->reflection->getMethod('is_opt');
-        $method->setAccessible(TRUE);
-
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_opt');
 
         $this->logger->expects($this->once())
                      ->method('error')
@@ -110,7 +99,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
 
         $method->invokeArgs($this->class, array($param, 1));
 
-        $this->assertTrue($property->getValue($this->class));
+        $this->assertTrue($this->get_reflection_property_value('error'));
     }
 
     /**
@@ -120,8 +109,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      */
     public function testIsOptWithSuperfluousToplevelArgument()
     {
-        $method = $this->reflection->getMethod('is_opt');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_opt');
 
         $this->logger->expects($this->once())
                      ->method('notice')
@@ -140,8 +128,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      */
     public function testIsOptReturnsFalseForValidShortParameterWithoutArguments()
     {
-        $method = $this->reflection->getMethod('is_opt');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_opt');
 
         $value = $method->invokeArgs($this->class, array('-a', 1));
 
@@ -156,8 +143,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      */
     public function testIsOptReturnsFalseForValidLongParameterWithoutArguments()
     {
-        $method = $this->reflection->getMethod('is_opt');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_opt');
 
         $value = $method->invokeArgs($this->class, array('--first', 1));
 
@@ -172,12 +158,9 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      */
     public function testIsOptReturnsTrueForValidShortParameterWithArguments()
     {
-        $args = $this->reflection->getProperty('args');
-        $args->setAccessible(TRUE);
-        $args->setValue($this->class, array('test.php', '-b', 'arg'));
+        $this->set_reflection_property_value('args', array('test.php', '-b', 'arg'));
 
-        $method = $this->reflection->getMethod('is_opt');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_opt');
 
         $value = $method->invokeArgs($this->class, array('-b', 1));
 
@@ -192,12 +175,9 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      */
     public function testIsOptReturnsTrueForValidLongParameterWithArguments()
     {
-        $args = $this->reflection->getProperty('args');
-        $args->setAccessible(TRUE);
-        $args->setValue($this->class, array('test.php', '--second', 'arg'));
+        $this->set_reflection_property_value('args', array('test.php', '--second', 'arg'));
 
-        $method = $this->reflection->getMethod('is_opt');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_opt');
 
         $value = $method->invokeArgs($this->class, array('--second', 1));
 
@@ -211,8 +191,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      */
     public function testIsOptReturnsFalseForArgument()
     {
-        $method = $this->reflection->getMethod('is_opt');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_opt');
 
         $value = $method->invokeArgs($this->class, array('arg', 2));
 

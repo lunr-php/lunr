@@ -9,6 +9,7 @@
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Shadow\Tests;
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Shadow\LunrCliParser
  */
 class LunrCliParserValidLongTest extends LunrCliParserTest
@@ -37,8 +39,7 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
      */
     public function testIsValidLongReturnsFalseForInvalidParameter($param)
     {
-        $method = $this->reflection->getMethod('is_valid_long');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_valid_long');
 
         $this->logger->expects($this->once())
                      ->method('error')
@@ -59,11 +60,7 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
      */
     public function testIsValidLongSetsErrorTrueForInvalidParameter($param)
     {
-        $method = $this->reflection->getMethod('is_valid_long');
-        $method->setAccessible(TRUE);
-
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_valid_long');
 
         $this->logger->expects($this->once())
                      ->method('error')
@@ -71,7 +68,7 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
 
         $method->invokeArgs($this->class, array($param, 1));
 
-        $this->assertTrue($property->getValue($this->class));
+        $this->assertTrue($this->get_reflection_property_value('error'));
     }
 
     /**
@@ -81,19 +78,13 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
      */
     public function testIsValidLongAddsValidParameterToAst()
     {
-        $method = $this->reflection->getMethod('is_valid_long');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_valid_long');
 
-        $property = $this->reflection->getProperty('ast');
-        $property->setAccessible(TRUE);
-
-        $short = $this->reflection->getProperty('long');
-        $short->setAccessible(TRUE);
-        $short->setValue($this->class, array('first'));
+        $this->set_reflection_property_value('long', array('first'));
 
         $method->invokeArgs($this->class, array('first', 1));
 
-        $value = $property->getValue($this->class);
+        $value = $this->get_reflection_property_value('ast');
 
         $this->assertArrayHasKey('first', $value);
         $this->assertEquals($value['first'], array());
@@ -107,12 +98,9 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
      */
     public function testIsValidLongReturnsFalseForValidParameterWithoutArguments()
     {
-        $method = $this->reflection->getMethod('is_valid_long');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_valid_long');
 
-        $property = $this->reflection->getProperty('long');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->class, array('first'));
+        $this->set_reflection_property_value('long', array('first'));
 
         $value = $method->invokeArgs($this->class, array('first', 1));
 
@@ -126,16 +114,11 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
      */
     public function testIsValidLongReturnsTrueForValidParameterWithArguments()
     {
-        $method = $this->reflection->getMethod('is_valid_long');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_valid_long');
 
-        $args = $this->reflection->getProperty('args');
-        $args->setAccessible(TRUE);
-        $args->setValue($this->class, array('test.php', '--second', 'arg'));
+        $this->set_reflection_property_value('args', array('test.php', '--second', 'arg'));
 
-        $property = $this->reflection->getProperty('long');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->class, array('second:'));
+        $this->set_reflection_property_value('long', array('second:'));
 
         $value = $method->invokeArgs($this->class, array('second', 1));
 

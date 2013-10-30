@@ -9,6 +9,7 @@
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Shadow\Tests;
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Shadow\LunrCliParser
  */
 class LunrCliParserBaseTest extends LunrCliParserTest
@@ -32,13 +34,7 @@ class LunrCliParserBaseTest extends LunrCliParserTest
      */
     public function testLoggerIsPassedCorrectly()
     {
-        $property = $this->reflection->getProperty('logger');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertInstanceOf('Psr\Log\LoggerInterface', $value);
-        $this->assertSame($this->logger, $value);
+        $this->assertPropertySame('logger', $this->logger);
     }
 
     /**
@@ -46,12 +42,7 @@ class LunrCliParserBaseTest extends LunrCliParserTest
      */
     public function testShortOptsIsPassedCorrectly()
     {
-        $property = $this->reflection->getProperty('short');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertEquals('ab:c;d:;e::', $value);
+        $this->assertPropertyEquals('short', 'ab:c;d:;e::');
     }
 
     /**
@@ -59,12 +50,7 @@ class LunrCliParserBaseTest extends LunrCliParserTest
      */
     public function testLongOptsIsPassedCorrectly()
     {
-        $property = $this->reflection->getProperty('long');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertEquals(array('first', 'second:', 'third;', 'fourth:;', 'fifth::'), $value);
+        $this->assertPropertyEquals('long', array('first', 'second:', 'third;', 'fourth:;', 'fifth::'));
     }
 
     /**
@@ -72,13 +58,9 @@ class LunrCliParserBaseTest extends LunrCliParserTest
      */
     public function testArgsIsEmptyArrayByDefault()
     {
-        $property = $this->reflection->getProperty('args');
-        $property->setAccessible(TRUE);
+        $value = $this->get_reflection_property_value('args');
 
-        $value = $property->getValue($this->class);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -86,13 +68,9 @@ class LunrCliParserBaseTest extends LunrCliParserTest
      */
     public function testCheckedIsEmptyArrayByDefault()
     {
-        $property = $this->reflection->getProperty('checked');
-        $property->setAccessible(TRUE);
+        $value = $this->get_reflection_property_value('checked');
 
-        $value = $property->getValue($this->class);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -100,13 +78,9 @@ class LunrCliParserBaseTest extends LunrCliParserTest
      */
     public function testASTisEmptyArrayByDefault()
     {
-        $property = $this->reflection->getProperty('ast');
-        $property->setAccessible(TRUE);
+        $value = $this->get_reflection_property_value('ast');
 
-        $value = $property->getValue($this->class);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -114,12 +88,7 @@ class LunrCliParserBaseTest extends LunrCliParserTest
      */
     public function testErrorIsFalseByDefault()
     {
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertFalse($value);
+        $this->assertFalse($this->get_reflection_property_value('error'));
     }
 
     /**
@@ -129,10 +98,7 @@ class LunrCliParserBaseTest extends LunrCliParserTest
      */
     public function testIsInvalidCommandLineReturnsError()
     {
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
+        $value = $this->get_reflection_property_value('error');
 
         $this->assertEquals($value, $this->class->is_invalid_commandline());
     }

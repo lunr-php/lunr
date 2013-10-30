@@ -9,6 +9,7 @@
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Shadow\Tests;
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Shadow\LunrCliParser
  */
 class LunrCliParserParseTest extends LunrCliParserTest
@@ -38,8 +40,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
 
         $value = $this->class->parse();
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -61,8 +62,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
 
         $value = $this->class->parse();
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -76,9 +76,6 @@ class LunrCliParserParseTest extends LunrCliParserTest
      */
     public function testParseArgvWithIncompleteArgumentsSetsErrorTrue($param)
     {
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
-
         $_SERVER['argv'] = array('script.php', $param);
 
         $this->logger->expects($this->once())
@@ -87,7 +84,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
 
         $this->class->parse();
 
-        $this->assertTrue($property->getValue($this->class));
+        $this->assertTrue($this->get_reflection_property_value('error'));
     }
 
     /**
@@ -102,9 +99,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
      */
     public function testParseValidShortParameters($shortopt, $params, $ast)
     {
-        $property = $this->reflection->getProperty('short');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->class, $shortopt);
+        $this->set_reflection_property_value('short', $shortopt);
 
         $this->logger->expects($this->never())
                      ->method('error');
@@ -113,8 +108,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
 
         $value = $this->class->parse();
 
-        $this->assertInternalType('array', $value);
-        $this->assertEquals($ast, $value);
+        $this->assertSame($ast, $value);
     }
 
     /**
@@ -129,9 +123,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
      */
     public function testParseValidLongParameters($longopt, $params, $ast)
     {
-        $property = $this->reflection->getProperty('long');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->class, $longopt);
+        $this->set_reflection_property_value('long', $longopt);
 
         $this->logger->expects($this->never())
                      ->method('error');
@@ -140,8 +132,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
 
         $value = $this->class->parse();
 
-        $this->assertInternalType('array', $value);
-        $this->assertEquals($ast, $value);
+        $this->assertSame($ast, $value);
     }
 
 }

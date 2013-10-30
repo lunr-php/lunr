@@ -9,6 +9,7 @@
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Shadow\Tests;
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Shadow\LunrCliParser
  */
 class LunrCliParserValidShortTest extends LunrCliParserTest
@@ -37,8 +39,7 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
      */
     public function testIsValidShortReturnsFalseForInvalidParameter($param)
     {
-        $method = $this->reflection->getMethod('is_valid_short');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_valid_short');
 
         $this->logger->expects($this->once())
                      ->method('error')
@@ -59,11 +60,8 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
      */
     public function testIsValidShortSetsErrorTrueForInvalidParameter($param)
     {
-        $method = $this->reflection->getMethod('is_valid_short');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_valid_short');
 
-        $property = $this->reflection->getProperty('error');
-        $property->setAccessible(TRUE);
 
         $this->logger->expects($this->once())
                      ->method('error')
@@ -71,7 +69,7 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
 
         $method->invokeArgs($this->class, array($param, 1));
 
-        $this->assertTrue($property->getValue($this->class));
+        $this->assertTrue($this->get_reflection_property_value('error'));
     }
 
     /**
@@ -81,19 +79,13 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
      */
     public function testIsValidShortAddsValidParameterToAst()
     {
-        $method = $this->reflection->getMethod('is_valid_short');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_valid_short');
 
-        $property = $this->reflection->getProperty('ast');
-        $property->setAccessible(TRUE);
-
-        $short = $this->reflection->getProperty('short');
-        $short->setAccessible(TRUE);
-        $short->setValue($this->class, 'a');
+        $this->set_reflection_property_value('short', 'a');
 
         $method->invokeArgs($this->class, array('a', 1));
 
-        $value = $property->getValue($this->class);
+        $value = $this->get_reflection_property_value('ast');
 
         $this->assertArrayHasKey('a', $value);
         $this->assertEquals($value['a'], array());
@@ -107,12 +99,9 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
      */
     public function testIsValidShortReturnsFalseForValidParameterWithoutArguments()
     {
-        $method = $this->reflection->getMethod('is_valid_short');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_valid_short');
 
-        $property = $this->reflection->getProperty('short');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->class, 'a');
+        $this->set_reflection_property_value('short', 'a');
 
         $value = $method->invokeArgs($this->class, array('a', 1));
 
@@ -126,16 +115,11 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
      */
     public function testIsValidShortReturnsTrueForValidParameterWithArguments()
     {
-        $method = $this->reflection->getMethod('is_valid_short');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_valid_short');
 
-        $args = $this->reflection->getProperty('args');
-        $args->setAccessible(TRUE);
-        $args->setValue($this->class, array('test.php', '-b', 'arg'));
+        $this->set_reflection_property_value('args', array('test.php', '-b', 'arg'));
 
-        $property = $this->reflection->getProperty('short');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->class, 'b:');
+        $this->set_reflection_property_value('short', 'b:');
 
         $value = $method->invokeArgs($this->class, array('b', 1));
 

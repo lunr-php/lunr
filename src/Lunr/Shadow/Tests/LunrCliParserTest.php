@@ -9,6 +9,7 @@
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -16,7 +17,7 @@
 namespace Lunr\Shadow\Tests;
 
 use Lunr\Shadow\LunrCliParser;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -27,22 +28,11 @@ use ReflectionClass;
  * @package    Shadow
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Shadow\LunrCliParser
  */
-abstract class LunrCliParserTest extends PHPUnit_Framework_TestCase
+abstract class LunrCliParserTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the LunrCliParser class.
-     * @var LunrCliParser
-     */
-    protected $class;
-
-    /**
-     * Reflection instance of the LunrCliParser class.
-     * @var ReflectionClass
-     */
-    protected $reflection;
 
     /**
      * Mock instance of a Logger class.
