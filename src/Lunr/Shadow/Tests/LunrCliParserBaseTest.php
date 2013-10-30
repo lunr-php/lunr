@@ -16,6 +16,8 @@
 
 namespace Lunr\Shadow\Tests;
 
+use Lunr\Halo\PsrLoggerTestTrait;
+
 /**
  * This class contains base test methods for the LunrCliParser class.
  *
@@ -29,13 +31,7 @@ namespace Lunr\Shadow\Tests;
 class LunrCliParserBaseTest extends LunrCliParserTest
 {
 
-    /**
-     * Test that the Logger class is passed correctly.
-     */
-    public function testLoggerIsPassedCorrectly()
-    {
-        $this->assertPropertySame('logger', $this->logger);
-    }
+    use PsrLoggerTestTrait;
 
     /**
      * Test that the short options string is passed correctly.
