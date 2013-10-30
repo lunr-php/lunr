@@ -278,12 +278,11 @@
         <whitelist>
             <directory>../src/Lunr/</directory>
             <exclude>
-                <file>../src/Lunr/Halo/LunrBaseTest.php</file>
+                <directory>../src/Lunr/Halo/</directory>
                 <directory>../src/Lunr/Core/Tests/</directory>
                 <directory>../src/Lunr/Corona/Tests/</directory>
                 <directory>../src/Lunr/Feedback/Tests/</directory>
                 <directory>../src/Lunr/Flare/Tests/</directory>
-                <directory>../src/Lunr/Halo/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/MySQL/Tests/</directory>
