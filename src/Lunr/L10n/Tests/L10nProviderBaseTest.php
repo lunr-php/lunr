@@ -15,6 +15,8 @@
 
 namespace Lunr\L10n\Tests;
 
+use Lunr\Halo\PsrLoggerTestTrait;
+
 /**
  * This class contains test methods for the abstract L10nProvider class.
  *
@@ -26,6 +28,8 @@ namespace Lunr\L10n\Tests;
  */
 class L10nProviderBaseTest extends L10nProviderTest
 {
+
+    use PsrLoggerTestTrait;
 
     /**
      * Test that the language is correctly stored in the object.
@@ -60,14 +64,6 @@ class L10nProviderBaseTest extends L10nProviderTest
         $default_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
 
         $this->assertPropertyEquals('locales_location', $default_location);
-    }
-
-    /**
-     * Test that the Logger class is passed correctly.
-     */
-    public function testLoggerIsPassedCorrectly()
-    {
-        $this->assertPropertySame('logger', $this->logger);
     }
 
     /**

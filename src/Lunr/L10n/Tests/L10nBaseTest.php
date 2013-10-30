@@ -15,9 +15,7 @@
 
 namespace Lunr\L10n\Tests;
 
-use Lunr\L10n\L10n;
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
+use Lunr\Halo\PsrLoggerTestTrait;
 
 /**
  * This class contains test methods for the L10n class.
@@ -31,6 +29,8 @@ use ReflectionClass;
 class L10nBaseTest extends L10nTest
 {
 
+    use PsrLoggerTestTrait;
+
     /**
      * Test that $languages is initially empty.
      */
@@ -40,14 +40,6 @@ class L10nBaseTest extends L10nTest
         $languages  = $properties['languages'];
 
         $this->assertEmpty($languages);
-    }
-
-    /**
-     * Test that the Logger class is passed correctly.
-     */
-    public function testLoggerIsPassedCorrectly()
-    {
-        $this->assertPropertySame('logger', $this->logger);
     }
 
     /**
