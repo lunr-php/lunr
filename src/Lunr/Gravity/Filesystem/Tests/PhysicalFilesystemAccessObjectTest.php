@@ -9,6 +9,7 @@
  * @package    Gravity
  * @subpackage Filesystem
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -17,7 +18,7 @@ namespace Lunr\Gravity\Filesystem\Tests;
 
 use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
 use Psr\Log\LoggerInterface;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 use stdClass;
 
@@ -29,22 +30,11 @@ use stdClass;
  * @package    Gravity
  * @subpackage Filesystem
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
  */
-abstract class PhysicalFilesystemAccessObjectTest extends PHPUnit_Framework_TestCase
+abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the PhysicalFilesystemAccessObject class.
-     * @var PhysicalFilesystemAccessObject
-     */
-    protected $class;
-
-    /**
-     * Reflection instance of the PhysicalFilesystemAccessObject class.
-     * @var ReflectionClass
-     */
-    protected $reflection;
 
     /**
      * Mock instance of a Logger class.

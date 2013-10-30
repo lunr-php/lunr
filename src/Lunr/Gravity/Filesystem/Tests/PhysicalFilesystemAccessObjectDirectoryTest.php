@@ -9,6 +9,7 @@
  * @package    Gravity
  * @subpackage Filesystem
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -24,6 +25,7 @@ use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
  * @package    Gravity
  * @subpackage Filesystem
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
  */
 class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAccessObjectTest
@@ -59,8 +61,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
 
         $value = $this->class->get_directory_listing($directory);
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -75,8 +76,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
 
         $value = $this->class->get_directory_listing($directory);
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -91,8 +91,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
 
         $value = $this->class->get_directory_listing($directory);
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -108,8 +107,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
     {
         $value = $this->class->get_directory_listing($directory);
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -125,8 +123,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
     {
         $value = $this->class->get_directory_listing($directory);
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
 }

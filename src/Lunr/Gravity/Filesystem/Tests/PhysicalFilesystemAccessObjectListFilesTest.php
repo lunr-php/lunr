@@ -9,6 +9,7 @@
  * @package    Gravity
  * @subpackage Filesystem
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -24,6 +25,7 @@ use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
  * @package    Gravity
  * @subpackage Filesystem
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
  */
 class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAccessObjectTest
@@ -69,8 +71,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
 
         $value = $this->class->get_list_of_files($directory);
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -95,8 +96,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
 
         $value = $this->class->get_list_of_files($directory);
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -121,8 +121,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
 
         $value = $this->class->get_list_of_files($directory);
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -137,8 +136,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
 
         $value = $this->class->get_list_of_files(NULL);
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -163,8 +161,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
 
         $value = $this->class->get_list_of_files($directory);
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -182,8 +179,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
 
         $value = $this->class->get_list_of_files($directory);
 
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
 }

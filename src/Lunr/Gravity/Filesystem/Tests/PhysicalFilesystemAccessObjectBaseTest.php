@@ -9,6 +9,7 @@
  * @package    Gravity
  * @subpackage Filesystem
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -24,6 +25,7 @@ use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
  * @package    Gravity
  * @subpackage Filesystem
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
  */
 class PhysicalFilesystemAccessObjectBaseTest extends PhysicalFilesystemAccessObjectTest
@@ -34,13 +36,7 @@ class PhysicalFilesystemAccessObjectBaseTest extends PhysicalFilesystemAccessObj
      */
     public function testLoggerIsPassedCorrectly()
     {
-        $property = $this->reflection->getProperty('logger');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->class);
-
-        $this->assertInstanceOf('Psr\Log\LoggerInterface', $value);
-        $this->assertSame($this->logger, $value);
+        $this->assertPropertySame('logger', $this->logger);
     }
 
 }
