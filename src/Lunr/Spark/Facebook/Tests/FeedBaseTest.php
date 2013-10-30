@@ -15,6 +15,8 @@
 
 namespace Lunr\Spark\Facebook\Tests;
 
+use Lunr\Halo\PsrLoggerTestTrait;
+
 /**
  * This class contains the tests for the Facebook Feed class.
  *
@@ -26,6 +28,8 @@ namespace Lunr\Spark\Facebook\Tests;
  */
 class FeedBaseTest extends FeedTest
 {
+
+    use PsrLoggerTestTrait;
 
     /**
      * Test that the CentralAuthenticationStore class is passed correctly.
@@ -41,14 +45,6 @@ class FeedBaseTest extends FeedTest
     public function testCurlIsSetCorrectly()
     {
         $this->assertPropertySame('curl', $this->curl);
-    }
-
-    /**
-     * Test that the Logger class is passed correctly.
-     */
-    public function testLoggerIsSetCorrectly()
-    {
-        $this->assertPropertySame('logger', $this->logger);
     }
 
     /**

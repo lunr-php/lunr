@@ -15,9 +15,7 @@
 
 namespace Lunr\Spark\Twitter\Tests;
 
-use Lunr\Spark\Twitter\Search;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use Lunr\Halo\PsrLoggerTestTrait;
 
 /**
  * This class contains the tests for the Search class.
@@ -30,6 +28,8 @@ use ReflectionClass;
  */
 class SearchBaseTest extends SearchTest
 {
+
+    use PsrLoggerTestTrait;
 
     /**
      * Test that the CentralAuthenticationStore class is passed correctly.
@@ -45,14 +45,6 @@ class SearchBaseTest extends SearchTest
     public function testCurlIsSetCorrectly()
     {
         $this->assertPropertySame('curl', $this->curl);
-    }
-
-    /**
-     * Test that the Logger class is passed correctly.
-     */
-    public function testLoggerIsSetCorrectly()
-    {
-        $this->assertPropertySame('logger', $this->logger);
     }
 
 }

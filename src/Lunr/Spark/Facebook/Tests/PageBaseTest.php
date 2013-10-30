@@ -15,9 +15,7 @@
 
 namespace Lunr\Spark\Facebook\Tests;
 
-use Lunr\Spark\Facebook\Page;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use Lunr\Halo\PsrLoggerTestTrait;
 
 /**
  * This class contains the tests for the Facebook Page class.
@@ -30,6 +28,8 @@ use ReflectionClass;
  */
 class PageBaseTest extends PageTest
 {
+
+    use PsrLoggerTestTrait;
 
     /**
      * Test that the CentralAuthenticationStore class is passed correctly.
@@ -45,14 +45,6 @@ class PageBaseTest extends PageTest
     public function testCurlIsSetCorrectly()
     {
         $this->assertPropertySame('curl', $this->curl);
-    }
-
-    /**
-     * Test that the Logger class is passed correctly.
-     */
-    public function testLoggerIsSetCorrectly()
-    {
-        $this->assertPropertySame('logger', $this->logger);
     }
 
     /**
