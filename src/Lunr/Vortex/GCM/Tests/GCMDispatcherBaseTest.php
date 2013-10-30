@@ -16,6 +16,7 @@
 namespace Lunr\Vortex\GCM\Tests;
 
 use Lunr\Vortex\GCM\GCMType;
+use Lunr\Halo\PsrLoggerTestTrait;
 
 /**
  * This class contains test for the constructor of the GCMDispatcher class.
@@ -28,6 +29,8 @@ use Lunr\Vortex\GCM\GCMType;
  */
 class GCMDispatcherBaseTest extends GCMDispatcherTest
 {
+
+    use PsrLoggerTestTrait;
 
     /**
      * Test that the endpoint is set to an empty array by default.
@@ -51,14 +54,6 @@ class GCMDispatcherBaseTest extends GCMDispatcherTest
     public function testCurlIsSetCorrectly()
     {
         $this->assertSame($this->curl, $this->get_reflection_property_value('curl'));
-    }
-
-    /**
-     * Test that the passed Logger object is set correctly.
-     */
-    public function testLoggerIsSetCorrectly()
-    {
-        $this->assertSame($this->logger, $this->get_reflection_property_value('logger'));
     }
 
     /**

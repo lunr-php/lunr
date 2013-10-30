@@ -15,6 +15,8 @@
 
 namespace Lunr\Vortex\MPNS\Tests;
 
+use Lunr\Halo\PsrLoggerTestTrait;
+
 /**
  * This class contains tests for the setters of the MPNSToastPayload class.
  *
@@ -27,13 +29,7 @@ namespace Lunr\Vortex\MPNS\Tests;
 class MPNSToastPayloadSetTest extends MPNSToastPayloadTest
 {
 
-    /**
-     * Test the logger class is passed correctly.
-     */
-    public function testLoggerIsPassedCorrectly()
-    {
-        $this->assertSame($this->logger, $this->get_reflection_property_value('logger'));
-    }
+    use PsrLoggerTestTrait;
 
     /**
      * Test set_title() works correctly.
