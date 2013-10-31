@@ -91,8 +91,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     /**
      * Test registering the autoloader class.
      *
-     * @runInSeparateProcess
-     *
      * @covers Lunr\Core\Autoloader::register
      */
     public function testRegisterAutoloader()
@@ -103,12 +101,12 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($value);
         $this->assertEquals(2, $this->check_spl_autoload_stack(spl_autoload_functions()));
+
+        $this->autoloader->unregister();
     }
 
     /**
      * Test unregistering the autoloader class.
-     *
-     * @runInSeparateProcess
      *
      * @depends testRegisterAutoloader
      * @covers  Lunr\Core\Autoloader::unregister
@@ -229,8 +227,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
     /**
      * Test loading of classes according to Lunr-0.1 specifics.
      *
-     * @runInSeparateProcess
-     *
      * @covers Lunr\Core\Autoloader::load
      */
     public function testLoadOfLunr01Classes()
@@ -248,8 +244,6 @@ class AutoloaderTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test loading of classes according to PSR-0 specifics.
-     *
-     * @runInSeparateProcess
      *
      * @covers Lunr\Core\Autoloader::load
      */
