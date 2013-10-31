@@ -19,12 +19,13 @@ namespace Lunr\Corona\Tests;
 /**
  * Tests for storing superglobal values.
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @covers     Lunr\Corona\Request
+ * @category      Libraries
+ * @package       Corona
+ * @subpackage    Tests
+ * @author        Heinz Wiesinger <heinz@m2mobi.com>
+ * @author        Leonidas Diamantis <leonidas@m2mobi.com>
+ * @covers        Lunr\Corona\Request
+ * @backupGlobals enabled
  */
 class RequestStorePostTest extends RequestTest
 {

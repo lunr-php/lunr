@@ -46,12 +46,12 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      */
     public function testLocateReinstantiatesInstanceFromCache()
     {
-        $cache = [ 'request' => [ 'name' => 'Lunr\Corona\Request', 'params' => [ 'config' ] ] ];
+        $cache = [ 'datetime' => [ 'name' => 'Lunr\Core\DateTime', 'params' => [ 'config' ] ] ];
         $this->set_reflection_property_value('cache', $cache);
 
         $method = $this->get_accessible_reflection_method('locate');
 
-        $this->assertInstanceOf('Lunr\Corona\Request', $method->invokeArgs($this->class, ['request']));
+        $this->assertInstanceOf('Lunr\Core\DateTime', $method->invokeArgs($this->class, ['datetime']));
     }
 
     /**
@@ -134,10 +134,10 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      */
     public function testMagicCallReinstantiatesInstanceFromCache()
     {
-        $cache = [ 'request' => [ 'name' => 'Lunr\Corona\Request', 'params' => [ 'config' ] ] ];
+        $cache = [ 'datetime' => [ 'name' => 'Lunr\Core\DateTime', 'params' => [ 'config' ] ] ];
         $this->set_reflection_property_value('cache', $cache);
 
-        $this->assertInstanceOf('Lunr\Corona\Request', $this->class->request());
+        $this->assertInstanceOf('Lunr\Core\DateTime', $this->class->datetime());
     }
 
     /**

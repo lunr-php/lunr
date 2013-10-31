@@ -39,30 +39,12 @@ class RequestStoreUrlTest extends RequestTest
     }
 
     /**
-     * Set the stored sapi value to 'apache'.
-     *
-     * @return void
-     */
-    protected function set_request_sapi_non_cli()
-    {
-        $request = $this->get_reflection_property_value('request');
-
-        $request['sapi'] = 'apache';
-
-        $this->set_reflection_property_value('request', $request);
-    }
-
-    /**
      * Test that the base_path is constructed and stored correctly.
      *
      * @covers Lunr\Corona\Request::store_url
      */
     public function testStoreBasePath()
     {
-        $this->set_request_sapi_non_cli();
-
-        $_SERVER = $this->setup_server_superglobal();
-
         $method = $this->get_accessible_reflection_method('store_url');
         $method->invokeArgs($this->class, [ $this->configuration ]);
 
@@ -78,10 +60,6 @@ class RequestStoreUrlTest extends RequestTest
      */
     public function testStoreDomain()
     {
-        $this->set_request_sapi_non_cli();
-
-        $_SERVER = $this->setup_server_superglobal();
-
         $method = $this->get_accessible_reflection_method('store_url');
         $method->invokeArgs($this->class, [ $this->configuration ]);
 
@@ -97,10 +75,6 @@ class RequestStoreUrlTest extends RequestTest
      */
     public function testStorePort()
     {
-        $this->set_request_sapi_non_cli();
-
-        $_SERVER = $this->setup_server_superglobal();
-
         $method = $this->get_accessible_reflection_method('store_url');
         $method->invokeArgs($this->class, [ $this->configuration ]);
 
@@ -116,8 +90,6 @@ class RequestStoreUrlTest extends RequestTest
      */
     public function testStorePortIfHttpsUnset()
     {
-        $this->set_request_sapi_non_cli();
-
         $_SERVER = $this->setup_server_superglobal();
         unset($_SERVER['HTTPS']);
 
@@ -140,8 +112,6 @@ class RequestStoreUrlTest extends RequestTest
      */
     public function testStorePortIfHttpsIsset($value, $protocol)
     {
-        $this->set_request_sapi_non_cli();
-
         $_SERVER          = $this->setup_server_superglobal();
         $_SERVER['HTTPS'] = $value;
 
@@ -165,8 +135,6 @@ class RequestStoreUrlTest extends RequestTest
      */
     public function testStoreBaseUrl($https, $port, $value)
     {
-        $this->set_request_sapi_non_cli();
-
         $_SERVER                = $this->setup_server_superglobal();
         $_SERVER['HTTPS']       = $https;
         $_SERVER['SERVER_PORT'] = $port;

@@ -18,11 +18,12 @@ namespace Lunr\Corona\Tests;
 /**
  * Basic tests for the case of empty superglobals.
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Corona\Request
+ * @category      Libraries
+ * @package       Corona
+ * @subpackage    Tests
+ * @author        Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers        Lunr\Corona\Request
+ * @backupGlobals enabled
  */
 class RequestBaseTest extends RequestTest
 {

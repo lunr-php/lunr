@@ -94,7 +94,7 @@ class Request implements RequestInterface
         $this->store_post();
         $this->store_get($configuration);
         $this->store_cookie();
-        $this->store_url($configuration);
+        $this->store_url();
         $this->store_files();
     }
 
@@ -200,19 +200,17 @@ class Request implements RequestInterface
      */
     protected function store_get($configuration)
     {
+        // Preset with default values:
+        $this->request['controller'] = $configuration['default_controller'];
+        $this->request['method']     = $configuration['default_method'];
+        $this->request['params']     = [];
+        $this->request['call']       = NULL;
+
         if (!is_array($_GET) || empty($_GET))
         {
-            $this->request['controller'] = $configuration['default_controller'];
-            $this->request['method']     = $configuration['default_method'];
-            $this->request['params']     = [];
-
             if (isset($this->request['controller'], $this->request['method']) === TRUE)
             {
                 $this->request['call'] = $this->request['controller'] . '/' . $this->request['method'];
-            }
-            else
-            {
-                $this->request['call'] = NULL;
             }
 
             //reset global GET array
@@ -227,13 +225,9 @@ class Request implements RequestInterface
             {
                 $this->request['params'][] = $value;
             }
-            elseif ($key == 'controller')
+            elseif (in_array($key, [ 'controller', 'method' ]))
             {
-                $this->request['controller'] = $value;
-            }
-            elseif ($key == 'method')
-            {
-                $this->request['method'] = $value;
+                $this->request[$key] = $value;
             }
             else
             {
@@ -241,28 +235,9 @@ class Request implements RequestInterface
             }
         }
 
-        if (!isset($this->request['controller']))
-        {
-            $this->request['controller'] = $configuration['default_controller'];
-        }
-
-        if (!isset($this->request['method']))
-        {
-            $this->request['method'] = $configuration['default_method'];
-        }
-
-        if (!isset($this->request['params']))
-        {
-            $this->request['params'] = [];
-        }
-
         if (isset($this->request['controller'], $this->request['method']) === TRUE)
         {
             $this->request['call'] = $this->request['controller'] . '/' . $this->request['method'];
-        }
-        else
-        {
-            $this->request['call'] = NULL;
         }
 
         //reset global GET array
@@ -284,11 +259,6 @@ class Request implements RequestInterface
             return;
         }
 
-        if(isset($_COOKIE['PHPSESSID']))
-        {
-            $session_id = $_COOKIE['PHPSESSID'];
-        }
-
         foreach ($_COOKIE as $key => $value)
         {
             $this->cookie[$key] = $value;
@@ -297,48 +267,37 @@ class Request implements RequestInterface
         //reset global COOKIE array
         $_COOKIE = [];
 
-        if(isset($session_id))
+        if(isset($this->cookie['PHPSESSID']))
         {
-            $_COOKIE['PHPSESSID'] = $session_id;
+            $_COOKIE['PHPSESSID'] = $this->cookie['PHPSESSID'];
+            unset($this->cookie['PHPSESSID']);
         }
     }
 
     /**
      * Store url request values locally.
      *
-     * @param Configuration $configuration Shared instance of the Configuration class
-     *
      * @return void
      */
-    protected function store_url($configuration)
+    protected function store_url()
     {
-        if ($this->request['sapi'] == 'cli')
+        $this->request['base_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
+
+        $this->request['protocol'] =
+            (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
+
+        $this->request['domain'] = $_SERVER['SERVER_NAME'];
+        $this->request['port']   = $_SERVER['SERVER_PORT'];
+
+        $baseurl = $this->request['protocol'] . '://' . $this->request['domain'];
+
+        if ((($this->request['protocol'] == 'http') && ($this->request['port'] != 80))
+            || (($this->request['protocol'] == 'https') && ($this->request['port'] != 443)))
         {
-            $this->request['base_path'] = $configuration['default_webpath'];
-            $this->request['protocol']  = $configuration['default_protocol'];
-            $this->request['domain']    = $configuration['default_domain'];
-            $this->request['port']      = $configuration['default_port'];
-            $this->request['base_url']  = $configuration['default_url'];
+            $baseurl .= ':' . $this->request['port'];
         }
-        else
-        {
-            $this->request['base_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
-            $this->request['protocol'] =
-                (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
-
-            $this->request['domain'] = $_SERVER['SERVER_NAME'];
-            $this->request['port']   = $_SERVER['SERVER_PORT'];
-
-            $baseurl = $this->request['protocol'] . '://' . $this->request['domain'];
-            if ((($this->request['protocol'] == 'http') && ($this->request['port'] != 80))
-                || (($this->request['protocol'] == 'https') && ($this->request['port'] != 443)))
-            {
-                $baseurl .= ':' . $this->request['port'];
-            }
-
-            $this->request['base_url'] = $baseurl . $this->request['base_path'];
-        }
+        $this->request['base_url'] = $baseurl . $this->request['base_path'];
     }
 
     /**

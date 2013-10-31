@@ -79,12 +79,12 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      */
     public function testGetInstanceReturnsInstanceForConstructorWithArguments()
     {
-        $cache = [ 'request' => [ 'name' => 'Lunr\Corona\Request', 'params' => [ 'config' ] ] ];
+        $cache = [ 'datetime' => [ 'name' => 'Lunr\Core\DateTime', 'params' => [ 'config' ] ] ];
         $this->set_reflection_property_value('cache', $cache);
 
         $method = $this->get_accessible_reflection_method('get_instance');
 
-        $this->assertInstanceOf('Lunr\Corona\Request', $method->invokeArgs($this->class, ['request']));
+        $this->assertInstanceOf('Lunr\Core\DateTime', $method->invokeArgs($this->class, ['datetime']));
     }
 
     /**

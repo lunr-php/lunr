@@ -18,11 +18,12 @@ namespace Lunr\Corona\Tests;
 /**
  * Tests for storing superglobal values.
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Tests
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @covers     Lunr\Corona\Request
+ * @category      Libraries
+ * @package       Corona
+ * @subpackage    Tests
+ * @author        Dinos Theodorou <dinos@m2mobi.com>
+ * @covers        Lunr\Corona\Request
+ * @backupGlobals enabled
  */
 class RequestStoreFilestTest extends RequestTest
 {

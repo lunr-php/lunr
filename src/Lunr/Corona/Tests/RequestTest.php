@@ -56,11 +56,6 @@ abstract class RequestTest extends LunrBaseTest
         $configuration = $this->getMock('Lunr\Core\Configuration');
 
         $map = [
-            [ 'default_webpath', '/path' ],
-            [ 'default_protocol', 'http' ],
-            [ 'default_domain', 'www.domain.com' ],
-            [ 'default_port', 666 ],
-            [ 'default_url', 'http://www.domain.com:666/path/' ],
             [ 'default_controller', 'DefaultController' ],
             [ 'default_method', 'default_method' ]
          ];
@@ -140,6 +135,8 @@ abstract class RequestTest extends LunrBaseTest
         $_GET    = [];
         $_COOKIE = [];
 
+        $_SERVER = $this->setup_server_superglobal();
+
         $this->class = new Request($this->configuration);
     }
 
@@ -175,11 +172,11 @@ abstract class RequestTest extends LunrBaseTest
     public function requestValueProvider()
     {
         $values   = [];
-        $values[] = [ 'protocol', 'http' ];
+        $values[] = [ 'protocol', 'https' ];
         $values[] = [ 'domain', 'www.domain.com' ];
-        $values[] = [ 'port', '666' ];
-        $values[] = [ 'base_path', '/path' ];
-        $values[] = [ 'base_url', 'http://www.domain.com:666/path/' ];
+        $values[] = [ 'port', '443' ];
+        $values[] = [ 'base_path', '/path/to/' ];
+        $values[] = [ 'base_url', 'https://www.domain.com/path/to/' ];
         $values[] = [ 'sapi', 'cli' ];
         $values[] = [ 'controller', 'DefaultController' ];
         $values[] = [ 'method', 'default_method' ];
@@ -197,11 +194,11 @@ abstract class RequestTest extends LunrBaseTest
     public function properRequestValueProvider()
     {
         $values   = [];
-        $values[] = [ 'protocol', 'http' ];
+        $values[] = [ 'protocol', 'https' ];
         $values[] = [ 'domain', 'www.domain.com' ];
-        $values[] = [ 'port', '666' ];
-        $values[] = [ 'base_path', '/path' ];
-        $values[] = [ 'base_url', 'http://www.domain.com:666/path/' ];
+        $values[] = [ 'port', '443' ];
+        $values[] = [ 'base_path', '/path/to/' ];
+        $values[] = [ 'base_url', 'https://www.domain.com/path/to/' ];
         $values[] = [ 'sapi', 'cli' ];
         $values[] = [ 'controller', 'controller' ];
         $values[] = [ 'method', 'method' ];
