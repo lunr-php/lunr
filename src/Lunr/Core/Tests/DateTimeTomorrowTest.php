@@ -55,8 +55,6 @@ class DateTimeTomorrowTest extends DateTimeTest
     /**
      * Test the function tomorrow() with a custom datetime format and custom locale.
      *
-     * @runInSeparateProcess
-     *
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Core\DateTime::tomorrow

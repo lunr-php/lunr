@@ -64,8 +64,6 @@ class DateTimeBaseTest extends DateTimeTest
     /**
      * Test the set_locale() method, without charset supplied.
      *
-     * @runInSeparateProcess
-     *
      * @covers Lunr\Core\DateTime::set_locale
      */
     public function testSetCustomLocaleWithDefaultCharset()
@@ -77,8 +75,6 @@ class DateTimeBaseTest extends DateTimeTest
 
     /**
      * Test the set_locale() method, with charset supplied.
-     *
-     * @runInSeparateProcess
      *
      * @covers Lunr\Core\DateTime::set_locale
      */
@@ -93,8 +89,6 @@ class DateTimeBaseTest extends DateTimeTest
      * Test the set_locale() method with invalid locale values, without charset supplied.
      *
      * @param mixed $value POSIX locale definition
-     *
-     * @runInSeparateProcess
      *
      * @depends      testDefaultLocale
      * @dataProvider invalidLocaleProvider

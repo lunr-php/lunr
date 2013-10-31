@@ -54,8 +54,6 @@ class DateTimeTodayTest extends DateTimeTest
     /**
      * Test the function today() with a custom datetime format and custom locale.
      *
-     * @runInSeparateProcess
-     *
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Core\DateTime::today
@@ -105,8 +103,6 @@ class DateTimeTodayTest extends DateTimeTest
 
     /**
      * Test the function now() with a custom datetime format and custom locale.
-     *
-     * @runInSeparateProcess
      *
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset

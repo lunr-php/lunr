@@ -55,8 +55,6 @@ class DateTimeYesterdayTest extends DateTimeTest
     /**
      * Test the function yesterday() with a custom datetime format and custom locale.
      *
-     * @runInSeparateProcess
-     *
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Core\DateTime::yesterday

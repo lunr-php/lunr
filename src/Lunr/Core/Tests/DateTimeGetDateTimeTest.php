@@ -68,8 +68,6 @@ class DateTimeGetDateTimeTest extends DateTimeTest
     /**
      * Test get_datetime() with a custom datetime format, custom locale and current timestamp as base.
      *
-     * @runInSeparateProcess
-     *
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Core\DateTime::get_datetime
