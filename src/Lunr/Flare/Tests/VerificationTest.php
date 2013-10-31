@@ -9,6 +9,7 @@
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -16,7 +17,7 @@
 namespace Lunr\Flare\Tests;
 
 use Lunr\Flare\Verification;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 use stdClass;
 
@@ -28,22 +29,11 @@ use stdClass;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Flare\Verification
  */
-abstract class VerificationTest extends PHPUnit_Framework_TestCase
+abstract class VerificationTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the Verification class
-     * @var Verification
-     */
-    protected $verification;
-
-    /**
-     * Reflection instance of the Verification class
-     * @var ReflectionClass
-     */
-    protected $verification_reflection;
 
     /**
      * Mock instance of the Logger class.
@@ -58,9 +48,9 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->verification = new Verification($this->logger);
+        $this->class = new Verification($this->logger);
 
-        $this->verification_reflection = new ReflectionClass('Lunr\Flare\Verification');
+        $this->reflection = new ReflectionClass('Lunr\Flare\Verification');
     }
 
     /**
@@ -68,9 +58,9 @@ abstract class VerificationTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->verification);
-        unset($this->verification_reflection);
         unset($this->logger);
+        unset($this->reflection);
+        unset($this->class);
     }
 
     /**

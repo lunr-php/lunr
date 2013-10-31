@@ -9,6 +9,7 @@
  * @package    Flare
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -24,6 +25,7 @@ use Lunr\Flare\Verification;
  * @package    Flare
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Flare\Verification
  */
 class VerificationBaseTest extends VerificationTest
@@ -34,13 +36,7 @@ class VerificationBaseTest extends VerificationTest
      */
     public function testLoggerPassed()
     {
-        $property = $this->verification_reflection->getProperty('logger');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->verification);
-
-        $this->assertInstanceOf('Psr\Log\LoggerInterface', $value);
-        $this->assertSame($this->logger, $value);
+        $this->assertPropertySame('logger', $this->logger);
     }
 
     /**
@@ -48,13 +44,9 @@ class VerificationBaseTest extends VerificationTest
      */
     public function testDataIsEmptyByDefault()
     {
-        $property = $this->verification_reflection->getProperty('data');
-        $property->setAccessible(TRUE);
+        $value = $this->get_reflection_property_value('data');
 
-        $value = $property->getValue($this->verification);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -62,13 +54,9 @@ class VerificationBaseTest extends VerificationTest
      */
     public function testResultIsEmptyByDefault()
     {
-        $property = $this->verification_reflection->getProperty('result');
-        $property->setAccessible(TRUE);
+        $value = $this->get_reflection_property_value('result');
 
-        $value = $property->getValue($this->verification);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -76,10 +64,7 @@ class VerificationBaseTest extends VerificationTest
      */
     public function testPointerIsNullByDefault()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
     }
 
     /**
@@ -87,13 +72,9 @@ class VerificationBaseTest extends VerificationTest
      */
     public function testSuperfluousIsEmptyByDefault()
     {
-        $property = $this->verification_reflection->getProperty('superfluous');
-        $property->setAccessible(TRUE);
+        $value = $this->get_reflection_property_value('superfluous');
 
-        $value = $property->getValue($this->verification);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -101,10 +82,7 @@ class VerificationBaseTest extends VerificationTest
      */
     public function testIdentifierIsEmptyStringByDefault()
     {
-        $property = $this->verification_reflection->getProperty('identifier');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('', $property->getValue($this->verification));
+        $this->assertPropertyEquals('identifier', '');
     }
 
     /**
@@ -112,10 +90,7 @@ class VerificationBaseTest extends VerificationTest
      */
     public function testCheckRemainingIsTrueByDefault()
     {
-        $property = $this->verification_reflection->getProperty('check_remaining');
-        $property->setAccessible(TRUE);
-
-        $this->assertTrue($property->getValue($this->verification));
+        $this->assertTrue($this->get_reflection_property_value('check_remaining'));
     }
 
     /**
@@ -123,10 +98,7 @@ class VerificationBaseTest extends VerificationTest
      */
     public function testCheckSuperfluousIsFalseByDefault()
     {
-        $property = $this->verification_reflection->getProperty('check_superfluous');
-        $property->setAccessible(TRUE);
-
-        $this->assertFalse($property->getValue($this->verification));
+        $this->assertFalse($this->get_reflection_property_value('check_superfluous'));
     }
 
 }

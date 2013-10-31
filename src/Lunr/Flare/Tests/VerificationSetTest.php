@@ -9,6 +9,7 @@
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -24,6 +25,7 @@ use Lunr\Flare\Verification;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Flare\Verification
  */
 class VerificationSetTest extends VerificationTest
@@ -37,10 +39,10 @@ class VerificationSetTest extends VerificationTest
     public function testSetDataReturnsSelfReference()
     {
         $set   = array('1');
-        $value = $this->verification->set_data($set);
+        $value = $this->class->set_data($set);
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -52,12 +54,8 @@ class VerificationSetTest extends VerificationTest
     {
         $set = array('test' => 'value');
 
-        $this->verification->set_data($set);
-
-        $property = $this->verification_reflection->getProperty('data');
-        $property->setAccessible(TRUE);
-
-        $this->assertSame($set, $property->getValue($this->verification));
+        $this->class->set_data($set);
+        $this->assertPropertySame('data', $set);
     }
 
     /**
@@ -73,17 +71,13 @@ class VerificationSetTest extends VerificationTest
         $this->logger->expects($this->once())
                      ->method('error');
 
-        $property = $this->verification_reflection->getProperty('data');
-        $property->setAccessible(TRUE);
+        $this->set_reflection_property_value('data', array('test' => 'value'));
 
-        $property->setValue($this->verification, array('test' => 'value'));
+        $this->class->set_data($value);
 
-        $this->verification->set_data($value);
+        $data = $this->get_reflection_property_value('data');
 
-        $data = $property->getValue($this->verification);
-
-        $this->assertInternalType('array', $data);
-        $this->assertEmpty($data);
+        $this->assertArrayEmpty($data);
     }
 
     /**
@@ -93,7 +87,7 @@ class VerificationSetTest extends VerificationTest
      */
     public function testSetDataResetsVerificationState()
     {
-        $props      = $this->verification_reflection->getProperties();
+        $props      = $this->reflection->getProperties();
         $properties = array();
 
         foreach ($props as &$value)
@@ -104,31 +98,29 @@ class VerificationSetTest extends VerificationTest
 
         unset($value);
 
-        $properties['check_remaining']->setValue($this->verification, FALSE);
-        $properties['check_superfluous']->setValue($this->verification, TRUE);
-        $properties['superfluous']->setValue($this->verification, array('test'));
-        $properties['result']->setValue($this->verification, array('test'));
-        $properties['pointer']->setValue($this->verification, 'test');
-        $properties['identifier']->setValue($this->verification, 'Testing');
+        $properties['check_remaining']->setValue($this->class, FALSE);
+        $properties['check_superfluous']->setValue($this->class, TRUE);
+        $properties['superfluous']->setValue($this->class, array('test'));
+        $properties['result']->setValue($this->class, array('test'));
+        $properties['pointer']->setValue($this->class, 'test');
+        $properties['identifier']->setValue($this->class, 'Testing');
 
         $set = array('1');
-        $this->verification->set_data($set);
+        $this->class->set_data($set);
 
 
-        $this->assertTrue($properties['check_remaining']->getValue($this->verification));
-        $this->assertFalse($properties['check_superfluous']->getValue($this->verification));
-        $this->assertNull($properties['pointer']->getValue($this->verification));
+        $this->assertTrue($properties['check_remaining']->getValue($this->class));
+        $this->assertFalse($properties['check_superfluous']->getValue($this->class));
+        $this->assertNull($properties['pointer']->getValue($this->class));
 
-        $superfluous = $properties['superfluous']->getValue($this->verification);
-        $result      = $properties['result']->getValue($this->verification);
-        $identifier  = $properties['identifier']->getValue($this->verification);
+        $superfluous = $properties['superfluous']->getValue($this->class);
+        $result      = $properties['result']->getValue($this->class);
+        $identifier  = $properties['identifier']->getValue($this->class);
 
-        $this->assertInternalType('array', $superfluous);
-        $this->assertInternalType('array', $result);
         $this->assertInternalType('string', $identifier);
 
-        $this->assertEmpty($superfluous);
-        $this->assertEmpty($result);
+        $this->assertArrayEmpty($superfluous);
+        $this->assertArrayEmpty($result);
         $this->assertEmpty($identifier);
     }
 
@@ -139,14 +131,11 @@ class VerificationSetTest extends VerificationTest
      */
     public function testSetIdentifierSetsIdentifier()
     {
-        $property = $this->verification_reflection->getProperty('identifier');
-        $property->setAccessible(TRUE);
-
         $id = 'Test Verification';
 
-        $this->verification->set_identifier($id);
+        $this->class->set_identifier($id);
 
-        $this->assertEquals($id, $property->getValue($this->verification));
+        $this->assertPropertyEquals('identifier', $id);
     }
 
     /**
@@ -158,10 +147,10 @@ class VerificationSetTest extends VerificationTest
     {
         $id = 'Test Verification';
 
-        $value = $this->verification->set_identifier($id);
+        $value = $this->class->set_identifier($id);
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -171,12 +160,9 @@ class VerificationSetTest extends VerificationTest
      */
     public function testIgnoreUncheckedIndexesSetsCheckRemainingFalse()
     {
-        $property = $this->verification_reflection->getProperty('check_remaining');
-        $property->setAccessible(TRUE);
+        $this->class->ignore_unchecked_indexes();
 
-        $this->verification->ignore_unchecked_indexes();
-
-        $this->assertFalse($property->getValue($this->verification));
+        $this->assertFalse($this->get_reflection_property_value('check_remaining'));
     }
 
     /**
@@ -186,10 +172,10 @@ class VerificationSetTest extends VerificationTest
      */
     public function testIgnoreUncheckedIndexesReturnsSelfReference()
     {
-        $value = $this->verification->ignore_unchecked_indexes();
+        $value = $this->class->ignore_unchecked_indexes();
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -199,12 +185,9 @@ class VerificationSetTest extends VerificationTest
      */
     public function testCheckSuperfluousChecksSetsCheckSuperfluousTrue()
     {
-        $property = $this->verification_reflection->getProperty('check_superfluous');
-        $property->setAccessible(TRUE);
+        $this->class->check_superfluous_checks();
 
-        $this->verification->check_superfluous_checks();
-
-        $this->assertTrue($property->getValue($this->verification));
+        $this->assertTrue($this->get_reflection_property_value('check_superfluous'));
     }
 
     /**
@@ -214,10 +197,10 @@ class VerificationSetTest extends VerificationTest
      */
     public function testCheckSuperfluousChecksReturnsSelfReference()
     {
-        $value = $this->verification->check_superfluous_checks();
+        $value = $this->class->check_superfluous_checks();
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -227,10 +210,10 @@ class VerificationSetTest extends VerificationTest
      */
     public function testInspectReturnsSelfReference()
     {
-        $value = $this->verification->inspect('test');
+        $value = $this->class->inspect('test');
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -242,16 +225,11 @@ class VerificationSetTest extends VerificationTest
     {
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $data = $this->set_reflection_property_value('data', $test);
 
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $this->class->inspect('test');
 
-        $this->verification->inspect('test');
-
-        $this->assertEquals('test', $property->getValue($this->verification));
+        $this->assertPropertyEquals('pointer', 'test');
     }
 
     /**
@@ -261,12 +239,9 @@ class VerificationSetTest extends VerificationTest
      */
     public function testInspectSetsPointerNullIfIndexDoesNotExist()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $this->class->inspect('test');
 
-        $this->verification->inspect('test');
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
     }
 
     /**
@@ -276,12 +251,9 @@ class VerificationSetTest extends VerificationTest
      */
     public function testInspectAddsIndexToSuperfluousIfItDoesNotExist()
     {
-        $property = $this->verification_reflection->getProperty('superfluous');
-        $property->setAccessible(TRUE);
+        $this->class->inspect('test');
 
-        $this->verification->inspect('test');
-
-        $value = $property->getValue($this->verification);
+        $value = $this->get_reflection_property_value('superfluous');
 
         $this->assertInternalType('array', $value);
         $this->assertContains('test', $value);

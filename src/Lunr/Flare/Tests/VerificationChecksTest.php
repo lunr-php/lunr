@@ -9,6 +9,7 @@
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -25,6 +26,7 @@ use Lunr\Flare\Verification;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Flare\Verification
  */
 class VerificationChecksTest extends VerificationTest
@@ -37,9 +39,7 @@ class VerificationChecksTest extends VerificationTest
     {
         parent::setUp();
 
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->verification, 'test');
+        $this->set_reflection_property_value('pointer', 'test');
     }
 
     /**
@@ -49,12 +49,9 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testUnimplementedStoresFalse()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
+        $this->class->unimplemented();
 
-        $this->verification->unimplemented();
-
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('unimplemented', $value['test']);
         $this->assertFalse($value['test']['unimplemented']);
@@ -67,13 +64,10 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testUnimplementedReturnsSelfReference()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
-        $value = $this->verification->unimplemented();
+        $value = $this->class->unimplemented();
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -83,12 +77,9 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIgnoreSetsResultTrue()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
+        $this->class->ignore();
 
-        $this->verification->ignore();
-
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertTrue($value['test']);
     }
@@ -100,13 +91,10 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIgnoreReturnsSelfReference()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
-        $value = $this->verification->ignore();
+        $value = $this->class->ignore();
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -116,12 +104,9 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIgnoreResetsPointer()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $this->class->ignore();
 
-        $this->verification->ignore();
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
     }
 
     /**
@@ -131,18 +116,13 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsLengthStoresTrueForCorrectLength()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $this->verification->is_length(5);
+        $this->class->is_length(5);
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_length_5', $value['test']);
         $this->assertTrue($value['test']['is_length_5']);
@@ -155,18 +135,13 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsLengthStoresFalseForIncorrectLength()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $this->verification->is_length(1);
+        $this->class->is_length(1);
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_length_1', $value['test']);
         $this->assertFalse($value['test']['is_length_1']);
@@ -179,19 +154,14 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsLengthReturnsSelfReference()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $value = $this->verification->is_length(5);
+        $value = $this->class->is_length(5);
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -205,18 +175,13 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsTypeStoresTrueForValidTypesAndValidValues($type, $value)
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => $value);
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $this->verification->is_type($type);
+        $this->class->is_type($type);
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_type_' . $type, $value['test']);
         $this->assertTrue($value['test']['is_type_' . $type]);
@@ -233,18 +198,13 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsTypeStoresFalseForValidTypesAndInvalidValues($type, $value)
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => $value);
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $this->verification->is_type($type);
+        $this->class->is_type($type);
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_type_' . $type, $value['test']);
         $this->assertFalse($value['test']['is_type_' . $type]);
@@ -257,18 +217,13 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsTypeStoresFalseForInvalidTypes()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $this->verification->is_type('type');
+        $this->class->is_type('type');
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_type_type', $value['test']);
         $this->assertFalse($value['test']['is_type_type']);
@@ -281,19 +236,14 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsTypeReturnsSelfReference()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $value = $this->verification->is_type('string');
+        $value = $this->class->is_type('string');
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -303,18 +253,13 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsNotEmptyStoresTrueForNonEmptyValues()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $this->verification->is_not_empty();
+        $this->class->is_not_empty();
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_not_empty', $value['test']);
         $this->assertTrue($value['test']['is_not_empty']);
@@ -330,18 +275,13 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsNotEmptyStoresFalseForEmptyValues($value)
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => $value);
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $this->verification->is_not_empty();
+        $this->class->is_not_empty();
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_not_empty', $value['test']);
         $this->assertFalse($value['test']['is_not_empty']);
@@ -354,19 +294,14 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsNotEmptyReturnsSelfReference()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $value = $this->verification->is_not_empty();
+        $value = $this->class->is_not_empty();
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -379,18 +314,13 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsNumericalBooleanStoresTrueForValidValues($value)
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => $value);
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $this->verification->is_numerical_boolean();
+        $this->class->is_numerical_boolean();
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_numerical_boolean', $value['test']);
         $this->assertTrue($value['test']['is_numerical_boolean']);
@@ -406,18 +336,13 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsNumericalBooleanStoresFalseForInvalidValues($value)
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => $value);
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $this->verification->is_numerical_boolean();
+        $this->class->is_numerical_boolean();
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_numerical_boolean', $value['test']);
         $this->assertFalse($value['test']['is_numerical_boolean']);
@@ -430,19 +355,14 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsNumericalBooleanReturnsSelfReference()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $value = $this->verification->is_numerical_boolean();
+        $value = $this->class->is_numerical_boolean();
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -455,18 +375,13 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsNumericalTrooleanStoresTrueForValidValues($value)
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => $value);
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $this->verification->is_numerical_troolean();
+        $this->class->is_numerical_troolean();
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_numerical_troolean', $value['test']);
         $this->assertTrue($value['test']['is_numerical_troolean']);
@@ -482,18 +397,13 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsNumericalTrooleanStoresFalseForInvalidValues($value)
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => $value);
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $this->verification->is_numerical_troolean();
+        $this->class->is_numerical_troolean();
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_numerical_troolean', $value['test']);
         $this->assertFalse($value['test']['is_numerical_troolean']);
@@ -506,19 +416,14 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsNumericalTrooleanReturnsSelfReference()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
-        $value = $this->verification->is_numerical_troolean();
+        $value = $this->class->is_numerical_troolean();
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -528,23 +433,18 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsMailStoresTrueForValidEmails()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
         $mail = $this->getMock('Lunr\Network\Mail');
         $mail->expects($this->once())
              ->method('is_valid')
              ->will($this->returnValue(TRUE));
 
-        $this->verification->is_mail($mail);
+        $this->class->is_mail($mail);
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_mail', $value['test']);
         $this->assertTrue($value['test']['is_mail']);
@@ -557,23 +457,18 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsMailStoresFalseForInvalidEmails()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
         $mail = $this->getMock('Lunr\Network\Mail');
         $mail->expects($this->once())
              ->method('is_valid')
              ->will($this->returnValue(FALSE));
 
-        $this->verification->is_mail($mail);
+        $this->class->is_mail($mail);
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_mail', $value['test']);
         $this->assertFalse($value['test']['is_mail']);
@@ -586,23 +481,18 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsMailReturnsSelfReference()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
         $mail = $this->getMock('Lunr\Network\Mail');
         $mail->expects($this->once())
              ->method('is_valid');
 
-        $value = $this->verification->is_mail($mail);
+        $value = $this->class->is_mail($mail);
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -612,23 +502,18 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsDateStoresTrueForValidDates()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
         $date = $this->getMock('Lunr\Core\DateTime');
         $date->expects($this->once())
              ->method('is_date')
              ->will($this->returnValue(TRUE));
 
-        $this->verification->is_date($date);
+        $this->class->is_date($date);
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_date', $value['test']);
         $this->assertTrue($value['test']['is_date']);
@@ -641,23 +526,18 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsDateStoresFalseForInvalidDates()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
         $date = $this->getMock('Lunr\Core\DateTime');
         $date->expects($this->once())
              ->method('is_date')
              ->will($this->returnValue(FALSE));
 
-        $this->verification->is_date($date);
+        $this->class->is_date($date);
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_date', $value['test']);
         $this->assertFalse($value['test']['is_date']);
@@ -670,23 +550,18 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsDateReturnsSelfReference()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
         $date = $this->getMock('Lunr\Core\DateTime');
         $date->expects($this->once())
              ->method('is_date');
 
-        $value = $this->verification->is_date($date);
+        $value = $this->class->is_date($date);
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -696,23 +571,18 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsTimeStoresTrueForValidTimes()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
         $date = $this->getMock('Lunr\Core\DateTime');
         $date->expects($this->once())
              ->method('is_time')
              ->will($this->returnValue(TRUE));
 
-        $this->verification->is_time($date);
+        $this->class->is_time($date);
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_time', $value['test']);
         $this->assertTrue($value['test']['is_time']);
@@ -725,23 +595,18 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsTimeStoresFalseForInvalidTimes()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
         $date = $this->getMock('Lunr\Core\DateTime');
         $date->expects($this->once())
              ->method('is_time')
              ->will($this->returnValue(FALSE));
 
-        $this->verification->is_time($date);
+        $this->class->is_time($date);
 
-        $value = $result->getValue($this->verification);
+        $value = $this->get_reflection_property_value('result');
         $this->assertArrayHasKey('test', $value);
         $this->assertArrayHasKey('is_time', $value['test']);
         $this->assertFalse($value['test']['is_time']);
@@ -754,23 +619,18 @@ class VerificationChecksTest extends VerificationTest
      */
     public function testIsTimeReturnsSelfReference()
     {
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
-
         $test = array('test' => 'value');
 
-        $data = $this->verification_reflection->getProperty('data');
-        $data->setAccessible(TRUE);
-        $data->setValue($this->verification, $test);
+        $this->set_reflection_property_value('data', $test);
 
         $date = $this->getMock('Lunr\Core\DateTime');
         $date->expects($this->once())
              ->method('is_time');
 
-        $value = $this->verification->is_time($date);
+        $value = $this->class->is_time($date);
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
 }

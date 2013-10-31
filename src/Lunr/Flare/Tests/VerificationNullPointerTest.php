@@ -9,6 +9,7 @@
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -25,6 +26,7 @@ use Lunr\Flare\Verification;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Flare\Verification
  */
 class VerificationNullPointerTest extends VerificationTest
@@ -38,19 +40,13 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIgnoreDoesNothingWhenPointerIsNull()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $before = $this->get_reflection_property_value('result');
 
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
+        $this->class->ignore();
 
-        $before = $result->getValue($this->verification);
+        $after = $this->get_reflection_property_value('result');
 
-        $this->verification->ignore();
-
-        $after = $result->getValue($this->verification);
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
         $this->assertEquals($before, $after);
     }
 
@@ -62,10 +58,10 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIgnoreReturnsSelfReferenceWhenPointerIsNull()
     {
-        $value = $this->verification->ignore();
+        $value = $this->class->ignore();
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -76,19 +72,13 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsLengthDoesNothingWhenPointerIsNull()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $before = $this->get_reflection_property_value('result');
 
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
+        $this->class->is_length(0);
 
-        $before = $result->getValue($this->verification);
+        $after = $this->get_reflection_property_value('result');
 
-        $this->verification->is_length(0);
-
-        $after = $result->getValue($this->verification);
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
         $this->assertEquals($before, $after);
     }
 
@@ -100,10 +90,10 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsLengthReturnsSelfReferenceWhenPointerIsNull()
     {
-        $value = $this->verification->is_length(0);
+        $value = $this->class->is_length(0);
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -114,19 +104,13 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsTypeDoesNothingWhenPointerIsNull()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $before = $this->get_reflection_property_value('result');
 
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
+        $this->class->is_type('null');
 
-        $before = $result->getValue($this->verification);
+        $after = $this->get_reflection_property_value('result');
 
-        $this->verification->is_type('null');
-
-        $after = $result->getValue($this->verification);
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
         $this->assertEquals($before, $after);
     }
 
@@ -138,10 +122,10 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsTypeReturnsSelfReferenceWhenPointerIsNull()
     {
-        $value = $this->verification->is_type('null');
+        $value = $this->class->is_type('null');
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -152,19 +136,13 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsNotEmptyDoesNothingWhenPointerIsNull()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $before = $this->get_reflection_property_value('result');
 
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
+        $this->class->is_not_empty();
 
-        $before = $result->getValue($this->verification);
+        $after = $this->get_reflection_property_value('result');
 
-        $this->verification->is_not_empty();
-
-        $after = $result->getValue($this->verification);
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
         $this->assertEquals($before, $after);
     }
 
@@ -176,10 +154,10 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsNotEmptyReturnsSelfReferenceWhenPointerIsNull()
     {
-        $value = $this->verification->is_not_empty();
+        $value = $this->class->is_not_empty();
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -190,19 +168,13 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsMailDoesNothingWhenPointerIsNull()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $before = $this->get_reflection_property_value('result');
 
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
+        $this->class->is_mail(NULL);
 
-        $before = $result->getValue($this->verification);
+        $after = $this->get_reflection_property_value('result');
 
-        $this->verification->is_mail(NULL);
-
-        $after = $result->getValue($this->verification);
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
         $this->assertEquals($before, $after);
     }
 
@@ -214,10 +186,10 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsMailReturnsSelfReferenceWhenPointerIsNull()
     {
-        $value = $this->verification->is_mail(NULL);
+        $value = $this->class->is_mail(NULL);
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -228,19 +200,13 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsNumericalBooleanDoesNothingWhenPointerIsNull()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $before = $this->get_reflection_property_value('result');
 
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
+        $this->class->is_numerical_boolean();
 
-        $before = $result->getValue($this->verification);
+        $after = $this->get_reflection_property_value('result');
 
-        $this->verification->is_numerical_boolean();
-
-        $after = $result->getValue($this->verification);
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
         $this->assertEquals($before, $after);
     }
 
@@ -252,10 +218,10 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsNumericalBooleanReturnsSelfReferenceWhenPointerIsNull()
     {
-        $value = $this->verification->is_numerical_boolean();
+        $value = $this->class->is_numerical_boolean();
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -266,19 +232,13 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsNumericalTrooleanDoesNothingWhenPointerIsNull()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $before = $this->get_reflection_property_value('result');
 
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
+        $this->class->is_numerical_troolean();
 
-        $before = $result->getValue($this->verification);
+        $after = $this->get_reflection_property_value('result');
 
-        $this->verification->is_numerical_troolean();
-
-        $after = $result->getValue($this->verification);
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
         $this->assertEquals($before, $after);
     }
 
@@ -290,10 +250,10 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsNumericalTrooleanReturnsSelfReferenceWhenPointerIsNull()
     {
-        $value = $this->verification->is_numerical_troolean();
+        $value = $this->class->is_numerical_troolean();
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -304,19 +264,13 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsDateDoesNothingWhenPointerIsNull()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $before = $this->get_reflection_property_value('result');
 
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
+        $this->class->is_date(NULL);
 
-        $before = $result->getValue($this->verification);
+        $after = $this->get_reflection_property_value('result');
 
-        $this->verification->is_date(NULL);
-
-        $after = $result->getValue($this->verification);
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
         $this->assertEquals($before, $after);
     }
 
@@ -328,10 +282,10 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsDateReturnsSelfReferenceWhenPointerIsNull()
     {
-        $value = $this->verification->is_date(NULL);
+        $value = $this->class->is_date(NULL);
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -342,19 +296,13 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsTimeDoesNothingWhenPointerIsNull()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $before = $this->get_reflection_property_value('result');
 
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
+        $this->class->is_time(NULL);
 
-        $before = $result->getValue($this->verification);
+        $after = $this->get_reflection_property_value('result');
 
-        $this->verification->is_time(NULL);
-
-        $after = $result->getValue($this->verification);
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
         $this->assertEquals($before, $after);
     }
 
@@ -366,10 +314,10 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testIsTimeReturnsSelfReferenceWhenPointerIsNull()
     {
-        $value = $this->verification->is_time(NULL);
+        $value = $this->class->is_time(NULL);
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
     /**
@@ -380,19 +328,13 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testUnimplementedDoesNothingWhenPointerIsNull()
     {
-        $property = $this->verification_reflection->getProperty('pointer');
-        $property->setAccessible(TRUE);
+        $before = $this->get_reflection_property_value('result');
 
-        $result = $this->verification_reflection->getProperty('result');
-        $result->setAccessible(TRUE);
+        $this->class->unimplemented();
 
-        $before = $result->getValue($this->verification);
+        $after = $this->get_reflection_property_value('result');
 
-        $this->verification->unimplemented();
-
-        $after = $result->getValue($this->verification);
-
-        $this->assertNull($property->getValue($this->verification));
+        $this->assertNull($this->get_reflection_property_value('pointer'));
         $this->assertEquals($before, $after);
     }
 
@@ -404,10 +346,10 @@ class VerificationNullPointerTest extends VerificationTest
      */
     public function testUnimplementedReturnsSelfReferenceWhenPointerIsNull()
     {
-        $value = $this->verification->unimplemented();
+        $value = $this->class->unimplemented();
 
         $this->assertInstanceOf('Lunr\Flare\Verification', $value);
-        $this->assertSame($this->verification, $value);
+        $this->assertSame($this->class, $value);
     }
 
 }

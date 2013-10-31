@@ -9,6 +9,7 @@
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -24,6 +25,7 @@ use Lunr\Flare\Verification;
  * @package    Core
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Flare\Verification
  */
 class VerificationResultTest extends VerificationTest
@@ -37,10 +39,9 @@ class VerificationResultTest extends VerificationTest
      */
     public function testIsOvercheckedReturnsFalseWhenSuperfluousIsEmpty()
     {
-        $method = $this->verification_reflection->getMethod('is_overchecked');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_overchecked');
 
-        $this->assertFalse($method->invokeArgs($this->verification, array('')));
+        $this->assertFalse($method->invokeArgs($this->class, array('')));
     }
 
     /**
@@ -50,17 +51,14 @@ class VerificationResultTest extends VerificationTest
      */
     public function testIsOvercheckedReturnsTrueWhenSuperfluousIsNotEmpty()
     {
-        $method = $this->verification_reflection->getMethod('is_overchecked');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_overchecked');
 
-        $property = $this->verification_reflection->getProperty('superfluous');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->verification, array('test1', 'test2'));
+        $this->set_reflection_property_value('superfluous', array('test1', 'test2'));
 
         $this->logger->expects($this->exactly(2))
                      ->method('error');
 
-        $this->assertTrue($method->invokeArgs($this->verification, array('')));
+        $this->assertTrue($method->invokeArgs($this->class, array('')));
     }
 
     /**
@@ -74,18 +72,13 @@ class VerificationResultTest extends VerificationTest
      */
     public function testIsFullyCheckedReturnsTrueWhenAllDataKeysHaveBeenChecked($data, $result)
     {
-        $checked_data = $this->verification_reflection->getProperty('data');
-        $checked_data->setAccessible(TRUE);
-        $checked_data->setValue($this->verification, $data);
+        $this->set_reflection_property_value('data', $data);
 
-        $results = $this->verification_reflection->getProperty('result');
-        $results->setAccessible(TRUE);
-        $results->setValue($this->verification, $result);
+        $results = $this->set_reflection_property_value('result', $result);
 
-        $method = $this->verification_reflection->getMethod('is_fully_checked');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_fully_checked');
 
-        $this->assertTrue($method->invokeArgs($this->verification, array('')));
+        $this->assertTrue($method->invokeArgs($this->class, array('')));
     }
 
     /**
@@ -99,21 +92,16 @@ class VerificationResultTest extends VerificationTest
      */
     public function testIsFullyCheckedReturnsFalseWhenNotAllDataKeysHaveBeenChecked($data, $result)
     {
-        $checked_data = $this->verification_reflection->getProperty('data');
-        $checked_data->setAccessible(TRUE);
-        $checked_data->setValue($this->verification, $data);
+        $checked_data = $this->set_reflection_property_value('data', $data);
 
-        $results = $this->verification_reflection->getProperty('result');
-        $results->setAccessible(TRUE);
-        $results->setValue($this->verification, $result);
+        $results = $this->set_reflection_property_value('result', $result);
 
-        $method = $this->verification_reflection->getMethod('is_fully_checked');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_fully_checked');
 
         $this->logger->expects($this->exactly(sizeof($data) - sizeof($result)))
                      ->method('error');
 
-        $this->assertFalse($method->invokeArgs($this->verification, array('')));
+        $this->assertFalse($method->invokeArgs($this->class, array('')));
     }
 
     /**
@@ -127,7 +115,7 @@ class VerificationResultTest extends VerificationTest
         $this->logger->expects($this->once())
                      ->method('error');
 
-        $this->assertFalse($this->verification->is_valid());
+        $this->assertFalse($this->class->is_valid());
     }
 
     /**
@@ -141,19 +129,13 @@ class VerificationResultTest extends VerificationTest
         $this->logger->expects($this->exactly(2))
                      ->method('error');
 
-        $identifier = $this->verification_reflection->getProperty('identifier');
-        $identifier->setAccessible(TRUE);
-        $identifier->setValue($this->verification, 'testrun');
+        $identifier = $this->set_reflection_property_value('identifier', 'testrun');
 
-        $enabled = $this->verification_reflection->getProperty('check_superfluous');
-        $enabled->setAccessible(TRUE);
-        $enabled->setValue($this->verification, TRUE);
+        $this->set_reflection_property_value('check_superfluous', TRUE);
 
-        $property = $this->verification_reflection->getProperty('superfluous');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->verification, array('test1', 'test2'));
+        $this->set_reflection_property_value('superfluous', array('test1', 'test2'));
 
-        $this->assertFalse($this->verification->is_valid());
+        $this->assertFalse($this->class->is_valid());
     }
 
     /**
@@ -167,19 +149,13 @@ class VerificationResultTest extends VerificationTest
         $this->logger->expects($this->once())
                      ->method('error');
 
-        $identifier = $this->verification_reflection->getProperty('identifier');
-        $identifier->setAccessible(TRUE);
-        $identifier->setValue($this->verification, 'testrun');
+        $this->set_reflection_property_value('identifier', 'testrun');
 
-        $checked_data = $this->verification_reflection->getProperty('data');
-        $checked_data->setAccessible(TRUE);
-        $checked_data->setValue($this->verification, array('test' => 'value'));
+        $this->set_reflection_property_value('data', array('test' => 'value'));
 
-        $results = $this->verification_reflection->getProperty('result');
-        $results->setAccessible(TRUE);
-        $results->setValue($this->verification, array());
+        $this->set_reflection_property_value('result', array());
 
-        $this->assertFalse($this->verification->is_valid());
+        $this->assertFalse($this->class->is_valid());
     }
 
     /**
@@ -189,27 +165,19 @@ class VerificationResultTest extends VerificationTest
      */
     public function testIsValidReturnsFalseIfACheckFailed()
     {
-        $identifier = $this->verification_reflection->getProperty('identifier');
-        $identifier->setAccessible(TRUE);
-        $identifier->setValue($this->verification, 'testrun');
+        $this->set_reflection_property_value('identifier', 'testrun');
 
-        $enabled = $this->verification_reflection->getProperty('check_remaining');
-        $enabled->setAccessible(TRUE);
-        $enabled->setValue($this->verification, FALSE);
+        $this->set_reflection_property_value('check_remaining', FALSE);
 
-        $checked_data = $this->verification_reflection->getProperty('data');
-        $checked_data->setAccessible(TRUE);
-        $checked_data->setValue($this->verification, array('test1' => 'value1', 'test2' => 'value2'));
+        $this->set_reflection_property_value('data', array('test1' => 'value1', 'test2' => 'value2'));
 
-        $results = $this->verification_reflection->getProperty('result');
-        $results->setAccessible(TRUE);
         $value = array('is_length_5' => FALSE);
-        $results->setValue($this->verification, array('test1' => $value, 'test2' => $value));
+        $this->set_reflection_property_value('result', array('test1' => $value, 'test2' => $value));
 
         $this->logger->expects($this->exactly(2))
                      ->method('error');
 
-        $this->assertFalse($this->verification->is_valid());
+        $this->assertFalse($this->class->is_valid());
     }
 
     /**
@@ -219,24 +187,16 @@ class VerificationResultTest extends VerificationTest
      */
     public function testIsValidReturnsTrueIfNoCheckFailed()
     {
-        $identifier = $this->verification_reflection->getProperty('identifier');
-        $identifier->setAccessible(TRUE);
-        $identifier->setValue($this->verification, 'testrun');
+        $this->set_reflection_property_value('identifier', 'testrun');
 
-        $enabled = $this->verification_reflection->getProperty('check_remaining');
-        $enabled->setAccessible(TRUE);
-        $enabled->setValue($this->verification, FALSE);
+        $this->set_reflection_property_value('check_remaining', FALSE);
 
-        $checked_data = $this->verification_reflection->getProperty('data');
-        $checked_data->setAccessible(TRUE);
-        $checked_data->setValue($this->verification, array('test1' => 'value1', 'test2' => 'value2'));
+        $this->set_reflection_property_value('data', array('test1' => 'value1', 'test2' => 'value2'));
 
-        $results = $this->verification_reflection->getProperty('result');
-        $results->setAccessible(TRUE);
         $value = array('is_length_6' => TRUE);
-        $results->setValue($this->verification, array('test1' => TRUE, 'test2' => $value));
+        $this->set_reflection_property_value('result', array('test1' => TRUE, 'test2' => $value));
 
-        $this->assertTrue($this->verification->is_valid());
+        $this->assertTrue($this->class->is_valid());
     }
 
     /**
@@ -247,28 +207,18 @@ class VerificationResultTest extends VerificationTest
      */
     public function testIsValidReturnsTrueIfNoCheckFailedAndIsOvercheckedIsFalse()
     {
-        $identifier = $this->verification_reflection->getProperty('identifier');
-        $identifier->setAccessible(TRUE);
-        $identifier->setValue($this->verification, 'testrun');
+        $this->set_reflection_property_value('identifier', 'testrun');
 
-        $enabled1 = $this->verification_reflection->getProperty('check_superfluous');
-        $enabled1->setAccessible(TRUE);
-        $enabled1->setValue($this->verification, TRUE);
+        $this->set_reflection_property_value('check_superfluous', TRUE);
 
-        $enabled2 = $this->verification_reflection->getProperty('check_remaining');
-        $enabled2->setAccessible(TRUE);
-        $enabled2->setValue($this->verification, FALSE);
+        $this->set_reflection_property_value('check_remaining', FALSE);
 
-        $checked_data = $this->verification_reflection->getProperty('data');
-        $checked_data->setAccessible(TRUE);
-        $checked_data->setValue($this->verification, array('test1' => 'value1', 'test2' => 'value2'));
+        $this->set_reflection_property_value('data', array('test1' => 'value1', 'test2' => 'value2'));
 
-        $results = $this->verification_reflection->getProperty('result');
-        $results->setAccessible(TRUE);
         $value = array('is_length_6' => TRUE);
-        $results->setValue($this->verification, array('test1' => TRUE, 'test2' => $value));
+        $this->set_reflection_property_value('result', array('test1' => TRUE, 'test2' => $value));
 
-        $this->assertTrue($this->verification->is_valid());
+        $this->assertTrue($this->class->is_valid());
     }
 
     /**
@@ -279,20 +229,14 @@ class VerificationResultTest extends VerificationTest
      */
     public function testIsValidReturnsTrueIfNoCheckFailedAndIsFullyCheckedIsTrue()
     {
-        $identifier = $this->verification_reflection->getProperty('identifier');
-        $identifier->setAccessible(TRUE);
-        $identifier->setValue($this->verification, 'testrun');
+        $this->set_reflection_property_value('identifier', 'testrun');
 
-        $checked_data = $this->verification_reflection->getProperty('data');
-        $checked_data->setAccessible(TRUE);
-        $checked_data->setValue($this->verification, array('test1' => 'value1', 'test2' => 'value2'));
+        $this->set_reflection_property_value('data', array('test1' => 'value1', 'test2' => 'value2'));
 
-        $results = $this->verification_reflection->getProperty('result');
-        $results->setAccessible(TRUE);
         $value = array('is_length_6' => TRUE);
-        $results->setValue($this->verification, array('test1' => TRUE, 'test2' => $value));
+        $this->set_reflection_property_value('result', array('test1' => TRUE, 'test2' => $value));
 
-        $this->assertTrue($this->verification->is_valid());
+        $this->assertTrue($this->class->is_valid());
     }
 
 }
