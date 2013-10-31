@@ -49,8 +49,6 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
     /**
      * Test that load_recipe() includes existing files.
      *
-     * @runInSeparateProcess
-     *
      * @covers Lunr\Core\ConfigServiceLocator::load_recipe
      */
     public function testLoadRecipeIncludesExistingFile()
@@ -70,8 +68,6 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
     /**
      * Test that load_recipe() caches valid recipes.
      *
-     * @runInSeparateProcess
-     *
      * @covers Lunr\Core\ConfigServiceLocator::load_recipe
      */
     public function testLoadRecipeCachesWithValidRecipies()
@@ -88,8 +84,6 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      * Test that load_recipe() does not cache invalid recipes.
      *
      * @param String $id ID of an invalid recipe.
-     *
-     * @runInSeparateProcess
      *
      * @dataProvider invalidRecipeProvider
      * @covers       Lunr\Core\ConfigServiceLocator::load_recipe

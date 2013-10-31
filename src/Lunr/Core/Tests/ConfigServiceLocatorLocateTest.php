@@ -57,8 +57,6 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
     /**
      * Test that locate() processes a totally new object instance.
      *
-     * @runInSeparateProcess
-     *
      * @covers Lunr\Core\ConfigServiceLocator::locate
      */
     public function testLocateProcessesTotallyNewInstance()
@@ -78,8 +76,6 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
 
     /**
      * Test that locate() returns totally new instance.
-     *
-     * @runInSeparateProcess
      *
      * @covers Lunr\Core\ConfigServiceLocator::locate
      */
@@ -143,8 +139,6 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
     /**
      * Test that __call() processes a totally new object instance.
      *
-     * @runInSeparateProcess
-     *
      * @covers Lunr\Core\ConfigServiceLocator::__call
      */
     public function testMagicCallProcessesTotallyNewInstance()
@@ -162,8 +156,6 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
 
     /**
      * Test that __call() returns totally new instance.
-     *
-     * @runInSeparateProcess
      *
      * @covers Lunr\Core\ConfigServiceLocator::__call
      */

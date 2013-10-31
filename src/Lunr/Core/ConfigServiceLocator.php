@@ -160,7 +160,7 @@ class ConfigServiceLocator
 
         if (stream_resolve_include_path($file))
         {
-            include_once $file;
+            include $file;
         }
 
         if (isset($recipe[$id]) && is_array($recipe[$id]) && is_array($recipe[$id]['params']))
