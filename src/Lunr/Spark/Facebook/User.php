@@ -92,7 +92,7 @@ abstract class User extends Api
      */
     protected function get_permissions()
     {
-        if (($this->access_token === NULL) || ($this->check_permissions === FALSE))
+        if (($this->access_token === NULL) || ($this->check_permissions === FALSE) || (stripos($this->access_token, '|') !== FALSE))
         {
             return;
         }

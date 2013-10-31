@@ -50,6 +50,24 @@ class UserPermissionsTest extends UserTest
     }
 
     /**
+     * Test that get_permissions() does not get permissions with an app access token.
+     *
+     * @covers Lunr\Spark\Facebook\User::get_permissions
+     */
+    public function testGetPermissionsDoesNotGetPermissionsWithAnAppAccessToken()
+    {
+        $this->cas->expects($this->exactly(2))
+                  ->method('get')
+                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
+                  ->will($this->returnValue('App|Only'));
+
+        $method = $this->get_accessible_reflection_method('get_permissions');
+        $method->invoke($this->class);
+
+        $this->assertArrayEmpty($this->get_reflection_property_value('permissions'));
+    }
+
+    /**
      * Test that get_permissions() sets permissions on success.
      *
      * @covers Lunr\Spark\Facebook\User::get_permissions
@@ -65,7 +83,7 @@ class UserPermissionsTest extends UserTest
             ]
         ];
 
-        $this->cas->expects($this->exactly(2))
+        $this->cas->expects($this->exactly(3))
                   ->method('get')
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue('Token'));
@@ -97,7 +115,7 @@ class UserPermissionsTest extends UserTest
      */
     public function testGetPermissionsSetsPermissionsEmptyOnError()
     {
-        $this->cas->expects($this->exactly(2))
+        $this->cas->expects($this->exactly(3))
                   ->method('get')
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue('Token'));

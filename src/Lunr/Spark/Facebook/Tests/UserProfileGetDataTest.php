@@ -251,9 +251,9 @@ class UserProfileGetDataTest extends UserProfileTest
             ]
         ];
 
-        $this->cas->expects($this->exactly(5))
+        $this->cas->expects($this->exactly(6))
                   ->method('get')
-                  ->will($this->onConsecutiveCalls('Token', 'Token', 'Proof', 'Token', 'Token'));
+                  ->will($this->onConsecutiveCalls('Token', 'Token', 'Proof', 'Token', 'Token', 'Token'));
 
         $this->curl->expects($this->exactly(2))
                    ->method('get_request')
