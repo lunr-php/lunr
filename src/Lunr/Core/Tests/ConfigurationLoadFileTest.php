@@ -41,8 +41,6 @@ class ConfigurationLoadFileTest extends ConfigurationTest
     /**
      * Test loading a correct config file.
      *
-     * @runInSeparateProcess
-     *
      * @depends Lunr\Core\Tests\ConfigurationArrayConstructorTest::testToArrayEqualsInput
      */
     public function testLoadCorrectFile()
@@ -61,8 +59,6 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
     /**
      * Test loading a correct config file.
-     *
-     * @runInSeparateProcess
      *
      * @depends Lunr\Core\Tests\ConfigurationArrayConstructorTest::testToArrayEqualsInput
      */
@@ -85,8 +81,6 @@ class ConfigurationLoadFileTest extends ConfigurationTest
     /**
      * Test loading a correct config file.
      *
-     * @runInSeparateProcess
-     *
      * @depends Lunr\Core\Tests\ConfigurationArrayConstructorTest::testToArrayEqualsInput
      */
     public function testLoadFileMergesArrays()
@@ -108,8 +102,6 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
     /**
      * Test loading an invalid config file.
-     *
-     * @runInSeparateProcess
      */
     public function testLoadInvalidFile()
     {
@@ -127,8 +119,6 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
     /**
      * Test loading a non-existing file.
-     *
-     * @runInSeparateProcess
      *
      * @expectedException PHPUnit_Framework_Error
      */
@@ -148,8 +138,6 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
     /**
      * Test that loading a file invalidates the cached size value.
-     *
-     * @runInSeparateProcess
      */
     public function testLoadFileInvalidatesSize()
     {
@@ -166,12 +154,12 @@ class ConfigurationLoadFileTest extends ConfigurationTest
     /**
      * Test loading a correct database config file.
      *
-     * @runInSeparateProcess
-     *
      * @depends Lunr\Core\Tests\ConfigurationArrayConstructorTest::testToArrayEqualsInput
      */
     public function testLoadCorrectDatabaseConfig()
     {
+        $oldpath = get_include_path();
+
         set_include_path(TEST_STATICS . '/Core/valid:' . get_include_path());
 
         $this->configuration->load_database_config();
@@ -188,15 +176,17 @@ class ConfigurationLoadFileTest extends ConfigurationTest
         $property->setAccessible(TRUE);
 
         $this->assertEquals($this->config, $this->configuration->toArray());
+
+        set_include_path($oldpath);
     }
 
     /**
      * Test loading an invalid config file.
-     *
-     * @runInSeparateProcess
      */
     public function testLoadInvalidDatabaseConfig()
     {
+        $oldpath = get_include_path();
+
         set_include_path(TEST_STATICS . '/Core/invalid:' . get_include_path());
 
         $property = $this->configuration_reflection->getProperty('config');
@@ -209,12 +199,12 @@ class ConfigurationLoadFileTest extends ConfigurationTest
         $after = $property->getValue($this->configuration);
 
         $this->assertEquals($before, $after);
+
+        set_include_path($oldpath);
     }
 
     /**
      * Test loading a non-existing database config file.
-     *
-     * @runInSeparateProcess
      *
      * @expectedException PHPUnit_Framework_Error
      */
@@ -234,8 +224,6 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
     /**
      * Test that loading a database config file invalidates the cached size value.
-     *
-     * @runInSeparateProcess
      */
     public function testLoadDatabaseConfigInvalidatesSize()
     {
