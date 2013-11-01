@@ -325,6 +325,32 @@ class MailSetTest extends MailTest
         $this->assertPropertyEquals('subject', 'Subject');
     }
 
+    /**
+     * Test resetting all values.
+     *
+     * @covers Lunr\Network\Mail::reset
+     */
+    public function testReset()
+    {
+        $this->set_reflection_property_value('msg', 'message');
+        $this->set_reflection_property_value('from', 'from@email.com');
+        $this->set_reflection_property_value('subject', 'subject');
+
+        $this->set_reflection_property_value('to', [ 'to@mail.com' ]);
+        $this->set_reflection_property_value('cc', [ 'cc@mail.com' ]);
+        $this->set_reflection_property_value('bcc', [ 'bcc@mail.com' ]);
+
+        $method = $this->get_accessible_reflection_method('reset');
+        $method->invoke($this->class);
+
+        $this->assertPropertyEmpty('msg');
+        $this->assertPropertyEmpty('from');
+        $this->assertPropertyEmpty('subject');
+        $this->assertArrayEmpty($this->get_reflection_property_value('to'));
+        $this->assertArrayEmpty($this->get_reflection_property_value('cc'));
+        $this->assertArrayEmpty($this->get_reflection_property_value('bcc'));
+    }
+
 }
 
 ?>

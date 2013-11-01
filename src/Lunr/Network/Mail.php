@@ -68,12 +68,7 @@ class Mail
      */
     public function __construct()
     {
-        $this->from    = '';
-        $this->to      = [];
-        $this->cc      = [];
-        $this->bcc     = [];
-        $this->msg     = '';
-        $this->subject = '';
+        $this->reset();
     }
 
     /**
@@ -230,7 +225,24 @@ class Mail
             }
         }
 
+        $this->reset();
+
         return $ok;
+    }
+
+    /**
+     * Reset the values of the class without destroying it.
+     *
+     * @return void
+     */
+    protected function reset()
+    {
+        $this->from    = '';
+        $this->to      = [];
+        $this->cc      = [];
+        $this->bcc     = [];
+        $this->msg     = '';
+        $this->subject = '';
     }
 
     /**
