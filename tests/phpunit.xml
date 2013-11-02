@@ -191,6 +191,7 @@
             <file>src/Lunr/Shadow/Tests/GetoptCliParserParseTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestGetTest.php</file>
+            <file>src/Lunr/Shadow/Tests/CliRequestStoreRequestTest.php</file>
         </testsuite>
         <testsuite name="Spark">
             <file>src/Lunr/Spark/Tests/CentralAuthenticationStoreBaseTest.php</file>

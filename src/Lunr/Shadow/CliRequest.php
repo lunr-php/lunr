@@ -88,17 +88,18 @@ class CliRequest implements RequestInterface
     public function __construct($configuration, $parser)
     {
         $this->ast     = $parser->parse();
-        $this->post    = array();
-        $this->get     = array();
-        $this->cookie  = array();
-        $this->request = array();
-        $this->json    = array();
-        $this->files   = array();
+        $this->post    = [];
+        $this->get     = [];
+        $this->cookie  = [];
+        $this->request = [];
+        $this->json    = [];
+        $this->files   = [];
 
         $this->request['sapi'] = PHP_SAPI;
         $this->request['host'] = gethostname();
 
         $this->store_default($configuration);
+        $this->store_request();
     }
 
     /**
@@ -126,7 +127,7 @@ class CliRequest implements RequestInterface
     {
         $this->request['controller'] = $configuration['default_controller'];
         $this->request['method']     = $configuration['default_method'];
-        $this->request['params']     = array();
+        $this->request['params']     = [];
 
         $this->request['base_path'] = $configuration['default_webpath'];
         $this->request['protocol']  = $configuration['default_protocol'];
@@ -141,6 +142,52 @@ class CliRequest implements RequestInterface
         else
         {
             $this->request['call'] = NULL;
+        }
+    }
+
+    /**
+     * Parse command line argument AST for request parameters.
+     *
+     * @return void
+     */
+    protected function store_request()
+    {
+        foreach([ 'controller', 'method', 'c', 'm' ] as $key)
+        {
+            if (array_key_exists($key, $this->ast))
+            {
+                $index = ($key === 'controller') || ($key === 'c') ? 'controller' : 'method';
+
+                $this->request[$index] = $this->ast[$key][0];
+                unset($this->ast[$key]);
+            }
+        }
+
+        if (isset($this->request['controller'], $this->request['method']) === TRUE)
+        {
+            $this->request['call'] = $this->request['controller'] . '/' . $this->request['method'];
+        }
+        else
+        {
+            $this->request['call'] = NULL;
+        }
+
+        foreach (['params', 'param', 'p'] as $key)
+        {
+            if (array_key_exists($key, $this->ast))
+            {
+                $this->request['params'] = $this->ast[$key];
+                unset($this->ast[$key]);
+            }
+        }
+
+        foreach([ 'post', 'get', 'cookie' ] as $global)
+        {
+            if (array_key_exists($global, $this->ast))
+            {
+                parse_str($this->ast[$global][0], $this->{$global});
+                unset($this->ast[$global]);
+            }
         }
     }
 

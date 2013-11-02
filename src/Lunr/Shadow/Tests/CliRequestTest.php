@@ -215,6 +215,55 @@ abstract class CliRequestTest extends LunrBaseTest
         return $values;
     }
 
+    /**
+     * Unit Test Data Provider for request values in the AST.
+     *
+     * @return array $values Request values
+     */
+    public function astRequestValueProvider()
+    {
+        $values   = [];
+        $values[] = [ 'controller', 'controller', [ 'default' ] ];
+        $values[] = [ 'controller', 'c', [ 'default' ] ];
+        $values[] = [ 'method', 'method', [ 'index' ] ];
+        $values[] = [ 'method', 'm', [ 'index' ] ];
+        $values[] = [ 'params', 'params', [ 1, 2, 3 ] ];
+        $values[] = [ 'params', 'param', [ 1, 2, 3 ] ];
+        $values[] = [ 'params', 'p', [ 1, 2, 3 ] ];
+
+        return $values;
+    }
+
+    /**
+     * Unit Test Data Provider for superglobal values in the AST.
+     *
+     * @return array $values Superglobal values
+     */
+    public function astSuperglobalValueProvider()
+    {
+        $values   = [];
+        $values[] = [ 'post', 'v=300.a&t=Page%20Title', [ 'v' => '300.a', 't' => 'Page Title' ] ];
+        $values[] = [ 'get', 'v=300.a&t=Page%20Title', [ 'v' => '300.a', 't' => 'Page Title' ] ];
+        $values[] = [ 'cookie', 'v=300.a&t=Page%20Title', [ 'v' => '300.a', 't' => 'Page Title' ] ];
+
+        return $values;
+    }
+
+    /**
+     * Unit Test Data Provider for call values.
+     *
+     * @return array $values Call values
+     */
+    public function callValueProvider()
+    {
+        $values   = [];
+        $values[] = [ 'controller', 'method', 'controller/method' ];
+        $values[] = [ 'controller', NULL, NULL ];
+        $values[] = [ NULL, 'method', NULL ];
+
+        return $values;
+    }
+
 }
 
 ?>
