@@ -271,7 +271,7 @@ class CliRequest implements RequestInterface
      */
     public function get_get_data($key)
     {
-        return NULL;
+        return isset($this->get[$key]) ? $this->get[$key] : NULL;
     }
 
     /**
@@ -283,19 +283,7 @@ class CliRequest implements RequestInterface
      */
     public function get_post_data($key)
     {
-        return NULL;
-    }
-
-    /**
-     * Retrieve a stored FILES value.
-     *
-     * @param mixed $key Key for the value to retrieve
-     *
-     * @return mixed $return The value of the key or NULL if not found
-     */
-    public function get_files_data($key)
-    {
-        return NULL;
+        return isset($this->post[$key]) ? $this->post[$key] : NULL;
     }
 
     /**
@@ -306,6 +294,18 @@ class CliRequest implements RequestInterface
      * @return mixed $return The value of the key or NULL if not found
      */
     public function get_cookie_data($key)
+    {
+        return isset($this->cookie[$key]) ? $this->cookie[$key] : NULL;
+    }
+
+    /**
+     * Retrieve a stored FILES value.
+     *
+     * @param mixed $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function get_files_data($key)
     {
         return NULL;
     }

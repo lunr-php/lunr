@@ -171,6 +171,51 @@ class CliRequestGetTest extends CliRequestTest
         $this->assertInstanceOf('Lunr\Corona\InterRequest', $value);
     }
 
+    /**
+     * Test getting GET data.
+     *
+     * @param String $value the expected value
+     * @param String $key   key for a GET value
+     *
+     * @dataProvider validJsonEnumProvider
+     * @covers       Lunr\Shadow\CliRequest::get_get_data
+     */
+    public function testGetGetData($value, $key)
+    {
+        $this->set_reflection_property_value('get', [ $key => $value ]);
+        $this->assertSame($value, $this->class->get_get_data($key));
+    }
+
+    /**
+     * Test getting POST data.
+     *
+     * @param String $value the expected value
+     * @param String $key   key for a GET value
+     *
+     * @dataProvider validJsonEnumProvider
+     * @covers       Lunr\Shadow\CliRequest::get_post_data
+     */
+    public function testGetPostData($value, $key)
+    {
+        $this->set_reflection_property_value('post', [ $key => $value ]);
+        $this->assertSame($value, $this->class->get_post_data($key));
+    }
+
+    /**
+     * Test getting GET data.
+     *
+     * @param String $value the expected value
+     * @param String $key   key for a GET value
+     *
+     * @dataProvider validJsonEnumProvider
+     * @covers       Lunr\Shadow\CliRequest::get_cookie_data
+     */
+    public function testGetCookieData($value, $key)
+    {
+        $this->set_reflection_property_value('cookie', [ $key => $value ]);
+        $this->assertSame($value, $this->class->get_cookie_data($key));
+    }
+
 }
 
 ?>
