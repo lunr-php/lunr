@@ -15,9 +15,7 @@
 
 namespace Lunr\Spark\Facebook\Tests;
 
-use Lunr\Spark\Facebook\User;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use Lunr\Spark\DataError;
 
 /**
  * This class contains the tests for the Facebook User class.
@@ -172,6 +170,70 @@ class UserPermissionsTest extends UserTest
         $method = $this->get_accessible_reflection_method('is_permission_granted');
 
         $this->assertFalse($method->invokeArgs($this->class, [ $permissions ]));
+    }
+
+    /**
+     * Test that check_item_access() returns Not Available if permissions are granted.
+     *
+     * @param string|array $permissions Set of permissions to check for.
+     *
+     * @dataProvider validPermissionsProvider
+     * @covers       Lunr\Spark\Facebook\User::check_item_access
+     */
+    public function testCheckItemAccessReturnsNotAvailableIfPermissionsGranted($permissions)
+    {
+        $granted = [ 'email' => 1, 'user_likes' => 1 ];
+
+        $this->set_reflection_property_value('permissions', $granted);
+
+        $method = $this->get_accessible_reflection_method('check_item_access');
+
+        $this->assertSame(DataError::NOT_AVAILABLE, $method->invokeArgs($this->class, [ 'item', $permissions ]));
+    }
+
+    /**
+     * Test that check_item_access() returns Access Denied if permissions are not granted.
+     *
+     * @param string|array $permissions Set of permissions to check for.
+     *
+     * @dataProvider invalidPermissionsProvider
+     * @covers       Lunr\Spark\Facebook\User::check_item_access
+     */
+    public function testCheckItemAccessReturnsAccessDeniedIfPermissionsNotGranted($permissions)
+    {
+        $granted = [ 'email' => 1, 'user_likes' => 1 ];
+
+        $this->set_reflection_property_value('permissions', $granted);
+
+        $method = $this->get_accessible_reflection_method('check_item_access');
+
+        $this->assertSame(DataError::ACCESS_DENIED, $method->invokeArgs($this->class, [ 'item', $permissions ]));
+    }
+
+    /**
+     * Test that check_item_access() logs a warning if permissions are not granted.
+     *
+     * @param string|array $permissions Set of permissions to check for.
+     * @param string       $info        Missing permission info.
+     *
+     * @dataProvider invalidPermissionsProvider
+     * @covers       Lunr\Spark\Facebook\User::check_item_access
+     */
+    public function testCheckItemAccessLogsWarningIfPermissionsNotGranted($permissions, $info)
+    {
+        $granted = [ 'email' => 1, 'user_likes' => 1 ];
+
+        $this->set_reflection_property_value('permissions', $granted);
+
+        $context = [ 'field' => 'item', 'permission' => $info ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with($this->equalTo('Access to "{field}" requires "{permission}" permission.'), $this->equalTo($context));
+
+        $method = $this->get_accessible_reflection_method('check_item_access');
+
+        $method->invokeArgs($this->class, [ 'item', $permissions ]);
     }
 
 }

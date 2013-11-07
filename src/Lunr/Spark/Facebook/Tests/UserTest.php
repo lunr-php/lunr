@@ -111,9 +111,9 @@ abstract class UserTest extends LunrBaseTest
     public function invalidPermissionsProvider()
     {
         $permissions   = [];
-        $permissions[] = [ 'friends_likes' ];
-        $permissions[] = [[ 'friends_likes' ]];
-        $permissions[] = [[ 'friends_likes', 'user_about_me' ]];
+        $permissions[] = [ 'friends_likes', 'friends_likes' ];
+        $permissions[] = [[ 'friends_likes' ], 'friends_likes' ];
+        $permissions[] = [[ 'friends_likes', 'user_about_me' ], 'friends_likes or user_about_me' ];
 
         return $permissions;
     }

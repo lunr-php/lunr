@@ -111,15 +111,7 @@ class Post extends User
                 return DataError::UNKNOWN_FIELD;
         }
 
-        if ($this->is_permission_granted($permission) === FALSE)
-        {
-            $context = [ 'field' => $item, 'permission' => implode(' or ', $permission) ];
-            $this->logger->warning('Access to "{field}" requires "{permission}" permission.', $context);
-
-            return DataError::ACCESS_DENIED;
-        }
-
-        return isset($this->data[$item]) ? $this->data[$item] : DataError::NOT_AVAILABLE;
+        return isset($this->data[$item]) ? $this->data[$item] : $this->check_item_access($item, $permission);
     }
 
     /**

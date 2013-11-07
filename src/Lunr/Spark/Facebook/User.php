@@ -15,6 +15,8 @@
 
 namespace Lunr\Spark\Facebook;
 
+use Lunr\Spark\DataError;
+
 /**
  * Facebook User Support for Spark
  *
@@ -138,6 +140,29 @@ abstract class User extends Api
         }
 
         return FALSE;
+    }
+
+    /**
+     * Check whether access to a given info item is allowed.
+     *
+     * @param String       $item       Info item identifier
+     * @param String|array $permission Permission string or set of permissions.
+     *
+     * @return String $error Access Denied if permissions are not granted, Not Available otherwise
+     */
+    protected function check_item_access($item, $permission)
+    {
+        if ($this->is_permission_granted($permission) === FALSE)
+        {
+            $context = [ 'field' => $item, 'permission' => implode(' or ', is_array($permission) ? $permission : [ $permission ]) ];
+            $this->logger->warning('Access to "{field}" requires "{permission}" permission.', $context);
+
+            return DataError::ACCESS_DENIED;
+        }
+        else
+        {
+            return DataError::NOT_AVAILABLE;
+        }
     }
 
 }
