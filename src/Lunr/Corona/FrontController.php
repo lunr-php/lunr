@@ -62,15 +62,26 @@ class FrontController
     /**
      * Get the controller responsible for the request.
      *
-     * @param String $src Project subfolder to look for controllers in.
+     * @param String  $src       Project subfolder to look for controllers in.
+     * @param Array   $list      List of controller names
+     * @param Boolean $blacklist Whether to use the controller list as blacklist or whitelist
      *
      * @return String $controller Fully qualified name of the responsible controller.
      */
-    public function get_controller($src)
+    public function get_controller($src, $list = [], $blacklist = TRUE)
     {
         $name = $this->request->controller . 'controller';
 
         if ($name == 'controller')
+        {
+            return '';
+        }
+
+        if (($blacklist === TRUE) && in_array($this->request->controller, $list))
+        {
+            return '';
+        }
+        elseif (($blacklist === FALSE) && !in_array($this->request->controller, $list))
         {
             return '';
         }

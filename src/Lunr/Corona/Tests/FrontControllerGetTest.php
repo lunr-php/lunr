@@ -38,7 +38,7 @@ class FrontControllerGetTest extends FrontControllerTest
         $result = __DIR__ . '/Project/Package/FunctionController.php';
         $fqcn   = 'Project\\Package\\FunctionController';
 
-        $this->request->expects($this->once())
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
                       ->will($this->returnValue('function'));
@@ -134,7 +134,7 @@ class FrontControllerGetTest extends FrontControllerTest
         $result = __DIR__ . '/Project/Package/FunctionController.php';
         $fqcn   = 'Project\\Package\\FunctionController';
 
-        $this->request->expects($this->once())
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
                       ->will($this->returnValue('function'));
@@ -145,6 +145,76 @@ class FrontControllerGetTest extends FrontControllerTest
                   ->will($this->returnValue(array($result, 'nr2')));
 
         $value = $this->class->get_controller($dir);
+
+        $this->assertEquals($fqcn, $value);
+    }
+
+    /**
+     * Test that get_controller() returns an empty string if the controller to find is blacklisted.
+     *
+     * @covers Lunr\Corona\FrontController::get_controller
+     */
+    public function testGetBlacklistedControllerReturnsEmptyString()
+    {
+        $dir = __DIR__;
+
+        $this->request->expects($this->exactly(2))
+                      ->method('__get')
+                      ->with('controller')
+                      ->will($this->returnValue('function'));
+
+        $this->fao->expects($this->never())
+                  ->method('find_matches');
+
+        $value = $this->class->get_controller($dir, [ 'function' ]);
+
+        $this->assertSame('', $value);
+    }
+
+    /**
+     * Test that get_controller() returns an empty string if the controller to find is not whitelisted.
+     *
+     * @covers Lunr\Corona\FrontController::get_controller
+     */
+    public function testGetNotWhitelistedControllerReturnsEmptyString()
+    {
+        $dir = __DIR__;
+
+        $this->request->expects($this->exactly(2))
+                      ->method('__get')
+                      ->with('controller')
+                      ->will($this->returnValue('function'));
+
+        $this->fao->expects($this->never())
+                  ->method('find_matches');
+
+        $value = $this->class->get_controller($dir, [], FALSE);
+
+        $this->assertSame('', $value);
+    }
+
+    /**
+     * Test that get_controller() returns a FQCN if the controller to find is whitelisted.
+     *
+     * @covers Lunr\Corona\FrontController::get_controller
+     */
+    public function testGetWhitelistedControllerReturnsFQCNForExistingController()
+    {
+        $dir    = __DIR__;
+        $result = __DIR__ . '/Project/Package/FunctionController.php';
+        $fqcn   = 'Project\\Package\\FunctionController';
+
+        $this->request->expects($this->exactly(2))
+                      ->method('__get')
+                      ->with('controller')
+                      ->will($this->returnValue('function'));
+
+        $this->fao->expects($this->once())
+                  ->method('find_matches')
+                  ->with('/^.+functioncontroller.php/i', $dir)
+                  ->will($this->returnValue(array($result)));
+
+        $value = $this->class->get_controller($dir, [ 'function' ], FALSE);
 
         $this->assertEquals($fqcn, $value);
     }
