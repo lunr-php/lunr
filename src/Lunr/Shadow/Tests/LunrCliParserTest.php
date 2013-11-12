@@ -35,18 +35,21 @@ abstract class LunrCliParserTest extends LunrBaseTest
 {
 
     /**
-     * Mock instance of a Logger class.
-     * @var LoggerInterface
+     * Mock instance of the Console class.
+     * @var Console
      */
-    protected $logger;
+    protected $console;
 
     /**
      * Test case constructor.
      */
     public function setUp()
     {
-        $this->logger     = $this->getMock('Psr\Log\LoggerInterface');
-        $this->class      = new LunrCliParser($this->logger, 'ab:c;d:;e::', [ 'first', 'second:', 'third;', 'fourth:;', 'fifth::' ]);
+        $this->console = $this->getMockBuilder('Lunr\Shadow\Console')
+                              ->disableOriginalConstructor()
+                              ->getMock();
+
+        $this->class      = new LunrCliParser($this->console, 'ab:c;d:;e::', [ 'first', 'second:', 'third;', 'fourth:;', 'fifth::' ]);
         $this->reflection = new ReflectionClass('Lunr\Shadow\LunrCliParser');
     }
 
@@ -55,7 +58,7 @@ abstract class LunrCliParserTest extends LunrBaseTest
      */
     public function tearDown()
     {
-        unset($this->logger);
+        unset($this->console);
         unset($this->class);
         unset($this->reflection);
     }

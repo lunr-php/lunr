@@ -31,7 +31,13 @@ use Lunr\Halo\PsrLoggerTestTrait;
 class LunrCliParserBaseTest extends LunrCliParserTest
 {
 
-    use PsrLoggerTestTrait;
+    /**
+     * Test that the Console class is passed correctly.
+     */
+    public function testConsoleIsPassedCorrectly()
+    {
+        $this->assertPropertySame('console', $this->console);
+    }
 
     /**
      * Test that the short options string is passed correctly.

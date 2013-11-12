@@ -69,19 +69,19 @@ class LunrCliParser implements CliParserInterface
     private $error;
 
     /**
-     * Shared instance of a logger class.
-     * @var LoggerInterface
+     * Shared instance of the console class.
+     * @var Console
      */
-    protected $logger;
+    protected $console;
 
     /**
      * Constructor.
      *
-     * @param LoggerInterface $logger    Shared instance of a Logger class
-     * @param String          $shortopts List of supported short arguments
-     * @param array           $longopts  List of supported long arguments (optional)
+     * @param Console $console   Shared instance of the Console class
+     * @param String  $shortopts List of supported short arguments
+     * @param array   $longopts  List of supported long arguments (optional)
      */
-    public function __construct($logger, $shortopts, $longopts = '')
+    public function __construct($console, $shortopts, $longopts = '')
     {
         $this->short   = $shortopts;
         $this->long    = $longopts;
@@ -89,7 +89,7 @@ class LunrCliParser implements CliParserInterface
         $this->checked = array();
         $this->ast     = array();
         $this->error   = FALSE;
-        $this->logger  = $logger;
+        $this->console = $console;
     }
 
     /**
@@ -103,7 +103,7 @@ class LunrCliParser implements CliParserInterface
         unset($this->checked);
         unset($this->ast);
         unset($this->error);
-        unset($this->logger);
+        unset($this->console);
     }
 
     /**
@@ -175,8 +175,7 @@ class LunrCliParser implements CliParserInterface
         }
         elseif($toplevel)
         {
-            $context = [ 'parameter' => $opt ];
-            $this->logger->notice('Superfluous argument: {parameter}', $context);
+            $this->console->cli_println('Superfluous argument: ' . $opt);
         }
 
         return FALSE;
@@ -196,8 +195,7 @@ class LunrCliParser implements CliParserInterface
 
         if($pos === FALSE)
         {
-            $context = [ 'parameter' => $opt ];
-            $this->logger->error('Invalid parameter given: {parameter}', $context);
+            $this->console->cli_println('Invalid parameter given: ' . $opt);
             $this->error = TRUE;
             return FALSE;
         }
@@ -238,8 +236,7 @@ class LunrCliParser implements CliParserInterface
 
         if($match === FALSE)
         {
-            $context = [ 'parameter' => $opt ];
-            $this->logger->error('Invalid parameter given: {parameter}', $context);
+            $this->console->cli_println('Invalid parameter given: ' . $opt);
             $this->error = TRUE;
             return FALSE;
         }
@@ -295,23 +292,19 @@ class LunrCliParser implements CliParserInterface
                 }
                 elseif ($type == ':')
                 {
-                    $context = [ 'parameter' => $opt ];
-                    $this->logger->error('Missing argument for -{parameter}', $context);
+                    $this->console->cli_println('Missing argument for -' . $opt);
                     $this->error = TRUE;
                 }
             }
             elseif ($type == ':')
             {
-                $context = [ 'parameter' => $opt ];
-                $this->logger->error('Missing argument for -{parameter}', $context);
+                $this->console->cli_println('Missing argument for -' . $opt);
                 $this->error = TRUE;
             }
         }
         elseif (count($this->args) > $next && !strpos($a, $opt))
         {
-            $context = [ 'argument' => $this->args[$next] ];
-            $this->logger->notice('Superfluous argument: {argument}', $context);
-
+            $this->console->cli_println('Superfluous argument: ' . $this->args[$next]);
             return TRUE;
         }
 

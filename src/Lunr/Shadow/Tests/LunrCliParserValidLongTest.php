@@ -41,9 +41,9 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
     {
         $method = $this->get_accessible_reflection_method('is_valid_long');
 
-        $this->logger->expects($this->once())
-                     ->method('error')
-                     ->with('Invalid parameter given: {parameter}', array('parameter' => $param));
+        $this->console->expects($this->once())
+                      ->method('cli_println')
+                      ->with($this->equalTo('Invalid parameter given: ' . $param));
 
         $value = $method->invokeArgs($this->class, array($param, 1));
 
@@ -62,9 +62,9 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
     {
         $method = $this->get_accessible_reflection_method('is_valid_long');
 
-        $this->logger->expects($this->once())
-                     ->method('error')
-                     ->with('Invalid parameter given: {parameter}', array('parameter' => $param));
+        $this->console->expects($this->once())
+                      ->method('cli_println')
+                      ->with($this->equalTo('Invalid parameter given: ' . $param));
 
         $method->invokeArgs($this->class, array($param, 1));
 
