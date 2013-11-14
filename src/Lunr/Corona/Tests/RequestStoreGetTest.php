@@ -229,6 +229,33 @@ class RequestStoreGetTest extends RequestTest
     }
 
     /**
+     * Test storing special $_GET values, when they have superfluous slashes.
+     *
+     * @covers Lunr\Corona\Request::store_get
+     */
+    public function testStoreSpecialGetValuesWithMultipleSlashes()
+    {
+        $this->set_reflection_property_value('request', []);
+
+        $_GET['controller'] = '/controller//';
+        $_GET['method']     = '/method/';
+        $_GET['param1']     = '/param1/';
+        $_GET['param2']     = '//param2/';
+        $call               = 'controller/method';
+
+        $method = $this->get_accessible_reflection_method('store_get');
+        $method->invokeArgs($this->class, [ $this->configuration ]);
+
+        $request = $this->get_reflection_property_value('request');
+
+        $this->assertEquals('controller', $request['controller']);
+        $this->assertEquals('method', $request['method']);
+        $this->assertEquals('param1', $request['params'][0]);
+        $this->assertEquals('param2', $request['params'][1]);
+        $this->assertEquals($call, $request['call']);
+    }
+
+    /**
      * Test storing the call value if default values are not set.
      *
      * @covers Lunr\Corona\Request::store_get

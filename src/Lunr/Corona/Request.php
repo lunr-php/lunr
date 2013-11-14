@@ -223,11 +223,11 @@ class Request implements RequestInterface
         {
             if (substr($key, 0, 5) == 'param')
             {
-                $this->request['params'][] = $value;
+                $this->request['params'][] = trim($value, '/');
             }
             elseif (in_array($key, [ 'controller', 'method' ]))
             {
-                $this->request[$key] = $value;
+                $this->request[$key] = trim($value, '/');
             }
             else
             {
