@@ -3,21 +3,18 @@
 /**
  * This file contains the MailSetTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
-
-use Lunr\Network\Mail;
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
 
 /**
  * This class contains test methods for the setters in the Mail class.
@@ -26,6 +23,7 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\Mail
  */
 class MailSetTest extends MailTest
@@ -38,10 +36,10 @@ class MailSetTest extends MailTest
      */
     public function testSetFromReturnsSelfReference()
     {
-        $result = $this->mail->set_from('info@m2mobi.com');
+        $result = $this->class->set_from('info@m2mobi.com');
 
         $this->assertInstanceOf('Lunr\Network\Mail', $result);
-        $this->assertSame($this->mail, $result);
+        $this->assertSame($this->class, $result);
     }
 
     /**
@@ -53,12 +51,9 @@ class MailSetTest extends MailTest
      */
     public function testSetInvalidEmailAsFromDoesNothing()
     {
-        $property = $this->mail_reflection->getProperty('from');
-        $property->setAccessible(TRUE);
+        $this->class->set_from(NULL);
 
-        $this->mail->set_from(NULL);
-
-        $this->assertEquals('', $property->getValue($this->mail));
+        $this->assertPropertyEquals('from', '');
     }
 
     /**
@@ -70,12 +65,9 @@ class MailSetTest extends MailTest
      */
     public function testSetValidEmailAsFrom()
     {
-        $property = $this->mail_reflection->getProperty('from');
-        $property->setAccessible(TRUE);
+        $this->class->set_from('info@m2mobi.com');
 
-        $this->mail->set_from('info@m2mobi.com');
-
-        $this->assertEquals('info@m2mobi.com', $property->getValue($this->mail));
+        $this->assertPropertyEquals('from', 'info@m2mobi.com');
     }
 
     /**
@@ -85,10 +77,10 @@ class MailSetTest extends MailTest
      */
     public function testAddToReturnsSelfReference()
     {
-        $result = $this->mail->add_to('info@m2mobi.com');
+        $result = $this->class->add_to('info@m2mobi.com');
 
         $this->assertInstanceOf('Lunr\Network\Mail', $result);
-        $this->assertSame($this->mail, $result);
+        $this->assertSame($this->class, $result);
     }
 
     /**
@@ -100,15 +92,11 @@ class MailSetTest extends MailTest
      */
     public function testAddInvalidEmailAsToDoesNothing()
     {
-        $property = $this->mail_reflection->getProperty('to');
-        $property->setAccessible(TRUE);
+        $this->class->add_to(NULL);
 
-        $this->mail->add_to(NULL);
+        $value = $this->get_reflection_property_value('to');
 
-        $value = $property->getValue($this->mail);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -120,14 +108,11 @@ class MailSetTest extends MailTest
      */
     public function testAddValidEmailAsTo()
     {
-        $property = $this->mail_reflection->getProperty('to');
-        $property->setAccessible(TRUE);
+        $this->class->add_to('info@m2mobi.com');
 
-        $this->mail->add_to('info@m2mobi.com');
+        $value = $this->get_reflection_property_value('to');
 
-        $value = $property->getValue($this->mail);
-
-        $this->assertInternalType('array', $value);
+        $this->assertArrayNotEmpty($value);
         $this->assertContains('info@m2mobi.com', $value);
         $this->assertCount(1, $value);
     }
@@ -141,15 +126,12 @@ class MailSetTest extends MailTest
      */
     public function testAddAnotherEmailAsTo()
     {
-        $property = $this->mail_reflection->getProperty('to');
-        $property->setAccessible(TRUE);
+        $this->class->add_to('info@m2mobi.com');
+        $this->class->add_to('jobs@m2mobi.com');
 
-        $this->mail->add_to('info@m2mobi.com');
-        $this->mail->add_to('jobs@m2mobi.com');
+        $value = $this->get_reflection_property_value('to');
 
-        $value = $property->getValue($this->mail);
-
-        $this->assertInternalType('array', $value);
+        $this->assertArrayNotEmpty($value);
         $this->assertContains('info@m2mobi.com', $value);
         $this->assertContains('jobs@m2mobi.com', $value);
         $this->assertCount(2, $value);
@@ -162,10 +144,10 @@ class MailSetTest extends MailTest
      */
     public function testAddCCReturnsSelfReference()
     {
-        $result = $this->mail->add_cc('info@m2mobi.com');
+        $result = $this->class->add_cc('info@m2mobi.com');
 
         $this->assertInstanceOf('Lunr\Network\Mail', $result);
-        $this->assertSame($this->mail, $result);
+        $this->assertSame($this->class, $result);
     }
 
     /**
@@ -177,15 +159,11 @@ class MailSetTest extends MailTest
      */
     public function testAddInvalidEmailAsCCDoesNothing()
     {
-        $property = $this->mail_reflection->getProperty('cc');
-        $property->setAccessible(TRUE);
+        $this->class->add_cc(NULL);
 
-        $this->mail->add_cc(NULL);
+        $value = $this->get_reflection_property_value('cc');
 
-        $value = $property->getValue($this->mail);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -197,14 +175,11 @@ class MailSetTest extends MailTest
      */
     public function testAddValidEmailAsCC()
     {
-        $property = $this->mail_reflection->getProperty('cc');
-        $property->setAccessible(TRUE);
+        $this->class->add_cc('info@m2mobi.com');
 
-        $this->mail->add_cc('info@m2mobi.com');
+        $value = $this->get_reflection_property_value('cc');
 
-        $value = $property->getValue($this->mail);
-
-        $this->assertInternalType('array', $value);
+        $this->assertArrayNotEmpty($value);
         $this->assertContains('info@m2mobi.com', $value);
         $this->assertCount(1, $value);
     }
@@ -218,15 +193,12 @@ class MailSetTest extends MailTest
      */
     public function testAddAnotherEmailAsCC()
     {
-        $property = $this->mail_reflection->getProperty('cc');
-        $property->setAccessible(TRUE);
+        $this->class->add_cc('info@m2mobi.com');
+        $this->class->add_cc('jobs@m2mobi.com');
 
-        $this->mail->add_cc('info@m2mobi.com');
-        $this->mail->add_cc('jobs@m2mobi.com');
+        $value = $this->get_reflection_property_value('cc');
 
-        $value = $property->getValue($this->mail);
-
-        $this->assertInternalType('array', $value);
+        $this->assertArrayNotEmpty($value);
         $this->assertContains('info@m2mobi.com', $value);
         $this->assertContains('jobs@m2mobi.com', $value);
         $this->assertCount(2, $value);
@@ -239,10 +211,10 @@ class MailSetTest extends MailTest
      */
     public function testAddBCCReturnsSelfReference()
     {
-        $result = $this->mail->add_bcc('info@m2mobi.com');
+        $result = $this->class->add_bcc('info@m2mobi.com');
 
         $this->assertInstanceOf('Lunr\Network\Mail', $result);
-        $this->assertSame($this->mail, $result);
+        $this->assertSame($this->class, $result);
     }
 
     /**
@@ -254,15 +226,11 @@ class MailSetTest extends MailTest
      */
     public function testAddInvalidEmailAsBCCDoesNothing()
     {
-        $property = $this->mail_reflection->getProperty('bcc');
-        $property->setAccessible(TRUE);
+        $this->class->add_bcc(NULL);
 
-        $this->mail->add_bcc(NULL);
+        $value = $this->get_reflection_property_value('bcc');
 
-        $value = $property->getValue($this->mail);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -274,14 +242,11 @@ class MailSetTest extends MailTest
      */
     public function testAddValidEmailAsBCC()
     {
-        $property = $this->mail_reflection->getProperty('bcc');
-        $property->setAccessible(TRUE);
+        $this->class->add_bcc('info@m2mobi.com');
 
-        $this->mail->add_bcc('info@m2mobi.com');
+        $value = $this->get_reflection_property_value('bcc');
 
-        $value = $property->getValue($this->mail);
-
-        $this->assertInternalType('array', $value);
+        $this->assertArrayNotEmpty($value);
         $this->assertContains('info@m2mobi.com', $value);
         $this->assertCount(1, $value);
     }
@@ -295,15 +260,12 @@ class MailSetTest extends MailTest
      */
     public function testAddAnotherEmailAsBCC()
     {
-        $property = $this->mail_reflection->getProperty('bcc');
-        $property->setAccessible(TRUE);
+        $this->class->add_bcc('info@m2mobi.com');
+        $this->class->add_bcc('jobs@m2mobi.com');
 
-        $this->mail->add_bcc('info@m2mobi.com');
-        $this->mail->add_bcc('jobs@m2mobi.com');
+        $value = $this->get_reflection_property_value('bcc');
 
-        $value = $property->getValue($this->mail);
-
-        $this->assertInternalType('array', $value);
+        $this->assertArrayNotEmpty($value);
         $this->assertContains('info@m2mobi.com', $value);
         $this->assertContains('jobs@m2mobi.com', $value);
         $this->assertCount(2, $value);
@@ -316,10 +278,10 @@ class MailSetTest extends MailTest
      */
     public function testSetMessageReturnsSelfReference()
     {
-        $result = $this->mail->set_message('Message');
+        $result = $this->class->set_message('Message');
 
         $this->assertInstanceOf('Lunr\Network\Mail', $result);
-        $this->assertSame($this->mail, $result);
+        $this->assertSame($this->class, $result);
     }
 
     /**
@@ -330,12 +292,9 @@ class MailSetTest extends MailTest
      */
     public function testSetMessage()
     {
-        $property = $this->mail_reflection->getProperty('msg');
-        $property->setAccessible(TRUE);
+        $this->class->set_message('Message');
 
-        $this->mail->set_message('Message');
-
-        $this->assertEquals('Message', $property->getValue($this->mail));
+        $this->assertPropertyEquals('msg', 'Message');
     }
 
     /**
@@ -345,26 +304,25 @@ class MailSetTest extends MailTest
      */
     public function testSetSubjectReturnsSelfReference()
     {
-        $result = $this->mail->set_subject('Subject');
+        $result = $this->class->set_subject('Subject');
 
         $this->assertInstanceOf('Lunr\Network\Mail', $result);
-        $this->assertSame($this->mail, $result);
+        $this->assertSame($this->class, $result);
     }
 
     /**
      * Test setting a subject.
      *
-     * @depends Lunr\Network\Tests\MailBaseTest::testMessageEmptyByDefault
+     * @depends Lunr\Network\Tests\MailBaseTest::testSubjectEmptyByDefault
      * @covers  Lunr\Network\Mail::set_message
      */
     public function testSetSubject()
     {
-        $property = $this->mail_reflection->getProperty('subject');
-        $property->setAccessible(TRUE);
+        $property = $this->get_reflection_property_value('subject');
 
-        $this->mail->set_subject('Subject');
+        $this->class->set_subject('Subject');
 
-        $this->assertEquals('Subject', $property->getValue($this->mail));
+        $this->assertPropertyEquals('subject', 'Subject');
     }
 
 }

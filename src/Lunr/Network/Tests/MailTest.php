@@ -3,12 +3,13 @@
 /**
  * This file contains the MailTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -16,7 +17,7 @@
 namespace Lunr\Network\Tests;
 
 use Lunr\Network\Mail;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -26,22 +27,11 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\Mail
  */
-abstract class MailTest extends PHPUnit_Framework_TestCase
+abstract class MailTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the Mail class.
-     * @var Mail
-     */
-    protected $mail;
-
-    /**
-     * Reflection instance of the Mail class.
-     * @var ReflectionClass
-     */
-    protected $mail_reflection;
 
     /**
      * Runkit simulation code for working email sending.
@@ -60,8 +50,8 @@ abstract class MailTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->mail            = new Mail();
-        $this->mail_reflection = new ReflectionClass('Lunr\Network\Mail');
+        $this->class      = new Mail();
+        $this->reflection = new ReflectionClass('Lunr\Network\Mail');
     }
 
     /**
@@ -69,8 +59,8 @@ abstract class MailTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->mail);
-        unset($this->mail_reflection);
+        unset($this->reflection);
+        unset($this->class);
     }
 
     /**
@@ -80,12 +70,12 @@ abstract class MailTest extends PHPUnit_Framework_TestCase
      */
     public function validEmailProvider()
     {
-        $emails   = array();
-        $emails[] = array('info@m2mobi.com');
-        $emails[] = array('info.jobs@m2mobi.com');
-        $emails[] = array('info-jobs@m2mobi.com');
-        $emails[] = array('INFO@m2mobi.com');
-        $emails[] = array('INFO@m2-mobi.com');
+        $emails   = [];
+        $emails[] = ['info@m2mobi.com'];
+        $emails[] = ['info.jobs@m2mobi.com'];
+        $emails[] = ['info-jobs@m2mobi.com'];
+        $emails[] = ['INFO@m2mobi.com'];
+        $emails[] = ['INFO@m2-mobi.com'];
 
         return $emails;
     }
@@ -97,12 +87,12 @@ abstract class MailTest extends PHPUnit_Framework_TestCase
      */
     public function invalidEmailProvider()
     {
-        $emails   = array();
-        $emails[] = array(FALSE);
-        $emails[] = array(NULL);
-        $emails[] = array('info');
-        $emails[] = array(100);
-        $emails[] = array('info@m2mobi');
+        $emails   = [];
+        $emails[] = [FALSE];
+        $emails[] = [NULL];
+        $emails[] = ['info'];
+        $emails[] = [100];
+        $emails[] = ['info@m2mobi'];
 
         return $emails;
     }

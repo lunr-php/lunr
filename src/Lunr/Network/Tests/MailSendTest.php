@@ -3,21 +3,18 @@
 /**
  * This file contains the MailSendTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
-
-use Lunr\Network\Mail;
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
 
 /**
  * This class contains test methods for sending emails.
@@ -26,6 +23,7 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\Mail
  */
 class MailSendTest extends MailTest
@@ -38,10 +36,9 @@ class MailSendTest extends MailTest
      */
     public function testGeneratingHeadersForInvalidCarbonCopyReturnsEmptyString()
     {
-        $method = $this->mail_reflection->getMethod('generate_carbon_copy_header');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('generate_carbon_copy_header');
 
-        $this->assertEquals('', $method->invokeArgs($this->mail, array('invalid')));
+        $this->assertEquals('', $method->invokeArgs($this->class, ['invalid']));
     }
 
     /**
@@ -52,11 +49,10 @@ class MailSendTest extends MailTest
      */
     public function testGeneratingCCHeadersWhenEmptyReturnsEmptyString()
     {
-        $method = $this->mail_reflection->getMethod('generate_carbon_copy_header');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('generate_carbon_copy_header');
 
-        $this->assertEquals('', $method->invokeArgs($this->mail, array('cc')));
-        $this->assertEquals('', $method->invoke($this->mail));
+        $this->assertEquals('', $method->invokeArgs($this->class, ['cc']));
+        $this->assertEquals('', $method->invoke($this->class));
     }
 
     /**
@@ -67,10 +63,9 @@ class MailSendTest extends MailTest
      */
     public function testGeneratingBCCHeadersWhenEmptyReturnsEmptyString()
     {
-        $method = $this->mail_reflection->getMethod('generate_carbon_copy_header');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('generate_carbon_copy_header');
 
-        $this->assertEquals('', $method->invokeArgs($this->mail, array('bcc')));
+        $this->assertEquals('', $method->invokeArgs($this->class, ['bcc']));
     }
 
     /**
@@ -80,17 +75,11 @@ class MailSendTest extends MailTest
      */
     public function testGeneratingCCHeadersWithOneEntry()
     {
-        $method = $this->mail_reflection->getMethod('generate_carbon_copy_header');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('generate_carbon_copy_header');
 
-        $property = $this->mail_reflection->getProperty('cc');
-        $property->setAccessible(TRUE);
+        $this->set_reflection_property_value('cc', ['info@m2mobi.com']);
 
-        $property->setValue($this->mail, array('info@m2mobi.com'));
-
-        $expect = "CC: info@m2mobi.com\r\n";
-
-        $this->assertEquals($expect, $method->invokeArgs($this->mail, array('cc')));
+        $this->assertEquals("CC: info@m2mobi.com\r\n", $method->invokeArgs($this->class, ['cc']));
     }
 
     /**
@@ -100,17 +89,11 @@ class MailSendTest extends MailTest
      */
     public function testGeneratingCCHeadersWithMoreEntries()
     {
-        $method = $this->mail_reflection->getMethod('generate_carbon_copy_header');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('generate_carbon_copy_header');
 
-        $property = $this->mail_reflection->getProperty('cc');
-        $property->setAccessible(TRUE);
+        $this->set_reflection_property_value('cc', ['info@m2mobi.com', 'jobs@m2mobi.com']);
 
-        $property->setValue($this->mail, array('info@m2mobi.com', 'jobs@m2mobi.com'));
-
-        $expect = "CC: info@m2mobi.com, jobs@m2mobi.com\r\n";
-
-        $this->assertEquals($expect, $method->invokeArgs($this->mail, array('cc')));
+        $this->assertEquals("CC: info@m2mobi.com, jobs@m2mobi.com\r\n", $method->invokeArgs($this->class, ['cc']));
     }
 
     /**
@@ -120,17 +103,11 @@ class MailSendTest extends MailTest
      */
     public function testGeneratingBCCHeadersWithOneEntry()
     {
-        $method = $this->mail_reflection->getMethod('generate_carbon_copy_header');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('generate_carbon_copy_header');
 
-        $property = $this->mail_reflection->getProperty('bcc');
-        $property->setAccessible(TRUE);
+        $this->set_reflection_property_value('bcc', ['info@m2mobi.com']);
 
-        $property->setValue($this->mail, array('info@m2mobi.com'));
-
-        $expect = "BCC: info@m2mobi.com\r\n";
-
-        $this->assertEquals($expect, $method->invokeArgs($this->mail, array('bcc')));
+        $this->assertEquals("BCC: info@m2mobi.com\r\n", $method->invokeArgs($this->class, ['bcc']));
     }
 
     /**
@@ -140,17 +117,13 @@ class MailSendTest extends MailTest
      */
     public function testGeneratingBCCHeadersWithMoreEntries()
     {
-        $method = $this->mail_reflection->getMethod('generate_carbon_copy_header');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('generate_carbon_copy_header');
 
-        $property = $this->mail_reflection->getProperty('bcc');
-        $property->setAccessible(TRUE);
-
-        $property->setValue($this->mail, array('info@m2mobi.com', 'jobs@m2mobi.com'));
+        $this->set_reflection_property_value('bcc', ['info@m2mobi.com', 'jobs@m2mobi.com']);
 
         $expect = "BCC: info@m2mobi.com, jobs@m2mobi.com\r\n";
 
-        $this->assertEquals($expect, $method->invokeArgs($this->mail, array('bcc')));
+        $this->assertEquals($expect, $method->invokeArgs($this->class, ['bcc']));
     }
 
     /**
@@ -161,10 +134,9 @@ class MailSendTest extends MailTest
      */
     public function testHeadersReturnsFalseWhenFromIsEmpty()
     {
-        $method = $this->mail_reflection->getMethod('generate_headers');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('generate_headers');
 
-        $this->assertFalse($method->invoke($this->mail));
+        $this->assertFalse($method->invoke($this->class));
     }
 
     /**
@@ -176,17 +148,14 @@ class MailSendTest extends MailTest
      */
     public function testHeadersWithEmptyCCAndEmptyBCC()
     {
-        $method = $this->mail_reflection->getMethod('generate_headers');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('generate_headers');
 
-        $property = $this->mail_reflection->getProperty('from');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->mail, 'info@m2mobi.com');
+        $this->set_reflection_property_value('from', 'info@m2mobi.com');
 
         $expected  = "From: info@m2mobi.com\r\n";
         $expected .= 'X-Mailer: PHP/' . phpversion();
 
-        $this->assertEquals($expected, $method->invoke($this->mail));
+        $this->assertEquals($expected, $method->invoke($this->class));
     }
 
     /**
@@ -199,22 +168,16 @@ class MailSendTest extends MailTest
      */
     public function testHeadersWithCCAndEmptyBCC()
     {
-        $method = $this->mail_reflection->getMethod('generate_headers');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('generate_headers');
 
-        $from = $this->mail_reflection->getProperty('from');
-        $from->setAccessible(TRUE);
-        $from->setValue($this->mail, 'info@m2mobi.com');
-
-        $cc = $this->mail_reflection->getProperty('cc');
-        $cc->setAccessible(TRUE);
-        $cc->setValue($this->mail, array('jobs@m2mobi.com'));
+        $this->set_reflection_property_value('from', 'info@m2mobi.com');
+        $this->set_reflection_property_value('cc', ['jobs@m2mobi.com']);
 
         $expected  = "From: info@m2mobi.com\r\n";
         $expected .= "CC: jobs@m2mobi.com\r\n";
         $expected .= 'X-Mailer: PHP/' . phpversion();
 
-        $this->assertEquals($expected, $method->invoke($this->mail));
+        $this->assertEquals($expected, $method->invoke($this->class));
     }
 
     /**
@@ -227,22 +190,16 @@ class MailSendTest extends MailTest
      */
     public function testHeadersWithEmptyCCAndBCC()
     {
-        $method = $this->mail_reflection->getMethod('generate_headers');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('generate_headers');
 
-        $from = $this->mail_reflection->getProperty('from');
-        $from->setAccessible(TRUE);
-        $from->setValue($this->mail, 'info@m2mobi.com');
-
-        $bcc = $this->mail_reflection->getProperty('bcc');
-        $bcc->setAccessible(TRUE);
-        $bcc->setValue($this->mail, array('jobs@m2mobi.com'));
+        $this->set_reflection_property_value('from', 'info@m2mobi.com');
+        $this->set_reflection_property_value('bcc', ['jobs@m2mobi.com']);
 
         $expected  = "From: info@m2mobi.com\r\n";
         $expected .= "BCC: jobs@m2mobi.com\r\n";
         $expected .= 'X-Mailer: PHP/' . phpversion();
 
-        $this->assertEquals($expected, $method->invoke($this->mail));
+        $this->assertEquals($expected, $method->invoke($this->class));
     }
 
     /**
@@ -256,27 +213,20 @@ class MailSendTest extends MailTest
      */
     public function testHeaders()
     {
-        $method = $this->mail_reflection->getMethod('generate_headers');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('generate_headers');
 
-        $from = $this->mail_reflection->getProperty('from');
-        $from->setAccessible(TRUE);
-        $from->setValue($this->mail, 'info@m2mobi.com');
+        $this->set_reflection_property_value('from', 'info@m2mobi.com');
 
-        $cc = $this->mail_reflection->getProperty('cc');
-        $cc->setAccessible(TRUE);
-        $cc->setValue($this->mail, array('jobs@m2mobi.com'));
+        $this->set_reflection_property_value('cc', ['jobs@m2mobi.com']);
 
-        $bcc = $this->mail_reflection->getProperty('bcc');
-        $bcc->setAccessible(TRUE);
-        $bcc->setValue($this->mail, array('jobs@m2mobi.com'));
+        $this->set_reflection_property_value('bcc', ['jobs@m2mobi.com']);
 
         $expected  = "From: info@m2mobi.com\r\n";
         $expected .= "CC: jobs@m2mobi.com\r\n";
         $expected .= "BCC: jobs@m2mobi.com\r\n";
         $expected .= 'X-Mailer: PHP/' . phpversion();
 
-        $this->assertEquals($expected, $method->invoke($this->mail));
+        $this->assertEquals($expected, $method->invoke($this->class));
     }
 
     /**
@@ -289,10 +239,10 @@ class MailSendTest extends MailTest
      */
     public function testSendReturnsFalseWhenFromIsEmpty()
     {
-        $this->mail->set_subject('Subject');
-        $this->mail->add_to('jobs@m2mobi.com');
+        $this->class->set_subject('Subject');
+        $this->class->add_to('jobs@m2mobi.com');
 
-        $this->assertFalse($this->mail->send());
+        $this->assertFalse($this->class->send());
     }
 
     /**
@@ -304,10 +254,10 @@ class MailSendTest extends MailTest
      */
     public function testSendReturnsFalseWhenToIsEmpty()
     {
-        $this->mail->set_subject('Subject');
-        $this->mail->set_from('info@m2mobi.com');
+        $this->class->set_subject('Subject');
+        $this->class->set_from('info@m2mobi.com');
 
-        $this->assertFalse($this->mail->send());
+        $this->assertFalse($this->class->send());
     }
 
     /**
@@ -319,10 +269,10 @@ class MailSendTest extends MailTest
      */
     public function testSendReturnsFalseWhenSubjectIsEmpty()
     {
-        $this->mail->add_to('jobs@m2mobi.com');
-        $this->mail->set_from('info@m2mobi.com');
+        $this->class->add_to('jobs@m2mobi.com');
+        $this->class->set_from('info@m2mobi.com');
 
-        $this->assertFalse($this->mail->send());
+        $this->assertFalse($this->class->send());
     }
 
     /**
@@ -336,13 +286,15 @@ class MailSendTest extends MailTest
      */
     public function testSendReturnsFalseWhenSendingFails()
     {
-        $this->mail->set_subject('Subject');
-        $this->mail->add_to('jobs@m2mobi.com');
-        $this->mail->set_from('info@m2mobi.com');
+        $this->class->set_subject('Subject');
+        $this->class->add_to('jobs@m2mobi.com');
+        $this->class->set_from('info@m2mobi.com');
 
-        runkit_function_redefine('mail', '', self::SEND_MAIL_FAILS);
+        $this->mock_function('mail', self::SEND_MAIL_FAILS);
 
-        $this->assertFalse($this->mail->send());
+        $this->assertFalse($this->class->send());
+
+        $this->unmock_function('mail');
     }
 
     /**
@@ -356,13 +308,15 @@ class MailSendTest extends MailTest
      */
     public function testSendReturnsTrueWhenSendingSucceeds()
     {
-        $this->mail->set_subject('Subject');
-        $this->mail->add_to('jobs@m2mobi.com');
-        $this->mail->set_from('info@m2mobi.com');
+        $this->class->set_subject('Subject');
+        $this->class->add_to('jobs@m2mobi.com');
+        $this->class->set_from('info@m2mobi.com');
 
-        runkit_function_redefine('mail', '', self::SEND_MAIL_WORKS);
+        $this->mock_function('mail', self::SEND_MAIL_WORKS);
 
-        $this->assertTrue($this->mail->send());
+        $this->assertTrue($this->class->send());
+
+        $this->unmock_function('mail');
     }
 
 }

@@ -4,7 +4,7 @@
  * This file contains a simple mail construction
  * and sending class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
@@ -69,9 +69,9 @@ class Mail
     public function __construct()
     {
         $this->from    = '';
-        $this->to      = array();
-        $this->cc      = array();
-        $this->bcc     = array();
+        $this->to      = [];
+        $this->cc      = [];
+        $this->bcc     = [];
         $this->msg     = '';
         $this->subject = '';
     }

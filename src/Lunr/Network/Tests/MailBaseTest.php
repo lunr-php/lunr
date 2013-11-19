@@ -3,21 +3,18 @@
 /**
  * This file contains the MailBaseTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
-
-use Lunr\Network\Mail;
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
 
 /**
  * This class contains test methods for the Mail class.
@@ -26,84 +23,61 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\Mail
  */
 class MailBaseTest extends MailTest
 {
 
     /**
-     * Test that the default sender address is empty.
+     * Test that from property from is empty by default.
      */
     public function testFromEmptyByDefault()
     {
-        $property = $this->mail_reflection->getProperty('from');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('', $property->getValue($this->mail));
+        $this->assertPropertyEquals('from', '');
     }
 
     /**
-     * Test that the default receiver address is empty.
-     */
-    public function testToEmptyByDefault()
-    {
-        $property = $this->mail_reflection->getProperty('to');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->mail);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
-    }
-
-    /**
-     * Test that the default CC address is empty.
-     */
-    public function testCCEmptyByDefault()
-    {
-        $property = $this->mail_reflection->getProperty('cc');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->mail);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
-    }
-
-    /**
-     * Test that the default BCC address is empty.
-     */
-    public function testBCCEmptyByDefault()
-    {
-        $property = $this->mail_reflection->getProperty('bcc');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->mail);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
-    }
-
-    /**
-     * Test that the default message is empty.
+     * Test that from property msg is empty by default.
      */
     public function testMessageEmptyByDefault()
     {
-        $property = $this->mail_reflection->getProperty('msg');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('', $property->getValue($this->mail));
+        $this->assertPropertyEquals('msg', '');
     }
 
     /**
-     * Test that the default subject is empty.
+     * Test that from property subject is empty by default.
      */
     public function testSubjectEmptyByDefault()
     {
-        $property = $this->mail_reflection->getProperty('subject');
-        $property->setAccessible(TRUE);
+        $this->assertPropertyEquals('subject', '');
+    }
 
-        $this->assertEquals('', $property->getValue($this->mail));
+    /**
+     * Test that property to is an empty array by default.
+     */
+    public function testToEmptyByDefault()
+    {
+        $value = $this->get_reflection_property_value('to');
+        $this->assertArrayEmpty($value);
+    }
+
+    /**
+     * Test that property cc is an empty array by default.
+     */
+    public function testCCEmptyByDefault()
+    {
+        $value = $this->get_reflection_property_value('cc');
+        $this->assertArrayEmpty($value);
+    }
+
+    /**
+     * Test that property bcc is an empty array by default.
+     */
+    public function testBCCEmptyByDefault()
+    {
+        $value = $this->get_reflection_property_value('bcc');
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -116,7 +90,7 @@ class MailBaseTest extends MailTest
      */
     public function testValidEmailIsValid($email)
     {
-        $this->assertTrue($this->mail->is_valid($email));
+        $this->assertTrue($this->class->is_valid($email));
     }
 
     /**
@@ -129,7 +103,7 @@ class MailBaseTest extends MailTest
      */
     public function testInvalidEmailIsNotValid($email)
     {
-        $this->assertFalse($this->mail->is_valid($email));
+        $this->assertFalse($this->class->is_valid($email));
     }
 
 }
