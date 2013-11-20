@@ -3,19 +3,20 @@
 /**
  * This file contains the StreamSocketTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @author     Andrea Nigido <andrea@m2mobi.com>
+ * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
 
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -25,21 +26,11 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\StreamSocket
  */
-abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
+abstract class StreamSocketTest extends LunrBaseTest
 {
-    /**
-     * Instance of the StreamSocket class.
-     * @var StreamSocket
-     */
-    protected $stream_socket;
-
-    /**
-     * Reflection instance of the StreamSocket class.
-     * @var ReflectionClass
-     */
-    protected $stream_socket_reflection;
 
     /**
      * Runkit simulation code for returning FALSE.
@@ -76,9 +67,8 @@ abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->stream_socket_reflection = new ReflectionClass('Lunr\Network\StreamSocket');
-
-        $this->stream_socket = $this->getMockForAbstractClass('Lunr\Network\StreamSocket');
+        $this->reflection = new ReflectionClass('Lunr\Network\StreamSocket');
+        $this->class      = $this->getMockForAbstractClass('Lunr\Network\StreamSocket');
     }
 
     /**
@@ -86,8 +76,8 @@ abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->stream_socket_reflection);
-        unset($this->stream_socket);
+        unset($this->reflection);
+        unset($this->class);
     }
 
     /**
@@ -97,10 +87,10 @@ abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
      */
     public function validPropertyProvider()
     {
-        $properties   = array();
-        $properties[] = array('errno', 0);
-        $properties[] = array('errmsg', '');
-        $properties[] = array('meta_data', array());
+        $properties   = [];
+        $properties[] = ['errno', 0];
+        $properties[] = ['errmsg', ''];
+        $properties[] = ['meta_data', []];
 
         return $properties;
     }
@@ -113,10 +103,10 @@ abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
      */
     public function validWrapperProvider()
     {
-        $wrappers   = array();
-        $wrappers[] = array('http', 'method', 'POST');
-        $wrappers[] = array('ftp', 'overwrite', FALSE);
-        $wrappers[] = array('tcp', 'bla', '127.0.0.1:4321');
+        $wrappers   = [];
+        $wrappers[] = ['http', 'method', 'POST'];
+        $wrappers[] = ['ftp', 'overwrite', FALSE];
+        $wrappers[] = ['tcp', 'bla', '127.0.0.1:4321'];
 
         return $wrappers;
     }
@@ -129,15 +119,15 @@ abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
      */
     public function invalidWrapperProvider()
     {
-        $wrappers   = array();
-        $wrappers[] = array('beuh', 'method', 'POST');
-        $wrappers[] = array('hein', 'overwrite', FALSE);
-        $wrappers[] = array('quoi', 'bla', '127.0.0.1:4321');
-        $wrappers[] = array(1, 1, 1);
-        $wrappers[] = array(0, 1, 1);
-        $wrappers[] = array(TRUE, 'TRUE', 'TRUE');
-        $wrappers[] = array(FALSE, 'FALSE', 'FALSE');
-        $wrappers[] = array(NULL, 'NULL', 'NULL');
+        $wrappers   = [];
+        $wrappers[] = ['beuh', 'method', 'POST'];
+        $wrappers[] = ['hein', 'overwrite', FALSE];
+        $wrappers[] = ['quoi', 'bla', '127.0.0.1:4321'];
+        $wrappers[] = [1, 1, 1];
+        $wrappers[] = [0, 1, 1];
+        $wrappers[] = [TRUE, 'TRUE', 'TRUE'];
+        $wrappers[] = [FALSE, 'FALSE', 'FALSE'];
+        $wrappers[] = [NULL, 'NULL', 'NULL'];
 
         return $wrappers;
     }
@@ -149,15 +139,15 @@ abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
      */
     public function invalidOptionsProvider()
     {
-        $options   = array();
-        $options[] = array('str');
-        $options[] = array(0);
-        $options[] = array(1);
-        $options[] = array(-1);
-        $options[] = array(37);
-        $options[] = array(NULL);
-        $options[] = array(FALSE);
-        $options[] = array(TRUE);
+        $options   = [];
+        $options[] = ['str'];
+        $options[] = [0];
+        $options[] = [1];
+        $options[] = [-1];
+        $options[] = [37];
+        $options[] = [NULL];
+        $options[] = [FALSE];
+        $options[] = [TRUE];
 
         return $options;
     }
@@ -169,9 +159,9 @@ abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
      */
     public function validBlockingProvider()
     {
-        $blockings   = array();
-        $blockings[] = array(TRUE);
-        $blockings[] = array(FALSE);
+        $blockings   = [];
+        $blockings[] = [TRUE];
+        $blockings[] = [FALSE];
 
         return $blockings;
     }
@@ -183,19 +173,19 @@ abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
      */
     public function invalidBlockingProvider()
     {
-        $blockings   = array();
-        $blockings[] = array(0);
-        $blockings[] = array(1);
-        $blockings[] = array(-1);
-        $blockings[] = array(2);
-        $blockings[] = array(1000);
-        $blockings[] = array(39);
-        $blockings[] = array('1');
-        $blockings[] = array('str');
-        $blockings[] = array(0.5);
-        $blockings[] = array(3.9);
-        $blockings[] = array(-4.7);
-        $blockings[] = array(NULL);
+        $blockings   = [];
+        $blockings[] = [0];
+        $blockings[] = [1];
+        $blockings[] = [-1];
+        $blockings[] = [2];
+        $blockings[] = [1000];
+        $blockings[] = [39];
+        $blockings[] = ['1'];
+        $blockings[] = ['str'];
+        $blockings[] = [0.5];
+        $blockings[] = [3.9];
+        $blockings[] = [-4.7];
+        $blockings[] = [NULL];
 
         return $blockings;
     }
@@ -207,14 +197,14 @@ abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
      */
     public function validTimeoutProvider()
     {
-        $timeouts   = array();
-        $timeouts[] = array(999, 999);
-        $timeouts[] = array(1, 1);
-        $timeouts[] = array(0, 1);
-        $timeouts[] = array(10, 12);
-        $timeouts[] = array(100, 1);
-        $timeouts[] = array(1000, 500);
-        $timeouts[] = array(0, NULL);
+        $timeouts   = [];
+        $timeouts[] = [999, 999];
+        $timeouts[] = [1, 1];
+        $timeouts[] = [0, 1];
+        $timeouts[] = [10, 12];
+        $timeouts[] = [100, 1];
+        $timeouts[] = [1000, 500];
+        $timeouts[] = [0, NULL];
 
         return $timeouts;
     }
@@ -226,16 +216,16 @@ abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
      */
     public function invalidTimeoutProvider()
     {
-        $timeouts   = array();
-        $timeouts[] = array('0', NULL);
-        $timeouts[] = array('1', '1');
-        $timeouts[] = array(-1, -1);
-        $timeouts[] = array(-10, -10);
-        $timeouts[] = array( '100', -100);
-        $timeouts[] = array(26.87, 52.87);
-        $timeouts[] = array(NULL, NULL);
-        $timeouts[] = array(FALSE, FALSE);
-        $timeouts[] = array(TRUE, TRUE);
+        $timeouts   = [];
+        $timeouts[] = ['0', NULL];
+        $timeouts[] = ['1', '1'];
+        $timeouts[] = [-1, -1];
+        $timeouts[] = [-10, -10];
+        $timeouts[] = ['100', -100];
+        $timeouts[] = [26.87, 52.87];
+        $timeouts[] = [NULL, NULL];
+        $timeouts[] = [FALSE, FALSE];
+        $timeouts[] = [TRUE, TRUE];
 
         return $timeouts;
     }
@@ -247,12 +237,12 @@ abstract class StreamSocketTest extends PHPUnit_Framework_TestCase
      */
     public function invalidNotificationCallBackProvider()
     {
-        $callbacks   = array();
-        $callbacks[] = array(FALSE);
-        $callbacks[] = array(TRUE);
-        $callbacks[] = array(0);
-        $callbacks[] = array('callback');
-        $callbacks[] = array($this, 'nocallback');
+        $callbacks   = [];
+        $callbacks[] = [FALSE];
+        $callbacks[] = [TRUE];
+        $callbacks[] = [0];
+        $callbacks[] = ['callback'];
+        $callbacks[] = [$this, 'nocallback'];
 
         return $callbacks;
     }

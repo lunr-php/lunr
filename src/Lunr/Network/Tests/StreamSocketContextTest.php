@@ -3,20 +3,18 @@
 /**
  * This file contains the StreamSocketExecuteTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @author     Andrea Nigido <andrea@m2mobi.com>
+ * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
-
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
 
 /**
  * This class contains test methods for stream context of the StreamSocket class.
@@ -25,6 +23,7 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\StreamSocket
  */
 class StreamSocketContextTest extends StreamSocketTest
@@ -37,19 +36,15 @@ class StreamSocketContextTest extends StreamSocketTest
      */
     public function testCreateContextSetsContextOptionsIfContextOptionsNotEmpty()
     {
-        $property = $this->stream_socket_reflection->getProperty('context');
-        $property->setAccessible(TRUE);
+        $value = ['http' => ['method' => ' POST']];
 
-        $value = array( 'http' => array('method' => ' POST'));
+        $this->class->set_context_options($value);
 
-        $this->stream_socket->set_context_options($value);
+        $method = $this->get_accessible_reflection_method('create_context');
 
-        $method = $this->stream_socket_reflection->getMethod('create_context');
-        $method->setAccessible(TRUE);
+        $method->invoke($this->class);
 
-        $method->invoke($this->stream_socket);
-
-        $options = stream_context_get_options($property->getValue($this->stream_socket));
+        $options = stream_context_get_options($this->get_reflection_property_value('context'));
 
         $this->assertArrayHasKey('http', $options);
         $this->assertEquals($value['http'], $options['http']);
@@ -62,15 +57,11 @@ class StreamSocketContextTest extends StreamSocketTest
      */
     public function testCreateContextDoesNotSetContextOptionsIfContextOptionsEmpty()
     {
-        $property = $this->stream_socket_reflection->getProperty('context');
-        $property->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('create_context');
 
-        $method = $this->stream_socket_reflection->getMethod('create_context');
-        $method->setAccessible(TRUE);
+        $method->invoke($this->class);
 
-        $method->invoke($this->stream_socket);
-
-        $this->assertEmpty(stream_context_get_options($property->getValue($this->stream_socket)));
+        $this->assertEmpty(stream_context_get_options($this->get_reflection_property_value('context')));
     }
 
     /**
@@ -80,19 +71,15 @@ class StreamSocketContextTest extends StreamSocketTest
      */
     public function testCreateContextSetsNotificationCallbackIfNotificationNotEmpty()
     {
-        $property = $this->stream_socket_reflection->getProperty('context');
-        $property->setAccessible(TRUE);
+        $notification = [$this, 'notification'];
 
-        $notification = array($this, 'notification');
+        $this->class->set_notification_callback($notification);
 
-        $this->stream_socket->set_notification_callback($notification);
+        $method = $this->get_accessible_reflection_method('create_context');
 
-        $method = $this->stream_socket_reflection->getMethod('create_context');
-        $method->setAccessible(TRUE);
+        $method->invoke($this->class);
 
-        $method->invoke($this->stream_socket);
-
-        $params = stream_context_get_params($property->getValue($this->stream_socket));
+        $params = stream_context_get_params($this->get_reflection_property_value('context'));
 
         $this->assertArrayHasKey('notification', $params);
         $this->assertEquals($notification, $params['notification']);
@@ -105,15 +92,11 @@ class StreamSocketContextTest extends StreamSocketTest
      */
     public function testCreateContextDoesNotSetNotificationCallbackIfNotificationIsNull()
     {
-        $property = $this->stream_socket_reflection->getProperty('context');
-        $property->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('create_context');
 
-        $method = $this->stream_socket_reflection->getMethod('create_context');
-        $method->setAccessible(TRUE);
+        $method->invoke($this->class);
 
-        $method->invoke($this->stream_socket);
-
-        $params = stream_context_get_params($property->getValue($this->stream_socket));
+        $params = stream_context_get_params($this->get_reflection_property_value('context'));
 
         $this->assertArrayNotHasKey('notification', $params);
     }
@@ -125,16 +108,14 @@ class StreamSocketContextTest extends StreamSocketTest
      */
     public function testCreateContextIsCreatedWithNullNotification()
     {
-        $property = $this->stream_socket_reflection->getProperty('context');
-        $property->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('create_context');
 
-        $method = $this->stream_socket_reflection->getMethod('create_context');
-        $method->setAccessible(TRUE);
+        $method->invoke($this->class);
 
-        $method->invoke($this->stream_socket);
+        $value = $this->get_reflection_property_value('context');
 
-        $this->assertNotNull($property->getValue($this->stream_socket));
-        $this->assertTrue(is_resource($property->getValue($this->stream_socket)));
+        $this->assertNotNull($value);
+        $this->assertTrue(is_resource($value));
     }
 
     /**
@@ -144,10 +125,9 @@ class StreamSocketContextTest extends StreamSocketTest
      */
     public function testCreateContextReturnsResource()
     {
-        $method = $this->stream_socket_reflection->getMethod('create_context');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('create_context');
 
-        $return = $method->invoke($this->stream_socket);
+        $return = $method->invoke($this->class);
 
         $this->assertTrue(is_resource($return));
         $this->assertEquals('stream-context', get_resource_type($return));

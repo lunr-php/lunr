@@ -3,20 +3,18 @@
 /**
  * This file contains the StreamSocketClientBaseTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @author     Andrea Nigido <andrea@m2mobi.com>
+ * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
-
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
 
 /**
  * This class contains basic test methods for the StreamClientSocket class.
@@ -25,6 +23,7 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\StreamSocketClient
  */
 class StreamSocketClientBaseTest extends StreamSocketClientTest
@@ -39,8 +38,7 @@ class StreamSocketClientBaseTest extends StreamSocketClientTest
     {
         $stream = new \Lunr\Network\StreamSocketClient('alinktosee');
 
-        $property = $this->stream_socket_client_reflection->getProperty('uri');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('uri');
 
         $this->assertEquals('alinktosee', $property->getValue($stream));
 
@@ -54,11 +52,8 @@ class StreamSocketClientBaseTest extends StreamSocketClientTest
      */
     public function testTimeoutIntisWithDefault()
     {
-        $property = $this->stream_socket_client_reflection->getProperty('init_timeout');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(ini_get('default_socket_timeout'), $property->getValue($this->stream_socket_client));
-        $this->assertTrue(is_float($property->getValue($this->stream_socket_client)));
+        $this->assertEquals(ini_get('default_socket_timeout'), $this->get_reflection_property_value('init_timeout'));
+        $this->assertInternalType('float', $this->get_reflection_property_value('init_timeout'));
     }
 
     /**
@@ -74,8 +69,7 @@ class StreamSocketClientBaseTest extends StreamSocketClientTest
     {
         $stream = new \Lunr\Network\StreamSocketClient('alinktosee', $value);
 
-        $property = $this->stream_socket_client_reflection->getProperty('init_timeout');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('init_timeout');
 
         $this->assertEquals($expected, $property->getValue($stream));
 
@@ -95,10 +89,9 @@ class StreamSocketClientBaseTest extends StreamSocketClientTest
     {
         $stream = new \Lunr\Network\StreamSocketClient('alinktosee', $value);
 
-        $property = $this->stream_socket_client_reflection->getProperty('init_timeout');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('init_timeout');
 
-        $this->assertEquals(floatval(ini_get('default_socket_timeout')), $property->getValue($stream));
+        $this->assertPropertyEquals('init_timeout', ini_get('default_socket_timeout'));
         $this->assertTrue($value !== $property->getValue($stream));
 
         unset($stream);
@@ -111,10 +104,7 @@ class StreamSocketClientBaseTest extends StreamSocketClientTest
      */
     public function testConnectedIsFalse()
     {
-        $property = $this->stream_socket_client_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-
-        $this->assertFalse($property->getValue($this->stream_socket_client));
+        $this->assertFalse($this->get_reflection_property_value('connected'));
     }
 
 }

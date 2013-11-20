@@ -3,20 +3,18 @@
 /**
  * This file contains the StreamSocketClientReadwriteTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @author     Andrea Nigido <andrea@m2mobi.com>
+ * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
-
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
 
 /**
  * This class contains test methods for read and write methods of the StreamClientSocket class.
@@ -25,6 +23,7 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\StreamSocketClient
  */
 class StreamSocketClientReadWriteTest extends StreamSocketClientTest
@@ -38,106 +37,115 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
      */
     public function testReadReturnsStringOnSuccess()
     {
-        runkit_function_redefine('fread', '', self::STREAM_SOCKET_CLIENT_RETURN_STRING);
+        $this->mock_function('fread', self::STREAM_SOCKET_CLIENT_RETURN_STRING);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
-
-        $this->assertTrue(is_string($this->stream_socket_client->read(8)));
+        $this->assertTrue(is_string($this->class->read(8)));
 
         unlink('./test.txt');
+
+        $this->unmock_function('fread');
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
      * Tests that read() returns a string with no lenght supplied.
-     *
-     * @runInSeparateProcess
      *
      * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::read
      */
     public function testReadReturnsStringWithNoLengthSupplied()
     {
-        runkit_function_redefine('stream_get_contents', '', self::STREAM_SOCKET_CLIENT_RETURN_STRING);
+        $this->mock_function('stream_get_contents', self::STREAM_SOCKET_CLIENT_RETURN_STRING);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
-
-        $this->assertTrue(is_string($this->stream_socket_client->read()));
+        $this->assertTrue(is_string($this->class->read()));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_get_contents');
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
      * Tests that read() returns a string with zero lenght supplied.
-     *
-     * @runInSeparateProcess
      *
      * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::read
      */
     public function testReadReturnsStringWithZeroLengthSupplied()
     {
-        runkit_function_redefine('stream_get_contents', '', self::STREAM_SOCKET_CLIENT_RETURN_STRING);
+        $this->mock_function('stream_get_contents', self::STREAM_SOCKET_CLIENT_RETURN_STRING);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
-
-        $this->assertTrue(is_string($this->stream_socket_client->read(-1)));
+        $this->assertTrue(is_string($this->class->read(-1)));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_get_contents');
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
      * Tests that read() returns FALSE on error.
-     *
-     * @runInSeparateProcess
      *
      * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::read
      */
     public function testReadReturnsFalseOnError()
     {
-        runkit_function_redefine('stream_get_contents', '', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
+        $this->mock_function('stream_get_contents', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
-
-        $this->assertFalse($this->stream_socket_client->read(8));
+        $this->assertFalse($this->class->read(8));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_get_contents');
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
      * Tests that read() create handle if stream not open.
-     *
-     * @runInSeparateProcess
      *
      * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::read
      */
     public function testReadOpensHandle()
     {
-        runkit_function_redefine('stream_get_contents', '', self::STREAM_SOCKET_CLIENT_RETURN_STRING);
+        $this->mock_function('stream_get_contents', self::STREAM_SOCKET_CLIENT_RETURN_STRING);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
+        $this->assertNull($this->get_reflection_property_value('handle'));
 
-        $property = $this->stream_socket_client_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
+        $this->class->read(8);
 
-        $this->assertNull($property->getValue($this->stream_socket_client));
-
-        $this->stream_socket_client->read(8);
-
-        $this->assertNotNull($property->getValue($this->stream_socket_client));
+        $this->assertNotNull($this->get_reflection_property_value('handle'));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_get_contents');
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
@@ -148,82 +156,82 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
      */
     public function testReadReturnsFalseIfCannotOpenStream()
     {
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
 
-        $property = $this->stream_socket_client_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
+        $this->assertFalse($this->class->read(8));
 
-        $this->assertFalse($this->stream_socket_client->read(8));
-
-        $this->assertNull($property->getValue($this->stream_socket_client));
+        $this->assertNull($this->get_reflection_property_value('handle'));
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
      * Tests that write() returns an int on success.
-     *
-     * @runInSeparateProcess
      *
      * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::write
      */
     public function testWriteReturnsIntOnSuccess()
     {
-        runkit_function_redefine('fwrite', '', self::STREAM_SOCKET_CLIENT_RETURN_EIGHT);
+        $this->mock_function('fwrite', self::STREAM_SOCKET_CLIENT_RETURN_EIGHT);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
-
-        $this->assertTrue(is_int($this->stream_socket_client->write('12345678')));
+        $this->assertTrue(is_int($this->class->write('12345678')));
+        $this->unmock_function('fwrite');
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
      * Tests that write() returns FALSE on error.
-     *
-     * @runInSeparateProcess
      *
      * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::write
      */
     public function testWriteReturnsFalseOnError()
     {
-        runkit_function_redefine('fwrite', '', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
+        $this->mock_function('fwrite', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
-
-        $this->assertFalse($this->stream_socket_client->write('12345678'));
+        $this->assertFalse($this->class->write('12345678'));
 
         unlink('./test.txt');
+
+        $this->unmock_function('fwrite');
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
      * Tests that write() create handle if stream not open.
-     *
-     * @runInSeparateProcess
      *
      * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::write
      */
     public function testWriteOpensHandle()
     {
-        runkit_function_redefine('fwrite', '', self::STREAM_SOCKET_CLIENT_RETURN_EIGHT);
+        $this->mock_function('fwrite', self::STREAM_SOCKET_CLIENT_RETURN_EIGHT);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
+        $this->assertNull($this->get_reflection_property_value('handle'));
 
-        $property = $this->stream_socket_client_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
+        $this->class->write('12345678');
 
-        $this->assertNull($property->getValue($this->stream_socket_client));
-
-        $this->stream_socket_client->write('12345678');
-
-        $this->assertNotNull($property->getValue($this->stream_socket_client));
+        $this->assertNotNull($this->get_reflection_property_value('handle'));
 
         unlink('./test.txt');
+
+        $this->unmock_function('fwrite');
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
@@ -234,13 +242,12 @@ class StreamSocketClientReadWriteTest extends StreamSocketClientTest
      */
     public function testWriteReturnsFalseIfCannotOpenStream()
     {
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
 
-        $property = $this->stream_socket_client_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
+        $this->assertFalse($this->class->write('12345678'));
+        $this->assertNull($this->get_reflection_property_value('handle'));
 
-        $this->assertFalse($this->stream_socket_client->write('12345678'));
-        $this->assertNull($property->getValue($this->stream_socket_client));
+        $this->unmock_function('stream_socket_client');
     }
 
 }

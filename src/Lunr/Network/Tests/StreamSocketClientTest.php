@@ -2,19 +2,20 @@
 /**
  * This file contains the StreamSocketClientTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @author     Andrea Nigido <andrea@m2mobi.com>
+ * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
 
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -24,21 +25,11 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\StreamSocketClient
  */
-abstract class StreamSocketClientTest extends PHPUnit_Framework_TestCase
+abstract class StreamSocketClientTest extends LunrBaseTest
 {
-    /**
-     * Instance of the StreamSocketClient class.
-     * @var StreamSocketClient
-     */
-    protected $stream_socket_client;
-
-    /**
-     * Reflection instance of the StreamSocketClient class.
-     * @var ReflectionClass
-     */
-    protected $stream_socket_client_reflection;
 
     /**
      * Runkit simulation code for returning TRUE.
@@ -81,9 +72,8 @@ abstract class StreamSocketClientTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->stream_socket_client_reflection = new ReflectionClass('Lunr\Network\StreamSocketClient');
-
-        $this->stream_socket_client = new \Lunr\Network\StreamSocketClient('');
+        $this->reflection = new ReflectionClass('Lunr\Network\StreamSocketClient');
+        $this->class      = new \Lunr\Network\StreamSocketClient('');
     }
 
     /**
@@ -91,8 +81,8 @@ abstract class StreamSocketClientTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->stream_socket_client_reflection);
-        unset($this->stream_socket_client);
+        unset($this->reflection);
+        unset($this->class);
     }
 
     /**
@@ -102,11 +92,11 @@ abstract class StreamSocketClientTest extends PHPUnit_Framework_TestCase
      */
     public function validInitTimeoutProvider()
     {
-        $timeout   = array();
-        $timeout[] = array(1, 1.0);
-        $timeout[] = array(1.0, 1.0);
-        $timeout[] = array(1000, 1000.0);
-        $timeout[] = array(1000.0, 1000.0);
+        $timeout   = [];
+        $timeout[] = [1, 1.0];
+        $timeout[] = [1.0, 1.0];
+        $timeout[] = [1000, 1000.0];
+        $timeout[] = [1000.0, 1000.0];
 
         return $timeout;
     }
@@ -118,12 +108,12 @@ abstract class StreamSocketClientTest extends PHPUnit_Framework_TestCase
      */
     public function invalidInitTimeoutProvider()
     {
-        $timeout   = array();
-        $timeout[] = array(FALSE);
-        $timeout[] = array(NULL);
-        $timeout[] = array(TRUE);
-        $timeout[] = array('str');
-        $timeout[] = array('1234');
+        $timeout   = [];
+        $timeout[] = [FALSE];
+        $timeout[] = [NULL];
+        $timeout[] = [TRUE];
+        $timeout[] = ['str'];
+        $timeout[] = ['1234'];
 
         return $timeout;
     }
@@ -135,11 +125,11 @@ abstract class StreamSocketClientTest extends PHPUnit_Framework_TestCase
      */
     public function invalidFlagProvider()
     {
-        $flags   = array();
-        $flags[] = array('STREAM_PERS');
-        $flags[] = array('STRAM_PERS');
-        $flags[] = array('STREAM_CLIENT');
-        $flags[] = array('STREAM_CLIENT_A_FLAG');
+        $flags   = [];
+        $flags[] = ['STREAM_PERS'];
+        $flags[] = ['STRAM_PERS'];
+        $flags[] = ['STREAM_CLIENT'];
+        $flags[] = ['STREAM_CLIENT_A_FLAG'];
 
         return $flags;
     }

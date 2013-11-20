@@ -3,20 +3,18 @@
 /**
  * This file contains the StreamSocketClientHandleTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @author     Andrea Nigido <andrea@m2mobi.com>
+ * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
-
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
 
 /**
  * This class contains test methods for stream handle resource of the StreamClientSocket class.
@@ -25,6 +23,7 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\StreamSocketClient
  */
 class StreamSocketClientHandleTest extends StreamSocketClientTest
@@ -38,21 +37,21 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      */
     public function testCreateHandle()
     {
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        $property = $this->stream_socket_client_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('create_handle');
 
-        $method = $this->stream_socket_client_reflection->getMethod('create_handle');
-        $method->setAccessible(TRUE);
+        $method->invoke($this->class);
 
-        $method->invoke($this->stream_socket_client);
-
-        $this->assertTrue(is_resource($property->getValue($this->stream_socket_client)));
+        $this->assertTrue(is_resource($this->get_reflection_property_value('handle')));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
@@ -63,14 +62,16 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      */
     public function testCreateHandleReturnsFalseOnError()
     {
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
 
-        $method = $this->stream_socket_client_reflection->getMethod('create_handle');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('create_handle');
 
-        $this->assertFalse($method->invoke($this->stream_socket_client));
+        $this->assertFalse($method->invoke($this->class));
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
@@ -81,18 +82,19 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      */
     public function testOpenCreatesHandle()
     {
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        $property = $this->stream_socket_client_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
+        $this->class->connect();
 
-        $this->stream_socket_client->connect();
-
-        $this->assertTrue(is_resource($property->getValue($this->stream_socket_client)));
+        $this->assertTrue(is_resource($this->get_reflection_property_value('handle')));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
@@ -103,26 +105,28 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      */
     public function testOpenTwiceKeepsSameHandle()
     {
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        $property = $this->stream_socket_client_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
+        $this->class->connect();
 
-        $this->stream_socket_client->connect();
+        $first = $this->get_reflection_property_value('handle');
 
-        $first = $property->getValue($this->stream_socket_client);
+        $this->unmock_function('stream_socket_client');
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_OTHER_HANDLE);
 
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_OTHER_HANDLE);
+        $this->class->connect();
 
-        $this->stream_socket_client->connect();
-
-        $second = $property->getValue($this->stream_socket_client);
+        $second = $this->get_reflection_property_value('handle');
 
         $this->assertEquals($first, $second);
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
@@ -133,36 +137,29 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      */
     public function testOpenReturnsFalseOnError()
     {
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
 
-        $this->assertFalse($this->stream_socket_client->connect());
+        $this->assertFalse($this->class->connect());
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
      * Tests that the call of disconnect() method sets the handle to null.
      *
-     * @runInSeparateProcess
-     *
      * @covers Lunr\Network\StreamSocketClient::disconnect
      */
     public function testCloseDestroysHandle()
     {
-        $property = $this->stream_socket_client_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
+        $this->set_reflection_property_value('connected', TRUE);
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $connect = $this->stream_socket_client_reflection->getProperty('connected');
-        $connect->setAccessible(TRUE);
-        $connect->setValue($this->stream_socket_client, TRUE);
-
-        $property->setValue($this->stream_socket_client, fopen('./test.txt', 'a'));
-
-        $this->assertTrue(is_resource($property->getValue($this->stream_socket_client)));
-
-        $this->assertTrue($this->stream_socket_client->disconnect());
-
-        $this->assertNull($property->getValue($this->stream_socket_client));
+        $this->assertTrue(is_resource($this->get_reflection_property_value('handle')));
+        $this->assertTrue($this->class->disconnect());
+        $this->assertNull($this->get_reflection_property_value('handle'));
 
         unlink('./test.txt');
     }
@@ -174,57 +171,47 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      */
     public function testCloseReturnsTrueIfHandleIsNull()
     {
-        $this->assertTrue($this->stream_socket_client->disconnect());
+        $this->assertTrue($this->class->disconnect());
     }
 
     /**
      * Tests that the call of disconnect() returns FALSE if error occurs.
-     *
-     * @runInSeparateProcess
      *
      * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::disconnect
      */
     public function testCloseReturnsFalseIfError()
     {
-        $copy = 'tmpdisconnect';
-        runkit_function_copy('fclose', $copy);
-        runkit_function_redefine('fclose', '', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
+        $this->mock_function('fclose', self::STREAM_SOCKET_CLIENT_RETURN_FALSE);
 
-        $connect = $this->stream_socket_client_reflection->getProperty('connected');
-        $connect->setAccessible(TRUE);
-        $connect->setValue($this->stream_socket_client, TRUE);
+        $this->set_reflection_property_value('connected', TRUE);
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $property = $this->stream_socket_client_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->stream_socket_client, fopen('./test.txt', 'a'));
-
-        $this->assertFalse($this->stream_socket_client->disconnect());
-
-        runkit_function_remove('fclose');
-        runkit_function_rename($copy, 'fclose');
-
+        $this->assertFalse($this->class->disconnect());
+        $this->unmock_function('fclose');
     }
 
     /**
      * Tests that the call of disconnect() return TRUE on success.
-     *
-     * @runInSeparateProcess
      *
      * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::disconnect
      */
     public function testCloseReturnsTrueOnSuccess()
     {
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        $this->assertTrue($this->stream_socket_client->connect());
-        runkit_function_redefine('fclose', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->assertTrue($this->class->connect());
 
-        $this->assertTrue($this->stream_socket_client->disconnect());
+        $this->mock_function('fclose', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
 
+        $this->assertTrue($this->class->disconnect());
+        $this->unmock_function('fclose');
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
@@ -235,23 +222,22 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      */
     public function testCreateHandleUpdatesMetaData()
     {
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        $property = $this->stream_socket_client_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
+        $first = $this->get_reflection_property_value('handle');
 
-        $first = $property->getValue($this->stream_socket_client);
+        $method = $this->get_accessible_reflection_method('create_handle');
 
-        $method = $this->stream_socket_client_reflection->getMethod('create_handle');
-        $method->setAccessible(TRUE);
+        $method->invoke($this->class);
 
-        $method->invoke($this->stream_socket_client);
-
-        $second = $property->getValue($this->stream_socket_client);
+        $second = $this->get_reflection_property_value('handle');
 
         $this->assertNotEquals($first, $second);
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
     /**
@@ -262,22 +248,21 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
      */
     public function testCreateHandleWithFlags()
     {
-        runkit_function_redefine('stream_set_timeout', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_set_blocking', '', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
-        runkit_function_redefine('stream_socket_client', '', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
+        $this->mock_function('stream_set_timeout', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_set_blocking', self::STREAM_SOCKET_CLIENT_RETURN_TRUE);
+        $this->mock_function('stream_socket_client', self::STREAM_SOCKET_CLIENT_RETURN_HANDLE);
 
-        $property = $this->stream_socket_client_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('create_handle');
 
-        $method = $this->stream_socket_client_reflection->getMethod('create_handle');
-        $method->setAccessible(TRUE);
+        $this->class->add_flag('STREAM_CLIENT_ASYNC_CONNECT');
+        $this->class->add_flag('STREAM_CLIENT_PERSISTENT');
 
-        $this->stream_socket_client->add_flag('STREAM_CLIENT_ASYNC_CONNECT');
-        $this->stream_socket_client->add_flag('STREAM_CLIENT_PERSISTENT');
+        $method->invoke($this->class);
 
-        $method->invoke($this->stream_socket_client);
-
-        $this->assertNotNull($property->getValue($this->stream_socket_client));
+        $this->assertNotNull($this->get_reflection_property_value('handle'));
+        $this->unmock_function('stream_set_timeout');
+        $this->unmock_function('stream_set_blocking');
+        $this->unmock_function('stream_socket_client');
     }
 
 }

@@ -3,20 +3,18 @@
 /**
  * This file contains the StreamSocketSetGetTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @author     Andrea Nigido <andrea@m2mobi.com>
+ * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
-
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
 
 /**
  * This class contains test methods for the getters and setters of the StreamSocket class.
@@ -25,6 +23,7 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\StreamSocket
  */
 class StreamSocketSetGetTest extends StreamSocketTest
@@ -41,7 +40,7 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testGetReturnsValuesForValidProperties($property, $value)
     {
-        $this->assertEquals($value, $this->stream_socket->$property);
+        $this->assertEquals($value, $this->class->$property);
     }
 
     /**
@@ -51,7 +50,7 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testGetReturnsNullForInvalidProperties()
     {
-        $this->assertNull($this->stream_socket->invalid_property);
+        $this->assertNull($this->class->invalid_property);
     }
 
     /**
@@ -66,15 +65,11 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetContextOptionWithValidWrapper($wrapper, $option, $value)
     {
-        $property = $this->stream_socket_reflection->getProperty('context_options');
-        $property->setAccessible(TRUE);
+        $this->class->set_context_option($wrapper, $option, $value);
 
-        $this->stream_socket->set_context_option($wrapper, $option, $value);
-
-        $context = $property->getValue($this->stream_socket);
+        $context = $this->get_reflection_property_value('context_options');
 
         $this->assertArrayHasKey($wrapper, $context);
-
         $this->assertArrayHasKey($option, $context[$wrapper]);
         $this->assertEquals($value, $context[$wrapper][$option]);
     }
@@ -92,14 +87,11 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetContextOptionWithInvalidWrapper($wrapper, $option, $value)
     {
-        $property = $this->stream_socket_reflection->getProperty('context_options');
-        $property->setAccessible(TRUE);
+        $previous = $this->get_reflection_property_value('context_options');
 
-        $previous = $property->getValue($this->stream_socket);
+        $this->class->set_context_option($wrapper, $option, $value);
 
-        $this->stream_socket->set_context_option($wrapper, $option, $value);
-
-        $this->assertEquals($previous, $property->getValue($this->stream_socket));
+        $this->assertPropertyEquals('context_options', $previous);
     }
 
     /**
@@ -110,18 +102,15 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetContextOptionsWithValidInput()
     {
-        $options = array(
-            'http' => array('method' => 'POST'),
-            'ftp'  => array('overwrite' => FALSE),
-            'tcp'  => array('bindto' => '127.0.0.1:4321'),
-        );
+        $options = [
+            'http' => ['method' => 'POST'],
+            'ftp' => ['overwrite' => FALSE],
+            'tcp' => ['bindto' => '127.0.0.1:4321']
+        ];
 
-        $property = $this->stream_socket_reflection->getProperty('context_options');
-        $property->setAccessible(TRUE);
+        $this->class->set_context_options($options);
 
-        $this->stream_socket->set_context_options($options);
-
-        $context = $property->getValue($this->stream_socket);
+        $context = $this->get_reflection_property_value('context_options');
 
         foreach($options as $wrapper_key => $wrapper)
         {
@@ -145,14 +134,11 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetContextOptionsIfInputIsNotArray($value)
     {
-        $property = $this->stream_socket_reflection->getProperty('context_options');
-        $property->setAccessible(TRUE);
+        $previous = $this->get_reflection_property_value('context_options');
 
-        $previous = $property->getValue($this->stream_socket);
+        $this->class->set_context_options($value);
 
-        $this->stream_socket->set_context_options($value);
-
-        $this->assertEquals($previous, $property->getValue($this->stream_socket));
+        $this->assertPropertyEquals('context_options', $previous);
     }
 
     /**
@@ -165,12 +151,9 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetBlockingWithValidInput($value)
     {
-        $property = $this->stream_socket_reflection->getProperty('blocking');
-        $property->setAccessible(TRUE);
+        $this->class->set_blocking($value);
 
-        $this->stream_socket->set_blocking($value);
-
-        $this->assertEquals($value, $property->getValue($this->stream_socket));
+        $this->assertPropertyEquals('blocking', $value);
     }
 
     /**
@@ -183,14 +166,11 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetBlockingWithInvalidInput($value)
     {
-        $property = $this->stream_socket_reflection->getProperty('blocking');
-        $property->setAccessible(TRUE);
+        $previous = $this->get_reflection_property_value('blocking');
 
-        $previous = $property->getValue($this->stream_socket);
+        $this->class->set_blocking($value);
 
-        $this->stream_socket->set_blocking($value);
-
-        $this->assertEquals($previous, $property->getValue($this->stream_socket));
+        $this->assertPropertyEquals('blocking', $previous);
     }
 
     /**
@@ -202,12 +182,12 @@ class StreamSocketSetGetTest extends StreamSocketTest
     {
         $value = array($this, 'notification');
 
-        $property = $this->stream_socket_reflection->getProperty('notification');
+        $property = $this->reflection->getProperty('notification');
         $property->setAccessible(TRUE);
 
-        $this->stream_socket->set_notification_callback($value);
+        $this->class->set_notification_callback($value);
 
-        $this->assertEquals($value, $property->getValue($this->stream_socket));
+        $this->assertEquals($value, $property->getValue($this->class));
     }
 
     /**
@@ -220,12 +200,9 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetNotificationCallBackWithInvalidValue($value)
     {
-        $property = $this->stream_socket_reflection->getProperty('notification');
-        $property->setAccessible(TRUE);
+        $this->class->set_notification_callback($value);
 
-        $this->stream_socket->set_notification_callback($value);
-
-        $this->assertFalse($value === $property->getValue($this->stream_socket));
+        $this->assertFalse($value === $this->get_reflection_property_value('notification'));
     }
 
     /**
@@ -239,16 +216,10 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetTimeoutWithValidValue($seconds, $micros)
     {
-        $timeout_seconds = $this->stream_socket_reflection->getProperty('timeout_seconds');
-        $timeout_seconds->setAccessible(TRUE);
+        $this->class->set_timeout($seconds, $micros);
 
-        $timeout_microseconds = $this->stream_socket_reflection->getProperty('timeout_microseconds');
-        $timeout_microseconds->setAccessible(TRUE);
-
-        $this->stream_socket->set_timeout($seconds, $micros);
-
-        $this->assertEquals($seconds, $timeout_seconds->getValue($this->stream_socket));
-        $this->assertEquals($micros, $timeout_microseconds->getValue($this->stream_socket));
+        $this->assertPropertyEquals('timeout_seconds', $seconds);
+        $this->assertPropertyEquals('timeout_microseconds', $micros);
     }
 
     /**
@@ -262,16 +233,10 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetTimeoutWithInvalidValue($seconds, $micros)
     {
-        $timeout_seconds = $this->stream_socket_reflection->getProperty('timeout_seconds');
-        $timeout_seconds->setAccessible(TRUE);
+        $this->class->set_timeout($seconds, $micros);
 
-        $timeout_microseconds = $this->stream_socket_reflection->getProperty('timeout_microseconds');
-        $timeout_microseconds->setAccessible(TRUE);
-
-        $this->stream_socket->set_timeout($seconds, $micros);
-
-        $this->assertFalse($seconds === $timeout_seconds->getValue($this->stream_socket));
-        $this->assertFalse($micros === $timeout_microseconds->getValue($this->stream_socket));
+        $this->assertFalse($seconds === $this->get_reflection_property_value('timeout_seconds'));
+        $this->assertFalse($micros === $this->get_reflection_property_value('timeout_microseconds'));
     }
 
     /**
@@ -281,19 +246,13 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetTimeoutWithDefaultMicroseconds()
     {
-        $timeout_seconds = $this->stream_socket_reflection->getProperty('timeout_seconds');
-        $timeout_seconds->setAccessible(TRUE);
+        $value = $this->get_reflection_property_value('timeout_microseconds');
 
-        $timeout_microseconds = $this->stream_socket_reflection->getProperty('timeout_microseconds');
-        $timeout_microseconds->setAccessible(TRUE);
+        $this->class->set_timeout(1);
 
-        $value = $timeout_microseconds->getValue($this->stream_socket);
-
-        $this->stream_socket->set_timeout(1);
-
-        $this->assertTrue(1 === $timeout_seconds->getValue($this->stream_socket));
-        $this->assertTrue(0 === $timeout_microseconds->getValue($this->stream_socket));
-        $this->assertSame($value, $timeout_microseconds->getValue($this->stream_socket));
+        $this->assertTrue(1 === $this->get_reflection_property_value('timeout_seconds'));
+        $this->assertTrue(0 === $this->get_reflection_property_value('timeout_microseconds'));
+        $this->assertPropertySame('timeout_microseconds', $value);
     }
 
     /**
@@ -303,9 +262,9 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetContextOptionReturnsSelfReference()
     {
-        $return = $this->stream_socket->set_context_option('http', 'method', 'POST');
+        $return = $this->class->set_context_option('http', 'method', 'POST');
 
-        $this->assertEquals($return, $this->stream_socket);
+        $this->assertEquals($return, $this->class);
     }
 
     /**
@@ -315,11 +274,11 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetContextOptionsReturnsSelfReference()
     {
-        $value = array('http' => array('method' => 'POST'));
+        $value = ['http' => ['method' => 'POST']];
 
-        $return = $this->stream_socket->set_context_options($value);
+        $return = $this->class->set_context_options($value);
 
-        $this->assertEquals($return, $this->stream_socket);
+        $this->assertEquals($return, $this->class);
     }
 
     /**
@@ -329,9 +288,9 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetBlockingReturnsSelfReference()
     {
-        $return = $this->stream_socket->set_blocking(0);
+        $return = $this->class->set_blocking(0);
 
-        $this->assertEquals($return, $this->stream_socket);
+        $this->assertEquals($return, $this->class);
     }
 
     /**
@@ -341,9 +300,9 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetNotificationCallbackReturnsSelfReference()
     {
-        $return = $this->stream_socket->set_notification_callback('notification');
+        $return = $this->class->set_notification_callback('notification');
 
-        $this->assertEquals($return, $this->stream_socket);
+        $this->assertEquals($return, $this->class);
     }
 
     /**
@@ -353,9 +312,9 @@ class StreamSocketSetGetTest extends StreamSocketTest
      */
     public function testSetTimeoutReturnsSelfReference()
     {
-        $return = $this->stream_socket->set_timeout(1);
+        $return = $this->class->set_timeout(1);
 
-        $this->assertEquals($return, $this->stream_socket);
+        $this->assertEquals($return, $this->class);
     }
 
 }

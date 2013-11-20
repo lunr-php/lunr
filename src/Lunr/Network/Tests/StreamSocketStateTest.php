@@ -3,20 +3,18 @@
 /**
  * This file contains the StreamSocketStateTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @author     Andrea Nigido <andrea@m2mobi.com>
+ * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
-
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
 
 /**
  * This class contains test methods for state change StreamSocket class.
@@ -25,6 +23,7 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\StreamSocket
  */
 class StreamSocketStateTest extends StreamSocketTest
@@ -38,21 +37,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testChangedReturnsTrueOnReadWatchOfTheStreamIfChanged()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_ONE);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_ONE);
 
-        $method = $this->stream_socket_reflection->getMethod('changed');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('changed');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invokeArgs($this->stream_socket, array(TRUE, FALSE, FALSE));
-
-        $this->assertTrue($return);
+        $this->assertTrue($method->invokeArgs($this->class, [TRUE, FALSE, FALSE]));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -63,21 +59,17 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testChangedReturnsFalseOnReadWatchOfTheStreamIfNotChanged()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_ZERO);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_ZERO);
 
-        $method = $this->stream_socket_reflection->getMethod('changed');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('changed');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
-        //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invokeArgs($this->stream_socket, array(TRUE, FALSE, FALSE));
-
-        $this->assertFalse($return);
+        $this->assertFalse($method->invokeArgs($this->class, [TRUE, FALSE, FALSE]));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -88,21 +80,17 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testChangedReturnsNullOnReadWatchOfTheStreamIfError()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_FALSE);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_FALSE);
 
-        $method = $this->stream_socket_reflection->getMethod('changed');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('changed');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
-        //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invokeArgs($this->stream_socket, array(TRUE, FALSE, FALSE));
-
-        $this->assertNull($return);
+        $this->assertNull($method->invokeArgs($this->class, [TRUE, FALSE, FALSE]));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -113,21 +101,17 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testChangedReturnsTrueOnWriteWatchOfTheStreamIfChanged()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_ONE);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_ONE);
 
-        $method = $this->stream_socket_reflection->getMethod('changed');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('changed');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
-        //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invokeArgs($this->stream_socket, array(FALSE, TRUE, FALSE));
-
-        $this->assertTrue($return);
+        $this->assertTrue($method->invokeArgs($this->class, [FALSE, TRUE, FALSE]));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -138,21 +122,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testChangedReturnsFalseOnWriteWatchOfTheStreamIfNotChanged()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_ZERO);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_ZERO);
 
-        $method = $this->stream_socket_reflection->getMethod('changed');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('changed');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invokeArgs($this->stream_socket, array(FALSE, TRUE, FALSE));
-
-        $this->assertFalse($return);
+        $this->assertFalse($method->invokeArgs($this->class, [FALSE, TRUE, FALSE]));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -163,21 +144,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testChangedReturnsNullOnWriteWatchOfTheStreamIfError()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_FALSE);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_FALSE);
 
-        $method = $this->stream_socket_reflection->getMethod('changed');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('changed');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invokeArgs($this->stream_socket, array(FALSE, TRUE, FALSE));
-
-        $this->assertNull($return);
+        $this->assertNull($method->invokeArgs($this->class, [FALSE, TRUE, FALSE]));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -188,21 +166,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testChangedReturnsTrueOnExceptionWatchOfTheStreamIfChanged()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_ONE);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_ONE);
 
-        $method = $this->stream_socket_reflection->getMethod('changed');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('changed');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invokeArgs($this->stream_socket, array(FALSE, FALSE, TRUE));
-
-        $this->assertTrue($return);
+        $this->assertTrue($method->invokeArgs($this->class, [FALSE, FALSE, TRUE]));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -213,21 +188,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testChangedReturnsFalseOnExceptionWatchOfTheStreamIfNotChanged()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_ZERO);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_ZERO);
 
-        $method = $this->stream_socket_reflection->getMethod('changed');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('changed');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invokeArgs($this->stream_socket, array(FALSE, FALSE, TRUE));
-
-        $this->assertFalse($return);
+        $this->assertFalse($method->invokeArgs($this->class, [FALSE, FALSE, TRUE]));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -238,21 +210,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testChangedReturnsNullOnexceptionWatchOfTheStreamIfError()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_FALSE);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_FALSE);
 
-        $method = $this->stream_socket_reflection->getMethod('changed');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('changed');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invokeArgs($this->stream_socket, array(FALSE, FALSE, TRUE));
-
-        $this->assertNull($return);
+        $this->assertNull($method->invokeArgs($this->class, [FALSE, FALSE, TRUE]));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -262,17 +231,11 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testChangedReturnsNullIfStreamNotOpened()
     {
-        $method = $this->stream_socket_reflection->getMethod('changed');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('changed');
 
-        $return = $method->invokeArgs($this->stream_socket, array(TRUE, FALSE, FALSE));
-        $this->assertNull($return);
-
-        $return = $method->invokeArgs($this->stream_socket, array(FALSE, TRUE, FALSE));
-        $this->assertNull($return);
-
-        $return = $method->invokeArgs($this->stream_socket, array(FALSE, FALSE, TRUE));
-        $this->assertNull($return);
+        $this->assertNull($method->invokeArgs($this->class, [TRUE, FALSE, FALSE]));
+        $this->assertNull($method->invokeArgs($this->class, [FALSE, TRUE, FALSE]));
+        $this->assertNull($method->invokeArgs($this->class, [FALSE, FALSE, TRUE]));
     }
 
     /**
@@ -284,21 +247,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testIsReadyToReadReturnsTrueIfStreamChanged()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_ONE);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_ONE);
 
-        $method = $this->stream_socket_reflection->getMethod('is_ready_to_read');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_ready_to_read');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invoke($this->stream_socket);
-
-        $this->assertTrue($return);
+        $this->assertTrue($method->invoke($this->class));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -310,21 +270,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testIsReadyToReadReturnsFalseIfStreamNotChanged()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_ZERO);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_ZERO);
 
-        $method = $this->stream_socket_reflection->getMethod('is_ready_to_read');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_ready_to_read');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invoke($this->stream_socket);
-
-        $this->assertFalse($return);
+        $this->assertFalse($method->invoke($this->class));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -336,21 +293,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testIsReadyToReadReturnsNullIfError()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_FALSE);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_FALSE);
 
-        $method = $this->stream_socket_reflection->getMethod('is_ready_to_read');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_ready_to_read');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invoke($this->stream_socket);
-
-        $this->assertNull($return);
+        $this->assertNull($method->invoke($this->class));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -362,21 +316,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testIsReadyToWriteReturnsTrueIfStreamChanged()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_ONE);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_ONE);
 
-        $method = $this->stream_socket_reflection->getMethod('is_ready_to_write');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_ready_to_write');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invoke($this->stream_socket);
-
-        $this->assertTrue($return);
+        $this->assertTrue($method->invoke($this->class));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -388,21 +339,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testIsReadyToWriteReturnsFalseIfStreamNotChanged()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_ZERO);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_ZERO);
 
-        $method = $this->stream_socket_reflection->getMethod('is_ready_to_write');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_ready_to_write');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invoke($this->stream_socket);
-
-        $this->assertFalse($return);
+        $this->assertFalse($method->invoke($this->class));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -414,21 +362,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testIsReadyToWriteReturnsNullIfError()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_FALSE);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_FALSE);
 
-        $method = $this->stream_socket_reflection->getMethod('is_ready_to_write');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_ready_to_write');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invoke($this->stream_socket);
-
-        $this->assertNull($return);
+        $this->assertNull($method->invoke($this->class));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -440,21 +385,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testIsReadyToreadExceptionnalDataReturnsTrueIfStreamChanged()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_ONE);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_ONE);
 
-        $method = $this->stream_socket_reflection->getMethod('is_ready_to_read_exceptional_data');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_ready_to_read_exceptional_data');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invokeArgs($this->stream_socket, array(FALSE, FALSE, TRUE));
-
-        $this->assertTrue($return);
+        $this->assertTrue($method->invokeArgs($this->class, [FALSE, FALSE, TRUE]));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -466,21 +408,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testIsReadyToreadExceptionnalDataReturnsFalseIfStreamNotChanged()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_ZERO);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_ZERO);
 
-        $method = $this->stream_socket_reflection->getMethod('is_ready_to_read_exceptional_data');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_ready_to_read_exceptional_data');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invokeArgs($this->stream_socket, array(FALSE, FALSE, TRUE));
-
-        $this->assertFalse($return);
+        $this->assertFalse($method->invokeArgs($this->class, [FALSE, FALSE, TRUE]));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
     /**
@@ -492,21 +431,18 @@ class StreamSocketStateTest extends StreamSocketTest
      */
     public function testIsReadyToreadExceptionnalDataReturnsNullIfError()
     {
-        runkit_function_redefine('stream_select', '', self::STREAM_SOCKET_RETURN_FALSE);
+        $this->mock_function('stream_select', self::STREAM_SOCKET_RETURN_FALSE);
 
-        $method = $this->stream_socket_reflection->getMethod('is_ready_to_read_exceptional_data');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('is_ready_to_read_exceptional_data');
 
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
         //to prevent the method to try to create the handle
-        $property->setValue($this->stream_socket, fopen('./test.txt', 'a'));
+        $this->set_reflection_property_value('handle', fopen('./test.txt', 'a'));
 
-        $return = $method->invokeArgs($this->stream_socket, array(FALSE, FALSE, TRUE));
-
-        $this->assertNull($return);
+        $this->assertNull($method->invokeArgs($this->class, [FALSE, FALSE, TRUE]));
 
         unlink('./test.txt');
+
+        $this->unmock_function('stream_select');
     }
 
 }

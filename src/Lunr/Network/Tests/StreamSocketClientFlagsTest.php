@@ -3,20 +3,18 @@
 /**
  * This file contains the StreamSocketClientFlagsTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @author     Andrea Nigido <andrea@m2mobi.com>
+ * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
-
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
 
 /**
  * This class contains test methods for flags of the StreamClientSocket class.
@@ -25,6 +23,7 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\StreamSocketClient
  */
 class StreamSocketClientFlagsTest extends StreamSocketClientTest
@@ -37,23 +36,20 @@ class StreamSocketClientFlagsTest extends StreamSocketClientTest
      */
     public function testAddValidFlagIfNotPresent()
     {
-        $property = $this->stream_socket_client_reflection->getProperty('flags');
-        $property->setAccessible(TRUE);
+        $previous = $this->get_reflection_property_value('flags');
 
-        $previous = $property->getValue($this->stream_socket_client);
+        $this->class->add_flag('STREAM_CLIENT_PERSISTENT');
 
-        $this->stream_socket_client->add_flag('STREAM_CLIENT_PERSISTENT');
-
-        $new = $property->getValue($this->stream_socket_client);
+        $new = $this->get_reflection_property_value('flags');
 
         $this->assertTrue(count($new) === count($previous) + 1);
         $this->assertContains(STREAM_CLIENT_PERSISTENT, $new);
 
-        $previous = $property->getValue($this->stream_socket_client);
+        $previous = $this->get_reflection_property_value('flags');
 
-        $this->stream_socket_client->add_flag('STREAM_CLIENT_ASYNC_CONNECT');
+        $this->class->add_flag('STREAM_CLIENT_ASYNC_CONNECT');
 
-        $new = $property->getValue($this->stream_socket_client);
+        $new = $this->get_reflection_property_value('flags');
 
         $this->assertTrue(count($new) === count($previous) + 1);
         $this->assertContains(STREAM_CLIENT_ASYNC_CONNECT, $new);
@@ -66,16 +62,13 @@ class StreamSocketClientFlagsTest extends StreamSocketClientTest
      */
     public function testDoNotAddValidFlagIfPresent()
     {
-        $property = $this->stream_socket_client_reflection->getProperty('flags');
-        $property->setAccessible(TRUE);
+        $this->class->add_flag('STREAM_CLIENT_PERSISTENT');
 
-        $this->stream_socket_client->add_flag('STREAM_CLIENT_PERSISTENT');
+        $previous = $this->get_reflection_property_value('flags');
 
-        $previous = $property->getValue($this->stream_socket_client);
+        $this->class->add_flag('STREAM_CLIENT_PERSISTENT');
 
-        $this->stream_socket_client->add_flag('STREAM_CLIENT_PERSISTENT');
-
-        $new = $property->getValue($this->stream_socket_client);
+        $new = $this->get_reflection_property_value('flags');
 
         $this->assertEquals($previous, $new);
     }
@@ -88,14 +81,11 @@ class StreamSocketClientFlagsTest extends StreamSocketClientTest
      */
     public function testDoNotAddInvalidFlag()
     {
-        $property = $this->stream_socket_client_reflection->getProperty('flags');
-        $property->setAccessible(TRUE);
+        $previous = $this->get_reflection_property_value('flags');
 
-        $previous = $property->getValue($this->stream_socket_client);
+        $this->class->add_flag('STREAM_CLIENT_PERSISTENT');
 
-        $this->stream_socket_client->add_flag('STREAM_CLIENT_PERSISTENT');
-
-        $new = $property->getValue($this->stream_socket_client);
+        $new = $this->get_reflection_property_value('flags');
 
         $this->assertTrue(count($new) === count($previous) + 1);
         $this->assertContains(STREAM_CLIENT_PERSISTENT, $new);
@@ -108,10 +98,9 @@ class StreamSocketClientFlagsTest extends StreamSocketClientTest
      */
     public function testCreateFlags()
     {
-        $method = $this->stream_socket_client_reflection->getMethod('create_flags');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('create_flags');
 
-        $this->assertEquals(3, $method->invokeArgs($this->stream_socket_client, array(2, 1)));
+        $this->assertEquals(3, $method->invokeArgs($this->class, [2, 1]));
     }
 
 }

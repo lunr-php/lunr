@@ -3,20 +3,18 @@
 /**
  * This file contains the StreamSocketBaseTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   Libraries
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
+ * @author     Andrea Nigido <andrea@m2mobi.com>
+ * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Network\Tests;
-
-use PHPUnit_Framework_TestCase;
-use ReflectionClass;
 
 /**
  * This class contains basic test methods for the StreamSocket class.
@@ -25,6 +23,7 @@ use ReflectionClass;
  * @package    Network
  * @subpackage Tests
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Network\StreamSocket
  */
 class StreamSocketBaseTest extends StreamSocketTest
@@ -35,13 +34,9 @@ class StreamSocketBaseTest extends StreamSocketTest
      */
     public function testContextOptionsIsEmptyArray()
     {
-        $property = $this->stream_socket_reflection->getProperty('context_options');
-        $property->setAccessible(TRUE);
+        $value = $this->get_reflection_property_value('context_options');
 
-        $value = $property->getValue($this->stream_socket);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -49,13 +44,9 @@ class StreamSocketBaseTest extends StreamSocketTest
      */
     public function testMetaDataIsEmptyArray()
     {
-        $property = $this->stream_socket_reflection->getProperty('meta_data');
-        $property->setAccessible(TRUE);
+        $value = $this->get_reflection_property_value('meta_data');
 
-        $value = $property->getValue($this->stream_socket);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -63,13 +54,9 @@ class StreamSocketBaseTest extends StreamSocketTest
      */
     public function testFlagsIsEmptyArray()
     {
-        $property = $this->stream_socket_reflection->getProperty('flags');
-        $property->setAccessible(TRUE);
+        $value = $this->get_reflection_property_value('flags');
 
-        $value = $property->getValue($this->stream_socket);
-
-        $this->assertInternalType('array', $value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($value);
     }
 
     /**
@@ -77,10 +64,7 @@ class StreamSocketBaseTest extends StreamSocketTest
      */
     public function testErrorNumberIsZero()
     {
-        $property = $this->stream_socket_reflection->getProperty('error_number');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(0, $property->getValue($this->stream_socket));
+        $this->assertPropertyEquals('error_number', 0);
     }
 
     /**
@@ -88,10 +72,7 @@ class StreamSocketBaseTest extends StreamSocketTest
      */
     public function testBlockingIsOne()
     {
-        $property = $this->stream_socket_reflection->getProperty('blocking');
-        $property->setAccessible(TRUE);
-
-        $this->assertTrue($property->getValue($this->stream_socket));
+        $this->assertTrue($this->get_reflection_property_value('blocking'));
     }
 
     /**
@@ -99,10 +80,7 @@ class StreamSocketBaseTest extends StreamSocketTest
      */
     public function testErrorMessageIsEmptyString()
     {
-        $property = $this->stream_socket_reflection->getProperty('error_message');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('', $property->getValue($this->stream_socket));
+        $this->assertPropertyEquals('error_message', '');
     }
 
     /**
@@ -110,10 +88,7 @@ class StreamSocketBaseTest extends StreamSocketTest
      */
     public function testNotificationIsNull()
     {
-        $property = $this->stream_socket_reflection->getProperty('notification');
-        $property->setAccessible(TRUE);
-
-        $this->assertNull($property->getValue($this->stream_socket));
+        $this->assertNull($this->get_reflection_property_value('notification'));
     }
 
     /**
@@ -121,10 +96,7 @@ class StreamSocketBaseTest extends StreamSocketTest
      */
     public function testHandleIsNull()
     {
-        $property = $this->stream_socket_reflection->getProperty('handle');
-        $property->setAccessible(TRUE);
-
-        $this->assertNull($property->getValue($this->stream_socket));
+        $this->assertNull($this->get_reflection_property_value('handle'));
     }
 
     /**
@@ -132,10 +104,7 @@ class StreamSocketBaseTest extends StreamSocketTest
      */
     public function testContextIsNull()
     {
-        $property = $this->stream_socket_reflection->getProperty('context');
-        $property->setAccessible(TRUE);
-
-        $this->assertNull($property->getValue($this->stream_socket));
+        $this->assertNull($this->get_reflection_property_value('context'));
     }
 
     /**
@@ -143,10 +112,7 @@ class StreamSocketBaseTest extends StreamSocketTest
      */
     public function testTimeoutSecondsInitValue()
     {
-        $property = $this->stream_socket_reflection->getProperty('timeout_seconds');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(60, $property->getValue($this->stream_socket));
+        $this->assertPropertyEquals('timeout_seconds', 60);
     }
 
     /**
@@ -154,10 +120,7 @@ class StreamSocketBaseTest extends StreamSocketTest
      */
     public function testTimeoutMicrosEqualsZero()
     {
-        $property = $this->stream_socket_reflection->getProperty('timeout_microseconds');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(0, $property->getValue($this->stream_socket));
+        $this->assertPropertyEquals('timeout_microseconds', 0);
     }
 
 }
