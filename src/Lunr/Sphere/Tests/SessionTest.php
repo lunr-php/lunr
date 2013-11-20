@@ -9,13 +9,14 @@
  * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Sphere\Tests;
 
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 use stdClass;
 use Lunr\Sphere\Session;
@@ -28,22 +29,11 @@ use Lunr\Sphere\Session;
  * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Sphere\Session
  */
-abstract class SessionTest extends PHPUnit_Framework_TestCase
+abstract class SessionTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the Session class
-     * @var Session
-     */
-    protected $session;
-
-    /**
-     * Reflection instance of the Session class
-     * @var ReflectionClass
-     */
-    protected $session_reflection;
 
     /**
      * Runkit simulation code that returns true;
@@ -71,9 +61,8 @@ abstract class SessionTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->session = new Session();
-
-        $this->session_reflection = new ReflectionClass('Lunr\Sphere\Session');
+        $this->class      = new Session();
+        $this->reflection = new ReflectionClass('Lunr\Sphere\Session');
     }
 
     /**
@@ -81,8 +70,8 @@ abstract class SessionTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->session);
-        unset($this->session_reflection);
+        unset($this->class);
+        unset($this->reflection);
     }
 
     /**
@@ -92,10 +81,10 @@ abstract class SessionTest extends PHPUnit_Framework_TestCase
      */
     public function invalidSessionHandlerProvider()
     {
-        $handlers   = array();
-        $handlers[] = array('myHandler');
-        $handlers[] = array(144);
-        $handlers[] = array(TRUE);
+        $handlers   = [];
+        $handlers[] = ['myHandler'];
+        $handlers[] = [144];
+        $handlers[] = [TRUE];
 
         return $handlers;
     }

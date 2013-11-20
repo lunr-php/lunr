@@ -9,6 +9,7 @@
  * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -22,6 +23,7 @@ namespace Lunr\Sphere\Tests;
  * @package    Sphere
  * @subpackage Tests
  * @author     Felipe Martinez <felipe@m2mobi.com>
+ * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Sphere\Session
  */
 class SessionBaseTest extends SessionTest
@@ -32,12 +34,7 @@ class SessionBaseTest extends SessionTest
      */
     public function testDefaultClosedValue()
     {
-        $property = $this->session_reflection->getProperty('closed');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->session);
-
-        $this->assertFalse($value);
+        $this->assertFalse($this->get_reflection_property_value('closed'));
     }
 
     /**
@@ -45,12 +42,7 @@ class SessionBaseTest extends SessionTest
      */
     public function testDefaultStartedValue()
     {
-        $property = $this->session_reflection->getProperty('started');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->session);
-
-        $this->assertFalse($value);
+        $this->assertFalse($this->get_reflection_property_value('started'));
     }
 
     /**
@@ -62,7 +54,7 @@ class SessionBaseTest extends SessionTest
     {
         $handler = $this->getMock('\SessionHandlerInterface');
 
-        $this->assertTrue($this->session->set_session_handler($handler));
+        $this->assertTrue($this->class->set_session_handler($handler));
     }
 
     /**
@@ -76,7 +68,7 @@ class SessionBaseTest extends SessionTest
      */
     public function testSetSessionHandlerReturnsFalseWithInvalidData($handler)
     {
-        $this->assertFalse($this->session->set_session_handler($handler));
+        $this->assertFalse($this->class->set_session_handler($handler));
     }
 
     /**
@@ -88,18 +80,14 @@ class SessionBaseTest extends SessionTest
      */
     public function testSetIsIgnoredWhenClosedAndNotStarted()
     {
-        $_SESSION = array();
-        $method   = $this->session_reflection->getMethod('set');
+        $_SESSION = [];
 
-        $property = $this->session_reflection->getProperty('started');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, FALSE);
+        $method = $this->get_accessible_reflection_method('set');
 
-        $property = $this->session_reflection->getProperty('closed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, TRUE);
+        $this->set_reflection_property_value('started', FALSE);
+        $this->set_reflection_property_value('closed', TRUE);
 
-        $method->invokeArgs($this->session, array('key', 'value'));
+        $method->invokeArgs($this->class, ['key', 'value']);
 
         $this->assertArrayNotHasKey('key', $_SESSION);
     }
@@ -113,18 +101,14 @@ class SessionBaseTest extends SessionTest
      */
     public function testSetIsIgnoredWhenNotClosedAndNotStarted()
     {
-        $_SESSION = array();
-        $method   = $this->session_reflection->getMethod('set');
+        $_SESSION = [];
 
-        $property = $this->session_reflection->getProperty('started');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, FALSE);
+        $method = $this->get_accessible_reflection_method('set');
 
-        $property = $this->session_reflection->getProperty('closed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, FALSE);
+        $this->set_reflection_property_value('started', FALSE);
+        $this->set_reflection_property_value('closed', FALSE);
 
-        $method->invokeArgs($this->session, array('key', 'value'));
+        $method->invokeArgs($this->class, ['key', 'value']);
 
         $this->assertArrayNotHasKey('key', $_SESSION);
     }
@@ -138,18 +122,14 @@ class SessionBaseTest extends SessionTest
      */
     public function testSetIsIgnoredWhenClosedAndStarted()
     {
-        $_SESSION = array();
-        $method   = $this->session_reflection->getMethod('set');
+        $_SESSION = [];
 
-        $property = $this->session_reflection->getProperty('started');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, TRUE);
+        $method = $this->get_accessible_reflection_method('set');
 
-        $property = $this->session_reflection->getProperty('closed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, TRUE);
+        $this->set_reflection_property_value('started', TRUE);
+        $this->set_reflection_property_value('closed', TRUE);
 
-        $method->invokeArgs($this->session, array('key', 'value'));
+        $method->invokeArgs($this->class, ['key', 'value']);
 
         $this->assertArrayNotHasKey('key', $_SESSION);
     }
@@ -163,17 +143,12 @@ class SessionBaseTest extends SessionTest
      */
     public function testSetWorksWhenNotClosedAndStarted()
     {
-        $method = $this->session_reflection->getMethod('set');
+        $method = $this->get_accessible_reflection_method('set');
 
-        $property = $this->session_reflection->getProperty('started');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, TRUE);
+        $this->set_reflection_property_value('started', TRUE);
+        $this->set_reflection_property_value('closed', FALSE);
 
-        $property = $this->session_reflection->getProperty('closed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, FALSE);
-
-        $method->invokeArgs($this->session, array('key', 'value'));
+        $method->invokeArgs($this->class, ['key', 'value']);
 
         $this->assertArrayHasKey('key', $_SESSION);
         $this->assertEquals($_SESSION['key'], 'value');
@@ -188,19 +163,14 @@ class SessionBaseTest extends SessionTest
      */
     public function testDeleteIsIgnoredWhenClosedAndNotStarted()
     {
-        $method = $this->session_reflection->getMethod('delete');
+        $method = $this->get_accessible_reflection_method('delete');
 
-        $property = $this->session_reflection->getProperty('started');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, FALSE);
-
-        $property = $this->session_reflection->getProperty('closed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, TRUE);
+        $this->set_reflection_property_value('started', FALSE);
+        $this->set_reflection_property_value('closed', TRUE);
 
         $_SESSION['key'] = 'value';
 
-        $method->invokeArgs($this->session, array('key'));
+        $method->invokeArgs($this->class, ['key']);
 
         $this->assertArrayHasKey('key', $_SESSION);
     }
@@ -214,19 +184,14 @@ class SessionBaseTest extends SessionTest
      */
     public function testDeleteIsIgnoredWhenNotClosedAndNotStarted()
     {
-        $method = $this->session_reflection->getMethod('delete');
+        $method = $this->get_accessible_reflection_method('delete');
 
-        $property = $this->session_reflection->getProperty('started');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, FALSE);
-
-        $property = $this->session_reflection->getProperty('closed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, FALSE);
+        $this->set_reflection_property_value('started', FALSE);
+        $this->set_reflection_property_value('closed', FALSE);
 
         $_SESSION['key'] = 'value';
 
-        $method->invokeArgs($this->session, array('key'));
+        $method->invokeArgs($this->class, ['key']);
 
         $this->assertArrayHasKey('key', $_SESSION);
     }
@@ -240,19 +205,14 @@ class SessionBaseTest extends SessionTest
      */
     public function testDeleteIsIgnoredWhenClosedAndStarted()
     {
-        $method = $this->session_reflection->getMethod('delete');
+        $method = $this->get_accessible_reflection_method('delete');
 
-        $property = $this->session_reflection->getProperty('started');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, TRUE);
-
-        $property = $this->session_reflection->getProperty('closed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, TRUE);
+        $this->set_reflection_property_value('started', TRUE);
+        $this->set_reflection_property_value('closed', TRUE);
 
         $_SESSION['key'] = 'value';
 
-        $method->invokeArgs($this->session, array('key'));
+        $method->invokeArgs($this->class, ['key']);
 
         $this->assertArrayHasKey('key', $_SESSION);
     }
@@ -266,20 +226,15 @@ class SessionBaseTest extends SessionTest
      */
     public function testDeleteWorksWhenNotClosedAndStarted()
     {
-        $_SESSION = array();
-        $method   = $this->session_reflection->getMethod('delete');
+        $_SESSION = [];
+        $method   = $this->get_accessible_reflection_method('delete');
 
-        $property = $this->session_reflection->getProperty('started');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, TRUE);
-
-        $property = $this->session_reflection->getProperty('closed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, FALSE);
+        $this->set_reflection_property_value('started', TRUE);
+        $this->set_reflection_property_value('closed', FALSE);
 
         $_SESSION['key'] = 'value';
 
-        $method->invokeArgs($this->session, array('key'));
+        $method->invokeArgs($this->class, ['key']);
 
         $this->assertArrayNotHasKey('key', $_SESSION);
     }
@@ -293,15 +248,13 @@ class SessionBaseTest extends SessionTest
      */
     public function testGetReturnsNullWhenNotStarted()
     {
-        $method = $this->session_reflection->getMethod('get');
+        $method = $this->get_accessible_reflection_method('get');
 
-        $property = $this->session_reflection->getProperty('started');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, FALSE);
+        $this->set_reflection_property_value('started', FALSE);
 
         $_SESSION['key'] = 'value';
 
-        $this->assertNull($method->invokeArgs($this->session, array('key')));
+        $this->assertNull($method->invokeArgs($this->class, ['key']));
     }
 
     /**
@@ -311,13 +264,11 @@ class SessionBaseTest extends SessionTest
      */
     public function testGetReturnsNullWhenNoKey()
     {
-        $method = $this->session_reflection->getMethod('get');
+        $method = $this->get_accessible_reflection_method('get');
 
-        $property = $this->session_reflection->getProperty('started');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, TRUE);
+        $this->set_reflection_property_value('started', TRUE);
 
-        $this->assertNull($method->invokeArgs($this->session, array('key')));
+        $this->assertNull($method->invokeArgs($this->class, ['key']));
     }
 
     /**
@@ -329,15 +280,13 @@ class SessionBaseTest extends SessionTest
      */
     public function testGetWorksWhenStarted()
     {
-        $method = $this->session_reflection->getMethod('get');
+        $method = $this->get_accessible_reflection_method('get');
 
-        $property = $this->session_reflection->getProperty('started');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->session, TRUE);
+        $this->set_reflection_property_value('started', TRUE);
 
         $_SESSION['key'] = 'value';
 
-        $this->assertEquals('value', $method->invokeArgs($this->session, array('key')));
+        $this->assertEquals('value', $method->invokeArgs($this->class, ['key']));
     }
 
     /**
@@ -348,9 +297,9 @@ class SessionBaseTest extends SessionTest
      */
     public function testGetSessionId()
     {
-        runkit_function_redefine('session_id', '', self::FUNCTION_GENERATE_ID);
-
-        $this->assertEquals('myId', $this->session->get_session_id());
+        $this->mock_function('session_id', self::FUNCTION_GENERATE_ID);
+        $this->assertEquals('myId', $this->class->get_session_id());
+        $this->unmock_function('session_id');
     }
 
     /**
@@ -361,16 +310,17 @@ class SessionBaseTest extends SessionTest
      */
     public function testGetNewSessionId()
     {
-        runkit_function_redefine('session_id', '', self::FUNCTION_GENERATE_ID);
-        runkit_function_redefine('session_regenerate_id', '', self::FUNCTION_RETURN_TRUE);
+        $this->mock_function('session_id', self::FUNCTION_GENERATE_ID);
+        $this->mock_function('session_regenerate_id', self::FUNCTION_RETURN_TRUE);
 
-        $oldId = $this->session->get_session_id();
+        $oldId = $this->class->get_session_id();
 
-        //This is the only way I know to set a new session ID using the redefined functions we have.
         session_id('newId');
-        $newId = $this->session->get_new_session_id();
+        $newId = $this->class->get_new_session_id();
 
         $this->assertNotEquals($oldId, $newId);
+        $this->unmock_function('session_id');
+        $this->unmock_function('session_regenerate_id');
     }
 
     /**
@@ -381,20 +331,16 @@ class SessionBaseTest extends SessionTest
      */
     public function testStart()
     {
-        $started = $this->session_reflection->getProperty('started');
-        $started->setAccessible(TRUE);
-        $started->setValue($this->session, FALSE);
+        $this->set_reflection_property_value('started', FALSE);
+        $this->set_reflection_property_value('closed', TRUE);
 
-        $closed = $this->session_reflection->getProperty('closed');
-        $closed->setAccessible(TRUE);
-        $closed->setValue($this->session, TRUE);
+        $this->mock_function('session_start', self::FUNCTION_RETURN_TRUE);
 
-        runkit_function_redefine('session_start', '', self::FUNCTION_RETURN_TRUE);
+        $this->class->start();
 
-        $this->session->start();
-
-        $this->assertTrue($started->getValue($this->session));
-        $this->assertFalse($closed->getValue($this->session));
+        $this->assertTrue($this->get_reflection_property_value('started'));
+        $this->assertFalse($this->get_reflection_property_value('closed'));
+        $this->unmock_function('session_start');
     }
 
     /**
@@ -404,17 +350,12 @@ class SessionBaseTest extends SessionTest
      */
     public function testStartIfAlreadyStarted()
     {
-        $started = $this->session_reflection->getProperty('started');
-        $started->setAccessible(TRUE);
-        $started->setValue($this->session, TRUE);
+        $this->set_reflection_property_value('started', TRUE);
 
-        $closed = $this->session_reflection->getProperty('closed');
-        $closed->setAccessible(TRUE);
+        $this->class->start();
 
-        $this->session->start();
-
-        $this->assertTrue($started->getValue($this->session));
-        $this->assertFalse($closed->getValue($this->session));
+        $this->assertTrue($this->get_reflection_property_value('started'));
+        $this->assertFalse($this->get_reflection_property_value('closed'));
     }
 
     /**
@@ -425,22 +366,19 @@ class SessionBaseTest extends SessionTest
      */
     public function testStartSetsId()
     {
-        $started = $this->session_reflection->getProperty('started');
-        $started->setAccessible(TRUE);
-        $started->setValue($this->session, FALSE);
+        $this->set_reflection_property_value('started', FALSE);
+        $this->set_reflection_property_value('closed', TRUE);
 
-        $closed = $this->session_reflection->getProperty('closed');
-        $closed->setAccessible(TRUE);
-        $closed->setValue($this->session, TRUE);
+        $this->mock_function('session_id', self::FUNCTION_GENERATE_ID);
+        $this->mock_function('session_start', self::FUNCTION_RETURN_TRUE);
 
-        runkit_function_redefine('session_id', '', self::FUNCTION_GENERATE_ID);
-        runkit_function_redefine('session_start', '', self::FUNCTION_RETURN_TRUE);
+        $this->class->start('newId');
 
-        $this->session->start('newId');
-
-        $this->assertTrue($started->getValue($this->session));
-        $this->assertFalse($closed->getValue($this->session));
-        $this->assertEquals('newId', $this->session->get_session_id());
+        $this->assertTrue($this->get_reflection_property_value('started'));
+        $this->assertFalse($this->get_reflection_property_value('closed'));
+        $this->assertEquals('newId', $this->class->get_session_id());
+        $this->unmock_function('session_id');
+        $this->unmock_function('session_start');
     }
 
     /**
@@ -451,17 +389,16 @@ class SessionBaseTest extends SessionTest
      */
     public function testDestroyWorksWhenStarted()
     {
-        $started = $this->session_reflection->getProperty('started');
-        $started->setAccessible(TRUE);
-        $started->setValue($this->session, TRUE);
+        $this->set_reflection_property_value('started', TRUE);
 
         $_SESSION['key'] = 'value';
 
-        runkit_function_redefine('session_destroy', '', self::FUNCTION_RETURN_TRUE);
+        $this->mock_function('session_destroy', self::FUNCTION_RETURN_TRUE);
 
-        $this->session->destroy();
+        $this->class->destroy();
 
-        $this->assertEquals(array(), $_SESSION);
+        $this->assertEquals([], $_SESSION);
+        $this->unmock_function('session_destroy');
     }
 
     /**
@@ -473,13 +410,11 @@ class SessionBaseTest extends SessionTest
      */
     public function testDestroyDoesNothingWhenNotStarted()
     {
-        $started = $this->session_reflection->getProperty('started');
-        $started->setAccessible(TRUE);
-        $started->setValue($this->session, FALSE);
+        $this->set_reflection_property_value('started', FALSE);
 
         $_SESSION['key'] = 'value';
 
-        $this->session->destroy();
+        $this->class->destroy();
 
         $this->assertArrayHasKey('key', $_SESSION);
     }
@@ -492,20 +427,16 @@ class SessionBaseTest extends SessionTest
      */
     public function testCloseSetsParameters()
     {
-        $started = $this->session_reflection->getProperty('started');
-        $started->setAccessible(TRUE);
-        $started->setValue($this->session, TRUE);
+        $this->set_reflection_property_value('started', TRUE);
+        $this->set_reflection_property_value('closed', FALSE);
 
-        $closed = $this->session_reflection->getProperty('closed');
-        $closed->setAccessible(TRUE);
-        $closed->setValue($this->session, FALSE);
+        $this->mock_function('session_write_close', self::FUNCTION_RETURN_TRUE);
 
-        runkit_function_redefine('session_write_close', '', self::FUNCTION_RETURN_TRUE);
+        $this->class->close();
 
-        $this->session->close();
-
-        $this->assertFalse($started->getValue($this->session));
-        $this->assertTrue($closed->getValue($this->session));
+        $this->assertFalse($this->get_reflection_property_value('started'));
+        $this->assertTrue($this->get_reflection_property_value('closed'));
+        $this->unmock_function('session_write_close');
     }
 
 }

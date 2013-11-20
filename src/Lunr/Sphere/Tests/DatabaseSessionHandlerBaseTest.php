@@ -67,8 +67,8 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
         $this->sdao->expects($this->once())
                    ->method('read_session_data')
                    ->with($this->equalTo('sessionid'))
-                   ->will($this->returnValue(array()));
-        $this->assertSame(array(), $this->class->read('sessionid'));
+                   ->will($this->returnValue([]));
+        $this->assertSame([], $this->class->read('sessionid'));
     }
 
     /**

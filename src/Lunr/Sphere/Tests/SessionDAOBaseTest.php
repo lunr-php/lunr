@@ -45,10 +45,10 @@ class SessionDAOBaseTest extends SessionDAOTest
                  ->method('query')
                  ->will($this->returnValue($this->query_result));
 
-        $map_column = array(
-            array('sessionID', '', 'sessionID'),
-            array('expires', '', 'expires')
-        );
+        $map_column = [
+            ['sessionID', '', 'sessionID'],
+            ['expires', '', 'expires']
+        ];
 
         $this->escaper->expects($this->once())
                       ->method('result_column')
@@ -110,10 +110,10 @@ class SessionDAOBaseTest extends SessionDAOTest
                  ->method('query')
                  ->will($this->returnValue($this->query_result));
 
-        $map_column = array(
-            array('sessionID', '', 'sessionID'),
-            array('expires', '', 'expires')
-        );
+        $map_column = [
+            ['sessionID', '', 'sessionID'],
+            ['expires', '', 'expires']
+        ];
 
         $this->escaper->expects($this->once())
                       ->method('result_column')
@@ -255,16 +255,16 @@ class SessionDAOBaseTest extends SessionDAOTest
 
         $time = time();
 
-        $map_column = array(
-            array('sessionID', '', 'sessionID'),
-            array('sessionData', '', 'sessionData'),
-            array('expires', '', 'expires'),
-        );
+        $map_column = [
+            ['sessionID', '', 'sessionID'],
+            ['sessionData', '', 'sessionData'],
+            ['expires', '', 'expires']
+        ];
 
-        $map_value = array(
-            array('myId', '', '', 'myId'),
-            array(base64_encode('myData'), '', '', base64_encode('myData'))
-        );
+        $map_value = [
+            ['myId', '', '', 'myId'],
+            [base64_encode('myData'), '', '', base64_encode('myData')]
+        ];
 
         $this->escaper->expects($this->exactly(2))
                       ->method('table')
@@ -300,11 +300,11 @@ class SessionDAOBaseTest extends SessionDAOTest
         $this->query_builder->expects($this->once())
                             ->method('get_select_query');
 
-        $data = array(
-            'sessionID'   => 'myId',
+        $data = [
+            'sessionID' => 'myId',
             'sessionData' => base64_encode('myData'),
-            'expires'     => $time
-        );
+            'expires' => $time
+        ];
 
         $this->query_builder->expects($this->once())
                             ->method('into')

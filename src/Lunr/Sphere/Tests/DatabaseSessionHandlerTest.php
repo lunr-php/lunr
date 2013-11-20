@@ -50,8 +50,7 @@ abstract class DatabaseSessionHandlerTest extends LunrBaseTest
                            ->disableOriginalConstructor()
                            ->getMock();
 
-        $this->class = new DatabaseSessionHandler($this->sdao);
-
+        $this->class      = new DatabaseSessionHandler($this->sdao);
         $this->reflection = new ReflectionClass('Lunr\Sphere\DatabaseSessionHandler');
     }
 
