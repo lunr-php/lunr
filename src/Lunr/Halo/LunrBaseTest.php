@@ -205,6 +205,18 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
         $this->assertNotEmpty($value);
     }
 
+    /**
+     * Expect that the output generating by the tested method matches the content of the given file.
+     *
+     * @param String $file Path to file to match against
+     *
+     * @return void
+     */
+    protected function expectOutputMatchesFile($file)
+    {
+        $this->expectOutputString(file_get_contents($file));
+    }
+
 }
 
 ?>
