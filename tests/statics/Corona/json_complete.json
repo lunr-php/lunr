@@ -1,0 +1,18 @@
+{
+    "data": {
+        "a": 100,
+        "b": {
+            "z": true
+        },
+        "c": [
+            null
+        ],
+        "d": {
+
+        }
+    },
+    "status": {
+        "code": 4040,
+        "message": "Message"
+    }
+}
