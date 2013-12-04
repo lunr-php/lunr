@@ -102,7 +102,7 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
     public function push()
     {
         $this->curl->set_option('CURLOPT_HEADER', TRUE);
-        $this->curl->set_http_headers('Content-Type:application/json', 'Authorization:key=' . $this->auth_token);
+        $this->curl->set_http_headers(['Content-Type:application/json', 'Authorization: key=' . $this->auth_token]);
 
         $tmp_payload                     = json_decode($this->payload, TRUE);
         $tmp_payload['registration_ids'] = [$this->endpoint];
