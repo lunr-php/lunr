@@ -75,6 +75,22 @@ abstract class JsonViewTest extends LunrBaseTest
         unset($this->reflection);
     }
 
+    /**
+     * Unit Test Data Provider for non-integer error info values.
+     *
+     * @return array $info Array of non-integer error info values.
+     */
+    public function invalidErrorInfoProvider()
+    {
+        $info   = [];
+        $info[] = [ 'string' ];
+        $info[] = [ NULL ];
+        $info[] = [ '404_1' ];
+        $info[] = [ '404.1' ];
+
+        return $info;
+    }
+
 }
 
 ?>
