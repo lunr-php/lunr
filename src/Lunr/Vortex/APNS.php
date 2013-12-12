@@ -18,6 +18,8 @@
 
 namespace Lunr\Vortex;
 
+use Lunr\Core\Output;
+
 /**
  * Apple Push Notifications System Library
  *
