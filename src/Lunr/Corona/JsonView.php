@@ -69,6 +69,11 @@ class JsonView extends View
         $json['status']['code']    = !is_numeric($info) || is_float($info + 1) ? $code : $info;
         $json['status']['message'] = is_null($msg) ? '' : $msg;
 
+        if ($json['data'] === [])
+        {
+            $json['data'] = new \stdClass();
+        }
+
         header('Content-type: application/json');
         http_response_code($code);
 

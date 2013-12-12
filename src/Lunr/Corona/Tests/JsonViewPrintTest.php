@@ -230,6 +230,51 @@ class JsonViewPrintTest extends JsonViewTest
     }
 
     /**
+     * Test that print_page() with empty data value.
+     *
+     * @covers Lunr\Corona\JsonView::print_page
+     */
+    public function testPrintPageWithEmptyData()
+    {
+        $this->response->expects($this->once())
+                       ->method('get_return_code_identifiers')
+                       ->with($this->equalTo(TRUE))
+                       ->will($this->returnValue('id'));
+
+        $this->response->expects($this->once())
+                       ->method('get_error_info')
+                       ->with($this->equalTo('id'))
+                       ->will($this->returnValue(4040));
+
+        $this->response->expects($this->once())
+                       ->method('get_error_message')
+                       ->with($this->equalTo('id'))
+                       ->will($this->returnValue('Message'));
+
+        $this->response->expects($this->once())
+                       ->method('get_return_code')
+                       ->with($this->equalTo('id'))
+                       ->will($this->returnValue(404));
+
+        $this->response->expects($this->once())
+                       ->method('get_response_data')
+                       ->will($this->returnValue([]));
+
+        $this->request->expects($this->once())
+                      ->method('__get')
+                      ->with($this->equalTo('sapi'))
+                      ->will($this->returnValue('cli'));
+
+        $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_empty_data.json');
+
+        $this->mock_function('header', '');
+
+        $this->class->print_page();
+
+        $this->unmock_function('header');
+    }
+
+    /**
      * Test that print_page() sets the proper JSON content type.
      *
      * @runInSeparateProcess
