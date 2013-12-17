@@ -76,6 +76,13 @@ abstract class View
     abstract public function print_page();
 
     /**
+     * Build display for Fatal Error output.
+     *
+     * @return void
+     */
+    abstract public function print_fatal_error();
+
+    /**
      * Return base_url or attach given path to base_url.
      *
      * @param String $path Path that should be attached to base_url (optional)

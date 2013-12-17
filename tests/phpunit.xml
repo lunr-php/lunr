@@ -59,6 +59,7 @@
             <file>src/Lunr/Corona/Tests/HTMLViewHelpersTest.php</file>
             <file>src/Lunr/Corona/Tests/JsonViewBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/JsonViewPrintTest.php</file>
+            <file>src/Lunr/Corona/Tests/JsonViewPrintFatalErrorTest.php</file>
         </testsuite>
         <testsuite name="Feedback">
             <file>src/Lunr/Feedback/Tests/PSR3LoggerTest.php</file>

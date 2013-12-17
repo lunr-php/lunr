@@ -87,6 +87,41 @@ class JsonView extends View
         }
     }
 
+    /**
+     * Build display for Fatal Error output.
+     *
+     * @return void
+     */
+    public function print_fatal_error()
+    {
+        $error = error_get_last();
+
+        if (($error === NULL) || ($error['type'] !== E_ERROR))
+        {
+            return;
+        }
+
+        $json = [];
+
+        $json['data']   = [];
+        $json['status'] = [];
+
+        $json['status']['code']    = 500;
+        $json['status']['message'] = $error['message'] . " in " . $error['file'] . " on line " . $error['line'];
+
+        header('Content-type: application/json');
+        http_response_code(500);
+
+        if ($this->request->sapi == 'cli')
+        {
+            echo json_encode($json, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT) . "\n";
+        }
+        else
+        {
+            echo json_encode($json, JSON_FORCE_OBJECT);
+        }
+    }
+
 }
 
 ?>

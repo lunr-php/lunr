@@ -1,0 +1,9 @@
+{
+    "data": {
+
+    },
+    "status": {
+        "code": 500,
+        "message": "Message in index.php on line 2"
+    }
+}
