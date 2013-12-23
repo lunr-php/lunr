@@ -115,7 +115,7 @@
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderConditionalTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderSelectTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderFluidInterfaceTest.php</file>
-            <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionTest.php</file>
+            <file>src/Lunr/Gravity/Database/Tests/DatabaseConnectionBaseTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionBaseTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionSetTest.php</file>
             <file>src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionConnectTest.php</file>

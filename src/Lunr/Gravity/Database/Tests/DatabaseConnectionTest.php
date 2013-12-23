@@ -16,7 +16,7 @@
 namespace Lunr\Gravity\Database\Tests;
 
 use Lunr\Gravity\Database\DatabaseConnection;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -28,32 +28,20 @@ use ReflectionClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Gravity\Database\DatabaseConnection
  */
-class DatabaseConnectionTest extends PHPUnit_Framework_TestCase
+abstract class DatabaseConnectionTest extends LunrBaseTest
 {
 
     /**
      * Mock instance of the Configuration class.
      * @var Configuration
      */
-    private $configuration;
+    protected $configuration;
 
     /**
      * Mock instance of a Logger class.
      * @var LoggerInterface
      */
-    private $logger;
-
-    /**
-     * Mock instance of the DatabaseConnection class.
-     * @var DatabaseConnection
-     */
-    private $db;
-
-    /**
-     * Reflection instance of the DatabaseConnection class.
-     * @var ReflectionClass
-     */
-    private $db_reflection;
+    protected $logger;
 
     /**
      * TestCase Constructor.
@@ -64,11 +52,11 @@ class DatabaseConnectionTest extends PHPUnit_Framework_TestCase
 
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->db = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseConnection')
-                         ->setConstructorArgs(array(&$this->configuration, &$this->logger))
-                         ->getMockForAbstractClass();
+        $this->class = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseConnection')
+                            ->setConstructorArgs(array(&$this->configuration, &$this->logger))
+                            ->getMockForAbstractClass();
 
-        $this->db_reflection = new ReflectionClass('Lunr\Gravity\Database\DatabaseConnection');
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\DatabaseConnection');
     }
 
     /**
@@ -78,105 +66,8 @@ class DatabaseConnectionTest extends PHPUnit_Framework_TestCase
     {
         unset($this->configuration);
         unset($this->logger);
-        unset($this->db);
-        unset($this->db_reflection);
-    }
-
-    /**
-     * Test that the Configuration class is passed by reference.
-     */
-    public function testConfigurationIsPassedByReference()
-    {
-        $property = $this->db_reflection->getProperty('configuration');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->db);
-
-        $this->assertInstanceOf('Lunr\Core\Configuration', $value);
-        $this->assertSame($this->configuration, $value);
-    }
-
-    /**
-     * Test that the Logger class is passed by reference.
-     */
-    public function testLoggerIsPassedByReference()
-    {
-        $property = $this->db_reflection->getProperty('logger');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->db);
-
-        $this->assertInstanceOf('Psr\Log\LoggerInterface', $value);
-        $this->assertSame($this->logger, $value);
-    }
-
-    /**
-     * Test that the connected flag is set to FALSE by default.
-     */
-    public function testConnectedIsFalse()
-    {
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-
-        $this->assertFalse($property->getValue($this->db));
-    }
-
-    /**
-     * Test that the readonly flag is set to TRUE by default.
-     */
-    public function testReadonlyIsFalseByDefault()
-    {
-        $property = $this->db_reflection->getProperty('readonly');
-        $property->setAccessible(TRUE);
-
-        $this->assertFalse($property->getValue($this->db));
-    }
-
-    /**
-     * Test that by default we don't have a QueryEscaper instance.
-     */
-    public function testEscaperIsNull()
-    {
-        $property = $this->db_reflection->getProperty('escaper');
-        $property->setAccessible(TRUE);
-
-        $this->assertNull($property->getValue($this->db));
-    }
-
-    /**
-     * Test that set_readonly sets the readonly flag when passed TRUE.
-     *
-     * @depends testReadonlyIsFalseByDefault
-     * @covers  Lunr\Gravity\Database\DatabaseConnection::set_readonly
-     */
-    public function testSetReadonlySetsReadonlyWhenPassedTrue()
-    {
-        $property = $this->db_reflection->getProperty('readonly');
-        $property->setAccessible(TRUE);
-
-        $this->db->set_readonly(TRUE);
-
-        $this->assertTrue($property->getValue($this->db));
-    }
-
-    /**
-     * Test that set_readonly unsets the readonly flag when passed FALSE.
-     *
-     * @depends testSetReadonlySetsReadonlyWhenPassedTrue
-     * @covers  Lunr\Gravity\Database\DatabaseConnection::set_readonly
-     */
-    public function testSetReadonlySetsReadwriteWhenPassedFalse()
-    {
-        $property = $this->db_reflection->getProperty('readonly');
-        $property->setAccessible(TRUE);
-
-        $this->db->set_readonly(TRUE);
-
-        $this->assertTrue($property->getValue($this->db));
-
-        $this->db->set_readonly(FALSE);
-
-        $this->assertFalse($property->getValue($this->db));
+        unset($this->class);
+        unset($this->reflection);
     }
 
 }
