@@ -38,17 +38,16 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      */
     public function testBeginTransactionStartsTransactionWhenConnected()
     {
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
+        $property = $this->get_accessible_reflection_property('connected');
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->once())
                      ->method('autocommit')
                      ->will($this->returnValue(TRUE));
 
-        $this->assertTrue($this->db->begin_transaction());
+        $this->assertTrue($this->class->begin_transaction());
 
-        $property->setValue($this->db, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -60,11 +59,9 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->db->begin_transaction());
+        $this->assertFalse($this->class->begin_transaction());
     }
 
     /**
@@ -75,17 +72,16 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      */
     public function testCommitWhenConnected()
     {
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
+        $property = $this->get_accessible_reflection_property('connected');
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->once())
                      ->method('commit')
                      ->will($this->returnValue(TRUE));
 
-        $this->assertTrue($this->db->commit());
+        $this->assertTrue($this->class->commit());
 
-        $property->setValue($this->db, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -97,11 +93,9 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->db->commit());
+        $this->assertFalse($this->class->commit());
     }
 
     /**
@@ -112,17 +106,16 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      */
     public function testRollbackWhenConnected()
     {
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
+        $property = $this->get_accessible_reflection_property('connected');
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->once())
                      ->method('rollback')
                      ->will($this->returnValue(TRUE));
 
-        $this->assertTrue($this->db->rollback());
+        $this->assertTrue($this->class->rollback());
 
-        $property->setValue($this->db, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -134,11 +127,9 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->db->rollback());
+        $this->assertFalse($this->class->rollback());
     }
 
     /**
@@ -149,17 +140,16 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      */
     public function testEndTransactionWhenConnected()
     {
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
+        $property = $this->get_accessible_reflection_property('connected');
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->once())
                      ->method('autocommit')
                      ->will($this->returnValue(TRUE));
 
-        $this->assertTrue($this->db->end_transaction());
+        $this->assertTrue($this->class->end_transaction());
 
-        $property->setValue($this->db, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -171,11 +161,9 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->db->end_transaction());
+        $this->assertFalse($this->class->end_transaction());
     }
 
 }

@@ -38,11 +38,9 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $query = $this->db->query('query');
+        $query = $this->class->query('query');
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLQueryResult', $query);
         $this->assertTrue($query->has_failed());
@@ -58,19 +56,14 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
-
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
+        $this->set_reflection_property_value('mysqli', $mysqli);
+        $this->set_reflection_property_value('connected', TRUE);
 
         $mysqli->expects($this->once())
                ->method('query')
                ->will($this->returnValue(TRUE));
 
-        $query = $this->db->query('query');
+        $query = $this->class->query('query');
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLQueryResult', $query);
         $this->assertFalse($query->has_failed());
@@ -86,24 +79,16 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
-
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
-
-        $hint = $this->db_reflection->getProperty('query_hint');
-        $hint->setAccessible(TRUE);
-        $hint->setValue($this->db, '/*hint*/');
+        $this->set_reflection_property_value('mysqli', $mysqli);
+        $this->set_reflection_property_value('connected', TRUE);
+        $this->set_reflection_property_value('query_hint', '/*hint*/');
 
         $mysqli->expects($this->once())
                ->method('query')
                ->with($this->equalTo('/*hint*/query'))
                ->will($this->returnValue(TRUE));
 
-        $query = $this->db->query('query');
+        $query = $this->class->query('query');
 
         $this->assertEquals('/*hint*/query', $query->query());
     }
@@ -118,26 +103,20 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
+        $this->set_reflection_property_value('connected', TRUE);
 
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
-
-        $hint = $this->db_reflection->getProperty('query_hint');
-        $hint->setAccessible(TRUE);
-        $hint->setValue($this->db, '/*hint*/');
+        $hint = $this->get_accessible_reflection_property('query_hint');
+        $hint->setValue($this->class, '/*hint*/');
 
         $mysqli->expects($this->once())
                ->method('query')
                ->with($this->equalTo('/*hint*/query'))
                ->will($this->returnValue(TRUE));
 
-        $this->db->query('query');
+        $this->class->query('query');
 
-        $this->assertSame('', $hint->getValue($this->db));
+        $this->assertSame('', $hint->getValue($this->class));
     }
 
     /**
@@ -149,11 +128,9 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $query = $this->db->async_query('query');
+        $query = $this->class->async_query('query');
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLQueryResult', $query);
         $this->assertTrue($query->has_failed());
@@ -169,13 +146,10 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
+        $property = $this->get_accessible_reflection_property('connected');
+        $property->setValue($this->class, TRUE);
 
         $mysqli->expects($this->once())
                ->method('query');
@@ -184,12 +158,12 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
                ->method('reap_async_query')
                ->will($this->returnValue(TRUE));
 
-        $query = $this->db->async_query('query');
+        $query = $this->class->async_query('query');
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult', $query);
         $this->assertFalse($query->has_failed());
 
-        $property->setValue($this->db, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -202,23 +176,15 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
-
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
-
-        $hint = $this->db_reflection->getProperty('query_hint');
-        $hint->setAccessible(TRUE);
-        $hint->setValue($this->db, '/*hint*/');
+        $this->set_reflection_property_value('mysqli', $mysqli);
+        $this->set_reflection_property_value('connected', TRUE);
+        $this->set_reflection_property_value('query_hint', '/*hint*/');
 
         $mysqli->expects($this->once())
                ->method('query')
                ->with($this->equalTo('/*hint*/query'), $this->equalTo(MYSQLI_ASYNC));
 
-        $query = $this->db->async_query('query');
+        $query = $this->class->async_query('query');
 
         $this->assertEquals('/*hint*/query', $query->query());
     }
@@ -233,25 +199,19 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
+        $this->set_reflection_property_value('connected', TRUE);
 
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
-
-        $hint = $this->db_reflection->getProperty('query_hint');
-        $hint->setAccessible(TRUE);
-        $hint->setValue($this->db, '/*hint*/');
+        $hint = $this->get_accessible_reflection_property('query_hint');
+        $hint->setValue($this->class, '/*hint*/');
 
         $mysqli->expects($this->once())
                ->method('query')
                ->with($this->equalTo('/*hint*/query'), $this->equalTo(MYSQLI_ASYNC));
 
-        $this->db->async_query('query');
+        $this->class->async_query('query');
 
-        $this->assertSame('', $hint->getValue($this->db));
+        $this->assertSame('', $hint->getValue($this->class));
     }
 
 }

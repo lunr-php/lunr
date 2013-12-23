@@ -16,7 +16,7 @@
 namespace Lunr\Gravity\Database\MySQL\Tests;
 
 use Lunr\Gravity\Database\MySQL\MySQLConnection;
-use PHPUnit_Framework_TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -29,20 +29,8 @@ use ReflectionClass;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Gravity\Database\MySQL\MySQLConnection
  */
-abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
+abstract class MySQLConnectionTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the MySQLConnection class.
-     * @var MySQLConnection
-     */
-    protected $db;
-
-    /**
-     * Reflection instance of the MySQLConnection class.
-     * @var ReflectionClass
-     */
-    protected $db_reflection;
 
     /**
      * Mock instance of the sub Configuration class.
@@ -84,16 +72,16 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
         );
 
         $this->configuration->expects($this->any())
-                      ->method('offsetGet')
-                      ->will($this->returnValueMap($map));
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap($map));
 
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->mysqli = $this->getMock('\mysqli');
 
-        $this->db = new MySQLConnection($this->configuration, $this->logger, $this->mysqli);
+        $this->class = new MySQLConnection($this->configuration, $this->logger, $this->mysqli);
 
-        $this->db_reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLConnection');
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLConnection');
     }
 
     /**
@@ -110,8 +98,8 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
         );
 
         $this->configuration->expects($this->any())
-                      ->method('offsetGet')
-                      ->will($this->returnValueMap($map));
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap($map));
 
         $map = array(
             array('rw_host', 'rw_host'),
@@ -122,16 +110,16 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
         );
 
         $this->sub_configuration->expects($this->any())
-                      ->method('offsetGet')
-                      ->will($this->returnValueMap($map));
+                                ->method('offsetGet')
+                                ->will($this->returnValueMap($map));
 
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->mysqli = $this->getMock('\mysqli');
 
-        $this->db = new MySQLConnection($this->configuration, $this->logger, $this->mysqli);
+        $this->class = new MySQLConnection($this->configuration, $this->logger, $this->mysqli);
 
-        $this->db_reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLConnection');
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLConnection');
     }
 
     /**
@@ -139,8 +127,8 @@ abstract class MySQLConnectionTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->db);
-        unset($this->db_reflection);
+        unset($this->class);
+        unset($this->reflection);
         unset($this->configuration);
         unset($this->logger);
     }

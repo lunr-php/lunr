@@ -38,11 +38,9 @@ class MySQLConnectionEscapeTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->db->escape_string('string'));
+        $this->assertFalse($this->class->escape_string('string'));
     }
 
     /**
@@ -58,19 +56,18 @@ class MySQLConnectionEscapeTest extends MySQLConnectionTest
      */
     public function testEscapeString($string, $part_escaped, $escaped)
     {
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
+        $property = $this->get_accessible_reflection_property('connected');
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->once())
                      ->method('escape_string')
                      ->will($this->returnValue($part_escaped));
 
-        $value = $this->db->escape_string($string);
+        $value = $this->class->escape_string($string);
 
         $this->assertEquals($escaped, $value);
 
-        $property->setValue($this->db, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
 }

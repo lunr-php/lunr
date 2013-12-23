@@ -15,8 +15,6 @@
 
 namespace Lunr\Gravity\Database\MySQL\Tests;
 
-use Lunr\Gravity\Database\MySQL\MySQLConnection;
-
 /**
  * This class contains test for the setters of the MySQLConnection class.
  *
@@ -44,29 +42,25 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      */
     public function testSetConfigurationSetsRWHostCorrectly()
     {
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('driver', 'mysql')
-        );
+        $map = [
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'driver', 'mysql' ]
+        ];
 
         $this->sub_configuration->expects($this->any())
-                      ->method('offsetGet')
-                      ->will($this->returnValueMap($map));
+                                ->method('offsetGet')
+                                ->will($this->returnValueMap($map));
 
-        $property = $this->db_reflection->getProperty('rw_host');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('rw_host');
+        $property->setValue($this->class, '');
 
-        $property->setValue($this->db, '');
+        $method = $this->get_accessible_reflection_method('set_configuration');
+        $method->invoke($this->class);
 
-        $method = $this->db_reflection->getMethod('set_configuration');
-        $method->setAccessible(TRUE);
-
-        $method->invoke($this->db);
-
-        $this->assertEquals('rw_host', $property->getValue($this->db));
+        $this->assertPropertyEquals('rw_host', $property->getValue($this->class));
     }
 
     /**
@@ -76,29 +70,25 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      */
     public function testSetConfigurationSetsUsernameCorrectly()
     {
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('driver', 'mysql')
-        );
+        $map = [
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'driver', 'mysql' ]
+        ];
 
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $property = $this->db_reflection->getProperty('user');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('user');
+        $property->setValue($this->class, '');
 
-        $property->setValue($this->db, '');
+        $method = $this->get_accessible_reflection_method('set_configuration');
+        $method->invoke($this->class);
 
-        $method = $this->db_reflection->getMethod('set_configuration');
-        $method->setAccessible(TRUE);
-
-        $method->invoke($this->db);
-
-        $this->assertEquals('username', $property->getValue($this->db));
+        $this->assertEquals('username', $property->getValue($this->class));
     }
 
     /**
@@ -108,29 +98,25 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      */
     public function testSetConfigurationSetsPasswordCorrectly()
     {
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('driver', 'mysql')
-        );
+        $map = [
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'driver', 'mysql' ]
+        ];
 
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $property = $this->db_reflection->getProperty('pwd');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('pwd');
+        $property->setValue($this->class, '');
 
-        $property->setValue($this->db, '');
+        $method = $this->get_accessible_reflection_method('set_configuration');
+        $method->invoke($this->class);
 
-        $method = $this->db_reflection->getMethod('set_configuration');
-        $method->setAccessible(TRUE);
-
-        $method->invoke($this->db);
-
-        $this->assertEquals('password', $property->getValue($this->db));
+        $this->assertEquals('password', $property->getValue($this->class));
     }
 
     /**
@@ -140,29 +126,25 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      */
     public function testSetConfigurationSetsDatabaseCorrectly()
     {
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('driver', 'mysql')
-        );
+        $map = [
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'driver', 'mysql' ]
+        ];
 
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $property = $this->db_reflection->getProperty('db');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('db');
+        $property->setValue($this->class, '');
 
-        $property->setValue($this->db, '');
+        $method = $this->get_accessible_reflection_method('set_configuration');
+        $method->invoke($this->class);
 
-        $method = $this->db_reflection->getMethod('set_configuration');
-        $method->setAccessible(TRUE);
-
-        $method->invoke($this->db);
-
-        $this->assertEquals('database', $property->getValue($this->db));
+        $this->assertEquals('database', $property->getValue($this->class));
     }
 
     /**
@@ -172,29 +154,25 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      */
     public function testSetConfigurationSetsROHostToRWHostIfItIsNotSet()
     {
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('driver', 'mysql')
-        );
+        $map = [
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'driver', 'mysql' ]
+        ];
 
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $property = $this->db_reflection->getProperty('ro_host');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('ro_host');
+        $property->setValue($this->class, '');
 
-        $property->setValue($this->db, '');
+        $method = $this->get_accessible_reflection_method('set_configuration');
+        $method->invoke($this->class);
 
-        $method = $this->db_reflection->getMethod('set_configuration');
-        $method->setAccessible(TRUE);
-
-        $method->invoke($this->db);
-
-        $this->assertEquals('rw_host', $property->getValue($this->db));
+        $this->assertEquals('rw_host', $property->getValue($this->class));
     }
 
     /**
@@ -204,30 +182,26 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      */
     public function testSetConfigurationSetsROHostToRWHostIfItIsEmpty()
     {
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('ro_host', ''),
-            array('driver', 'mysql')
-        );
+        $map = [
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'ro_host', '' ],
+            [ 'driver', 'mysql' ]
+        ];
 
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $property = $this->db_reflection->getProperty('ro_host');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('ro_host');
+        $property->setValue($this->class, '');
 
-        $property->setValue($this->db, '');
+        $method = $this->get_accessible_reflection_method('set_configuration');
+        $method->invoke($this->class);
 
-        $method = $this->db_reflection->getMethod('set_configuration');
-        $method->setAccessible(TRUE);
-
-        $method->invoke($this->db);
-
-        $this->assertEquals('rw_host', $property->getValue($this->db));
+        $this->assertEquals('rw_host', $property->getValue($this->class));
     }
 
     /**
@@ -237,14 +211,14 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      */
     public function testSetConfigurationSetsROHostCorrectly()
     {
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('ro_host', 'ro_host'),
-            array('driver', 'mysql')
-        );
+        $map = [
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'ro_host', 'ro_host' ],
+            [ 'driver', 'mysql' ]
+        ];
 
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
@@ -254,17 +228,13 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
                       ->method('offsetExists')
                       ->will($this->returnValue(TRUE));
 
-        $property = $this->db_reflection->getProperty('ro_host');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('ro_host');
+        $property->setValue($this->class, '');
 
-        $property->setValue($this->db, '');
+        $method = $this->get_accessible_reflection_method('set_configuration');
+        $method->invoke($this->class);
 
-        $method = $this->db_reflection->getMethod('set_configuration');
-        $method->setAccessible(TRUE);
-
-        $method->invoke($this->db);
-
-        $this->assertEquals('ro_host', $property->getValue($this->db));
+        $this->assertEquals('ro_host', $property->getValue($this->class));
     }
 
     /**
@@ -274,29 +244,25 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      */
     public function testSetConfigurationSetsPortToIniValueIfNotSet()
     {
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('driver', 'mysql')
-        );
+        $map = [
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'driver', 'mysql' ]
+        ];
 
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $property = $this->db_reflection->getProperty('port');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('port');
+        $property->setValue($this->class, '');
 
-        $property->setValue($this->db, '');
+        $method = $this->get_accessible_reflection_method('set_configuration');
+        $method->invoke($this->class);
 
-        $method = $this->db_reflection->getMethod('set_configuration');
-        $method->setAccessible(TRUE);
-
-        $method->invoke($this->db);
-
-        $this->assertEquals(ini_get('mysqli.default_port'), $property->getValue($this->db));
+        $this->assertEquals(ini_get('mysqli.default_port'), $property->getValue($this->class));
     }
 
     /**
@@ -306,30 +272,26 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      */
     public function testSetConfigurationSetsPortCorrectly()
     {
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('port', 'port'),
-            array('driver', 'mysql')
-        );
+        $map = [
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'port', 'port' ],
+            [ 'driver', 'mysql' ]
+        ];
 
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $property = $this->db_reflection->getProperty('port');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('port');
+        $property->setValue($this->class, '');
 
-        $property->setValue($this->db, '');
+        $method = $this->get_accessible_reflection_method('set_configuration');
+        $method->invoke($this->class);
 
-        $method = $this->db_reflection->getMethod('set_configuration');
-        $method->setAccessible(TRUE);
-
-        $method->invoke($this->db);
-
-        $this->assertEquals('port', $property->getValue($this->db));
+        $this->assertEquals('port', $property->getValue($this->class));
     }
 
     /**
@@ -339,29 +301,25 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      */
     public function testSetConfigurationSetsSocketToIniValueIfNotSet()
     {
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('driver', 'mysql')
-        );
+        $map = [
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'driver', 'mysql' ]
+        ];
 
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $property = $this->db_reflection->getProperty('socket');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('socket');
+        $property->setValue($this->class, '');
 
-        $property->setValue($this->db, '');
+        $method = $this->get_accessible_reflection_method('set_configuration');
+        $method->invoke($this->class);
 
-        $method = $this->db_reflection->getMethod('set_configuration');
-        $method->setAccessible(TRUE);
-
-        $method->invoke($this->db);
-
-        $this->assertEquals(ini_get('mysqli.default_socket'), $property->getValue($this->db));
+        $this->assertEquals(ini_get('mysqli.default_socket'), $property->getValue($this->class));
     }
 
     /**
@@ -371,30 +329,26 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      */
     public function testSetConfigurationSetsSocketCorrectly()
     {
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('socket', 'socket'),
-            array('driver', 'mysql')
-        );
+        $map = [
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'socket', 'socket' ],
+            [ 'driver', 'mysql' ]
+        ];
 
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $property = $this->db_reflection->getProperty('socket');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('socket');
+        $property->setValue($this->class, '');
 
-        $property->setValue($this->db, '');
+        $method = $this->get_accessible_reflection_method('set_configuration');
+        $method->invoke($this->class);
 
-        $method = $this->db_reflection->getMethod('set_configuration');
-        $method->setAccessible(TRUE);
-
-        $method->invoke($this->db);
-
-        $this->assertEquals('socket', $property->getValue($this->db));
+        $this->assertEquals('socket', $property->getValue($this->class));
     }
 
 }

@@ -38,13 +38,8 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testSuccessfulConnectReadonly()
     {
-        $readonly = $this->db_reflection->getProperty('readonly');
-        $readonly->setAccessible(TRUE);
-        $readonly->setValue($this->db, TRUE);
-
-        $ro_host = $this->db_reflection->getProperty('ro_host');
-        $ro_host->setAccessible(TRUE);
-        $ro_host->setValue($this->db, 'ro_host');
+        $this->set_reflection_property_value('readonly', TRUE);
+        $this->set_reflection_property_value('ro_host', 'ro_host');
 
         $port   = ini_get('mysqli.default_port');
         $socket = ini_get('mysqli.default_socket');
@@ -56,14 +51,13 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
         $this->mysqli->expects($this->once())
                      ->method('set_charset');
 
-        $this->db->connect();
+        $this->class->connect();
 
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('connected');
 
-        $this->assertTrue($property->getValue($this->db));
+        $this->assertTrue($property->getValue($this->class));
 
-        $property->setValue($this->db, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -84,14 +78,13 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
         $this->mysqli->expects($this->once())
                      ->method('set_charset');
 
-        $this->db->connect();
+        $this->class->connect();
 
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('connected');
 
-        $this->assertTrue($property->getValue($this->db));
+        $this->assertTrue($property->getValue($this->class));
 
-        $property->setValue($this->db, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -103,16 +96,14 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->db->connect();
+        $this->class->connect();
 
-        $property = $this->db_reflection->getProperty('connected');
+        $property = $this->reflection->getProperty('connected');
         $property->setAccessible(TRUE);
 
-        $this->assertFalse($property->getValue($this->db));
+        $this->assertFalse($this->get_reflection_property_value('connected'));
     }
 
     /**
@@ -122,18 +113,19 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testConnectDoesNotReconnectWhenAlreadyConnected()
     {
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
+        $property = $this->get_accessible_reflection_property('connected');
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('connect');
 
-        $this->db->connect();
+        $this->class->connect();
 
-        $this->assertTrue($property->getValue($this->db));
+        $property = $this->get_accessible_reflection_property('connected');
 
-        $property->setValue($this->db, FALSE);
+        $this->assertTrue($property->getValue($this->class));
+
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -147,34 +139,30 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
 
         $configuration = $this->getMock('Lunr\Core\Configuration');
 
-        $map = array(
-            array('db', $sub_configuration),
-        );
+        $map = [[ 'db', $sub_configuration ]];
 
         $configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('driver', 'not_mysql')
-        );
+        $map = [
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'driver', 'not_mysql' ]
+        ];
 
         $sub_configuration->expects($this->any())
-                      ->method('offsetGet')
-                      ->will($this->returnValueMap($map));
+                          ->method('offsetGet')
+                          ->will($this->returnValueMap($map));
 
-        $config = $this->db_reflection->getProperty('configuration');
-        $config->setAccessible(TRUE);
-        $config->setValue($this->db, $configuration);
+        $this->set_reflection_property_value('configuration', $configuration);
 
         $this->logger->expects($this->once())
                      ->method('error');
 
-        $this->db->connect();
+        $this->class->connect();
     }
 
     /**
@@ -184,17 +172,14 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testDisconnectDoesNotTryToDisconnectWhenNotConnected()
     {
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-
         $this->mysqli->expects($this->never())
                      ->method('kill');
         $this->mysqli->expects($this->never())
                      ->method('close');
 
-        $this->db->disconnect();
+        $this->class->disconnect();
 
-        $this->assertFalse($property->getValue($this->db));
+        $this->assertFalse($this->get_reflection_property_value('connected'));
     }
 
     /**
@@ -207,20 +192,17 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->db->connect();
+        $this->class->connect();
 
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
+        $property = $this->get_accessible_reflection_property('connected');
 
-        $this->assertTrue($property->getValue($this->db));
+        $this->assertTrue($property->getValue($this->class));
 
-        $this->db->disconnect();
+        $this->class->disconnect();
 
-        $this->assertFalse($property->getValue($this->db));
+        $this->assertFalse($property->getValue($this->class));
     }
 
     /**
@@ -232,11 +214,9 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->db->change_database('new_db'));
+        $this->assertFalse($this->class->change_database('new_db'));
     }
 
     /**
@@ -247,16 +227,16 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testChangeDatabaseReturnsFalseWhenSelectDBFailed()
     {
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
+        $property = $this->get_accessible_reflection_property('connected');
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->once())
                      ->method('select_db')
                      ->will($this->returnValue(FALSE));
 
-        $this->assertFalse($this->db->change_database('new_db'));
-        $property->setValue($this->db, FALSE);
+        $this->assertFalse($this->class->change_database('new_db'));
+
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -267,16 +247,16 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testChangeDatabaseReturnsTrueWhenSelectDBWorked()
     {
-        $property = $this->db_reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, TRUE);
+        $property = $this->get_accessible_reflection_property('connected');
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->once())
                      ->method('select_db')
                      ->will($this->returnValue(TRUE));
 
-        $this->assertTrue($this->db->change_database('new_db'));
-        $property->setValue($this->db, FALSE);
+        $this->assertTrue($this->class->change_database('new_db'));
+
+        $property->setValue($this->class, FALSE);
     }
 
 }

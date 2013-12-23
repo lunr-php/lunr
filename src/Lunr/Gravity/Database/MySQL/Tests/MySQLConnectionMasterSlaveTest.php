@@ -41,12 +41,9 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      */
     public function testRunOnMasterSetsCorrectQueryHint()
     {
-        $this->db->run_on_master();
+        $this->class->run_on_master();
 
-        $property = $this->db_reflection->getProperty('query_hint');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('/*' . MYSQLND_MS_MASTER_SWITCH . '*/', $property->getValue($this->db));
+        $this->assertPropertyEquals('query_hint', '/*' . MYSQLND_MS_MASTER_SWITCH . '*/');
     }
 
     /**
@@ -57,12 +54,9 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      */
     public function testRunOnSlaveSetsCorrectQueryHint()
     {
-        $this->db->run_on_slave();
+        $this->class->run_on_slave();
 
-        $property = $this->db_reflection->getProperty('query_hint');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('/*' . MYSQLND_MS_SLAVE_SWITCH . '*/', $property->getValue($this->db));
+        $this->assertPropertyEquals('query_hint', '/*' . MYSQLND_MS_SLAVE_SWITCH . '*/');
     }
 
     /**
@@ -73,12 +67,9 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      */
     public function testRunOnLastUsedSetsCorrectQueryHint()
     {
-        $this->db->run_on_last_used();
+        $this->class->run_on_last_used();
 
-        $property = $this->db_reflection->getProperty('query_hint');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('/*' . MYSQLND_MS_LAST_USED_SWITCH . '*/', $property->getValue($this->db));
+        $this->assertPropertyEquals('query_hint', '/*' . MYSQLND_MS_LAST_USED_SWITCH . '*/');
     }
 
     /**
@@ -88,7 +79,7 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      */
     public function testRunOnMasterReturnsSelfReference()
     {
-        $this->assertSame($this->db, $this->db->run_on_master());
+        $this->assertSame($this->class, $this->class->run_on_master());
     }
 
     /**
@@ -98,7 +89,7 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      */
     public function testRunOnSlaveReturnsSelfReference()
     {
-        $this->assertSame($this->db, $this->db->run_on_slave());
+        $this->assertSame($this->class, $this->class->run_on_slave());
     }
 
     /**
@@ -108,7 +99,7 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      */
     public function testRunOnLastUsedReturnsSelfReference()
     {
-        $this->assertSame($this->db, $this->db->run_on_last_used());
+        $this->assertSame($this->class, $this->class->run_on_last_used());
     }
 
     /**
@@ -118,11 +109,9 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      */
     public function testGetQosPolicyReturnsCurrentlySetPolicy()
     {
-        $property = $this->db_reflection->getProperty('qos_policy');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->db, MYSQLND_MS_QOS_CONSISTENCY_SESSION);
+        $this->set_reflection_property_value('qos_policy', MYSQLND_MS_QOS_CONSISTENCY_SESSION);
 
-        $this->assertSame(MYSQLND_MS_QOS_CONSISTENCY_SESSION, $this->db->get_qos_policy());
+        $this->assertSame(MYSQLND_MS_QOS_CONSISTENCY_SESSION, $this->class->get_qos_policy());
     }
 
     /**
@@ -138,7 +127,7 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
     {
         runkit_function_redefine('mysqlnd_ms_set_qos', '', self::SET_QOS_WORKS);
 
-        $this->assertTrue($this->db->set_qos_policy(MYSQLND_MS_QOS_CONSISTENCY_SESSION));
+        $this->assertTrue($this->class->set_qos_policy(MYSQLND_MS_QOS_CONSISTENCY_SESSION));
     }
 
     /**
@@ -152,11 +141,9 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
 
-        $class = $this->db_reflection->getProperty('mysqli');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->db, $mysqli);
+        $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->db->set_qos_policy(100));
+        $this->assertFalse($this->class->set_qos_policy(100));
     }
 
 }

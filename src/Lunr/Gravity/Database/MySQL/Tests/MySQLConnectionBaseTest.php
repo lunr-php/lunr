@@ -15,7 +15,7 @@
 
 namespace Lunr\Gravity\Database\MySQL\Tests;
 
-use Lunr\Gravity\Database\MySQL\MySQLConnection;
+use Lunr\Halo\PsrLoggerTestTrait;
 
 /**
  * This class contains basic tests for the MySQLConnection class.
@@ -29,17 +29,14 @@ use Lunr\Gravity\Database\MySQL\MySQLConnection;
 class MySQLConnectionBaseTest extends MySQLConnectionTest
 {
 
+    use PsrLoggerTestTrait;
+
     /**
      * Test that the mysqli class was passed correctly.
      */
     public function testMysqliPassed()
     {
-        $property = $this->db_reflection->getProperty('mysqli');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->db);
-
-        $this->assertInstanceOf('\mysqli', $value);
+        $this->assertPropertySame('mysqli', $this->mysqli);
     }
 
     /**
@@ -47,10 +44,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testRWHostIsSetCorrectly()
     {
-        $property = $this->db_reflection->getProperty('rw_host');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('rw_host', $property->getValue($this->db));
+        $this->assertPropertyEquals('rw_host', 'rw_host');
     }
 
     /**
@@ -58,10 +52,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testROHostIsSetToRWHost()
     {
-        $property = $this->db_reflection->getProperty('ro_host');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('rw_host', $property->getValue($this->db));
+        $this->assertPropertyEquals('ro_host', 'rw_host');
     }
 
     /**
@@ -69,10 +60,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testUsernameIsSetCorrectly()
     {
-        $property = $this->db_reflection->getProperty('user');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('username', $property->getValue($this->db));
+        $this->assertPropertyEquals('user', 'username');
     }
 
     /**
@@ -80,10 +68,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testPasswordIsSetCorrectly()
     {
-        $property = $this->db_reflection->getProperty('pwd');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('password', $property->getValue($this->db));
+        $this->assertPropertyEquals('pwd', 'password');
     }
 
     /**
@@ -91,10 +76,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testDatabaseIsSetCorrectly()
     {
-        $property = $this->db_reflection->getProperty('db');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('database', $property->getValue($this->db));
+        $this->assertPropertyEquals('db', 'database');
     }
 
     /**
@@ -102,10 +84,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testPortMatchesValueInPHPIni()
     {
-        $property = $this->db_reflection->getProperty('port');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(ini_get('mysqli.default_port'), $property->getValue($this->db));
+        $this->assertPropertyEquals('port', ini_get('mysqli.default_port'));
     }
 
     /**
@@ -113,10 +92,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testSocketMatchesValueInPHPIni()
     {
-        $property = $this->db_reflection->getProperty('socket');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(ini_get('mysqli.default_socket'), $property->getValue($this->db));
+        $this->assertPropertyEquals('socket', ini_get('mysqli.default_socket'));
     }
 
     /**
@@ -124,10 +100,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testQueryHintIsEmpty()
     {
-        $property = $this->db_reflection->getProperty('query_hint');
-        $property->setAccessible(TRUE);
-
-        $this->assertSame('', $property->getValue($this->db));
+        $this->assertPropertySame('query_hint', '');
     }
 
     /**
@@ -137,10 +110,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testQoSPolicyIsSetToDefaultPolicy()
     {
-        $property = $this->db_reflection->getProperty('qos_policy');
-        $property->setAccessible(TRUE);
-
-        $this->assertSame(MYSQLND_MS_QOS_CONSISTENCY_EVENTUAL, $property->getValue($this->db));
+        $this->assertPropertySame('qos_policy', MYSQLND_MS_QOS_CONSISTENCY_EVENTUAL);
     }
 
     /**
@@ -150,7 +120,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testGetNewDMLQueryBuilderObjectSimpleReturnsObject()
     {
-        $value = $this->db->get_new_dml_query_builder_object();
+        $value = $this->class->get_new_dml_query_builder_object();
 
         $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseDMLQueryBuilder', $value);
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder', $value);
@@ -164,7 +134,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testGetNewDMLQueryBuilderObjectReturnsObject()
     {
-        $value = $this->db->get_new_dml_query_builder_object(FALSE);
+        $value = $this->class->get_new_dml_query_builder_object(FALSE);
 
         $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseDMLQueryBuilder', $value);
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder', $value);
@@ -178,7 +148,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testGetQueryEscaperObjectReturnsObject()
     {
-        $value = $this->db->get_query_escaper_object();
+        $value = $this->class->get_query_escaper_object();
 
         $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseQueryEscaper', $value);
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper', $value);
@@ -191,14 +161,13 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testGetQueryEscaperObjectCachesObject()
     {
-        $property = $this->db_reflection->getProperty('escaper');
-        $property->setAccessible(TRUE);
-        $this->assertNull($property->getValue($this->db));
+        $property = $this->get_accessible_reflection_property('escaper');
+        $this->assertNull($property->getValue($this->class));
 
-        $this->db->get_query_escaper_object();
+        $this->class->get_query_escaper_object();
 
         $instance = 'Lunr\Gravity\Database\MySQL\MySQLQueryEscaper';
-        $this->assertInstanceOf($instance, $property->getValue($this->db));
+        $this->assertInstanceOf($instance, $property->getValue($this->class));
     }
 
     /**
@@ -208,8 +177,8 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testGetQueryEscaperObjectReturnsCachedObject()
     {
-        $value1 = $this->db->get_query_escaper_object();
-        $value2 = $this->db->get_query_escaper_object();
+        $value1 = $this->class->get_query_escaper_object();
+        $value2 = $this->class->get_query_escaper_object();
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper', $value1);
         $this->assertSame($value1, $value2);
