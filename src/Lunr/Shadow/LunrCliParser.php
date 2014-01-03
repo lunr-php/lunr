@@ -10,8 +10,8 @@
  * @package    Shadow
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2009-2013, Heinz Wiesinger, Amsterdam, The Netherlands
- * @copyright  2010-2013, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2009-2014, Heinz Wiesinger, Amsterdam, The Netherlands
+ * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 

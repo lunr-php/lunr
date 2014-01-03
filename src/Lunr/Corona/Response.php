@@ -9,7 +9,7 @@
  * @package    Corona
  * @subpackage Request
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2011-2013, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2011-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 

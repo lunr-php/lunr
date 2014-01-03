@@ -9,7 +9,7 @@
  * @package    Gravity
  * @subpackage Database
  * @author     Olivier Wizen <olivier@m2mobi.com>
- * @copyright  2012-2013, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
