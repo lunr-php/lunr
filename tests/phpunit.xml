@@ -65,6 +65,7 @@
             <file>src/Lunr/Feedback/Tests/PSR3LoggerTest.php</file>
             <file>src/Lunr/Feedback/Tests/PHPLoggerTest.php</file>
             <file>src/Lunr/Feedback/Tests/FileLoggerTest.php</file>
+            <file>src/Lunr/Feedback/Tests/ChainLoggerBaseTest.php</file>
         </testsuite>
         <testsuite name="Flare">
             <file>src/Lunr/Flare/Tests/VerificationBaseTest.php</file>
