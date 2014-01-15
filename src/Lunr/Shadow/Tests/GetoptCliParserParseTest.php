@@ -61,6 +61,20 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
     }
 
     /**
+     * Test that wrap_argument() does not re-wrap already wrapped arguments (like multiple parameters).
+     *
+     * @covers Lunr\Shadow\GetoptCliParser::wrap_argument
+     */
+    public function testWrapArgumentDoesNotRewrapArguments()
+    {
+        $method = $this->get_accessible_reflection_method('wrap_argument');
+
+        $value = $method->invokeArgs($this->class, [ [ 'param1', 'param2' ] ]);
+
+        $this->assertEquals([ 'param1', 'param2' ], $value);
+    }
+
+    /**
      * Test that parse() returns an empty array on error.
      *
      * @requires extension runkit

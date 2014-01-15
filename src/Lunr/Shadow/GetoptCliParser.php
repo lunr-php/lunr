@@ -110,6 +110,10 @@ class GetoptCliParser implements CliParserInterface
         {
             return array();
         }
+        elseif (is_array($value))
+        {
+            return $value;
+        }
         else
         {
             return array($value);
