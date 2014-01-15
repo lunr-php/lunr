@@ -109,9 +109,9 @@ abstract class ViewTest extends LunrBaseTest
      */
     public function baseUrlProvider()
     {
-        $values   = array();
-        $values[] = array('http://www.example.org/', 'method/param', 'http://www.example.org/method/param');
-        $values[] = array('http://www.example.org/test/', 'method/param', 'http://www.example.org/test/method/param');
+        $values   = [];
+        $values[] = [ 'http://www.example.org/', 'method/param', 'http://www.example.org/method/param' ];
+        $values[] = [ 'http://www.example.org/test/', 'method/param', 'http://www.example.org/test/method/param' ];
         return $values;
     }
 
@@ -122,11 +122,51 @@ abstract class ViewTest extends LunrBaseTest
      */
     public function staticsProvider()
     {
-        $values   = array();
-        $values[] = array('/', 'statics', 'image/test.jpg', '/statics/image/test.jpg');
-        $values[] = array('/', '/statics', 'image/test.jpg', '/statics/image/test.jpg');
-        $values[] = array('/test/', 'statics', 'image/test.jpg', '/test/statics/image/test.jpg');
-        $values[] = array('/test/', '/statics', 'image/test.jpg', '/test/statics/image/test.jpg');
+        $values   = [];
+        $values[] = [ '/', 'statics', 'image/test.jpg', '/statics/image/test.jpg' ];
+        $values[] = [ '/', '/statics', 'image/test.jpg', '/statics/image/test.jpg' ];
+        $values[] = [ '/test/', 'statics', 'image/test.jpg', '/test/statics/image/test.jpg' ];
+        $values[] = [ '/test/', '/statics', 'image/test.jpg', '/test/statics/image/test.jpg' ];
+        return $values;
+    }
+
+    /**
+     * Unit Test Data Provider for fatal error information.
+     *
+     * @return array $values Array of mocked fatal error information.
+     */
+    public function fatalErrorInfoProvider()
+    {
+        $values   = [];
+        $values[] = [ [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 4, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 16, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 64, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 256, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+
+        return $values;
+    }
+
+    /**
+     * Unit Test Data Provider for error information.
+     *
+     * @return array $values Array of non-fatal error information.
+     */
+    public function errorInfoProvider()
+    {
+        $values   = [];
+        $values[] = [ NULL ];
+        $values[] = [ [ 'type' => 2, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 8, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 32, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 128, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 512, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 1024, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 2048, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 4096, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 8192, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+        $values[] = [ [ 'type' => 16384, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
+
         return $values;
     }
 

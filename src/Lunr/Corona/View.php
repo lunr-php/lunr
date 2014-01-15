@@ -123,6 +123,25 @@ abstract class View
         return $output;
     }
 
+    /**
+     * Check whether the last error was fatal or not.
+     *
+     * @param Array $error Value returned from error_get_last()
+     *
+     * @return Boolean $return TRUE if error was fatal, FALSE otherwise
+     */
+    protected function is_fatal_error($error)
+    {
+        if (($error === NULL) || !in_array($error['type'], [ E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR ]))
+        {
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+
 }
 
 ?>

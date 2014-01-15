@@ -75,6 +75,36 @@ class ViewHelpersTest extends ViewTest
         $this->assertEquals($result, $method->invokeArgs($this->class, array($path)));
     }
 
+    /**
+     * Test that is_fatal_error() returns TRUE if last error is fatal.
+     *
+     * @param Array $error Mocked error information
+     *
+     * @dataProvider fatalErrorInfoProvider
+     * @covers       Lunr\Corona\View::is_fatal_error
+     */
+    public function testIsFatalErrorReturnsTrueIfErrorIsFatal($error)
+    {
+        $method = $this->get_accessible_reflection_method('is_fatal_error');
+
+        $this->assertTrue($method->invokeArgs($this->class, [ $error ]));
+    }
+
+    /**
+     * Test that is_fatal_error() returns FALSE if last error is fatal.
+     *
+     * @param Array $error Mocked error information
+     *
+     * @dataProvider errorInfoProvider
+     * @covers       Lunr\Corona\View::is_fatal_error
+     */
+    public function testIsFatalErrorReturnsFalseIfErrorIsNotFatal($error)
+    {
+        $method = $this->get_accessible_reflection_method('is_fatal_error');
+
+        $this->assertFalse($method->invokeArgs($this->class, [ $error ]));
+    }
+
 }
 
 ?>

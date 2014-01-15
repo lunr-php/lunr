@@ -96,7 +96,7 @@ class JsonView extends View
     {
         $error = error_get_last();
 
-        if (($error === NULL) || ($error['type'] !== E_ERROR))
+        if ($this->is_fatal_error($error) === FALSE)
         {
             return;
         }
