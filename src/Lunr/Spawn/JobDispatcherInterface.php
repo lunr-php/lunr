@@ -43,6 +43,24 @@ interface JobDispatcherInterface
      */
     public function get_job_id();
 
+    /**
+     * Sets the queue(s) to dispatch to for this dispatcher.
+     *
+     * @param mixed $queue The queue or the queues to set for this dispatcher.
+     *
+     * @return JobDispatcherInterface $self Self-reference
+     */
+    public function set_queue($queue);
+
+    /**
+     * Sets whether the status of the dispatched job will be tracked.
+     *
+     * @param Boolean $track_status The queue to set for this dispatcher
+     *
+     * @return JobDispatcherInterface $self Self-reference
+     */
+    public function set_track_status($track_status);
+
 }
 
 ?>

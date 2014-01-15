@@ -238,6 +238,8 @@
             <file>src/Lunr/Spark/Twitter/Tests/TweetGetTweetDataTest.php</file>
         </testsuite>
         <testsuite name="Spawn">
+            <file>src/Lunr/Spawn/Tests/NullDispatcherBaseTest.php</file>
+            <file>src/Lunr/Spawn/Tests/NullDispatcherTest.php</file>
             <file>src/Lunr/Spawn/Tests/ResqueJobDispatcherBaseTest.php</file>
             <file>src/Lunr/Spawn/Tests/ResqueRequestBaseTest.php</file>
             <file>src/Lunr/Spawn/Tests/ResqueRequestRunkitTest.php</file>
