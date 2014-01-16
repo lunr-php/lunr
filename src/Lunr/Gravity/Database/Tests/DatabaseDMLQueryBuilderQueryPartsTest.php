@@ -239,6 +239,26 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+    * Test grouping condition start.
+    *
+    * @param String $keyword   The expected statement keyword
+    * @param String $attribute The name of the property where the statement is stored
+    *
+    * @dataProvider conditionalKeywordProvider
+    * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
+    */
+    public function testOpenGroupWithConnector($keyword, $attribute)
+    {
+        $this->set_reflection_property_value('connector', 'OR');
+
+        $method = $this->get_accessible_reflection_method('sql_group_start');
+        $method->invokeArgs($this->class, [ $keyword ]);
+
+        $this->assertEquals(' OR (', $this->get_reflection_property_value($attribute));
+        $this->assertEquals('', $this->get_reflection_property_value('connector'));
+    }
+
+    /**
      * Test closing the parentheses for grouped condition.
      *
      * @param String $keyword   The expected statement keyword

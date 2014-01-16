@@ -790,6 +790,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             $this->$condition .= 'ON (';
             $this->is_join     = FALSE;
         }
+        elseif ($this->connector != '')
+        {
+            $this->$condition .= ' ' . $this->connector . ' (';
+            $this->connector   = '';
+        }
         else
         {
             $this->$condition .= '(';
