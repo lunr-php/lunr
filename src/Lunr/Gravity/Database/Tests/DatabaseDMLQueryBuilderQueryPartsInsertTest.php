@@ -117,6 +117,22 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     }
 
     /**
+     * Test specifying NULL values in the Values part of a query.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
+     */
+    public function testNullValues()
+    {
+        $method = $this->get_accessible_reflection_method('sql_values');
+
+        $method->invokeArgs($this->class, [[ 'value1', NULL, 'value3' ]]);
+
+        $string = 'VALUES (value1, NULL, value3)';
+
+        $this->assertPropertyEquals('values', $string);
+    }
+
+    /**
      * Test specifying the column_names part of a query.
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_column_names
