@@ -56,7 +56,7 @@ class VerificationResultTest extends VerificationTest
         $this->set_reflection_property_value('superfluous', array('test1', 'test2'));
 
         $this->logger->expects($this->exactly(2))
-                     ->method('error');
+                     ->method('warning');
 
         $this->assertTrue($method->invokeArgs($this->class, array('')));
     }
@@ -99,7 +99,7 @@ class VerificationResultTest extends VerificationTest
         $method = $this->get_accessible_reflection_method('is_fully_checked');
 
         $this->logger->expects($this->exactly(sizeof($data) - sizeof($result)))
-                     ->method('error');
+                     ->method('warning');
 
         $this->assertFalse($method->invokeArgs($this->class, array('')));
     }
@@ -113,7 +113,7 @@ class VerificationResultTest extends VerificationTest
     public function testIsValidReturnsFalseIfIdentifierIsEmpty()
     {
         $this->logger->expects($this->once())
-                     ->method('error');
+                     ->method('warning');
 
         $this->assertFalse($this->class->is_valid());
     }
@@ -127,7 +127,7 @@ class VerificationResultTest extends VerificationTest
     public function testIsValidReturnsFalseIfCheckSuperfluousEnabledAndIsOvercheckedTrue()
     {
         $this->logger->expects($this->exactly(2))
-                     ->method('error');
+                     ->method('warning');
 
         $identifier = $this->set_reflection_property_value('identifier', 'testrun');
 
@@ -147,7 +147,7 @@ class VerificationResultTest extends VerificationTest
     public function testIsValidReturnsFalseIfCheckRemainingEnabledAndIsFullyCheckedFalse()
     {
         $this->logger->expects($this->once())
-                     ->method('error');
+                     ->method('warning');
 
         $this->set_reflection_property_value('identifier', 'testrun');
 
@@ -175,7 +175,7 @@ class VerificationResultTest extends VerificationTest
         $this->set_reflection_property_value('result', array('test1' => $value, 'test2' => $value));
 
         $this->logger->expects($this->exactly(2))
-                     ->method('error');
+                     ->method('warning');
 
         $this->assertFalse($this->class->is_valid());
     }

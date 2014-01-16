@@ -145,7 +145,7 @@ class Verification
         }
         else
         {
-            $this->logger->error("Can't verify input dataset! Invalid dataset format.");
+            $this->logger->warning("Can't verify input dataset! Invalid dataset format.");
 
             # don't verify stale input against new ruleset
             if (!empty($this->data))
@@ -235,7 +235,7 @@ class Verification
     {
         if (trim($this->identifier) == '')
         {
-            $this->logger->error("Can't verify input. Empty Identifier!'");
+            $this->logger->warning("Can't verify input. Empty Identifier!'");
             return FALSE;
         }
 
@@ -283,7 +283,7 @@ class Verification
                     $context['val']   = print_r($this->data[$index], TRUE);
                     $context['type']  = gettype($this->data[$index]);
 
-                    $this->logger->error($message, $context);
+                    $this->logger->warning($message, $context);
 
                     $valid = FALSE;
                 }
@@ -314,7 +314,7 @@ class Verification
         {
             $context['key'] = $value;
 
-            $this->logger->error($message, $context);
+            $this->logger->warning($message, $context);
         }
 
         unset($value);
@@ -348,7 +348,7 @@ class Verification
         {
             $context['index'] = $value;
 
-            $this->logger->error($message, $context);
+            $this->logger->warning($message, $context);
         }
 
         return FALSE;

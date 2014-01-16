@@ -69,7 +69,7 @@ class VerificationSetTest extends VerificationTest
     public function testSetDataSetsEmptyArrayAsDataIfDatasetIsInvalid($value)
     {
         $this->logger->expects($this->once())
-                     ->method('error');
+                     ->method('warning');
 
         $this->set_reflection_property_value('data', array('test' => 'value'));
 
