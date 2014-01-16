@@ -63,6 +63,23 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     }
 
     /**
+     * Test the sql_set() function when a value is NULL.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_set
+     */
+    public function testSetWithNullValue()
+    {
+        $method = $this->get_accessible_reflection_method('sql_set');
+
+        $method->invokeArgs($this->class, [[ 'column1' => 'value1' ]]);
+        $method->invokeArgs($this->class, [[ 'column2' => NULL ]]);
+
+        $string = 'SET column1 = value1, column2 = NULL';
+
+        $this->assertPropertyEquals('set', $string);
+    }
+
+    /**
      * Test specifying empty Values for a query.
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values

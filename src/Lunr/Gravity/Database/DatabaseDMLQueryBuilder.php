@@ -511,6 +511,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
         foreach ($set as $key => $value)
         {
+            $value = (is_null($value)) ? 'NULL' : $value;
+
             $this->set .= $key . ' = ' . $value . ', ';
         }
 
