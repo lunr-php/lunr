@@ -358,6 +358,45 @@ abstract class RequestTest extends LunrBaseTest
         return $server;
     }
 
+    /**
+     * Unit Test Data Provider for Accept header content type(s).
+     *
+     * @return array $value Array of content type(s)
+     */
+    public function contentTypeProvider()
+    {
+        $value   = [];
+        $value[] = [ 'text/html' ];
+
+        return $value;
+    }
+
+    /**
+     * Unit Test Data Provider for Accept header language(s).
+     *
+     * @return array $value Array of language(s)
+     */
+    public function acceptLanguageProvider()
+    {
+        $value   = [];
+        $value[] = [ 'en-US' ];
+
+        return $value;
+    }
+
+    /**
+     * Unit Test Data Provider for Accept header charset(s).
+     *
+     * @return array $value Array of charset(s)
+     */
+    public function acceptCharsetProvider()
+    {
+        $value   = [];
+        $value[] = [ 'utf-8' ];
+
+        return $value;
+    }
+
 }
 
 ?>

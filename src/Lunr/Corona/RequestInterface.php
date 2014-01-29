@@ -94,6 +94,36 @@ interface RequestInterface
      */
     public function get_cookie_data($key);
 
+    /**
+     * Negotiate & retrieve the client's prefered content type.
+     *
+     * @param Array $supported Array containing the supported content types
+     *
+     * @return Mixed $return The best match of the prefered content types or NULL
+     *                       if there are no supported types or the header is not set
+     */
+    public function get_accept_format($supported = []);
+
+    /**
+     * Negotiate & retrieve the clients prefered language.
+     *
+     * @param Array $supported Array containing the supported languages
+     *
+     * @return Mixed $return The best match of the prefered languages or NULL if
+     *                       there are no supported languages or the header is not set
+     */
+    public function get_accept_language($supported = []);
+
+    /**
+     * Negotiate & retrieve the clients prefered encoding/charset.
+     *
+     * @param Array $supported Array containing the supported encodings
+     *
+     * @return Mixed $return The best match of the prefered encodings or NULL if
+     *                       there are no supported encodings or the header is not set
+     */
+    public function get_accept_encoding($supported = []);
+
 }
 
 ?>

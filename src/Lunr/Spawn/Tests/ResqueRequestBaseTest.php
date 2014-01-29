@@ -116,6 +116,36 @@ class ResqueRequestBaseTest extends ResqueRequestTest
     }
 
     /**
+     * Test getting the Accept header format will return null.
+     *
+     * @covers Lunr\Spawn\ResqueRequest::get_accept_format
+     */
+    public function testGetAcceptFormatReturnsNull()
+    {
+        $this->assertNull($this->class->get_accept_format());
+    }
+
+    /**
+     * Test getting the Accept header language will return null.
+     *
+     * @covers Lunr\Spawn\ResqueRequest::get_accept_language
+     */
+    public function testGetAcceptLanguageReturnsNull()
+    {
+        $this->assertNull($this->class->get_accept_language());
+    }
+
+    /**
+     * Test getting the Accept header encoding will return null.
+     *
+     * @covers Lunr\Spawn\ResqueRequest::get_accept_encoding
+     */
+    public function testGetAcceptEncodingReturnsNull()
+    {
+        $this->assertNull($this->class->get_accept_encoding());
+    }
+
+    /**
      * Check that request values are returned correctly by the magic get method.
      *
      * @param String $key   key for a request value

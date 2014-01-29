@@ -59,7 +59,7 @@ class CliRequest implements RequestInterface
      */
     protected $files;
 
-     /**
+    /**
      * Request parameters:
      *  'protocol'   The protocol used for the request
      *  'domain'     The domain used for the request
@@ -308,6 +308,54 @@ class CliRequest implements RequestInterface
     public function get_files_data($key)
     {
         return NULL;
+    }
+
+    /**
+     * Negotiate & retrieve the client's prefered content type.
+     *
+     * @param Array $supported Array containing the supported content types
+     *
+     * @return Mixed $return The best match of the prefered content types or NULL
+     *                       if there are no supported types or the header is not set
+     */
+    public function get_accept_format($supported = [])
+    {
+        // make $_SERVER think this is a web request
+        $_SERVER['HTTP_ACCEPT'] = $this->ast['accept-format'];
+
+        return http_negotiate_content_type($supported);
+    }
+
+    /**
+     * Negotiate & retrieve the clients prefered language.
+     *
+     * @param Array $supported Array containing the supported languages
+     *
+     * @return Mixed $return The best match of the prefered languages or NULL if
+     *                       there are no supported languages or the header is not set
+     */
+    public function get_accept_language($supported = [])
+    {
+        // make $_SERVER think this is a web request
+        $_SERVER['HTTP_ACCEPT_LANGUAGE'] = $this->ast['accept-language'];
+
+        return http_negotiate_language($supported);
+    }
+
+    /**
+     * Negotiate & retrieve the clients prefered encoding/charset.
+     *
+     * @param Array $supported Array containing the supported encodings
+     *
+     * @return Mixed $return The best match of the prefered encodings or NULL if
+     *                       there are no supported encodings or the header is not set
+     */
+    public function get_accept_encoding($supported = [])
+    {
+        // make $_SERVER think this is a web request
+        $_SERVER['HTTP_ACCEPT_ENCODING'] = $this->ast['accept-encoding'];;
+
+        return http_negotiate_charset($supported);
     }
 
 }

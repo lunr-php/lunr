@@ -126,6 +126,99 @@ class RequestGetTest extends RequestTest
         $this->assertInstanceOf('Lunr\Corona\InterRequest', $value);
     }
 
+    /**
+     * Test that get_accept_format() returns content type when called with a valid set of supported formats.
+     *
+     * @param String $value the expected value
+     *
+     * @dataProvider contentTypeProvider
+     * @covers       Lunr\Corona\Request::get_accept_format
+     */
+    public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value)
+    {
+        $this->mock_function('http_negotiate_content_type', 'return "text/html";');
+
+        $this->assertEquals($value, $this->class->get_accept_format($value));
+
+        $this->unmock_function('http_negotiate_content_type');
+    }
+
+    /**
+     * Test that get_accept_format() returns null when called with an empty set of supported formats.
+     *
+     * @covers Lunr\Corona\Request::get_accept_format
+     */
+    public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull()
+    {
+        $this->mock_function('http_negotiate_content_type', 'return NULL;');
+
+        $this->assertNull($this->class->get_accept_format([]));
+
+        $this->unmock_function('http_negotiate_content_type');
+    }
+
+    /**
+     * Test that get_accept_language() returns content type when called with a valid set of supported languages.
+     *
+     * @param String $value the expected value
+     *
+     * @dataProvider acceptLanguageProvider
+     * @covers       Lunr\Corona\Request::get_accept_language
+     */
+    public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value)
+    {
+        $this->mock_function('http_negotiate_language', 'return "en-US";');
+
+        $this->assertEquals($value, $this->class->get_accept_language($value));
+
+        $this->unmock_function('http_negotiate_language');
+    }
+
+    /**
+     * Test that get_accept_format() returns null when called with an empty set of supported languages.
+     *
+     * @covers Lunr\Corona\Request::get_accept_language
+     */
+    public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull()
+    {
+        $this->mock_function('http_negotiate_language', 'return NULL;');
+
+        $this->assertNull($this->class->get_accept_language([]));
+
+        $this->unmock_function('http_negotiate_language');
+    }
+
+    /**
+     * Test that get_accept_encoding() returns content type when called with a valid set of supported charsets.
+     *
+     * @param String $value the expected value
+     *
+     * @dataProvider acceptCharsetProvider
+     * @covers       Lunr\Corona\Request::get_accept_encoding
+     */
+    public function testGetAcceptEncodingWithValidSupportedCharsetsReturnsString($value)
+    {
+        $this->mock_function('http_negotiate_charset', 'return "utf-8";');
+
+        $this->assertEquals($value, $this->class->get_accept_encoding($value));
+
+        $this->unmock_function('http_negotiate_charset');
+    }
+
+    /**
+     * Test that get_accept_encoding() returns null when called with an empty set of supported charsets.
+     *
+     * @covers Lunr\Corona\Request::get_accept_encoding
+     */
+    public function testGetAcceptEncodingWithEmptySupportedCharsetsReturnsNull()
+    {
+        $this->mock_function('http_negotiate_charset', 'return NULL;');
+
+        $this->assertNull($this->class->get_accept_encoding([]));
+
+        $this->unmock_function('http_negotiate_charset');
+    }
+
 }
 
 ?>

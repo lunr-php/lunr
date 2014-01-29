@@ -18,11 +18,12 @@ namespace Lunr\Shadow\Tests;
 /**
  * This class contains test methods for getters of the CliRequest class.
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Tests
- * @author     Olivier Wizen <olivier@m2mobi.com>
- * @covers     Lunr\Shadow\CliRequest
+ * @category      Libraries
+ * @package       Shadow
+ * @subpackage    Tests
+ * @author        Olivier Wizen <olivier@m2mobi.com>
+ * @covers        Lunr\Shadow\CliRequest
+ * @backupGlobals enabled
  */
 class CliRequestGetTest extends CliRequestTest
 {
@@ -214,6 +215,126 @@ class CliRequestGetTest extends CliRequestTest
     {
         $this->set_reflection_property_value('cookie', [ $key => $value ]);
         $this->assertSame($value, $this->class->get_cookie_data($key));
+    }
+
+    /**
+     * Test that get_accept_format() returns content type when called with a valid set of supported formats.
+     *
+     * @param String $key   the expected key in ast
+     * @param String $value the expected value
+     *
+     * @dataProvider contentTypeProvider
+     * @covers       Lunr\Shadow\CliRequest::get_accept_format
+     */
+    public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($key, $value)
+    {
+        $this->mock_function('http_negotiate_content_type', 'return "text/html";');
+
+        $this->set_reflection_property_value('ast', [ $key => $value ]);
+
+        $this->assertEquals($value, $this->class->get_accept_format($value));
+
+        $this->unmock_function('http_negotiate_content_type');
+    }
+
+    /**
+     * Test that get_accept_format() returns null when called with an empty set of supported formats.
+     *
+     * @param String $key   the expected key in ast
+     * @param String $value the expected value
+     *
+     * @dataProvider contentTypeProvider
+     * @covers       Lunr\Shadow\CliRequest::get_accept_format
+     */
+    public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull($key, $value)
+    {
+        $this->mock_function('http_negotiate_content_type', 'return NULL;');
+
+        $this->set_reflection_property_value('ast', [ $key => $value ]);
+
+        $this->assertNull($this->class->get_accept_format([]));
+
+        $this->unmock_function('http_negotiate_content_type');
+    }
+
+    /**
+     * Test that get_accept_language() returns content type when called with a valid set of supported languages.
+     *
+     * @param String $key   the expected key in ast
+     * @param String $value the expected value
+     *
+     * @dataProvider acceptLanguageProvider
+     * @covers       Lunr\Shadow\CliRequest::get_accept_language
+     */
+    public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($key, $value)
+    {
+        $this->mock_function('http_negotiate_language', 'return "en-US";');
+
+        $this->set_reflection_property_value('ast', [ $key => $value ]);
+
+        $this->assertEquals($value, $this->class->get_accept_language($value));
+
+        $this->unmock_function('http_negotiate_language');
+    }
+
+    /**
+     * Test that get_accept_format() returns null when called with an empty set of supported languages.
+     *
+     * @param String $key   the expected key in ast
+     * @param String $value the expected value
+     *
+     * @dataProvider acceptLanguageProvider
+     * @covers       Lunr\Shadow\CliRequest::get_accept_language
+     */
+    public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull($key, $value)
+    {
+        $this->mock_function('http_negotiate_language', 'return NULL;');
+
+        $this->set_reflection_property_value('ast', [ $key => $value ]);
+
+        $this->assertNull($this->class->get_accept_language([]));
+
+        $this->unmock_function('http_negotiate_language');
+    }
+
+    /**
+     * Test that get_accept_encoding() returns content type when called with a valid set of supported charsets.
+     *
+     * @param String $key   the expected key in ast
+     * @param String $value the expected value
+     *
+     * @dataProvider acceptCharsetProvider
+     * @covers       Lunr\Shadow\CliRequest::get_accept_encoding
+     */
+    public function testGetAcceptEncodingWithValidSupportedCharsetsReturnsString($key, $value)
+    {
+        $this->mock_function('http_negotiate_charset', 'return "utf-8";');
+
+        $this->set_reflection_property_value('ast', [ $key => $value ]);
+
+        $this->assertEquals($value, $this->class->get_accept_encoding($value));
+
+        $this->unmock_function('http_negotiate_charset');
+    }
+
+    /**
+     * Test that get_accept_encoding() returns null when called with an empty set of supported charsets.
+     *
+     * @param String $key   the expected key in ast
+     * @param String $value the expected value
+     *
+     * @dataProvider acceptCharsetProvider
+     * @covers       Lunr\Shadow\CliRequest::get_accept_encoding
+     */
+    public function testGetAcceptEncodingWithEmptySupportedCharsetsReturnsNull($key, $value)
+    {
+        $this->mock_function('http_negotiate_charset', 'return NULL;');
+
+        $this->set_reflection_property_value('ast', [ $key => $value ]);
+
+        $this->assertNull($this->class->get_accept_encoding([]));
+
+        $this->unmock_function('http_negotiate_charset');
     }
 
 }

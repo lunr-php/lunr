@@ -264,6 +264,45 @@ abstract class CliRequestTest extends LunrBaseTest
         return $values;
     }
 
+    /**
+     * Unit Test Data Provider for Accept header content type(s).
+     *
+     * @return array $value Array of content type(s)
+     */
+    public function contentTypeProvider()
+    {
+        $value   = [];
+        $value[] = [ 'accept-format', 'text/html' ];
+
+        return $value;
+    }
+
+    /**
+     * Unit Test Data Provider for Accept header language(s).
+     *
+     * @return array $value Array of language(s)
+     */
+    public function acceptLanguageProvider()
+    {
+        $value   = [];
+        $value[] = [ 'accept-language', 'en-US' ];
+
+        return $value;
+    }
+
+    /**
+     * Unit Test Data Provider for Accept header charset(s).
+     *
+     * @return array $value Array of charset(s)
+     */
+    public function acceptCharsetProvider()
+    {
+        $value   = [];
+        $value[] = [ 'accept-encoding', 'utf-8' ];
+
+        return $value;
+    }
+
 }
 
 ?>
