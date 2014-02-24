@@ -51,6 +51,20 @@ class JsonViewBaseTest extends JsonViewTest
         $this->assertPropertySame('configuration', $this->configuration);
     }
 
+    /**
+     * Test that prepare_data() does not modify the data.
+     *
+     * @covers Lunr\Corona\JsonView::prepare_data
+     */
+    public function testPrepareDataReturnsUnmodifiedData()
+    {
+        $data = [ 'key' => 'value', 'key2' => NULL ];
+
+        $method = $this->get_accessible_reflection_method('prepare_data');
+
+        $this->assertSame($data, $method->invokeArgs($this->class, [ $data ]));
+    }
+
 }
 
 ?>

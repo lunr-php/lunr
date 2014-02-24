@@ -49,6 +49,18 @@ class JsonView extends View
     }
 
     /**
+     * Prepare the response data before using it for generating the output.
+     *
+     * @param mixed $data Response data to prepare
+     *
+     * @return mixed $return Prepared response data
+     */
+    protected function prepare_data($data)
+    {
+        return $data;
+    }
+
+    /**
      * Build the actual display and print it.
      *
      * @return void
@@ -63,7 +75,7 @@ class JsonView extends View
 
         $json = [];
 
-        $json['data']   = $this->response->get_response_data();
+        $json['data']   = $this->prepare_data($this->response->get_response_data());
         $json['status'] = [];
 
         $json['status']['code']    = !is_numeric($info) || is_float($info + 1) ? $code : $info;
