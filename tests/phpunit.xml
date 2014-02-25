@@ -64,6 +64,8 @@
         </testsuite>
         <testsuite name="Feedback">
             <file>src/Lunr/Feedback/Tests/PSR3LoggerTest.php</file>
+            <file>src/Lunr/Feedback/Tests/AbstractLoggerNoDateTimeTest.php</file>
+            <file>src/Lunr/Feedback/Tests/AbstractLoggerDateTimeTest.php</file>
             <file>src/Lunr/Feedback/Tests/PHPLoggerTest.php</file>
             <file>src/Lunr/Feedback/Tests/FileLoggerTest.php</file>
             <file>src/Lunr/Feedback/Tests/ChainLoggerBaseTest.php</file>

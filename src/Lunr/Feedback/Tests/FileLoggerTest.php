@@ -47,6 +47,12 @@ class FileLoggerTest extends LunrBaseTest
     private $datetime;
 
     /**
+     * Mock instance of the FilesystemAccessObject class
+     * @var FilesystemAccessObjectInterface
+     */
+    private $fao;
+
+    /**
      * Log-file name.
      * @var String
      */
@@ -73,9 +79,11 @@ class FileLoggerTest extends LunrBaseTest
                        ->method('set_datetime_format')
                        ->with($this->equalTo('%Y-%m-%d %H:%M:%S'));
 
+        $this->fao = $this->getMock('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface');
+
         $this->filename = tempnam('/tmp', 'phpunit_');
 
-        $this->class = new FileLogger($this->filename, $this->datetime, $this->request);
+        $this->class = new FileLogger($this->filename, $this->datetime, $this->request, $this->fao);
     }
 
     /**
@@ -114,25 +122,9 @@ class FileLoggerTest extends LunrBaseTest
     }
 
     /**
-     * Test that log() returns a PHP Warning if xdebug is installed.
-     *
-     * @requires extension xdebug
-     * @covers   Lunr\Feedback\FileLogger::log
-     */
-    public function testLogThrowsErrorIfXdebugIsPresent()
-    {
-        $property = $this->set_reflection_property_value('filename', '/dev/null');
-
-        $this->expectOutputRegex('/^\nXdebug: WARNING: Foo/');
-        $this->class->log(LogLevel::WARNING, 'Foo');
-    }
-
-    /**
      * Test that log() logs correctly to a file.
      *
-     * @depends  testLogThrowsErrorIfXdebugIsPresent
-     * @requires extension xdebug
-     * @covers   Lunr\Feedback\FileLogger::log
+     * @covers Lunr\Feedback\FileLogger::log
      */
     public function testLogPutsMessageInFile()
     {
@@ -140,24 +132,29 @@ class FileLoggerTest extends LunrBaseTest
                        ->method('get_datetime')
                        ->will($this->returnValue(self::DATETIME_STRING));
 
-        $this->expectOutputRegex('/^\nXdebug: WARNING: Foo/');
-        $this->class->log(LogLevel::WARNING, 'Foo');
+        $this->fao->expects($this->once())
+                  ->method('put_file_content')
+                  ->with($this->equalTo($this->filename), $this->equalTo("[2011-11-10 10:30:22]: WARNING: Foo\n"), $this->equalTo(TRUE));
 
-        $this->assertFileEquals(TEST_STATICS . '/Feedback/errorln.log', $this->filename);
+        $this->class->log(LogLevel::WARNING, 'Foo');
     }
 
     /**
      * Test that log() returns a string when an object is passed as message.
      *
-     * @depends  testLogThrowsErrorIfXdebugIsPresent
-     * @requires extension xdebug
-     * @covers   Lunr\Feedback\PHPLogger::log
+     * @covers Lunr\Feedback\PHPLogger::log
      */
     public function testLogReturnsStringWhenObjectPassedAsMessage()
     {
         $object = new MockLogMessage();
 
-        $this->expectOutputRegex('/^\nXdebug: WARNING: Foo/');
+        $this->datetime->expects($this->once())
+                       ->method('get_datetime')
+                       ->will($this->returnValue(self::DATETIME_STRING));
+
+        $this->fao->expects($this->once())
+                  ->method('put_file_content')
+                  ->with($this->equalTo($this->filename), $this->equalTo("[2011-11-10 10:30:22]: WARNING: Foo\n"), $this->equalTo(TRUE));
 
         $this->class->log(LogLevel::WARNING, $object);
     }

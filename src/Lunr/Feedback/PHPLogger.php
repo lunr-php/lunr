@@ -25,14 +25,8 @@ use Psr\Log\LogLevel;
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-class PHPLogger extends PSR3Logger
+class PHPLogger extends AbstractLogger
 {
-
-    /**
-     * Reference to the Request class.
-     * @var RequestInterface
-     */
-    protected $request;
 
     /**
      * Constructor.
@@ -41,7 +35,7 @@ class PHPLogger extends PSR3Logger
      */
     public function __construct($request)
     {
-        $this->request = $request;
+        parent::__construct($request);
     }
 
     /**
@@ -49,58 +43,7 @@ class PHPLogger extends PSR3Logger
      */
     public function __destruct()
     {
-        unset($this->request);
-    }
-
-    /**
-     * Compose message string.
-     *
-     * @param String $message Base message with placeholders
-     * @param array  $context Additional meta-information for the log
-     *
-     * @return String $msg Log Message String
-     */
-    protected function compose_message($message, $context)
-    {
-        if ($this->request->call != NULL)
-        {
-            $infix = $this->request->call . ': ';
-        }
-        else
-        {
-            $infix = '';
-        }
-
-        if (!empty($context['file']) && !empty($context['line']))
-        {
-            $suffix = ' (' . $context['file'] . ': ' . $context['line'] . ')';
-        }
-        else
-        {
-            $suffix = '';
-        }
-
-        return $infix . $this->interpolate_message($message, $context) . $suffix;
-    }
-
-    /**
-     * Replace placeholders in log message according to PSR-3.
-     *
-     * @param String $message Base message with placeholders
-     * @param array  $context Additional meta-information for the log
-     *
-     * @return String $message Interpolated message
-     */
-    protected function interpolate_message($message, $context)
-    {
-        $replace = array();
-
-        foreach ($context as $key => $val)
-        {
-            $replace['{' . $key . '}'] = $val;
-        }
-
-        return strtr($message, $replace);
+        parent::__destruct();
     }
 
     /**

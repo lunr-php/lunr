@@ -23,14 +23,14 @@ namespace Lunr\Feedback;
  * @subpackage Libraries
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
-class FileLogger extends PHPLogger
+class FileLogger extends AbstractLogger
 {
 
     /**
-     * Instance of the DateTime class.
-     * @var DateTime
+     * Shared instance of the FilesystemAccessObject
+     * @var \Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface
      */
-    private $datetime;
+    private $fao;
 
     /**
      * Filename of the logfile.
@@ -41,16 +41,17 @@ class FileLogger extends PHPLogger
     /**
      * Constructor.
      *
-     * @param String           $filename Filename of the target log-file.
-     * @param DateTime         $datetime Instance of the DateTime class.
-     * @param RequestInterface $request  Reference to the Request class.
+     * @param String                                                   $filename Filename of the target log-file.
+     * @param \Lunr\Core\DateTime                                      $datetime Instance of the DateTime class.
+     * @param \Lunr\Corona\RequestInterface                            $request  Shared instance of the Request class.
+     * @param \Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface $fao      Shared instance of the FilesystemAccessObject
      */
-    public function __construct($filename, $datetime, $request)
+    public function __construct($filename, $datetime, $request, $fao)
     {
-        parent::__construct($request);
-        $this->datetime = $datetime;
-        $this->datetime->set_datetime_format('%Y-%m-%d %H:%M:%S');
+        parent::__construct($request, $datetime);
+
         $this->filename = $filename;
+        $this->fao      = $fao;
     }
 
     /**
@@ -58,8 +59,9 @@ class FileLogger extends PHPLogger
      */
     public function __destruct()
     {
-        unset($this->datetime);
+        unset($this->fao);
         unset($this->filename);
+
         parent::__destruct();
     }
 
@@ -74,17 +76,10 @@ class FileLogger extends PHPLogger
      */
     public function log($level, $message, array $context = array())
     {
-        $prefix = '[' . $this->datetime->get_datetime() . ']: ';
-
         $message = strtoupper($level) . ': ' . (string) $message;
-        $msg     = $this->compose_message($message, $context);
+        $msg     = $this->compose_timestamped_message($message, $context);
 
-        if (function_exists('xdebug_print_function_stack') === TRUE)
-        {
-            xdebug_print_function_stack($msg);
-        }
-
-        error_log($prefix . $msg . "\n", 3, $this->filename);
+        $this->fao->put_file_content($this->filename, $msg . "\n", TRUE);
     }
 
 }
