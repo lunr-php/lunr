@@ -38,7 +38,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      */
     public function testGetListOfFilesInAccessibleDirectory()
     {
-        $expected = [ 'file1', 'file2' ];
+        $expected = [ 'file1', 'file2', 'file3' ];
 
         $value = $this->class->get_list_of_files($this->find_location);
 

@@ -227,6 +227,57 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     }
 
     /**
+     * Test that put_file_content() appends the content to the file.
+     *
+     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     */
+    public function testPutFileContentAppendsToFile()
+    {
+        $file = tempnam('/tmp', 'phpunit_');
+
+        $content = "Content\n";
+
+        $this->class->put_file_content($file, $content);
+        $this->class->put_file_content($file, $content, TRUE);
+
+        $this->assertFileEquals(TEST_STATICS . '/Gravity/file3', $file);
+    }
+
+    /**
+     * Test that put_file_content() acquires an exclusive lock to the file.
+     *
+     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     */
+    public function testPutFileContentAcquiresExclusiveLock()
+    {
+        $file = tempnam('/tmp', 'phpunit_');
+
+        $content = "Content\n";
+
+        $this->class->put_file_content($file, $content);
+        $this->class->put_file_content($file, $content, FALSE, TRUE);
+
+        $this->assertFileEquals(TEST_STATICS . '/Gravity/file1', $file);
+    }
+
+    /**
+     * Test that put_file_content() appends the content to the file and acquires an exclusive lock.
+     *
+     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     */
+    public function testPutFileContentAppendsToFileAndAcquiresExclusiveLock()
+    {
+        $file = tempnam('/tmp', 'phpunit_');
+
+        $content = "Content\n";
+
+        $this->class->put_file_content($file, $content);
+        $this->class->put_file_content($file, $content, TRUE, TRUE);
+
+        $this->assertFileEquals(TEST_STATICS . '/Gravity/file3', $file);
+    }
+
+    /**
      * Test getting a SplFileObject for an accessible file.
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object

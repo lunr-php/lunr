@@ -38,7 +38,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
      */
     public function testGetListingOfAccessibleDirectory()
     {
-        $expected = [ 'file1', 'file2', 'folder1', 'folder2' ];
+        $expected = [ 'file1', 'file2', 'file3', 'folder1', 'folder2' ];
 
         $value = $this->class->get_directory_listing($this->find_location);
 

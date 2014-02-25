@@ -248,15 +248,29 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     /**
      * Write contents into file.
      *
-     * @param String $file     Filepath
-     * @param String $contents Contents to write
+     * @param String  $file           Filepath
+     * @param String  $contents       Contents to write
+     * @param Boolean $append         Whether to append to an existing file or not
+     * @param Boolean $exclusive_lock Whether to acquire an exclusive write lock for the file or not
      *
      * @return mixed $return Written bytes as integer on success,
      *                       FALSE on failure
      */
-    public function put_file_content($file, $contents)
+    public function put_file_content($file, $contents, $append = FALSE, $exclusive_lock = FALSE)
     {
-        return is_bool($file) ? FALSE : file_put_contents($file, $contents);
+        $flags = 0;
+
+        if ($append === TRUE)
+        {
+            $flags = $flags | FILE_APPEND;
+        }
+
+        if ($exclusive_lock === TRUE)
+        {
+            $flags = $flags | LOCK_EX;
+        }
+
+        return is_bool($file) ? FALSE : file_put_contents($file, $contents, $flags);
     }
 
 }
