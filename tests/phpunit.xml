@@ -68,6 +68,7 @@
             <file>src/Lunr/Feedback/Tests/AbstractLoggerDateTimeTest.php</file>
             <file>src/Lunr/Feedback/Tests/PHPLoggerTest.php</file>
             <file>src/Lunr/Feedback/Tests/FileLoggerTest.php</file>
+            <file>src/Lunr/Feedback/Tests/ConsoleLoggerBaseTest.php</file>
             <file>src/Lunr/Feedback/Tests/ChainLoggerBaseTest.php</file>
         </testsuite>
         <testsuite name="Flare">
