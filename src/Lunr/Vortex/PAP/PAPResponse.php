@@ -77,8 +77,6 @@ class PAPResponse
 
             $context = [ 'error' => $this->pap_response['message'], 'endpoint' => $device_id ];
             $logger->error('Parsing response of push notification to {endpoint} failed: {error}', $context);
-
-            $this->pap_response = [];
         }
         else
         {
@@ -100,7 +98,8 @@ class PAPResponse
     /**
      * Helper function for extracting the error info from the PAP response XML.
      *
-     * @return void
+     * @return Mixed $return FALSE in case the xml response is unparsable,
+     *                       void otherwise
      */
     private function parse_pap_response()
     {
@@ -122,6 +121,9 @@ class PAPResponse
         {
             if ($values[1]['tag'] == 'PUSH-RESPONSE')
             {
+                // a XML response with the above tag in it is by default
+                // a successful response, so the code in it will either be
+                // 1000 or 1001 and we don't have to check that in set_status
                 $this->pap_response['code'] = 0;
             }
             else
@@ -163,7 +165,7 @@ class PAPResponse
                     {
                         $this->status = PushNotificationStatus::ERROR;
                     }
-                    elseif ($this->pap_response['code'] <= 4502) // Temporary error
+                    elseif ($this->pap_response['code'] <= 4502)
                     {
                         $this->status = PushNotificationStatus::TEMPORARY_ERROR;
                     }
