@@ -28,7 +28,7 @@ use ReflectionClass;
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @covers     Lunr\Vortex\PAP\PAPPayload
  */
-class PAPPayloadTest extends LunrBaseTest
+abstract class PAPPayloadTest extends LunrBaseTest
 {
 
     /**
