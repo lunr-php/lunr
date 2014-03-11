@@ -293,6 +293,9 @@
             <file>src/Lunr/Vortex/PAP/Tests/PAPResponseInvalidXMLTest.php</file>
             <file>src/Lunr/Vortex/PAP/Tests/PAPResponseSetTest.php</file>
             <file>src/Lunr/Vortex/PAP/Tests/PAPResponseSuccessTest.php</file>
+            <file>src/Lunr/Vortex/PAP/Tests/PAPDispatcherPushTest.php</file>
+            <file>src/Lunr/Vortex/PAP/Tests/PAPDispatcherSetTest.php</file>
+            <file>src/Lunr/Vortex/PAP/Tests/PAPDispatcherTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
