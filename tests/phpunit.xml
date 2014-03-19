@@ -265,6 +265,9 @@
             <file>src/Lunr/Ticks/Tests/FileTimerStopTest.php</file>
         </testsuite>
         <testsuite name="Vortex">
+            <file>src/Lunr/Vortex/APNS/Tests/APNSPayloadBaseTest.php</file>
+            <file>src/Lunr/Vortex/APNS/Tests/APNSPayloadGetTest.php</file>
+            <file>src/Lunr/Vortex/APNS/Tests/APNSPayloadSetTest.php</file>
             <file>src/Lunr/Vortex/APNS/Tests/APNSResponseSetTest.php</file>
             <file>src/Lunr/Vortex/APNS/Tests/APNSResponseSuccessTest.php</file>
             <file>src/Lunr/Vortex/APNS/Tests/APNSResponseTest.php</file>
