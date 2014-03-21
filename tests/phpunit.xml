@@ -50,6 +50,7 @@
             <file>src/Lunr/Corona/Tests/RequestStoreUrlTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestGetTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestRunkitTest.php</file>
+            <file>src/Lunr/Corona/Tests/RequestProxyBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/ResponseBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/ResponseGetTest.php</file>
             <file>src/Lunr/Corona/Tests/ResponseSetTest.php</file>
