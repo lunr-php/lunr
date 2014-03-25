@@ -59,26 +59,24 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
     private $logger;
 
     /**
-     * Shared instance of the Configuration class.
-     * @var Configuration
+     * Url to send the GCM push notification to.
+     * @var String
      */
-    private $config;
+    const GOOGLE_SEND_URL = 'https://android.googleapis.com/gcm/send';
 
     /**
      * Constructor.
      *
      * @param Curl            $curl   Shared instance of the Curl class.
      * @param LoggerInterface $logger Shared instance of a Logger.
-     * @param Configuration   $config Shared instance of the Configuration class.
      */
-    public function __construct($curl, $logger, $config)
+    public function __construct($curl, $logger)
     {
         $this->endpoint   = '';
         $this->payload    = '';
         $this->auth_token = '';
         $this->curl       = $curl;
         $this->logger     = $logger;
-        $this->config     = $config;
     }
 
     /**
@@ -91,7 +89,6 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
         unset($this->auth_token);
         unset($this->curl);
         unset($this->logger);
-        unset($this->config);
     }
 
     /**
@@ -108,7 +105,7 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
         $tmp_payload['registration_ids'] = [$this->endpoint];
         $this->payload                   = json_encode($tmp_payload);
 
-        $response = $this->curl->post_request($this->config['gcm']['google_send_url'], $this->payload);
+        $response = $this->curl->post_request(self::GOOGLE_SEND_URL, $this->payload);
 
         $this->endpoint   = '';
         $this->payload    = '';

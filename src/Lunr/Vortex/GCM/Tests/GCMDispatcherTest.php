@@ -46,40 +46,14 @@ abstract class GCMDispatcherTest extends LunrBaseTest
     protected $logger;
 
     /**
-     * Mock instance of the Configuration class.
-     * @var Configuration
-     */
-    protected $config;
-
-    /**
-     * Mock instance of the Configuration class.
-     * @var Configuration
-     */
-    protected $sub_config;
-
-    /**
      * Testcase Constructor.
      */
     public function setUp()
     {
         $this->curl       = $this->getMock('Lunr\Network\Curl');
         $this->logger     = $this->getMock('Psr\Log\LoggerInterface');
-        $this->config     = $this->getMock('Lunr\Core\Configuration');
-        $this->sub_config = $this->getMock('Lunr\Core\Configuration');
 
-        $map = [ 'gcm' => $this->sub_config ];
-
-        $this->config->expects($this->any())
-                     ->method('offsetGet')
-                     ->will($this->returnValueMap($map));
-
-        $map = ['google_send_url' => 'gcm_post_url'];
-
-        $this->sub_config->expects($this->any())
-                         ->method('offsetGet')
-                         ->will($this->returnValueMap($map));
-
-        $this->class = new GCMDispatcher($this->curl, $this->logger, $this->config);
+        $this->class = new GCMDispatcher($this->curl, $this->logger);
 
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMDispatcher');
     }
@@ -90,8 +64,6 @@ abstract class GCMDispatcherTest extends LunrBaseTest
     public function tearDown()
     {
         unset($this->logger);
-        unset($this->config);
-        unset($this->sub_config);
         unset($this->class);
         unset($this->reflection);
     }

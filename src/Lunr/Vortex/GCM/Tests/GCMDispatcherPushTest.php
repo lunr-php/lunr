@@ -51,7 +51,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
 
         $this->curl->expects($this->once())
                    ->method('post_request')
-                   ->with($this->config['gcm']['google_send_url'], $this->equalTo('{"registration_ids":["endpoint"]}'))
+                   ->with('https://android.googleapis.com/gcm/send', $this->equalTo('{"registration_ids":["endpoint"]}'))
                    ->will($this->returnValue($response));
 
         $this->assertInstanceOf('Lunr\Vortex\GCM\GCMResponse', $this->class->push());
@@ -74,7 +74,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
 
         $this->curl->expects($this->once())
                    ->method('post_request')
-                   ->with($this->config['gcm']['google_send_url'], $this->equalTo('{"registration_ids":["endpoint"]}'))
+                   ->with('https://android.googleapis.com/gcm/send', $this->equalTo('{"registration_ids":["endpoint"]}'))
                    ->will($this->returnValue($response));
 
         $this->class->push();
