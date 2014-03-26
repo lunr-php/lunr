@@ -63,7 +63,7 @@ class GCMResponse
             $this->status = PushNotificationStatus::ERROR;
 
             $context = [ 'error' => $response->get_network_error_message(), 'endpoint' => $device_id ];
-            $logger->error('Dispatching push notification to {endpoint} failed: {error}', $context);
+            $logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
         }
         else
         {

@@ -67,7 +67,7 @@ abstract class GCMResponseTest extends LunrBaseTest
                  ->will($this->returnValueMap($map));
 
         $this->logger->expects($this->once())
-                     ->method('error')
+                     ->method('warning')
                      ->with(
                         $this->equalTo('Dispatching push notification to {endpoint} failed: {error}'),
                         $this->equalTo(['error' => 'Error Message', 'endpoint' => '12345679'])

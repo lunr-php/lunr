@@ -52,7 +52,7 @@ class EmailResponse
             $this->status = PushNotificationStatus::ERROR;
 
             $context = [ 'endpoint' => $email ];
-            $logger->error('Sending email notification to {endpoint} failed.', $context);
+            $logger->warning('Sending email notification to {endpoint} failed.', $context);
         }
     }
 

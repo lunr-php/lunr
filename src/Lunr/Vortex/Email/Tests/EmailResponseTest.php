@@ -51,7 +51,7 @@ abstract class EmailResponseTest extends LunrBaseTest
         $response = FALSE;
 
         $this->logger->expects($this->once())
-                     ->method('error')
+                     ->method('warning')
                      ->with(
                         $this->equalTo('Sending email notification to {endpoint} failed.'),
                         $this->equalTo([ 'endpoint' => '12345679' ])

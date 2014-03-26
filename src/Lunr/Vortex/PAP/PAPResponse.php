@@ -70,13 +70,13 @@ class PAPResponse
             $this->status = PushNotificationStatus::ERROR;
 
             $context = [ 'error' => $response->get_network_error_message(), 'endpoint' => $device_id ];
-            $logger->error('Dispatching push notification to {endpoint} failed: {error}', $context);
+            $logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
         }
         elseif ($this->parse_pap_response() === FALSE) {
             $this->status = PushNotificationStatus::ERROR;
 
             $context = [ 'error' => $this->pap_response['message'], 'endpoint' => $device_id ];
-            $logger->error('Parsing response of push notification to {endpoint} failed: {error}', $context);
+            $logger->warning('Parsing response of push notification to {endpoint} failed: {error}', $context);
         }
         else
         {
