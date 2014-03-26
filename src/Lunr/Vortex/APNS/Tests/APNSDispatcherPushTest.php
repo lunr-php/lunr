@@ -81,6 +81,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
         }
 
         $this->assertTrue($this->get_reflection_property_value('setup'));
+        $this->assertPropertyEquals('endpoint', '');
         $this->assertPropertyEquals('payload', '');
     }
 

@@ -117,6 +117,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
 
         $this->class->push();
 
+        $this->assertPropertyEquals('endpoint', '');
         $this->assertPropertyEquals('push_id', '');
         $this->assertPropertyEquals('payload', '');
         $this->assertPropertyEquals('deliverbefore', '');

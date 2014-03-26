@@ -148,11 +148,14 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
 
         $response = $this->curl->post_request($pap_url, $pap_data);
 
+        $res = new PAPResponse($response, $this->logger, $this->endpoint);
+
+        $this->endpoint      = '';
         $this->push_id       = '';
         $this->payload       = '';
         $this->deliverbefore = '';
 
-        return new PAPResponse($response, $this->logger, $this->endpoint);
+        return $res;
     }
 
     /**

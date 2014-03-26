@@ -156,9 +156,12 @@ class APNSDispatcher implements PushNotificationDispatcherInterface
         apn_close($this->apn);
         apn_payload_free($apn_payload);
 
-        $this->payload = '';
+        $res = new APNSResponse($response, $this->logger, $this->endpoint);
 
-        return new APNSResponse($response, $this->logger, $this->endpoint);
+        $this->endpoint = '';
+        $this->payload  = '';
+
+        return $res;
     }
 
     /**

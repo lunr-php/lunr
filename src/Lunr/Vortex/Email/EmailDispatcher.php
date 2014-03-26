@@ -101,9 +101,12 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
 
         $response = $this->mail->send();
 
-        $this->payload = '';
+        $res = new EmailResponse($response, $this->logger, $this->endpoint);
 
-        return new EmailResponse($response, $this->logger, $this->endpoint);
+        $this->endpoint = '';
+        $this->payload  = '';
+
+        return $res;
     }
 
     /**

@@ -79,6 +79,7 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
 
         $this->class->push();
 
+        $this->assertPropertyEquals('endpoint', '');
         $this->assertPropertyEquals('payload', '');
     }
 

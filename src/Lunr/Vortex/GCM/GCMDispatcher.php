@@ -107,11 +107,13 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
 
         $response = $this->curl->post_request(self::GOOGLE_SEND_URL, $this->payload);
 
+        $res = new GCMResponse($response, $this->logger, $this->endpoint);
+
         $this->endpoint   = '';
         $this->payload    = '';
         $this->auth_token = '';
 
-        return new GCMResponse($response, $this->logger, $this->endpoint);
+        return $res;
     }
 
     /**
