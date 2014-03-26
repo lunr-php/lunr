@@ -87,6 +87,23 @@ class RequestProxyBaseTest extends RequestProxyTest
     }
 
     /**
+     * Test that redirect() replaces the request class that is proxied with an inter request class.
+     *
+     * @covers Lunr\Corona\RequestProxy::redirect
+     */
+    public function testRedirectReplacesRequestClassWithInterRequestClass()
+    {
+        $new = $this->getMockBuilder('Lunr\Corona\InterRequest')
+                    ->disableOriginalConstructor()
+                    ->getMock();
+
+        $this->class->redirect($new);
+
+        $this->assertPropertySame('request', $new);
+        $this->assertNotSame($new, $this->request);
+    }
+
+    /**
      * Test that redirect() ignores trying to replace the request class with a non-request class.
      *
      * @covers Lunr\Corona\RequestProxy::redirect

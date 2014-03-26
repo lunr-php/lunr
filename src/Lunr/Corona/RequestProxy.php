@@ -86,7 +86,7 @@ class RequestProxy
      */
     public function redirect($request)
     {
-        if ($request instanceof RequestInterface)
+        if ($request instanceof RequestInterface || $request instanceof InterRequest)
         {
             $this->request = $request;
         }
