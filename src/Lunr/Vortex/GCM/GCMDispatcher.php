@@ -111,7 +111,6 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
 
         $this->endpoint   = '';
         $this->payload    = '';
-        $this->auth_token = '';
 
         return $res;
     }

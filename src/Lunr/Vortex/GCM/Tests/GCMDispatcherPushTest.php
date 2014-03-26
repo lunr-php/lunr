@@ -81,7 +81,6 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
 
         $this->assertPropertyEquals('endpoint', '');
         $this->assertPropertyEquals('payload', '');
-        $this->assertPropertyEquals('auth_token', '');
     }
 
 }
