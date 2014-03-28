@@ -57,6 +57,19 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     }
 
     /**
+     * Define Column names of the affected by Insert or Update SQL statement.
+     *
+     * @param Array $keys Array containing escaped field names to be set
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function column_names($keys)
+    {
+        $keys = array_map([ $this->escaper, 'column' ], $keys);
+        return parent::column_names($keys);
+    }
+
+    /**
      * Define a SELECT clause.
      *
      * @param String $select The column(s) to select
