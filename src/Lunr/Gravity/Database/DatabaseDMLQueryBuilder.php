@@ -787,21 +787,23 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     public function sql_group_start($condition = 'WHERE')
     {
         $condition = ($condition === 'ON') ? 'join' : strtolower($condition);
+
         if ($this->is_join)
         {
-            $this->$condition .= 'ON (';
+            $this->$condition .= 'ON ';
             $this->is_join     = FALSE;
         }
         elseif ($this->connector != '')
         {
-            $this->$condition .= ' ' . $this->connector . ' (';
+            $this->$condition .= ' ' . $this->connector . ' ';
             $this->connector   = '';
         }
-        else
+        elseif (!empty($this->$condition) && substr($this->$condition, -1) !== '(')
         {
-            $this->$condition .= '(';
+            $this->$condition .= ' AND ';
         }
 
+        $this->$condition .= '(';
     }
 
     /**

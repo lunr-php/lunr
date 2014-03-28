@@ -259,6 +259,43 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+    * Test incremental grouping condition start.
+    *
+    * @param String $keyword   The expected statement keyword
+    * @param String $attribute The name of the property where the statement is stored
+    *
+    * @dataProvider conditionalKeywordProvider
+    * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
+    */
+    public function testIncrementalOpenGroup($keyword, $attribute)
+    {
+        $method = $this->get_accessible_reflection_method('sql_group_start');
+        $method->invokeArgs($this->class, [ $keyword ]);
+        $method->invokeArgs($this->class, [ $keyword ]);
+
+        $this->assertEquals('((', $this->get_reflection_property_value($attribute));
+    }
+
+    /**
+    * Test grouping condition start uses AND connector by default if there is already a condition.
+    *
+    * @param String $keyword   The expected statement keyword
+    * @param String $attribute The name of the property where the statement is stored
+    *
+    * @dataProvider conditionalKeywordProvider
+    * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
+    */
+    public function testOpenGroupUsesDefaultConnector($keyword, $attribute)
+    {
+        $this->set_reflection_property_value($attribute, 'Condition');
+
+        $method = $this->get_accessible_reflection_method('sql_group_start');
+        $method->invokeArgs($this->class, [ $keyword ]);
+
+        $this->assertEquals('Condition AND (', $this->get_reflection_property_value($attribute));
+    }
+
+    /**
      * Test closing the parentheses for grouped condition.
      *
      * @param String $keyword   The expected statement keyword
