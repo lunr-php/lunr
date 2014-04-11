@@ -55,7 +55,7 @@ class PAPPayload
      */
     public function get_payload()
     {
-        return json_encode([ 'message' => $this->data ]);
+        return json_encode($this->data);
     }
 
     /**
