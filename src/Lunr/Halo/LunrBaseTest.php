@@ -121,7 +121,10 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
      */
     protected function mock_function($name, $mock)
     {
-        runkit_function_copy($name, $name . self::FUNCTION_ID);
+        if (function_exists($name . self::FUNCTION_ID) === FALSE)
+        {
+            runkit_function_copy($name, $name . self::FUNCTION_ID);
+        }
         runkit_function_redefine($name, '', $mock);
     }
 
