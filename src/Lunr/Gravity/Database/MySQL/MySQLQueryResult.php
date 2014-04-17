@@ -28,6 +28,11 @@ use MySQLi_Result;
  */
 class MySQLQueryResult implements DatabaseQueryResultInterface
 {
+    /**
+     * The MySQL error code for transaction deadlock.
+     * @var Integer
+     */
+    const DEADLOCK_ERR_CODE = 1213;
 
     /**
      * The query string that was executed.
@@ -163,6 +168,16 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     public function has_failed()
     {
         return !$this->success;
+    }
+
+    /**
+     * Check whether the query has a deadlock or not.
+     *
+     * @return Boolean $return TRUE if it failed, FALSE otherwise
+     */
+    public function has_deadlock()
+    {
+        return ($this->error_number == self::DEADLOCK_ERR_CODE) ? TRUE : FALSE;
     }
 
     /**

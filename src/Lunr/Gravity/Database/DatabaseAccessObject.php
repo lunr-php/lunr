@@ -197,6 +197,30 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         }
     }
 
+    /**
+     * Retry executing the query in case of deadlock error.
+     *
+     * @param DatabaseQueryResult $query       The result of the run query
+     * @param Integer             $retry_count The max amount of re-executing the query
+     *
+     * @return mixed $return FALSE on failure, mixed otherwise
+     */
+    protected function result_retry($query, $retry_count = 5)
+    {
+
+        for($i = 0; $i < $retry_count; $i++)
+        {
+            if($query->has_deadlock() === FALSE)
+            {
+                return $query;
+            }
+
+            $query = $this->db->query($query->query());
+        }
+
+        return $query;
+    }
+
 }
 
 ?>

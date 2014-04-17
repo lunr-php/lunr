@@ -417,6 +417,97 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $this->assertEquals($query_result, $result);
     }
 
+    /**
+     * Test that result_retry() returns the same result query if there is no deadlock.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_retry
+     */
+    public function testResultRetryReturnsQueryInNoDeadlock()
+    {
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+                      ->disableOriginalConstructor()
+                      ->getMock();
+
+        $query->expects($this->once())
+              ->method('has_deadlock')
+              ->will($this->returnValue(FALSE));
+
+        $method = $this->reflection_dao->getMethod('result_retry');
+        $method->setAccessible(TRUE);
+
+        $result = $method->invokeArgs($this->dao, [$query]);
+
+        $this->assertSame($result, $query);
+    }
+
+    /**
+     * Test that result_retry() re-executes the query if there is a deadlock.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_retry
+     */
+    public function testResultRetryReExecutesQueryInDeadlock()
+    {
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+                      ->disableOriginalConstructor()
+                      ->getMock();
+
+        $query->expects($this->at(0))
+              ->method('has_deadlock')
+              ->will($this->returnValue(TRUE));
+
+        $query->expects($this->at(1))
+              ->method('query')
+              ->will($this->returnValue('sql_query'));
+
+        $this->db->expects($this->once())
+                 ->method('query')
+                 ->with('sql_query')
+                 ->will($this->returnValue($query));
+
+        $method = $this->reflection_dao->getMethod('result_retry');
+        $method->setAccessible(TRUE);
+
+        $result = $method->invokeArgs($this->dao, [$query, 1]);
+
+        $this->assertSame($result, $query);
+    }
+
+    /**
+     * Test that result_retry() re-executes the query if there is a deadlock more than once.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_retry
+     */
+    public function testResultRetryReExecutesQueryInDeadlockMoreThanOnce()
+    {
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+                      ->disableOriginalConstructor()
+                      ->getMock();
+
+        $query->expects($this->at(0))
+              ->method('has_deadlock')
+              ->will($this->returnValue(TRUE));
+
+        $query->expects($this->at(1))
+              ->method('query')
+              ->will($this->returnValue('sql_query'));
+
+        $this->db->expects($this->once())
+                 ->method('query')
+                 ->with('sql_query')
+                 ->will($this->returnValue($query));
+
+        $query->expects($this->at(2))
+              ->method('has_deadlock')
+              ->will($this->returnValue(FALSE));
+
+        $method = $this->reflection_dao->getMethod('result_retry');
+        $method->setAccessible(TRUE);
+
+        $result = $method->invokeArgs($this->dao, [$query, 2]);
+
+        $this->assertSame($result, $query);
+    }
+
 }
 
 ?>

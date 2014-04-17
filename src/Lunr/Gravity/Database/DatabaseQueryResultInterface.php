@@ -34,6 +34,13 @@ interface DatabaseQueryResultInterface
     public function has_failed();
 
     /**
+     * Check whether the query has a deadlock or not.
+     *
+     * @return Boolean $return TRUE if it failed, FALSE otherwise
+     */
+    public function has_deadlock();
+
+    /**
      * Get string description of the error, if there was one.
      *
      * @return String $message Error Message

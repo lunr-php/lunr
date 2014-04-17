@@ -201,6 +201,36 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
         $this->assertNull($this->result->result_cell('cell'));
     }
 
+    /**
+     * Test that the has_deadlock() method returns TRUE.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::has_deadlock
+     */
+    public function testHasDeadlockReturnsTrue()
+    {
+        $property = $this->result_reflection->getProperty('error_number');
+        $property->setAccessible(TRUE);
+
+        $property->setValue($this->result, 1213);
+
+        $this->assertTrue($this->result->has_deadlock());
+    }
+
+    /**
+     * Test that the has_deadlock() method returns FALSE.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::has_deadlock
+     */
+    public function testHasDeadlockReturnsFalse()
+    {
+        $property = $this->result_reflection->getProperty('error_number');
+        $property->setAccessible(TRUE);
+
+        $property->setValue($this->result, 999);
+
+        $this->assertFalse($this->result->has_deadlock());
+    }
+
 }
 
 ?>
