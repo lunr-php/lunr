@@ -26,6 +26,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RecursiveRegexIterator;
 use SplFileObject;
+use FilesystemIterator;
 
 /**
  * Class to access a physical filesystem.
@@ -271,6 +272,48 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
         }
 
         return is_bool($file) ? FALSE : file_put_contents($file, $contents, $flags);
+    }
+
+    /**
+     * Recursively removes a directory and its contents.
+     *
+     * @param  String $dir_path The directory path to be removed
+     *
+     * @return Boolean TRUE when directory is removed and FALSE in a failure.
+     */
+    public function rmdir($dir_path)
+    {
+        try
+        {
+            $directory = new RecursiveDirectoryIterator($dir_path, FilesystemIterator::SKIP_DOTS);
+            $iterator  = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::CHILD_FIRST);
+
+            foreach($iterator as $file)
+            {
+                if($file->isFile())
+                {
+                    unlink($file->getPathname());
+                }
+                else
+                {
+                    rmdir($file->getPathname());
+                }
+            }
+
+            return rmdir($dir_path);
+        }
+        catch(UnexpectedValueException $unexpected)
+        {
+            $context = [ 'directory' => $dir_path, 'message' => $unexpected->getMessage() ];
+            $this->logger->error("Couldn't recurse on directory '{directory}': {message}", $context);
+            return FALSE;
+        }
+        catch(RuntimeException $runtime)
+        {
+            $context = [ 'message' => $runtime->getMessage() ];
+            $this->logger->warning('{message}', $context);
+            return FALSE;
+        }
     }
 
 }

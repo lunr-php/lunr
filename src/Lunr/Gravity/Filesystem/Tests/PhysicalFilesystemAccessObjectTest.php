@@ -114,6 +114,35 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
         return $modes;
     }
 
+    /**
+     * Unit test data provider for empty filepath values.
+     *
+     * @return array $filepath Array of invalid filepaths
+     */
+    public function emptyFilepathValueProvider()
+    {
+        $filepath   = [];
+        $filepath[] = [NULL];
+        $filepath[] = [FALSE];
+
+        return $filepath;
+    }
+
+    /**
+     * Unit test data provider for invalid filepath values.
+     *
+     * @return array $filepath Array of invalid filepaths
+     */
+    public function invalidFilepathValueProvider()
+    {
+        $filepath   = [];
+        $filepath[] = ['/tmp56474q', 'RecursiveDirectoryIterator::__construct(/tmp56474q): failed to open dir: No such file or directory'];
+        $filepath[] = ['/root', 'RecursiveDirectoryIterator::__construct(/root): failed to open dir: Permission denied'];
+        $filepath[] = [new stdClass(), 'RecursiveDirectoryIterator::__construct() expects parameter 1 to be string, object given'];
+
+        return $filepath;
+    }
+
 }
 
 ?>
