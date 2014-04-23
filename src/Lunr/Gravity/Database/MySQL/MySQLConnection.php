@@ -89,6 +89,36 @@ class MySQLConnection extends DatabaseConnection
     protected $qos_policy;
 
     /**
+     * The path name to the key file.
+     * @var String
+     */
+    protected $ssl_key;
+
+    /**
+     * The path name to the certificate file.
+     * @var String
+     */
+    protected $ssl_cert;
+
+    /**
+     * The path name to the certificate authority file.
+     * @var String
+     */
+    protected $ca_cert;
+
+    /**
+     * The pathname to a directory that contains trusted SSL CA certificates in PEM format.
+     * @var String
+     */
+    protected $ca_path;
+
+    /**
+     * A list of allowable ciphers to use for SSL encryption.
+     * @var String
+     */
+    protected $cipher;
+
+    /**
      * Constructor.
      *
      * @param Configuration   $configuration Shared instance of the configuration class
@@ -128,6 +158,11 @@ class MySQLConnection extends DatabaseConnection
         unset($this->socket);
         unset($this->qos_policy);
         unset($this->query_hint);
+        unset($this->ssl_key);
+        unset($this->ssl_cert);
+        unset($this->ca_cert);
+        unset($this->ca_path);
+        unset($this->cipher);
 
         parent::__destruct();
     }
@@ -139,10 +174,15 @@ class MySQLConnection extends DatabaseConnection
      */
     private function set_configuration()
     {
-        $this->rw_host = $this->configuration['db']['rw_host'];
-        $this->user    = $this->configuration['db']['username'];
-        $this->pwd     = $this->configuration['db']['password'];
-        $this->db      = $this->configuration['db']['database'];
+        $this->rw_host  = $this->configuration['db']['rw_host'];
+        $this->user     = $this->configuration['db']['username'];
+        $this->pwd      = $this->configuration['db']['password'];
+        $this->db       = $this->configuration['db']['database'];
+        $this->ssl_key  = $this->configuration['db']['ssl_key'];
+        $this->ssl_cert = $this->configuration['db']['ssl_cert'];
+        $this->ca_cert  = $this->configuration['db']['ca_cert'];
+        $this->ca_path  = $this->configuration['db']['ca_path'];
+        $this->cipher   = $this->configuration['db']['cipher'];
 
         if (empty($this->configuration['db']['ro_host']))
         {
@@ -191,6 +231,11 @@ class MySQLConnection extends DatabaseConnection
         }
 
         $host = ($this->readonly === TRUE) ? $this->ro_host : $this->rw_host;
+
+        if(isset($this->ssl_key, $this->ssl_cert, $this->ca_cert))
+        {
+            $this->mysqli->ssl_set($this->ssl_key, $this->ssl_cert, $this->ca_cert, $this->ca_path, $this->cipher);
+        }
 
         $this->mysqli->connect($host, $this->user, $this->pwd, $this->db, $this->port, $this->socket);
 

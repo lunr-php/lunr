@@ -3,7 +3,7 @@
 /**
  * This file contains the MySQLConnectionTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   MySQL
  * @package    Gravity
@@ -67,9 +67,9 @@ abstract class MySQLConnectionTest extends LunrBaseTest
 
         $this->configuration = $this->getMock('Lunr\Core\Configuration');
 
-        $map = array(
-            array('db', $this->sub_configuration),
-        );
+        $map = [
+            ['db', $this->sub_configuration],
+        ];
 
         $this->configuration->expects($this->any())
                             ->method('offsetGet')
@@ -93,21 +93,21 @@ abstract class MySQLConnectionTest extends LunrBaseTest
 
         $this->configuration = $this->getMock('Lunr\Core\Configuration');
 
-        $map = array(
-            array('db', $this->sub_configuration),
-        );
+        $map = [
+            ['db', $this->sub_configuration],
+        ];
 
         $this->configuration->expects($this->any())
                             ->method('offsetGet')
                             ->will($this->returnValueMap($map));
 
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('driver', 'mysql')
-        );
+        $map = [
+            ['rw_host', 'rw_host'],
+            ['username', 'username'],
+            ['password', 'password'],
+            ['database', 'database'],
+            ['driver', 'mysql']
+        ];
 
         $this->sub_configuration->expects($this->any())
                                 ->method('offsetGet')
@@ -140,11 +140,11 @@ abstract class MySQLConnectionTest extends LunrBaseTest
      */
     public function escapeStringProvider()
     {
-        $strings   = array();
-        $strings[] = array("'--", "\'--", "\'--");
-        $strings[] = array("\'--", "\\\'--", "\\\'--");
-        $strings[] = array('70%', '70%', '70%');
-        $strings[] = array('test_name', 'test_name', 'test_name');
+        $strings   = [];
+        $strings[] = ["'--", "\'--", "\'--"];
+        $strings[] = ["\'--", "\\\'--", "\\\'--"];
+        $strings[] = ['70%', '70%', '70%'];
+        $strings[] = ['test_name', 'test_name', 'test_name'];
 
         return $strings;
     }

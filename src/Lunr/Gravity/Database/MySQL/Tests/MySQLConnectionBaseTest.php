@@ -114,6 +114,47 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     }
 
     /**
+     * Test that ssl_key is set as NULL if not set in the configuration.
+     */
+    public function testSSLKeyIsSetCorrectly()
+    {
+        $this->assertPropertyEquals('ssl_key', NULL);
+    }
+
+    /**
+     * Test that ssl_cert is set as NULL if not set in the configuration.
+     */
+    public function testSSLCertIsSetCorrectly()
+    {
+        $this->assertPropertyEquals('ssl_cert', NULL);
+    }
+
+    /**
+     * Test that ca_cert is set as NULL if not set in the configuration.
+     */
+    public function testCACertIsSetCorrectly()
+    {
+        $this->assertPropertyEquals('ca_cert', NULL);
+    }
+
+    /**
+     * Test that ca_path is set as NULL if not set in the configuration.
+     */
+    public function testCAPathIsSetCorrectly()
+    {
+        $this->assertPropertyEquals('ca_path', NULL);
+    }
+
+    /**
+     * Test that cipher is set as NULL if not set in the configuration.
+     */
+    public function testCipherIsSetCorrectly()
+    {
+        $this->assertPropertyEquals('cipher', NULL);
+    }
+
+
+    /**
      * Test that get_new_dml_query_builder_object() returns a new object.
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_new_dml_query_builder_object

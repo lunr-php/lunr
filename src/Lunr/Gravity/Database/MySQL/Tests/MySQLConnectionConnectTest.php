@@ -3,7 +3,7 @@
 /**
  * This file contains the MySQLConnectionConnectTest class.
  *
- * PHP Version 5.3
+ * PHP Version 5.4
  *
  * @category   MySQL
  * @package    Gravity
@@ -48,6 +48,9 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
                      ->method('connect')
                      ->with('ro_host', 'username', 'password', 'database', $port, $socket);
 
+        $this->mysqli->expects($this->never())
+                     ->method('ssl_set');
+
         $this->mysqli->expects($this->once())
                      ->method('set_charset');
 
@@ -75,6 +78,46 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
                      ->method('connect')
                      ->with('rw_host', 'username', 'password', 'database', $port, $socket);
 
+        $this->mysqli->expects($this->never())
+                     ->method('ssl_set');
+
+        $this->mysqli->expects($this->once())
+                     ->method('set_charset');
+
+        $this->class->connect();
+
+        $property = $this->get_accessible_reflection_property('connected');
+
+        $this->assertTrue($property->getValue($this->class));
+
+        $property->setValue($this->class, FALSE);
+    }
+
+    /**
+     * Test a successful readwrite connection with ssl.
+     *
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::connect
+     */
+    public function testSuccessfulConnectReadwriteWithSSL()
+    {
+        $port   = ini_get('mysqli.default_port');
+        $socket = ini_get('mysqli.default_socket');
+
+        $this->set_reflection_property_value('ssl_key', 'ssl_key');
+        $this->set_reflection_property_value('ssl_cert', 'ssl_cert');
+        $this->set_reflection_property_value('ca_cert', 'ca_cert');
+        $this->set_reflection_property_value('ca_path', 'ca_path');
+        $this->set_reflection_property_value('cipher', 'cipher');
+
+        $this->mysqli->expects($this->once())
+                     ->method('connect')
+                     ->with('rw_host', 'username', 'password', 'database', $port, $socket);
+
+        $this->mysqli->expects($this->once())
+                     ->method('ssl_set')
+                     ->with('ssl_key', 'ssl_cert', 'ca_cert', 'ca_path', 'cipher');
+
         $this->mysqli->expects($this->once())
                      ->method('set_charset');
 
@@ -98,6 +141,9 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
+        $this->mysqli->expects($this->never())
+                     ->method('ssl_set');
+
         $this->class->connect();
 
         $property = $this->reflection->getProperty('connected');
@@ -118,6 +164,9 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
 
         $this->mysqli->expects($this->never())
                      ->method('connect');
+
+        $this->mysqli->expects($this->never())
+                     ->method('ssl_set');
 
         $this->class->connect();
 
@@ -156,6 +205,9 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
         $sub_configuration->expects($this->any())
                           ->method('offsetGet')
                           ->will($this->returnValueMap($map));
+
+        $this->mysqli->expects($this->never())
+                     ->method('ssl_set');
 
         $this->set_reflection_property_value('configuration', $configuration);
 
