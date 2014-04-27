@@ -217,6 +217,16 @@ class WebRequestParser implements RequestParserInterface
     }
 
     /**
+     * Parse command line variables into local variable.
+     *
+     * @return Array Parsed command line arguments
+     */
+    public function parse_command_line_arguments()
+    {
+        return [];
+    }
+
+    /**
      * Negotiate & retrieve the client's prefered content type.
      *
      * @param Array $supported Array containing the supported content types

@@ -63,6 +63,13 @@ interface RequestParserInterface
     public function parse_cookie();
 
     /**
+     * Parse command line variables into local variable.
+     *
+     * @return Array Parsed command line arguments
+     */
+    public function parse_command_line_arguments();
+
+    /**
      * Negotiate & retrieve the client's prefered content type.
      *
      * @param Array $supported Array containing the supported content types

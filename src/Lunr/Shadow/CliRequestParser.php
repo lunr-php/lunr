@@ -189,6 +189,26 @@ class CliRequestParser implements RequestParserInterface
     }
 
     /**
+     * Parse command line variables into local variable.
+     *
+     * @return Array Parsed command line arguments
+     */
+    public function parse_command_line_arguments()
+    {
+        $ast = $this->ast;
+
+        unset($ast['controller'], $ast['c']);
+        unset($ast['method'], $ast['m']);
+        unset($ast['params'], $ast['param'], $ast['p']);
+        unset($ast['post'], $ast['get'], $ast['files'], $ast['cookie']);
+        unset($ast['accept-format']);
+        unset($ast['accept-language']);
+        unset($ast['accept-encoding']);
+
+        return $ast;
+    }
+
+    /**
      * Negotiate & retrieve the client's prefered content type.
      *
      * @param Array $supported Array containing the supported content types

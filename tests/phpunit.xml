@@ -70,6 +70,7 @@
             <file>src/Lunr/Corona/Tests/WebRequestParserParseFilesTest.php</file>
             <file>src/Lunr/Corona/Tests/WebRequestParserParseCookieTest.php</file>
             <file>src/Lunr/Corona/Tests/WebRequestParserAcceptTest.php</file>
+            <file>src/Lunr/Corona/Tests/WebRequestParserParseCommandLineArgumentsTest.php</file>
         </testsuite>
         <testsuite name="Feedback">
             <file>src/Lunr/Feedback/Tests/PSR3LoggerTest.php</file>
@@ -223,6 +224,7 @@
             <file>src/Lunr/Shadow/Tests/CliRequestParserParseCookieTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestParserParseFilesTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestParserAcceptTest.php</file>
+            <file>src/Lunr/Shadow/Tests/CliRequestParserParseCommandLineArgumentsTest.php</file>
         </testsuite>
         <testsuite name="Spark">
             <file>src/Lunr/Spark/Tests/CentralAuthenticationStoreBaseTest.php</file>
