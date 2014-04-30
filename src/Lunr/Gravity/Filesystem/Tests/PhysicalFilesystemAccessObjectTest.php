@@ -143,6 +143,20 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
         return $filepath;
     }
 
+    /**
+     * Unit test data provider for invalid array values.
+     *
+     * @return array $filepath Array of invalid values
+     */
+    public function invalidCSVArrayValues()
+    {
+        $values   = [];
+        $values[] = [ NULL ];
+        $values[] = [ FALSE ];
+
+        return $values;
+    }
+
 }
 
 ?>

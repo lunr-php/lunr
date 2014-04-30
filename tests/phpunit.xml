@@ -167,6 +167,7 @@
             <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectDirectoryTest.php</file>
             <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectFindTest.php</file>
             <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemRemoveDirectoryTest.php</file>
+            <file>src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectCSVTest.php</file>
         </testsuite>
         <testsuite name="L10n">
             <file>tests/system/EnvironmentTest.php</file>
