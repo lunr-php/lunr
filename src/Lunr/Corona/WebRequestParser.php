@@ -96,6 +96,33 @@ class WebRequestParser implements RequestParserInterface
 
         $request['base_url'] = $baseurl . $request['base_path'];
 
+        $request['device_useragent'] = NULL;
+        $request['useragent']        = NULL;
+
+        $keys = [
+            'HTTP_X_DEVICE_USER_AGENT',
+            'HTTP_X_ORIGINAL_USER_AGENT',
+            'HTTP_X_OPERAMINI_PHONE_UA',
+            'HTTP_X_SKYFIRE_PHONE',
+            'HTTP_X_BOLT_PHONE_UA',
+            'HTTP_DEVICE_STOCK_UA',
+            'HTTP_X_UCBROWSER_DEVICE_UA'
+        ];
+
+        foreach ($keys as $key)
+        {
+            if (array_key_exists($key, $_SERVER))
+            {
+                $request['device_useragent'] = $_SERVER[$key];
+                break;
+            }
+        }
+
+        if (array_key_exists('HTTP_USER_AGENT', $_SERVER))
+        {
+            $request['useragent'] = $_SERVER['HTTP_USER_AGENT'];
+        }
+
         // Preset with default values:
         $request['controller'] = $this->config['default_controller'];
         $request['method']     = $this->config['default_method'];

@@ -47,12 +47,14 @@ trait RequestParserRequestTestTrait
     /**
      * Preparation work for the request tests.
      *
-     * @param String $protocol Protocol name
-     * @param String $port     Port number
+     * @param String  $protocol  Protocol name
+     * @param String  $port      Port number
+     * @param Boolean $useragent Whether to include useragent information or not
+     * @param String  $key       Device useragent key
      *
      * @return void
      */
-    protected abstract function prepare_request_test($protocol = 'HTTP', $port = '80');
+    protected abstract function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = '');
 
     /**
      * Preparation work for the request tests.
@@ -109,6 +111,13 @@ trait RequestParserRequestTestTrait
      * @return array $base Array of parameter key names
      */
     public abstract function paramsKeyNameProvider();
+
+    /**
+     * Unit Test Data Provider for Device Useragent keys.
+     *
+     * @return array $keys Array of array keys.
+     */
+    public abstract function deviceUserAgentKeyProvider();
 
     /**
      * Test that the host is stored correctly.
@@ -213,6 +222,74 @@ trait RequestParserRequestTestTrait
         $this->assertInternalType('array', $request);
         $this->assertArrayHasKey('base_url', $request);
         $this->assertEquals($baseurl, $request['base_url']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that the useragent is stored correctly, when it is not present.
+     */
+    public function testRequestNoUserAgent()
+    {
+        $this->prepare_request_test();
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('useragent', $request);
+        $this->assertNull($request['useragent']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that the device useragent is stored correctly, when it is not present.
+     */
+    public function testRequestNoDeviceUserAgent()
+    {
+        $this->prepare_request_test();
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('device_useragent', $request);
+        $this->assertNull($request['device_useragent']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that the useragent is stored correctly.
+     */
+    public function testRequestUserAgent()
+    {
+        $this->prepare_request_test('HTTP', '80', TRUE);
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('useragent', $request);
+        $this->assertEquals('UserAgent', $request['useragent']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that the device useragent is stored correctly.
+     *
+     * @param String $key Key for the device useragent string
+     *
+     * @dataProvider deviceUserAgentKeyProvider
+     */
+    public function testRequestDeviceUserAgent($key)
+    {
+        $this->prepare_request_test('HTTP', '80', TRUE, $key);
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('device_useragent', $request);
+        $this->assertEquals('Device UserAgent', $request['device_useragent']);
 
         $this->cleanup_request_test();
     }

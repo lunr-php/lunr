@@ -41,12 +41,14 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
     /**
      * Preparation work for the request tests.
      *
-     * @param String $protocol Protocol name
-     * @param String $port     Port number
+     * @param String  $protocol  Protocol name
+     * @param String  $port      Port number
+     * @param Boolean $useragent Whether to include useragent information or not
+     * @param String  $key       Device useragent key
      *
      * @return void
      */
-    protected function prepare_request_test($protocol = 'HTTP', $port = '80')
+    protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = '')
     {
         if (extension_loaded('runkit') === FALSE)
         {
@@ -88,6 +90,21 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
                             ->method('offsetGet')
                             ->with($this->equalTo('default_url'))
                             ->will($this->returnValue($url));
+
+        if ($useragent === TRUE)
+        {
+            $property = $this->get_accessible_reflection_property('ast');
+            $ast      = $property->getValue($this->class);
+
+            $ast['useragent'] = [ 'UserAgent' ];
+
+            if ($key != '')
+            {
+                $ast[$key] = [ 'Device UserAgent' ];
+            }
+
+            $property->setValue($this->class, $ast);
+        }
     }
 
     /**
@@ -235,6 +252,19 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
         $value[] = [ 'p' ];
 
         return $value;
+    }
+
+    /**
+     * Unit Test Data Provider for Device Useragent keys in $_SERVER.
+     *
+     * @return array $keys Array of array keys.
+     */
+    public function deviceUserAgentKeyProvider()
+    {
+        $keys   = [];
+        $keys[] = [ 'device_useragent' ];
+
+        return $keys;
     }
 
     /**

@@ -41,12 +41,14 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
     /**
      * Preparation work for the request tests.
      *
-     * @param String $protocol Protocol name
-     * @param String $port     Port number
+     * @param String  $protocol  Protocol name
+     * @param String  $port      Port number
+     * @param Boolean $useragent Whether to include useragent information or not
+     * @param String  $key       Device useragent key
      *
      * @return void
      */
-    protected function prepare_request_test($protocol = 'HTTP', $port = '80')
+    protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = '')
     {
         if (extension_loaded('runkit') === FALSE)
         {
@@ -59,6 +61,16 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
         $_SERVER['HTTPS']       = $protocol === 'HTTPS' ? 'on' : 'off';
         $_SERVER['SERVER_NAME'] = 'www.domain.com';
         $_SERVER['SERVER_PORT'] = $port;
+
+        if ($useragent === TRUE)
+        {
+            $_SERVER['HTTP_USER_AGENT'] = 'UserAgent';
+
+            if ($key != '')
+            {
+                $_SERVER[$key] = 'Device UserAgent';
+            }
+        }
     }
 
     /**
@@ -195,6 +207,25 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
         $value[] = [ 'param' ];
 
         return $value;
+    }
+
+    /**
+     * Unit Test Data Provider for Device Useragent keys in $_SERVER.
+     *
+     * @return array $keys Array of array keys.
+     */
+    public function deviceUserAgentKeyProvider()
+    {
+        $keys   = [];
+        $keys[] = [ 'HTTP_X_DEVICE_USER_AGENT' ];
+        $keys[] = [ 'HTTP_X_ORIGINAL_USER_AGENT' ];
+        $keys[] = [ 'HTTP_X_OPERAMINI_PHONE_UA' ];
+        $keys[] = [ 'HTTP_X_SKYFIRE_PHONE' ];
+        $keys[] = [ 'HTTP_X_BOLT_PHONE_UA' ];
+        $keys[] = [ 'HTTP_DEVICE_STOCK_UA' ];
+        $keys[] = [ 'HTTP_X_UCBROWSER_DEVICE_UA' ];
+
+        return $keys;
     }
 
     /**

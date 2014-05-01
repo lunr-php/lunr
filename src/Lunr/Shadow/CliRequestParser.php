@@ -88,6 +88,19 @@ class CliRequestParser implements RequestParserInterface
         $request['method']     = $this->config['default_method'];
         $request['params']     = [];
 
+        $request['device_useragent'] = NULL;
+        $request['useragent']        = NULL;
+
+        if (array_key_exists('device_useragent', $this->ast))
+        {
+            $request['device_useragent'] = $this->ast['device_useragent'][0];
+        }
+
+        if (array_key_exists('useragent', $this->ast))
+        {
+            $request['useragent'] = $this->ast['useragent'][0];
+        }
+
         foreach([ 'controller', 'method', 'c', 'm' ] as $key)
         {
             if (array_key_exists($key, $this->ast))
