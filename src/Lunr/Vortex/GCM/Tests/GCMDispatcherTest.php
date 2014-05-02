@@ -50,8 +50,8 @@ abstract class GCMDispatcherTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->curl       = $this->getMock('Lunr\Network\Curl');
-        $this->logger     = $this->getMock('Psr\Log\LoggerInterface');
+        $this->curl   = $this->getMock('Lunr\Network\Curl');
+        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->class = new GCMDispatcher($this->curl, $this->logger);
 

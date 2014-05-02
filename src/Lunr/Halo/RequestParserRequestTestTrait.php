@@ -47,8 +47,8 @@ trait RequestParserRequestTestTrait
     /**
      * Preparation work for the request tests.
      *
-     * @param String  $protocol Protocol name
-     * @param String  $port     Port number
+     * @param String $protocol Protocol name
+     * @param String $port     Port number
      *
      * @return void
      */

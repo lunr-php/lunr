@@ -202,7 +202,7 @@ class APNSDispatcher implements PushNotificationDispatcherInterface
     public function set_certificate($certificate)
     {
         $this->certificate = $certificate;
-        $this->setup = FALSE;
+        $this->setup       = FALSE;
 
         return $this;
     }
@@ -210,14 +210,14 @@ class APNSDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the the SSL certificate passphrase.
      *
-     * @param String $certificate The actual passphrase
+     * @param String $passphrase The actual passphrase
      *
      * @return APNSDispatcher $self Self reference
      */
     public function set_passphrase($passphrase)
     {
         $this->passphrase = $passphrase;
-        $this->setup = FALSE;
+        $this->setup      = FALSE;
 
         return $this;
     }

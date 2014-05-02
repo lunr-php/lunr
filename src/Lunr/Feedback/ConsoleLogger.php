@@ -35,8 +35,8 @@ class ConsoleLogger extends AbstractLogger
     /**
      * Constructor.
      *
-     * @param \Lunr\Corona\RequestInterface $request  Shared instance of the Request class.
-     * @param \Lunr\Shadow\Console          $console  Shared instance of the Console class.
+     * @param \Lunr\Corona\RequestInterface $request Shared instance of the Request class.
+     * @param \Lunr\Shadow\Console          $console Shared instance of the Console class.
      */
     public function __construct($request, $console)
     {

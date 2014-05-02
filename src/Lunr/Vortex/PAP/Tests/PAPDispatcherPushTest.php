@@ -75,15 +75,15 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
 
         $this->curl->expects($this->at(6))
                    ->method('set_http_header')
-                   ->with("Content-Type: multipart/related; boundary=mPsbVQo0a68eIL3OAxnm; type=application/xml");
+                   ->with('Content-Type: multipart/related; boundary=mPsbVQo0a68eIL3OAxnm; type=application/xml');
 
         $this->curl->expects($this->at(7))
                    ->method('set_http_header')
-                   ->with("Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2");
+                   ->with('Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2');
 
         $this->curl->expects($this->at(8))
                    ->method('set_http_header')
-                   ->with("Connection: keep-alive");
+                   ->with('Connection: keep-alive');
 
         $this->curl->expects($this->once())
                    ->method('post_request')

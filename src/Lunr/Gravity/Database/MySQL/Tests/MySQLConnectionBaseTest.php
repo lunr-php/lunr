@@ -153,7 +153,6 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
         $this->assertPropertyEquals('cipher', NULL);
     }
 
-
     /**
      * Test that get_new_dml_query_builder_object() returns a new object.
      *

@@ -30,11 +30,11 @@ class APNSPayloadGetTest extends APNSPayloadTest
     /**
      * Test get_payload() with alert being present.
      *
-     * @param String $file The path to the payload file
+     * @param String $file       The path to the payload file
      * @param array  $data_array The data to compare get_payload against
      *
      * @dataProvider payloadProvider
-     * @covers Lunr\Vortex\APNS\APNSPayload::get_payload
+     * @covers       Lunr\Vortex\APNS\APNSPayload::get_payload
      */
     public function testGetPayloadWithAlert($file, $data_array)
     {

@@ -52,7 +52,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['cookie'] = [ "test1=value1&test2=value2" ];
+        $ast['cookie'] = [ 'test1=value1&test2=value2' ];
 
         $_VAR['test1'] = 'value1';
         $_VAR['test2'] = 'value2';
@@ -74,7 +74,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['cookie'] = [ "test1=value1&test2=value2" ];
+        $ast['cookie'] = [ 'test1=value1&test2=value2' ];
 
         $_VAR['test1'] = 'value1';
         $_VAR['test2'] = 'value2';
@@ -100,7 +100,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['cookie'] = [ "test1=value1&test2=value2&PHPSESSID=value3" ];
+        $ast['cookie'] = [ 'test1=value1&test2=value2&PHPSESSID=value3' ];
 
         $property->setValue($this->class, $ast);
 
@@ -110,6 +110,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
         $this->assertArrayHasKey('PHPSESSID', $_COOKIE);
         $this->assertArrayNotHasKey('PHPSESSID', $result);
     }
+
 }
 
 ?>

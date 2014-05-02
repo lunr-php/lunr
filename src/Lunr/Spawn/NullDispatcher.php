@@ -25,6 +25,7 @@ namespace Lunr\Spawn;
  */
 class NullDispatcher implements JobDispatcherInterface
 {
+
     /**
      * Constructor.
      */

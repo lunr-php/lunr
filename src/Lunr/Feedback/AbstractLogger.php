@@ -41,7 +41,7 @@ abstract class AbstractLogger extends PSR3Logger
     /**
      * Constructor.
      *
-     * @param \Lunr\Corona\RequestInterface $request Reference to the Request class.
+     * @param \Lunr\Corona\RequestInterface $request  Reference to the Request class.
      * @param \Lunr\Core\DateTime           $datetime Instance of the DateTime class.
      */
     public function __construct($request, $datetime = NULL)

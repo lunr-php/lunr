@@ -229,7 +229,6 @@ class PAPResponseSetTest extends PAPResponseTest
         $this->assertEquals(PushNotificationStatus::UNKNOWN, $this->get_reflection_property_value('status'));
     }
 
-
     /**
      * Test parse_pap_response() parses a response with a failure.
      *

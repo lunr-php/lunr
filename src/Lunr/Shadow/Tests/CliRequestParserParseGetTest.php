@@ -50,7 +50,7 @@ class CliRequestParserParseGetTest extends CliRequestParserTest
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['get'] = [ "test1=value1&test2=value2" ];
+        $ast['get'] = [ 'test1=value1&test2=value2' ];
 
         $_VAR['test1'] = 'value1';
         $_VAR['test2'] = 'value2';
@@ -72,7 +72,7 @@ class CliRequestParserParseGetTest extends CliRequestParserTest
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['get'] = [ "test1=value1&test2=value2" ];
+        $ast['get'] = [ 'test1=value1&test2=value2' ];
 
         $_VAR['test1'] = 'value1';
         $_VAR['test2'] = 'value2';

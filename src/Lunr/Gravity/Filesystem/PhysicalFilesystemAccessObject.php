@@ -277,7 +277,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     /**
      * Recursively removes a directory and its contents.
      *
-     * @param  String $dir_path The directory path to be removed
+     * @param String $dir_path The directory path to be removed
      *
      * @return Boolean TRUE when directory is removed and FALSE in a failure.
      */

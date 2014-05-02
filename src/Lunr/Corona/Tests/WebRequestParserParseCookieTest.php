@@ -76,7 +76,7 @@ class WebRequestParserParseCookieTest extends WebRequestParserTest
     {
         $_COOKIE['test1'] = 'value1';
         $_COOKIE['test2'] = 'value2';
-        $cache          = $_COOKIE;
+        $cache            = $_COOKIE;
 
         $result = $this->class->parse_cookie();
 
@@ -114,6 +114,7 @@ class WebRequestParserParseCookieTest extends WebRequestParserTest
         $this->assertCount(1, $_COOKIE);
         $this->assertArrayHasKey('PHPSESSID', $_COOKIE);
     }
+
 }
 
 ?>

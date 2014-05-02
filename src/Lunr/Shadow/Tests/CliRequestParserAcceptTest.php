@@ -45,7 +45,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['accept-format'] = [ "text/plain,text/html" ];
+        $ast['accept-format'] = [ 'text/plain,text/html' ];
 
         $property->setValue($this->class, $ast);
 
@@ -68,7 +68,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['accept-format'] = [ "text/plain,text/html" ];
+        $ast['accept-format'] = [ 'text/plain,text/html' ];
 
         $property->setValue($this->class, $ast);
 
@@ -94,7 +94,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['accept-language'] = [ "de-DE,en-US" ];
+        $ast['accept-language'] = [ 'de-DE,en-US' ];
 
         $property->setValue($this->class, $ast);
 
@@ -117,7 +117,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['accept-language'] = [ "de-DE,en-US" ];
+        $ast['accept-language'] = [ 'de-DE,en-US' ];
 
         $property->setValue($this->class, $ast);
 
@@ -143,7 +143,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['accept-encoding'] = [ "iso8859,utf-8" ];
+        $ast['accept-encoding'] = [ 'iso8859,utf-8' ];
 
         $property->setValue($this->class, $ast);
 
@@ -166,7 +166,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['accept-encoding'] = [ "iso8859,utf-8" ];
+        $ast['accept-encoding'] = [ 'iso8859,utf-8' ];
 
         $property->setValue($this->class, $ast);
 

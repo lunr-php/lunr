@@ -198,7 +198,6 @@ class AbstractLoggerDateTimeTest extends AbstractLoggerTest
         $this->assertEquals(self::DATETIME_LOG_STRING . $expected . ' (Test.php: 223)', $msg);
     }
 
-
 }
 
 ?>

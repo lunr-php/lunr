@@ -109,8 +109,8 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
 
         $res = new GCMResponse($response, $this->logger, $this->endpoint);
 
-        $this->endpoint   = '';
-        $this->payload    = '';
+        $this->endpoint = '';
+        $this->payload  = '';
 
         return $res;
     }

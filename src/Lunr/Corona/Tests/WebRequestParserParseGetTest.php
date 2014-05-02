@@ -74,7 +74,7 @@ class WebRequestParserParseGetTest extends WebRequestParserTest
     {
         $_GET['test1'] = 'value1';
         $_GET['test2'] = 'value2';
-        $cache          = $_GET;
+        $cache         = $_GET;
 
         $result = $this->class->parse_get();
 

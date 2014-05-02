@@ -90,7 +90,7 @@ class WebRequestParserParseFilesTest extends WebRequestParserTest
             'size' => 'Size2'
         ];
 
-        $cache          = $_FILES;
+        $cache = $_FILES;
 
         $result = $this->class->parse_files();
 

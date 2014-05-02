@@ -37,9 +37,9 @@ class EmailResponse
     /**
      * Constructor.
      *
-     * @param Boolean         $response  Response of the Mail Class.
-     * @param LoggerInterface $logger    Shared instance of a Logger.
-     * @param String          $email     The email address that the message was sent to.
+     * @param Boolean         $response Response of the Mail Class.
+     * @param LoggerInterface $logger   Shared instance of a Logger.
+     * @param String          $email    The email address that the message was sent to.
      */
     public function __construct($response, $logger, $email)
     {

@@ -105,7 +105,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
 
         $_GET[$this->params . '1'] = 'parama';
         $_GET[$this->params . '2'] = 'paramb';
-        $_GET['data']   = 'value';
+        $_GET['data']              = 'value';
     }
 
     /**

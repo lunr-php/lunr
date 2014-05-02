@@ -54,7 +54,7 @@ class ConsoleLoggerBaseTest extends ConsoleLoggerTest
     {
         $this->console->expects($this->once())
                       ->method('cli_println')
-                      ->with($this->equalTo("WARNING: Foo"));
+                      ->with($this->equalTo('WARNING: Foo'));
 
         $this->class->log(LogLevel::WARNING, 'Foo');
     }
