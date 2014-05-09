@@ -28,6 +28,23 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
 {
 
     /**
+     * Test into().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::into
+     */
+    public function testInto()
+    {
+        $this->escaper->expects($this->once())
+                      ->method('table')
+                      ->with($this->equalTo('table'))
+                      ->will($this->returnValue('`table`'));
+
+        $this->class->into('table');
+
+        $this->assertEquals('INTO `table`', $this->get_reflection_property_value('into'));
+    }
+
+    /**
      * Test column_names() with a single column.
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::column_names

@@ -31,6 +31,17 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
 {
 
     /**
+     * Test the fluid interface of into().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::into
+     */
+    public function testIntoReturnsSelf()
+    {
+        $return = $this->class->into('table');
+        $this->assertSame($this->class, $return);
+    }
+
+    /**
      * Test the fluid interface of column_names().
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::column_names

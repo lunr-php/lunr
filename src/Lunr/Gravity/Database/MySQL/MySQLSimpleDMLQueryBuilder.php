@@ -57,6 +57,19 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     }
 
     /**
+     * Define INTO clause of the SQL statement.
+     *
+     * @param String $table Table reference
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function into($table)
+    {
+        $table = $this->escaper->table($table);
+        return parent::into($table);
+    }
+
+    /**
      * Define Column names of the affected by Insert or Update SQL statement.
      *
      * @param Array $keys Array containing escaped field names to be set
