@@ -111,6 +111,29 @@ trait DatabaseAccessObjectSelectQueryTestTrait
                      ->method('has_failed')
                      ->will($this->returnValue(TRUE));
     }
+
+    /**
+     * Expect that a query is successful.
+     *
+     * @return void
+     */
+    protected function expectQuerySuccess()
+    {
+        $mock = new FluidInterfaceMock();
+
+        $this->db->expects($this->once())
+                 ->method('get_new_dml_query_builder_object')
+                 ->will($this->returnValue($mock));
+
+        $this->db->expects($this->once())
+                 ->method('query')
+                 ->will($this->returnValue($this->result));
+
+        $this->result->expects($this->once())
+                     ->method('has_failed')
+                     ->will($this->returnValue(FALSE));
+    }
+
 }
 
 ?>
