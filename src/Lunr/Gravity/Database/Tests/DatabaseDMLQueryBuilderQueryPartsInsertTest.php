@@ -98,13 +98,16 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     /**
      * Test specifying the Values part of a query.
      *
-     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
+     * @param Array $values Array of insert values
+     *
+     * @dataProvider insertValuesProvider
+     * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
      */
-    public function testInitialValuesQueryPart()
+    public function testInitialValuesQueryPart($values)
     {
         $method = $this->get_accessible_reflection_method('sql_values');
 
-        $method->invokeArgs($this->class, [[ 'value1', 'value2', 'value3' ]]);
+        $method->invokeArgs($this->class, [ $values ]);
 
         $string = 'VALUES (value1, value2, value3)';
 

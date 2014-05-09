@@ -133,6 +133,22 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
         return $types;
     }
 
+    /**
+     * Unit Test Data Provider for initial insert values.
+     *
+     * @return array $values Array of inital insert values.
+     */
+    public function insertValuesProvider()
+    {
+        $values   = [];
+        $values[] = [ [[ 'value1', 'value2', 'value3' ]] ];
+        $values[] = [ [ 'value1', 'value2', 'value3' ] ];
+        $values[] = [ [ 'key1' => 'value1', 'key2' => 'value2', 'key3' => 'value3' ] ];
+
+        return $values;
+    }
+
+
 }
 
 ?>

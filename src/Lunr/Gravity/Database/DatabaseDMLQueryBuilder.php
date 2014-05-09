@@ -555,7 +555,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             $this->values .= ', ';
         }
 
-        if (!is_array($values[0]))
+        if (!isset($values[0]) || !is_array($values[0]))
         {
             $values = array($values);
         }
