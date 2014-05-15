@@ -106,6 +106,19 @@ interface FilesystemAccessObjectInterface
      */
     public function put_csv_file_content($file, $data, $delimiter = ',', $enclosure = '"');
 
+    /**
+     * Creates a directory with the given name, if it does not exist.
+     *
+     * This method is a wrapper of the php mkdir.
+     *
+     * @param String  $pathname  The directory path/name
+     * @param Integer $mode      The access mode (0755 by default)
+     * @param Boolean $recursive Allows the creation of nested directories specified in the pathname
+     *
+     * @return Boolean TRUE when directory is created or FALSE in failure.
+     */
+    public function mkdir($pathname, $mode = 0755, $recursive = FALSE);
+
 }
 
 ?>

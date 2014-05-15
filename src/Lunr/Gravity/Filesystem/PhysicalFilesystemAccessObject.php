@@ -346,6 +346,46 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
         return TRUE;
     }
 
+    /**
+     * Creates a directory with the given name, if it does not exist.
+     *
+     * This method is a wrapper of the php mkdir.
+     *
+     * @param String  $pathname  The directory path/name
+     * @param Integer $mode      The access mode (0755 by default)
+     * @param Boolean $recursive Allows the creation of nested directories specified in the pathname
+     *
+     * @return Boolean TRUE when directory is created or FALSE in failure.
+     */
+    public function mkdir($pathname, $mode = 0755, $recursive = FALSE)
+    {
+        if(is_string($mode))
+        {
+            $this->logger->warning('String representation of access mode is not supported. Please, try using an integer.');
+            return FALSE;
+        }
+
+        if(decoct(octdec(strval($mode))) != $mode && $mode > 0)
+        {
+            $mode = octdec((string) $mode);
+        }
+
+        //this is the octal range (0000 - 2777 and 4000 - 4777) in decimal
+        if(!(($mode >= 0 && $mode <= 1535) || ($mode >= 2048 && $mode <= 2559)))
+        {
+            $this->logger->warning('Access mode value ' . $mode . ' is invalid.');
+            return FALSE;
+        }
+
+        if(mkdir($pathname, $mode, $recursive) === FALSE)
+        {
+            $this->logger->warning('Failed to create directory: ' . $pathname);
+            return FALSE;
+        }
+
+        return TRUE;
+    }
+
 }
 
 ?>

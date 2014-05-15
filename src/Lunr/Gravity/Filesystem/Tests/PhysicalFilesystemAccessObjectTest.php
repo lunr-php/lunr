@@ -146,7 +146,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     /**
      * Unit test data provider for invalid array values.
      *
-     * @return array $filepath Array of invalid values
+     * @return array $values Array of invalid values
      */
     public function invalidCSVArrayValues()
     {
@@ -155,6 +155,39 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
         $values[] = [ FALSE ];
 
         return $values;
+    }
+
+    /**
+     * Unit test data provider for invalid access mode values.
+     *
+     * @return array $modes Array of invalid values
+     */
+    public function invalidDirModeValues()
+    {
+        $modes   = [];
+        $modes[] = [ -1 ];
+        $modes[] = [ 1536 ];
+        $modes[] = [ 5000 ];
+
+        return $modes;
+    }
+
+    /**
+     * Unit test data provider for valid access mode values.
+     *
+     * @return array $modes Array of valid values
+     */
+    public function validDirModeValues()
+    {
+        $modes   = [];
+        $modes[] = [ 777 ];
+        $modes[] = [ 510 ];
+        $modes[] = [ 0775 ];
+        $modes[] = [ 01777 ];
+        $modes[] = [ 02777 ];
+        $modes[] = [ 04777 ];
+
+        return $modes;
     }
 
 }
