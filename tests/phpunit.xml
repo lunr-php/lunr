@@ -43,13 +43,9 @@
             <file>src/Lunr/Corona/Tests/FrontControllerDispatchTest.php</file>
             <file>src/Lunr/Corona/Tests/InterRequestTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestBaseTest.php</file>
-            <file>src/Lunr/Corona/Tests/RequestStoreCookieTest.php</file>
-            <file>src/Lunr/Corona/Tests/RequestStoreGetTest.php</file>
-            <file>src/Lunr/Corona/Tests/RequestStoreFilesTest.php</file>
-            <file>src/Lunr/Corona/Tests/RequestStorePostTest.php</file>
-            <file>src/Lunr/Corona/Tests/RequestStoreUrlTest.php</file>
+            <file>src/Lunr/Corona/Tests/RequestMagicGetTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestGetTest.php</file>
-            <file>src/Lunr/Corona/Tests/RequestRunkitTest.php</file>
+            <file>src/Lunr/Corona/Tests/RequestSetMockValuesTest.php</file>
             <file>src/Lunr/Corona/Tests/RequestProxyBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/ResponseBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/ResponseGetTest.php</file>

@@ -19,65 +19,34 @@ namespace Lunr\Corona\Tests;
 /**
  * Tests for getting stored superglobal values.
  *
- * @category      Libraries
- * @package       Corona
- * @subpackage    Tests
- * @author        Heinz Wiesinger <heinz@m2mobi.com>
- * @author        Leonidas Diamantis <leonidas@m2mobi.com>
- * @covers        Lunr\Corona\Request
- * @backupGlobals enabled
+ * @category   Libraries
+ * @package    Corona
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Leonidas Diamantis <leonidas@m2mobi.com>
+ * @covers     Lunr\Corona\Request
  */
 class RequestGetTest extends RequestTest
 {
 
     /**
-     * TestCase Constructor.
-     */
-    public function setUp()
-    {
-        $this->setUpFilled();
-    }
-
-    /**
-     * Check that request values are returned correctly by the magic get method.
-     *
-     * @param String $key   key for a request value
-     * @param mixed  $value value of a request value
-     *
-     * @dataProvider properRequestValueProvider
-     * @covers       Lunr\Corona\Request::__get
-     */
-    public function testMagicGetMethod($key, $value)
-    {
-        $this->assertEquals($value, $this->class->$key);
-    }
-
-    /**
      * Test getting GET data.
      *
-     * @param String $value the expected value
-     * @param String $key   key for a GET value
-     *
-     * @dataProvider validJsonEnumProvider
-     * @covers       Lunr\Corona\Request::get_get_data
+     * @covers Lunr\Corona\Request::get_get_data
      */
-    public function testGetGetData($value, $key)
+    public function testGetGetData()
     {
-        $this->assertEquals($value, $this->class->get_get_data($key));
+        $this->assertEquals('get_value', $this->class->get_get_data('get_key'));
     }
 
     /**
      * Test getting POST data.
      *
-     * @param String $value the expected value
-     * @param String $key   key for a GET value
-     *
-     * @dataProvider validJsonEnumProvider
-     * @covers       Lunr\Corona\Request::get_post_data
+     * @covers Lunr\Corona\Request::get_post_data
      */
-    public function testGetPostData($value, $key)
+    public function testGetPostData()
     {
-        $this->assertEquals($value, $this->class->get_post_data($key));
+        $this->assertEquals('post_value', $this->class->get_post_data('post_key'));
     }
 
     /**
@@ -87,43 +56,70 @@ class RequestGetTest extends RequestTest
      */
     public function testGetFileData()
     {
-        $value = [
-            'image' => [
-                'name' => 'Name',
-                'type' => 'Type',
-                'tmp_name' => 'Tmp',
-                'error' => 'Error',
-                'size' => 'Size'
-            ]
-        ];
-
-        $this->assertEquals($value['image'], $this->class->get_files_data('image'));
+        $this->assertEquals($this->files['image'], $this->class->get_files_data('image'));
     }
 
     /**
-     * Test getting GET data.
+     * Test getting COOKIE data.
      *
-     * @param String $value the expected value
-     * @param String $key   key for a GET value
-     *
-     * @dataProvider validJsonEnumProvider
-     * @covers       Lunr\Corona\Request::get_cookie_data
+     * @covers Lunr\Corona\Request::get_cookie_data
      */
-    public function testGetCookieData($value, $key)
+    public function testGetCookieData()
     {
-        $this->assertEquals($value, $this->class->get_cookie_data($key));
+        $this->assertEquals('cookie_value', $this->class->get_cookie_data('cookie_key'));
     }
 
     /**
-     * Tests that get_new_inter_request_object returns an InterRequest object.
+     * Tests that get_all_options() returns the ast property.
      *
-     * @covers Lunr\Corona\Request::get_new_inter_request_object
+     * @param array $keys The array of keys to test
+     *
+     * @dataProvider cliArgsKeyProvider
+     * @covers       Lunr\Corona\Request::get_all_options
      */
-    public function testGetNewInterRequestObject()
+    public function testGetAllOptionsReturnsArray($keys)
     {
-        $value = $this->class->get_new_inter_request_object(array());
+        $values = array();
+        for ($i = 0; $i < sizeof($keys); $i++)
+        {
+            $values[] = 'value';
+        }
 
-        $this->assertInstanceOf('Lunr\Corona\InterRequest', $value);
+        $this->set_reflection_property_value('cli_args', array_combine($keys, $values));
+
+        $return = $this->class->get_all_options();
+
+        $this->assertEquals($keys, $return);
+    }
+
+    /**
+     * Tests that get_option_data() returns a value for a proper key.
+     *
+     * @param array $value The expected value to test
+     *
+     * @dataProvider validCliArgsValueProvider
+     * @covers       Lunr\Corona\Request::get_option_data
+     */
+    public function testGetOptionDataReturnsValueForValidKey($value)
+    {
+        $this->set_reflection_property_value('cli_args', [ 'a' => $value ]);
+
+        $result = $this->class->get_option_data('a');
+
+        $this->assertEquals($value, $result);
+    }
+
+    /**
+     * Tests that get_option_data() returns NULL for invalid key.
+     *
+     * @covers Lunr\Corona\Request::get_option_data
+     */
+    public function testGetOptionDataReturnsNullForInvalidKey()
+    {
+        $ast = $this->get_reflection_property_value('cli_args');
+
+        $this->assertArrayNotHasKey('foo', $ast);
+        $this->assertNull($this->class->get_option_data('foo'));
     }
 
     /**
@@ -139,11 +135,12 @@ class RequestGetTest extends RequestTest
      */
     public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value)
     {
-        $this->mock_function('http_negotiate_content_type', 'return "text/html";');
+        $this->parser->expects($this->once())
+                     ->method('parse_accept_format')
+                     ->with($this->equalTo($value))
+                     ->will($this->returnValue('text/html'));
 
         $this->assertEquals($value, $this->class->get_accept_format($value));
-
-        $this->unmock_function('http_negotiate_content_type');
     }
 
     /**
@@ -156,11 +153,7 @@ class RequestGetTest extends RequestTest
      */
     public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull()
     {
-        $this->mock_function('http_negotiate_content_type', 'return NULL;');
-
         $this->assertNull($this->class->get_accept_format([]));
-
-        $this->unmock_function('http_negotiate_content_type');
     }
 
     /**
@@ -176,11 +169,12 @@ class RequestGetTest extends RequestTest
      */
     public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value)
     {
-        $this->mock_function('http_negotiate_language', 'return "en-US";');
+        $this->parser->expects($this->once())
+                     ->method('parse_accept_language')
+                     ->with($this->equalTo($value))
+                     ->will($this->returnValue('en-US'));
 
         $this->assertEquals($value, $this->class->get_accept_language($value));
-
-        $this->unmock_function('http_negotiate_language');
     }
 
     /**
@@ -193,11 +187,7 @@ class RequestGetTest extends RequestTest
      */
     public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull()
     {
-        $this->mock_function('http_negotiate_language', 'return NULL;');
-
         $this->assertNull($this->class->get_accept_language([]));
-
-        $this->unmock_function('http_negotiate_language');
     }
 
     /**
@@ -213,11 +203,12 @@ class RequestGetTest extends RequestTest
      */
     public function testGetAcceptEncodingWithValidSupportedCharsetsReturnsString($value)
     {
-        $this->mock_function('http_negotiate_charset', 'return "utf-8";');
+        $this->parser->expects($this->once())
+                     ->method('parse_accept_encoding')
+                     ->with($this->equalTo($value))
+                     ->will($this->returnValue('utf-8'));
 
         $this->assertEquals($value, $this->class->get_accept_encoding($value));
-
-        $this->unmock_function('http_negotiate_charset');
     }
 
     /**
@@ -230,11 +221,7 @@ class RequestGetTest extends RequestTest
      */
     public function testGetAcceptEncodingWithEmptySupportedCharsetsReturnsNull()
     {
-        $this->mock_function('http_negotiate_charset', 'return NULL;');
-
         $this->assertNull($this->class->get_accept_encoding([]));
-
-        $this->unmock_function('http_negotiate_charset');
     }
 
 }

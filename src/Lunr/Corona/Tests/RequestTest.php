@@ -35,109 +35,60 @@ abstract class RequestTest extends LunrBaseTest
 {
 
     /**
-     * Mock of the Configuration class.
-     * @var Configuration
+     * Mock of the Request Parser class.
+     * @var \Lunr\Corona\RequestParserInterface
      */
-    protected $configuration;
+    protected $parser;
 
     /**
-     * Runkit simulation code for getting the hostname.
-     * @var string
+     * Mocked file upload data.
+     * @var Array
      */
-    const GET_HOSTNAME = 'return "Lunr";';
+    protected $files = [
+        'image' => [
+            'name'     => 'Name',
+            'type'     => 'Type',
+            'tmp_name' => 'Tmp',
+            'error'    => 'Error',
+            'size'     => 'Size'
+        ]
+    ];
 
     /**
      * Shared TestCase Constructor code.
      *
      * @return void
      */
-    public function setUpShared()
+    public function setUp()
     {
-        $configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->parser = $this->getMock('Lunr\Corona\RequestParserInterface');
 
-        $map = [
-            [ 'default_controller', 'DefaultController' ],
-            [ 'default_method', 'default_method' ]
-         ];
+        $this->parser->expects($this->once())
+                     ->method('parse_request')
+                     ->will($this->returnValue($this->get_request_values()));
 
-        $configuration->expects($this->any())
-                      ->method('offsetGet')
-                      ->will($this->returnValueMap($map));
+        $this->parser->expects($this->once())
+                     ->method('parse_post')
+                     ->will($this->returnValue([ 'post_key' => 'post_value' ]));
 
-        $this->configuration = $configuration;
+        $this->parser->expects($this->once())
+                     ->method('parse_get')
+                     ->will($this->returnValue([ 'get_key' => 'get_value' ]));
 
+        $this->parser->expects($this->once())
+                     ->method('parse_cookie')
+                     ->will($this->returnValue([ 'cookie_key' => 'cookie_value' ]));
+
+        $this->parser->expects($this->once())
+                     ->method('parse_files')
+                     ->will($this->returnValue($this->files));
+
+        $this->parser->expects($this->once())
+                     ->method('parse_command_line_arguments')
+                     ->will($this->returnValue([]));
+
+        $this->class      = new Request($this->parser);
         $this->reflection = new ReflectionClass('Lunr\Corona\Request');
-    }
-
-    /**
-     * TestCase Constructor for filled superglobals.
-     *
-     * @return void
-     */
-    public function setUpRunkit()
-    {
-        if (extension_loaded('runkit') === FALSE)
-        {
-            $this->markTestSkipped('Extension runkit is required.');
-        }
-
-        $this->mock_function('gethostname', self::GET_HOSTNAME);
-
-        $this->setUpFilled();
-    }
-
-    /**
-     * TestCase Constructor for filled superglobals.
-     *
-     * @return void
-     */
-    public function setUpFilled()
-    {
-        $this->setUpShared();
-
-        $enums  = $this->get_json_enums();
-        $_POST  = array_flip($enums);
-        $_FILES = [
-            'image' => [
-                'name' => 'Name',
-                'type' => 'Type',
-                'tmp_name' => 'Tmp',
-                'error' => 'Error',
-                'size' => 'Size'
-            ]
-        ];
-
-        $_GET               = array_flip($enums);
-        $_GET['controller'] = 'controller';
-        $_GET['method']     = 'method';
-        $_GET['param1']     = 'param1';
-        $_GET['param2']     = 'param2';
-
-        $_COOKIE              = array_flip($enums);
-        $_COOKIE['PHPSESSID'] = 'value';
-
-        $_SERVER = $this->setup_server_superglobal();
-
-        $this->class = new Request($this->configuration);
-    }
-
-    /**
-     * TestCase Constructor for empty superglobals.
-     *
-     * @return void
-     */
-    public function setUpEmpty()
-    {
-        $this->setUpShared();
-
-        $_POST   = [];
-        $_FILES  = [];
-        $_GET    = [];
-        $_COOKIE = [];
-
-        $_SERVER = $this->setup_server_superglobal();
-
-        $this->class = new Request($this->configuration);
     }
 
     /**
@@ -147,21 +98,32 @@ abstract class RequestTest extends LunrBaseTest
     {
         unset($this->class);
         unset($this->reflection);
-        unset($this->configuration);
+        unset($this->parser);
     }
 
     /**
-     * TestCase Destructor.
+     * Return sample request values.
      *
-     * @return void
+     * @return Array $request Sample request values
      */
-    public function tearDownRunkit()
+    protected function get_request_values()
     {
-        $this->unmock_function('gethostname');
+        $request = [
+            'protocol'         => 'https',
+            'domain'           => 'www.domain.com',
+            'port'             => '443',
+            'base_path'        => '/path/to/',
+            'base_url'         => 'https://www.domain.com/path/to/',
+            'sapi'             => 'cli',
+            'controller'       => 'controller',
+            'method'           => 'method',
+            'params'           => [ 'param1', 'param2' ],
+            'call'             => 'controller/method',
+            'useragent'        => 'UserAgent',
+            'device_useragent' => 'Device UserAgent'
+        ];
 
-        unset($this->class);
-        unset($this->reflection);
-        unset($this->configuration);
+        return $request;
     }
 
     /**
@@ -172,78 +134,55 @@ abstract class RequestTest extends LunrBaseTest
     public function requestValueProvider()
     {
         $values   = [];
-        $values[] = [ 'protocol', 'https' ];
-        $values[] = [ 'domain', 'www.domain.com' ];
-        $values[] = [ 'port', '443' ];
-        $values[] = [ 'base_path', '/path/to/' ];
-        $values[] = [ 'base_url', 'https://www.domain.com/path/to/' ];
-        $values[] = [ 'sapi', 'cli' ];
-        $values[] = [ 'controller', 'DefaultController' ];
-        $values[] = [ 'method', 'default_method' ];
-        $values[] = [ 'params', [] ];
-        $values[] = [ 'call', 'DefaultController/default_method' ];
+
+        foreach ($this->get_request_values() as $key => $value)
+        {
+            $values[] = [ $key, $value ];
+        }
 
         return $values;
     }
 
     /**
-     * Unit Test Data Provider for request values.
+     * Unit test Data Provider for valid cli argument values.
      *
-     * @return array $values Set of request values
+     * @return array $values Set of cli argument key value pair
      */
-    public function properRequestValueProvider()
+    public function validCliArgsValueProvider()
     {
         $values   = [];
-        $values[] = [ 'protocol', 'https' ];
-        $values[] = [ 'domain', 'www.domain.com' ];
-        $values[] = [ 'port', '443' ];
-        $values[] = [ 'base_path', '/path/to/' ];
-        $values[] = [ 'base_url', 'https://www.domain.com/path/to/' ];
-        $values[] = [ 'sapi', 'cli' ];
-        $values[] = [ 'controller', 'controller' ];
-        $values[] = [ 'method', 'method' ];
-        $values[] = [ 'params', [ 'param1', 'param2' ] ];
-        $values[] = [ 'call', 'controller/method' ];
+        $values[] = [[]];
+        $values[] = [[[ FALSE, FALSE ]]];
+        $values[] = [[ 'test' ]];
+        $values[] = [[ 'test', 'test1' ]];
 
         return $values;
     }
 
     /**
-     * Unit Test Data Provider for valid json enums.
+     * Unit Test Data provider for cli argument keys.
      *
-     * @return array $json Set of valid json enums
+     * @return array $values Set cli argument keys
      */
-    public function validJsonEnumProvider()
-    {
-        $json   = [];
-        $json[] = [ 'long_value', 'lv' ];
-        $json[] = [ 'short_value', 'sv' ];
-
-        return $json;
-    }
-
-    /**
-     * Unit Test Data Provider for invalid global array keys.
-     *
-     * @return array $keys Set of invalid array keys
-     */
-    public function invalidKeyProvider()
-    {
-        $keys   = [];
-        $keys[] = [ 'invalid' ];
-
-        return $keys;
-    }
-
-    /**
-     * Unit Test Data Provider for invalid $_COOKIE values.
-     *
-     * @return array $cookie Set of invalid $_COOKIE values
-     */
-    public function invalidSuperglobalValueProvider()
+    public function cliArgsKeyProvider()
     {
         $values   = [];
-        $values[] = [ [] ];
+        $values[] = [[]];
+        $values[] = [[ 'a' ]];
+        $values[] = [[ 'a', 'b' ]];
+
+        return $values;
+    }
+
+    /**
+     * Unit Test Data Provider for invalid mock values.
+     *
+     * @return array $cookie Set of invalid mock values
+     */
+    public function invalidMockValueProvider()
+    {
+        $values   = [];
+        $values[] = [ new \stdClass() ];
         $values[] = [ 0 ];
         $values[] = [ 'String' ];
         $values[] = [ TRUE ];
@@ -263,99 +202,6 @@ abstract class RequestTest extends LunrBaseTest
         $keys[] = [ 'Unhandled' ];
 
         return $keys;
-    }
-
-    /**
-     * Unit Test Data Provider for $_SERVER['HTTPS'] values.
-     *
-     * @return array $https Array of $_SERVER['HTTPS'] values
-     */
-    public function httpsServerSuperglobalValueProvider()
-    {
-        $https   = [];
-        $https[] = [ 'on', 'https' ];
-        $https[] = [ 'off', 'http' ];
-
-        return $https;
-    }
-
-    /**
-     * Unit Test Data Provider for possible base_url values and parameters.
-     *
-     * @return array $base Array of base_url parameters and possible values
-     */
-    public function baseurlProvider()
-    {
-        $base   = [];
-        $base[] = [ 'on', '443', 'https://www.domain.com/path/to/' ];
-        $base[] = [ 'on', '80', 'https://www.domain.com:80/path/to/' ];
-        $base[] = [ 'off', '80', 'http://www.domain.com/path/to/' ];
-        $base[] = [ 'off', '443', 'http://www.domain.com:443/path/to/' ];
-
-        return $base;
-    }
-
-    /**
-     * Get a set of JSON enums.
-     *
-     * @return array $json Set of json enums
-     */
-    public function get_json_enums()
-    {
-        $raw = $this->validJsonEnumProvider();
-
-        $JSON = [];
-
-        foreach ($raw as $set)
-        {
-            $JSON[$set[0]] = $set[1];
-        }
-
-        return $JSON;
-    }
-
-    /**
-     * Check whether the request values are as expected.
-     *
-     * @param array $request_values Array of actual request values
-     *
-     * @return Boolean $return TRUE if it matches the default, FALSE otherwise
-     */
-    public function check_default_request_values($request_values)
-    {
-        $values = $this->requestValueProvider();
-        $array  = [];
-
-        foreach ($values as $value)
-        {
-            $array[$value[0]] = $value[1];
-        }
-
-        if ($array === $request_values)
-        {
-            return TRUE;
-        }
-        else
-        {
-            return FALSE;
-        }
-    }
-
-    /**
-     * Set up the $_SERVER superglobal for our tests.
-     *
-     * @return array $server Stripped down $_SERVER variable
-     */
-    protected function setup_server_superglobal()
-    {
-        $server = [];
-
-        $server['SCRIPT_NAME'] = '/path/to/index.php';
-        $server['HTTPS']       = 'on';
-        $server['SERVER_NAME'] = 'www.domain.com';
-        $server['SERVER_PORT'] = '443';
-
-        return $server;
     }
 
     /**

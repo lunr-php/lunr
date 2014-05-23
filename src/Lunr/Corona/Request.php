@@ -27,7 +27,7 @@ namespace Lunr\Corona;
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */
-class Request implements RequestInterface
+class Request
 {
 
     /**
@@ -75,27 +75,40 @@ class Request implements RequestInterface
     protected $files;
 
     /**
+     * Stored command line arguments
+     * @var array
+     */
+    protected $cli_args;
+
+    /**
+     * Shared instance of the request parser.
+     * @var RequestParserInterface
+     */
+    protected $parser;
+
+    /**
+     * The request values to mock.
+     * @var array
+     */
+    private $mock;
+
+    /**
      * Constructor.
      *
-     * @param Configuration $configuration Shared instance of the Configuration class
+     * @param RequestParserInterface $parser Shared instance of a Request Parser class
      */
-    public function __construct($configuration)
+    public function __construct($parser)
     {
-        $this->post    = [];
-        $this->get     = [];
-        $this->cookie  = [];
-        $this->request = [];
-        $this->json    = [];
-        $this->files   = [];
+        $this->parser = $parser;
 
-        $this->request['sapi'] = PHP_SAPI;
-        $this->request['host'] = gethostname();
+        $this->request  = $parser->parse_request();
+        $this->post     = $parser->parse_post();
+        $this->get      = $parser->parse_get();
+        $this->cookie   = $parser->parse_cookie();
+        $this->files    = $parser->parse_files();
+        $this->cli_args = $parser->parse_command_line_arguments();
 
-        $this->store_post();
-        $this->store_get($configuration);
-        $this->store_cookie();
-        $this->store_url();
-        $this->store_files();
+        $this->mock = [];
     }
 
     /**
@@ -107,8 +120,9 @@ class Request implements RequestInterface
         unset($this->get);
         unset($this->cookie);
         unset($this->request);
-        unset($this->json);
         unset($this->files);
+        unset($this->parser);
+        unset($this->mock);
     }
 
     /**
@@ -122,182 +136,65 @@ class Request implements RequestInterface
      */
     public function __get($name)
     {
-        switch ($name)
+        if (array_key_exists($name, $this->request))
         {
-            case 'protocol':
-            case 'domain':
-            case 'port':
-            case 'base_path':
-            case 'base_url':
-            case 'controller':
-            case 'method':
-            case 'params':
-            case 'sapi':
-            case 'host':
-            case 'call':
-                return $this->request[$name];
-                break;
-            default:
-                return NULL;
-                break;
-        }
-    }
-
-    /**
-     * Store $_POST values locally and reset it globally.
-     *
-     * @return void
-     */
-    protected function store_post()
-    {
-        if (!is_array($_POST) || empty($_POST))
-        {
-            //reset global POST array
-            $_POST = [];
-
-            return;
-        }
-
-        foreach ($_POST as $key => $value)
-        {
-            $this->post[$key] = $value;
-        }
-
-        //reset global POST array
-        $_POST = [];
-    }
-
-    /**
-     * Store $_FILE values locally and reset it globally.
-     *
-     * @return void
-     */
-    protected function store_files()
-    {
-        if (!is_array($_FILES) || empty($_FILES))
-        {
-            //reset global FILE array
-            $_FILES = [];
-
-            return;
-        }
-
-        foreach ($_FILES as $key => $value)
-        {
-            $this->files[$key] = $value;
-        }
-
-        //reset global FILE array
-        $_FILES = [];
-    }
-
-    /**
-     * Store $_GET values locally and reset it globally.
-     *
-     * @param Configuration $configuration Shared instance of the Configuration class
-     *
-     * @return void
-     */
-    protected function store_get($configuration)
-    {
-        // Preset with default values:
-        $this->request['controller'] = $configuration['default_controller'];
-        $this->request['method']     = $configuration['default_method'];
-        $this->request['params']     = [];
-        $this->request['call']       = NULL;
-
-        if (!is_array($_GET) || empty($_GET))
-        {
-            if (isset($this->request['controller'], $this->request['method']) === TRUE)
+            if (array_key_exists($name, $this->mock))
             {
-                $this->request['call'] = $this->request['controller'] . '/' . $this->request['method'];
-            }
-
-            //reset global GET array
-            $_GET = [];
-
-            return;
-        }
-
-        foreach ($_GET as $key => $value)
-        {
-            if (substr($key, 0, 5) == 'param')
-            {
-                $this->request['params'][] = trim($value, '/');
-            }
-            elseif (in_array($key, [ 'controller', 'method' ]))
-            {
-                $this->request[$key] = trim($value, '/');
+                return $this->mock[$name];
             }
             else
             {
-                $this->get[$key] = $value;
+                return $this->request[$name];
             }
         }
-
-        if (isset($this->request['controller'], $this->request['method']) === TRUE)
+        else
         {
-            $this->request['call'] = $this->request['controller'] . '/' . $this->request['method'];
+            return NULL;
         }
-
-        //reset global GET array
-        $_GET = [];
     }
 
     /**
-     * Store $_COOKIE values locally and reset it globally.
+     * Override request values detected from the request parser.
+     *
+     * @param Array $values Array of key value pairs holding mocked request values
      *
      * @return void
      */
-    protected function store_cookie()
+    public function set_mock_values($values)
     {
-        if (!is_array($_COOKIE) || empty($_COOKIE))
+        if (!is_array($values))
         {
-            //reset global COOKIE array
-            $_COOKIE = [];
-
             return;
         }
 
-        foreach ($_COOKIE as $key => $value)
-        {
-            $this->cookie[$key] = $value;
-        }
-
-        //reset global COOKIE array
-        $_COOKIE = [];
-
-        if(isset($this->cookie['PHPSESSID']))
-        {
-            $_COOKIE['PHPSESSID'] = $this->cookie['PHPSESSID'];
-            unset($this->cookie['PHPSESSID']);
-        }
+        $this->mock = $values;
     }
 
     /**
-     * Store url request values locally.
+     * Returns a CLI option array of value(s).
      *
-     * @return void
+     * @param mixed $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
      */
-    protected function store_url()
+    public function get_option_data($key)
     {
-        $this->request['base_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
-
-        $this->request['protocol'] =
-            (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
-
-        $this->request['domain'] = $_SERVER['SERVER_NAME'];
-        $this->request['port']   = $_SERVER['SERVER_PORT'];
-
-        $baseurl = $this->request['protocol'] . '://' . $this->request['domain'];
-
-        if ((($this->request['protocol'] == 'http') && ($this->request['port'] != 80))
-            || (($this->request['protocol'] == 'https') && ($this->request['port'] != 443)))
+        if(array_key_exists($key, $this->cli_args))
         {
-            $baseurl .= ':' . $this->request['port'];
+            return $this->cli_args[$key];
         }
 
-        $this->request['base_url'] = $baseurl . $this->request['base_path'];
+        return NULL;
+    }
+
+    /**
+     * Returns all CLI options.
+     *
+     * @return array $return The option and the arguments of the request
+     */
+    public function get_all_options()
+    {
+        return array_keys($this->cli_args);
     }
 
     /**
@@ -310,7 +207,7 @@ class Request implements RequestInterface
      */
     public function get_accept_format($supported = [])
     {
-        return http_negotiate_content_type($supported);
+        return $this->parser->parse_accept_format($supported);
     }
 
     /**
@@ -323,7 +220,7 @@ class Request implements RequestInterface
      */
     public function get_accept_language($supported = [])
     {
-        return http_negotiate_language($supported);
+        return $this->parser->parse_accept_language($supported);
     }
 
     /**
@@ -336,7 +233,7 @@ class Request implements RequestInterface
      */
     public function get_accept_encoding($supported = [])
     {
-        return http_negotiate_charset($supported);
+        return $this->parser->parse_accept_encoding($supported);
     }
 
     /**
@@ -373,18 +270,6 @@ class Request implements RequestInterface
     public function get_cookie_data($key)
     {
         return isset($this->cookie[$key]) ? $this->cookie[$key] : NULL;
-    }
-
-    /**
-     * Returns a new inter request object.
-     *
-     * @param array $params the parameters to set the inter request with
-     *
-     * @return InterRequest $request The set inter request object
-     */
-    public function get_new_inter_request_object($params)
-    {
-        return new InterRequest($this, $params);
     }
 
     /**

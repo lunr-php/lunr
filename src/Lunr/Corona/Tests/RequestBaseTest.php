@@ -18,54 +18,53 @@ namespace Lunr\Corona\Tests;
 /**
  * Basic tests for the case of empty superglobals.
  *
- * @category      Libraries
- * @package       Corona
- * @subpackage    Tests
- * @author        Heinz Wiesinger <heinz@m2mobi.com>
- * @covers        Lunr\Corona\Request
- * @backupGlobals enabled
+ * @category   Libraries
+ * @package    Corona
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @covers     Lunr\Corona\Request
  */
 class RequestBaseTest extends RequestTest
 {
 
     /**
-     * TestCase Constructor.
+     * Check that post values are set correctly.
      */
-    public function setUp()
+    public function testPost()
     {
-        $this->setUpEmpty();
+        $this->assertEquals([ 'post_key' => 'post_value' ], $this->get_reflection_property_value('post'));
     }
 
     /**
-     * Check that post is empty if $_POST is empty.
+     * Check that get values are set correctly.
      */
-    public function testPostEmpty()
+    public function testGet()
     {
-        $this->assertArrayEmpty($this->get_reflection_property_value('post'));
+        $this->assertEquals([ 'get_key' => 'get_value' ], $this->get_reflection_property_value('get'));
     }
 
     /**
-     * Check that get is empty if $_GET is empty.
+     * Check that files values are set correctly.
      */
-    public function testGetEmpty()
+    public function testFiles()
     {
-        $this->assertArrayEmpty($this->get_reflection_property_value('get'));
+        $this->assertEquals($this->files, $this->get_reflection_property_value('files'));
     }
 
     /**
-     * Check that files is empty if $_FILES is empty.
+     * Check that cookie values are set correctly.
      */
-    public function testFilesEmpty()
+    public function testCookie()
     {
-        $this->assertArrayEmpty($this->get_reflection_property_value('files'));
+        $this->assertEquals([ 'cookie_key' => 'cookie_value' ], $this->get_reflection_property_value('cookie'));
     }
 
     /**
-     * Check that cookie is empty if $_COOKIE is empty.
+     * Check that cli argument values are set correctly.
      */
-    public function testCookieEmpty()
+    public function testCliArgs()
     {
-        $this->assertArrayEmpty($this->get_reflection_property_value('cookie'));
+        $this->assertArrayEmpty($this->get_reflection_property_value('cli_args'));
     }
 
     /**
@@ -82,90 +81,6 @@ class RequestBaseTest extends RequestTest
 
         $this->assertArrayHasKey($key, $request);
         $this->assertEquals($value, $request[$key]);
-    }
-
-    /**
-     * Test getting GET data when $_GET is empty.
-     *
-     * @param String $key key for a GET value
-     *
-     * @depends      testGetEmpty
-     * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Corona\Request::get_get_data
-     */
-    public function testGetGetDataWhenGetEmpty($key)
-    {
-        $this->assertNull($this->class->get_get_data($key));
-    }
-
-    /**
-     * Test getting POST data when $_POST is empty.
-     *
-     * @param String $key key for a POST value
-     *
-     * @depends      testPostEmpty
-     * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Corona\Request::get_post_data
-     */
-    public function testGetPostDataWhenPostEmpty($key)
-    {
-        $this->assertNull($this->class->get_post_data($key));
-    }
-
-    /**
-     * Test getting FILE data when $_FILES is empty.
-     *
-     * @param String $key key for a POST value
-     *
-     * @depends      testFilesEmpty
-     * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Corona\Request::get_files_data
-     */
-    public function testGetFilesDataWhenPostEmpty($key)
-    {
-        $this->assertNull($this->class->get_files_data($key));
-    }
-
-    /**
-     * Test getting COOKIE data when $_COOKIE is empty.
-     *
-     * @param String $key key for a COOKIE value
-     *
-     * @depends      testCookieEmpty
-     * @dataProvider invalidKeyProvider
-     * @covers       Lunr\Corona\Request::get_cookie_data
-     */
-    public function testGetCookieDataWhenCookieEmpty($key)
-    {
-        $this->assertNull($this->class->get_cookie_data($key));
-    }
-
-    /**
-     * Check that request values are returned correctly by the magic get method.
-     *
-     * @param String $key   key for a request value
-     * @param mixed  $value value of a request value
-     *
-     * @depends      testRequestDefaultValues
-     * @dataProvider requestValueProvider
-     * @covers       Lunr\Corona\Request::__get
-     */
-    public function testMagicGetMethodWhenGetEmpty($key, $value)
-    {
-        $this->assertEquals($value, $this->class->$key);
-    }
-
-    /**
-     * Test that __get() returns NULL for unhandled keys.
-     *
-     * @param String $key key for __get()
-     *
-     * @dataProvider unhandledMagicGetKeysProvider
-     * @covers       Lunr\Corona\Request::__get
-     */
-    public function testMagicGetIsNullForUnhandledKeys($key)
-    {
-        $this->assertNull($this->class->$key);
     }
 
 }
