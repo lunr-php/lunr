@@ -86,6 +86,22 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+     * Test specifying the UNION part of a query, when compound is set.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_compound
+     */
+    public function testCompoundQueryWhenCompoundIsSet()
+    {
+        $this->set_reflection_property_value('compound', 'QUERY');
+
+        $method = $this->get_accessible_reflection_method('sql_compound');
+
+        $method->invokeArgs($this->class, [ '(sql query)', 'UNION' ]);
+
+        $this->assertPropertyEquals('compound', 'QUERY UNION (sql query)');
+    }
+
+    /**
      * Test creating a simple order by statement.
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_order_by
