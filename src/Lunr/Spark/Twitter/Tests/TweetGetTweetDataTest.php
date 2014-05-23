@@ -57,6 +57,16 @@ class TweetGetTweetDataTest extends TweetTest
         $this->assertSame(DataError::NOT_AVAILABLE, $this->class->{'get_' . $field}());
     }
 
+    /**
+     * Test that getting tweet data returns UNKNOWN_FIELD in unkown field request.
+     *
+     * @covers Lunr\Spark\Twitter\Tweet::__call
+     */
+    public function testGetTweetDataReturnsUnknownDataErrorInUnkownField()
+    {
+        $this->assertSame(DataError::UNKNOWN_FIELD, $this->class->get_unkown());
+    }
+
 }
 
 ?>
