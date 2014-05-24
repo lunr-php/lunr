@@ -62,6 +62,8 @@
             <file>src/Lunr/Corona/Tests/JsonViewPrintTest.php</file>
             <file>src/Lunr/Corona/Tests/JsonViewPrintFatalErrorTest.php</file>
             <file>src/Lunr/Corona/Tests/CompactJsonViewBaseTest.php</file>
+            <file>src/Lunr/Corona/Tests/RequestParserBaseTest.php</file>
+            <file>src/Lunr/Corona/Tests/RequestParserParseRequestTest.php</file>
             <file>src/Lunr/Corona/Tests/WebRequestParserBaseTest.php</file>
             <file>src/Lunr/Corona/Tests/WebRequestParserParseRequestTest.php</file>
             <file>src/Lunr/Corona/Tests/WebRequestParserParseSuperGlobalTest.php</file>
