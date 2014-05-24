@@ -15,7 +15,7 @@
 
 namespace Lunr\Shadow\Tests;
 
-use Lunr\Halo\RequestParserRequestTestTrait;
+use Lunr\Halo\RequestParserDynamicRequestTestTrait;
 
 /**
  * Basic tests for the case of empty superglobals.
@@ -30,7 +30,7 @@ use Lunr\Halo\RequestParserRequestTestTrait;
 class CliRequestParserParseRequestTest extends CliRequestParserTest
 {
 
-    use RequestParserRequestTestTrait;
+    use RequestParserDynamicRequestTestTrait;
 
     /**
      * Runkit simulation code for getting the hostname.
