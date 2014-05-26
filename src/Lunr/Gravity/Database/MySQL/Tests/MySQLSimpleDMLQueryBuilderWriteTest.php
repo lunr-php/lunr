@@ -16,7 +16,7 @@
 namespace Lunr\Gravity\Database\MySQL\Tests;
 
 /**
- * This class contains select tests for the MySQLSimpleDMLQueryBuilder class.
+ * This class contains update/delete/insert tests for the MySQLSimpleDMLQueryBuilder class.
  *
  * @category   MySQL
  * @package    Gravity
@@ -81,6 +81,45 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
         $this->class->column_names([ 'col1', 'col2' ]);
 
         $this->assertEquals('(`col1`, `col2`)', $this->get_reflection_property_value('column_names'));
+    }
+
+    /**
+     * Test update() with one table to update.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::update
+     */
+    public function testUpdateWithOneTable()
+    {
+        $this->escaper->expects($this->once())
+                      ->method('table')
+                      ->with($this->equalTo('table'))
+                      ->will($this->returnValue('`table`'));
+
+        $this->class->update('table');
+
+        $this->assertEquals('`table`', $this->get_reflection_property_value('update'));
+    }
+
+    /**
+     * Test update() with multiple tables to update.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::update
+     */
+    public function testUpdateWithMultipleTables()
+    {
+        $this->escaper->expects($this->at(0))
+                      ->method('table')
+                      ->with($this->equalTo('table'))
+                      ->will($this->returnValue('`table`'));
+
+        $this->escaper->expects($this->at(1))
+                      ->method('table')
+                      ->with($this->equalTo(' table'))
+                      ->will($this->returnValue('`table`'));
+
+        $this->class->update('table, table');
+
+        $this->assertEquals('`table`, `table`', $this->get_reflection_property_value('update'));
     }
 
 }

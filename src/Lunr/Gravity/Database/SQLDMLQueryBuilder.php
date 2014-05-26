@@ -141,13 +141,13 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a UPDATE clause.
      *
-     * @param String $table The table to update
+     * @param String $table_references The tables to update
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
-    public function update($table)
+    public function update($table_references)
     {
-        $this->sql_update($table);
+        $this->sql_update($table_references);
         return $this;
     }
 

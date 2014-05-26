@@ -83,6 +83,25 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     }
 
     /**
+     * Define a UPDATE clause.
+     *
+     * @param String $table_references The tables to update
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function update($table_references)
+    {
+        $tables = '';
+
+        foreach (explode(',', $table_references) as $table)
+        {
+            $tables .= $this->escape_alias($table, TRUE) . ', ';
+        }
+
+        return parent::update(rtrim($tables, ', '));
+    }
+
+    /**
      * Define a SELECT clause.
      *
      * @param String $select The column(s) to select

@@ -402,18 +402,18 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a UPDATE clause.
      *
-     * @param String $table The table to update
+     * @param String $table_references The tables to update
      *
      * @return void
      */
-    protected function sql_update($table)
+    protected function sql_update($table_references)
     {
         if ($this->update != '')
         {
             $this->update .= ', ';
         }
 
-        $this->update .= $table;
+        $this->update .= $table_references;
     }
 
     /**
