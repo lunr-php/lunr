@@ -65,6 +65,16 @@ class APNSDispatcherBaseTest extends APNSDispatcherTest
     }
 
     /**
+     * Test that the passphrase is set to an empty string by default.
+     *
+     * @requires extension apn
+     */
+    public function testModeIsProduction()
+    {
+        $this->assertPropertyEquals('mode', APN_PRODUCTION);
+    }
+
+    /**
      * Test that the setup flag is set to FALSE by default.
      */
     public function testSetupIsFalse()

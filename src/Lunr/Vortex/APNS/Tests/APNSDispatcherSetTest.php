@@ -123,6 +123,44 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
         $this->assertEquals($this->class, $this->class->set_passphrase($passphrase));
     }
 
+    /**
+     * Test that set_passphrase() sets the passphrase.
+     *
+     * @requires extension apn
+     * @covers   Lunr\Vortex\APNS\APNSDispatcher::set_passphrase
+     */
+    public function testSetSandboxModeSetsSandboxModeWithTrue()
+    {
+        $this->class->set_sandbox_mode(TRUE);
+
+        $this->assertPropertyEquals('mode', APN_SANDBOX);
+        $this->assertPropertyEquals('setup', FALSE);
+    }
+
+    /**
+     * Test that set_passphrase() sets the passphrase.
+     *
+     * @requires extension apn
+     * @covers   Lunr\Vortex\APNS\APNSDispatcher::set_passphrase
+     */
+    public function testSetSandboxModeSetsProductionModeWithFalse()
+    {
+        $this->class->set_sandbox_mode(FALSE);
+
+        $this->assertPropertyEquals('mode', APN_PRODUCTION);
+        $this->assertPropertyEquals('setup', FALSE);
+    }
+
+    /**
+     * Test the fluid interface of set_sandbox_mode().
+     *
+     * @covers Lunr\Vortex\APNS\APNSDispatcher::set_sandbox_mode
+     */
+    public function testSetSandboxModeReturnsSelfReference()
+    {
+        $this->assertEquals($this->class, $this->class->set_sandbox_mode());
+    }
+
 }
 
 ?>

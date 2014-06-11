@@ -67,7 +67,8 @@ abstract class APNSDispatcherTest extends LunrBaseTest
             'apn_connect',
             'apn_send',
             'apn_close',
-            'apn_payload_free'
+            'apn_payload_free',
+            'apn_set_mode'
         ];
 
         $this->mock_function('apn_init', self::APN_RETURN_TRUE);

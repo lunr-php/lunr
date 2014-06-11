@@ -53,6 +53,12 @@ class APNSDispatcher implements PushNotificationDispatcherInterface
     private $passphrase;
 
     /**
+     * APNS Connection mode.
+     * @var String
+     */
+    private $mode;
+
+    /**
      * Reference to the php_apn extension.
      * @var Resource
      */
@@ -81,6 +87,7 @@ class APNSDispatcher implements PushNotificationDispatcherInterface
         $this->payload     = '';
         $this->certificate = '';
         $this->passphrase  = '';
+        $this->mode        = APN_PRODUCTION;
         $this->logger      = $logger;
         $this->setup       = FALSE;
 
@@ -114,6 +121,7 @@ class APNSDispatcher implements PushNotificationDispatcherInterface
         {
             apn_set_certificate($this->apn, $this->certificate);
             apn_set_private_key($this->apn, $this->certificate, $this->passphrase);
+            apn_set_mode($this->apn, $this->mode);
 
             $this->setup = TRUE;
         }
@@ -218,6 +226,20 @@ class APNSDispatcher implements PushNotificationDispatcherInterface
     {
         $this->passphrase = $passphrase;
         $this->setup      = FALSE;
+
+        return $this;
+    }
+
+    /**
+     * Use sandbox mode for sending push notifications.
+     *
+     * @param Boolean $sandbox TRUE for setting sandbox mode, FALSE for setting production mode
+     *
+     * @return APNSDispatcher $self Self reference
+     */
+    public function set_sandbox_mode($sandbox = TRUE)
+    {
+        $this->mode = $sandbox ? APN_SANDBOX : APN_PRODUCTION;
 
         return $this;
     }
