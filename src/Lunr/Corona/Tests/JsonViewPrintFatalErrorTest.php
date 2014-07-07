@@ -82,6 +82,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
     /**
      * Test that print_fatal_error() does prints a json object if there is a fatal error.
      *
+     * @requires PHP 5.5.12
      * @requires extension runkit
      * @covers   Lunr\Corona\JsonView::print_fatal_error
      */

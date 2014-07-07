@@ -49,6 +49,7 @@ class JsonViewPrintTest extends JsonViewTest
      * @param mixed $error_info Non-integer error info value
      *
      * @dataProvider invalidErrorInfoProvider
+     * @requires     PHP 5.5.12
      * @requires     extension runkit
      * @covers       Lunr\Corona\JsonView::print_page
      */
@@ -95,6 +96,7 @@ class JsonViewPrintTest extends JsonViewTest
     /**
      * Test that print_page() prints JSON with an empty string as message if message is missing.
      *
+     * @requires PHP 5.5.12
      * @requires extension runkit
      * @covers   Lunr\Corona\JsonView::print_page
      */
@@ -141,6 +143,7 @@ class JsonViewPrintTest extends JsonViewTest
     /**
      * Test that print_page() prints JSON.
      *
+     * @requires PHP 5.5.12
      * @requires extension runkit
      * @covers   Lunr\Corona\JsonView::print_page
      */
@@ -232,7 +235,8 @@ class JsonViewPrintTest extends JsonViewTest
     /**
      * Test that print_page() with empty data value.
      *
-     * @covers Lunr\Corona\JsonView::print_page
+     * @requires PHP 5.5.12
+     * @covers   Lunr\Corona\JsonView::print_page
      */
     public function testPrintPageWithEmptyData()
     {
@@ -279,6 +283,7 @@ class JsonViewPrintTest extends JsonViewTest
      *
      * @runInSeparateProcess
      *
+     * @requires PHP 5.5.12
      * @requires extension xdebug
      * @covers   Lunr\Corona\JsonView::print_page
      */
