@@ -143,6 +143,58 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Mock a method.
+     *
+     * Replace the code of a function of a specific class
+     *
+     * @param Callable $method     Method defined in an array form
+     * @param String   $mock       Replacement code for the method
+     * @param String   $visibility Visibility of the redefined method
+     *
+     * @return void
+     */
+    protected function mock_method($method, $mock, $visibility = 'public')
+    {
+        $class_name  = $method[0];
+        $method_name = $method[1];
+
+        if (method_exists($class_name, $method_name . self::FUNCTION_ID) === FALSE)
+        {
+            runkit_method_copy($class_name, $method_name . self::FUNCTION_ID, $class_name, $method_name);
+        }
+
+        switch ($visibility) {
+            case 'public':
+                $visibility_flag = RUNKIT_ACC_PUBLIC;
+                break;
+            case 'protected':
+                $visibility_flag = RUNKIT_ACC_PROTECTED;
+                break;
+            case 'private':
+                $visibility_flag = RUNKIT_ACC_PRIVATE;
+                break;
+        }
+
+        runkit_method_redefine($class_name, $method_name, '', $mock, $visibility_flag);
+    }
+
+    /**
+     * Unmock a method.
+     *
+     * @param Callable $method Method defined in an array form
+     *
+     * @return void
+     */
+    protected function unmock_method($method)
+    {
+        $class_name  = $method[0];
+        $method_name = $method[1];
+
+        runkit_method_remove($class_name, $method_name);
+        runkit_method_rename($class_name, $method_name . self::FUNCTION_ID, $method_name);
+    }
+
+    /**
      * Assert that a property value equals the expected value.
      *
      * @param String $property Property name
