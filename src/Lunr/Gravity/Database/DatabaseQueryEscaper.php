@@ -148,6 +148,18 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
     }
 
     /**
+     * Define and escape input as floating point value.
+     *
+     * @param mixed $value Input to escape as float
+     *
+     * @return Integer Defined and escaped float value
+     */
+    public function floatvalue($value)
+    {
+        return floatval($value);
+    }
+
+    /**
     * Define input as a query within parentheses.
     *
     * @param String $value Input

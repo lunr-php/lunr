@@ -111,6 +111,20 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
     }
 
     /**
+     * Unit Test Data Provider for legal input values to be escaped as integer.
+     *
+     *  @return array $expecteds array of value to be escaped and their result
+     */
+    public function expectedFloatProvider()
+    {
+        $expecteds   = [];
+        $expecteds[] = ['1.0', 1];
+        $expecteds[] = ['10.1', 10.1];
+
+        return $expecteds;
+    }
+
+    /**
      * Unit Test Data Provider for illegalinput values to be escaped as integer.
      *
      *  @return array $illegals array of value to be escaped and their result
@@ -127,6 +141,29 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
 
         $illegals[] = ['value', 0];
         $illegals[] = ['1e10', 1];
+
+        $illegals[] = [[], 0];
+        $illegals[] = [['a', 'b'], 1];
+
+        return $illegals;
+    }
+
+    /**
+     * Unit Test Data Provider for illegalinput values to be escaped as float.
+     *
+     *  @return array $illegals array of value to be escaped and their result
+     */
+    public function illegalFloatProvider()
+    {
+        $illegals   = [];
+        $illegals[] = ["3.3.3", 3.3];
+
+        $illegals[] = [NULL, 0];
+
+        $illegals[] = [FALSE, 0];
+        $illegals[] = [TRUE, 1];
+
+        $illegals[] = ['value', 0];
 
         $illegals[] = [[], 0];
         $illegals[] = [['a', 'b'], 1];

@@ -255,6 +255,45 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     }
 
     /**
+     * Test escaping a float.
+     *
+     * @param mixed   $value    The input value to be escaped
+     * @param Integer $expected The expected escaped float
+     *
+     * @dataProvider expectedFloatProvider
+     * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::floatvalue
+     */
+    public function testEscapeFloatValue($value, $expected)
+    {
+        $this->assertEquals($expected, $this->class->floatvalue($value));
+    }
+
+    /**
+     * Test escaping an object as float.
+     *
+     * @expectedException PHPUnit_Framework_Error_Notice
+     * @covers            Lunr\Gravity\Database\DatabaseQueryEscaper::floatvalue
+     */
+    public function testEscapeObjectAsFloatValue()
+    {
+        $this->assertEquals(0, $this->class->floatvalue($this->class));
+    }
+
+    /**
+     * Test escaping illegal value as float.
+     *
+     * @param mixed   $value   The input value to be escaped
+     * @param integer $illegal The illegal escaped float
+     *
+     * @dataProvider illegalFloatProvider
+     * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::floatvalue
+     */
+    public function testEscapeIllegalAsFloatValue($value, $illegal)
+    {
+        $this->assertEquals($illegal, $this->class->floatvalue($value));
+    }
+
+    /**
      * Test prepending and apending parentheses to a value.
      *
      * @covers Lunr\Gravity\Database\DatabaseQueryEscaper::query_value
