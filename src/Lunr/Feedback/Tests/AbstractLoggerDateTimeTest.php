@@ -116,7 +116,7 @@ class AbstractLoggerDateTimeTest extends AbstractLoggerTest
 
         $msg = $method->invokeArgs($this->class, array($message, $context));
 
-        $this->assertEquals('controller/method: ' . self::DATETIME_LOG_STRING . $expected, $msg);
+        $this->assertEquals(self::DATETIME_LOG_STRING . 'controller/method: ' . $expected, $msg);
     }
 
     /**

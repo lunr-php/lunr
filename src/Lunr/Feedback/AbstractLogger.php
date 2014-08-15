@@ -81,7 +81,7 @@ abstract class AbstractLogger extends PSR3Logger
             $prefix .= '[' . $this->datetime->get_datetime() . ']: ';
         }
 
-        return $this->compose_message($prefix . $message, $context);
+        return $prefix . $this->compose_message($message, $context);
     }
 
     /**
