@@ -38,6 +38,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * @dataProvider contentTypeProvider
      * @requires     extension runkit
      * @requires     extension http
+     * @requires     function http_negotiate_content_type
      * @covers       Lunr\Corona\WebRequestParser::parse_accept_format
      */
     public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value)
@@ -54,6 +55,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      *
      * @requires extension runkit
      * @requires extension http
+     * @requires function http_negotiate_content_type
      * @covers   Lunr\Corona\WebRequestParser::parse_accept_format
      */
     public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull()
@@ -73,6 +75,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * @dataProvider acceptLanguageProvider
      * @requires     extension runkit
      * @requires     extension http
+     * @requires     function http_negotiate_language
      * @covers       Lunr\Corona\WebRequestParser::parse_accept_language
      */
     public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value)
@@ -89,6 +92,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      *
      * @requires extension runkit
      * @requires extension http
+     * @requires function http_negotiate_language
      * @covers   Lunr\Corona\WebRequestParser::parse_accept_language
      */
     public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull()
@@ -108,6 +112,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * @dataProvider acceptCharsetProvider
      * @requires     extension runkit
      * @requires     extension http
+     * @requires     function http_negotiate_charset
      * @covers       Lunr\Corona\WebRequestParser::parse_accept_encoding
      */
     public function testGetAcceptEncodingWithValidSupportedCharsetsReturnsString($value)
@@ -124,6 +129,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      *
      * @requires extension runkit
      * @requires extension http
+     * @requires function http_negotiate_charset
      * @covers   Lunr\Corona\WebRequestParser::parse_accept_encoding
      */
     public function testGetAcceptEncodingWithEmptySupportedCharsetsReturnsNull()
