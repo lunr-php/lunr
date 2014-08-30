@@ -84,9 +84,9 @@ abstract class MPNSResponseTest extends LunrBaseTest
      */
     public function setUpSuccess()
     {
-        if (extension_loaded('http') === FALSE)
+        if (extension_loaded('http') === FALSE || empty(get_extension_funcs('http')))
         {
-            $this->markTestSkipped('Extension http is required.');
+            $this->markTestSkipped('Extension http (1.7.x) is required.');
         }
 
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
