@@ -38,6 +38,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @dataProvider contentTypeProvider
      * @requires     extension runkit
      * @requires     extension http
+     * @requires     function http_negotiate_content_type
      * @covers       Lunr\Shadow\CliRequestParser::parse_accept_format
      */
     public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value)
@@ -61,6 +62,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      *
      * @requires extension runkit
      * @requires extension http
+     * @requires function http_negotiate_content_type
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_format
      */
     public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull()
@@ -87,6 +89,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @dataProvider acceptLanguageProvider
      * @requires     extension runkit
      * @requires     extension http
+     * @requires     function http_negotiate_language
      * @covers       Lunr\Shadow\CliRequestParser::parse_accept_language
      */
     public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value)
@@ -110,6 +113,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      *
      * @requires extension runkit
      * @requires extension http
+     * @requires function http_negotiate_language
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_language
      */
     public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull()
@@ -136,6 +140,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @dataProvider acceptCharsetProvider
      * @requires     extension runkit
      * @requires     extension http
+     * @requires     function http_negotiate_charset
      * @covers       Lunr\Shadow\CliRequestParser::parse_accept_encoding
      */
     public function testGetAcceptEncodingWithValidSupportedCharsetsReturnsString($value)
@@ -159,6 +164,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      *
      * @requires extension runkit
      * @requires extension http
+     * @requires function http_negotiate_charset
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_encoding
      */
     public function testGetAcceptEncodingWithEmptySupportedCharsetsReturnsNull()

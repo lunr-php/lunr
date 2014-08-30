@@ -224,6 +224,9 @@ class CliRequestGetTest extends CliRequestTest
      * @param String $value the expected value
      *
      * @dataProvider contentTypeProvider
+     * @requires     extension http
+     * @requires     extension runkit
+     * @requires     function http_negotiate_content_type
      * @covers       Lunr\Shadow\CliRequest::get_accept_format
      */
     public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($key, $value)
@@ -244,6 +247,9 @@ class CliRequestGetTest extends CliRequestTest
      * @param String $value the expected value
      *
      * @dataProvider contentTypeProvider
+     * @requires     extension http
+     * @requires     extension runkit
+     * @requires     function http_negotiate_content_type
      * @covers       Lunr\Shadow\CliRequest::get_accept_format
      */
     public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull($key, $value)
@@ -264,6 +270,9 @@ class CliRequestGetTest extends CliRequestTest
      * @param String $value the expected value
      *
      * @dataProvider acceptLanguageProvider
+     * @requires     extension http
+     * @requires     extension runkit
+     * @requires     function http_negotiate_language
      * @covers       Lunr\Shadow\CliRequest::get_accept_language
      */
     public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($key, $value)
@@ -284,6 +293,9 @@ class CliRequestGetTest extends CliRequestTest
      * @param String $value the expected value
      *
      * @dataProvider acceptLanguageProvider
+     * @requires     extension http
+     * @requires     extension runkit
+     * @requires     function http_negotiate_language
      * @covers       Lunr\Shadow\CliRequest::get_accept_language
      */
     public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull($key, $value)
@@ -304,6 +316,9 @@ class CliRequestGetTest extends CliRequestTest
      * @param String $value the expected value
      *
      * @dataProvider acceptCharsetProvider
+     * @requires     extension http
+     * @requires     extension runkit
+     * @requires     function http_negotiate_charset
      * @covers       Lunr\Shadow\CliRequest::get_accept_encoding
      */
     public function testGetAcceptEncodingWithValidSupportedCharsetsReturnsString($key, $value)
@@ -324,6 +339,9 @@ class CliRequestGetTest extends CliRequestTest
      * @param String $value the expected value
      *
      * @dataProvider acceptCharsetProvider
+     * @requires     extension http
+     * @requires     extension runkit
+     * @requires     function http_negotiate_charset
      * @covers       Lunr\Shadow\CliRequest::get_accept_encoding
      */
     public function testGetAcceptEncodingWithEmptySupportedCharsetsReturnsNull($key, $value)
