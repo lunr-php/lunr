@@ -213,9 +213,6 @@
             <file>src/Lunr/Shadow/Tests/LunrCliParserParseTest.php</file>
             <file>src/Lunr/Shadow/Tests/GetoptCliParserBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/GetoptCliParserParseTest.php</file>
-            <file>src/Lunr/Shadow/Tests/CliRequestBaseTest.php</file>
-            <file>src/Lunr/Shadow/Tests/CliRequestGetTest.php</file>
-            <file>src/Lunr/Shadow/Tests/CliRequestStoreRequestTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestParserBaseTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestParserParseRequestTest.php</file>
             <file>src/Lunr/Shadow/Tests/CliRequestParserParseSuperGlobalTest.php</file>
