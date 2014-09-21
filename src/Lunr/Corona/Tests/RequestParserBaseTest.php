@@ -107,13 +107,13 @@ class RequestParserBaseTest extends RequestParserTest
     }
 
     /**
-     * Test that parse_accept_encoding() returns NULL.
+     * Test that parse_accept_charset() returns NULL.
      *
-     * @covers Lunr\Corona\RequestParser::parse_accept_encoding
+     * @covers Lunr\Corona\RequestParser::parse_accept_charset
      */
-    public function testParseAcceptEncodingReturnsNull()
+    public function testParseAcceptCharsetReturnsNull()
     {
-        $this->assertNull($this->class->parse_accept_encoding());
+        $this->assertNull($this->class->parse_accept_charset());
     }
 
 }
