@@ -90,14 +90,14 @@ interface RequestParserInterface
     public function parse_accept_language($supported = []);
 
     /**
-     * Negotiate & retrieve the clients prefered encoding/charset.
+     * Negotiate & retrieve the clients prefered charset.
      *
-     * @param Array $supported Array containing the supported encodings
+     * @param Array $supported Array containing the supported charsets
      *
-     * @return Mixed $return The best match of the prefered encodings or NULL if
-     *                       there are no supported encodings or the header is not set
+     * @return Mixed $return The best match of the prefered charsets or NULL if
+     *                       there are no supported charsets or the header is not set
      */
-    public function parse_accept_encoding($supported = []);
+    public function parse_accept_charset($supported = []);
 
 }
 
