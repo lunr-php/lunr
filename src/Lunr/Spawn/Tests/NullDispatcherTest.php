@@ -28,7 +28,7 @@ use ReflectionClass;
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @covers     Lunr\Spawn\NullDispatcher
  */
-class NullDispatcherTest extends LunrBaseTest
+abstract class NullDispatcherTest extends LunrBaseTest
 {
 
     /**
