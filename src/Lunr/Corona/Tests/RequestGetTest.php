@@ -128,9 +128,6 @@ class RequestGetTest extends RequestTest
      * @param String $value the expected value
      *
      * @dataProvider contentTypeProvider
-     * @requires     extension http
-     * @requires     extension runkit
-     * @requires     function http_negotiate_content_type
      * @covers       Lunr\Corona\Request::get_accept_format
      */
     public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value)
@@ -146,10 +143,7 @@ class RequestGetTest extends RequestTest
     /**
      * Test that get_accept_format() returns null when called with an empty set of supported formats.
      *
-     * @requires extension http
-     * @requires extension runkit
-     * @requires function http_negotiate_content_type
-     * @covers   Lunr\Corona\Request::get_accept_format
+     * @covers Lunr\Corona\Request::get_accept_format
      */
     public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull()
     {
@@ -162,9 +156,6 @@ class RequestGetTest extends RequestTest
      * @param String $value the expected value
      *
      * @dataProvider acceptLanguageProvider
-     * @requires     extension http
-     * @requires     extension runkit
-     * @requires     function http_negotiate_language
      * @covers       Lunr\Corona\Request::get_accept_language
      */
     public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value)
@@ -180,10 +171,7 @@ class RequestGetTest extends RequestTest
     /**
      * Test that get_accept_format() returns null when called with an empty set of supported languages.
      *
-     * @requires extension http
-     * @requires extension runkit
-     * @requires function http_negotiate_language
-     * @covers   Lunr\Corona\Request::get_accept_language
+     * @covers Lunr\Corona\Request::get_accept_language
      */
     public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull()
     {
@@ -191,37 +179,31 @@ class RequestGetTest extends RequestTest
     }
 
     /**
-     * Test that get_accept_encoding() returns content type when called with a valid set of supported charsets.
+     * Test that get_accept_charset() returns content type when called with a valid set of supported charsets.
      *
      * @param String $value the expected value
      *
      * @dataProvider acceptCharsetProvider
-     * @requires     extension http
-     * @requires     extension runkit
-     * @requires     function http_negotiate_charset
-     * @covers       Lunr\Corona\Request::get_accept_encoding
+     * @covers       Lunr\Corona\Request::get_accept_charset
      */
-    public function testGetAcceptEncodingWithValidSupportedCharsetsReturnsString($value)
+    public function testGetAcceptCharsetWithValidSupportedCharsetsReturnsString($value)
     {
         $this->parser->expects($this->once())
-                     ->method('parse_accept_encoding')
+                     ->method('parse_accept_charset')
                      ->with($this->equalTo($value))
                      ->will($this->returnValue('utf-8'));
 
-        $this->assertEquals($value, $this->class->get_accept_encoding($value));
+        $this->assertEquals($value, $this->class->get_accept_charset($value));
     }
 
     /**
-     * Test that get_accept_encoding() returns null when called with an empty set of supported charsets.
+     * Test that get_accept_charset() returns null when called with an empty set of supported charsets.
      *
-     * @requires extension http
-     * @requires extension runkit
-     * @requires function http_negotiate_charset
-     * @covers   Lunr\Corona\Request::get_accept_encoding
+     * @covers Lunr\Corona\Request::get_accept_charset
      */
-    public function testGetAcceptEncodingWithEmptySupportedCharsetsReturnsNull()
+    public function testGetAcceptCharsetWithEmptySupportedCharsetsReturnsNull()
     {
-        $this->assertNull($this->class->get_accept_encoding([]));
+        $this->assertNull($this->class->get_accept_charset([]));
     }
 
 }
