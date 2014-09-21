@@ -37,6 +37,14 @@ class WebRequestParserBaseTest extends WebRequestParserTest
     }
 
     /**
+     * Test that the header class is set correctly.
+     */
+    public function testHeaderSetCorrectly()
+    {
+        $this->assertPropertySame('header', $this->header);
+    }
+
+    /**
      * Test that $request_parsed is FALSE by default.
      */
     public function testRequestParsedIsFalseByDefault()

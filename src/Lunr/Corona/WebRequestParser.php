@@ -37,6 +37,12 @@ class WebRequestParser implements RequestParserInterface
     protected $config;
 
     /**
+     * Shared instance of the Header class.
+     * @var \http\Header
+     */
+    protected $header;
+
+    /**
      * Whether the request was parsed already or not,
      * @var Boolean
      */
@@ -46,10 +52,12 @@ class WebRequestParser implements RequestParserInterface
      * Constructor.
      *
      * @param \Lunr\Core\Configuration $configuration Shared instance of the Configuration class
+     * @param \http\Header             $header        Shared instance of the Header class
      */
-    public function __construct($configuration)
+    public function __construct($configuration, $header)
     {
         $this->config         = $configuration;
+        $this->header         = $header;
         $this->request_parsed = FALSE;
     }
 
@@ -59,6 +67,7 @@ class WebRequestParser implements RequestParserInterface
     public function __destruct()
     {
         unset($this->config);
+        unset($this->header);
         unset($this->request_parsed);
     }
 
@@ -263,7 +272,10 @@ class WebRequestParser implements RequestParserInterface
      */
     public function parse_accept_format($supported = [])
     {
-        return http_negotiate_content_type($supported);
+        $this->header->name  = "Accept";
+        $this->header->value = $_SERVER['HTTP_ACCEPT'];
+
+        return $this->header->negotiate($supported);
     }
 
     /**
@@ -276,20 +288,26 @@ class WebRequestParser implements RequestParserInterface
      */
     public function parse_accept_language($supported = [])
     {
-        return http_negotiate_language($supported);
+        $this->header->name  = "Accept-Language";
+        $this->header->value = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+
+        return $this->header->negotiate($supported);
     }
 
     /**
-     * Negotiate & retrieve the clients prefered encoding/charset.
+     * Negotiate & retrieve the clients prefered charset.
      *
-     * @param Array $supported Array containing the supported encodings
+     * @param Array $supported Array containing the supported charsets
      *
-     * @return Mixed $return The best match of the prefered encodings or NULL if
-     *                       there are no supported encodings or the header is not set
+     * @return Mixed $return The best match of the prefered charsets or NULL if
+     *                       there are no supported charsets or the header is not set
      */
-    public function parse_accept_encoding($supported = [])
+    public function parse_accept_charset($supported = [])
     {
-        return http_negotiate_charset($supported);
+        $this->header->name  = "Accept-Charset";
+        $this->header->value = $_SERVER['HTTP_ACCEPT_CHARSET'];
+
+        return $this->header->negotiate($supported);
     }
 
 }

@@ -34,9 +34,16 @@ abstract class WebRequestParserTest extends LunrBaseTest
 
     /**
      * Mock of the Configuration class.
-     * @var Configuration
+     * @var \Lunr\Core\Configuration
      */
     protected $configuration;
+
+
+    /**
+     * Mock instance of the Header class
+     * @var \http\Header
+     */
+    protected $header;
 
     /**
      * Shared TestCase Constructor code.
@@ -46,8 +53,9 @@ abstract class WebRequestParserTest extends LunrBaseTest
     public function setUp()
     {
         $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->header        = $this->getMock('http\Header');
 
-        $this->class      = new WebRequestParser($this->configuration);
+        $this->class      = new WebRequestParser($this->configuration, $this->header);
         $this->reflection = new ReflectionClass('Lunr\Corona\WebRequestParser');
     }
 
@@ -59,6 +67,7 @@ abstract class WebRequestParserTest extends LunrBaseTest
         unset($this->class);
         unset($this->reflection);
         unset($this->configuration);
+        unset($this->header);
     }
 
     /**
