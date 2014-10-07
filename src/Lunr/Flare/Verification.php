@@ -24,13 +24,13 @@ class Verification
      * Shared instance of a Logger class.
      * @var LoggerInterface
      */
-    private $logger;
+    protected $logger;
 
     /**
      * The dataset to verify.
      * @var array
      */
-    private $data;
+    protected $data;
 
     /**
      * Pointer to the element in the dataset to inspect.
@@ -48,26 +48,26 @@ class Verification
      * Set of rulesets for non-existing keys.
      * @var array
      */
-    private $superfluous;
+    protected $superfluous;
 
     /**
      * Identifier for the verification process.
      * Used in the log file.
      * @var String
      */
-    private $identifier;
+    protected $identifier;
 
     /**
      * Flag whether to check for superfluous rules or not.
      * @var Boolean
      */
-    private $check_superfluous;
+    protected $check_superfluous;
 
     /**
      * Flag whether to check for unchecked indexes or not.
      * @var Boolean
      */
-    private $check_remaining;
+    protected $check_remaining;
 
     /**
      * Constructor.
@@ -293,7 +293,7 @@ class Verification
      *
      * @return Boolean $return TRUE if no non-existing indexes have been checked, FALSE otherwise
      */
-    private function is_overchecked($error_prefix)
+    protected function is_overchecked($error_prefix)
     {
         if (empty($this->superfluous))
         {
@@ -322,7 +322,7 @@ class Verification
      *
      * @return Boolean $return TRUE if everything has been checked, FALSE otherwise
      */
-    private function is_fully_checked($error_prefix)
+    protected function is_fully_checked($error_prefix)
     {
         // Check that input matches with the defined ruleset
         $data_indexes       = array_keys($this->data);
