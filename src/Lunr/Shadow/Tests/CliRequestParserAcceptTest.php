@@ -36,6 +36,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      *
      * @dataProvider contentTypeProvider
      * @requires     extension http
+     * @requires     function http\Header::negotiate
      * @covers       Lunr\Shadow\CliRequestParser::parse_accept_format
      */
     public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value)
@@ -66,6 +67,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * Test that parse_accept_format() returns null when called with an empty set of supported formats.
      *
      * @requires extension http
+     * @requires function http\Header::negotiate
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_format
      */
     public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull()
@@ -98,6 +100,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      *
      * @dataProvider acceptLanguageProvider
      * @requires     extension http
+     * @requires     function http\Header::negotiate
      * @covers       Lunr\Shadow\CliRequestParser::parse_accept_language
      */
     public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value)
@@ -127,6 +130,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * Test that parse_accept_format() returns null when called with an empty set of supported languages.
      *
      * @requires extension http
+     * @requires function http\Header::negotiate
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_language
      */
     public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull()
@@ -159,6 +163,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      *
      * @dataProvider acceptCharsetProvider
      * @requires     extension http
+     * @requires     function http\Header::negotiate
      * @covers       Lunr\Shadow\CliRequestParser::parse_accept_charset
      */
     public function testGetAcceptCharsetWithValidSupportedCharsetsReturnsString($value)
@@ -188,6 +193,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * Test that parse_accept_charset() returns null when called with an empty set of supported charsets.
      *
      * @requires extension http
+     * @requires function http\Header::negotiate
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_charset
      */
     public function testGetAcceptCharsetWithEmptySupportedCharsetsReturnsNull()
