@@ -39,6 +39,12 @@ class CliRequestParser implements RequestParserInterface
     protected $config;
 
     /**
+     * Shared instance of the Header class.
+     * @var \http\Header
+     */
+    protected $header;
+
+    /**
      * "Abstract Syntax Tree" of the passed arguments on the command line
      * @var array
      */
@@ -49,10 +55,12 @@ class CliRequestParser implements RequestParserInterface
      *
      * @param \Lunr\Core\Configuration        $configuration Shared instance of the Configuration class
      * @param \Lunr\Shadow\CliParserInterface $parser        The CliParser of this request
+     * @param \http\Header                    $header        Shared instance of the Header class
      */
-    public function __construct($configuration, $parser)
+    public function __construct($configuration, $parser, $header)
     {
         $this->config = $configuration;
+        $this->header = $header;
         $this->ast    = $parser->parse();
     }
 
@@ -62,6 +70,7 @@ class CliRequestParser implements RequestParserInterface
     public function __destruct()
     {
         unset($this->config);
+        unset($this->header);
         unset($this->ast);
     }
 
@@ -216,7 +225,7 @@ class CliRequestParser implements RequestParserInterface
         unset($ast['post'], $ast['get'], $ast['files'], $ast['cookie']);
         unset($ast['accept-format']);
         unset($ast['accept-language']);
-        unset($ast['accept-encoding']);
+        unset($ast['accept-charset']);
 
         return $ast;
     }
@@ -231,10 +240,10 @@ class CliRequestParser implements RequestParserInterface
      */
     public function parse_accept_format($supported = [])
     {
-        // pretend this is a web request
-        $_SERVER['HTTP_ACCEPT'] = $this->ast['accept-format'];
+        $this->header->name  = "Accept";
+        $this->header->value = $this->ast['accept-format'][0];
 
-        return http_negotiate_content_type($supported);
+        return $this->header->negotiate($supported);
     }
 
     /**
@@ -247,26 +256,26 @@ class CliRequestParser implements RequestParserInterface
      */
     public function parse_accept_language($supported = [])
     {
-        // make $_SERVER think this is a web request
-        $_SERVER['HTTP_ACCEPT_LANGUAGE'] = $this->ast['accept-language'];
+        $this->header->name  = "Accept-Language";
+        $this->header->value = $this->ast['accept-language'][0];
 
-        return http_negotiate_language($supported);
+        return $this->header->negotiate($supported);
     }
 
     /**
-     * Negotiate & retrieve the clients prefered encoding/charset.
+     * Negotiate & retrieve the clients prefered charset.
      *
-     * @param Array $supported Array containing the supported encodings
+     * @param Array $supported Array containing the supported charsets
      *
-     * @return Mixed $return The best match of the prefered encodings or NULL if
-     *                       there are no supported encodings or the header is not set
+     * @return Mixed $return The best match of the prefered charsets or NULL if
+     *                       there are no supported charsets or the header is not set
      */
-    public function parse_accept_encoding($supported = [])
+    public function parse_accept_charset($supported = [])
     {
-        // make $_SERVER think this is a web request
-        $_SERVER['HTTP_ACCEPT_ENCODING'] = $this->ast['accept-encoding'];
+        $this->header->name  = "Accept-Charset";
+        $this->header->value = $this->ast['accept-charset'][0];
 
-        return http_negotiate_charset($supported);
+        return $this->header->negotiate($supported);
     }
 
 }

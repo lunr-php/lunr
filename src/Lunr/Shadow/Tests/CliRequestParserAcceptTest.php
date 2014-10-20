@@ -19,13 +19,12 @@ namespace Lunr\Shadow\Tests;
 /**
  * Basic tests for the case of empty superglobals.
  *
- * @category      Libraries
- * @package       Shadow
- * @subpackage    Tests
- * @author        Heinz Wiesinger <heinz@m2mobi.com>
- * @author        Leonidas Diamantis <leonidas@m2mobi.com>
- * @covers        Lunr\Shadow\CliRequestParser
- * @backupGlobals enabled
+ * @category   Libraries
+ * @package    Shadow
+ * @subpackage Tests
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Leonidas Diamantis <leonidas@m2mobi.com>
+ * @covers     Lunr\Shadow\CliRequestParser
  */
 class CliRequestParserAcceptTest extends CliRequestParserTest
 {
@@ -36,49 +35,60 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @param String $value the expected value
      *
      * @dataProvider contentTypeProvider
-     * @requires     extension runkit
      * @requires     extension http
-     * @requires     function http_negotiate_content_type
      * @covers       Lunr\Shadow\CliRequestParser::parse_accept_format
      */
     public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value)
     {
+        $this->assertNull($this->header->name);
+        $this->assertNull($this->header->value);
+
         $property = $this->get_accessible_reflection_property('ast');
-        $ast      = $property->getValue($this->class);
+        $old      = $property->getValue($this->class);
+        $new      = $old;
 
-        $ast['accept-format'] = [ 'text/plain,text/html' ];
+        $new['accept-format'] = [ 'accept_value' ];
 
-        $property->setValue($this->class, $ast);
+        $property->setValue($this->class, $new);
 
-        $this->mock_function('http_negotiate_content_type', 'return "text/html";');
+        $this->header->expects($this->once())
+                     ->method('negotiate')
+                     ->with($this->equalTo($value))
+                     ->will($this->returnValue('text/html'));
 
         $this->assertEquals($value, $this->class->parse_accept_format($value));
 
-        $this->unmock_function('http_negotiate_content_type');
+        $this->assertSame('Accept', $this->header->name);
+        $this->assertSame('accept_value', $this->header->value);
     }
 
     /**
      * Test that parse_accept_format() returns null when called with an empty set of supported formats.
      *
-     * @requires extension runkit
      * @requires extension http
-     * @requires function http_negotiate_content_type
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_format
      */
     public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull()
     {
+        $this->assertNull($this->header->name);
+        $this->assertNull($this->header->value);
+
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['accept-format'] = [ 'text/plain,text/html' ];
+        $ast['accept-format'] = [ 'accept_value' ];
 
         $property->setValue($this->class, $ast);
 
-        $this->mock_function('http_negotiate_content_type', 'return NULL;');
+        $this->header->expects($this->once())
+                     ->method('negotiate')
+                     ->with($this->equalTo([]))
+                     ->will($this->returnValue(NULL));
 
         $this->assertNull($this->class->parse_accept_format([]));
 
-        $this->unmock_function('http_negotiate_content_type');
+        $this->assertSame('Accept', $this->header->name);
+        $this->assertSame('accept_value', $this->header->value);
     }
 
     /**
@@ -87,100 +97,120 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @param String $value the expected value
      *
      * @dataProvider acceptLanguageProvider
-     * @requires     extension runkit
      * @requires     extension http
-     * @requires     function http_negotiate_language
      * @covers       Lunr\Shadow\CliRequestParser::parse_accept_language
      */
     public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value)
     {
+        $this->assertNull($this->header->name);
+        $this->assertNull($this->header->value);
+
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['accept-language'] = [ 'de-DE,en-US' ];
+        $ast['accept-language'] = [ 'accept_language_value' ];
 
         $property->setValue($this->class, $ast);
 
-        $this->mock_function('http_negotiate_language', 'return "en-US";');
+        $this->header->expects($this->once())
+                     ->method('negotiate')
+                     ->with($this->equalTo($value))
+                     ->will($this->returnValue('en-US'));
 
         $this->assertEquals($value, $this->class->parse_accept_language($value));
 
-        $this->unmock_function('http_negotiate_language');
+        $this->assertSame('Accept-Language', $this->header->name);
+        $this->assertSame('accept_language_value', $this->header->value);
     }
 
     /**
      * Test that parse_accept_format() returns null when called with an empty set of supported languages.
      *
-     * @requires extension runkit
      * @requires extension http
-     * @requires function http_negotiate_language
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_language
      */
     public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull()
     {
+        $this->assertNull($this->header->name);
+        $this->assertNull($this->header->value);
+
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['accept-language'] = [ 'de-DE,en-US' ];
+        $ast['accept-language'] = [ 'accept_language_value' ];
 
         $property->setValue($this->class, $ast);
 
-        $this->mock_function('http_negotiate_language', 'return NULL;');
+        $this->header->expects($this->once())
+                     ->method('negotiate')
+                     ->with($this->equalTo([]))
+                     ->will($this->returnValue(NULL));
 
         $this->assertNull($this->class->parse_accept_language([]));
 
-        $this->unmock_function('http_negotiate_language');
+        $this->assertSame('Accept-Language', $this->header->name);
+        $this->assertSame('accept_language_value', $this->header->value);
     }
 
     /**
-     * Test that parse_accept_encoding() returns content type when called with a valid set of supported charsets.
+     * Test that parse_accept_charset() returns content type when called with a valid set of supported charsets.
      *
      * @param String $value the expected value
      *
      * @dataProvider acceptCharsetProvider
-     * @requires     extension runkit
      * @requires     extension http
-     * @requires     function http_negotiate_charset
-     * @covers       Lunr\Shadow\CliRequestParser::parse_accept_encoding
+     * @covers       Lunr\Shadow\CliRequestParser::parse_accept_charset
      */
-    public function testGetAcceptEncodingWithValidSupportedCharsetsReturnsString($value)
+    public function testGetAcceptCharsetWithValidSupportedCharsetsReturnsString($value)
     {
+        $this->assertNull($this->header->name);
+        $this->assertNull($this->header->value);
+
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['accept-encoding'] = [ 'iso8859,utf-8' ];
+        $ast['accept-charset'] = [ 'accept_charset_value' ];
 
         $property->setValue($this->class, $ast);
 
-        $this->mock_function('http_negotiate_charset', 'return "utf-8";');
+        $this->header->expects($this->once())
+                     ->method('negotiate')
+                     ->with($this->equalTo($value))
+                     ->will($this->returnValue('utf-8'));
 
-        $this->assertEquals($value, $this->class->parse_accept_encoding($value));
+        $this->assertEquals($value, $this->class->parse_accept_charset($value));
 
-        $this->unmock_function('http_negotiate_charset');
+        $this->assertSame('Accept-Charset', $this->header->name);
+        $this->assertSame('accept_charset_value', $this->header->value);
     }
 
     /**
-     * Test that parse_accept_encoding() returns null when called with an empty set of supported charsets.
+     * Test that parse_accept_charset() returns null when called with an empty set of supported charsets.
      *
-     * @requires extension runkit
      * @requires extension http
-     * @requires function http_negotiate_charset
-     * @covers   Lunr\Shadow\CliRequestParser::parse_accept_encoding
+     * @covers   Lunr\Shadow\CliRequestParser::parse_accept_charset
      */
-    public function testGetAcceptEncodingWithEmptySupportedCharsetsReturnsNull()
+    public function testGetAcceptCharsetWithEmptySupportedCharsetsReturnsNull()
     {
+        $this->assertNull($this->header->name);
+        $this->assertNull($this->header->value);
+
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
 
-        $ast['accept-encoding'] = [ 'iso8859,utf-8' ];
+        $ast['accept-charset'] = [ 'accept_charset_value' ];
 
         $property->setValue($this->class, $ast);
 
-        $this->mock_function('http_negotiate_charset', 'return NULL;');
+        $this->header->expects($this->once())
+                     ->method('negotiate')
+                     ->with($this->equalTo([]))
+                     ->will($this->returnValue(NULL));
 
-        $this->assertNull($this->class->parse_accept_encoding([]));
+        $this->assertNull($this->class->parse_accept_charset([]));
 
-        $this->unmock_function('http_negotiate_charset');
+        $this->assertSame('Accept-Charset', $this->header->name);
+        $this->assertSame('accept_charset_value', $this->header->value);
     }
 
 }

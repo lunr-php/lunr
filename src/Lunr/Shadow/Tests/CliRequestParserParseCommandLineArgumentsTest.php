@@ -60,7 +60,7 @@ class CliRequestParserParseCommandLineArgumentsTest extends CliRequestParserTest
             'cookie'          => [ 'data' ],
             'accept-format'   => [ 'format' ],
             'accept-language' => [ 'language' ],
-            'accept-encoding' => [ 'encoding' ],
+            'accept-charset'  => [ 'charset' ],
         ];
 
         $this->set_reflection_property_value('ast', $ast);
@@ -88,7 +88,7 @@ class CliRequestParserParseCommandLineArgumentsTest extends CliRequestParserTest
             'cookie'          => [ 'data' ],
             'accept-format'   => [ 'format' ],
             'accept-language' => [ 'language' ],
-            'accept-encoding' => [ 'encoding' ],
+            'accept-charset'  => [ 'charset' ],
             'f'               => [ 'value1' ],
             'g'               => [ 'value2' ],
         ];
