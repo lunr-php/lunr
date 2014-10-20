@@ -37,6 +37,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      *
      * @dataProvider contentTypeProvider
      * @requires     extension http
+     * @requires     function http\Header::negotiate
      * @covers       Lunr\Corona\WebRequestParser::parse_accept_format
      */
     public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value)
@@ -61,6 +62,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * Test that parse_accept_format() returns null when called with an empty set of supported formats.
      *
      * @requires extension http
+     * @requires function http\Header::negotiate
      * @covers   Lunr\Corona\WebRequestParser::parse_accept_format
      */
     public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull()
@@ -88,6 +90,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      *
      * @dataProvider acceptLanguageProvider
      * @requires     extension http
+     * @requires     function http\Header::negotiate
      * @covers       Lunr\Corona\WebRequestParser::parse_accept_language
      */
     public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value)
@@ -112,6 +115,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * Test that parse_accept_format() returns null when called with an empty set of supported languages.
      *
      * @requires extension http
+     * @requires function http\Header::negotiate
      * @covers   Lunr\Corona\WebRequestParser::parse_accept_language
      */
     public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull()
@@ -139,6 +143,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      *
      * @dataProvider acceptCharsetProvider
      * @requires     extension http
+     * @requires     function http\Header::negotiate
      * @covers       Lunr\Corona\WebRequestParser::parse_accept_charset
      */
     public function testGetAcceptCharsetWithValidSupportedCharsetsReturnsString($value)
@@ -163,6 +168,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * Test that parse_accept_charset() returns null when called with an empty set of supported charsets.
      *
      * @requires extension http
+     * @requires function http\Header::negotiate
      * @covers   Lunr\Corona\WebRequestParser::parse_accept_charset
      */
     public function testGetAcceptCharsetWithEmptySupportedCharsetsReturnsNull()
