@@ -72,6 +72,14 @@ class MPNSDispatcherBaseTest extends MPNSDispatcherTest
         $this->assertSame(MPNSType::RAW, $this->get_reflection_property_value('type'));
     }
 
+    /**
+     * Test that the passed Header object is set correctly.
+     */
+    public function testHeaderIsSetCorrectly()
+    {
+        $this->assertSame($this->header, $this->get_reflection_property_value('header'));
+    }
+
 }
 
 ?>

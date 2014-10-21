@@ -49,10 +49,11 @@ class MPNSResponse
     /**
      * Constructor.
      *
-     * @param CurlResponse    $response Curl Response object.
-     * @param LoggerInterface $logger   Shared instance of a Logger.
+     * @param \Lunr\Network\CurlResponse $response Curl Response object.
+     * @param \Psr\Log\LoggerInterface   $logger   Shared instance of a Logger.
+     * @param \http\Header               $header   Instance of a Header class.
      */
-    public function __construct($response, $logger)
+    public function __construct($response, $logger, $header)
     {
         $this->http_code = $response->http_code;
 
@@ -65,7 +66,7 @@ class MPNSResponse
         }
         else
         {
-            $this->parse_headers($response->get_result(), $response->header_size);
+            $this->parse_headers($header, $response->get_result(), $response->header_size);
             $this->set_status($response->url, $logger);
         }
     }
@@ -83,14 +84,15 @@ class MPNSResponse
     /**
      * Parse response header information.
      *
-     * @param String  $result      Response result
-     * @param Integer $header_size Size of the header
+     * @param String       $result      Response result
+     * @param Integer      $header_size Size of the header
+     * @param \http\Header $header      Instance of a Header class.
      *
      * @return void
      */
-    private function parse_headers($result, $header_size)
+    private function parse_headers($header, $result, $header_size)
     {
-        $this->headers = http_parse_headers(substr($result, 0, $header_size));
+        $this->headers = $header->parse(substr($result, 0, $header_size));
 
         if (in_array($this->http_code, [ 400, 401, 405, 503 ]))
         {

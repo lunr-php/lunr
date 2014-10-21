@@ -54,23 +54,30 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
 
     /**
      * Shared instance of the Curl class.
-     * @var Curl
+     * @var \Lunr\Network\Curl
      */
     private $curl;
 
     /**
      * Shared instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
     /**
+     * Shared instance of a header class.
+     * @var \http\Header
+     */
+    private $header;
+
+    /**
      * Constructor.
      *
-     * @param Curl            $curl   Shared instance of the Curl class.
-     * @param LoggerInterface $logger Shared instance of a Logger.
+     * @param \Lunr\Network\Curl       $curl   Shared instance of the Curl class.
+     * @param \Psr\Log\LoggerInterface $logger Shared instance of a Logger.
+     * @param \http\Header             $header Shared instance of a Header class.
      */
-    public function __construct($curl, $logger)
+    public function __construct($curl, $logger, $header)
     {
         $this->endpoint = '';
         $this->payload  = '';
@@ -78,6 +85,7 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
         $this->curl     = $curl;
         $this->logger   = $logger;
         $this->type     = MPNSType::RAW;
+        $this->header   = $header;
     }
 
     /**
@@ -91,6 +99,7 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
         unset($this->type);
         unset($this->curl);
         unset($this->logger);
+        unset($this->header);
     }
 
     /**
@@ -120,7 +129,7 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
         $this->priority = 0;
         $this->type     = MPNSType::RAW;
 
-        return new MPNSResponse($response, $this->logger);
+        return new MPNSResponse($response, $this->logger, $this->header);
     }
 
     /**

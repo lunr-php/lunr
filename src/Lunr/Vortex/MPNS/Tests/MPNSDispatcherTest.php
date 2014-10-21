@@ -36,15 +36,21 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
 
     /**
      * Mock instance of the Curl class.
-     * @var Curl
+     * @var \Lunr\Network\Curl
      */
     protected $curl;
 
     /**
      * Mock instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
+
+    /**
+     * Mock instance of a Header class.
+     * @var \http\Header
+     */
+    protected $header;
 
     /**
      * Testcase Constructor.
@@ -57,7 +63,9 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
 
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->class = new MPNSDispatcher($this->curl, $this->logger);
+        $this->header = $this->getMock('http\Header');
+
+        $this->class = new MPNSDispatcher($this->curl, $this->logger, $this->header);
 
         $this->reflection = new ReflectionClass('Lunr\Vortex\MPNS\MPNSDispatcher');
     }
@@ -69,6 +77,9 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
     {
         unset($this->class);
         unset($this->reflection);
+        unset($this->curl);
+        unset($this->logger);
+        unset($this->header);
     }
 
     /**

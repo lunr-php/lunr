@@ -45,11 +45,18 @@ class MPNSResponseSetTest extends MPNSResponseTest
     public function testParseHeadersWithPreconditionFailedStatus()
     {
         $result = file_get_contents(TEST_STATICS . '/Vortex/mpns_response.txt');
+        $parsed = file_get_contents(TEST_STATICS . '/Vortex/mpns_response_parsed.txt');
+
+        $header = $this->getMock('http\Header', [ 'parse' ]);
+
+        $parse = [ get_class($header), 'parse' ];
+
+        $this->mock_method($parse, "return $parsed;");
 
         $this->set_reflection_property_value('http_code', 412);
 
         $method = $this->get_accessible_reflection_method('parse_headers');
-        $method->invokeArgs($this->class, [$result, 129]);
+        $method->invokeArgs($this->class, [$header, $result, 129]);
 
         $headers = $this->get_reflection_property_value('headers');
 
@@ -60,6 +67,8 @@ class MPNSResponseSetTest extends MPNSResponseTest
         $this->assertEquals('Received', $headers['X-Notificationstatus']);
         $this->assertEquals('Connected', $headers['X-Deviceconnectionstatus']);
         $this->assertEquals('N/A', $headers['X-Subscriptionstatus']);
+
+        $this->unmock_method($parse);
     }
 
     /**
@@ -73,11 +82,18 @@ class MPNSResponseSetTest extends MPNSResponseTest
     public function testParseHeadersWithSpecialStatusCodes($status)
     {
         $result = file_get_contents(TEST_STATICS . '/Vortex/mpns_response.txt');
+        $parsed = file_get_contents(TEST_STATICS . '/Vortex/mpns_response_parsed.txt');
+
+        $header = $this->getMock('http\Header', [ 'parse' ]);
+
+        $parse = [ get_class($header), 'parse' ];
+
+        $this->mock_method($parse, "return $parsed;");
 
         $this->set_reflection_property_value('http_code', $status);
 
         $method = $this->get_accessible_reflection_method('parse_headers');
-        $method->invokeArgs($this->class, [$result, 129]);
+        $method->invokeArgs($this->class, [$header, $result, 129]);
 
         $headers = $this->get_reflection_property_value('headers');
 
@@ -88,6 +104,8 @@ class MPNSResponseSetTest extends MPNSResponseTest
         $this->assertEquals('N/A', $headers['X-Notificationstatus']);
         $this->assertEquals('N/A', $headers['X-Deviceconnectionstatus']);
         $this->assertEquals('N/A', $headers['X-Subscriptionstatus']);
+
+        $this->unmock_method($parse);
     }
 
     /**

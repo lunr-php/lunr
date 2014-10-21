@@ -35,9 +35,15 @@ abstract class MPNSResponseTest extends LunrBaseTest
 
     /**
      * Mock instance of the Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
+
+    /**
+     * Mock instance of the Header class.
+     * @var \http\Header
+     */
+    protected $header;
 
     /**
      * Testcase Constructor.
@@ -47,6 +53,8 @@ abstract class MPNSResponseTest extends LunrBaseTest
     public function setUpError()
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+
+        $this->header = $this->getMock('http\Header');
 
         $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
                          ->disableOriginalConstructor()
@@ -73,7 +81,7 @@ abstract class MPNSResponseTest extends LunrBaseTest
                         $this->equalTo(['error' => 'Error Message', 'endpoint' => 'http://localhost/'])
                      );
 
-        $this->class      = new MPNSResponse($response, $this->logger);
+        $this->class      = new MPNSResponse($response, $this->logger, $this->header);
         $this->reflection = new ReflectionClass('Lunr\Vortex\MPNS\MPNSResponse');
     }
 
@@ -84,10 +92,17 @@ abstract class MPNSResponseTest extends LunrBaseTest
      */
     public function setUpSuccess()
     {
-        if (extension_loaded('http') === FALSE || empty(get_extension_funcs('http')))
+        if (extension_loaded('http') === FALSE || empty(get_extension_funcs('http')) === FALSE)
         {
-            $this->markTestSkipped('Extension http (1.7.x) is required.');
+            $this->markTestSkipped('Extension http (2.x) is required.');
         }
+
+        $this->header = $this->getMock('http\Header', [ 'parse' ]);
+
+        $method = [ get_class($this->header), 'parse' ];
+        $parsed = file_get_contents(TEST_STATICS . '/Vortex/mpns_response_parsed.txt');
+
+        $this->mock_method($method, "return $parsed;");
 
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
@@ -110,8 +125,10 @@ abstract class MPNSResponseTest extends LunrBaseTest
                  ->method('get_result')
                  ->will($this->returnValue(file_get_contents($file)));
 
-        $this->class      = new MPNSResponse($response, $this->logger);
+        $this->class      = new MPNSResponse($response, $this->logger, $this->header);
         $this->reflection = new ReflectionClass('Lunr\Vortex\MPNS\MPNSResponse');
+
+        $this->unmock_method($method);
     }
 
     /**
