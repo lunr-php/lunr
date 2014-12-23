@@ -74,7 +74,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that set doesn't do anything when closed and not started.
      *
-     * @runInSeparateProcess
+     * @backupGlobals enabled
      *
      * @covers Lunr\Sphere\Session::set
      */
@@ -95,7 +95,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that set doesn't do anything when not closed and not started.
      *
-     * @runInSeparateProcess
+     * @backupGlobals enabled
      *
      * @covers Lunr\Sphere\Session::set
      */
@@ -116,7 +116,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that set doesn't do anything when closed and started.
      *
-     * @runInSeparateProcess
+     * @backupGlobals enabled
      *
      * @covers Lunr\Sphere\Session::set
      */
@@ -137,7 +137,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that set works when not closed and started.
      *
-     * @runInSeparateProcess
+     * @backupGlobals enabled
      *
      * @covers Lunr\Sphere\Session::set
      */
@@ -157,7 +157,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that delete doesn't do anything when closed and not started.
      *
-     * @runInSeparateProcess
+     * @backupGlobals enabled
      *
      * @covers Lunr\Sphere\Session::delete
      */
@@ -178,7 +178,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that delete doesn't do anything when not closed and not started.
      *
-     * @runInSeparateProcess
+     * @backupGlobals enabled
      *
      * @covers Lunr\Sphere\Session::delete
      */
@@ -199,7 +199,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that delete doesn't do anything when closed and started.
      *
-     * @runInSeparateProcess
+     * @backupGlobals enabled
      *
      * @covers Lunr\Sphere\Session::delete
      */
@@ -220,7 +220,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that delete works when not closed and started.
      *
-     * @runInSeparateProcess
+     * @backupGlobals enabled
      *
      * @covers Lunr\Sphere\Session::delete
      */
@@ -242,7 +242,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that get doesn't do anything when not started.
      *
-     * @runInSeparateProcess
+     * @backupGlobals enabled
      *
      * @covers Lunr\Sphere\Session::get
      */
@@ -274,7 +274,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that get works when started.
      *
-     * @runInSeparateProcess
+     * @backupGlobals enabled
      *
      * @covers Lunr\Sphere\Session::get
      */
@@ -404,7 +404,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that destroy doesn't work when not started.
      *
-     * @runInSeparateProcess
+     * @backupGlobals enabled
      *
      * @covers Lunr\Sphere\Session::destroy
      */
