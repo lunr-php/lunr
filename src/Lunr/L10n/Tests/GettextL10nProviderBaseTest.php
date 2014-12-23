@@ -32,19 +32,23 @@ class GettextL10nProviderBaseTest extends GettextL10nProviderTest
     /**
      * Test that init() works correctly.
      *
-     * @runInSeparateProcess
-     *
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::init
      */
     public function testInit()
     {
+        $current = textdomain(NULL);
+        $locale  = setlocale(LC_MESSAGES, 0);
+
         $method = $this->get_accessible_reflection_method('init');
 
         $method->invokeArgs($this->class, array(self::LANGUAGE));
 
         $this->assertEquals(self::LANGUAGE, setlocale(LC_MESSAGES, 0));
         $this->assertEquals(self::DOMAIN, textdomain(NULL));
+
+        textdomain($current);
+        setlocale(LC_MESSAGES, $locale);
     }
 
 }

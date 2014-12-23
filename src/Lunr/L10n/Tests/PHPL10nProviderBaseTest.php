@@ -49,8 +49,6 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
     /**
      * Test that init() sets initialized to TRUE.
      *
-     * @runInSeparateProcess
-     *
      * @depends testLangArrayIsEmptyByDefault
      * @covers  Lunr\L10n\PHPL10nProvider::init
      */
@@ -65,8 +63,6 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
 
     /**
      * Test that init() populates the lang_array for a non-default language.
-     *
-     * @runInSeparateProcess
      *
      * @depends testLangArrayIsEmptyByDefault
      * @covers  Lunr\L10n\PHPL10nProvider::init
@@ -86,8 +82,6 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
     /**
      * Test that init() does not populate the lang_array with the default language.
      *
-     * @runInSeparateProcess
-     *
      * @depends testLangArrayIsEmptyByDefault
      * @covers  Lunr\L10n\PHPL10nProvider::init
      */
@@ -102,8 +96,6 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
 
     /**
      * Test that init() does not re-populate the lang_array if already initialized.
-     *
-     * @runInSeparateProcess
      *
      * @depends testLangArrayIsEmptyByDefault
      * @covers  Lunr\L10n\PHPL10nProvider::init

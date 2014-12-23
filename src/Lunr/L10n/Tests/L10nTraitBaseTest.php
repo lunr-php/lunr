@@ -58,8 +58,6 @@ class L10nTraitBaseTest extends L10nTraitTest
     /**
      * Test that setting a valid default language doesn't alter the currently set locale.
      *
-     * @runInSeparateProcess
-     *
      * @covers Lunr\L10n\L10nTrait::set_default_language
      */
     public function testSetValidDefaultLanguageDoesNotAlterCurrentLocale()
@@ -73,8 +71,6 @@ class L10nTraitBaseTest extends L10nTraitTest
 
     /**
      * Test that setting an invalid default language doesn't alter the currently set locale.
-     *
-     * @runInSeparateProcess
      *
      * @covers Lunr\L10n\L10nTrait::set_default_language
      */
