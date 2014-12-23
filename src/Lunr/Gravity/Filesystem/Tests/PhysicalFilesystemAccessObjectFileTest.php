@@ -297,8 +297,6 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * @param mixed  $mode    Invalid mode
      * @param String $message Expected error message
      *
-     * @runInSeparateProcess
-     *
      * @dataProvider invalidModesProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
      */

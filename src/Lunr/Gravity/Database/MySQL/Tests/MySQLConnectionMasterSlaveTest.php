@@ -105,7 +105,8 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
     /**
      * Test that get_qos_policy() returns the currently set QoS Pollicy.
      *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_qos_policy
+     * @requires extension mysqlnd_ms
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::get_qos_policy
      */
     public function testGetQosPolicyReturnsCurrentlySetPolicy()
     {
@@ -125,9 +126,11 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      */
     public function testSetQosPolicyReturnsTrueOnSuccess()
     {
-        runkit_function_redefine('mysqlnd_ms_set_qos', '', self::SET_QOS_WORKS);
+        $this->mock_function('mysqlnd_ms_set_qos', self::SET_QOS_WORKS);
 
         $this->assertTrue($this->class->set_qos_policy(MYSQLND_MS_QOS_CONSISTENCY_SESSION));
+
+        $this->unmock_function('mysqlnd_ms_set_qos');
     }
 
     /**
