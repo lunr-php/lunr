@@ -155,7 +155,7 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
      */
     protected function mock_method($method, $mock, $visibility = 'public')
     {
-        $class_name  = $method[0];
+        $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
 
         if (method_exists($class_name, $method_name . self::FUNCTION_ID) === FALSE)
@@ -187,7 +187,7 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
      */
     protected function unmock_method($method)
     {
-        $class_name  = $method[0];
+        $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
 
         runkit_method_remove($class_name, $method_name);
