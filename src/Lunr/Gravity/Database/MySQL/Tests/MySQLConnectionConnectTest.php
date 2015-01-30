@@ -38,21 +38,26 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testSuccessfulConnectReadonly()
     {
+        $mysqli = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\Tests\MockMySQLi')
+                       ->setMethods([ 'connect', 'ssl_set', 'set_charset' ])
+                       ->getMock();
+
+        $this->set_reflection_property_value('mysqli', $mysqli);
         $this->set_reflection_property_value('readonly', TRUE);
         $this->set_reflection_property_value('ro_host', 'ro_host');
 
         $port   = ini_get('mysqli.default_port');
         $socket = ini_get('mysqli.default_socket');
 
-        $this->mysqli->expects($this->once())
-                     ->method('connect')
-                     ->with('ro_host', 'username', 'password', 'database', $port, $socket);
+        $mysqli->expects($this->once())
+               ->method('connect')
+               ->with('ro_host', 'username', 'password', 'database', $port, $socket);
 
-        $this->mysqli->expects($this->never())
-                     ->method('ssl_set');
+        $mysqli->expects($this->never())
+               ->method('ssl_set');
 
-        $this->mysqli->expects($this->once())
-                     ->method('set_charset');
+        $mysqli->expects($this->once())
+               ->method('set_charset');
 
         $this->class->connect();
 
@@ -71,18 +76,24 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testSuccessfulConnectReadwrite()
     {
+        $mysqli = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\Tests\MockMySQLi')
+                       ->setMethods([ 'connect', 'ssl_set', 'set_charset' ])
+                       ->getMock();
+
+        $this->set_reflection_property_value('mysqli', $mysqli);
+
         $port   = ini_get('mysqli.default_port');
         $socket = ini_get('mysqli.default_socket');
 
-        $this->mysqli->expects($this->once())
-                     ->method('connect')
-                     ->with('rw_host', 'username', 'password', 'database', $port, $socket);
+        $mysqli->expects($this->once())
+               ->method('connect')
+               ->with('rw_host', 'username', 'password', 'database', $port, $socket);
 
-        $this->mysqli->expects($this->never())
-                     ->method('ssl_set');
+        $mysqli->expects($this->never())
+               ->method('ssl_set');
 
-        $this->mysqli->expects($this->once())
-                     ->method('set_charset');
+        $mysqli->expects($this->once())
+               ->method('set_charset');
 
         $this->class->connect();
 
@@ -101,6 +112,12 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testSuccessfulConnectReadwriteWithSSL()
     {
+        $mysqli = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\Tests\MockMySQLi')
+                       ->setMethods([ 'connect', 'ssl_set', 'set_charset' ])
+                       ->getMock();
+
+        $this->set_reflection_property_value('mysqli', $mysqli);
+
         $port   = ini_get('mysqli.default_port');
         $socket = ini_get('mysqli.default_socket');
 
@@ -110,16 +127,16 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
         $this->set_reflection_property_value('ca_path', 'ca_path');
         $this->set_reflection_property_value('cipher', 'cipher');
 
-        $this->mysqli->expects($this->once())
-                     ->method('connect')
-                     ->with('rw_host', 'username', 'password', 'database', $port, $socket);
+        $mysqli->expects($this->once())
+               ->method('connect')
+               ->with('rw_host', 'username', 'password', 'database', $port, $socket);
 
-        $this->mysqli->expects($this->once())
-                     ->method('ssl_set')
-                     ->with('ssl_key', 'ssl_cert', 'ca_cert', 'ca_path', 'cipher');
+        $mysqli->expects($this->once())
+               ->method('ssl_set')
+               ->with('ssl_key', 'ssl_cert', 'ca_cert', 'ca_path', 'cipher');
 
-        $this->mysqli->expects($this->once())
-                     ->method('set_charset');
+        $mysqli->expects($this->once())
+               ->method('set_charset');
 
         $this->class->connect();
 
@@ -141,8 +158,8 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->mysqli->expects($this->never())
-                     ->method('ssl_set');
+        $mysqli->expects($this->never())
+               ->method('ssl_set');
 
         $this->class->connect();
 
