@@ -91,7 +91,9 @@ class MPNSResponse
      */
     private function parse_headers($result, $header_size)
     {
-        $this->headers = http_parse_headers(substr($result, 0, $header_size));
+        $header = new \http\Header();
+
+        $this->headers = $header->parse(substr($result, 0, $header_size));
 
         if (in_array($this->http_code, [ 400, 401, 405, 503 ]))
         {
