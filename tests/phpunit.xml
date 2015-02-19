@@ -223,6 +223,8 @@
         </testsuite>
         <testsuite name="Spark">
             <file>../src/Lunr/Spark/Tests/CentralAuthenticationStoreBaseTest.php</file>
+            <file>../src/Lunr/Spark/Tests/LunrSoapClientInitTest.php</file>
+            <file>../src/Lunr/Spark/Tests/LunrSoapClientHeaderTest.php</file>
             <file>../src/Lunr/Spark/Facebook/Tests/ApiBaseTest.php</file>
             <file>../src/Lunr/Spark/Facebook/Tests/ApiGetUrlResultsTest.php</file>
             <file>../src/Lunr/Spark/Facebook/Tests/ApiGetJsonResultsTest.php</file>
