@@ -30,7 +30,7 @@ class RequestGetTest extends RequestTest
 {
 
     /**
-     * Test getting GET data.
+     * Test getting GET data returns get value if no mock value.
      *
      * @covers Lunr\Corona\Request::get_get_data
      */
@@ -40,12 +40,60 @@ class RequestGetTest extends RequestTest
     }
 
     /**
-     * Test getting POST data.
+     * Test getting GET data returns mock value if present.
+     *
+     * @covers Lunr\Corona\Request::get_get_data
+     */
+    public function testGetGetDataWithMockValue()
+    {
+        $this->set_reflection_property_value('mock', [ 'get' => [ 'get_key' => 'get_mock_value' ] ]);
+
+        $this->assertEquals('get_mock_value', $this->class->get_get_data('get_key'));
+    }
+
+    /**
+     * Test getting GET data returns get value if empty mock value.
+     *
+     * @covers Lunr\Corona\Request::get_get_data
+     */
+    public function testGetGetDataWithInvalidMockValue()
+    {
+        $this->set_reflection_property_value('mock', [ 'get' => [] ]);
+
+        $this->assertEquals('get_value', $this->class->get_get_data('get_key'));
+    }
+
+    /**
+     * Test getting POST data returns post value if no mock value.
      *
      * @covers Lunr\Corona\Request::get_post_data
      */
     public function testGetPostData()
     {
+        $this->assertEquals('post_value', $this->class->get_post_data('post_key'));
+    }
+
+    /**
+     * Test getting POST data returns mock value if present.
+     *
+     * @covers Lunr\Corona\Request::get_post_data
+     */
+    public function testGetPostDataWithMockValue()
+    {
+        $this->set_reflection_property_value('mock', [ 'post' => [ 'post_key' => 'post_mock_value' ] ]);
+
+        $this->assertEquals('post_mock_value', $this->class->get_post_data('post_key'));
+    }
+
+    /**
+     * Test getting POST data returns post value if empty mock value.
+     *
+     * @covers Lunr\Corona\Request::get_post_data
+     */
+    public function testGetPostDataWithInvalidMockValue()
+    {
+        $this->set_reflection_property_value('mock', [ 'post' => [] ]);
+
         $this->assertEquals('post_value', $this->class->get_post_data('post_key'));
     }
 
