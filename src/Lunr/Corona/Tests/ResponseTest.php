@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Tests
+ * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -22,10 +20,6 @@ use ReflectionClass;
 /**
  * This class contains test methods for the Response class.
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Corona\Response
  */
 class ResponseTest extends LunrBaseTest

@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage MVC
+ * @package    Lunr\Corona
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -18,12 +16,6 @@ namespace Lunr\Corona;
 
 /**
  * Base Model class
- *
- * @category   Libraries
- * @package    Corona
- * @subpackage MVC
- * @author     Felipe Martinez <felipe@m2mobi.com>
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 interface Model
 {

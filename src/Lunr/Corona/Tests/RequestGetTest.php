@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Tests
+ * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2011-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -19,11 +17,6 @@ namespace Lunr\Corona\Tests;
 /**
  * Tests for getting stored superglobal values.
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @covers     Lunr\Corona\Request
  */
 class RequestGetTest extends RequestTest

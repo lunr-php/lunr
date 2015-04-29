@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Library
- * @package    Corona
- * @subpackage MVC
+ * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,13 +15,6 @@ namespace Lunr\Corona;
 
 /**
  * View class for displaying JSON return values.
- *
- * @category   Library
- * @package    Corona
- * @subpackage MVC
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
  */
 class JsonView extends View
 {

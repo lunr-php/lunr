@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Tests
+ * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -24,11 +22,6 @@ use ReflectionClass;
  * This class tests the setup of the view class,
  * as well as the helper methods.
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Corona\View
  */
 abstract class ViewTest extends LunrBaseTest

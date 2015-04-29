@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Request
+ * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,11 +16,6 @@ namespace Lunr\Corona;
 /**
  * Request Parser Interface.
  * Manages access to request related information in a uniform way.
- *
- * @category   Libraries
- * @package    Corona
- * @subpackage Request
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 interface RequestParserInterface
 {

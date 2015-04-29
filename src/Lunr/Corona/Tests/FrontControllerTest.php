@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Tests
+ * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -24,11 +22,6 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the FrontController class.
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
  * @covers     Lunr\Corona\FrontController
  */
 abstract class FrontControllerTest extends LunrBaseTest

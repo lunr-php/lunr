@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Tests
+ * @package    Lunr\Corona
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -19,11 +17,6 @@ namespace Lunr\Corona\Tests;
 /**
  * Basic tests for the case of empty superglobals.
  *
- * @category      Libraries
- * @package       Corona
- * @subpackage    Tests
- * @author        Dinos Theodorou <dinos@m2mobi.com>
- * @author        Heinz Wiesinger <heinz@m2mobi.com>
  * @covers        Lunr\Corona\WebRequestParser
  * @backupGlobals enabled
  */

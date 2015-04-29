@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Request
+ * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,11 +16,6 @@ namespace Lunr\Corona;
 /**
  * Respone abstraction class.
  * Transport of data between Model/Controller and View
- *
- * @category   Libraries
- * @package    Corona
- * @subpackage Request
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class Response
 {

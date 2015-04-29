@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage MVC
+ * @package    Lunr\Corona
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -18,12 +16,6 @@ namespace Lunr\Corona;
 
 /**
  * View class used by the Website
- *
- * @category   Libraries
- * @package    Corona
- * @subpackage MVC
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 abstract class HTMLView extends View
 {

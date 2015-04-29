@@ -6,9 +6,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Corona
- * @subpackage Mocks
+ * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,6 @@ use Lunr\Corona\Controller;
 
 /**
  * View Mock class
- *
- * @category   Libraries
- * @package    Corona
- * @subpackage Mocks
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class MockController extends Controller
 {
