@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
+ * @package    Lunr\Core
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,10 +16,6 @@ namespace Lunr\Core\Tests;
 /**
  * This class contains the tests for the locator class.
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Core\ConfigServiceLocator
  */
 class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest

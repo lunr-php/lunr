@@ -6,9 +6,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
+ * @package    Lunr\Core
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -21,10 +19,6 @@ use Lunr\Core\Configuration;
 /**
  * Test for the method convert_array_to_class().
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Core\Configuration
  */
 class ConfigurationConvertArrayToClassTest extends ConfigurationTest

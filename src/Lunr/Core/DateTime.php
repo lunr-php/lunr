@@ -6,9 +6,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Libraries
+ * @package    Lunr\Core
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Jose Viso <jose@m2mobi.com>
  * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -19,12 +17,6 @@ namespace Lunr\Core;
 
 /**
  * Date/Time related functions
- *
- * @category   Libraries
- * @package    Core
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Jose Viso <jose@m2mobi.com>
  */
 class DateTime
 {

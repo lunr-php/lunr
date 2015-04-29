@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
+ * @package    Lunr\Core
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,10 +18,6 @@ use Lunr\Core\Configuration;
 /**
  * This tests the ArrayAccess methods of the Configuration class.
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @depends    Lunr\Core\Tests\ConfigurationArrayConstructorTest::testConfig
  * @covers     Lunr\Core\Configuration
  */

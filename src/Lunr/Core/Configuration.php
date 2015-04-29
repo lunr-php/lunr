@@ -7,9 +7,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Libraries
+ * @package    Lunr\Core
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -23,11 +21,6 @@ use Countable;
 
 /**
  * Configuration Class
- *
- * @category   Libraries
- * @package    Core
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class Configuration implements ArrayAccess, Iterator, Countable
 {

@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
+ * @package    Lunr\Core
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -23,10 +21,6 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the DateTime class.
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @covers     Lunr\Core\DateTime
  */
 abstract class DateTimeTest extends LunrBaseTest
