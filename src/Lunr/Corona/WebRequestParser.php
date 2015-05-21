@@ -235,6 +235,16 @@ class WebRequestParser implements RequestParserInterface
     }
 
     /**
+     * Parse php://input value.
+     *
+     * @return String Parsed php://input value
+     */
+    public function parse_raw_data()
+    {
+        return file_get_contents('php://input');
+    }
+
+    /**
      * Parse $_COOKIE values into local variable and reset it globally.
      *
      * @return Array Parsed Cookie values

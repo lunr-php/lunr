@@ -116,6 +116,23 @@ class RequestParserBaseTest extends RequestParserTest
         $this->assertNull($this->class->parse_accept_charset());
     }
 
+    /**
+     * Test storing raw request data.
+     *
+     * @requires extension runkit
+     * @covers   Lunr\Corona\RequestParser::parse_raw_data
+     */
+    public function testParseRawData()
+    {
+        $this->mock_function('file_get_contents', 'return "raw";');
+
+        $result = $this->class->parse_raw_data();
+
+        $this->assertEquals('raw', $result);
+
+        $this->unmock_function('file_get_contents');
+    }
+
 }
 
 ?>

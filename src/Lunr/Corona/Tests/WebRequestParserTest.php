@@ -38,7 +38,6 @@ abstract class WebRequestParserTest extends LunrBaseTest
      */
     protected $configuration;
 
-
     /**
      * Mock instance of the Header class
      * @var \http\Header

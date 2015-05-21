@@ -63,6 +63,13 @@ interface RequestParserInterface
     public function parse_cookie();
 
     /**
+     * Parse php://input values into local variable.
+     *
+     * @return Array Parsed php://input values
+     */
+    public function parse_raw_data();
+
+    /**
      * Parse command line variables into local variable.
      *
      * @return Array Parsed command line arguments

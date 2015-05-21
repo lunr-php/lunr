@@ -65,6 +65,7 @@
             <file>../src/Lunr/Corona/Tests/WebRequestParserParseGetTest.php</file>
             <file>../src/Lunr/Corona/Tests/WebRequestParserParseFilesTest.php</file>
             <file>../src/Lunr/Corona/Tests/WebRequestParserParseCookieTest.php</file>
+            <file>../src/Lunr/Corona/Tests/WebRequestParserParseRawDataTest.php</file>
             <file>../src/Lunr/Corona/Tests/WebRequestParserAcceptTest.php</file>
             <file>../src/Lunr/Corona/Tests/WebRequestParserParseCommandLineArgumentsTest.php</file>
         </testsuite>

@@ -131,6 +131,16 @@ class RequestParser implements RequestParserInterface
     }
 
     /**
+     * Parse php://stdin value.
+     *
+     * @return String Parsed php://stdin value
+     */
+    public function parse_raw_data()
+    {
+        return file_get_contents('php://stdin');
+    }
+
+    /**
      * Parse command line variables into local variable.
      *
      * @return Array Parsed command line arguments
