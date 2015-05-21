@@ -254,6 +254,20 @@ class RequestGetTest extends RequestTest
         $this->assertNull($this->class->get_accept_charset([]));
     }
 
+    /**
+     * Test that get_raw_data() returns raw request data.
+     *
+     * @covers Lunr\Corona\Request::get_raw_data
+     */
+    public function testGetRawDataReturnsRawRequestData()
+    {
+        $this->parser->expects($this->once())
+                     ->method('parse_raw_data')
+                     ->will($this->returnValue('raw'));
+
+        $this->assertEquals('raw', $this->class->get_raw_data());
+    }
+
 }
 
 ?>

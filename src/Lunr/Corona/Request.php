@@ -296,6 +296,16 @@ class Request
         return isset($this->files[$key]) ? $this->files[$key] : NULL;
     }
 
+    /**
+     * Retrieve raw request data.
+     *
+     * @return String $return The raw request data as string
+     */
+    public function get_raw_data()
+    {
+        return $this->parser->parse_raw_data();
+    }
+
 }
 
 ?>
