@@ -40,7 +40,7 @@ class JsonViewPrintTest extends JsonViewTest
     {
         parent::setUp();
 
-        $this->json = [ 'a' => 100, 'b' => [ 'z' => TRUE ], 'c' => [ NULL ], 'd' => new \stdClass() ];
+        $this->json = [ 'a' => 100, 'b' => [ 'z' => TRUE ], 'c' => [ NULL ], 'd' => new \stdClass(), 'e' => 'みんな' ];
     }
 
     /**
@@ -223,7 +223,7 @@ class JsonViewPrintTest extends JsonViewTest
                       ->with($this->equalTo('sapi'))
                       ->will($this->returnValue('web'));
 
-        $this->expectOutputString('{"data":{"a":100,"b":{"z":true},"c":[null],"d":{}},"status":{"code":4040,"message":"Message"}}');
+        $this->expectOutputString('{"data":{"a":100,"b":{"z":true},"c":[null],"d":{},"e":"みんな"},"status":{"code":4040,"message":"Message"}}');
 
         $this->mock_function('header', '');
 

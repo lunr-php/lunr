@@ -91,11 +91,11 @@ class JsonView extends View
 
         if ($this->request->sapi == 'cli')
         {
-            echo json_encode($json, JSON_PRETTY_PRINT) . "\n";
+            echo json_encode($json, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . "\n";
         }
         else
         {
-            echo json_encode($json);
+            echo json_encode($json, JSON_UNESCAPED_UNICODE);
         }
     }
 
@@ -126,11 +126,11 @@ class JsonView extends View
 
         if ($this->request->sapi == 'cli')
         {
-            echo json_encode($json, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT) . "\n";
+            echo json_encode($json, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_FORCE_OBJECT) . "\n";
         }
         else
         {
-            echo json_encode($json, JSON_FORCE_OBJECT);
+            echo json_encode($json, JSON_UNESCAPED_UNICODE | JSON_FORCE_OBJECT);
         }
     }
 
