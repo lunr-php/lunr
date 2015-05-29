@@ -89,6 +89,7 @@
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperEscapeTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryEscaperEscapeTest.php</file>
+            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryEscaperEscapeUUIDValueTest.php</file>
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3QueryEscaperEscapeTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultFailedTest.php</file>

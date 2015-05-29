@@ -75,6 +75,20 @@ class MySQLQueryEscaper extends DatabaseQueryEscaper
     }
 
     /**
+     * Define and escape input as a UUID value.
+     *
+     * @param mixed  $value     Input
+     * @param String $collation Collation name
+     * @param String $charset   Charset name
+     *
+     * @return String $return Defined, escaped and unhexed value
+     */
+    public function uuidvalue($value, $collation = '', $charset = '')
+    {
+        return trim($charset . ' ' . $this->collate('UNHEX(REPLACE(\'' . $this->db->escape_string($value) . '\'),\'-\',\'\')', $collation));
+    }
+
+    /**
      * Define and escape input as a hexadecimal value.
      *
      * @param mixed  $value     Input
