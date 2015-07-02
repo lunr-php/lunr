@@ -38,7 +38,7 @@ trait DatabaseAccessObjectSelectQueryTestTrait
     {
         $mock = new FluidInterfaceMock();
 
-        $this->db->expects($this->once())
+        $this->db->expects($this->atLeast(1))
                  ->method('get_new_dml_query_builder_object')
                  ->will($this->returnValue($mock));
 
@@ -70,7 +70,7 @@ trait DatabaseAccessObjectSelectQueryTestTrait
     {
         $mock = new FluidInterfaceMock();
 
-        $this->db->expects($this->once())
+        $this->db->expects($this->atLeast(1))
                  ->method('get_new_dml_query_builder_object')
                  ->will($this->returnValue($mock));
 
@@ -99,7 +99,7 @@ trait DatabaseAccessObjectSelectQueryTestTrait
     {
         $mock = new FluidInterfaceMock();
 
-        $this->db->expects($this->once())
+        $this->db->expects($this->atLeast(1))
                  ->method('get_new_dml_query_builder_object')
                  ->will($this->returnValue($mock));
 
@@ -121,7 +121,7 @@ trait DatabaseAccessObjectSelectQueryTestTrait
     {
         $mock = new FluidInterfaceMock();
 
-        $this->db->expects($this->once())
+        $this->db->expects($this->atLeast(1))
                  ->method('get_new_dml_query_builder_object')
                  ->will($this->returnValue($mock));
 
