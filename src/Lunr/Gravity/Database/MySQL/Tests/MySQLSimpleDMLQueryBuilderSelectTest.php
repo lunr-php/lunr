@@ -159,6 +159,40 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
         $this->assertEquals('LIMIT 10', $this->get_reflection_property_value('limit'));
     }
 
+    /**
+     * Test union().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::union
+     */
+    public function testUnion()
+    {
+        $this->escaper->expects($this->once())
+                      ->method('query_value')
+                      ->with($this->equalTo('query'))
+                      ->will($this->returnValue('(query)'));
+
+        $this->class->union('query');
+
+        $this->assertEquals('UNION (query)', $this->get_reflection_property_value('compound'));
+    }
+
+     /**
+     * Test union() all.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::union
+     */
+    public function testUnionAll()
+    {
+        $this->escaper->expects($this->once())
+                      ->method('query_value')
+                      ->with($this->equalTo('query'))
+                      ->will($this->returnValue('(query)'));
+
+        $this->class->union('query', TRUE);
+
+        $this->assertEquals('UNION ALL (query)', $this->get_reflection_property_value('compound'));
+    }
+
 }
 
 ?>

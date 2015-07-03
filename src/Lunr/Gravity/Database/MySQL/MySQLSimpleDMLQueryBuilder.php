@@ -412,6 +412,19 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     }
 
     /**
+     * Define a UNION or UNION ALL clause of the SQL statement.
+     *
+     * @param String  $sql_query sql query reference
+     * @param Boolean $all       True for ALL or False for empty (default).
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function union($sql_query, $all = FALSE)
+    {
+        return parent::union($this->escaper->query_value($sql_query), $all);
+    }
+
+    /**
      * Escape a table reference.
      *
      * @param String  $location_reference A location reference
