@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Database
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,7 @@ use Lunr\Gravity\Database\DatabaseDMLQueryBuilder;
 /**
  * This class contains the tests for the query parts methods that are used when building INSERT and REPLACE statements
  *
- * @category   Database
- * @package    Gravity
- * @subpackage Database
- * @author     Felipe Martinez <felipe@m2mobi.com>
- * @covers     Lunr\Gravity\Database\DatabaseDMLQueryBuilder
+ * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder
  */
 class DatabaseDMLQueryBuilderQueryPartsUpdateTest extends DatabaseDMLQueryBuilderTest
 {

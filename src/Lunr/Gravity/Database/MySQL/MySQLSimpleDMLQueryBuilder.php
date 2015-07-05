@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\MySQL
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -19,11 +17,6 @@ namespace Lunr\Gravity\Database\MySQL;
  * This is a SQL query builder class for generating queries
  * suitable for either MySQL or MariaDB, performing automatic escaping
  * of input values where appropriate.
- *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
 {

@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   SQLite3
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\SQLite3
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -20,12 +18,6 @@ use Lunr\Gravity\Database\DatabaseConnection;
 
 /**
  * SQLite database access class.
- *
- * @category   SQLite3
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Olivier Wizen <olivier@m2mobi.com>
  */
 class SQLite3Connection extends DatabaseConnection
 {

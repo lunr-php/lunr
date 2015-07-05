@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Database
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\SQLite3
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -22,11 +20,7 @@ use ReflectionClass;
 /**
  * This class contains the tests for the SQLite3QueryEscaper class.
  *
- * @category   Database
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Gravity\Database\SQLite3QueryEscaper
+ * @covers Lunr\Gravity\Database\SQLite3QueryEscaper
  */
 abstract class SQLite3QueryEscaperTest extends LunrBaseTest
 {

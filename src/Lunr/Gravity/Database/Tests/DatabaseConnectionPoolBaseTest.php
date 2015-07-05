@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Database
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,7 @@ use Lunr\Gravity\Database\DatabaseConnectionPool;
 /**
  * This class contains basic tests for the DatabaseConnectionPool class.
  *
- * @category   Database
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Gravity\Database\DatabaseConnectionPool
+ * @covers Lunr\Gravity\Database\DatabaseConnectionPool
  */
 class DatabaseConnectionPoolBaseTest extends DatabaseConnectionPoolTest
 {

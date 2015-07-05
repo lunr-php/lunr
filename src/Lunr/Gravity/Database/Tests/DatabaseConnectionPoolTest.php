@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Database
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -23,11 +21,7 @@ use ReflectionClass;
  * This class contains common constructors/destructors and data providers
  * for testing the DatabaseConnectionPool class.
  *
- * @category   Database
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Gravity\Database\DatabaseConnectionPool
+ * @covers Lunr\Gravity\Database\DatabaseConnectionPool
  */
 abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
 {

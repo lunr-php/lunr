@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   SQLite3
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\SQLite3
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -23,11 +21,7 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the SQLite3DMLQueryBuilder class.
  *
- * @category   SQLite3
- * @package    Gravity
- * @subpackage Database
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @covers     Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder
+ * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder
  */
 abstract class SQLite3DMLQueryBuilderTest extends LunrBaseTest
 {

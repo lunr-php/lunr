@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\MySQL
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -19,11 +17,6 @@ use Lunr\Gravity\Database\DatabaseConnection;
 
 /**
  * MySQL/MariaDB database access class.
- *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class MySQLConnection extends DatabaseConnection
 {

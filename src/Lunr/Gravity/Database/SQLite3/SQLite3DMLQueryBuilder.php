@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   SQLite3
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\SQLite3
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -19,11 +17,6 @@ use Lunr\Gravity\Database\SQLDMLQueryBuilder;
 
 /**
  * This is a SQL query builder class for generating queries suitable for SQLite3.
- *
- * @category   SQLite3
- * @package    Gravity
- * @subpackage Database
- * @author     Olivier Wizen <olivier@m2mobi.com>
  */
 class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
 {

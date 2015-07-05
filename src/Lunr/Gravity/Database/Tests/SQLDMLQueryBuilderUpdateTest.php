@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   SQL
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -19,11 +17,7 @@ namespace Lunr\Gravity\Database\Tests;
  * This class contains the tests for the query parts necessary to build
  * update queries.
  *
- * @category   SQL
- * @package    Gravity
- * @subpackage Database
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @covers     Lunr\Gravity\Database\SQLDMLQueryBuilder
+ * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder
  */
 class SQLDMLQueryBuilderUpdateTest extends SQLDMLQueryBuilderTest
 {

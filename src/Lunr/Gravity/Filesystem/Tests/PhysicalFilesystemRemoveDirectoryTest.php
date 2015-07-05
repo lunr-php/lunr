@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Filesystem
- * @package    Gravity
- * @subpackage Filesystem
+ * @package    Lunr\Gravity\Filesystem
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,7 @@ use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
 /**
  * This class contains tests for removing a directory recursively.
  *
- * @category   Filesystem
- * @package    Gravity
- * @subpackage Filesystem
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @covers     Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
+ * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
  */
 class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObjectTest
 {

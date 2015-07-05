@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   SQLite3
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\SQLite3
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,7 @@ use Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper;
 /**
  * This class contains the tests for escaping values in queries.
  *
- * @category   SQLite3
- * @package    Gravity
- * @subpackage Database
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @covers     Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper
+ * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper
  */
 class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
 {

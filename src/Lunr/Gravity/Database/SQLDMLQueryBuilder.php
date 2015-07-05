@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @author     Felipe Martinez <felipe@m2mobi.com>
@@ -20,13 +18,6 @@ namespace Lunr\Gravity\Database;
 /**
  * This is a SQL query builder class for generating queries
  * suitable for common SQL queries.
- *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Olivier Wizen <olivier@m2mobi.com>
- * @author     Felipe Martinez <felipe@m2mobi.com>
  */
 abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
 {

@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Database
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @author     Felipe Martinez <felipe@m2mobi.com>
@@ -20,13 +18,7 @@ namespace Lunr\Gravity\Database\Tests;
 /**
  * This class contains the tests for the setup and the final query creation.
  *
- * @category   Database
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Olivier Wizen <olivier@m2mobi.com>
- * @author     Felipe Martinez <felipe@m2mobi.com>
- * @covers     Lunr\Gravity\Database\DatabaseDMLQueryBuilder
+ * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder
  */
 class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
 {

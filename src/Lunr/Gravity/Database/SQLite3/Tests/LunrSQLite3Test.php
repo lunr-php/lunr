@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   SQLite3
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\SQLite3
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -22,11 +20,7 @@ use ReflectionClass;
 /**
  * This class contains the tests for the LunrSQLite3 class.
  *
- * @category   SQLite3
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Gravity\Database\SQLite3\LunrSQLite3
+ * @covers Lunr\Gravity\Database\SQLite3\LunrSQLite3
  */
 class LunrSQLite3Test extends LunrBaseTest
 {

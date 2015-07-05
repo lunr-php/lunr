@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\MySQL
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @author     Felipe Martinez <felipe@m2mobi.com>
@@ -22,13 +20,6 @@ use Lunr\Gravity\Database\SQLDMLQueryBuilder;
 /**
  * This is a SQL query builder class for generating queries
  * suitable for either MySQL or MariaDB.
- *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Olivier Wizen <olivier@m2mobi.com>
- * @author     Felipe Martinez <felipe@m2mobi.com>
  */
 class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
 {

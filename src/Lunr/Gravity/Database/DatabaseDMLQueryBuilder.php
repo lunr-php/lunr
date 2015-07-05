@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Database
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @author     Felipe Martinez <felipe@m2mobi.com>
@@ -19,13 +17,6 @@ namespace Lunr\Gravity\Database;
 
 /**
  * This class defines abstract database query building.
- *
- * @category   Database
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Olivier Wizen <olivier@m2mobi.com>
- * @author     Felipe Martinez <felipe@m2mobi.com>
  */
 abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 {

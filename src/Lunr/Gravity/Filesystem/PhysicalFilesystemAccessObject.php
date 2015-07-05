@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Filesystem
- * @package    Gravity
- * @subpackage Filesystem
+ * @package    Lunr\Gravity\Filesystem
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -30,11 +28,6 @@ use FilesystemIterator;
 
 /**
  * Class to access a physical filesystem.
- *
- * @category   Filesystem
- * @package    Gravity
- * @subpackage Filesystem
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, FilesystemAccessObjectInterface
 {

@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Filesystem
- * @package    Gravity
- * @subpackage Filesystem
+ * @package    Lunr\Gravity\Filesystem
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Gravity\Filesystem;
 
 /**
  * Filesystem Access Object interface.
- *
- * @category   Filesystem
- * @package    Gravity
- * @subpackage Filesystem
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 interface FilesystemAccessObjectInterface
 {

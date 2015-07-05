@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   SQL
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -23,11 +21,7 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the SQLDMLQueryBuilder class.
  *
- * @category   SQL
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Gravity\Database\SQLDMLQueryBuilder
+ * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder
  */
 abstract class SQLDMLQueryBuilderTest extends LunrBaseTest
 {

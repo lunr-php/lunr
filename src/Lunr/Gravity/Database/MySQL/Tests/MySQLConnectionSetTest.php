@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\MySQL
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,11 +16,7 @@ namespace Lunr\Gravity\Database\MySQL\Tests;
 /**
  * This class contains test for the setters of the MySQLConnection class.
  *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Gravity\Database\MySQL\MySQLConnection
+ * @covers Lunr\Gravity\Database\MySQL\MySQLConnection
  */
 class MySQLConnectionSetTest extends MySQLConnectionTest
 {

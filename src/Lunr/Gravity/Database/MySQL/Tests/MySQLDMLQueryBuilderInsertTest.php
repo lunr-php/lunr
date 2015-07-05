@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\MySQL
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -21,11 +19,7 @@ use Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder;
  * This class contains the tests for the query parts necessary to build
  * insert/replace queries.
  *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
- * @author     Felipe Martinez <felipe@m2mobi.com>
- * @covers     Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder
+ * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder
  */
 class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
 {

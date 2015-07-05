@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\MySQL
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2015, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,7 @@ use Lunr\Gravity\Database\MySQL\MySQLQueryEscaper;
 /**
  * This class contains the tests for escaping values in queries.
  *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Gravity\Database\MySQL\MySQLQueryEscaper
+ * @covers Lunr\Gravity\Database\MySQL\MySQLQueryEscaper
  */
 class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
 {

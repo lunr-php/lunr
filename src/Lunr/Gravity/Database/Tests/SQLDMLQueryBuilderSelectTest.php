@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   SQLite3
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -20,12 +18,7 @@ namespace Lunr\Gravity\Database\Tests;
  * This class contains the tests for the query parts necessary to build
  * select queries.
  *
- * @category   SQLite3
- * @package    Gravity
- * @subpackage Database
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Gravity\Database\SQLDMLQueryBuilder
+ * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder
  */
 class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
 {

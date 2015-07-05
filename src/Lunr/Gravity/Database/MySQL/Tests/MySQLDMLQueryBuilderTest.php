@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
+ * @package    Lunr\Gravity\Database\MySQL
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -25,11 +23,7 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the MySQLDMLQueryBuilder class.
  *
- * @category   MySQL
- * @package    Gravity
- * @subpackage Database
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder
+ * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder
  */
 abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
 {
