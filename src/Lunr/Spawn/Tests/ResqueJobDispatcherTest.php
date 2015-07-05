@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Spawn
- * @subpackage Tests
+ * @package    Lunr\Spawn
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -22,11 +20,7 @@ use Lunr\Spawn\ResqueJobDispatcher;
 /**
  * This class contains test set up and the data providers for the ResqueJobDispatcher class.
  *
- * @category   Libraries
- * @package    Spawn
- * @subpackage Tests
- * @author     Olivier Wizen <olivier@m2mobi.com>
- * @covers     Lunr\Spawn\ResqueJobDispatcher
+ * @covers Lunr\Spawn\ResqueJobDispatcher
  */
 class ResqueJobDispatcherTest extends LunrBaseTest
 {

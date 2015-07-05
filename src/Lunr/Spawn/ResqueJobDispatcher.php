@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Spawn
- * @subpackage Libraries
+ * @package    Lunr\Spawn
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -19,11 +17,6 @@ use \Resque;
 
 /**
  * Resque job dispatcher class.
- *
- * @category   Libraries
- * @package    Spawn
- * @subpackage Libraries
- * @author     Olivier Wizen <olivier@m2mobi.com>
  */
 class ResqueJobDispatcher implements JobDispatcherInterface
 {

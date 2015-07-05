@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Spawn
- * @subpackage Tests
+ * @package    Lunr\Spawn
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,11 +16,7 @@ namespace Lunr\Spawn\Tests;
 /**
  * This class contains test methods for the NullDispatcher class.
  *
- * @category   Libraries
- * @package    Spawn
- * @subpackage Tests
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @covers     Lunr\Spawn\NullDispatcher
+ * @covers Lunr\Spawn\NullDispatcher
  */
 class NullDispatcherBaseTest extends NullDispatcherTest
 {

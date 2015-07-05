@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Spawn
- * @subpackage Libraries
+ * @package    Lunr\Spawn
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Spawn;
 
 /**
  * Null dispatcher class.
- *
- * @category   Libraries
- * @package    Spawn
- * @subpackage Libraries
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */
 class NullDispatcher implements JobDispatcherInterface
 {
