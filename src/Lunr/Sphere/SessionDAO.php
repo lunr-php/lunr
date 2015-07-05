@@ -100,7 +100,7 @@ class SessionDAO extends DatabaseAccessObject
             $data = array(
                 $this->escaper->column('sessionID')   => $this->escaper->value($id),
                 $this->escaper->column('sessionData') => $this->escaper->value(base64_encode($session_data)),
-                $this->escaper->column('expires')     => $this->escaper->intvalue($time)
+                $this->escaper->column('expires')     => $this->escaper->intvalue($time),
             );
 
             $builder_replace = $this->db->get_new_dml_query_builder_object(FALSE);
