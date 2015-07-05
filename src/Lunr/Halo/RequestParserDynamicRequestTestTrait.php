@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Tests
- * @package    Halo
- * @subpackage Libraries
+ * @package    Lunr\Halo
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Halo;
 
 /**
  * This trait contains test methods to verify a PSR-3 compliant logger was passed correctly.
- *
- * @category   Tests
- * @package    Halo
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 trait RequestParserDynamicRequestTestTrait
 {

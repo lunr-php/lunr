@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Halo
- * @subpackage Libraries
+ * @package    Lunr\Halo
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,6 @@ use ReflectionClass;
 
 /**
  * This class contains helper code for the Lunr unit tests.
- *
- * @category   Libraries
- * @package    Halo
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
 {

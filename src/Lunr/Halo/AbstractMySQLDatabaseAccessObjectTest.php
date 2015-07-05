@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Halo
- * @subpackage Libraries
+ * @package    Lunr\Halo
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -19,11 +17,6 @@ use ReflectionClass;
 
 /**
  * This class contains setup and tear down methods for DAOs using MySQL access.
- *
- * @category   Libraries
- * @package    Halo
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 abstract class AbstractMySQLDatabaseAccessObjectTest extends LunrBaseTest
 {
