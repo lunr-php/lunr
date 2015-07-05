@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Flare
- * @subpackage Tests
+ * @package    Lunr\Flare
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -21,12 +19,7 @@ use Lunr\Flare\Verification;
 /**
  * This class contains tests for the constructor of the Verification class.
  *
- * @category   Libraries
- * @package    Flare
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @covers     Lunr\Flare\Verification
+ * @covers Lunr\Flare\Verification
  */
 class VerificationBaseTest extends VerificationTest
 {

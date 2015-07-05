@@ -6,9 +6,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Flare
- * @subpackage Libraries
+ * @package    Lunr\Flare
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,11 +16,6 @@ namespace Lunr\Flare;
 
 /**
  * Verification class
- *
- * @category   Libraries
- * @package    Flare
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class Verification
 {

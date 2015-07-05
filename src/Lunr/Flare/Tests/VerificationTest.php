@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
+ * @package    Lunr\Flare
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -25,12 +23,7 @@ use stdClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the Verification class.
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @covers     Lunr\Flare\Verification
+ * @covers Lunr\Flare\Verification
  */
 abstract class VerificationTest extends LunrBaseTest
 {
