@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Feedback
- * @subpackage Tests
+ * @package    Lunr\Feedback
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -23,11 +21,7 @@ use ReflectionClass;
 /**
  * This class contains test methods for the PHPLogger class.
  *
- * @category   Libraries
- * @package    Feedback
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Feedback\PHPLogger
+ * @covers Lunr\Feedback\PHPLogger
  */
 class PHPLoggerTest extends LunrBaseTest
 {

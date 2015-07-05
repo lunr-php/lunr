@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Feedback
- * @subpackage Tests
+ * @package    Lunr\Feedback
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,7 @@ use Psr\Log\LogLevel;
 /**
  * This class contains test methods for the ConsoleLogger class.
  *
- * @category   Libraries
- * @package    Feedback
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Feedback\ConsoleLogger
+ * @covers Lunr\Feedback\ConsoleLogger
  */
 class ConsoleLoggerBaseTest extends ConsoleLoggerTest
 {

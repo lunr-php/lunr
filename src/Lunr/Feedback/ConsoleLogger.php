@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Feedback
- * @subpackage Libraries
+ * @package    Lunr\Feedback
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Feedback;
 
 /**
  * A class for logging messages to the command line.
- *
- * @category   Libraries
- * @package    Feedback
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class ConsoleLogger extends AbstractLogger
 {

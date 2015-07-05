@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Feedback
- * @subpackage Libraries
+ * @package    Lunr\Feedback
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,6 @@ use Psr\Log\LogLevel;
 
 /**
  * Abstract class implementing parts of the PSR-3 standard.
- *
- * @category   Libraries
- * @package    Feedback
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 abstract class PSR3Logger implements LoggerInterface
 {

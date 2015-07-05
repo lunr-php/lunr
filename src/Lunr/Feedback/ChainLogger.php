@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Feedback
- * @subpackage Libraries
+ * @package    Lunr\Feedback
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -19,11 +17,6 @@ use Psr\Log\LoggerInterface;
 
 /**
  * A class for chain logging messages to multiple loggers.
- *
- * @category   Libraries
- * @package    Feedback
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class ChainLogger extends PSR3Logger
 {

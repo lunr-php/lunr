@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Feedback
- * @subpackage Tests
+ * @package    Lunr\Feedback
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -24,12 +22,7 @@ use ReflectionClass;
 /**
  * This class contains test methods for the PSR3Logger class.
  *
- * @category   Libraries
- * @package    Feedback
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @covers     Lunr\Feedback\PSR3Logger
+ * @covers Lunr\Feedback\PSR3Logger
  */
 class PSR3LoggerTest extends LunrBaseTest
 {
