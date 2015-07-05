@@ -173,10 +173,10 @@ class Authentication extends Api
     public function get_temporary_access_token()
     {
         $params = [
-            'client_id' => $this->app_id,
+            'client_id'     => $this->app_id,
             'client_secret' => $this->app_secret,
-            'redirect_uri' => $this->redirect_uri,
-            'code' => $this->code
+            'redirect_uri'  => $this->redirect_uri,
+            'code'          => $this->code,
         ];
 
         $url = Domain::GRAPH . 'oauth/access_token';
@@ -202,9 +202,9 @@ class Authentication extends Api
     public function get_app_access_token()
     {
         $params = [
-            'client_id' => $this->app_id,
+            'client_id'     => $this->app_id,
             'client_secret' => $this->app_secret,
-            'grant_type' => 'client_credentials',
+            'grant_type'    => 'client_credentials',
         ];
 
         $url = Domain::GRAPH . 'oauth/access_token';
@@ -240,9 +240,9 @@ class Authentication extends Api
     public function get_login_url()
     {
         $params = [
-            'client_id' => $this->app_id,
+            'client_id'    => $this->app_id,
             'redirect_uri' => $this->redirect_uri,
-            'state' => $this->state
+            'state'        => $this->state,
         ];
 
         if ($this->scope !== NULL)
@@ -261,8 +261,8 @@ class Authentication extends Api
     public function get_logout_url()
     {
         $params = [
-            'next' => $this->redirect_uri,
-            'access_token' => $this->access_token
+            'next'         => $this->redirect_uri,
+            'access_token' => $this->access_token,
         ];
 
         return Domain::WWW . 'logout.php?' . http_build_query($params);

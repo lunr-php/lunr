@@ -50,8 +50,8 @@ class FeedClassifyTest extends FeedTest
     public function testClassifySetsNextIfPresent()
     {
         $data = [
-            'data' => [],
-            'paging' => [ 'next' => 'https://graph.facebook.com/19292868552/feed?limit=25&until=1375966859' ]
+            'data'   => [],
+            'paging' => [ 'next' => 'https://graph.facebook.com/19292868552/feed?limit=25&until=1375966859' ],
         ];
 
         $this->set_reflection_property_value('data', $data);
@@ -70,8 +70,8 @@ class FeedClassifyTest extends FeedTest
     public function testClassifySetsPreviousIfPresent()
     {
         $data = [
-            'data' => [],
-            'paging' => [ 'previous' => 'https://graph.facebook.com/19292868552/feed?limit=25&since=1382551720' ]
+            'data'   => [],
+            'paging' => [ 'previous' => 'https://graph.facebook.com/19292868552/feed?limit=25&since=1382551720' ],
         ];
 
         $this->set_reflection_property_value('data', $data);
@@ -90,8 +90,8 @@ class FeedClassifyTest extends FeedTest
     public function testClassifyDoesNotTouchNextIfNotPresent()
     {
         $data = [
-            'data' => [],
-            'paging' => []
+            'data'   => [],
+            'paging' => [],
         ];
 
         $this->set_reflection_property_value('data', $data);
@@ -110,8 +110,8 @@ class FeedClassifyTest extends FeedTest
     public function testClassifyDoesNotTouchPreviousIfNotPresent()
     {
         $data = [
-            'data' => [],
-            'paging' => []
+            'data'   => [],
+            'paging' => [],
         ];
 
         $this->set_reflection_property_value('data', $data);
@@ -133,8 +133,8 @@ class FeedClassifyTest extends FeedTest
             'data' => [
                 [ 'id' => '1' ],
                 [ 'id' => '2' ],
-                [ 'id' => '3' ]
-            ]
+                [ 'id' => '3' ],
+            ],
         ];
 
         $this->set_reflection_property_value('data', $data);
@@ -158,8 +158,8 @@ class FeedClassifyTest extends FeedTest
     {
         $data = [
             'data' => [
-                [ 'id' => '1' ]
-            ]
+                [ 'id' => '1' ],
+            ],
         ];
 
         $this->set_reflection_property_value('data', $data);
@@ -186,8 +186,8 @@ class FeedClassifyTest extends FeedTest
     {
         $data = [
             'data' => [
-                [ 'id' => '1' ]
-            ]
+                [ 'id' => '1' ],
+            ],
         ];
 
         $permissions = [ 'email' ];
@@ -217,8 +217,8 @@ class FeedClassifyTest extends FeedTest
     {
         $data = [
             'data' => [
-                [ 'id' => '1' ]
-            ]
+                [ 'id' => '1' ],
+            ],
         ];
 
         $this->set_reflection_property_value('data', $data);

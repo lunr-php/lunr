@@ -44,14 +44,14 @@ class AuthenticationApiTest extends AuthenticationTest
         parent::setUp();
 
         $this->options = [
-            'CURLOPT_USERPWD' => 'Key:Secret',
-            'CURLOPT_VERBOSE' => TRUE,
-            'CURLOPT_SSL_VERIFYPEER' => TRUE
+            'CURLOPT_USERPWD'        => 'Key:Secret',
+            'CURLOPT_VERBOSE'        => TRUE,
+            'CURLOPT_SSL_VERIFYPEER' => TRUE,
         ];
 
         $this->header = [
             'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
-            'User-Agent' => 'lunr.nl'
+            'User-Agent'   => 'lunr.nl',
         ];
     }
 

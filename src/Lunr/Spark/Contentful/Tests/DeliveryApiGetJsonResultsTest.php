@@ -89,10 +89,8 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
     public function testGetJsonResultsThrowsErrorIfRequestHadError()
     {
         $output = [
-            "message" => "Something failed",
-            "sys"     => [
-                "id" => "Something"
-            ]
+            'message' => 'Something failed',
+            'sys'     => ['id' => 'Something'],
         ];
 
         $this->curl->expects($this->once())
@@ -187,7 +185,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
     {
         $output = [
             'param1' => 1,
-            'param2' => 2
+            'param2' => 2,
         ];
 
         $this->curl->expects($this->once())

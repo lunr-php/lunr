@@ -129,7 +129,7 @@ class Feed extends User
     {
         $params = [
             'limit' => $this->limit,
-            'until' => $this->next
+            'until' => $this->next,
         ];
 
         $id  = ($this->fetched_user_data === FALSE) ? $this->id : $this->profile_id;
@@ -147,7 +147,7 @@ class Feed extends User
     {
         $params = [
             'limit' => $this->limit,
-            'since' => $this->previous
+            'since' => $this->previous,
         ];
 
         $id  = ($this->fetched_user_data === FALSE) ? $this->id : $this->profile_id;

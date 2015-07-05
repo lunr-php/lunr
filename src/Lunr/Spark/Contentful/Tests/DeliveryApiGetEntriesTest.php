@@ -69,9 +69,11 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
+        $url = 'https://cdn.contentful.com/spaces//entries?field.urlName%5Bmatch%5D=bar&access_token=token&content_type=foo';
+
         $this->curl->expects($this->once())
                    ->method('get_request')
-                   ->with($this->equalTo('https://cdn.contentful.com/spaces//entries?field.urlName%5Bmatch%5D=bar&access_token=token&content_type=foo'))
+                   ->with($this->equalTo($url))
                    ->will($this->returnValue($this->response));
 
         $this->response->expects($this->once())
@@ -98,7 +100,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
     {
         $output = [
             'param1' => 1,
-            'param2' => 2
+            'param2' => 2,
         ];
 
         $this->cas->expects($this->once())
@@ -134,7 +136,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
     {
         $output = [
             'param1' => 1,
-            'param2' => 2
+            'param2' => 2,
         ];
 
         $this->cas->expects($this->once())
@@ -142,9 +144,11 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
+        $url = 'https://cdn.contentful.com/spaces//entries?field.urlName%5Bmatch%5D=bar&access_token=token&content_type=foo';
+
         $this->curl->expects($this->once())
                    ->method('get_request')
-                   ->with($this->equalTo('https://cdn.contentful.com/spaces//entries?field.urlName%5Bmatch%5D=bar&access_token=token&content_type=foo'))
+                   ->with($this->equalTo($url))
                    ->will($this->returnValue($this->response));
 
         $this->response->expects($this->once())

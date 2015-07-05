@@ -50,9 +50,9 @@ class SearchApiTest extends SearchTest
     {
         $url    = 'https://api.twitter.com/1.1/search/tweets.json';
         $params = [
-            'count' => 5,
+            'count'       => 5,
             'result_type' => 'recent',
-            'q' => '#testing'
+            'q'           => '#testing',
         ];
 
         $this->cas->expects($this->once())
@@ -93,9 +93,9 @@ class SearchApiTest extends SearchTest
     {
         $url    = 'https://api.twitter.com/1.1/search/tweets.json';
         $params = [
-            'count' => 5,
+            'count'       => 5,
             'result_type' => 'recent',
-            'q' => '#testing'
+            'q'           => '#testing',
         ];
 
         $this->cas->expects($this->once())
@@ -151,7 +151,7 @@ class SearchApiTest extends SearchTest
     {
         $result = [
             ['Foo' => 'Bar'],
-            ['Bar' => 'Foo']
+            ['Bar' => 'Foo'],
         ];
 
         $method = $this->get_accessible_reflection_method('classify');

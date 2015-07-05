@@ -93,7 +93,7 @@ abstract class User extends Api
         }
 
         $params = [
-            'access_token' => $this->access_token
+            'access_token' => $this->access_token,
         ];
 
         $url = Domain::GRAPH . $this->profile_id . '/permissions';

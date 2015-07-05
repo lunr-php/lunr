@@ -125,9 +125,9 @@ class ApiGetJsonResultsTest extends ApiTest
         $output = [
             'error' => [
                 'message' => 'Message',
-                'code' => 'Code',
-                'type' => 'Type',
-            ]
+                'code'    => 'Code',
+                'type'    => 'Type',
+            ],
         ];
 
         $this->curl->expects($this->once())
@@ -214,7 +214,7 @@ class ApiGetJsonResultsTest extends ApiTest
     {
         $output = [
             'param1' => 1,
-            'param2' => 2
+            'param2' => 2,
         ];
 
         $this->curl->expects($this->once())

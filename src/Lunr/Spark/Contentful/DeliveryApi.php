@@ -140,7 +140,7 @@ class DeliveryApi
         $filters['access_token'] = $this->access_token;
         $filters['content_type'] = $type;
 
-        $url = static::URL . $this->space . "/entries";
+        $url = static::URL . $this->space . '/entries';
 
         $values = $this->get_json_results($url, $filters);
 
@@ -150,8 +150,8 @@ class DeliveryApi
     /**
      * Fetch and parse results as though they were a json string.
      *
-     * @param String $url     API URL
-     * @param Array  $params  Array of parameters for the API request
+     * @param String $url    API URL
+     * @param Array  $params Array of parameters for the API request
      *
      * @return Array $parts Array of return values
      */

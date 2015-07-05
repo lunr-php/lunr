@@ -125,9 +125,9 @@ class ApiGetUrlResultsTest extends ApiTest
         $output = [
             'error' => [
                 'message' => 'Message',
-                'code' => 'Code',
-                'type' => 'Type',
-            ]
+                'code'    => 'Code',
+                'type'    => 'Type',
+            ],
         ];
 
         $this->curl->expects($this->once())

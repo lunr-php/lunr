@@ -52,18 +52,16 @@ class Authentication extends Api
     {
         $header = [
             'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
-            'User-Agent' => $this->user_agent
+            'User-Agent'   => $this->user_agent,
         ];
 
         $options = [
-            'CURLOPT_USERPWD' => $this->consumer_key . ':' . $this->consumer_secret,
-            'CURLOPT_VERBOSE' => TRUE,
-            'CURLOPT_SSL_VERIFYPEER' => TRUE
+            'CURLOPT_USERPWD'        => $this->consumer_key . ':' . $this->consumer_secret,
+            'CURLOPT_VERBOSE'        => TRUE,
+            'CURLOPT_SSL_VERIFYPEER' => TRUE,
         ];
 
-        $params = [
-            'grant_type' => 'client_credentials'
-        ];
+        $params = ['grant_type' => 'client_credentials'];
 
         $this->curl->set_http_headers($header);
         $this->curl->set_options($options);

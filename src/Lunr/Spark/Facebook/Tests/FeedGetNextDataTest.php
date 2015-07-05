@@ -230,10 +230,10 @@ class FeedGetNextDataTest extends FeedTest
         $data = [
             'data' => [
                 0 => [
-                    'email' => 1,
-                    'user_likes' => 1
-                ]
-            ]
+                    'email'      => 1,
+                    'user_likes' => 1,
+                ],
+            ],
         ];
 
         $this->cas->expects($this->exactly(6))
