@@ -59,7 +59,7 @@ class FileTimerStopTest extends FileTimerTest
      */
     public function testStopStoppedTimerDoesNotChangeStopTime()
     {
-        $timers = [ 'id' => [ 'stop' => 1372115612.4691,  'stopped' => TRUE ] ];
+        $timers = [ 'id' => [ 'stop' => 1372115612.4691, 'stopped' => TRUE ] ];
         $this->set_reflection_property_value('timers', $timers);
 
         $this->class->stop('id');
@@ -128,7 +128,7 @@ class FileTimerStopTest extends FileTimerTest
      */
     public function testStopAllDoesNotAlterAlreadyStoppedTimers()
     {
-        $timers = [ 'id' => [ 'stop' => 1372115612.4691,  'stopped' => TRUE ] ];
+        $timers = [ 'id' => [ 'stop' => 1372115612.4691, 'stopped' => TRUE ] ];
         $this->set_reflection_property_value('timers', $timers);
 
         $this->class->stop_all();
