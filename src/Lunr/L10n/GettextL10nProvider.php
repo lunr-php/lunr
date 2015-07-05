@@ -133,7 +133,8 @@ class GettextL10nProvider extends L10nProvider
         $output   = dcngettext($this->domain, $composed, $plural, $amount, LC_MESSAGES);
 
         if ((($output == $composed) || ($output == $plural))
-            && ($this->language != $this->default_language))
+            && ($this->language != $this->default_language)
+        )
         {
             return ($amount == 1 ? $singular : $plural);
         }

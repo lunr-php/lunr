@@ -175,7 +175,8 @@ class PHPL10nProvider extends L10nProvider
         if (($context != '')
             && !array_key_exists($plural, $this->lang_array[$singular])
             && array_key_exists($context, $this->lang_array[$singular])
-            && !is_array($this->lang_array[$singular][$context]))
+            && !is_array($this->lang_array[$singular][$context])
+        )
         {
             return $this->lang_array[$singular][$context];
         }
@@ -190,7 +191,8 @@ class PHPL10nProvider extends L10nProvider
         {
             if (!is_array($this->lang_array[$singular][$plural])
                 || !isset($this->lang_array[$singular][$plural][0])
-                || !isset($this->lang_array[$singular][$plural][1]))
+                || !isset($this->lang_array[$singular][$plural][1])
+            )
             {
                 return ($amount == 1 ? $singular : $plural);
             }
@@ -208,7 +210,8 @@ class PHPL10nProvider extends L10nProvider
         // Check whether we have the given context available
         if (!is_array($this->lang_array[$singular][$plural])
             || !isset($this->lang_array[$singular][$plural][$context])
-            || !is_array($this->lang_array[$singular][$plural][$context]))
+            || !is_array($this->lang_array[$singular][$plural][$context])
+        )
         {
             return ($amount == 1 ? $singular : $plural);
         }
