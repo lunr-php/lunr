@@ -210,7 +210,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
             [ 'username', 'username' ],
             [ 'password', 'password' ],
             [ 'database', 'database' ],
-            [ 'driver', 'not_mysql' ]
+            [ 'driver', 'not_mysql' ],
         ];
 
         $sub_configuration->expects($this->any())

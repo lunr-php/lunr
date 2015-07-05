@@ -44,7 +44,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
             [ 'ssl_cert', 'ssl_cert' ],
             [ 'ca_cert', 'ca_cert' ],
             [ 'ca_path', 'ca_path' ],
-            [ 'cipher', 'cipher' ]
+            [ 'cipher', 'cipher' ],
         ];
     }
 

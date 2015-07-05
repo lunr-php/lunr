@@ -106,7 +106,7 @@ abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
             array('username', 'username'),
             array('password', 'password'),
             array('database', 'database'),
-            array('driver', 'unsupported')
+            array('driver', 'unsupported'),
         );
 
         $this->sub_configuration->expects($this->any())
@@ -144,7 +144,7 @@ abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
             array('username', 'username'),
             array('password', 'password'),
             array('database', 'database'),
-            array('driver', 'mysql')
+            array('driver', 'mysql'),
         );
 
         $this->sub_configuration->expects($this->any())

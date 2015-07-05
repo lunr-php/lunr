@@ -100,7 +100,7 @@ abstract class MySQLConnectionTest extends LunrBaseTest
             ['username', 'username'],
             ['password', 'password'],
             ['database', 'database'],
-            ['driver', 'mysql']
+            ['driver', 'mysql'],
         ];
 
         $this->sub_configuration->expects($this->any())

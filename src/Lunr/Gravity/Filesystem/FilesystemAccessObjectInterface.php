@@ -91,7 +91,7 @@ interface FilesystemAccessObjectInterface
      * Turns the values of an array into csv and writes them in a given file.
      *
      * @param  String $file      The filepath to write the file
-     * @param  Array $data       An array with the data to be turned into csv
+     * @param  Array  $data      An array with the data to be turned into csv
      * @param  String $delimiter The delimiter for the csv (optional)
      * @param  String $enclosure The enclosure for the csv (option)
      *

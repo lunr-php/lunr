@@ -726,7 +726,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             if (isset($this->$component) && ($this->$component != ''))
             {
                 if (($component === 'select_mode') || ($component === 'delete_mode')
-                    || ($component === 'insert_mode') || ($component === 'update_mode'))
+                    || ($component === 'insert_mode') || ($component === 'update_mode')
+                )
                 {
                     $sql .= implode(' ', array_unique($this->$component)) . ' ';
                 }

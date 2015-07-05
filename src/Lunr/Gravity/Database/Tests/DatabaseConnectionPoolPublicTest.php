@@ -49,7 +49,7 @@ class DatabaseConnectionPoolPublicTest extends DatabaseConnectionPoolTest
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLConnection', $value);
         $this->assertTrue($property->getValue($value));
-   }
+    }
 
     /**
      * Test that get_new_rw_connection() returns a new MySQLConnection.

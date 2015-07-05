@@ -58,7 +58,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
                      ->with("Couldn't open directory '{directory}': {message}",
                         array(
                             'message'   => $error,
-                            'directory' => $directory
+                            'directory' => $directory,
                         )
                      );
 
@@ -83,7 +83,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
                      ->with("Couldn't open directory '{directory}': {message}",
                         array(
                             'message'   => $error,
-                            'directory' => $directory
+                            'directory' => $directory,
                         )
                      );
 
@@ -106,7 +106,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
                      ->with("Couldn't open directory '{directory}': {message}",
                         array(
                             'message'   => "DirectoryIterator::__construct($directory): failed to open dir: Not a directory",
-                            'directory' => $directory
+                            'directory' => $directory,
                         )
                      );
 
@@ -147,7 +147,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
                      ->with("Couldn't open directory '{directory}': {message}",
                         array(
                             'message'   => $error,
-                            'directory' => $directory
+                            'directory' => $directory,
                         )
                      );
 

@@ -58,7 +58,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
                      ->with("Couldn't open directory '{directory}': {message}",
                         array(
                             'message'   => $error,
-                            'directory' => $directory
+                            'directory' => $directory,
                         )
                      );
 
@@ -83,7 +83,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
                      ->with("Couldn't open directory '{directory}': {message}",
                         array(
                             'message'   => $error,
-                            'directory' => $directory
+                            'directory' => $directory,
                         )
                      );
 
@@ -108,7 +108,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
                      ->with("Couldn't open directory '{directory}': {message}",
                         array(
                             'message'   => $error,
-                            'directory' => $directory
+                            'directory' => $directory,
                         )
                      );
 
@@ -148,7 +148,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
                      ->with("Couldn't open directory '{directory}': {message}",
                         array(
                             'message'   => $error,
-                            'directory' => $directory
+                            'directory' => $directory,
                         )
                      );
 

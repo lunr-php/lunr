@@ -114,7 +114,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
                      ->with("Couldn't open directory '{directory}': {message}",
                         array(
                             'message'   => $error,
-                            'directory' => $directory
+                            'directory' => $directory,
                         )
                      );
 
@@ -139,7 +139,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
                      ->with("Couldn't open directory '{directory}': {message}",
                         array(
                             'message'   => $error,
-                            'directory' => $directory
+                            'directory' => $directory,
                         )
                      );
 
@@ -164,7 +164,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
                      ->with("Couldn't open directory '{directory}': {message}",
                         array(
                             'message'   => $error,
-                            'directory' => $directory
+                            'directory' => $directory,
                         )
                      );
 
@@ -205,7 +205,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
                      ->with("Couldn't open directory '{directory}': {message}",
                         array(
                             'message'   => $error,
-                            'directory' => $directory
+                            'directory' => $directory,
                         )
                      );
 

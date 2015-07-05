@@ -42,6 +42,8 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
     /**
      * Test that mkdir() returns FALSE when access mode is invalid.
      *
+     * @param mixed $mode Invalid mode value
+     *
      * @dataProvider invalidDirModeValues
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir
      */
@@ -78,6 +80,8 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
 
     /**
      * Test that mkdir() returns TRUE when creates a directory.
+     *
+     * @param int $mode Valid mode value
      *
      * @dataProvider validDirModeValues
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir

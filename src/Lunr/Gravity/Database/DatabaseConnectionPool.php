@@ -136,7 +136,7 @@ class DatabaseConnectionPool
                 break;
         }
 
-        if (($new === TRUE) || (sizeof($this->$store) == 0))
+        if (($new === TRUE) || (count($this->$store) == 0))
         {
             $connection = new $type($this->configuration, $this->logger, $extra);
 

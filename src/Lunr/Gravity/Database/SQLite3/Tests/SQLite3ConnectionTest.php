@@ -102,7 +102,7 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
 
         $map = array(
             array('file', '/tmp/test.db'),
-            array('driver', 'sqlite3')
+            array('driver', 'sqlite3'),
         );
 
         $this->sub_configuration->expects($this->any())

@@ -150,7 +150,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
     public function illegalFloatProvider()
     {
         $illegals   = [];
-        $illegals[] = ["3.3.3", 3.3];
+        $illegals[] = ['3.3.3', 3.3];
 
         $illegals[] = [NULL, 0];
 

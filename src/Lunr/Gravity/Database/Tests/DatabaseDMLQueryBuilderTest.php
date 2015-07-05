@@ -142,7 +142,6 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
         return $values;
     }
 
-
 }
 
 ?>

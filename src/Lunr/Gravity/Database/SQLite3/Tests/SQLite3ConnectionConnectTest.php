@@ -127,7 +127,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
 
         $map = array(
             array('file', '/tmp/test.db'),
-            array('driver', 'not_sqlite3')
+            array('driver', 'not_sqlite3'),
         );
 
         $sub_configuration->expects($this->any())
