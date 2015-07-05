@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    L10n
- * @subpackage Libraries
+ * @package    Lunr\L10n
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -19,11 +17,6 @@ use Lunr\Corona\HTMLView;
 
 /**
  * View class used by the Website
- *
- * @category   Libraries
- * @package    L10n
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 abstract class L10nHTMLView extends HTMLView
 {

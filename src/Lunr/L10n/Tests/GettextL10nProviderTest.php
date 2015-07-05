@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    L10n
- * @subpackage Tests
+ * @package    Lunr\L10n
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -23,11 +21,7 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the GettextL10nProvider class.
  *
- * @category   Libraries
- * @package    L10n
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\L10n\GettextL10nProvider
+ * @covers Lunr\L10n\GettextL10nProvider
  */
 abstract class GettextL10nProviderTest extends LunrBaseTest
 {

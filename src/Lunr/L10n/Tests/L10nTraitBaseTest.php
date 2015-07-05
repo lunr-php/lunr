@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    L10n
- * @subpackage Tests
+ * @package    Lunr\L10n
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,11 +16,7 @@ namespace Lunr\L10n\Tests;
 /**
  * This class contains test methods for the L10n class.
  *
- * @category   Libraries
- * @package    L10n
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\L10n\L10nTrait
+ * @covers Lunr\L10n\L10nTrait
  */
 class L10nTraitBaseTest extends L10nTraitTest
 {

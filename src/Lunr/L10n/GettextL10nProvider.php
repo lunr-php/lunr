@@ -6,9 +6,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    L10n
- * @subpackage Libraries
+ * @package    Lunr\L10n
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,11 +16,6 @@ namespace Lunr\L10n;
 
 /**
  * Gettext Localization Provider class
- *
- * @category   Libraries
- * @package    L10n
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class GettextL10nProvider extends L10nProvider
 {

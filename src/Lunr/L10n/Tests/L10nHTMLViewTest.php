@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    L10n
- * @subpackage Tests
+ * @package    Lunr\L10n
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -22,11 +20,7 @@ use ReflectionClass;
 /**
  * This class tests the setup of the localized view class, as well as the helper methods.
  *
- * @category   Libraries
- * @package    L10n
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\L10n\L10nHTMLView
+ * @covers Lunr\L10n\L10nHTMLView
  */
 abstract class L10nHTMLViewTest extends LunrBaseTest
 {

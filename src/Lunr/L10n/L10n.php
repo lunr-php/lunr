@@ -6,9 +6,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    L10n
- * @subpackage Libraries
+ * @package    Lunr\L10n
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Julio Foulquié <julio@m2mobi.com>
  * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -19,12 +17,6 @@ namespace Lunr\L10n;
 
 /**
  * Localization support class
- *
- * @category   Libraries
- * @package    L10n
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Julio Foulquié <julio@m2mobi.com>
  */
 class L10n
 {
