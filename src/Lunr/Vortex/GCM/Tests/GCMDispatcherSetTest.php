@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage GCM
+ * @package    Lunr\Vortex\GCM
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,11 +16,7 @@ namespace Lunr\Vortex\GCM\Tests;
 /**
  * This class contains tests for the setters of the GCMDispatcher class.
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage GCM
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @covers     Lunr\Vortex\GCM\GCMDispatcher
+ * @covers Lunr\Vortex\GCM\GCMDispatcher
  */
 class GCMDispatcherSetTest extends GCMDispatcherTest
 {

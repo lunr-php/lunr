@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage Email
+ * @package    Lunr\Vortex\Email
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -19,11 +17,7 @@ namespace Lunr\Vortex\Email\Tests;
 /**
  * This class contains test for the push() method of the EmailDispatcher class.
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage Email
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @covers     Lunr\Vortex\Email\EmailDispatcher
+ * @covers Lunr\Vortex\Email\EmailDispatcher
  */
 class EmailDispatcherPushTest extends EmailDispatcherTest
 {

@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Payload
- * @package    Vortex
- * @subpackage Email
+ * @package    Lunr\Vortex\Email
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Vortex\Email;
 
 /**
  * Email Notification Payload Generator.
- *
- * @category   Payload
- * @package    Vortex
- * @subpackage Email
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */
 class EmailPayload
 {

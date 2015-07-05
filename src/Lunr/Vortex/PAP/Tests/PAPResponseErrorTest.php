@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage PAP
+ * @package    Lunr\Vortex\PAP
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,7 @@ use Lunr\Vortex\PushNotificationStatus;
 /**
  * This class contains tests for failed PAP dispatches.
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage PAP
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @covers     Lunr\Vortex\PAP\PAPResponse
+ * @covers Lunr\Vortex\PAP\PAPResponse
  */
 class PAPResponseErrorTest extends PAPResponseTest
 {

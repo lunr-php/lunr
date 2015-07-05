@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage PAP
+ * @package    Lunr\Vortex\PAP
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -22,11 +20,7 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the PAPPayload class.
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage PAP
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @covers     Lunr\Vortex\PAP\PAPPayload
+ * @covers Lunr\Vortex\PAP\PAPPayload
  */
 abstract class PAPPayloadTest extends LunrBaseTest
 {

@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Payload
- * @package    Vortex
- * @subpackage GCM
+ * @package    Lunr\Vortex\GCM
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Vortex\GCM;
 
 /**
  * Google Cloud Messaging Push Notification Payload Generator.
- *
- * @category   Payload
- * @package    Vortex
- * @subpackage GCM
- * @author     Dinos Theodorou <dinos@m2mobi.com>
  */
 class GCMPayload
 {

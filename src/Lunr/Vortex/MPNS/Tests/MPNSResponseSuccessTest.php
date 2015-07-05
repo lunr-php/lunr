@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage MPNS
+ * @package    Lunr\Vortex\MPNS
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,7 @@ use Lunr\Vortex\PushNotificationStatus;
 /**
  * This class contains tests for successful MPNS dispatches.
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage MPNS
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Vortex\MPNS\MPNSResponse
+ * @covers Lunr\Vortex\MPNS\MPNSResponse
  */
 class MPNSResponseSuccessTest extends MPNSResponseTest
 {

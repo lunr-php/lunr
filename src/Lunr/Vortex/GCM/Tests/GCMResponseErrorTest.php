@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage GCM
+ * @package    Lunr\Vortex\GCM
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,7 @@ use Lunr\Vortex\PushNotificationStatus;
 /**
  * This class contains tests for failed GCM dispatches.
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage GCM
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @covers     Lunr\Vortex\GCM\GCMResponse
+ * @covers Lunr\Vortex\GCM\GCMResponse
  */
 class GCMResponseErrorTest extends GCMResponseTest
 {

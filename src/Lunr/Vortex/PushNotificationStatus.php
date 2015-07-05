@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Status
- * @package    Vortex
- * @subpackage General
+ * @package    Lunr\Vortex
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Vortex;
 
 /**
  * Windows Phone Push Notification Priority Types.
- *
- * @category   Status
- * @package    Vortex
- * @subpackage General
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class PushNotificationStatus
 {

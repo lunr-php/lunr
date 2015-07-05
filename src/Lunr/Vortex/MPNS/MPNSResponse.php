@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Response
- * @package    Vortex
- * @subpackage MPNS
+ * @package    Lunr\Vortex\MPNS
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -19,11 +17,6 @@ use Lunr\Vortex\PushNotificationStatus;
 
 /**
  * Windows Phone Push Notification response wrapper.
- *
- * @category   Response
- * @package    Vortex
- * @subpackage MPNS
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class MPNSResponse
 {

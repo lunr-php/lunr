@@ -6,9 +6,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Dispatcher
- * @package    Vortex
- * @subpackage General
+ * @package    Lunr\Vortex
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -19,12 +17,6 @@ namespace Lunr\Vortex;
 
 /**
  * Push notification interface.
- *
- * @category   Dispatcher
- * @package    Vortex
- * @subpackage General
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Olivier Wizen <olivier@m2mobi.com>
  */
 interface PushNotificationDispatcherInterface
 {

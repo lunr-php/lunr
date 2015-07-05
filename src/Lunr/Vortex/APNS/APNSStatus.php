@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Status
- * @package    Vortex
- * @subpackage MPNS
+ * @package    Lunr\Vortex\APNS
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -22,11 +20,6 @@ namespace Lunr\Vortex\APNS;
  * as the status of the push notification connection & delivery, together
  * with any possible internal error that might happen in the low level
  * library we are using.
- *
- * @category   Status
- * @package    Vortex
- * @subpackage APNS
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */
 class APNSStatus
 {

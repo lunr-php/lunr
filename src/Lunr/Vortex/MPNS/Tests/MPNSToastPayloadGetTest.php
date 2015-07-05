@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage MPNS
+ * @package    Lunr\Vortex\MPNS
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,11 +16,7 @@ namespace Lunr\Vortex\MPNS\Tests;
 /**
  * This class contains tests for the getters of the MPNSToastPayload class.
  *
- * @category   Tests
- * @package    Vortex
- * @subpackage MPNS
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Vortex\MPNS\MPNSToastPayload
+ * @covers Lunr\Vortex\MPNS\MPNSToastPayload
  */
 class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
 {

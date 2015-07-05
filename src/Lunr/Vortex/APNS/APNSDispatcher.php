@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Dispatcher
- * @package    Vortex
- * @subpackage APNS
+ * @package    Lunr\Vortex\APNS
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -19,11 +17,6 @@ use Lunr\Vortex\PushNotificationDispatcherInterface;
 
 /**
  * Apple Push Notification Service Dispatcher.
- *
- * @category   Dispatcher
- * @package    Vortex
- * @subpackage APNS
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */
 class APNSDispatcher implements PushNotificationDispatcherInterface
 {
