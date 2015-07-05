@@ -140,7 +140,8 @@ class LocatorTest extends LunrBaseTest
     public function testDeclaringAsSingletonReturnsDifferentClosure()
     {
         $closure = function () { return 1; };
-        $value   = $this->class->as_singleton($closure);
+
+        $value = $this->class->as_singleton($closure);
 
         $this->assertInternalType('callable', $value);
         $this->assertNotSame($closure, $value);
@@ -154,7 +155,8 @@ class LocatorTest extends LunrBaseTest
     public function testSingletonClosureReturnsValueFromClosure()
     {
         $closure = function () { return 1; };
-        $value   = $this->class->as_singleton($closure);
+
+        $value = $this->class->as_singleton($closure);
 
         $this->assertEquals(1, $value());
     }
@@ -167,7 +169,8 @@ class LocatorTest extends LunrBaseTest
     public function testSingletonClosureReturnsSingletonUponSecondCall()
     {
         $closure = function () { return new stdClass(); };
-        $value   = $this->class->as_singleton($closure);
+
+        $value = $this->class->as_singleton($closure);
 
         $class1       = $value();
         $class1->test = 'value';

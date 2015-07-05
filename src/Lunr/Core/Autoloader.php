@@ -79,8 +79,7 @@ class Autoloader
     public function add_include_path($path)
     {
         set_include_path(
-            get_include_path() . ':' .
-            $path
+            get_include_path() . ':' . $path
         );
     }
 
@@ -176,7 +175,7 @@ class Autoloader
             return "class.$class.mock.php";
         }
 
-        $index = sizeof($split_name) - 1;
+        $index = count($split_name) - 1;
 
         if ($index == 0)
         {
@@ -196,6 +195,7 @@ class Autoloader
                 {
                     return "controller.$class.inc.php";
                 }
+
                 break;
             case 'Model':
             case 'View':
