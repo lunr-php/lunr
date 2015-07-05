@@ -7,9 +7,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Surface
- * @subpackage Libraries
+ * @package    Lunr\Surface
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Javier Negre <javi@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
@@ -21,13 +19,6 @@ namespace Lunr\Surface;
 
 /**
  * Pagination class
- *
- * @category   Libraries
- * @package    Surface
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Javier Negre <javi@m2mobi.com>
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  */
 class Pagination
 {
