@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Sphere
- * @subpackage Libraries
+ * @package    Lunr\Sphere
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -18,12 +16,6 @@ namespace Lunr\Sphere;
 
 /**
  * Session Wrapper Class
- *
- * @category   Libraries
- * @package    Sphere
- * @subpackage Libraries
- * @author     Felipe Martinez <felipe@m2mobi.com>
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class Session
 {

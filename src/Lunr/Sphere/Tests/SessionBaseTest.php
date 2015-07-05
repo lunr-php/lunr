@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Sphere
- * @subpackage Tests
+ * @package    Lunr\Sphere
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -19,12 +17,7 @@ namespace Lunr\Sphere\Tests;
 /**
  * This class contains tests for the Session class.
  *
- * @category   Libraries
- * @package    Sphere
- * @subpackage Tests
- * @author     Felipe Martinez <felipe@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @covers     Lunr\Sphere\Session
+ * @covers Lunr\Sphere\Session
  */
 class SessionBaseTest extends SessionTest
 {

@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Sphere
- * @subpackage Tests
+ * @package    Lunr\Sphere
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -25,12 +23,7 @@ use Lunr\Sphere\DatabaseSessionHandler;
  * This class contains common setup routines, providers
  * and shared attributes for testing the DatabaseSessionHandler class.
  *
- * @category   Libraries
- * @package    Sphere
- * @subpackage Tests
- * @author     Felipe Martinez <felipe@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @covers     Lunr\Sphere\DatabaseSessionHandler
+ * @covers Lunr\Sphere\DatabaseSessionHandler
  */
 abstract class DatabaseSessionHandlerTest extends LunrBaseTest
 {

@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Sphere
- * @subpackage Tests
+ * @package    Lunr\Sphere
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -27,11 +25,7 @@ use \stdClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the SessionDAO class.
  *
- * @category   Libraries
- * @package    Sphere
- * @subpackage Tests
- * @author     Felipe Martinez <felipe@m2mobi.com>
- * @covers     Lunr\Sphere\SessionDAO
+ * @covers Lunr\Sphere\SessionDAO
  */
 class SessionDAOTest extends LunrBaseTest
 {
