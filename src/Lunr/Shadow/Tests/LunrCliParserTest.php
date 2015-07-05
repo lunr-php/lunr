@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Tests
+ * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -24,12 +22,7 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the LunrCliParser class.
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @covers     Lunr\Shadow\LunrCliParser
+ * @covers Lunr\Shadow\LunrCliParser
  */
 abstract class LunrCliParserTest extends LunrBaseTest
 {

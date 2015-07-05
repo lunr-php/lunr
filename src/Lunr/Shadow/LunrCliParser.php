@@ -6,9 +6,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Libraries
+ * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2009-2014, Heinz Wiesinger, Amsterdam, The Netherlands
  * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -23,11 +21,6 @@ namespace Lunr\Shadow;
  * only allows one argument per command line option, this
  * class allows more than one argument, as well as optional
  * and obligatory arguments mixed
- *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class LunrCliParser implements CliParserInterface
 {

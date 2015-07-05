@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Tests
+ * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -19,12 +17,7 @@ namespace Lunr\Shadow\Tests;
 /**
  * This class contains test methods for parse() in the GetoptCliParser class.
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @covers     Lunr\Shadow\GetoptCliParser
+ * @covers Lunr\Shadow\GetoptCliParser
  */
 class GetoptCliParserParseTest extends GetoptCliParserTest
 {

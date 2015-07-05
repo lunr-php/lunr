@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Request
+ * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -22,12 +20,6 @@ use Lunr\Corona\RequestParserInterface;
  * Cli Request Parser.
  * Manages access to $_POST, $_GET values, as well as
  * the request URL parameters
- *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Request
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Olivier Wizen <olivier@m2mobi.com>
  */
 class CliRequestParser implements RequestParserInterface
 {

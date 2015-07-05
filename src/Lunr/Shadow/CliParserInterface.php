@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Libraries
+ * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Shadow;
 
 /**
  * Command line argument parser interface.
- *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 interface CliParserInterface
 {

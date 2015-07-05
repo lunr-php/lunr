@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Libraries
+ * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,6 @@ namespace Lunr\Shadow;
  * output strings. Though this is certainly not a usecase
  * restricted to the console environment, this is where
  * it's primary usecase lies.
- *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class Console
 {

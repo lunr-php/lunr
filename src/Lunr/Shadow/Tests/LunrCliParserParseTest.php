@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Tests
+ * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -19,12 +17,7 @@ namespace Lunr\Shadow\Tests;
 /**
  * This class contains test methods for parse() in the LunrCliParser class.
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @covers     Lunr\Shadow\LunrCliParser
+ * @covers Lunr\Shadow\LunrCliParser
  */
 class LunrCliParserParseTest extends LunrCliParserTest
 {

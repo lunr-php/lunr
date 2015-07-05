@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Tests
+ * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2011-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -23,12 +21,7 @@ use ReflectionClass;
 /**
  * This class contains test methods for the Console class.
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @covers     Lunr\Shadow\Console
+ * @covers Lunr\Shadow\Console
  */
 class ConsoleTest extends LunrBaseTest
 {

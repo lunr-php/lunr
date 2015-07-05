@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Shadow
- * @subpackage Tests
+ * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -19,11 +17,6 @@ namespace Lunr\Shadow\Tests;
 /**
  * Basic tests for the case of empty superglobals.
  *
- * @category      Libraries
- * @package       Shadow
- * @subpackage    Tests
- * @author        Heinz Wiesinger <heinz@m2mobi.com>
- * @author        Leonidas Diamantis <leonidas@m2mobi.com>
  * @covers        Lunr\Shadow\CliRequestParser
  * @backupGlobals enabled
  */
