@@ -45,7 +45,7 @@ abstract class PaginationTest extends LunrBaseTest
             array('base_url', 'http://www.example.com'),
             array('controller', 'controller'),
             array('method', 'method'),
-            array('params', array('param1', 'param2'))
+            array('params', array('param1', 'param2')),
         );
 
         $this->request->expects($this->exactly(4))
@@ -70,7 +70,7 @@ abstract class PaginationTest extends LunrBaseTest
             array('base_url', 'http://www.example.com'),
             array('controller', 'controller'),
             array('method', 'method'),
-            array('params', array('param1', 'param2', '10'))
+            array('params', array('param1', 'param2', '10')),
         );
 
         $this->request->expects($this->exactly(4))
