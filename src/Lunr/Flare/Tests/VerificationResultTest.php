@@ -91,7 +91,7 @@ class VerificationResultTest extends VerificationTest
 
         $method = $this->get_accessible_reflection_method('is_fully_checked');
 
-        $this->logger->expects($this->exactly(sizeof($data) - sizeof($result)))
+        $this->logger->expects($this->exactly(count($data) - count($result)))
                      ->method('warning');
 
         $this->assertFalse($method->invokeArgs($this->class, array('')));

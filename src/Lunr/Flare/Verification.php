@@ -126,7 +126,7 @@ class Verification
     /**
      * Set the data we want to verify.
      *
-     * @param array &$dataset The dataset we are going to verify
+     * @param array $dataset The dataset we are going to verify
      *
      * @return Verification $self Self reference
      */
@@ -442,8 +442,7 @@ class Verification
             return $this;
         }
 
-        $this->result[$this->pointer]['is_numerical_boolean'] =
-            ($this->data[$this->pointer] === 1) || ($this->data[$this->pointer] === 0) ||
+        $this->result[$this->pointer]['is_numerical_boolean'] = ($this->data[$this->pointer] === 1) || ($this->data[$this->pointer] === 0) ||
             ($this->data[$this->pointer] === '0') || ($this->data[$this->pointer] === '1');
 
         return $this;
@@ -480,8 +479,7 @@ class Verification
             return $this;
         }
 
-        $this->result[$this->pointer]['is_numerical_troolean'] =
-            ($this->data[$this->pointer] === 0) || ($this->data[$this->pointer] === 1) ||
+        $this->result[$this->pointer]['is_numerical_troolean'] = ($this->data[$this->pointer] === 0) || ($this->data[$this->pointer] === 1) ||
             ($this->data[$this->pointer] === 2) || ($this->data[$this->pointer] === '0') ||
             ($this->data[$this->pointer] === '1') || ($this->data[$this->pointer] === '2');
 
