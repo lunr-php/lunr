@@ -165,8 +165,9 @@ abstract class StreamSocket
             return $this;
         }
 
-        if(! in_array($wrapper, stream_get_wrappers() ) &&
-           ! in_array($wrapper, stream_get_transports()))
+        if(! in_array($wrapper, stream_get_wrappers())
+            && ! in_array($wrapper, stream_get_transports())
+        )
         {
             return $this;
         }
@@ -314,8 +315,8 @@ abstract class StreamSocket
             return NULL;
         }
 
-        $read_array   = $read      ? array($this->handle) : NULL;
-        $write_array  = $write     ? array($this->handle) : NULL;
+        $read_array   = $read ? array($this->handle) : NULL;
+        $write_array  = $write ? array($this->handle) : NULL;
         $except_array = $exception ? array($this->handle) : NULL;
 
         $changed = stream_select(

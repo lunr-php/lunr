@@ -90,7 +90,8 @@ class Mail
         // might be implied. So we check for a present domain by checking the
         // presence of the '@' character
         if((filter_var($email, FILTER_VALIDATE_EMAIL) === FALSE)
-            || (strpos($email, '@') === FALSE))
+            || (strpos($email, '@') === FALSE)
+        )
         {
             return FALSE;
         }

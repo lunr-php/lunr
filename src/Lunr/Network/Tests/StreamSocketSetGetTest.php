@@ -97,8 +97,8 @@ class StreamSocketSetGetTest extends StreamSocketTest
     {
         $options = [
             'http' => ['method' => 'POST'],
-            'ftp' => ['overwrite' => FALSE],
-            'tcp' => ['bindto' => '127.0.0.1:4321']
+            'ftp'  => ['overwrite' => FALSE],
+            'tcp'  => ['bindto' => '127.0.0.1:4321'],
         ];
 
         $this->class->set_context_options($options);

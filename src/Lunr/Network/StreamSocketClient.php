@@ -132,7 +132,7 @@ class StreamSocketClient extends StreamSocket
             return FALSE;
         }
 
-        stream_set_blocking($this->handle, $this->blocking ? 1: 0);
+        stream_set_blocking($this->handle, $this->blocking ? 1 : 0);
         stream_set_timeout($this->handle, $this->timeout_seconds, $this->timeout_microseconds);
         //update the metadata
         $this->meta_data = stream_get_meta_data($this->handle);
