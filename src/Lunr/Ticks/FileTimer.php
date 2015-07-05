@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Ticks
- * @subpackage Libraries
+ * @package    Lunr\Ticks
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Ticks;
 
 /**
  * Timer class, storing results in a file.
- *
- * @category   Libraries
- * @package    Ticks
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class FileTimer implements TimerInterface
 {
