@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Network
- * @subpackage Tests
+ * @package    Lunr\Network
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -19,12 +17,7 @@ namespace Lunr\Network\Tests;
 /**
  * This class contains basic test methods for the StreamSocket class.
  *
- * @category   Libraries
- * @package    Network
- * @subpackage Tests
- * @author     Olivier Wizen <olivier@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @covers     Lunr\Network\StreamSocket
+ * @covers Lunr\Network\StreamSocket
  */
 class StreamSocketBaseTest extends StreamSocketTest
 {

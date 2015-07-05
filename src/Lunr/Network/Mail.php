@@ -6,9 +6,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Network
- * @subpackage Libraries
+ * @package    Lunr\Network
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,11 +16,6 @@ namespace Lunr\Network;
 
 /**
  * Mail sender library
- *
- * @category   Libraries
- * @package    Network
- * @subpackage Libraries
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class Mail
 {

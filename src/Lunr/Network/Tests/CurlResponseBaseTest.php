@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Network
- * @subpackage Tests
+ * @package    Lunr\Network
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,11 +16,7 @@ namespace Lunr\Network\Tests;
 /**
  * This class contains test methods for the Curl class.
  *
- * @category   Libraries
- * @package    Network
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\Network\CurlResponse
+ * @covers Lunr\Network\CurlResponse
  */
 class CurlResponseBaseTest extends CurlResponseTest
 {

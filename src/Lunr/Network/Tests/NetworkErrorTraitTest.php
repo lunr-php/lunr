@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Network
- * @subpackage Tests
+ * @package    Lunr\Network
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -22,12 +20,7 @@ use ReflectionClass;
 /**
  * This class contains basic test methods for the StreamSocket class.
  *
- * @category   Libraries
- * @package    Network
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @covers     Lunr\Network\NetworkErrorTrait
+ * @covers Lunr\Network\NetworkErrorTrait
  */
 class NetworkErrorTraitTest extends LunrBaseTest
 {

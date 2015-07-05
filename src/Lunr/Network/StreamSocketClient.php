@@ -5,9 +5,7 @@
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Network
- * @subpackage Libraries
+ * @package    Lunr\Network
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2012, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Network;
 
 /**
  * Stream socket client wrapper class.
- *
- * @category   Libraries
- * @package    Network
- * @subpackage Libraries
- * @author     Olivier Wizen <olivier@m2mobi.com>
  */
 class StreamSocketClient extends StreamSocket
 {

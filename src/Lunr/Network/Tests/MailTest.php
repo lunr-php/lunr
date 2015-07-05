@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Network
- * @subpackage Tests
+ * @package    Lunr\Network
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2012-2014, M2Mobi BV, Amsterdam, The Netherlands
@@ -23,12 +21,7 @@ use ReflectionClass;
 /**
  * This class contains test methods for the Mail class.
  *
- * @category   Libraries
- * @package    Network
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @covers     Lunr\Network\Mail
+ * @covers Lunr\Network\Mail
  */
 abstract class MailTest extends LunrBaseTest
 {
