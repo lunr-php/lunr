@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Priority
- * @package    Spark
- * @subpackage Data
+ * @package    Lunr\Spark
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Spark;
 
 /**
  * Spark module data error types.
- *
- * @category   Priority
- * @package    Spark
- * @subpackage Data
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class DataError
 {

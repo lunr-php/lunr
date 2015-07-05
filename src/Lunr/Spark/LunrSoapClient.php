@@ -5,9 +5,7 @@
  *
  * PHP Version 5.6
  *
- * @category   Libraries
- * @package    Spark
- * @subpackage Soap
+ * @package    Lunr\Spark
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,6 @@ use SoapHeader;
 
 /**
  * Wrapper around SoapClient class.
- *
- * @category   Libraries
- * @package    Spark
- * @subpackage Soap
- * @author     Damien Tardy-Panis <damien@m2mobi.com>
  */
 class LunrSoapClient extends SoapClient
 {

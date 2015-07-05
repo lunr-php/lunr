@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Spark
- * @subpackage Tests
+ * @package    Lunr\Spark
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -20,11 +18,7 @@ use SoapHeader;
 /**
  * This class contains tests for the header functions of the LunrSoapClient class.
  *
- * @category   Libraries
- * @package    Spark
- * @subpackage Tests
- * @author     Damien Tardy-Panis <damien@m2mobi.com>
- * @covers     Lunr\Spark\LunrSoapClient
+ * @covers Lunr\Spark\LunrSoapClient
  */
 class LunrSoapClientHeaderTest extends LunrSoapClientTest
 {

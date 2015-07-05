@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Spark
- * @subpackage Contentful
+ * @package    Lunr\Spark\Contentful
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2015, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Spark\Contentful;
 
 /**
  * Low level Contentful API methods for Spark
- *
- * @category   Libraries
- * @package    Spark
- * @subpackage Contentful
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class DeliveryApi
 {

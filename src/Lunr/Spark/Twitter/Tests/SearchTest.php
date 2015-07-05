@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Spark
- * @subpackage Tests
+ * @package    Lunr\Spark\Twitter
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -22,11 +20,7 @@ use ReflectionClass;
 /**
  * This class contains the tests for the Search class.
  *
- * @category   Libraries
- * @package    Spark
- * @subpackage Tests
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @covers     Lunr\Spark\Twitter\Search
+ * @covers Lunr\Spark\Twitter\Search
  */
 abstract class SearchTest extends LunrBaseTest
 {

@@ -5,9 +5,7 @@
  *
  * PHP Version 5.4
  *
- * @category   Libraries
- * @package    Spark
- * @subpackage Facebook
+ * @package    Lunr\Spark\Facebook
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -17,11 +15,6 @@ namespace Lunr\Spark\Facebook;
 
 /**
  * Facebook Domains
- *
- * @category   Libraries
- * @package    Spark
- * @subpackage Facebook
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
  */
 class Domain
 {
