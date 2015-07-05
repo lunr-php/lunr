@@ -53,7 +53,7 @@ abstract class CliRequestParserTest extends LunrBaseTest
             'a'        => [],
             'required' => [[ 'value1', 'value2', 'value3' ]],
             'optional' => [ 'optional value' ],
-            'option'   => []
+            'option'   => [],
         ];
 
         $parser = $this->getMock('Lunr\Shadow\CliParserInterface');
