@@ -43,8 +43,8 @@ abstract class RequestTest extends LunrBaseTest
             'type'     => 'Type',
             'tmp_name' => 'Tmp',
             'error'    => 'Error',
-            'size'     => 'Size'
-        ]
+            'size'     => 'Size',
+        ],
     ];
 
     /**
@@ -113,7 +113,7 @@ abstract class RequestTest extends LunrBaseTest
             'params'           => [ 'param1', 'param2' ],
             'call'             => 'controller/method',
             'useragent'        => 'UserAgent',
-            'device_useragent' => 'Device UserAgent'
+            'device_useragent' => 'Device UserAgent',
         ];
 
         return $request;
@@ -126,7 +126,7 @@ abstract class RequestTest extends LunrBaseTest
      */
     public function requestValueProvider()
     {
-        $values   = [];
+        $values = [];
 
         foreach ($this->get_request_values() as $key => $value)
         {

@@ -121,7 +121,7 @@ class RequestGetTest extends RequestTest
     public function testGetAllOptionsReturnsArray($keys)
     {
         $values = array();
-        for ($i = 0; $i < sizeof($keys); $i++)
+        for ($i = 0; $i < count($keys); $i++)
         {
             $values[] = 'value';
         }

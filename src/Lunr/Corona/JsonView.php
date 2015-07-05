@@ -110,7 +110,7 @@ class JsonView extends View
         $json['status'] = [];
 
         $json['status']['code']    = 500;
-        $json['status']['message'] = $error['message'] . " in " . $error['file'] . " on line " . $error['line'];
+        $json['status']['message'] = $error['message'] . ' in ' . $error['file'] . ' on line ' . $error['line'];
 
         header('Content-type: application/json');
         http_response_code(500);

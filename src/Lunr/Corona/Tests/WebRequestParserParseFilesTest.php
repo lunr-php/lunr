@@ -68,19 +68,19 @@ class WebRequestParserParseFilesTest extends WebRequestParserTest
     public function testParseValidFilesValues()
     {
         $_FILES['test1'] = [
-            'name' => 'Name',
-            'type' => 'Type',
+            'name'     => 'Name',
+            'type'     => 'Type',
             'tmp_name' => 'Tmp',
-            'error' => 'Error',
-            'size' => 'Size'
+            'error'    => 'Error',
+            'size'     => 'Size',
         ];
 
         $_FILES['test2'] = [
-            'name' => 'Name2',
-            'type' => 'Type2',
+            'name'     => 'Name2',
+            'type'     => 'Type2',
             'tmp_name' => 'Tmp2',
-            'error' => 'Error2',
-            'size' => 'Size2'
+            'error'    => 'Error2',
+            'size'     => 'Size2',
         ];
 
         $cache = $_FILES;
@@ -98,19 +98,19 @@ class WebRequestParserParseFilesTest extends WebRequestParserTest
     public function testFilesEmptyAfterParse()
     {
         $_FILES['test1'] = [
-            'name' => 'Name',
-            'type' => 'Type',
+            'name'     => 'Name',
+            'type'     => 'Type',
             'tmp_name' => 'Tmp',
-            'error' => 'Error',
-            'size' => 'Size'
+            'error'    => 'Error',
+            'size'     => 'Size',
         ];
 
         $_FILES['test2'] = [
-            'name' => 'Name2',
-            'type' => 'Type2',
+            'name'     => 'Name2',
+            'type'     => 'Type2',
             'tmp_name' => 'Tmp2',
-            'error' => 'Error2',
-            'size' => 'Size2'
+            'error'    => 'Error2',
+            'size'     => 'Size2',
         ];
 
         $this->class->parse_files();

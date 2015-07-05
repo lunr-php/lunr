@@ -238,7 +238,8 @@ class Request
     public function get_get_data($key)
     {
         if (array_key_exists('get', $this->mock)
-            && array_key_exists($key, $this->mock['get']))
+            && array_key_exists($key, $this->mock['get'])
+        )
         {
             return $this->mock['get'][$key];
         }
@@ -256,7 +257,8 @@ class Request
     public function get_post_data($key)
     {
         if (array_key_exists('post', $this->mock)
-            && array_key_exists($key, $this->mock['post']))
+            && array_key_exists($key, $this->mock['post'])
+        )
         {
             return $this->mock['post'][$key];
         }

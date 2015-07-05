@@ -90,7 +90,8 @@ class WebRequestParser implements RequestParserInterface
         $baseurl = $request['protocol'] . '://' . $request['domain'];
 
         if ((($request['protocol'] == 'http') && ($request['port'] != 80))
-            || (($request['protocol'] == 'https') && ($request['port'] != 443)))
+            || (($request['protocol'] == 'https') && ($request['port'] != 443))
+        )
         {
             $baseurl .= ':' . $request['port'];
         }
@@ -107,7 +108,7 @@ class WebRequestParser implements RequestParserInterface
             'HTTP_X_SKYFIRE_PHONE',
             'HTTP_X_BOLT_PHONE_UA',
             'HTTP_DEVICE_STOCK_UA',
-            'HTTP_X_UCBROWSER_DEVICE_UA'
+            'HTTP_X_UCBROWSER_DEVICE_UA',
         ];
 
         foreach ($keys as $key)
@@ -169,7 +170,7 @@ class WebRequestParser implements RequestParserInterface
     /**
      * Parse super global variables.
      *
-     * @param Array &$_VAR Reference to a super global variable
+     * @param Array $_VAR Reference to a super global variable
      *
      * @return Array $var Parsed variable
      */
@@ -274,7 +275,7 @@ class WebRequestParser implements RequestParserInterface
      */
     public function parse_accept_format($supported = [])
     {
-        $this->header->name  = "Accept";
+        $this->header->name  = 'Accept';
         $this->header->value = $_SERVER['HTTP_ACCEPT'];
 
         return $this->header->negotiate($supported);
@@ -290,7 +291,7 @@ class WebRequestParser implements RequestParserInterface
      */
     public function parse_accept_language($supported = [])
     {
-        $this->header->name  = "Accept-Language";
+        $this->header->name  = 'Accept-Language';
         $this->header->value = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 
         return $this->header->negotiate($supported);
@@ -306,7 +307,7 @@ class WebRequestParser implements RequestParserInterface
      */
     public function parse_accept_charset($supported = [])
     {
-        $this->header->name  = "Accept-Charset";
+        $this->header->name  = 'Accept-Charset';
         $this->header->value = $_SERVER['HTTP_ACCEPT_CHARSET'];
 
         return $this->header->negotiate($supported);

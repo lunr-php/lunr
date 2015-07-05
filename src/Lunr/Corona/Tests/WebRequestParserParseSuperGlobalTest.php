@@ -35,7 +35,7 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
         $_VAR = $var;
 
         $method = $this->get_accessible_reflection_method('parse_super_global');
-        $result = $method->invokeArgs($this->class, [ &$_VAR ]);
+        $result = $method->invokeArgs($this->class, [ & $_VAR ]);
 
         $this->assertArrayEmpty($result);
     }
@@ -56,7 +56,7 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
         $_VAR = $var;
 
         $method = $this->get_accessible_reflection_method('parse_super_global');
-        $method->invokeArgs($this->class, [ &$_VAR ]);
+        $method->invokeArgs($this->class, [ & $_VAR ]);
 
         $this->assertArrayEmpty($_VAR);
     }
@@ -73,7 +73,7 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
         $cache         = $_VAR;
 
         $method = $this->get_accessible_reflection_method('parse_super_global');
-        $result = $method->invokeArgs($this->class, [ &$_VAR ]);
+        $result = $method->invokeArgs($this->class, [ & $_VAR ]);
 
         $this->assertEquals($cache, $result);
     }
@@ -89,7 +89,7 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
         $_VAR['test2'] = 'value2';
 
         $method = $this->get_accessible_reflection_method('parse_super_global');
-        $method->invokeArgs($this->class, [ &$_VAR ]);
+        $method->invokeArgs($this->class, [ & $_VAR ]);
 
         $this->assertArrayEmpty($_VAR);
     }

@@ -25,7 +25,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      * Runkit simulation code for no error.
      * @var String
      */
-    const NO_ERROR = "return NULL;";
+    const NO_ERROR = 'return NULL;';
 
     /**
      * Runkit simulation code for non-fatal error.
@@ -49,7 +49,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
     {
         $this->mock_function('error_get_last', self::NO_ERROR);
 
-        $this->expectOutputString("");
+        $this->expectOutputString('');
 
         $this->class->print_fatal_error();
 
@@ -66,7 +66,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
     {
         $this->mock_function('error_get_last', self::ERROR);
 
-        $this->expectOutputString("");
+        $this->expectOutputString('');
 
         $this->class->print_fatal_error();
 
