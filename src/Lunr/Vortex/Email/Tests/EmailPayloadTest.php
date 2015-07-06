@@ -37,8 +37,8 @@ abstract class EmailPayloadTest extends LunrBaseTest
     public function setUp()
     {
         $elements_array = [
-                'subject' => 'value1',
-                'body'    => 'value2'
+            'subject' => 'value1',
+            'body'    => 'value2',
         ];
 
         $this->payload = json_encode($elements_array);

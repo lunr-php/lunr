@@ -65,7 +65,7 @@ class APNSResponseSetTest extends APNSResponseTest
         $context = [
             'endpoint'    => 'URL',
             'code'        => $expected,
-            'description' => $msg
+            'description' => $msg,
         ];
 
         $message  = 'Push notification delivery status for endpoint {endpoint}: ';

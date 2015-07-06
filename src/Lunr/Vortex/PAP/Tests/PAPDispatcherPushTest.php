@@ -13,7 +13,6 @@
 
 namespace Lunr\Vortex\PAP\Tests;
 
-
 /**
  * This class contains test for the push() method of the PAPDispatcher class.
  *

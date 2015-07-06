@@ -47,8 +47,8 @@ class GCMPayloadGetTest extends GCMPayloadTest
         $elements = [
             'data' => [
                 'key1' => 'value1',
-                'key2' => 'value2'
-            ]
+                'key2' => 'value2',
+            ],
         ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -81,12 +81,12 @@ class GCMPayloadGetTest extends GCMPayloadTest
         $file     = TEST_STATICS . '/Vortex/gcm.json';
         $elements = [
             'registration_ids' => [ 'one', 'two', 'three' ],
-            'collapse_key' => 'test',
-            'data' => [
+            'collapse_key'     => 'test',
+            'data'             => [
                 'key1' => 'value1',
-                'key2' => 'value2'
+                'key2' => 'value2',
             ],
-            'time_to_live' => 10
+            'time_to_live'     => 10,
         ];
 
         $this->set_reflection_property_value('elements', $elements);

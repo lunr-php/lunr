@@ -13,7 +13,6 @@
 
 namespace Lunr\Vortex\GCM\Tests;
 
-
 /**
  * This class contains test for the push() method of the GCMDispatcher class.
  *

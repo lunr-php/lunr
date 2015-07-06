@@ -67,11 +67,31 @@ abstract class APNSResponseTest extends LunrBaseTest
     public function failedRequestProvider()
     {
         $requests   = [];
-        $requests[] = [ APNSStatus::APN_ERR_TOKEN_IS_NOT_SET, 'no device tokens given', PushNotificationStatus::INVALID_ENDPOINT ];
-        $requests[] = [ APNSStatus::APN_ERR_TOKEN_INVALID, 'invalid device token', PushNotificationStatus::INVALID_ENDPOINT ];
-        $requests[] = [ APNSStatus::APN_ERR_PROCESSING_ERROR, 'processing error', PushNotificationStatus::TEMPORARY_ERROR ];
-        $requests[] = [ APNSStatus::APN_ERR_UNKNOWN, 'unknown error', PushNotificationStatus::UNKNOWN ];
-        $requests[] = [ APNSStatus::APN_ERR_UNABLE_TO_USE_SPECIFIED_CERTIFICATE, 'unable to use specified SSL certificate', PushNotificationStatus::ERROR ];
+        $requests[] = [
+            APNSStatus::APN_ERR_TOKEN_IS_NOT_SET,
+            'no device tokens given',
+            PushNotificationStatus::INVALID_ENDPOINT,
+        ];
+        $requests[] = [
+            APNSStatus::APN_ERR_TOKEN_INVALID,
+            'invalid device token',
+            PushNotificationStatus::INVALID_ENDPOINT,
+        ];
+        $requests[] = [
+            APNSStatus::APN_ERR_PROCESSING_ERROR,
+            'processing error',
+            PushNotificationStatus::TEMPORARY_ERROR,
+        ];
+        $requests[] = [
+            APNSStatus::APN_ERR_UNKNOWN,
+            'unknown error',
+            PushNotificationStatus::UNKNOWN,
+        ];
+        $requests[] = [
+            APNSStatus::APN_ERR_UNABLE_TO_USE_SPECIFIED_CERTIFICATE,
+            'unable to use specified SSL certificate',
+            PushNotificationStatus::ERROR,
+        ];
 
         return $requests;
     }

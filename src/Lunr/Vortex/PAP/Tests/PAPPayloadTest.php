@@ -39,8 +39,8 @@ abstract class PAPPayloadTest extends LunrBaseTest
         $elements_array = [
             'message' => [
                 'key1' => 'value1',
-                'key2' => 'value2'
-            ]
+                'key2' => 'value2',
+            ],
         ];
 
         $this->payload = json_encode($elements_array);

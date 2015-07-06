@@ -100,7 +100,7 @@ class APNSResponse
             $context = [
                 'endpoint'    => $endpoint,
                 'code'        => $this->status,
-                'description' => $this->result
+                'description' => $this->result,
             ];
 
             $message  = 'Push notification delivery status for endpoint {endpoint}: ';

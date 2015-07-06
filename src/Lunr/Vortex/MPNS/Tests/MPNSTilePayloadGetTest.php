@@ -120,12 +120,12 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
     {
         $file     = TEST_STATICS . '/Vortex/mpns_tile.xml';
         $elements = [
-            'title' => 'Title',
-            'background_image' => 'BgImage',
-            'count' => 'Count',
+            'title'                 => 'Title',
+            'background_image'      => 'BgImage',
+            'count'                 => 'Count',
             'back_background_image' => 'BkBgImage',
-            'back_title' => 'Back Title',
-            'back_content' => 'Back Content'
+            'back_title'            => 'Back Title',
+            'back_content'          => 'Back Content',
         ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -142,13 +142,13 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
     {
         $file     = TEST_STATICS . '/Vortex/mpns_tile_id.xml';
         $elements = [
-            'title' => 'Title',
-            'background_image' => 'BgImage',
-            'count' => 'Count',
+            'title'                 => 'Title',
+            'background_image'      => 'BgImage',
+            'count'                 => 'Count',
             'back_background_image' => 'BkBgImage',
-            'back_title' => 'Back Title',
-            'back_content' => 'Back Content',
-            'id' => 'ID'
+            'back_title'            => 'Back Title',
+            'back_content'          => 'Back Content',
+            'id'                    => 'ID',
         ];
 
         $this->set_reflection_property_value('elements', $elements);

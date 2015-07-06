@@ -62,9 +62,9 @@ class PAPResponseSetTest extends PAPResponseTest
         $this->set_reflection_property_value('result', 'something');
 
         $context = [
-            'endpoint' => 'URL',
-            'code' => $expected,
-            'description' => 'something'
+            'endpoint'    => 'URL',
+            'code'        => $expected,
+            'description' => 'something',
         ];
 
         $message  = 'Push notification delivery status for endpoint {endpoint}: ';
@@ -99,7 +99,7 @@ class PAPResponseSetTest extends PAPResponseTest
         $context = [
             'code'        => 5,
             'endpoint'    => 'URL',
-            'description' => 'Invalid or missing attribute address-value'
+            'description' => 'Invalid or missing attribute address-value',
         ];
 
         $message  = 'Push notification delivery status for endpoint {endpoint}: ';
@@ -134,7 +134,7 @@ class PAPResponseSetTest extends PAPResponseTest
         $context = [
             'code'        => 3,
             'endpoint'    => 'URL',
-            'description' => 'The specified PIN is not recognized'
+            'description' => 'The specified PIN is not recognized',
         ];
 
         $message  = 'Push notification delivery status for endpoint {endpoint}: ';
@@ -169,7 +169,7 @@ class PAPResponseSetTest extends PAPResponseTest
         $context = [
             'code'        => 2,
             'endpoint'    => 'URL',
-            'description' => 'The server is busy'
+            'description' => 'The server is busy',
         ];
 
         $message  = 'Push notification delivery status for endpoint {endpoint}: ';
@@ -204,7 +204,7 @@ class PAPResponseSetTest extends PAPResponseTest
         $context = [
             'code'        => 0,
             'endpoint'    => 'URL',
-            'description' => 'The RIM specific request is badly formed'
+            'description' => 'The RIM specific request is badly formed',
         ];
 
         $message  = 'Push notification delivery status for endpoint {endpoint}: ';

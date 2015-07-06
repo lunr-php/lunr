@@ -13,7 +13,6 @@
 
 namespace Lunr\Vortex\Email\Tests;
 
-
 /**
  * This class contains test for the push() method of the EmailDispatcher class.
  *

@@ -106,9 +106,9 @@ class GCMResponse
         if ($this->status !== PushNotificationStatus::SUCCESS)
         {
             $context = [
-                'endpoint' => $endpoint,
-                'code' => $this->status,
-                'description' => $this->result
+                'endpoint'    => $endpoint,
+                'code'        => $this->status,
+                'description' => $this->result,
             ];
 
             $message  = 'Push notification delivery status for endpoint {endpoint}: ';
@@ -124,7 +124,7 @@ class GCMResponse
             {
                 $context = [
                     'failure' => $failures['failure'],
-                    'errors' => json_encode($failures['messages'])
+                    'errors'  => json_encode($failures['messages']),
                 ];
 
                 $message  = '{failure} push notification(s) failed with the following ';

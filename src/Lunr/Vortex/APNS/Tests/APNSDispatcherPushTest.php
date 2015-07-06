@@ -13,7 +13,6 @@
 
 namespace Lunr\Vortex\APNS\Tests;
 
-
 /**
  * This class contains test for the push() method of the APNSDispatcher class.
  *
@@ -21,6 +20,8 @@ namespace Lunr\Vortex\APNS\Tests;
  */
 class APNSDispatcherPushTest extends APNSDispatcherTest
 {
+
+    protected $payload = '{"alert":"apnsmessage","badge":10,"sound":"bingbong.wav","custom_data":{"key1":"value1","key2":"value2"}}';
 
     /**
      * Test that push() returns APNSResponseObject.
@@ -30,7 +31,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
     public function testPushReturnsAPNSResponseObject()
     {
         $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', '{"alert":"apnsmessage","badge":10,"sound":"bingbong.wav","custom_data":{"key1":"value1","key2":"value2"}}');
+        $this->set_reflection_property_value('payload', $this->payload);
         $this->set_reflection_property_value('certificate', 'certificate');
         $this->set_reflection_property_value('passphrase', 'passphrase');
         $this->set_reflection_property_value('setup', FALSE);
@@ -57,7 +58,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
     public function testPushResetsProperties()
     {
         $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', '{"alert":"apnsmessage","badge":10,"sound":"bingbong.wav","custom_data":{"key1":"value1","key2":"value2"}}');
+        $this->set_reflection_property_value('payload', $this->payload);
         $this->set_reflection_property_value('certificate', 'certificate');
         $this->set_reflection_property_value('passphrase', 'passphrase');
         $this->set_reflection_property_value('setup', FALSE);

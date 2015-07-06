@@ -30,8 +30,8 @@ class EmailPayloadGetTest extends EmailPayloadTest
     {
         $file     = TEST_STATICS . '/Vortex/email_payload.json';
         $elements = [
-                'subject' => 'value1',
-                'body'    => 'value2'
+            'subject' => 'value1',
+            'body'    => 'value2',
         ];
 
         $this->set_reflection_property_value('elements', $elements);

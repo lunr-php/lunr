@@ -141,9 +141,9 @@ class MPNSResponseSetTest extends MPNSResponseTest
 
         $context = [
             'endpoint' => 'URL',
-            'nstatus' => $nstatus,
-            'dstatus' => 'N/A',
-            'sstatus' => 'N/A'
+            'nstatus'  => $nstatus,
+            'dstatus'  => 'N/A',
+            'sstatus'  => 'N/A',
         ];
 
         $message  = 'Push notification delivery status for endpoint {endpoint}: ';

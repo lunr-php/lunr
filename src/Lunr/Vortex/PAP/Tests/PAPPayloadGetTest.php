@@ -30,8 +30,8 @@ class PAPPayloadGetTest extends PAPPayloadTest
     {
         $file     = TEST_STATICS . '/Vortex/pap_message.json';
         $elements = [
-                'key1' => 'value1',
-                'key2' => 'value2'
+            'key1' => 'value1',
+            'key2' => 'value2',
         ];
 
         $this->set_reflection_property_value('data', $elements);

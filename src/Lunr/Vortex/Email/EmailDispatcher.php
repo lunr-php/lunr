@@ -133,7 +133,7 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the the payload to email.
      *
-     * @param String &$payload The reference to the payload of the email
+     * @param String $payload The reference to the payload of the email
      *
      * @return EmailDispatcher $self Self reference
      */

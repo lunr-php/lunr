@@ -38,12 +38,12 @@ class GCMPayloadTest extends LunrBaseTest
     {
         $elements_array = [
             'registration_ids' => [ 'one', 'two', 'three' ],
-            'collapse_key' => 'test',
-            'data' => [
+            'collapse_key'     => 'test',
+            'data'             => [
                 'key1' => 'value1',
-                'key2' => 'value2'
+                'key2' => 'value2',
             ],
-            'time_to_live' => 10
+            'time_to_live'     => 10,
         ];
 
         $this->payload = json_encode($elements_array);

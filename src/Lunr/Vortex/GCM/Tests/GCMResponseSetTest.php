@@ -62,9 +62,9 @@ class GCMResponseSetTest extends GCMResponseTest
         $this->set_reflection_property_value('result', 'something');
 
         $context = [
-            'endpoint' => 'URL',
-            'code' => $expected,
-            'description' => 'something'
+            'endpoint'    => 'URL',
+            'code'        => $expected,
+            'description' => 'something',
         ];
 
         $message  = 'Push notification delivery status for endpoint {endpoint}: ';
@@ -97,7 +97,7 @@ class GCMResponseSetTest extends GCMResponseTest
 
         $context = [
             'failure' => 1,
-            'errors' => '["InvalidRegistration"]'
+            'errors'  => '["InvalidRegistration"]',
         ];
 
         $message  = '{failure} push notification(s) failed with the following ';

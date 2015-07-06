@@ -77,9 +77,9 @@ class MPNSResponse
     /**
      * Parse response header information.
      *
+     * @param \http\Header $header      Instance of a Header class.
      * @param String       $result      Response result
      * @param Integer      $header_size Size of the header
-     * @param \http\Header $header      Instance of a Header class.
      *
      * @return void
      */
@@ -149,9 +149,9 @@ class MPNSResponse
         {
             $context = [
                 'endpoint' => $endpoint,
-                'nstatus' => $this->headers['X-Notificationstatus'],
-                'dstatus' => $this->headers['X-Deviceconnectionstatus'],
-                'sstatus' => $this->headers['X-Subscriptionstatus']
+                'nstatus'  => $this->headers['X-Notificationstatus'],
+                'dstatus'  => $this->headers['X-Deviceconnectionstatus'],
+                'sstatus'  => $this->headers['X-Subscriptionstatus'],
             ];
 
             $message  = 'Push notification delivery status for endpoint {endpoint}: ';

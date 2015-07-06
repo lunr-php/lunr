@@ -40,7 +40,7 @@ interface PushNotificationDispatcherInterface
     /**
      * Set the the payload to push.
      *
-     * @param String &$payload The reference to the payload of the push
+     * @param String $payload The reference to the payload of the push
      *
      * @return PushNotificationDispatcherInterface $self Self reference
      */

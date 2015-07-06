@@ -135,9 +135,9 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
         $this->curl->set_option('CURLOPT_USERPWD', $this->auth_token . ':' . $this->password);
         $this->curl->set_option('CURLOPT_RETURNTRANSFER', TRUE);
 
-        $this->curl->set_http_header("Content-Type: multipart/related; boundary=" . self::PAP_BOUNDARY . "; type=application/xml");
-        $this->curl->set_http_header("Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2");
-        $this->curl->set_http_header("Connection: keep-alive");
+        $this->curl->set_http_header('Content-Type: multipart/related; boundary=' . self::PAP_BOUNDARY . '; type=application/xml');
+        $this->curl->set_http_header('Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2');
+        $this->curl->set_http_header('Connection: keep-alive');
 
         $response = $this->curl->post_request($pap_url, $pap_data);
 
@@ -154,19 +154,22 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Constructs the control XML of the PAP request.
      *
-     * @return String $pap_control The control XML populated with all relevant values
+     * @return String $xml The control XML populated with all relevant values
      */
     protected function construct_pap_control_xml()
     {
         // construct PAP control xml
-        $pap_control  = "<?xml version=\"1.0\"?>\n";
-        $pap_control .= "<!DOCTYPE pap PUBLIC \"-//WAPFORUM//DTD PAP 2.1//EN\" \"http://www.openmobilealliance.org/tech/DTD/pap_2.1.dtd\">\n";
-        $pap_control .= "<pap>\n<push-message push-id=\"{$this->push_id}\" source-reference=\"{$this->auth_token}\" deliver-before-timestamp=\"{$this->deliverbefore}\">\n";
-        $pap_control .= "<address address-value=\"{$this->endpoint}\"/>\n";
-        $pap_control .= "<quality-of-service delivery-method=\"unconfirmed\"/>\n";
-        $pap_control .= "</push-message>\n</pap>\n";
+        // @codingStandardsIgnoreStart
+        $xml  = "<?xml version=\"1.0\"?>\n";
+        $xml .= "<!DOCTYPE pap PUBLIC \"-//WAPFORUM//DTD PAP 2.1//EN\" \"http://www.openmobilealliance.org/tech/DTD/pap_2.1.dtd\">\n";
+        $xml .= "<pap>\n";
+        $xml .= "<push-message push-id=\"{$this->push_id}\" source-reference=\"{$this->auth_token}\" deliver-before-timestamp=\"{$this->deliverbefore}\">\n";
+        $xml .= "<address address-value=\"{$this->endpoint}\"/>\n";
+        $xml .= "<quality-of-service delivery-method=\"unconfirmed\"/>\n";
+        $xml .= "</push-message>\n</pap>\n";
+        // @codingStandardsIgnoreEnd
 
-        return $pap_control;
+        return $xml;
     }
 
     /**
@@ -184,14 +187,14 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
         $this->payload     = json_encode($tmp_payload);
 
         // construct custom headers; inject control xml & payload
-        $data = '--' . self::PAP_BOUNDARY . "\r\n" .
-                "Content-Type: application/xml; charset=UTF-8\r\n\r\n" .
-                $this->construct_pap_control_xml() .
-                "\r\n--" . self::PAP_BOUNDARY . "\r\n" .
-                "Content-Type: text/plain\r\n" .
-                'Push-Message-ID: ' . $this->push_id . "\r\n\r\n" .
-                $this->payload .
-                "\r\n--" . self::PAP_BOUNDARY . "--\n\r";
+        $data  = '--' . self::PAP_BOUNDARY . "\r\n";
+        $data .= "Content-Type: application/xml; charset=UTF-8\r\n\r\n";
+        $data .= $this->construct_pap_control_xml() . "\r\n--";
+        $data .= self::PAP_BOUNDARY . "\r\n";
+        $data .= "Content-Type: text/plain\r\n";
+        $data .= 'Push-Message-ID: ' . $this->push_id . "\r\n\r\n";
+        $data .= $this->payload . "\r\n--";
+        $data .= self::PAP_BOUNDARY . "--\n\r";
 
         return $data;
     }
@@ -213,7 +216,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the the payload to push.
      *
-     * @param String &$payload The reference to the payload of the push
+     * @param String $payload The reference to the payload of the push
      *
      * @return PAPDispatcher $self Self reference
      */
