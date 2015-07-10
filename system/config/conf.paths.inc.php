@@ -53,6 +53,10 @@ else
                         ? 'https'
                         : 'http';
 
+    $config['protocol'] = (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+                        ? 'https'
+                        : $config['protocol'];
+
     $config['base_url'] = $config['protocol'] . '://' . $_SERVER['SERVER_NAME'];
     //$config['base_url'] .= ":" . $_SERVER['SERVER_PORT'];
     $config['base_url'] .= $config['base_path'];
