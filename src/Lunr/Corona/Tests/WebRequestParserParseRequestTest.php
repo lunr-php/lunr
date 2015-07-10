@@ -52,7 +52,30 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
         $this->mock_function('gethostname', self::GET_HOSTNAME);
 
         $_SERVER['SCRIPT_NAME'] = '/path/to/index.php';
-        $_SERVER['HTTPS']       = $protocol === 'HTTPS' ? 'on' : 'off';
+
+        if ($protocol == 'TERMINATED_HTTPS')
+        {
+            $_SERVER['HTTP_X_FORWARDED_PROTO'] = 'https';
+        }
+        else if ($protocol == 'PROXIED_HTTP')
+        {
+            $_SERVER['HTTP_X_FORWARDED_PROTO'] = 'http';
+        }
+        else if ($protocol == 'MIXED_HTTPS')
+        {
+            $_SERVER['HTTP_X_FORWARDED_PROTO'] = 'https';
+            $_SERVER['HTTPS']                  = 'off';
+        }
+        else if ($protocol == 'MIXED_HTTP')
+        {
+            $_SERVER['HTTP_X_FORWARDED_PROTO'] = 'http';
+            $_SERVER['HTTPS']                  = 'on';
+        }
+        else
+        {
+            $_SERVER['HTTPS'] = $protocol === 'HTTPS' ? 'on' : 'off';
+        }
+
         $_SERVER['SERVER_NAME'] = 'www.domain.com';
         $_SERVER['SERVER_PORT'] = $port;
 
@@ -274,6 +297,120 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
         $this->set_reflection_property_value('request_parsed', TRUE);
 
         $this->assertArrayEmpty($this->class->parse_request());
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() returns correct protocol for http request.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testParseRequestForHttpRequest()
+    {
+        $this->prepare_request_test('HTTP', '80');
+        $this->prepare_request_data(TRUE, TRUE, TRUE);
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('protocol', $request);
+        $this->assertEquals('http', $request['protocol']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() returns correct protocol for https request.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testParseRequestForHttpsRequest()
+    {
+        $this->prepare_request_test('HTTPS', '443');
+        $this->prepare_request_data(TRUE, TRUE, TRUE);
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('protocol', $request);
+        $this->assertEquals('https', $request['protocol']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() returns correct protocol for proxied http request.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testParseRequestForProxiedHttpRequest()
+    {
+        $this->prepare_request_test('PROXIED_HTTP', '80');
+        $this->prepare_request_data(TRUE, TRUE, TRUE);
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('protocol', $request);
+        $this->assertEquals('http', $request['protocol']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() returns correct protocol for terminated https request.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testParseRequestForSSLterminationRequest()
+    {
+        $this->prepare_request_test('TERMINATED_HTTPS', '443');
+        $this->prepare_request_data(TRUE, TRUE, TRUE);
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('protocol', $request);
+        $this->assertEquals('https', $request['protocol']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() returns correct protocol for proxied https request.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testParseRequestForProxiedHttpsRequest()
+    {
+        $this->prepare_request_test('MIXED_HTTPS', '443');
+        $this->prepare_request_data(TRUE, TRUE, TRUE);
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('protocol', $request);
+        $this->assertEquals('https', $request['protocol']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() returns correct protocol for proxied http request.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testParseRequestForproxiedMixedHttpRequest()
+    {
+        $this->prepare_request_test('MIXED_HTTP', '443');
+        $this->prepare_request_data(TRUE, TRUE, TRUE);
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('protocol', $request);
+        $this->assertEquals('http', $request['protocol']);
 
         $this->cleanup_request_test();
     }
