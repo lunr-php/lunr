@@ -107,10 +107,11 @@ class ApiGetJsonResultsTest extends ApiTest
     public function testGetJsonResultsThrowsErrorIfRequestHadError()
     {
         $output = [
-            'errors' => [[
-                'message' => 'Message',
-                'code'    => 'Code',
-            ],
+            'errors' => [
+                [
+                    'message' => 'Message',
+                    'code'    => 'Code',
+                ],
             ],
         ];
 
