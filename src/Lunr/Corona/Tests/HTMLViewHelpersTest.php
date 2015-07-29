@@ -39,7 +39,8 @@ class HTMLViewHelpersTest extends HTMLViewTest
     /**
      * Test generating stylesheet include links for one stylesheet.
      *
-     * @covers Lunr\Corona\HTMLView::include_stylesheets
+     * @requires extension runkit
+     * @covers   Lunr\Corona\HTMLView::include_stylesheets
      */
     public function testIncludeStylesheetsWithOneStylesheet()
     {
@@ -47,21 +48,99 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $method = $this->get_accessible_reflection_method('include_stylesheets');
 
+        $this->request->expects($this->at(0))
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->at(1))
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->mock_function('filemtime', 'return 1438183002;');
+
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/stylesheet_1.html', $method->invoke($this->class));
+
+        $this->unmock_function('filemtime');
     }
 
     /**
      * Test generating stylesheet include links for multiple stylesheets.
      *
-     * @covers Lunr\Corona\HTMLView::include_stylesheets
+     * @requires extension runkit
+     * @covers   Lunr\Corona\HTMLView::include_stylesheets
      */
     public function testIncludeStylesheetsWithMultipleStylesheets()
     {
-        $this->set_reflection_property_value('stylesheets', [ 'style1.css', 'style2.css' ]);
+        $this->set_reflection_property_value('stylesheets', [ 'style2.css', 'style1.css' ]);
 
         $method = $this->get_accessible_reflection_method('include_stylesheets');
 
+        $this->request->expects($this->at(0))
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->at(1))
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->request->expects($this->at(2))
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->at(3))
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->mock_function('filemtime', 'return 1438183002;');
+
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/stylesheet_2.html', $method->invoke($this->class));
+
+        $this->unmock_function('filemtime');
+    }
+
+    /**
+     * Test generating stylesheet include links for multiple sorted stylesheets.
+     *
+     * @requires extension runkit
+     * @covers   Lunr\Corona\HTMLView::include_stylesheets
+     */
+    public function testIncludeStylesheetsWithMultipleStylesheetsSorted()
+    {
+        $this->set_reflection_property_value('stylesheets', [ 'style2.css', 'style1.css' ]);
+
+        $method = $this->get_accessible_reflection_method('include_stylesheets');
+
+        $this->request->expects($this->at(0))
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->at(1))
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->request->expects($this->at(2))
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->at(3))
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->mock_function('filemtime', 'return 1438183002;');
+
+        $this->assertStringEqualsFile(TEST_STATICS . '/Corona/stylesheet_3.html', $method->invokeArgs($this->class, [ TRUE ]));
+
+        $this->unmock_function('filemtime');
     }
 
     /**
@@ -81,7 +160,8 @@ class HTMLViewHelpersTest extends HTMLViewTest
     /**
      * Test generating javascript include links for one javascript file.
      *
-     * @covers Lunr\Corona\HTMLView::include_javascript
+     * @requires extension runkit
+     * @covers   Lunr\Corona\HTMLView::include_javascript
      */
     public function testIncludeJavascriptWithOneJSFile()
     {
@@ -89,21 +169,99 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $method = $this->get_accessible_reflection_method('include_javascript');
 
+        $this->request->expects($this->at(0))
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->at(1))
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->mock_function('filemtime', 'return 1438183002;');
+
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/javascript_1.html', $method->invoke($this->class));
+
+        $this->unmock_function('filemtime');
     }
 
     /**
      * Test generating javascript include links for multiple javascript files.
      *
-     * @covers Lunr\Corona\HTMLView::include_javascript
+     * @requires extension runkit
+     * @covers   Lunr\Corona\HTMLView::include_javascript
      */
     public function testIncludeJavascriptWithMultipleJSFiles()
     {
-        $this->set_reflection_property_value('javascript', [ 'script1.js', 'script2.js' ]);
+        $this->set_reflection_property_value('javascript', [ 'script2.js', 'script1.js' ]);
 
         $method = $this->get_accessible_reflection_method('include_javascript');
 
+        $this->request->expects($this->at(0))
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->at(1))
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->request->expects($this->at(2))
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->at(3))
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->mock_function('filemtime', 'return 1438183002;');
+
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/javascript_2.html', $method->invoke($this->class));
+
+        $this->unmock_function('filemtime');
+    }
+
+    /**
+     * Test generating javascript include links for multiple sorted javascript files.
+     *
+     * @requires extension runkit
+     * @covers   Lunr\Corona\HTMLView::include_javascript
+     */
+    public function testIncludeJavascriptWithMultipleJSFilesSorted()
+    {
+        $this->set_reflection_property_value('javascript', [ 'script2.js', 'script1.js' ]);
+
+        $method = $this->get_accessible_reflection_method('include_javascript');
+
+        $this->request->expects($this->at(0))
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->at(1))
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->request->expects($this->at(2))
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->at(3))
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->mock_function('filemtime', 'return 1438183002;');
+
+        $this->assertStringEqualsFile(TEST_STATICS . '/Corona/javascript_3.html', $method->invokeArgs($this->class, [ TRUE ]));
+
+        $this->unmock_function('filemtime');
     }
 
     /**

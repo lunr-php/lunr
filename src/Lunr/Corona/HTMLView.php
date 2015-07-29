@@ -61,15 +61,23 @@ abstract class HTMLView extends View
     /**
      * Generate css include statements.
      *
+     * @param Boolean $sort Whether to sort the list of css files or not
+     *
      * @return String $links Generated html code for including css stylesheets
      */
-    protected function include_stylesheets()
+    protected function include_stylesheets($sort = FALSE)
     {
         $links = '';
 
+        if ($sort === TRUE)
+        {
+            sort($this->stylesheets);
+        }
+
         foreach($this->stylesheets as $stylesheet)
         {
-            $links .= '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '">' . "\n";
+            $stylesheet .= '?' . filemtime($this->request->application_path . str_replace($this->request->base_path, '', $stylesheet));
+            $links      .= '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '">' . "\n";
         }
 
         return $links;
@@ -78,14 +86,22 @@ abstract class HTMLView extends View
     /**
      * Generate javascript include statements.
      *
+     * @param Boolean $sort Whether to sort the list of js files or not
+     *
      * @return String $links Generated html code for including javascript
      */
-    protected function include_javascript()
+    protected function include_javascript($sort = FALSE)
     {
         $links = '';
 
+        if ($sort === TRUE)
+        {
+            sort($this->javascript);
+        }
+
         foreach($this->javascript as $js)
         {
+            $js    .= '?' . filemtime($this->request->application_path . str_replace($this->request->base_path, '', $js));
             $links .= '<script src="' . $js . '"></script>' . "\n";
         }
 
