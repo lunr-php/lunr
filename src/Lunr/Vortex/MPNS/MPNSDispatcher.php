@@ -146,7 +146,7 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
      *
      * @return MPNSDispatcher $self Self reference
      */
-    public function set_payload($payload)
+    public function set_payload(&$payload)
     {
         $this->payload =& $payload;
 
