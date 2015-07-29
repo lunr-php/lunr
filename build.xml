@@ -3,6 +3,8 @@
     <property name="system" value="src/Lunr" />
     <property name="tests" value="tests" />
 
+    <property name="coding_standard" value="../lunr-coding-standard"/>
+
     <target name="clean"
             description="Cleanup and create build directories">
         <delete dir="${basedir}/build" />
@@ -87,8 +89,8 @@
     <target name="phpcs"
             description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
         <exec executable="phpcs">
-            <arg value="--standard=Lunr" />
-            <arg value="--ignore=*/html\..*" />
+            <arg value="--standard=${coding_standard}/Lunr/" />
+            <arg value="--ignore=html\.*" />
             <arg path="${system}" />
         </exec>
     </target>
@@ -98,8 +100,17 @@
         <exec executable="phpcs" output="/dev/null">
             <arg value="--report=checkstyle" />
             <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
-            <arg value="--standard=Lunr" />
-            <arg value="--ignore=*/html\..*" />
+            <arg value="--standard=${coding_standard}/Lunr/" />
+            <arg value="--ignore=html\.*" />
+            <arg path="${system}" />
+        </exec>
+    </target>
+
+    <target name="phpcbf"
+            description="Fixing coding standard violations using PHP Code Beautifier and Fixer. Intended for usage on the command line before committing.">
+        <exec executable="phpcbf">
+            <arg value="--standard=${coding_standard}/Lunr/" />
+            <arg value="--ignore=html\.*" />
             <arg path="${system}" />
         </exec>
     </target>
