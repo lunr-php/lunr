@@ -49,6 +49,8 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
             $this->markTestSkipped('Extension runkit is required.');
         }
 
+        $_SERVER['SCRIPT_FILENAME'] = '/full/path/to/index.php';
+
         $this->mock_function('gethostname', self::GET_HOSTNAME);
 
         $this->configuration->expects($this->at(0))

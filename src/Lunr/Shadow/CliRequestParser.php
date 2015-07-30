@@ -78,6 +78,8 @@ class CliRequestParser implements RequestParserInterface
         $request['sapi'] = PHP_SAPI;
         $request['host'] = gethostname();
 
+        $request['application_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']);
+
         $request['base_path'] = $this->config['default_webpath'];
         $request['protocol']  = $this->config['default_protocol'];
         $request['domain']    = $this->config['default_domain'];
