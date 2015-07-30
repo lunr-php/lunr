@@ -107,6 +107,22 @@ trait RequestParserStaticRequestTestTrait
     }
 
     /**
+     * Test that the application_path is constructed and stored correctly.
+     */
+    public function testApplicationPath()
+    {
+        $this->prepare_request_test();
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('application_path', $request);
+        $this->assertEquals('/full/path/to/', $request['application_path']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
      * Test that the base_path is constructed and stored correctly.
      */
     public function testRequestBasePath()
