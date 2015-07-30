@@ -80,6 +80,8 @@ class WebRequestParser implements RequestParserInterface
         $request['sapi'] = PHP_SAPI;
         $request['host'] = gethostname();
 
+        $request['application_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']);
+
         $request['base_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
         $request['protocol'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';

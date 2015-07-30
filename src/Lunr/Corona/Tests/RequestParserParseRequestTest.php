@@ -53,20 +53,25 @@ class RequestParserParseRequestTest extends RequestParserTest
 
         $this->configuration->expects($this->at(0))
                             ->method('offsetGet')
+                            ->with($this->equalTo('default_application_path'))
+                            ->will($this->returnValue('/full/path/to/'));
+
+        $this->configuration->expects($this->at(1))
+                            ->method('offsetGet')
                             ->with($this->equalTo('default_webpath'))
                             ->will($this->returnValue('/path/to/'));
 
-        $this->configuration->expects($this->at(1))
+        $this->configuration->expects($this->at(2))
                             ->method('offsetGet')
                             ->with($this->equalTo('default_protocol'))
                             ->will($this->returnValue(strtolower($protocol)));
 
-        $this->configuration->expects($this->at(2))
+        $this->configuration->expects($this->at(3))
                             ->method('offsetGet')
                             ->with($this->equalTo('default_domain'))
                             ->will($this->returnValue('www.domain.com'));
 
-        $this->configuration->expects($this->at(3))
+        $this->configuration->expects($this->at(4))
                             ->method('offsetGet')
                             ->with($this->equalTo('default_port'))
                             ->will($this->returnValue($port));
@@ -80,7 +85,7 @@ class RequestParserParseRequestTest extends RequestParserTest
             $url = strtolower($protocol) . '://www.domain.com:' . $port . '/path/to/';
         }
 
-        $this->configuration->expects($this->at(4))
+        $this->configuration->expects($this->at(5))
                             ->method('offsetGet')
                             ->with($this->equalTo('default_url'))
                             ->will($this->returnValue($url));
@@ -99,7 +104,7 @@ class RequestParserParseRequestTest extends RequestParserTest
     {
         if ($controller === TRUE)
         {
-            $this->configuration->expects($this->at(5))
+            $this->configuration->expects($this->at(6))
                                 ->method('offsetGet')
                                 ->with($this->equalTo('default_controller'))
                                 ->will($this->returnValue('DefaultController'));
@@ -107,7 +112,7 @@ class RequestParserParseRequestTest extends RequestParserTest
 
         if ($method === TRUE)
         {
-            $this->configuration->expects($this->at(6))
+            $this->configuration->expects($this->at(7))
                                 ->method('offsetGet')
                                 ->with($this->equalTo('default_method'))
                                 ->will($this->returnValue('default_method'));

@@ -56,6 +56,8 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
         $_SERVER['SERVER_NAME'] = 'www.domain.com';
         $_SERVER['SERVER_PORT'] = $port;
 
+        $_SERVER['SCRIPT_FILENAME'] = '/full/path/to/index.php';
+
         if ($useragent === TRUE)
         {
             $_SERVER['HTTP_USER_AGENT'] = 'UserAgent';
