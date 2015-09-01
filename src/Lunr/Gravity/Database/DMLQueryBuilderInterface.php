@@ -194,6 +194,16 @@ interface DMLQueryBuilderInterface
     public function on_regexp($left, $right, $negate = FALSE);
 
     /**
+     * Define ON part of a JOIN clause with the NULL condition.
+     *
+     * @param String $left   Left expression
+     * @param String $negate Whether to negate the condition or not
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function on_null($left, $negate = FALSE);
+
+    /**
      * Define WHERE clause of the SQL statement.
      *
      * @param String $left     Left expression
@@ -248,6 +258,16 @@ interface DMLQueryBuilderInterface
     * @return DMLQueryBuilderInterface $self Self reference
     */
     public function where_regexp($left, $right, $negate = FALSE);
+
+    /**
+     * Define WHERE clause with the NULL condition.
+     *
+     * @param String $left   Left expression
+     * @param String $negate Whether to negate the condition or not
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function where_null($left, $negate = FALSE);
 
     /**
      * Define a GROUP BY clause of the SQL statement.
@@ -313,6 +333,16 @@ interface DMLQueryBuilderInterface
     * @return DMLQueryBuilderInterface $self Self reference
     */
     public function having_regexp($left, $right, $negate = FALSE);
+
+    /**
+     * Define HAVING clause with the NULL condition.
+     *
+     * @param String $left   Left expression
+     * @param String $negate Whether to negate the condition or not
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function having_null($left, $negate = FALSE);
 
     /**
      * Define a ORDER BY clause of the SQL statement.

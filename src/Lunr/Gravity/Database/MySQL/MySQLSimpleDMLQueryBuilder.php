@@ -216,6 +216,19 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     }
 
     /**
+     * Define ON part of a JOIN clause with the NULL condition.
+     *
+     * @param String $left   Left expression
+     * @param String $negate Whether to negate the condition or not
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function on_null($left, $negate = FALSE)
+    {
+        return parent::on_null($this->escaper->column($left), $negate);
+    }
+
+    /**
      * Define WHERE clause of the SQL statement.
      *
      * @param String $left     Left expression
@@ -288,6 +301,19 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     public function where_regexp($left, $right, $negate = FALSE)
     {
         return parent::where_regexp($this->escaper->column($left), $right, $negate);
+    }
+
+    /**
+     * Define WHERE clause with the NULL condition.
+     *
+     * @param String $left   Left expression
+     * @param String $negate Whether to negate the condition or not
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function where_null($left, $negate = FALSE)
+    {
+        return parent::where_null($this->escaper->column($left), $negate);
     }
 
     /**
@@ -376,6 +402,19 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     public function having_regexp($left, $right, $negate = FALSE)
     {
         return parent::having_regexp($this->escaper->column($left), $right, $negate);
+    }
+
+    /**
+     * Define HAVING clause with the NULL condition.
+     *
+     * @param String $left   Left expression
+     * @param String $negate Whether to negate the condition or not
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function having_null($left, $negate = FALSE)
+    {
+        return parent::having_null($this->escaper->column($left), $negate);
     }
 
     /**

@@ -193,6 +193,43 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
     }
 
     /**
+     * Test specifying the on part of a query.
+     *
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::on_null
+     */
+    public function testOnNull()
+    {
+        $this->class->on_null('left');
+        $this->assertPropertyEquals('join', 'ON left IS NULL');
+    }
+
+    /**
+     * Test specifying the on part of a query with non default operator.
+     *
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::on_null
+     */
+    public function testOnNotNull()
+    {
+        $this->class->on_null('left', TRUE);
+        $this->assertPropertyEquals('join', 'ON left IS NOT NULL');
+    }
+
+    /**
+     * Test fluid interface of the on_null method.
+     *
+     * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::on_null
+     */
+    public function testOnNullReturnsSelfReference()
+    {
+        $return = $this->class->on_null('left');
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\SQLDMLQueryBuilder', $return);
+        $this->assertSame($this->class, $return);
+    }
+
+    /**
      * Test grouping of WHERE condition (start group).
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::start_where_group
@@ -363,6 +400,43 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
     }
 
     /**
+     * Test specifying the where part of a query.
+     *
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::where_null
+     */
+    public function testWhereNull()
+    {
+        $this->class->where_null('left');
+        $this->assertPropertyEquals('where', 'WHERE left IS NULL');
+    }
+
+    /**
+     * Test specifying the where part of a query with non default operator.
+     *
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::where_null
+     */
+    public function testWhereNotNull()
+    {
+        $this->class->where_null('left', TRUE);
+        $this->assertPropertyEquals('where', 'WHERE left IS NOT NULL');
+    }
+
+    /**
+     * Test fluid interface of the where_null method.
+     *
+     * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::where_null
+     */
+    public function testWhereNullReturnsSelfReference()
+    {
+        $return = $this->class->where_null('left');
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\SQLDMLQueryBuilder', $return);
+        $this->assertSame($this->class, $return);
+    }
+
+    /**
      * Test grouping of HAVING condition (start group).
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::start_having_group
@@ -527,6 +601,43 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
     public function testHavingBetweenReturnsSelfReference()
     {
         $return = $this->class->having_between('left', 'lower', 'upper');
+
+        $this->assertInstanceOf('Lunr\Gravity\Database\SQLDMLQueryBuilder', $return);
+        $this->assertSame($this->class, $return);
+    }
+
+    /**
+     * Test specifying the having part of a query.
+     *
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
+     * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::having_null
+     */
+    public function testHavingNull()
+    {
+        $this->class->having_null('left');
+        $this->assertPropertyEquals('having', 'HAVING left IS NULL');
+    }
+
+    /**
+     * Test specifying the having part of a query with non default operator.
+     *
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
+     * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::having_null
+     */
+    public function testHavingNotNull()
+    {
+        $this->class->having_null('left', TRUE);
+        $this->assertPropertyEquals('having', 'HAVING left IS NOT NULL');
+    }
+
+    /**
+     * Test fluid interface of the having_null method.
+     *
+     * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::having_null
+     */
+    public function testHavingNullReturnsSelfReference()
+    {
+        $return = $this->class->having_null('left');
 
         $this->assertInstanceOf('Lunr\Gravity\Database\SQLDMLQueryBuilder', $return);
         $this->assertSame($this->class, $return);

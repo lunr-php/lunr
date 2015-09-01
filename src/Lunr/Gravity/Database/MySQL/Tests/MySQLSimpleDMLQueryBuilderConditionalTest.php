@@ -130,6 +130,40 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
     }
 
     /**
+     * Test on_null().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_null
+     */
+    public function testOnNull()
+    {
+        $this->escaper->expects($this->once())
+                      ->method('column')
+                      ->with($this->equalTo('left'))
+                      ->will($this->returnValue('`left`'));
+
+        $this->class->on_null('left');
+
+        $this->assertEquals('ON `left` IS NULL', $this->get_reflection_property_value('join'));
+    }
+
+    /**
+     * Test negate on_null().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_null
+     */
+    public function testOnNotNull()
+    {
+        $this->escaper->expects($this->once())
+                      ->method('column')
+                      ->with($this->equalTo('left'))
+                      ->will($this->returnValue('`left`'));
+
+        $this->class->on_null('left', TRUE);
+
+        $this->assertEquals('ON `left` IS NOT NULL', $this->get_reflection_property_value('join'));
+    }
+
+    /**
      * Test where().
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where
@@ -235,6 +269,40 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
     }
 
     /**
+     * Test where_null().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_null
+     */
+    public function testWhereNull()
+    {
+        $this->escaper->expects($this->once())
+                      ->method('column')
+                      ->with($this->equalTo('left'))
+                      ->will($this->returnValue('`left`'));
+
+        $this->class->where_null('left');
+
+        $this->assertEquals('WHERE `left` IS NULL', $this->get_reflection_property_value('where'));
+    }
+
+    /**
+     * Test negate where_null().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_null
+     */
+    public function testWhereNotNull()
+    {
+        $this->escaper->expects($this->once())
+                      ->method('column')
+                      ->with($this->equalTo('left'))
+                      ->will($this->returnValue('`left`'));
+
+        $this->class->where_null('left', TRUE);
+
+        $this->assertEquals('WHERE `left` IS NOT NULL', $this->get_reflection_property_value('where'));
+    }
+
+    /**
      * Test having().
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having
@@ -337,6 +405,40 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
         $this->class->having_regexp('left', 'right');
 
         $this->assertEquals('HAVING `left` REGEXP right', $this->get_reflection_property_value('having'));
+    }
+
+    /**
+     * Test having_null().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having_null
+     */
+    public function testHavingNull()
+    {
+        $this->escaper->expects($this->once())
+                      ->method('column')
+                      ->with($this->equalTo('left'))
+                      ->will($this->returnValue('`left`'));
+
+        $this->class->having_null('left');
+
+        $this->assertEquals('HAVING `left` IS NULL', $this->get_reflection_property_value('having'));
+    }
+
+    /**
+     * Test negate having_null().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having_null
+     */
+    public function testHavingNotNull()
+    {
+        $this->escaper->expects($this->once())
+                      ->method('column')
+                      ->with($this->equalTo('left'))
+                      ->will($this->returnValue('`left`'));
+
+        $this->class->having_null('left', TRUE);
+
+        $this->assertEquals('HAVING `left` IS NOT NULL', $this->get_reflection_property_value('having'));
     }
 
 }

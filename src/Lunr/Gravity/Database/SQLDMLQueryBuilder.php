@@ -237,6 +237,21 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define ON part of a JOIN clause with the NULL condition.
+     *
+     * @param String $left   Left expression
+     * @param String $negate Whether to negate the condition or not
+     *
+     * @return SQLDMLQueryBuilder $self Self reference
+     */
+    public function on_null($left, $negate = FALSE)
+    {
+        $operator = ($negate === FALSE) ? 'IS' : 'IS NOT';
+        $this->sql_condition($left, 'NULL', $operator, 'ON');
+        return $this;
+    }
+
+    /**
      * Open ON group.
      *
      * @return SQLDMLQueryBuilder $self Self reference
@@ -324,6 +339,21 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define WHERE clause with the NULL condition.
+     *
+     * @param String $left   Left expression
+     * @param String $negate Whether to negate the condition or not
+     *
+     * @return SQLDMLQueryBuilder $self Self reference
+     */
+    public function where_null($left, $negate = FALSE)
+    {
+        $operator = ($negate === FALSE) ? 'IS' : 'IS NOT';
+        $this->sql_condition($left, 'NULL', $operator);
+        return $this;
+    }
+
+    /**
      * Open WHERE group.
      *
      * @return SQLDMLQueryBuilder $self Self reference
@@ -407,6 +437,21 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
         $right    = $lower . ' AND ' . $upper;
         $operator = ($negate === FALSE) ? 'BETWEEN' : 'NOT BETWEEN';
         $this->sql_condition($left, $right, $operator, 'HAVING');
+        return $this;
+    }
+
+    /**
+     * Define HAVING clause with the NULL condition.
+     *
+     * @param String $left   Left expression
+     * @param String $negate Whether to negate the condition or not
+     *
+     * @return SQLDMLQueryBuilder $self Self reference
+     */
+    public function having_null($left, $negate = FALSE)
+    {
+        $operator = ($negate === FALSE) ? 'IS' : 'IS NOT';
+        $this->sql_condition($left, 'NULL', $operator, 'HAVING');
         return $this;
     }
 
