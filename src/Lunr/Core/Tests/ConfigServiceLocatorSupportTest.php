@@ -160,6 +160,104 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $this->assertArrayHasKey('id', $registry->getValue($this->class));
     }
 
+    /**
+     * Test that process_new_instance() calls defined methods with params.
+     *
+     * @covers Lunr\Core\ConfigServiceLocator::process_new_instance
+     */
+    public function testProcessNewInstanceCallsMethodsWithParams()
+    {
+        $recipe = [
+            'id' => [
+                'methods' => [
+                    [
+                        'name'   => 'test',
+                        'params' => [ 'param1' ],
+                    ],
+                    [
+                        'name'   => 'test',
+                        'params' => [ 'param2', 'param3' ],
+                    ],
+                ],
+            ],
+        ];
+
+        $this->set_reflection_property_value('cache', $recipe);
+
+        $mock = $this->getMock('Lunr\Halo\CallbackMock');
+
+        $mock->expects($this->at(0))
+             ->method('test')
+             ->with('param1');
+
+        $mock->expects($this->at(1))
+             ->method('test')
+             ->with('param2', 'param3');
+
+        $method = $this->get_accessible_reflection_method('process_new_instance');
+        $method->invokeArgs($this->class, [ 'id', $mock ]);
+    }
+
+    /**
+     * Test that process_new_instance() calls defined methods with no params.
+     *
+     * @covers Lunr\Core\ConfigServiceLocator::process_new_instance
+     */
+    public function testProcessNewInstanceCallsMethodsWithNoParams()
+    {
+        $recipe = [
+            'id' => [
+                'methods' => [
+                    [ 'name' => 'test' ],
+                ],
+            ],
+        ];
+
+        $this->set_reflection_property_value('cache', $recipe);
+
+        $mock = $this->getMock('Lunr\Halo\CallbackMock');
+
+        $mock->expects($this->at(0))
+             ->method('test');
+
+        $method = $this->get_accessible_reflection_method('process_new_instance');
+        $method->invokeArgs($this->class, [ 'id', $mock ]);
+    }
+
+    /**
+     * Test that process_new_instance() calls defined methods with located params.
+     *
+     * @covers Lunr\Core\ConfigServiceLocator::process_new_instance
+     */
+    public function testProcessNewInstanceCallsMethodsWithLocatedParams()
+    {
+        $recipe = [
+            'id' => [
+                'methods' => [
+                    [
+                        'name'   => 'test',
+                        'params' => [ 'object1_id', 'param2' ],
+                    ],
+                ],
+            ],
+        ];
+
+        $object1 = (object) [ 'key1' => 'value1' ];
+
+        $this->set_reflection_property_value('cache', $recipe);
+        $this->set_reflection_property_value('registry', [ 'object1_id' => $object1 ]);
+
+        $mock = $this->getMock('Lunr\Halo\CallbackMock');
+
+        $mock->expects($this->at(0))
+             ->method('test')
+             ->with($this->identicalTo($object1), 'param2');
+
+
+        $method = $this->get_accessible_reflection_method('process_new_instance');
+        $method->invokeArgs($this->class, [ 'id', $mock ]);
+    }
+
 }
 
 ?>

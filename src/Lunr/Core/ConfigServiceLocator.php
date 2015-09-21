@@ -177,6 +177,16 @@ class ConfigServiceLocator
             $this->registry[$id] = $instance;
         }
 
+        if (isset($this->cache[$id]['methods']))
+        {
+            foreach ($this->cache[$id]['methods'] as $method)
+            {
+                $method_params = isset($method['params']) ? $this->get_parameters($method['params']) : [];
+
+                $instance->{$method['name']}(...$method_params);
+            }
+        }
+
         return $instance;
     }
 
