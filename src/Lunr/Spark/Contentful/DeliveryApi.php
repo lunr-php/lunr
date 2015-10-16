@@ -148,6 +148,24 @@ class DeliveryApi
     }
 
     /**
+     * Fetch assets from Contentful.
+     *
+     * @param Array $filters Assets filters
+     *
+     * @return Array $values Content Array
+     */
+    public function get_assets($filters = [])
+    {
+        $filters['access_token'] = $this->access_token;
+
+        $url = static::URL . $this->space . '/assets';
+
+        $values = $this->get_json_results($url, $filters);
+
+        return $values;
+    }
+
+    /**
      * Fetch and parse results as though they were a json string.
      *
      * @param String $url    API URL
