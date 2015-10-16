@@ -233,6 +233,7 @@
             <file>../src/Lunr/Spark/Contentful/Tests/DeliveryApiGetEntriesTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/DeliveryApiGetAssetsTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/DeliveryApiSetSpaceIdTest.php</file>
+            <file>../src/Lunr/Spark/Contentful/Tests/PreviewApiBaseTest.php</file>
             <file>../src/Lunr/Spark/Facebook/Tests/ApiBaseTest.php</file>
             <file>../src/Lunr/Spark/Facebook/Tests/ApiGetUrlResultsTest.php</file>
             <file>../src/Lunr/Spark/Facebook/Tests/ApiGetJsonResultsTest.php</file>
