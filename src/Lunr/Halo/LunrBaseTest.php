@@ -143,10 +143,11 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
      * @param Callable $method     Method defined in an array form
      * @param String   $mock       Replacement code for the method
      * @param String   $visibility Visibility of the redefined method
+     * @param String   $args       Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
-    protected function mock_method($method, $mock, $visibility = 'public')
+    protected function mock_method($method, $mock, $visibility = 'public', $args = '')
     {
         $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
@@ -168,7 +169,7 @@ abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
                 break;
         }
 
-        runkit_method_redefine($class_name, $method_name, '', $mock, $visibility_flag);
+        runkit_method_redefine($class_name, $method_name, $args, $mock, $visibility_flag);
     }
 
     /**
