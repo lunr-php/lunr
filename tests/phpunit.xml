@@ -218,6 +218,7 @@
             <file>../src/Lunr/Shadow/Tests/CliRequestParserParseRequestTest.php</file>
             <file>../src/Lunr/Shadow/Tests/CliRequestParserParseSuperGlobalTest.php</file>
             <file>../src/Lunr/Shadow/Tests/CliRequestParserParsePostTest.php</file>
+            <file>../src/Lunr/Shadow/Tests/CliRequestParserParseServerTest.php</file>
             <file>../src/Lunr/Shadow/Tests/CliRequestParserParseGetTest.php</file>
             <file>../src/Lunr/Shadow/Tests/CliRequestParserParseCookieTest.php</file>
             <file>../src/Lunr/Shadow/Tests/CliRequestParserParseFilesTest.php</file>

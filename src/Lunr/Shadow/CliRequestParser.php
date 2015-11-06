@@ -177,6 +177,23 @@ class CliRequestParser implements RequestParserInterface
     }
 
     /**
+     * Parse $_SERVER values into local variable.
+     *
+     * @return Array Parsed SERVER values
+     */
+    public function parse_server()
+    {
+        $server = [];
+
+        foreach ($_SERVER as $key => $value)
+        {
+            $server[$key] = $value;
+        }
+
+        return $server;
+    }
+
+    /**
      * Parse $_GET values into local variable and reset it globally.
      *
      * @return Array Parsed GET values
