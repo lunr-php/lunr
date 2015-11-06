@@ -179,16 +179,17 @@ class WebRequestParser implements RequestParserInterface
     /**
      * Parse super global variables.
      *
-     * @param Array $_VAR Reference to a super global variable
+     * @param Array   $_VAR  Reference to a super global variable
+     * @param Boolean $reset Whether to reset the super global variable
      *
      * @return Array $var Parsed variable
      */
-    protected function parse_super_global(&$_VAR)
+    protected function parse_super_global(&$_VAR, $reset = TRUE)
     {
         if (!is_array($_VAR) || empty($_VAR))
         {
             //reset super global
-            $_VAR = [];
+            $_VAR = $reset === TRUE ? [] : $_VAR;
 
             return $_VAR;
         }
@@ -201,9 +202,19 @@ class WebRequestParser implements RequestParserInterface
         }
 
         //reset super global
-        $_VAR = [];
+        $_VAR = $reset === TRUE ? [] : $_VAR;
 
         return $var;
+    }
+
+    /**
+     * Store request related information and remove it from super globals where necessary.
+     *
+     * @return Array Parsed HTTP header values
+     */
+    public function parse_server()
+    {
+        return $this->parse_super_global($_SERVER, FALSE);
     }
 
     /**

@@ -23,42 +23,29 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
 {
 
     /**
-     * Test storing invalid super global values.
-     *
-     * @param mixed $var Invalid super global values
-     *
-     * @dataProvider invalidSuperglobalValueProvider
-     * @covers       Lunr\Corona\WebRequestParser::parse_super_global
-     */
-    public function testParseInvalidSuperGlobalValuesReturnsEmptyArray($var)
-    {
-        $_VAR = $var;
-
-        $method = $this->get_accessible_reflection_method('parse_super_global');
-        $result = $method->invokeArgs($this->class, [ & $_VAR ]);
-
-        $this->assertArrayEmpty($result);
-    }
-
-    /**
     * Test storing invalid super global values.
     *
     * Checks whether the superglobal super global is reset to being empty after
     * passing invalid super global values in it.
     *
-    * @param mixed $var Invalid super global values
+    * @param mixed   $var   Invalid super global values
+    * @param boolean $reset Whether or not to reset the super global afterwards.
     *
     * @dataProvider invalidSuperglobalValueProvider
     * @covers       Lunr\Corona\WebRequestParser::parse_super_global
     */
-    public function testParseInvalidSuperGlobalValuesResetsSuperGlobal($var)
+    public function testParseInvalidSuperGlobalValuesResetsSuperGlobal($var, $reset)
     {
         $_VAR = $var;
 
         $method = $this->get_accessible_reflection_method('parse_super_global');
-        $method->invokeArgs($this->class, [ & $_VAR ]);
-
-        $this->assertArrayEmpty($_VAR);
+        $method->invokeArgs($this->class, [ & $_VAR, $reset]);
+        if($reset)
+        {
+            $this->assertArrayEmpty($_VAR);
+        }else{
+            $this->assertEquals($var, $_VAR);
+        }
     }
 
     /**
@@ -92,6 +79,24 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
         $method->invokeArgs($this->class, [ & $_VAR ]);
 
         $this->assertArrayEmpty($_VAR);
+    }
+
+    /**
+     * Test that super global is not empty after storing with reset is FALSE.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_super_global
+     */
+    public function testSuperGlobalNotEmptyAfterParse()
+    {
+        $_VAR['test1'] = 'value1';
+        $_VAR['test2'] = 'value2';
+
+        $_VAR_REF = $_VAR;
+
+        $method = $this->get_accessible_reflection_method('parse_super_global');
+        $method->invokeArgs($this->class, [ & $_VAR_REF, FALSE]);
+
+        $this->assertEquals($_VAR, $_VAR_REF);
     }
 
 }

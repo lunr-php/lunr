@@ -73,6 +73,10 @@ abstract class RequestTest extends LunrBaseTest
                      ->will($this->returnValue([ 'cookie_key' => 'cookie_value' ]));
 
         $this->parser->expects($this->once())
+                     ->method('parse_server')
+                     ->will($this->returnValue([ 'server_key' => 'server_value' ]));
+
+        $this->parser->expects($this->once())
                      ->method('parse_files')
                      ->will($this->returnValue($this->files));
 

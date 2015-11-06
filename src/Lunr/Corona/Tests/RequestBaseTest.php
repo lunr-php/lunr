@@ -30,6 +30,14 @@ class RequestBaseTest extends RequestTest
     }
 
     /**
+     * Check that server values are set correctly.
+     */
+    public function testServer()
+    {
+        $this->assertEquals([ 'server_key' => 'server_value' ], $this->get_reflection_property_value('server'));
+    }
+
+    /**
      * Check that get values are set correctly.
      */
     public function testGet()

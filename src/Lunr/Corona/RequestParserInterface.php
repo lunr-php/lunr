@@ -28,6 +28,13 @@ interface RequestParserInterface
     public function parse_request();
 
     /**
+     * Store $_SERVER header values into local variables and reset it globally.
+     *
+     * @return mixed
+     */
+    public function parse_server();
+
+    /**
      * Parse $_POST values into local variable and reset it globally.
      *
      * @return Array Parsed POST values

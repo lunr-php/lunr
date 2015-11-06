@@ -41,6 +41,12 @@ class Request
     protected $cookie;
 
     /**
+     * Stored $_SERVER values
+     * @var array
+     */
+    protected $server;
+
+    /**
      * Request parameters:
      *  'protocol'   The protocol used for the request
      *  'domain'     The domain used for the request
@@ -94,6 +100,7 @@ class Request
         $this->parser = $parser;
 
         $this->request  = $parser->parse_request();
+        $this->server   = $parser->parse_server();
         $this->post     = $parser->parse_post();
         $this->get      = $parser->parse_get();
         $this->cookie   = $parser->parse_cookie();
@@ -110,6 +117,7 @@ class Request
     {
         unset($this->post);
         unset($this->get);
+        unset($this->server);
         unset($this->cookie);
         unset($this->request);
         unset($this->files);
@@ -264,6 +272,18 @@ class Request
         }
 
         return isset($this->post[$key]) ? $this->post[$key] : NULL;
+    }
+
+    /**
+     * Retrieve a stored SERVER value.
+     *
+     * @param mixed $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function get_server_data($key)
+    {
+        return isset($this->server[$key]) ? $this->server[$key] : NULL;
     }
 
     /**

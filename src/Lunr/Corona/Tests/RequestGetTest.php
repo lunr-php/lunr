@@ -91,6 +91,16 @@ class RequestGetTest extends RequestTest
     }
 
     /**
+     * Test getting SERVER data.
+     *
+     * @covers Lunr\Corona\Request::get_server_data
+     */
+    public function testGetServerData()
+    {
+        $this->assertEquals('server_value', $this->class->get_server_data('server_key'));
+    }
+
+    /**
      * Test getting FILES data.
      *
      * @covers Lunr\Corona\Request::get_files_data

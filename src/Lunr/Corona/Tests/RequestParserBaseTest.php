@@ -41,6 +41,16 @@ class RequestParserBaseTest extends RequestParserTest
     }
 
     /**
+     * Test storing no server values.
+     *
+     * @covers Lunr\Corona\RequestParser::parse_server
+     */
+    public function testParsingNoServerValues()
+    {
+        $this->assertArrayEmpty($this->class->parse_server());
+    }
+
+    /**
      * Test storing no files values.
      *
      * @covers Lunr\Corona\RequestParser::parse_files

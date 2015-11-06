@@ -86,6 +86,16 @@ class RequestParser implements RequestParserInterface
     }
 
     /**
+     * Parse $_POST values into local variable.
+     *
+     * @return Array Parsed HTTP header values
+     */
+    public function parse_server()
+    {
+        return [];
+    }
+
+    /**
      * Parse $_POST values into local variable and reset it globally.
      *
      * @return Array Parsed POST values

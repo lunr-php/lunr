@@ -79,6 +79,15 @@ interface RequestInterface
     public function get_cookie_data($key);
 
     /**
+     * Retrieve a stored SERVER value.
+     *
+     * @param mixed $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function get_server_data($key);
+
+    /**
      * Negotiate & retrieve the client's prefered content type.
      *
      * @param Array $supported Array containing the supported content types
