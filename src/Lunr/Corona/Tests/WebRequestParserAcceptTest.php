@@ -77,6 +77,30 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
     }
 
     /**
+     * Test that parse_accept_format() returns null when called without a set of supported formats.
+     *
+     * @requires extension http
+     * @requires function http\Header::negotiate
+     * @covers   Lunr\Corona\WebRequestParser::parse_accept_format
+     */
+    public function testGetAcceptFormatWithoutSupportedFormatsReturnsNull()
+    {
+        $this->assertNull($this->header->name);
+        $this->assertNull($this->header->value);
+
+        unset($_SERVER['HTTP_ACCEPT']);
+
+        $this->header->expects($this->never())
+                     ->method('negotiate')
+                     ->with($this->equalTo([]));
+
+        $this->assertNull($this->class->parse_accept_format([]));
+
+        $this->assertNull($this->header->name);
+        $this->assertNull($this->header->value);
+    }
+
+    /**
      * Test that parse_accept_language() returns content type when called with a valid set of supported languages.
      *
      * @param String $value the expected value
@@ -127,6 +151,30 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
 
         $this->assertSame('Accept-Language', $this->header->name);
         $this->assertSame('accept_language_value', $this->header->value);
+    }
+
+    /**
+     * Test that parse_accept_format() returns null when called without a set of supported languages.
+     *
+     * @requires extension http
+     * @requires function http\Header::negotiate
+     * @covers   Lunr\Corona\WebRequestParser::parse_accept_language
+     */
+    public function testGetAcceptLanguageWithoutSupportedLanguagesReturnsNull()
+    {
+        $this->assertNull($this->header->name);
+        $this->assertNull($this->header->value);
+
+        unset($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+
+        $this->header->expects($this->never())
+                     ->method('negotiate')
+                     ->with($this->equalTo([]));
+
+        $this->assertNull($this->class->parse_accept_language([]));
+
+        $this->assertNull($this->header->name);
+        $this->assertNull($this->header->value);
     }
 
     /**
@@ -182,6 +230,29 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
         $this->assertSame('accept_charset_value', $this->header->value);
     }
 
+    /**
+     * Test that parse_accept_charset() returns null when called without a set of supported charsets.
+     *
+     * @requires extension http
+     * @requires function http\Header::negotiate
+     * @covers   Lunr\Corona\WebRequestParser::parse_accept_charset
+     */
+    public function testGetAcceptCharsetWithoutSupportedCharsetsReturnsNull()
+    {
+        $this->assertNull($this->header->name);
+        $this->assertNull($this->header->value);
+
+        unset($_SERVER['HTTP_ACCEPT_CHARSET']);
+
+        $this->header->expects($this->never())
+                     ->method('negotiate')
+                     ->with($this->equalTo([]));
+
+        $this->assertNull($this->class->parse_accept_charset([]));
+
+        $this->assertNull($this->header->name);
+        $this->assertNull($this->header->value);
+    }
 }
 
 ?>

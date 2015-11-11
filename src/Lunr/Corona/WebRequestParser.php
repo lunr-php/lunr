@@ -295,10 +295,13 @@ class WebRequestParser implements RequestParserInterface
      */
     public function parse_accept_format($supported = [])
     {
-        $this->header->name  = 'Accept';
-        $this->header->value = $_SERVER['HTTP_ACCEPT'];
-
-        return $this->header->negotiate($supported);
+        if(isset($_SERVER['HTTP_ACCEPT']))
+        {
+            $this->header->name  = 'Accept';
+            $this->header->value = $_SERVER['HTTP_ACCEPT'];
+            return $this->header->negotiate($supported);
+        }
+        return NULL;
     }
 
     /**
@@ -311,10 +314,13 @@ class WebRequestParser implements RequestParserInterface
      */
     public function parse_accept_language($supported = [])
     {
-        $this->header->name  = 'Accept-Language';
-        $this->header->value = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            $this->header->name = 'Accept-Language';
+            $this->header->value = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 
-        return $this->header->negotiate($supported);
+            return $this->header->negotiate($supported);
+        }
+        return NULL;
     }
 
     /**
@@ -327,10 +333,13 @@ class WebRequestParser implements RequestParserInterface
      */
     public function parse_accept_charset($supported = [])
     {
-        $this->header->name  = 'Accept-Charset';
-        $this->header->value = $_SERVER['HTTP_ACCEPT_CHARSET'];
+        if(isset($_SERVER['HTTP_ACCEPT_CHARSET'])) {
+            $this->header->name = 'Accept-Charset';
+            $this->header->value = $_SERVER['HTTP_ACCEPT_CHARSET'];
 
-        return $this->header->negotiate($supported);
+            return $this->header->negotiate($supported);
+        }
+        return NULL;
     }
 
 }
