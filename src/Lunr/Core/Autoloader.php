@@ -3,7 +3,7 @@
 /**
  * This file contains a PHP Class autoloader.
  *
- * PHP Version 5.3
+ * PHP Version 5.6
  *
  * @package    Lunr\Core
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -29,11 +29,20 @@ class Autoloader
     private $controllers;
 
     /**
+     * An array of prefixes for namespaces
+     *
+     * @var
+     */
+    private $prefixes;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->controllers = array();
+        $this->controllers = [];
+        $this->prefixes    = [];
+        $this->set_prefix('Lunr', '/');
     }
 
     /**
@@ -53,7 +62,15 @@ class Autoloader
      */
     public function load($class)
     {
-        $file = $this->get_class_filepath($class);
+        $file = $this->get_psr0_class_filepath($class);
+
+        if (stream_resolve_include_path($file))
+        {
+            include_once $file;
+            return;
+        }
+
+        $file = $this->get_psr4_class_filepath($class);
 
         if (stream_resolve_include_path($file))
         {
@@ -102,7 +119,7 @@ class Autoloader
      */
     public function register()
     {
-        return spl_autoload_register(array($this, 'load'));
+        return spl_autoload_register([$this, 'load']);
     }
 
     /**
@@ -112,7 +129,7 @@ class Autoloader
      */
     public function unregister()
     {
-        return spl_autoload_unregister(array($this, 'load'));
+        return spl_autoload_unregister([$this, 'load']);
     }
 
     /**
@@ -124,7 +141,7 @@ class Autoloader
      *
      * @return String $filepath Path and filename
      */
-    public function get_class_filepath($class)
+    public function get_psr0_class_filepath($class)
     {
         $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
 
@@ -135,6 +152,41 @@ class Autoloader
         $class = str_replace('_', DIRECTORY_SEPARATOR, $class);
 
         return ltrim($path, '/') . $class . '.php';
+    }
+
+    /**
+     * Convert namespaced classname to filepath.
+     *
+     * Rules according to PSR-4.
+     *
+     * @param String $class namespaced classname
+     *
+     * @return String $filepath Path and filename
+     */
+    public function get_psr4_class_filepath($class)
+    {
+        $namespace = substr($class, 0, strrpos($class, '\\'));
+        $classname = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+        $class     = substr($class, strrpos($class, '\\') + 1);
+
+        do
+        {
+            if (isset($this->prefixes[$namespace]) === TRUE)
+            {
+                $base_path = $this->prefixes[$namespace];
+                $class     = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+
+                return $base_path . $class . '.php';
+            }
+            else
+            {
+                $class     = substr($namespace, strrpos($namespace, '\\') + 1) . '\\' . $class;
+                $namespace = substr($namespace, 0, strrpos($namespace, '\\'));
+            }
+        }
+        while (strrpos($namespace, '\\') > 1);
+
+        return $classname . '.php';
     }
 
     /**
@@ -212,6 +264,19 @@ class Autoloader
                 return "class.$class.inc.php";
                 break;
         }
+    }
+
+    /**
+     * Set a prefix to use in the PSR-4 implementation.
+     *
+     * @param string $class_prefix The class prefix to use PSR-4 override with
+     * @param string $filepath     The file path to resolve the prefix to.
+     *
+     * @return void
+     */
+    public function set_prefix($class_prefix, $filepath)
+    {
+        $this->prefixes[$class_prefix] = $filepath;
     }
 
 }
