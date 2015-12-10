@@ -62,6 +62,13 @@ class DBConMySQL extends DBCon
 
     /**
      * Path to the UNIX socket for localhost connection
+     * @var Integer
+     */
+    private $port;
+
+    /**
+     * Path to the UNIX socket for localhost connection
+     * @var String
      */
     private $socket;
 
@@ -113,6 +120,15 @@ class DBConMySQL extends DBCon
         $this->pwd     = $db['password'];
         $this->db      = $db['database'];
 
+        if (isset($db['port']))
+        {
+            $this->port = $db['port'];
+        }
+        else
+        {
+            $this->port = ini_get('mysqli.default_port');
+        }
+
         if (isset($db['socket']))
         {
             $this->socket = $db['socket'];
@@ -157,6 +173,7 @@ class DBConMySQL extends DBCon
         unset($this->for_update);
         unset($this->gen_uuid_hex);
         unset($this->socket);
+        unset($this->port);
         parent::__destruct();
     }
 
@@ -174,7 +191,7 @@ class DBConMySQL extends DBCon
                 $this->user,
                 $this->pwd,
                 $this->db,
-                ini_get('mysqli.default_port'),
+                $this->port,
                 $this->socket
             );
         }
@@ -185,7 +202,7 @@ class DBConMySQL extends DBCon
                 $this->user,
                 $this->pwd,
                 $this->db,
-                ini_get('mysqli.default_port'),
+                $this->port,
                 $this->socket
             );
         }
