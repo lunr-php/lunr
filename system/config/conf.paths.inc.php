@@ -57,7 +57,8 @@ else
                         ? 'https'
                         : $config['protocol'];
 
-    $config['base_url'] = $config['protocol'] . '://' . $_SERVER['SERVER_NAME'];
+    $domain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
+    $config['base_url'] = $config['protocol'] . '://' . $domain;
     //$config['base_url'] .= ":" . $_SERVER['SERVER_PORT'];
     $config['base_url'] .= $config['base_path'];
 }
