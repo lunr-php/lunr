@@ -93,7 +93,7 @@ class WebRequestParser implements RequestParserInterface
             $request['protocol'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
         }
 
-        $request['domain'] = $_SERVER['SERVER_NAME'];
+        $request['domain'] = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
         $request['port']   = $_SERVER['SERVER_PORT'];
 
         $baseurl = $request['protocol'] . '://' . $request['domain'];

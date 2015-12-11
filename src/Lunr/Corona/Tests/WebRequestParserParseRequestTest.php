@@ -76,6 +76,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
             $_SERVER['HTTPS'] = $protocol === 'HTTPS' ? 'on' : 'off';
         }
 
+        $_SERVER['HTTP_HOST']   = 'www.domain.com';
         $_SERVER['SERVER_NAME'] = 'www.domain.com';
         $_SERVER['SERVER_PORT'] = $port;
 
@@ -411,6 +412,50 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
         $this->assertInternalType('array', $request);
         $this->assertArrayHasKey('protocol', $request);
         $this->assertEquals('http', $request['protocol']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() sets domain from http post.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testParseRequestSetsDomainFromHttpHost()
+    {
+        $this->prepare_request_test();
+        $this->prepare_request_data();
+
+        $_SERVER['HTTP_HOST']   = 'www.http_post_domain.com';
+        $_SERVER['SERVER_NAME'] = 'www.server_name_domain.com';
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('base_url', $request);
+        $this->assertEquals('http://www.http_post_domain.com/path/to/', $request['base_url']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() sets domain from server name if http host not defined.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testParseRequestSetsDomainFromServerNameIfHttpHostNotDefined()
+    {
+        $this->prepare_request_test();
+        $this->prepare_request_data();
+
+        unset($_SERVER['HTTP_HOST']);
+        $_SERVER['SERVER_NAME'] = 'www.server_name_domain.com';
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('base_url', $request);
+        $this->assertEquals('http://www.server_name_domain.com/path/to/', $request['base_url']);
 
         $this->cleanup_request_test();
     }
