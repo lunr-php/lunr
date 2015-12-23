@@ -32,6 +32,18 @@ class FrontController
     protected $fao;
 
     /**
+     * Registered lookup paths.
+     * @var Array
+     */
+    protected $paths;
+
+    /**
+     * Registered routing rules.
+     * @var Array
+     */
+    protected $routes;
+
+    /**
      * Constructor.
      *
      * @param RequestInterface                $request Instance of the Request class.
@@ -41,6 +53,9 @@ class FrontController
     {
         $this->request = $request;
         $this->fao     = $fao;
+
+        $this->paths  = [];
+        $this->routes = [];
     }
 
     /**
@@ -50,6 +65,35 @@ class FrontController
     {
         unset($this->request);
         unset($this->fao);
+        unset($this->paths);
+        unset($this->routes);
+    }
+
+    /**
+     * Register a path for controller lookup
+     *
+     * @param String $identifier Path identifier
+     * @param String $path       Path specification
+     *
+     * @return void
+     */
+    public function register_lookup_path($identifier, $path)
+    {
+        $this->paths[$identifier] = $path;
+    }
+
+    /**
+     * Add a static routing rule for specific calls.
+     *
+     * @param String $call  Request call identifier (either call or controller name)
+     * @param mixed  $route Routing rule. Use NULL for blacklisting, an empty array for whitelisting
+     *                      or an array of path identifiers to limit the lookup search to those paths.
+     *
+     * @return void
+     */
+    public function add_routing_rule($call, $route = [])
+    {
+        $this->routes[$call] = $route;
     }
 
     /**
@@ -90,6 +134,67 @@ class FrontController
         $replace = [ '', '', '\\' ];
 
         return ltrim(str_replace($search, $replace, $matches[0]), '\\');
+    }
+
+    /**
+     * Lookup the controller in the registered paths.
+     *
+     * @param String ... Identifiers for the paths to use for the lookup
+     *
+     * @return String $controller Fully qualified name of the responsible controller.
+     */
+    public function lookup(...$paths)
+    {
+        if (empty($this->paths))
+        {
+            return '';
+        }
+
+        $paths = empty($paths) ? array_keys($this->paths) : $paths;
+
+        $controller = '';
+
+        foreach ($paths as $id)
+        {
+            if (array_key_exists($id, $this->paths))
+            {
+                $controller = $this->get_controller($this->paths[$id]);
+            }
+
+            if ($controller != '')
+            {
+                break;
+            }
+        }
+
+        return $controller;
+    }
+
+    /**
+     * Find the controller name for the request made.
+     *
+     * @return String $controller Fully qualified name of the responsible controller.
+     */
+    public function route()
+    {
+        foreach ([ 'call', 'controller' ] as $id)
+        {
+            $key = $this->request->$id;
+
+            if (array_key_exists($key, $this->routes))
+            {
+                if ($this->routes[$key] === NULL)
+                {
+                    return '';
+                }
+                else
+                {
+                    return $this->lookup(...$this->routes[$key]);
+                }
+            }
+        }
+
+        return $this->lookup();
     }
 
     /**

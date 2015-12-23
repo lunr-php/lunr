@@ -40,6 +40,8 @@
             <file>../src/Lunr/Corona/Tests/ControllerResultTest.php</file>
             <file>../src/Lunr/Corona/Tests/FrontControllerBaseTest.php</file>
             <file>../src/Lunr/Corona/Tests/FrontControllerGetTest.php</file>
+            <file>../src/Lunr/Corona/Tests/FrontControllerLookupTest.php</file>
+            <file>../src/Lunr/Corona/Tests/FrontControllerRouteTest.php</file>
             <file>../src/Lunr/Corona/Tests/FrontControllerDispatchTest.php</file>
             <file>../src/Lunr/Corona/Tests/RequestBaseTest.php</file>
             <file>../src/Lunr/Corona/Tests/RequestMagicGetTest.php</file>
