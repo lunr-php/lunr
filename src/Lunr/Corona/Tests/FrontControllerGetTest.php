@@ -7,7 +7,7 @@
  *
  * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2013-2014, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
@@ -39,7 +39,7 @@ class FrontControllerGetTest extends FrontControllerTest
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
-                  ->with('/^.+functioncontroller.php/i', $dir)
+                  ->with('/^.+\/functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array($result)));
 
         $value = $this->class->get_controller($dir);
@@ -63,7 +63,7 @@ class FrontControllerGetTest extends FrontControllerTest
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
-                  ->with('/^.+functioncontroller.php/i', $dir)
+                  ->with('/^.+\/functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array()));
 
         $value = $this->class->get_controller($dir);
@@ -87,7 +87,7 @@ class FrontControllerGetTest extends FrontControllerTest
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
-                  ->with('/^.+functioncontroller.php/i', $dir)
+                  ->with('/^.+\/functioncontroller.php/i', $dir)
                   ->will($this->returnValue(FALSE));
 
         $value = $this->class->get_controller($dir);
@@ -135,7 +135,7 @@ class FrontControllerGetTest extends FrontControllerTest
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
-                  ->with('/^.+functioncontroller.php/i', $dir)
+                  ->with('/^.+\/functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array($result, 'nr2')));
 
         $value = $this->class->get_controller($dir);
@@ -205,7 +205,7 @@ class FrontControllerGetTest extends FrontControllerTest
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
-                  ->with('/^.+functioncontroller.php/i', $dir)
+                  ->with('/^.+\/functioncontroller.php/i', $dir)
                   ->will($this->returnValue(array($result)));
 
         $value = $this->class->get_controller($dir, [ 'function' ], FALSE);
