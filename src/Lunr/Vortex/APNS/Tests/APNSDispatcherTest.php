@@ -52,7 +52,7 @@ abstract class APNSDispatcherTest extends LunrBaseTest
         $this->apn_functions = [
             'apn_set_certificate',
             'apn_set_private_key',
-            'apn_add_token',
+            'apn_payload_add_token',
             'apn_payload_init',
             'apn_payload_set_body',
             'apn_payload_set_sound',

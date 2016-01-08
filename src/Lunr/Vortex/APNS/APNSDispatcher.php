@@ -119,11 +119,11 @@ class APNSDispatcher implements PushNotificationDispatcherInterface
             $this->setup = TRUE;
         }
 
-        apn_add_token($this->apn, $this->endpoint);
-
         $tmp_payload = json_decode($this->payload, TRUE);
 
         $apn_payload = apn_payload_init();
+
+        apn_payload_add_token($apn_payload, $this->endpoint);
 
         apn_payload_set_body($apn_payload, $tmp_payload['alert']);
 
