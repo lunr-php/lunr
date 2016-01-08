@@ -88,6 +88,15 @@ interface RequestInterface
     public function get_server_data($key);
 
     /**
+     * Retrieve a stored HTTP Header from the SERVER value.
+     *
+     * @param mixed $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function get_http_header_data($key);
+
+    /**
      * Negotiate & retrieve the client's prefered content type.
      *
      * @param Array $supported Array containing the supported content types

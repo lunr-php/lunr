@@ -74,7 +74,7 @@ abstract class RequestTest extends LunrBaseTest
 
         $this->parser->expects($this->once())
                      ->method('parse_server')
-                     ->will($this->returnValue([ 'server_key' => 'server_value' ]));
+                     ->will($this->returnValue([ 'server_key' => 'server_value', 'HTTP_SERVER_KEY' => 'HTTP_SERVER_VALUE' ]));
 
         $this->parser->expects($this->once())
                      ->method('parse_files')

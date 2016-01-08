@@ -34,7 +34,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testServer()
     {
-        $this->assertEquals([ 'server_key' => 'server_value' ], $this->get_reflection_property_value('server'));
+        $this->assertEquals([ 'server_key' => 'server_value', 'HTTP_SERVER_KEY' => 'HTTP_SERVER_VALUE' ], $this->get_reflection_property_value('server'));
     }
 
     /**

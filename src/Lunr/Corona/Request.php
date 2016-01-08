@@ -295,6 +295,19 @@ class Request
     }
 
     /**
+     * Retrieve a stored HTTP Header from the SERVER value.
+     *
+     * @param mixed $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function get_http_header_data($key)
+    {
+        $http_key = 'HTTP_'.strtoupper(str_replace('-', '_', $key));
+        return isset($this->server[$http_key]) ? $this->server[$http_key] : NULL;
+    }
+
+    /**
      * Retrieve a stored COOKIE value.
      *
      * @param mixed $key Key for the value to retrieve
