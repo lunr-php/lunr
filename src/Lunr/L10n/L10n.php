@@ -9,7 +9,7 @@
  * @package    Lunr\L10n
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Julio Foulquié <julio@m2mobi.com>
- * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2010-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 

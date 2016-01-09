@@ -10,7 +10,7 @@
  * @package    Lunr\Sphere
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2010-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 

@@ -7,7 +7,7 @@
  *
  * @package    Lunr\Vortex\PAP
  * @author     Leonidas Diaamntis <leonidas@m2mobi.com>
- * @copyright  2014, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2014-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 

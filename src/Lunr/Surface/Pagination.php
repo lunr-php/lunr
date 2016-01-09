@@ -11,7 +11,7 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Javier Negre <javi@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @copyright  2010-2014, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2010-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
