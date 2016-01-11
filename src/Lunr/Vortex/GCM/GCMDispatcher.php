@@ -41,6 +41,12 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
     private $auth_token;
 
     /**
+     * Push Notification Priority
+     * @var string
+     */
+    private $priority;
+
+    /**
      * Shared instance of the Curl class.
      * @var Curl
      */
@@ -69,6 +75,7 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
         $this->endpoint   = '';
         $this->payload    = '';
         $this->auth_token = '';
+        $this->priority   = 'normal';
         $this->curl       = $curl;
         $this->logger     = $logger;
     }
@@ -81,6 +88,7 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
         unset($this->endpoint);
         unset($this->payload);
         unset($this->auth_token);
+        unset($this->priority);
         unset($this->curl);
         unset($this->logger);
     }
@@ -97,6 +105,7 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
 
         $tmp_payload                     = json_decode($this->payload, TRUE);
         $tmp_payload['registration_ids'] = [$this->endpoint];
+        $tmp_payload['priority']         = $this->priority;
         $this->payload                   = json_encode($tmp_payload);
 
         $response = $this->curl->post_request(self::GOOGLE_SEND_URL, $this->payload);
@@ -151,6 +160,21 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
         return $this;
     }
 
+    /**
+     * Sets the notification priority.
+     *
+     * @see https://developers.google.com/cloud-messaging/concept-options#setting-the-priority-of-a-message
+     *
+     * @param string $priority notification priority (normal|high)
+     *
+     * @return GCMPayload $self Self Reference
+     */
+    public function set_priority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
 }
 
 ?>

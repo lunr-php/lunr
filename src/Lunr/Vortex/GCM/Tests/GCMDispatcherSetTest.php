@@ -81,6 +81,19 @@ class GCMDispatcherSetTest extends GCMDispatcherTest
     }
 
     /**
+     * Test that set_priority() sets the priority.
+     *
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::set_priority
+     */
+    public function testSetPrioritySetsPayload()
+    {
+        $priority = 'priority';
+        $this->class->set_priority($priority);
+
+        $this->assertPropertyEquals('priority', 'priority');
+    }
+
+    /**
      * Test the fluid interface of set_auth_token().
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::set_auth_token

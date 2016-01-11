@@ -58,6 +58,14 @@ class GCMDispatcherBaseTest extends GCMDispatcherTest
         $this->assertPropertyEquals('auth_token', '');
     }
 
+    /**
+     * Test that the priority is set to 'normal' by default.
+     */
+    public function testPriorityIsNormal()
+    {
+        $this->assertPropertyEquals('priority', 'normal');
+    }
+
 }
 
 ?>
