@@ -7,6 +7,7 @@
  *
  * @package    Lunr\Vortex\GCM
  * @author     Dinos Theodorou <dinos@m2mobi.com>
+ * @author     Sean Molenaar <sean@m2mobi.com>
  * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -73,7 +74,7 @@ class GCMPayload
      *
      * The fields of data represent the key-value pairs of the message's payload data.
      *
-     * @param array $data The actuall notification information
+     * @param array $data The actual notification information
      *
      * @return GCMPayload $self Self Reference
      */
