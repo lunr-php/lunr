@@ -344,6 +344,10 @@
             <file>../src/Lunr/Vortex/WNS/Tests/WNSResponseSetTest.php</file>
             <file>../src/Lunr/Vortex/WNS/Tests/WNSResponseSuccessTest.php</file>
             <file>../src/Lunr/Vortex/WNS/Tests/WNSResponseErrorTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSDispatcherBaseTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSDispatcherOAuthTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSDispatcherPushTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSDispatcherSetTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPPayloadBaseTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPPayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPPayloadSetTest.php</file>
