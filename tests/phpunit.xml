@@ -334,6 +334,13 @@
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSDispatcherBaseTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSDispatcherSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSDispatcherPushTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSPayloadBaseTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSToastPayloadSetTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSToastPayloadGetTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSTilePayloadSetTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSTilePayloadGetTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSBadgePayloadSetTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSBadgePayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPPayloadBaseTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPPayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPPayloadSetTest.php</file>
@@ -377,6 +384,7 @@
                 <directory>../src/Lunr/Vortex/GCM/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Email/Tests/</directory>
                 <directory>../src/Lunr/Vortex/MPNS/Tests/</directory>
+                <directory>../src/Lunr/Vortex/WNS/Tests/</directory>
                 <directory>../src/Lunr/Vortex/PAP/Tests/</directory>
             </exclude>
         </whitelist>

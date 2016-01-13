@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tile>
+<visual>
+<binding template="TileSquareText04">
+<text id="1">Text</text>
+</binding>
+<binding template="TileWideText03">
+<text id="1">Text</text>
+</binding>
+</visual>
+</tile>

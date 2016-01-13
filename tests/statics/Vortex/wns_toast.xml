@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toast launch="Deeplink">
+<visual>
+<binding template="ToastGeneric">
+<text id="1">Title</text>
+<text id="2">Message</text>
+</binding>
+</visual>
+</toast>
