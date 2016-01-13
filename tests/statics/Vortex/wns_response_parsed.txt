@@ -1,0 +1,7 @@
+[
+    "Date" => "2016-01-13",
+    "X-WNS-Status" => "received",
+    "X-WNS-DeviceConnectionStatus" => "connected",
+    "X-WNS-Error-Description" => "Some Error",
+    "X-WNS-Debug-Trace" => "Some Trace"
+]

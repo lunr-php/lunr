@@ -341,6 +341,9 @@
             <file>../src/Lunr/Vortex/WNS/Tests/WNSTilePayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/WNS/Tests/WNSBadgePayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/WNS/Tests/WNSBadgePayloadGetTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSResponseSetTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSResponseSuccessTest.php</file>
+            <file>../src/Lunr/Vortex/WNS/Tests/WNSResponseErrorTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPPayloadBaseTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPPayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPPayloadSetTest.php</file>
