@@ -103,10 +103,10 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
         $this->curl->set_option('CURLOPT_HEADER', TRUE);
         $this->curl->set_http_headers(['Content-Type:application/json', 'Authorization: key=' . $this->auth_token]);
 
-        $tmp_payload                     = json_decode($this->payload, TRUE);
-        $tmp_payload['registration_ids'] = [$this->endpoint];
-        $tmp_payload['priority']         = $this->priority;
-        $this->payload                   = json_encode($tmp_payload);
+        $tmp_payload             = json_decode($this->payload, TRUE);
+        $tmp_payload['to']       = $this->endpoint;
+        $tmp_payload['priority'] = $this->priority;
+        $this->payload           = json_encode($tmp_payload);
 
         $response = $this->curl->post_request(self::GOOGLE_SEND_URL, $this->payload);
 
@@ -175,6 +175,7 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
 
         return $this;
     }
+
 }
 
 ?>
