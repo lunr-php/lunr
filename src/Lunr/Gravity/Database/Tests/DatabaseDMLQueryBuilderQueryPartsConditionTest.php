@@ -64,7 +64,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
     {
         $method = $this->get_accessible_reflection_method('sql_condition');
 
-        $this->set_reflection_property_value('is_join', TRUE);
+        $this->set_reflection_property_value('is_unfinished_join', TRUE);
         $this->set_reflection_property_value('join', 'JOIN table');
 
         $method->invokeArgs($this->class, [ 'a', 'b', '=', 'ON' ]);
@@ -83,7 +83,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
     {
         $method = $this->get_accessible_reflection_method('sql_condition');
 
-        $this->set_reflection_property_value('is_join', FALSE);
+        $this->set_reflection_property_value('is_unfinished_join', FALSE);
 
         $this->set_reflection_property_value('join', 'JOIN table ON (');
 

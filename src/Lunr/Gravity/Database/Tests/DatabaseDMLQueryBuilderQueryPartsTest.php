@@ -238,13 +238,28 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     */
     public function testOpenGroupIfJoin()
     {
-        $this->set_reflection_property_value('is_join', TRUE);
+        $this->set_reflection_property_value('is_unfinished_join', TRUE);
 
         $method = $this->get_accessible_reflection_method('sql_group_start');
         $method->invokeArgs($this->class, [ 'ON' ]);
 
         $this->assertEquals('ON (', $this->get_reflection_property_value('join'));
-        $this->assertFalse($this->get_reflection_property_value('is_join'));
+        $this->assertFalse($this->get_reflection_property_value('is_unfinished_join'));
+    }
+
+    /**
+     * Test grouping condition start with closed join statement.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
+     */
+    public function testOpenGroupIfNaturalJoin()
+    {
+        $this->set_reflection_property_value('is_unfinished_join', FALSE);
+
+        $method = $this->get_accessible_reflection_method('sql_group_start');
+        $method->invokeArgs($this->class, [ 'WHERE' ]);
+
+        $this->assertEquals('', $this->get_reflection_property_value('join'));
     }
 
     /**

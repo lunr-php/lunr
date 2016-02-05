@@ -9,6 +9,7 @@
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @author     Felipe Martinez <felipe@m2mobi.com>
+ * @author     Ruben de Groot <r.degroot@m2mobi.com>
  * @copyright  2012-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -154,17 +155,17 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     protected $connector;
 
     /**
-     * SQL Query part: Boolean identifying if we are joining tables
+     * SQL Query part: Boolean identifying if the join is not finished
      * @var Boolean
      */
-    protected $is_join;
+    protected $is_unfinished_join;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->select           = '';
+        $this->select            = '';
         $this->select_mode      = array();
         $this->update           = '';
         $this->update_mode      = array();
@@ -185,7 +186,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         $this->values           = '';
         $this->select_statement = '';
         $this->compound         = '';
-        $this->is_join          = FALSE;
+        $this->is_unfinished_join  = FALSE;
     }
 
     /**
@@ -214,7 +215,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         unset($this->column_names);
         unset($this->values);
         unset($this->select_statement);
-        unset($this->is_join);
+        unset($this->is_unfinished_join);
     }
 
     /**
@@ -458,6 +459,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     protected function sql_join($table_reference, $type, $index_hints = NULL)
     {
         $type = strtoupper($type);
+
         $join = ($type == 'STRAIGHT') ? 'STRAIGHT_JOIN ' : ltrim($type . ' JOIN ');
 
         if ($this->join != '')
@@ -467,7 +469,10 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
         $this->join .= $join . $table_reference . $this->prepare_index_hints($index_hints);
 
-        $this->is_join = TRUE;
+        if (!(substr($type, 0, 7) == 'NATURAL'))
+        {
+            $this->is_unfinished_join = TRUE;
+        }
     }
 
     /**
@@ -590,9 +595,9 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     {
         $condition = ($base === 'ON') ? 'join' : strtolower($base);
 
-        if (rtrim($this->$condition, '(') == '' || $this->is_join)
+        if (rtrim($this->$condition, '(') == '' || $this->is_unfinished_join)
         {
-            if ($this->is_join)
+            if ($this->is_unfinished_join)
             {
                 $this->$condition .= ' ' . $base . ' ';
             }
@@ -601,8 +606,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
                 $this->$condition = $base . ' ' . $this->$condition;
             }
 
-            $this->connector = '';
-            $this->is_join   = FALSE;
+            $this->connector       = '';
+            $this->is_unfinished_join = FALSE;
         }
         elseif ($this->connector != '')
         {
@@ -756,13 +761,10 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     protected function prepare_index_hints($index_hints)
     {
-        if (is_array($index_hints) && !empty($index_hints))
-        {
+        if (is_array($index_hints) && !empty($index_hints)) {
             $index_hints = array_diff($index_hints, array(NULL));
-            $hints       = ' ' . implode(', ', $index_hints);
-        }
-        else
-        {
+            $hints = ' ' . implode(', ', $index_hints);
+        } else {
             $hints = '';
         }
 
@@ -772,7 +774,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Open the parentheses for the sql condition.
      *
-     * @param String $condition String indicationg Statement to group
+     * @param String $condition String indication Statement to group
      *
      * @return void
      */
@@ -780,10 +782,10 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     {
         $condition = ($condition === 'ON') ? 'join' : strtolower($condition);
 
-        if ($this->is_join)
+        if ($this->is_unfinished_join)
         {
-            $this->$condition .= 'ON ';
-            $this->is_join     = FALSE;
+            $this->$condition     .= 'ON ';
+            $this->is_unfinished_join = FALSE;
         }
         elseif ($this->connector != '')
         {
@@ -801,7 +803,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Close the parentheses for the sql condition.
      *
-     * @param String $condition String indicationg Statement to group
+     * @param String $condition String indication Statement to group
      *
      * @return void
      */

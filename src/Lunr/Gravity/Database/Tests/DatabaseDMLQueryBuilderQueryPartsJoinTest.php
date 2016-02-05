@@ -192,17 +192,33 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
     }
 
     /**
-     * Test that specifying a join clause sets the property is_join.
+     * Test that specifying a join clause sets the property is_unfinished_join to FALSE
+     * when there is a natural join.
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
      */
-    public function testJoinSetsIsJoin()
+    public function testJoinSetsUnfinishedJoinWithNaturalJoin()
+    {
+        $method = $this->get_accessible_reflection_method('sql_join');
+
+        $method->invokeArgs($this->class, [ 'table', 'NATURAL LEFT JOIN' ]);
+
+        $this->assertFalse($this->get_reflection_property_value('is_unfinished_join'));
+    }
+
+    /**
+     * Test that specifying a join clause sets the property is_unfinished_join to TRUE
+     * when the join still has to be finished.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
+     */
+    public function testJoinSetsUnfinishedJoin()
     {
         $method = $this->get_accessible_reflection_method('sql_join');
 
         $method->invokeArgs($this->class, [ 'table', 'INNER' ]);
 
-        $this->assertTrue($this->get_reflection_property_value('is_join'));
+        $this->assertTrue($this->get_reflection_property_value('is_unfinished_join'));
     }
 
 }
