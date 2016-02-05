@@ -234,7 +234,7 @@ class MySQLConnection extends DatabaseConnection
 
         if ($this->mysqli->errno === 0)
         {
-            $this->mysqli->set_charset('utf8');
+            $this->mysqli->set_charset('utf8mb4');
             $this->connected = TRUE;
         }
     }
