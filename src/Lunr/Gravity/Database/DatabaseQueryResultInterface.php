@@ -65,14 +65,14 @@ interface DatabaseQueryResultInterface
     /**
      * Returns the number of rows affected by the last query.
      *
-     * @return mixed $number Number of rows in the result set.
+     * @return mixed $number Number of affected rows in the result set.
      */
     public function affected_rows();
 
     /**
-     * Returns the number of rows in the result set.
+     * Returns the number of rows in the query.
      *
-     * @return mixed $number Number of rows in the result set.
+     * @return Integer $number Number of rows in the result set.
      */
     public function number_of_rows();
 
