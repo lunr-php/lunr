@@ -54,27 +54,37 @@ class WNSToastPayload extends WNSPayload
      */
     public function get_payload()
     {
-        $xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-        if (isset($this->elements['deeplink']))
+        $text_id = 1;
+
+        $template = 'ToastText01';
+        if(isset($this->elements['title']) && isset($this->elements['message']))
         {
-            $xml .= '<toast launch="' . $this->elements['deeplink'] . "\">\n";
-        }
-        else
-        {
-            $xml .= "<toast>\n";
+            $template = 'ToastText02';
         }
 
+        $deeplink = '';
+        if(isset($this->elements['deeplink']))
+        {
+            $deeplink = $this->elements['deeplink'];
+        }
+
+        $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        $xml .= "<toast launch=\"".$deeplink."\">\n";
+
+
         $xml .= "<visual>\n";
-        $xml .= "<binding template=\"ToastGeneric\">\n";
+        $xml .= "<binding template=\"".$template."\">\n";
+
 
         if (isset($this->elements['title']))
         {
-            $xml .= '<text id="1">' . $this->elements['title'] . "</text>\n";
+            $xml .= '<text id="'.$text_id.'">' . $this->elements['title'] . "</text>\n";
+            $text_id++;
         }
 
         if (isset($this->elements['message']))
         {
-            $xml .= '<text id="2">' . $this->elements['message'] . "</text>\n";
+            $xml .= '<text id="'.$text_id.'">' . $this->elements['message'] . "</text>\n";
         }
 
         $xml .= "</binding>\n";

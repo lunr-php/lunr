@@ -43,7 +43,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
                        [
                            'X-WNS-Type: wns/tile',
                            'Accept: application/*',
-                           'Authenication: Bearer 123456',
+                           'Authorization: Bearer 123456',
                            'X-WNS-RequestForStatus: true',
                        ]));
                        $this->curl->expects($this->never())
@@ -87,7 +87,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
                        [
                            'X-WNS-Type: wns/tile',
                            'Accept: application/*',
-                           'Authenication: Bearer 123456',
+                           'Authorization: Bearer 123456',
                            'X-WNS-RequestForStatus: true',
                        ]));
                        $this->curl->expects($this->once())
@@ -124,7 +124,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
                        [
                            'X-WNS-Type: wns/toast',
                            'Accept: application/*',
-                           'Authenication: Bearer 123456',
+                           'Authorization: Bearer 123456',
                            'X-WNS-RequestForStatus: true',
                        ]));
                        $this->curl->expects($this->once())
@@ -191,7 +191,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
                        [
                            'X-WNS-Type: wns/raw',
                            'Accept: application/*',
-                           'Authenication: Bearer 123456',
+                           'Authorization: Bearer 123456',
                            'X-WNS-RequestForStatus: true',
                        ]));
 

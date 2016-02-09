@@ -139,7 +139,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
         $this->curl->set_http_headers([
             'X-WNS-Type: wns/' . $this->type,
             'Accept: application/*',
-            'Authenication: Bearer ' . $this->oauth_token,
+            'Authorization: Bearer ' . $this->oauth_token,
             'X-WNS-RequestForStatus: true',
         ]);
 
@@ -235,7 +235,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
     /**
      * Get an oath token from the microsoft webservice.
      *
-     * @return mixed the Curl response.
+     * @return string|boolean the Curl response or FALSE if it failed.
      */
     public function get_oauth_token()
     {
@@ -246,9 +246,29 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
             'scope'         => self::NOTIFICATION_SCOPE,
         ];
 
-        $response = $this->curl->post_request(self::TOKEN_URL, json_encode($request_post));
+        $this->curl->set_http_header('Content-Type: application/x-www-form-urlencoded');
 
-        return $response->get_result();
+        $http_response = $this->curl->post_request(self::TOKEN_URL, http_build_query($request_post));
+
+        if($http_response->error_number > 0)
+        {
+            $this->logger->error('Requesting token failed: No response');
+            return FALSE;
+        }
+
+        $response_object = json_decode($http_response->get_result());
+        if(!(json_last_error() === JSON_ERROR_NONE))
+        {
+            $this->logger->error('Requesting token failed: Malformed JSON response');
+            return FALSE;
+        }
+        if(!property_exists($response_object, "access_token"))
+        {
+            $this->logger->error('Requesting token failed: Not a valid JSON response');
+            return FALSE;
+        }
+
+        return $response_object->access_token;
     }
 
     /**

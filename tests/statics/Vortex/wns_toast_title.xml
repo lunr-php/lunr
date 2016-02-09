@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<toast>
+<?xml version="1.0" encoding="UTF-8"?>
+<toast launch="">
 <visual>
-<binding template="ToastGeneric">
+<binding template="ToastText01">
 <text id="1">Title</text>
 </binding>
 </visual>
