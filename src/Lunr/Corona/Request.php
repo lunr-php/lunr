@@ -73,6 +73,12 @@ class Request
     protected $files;
 
     /**
+     * Stored php://input values
+     * @var string
+     */
+    protected $raw_data;
+
+    /**
      * Stored command line arguments
      * @var array
      */
@@ -106,6 +112,7 @@ class Request
         $this->cookie   = $parser->parse_cookie();
         $this->files    = $parser->parse_files();
         $this->cli_args = $parser->parse_command_line_arguments();
+        $this->raw_data = NULL;
 
         $this->mock = [];
     }
@@ -123,6 +130,7 @@ class Request
         unset($this->files);
         unset($this->parser);
         unset($this->mock);
+        unset($this->raw_data);
     }
 
     /**
@@ -317,7 +325,12 @@ class Request
      */
     public function get_raw_data()
     {
-        return $this->parser->parse_raw_data();
+        $input = $this->parser->parse_raw_data();
+        if (!empty($input))
+        {
+            $this->raw_data = $input;
+        }
+        return $this->raw_data;
     }
 
 }

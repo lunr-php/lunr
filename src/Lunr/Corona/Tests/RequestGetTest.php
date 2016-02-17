@@ -271,6 +271,47 @@ class RequestGetTest extends RequestTest
         $this->assertEquals('raw', $this->class->get_raw_data());
     }
 
+
+    /**
+     * Test that get_raw_data() returns cached raw request data if parsing it is empty.
+     *
+     * @covers Lunr\Corona\Request::get_raw_data
+     */
+    public function testGetRawDataReturnsCachedRawRequestData()
+    {
+        $this->parser->expects($this->at(0))
+                     ->method('parse_raw_data')
+                     ->will($this->returnValue('raw'));
+
+        $this->parser->expects($this->at(1))
+                     ->method('parse_raw_data')
+                     ->will($this->returnValue(''));
+
+        $this->assertEquals('raw', $this->class->get_raw_data());
+        $this->assertEquals('raw', $this->class->get_raw_data());
+        $this->assertEquals('raw',$this->get_reflection_property_value('raw_data'));
+    }
+
+    /**
+     * Test that get_raw_data() returns no cached raw request data if parsing it is not empty.
+     *
+     * @covers Lunr\Corona\Request::get_raw_data
+     */
+    public function testGetRawDataReturnsUnCachedRawRequestData()
+    {
+        $this->parser->expects($this->at(0))
+                     ->method('parse_raw_data')
+                     ->will($this->returnValue('raw'));
+
+        $this->parser->expects($this->at(1))
+                     ->method('parse_raw_data')
+                     ->will($this->returnValue('hello'));
+
+        $this->assertEquals('raw', $this->class->get_raw_data());
+        $this->assertEquals('raw',$this->get_reflection_property_value('raw_data'));
+        $this->assertEquals('hello', $this->class->get_raw_data());
+        $this->assertEquals('hello',$this->get_reflection_property_value('raw_data'));
+    }
 }
 
 ?>

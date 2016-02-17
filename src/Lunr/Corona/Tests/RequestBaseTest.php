@@ -70,6 +70,14 @@ class RequestBaseTest extends RequestTest
     }
 
     /**
+     * Check that raw data is set correctly.
+     */
+    public function testRawData()
+    {
+        $this->assertNull($this->get_reflection_property_value('raw_data'));
+    }
+
+    /**
      * Check that request is filled with sane default values.
      *
      * @param String $key   key for a request value
