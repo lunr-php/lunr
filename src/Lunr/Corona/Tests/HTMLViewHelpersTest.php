@@ -105,6 +105,41 @@ class HTMLViewHelpersTest extends HTMLViewTest
     }
 
     /**
+     * Test generating stylesheet include links for external stylesheets.
+     *
+     * @requires extension runkit
+     * @covers   Lunr\Corona\HTMLView::include_stylesheets
+     */
+    public function testIncludeStylesheetsWithExternalStylesheets()
+    {
+        $this->set_reflection_property_value('stylesheets', [ 'http://www.website.com/style3.css', 'https://www.website.com/style2.css', '//www.website.com/style1.css']);
+
+        $method = $this->get_accessible_reflection_method('include_stylesheets');
+
+        $this->request->expects($this->never())
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->never())
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->request->expects($this->never())
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->never())
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->assertStringEqualsFile(TEST_STATICS . '/Corona/stylesheet_external.html', $method->invoke($this->class));
+    }
+
+    /**
      * Test generating stylesheet include links for multiple sorted stylesheets.
      *
      * @requires extension runkit
@@ -223,6 +258,41 @@ class HTMLViewHelpersTest extends HTMLViewTest
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/javascript_2.html', $method->invoke($this->class));
 
         $this->unmock_function('filemtime');
+    }
+
+    /**
+     * Test generating javascript include links for external javascript files.
+     *
+     * @requires extension runkit
+     * @covers   Lunr\Corona\HTMLView::include_javascript
+     */
+    public function testIncludeJavascriptWithExternalJSFiles()
+    {
+        $this->set_reflection_property_value('javascript', [ 'http://www.website.com/script3.js', 'https://www.website.com/script2.js', '//www.website.com/script1.js']);
+
+        $method = $this->get_accessible_reflection_method('include_javascript');
+
+        $this->request->expects($this->never())
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->never())
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->request->expects($this->never())
+                      ->method('__get')
+                      ->with($this->equalTo('application_path'))
+                      ->will($this->returnValue('/full/path/to/'));
+
+        $this->request->expects($this->never())
+                      ->method('__get')
+                      ->with($this->equalTo('base_path'))
+                      ->will($this->returnValue('/to/'));
+
+        $this->assertStringEqualsFile(TEST_STATICS . '/Corona/javascript_external.html', $method->invoke($this->class));
     }
 
     /**

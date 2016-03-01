@@ -76,8 +76,12 @@ abstract class HTMLView extends View
 
         foreach($this->stylesheets as $stylesheet)
         {
-            $stylesheet .= '?' . filemtime($this->request->application_path . str_replace($this->request->base_path, '', $stylesheet));
-            $links      .= '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '">' . "\n";
+            if (!$this->is_external($stylesheet))
+            {
+                $stylesheet .= '?' . filemtime($this->request->application_path . str_replace($this->request->base_path, '', $stylesheet));
+            }
+
+            $links .= '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '">' . "\n";
         }
 
         return $links;
@@ -101,11 +105,28 @@ abstract class HTMLView extends View
 
         foreach($this->javascript as $js)
         {
-            $js    .= '?' . filemtime($this->request->application_path . str_replace($this->request->base_path, '', $js));
+
+            if (!$this->is_external($js))
+            {
+                $js .= '?' . filemtime($this->request->application_path . str_replace($this->request->base_path, '', $js));
+            }
+
             $links .= '<script src="' . $js . '"></script>' . "\n";
         }
 
         return $links;
+    }
+
+    /**
+     * Check of a URI is external or local
+     *
+     * @param string $uri a URI
+     *
+     * @return bool if the URI is external or not
+     */
+    private function is_external($uri)
+    {
+        return (strpos($uri, 'http://') === 0 || strpos($uri, 'https://') === 0 || strpos($uri, '//') === 0);
     }
 
     /**
