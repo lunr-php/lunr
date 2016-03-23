@@ -107,11 +107,11 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
     public function testGetOathRespondsFalseIfInvalidJSON()
     {
         $request_post = http_build_query([
-                                             'grant_type'    => 'client_credentials',
-                                             'client_id'     => '012345',
-                                             'client_secret' => '012345678',
-                                             'scope'         => 'notify.windows.com',
-                                         ]);
+            'grant_type'    => 'client_credentials',
+            'client_id'     => '012345',
+            'client_secret' => '012345678',
+            'scope'         => 'notify.windows.com',
+        ]);
 
         $this->expectFromConfig('012345', '012345678');
 
@@ -140,11 +140,11 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
     public function testGetOathRespondsFalseIfIncompleteJSON()
     {
         $request_post = http_build_query([
-                                             'grant_type'    => 'client_credentials',
-                                             'client_id'     => '012345',
-                                             'client_secret' => '012345678',
-                                             'scope'         => 'notify.windows.com',
-                                         ]);
+            'grant_type'    => 'client_credentials',
+            'client_id'     => '012345',
+            'client_secret' => '012345678',
+            'scope'         => 'notify.windows.com',
+        ]);
 
         $this->expectFromConfig('012345', '012345678');
 

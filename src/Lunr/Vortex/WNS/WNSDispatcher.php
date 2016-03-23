@@ -262,7 +262,8 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
             $this->logger->error('Requesting token failed: Malformed JSON response');
             return FALSE;
         }
-        if(!property_exists($response_object, "access_token"))
+
+        if(!property_exists($response_object, 'access_token'))
         {
             $this->logger->error('Requesting token failed: Not a valid JSON response');
             return FALSE;

@@ -68,23 +68,23 @@ class WNSToastPayload extends WNSPayload
             $deeplink = $this->elements['deeplink'];
         }
 
-        $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        $xml .= "<toast launch=\"".$deeplink."\">\n";
+        $xml  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        $xml .= '<toast launch="' . $deeplink . "\">\n";
 
 
         $xml .= "<visual>\n";
-        $xml .= "<binding template=\"".$template."\">\n";
+        $xml .= '<binding template="' . $template . "\">\n";
 
 
         if (isset($this->elements['title']))
         {
-            $xml .= '<text id="'.$text_id.'">' . $this->elements['title'] . "</text>\n";
+            $xml .= '<text id="' . $text_id . '">' . $this->elements['title'] . "</text>\n";
             $text_id++;
         }
 
         if (isset($this->elements['message']))
         {
-            $xml .= '<text id="'.$text_id.'">' . $this->elements['message'] . "</text>\n";
+            $xml .= '<text id="' . $text_id . '">' . $this->elements['message'] . "</text>\n";
         }
 
         $xml .= "</binding>\n";
