@@ -150,6 +150,7 @@
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionConnectTest.php</file>
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionEscapeTest.php</file>
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionTransactionTest.php</file>
+	    <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionQueryTest.php</file>
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderConditionTest.php</file>
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderGroupByTest.php</file>
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderSelectTest.php</file>

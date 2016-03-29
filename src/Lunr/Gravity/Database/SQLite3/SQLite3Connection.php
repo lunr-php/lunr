@@ -8,6 +8,7 @@
  * @package    Lunr\Gravity\Database\SQLite3
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
+ * @author     Ruben de Groot <r.degroot@m2mobi.com>
  * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -186,11 +187,11 @@ class SQLite3Connection extends DatabaseConnection
 
         if ($this->connected === TRUE)
         {
-            return NULL;
+            return new SQLite3QueryResult($sql_query, $this->sqlite3->query($sql_query), $this->sqlite3);
         }
         else
         {
-            return NULL;
+            return new SQLite3QueryResult($sql_query, FALSE, $this->sqlite3);
         }
     }
 

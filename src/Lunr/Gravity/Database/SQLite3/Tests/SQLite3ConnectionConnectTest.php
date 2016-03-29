@@ -111,7 +111,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::connect
      */
-    public function testConnectFailsWhenDriverIsNotMysql()
+    public function testConnectFailsWhenDriverIsNotSQLite3()
     {
         $sub_configuration = $this->getMock('Lunr\Core\Configuration');
 
