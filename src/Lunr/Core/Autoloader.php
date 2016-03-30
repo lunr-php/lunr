@@ -186,6 +186,15 @@ class Autoloader
         }
         while (strrpos($namespace, '\\') > 1);
 
+        # Try once more in case we have a mapped namespace without namespace separator
+        if (isset($this->prefixes[$namespace]) === TRUE)
+        {
+            $base_path = $this->prefixes[$namespace];
+            $class     = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+
+            return $base_path . $class . '.php';
+        }
+
         return $classname . '.php';
     }
 

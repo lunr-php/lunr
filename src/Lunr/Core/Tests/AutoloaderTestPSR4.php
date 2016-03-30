@@ -39,6 +39,8 @@ class AutoloaderTestPSR4 extends AutoloaderTest
         $classes[] = [ 'L1\L2', 'src/Level_word/', 'L1\L2\File', 'src/Level_word/File.php' ];
         $classes[] = [ 'L1\L2_word', 'src/Level/', 'L1\L2_word\File', 'src/Level/File.php' ];
 
+        $classes[] = [ 'L1', 'src/Level/', 'L1\L2\File', 'src/Level/L2/File.php' ];
+
         return $classes;
     }
 
