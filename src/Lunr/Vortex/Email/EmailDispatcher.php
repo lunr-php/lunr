@@ -117,15 +117,22 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
     }
 
     /**
-     * Set the endpoint for the email.
+     * Set the endpoints for the email.
      *
-     * @param String $endpoint The endpoint for the email
+     * @param Array|String $endpoints The endpoint for the email
      *
      * @return EmailDispatcher $self Self reference
      */
-    public function set_endpoint($endpoint)
+    public function set_endpoints($endpoints)
     {
-        $this->endpoint = $endpoint;
+        if (is_array($endpoints))
+        {
+            $this->endpoint = empty($endpoints) ? '' : $endpoints[0];
+        }
+        else
+        {
+            $this->endpoint = $endpoints;
+        }
 
         return $this;
     }

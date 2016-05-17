@@ -29,7 +29,7 @@ class WNSDispatcherBaseTest extends WNSDispatcherTest
     /**
      * Test that the endpoint is set to an empty string by default.
      */
-    public function testEndpointIsEmptyString()
+    public function testEndpointsIsEmptyString()
     {
         $this->assertPropertyEquals('endpoint', '');
     }

@@ -22,25 +22,49 @@ class GCMDispatcherSetTest extends GCMDispatcherTest
 {
 
     /**
-     * Test that set_endpoint() sets the endpoint.
+     * Test that set_endpoints() sets unique endpoint with single parameter.
      *
-     * @covers Lunr\Vortex\GCM\GCMDispatcher::set_endpoint
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::set_endpoints
      */
-    public function testSetEndpointSetsEndpoint()
+    public function testSetEndpointsSetsUniqueEndpointWithString()
     {
-        $this->class->set_endpoint('endpoint');
+        $this->class->set_endpoints('endpoint');
 
         $this->assertPropertyEquals('endpoint', 'endpoint');
     }
 
     /**
-     * Test the fluid interface of set_endpoint().
+     * Test that set_endpoints() sets the first endpoint of the list.
      *
-     * @covers Lunr\Vortex\GCM\GCMDispatcher::set_endpoint
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::set_endpoints
      */
-    public function testSetEndpointReturnsSelfReference()
+    public function testSetEndpointsSetsFirstEndpointWithArray()
     {
-        $this->assertEquals($this->class, $this->class->set_endpoint('endpoint'));
+        $this->class->set_endpoints([ 'endpoint1', 'endpoint2' ]);
+
+        $this->assertPropertyEquals('endpoint', 'endpoint1');
+    }
+
+    /**
+     * Test that set_endpoints() sets empty endpoint with empty endpoints list.
+     *
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::set_endpoints
+     */
+    public function testSetEndpointsSetsEmptyEndpointWithEmptyArray()
+    {
+        $this->class->set_endpoints([]);
+
+        $this->assertPropertyEquals('endpoint', '');
+    }
+
+    /**
+     * Test the fluid interface of set_endpoints().
+     *
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::set_endpoints
+     */
+    public function testSetEndpointsReturnsSelfReference()
+    {
+        $this->assertEquals($this->class, $this->class->set_endpoints('endpoint'));
     }
 
     /**

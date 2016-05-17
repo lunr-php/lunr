@@ -200,15 +200,22 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     }
 
     /**
-     * Set the endpoint for the push.
+     * Set the endpoint(s) for the push.
      *
-     * @param String $endpoint The endpoint for the push
+     * @param Array|String $endpoints The endpoint(s) for the push
      *
      * @return PAPDispatcher $self Self reference
      */
-    public function set_endpoint($endpoint)
+    public function set_endpoints($endpoints)
     {
-        $this->endpoint = $endpoint;
+        if (is_array($endpoints))
+        {
+            $this->endpoint = empty($endpoints) ? '' : $endpoints[0];
+        }
+        else
+        {
+            $this->endpoint = $endpoints;
+        }
 
         return $this;
     }

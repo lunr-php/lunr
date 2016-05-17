@@ -26,9 +26,9 @@ class EmailDispatcherBaseTest extends EmailDispatcherTest
     use PsrLoggerTestTrait;
 
     /**
-     * Test that the endpoint is set to an empty array by default.
+     * Test that the endpoint is set to an empty string by default.
      */
-    public function testEndpointIsEmptyArray()
+    public function testEndpointsIsEmptyString()
     {
         $this->assertPropertyEmpty('endpoint');
     }

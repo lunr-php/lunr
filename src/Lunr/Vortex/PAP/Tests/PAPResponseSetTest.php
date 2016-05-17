@@ -123,7 +123,7 @@ class PAPResponseSetTest extends PAPResponseTest
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::set_status
      */
-    public function testSetStatusWithInvalidEndpointLogsError()
+    public function testSetStatusWithInvalidEndpointsLogsError()
     {
         $file = file_get_contents(TEST_STATICS . '/Vortex/pap_response_error_invalid_endpoint.xml');
 

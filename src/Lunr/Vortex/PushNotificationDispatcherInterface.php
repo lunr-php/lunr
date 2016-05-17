@@ -29,13 +29,13 @@ interface PushNotificationDispatcherInterface
     public function push();
 
     /**
-     * Set the endpoint for the push.
+     * Set the endpoint(s) for the push.
      *
-     * @param String $endpoint The endpoint for the push
+     * @param Array|String $endpoints The endpoint(s) for the push
      *
      * @return PushNotificationDispatcherInterface $self Self reference
      */
-    public function set_endpoint($endpoint);
+    public function set_endpoints($endpoints);
 
     /**
      * Set the the payload to push.
