@@ -14,11 +14,12 @@
 namespace Lunr\Vortex\Email;
 
 use Lunr\Vortex\PushNotificationStatus;
+use Lunr\Vortex\PushNotificationResponseInterface;
 
 /**
  * Email notification response wrapper.
  */
-class EmailResponse
+class EmailResponse implements PushNotificationResponseInterface
 {
 
     /**

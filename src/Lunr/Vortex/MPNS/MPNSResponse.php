@@ -14,11 +14,12 @@
 namespace Lunr\Vortex\MPNS;
 
 use Lunr\Vortex\PushNotificationStatus;
+use Lunr\Vortex\PushNotificationResponseInterface;
 
 /**
  * Windows Phone Push Notification response wrapper.
  */
-class MPNSResponse
+class MPNSResponse implements PushNotificationResponseInterface
 {
 
     /**

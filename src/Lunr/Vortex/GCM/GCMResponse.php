@@ -14,11 +14,12 @@
 namespace Lunr\Vortex\GCM;
 
 use Lunr\Vortex\PushNotificationStatus;
+use Lunr\Vortex\PushNotificationResponseInterface;
 
 /**
  * Google Cloud Messaging Push Notification response wrapper.
  */
-class GCMResponse
+class GCMResponse implements PushNotificationResponseInterface
 {
 
     /**

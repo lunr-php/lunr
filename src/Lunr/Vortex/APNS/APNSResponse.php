@@ -14,11 +14,12 @@
 namespace Lunr\Vortex\APNS;
 
 use Lunr\Vortex\PushNotificationStatus;
+use Lunr\Vortex\PushNotificationResponseInterface;
 
 /**
  * Apple Push Notification Service response wrapper.
  */
-class APNSResponse
+class APNSResponse implements PushNotificationResponseInterface
 {
 
     /**

@@ -14,11 +14,12 @@
 namespace Lunr\Vortex\PAP;
 
 use Lunr\Vortex\PushNotificationStatus;
+use Lunr\Vortex\PushNotificationResponseInterface;
 
 /**
  * Google Cloud Messaging Push Notification response wrapper.
  */
-class PAPResponse
+class PAPResponse implements PushNotificationResponseInterface
 {
 
     /**
