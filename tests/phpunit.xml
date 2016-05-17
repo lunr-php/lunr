@@ -320,6 +320,7 @@
             <file>../src/Lunr/Vortex/Email/Tests/EmailResponseErrorTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailResponseSetTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailResponseSuccessTest.php</file>
+            <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherBaseTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherSetTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherTest.php</file>
@@ -365,6 +366,7 @@
             <file>../src/Lunr/Vortex/PAP/Tests/PAPResponseInvalidXMLTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPResponseSetTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPResponseSuccessTest.php</file>
+            <file>../src/Lunr/Vortex/PAP/Tests/PAPDispatcherBaseTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPDispatcherSetTest.php</file>
             <file>../src/Lunr/Vortex/PAP/Tests/PAPDispatcherTest.php</file>
