@@ -29,6 +29,12 @@ class EmailResponse implements PushNotificationResponseInterface
     private $status;
 
     /**
+     * Push notification endpoint.
+     * @var String
+     */
+    private $endpoint;
+
+    /**
      * Constructor.
      *
      * @param Boolean         $response Response of the Mail Class.
@@ -37,6 +43,8 @@ class EmailResponse implements PushNotificationResponseInterface
      */
     public function __construct($response, $logger, $email)
     {
+        $this->endpoint = $email;
+
         if ($response === TRUE)
         {
             $this->status = PushNotificationStatus::SUCCESS;
@@ -59,12 +67,19 @@ class EmailResponse implements PushNotificationResponseInterface
     }
 
     /**
-     * Get notification delivery status.
+     * Get notification delivery status for an endpoint.
      *
-     * @return PushNotificationStatus $status Delivery status
+     * @param String $endpoint endpoint
+     *
+     * @return PushNotificationStatus $status Delivery status for the endpoint
      */
-    public function get_status()
+    public function get_status($endpoint)
     {
+        if ($endpoint != $this->endpoint)
+        {
+            return PushNotificationStatus::UNKNOWN;
+        }
+
         return $this->status;
     }
 

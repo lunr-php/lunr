@@ -56,11 +56,39 @@ class MPNSResponseSuccessTest extends MPNSResponseTest
     }
 
     /**
+     * Test that the endpoint is set correctly.
+     */
+    public function testEndpointSetCorrectly()
+    {
+        $this->assertPropertySame('endpoint', 'http://localhost/');
+    }
+
+    /**
      * Test that the http code is set from the Response object.
      */
     public function testHttpCodeIsSetCorrectly()
     {
         $this->assertEquals(200, $this->get_reflection_property_value('http_code'));
+    }
+
+    /**
+     * Test that get_status() returns the dispatch status with correct endpoint.
+     *
+     * @covers Lunr\Vortex\MPNS\MPNSResponse::get_status
+     */
+    public function testGetStatusReturnsStatusForCorrectEndpoint()
+    {
+        $this->assertEquals($this->class->get_status('http://localhost/'), PushNotificationStatus::SUCCESS);
+    }
+
+    /**
+     * Test that get_status() returns unknown status with incorrect endpoint.
+     *
+     * @covers Lunr\Vortex\MPNS\MPNSResponse::get_status
+     */
+    public function testGetStatusReturnsUnknownStatusForIncorrectEndpoint()
+    {
+        $this->assertEquals($this->class->get_status('http://foo/'), PushNotificationStatus::UNKNOWN);
     }
 
 }

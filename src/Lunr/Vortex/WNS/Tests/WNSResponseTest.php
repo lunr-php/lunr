@@ -64,7 +64,7 @@ abstract class WNSResponseTest extends LunrBaseTest
 
         $map = [ [ 'http_code', 404 ], [ 'url', 'http://localhost/' ] ];
 
-        $response->expects($this->exactly(2))
+        $response->expects($this->exactly(3))
                  ->method('__get')
                  ->will($this->returnValueMap($map));
 
@@ -111,7 +111,7 @@ abstract class WNSResponseTest extends LunrBaseTest
         $file = TEST_STATICS . '/Vortex/wns_response.txt';
         $map  = [ [ 'http_code', 200 ], [ 'header_size', 129 ], [ 'url', 'http://localhost/' ] ];
 
-        $response->expects($this->exactly(3))
+        $response->expects($this->exactly(4))
                  ->method('__get')
                  ->will($this->returnValueMap($map));
 

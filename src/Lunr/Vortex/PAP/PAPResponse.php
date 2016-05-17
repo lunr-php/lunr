@@ -47,6 +47,12 @@ class PAPResponse implements PushNotificationResponseInterface
     private $pap_response;
 
     /**
+     * Push notification endpoint.
+     * @var String
+     */
+    private $endpoint;
+
+    /**
      * Constructor.
      *
      * @param CurlResponse    $response  Curl Response object.
@@ -57,6 +63,7 @@ class PAPResponse implements PushNotificationResponseInterface
     {
         $this->http_code    = $response->http_code;
         $this->result       = $response->get_result();
+        $this->endpoint     = $device_id;
         $this->pap_response = [];
 
         if ($response->get_network_error_number() !== 0)
@@ -203,12 +210,19 @@ class PAPResponse implements PushNotificationResponseInterface
     }
 
     /**
-     * Get notification delivery status.
+     * Get notification delivery status for an endpoint.
      *
-     * @return PushNotificationStatus $status Delivery status
+     * @param String $endpoint endpoint
+     *
+     * @return PushNotificationStatus $status Delivery status for the endpoint
      */
-    public function get_status()
+    public function get_status($endpoint)
     {
+        if ($endpoint != $this->endpoint)
+        {
+            return PushNotificationStatus::UNKNOWN;
+        }
+
         return $this->status;
     }
 

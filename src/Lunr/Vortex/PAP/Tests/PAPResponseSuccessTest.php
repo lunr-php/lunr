@@ -40,6 +40,14 @@ class PAPResponseSuccessTest extends PAPResponseTest
     }
 
     /**
+     * Test that the endpoint is set correctly.
+     */
+    public function testEndpointSetCorrectly()
+    {
+        $this->assertPropertySame('endpoint', '12345679');
+    }
+
+    /**
      * Test that the http code is set from the Response object.
      */
     public function testHttpCodeIsSetCorrectly()
@@ -62,6 +70,26 @@ class PAPResponseSuccessTest extends PAPResponseTest
         $result = $method->invoke($this->class);
 
         $this->assertEquals(1, count($result));
+    }
+
+    /**
+     * Test that get_status() returns the dispatch status with correct endpoint.
+     *
+     * @covers Lunr\Vortex\PAP\PAPResponse::get_status
+     */
+    public function testGetStatusReturnsStatusForCorrectEndpoint()
+    {
+        $this->assertEquals($this->class->get_status('12345679'), PushNotificationStatus::SUCCESS);
+    }
+
+    /**
+     * Test that get_status() returns unknown status with incorrect endpoint.
+     *
+     * @covers Lunr\Vortex\PAP\PAPResponse::get_status
+     */
+    public function testGetStatusReturnsUnknownStatusForIncorrectEndpoint()
+    {
+        $this->assertEquals($this->class->get_status('abcdefghi'), PushNotificationStatus::UNKNOWN);
     }
 
 }

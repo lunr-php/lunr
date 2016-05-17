@@ -41,6 +41,12 @@ class APNSResponse implements PushNotificationResponseInterface
     private $result;
 
     /**
+     * Push notification endpoint.
+     * @var String
+     */
+    private $endpoint;
+
+    /**
      * Constructor.
      *
      * @param array           $response  The response from the APNS stream.
@@ -50,8 +56,8 @@ class APNSResponse implements PushNotificationResponseInterface
     public function __construct($response, $logger, $device_id)
     {
         $this->response_code = $response['error_code'];
-
-        $this->result = $response['error_message'];
+        $this->result        = $response['error_message'];
+        $this->endpoint      = $device_id;
 
         $this->set_status($device_id, $logger);
     }
@@ -112,12 +118,19 @@ class APNSResponse implements PushNotificationResponseInterface
     }
 
     /**
-     * Get notification delivery status.
+     * Get notification delivery status for an endpoint.
      *
-     * @return PushNotificationStatus $status Delivery status
+     * @param String $endpoint endpoint
+     *
+     * @return PushNotificationStatus $status Delivery status for the endpoint
      */
-    public function get_status()
+    public function get_status($endpoint)
     {
+        if ($endpoint != $this->endpoint)
+        {
+            return PushNotificationStatus::UNKNOWN;
+        }
+
         return $this->status;
     }
 

@@ -20,11 +20,13 @@ interface PushNotificationResponseInterface
 {
 
     /**
-     * Get notification delivery status.
+     * Get notification delivery status for an endpoint.
      *
-     * @return PushNotificationStatus $status Delivery status
+     * @param String $endpoint endpoint
+     *
+     * @return PushNotificationStatus $status Delivery status for the endpoint
      */
-    public function get_status();
+    public function get_status($endpoint);
 
 }
 

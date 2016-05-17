@@ -48,6 +48,14 @@ class WNSResponseErrorTest extends WNSResponseTest
     }
 
     /**
+     * Test that the endpoint is set correctly.
+     */
+    public function testEndpointSetCorrectly()
+    {
+        $this->assertPropertySame('endpoint', 'http://localhost/');
+    }
+
+    /**
      * Test that the http code is set from the Response object.
      */
     public function testHttpCodeIsSetCorrectly()
@@ -56,13 +64,23 @@ class WNSResponseErrorTest extends WNSResponseTest
     }
 
     /**
-     * Test that get_status() returns the dispatch status.
+     * Test that get_status() returns the dispatch status with correct endpoint.
      *
      * @covers Lunr\Vortex\WNS\WNSResponse::get_status
      */
-    public function testGetStatusReturnsStatus()
+    public function testGetStatusReturnsStatusForCorrectEndpoint()
     {
-        $this->assertEquals(PushNotificationStatus::ERROR, $this->class->get_status());
+        $this->assertEquals($this->class->get_status('http://localhost/'), PushNotificationStatus::ERROR);
+    }
+
+    /**
+     * Test that get_status() returns unknown status with incorrect endpoint.
+     *
+     * @covers Lunr\Vortex\WNS\WNSResponse::get_status
+     */
+    public function testGetStatusReturnsUnknownStatusForIncorrectEndpoint()
+    {
+        $this->assertEquals($this->class->get_status('http://foo/'), PushNotificationStatus::UNKNOWN);
     }
 
 }
