@@ -14,8 +14,6 @@
 namespace Lunr\Vortex\GCM\Tests;
 
 use Lunr\Vortex\GCM\GCMDispatcher;
-use Lunr\Vortex\GCM\GCMPriority;
-use Lunr\Vortex\GCM\GCMType;
 use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 

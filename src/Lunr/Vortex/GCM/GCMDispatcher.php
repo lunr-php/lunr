@@ -14,19 +14,19 @@
 
 namespace Lunr\Vortex\GCM;
 
-use Lunr\Vortex\PushNotificationDispatcherInterface;
+use Lunr\Vortex\PushNotificationMultiDispatcherInterface;
 
 /**
  * Google Cloud Messaging Push Notification Dispatcher.
  */
-class GCMDispatcher implements PushNotificationDispatcherInterface
+class GCMDispatcher implements PushNotificationMultiDispatcherInterface
 {
 
     /**
-     * Push Notification endpoint.
-     * @var String
+     * Push Notification endpoints.
+     * @var Array
      */
-    private $endpoint;
+    private $endpoints;
 
     /**
      * Push Notification payload to send.
@@ -72,12 +72,10 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
      */
     public function __construct($curl, $logger)
     {
-        $this->endpoint   = '';
-        $this->payload    = '';
-        $this->auth_token = '';
-        $this->priority   = 'normal';
-        $this->curl       = $curl;
-        $this->logger     = $logger;
+        $this->curl   = $curl;
+        $this->logger = $logger;
+
+        $this->reset();
     }
 
     /**
@@ -85,12 +83,25 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
      */
     public function __destruct()
     {
-        unset($this->endpoint);
+        unset($this->endpoints);
         unset($this->payload);
         unset($this->auth_token);
         unset($this->priority);
         unset($this->curl);
         unset($this->logger);
+    }
+
+    /**
+     * Reset the variable members of the class.
+     *
+     * @return void
+     */
+    protected function reset()
+    {
+        $this->endpoints  = [];
+        $this->payload    = '{}';
+        $this->auth_token = '';
+        $this->priority   = 'normal';
     }
 
     /**
@@ -100,22 +111,30 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
      */
     public function push()
     {
-        $this->curl->set_option('CURLOPT_HEADER', TRUE);
+        $this->curl->set_option('CURLOPT_FAILONERROR', FALSE);
         $this->curl->set_http_headers(['Content-Type:application/json', 'Authorization: key=' . $this->auth_token]);
 
-        $tmp_payload             = json_decode($this->payload, TRUE);
-        $tmp_payload['to']       = $this->endpoint;
+        $tmp_payload = json_decode($this->payload, TRUE);
+
+        if (count($this->endpoints) > 1)
+        {
+            $tmp_payload['registration_ids'] = $this->endpoints;
+        }
+        else if (isset($this->endpoints[0]))
+        {
+            $tmp_payload['to'] = $this->endpoints[0];
+        }
+
         $tmp_payload['priority'] = $this->priority;
-        $this->payload           = json_encode($tmp_payload);
 
-        $response = $this->curl->post_request(self::GOOGLE_SEND_URL, $this->payload);
+        $this->payload = json_encode($tmp_payload);
 
-        $res = new GCMResponse($response, $this->logger, $this->endpoint);
+        $curl_response = $this->curl->post_request(self::GOOGLE_SEND_URL, $this->payload);
+        $gcm_response  = new GCMResponse($curl_response, $this->logger, $this->endpoints);
 
-        $this->endpoint = '';
-        $this->payload  = '';
+        $this->reset();
 
-        return $res;
+        return $gcm_response;
     }
 
     /**
@@ -127,14 +146,7 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
      */
     public function set_endpoints($endpoints)
     {
-        if (is_array($endpoints))
-        {
-            $this->endpoint = empty($endpoints) ? '' : $endpoints[0];
-        }
-        else
-        {
-            $this->endpoint = $endpoints;
-        }
+        $this->endpoints = !is_array($endpoints) ? [ $endpoints ] : $endpoints;
 
         return $this;
     }

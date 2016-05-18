@@ -26,35 +26,35 @@ class GCMDispatcherSetTest extends GCMDispatcherTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::set_endpoints
      */
-    public function testSetEndpointsSetsUniqueEndpointWithString()
+    public function testSetEndpointsSetUniqueEndpointWithString()
     {
         $this->class->set_endpoints('endpoint');
 
-        $this->assertPropertyEquals('endpoint', 'endpoint');
+        $this->assertPropertyEquals('endpoints', [ 'endpoint' ]);
     }
 
     /**
-     * Test that set_endpoints() sets the first endpoint of the list.
+     * Test that set_endpoints() set endpoints list with array parameter.
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::set_endpoints
      */
-    public function testSetEndpointsSetsFirstEndpointWithArray()
+    public function testSetEndpointsSetEndpointsListWithArray()
     {
         $this->class->set_endpoints([ 'endpoint1', 'endpoint2' ]);
 
-        $this->assertPropertyEquals('endpoint', 'endpoint1');
+        $this->assertPropertyEquals('endpoints', [ 'endpoint1', 'endpoint2' ]);
     }
 
     /**
-     * Test that set_endpoints() sets empty endpoint with empty endpoints list.
+     * Test that set_endpoints() set empty endpoints list with empty array parameter.
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::set_endpoints
      */
-    public function testSetEndpointsSetsEmptyEndpointWithEmptyArray()
+    public function testSetEndpointsSetEmptyEndpointsListWithEmptyArray()
     {
         $this->class->set_endpoints([]);
 
-        $this->assertPropertyEquals('endpoint', '');
+        $this->assertPropertyEquals('endpoints', []);
     }
 
     /**
@@ -68,7 +68,7 @@ class GCMDispatcherSetTest extends GCMDispatcherTest
     }
 
     /**
-     * Test that set_payload() sets the endpoint.
+     * Test that set_payload() sets the payload.
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::set_payload
      */
@@ -98,23 +98,9 @@ class GCMDispatcherSetTest extends GCMDispatcherTest
      */
     public function testSetAuthTokenSetsPayload()
     {
-        $auth_token = 'auth_token';
-        $this->class->set_auth_token($auth_token);
+        $this->class->set_auth_token('auth_token');
 
         $this->assertPropertyEquals('auth_token', 'auth_token');
-    }
-
-    /**
-     * Test that set_priority() sets the priority.
-     *
-     * @covers Lunr\Vortex\GCM\GCMDispatcher::set_priority
-     */
-    public function testSetPrioritySetsPayload()
-    {
-        $priority = 'priority';
-        $this->class->set_priority($priority);
-
-        $this->assertPropertyEquals('priority', 'priority');
     }
 
     /**
@@ -124,8 +110,29 @@ class GCMDispatcherSetTest extends GCMDispatcherTest
      */
     public function testSetAuthTokenReturnsSelfReference()
     {
-        $auth_token = 'auth_token';
-        $this->assertEquals($this->class, $this->class->set_auth_token($auth_token));
+        $this->assertEquals($this->class, $this->class->set_auth_token('auth_token'));
+    }
+
+    /**
+     * Test that set_priority() sets the priority.
+     *
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::set_priority
+     */
+    public function testSetPrioritySetsPayload()
+    {
+        $this->class->set_priority('priority');
+
+        $this->assertPropertyEquals('priority', 'priority');
+    }
+
+    /**
+     * Test the fluid interface of set_priority().
+     *
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::set_priority
+     */
+    public function testSetPriorityReturnsSelfReference()
+    {
+        $this->assertEquals($this->class, $this->class->set_priority('high'));
     }
 
 }

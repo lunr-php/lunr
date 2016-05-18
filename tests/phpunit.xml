@@ -327,7 +327,6 @@
             <file>../src/Lunr/Vortex/GCM/Tests/GCMDispatcherBaseTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMDispatcherSetTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMDispatcherTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMPayloadBaseTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMPayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMPayloadSetTest.php</file>

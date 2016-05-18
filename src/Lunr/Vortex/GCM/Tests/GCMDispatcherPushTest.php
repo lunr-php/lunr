@@ -28,26 +28,17 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushReturnsGCMResponseObject()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
-
         $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                          ->disableOriginalConstructor()
-                          ->getMock();
-
-        $this->curl->expects($this->once())
-                   ->method('set_option')
-                   ->with($this->equalTo('CURLOPT_HEADER'), $this->equalTo(TRUE));
-
-        $this->curl->expects($this->once())
-                   ->method('set_http_headers');
+                         ->disableOriginalConstructor()
+                         ->getMock();
 
         $this->curl->expects($this->once())
                    ->method('post_request')
-                   ->with('https://gcm-http.googleapis.com/gcm/send', $this->equalTo('{"to":"endpoint","priority":"normal"}'))
                    ->will($this->returnValue($response));
 
-        $this->assertInstanceOf('Lunr\Vortex\GCM\GCMResponse', $this->class->push());
+        $result = $this->class->push();
+
+        $this->assertInstanceOf('Lunr\Vortex\GCM\GCMResponse', $result);
     }
 
     /**
@@ -57,9 +48,10 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushResetsProperties()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
+        $this->set_reflection_property_value('endpoints', [ 'endpoint' ]);
+        $this->set_reflection_property_value('payload', '{"collapse_key":"abcde-12345"}');
         $this->set_reflection_property_value('auth_token', 'auth_token');
+        $this->set_reflection_property_value('priority', 'high');
 
         $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
                          ->disableOriginalConstructor()
@@ -67,13 +59,110 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
 
         $this->curl->expects($this->once())
                    ->method('post_request')
-                   ->with('https://gcm-http.googleapis.com/gcm/send', $this->equalTo('{"to":"endpoint","priority":"normal"}'))
                    ->will($this->returnValue($response));
 
         $this->class->push();
 
-        $this->assertPropertyEquals('endpoint', '');
-        $this->assertPropertyEquals('payload', '');
+        $this->assertPropertyEquals('endpoints', []);
+        $this->assertPropertyEquals('payload', '{}');
+        $this->assertPropertyEquals('auth_token', '');
+        $this->assertPropertyEquals('priority', 'normal');
+    }
+
+    /**
+     * Test that push() sends correct request with multiple endpoints.
+     *
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::push
+     */
+    public function testPushRequestWithMultipleEndpoints()
+    {
+        $this->set_reflection_property_value('endpoints', [ 'endpoint1', 'endpoint2' ]);
+        $this->set_reflection_property_value('payload', '{"collapse_key":"abcde-12345"}');
+        $this->set_reflection_property_value('auth_token', 'auth_token');
+        $this->set_reflection_property_value('priority', 'high');
+
+        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
+                         ->disableOriginalConstructor()
+                         ->getMock();
+
+        $this->curl->expects($this->once())
+                   ->method('set_option')
+                   ->with('CURLOPT_FAILONERROR', FALSE);
+
+        $this->curl->expects($this->once())
+                   ->method('set_http_headers')
+                   ->with([ 'Content-Type:application/json', 'Authorization: key=auth_token' ]);
+
+        $this->curl->expects($this->once())
+                   ->method('post_request')
+                   ->with(
+                        'https://gcm-http.googleapis.com/gcm/send',
+                        '{"collapse_key":"abcde-12345","registration_ids":["endpoint1","endpoint2"],"priority":"high"}'
+                    )
+                   ->will($this->returnValue($response));
+
+        $this->class->push();
+    }
+
+    /**
+     * Test that push() sends correct request with single endpoint.
+     *
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::push
+     */
+    public function testPushRequestWithSingleEndpoint()
+    {
+        $this->set_reflection_property_value('endpoints', [ 'endpoint' ]);
+        $this->set_reflection_property_value('payload', '{"collapse_key":"abcde-12345"}');
+        $this->set_reflection_property_value('auth_token', 'auth_token');
+
+        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
+                         ->disableOriginalConstructor()
+                         ->getMock();
+
+        $this->curl->expects($this->once())
+                   ->method('set_option')
+                   ->with('CURLOPT_FAILONERROR', FALSE);
+
+        $this->curl->expects($this->once())
+                   ->method('set_http_headers')
+                   ->with([ 'Content-Type:application/json', 'Authorization: key=auth_token' ]);
+
+        $this->curl->expects($this->once())
+                   ->method('post_request')
+                   ->with(
+                        'https://gcm-http.googleapis.com/gcm/send',
+                        '{"collapse_key":"abcde-12345","to":"endpoint","priority":"normal"}'
+                    )
+                   ->will($this->returnValue($response));
+
+        $this->class->push();
+    }
+
+    /**
+     * Test that push() sends correct request with no properties set.
+     *
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::push
+     */
+    public function testPushRequestWithDefaultValues()
+    {
+        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
+                         ->disableOriginalConstructor()
+                         ->getMock();
+
+        $this->curl->expects($this->once())
+                   ->method('set_option')
+                   ->with('CURLOPT_FAILONERROR', FALSE);
+
+        $this->curl->expects($this->once())
+                   ->method('set_http_headers')
+                   ->with([ 'Content-Type:application/json', 'Authorization: key=' ]);
+
+        $this->curl->expects($this->once())
+                   ->method('post_request')
+                   ->with('https://gcm-http.googleapis.com/gcm/send', '{"priority":"normal"}')
+                   ->will($this->returnValue($response));
+
+        $this->class->push();
     }
 
 }
