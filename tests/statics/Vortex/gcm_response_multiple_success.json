@@ -1,14 +1,17 @@
 {
     "multicast_id": 108,
-    "success": 1,
-    "failure": 1,
+    "success": 3,
+    "failure": 0,
     "canonical_ids": 0,
     "results": [
         {
-            "error": "InvalidRegistration"
+            "message_id": "1:08"
         },
         {
             "message_id": "1:08"
+        },
+        {
+            "message_id": "1:09"
         }
     ]
 }

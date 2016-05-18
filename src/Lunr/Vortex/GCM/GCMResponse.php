@@ -7,6 +7,7 @@
  *
  * @package    Lunr\Vortex\GCM
  * @author     Dinos Theodorou <dinos@m2mobi.com>
+ * @author     Damien Tardy-Panis <damien@m2mobi.com>
  * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -23,52 +24,51 @@ class GCMResponse implements PushNotificationResponseInterface
 {
 
     /**
-     * HTTP status code.
+     * Shared instance of a Logger class.
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * The response HTTP code.
      * @var Integer
      */
     private $http_code;
 
     /**
-     * Delivery status.
-     * @var Integer
-     */
-    private $status;
-
-    /**
-     * The gcm response info.
+     * The response body content.
      * @var String
      */
-    private $result;
+    private $content;
 
     /**
-     * Push notification endpoint.
-     * @var String
+     * The statuses per endpoint.
+     * @var Array
      */
-    private $endpoint;
+    private $statuses;
 
     /**
      * Constructor.
      *
      * @param CurlResponse    $response  Curl Response object.
      * @param LoggerInterface $logger    Shared instance of a Logger.
-     * @param string          $device_id The deviceID that the message was sent to.
+     * @param Array           $endpoints The endpoints the message was sent to (in the same order as sent).
      */
-    public function __construct($response, $logger, $device_id)
+    public function __construct($response, $logger, $endpoints)
     {
+        $this->logger   = $logger;
+        $this->statuses = [];
+
         $this->http_code = $response->http_code;
-        $this->result    = $response->get_result();
-        $this->endpoint  = $device_id;
+        $this->content   = $response->get_result();
 
-        if ($response->get_network_error_number() !== 0)
+        if ($this->http_code == 200)
         {
-            $this->status = PushNotificationStatus::ERROR;
-
-            $context = [ 'error' => $response->get_network_error_message(), 'endpoint' => $device_id ];
-            $logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
+            $this->set_statuses($endpoints);
         }
         else
         {
-            $this->set_status($device_id, $logger);
+            $this->report_error($endpoints);
         }
     }
 
@@ -77,69 +77,48 @@ class GCMResponse implements PushNotificationResponseInterface
      */
     public function __destruct()
     {
+        unset($this->logger);
         unset($this->http_code);
-        unset($this->status);
-        unset($this->result);
+        unset($this->content);
+        unset($this->statuses);
     }
 
     /**
-     * Set notification status information.
+     * Define the status result for each endpoint.
      *
-     * @param String          $endpoint The notification endpoint that was used.
-     * @param LoggerInterface $logger   Shared instance of a Logger.
+     * @param Array $endpoints The endpoints the message was sent to (in the same order as sent).
      *
      * @return void
      */
-    private function set_status($endpoint, $logger)
+    private function set_statuses(&$endpoints)
     {
-        switch ($this->http_code)
+        $json_content = json_decode($this->content, TRUE);
+
+        if (!isset($json_content['results']))
         {
-            case 200:
-                $this->status = PushNotificationStatus::SUCCESS;
-                break;
-            case 400:
-                $this->status = PushNotificationStatus::ERROR;
-                break;
-            case 401:
-                $this->status = PushNotificationStatus::INVALID_ENDPOINT;
-                break;
-            case 503:
-                $this->status = PushNotificationStatus::ERROR;
-                break;
-            default:
-                $this->status = PushNotificationStatus::UNKNOWN;
-                break;
+            $this->report_error($endpoints);
+            return;
         }
 
-        if ($this->status !== PushNotificationStatus::SUCCESS)
+        foreach ($json_content['results'] as $result)
         {
-            $context = [
-                'endpoint'    => $endpoint,
-                'code'        => $this->status,
-                'description' => $this->result,
-            ];
+            $endpoint = array_shift($endpoints);
 
-            $message  = 'Push notification delivery status for endpoint {endpoint}: ';
-            $message .= 'failed with an error: {description}. Error #{code}';
-
-            $logger->warning($message, $context);
-        }
-        else
-        {
-            $failures = $this->parse_gcm_failures();
-
-            if($failures['failure'] != 0)
+            if (is_null($endpoint))
             {
-                $context = [
-                    'failure' => $failures['failure'],
-                    'errors'  => json_encode($failures['messages']),
-                ];
-
-                $message  = '{failure} push notification(s) failed with the following ';
-                $message .= 'error information {errors}.';
-
-                $logger->warning($message, $context);
+                break;
             }
+
+            if (!isset($result['error']))
+            {
+                $this->statuses[$endpoint] = PushNotificationStatus::SUCCESS;
+            }
+            else
+            {
+                $this->report_endpoint_error($endpoint, $result['error']);
+            }
+
+            // We are supposed here to parse the new registration ids
         }
     }
 
@@ -152,40 +131,121 @@ class GCMResponse implements PushNotificationResponseInterface
      */
     public function get_status($endpoint)
     {
-        if ($endpoint != $this->endpoint)
+        if (empty($this->statuses))
         {
             return PushNotificationStatus::UNKNOWN;
         }
 
-        return $this->status;
+        return isset($this->statuses[$endpoint]) ? $this->statuses[$endpoint] : PushNotificationStatus::UNKNOWN;
     }
 
     /**
-     * Helper function for extracting the error info from the gcm response json.
+     * Report an error with the push notification.
      *
-     * @return array An array with the amount of errors and their information.
+     * @param Array $endpoints The endpoints the message was sent to
+     *
+     * @return void
      */
-    private function parse_gcm_failures()
+    private function report_error(&$endpoints)
     {
-        $results = json_decode($this->result, TRUE);
+        $error_message = 'Unknown error';
+        $status        = PushNotificationStatus::UNKNOWN;
 
-        $failures            = [];
-        $failures['failure'] = $results['failure'];
-
-        if($results['failure'] == 0)
+        if ($this->http_code == 400)
         {
-            return $failures;
+            $error_message = "Invalid JSON ({$this->content})";
+            $status        = PushNotificationStatus::ERROR;
+        }
+        else if ($this->http_code == 401)
+        {
+            $error_message = 'Error with authentication';
+            $status        = PushNotificationStatus::ERROR;
+        }
+        else if ($this->http_code >= 500)
+        {
+            $error_message = 'Internal error';
+            $status        = PushNotificationStatus::TEMPORARY_ERROR;
         }
 
-        foreach($results['results'] as $value)
+        foreach ($endpoints as $endpoint)
         {
-            if(isset($value['error']))
-            {
-                $failures['messages'][] = $value['error'];
-            }
+            $this->statuses[$endpoint] = $status;
         }
 
-        return $failures;
+        $context = [ 'error' => $error_message ];
+        $this->logger->warning('Dispatching push notification failed: {error}', $context);
+    }
+
+    /**
+     * Report an error with the push notification for one endpoint.
+     *
+     * @param String $endpoint   Endpoint for which the push failed
+     * @param String $error_code Error responde code
+     *
+     * @return void
+     */
+    private function report_endpoint_error($endpoint, $error_code)
+    {
+        switch ($error_code)
+        {
+            case 'MissingRegistration':
+                $status        = PushNotificationStatus::INVALID_ENDPOINT;
+                $error_message = 'Missing registration token';
+                break;
+            case 'InvalidRegistration':
+                $status        = PushNotificationStatus::INVALID_ENDPOINT;
+                $error_message = 'Invalid registration token';
+                break;
+            case 'NotRegistered':
+                $status        = PushNotificationStatus::INVALID_ENDPOINT;
+                $error_message = 'Unregistered device';
+                break;
+            case 'InvalidPackageName':
+                $status        = PushNotificationStatus::INVALID_ENDPOINT;
+                $error_message = 'Invalid package name';
+                break;
+            case 'MismatchSenderId':
+                $status        = PushNotificationStatus::INVALID_ENDPOINT;
+                $error_message = 'Mismatched sender';
+                break;
+            case 'MessageTooBig':
+                $status        = PushNotificationStatus::ERROR;
+                $error_message = 'Message too big';
+                break;
+            case 'InvalidDataKey':
+                $status        = PushNotificationStatus::ERROR;
+                $error_message = 'Invalid data key';
+                break;
+            case 'InvalidTtl':
+                $status        = PushNotificationStatus::ERROR;
+                $error_message = 'Invalid time to live';
+                break;
+            case 'Unavailable':
+                $status        = PushNotificationStatus::TEMPORARY_ERROR;
+                $error_message = 'Timeout';
+                break;
+            case 'InternalServerError':
+                $status        = PushNotificationStatus::TEMPORARY_ERROR;
+                $error_message = 'Internal server error';
+                break;
+            case 'DeviceMessageRateExceeded':
+                $status        = PushNotificationStatus::TEMPORARY_ERROR;
+                $error_message = 'Device message rate exceeded';
+                break;
+            case 'TopicsMessageRateExceeded':
+                $status        = PushNotificationStatus::TEMPORARY_ERROR;
+                $error_message = 'Topics message rate exceeded';
+                break;
+            default:
+                $status        = PushNotificationStatus::UNKNOWN;
+                $error_message = $error_code;
+                break;
+        }
+
+        $context = [ 'endpoint' => $endpoint, 'error' => $error_message ];
+        $this->logger->warning('Dispatching push notification failed for endpoint {endpoint}: {error}', $context);
+
+        $this->statuses[$endpoint] = $status;
     }
 
 }
