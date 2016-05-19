@@ -28,7 +28,7 @@ class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
      */
     public function testGetPayloadWithTitle()
     {
-        $file     = TEST_STATICS . '/Vortex/mpns_toast_title.xml';
+        $file     = TEST_STATICS . '/Vortex/mpns/toast_title.xml';
         $elements = [ 'title' => 'Title' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -43,7 +43,7 @@ class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
      */
     public function testGetPayloadWithMessage()
     {
-        $file     = TEST_STATICS . '/Vortex/mpns_toast_message.xml';
+        $file     = TEST_STATICS . '/Vortex/mpns/toast_message.xml';
         $elements = [ 'message' => 'Message' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -58,7 +58,7 @@ class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
      */
     public function testGetPayloadWithDeeplink()
     {
-        $file     = TEST_STATICS . '/Vortex/mpns_toast_deeplink.xml';
+        $file     = TEST_STATICS . '/Vortex/mpns/toast_deeplink.xml';
         $elements = [ 'deeplink' => 'Deeplink' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -73,7 +73,7 @@ class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
      */
     public function testGetPayload()
     {
-        $file     = TEST_STATICS . '/Vortex/mpns_toast.xml';
+        $file     = TEST_STATICS . '/Vortex/mpns/toast.xml';
         $elements = [ 'title' => 'Title', 'message' => 'Message', 'deeplink' => 'Deeplink' ];
 
         $this->set_reflection_property_value('elements', $elements);

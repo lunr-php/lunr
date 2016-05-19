@@ -38,7 +38,7 @@ class PAPResponseInvalidXMLTest extends PAPResponseTest
      */
     public function testStatusForSuccessRequestStatusLogsErrorOnInvalidXMLResponse()
     {
-        $file = file_get_contents(TEST_STATICS . '/Vortex/pap_response_invalid.xml');
+        $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response_invalid.xml');
 
         $this->set_reflection_property_value('result', $file);
 

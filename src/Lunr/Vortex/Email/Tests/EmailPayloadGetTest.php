@@ -28,7 +28,7 @@ class EmailPayloadGetTest extends EmailPayloadTest
      */
     public function testGetPayload()
     {
-        $file     = TEST_STATICS . '/Vortex/email_payload.json';
+        $file     = TEST_STATICS . '/Vortex/email/payload.json';
         $elements = [
             'subject' => 'value1',
             'body'    => 'value2',

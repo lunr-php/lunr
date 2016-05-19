@@ -28,7 +28,7 @@ class WNSTilePayloadGetTest extends WNSTilePayloadTest
      */
     public function testGetPayload()
     {
-        $file     = TEST_STATICS . '/Vortex/wns_tile.xml';
+        $file     = TEST_STATICS . '/Vortex/wns/tile.xml';
         $elements = [ 'text' => 'Text' ];
 
         $this->set_reflection_property_value('elements', $elements);

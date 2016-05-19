@@ -28,7 +28,7 @@ class WNSBadgePayloadGetTest extends WNSBadgePayloadTest
      */
     public function testGetPayload()
     {
-        $file     = TEST_STATICS . '/Vortex/wns_badge.xml';
+        $file     = TEST_STATICS . '/Vortex/wns/badge.xml';
         $elements = [ 'value' => 2 ];
 
         $this->set_reflection_property_value('elements', $elements);

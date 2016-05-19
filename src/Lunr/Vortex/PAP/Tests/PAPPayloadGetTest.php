@@ -28,7 +28,7 @@ class PAPPayloadGetTest extends PAPPayloadTest
      */
     public function testGetPayload()
     {
-        $file     = TEST_STATICS . '/Vortex/pap_message.json';
+        $file     = TEST_STATICS . '/Vortex/pap/message.json';
         $elements = [
             'key1' => 'value1',
             'key2' => 'value2',

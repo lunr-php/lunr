@@ -40,7 +40,7 @@ class GCMResponseGetStatusTest extends GCMResponseTest
                             ->with('http_code')
                             ->willReturn(200);
 
-        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm_response_single_success.json');
+        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_single_success.json');
 
         $this->curl_response->expects($this->once())
                             ->method('get_result')

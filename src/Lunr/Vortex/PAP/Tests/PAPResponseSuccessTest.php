@@ -62,7 +62,7 @@ class PAPResponseSuccessTest extends PAPResponseTest
      */
     public function testParsePAPResponseWithoutFailure()
     {
-        $file = file_get_contents(TEST_STATICS . '/Vortex/pap_response.xml');
+        $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response.xml');
 
         $this->set_reflection_property_value('result', $file);
 

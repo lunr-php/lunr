@@ -122,7 +122,7 @@ abstract class PAPResponseTest extends LunrBaseTest
                  ->method('get_network_error_number')
                  ->will($this->returnValue(0));
 
-        $file = TEST_STATICS . '/Vortex/pap_response.xml';
+        $file = TEST_STATICS . '/Vortex/pap/response.xml';
         $map  = [ [ 'http_code', 200 ], [ 'header_size', 176 ] ];
 
         $response->expects($this->once())

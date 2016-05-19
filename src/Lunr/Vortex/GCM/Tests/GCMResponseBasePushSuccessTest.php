@@ -41,7 +41,7 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
                             ->with('http_code')
                             ->willReturn(200);
 
-        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm_response_missing_results.json');
+        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_missing_results.json');
 
         $this->curl_response->expects($this->once())
                             ->method('get_result')
@@ -80,7 +80,7 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
                             ->with('http_code')
                             ->willReturn(200);
 
-        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm_response_single_success.json');
+        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_single_success.json');
 
         $this->curl_response->expects($this->once())
                             ->method('get_result')
@@ -115,7 +115,7 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
                             ->with('http_code')
                             ->willReturn(200);
 
-        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm_response_single_error.json');
+        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_single_error.json');
 
         $this->curl_response->expects($this->once())
                             ->method('get_result')
@@ -154,7 +154,7 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
                             ->with('http_code')
                             ->willReturn(200);
 
-        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm_response_multiple_success.json');
+        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_multiple_success.json');
 
         $this->curl_response->expects($this->once())
                             ->method('get_result')
@@ -193,7 +193,7 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
                             ->with('http_code')
                             ->willReturn(200);
 
-        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm_response_multiple_error.json');
+        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_multiple_error.json');
 
         $this->curl_response->expects($this->once())
                             ->method('get_result')
@@ -270,7 +270,7 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
                             ->with('http_code')
                             ->willReturn(200);
 
-        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm_response_multiple_mixed.json');
+        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_multiple_mixed.json');
 
         $this->curl_response->expects($this->once())
                             ->method('get_result')
@@ -322,7 +322,7 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
                             ->with('http_code')
                             ->willReturn(200);
 
-        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm_response_multiple_success.json');
+        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_multiple_success.json');
 
         $this->curl_response->expects($this->once())
                             ->method('get_result')
@@ -361,7 +361,7 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
                             ->with('http_code')
                             ->willReturn(200);
 
-        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm_response_multiple_success.json');
+        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_multiple_success.json');
 
         $this->curl_response->expects($this->once())
                             ->method('get_result')

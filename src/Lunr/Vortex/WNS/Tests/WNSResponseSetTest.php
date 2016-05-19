@@ -38,8 +38,8 @@ class WNSResponseSetTest extends WNSResponseTest
      */
     public function testParseHeadersWithPreconditionFailedStatus()
     {
-        $result = file_get_contents(TEST_STATICS . '/Vortex/wns_response.txt');
-        $parsed = file_get_contents(TEST_STATICS . '/Vortex/wns_response_parsed.txt');
+        $result = file_get_contents(TEST_STATICS . '/Vortex/wns/response.txt');
+        $parsed = file_get_contents(TEST_STATICS . '/Vortex/wns/response_parsed.txt');
 
         $header = $this->getMock('http\Header', [ 'parse' ]);
 

@@ -101,7 +101,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
 
         $control_xml = $method->invoke($this->class);
 
-        $xml_file = file_get_contents(TEST_STATICS . '/Vortex/pap_request_control_empty.xml');
+        $xml_file = file_get_contents(TEST_STATICS . '/Vortex/pap/request_control_empty.xml');
 
         $this->assertEquals($control_xml, $xml_file);
     }
@@ -123,7 +123,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
 
         $control_xml = $method->invoke($this->class);
 
-        $xml_file = file_get_contents(TEST_STATICS . '/Vortex/pap_request_control.xml');
+        $xml_file = file_get_contents(TEST_STATICS . '/Vortex/pap/request_control.xml');
 
         $this->assertEquals($control_xml, $xml_file);
     }
@@ -147,7 +147,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
 
         $request_headers = $method->invoke($this->class);
 
-        $request_file = file_get_contents(TEST_STATICS . '/Vortex/pap_request_custom_headers.txt');
+        $request_file = file_get_contents(TEST_STATICS . '/Vortex/pap/request_custom_headers.txt');
 
         $this->assertEquals($request_headers, $request_file);
 

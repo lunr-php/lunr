@@ -28,7 +28,7 @@ class GCMPayloadGetTest extends GCMPayloadTest
      */
     public function testGetPayloadWithCollapseKey()
     {
-        $file     = TEST_STATICS . '/Vortex/gcm_collapse_key.json';
+        $file     = TEST_STATICS . '/Vortex/gcm/collapse_key.json';
         $elements = [ 'collapse_key' => 'test' ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -43,7 +43,7 @@ class GCMPayloadGetTest extends GCMPayloadTest
      */
     public function testGetPayloadWithData()
     {
-        $file     = TEST_STATICS . '/Vortex/gcm_data.json';
+        $file     = TEST_STATICS . '/Vortex/gcm/data.json';
         $elements = [
             'data' => [
                 'key1' => 'value1',
@@ -63,7 +63,7 @@ class GCMPayloadGetTest extends GCMPayloadTest
      */
     public function testGetPayloadWithTimeToLive()
     {
-        $file     = TEST_STATICS . '/Vortex/gcm_time_to_live.json';
+        $file     = TEST_STATICS . '/Vortex/gcm/time_to_live.json';
         $elements = [ 'time_to_live' => 10 ];
 
         $this->set_reflection_property_value('elements', $elements);
@@ -78,7 +78,7 @@ class GCMPayloadGetTest extends GCMPayloadTest
      */
     public function testGetPayload()
     {
-        $file     = TEST_STATICS . '/Vortex/gcm.json';
+        $file     = TEST_STATICS . '/Vortex/gcm/gcm.json';
         $elements = [
             'registration_ids' => [ 'one', 'two', 'three' ],
             'collapse_key'     => 'test',

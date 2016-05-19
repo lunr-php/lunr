@@ -90,7 +90,7 @@ class PAPResponseSetTest extends PAPResponseTest
      */
     public function testStatusForSuccessRequestStatusLogsOneError()
     {
-        $file = file_get_contents(TEST_STATICS . '/Vortex/pap_response_error.xml');
+        $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response_error.xml');
 
         $this->set_reflection_property_value('result', $file);
         $this->set_reflection_property_value('http_code', 200);
@@ -125,7 +125,7 @@ class PAPResponseSetTest extends PAPResponseTest
      */
     public function testSetStatusWithInvalidEndpointsLogsError()
     {
-        $file = file_get_contents(TEST_STATICS . '/Vortex/pap_response_error_invalid_endpoint.xml');
+        $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response_error_invalid_endpoint.xml');
 
         $this->set_reflection_property_value('result', $file);
         $this->set_reflection_property_value('http_code', 200);
@@ -160,7 +160,7 @@ class PAPResponseSetTest extends PAPResponseTest
      */
     public function testSetStatusLogsTemporaryError()
     {
-        $file = file_get_contents(TEST_STATICS . '/Vortex/pap_response_error_temporary.xml');
+        $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response_error_temporary.xml');
 
         $this->set_reflection_property_value('result', $file);
         $this->set_reflection_property_value('http_code', 200);
@@ -195,7 +195,7 @@ class PAPResponseSetTest extends PAPResponseTest
      */
     public function testSetStatusLogsUnknownError()
     {
-        $file = file_get_contents(TEST_STATICS . '/Vortex/pap_response_error_unknown.xml');
+        $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response_error_unknown.xml');
 
         $this->set_reflection_property_value('result', $file);
         $this->set_reflection_property_value('http_code', 200);
@@ -230,7 +230,7 @@ class PAPResponseSetTest extends PAPResponseTest
      */
     public function testParsePAPResponseWithOneFailure()
     {
-        $file = file_get_contents(TEST_STATICS . '/Vortex/pap_response_error.xml');
+        $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response_error.xml');
 
         $this->set_reflection_property_value('result', $file);
         $this->set_reflection_property_value('pap_response', []);

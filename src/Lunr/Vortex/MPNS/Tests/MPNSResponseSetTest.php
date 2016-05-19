@@ -38,8 +38,8 @@ class MPNSResponseSetTest extends MPNSResponseTest
      */
     public function testParseHeadersWithPreconditionFailedStatus()
     {
-        $result = file_get_contents(TEST_STATICS . '/Vortex/mpns_response.txt');
-        $parsed = file_get_contents(TEST_STATICS . '/Vortex/mpns_response_parsed.txt');
+        $result = file_get_contents(TEST_STATICS . '/Vortex/mpns/response.txt');
+        $parsed = file_get_contents(TEST_STATICS . '/Vortex/mpns/response_parsed.txt');
 
         $header = $this->getMock('http\Header', [ 'parse' ]);
 
@@ -75,8 +75,8 @@ class MPNSResponseSetTest extends MPNSResponseTest
      */
     public function testParseHeadersWithSpecialStatusCodes($status)
     {
-        $result = file_get_contents(TEST_STATICS . '/Vortex/mpns_response.txt');
-        $parsed = file_get_contents(TEST_STATICS . '/Vortex/mpns_response_parsed.txt');
+        $result = file_get_contents(TEST_STATICS . '/Vortex/mpns/response.txt');
+        $parsed = file_get_contents(TEST_STATICS . '/Vortex/mpns/response_parsed.txt');
 
         $header = $this->getMock('http\Header', [ 'parse' ]);
 

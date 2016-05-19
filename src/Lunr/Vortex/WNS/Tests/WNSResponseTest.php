@@ -94,7 +94,7 @@ abstract class WNSResponseTest extends LunrBaseTest
         $this->header = $this->getMock('http\Header', [ 'parse' ]);
 
         $method = [ get_class($this->header), 'parse' ];
-        $parsed = file_get_contents(TEST_STATICS . '/Vortex/wns_response_parsed.txt');
+        $parsed = file_get_contents(TEST_STATICS . '/Vortex/wns/response_parsed.txt');
 
         $this->mock_method($method, "return $parsed;");
 
@@ -108,7 +108,7 @@ abstract class WNSResponseTest extends LunrBaseTest
                  ->method('get_network_error_number')
                  ->will($this->returnValue(0));
 
-        $file = TEST_STATICS . '/Vortex/wns_response.txt';
+        $file = TEST_STATICS . '/Vortex/wns/response.txt';
         $map  = [ [ 'http_code', 200 ], [ 'header_size', 129 ], [ 'url', 'http://localhost/' ] ];
 
         $response->expects($this->exactly(4))
