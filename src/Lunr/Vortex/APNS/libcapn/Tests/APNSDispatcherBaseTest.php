@@ -11,15 +11,15 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS\Tests;
+namespace Lunr\Vortex\APNS\libcapn\Tests;
 
-use Lunr\Vortex\APNS\APNSType;
+use Lunr\Vortex\APNS\libcapn\APNSType;
 use Lunr\Halo\PsrLoggerTestTrait;
 
 /**
  * This class contains test for the constructor of the APNSDispatcher class.
  *
- * @covers Lunr\Vortex\APNS\APNSDispatcher
+ * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher
  */
 class APNSDispatcherBaseTest extends APNSDispatcherTest
 {

@@ -303,16 +303,16 @@
             <file>../src/Lunr/Ticks/Tests/FileTimerStopTest.php</file>
         </testsuite>
         <testsuite name="Vortex">
-            <file>../src/Lunr/Vortex/APNS/Tests/APNSPayloadBaseTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/Tests/APNSPayloadGetTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/Tests/APNSPayloadSetTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/Tests/APNSResponseSetTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/Tests/APNSResponseSuccessTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/Tests/APNSResponseTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/Tests/APNSDispatcherBaseTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/Tests/APNSDispatcherPushTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/Tests/APNSDispatcherSetTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/Tests/APNSDispatcherTest.php</file>
+            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSPayloadBaseTest.php</file>
+            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSPayloadGetTest.php</file>
+            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSPayloadSetTest.php</file>
+            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSResponseSetTest.php</file>
+            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSResponseSuccessTest.php</file>
+            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSResponseTest.php</file>
+            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSDispatcherBaseTest.php</file>
+            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSDispatcherPushTest.php</file>
+            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSDispatcherSetTest.php</file>
+            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSDispatcherTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailPayloadBaseTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailPayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailPayloadSetTest.php</file>
@@ -397,7 +397,7 @@
                 <directory>../src/Lunr/Surface/Tests/</directory>
                 <directory>../src/Lunr/Ticks/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Tests/</directory>
-                <directory>../src/Lunr/Vortex/APNS/Tests/</directory>
+                <directory>../src/Lunr/Vortex/APNS/libcapn/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Email/Tests/</directory>
                 <directory>../src/Lunr/Vortex/GCM/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Email/Tests/</directory>

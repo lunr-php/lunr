@@ -11,7 +11,7 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS;
+namespace Lunr\Vortex\APNS\libcapn;
 
 /**
  * Apple Push Notification Service status codes.

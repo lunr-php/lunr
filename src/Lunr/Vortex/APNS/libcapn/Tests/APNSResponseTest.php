@@ -11,10 +11,10 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS\Tests;
+namespace Lunr\Vortex\APNS\libcapn\Tests;
 
-use Lunr\Vortex\APNS\APNSResponse;
-use Lunr\Vortex\APNS\APNSStatus;
+use Lunr\Vortex\APNS\libcapn\APNSResponse;
+use Lunr\Vortex\APNS\libcapn\APNSStatus;
 use Lunr\Vortex\PushNotificationStatus;
 use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
@@ -23,7 +23,7 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the APNSResponse class.
  *
- * @covers Lunr\Vortex\APNS\APNSResponse
+ * @covers Lunr\Vortex\APNS\libcapn\APNSResponse
  */
 abstract class APNSResponseTest extends LunrBaseTest
 {
@@ -46,7 +46,7 @@ abstract class APNSResponseTest extends LunrBaseTest
         $response = [ 'error_code' => 0, 'error_message' => NULL ];
 
         $this->class      = new APNSResponse($response, $this->logger, '12345679');
-        $this->reflection = new ReflectionClass('Lunr\Vortex\APNS\APNSResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\APNS\libcapn\APNSResponse');
     }
 
     /**

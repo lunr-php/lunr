@@ -11,12 +11,12 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS\Tests;
+namespace Lunr\Vortex\APNS\libcapn\Tests;
 
 /**
  * This class contains tests for the getters of the APNSPayload class.
  *
- * @covers Lunr\Vortex\APNS\APNSPayload
+ * @covers Lunr\Vortex\APNS\libcapn\APNSPayload
  */
 class APNSPayloadGetTest extends APNSPayloadTest
 {
@@ -28,7 +28,7 @@ class APNSPayloadGetTest extends APNSPayloadTest
      * @param array  $data_array The data to compare get_payload against
      *
      * @dataProvider payloadProvider
-     * @covers       Lunr\Vortex\APNS\APNSPayload::get_payload
+     * @covers       Lunr\Vortex\APNS\libcapn\APNSPayload::get_payload
      */
     public function testGetPayloadWithAlert($file, $data_array)
     {

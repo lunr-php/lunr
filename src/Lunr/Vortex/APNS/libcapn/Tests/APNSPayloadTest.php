@@ -11,7 +11,7 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS\Tests;
+namespace Lunr\Vortex\APNS\libcapn\Tests;
 
 use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
@@ -20,7 +20,7 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the APNSPayload class.
  *
- * @covers Lunr\Vortex\APNS\APNSPayload
+ * @covers Lunr\Vortex\APNS\libcapn\APNSPayload
  */
 class APNSPayloadTest extends LunrBaseTest
 {
@@ -48,10 +48,10 @@ class APNSPayloadTest extends LunrBaseTest
 
         $this->payload = json_encode($elements_array);
 
-        $this->class = $this->getMockBuilder('Lunr\Vortex\APNS\APNSPayload')
+        $this->class = $this->getMockBuilder('Lunr\Vortex\APNS\libcapn\APNSPayload')
                             ->getMockForAbstractClass();
 
-        $this->reflection = new ReflectionClass('Lunr\Vortex\APNS\APNSPayload');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\APNS\libcapn\APNSPayload');
     }
 
     /**
@@ -62,11 +62,11 @@ class APNSPayloadTest extends LunrBaseTest
     public function payloadProvider()
     {
         $values   = [];
-        $values[] = [ '/Vortex/apns/alert.json', [ 'alert' => 'apnsmessage' ] ];
-        $values[] = [ '/Vortex/apns/custom_data.json', [ 'custom_data' => [ 'key1' => 'value1', 'key2' => 'value2' ] ] ];
-        $values[] = [ '/Vortex/apns/badge.json', [ 'badge' => 10 ] ];
+        $values[] = [ '/Vortex/apns/libcapn/alert.json', [ 'alert' => 'apnsmessage' ] ];
+        $values[] = [ '/Vortex/apns/libcapn/custom_data.json', [ 'custom_data' => [ 'key1' => 'value1', 'key2' => 'value2' ] ] ];
+        $values[] = [ '/Vortex/apns/libcapn/badge.json', [ 'badge' => 10 ] ];
         $values[] = [
-            '/Vortex/apns/apns.json',
+            '/Vortex/apns/libcapn/apns.json',
             [
                 'alert'       => 'apnsmessage',
                 'badge'       => 10,

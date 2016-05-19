@@ -11,14 +11,14 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS\Tests;
+namespace Lunr\Vortex\APNS\libcapn\Tests;
 
 use Lunr\Vortex\PushNotificationStatus;
 
 /**
  * This class contains tests for successful APNS dispatches.
  *
- * @covers Lunr\Vortex\APNS\APNSResponse
+ * @covers Lunr\Vortex\APNS\libcapn\APNSResponse
  */
 class APNSResponseSuccessTest extends APNSResponseTest
 {
@@ -58,7 +58,7 @@ class APNSResponseSuccessTest extends APNSResponseTest
     /**
      * Test that get_status() returns the dispatch status with correct endpoint.
      *
-     * @covers Lunr\Vortex\APNS\APNSResponse::get_status
+     * @covers Lunr\Vortex\APNS\libcapn\APNSResponse::get_status
      */
     public function testGetStatusReturnsStatusForCorrectEndpoint()
     {
@@ -68,7 +68,7 @@ class APNSResponseSuccessTest extends APNSResponseTest
     /**
      * Test that get_status() returns unknown status with incorrect endpoint.
      *
-     * @covers Lunr\Vortex\APNS\APNSResponse::get_status
+     * @covers Lunr\Vortex\APNS\libcapn\APNSResponse::get_status
      */
     public function testGetStatusReturnsUnknownStatusForIncorrectEndpoint()
     {

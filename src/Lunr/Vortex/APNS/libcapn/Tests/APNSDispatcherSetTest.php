@@ -11,12 +11,12 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS\Tests;
+namespace Lunr\Vortex\APNS\libcapn\Tests;
 
 /**
  * This class contains tests for the setters of the APNSDispatcher class.
  *
- * @covers Lunr\Vortex\APNS\APNSDispatcher
+ * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher
  */
 class APNSDispatcherSetTest extends APNSDispatcherTest
 {
@@ -24,7 +24,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
     /**
      * Test that set_endpoints() sets unique endpoint with single parameter.
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::set_endpoints
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_endpoints
      */
     public function testSetEndpointsSetsUniqueEndpointWithString()
     {
@@ -36,7 +36,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
     /**
      * Test that set_endpoints() sets the first endpoint of the list.
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::set_endpoints
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_endpoints
      */
     public function testSetEndpointsSetsFirstEndpointWithArray()
     {
@@ -48,7 +48,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
     /**
      * Test that set_endpoints() sets empty endpoint with empty endpoints list.
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::set_endpoints
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_endpoints
      */
     public function testSetEndpointsSetsEmptyEndpointWithEmptyArray()
     {
@@ -60,7 +60,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
     /**
      * Test the fluid interface of set_endpoints().
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::set_endpoints
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_endpoints
      */
     public function testSetEndpointsReturnsSelfReference()
     {
@@ -70,7 +70,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
     /**
      * Test that set_payload() sets the payload.
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::set_payload
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_payload
      */
     public function testSetPayloadSetsPayload()
     {
@@ -83,7 +83,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
     /**
      * Test the fluid interface of set_payload().
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::set_payload
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_payload
      */
     public function testSetPayloadReturnsSelfReference()
     {
@@ -94,7 +94,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
     /**
      * Test that set_certificate() sets the certificate.
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::set_certificate
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_certificate
      */
     public function testSetCertificateSetsCertificate()
     {
@@ -108,7 +108,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
     /**
      * Test the fluid interface of set_certificate().
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::set_certificate
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_certificate
      */
     public function testSetCertificateReturnsSelfReference()
     {
@@ -119,7 +119,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
     /**
      * Test that set_passphrase() sets the passphrase.
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::set_passphrase
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_passphrase
      */
     public function testSetPassphraseSetsPassphrase()
     {
@@ -133,7 +133,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
     /**
      * Test the fluid interface of set_passphrase().
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::set_passphrase
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_passphrase
      */
     public function testSetPassphraseReturnsSelfReference()
     {
@@ -145,7 +145,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
      * Test that set_passphrase() sets the passphrase.
      *
      * @requires extension apn
-     * @covers   Lunr\Vortex\APNS\APNSDispatcher::set_passphrase
+     * @covers   Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_passphrase
      */
     public function testSetSandboxModeSetsSandboxModeWithTrue()
     {
@@ -159,7 +159,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
      * Test that set_passphrase() sets the passphrase.
      *
      * @requires extension apn
-     * @covers   Lunr\Vortex\APNS\APNSDispatcher::set_passphrase
+     * @covers   Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_passphrase
      */
     public function testSetSandboxModeSetsProductionModeWithFalse()
     {
@@ -172,7 +172,7 @@ class APNSDispatcherSetTest extends APNSDispatcherTest
     /**
      * Test the fluid interface of set_sandbox_mode().
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::set_sandbox_mode
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::set_sandbox_mode
      */
     public function testSetSandboxModeReturnsSelfReference()
     {

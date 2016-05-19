@@ -11,12 +11,12 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS\Tests;
+namespace Lunr\Vortex\APNS\libcapn\Tests;
 
 /**
  * This class contains the Base tests of the APNSPayload class.
  *
- * @covers Lunr\Vortex\APNS\APNSPayload
+ * @covers Lunr\Vortex\APNS\libcapn\APNSPayload
  */
 class APNSPayloadBaseTest extends APNSPayloadTest
 {

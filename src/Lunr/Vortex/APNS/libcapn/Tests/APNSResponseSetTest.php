@@ -11,14 +11,14 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS\Tests;
+namespace Lunr\Vortex\APNS\libcapn\Tests;
 
 use Lunr\Vortex\PushNotificationStatus;
 
 /**
  * This class contains tests for setting meta information about APNS dispatches.
  *
- * @covers Lunr\Vortex\APNS\APNSResponse
+ * @covers Lunr\Vortex\APNS\libcapn\APNSResponse
  */
 class APNSResponseSetTest extends APNSResponseTest
 {
@@ -34,7 +34,7 @@ class APNSResponseSetTest extends APNSResponseTest
     /**
      * Test setting the status for a successful request.
      *
-     * @covers Lunr\Vortex\APNS\APNSResponse::set_status
+     * @covers Lunr\Vortex\APNS\libcapn\APNSResponse::set_status
      */
     public function testStatusForSuccessRequestStatus()
     {
@@ -55,7 +55,7 @@ class APNSResponseSetTest extends APNSResponseTest
      * @param Integer $expected Expected push notification status
      *
      * @dataProvider failedRequestProvider
-     * @covers       Lunr\Vortex\APNS\APNSResponse::set_status
+     * @covers       Lunr\Vortex\APNS\libcapn\APNSResponse::set_status
      */
     public function testSetStatusForNonSuccessRequestStatus($code, $msg, $expected)
     {
