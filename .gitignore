@@ -13,5 +13,6 @@ build
 *.mo
 
 # ignore external interactions
+src/ApnsPHP
 src/Psr
 src/Resque
