@@ -11,7 +11,7 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS\libcapn\Tests;
+namespace Lunr\Vortex\APNS\Tests;
 
 use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
@@ -20,7 +20,7 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the APNSPayload class.
  *
- * @covers Lunr\Vortex\APNS\libcapn\APNSPayload
+ * @covers Lunr\Vortex\APNS\APNSPayload
  */
 class APNSPayloadTest extends LunrBaseTest
 {
@@ -48,10 +48,10 @@ class APNSPayloadTest extends LunrBaseTest
 
         $this->payload = json_encode($elements_array);
 
-        $this->class = $this->getMockBuilder('Lunr\Vortex\APNS\libcapn\APNSPayload')
+        $this->class = $this->getMockBuilder('Lunr\Vortex\APNS\APNSPayload')
                             ->getMockForAbstractClass();
 
-        $this->reflection = new ReflectionClass('Lunr\Vortex\APNS\libcapn\APNSPayload');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\APNS\APNSPayload');
     }
 
     /**

@@ -11,12 +11,12 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS\libcapn\Tests;
+namespace Lunr\Vortex\APNS\Tests;
 
 /**
  * This class contains tests for the setters of the APNSPayload class.
  *
- * @covers Lunr\Vortex\APNS\libcapn\APNSPayload
+ * @covers Lunr\Vortex\APNS\APNSPayload
  */
 class APNSPayloadSetTest extends APNSPayloadTest
 {
@@ -24,7 +24,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
     /**
      * Test set_alert() works correctly.
      *
-     * @covers Lunr\Vortex\APNS\libcapn\APNSPayload::set_alert
+     * @covers Lunr\Vortex\APNS\APNSPayload::set_alert
      */
     public function testSetAlert()
     {
@@ -39,7 +39,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
     /**
      * Test fluid interface of set_alert().
      *
-     * @covers Lunr\Vortex\APNS\libcapn\APNSPayload::set_alert
+     * @covers Lunr\Vortex\APNS\APNSPayload::set_alert
      */
     public function testSetAlertReturnsSelfReference()
     {
@@ -49,7 +49,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
     /**
      * Test set_sound() works correctly.
      *
-     * @covers Lunr\Vortex\APNS\libcapn\APNSPayload::set_sound
+     * @covers Lunr\Vortex\APNS\APNSPayload::set_sound
      */
     public function testSetSound()
     {
@@ -64,7 +64,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
     /**
      * Test fluid interface of set_sound().
      *
-     * @covers Lunr\Vortex\APNS\libcapn\APNSPayload::set_sound
+     * @covers Lunr\Vortex\APNS\APNSPayload::set_sound
      */
     public function testSetSoundReturnsSelfReference()
     {
@@ -74,7 +74,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
     /**
      * Test set_custom_data() works correctly.
      *
-     * @covers Lunr\Vortex\APNS\libcapn\APNSPayload::set_custom_data
+     * @covers Lunr\Vortex\APNS\APNSPayload::set_custom_data
      */
     public function testSetCustomData()
     {
@@ -89,7 +89,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
     /**
      * Test fluid interface of set_custom_data().
      *
-     * @covers Lunr\Vortex\APNS\libcapn\APNSPayload::set_custom_data
+     * @covers Lunr\Vortex\APNS\APNSPayload::set_custom_data
      */
     public function testSetCustomDataReturnsSelfReference()
     {
@@ -99,7 +99,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
     /**
      * Test set_badge() works correctly.
      *
-     * @covers Lunr\Vortex\APNS\libcapn\APNSPayload::set_badge
+     * @covers Lunr\Vortex\APNS\APNSPayload::set_badge
      */
     public function testSetBadge()
     {
@@ -114,7 +114,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
     /**
      * Test fluid interface of set_badge().
      *
-     * @covers Lunr\Vortex\APNS\libcapn\APNSPayload::set_badge
+     * @covers Lunr\Vortex\APNS\APNSPayload::set_badge
      */
     public function testSetBadgeReturnsSelfReference()
     {
