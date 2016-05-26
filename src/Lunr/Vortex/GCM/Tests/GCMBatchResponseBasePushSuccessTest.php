@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the GCMResponseBasePushSuccessTest class.
+ * This file contains the GCMBatchResponseBasePushSuccessTest class.
  *
  * PHP Version 5.4
  *
@@ -13,29 +13,27 @@
 
 namespace Lunr\Vortex\GCM\Tests;
 
-use Lunr\Vortex\GCM\GCMResponse;
+use Lunr\Vortex\GCM\GCMBatchResponse;
 use Lunr\Vortex\PushNotificationStatus;
 
 use ReflectionClass;
 
 /**
- * This class contains tests for the constructor of the GCMResponse class
+ * This class contains tests for the constructor of the GCMBatchResponse class
  * in case of a push notification success.
  *
- * @covers Lunr\Vortex\GCM\GCMResponse
+ * @covers Lunr\Vortex\GCM\GCMBatchResponse
  */
-class GCMResponseBasePushSuccessTest extends GCMResponseTest
+class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
 {
 
     /**
      * Test constructor behavior for success of push notification with missing results.
      *
-     * @covers Lunr\Vortex\GCM\GCMResponse::__construct
+     * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
     public function testPushSuccessWithMissingResults()
     {
-        parent::setUp();
-
         $this->curl_response->expects($this->once())
                             ->method('__get')
                             ->with('http_code')
@@ -57,8 +55,8 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
         $endpoints = [ 'endpoint1' ];
         $statuses  = [ 'endpoint1' => PushNotificationStatus::UNKNOWN ];
 
-        $this->class      = new GCMResponse($this->curl_response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -69,12 +67,10 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
     /**
      * Test constructor behavior for push success with single endpoint success.
      *
-     * @covers Lunr\Vortex\GCM\GCMResponse::__construct
+     * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
     public function testPushSuccessWithSingleSuccess()
     {
-        parent::setUp();
-
         $this->curl_response->expects($this->once())
                             ->method('__get')
                             ->with('http_code')
@@ -92,8 +88,8 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
         $endpoints = [ 'endpoint1' ];
         $statuses  = [ 'endpoint1' => PushNotificationStatus::SUCCESS ];
 
-        $this->class      = new GCMResponse($this->curl_response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -104,12 +100,10 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
     /**
      * Test constructor behavior for success of push notification with single error.
      *
-     * @covers Lunr\Vortex\GCM\GCMResponse::__construct
+     * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
     public function testPushSuccessWithSingleError()
     {
-        parent::setUp();
-
         $this->curl_response->expects($this->once())
                             ->method('__get')
                             ->with('http_code')
@@ -131,8 +125,8 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
         $endpoints = [ 'endpoint1' ];
         $statuses  = [ 'endpoint1' => PushNotificationStatus::INVALID_ENDPOINT ];
 
-        $this->class      = new GCMResponse($this->curl_response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -143,12 +137,10 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
     /**
      * Test constructor behavior for success of push notification with multiple success.
      *
-     * @covers Lunr\Vortex\GCM\GCMResponse::__construct
+     * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
     public function testPushSuccessWithMultipleSuccess()
     {
-        parent::setUp();
-
         $this->curl_response->expects($this->once())
                             ->method('__get')
                             ->with('http_code')
@@ -170,8 +162,8 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
             'endpoint3' => PushNotificationStatus::SUCCESS,
         ];
 
-        $this->class      = new GCMResponse($this->curl_response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -182,12 +174,10 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
     /**
      * Test constructor behavior for success of push notification with multiple errors.
      *
-     * @covers Lunr\Vortex\GCM\GCMResponse::__construct
+     * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
     public function testPushSuccessWithMultipleErrors()
     {
-        parent::setUp();
-
         $this->curl_response->expects($this->once())
                             ->method('__get')
                             ->with('http_code')
@@ -247,8 +237,8 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
             'endpoint13' => PushNotificationStatus::UNKNOWN,
         ];
 
-        $this->class      = new GCMResponse($this->curl_response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -259,12 +249,10 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
     /**
      * Test constructor behavior for success of push notification with multiple mixed results.
      *
-     * @covers Lunr\Vortex\GCM\GCMResponse::__construct
+     * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
     public function testPushSuccessWithMultipleMixedResults()
     {
-        parent::setUp();
-
         $this->curl_response->expects($this->once())
                             ->method('__get')
                             ->with('http_code')
@@ -299,8 +287,8 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
                         [ 'endpoint' => 'endpoint3', 'error' => 'Invalid registration token' ]
                       );
 
-        $this->class      = new GCMResponse($this->curl_response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -311,12 +299,10 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
     /**
      * Test constructor behavior for success of push notification with more endpoints than results.
      *
-     * @covers Lunr\Vortex\GCM\GCMResponse::__construct
+     * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
     public function testPushSuccessWithMoreEndpointsThanResults()
     {
-        parent::setUp();
-
         $this->curl_response->expects($this->once())
                             ->method('__get')
                             ->with('http_code')
@@ -338,8 +324,8 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
             'endpoint3' => PushNotificationStatus::SUCCESS,
         ];
 
-        $this->class      = new GCMResponse($this->curl_response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -350,12 +336,10 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
     /**
      * Test constructor behavior for success of push notification with less endpoints than results.
      *
-     * @covers Lunr\Vortex\GCM\GCMResponse::__construct
+     * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
     public function testPushSuccessWithLessEndpointsThanResults()
     {
-        parent::setUp();
-
         $this->curl_response->expects($this->once())
                             ->method('__get')
                             ->with('http_code')
@@ -373,8 +357,8 @@ class GCMResponseBasePushSuccessTest extends GCMResponseTest
         $endpoints = [ 'endpoint1' ];
         $statuses  = [ 'endpoint1' => PushNotificationStatus::SUCCESS ];
 
-        $this->class      = new GCMResponse($this->curl_response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);

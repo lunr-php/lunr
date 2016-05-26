@@ -24,52 +24,17 @@ class GCMResponse implements PushNotificationResponseInterface
 {
 
     /**
-     * Shared instance of a Logger class.
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * The response HTTP code.
-     * @var Integer
-     */
-    private $http_code;
-
-    /**
-     * The response body content.
-     * @var String
-     */
-    private $content;
-
-    /**
      * The statuses per endpoint.
      * @var Array
      */
-    private $statuses;
+    protected $statuses;
 
     /**
      * Constructor.
-     *
-     * @param CurlResponse    $response  Curl Response object.
-     * @param LoggerInterface $logger    Shared instance of a Logger.
-     * @param Array           $endpoints The endpoints the message was sent to (in the same order as sent).
      */
-    public function __construct($response, $logger, $endpoints)
+    public function __construct()
     {
-        $this->logger   = $logger;
         $this->statuses = [];
-
-        $this->http_code = $response->http_code;
-        $this->content   = $response->get_result();
-
-        if ($this->http_code == 200)
-        {
-            $this->set_statuses($endpoints);
-        }
-        else
-        {
-            $this->report_error($endpoints);
-        }
     }
 
     /**
@@ -77,48 +42,22 @@ class GCMResponse implements PushNotificationResponseInterface
      */
     public function __destruct()
     {
-        unset($this->logger);
-        unset($this->http_code);
-        unset($this->content);
         unset($this->statuses);
     }
 
     /**
-     * Define the status result for each endpoint.
+     * Add the results of a batch response.
      *
-     * @param Array $endpoints The endpoints the message was sent to (in the same order as sent).
+     * @param GCMBatchResponse $batch_response Batch response
+     * @param Array            $endpoints      endpoints of the batch
      *
      * @return void
      */
-    private function set_statuses(&$endpoints)
+    public function add_batch_response($batch_response, $endpoints)
     {
-        $json_content = json_decode($this->content, TRUE);
-
-        if (!isset($json_content['results']))
+        foreach($endpoints as $endpoint)
         {
-            $this->report_error($endpoints);
-            return;
-        }
-
-        foreach ($json_content['results'] as $result)
-        {
-            $endpoint = array_shift($endpoints);
-
-            if (is_null($endpoint))
-            {
-                break;
-            }
-
-            if (!isset($result['error']))
-            {
-                $this->statuses[$endpoint] = PushNotificationStatus::SUCCESS;
-            }
-            else
-            {
-                $this->report_endpoint_error($endpoint, $result['error']);
-            }
-
-            // We are supposed here to parse the new registration ids
+            $this->statuses[$endpoint] = $batch_response->get_status($endpoint);
         }
     }
 
@@ -131,121 +70,7 @@ class GCMResponse implements PushNotificationResponseInterface
      */
     public function get_status($endpoint)
     {
-        if (empty($this->statuses))
-        {
-            return PushNotificationStatus::UNKNOWN;
-        }
-
         return isset($this->statuses[$endpoint]) ? $this->statuses[$endpoint] : PushNotificationStatus::UNKNOWN;
-    }
-
-    /**
-     * Report an error with the push notification.
-     *
-     * @param Array $endpoints The endpoints the message was sent to
-     *
-     * @return void
-     */
-    private function report_error(&$endpoints)
-    {
-        $error_message = 'Unknown error';
-        $status        = PushNotificationStatus::UNKNOWN;
-
-        if ($this->http_code == 400)
-        {
-            $error_message = "Invalid JSON ({$this->content})";
-            $status        = PushNotificationStatus::ERROR;
-        }
-        else if ($this->http_code == 401)
-        {
-            $error_message = 'Error with authentication';
-            $status        = PushNotificationStatus::ERROR;
-        }
-        else if ($this->http_code >= 500)
-        {
-            $error_message = 'Internal error';
-            $status        = PushNotificationStatus::TEMPORARY_ERROR;
-        }
-
-        foreach ($endpoints as $endpoint)
-        {
-            $this->statuses[$endpoint] = $status;
-        }
-
-        $context = [ 'error' => $error_message ];
-        $this->logger->warning('Dispatching push notification failed: {error}', $context);
-    }
-
-    /**
-     * Report an error with the push notification for one endpoint.
-     *
-     * @param String $endpoint   Endpoint for which the push failed
-     * @param String $error_code Error responde code
-     *
-     * @return void
-     */
-    private function report_endpoint_error($endpoint, $error_code)
-    {
-        switch ($error_code)
-        {
-            case 'MissingRegistration':
-                $status        = PushNotificationStatus::INVALID_ENDPOINT;
-                $error_message = 'Missing registration token';
-                break;
-            case 'InvalidRegistration':
-                $status        = PushNotificationStatus::INVALID_ENDPOINT;
-                $error_message = 'Invalid registration token';
-                break;
-            case 'NotRegistered':
-                $status        = PushNotificationStatus::INVALID_ENDPOINT;
-                $error_message = 'Unregistered device';
-                break;
-            case 'InvalidPackageName':
-                $status        = PushNotificationStatus::INVALID_ENDPOINT;
-                $error_message = 'Invalid package name';
-                break;
-            case 'MismatchSenderId':
-                $status        = PushNotificationStatus::INVALID_ENDPOINT;
-                $error_message = 'Mismatched sender';
-                break;
-            case 'MessageTooBig':
-                $status        = PushNotificationStatus::ERROR;
-                $error_message = 'Message too big';
-                break;
-            case 'InvalidDataKey':
-                $status        = PushNotificationStatus::ERROR;
-                $error_message = 'Invalid data key';
-                break;
-            case 'InvalidTtl':
-                $status        = PushNotificationStatus::ERROR;
-                $error_message = 'Invalid time to live';
-                break;
-            case 'Unavailable':
-                $status        = PushNotificationStatus::TEMPORARY_ERROR;
-                $error_message = 'Timeout';
-                break;
-            case 'InternalServerError':
-                $status        = PushNotificationStatus::TEMPORARY_ERROR;
-                $error_message = 'Internal server error';
-                break;
-            case 'DeviceMessageRateExceeded':
-                $status        = PushNotificationStatus::TEMPORARY_ERROR;
-                $error_message = 'Device message rate exceeded';
-                break;
-            case 'TopicsMessageRateExceeded':
-                $status        = PushNotificationStatus::TEMPORARY_ERROR;
-                $error_message = 'Topics message rate exceeded';
-                break;
-            default:
-                $status        = PushNotificationStatus::UNKNOWN;
-                $error_message = $error_code;
-                break;
-        }
-
-        $context = [ 'endpoint' => $endpoint, 'error' => $error_message ];
-        $this->logger->warning('Dispatching push notification failed for endpoint {endpoint}: {error}', $context);
-
-        $this->statuses[$endpoint] = $status;
     }
 
 }

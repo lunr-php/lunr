@@ -23,6 +23,12 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
 {
 
     /**
+     * Maximum number of endpoints allowed in one push.
+     * @var Integer
+     */
+    const BATCH_SIZE = 1000;
+
+    /**
      * Push Notification endpoints.
      * @var Array
      */
@@ -111,30 +117,53 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
      */
     public function push()
     {
+        $gcm_response = new GCMResponse();
+
+        foreach (array_chunk($this->endpoints, self::BATCH_SIZE) as &$endpoints)
+        {
+            $batch_response = $this->push_batch($endpoints);
+
+            $gcm_response->add_batch_response($batch_response, $endpoints);
+
+            unset($batch_response);
+        }
+
+        unset($endpoints);
+
+        $this->reset();
+
+        return $gcm_response;
+    }
+
+    /**
+     * Push the notification to a batch of endpoints.
+     *
+     * @param Array $endpoints Endpoints to sent it to in this batch
+     *
+     * @return GCMBatchResponse $return Response object
+     */
+    protected function push_batch(&$endpoints)
+    {
         $this->curl->set_option('CURLOPT_FAILONERROR', FALSE);
         $this->curl->set_http_headers(['Content-Type:application/json', 'Authorization: key=' . $this->auth_token]);
 
         $tmp_payload = json_decode($this->payload, TRUE);
 
-        if (count($this->endpoints) > 1)
+        if (count($endpoints) > 1)
         {
-            $tmp_payload['registration_ids'] = $this->endpoints;
+            $tmp_payload['registration_ids'] = $endpoints;
         }
-        else if (isset($this->endpoints[0]))
+        else if (isset($endpoints[0]))
         {
-            $tmp_payload['to'] = $this->endpoints[0];
+            $tmp_payload['to'] = $endpoints[0];
         }
 
         $tmp_payload['priority'] = $this->priority;
 
-        $this->payload = json_encode($tmp_payload);
+        $curl_response      = $this->curl->post_request(self::GOOGLE_SEND_URL, json_encode($tmp_payload));
+        $gcm_batch_response = new GCMBatchResponse($curl_response, $this->logger, $this->endpoints);
 
-        $curl_response = $this->curl->post_request(self::GOOGLE_SEND_URL, $this->payload);
-        $gcm_response  = new GCMResponse($curl_response, $this->logger, $this->endpoints);
-
-        $this->reset();
-
-        return $gcm_response;
+        return $gcm_batch_response;
     }
 
     /**

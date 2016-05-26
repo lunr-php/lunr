@@ -1,27 +1,54 @@
 <?php
 
 /**
- * This file contains the GCMResponseGetStatusTest class.
+ * This file contains the GCMBatchResponseGetStatusTest class.
  *
  * PHP Version 5.4
  *
  * @package    Lunr\Vortex\GCM
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
- * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Vortex\GCM\Tests;
 
+use Lunr\Vortex\GCM\GCMBatchResponse;
 use Lunr\Vortex\PushNotificationStatus;
 
+use ReflectionClass;
+
 /**
- * This class contains tests for the get_status function of the GCMResponse class.
+ * This class contains tests for the get_status function of the GCMBatchResponse class.
  *
- * @covers Lunr\Vortex\GCM\GCMResponse
+ * @covers Lunr\Vortex\GCM\GCMBatchResponse
  */
-class GCMResponseGetStatusTest extends GCMResponseTest
+class GCMBatchResponseGetStatusTest extends GCMBatchResponseTest
 {
+
+    /**
+     * Testcase constructor.
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->curl_response->expects($this->once())
+                            ->method('__get')
+                            ->with('http_code')
+                            ->willReturn(200);
+
+        $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_single_success.json');
+
+        $this->curl_response->expects($this->once())
+                            ->method('get_result')
+                            ->willReturn($content);
+
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+    }
 
     /**
      * Unit test data provider.
@@ -77,7 +104,7 @@ class GCMResponseGetStatusTest extends GCMResponseTest
      * @param Integer $status   Expected function result
      *
      * @dataProvider endpointDataProvider
-     * @covers       Lunr\Vortex\GCM\GCMResponse::get_status
+     * @covers       Lunr\Vortex\GCM\GCMBatchResponse::get_status
      */
     public function testGetStatus($statuses, $status)
     {

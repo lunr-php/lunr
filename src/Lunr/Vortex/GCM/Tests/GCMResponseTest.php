@@ -1,20 +1,21 @@
 <?php
 
 /**
- * This file contains the GCMResponseBaseTest class.
+ * This file contains the GCMResponseTest class.
  *
  * PHP Version 5.4
  *
- * @package    Lunr\Vortex\GCM
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @author     Damien Tardy-Panis <damien@m2mobi.com>
- * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Vortex\GCM
+ * @author    Damien Tardy-Panis <damien@m2mobi.com>
+ * @copyright 2013-2016, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Vortex\GCM\Tests;
 
 use Lunr\Halo\LunrBaseTest;
+use ReflectionClass;
+use Lunr\Vortex\GCM\GCMResponse;
 
 /**
  * This class contains common setup routines, providers
@@ -26,16 +27,10 @@ abstract class GCMResponseTest extends LunrBaseTest
 {
 
     /**
-     * Mock instance of the Logger class.
-     * @var LoggerInterface
+     * Mock instance of the GCMBatchResponse class.
+     * @var Lunr\Vortex\GCM\GCMBatchResponse
      */
-    protected $logger;
-
-    /**
-     * Mock instance of the CurlResponse class.
-     * @var Lunr\Network\CurlResponse
-     */
-    protected $curl_response;
+    protected $batch_response;
 
     /**
      * Testcase Constructor.
@@ -44,11 +39,12 @@ abstract class GCMResponseTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->batch_response = $this->getMockBuilder('Lunr\Vortex\GCM\GCMBatchResponse')
+                                     ->disableOriginalConstructor()
+                                     ->getMock();
 
-        $this->curl_response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                                    ->disableOriginalConstructor()
-                                    ->getMock();
+        $this->class      = new GCMResponse();
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
     }
 
     /**
@@ -56,8 +52,7 @@ abstract class GCMResponseTest extends LunrBaseTest
      */
     public function tearDown()
     {
-        unset($this->logger);
-        unset($this->curl_response);
+        unset($this->batch_response);
         unset($this->class);
         unset($this->reflection);
     }

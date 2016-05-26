@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the GCMResponseBasePushErrorTest class.
+ * This file contains the GCMBatchResponseBasePushErrorTest class.
  *
  * PHP Version 5.4
  *
@@ -13,29 +13,27 @@
 
 namespace Lunr\Vortex\GCM\Tests;
 
-use Lunr\Vortex\GCM\GCMResponse;
+use Lunr\Vortex\GCM\GCMBatchResponse;
 use Lunr\Vortex\PushNotificationStatus;
 
 use ReflectionClass;
 
 /**
- * This class contains tests for the constructor of the GCMResponse class
+ * This class contains tests for the constructor of the GCMBatchResponse class
  * in case of a push notification error.
  *
- * @covers Lunr\Vortex\GCM\GCMResponse
+ * @covers Lunr\Vortex\GCM\GCMBatchResponse
  */
-class GCMResponseBasePushErrorTest extends GCMResponseTest
+class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
 {
 
     /**
      * Test constructor behavior for error of push notification in case of invalid JSON.
      *
-     * @covers Lunr\Vortex\GCM\GCMResponse::__construct
+     * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
     public function testPushErrorInvalidJSON()
     {
-        parent::setUp();
-
         $http_code = 400;
         $content   = 'Field "collapse_key" must be a JSON string: 1463565451';
 
@@ -55,8 +53,8 @@ class GCMResponseBasePushErrorTest extends GCMResponseTest
                         [ 'error' => "Invalid JSON ({$content})" ]
                      );
 
-        $this->class      = new GCMResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger);
         $this->assertPropertyEquals('statuses', [ 'endpoint1' => PushNotificationStatus::ERROR ]);
@@ -67,12 +65,10 @@ class GCMResponseBasePushErrorTest extends GCMResponseTest
     /**
      * Test constructor behavior for error of push notification in case of authentication error.
      *
-     * @covers Lunr\Vortex\GCM\GCMResponse::__construct
+     * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
     public function testPushErrorAuthenticationError()
     {
-        parent::setUp();
-
         $http_code = 401;
         $content   = 'stuff';
 
@@ -92,8 +88,8 @@ class GCMResponseBasePushErrorTest extends GCMResponseTest
                         [ 'error' => 'Error with authentication' ]
                      );
 
-        $this->class      = new GCMResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger);
         $this->assertPropertyEquals('statuses', [ 'endpoint1' => PushNotificationStatus::ERROR ]);
@@ -124,12 +120,10 @@ class GCMResponseBasePushErrorTest extends GCMResponseTest
      * @param Integer $http_code HTTP code received
      *
      * @dataProvider internalErrorHTTPCodeDataProvider
-     * @covers       Lunr\Vortex\GCM\GCMResponse::__construct
+     * @covers       Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
     public function testPushErrorInternalError($http_code)
     {
-        parent::setUp();
-
         $content = 'stuff';
 
         $this->curl_response->expects($this->once())
@@ -148,8 +142,8 @@ class GCMResponseBasePushErrorTest extends GCMResponseTest
                         [ 'error' => 'Internal error' ]
                      );
 
-        $this->class      = new GCMResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger);
         $this->assertPropertyEquals('statuses', [ 'endpoint1' => PushNotificationStatus::TEMPORARY_ERROR ]);
@@ -178,12 +172,10 @@ class GCMResponseBasePushErrorTest extends GCMResponseTest
      * @param Integer $http_code HTTP code received
      *
      * @dataProvider unknownErrorHTTPCodeDataProvider
-     * @covers       Lunr\Vortex\GCM\GCMResponse::__construct
+     * @covers       Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
     public function testPushErrorUnknownError($http_code)
     {
-        parent::setUp();
-
         $content = 'stuff';
 
         $this->curl_response->expects($this->once())
@@ -202,8 +194,8 @@ class GCMResponseBasePushErrorTest extends GCMResponseTest
                         [ 'error' => 'Unknown error' ]
                      );
 
-        $this->class      = new GCMResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMResponse');
+        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger);
         $this->assertPropertyEquals('statuses', [ 'endpoint1' => PushNotificationStatus::UNKNOWN ]);
