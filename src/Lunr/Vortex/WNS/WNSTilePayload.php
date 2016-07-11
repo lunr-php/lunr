@@ -42,27 +42,30 @@ class WNSTilePayload extends WNSPayload
      */
     public function get_payload()
     {
-        $xml  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-        $xml .= "<tile>\n";
-        $xml .= "<visual>\n";
-        $xml .= "<binding template=\"TileSquareText04\">\n";
-
-        if (isset($this->elements['text']) === TRUE)
-        {
-            $xml .= '<text id="1">' . $this->elements['text'] . "</text>\n";
+        $inner_xml = '';
+        foreach ($this->elements['image'] as $key => $value) {
+            $inner_xml .= '            <image id="' . ($key + 1) . '" src="' . $value . "\"/>\r\n";
         }
 
-        $xml .= "</binding>\n";
-        $xml .= "<binding template=\"TileWideText03\">\n";
-
-        if (isset($this->elements['text']) === TRUE)
-        {
-            $xml .= '<text id="1">' . $this->elements['text'] . "</text>\n";
+        foreach ($this->elements['text'] as $key => $value) {
+            $inner_xml .= '            <text id="' . ($key + 1) . '">' . $value . "</text>\r\n";
         }
 
-        $xml .= "</binding>\n";
-        $xml .= "</visual>\n";
-        $xml .= "</tile>\n";
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\r\n";
+
+        foreach ($this->elements['template'] as $key => $template)
+        {
+            $xml .= '<tile>'."\r\n";
+            $xml .= "    <visual version=\"2\">"."\r\n";
+            $xml .= '        <binding template="' . $template . "\">"."\r\n";
+            $xml .= $inner_xml;
+            $xml .= "        </binding>"."\r\n";
+            $xml .= "    </visual>"."\r\n";
+            $xml .= '</tile>';
+            $xml .= ($key < (count($this->elements['template'])-1)) ? "\r\n"."\r\n" : "\r\n";
+        }
+
+
 
         return $xml;
     }
@@ -70,13 +73,72 @@ class WNSTilePayload extends WNSPayload
     /**
      * Set text for the tile notification.
      *
-     * @param String $text Text on the tile
+     * @param String[]|String $text Text on the tile
+     *
+     * @param int             $line The line on which to add the text
      *
      * @return WNSTilePayload $self Self Reference
      */
-    public function set_text($text)
+    public function set_text($text, $line = 0)
     {
-        $this->elements['text'] = $this->escape_string($text);
+        if (!is_array($text))
+        {
+            $this->elements['text'][$line] = $this->escape_string($text);
+            return $this;
+        }
+
+        foreach ($text as $key => $value) {
+            $this->elements['text'][$key] = $this->escape_string($value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set image for the tile notification.
+     *
+     * @param String[]|String $image Image on the tile
+     *
+     * @param int             $line  The line on which to add the text
+     *
+     * @return WNSTilePayload $self Self Reference
+     */
+    public function set_image($image, $line = 0)
+    {
+        if (!is_array($image))
+        {
+            $this->elements['image'][$line] = $this->escape_string($image);
+            return $this;
+        }
+
+        foreach ($image as $key => $value) {
+            $this->elements['image'][$key] = $this->escape_string($value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set template for the tile notification.
+     *
+     * @param String[]|String $templates Template(s) for notification
+     *
+     *
+     * @see https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.notifications.tiletemplatetype
+     *
+     * @return WNSTilePayload $self Self Reference
+     */
+    public function set_templates($templates)
+    {
+        if (!is_array($templates))
+        {
+            $templates = [ $templates ];
+        }
+
+        foreach ($templates as $key => $template)
+        {
+            $this->elements['templates'][$key] = $this->escape_string($template);
+        }
 
         return $this;
     }
