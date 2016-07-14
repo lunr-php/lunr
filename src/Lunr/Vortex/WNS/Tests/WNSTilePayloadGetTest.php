@@ -29,11 +29,41 @@ class WNSTilePayloadGetTest extends WNSTilePayloadTest
     public function testGetPayload()
     {
         $file     = TEST_STATICS . '/Vortex/wns/tile.xml';
-        $elements = [ 'text' => 'Text' ];
+        $elements = [ 'text' => ['Text'], 'template' => [ 'TileSquare150x150Text04', 'TileWide310x150Text03'], 'image' => [ 'image' ]];
 
         $this->set_reflection_property_value('elements', $elements);
 
-        $this->assertStringMatchesFormatFile($file, $this->class->get_payload());
+        $this->assertStringEqualsFile($file, $this->class->get_payload());
+    }
+
+    /**
+     * Test get_payload() without images being present.
+     *
+     * @covers Lunr\Vortex\WNS\WNSTilePayload::get_payload
+     */
+    public function testGetPayloadWithoutImage()
+    {
+        $file     = TEST_STATICS . '/Vortex/wns/tile_image.xml';
+        $elements = [ 'text' => ['Text'], 'template' => ['TileSquare150x150Text04', 'TileWide310x150Text03'], 'image' => []];
+
+        $this->set_reflection_property_value('elements', $elements);
+
+        $this->assertStringEqualsFile($file, $this->class->get_payload());
+    }
+
+    /**
+     * Test get_payload() without the wide template being present.
+     *
+     * @covers Lunr\Vortex\WNS\WNSTilePayload::get_payload
+     */
+    public function testGetPayloadWithoutWideTemplate()
+    {
+        $file     = TEST_STATICS . '/Vortex/wns/tile_square.xml';
+        $elements = [ 'text' => ['Text'], 'template' => [ 'TileSquare150x150Text04' ], 'image' => []];
+
+        $this->set_reflection_property_value('elements', $elements);
+
+        $this->assertStringEqualsFile($file, $this->class->get_payload());
     }
 
 }

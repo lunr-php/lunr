@@ -29,7 +29,7 @@ class WNSToastPayloadGetTest extends WNSToastPayloadTest
     public function testGetPayloadWithTitle()
     {
         $file     = TEST_STATICS . '/Vortex/wns/toast_title.xml';
-        $elements = [ 'title' => 'Title' ];
+        $elements = [ 'text' => ['Title'] ];
 
         $this->set_reflection_property_value('elements', $elements);
 
@@ -44,7 +44,7 @@ class WNSToastPayloadGetTest extends WNSToastPayloadTest
     public function testGetPayloadWithMessage()
     {
         $file     = TEST_STATICS . '/Vortex/wns/toast_message.xml';
-        $elements = [ 'message' => 'Message' ];
+        $elements = [ 'text' => ['Message'] ];
 
         $this->set_reflection_property_value('elements', $elements);
 
@@ -56,10 +56,10 @@ class WNSToastPayloadGetTest extends WNSToastPayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSToastPayload::get_payload
      */
-    public function testGetPayloadWithDeeplink()
+    public function testGetPayloadWithDeeplinkAndTemplate()
     {
         $file     = TEST_STATICS . '/Vortex/wns/toast_deeplink.xml';
-        $elements = [ 'deeplink' => 'Deeplink' ];
+        $elements = [ 'text' => [], 'template' => 'ToastText01', 'launch' => 'Deeplink' ];
 
         $this->set_reflection_property_value('elements', $elements);
 
@@ -74,7 +74,7 @@ class WNSToastPayloadGetTest extends WNSToastPayloadTest
     public function testGetPayload()
     {
         $file     = TEST_STATICS . '/Vortex/wns/toast.xml';
-        $elements = [ 'title' => 'Title', 'message' => 'Message', 'deeplink' => 'Deeplink' ];
+        $elements = [ 'text' => ['Title', 'Message', 'Hello'], 'template' => 'ToastText04', 'image' => 'image', 'launch' => 'Deeplink' ];
 
         $this->set_reflection_property_value('elements', $elements);
 

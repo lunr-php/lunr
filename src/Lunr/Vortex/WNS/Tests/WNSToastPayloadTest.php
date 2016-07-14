@@ -27,19 +27,11 @@ abstract class WNSToastPayloadTest extends LunrBaseTest
 {
 
     /**
-     * Mock instance of the logger class.
-     * @var LoggerInterface
-     */
-    protected $logger;
-
-    /**
      * Testcase Constructor.
      */
     public function setUp()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
-
-        $this->class = new WNSToastPayload($this->logger);
+        $this->class = new WNSToastPayload();
 
         $this->reflection = new ReflectionClass('Lunr\Vortex\WNS\WNSToastPayload');
     }
@@ -49,7 +41,6 @@ abstract class WNSToastPayloadTest extends LunrBaseTest
      */
     public function tearDown()
     {
-        unset($this->logger);
         unset($this->class);
         unset($this->reflection);
     }

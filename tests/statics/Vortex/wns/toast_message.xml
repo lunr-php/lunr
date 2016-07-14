@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<toast launch="">
+<toast >
 <visual>
 <binding template="ToastText01">
 <text id="1">Message</text>

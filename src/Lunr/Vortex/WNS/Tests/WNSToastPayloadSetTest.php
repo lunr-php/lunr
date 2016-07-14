@@ -13,8 +13,6 @@
 
 namespace Lunr\Vortex\WNS\Tests;
 
-use Lunr\Halo\PsrLoggerTestTrait;
-
 /**
  * This class contains tests for the setters of the WNSToastPayload class.
  *
@@ -23,108 +21,135 @@ use Lunr\Halo\PsrLoggerTestTrait;
 class WNSToastPayloadSetTest extends WNSToastPayloadTest
 {
 
-    use PsrLoggerTestTrait;
-
     /**
-     * Test set_title() works correctly.
+     * Test set_text() works correctly for strings.
      *
-     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_title
+     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_text
      */
-    public function testSetTitle()
+    public function testSetTextFirstLine()
     {
-        $this->class->set_title('&title');
+        $this->class->set_text('&title');
 
         $value = $this->get_reflection_property_value('elements');
 
-        $this->assertArrayHasKey('title', $value);
-        $this->assertEquals('&amp;title', $value['title']);
+        $this->assertArrayHasKey('text', $value);
+        $this->assertEquals('&amp;title', $value['text'][0]);
     }
 
     /**
-     * Test fluid interface of set_title().
+     * Test set_text() works correctly for arrays.
      *
-     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_title
+     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_text
      */
-    public function testSetTitleReturnsSelfReference()
+    public function testSetTextArray()
     {
-        $this->assertSame($this->class, $this->class->set_title('title'));
-    }
-
-    /**
-     * Test set_message() works correctly.
-     *
-     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_message
-     */
-    public function testSetMessage()
-    {
-        $this->class->set_message('&message');
+        $this->class->set_text(['title', 'message']);
 
         $value = $this->get_reflection_property_value('elements');
 
-        $this->assertArrayHasKey('message', $value);
-        $this->assertEquals('&amp;message', $value['message']);
+        $this->assertArrayHasKey('text', $value);
+        $this->assertEquals('title', $value['text'][0]);
+        $this->assertEquals('message', $value['text'][1]);
     }
 
     /**
-     * Test fluid interface of set_message().
+     * Test fluid interface of set_text().
      *
-     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_message
+     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_text
      */
-    public function testSetMessageReturnsSelfReference()
+    public function testSetTextReturnsSelfReference()
     {
-        $this->assertSame($this->class, $this->class->set_message('message'));
+        $this->assertSame($this->class, $this->class->set_text('title'));
     }
 
     /**
-     * Test set_deeplink() with correct links.
+     * Test set_text() works correctly for custom lines.
      *
-     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_deeplink
+     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_text
      */
-    public function testSetDeeplinkWithCorrectLink()
+    public function testSetTextMessage()
     {
-        $this->class->set_deeplink('/page&link');
+        $this->class->set_text('&message', 1);
 
         $value = $this->get_reflection_property_value('elements');
 
-        $this->assertArrayHasKey('deeplink', $value);
-        $this->assertEquals('/page&amp;link', $value['deeplink']);
+        $this->assertArrayHasKey('text', $value);
+        $this->assertEquals('&amp;message', $value['text'][1]);
     }
 
     /**
-     * Test set_deeplink() with too long links.
+     * Test set_launch() with correct links.
      *
-     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_deeplink
+     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_launch
      */
-    public function testSetDeeplinkWithTooLongLink()
+    public function testSetLaunchWithCorrectLink()
     {
-        $string = '<&';
-
-        for ($i = 0; $i < 127; $i++)
-        {
-            $string .= 'aa';
-        }
-
-        $this->logger->expects($this->once())
-                     ->method('notice')
-                     ->with($this->equalTo('Deeplink for Windows Toast Notification too long. Truncated.'));
-
-        $this->class->set_deeplink($string);
+        $this->class->set_launch('/page&link');
 
         $value = $this->get_reflection_property_value('elements');
 
-        $this->assertArrayHasKey('deeplink', $value);
-        $this->assertEquals('&lt;&amp;' . substr($string, 2, 247), $value['deeplink']);
-        $this->assertEquals(256, strlen($value['deeplink']));
+        $this->assertArrayHasKey('launch', $value);
+        $this->assertEquals('/page&amp;link', $value['launch']);
     }
 
     /**
-     * Test fluid interface of set_deeplink().
+     * Test fluid interface of set_launch().
      *
-     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_deeplink
+     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_launch
      */
-    public function testSetDeeplinkReturnsSelfReference()
+    public function testSetLaunchReturnsSelfReference()
     {
-        $this->assertSame($this->class, $this->class->set_deeplink('link'));
+        $this->assertSame($this->class, $this->class->set_launch('link'));
+    }
+
+    /**
+     * Test set_template() with correct links.
+     *
+     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_template
+     */
+    public function testSetTemplateWithCorrectLink()
+    {
+        $this->class->set_template('ToastText04');
+
+        $value = $this->get_reflection_property_value('elements');
+
+        $this->assertArrayHasKey('template', $value);
+        $this->assertEquals('ToastText04', $value['template']);
+    }
+
+    /**
+     * Test fluid interface of set_template().
+     *
+     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_template
+     */
+    public function testSetTemplateReturnsSelfReference()
+    {
+        $this->assertSame($this->class, $this->class->set_template('link'));
+    }
+
+    /**
+     * Test set_image() with correct value.
+     *
+     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_image
+     */
+    public function testSetImage()
+    {
+        $this->class->set_image('https://image.url/img.jpg');
+
+        $value = $this->get_reflection_property_value('elements');
+
+        $this->assertArrayHasKey('image', $value);
+        $this->assertEquals('https://image.url/img.jpg', $value['image']);
+    }
+
+    /**
+     * Test fluid interface of set_image().
+     *
+     * @covers Lunr\Vortex\WNS\WNSToastPayload::set_image
+     */
+    public function testSetImageReturnsSelfReference()
+    {
+        $this->assertSame($this->class, $this->class->set_image('image'));
     }
 
 }

@@ -20,21 +20,11 @@ class WNSToastPayload extends WNSPayload
 {
 
     /**
-     * Shared instance of a Logger.
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * Constructor.
-     *
-     * @param LoggerInterface $logger Shared instance of a logger
      */
-    public function __construct($logger)
+    public function __construct()
     {
         parent::__construct();
-
-        $this->logger = $logger;
     }
 
     /**
@@ -42,8 +32,6 @@ class WNSToastPayload extends WNSPayload
      */
     public function __destruct()
     {
-        unset($this->logger);
-
         parent::__destruct();
     }
 
@@ -54,37 +42,29 @@ class WNSToastPayload extends WNSPayload
      */
     public function get_payload()
     {
-        $text_id = 1;
+        $template = (isset($this->elements['template'])) ? $this->elements['template'] : 'ToastText0' . count($this->elements['text']);
 
-        $template = 'ToastText01';
-        if(isset($this->elements['title']) && isset($this->elements['message']))
+        $launch = '';
+        if(isset($this->elements['launch']))
         {
-            $template = 'ToastText02';
-        }
-
-        $deeplink = '';
-        if(isset($this->elements['deeplink']))
-        {
-            $deeplink = $this->elements['deeplink'];
+            $launch = 'launch="' . $this->elements['launch'] . '"';
         }
 
         $xml  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        $xml .= '<toast launch="' . $deeplink . "\">\n";
+        $xml .= '<toast ' . $launch . ">\n";
 
 
         $xml .= "<visual>\n";
         $xml .= '<binding template="' . $template . "\">\n";
 
-
-        if (isset($this->elements['title']))
+        if(isset($this->elements['image']))
         {
-            $xml .= '<text id="' . $text_id . '">' . $this->elements['title'] . "</text>\n";
-            $text_id++;
+            $xml .= '<image id="1" src="' . $this->elements['image'] . "\"/>\n";
         }
 
-        if (isset($this->elements['message']))
+        foreach ($this->elements['text'] as $key => $value)
         {
-            $xml .= '<text id="' . $text_id . '">' . $this->elements['message'] . "</text>\n";
+            $xml .= '<text id="' . ( $key + 1 ) . '">' . $value . "</text>\n";
         }
 
         $xml .= "</binding>\n";
@@ -95,51 +75,70 @@ class WNSToastPayload extends WNSPayload
     }
 
     /**
-     * Set title for the toast notification.
+     * Set text for the toast notification.
      *
-     * @param String $title Title
+     * @param String[]|String $text Message
      *
-     * @return WNSToastPayload $self Self Reference
+     * @param int             $line The line on which to add the text
+     *
+     * @return \Lunr\Vortex\WNS\WNSToastPayload $self Self Reference
      */
-    public function set_title($title)
+    public function set_text($text, $line = 0)
     {
-        $this->elements['title'] = $this->escape_string($title);
-
-        return $this;
-    }
-
-    /**
-     * Set message for the toast notification.
-     *
-     * @param String $message Message
-     *
-     * @return WNSToastPayload $self Self Reference
-     */
-    public function set_message($message)
-    {
-        $this->elements['message'] = $this->escape_string($message);
-
-        return $this;
-    }
-
-    /**
-     * Set deeplink for the toast notification.
-     *
-     * @param String $deeplink Deeplink
-     *
-     * @return WNSToastPayload $self Self Reference
-     */
-    public function set_deeplink($deeplink)
-    {
-        $deeplink = $this->escape_string($deeplink);
-
-        if (strlen($deeplink) > 256)
+        if (!is_array($text))
         {
-            $deeplink = substr($deeplink, 0, 256);
-            $this->logger->notice('Deeplink for Windows Toast Notification too long. Truncated.');
+            $this->elements['text'][$line] = $this->escape_string($text);
+            return $this;
         }
 
-        $this->elements['deeplink'] = $deeplink;
+        foreach ($text as $key => $value)
+        {
+            $this->elements['text'][$key] = $this->escape_string($value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set launch parameter for the toast notification.
+     *
+     * @param String $launch Launch parameters for the app
+     *
+     * @return WNSToastPayload $self Self Reference
+     */
+    public function set_launch($launch)
+    {
+        $this->elements['launch'] = $this->escape_string($launch);
+
+        return $this;
+    }
+
+    /**
+     * Set template for the toast notification.
+     *
+     * @param String $template Template for the notification
+     *
+     * @see https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.notifications.toasttemplatetype
+     *
+     * @return WNSToastPayload $self Self Reference
+     */
+    public function set_template($template)
+    {
+        $this->elements['template'] = $this->escape_string($template);
+
+        return $this;
+    }
+
+    /**
+     * Set image for the toast notification.
+     *
+     * @param String $image Image to display
+     *
+     * @return WNSToastPayload $self Self Reference
+     */
+    public function set_image($image)
+    {
+        $this->elements['image'] = $this->escape_string($image);
 
         return $this;
     }
