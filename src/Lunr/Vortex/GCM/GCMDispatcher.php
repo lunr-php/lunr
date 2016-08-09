@@ -161,7 +161,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
         $tmp_payload['priority'] = $this->priority;
 
         $curl_response      = $this->curl->post_request(self::GOOGLE_SEND_URL, json_encode($tmp_payload));
-        $gcm_batch_response = new GCMBatchResponse($curl_response, $this->logger, $this->endpoints);
+        $gcm_batch_response = new GCMBatchResponse($curl_response, $this->logger, $endpoints);
 
         return $gcm_batch_response;
     }
