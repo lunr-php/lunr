@@ -16,3 +16,4 @@ build
 src/ApnsPHP
 src/Psr
 src/Resque
+src/PHPMailer

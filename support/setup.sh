@@ -13,6 +13,7 @@ fi
 PSRLOG="https://github.com/php-fig/log/archive/1.0.0.tar.gz"
 RESQUE="https://github.com/chrisboulton/php-resque/archive/1.2.tar.gz"
 APNSPHP="https://github.com/M2Mobi/ApnsPHP/archive/b9c04fdfdf63da714fbb06e4151d939e0e9fdccb.tar.gz"
+PHPMAILER="https://github.com/PHPMailer/PHPMailer/archive/v6.0.0rc2.tar.gz"
 
 if ! [ -e "$DESTDIR/Psr/Log" ]; then
   cd "$TMP"
@@ -43,6 +44,16 @@ if ! [ -e "$DESTDIR/ApnsPHP" ]; then
     tar xvf ApnsPHP-b9c04fdfdf63da714fbb06e4151d939e0e9fdccb.tar.gz
 
     mv ApnsPHP-b9c04fdfdf63da714fbb06e4151d939e0e9fdccb/ApnsPHP "$DESTDIR/ApnsPHP"
+  cd -
+fi
+
+if ! [ -e "$DESTDIR/PHPMailer" ]; then
+  cd "$TMP"
+    wget --content-disposition "$PHPMAILER"
+    tar xvf PHPMailer-6.0.0rc2.tar.gz
+
+    mkdir -p "$DESTDIR/PHPMailer"
+    mv PHPMailer-6.0.0rc2/src "$DESTDIR/PHPMailer/PHPMailer"
   cd -
 fi
 

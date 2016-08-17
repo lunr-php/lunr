@@ -329,7 +329,6 @@
             <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherBaseTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherSetTest.php</file>
-            <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMDispatcherBaseTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMDispatcherSetTest.php</file>

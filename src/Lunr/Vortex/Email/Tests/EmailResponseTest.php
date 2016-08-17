@@ -42,13 +42,19 @@ abstract class EmailResponseTest extends LunrBaseTest
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $response = FALSE;
+        $response = $this->getMock('PHPMailer\PHPMailer\PHPMailer');
+
+        $response->expects($this->once())
+                 ->method('isError')
+                 ->will($this->returnValue(TRUE));
+
+        $response->ErrorInfo = 'ErrorInfo';
 
         $this->logger->expects($this->once())
                      ->method('warning')
                      ->with(
-                        $this->equalTo('Sending email notification to {endpoint} failed.'),
-                        $this->equalTo([ 'endpoint' => '12345679' ])
+                        $this->equalTo('Sending email notification to {endpoint} failed: {message}'),
+                        $this->equalTo([ 'endpoint' => '12345679', 'message' => 'ErrorInfo' ])
                      );
 
         $this->class      = new EmailResponse($response, $this->logger, '12345679');
@@ -64,7 +70,11 @@ abstract class EmailResponseTest extends LunrBaseTest
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $response = TRUE;
+        $response = $this->getMock('PHPMailer\PHPMailer\PHPMailer');
+
+        $response->expects($this->once())
+                 ->method('isError')
+                 ->will($this->returnValue(FALSE));
 
         $this->class      = new EmailResponse($response, $this->logger, '12345679');
         $this->reflection = new ReflectionClass('Lunr\Vortex\Email\EmailResponse');
