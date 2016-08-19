@@ -244,6 +244,12 @@ class ConfigServiceLocator
 
         foreach ($params as $value)
         {
+            if ($value[0] == '!')
+            {
+                $processed_params[] = substr($value, 1);
+                continue;
+            }
+
             $tmp = $this->locate($value);
 
             if (is_null($tmp))
