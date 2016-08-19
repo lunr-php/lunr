@@ -37,6 +37,8 @@
             <file>../src/Lunr/Core/Tests/ConfigServiceLocatorSupportTest.php</file>
             <file>../src/Lunr/Core/Tests/ConfigServiceLocatorGetInstanceTest.php</file>
             <file>../src/Lunr/Core/Tests/ConfigServiceLocatorLocateTest.php</file>
+            <file>../src/Lunr/Core/Tests/IniMainTest.php</file>
+            <file>../src/Lunr/Core/Tests/IniSectionTest.php</file>
         </testsuite>
         <testsuite name="Corona">
             <file>../src/Lunr/Corona/Tests/ControllerBaseTest.php</file>
