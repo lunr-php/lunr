@@ -131,13 +131,30 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
     }
 
     /**
+     * Test that get_parameters processes forced non-ID parameters.
+     *
+     * @covers Lunr\Core\ConfigServiceLocator::get_parameters
+     */
+    public function testGetParametersProcessesForcedNonIDParameter()
+    {
+        $params = [ '!string' ];
+
+        $method = $this->get_accessible_reflection_method('get_parameters');
+
+        $return = $method->invokeArgs($this->class, [ $params ]);
+
+        $this->assertInternalType('array', $return);
+        $this->assertEquals('string', $return[0]);
+    }
+
+    /**
      * Test that get_parameters processes mixed parameters.
      *
      * @covers Lunr\Core\ConfigServiceLocator::get_parameters
      */
     public function testGetParametersProcessesMixedParameters()
     {
-        $params = [ 'config', 'string' ];
+        $params = [ 'config', '!config', 'string' ];
 
         $method = $this->get_accessible_reflection_method('get_parameters');
 
@@ -145,7 +162,8 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
 
         $this->assertInternalType('array', $return);
         $this->assertInstanceOf('Lunr\Core\Configuration', $return[0]);
-        $this->assertEquals('string', $return[1]);
+        $this->assertEquals('config', $return[1]);
+        $this->assertEquals('string', $return[2]);
     }
 
 }
