@@ -86,13 +86,6 @@
             <file>../src/Lunr/Feedback/Tests/ConsoleLoggerBaseTest.php</file>
             <file>../src/Lunr/Feedback/Tests/ChainLoggerBaseTest.php</file>
         </testsuite>
-        <testsuite name="Flare">
-            <file>../src/Lunr/Flare/Tests/VerificationBaseTest.php</file>
-            <file>../src/Lunr/Flare/Tests/VerificationNullPointerTest.php</file>
-            <file>../src/Lunr/Flare/Tests/VerificationChecksTest.php</file>
-            <file>../src/Lunr/Flare/Tests/VerificationSetTest.php</file>
-            <file>../src/Lunr/Flare/Tests/VerificationResultTest.php</file>
-        </testsuite>
         <testsuite name="Gravity">
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperEscapeTest.php</file>
@@ -389,7 +382,6 @@
                 <directory>../src/Lunr/Core/Tests/</directory>
                 <directory>../src/Lunr/Corona/Tests/</directory>
                 <directory>../src/Lunr/Feedback/Tests/</directory>
-                <directory>../src/Lunr/Flare/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/MySQL/Tests/</directory>
