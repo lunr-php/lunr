@@ -205,9 +205,6 @@
             <file>../src/Lunr/Network/Tests/StreamSocketClientFlagsTest.php</file>
             <file>../src/Lunr/Network/Tests/StreamSocketClientHandleTest.php</file>
             <file>../src/Lunr/Network/Tests/StreamSocketClientReadWriteTest.php</file>
-            <file>../src/Lunr/Network/Tests/MailBaseTest.php</file>
-            <file>../src/Lunr/Network/Tests/MailSetTest.php</file>
-            <file>../src/Lunr/Network/Tests/MailSendTest.php</file>
         </testsuite>
         <testsuite name="Shadow">
             <file>../src/Lunr/Shadow/Tests/ConsoleTest.php</file>
