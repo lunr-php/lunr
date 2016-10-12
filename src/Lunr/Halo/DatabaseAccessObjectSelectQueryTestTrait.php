@@ -27,7 +27,7 @@ trait DatabaseAccessObjectSelectQueryTestTrait
      *
      * @return void
      */
-    public function expextResultOnSuccess($data, $format = 'array')
+    public function expectResultOnSuccess($data, $format = 'array')
     {
         $mock = new FluidInterfaceMock();
 
