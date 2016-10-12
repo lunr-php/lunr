@@ -78,6 +78,32 @@ class Ini
         ini_restore(is_null($this->section) ? $name : $this->section . '.' . $name);
     }
 
+    /**
+     * Convert a human readable memory limit string into an integer.
+     *
+     * @param String $val Human readable memory limit
+     *
+     * @return integer $val Integer memory limit in bytes
+     */
+    public function get_integer_for_shorthand_bytes($val)
+    {
+        $val  = trim($val);
+        $last = strtolower($val[ strlen($val) - 1 ]);
+
+        switch($last) {
+            case 'g':
+                $val *= 1024;
+            case 'm':
+                $val *= 1024;
+            case 'k':
+                $val *= 1024;
+            default:
+                break;
+        }
+
+        return (int) $val;
+    }
+
 }
 
 ?>

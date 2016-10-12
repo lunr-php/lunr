@@ -57,6 +57,22 @@ abstract class IniTest extends LunrBaseTest
         unset($this->class);
     }
 
+    /**
+     * Unit Test Data Provider for shorthand byte strings.
+     *
+     * @return array $values shorthand byte strings.
+     */
+    public function shorthandBytesProvider()
+    {
+        $values   = [];
+        $values[] = [ '10', 10 ];
+        $values[] = [ '10K', 10240 ];
+        $values[] = [ '10M', 10485760 ];
+        $values[] = [ '10G', 10737418240 ];
+
+        return $values;
+    }
+
 }
 
 ?>
