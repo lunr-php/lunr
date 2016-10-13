@@ -221,6 +221,23 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
         $this->assertTrue($this->get_reflection_property_value('is_unfinished_join'));
     }
 
+    /**
+     * Test that specifying a join clause resets the property join_type to ' ' after having used join before.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
+     */
+    public function testJoinSetsJoinType()
+    {
+        $this->set_reflection_property_value('join_type', 'on');
+
+        $method = $this->get_accessible_reflection_method('sql_join');
+
+        $method->invokeArgs($this->class, [ 'table', 'INNER' ]);
+
+        $this->assertTrue($this->get_reflection_property_value('is_unfinished_join'));
+        $this->assertSame('', $this->get_reflection_property_value('join_type'));
+    }
+
 }
 
 ?>

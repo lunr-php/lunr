@@ -141,6 +141,25 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     }
 
     /**
+     * Define USING part of the SQL statement.
+     *
+     * @param String $column_list columns to use.
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function using($column_list)
+    {
+        $columns = '';
+
+        foreach (explode(',', $column_list) as $column)
+        {
+            $columns .= $this->escaper->column(trim($column)) . ', ';
+        }
+
+        return parent::using(rtrim($columns, ', '));
+    }
+
+    /**
      * Define ON part of a JOIN clause of the SQL statement.
      *
      * @param String $left     Left expression

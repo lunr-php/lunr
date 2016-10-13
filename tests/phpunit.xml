@@ -113,6 +113,7 @@
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsDeleteTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsInsertTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsUpdateTest.php</file>
+            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsUsingTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderSelectTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderInsertTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderUpdateTest.php</file>
@@ -120,6 +121,7 @@
             <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderConditionTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderOrderByTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderLimitTest.php</file>
+            <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderUsingTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderSelectTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderDeleteTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderInsertTest.php</file>
@@ -131,6 +133,7 @@
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderSelectTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderWriteTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderFluidInterfaceTest.php</file>
+            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderUsingTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseConnectionBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionSetTest.php</file>

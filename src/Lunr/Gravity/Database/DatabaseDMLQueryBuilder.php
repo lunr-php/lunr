@@ -70,7 +70,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     protected $insert_mode;
 
-        /**
+    /**
      * SQL Query part: UPDATE clause
      * @var String
      */
@@ -161,32 +161,39 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     protected $is_unfinished_join;
 
     /**
+     * SQL Query part: string identifying if the join type is type "using" or "on"
+     * @var String
+     */
+    protected $join_type;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->select            = '';
-        $this->select_mode      = array();
-        $this->update           = '';
-        $this->update_mode      = array();
-        $this->delete           = '';
-        $this->delete_mode      = array();
-        $this->from             = '';
-        $this->join             = '';
-        $this->where            = '';
-        $this->group_by         = '';
-        $this->having           = '';
-        $this->order_by         = '';
-        $this->limit            = '';
-        $this->connector        = '';
-        $this->into             = '';
-        $this->insert_mode      = array();
-        $this->set              = '';
-        $this->column_names     = '';
-        $this->values           = '';
-        $this->select_statement = '';
-        $this->compound         = '';
-        $this->is_unfinished_join  = FALSE;
+        $this->select             = '';
+        $this->select_mode        = array();
+        $this->update             = '';
+        $this->update_mode        = array();
+        $this->delete             = '';
+        $this->delete_mode        = array();
+        $this->from               = '';
+        $this->join               = '';
+        $this->where              = '';
+        $this->group_by           = '';
+        $this->having             = '';
+        $this->order_by           = '';
+        $this->limit              = '';
+        $this->connector          = '';
+        $this->into               = '';
+        $this->insert_mode        = array();
+        $this->set                = '';
+        $this->column_names       = '';
+        $this->values             = '';
+        $this->select_statement   = '';
+        $this->compound           = '';
+        $this->is_unfinished_join = FALSE;
+        $this->join_type          = '';
     }
 
     /**
@@ -216,6 +223,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         unset($this->values);
         unset($this->select_statement);
         unset($this->is_unfinished_join);
+        unset($this->join_type);
     }
 
     /**
@@ -291,7 +299,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             $components[] = 'column_names';
             $components[] = 'select_statement';
 
-            $valid = array('HIGH_PRIORITY', 'LOW_PRIORITY', 'IGNORE');
+            $valid = array( 'HIGH_PRIORITY', 'LOW_PRIORITY', 'IGNORE' );
 
             $this->insert_mode = array_intersect($this->insert_mode, $valid);
         }
@@ -320,7 +328,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             return '';
         }
 
-        $valid = array('LOW_PRIORITY', 'DELAYED');
+        $valid = array( 'LOW_PRIORITY', 'DELAYED' );
 
         $this->insert_mode = array_intersect($this->insert_mode, $valid);
 
@@ -358,7 +366,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             return '';
         }
 
-        $valid = array('LOW_PRIORITY', 'IGNORE');
+        $valid = array( 'LOW_PRIORITY', 'IGNORE' );
 
         $this->update_mode = array_intersect($this->update_mode, $valid);
 
@@ -473,6 +481,40 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         {
             $this->is_unfinished_join = TRUE;
         }
+
+        $this->join_type = '';
+    }
+
+    /**
+     * Define USING clause of the SQL statement.
+     *
+     * @param String $column_list Column name to use.
+     */
+    function sql_using($column_list)
+    {
+        // Select join type.
+        if ($this->join_type === '')
+        {
+            $this->join_type = 'using';
+        }
+
+        // Prevent USING and ON to be used at the same time.
+        if ($this->join_type !== 'using')
+        {
+            return;
+        }
+
+        if ($this->is_unfinished_join)
+        {
+            $this->join .= ' ' . 'USING (';
+            $this->is_unfinished_join = FALSE;
+        }
+        elseif (substr($this->join, -1) !== '(')
+        {
+            $this->join = rtrim($this->join, ')') . ', ';
+        }
+
+        $this->join .= $column_list . ')';
     }
 
     /**
@@ -531,7 +573,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      * Define Values for Insert or Update SQL statement.
      *
      * @param Array $values Array containing escaped values to be set, can be either an
-     * array or an array of arrays
+     *                      array or an array of arrays
      *
      * @return void
      */
@@ -553,7 +595,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
         if (!isset($values[0]) || !is_array($values[0]))
         {
-            $values = array($values);
+            $values = array( $values );
         }
 
         foreach ($values as $value)
@@ -595,6 +637,18 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     {
         $condition = ($base === 'ON') ? 'join' : strtolower($base);
 
+        // select join type.
+        if ($this->join_type === '' && $this->is_unfinished_join === TRUE && $base === 'ON')
+        {
+            $this->join_type = strtolower($base);
+        }
+
+        // Prevent USING and ON to be used at the same time.
+        if ($this->join_type === 'using' && $condition === 'join')
+        {
+            return;
+        }
+
         if (rtrim($this->$condition, '(') == '' || $this->is_unfinished_join)
         {
             if ($this->is_unfinished_join)
@@ -606,13 +660,13 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
                 $this->$condition = $base . ' ' . $this->$condition;
             }
 
-            $this->connector       = '';
+            $this->connector          = '';
             $this->is_unfinished_join = FALSE;
         }
         elseif ($this->connector != '')
         {
             $this->$condition .= ' ' . $this->connector . ' ';
-            $this->connector   = '';
+            $this->connector = '';
         }
         elseif (substr($this->$condition, -1) !== '(')
         {
@@ -761,10 +815,13 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     protected function prepare_index_hints($index_hints)
     {
-        if (is_array($index_hints) && !empty($index_hints)) {
-            $index_hints = array_diff($index_hints, array(NULL));
-            $hints = ' ' . implode(', ', $index_hints);
-        } else {
+        if (is_array($index_hints) && !empty($index_hints))
+        {
+            $index_hints = array_diff($index_hints, array( NULL ));
+            $hints       = ' ' . implode(', ', $index_hints);
+        }
+        else
+        {
             $hints = '';
         }
 
@@ -774,17 +831,29 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Open the parentheses for the sql condition.
      *
-     * @param String $condition String indication Statement to group
+     * @param String $base String indication Statement to group
      *
      * @return void
      */
-    public function sql_group_start($condition = 'WHERE')
+    public function sql_group_start($base = 'WHERE')
     {
-        $condition = ($condition === 'ON') ? 'join' : strtolower($condition);
+        $condition = ($base === 'ON') ? 'join' : strtolower($base);
+
+        // select join type.
+        if ($this->join_type === '' && $this->is_unfinished_join === TRUE && $base === 'ON')
+        {
+            $this->join_type = strtolower($base);
+        }
+
+        // Prevent USING and ON to be used at the same time.
+        if ($this->join_type === 'using' && $condition === 'join')
+        {
+            return;
+        }
 
         if ($this->is_unfinished_join)
         {
-            $this->$condition     .= 'ON ';
+            $this->$condition        .= 'ON ';
             $this->is_unfinished_join = FALSE;
         }
         elseif ($this->connector != '')
@@ -809,7 +878,14 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     public function sql_group_end($condition = 'WHERE')
     {
-        $condition         = ($condition === 'ON') ? 'join' : strtolower($condition);
+        $condition = ($condition === 'ON') ? 'join' : strtolower($condition);
+
+        // Prevent USING and ON to be used at the same time.
+        if ($this->join_type === 'using' && $condition === 'join')
+        {
+            return;
+        }
+
         $this->$condition .= ')';
     }
 

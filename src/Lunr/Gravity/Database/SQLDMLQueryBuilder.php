@@ -172,6 +172,19 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Define USING part of the SQL statement.
+     *
+     * @param String  $column_list Column name to use.
+     *
+     * @return SQLDMLQueryBuilder $self Self reference
+     */
+    public function using($column_list)
+    {
+        $this->sql_using($column_list);
+        return $this;
+    }
+
+    /**
      * Define ON part of a JOIN clause of the SQL statement.
      *
      * @param String $left     Left expression
