@@ -502,6 +502,60 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $this->assertSame($result, $query);
     }
 
+    /**
+     * Test that result_boolean() returns FALSE on a failure.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_boolean
+     */
+    public function testResultHasFailedTrueIfQueryFailed()
+    {
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $query->expects($this->once())
+            ->method('has_failed')
+            ->will($this->returnValue(TRUE));
+
+        $query->expects($this->once())
+            ->method('error_message')
+            ->will($this->returnValue('message'));
+
+        $query->expects($this->once())
+            ->method('query')
+            ->will($this->returnValue('query'));
+
+        $this->logger->expects($this->once())
+            ->method('error')
+            ->with('{query}; failed with error: {error}', array('query' => 'query', 'error' => 'message'));
+
+        $method2 = $this->reflection_dao->getMethod('result_boolean');
+        $method2->setAccessible(TRUE);
+
+        $this->assertFalse($method2->invokeArgs($this->dao, array(&$query)));
+    }
+
+    /**
+     * Test that result_retry() returns TRUE on succesfull execution.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_boolean
+     */
+    public function testResultHasFailedFalseIfQuerySuccesfull()
+    {
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $query->expects($this->once())
+            ->method('has_failed')
+            ->will($this->returnValue(FALSE));
+
+        $method2 = $this->reflection_dao->getMethod('result_boolean');
+        $method2->setAccessible(TRUE);
+
+        $this->assertTrue($method2->invokeArgs($this->dao, array(&$query)));
+    }
+
 }
 
 ?>

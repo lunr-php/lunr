@@ -214,6 +214,24 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         return $query;
     }
 
+    /**
+     * Check whether the query has failed or not.
+     *
+     * @param DatabaseQueryResult $query The result of the run query
+     *
+     * @return bool $return FALSE if it failed, FALSE otherwise
+     */
+    protected function result_boolean($query)
+    {
+        $result = $query->has_failed();
+        if ($result === TRUE)
+        {
+            $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
+            $this->logger->error('{query}; failed with error: {error}', $context);
+        }
+        return !$result;
+    }
+
 }
 
 ?>
