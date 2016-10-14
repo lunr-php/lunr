@@ -277,11 +277,6 @@
             <file>../src/Lunr/Sphere/Tests/DatabaseSessionHandlerBaseTest.php</file>
             <file>../src/Lunr/Sphere/Tests/SessionDAOBaseTest.php</file>
         </testsuite>
-        <testsuite name="Surface">
-            <file>../src/Lunr/Surface/Tests/PaginationNoCursorTest.php</file>
-            <file>../src/Lunr/Surface/Tests/PaginationSettersTest.php</file>
-            <file>../src/Lunr/Surface/Tests/PaginationHTMLTest.php</file>
-        </testsuite>
         <testsuite name="Ticks">
             <file>../src/Lunr/Ticks/Tests/FileTimerRequestTest.php</file>
             <file>../src/Lunr/Ticks/Tests/FileTimerNoRequestTest.php</file>
