@@ -13,6 +13,9 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
+use Requests_Exception_HTTP_400;
+use Requests_Exception;
+
 /**
  * This class contains the tests for the DeliveryApi.
  *
@@ -36,18 +39,20 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('https://cdn.contentful.com/spaces/5p4c31D/assets?access_token=token'))
+        $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
+        $params = [ 'access_token' => 'token' ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params))
                    ->will($this->returnValue($this->response));
 
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(400));
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
 
-        $this->response->expects($this->once())
-                       ->method('get_result');
+        $this->response->status_code = 400;
+        $this->response->body        = NULL;
 
         $return = $this->class->get_assets();
 
@@ -71,20 +76,86 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $url = 'https://cdn.contentful.com/spaces/5p4c31D/assets?mimetype_group=image&access_token=token';
+        $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
+        $params = [ 'mimetype_group' => 'image', 'access_token' => 'token' ];
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo($url))
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params))
                    ->will($this->returnValue($this->response));
 
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(400));
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
 
-        $this->response->expects($this->once())
-                       ->method('get_result');
+        $this->response->status_code = 400;
+        $this->response->body        = NULL;
+
+        $return = $this->class->get_assets([ 'mimetype_group' => 'image' ]);
+
+        $this->assertInternalType('array', $return);
+        $this->assertArrayHasKey('total', $return);
+        $this->assertSame(0, $return['total']);
+    }
+
+    /**
+     * Test that get_assets() returns an empty result if the request failed.
+     *
+     * @requires extension runkit
+     * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
+     */
+    public function testGetAssetsWithoutFiltersReturnsEmptyResultOnRequestFailure()
+    {
+        $this->set_reflection_property_value('space', '5p4c31D');
+
+        $this->cas->expects($this->once())
+                  ->method('get')
+                  ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
+                  ->will($this->returnValue('token'));
+
+        $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
+        $params = [ 'access_token' => 'token' ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params))
+                   ->will($this->throwException(new Requests_Exception('cURL error 0001: Network error', 'curlerror', NULL)));
+
+        $this->response->expects($this->never())
+                       ->method('throw_for_status');
+
+        $return = $this->class->get_assets();
+
+        $this->assertInternalType('array', $return);
+        $this->assertArrayHasKey('total', $return);
+        $this->assertSame(0, $return['total']);
+    }
+
+    /**
+     * Test that get_assets() with filters returns an empty result if the request failed.
+     *
+     * @requires extension runkit
+     * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
+     */
+    public function testGetAssetsWithFiltersReturnsEmptyResultOnRequestFailure()
+    {
+        $this->set_reflection_property_value('space', '5p4c31D');
+
+        $this->cas->expects($this->once())
+                  ->method('get')
+                  ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
+                  ->will($this->returnValue('token'));
+
+        $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
+        $params = [ 'mimetype_group' => 'image', 'access_token' => 'token' ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params))
+                   ->will($this->throwException(new Requests_Exception('cURL error 0001: Network error', 'curlerror', NULL)));
+
+        $this->response->expects($this->never())
+                       ->method('throw_for_status');
 
         $return = $this->class->get_assets([ 'mimetype_group' => 'image' ]);
 
@@ -113,19 +184,16 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('https://cdn.contentful.com/spaces/5p4c31D/assets?access_token=token'))
+        $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
+        $params = [ 'access_token' => 'token' ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
-
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue(json_encode($output)));
+        $this->response->status_code = 200;
+        $this->response->body        = json_encode($output);
 
         $result = $this->class->get_assets();
 
@@ -152,21 +220,16 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $url = 'https://cdn.contentful.com/spaces/5p4c31D/assets?mimetype_group=image&access_token=token';
+        $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
+        $params = [ 'mimetype_group' => 'image', 'access_token' => 'token' ];
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo($url))
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
-
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue(json_encode($output)));
+        $this->response->status_code = 200;
+        $this->response->body        = json_encode($output);
 
         $result = $this->class->get_assets([ 'mimetype_group' => 'image' ]);
 

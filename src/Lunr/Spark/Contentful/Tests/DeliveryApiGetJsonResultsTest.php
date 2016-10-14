@@ -13,9 +13,8 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
-use Lunr\Spark\Contentful\DeliveryApi;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use Requests_Exception_HTTP_400;
+use Requests_Exception;
 
 /**
  * This class contains the tests for the DeliveryApi.
@@ -28,57 +27,35 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
     /**
      * Test that get_josn_results() does a correct get_request without params.
      *
-     * @param String $http_method HTTP method to use for the request.
-     *
-     * @dataProvider getMethodProvider
-     * @covers       Lunr\Spark\Contentful\DeliveryApi::get_json_results
+     * @covers Lunr\Spark\Contentful\DeliveryApi::get_json_results
      */
-    public function testGetJsonResultsMakesGetRequestWithoutParams($http_method)
+    public function testGetJsonResultsMakesGetRequestWithoutParams()
     {
-        $this->curl->expects($this->once())
-                   ->method('set_option')
-                   ->with($this->equalTo('CURLOPT_FAILONERROR'), $this->equalTo(FALSE));
-
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([]))
                    ->will($this->returnValue($this->response));
-
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue('{"message":"text",sys:{"id":"errorid"}}'));
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
-        $method->invokeArgs($this->class, [ 'http://localhost', [], $http_method ]);
+        $method->invokeArgs($this->class, [ 'http://localhost', [] ]);
     }
 
     /**
      * Test that get_json_results() does a correct get_request with params.
      *
-     * @param String $http_method HTTP method to use for the request.
-     *
-     * @dataProvider getMethodProvider
-     * @covers       Lunr\Spark\Contentful\DeliveryApi::get_json_results
+     * @covers Lunr\Spark\Contentful\DeliveryApi::get_json_results
      */
-    public function testGetJsonResultsMakesGetRequestWithParams($http_method)
+    public function testGetJsonResultsMakesGetRequestWithParams()
     {
-        $this->curl->expects($this->once())
-                   ->method('set_option')
-                   ->with($this->equalTo('CURLOPT_FAILONERROR'), $this->equalTo(FALSE));
-
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?param1=1&param2=2'))
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([ 'param1' => 1, 'param2' => 2 ]))
                    ->will($this->returnValue($this->response));
-
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue('{"message":"text",sys:{"id":"errorid"}}'));
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
-        $method->invokeArgs($this->class, [ 'http://localhost', [ 'param1' => 1, 'param2' => 2 ], $http_method ]);
+        $method->invokeArgs($this->class, [ 'http://localhost', [ 'param1' => 1, 'param2' => 2 ] ]);
     }
 
     /**
@@ -93,25 +70,50 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
             'sys'     => ['id' => 'Something'],
         ];
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([]))
                    ->will($this->returnValue($this->response));
 
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(400));
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
 
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue(json_encode($output)));
+        $this->response->status_code = 400;
+        $this->response->body        = json_encode($output);
+        $this->response->url         = 'http://localhost/url';
 
-        $context = [ 'message' => 'Something failed', 'id' => 'Something', 'request' => 'http://localhost' ];
+        $context = [ 'message' => 'Something failed', 'id' => 'Something', 'request' => 'http://localhost/url' ];
 
         $this->logger->expects($this->once())
                      ->method('warning')
                      ->with($this->equalTo('Contentful API Request ({request}) failed with id "{id}": {message}'), $this->equalTo($context));
+
+        $method = $this->get_accessible_reflection_method('get_json_results');
+
+        $method->invokeArgs($this->class, [ 'http://localhost' ]);
+    }
+
+    /**
+     * Test that get_json_results() throws an error if the request failed.
+     *
+     * @covers Lunr\Spark\Contentful\DeliveryApi::get_json_results
+     */
+    public function testGetJsonResultsThrowsErrorIfRequestFailed()
+    {
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([]))
+                   ->will($this->throwException(new Requests_Exception('cURL error 0001: Network error', 'curlerror', NULL)));
+
+        $this->response->expects($this->never())
+                       ->method('throw_for_status');
+
+        $context = [ 'message' => 'cURL error 0001: Network error', 'request' => 'http://localhost' ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with($this->equalTo('Contentful API Request ({request}) failed! {message}'), $this->equalTo($context));
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -125,19 +127,13 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
      */
     public function testGetJsonResultsDoesNotThrowErrorIfRequestSuccessful()
     {
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([]))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
-
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue('{}'));
+        $this->response->status_code = 200;
+        $this->response->body        = '{}';
 
         $this->logger->expects($this->never())
                      ->method('error');
@@ -154,18 +150,23 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
      */
     public function testGetJsonResultsReturnsEmptyResultOnRequestError()
     {
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $output = [
+            'message' => 'Something failed',
+            'sys'     => ['id' => 'Something'],
+        ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([]))
                    ->will($this->returnValue($this->response));
 
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(400));
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
 
-        $this->response->expects($this->once())
-                       ->method('get_result');
+        $this->response->status_code = 400;
+        $this->response->body        = json_encode($output);
+        $this->response->url         = 'http://localhost/url';
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -188,19 +189,13 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
             'param2' => 2,
         ];
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([]))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
-
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue(json_encode($output)));
+        $this->response->status_code = 200;
+        $this->response->body        = json_encode($output);
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 

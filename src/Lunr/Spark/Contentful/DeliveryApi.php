@@ -13,6 +13,9 @@
 
 namespace Lunr\Spark\Contentful;
 
+use Requests_Exception;
+use Requests_Exception_HTTP;
+
 /**
  * Low level Contentful API methods for Spark
  */
@@ -21,21 +24,21 @@ class DeliveryApi
 
     /**
      * Shared instance of the CentralAuthenticationStore
-     * @var CentralAuthenticationStore
+     * @var \Lunr\Spark\CentralAuthenticationStore
      */
     protected $cas;
 
     /**
      * Shared instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
     /**
-     * Shared instance of the Curl class.
-     * @var Curl
+     * Shared instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    protected $curl;
+    protected $http;
 
     /**
      * Space ID
@@ -54,13 +57,13 @@ class DeliveryApi
      *
      * @param \Lunr\Spark\CentralAuthenticationStore $cas    Shared instance of the credentials store
      * @param \Psr\Log\LoggerInterface               $logger Shared instance of a Logger class.
-     * @param \Lunr\Network\Curl                     $curl   Shared instance of the Curl class.
+     * @param \Requests_Session                      $http   Shared instance of the Requests_Session class.
      */
-    public function __construct($cas, $logger, $curl)
+    public function __construct($cas, $logger, $http)
     {
         $this->cas    = $cas;
         $this->logger = $logger;
-        $this->curl   = $curl;
+        $this->http   = $http;
         $this->space  = '';
     }
 
@@ -71,7 +74,7 @@ class DeliveryApi
     {
         unset($this->cas);
         unset($this->logger);
-        unset($this->curl);
+        unset($this->http);
         unset($this->space);
     }
 
@@ -175,16 +178,25 @@ class DeliveryApi
      */
     protected function get_json_results($url, $params = [])
     {
-        $this->curl->set_option('CURLOPT_FAILONERROR', FALSE);
-
-        $response = $this->curl->get_request($url . '?' . http_build_query($params));
-
-        $result = json_decode($response->get_result(), TRUE);
-
-        if ($response->http_code !== 200)
+        try
         {
-            $context = [ 'message' => $result['message'], 'request' => $url, 'id' => $result['sys']['id'] ];
+            $response = $this->http->request($url, [], $params);
+
+            $result = json_decode($response->body, TRUE);
+
+            $response->throw_for_status();
+        }
+        catch (Requests_Exception_HTTP $e)
+        {
+            $context = [ 'message' => $result['message'], 'request' => $response->url, 'id' => $result['sys']['id'] ];
             $this->logger->warning('Contentful API Request ({request}) failed with id "{id}": {message}', $context);
+
+            $result['total'] = 0;
+        }
+        catch (Requests_Exception $e)
+        {
+            $context = [ 'message' => $e->getMessage(), 'request' => $url ];
+            $this->logger->warning('Contentful API Request ({request}) failed! {message}', $context);
 
             $result['total'] = 0;
         }

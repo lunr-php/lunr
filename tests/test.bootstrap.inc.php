@@ -19,6 +19,7 @@ $base = __DIR__ . '/..';
 
 set_include_path(
     $base . '/src:' .
+    $base . '/src/Requests:' .
     $base . '/config:' .
     $base . '/system:' .
     $base . '/tests:' .
