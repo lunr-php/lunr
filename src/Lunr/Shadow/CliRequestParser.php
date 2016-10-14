@@ -262,7 +262,7 @@ class CliRequestParser implements RequestParserInterface
     public function parse_accept_format($supported = [])
     {
         $this->header->name  = 'Accept';
-        $this->header->value = $this->ast['accept-format'][0];
+        $this->header->value = array_key_exists('accept-format', $this->ast) ? $this->ast['accept-format'][0] : NULL;
 
         return $this->header->negotiate($supported);
     }
@@ -278,7 +278,7 @@ class CliRequestParser implements RequestParserInterface
     public function parse_accept_language($supported = [])
     {
         $this->header->name  = 'Accept-Language';
-        $this->header->value = $this->ast['accept-language'][0];
+        $this->header->value = array_key_exists('accept-language', $this->ast) ? $this->ast['accept-language'][0] : NULL;
 
         return $this->header->negotiate($supported);
     }
@@ -294,7 +294,7 @@ class CliRequestParser implements RequestParserInterface
     public function parse_accept_charset($supported = [])
     {
         $this->header->name  = 'Accept-Charset';
-        $this->header->value = $this->ast['accept-charset'][0];
+        $this->header->value = array_key_exists('accept-charset', $this->ast) ? $this->ast['accept-charset'][0] : NULL;
 
         return $this->header->negotiate($supported);
     }
