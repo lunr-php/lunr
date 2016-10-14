@@ -71,6 +71,26 @@ class CurlResponseSuccessTest extends CurlResponseTest
         $this->assertEquals('Result', $this->class->get_result());
     }
 
+    /**
+     * Test that we can get the stored error message.
+     *
+     * @covers Lunr\Network\CurlResponse::get_network_error_message
+     */
+    public function testReturnErrorMessage()
+    {
+        $this->assertEquals('error', $this->class->get_network_error_message());
+    }
+
+    /**
+     * Test that we can get the stored error number.
+     *
+     * @covers Lunr\Network\CurlResponse::get_network_error_number
+     */
+    public function testReturnErrorNumber()
+    {
+        $this->assertEquals(10, $this->class->get_network_error_number());
+    }
+
 }
 
 ?>

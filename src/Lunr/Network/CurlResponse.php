@@ -19,8 +19,6 @@ namespace Lunr\Network;
 class CurlResponse
 {
 
-    use NetworkErrorTrait;
-
     /**
      * Information about a successfully completed request.
      * @var array
@@ -32,6 +30,18 @@ class CurlResponse
      * @var mixed
      */
     protected $result;
+
+    /**
+     * Network error number
+     * @var Integer
+     */
+    protected $error_number;
+
+    /**
+     * Network error message
+     * @var String
+     */
+    protected $error_message;
 
     /**
      * Constructor.
@@ -101,6 +111,26 @@ class CurlResponse
     public function get_result()
     {
         return $this->result;
+    }
+
+    /**
+     * Return the last error message.
+     *
+     * @return String $error Error message
+     */
+    public function get_network_error_message()
+    {
+        return $this->error_message;
+    }
+
+    /**
+     * Return the last error number.
+     *
+     * @return String $errno Error number
+     */
+    public function get_network_error_number()
+    {
+        return $this->error_number;
     }
 
 }

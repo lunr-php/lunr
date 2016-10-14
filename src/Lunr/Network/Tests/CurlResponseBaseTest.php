@@ -83,6 +83,26 @@ class CurlResponseBaseTest extends CurlResponseTest
         $this->assertNull($this->class->key);
     }
 
+    /**
+     * Test that we can get the stored error message.
+     *
+     * @covers Lunr\Network\CurlResponse::get_network_error_message
+     */
+    public function testReturnErrorMessage()
+    {
+        $this->assertEquals('Could not set curl options!', $this->class->get_network_error_message());
+    }
+
+    /**
+     * Test that we can get the stored error number.
+     *
+     * @covers Lunr\Network\CurlResponse::get_network_error_number
+     */
+    public function testReturnErrorNumber()
+    {
+        $this->assertEquals(-1, $this->class->get_network_error_number());
+    }
+
 }
 
 ?>
