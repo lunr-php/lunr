@@ -219,7 +219,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      *
      * @param DatabaseQueryResult $query The result of the run query
      *
-     * @return bool $return FALSE if it failed, FALSE otherwise
+     * @return bool $return FALSE on failure, TRUE on success
      */
     protected function result_boolean($query)
     {
