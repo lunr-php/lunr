@@ -7,6 +7,7 @@
  *
  * @package    Lunr\Vortex\GCM
  * @author     Dinos Theodorou <dinos@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -43,11 +44,11 @@ class GCMDispatcherBaseTest extends GCMDispatcherTest
     }
 
     /**
-     * Test that the passed Curl object is set correctly.
+     * Test that the passed Requests_Session object is set correctly.
      */
-    public function testCurlIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly()
     {
-        $this->assertSame($this->curl, $this->get_reflection_property_value('curl'));
+        $this->assertPropertySame('http', $this->http);
     }
 
     /**
@@ -64,6 +65,21 @@ class GCMDispatcherBaseTest extends GCMDispatcherTest
     public function testPriorityIsNormal()
     {
         $this->assertPropertyEquals('priority', 'normal');
+    }
+
+    /**
+     * Test get_new_response_object_for_failed_request().
+     *
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::get_new_response_object_for_failed_request
+     */
+    public function testGetNewResponseObjectForFailedRequest()
+    {
+        $method = $this->get_accessible_reflection_method('get_new_response_object_for_failed_request');
+
+        $result = $method->invoke($this->class);
+
+        $this->assertInstanceOf('\Requests_Response', $result);
+        $this->assertEquals('https://gcm-http.googleapis.com/gcm/send', $result->url);
     }
 
 }

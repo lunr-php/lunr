@@ -7,6 +7,7 @@
  *
  * @package    Lunr\Vortex\GCM
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -34,16 +35,10 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
      */
     public function testPushSuccessWithMissingResults()
     {
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn(200);
-
         $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_missing_results.json');
 
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = 200;
+        $this->response->body        = $content;
 
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -55,7 +50,7 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
         $endpoints = [ 'endpoint1' ];
         $statuses  = [ 'endpoint1' => PushNotificationStatus::UNKNOWN ];
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, $endpoints);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
@@ -71,16 +66,10 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
      */
     public function testPushSuccessWithSingleSuccess()
     {
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn(200);
-
         $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_single_success.json');
 
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = 200;
+        $this->response->body        = $content;
 
         $this->logger->expects($this->never())
                      ->method('warning');
@@ -88,7 +77,7 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
         $endpoints = [ 'endpoint1' ];
         $statuses  = [ 'endpoint1' => PushNotificationStatus::SUCCESS ];
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, $endpoints);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
@@ -104,16 +93,10 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
      */
     public function testPushSuccessWithSingleError()
     {
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn(200);
-
         $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_single_error.json');
 
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = 200;
+        $this->response->body        = $content;
 
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -125,7 +108,7 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
         $endpoints = [ 'endpoint1' ];
         $statuses  = [ 'endpoint1' => PushNotificationStatus::INVALID_ENDPOINT ];
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, $endpoints);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
@@ -141,16 +124,10 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
      */
     public function testPushSuccessWithMultipleSuccess()
     {
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn(200);
-
         $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_multiple_success.json');
 
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = 200;
+        $this->response->body        = $content;
 
         $this->logger->expects($this->never())
                      ->method('warning');
@@ -162,7 +139,7 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
             'endpoint3' => PushNotificationStatus::SUCCESS,
         ];
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, $endpoints);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
@@ -178,16 +155,10 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
      */
     public function testPushSuccessWithMultipleErrors()
     {
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn(200);
-
         $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_multiple_error.json');
 
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = 200;
+        $this->response->body        = $content;
 
         $error_messages = [
             'endpoint1'  => 'Missing registration token',
@@ -237,7 +208,7 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
             'endpoint13' => PushNotificationStatus::UNKNOWN,
         ];
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, $endpoints);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
@@ -253,16 +224,10 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
      */
     public function testPushSuccessWithMultipleMixedResults()
     {
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn(200);
-
         $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_multiple_mixed.json');
 
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = 200;
+        $this->response->body        = $content;
 
         $endpoints = [ 'endpoint1', 'endpoint2', 'endpoint3', 'endpoint4', 'endpoint5' ];
         $statuses  = [
@@ -287,7 +252,7 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
                         [ 'endpoint' => 'endpoint3', 'error' => 'Invalid registration token' ]
                       );
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, $endpoints);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
@@ -303,16 +268,10 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
      */
     public function testPushSuccessWithMoreEndpointsThanResults()
     {
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn(200);
-
         $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_multiple_success.json');
 
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = 200;
+        $this->response->body        = $content;
 
         $this->logger->expects($this->never())
                      ->method('warning');
@@ -324,7 +283,7 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
             'endpoint3' => PushNotificationStatus::SUCCESS,
         ];
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, $endpoints);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
@@ -340,16 +299,10 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
      */
     public function testPushSuccessWithLessEndpointsThanResults()
     {
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn(200);
-
         $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_multiple_success.json');
 
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = 200;
+        $this->response->body        = $content;
 
         $this->logger->expects($this->never())
                      ->method('warning');
@@ -357,7 +310,7 @@ class GCMBatchResponseBasePushSuccessTest extends GCMBatchResponseTest
         $endpoints = [ 'endpoint1' ];
         $statuses  = [ 'endpoint1' => PushNotificationStatus::SUCCESS ];
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, $endpoints);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, $endpoints);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);

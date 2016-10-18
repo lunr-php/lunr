@@ -7,6 +7,7 @@
  *
  * @package    Lunr\Vortex\GCM
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -35,18 +36,12 @@ class GCMBatchResponseGetStatusTest extends GCMBatchResponseTest
     {
         parent::setUp();
 
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn(200);
-
         $content = file_get_contents(TEST_STATICS . '/Vortex/gcm/response_single_success.json');
 
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = 200;
+        $this->response->body        = $content;
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ]);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
     }
 

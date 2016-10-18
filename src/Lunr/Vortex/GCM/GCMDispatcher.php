@@ -7,6 +7,7 @@
  *
  * @package    Lunr\Vortex\GCM
  * @author     Dinos Theodorou <dinos@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Sean Molenaar <sean@m2mobi.com>
  * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -15,6 +16,8 @@
 namespace Lunr\Vortex\GCM;
 
 use Lunr\Vortex\PushNotificationMultiDispatcherInterface;
+use Requests_Exception;
+use Requests_Response;
 
 /**
  * Google Cloud Messaging Push Notification Dispatcher.
@@ -53,14 +56,14 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     private $priority;
 
     /**
-     * Shared instance of the Curl class.
-     * @var Curl
+     * Shared instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    private $curl;
+    private $http;
 
     /**
      * Shared instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
@@ -73,12 +76,12 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     /**
      * Constructor.
      *
-     * @param Curl            $curl   Shared instance of the Curl class.
-     * @param LoggerInterface $logger Shared instance of a Logger.
+     * @param \Requests_Session        $http   Shared instance of the Requests_Session class.
+     * @param \Psr\Log\LoggerInterface $logger Shared instance of a Logger.
      */
-    public function __construct($curl, $logger)
+    public function __construct($http, $logger)
     {
-        $this->curl   = $curl;
+        $this->http   = $http;
         $this->logger = $logger;
 
         $this->reset();
@@ -93,7 +96,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
         unset($this->payload);
         unset($this->auth_token);
         unset($this->priority);
-        unset($this->curl);
+        unset($this->http);
         unset($this->logger);
     }
 
@@ -144,8 +147,10 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
      */
     protected function push_batch(&$endpoints)
     {
-        $this->curl->set_option('CURLOPT_FAILONERROR', FALSE);
-        $this->curl->set_http_headers(['Content-Type:application/json', 'Authorization: key=' . $this->auth_token]);
+        $headers = [
+            'Content-Type'  => 'application/json',
+            'Authorization' => 'key=' . $this->auth_token,
+        ];
 
         $tmp_payload = json_decode($this->payload, TRUE);
 
@@ -160,8 +165,14 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
 
         $tmp_payload['priority'] = $this->priority;
 
-        $curl_response      = $this->curl->post_request(self::GOOGLE_SEND_URL, json_encode($tmp_payload));
-        $gcm_batch_response = new GCMBatchResponse($curl_response, $this->logger, $endpoints);
+        try {
+            $http_response = $this->http->post(self::GOOGLE_SEND_URL, $headers, json_encode($tmp_payload));
+        } catch(Requests_Exception $e) {
+            $this->logger->warning('Dispatching GCM notification(s) failed: {message}', [ 'message' => $e->getMessage() ]);
+            $http_response = $this->get_new_response_object_for_failed_request();
+        }
+
+        $gcm_batch_response = new GCMBatchResponse($http_response, $this->logger, $endpoints);
 
         return $gcm_batch_response;
     }
@@ -222,6 +233,20 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
         $this->priority = $priority;
 
         return $this;
+    }
+
+    /**
+     * Get a Requests_Response object for a failed request.
+     *
+     * @return \Requests_Response $http_response New instance of a Requests_Response object.
+     */
+    protected function get_new_response_object_for_failed_request()
+    {
+        $http_response = new Requests_Response();
+
+        $http_response->url = self::GOOGLE_SEND_URL;
+
+        return $http_response;
     }
 
 }

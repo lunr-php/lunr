@@ -49,17 +49,17 @@ class GCMBatchResponse
     /**
      * Constructor.
      *
-     * @param CurlResponse    $response  Curl Response object.
-     * @param LoggerInterface $logger    Shared instance of a Logger.
-     * @param Array           $endpoints The endpoints the message was sent to (in the same order as sent).
+     * @param \Requests_Response       $response  Requests_Response object.
+     * @param \Psr\Log\LoggerInterface $logger    Shared instance of a Logger.
+     * @param Array                    $endpoints The endpoints the message was sent to (in the same order as sent).
      */
     public function __construct($response, $logger, $endpoints)
     {
         $this->logger   = $logger;
         $this->statuses = [];
 
-        $this->http_code = $response->http_code;
-        $this->content   = $response->get_result();
+        $this->http_code = $response->status_code;
+        $this->content   = $response->body;
 
         if ($this->http_code == 200)
         {

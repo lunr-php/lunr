@@ -7,6 +7,7 @@
  *
  * @package    Lunr\Vortex\GCM
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -37,14 +38,8 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
         $http_code = 400;
         $content   = 'Field "collapse_key" must be a JSON string: 1463565451';
 
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn($http_code);
-
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = $http_code;
+        $this->response->body        = $content;
 
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -53,7 +48,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
                         [ 'error' => "Invalid JSON ({$content})" ]
                      );
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ]);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger);
@@ -72,14 +67,8 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
         $http_code = 401;
         $content   = 'stuff';
 
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn($http_code);
-
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = $http_code;
+        $this->response->body        = $content;
 
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -88,7 +77,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
                         [ 'error' => 'Error with authentication' ]
                      );
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ]);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger);
@@ -126,14 +115,8 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
     {
         $content = 'stuff';
 
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn($http_code);
-
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = $http_code;
+        $this->response->body        = $content;
 
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -142,7 +125,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
                         [ 'error' => 'Internal error' ]
                      );
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ]);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger);
@@ -178,14 +161,8 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
     {
         $content = 'stuff';
 
-        $this->curl_response->expects($this->once())
-                            ->method('__get')
-                            ->with('http_code')
-                            ->willReturn($http_code);
-
-        $this->curl_response->expects($this->once())
-                            ->method('get_result')
-                            ->willReturn($content);
+        $this->response->status_code = $http_code;
+        $this->response->body        = $content;
 
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -194,7 +171,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
                         [ 'error' => 'Unknown error' ]
                      );
 
-        $this->class      = new GCMBatchResponse($this->curl_response, $this->logger, [ 'endpoint1' ]);
+        $this->class      = new GCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ]);
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger);

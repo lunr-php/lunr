@@ -6,8 +6,9 @@
  * PHP Version 5.4
  *
  * @package    Lunr\Vortex\GCM
- * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
+ * @author     Dinos Theodorou <dinos@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -27,15 +28,15 @@ abstract class GCMBatchResponseTest extends LunrBaseTest
 
     /**
      * Mock instance of the Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
     /**
-     * Mock instance of the CurlResponse class.
-     * @var Lunr\Network\CurlResponse
+     * Mock instance of the Requests_Response class.
+     * @var \Requests_Response
      */
-    protected $curl_response;
+    protected $response;
 
     /**
      * Testcase Constructor.
@@ -46,9 +47,7 @@ abstract class GCMBatchResponseTest extends LunrBaseTest
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->curl_response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                                    ->disableOriginalConstructor()
-                                    ->getMock();
+        $this->response = $this->getMock('Requests_Response');
     }
 
     /**
@@ -57,7 +56,7 @@ abstract class GCMBatchResponseTest extends LunrBaseTest
     public function tearDown()
     {
         unset($this->logger);
-        unset($this->curl_response);
+        unset($this->response);
         unset($this->class);
         unset($this->reflection);
     }

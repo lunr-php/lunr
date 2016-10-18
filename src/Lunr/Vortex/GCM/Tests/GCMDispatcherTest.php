@@ -7,6 +7,7 @@
  *
  * @package    Lunr\Vortex\GCM
  * @author     Dinos Theodorou <dinos@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -26,14 +27,14 @@ use ReflectionClass;
 abstract class GCMDispatcherTest extends LunrBaseTest
 {
     /**
-     * Mock instance of the Curl class.
-     * @var Curl
+     * Mock instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    protected $curl;
+    protected $http;
 
     /**
      * Mock instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
@@ -42,10 +43,10 @@ abstract class GCMDispatcherTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->curl   = $this->getMock('Lunr\Network\Curl');
+        $this->http   = $this->getMock('Requests_Session');
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->class = new GCMDispatcher($this->curl, $this->logger);
+        $this->class = new GCMDispatcher($this->http, $this->logger);
 
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMDispatcher');
     }
