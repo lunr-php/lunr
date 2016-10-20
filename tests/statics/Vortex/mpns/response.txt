@@ -1,5 +1,0 @@
-HTTP/1.1 200 OK
-Date: 2013-07-05
-X-NotificationStatus: Received
-X-DeviceConnectionStatus: Connected
-X-SubscriptionStatus: Active

@@ -34,23 +34,21 @@ class MPNSResponseSetTest extends MPNSResponseTest
     /**
      * Test setting headers for status 412.
      *
-     * @covers Lunr\Vortex\MPNS\MPNSResponse::parse_headers
+     * @covers Lunr\Vortex\MPNS\MPNSResponse::set_headers
      */
-    public function testParseHeadersWithPreconditionFailedStatus()
+    public function testSetHeadersWithPreconditionFailedStatus()
     {
-        $result = file_get_contents(TEST_STATICS . '/Vortex/mpns/response.txt');
-        $parsed = file_get_contents(TEST_STATICS . '/Vortex/mpns/response_parsed.txt');
-
-        $header = $this->getMock('http\Header', [ 'parse' ]);
-
-        $parse = [ get_class($header), 'parse' ];
-
-        $this->mock_method($parse, "return $parsed;");
+        $headers = [
+            "Date" => "2013-07-05",
+            "X-Notificationstatus" => "Received",
+            "X-Deviceconnectionstatus" => "Connected",
+            "X-Subscriptionstatus" => "Active"
+        ];
 
         $this->set_reflection_property_value('http_code', 412);
 
-        $method = $this->get_accessible_reflection_method('parse_headers');
-        $method->invokeArgs($this->class, [$header, $result, 129]);
+        $method = $this->get_accessible_reflection_method('set_headers');
+        $method->invokeArgs($this->class, [ $headers ]);
 
         $headers = $this->get_reflection_property_value('headers');
 
@@ -61,8 +59,6 @@ class MPNSResponseSetTest extends MPNSResponseTest
         $this->assertEquals('Received', $headers['X-Notificationstatus']);
         $this->assertEquals('Connected', $headers['X-Deviceconnectionstatus']);
         $this->assertEquals('N/A', $headers['X-Subscriptionstatus']);
-
-        $this->unmock_method($parse);
     }
 
     /**
@@ -71,23 +67,21 @@ class MPNSResponseSetTest extends MPNSResponseTest
      * @param Integer $status Special status code
      *
      * @dataProvider specialStatusProvider
-     * @covers       Lunr\Vortex\MPNS\MPNSResponse::parse_headers
+     * @covers       Lunr\Vortex\MPNS\MPNSResponse::set_headers
      */
-    public function testParseHeadersWithSpecialStatusCodes($status)
+    public function testSetHeadersWithSpecialStatusCodes($status)
     {
-        $result = file_get_contents(TEST_STATICS . '/Vortex/mpns/response.txt');
-        $parsed = file_get_contents(TEST_STATICS . '/Vortex/mpns/response_parsed.txt');
-
-        $header = $this->getMock('http\Header', [ 'parse' ]);
-
-        $parse = [ get_class($header), 'parse' ];
-
-        $this->mock_method($parse, "return $parsed;");
+        $headers = [
+            "Date" => "2013-07-05",
+            "X-Notificationstatus" => "Received",
+            "X-Deviceconnectionstatus" => "Connected",
+            "X-Subscriptionstatus" => "Active"
+        ];
 
         $this->set_reflection_property_value('http_code', $status);
 
-        $method = $this->get_accessible_reflection_method('parse_headers');
-        $method->invokeArgs($this->class, [$header, $result, 129]);
+        $method = $this->get_accessible_reflection_method('set_headers');
+        $method->invokeArgs($this->class, [ $headers ]);
 
         $headers = $this->get_reflection_property_value('headers');
 
@@ -98,8 +92,6 @@ class MPNSResponseSetTest extends MPNSResponseTest
         $this->assertEquals('N/A', $headers['X-Notificationstatus']);
         $this->assertEquals('N/A', $headers['X-Deviceconnectionstatus']);
         $this->assertEquals('N/A', $headers['X-Subscriptionstatus']);
-
-        $this->unmock_method($parse);
     }
 
     /**

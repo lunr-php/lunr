@@ -60,7 +60,7 @@ class MPNSResponseErrorTest extends MPNSResponseTest
      */
     public function testHttpCodeIsSetCorrectly()
     {
-        $this->assertEquals(404, $this->get_reflection_property_value('http_code'));
+        $this->assertEquals(FALSE, $this->get_reflection_property_value('http_code'));
     }
 
     /**

@@ -29,10 +29,10 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
 {
 
     /**
-     * Mock instance of the Curl class.
-     * @var \Lunr\Network\Curl
+     * Mock instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    protected $curl;
+    protected $http;
 
     /**
      * Mock instance of a Logger class.
@@ -41,25 +41,21 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
     protected $logger;
 
     /**
-     * Mock instance of a Header class.
-     * @var \http\Header
+     * Mock instance of a Requests_Response class
+     * @var \Requests_Response
      */
-    protected $header;
+    protected $response;
 
     /**
      * Testcase Constructor.
      */
     public function setUp()
     {
-        $this->curl = $this->getMockBuilder('Lunr\Network\Curl')
-                           ->disableOriginalConstructor()
-                           ->getMock();
+        $this->http     = $this->getMock('Requests_Session');
+        $this->logger   = $this->getMock('Psr\Log\LoggerInterface');
+        $this->response = $this->getMock('Requests_Response');
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
-
-        $this->header = $this->getMock('http\Header');
-
-        $this->class = new MPNSDispatcher($this->curl, $this->logger, $this->header);
+        $this->class = new MPNSDispatcher($this->http, $this->logger);
 
         $this->reflection = new ReflectionClass('Lunr\Vortex\MPNS\MPNSDispatcher');
     }
@@ -71,9 +67,9 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
     {
         unset($this->class);
         unset($this->reflection);
-        unset($this->curl);
+        unset($this->http);
         unset($this->logger);
-        unset($this->header);
+        unset($this->response);
     }
 
     /**

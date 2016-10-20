@@ -49,25 +49,21 @@ class MPNSResponse implements PushNotificationResponseInterface
     /**
      * Constructor.
      *
-     * @param \Lunr\Network\CurlResponse $response Curl Response object.
-     * @param \Psr\Log\LoggerInterface   $logger   Shared instance of a Logger.
-     * @param \http\Header               $header   Instance of a Header class.
+     * @param \Requests_Response       $response Requests_Response object.
+     * @param \Psr\Log\LoggerInterface $logger   Shared instance of a Logger.
      */
-    public function __construct($response, $logger, $header)
+    public function __construct($response, $logger)
     {
-        $this->http_code = $response->http_code;
+        $this->http_code = $response->status_code;
         $this->endpoint  = $response->url;
 
-        if ($response->get_network_error_number() !== 0)
+        if ($this->http_code === FALSE)
         {
             $this->status = PushNotificationStatus::ERROR;
-
-            $context = [ 'error' => $response->get_network_error_message(), 'endpoint' => $response->url ];
-            $logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
         }
         else
         {
-            $this->parse_headers($header, $response->get_result(), $response->header_size);
+            $this->set_headers($response->headers);
             $this->set_status($response->url, $logger);
         }
     }
@@ -83,17 +79,15 @@ class MPNSResponse implements PushNotificationResponseInterface
     }
 
     /**
-     * Parse response header information.
+     * Set response header information.
      *
-     * @param \http\Header $header      Instance of a Header class.
-     * @param String       $result      Response result
-     * @param Integer      $header_size Size of the header
+     * @param Array $headers Response headers
      *
      * @return void
      */
-    private function parse_headers($header, $result, $header_size)
+    private function set_headers($headers)
     {
-        $this->headers = $header->parse(substr($result, 0, $header_size));
+        $this->headers = $headers;
 
         if (in_array($this->http_code, [ 400, 401, 405, 503 ]))
         {
@@ -105,7 +99,6 @@ class MPNSResponse implements PushNotificationResponseInterface
         {
             $this->headers['X-Subscriptionstatus'] = 'N/A';
         }
-
     }
 
     /**

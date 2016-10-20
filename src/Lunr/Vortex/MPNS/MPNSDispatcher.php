@@ -14,6 +14,8 @@
 namespace Lunr\Vortex\MPNS;
 
 use Lunr\Vortex\PushNotificationDispatcherInterface;
+use Requests_Exception;
+use Requests_Response;
 
 /**
  * Windows Phone Push Notification Dispatcher.
@@ -46,10 +48,10 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
     private $type;
 
     /**
-     * Shared instance of the Curl class.
-     * @var \Lunr\Network\Curl
+     * Shared instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    private $curl;
+    private $http;
 
     /**
      * Shared instance of a Logger class.
@@ -58,27 +60,19 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
     private $logger;
 
     /**
-     * Shared instance of a header class.
-     * @var \http\Header
-     */
-    private $header;
-
-    /**
      * Constructor.
      *
-     * @param \Lunr\Network\Curl       $curl   Shared instance of the Curl class.
+     * @param \Requests_Session        $http   Shared instance of the Requests_Session class.
      * @param \Psr\Log\LoggerInterface $logger Shared instance of a Logger.
-     * @param \http\Header             $header Shared instance of a Header class.
      */
-    public function __construct($curl, $logger, $header)
+    public function __construct($http, $logger)
     {
         $this->endpoint = '';
         $this->payload  = '';
         $this->priority = 0;
-        $this->curl     = $curl;
+        $this->http     = $http;
         $this->logger   = $logger;
         $this->type     = MPNSType::RAW;
-        $this->header   = $header;
     }
 
     /**
@@ -90,9 +84,8 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
         unset($this->payload);
         unset($this->priority);
         unset($this->type);
-        unset($this->curl);
+        unset($this->http);
         unset($this->logger);
-        unset($this->header);
     }
 
     /**
@@ -102,27 +95,39 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
      */
     public function push()
     {
-        $this->curl->set_option('CURLOPT_HEADER', TRUE);
-        $this->curl->set_http_headers([ 'Content-Type: text/xml', 'Accept: application/*' ]);
+        $headers = [
+            'Content-Type' => 'text/xml',
+            'Accept'       => 'application/*',
+        ];
 
         if (($this->type === MPNSType::TILE) || ($this->type === MPNSType::TOAST))
         {
-            $this->curl->set_http_header('X-WindowsPhone-Target: ' . $this->type);
+            $headers['X-WindowsPhone-Target'] = $this->type;
         }
 
         if ($this->priority !== 0)
         {
-            $this->curl->set_http_header('X-NotificationClass: ' . $this->priority);
+            $headers['X-NotificationClass'] = $this->priority;
         }
 
-        $response = $this->curl->post_request($this->endpoint, $this->payload);
+        try
+        {
+            $response = $this->http->post($this->endpoint, $headers, $this->payload);
+        }
+        catch (Requests_Exception $e)
+        {
+            $response = $this->get_new_response_object_for_failed_request();
+            $context  = [ 'error' => $e->getMessage(), 'endpoint' => $this->endpoint ];
+
+            $this->logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
+        }
 
         $this->endpoint = '';
         $this->payload  = '';
         $this->priority = 0;
         $this->type     = MPNSType::RAW;
 
-        return new MPNSResponse($response, $this->logger, $this->header);
+        return new MPNSResponse($response, $this->logger);
     }
 
     /**
@@ -192,6 +197,20 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
         }
 
         return $this;
+    }
+
+    /**
+     * Get a Requests_Response object for a failed request.
+     *
+     * @return \Requests_Response $http_response New instance of a Requests_Response object.
+     */
+    protected function get_new_response_object_for_failed_request()
+    {
+        $http_response = new Requests_Response();
+
+        $http_response->url = $this->endpoint;
+
+        return $http_response;
     }
 
 }

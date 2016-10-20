@@ -34,12 +34,6 @@ abstract class MPNSResponseTest extends LunrBaseTest
     protected $logger;
 
     /**
-     * Mock instance of the Header class.
-     * @var \http\Header
-     */
-    protected $header;
-
-    /**
      * Testcase Constructor.
      *
      * @return void
@@ -48,34 +42,12 @@ abstract class MPNSResponseTest extends LunrBaseTest
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->header = $this->getMock('http\Header');
+        $response = $this->getMock('Requests_Response');
 
-        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $response->status_code = FALSE;
+        $response->url         = 'http://localhost/';
 
-        $response->expects($this->once())
-                 ->method('get_network_error_number')
-                 ->will($this->returnValue(-1));
-
-        $response->expects($this->once())
-                 ->method('get_network_error_message')
-                 ->will($this->returnValue('Error Message'));
-
-        $map = [ [ 'http_code', 404 ], [ 'url', 'http://localhost/' ] ];
-
-        $response->expects($this->exactly(3))
-                 ->method('__get')
-                 ->will($this->returnValueMap($map));
-
-        $this->logger->expects($this->once())
-                     ->method('warning')
-                     ->with(
-                        $this->equalTo('Dispatching push notification to {endpoint} failed: {error}'),
-                        $this->equalTo(['error' => 'Error Message', 'endpoint' => 'http://localhost/'])
-                     );
-
-        $this->class      = new MPNSResponse($response, $this->logger, $this->header);
+        $this->class      = new MPNSResponse($response, $this->logger);
         $this->reflection = new ReflectionClass('Lunr\Vortex\MPNS\MPNSResponse');
     }
 
@@ -86,43 +58,22 @@ abstract class MPNSResponseTest extends LunrBaseTest
      */
     public function setUpSuccess()
     {
-        if (extension_loaded('http') === FALSE || empty(get_extension_funcs('http')) === FALSE)
-        {
-            $this->markTestSkipped('Extension http (2.x) is required.');
-        }
-
-        $this->header = $this->getMock('http\Header', [ 'parse' ]);
-
-        $method = [ get_class($this->header), 'parse' ];
-        $parsed = file_get_contents(TEST_STATICS . '/Vortex/mpns/response_parsed.txt');
-
-        $this->mock_method($method, "return $parsed;");
-
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $response = $this->getMock('Requests_Response');
 
-        $response->expects($this->once())
-                 ->method('get_network_error_number')
-                 ->will($this->returnValue(0));
+        $response->headers = [
+            "Date" => "2013-07-05",
+            "X-Notificationstatus" => "Received",
+            "X-Deviceconnectionstatus" => "Connected",
+            "X-Subscriptionstatus" => "Active"
+        ];
 
-        $file = TEST_STATICS . '/Vortex/mpns/response.txt';
-        $map  = [ [ 'http_code', 200 ], [ 'header_size', 129 ], [ 'url', 'http://localhost/' ] ];
+        $response->status_code = 200;
+        $response->url         = 'http://localhost/';
 
-        $response->expects($this->exactly(4))
-                 ->method('__get')
-                 ->will($this->returnValueMap($map));
-
-        $response->expects($this->once())
-                 ->method('get_result')
-                 ->will($this->returnValue(file_get_contents($file)));
-
-        $this->class      = new MPNSResponse($response, $this->logger, $this->header);
+        $this->class      = new MPNSResponse($response, $this->logger);
         $this->reflection = new ReflectionClass('Lunr\Vortex\MPNS\MPNSResponse');
-
-        $this->unmock_method($method);
     }
 
     /**

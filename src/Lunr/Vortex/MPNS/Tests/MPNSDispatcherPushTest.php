@@ -15,6 +15,7 @@ namespace Lunr\Vortex\MPNS\Tests;
 
 use Lunr\Vortex\MPNS\MPNSType;
 use Lunr\Vortex\MPNS\MPNSPriority;
+use Requests_Exception;
 
 /**
  * This class contains test for the push() method of the MPNSDispatcher class.
@@ -35,18 +36,16 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
         $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('type', MPNSType::TILE);
 
-        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $headers = [
+            'Content-Type' => 'text/xml',
+            'Accept' => 'application/*',
+            'X-WindowsPhone-Target' => MPNSType::TILE,
+        ];
 
-        $this->curl->expects($this->once())
-                   ->method('set_http_header')
-                   ->with($this->equalTo('X-WindowsPhone-Target: ' . MPNSType::TILE));
-
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('endpoint'), $this->equalTo('payload'))
-                   ->will($this->returnValue($response));
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->will($this->returnValue($this->response));
 
         $this->class->push();
     }
@@ -62,18 +61,16 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
         $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('type', MPNSType::TOAST);
 
-        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $headers = [
+            'Content-Type' => 'text/xml',
+            'Accept' => 'application/*',
+            'X-WindowsPhone-Target' => MPNSType::TOAST,
+        ];
 
-        $this->curl->expects($this->once())
-                   ->method('set_http_header')
-                   ->with($this->equalTo('X-WindowsPhone-Target: ' . MPNSType::TOAST));
-
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('endpoint'), $this->equalTo('payload'))
-                   ->will($this->returnValue($response));
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->will($this->returnValue($this->response));
 
         $this->class->push();
     }
@@ -87,18 +84,17 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
     {
         $this->set_reflection_property_value('endpoint', 'endpoint');
         $this->set_reflection_property_value('payload', 'payload');
+        $this->set_reflection_property_value('type', MPNSType::RAW);
 
-        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $headers = [
+            'Content-Type' => 'text/xml',
+            'Accept' => 'application/*',
+        ];
 
-        $this->curl->expects($this->never())
-                   ->method('set_http_header');
-
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('endpoint'), $this->equalTo('payload'))
-                   ->will($this->returnValue($response));
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->will($this->returnValue($this->response));
 
         $this->class->push();
     }
@@ -112,18 +108,17 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
     {
         $this->set_reflection_property_value('endpoint', 'endpoint');
         $this->set_reflection_property_value('payload', 'payload');
+        $this->set_reflection_property_value('priority', 0);
 
-        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $headers = [
+            'Content-Type' => 'text/xml',
+            'Accept' => 'application/*',
+        ];
 
-        $this->curl->expects($this->never())
-                   ->method('set_http_header');
-
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('endpoint'), $this->equalTo('payload'))
-                   ->will($this->returnValue($response));
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->will($this->returnValue($this->response));
 
         $this->class->push();
     }
@@ -142,18 +137,16 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
         $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('priority', $priority);
 
-        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $headers = [
+            'Content-Type' => 'text/xml',
+            'Accept' => 'application/*',
+            'X-NotificationClass' => $priority,
+        ];
 
-        $this->curl->expects($this->once())
-                   ->method('set_http_header')
-                   ->with($this->equalTo('X-NotificationClass: ' . $priority));
-
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('endpoint'), $this->equalTo('payload'))
-                   ->will($this->returnValue($response));
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->will($this->returnValue($this->response));
 
         $this->class->push();
     }
@@ -163,27 +156,50 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSDispatcher::push
      */
-    public function testPushReturnsMPNSResponseObject()
+    public function testPushReturnsMPNSResponseObjectOnError()
     {
         $this->set_reflection_property_value('endpoint', 'endpoint');
         $this->set_reflection_property_value('payload', 'payload');
 
-        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $headers = [
+            'Content-Type' => 'text/xml',
+            'Accept' => 'application/*',
+        ];
 
-        $this->curl->expects($this->once())
-                   ->method('set_option')
-                   ->with($this->equalTo('CURLOPT_HEADER'), $this->equalTo(TRUE));
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->will($this->throwException(new Requests_Exception('Network problem!', 'curlerror', NULL)));
 
-        $this->curl->expects($this->once())
-                   ->method('set_http_headers')
-                   ->with($this->equalTo([ 'Content-Type: text/xml', 'Accept: application/*' ]));
+        $message = 'Dispatching push notification to {endpoint} failed: {error}';
+        $context = [ 'error' => 'Network problem!', 'endpoint' => 'endpoint' ];
 
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('endpoint'), $this->equalTo('payload'))
-                   ->will($this->returnValue($response));
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with($this->equalTo($message), $this->equalTo($context));
+
+        $this->assertInstanceOf('Lunr\Vortex\MPNS\MPNSResponse', $this->class->push());
+    }
+
+    /**
+     * Test that push() returns MPNSResponseObject.
+     *
+     * @covers Lunr\Vortex\MPNS\MPNSDispatcher::push
+     */
+    public function testPushReturnsMPNSResponseObjectOnSuccess()
+    {
+        $this->set_reflection_property_value('endpoint', 'endpoint');
+        $this->set_reflection_property_value('payload', 'payload');
+
+        $headers = [
+            'Content-Type' => 'text/xml',
+            'Accept' => 'application/*',
+        ];
+
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->will($this->returnValue($this->response));
 
         $this->assertInstanceOf('Lunr\Vortex\MPNS\MPNSResponse', $this->class->push());
     }
@@ -193,21 +209,56 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSDispatcher::push
      */
-    public function testPushResetsProperties()
+    public function testPushResetsPropertiesOnError()
     {
         $this->set_reflection_property_value('endpoint', 'endpoint');
         $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('priority', MPNSPriority::TOAST_IMMEDIATELY);
         $this->set_reflection_property_value('type', MPNSType::TOAST);
 
-        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $headers = [
+            'Content-Type' => 'text/xml',
+            'Accept' => 'application/*',
+            'X-WindowsPhone-Target' => 'toast',
+            'X-NotificationClass' => 2,
+        ];
 
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('endpoint'), $this->equalTo('payload'))
-                   ->will($this->returnValue($response));
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->will($this->throwException(new Requests_Exception('Network problem!', 'curlerror', NULL)));
+
+        $this->class->push();
+
+        $this->assertPropertyEquals('endpoint', '');
+        $this->assertPropertyEquals('payload', '');
+        $this->assertSame(0, $this->get_reflection_property_value('priority'));
+        $this->assertSame(MPNSType::RAW, $this->get_reflection_property_value('type'));
+    }
+
+    /**
+     * Test that push() resets the properties after a push.
+     *
+     * @covers Lunr\Vortex\MPNS\MPNSDispatcher::push
+     */
+    public function testPushResetsPropertiesOnSuccess()
+    {
+        $this->set_reflection_property_value('endpoint', 'endpoint');
+        $this->set_reflection_property_value('payload', 'payload');
+        $this->set_reflection_property_value('priority', MPNSPriority::TOAST_IMMEDIATELY);
+        $this->set_reflection_property_value('type', MPNSType::TOAST);
+
+        $headers = [
+            'Content-Type' => 'text/xml',
+            'Accept' => 'application/*',
+            'X-WindowsPhone-Target' => 'toast',
+            'X-NotificationClass' => 2,
+        ];
+
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->will($this->returnValue($this->response));
 
         $this->class->push();
 
