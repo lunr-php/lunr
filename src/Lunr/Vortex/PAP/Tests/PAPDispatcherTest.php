@@ -6,6 +6,7 @@
  * PHP Version 5.4
  *
  * @package    Lunr\Vortex\PAP
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -26,32 +27,33 @@ use ReflectionClass;
 abstract class PAPDispatcherTest extends LunrBaseTest
 {
     /**
-     * Mock instance of the Curl class.
-     * @var Curl
+     * Mock instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    protected $curl;
+    protected $http;
 
     /**
      * Mock instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
     /**
-     * Reflection instance of the PAPDispatcher
-     * @var ReflectionClass
+     * Mock instance of the Requests_Response class.
+     * @var \Requests_Response
      */
-    protected $reflection;
+    protected $response;
 
     /**
      * Testcase Constructor.
      */
     public function setUp()
     {
-        $this->curl   = $this->getMock('Lunr\Network\Curl');
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->http     = $this->getMock('Requests_Session');
+        $this->response = $this->getMock('Requests_Response');
+        $this->logger   = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->class = new PAPDispatcher($this->curl, $this->logger);
+        $this->class = new PAPDispatcher($this->http, $this->logger);
 
         $this->reflection = new ReflectionClass('Lunr\Vortex\PAP\PAPDispatcher');
     }
@@ -62,6 +64,8 @@ abstract class PAPDispatcherTest extends LunrBaseTest
     public function tearDown()
     {
         unset($this->logger);
+        unset($this->http);
+        unset($this->response);
         unset($this->class);
         unset($this->reflection);
     }

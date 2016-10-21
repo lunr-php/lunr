@@ -82,11 +82,11 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
     }
 
     /**
-     * Test that the passed Curl object is set correctly.
+     * Test that the passed Requests_Session object is set correctly.
      */
-    public function testCurlIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly()
     {
-        $this->assertSame($this->curl, $this->get_reflection_property_value('curl'));
+        $this->assertSame($this->http, $this->get_reflection_property_value('http'));
     }
 
     /**
@@ -152,6 +152,23 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
         $this->assertEquals($request_headers, $request_file);
 
         $this->unmock_function('microtime');
+    }
+
+    /**
+     * Test get_new_response_object_for_failed_request().
+     *
+     * @covers Lunr\Vortex\PAP\PAPDispatcher::get_new_response_object_for_failed_request
+     */
+    public function testGetNewResponseObjectForFailedRequest()
+    {
+        $this->set_reflection_property_value('cid', 'papcid');
+
+        $method = $this->get_accessible_reflection_method('get_new_response_object_for_failed_request');
+
+        $result = $method->invoke($this->class);
+
+        $this->assertInstanceOf('\Requests_Response', $result);
+        $this->assertEquals('https://cppapcid.pushapi.na.blackberry.com/mss/PD_pushRequest', $result->url);
     }
 
 }

@@ -6,6 +6,7 @@
  * PHP Version 5.4
  *
  * @package    Lunr\Vortex\PAP
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -14,6 +15,8 @@
 namespace Lunr\Vortex\PAP;
 
 use Lunr\Vortex\PushNotificationDispatcherInterface;
+use Requests_Exception;
+use Requests_Response;
 
 /**
  * PAP Format Push Notification Dispatcher.
@@ -64,14 +67,14 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     private $push_id;
 
     /**
-     * Shared instance of the Curl class.
-     * @var Curl
+     * Shared instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    private $curl;
+    private $http;
 
     /**
      * Shared instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
@@ -84,10 +87,10 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Constructor.
      *
-     * @param Curl            $curl   Shared instance of the Curl class.
-     * @param LoggerInterface $logger Shared instance of a Logger.
+     * @param \Requests_Session        $http   Shared instance of the Requests_Session class.
+     * @param \Psr\Log\LoggerInterface $logger Shared instance of a Logger.
      */
-    public function __construct($curl, $logger)
+    public function __construct($http, $logger)
     {
         $this->endpoint      = '';
         $this->payload       = '';
@@ -96,7 +99,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
         $this->cid           = '';
         $this->deliverbefore = '';
         $this->push_id       = '';
-        $this->curl          = $curl;
+        $this->http          = $http;
         $this->logger        = $logger;
     }
 
@@ -112,7 +115,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
         unset($this->cid);
         unset($this->deliverbefore);
         unset($this->push_id);
-        unset($this->curl);
+        unset($this->http);
         unset($this->logger);
     }
 
@@ -128,27 +131,37 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
 
         $pap_data = $this->construct_pap_data();
 
-        $this->curl->set_option('CURLOPT_URL', $pap_url);
-        $this->curl->set_option('CURLOPT_HEADER', FALSE);
-        $this->curl->set_option('CURLOPT_HTTP_VERSION', CURL_HTTP_VERSION_1_1);
-        $this->curl->set_option('CURLOPT_HTTPAUTH', CURLAUTH_BASIC);
-        $this->curl->set_option('CURLOPT_USERPWD', $this->auth_token . ':' . $this->password);
-        $this->curl->set_option('CURLOPT_RETURNTRANSFER', TRUE);
+        $options = [
+            'auth' => [
+                $this->auth_token,
+                $this->password,
+            ]
+        ];
 
-        $this->curl->set_http_header('Content-Type: multipart/related; boundary=' . self::PAP_BOUNDARY . '; type=application/xml');
-        $this->curl->set_http_header('Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2');
-        $this->curl->set_http_header('Connection: keep-alive');
+        $headers = [
+            'Content-Type' => 'multipart/related; boundary=' . self::PAP_BOUNDARY . '; type=application/xml',
+            'Accept'       => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+            'Connection'   => 'keep-alive',
+        ];
 
-        $response = $this->curl->post_request($pap_url, $pap_data);
+        try
+        {
+            $response = $this->http->post($pap_url, $headers, $pap_data, $options);
+        }
+        catch(Requests_Exception $e)
+        {
+            $response = $this->get_new_response_object_for_failed_request();
+            $context  = [ 'error' => $e->getMessage(), 'endpoint' => $this->endpoint ];
 
-        $res = new PAPResponse($response, $this->logger, $this->endpoint);
+            $this->logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
+        }
 
         $this->endpoint      = '';
         $this->push_id       = '';
         $this->payload       = '';
         $this->deliverbefore = '';
 
-        return $res;
+        return new PAPResponse($response, $this->logger, $this->endpoint);
     }
 
     /**
@@ -288,6 +301,20 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
         $this->deliverbefore = $timestamp;
 
         return $this;
+    }
+
+    /**
+     * Get a Requests_Response object for a failed request.
+     *
+     * @return \Requests_Response $http_response New instance of a Requests_Response object.
+     */
+    protected function get_new_response_object_for_failed_request()
+    {
+        $http_response = new Requests_Response();
+
+        $http_response->url = "https://cp{$this->cid}.pushapi.na.blackberry.com/mss/PD_pushRequest";
+
+        return $http_response;
     }
 
 }

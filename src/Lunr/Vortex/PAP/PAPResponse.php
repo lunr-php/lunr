@@ -6,6 +6,7 @@
  * PHP Version 5.4
  *
  * @package    Lunr\Vortex\PAP
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -55,23 +56,20 @@ class PAPResponse implements PushNotificationResponseInterface
     /**
      * Constructor.
      *
-     * @param CurlResponse    $response  Curl Response object.
-     * @param LoggerInterface $logger    Shared instance of a Logger.
-     * @param string          $device_id The deviceID that the message was sent to.
+     * @param \Requests_Response       $response  Requests_Response object.
+     * @param \Psr\Log\LoggerInterface $logger    Shared instance of a Logger.
+     * @param string                   $device_id The deviceID that the message was sent to.
      */
     public function __construct($response, $logger, $device_id)
     {
-        $this->http_code    = $response->http_code;
-        $this->result       = $response->get_result();
+        $this->http_code    = $response->status_code;
+        $this->result       = $response->body;
         $this->endpoint     = $device_id;
         $this->pap_response = [];
 
-        if ($response->get_network_error_number() !== 0)
+        if ($this->http_code === FALSE)
         {
             $this->status = PushNotificationStatus::ERROR;
-
-            $context = [ 'error' => $response->get_network_error_message(), 'endpoint' => $device_id ];
-            $logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
         }
         elseif ($this->parse_pap_response() === FALSE)
         {

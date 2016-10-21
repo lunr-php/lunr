@@ -6,6 +6,7 @@
  * PHP Version 5.4
  *
  * @package    Lunr\Vortex\PAP
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -29,7 +30,7 @@ abstract class PAPResponseTest extends LunrBaseTest
 
     /**
      * Mock instance of the Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
@@ -42,30 +43,9 @@ abstract class PAPResponseTest extends LunrBaseTest
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $response = $this->getMock('Requests_Response');
 
-        $response->expects($this->once())
-                 ->method('get_network_error_number')
-                 ->will($this->returnValue(-1));
-
-        $response->expects($this->once())
-                 ->method('get_network_error_message')
-                 ->will($this->returnValue('Error Message'));
-
-        $map = [ [ 'http_code', 503 ] ];
-
-        $response->expects($this->exactly(1))
-                 ->method('__get')
-                 ->will($this->returnValueMap($map));
-
-        $this->logger->expects($this->once())
-                     ->method('warning')
-                     ->with(
-                        $this->equalTo('Dispatching push notification to {endpoint} failed: {error}'),
-                        $this->equalTo(['error' => 'Error Message', 'endpoint' => '12345679'])
-                     );
+        $response->status_code = FALSE;
 
         $this->class      = new PAPResponse($response, $this->logger, '12345679');
         $this->reflection = new ReflectionClass('Lunr\Vortex\PAP\PAPResponse');
@@ -80,19 +60,9 @@ abstract class PAPResponseTest extends LunrBaseTest
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $response = $this->getMock('Requests_Response');
 
-        $response->expects($this->once())
-                 ->method('get_network_error_number')
-                 ->will($this->returnValue(0));
-
-        $map = [ [ 'http_code', 200 ] ];
-
-        $response->expects($this->exactly(1))
-                 ->method('__get')
-                 ->will($this->returnValueMap($map));
+        $response->status_code = 200;
 
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -114,24 +84,12 @@ abstract class PAPResponseTest extends LunrBaseTest
     {
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                         ->disableOriginalConstructor()
-                         ->getMock();
-
-        $response->expects($this->once())
-                 ->method('get_network_error_number')
-                 ->will($this->returnValue(0));
-
         $file = TEST_STATICS . '/Vortex/pap/response.xml';
-        $map  = [ [ 'http_code', 200 ], [ 'header_size', 176 ] ];
 
-        $response->expects($this->once())
-                 ->method('__get')
-                 ->will($this->returnValueMap($map));
+        $response = $this->getMock('Requests_Response');
 
-        $response->expects($this->once())
-                 ->method('get_result')
-                 ->will($this->returnValue(file_get_contents($file)));
+        $response->status_code = 200;
+        $response->body        = file_get_contents($file);
 
         $this->class      = new PAPResponse($response, $this->logger, '12345679');
         $this->reflection = new ReflectionClass('Lunr\Vortex\PAP\PAPResponse');
