@@ -32,9 +32,9 @@ class WNSResponseSuccessTest extends WNSResponseTest
     }
 
     /**
-     * Test headers are not set when request failed.
+     * Test headers are set correctly.
      */
-    public function testHeadersIsNull()
+    public function testHeadersIsSetCorrectly()
     {
         $headers = $this->get_reflection_property_value('headers');
 
@@ -46,9 +46,9 @@ class WNSResponseSuccessTest extends WNSResponseTest
     }
 
     /**
-     * Test that the status is set as error.
+     * Test that the status is set as success.
      */
-    public function testStatusIsError()
+    public function testStatusIsSuccess()
     {
         $this->assertEquals(PushNotificationStatus::SUCCESS, $this->get_reflection_property_value('status'));
     }

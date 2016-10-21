@@ -32,42 +32,6 @@ class WNSResponseSetTest extends WNSResponseTest
     }
 
     /**
-     * Test setting headers for status 412.
-     *
-     * @covers Lunr\Vortex\WNS\WNSResponse::parse_headers
-     */
-    public function testParseHeadersWithPreconditionFailedStatus()
-    {
-        $result = file_get_contents(TEST_STATICS . '/Vortex/wns/response.txt');
-        $parsed = file_get_contents(TEST_STATICS . '/Vortex/wns/response_parsed.txt');
-
-        $header = $this->getMock('http\Header', [ 'parse' ]);
-
-        $parse = [ get_class($header), 'parse' ];
-
-        $this->mock_method($parse, "return $parsed;");
-
-        $this->set_reflection_property_value('http_code', 412);
-
-        $method = $this->get_accessible_reflection_method('parse_headers');
-        $method->invokeArgs($this->class, [$header, $result, 129]);
-
-        $headers = $this->get_reflection_property_value('headers');
-
-        $this->assertArrayHasKey('X-WNS-Status', $headers);
-        $this->assertArrayHasKey('X-WNS-DeviceConnectionStatus', $headers);
-        $this->assertArrayHasKey('X-WNS-Error-Description', $headers);
-        $this->assertArrayHasKey('X-WNS-Debug-Trace', $headers);
-
-        $this->assertEquals('received', $headers['X-WNS-Status']);
-        $this->assertEquals('connected', $headers['X-WNS-DeviceConnectionStatus']);
-        $this->assertEquals('Some Error', $headers['X-WNS-Error-Description']);
-        $this->assertEquals('Some Trace', $headers['X-WNS-Debug-Trace']);
-
-        $this->unmock_method($parse);
-    }
-
-    /**
      * Test setting the status for a successful request.
      *
      * @covers Lunr\Vortex\WNS\WNSResponse::set_status

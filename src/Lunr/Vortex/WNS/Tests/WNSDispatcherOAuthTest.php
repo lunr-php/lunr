@@ -12,6 +12,8 @@
 
 namespace Lunr\Vortex\WNS\Tests;
 
+use Requests_Exception;
+
 /**
  * Class WNSDispatcherOAuthTest tests the Authentication to the WNS Server
  * @covers Lunr\Vortex\WNS\WNSDispatcher
@@ -29,10 +31,8 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
      */
     private function expectFromConfig($client_id, $client_secret)
     {
-
         $this->set_reflection_property_value('client_id', $client_id);
         $this->set_reflection_property_value('client_secret', $client_secret);
-
     }
 
     /**
@@ -40,25 +40,27 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::get_oauth_token
      */
-    public function testGetOathMakesCorrectRequest()
+    public function testGetOauthMakesCorrectRequest()
     {
-        $request_post = http_build_query([
+        $request_post = [
             'grant_type'    => 'client_credentials',
             'client_id'     => '012345',
             'client_secret' => '012345678',
             'scope'         => 'notify.windows.com',
-        ]);
+        ];
+
+        $headers = [ 'Content-Type' => 'application/x-www-form-urlencoded' ];
+        $url     = 'https://login.live.com/accesstoken.srf';
+
+        $this->response->status_code = 200;
+        $this->response->body        = '{"access_token":"access_token"}';
 
         $this->expectFromConfig('012345', '012345678');
 
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('https://login.live.com/accesstoken.srf'), $this->equalTo($request_post))
-                   ->will($this->returnValue($this->curlresponse));
-
-        $this->curlresponse->expects($this->once())
-                           ->method('get_result')
-                           ->will($this->returnValue('{"access_token":"access_token"}'));
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($request_post))
+                   ->will($this->returnValue($this->response));
 
         $this->class->get_oauth_token();
     }
@@ -68,32 +70,27 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::get_oauth_token
      */
-    public function testGetOathRespondsFalseIfErrorCurl()
+    public function testGetOauthRespondsFalseIfRequestError()
     {
-        $request_post = http_build_query([
+        $request_post = [
             'grant_type'    => 'client_credentials',
             'client_id'     => '012345',
             'client_secret' => '012345678',
             'scope'         => 'notify.windows.com',
-        ]);
+        ];
 
         $this->expectFromConfig('012345', '012345678');
 
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('https://login.live.com/accesstoken.srf'), $this->equalTo($request_post))
-                   ->will($this->returnValue($this->curlresponse));
+        $headers = [ 'Content-Type' => 'application/x-www-form-urlencoded' ];
+        $url     = 'https://login.live.com/accesstoken.srf';
 
-        $this->curlresponse->expects($this->never())
-                           ->method('get_result');
-
-        $this->curlresponse->expects($this->once())
-                           ->method('__get')
-                           ->with($this->equalTo('error_number'))
-                           ->will($this->returnValue(5));
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($request_post))
+                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
 
         $this->logger->expects($this->once())
-                     ->method('error')
+                     ->method('warning')
                      ->with('Requesting token failed: No response');
 
         $this->assertFalse($this->class->get_oauth_token());
@@ -104,29 +101,30 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::get_oauth_token
      */
-    public function testGetOathRespondsFalseIfInvalidJSON()
+    public function testGetOauthRespondsFalseIfInvalidJSON()
     {
-        $request_post = http_build_query([
+        $request_post = [
             'grant_type'    => 'client_credentials',
             'client_id'     => '012345',
             'client_secret' => '012345678',
             'scope'         => 'notify.windows.com',
-        ]);
+        ];
 
         $this->expectFromConfig('012345', '012345678');
 
+        $headers = [ 'Content-Type' => 'application/x-www-form-urlencoded' ];
+        $url     = 'https://login.live.com/accesstoken.srf';
 
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('https://login.live.com/accesstoken.srf'), $this->equalTo($request_post))
-                   ->will($this->returnValue($this->curlresponse));
+        $this->response->status_code = 200;
+        $this->response->body        = 'HELLO I\'m an invalid JSON object';
 
-        $this->curlresponse->expects($this->once())
-                           ->method('get_result')
-                           ->will($this->returnValue('HELLO I\'m an invalid JSON object'));
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($request_post))
+                   ->will($this->returnValue($this->response));
 
         $this->logger->expects($this->once())
-                     ->method('error')
+                     ->method('warning')
                      ->with('Requesting token failed: Malformed JSON response');
 
         $this->assertFalse($this->class->get_oauth_token());
@@ -137,29 +135,30 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::get_oauth_token
      */
-    public function testGetOathRespondsFalseIfIncompleteJSON()
+    public function testGetOauthRespondsFalseIfIncompleteJSON()
     {
-        $request_post = http_build_query([
+        $request_post = [
             'grant_type'    => 'client_credentials',
             'client_id'     => '012345',
             'client_secret' => '012345678',
             'scope'         => 'notify.windows.com',
-        ]);
+        ];
 
         $this->expectFromConfig('012345', '012345678');
 
+        $headers = [ 'Content-Type' => 'application/x-www-form-urlencoded' ];
+        $url     = 'https://login.live.com/accesstoken.srf';
 
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('https://login.live.com/accesstoken.srf'), $this->equalTo($request_post))
-                   ->will($this->returnValue($this->curlresponse));
+        $this->response->status_code = 200;
+        $this->response->body        = '{"Message": "HELLO I\'m an invalid JSON object"}';
 
-        $this->curlresponse->expects($this->once())
-                           ->method('get_result')
-                           ->will($this->returnValue('{"Message": "HELLO I\'m an invalid JSON object"}'));
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($request_post))
+                   ->will($this->returnValue($this->response));
 
         $this->logger->expects($this->once())
-                     ->method('error')
+                     ->method('warning')
                      ->with('Requesting token failed: Not a valid JSON response');
 
         $this->assertFalse($this->class->get_oauth_token());
@@ -170,26 +169,27 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::get_oauth_token
      */
-    public function testGetOathRespondsCorrectly()
+    public function testGetOauthRespondsCorrectly()
     {
-        $request_post = http_build_query([
+        $request_post = [
             'grant_type'    => 'client_credentials',
             'client_id'     => '012345',
             'client_secret' => '012345678',
             'scope'         => 'notify.windows.com',
-        ]);
+        ];
 
         $this->expectFromConfig('012345', '012345678');
 
+        $headers = [ 'Content-Type' => 'application/x-www-form-urlencoded' ];
+        $url     = 'https://login.live.com/accesstoken.srf';
 
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('https://login.live.com/accesstoken.srf'), $this->equalTo($request_post))
-                   ->will($this->returnValue($this->curlresponse));
+        $this->response->status_code = 200;
+        $this->response->body        = '{"access_token":"access_token"}';
 
-        $this->curlresponse->expects($this->once())
-                           ->method('get_result')
-                           ->will($this->returnValue('{"access_token":"access_token"}'));
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($request_post))
+                   ->will($this->returnValue($this->response));
 
         $this->assertSame('access_token', $this->class->get_oauth_token());
     }

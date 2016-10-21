@@ -6,6 +6,7 @@
  * PHP Version 5.4
  *
  * @package    Lunr\Vortex\WNS
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Sean Molenaar <sean@m2mobi.com>
  * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -14,6 +15,8 @@
 namespace Lunr\Vortex\WNS;
 
 use Lunr\Vortex\PushNotificationDispatcherInterface;
+use Requests_Exception;
+use Requests_Response;
 
 /**
  * Windows Push Notification Dispatcher.
@@ -57,22 +60,16 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
     private $type;
 
     /**
-     * Shared instance of the Curl class.
-     * @var \Lunr\Network\Curl
+     * Shared instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    private $curl;
+    private $http;
 
     /**
      * Shared instance of a Logger class.
      * @var \Psr\Log\LoggerInterface
      */
     private $logger;
-
-    /**
-     * Shared instance of a header class.
-     * @var \http\Header
-     */
-    private $header;
 
     /**
      * The URL to use to request an OAuth token.
@@ -89,18 +86,16 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
     /**
      * Constructor.
      *
-     * @param \Lunr\Network\Curl       $curl   Shared instance of the Curl class.
+     * @param \Requests_Session        $http   Shared instance of the Requests_Session class.
      * @param \Psr\Log\LoggerInterface $logger Shared instance of a Logger.
-     * @param \http\Header             $header Shared instance of a Header class.
      */
-    public function __construct($curl, $logger, $header)
+    public function __construct($http, $logger)
     {
         $this->endpoint      = '';
         $this->payload       = '';
-        $this->curl          = $curl;
+        $this->http          = $http;
         $this->logger        = $logger;
         $this->type          = WNSType::RAW;
-        $this->header        = $header;
         $this->client_id     = NULL;
         $this->client_secret = NULL;
         $this->oauth_token   = NULL;
@@ -114,9 +109,8 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
         unset($this->endpoint);
         unset($this->payload);
         unset($this->type);
-        unset($this->curl);
+        unset($this->http);
         unset($this->logger);
-        unset($this->header);
         unset($this->client_id);
         unset($this->client_secret);
         unset($this->oauth_token);
@@ -131,34 +125,49 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
     {
         if(!isset($this->oauth_token))
         {
-            $this->logger->warning('Tried to push notification to {endpoint} but wasn\'t authenticated.', ['endpoint' => $this->endpoint]);
-            return;
+            $this->logger->warning('Tried to push notification to {endpoint} but wasn\'t authenticated.', [ 'endpoint' => $this->endpoint ]);
+            $response = $this->get_new_response_object_for_failed_request();
+
+            $this->endpoint = '';
+            $this->payload  = '';
+            $this->type     = WNSType::RAW;
+
+            return new WNSResponse($response, $this->logger);
         }
 
-        $this->curl->set_option('CURLOPT_HEADER', TRUE);
-        $this->curl->set_http_headers([
-            'X-WNS-Type: wns/' . $this->type,
-            'Accept: application/*',
-            'Authorization: Bearer ' . $this->oauth_token,
-            'X-WNS-RequestForStatus: true',
-        ]);
+        $headers = [
+            'X-WNS-Type' => 'wns/' . $this->type,
+            'Accept' => 'application/*',
+            'Authorization' => 'Bearer ' . $this->oauth_token,
+            'X-WNS-RequestForStatus' => 'true',
+        ];
 
         if ($this->type === WNSType::RAW)
         {
-            $this->curl->set_http_header('Content-Type: application/octet-stream');
+            $headers['Content-Type'] = 'application/octet-stream';
         }
         else
         {
-            $this->curl->set_http_header('Content-Type: text/xml');
+            $headers['Content-Type'] = 'text/xml';
         }
 
-        $response = $this->curl->post_request($this->endpoint, $this->payload);
+        try
+        {
+            $response = $this->http->post($this->endpoint, $headers, $this->payload);
+        }
+        catch(Requests_Exception $e)
+        {
+            $response = $this->get_new_response_object_for_failed_request();
+            $context  = [ 'error' => $e->getMessage(), 'endpoint' => $this->endpoint ];
+
+            $this->logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
+        }
 
         $this->endpoint = '';
         $this->payload  = '';
         $this->type     = WNSType::RAW;
 
-        return new WNSResponse($response, $this->logger, $this->header);
+        return new WNSResponse($response, $this->logger);
     }
 
     /**
@@ -242,7 +251,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
     /**
      * Get an oath token from the microsoft webservice.
      *
-     * @return string|boolean the Curl response or FALSE if it failed.
+     * @return string|boolean the oauth access token or FALSE if it failed.
      */
     public function get_oauth_token()
     {
@@ -253,26 +262,29 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
             'scope'         => self::NOTIFICATION_SCOPE,
         ];
 
-        $this->curl->set_http_header('Content-Type: application/x-www-form-urlencoded');
+        $headers = [ 'Content-Type' => 'application/x-www-form-urlencoded' ];
 
-        $http_response = $this->curl->post_request(self::TOKEN_URL, http_build_query($request_post));
-
-        if($http_response->error_number > 0)
+        try
         {
-            $this->logger->error('Requesting token failed: No response');
+            $response = $this->http->post(self::TOKEN_URL, $headers, $request_post);
+        }
+        catch(Requests_Exception $e)
+        {
+            $this->logger->warning('Requesting token failed: No response');
             return FALSE;
         }
 
-        $response_object = json_decode($http_response->get_result());
+        $response_object = json_decode($response->body);
+
         if(!(json_last_error() === JSON_ERROR_NONE))
         {
-            $this->logger->error('Requesting token failed: Malformed JSON response');
+            $this->logger->warning('Requesting token failed: Malformed JSON response');
             return FALSE;
         }
 
         if(!property_exists($response_object, 'access_token'))
         {
-            $this->logger->error('Requesting token failed: Not a valid JSON response');
+            $this->logger->warning('Requesting token failed: Not a valid JSON response');
             return FALSE;
         }
 
@@ -289,6 +301,20 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
     public function set_oauth_token($token)
     {
         $this->oauth_token = $token;
+    }
+
+    /**
+     * Get a Requests_Response object for a failed request.
+     *
+     * @return \Requests_Response $http_response New instance of a Requests_Response object.
+     */
+    protected function get_new_response_object_for_failed_request()
+    {
+        $http_response = new Requests_Response();
+
+        $http_response->url = $this->endpoint;
+
+        return $http_response;
     }
 
 }

@@ -1,6 +1,0 @@
-HTTP/1.1 200 OK
-Date: 2013-07-05
-X-WNS-Status: received
-X-WNS-DeviceConnectionStatus: connected
-X-WNS-Error-Description: Some Error
-X-WNS-Debug-Trace: Some Trace

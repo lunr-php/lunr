@@ -43,11 +43,11 @@ class WNSDispatcherBaseTest extends WNSDispatcherTest
     }
 
     /**
-     * Test that the passed Curl object is set correctly.
+     * Test that the passed Requesys_Session object is set correctly.
      */
-    public function testCurlIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly()
     {
-        $this->assertSame($this->curl, $this->get_reflection_property_value('curl'));
+        $this->assertSame($this->http, $this->get_reflection_property_value('http'));
     }
 
     /**
@@ -59,11 +59,20 @@ class WNSDispatcherBaseTest extends WNSDispatcherTest
     }
 
     /**
-     * Test that the passed Header object is set correctly.
+     * Test get_new_response_object_for_failed_request().
+     *
+     * @covers Lunr\Vortex\WNS\WNSDispatcher::get_new_response_object_for_failed_request
      */
-    public function testHeaderIsSetCorrectly()
+    public function testGetNewResponseObjectForFailedRequest()
     {
-        $this->assertSame($this->header, $this->get_reflection_property_value('header'));
+        $this->set_reflection_property_value('endpoint', 'http://localhost/');
+
+        $method = $this->get_accessible_reflection_method('get_new_response_object_for_failed_request');
+
+        $result = $method->invoke($this->class);
+
+        $this->assertInstanceOf('\Requests_Response', $result);
+        $this->assertEquals('http://localhost/', $result->url);
     }
 
 }

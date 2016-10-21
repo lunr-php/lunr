@@ -60,7 +60,7 @@ class WNSResponseErrorTest extends WNSResponseTest
      */
     public function testHttpCodeIsSetCorrectly()
     {
-        $this->assertEquals(404, $this->get_reflection_property_value('http_code'));
+        $this->assertFalse($this->get_reflection_property_value('http_code'));
     }
 
     /**

@@ -29,10 +29,10 @@ abstract class WNSDispatcherTest extends LunrBaseTest
 {
 
     /**
-     * Mock instance of the Curl class.
-     * @var \Lunr\Network\Curl
+     * Mock instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    protected $curl;
+    protected $http;
 
     /**
      * Mock instance of a Logger class.
@@ -41,35 +41,25 @@ abstract class WNSDispatcherTest extends LunrBaseTest
     protected $logger;
 
     /**
-     * Mock instance of a Header class.
-     * @var \http\Header
-     */
-    protected $header;
-
-    /**
      * Mock instance of the Configuration class.
      * @var \Lunr\Core\Configuration
      */
     protected $config;
 
     /**
-     * Mock instance of the CurlResponse class.
-     * @var \Lunr\Network\CurlResponse
+     * Mock instance of the Requests_Response class.
+     * @var \Requests_Response
      */
-    protected $curlresponse;
+    protected $response;
 
     /**
      * Testcase Constructor.
      */
     public function setUp()
     {
-        $this->curl = $this->getMockBuilder('Lunr\Network\Curl')
-                           ->disableOriginalConstructor()
-                           ->getMock();
+        $this->http = $this->getMock('Requests_Session');
 
-        $this->curlresponse = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                                   ->disableOriginalConstructor()
-                                   ->getMock();
+        $this->response = $this->getMock('Requests_Response');
 
         $this->config = $this->getMockBuilder('Lunr\Core\Configuration')
                              ->disableOriginalConstructor()
@@ -77,9 +67,7 @@ abstract class WNSDispatcherTest extends LunrBaseTest
 
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
-        $this->header = $this->getMock('http\Header');
-
-        $this->class = new WNSDispatcher($this->curl, $this->logger, $this->header, $this->config);
+        $this->class = new WNSDispatcher($this->http, $this->logger, $this->config);
 
         $this->reflection = new ReflectionClass('Lunr\Vortex\WNS\WNSDispatcher');
     }
@@ -91,11 +79,10 @@ abstract class WNSDispatcherTest extends LunrBaseTest
     {
         unset($this->class);
         unset($this->reflection);
-        unset($this->curl);
+        unset($this->http);
         unset($this->logger);
-        unset($this->header);
         unset($this->config);
-        unset($this->curlresponse);
+        unset($this->response);
     }
 
     /**

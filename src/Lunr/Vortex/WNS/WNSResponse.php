@@ -6,6 +6,7 @@
  * PHP Version 5.4
  *
  * @package    Lunr\Vortex\WNS
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Sean Molenaar <sean@m2mobi.com>
  * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -48,25 +49,21 @@ class WNSResponse
     /**
      * Constructor.
      *
-     * @param \Lunr\Network\CurlResponse $response Curl Response object.
-     * @param \Psr\Log\LoggerInterface   $logger   Shared instance of a Logger.
-     * @param \http\Header               $header   Instance of a Header class.
+     * @param \Requests_Response       $response Requests_Response object.
+     * @param \Psr\Log\LoggerInterface $logger   Shared instance of a Logger.
      */
-    public function __construct($response, $logger, $header)
+    public function __construct($response, $logger)
     {
-        $this->http_code = $response->http_code;
+        $this->http_code = $response->status_code;
         $this->endpoint  = $response->url;
 
-        if ($response->get_network_error_number() !== 0)
+        if ($this->http_code === FALSE)
         {
             $this->status = PushNotificationStatus::ERROR;
-
-            $context = [ 'error' => $response->get_network_error_message(), 'endpoint' => $response->url ];
-            $logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
         }
         else
         {
-            $this->parse_headers($header, $response->get_result(), $response->header_size);
+            $this->headers = $response->headers;
             $this->set_status($response->url, $logger);
         }
     }
@@ -79,20 +76,6 @@ class WNSResponse
         unset($this->headers);
         unset($this->http_code);
         unset($this->status);
-    }
-
-    /**
-     * Parse response header information.
-     *
-     * @param \http\Header $header      Instance of a Header class.
-     * @param String       $result      Response result
-     * @param Integer      $header_size Size of the header
-     *
-     * @return void
-     */
-    private function parse_headers($header, $result, $header_size)
-    {
-        $this->headers = $header->parse(substr($result, 0, $header_size));
     }
 
     /**
