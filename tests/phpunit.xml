@@ -193,14 +193,6 @@
             <file>../src/Lunr/L10n/Tests/PHPL10nProviderLangTest.php</file>
             <file>../src/Lunr/L10n/Tests/PHPL10nProviderNlangTest.php</file>
         </testsuite>
-        <testsuite name="Network">
-            <file>../src/Lunr/Network/Tests/CurlBaseTest.php</file>
-            <file>../src/Lunr/Network/Tests/CurlSetGetTest.php</file>
-            <file>../src/Lunr/Network/Tests/CurlExecuteTest.php</file>
-            <file>../src/Lunr/Network/Tests/CurlRequestTest.php</file>
-            <file>../src/Lunr/Network/Tests/CurlResponseBaseTest.php</file>
-            <file>../src/Lunr/Network/Tests/CurlResponseSuccessTest.php</file>
-        </testsuite>
         <testsuite name="Shadow">
             <file>../src/Lunr/Shadow/Tests/ConsoleTest.php</file>
             <file>../src/Lunr/Shadow/Tests/LunrCliParserBaseTest.php</file>
@@ -375,7 +367,6 @@
                 <directory>../src/Lunr/Gravity/Database/SQLite3/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Filesystem/Tests/</directory>
                 <directory>../src/Lunr/L10n/Tests/</directory>
-                <directory>../src/Lunr/Network/Tests/</directory>
                 <directory>../src/Lunr/Shadow/Tests/</directory>
                 <directory>../src/Lunr/Spark/Tests/</directory>
                 <directory>../src/Lunr/Spark/Contentful/Tests/</directory>
@@ -383,7 +374,6 @@
                 <directory>../src/Lunr/Spark/Twitter/Tests/</directory>
                 <directory>../src/Lunr/Spawn/Tests/</directory>
                 <directory>../src/Lunr/Sphere/Tests/</directory>
-                <directory>../src/Lunr/Surface/Tests/</directory>
                 <directory>../src/Lunr/Ticks/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Tests/</directory>
                 <directory>../src/Lunr/Vortex/APNS/Tests/</directory>
