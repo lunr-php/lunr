@@ -22,13 +22,13 @@ class Search extends Api
     /**
      * Constructor.
      *
-     * @param CentralAuthenticationStore $cas    Shared instance of the CentralAuthenticationStore class.
-     * @param LoggerInterface            $logger Shared instance of a Logger class.
-     * @param Curl                       $curl   Shared instance of the Curl class.
+     * @param \Lunr\Spark\CentralAuthenticationStore $cas    Shared instance of the credentials store
+     * @param \Psr\Log\LoggerInterface               $logger Shared instance of a Logger class.
+     * @param \Requests_Session                      $http   Shared instance of the Requests_Session class.
      */
-    public function __construct($cas, $logger, $curl)
+    public function __construct($cas, $logger, $http)
     {
-        parent::__construct($cas, $logger, $curl);
+        parent::__construct($cas, $logger, $http);
     }
 
     /**
@@ -48,18 +48,15 @@ class Search extends Api
      */
     public function search_tweets($params)
     {
-        $header = [
-            'Host: api.twitter.com',
-            'Authorization: Bearer ' . $this->bearer_token,
-            'Content-Type: application/x-www-form-urlencoded;charset=UTF-8',
+        $headers = [
+            'Host'          => 'api.twitter.com',
+            'Authorization' => 'Bearer ' . $this->bearer_token,
+            'Content-Type'  => 'application/x-www-form-urlencoded;charset=UTF-8',
         ];
-
-        $this->curl->set_http_headers($header);
-        $this->curl->set_option('CURLOPT_ENCODING', 'gzip');
 
         $url = Domain::API . '1.1/search/tweets.json';
 
-        $results = $this->get_json_results($url, $params);
+        $results = $this->get_json_results($url, $headers, $params);
 
         if (empty($results) === TRUE)
         {

@@ -13,9 +13,8 @@
 
 namespace Lunr\Spark\Twitter\Tests;
 
-use Lunr\Spark\Twitter\Api;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use Requests_Exception_HTTP_400;
+use Requests_Exception;
 
 /**
  * This class contains the tests for the Api.
@@ -26,77 +25,47 @@ class ApiGetJsonResultsTest extends ApiTest
 {
 
     /**
-     * Test that get_josn_results() does a correct get_request without params.
+     * Test that get_json_results() does a correct request.
      *
      * @param String $http_method HTTP method to use for the request.
      *
-     * @dataProvider getMethodProvider
+     * @dataProvider requestParamProvider
      * @covers       Lunr\Spark\Twitter\Api::get_json_results
      */
-    public function testGetJsonResultsMakesGetRequestWithoutParams($http_method)
+    public function testGetJsonResultsCallsRequest(...$arguments)
     {
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $count = count($arguments);
+
+        $options           = [];
+        $http_method_upper = 'GET';
+        $params            = [];
+        $headers           = [];
+
+        switch ($count)
+        {
+            case 5:
+                $options = $arguments[4];
+            case 4:
+                $http_method_upper = strtoupper($arguments[3]);
+            case 3:
+                $params = $arguments[2];
+            case 2:
+                $headers = $arguments[1];
+            case 1:
+            default:
+                $url = $arguments[0];
+        }
+
+        $options['verify'] = TRUE;
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($params), $this->equalTo($http_method_upper), $this->equalTo($options))
                    ->will($this->returnValue($this->response));
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
-        $method->invokeArgs($this->class, [ 'http://localhost', [], $http_method ]);
-    }
-
-    /**
-     * Test that get_json_results() does a correct get_request with params.
-     *
-     * @param String $http_method HTTP method to use for the request.
-     *
-     * @dataProvider getMethodProvider
-     * @covers       Lunr\Spark\Twitter\Api::get_json_results
-     */
-    public function testGetJsonResultsMakesGetRequestWithParams($http_method)
-    {
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?param1=1&param2=2'))
-                   ->will($this->returnValue($this->response));
-
-        $method = $this->get_accessible_reflection_method('get_json_results');
-
-        $method->invokeArgs($this->class, [ 'http://localhost', [ 'param1' => 1, 'param2' => 2 ], $http_method ]);
-    }
-
-    /**
-     * Test that get_json_results() does a correct post_request without params.
-     *
-     * @covers Lunr\Spark\Twitter\Api::get_json_results
-     */
-    public function testGetJsonResultsMakesPostRequestWithoutParams()
-    {
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('http://localhost'), $this->equalTo([]))
-                   ->will($this->returnValue($this->response));
-
-        $method = $this->get_accessible_reflection_method('get_json_results');
-
-        $method->invokeArgs($this->class, [ 'http://localhost', [], 'POST' ]);
-    }
-
-    /**
-     * Test that get_json_results() does a correct post_request with params.
-     *
-     * @covers Lunr\Spark\Twitter\Api::get_json_results
-     */
-    public function testGetJsonResultsMakesPostRequestWithParams()
-    {
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('http://localhost'), $this->equalTo([ 'param1' => 1, 'param2' => 2 ]))
-                   ->will($this->returnValue($this->response));
-
-        $method = $this->get_accessible_reflection_method('get_json_results');
-
-        $method->invokeArgs($this->class, [ 'http://localhost', [ 'param1' => 1, 'param2' => 2 ], 'POST' ]);
+        $method->invokeArgs($this->class, $arguments);
     }
 
     /**
@@ -115,25 +84,56 @@ class ApiGetJsonResultsTest extends ApiTest
             ],
         ];
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $url     = 'http://localhost';
+        $options = [ 'verify' => TRUE ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'), $this->equalTo($options))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(400));
+        $this->response->status_code = 400;
+        $this->response->body        = json_encode($output);
+        $this->response->url         = $url;
 
         $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue(json_encode($output)));
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400('Invalid Input!')));
 
         $context = [ 'message' => 'Message', 'code' => 'Code', 'request' => 'http://localhost' ];
 
         $this->logger->expects($this->once())
-                     ->method('error')
+                     ->method('warning')
                      ->with($this->equalTo('Twitter API Request ({request}) failed, ({code}): {message}'), $this->equalTo($context));
+
+        $method = $this->get_accessible_reflection_method('get_json_results');
+
+        $method->invokeArgs($this->class, [ 'http://localhost' ]);
+    }
+
+    /**
+     * Test that get_json_results() throws an error if the request failed.
+     *
+     * @covers Lunr\Spark\Twitter\Api::get_json_results
+     */
+    public function testGetJsonResultsThrowsErrorIfRequestFailed()
+    {
+        $url     = 'http://localhost';
+        $options = [ 'verify' => TRUE ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'), $this->equalTo($options))
+                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+
+        $this->response->expects($this->never())
+                       ->method('throw_for_status');
+
+        $context = [ 'message' => 'Network error!', 'request' => 'http://localhost' ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with($this->equalTo('Twitter API Request ({request}) failed: {message}'), $this->equalTo($context));
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -147,18 +147,23 @@ class ApiGetJsonResultsTest extends ApiTest
      */
     public function testGetJsonResultsDoesNotThrowErrorIfRequestSuccessful()
     {
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $url     = 'http://localhost';
+        $options = [ 'verify' => TRUE ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'), $this->equalTo($options))
                    ->will($this->returnValue($this->response));
 
+        $this->response->status_code = 200;
+        $this->response->body        = '{}';
+        $this->response->url         = $url;
+
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
+                       ->method('throw_for_status');
 
         $this->logger->expects($this->never())
-                     ->method('error');
+                     ->method('warning');
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -172,18 +177,65 @@ class ApiGetJsonResultsTest extends ApiTest
      */
     public function testGetJsonResultsReturnsEmptyArrayOnRequestError()
     {
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $output = [
+            'errors' => [
+                [
+                    'message' => 'Message',
+                    'code'    => 'Code',
+                ],
+            ],
+        ];
+
+        $url     = 'http://localhost';
+        $options = [ 'verify' => TRUE ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'), $this->equalTo($options))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(400));
+        $this->response->status_code = 400;
+        $this->response->body        = json_encode($output);
+        $this->response->url         = $url;
 
         $this->response->expects($this->once())
-                       ->method('get_result');
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400('Invalid Input!')));
+
+        $context = [ 'message' => 'Message', 'code' => 'Code', 'request' => 'http://localhost' ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with($this->equalTo('Twitter API Request ({request}) failed, ({code}): {message}'), $this->equalTo($context));
+
+        $method = $this->get_accessible_reflection_method('get_json_results');
+
+        $this->assertEmpty($method->invokeArgs($this->class, [ 'http://localhost' ]));
+    }
+
+    /**
+     * Test that get_json_results() returns an empty array if the request failed.
+     *
+     * @covers Lunr\Spark\Twitter\Api::get_json_results
+     */
+    public function testGetJsonResultsReturnsEmptyArrayIfRequestFailed()
+    {
+        $url     = 'http://localhost';
+        $options = [ 'verify' => TRUE ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'), $this->equalTo($options))
+                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+
+        $this->response->expects($this->never())
+                       ->method('throw_for_status');
+
+        $context = [ 'message' => 'Network error!', 'request' => 'http://localhost' ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with($this->equalTo('Twitter API Request ({request}) failed: {message}'), $this->equalTo($context));
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -202,19 +254,23 @@ class ApiGetJsonResultsTest extends ApiTest
             'param2' => 2,
         ];
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $url     = 'http://localhost';
+        $options = [ 'verify' => TRUE ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'), $this->equalTo($options))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
+        $this->response->status_code = 200;
+        $this->response->body        = json_encode($output);
+        $this->response->url         = $url;
 
         $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue(json_encode($output)));
+                       ->method('throw_for_status');
+
+        $this->logger->expects($this->never())
+                     ->method('warning');
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 

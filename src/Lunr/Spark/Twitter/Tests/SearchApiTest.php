@@ -7,11 +7,15 @@
  *
  * @package    Lunr\Spark\Twitter
  * @author     Dinos Theodorou <dinos@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Spark\Twitter\Tests;
+
+use Requests_Exception_HTTP_400;
+use Requests_Exception;
 
 /**
  * This class contains the tests for the Search.
@@ -22,10 +26,10 @@ class SearchApiTest extends SearchTest
 {
 
     /**
-     * A sample curl header array
+     * A sample http header array
      * @var array
      */
-    protected $header;
+    protected $headers;
 
     /**
      * SearchApiTest constructor.
@@ -34,10 +38,10 @@ class SearchApiTest extends SearchTest
     {
         parent::setUp();
 
-        $this->header = [
-            'Host: api.twitter.com',
-            'Authorization: Bearer BEARER TOKEN',
-            'Content-Type: application/x-www-form-urlencoded;charset=UTF-8',
+        $this->headers = [
+            'Host' => 'api.twitter.com',
+            'Authorization' => 'Bearer BEARER TOKEN',
+            'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
         ];
     }
 
@@ -48,38 +52,65 @@ class SearchApiTest extends SearchTest
      */
     public function testSearchTweetsReturnsEmptyArrayOnError()
     {
-        $url    = 'https://api.twitter.com/1.1/search/tweets.json';
+        $url = 'https://api.twitter.com/1.1/search/tweets.json';
+
         $params = [
             'count'       => 5,
             'result_type' => 'recent',
             'q'           => '#testing',
         ];
 
+        $options = [ 'verify' => TRUE ];
+
         $this->cas->expects($this->once())
                   ->method('get')
                   ->with($this->equalTo('twitter'), $this->equalTo('bearer_token'))
                   ->will($this->returnValue('BEARER TOKEN'));
 
-        $this->curl->expects($this->once())
-                   ->method('set_option')
-                   ->with($this->equalTo('CURLOPT_ENCODING'), $this->equalTo('gzip'));
-
-        $this->curl->expects($this->once())
-                   ->method('set_http_headers')
-                   ->with($this->equalTo($this->header));
-
-        $this->curl->expects($this->once())
-                   ->method('get_request')
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('GET'), $this->equalTo($options))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue('{"errors":[{"message":"Test twitter error","code":34}]}'));
+        $this->response->status_code = 400;
+        $this->response->body        = '{"errors":[{"message":"Test twitter error","code":34}]}';
 
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(400));
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400('Invalid Input!')));
+
+        $this->assertArrayEmpty($this->class->search_tweets($params));
+    }
+
+    /**
+     * Test that search_tweets() returns an empty array on request failure.
+     *
+     * @covers Lunr\Spark\Twitter\Search::search_tweets
+     */
+    public function testSearchTweetsReturnsEmptyArrayOnFailure()
+    {
+        $url = 'https://api.twitter.com/1.1/search/tweets.json';
+
+        $params = [
+            'count'       => 5,
+            'result_type' => 'recent',
+            'q'           => '#testing',
+        ];
+
+        $options = [ 'verify' => TRUE ];
+
+        $this->cas->expects($this->once())
+                  ->method('get')
+                  ->with($this->equalTo('twitter'), $this->equalTo('bearer_token'))
+                  ->will($this->returnValue('BEARER TOKEN'));
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('GET'), $this->equalTo($options))
+                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+
+        $this->response->expects($this->never())
+                       ->method('throw_for_status');
 
         $this->assertArrayEmpty($this->class->search_tweets($params));
     }
@@ -91,38 +122,31 @@ class SearchApiTest extends SearchTest
      */
     public function testSearchTweetsReturnsResultTweets()
     {
-        $url    = 'https://api.twitter.com/1.1/search/tweets.json';
+        $url = 'https://api.twitter.com/1.1/search/tweets.json';
+
         $params = [
             'count'       => 5,
             'result_type' => 'recent',
             'q'           => '#testing',
         ];
 
+        $options = [ 'verify' => TRUE ];
+
         $this->cas->expects($this->once())
                   ->method('get')
                   ->with($this->equalTo('twitter'), $this->equalTo('bearer_token'))
                   ->will($this->returnValue('BEARER TOKEN'));
 
-        $this->curl->expects($this->once())
-                   ->method('set_option')
-                   ->with($this->equalTo('CURLOPT_ENCODING'), $this->equalTo('gzip'));
-
-        $this->curl->expects($this->once())
-                   ->method('set_http_headers')
-                   ->with($this->equalTo($this->header));
-
-        $this->curl->expects($this->once())
-                   ->method('get_request')
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('GET'), $this->equalTo($options))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue('{"statuses":[{"tweet":"Not a real tweet property and value"}]}'));
+        $this->response->status_code = 200;
+        $this->response->body        = '{"statuses":[{"tweet":"Not a real tweet property and value"}]}';
 
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
+                       ->method('throw_for_status');
 
         $result = $this->class->search_tweets($params);
 

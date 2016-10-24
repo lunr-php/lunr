@@ -34,11 +34,11 @@ class AuthenticationBaseTest extends AuthenticationTest
     }
 
     /**
-     * Test that the Curl class is passed correctly.
+     * Test that the Requests_Session class is passed correctly.
      */
-    public function testCurlIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly()
     {
-        $this->assertPropertySame('curl', $this->curl);
+        $this->assertPropertySame('http', $this->http);
     }
 
 }

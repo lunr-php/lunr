@@ -22,13 +22,13 @@ class Authentication extends Api
     /**
      * Constructor.
      *
-     * @param CentralAuthenticationStore $cas    Shared instance of the CentralAuthenticationStore class.
-     * @param LoggerInterface            $logger Shared instance of a Logger class.
-     * @param Curl                       $curl   Shared instance of the Curl class.
+     * @param \Lunr\Spark\CentralAuthenticationStore $cas    Shared instance of the credentials store
+     * @param \Psr\Log\LoggerInterface               $logger Shared instance of a Logger class.
+     * @param \Requests_Session                      $http   Shared instance of the Requests_Session class.
      */
-    public function __construct($cas, $logger, $curl)
+    public function __construct($cas, $logger, $http)
     {
-        parent::__construct($cas, $logger, $curl);
+        parent::__construct($cas, $logger, $http);
     }
 
     /**
@@ -50,25 +50,23 @@ class Authentication extends Api
      */
     public function get_bearer_token()
     {
-        $header = [
+        $headers = [
             'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
             'User-Agent'   => $this->user_agent,
         ];
 
         $options = [
-            'CURLOPT_USERPWD'        => $this->consumer_key . ':' . $this->consumer_secret,
-            'CURLOPT_VERBOSE'        => TRUE,
-            'CURLOPT_SSL_VERIFYPEER' => TRUE,
+            'auth' => [
+                $this->consumer_key,
+                $this->consumer_secret,
+            ],
         ];
 
         $params = ['grant_type' => 'client_credentials'];
 
-        $this->curl->set_http_headers($header);
-        $this->curl->set_options($options);
-
         $url = Domain::API . 'oauth2/token';
 
-        $result = $this->get_json_results($url, $params, 'post');
+        $result = $this->get_json_results($url, $headers, $params, 'POST', $options);
 
         if (empty($result) === TRUE)
         {

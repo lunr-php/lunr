@@ -13,6 +13,9 @@
 
 namespace Lunr\Spark\Twitter;
 
+use Requests_Exception;
+use Requests_Exception_HTTP;
+
 /**
  * Low level Facebook API methods for Spark
  */
@@ -21,34 +24,34 @@ abstract class Api
 
     /**
      * Shared instance of the CentralAuthenticationStore
-     * @var CentralAuthenticationStore
+     * @var \Lunr\Spark\CentralAuthenticationStore
      */
     protected $cas;
 
     /**
      * Shared instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
     /**
-     * Shared instance of the Curl class.
-     * @var Curl
+     * Shared instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    protected $curl;
+    protected $http;
 
     /**
      * Constructor.
      *
-     * @param CentralAuthenticationStore $cas    Shared instance of the credentials store
-     * @param LoggerInterface            $logger Shared instance of a Logger class.
-     * @param Curl                       $curl   Shared instance of the Curl class.
+     * @param \Lunr\Spark\CentralAuthenticationStore $cas    Shared instance of the credentials store
+     * @param \Psr\Log\LoggerInterface               $logger Shared instance of a Logger class.
+     * @param \Requests_Session                      $http   Shared instance of the Requests_Session class.
      */
-    public function __construct($cas, $logger, $curl)
+    public function __construct($cas, $logger, $http)
     {
         $this->cas    = $cas;
         $this->logger = $logger;
-        $this->curl   = $curl;
+        $this->http   = $http;
     }
 
     /**
@@ -58,7 +61,7 @@ abstract class Api
     {
         unset($this->cas);
         unset($this->logger);
-        unset($this->curl);
+        unset($this->http);
     }
 
     /**
@@ -108,30 +111,48 @@ abstract class Api
     /**
      * Fetch and parse results as though they were a query string.
      *
-     * @param String $url    API URL
-     * @param Array  $params Array of parameters for the API request
-     * @param String $method Request method to use, either 'get' or 'post'
+     * @param String $url     API URL
+     * @param Array  $headers Array of HTTP headers to send with the request
+     * @param Array  $params  Array of parameters for the API request
+     * @param String $method  Request method to use
+     * @param Array  $options Array of config options for the request library
      *
      * @return Array $result Array of return values
      */
-    protected function get_json_results($url, $params = [], $method = 'get')
+    protected function get_json_results($url, $headers = [], $params = [], $method = 'GET', $options = [])
     {
-        if (strtolower($method) === 'get')
-        {
-            $response = $this->curl->get_request($url . '?' . http_build_query($params));
-        }
-        else
-        {
-            $response = $this->curl->post_request($url, $params);
-        }
+        // Use the system trust store
+        $options['verify'] = TRUE;
 
-        $result = json_decode($response->get_result(), TRUE);
+        try
+        {
+            $response = $this->http->request($url, $headers, $params, strtoupper($method), $options);
 
-        if ($response->http_code !== 200)
+            $result = json_decode($response->body, TRUE);
+
+            $response->throw_for_status();
+        }
+        catch(Requests_Exception_HTTP $e)
         {
             $error   = $result['errors'][0];
-            $context = [ 'message' => $error['message'], 'code' => $error['code'], 'request' => $url ];
-            $this->logger->error('Twitter API Request ({request}) failed, ({code}): {message}', $context);
+            $context = [
+                'message' => $error['message'],
+                'code'    => $error['code'],
+                'request' => $response->url
+            ];
+
+            $this->logger->warning('Twitter API Request ({request}) failed, ({code}): {message}', $context);
+
+            $result = '';
+        }
+        catch (Requests_Exception $e)
+        {
+            $context = [
+                'message' => $e->getMessage(),
+                'request' => $url
+            ];
+
+            $this->logger->warning('Twitter API Request ({request}) failed: {message}', $context);
 
             $result = '';
         }

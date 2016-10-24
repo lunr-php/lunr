@@ -7,15 +7,15 @@
  *
  * @package    Lunr\Spark\Twitter
  * @author     Dinos Theodorou <dinos@m2mobi.com>
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2016, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Spark\Twitter\Tests;
 
-use Lunr\Spark\Twitter\Authentication;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use Requests_Exception;
+use Requests_Exception_HTTP_400;
 
 /**
  * This class contains the tests for the Authentication.
@@ -25,16 +25,16 @@ use ReflectionClass;
 class AuthenticationApiTest extends AuthenticationTest
 {
     /**
-     * A sample curl options array
+     * A sample http options array
      * @var array
      */
     protected $options;
 
     /**
-     * A sample curl header array
+     * A sample http header array
      * @var array
      */
-    protected $header;
+    protected $headers;
 
     /**
      * AuthenticationApiTest constructor.
@@ -44,12 +44,14 @@ class AuthenticationApiTest extends AuthenticationTest
         parent::setUp();
 
         $this->options = [
-            'CURLOPT_USERPWD'        => 'Key:Secret',
-            'CURLOPT_VERBOSE'        => TRUE,
-            'CURLOPT_SSL_VERIFYPEER' => TRUE,
+            'verify' => TRUE,
+            'auth' => [
+                'Key',
+                'Secret'
+            ],
         ];
 
-        $this->header = [
+        $this->headers = [
             'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
             'User-Agent'   => 'lunr.nl',
         ];
@@ -63,7 +65,7 @@ class AuthenticationApiTest extends AuthenticationTest
     public function testGetBearerTokenReturnsErrorStringOnError()
     {
         $url    = 'https://api.twitter.com/oauth2/token';
-        $params = 'grant_type=client_credentials';
+        $params = [ 'grant_type' => 'client_credentials' ];
 
         $this->cas->expects($this->at(0))
                   ->method('get')
@@ -80,26 +82,53 @@ class AuthenticationApiTest extends AuthenticationTest
                   ->with($this->equalTo('twitter'), $this->equalTo('consumer_secret'))
                   ->will($this->returnValue('Secret'));
 
-        $this->curl->expects($this->once())
-                   ->method('set_options')
-                   ->with($this->equalTo($this->options));
-
-        $this->curl->expects($this->once())
-                   ->method('set_http_headers')
-                   ->with($this->equalTo($this->header));
-
-        $this->curl->expects($this->once())
-                   ->method('post_request')
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('POST'), $this->equalTo($this->options))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue('{"errors":[{"message":"Test twitter error","code":34}]}'));
+        $this->response->status_code = 400;
+        $this->response->body        = '{"errors":[{"message":"Test twitter error","code":34}]}';
 
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(400));
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400('Invalid Input!')));
+
+        $this->assertSame('', $this->class->get_bearer_token());
+    }
+
+    /**
+     * Test that get_bearer_token() returns an empty string on request failure.
+     *
+     * @covers Lunr\Spark\Twitter\Authentication::get_bearer_token
+     */
+    public function testGetBearerTokenReturnsErrorStringOnFailure()
+    {
+        $url    = 'https://api.twitter.com/oauth2/token';
+        $params = [ 'grant_type' => 'client_credentials' ];
+
+        $this->cas->expects($this->at(0))
+                  ->method('get')
+                  ->with($this->equalTo('twitter'), $this->equalTo('user_agent'))
+                  ->will($this->returnValue('lunr.nl'));
+
+        $this->cas->expects($this->at(1))
+                  ->method('get')
+                  ->with($this->equalTo('twitter'), $this->equalTo('consumer_key'))
+                  ->will($this->returnValue('Key'));
+
+        $this->cas->expects($this->at(2))
+                  ->method('get')
+                  ->with($this->equalTo('twitter'), $this->equalTo('consumer_secret'))
+                  ->will($this->returnValue('Secret'));
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('POST'), $this->equalTo($this->options))
+                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+
+        $this->response->expects($this->never())
+                       ->method('throw_for_status');
 
         $this->assertSame('', $this->class->get_bearer_token());
     }
@@ -112,7 +141,7 @@ class AuthenticationApiTest extends AuthenticationTest
     public function testGetBearerTokenStoresBearerTokenInCas()
     {
         $url    = 'https://api.twitter.com/oauth2/token';
-        $params = 'grant_type=client_credentials';
+        $params = [ 'grant_type' => 'client_credentials' ];
 
         $this->cas->expects($this->at(0))
                   ->method('get')
@@ -129,26 +158,16 @@ class AuthenticationApiTest extends AuthenticationTest
                   ->with($this->equalTo('twitter'), $this->equalTo('consumer_secret'))
                   ->will($this->returnValue('Secret'));
 
-        $this->curl->expects($this->once())
-                   ->method('set_options')
-                   ->with($this->equalTo($this->options));
-
-        $this->curl->expects($this->once())
-                   ->method('set_http_headers')
-                   ->with($this->equalTo($this->header));
-
-        $this->curl->expects($this->once())
-                   ->method('post_request')
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('POST'), $this->equalTo($this->options))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue('{"token_type":"bearer","access_token":"TOKEN"}'));
+        $this->response->status_code = 200;
+        $this->response->body        = '{"token_type":"bearer","access_token":"TOKEN"}';
 
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
+                       ->method('throw_for_status');
 
         $this->cas->expects($this->once())
                   ->method('add')
@@ -165,7 +184,7 @@ class AuthenticationApiTest extends AuthenticationTest
     public function testGetBearerTokenReturnsBearerToken()
     {
         $url    = 'https://api.twitter.com/oauth2/token';
-        $params = 'grant_type=client_credentials';
+        $params = [ 'grant_type' => 'client_credentials' ];
 
         $this->cas->expects($this->at(0))
                   ->method('get')
@@ -182,26 +201,16 @@ class AuthenticationApiTest extends AuthenticationTest
                   ->with($this->equalTo('twitter'), $this->equalTo('consumer_secret'))
                   ->will($this->returnValue('Secret'));
 
-        $this->curl->expects($this->once())
-                   ->method('set_options')
-                   ->with($this->equalTo($this->options));
-
-        $this->curl->expects($this->once())
-                   ->method('set_http_headers')
-                   ->with($this->equalTo($this->header));
-
-        $this->curl->expects($this->once())
-                   ->method('post_request')
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('POST'), $this->equalTo($this->options))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue('{"token_type":"bearer","access_token":"TOKEN"}'));
+        $this->response->status_code = 200;
+        $this->response->body        = '{"token_type":"bearer","access_token":"TOKEN"}';
 
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
+                       ->method('throw_for_status');
 
         $this->cas->expects($this->once())
                   ->method('add')
