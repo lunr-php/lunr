@@ -52,14 +52,14 @@ class Authentication extends Api
     /**
      * Constructor.
      *
-     * @param CentralAuthenticationStore $cas     Shared instance of the CentralAuthenticationStore class.
-     * @param LoggerInterface            $logger  Shared instance of a Logger class.
-     * @param Curl                       $curl    Shared instance of the Curl class.
-     * @param RequestInterface           $request Shared instance of a Request class.
+     * @param \Lunr\Spark\CentralAuthenticationStore $cas     Shared instance of the credentials store
+     * @param \Psr\Log\LoggerInterface               $logger  Shared instance of a Logger class.
+     * @param \Requests_Session                      $http    Shared instance of the Requests_Session class.
+     * @param \Lunr\Corona\RequestInterface          $request Shared instance of a Request class.
      */
-    public function __construct($cas, $logger, $curl, $request)
+    public function __construct($cas, $logger, $http, $request)
     {
-        parent::__construct($cas, $logger, $curl);
+        parent::__construct($cas, $logger, $http);
 
         $this->state         = $request->get_get_data('state');
         $this->code          = $request->get_get_data('code');
@@ -83,7 +83,6 @@ class Authentication extends Api
         unset($this->scope);
         unset($this->redirect_uri);
         unset($this->token_expires);
-        unset($this->curl);
 
         parent::__destruct();
     }

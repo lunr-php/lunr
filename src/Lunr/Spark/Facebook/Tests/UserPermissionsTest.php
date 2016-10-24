@@ -14,6 +14,8 @@
 namespace Lunr\Spark\Facebook\Tests;
 
 use Lunr\Spark\DataError;
+use Requests_Exception;
+use Requests_Exception_HTTP_400;
 
 /**
  * This class contains the tests for the Facebook User class.
@@ -80,19 +82,16 @@ class UserPermissionsTest extends UserTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue('Token'));
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('https://graph.facebook.com/me/permissions?access_token=Token'))
+        $url    = 'https://graph.facebook.com/me/permissions';
+        $params = [ 'access_token' => 'Token' ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
-
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue(json_encode($data)));
+        $this->response->status_code = 200;
+        $this->response->body        = json_encode($data);
 
         $method = $this->get_accessible_reflection_method('get_permissions');
         $method->invoke($this->class);
@@ -112,15 +111,45 @@ class UserPermissionsTest extends UserTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue('Token'));
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('https://graph.facebook.com/me/permissions?access_token=Token'))
+        $url    = 'https://graph.facebook.com/me/permissions';
+        $params = [ 'access_token' => 'Token' ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
+        $this->response->status_code = 400;
+
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(400));
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400('Not Found!')));
+
+        $method = $this->get_accessible_reflection_method('get_permissions');
+        $method->invoke($this->class);
+
+        $this->assertArrayEmpty($this->get_reflection_property_value('permissions'));
+    }
+
+    /**
+     * Test that get_permissions() does not set permissions on failure.
+     *
+     * @covers Lunr\Spark\Facebook\User::get_permissions
+     */
+    public function testGetPermissionsSetsPermissionsEmptyOnFailure()
+    {
+        $this->cas->expects($this->exactly(3))
+                  ->method('get')
+                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
+                  ->will($this->returnValue('Token'));
+
+        $url    = 'https://graph.facebook.com/me/permissions';
+        $params = [ 'access_token' => 'Token' ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
+                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
 
         $method = $this->get_accessible_reflection_method('get_permissions');
         $method->invoke($this->class);

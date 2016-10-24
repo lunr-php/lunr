@@ -13,6 +13,9 @@
 
 namespace Lunr\Spark\Facebook;
 
+use Requests_Exception;
+use Requests_Exception_HTTP;
+
 /**
  * Low level Facebook API methods for Spark
  */
@@ -21,21 +24,21 @@ abstract class Api
 
     /**
      * Shared instance of the CentralAuthenticationStore
-     * @var CentralAuthenticationStore
+     * @var \Lunr\Spark\CentralAuthenticationStore
      */
     protected $cas;
 
     /**
      * Shared instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
     /**
-     * Shared instance of the Curl class.
-     * @var Curl
+     * Shared instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    protected $curl;
+    protected $http;
 
     /**
      * Requested fields of the profile.
@@ -64,15 +67,15 @@ abstract class Api
     /**
      * Constructor.
      *
-     * @param CentralAuthenticationStore $cas    Shared instance of the credentials store
-     * @param LoggerInterface            $logger Shared instance of a Logger class.
-     * @param Curl                       $curl   Shared instance of the Curl class.
+     * @param \Lunr\Spark\CentralAuthenticationStore $cas    Shared instance of the credentials store
+     * @param \Psr\Log\LoggerInterface               $logger Shared instance of a Logger class.
+     * @param \Requests_Session                      $http   Shared instance of the Requests_Session class.
      */
-    public function __construct($cas, $logger, $curl)
+    public function __construct($cas, $logger, $http)
     {
         $this->cas    = $cas;
         $this->logger = $logger;
-        $this->curl   = $curl;
+        $this->http   = $http;
         $this->id     = '';
         $this->fields = [];
         $this->data   = [];
@@ -87,7 +90,7 @@ abstract class Api
     {
         unset($this->cas);
         unset($this->logger);
-        unset($this->curl);
+        unset($this->http);
         unset($this->id);
         unset($this->fields);
         unset($this->data);
@@ -180,30 +183,32 @@ abstract class Api
      */
     protected function get_url_results($url, $params = [], $method = 'get')
     {
-        $this->curl->set_option('CURLOPT_FAILONERROR', FALSE);
+        $method = strtoupper($method);
 
-        if (strtolower($method) === 'get')
+        $parts   = [];
+
+        try
         {
-            $response = $this->curl->get_request($url . '?' . http_build_query($params));
-        }
-        else
-        {
-            $response = $this->curl->post_request($url, $params);
-        }
+            $response = $this->http->request($url, [], $params, $method);
 
-        $parts = NULL;
+            parse_str($response->body, $parts);
 
-        if ($response->http_code !== 200)
+            $response->throw_for_status();
+        }
+        catch(Requests_Exception_HTTP $e)
         {
             $parts   = [];
-            $message = json_decode($response->get_result(), TRUE);
+            $message = json_decode($response->body, TRUE);
             $error   = $message['error'];
-            $context = [ 'message' => $error['message'], 'code' => $error['code'], 'type' => $error['type'], 'request' => $url ];
-            $this->logger->error('Facebook API Request ({request}) failed, {type} ({code}): {message}', $context);
+            $context = [ 'message' => $error['message'], 'code' => $error['code'], 'type' => $error['type'], 'request' => $response->url ];
+
+            $this->logger->warning('Facebook API Request ({request}) failed, {type} ({code}): {message}', $context);
         }
-        else
+        catch(Requests_Exception $e)
         {
-            parse_str($response->get_result(), $parts);
+            $context = [ 'message' => $e->getMessage(), 'request' => $url ];
+
+            $this->logger->warning('Facebook API Request ({request}) failed: {message}', $context);
         }
 
         unset($response);
@@ -222,25 +227,31 @@ abstract class Api
      */
     protected function get_json_results($url, $params = [], $method = 'get')
     {
-        $this->curl->set_option('CURLOPT_FAILONERROR', FALSE);
+        $method = strtoupper($method);
 
-        if (strtolower($method) === 'get')
+        $result  = [];
+
+        try
         {
-            $response = $this->curl->get_request($url . '?' . http_build_query($params));
-        }
-        else
-        {
-            $response = $this->curl->post_request($url, $params);
-        }
+            $response = $this->http->request($url, [], $params, $method);
 
-        $result = json_decode($response->get_result(), TRUE);
+            $result = json_decode($response->body, TRUE);
 
-        if ($response->http_code !== 200)
+            $response->throw_for_status();
+        }
+        catch(Requests_Exception_HTTP $e)
         {
             $error   = $result['error'];
             $result  = [];
-            $context = [ 'message' => $error['message'], 'code' => $error['code'], 'type' => $error['type'], 'request' => $url ];
-            $this->logger->error('Facebook API Request ({request}) failed, {type} ({code}): {message}', $context);
+            $context = [ 'message' => $error['message'], 'code' => $error['code'], 'type' => $error['type'], 'request' => $response->url ];
+
+            $this->logger->warning('Facebook API Request ({request}) failed, {type} ({code}): {message}', $context);
+        }
+        catch(Requests_Exception $e)
+        {
+            $context = [ 'message' => $e->getMessage(), 'request' => $url ];
+
+            $this->logger->warning('Facebook API Request ({request}) failed: {message}', $context);
         }
 
         unset($response);

@@ -27,19 +27,19 @@ abstract class PostTest extends LunrBaseTest
 
     /**
      * Mock instance of the CentralAuthenticationStore class.
-     * @var CentralAuthenticationStore
+     * @var \Lunr\Spark\CentralAuthenticationStore
      */
     protected $cas;
 
     /**
-     * Mock instance of the Curl class.
-     * @var Curl
+     * Mock instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    protected $curl;
+    protected $http;
 
     /**
      * Mock instance of the Logger class
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
@@ -49,11 +49,11 @@ abstract class PostTest extends LunrBaseTest
     public function setUp()
     {
         $this->cas    = $this->getMock('Lunr\Spark\CentralAuthenticationStore');
-        $this->curl   = $this->getMock('Lunr\Network\Curl');
+        $this->http   = $this->getMock('Requests_Session');
         $this->logger = $this->getMock('Psr\Log\LoggerInterface');
 
         $this->class = $this->getMockBuilder('Lunr\Spark\Facebook\Post')
-                            ->setConstructorArgs([ $this->cas, $this->logger, $this->curl ])
+                            ->setConstructorArgs([ $this->cas, $this->logger, $this->http ])
                             ->getMockForAbstractClass();
 
         $this->reflection = new ReflectionClass('Lunr\Spark\Facebook\Post');
@@ -67,7 +67,7 @@ abstract class PostTest extends LunrBaseTest
         unset($this->class);
         unset($this->reflection);
         unset($this->cas);
-        unset($this->curl);
+        unset($this->http);
         unset($this->logger);
     }
 

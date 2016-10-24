@@ -27,31 +27,31 @@ abstract class AuthenticationTest extends LunrBaseTest
 
     /**
      * Mock instance of the CentralAuthenticationStore class.
-     * @var CentralAuthenticationStore
+     * @var \Lunr\Spark\CentralAuthenticationStore
      */
     protected $cas;
 
     /**
-     * Mock instance of the Curl class.
-     * @var Curl
+     * Mock instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    protected $curl;
+    protected $http;
 
     /**
      * Mock instance of the Logger class
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
     /**
      * Mock instance of the Request class.
-     * @var RequestInterface
+     * @var \Lunr\Corona\RequestInterface
      */
     protected $request;
 
     /**
-     * Mock instance of the CurlResponse class.
-     * @var CurlResponse
+     * Mock instance of the Requests_Response class.
+     * @var \Requests_Response
      */
     protected $response;
 
@@ -63,19 +63,17 @@ abstract class AuthenticationTest extends LunrBaseTest
     public function setUpNull()
     {
         $this->cas      = $this->getMock('Lunr\Spark\CentralAuthenticationStore');
-        $this->curl     = $this->getMock('Lunr\Network\Curl');
+        $this->http     = $this->getMock('Requests_Session');
         $this->logger   = $this->getMock('Psr\Log\LoggerInterface');
         $this->request  = $this->getMock('Lunr\Corona\RequestInterface');
-        $this->response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                               ->disableOriginalConstructor()
-                               ->getMock();
+        $this->response = $this->getMock('Requests_Response');
 
         $this->request->expects($this->at(0))
                       ->method('get_get_data')
                       ->with($this->equalTo('state'))
                       ->will($this->returnValue(NULL));
 
-        $this->class      = new Authentication($this->cas, $this->logger, $this->curl, $this->request);
+        $this->class      = new Authentication($this->cas, $this->logger, $this->http, $this->request);
         $this->reflection = new ReflectionClass('Lunr\Spark\Facebook\Authentication');
     }
 
@@ -85,12 +83,10 @@ abstract class AuthenticationTest extends LunrBaseTest
     public function setUp()
     {
         $this->cas      = $this->getMock('Lunr\Spark\CentralAuthenticationStore');
-        $this->curl     = $this->getMock('Lunr\Network\Curl');
+        $this->http     = $this->getMock('Requests_Session');
         $this->logger   = $this->getMock('Psr\Log\LoggerInterface');
         $this->request  = $this->getMock('Lunr\Corona\RequestInterface');
-        $this->response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                               ->disableOriginalConstructor()
-                               ->getMock();
+        $this->response = $this->getMock('Requests_Response');
 
         $this->request->expects($this->at(0))
                       ->method('get_get_data')
@@ -106,7 +102,7 @@ abstract class AuthenticationTest extends LunrBaseTest
                       ->method('__get')
                       ->will($this->onConsecutiveCalls('http://localhost/', 'controller/method/'));
 
-        $this->class      = new Authentication($this->cas, $this->logger, $this->curl, $this->request);
+        $this->class      = new Authentication($this->cas, $this->logger, $this->http, $this->request);
         $this->reflection = new ReflectionClass('Lunr\Spark\Facebook\Authentication');
     }
 
@@ -118,7 +114,7 @@ abstract class AuthenticationTest extends LunrBaseTest
         unset($this->class);
         unset($this->reflection);
         unset($this->cas);
-        unset($this->curl);
+        unset($this->http);
         unset($this->logger);
         unset($this->request);
         unset($this->response);

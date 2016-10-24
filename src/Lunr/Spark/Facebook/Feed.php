@@ -46,13 +46,13 @@ class Feed extends User
     /**
      * Constructor.
      *
-     * @param CentralAuthenticationStore $cas    Shared instance of the credentials store
-     * @param LoggerInterface            $logger Shared instance of a Logger class.
-     * @param Curl                       $curl   Shared instance of the Curl class.
+     * @param \Lunr\Spark\CentralAuthenticationStore $cas    Shared instance of the credentials store
+     * @param \Psr\Log\LoggerInterface               $logger Shared instance of a Logger class.
+     * @param \Requests_Session                      $http   Shared instance of the Requests_Session class.
      */
-    public function __construct($cas, $logger, $curl)
+    public function __construct($cas, $logger, $http)
     {
-        parent::__construct($cas, $logger, $curl);
+        parent::__construct($cas, $logger, $http);
 
         $this->limit    = 25;
         $this->next     = 0;
@@ -209,7 +209,7 @@ class Feed extends User
 
         foreach ($this->data['data'] as $post)
         {
-            $posts[] = (new Post($this->cas, $this->logger, $this->curl))->set_data($post, $this->permissions, $this->used_access_token);
+            $posts[] = (new Post($this->cas, $this->logger, $this->http))->set_data($post, $this->permissions, $this->used_access_token);
         }
 
         $this->data = $posts;

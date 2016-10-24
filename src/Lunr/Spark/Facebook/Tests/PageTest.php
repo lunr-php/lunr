@@ -27,25 +27,25 @@ abstract class PageTest extends LunrBaseTest
 
     /**
      * Mock instance of the CentralAuthenticationStore class.
-     * @var CentralAuthenticationStore
+     * @var \Lunr\Spark\CentralAuthenticationStore
      */
     protected $cas;
 
     /**
-     * Mock instance of the Curl class.
-     * @var Curl
+     * Mock instance of the Requests_Session class.
+     * @var \Requests_Session
      */
-    protected $curl;
+    protected $http;
 
     /**
      * Mock instance of the Logger class
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
     /**
-     * Mock instance of the CurlResponse class.
-     * @var CurlResponse
+     * Mock instance of the Requests_Response class.
+     * @var \Requests_Response
      */
     protected $response;
 
@@ -55,14 +55,12 @@ abstract class PageTest extends LunrBaseTest
     public function setUp()
     {
         $this->cas      = $this->getMock('Lunr\Spark\CentralAuthenticationStore');
-        $this->curl     = $this->getMock('Lunr\Network\Curl');
+        $this->http     = $this->getMock('Requests_Session');
         $this->logger   = $this->getMock('Psr\Log\LoggerInterface');
-        $this->response = $this->getMockBuilder('Lunr\Network\CurlResponse')
-                               ->disableOriginalConstructor()
-                               ->getMock();
+        $this->response = $this->getMock('Requests_Response');
 
         $this->class = $this->getMockBuilder('Lunr\Spark\Facebook\Page')
-                            ->setConstructorArgs([ $this->cas, $this->logger, $this->curl ])
+                            ->setConstructorArgs([ $this->cas, $this->logger, $this->http ])
                             ->getMockForAbstractClass();
 
         $this->reflection = new ReflectionClass('Lunr\Spark\Facebook\Page');
@@ -76,7 +74,7 @@ abstract class PageTest extends LunrBaseTest
         unset($this->class);
         unset($this->reflection);
         unset($this->cas);
-        unset($this->curl);
+        unset($this->http);
         unset($this->logger);
         unset($this->response);
     }

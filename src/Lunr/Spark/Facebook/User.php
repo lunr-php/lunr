@@ -42,13 +42,13 @@ abstract class User extends Api
     /**
      * Constructor.
      *
-     * @param CentralAuthenticationStore $cas    Shared instance of the credentials store
-     * @param LoggerInterface            $logger Shared instance of a Logger class.
-     * @param Curl                       $curl   Shared instance of the Curl class.
+     * @param \Lunr\Spark\CentralAuthenticationStore $cas    Shared instance of the credentials store
+     * @param \Psr\Log\LoggerInterface               $logger Shared instance of a Logger class.
+     * @param \Requests_Session                      $http   Shared instance of the Requests_Session class.
      */
-    public function __construct($cas, $logger, $curl)
+    public function __construct($cas, $logger, $http)
     {
-        parent::__construct($cas, $logger, $curl);
+        parent::__construct($cas, $logger, $http);
 
         $this->profile_id  = 'me';
         $this->permissions = [];

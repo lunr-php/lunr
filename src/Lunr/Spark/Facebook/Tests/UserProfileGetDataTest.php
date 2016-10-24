@@ -13,9 +13,8 @@
 
 namespace Lunr\Spark\Facebook\Tests;
 
-use Lunr\Spark\Facebook\UserProfile;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use Requests_Exception;
+use Requests_Exception_HTTP_400;
 
 /**
  * This class contains the tests for the Facebook UserProfile class.
@@ -47,8 +46,8 @@ class UserProfileGetDataTest extends UserProfileTest
                   ->with($this->equalTo('facebook'), $this->equalTo('app_secret_proof'))
                   ->will($this->returnValue('Proof'));
 
-        $this->curl->expects($this->any())
-                   ->method('get_request')
+        $this->http->expects($this->any())
+                   ->method('request')
                    ->will($this->returnValue($this->response));
 
         $this->class->get_data();
@@ -68,8 +67,8 @@ class UserProfileGetDataTest extends UserProfileTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
 
-        $this->curl->expects($this->any())
-                   ->method('get_request')
+        $this->http->expects($this->any())
+                   ->method('request')
                    ->will($this->returnValue($this->response));
 
         $this->class->get_data();
@@ -91,9 +90,12 @@ class UserProfileGetDataTest extends UserProfileTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
 
-        $this->curl->expects($this->at(1))
-                   ->method('get_request')
-                   ->with($this->equalTo('https://graph.facebook.com/me?fields=email%2Cuser_likes'))
+        $url    = 'https://graph.facebook.com/me';
+        $params = [ 'fields' => 'email,user_likes' ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
         $this->class->get_data();
@@ -111,9 +113,12 @@ class UserProfileGetDataTest extends UserProfileTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
 
-        $this->curl->expects($this->at(1))
-                   ->method('get_request')
-                   ->with($this->equalTo('https://graph.facebook.com/me?'))
+        $url    = 'https://graph.facebook.com/me';
+        $params = [];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
         $this->class->get_data();
@@ -141,9 +146,15 @@ class UserProfileGetDataTest extends UserProfileTest
                   ->with($this->equalTo('facebook'), $this->equalTo('app_secret_proof'))
                   ->will($this->returnValue('Proof'));
 
-        $this->curl->expects($this->at(1))
-                   ->method('get_request')
-                   ->with($this->equalTo('https://graph.facebook.com/me?access_token=Token&appsecret_proof=Proof'))
+        $url    = 'https://graph.facebook.com/me';
+        $params = [
+            'access_token' => 'Token',
+            'appsecret_proof' => 'Proof',
+        ];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
         $this->class->get_data();
@@ -161,9 +172,12 @@ class UserProfileGetDataTest extends UserProfileTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
 
-        $this->curl->expects($this->at(1))
-                   ->method('get_request')
-                   ->with($this->equalTo('https://graph.facebook.com/me?'))
+        $url    = 'https://graph.facebook.com/me';
+        $params = [];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
         $this->class->get_data();
@@ -183,19 +197,16 @@ class UserProfileGetDataTest extends UserProfileTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
 
-        $this->curl->expects($this->at(1))
-                   ->method('get_request')
-                   ->with($this->equalTo('https://graph.facebook.com/me?'))
+        $url    = 'https://graph.facebook.com/me';
+        $params = [];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with('http_code')
-                       ->will($this->returnValue(200));
-
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue(json_encode($data)));
+        $this->response->status_code = 200;
+        $this->response->body        = json_encode($data);
 
         $this->class->get_data();
 
@@ -214,15 +225,44 @@ class UserProfileGetDataTest extends UserProfileTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
 
-        $this->curl->expects($this->at(1))
-                   ->method('get_request')
-                   ->with($this->equalTo('https://graph.facebook.com/me?'))
+        $url    = 'https://graph.facebook.com/me';
+        $params = [];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
+                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+
+        $this->class->get_data();
+
+        $this->assertArrayEmpty($this->get_reflection_property_value('data'));
+    }
+
+    /**
+     * Test that get_data() sets data when request was not successful.
+     *
+     * @covers Lunr\Spark\Facebook\UserProfile::get_data
+     */
+    public function testGetDataSetsDataOnRequestError()
+    {
+        $this->cas->expects($this->exactly(2))
+                  ->method('get')
+                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
+                  ->will($this->returnValue(NULL));
+
+        $url    = 'https://graph.facebook.com/me';
+        $params = [];
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
+        $this->response->status_code = 400;
+
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with('http_code')
-                       ->will($this->returnValue(400));
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400('Not Found!')));
 
         $this->class->get_data();
 
@@ -249,18 +289,29 @@ class UserProfileGetDataTest extends UserProfileTest
                   ->method('get')
                   ->will($this->onConsecutiveCalls('Token', 'Token', 'Proof', 'Token', 'Token', 'Token'));
 
-        $this->curl->expects($this->exactly(2))
-                   ->method('get_request')
+        $url    = 'https://graph.facebook.com/me';
+        $params = [
+            'access_token' => 'Token',
+            'appsecret_proof' => 'Proof'
+        ];
+
+        $this->http->expects($this->at(0))
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->exactly(2))
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
+        $url    = 'https://graph.facebook.com/me/permissions';
+        $params = [
+            'access_token' => 'Token',
+        ];
 
-        $this->response->expects($this->exactly(2))
-                       ->method('get_result')
-                       ->will($this->returnValue(json_encode($data)));
+        $this->http->expects($this->at(1))
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
+                   ->will($this->returnValue($this->response));
+
+        $this->response->status_code = 200;
+        $this->response->body        = json_encode($data);
 
         $this->class->get_data();
 

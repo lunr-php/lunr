@@ -13,9 +13,8 @@
 
 namespace Lunr\Spark\Facebook\Tests;
 
-use Lunr\Spark\Facebook\Api;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use Requests_Exception;
+use Requests_Exception_HTTP_400;
 
 /**
  * This class contains the tests for the Api.
@@ -26,93 +25,41 @@ class ApiGetUrlResultsTest extends ApiTest
 {
 
     /**
-     * Test that get_url_results() does a correct get_request without params.
+     * Test that get_url_results() does a correct request.
      *
      * @param String $http_method HTTP method to use for the request.
      *
-     * @dataProvider getMethodProvider
+     * @dataProvider requestParamProvider
      * @covers       Lunr\Spark\Facebook\Api::get_url_results
      */
-    public function testGetUrlResultsMakesGetRequestWithoutParams($http_method)
+    public function testGetJsonResultsCallsRequest(...$arguments)
     {
-        $this->curl->expects($this->once())
-                   ->method('set_option')
-                   ->with($this->equalTo('CURLOPT_FAILONERROR'), $this->equalTo(FALSE));
+        $count = count($arguments);
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $http_method_upper = 'GET';
+        $params            = [];
+
+        switch ($count)
+        {
+            case 3:
+                $http_method_upper = strtoupper($arguments[2]);
+            case 2:
+                $params = $arguments[1];
+            case 1:
+            default:
+                $url = $arguments[0];
+        }
+
+        $options['verify'] = TRUE;
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo($http_method_upper))
                    ->will($this->returnValue($this->response));
 
         $method = $this->get_accessible_reflection_method('get_url_results');
 
-        $method->invokeArgs($this->class, [ 'http://localhost', [], $http_method ]);
-    }
-
-    /**
-     * Test that get_url_results() does a correct get_request with params.
-     *
-     * @param String $http_method HTTP method to use for the request.
-     *
-     * @dataProvider getMethodProvider
-     * @covers       Lunr\Spark\Facebook\Api::get_url_results
-     */
-    public function testGetUrlResultsMakesGetRequestWithParams($http_method)
-    {
-        $this->curl->expects($this->once())
-                   ->method('set_option')
-                   ->with($this->equalTo('CURLOPT_FAILONERROR'), $this->equalTo(FALSE));
-
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?param1=1&param2=2'))
-                   ->will($this->returnValue($this->response));
-
-        $method = $this->get_accessible_reflection_method('get_url_results');
-
-        $method->invokeArgs($this->class, [ 'http://localhost', [ 'param1' => 1, 'param2' => 2 ], $http_method ]);
-    }
-
-    /**
-     * Test that get_url_results() does a correct post_request without params.
-     *
-     * @covers Lunr\Spark\Facebook\Api::get_url_results
-     */
-    public function testGetUrlResultsMakesPostRequestWithoutParams()
-    {
-        $this->curl->expects($this->once())
-                   ->method('set_option')
-                   ->with($this->equalTo('CURLOPT_FAILONERROR'), $this->equalTo(FALSE));
-
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('http://localhost'), $this->equalTo([]))
-                   ->will($this->returnValue($this->response));
-
-        $method = $this->get_accessible_reflection_method('get_url_results');
-
-        $method->invokeArgs($this->class, [ 'http://localhost', [], 'POST' ]);
-    }
-
-    /**
-     * Test that get_url_results() does a correct post_request with params.
-     *
-     * @covers Lunr\Spark\Facebook\Api::get_url_results
-     */
-    public function testGetUrlResultsMakesPostRequestWithParams()
-    {
-        $this->curl->expects($this->once())
-                   ->method('set_option')
-                   ->with($this->equalTo('CURLOPT_FAILONERROR'), $this->equalTo(FALSE));
-
-        $this->curl->expects($this->once())
-                   ->method('post_request')
-                   ->with($this->equalTo('http://localhost'), $this->equalTo([ 'param1' => 1, 'param2' => 2 ]))
-                   ->will($this->returnValue($this->response));
-
-        $method = $this->get_accessible_reflection_method('get_url_results');
-
-        $method->invokeArgs($this->class, [ 'http://localhost', [ 'param1' => 1, 'param2' => 2 ], 'POST' ]);
+        $method->invokeArgs($this->class, $arguments);
     }
 
     /**
@@ -130,25 +77,62 @@ class ApiGetUrlResultsTest extends ApiTest
             ],
         ];
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $url = 'http://localhost';
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(400));
+        $this->response->status_code = 400;
+        $this->response->body        = json_encode($output);
+        $this->response->url         = 'http://localhost/url/';
 
         $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue(json_encode($output)));
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400('Not Found!')));
 
-        $context = [ 'message' => 'Message', 'code' => 'Code', 'type' => 'Type', 'request' => 'http://localhost' ];
+        $context = [ 'message' => 'Message', 'code' => 'Code', 'type' => 'Type', 'request' => 'http://localhost/url/' ];
 
         $this->logger->expects($this->once())
-                     ->method('error')
+                     ->method('warning')
                      ->with($this->equalTo('Facebook API Request ({request}) failed, {type} ({code}): {message}'), $this->equalTo($context));
+
+        $method = $this->get_accessible_reflection_method('get_url_results');
+
+        $method->invokeArgs($this->class, [ 'http://localhost' ]);
+    }
+
+    /**
+     * Test that get_url_results() throws an error if the request failed.
+     *
+     * @covers Lunr\Spark\Facebook\Api::get_url_results
+     */
+    public function testGetJsonResultsThrowsErrorIfRequestFailed()
+    {
+        $output = [
+            'error' => [
+                'message' => 'Message',
+                'code'    => 'Code',
+                'type'    => 'Type',
+            ],
+        ];
+
+        $url = 'http://localhost';
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
+                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+
+        $this->response->expects($this->never())
+                       ->method('throw_for_status');
+
+        $context = [ 'message' => 'Network error!', 'request' => 'http://localhost' ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with($this->equalTo('Facebook API Request ({request}) failed: {message}'), $this->equalTo($context));
 
         $method = $this->get_accessible_reflection_method('get_url_results');
 
@@ -162,18 +146,20 @@ class ApiGetUrlResultsTest extends ApiTest
      */
     public function testGetUrlResultsDoesNotThrowErrorIfRequestSuccessful()
     {
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $url = 'http://localhost';
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
+        $this->response->status_code = 200;
+
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
+                       ->method('throw_for_status');
 
         $this->logger->expects($this->never())
-                     ->method('error');
+                     ->method('warning');
 
         $method = $this->get_accessible_reflection_method('get_url_results');
 
@@ -187,18 +173,58 @@ class ApiGetUrlResultsTest extends ApiTest
      */
     public function testGetUrlResultsReturnsEmptyArrayOnRequestError()
     {
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $output = [
+            'error' => [
+                'message' => 'Message',
+                'code'    => 'Code',
+                'type'    => 'Type',
+            ],
+        ];
+
+        $url = 'http://localhost';
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(400));
+        $this->response->status_code = 400;
+        $this->response->body        = json_encode($output);
+        $this->response->url         = 'http://localhost/url/';
 
         $this->response->expects($this->once())
-                       ->method('get_result');
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400('Not Found!')));
+
+        $method = $this->get_accessible_reflection_method('get_url_results');
+
+        $this->assertArrayEmpty($method->invokeArgs($this->class, [ 'http://localhost' ]));
+    }
+
+    /**
+     * Test that get_url_results() returns an empty array if there was a request failure.
+     *
+     * @covers Lunr\Spark\Facebook\Api::get_url_results
+     */
+    public function testGetJsonResultsReturnsEmptyArrayOnRequestFailure()
+    {
+        $output = [
+            'error' => [
+                'message' => 'Message',
+                'code'    => 'Code',
+                'type'    => 'Type',
+            ],
+        ];
+
+        $url = 'http://localhost';
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
+                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+
+        $this->response->expects($this->never())
+                       ->method('throw_for_status');
 
         $method = $this->get_accessible_reflection_method('get_url_results');
 
@@ -212,19 +238,18 @@ class ApiGetUrlResultsTest extends ApiTest
      */
     public function testGetUrlResultsReturnsResultsOnSuccessfulRequest()
     {
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo('http://localhost?'))
+        $url = 'http://localhost';
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
+        $this->response->status_code = 200;
+        $this->response->body        = 'param1=1&param2=2';
 
         $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue('param1=1&param2=2'));
+                       ->method('throw_for_status');
 
         $method = $this->get_accessible_reflection_method('get_url_results');
 

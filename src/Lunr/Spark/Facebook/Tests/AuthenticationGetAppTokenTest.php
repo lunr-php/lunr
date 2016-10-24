@@ -13,9 +13,8 @@
 
 namespace Lunr\Spark\Facebook\Tests;
 
-use Lunr\Spark\Facebook\Authentication;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use Requests_Exception;
+use Requests_Exception_HTTP_400;
 
 /**
  * This class contains the tests for the Authentication.
@@ -32,8 +31,12 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
      */
     public function testGetAppAccessTokenReturnsEmptyStringOnError()
     {
-        $url    = 'https://graph.facebook.com/oauth/access_token?';
-        $params = 'client_id=Lunr&client_secret=Secret&grant_type=client_credentials';
+        $url    = 'https://graph.facebook.com/oauth/access_token';
+        $params = [
+            'client_id' => 'Lunr',
+            'client_secret' => 'Secret',
+            'grant_type' => 'client_credentials',
+        ];
 
         $this->cas->expects($this->at(0))
                   ->method('get')
@@ -45,15 +48,48 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
                   ->with($this->equalTo('facebook'), $this->equalTo('app_secret'))
                   ->will($this->returnValue('Secret'));
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo($url . $params))
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
+        $this->response->status_code = 400;
+
         $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(400));
+                       ->method('throw_for_status')
+                       ->will($this->throwException(new Requests_Exception_HTTP_400('Not Found!')));
+
+        $this->assertSame('', $this->class->get_app_access_token());
+    }
+
+    /**
+     * Test that get_app_access_token() returns an empty string on request failure.
+     *
+     * @covers Lunr\Spark\Facebook\Authentication::get_app_access_token
+     */
+    public function testGetAppAccessTokenReturnsEmptyStringOnFailure()
+    {
+        $url    = 'https://graph.facebook.com/oauth/access_token';
+        $params = [
+            'client_id' => 'Lunr',
+            'client_secret' => 'Secret',
+            'grant_type' => 'client_credentials',
+        ];
+
+        $this->cas->expects($this->at(0))
+                  ->method('get')
+                  ->with($this->equalTo('facebook'), $this->equalTo('app_id'))
+                  ->will($this->returnValue('Lunr'));
+
+        $this->cas->expects($this->at(1))
+                  ->method('get')
+                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret'))
+                  ->will($this->returnValue('Secret'));
+
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
+                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
 
         $this->assertSame('', $this->class->get_app_access_token());
     }
@@ -65,8 +101,12 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
      */
     public function testGetAppAccessTokenStoresAccessTokenInCas()
     {
-        $url    = 'https://graph.facebook.com/oauth/access_token?';
-        $params = 'client_id=Lunr&client_secret=Secret&grant_type=client_credentials';
+        $url    = 'https://graph.facebook.com/oauth/access_token';
+        $params = [
+            'client_id' => 'Lunr',
+            'client_secret' => 'Secret',
+            'grant_type' => 'client_credentials',
+        ];
 
         $this->cas->expects($this->at(0))
                   ->method('get')
@@ -78,19 +118,13 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
                   ->with($this->equalTo('facebook'), $this->equalTo('app_secret'))
                   ->will($this->returnValue('Secret'));
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo($url . $params))
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
-
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue('access_token=Token'));
+        $this->response->status_code = 200;
+        $this->response->body        = 'access_token=Token';
 
         $this->cas->expects($this->at(2))
                   ->method('add')
@@ -106,8 +140,12 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
      */
     public function testGetAppAccessTokenStoresExpiryTime()
     {
-        $url    = 'https://graph.facebook.com/oauth/access_token?';
-        $params = 'client_id=Lunr&client_secret=Secret&grant_type=client_credentials';
+        $url    = 'https://graph.facebook.com/oauth/access_token';
+        $params = [
+            'client_id' => 'Lunr',
+            'client_secret' => 'Secret',
+            'grant_type' => 'client_credentials',
+        ];
 
         $this->cas->expects($this->at(0))
                   ->method('get')
@@ -119,19 +157,13 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
                   ->with($this->equalTo('facebook'), $this->equalTo('app_secret'))
                   ->will($this->returnValue('Secret'));
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo($url . $params))
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
-
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue('access_token=Token'));
+        $this->response->status_code = 200;
+        $this->response->body        = 'access_token=Token';
 
         $this->class->get_app_access_token();
 
@@ -145,8 +177,12 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
      */
     public function testGetAppAccessTokenReturnsAccessTokenOnSuccess()
     {
-        $url    = 'https://graph.facebook.com/oauth/access_token?';
-        $params = 'client_id=Lunr&client_secret=Secret&grant_type=client_credentials';
+        $url    = 'https://graph.facebook.com/oauth/access_token';
+        $params = [
+            'client_id' => 'Lunr',
+            'client_secret' => 'Secret',
+            'grant_type' => 'client_credentials',
+        ];
 
         $this->cas->expects($this->at(0))
                   ->method('get')
@@ -158,19 +194,13 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
                   ->with($this->equalTo('facebook'), $this->equalTo('app_secret'))
                   ->will($this->returnValue('Secret'));
 
-        $this->curl->expects($this->once())
-                   ->method('get_request')
-                   ->with($this->equalTo($url . $params))
+        $this->http->expects($this->once())
+                   ->method('request')
+                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
 
-        $this->response->expects($this->once())
-                       ->method('__get')
-                       ->with($this->equalTo('http_code'))
-                       ->will($this->returnValue(200));
-
-        $this->response->expects($this->once())
-                       ->method('get_result')
-                       ->will($this->returnValue('access_token=Token'));
+        $this->response->status_code = 200;
+        $this->response->body        = 'access_token=Token';
 
         $this->assertEquals('Token', $this->class->get_app_access_token());
     }
