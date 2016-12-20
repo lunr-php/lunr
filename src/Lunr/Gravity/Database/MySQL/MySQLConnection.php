@@ -335,22 +335,46 @@ class MySQLConnection extends DatabaseConnection
     /**
      * When running the query on a replication setup, hint to run the next query on the master server.
      *
+     * @param String $style What hint style to use.
+     *
      * @return MySQLConnection $self Self reference
      */
-    public function run_on_master()
+    public function run_on_master($style = 'maxscale')
     {
-        $this->query_hint = '/*ms=master*/'; // MYSQLND_MS_MASTER_SWITCH
+        switch ($style)
+        {
+            case 'mysqlnd' :
+                $this->query_hint = '/*ms=master*/'; // MYSQLND_MS_MASTER_SWITCH
+                break;
+            case 'maxscale':
+                $this->query_hint = '/* maxscale route to master */';
+                break;
+            default:
+                break;
+        }
         return $this;
     }
 
     /**
      * When running the query on a replication setup, hint to run the next query on the slave server.
      *
+     * @param String $style What hint style to use.
+     *
      * @return MySQLConnection $self Self reference
      */
-    public function run_on_slave()
+    public function run_on_slave($style = 'maxscale')
     {
-        $this->query_hint = '/*ms=slave*/'; // MYSQLND_MS_SLAVE_SWITCH
+        switch ($style)
+        {
+            case 'mysqlnd' :
+                $this->query_hint = '/*ms=slave*/'; // MYSQLND_MS_SLAVE_SWITCH
+                break;
+            case 'maxscale':
+                $this->query_hint = '/* maxscale route to slave */';
+                break;
+            default:
+                break;
+        }
         return $this;
     }
 

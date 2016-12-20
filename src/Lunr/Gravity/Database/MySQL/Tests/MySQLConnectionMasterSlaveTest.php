@@ -28,14 +28,38 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
     const SET_QOS_WORKS = 'return TRUE;';
 
     /**
+     * Test that run_on_master() sets the correct default query hint.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::run_on_master
+     */
+    public function testRunOnMasterSetsCorrectQueryHint()
+    {
+        $this->class->run_on_master();
+
+        $this->assertPropertyEquals('query_hint', '/* maxscale route to master */');
+    }
+
+    /**
+     * Test that run_on_slave() sets the correct default query hint.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::run_on_slave
+     */
+    public function testRunOnSlaveSetsCorrectQueryHint()
+    {
+        $this->class->run_on_slave();
+
+        $this->assertPropertyEquals('query_hint', '/* maxscale route to slave */');
+    }
+
+    /**
      * Test that run_on_master() sets the correct query hint for mysqlnd_ms.
      *
      * @requires extension mysqlnd_ms
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::run_on_master
      */
-    public function testRunOnMasterSetsCorrectQueryHint()
+    public function testRunOnMasterSetsCorrectQueryHintForMysqlndms()
     {
-        $this->class->run_on_master();
+        $this->class->run_on_master('mysqlnd');
 
         $this->assertPropertyEquals('query_hint', '/*' . MYSQLND_MS_MASTER_SWITCH . '*/');
     }
@@ -46,11 +70,35 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      * @requires extension mysqlnd_ms
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::run_on_slave
      */
-    public function testRunOnSlaveSetsCorrectQueryHint()
+    public function testRunOnSlaveSetsCorrectQueryHintForMysqlndms()
     {
-        $this->class->run_on_slave();
+        $this->class->run_on_slave('mysqlnd');
 
         $this->assertPropertyEquals('query_hint', '/*' . MYSQLND_MS_SLAVE_SWITCH . '*/');
+    }
+
+    /**
+     * Test that run_on_master() sets the correct query hint for maxscale.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::run_on_master
+     */
+    public function testRunOnMasterSetsCorrectQueryHintForMaxscale()
+    {
+        $this->class->run_on_master('maxscale');
+
+        $this->assertPropertyEquals('query_hint', '/* maxscale route to master */');
+    }
+
+    /**
+     * Test that run_on_slave() sets the correct query hint for maxscale.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::run_on_slave
+     */
+    public function testRunOnSlaveSetsCorrectQueryHintForMaxscale()
+    {
+        $this->class->run_on_slave('maxscale');
+
+        $this->assertPropertyEquals('query_hint', '/* maxscale route to slave */');
     }
 
     /**
