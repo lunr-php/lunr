@@ -11,12 +11,14 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Halo;
+namespace Lunr\Gravity\Database\Tests\Helpers;
+
+use Lunr\Halo\FluidInterfaceMock;
 
 /**
  * This trait contains helper methods to test general success and error cases of SELECT queries.
  */
-trait DatabaseAccessObjectSelectQueryTestTrait
+trait DatabaseAccessObjectQueryTestTrait
 {
 
     /**

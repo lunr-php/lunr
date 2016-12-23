@@ -11,8 +11,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Halo;
+namespace Lunr\Gravity\Database\MySQL\Tests\Helpers;
 
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
