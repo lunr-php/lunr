@@ -13,7 +13,7 @@
 
 namespace Lunr\Vortex\MPNS\Tests;
 
-use Lunr\Halo\PsrLoggerTestTrait;
+use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
 
 /**
  * This class contains tests for the setters of the MPNSToastPayload class.

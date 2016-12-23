@@ -14,7 +14,7 @@
 namespace Lunr\Vortex\MPNS\Tests;
 
 use Lunr\Vortex\MPNS\MPNSType;
-use Lunr\Halo\PsrLoggerTestTrait;
+use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
 
 /**
  * This class contains test for the constructor of the MPNSDispatcher class.

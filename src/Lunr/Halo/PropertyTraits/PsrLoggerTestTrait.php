@@ -11,7 +11,7 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Halo;
+namespace Lunr\Halo\PropertyTraits;
 
 /**
  * This trait contains test methods to verify a PSR-3 compliant logger was passed correctly.

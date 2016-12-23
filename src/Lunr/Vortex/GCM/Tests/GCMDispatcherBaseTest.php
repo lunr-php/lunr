@@ -15,7 +15,7 @@
 namespace Lunr\Vortex\GCM\Tests;
 
 use Lunr\Vortex\GCM\GCMType;
-use Lunr\Halo\PsrLoggerTestTrait;
+use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
 
 /**
  * This class contains test for the constructor of the GCMDispatcher class.

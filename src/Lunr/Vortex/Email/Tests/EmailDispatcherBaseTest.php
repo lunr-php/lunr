@@ -13,7 +13,7 @@
 
 namespace Lunr\Vortex\Email\Tests;
 
-use Lunr\Halo\PsrLoggerTestTrait;
+use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
 
 /**
  * This class contains test for the constructor of the EmailDispatcher class.

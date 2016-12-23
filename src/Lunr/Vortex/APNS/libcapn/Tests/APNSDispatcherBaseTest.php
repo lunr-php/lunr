@@ -14,7 +14,7 @@
 namespace Lunr\Vortex\APNS\libcapn\Tests;
 
 use Lunr\Vortex\APNS\libcapn\APNSType;
-use Lunr\Halo\PsrLoggerTestTrait;
+use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
 
 /**
  * This class contains test for the constructor of the APNSDispatcher class.

@@ -13,7 +13,7 @@
 
 namespace Lunr\Gravity\Database\MySQL\Tests;
 
-use Lunr\Halo\PsrLoggerTestTrait;
+use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
 
 /**
  * This class contains basic tests for the MySQLConnection class.

@@ -13,7 +13,7 @@
 
 namespace Lunr\L10n\Tests;
 
-use Lunr\Halo\PsrLoggerTestTrait;
+use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
 
 /**
  * This class contains test methods for the L10n class.

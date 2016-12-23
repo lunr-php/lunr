@@ -13,7 +13,7 @@
 
 namespace Lunr\Gravity\Database\Tests;
 
-use Lunr\Halo\PsrLoggerTestTrait;
+use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
 
 /**
  * This class contains the tests for the DatabaseConnection class.

@@ -14,7 +14,7 @@
 namespace Lunr\Vortex\WNS\Tests;
 
 use Lunr\Vortex\WNS\WNSType;
-use Lunr\Halo\PsrLoggerTestTrait;
+use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
 
 /**
  * This class contains test for the constructor of the WNSDispatcher class.
