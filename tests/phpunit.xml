@@ -32,7 +32,6 @@
             <file>../src/Lunr/Core/Tests/ConfigurationArrayAccessTest.php</file>
             <file>../src/Lunr/Core/Tests/ConfigurationLoadFileTest.php</file>
             <file>../src/Lunr/Core/Tests/ConfigurationArrayUsageTest.php</file>
-            <file>../src/Lunr/Core/Tests/ClosureServiceLocatorTest.php</file>
             <file>../src/Lunr/Core/Tests/ConfigServiceLocatorBaseTest.php</file>
             <file>../src/Lunr/Core/Tests/ConfigServiceLocatorSupportTest.php</file>
             <file>../src/Lunr/Core/Tests/ConfigServiceLocatorGetInstanceTest.php</file>
