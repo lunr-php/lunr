@@ -13,7 +13,7 @@
 
 namespace Lunr\Shadow\Tests;
 
-use Lunr\Halo\RequestParserDynamicRequestTestTrait;
+use Lunr\Corona\Tests\Helpers\RequestParserDynamicRequestTestTrait;
 
 /**
  * Basic tests for the case of empty superglobals.
