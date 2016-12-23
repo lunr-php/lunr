@@ -270,12 +270,6 @@
             <file>../src/Lunr/Sphere/Tests/DatabaseSessionHandlerBaseTest.php</file>
             <file>../src/Lunr/Sphere/Tests/SessionDAOBaseTest.php</file>
         </testsuite>
-        <testsuite name="Ticks">
-            <file>../src/Lunr/Ticks/Tests/FileTimerRequestTest.php</file>
-            <file>../src/Lunr/Ticks/Tests/FileTimerNoRequestTest.php</file>
-            <file>../src/Lunr/Ticks/Tests/FileTimerStartTest.php</file>
-            <file>../src/Lunr/Ticks/Tests/FileTimerStopTest.php</file>
-        </testsuite>
         <testsuite name="Vortex">
             <file>../src/Lunr/Vortex/APNS/Tests/APNSPayloadBaseTest.php</file>
             <file>../src/Lunr/Vortex/APNS/Tests/APNSPayloadGetTest.php</file>
@@ -374,7 +368,6 @@
                 <directory>../src/Lunr/Spark/Twitter/Tests/</directory>
                 <directory>../src/Lunr/Spawn/Tests/</directory>
                 <directory>../src/Lunr/Sphere/Tests/</directory>
-                <directory>../src/Lunr/Ticks/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Tests/</directory>
                 <directory>../src/Lunr/Vortex/APNS/Tests/</directory>
                 <directory>../src/Lunr/Vortex/APNS/libcapn/Tests/</directory>
