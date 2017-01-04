@@ -184,7 +184,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
 
         $this->set_reflection_property_value('cache', $recipe);
 
-        $mock = $this->getMock('Lunr\Halo\CallbackMock');
+        $mock = $this->getMockBuilder('Lunr\Halo\CallbackMock')->getMock();
 
         $mock->expects($this->at(0))
              ->method('test')
@@ -215,7 +215,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
 
         $this->set_reflection_property_value('cache', $recipe);
 
-        $mock = $this->getMock('Lunr\Halo\CallbackMock');
+        $mock = $this->getMockBuilder('Lunr\Halo\CallbackMock')->getMock();
 
         $mock->expects($this->at(0))
              ->method('test');
@@ -247,7 +247,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $this->set_reflection_property_value('cache', $recipe);
         $this->set_reflection_property_value('registry', [ 'object1_id' => $object1 ]);
 
-        $mock = $this->getMock('Lunr\Halo\CallbackMock');
+        $mock = $this->getMockBuilder('Lunr\Halo\CallbackMock')->getMock();
 
         $mock->expects($this->at(0))
              ->method('test')

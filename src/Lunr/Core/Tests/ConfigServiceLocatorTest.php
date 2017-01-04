@@ -36,7 +36,7 @@ abstract class ConfigServiceLocatorTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $this->class      = new ConfigServiceLocator($this->configuration);
         $this->reflection = new ReflectionClass('Lunr\Core\ConfigServiceLocator');
