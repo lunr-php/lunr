@@ -23,6 +23,12 @@ abstract class LunrBaseTest extends TestCase
 {
 
     /**
+     * Identifier string for backup functions.
+     * @var String
+     */
+    const FUNCTION_ID = '_lunrbackup';
+
+    /**
      * Instance of the tested class.
      * @var mixed
      */
@@ -35,33 +41,12 @@ abstract class LunrBaseTest extends TestCase
     protected $reflection;
 
     /**
-     * Identifier string for backup functions.
-     * @var String
-     */
-    const FUNCTION_ID = '_lunrbackup';
-
-    /**
      * Testcase Destructor.
      */
     public function tearDown()
     {
         unset($this->class);
         unset($this->reflection);
-    }
-
-    /**
-     * Get an accessible ReflectionProperty.
-     *
-     * @param String $property Property name
-     *
-     * @return ReflectionProperty $return The ReflectionProperty instance
-     */
-    protected function get_accessible_reflection_property($property)
-    {
-        $return = $this->reflection->getProperty($property);
-        $return->setAccessible(TRUE);
-
-        return $return;
     }
 
     /**
@@ -89,7 +74,23 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function set_reflection_property_value($property, $value)
     {
-        $this->get_accessible_reflection_property($property)->setValue($this->class, $value);
+        $this->get_accessible_reflection_property($property)
+             ->setValue($this->class, $value);
+    }
+
+    /**
+     * Get an accessible ReflectionProperty.
+     *
+     * @param String $property Property name
+     *
+     * @return ReflectionProperty $return The ReflectionProperty instance
+     */
+    protected function get_accessible_reflection_property($property)
+    {
+        $return = $this->reflection->getProperty($property);
+        $return->setAccessible(TRUE);
+
+        return $return;
     }
 
     /**
@@ -101,7 +102,8 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function get_reflection_property_value($property)
     {
-        return $this->get_accessible_reflection_property($property)->getValue($this->class);
+        return $this->get_accessible_reflection_property($property)
+                    ->getValue($this->class);
     }
 
     /**
@@ -114,12 +116,54 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function mock_function($name, $mock)
     {
+        if (PHP_MAJOR_VERSION < 7)
+        {
+            $this->runkit_mock_function($name, $mock);
+
+            return;
+        }
+
+        $this->uopz_mock_function($name, $mock);
+    }
+
+    /**
+     * Mock a PHP function with runkit.
+     *
+     * @param String $name Function name
+     * @param String $mock Replacement code for the function
+     *
+     * @return void
+     */
+    private function runkit_mock_function($name, $mock)
+    {
         if (function_exists($name . self::FUNCTION_ID) === FALSE)
         {
             runkit_function_copy($name, $name . self::FUNCTION_ID);
         }
 
         runkit_function_redefine($name, '', $mock);
+    }
+
+    /**
+     * Mock a PHP function with uopz.
+     *
+     * @param String          $name Function name
+     * @param String|callable $mock Replacement code for the function
+     *
+     * @return void
+     */
+    private function uopz_mock_function($name, $mock)
+    {
+        if (is_callable($mock))
+        {
+            uopz_set_return($name, $mock);
+            return;
+        }
+
+        uopz_set_return($name, function () use ($mock)
+        {
+            return eval($mock);
+        }, TRUE);
     }
 
     /**
@@ -131,8 +175,39 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function unmock_function($name)
     {
+        if (PHP_MAJOR_VERSION < 7)
+        {
+            $this->runkit_unmock_function($name);
+
+            return;
+        }
+
+        $this->uopz_unmock_function($name);
+    }
+
+    /**
+     * Unmock a PHP function with runkit.
+     *
+     * @param String $name Function name
+     *
+     * @return void
+     */
+    private function runkit_unmock_function($name)
+    {
         runkit_function_remove($name);
         runkit_function_rename($name . self::FUNCTION_ID, $name);
+    }
+
+    /**
+     * Unmock a PHP function with uopz.
+     *
+     * @param String $name Function name
+     *
+     * @return void
+     */
+    private function uopz_unmock_function($name)
+    {
+        uopz_unset_return($name);
     }
 
     /**
@@ -149,6 +224,31 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function mock_method($method, $mock, $visibility = 'public', $args = '')
     {
+        if (PHP_MAJOR_VERSION < 7)
+        {
+            $this->runkit_mock_method($method, $mock, $visibility, $args);
+
+            return;
+        }
+
+        //UOPZ does not support changing the visibility with the currently used function
+        $this->uopz_mock_method($method, $mock, $args);
+    }
+
+    /**
+     * Mock a method with runkit.
+     *
+     * Replace the code of a function of a specific class
+     *
+     * @param Callable $method     Method defined in an array form
+     * @param String   $mock       Replacement code for the method
+     * @param String   $visibility Visibility of the redefined method
+     * @param String   $args       Comma-delimited list of arguments for the redefined method
+     *
+     * @return void
+     */
+    private function runkit_mock_method($method, $mock, $visibility = 'public', $args = '')
+    {
         $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
 
@@ -157,7 +257,8 @@ abstract class LunrBaseTest extends TestCase
             runkit_method_copy($class_name, $method_name . self::FUNCTION_ID, $class_name, $method_name);
         }
 
-        switch ($visibility) {
+        switch ($visibility)
+        {
             case 'public':
                 $visibility_flag = RUNKIT_ACC_PUBLIC;
                 break;
@@ -173,6 +274,34 @@ abstract class LunrBaseTest extends TestCase
     }
 
     /**
+     * Mock a method with uopz.
+     *
+     * Replace the code of a function of a specific class
+     *
+     * @param Callable $method Method defined in an array form
+     * @param String   $mock   Replacement code for the method
+     * @param String   $args   Comma-delimited list of arguments for the redefined method
+     *
+     * @return void
+     */
+    private function uopz_mock_method($method, $mock, $args = '')
+    {
+        $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
+        $method_name = $method[1];
+
+        if (!is_callable($mock))
+        {
+            $mock = function () use ($mock)
+            {
+                return eval($mock);
+            };
+        }
+
+        uopz_set_return($class_name, $method_name, call_user_func_array($mock, explode(',', $args)));
+
+    }
+
+    /**
      * Unmock a method.
      *
      * @param Callable $method Method defined in an array form
@@ -181,11 +310,71 @@ abstract class LunrBaseTest extends TestCase
      */
     protected function unmock_method($method)
     {
+        if (PHP_MAJOR_VERSION < 7)
+        {
+            $this->runkit_unmock_method($method);
+
+            return;
+        }
+
+        $this->uopz_unmock_method($method);
+    }
+
+    /**
+     * Unmock a method with runkit.
+     *
+     * @param Callable $method Method defined in an array form
+     *
+     * @return void
+     */
+    private function runkit_unmock_method($method)
+    {
         $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
 
         runkit_method_remove($class_name, $method_name);
         runkit_method_rename($class_name, $method_name . self::FUNCTION_ID, $method_name);
+    }
+
+    /**
+     * Unmock a method with uopz.
+     *
+     * @param Callable $method Method defined in an array form
+     *
+     * @return void
+     */
+    private function uopz_unmock_method($method)
+    {
+        $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
+        $method_name = $method[1];
+
+        uopz_unset_return($class_name, $method_name);
+    }
+
+    /**
+     * Redefine a constant with runkit or uopz
+     *
+     * TODO: Figure out why this won' work
+     *
+     * @param string $constant The constant
+     * @param mixed  $value    New value
+     *
+     * @return void
+     */
+    protected function constant_redefine($constant, $value)
+    {
+        if (PHP_MAJOR_VERSION < 7)
+        {
+            runkit_constant_redefine($constant, $value);
+
+            return;
+        }
+
+        $constant      = explode('::', $constant);
+        $class_name    = $constant[0];
+        $constant_name = $constant[1];
+
+        uopz_redefine($class_name, $constant_name, $value);
     }
 
     /**
