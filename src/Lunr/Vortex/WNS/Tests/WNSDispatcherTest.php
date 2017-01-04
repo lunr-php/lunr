@@ -57,15 +57,15 @@ abstract class WNSDispatcherTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->http = $this->getMock('Requests_Session');
+        $this->http = $this->getMockBuilder('Requests_Session')->getMock();
 
-        $this->response = $this->getMock('Requests_Response');
+        $this->response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $this->config = $this->getMockBuilder('Lunr\Core\Configuration')
                              ->disableOriginalConstructor()
                              ->getMock();
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->class = new WNSDispatcher($this->http, $this->logger, $this->config);
 

@@ -41,7 +41,7 @@ abstract class APNSResponseTest extends LunrBaseTest
      */
     public function setUpSuccess()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $response = [ 'error_code' => 0, 'error_message' => NULL ];
 

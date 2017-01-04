@@ -49,7 +49,7 @@ abstract class APNSDispatcherTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->apns_push = $this->getMockBuilder('ApnsPHP_Push')
                                 ->disableOriginalConstructor()

@@ -40,9 +40,9 @@ abstract class WNSResponseTest extends LunrBaseTest
      */
     public function setUpError()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $response = $this->getMock('Requests_Response');
+        $response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $response->status_code = FALSE;
         $response->url         = 'http://localhost/';
@@ -58,9 +58,9 @@ abstract class WNSResponseTest extends LunrBaseTest
      */
     public function setUpSuccess()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $response = $this->getMock('Requests_Response');
+        $response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $response->headers = [
             'Date'                         => '2016-01-13',

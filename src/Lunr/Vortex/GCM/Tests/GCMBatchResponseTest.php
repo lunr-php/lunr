@@ -45,9 +45,9 @@ abstract class GCMBatchResponseTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $this->response = $this->getMock('Requests_Response');
+        $this->response = $this->getMockBuilder('Requests_Response')->getMock();
     }
 
     /**

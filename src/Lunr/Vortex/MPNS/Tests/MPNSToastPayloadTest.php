@@ -37,7 +37,7 @@ abstract class MPNSToastPayloadTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->class = new MPNSToastPayload($this->logger);
 

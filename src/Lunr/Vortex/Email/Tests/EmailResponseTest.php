@@ -40,9 +40,9 @@ abstract class EmailResponseTest extends LunrBaseTest
      */
     public function setUpError()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $response = $this->getMock('PHPMailer\PHPMailer\PHPMailer');
+        $response = $this->getMockBuilder('PHPMailer\PHPMailer\PHPMailer')->getMock();
 
         $response->expects($this->once())
                  ->method('isError')
@@ -68,9 +68,9 @@ abstract class EmailResponseTest extends LunrBaseTest
      */
     public function setUpSuccess()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $response = $this->getMock('PHPMailer\PHPMailer\PHPMailer');
+        $response = $this->getMockBuilder('PHPMailer\PHPMailer\PHPMailer')->getMock();
 
         $response->expects($this->once())
                  ->method('isError')

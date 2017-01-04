@@ -41,9 +41,9 @@ abstract class PAPResponseTest extends LunrBaseTest
      */
     public function setUpError()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $response = $this->getMock('Requests_Response');
+        $response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $response->status_code = FALSE;
 
@@ -58,9 +58,9 @@ abstract class PAPResponseTest extends LunrBaseTest
      */
     public function setUpInvalidXMLError()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $response = $this->getMock('Requests_Response');
+        $response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $response->status_code = 200;
 
@@ -82,11 +82,11 @@ abstract class PAPResponseTest extends LunrBaseTest
      */
     public function setUpSuccess()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $file = TEST_STATICS . '/Vortex/pap/response.xml';
 
-        $response = $this->getMock('Requests_Response');
+        $response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $response->status_code = 200;
         $response->body        = file_get_contents($file);

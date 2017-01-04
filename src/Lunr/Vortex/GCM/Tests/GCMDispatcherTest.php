@@ -43,10 +43,11 @@ abstract class GCMDispatcherTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->http   = $this->getMock('Requests_Session');
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->http   = $this->getMockBuilder('Requests_Session')->getMock();
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->class = new GCMDispatcher($this->http, $this->logger);
+
 
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMDispatcher');
     }

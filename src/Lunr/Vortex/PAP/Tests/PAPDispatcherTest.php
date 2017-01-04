@@ -49,9 +49,9 @@ abstract class PAPDispatcherTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->http     = $this->getMock('Requests_Session');
-        $this->response = $this->getMock('Requests_Response');
-        $this->logger   = $this->getMock('Psr\Log\LoggerInterface');
+        $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
+        $this->response = $this->getMockBuilder('Requests_Response')->getMock();
+        $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->class = new PAPDispatcher($this->http, $this->logger);
 

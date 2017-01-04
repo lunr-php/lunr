@@ -67,7 +67,7 @@ abstract class APNSDispatcherTest extends LunrBaseTest
 
         $this->mock_function('apn_init', self::APN_RETURN_TRUE);
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->class = new APNSDispatcher($this->logger);
 

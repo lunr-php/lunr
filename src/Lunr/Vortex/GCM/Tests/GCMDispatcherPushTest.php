@@ -61,7 +61,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('priority', 'high');
 
-        $response = $this->getMock('Requests_Response');
+        $response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $this->http->expects($this->once())
                    ->method('post')
@@ -118,7 +118,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
     {
         $this->set_reflection_property_value('endpoints', [ 'endpoint' ]);
 
-        $response = $this->getMock('Requests_Response');
+        $response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $headers = [
             'Content-Type'  => 'application/json',
@@ -147,7 +147,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $this->set_reflection_property_value('payload', '{"collapse_key":"abcde-12345"}');
         $this->set_reflection_property_value('auth_token', 'auth_token');
 
-        $response = $this->getMock('Requests_Response');
+        $response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $headers = [
             'Content-Type'  => 'application/json',
@@ -177,7 +177,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('priority', 'high');
 
-        $response = $this->getMock('Requests_Response');
+        $response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $headers = [
             'Content-Type'  => 'application/json',
@@ -209,7 +209,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('priority', 'high');
 
-        $response = $this->getMock('Requests_Response');
+        $response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $headers = [
             'Content-Type'  => 'application/json',

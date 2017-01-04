@@ -48,9 +48,9 @@ abstract class EmailDispatcherTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->mail_transport = $this->getMock('PHPMailer\PHPMailer\PHPMailer');
+        $this->mail_transport = $this->getMockBuilder('PHPMailer\PHPMailer\PHPMailer')->getMock();
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->class = new EmailDispatcher($this->mail_transport, $this->logger);
 
