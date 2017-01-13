@@ -27,6 +27,8 @@ class Ini
 
     /**
      * Constructor.
+     *
+     * @param String $section Ini section to wrap
      */
     public function __construct($section = NULL)
     {
@@ -57,7 +59,7 @@ class Ini
     /**
      * Get the current value for an ini configuration option.
      *
-     * @param String $name  php.ini configuration option.
+     * @param String $name php.ini configuration option.
      *
      * @return mixed $value The current value of the configuration option.
      */
