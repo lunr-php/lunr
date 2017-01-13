@@ -37,8 +37,8 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
         $this->set_reflection_property_value('type', MPNSType::TILE);
 
         $headers = [
-            'Content-Type' => 'text/xml',
-            'Accept' => 'application/*',
+            'Content-Type'          => 'text/xml',
+            'Accept'                => 'application/*',
             'X-WindowsPhone-Target' => MPNSType::TILE,
         ];
 
@@ -62,8 +62,8 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
         $this->set_reflection_property_value('type', MPNSType::TOAST);
 
         $headers = [
-            'Content-Type' => 'text/xml',
-            'Accept' => 'application/*',
+            'Content-Type'          => 'text/xml',
+            'Accept'                => 'application/*',
             'X-WindowsPhone-Target' => MPNSType::TOAST,
         ];
 
@@ -88,7 +88,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
 
         $headers = [
             'Content-Type' => 'text/xml',
-            'Accept' => 'application/*',
+            'Accept'       => 'application/*',
         ];
 
         $this->http->expects($this->once())
@@ -112,7 +112,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
 
         $headers = [
             'Content-Type' => 'text/xml',
-            'Accept' => 'application/*',
+            'Accept'       => 'application/*',
         ];
 
         $this->http->expects($this->once())
@@ -138,8 +138,8 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
         $this->set_reflection_property_value('priority', $priority);
 
         $headers = [
-            'Content-Type' => 'text/xml',
-            'Accept' => 'application/*',
+            'Content-Type'        => 'text/xml',
+            'Accept'              => 'application/*',
             'X-NotificationClass' => $priority,
         ];
 
@@ -163,7 +163,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
 
         $headers = [
             'Content-Type' => 'text/xml',
-            'Accept' => 'application/*',
+            'Accept'       => 'application/*',
         ];
 
         $this->http->expects($this->once())
@@ -193,7 +193,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
 
         $headers = [
             'Content-Type' => 'text/xml',
-            'Accept' => 'application/*',
+            'Accept'       => 'application/*',
         ];
 
         $this->http->expects($this->once())
@@ -217,10 +217,10 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
         $this->set_reflection_property_value('type', MPNSType::TOAST);
 
         $headers = [
-            'Content-Type' => 'text/xml',
-            'Accept' => 'application/*',
+            'Content-Type'          => 'text/xml',
+            'Accept'                => 'application/*',
             'X-WindowsPhone-Target' => 'toast',
-            'X-NotificationClass' => 2,
+            'X-NotificationClass'   => 2,
         ];
 
         $this->http->expects($this->once())
@@ -249,10 +249,10 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
         $this->set_reflection_property_value('type', MPNSType::TOAST);
 
         $headers = [
-            'Content-Type' => 'text/xml',
-            'Accept' => 'application/*',
+            'Content-Type'          => 'text/xml',
+            'Accept'                => 'application/*',
             'X-WindowsPhone-Target' => 'toast',
-            'X-NotificationClass' => 2,
+            'X-NotificationClass'   => 2,
         ];
 
         $this->http->expects($this->once())

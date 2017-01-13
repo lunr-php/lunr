@@ -63,10 +63,10 @@ abstract class MPNSResponseTest extends LunrBaseTest
         $response = $this->getMock('Requests_Response');
 
         $response->headers = [
-            "Date" => "2013-07-05",
-            "X-Notificationstatus" => "Received",
-            "X-Deviceconnectionstatus" => "Connected",
-            "X-Subscriptionstatus" => "Active"
+            'Date'                     => '2013-07-05',
+            'X-Notificationstatus'     => 'Received',
+            'X-Deviceconnectionstatus' => 'Connected',
+            'X-Subscriptionstatus'     => 'Active',
         ];
 
         $response->status_code = 200;

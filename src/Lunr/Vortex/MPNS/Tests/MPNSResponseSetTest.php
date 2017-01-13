@@ -39,10 +39,10 @@ class MPNSResponseSetTest extends MPNSResponseTest
     public function testSetHeadersWithPreconditionFailedStatus()
     {
         $headers = [
-            "Date" => "2013-07-05",
-            "X-Notificationstatus" => "Received",
-            "X-Deviceconnectionstatus" => "Connected",
-            "X-Subscriptionstatus" => "Active"
+            'Date'                     => '2013-07-05',
+            'X-Notificationstatus'     => 'Received',
+            'X-Deviceconnectionstatus' => 'Connected',
+            'X-Subscriptionstatus'     => 'Active',
         ];
 
         $this->set_reflection_property_value('http_code', 412);
@@ -72,10 +72,10 @@ class MPNSResponseSetTest extends MPNSResponseTest
     public function testSetHeadersWithSpecialStatusCodes($status)
     {
         $headers = [
-            "Date" => "2013-07-05",
-            "X-Notificationstatus" => "Received",
-            "X-Deviceconnectionstatus" => "Connected",
-            "X-Subscriptionstatus" => "Active"
+            'Date'                     => '2013-07-05',
+            'X-Notificationstatus'     => 'Received',
+            'X-Deviceconnectionstatus' => 'Connected',
+            'X-Subscriptionstatus'     => 'Active',
         ];
 
         $this->set_reflection_property_value('http_code', $status);

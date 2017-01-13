@@ -135,7 +135,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
             'auth' => [
                 $this->auth_token,
                 $this->password,
-            ]
+            ],
         ];
 
         $headers = [

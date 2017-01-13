@@ -63,11 +63,11 @@ abstract class WNSResponseTest extends LunrBaseTest
         $response = $this->getMock('Requests_Response');
 
         $response->headers = [
-            "Date" => "2016-01-13",
-            "X-WNS-Status" => "received",
-            "X-WNS-DeviceConnectionStatus" => "connected",
-            "X-WNS-Error-Description" => "Some Error",
-            "X-WNS-Debug-Trace" => "Some Trace"
+            'Date'                         => '2016-01-13',
+            'X-WNS-Status'                 => 'received',
+            'X-WNS-DeviceConnectionStatus' => 'connected',
+            'X-WNS-Error-Description'      => 'Some Error',
+            'X-WNS-Debug-Trace'            => 'Some Trace',
         ];
 
         $response->status_code = 200;

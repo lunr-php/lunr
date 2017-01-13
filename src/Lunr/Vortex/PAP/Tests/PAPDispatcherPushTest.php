@@ -48,7 +48,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
             'Connection'   => 'keep-alive',
         ];
 
-        $url = "https://cpcid.pushapi.na.blackberry.com/mss/PD_pushRequest";
+        $url = 'https://cpcid.pushapi.na.blackberry.com/mss/PD_pushRequest';
 
         $xml = file_get_contents(TEST_STATICS . '/Vortex/pap/request_custom_headers.txt');
 
@@ -56,7 +56,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
             'auth' => [
                 'auth_token',
                 'password',
-            ]
+            ],
         ];
 
         $this->http->expects($this->once())
@@ -100,7 +100,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
             'Connection'   => 'keep-alive',
         ];
 
-        $url = "https://cpcid.pushapi.na.blackberry.com/mss/PD_pushRequest";
+        $url = 'https://cpcid.pushapi.na.blackberry.com/mss/PD_pushRequest';
 
         $xml = file_get_contents(TEST_STATICS . '/Vortex/pap/request_custom_headers.txt');
 
@@ -108,7 +108,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
             'auth' => [
                 'auth_token',
                 'password',
-            ]
+            ],
         ];
 
         $this->http->expects($this->once())
@@ -148,7 +148,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
             'Connection'   => 'keep-alive',
         ];
 
-        $url = "https://cpcid.pushapi.na.blackberry.com/mss/PD_pushRequest";
+        $url = 'https://cpcid.pushapi.na.blackberry.com/mss/PD_pushRequest';
 
         $xml = file_get_contents(TEST_STATICS . '/Vortex/pap/request_custom_headers.txt');
 
@@ -156,7 +156,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
             'auth' => [
                 'auth_token',
                 'password',
-            ]
+            ],
         ];
 
         $this->http->expects($this->once())
@@ -205,7 +205,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
             'Connection'   => 'keep-alive',
         ];
 
-        $url = "https://cpcid.pushapi.na.blackberry.com/mss/PD_pushRequest";
+        $url = 'https://cpcid.pushapi.na.blackberry.com/mss/PD_pushRequest';
 
         $xml = file_get_contents(TEST_STATICS . '/Vortex/pap/request_custom_headers.txt');
 
@@ -213,7 +213,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
             'auth' => [
                 'auth_token',
                 'password',
-            ]
+            ],
         ];
 
         $this->http->expects($this->once())

@@ -107,7 +107,7 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
             $payload_array = json_decode($this->payload, TRUE);
 
             $mail_transport->Subject = $payload_array['subject'];
-            $mail_transport->Body = $payload_array['body'];
+            $mail_transport->Body    = $payload_array['body'];
 
             $mail_transport->send();
 

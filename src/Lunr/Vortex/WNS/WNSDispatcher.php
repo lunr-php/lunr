@@ -136,9 +136,9 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
         }
 
         $headers = [
-            'X-WNS-Type' => 'wns/' . $this->type,
-            'Accept' => 'application/*',
-            'Authorization' => 'Bearer ' . $this->oauth_token,
+            'X-WNS-Type'             => 'wns/' . $this->type,
+            'Accept'                 => 'application/*',
+            'Authorization'          => 'Bearer ' . $this->oauth_token,
             'X-WNS-RequestForStatus' => 'true',
         ];
 

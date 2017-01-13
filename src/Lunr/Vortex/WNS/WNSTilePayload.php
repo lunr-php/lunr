@@ -51,18 +51,18 @@ class WNSTilePayload extends WNSPayload
             $inner_xml .= '            <text id="' . ($key + 1) . '">' . $value . "</text>\r\n";
         }
 
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\r\n";
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\r\n";
 
         foreach ($this->elements['template'] as $key => $template)
         {
-            $xml .= '<tile>'."\r\n";
-            $xml .= "    <visual version=\"2\">"."\r\n";
-            $xml .= '        <binding template="' . $template . "\">"."\r\n";
+            $xml .= '<tile>' . "\r\n";
+            $xml .= '    <visual version="2">' . "\r\n";
+            $xml .= '        <binding template="' . $template . '">' . "\r\n";
             $xml .= $inner_xml;
-            $xml .= "        </binding>"."\r\n";
-            $xml .= "    </visual>"."\r\n";
+            $xml .= '        </binding>' . "\r\n";
+            $xml .= '    </visual>' . "\r\n";
             $xml .= '</tile>';
-            $xml .= ($key < (count($this->elements['template'])-1)) ? "\r\n"."\r\n" : "\r\n";
+            $xml .= ($key < (count($this->elements['template']) - 1)) ? "\r\n\r\n" : "\r\n";
         }
 
 

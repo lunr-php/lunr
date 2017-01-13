@@ -88,11 +88,11 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
         $this->set_reflection_property_value('oauth_token', '123456');
 
         $headers = [
-            'X-WNS-Type' => 'wns/tile',
-            'Accept' => 'application/*',
-            'Authorization' => 'Bearer 123456',
+            'X-WNS-Type'             => 'wns/tile',
+            'Accept'                 => 'application/*',
+            'Authorization'          => 'Bearer 123456',
             'X-WNS-RequestForStatus' => 'true',
-            'Content-Type' => 'text/xml',
+            'Content-Type'           => 'text/xml',
         ];
 
         $this->http->expects($this->once())
@@ -116,11 +116,11 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
         $this->set_reflection_property_value('oauth_token', '123456');
 
         $headers = [
-            'X-WNS-Type' => 'wns/toast',
-            'Accept' => 'application/*',
-            'Authorization' => 'Bearer 123456',
+            'X-WNS-Type'             => 'wns/toast',
+            'Accept'                 => 'application/*',
+            'Authorization'          => 'Bearer 123456',
             'X-WNS-RequestForStatus' => 'true',
-            'Content-Type' => 'text/xml',
+            'Content-Type'           => 'text/xml',
         ];
 
         $this->http->expects($this->once())
@@ -143,11 +143,11 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
         $this->set_reflection_property_value('oauth_token', '123456');
 
         $headers = [
-            'X-WNS-Type' => 'wns/raw',
-            'Accept' => 'application/*',
-            'Authorization' => 'Bearer 123456',
+            'X-WNS-Type'             => 'wns/raw',
+            'Accept'                 => 'application/*',
+            'Authorization'          => 'Bearer 123456',
             'X-WNS-RequestForStatus' => 'true',
-            'Content-Type' => 'application/octet-stream',
+            'Content-Type'           => 'application/octet-stream',
         ];
 
         $this->http->expects($this->once())
@@ -170,11 +170,11 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
         $this->set_reflection_property_value('oauth_token', '123456');
 
         $headers = [
-            'X-WNS-Type' => 'wns/raw',
-            'Accept' => 'application/*',
-            'Authorization' => 'Bearer 123456',
+            'X-WNS-Type'             => 'wns/raw',
+            'Accept'                 => 'application/*',
+            'Authorization'          => 'Bearer 123456',
             'X-WNS-RequestForStatus' => 'true',
-            'Content-Type' => 'application/octet-stream',
+            'Content-Type'           => 'application/octet-stream',
         ];
 
         $this->http->expects($this->once())
@@ -204,11 +204,11 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
         $this->set_reflection_property_value('oauth_token', '123456');
 
         $headers = [
-            'X-WNS-Type' => 'wns/raw',
-            'Accept' => 'application/*',
-            'Authorization' => 'Bearer 123456',
+            'X-WNS-Type'             => 'wns/raw',
+            'Accept'                 => 'application/*',
+            'Authorization'          => 'Bearer 123456',
             'X-WNS-RequestForStatus' => 'true',
-            'Content-Type' => 'application/octet-stream',
+            'Content-Type'           => 'application/octet-stream',
         ];
 
         $this->http->expects($this->once())
@@ -232,11 +232,11 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
         $this->set_reflection_property_value('oauth_token', '123456');
 
         $headers = [
-            'X-WNS-Type' => 'wns/toast',
-            'Accept' => 'application/*',
-            'Authorization' => 'Bearer 123456',
+            'X-WNS-Type'             => 'wns/toast',
+            'Accept'                 => 'application/*',
+            'Authorization'          => 'Bearer 123456',
             'X-WNS-RequestForStatus' => 'true',
-            'Content-Type' => 'text/xml',
+            'Content-Type'           => 'text/xml',
         ];
 
         $this->http->expects($this->once())
@@ -271,11 +271,11 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
         $this->set_reflection_property_value('oauth_token', '123456');
 
         $headers = [
-            'X-WNS-Type' => 'wns/toast',
-            'Accept' => 'application/*',
-            'Authorization' => 'Bearer 123456',
+            'X-WNS-Type'             => 'wns/toast',
+            'Accept'                 => 'application/*',
+            'Authorization'          => 'Bearer 123456',
             'X-WNS-RequestForStatus' => 'true',
-            'Content-Type' => 'text/xml',
+            'Content-Type'           => 'text/xml',
         ];
 
         $this->http->expects($this->once())
