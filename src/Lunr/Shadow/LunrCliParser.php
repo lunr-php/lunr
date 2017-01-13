@@ -8,8 +8,8 @@
  *
  * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2009-2016, Heinz Wiesinger, Amsterdam, The Netherlands
- * @copyright  2010-2016, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2009-2017, Heinz Wiesinger, Amsterdam, The Netherlands
+ * @copyright  2010-2017, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 

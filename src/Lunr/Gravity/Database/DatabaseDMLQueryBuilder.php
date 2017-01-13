@@ -10,7 +10,7 @@
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Ruben de Groot <r.degroot@m2mobi.com>
- * @copyright  2012-2016, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2012-2017, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 

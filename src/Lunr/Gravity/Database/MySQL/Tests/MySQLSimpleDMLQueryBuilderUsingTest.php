@@ -7,7 +7,7 @@
  *
  * @package    Lunr\Gravity\Database\MySQL
  * @author     Patrick Valk <p.valk@m2mobi.com>
- * @copyright  2016, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2016-2017, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 

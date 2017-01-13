@@ -7,7 +7,7 @@
  *
  * @package    Lunr\Halo
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2015-2016, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2015-2017, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
