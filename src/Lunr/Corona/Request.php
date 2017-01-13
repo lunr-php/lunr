@@ -303,7 +303,7 @@ class Request
      */
     public function get_http_header_data($key)
     {
-        $http_key = 'HTTP_'.strtoupper(str_replace('-', '_', $key));
+        $http_key = 'HTTP_' . strtoupper(str_replace('-', '_', $key));
         return isset($this->server[$http_key]) ? $this->server[$http_key] : NULL;
     }
 
@@ -343,6 +343,7 @@ class Request
         {
             $this->raw_data = $input;
         }
+
         return $this->raw_data;
     }
 

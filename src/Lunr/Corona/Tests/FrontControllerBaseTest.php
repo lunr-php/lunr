@@ -97,6 +97,7 @@ class FrontControllerBaseTest extends FrontControllerTest
         $this->assertArrayHasKey('foo/bar', $routes);
         $this->assertEquals([ 'baz' ], $routes['foo/bar']);
     }
+
 }
 
 ?>

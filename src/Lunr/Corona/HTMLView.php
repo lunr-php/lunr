@@ -105,7 +105,6 @@ abstract class HTMLView extends View
 
         foreach($this->javascript as $js)
         {
-
             if (!$this->is_external($js))
             {
                 $js .= '?' . filemtime($this->request->application_path . str_replace($this->request->base_path, '', $js));

@@ -139,7 +139,7 @@ class FrontController
     /**
      * Lookup the controller in the registered paths.
      *
-     * @param String ... Identifiers for the paths to use for the lookup
+     * @param String $paths Identifiers for the paths to use for the lookup
      *
      * @return String $controller Fully qualified name of the responsible controller.
      */

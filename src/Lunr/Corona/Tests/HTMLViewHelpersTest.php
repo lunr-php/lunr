@@ -112,7 +112,13 @@ class HTMLViewHelpersTest extends HTMLViewTest
      */
     public function testIncludeStylesheetsWithExternalStylesheets()
     {
-        $this->set_reflection_property_value('stylesheets', [ 'http://www.website.com/style3.css', 'https://www.website.com/style2.css', '//www.website.com/style1.css']);
+        $stylesheets = [
+            'http://www.website.com/style3.css',
+            'https://www.website.com/style2.css',
+            '//www.website.com/style1.css',
+        ];
+
+        $this->set_reflection_property_value('stylesheets', $stylesheets);
 
         $method = $this->get_accessible_reflection_method('include_stylesheets');
 
@@ -268,7 +274,13 @@ class HTMLViewHelpersTest extends HTMLViewTest
      */
     public function testIncludeJavascriptWithExternalJSFiles()
     {
-        $this->set_reflection_property_value('javascript', [ 'http://www.website.com/script3.js', 'https://www.website.com/script2.js', '//www.website.com/script1.js']);
+        $javascript = [
+            'http://www.website.com/script3.js',
+            'https://www.website.com/script2.js',
+            '//www.website.com/script1.js',
+        ];
+
+        $this->set_reflection_property_value('javascript', $javascript);
 
         $method = $this->get_accessible_reflection_method('include_javascript');
 

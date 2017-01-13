@@ -281,7 +281,6 @@ class RequestGetTest extends RequestTest
         $this->assertEquals('raw', $this->class->get_raw_data());
     }
 
-
     /**
      * Test that get_raw_data() returns cached raw request data if parsing it is empty.
      *
@@ -299,7 +298,7 @@ class RequestGetTest extends RequestTest
 
         $this->assertEquals('raw', $this->class->get_raw_data());
         $this->assertEquals('raw', $this->class->get_raw_data());
-        $this->assertEquals('raw',$this->get_reflection_property_value('raw_data'));
+        $this->assertEquals('raw', $this->get_reflection_property_value('raw_data'));
     }
 
     /**
@@ -318,10 +317,11 @@ class RequestGetTest extends RequestTest
                      ->will($this->returnValue('hello'));
 
         $this->assertEquals('raw', $this->class->get_raw_data());
-        $this->assertEquals('raw',$this->get_reflection_property_value('raw_data'));
+        $this->assertEquals('raw', $this->get_reflection_property_value('raw_data'));
         $this->assertEquals('hello', $this->class->get_raw_data());
-        $this->assertEquals('hello',$this->get_reflection_property_value('raw_data'));
+        $this->assertEquals('hello', $this->get_reflection_property_value('raw_data'));
     }
+
 }
 
 ?>

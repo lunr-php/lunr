@@ -253,6 +253,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
     }
+
 }
 
 ?>
