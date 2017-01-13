@@ -489,6 +489,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      * Define USING clause of the SQL statement.
      *
      * @param String $column_list Column name to use.
+     *
+     * @return void
      */
     function sql_using($column_list)
     {
@@ -506,7 +508,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
         if ($this->is_unfinished_join)
         {
-            $this->join .= ' ' . 'USING (';
+            $this->join              .= ' USING (';
             $this->is_unfinished_join = FALSE;
         }
         elseif (substr($this->join, -1) !== '(')
@@ -666,7 +668,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         elseif ($this->connector != '')
         {
             $this->$condition .= ' ' . $this->connector . ' ';
-            $this->connector = '';
+            $this->connector   = '';
         }
         elseif (substr($this->$condition, -1) !== '(')
         {

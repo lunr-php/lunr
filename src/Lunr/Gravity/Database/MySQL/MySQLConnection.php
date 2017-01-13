@@ -352,6 +352,7 @@ class MySQLConnection extends DatabaseConnection
             default:
                 break;
         }
+
         return $this;
     }
 
@@ -375,6 +376,7 @@ class MySQLConnection extends DatabaseConnection
             default:
                 break;
         }
+
         return $this;
     }
 

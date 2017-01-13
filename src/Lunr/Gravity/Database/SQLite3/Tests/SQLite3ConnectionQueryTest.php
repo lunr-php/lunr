@@ -23,7 +23,8 @@ use Lunr\Gravity\Database\SQLite3\SQLite3Connection;
  */
 class SQLite3ConnectionQueryTest extends SQLite3ConnectionTest
 {
-	/**
+
+    /**
      * Test that query() returns a QueryResult that indicates a failed query when not connected.
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::query
@@ -43,7 +44,7 @@ class SQLite3ConnectionQueryTest extends SQLite3ConnectionTest
      */
     public function testQueryReturnsQueryResultWhenConnected()
     {
-		$this->set_reflection_property_value('connected', TRUE);
+        $this->set_reflection_property_value('connected', TRUE);
 
         $this->sqlite3->expects($this->once())
                       ->method('query')
@@ -54,6 +55,7 @@ class SQLite3ConnectionQueryTest extends SQLite3ConnectionTest
         $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3QueryResult', $query);
         $this->assertFalse($query->has_failed());
     }
+
 }
 
 ?>

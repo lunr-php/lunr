@@ -229,6 +229,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
             $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
             $this->logger->error('{query}; failed with error: {error}', $context);
         }
+
         return !$result;
     }
 

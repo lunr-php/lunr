@@ -174,7 +174,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define USING part of the SQL statement.
      *
-     * @param String  $column_list Column name to use.
+     * @param String $column_list Column name to use.
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
