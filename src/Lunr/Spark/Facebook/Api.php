@@ -185,7 +185,7 @@ abstract class Api
     {
         $method = strtoupper($method);
 
-        $parts   = [];
+        $parts = [];
 
         try
         {
@@ -229,7 +229,7 @@ abstract class Api
     {
         $method = strtoupper($method);
 
-        $result  = [];
+        $result = [];
 
         try
         {

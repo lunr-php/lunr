@@ -138,7 +138,7 @@ abstract class Api
             $context = [
                 'message' => $error['message'],
                 'code'    => $error['code'],
-                'request' => $response->url
+                'request' => $response->url,
             ];
 
             $this->logger->warning('Twitter API Request ({request}) failed, ({code}): {message}', $context);
@@ -149,7 +149,7 @@ abstract class Api
         {
             $context = [
                 'message' => $e->getMessage(),
-                'request' => $url
+                'request' => $url,
             ];
 
             $this->logger->warning('Twitter API Request ({request}) failed: {message}', $context);

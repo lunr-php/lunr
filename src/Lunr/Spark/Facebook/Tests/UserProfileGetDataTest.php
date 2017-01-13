@@ -148,7 +148,7 @@ class UserProfileGetDataTest extends UserProfileTest
 
         $url    = 'https://graph.facebook.com/me';
         $params = [
-            'access_token' => 'Token',
+            'access_token'    => 'Token',
             'appsecret_proof' => 'Proof',
         ];
 
@@ -291,8 +291,8 @@ class UserProfileGetDataTest extends UserProfileTest
 
         $url    = 'https://graph.facebook.com/me';
         $params = [
-            'access_token' => 'Token',
-            'appsecret_proof' => 'Proof'
+            'access_token'    => 'Token',
+            'appsecret_proof' => 'Proof',
         ];
 
         $this->http->expects($this->at(0))
@@ -301,9 +301,7 @@ class UserProfileGetDataTest extends UserProfileTest
                    ->will($this->returnValue($this->response));
 
         $url    = 'https://graph.facebook.com/me/permissions';
-        $params = [
-            'access_token' => 'Token',
-        ];
+        $params = ['access_token' => 'Token'];
 
         $this->http->expects($this->at(1))
                    ->method('request')

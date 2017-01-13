@@ -25,7 +25,7 @@ class Tweet
      * Tweet data.
      * @var Array
      */
-     protected $data;
+    protected $data;
 
     /**
      * Constructor.

@@ -45,9 +45,9 @@ class AuthenticationApiTest extends AuthenticationTest
 
         $this->options = [
             'verify' => TRUE,
-            'auth' => [
+            'auth'   => [
                 'Key',
-                'Secret'
+                'Secret',
             ],
         ];
 

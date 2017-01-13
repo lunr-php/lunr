@@ -116,7 +116,7 @@ class ApiFetchDataTest extends ApiTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
 
-        $url    = 'http://localhost';
+        $url = 'http://localhost';
 
         $this->http->expects($this->at(0))
                    ->method('request')
@@ -151,7 +151,7 @@ class ApiFetchDataTest extends ApiTest
 
         $url    = 'http://localhost';
         $params = [
-            'access_token' => 'Token',
+            'access_token'    => 'Token',
             'appsecret_proof' => 'Proof',
         ];
 
@@ -176,7 +176,7 @@ class ApiFetchDataTest extends ApiTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
 
-        $url    = 'http://localhost';
+        $url = 'http://localhost';
 
         $this->http->expects($this->at(0))
                    ->method('request')
@@ -201,7 +201,7 @@ class ApiFetchDataTest extends ApiTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
 
-        $url    = 'http://localhost';
+        $url = 'http://localhost';
 
         $this->http->expects($this->at(0))
                    ->method('request')
@@ -229,7 +229,7 @@ class ApiFetchDataTest extends ApiTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
 
-        $url    = 'http://localhost';
+        $url = 'http://localhost';
 
         $this->http->expects($this->once())
                    ->method('request')
@@ -262,7 +262,7 @@ class ApiFetchDataTest extends ApiTest
                   ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
                   ->will($this->returnValue(NULL));
 
-        $url    = 'http://localhost';
+        $url = 'http://localhost';
 
         $this->http->expects($this->once())
                    ->method('request')

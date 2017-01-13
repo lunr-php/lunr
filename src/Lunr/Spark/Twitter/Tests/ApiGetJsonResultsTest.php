@@ -27,7 +27,7 @@ class ApiGetJsonResultsTest extends ApiTest
     /**
      * Test that get_json_results() does a correct request.
      *
-     * @param String $http_method HTTP method to use for the request.
+     * @param String $arguments Request parameters to expect.
      *
      * @dataProvider requestParamProvider
      * @covers       Lunr\Spark\Twitter\Api::get_json_results

@@ -33,10 +33,10 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
-            'client_id' => 'Lunr',
+            'client_id'     => 'Lunr',
             'client_secret' => 'Secret',
-            'redirect_uri' => 'http://localhost/controller/method/',
-            'code' => 'Code',
+            'redirect_uri'  => 'http://localhost/controller/method/',
+            'code'          => 'Code',
         ];
 
         $this->cas->expects($this->at(0))
@@ -74,10 +74,10 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
-            'client_id' => 'Lunr',
+            'client_id'     => 'Lunr',
             'client_secret' => 'Secret',
-            'redirect_uri' => 'http://localhost/controller/method/',
-            'code' => 'Code',
+            'redirect_uri'  => 'http://localhost/controller/method/',
+            'code'          => 'Code',
         ];
 
         $this->cas->expects($this->at(0))
@@ -109,10 +109,10 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
-            'client_id' => 'Lunr',
+            'client_id'     => 'Lunr',
             'client_secret' => 'Secret',
-            'redirect_uri' => 'http://localhost/controller/method/',
-            'code' => 'Code',
+            'redirect_uri'  => 'http://localhost/controller/method/',
+            'code'          => 'Code',
         ];
 
         $this->cas->expects($this->at(0))
@@ -151,10 +151,10 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
-            'client_id' => 'Lunr',
+            'client_id'     => 'Lunr',
             'client_secret' => 'Secret',
-            'redirect_uri' => 'http://localhost/controller/method/',
-            'code' => 'Code',
+            'redirect_uri'  => 'http://localhost/controller/method/',
+            'code'          => 'Code',
         ];
 
         $this->cas->expects($this->at(0))
@@ -191,10 +191,10 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
-            'client_id' => 'Lunr',
+            'client_id'     => 'Lunr',
             'client_secret' => 'Secret',
-            'redirect_uri' => 'http://localhost/controller/method/',
-            'code' => 'Code',
+            'redirect_uri'  => 'http://localhost/controller/method/',
+            'code'          => 'Code',
         ];
 
         $this->cas->expects($this->at(0))

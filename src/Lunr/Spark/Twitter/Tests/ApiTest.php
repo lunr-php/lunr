@@ -102,9 +102,7 @@ abstract class ApiTest extends LunrBaseTest
     public function requestParamProvider()
     {
         $args   = [];
-        $args[] = [
-            'http://localhost',
-        ];
+        $args[] = ['http://localhost'];
         $args[] = [
             'http://localhost',
             [ 'Content-Type' => 'application/json' ],

@@ -135,9 +135,7 @@ abstract class ApiTest extends LunrBaseTest
     public function requestParamProvider()
     {
         $args   = [];
-        $args[] = [
-            'http://localhost',
-        ];
+        $args[] = ['http://localhost'];
         $args[] = [
             'http://localhost',
             [ 'param1' => 1, 'param2' => 2 ],
@@ -170,6 +168,7 @@ abstract class ApiTest extends LunrBaseTest
 
         return $args;
     }
+
 }
 
 ?>

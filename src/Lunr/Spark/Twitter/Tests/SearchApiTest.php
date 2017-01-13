@@ -39,9 +39,9 @@ class SearchApiTest extends SearchTest
         parent::setUp();
 
         $this->headers = [
-            'Host' => 'api.twitter.com',
+            'Host'          => 'api.twitter.com',
             'Authorization' => 'Bearer BEARER TOKEN',
-            'Content-Type' => 'application/x-www-form-urlencoded;charset=UTF-8',
+            'Content-Type'  => 'application/x-www-form-urlencoded;charset=UTF-8',
         ];
     }
 

@@ -33,9 +33,9 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
-            'client_id' => 'Lunr',
+            'client_id'     => 'Lunr',
             'client_secret' => 'Secret',
-            'grant_type' => 'client_credentials',
+            'grant_type'    => 'client_credentials',
         ];
 
         $this->cas->expects($this->at(0))
@@ -71,9 +71,9 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
-            'client_id' => 'Lunr',
+            'client_id'     => 'Lunr',
             'client_secret' => 'Secret',
-            'grant_type' => 'client_credentials',
+            'grant_type'    => 'client_credentials',
         ];
 
         $this->cas->expects($this->at(0))
@@ -103,9 +103,9 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
-            'client_id' => 'Lunr',
+            'client_id'     => 'Lunr',
             'client_secret' => 'Secret',
-            'grant_type' => 'client_credentials',
+            'grant_type'    => 'client_credentials',
         ];
 
         $this->cas->expects($this->at(0))
@@ -142,9 +142,9 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
-            'client_id' => 'Lunr',
+            'client_id'     => 'Lunr',
             'client_secret' => 'Secret',
-            'grant_type' => 'client_credentials',
+            'grant_type'    => 'client_credentials',
         ];
 
         $this->cas->expects($this->at(0))
@@ -179,9 +179,9 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
-            'client_id' => 'Lunr',
+            'client_id'     => 'Lunr',
             'client_secret' => 'Secret',
-            'grant_type' => 'client_credentials',
+            'grant_type'    => 'client_credentials',
         ];
 
         $this->cas->expects($this->at(0))

@@ -42,8 +42,8 @@ class FeedGetPreviousDataTest extends FeedTest
         $url    = 'https://graph.facebook.com/resource/feed';
         $params = [
             'fields' => 'email,user_likes',
-            'limit' => 25,
-            'since' => 0,
+            'limit'  => 25,
+            'since'  => 0,
         ];
 
         $this->http->expects($this->once())
@@ -114,10 +114,10 @@ class FeedGetPreviousDataTest extends FeedTest
 
         $url    = 'https://graph.facebook.com/resource/feed';
         $params = [
-            'limit' => 25,
-            'access_token' => 'Token',
+            'limit'           => 25,
+            'access_token'    => 'Token',
             'appsecret_proof' => 'Proof',
-            'since' => 0,
+            'since'           => 0,
         ];
 
         $this->http->expects($this->once())
@@ -319,10 +319,10 @@ class FeedGetPreviousDataTest extends FeedTest
 
         $url    = 'https://graph.facebook.com/resource/feed';
         $params = [
-            'access_token' => 'Token',
+            'access_token'    => 'Token',
             'appsecret_proof' => 'Proof',
-            'limit' => 25,
-            'since' => 0,
+            'limit'           => 25,
+            'since'           => 0,
         ];
 
         $this->http->expects($this->at(0))
@@ -331,9 +331,7 @@ class FeedGetPreviousDataTest extends FeedTest
                    ->will($this->returnValue($this->response));
 
         $url    = 'https://graph.facebook.com/me/permissions';
-        $params = [
-            'access_token' => 'Token',
-        ];
+        $params = ['access_token' => 'Token'];
 
         $this->http->expects($this->at(1))
                    ->method('request')
@@ -363,10 +361,10 @@ class FeedGetPreviousDataTest extends FeedTest
 
         $url    = 'https://graph.facebook.com/resource/feed';
         $params = [
-            'access_token' => 'Token',
+            'access_token'    => 'Token',
             'appsecret_proof' => 'Proof',
-            'limit' => 25,
-            'since' => 0,
+            'limit'           => 25,
+            'since'           => 0,
         ];
 
         $this->http->expects($this->at(0))
