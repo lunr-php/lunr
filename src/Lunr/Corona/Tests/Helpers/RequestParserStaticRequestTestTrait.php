@@ -13,6 +13,8 @@
 
 namespace Lunr\Corona\Tests\Helpers;
 
+use Lunr\Corona\HttpMethod;
+
 /**
  * This trait contains test methods to verify a PSR-3 compliant logger was passed correctly.
  */
@@ -73,6 +75,22 @@ trait RequestParserStaticRequestTestTrait
      * @return array $base Array of base_url parameters and possible values
      */
     public abstract function baseurlProvider();
+
+    /**
+     * Test that parse_request() unsets request data in the AST.
+     */
+    public function testParseRequestSetsDefaultHttpAction()
+    {
+        $this->prepare_request_test('HTTP', '80');
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('action', $request);
+        $this->assertEquals(HttpMethod::GET, $request['action']);
+
+        $this->cleanup_request_test();
+    }
 
     /**
      * Test that the host is stored correctly.
