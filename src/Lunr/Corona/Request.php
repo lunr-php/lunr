@@ -48,6 +48,7 @@ class Request
 
     /**
      * Request parameters:
+     *  'action'     The HTTP method used for the request
      *  'protocol'   The protocol used for the request
      *  'domain'     The domain used for the request
      *  'port'       The port used for the request

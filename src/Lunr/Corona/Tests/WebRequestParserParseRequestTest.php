@@ -13,6 +13,7 @@
 
 namespace Lunr\Corona\Tests;
 
+use Lunr\Corona\HttpMethod;
 use Lunr\Corona\Tests\Helpers\RequestParserDynamicRequestTestTrait;
 
 /**
@@ -456,6 +457,46 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
         $this->assertInternalType('array', $request);
         $this->assertArrayHasKey('base_url', $request);
         $this->assertEquals('http://www.server_name_domain.com/path/to/', $request['base_url']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() sets default http method.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testParseRequestSetsDefaultHttpMethod()
+    {
+        $this->prepare_request_test();
+        $this->prepare_request_data();
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('action', $request);
+        $this->assertEquals(HttpMethod::GET, $request['action']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() sets default http method.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testParseRequestSetsHttpMethod()
+    {
+        $this->prepare_request_test();
+        $this->prepare_request_data();
+
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('action', $request);
+        $this->assertEquals(HttpMethod::POST, $request['action']);
 
         $this->cleanup_request_test();
     }

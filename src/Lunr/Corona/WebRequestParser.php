@@ -80,6 +80,15 @@ class WebRequestParser implements RequestParserInterface
         $request['sapi'] = PHP_SAPI;
         $request['host'] = gethostname();
 
+        if (array_key_exists('REQUEST_METHOD', $_SERVER))
+        {
+            $request['action'] = $_SERVER['REQUEST_METHOD'];
+        }
+        else
+        {
+            $request['action'] = HttpMethod::GET;
+        }
+
         $request['application_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']);
 
         $request['base_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
