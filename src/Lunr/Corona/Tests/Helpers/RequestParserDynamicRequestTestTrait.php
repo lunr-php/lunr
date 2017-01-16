@@ -13,6 +13,8 @@
 
 namespace Lunr\Corona\Tests\Helpers;
 
+use Lunr\Corona\HttpMethod;
+
 /**
  * This trait contains test methods to verify a PSR-3 compliant logger was passed correctly.
  */
@@ -58,6 +60,22 @@ trait RequestParserDynamicRequestTestTrait
      * @return array $keys Array of array keys.
      */
     public abstract function deviceUserAgentKeyProvider();
+
+    /**
+     * Test that parse_request() unsets request data in the AST.
+     */
+    public function testParseRequestSetsDefaultHttpAction()
+    {
+        $this->prepare_request_test('HTTP', '80');
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('action', $request);
+        $this->assertEquals(HttpMethod::GET, $request['action']);
+
+        $this->cleanup_request_test();
+    }
 
     /**
      * Test that the useragent is stored correctly.

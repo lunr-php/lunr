@@ -466,25 +466,6 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestSetsDefaultHttpMethod()
-    {
-        $this->prepare_request_test();
-        $this->prepare_request_data();
-
-        $request = $this->class->parse_request();
-
-        $this->assertInternalType('array', $request);
-        $this->assertArrayHasKey('action', $request);
-        $this->assertEquals(HttpMethod::GET, $request['action']);
-
-        $this->cleanup_request_test();
-    }
-
-    /**
-     * Test that parse_request() sets default http method.
-     *
-     * @covers Lunr\Corona\WebRequestParser::parse_request
-     */
     public function testParseRequestSetsHttpMethod()
     {
         $this->prepare_request_test();

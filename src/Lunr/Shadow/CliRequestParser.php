@@ -15,6 +15,7 @@
 namespace Lunr\Shadow;
 
 use Lunr\Corona\RequestParserInterface;
+use Lunr\Corona\HttpMethod;
 
 /**
  * Cli Request Parser.
@@ -85,6 +86,7 @@ class CliRequestParser implements RequestParserInterface
         $request['domain']    = $this->config['default_domain'];
         $request['port']      = $this->config['default_port'];
         $request['base_url']  = $this->config['default_url'];
+        $request['action']    = HttpMethod::GET;
 
         // Preset with default values:
         $request['controller'] = $this->config['default_controller'];
@@ -93,6 +95,14 @@ class CliRequestParser implements RequestParserInterface
 
         $request['device_useragent'] = NULL;
         $request['useragent']        = NULL;
+
+        foreach([ 'action', 'x' ] as $key)
+        {
+            if (array_key_exists($key, $this->ast))
+            {
+                $request['action'] = $this->ast[$key][0];
+            }
+        }
 
         if (array_key_exists('device_useragent', $this->ast))
         {

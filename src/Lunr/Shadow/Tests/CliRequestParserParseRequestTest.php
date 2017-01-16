@@ -13,6 +13,7 @@
 
 namespace Lunr\Shadow\Tests;
 
+use Lunr\Corona\HttpMethod;
 use Lunr\Corona\Tests\Helpers\RequestParserDynamicRequestTestTrait;
 
 /**
@@ -286,6 +287,56 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
         $this->assertArrayNotHasKey('params', $ast);
         $this->assertArrayNotHasKey('param', $ast);
         $this->assertArrayNotHasKey('p', $ast);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() sets default http method.
+     *
+     * @covers Lunr\Shadow\CliRequestParser::parse_request
+     */
+    public function testParseRequestSetsHttpMethodWithLongOption()
+    {
+        $this->prepare_request_test();
+        $this->prepare_request_data();
+
+        $ast = $this->get_reflection_property_value('ast');
+
+        $ast['action'] = [ 'POST' ];
+
+        $this->set_reflection_property_value('ast', $ast);
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('action', $request);
+        $this->assertEquals(HttpMethod::POST, $request['action']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() sets default http method.
+     *
+     * @covers Lunr\Shadow\CliRequestParser::parse_request
+     */
+    public function testParseRequestSetsHttpMethodWithShortOption()
+    {
+        $this->prepare_request_test();
+        $this->prepare_request_data();
+
+        $ast = $this->get_reflection_property_value('ast');
+
+        $ast['x'] = [ 'POST' ];
+
+        $this->set_reflection_property_value('ast', $ast);
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('action', $request);
+        $this->assertEquals(HttpMethod::POST, $request['action']);
 
         $this->cleanup_request_test();
     }
