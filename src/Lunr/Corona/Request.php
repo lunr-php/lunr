@@ -54,6 +54,9 @@ class Request
      *  'base_path'  The path on the server to the application
      *  'base_url'   All of the above combined
      *
+     *  'device_useragent' The device specific user agent sent with the request
+     *  'useragent'        The user agent sent with the request
+     *
      *  'sapi'       The PHP SAPI invoking the code
      *  'host'       The hostname of the server the script is running on
      *

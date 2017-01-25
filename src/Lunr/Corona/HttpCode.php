@@ -14,7 +14,7 @@
 namespace Lunr\Corona;
 
 /**
- * Spark module data error types.
+ * HTTP status codes.
  */
 class HttpCode
 {
