@@ -313,6 +313,8 @@
             <file>../src/Lunr/Vortex/GCM/Tests/GCMResponseBaseTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMResponseAddBatchResponseTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMResponseGetStatusTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseBasePushErrorTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseBasePushSuccessTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadGetTest.php</file>
@@ -377,6 +379,7 @@
                 <directory>../src/Lunr/Vortex/APNS/libcapn/Tests/</directory>
                 <directory>../src/Lunr/Vortex/APNS/ApnsPHP/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Email/Tests/</directory>
+                <directory>../src/Lunr/Vortex/FCM/Tests/</directory>
                 <directory>../src/Lunr/Vortex/GCM/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Email/Tests/</directory>
                 <directory>../src/Lunr/Vortex/MPNS/Tests/</directory>
