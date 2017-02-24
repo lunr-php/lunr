@@ -44,7 +44,7 @@ class L10nTraitTest extends LunrBaseTest
     {
         $this->class      = $this->getObjectForTrait('Lunr\L10n\L10nTrait');
         $this->reflection = new ReflectionClass($this->class);
-        $this->logger     = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger     = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->set_reflection_property_value('logger', $this->logger);
     }

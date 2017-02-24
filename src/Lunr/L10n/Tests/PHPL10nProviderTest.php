@@ -53,7 +53,7 @@ abstract class PHPL10nProviderTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->reflection = new ReflectionClass('Lunr\L10n\PHPL10nProvider');
 

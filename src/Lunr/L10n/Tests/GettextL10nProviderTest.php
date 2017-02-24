@@ -49,7 +49,7 @@ abstract class GettextL10nProviderTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->class = new GettextL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger);
         $this->class->set_default_language('nl_NL');

@@ -56,11 +56,11 @@ abstract class L10nHTMLViewTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->request = $this->getMock('Lunr\Core\RequestInterface');
+        $this->request = $this->getMockBuilder('Lunr\Core\RequestInterface')->getMock();
 
-        $this->response = $this->getMock('Lunr\Core\Response');
+        $this->response = $this->getMockBuilder('Lunr\Core\Response')->getMock();
 
         $this->l10nprovider = $this->getMockBuilder('Lunr\L10n\L10nProvider')
                                    ->disableOriginalConstructor()

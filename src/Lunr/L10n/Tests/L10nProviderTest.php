@@ -48,7 +48,7 @@ abstract class L10nProviderTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->class = $this->getMockBuilder('Lunr\L10n\L10nProvider')
                             ->setConstructorArgs([ self::LANGUAGE, self::DOMAIN, $this->logger ])

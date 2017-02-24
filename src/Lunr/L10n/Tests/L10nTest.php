@@ -48,8 +48,8 @@ abstract class L10nTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
-        $this->fao    = $this->getMock('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+        $this->fao    = $this->getMockBuilder('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface')->getMock();
 
         $this->class = new L10n($this->logger, $this->fao);
 
