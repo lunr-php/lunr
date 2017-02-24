@@ -1,13 +1,11 @@
 <?php
 
 /**
- * This file contains the EinvironmentTest class.
+ * This file contains the EnvironmentTest class.
  *
  * PHP Version 5.3
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
+ * @package    Core\Tests
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2017, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -15,19 +13,15 @@
 
 namespace Lunr;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 /**
  * This class tests for a proper test environment.
  *
- * @category   Libraries
- * @package    Core
- * @subpackage Tests
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @covers     Lunr\EnvironmentTest
+ * @covers Lunr\EnvironmentTest
  */
-class EnvironmentTest extends PHPUnit_Framework_TestCase
+class EnvironmentTest extends TestCase
 {
 
     /**

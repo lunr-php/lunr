@@ -14,7 +14,7 @@
 namespace Lunr\Core\Tests;
 
 use Lunr\Core\Configuration;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use stdClass;
 
@@ -24,7 +24,7 @@ use stdClass;
  *
  * @covers     Lunr\Core\DateTime
  */
-abstract class ConfigurationTest extends PHPUnit_Framework_TestCase
+abstract class ConfigurationTest extends TestCase
 {
 
     /**

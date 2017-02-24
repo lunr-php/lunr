@@ -13,6 +13,8 @@
 
 namespace Lunr\Corona\Tests;
 
+use PHPUnit\Framework\Error\Error as PHPUnit_Framework_Error;
+
 /**
  * This class contains tests for dispatching controllers with the FrontController class.
  *

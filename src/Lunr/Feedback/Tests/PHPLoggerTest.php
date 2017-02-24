@@ -14,6 +14,7 @@
 namespace Lunr\Feedback\Tests;
 
 use Lunr\Feedback\PHPLogger;
+use PHPUnit\Framework\Error\Warning as PHPUnit_Framework_Error_Warning;
 use Psr\Log\LogLevel;
 use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;

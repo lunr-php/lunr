@@ -14,6 +14,7 @@
 namespace Lunr\Core\Tests;
 
 use Lunr\Core\Configuration;
+use PHPUnit\Framework\Error\Error as PHPUnit_Framework_Error;
 
 /**
  * This tests loading configuration files via the Configuration class.

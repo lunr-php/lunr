@@ -15,6 +15,7 @@ namespace Lunr\Gravity\Database\SQLite3\Tests;
 
 use Lunr\Gravity\Database\SQLite3\LunrSQLite3;
 use Lunr\Halo\LunrBaseTest;
+use PHPUnit\Framework\Error\Warning as PHPUnit_Framework_Error_Warning;
 use ReflectionClass;
 
 /**

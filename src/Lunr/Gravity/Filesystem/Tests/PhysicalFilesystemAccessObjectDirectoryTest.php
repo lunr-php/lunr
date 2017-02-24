@@ -15,6 +15,7 @@
 namespace Lunr\Gravity\Filesystem\Tests;
 
 use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
+use PHPUnit\Framework\Error\Warning as PHPUnit_Framework_Error_Warning;
 
 /**
  * This class contains tests for directory related methods in the PhysicalFilesystemAccessObject.

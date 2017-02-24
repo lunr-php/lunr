@@ -13,6 +13,7 @@
  */
 
 namespace Lunr\Sphere\Tests;
+use PHPUnit\Framework\Error\Warning as PHPUnit_Framework_Error_Warning;
 
 /**
  * This class contains tests for the Session class.

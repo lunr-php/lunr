@@ -13,13 +13,13 @@
 
 namespace Lunr\Halo;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 /**
  * This class contains helper code for the Lunr unit tests.
  */
-abstract class LunrBaseTest extends PHPUnit_Framework_TestCase
+abstract class LunrBaseTest extends TestCase
 {
 
     /**

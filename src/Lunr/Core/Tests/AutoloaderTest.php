@@ -14,7 +14,7 @@
 namespace Lunr\Core\Tests;
 
 use Lunr\Core\Autoloader;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 /**
@@ -22,7 +22,7 @@ use ReflectionClass;
  *
  * @covers     Lunr\Core\Autoloader
  */
-class AutoloaderTest extends PHPUnit_Framework_TestCase
+class AutoloaderTest extends TestCase
 {
 
     /**

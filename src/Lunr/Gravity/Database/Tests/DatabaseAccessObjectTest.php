@@ -14,7 +14,7 @@
 namespace Lunr\Gravity\Database\Tests;
 
 use Lunr\Gravity\Database\DatabaseAccessObject;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 /**
@@ -22,7 +22,7 @@ use ReflectionClass;
  *
  * @covers Lunr\Gravity\Database\DatabaseAccessObject
  */
-abstract class DatabaseAccessObjectTest extends PHPUnit_Framework_TestCase
+abstract class DatabaseAccessObjectTest extends TestCase
 {
 
     /**

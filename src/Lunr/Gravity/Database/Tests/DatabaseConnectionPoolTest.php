@@ -14,7 +14,7 @@
 namespace Lunr\Gravity\Database\Tests;
 
 use Lunr\Gravity\Database\DatabaseConnectionPool;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 /**
@@ -23,7 +23,7 @@ use ReflectionClass;
  *
  * @covers Lunr\Gravity\Database\DatabaseConnectionPool
  */
-abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
+abstract class DatabaseConnectionPoolTest extends TestCase
 {
 
     /**

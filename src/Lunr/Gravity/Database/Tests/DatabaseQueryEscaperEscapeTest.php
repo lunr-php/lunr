@@ -15,6 +15,7 @@ namespace Lunr\Gravity\Database\Tests;
 
 use Lunr\Gravity\Database\DatabaseQueryEscaper;
 use Lunr\Halo\LunrBaseTest;
+use PHPUnit\Framework\Error\Notice as PHPUnit_Framework_Error_Notice;
 use ReflectionClass;
 
 /**

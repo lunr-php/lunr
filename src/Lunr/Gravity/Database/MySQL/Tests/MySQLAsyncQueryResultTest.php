@@ -14,7 +14,7 @@
 namespace Lunr\Gravity\Database\MySQL\Tests;
 
 use Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use mysqli;
 
@@ -24,7 +24,7 @@ use mysqli;
  *
  * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult
  */
-abstract class MySQLAsyncQueryResultTest extends PHPUnit_Framework_TestCase
+abstract class MySQLAsyncQueryResultTest extends TestCase
 {
 
     /**

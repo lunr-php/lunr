@@ -16,7 +16,7 @@ namespace Lunr\Gravity\Database\MySQL\Tests;
 
 use Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 /**
@@ -25,7 +25,7 @@ use ReflectionClass;
  *
  * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder
  */
-abstract class MySQLDMLQueryBuilderTest extends PHPUnit_Framework_TestCase
+abstract class MySQLDMLQueryBuilderTest extends TestCase
 {
 
     /**
