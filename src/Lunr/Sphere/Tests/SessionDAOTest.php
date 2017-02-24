@@ -77,11 +77,11 @@ class SessionDAOTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $mysqli_mock        = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $mysqli_mock        = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
         $mysqli_result_mock = new MockMySQLiResult($this->getMockBuilder('mysqli_result')
                                                         ->disableOriginalConstructor()
                                                         ->getMock());

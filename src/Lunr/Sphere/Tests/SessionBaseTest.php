@@ -45,7 +45,7 @@ class SessionBaseTest extends SessionTest
      */
     public function testSetSessionHandlerReturnsTrueWithSessionHandlerInterface()
     {
-        $handler = $this->getMock('\SessionHandlerInterface');
+        $handler = $this->getMockBuilder('\SessionHandlerInterface')->getMock();
 
         $this->assertTrue($this->class->set_session_handler($handler));
     }
