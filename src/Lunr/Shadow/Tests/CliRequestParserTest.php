@@ -45,7 +45,7 @@ abstract class CliRequestParserTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $ast = [
             'f'        => [ 'value for f' ],
@@ -56,13 +56,13 @@ abstract class CliRequestParserTest extends LunrBaseTest
             'option'   => [],
         ];
 
-        $parser = $this->getMock('Lunr\Shadow\CliParserInterface');
+        $parser = $this->getMockBuilder('Lunr\Shadow\CliParserInterface')->getMock();
 
         $parser->expects($this->any())
                ->method('parse')
                ->will($this->returnValue($ast));
 
-        $this->header = $this->getMock('http\Header');
+        $this->header = $this->getMockBuilder('http\Header')->getMock();
 
         $this->class      = new CliRequestParser($this->configuration, $parser, $this->header);
         $this->reflection = new ReflectionClass('Lunr\Shadow\CliRequestParser');

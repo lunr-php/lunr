@@ -37,7 +37,7 @@ class ConsoleTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $datetime = $this->getMock('Lunr\Core\DateTime');
+        $datetime = $this->getMockBuilder('Lunr\Core\DateTime')->getMock();
         $datetime->expects($this->once())
                  ->method('set_datetime_format')
                  ->will($this->returnValue(TRUE));
