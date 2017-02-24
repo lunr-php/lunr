@@ -44,9 +44,9 @@ abstract class FrontControllerTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->request = $this->getMock('Lunr\Corona\RequestInterface');
+        $this->request = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
 
-        $this->fao = $this->getMock('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface');
+        $this->fao = $this->getMockBuilder('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface')->getMock();
 
         $this->class = new FrontController($this->request, $this->fao);
 

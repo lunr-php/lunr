@@ -45,8 +45,8 @@ abstract class WebRequestParserTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
-        $this->header        = $this->getMock('http\Header');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
+        $this->header        = $this->getMockBuilder('http\Header')->getMock();
 
         $this->class      = new WebRequestParser($this->configuration, $this->header);
         $this->reflection = new ReflectionClass('Lunr\Corona\WebRequestParser');

@@ -52,11 +52,11 @@ abstract class HTMLViewTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->request = $this->getMock('Lunr\Corona\RequestInterface');
+        $this->request = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
 
-        $this->response = $this->getMock('Lunr\Corona\Response');
+        $this->response = $this->getMockBuilder('Lunr\Corona\Response')->getMock();
 
         $this->class = $this->getMockBuilder('Lunr\Corona\HTMLView')
                            ->setConstructorArgs([$this->request, $this->response, $this->configuration])

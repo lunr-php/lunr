@@ -54,7 +54,7 @@ abstract class RequestTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->parser = $this->getMock('Lunr\Corona\RequestParserInterface');
+        $this->parser = $this->getMockBuilder('Lunr\Corona\RequestParserInterface')->getMock();
 
         $this->parser->expects($this->once())
                      ->method('parse_request')

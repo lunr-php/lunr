@@ -49,9 +49,9 @@ abstract class JsonViewTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->response      = $this->getMock('Lunr\Corona\Response');
-        $this->request       = $this->getMock('Lunr\Corona\RequestInterface');
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->response      = $this->getMockBuilder('Lunr\Corona\Response')->getMock();
+        $this->request       = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $this->class      = new JsonView($this->request, $this->response, $this->configuration);
         $this->reflection = new ReflectionClass('Lunr\Corona\JsonView');

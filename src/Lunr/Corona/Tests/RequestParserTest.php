@@ -39,7 +39,7 @@ abstract class RequestParserTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $this->class      = new RequestParser($this->configuration);
         $this->reflection = new ReflectionClass('Lunr\Corona\RequestParser');

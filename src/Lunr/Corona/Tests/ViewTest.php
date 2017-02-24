@@ -58,9 +58,9 @@ abstract class ViewTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = array(
             array('path', $this->sub_configuration),
@@ -70,9 +70,9 @@ abstract class ViewTest extends LunrBaseTest
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->request = $this->getMock('Lunr\Corona\RequestInterface');
+        $this->request = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
 
-        $this->response = $this->getMock('Lunr\Corona\Response');
+        $this->response = $this->getMockBuilder('Lunr\Corona\Response')->getMock();
 
         $this->class = $this->getMockBuilder('Lunr\Corona\View')
                            ->setConstructorArgs(
