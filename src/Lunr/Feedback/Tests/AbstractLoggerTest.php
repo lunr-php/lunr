@@ -56,7 +56,7 @@ abstract class AbstractLoggerTest extends LunrBaseTest
      */
     public function setUpNoDateTime()
     {
-        $this->request = $this->getMock('Lunr\Corona\RequestInterface');
+        $this->request = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
 
         $this->class = $this->getMockBuilder('Lunr\Feedback\AbstractLogger')
                             ->setConstructorArgs([ $this->request ])
@@ -72,8 +72,8 @@ abstract class AbstractLoggerTest extends LunrBaseTest
      */
     public function setUpDateTime()
     {
-        $this->request  = $this->getMock('Lunr\Corona\RequestInterface');
-        $this->datetime = $this->getMock('Lunr\Core\DateTime');
+        $this->request  = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
+        $this->datetime = $this->getMockBuilder('Lunr\Core\DateTime')->getMock();
 
         $this->datetime->expects($this->once())
                        ->method('set_datetime_format')

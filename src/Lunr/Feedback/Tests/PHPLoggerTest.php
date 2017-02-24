@@ -37,7 +37,7 @@ class PHPLoggerTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->request = $this->getMock('Lunr\Corona\RequestInterface');
+        $this->request = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
 
         $this->class      = new PHPLogger($this->request);
         $this->reflection = new ReflectionClass('Lunr\Feedback\PHPLogger');

@@ -43,8 +43,8 @@ abstract class ChainLoggerTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->logger1 = $this->getMock('Psr\Log\LoggerInterface');
-        $this->logger2 = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger1 = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+        $this->logger2 = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->class      = new ChainLogger($this->logger1, $this->logger2);
         $this->reflection = new ReflectionClass('Lunr\Feedback\ChainLogger');

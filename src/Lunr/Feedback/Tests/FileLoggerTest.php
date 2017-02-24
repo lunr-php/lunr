@@ -64,15 +64,15 @@ class FileLoggerTest extends LunrBaseTest
     {
         $this->reflection = new ReflectionClass('Lunr\Feedback\FileLogger');
 
-        $this->request = $this->getMock('Lunr\Corona\RequestInterface');
+        $this->request = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
 
-        $this->datetime = $this->getMock('Lunr\Core\DateTime');
+        $this->datetime = $this->getMockBuilder('Lunr\Core\DateTime')->getMock();
 
         $this->datetime->expects($this->once())
                        ->method('set_datetime_format')
                        ->with($this->equalTo('%Y-%m-%d %H:%M:%S'));
 
-        $this->fao = $this->getMock('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface');
+        $this->fao = $this->getMockBuilder('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface')->getMock();
 
         $this->filename = tempnam('/tmp', 'phpunit_');
 

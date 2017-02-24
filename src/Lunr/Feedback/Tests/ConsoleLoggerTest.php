@@ -42,7 +42,7 @@ abstract class ConsoleLoggerTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->request = $this->getMock('Lunr\Corona\RequestInterface');
+        $this->request = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
         $this->console = $this->getMockBuilder('Lunr\Shadow\Console')
                               ->disableOriginalConstructor()
                               ->getMock();
