@@ -56,7 +56,7 @@ abstract class MySQLAsyncQueryResultTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $this->mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->query = 'SELECT * FROM table';
 

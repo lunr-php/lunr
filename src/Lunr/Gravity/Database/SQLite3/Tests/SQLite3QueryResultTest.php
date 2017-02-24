@@ -53,7 +53,7 @@ class SQLite3QueryResultTest extends LunrBaseTest
      */
     public function setUpWithResult()
     {
-        $this->sqlite3 = $this->getMock('Lunr\Gravity\Database\SQLite3\LunrSQLite3');
+        $this->sqlite3 = $this->getMockBuilder('Lunr\Gravity\Database\SQLite3\LunrSQLite3')->getMock();
 
         $this->query = 'SELECT * FROM table';
 
@@ -73,7 +73,7 @@ class SQLite3QueryResultTest extends LunrBaseTest
      */
     public function setUpWithNoResult()
     {
-        $this->sqlite3 = $this->getMock('Lunr\Gravity\Database\SQLite3\LunrSQLite3');
+        $this->sqlite3 = $this->getMockBuilder('Lunr\Gravity\Database\SQLite3\LunrSQLite3')->getMock();
 
         $this->query = 'SELECT * FROM table';
 
@@ -96,7 +96,7 @@ class SQLite3QueryResultTest extends LunrBaseTest
      */
     public function setUpWithFailedQuery()
     {
-        $this->sqlite3 = $this->getMock('Lunr\Gravity\Database\SQLite3\LunrSQLite3');
+        $this->sqlite3 = $this->getMockBuilder('Lunr\Gravity\Database\SQLite3\LunrSQLite3')->getMock();
 
         $this->query = 'SELECT * FROM table';
 

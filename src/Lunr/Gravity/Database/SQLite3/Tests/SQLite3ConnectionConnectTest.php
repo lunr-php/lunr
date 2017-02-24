@@ -113,9 +113,9 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
      */
     public function testConnectFailsWhenDriverIsNotSQLite3()
     {
-        $sub_configuration = $this->getMock('Lunr\Core\Configuration');
+        $sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $configuration = $this->getMock('Lunr\Core\Configuration');
+        $configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = array(
             array('db', $sub_configuration),

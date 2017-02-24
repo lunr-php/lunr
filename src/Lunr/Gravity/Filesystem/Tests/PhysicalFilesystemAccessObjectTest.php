@@ -46,7 +46,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->logger        = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger        = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->class         = new PhysicalFilesystemAccessObject($this->logger);
         $this->reflection    = new ReflectionClass('Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject');
         $this->find_location = TEST_STATICS . '/Gravity';

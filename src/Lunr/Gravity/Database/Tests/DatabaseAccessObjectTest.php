@@ -64,7 +64,7 @@ abstract class DatabaseAccessObjectTest extends PHPUnit_Framework_TestCase
     {
         $this->pool = NULL;
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->db = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLConnection')
                          ->disableOriginalConstructor()
@@ -96,7 +96,7 @@ abstract class DatabaseAccessObjectTest extends PHPUnit_Framework_TestCase
                            ->disableOriginalConstructor()
                            ->getMock();
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->db = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLConnection')
                          ->disableOriginalConstructor()

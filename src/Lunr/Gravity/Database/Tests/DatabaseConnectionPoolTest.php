@@ -63,9 +63,9 @@ abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
      */
     public function emptySetup()
     {
-        $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = array(
             array('db', $this->sub_configuration),
@@ -75,7 +75,7 @@ abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->pool = new DatabaseConnectionPool($this->configuration, $this->logger);
 
@@ -89,9 +89,9 @@ abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
      */
     public function unsupportedSetup()
     {
-        $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = array(
             array('db', $this->sub_configuration),
@@ -113,7 +113,7 @@ abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->pool = new DatabaseConnectionPool($this->configuration, $this->logger);
 
@@ -127,9 +127,9 @@ abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
      */
     public function supportedSetup()
     {
-        $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = array(
             array('db', $this->sub_configuration),
@@ -151,7 +151,7 @@ abstract class DatabaseConnectionPoolTest extends PHPUnit_Framework_TestCase
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->pool = new DatabaseConnectionPool($this->configuration, $this->logger);
 

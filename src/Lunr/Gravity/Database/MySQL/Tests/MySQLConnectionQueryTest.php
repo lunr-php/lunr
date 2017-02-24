@@ -30,7 +30,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testQueryReturnsFailedQueryResultWhenNotConnected()
     {
-        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
@@ -48,7 +48,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testQueryReturnsQueryResultWhenConnected()
     {
-        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
         $this->set_reflection_property_value('connected', TRUE);
@@ -71,7 +71,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testQueryPrependsQueryHintIfPresent()
     {
-        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
         $this->set_reflection_property_value('connected', TRUE);
@@ -95,7 +95,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testQueryResetsQueryHint()
     {
-        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
         $this->set_reflection_property_value('connected', TRUE);
@@ -120,7 +120,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testAsyncQueryReturnsFailedQueryResultWhenNotConnected()
     {
-        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
@@ -138,7 +138,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testAsyncQueryReturnsQueryResultWhenConnected()
     {
-        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
@@ -168,7 +168,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testAsyncQueryPrependsQueryHintIfPresent()
     {
-        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
         $this->set_reflection_property_value('connected', TRUE);
@@ -191,7 +191,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testAsyncQueryResetsQueryHint()
     {
-        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
         $this->set_reflection_property_value('connected', TRUE);

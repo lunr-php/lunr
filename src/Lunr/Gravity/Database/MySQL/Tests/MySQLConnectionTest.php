@@ -57,9 +57,9 @@ abstract class MySQLConnectionTest extends LunrBaseTest
      */
     public function emptySetUp()
     {
-        $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = [
             ['db', $this->sub_configuration],
@@ -69,9 +69,9 @@ abstract class MySQLConnectionTest extends LunrBaseTest
                             ->method('offsetGet')
                             ->will($this->returnValueMap($map));
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $this->mysqli = $this->getMock('\mysqli');
+        $this->mysqli = $this->getMockBuilder('\mysqli')->getMock();
 
         $this->class = new MySQLConnection($this->configuration, $this->logger, $this->mysqli);
 
@@ -83,9 +83,9 @@ abstract class MySQLConnectionTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = [
             ['db', $this->sub_configuration],
@@ -107,9 +107,9 @@ abstract class MySQLConnectionTest extends LunrBaseTest
                                 ->method('offsetGet')
                                 ->will($this->returnValueMap($map));
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $this->mysqli = $this->getMock('\mysqli');
+        $this->mysqli = $this->getMockBuilder('\mysqli')->getMock();
 
         $this->class = new MySQLConnection($this->configuration, $this->logger, $this->mysqli);
 

@@ -184,7 +184,7 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      */
     public function testSetQosPolicyReturnsFalseOnFailure()
     {
-        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 

@@ -65,7 +65,7 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
      */
     public function resultSetSetup()
     {
-        $this->mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $this->mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->query_result = new MockMySQLiResult($this->getMockBuilder('mysqli_result')
                                                         ->disableOriginalConstructor()
@@ -87,7 +87,7 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
     {
         $this->query_result = FALSE;
 
-        $this->mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
+        $this->mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->query = 'SELECT * FROM table';
 
@@ -105,7 +105,7 @@ abstract class MySQLQueryResultTest extends PHPUnit_Framework_TestCase
     {
         $this->query_result = TRUE;
 
-        $this->mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $this->mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->query = 'SELECT * FROM table';
 

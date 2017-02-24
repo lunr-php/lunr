@@ -57,9 +57,9 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
             $this->markTestSkipped('Extension sqlite3 is required.');
         }
 
-        $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = array(
             array('db', $this->sub_configuration),
@@ -69,9 +69,9 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
                             ->method('offsetGet')
                             ->will($this->returnValueMap($map));
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $this->sqlite3 = $this->getMock('Lunr\Gravity\Database\SQLite3\LunrSQLite3');
+        $this->sqlite3 = $this->getMockBuilder('Lunr\Gravity\Database\SQLite3\LunrSQLite3')->getMock();
 
         $this->class = new SQLite3Connection($this->configuration, $this->logger, $this->sqlite3);
 
@@ -88,9 +88,9 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
             $this->markTestSkipped('Extension sqlite3 is required.');
         }
 
-        $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = array(
             array('db', $this->sub_configuration),
@@ -114,9 +114,9 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
                                 ->with($this->equalTo('file'))
                                 ->will($this->returnValue(TRUE));
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $this->sqlite3 = $this->getMock('Lunr\Gravity\Database\SQLite3\LunrSQLite3');
+        $this->sqlite3 = $this->getMockBuilder('Lunr\Gravity\Database\SQLite3\LunrSQLite3')->getMock();
 
         $this->class = new SQLite3Connection($this->configuration, $this->logger, $this->sqlite3);
 

@@ -30,7 +30,7 @@ class MySQLConnectionEscapeTest extends MySQLConnectionTest
      */
     public function testEscapeStringReturnsFalseWhenNotConnected()
     {
-        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 

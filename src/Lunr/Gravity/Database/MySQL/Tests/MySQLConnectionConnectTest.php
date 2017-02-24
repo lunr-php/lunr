@@ -148,7 +148,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testFailedConnect()
     {
-        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
@@ -195,9 +195,9 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testConnectFailsWhenDriverIsNotMysql()
     {
-        $sub_configuration = $this->getMock('Lunr\Core\Configuration');
+        $sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $configuration = $this->getMock('Lunr\Core\Configuration');
+        $configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = [[ 'db', $sub_configuration ]];
 
@@ -253,7 +253,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testDisconnect()
     {
-        $mysqli = new MockMySQLiSuccessfulConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
@@ -275,7 +275,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      */
     public function testChangeDatabaseReturnsFalseWhenNotConnected()
     {
-        $mysqli = new MockMySQLiFailedConnection($this->getMock('\mysqli'));
+        $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
