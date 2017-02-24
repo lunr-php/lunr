@@ -48,9 +48,9 @@ abstract class PostTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->cas    = $this->getMock('Lunr\Spark\CentralAuthenticationStore');
-        $this->http   = $this->getMock('Requests_Session');
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->cas    = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
+        $this->http   = $this->getMockBuilder('Requests_Session')->getMock();
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->class = $this->getMockBuilder('Lunr\Spark\Facebook\Post')
                             ->setConstructorArgs([ $this->cas, $this->logger, $this->http ])

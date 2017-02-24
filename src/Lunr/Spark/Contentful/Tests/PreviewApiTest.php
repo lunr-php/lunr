@@ -54,10 +54,10 @@ abstract class PreviewApiTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->cas      = $this->getMock('Lunr\Spark\CentralAuthenticationStore');
-        $this->http     = $this->getMock('Requests_Session');
-        $this->logger   = $this->getMock('Psr\Log\LoggerInterface');
-        $this->response = $this->getMock('Requests_Response');
+        $this->cas      = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
+        $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
+        $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+        $this->response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $this->class = new PreviewApi($this->cas, $this->logger, $this->http);
 
