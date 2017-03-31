@@ -56,6 +56,31 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
     }
 
     /**
+     * Allow value escapers to handle NULL values more gracefully.
+     *
+     * @param String $name      Method name that was called
+     * @param Array  $arguments Arguments passed to the method
+     *
+     * @return mixed $return Escaped value or NULL
+     */
+    public function __call($name, $arguments)
+    {
+        if (substr($name, 0, 8) == 'null_or_' && strpos($name, 'value'))
+        {
+            if ($arguments[0] === NULL)
+            {
+                return NULL;
+            }
+            else
+            {
+                $method = substr($name, 8);
+
+                return $this->{$method}(...$arguments);
+            }
+        }
+    }
+
+    /**
      * Define and escape input as column.
      *
      * @param String $name      Input

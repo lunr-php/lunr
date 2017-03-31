@@ -89,6 +89,7 @@
         <testsuite name="Gravity">
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperEscapeTest.php</file>
+            <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperNullEscapeTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryEscaperEscapeTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryEscaperEscapeUUIDValueTest.php</file>
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3QueryEscaperEscapeTest.php</file>
