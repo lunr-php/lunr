@@ -73,7 +73,7 @@ abstract class MySQLDatabaseAccessObjectTest extends LunrBaseTest
                              ->disableOriginalConstructor()
                              ->getMock();
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->db->expects($this->at(0))
                  ->method('get_query_escaper_object')
