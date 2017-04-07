@@ -71,7 +71,7 @@ class FeedGetDataTest extends FeedTest
     public function testGetDataDoesNotCallApiIfResourceIDNotSetAndNotFetchingUserData()
     {
         $this->cas->expects($this->never())
-                  ->method('__get');
+                  ->method('get');
 
         $this->http->expects($this->never())
                    ->method('request');

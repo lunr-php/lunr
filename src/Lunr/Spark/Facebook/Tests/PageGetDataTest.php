@@ -32,7 +32,7 @@ class PageGetDataTest extends PageTest
     public function testGetDataDoesNotCallApiIfPageIDNotSet()
     {
         $this->cas->expects($this->never())
-                  ->method('__get');
+                  ->method('get');
 
         $this->http->expects($this->never())
                    ->method('request');
