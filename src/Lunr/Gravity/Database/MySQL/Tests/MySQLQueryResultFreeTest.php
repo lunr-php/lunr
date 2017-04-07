@@ -59,8 +59,8 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
         $property->setAccessible(TRUE);
         $property->setValue($this->result, TRUE);
 
-        $this->mysqli->expects($this->never())
-                     ->method('free');
+        $this->query_result->expects($this->never())
+                           ->method('free');
 
         $method = $this->result_reflection->getMethod('free_result');
         $method->setAccessible(TRUE);
