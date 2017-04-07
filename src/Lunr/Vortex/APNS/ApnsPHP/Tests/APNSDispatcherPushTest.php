@@ -263,9 +263,16 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
         $this->apns_push->expects($this->at($pos++))
                         ->method('disconnect');
 
+        $error = [
+            [
+                'MESSAGE' => 'Error',
+                'ERRORS'  => [],
+            ]
+        ];
+
         $this->apns_push->expects($this->at($pos++))
-                        ->method('get_errors')
-                        ->willReturn([ 'errors' ]);
+                        ->method('getErrors')
+                        ->willReturn($error);
 
         $this->logger->expects($this->never())
                      ->method('warning');
