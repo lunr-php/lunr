@@ -2,6 +2,11 @@
 def ant_sh(String stage){
     sh "/bin/ant ${stage}"
 }
+def deploy(){
+    if(env.deploy){
+        sh "salt-connect library project=lunr branch=master env=m2mobi"
+    }
+}
 pipeline {
     agent {
         label "web"
@@ -141,9 +146,7 @@ pipeline {
             }
             post {
                 success {
-                    if(env.deploy){
-                        sh "salt-connect library project=lunr branch=master env=m2mobi"
-                    }
+                    deploy()
                 }
             }
         }
