@@ -157,19 +157,19 @@ pipeline {
             emailext body: 'Please go to $BUILD_URL to see the result.',
                      recipientProviders: [[$class: 'CulpritsRecipientProvider']],
                      subject: 'Job $BUILD_DISPLAY_NAME finished',
-                     to: '$LUNR_MAILINGLIST'
+                     to: '${ENV,var="LUNR_MAILINGLIST"}'
         }
         failure {
             emailext body: 'Please go to $BUILD_URL to see the result.',
                                  recipientProviders: [[$class: 'CulpritsRecipientProvider']],
                                  subject: 'Job $BUILD_DISPLAY_NAME failed',
-                                 to: '$LUNR_MAILINGLIST'
+                                 to: '${ENV,var="LUNR_MAILINGLIST"}'
         }
         unstable {
             emailext body: 'Please go to $BUILD_URL to see the result.',
                                  recipientProviders: [[$class: 'CulpritsRecipientProvider']],
                                  subject: 'Job $BUILD_DISPLAY_NAME was deemed unstable',
-                                 to: '$LUNR_MAILINGLIST'
+                                 to: '${ENV,var="LUNR_MAILINGLIST"}'
         }
     }
 
