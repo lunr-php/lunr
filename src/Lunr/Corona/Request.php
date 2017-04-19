@@ -167,6 +167,7 @@ class Request
 
     /**
      * Override request values detected from the request parser.
+     * Replace all previous mock values.
      *
      * @param Array $values Array of key value pairs holding mocked request values
      *
@@ -180,6 +181,27 @@ class Request
         }
 
         $this->mock = $values;
+    }
+
+    /**
+     * Override request values detected from the request parser.
+     * Keep previous mock values and replace individual keys.
+     *
+     * @param Array $values Array of key value pairs holding mocked request values
+     *
+     * @return void
+     */
+    public function add_mock_values($values)
+    {
+        if (!is_array($values))
+        {
+            return;
+        }
+
+        foreach ($values as $key => $value)
+        {
+            $this->mock[$key] = $value;
+        }
     }
 
     /**
