@@ -244,7 +244,7 @@ class ConfigServiceLocator
 
         foreach ($params as $value)
         {
-            if ($value[0] == '!')
+            if (is_string($value) && $value[0] === '!')
             {
                 $processed_params[] = substr($value, 1);
                 continue;

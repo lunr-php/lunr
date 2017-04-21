@@ -131,6 +131,25 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
     }
 
     /**
+     * Test that get_parameters processes non-string parameters.
+     *
+     * @covers Lunr\Core\ConfigServiceLocator::get_parameters
+     */
+    public function testGetParametersProcessesNonStringParameter()
+    {
+        $params = [ [], 5, NULL ];
+
+        $method = $this->get_accessible_reflection_method('get_parameters');
+
+        $return = $method->invokeArgs($this->class, [ $params ]);
+
+        $this->assertInternalType('array', $return);
+        $this->assertSame([], $return[0]);
+        $this->assertSame(5, $return[1]);
+        $this->assertSame(NULL, $return[2]);
+    }
+
+    /**
      * Test that get_parameters processes forced non-ID parameters.
      *
      * @covers Lunr\Core\ConfigServiceLocator::get_parameters
