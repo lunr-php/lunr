@@ -35,43 +35,49 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
      * Push Notification endpoints.
      * @var Array
      */
-    private $endpoints;
+    protected $endpoints;
 
     /**
      * Push Notification payload to send.
      * @var String
      */
-    private $payload;
+    protected $payload;
 
     /**
      * Push Notification authentication token.
      * @var String
      */
-    private $auth_token;
+    protected $auth_token;
 
     /**
      * Push Notification Priority
      * @var string
      */
-    private $priority;
+    protected $priority;
 
     /**
      * Shared instance of the Requests_Session class.
      * @var \Requests_Session
      */
-    private $http;
+    protected $http;
 
     /**
      * Shared instance of a Logger class.
      * @var \Psr\Log\LoggerInterface
      */
-    private $logger;
+    protected $logger;
 
     /**
      * Url to send the GCM push notification to.
      * @var String
      */
     const GOOGLE_SEND_URL = 'https://gcm-http.googleapis.com/gcm/send';
+
+    /**
+     * Service name.
+     * @var String
+     */
+    const SERVICE_NAME = 'GCM';
 
     /**
      * Constructor.
@@ -190,9 +196,10 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
         $tmp_payload['priority'] = $this->priority;
 
         try {
-            $http_response = $this->http->post(self::GOOGLE_SEND_URL, $headers, json_encode($tmp_payload));
+            $http_response = $this->http->post(static::GOOGLE_SEND_URL, $headers, json_encode($tmp_payload));
         } catch(Requests_Exception $e) {
-            $this->logger->warning('Dispatching GCM notification(s) failed: {message}', [ 'message' => $e->getMessage() ]);
+            $this->logger->warning('Dispatching ' . static::SERVICE_NAME
+                . ' notification(s) failed: {message}', [ 'message' => $e->getMessage() ]);
             $http_response = $this->get_new_response_object_for_failed_request();
         }
 
@@ -268,7 +275,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     {
         $http_response = new Requests_Response();
 
-        $http_response->url = self::GOOGLE_SEND_URL;
+        $http_response->url = static::GOOGLE_SEND_URL;
 
         return $http_response;
     }
