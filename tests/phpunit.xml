@@ -317,6 +317,8 @@
             <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseBasePushErrorTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseBasePushSuccessTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMResponseBaseTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherBaseTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadGetTest.php</file>
