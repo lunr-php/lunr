@@ -62,6 +62,36 @@ abstract class GCMDispatcherTest extends LunrBaseTest
         unset($this->reflection);
     }
 
+    /**
+     * Test that get_response() returns GCMResponseObject.
+     *
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::get_response
+     */
+    public function testGetResponseReturnsGCMResponseObject()
+    {
+        $result = $this->class->get_response();
+
+        $this->assertInstanceOf('Lunr\Vortex\GCM\GCMResponse', $result);
+    }
+
+    /**
+     * Test that get_batch_response() returns GCMBatchResponse.
+     *
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::get_batch_response
+     */
+    public function testGetBatchResponseReturnsGCMBatchResponseObject()
+    {
+        $this->http->expects($this->at(0))
+                   ->method('__get')
+                   ->with('status_code')
+                   ->will($this->returnValue(500));
+
+        $method = $this->get_accessible_reflection_method('get_batch_response');
+        $result = $method->invokeArgs($this->class, [$this->http, $this->logger, [ 'endpoint' ]]);
+
+        $this->assertInstanceOf('Lunr\Vortex\GCM\GCMBatchResponse', $result);
+    }
+
 }
 
 ?>

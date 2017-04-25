@@ -114,13 +114,37 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     }
 
     /**
+     * Getter for GCMResponse.
+     *
+     * @return GCMResponse
+     */
+    public function get_response()
+    {
+        return new GCMResponse();
+    }
+
+    /**
+     * Getter for GCMBatchResponse.
+     *
+     * @param \Requests_Response       $http_response Requests_Response object.
+     * @param \Psr\Log\LoggerInterface $logger        Shared instance of a Logger.
+     * @param Array                    $endpoints     The endpoints the message was sent to (in the same order as sent).
+     *
+     * @return GCMBatchResponse
+     */
+    public function get_batch_response($http_response, $logger, $endpoints)
+    {
+        return new GCMBatchResponse($http_response, $logger, $endpoints);
+    }
+
+    /**
      * Push the notification.
      *
      * @return GCMResponse $return Response object
      */
     public function push()
     {
-        $gcm_response = new GCMResponse();
+        $gcm_response = $this->get_response();
 
         foreach (array_chunk($this->endpoints, self::BATCH_SIZE) as &$endpoints)
         {
@@ -172,7 +196,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
             $http_response = $this->get_new_response_object_for_failed_request();
         }
 
-        $gcm_batch_response = new GCMBatchResponse($http_response, $this->logger, $endpoints);
+        $gcm_batch_response = $this->get_batch_response($http_response, $this->logger, $endpoints);
 
         return $gcm_batch_response;
     }
