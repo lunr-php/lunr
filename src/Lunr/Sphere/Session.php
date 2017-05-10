@@ -8,6 +8,7 @@
  * @package    Lunr\Sphere
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
+ * @author     Sean Molenaar   <sean@m2mobi.com>
  * @copyright  2010-2017, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -34,9 +35,15 @@ class Session
 
     /**
      * Constructor.
+     * @param \SessionHandlerInterface|null $session_handler Handler for the session
      */
-    public function __construct()
+    public function __construct($session_handler = NULL)
     {
+        if ($session_handler !== NULL)
+        {
+            $this->setSessionHandler($session_handler);
+        }
+
         $this->closed  = FALSE;
         $this->started = FALSE;
 
@@ -61,11 +68,11 @@ class Session
     /**
      * Set SessionHandler.
      *
-     * @param SessionHandlerInterface $session_handler Session handler
+     * @param \SessionHandlerInterface $session_handler Session handler
      *
      * @return boolean
      */
-    public function set_session_handler($session_handler)
+    public function setSessionHandler($session_handler)
     {
         return session_set_save_handler($session_handler, TRUE);
     }
@@ -105,10 +112,11 @@ class Session
      * Get a key->value pair from the current session.
      *
      * @param mixed $key Identifier
+     * @param mixed $alt What to return if not found
      *
      * @return mixed
      */
-    public function get($key)
+    public function get($key, $alt = NULL)
     {
         if ($this->started && isset($_SESSION[$key]))
         {
@@ -116,7 +124,7 @@ class Session
         }
         else
         {
-            return NULL;
+            return $alt;
         }
     }
 
@@ -125,9 +133,26 @@ class Session
      *
      * @return String $session_id
      */
-    public function get_session_id()
+    public function sessionId()
     {
         return session_id();
+    }
+
+    /**
+     * Get the current session ID.
+     *
+     * @param string $id Predefined Session ID
+     *
+     * @return void
+     */
+    public function setSessionId($id)
+    {
+        if ($id == '')
+        {
+            return;
+        }
+
+        session_id($id);
     }
 
     /**
@@ -135,34 +160,45 @@ class Session
      *
      * @return String $session_id
      */
-    public function get_new_session_id()
+    public function regenerateId()
     {
         session_regenerate_id();
-        return $this->get_session_id();
+        return $this->sessionId();
     }
 
     /**
-     * Start a new session or continure an existing one.
+     * Start a new session or continue an existing one.
      *
      * @param String $id Predefined Session ID
      *
-     * @return void
+     * @return bool
      */
     public function start($id = '')
     {
         if ($this->started)
         {
-            return;
+            return TRUE;
         }
 
-        if ($id != '')
-        {
-            session_id($id);
-        }
+        $this->setSessionId($id);
 
-        session_start();
-        $this->started = TRUE;
-        $this->closed  = FALSE;
+        $success       = session_start();
+        $this->started = $success;
+        $this->closed  = !$success;
+
+        return $success;
+    }
+
+    /**
+     * Resumes a previously-existing session.
+     *
+     * @param String $id Predefined Session ID
+     *
+     * @return bool
+     */
+    public function resume($id = '')
+    {
+        return $this->start($id);
     }
 
     /**
@@ -186,7 +222,7 @@ class Session
     {
         if ($this->started)
         {
-            $_SESSION = array();
+            $_SESSION = [];
             session_destroy();
         }
     }

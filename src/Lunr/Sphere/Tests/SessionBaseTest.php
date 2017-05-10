@@ -42,13 +42,13 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that setSessionHandler returns true when receives a SessionHandlerInterface.
      *
-     * @covers Lunr\Sphere\Session::set_session_handler
+     * @covers Lunr\Sphere\Session::setSessionHandler
      */
     public function testSetSessionHandlerReturnsTrueWithSessionHandlerInterface()
     {
         $handler = $this->getMockBuilder('\SessionHandlerInterface')->getMock();
 
-        $this->assertTrue($this->class->set_session_handler($handler));
+        $this->assertTrue($this->class->setSessionHandler($handler));
     }
 
     /**
@@ -58,11 +58,11 @@ class SessionBaseTest extends SessionTest
      *
      * @expectedException PHPUnit_Framework_Error_Warning
      * @dataProvider      invalidSessionHandlerProvider
-     * @covers            Lunr\Sphere\Session::set_session_handler
+     * @covers            Lunr\Sphere\Session::setSessionHandler
      */
     public function testSetSessionHandlerReturnsFalseWithInvalidData($handler)
     {
-        $this->assertFalse($this->class->set_session_handler($handler));
+        $this->assertFalse($this->class->setSessionHandler($handler));
     }
 
     /**
@@ -284,33 +284,47 @@ class SessionBaseTest extends SessionTest
     }
 
     /**
-     * Test that get_session_id works properly.
+     * Test that sessionId works properly.
      *
      * @requires extension runkit
-     * @covers   Lunr\Sphere\Session::get_session_id
+     * @covers   Lunr\Sphere\Session::sessionId
      */
     public function testGetSessionId()
     {
         $this->mock_function('session_id', self::FUNCTION_GENERATE_ID);
-        $this->assertEquals('myId', $this->class->get_session_id());
+        $this->assertEquals('myId', $this->class->sessionId());
         $this->unmock_function('session_id');
     }
 
     /**
-     * Test that get_new_session_id works properly.
+     * Test that setSessionId works properly.
      *
      * @requires extension runkit
-     * @covers   Lunr\Sphere\Session::get_new_session_id
+     * @covers   Lunr\Sphere\Session::setSessionId
+     */
+    public function testSetSessionId()
+    {
+        $this->mock_function('session_id', self::FUNCTION_GENERATE_ID);
+        $this->class->setSessionId('hello');
+        $this->assertEquals('hello', $this->class->sessionId());
+        $this->unmock_function('session_id');
+    }
+
+    /**
+     * Test that regenerateId works properly.
+     *
+     * @requires extension runkit
+     * @covers   Lunr\Sphere\Session::regenerateId
      */
     public function testGetNewSessionId()
     {
         $this->mock_function('session_id', self::FUNCTION_GENERATE_ID);
         $this->mock_function('session_regenerate_id', self::FUNCTION_RETURN_TRUE);
 
-        $oldId = $this->class->get_session_id();
+        $oldId = $this->class->sessionId();
 
         session_id('newId');
-        $newId = $this->class->get_new_session_id();
+        $newId = $this->class->regenerateId();
 
         $this->assertNotEquals($oldId, $newId);
         $this->unmock_function('session_id');
@@ -335,6 +349,45 @@ class SessionBaseTest extends SessionTest
         $this->assertTrue($this->get_reflection_property_value('started'));
         $this->assertFalse($this->get_reflection_property_value('closed'));
         $this->unmock_function('session_start');
+    }
+
+    /**
+     * Test that resume works properly.
+     *
+     * @requires extension runkit
+     * @covers   \Lunr\Sphere\Session::resume
+     */
+    public function testResume()
+    {
+        $this->set_reflection_property_value('started', TRUE);
+        $this->set_reflection_property_value('closed', FALSE);
+
+        $this->class->resume('2');
+
+        $this->assertTrue($this->get_reflection_property_value('started'));
+        $this->assertFalse($this->get_reflection_property_value('closed'));
+    }
+
+    /**
+     * Test that resume works properly when closed.
+     *
+     * @requires extension runkit
+     * @covers   \Lunr\Sphere\Session::resume
+     */
+    public function testResumeWhenClosed()
+    {
+        $this->set_reflection_property_value('started', FALSE);
+        $this->set_reflection_property_value('closed', TRUE);
+
+        $this->mock_function('session_start', self::FUNCTION_RETURN_TRUE);
+        $this->mock_function('session_id', self::FUNCTION_GENERATE_ID);
+
+        $this->class->resume('2');
+
+        $this->assertTrue($this->get_reflection_property_value('started'));
+        $this->assertFalse($this->get_reflection_property_value('closed'));
+        $this->unmock_function('session_start');
+        $this->unmock_function('session_id');
     }
 
     /**
@@ -370,7 +423,7 @@ class SessionBaseTest extends SessionTest
 
         $this->assertTrue($this->get_reflection_property_value('started'));
         $this->assertFalse($this->get_reflection_property_value('closed'));
-        $this->assertEquals('newId', $this->class->get_session_id());
+        $this->assertEquals('newId', $this->class->sessionId());
         $this->unmock_function('session_id');
         $this->unmock_function('session_start');
     }
