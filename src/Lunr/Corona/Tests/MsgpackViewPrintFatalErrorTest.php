@@ -43,7 +43,7 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
      * Test that print_fatal_error() does not print an error page if there is no error.
      *
      * @requires extension msgpack
-     * @requires extension runkit
+     *
      * @covers   Lunr\Corona\MsgpackView::print_fatal_error
      */
     public function testPrintFatalErrorPrintsNothingIfNoError()
@@ -61,7 +61,7 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
      * Test that print_fatal_error() does not print an error page if there is no fatal error.
      *
      * @requires extension msgpack
-     * @requires extension runkit
+     *
      * @covers   Lunr\Corona\MsgpackView::print_fatal_error
      */
     public function testPrintFatalErrorPrintsNothingIfErrorNotFatal()
@@ -79,7 +79,7 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
      * Test that print_fatal_error() does prints a msgpack object if there is a fatal error.
      *
      * @requires extension msgpack
-     * @requires extension runkit
+     *
      * @covers   Lunr\Corona\MsgpackView::print_fatal_error
      */
     public function testPrintFatalErrorPrintsMsgpack()

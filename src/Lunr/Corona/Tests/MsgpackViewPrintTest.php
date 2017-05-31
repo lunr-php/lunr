@@ -44,7 +44,6 @@ class MsgpackViewPrintTest extends MsgpackViewTest
      *
      * @dataProvider invalidErrorInfoProvider
      * @requires     extension msgpack
-     * @requires     extension runkit
      * @covers       Lunr\Corona\MsgpackView::print_page
      */
     public function testPrintPagePrintsmsgpackWithCode($error_info)
@@ -86,7 +85,6 @@ class MsgpackViewPrintTest extends MsgpackViewTest
      * Test that print_page() prints MSGPACK with an empty string as message if message is missing.
      *
      * @requires extension msgpack
-     * @requires extension runkit
      * @covers   Lunr\Corona\MsgpackView::print_page
      */
     public function testPrintPagePrintsmsgpackWithoutMessage()
@@ -128,7 +126,6 @@ class MsgpackViewPrintTest extends MsgpackViewTest
      * Test that print_page() prints MSGPACK.
      *
      * @requires extension msgpack
-     * @requires extension runkit
      * @covers   Lunr\Corona\MsgpackView::print_page
      */
     public function testPrintPagePrintsmsgpack()

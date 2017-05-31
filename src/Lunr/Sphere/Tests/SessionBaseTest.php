@@ -350,7 +350,6 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that resume works properly.
      *
-     * @requires extension runkit
      * @covers   \Lunr\Sphere\Session::resume
      */
     public function testResume()
@@ -367,7 +366,6 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that resume works properly when closed.
      *
-     * @requires extension runkit
      * @covers   \Lunr\Sphere\Session::resume
      */
     public function testResumeWhenClosed()
