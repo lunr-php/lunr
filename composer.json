@@ -1,0 +1,40 @@
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/M2Mobi/ApnsPHP.git"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/M2Mobi/php-resque.git"
+    }
+  ],
+  "require": {
+    "psr/log": "~1.0.2",
+    "chrisboulton/php-resque": "dev-master#981ef3da53f671c14f8fc61a233c3974f04128a9",
+    "duccio/apns-php": "dev-master#2f5965c37568a26084d7544947cc0883ad2dac0d",
+    "PHPMailer/PHPMailer": "~6.0.0rc4",
+    "rmccue/Requests": "~1.7.0",
+    "colinmollenhour/credis": "~1.7",
+    "php": "5.6.*"
+  },
+  "suggest": {
+    "ext-http": "Needed for HTTP support in Corona, needed to get hostname in Shadow when parsing data",
+    "ext-apn": "Needed for push notification support in Vortex",
+    "ext-msgpack": "Needed for msgpack support in Corona",
+    "ext-gettext": "Needed for internationalization support in L10n",
+    "ext-mysqli": "Needed for MySQL/MariaDB support in Gravity (0.1)",
+    "ext-mysqlnd_ms": "Needed for MySQL load balancing Gravity (r335219) -> https://svn.php.net/viewvc/pecl/mysqlnd_ms/trunk/",
+    "ext-uopz": "Needed for unit tests on PHP 7 as a replacement for runkit"
+  },
+  "require-dev": {
+    "ext-runkit": "~1.0.4",
+    "ext-xdebug": "~2.4"
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "autoload": {
+    "psr-4": {"Lunr\\": "src/Lunr/"}
+  }
+}

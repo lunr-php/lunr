@@ -18,3 +18,4 @@ src/PHPMailer
 src/Psr
 src/Requests
 src/Resque
+vendor

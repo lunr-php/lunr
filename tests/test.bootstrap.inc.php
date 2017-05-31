@@ -29,11 +29,19 @@ set_include_path(
     get_include_path()
 );
 
-// Load and setup class file autloader
-require_once 'Lunr/Core/Autoloader.php';
+if (file_exists('vendor/autoload.php') == TRUE)
+{
+    // Load composer autoloader.
+    require_once 'vendor/autoload.php';
+}
+else
+{
+    // Load and setup class file autloader
+    require_once 'Lunr/Core/Autoloader.php';
 
-$autoloader = new Lunr\Core\Autoloader();
-$autoloader->register();
+    $autoloader = new Lunr\Core\Autoloader();
+    $autoloader->register();
+}
 
 if (defined('TEST_STATICS') === FALSE)
 {
