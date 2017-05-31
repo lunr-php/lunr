@@ -25,7 +25,6 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
     /**
      * Tests that the call of create_handle() sets the handle to a resource.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::create_handle
      */
     public function testCreateHandle()
@@ -50,7 +49,6 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
     /**
      * Tests that create_handle() returns FALSE if error occurs.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::create_handle
      */
     public function testCreateHandleReturnsFalseOnError()
@@ -70,7 +68,6 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
     /**
      * Tests that the call of connect creates the handle.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::connect
      */
     public function testOpenCreatesHandle()
@@ -93,7 +90,6 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
     /**
      * Tests that the call of connect with a previously connected handle keeps it the same.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::connect
      */
     public function testOpenTwiceKeepsSameHandle()
@@ -125,7 +121,6 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
     /**
      * Tests that connect() returns FALSE if error occurs.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::connect
      */
     public function testOpenReturnsFalseOnError()
@@ -170,7 +165,6 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
     /**
      * Tests that the call of disconnect() returns FALSE if error occurs.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::disconnect
      */
     public function testCloseReturnsFalseIfError()
@@ -187,7 +181,6 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
     /**
      * Tests that the call of disconnect() return TRUE on success.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::disconnect
      */
     public function testCloseReturnsTrueOnSuccess()
@@ -210,7 +203,6 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
     /**
      * Tests that create_handle() updates the meta_data.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::create_handle
      */
     public function testCreateHandleUpdatesMetaData()
@@ -236,7 +228,6 @@ class StreamSocketClientHandleTest extends StreamSocketClientTest
     /**
      * Tests that the addition of proper flags leads to a handle creation.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\StreamSocketClient::create_handle
      */
     public function testCreateHandleWithFlags()

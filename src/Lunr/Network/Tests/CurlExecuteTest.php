@@ -28,7 +28,6 @@ class CurlExecuteTest extends CurlTest
     /**
      * Test that execute() resets headers after a request.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\Curl::execute
      */
     public function testExecuteResetsHeaders()
@@ -62,7 +61,6 @@ class CurlExecuteTest extends CurlTest
     /**
      * Test that execute() resets options after a request.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\Curl::execute
      */
     public function testExecuteDoesNotSetHeaderOptionIfHeadersEmpty()
@@ -104,7 +102,6 @@ class CurlExecuteTest extends CurlTest
     /**
      * Test that execute returns a CurlResponse object on successful request.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\Curl::execute
      */
     public function testExecuteReturnsResponseObjectOnSuccess()
@@ -134,7 +131,6 @@ class CurlExecuteTest extends CurlTest
     /**
      * Test that execute returns a CurlResponse object on failed request.
      *
-     * @requires extension runkit
      * @covers   Lunr\Network\Curl::execute
      */
     public function testExecuteReturnsResponseObjectOnError()

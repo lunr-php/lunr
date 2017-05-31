@@ -29,7 +29,6 @@ class CurlRequestTest extends CurlTest
      * Test that get_request() returns response object on successful request.
      *
      * @depends  Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnSuccess
-     * @requires extension runkit
      * @covers   Lunr\Network\Curl::get_request
      */
     public function testGetRequestReturnsResponseObjectOnSuccess()
@@ -59,7 +58,6 @@ class CurlRequestTest extends CurlTest
      * Test that get_request() returns response object on failed request.
      *
      * @depends  Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnError
-     * @requires extension runkit
      * @covers   Lunr\Network\Curl::get_request
      */
     public function testGetRequestReturnsResponseObjectOnError()
@@ -89,7 +87,7 @@ class CurlRequestTest extends CurlTest
      * Test that post_request() returns response object on successful request.
      *
      * @depends  Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnSuccess
-     * @requires extension runkit
+
      * @covers   Lunr\Network\Curl::post_request
      */
     public function testPostRequestReturnsResponseObjectOnSuccess()
@@ -119,7 +117,6 @@ class CurlRequestTest extends CurlTest
      * Test that post_request() returns response object on failed request.
      *
      * @depends  Lunr\Network\Tests\CurlExecuteTest::testExecuteReturnsResponseObjectOnError
-     * @requires extension runkit
      * @covers   Lunr\Network\Curl::post_request
      */
     public function testPostRequestReturnsResponseObjectOnError()

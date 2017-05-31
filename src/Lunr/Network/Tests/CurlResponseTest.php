@@ -55,14 +55,9 @@ abstract class CurlResponseTest extends LunrBaseTest
             $this->markTestSkipped('Extension curl is required.');
         }
 
-        if (extension_loaded('runkit') === FALSE)
-        {
-            $this->markTestSkipped('Extension runkit is required.');
-        }
-
-        runkit_function_redefine('curl_errno', '', self::CURL_RETURN_ERRNO);
-        runkit_function_redefine('curl_error', '', self::CURL_RETURN_ERRMSG);
-        runkit_function_redefine('curl_getinfo', '', self::CURL_RETURN_INFO);
+        $this->mock_function('curl_errno', self::CURL_RETURN_ERRNO);
+        $this->mock_function('curl_error', self::CURL_RETURN_ERRMSG);
+        $this->mock_function('curl_getinfo', self::CURL_RETURN_INFO);
 
         $this->class      = new CurlResponse('Result', 'handle');
         $this->reflection = new ReflectionClass('Lunr\Network\CurlResponse');

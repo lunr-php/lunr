@@ -274,7 +274,6 @@ class MailSendTest extends MailTest
      * @depends  Lunr\Network\Tests\MailSetTest::testSetSubject
      * @depends  Lunr\Network\Tests\MailSetTest::testAddValidEmailAsTo
      * @depends  Lunr\Network\Tests\MailSetTest::testSetValidEmailAsFrom
-     * @requires extension runkit
      * @covers   Lunr\Network\Mail::send
      */
     public function testSendReturnsFalseWhenSendingFails()
@@ -296,7 +295,6 @@ class MailSendTest extends MailTest
      * @depends  Lunr\Network\Tests\MailSetTest::testSetSubject
      * @depends  Lunr\Network\Tests\MailSetTest::testAddValidEmailAsTo
      * @depends  Lunr\Network\Tests\MailSetTest::testSetValidEmailAsFrom
-     * @requires extension runkit
      * @covers   Lunr\Network\Mail::send
      */
     public function testSendReturnsTrueWhenSendingSucceeds()
