@@ -42,7 +42,6 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
     /**
      * Test that print_fatal_error() does not print an error page if there is no error.
      *
-     * @requires extension runkit
      * @covers   Lunr\Corona\JsonView::print_fatal_error
      */
     public function testPrintFatalErrorPrintsNothingIfNoError()
@@ -59,7 +58,6 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
     /**
      * Test that print_fatal_error() does not print an error page if there is no fatal error.
      *
-     * @requires extension runkit
      * @covers   Lunr\Corona\JsonView::print_fatal_error
      */
     public function testPrintFatalErrorPrintsNothingIfErrorNotFatal()
@@ -77,7 +75,6 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      * Test that print_fatal_error() does prints a json object if there is a fatal error.
      *
      * @requires PHP 5.5.12
-     * @requires extension runkit
      * @covers   Lunr\Corona\JsonView::print_fatal_error
      */
     public function testPrintFatalErrorPrintsPrettyJson()
@@ -101,7 +98,6 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
     /**
      * Test that print_fatal_error() does prints a json object if there is a fatal error.
      *
-     * @requires extension runkit
      * @covers   Lunr\Corona\JsonView::print_fatal_error
      */
     public function testPrintFatalErrorForWebPrintsJson()

@@ -25,7 +25,6 @@ class WebRequestParserParseRawDataTest extends WebRequestParserTest
     /**
      * Test storing raw request data.
      *
-     * @requires extension runkit
      * @covers   Lunr\Corona\WebRequestParser::parse_raw_data
      */
     public function testParseRawData()

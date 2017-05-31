@@ -123,7 +123,6 @@ class RequestParserBaseTest extends RequestParserTest
     /**
      * Test storing raw request data.
      *
-     * @requires extension runkit
      * @covers   Lunr\Corona\RequestParser::parse_raw_data
      */
     public function testParseRawData()

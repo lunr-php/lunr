@@ -39,7 +39,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
     /**
      * Test generating stylesheet include links for one stylesheet.
      *
-     * @requires extension runkit
+     *
      * @covers   Lunr\Corona\HTMLView::include_stylesheets
      */
     public function testIncludeStylesheetsWithOneStylesheet()
@@ -68,7 +68,6 @@ class HTMLViewHelpersTest extends HTMLViewTest
     /**
      * Test generating stylesheet include links for multiple stylesheets.
      *
-     * @requires extension runkit
      * @covers   Lunr\Corona\HTMLView::include_stylesheets
      */
     public function testIncludeStylesheetsWithMultipleStylesheets()
@@ -107,7 +106,6 @@ class HTMLViewHelpersTest extends HTMLViewTest
     /**
      * Test generating stylesheet include links for external stylesheets.
      *
-     * @requires extension runkit
      * @covers   Lunr\Corona\HTMLView::include_stylesheets
      */
     public function testIncludeStylesheetsWithExternalStylesheets()
@@ -142,7 +140,6 @@ class HTMLViewHelpersTest extends HTMLViewTest
     /**
      * Test generating stylesheet include links for multiple sorted stylesheets.
      *
-     * @requires extension runkit
      * @covers   Lunr\Corona\HTMLView::include_stylesheets
      */
     public function testIncludeStylesheetsWithMultipleStylesheetsSorted()
@@ -195,7 +192,6 @@ class HTMLViewHelpersTest extends HTMLViewTest
     /**
      * Test generating javascript include links for one javascript file.
      *
-     * @requires extension runkit
      * @covers   Lunr\Corona\HTMLView::include_javascript
      */
     public function testIncludeJavascriptWithOneJSFile()
@@ -224,7 +220,6 @@ class HTMLViewHelpersTest extends HTMLViewTest
     /**
      * Test generating javascript include links for multiple javascript files.
      *
-     * @requires extension runkit
      * @covers   Lunr\Corona\HTMLView::include_javascript
      */
     public function testIncludeJavascriptWithMultipleJSFiles()
@@ -263,7 +258,6 @@ class HTMLViewHelpersTest extends HTMLViewTest
     /**
      * Test generating javascript include links for external javascript files.
      *
-     * @requires extension runkit
      * @covers   Lunr\Corona\HTMLView::include_javascript
      */
     public function testIncludeJavascriptWithExternalJSFiles()
@@ -298,7 +292,6 @@ class HTMLViewHelpersTest extends HTMLViewTest
     /**
      * Test generating javascript include links for multiple sorted javascript files.
      *
-     * @requires extension runkit
      * @covers   Lunr\Corona\HTMLView::include_javascript
      */
     public function testIncludeJavascriptWithMultipleJSFilesSorted()

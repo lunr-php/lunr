@@ -25,7 +25,6 @@ class CliRequestParserParseRawDataTest extends CliRequestParserTest
     /**
      * Test storing raw request data.
      *
-     * @requires extension runkit
      * @covers   Lunr\Shadow\CliRequestParser::parse_raw_data
      */
     public function testParseRawData()
