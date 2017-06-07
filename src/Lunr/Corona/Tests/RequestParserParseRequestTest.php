@@ -44,11 +44,6 @@ class RequestParserParseRequestTest extends RequestParserTest
      */
     protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = '')
     {
-        if (extension_loaded('runkit') === FALSE)
-        {
-            $this->markTestSkipped('Extension runkit is required.');
-        }
-
         $this->mock_function('gethostname', self::GET_HOSTNAME);
 
         $this->configuration->expects($this->at(0))

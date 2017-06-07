@@ -163,7 +163,6 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      * @runInSeparateProcess
      *
      * @requires extension mysqlnd_ms
-     * @requires extension runkit
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::set_qos_policy
      */
     public function testSetQosPolicyReturnsTrueOnSuccess()

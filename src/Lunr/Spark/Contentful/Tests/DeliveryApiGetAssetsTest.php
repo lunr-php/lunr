@@ -27,7 +27,6 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
     /**
      * Test that get_assets() returns an empty result if there was a request error.
      *
-     * @requires extension runkit
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
     public function testGetAssetsWithoutFiltersReturnsEmptyResultOnRequestError()
@@ -64,7 +63,6 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
     /**
      * Test that get_assets() with filters returns an empty result if there was a request error.
      *
-     * @requires extension runkit
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
     public function testGetAssetsWithFiltersReturnsEmptyResultOnRequestError()
@@ -101,7 +99,6 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
     /**
      * Test that get_assets() returns an empty result if the request failed.
      *
-     * @requires extension runkit
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
     public function testGetAssetsWithoutFiltersReturnsEmptyResultOnRequestFailure()
@@ -134,7 +131,6 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
     /**
      * Test that get_assets() with filters returns an empty result if the request failed.
      *
-     * @requires extension runkit
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
     public function testGetAssetsWithFiltersReturnsEmptyResultOnRequestFailure()
@@ -167,7 +163,6 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
     /**
      * Test that get_assets() returns the request result on success.
      *
-     * @requires extension runkit
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
     public function testGetAssetsWithoutFiltersReturnsResultsOnSuccessfulRequest()
@@ -203,7 +198,6 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
     /**
      * Test that get_assets() with filters returns the request result on success.
      *
-     * @requires extension runkit
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
     public function testGetAssetsWithFiltersReturnsResultsOnSuccessfulRequest()

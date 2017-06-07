@@ -45,11 +45,6 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      */
     protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = '')
     {
-        if (extension_loaded('runkit') === FALSE)
-        {
-            $this->markTestSkipped('Extension runkit is required.');
-        }
-
         $_SERVER['SCRIPT_FILENAME'] = '/full/path/to/index.php';
 
         $this->mock_function('gethostname', self::GET_HOSTNAME);

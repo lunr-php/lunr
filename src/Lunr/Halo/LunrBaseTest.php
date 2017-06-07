@@ -136,6 +136,12 @@ abstract class LunrBaseTest extends TestCase
      */
     private function runkit_mock_function($name, $mock)
     {
+        if (!extension_loaded('runkit'))
+        {
+            $this->markTestSkipped('The runkit extension is not available.');
+            return;
+        }
+
         if (function_exists($name . self::FUNCTION_ID) === FALSE)
         {
             runkit_function_copy($name, $name . self::FUNCTION_ID);
@@ -154,6 +160,12 @@ abstract class LunrBaseTest extends TestCase
      */
     private function uopz_mock_function($name, $mock)
     {
+        if (!extension_loaded('uopz'))
+        {
+            $this->markTestSkipped('The uopz extension is not available.');
+            return;
+        }
+
         if (is_callable($mock))
         {
             uopz_set_return($name, $mock);
@@ -249,6 +261,12 @@ abstract class LunrBaseTest extends TestCase
      */
     private function runkit_mock_method($method, $mock, $visibility = 'public', $args = '')
     {
+        if (!extension_loaded('runkit'))
+        {
+            $this->markTestSkipped('The runkit extension is not available.');
+            return;
+        }
+
         $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
 
@@ -286,6 +304,12 @@ abstract class LunrBaseTest extends TestCase
      */
     private function uopz_mock_method($method, $mock, $args = '')
     {
+        if (!extension_loaded('uopz'))
+        {
+            $this->markTestSkipped('The uopz extension is not available.');
+            return;
+        }
+
         $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
 
@@ -365,8 +389,20 @@ abstract class LunrBaseTest extends TestCase
     {
         if (PHP_MAJOR_VERSION < 7)
         {
+            if (!extension_loaded('runkit'))
+            {
+                $this->markTestSkipped('The runkit extension is not available.');
+                return;
+            }
+
             runkit_constant_redefine($constant, $value);
 
+            return;
+        }
+
+        if (!extension_loaded('uopz'))
+        {
+            $this->markTestSkipped('The uopz extension is not available.');
             return;
         }
 
