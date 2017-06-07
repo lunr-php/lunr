@@ -202,7 +202,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushRequestWithMultipleEndpointsMultipleBatches()
     {
-        runkit_constant_redefine('Lunr\Vortex\GCM\GCMDispatcher::BATCH_SIZE', 2);
+        $this->constant_redefine('Lunr\Vortex\GCM\GCMDispatcher::BATCH_SIZE', 2);
 
         $this->set_reflection_property_value('endpoints', [ 'endpoint1', 'endpoint2', 'endpoint3', 'endpoint4', 'endpoint5' ]);
         $this->set_reflection_property_value('payload', '{"collapse_key":"abcde-12345"}');

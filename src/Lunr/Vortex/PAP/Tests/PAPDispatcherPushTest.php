@@ -27,7 +27,6 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
     /**
      * Test that push() returns PAPResponseObject.
      *
-     * @requires extension runkit
      * @covers   Lunr\Vortex\PAP\PAPDispatcher::push
      */
     public function testPushReturnsPAPResponseObjectOnRequestFailure()
@@ -79,7 +78,6 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
     /**
      * Test that push() returns PAPResponseObject.
      *
-     * @requires extension runkit
      * @covers   Lunr\Vortex\PAP\PAPDispatcher::push
      */
     public function testPushReturnsPAPResponseObject()
@@ -127,7 +125,6 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
     /**
      * Test that push() resets the properties after a push.
      *
-     * @requires extension runkit
      * @covers   Lunr\Vortex\PAP\PAPDispatcher::push
      */
     public function testPushResetsPropertiesOnRequestFailure()
@@ -184,7 +181,6 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
     /**
      * Test that push() resets the properties after a push.
      *
-     * @requires extension runkit
      * @covers   Lunr\Vortex\PAP\PAPDispatcher::push
      */
     public function testPushResetsProperties()

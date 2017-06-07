@@ -99,7 +99,6 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
     /**
      * Test that get_assets() returns an empty result if the request failed.
      *
-     * @requires extension runkit
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
     public function testGetAssetsWithoutFiltersReturnsEmptyResultOnRequestFailure()
@@ -132,7 +131,6 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
     /**
      * Test that get_assets() with filters returns an empty result if the request failed.
      *
-     * @requires extension runkit
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
     public function testGetAssetsWithFiltersReturnsEmptyResultOnRequestFailure()
