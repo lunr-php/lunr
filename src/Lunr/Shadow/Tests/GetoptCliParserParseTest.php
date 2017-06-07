@@ -70,47 +70,47 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
     /**
      * Test that parse() returns an empty array on error.
      *
-     * @requires extension runkit
      * @covers   Lunr\Shadow\GetoptCliParser::parse
      */
     public function testParseReturnsEmptyArrayOnError()
     {
-        runkit_function_redefine('getopt', '', self::PARSE_FAILS);
+        $this->mock_function('getopt', self::PARSE_FAILS);
 
         $value = $this->class->parse();
 
         $this->assertArrayEmpty($value);
+        $this->unmock_function('getopt');
     }
 
     /**
      * Test that parse() sets error to TRUE on error.
      *
-     * @requires extension runkit
      * @covers   Lunr\Shadow\GetoptCliParser::parse
      */
     public function testParseSetsErrorTrueOnError()
     {
-        runkit_function_redefine('getopt', '', self::PARSE_FAILS);
+        $this->mock_function('getopt', self::PARSE_FAILS);
 
         $this->class->parse();
 
         $this->assertTrue($this->get_reflection_property_value('error'));
+        $this->unmock_function('getopt');
     }
 
     /**
      * Test that parse() returns an ast array on success.
      *
-     * @requires extension runkit
      * @covers   Lunr\Shadow\GetoptCliParser::parse
      */
     public function testParseReturnsAstOnSuccess()
     {
-        runkit_function_redefine('getopt', '', self::PARSE_WORKS);
+        $this->mock_function('getopt', self::PARSE_WORKS);
 
         $value = $this->class->parse();
 
         $this->assertInternalType('array', $value);
         $this->assertEquals(array('a' => array(), 'b' => array('arg')), $value);
+        $this->unmock_function('getopt');
     }
 
 }

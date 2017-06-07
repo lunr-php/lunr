@@ -285,7 +285,6 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that get_session_id works properly.
      *
-     * @requires extension runkit
      * @covers   Lunr\Sphere\Session::get_session_id
      */
     public function testGetSessionId()
@@ -298,7 +297,6 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that get_new_session_id works properly.
      *
-     * @requires extension runkit
      * @covers   Lunr\Sphere\Session::get_new_session_id
      */
     public function testGetNewSessionId()
@@ -319,7 +317,6 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that start works properly.
      *
-     * @requires extension runkit
      * @covers   Lunr\Sphere\Session::start
      */
     public function testStart()
@@ -354,7 +351,6 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that start works properly setting an id.
      *
-     * @requires extension runkit
      * @covers   Lunr\Sphere\Session::start
      */
     public function testStartSetsId()
@@ -377,7 +373,6 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that destroy works properly when started.
      *
-     * @requires extension runkit
      * @covers   Lunr\Sphere\Session::destroy
      */
     public function testDestroyWorksWhenStarted()
@@ -415,7 +410,6 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that close.
      *
-     * @requires extension runkit
      * @covers   Lunr\Sphere\Session::close
      */
     public function testCloseSetsParameters()
