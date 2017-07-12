@@ -206,6 +206,11 @@ abstract class LunrBaseTest extends TestCase
      */
     private function runkit_unmock_function($name)
     {
+        if (!extension_loaded('runkit'))
+        {
+            return;
+        }
+
         runkit_function_remove($name);
         runkit_function_rename($name . self::FUNCTION_ID, $name);
     }
@@ -219,6 +224,11 @@ abstract class LunrBaseTest extends TestCase
      */
     private function uopz_unmock_function($name)
     {
+        if (!extension_loaded('uopz'))
+        {
+            return;
+        }
+
         uopz_unset_return($name);
     }
 
@@ -353,6 +363,11 @@ abstract class LunrBaseTest extends TestCase
      */
     private function runkit_unmock_method($method)
     {
+        if (!extension_loaded('runkit'))
+        {
+            return;
+        }
+
         $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
 
@@ -369,6 +384,11 @@ abstract class LunrBaseTest extends TestCase
      */
     private function uopz_unmock_method($method)
     {
+        if (!extension_loaded('uopz'))
+        {
+            return;
+        }
+
         $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
 
