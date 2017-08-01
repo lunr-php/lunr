@@ -11,8 +11,8 @@ fi
 
 # interactions download locations
 PSRLOG="https://github.com/php-fig/log/archive/1.0.2.tar.gz"
-RESQUE="https://github.com/chrisboulton/php-resque/archive/cf187fae522df085f79837d3763645da066194d6.tar.gz"
-APNSPHP="https://github.com/M2Mobi/ApnsPHP/archive/b9c04fdfdf63da714fbb06e4151d939e0e9fdccb.tar.gz"
+RESQUE="https://github.com/chrisboulton/php-resque/archive/981ef3da53f671c14f8fc61a233c3974f04128a9.tar.gz"
+APNSPHP="https://github.com/M2Mobi/ApnsPHP/archive/2f5965c37568a26084d7544947cc0883ad2dac0d.tar.gz"
 PHPMAILER="https://github.com/PHPMailer/PHPMailer/archive/v6.0.0rc4.tar.gz"
 REQUESTS="https://github.com/rmccue/Requests/archive/v1.7.0.tar.gz"
 
@@ -28,9 +28,9 @@ fi
 if ! [ -e "$DESTDIR/Resque" ]; then
   cd "$TMP"
     wget --content-disposition "$RESQUE"
-    tar xvf php-resque-cf187fae522df085f79837d3763645da066194d6.tar.gz
+    tar xvf php-resque-981ef3da53f671c14f8fc61a233c3974f04128a9.tar.gz
 
-    mv php-resque-cf187fae522df085f79837d3763645da066194d6/lib "$DESTDIR/Resque"
+    mv php-resque-981ef3da53f671c14f8fc61a233c3974f04128a9/lib "$DESTDIR/Resque"
   cd -
 fi
 
@@ -42,9 +42,9 @@ fi
 if ! [ -e "$DESTDIR/ApnsPHP" ]; then
   cd "$TMP"
     wget --content-disposition "$APNSPHP"
-    tar xvf ApnsPHP-b9c04fdfdf63da714fbb06e4151d939e0e9fdccb.tar.gz
+    tar xvf ApnsPHP-2f5965c37568a26084d7544947cc0883ad2dac0d.tar.gz
 
-    mv ApnsPHP-b9c04fdfdf63da714fbb06e4151d939e0e9fdccb/ApnsPHP "$DESTDIR/ApnsPHP"
+    mv ApnsPHP-2f5965c37568a26084d7544947cc0883ad2dac0d/ApnsPHP "$DESTDIR/ApnsPHP"
   cd -
 fi
 
