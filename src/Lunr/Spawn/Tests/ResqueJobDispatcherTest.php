@@ -48,7 +48,7 @@ class ResqueJobDispatcherTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->resque = $this->getMockBuilder('Resque')->setMethods(['enqueue'])->getMock();
+        $this->resque = $this->getMockBuilder('Resque')->getMock();
 
         $this->reflection = new ReflectionClass('Lunr\Spawn\ResqueJobDispatcher');
         $this->class      = new ResqueJobDispatcher($this->resque);

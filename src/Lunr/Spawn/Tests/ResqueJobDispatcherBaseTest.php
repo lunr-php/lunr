@@ -80,15 +80,15 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      */
     public function testDispatchUpdateToken()
     {
-        $this->resque->expects($this->any())
-             ->method('enqueue')
-             ->will($this->returnValue('TOKEN'));
+        $this->mock_method([ $this->resque, 'enqueue' ], 'return "TOKEN";');
 
         $this->class->dispatch('job', array());
 
         $value = $this->get_reflection_property_value('token');
 
         $this->assertNotNull($value);
+
+        $this->unmock_method([ $this->resque, 'enqueue' ]);
     }
 
     /**
@@ -98,15 +98,15 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      */
     public function testGetJobIdReturnsToken()
     {
-        $this->resque->expects($this->any())
-             ->method('enqueue')
-             ->will($this->returnValue('TOKEN'));
+        $this->mock_method([ $this->resque, 'enqueue' ], 'return "TOKEN";');
 
         $this->class->dispatch('job', array());
 
         $value = $this->get_reflection_property_value('token');
 
         $this->assertSame($value, $this->class->get_job_id());
+
+        $this->unmock_method([ $this->resque, 'enqueue' ]);
     }
 
     /**
