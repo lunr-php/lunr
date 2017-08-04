@@ -46,6 +46,12 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
     protected $configuration;
 
     /**
+     * Mock instance of the Configuration class.
+     * @var Configuration
+     */
+    protected $sub_configuration;
+
+    /**
      * TestCase Constructor.
      *
      * @return void
@@ -61,13 +67,14 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
 
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $map = array(
-            array('db', $this->sub_configuration),
-        );
-
         $this->configuration->expects($this->any())
+                            ->method('offsetExists')
+                            ->will($this->returnValue(TRUE));
+
+        $this->configuration->expects($this->atLeast(1))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap($map));
+                            ->with('db')
+                            ->will($this->returnValue($this->sub_configuration));
 
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
@@ -92,27 +99,27 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
 
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $map = array(
-            array('db', $this->sub_configuration),
-        );
-
         $this->configuration->expects($this->any())
+                            ->method('offsetExists')
+                            ->will($this->returnValue(TRUE));
+
+        $this->configuration->expects($this->atLeast(1))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap($map));
+                            ->with('db')
+                            ->will($this->returnValue($this->sub_configuration));
 
-        $map = array(
-            array('file', '/tmp/test.db'),
-            array('driver', 'sqlite3'),
-        );
+        $this->sub_configuration->expects($this->atLeast(1))
+                                ->method('offsetExists')
+                                ->will($this->returnValue(TRUE));
 
-        $this->sub_configuration->expects($this->any())
+        $map = [
+            ['file', '/tmp/test.db'],
+            ['driver', 'sqlite3'],
+        ];
+
+        $this->sub_configuration->expects($this->atLeast(1))
                                 ->method('offsetGet')
                                 ->will($this->returnValueMap($map));
-
-        $this->sub_configuration->expects($this->any())
-                                ->method('offsetExists')
-                                ->with($this->equalTo('file'))
-                                ->will($this->returnValue(TRUE));
 
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 

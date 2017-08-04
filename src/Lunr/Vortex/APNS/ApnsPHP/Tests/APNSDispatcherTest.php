@@ -34,13 +34,13 @@ abstract class APNSDispatcherTest extends LunrBaseTest
 
     /**
      * Mock instance of an APNS Push class.
-     * @var ApnsPHP\Push
+     * @var \ApnsPHP_Push
      */
     protected $apns_push;
 
     /**
      * Mock instance of an APNS Message class.
-     * @var ApnsPHP\Message
+     * @var \ApnsPHP_Message
      */
     protected $apns_message;
 

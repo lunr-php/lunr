@@ -202,8 +202,6 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushRequestWithMultipleEndpointsMultipleBatches()
     {
-        $this->constant_redefine('Lunr\Vortex\GCM\GCMDispatcher::BATCH_SIZE', 2);
-
         $this->set_reflection_property_value('endpoints', [ 'endpoint1', 'endpoint2', 'endpoint3', 'endpoint4', 'endpoint5' ]);
         $this->set_reflection_property_value('payload', '{"collapse_key":"abcde-12345"}');
         $this->set_reflection_property_value('auth_token', 'auth_token');

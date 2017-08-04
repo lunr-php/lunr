@@ -143,7 +143,7 @@ class LunrCliParser implements CliParserInterface
     {
         array_push($this->checked, $opt);
 
-        if ($opt{0} == '-')
+        if (isset($opt{0}) && $opt{0} == '-')
         {
             $param = substr($opt, 1);
 
@@ -152,7 +152,7 @@ class LunrCliParser implements CliParserInterface
                 return $this->is_valid_short($opt, $index);
             }
 
-            if($param{0} != '-')
+            if(isset($param{0}) && $param{0} != '-')
             {
                 return $this->is_valid_short($param, $index);
             }

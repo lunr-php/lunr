@@ -172,9 +172,9 @@ abstract class LunrBaseTest extends TestCase
             return;
         }
 
-        if (is_callable($mock))
+        if ($mock instanceof \Closure)
         {
-            uopz_set_return($name, $mock);
+            uopz_set_return($name, $mock, TRUE);
             return;
         }
 

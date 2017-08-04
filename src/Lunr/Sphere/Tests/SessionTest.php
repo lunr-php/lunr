@@ -15,9 +15,8 @@
 namespace Lunr\Sphere\Tests;
 
 use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
-use stdClass;
 use Lunr\Sphere\Session;
+use ReflectionClass;
 
 /**
  * This class contains common setup routines, providers
@@ -38,24 +37,29 @@ abstract class SessionTest extends LunrBaseTest
      * Runkit simulation code that returns id;
      * @var string
      */
-    const FUNCTION_GENERATE_ID = '  static $id;
-                                    $args = func_get_args();
-                                    if(!is_null($args)&&isset($args[0])){
-                                        $id = $args[0];
-                                    }
-                                    if(!is_null($id)){
-                                       return $id;
-                                    }else{
-                                        return \'myId\';
-                                    }';
+    protected $generate_id_function;
 
     /**
      * TestCase Constructor.
      */
     public function setUp()
     {
-        $this->class      = new Session();
-        $this->reflection = new ReflectionClass('Lunr\Sphere\Session');
+        $this->class                = new Session();
+        $this->reflection           = new ReflectionClass('Lunr\Sphere\Session');
+        $id                         = 'myId';
+        $this->generate_id_function = function ($set_id = NULL) use (&$id) {
+            if (!is_null($set_id))
+            {
+                $id = $set_id;
+            }
+
+            if(!is_null($id))
+            {
+                return $id;
+            }else{
+                return 'myId';
+            }
+        };
     }
 
     /**

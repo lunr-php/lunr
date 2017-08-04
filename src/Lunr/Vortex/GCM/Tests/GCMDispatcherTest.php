@@ -48,6 +48,7 @@ abstract class GCMDispatcherTest extends LunrBaseTest
 
         $this->class = new GCMDispatcher($this->http, $this->logger);
 
+        $this->constant_redefine('Lunr\Vortex\GCM\GCMDispatcher::BATCH_SIZE', 2);
 
         $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMDispatcher');
     }
