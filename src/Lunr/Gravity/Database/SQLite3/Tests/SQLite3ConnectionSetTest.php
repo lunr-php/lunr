@@ -43,7 +43,7 @@ class SQLite3ConnectionSetTest extends SQLite3ConnectionTest
         $this->configuration->expects($this->any())
                            ->method('offsetGet')
                            ->with('db')
-                           ->will($this->returnValue(array('file' => NULL)));
+                           ->will($this->returnValue(['file' => NULL]));
 
         $this->set_reflection_property_value('db', '');
 
@@ -65,7 +65,7 @@ class SQLite3ConnectionSetTest extends SQLite3ConnectionTest
         $this->configuration->expects($this->any())
                             ->method('offsetGet')
                             ->with('db')
-                            ->will($this->returnValue(array('file' => NULL)));
+                            ->will($this->returnValue(['file' => NULL]));
 
         $this->set_reflection_property_value('db', '');
 
