@@ -47,7 +47,10 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
 
         $this->assertPropertySame('endpoints', []);
         $this->assertPropertySame('payload', '{}');
-        $this->assertPropertySame('apns_message', NULL);
+        if (!defined('REFLECTION_BUG_72194') || REFLECTION_BUG_72194 !== TRUE)
+        {
+            $this->assertPropertySame('apns_message', NULL);
+        }
     }
 
     /**

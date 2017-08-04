@@ -122,7 +122,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     {
         $gcm_response = new GCMResponse();
 
-        foreach (array_chunk($this->endpoints, self::BATCH_SIZE) as &$endpoints)
+        foreach (array_chunk($this->endpoints, static::BATCH_SIZE) as &$endpoints)
         {
             $batch_response = $this->push_batch($endpoints);
 

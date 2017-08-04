@@ -38,13 +38,13 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
 
     /**
      * Shared instance of ApnsPHP\Push.
-     * @var ApnsPHP\Push
+     * @var \ApnsPHP\Push
      */
     protected $apns_push;
 
     /**
      * Apns Message instance
-     * @var ApnsPHP\Message
+     * @var \ApnsPHP\Message
      */
     protected $apns_message;
 

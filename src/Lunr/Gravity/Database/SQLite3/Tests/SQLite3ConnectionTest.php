@@ -65,7 +65,7 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
 
         $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
 
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $this->configuration->expects($this->any())
                             ->method('offsetExists')
@@ -97,7 +97,7 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
 
         $this->sub_configuration = $this->getMock('Lunr\Core\Configuration');
 
-        $this->configuration = $this->getMock('Lunr\Core\Configuration');
+        $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $this->configuration->expects($this->any())
                             ->method('offsetExists')
