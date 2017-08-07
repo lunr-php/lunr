@@ -129,8 +129,8 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Mock a PHP function with runkit.
      *
-     * @param String $name Function name
-     * @param String $mock Replacement code for the function
+     * @param String          $name Function name
+     * @param String|\Closure $mock Replacement code for the function
      *
      * @return void
      */
@@ -145,6 +145,12 @@ abstract class LunrBaseTest extends TestCase
         if (function_exists($name . self::FUNCTION_ID) === FALSE)
         {
             runkit_function_copy($name, $name . self::FUNCTION_ID);
+        }
+
+        if ($mock instanceof \Closure)
+        {
+            runkit_function_redefine($name, $mock);
+            return;
         }
 
         runkit_function_redefine($name, '', $mock);
