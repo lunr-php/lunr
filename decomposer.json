@@ -48,5 +48,13 @@
     "includes": [
       "Credis-1.7"
     ]
+  },
+  "Psr-Cache": {
+    "url": "https://github.com/php-fig/cache.git",
+    "version": "1.0.1",
+    "psr4": {
+      "prefix": "Psr\\Cache",
+      "search-path": "/src/"
+    }
   }
 }

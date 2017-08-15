@@ -48,6 +48,7 @@ else
     include_once 'ApnsPHP-1.0.1.91.php';
     include_once 'Requests-1.7.0.php';
     include_once 'PHP-Resque-1.2.92.php';
+    include_once 'Psr-Cache-1.0.1.php';
 }
 
 if (defined('TEST_STATICS') === FALSE)

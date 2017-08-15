@@ -12,6 +12,11 @@
         <ini name="zend.enable_gc" value="1" />
     </php>
     <testsuites>
+        <testsuite name="Cache">
+            <file>../src/Lunr/Cache/Tests/CacheHandlerTest.php</file>
+            <file>../src/Lunr/Cache/Tests/CacheHandlerBaseTest.php</file>
+            <file>../src/Lunr/Cache/Tests/CacheHandlerDataTest.php</file>
+        </testsuite>
         <testsuite name="Core">
             <file>../src/Lunr/Core/Tests/AutoloaderTest.php</file>
             <file>../src/Lunr/Core/Tests/AutoloaderTestLegacy.php</file>
@@ -352,6 +357,7 @@
         <whitelist>
             <directory>../src/Lunr/</directory>
             <exclude>
+                <directory>../src/Lunr/Cache/Tests/</directory>
                 <directory>../src/Lunr/Halo/</directory>
                 <directory>../src/Lunr/Core/Tests/</directory>
                 <directory>../src/Lunr/Corona/Tests/</directory>
