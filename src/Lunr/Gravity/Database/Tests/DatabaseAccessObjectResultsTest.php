@@ -34,6 +34,121 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
     }
 
     /**
+     * Test that indexed_result_array() returns FALSE if query failed.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::indexed_result_array
+     */
+    public function testIndexedResultArrayReturnsFalseIfQueryFailed()
+    {
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+                      ->disableOriginalConstructor()
+                      ->getMock();
+
+        $query->expects($this->once())
+              ->method('has_failed')
+              ->will($this->returnValue(TRUE));
+
+        $query->expects($this->once())
+              ->method('error_message')
+              ->will($this->returnValue('message'));
+
+        $query->expects($this->once())
+              ->method('query')
+              ->will($this->returnValue('query'));
+
+        $this->logger->expects($this->once())
+                     ->method('error')
+                     ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
+
+        $method = $this->reflection_dao->getMethod('indexed_result_array');
+        $method->setAccessible(TRUE);
+
+        $this->assertFalse($method->invokeArgs($this->dao, [ &$query, 'key2' ]));
+    }
+
+    /**
+     * Test that indexed_result_array() returns an empty array if query has no results.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::indexed_result_array
+     */
+    public function testIndexedResultArrayReturnsEmptyArrayIfQueryHasNoResults()
+    {
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+                      ->disableOriginalConstructor()
+                      ->getMock();
+
+        $query->expects($this->once())
+              ->method('has_failed')
+              ->will($this->returnValue(FALSE));
+
+        $query->expects($this->once())
+              ->method('number_of_rows')
+              ->will($this->returnValue(0));
+
+        $method = $this->reflection_dao->getMethod('indexed_result_array');
+        $method->setAccessible(TRUE);
+
+        $result = $method->invokeArgs($this->dao, [ &$query, 'key2' ]);
+
+        $this->assertInternalType('array', $result);
+        $this->assertEmpty($result);
+    }
+
+    /**
+     * Test that indexed_result_array() returns an array of values if query has results.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::indexed_result_array
+     */
+    public function testIndexedResultArrayReturnsArrayIfQueryHasResults()
+    {
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+                      ->disableOriginalConstructor()
+                      ->getMock();
+
+        $query->expects($this->once())
+              ->method('has_failed')
+              ->will($this->returnValue(FALSE));
+
+        $query->expects($this->once())
+              ->method('number_of_rows')
+              ->will($this->returnValue(1));
+
+        $query_result = [
+            [
+                'key'  => 'value',
+                'key2' => 'index',
+            ],
+            [
+                'key'  => 'value2',
+                'key2' => 'index2',
+            ],
+        ];
+
+        $query->expects($this->once())
+              ->method('result_array')
+              ->will($this->returnValue($query_result));
+
+        $method = $this->reflection_dao->getMethod('indexed_result_array');
+        $method->setAccessible(TRUE);
+
+        $result = $method->invokeArgs($this->dao, [ &$query, 'key2' ]);
+
+        $indexed_result = [
+            'index' => [
+                'key'  => 'value',
+                'key2' => 'index',
+            ],
+            'index2' => [
+                'key'  => 'value2',
+                'key2' => 'index2',
+            ],
+        ];
+
+        $this->assertInternalType('array', $result);
+        $this->assertEquals($indexed_result, $result);
+    }
+
+    /**
      * Test that result_array() returns FALSE if query failed.
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_array

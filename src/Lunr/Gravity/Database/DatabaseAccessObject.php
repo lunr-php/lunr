@@ -85,11 +85,43 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     }
 
     /**
+     * Get query result as an indexed array.
+     *
+     * @param DatabaseQueryResult $query  The result of the run query
+     * @param string              $column Column to use as index
+     *
+     * @return mixed $result FALSE on failure, array otherwise
+     */
+    protected function indexed_result_array($query, $column)
+    {
+        if ($query->has_failed() === TRUE)
+        {
+            $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
+            $this->logger->error('{query}; failed with error: {error}', $context);
+            return FALSE;
+        }
+
+        if ($query->number_of_rows() == 0)
+        {
+            return array();
+        }
+
+        $result = [];
+
+        foreach ($query->result_array() as $row)
+        {
+            $result[$row[$column]] = $row;
+        }
+
+        return $result;
+    }
+
+    /**
      * Get query result as array.
      *
      * @param DatabaseQueryResult $query The result of the run query
      *
-     * @return mixed $return FALSE on failure, array otherwise
+     * @return mixed $result FALSE on failure, array otherwise
      */
     protected function result_array($query)
     {
@@ -115,7 +147,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      *
      * @param DatabaseQueryResult $query The result of the run query
      *
-     * @return mixed $return FALSE on failure, array otherwise
+     * @return mixed $result FALSE on failure, array otherwise
      */
     protected function result_row($query)
     {
@@ -142,7 +174,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      * @param DatabaseQueryResult $query  The result of the run query
      * @param String              $column The title of the requested column
      *
-     * @return mixed $return FALSE on failure, array otherwise
+     * @return mixed $result FALSE on failure, array otherwise
      */
     protected function result_column($query, $column)
     {
@@ -169,7 +201,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      * @param DatabaseQueryResult $query The result of the run query
      * @param String              $cell  The title of the requested cell
      *
-     * @return mixed $return FALSE on failure, mixed otherwise
+     * @return mixed $result FALSE on failure, mixed otherwise
      */
     protected function result_cell($query, $cell)
     {
@@ -196,7 +228,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      * @param DatabaseQueryResult $query       The result of the run query
      * @param Integer             $retry_count The max amount of re-executing the query
      *
-     * @return mixed $return FALSE on failure, mixed otherwise
+     * @return mixed $result FALSE on failure, mixed otherwise
      */
     protected function result_retry($query, $retry_count = 5)
     {
@@ -219,7 +251,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      *
      * @param DatabaseQueryResult $query The result of the run query
      *
-     * @return bool $return FALSE on failure, TRUE on success
+     * @return bool $result FALSE on failure, TRUE on success
      */
     protected function result_boolean($query)
     {
