@@ -72,7 +72,6 @@ abstract class IniTest extends LunrBaseTest
 
         return $values;
     }
-
 }
 
 ?>
