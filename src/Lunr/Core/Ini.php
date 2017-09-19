@@ -92,6 +92,8 @@ class Ini
         $val  = trim($val);
         $last = strtolower($val[ strlen($val) - 1 ]);
 
+        $val = intval($val);
+
         switch($last) {
             case 'g':
                 $val *= 1024;

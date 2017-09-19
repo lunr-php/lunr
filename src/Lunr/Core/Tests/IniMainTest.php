@@ -49,9 +49,11 @@ class IniMainTest extends IniTest
     {
         $limit = ini_get('memory_limit');
 
-        $this->class->memory_limit = $limit + 100;
+        $suffix = str_replace((int) $limit, '',$limit);
 
-        $this->assertEquals($limit + 100, ini_get('memory_limit'));
+        $this->class->memory_limit = ((int) $limit + 100) . $suffix;
+
+        $this->assertEquals(((int) $limit + 100) . $suffix, ini_get('memory_limit'));
 
         ini_restore('memory_limit');
     }
@@ -97,9 +99,11 @@ class IniMainTest extends IniTest
     {
         $limit = ini_get('memory_limit');
 
-        $this->class->memory_limit = $limit + 100;
+        $suffix = str_replace((int) $limit, '',$limit);
 
-        $this->assertEquals($limit + 100, ini_get('memory_limit'));
+        $this->class->memory_limit = ((int) $limit + 100) . $suffix;
+
+        $this->assertEquals(((int) $limit + 100) . $suffix, ini_get('memory_limit'));
 
         unset($this->class->memory_limit);
 

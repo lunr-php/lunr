@@ -16,20 +16,21 @@
     "PHPMailer/PHPMailer": "~6.0.0rc4",
     "rmccue/Requests": "~1.7.0",
     "colinmollenhour/credis": "~1.7",
-    "php": "5.6.*",
+    "php": "5.6.* || 7.*",
     "psr/cache": "~1.0"
   },
   "suggest": {
     "ext-http": "Needed for HTTP support in Corona, needed to get hostname in Shadow when parsing data",
-    "ext-apn": "Needed for push notification support in Vortex",
+    "ext-apn": "Needed for push notification support in Vortex with PHP 5",
     "ext-msgpack": "Needed for msgpack support in Corona",
     "ext-gettext": "Needed for internationalization support in L10n",
     "ext-mysqli": "Needed for MySQL/MariaDB support in Gravity (0.1)",
     "ext-mysqlnd_ms": "Needed for MySQL load balancing Gravity (r335219) -> https://svn.php.net/viewvc/pecl/mysqlnd_ms/trunk/",
-    "ext-uopz": "Needed for unit tests on PHP 7 as a replacement for runkit"
+    "ext-uopz": "Needed for unit tests on PHP 7 to mock internals",
+    "ext-runkit": "Needed for unit tests on PHP 5 to mock internals"
   },
   "require-dev": {
-    "ext-runkit": "~1.0.4",
+    "phpunit/phpunit": "~5.7",
     "ext-xdebug": "~2.4"
   },
   "config": {

@@ -40,22 +40,31 @@ abstract class SessionTest extends LunrBaseTest
     protected $generate_id_function;
 
     /**
+     * ID for the session
+     * @var string
+     */
+    public $id;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp()
     {
-        $this->class                = new Session();
-        $this->reflection           = new ReflectionClass('Lunr\Sphere\Session');
-        $id                         = 'myId';
-        $this->generate_id_function = function ($set_id = NULL) use (&$id) {
+        $this->class      = new Session();
+        $this->reflection = new ReflectionClass('Lunr\Sphere\Session');
+
+        //TODO: Make this less magic
+        $this->id                   = 'myId';
+        $self                       = &$this;
+        $this->generate_id_function = function ($set_id = NULL) use (&$self) {
             if (!is_null($set_id))
             {
-                $id = $set_id;
+                $self->id = $set_id;
             }
 
-            if(!is_null($id))
+            if(!is_null($self->id))
             {
-                return $id;
+                return $self->id;
             }else{
                 return 'myId';
             }

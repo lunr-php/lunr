@@ -29,10 +29,10 @@ set_include_path(
     get_include_path()
 );
 
-if (file_exists('vendor/autoload.php') == TRUE)
+if (file_exists(__DIR__ . '/../vendor/autoload.php') == TRUE)
 {
     // Load composer autoloader.
-    require_once 'vendor/autoload.php';
+    require_once __DIR__ . '/../vendor/autoload.php';
 }
 else
 {
