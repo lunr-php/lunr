@@ -134,7 +134,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
         $illegals[] = [TRUE, 1];
 
         $illegals[] = ['value', 0];
-        $illegals[] = ['1e10', 1];
+        $illegals[] = ['1x10', 1];
 
         $illegals[] = [[], 0];
         $illegals[] = [['a', 'b'], 1];
