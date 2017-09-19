@@ -66,6 +66,8 @@ class Request
      *  'params'     The parameters for that method
      *  'call'       The call identifier, combining controller and method
      *
+     *  'verbosity'  Logging verbosity
+     *
      * @var array
      */
     protected $request;

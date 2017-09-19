@@ -14,6 +14,8 @@
 
 namespace Lunr\Corona;
 
+use Psr\Log\LogLevel;
+
 /**
  * Web Request Parser.
  * Manages access to $_POST, $_GET values, as well as
@@ -148,6 +150,7 @@ class WebRequestParser implements RequestParserInterface
         $request['method']     = $this->config['default_method'];
         $request['params']     = [];
         $request['call']       = NULL;
+        $request['verbosity']  = LogLevel::WARNING;
 
         if (!is_array($_GET) || empty($_GET))
         {

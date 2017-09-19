@@ -14,6 +14,7 @@
 namespace Lunr\Corona\Tests\Helpers;
 
 use Lunr\Corona\HttpMethod;
+use Psr\Log\LogLevel;
 
 /**
  * This trait contains test methods to verify a PSR-3 compliant logger was passed correctly.
@@ -243,6 +244,22 @@ trait RequestParserStaticRequestTestTrait
         $this->assertInternalType('array', $request);
         $this->assertArrayHasKey('device_useragent', $request);
         $this->assertNull($request['device_useragent']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that the verbosity is stored correctly.
+     */
+    public function testRequestVerbosity()
+    {
+        $this->prepare_request_test('HTTP', '80', TRUE);
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('verbosity', $request);
+        $this->assertEquals(LogLevel::WARNING, $request['verbosity']);
 
         $this->cleanup_request_test();
     }

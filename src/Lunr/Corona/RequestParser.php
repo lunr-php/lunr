@@ -13,6 +13,8 @@
 
 namespace Lunr\Corona;
 
+use Psr\Log\LogLevel;
+
 /**
  * Request Parser.
  * Manages access to $_POST, $_GET values, as well as
@@ -82,6 +84,7 @@ class RequestParser implements RequestParserInterface
 
         $request['device_useragent'] = NULL;
         $request['useragent']        = NULL;
+        $request['verbosity']        = LogLevel::WARNING;
 
         return $request;
     }

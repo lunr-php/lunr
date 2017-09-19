@@ -15,6 +15,7 @@ namespace Lunr\Shadow\Tests;
 
 use Lunr\Corona\HttpMethod;
 use Lunr\Corona\Tests\Helpers\RequestParserDynamicRequestTestTrait;
+use Psr\Log\LogLevel;
 
 /**
  * Basic tests for the case of empty superglobals.
@@ -247,6 +248,24 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
     }
 
     /**
+     * Unit Test Data Provider for possible verbosity key names.
+     *
+     * @return array $base Array of verbosity key names
+     */
+    public function verbosityProvider()
+    {
+        $value   = [];
+        $value[] = [ 'v', 1, LogLevel::NOTICE ];
+        $value[] = [ 'v', 2, LogLevel::INFO ];
+        $value[] = [ 'v', 3, LogLevel::DEBUG ];
+        $value[] = [ 'verbose', 1, LogLevel::NOTICE ];
+        $value[] = [ 'verbose', 2, LogLevel::INFO ];
+        $value[] = [ 'verbose', 3, LogLevel::DEBUG ];
+
+        return $value;
+    }
+
+    /**
      * Unit Test Data Provider for Device Useragent keys in $_SERVER.
      *
      * @return array $keys Array of array keys.
@@ -336,6 +355,40 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
         $this->cleanup_request_test();
     }
 
+    /**
+     * Test that parse_request() sets default http method.
+     *
+     * @param string           $key    Verbosity key name
+     * @param integer          $amount Amount of verbosity parameters passed
+     * @param Psr\Log\LogLevel $level  Parsed verbosity level
+     *
+     * @dataProvider verbosityProvider
+     * @covers       Lunr\Shadow\CliRequestParser::parse_request
+     */
+    public function testParseRequestSetsVerbosityLevel($key, $amount, $level)
+    {
+        $this->prepare_request_test();
+        $this->prepare_request_data();
+
+        $ast = $this->get_reflection_property_value('ast');
+
+        $ast[$key] = [];
+
+        for ($i = $amount; $i > 0; $i--)
+        {
+            $ast[$key][] = FALSE;
+        }
+
+        $this->set_reflection_property_value('ast', $ast);
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('verbosity', $request);
+        $this->assertEquals($level, $request['verbosity']);
+
+        $this->cleanup_request_test();
+    }
 }
 
 ?>

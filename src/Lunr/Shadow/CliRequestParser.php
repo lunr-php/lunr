@@ -16,6 +16,7 @@ namespace Lunr\Shadow;
 
 use Lunr\Corona\RequestParserInterface;
 use Lunr\Corona\HttpMethod;
+use Psr\Log\LogLevel;
 
 /**
  * Cli Request Parser.
@@ -139,6 +140,31 @@ class CliRequestParser implements RequestParserInterface
             if (array_key_exists($key, $this->ast))
             {
                 $request['params'] = array_map(function ($val){ return trim($val, '/'); }, $this->ast[$key]);
+                unset($this->ast[$key]);
+            }
+        }
+
+        $request['verbosity'] = LogLevel::WARNING;
+
+        foreach ([ 'verbose', 'v' ] as $key)
+        {
+            if (array_key_exists($key, $this->ast))
+            {
+                $count = count($this->ast[$key]);
+
+                if ($count <= 1)
+                {
+                    $request['verbosity'] = LogLevel::NOTICE;
+                }
+                elseif ($count == 2)
+                {
+                    $request['verbosity'] = LogLevel::INFO;
+                }
+                else
+                {
+                    $request['verbosity'] = LogLevel::DEBUG;
+                }
+
                 unset($this->ast[$key]);
             }
         }
