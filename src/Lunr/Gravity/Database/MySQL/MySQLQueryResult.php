@@ -245,17 +245,14 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      */
     public function result_array()
     {
-        $output = array();
+        $output = [];
 
         if (!is_object($this->result))
         {
             return $output;
         }
 
-        while ($row = $this->result->fetch_assoc())
-        {
-            $output[] = $row;
-        }
+        $output = $this->result->fetch_all(MYSQLI_ASSOC);
 
         $this->free_result();
 
@@ -269,7 +266,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      */
     public function result_row()
     {
-        $output = is_object($this->result) ? $this->result->fetch_assoc() : array();
+        $output = is_object($this->result) ? $this->result->fetch_assoc() : [];
 
         $this->free_result();
 
@@ -285,7 +282,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      */
     public function result_column($column)
     {
-        $output = array();
+        $output = [];
 
         if (!is_object($this->result))
         {

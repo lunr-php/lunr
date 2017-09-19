@@ -94,17 +94,21 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
      */
     public function testResultArrayReturnsArray()
     {
-        $result = array(0 => array('col1' => 'val1', 'col2' => 'val2'), 1 => array('col1' => 'val3', 'col2' => 'val4'));
+        $result = [
+            [
+                'col1' => 'val1',
+                'col2' => 'val2'
+            ],
+            [
+                'col1' => 'val3',
+                'col2' => 'val4'
+            ]
+        ];
 
-        $this->query_result->expects($this->at(0))
-                           ->method('fetch_assoc')
-                           ->will($this->returnValue($result[0]));
-        $this->query_result->expects($this->at(1))
-                           ->method('fetch_assoc')
-                           ->will($this->returnValue($result[1]));
-        $this->query_result->expects($this->at(2))
-                           ->method('fetch_assoc')
-                           ->will($this->returnValue(NULL));
+        $this->query_result->expects($this->once())
+                           ->method('fetch_all')
+                           ->willReturn($result);
+
         $value = $this->result->result_array();
 
         $this->assertInternalType('array', $value);
