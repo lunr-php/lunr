@@ -151,10 +151,11 @@
         <exec executable="support/gen_l10n.sh" />
     </target>
 
-    <target name="setup"
-            description="Setup runtime environment">
-        <exec executable="support/setup.sh" />
-    </target>
+     <target name="setup">
+         <exec executable="decomposer">
+             <arg value="install"/>
+         </exec>
+     </target>
 
     <target name="build" depends="clean,setup,parallelTasks,phpunit,phpcb" />
 </project>
