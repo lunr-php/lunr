@@ -40,7 +40,7 @@ pipeline {
             steps{
                 ant_sh('clean')
                 ant_sh('setup')
-                dependencies(${ENV,var="dependency_tool"})
+                dependencies(env.dependency_tool)
                 ant_sh('pdepend')
                 ant_sh('l10n')
             }
