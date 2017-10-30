@@ -148,6 +148,14 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     }
 
     /**
+     * Test that options is set correctly.
+     */
+    public function testOptionsIsSetCorrectly()
+    {
+        $this->assertPropertyEquals('options', [ MYSQLI_OPT_INT_AND_FLOAT_NATIVE => TRUE]);
+    }
+
+    /**
      * Test that get_new_dml_query_builder_object() returns a new object.
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_new_dml_query_builder_object

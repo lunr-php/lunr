@@ -100,6 +100,19 @@ class MockMySQLi
         return TRUE;
     }
 
+    /**
+     * Used for setting mysqli options.
+     *
+     * @param int   $key   Mysqli option key.
+     * @param mixed $value Mysqli option value.
+     *
+     * @return boolean $return Always returns TRUE
+     */
+    public function options($key, $value)
+    {
+        return TRUE;
+    }
+
 }
 
 ?>

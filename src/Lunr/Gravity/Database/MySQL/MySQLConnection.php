@@ -112,6 +112,12 @@ class MySQLConnection extends DatabaseConnection
     protected $cipher;
 
     /**
+     * Mysqli options.
+     * @var array
+     */
+    protected $options;
+
+    /**
      * Constructor.
      *
      * @param Configuration   $configuration Shared instance of the configuration class
@@ -126,6 +132,7 @@ class MySQLConnection extends DatabaseConnection
 
         $this->query_hint = '';
         $this->qos_policy = 2; //MYSQLND_MS_QOS_CONSISTENCY_EVENTUAL
+        $this->options[ MYSQLI_OPT_INT_AND_FLOAT_NATIVE ] = TRUE;
 
         $this->set_configuration();
     }
@@ -230,6 +237,11 @@ class MySQLConnection extends DatabaseConnection
             $this->mysqli->ssl_set($this->ssl_key, $this->ssl_cert, $this->ca_cert, $this->ca_path, $this->cipher);
         }
 
+        foreach ($this->options as $key => $value)
+        {
+            $this->mysqli->options($key, $value);
+        }
+
         $this->mysqli->connect($host, $this->user, $this->pwd, $this->db, $this->port, $this->socket);
 
         if ($this->mysqli->errno === 0)
@@ -275,6 +287,26 @@ class MySQLConnection extends DatabaseConnection
         {
             return FALSE;
         }
+    }
+
+    /**
+     * Set option for the current connection.
+     *
+     * @param int   $key   Mysqli option key.
+     * @param mixed $value Mysqli option value.
+     *
+     * @return bool True on success, False on Failure
+     */
+    public function set_option($key, $value)
+    {
+        if (is_int($key) === FALSE || is_null($value) === TRUE)
+        {
+            return FALSE;
+        }
+
+        $this->options[$key] = $value;
+
+        return TRUE;
     }
 
     /**

@@ -155,6 +155,9 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
         $mysqli->expects($this->never())
                ->method('ssl_set');
 
+        $mysqli->expects($this->any())
+               ->method('options');
+
         $this->class->connect();
 
         $property = $this->reflection->getProperty('connected');
@@ -178,6 +181,9 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
 
         $this->mysqli->expects($this->never())
                      ->method('ssl_set');
+
+        $this->mysqli->expects($this->any())
+                     ->method('options');
 
         $this->class->connect();
 
@@ -225,6 +231,9 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
         $this->logger->expects($this->once())
                      ->method('error');
 
+        $this->mysqli->expects($this->any())
+               ->method('options');
+
         $this->class->connect();
     }
 
@@ -256,6 +265,9 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
+
+        $mysqli->expects($this->any())
+               ->method('options');
 
         $this->class->connect();
 
@@ -320,6 +332,21 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
         $this->assertTrue($this->class->change_database('new_db'));
 
         $property->setValue($this->class, FALSE);
+    }
+
+    /**
+     * Test that options() works.
+     *
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::set_option
+     */
+    public function testOptionsWorks()
+    {
+        $this->class->set_option(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, FALSE);
+        $this->class->set_option(MYSQLI_OPT_CONNECT_TIMEOUT, 42);
+
+        $this->assertPropertyEquals('options', [ MYSQLI_OPT_INT_AND_FLOAT_NATIVE => FALSE, MYSQLI_OPT_CONNECT_TIMEOUT => 42]);
+
     }
 
 }
