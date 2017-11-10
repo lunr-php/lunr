@@ -33,6 +33,12 @@ class HttpCode
      */
     const SWITCHING_PROTOCOLS = 101;
 
+    /**
+     * An interim response used to inform the client that the server has accepted the complete request, but has not yet completed it.
+     * @var Integer
+     */
+    const PROCESSING = 102;
+
     // Successful
 
     /**
@@ -120,6 +126,12 @@ class HttpCode
      * @var Integer
      */
     const TEMPORARY_REDIRECT = 307;
+
+    /**
+     * The target resource has been assigned a new permanent URI and any future references to this resource ought to use one of the enclosed URIs.
+     * @var Integer
+     */
+    const PERMANENT_REDIRECT = 308;
 
     // Client Error
 
@@ -230,6 +242,62 @@ class HttpCode
      * @var Integer
      */
     const EXPECTATION_FAILED = 417;
+
+    /**
+     * Client attempted to brew coffee with a teapot.
+     * @var Integer
+     */
+    const I_AM_A_TEAPOT = 418;
+
+    /**
+     * The request was directed at a server that is not able to produce a response.
+     * @var Integer
+     */
+    const MISDIRECTED_REQUEST = 421;
+
+    /**
+     * The server understands the content type of the request entity,
+     * and the syntax of the request entity is correct but was unable to process the contained instructions.
+     * @var Integer
+     */
+    const UNPROCESSABLE_ENTITY = 422;
+
+    /**
+     * The source or destination resource of a method is locked.
+     * @var Integer
+     */
+    const LOCKED = 423;
+
+    /**
+     * The method could not be performed on the resource because the requested action depended on another action and that action failed.
+     * @var Integer
+     */
+    const FAILED_DEPENDENCY = 424;
+
+    /**
+     * The server refuses to perform the request using the current protocol
+     * but might be willing to do so after the client upgrades to a different protocol.
+     * @var Integer
+     */
+    const UPGRADE_REQUIRED = 426;
+
+    /**
+     * The origin server requires the request to be conditional.
+     * @var Integer
+     */
+    const PRECONDITION_REQUIRED = 428;
+
+    /**
+     * The user has sent too many requests in a given amount of time ("rate limiting").
+     * @var Integer
+     */
+    const TOO_MANY_REQUESTS = 429;
+
+    /**
+     * The server is unwilling to process the request because its header fields are too large.
+     * @var Integer
+     */
+    const REQUEST_HEADER_FIELDS_TOO_LARGE = 431;
 
     // Server Error
 
