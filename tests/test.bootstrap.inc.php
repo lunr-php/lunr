@@ -44,7 +44,7 @@ else
 
     // Include libraries
     include_once 'Psr-Log-1.0.2.php';
-    include_once 'PHPMailer-6.0.0rc4.php';
+    include_once 'PHPMailer-6.0.2.php';
     include_once 'ApnsPHP-1.0.1.91.php';
     include_once 'Requests-1.7.0.php';
     include_once 'PHP-Resque-1.2.92.php';

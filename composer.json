@@ -13,7 +13,7 @@
     "psr/log": "~1.0.2",
     "chrisboulton/php-resque": "dev-master#981ef3da53f671c14f8fc61a233c3974f04128a9",
     "duccio/apns-php": "dev-master#2f5965c37568a26084d7544947cc0883ad2dac0d",
-    "PHPMailer/PHPMailer": "~6.0.0rc4",
+    "PHPMailer/PHPMailer": "~6.0.0",
     "rmccue/Requests": "~1.7.0",
     "colinmollenhour/credis": "~1.7",
     "php": "5.6.* || 7.*",
