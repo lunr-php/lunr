@@ -42,6 +42,8 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that setSessionHandler returns true when receives a SessionHandlerInterface.
      *
+     * @runInSeparateProcess
+     *
      * @covers Lunr\Sphere\Session::setSessionHandler
      */
     public function testSetSessionHandlerReturnsTrueWithSessionHandlerInterface()
