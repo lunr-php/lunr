@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This file contains the SessionBaseTest class.
  *
@@ -13,6 +12,8 @@
  */
 
 namespace Lunr\Sphere\Tests;
+
+use PHPUnit\Framework\Error\Warning as PHPUnit_Framework_Error_Warning;
 
 /**
  * This class contains tests for the Session class.
@@ -40,6 +41,8 @@ class SessionBaseTest extends SessionTest
 
     /**
      * Test that setSessionHandler returns true when receives a SessionHandlerInterface.
+     *
+     * @runInSeparateProcess
      *
      * @covers Lunr\Sphere\Session::set_session_handler
      */
@@ -289,7 +292,7 @@ class SessionBaseTest extends SessionTest
      */
     public function testGetSessionId()
     {
-        $this->mock_function('session_id', self::FUNCTION_GENERATE_ID);
+        $this->mock_function('session_id', $this->generate_id_function);
         $this->assertEquals('myId', $this->class->get_session_id());
         $this->unmock_function('session_id');
     }
@@ -301,7 +304,7 @@ class SessionBaseTest extends SessionTest
      */
     public function testGetNewSessionId()
     {
-        $this->mock_function('session_id', self::FUNCTION_GENERATE_ID);
+        $this->mock_function('session_id', $this->generate_id_function);
         $this->mock_function('session_regenerate_id', self::FUNCTION_RETURN_TRUE);
 
         $oldId = $this->class->get_session_id();
@@ -351,14 +354,14 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that start works properly setting an id.
      *
-     * @covers   Lunr\Sphere\Session::start
+     * @covers   \Lunr\Sphere\Session::start
      */
     public function testStartSetsId()
     {
         $this->set_reflection_property_value('started', FALSE);
         $this->set_reflection_property_value('closed', TRUE);
 
-        $this->mock_function('session_id', self::FUNCTION_GENERATE_ID);
+        $this->mock_function('session_id', $this->generate_id_function);
         $this->mock_function('session_start', self::FUNCTION_RETURN_TRUE);
 
         $this->class->start('newId');

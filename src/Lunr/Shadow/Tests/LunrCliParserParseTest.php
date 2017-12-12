@@ -37,7 +37,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
     }
 
     /**
-     * Test that parsing with incomplete arguments returns an empty array.
+     * Test that parsing with incomplete arguments returns an empty array and sets the Error property.
      *
      * @param mixed $param Invalid Parameter
      *
@@ -56,27 +56,6 @@ class LunrCliParserParseTest extends LunrCliParserTest
         $value = $this->class->parse();
 
         $this->assertArrayEmpty($value);
-    }
-
-    /**
-     * Test that parsing with incomplete arguments returns an empty array.
-     *
-     * @param mixed $param Invalid Parameter
-     *
-     * @dataProvider invalidParameterProvider
-     * @depends      Lunr\Shadow\Tests\LunrCliParserIsOptTest::testIsOptSetsErrorTrueForInvalidParameter
-     * @covers       Lunr\Shadow\LunrCliParser::parse
-     */
-    public function testParseArgvWithIncompleteArgumentsSetsErrorTrue($param)
-    {
-        $_SERVER['argv'] = array('script.php', $param);
-
-        $this->console->expects($this->once())
-                      ->method('cli_println')
-                      ->with($this->equalTo('Invalid parameter given: ' . $param));
-
-        $this->class->parse();
-
         $this->assertTrue($this->get_reflection_property_value('error'));
     }
 

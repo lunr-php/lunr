@@ -49,6 +49,12 @@ abstract class APNSDispatcherTest extends LunrBaseTest
      */
     public function setUp()
     {
+        if (!extension_loaded('apn'))
+        {
+            $this->markTestSkipped('Extension apn is required.');
+            return;
+        }
+
         $this->apn_functions = [
             'apn_set_certificate',
             'apn_set_private_key',
