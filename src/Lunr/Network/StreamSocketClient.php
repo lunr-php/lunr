@@ -119,8 +119,8 @@ class StreamSocketClient extends StreamSocket
 
         $this->handle = stream_socket_client(
                 $this->uri,
-                $this->errno,
-                $this->errmsg,
+                $this->error_number,
+                $this->error_message,
                 $this->init_timeout,
                 $flags,
                 $this->context
