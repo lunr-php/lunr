@@ -25,6 +25,7 @@ use RecursiveIteratorIterator;
 use RecursiveRegexIterator;
 use SplFileObject;
 use FilesystemIterator;
+use TypeError;
 
 /**
  * Class to access a physical filesystem.
@@ -192,6 +193,12 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
             $this->logger->warning('{message}', $context);
             return array();
         }
+        catch(TypeError $runtime)
+        {
+            $context = [ 'message' => $runtime->getMessage() ];
+            $this->logger->error('{message}', $context);
+            return FALSE;
+        }
 
         return array_keys(iterator_to_array($matches));
     }
@@ -220,6 +227,13 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
         catch(LogicException $logic)
         {
             $context = [ 'message' => $logic->getMessage() ];
+            $this->logger->error('{message}', $context);
+
+            return FALSE;
+        }
+        catch(TypeError $e)
+        {
+            $context = [ 'message' => $e->getMessage() ];
             $this->logger->error('{message}', $context);
 
             return FALSE;

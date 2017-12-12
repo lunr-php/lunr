@@ -43,9 +43,11 @@ trait DatabaseAccessObjectSelectQueryTestTrait
                      ->method('has_failed')
                      ->will($this->returnValue(FALSE));
 
+        $count = $format === 'cell' ? 1 : count($data);
+
         $this->result->expects($this->once())
                      ->method('number_of_rows')
-                     ->will($this->returnValue(count($data)));
+                     ->will($this->returnValue($count));
 
         $this->result->expects($this->once())
                      ->method('result_' . $format)
