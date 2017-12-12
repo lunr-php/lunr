@@ -184,13 +184,13 @@ class MySQLConnection extends DatabaseConnection
         $this->ca_path  = $this->configuration['db']['ca_path'];
         $this->cipher   = $this->configuration['db']['cipher'];
 
-        if (empty($this->configuration['db']['ro_host']))
+        if ($this->configuration['db']['ro_host'] != NULL)
         {
-            $this->ro_host = $this->rw_host;
+            $this->ro_host = $this->configuration['db']['ro_host'];
         }
         else
         {
-            $this->ro_host = $this->configuration['db']['ro_host'];
+            $this->ro_host = $this->rw_host;
         }
 
         if ($this->configuration['db']['port'] != NULL)
