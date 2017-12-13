@@ -15,6 +15,7 @@ namespace Lunr\Halo;
 
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use Closure;
 
 /**
  * This class contains helper code for the Lunr unit tests.
@@ -147,7 +148,7 @@ abstract class LunrBaseTest extends TestCase
             runkit_function_copy($name, $name . self::FUNCTION_ID);
         }
 
-        if ($mock instanceof \Closure)
+        if ($mock instanceof Closure)
         {
             runkit_function_redefine($name, $mock);
             return;
@@ -172,7 +173,7 @@ abstract class LunrBaseTest extends TestCase
             return;
         }
 
-        if ($mock instanceof \Closure)
+        if ($mock instanceof Closure)
         {
             uopz_set_return($name, $mock, TRUE);
             return;
@@ -329,16 +330,19 @@ abstract class LunrBaseTest extends TestCase
         $class_name  = is_object($method[0]) ? get_class($method[0]) : $method[0];
         $method_name = $method[1];
 
-        if (!is_callable($mock))
+        if ($mock instanceof Closure)
         {
-            $mock = function () use ($mock)
-            {
-                return eval($mock);
-            };
+            uopz_set_return($class_name, $method_name, $mock, TRUE);
+            return;
         }
 
-        uopz_set_return($class_name, $method_name, call_user_func_array($mock, explode(',', $args)));
+        $name = '_lambda_func_' . uniqid();
 
+        $callable = 'function ' . $name . '(' . $args . '){' . $mock . '}';
+
+        eval($callable);
+
+        uopz_set_return($class_name, $method_name, Closure::fromCallable($name), TRUE);
     }
 
     /**
