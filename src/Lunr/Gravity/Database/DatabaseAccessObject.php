@@ -87,8 +87,8 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Get query result as an indexed array.
      *
-     * @param DatabaseQueryResult $query  The result of the run query
-     * @param string              $column Column to use as index
+     * @param DatabaseQueryResultInterface $query  The result of the run query
+     * @param string                       $column Column to use as index
      *
      * @return mixed $result FALSE on failure, array otherwise
      */
@@ -119,7 +119,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Get query result as array.
      *
-     * @param DatabaseQueryResult $query The result of the run query
+     * @param DatabaseQueryResultInterface $query The result of the run query
      *
      * @return mixed $result FALSE on failure, array otherwise
      */
@@ -145,7 +145,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Get first row of query result.
      *
-     * @param DatabaseQueryResult $query The result of the run query
+     * @param DatabaseQueryResultInterface $query The result of the run query
      *
      * @return mixed $result FALSE on failure, array otherwise
      */
@@ -171,8 +171,8 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Get specific column of query result.
      *
-     * @param DatabaseQueryResult $query  The result of the run query
-     * @param String              $column The title of the requested column
+     * @param DatabaseQueryResultInterface $query  The result of the run query
+     * @param String                       $column The title of the requested column
      *
      * @return mixed $result FALSE on failure, array otherwise
      */
@@ -198,8 +198,8 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Get specific cell of the first row of the query result.
      *
-     * @param DatabaseQueryResult $query The result of the run query
-     * @param String              $cell  The title of the requested cell
+     * @param DatabaseQueryResultInterface $query The result of the run query
+     * @param String                       $cell  The title of the requested cell
      *
      * @return mixed $result FALSE on failure, mixed otherwise
      */
@@ -225,8 +225,8 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Retry executing the query in case of deadlock error.
      *
-     * @param DatabaseQueryResult $query       The result of the run query
-     * @param Integer             $retry_count The max amount of re-executing the query
+     * @param DatabaseQueryResultInterface $query       The result of the run query
+     * @param Integer                      $retry_count The max amount of re-executing the query
      *
      * @return mixed $result FALSE on failure, mixed otherwise
      */
@@ -249,7 +249,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Check whether the query has failed or not.
      *
-     * @param DatabaseQueryResult $query The result of the run query
+     * @param DatabaseQueryResultInterface $query The result of the run query
      *
      * @return bool $result FALSE on failure, TRUE on success
      */

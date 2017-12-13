@@ -140,7 +140,7 @@ abstract class DatabaseConnection
      *
      * @param String $sql_query The SQL query to run on the database
      *
-     * @return DatabaseQueryResult $result Query Result
+     * @return DatabaseQueryResultInterface $result Query Result
      */
     public abstract function query($sql_query);
 
