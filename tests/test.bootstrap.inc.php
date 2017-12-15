@@ -29,26 +29,15 @@ set_include_path(
     get_include_path()
 );
 
-if (file_exists(__DIR__ . '/../vendor/autoload.php') == TRUE)
+if (file_exists($base . '/vendor/autoload.php') == TRUE)
 {
     // Load composer autoloader.
-    require_once __DIR__ . '/../vendor/autoload.php';
+    require_once $base . '/vendor/autoload.php';
 }
 else
 {
-    // Load and setup class file autloader
-    require_once 'Lunr/Core/Autoloader.php';
-
-    $autoloader = new Lunr\Core\Autoloader();
-    $autoloader->register();
-
-    // Include libraries
-    include_once 'Psr-Log-1.0.2.php';
-    include_once 'PHPMailer-6.0.2.php';
-    include_once 'ApnsPHP-1.0.1.91.php';
-    include_once 'Requests-1.7.0.php';
-    include_once 'PHP-Resque-1.2.92.php';
-    include_once 'Psr-Cache-1.0.1.php';
+    // Load decomposer autoloade.
+    require_once $base . '/decomposer.autoload.inc.php';
 }
 
 define('REFLECTION_BUG_72194', (PHP_MAJOR_VERSION > 5));

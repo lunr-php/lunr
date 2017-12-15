@@ -12,10 +12,6 @@ build
 # ignore compiled gettext language files
 *.mo
 
-# ignore external interactions
-src/ApnsPHP
-src/PHPMailer
-src/Psr
-src/Requests
-src/Resque
+# ignore generated files
 vendor
+decomposer.autoload.inc.php
