@@ -408,6 +408,19 @@ interface DMLQueryBuilderInterface
      */
     public function with($alias, $sql_query, $column_names = NULL);
 
+    /**
+     * Define a recursive WITH clause.
+     *
+     * @param String  $alias           The alias of the WITH statement
+     * @param String  $anchor_query    The initial select statement
+     * @param String  $recursive_query The select statement that selects recursively out of the initial query
+     * @param Boolean $union_all       True for UNION ALL false for UNION
+     * @param array   $column_names    An optional parameter to give the result columns a name
+     *
+     * @return SQLDMLQueryBuilder $self Self reference
+     */
+    public function with_recursive($alias, $anchor_query, $recursive_query, $union_all = FALSE, $column_names = NULL);
+
 }
 
 ?>

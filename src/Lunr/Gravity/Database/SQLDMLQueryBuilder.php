@@ -562,11 +562,29 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      * @param string $sql_query    Sql query reference
      * @param array  $column_names An optional parameter to give the result columns a name
      *
-     * @return $this SQLDMLQueryBuilder $self Self reference
+     * @return SQLDMLQueryBuilder $self Self reference
      */
     public function with($alias, $sql_query, $column_names = NULL)
     {
-        $this->sql_with($alias, $sql_query, $column_names);
+        $this->sql_with($alias, $sql_query, '', '', $column_names);
+        return $this;
+    }
+
+    /**
+     * Define a recursive WITH clause.
+     *
+     * @param string  $alias           The alias of the WITH statement
+     * @param string  $anchor_query    The initial select statement
+     * @param string  $recursive_query The select statement that selects recursively out of the initial query
+     * @param boolean $union_all       True for UNION ALL false for UNION
+     * @param array   $column_names    An optional parameter to give the result columns a name
+     *
+     * @return SQLDMLQueryBuilder $self Self reference
+     */
+    public function with_recursive($alias, $anchor_query, $recursive_query, $union_all = FALSE, $column_names = NULL)
+    {
+        $base = ($union_all === TRUE) ? 'UNION ALL' : 'UNION';
+        $this->sql_with($alias, $anchor_query, $recursive_query, $base, $column_names);
         return $this;
     }
 

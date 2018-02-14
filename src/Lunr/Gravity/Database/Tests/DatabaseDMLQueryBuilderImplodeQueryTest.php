@@ -133,7 +133,7 @@ class DatabaseDMLQueryBuilderImplodeQueryTest extends DatabaseDMLQueryBuilderTes
     }
 
     /**
-     * Test imploding a query with dupliacte insert_mode values.
+     * Test imploding a query with duplicate insert_mode values.
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::implode_query
      */

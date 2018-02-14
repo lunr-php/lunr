@@ -32,7 +32,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
         $method = $this->get_accessible_reflection_method('sql_with');
         $method->invokeArgs($this->class, [ 'alias', 'query' ]);
 
-        $string = 'WITH alias AS ( query )';
+        $string = 'alias AS ( query )';
 
         $this->assertEquals($string, $this->get_reflection_property_value('with'));
     }
@@ -44,12 +44,12 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      */
     public function testMultipleNonRecursiveWithWithoutColumnNames()
     {
-        $this->set_reflection_property_value('with', 'WITH alias AS ( query )');
+        $this->set_reflection_property_value('with', 'alias AS ( query )');
 
         $method = $this->get_accessible_reflection_method('sql_with');
         $method->invokeArgs($this->class, [ 'alias2', 'query2' ]);
 
-        $string = 'WITH alias AS ( query ), alias2 AS ( query2 )';
+        $string = 'alias AS ( query ), alias2 AS ( query2 )';
 
         $this->assertEquals($string, $this->get_reflection_property_value('with'));
     }
@@ -65,9 +65,9 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
 
         $column_names = [ 'column1', 'column2', 'column3' ];
 
-        $method->invokeArgs($this->class, [ 'alias', 'query', $column_names ]);
+        $method->invokeArgs($this->class, [ 'alias', 'query', '', '', $column_names ]);
 
-        $string = 'WITH alias (column1, column2, column3) AS ( query )';
+        $string = 'alias (column1, column2, column3) AS ( query )';
 
         $this->assertEquals($string, $this->get_reflection_property_value('with'));
     }
@@ -80,12 +80,168 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
     public function testMultipleNonRecursiveWithIncludingColumnNames()
     {
         $this->set_reflection_property_value
-            ('with', 'WITH alias (column1, column2, column3) AS ( query )');
+            ('with', 'alias (column1, column2, column3) AS ( query )');
 
         $method = $this->get_accessible_reflection_method('sql_with');
         $method->invokeArgs($this->class, [ 'alias2', 'query2' ]);
 
-        $string = 'WITH alias (column1, column2, column3) AS ( query ), alias2 AS ( query2 )';
+        $string = 'alias (column1, column2, column3) AS ( query ), alias2 AS ( query2 )';
+
+        $this->assertEquals($string, $this->get_reflection_property_value('with'));
+    }
+
+    /**
+     * Test specifying the with part of a query with recursion and without column names
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
+     */
+    public function testRecursiveWithWithoutColumnNames()
+    {
+        $method = $this->get_accessible_reflection_method('sql_with');
+        $method->invokeArgs($this->class, [ 'alias', 'anchor_query', 'recursive_query', 'UNION']);
+
+        $string = 'alias AS ( anchor_query UNION recursive_query )';
+
+        $this->assertEquals($string, $this->get_reflection_property_value('with'));
+    }
+
+    /**
+     * Test specifying the with part of a query with recursion and with column names
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
+     */
+    public function testRecursiveWithWithColumnNames()
+    {
+        $method = $this->get_accessible_reflection_method('sql_with');
+
+        $column_names = array('column1', 'column2', 'column3');
+
+        $method->invokeArgs($this->class, [ 'alias', 'anchor_query', 'recursive_query', 'UNION', $column_names ]);
+
+        $string = 'alias (column1, column2, column3) AS ( anchor_query UNION recursive_query )';
+
+        $this->assertEquals($string, $this->get_reflection_property_value('with'));
+    }
+
+    /**
+     * Test specifying a recursive query after a  non recursive query has been specified withouth column names
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
+     */
+    public function testRecursiveWithAfterNonRecursiveQueryWithoutColumnNames()
+    {
+        $this->set_reflection_property_value
+        ('with', 'alias AS ( query )');
+
+        $method = $this->get_accessible_reflection_method('sql_with');
+
+        $method->invokeArgs($this->class, [ 'alias', 'anchor_query', 'recursive_query', 'UNION' ]);
+
+        $string = 'alias AS ( anchor_query UNION recursive_query ), alias AS ( query )';
+
+        $this->assertEquals($string, $this->get_reflection_property_value('with'));
+    }
+
+    /**
+     * Test specifying a recursive query after a non recursive query has been specified using column names
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
+     */
+    public function testRecursiveWithAfterNonRecursiveQueryWithColumnNames()
+    {
+        $this->set_reflection_property_value
+        ('with', 'alias (column1, column2, column3) AS ( query )');
+
+        $column_names = array('column1', 'column2', 'column3');
+
+        $method = $this->get_accessible_reflection_method('sql_with');
+
+        $method->invokeArgs($this->class, [ 'alias', 'anchor_query', 'recursive_query', 'UNION', $column_names ]);
+
+        $string  = 'alias (column1, column2, column3) AS ( anchor_query UNION recursive_query ),';
+        $string .= ' alias (column1, column2, column3) AS ( query )';
+
+        $this->assertEquals($string, $this->get_reflection_property_value('with'));
+    }
+
+    /**
+     * Test specifying a recursive query after a recursive query has been specified without column names
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
+     */
+    public function testRecursiveWithAfterRecursiveQueryWithoutColumnNames()
+    {
+        $this->set_reflection_property_value
+        ('with', 'alias AS ( anchor_query UNION recursive_query )');
+
+        $method = $this->get_accessible_reflection_method('sql_with');
+
+        $method->invokeArgs($this->class, [ 'alias', 'anchor_query', 'recursive_query', 'UNION' ]);
+
+        $string = 'alias AS ( anchor_query UNION recursive_query ), alias AS ( anchor_query UNION recursive_query )';
+
+        $this->assertEquals($string, $this->get_reflection_property_value('with'));
+    }
+
+    /**
+     * Test specifying a recursive query after a recursive query has been specified using column names
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
+     */
+    public function testRecursiveWithAfterRecursiveQueryWithColumnNames()
+    {
+        $this->set_reflection_property_value
+        ('with', 'alias (column1, column2, column3) AS ( anchor_query UNION recursive_query )');
+
+        $column_names = array('column1', 'column2', 'column3');
+
+        $method = $this->get_accessible_reflection_method('sql_with');
+
+        $method->invokeArgs($this->class, [ 'alias', 'anchor_query', 'recursive_query', 'UNION', $column_names ]);
+
+        $string  = 'alias (column1, column2, column3) AS ( anchor_query UNION recursive_query ), ';
+        $string .= 'alias (column1, column2, column3) AS ( anchor_query UNION recursive_query )';
+
+        $this->assertEquals($string, $this->get_reflection_property_value('with'));
+    }
+
+    /**
+     * Test specifying a non recursive query after a recursive query has been specified without column names
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
+     */
+    public function testNonRecursiveWithAfterRecursiveQueryWithoutColumnNames()
+    {
+        $this->set_reflection_property_value
+        ('with', 'alias AS ( anchor_query UNION recursive_query )');
+
+        $method = $this->get_accessible_reflection_method('sql_with');
+
+        $method->invokeArgs($this->class, [ 'alias', 'query' ]);
+
+        $string = 'alias AS ( anchor_query UNION recursive_query ), alias AS ( query )';
+
+        $this->assertEquals($string, $this->get_reflection_property_value('with'));
+    }
+
+    /**
+     * Test specifying a non recursive query after a recursive query has been specified using column names
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
+     */
+    public function testNonRecursiveWithAfterRecursiveQueryWithColumnNames()
+    {
+        $this->set_reflection_property_value
+        ('with', 'alias (column1, column2, column3) AS ( anchor_query UNION recursive_query )');
+
+        $method = $this->get_accessible_reflection_method('sql_with');
+
+        $column_names = array('column1', 'column2', 'column3');
+
+        $method->invokeArgs($this->class, [ 'alias', 'query', '', '', $column_names ]);
+
+        $string  = 'alias (column1, column2, column3) AS ( anchor_query UNION recursive_query ), ';
+        $string .= 'alias (column1, column2, column3) AS ( query )';
 
         $this->assertEquals($string, $this->get_reflection_property_value('with'));
     }

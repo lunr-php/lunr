@@ -173,6 +173,12 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     protected $with;
 
     /**
+     * Whether a recursive with statement is used or not
+     * @var boolean
+     */
+    protected $is_recursive;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -201,6 +207,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         $this->is_unfinished_join = FALSE;
         $this->join_type          = '';
         $this->with               = '';
+        $this->is_recursive       = FALSE;
     }
 
     /**
@@ -232,6 +239,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         unset($this->is_unfinished_join);
         unset($this->join_type);
         unset($this->with);
+        unset($this->is_recursive);
     }
 
     /**
@@ -251,7 +259,21 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         array_push($components, 'select_mode', 'select', 'from', 'join', 'where');
         array_push($components, 'group_by', 'having', 'order_by', 'limit', 'lock_mode');
 
-        $standard = $this->with . 'SELECT ' . $this->implode_query($components);
+        $with_query = '';
+
+        if($this->with != '')
+        {
+            if ($this->is_recursive == TRUE)
+            {
+                $with_query = 'WITH RECURSIVE ' . $this->with . ' ';
+            }
+            else
+            {
+                $with_query = 'WITH ' . $this->with . ' ';
+            }
+        }
+
+        $standard = $with_query . 'SELECT ' . $this->implode_query($components);
         if ($this->compound == '')
         {
             return $standard;
@@ -410,26 +432,45 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a WITH clause.
      *
-     * @param string $alias        The alias of the WITH statement
-     * @param string $sql_query    Sql query reference
-     * @param array  $column_names An optional parameter to give the result columns a name
+     * @param string $alias           The alias of the WITH statement
+     * @param string $sql_query       Sql query reference
+     * @param string $recursive_query The select statement that selects recursively out of the initial query
+     * @param string $union           The union part of a recursive query
+     * @param array  $column_names    An optional parameter to give the result columns a name
      *
      * @return void
      */
-    protected function sql_with($alias, $sql_query, $column_names = NULL)
+    protected function sql_with($alias, $sql_query, $recursive_query = NULL, $union = NULL, $column_names = NULL)
     {
-        if ($column_names !== NULL)
+        if($column_names !== NULL)
         {
             $column_names = ' (' . implode(', ', $column_names) . ')';
         }
 
-        if ($this->with != '')
+        if($recursive_query != '' && $recursive_query !== NULL)
         {
-            $this->with .= ', ' . $alias . ' AS ( ' . $sql_query . ' )';
+            $this->is_recursive = TRUE;
+
+            if(!is_null($union))
+            {
+                $recursive_query = ' ' . $union . ' ' . $recursive_query;
+            }
+        }
+
+        if($this->with != '')
+        {
+            if ($recursive_query != '' && $recursive_query !== NULL)
+            {
+                $this->with = $alias . $column_names . ' AS ( ' . $sql_query . $recursive_query . ' ), ' . $this->with;
+            }
+            else
+            {
+                $this->with .= ', ' . $alias . $column_names . ' AS ( ' . $sql_query . ' )';
+            }
         }
         else
         {
-            $this->with = 'WITH ' . $alias . $column_names . ' AS ( ' . $sql_query . ' )';
+            $this->with = $alias . $column_names . ' AS ( ' . $sql_query . $recursive_query . ' )';
         }
     }
 

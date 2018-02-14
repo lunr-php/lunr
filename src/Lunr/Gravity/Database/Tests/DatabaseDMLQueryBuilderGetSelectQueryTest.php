@@ -82,6 +82,36 @@ class DatabaseDMLQueryBuilderGetSelectQueryTest extends DatabaseDMLQueryBuilderT
         $this->assertEquals($string, $this->class->get_select_query());
     }
 
+    /**
+     * Test getting a select query using with statement
+     */
+    public function testGetSelectQueryUsingWith()
+    {
+
+        $this->set_reflection_property_value('with', 'alias AS ( query )');
+        $this->set_reflection_property_value('select', '*');
+        $this->set_reflection_property_value('from', 'FROM alias');
+
+        $string = 'WITH alias AS ( query ) SELECT * FROM alias';
+
+        $this->assertEquals($string, $this->class->get_select_query());
+    }
+
+    /**
+     * Test getting a select query using a recursive with statement
+     */
+    public function testGetSelectQueryUsingRecursiveWith()
+    {
+        $this->set_reflection_property_value('with', 'alias AS ( query )');
+        $this->set_reflection_property_value('is_recursive', TRUE);
+        $this->set_reflection_property_value('select', '*');
+        $this->set_reflection_property_value('from', 'FROM alias');
+
+        $string = 'WITH RECURSIVE alias AS ( query ) SELECT * FROM alias';
+
+        $this->assertEquals($string, $this->class->get_select_query());
+    }
+
 }
 
 ?>
