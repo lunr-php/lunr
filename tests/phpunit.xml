@@ -115,6 +115,7 @@
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsInsertTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsUpdateTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsUsingTest.php</file>
+            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsWithTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderSelectTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderInsertTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderUpdateTest.php</file>
@@ -123,6 +124,7 @@
             <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderOrderByTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderLimitTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderUsingTest.php</file>
+            <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderWithTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderSelectTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderDeleteTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderInsertTest.php</file>

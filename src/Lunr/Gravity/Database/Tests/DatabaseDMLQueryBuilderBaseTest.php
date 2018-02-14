@@ -152,6 +152,14 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+     * Test that with is an empty string by default.
+     */
+    public function testWithEmptyByDefault()
+    {
+        $this->assertPropertyEquals('with', '');
+    }
+
+    /**
      * Test that prepare_index_hints prepares valid index hints correctly.
      *
      * @param Array  $hints    Array of index hints

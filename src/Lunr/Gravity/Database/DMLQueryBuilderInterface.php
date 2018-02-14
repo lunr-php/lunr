@@ -397,6 +397,17 @@ interface DMLQueryBuilderInterface
      */
     public function sql_or();
 
+    /**
+     * Define a with clause.
+     *
+     * @param String $alias        The alias of the WITH statement
+     * @param String $sql_query    Sql query reference
+     * @param array  $column_names An optional parameter to give the result columns a name
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function with($alias, $sql_query, $column_names = NULL);
+
 }
 
 ?>

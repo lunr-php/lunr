@@ -167,6 +167,12 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     protected $join_type;
 
     /**
+     * SQL Query part: String that contains the with query
+     * @var String
+     */
+    protected $with;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -194,6 +200,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         $this->compound           = '';
         $this->is_unfinished_join = FALSE;
         $this->join_type          = '';
+        $this->with               = '';
     }
 
     /**
@@ -224,6 +231,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         unset($this->select_statement);
         unset($this->is_unfinished_join);
         unset($this->join_type);
+        unset($this->with);
     }
 
     /**
@@ -243,7 +251,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         array_push($components, 'select_mode', 'select', 'from', 'join', 'where');
         array_push($components, 'group_by', 'having', 'order_by', 'limit', 'lock_mode');
 
-        $standard = 'SELECT ' . $this->implode_query($components);
+        $standard = $this->with . 'SELECT ' . $this->implode_query($components);
         if ($this->compound == '')
         {
             return $standard;
@@ -397,6 +405,32 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         }
 
         $this->select .= $select;
+    }
+
+    /**
+     * Define a WITH clause.
+     *
+     * @param string $alias        The alias of the WITH statement
+     * @param string $sql_query    Sql query reference
+     * @param array  $column_names An optional parameter to give the result columns a name
+     *
+     * @return void
+     */
+    protected function sql_with($alias, $sql_query, $column_names = NULL)
+    {
+        if($column_names !== NULL)
+        {
+            $column_names = ' (' . implode(', ', $column_names) . ')';
+        }
+
+        if($this->with != '')
+        {
+            $this->with .= ', ' . $alias . ' AS ( ' . $sql_query . ' )';
+        }
+        else
+        {
+            $this->with = 'WITH ' . $alias . $column_names . ' AS ( ' . $sql_query . ' )';
+        }
     }
 
     /**
