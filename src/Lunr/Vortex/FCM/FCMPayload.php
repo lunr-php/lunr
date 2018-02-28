@@ -37,6 +37,22 @@ class FCMPayload extends GCMPayload
         parent::__destruct();
     }
 
+    /**
+     * Sets the payload key data.
+     *
+     * The fields of data represent the key-value pairs of the message's payload data.
+     *
+     * @param array $data The actual notification information
+     *
+     * @return FCMPayload $self Self Reference
+     */
+    public function set_data($data)
+    {
+        $this->elements['notification'] = $data;
+
+        return $this;
+    }
+
 }
 
 ?>
