@@ -8,7 +8,7 @@
  * @package    Lunr\Vortex\GCM
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2016-2017, M2Mobi BV, Amsterdam, The Netherlands
+ * @copyright  2016-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
