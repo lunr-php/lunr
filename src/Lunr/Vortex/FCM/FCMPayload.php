@@ -46,7 +46,7 @@ class FCMPayload extends GCMPayload
      *
      * @return FCMPayload $self Self Reference
      */
-    public function set_data($data)
+    public function set_notification($data)
     {
         $this->elements['notification'] = $data;
 

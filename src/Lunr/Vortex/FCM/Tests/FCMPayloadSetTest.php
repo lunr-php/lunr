@@ -22,13 +22,13 @@ class FCMPayloadSetTest extends FCMPayloadTest
 {
 
     /**
-     * Test set_data() works correctly.
+     * Test set_notification() works correctly.
      *
-     * @covers Lunr\Vortex\FCM\FCMPayload::set_data
+     * @covers Lunr\Vortex\FCM\FCMPayload::set_notification
      */
-    public function testSetData()
+    public function testSetNotification()
     {
-        $this->class->set_data(['key' => 'value']);
+        $this->class->set_notification(['key' => 'value']);
 
         $value = $this->get_reflection_property_value('elements');
 
@@ -37,13 +37,13 @@ class FCMPayloadSetTest extends FCMPayloadTest
     }
 
     /**
-     * Test fluid interface of set_data().
+     * Test fluid interface of set_notification().
      *
-     * @covers Lunr\Vortex\FCM\FCMPayload::set_data
+     * @covers Lunr\Vortex\FCM\FCMPayload::set_notification
      */
     public function testSetDataReturnsSelfReference()
     {
-        $this->assertSame($this->class, $this->class->set_data('data'));
+        $this->assertSame($this->class, $this->class->set_notification('data'));
     }
 
 }
