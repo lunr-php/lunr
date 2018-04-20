@@ -13,8 +13,6 @@
 
 namespace Lunr\Sphere\Tests;
 
-use PHPUnit\Framework\Error\Warning as PHPUnit_Framework_Error_Warning;
-
 /**
  * This class contains tests for the Session class.
  *
@@ -58,12 +56,20 @@ class SessionBaseTest extends SessionTest
      *
      * @param mixed $handler Invalid Session handler
      *
-     * @expectedException PHPUnit_Framework_Error_Warning
      * @dataProvider      invalidSessionHandlerProvider
      * @covers            Lunr\Sphere\Session::setSessionHandler
      */
     public function testSetSessionHandlerReturnsFalseWithInvalidData($handler)
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $this->assertFalse($this->class->setSessionHandler($handler));
     }
 

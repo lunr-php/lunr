@@ -13,8 +13,6 @@
 
 namespace Lunr\Corona\Tests;
 
-use PHPUnit\Framework\Error\Error as PHPUnit_Framework_Error;
-
 /**
  * This class contains tests for dispatching controllers with the FrontController class.
  *
@@ -76,12 +74,20 @@ class FrontControllerDispatchTest extends FrontControllerTest
      *
      * @param mixed $value Invalid controller name.
      *
-     * @expectedException PHPUnit_Framework_Error
      * @dataProvider      invalidControllerNameProvider
      * @covers            Lunr\Corona\FrontController::dispatch
      */
     function testDispatchWithInvalidControllerValues($value)
     {
+        if (class_exists('\PHPUnit\Framework\Error\Error'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Error::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error::class);
+        }
+
         $this->request->expects($this->at(0))
                       ->method('__get')
                       ->with('method')

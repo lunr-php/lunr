@@ -14,7 +14,6 @@
 namespace Lunr\Gravity\Filesystem\Tests;
 
 use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
-use PHPUnit\Framework\Error\Warning as PHPUnit_Framework_Error_Warning;
 
 /**
  * This class contains tests for file related methods in the PhysicalFilesystemAccessObject.
@@ -43,11 +42,19 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that get_file_content() does not get contents of an inaccessible file.
      *
-     * @expectedException PHPUnit_Framework_Error_Warning
      * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
      */
     public function testGetFileContentWithInaccessibleFile()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $file = '/root/ab45cd89';
 
         $fetched = $this->class->get_file_content($file);
@@ -58,12 +65,20 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that get_file_content() does not get contents of a non-existant file.
      *
-     * @expectedException PHPUnit_Framework_Error_Warning
      * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
      */
     public function testGetFileContentWithNonExistantFile()
     {
-        $file = '/tmp/ab45cd89';
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
+        $file = sys_get_temp_dir() . '/ab45cd89';
 
         $fetched = $this->class->get_file_content($file);
 
@@ -77,7 +92,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testGetFileContentOfDirectory()
     {
-        $file = '/tmp';
+        $file = sys_get_temp_dir();
 
         $fetched = $this->class->get_file_content($file);
 
@@ -89,12 +104,20 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @param mixed $file Invalid filename
      *
-     * @expectedException PHPUnit_Framework_Error_Warning
      * @dataProvider      invalidNameProvider
      * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
      */
     public function testGetFileContentWithInvalidFilenames($file)
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $fetched = $this->class->get_file_content($file);
 
         $this->assertFalse($fetched);
@@ -122,7 +145,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testPutFileContentWithAccessibleFile()
     {
-        $file = tempnam('/tmp', 'phpunit_');
+        $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
         $content = "Content\n";
 
@@ -135,11 +158,19 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() does not put contents in an inaccessible file.
      *
-     * @expectedException PHPUnit_Framework_Error_Warning
      * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentWithInaccessibleFile()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $file = '/root/ab45cd89';
 
         $content = "Content\n";
@@ -156,7 +187,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testPutFileContentWithNonExistantFile()
     {
-        $file = '/tmp/ab65cd89';
+        $file = sys_get_temp_dir() . '/ab65cd89';
 
         $this->assertFalse(file_exists($file));
 
@@ -172,12 +203,20 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() does not put contents in a directory.
      *
-     * @expectedException PHPUnit_Framework_Error_Warning
      * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentInDirectory()
     {
-        $file = '/tmp';
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
+        $file = sys_get_temp_dir();
 
         $content = "Content\n";
 
@@ -191,12 +230,20 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @param mixed $file Invalid filename
      *
-     * @expectedException PHPUnit_Framework_Error_Warning
      * @dataProvider      invalidNameProvider
      * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentWithInvalidFilenames($file)
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $content = "Content\n";
 
         $written = $this->class->put_file_content($file, $content);
@@ -228,7 +275,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testPutFileContentAppendsToFile()
     {
-        $file = tempnam('/tmp', 'phpunit_');
+        $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
         $content = "Content\n";
 
@@ -245,7 +292,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testPutFileContentAcquiresExclusiveLock()
     {
-        $file = tempnam('/tmp', 'phpunit_');
+        $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
         $content = "Content\n";
 
@@ -262,7 +309,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testPutFileContentAppendsToFileAndAcquiresExclusiveLock()
     {
-        $file = tempnam('/tmp', 'phpunit_');
+        $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
         $content = "Content\n";
 
@@ -279,7 +326,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testGetFileObjectForAccessibleFile()
     {
-        $file = tempnam('/tmp', 'phpunit_');
+        $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
         $value = $this->class->get_file_object($file);
 
@@ -297,7 +344,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testGetFileObjectForAccessibleFileWithInvalidMode($mode, $message)
     {
-        $file = tempnam('/tmp', 'phpunit_');
+        $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
         $filename = is_object($mode) ? '' : $file;
 
@@ -337,7 +384,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testGetFileObjectForNonExistantFile()
     {
-        $file = '/tmp/ab65cd89';
+        $file = sys_get_temp_dir() . '/ab65cd89';
 
         $error = "SplFileObject::__construct($file): failed to open stream: No such file or directory";
 
@@ -359,7 +406,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      */
     public function testGetFileObjectOfDirectory()
     {
-        $file = '/tmp';
+        $file = sys_get_temp_dir();
 
         $error = 'Cannot use SplFileObject with directories';
 

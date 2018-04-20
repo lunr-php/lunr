@@ -14,7 +14,6 @@
 namespace Lunr\Core\Tests;
 
 use Lunr\Core\Configuration;
-use PHPUnit\Framework\Error\Error as PHPUnit_Framework_Error;
 
 /**
  * This tests loading configuration files via the Configuration class.
@@ -114,11 +113,18 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
     /**
      * Test loading a non-existing file.
-     *
-     * @expectedException PHPUnit_Framework_Error
      */
     public function testLoadNonExistingFile()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Error'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Error::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error::class);
+        }
+
         $property = $this->configuration_reflection->getProperty('config');
         $property->setAccessible(TRUE);
 

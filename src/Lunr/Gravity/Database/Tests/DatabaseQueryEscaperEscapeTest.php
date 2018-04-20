@@ -15,7 +15,6 @@ namespace Lunr\Gravity\Database\Tests;
 
 use Lunr\Gravity\Database\DatabaseQueryEscaper;
 use Lunr\Halo\LunrBaseTest;
-use PHPUnit\Framework\Error\Notice as PHPUnit_Framework_Error_Notice;
 use ReflectionClass;
 
 /**
@@ -227,11 +226,18 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test escaping an object as integer.
      *
-     * @expectedException PHPUnit_Framework_Error_Notice
      * @covers            Lunr\Gravity\Database\DatabaseQueryEscaper::intvalue
      */
     public function testEscapeObjectAsIntValue()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Error'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Error::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error::class);
+        }
         $this->assertEquals(0, $this->class->intvalue($this->class));
     }
 
@@ -266,11 +272,18 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test escaping an object as float.
      *
-     * @expectedException PHPUnit_Framework_Error_Notice
      * @covers            Lunr\Gravity\Database\DatabaseQueryEscaper::floatvalue
      */
     public function testEscapeObjectAsFloatValue()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Notice'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Notice::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error::class);
+        }
         $this->assertEquals(0, $this->class->floatvalue($this->class));
     }
 

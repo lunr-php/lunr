@@ -15,7 +15,6 @@ namespace Lunr\Gravity\Database\SQLite3\Tests;
 
 use Lunr\Gravity\Database\SQLite3\LunrSQLite3;
 use Lunr\Halo\LunrBaseTest;
-use PHPUnit\Framework\Error\Warning as PHPUnit_Framework_Error_Warning;
 use ReflectionClass;
 
 /**
@@ -50,21 +49,35 @@ class LunrSQLite3Test extends LunrBaseTest
 
     /**
      * Test that busyTimeout throws a warning because we are not yet connected.
-     *
-     * @expectedException PHPUnit_Framework_Error_Warning
      */
     public function testBusyTimeoutThrowsWarning()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $this->assertFALSE($this->class->busyTimeout(1000));
     }
 
     /**
      * Test that changes throws a warning because we are not yet connected.
-     *
-     * @expectedException PHPUnit_Framework_Error_Warning
      */
     public function testChangesThrowsWarning()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $this->assertEquals(0, $this->class->changes());
     }
 
@@ -86,71 +99,120 @@ class LunrSQLite3Test extends LunrBaseTest
 
     /**
      * Test that exec throws a warning because we are not yet connected.
-     *
-     * @expectedException PHPUnit_Framework_Error_Warning
      */
     public function testExecThrowsWarning()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $this->assertFalse($this->class->exec('Test'));
     }
 
     /**
      * Test that lastErrorCode throws a warning because we are not yet connected.
-     *
-     * @expectedException PHPUnit_Framework_Error_Warning
      */
     public function testLastErrorCodeThrowsWarning()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $this->assertEquals(0, $this->class->lastErrorCode());
     }
 
     /**
      * Test that lastErrorMsg throws a warning because we are not yet connected.
-     *
-     * @expectedException PHPUnit_Framework_Error_Warning
      */
     public function testLastErrorMsgThrowsWarning()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $this->assertEquals(0, $this->class->lastErrorMsg());
     }
 
     /**
      * Test that lastInsertRowID throws a warning because we are not yet connected.
-     *
-     * @expectedException PHPUnit_Framework_Error_Warning
      */
     public function testLastInsertRowIDThrowsWarning()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $this->assertEquals(0, $this->class->lastInsertRowID());
     }
 
     /**
      * Test that prepare throws a warning because we are not yet connected.
-     *
-     * @expectedException PHPUnit_Framework_Error_Warning
      */
     public function testPrepareThrowsWarning()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $this->assertFalse($this->class->prepare('Test'));
     }
 
     /**
      * Test that query throws a warning because we are not yet connected.
-     *
-     * @expectedException PHPUnit_Framework_Error_Warning
      */
     public function testQueryThrowsWarning()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $this->assertFalse($this->class->query('Test'));
     }
 
     /**
      * Test that querySingle throws a warning because we are not yet connected.
-     *
-     * @expectedException PHPUnit_Framework_Error_Warning
      */
     public function testQuerySingleThrowsWarning()
     {
+        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        {
+            // PHPUnit 6
+            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
+        } else {
+            // PHPUnit 5
+            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+        }
+
         $this->assertFalse($this->class->querySingle('Test'));
     }
 
