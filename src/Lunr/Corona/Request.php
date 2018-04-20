@@ -275,15 +275,23 @@ class Request
     /**
      * Retrieve a stored GET value.
      *
-     * @param mixed $key Key for the value to retrieve
+     * @param string|null $key Key for the value to retrieve
      *
-     * @return mixed $return The value of the key or NULL if not found
+     * @return mixed The value of the key, all GET values if no key is provided or NULL if not found.
      */
-    public function get_get_data($key)
+    public function get_get_data($key = NULL)
     {
-        if (array_key_exists('get', $this->mock)
-            && array_key_exists($key, $this->mock['get'])
-        )
+        if ($key === NULL)
+        {
+            if (!array_key_exists('get', $this->mock))
+            {
+                return $this->get;
+            }
+
+            return array_merge($this->get, $this->mock['get']);
+        }
+
+        if (array_key_exists('get', $this->mock) && array_key_exists($key, $this->mock['get']))
         {
             return $this->mock['get'][$key];
         }
@@ -294,15 +302,23 @@ class Request
     /**
      * Retrieve a stored POST value.
      *
-     * @param mixed $key Key for the value to retrieve
+     * @param string|null $key Key for the value to retrieve
      *
-     * @return mixed $return The value of the key or NULL if not found
+     * @return mixed The value of the key, all POST values if no key is provided or NULL if not found.
      */
-    public function get_post_data($key)
+    public function get_post_data($key = NULL)
     {
-        if (array_key_exists('post', $this->mock)
-            && array_key_exists($key, $this->mock['post'])
-        )
+        if ($key === NULL)
+        {
+            if (!array_key_exists('post', $this->mock))
+            {
+                return $this->post;
+            }
+
+            return array_merge($this->post, $this->mock['post']);
+        }
+
+        if (array_key_exists('post', $this->mock) && array_key_exists($key, $this->mock['post']))
         {
             return $this->mock['post'][$key];
         }

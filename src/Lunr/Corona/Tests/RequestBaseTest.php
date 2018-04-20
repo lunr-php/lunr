@@ -26,7 +26,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testPost()
     {
-        $this->assertEquals([ 'post_key' => 'post_value' ], $this->get_reflection_property_value('post'));
+        $this->assertEquals([ 'post_key' => 'post_value', 'post_second_key' => 'post_value' ], $this->get_reflection_property_value('post'));
     }
 
     /**
@@ -47,7 +47,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testGet()
     {
-        $this->assertEquals([ 'get_key' => 'get_value' ], $this->get_reflection_property_value('get'));
+        $this->assertEquals([ 'get_key' => 'get_value', 'get_second_key' => 'get_value' ], $this->get_reflection_property_value('get'));
     }
 
     /**

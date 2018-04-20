@@ -45,20 +45,20 @@ interface RequestInterface
     /**
      * Retrieve a stored GET value.
      *
-     * @param mixed $key Key for the value to retrieve
+     * @param string|null $key Key for the value to retrieve
      *
-     * @return mixed $return The value of the key or NULL if not found
+     * @return mixed The value of the key, all GET values if no key is provided or NULL if not found.
      */
-    public function get_get_data($key);
+    public function get_get_data($key = NULL);
 
     /**
      * Retrieve a stored POST value.
      *
-     * @param mixed $key Key for the value to retrieve
+     * @param string|null $key Key for the value to retrieve
      *
-     * @return mixed $return The value of the key or NULL if not found
+     * @return mixed The value of the key, all POST values if no key is provided or NULL if not found.
      */
-    public function get_post_data($key);
+    public function get_post_data($key = NULL);
 
     /**
      * Retrieve a stored FILES value.

@@ -62,11 +62,11 @@ abstract class RequestTest extends LunrBaseTest
 
         $this->parser->expects($this->once())
                      ->method('parse_post')
-                     ->will($this->returnValue([ 'post_key' => 'post_value' ]));
+                     ->will($this->returnValue([ 'post_key' => 'post_value', 'post_second_key' => 'post_value' ]));
 
         $this->parser->expects($this->once())
                      ->method('parse_get')
-                     ->will($this->returnValue([ 'get_key' => 'get_value' ]));
+                     ->will($this->returnValue([ 'get_key' => 'get_value', 'get_second_key' => 'get_value' ]));
 
         $this->parser->expects($this->once())
                      ->method('parse_cookie')

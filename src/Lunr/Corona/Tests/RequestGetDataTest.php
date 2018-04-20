@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the RequestGetTest class.
+ * This file contains the RequestGetDataTest class.
  *
  * PHP Version 5.4
  *
@@ -19,7 +19,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\Request
  */
-class RequestGetTest extends RequestTest
+class RequestGetDataTest extends RequestTest
 {
 
     /**
@@ -33,15 +33,42 @@ class RequestGetTest extends RequestTest
     }
 
     /**
+     * Test getting GET data returns get values if no mock values.
+     *
+     * @covers Lunr\Corona\Request::get_get_data
+     */
+    public function testGetGetDataNoKey()
+    {
+        $this->assertEquals(['get_key' => 'get_value', 'get_second_key' => 'get_value'], $this->class->get_get_data());
+    }
+
+    /**
      * Test getting GET data returns mock value if present.
      *
      * @covers Lunr\Corona\Request::get_get_data
      */
     public function testGetGetDataWithMockValue()
     {
-        $this->set_reflection_property_value('mock', [ 'get' => [ 'get_key' => 'get_mock_value' ] ]);
+        $this->set_reflection_property_value('mock', ['get' => ['get_key' => 'get_mock_value']]);
 
         $this->assertEquals('get_mock_value', $this->class->get_get_data('get_key'));
+    }
+
+    /**
+     * Test getting GET data returns mock values if present.
+     *
+     * @covers Lunr\Corona\Request::get_get_data
+     */
+    public function testGetGetDataWithMockValueNoKey()
+    {
+        $this->set_reflection_property_value('mock', [ 'get' => [ 'get_key' => 'get_mock_value', 'mock_key' => 'get_mock_value' ] ]);
+
+        $expects = [
+            'get_key'        => 'get_mock_value',
+            'get_second_key' => 'get_value',
+            'mock_key'       => 'get_mock_value',
+        ];
+        $this->assertEquals($expects, $this->class->get_get_data());
     }
 
     /**
@@ -67,6 +94,16 @@ class RequestGetTest extends RequestTest
     }
 
     /**
+     * Test getting POST data returns get values if no mock values.
+     *
+     * @covers Lunr\Corona\Request::get_post_data
+     */
+    public function testGetPostDataNoKey()
+    {
+        $this->assertEquals(['post_key' => 'post_value', 'post_second_key' => 'post_value'], $this->class->get_post_data());
+    }
+
+    /**
      * Test getting POST data returns mock value if present.
      *
      * @covers Lunr\Corona\Request::get_post_data
@@ -76,6 +113,23 @@ class RequestGetTest extends RequestTest
         $this->set_reflection_property_value('mock', [ 'post' => [ 'post_key' => 'post_mock_value' ] ]);
 
         $this->assertEquals('post_mock_value', $this->class->get_post_data('post_key'));
+    }
+
+    /**
+     * Test getting POST data returns mock values if present.
+     *
+     * @covers Lunr\Corona\Request::get_post_data
+     */
+    public function testGetPostDataWithMockValueNoKey()
+    {
+        $this->set_reflection_property_value('mock', [ 'post' => [ 'post_key' => 'post_mock_value', 'mock_key' => 'post_mock_value' ] ]);
+
+        $expects = [
+            'post_key'        => 'post_mock_value',
+            'post_second_key' => 'post_value',
+            'mock_key'        => 'post_mock_value',
+        ];
+        $this->assertEquals($expects, $this->class->get_post_data());
     }
 
     /**
