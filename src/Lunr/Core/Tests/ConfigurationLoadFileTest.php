@@ -119,10 +119,12 @@ class ConfigurationLoadFileTest extends ConfigurationTest
         if (class_exists('\PHPUnit\Framework\Error\Error'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Error::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Error');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error::class);
+            $this->expectException('\PHPUnit_Framework_Error');
         }
 
         $property = $this->configuration_reflection->getProperty('config');
