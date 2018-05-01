@@ -272,13 +272,6 @@
             <file>../src/Lunr/Vortex/APNS/Tests/APNSPayloadBaseTest.php</file>
             <file>../src/Lunr/Vortex/APNS/Tests/APNSPayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/APNS/Tests/APNSPayloadSetTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSResponseSetTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSResponseSuccessTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSResponseTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSDispatcherBaseTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSDispatcherPushTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSDispatcherSetTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/libcapn/Tests/APNSDispatcherTest.php</file>
             <file>../src/Lunr/Vortex/APNS/ApnsPHP/Tests/APNSResponseBasePushSuccessTest.php</file>
             <file>../src/Lunr/Vortex/APNS/ApnsPHP/Tests/APNSResponseBasePushErrorTest.php</file>
             <file>../src/Lunr/Vortex/APNS/ApnsPHP/Tests/APNSResponseGetStatusTest.php</file>
