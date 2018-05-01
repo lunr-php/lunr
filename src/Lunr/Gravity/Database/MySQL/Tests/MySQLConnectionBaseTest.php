@@ -98,16 +98,6 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     }
 
     /**
-     * Test that database is set correctly.
-     *
-     * @requires extension mysqlnd_ms
-     */
-    public function testQoSPolicyIsSetToDefaultPolicy()
-    {
-        $this->assertPropertySame('qos_policy', MYSQLND_MS_QOS_CONSISTENCY_EVENTUAL);
-    }
-
-    /**
      * Test that ssl_key is set as NULL if not set in the configuration.
      */
     public function testSSLKeyIsSetCorrectly()
