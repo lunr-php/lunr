@@ -42,17 +42,19 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that get_file_content() does not get contents of an inaccessible file.
      *
-     * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
+     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
      */
     public function testGetFileContentWithInaccessibleFile()
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+            $this->expectException('\PHPUnit_Framework_Error_Warning');
         }
 
         $file = '/root/ab45cd89';
@@ -65,20 +67,22 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that get_file_content() does not get contents of a non-existant file.
      *
-     * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
+     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
      */
     public function testGetFileContentWithNonExistantFile()
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+            $this->expectException('\PHPUnit_Framework_Error_Warning');
         }
 
-        $file = sys_get_temp_dir() . '/ab45cd89';
+        $file = '/tmp/ab45cd89';
 
         $fetched = $this->class->get_file_content($file);
 
@@ -104,18 +108,20 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @param mixed $file Invalid filename
      *
-     * @dataProvider      invalidNameProvider
-     * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
+     * @dataProvider invalidNameProvider
+     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
      */
     public function testGetFileContentWithInvalidFilenames($file)
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+            $this->expectException('\PHPUnit_Framework_Error_Warning');
         }
 
         $fetched = $this->class->get_file_content($file);
@@ -158,17 +164,19 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() does not put contents in an inaccessible file.
      *
-     * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentWithInaccessibleFile()
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+            $this->expectException('\PHPUnit_Framework_Error_Warning');
         }
 
         $file = '/root/ab45cd89';
@@ -203,20 +211,22 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() does not put contents in a directory.
      *
-     * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentInDirectory()
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+            $this->expectException('\PHPUnit_Framework_Error_Warning');
         }
 
-        $file = sys_get_temp_dir();
+        $file = '/tmp';
 
         $content = "Content\n";
 
@@ -230,18 +240,20 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @param mixed $file Invalid filename
      *
-     * @dataProvider      invalidNameProvider
-     * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     * @dataProvider invalidNameProvider
+     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentWithInvalidFilenames($file)
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+            $this->expectException('\PHPUnit_Framework_Error_Warning');
         }
 
         $content = "Content\n";

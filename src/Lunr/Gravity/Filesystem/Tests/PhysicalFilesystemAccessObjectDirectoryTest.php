@@ -45,17 +45,19 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
     /**
      * Test listing  an inaccessible directory.
      *
-     * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
+     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
      */
     public function testGetListingOfInaccessibleDirectory()
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+            $this->expectException('\PHPUnit_Framework_Error_Warning');
         }
 
         $directory = '/root';
@@ -68,17 +70,19 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
     /**
      * Test listing an non-existant directory.
      *
-     * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
+     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
      */
     public function testGetListingOfNonExistantDirectory()
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+            $this->expectException('\PHPUnit_Framework_Error_Warning');
         }
 
         $directory = '/tmp56474q';
@@ -91,20 +95,22 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
     /**
      * Test listing a file.
      *
-     * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
+     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
      */
     public function testGetListingOfFile()
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+            $this->expectException('\PHPUnit_Framework_Error_Warning');
         }
 
-        $directory = tempnam(sys_get_temp_dir(), 'phpunit_');;
+        $directory = tempnam('/tmp', 'phpunit_');;
 
         $value = $this->class->get_directory_listing($directory);
 
@@ -116,18 +122,20 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
      *
      * @param mixed $directory Invalid directory value
      *
-     * @dataProvider      invalidNameProvider
-     * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
+     * @dataProvider invalidNameProvider
+     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
      */
     Public function testGetListingOfInvalidDirectory($directory)
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+            $this->expectException('\PHPUnit_Framework_Error_Warning');
         }
 
         $value = $this->class->get_directory_listing($directory);
@@ -140,18 +148,20 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
      *
      * @param Boolean $directory Boolean directory value
      *
-     * @dataProvider      booleanNameProvider
-     * @covers            Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
+     * @dataProvider booleanNameProvider
+     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
      */
     Public function testGetListingOfBooleanDirectory($directory)
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+            $this->expectException('\PHPUnit_Framework_Error_Warning');
         }
 
         $value = $this->class->get_directory_listing($directory);
