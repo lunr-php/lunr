@@ -18,10 +18,6 @@
             <file>../src/Lunr/Cache/Tests/CacheHandlerDataTest.php</file>
         </testsuite>
         <testsuite name="Core">
-            <file>../src/Lunr/Core/Tests/AutoloaderTest.php</file>
-            <file>../src/Lunr/Core/Tests/AutoloaderTestLegacy.php</file>
-            <file>../src/Lunr/Core/Tests/AutoloaderTestPSR0.php</file>
-            <file>../src/Lunr/Core/Tests/AutoloaderTestPSR4.php</file>
             <file>../src/Lunr/Core/Tests/DateTimeBaseTest.php</file>
             <file>../src/Lunr/Core/Tests/DateTimeGetDateTimeTest.php</file>
             <file>../src/Lunr/Core/Tests/DateTimeGetDelayedDatetimeTest.php</file>
