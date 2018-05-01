@@ -74,18 +74,20 @@ class FrontControllerDispatchTest extends FrontControllerTest
      *
      * @param mixed $value Invalid controller name.
      *
-     * @dataProvider      invalidControllerNameProvider
-     * @covers            Lunr\Corona\FrontController::dispatch
+     * @dataProvider invalidControllerNameProvider
+     * @covers       Lunr\Corona\FrontController::dispatch
      */
     function testDispatchWithInvalidControllerValues($value)
     {
         if (class_exists('\PHPUnit\Framework\Error\Error'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Error::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Error');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error::class);
+            $this->expectException('\PHPUnit_Framework_Error');
         }
 
         $this->request->expects($this->at(0))
