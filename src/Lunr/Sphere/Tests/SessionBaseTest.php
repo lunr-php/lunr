@@ -56,18 +56,20 @@ class SessionBaseTest extends SessionTest
      *
      * @param mixed $handler Invalid Session handler
      *
-     * @dataProvider      invalidSessionHandlerProvider
-     * @covers            Lunr\Sphere\Session::setSessionHandler
+     * @dataProvider invalidSessionHandlerProvider
+     * @covers       Lunr\Sphere\Session::setSessionHandler
      */
     public function testSetSessionHandlerReturnsFalseWithInvalidData($handler)
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
             // PHPUnit 6
-            $this->expectException(\PHPUnit\Framework\Error\Warning::class);
-        } else {
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+        }
+        else
+        {
             // PHPUnit 5
-            $this->expectException(\PHPUnit_Framework_Error_Warning::class);
+            $this->expectException('\PHPUnit_Framework_Error_Warning');
         }
 
         $this->assertFalse($this->class->setSessionHandler($handler));
