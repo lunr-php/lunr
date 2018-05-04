@@ -49,6 +49,9 @@
             <file>../src/Lunr/Corona/Tests/FrontControllerLookupTest.php</file>
             <file>../src/Lunr/Corona/Tests/FrontControllerRouteTest.php</file>
             <file>../src/Lunr/Corona/Tests/FrontControllerDispatchTest.php</file>
+            <file>../src/Lunr/Corona/Tests/RequestResultHandlerBaseTest.php</file>
+            <file>../src/Lunr/Corona/Tests/RequestResultHandlerSetResultTest.php</file>
+            <file>../src/Lunr/Corona/Tests/RequestResultHandlerHandleRequestTest.php</file>
             <file>../src/Lunr/Corona/Tests/RequestBaseTest.php</file>
             <file>../src/Lunr/Corona/Tests/RequestMagicGetTest.php</file>
             <file>../src/Lunr/Corona/Tests/RequestGetDataTest.php</file>
@@ -81,6 +84,16 @@
             <file>../src/Lunr/Corona/Tests/MsgpackViewBaseTest.php</file>
             <file>../src/Lunr/Corona/Tests/MsgpackViewPrintTest.php</file>
             <file>../src/Lunr/Corona/Tests/MsgpackViewPrintFatalErrorTest.php</file>
+            <file>../src/Lunr/Corona/Exceptions/Tests/HttpExceptionBaseTest.php</file>
+            <file>../src/Lunr/Corona/Exceptions/Tests/HttpExceptionNoAppCodeTest.php</file>
+            <file>../src/Lunr/Corona/Exceptions/Tests/BadRequestExceptionBaseTest.php</file>
+            <file>../src/Lunr/Corona/Exceptions/Tests/ForbiddenExceptionBaseTest.php</file>
+            <file>../src/Lunr/Corona/Exceptions/Tests/MethodNotAllowedExceptionBaseTest.php</file>
+            <file>../src/Lunr/Corona/Exceptions/Tests/NotFoundExceptionBaseTest.php</file>
+            <file>../src/Lunr/Corona/Exceptions/Tests/NotImplementedExceptionBaseTest.php</file>
+            <file>../src/Lunr/Corona/Exceptions/Tests/PreconditionFailedExceptionBaseTest.php</file>
+            <file>../src/Lunr/Corona/Exceptions/Tests/RequestedRangeNotSatisfiableExceptionBaseTest.php</file>
+            <file>../src/Lunr/Corona/Exceptions/Tests/UnauthorizedExceptionBaseTest.php</file>
         </testsuite>
         <testsuite name="Gravity">
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperBaseTest.php</file>
@@ -354,6 +367,7 @@
                 <directory>../src/Lunr/Halo/</directory>
                 <directory>../src/Lunr/Core/Tests/</directory>
                 <directory>../src/Lunr/Corona/Tests/</directory>
+                <directory>../src/Lunr/Corona/Exceptions/Tests/</directory>
                 <directory>../src/Lunr/Feedback/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/Tests/</directory>

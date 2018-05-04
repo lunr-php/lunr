@@ -29,13 +29,19 @@ abstract class FrontControllerTest extends LunrBaseTest
 
     /**
      * Mock instance of the Request class.
-     * @var RequestInterface
+     * @var Request
      */
     protected $request;
 
     /**
+     * Mock instance of the RequestResultHandler class.
+     * @var RequestResultHandler
+     */
+    protected $handler;
+
+    /**
      * Mock instance of a FilesystemAccessObject class.
-     * @var FilesystemAccessObjectInterface
+     * @var \Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface
      */
     protected $fao;
 
@@ -44,11 +50,17 @@ abstract class FrontControllerTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->request = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
+        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
+                              ->disableOriginalConstructor()
+                              ->getMock();
+
+        $this->handler = $this->getMockBuilder('Lunr\Corona\RequestResultHandler')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $this->fao = $this->getMockBuilder('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface')->getMock();
 
-        $this->class = new FrontController($this->request, $this->fao);
+        $this->class = new FrontController($this->request, $this->handler, $this->fao);
 
         $this->reflection = new ReflectionClass('Lunr\Corona\FrontController');
     }
@@ -61,6 +73,7 @@ abstract class FrontControllerTest extends LunrBaseTest
         unset($this->class);
         unset($this->reflection);
         unset($this->request);
+        unset($this->handler);
         unset($this->fao);
     }
 
@@ -76,7 +89,6 @@ abstract class FrontControllerTest extends LunrBaseTest
         $names[] = [ FALSE ];
         $names[] = [ 1 ];
         $names[] = [ 1.1 ];
-        $names[] = [ 'String' ];
 
         return $names;
     }

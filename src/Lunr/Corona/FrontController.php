@@ -20,14 +20,20 @@ class FrontController
 {
 
     /**
-     * Instance of the Request class.
-     * @var RequestInterface
+     * Shared instance of the Request class.
+     * @var Request
      */
     protected $request;
 
     /**
+     * Shared instance of the RequestResultHandler class.
+     * @var RequestResultHandler
+     */
+    protected $handler;
+
+    /**
      * Instance of the FilesystemAccessObject class.
-     * @var FilesystemAccessObjectInterface
+     * @var \Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface
      */
     protected $fao;
 
@@ -46,12 +52,14 @@ class FrontController
     /**
      * Constructor.
      *
-     * @param RequestInterface                $request Instance of the Request class.
-     * @param FilesystemAccessObjectInterface $fao     Instance of the FilesystemAccessObject class.
+     * @param Request                                                  $request Instance of the Request class.
+     * @param RequestResultHandler                                     $handler Instance of the RequestResultHandler class.
+     * @param \Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface $fao     Instance of the FilesystemAccessObject class.
      */
-    public function __construct($request, $fao)
+    public function __construct($request, $handler, $fao)
     {
         $this->request = $request;
+        $this->handler = $handler;
         $this->fao     = $fao;
 
         $this->paths  = [];
@@ -64,6 +72,7 @@ class FrontController
     public function __destruct()
     {
         unset($this->request);
+        unset($this->handler);
         unset($this->fao);
         unset($this->paths);
         unset($this->routes);
@@ -206,7 +215,7 @@ class FrontController
      */
     public function dispatch($controller)
     {
-        call_user_func_array([ $controller, $this->request->method ], $this->request->params);
+        $this->handler->handle_request([ $controller, $this->request->method ], $this->request->params);
     }
 
 }

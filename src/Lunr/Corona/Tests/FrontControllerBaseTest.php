@@ -31,6 +31,14 @@ class FrontControllerBaseTest extends FrontControllerTest
     }
 
     /**
+     * Test that the RequestResultHandler class was passed correctly.
+     */
+    public function testRequestResultHandlerPassedCorrectly()
+    {
+        $this->assertPropertySame('handler', $this->handler);
+    }
+
+    /**
      * Test that the FilesystemAccessObject class was passed correctly.
      */
     public function testFAOPassedCorrectly()

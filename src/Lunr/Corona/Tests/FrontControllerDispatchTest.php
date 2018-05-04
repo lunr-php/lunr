@@ -30,19 +30,19 @@ class FrontControllerDispatchTest extends FrontControllerTest
     {
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')->getMock();
 
+        $this->handler->expects($this->once())
+                      ->method('handle_request')
+                      ->with([ $controller, 'foo' ], [ 1, 2 ]);
+
         $this->request->expects($this->at(0))
                       ->method('__get')
                       ->with('method')
-                      ->will($this->returnValue('foo'));
+                      ->willReturn('foo');
 
         $this->request->expects($this->at(1))
                       ->method('__get')
                       ->with('params')
-                      ->will($this->returnValue([ 1, 2 ]));
-
-        $controller->expects($this->once())
-                   ->method('foo')
-                   ->with(1, 2);
+                      ->willReturn([ 1, 2 ]);
 
         $this->class->dispatch($controller);
     }
@@ -56,17 +56,45 @@ class FrontControllerDispatchTest extends FrontControllerTest
     {
         $controller = 'Lunr\Corona\Tests\MockController';
 
+        $this->handler->expects($this->once())
+                      ->method('handle_request')
+                      ->with([ $controller, 'bar'], [ 1, 2 ]);
+
         $this->request->expects($this->at(0))
                       ->method('__get')
                       ->with('method')
-                      ->will($this->returnValue('bar'));
+                      ->willReturn('bar');
 
         $this->request->expects($this->at(1))
                       ->method('__get')
                       ->with('params')
-                      ->will($this->returnValue([ 1, 2 ]));
+                      ->willReturn([ 1, 2 ]);
 
         $this->class->dispatch($controller);
+    }
+
+    /**
+     * Test that dispatch behaves well with a non-existant controller.
+     *
+     * @covers Lunr\Corona\FrontController::dispatch
+     */
+    function testDispatchWithNonExistantController()
+    {
+        $this->handler->expects($this->once())
+                      ->method('handle_request')
+                      ->with([ 'String', 'bar' ], [ 1, 2 ]);
+
+        $this->request->expects($this->at(0))
+                      ->method('__get')
+                      ->with('method')
+                      ->willReturn('bar');
+
+        $this->request->expects($this->at(1))
+                      ->method('__get')
+                      ->with('params')
+                      ->willReturn([ 1, 2 ]);
+
+        $this->class->dispatch('String');
     }
 
     /**
@@ -79,26 +107,19 @@ class FrontControllerDispatchTest extends FrontControllerTest
      */
     public function testDispatchWithInvalidControllerValues($value)
     {
-        if (class_exists('\PHPUnit\Framework\Error\Error'))
-        {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Error');
-        }
-        else
-        {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error');
-        }
+        $this->handler->expects($this->once())
+                      ->method('handle_request')
+                      ->with([ $value, 'bar' ], [ 1, 2 ]);
 
         $this->request->expects($this->at(0))
                       ->method('__get')
                       ->with('method')
-                      ->will($this->returnValue('bar'));
+                      ->willReturn('bar');
 
         $this->request->expects($this->at(1))
                       ->method('__get')
                       ->with('params')
-                      ->will($this->returnValue([]));
+                      ->willReturn([ 1, 2 ]);
 
         $this->class->dispatch($value);
     }
