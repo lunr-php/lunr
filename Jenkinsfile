@@ -75,9 +75,9 @@ pipeline {
             steps{
                 parallel (
                     sonarQube: {
-                        def scannerHome = tool 'linux scanner';
                         withSonarQubeEnv('M2mobi') {
-                          sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=php:${name} -Dsonar.sources=src/ -Dsonar.php.tests.reportPath=build/logs/junit.xml -Dsonar.php.coverage.reportPaths=build/logs/clover.xml"
+                            def scannerHome = tool 'linux scanner';
+                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=php:${name} -Dsonar.sources=src/ -Dsonar.php.tests.reportPath=build/logs/junit.xml -Dsonar.php.coverage.reportPaths=build/logs/clover.xml"
                         }
                     },
                     pdepend: {
