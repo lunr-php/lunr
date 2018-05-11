@@ -1,13 +1,10 @@
 #!groovy
-def name = 'lunr'
-def env = 'm2mobi'
-
 def ant_sh(String stage){
     sh "/bin/ant ${stage}"
 }
 def deploy(){
     if(env.deploy){
-        sh "salt-connect library project=${name} branch=master env=${env}"
+        sh "salt-connect library project=lunr branch=master env=m2mobi"
     }
 }
 def dependencies(String dependency_tool){
