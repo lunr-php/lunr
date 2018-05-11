@@ -1,7 +1,6 @@
 #!groovy
 def name = 'lunr'
 def env = 'm2mobi'
-def scannerHome = tool 'linux scanner';
 
 def ant_sh(String stage){
     sh "/bin/ant ${stage}"
@@ -77,7 +76,7 @@ pipeline {
                 parallel (
                     sonarQube: {
                         withSonarQubeEnv('M2mobi') {
-                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=php:${name} -Dsonar.sources=src/ -Dsonar.php.tests.reportPath=build/logs/junit.xml -Dsonar.php.coverage.reportPaths=build/logs/clover.xml"
+                            sh "sonar-scanner -Dsonar.projectKey=php:${name} -Dsonar.sources=src/ -Dsonar.php.tests.reportPath=build/logs/junit.xml -Dsonar.php.coverage.reportPaths=build/logs/clover.xml"
                         }
                     },
                     pdepend: {
