@@ -74,11 +74,6 @@ pipeline {
         stage('Publishing Report'){
             steps{
                 parallel (
-                    sonarQube: {
-                        withSonarQubeEnv('M2mobi') {
-                            sh "sonar-scanner -Dsonar.projectKey=php:${name} -Dsonar.sources=src/ -Dsonar.php.tests.reportPath=build/logs/junit.xml -Dsonar.php.coverage.reportPaths=build/logs/clover.xml"
-                        }
-                    },
                     pdepend: {
                         publishHTML(
                             target: [
