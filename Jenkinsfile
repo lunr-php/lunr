@@ -1,10 +1,13 @@
 #!groovy
+def name = 'lunr'
+def env = 'm2mobi'
+
 def ant_sh(String stage){
     sh "/bin/ant ${stage}"
 }
 def deploy(){
     if(env.deploy){
-        sh "salt-connect library project=lunr branch=master env=m2mobi"
+        sh "salt-connect library project=${name} branch=master env=${env}"
     }
 }
 def dependencies(String dependency_tool){
@@ -71,6 +74,12 @@ pipeline {
         stage('Publishing Report'){
             steps{
                 parallel (
+                    sonarQube: {
+                        def scannerHome = tool 'linux scanner';
+                        withSonarQubeEnv('M2mobi') {
+                          sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=php:${name} -Dsonar.sources=src/ -Dsonar.php.tests.reportPath=build/logs/junit.xml -Dsonar.php.coverage.reportPaths=build/logs/clover.xml"
+                        }
+                    }
                     pdepend: {
                         publishHTML(
                             target: [
