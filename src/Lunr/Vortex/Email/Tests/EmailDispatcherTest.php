@@ -38,10 +38,10 @@ abstract class EmailDispatcherTest extends LunrBaseTest
     protected $logger;
 
     /**
-     * Reflection instance of the EmailDispatcher
-     * @var ReflectionClass
+     * Mock instance of the Email Payload class.
+     * @var EmailPayload
      */
-    protected $reflection;
+    protected $payload;
 
     /**
      * Testcase Constructor.
@@ -51,6 +51,10 @@ abstract class EmailDispatcherTest extends LunrBaseTest
         $this->mail_transport = $this->getMockBuilder('PHPMailer\PHPMailer\PHPMailer')->getMock();
 
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\Email\EmailPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $this->class = new EmailDispatcher($this->mail_transport, $this->logger);
 
@@ -64,6 +68,7 @@ abstract class EmailDispatcherTest extends LunrBaseTest
     {
         unset($this->logger);
         unset($this->mail_transport);
+        unset($this->payload);
         unset($this->class);
         unset($this->reflection);
     }

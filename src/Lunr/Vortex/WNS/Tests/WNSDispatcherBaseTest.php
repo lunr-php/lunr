@@ -27,22 +27,6 @@ class WNSDispatcherBaseTest extends WNSDispatcherTest
     use PsrLoggerTestTrait;
 
     /**
-     * Test that the endpoint is set to an empty string by default.
-     */
-    public function testEndpointsIsEmptyString()
-    {
-        $this->assertPropertyEquals('endpoint', '');
-    }
-
-    /**
-     * Test that the payload is set to an empty string by default.
-     */
-    public function testPayloadIsEmptyString()
-    {
-        $this->assertPropertyEquals('payload', '');
-    }
-
-    /**
      * Test that the passed Requesys_Session object is set correctly.
      */
     public function testRequestsSessionIsSetCorrectly()
@@ -65,11 +49,9 @@ class WNSDispatcherBaseTest extends WNSDispatcherTest
      */
     public function testGetNewResponseObjectForFailedRequest()
     {
-        $this->set_reflection_property_value('endpoint', 'http://localhost/');
-
         $method = $this->get_accessible_reflection_method('get_new_response_object_for_failed_request');
 
-        $result = $method->invoke($this->class);
+        $result = $method->invokeArgs($this->class, [ 'http://localhost/' ]);
 
         $this->assertInstanceOf('\Requests_Response', $result);
         $this->assertEquals('http://localhost/', $result->url);

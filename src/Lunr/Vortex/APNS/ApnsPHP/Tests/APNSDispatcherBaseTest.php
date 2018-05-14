@@ -26,22 +26,6 @@ class APNSDispatcherBaseTest extends APNSDispatcherTest
     use PsrLoggerTestTrait;
 
     /**
-     * Test that the endpoints property is set to an empty array by default.
-     */
-    public function testEndpointsIsEmptyArray()
-    {
-        $this->assertPropertySame('endpoints', []);
-    }
-
-    /**
-     * Test that the payload property is set to an empty JSON object by default.
-     */
-    public function testPayloadIsEmptyJSONObject()
-    {
-        $this->assertPropertySame('payload', '{}');
-    }
-
-    /**
      * Test that the APNS message property is set to NULL.
      */
     public function testAPNSMessageIsNull()

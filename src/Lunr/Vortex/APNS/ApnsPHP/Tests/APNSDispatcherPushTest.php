@@ -28,7 +28,9 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      */
     public function testPushReturnsAPNSResponseObject()
     {
-        $result = $this->class->push();
+        $endpoints = [];
+
+        $result = $this->class->push($this->payload, $endpoints);
 
         $this->assertInstanceOf('Lunr\Vortex\APNS\ApnsPHP\APNSResponse', $result);
     }
@@ -40,17 +42,17 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      */
     public function testPushResetsProperties()
     {
-        $this->set_reflection_property_value('endpoints', [ 'endpoint1', 'endpoint2' ]);
-        $this->set_reflection_property_value('payload', '{"msg":"yo"}');
-
-        $this->class->push();
-
-        $this->assertPropertySame('endpoints', []);
-        $this->assertPropertySame('payload', '{}');
-        if (!defined('REFLECTION_BUG_72194') || REFLECTION_BUG_72194 !== TRUE)
+        if (defined('REFLECTION_BUG_72194') && REFLECTION_BUG_72194 === TRUE)
         {
-            $this->assertPropertySame('apns_message', NULL);
+            $this->markTestSkipped('Reflection can\'t handle this right now');
+            return;
         }
+
+        $endpoints = [];
+
+        $this->class->push($this->payload, $endpoints);
+
+        $this->assertPropertySame('apns_message', NULL);
     }
 
     /**
@@ -60,9 +62,13 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      */
     public function testPushWithNonJSONPayloadProceedsWithoutError()
     {
-        $this->set_reflection_property_value('payload', '{"yo"}');
+        $endpoints = [];
 
-        $result = $this->class->push();
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"yo"}');
+
+        $result = $this->class->push($this->payload, $endpoints);
 
         $this->assertInstanceOf('Lunr\Vortex\APNS\ApnsPHP\APNSResponse', $result);
     }
@@ -74,8 +80,13 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      */
     public function testPushConstructsCorrectPayload()
     {
+        $endpoints = [];
+
         $payload = '{"alert":"message","sound":"yo.mp3","yo":"he","badge":7,"custom_data":{"key1":"value1","key2":"value2"}}';
-        $this->set_reflection_property_value('payload', $payload);
+
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn($payload);
 
         $this->apns_message->expects($this->once())
                            ->method('setText')
@@ -96,7 +107,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
                                [ 'key2', 'value2' ]
                            );
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -106,7 +117,11 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      */
     public function testPushLogPayloadBuildingBadgeError()
     {
-        $this->set_reflection_property_value('payload', '{"badge":"yo"}');
+        $endpoints = [];
+
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"badge":"yo"}');
 
         $this->apns_message->expects($this->once())
                            ->method('setBadge')
@@ -117,7 +132,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
                      ->method('warning')
                      ->with('Invalid badge: yo');
 
-        $result = $this->class->push();
+        $result = $this->class->push($this->payload, $endpoints);
 
         $this->assertInstanceOf('Lunr\Vortex\APNS\ApnsPHP\APNSResponse', $result);
     }
@@ -129,7 +144,11 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      */
     public function testPushLogPayloadBuildingCustomPropertyError()
     {
-        $this->set_reflection_property_value('payload', '{"custom_data":{"apns":"value1"}}');
+        $endpoints = [];
+
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"custom_data":{"apns":"value1"}}');
 
         $this->apns_message->expects($this->once())
                            ->method('setCustomProperty')
@@ -140,7 +159,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
                      ->method('warning')
                      ->with('Reserved keyword: apns');
 
-        $result = $this->class->push();
+        $result = $this->class->push($this->payload, $endpoints);
 
         $this->assertInstanceOf('Lunr\Vortex\APNS\ApnsPHP\APNSResponse', $result);
     }
@@ -152,13 +171,13 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      */
     public function testPushAddAllEndpointsToMessage()
     {
-        $this->set_reflection_property_value('endpoints', [ 'endpoint1', 'endpoint2' ]);
+        $endpoints = [ 'endpoint1', 'endpoint2' ];
 
         $this->apns_message->expects($this->exactly(2))
                            ->method('addRecipient')
                            ->withConsecutive([ 'endpoint1' ], [ 'endpoint2' ]);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -168,7 +187,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      */
     public function testPushLogInvalidEndpoints()
     {
-        $this->set_reflection_property_value('endpoints', [ 'endpoint1', 'endpoint2', 'endpoint3' ]);
+        $endpoints = [ 'endpoint1', 'endpoint2', 'endpoint3' ];
 
         $pos = 0;
 
@@ -193,7 +212,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
                         [ 'Invalid endpoint: endpoint3' ]
                      );
 
-        $result = $this->class->push();
+        $result = $this->class->push($this->payload, $endpoints);
 
         $this->assertInstanceOf('Lunr\Vortex\APNS\ApnsPHP\APNSResponse', $result);
     }
@@ -205,6 +224,8 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      */
     public function testPushLogFailedConnection()
     {
+        $endpoints = [];
+
         $this->apns_push->expects($this->once())
                         ->method('connect')
                         ->will($this->throwException(new \ApnsPHP_Exception('Failed to connect')));
@@ -216,7 +237,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
                         [ 'error' => 'Failed to connect' ]
                      );
 
-        $result = $this->class->push();
+        $result = $this->class->push($this->payload, $endpoints);
 
         $this->assertInstanceOf('Lunr\Vortex\APNS\ApnsPHP\APNSResponse', $result);
     }
@@ -228,6 +249,8 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      */
     public function testPushLogFailedSending()
     {
+        $endpoints = [];
+
         $this->apns_push->expects($this->once())
                         ->method('send')
                         ->will($this->throwException(new \ApnsPHP_Push_Exception('Failed to send')));
@@ -239,7 +262,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
                         [ 'error' => 'Failed to send' ]
                      );
 
-        $result = $this->class->push();
+        $result = $this->class->push($this->payload, $endpoints);
 
         $this->assertInstanceOf('Lunr\Vortex\APNS\ApnsPHP\APNSResponse', $result);
     }
@@ -251,6 +274,8 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      */
     public function testPushSuccess()
     {
+        $endpoints = [];
+
         $pos = 0;
 
         $this->apns_push->expects($this->at($pos++))
@@ -280,7 +305,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
         $this->logger->expects($this->never())
                      ->method('warning');
 
-        $result = $this->class->push();
+        $result = $this->class->push($this->payload, $endpoints);
 
         $this->assertInstanceOf('Lunr\Vortex\APNS\ApnsPHP\APNSResponse', $result);
     }

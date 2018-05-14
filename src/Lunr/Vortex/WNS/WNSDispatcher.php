@@ -36,18 +36,6 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
     protected $client_id;
 
     /**
-     * Push Notification endpoint.
-     * @var String
-     */
-    private $endpoint;
-
-    /**
-     * Push Notification payload to send.
-     * @var String
-     */
-    private $payload;
-
-    /**
      * The authentication token to identify the app channel
      * @var string
      */
@@ -91,8 +79,6 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
      */
     public function __construct($http, $logger)
     {
-        $this->endpoint      = '';
-        $this->payload       = '';
         $this->http          = $http;
         $this->logger        = $logger;
         $this->type          = WNSType::RAW;
@@ -106,8 +92,6 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
      */
     public function __destruct()
     {
-        unset($this->endpoint);
-        unset($this->payload);
         unset($this->type);
         unset($this->http);
         unset($this->logger);
@@ -119,18 +103,19 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
     /**
      * Push the notification.
      *
+     * @param WNSPayload $payload   Payload object
+     * @param array      $endpoints Endpoints to send to in this batch
+     *
      * @return WNSResponse $return Response object
      */
-    public function push()
+    public function push($payload, &$endpoints)
     {
         if (!isset($this->oauth_token))
         {
-            $this->logger->warning('Tried to push notification to {endpoint} but wasn\'t authenticated.', [ 'endpoint' => $this->endpoint ]);
-            $response = $this->get_new_response_object_for_failed_request();
+            $this->logger->warning('Tried to push notification to {endpoint} but wasn\'t authenticated.', [ 'endpoint' => $endpoints[0] ]);
+            $response = $this->get_new_response_object_for_failed_request($endpoints[0]);
 
-            $this->endpoint = '';
-            $this->payload  = '';
-            $this->type     = WNSType::RAW;
+            $this->type = WNSType::RAW;
 
             return new WNSResponse($response, $this->logger);
         }
@@ -153,56 +138,19 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
 
         try
         {
-            $response = $this->http->post($this->endpoint, $headers, $this->payload);
+            $response = $this->http->post($endpoints[0], $headers, $payload->get_payload());
         }
         catch (Requests_Exception $e)
         {
-            $response = $this->get_new_response_object_for_failed_request();
-            $context  = [ 'error' => $e->getMessage(), 'endpoint' => $this->endpoint ];
+            $response = $this->get_new_response_object_for_failed_request($endpoints[0]);
+            $context  = [ 'error' => $e->getMessage(), 'endpoint' => $endpoints[0] ];
 
             $this->logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
         }
 
-        $this->endpoint = '';
-        $this->payload  = '';
-        $this->type     = WNSType::RAW;
+        $this->type = WNSType::RAW;
 
         return new WNSResponse($response, $this->logger);
-    }
-
-    /**
-     * Set the endpoint(s) for the push.
-     *
-     * @param array|string $endpoints The endpoint(s) for the push
-     *
-     * @return WNSDispatcher $self Self reference
-     */
-    public function set_endpoints($endpoints)
-    {
-        if (is_array($endpoints))
-        {
-            $this->endpoint = empty($endpoints) ? '' : $endpoints[0];
-        }
-        else
-        {
-            $this->endpoint = $endpoints;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set the the payload to push.
-     *
-     * @param string $payload The reference to the payload of the push
-     *
-     * @return WNSDispatcher $self Self reference
-     */
-    public function set_payload(&$payload)
-    {
-        $this->payload =& $payload;
-
-        return $this;
     }
 
     /**
@@ -306,13 +254,15 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
     /**
      * Get a Requests_Response object for a failed request.
      *
+     * @param string $endpoint Endpoint to send to
+     *
      * @return \Requests_Response $http_response New instance of a Requests_Response object.
      */
-    protected function get_new_response_object_for_failed_request()
+    protected function get_new_response_object_for_failed_request($endpoint)
     {
         $http_response = new Requests_Response();
 
-        $http_response->url = $this->endpoint;
+        $http_response->url = $endpoint;
 
         return $http_response;
     }

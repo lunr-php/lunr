@@ -39,12 +39,22 @@ abstract class GCMDispatcherTest extends LunrBaseTest
     protected $logger;
 
     /**
+     * Mock instance of the GCM Payload class.
+     * @var GCMPayload
+     */
+    protected $payload;
+
+    /**
      * Testcase Constructor.
      */
     public function setUp()
     {
         $this->http   = $this->getMockBuilder('Requests_Session')->getMock();
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\GCM\GCMPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $this->class = new GCMDispatcher($this->http, $this->logger);
 
@@ -59,6 +69,7 @@ abstract class GCMDispatcherTest extends LunrBaseTest
     public function tearDown()
     {
         unset($this->logger);
+        unset($this->payload);
         unset($this->class);
         unset($this->reflection);
     }

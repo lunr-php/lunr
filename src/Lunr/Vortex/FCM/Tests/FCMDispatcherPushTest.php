@@ -28,9 +28,11 @@ class FCMDispatcherPushTest extends FCMDispatcherTest
      */
     public function testPushReturnsFCMResponseObject()
     {
+        $endpoints = [];
+
         $this->constant_redefine('Lunr\Vortex\FCM\FCMDispatcher::BATCH_SIZE', 2);
 
-        $result = $this->class->push();
+        $result = $this->class->push($this->payload, $endpoints);
 
         $this->assertInstanceOf('Lunr\Vortex\FCM\FCMResponse', $result);
     }
@@ -42,6 +44,8 @@ class FCMDispatcherPushTest extends FCMDispatcherTest
      */
     public function testPushBatchReturnsFCMBatchResponseObject()
     {
+        $endpoints = [ 'endpoint' ];
+
         $response = $this->getMockBuilder('Requests_Response')->getMock();
 
         $this->http->expects($this->once())
@@ -49,8 +53,7 @@ class FCMDispatcherPushTest extends FCMDispatcherTest
                    ->will($this->returnValue($response));
 
         $method = $this->get_accessible_reflection_method('push_batch');
-        $data   = [ 'endpoint' ];
-        $result = $method->invokeArgs($this->class, [ &$data ]);
+        $result = $method->invokeArgs($this->class, [ $this->payload, &$endpoints ]);
 
         $this->assertInstanceOf('Lunr\Vortex\FCM\FCMBatchResponse', $result);
     }

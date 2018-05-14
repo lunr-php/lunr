@@ -53,6 +53,12 @@ abstract class WNSDispatcherTest extends LunrBaseTest
     protected $response;
 
     /**
+     * Mock instance of the WNS Payload class.
+     * @var WNSPayload
+     */
+    protected $payload;
+
+    /**
      * Testcase Constructor.
      */
     public function setUp()
@@ -67,6 +73,10 @@ abstract class WNSDispatcherTest extends LunrBaseTest
 
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\WNS\WNSPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
+
         $this->class = new WNSDispatcher($this->http, $this->logger, $this->config);
 
         $this->reflection = new ReflectionClass('Lunr\Vortex\WNS\WNSDispatcher');
@@ -79,6 +89,7 @@ abstract class WNSDispatcherTest extends LunrBaseTest
     {
         unset($this->class);
         unset($this->reflection);
+        unset($this->payload);
         unset($this->http);
         unset($this->logger);
         unset($this->config);

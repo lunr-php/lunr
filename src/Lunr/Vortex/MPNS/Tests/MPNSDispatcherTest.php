@@ -47,6 +47,12 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
     protected $response;
 
     /**
+     * Mock instance of the MPNS Payload class.
+     * @var MPNSPayload
+     */
+    protected $payload;
+
+    /**
      * Testcase Constructor.
      */
     public function setUp()
@@ -54,6 +60,10 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->response = $this->getMockBuilder('Requests_Response')->getMock();
+
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\MPNS\MPNSPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $this->class = new MPNSDispatcher($this->http, $this->logger);
 
@@ -67,6 +77,7 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
     {
         unset($this->class);
         unset($this->reflection);
+        unset($this->payload);
         unset($this->http);
         unset($this->logger);
         unset($this->response);

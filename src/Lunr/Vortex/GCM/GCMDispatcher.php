@@ -32,18 +32,6 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     const BATCH_SIZE = 1000;
 
     /**
-     * Push Notification endpoints.
-     * @var Array
-     */
-    protected $endpoints;
-
-    /**
-     * Push Notification payload to send.
-     * @var String
-     */
-    protected $payload;
-
-    /**
      * Push Notification authentication token.
      * @var String
      */
@@ -98,8 +86,6 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
      */
     public function __destruct()
     {
-        unset($this->endpoints);
-        unset($this->payload);
         unset($this->auth_token);
         unset($this->priority);
         unset($this->http);
@@ -113,8 +99,6 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
      */
     protected function reset()
     {
-        $this->endpoints  = [];
-        $this->payload    = '{}';
         $this->auth_token = '';
         $this->priority   = 'normal';
     }
@@ -146,22 +130,25 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     /**
      * Push the notification.
      *
+     * @param GCMPayload $payload   Payload object
+     * @param array      $endpoints Endpoints to send to in this batch
+     *
      * @return GCMResponse $return Response object
      */
-    public function push()
+    public function push($payload, &$endpoints)
     {
         $gcm_response = $this->get_response();
 
-        foreach (array_chunk($this->endpoints, static::BATCH_SIZE) as &$endpoints)
+        foreach (array_chunk($endpoints, static::BATCH_SIZE) as &$batch)
         {
-            $batch_response = $this->push_batch($endpoints);
+            $batch_response = $this->push_batch($payload, $batch);
 
-            $gcm_response->add_batch_response($batch_response, $endpoints);
+            $gcm_response->add_batch_response($batch_response, $batch);
 
             unset($batch_response);
         }
 
-        unset($endpoints);
+        unset($batch);
 
         $this->reset();
 
@@ -171,18 +158,19 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     /**
      * Push the notification to a batch of endpoints.
      *
-     * @param array $endpoints Endpoints to sent it to in this batch
+     * @param GCMPayload $payload   Payload object
+     * @param array      $endpoints Endpoints to send to in this batch
      *
      * @return GCMBatchResponse $return Response object
      */
-    protected function push_batch(&$endpoints)
+    protected function push_batch($payload, &$endpoints)
     {
         $headers = [
             'Content-Type'  => 'application/json',
             'Authorization' => 'key=' . $this->auth_token,
         ];
 
-        $tmp_payload = json_decode($this->payload, TRUE);
+        $tmp_payload = json_decode($payload->get_payload(), TRUE);
 
         if (count($endpoints) > 1)
         {
@@ -211,34 +199,6 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
         $gcm_batch_response = $this->get_batch_response($http_response, $this->logger, $endpoints);
 
         return $gcm_batch_response;
-    }
-
-    /**
-     * Set the endpoint(s) for the push.
-     *
-     * @param array|string $endpoints The endpoint(s) for the push
-     *
-     * @return GCMSDispatcher $self Self reference
-     */
-    public function set_endpoints($endpoints)
-    {
-        $this->endpoints = !is_array($endpoints) ? [ $endpoints ] : $endpoints;
-
-        return $this;
-    }
-
-    /**
-     * Set the the payload to push.
-     *
-     * @param string $payload The reference to the payload of the push
-     *
-     * @return GCMDispatcher $self Self reference
-     */
-    public function set_payload(&$payload)
-    {
-        $this->payload =& $payload;
-
-        return $this;
     }
 
     /**

@@ -25,18 +25,6 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
 {
 
     /**
-     * Push Notification endpoint.
-     * @var String
-     */
-    private $endpoint;
-
-    /**
-     * Push Notification payload to send.
-     * @var String
-     */
-    private $payload;
-
-    /**
      * Push Notification authentication token.
      * @var String
      */
@@ -92,8 +80,6 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
      */
     public function __construct($http, $logger)
     {
-        $this->endpoint      = '';
-        $this->payload       = '';
         $this->auth_token    = '';
         $this->password      = '';
         $this->cid           = '';
@@ -108,8 +94,6 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
      */
     public function __destruct()
     {
-        unset($this->endpoint);
-        unset($this->payload);
         unset($this->auth_token);
         unset($this->password);
         unset($this->cid);
@@ -122,14 +106,17 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Push the notification.
      *
+     * @param PAPPayload $payload   Payload object
+     * @param array      $endpoints Endpoints to send to in this batch
+     *
      * @return PAPResponse $return Response object
      */
-    public function push()
+    public function push($payload, &$endpoints)
     {
         // construct PAP URL
         $pap_url = "https://cp{$this->cid}.pushapi.na.blackberry.com/mss/PD_pushRequest";
 
-        $pap_data = $this->construct_pap_data();
+        $pap_data = $this->construct_pap_data($payload, $endpoints[0]);
 
         $options = [
             'auth' => [
@@ -151,25 +138,25 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
         catch (Requests_Exception $e)
         {
             $response = $this->get_new_response_object_for_failed_request();
-            $context  = [ 'error' => $e->getMessage(), 'endpoint' => $this->endpoint ];
+            $context  = [ 'error' => $e->getMessage(), 'endpoint' => $endpoints[0] ];
 
             $this->logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
         }
 
-        $this->endpoint      = '';
         $this->push_id       = '';
-        $this->payload       = '';
         $this->deliverbefore = '';
 
-        return new PAPResponse($response, $this->logger, $this->endpoint);
+        return new PAPResponse($response, $this->logger, $endpoints[0]);
     }
 
     /**
      * Constructs the control XML of the PAP request.
      *
-     * @return string $xml The control XML populated with all relevant values
+     * @param string $endpoint Endpoint to send to
+     *
+     * @return String $xml The control XML populated with all relevant values
      */
-    protected function construct_pap_control_xml()
+    protected function construct_pap_control_xml($endpoint)
     {
         // construct PAP control xml
         // @codingStandardsIgnoreStart
@@ -177,7 +164,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
         $xml .= "<!DOCTYPE pap PUBLIC \"-//WAPFORUM//DTD PAP 2.1//EN\" \"http://www.openmobilealliance.org/tech/DTD/pap_2.1.dtd\">\n";
         $xml .= "<pap>\n";
         $xml .= "<push-message push-id=\"{$this->push_id}\" source-reference=\"{$this->auth_token}\" deliver-before-timestamp=\"{$this->deliverbefore}\">\n";
-        $xml .= "<address address-value=\"{$this->endpoint}\"/>\n";
+        $xml .= "<address address-value=\"$endpoint\"/>\n";
         $xml .= "<quality-of-service delivery-method=\"unconfirmed\"/>\n";
         $xml .= "</push-message>\n</pap>\n";
         // @codingStandardsIgnoreEnd
@@ -188,63 +175,30 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Constructs the full data of the PAP request.
      *
-     * @return string $data The PAP request data populated with all relevant values
+     * @param PAPPayload $payload  Payload object
+     * @param string     $endpoint Endpoint to send to
+     *
+     * @return String $data The PAP request data populated with all relevant values
      */
-    protected function construct_pap_data()
+    protected function construct_pap_data($payload, $endpoint)
     {
-        $this->push_id = $this->endpoint . microtime(TRUE);
+        $this->push_id = $endpoint . microtime(TRUE);
 
         // inject the unique push id in the payload
-        $tmp_payload       = json_decode($this->payload, TRUE);
+        $tmp_payload       = json_decode($payload->get_payload(), TRUE);
         $tmp_payload['id'] = $this->push_id;
-        $this->payload     = json_encode($tmp_payload);
 
         // construct custom headers; inject control xml & payload
         $data  = '--' . self::PAP_BOUNDARY . "\r\n";
         $data .= "Content-Type: application/xml; charset=UTF-8\r\n\r\n";
-        $data .= $this->construct_pap_control_xml() . "\r\n--";
+        $data .= $this->construct_pap_control_xml($endpoint) . "\r\n--";
         $data .= self::PAP_BOUNDARY . "\r\n";
         $data .= "Content-Type: text/plain\r\n";
         $data .= 'Push-Message-ID: ' . $this->push_id . "\r\n\r\n";
-        $data .= $this->payload . "\r\n--";
+        $data .= json_encode($tmp_payload) . "\r\n--";
         $data .= self::PAP_BOUNDARY . "--\n\r";
 
         return $data;
-    }
-
-    /**
-     * Set the endpoint(s) for the push.
-     *
-     * @param array|string $endpoints The endpoint(s) for the push
-     *
-     * @return PAPDispatcher $self Self reference
-     */
-    public function set_endpoints($endpoints)
-    {
-        if (is_array($endpoints))
-        {
-            $this->endpoint = empty($endpoints) ? '' : $endpoints[0];
-        }
-        else
-        {
-            $this->endpoint = $endpoints;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set the the payload to push.
-     *
-     * @param string $payload The reference to the payload of the push
-     *
-     * @return PAPDispatcher $self Self reference
-     */
-    public function set_payload(&$payload)
-    {
-        $this->payload =& $payload;
-
-        return $this;
     }
 
     /**

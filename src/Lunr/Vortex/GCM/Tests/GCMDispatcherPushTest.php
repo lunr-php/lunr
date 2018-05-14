@@ -31,7 +31,9 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushReturnsGCMResponseObject()
     {
-        $result = $this->class->push();
+        $endpoints = [];
+
+        $result = $this->class->push($this->payload, $endpoints);
 
         $this->assertInstanceOf('Lunr\Vortex\GCM\GCMResponse', $result);
     }
@@ -43,10 +45,12 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushDoesNoRequestIfNoEndpoint()
     {
+        $endpoints = [];
+
         $this->http->expects($this->never())
                    ->method('post');
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -56,8 +60,12 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushResetsProperties()
     {
-        $this->set_reflection_property_value('endpoints', [ 'endpoint' ]);
-        $this->set_reflection_property_value('payload', '{"collapse_key":"abcde-12345"}');
+        $endpoints = [ 'endpoint' ];
+
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"collapse_key":"abcde-12345"}');
+
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('priority', 'high');
 
@@ -67,10 +75,8 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
                    ->method('post')
                    ->will($this->returnValue($response));
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
 
-        $this->assertPropertyEquals('endpoints', []);
-        $this->assertPropertyEquals('payload', '{}');
         $this->assertPropertyEquals('auth_token', '');
         $this->assertPropertyEquals('priority', 'normal');
     }
@@ -82,7 +88,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushWithFailedRequest()
     {
-        $this->set_reflection_property_value('endpoints', [ 'endpoint' ]);
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type'  => 'application/json',
@@ -104,7 +110,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
                      ->method('warning')
                      ->with($this->equalTo($message), $this->equalTo($context));
 
-        $result = $this->class->push();
+        $result = $this->class->push($this->payload, $endpoints);
 
         $this->assertInstanceOf('Lunr\Vortex\GCM\GCMResponse', $result);
     }
@@ -116,7 +122,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushRequestWithDefaultValues()
     {
-        $this->set_reflection_property_value('endpoints', [ 'endpoint' ]);
+        $endpoints = [ 'endpoint' ];
 
         $response = $this->getMockBuilder('Requests_Response')->getMock();
 
@@ -133,7 +139,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
                    ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
                    ->will($this->returnValue($response));
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -143,8 +149,12 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushRequestWithSingleEndpoint()
     {
-        $this->set_reflection_property_value('endpoints', [ 'endpoint' ]);
-        $this->set_reflection_property_value('payload', '{"collapse_key":"abcde-12345"}');
+        $endpoints = [ 'endpoint' ];
+
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"collapse_key":"abcde-12345"}');
+
         $this->set_reflection_property_value('auth_token', 'auth_token');
 
         $response = $this->getMockBuilder('Requests_Response')->getMock();
@@ -162,7 +172,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
                    ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
                    ->will($this->returnValue($response));
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -172,8 +182,12 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushRequestWithMultipleEndpointsOneBatch()
     {
-        $this->set_reflection_property_value('endpoints', [ 'endpoint1', 'endpoint2' ]);
-        $this->set_reflection_property_value('payload', '{"collapse_key":"abcde-12345"}');
+        $endpoints = [ 'endpoint1', 'endpoint2' ];
+
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"collapse_key":"abcde-12345"}');
+
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('priority', 'high');
 
@@ -192,7 +206,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
                    ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
                    ->will($this->returnValue($response));
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -202,8 +216,12 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushRequestWithMultipleEndpointsMultipleBatches()
     {
-        $this->set_reflection_property_value('endpoints', [ 'endpoint1', 'endpoint2', 'endpoint3', 'endpoint4', 'endpoint5' ]);
-        $this->set_reflection_property_value('payload', '{"collapse_key":"abcde-12345"}');
+        $endpoints = [ 'endpoint1', 'endpoint2', 'endpoint3', 'endpoint4', 'endpoint5' ];
+
+        $this->payload->expects($this->exactly(3))
+                      ->method('get_payload')
+                      ->willReturn('{"collapse_key":"abcde-12345"}');
+
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('priority', 'high');
 
@@ -239,7 +257,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
                    ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
                    ->will($this->returnValue($response));
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
 }

@@ -4,7 +4,7 @@
  * This file contains the PushNotificationDispatcherInterface interface which
  * is the base of all push notifications.
  *
- * PHP Version 5.4
+ * PHP Version 7.2
  *
  * @package    Lunr\Vortex
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -24,27 +24,12 @@ interface PushNotificationDispatcherInterface
     /**
      * Push the notification.
      *
+     * @param object $payload   Payload object
+     * @param array  $endpoints Endpoints to sent it to in this batch
+     *
      * @return PushNotificationResponseInterface $return Response object
      */
-    public function push();
-
-    /**
-     * Set the endpoint(s) for the push.
-     *
-     * @param array|string $endpoints The endpoint(s) for the push
-     *
-     * @return PushNotificationDispatcherInterface $self Self reference
-     */
-    public function set_endpoints($endpoints);
-
-    /**
-     * Set the the payload to push.
-     *
-     * @param string $payload The reference to the payload of the push
-     *
-     * @return PushNotificationDispatcherInterface $self Self reference
-     */
-    public function set_payload(&$payload);
+    public function push($payload, &$endpoints);
 
 }
 

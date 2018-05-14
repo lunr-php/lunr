@@ -31,20 +31,19 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushingWithoutOauthReturnsWNSResponse()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
+        $endpoints = [ 'endpoint' ];
 
         $message = 'Tried to push notification to {endpoint} but wasn\'t authenticated.';
         $context = [ 'endpoint' => 'endpoint' ];
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo($message), $this->equalTo($context));
+                     ->with($message, $context);
 
         $this->http->expects($this->never())
                    ->method('post');
 
-        $this->assertInstanceOf('\Lunr\Vortex\WNS\WNSResponse', $this->class->push());
+        $this->assertInstanceOf('\Lunr\Vortex\WNS\WNSResponse', $this->class->push($this->payload, $endpoints));
     }
 
     /**
@@ -54,24 +53,22 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushWithoutOauthResetsProperties()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('type', WNSType::TOAST);
+
+        $endpoints = [ 'endpoint' ];
 
         $message = 'Tried to push notification to {endpoint} but wasn\'t authenticated.';
         $context = [ 'endpoint' => 'endpoint' ];
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo($message), $this->equalTo($context));
+                     ->with($message, $context);
 
         $this->http->expects($this->never())
                    ->method('post');
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
 
-        $this->assertPropertyEquals('endpoint', '');
-        $this->assertPropertyEquals('payload', '');
         $this->assertPropertySame('type', WNSType::RAW);
     }
 
@@ -82,10 +79,10 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushingTileSetsTargetHeader()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('type', WNSType::TILE);
         $this->set_reflection_property_value('oauth_token', '123456');
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'X-WNS-Type'             => 'wns/tile',
@@ -95,12 +92,16 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
             'Content-Type'           => 'text/xml',
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
-                   ->will($this->returnValue($this->response));
+                   ->with('endpoint', $headers, 'payload')
+                   ->willReturn($this->response);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -110,10 +111,10 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushingToastSetsTargetHeader()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('type', WNSType::TOAST);
         $this->set_reflection_property_value('oauth_token', '123456');
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'X-WNS-Type'             => 'wns/toast',
@@ -123,12 +124,16 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
             'Content-Type'           => 'text/xml',
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
-                   ->will($this->returnValue($this->response));
+                   ->with('endpoint', $headers, 'payload')
+                   ->willReturn($this->response);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -138,9 +143,9 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushingRawDoesNotSetTargetHeader()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('oauth_token', '123456');
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'X-WNS-Type'             => 'wns/raw',
@@ -150,12 +155,16 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
             'Content-Type'           => 'application/octet-stream',
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
-                   ->will($this->returnValue($this->response));
+                   ->with('endpoint', $headers, 'payload')
+                   ->willReturn($this->response);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -165,9 +174,9 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushReturnsWNSResponseObjectOnRequestFailure()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('oauth_token', '123456');
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'X-WNS-Type'             => 'wns/raw',
@@ -177,9 +186,13 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
             'Content-Type'           => 'application/octet-stream',
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->with('endpoint', $headers, 'payload')
                    ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
 
         $message = 'Dispatching push notification to {endpoint} failed: {error}';
@@ -187,9 +200,9 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo($message), $this->equalTo($context));
+                     ->with($message, $context);
 
-        $this->assertInstanceOf('Lunr\Vortex\WNS\WNSResponse', $this->class->push());
+        $this->assertInstanceOf('Lunr\Vortex\WNS\WNSResponse', $this->class->push($this->payload, $endpoints));
     }
 
     /**
@@ -199,9 +212,9 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushReturnsWNSResponseObject()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('oauth_token', '123456');
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'X-WNS-Type'             => 'wns/raw',
@@ -211,12 +224,16 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
             'Content-Type'           => 'application/octet-stream',
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
-                   ->will($this->returnValue($this->response));
+                   ->with('endpoint', $headers, 'payload')
+                   ->willReturn($this->response);
 
-        $this->assertInstanceOf('Lunr\Vortex\WNS\WNSResponse', $this->class->push());
+        $this->assertInstanceOf('Lunr\Vortex\WNS\WNSResponse', $this->class->push($this->payload, $endpoints));
     }
 
     /**
@@ -226,10 +243,10 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushResetsPropertiesOnRequestFailure()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('type', WNSType::TOAST);
         $this->set_reflection_property_value('oauth_token', '123456');
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'X-WNS-Type'             => 'wns/toast',
@@ -239,9 +256,13 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
             'Content-Type'           => 'text/xml',
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->with('endpoint', $headers, 'payload')
                    ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
 
         $message = 'Dispatching push notification to {endpoint} failed: {error}';
@@ -249,12 +270,10 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo($message), $this->equalTo($context));
+                     ->with($message, $context);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
 
-        $this->assertPropertyEquals('endpoint', '');
-        $this->assertPropertyEquals('payload', '');
         $this->assertPropertySame('type', WNSType::RAW);
     }
 
@@ -265,10 +284,10 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushResetsProperties()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('type', WNSType::TOAST);
         $this->set_reflection_property_value('oauth_token', '123456');
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'X-WNS-Type'             => 'wns/toast',
@@ -278,15 +297,17 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
             'Content-Type'           => 'text/xml',
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
-                   ->will($this->returnValue($this->response));
+                   ->with('endpoint', $headers, 'payload')
+                   ->willReturn($this->response);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
 
-        $this->assertPropertyEquals('endpoint', '');
-        $this->assertPropertyEquals('payload', '');
         $this->assertPropertySame('type', WNSType::RAW);
     }
 

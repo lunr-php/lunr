@@ -38,12 +38,22 @@ abstract class FCMDispatcherTest extends LunrBaseTest
     protected $logger;
 
     /**
+     * Mock instance of the FCM Payload class.
+     * @var FCMPayload
+     */
+    protected $payload;
+
+    /**
      * Testcase Constructor.
      */
     public function setUp()
     {
         $this->http   = $this->getMockBuilder('Requests_Session')->getMock();
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\FCM\FCMPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $this->class = new FCMDispatcher($this->http, $this->logger);
 
@@ -56,6 +66,7 @@ abstract class FCMDispatcherTest extends LunrBaseTest
     public function tearDown()
     {
         unset($this->logger);
+        unset($this->payload);
         unset($this->class);
         unset($this->reflection);
     }

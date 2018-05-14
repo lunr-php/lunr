@@ -26,22 +26,6 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
     use PsrLoggerTestTrait;
 
     /**
-     * Test that the endpoint is set to an empty string by default.
-     */
-    public function testEndpointsIsEmptyString()
-    {
-        $this->assertPropertyEmpty('endpoint');
-    }
-
-    /**
-     * Test that the payload is set to an empty string by default.
-     */
-    public function testPayloadIsEmptyString()
-    {
-        $this->assertPropertyEmpty('payload');
-    }
-
-    /**
      * Test that the auth_token is set to an empty string by default.
      */
     public function testAuthTokenIsEmptyString()
@@ -99,7 +83,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
         $method = $this->reflection->getMethod('construct_pap_control_xml');
         $method->setAccessible(TRUE);
 
-        $control_xml = $method->invoke($this->class);
+        $control_xml = $method->invokeArgs($this->class, [ 'endpoint' ]);
 
         $xml_file = file_get_contents(TEST_STATICS . '/Vortex/pap/request_control_empty.xml');
 
@@ -114,14 +98,13 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
     public function testConstructControlXMLConstructsXMLCorrectly()
     {
         $this->set_reflection_property_value('auth_token', 'auth_token');
-        $this->set_reflection_property_value('endpoint', 'endpoint');
         $this->set_reflection_property_value('deliverbefore', 'deliverbefore');
         $this->set_reflection_property_value('push_id', 'endpoint12345');
 
         $method = $this->reflection->getMethod('construct_pap_control_xml');
         $method->setAccessible(TRUE);
 
-        $control_xml = $method->invoke($this->class);
+        $control_xml = $method->invokeArgs($this->class, [ 'endpoint' ]);
 
         $xml_file = file_get_contents(TEST_STATICS . '/Vortex/pap/request_control.xml');
 
@@ -138,14 +121,16 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
         $this->mock_function('microtime', 'return 12345;');
 
         $this->set_reflection_property_value('auth_token', 'auth_token');
-        $this->set_reflection_property_value('endpoint', 'endpoint');
         $this->set_reflection_property_value('deliverbefore', 'deliverbefore');
-        $this->set_reflection_property_value('payload', '{"message":"test"}');
+
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"message":"test"}');
 
         $method = $this->reflection->getMethod('construct_pap_data');
         $method->setAccessible(TRUE);
 
-        $request_headers = $method->invoke($this->class);
+        $request_headers = $method->invokeArgs($this->class, [ $this->payload, 'endpoint' ]);
 
         $request_file = file_get_contents(TEST_STATICS . '/Vortex/pap/request_custom_headers.txt');
 

@@ -28,18 +28,6 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
     private $source;
 
     /**
-     * Email Notification endpoint.
-     * @var String
-     */
-    private $endpoint;
-
-    /**
-     * Email Notification payload to send.
-     * @var String
-     */
-    private $payload;
-
-    /**
      * Shared instance of the mail transport class.
      * @var \PHPMailer\PHPMailer\PHPMailer
      */
@@ -60,8 +48,6 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
     public function __construct($mail_transport, $logger)
     {
         $this->source   = '';
-        $this->endpoint = '';
-        $this->payload  = '';
         $this->logger   = $logger;
 
         $this->mail_transport = $mail_transport;
@@ -73,8 +59,6 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
     public function __destruct()
     {
         unset($this->source);
-        unset($this->endpoint);
-        unset($this->payload);
         unset($this->mail_transport);
         unset($this->logger);
     }
@@ -92,9 +76,12 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
     /**
      * Send the notification.
      *
+     * @param EmailPayload $payload   Payload object
+     * @param array        $endpoints Endpoints to send to in this batch
+     *
      * @return EmailResponse $return Response object
      */
-    public function push()
+    public function push($payload, &$endpoints)
     {
         // PHPMailer is not reentrant, so we have to clone it before we can do endpoint specific configuration.
         $mail_transport = $this->clone_mail();
@@ -102,24 +89,21 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
         try
         {
             $mail_transport->setFrom($this->source);
-            $mail_transport->addAddress($this->endpoint);
+            $mail_transport->addAddress($endpoints[0]);
 
-            $payload_array = json_decode($this->payload, TRUE);
+            $payload_array = json_decode($payload->get_payload(), TRUE);
 
             $mail_transport->Subject = $payload_array['subject'];
             $mail_transport->Body    = $payload_array['body'];
 
             $mail_transport->send();
 
-            $res = new EmailResponse($mail_transport, $this->logger, $this->endpoint);
+            $res = new EmailResponse($mail_transport, $this->logger, $endpoints[0]);
         }
         catch (PHPMailerException $e)
         {
-            $res = new EmailResponse($mail_transport, $this->logger, $this->endpoint);
+            $res = new EmailResponse($mail_transport, $this->logger, $endpoints[0]);
         }
-
-        $this->endpoint = '';
-        $this->payload  = '';
 
         return $res;
     }
@@ -134,41 +118,6 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
     public function set_source($source)
     {
         $this->source = $source;
-
-        return $this;
-    }
-
-    /**
-     * Set the endpoints for the email.
-     *
-     * @param array|string $endpoints The endpoint for the email
-     *
-     * @return EmailDispatcher $self Self reference
-     */
-    public function set_endpoints($endpoints)
-    {
-        if (is_array($endpoints))
-        {
-            $this->endpoint = empty($endpoints) ? '' : $endpoints[0];
-        }
-        else
-        {
-            $this->endpoint = $endpoints;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set the the payload to email.
-     *
-     * @param string $payload The reference to the payload of the email
-     *
-     * @return EmailDispatcher $self Self reference
-     */
-    public function set_payload(&$payload)
-    {
-        $this->payload =& $payload;
 
         return $this;
     }

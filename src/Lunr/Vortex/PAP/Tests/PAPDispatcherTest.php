@@ -45,6 +45,12 @@ abstract class PAPDispatcherTest extends LunrBaseTest
     protected $response;
 
     /**
+     * Mock instance of the PAP Payload class.
+     * @var PAPPayload
+     */
+    protected $payload;
+
+    /**
      * Testcase Constructor.
      */
     public function setUp()
@@ -52,6 +58,10 @@ abstract class PAPDispatcherTest extends LunrBaseTest
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
         $this->response = $this->getMockBuilder('Requests_Response')->getMock();
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\PAP\PAPPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $this->class = new PAPDispatcher($this->http, $this->logger);
 
@@ -66,6 +76,7 @@ abstract class PAPDispatcherTest extends LunrBaseTest
         unset($this->logger);
         unset($this->http);
         unset($this->response);
+        unset($this->payload);
         unset($this->class);
         unset($this->reflection);
     }

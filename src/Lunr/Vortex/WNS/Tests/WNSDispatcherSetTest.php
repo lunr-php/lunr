@@ -25,52 +25,6 @@ class WNSDispatcherSetTest extends WNSDispatcherTest
 {
 
     /**
-     * Test that set_endpoints() sets unique endpoint with single parameter.
-     *
-     * @covers Lunr\Vortex\WNS\WNSDispatcher::set_endpoints
-     */
-    public function testSetEndpointsSetsUniqueEndpointWithString()
-    {
-        $this->class->set_endpoints('endpoint');
-
-        $this->assertPropertyEquals('endpoint', 'endpoint');
-    }
-
-    /**
-     * Test that set_endpoints() sets the first endpoint of the list.
-     *
-     * @covers Lunr\Vortex\WNS\WNSDispatcher::set_endpoints
-     */
-    public function testSetEndpointsSetsFirstEndpointWithArray()
-    {
-        $this->class->set_endpoints([ 'endpoint1', 'endpoint2' ]);
-
-        $this->assertPropertyEquals('endpoint', 'endpoint1');
-    }
-
-    /**
-     * Test that set_endpoints() sets empty endpoint with empty endpoints list.
-     *
-     * @covers Lunr\Vortex\WNS\WNSDispatcher::set_endpoints
-     */
-    public function testSetEndpointsSetsEmptyEndpointWithEmptyArray()
-    {
-        $this->class->set_endpoints([]);
-
-        $this->assertPropertyEquals('endpoint', '');
-    }
-
-    /**
-     * Test the fluid interface of set_endpoints().
-     *
-     * @covers Lunr\Vortex\WNS\WNSDispatcher::set_endpoints
-     */
-    public function testSetEndpointsReturnsSelfReference()
-    {
-        $this->assertEquals($this->class, $this->class->set_endpoints('endpoint'));
-    }
-
-    /**
      * Test that set_client_id() sets the client_id.
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::set_client_id
@@ -124,30 +78,6 @@ class WNSDispatcherSetTest extends WNSDispatcherTest
         $this->class->set_oauth_token('token');
 
         $this->assertPropertyEquals('oauth_token', 'token');
-    }
-
-    /**
-     * Test that set_payload() sets the endpoint.
-     *
-     * @covers Lunr\Vortex\WNS\WNSDispatcher::set_payload
-     */
-    public function testSetPayloadSetsPayload()
-    {
-        $payload = 'payload';
-        $this->class->set_payload($payload);
-
-        $this->assertPropertyEquals('payload', 'payload');
-    }
-
-    /**
-     * Test the fluid interface of set_payload().
-     *
-     * @covers Lunr\Vortex\WNS\WNSDispatcher::set_payload
-     */
-    public function testSetPayloadReturnsSelfReference()
-    {
-        $payload = 'payload';
-        $this->assertEquals($this->class, $this->class->set_payload($payload));
     }
 
     /**

@@ -33,13 +33,13 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
     {
         $this->mock_function('microtime', 'return 12345;');
 
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', '{"message":"test"}');
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('password', 'password');
         $this->set_reflection_property_value('cid', 'cid');
         $this->set_reflection_property_value('deliverbefore', 'deliverbefore');
         $this->set_reflection_property_value('push_id', '12345');
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type' => 'multipart/related; boundary=mPsbVQo0a68eIL3OAxnm; type=application/xml',
@@ -58,9 +58,13 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
             ],
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"message":"test"}');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($xml), $this->equalTo($options))
+                   ->with($url, $headers, $xml, $options)
                    ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
 
         $message = 'Dispatching push notification to {endpoint} failed: {error}';
@@ -68,9 +72,9 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo($message), $this->equalTo($context));
+                     ->with($message, $context);
 
-        $this->assertInstanceOf('Lunr\Vortex\PAP\PAPResponse', $this->class->push());
+        $this->assertInstanceOf('Lunr\Vortex\PAP\PAPResponse', $this->class->push($this->payload, $endpoints));
 
         $this->unmock_function('microtime');
     }
@@ -84,13 +88,13 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
     {
         $this->mock_function('microtime', 'return 12345;');
 
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', '{"message":"test"}');
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('password', 'password');
         $this->set_reflection_property_value('cid', 'cid');
         $this->set_reflection_property_value('deliverbefore', 'deliverbefore');
         $this->set_reflection_property_value('push_id', '12345');
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type' => 'multipart/related; boundary=mPsbVQo0a68eIL3OAxnm; type=application/xml',
@@ -109,15 +113,19 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
             ],
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"message":"test"}');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($xml), $this->equalTo($options))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, $headers, $xml, $options)
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = file_get_contents(TEST_STATICS . '/Vortex/pap/response.xml');
 
-        $this->assertInstanceOf('Lunr\Vortex\PAP\PAPResponse', $this->class->push());
+        $this->assertInstanceOf('Lunr\Vortex\PAP\PAPResponse', $this->class->push($this->payload, $endpoints));
 
         $this->unmock_function('microtime');
     }
@@ -131,13 +139,13 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
     {
         $this->mock_function('microtime', 'return 12345;');
 
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', '{"message":"test"}');
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('password', 'password');
         $this->set_reflection_property_value('cid', 'cid');
         $this->set_reflection_property_value('deliverbefore', 'deliverbefore');
         $this->set_reflection_property_value('push_id', 'endpoint12345');
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type' => 'multipart/related; boundary=mPsbVQo0a68eIL3OAxnm; type=application/xml',
@@ -156,9 +164,13 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
             ],
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"message":"test"}');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($xml), $this->equalTo($options))
+                   ->with($url, $headers, $xml, $options)
                    ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
 
         $message = 'Dispatching push notification to {endpoint} failed: {error}';
@@ -166,13 +178,11 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo($message), $this->equalTo($context));
+                     ->with($message, $context);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
 
-        $this->assertPropertyEquals('endpoint', '');
         $this->assertPropertyEquals('push_id', '');
-        $this->assertPropertyEquals('payload', '');
         $this->assertPropertyEquals('deliverbefore', '');
 
         $this->unmock_function('microtime');
@@ -187,13 +197,13 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
     {
         $this->mock_function('microtime', 'return 12345;');
 
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', '{"message":"test"}');
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('password', 'password');
         $this->set_reflection_property_value('cid', 'cid');
         $this->set_reflection_property_value('deliverbefore', 'deliverbefore');
         $this->set_reflection_property_value('push_id', 'endpoint12345');
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type' => 'multipart/related; boundary=mPsbVQo0a68eIL3OAxnm; type=application/xml',
@@ -212,16 +222,18 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
             ],
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"message":"test"}');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($xml), $this->equalTo($options))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, $headers, $xml, $options)
+                   ->willReturn($this->response);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
 
-        $this->assertPropertyEquals('endpoint', '');
         $this->assertPropertyEquals('push_id', '');
-        $this->assertPropertyEquals('payload', '');
         $this->assertPropertyEquals('deliverbefore', '');
 
         $this->unmock_function('microtime');

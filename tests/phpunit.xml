@@ -276,7 +276,6 @@
             <file>../src/Lunr/Vortex/APNS/ApnsPHP/Tests/APNSResponseBasePushErrorTest.php</file>
             <file>../src/Lunr/Vortex/APNS/ApnsPHP/Tests/APNSResponseGetStatusTest.php</file>
             <file>../src/Lunr/Vortex/APNS/ApnsPHP/Tests/APNSDispatcherBaseTest.php</file>
-            <file>../src/Lunr/Vortex/APNS/ApnsPHP/Tests/APNSDispatcherSetTest.php</file>
             <file>../src/Lunr/Vortex/APNS/ApnsPHP/Tests/APNSDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailPayloadBaseTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailPayloadGetTest.php</file>
@@ -305,7 +304,6 @@
             <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseBasePushErrorTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseBasePushSuccessTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMResponseBaseTest.php</file>
-            <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherBaseTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadSetTest.php</file>

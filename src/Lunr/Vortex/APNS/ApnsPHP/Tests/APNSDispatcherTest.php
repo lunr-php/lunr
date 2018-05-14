@@ -45,6 +45,12 @@ abstract class APNSDispatcherTest extends LunrBaseTest
     protected $apns_message;
 
     /**
+     * Mock instance of the APNS Payload class.
+     * @var \Lunr\Vortex\APNS\APNSPayload
+     */
+    protected $payload;
+
+    /**
      * Testcase Constructor.
      */
     public function setUp()
@@ -58,6 +64,10 @@ abstract class APNSDispatcherTest extends LunrBaseTest
         $this->apns_message = $this->getMockBuilder('ApnsPHP_Message')
                                    ->disableOriginalConstructor()
                                    ->getMock();
+
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\APNS\APNSPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $this->class = $this->getMockBuilder('Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher')
                             ->setConstructorArgs([ $this->logger, $this->apns_push ])
@@ -80,6 +90,7 @@ abstract class APNSDispatcherTest extends LunrBaseTest
         unset($this->logger);
         unset($this->apns_push);
         unset($this->apns_message);
+        unset($this->payload);
         unset($this->class);
         unset($this->reflection);
     }

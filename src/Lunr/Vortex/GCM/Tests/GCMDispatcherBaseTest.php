@@ -28,22 +28,6 @@ class GCMDispatcherBaseTest extends GCMDispatcherTest
     use PsrLoggerTestTrait;
 
     /**
-     * Test that the endpoints is set to an empty array by default.
-     */
-    public function testEndpointsIsEmptyArray()
-    {
-        $this->assertPropertyEquals('endpoints', []);
-    }
-
-    /**
-     * Test that the payload is set to an empty json string by default.
-     */
-    public function testPayloadIsEmptyJsonString()
-    {
-        $this->assertPropertyEquals('payload', '{}');
-    }
-
-    /**
      * Test that the passed Requests_Session object is set correctly.
      */
     public function testRequestsSessionIsSetCorrectly()

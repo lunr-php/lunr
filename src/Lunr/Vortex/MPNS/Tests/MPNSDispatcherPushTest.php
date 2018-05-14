@@ -32,9 +32,9 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushingTileSetsTargetHeader()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('type', MPNSType::TILE);
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type'          => 'text/xml',
@@ -42,12 +42,16 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
             'X-WindowsPhone-Target' => MPNSType::TILE,
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
-                   ->will($this->returnValue($this->response));
+                   ->with('endpoint', $headers, 'payload')
+                   ->willReturn($this->response);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -57,9 +61,9 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushingToastSetsTargetHeader()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('type', MPNSType::TOAST);
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type'          => 'text/xml',
@@ -67,12 +71,16 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
             'X-WindowsPhone-Target' => MPNSType::TOAST,
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
-                   ->will($this->returnValue($this->response));
+                   ->with('endpoint', $headers, 'payload')
+                   ->willReturn($this->response);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -82,21 +90,25 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushingRawDoesNotSetTargetHeader()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('type', MPNSType::RAW);
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type' => 'text/xml',
             'Accept'       => 'application/*',
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
-                   ->will($this->returnValue($this->response));
+                   ->with('endpoint', $headers, 'payload')
+                   ->willReturn($this->response);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -106,21 +118,25 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushingWithDefaultPriorityDoesNotSetPriorityHeader()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('priority', 0);
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type' => 'text/xml',
             'Accept'       => 'application/*',
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
-                   ->will($this->returnValue($this->response));
+                   ->with('endpoint', $headers, 'payload')
+                   ->willReturn($this->response);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -133,9 +149,9 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushingWithValidPrioritySetsPriorityHeader($priority)
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('priority', $priority);
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type'        => 'text/xml',
@@ -143,12 +159,16 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
             'X-NotificationClass' => $priority,
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
-                   ->will($this->returnValue($this->response));
+                   ->with('endpoint', $headers, 'payload')
+                   ->willReturn($this->response);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -158,17 +178,20 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushReturnsMPNSResponseObjectOnError()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type' => 'text/xml',
             'Accept'       => 'application/*',
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->with('endpoint', $headers, 'payload')
                    ->will($this->throwException(new Requests_Exception('Network problem!', 'curlerror', NULL)));
 
         $message = 'Dispatching push notification to {endpoint} failed: {error}';
@@ -176,9 +199,9 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo($message), $this->equalTo($context));
+                     ->with($message, $context);
 
-        $this->assertInstanceOf('Lunr\Vortex\MPNS\MPNSResponse', $this->class->push());
+        $this->assertInstanceOf('Lunr\Vortex\MPNS\MPNSResponse', $this->class->push($this->payload, $endpoints));
     }
 
     /**
@@ -188,20 +211,23 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushReturnsMPNSResponseObjectOnSuccess()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type' => 'text/xml',
             'Accept'       => 'application/*',
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
-                   ->will($this->returnValue($this->response));
+                   ->with('endpoint', $headers, 'payload')
+                   ->willReturn($this->response);
 
-        $this->assertInstanceOf('Lunr\Vortex\MPNS\MPNSResponse', $this->class->push());
+        $this->assertInstanceOf('Lunr\Vortex\MPNS\MPNSResponse', $this->class->push($this->payload, $endpoints));
     }
 
     /**
@@ -211,10 +237,10 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushResetsPropertiesOnError()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('priority', MPNSPriority::TOAST_IMMEDIATELY);
         $this->set_reflection_property_value('type', MPNSType::TOAST);
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type'          => 'text/xml',
@@ -223,15 +249,17 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
             'X-NotificationClass'   => 2,
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
+                   ->with('endpoint', $headers, 'payload')
                    ->will($this->throwException(new Requests_Exception('Network problem!', 'curlerror', NULL)));
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
 
-        $this->assertPropertyEquals('endpoint', '');
-        $this->assertPropertyEquals('payload', '');
         $this->assertSame(0, $this->get_reflection_property_value('priority'));
         $this->assertSame(MPNSType::RAW, $this->get_reflection_property_value('type'));
     }
@@ -243,10 +271,10 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushResetsPropertiesOnSuccess()
     {
-        $this->set_reflection_property_value('endpoint', 'endpoint');
-        $this->set_reflection_property_value('payload', 'payload');
         $this->set_reflection_property_value('priority', MPNSPriority::TOAST_IMMEDIATELY);
         $this->set_reflection_property_value('type', MPNSType::TOAST);
+
+        $endpoints = [ 'endpoint' ];
 
         $headers = [
             'Content-Type'          => 'text/xml',
@@ -255,15 +283,17 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
             'X-NotificationClass'   => 2,
         ];
 
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('payload');
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo('endpoint'), $this->equalTo($headers), $this->equalTo('payload'))
-                   ->will($this->returnValue($this->response));
+                   ->with('endpoint', $headers, 'payload')
+                   ->willReturn($this->response);
 
-        $this->class->push();
+        $this->class->push($this->payload, $endpoints);
 
-        $this->assertPropertyEquals('endpoint', '');
-        $this->assertPropertyEquals('payload', '');
         $this->assertSame(0, $this->get_reflection_property_value('priority'));
         $this->assertSame(MPNSType::RAW, $this->get_reflection_property_value('type'));
     }

@@ -30,9 +30,13 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
      */
     public function testPushReturnsEmailResponseObject()
     {
-        $this->set_reflection_property_value('endpoint', 'recipient@domain.com');
+        $endpoints = [ 'recipient@domain.com' ];
+
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"subject": "subject", "body": "body"}');
+
         $this->set_reflection_property_value('source', 'sender@domain.com');
-        $this->set_reflection_property_value('payload', '{"subject": "subject", "body": "body"}');
 
         $this->mock_method([ $this->class, 'clone_mail' ], 'return $this->mail_transport;', 'private');
 
@@ -42,13 +46,13 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
 
         $this->mail_transport->expects($this->once())
                              ->method('addAddress')
-                             ->with($this->get_reflection_property_value('endpoint'));
+                             ->with('recipient@domain.com');
 
         $this->mail_transport->expects($this->once())
                              ->method('send')
                              ->will($this->returnValue(TRUE));
 
-        $this->assertInstanceOf('Lunr\Vortex\Email\EmailResponse', $this->class->push());
+        $this->assertInstanceOf('Lunr\Vortex\Email\EmailResponse', $this->class->push($this->payload, $endpoints));
 
         $this->assertEquals($this->mail_transport->Subject, 'subject');
         $this->assertEquals($this->mail_transport->Body, 'body');
@@ -63,9 +67,13 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
      */
     public function testPushReturnsEmailResponseObjectOnError()
     {
-        $this->set_reflection_property_value('endpoint', 'recipient@domain.com');
+        $endpoints = [ 'recipient@domain.com' ];
+
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"subject": "subject", "body": "body"}');
+
         $this->set_reflection_property_value('source', 'sender@domain.com');
-        $this->set_reflection_property_value('payload', '{"subject": "subject", "body": "body"}');
 
         $this->mock_method([ $this->class, 'clone_mail' ], 'return $this->mail_transport;', 'private');
 
@@ -75,13 +83,13 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
 
         $this->mail_transport->expects($this->once())
                              ->method('addAddress')
-                             ->with($this->get_reflection_property_value('endpoint'));
+                             ->with('recipient@domain.com');
 
         $this->mail_transport->expects($this->once())
                              ->method('send')
                              ->will($this->throwException(new PHPMailerException));
 
-        $this->assertInstanceOf('Lunr\Vortex\Email\EmailResponse', $this->class->push());
+        $this->assertInstanceOf('Lunr\Vortex\Email\EmailResponse', $this->class->push($this->payload, $endpoints));
 
         $this->assertEquals($this->mail_transport->Subject, 'subject');
         $this->assertEquals($this->mail_transport->Body, 'body');
@@ -96,9 +104,13 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
      */
     public function testPushResetsProperties()
     {
-        $this->set_reflection_property_value('endpoint', 'recipient@domain.com');
+        $endpoints = [ 'recipient@domain.com' ];
+
+        $this->payload->expects($this->once())
+                      ->method('get_payload')
+                      ->willReturn('{"subject": "subject", "body": "body"}');
+
         $this->set_reflection_property_value('source', 'sender@domain.com');
-        $this->set_reflection_property_value('payload', '{"subject": "subject", "body": "body"}');
 
         $this->mock_method([ $this->class, 'clone_mail' ], 'return $this->mail_transport;', 'private');
 
@@ -106,10 +118,7 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
                              ->method('send')
                              ->will($this->returnValue(TRUE));
 
-        $this->class->push();
-
-        $this->assertPropertyEquals('endpoint', '');
-        $this->assertPropertyEquals('payload', '');
+        $this->class->push($this->payload, $endpoints);
 
         $this->unmock_method([ $this->class, 'clone_mail' ]);
     }

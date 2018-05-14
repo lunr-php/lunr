@@ -16,6 +16,7 @@ namespace Lunr\Vortex\APNS\ApnsPHP;
 use \ApnsPHP_Message;
 use \ApnsPHP_Message_Exception;
 use \ApnsPHP_Exception;
+use Lunr\Vortex\APNS\APNSPayload;
 use Lunr\Vortex\PushNotificationMultiDispatcherInterface;
 
 /**
@@ -23,18 +24,6 @@ use Lunr\Vortex\PushNotificationMultiDispatcherInterface;
  */
 class APNSDispatcher implements PushNotificationMultiDispatcherInterface
 {
-
-    /**
-     * Push Notification endpoints.
-     * @var Array
-     */
-    protected $endpoints;
-
-    /**
-     * Push Notification payload to send.
-     * @var String
-     */
-    protected $payload;
 
     /**
      * Shared instance of ApnsPHP\Push.
@@ -73,8 +62,6 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
      */
     public function __destruct()
     {
-        unset($this->endpoints);
-        unset($this->payload);
         unset($this->apns_push);
         unset($this->apns_message);
         unset($this->logger);
@@ -87,9 +74,6 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
      */
     protected function reset()
     {
-        $this->endpoints = [];
-        $this->payload   = '{}';
-
         unset($this->apns_message);
     }
 
@@ -108,12 +92,15 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
     /**
      * Push the notification.
      *
+     * @param APNSPayload $payload   Payload object
+     * @param array       $endpoints Endpoints to send to in this batch
+     *
      * @return APNSResponse $return Response object
      */
-    public function push()
+    public function push($payload, &$endpoints)
     {
         // Create message
-        $tmp_payload = json_decode($this->payload, TRUE);
+        $tmp_payload = json_decode($payload->get_payload(), TRUE);
 
         $this->apns_message = $this->get_new_apns_message();
 
@@ -150,7 +137,7 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
         // Add endpoints
         $invalid_endpoints = [];
 
-        foreach ($this->endpoints as $endpoint)
+        foreach ($endpoints as $endpoint)
         {
             try
             {
@@ -183,39 +170,11 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
         }
 
         // Return response
-        $response = new APNSResponse($this->logger, $this->endpoints, $invalid_endpoints, $errors);
+        $response = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors);
 
         $this->reset();
 
         return $response;
-    }
-
-    /**
-     * Set the endpoint(s) for the push.
-     *
-     * @param array|string $endpoints The endpoint(s) for the push
-     *
-     * @return GCMSDispatcher $self Self reference
-     */
-    public function set_endpoints($endpoints)
-    {
-        $this->endpoints = !is_array($endpoints) ? [ $endpoints ] : $endpoints;
-
-        return $this;
-    }
-
-    /**
-     * Set the the payload to push.
-     *
-     * @param ApnsPHP\Message $payload The reference to the payload of the push
-     *
-     * @return APNSDispatcher $self Self reference
-     */
-    public function set_payload(&$payload)
-    {
-        $this->payload =& $payload;
-
-        return $this;
     }
 
 }
