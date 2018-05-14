@@ -174,7 +174,7 @@ pipeline {
         failure {
             emailext body: 'Please go to $BUILD_URL to see the result.',
                      recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'CulpritsRecipientProvider']],
-                     subject: '$JOB_NAME ($GIT_BRANCH): Build $BUILD_DISPLAY_NAME: FAILED'
+                     subject: '$JOB_NAME ($GIT_BRANCH): Build $BUILD_DISPLAY_NAME: FAILED',
                      to: '${ENV,var="LUNR_MAILINGLIST"}'
         }
     }
