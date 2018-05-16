@@ -50,7 +50,7 @@ pipeline {
                 parallel (
                     md: { ant_sh('phpmd-ci') },
                     cpd: { ant_sh('phpcpd') },
-                    cs: { ant_sh('phpcs-ci') },
+                    cs: { ant_sh('phpcs') },
                     loc: { ant_sh('phploc') },
                     doc: { ant_sh('phpdoc') }
                 )
