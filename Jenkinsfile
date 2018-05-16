@@ -92,16 +92,6 @@ pipeline {
                             ]
                         )
                     },
-                    phpdoc: {
-                        publishHTML(
-                            target: [
-                                reportName: 'PHPDoc Reports',
-                                reportDir: 'build/api',
-                                reportFiles: 'index.html',
-                                keepAll: true
-                            ]
-                        )
-                    },
                     clover:{
                         step(
                             [
