@@ -63,7 +63,6 @@ class GCMResponseAddBatchResponseTest extends GCMResponseTest
             'endpoint4' => PushNotificationStatus::SUCCESS,
         ];
 
-
         $this->set_reflection_property_value('statuses', $statuses);
 
         $pos = 0;

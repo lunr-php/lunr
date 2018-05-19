@@ -195,7 +195,7 @@ abstract class Api
 
             $response->throw_for_status();
         }
-        catch(Requests_Exception_HTTP $e)
+        catch (Requests_Exception_HTTP $e)
         {
             $parts   = [];
             $message = json_decode($response->body, TRUE);
@@ -204,7 +204,7 @@ abstract class Api
 
             $this->logger->warning('Facebook API Request ({request}) failed, {type} ({code}): {message}', $context);
         }
-        catch(Requests_Exception $e)
+        catch (Requests_Exception $e)
         {
             $context = [ 'message' => $e->getMessage(), 'request' => $url ];
 
@@ -239,7 +239,7 @@ abstract class Api
 
             $response->throw_for_status();
         }
-        catch(Requests_Exception_HTTP $e)
+        catch (Requests_Exception_HTTP $e)
         {
             $error   = $result['error'];
             $result  = [];
@@ -247,7 +247,7 @@ abstract class Api
 
             $this->logger->warning('Facebook API Request ({request}) failed, {type} ({code}): {message}', $context);
         }
-        catch(Requests_Exception $e)
+        catch (Requests_Exception $e)
         {
             $context = [ 'message' => $e->getMessage(), 'request' => $url ];
 

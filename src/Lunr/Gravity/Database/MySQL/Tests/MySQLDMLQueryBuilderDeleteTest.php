@@ -27,7 +27,7 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
     /**
      * Test that standard delete modes are handled correctly.
      *
-     * @param String $mode valid delete mode.
+     * @param string $mode Valid delete mode.
      *
      * @dataProvider deleteModesStandardProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete_mode

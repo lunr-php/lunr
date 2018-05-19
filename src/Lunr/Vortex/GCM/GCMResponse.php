@@ -49,13 +49,13 @@ class GCMResponse implements PushNotificationResponseInterface
      * Add the results of a batch response.
      *
      * @param GCMBatchResponse $batch_response Batch response
-     * @param Array            $endpoints      endpoints of the batch
+     * @param array            $endpoints      Endpoints of the batch
      *
      * @return void
      */
     public function add_batch_response($batch_response, $endpoints)
     {
-        foreach($endpoints as $endpoint)
+        foreach ($endpoints as $endpoint)
         {
             $this->statuses[$endpoint] = $batch_response->get_status($endpoint);
         }
@@ -64,7 +64,7 @@ class GCMResponse implements PushNotificationResponseInterface
     /**
      * Get notification delivery status for an endpoint.
      *
-     * @param String $endpoint endpoint
+     * @param string $endpoint Endpoint
      *
      * @return PushNotificationStatus $status Delivery status for the endpoint
      */

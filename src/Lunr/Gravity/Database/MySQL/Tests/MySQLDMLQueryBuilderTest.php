@@ -77,10 +77,10 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      */
     public function selectModesDuplicatesProvider()
     {
-        $modes   = array();
-        $modes[] = array('ALL');
-        $modes[] = array('DISTINCT');
-        $modes[] = array('DISTINCTROW');
+        $modes   = [];
+        $modes[] = ['ALL'];
+        $modes[] = ['DISTINCT'];
+        $modes[] = ['DISTINCTROW'];
 
         return $modes;
     }
@@ -92,9 +92,9 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      */
     public function selectModesCacheProvider()
     {
-        $modes   = array();
-        $modes[] = array('SQL_CACHE');
-        $modes[] = array('SQL_NO_CACHE');
+        $modes   = [];
+        $modes[] = ['SQL_CACHE'];
+        $modes[] = ['SQL_NO_CACHE'];
 
         return $modes;
     }
@@ -106,13 +106,13 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      */
     public function selectModesStandardProvider()
     {
-        $modes   = array();
-        $modes[] = array('HIGH_PRIORITY');
-        $modes[] = array('STRAIGHT_JOIN');
-        $modes[] = array('SQL_BIG_RESULT');
-        $modes[] = array('SQL_SMALL_RESULT');
-        $modes[] = array('SQL_BUFFER_RESULT');
-        $modes[] = array('SQL_CALC_FOUND_ROWS');
+        $modes   = [];
+        $modes[] = ['HIGH_PRIORITY'];
+        $modes[] = ['STRAIGHT_JOIN'];
+        $modes[] = ['SQL_BIG_RESULT'];
+        $modes[] = ['SQL_SMALL_RESULT'];
+        $modes[] = ['SQL_BUFFER_RESULT'];
+        $modes[] = ['SQL_CALC_FOUND_ROWS'];
 
         return $modes;
     }
@@ -124,9 +124,9 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      */
     public function updateModesStandardProvider()
     {
-        $modes   = array();
-        $modes[] = array('LOW_PRIORITY');
-        $modes[] = array('IGNORE');
+        $modes   = [];
+        $modes[] = ['LOW_PRIORITY'];
+        $modes[] = ['IGNORE'];
 
         return $modes;
     }
@@ -138,9 +138,9 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      */
     public function lockModesStandardProvider()
     {
-        $modes   = array();
-        $modes[] = array('FOR UPDATE');
-        $modes[] = array('LOCK IN SHARE MODE');
+        $modes   = [];
+        $modes[] = ['FOR UPDATE'];
+        $modes[] = ['LOCK IN SHARE MODE'];
 
         return $modes;
     }
@@ -152,10 +152,10 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      */
     public function deleteModesStandardProvider()
     {
-        $modes   = array();
-        $modes[] = array('LOW_PRIORITY');
-        $modes[] = array('QUICK');
-        $modes[] = array('IGNORE');
+        $modes   = [];
+        $modes[] = ['LOW_PRIORITY'];
+        $modes[] = ['QUICK'];
+        $modes[] = ['IGNORE'];
 
         return $modes;
     }
@@ -167,10 +167,10 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      */
     public function expectedDeleteModesProvider()
     {
-        $expectedmodes   = array();
-        $expectedmodes[] = array('low_priority', 'LOW_PRIORITY');
-        $expectedmodes[] = array('QuIcK', 'QUICK');
-        $expectedmodes[] = array('IGNORE', 'IGNORE');
+        $expectedmodes   = [];
+        $expectedmodes[] = ['low_priority', 'LOW_PRIORITY'];
+        $expectedmodes[] = ['QuIcK', 'QUICK'];
+        $expectedmodes[] = ['IGNORE', 'IGNORE'];
 
         return $expectedmodes;
     }
@@ -182,11 +182,11 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      */
     public function insertModesStandardProvider()
     {
-        $modes   = array();
-        $modes[] = array('LOW_PRIORITY');
-        $modes[] = array('DELAYED');
-        $modes[] = array('HIGH_PRIORITY');
-        $modes[] = array('IGNORE');
+        $modes   = [];
+        $modes[] = ['LOW_PRIORITY'];
+        $modes[] = ['DELAYED'];
+        $modes[] = ['HIGH_PRIORITY'];
+        $modes[] = ['IGNORE'];
 
         return $modes;
     }
@@ -198,10 +198,10 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      */
     public function expectedInsertModesProvider()
     {
-        $expectedmodes   = array();
-        $expectedmodes[] = array('low_priority', 'LOW_PRIORITY');
-        $expectedmodes[] = array('DeLayeD', 'DELAYED');
-        $expectedmodes[] = array('IGNORE', 'IGNORE');
+        $expectedmodes   = [];
+        $expectedmodes[] = ['low_priority', 'LOW_PRIORITY'];
+        $expectedmodes[] = ['DeLayeD', 'DELAYED'];
+        $expectedmodes[] = ['IGNORE', 'IGNORE'];
 
         return $expectedmodes;
     }

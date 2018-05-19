@@ -57,7 +57,7 @@ class SQLDMLQueryBuilderUpdateTest extends SQLDMLQueryBuilderTest
      */
     public function testSetReturnsSelfReference()
     {
-        $return = $this->class->set(array('column1' => 'value1'));
+        $return = $this->class->set(['column1' => 'value1']);
 
         $this->assertInstanceOf('Lunr\Gravity\Database\SQLDMLQueryBuilder', $return);
         $this->assertSame($this->class, $return);

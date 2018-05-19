@@ -178,11 +178,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     public function __construct()
     {
         $this->select             = '';
-        $this->select_mode        = array();
+        $this->select_mode        = [];
         $this->update             = '';
-        $this->update_mode        = array();
+        $this->update_mode        = [];
         $this->delete             = '';
-        $this->delete_mode        = array();
+        $this->delete_mode        = [];
         $this->from               = '';
         $this->join               = '';
         $this->where              = '';
@@ -192,7 +192,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         $this->limit              = '';
         $this->connector          = '';
         $this->into               = '';
-        $this->insert_mode        = array();
+        $this->insert_mode        = [];
         $this->set                = '';
         $this->column_names       = '';
         $this->values             = '';
@@ -246,7 +246,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             return '';
         }
 
-        $components = array();
+        $components = [];
 
         array_push($components, 'select_mode', 'select', 'from', 'join', 'where');
         array_push($components, 'group_by', 'having', 'order_by', 'limit', 'lock_mode');
@@ -257,7 +257,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             return $standard;
         }
 
-        $components   = array();
+        $components   = [];
         $components[] = 'compound';
 
         return '(' . $standard . ') ' . $this->implode_query($components);
@@ -275,7 +275,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             return '';
         }
 
-        $components = array();
+        $components = [];
         array_push($components, 'delete_mode', 'delete', 'from', 'join', 'where');
 
         if (($this->delete == '') && ($this->join == ''))
@@ -298,7 +298,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             return '';
         }
 
-        $components   = array();
+        $components   = [];
         $components[] = 'insert_mode';
         $components[] = 'into';
 
@@ -307,7 +307,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             $components[] = 'column_names';
             $components[] = 'select_statement';
 
-            $valid = array( 'HIGH_PRIORITY', 'LOW_PRIORITY', 'IGNORE' );
+            $valid = [ 'HIGH_PRIORITY', 'LOW_PRIORITY', 'IGNORE' ];
 
             $this->insert_mode = array_intersect($this->insert_mode, $valid);
         }
@@ -336,11 +336,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             return '';
         }
 
-        $valid = array( 'LOW_PRIORITY', 'DELAYED' );
+        $valid = [ 'LOW_PRIORITY', 'DELAYED' ];
 
         $this->insert_mode = array_intersect($this->insert_mode, $valid);
 
-        $components   = array();
+        $components   = [];
         $components[] = 'insert_mode';
         $components[] = 'into';
 
@@ -374,11 +374,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             return '';
         }
 
-        $valid = array( 'LOW_PRIORITY', 'IGNORE' );
+        $valid = [ 'LOW_PRIORITY', 'IGNORE' ];
 
         $this->update_mode = array_intersect($this->update_mode, $valid);
 
-        $components = array();
+        $components = [];
         array_push($components, 'update_mode', 'update', 'join', 'set', 'where');
 
         if ((strpos($this->update, ',') === FALSE) && $this->join == '')
@@ -418,12 +418,12 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     protected function sql_with($alias, $sql_query, $column_names = NULL)
     {
-        if($column_names !== NULL)
+        if ($column_names !== NULL)
         {
             $column_names = ' (' . implode(', ', $column_names) . ')';
         }
 
-        if($this->with != '')
+        if ($this->with != '')
         {
             $this->with .= ', ' . $alias . ' AS ( ' . $sql_query . ' )';
         }
@@ -526,7 +526,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    function sql_using($column_list)
+    protected function sql_using($column_list)
     {
         // Select join type.
         if ($this->join_type === '')
@@ -631,7 +631,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
         if (!isset($values[0]) || !is_array($values[0]))
         {
-            $values = array( $values );
+            $values = [ $values ];
         }
 
         foreach ($values as $value)
@@ -649,7 +649,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param String $select SQL Select statement to be used in Insert
      *
-     * @return DatabaseDMLQueryBuilder $self Self reference
+     * @return void
      */
     protected function sql_select_statement($select)
     {
@@ -662,10 +662,10 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a conditional clause for the SQL statement.
      *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
-     * @param String $base     whether to construct WHERE, HAVING or ON
+     * @param string $left     Left expression
+     * @param string $right    Right expression
+     * @param string $operator Comparison operator
+     * @param string $base     Whether to construct WHERE, HAVING or ON
      *
      * @return void
      */
@@ -853,7 +853,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     {
         if (is_array($index_hints) && !empty($index_hints))
         {
-            $index_hints = array_diff($index_hints, array( NULL ));
+            $index_hints = array_diff($index_hints, [ NULL ]);
             $hints       = ' ' . implode(', ', $index_hints);
         }
         else

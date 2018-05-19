@@ -53,7 +53,7 @@ class SQLite3DMLQueryBuilderInsertTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test that standard insert modes are handled correctly.
      *
-     * @param String $mode valid insert mode.
+     * @param string $mode Valid insert mode.
      *
      * @dataProvider modesProvider
      * @covers       Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::insert_mode

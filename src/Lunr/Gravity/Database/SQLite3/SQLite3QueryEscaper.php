@@ -126,14 +126,14 @@ class SQLite3QueryEscaper extends DatabaseQueryEscaper
 
         $keyword = strtoupper($keyword);
 
-        $valid_keywords = array('INDEXED BY', 'NOT INDEXED');
+        $valid_keywords = ['INDEXED BY', 'NOT INDEXED'];
 
         if (!in_array($keyword, $valid_keywords))
         {
             $keyword = 'INDEXED BY';
         }
 
-        $indices = array_map(array($this, 'escape_location_reference'), $indices);
+        $indices = array_map([$this, 'escape_location_reference'], $indices);
         $indices = implode(', ', $indices);
 
         return $keyword . ' ' . $indices;

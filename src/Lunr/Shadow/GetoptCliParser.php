@@ -72,10 +72,10 @@ class GetoptCliParser implements CliParserInterface
         if ($raw === FALSE)
         {
             $this->error = TRUE;
-            return array();
+            return [];
         }
 
-        $ast = array_map(array($this, 'wrap_argument'), $raw);
+        $ast = array_map([$this, 'wrap_argument'], $raw);
 
         return $ast;
     }
@@ -101,7 +101,7 @@ class GetoptCliParser implements CliParserInterface
     {
         if ($value === FALSE)
         {
-            return array();
+            return [];
         }
         elseif (is_array($value))
         {
@@ -109,7 +109,7 @@ class GetoptCliParser implements CliParserInterface
         }
         else
         {
-            return array($value);
+            return [$value];
         }
     }
 

@@ -45,7 +45,7 @@ class WNSToastPayload extends WNSPayload
         $template = (isset($this->elements['template'])) ? $this->elements['template'] : 'ToastText0' . count($this->elements['text']);
 
         $launch = '';
-        if(isset($this->elements['launch']))
+        if (isset($this->elements['launch']))
         {
             $launch = 'launch="' . $this->elements['launch'] . '"';
         }
@@ -53,11 +53,10 @@ class WNSToastPayload extends WNSPayload
         $xml  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         $xml .= '<toast ' . $launch . ">\n";
 
-
         $xml .= "<visual>\n";
         $xml .= '<binding template="' . $template . "\">\n";
 
-        if(isset($this->elements['image']))
+        if (isset($this->elements['image']))
         {
             $xml .= '<image id="1" src="' . $this->elements['image'] . "\"/>\n";
         }

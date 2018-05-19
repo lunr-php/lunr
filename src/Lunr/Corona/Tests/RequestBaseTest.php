@@ -85,8 +85,8 @@ class RequestBaseTest extends RequestTest
     /**
      * Check that request is filled with sane default values.
      *
-     * @param String $key   key for a request value
-     * @param mixed  $value value of a request value
+     * @param string $key   Key for a request value
+     * @param mixed  $value Value of a request value
      *
      * @dataProvider requestValueProvider
      */

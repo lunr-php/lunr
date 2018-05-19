@@ -53,9 +53,9 @@ class LunrSoapClient extends SoapClient
     /**
      * Create a SoapHeader.
      *
-     * @param String $namespace header namespace
-     * @param String $name      header name
-     * @param Array  $data      header data
+     * @param string $namespace Header namespace
+     * @param string $name      Header name
+     * @param array  $data      Header data
      *
      * @return SoapHeader header created
      */
@@ -67,7 +67,7 @@ class LunrSoapClient extends SoapClient
     /**
      * Set the client headers.
      *
-     * @param Array|SoapHeader $headers headers to set
+     * @param array|SoapHeader $headers Headers to set
      *
      * @return LunrSoapClient $self self reference
      */

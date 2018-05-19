@@ -270,7 +270,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
             [
                 'MESSAGE' => 'Error',
                 'ERRORS'  => [],
-            ]
+            ],
         ];
 
         $this->apns_push->expects($this->at($pos++))

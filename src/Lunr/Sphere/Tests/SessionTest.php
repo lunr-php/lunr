@@ -62,10 +62,12 @@ abstract class SessionTest extends LunrBaseTest
                 $self->id = $set_id;
             }
 
-            if(!is_null($self->id))
+            if (!is_null($self->id))
             {
                 return $self->id;
-            }else{
+            }
+            else
+            {
                 return 'myId';
             }
         };

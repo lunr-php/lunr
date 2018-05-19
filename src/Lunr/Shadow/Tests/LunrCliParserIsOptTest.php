@@ -31,9 +31,9 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 
-        $method->invokeArgs($this->class, array('1', 2));
+        $method->invokeArgs($this->class, ['1', 2]);
 
-        $this->assertPropertyEquals('checked', array('1'));
+        $this->assertPropertyEquals('checked', ['1']);
     }
 
     /**
@@ -45,10 +45,10 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 
-        $method->invokeArgs($this->class, array('1', 2));
-        $method->invokeArgs($this->class, array('2', 2));
+        $method->invokeArgs($this->class, ['1', 2]);
+        $method->invokeArgs($this->class, ['2', 2]);
 
-        $this->assertPropertyEquals('checked', array('1', '2'));
+        $this->assertPropertyEquals('checked', ['1', '2']);
     }
 
     /**
@@ -68,7 +68,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
                       ->method('cli_println')
                       ->with($this->equalTo('Invalid parameter given: ' . $param));
 
-        $value = $method->invokeArgs($this->class, array($param, 1));
+        $value = $method->invokeArgs($this->class, [$param, 1]);
 
         $this->assertFalse($value);
     }
@@ -90,7 +90,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
                       ->method('cli_println')
                       ->with($this->equalTo('Invalid parameter given: ' . $param));
 
-        $method->invokeArgs($this->class, array($param, 1));
+        $method->invokeArgs($this->class, [$param, 1]);
 
         $this->assertTrue($this->get_reflection_property_value('error'));
     }
@@ -108,7 +108,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
                       ->method('cli_println')
                       ->with($this->equalTo('Superfluous argument: first'));
 
-        $value = $method->invokeArgs($this->class, array('first', 1, TRUE));
+        $value = $method->invokeArgs($this->class, ['first', 1, TRUE]);
 
         $this->assertFalse($value);
     }
@@ -123,7 +123,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 
-        $value = $method->invokeArgs($this->class, array('-a', 1));
+        $value = $method->invokeArgs($this->class, ['-a', 1]);
 
         $this->assertFalse($value);
     }
@@ -138,7 +138,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 
-        $value = $method->invokeArgs($this->class, array('--first', 1));
+        $value = $method->invokeArgs($this->class, ['--first', 1]);
 
         $this->assertFalse($value);
     }
@@ -151,11 +151,11 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      */
     public function testIsOptReturnsTrueForValidShortParameterWithArguments()
     {
-        $this->set_reflection_property_value('args', array('test.php', '-b', 'arg'));
+        $this->set_reflection_property_value('args', ['test.php', '-b', 'arg']);
 
         $method = $this->get_accessible_reflection_method('is_opt');
 
-        $value = $method->invokeArgs($this->class, array('-b', 1));
+        $value = $method->invokeArgs($this->class, ['-b', 1]);
 
         $this->assertTrue($value);
     }
@@ -168,11 +168,11 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      */
     public function testIsOptReturnsTrueForValidLongParameterWithArguments()
     {
-        $this->set_reflection_property_value('args', array('test.php', '--second', 'arg'));
+        $this->set_reflection_property_value('args', ['test.php', '--second', 'arg']);
 
         $method = $this->get_accessible_reflection_method('is_opt');
 
-        $value = $method->invokeArgs($this->class, array('--second', 1));
+        $value = $method->invokeArgs($this->class, ['--second', 1]);
 
         $this->assertTrue($value);
     }
@@ -186,7 +186,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 
-        $value = $method->invokeArgs($this->class, array('arg', 2));
+        $value = $method->invokeArgs($this->class, ['arg', 2]);
 
         $this->assertFalse($value);
     }

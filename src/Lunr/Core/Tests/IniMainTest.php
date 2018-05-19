@@ -49,7 +49,7 @@ class IniMainTest extends IniTest
     {
         $limit = ini_get('memory_limit');
 
-        $suffix = str_replace((int) $limit, '',$limit);
+        $suffix = str_replace((int) $limit, '', $limit);
 
         $this->class->memory_limit = ((int) $limit + 100) . $suffix;
 
@@ -99,7 +99,7 @@ class IniMainTest extends IniTest
     {
         $limit = ini_get('memory_limit');
 
-        $suffix = str_replace((int) $limit, '',$limit);
+        $suffix = str_replace((int) $limit, '', $limit);
 
         $this->class->memory_limit = ((int) $limit + 100) . $suffix;
 

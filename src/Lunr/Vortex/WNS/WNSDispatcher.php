@@ -123,7 +123,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
      */
     public function push()
     {
-        if(!isset($this->oauth_token))
+        if (!isset($this->oauth_token))
         {
             $this->logger->warning('Tried to push notification to {endpoint} but wasn\'t authenticated.', [ 'endpoint' => $this->endpoint ]);
             $response = $this->get_new_response_object_for_failed_request();
@@ -155,7 +155,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
         {
             $response = $this->http->post($this->endpoint, $headers, $this->payload);
         }
-        catch(Requests_Exception $e)
+        catch (Requests_Exception $e)
         {
             $response = $this->get_new_response_object_for_failed_request();
             $context  = [ 'error' => $e->getMessage(), 'endpoint' => $this->endpoint ];
@@ -268,7 +268,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
         {
             $response = $this->http->post(self::TOKEN_URL, $headers, $request_post);
         }
-        catch(Requests_Exception $e)
+        catch (Requests_Exception $e)
         {
             $this->logger->warning('Requesting token failed: No response');
             return FALSE;
@@ -276,13 +276,13 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
 
         $response_object = json_decode($response->body);
 
-        if(!(json_last_error() === JSON_ERROR_NONE))
+        if (!(json_last_error() === JSON_ERROR_NONE))
         {
             $this->logger->warning('Requesting token failed: Malformed JSON response');
             return FALSE;
         }
 
-        if(!property_exists($response_object, 'access_token'))
+        if (!property_exists($response_object, 'access_token'))
         {
             $this->logger->warning('Requesting token failed: Not a valid JSON response');
             return FALSE;
@@ -294,7 +294,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set a token to authenticate with.
      *
-     * @param string $token the OAuth token to use
+     * @param string $token The OAuth token to use
      *
      * @return void
      */

@@ -59,7 +59,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
     {
         if (!is_array($bootstrap))
         {
-            $bootstrap = array();
+            $bootstrap = [];
         }
 
         if (!empty($bootstrap))
@@ -130,7 +130,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
 
         if (!is_array($config))
         {
-            $config = array();
+            $config = [];
             return;
         }
 
@@ -159,7 +159,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
 
         if (empty($array))
         {
-            return new self(array());
+            return new self([]);
         }
 
         foreach ($array as $key => $value)

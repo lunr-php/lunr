@@ -69,7 +69,7 @@ class EmailResponse implements PushNotificationResponseInterface
     /**
      * Get notification delivery status for an endpoint.
      *
-     * @param String $endpoint endpoint
+     * @param string $endpoint Endpoint
      *
      * @return PushNotificationStatus $status Delivery status for the endpoint
      */

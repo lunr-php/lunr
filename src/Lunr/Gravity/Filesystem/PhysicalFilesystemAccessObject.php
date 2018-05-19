@@ -66,7 +66,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      */
     public function get_list_of_directories($directory)
     {
-        $directories = array();
+        $directories = [];
 
         if (is_bool($directory))
         {
@@ -84,12 +84,12 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
                 }
             }
         }
-        catch(UnexpectedValueException $unexpected)
+        catch (UnexpectedValueException $unexpected)
         {
             $context = [ 'directory' => $directory, 'message' => $unexpected->getMessage() ];
             $this->logger->error("Couldn't open directory '{directory}': {message}", $context);
         }
-        catch(RuntimeException $runtime)
+        catch (RuntimeException $runtime)
         {
             $context = [ 'message' => $runtime->getMessage() ];
             $this->logger->warning('{message}', $context);
@@ -107,7 +107,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      */
     public function get_list_of_files($directory)
     {
-        $files = array();
+        $files = [];
 
         if (is_bool($directory))
         {
@@ -125,12 +125,12 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
                 }
             }
         }
-        catch(UnexpectedValueException $unexpected)
+        catch (UnexpectedValueException $unexpected)
         {
             $context = [ 'directory' => $directory, 'message' => $unexpected->getMessage() ];
             $this->logger->error("Couldn't open directory '{directory}': {message}", $context);
         }
-        catch(RuntimeException $runtime)
+        catch (RuntimeException $runtime)
         {
             $context = [ 'message' => $runtime->getMessage() ];
             $this->logger->warning('{message}', $context);
@@ -150,7 +150,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     {
         $raw_results = scandir($directory, SCANDIR_SORT_NONE);
 
-        return array_diff($raw_results, array('.', '..'));
+        return array_diff($raw_results, ['.', '..']);
     }
 
     /**
@@ -166,7 +166,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     {
         if (is_bool($needle) || is_bool($haystack))
         {
-            return array();
+            return [];
         }
 
         try
@@ -175,25 +175,25 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
             $iterator  = new RecursiveIteratorIterator($directory);
             $matches   = new RegexIterator($iterator, $needle, RecursiveRegexIterator::GET_MATCH);
         }
-        catch(UnexpectedValueException $unexpected)
+        catch (UnexpectedValueException $unexpected)
         {
             $context = [ 'directory' => $haystack, 'message' => $unexpected->getMessage() ];
             $this->logger->error("Couldn't open directory '{directory}': {message}", $context);
             return FALSE;
         }
-        catch(InvalidArgumentException $invalid)
+        catch (InvalidArgumentException $invalid)
         {
             $context = [ 'message' => $invalid->getMessage() ];
             $this->logger->error('{message}', $context);
             return FALSE;
         }
-        catch(RuntimeException $runtime)
+        catch (RuntimeException $runtime)
         {
             $context = [ 'message' => $runtime->getMessage() ];
             $this->logger->warning('{message}', $context);
-            return array();
+            return [];
         }
-        catch(TypeError $runtime)
+        catch (TypeError $runtime)
         {
             $context = [ 'message' => $runtime->getMessage() ];
             $this->logger->error('{message}', $context);
@@ -217,21 +217,21 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
         {
             return is_bool($file) ? FALSE : new SplFileObject($file, $mode);
         }
-        catch(RuntimeException $runtime)
+        catch (RuntimeException $runtime)
         {
             $context = [ 'message' => $runtime->getMessage() ];
             $this->logger->error('{message}', $context);
 
             return FALSE;
         }
-        catch(LogicException $logic)
+        catch (LogicException $logic)
         {
             $context = [ 'message' => $logic->getMessage() ];
             $this->logger->error('{message}', $context);
 
             return FALSE;
         }
-        catch(TypeError $e)
+        catch (TypeError $e)
         {
             $context = [ 'message' => $e->getMessage() ];
             $this->logger->error('{message}', $context);
@@ -295,9 +295,9 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
             $directory = new RecursiveDirectoryIterator($dir_path, FilesystemIterator::SKIP_DOTS);
             $iterator  = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::CHILD_FIRST);
 
-            foreach($iterator as $file)
+            foreach ($iterator as $file)
             {
-                if($file->isFile())
+                if ($file->isFile())
                 {
                     unlink($file->getPathname());
                 }
@@ -309,13 +309,13 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
 
             return rmdir($dir_path);
         }
-        catch(UnexpectedValueException $unexpected)
+        catch (UnexpectedValueException $unexpected)
         {
             $context = [ 'directory' => $dir_path, 'message' => $unexpected->getMessage() ];
             $this->logger->error("Couldn't recurse on directory '{directory}': {message}", $context);
             return FALSE;
         }
-        catch(RuntimeException $runtime)
+        catch (RuntimeException $runtime)
         {
             $context = [ 'message' => $runtime->getMessage() ];
             $this->logger->warning('{message}', $context);
@@ -337,7 +337,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     {
         $fp = fopen($file, 'w');
 
-        if($fp === FALSE)
+        if ($fp === FALSE)
         {
             $this->logger->warning('Could not open the file: ' . $file);
             return FALSE;
@@ -366,25 +366,25 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      */
     public function mkdir($pathname, $mode = 0755, $recursive = FALSE)
     {
-        if(is_string($mode))
+        if (is_string($mode))
         {
             $this->logger->warning('String representation of access mode is not supported. Please, try using an integer.');
             return FALSE;
         }
 
-        if(decoct(octdec(strval($mode))) != $mode && $mode > 0)
+        if (decoct(octdec(strval($mode))) != $mode && $mode > 0)
         {
             $mode = octdec((string) $mode);
         }
 
         //this is the octal range (0000 - 2777 and 4000 - 4777) in decimal
-        if(!(($mode >= 0 && $mode <= 1535) || ($mode >= 2048 && $mode <= 2559)))
+        if (!(($mode >= 0 && $mode <= 1535) || ($mode >= 2048 && $mode <= 2559)))
         {
             $this->logger->warning('Access mode value ' . $mode . ' is invalid.');
             return FALSE;
         }
 
-        if(mkdir($pathname, $mode, $recursive) === FALSE)
+        if (mkdir($pathname, $mode, $recursive) === FALSE)
         {
             $this->logger->warning('Failed to create directory: ' . $pathname);
             return FALSE;

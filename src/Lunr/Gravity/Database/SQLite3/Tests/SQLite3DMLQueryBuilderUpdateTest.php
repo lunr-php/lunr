@@ -27,7 +27,7 @@ class SQLite3DMLQueryBuilderUpdateTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test that standard update modes are handled correctly.
      *
-     * @param String $mode valid update modes.
+     * @param string $mode Valid update modes.
      *
      * @dataProvider modesProvider
      * @covers       Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::update_mode

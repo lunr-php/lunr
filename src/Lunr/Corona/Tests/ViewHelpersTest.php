@@ -25,9 +25,9 @@ class ViewHelpersTest extends ViewTest
     /**
      * Tests the base_url method of the View class.
      *
-     * @param String $baseurl baseurl value
-     * @param String $path    path to append to the baseurl
-     * @param String $result  expected combined result
+     * @param string $baseurl Baseurl value
+     * @param string $path    Path to append to the baseurl
+     * @param string $result  Expected combined result
      *
      * @dataProvider baseUrlProvider
      * @covers       Lunr\Corona\View::base_url
@@ -40,16 +40,16 @@ class ViewHelpersTest extends ViewTest
 
         $method = $this->get_accessible_reflection_method('base_url');
 
-        $this->assertEquals($result, $method->invokeArgs($this->class, array($path)));
+        $this->assertEquals($result, $method->invokeArgs($this->class, [$path]));
     }
 
     /**
      * Tests the statics method of the View class.
      *
-     * @param String $base    basepath value
-     * @param String $statics path to statics
-     * @param String $path    path to append to the statics path
-     * @param String $result  expected combined result
+     * @param string $base    Basepath value
+     * @param string $statics Path to statics
+     * @param string $path    Path to append to the statics path
+     * @param string $result  Expected combined result
      *
      * @dataProvider staticsProvider
      * @covers       Lunr\Corona\View::statics
@@ -65,7 +65,7 @@ class ViewHelpersTest extends ViewTest
 
         $method = $this->get_accessible_reflection_method('statics');
 
-        $this->assertEquals($result, $method->invokeArgs($this->class, array($path)));
+        $this->assertEquals($result, $method->invokeArgs($this->class, [$path]));
     }
 
     /**

@@ -215,7 +215,7 @@ class Request
      */
     public function get_option_data($key)
     {
-        if(array_key_exists($key, $this->cli_args))
+        if (array_key_exists($key, $this->cli_args))
         {
             return $this->cli_args[$key];
         }

@@ -78,9 +78,9 @@ class LunrCliParser implements CliParserInterface
     {
         $this->short   = $shortopts;
         $this->long    = $longopts;
-        $this->args    = array();
-        $this->checked = array();
-        $this->ast     = array();
+        $this->args    = [];
+        $this->checked = [];
+        $this->ast     = [];
         $this->error   = FALSE;
         $this->console = $console;
     }
@@ -108,9 +108,9 @@ class LunrCliParser implements CliParserInterface
     {
         $this->args = $_SERVER['argv'];
 
-        foreach($this->args as $index => $arg)
+        foreach ($this->args as $index => $arg)
         {
-            if(!in_array($arg, $this->checked) && $index != 0)
+            if (!in_array($arg, $this->checked) && $index != 0)
             {
                 $this->is_opt($arg, $index, TRUE);
             }
@@ -152,7 +152,7 @@ class LunrCliParser implements CliParserInterface
                 return $this->is_valid_short($opt, $index);
             }
 
-            if(isset($param{0}) && $param{0} != '-')
+            if (isset($param{0}) && $param{0} != '-')
             {
                 return $this->is_valid_short($param, $index);
             }
@@ -166,7 +166,7 @@ class LunrCliParser implements CliParserInterface
                 return $this->is_valid_long($opt, $index);
             }
         }
-        elseif($toplevel)
+        elseif ($toplevel)
         {
             $this->console->cli_println('Superfluous argument: ' . $opt);
         }
@@ -186,14 +186,14 @@ class LunrCliParser implements CliParserInterface
     {
         $pos = strpos($this->short, $opt);
 
-        if($pos === FALSE)
+        if ($pos === FALSE)
         {
             $this->console->cli_println('Invalid parameter given: ' . $opt);
             $this->error = TRUE;
             return FALSE;
         }
 
-        $this->ast[$opt] = array();
+        $this->ast[$opt] = [];
 
         return $this->check_argument($opt, $index, $pos, $this->short);
     }
@@ -210,9 +210,9 @@ class LunrCliParser implements CliParserInterface
     {
         $match = FALSE;
 
-        foreach($this->long as $key => $arg)
+        foreach ($this->long as $key => $arg)
         {
-            if($opt == substr($arg, 0, strlen($opt)))
+            if ($opt == substr($arg, 0, strlen($opt)))
             {
                 if (strlen($arg) == strlen($opt))
                 {
@@ -227,14 +227,14 @@ class LunrCliParser implements CliParserInterface
             }
         }
 
-        if($match === FALSE)
+        if ($match === FALSE)
         {
             $this->console->cli_println('Invalid parameter given: ' . $opt);
             $this->error = TRUE;
             return FALSE;
         }
 
-        $this->ast[$opt] = array();
+        $this->ast[$opt] = [];
 
         return $this->check_argument($opt, $index, strlen($opt) - 1, $this->long[$args]);
     }
@@ -254,9 +254,9 @@ class LunrCliParser implements CliParserInterface
     {
         $next = $index + 1;
 
-        if($pos + 1 < strlen($a))
+        if ($pos + 1 < strlen($a))
         {
-            if(!in_array($a{$pos + 1}, array(':', ';')))
+            if (!in_array($a{$pos + 1}, [':', ';']))
             {
                 return FALSE;
             }

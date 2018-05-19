@@ -67,9 +67,9 @@ abstract class DatabaseConnectionPoolTest extends TestCase
 
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $map = array(
-            array('db', $this->sub_configuration),
-        );
+        $map = [
+            ['db', $this->sub_configuration],
+        ];
 
         $this->configuration->expects($this->any())
                       ->method('offsetGet')
@@ -93,21 +93,21 @@ abstract class DatabaseConnectionPoolTest extends TestCase
 
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $map = array(
-            array('db', $this->sub_configuration),
-        );
+        $map = [
+            ['db', $this->sub_configuration],
+        ];
 
         $this->configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('driver', 'unsupported'),
-        );
+        $map = [
+            ['rw_host', 'rw_host'],
+            ['username', 'username'],
+            ['password', 'password'],
+            ['database', 'database'],
+            ['driver', 'unsupported'],
+        ];
 
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
@@ -131,21 +131,21 @@ abstract class DatabaseConnectionPoolTest extends TestCase
 
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $map = array(
-            array('db', $this->sub_configuration),
-        );
+        $map = [
+            ['db', $this->sub_configuration],
+        ];
 
         $this->configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $map = array(
-            array('rw_host', 'rw_host'),
-            array('username', 'username'),
-            array('password', 'password'),
-            array('database', 'database'),
-            array('driver', 'mysql'),
-        );
+        $map = [
+            ['rw_host', 'rw_host'],
+            ['username', 'username'],
+            ['password', 'password'],
+            ['database', 'database'],
+            ['driver', 'mysql'],
+        ];
 
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')

@@ -148,7 +148,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
         {
             $response = $this->http->post($pap_url, $headers, $pap_data, $options);
         }
-        catch(Requests_Exception $e)
+        catch (Requests_Exception $e)
         {
             $response = $this->get_new_response_object_for_failed_request();
             $context  = [ 'error' => $e->getMessage(), 'endpoint' => $this->endpoint ];

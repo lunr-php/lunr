@@ -74,7 +74,7 @@ abstract class HTMLView extends View
             sort($this->stylesheets);
         }
 
-        foreach($this->stylesheets as $stylesheet)
+        foreach ($this->stylesheets as $stylesheet)
         {
             if (!$this->is_external($stylesheet))
             {
@@ -103,7 +103,7 @@ abstract class HTMLView extends View
             sort($this->javascript);
         }
 
-        foreach($this->javascript as $js)
+        foreach ($this->javascript as $js)
         {
             if (!$this->is_external($js))
             {
@@ -119,7 +119,7 @@ abstract class HTMLView extends View
     /**
      * Check of a URI is external or local
      *
-     * @param string $uri a URI
+     * @param string $uri A URI
      *
      * @return bool if the URI is external or not
      */

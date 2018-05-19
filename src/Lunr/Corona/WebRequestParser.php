@@ -278,7 +278,7 @@ class WebRequestParser implements RequestParserInterface
     {
         $cookie = $this->parse_super_global($_COOKIE);
 
-        if(isset($cookie['PHPSESSID']))
+        if (isset($cookie['PHPSESSID']))
         {
             $_COOKIE['PHPSESSID'] = $cookie['PHPSESSID'];
             unset($cookie['PHPSESSID']);
@@ -307,7 +307,7 @@ class WebRequestParser implements RequestParserInterface
      */
     public function parse_accept_format($supported = [])
     {
-        if(isset($_SERVER['HTTP_ACCEPT']))
+        if (isset($_SERVER['HTTP_ACCEPT']))
         {
             $this->header->name  = 'Accept';
             $this->header->value = $_SERVER['HTTP_ACCEPT'];
@@ -327,7 +327,7 @@ class WebRequestParser implements RequestParserInterface
      */
     public function parse_accept_language($supported = [])
     {
-        if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
         {
             $this->header->name  = 'Accept-Language';
             $this->header->value = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
@@ -348,7 +348,7 @@ class WebRequestParser implements RequestParserInterface
      */
     public function parse_accept_charset($supported = [])
     {
-        if(isset($_SERVER['HTTP_ACCEPT_CHARSET']))
+        if (isset($_SERVER['HTTP_ACCEPT_CHARSET']))
         {
             $this->header->name  = 'Accept-Charset';
             $this->header->value = $_SERVER['HTTP_ACCEPT_CHARSET'];

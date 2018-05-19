@@ -29,7 +29,7 @@ class ConfigurationConvertArrayToClassTest extends ConfigurationTest
      */
     public function setUp()
     {
-        $this->setUpArray(array());
+        $this->setUpArray([]);
     }
 
     /**
@@ -44,7 +44,7 @@ class ConfigurationConvertArrayToClassTest extends ConfigurationTest
     {
         $method = $this->configuration_reflection->getMethod('convert_array_to_class');
         $method->setAccessible(TRUE);
-        $this->assertEquals($input, $method->invokeArgs($this->configuration, array($input)));
+        $this->assertEquals($input, $method->invokeArgs($this->configuration, [$input]));
     }
 
     /**
@@ -56,7 +56,7 @@ class ConfigurationConvertArrayToClassTest extends ConfigurationTest
     {
         $method = $this->configuration_reflection->getMethod('convert_array_to_class');
         $method->setAccessible(TRUE);
-        $output = $method->invokeArgs($this->configuration, array(array()));
+        $output = $method->invokeArgs($this->configuration, [[]]);
 
         $this->assertInstanceOf('Lunr\Core\Configuration', $output);
 
@@ -78,13 +78,13 @@ class ConfigurationConvertArrayToClassTest extends ConfigurationTest
      */
     public function testConvertArrayToClassWithArrayValue()
     {
-        $input          = array();
+        $input          = [];
         $input['test']  = 'String';
         $input['test1'] = 1;
 
         $method = $this->configuration_reflection->getMethod('convert_array_to_class');
         $method->setAccessible(TRUE);
-        $output = $method->invokeArgs($this->configuration, array($input));
+        $output = $method->invokeArgs($this->configuration, [$input]);
 
         $this->assertEquals($input, $output);
     }
@@ -97,15 +97,15 @@ class ConfigurationConvertArrayToClassTest extends ConfigurationTest
      */
     public function testConvertArrayToClassWithMultidimensionalArrayValue()
     {
-        $config                   = array();
+        $config                   = [];
         $config['test1']          = 'String';
-        $config['test2']          = array();
+        $config['test2']          = [];
         $config['test2']['test3'] = 1;
         $config['test2']['test4'] = FALSE;
 
         $method = $this->configuration_reflection->getMethod('convert_array_to_class');
         $method->setAccessible(TRUE);
-        $output = $method->invokeArgs($this->configuration, array($config));
+        $output = $method->invokeArgs($this->configuration, [$config]);
 
         $this->assertTrue(is_array($output));
 

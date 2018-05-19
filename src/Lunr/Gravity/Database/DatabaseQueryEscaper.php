@@ -198,7 +198,7 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
      */
     public function list_value($array_values)
     {
-        if(is_array($array_values) === FALSE)
+        if (is_array($array_values) === FALSE)
         {
             return '';
         }

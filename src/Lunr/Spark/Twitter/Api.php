@@ -132,7 +132,7 @@ abstract class Api
 
             $response->throw_for_status();
         }
-        catch(Requests_Exception_HTTP $e)
+        catch (Requests_Exception_HTTP $e)
         {
             $error   = $result['errors'][0];
             $context = [

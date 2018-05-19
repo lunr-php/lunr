@@ -367,8 +367,8 @@ interface DMLQueryBuilderInterface
     /**
      * Define a UNION or UNION ALL clause of the SQL statement.
      *
-     * @param String  $sql_query sql query reference
-     * @param Boolean $all       True for ALL or False for empty (default).
+     * @param string  $sql_query SQL query reference
+     * @param boolean $all       True for ALL or False for empty (default).
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */

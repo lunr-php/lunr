@@ -150,8 +150,8 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
      */
     public function escapeStringProvider()
     {
-        $strings   = array();
-        $strings[] = array('Start', 'Start', 'Start');
+        $strings   = [];
+        $strings[] = ['Start', 'Start', 'Start'];
 
         return $strings;
     }

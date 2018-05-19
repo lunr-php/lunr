@@ -74,7 +74,7 @@ class L10nBaseTest extends L10nTest
         $this->fao->expects($this->once())
                   ->method('get_list_of_directories')
                   ->with(dirname($_SERVER['PHP_SELF']) . '/l10n')
-                  ->will($this->returnValue(array('de_DE', 'nl_NL')));
+                  ->will($this->returnValue(['de_DE', 'nl_NL']));
 
         $languages = $this->class->get_supported_languages();
         sort($languages);

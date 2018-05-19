@@ -101,7 +101,7 @@ class MsgpackView extends View
 
         $msgpack = [];
 
-        $msgpack['data'] = new \stdClass();
+        $msgpack['data']   = new \stdClass();
         $msgpack['status'] = [];
 
         $msgpack['status']['code']    = 500;

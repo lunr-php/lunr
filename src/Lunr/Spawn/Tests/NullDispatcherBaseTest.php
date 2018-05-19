@@ -28,7 +28,7 @@ class NullDispatcherBaseTest extends NullDispatcherTest
      */
     public function testDispatchReturnsNull()
     {
-        $value = $this->class->dispatch('job', array());
+        $value = $this->class->dispatch('job', []);
 
         $this->assertNull($value);
     }

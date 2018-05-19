@@ -346,7 +346,6 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
         $this->class->set_option(MYSQLI_OPT_CONNECT_TIMEOUT, 42);
 
         $this->assertPropertyEquals('options', [ MYSQLI_OPT_INT_AND_FLOAT_NATIVE => FALSE, MYSQLI_OPT_CONNECT_TIMEOUT => 42]);
-
     }
 
 }

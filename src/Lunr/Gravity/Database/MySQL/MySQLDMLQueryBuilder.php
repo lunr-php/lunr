@@ -206,7 +206,7 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     {
         $this->sql_group_by($expr);
 
-        if($order !== NULL && is_bool($order))
+        if ($order !== NULL && is_bool($order))
         {
             $direction       = ($order === TRUE) ? ' ASC' : ' DESC';
             $this->group_by .= $direction;

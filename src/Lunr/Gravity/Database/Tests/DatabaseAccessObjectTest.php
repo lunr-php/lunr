@@ -79,7 +79,7 @@ abstract class DatabaseAccessObjectTest extends TestCase
                  ->will($this->returnValue($escaper));
 
         $this->dao = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseAccessObject')
-                          ->setConstructorArgs(array($this->db, $this->logger))
+                          ->setConstructorArgs([$this->db, $this->logger])
                           ->getMockForAbstractClass();
 
         $this->reflection_dao = new ReflectionClass('Lunr\Gravity\Database\DatabaseAccessObject');
@@ -111,7 +111,7 @@ abstract class DatabaseAccessObjectTest extends TestCase
                  ->will($this->returnValue($escaper));
 
         $this->dao = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseAccessObject')
-                          ->setConstructorArgs(array($this->db, $this->logger, $this->pool))
+                          ->setConstructorArgs([$this->db, $this->logger, $this->pool])
                           ->getMockForAbstractClass();
 
         $this->reflection_dao = new ReflectionClass('Lunr\Gravity\Database\DatabaseAccessObject');

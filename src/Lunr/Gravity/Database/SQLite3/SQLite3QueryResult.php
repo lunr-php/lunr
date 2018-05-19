@@ -217,9 +217,9 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
     }
 
     /**
-     * Returns the number of rows in the query. 
+     * Returns the number of rows in the query.
      *
-     * @return Integer $number Number of rows in the result set. 
+     * @return Integer $number Number of rows in the result set.
      */
     public function number_of_rows()
     {

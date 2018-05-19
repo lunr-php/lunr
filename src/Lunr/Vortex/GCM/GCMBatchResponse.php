@@ -124,7 +124,7 @@ class GCMBatchResponse
     /**
      * Get notification delivery status for an endpoint.
      *
-     * @param String $endpoint endpoint
+     * @param string $endpoint Endpoint
      *
      * @return PushNotificationStatus $status Delivery status for the endpoint
      */
@@ -150,12 +150,12 @@ class GCMBatchResponse
             $error_message = "Invalid JSON ({$this->content})";
             $status        = PushNotificationStatus::ERROR;
         }
-        else if ($this->http_code == 401)
+        elseif ($this->http_code == 401)
         {
             $error_message = 'Error with authentication';
             $status        = PushNotificationStatus::ERROR;
         }
-        else if ($this->http_code >= 500)
+        elseif ($this->http_code >= 500)
         {
             $error_message = 'Internal error';
             $status        = PushNotificationStatus::TEMPORARY_ERROR;

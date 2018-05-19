@@ -139,7 +139,7 @@ class FrontController
     /**
      * Lookup the controller in the registered paths.
      *
-     * @param String $paths Identifiers for the paths to use for the lookup
+     * @param string ...$paths Identifiers for the paths to use for the lookup
      *
      * @return String $controller Fully qualified name of the responsible controller.
      */
@@ -206,7 +206,7 @@ class FrontController
      */
     public function dispatch($controller)
     {
-        call_user_func_array(array($controller, $this->request->method), $this->request->params);
+        call_user_func_array([$controller, $this->request->method], $this->request->params);
     }
 
 }

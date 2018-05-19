@@ -43,7 +43,7 @@ class WNSBadgePayload extends WNSPayload
     public function get_payload()
     {
         $xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-        if(isset($this->elements['value']))
+        if (isset($this->elements['value']))
         {
             $xml .= '<badge value="' . $this->elements['value'] . '"/>';
         }
@@ -54,7 +54,7 @@ class WNSBadgePayload extends WNSPayload
     /**
      * Set text for the Badge notification.
      *
-     * @param String $value value on the Badge
+     * @param string $value Value on the Badge
      *
      * @see https://msdn.microsoft.com/en-us/library/windows/apps/br212849.aspx
      *

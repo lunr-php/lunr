@@ -55,7 +55,7 @@ class MockMySQLiSuccessfulConnection
      */
     public function __call($method, $arguments)
     {
-        return call_user_func_array(array($this->mysqli, $method), $arguments);
+        return call_user_func_array([$this->mysqli, $method], $arguments);
     }
 
     /**

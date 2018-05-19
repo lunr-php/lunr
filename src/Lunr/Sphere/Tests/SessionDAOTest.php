@@ -91,7 +91,7 @@ class SessionDAOTest extends LunrBaseTest
                          ->getMock();
 
         $this->query_builder = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder')
-                                    ->setConstructorArgs(array($this->db))
+                                    ->setConstructorArgs([$this->db])
                                     ->getMock();
 
         $this->escaper = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper')
@@ -110,7 +110,6 @@ class SessionDAOTest extends LunrBaseTest
 
         $this->class      = new SessionDAO($this->db, $this->logger);
         $this->reflection = new ReflectionClass('Lunr\Sphere\SessionDAO');
-
     }
 
     /**

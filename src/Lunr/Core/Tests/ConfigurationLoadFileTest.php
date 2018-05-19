@@ -41,7 +41,7 @@ class ConfigurationLoadFileTest extends ConfigurationTest
     {
         $this->configuration->load_file('correct');
 
-        $this->config['load']        = array();
+        $this->config['load']        = [];
         $this->config['load']['one'] = 'Value';
         $this->config['load']['two'] = 'String';
 
@@ -63,9 +63,9 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
         $this->configuration->load_file('overwrite');
 
-        $config                   = array();
+        $config                   = [];
         $config['test1']          = 'Value';
-        $config['test2']          = array();
+        $config['test2']          = [];
         $config['test2']['test3'] = 1;
         $config['test2']['test4'] = FALSE;
 
@@ -84,9 +84,9 @@ class ConfigurationLoadFileTest extends ConfigurationTest
 
         $this->configuration->load_file('merge');
 
-        $config                   = array();
+        $config                   = [];
         $config['test1']          = 'String';
-        $config['test2']          = array();
+        $config['test2']          = [];
         $config['test2']['test3'] = 1;
         $config['test2']['test4'] = FALSE;
         $config['test2']['test5'] = 'Value';

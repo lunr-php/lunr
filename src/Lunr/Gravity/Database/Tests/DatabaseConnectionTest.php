@@ -47,7 +47,7 @@ abstract class DatabaseConnectionTest extends LunrBaseTest
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->class = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseConnection')
-                            ->setConstructorArgs(array(&$this->configuration, &$this->logger))
+                            ->setConstructorArgs([&$this->configuration, &$this->logger])
                             ->getMockForAbstractClass();
 
         $this->reflection = new ReflectionClass('Lunr\Gravity\Database\DatabaseConnection');

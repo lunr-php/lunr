@@ -71,7 +71,7 @@ class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObje
      * @dataProvider emptyFilepathValueProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::rmdir
      */
-    Public function testRemoveDirectoryInEmptyDirectory($directory)
+    public function testRemoveDirectoryInEmptyDirectory($directory)
     {
         $this->logger->expects($this->once())
                      ->method('warning')

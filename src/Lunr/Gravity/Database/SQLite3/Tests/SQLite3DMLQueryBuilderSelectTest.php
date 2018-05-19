@@ -27,7 +27,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test that select modes for handling duplicate result entries are handled correctly.
      *
-     * @param String $mode valid select mode for handling duplicate entries.
+     * @param string $mode Valid select mode for handling duplicate entries.
      *
      * @dataProvider selectModesDuplicatesProvider
      * @covers       Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::select_mode

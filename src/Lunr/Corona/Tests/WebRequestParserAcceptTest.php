@@ -26,7 +26,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
     /**
      * Test that parse_accept_format() returns content type when called with a valid set of supported formats.
      *
-     * @param String $value the expected value
+     * @param string $value The expected value
      *
      * @dataProvider contentTypeProvider
      * @requires     extension http
@@ -103,7 +103,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
     /**
      * Test that parse_accept_language() returns content type when called with a valid set of supported languages.
      *
-     * @param String $value the expected value
+     * @param string $value The expected value
      *
      * @dataProvider acceptLanguageProvider
      * @requires     extension http
@@ -180,7 +180,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
     /**
      * Test that parse_accept_charset() returns content type when called with a valid set of supported charsets.
      *
-     * @param String $value the expected value
+     * @param string $value The expected value
      *
      * @dataProvider acceptCharsetProvider
      * @requires     extension http

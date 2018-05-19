@@ -117,8 +117,10 @@ class PAPResponse implements PushNotificationResponseInterface
 
         xml_parser_free($p);
 
-        if (empty($this->pap_response)) // no errors in parsing the XML response
+        if (empty($this->pap_response))
         {
+            // no errors in parsing the XML response
+
             if ($values[1]['tag'] == 'PUSH-RESPONSE')
             {
                 // a XML response with the above tag in it is by default
@@ -210,7 +212,7 @@ class PAPResponse implements PushNotificationResponseInterface
     /**
      * Get notification delivery status for an endpoint.
      *
-     * @param String $endpoint endpoint
+     * @param string $endpoint Endpoint
      *
      * @return PushNotificationStatus $status Delivery status for the endpoint
      */

@@ -29,7 +29,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
     public function testGetCallWithoutKey()
     {
         $method = $this->get_accessible_reflection_method('get');
-        $this->assertEquals(FALSE, $method->invoke($this->class, null));
+        $this->assertEquals(FALSE, $method->invoke($this->class, NULL));
     }
 
     /**
@@ -65,7 +65,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
      */
     public function testGetCallWithHitData()
     {
-        $key = 3;
+        $key  = 3;
         $data = 42;
 
         $item = $this->getMockBuilder('\Psr\Cache\CacheItemInterface')
@@ -97,7 +97,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
     public function testSetCallWithoutKey()
     {
         $method = $this->get_accessible_reflection_method('set');
-        $this->assertEquals(FALSE, $method->invoke($this->class, null, 3));
+        $this->assertEquals(FALSE, $method->invoke($this->class, NULL, 3));
     }
 
     /**
@@ -108,7 +108,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
     public function testSetCallWithoutValue()
     {
         $method = $this->get_accessible_reflection_method('set');
-        $this->assertEquals(FALSE, $method->invoke($this->class, 42, null));
+        $this->assertEquals(FALSE, $method->invoke($this->class, 42, NULL));
     }
 
     /**
@@ -118,7 +118,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
      */
     public function testSetCall()
     {
-        $key = 3;
+        $key  = 3;
         $data = 42;
 
         $item = $this->getMockBuilder('\Psr\Cache\CacheItemInterface')
@@ -153,9 +153,9 @@ class CacheHandlerDataTest extends CacheHandlerTest
      */
     public function testSetCallWithCustomTTL()
     {
-        $key = 3;
+        $key  = 3;
         $data = 42;
-        $ttl = 777;
+        $ttl  = 777;
 
         $item = $this->getMockBuilder('\Psr\Cache\CacheItemInterface')
                      ->disableOriginalConstructor()

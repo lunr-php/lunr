@@ -117,18 +117,18 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
 
         $configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $map = array(
-            array('db', $sub_configuration),
-        );
+        $map = [
+            ['db', $sub_configuration],
+        ];
 
         $configuration->expects($this->any())
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $map = array(
-            array('file', '/tmp/test.db'),
-            array('driver', 'not_sqlite3'),
-        );
+        $map = [
+            ['file', '/tmp/test.db'],
+            ['driver', 'not_sqlite3'],
+        ];
 
         $sub_configuration->expects($this->any())
                           ->method('offsetGet')

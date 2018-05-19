@@ -27,7 +27,7 @@ class ApiGetUrlResultsTest extends ApiTest
     /**
      * Test that get_url_results() does a correct request.
      *
-     * @param String $arguments Request parameters to expect.
+     * @param string ...$arguments Request parameters to expect.
      *
      * @dataProvider requestParamProvider
      * @covers       Lunr\Spark\Facebook\Api::get_url_results

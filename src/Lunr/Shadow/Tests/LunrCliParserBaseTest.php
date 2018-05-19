@@ -45,7 +45,7 @@ class LunrCliParserBaseTest extends LunrCliParserTest
      */
     public function testLongOptsIsPassedCorrectly()
     {
-        $this->assertPropertyEquals('long', array('first', 'second:', 'third;', 'fourth:;', 'fifth::'));
+        $this->assertPropertyEquals('long', ['first', 'second:', 'third;', 'fourth:;', 'fifth::']);
     }
 
     /**

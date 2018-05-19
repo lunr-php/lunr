@@ -86,7 +86,6 @@ class SessionDAOBaseTest extends SessionDAOTest
                            ->will($this->returnValue(TRUE));
 
         $this->assertFalse($this->class->read_session_data('myId'));
-
     }
 
     /**
@@ -157,7 +156,6 @@ class SessionDAOBaseTest extends SessionDAOTest
                            ->will($this->returnValue(base64_encode('mySession')));
 
         $this->assertEquals($this->class->read_session_data('myId'), 'mySession');
-
     }
 
     /**

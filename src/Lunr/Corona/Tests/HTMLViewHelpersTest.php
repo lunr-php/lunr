@@ -39,7 +39,6 @@ class HTMLViewHelpersTest extends HTMLViewTest
     /**
      * Test generating stylesheet include links for one stylesheet.
      *
-     *
      * @covers   Lunr\Corona\HTMLView::include_stylesheets
      */
     public function testIncludeStylesheetsWithOneStylesheet()
@@ -342,10 +341,10 @@ class HTMLViewHelpersTest extends HTMLViewTest
     /**
      * Tests the css_alternate method of the View class.
      *
-     * @param String $basename         css rule basename
-     * @param String $alternation_hint hint on whether to use 'even' or 'odd'
-     * @param String $suffix           custom suffix instead of 'even' or 'odd'
-     * @param String $result           expected combined result
+     * @param string $basename         CSS rule basename
+     * @param string $alternation_hint Hint on whether to use 'even' or 'odd'
+     * @param string $suffix           Custom suffix instead of 'even' or 'odd'
+     * @param string $result           Expected combined result
      *
      * @dataProvider cssAlternateProvider
      * @covers       Lunr\Corona\HTMLView::css_alternate

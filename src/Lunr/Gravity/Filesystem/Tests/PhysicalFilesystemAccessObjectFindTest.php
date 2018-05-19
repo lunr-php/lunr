@@ -53,7 +53,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{message}', array('message' => $error)
+                     ->with('{message}', ['message' => $error]
                      );
 
         $value = $this->class->find_matches(NULL, $this->find_location);
@@ -72,7 +72,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{message}', array('message' => $error)
+                     ->with('{message}', ['message' => $error]
                      );
 
         $value = $this->class->find_matches(new \stdClass(), $this->find_location);
@@ -112,10 +112,10 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array(
+                        [
                             'message'   => $error,
                             'directory' => $directory,
-                        )
+                        ]
                      );
 
         $value = $this->class->find_matches('/^.+pattern/i', $directory);
@@ -137,10 +137,10 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array(
+                        [
                             'message'   => $error,
                             'directory' => $directory,
-                        )
+                        ]
                      );
 
         $value = $this->class->find_matches('/^.+pattern/i', $directory);
@@ -162,10 +162,10 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array(
+                        [
                             'message'   => $error,
                             'directory' => $directory,
-                        )
+                        ]
                      );
 
         $value = $this->class->find_matches('/^.+pattern/i', $directory);
@@ -178,11 +178,11 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    Public function testGetMatchesOfNullDirectory()
+    public function testGetMatchesOfNullDirectory()
     {
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with('{message}', array('message' => 'Directory name must not be empty.'));
+                     ->with('{message}', ['message' => 'Directory name must not be empty.']);
 
         $value = $this->class->find_matches('/^.+pattern/i', NULL);
 
@@ -194,7 +194,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    Public function testGetMatchesOfObjectDirectory()
+    public function testGetMatchesOfObjectDirectory()
     {
         $directory = new \stdClass();
 
@@ -203,10 +203,10 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array(
+                        [
                             'message'   => $error,
                             'directory' => $directory,
-                        )
+                        ]
                      );
 
         $value = $this->class->find_matches('/^.+pattern/i', $directory);
@@ -222,7 +222,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    Public function testGetMatchesOfBooleanDirectory($directory)
+    public function testGetMatchesOfBooleanDirectory($directory)
     {
         $this->logger->expects($this->never())
                      ->method('error');

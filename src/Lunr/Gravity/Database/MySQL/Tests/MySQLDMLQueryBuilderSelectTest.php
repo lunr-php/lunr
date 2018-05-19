@@ -27,7 +27,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
     /**
      * Test that select modes for handling duplicate result entries are handled correctly.
      *
-     * @param String $mode valid select mode for handling duplicate entries.
+     * @param string $mode Valid select mode for handling duplicate entries.
      *
      * @dataProvider selectModesDuplicatesProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select_mode
@@ -47,7 +47,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
     /**
      * Test that select modes for handling the result cache are handled correctly.
      *
-     * @param String $mode valid select mode for handling the cache.
+     * @param string $mode Valid select mode for handling the cache.
      *
      * @dataProvider selectModesCacheProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select_mode
@@ -67,7 +67,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
     /**
      * Test that standard select modes are handled correctly.
      *
-     * @param String $mode valid select modes.
+     * @param string $mode Valid select modes.
      *
      * @dataProvider selectModesStandardProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select_mode
@@ -103,7 +103,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
     /**
      * Test that standard lock modes are handled correctly.
      *
-     * @param String $mode valid select modes.
+     * @param string $mode Valid select modes.
      *
      * @dataProvider lockModesStandardProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::lock_mode

@@ -56,10 +56,10 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array(
+                        [
                             'message'   => $error,
                             'directory' => $directory,
-                        )
+                        ]
                      );
 
         $value = $this->class->get_list_of_files($directory);
@@ -81,10 +81,10 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array(
+                        [
                             'message'   => $error,
                             'directory' => $directory,
-                        )
+                        ]
                      );
 
         $value = $this->class->get_list_of_files($directory);
@@ -106,10 +106,10 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array(
+                        [
                             'message'   => $error,
                             'directory' => $directory,
-                        )
+                        ]
                      );
 
         $value = $this->class->get_list_of_files($directory);
@@ -122,7 +122,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
      */
-    Public function testGetListOfFilesInNullDirectory()
+    public function testGetListOfFilesInNullDirectory()
     {
         $this->logger->expects($this->never())
                      ->method('error');
@@ -137,7 +137,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
      */
-    Public function testGetListOfFilesInObjectDirectory()
+    public function testGetListOfFilesInObjectDirectory()
     {
         $directory = new \stdClass();
 
@@ -146,10 +146,10 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array(
+                        [
                             'message'   => $error,
                             'directory' => $directory,
-                        )
+                        ]
                      );
 
         $value = $this->class->get_list_of_files($directory);
@@ -165,7 +165,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
      */
-    Public function testGetListOfFilesInBooleanTrueDirectory($directory)
+    public function testGetListOfFilesInBooleanTrueDirectory($directory)
     {
         $this->logger->expects($this->never())
                      ->method('error');

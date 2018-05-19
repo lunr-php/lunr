@@ -124,7 +124,7 @@ class MySQLConnection extends DatabaseConnection
 
         $this->mysqli =& $mysqli;
 
-        $this->query_hint = '';
+        $this->query_hint                                 = '';
         $this->options[ MYSQLI_OPT_INT_AND_FLOAT_NATIVE ] = TRUE;
 
         $this->set_configuration();
@@ -224,7 +224,7 @@ class MySQLConnection extends DatabaseConnection
 
         $host = ($this->readonly === TRUE) ? $this->ro_host : $this->rw_host;
 
-        if(isset($this->ssl_key, $this->ssl_cert, $this->ca_cert))
+        if (isset($this->ssl_key, $this->ssl_cert, $this->ca_cert))
         {
             $this->mysqli->ssl_set($this->ssl_key, $this->ssl_cert, $this->ca_cert, $this->ca_path, $this->cipher);
         }

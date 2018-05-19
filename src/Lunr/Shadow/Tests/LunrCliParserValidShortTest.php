@@ -38,7 +38,7 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
                       ->method('cli_println')
                       ->with($this->equalTo('Invalid parameter given: ' . $param));
 
-        $value = $method->invokeArgs($this->class, array($param, 1));
+        $value = $method->invokeArgs($this->class, [$param, 1]);
 
         $this->assertFalse($value);
     }
@@ -59,7 +59,7 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
                       ->method('cli_println')
                       ->with($this->equalTo('Invalid parameter given: ' . $param));
 
-        $method->invokeArgs($this->class, array($param, 1));
+        $method->invokeArgs($this->class, [$param, 1]);
 
         $this->assertTrue($this->get_reflection_property_value('error'));
     }
@@ -75,12 +75,12 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
 
         $this->set_reflection_property_value('short', 'a');
 
-        $method->invokeArgs($this->class, array('a', 1));
+        $method->invokeArgs($this->class, ['a', 1]);
 
         $value = $this->get_reflection_property_value('ast');
 
         $this->assertArrayHasKey('a', $value);
-        $this->assertEquals($value['a'], array());
+        $this->assertEquals($value['a'], []);
     }
 
     /**
@@ -95,7 +95,7 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
 
         $this->set_reflection_property_value('short', 'a');
 
-        $value = $method->invokeArgs($this->class, array('a', 1));
+        $value = $method->invokeArgs($this->class, ['a', 1]);
 
         $this->assertFalse($value);
     }
@@ -109,11 +109,11 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
     {
         $method = $this->get_accessible_reflection_method('is_valid_short');
 
-        $this->set_reflection_property_value('args', array('test.php', '-b', 'arg'));
+        $this->set_reflection_property_value('args', ['test.php', '-b', 'arg']);
 
         $this->set_reflection_property_value('short', 'b:');
 
-        $value = $method->invokeArgs($this->class, array('b', 1));
+        $value = $method->invokeArgs($this->class, ['b', 1]);
 
         $this->assertTrue($value);
     }

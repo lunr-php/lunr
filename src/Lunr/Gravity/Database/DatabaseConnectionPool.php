@@ -56,8 +56,8 @@ class DatabaseConnectionPool
         $this->configuration = $configuration;
         $this->logger        = $logger;
 
-        $this->ro_pool = array();
-        $this->rw_pool = array();
+        $this->ro_pool = [];
+        $this->rw_pool = [];
     }
 
     /**

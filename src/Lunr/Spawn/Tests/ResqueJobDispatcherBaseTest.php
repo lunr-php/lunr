@@ -44,8 +44,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
     {
         $value = $this->get_reflection_property_value('queue');
 
-        $this->assertEquals(array('default_queue'), $value);
-
+        $this->assertEquals(['default_queue'], $value);
     }
 
     /**
@@ -58,7 +57,6 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
         $value = $this->get_reflection_property_value('track_status');
 
         $this->assertFalse($value);
-
     }
 
     /**
@@ -82,7 +80,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
     {
         $this->mock_method([ $this->resque, 'enqueue' ], 'return "TOKEN";');
 
-        $this->class->dispatch('job', array());
+        $this->class->dispatch('job', []);
 
         $value = $this->get_reflection_property_value('token');
 
@@ -100,7 +98,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
     {
         $this->mock_method([ $this->resque, 'enqueue' ], 'return "TOKEN";');
 
-        $this->class->dispatch('job', array());
+        $this->class->dispatch('job', []);
 
         $value = $this->get_reflection_property_value('token');
 
@@ -121,7 +119,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
 
         $value = $this->get_reflection_property_value('queue');
 
-        $this->assertSame(array($queue), $value);
+        $this->assertSame([$queue], $value);
     }
 
     /**
@@ -131,7 +129,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      */
     public function testSetQueueWithArray()
     {
-        $queue = array('queue');
+        $queue = ['queue'];
         $this->class->set_queue($queue);
 
         $value = $this->get_reflection_property_value('queue');
@@ -159,7 +157,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
     /**
      * Tests that set_track_status() modifies the track status property with valid value.
      *
-     * @param Boolean $value the value to test
+     * @param boolean $value The value to test
      *
      * @dataProvider validTrackStatusProvider
      * @covers       Lunr\Spawn\ResqueJobDispatcher::set_track_status
@@ -177,7 +175,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
     /**
      * Tests that set_track_status() does not modify the track status property with invalid value.
      *
-     * @param mixed $value the value to test
+     * @param mixed $value The value to test
      *
      * @dataProvider invalidTrackStatusProvider
      * @covers       Lunr\Spawn\ResqueJobDispatcher::set_track_status

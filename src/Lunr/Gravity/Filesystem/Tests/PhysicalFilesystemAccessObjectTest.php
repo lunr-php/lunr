@@ -70,9 +70,9 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
      */
     public function invalidNameProvider()
     {
-        $names   = array();
-        $names[] = array(NULL, 'SplFileObject::__construct(): Filename cannot be empty');
-        $names[] = array(new stdClass(), 'SplFileObject::__construct() expects parameter 1 to be a valid path, object given');
+        $names   = [];
+        $names[] = [NULL, 'SplFileObject::__construct(): Filename cannot be empty'];
+        $names[] = [new stdClass(), 'SplFileObject::__construct() expects parameter 1 to be a valid path, object given'];
 
         return $names;
     }
@@ -84,9 +84,9 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
      */
     public function booleanNameProvider()
     {
-        $names   = array();
-        $names[] = array(TRUE);
-        $names[] = array(FALSE);
+        $names   = [];
+        $names[] = [TRUE];
+        $names[] = [FALSE];
 
         return $names;
     }
@@ -98,11 +98,11 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
      */
     public function invalidModesProvider()
     {
-        $modes   = array();
-        $modes[] = array(NULL, ': failed to open stream: No such file or directory');
-        $modes[] = array(new stdClass(), ' expects parameter 2 to be string, object given');
-        $modes[] = array(TRUE, ': failed to open stream: No such file or directory');
-        $modes[] = array(FALSE, ': failed to open stream: No such file or directory');
+        $modes   = [];
+        $modes[] = [NULL, ': failed to open stream: No such file or directory'];
+        $modes[] = [new stdClass(), ' expects parameter 2 to be string, object given'];
+        $modes[] = [TRUE, ': failed to open stream: No such file or directory'];
+        $modes[] = [FALSE, ': failed to open stream: No such file or directory'];
 
         return $modes;
     }

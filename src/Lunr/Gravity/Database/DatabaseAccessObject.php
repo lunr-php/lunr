@@ -103,7 +103,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
 
         if ($query->number_of_rows() == 0)
         {
-            return array();
+            return [];
         }
 
         $result = [];
@@ -134,7 +134,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
 
         if ($query->number_of_rows() == 0)
         {
-            return array();
+            return [];
         }
         else
         {
@@ -160,7 +160,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
 
         if ($query->number_of_rows() == 0)
         {
-            return array();
+            return [];
         }
         else
         {
@@ -187,7 +187,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
 
         if ($query->number_of_rows() == 0)
         {
-            return array();
+            return [];
         }
         else
         {
@@ -233,9 +233,9 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     protected function result_retry($query, $retry_count = 5)
     {
 
-        for($i = 0; $i < $retry_count; $i++)
+        for ($i = 0; $i < $retry_count; $i++)
         {
-            if($query->has_deadlock() === FALSE)
+            if ($query->has_deadlock() === FALSE)
             {
                 return $query;
             }

@@ -389,6 +389,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
 
         $this->cleanup_request_test();
     }
+
 }
 
 ?>

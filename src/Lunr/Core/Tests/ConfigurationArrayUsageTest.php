@@ -110,7 +110,7 @@ class ConfigurationArrayUsageTest extends ConfigurationTest
 
         $config = $property->getValue($this->configuration);
 
-        foreach($this->configuration as $key => $value)
+        foreach ($this->configuration as $key => $value)
         {
             $this->assertEquals($config[$key], $value);
             ++$iteration;

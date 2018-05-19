@@ -49,7 +49,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
             return '';
         }
 
-        $components   = array();
+        $components   = [];
         $components[] = 'insert_mode';
         $components[] = 'into';
         $components[] = 'column_names';
@@ -78,7 +78,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
             return '';
         }
 
-        $components   = array();
+        $components   = [];
         $components[] = 'into';
         $components[] = 'column_names';
 

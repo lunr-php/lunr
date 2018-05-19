@@ -46,7 +46,7 @@ class Ini
     /**
      * Set a new value for an ini configuration option.
      *
-     * @param String $name  php.ini configuration option.
+     * @param string $name  The php.ini configuration option.
      * @param mixed  $value New value
      *
      * @return void
@@ -59,7 +59,7 @@ class Ini
     /**
      * Get the current value for an ini configuration option.
      *
-     * @param String $name php.ini configuration option.
+     * @param string $name The php.ini configuration option.
      *
      * @return mixed $value The current value of the configuration option.
      */
@@ -71,7 +71,7 @@ class Ini
     /**
      * Reset a ini configuration option.
      *
-     * @param String $name php.ini configuration option.
+     * @param string $name The php.ini configuration option.
      *
      * @return void
      */
@@ -94,7 +94,8 @@ class Ini
 
         $val = intval($val);
 
-        switch($last) {
+        switch ($last)
+        {
             case 'g':
                 $val *= 1024;
             case 'm':

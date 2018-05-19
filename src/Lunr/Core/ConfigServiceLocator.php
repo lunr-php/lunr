@@ -49,8 +49,8 @@ class ConfigServiceLocator
      */
     public function __construct($config)
     {
-        $this->registry = array();
-        $this->cache    = array();
+        $this->registry = [];
+        $this->cache    = [];
 
         $this->config = $config;
 
@@ -240,7 +240,7 @@ class ConfigServiceLocator
      */
     protected function get_parameters($params)
     {
-        $processed_params = array();
+        $processed_params = [];
 
         foreach ($params as $value)
         {

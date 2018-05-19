@@ -27,7 +27,7 @@ class MySQLDMLQueryBuilderUpdateTest extends MySQLDMLQueryBuilderTest
     /**
      * Test that standard update modes are handled correctly.
      *
-     * @param String $mode valid update modes.
+     * @param string $mode Valid update modes.
      *
      * @dataProvider updateModesStandardProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::update_mode

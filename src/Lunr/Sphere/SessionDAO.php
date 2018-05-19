@@ -60,7 +60,7 @@ class SessionDAO extends DatabaseAccessObject
         $query  = $this->db->query($builder->get_select_query());
         $result = $this->result_cell($query, 'sessionData');
 
-        if($result != FALSE)
+        if ($result != FALSE)
         {
             return base64_decode($result);
         }
@@ -73,9 +73,9 @@ class SessionDAO extends DatabaseAccessObject
     /**
      * Save session data into the database.
      *
-     * @param String  $id           Session ID
-     * @param String  $session_data Session data
-     * @param Integer $time         expiration timestamp
+     * @param string  $id           Session ID
+     * @param string  $session_data Session data
+     * @param integer $time         Expiration timestamp
      *
      * @return void
      */
@@ -97,11 +97,11 @@ class SessionDAO extends DatabaseAccessObject
         }
         else
         {
-            $data = array(
+            $data = [
                 $this->escaper->column('sessionID')   => $this->escaper->value($id),
                 $this->escaper->column('sessionData') => $this->escaper->value(base64_encode($session_data)),
                 $this->escaper->column('expires')     => $this->escaper->intvalue($time),
-            );
+            ];
 
             $builder_replace = $this->db->get_new_dml_query_builder_object(FALSE);
             $builder_replace->into($this->escaper->table('user_sessions'))

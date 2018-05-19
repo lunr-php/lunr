@@ -76,6 +76,7 @@ class FCMDispatcher extends GCMDispatcher
     {
         return new FCMBatchResponse($http_response, $logger, $endpoints);
     }
+
 }
 
 ?>

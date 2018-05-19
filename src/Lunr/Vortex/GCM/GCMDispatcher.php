@@ -188,18 +188,23 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
         {
             $tmp_payload['registration_ids'] = $endpoints;
         }
-        else if (isset($endpoints[0]))
+        elseif (isset($endpoints[0]))
         {
             $tmp_payload['to'] = $endpoints[0];
         }
 
         $tmp_payload['priority'] = $this->priority;
 
-        try {
+        try
+        {
             $http_response = $this->http->post(static::GOOGLE_SEND_URL, $headers, json_encode($tmp_payload));
-        } catch(Requests_Exception $e) {
-            $this->logger->warning('Dispatching ' . static::SERVICE_NAME
-                . ' notification(s) failed: {message}', [ 'message' => $e->getMessage() ]);
+        }
+        catch (Requests_Exception $e)
+        {
+            $this->logger->warning(
+                'Dispatching ' . static::SERVICE_NAME . ' notification(s) failed: {message}',
+                [ 'message' => $e->getMessage() ]
+            );
             $http_response = $this->get_new_response_object_for_failed_request();
         }
 
@@ -255,7 +260,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
      *
      * @see https://developers.google.com/cloud-messaging/concept-options#setting-the-priority-of-a-message
      *
-     * @param string $priority notification priority (normal|high)
+     * @param string $priority Notification priority (normal|high)
      *
      * @return GCMPayload $self Self Reference
      */

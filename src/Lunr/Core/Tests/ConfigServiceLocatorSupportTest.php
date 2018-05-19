@@ -36,7 +36,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $method = $this->get_accessible_reflection_method('load_recipe');
 
         $this->assertNotContains($filename, get_included_files());
-        $method->invokeArgs($this->class, array('nonexisting'));
+        $method->invokeArgs($this->class, ['nonexisting']);
         $this->assertNotContains($filename, get_included_files());
     }
 
@@ -55,7 +55,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $method = $this->get_accessible_reflection_method('load_recipe');
 
         $this->assertNotContains($filename, get_included_files());
-        $method->invokeArgs($this->class, array('valid'));
+        $method->invokeArgs($this->class, ['valid']);
         $this->assertContains($filename, get_included_files());
     }
 
@@ -70,7 +70,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $cache  = $this->get_accessible_reflection_property('cache');
 
         $this->assertArrayNotHasKey('valid', $cache->getValue($this->class));
-        $method->invokeArgs($this->class, array('valid'));
+        $method->invokeArgs($this->class, ['valid']);
         $this->assertArrayHasKey('valid', $cache->getValue($this->class));
     }
 
@@ -88,7 +88,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $cache  = $this->get_accessible_reflection_property('cache');
 
         $this->assertArrayNotHasKey($id, $cache->getValue($this->class));
-        $method->invokeArgs($this->class, array('valid'));
+        $method->invokeArgs($this->class, ['valid']);
         $this->assertArrayNotHasKey($id, $cache->getValue($this->class));
     }
 
@@ -252,7 +252,6 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $mock->expects($this->at(0))
              ->method('test')
              ->with($this->identicalTo($object1), 'param2');
-
 
         $method = $this->get_accessible_reflection_method('process_new_instance');
         $method->invokeArgs($this->class, [ 'id', $mock ]);

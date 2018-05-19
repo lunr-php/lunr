@@ -40,10 +40,12 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
 
         $method = $this->get_accessible_reflection_method('parse_super_global');
         $method->invokeArgs($this->class, [ & $_VAR, $reset]);
-        if($reset)
+        if ($reset)
         {
             $this->assertArrayEmpty($_VAR);
-        }else{
+        }
+        else
+        {
             $this->assertEquals($var, $_VAR);
         }
     }

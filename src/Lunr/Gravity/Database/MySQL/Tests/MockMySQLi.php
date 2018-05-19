@@ -24,7 +24,7 @@ class MockMySQLi
      */
     public function __construct()
     {
-
+        // no-op
     }
 
     /**
@@ -32,7 +32,7 @@ class MockMySQLi
      */
     public function __destruct()
     {
-
+        // no-op
     }
 
     /**

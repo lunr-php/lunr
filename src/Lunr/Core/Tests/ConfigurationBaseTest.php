@@ -29,7 +29,7 @@ class ConfigurationBaseTest extends ConfigurationTest
      */
     public function setUp()
     {
-        $this->setUpArray(array());
+        $this->setUpArray([]);
     }
 
     /**
@@ -94,7 +94,7 @@ class ConfigurationBaseTest extends ConfigurationTest
      */
     public function testToArrayIsEmpty()
     {
-        $this->assertEquals(array(), $this->configuration->toArray());
+        $this->assertEquals([], $this->configuration->toArray());
     }
 
     /**

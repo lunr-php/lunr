@@ -100,7 +100,7 @@ class Tweet
      *
      * @param array $data Array with tweet data.
      *
-     * @return void
+     * @return Tweet Self reference
      */
     public function set_data($data)
     {

@@ -24,8 +24,8 @@ class RequestMagicGetTest extends RequestTest
     /**
      * Check that request values are returned correctly by the magic get method.
      *
-     * @param String $key   key for a request value
-     * @param mixed  $value value of a request value
+     * @param string $key   Key for a request value
+     * @param mixed  $value Value of a request value
      *
      * @dataProvider requestValueProvider
      * @covers       Lunr\Corona\Request::__get
@@ -38,7 +38,7 @@ class RequestMagicGetTest extends RequestTest
     /**
      * Check that the magic get function correctly returns mocked values if present.
      *
-     * @param String $key key for a request value
+     * @param string $key Key for a request value
      *
      * @dataProvider requestValueProvider
      * @covers       Lunr\Corona\Request::__get
@@ -63,7 +63,7 @@ class RequestMagicGetTest extends RequestTest
     /**
      * Test that __get() returns NULL for unhandled keys.
      *
-     * @param String $key key for __get()
+     * @param string $key Key for __get()
      *
      * @dataProvider unhandledMagicGetKeysProvider
      * @covers       Lunr\Corona\Request::__get

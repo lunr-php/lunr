@@ -45,7 +45,7 @@ class PHPL10nProvider extends L10nProvider
         parent::__construct($language, $domain, $logger);
 
         $this->initialized = FALSE;
-        $this->lang_array  = array();
+        $this->lang_array  = [];
     }
 
     /**
@@ -74,7 +74,7 @@ class PHPL10nProvider extends L10nProvider
 
         if ($language != $this->default_language)
         {
-            $lang     = array();
+            $lang     = [];
             $langpath = $this->locales_location . '/' . $language . '/';
             include $langpath . $this->domain . '.php';
             $this->lang_array =& $lang;
@@ -112,7 +112,7 @@ class PHPL10nProvider extends L10nProvider
             //Check if the key have context asociated in the array
             if (is_array($this->lang_array[$identifier]))
             {
-                foreach($this->lang_array[$identifier] as $value)
+                foreach ($this->lang_array[$identifier] as $value)
                 {
                     if (is_array($value) && isset($value[0]))
                     {

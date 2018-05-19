@@ -50,7 +50,7 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
     {
         $method = $this->get_accessible_reflection_method('init');
 
-        $method->invokeArgs($this->class, array(self::LANGUAGE));
+        $method->invokeArgs($this->class, [self::LANGUAGE]);
 
         $this->assertTrue($this->get_reflection_property_value('initialized'));
     }
@@ -65,7 +65,7 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
     {
         $method = $this->get_accessible_reflection_method('init');
 
-        $method->invokeArgs($this->class, array(self::LANGUAGE));
+        $method->invokeArgs($this->class, [self::LANGUAGE]);
 
         $property = $this->get_reflection_property_value('lang_array');
 
@@ -83,7 +83,7 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
     {
         $method = $this->get_accessible_reflection_method('init');
 
-        $method->invokeArgs($this->class, array('en_US'));
+        $method->invokeArgs($this->class, ['en_US']);
 
         $this->assertArrayEmpty($this->get_reflection_property_value('lang_array'));
     }
@@ -100,13 +100,13 @@ class PHPL10nProviderBaseTest extends PHPL10nProviderTest
 
         $method = $this->get_accessible_reflection_method('init');
 
-        $method->invokeArgs($this->class, array(self::LANGUAGE));
+        $method->invokeArgs($this->class, [self::LANGUAGE]);
 
         $value = $property->getValue($this->class);
         $this->assertInternalType('array', $value);
         $this->assertNotEmpty($value);
 
-        $method->invokeArgs($this->class, array('en_US'));
+        $method->invokeArgs($this->class, ['en_US']);
 
         $value = $property->getValue($this->class);
         $this->assertInternalType('array', $value);

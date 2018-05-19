@@ -44,7 +44,7 @@ abstract class GetoptCliParserTest extends LunrBaseTest
      */
     public function setUp()
     {
-        $this->class      = new GetoptCliParser('ab:c::', array('first', 'second:', 'third::'));
+        $this->class      = new GetoptCliParser('ab:c::', ['first', 'second:', 'third::']);
         $this->reflection = new ReflectionClass('Lunr\Shadow\GetoptCliParser');
     }
 
@@ -64,12 +64,12 @@ abstract class GetoptCliParserTest extends LunrBaseTest
      */
     public function valueProvider()
     {
-        $values   = array();
-        $values[] = array('string');
-        $values[] = array(1);
-        $values[] = array(1.1);
-        $values[] = array(TRUE);
-        $values[] = array(NULL);
+        $values   = [];
+        $values[] = ['string'];
+        $values[] = [1];
+        $values[] = [1.1];
+        $values[] = [TRUE];
+        $values[] = [NULL];
 
         return $values;
     }

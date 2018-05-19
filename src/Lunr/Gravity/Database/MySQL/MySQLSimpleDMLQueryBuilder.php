@@ -143,7 +143,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define USING part of the SQL statement.
      *
-     * @param String $column_list columns to use.
+     * @param string $column_list Columns to use.
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -465,8 +465,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define a UNION or UNION ALL clause of the SQL statement.
      *
-     * @param String  $sql_query sql query reference
-     * @param Boolean $all       True for ALL or False for empty (default).
+     * @param string  $sql_query SQL query reference
+     * @param boolean $all       True for ALL or False for empty (default).
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */

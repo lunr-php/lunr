@@ -26,7 +26,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::dispatch
      */
-    function testDispatchWithInstantiatedController()
+    public function testDispatchWithInstantiatedController()
     {
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')->getMock();
 
@@ -38,7 +38,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
         $this->request->expects($this->at(1))
                       ->method('__get')
                       ->with('params')
-                      ->will($this->returnValue(array(1, 2)));
+                      ->will($this->returnValue([1, 2]));
 
         $controller->expects($this->once())
                    ->method('foo')
@@ -52,7 +52,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::dispatch
      */
-    function testDispatchWithControllerAsString()
+    public function testDispatchWithControllerAsString()
     {
         $controller = 'Lunr\Corona\Tests\MockController';
 
@@ -64,7 +64,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
         $this->request->expects($this->at(1))
                       ->method('__get')
                       ->with('params')
-                      ->will($this->returnValue(array(1, 2)));
+                      ->will($this->returnValue([1, 2]));
 
         $this->class->dispatch($controller);
     }
@@ -77,7 +77,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
      * @dataProvider invalidControllerNameProvider
      * @covers       Lunr\Corona\FrontController::dispatch
      */
-    function testDispatchWithInvalidControllerValues($value)
+    public function testDispatchWithInvalidControllerValues($value)
     {
         if (class_exists('\PHPUnit\Framework\Error\Error'))
         {
@@ -98,7 +98,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
         $this->request->expects($this->at(1))
                       ->method('__get')
                       ->with('params')
-                      ->will($this->returnValue(array()));
+                      ->will($this->returnValue([]));
 
         $this->class->dispatch($value);
     }

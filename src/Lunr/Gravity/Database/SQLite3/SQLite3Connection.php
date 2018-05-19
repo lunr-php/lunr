@@ -81,7 +81,7 @@ class SQLite3Connection extends DatabaseConnection
      */
     public function connect()
     {
-        if($this->connected === TRUE)
+        if ($this->connected === TRUE)
         {
             return;
         }
@@ -96,7 +96,7 @@ class SQLite3Connection extends DatabaseConnection
 
         $this->sqlite3->open($this->db, $flag | SQLITE3_OPEN_CREATE, '');
 
-        if($this->sqlite3->lastErrorCode() === 0)
+        if ($this->sqlite3->lastErrorCode() === 0)
         {
             $this->connected = TRUE;
         }
@@ -109,7 +109,7 @@ class SQLite3Connection extends DatabaseConnection
      */
     public function disconnect()
     {
-        if($this->connected !== TRUE)
+        if ($this->connected !== TRUE)
         {
             return;
         }

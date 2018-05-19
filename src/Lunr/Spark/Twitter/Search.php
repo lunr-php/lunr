@@ -71,18 +71,18 @@ class Search extends Api
      *
      * @param array $data Array of tweet results
      *
-     * @return array An array of Tweets
+     * @return array|null An array of Tweets
      */
     protected function classify($data)
     {
-        if(!isset($data) || empty($data))
+        if (!isset($data) || empty($data))
         {
-            return;
+            return NULL;
         }
 
         $tweets = [];
 
-        foreach($data as $tweet)
+        foreach ($data as $tweet)
         {
             $tweet_obj = new Tweet();
 

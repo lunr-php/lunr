@@ -97,7 +97,7 @@ class CliRequestParser implements RequestParserInterface
         $request['device_useragent'] = NULL;
         $request['useragent']        = NULL;
 
-        foreach([ 'action', 'x' ] as $key)
+        foreach ([ 'action', 'x' ] as $key)
         {
             if (array_key_exists($key, $this->ast))
             {
@@ -115,7 +115,7 @@ class CliRequestParser implements RequestParserInterface
             $request['useragent'] = $this->ast['useragent'][0];
         }
 
-        foreach([ 'controller', 'method', 'c', 'm' ] as $key)
+        foreach ([ 'controller', 'method', 'c', 'm' ] as $key)
         {
             if (array_key_exists($key, $this->ast))
             {
@@ -248,7 +248,7 @@ class CliRequestParser implements RequestParserInterface
     {
         $cookie = $this->parse_super_global('cookie');
 
-        if(isset($cookie['PHPSESSID']))
+        if (isset($cookie['PHPSESSID']))
         {
             $_COOKIE['PHPSESSID'] = $cookie['PHPSESSID'];
             unset($cookie['PHPSESSID']);

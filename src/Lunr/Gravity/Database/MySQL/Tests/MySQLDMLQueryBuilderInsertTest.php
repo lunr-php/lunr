@@ -53,7 +53,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
     /**
      * Test that standard insert modes are handled correctly.
      *
-     * @param String $mode valid insert mode.
+     * @param string $mode Valid insert mode.
      *
      * @dataProvider insertModesStandardProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::insert_mode

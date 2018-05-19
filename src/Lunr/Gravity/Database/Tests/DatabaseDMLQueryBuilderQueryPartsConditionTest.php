@@ -87,7 +87,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
 
         $this->set_reflection_property_value('join', 'JOIN table ON (');
 
-        $method->invokeArgs($this->class, array( 'a', 'b', '=', 'ON' ));
+        $method->invokeArgs($this->class, [ 'a', 'b', '=', 'ON' ]);
 
         $string = 'JOIN table ON (a = b';
 
@@ -175,7 +175,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
     {
         $method_cond = $this->get_accessible_reflection_method('sql_condition');
 
-        $arguments = array( 'a', 'b', '=', $keyword );
+        $arguments = [ 'a', 'b', '=', $keyword ];
 
         $this->set_reflection_property_value($attribute, '(');
 

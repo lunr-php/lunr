@@ -53,7 +53,7 @@ class ResqueJobDispatcher implements JobDispatcherInterface
     {
         $this->resque       = $resque;
         $this->token        = NULL;
-        $this->queue        = array('default_queue');
+        $this->queue        = ['default_queue'];
         $this->track_status = FALSE;
     }
 
@@ -81,7 +81,7 @@ class ResqueJobDispatcher implements JobDispatcherInterface
      */
     public function dispatch($job, $args = NULL)
     {
-        foreach($this->queue as $queue)
+        foreach ($this->queue as $queue)
         {
             $this->token = $this->resque->enqueue($queue, $job, $args, $this->track_status);
         }
@@ -107,18 +107,18 @@ class ResqueJobDispatcher implements JobDispatcherInterface
      */
     public function set_queue($queue)
     {
-        $error = array();
+        $error = [];
 
-        if(is_string($queue))
+        if (is_string($queue))
         {
-            $this->queue = array($queue);
+            $this->queue = [$queue];
         }
-        elseif(is_array($queue))
+        elseif (is_array($queue))
         {
-            $this->queue = array();
-            foreach($queue as $value)
+            $this->queue = [];
+            foreach ($queue as $value)
             {
-                if(is_string($value))
+                if (is_string($value))
                 {
                     $this->queue[] = $value;
                 }
@@ -137,7 +137,7 @@ class ResqueJobDispatcher implements JobDispatcherInterface
      */
     public function set_track_status($track_status)
     {
-        if(is_bool($track_status))
+        if (is_bool($track_status))
         {
             $this->track_status = $track_status;
         }

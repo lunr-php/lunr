@@ -53,16 +53,16 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
         {
             $_SERVER['HTTP_X_FORWARDED_PROTO'] = 'https';
         }
-        else if ($protocol == 'PROXIED_HTTP')
+        elseif ($protocol == 'PROXIED_HTTP')
         {
             $_SERVER['HTTP_X_FORWARDED_PROTO'] = 'http';
         }
-        else if ($protocol == 'MIXED_HTTPS')
+        elseif ($protocol == 'MIXED_HTTPS')
         {
             $_SERVER['HTTP_X_FORWARDED_PROTO'] = 'https';
             $_SERVER['HTTPS']                  = 'off';
         }
-        else if ($protocol == 'MIXED_HTTP')
+        elseif ($protocol == 'MIXED_HTTP')
         {
             $_SERVER['HTTP_X_FORWARDED_PROTO'] = 'http';
             $_SERVER['HTTPS']                  = 'on';

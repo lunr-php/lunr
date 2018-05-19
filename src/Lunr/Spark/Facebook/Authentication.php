@@ -90,7 +90,7 @@ class Authentication extends Api
     /**
      * Set authentication verification code.
      *
-     * @param String $code verification code
+     * @param string $code Verification code
      *
      * @return void
      */

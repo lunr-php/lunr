@@ -71,12 +71,12 @@ abstract class FrontControllerTest extends LunrBaseTest
      */
     public function invalidControllerNameProvider()
     {
-        $names   = array();
-        $names[] = array(NULL);
-        $names[] = array(FALSE);
-        $names[] = array(1);
-        $names[] = array(1.1);
-        $names[] = array('String');
+        $names   = [];
+        $names[] = [NULL];
+        $names[] = [FALSE];
+        $names[] = [1];
+        $names[] = [1.1];
+        $names[] = ['String'];
 
         return $names;
     }

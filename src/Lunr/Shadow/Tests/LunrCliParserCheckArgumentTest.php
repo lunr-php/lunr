@@ -31,7 +31,7 @@ class LunrCliParserCheckArgumentTest extends LunrCliParserTest
     {
         $method = $this->get_accessible_reflection_method('check_argument');
 
-        $value = $method->invokeArgs($this->class, array('a', 1, 0, 'a'));
+        $value = $method->invokeArgs($this->class, ['a', 1, 0, 'a']);
 
         $this->assertFalse($value);
     }
@@ -43,7 +43,7 @@ class LunrCliParserCheckArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentReturnsTrueForSuperfluousArgument()
     {
-        $this->set_reflection_property_value('args', array('test.php', '-a', 'arg'));
+        $this->set_reflection_property_value('args', ['test.php', '-a', 'arg']);
 
         $method = $this->get_accessible_reflection_method('check_argument');
 
@@ -51,7 +51,7 @@ class LunrCliParserCheckArgumentTest extends LunrCliParserTest
                       ->method('cli_println')
                       ->with($this->equalTo('Superfluous argument: arg'));
 
-        $value = $method->invokeArgs($this->class, array('a', 1, 0, 'a'));
+        $value = $method->invokeArgs($this->class, ['a', 1, 0, 'a']);
 
         $this->assertTrue($value);
     }

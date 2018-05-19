@@ -194,7 +194,7 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetAllOptionsReturnsArray($keys)
     {
-        $values = array();
+        $values = [];
         for ($i = 0; $i < count($keys); $i++)
         {
             $values[] = 'value';
@@ -240,7 +240,7 @@ class RequestGetDataTest extends RequestTest
     /**
      * Test that get_accept_format() returns content type when called with a valid set of supported formats.
      *
-     * @param String $value the expected value
+     * @param string $value The expected value
      *
      * @dataProvider contentTypeProvider
      * @covers       Lunr\Corona\Request::get_accept_format
@@ -268,7 +268,7 @@ class RequestGetDataTest extends RequestTest
     /**
      * Test that get_accept_language() returns content type when called with a valid set of supported languages.
      *
-     * @param String $value the expected value
+     * @param string $value The expected value
      *
      * @dataProvider acceptLanguageProvider
      * @covers       Lunr\Corona\Request::get_accept_language
@@ -296,7 +296,7 @@ class RequestGetDataTest extends RequestTest
     /**
      * Test that get_accept_charset() returns content type when called with a valid set of supported charsets.
      *
-     * @param String $value the expected value
+     * @param string $value The expected value
      *
      * @dataProvider acceptCharsetProvider
      * @covers       Lunr\Corona\Request::get_accept_charset

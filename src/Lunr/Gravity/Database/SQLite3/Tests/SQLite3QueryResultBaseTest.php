@@ -94,7 +94,7 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
         $this->set_reflection_property_value('affected_rows', 12);
         $this->assertSame(12, $this->class->affected_rows());
     }
- 
+
     /**
      * Test that error_message() returns a string.
      *

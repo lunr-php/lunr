@@ -142,7 +142,7 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
                 }
             }
         }
-        catch(ApnsPHP_Message_Exception $e)
+        catch (ApnsPHP_Message_Exception $e)
         {
             $this->logger->warning($e->getMessage());
         }
@@ -156,7 +156,7 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
             {
                 $this->apns_message->addRecipient($endpoint);
             }
-            catch(ApnsPHP_Message_Exception $e)
+            catch (ApnsPHP_Message_Exception $e)
             {
                 $invalid_endpoints[] = $endpoint;
 

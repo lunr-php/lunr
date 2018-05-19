@@ -24,7 +24,7 @@ class CallbackMock
      */
     public function __construct()
     {
-
+        // no-op
     }
 
     /**
@@ -32,7 +32,7 @@ class CallbackMock
      */
     public function __destruct()
     {
-
+        // no-op
     }
 
     /**
@@ -42,7 +42,7 @@ class CallbackMock
      */
     public function test()
     {
-
+        // no-op
     }
 
 }

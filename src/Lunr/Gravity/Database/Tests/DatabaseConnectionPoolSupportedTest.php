@@ -48,7 +48,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
         $property = $dbr->getProperty('readonly');
         $property->setAccessible(TRUE);
 
-        $value = $method->invokeArgs($this->pool, array(TRUE, TRUE));
+        $value = $method->invokeArgs($this->pool, [TRUE, TRUE]);
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLConnection', $value);
         $this->assertTrue($property->getValue($value));
@@ -69,7 +69,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
         $property = $dbr->getProperty('readonly');
         $property->setAccessible(TRUE);
 
-        $value = $method->invokeArgs($this->pool, array(TRUE, FALSE));
+        $value = $method->invokeArgs($this->pool, [TRUE, FALSE]);
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLConnection', $value);
         $this->assertFalse($property->getValue($value));
@@ -90,7 +90,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
 
         $this->assertEmpty($property->getValue($this->pool));
 
-        $value = $method->invokeArgs($this->pool, array(TRUE, TRUE));
+        $value = $method->invokeArgs($this->pool, [TRUE, TRUE]);
 
         $stored = $property->getValue($this->pool);
 
@@ -113,7 +113,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
 
         $this->assertEmpty($property->getValue($this->pool));
 
-        $value = $method->invokeArgs($this->pool, array(TRUE, FALSE));
+        $value = $method->invokeArgs($this->pool, [TRUE, FALSE]);
 
         $stored = $property->getValue($this->pool);
 
@@ -136,7 +136,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
 
         $this->assertEmpty($property->getValue($this->pool));
 
-        $value = $method->invokeArgs($this->pool, array(FALSE, TRUE));
+        $value = $method->invokeArgs($this->pool, [FALSE, TRUE]);
 
         $stored = $property->getValue($this->pool);
 
@@ -159,7 +159,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
 
         $this->assertEmpty($property->getValue($this->pool));
 
-        $value = $method->invokeArgs($this->pool, array(FALSE, FALSE));
+        $value = $method->invokeArgs($this->pool, [FALSE, FALSE]);
 
         $stored = $property->getValue($this->pool);
 
@@ -182,13 +182,13 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
 
         $this->assertEmpty($property->getValue($this->pool));
 
-        $method->invokeArgs($this->pool, array(FALSE, TRUE));
+        $method->invokeArgs($this->pool, [FALSE, TRUE]);
 
         $stored = $property->getValue($this->pool);
 
         $this->assertCount(1, $stored);
 
-        $value = $method->invokeArgs($this->pool, array(FALSE, TRUE));
+        $value = $method->invokeArgs($this->pool, [FALSE, TRUE]);
 
         $stored = $property->getValue($this->pool);
 
@@ -211,13 +211,13 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
 
         $this->assertEmpty($property->getValue($this->pool));
 
-        $method->invokeArgs($this->pool, array(FALSE, FALSE));
+        $method->invokeArgs($this->pool, [FALSE, FALSE]);
 
         $stored = $property->getValue($this->pool);
 
         $this->assertCount(1, $stored);
 
-        $value = $method->invokeArgs($this->pool, array(FALSE, FALSE));
+        $value = $method->invokeArgs($this->pool, [FALSE, FALSE]);
 
         $stored = $property->getValue($this->pool);
 

@@ -37,7 +37,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     public function testEscapeLocationReference($col, $escaped)
     {
         $method = $this->get_accessible_reflection_method('escape_location_reference');
-        $this->assertEquals($escaped, $method->invokeArgs($this->class, array($col)));
+        $this->assertEquals($escaped, $method->invokeArgs($this->class, [$col]));
     }
 
     /**
@@ -48,7 +48,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     public function testCollateWithValueOnly()
     {
         $method = $this->get_accessible_reflection_method('collate');
-        $this->assertEquals('value', $method->invokeArgs($this->class, array('value', '')));
+        $this->assertEquals('value', $method->invokeArgs($this->class, ['value', '']));
     }
 
     /**
@@ -62,7 +62,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
 
         $string = 'value COLLATE utf8_general_ci';
 
-        $this->assertEquals($string, $method->invokeArgs($this->class, array('value', 'utf8_general_ci')));
+        $this->assertEquals($string, $method->invokeArgs($this->class, ['value', 'utf8_general_ci']));
     }
 
     /**
@@ -324,7 +324,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      */
     public function testEscapeListValueSimpleArray()
     {
-        $values = array('value1', 'value2');
+        $values = ['value1', 'value2'];
         $this->assertEquals('(value1,value2)', $this->class->list_value($values));
     }
 
@@ -335,7 +335,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      */
     public function testEscapeListValueSimpleArrayOne()
     {
-        $values = array('value1');
+        $values = ['value1'];
         $this->assertEquals('(value1)', $this->class->list_value($values));
     }
 

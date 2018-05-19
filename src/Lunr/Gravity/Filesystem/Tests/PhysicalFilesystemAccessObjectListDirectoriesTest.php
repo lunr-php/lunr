@@ -56,10 +56,10 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array(
+                        [
                             'message'   => $error,
                             'directory' => $directory,
-                        )
+                        ]
                      );
 
         $value = $this->class->get_list_of_directories($directory);
@@ -81,10 +81,10 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array(
+                        [
                             'message'   => $error,
                             'directory' => $directory,
-                        )
+                        ]
                      );
 
         $value = $this->class->get_list_of_directories($directory);
@@ -104,10 +104,10 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array(
+                        [
                             'message'   => "DirectoryIterator::__construct($directory): failed to open dir: Not a directory",
                             'directory' => $directory,
-                        )
+                        ]
                      );
 
         $value = $this->class->get_list_of_directories($directory);
@@ -120,11 +120,11 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_directories
      */
-    Public function testGetListOfDirectoriesInNullDirectory()
+    public function testGetListOfDirectoriesInNullDirectory()
     {
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with('{message}', array('message' => 'Directory name must not be empty.'));
+                     ->with('{message}', ['message' => 'Directory name must not be empty.']);
 
         $value = $this->class->get_list_of_directories(NULL);
 
@@ -136,7 +136,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_directories
      */
-    Public function testGetListOfDirectoriesInObjectDirectory()
+    public function testGetListOfDirectoriesInObjectDirectory()
     {
         $directory = new \stdClass();
 
@@ -145,10 +145,10 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
-                        array(
+                        [
                             'message'   => $error,
                             'directory' => $directory,
-                        )
+                        ]
                      );
 
         $value = $this->class->get_list_of_directories($directory);
@@ -164,7 +164,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_directories
      */
-    Public function testGetListOfDirectoriesInBooleanDirectory($directory)
+    public function testGetListOfDirectoriesInBooleanDirectory($directory)
     {
         $this->logger->expects($this->never())
                      ->method('error');
