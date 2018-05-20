@@ -83,8 +83,8 @@ class SQLite3DMLQueryBuilderInsertTest extends SQLite3DMLQueryBuilderTest
     /**
      * Test insert modes get uppercased properly.
      *
-     * @param String $value    Insert mode to set
-     * @param String $expected Expected built query part
+     * @param string $value    Insert mode to set
+     * @param string $expected Expected built query part
      *
      * @dataProvider expectedModesProvider
      * @covers       Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::insert_mode

@@ -133,7 +133,7 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the endpoint(s) for the push.
      *
-     * @param Array|String $endpoints The endpoint(s) for the push
+     * @param array|string $endpoints The endpoint(s) for the push
      *
      * @return MPNSDispatcher $self Self reference
      */
@@ -154,7 +154,7 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the the payload to push.
      *
-     * @param String $payload The reference to the payload of the push
+     * @param string $payload The reference to the payload of the push
      *
      * @return MPNSDispatcher $self Self reference
      */
@@ -168,7 +168,7 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the priority for the push notification.
      *
-     * @param Integer $priority Priority for the push notification.
+     * @param integer $priority Priority for the push notification.
      *
      * @return MPNSDispatcher $self Self reference
      */
@@ -185,7 +185,7 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the type for the push notification.
      *
-     * @param String $type Type for the push notification.
+     * @param string $type Type for the push notification.
      *
      * @return MPNSDispatcher $self Self reference
      */

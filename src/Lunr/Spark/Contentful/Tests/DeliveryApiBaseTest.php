@@ -44,7 +44,7 @@ class DeliveryApiBaseTest extends DeliveryApiTest
     /**
      * Test that __get() gets existing credential values from the CAS.
      *
-     * @param String $key Credential key
+     * @param string $key Credential key
      *
      * @dataProvider generalKeyProvider
      * @covers       Lunr\Spark\Contentful\DeliveryApi::__get
@@ -75,7 +75,7 @@ class DeliveryApiBaseTest extends DeliveryApiTest
     /**
      * Test that __set() sets general credential values in the CAS.
      *
-     * @param String $key Credential key
+     * @param string $key Credential key
      *
      * @dataProvider generalKeyProvider
      * @covers       Lunr\Spark\Contentful\DeliveryApi::__set

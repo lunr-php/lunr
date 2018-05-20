@@ -144,7 +144,7 @@ class Request
      *
      * This gives access to the request keys.
      *
-     * @param String $name Attribute name
+     * @param string $name Attribute name
      *
      * @return mixed $return Value of the chosen attribute
      */
@@ -171,7 +171,7 @@ class Request
      * Override request values detected from the request parser.
      * Replace all previous mock values.
      *
-     * @param Array $values Array of key value pairs holding mocked request values
+     * @param array $values Array of key value pairs holding mocked request values
      *
      * @return void
      */
@@ -189,7 +189,7 @@ class Request
      * Override request values detected from the request parser.
      * Keep previous mock values and replace individual keys.
      *
-     * @param Array $values Array of key value pairs holding mocked request values
+     * @param array $values Array of key value pairs holding mocked request values
      *
      * @return void
      */
@@ -236,9 +236,9 @@ class Request
     /**
      * Negotiate & retrieve the client's prefered content type.
      *
-     * @param Array $supported Array containing the supported content types
+     * @param array $supported Array containing the supported content types
      *
-     * @return Mixed $return The best match of the prefered content types or NULL
+     * @return mixed $return The best match of the prefered content types or NULL
      *                       if there are no supported types or the header is not set
      */
     public function get_accept_format($supported = [])
@@ -249,9 +249,9 @@ class Request
     /**
      * Negotiate & retrieve the clients prefered language.
      *
-     * @param Array $supported Array containing the supported languages
+     * @param array $supported Array containing the supported languages
      *
-     * @return Mixed $return The best match of the prefered languages or NULL if
+     * @return mixed $return The best match of the prefered languages or NULL if
      *                       there are no supported languages or the header is not set
      */
     public function get_accept_language($supported = [])
@@ -262,9 +262,9 @@ class Request
     /**
      * Negotiate & retrieve the clients prefered charset.
      *
-     * @param Array $supported Array containing the supported charsets
+     * @param array $supported Array containing the supported charsets
      *
-     * @return Mixed $return The best match of the prefered charsets or NULL if
+     * @return mixed $return The best match of the prefered charsets or NULL if
      *                       there are no supported charsets or the header is not set
      */
     public function get_accept_charset($supported = [])
@@ -378,7 +378,7 @@ class Request
     /**
      * Retrieve raw request data.
      *
-     * @return String $return The raw request data as string
+     * @return string $return The raw request data as string
      */
     public function get_raw_data()
     {

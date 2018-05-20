@@ -159,7 +159,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
     /**
      * Test listing directories in an boolean directory.
      *
-     * @param Boolean $directory Boolean directory value
+     * @param boolean $directory Boolean directory value
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_directories

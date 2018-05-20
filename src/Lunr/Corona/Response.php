@@ -79,7 +79,7 @@ class Response
      *
      * This gives access to the error information and the return code.
      *
-     * @param String $name Attribute name
+     * @param string $name Attribute name
      *
      * @return mixed $return Value of the chosen attribute
      */
@@ -97,8 +97,8 @@ class Response
     /**
      * Set values for return code and error information.
      *
-     * @param String $name  Attribute name
-     * @param String $value Attribute value to set
+     * @param string $name  Attribute name
+     * @param string $value Attribute value to set
      *
      * @return void
      */
@@ -130,8 +130,8 @@ class Response
     /**
      * Set an error message for the given call identifier.
      *
-     * @param String $identifier Call identifier
-     * @param String $value      Error message
+     * @param string $identifier Call identifier
+     * @param string $value      Error message
      *
      * @return void
      */
@@ -143,7 +143,7 @@ class Response
     /**
      * Set additional error information for the given call identifier.
      *
-     * @param String $identifier Call identifier
+     * @param string $identifier Call identifier
      * @param mixed  $value      Additional error information
      *
      * @return void
@@ -156,8 +156,8 @@ class Response
     /**
      * Set a return code for the given call identifier.
      *
-     * @param String  $identifier Call identifier
-     * @param Integer $value      Return code
+     * @param string  $identifier Call identifier
+     * @param integer $value      Return code
      *
      * @return void
      */
@@ -232,7 +232,7 @@ class Response
     /**
      * Get the set of return code identifiers.
      *
-     * @param Boolean $max Only return the identifier of the highest error code (FALSE by default)
+     * @param boolean $max Only return the identifier of the highest error code (FALSE by default)
      *
      * @return string|array $return Requested set of identifiers.
      */

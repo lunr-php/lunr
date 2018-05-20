@@ -50,9 +50,9 @@ class WNSResponseSetTest extends WNSResponseTest
     /**
      * Test setting the status for a failed request.
      *
-     * @param Integer $code     Status code
-     * @param String  $nstatus  Notification status string
-     * @param Integer $expected Expected push notification status
+     * @param integer $code     Status code
+     * @param string  $nstatus  Notification status string
+     * @param integer $expected Expected push notification status
      *
      * @dataProvider failedRequestProvider
      * @covers       Lunr\Vortex\WNS\WNSResponse::set_status

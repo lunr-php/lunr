@@ -43,7 +43,7 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define the mode of the DELETE clause.
      *
-     * @param String $mode The delete mode you want to use
+     * @param string $mode The delete mode you want to use
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -67,7 +67,7 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define the mode of the INSERT clause.
      *
-     * @param String $mode The insert mode you want to use
+     * @param string $mode The insert mode you want to use
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -94,7 +94,7 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define the mode of the REPLACE clause.
      *
-     * @param String $mode The replace mode you want to use
+     * @param string $mode The replace mode you want to use
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -106,7 +106,7 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define the mode of the SELECT clause.
      *
-     * @param String $mode The select mode you want to use
+     * @param string $mode The select mode you want to use
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -142,7 +142,7 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define the mode of the UPDATE clause.
      *
-     * @param String $mode The update mode you want to use
+     * @param string $mode The update mode you want to use
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -165,9 +165,9 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause with REGEXP comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -181,9 +181,9 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define WHERE clause with the REGEXP condition of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -197,8 +197,8 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define GROUP BY clause of the SQL statement.
      *
-     * @param String  $expr  Expression to group by
-     * @param Boolean $order Order ASCending/TRUE or DESCending/FALSE, default no order/NULL
+     * @param string  $expr  Expression to group by
+     * @param boolean $order Order ASCending/TRUE or DESCending/FALSE, default no order/NULL
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -218,9 +218,9 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define HAVING clause with REGEXP comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -234,7 +234,7 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define the lock mode for a transaction.
      *
-     * @param String $mode The lock mode you want to use
+     * @param string $mode The lock mode you want to use
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */

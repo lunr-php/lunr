@@ -132,7 +132,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that get_file_content() with invalid file names.
      *
-     * @param Boolean $file Boolean filename
+     * @param boolean $file Boolean filename
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
@@ -266,7 +266,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() with boolean file names.
      *
-     * @param Boolean $file Boolean filename
+     * @param boolean $file Boolean filename
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
@@ -349,7 +349,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * Test getting a SplFileObject for an accessible file with invalid mode.
      *
      * @param mixed  $mode    Invalid mode
-     * @param String $message Expected error message
+     * @param string $message Expected error message
      *
      * @dataProvider invalidModesProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
@@ -435,7 +435,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * Test getting a SplFileObject for invalid file names.
      *
      * @param mixed  $file    Invalid filename
-     * @param String $message Expected error message
+     * @param string $message Expected error message
      *
      * @dataProvider invalidNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
@@ -454,7 +454,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test getting a SplFileObject for boolean file names.
      *
-     * @param Boolean $file Boolean filename
+     * @param boolean $file Boolean filename
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object

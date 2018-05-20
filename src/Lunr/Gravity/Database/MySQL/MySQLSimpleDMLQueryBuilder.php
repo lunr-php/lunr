@@ -52,7 +52,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define INTO clause of the SQL statement.
      *
-     * @param String $table Table reference
+     * @param string $table Table reference
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -65,7 +65,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define Column names of the affected by Insert or Update SQL statement.
      *
-     * @param Array $keys Array containing escaped field names to be set
+     * @param array $keys Array containing escaped field names to be set
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -78,7 +78,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define a UPDATE clause.
      *
-     * @param String $table_references The tables to update
+     * @param string $table_references The tables to update
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -97,7 +97,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define a SELECT clause.
      *
-     * @param String $select The column(s) to select
+     * @param string $select The column(s) to select
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -116,7 +116,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define FROM clause of the SQL statement.
      *
-     * @param String $table_reference Table reference
+     * @param string $table_reference Table reference
      * @param array  $index_hints     Array of Index Hints
      *
      * @return MySQLDMLQueryBuilder $self Self reference
@@ -129,8 +129,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define JOIN clause of the SQL statement.
      *
-     * @param String $table_reference Table reference
-     * @param String $type            Type of JOIN operation to perform.
+     * @param string $table_reference Table reference
+     * @param string $type            Type of JOIN operation to perform.
      * @param array  $index_hints     Array of Index Hints
      *
      * @return MySQLDMLQueryBuilder $self Self reference
@@ -162,9 +162,9 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause of the SQL statement.
      *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
+     * @param string $left     Left expression
+     * @param string $right    Right expression
+     * @param string $operator Comparison operator
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -176,9 +176,9 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause with LIKE comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -190,9 +190,9 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause with IN comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -204,10 +204,10 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause with BETWEEN comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $lower  The lower bound of the between condition
-     * @param String $upper  The upper bound of the between condition
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $lower  The lower bound of the between condition
+     * @param string $upper  The upper bound of the between condition
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -223,9 +223,9 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause with REGEXP comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -237,8 +237,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause with the NULL condition.
      *
-     * @param String $left   Left expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -250,9 +250,9 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define WHERE clause of the SQL statement.
      *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
+     * @param string $left     Left expression
+     * @param string $right    Right expression
+     * @param string $operator Comparison operator
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -264,9 +264,9 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define WHERE clause with LIKE comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -278,9 +278,9 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define WHERE clause with the IN condition of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -292,10 +292,10 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define WHERE clause with the BETWEEN condition of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $lower  The lower bound of the between condition
-     * @param String $upper  The upper bound of the between condition
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $lower  The lower bound of the between condition
+     * @param string $upper  The upper bound of the between condition
+     * @param string $negate Whether to negate the condition or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -311,9 +311,9 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define WHERE clause with the REGEXP condition of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -325,8 +325,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define WHERE clause with the NULL condition.
      *
-     * @param String $left   Left expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -338,8 +338,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define GROUP BY clause of the SQL statement.
      *
-     * @param String  $expr  Expression to group by
-     * @param Boolean $order Order ASCending/TRUE or DESCending/FALSE, default no order/NULL
+     * @param string  $expr  Expression to group by
+     * @param boolean $order Order ASCending/TRUE or DESCending/FALSE, default no order/NULL
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -351,9 +351,9 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define HAVING clause of the SQL statement.
      *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
+     * @param string $left     Left expression
+     * @param string $right    Right expression
+     * @param string $operator Comparison operator
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -365,9 +365,9 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define HAVING clause with LIKE comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -379,9 +379,9 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define HAVING clause with IN comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -393,10 +393,10 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define HAVING clause with BETWEEN comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $lower  The lower bound of the between condition
-     * @param String $upper  The upper bound of the between condition
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $lower  The lower bound of the between condition
+     * @param string $upper  The upper bound of the between condition
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -412,9 +412,9 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define HAVING clause with REGEXP comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -426,8 +426,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define HAVING clause with the NULL condition.
      *
-     * @param String $left   Left expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -439,8 +439,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define ORDER BY clause in the SQL statement.
      *
-     * @param String  $expr Expression to order by
-     * @param Boolean $asc  Order ASCending/TRUE or DESCending/FALSE
+     * @param string  $expr Expression to order by
+     * @param boolean $asc  Order ASCending/TRUE or DESCending/FALSE
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -452,8 +452,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Define a LIMIT clause of the SQL statement.
      *
-     * @param Integer $amount The amount of elements to retrieve
-     * @param Integer $offset Start retrieving elements from a specific index
+     * @param integer $amount The amount of elements to retrieve
+     * @param integer $offset Start retrieving elements from a specific index
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -478,10 +478,10 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Escape a table reference.
      *
-     * @param String  $location_reference A location reference
-     * @param Boolean $table              Whether to escape a table or a result_column
+     * @param string  $location_reference A location reference
+     * @param boolean $table              Whether to escape a table or a result_column
      *
-     * @return String $escaped Escaped location reference
+     * @return string $escaped Escaped location reference
      */
     protected function escape_alias($location_reference, $table = TRUE)
     {

@@ -38,8 +38,8 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
     /**
      * Test creating a simple where/having statement.
      *
-     * @param String $keyword   The expected statement keyword
-     * @param String $attribute The name of the property where the statement is stored
+     * @param string $keyword   The expected statement keyword
+     * @param string $attribute The name of the property where the statement is stored
      *
      * @dataProvider ConditionalKeywordProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
@@ -97,8 +97,8 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
     /**
      * Test creating a where/having statement with non-default operator.
      *
-     * @param String $keyword   The expected statement keyword
-     * @param String $attribute The name of the property where the statement is stored
+     * @param string $keyword   The expected statement keyword
+     * @param string $attribute The name of the property where the statement is stored
      *
      * @dataProvider ConditionalKeywordProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
@@ -117,8 +117,8 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
     /**
      * Test extending a where/having statement with default connector.
      *
-     * @param String $keyword   The expected statement keyword
-     * @param String $attribute The name of the property where the statement is stored
+     * @param string $keyword   The expected statement keyword
+     * @param string $attribute The name of the property where the statement is stored
      *
      * @dataProvider ConditionalKeywordProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
@@ -140,8 +140,8 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
     /**
      * Test extending a where/having statement with a specified connector.
      *
-     * @param String $keyword   The expected statement keyword
-     * @param String $attribute The name of the property where the statement is stored
+     * @param string $keyword   The expected statement keyword
+     * @param string $attribute The name of the property where the statement is stored
      *
      * @dataProvider ConditionalKeywordProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
@@ -165,8 +165,8 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
     /**
      * Test getting a select query with grouped condition.
      *
-     * @param String $keyword   The expected statement keyword
-     * @param String $attribute The name of the property where the statement is stored
+     * @param string $keyword   The expected statement keyword
+     * @param string $attribute The name of the property where the statement is stored
      *
      * @dataProvider conditionalKeywordProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition

@@ -134,7 +134,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
      *
      * @param \Requests_Response       $http_response Requests_Response object.
      * @param \Psr\Log\LoggerInterface $logger        Shared instance of a Logger.
-     * @param Array                    $endpoints     The endpoints the message was sent to (in the same order as sent).
+     * @param array                    $endpoints     The endpoints the message was sent to (in the same order as sent).
      *
      * @return GCMBatchResponse
      */
@@ -171,7 +171,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     /**
      * Push the notification to a batch of endpoints.
      *
-     * @param Array $endpoints Endpoints to sent it to in this batch
+     * @param array $endpoints Endpoints to sent it to in this batch
      *
      * @return GCMBatchResponse $return Response object
      */
@@ -216,7 +216,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     /**
      * Set the endpoint(s) for the push.
      *
-     * @param Array|String $endpoints The endpoint(s) for the push
+     * @param array|string $endpoints The endpoint(s) for the push
      *
      * @return GCMSDispatcher $self Self reference
      */
@@ -230,7 +230,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     /**
      * Set the the payload to push.
      *
-     * @param String $payload The reference to the payload of the push
+     * @param string $payload The reference to the payload of the push
      *
      * @return GCMDispatcher $self Self reference
      */
@@ -244,7 +244,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     /**
      * Set the the auth token for the http headers.
      *
-     * @param String $auth_token The auth token for the gcm push notifications
+     * @param string $auth_token The auth token for the gcm push notifications
      *
      * @return GCMDispatcher $self Self reference
      */

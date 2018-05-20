@@ -25,7 +25,7 @@ trait DatabaseAccessObjectQueryTestTrait
      * Expect that a query returns successful results.
      *
      * @param mixed  $data   Result data
-     * @param String $format Return result as 'array', 'row', 'column' or 'cell'
+     * @param string $format Return result as 'array', 'row', 'column' or 'cell'
      *
      * @return void
      */
@@ -59,7 +59,7 @@ trait DatabaseAccessObjectQueryTestTrait
     /**
      * Expect that a query returns no results.
      *
-     * @param String $format Return result as 'array', 'row', 'column' or 'cell'
+     * @param string $format Return result as 'array', 'row', 'column' or 'cell'
      *
      * @return void
      */

@@ -113,8 +113,8 @@ class L10nBaseTest extends L10nTest
     /**
      * Test iso_to_posix() with supported languages.
      *
-     * @param String $iso   ISO language definition
-     * @param String $posix POSIX language definition
+     * @param string $iso   ISO language definition
+     * @param string $posix POSIX language definition
      *
      * @dataProvider supportedLanguagesProvider
      * @depends      testCachedGetSupportedLanguages
@@ -129,7 +129,7 @@ class L10nBaseTest extends L10nTest
     /**
      * Test iso_to_posix() with unsupported languages.
      *
-     * @param String $iso ISO language definition
+     * @param string $iso ISO language definition
      *
      * @dataProvider unsupportedLanguagesProvider
      * @depends      testCachedGetSupportedLanguages

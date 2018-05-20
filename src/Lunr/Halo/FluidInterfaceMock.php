@@ -44,8 +44,8 @@ class FluidInterfaceMock
     /**
      * Handle fluid interface calls.
      *
-     * @param String $name      Method name
-     * @param Array  $arguments Method arguments
+     * @param string $name      Method name
+     * @param array  $arguments Method arguments
      *
      * @return mixed $return Stored return value or a self reference
      */
@@ -64,8 +64,8 @@ class FluidInterfaceMock
     /**
      * Specifically mock a certain method call.
      *
-     * @param String $name  Method name
-     * @param Mixed  $value Mocked return value
+     * @param string $name  Method name
+     * @param mixed  $value Mocked return value
      *
      * @return void
      */

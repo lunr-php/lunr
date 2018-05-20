@@ -86,7 +86,7 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
     /**
      * Constructor to build the results.
      *
-     * @param String      $query   Executed query
+     * @param string      $query   Executed query
      * @param mixed       $result  Query result
      * @param LunrSQLite3 $sqlite3 Instance of the LunrSQLite3 class
      */
@@ -148,7 +148,7 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
     /**
      * Check whether the query has a deadlock or not.
      *
-     * @return Boolean $return TRUE if it failed, FALSE otherwise
+     * @return boolean $return TRUE if it failed, FALSE otherwise
      */
     public function has_deadlock()
     {
@@ -158,7 +158,7 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
     /**
      * Check whether the query has failed or not.
      *
-     * @return Boolean $return TRUE if it failed, FALSE otherwise
+     * @return boolean $return TRUE if it failed, FALSE otherwise
      */
     public function has_failed()
     {
@@ -168,7 +168,7 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
     /**
      * Get string description of the error, if there was one.
      *
-     * @return String $message Error Message
+     * @return string $message Error Message
      */
     public function error_message()
     {
@@ -178,7 +178,7 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
     /**
      * Get numerical error code of the error, if there was one.
      *
-     * @return Integer $code Error Code
+     * @return integer $code Error Code
      */
     public function error_number()
     {
@@ -199,7 +199,7 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
     /**
      * Get the executed query.
      *
-     * @return String $query The executed query
+     * @return string $query The executed query
      */
     public function query()
     {
@@ -219,7 +219,7 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
     /**
      * Returns the number of rows in the query.
      *
-     * @return Integer $number Number of rows in the result set.
+     * @return integer $number Number of rows in the result set.
      */
     public function number_of_rows()
     {
@@ -279,7 +279,7 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
     /**
      * Get a specific column of the result set.
      *
-     * @param String $column Column or Alias name
+     * @param string $column Column or Alias name
      *
      * @return array $output Result column as array
      */
@@ -305,7 +305,7 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
     /**
      * Get a specific column of the first row of the result set.
      *
-     * @param String $column Column or Alias name
+     * @param string $column Column or Alias name
      *
      * @return mixed $output NULL if it does not exist, the value otherwise
      */

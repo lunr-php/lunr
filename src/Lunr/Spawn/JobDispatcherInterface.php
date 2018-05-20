@@ -22,7 +22,7 @@ interface JobDispatcherInterface
     /**
      * Dispatch a background job.
      *
-     * @param String $job  The job to execute
+     * @param string $job  The job to execute
      * @param mixed  $args The arguments for the job execution
      *
      * @return void
@@ -32,7 +32,7 @@ interface JobDispatcherInterface
     /**
      * Returns the job ID of the last background job dispatchin, if any.
      *
-     * @return String $result The result of the last dispatching if any
+     * @return string $result The result of the last dispatching if any
      */
     public function get_job_id();
 
@@ -48,7 +48,7 @@ interface JobDispatcherInterface
     /**
      * Sets whether the status of the dispatched job will be tracked.
      *
-     * @param Boolean $track_status The queue to set for this dispatcher
+     * @param boolean $track_status The queue to set for this dispatcher
      *
      * @return JobDispatcherInterface $self Self-reference
      */

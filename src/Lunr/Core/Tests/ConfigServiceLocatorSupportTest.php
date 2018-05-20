@@ -77,7 +77,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
     /**
      * Test that load_recipe() does not cache invalid recipes.
      *
-     * @param String $id ID of an invalid recipe.
+     * @param string $id ID of an invalid recipe.
      *
      * @dataProvider invalidRecipeProvider
      * @covers       Lunr\Core\ConfigServiceLocator::load_recipe

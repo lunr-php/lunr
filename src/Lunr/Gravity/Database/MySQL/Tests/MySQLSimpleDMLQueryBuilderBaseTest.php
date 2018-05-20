@@ -36,11 +36,11 @@ class MySQLSimpleDMLQueryBuilderBaseTest extends MySQLSimpleDMLQueryBuilderTest
     /**
      * Test escape_alias() with aliased references.
      *
-     * @param String  $input    Location reference
-     * @param Boolean $type     Whether to escape a Table or a Result column
-     * @param String  $name     Reference name
-     * @param String  $alias    Alias
-     * @param String  $expected Expected escaped string
+     * @param string  $input    Location reference
+     * @param boolean $type     Whether to escape a Table or a Result column
+     * @param string  $name     Reference name
+     * @param string  $alias    Alias
+     * @param string  $expected Expected escaped string
      *
      * @dataProvider locationReferenceAliasProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::escape_alias
@@ -64,9 +64,9 @@ class MySQLSimpleDMLQueryBuilderBaseTest extends MySQLSimpleDMLQueryBuilderTest
     /**
      * Test escape_alias() with plain references.
      *
-     * @param String  $input    Location reference
-     * @param Boolean $type     Whether to escape a Table or a Result column
-     * @param String  $expected Expected escaped string
+     * @param string  $input    Location reference
+     * @param boolean $type     Whether to escape a Table or a Result column
+     * @param string  $expected Expected escaped string
      *
      * @dataProvider locationReferenceProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::escape_alias

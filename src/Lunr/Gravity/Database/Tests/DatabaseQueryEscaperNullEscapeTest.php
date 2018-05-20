@@ -28,7 +28,7 @@ class DatabaseQueryEscaperNullEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Unit test data provider for valid value escapers.
      *
-     * @return Array $escapers Valid value escapers
+     * @return array $escapers Valid value escapers
      */
     public function validValueEscaperProvider()
     {
@@ -60,7 +60,7 @@ class DatabaseQueryEscaperNullEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Unit test data provider for invalid value escapers.
      *
-     * @return Array $escapers Invalid value escapers
+     * @return array $escapers Invalid value escapers
      */
     public function invalidValueEscaperProvider()
     {
@@ -80,8 +80,8 @@ class DatabaseQueryEscaperNullEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test escaping values through null-safe calling.
      *
-     * @param String $name      Escaper function name
-     * @param Array  $arguments Arguments for the escaper function
+     * @param string $name      Escaper function name
+     * @param array  $arguments Arguments for the escaper function
      * @param mixed  $expected  Expected escaped result
      *
      * @dataProvider validValueEscaperProvider
@@ -99,8 +99,8 @@ class DatabaseQueryEscaperNullEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test escaping unsupported values through null-safe calling.
      *
-     * @param String $name      Escaper function name
-     * @param Array  $arguments Arguments for the escaper function
+     * @param string $name      Escaper function name
+     * @param array  $arguments Arguments for the escaper function
      *
      * @dataProvider invalidValueEscaperProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::__call
@@ -117,7 +117,7 @@ class DatabaseQueryEscaperNullEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test escaping null values.
      *
-     * @param String $name Escaper function name
+     * @param string $name Escaper function name
      *
      * @dataProvider validValueEscaperProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::__call

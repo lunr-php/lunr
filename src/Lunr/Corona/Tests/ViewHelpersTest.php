@@ -71,7 +71,7 @@ class ViewHelpersTest extends ViewTest
     /**
      * Test that is_fatal_error() returns TRUE if last error is fatal.
      *
-     * @param Array $error Mocked error information
+     * @param array $error Mocked error information
      *
      * @dataProvider fatalErrorInfoProvider
      * @covers       Lunr\Corona\View::is_fatal_error
@@ -86,7 +86,7 @@ class ViewHelpersTest extends ViewTest
     /**
      * Test that is_fatal_error() returns FALSE if last error is fatal.
      *
-     * @param Array $error Mocked error information
+     * @param array $error Mocked error information
      *
      * @dataProvider errorInfoProvider
      * @covers       Lunr\Corona\View::is_fatal_error

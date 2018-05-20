@@ -44,9 +44,9 @@ abstract class MPNSPayload
     /**
      * Escape a string for use in the payload.
      *
-     * @param String $string String to escape
+     * @param string $string String to escape
      *
-     * @return String $return Escaped string
+     * @return string $return Escaped string
      */
     protected function escape_string($string)
     {
@@ -59,7 +59,7 @@ abstract class MPNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return String $return Payload
+     * @return string $return Payload
      */
     public abstract function get_payload();
 

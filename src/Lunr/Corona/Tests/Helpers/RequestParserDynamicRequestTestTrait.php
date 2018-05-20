@@ -27,8 +27,8 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Preparation work for the request tests.
      *
-     * @param Boolean $controller Whether to set a controller value
-     * @param Boolean $method     Whether to set a method value
+     * @param boolean $controller Whether to set a controller value
+     * @param boolean $method     Whether to set a method value
      *
      * @return void
      */
@@ -97,7 +97,7 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the device useragent is stored correctly.
      *
-     * @param String $key Key for the device useragent string
+     * @param string $key Key for the device useragent string
      *
      * @dataProvider deviceUserAgentKeyProvider
      */
@@ -133,7 +133,7 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the default controller value is stored correctly.
      *
-     * @param String $key Controller key name
+     * @param string $key Controller key name
      *
      * @dataProvider controllerKeyNameProvider
      */
@@ -156,7 +156,7 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the default method value is stored correctly.
      *
-     * @param String $key Method key name
+     * @param string $key Method key name
      *
      * @dataProvider methodKeyNameProvider
      */
@@ -179,7 +179,7 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the default params value is stored correctly.
      *
-     * @param String $key Parameter key name
+     * @param string $key Parameter key name
      *
      * @dataProvider paramsKeyNameProvider
      */
@@ -256,7 +256,7 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the default controller value is stored correctly.
      *
-     * @param String $key Controller key name
+     * @param string $key Controller key name
      *
      * @dataProvider controllerKeyNameProvider
      */
@@ -279,7 +279,7 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the default method value is stored correctly.
      *
-     * @param String $key Method key name
+     * @param string $key Method key name
      *
      * @dataProvider methodKeyNameProvider
      */
@@ -302,7 +302,7 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the default params value is stored correctly.
      *
-     * @param String $key Parameter key name
+     * @param string $key Parameter key name
      *
      * @dataProvider paramsKeyNameProvider
      */

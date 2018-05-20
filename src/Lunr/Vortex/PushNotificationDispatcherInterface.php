@@ -31,7 +31,7 @@ interface PushNotificationDispatcherInterface
     /**
      * Set the endpoint(s) for the push.
      *
-     * @param Array|String $endpoints The endpoint(s) for the push
+     * @param array|string $endpoints The endpoint(s) for the push
      *
      * @return PushNotificationDispatcherInterface $self Self reference
      */
@@ -40,7 +40,7 @@ interface PushNotificationDispatcherInterface
     /**
      * Set the the payload to push.
      *
-     * @param String $payload The reference to the payload of the push
+     * @param string $payload The reference to the payload of the push
      *
      * @return PushNotificationDispatcherInterface $self Self reference
      */

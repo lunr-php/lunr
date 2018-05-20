@@ -89,8 +89,8 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
     /**
      * Test insert modes get uppercased properly.
      *
-     * @param String $value    Insert mode to set
-     * @param String $expected Expected built query part
+     * @param string $value    Insert mode to set
+     * @param string $expected Expected built query part
      *
      * @dataProvider expectedInsertModesProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::insert_mode

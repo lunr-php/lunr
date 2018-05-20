@@ -122,9 +122,9 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Change the default database for the current connection.
      *
-     * @param String $db New default database
+     * @param string $db New default database
      *
-     * @return Boolean True on success, False on Failure
+     * @return boolean True on success, False on Failure
      */
     public function change_database($db)
     {
@@ -165,9 +165,9 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Escape a string to be used in a SQL query.
      *
-     * @param String $string The string to escape
+     * @param string $string The string to escape
      *
-     * @return Mixed $return The escaped string on success, FALSE on error
+     * @return mixed $return The escaped string on success, FALSE on error
      */
     public function escape_string($string)
     {
@@ -177,7 +177,7 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Run a SQL query.
      *
-     * @param String $sql_query The SQL query to run on the database
+     * @param string $sql_query The SQL query to run on the database
      *
      * @return DMLQueryBuilderInterface $result Query Result
      */
@@ -198,7 +198,7 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Begins a transaction.
      *
-     * @return Boolean
+     * @return boolean
      */
     public function begin_transaction()
     {
@@ -215,7 +215,7 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Commits a transaction.
      *
-     * @return Boolean
+     * @return boolean
      */
     public function commit()
     {
@@ -232,7 +232,7 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Rolls back a transaction.
      *
-     * @return Boolean
+     * @return boolean
      */
     public function rollback()
     {
@@ -249,7 +249,7 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Ends a transaction.
      *
-     * @return Boolean
+     * @return boolean
      */
     public function end_transaction()
     {

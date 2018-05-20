@@ -38,7 +38,7 @@ class WNSToastPayload extends WNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return String $return Payload
+     * @return string $return Payload
      */
     public function get_payload()
     {
@@ -76,9 +76,9 @@ class WNSToastPayload extends WNSPayload
     /**
      * Set text for the toast notification.
      *
-     * @param String[]|String $text Message
+     * @param String[]|string $text Message
      *
-     * @param int             $line The line on which to add the text
+     * @param integer         $line The line on which to add the text
      *
      * @return \Lunr\Vortex\WNS\WNSToastPayload $self Self Reference
      */
@@ -101,7 +101,7 @@ class WNSToastPayload extends WNSPayload
     /**
      * Set launch parameter for the toast notification.
      *
-     * @param String $launch Launch parameters for the app
+     * @param string $launch Launch parameters for the app
      *
      * @return WNSToastPayload $self Self Reference
      */
@@ -115,7 +115,7 @@ class WNSToastPayload extends WNSPayload
     /**
      * Set template for the toast notification.
      *
-     * @param String $template Template for the notification
+     * @param string $template Template for the notification
      *
      * @see https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.notifications.toasttemplatetype
      *
@@ -131,7 +131,7 @@ class WNSToastPayload extends WNSPayload
     /**
      * Set image for the toast notification.
      *
-     * @param String $image Image to display
+     * @param string $image Image to display
      *
      * @return WNSToastPayload $self Self Reference
      */

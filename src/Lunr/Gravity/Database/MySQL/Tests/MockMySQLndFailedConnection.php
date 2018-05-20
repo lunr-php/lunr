@@ -29,9 +29,9 @@ class MockMySQLndFailedConnection extends MySQLndUhConnection
      * @param string             $user        Username
      * @param string             $password    Password
      * @param string             $database    Database
-     * @param int                $port        Port
+     * @param integer            $port        Port
      * @param string             $socket      Socket
-     * @param int                $mysql_flags Connection options
+     * @param integer            $mysql_flags Connection options
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
@@ -49,7 +49,7 @@ class MockMySQLndFailedConnection extends MySQLndUhConnection
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return int $return Fake error number
+     * @return integer $return Fake error number
      */
     public function getErrorNumber($connection)
     {
@@ -63,7 +63,7 @@ class MockMySQLndFailedConnection extends MySQLndUhConnection
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return int $return Assume failed query
+     * @return integer $return Assume failed query
      */
     public function reapQuery($connection)
     {

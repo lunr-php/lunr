@@ -26,7 +26,7 @@ class TweetGetTweetDataTest extends TweetTest
     /**
      * Test that getting tweet data returns the data if it is present.
      *
-     * @param String $field Field name
+     * @param string $field Field name
      *
      * @dataProvider tweetFieldsProvider
      * @covers       Lunr\Spark\Twitter\Tweet::__call
@@ -41,7 +41,7 @@ class TweetGetTweetDataTest extends TweetTest
     /**
      * Test that getting tweet data returns NOT_AVAILABLE if it is not present.
      *
-     * @param String $field Field name
+     * @param string $field Field name
      *
      * @dataProvider tweetFieldsProvider
      * @covers       Lunr\Spark\Twitter\Tweet::__call

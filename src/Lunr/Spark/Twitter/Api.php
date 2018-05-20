@@ -67,7 +67,7 @@ abstract class Api
     /**
      * Get access to shared credentials.
      *
-     * @param String $key Credentials key
+     * @param string $key Credentials key
      *
      * @return mixed $return Value of the chosen key
      */
@@ -88,8 +88,8 @@ abstract class Api
     /**
      * Set shared credentials.
      *
-     * @param String $key   Key name
-     * @param String $value Value to set
+     * @param string $key   Key name
+     * @param string $value Value to set
      *
      * @return void
      */
@@ -111,13 +111,13 @@ abstract class Api
     /**
      * Fetch and parse results as though they were a query string.
      *
-     * @param String $url     API URL
-     * @param Array  $headers Array of HTTP headers to send with the request
-     * @param Array  $params  Array of parameters for the API request
-     * @param String $method  Request method to use
-     * @param Array  $options Array of config options for the request library
+     * @param string $url     API URL
+     * @param array  $headers Array of HTTP headers to send with the request
+     * @param array  $params  Array of parameters for the API request
+     * @param string $method  Request method to use
+     * @param array  $options Array of config options for the request library
      *
-     * @return Array $result Array of return values
+     * @return array $result Array of return values
      */
     protected function get_json_results($url, $headers = [], $params = [], $method = 'GET', $options = [])
     {

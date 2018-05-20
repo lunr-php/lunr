@@ -39,8 +39,8 @@ class LunrSoapClient extends SoapClient
     /**
      * Inits the client.
      *
-     * @param String $wsdl    WSDL url
-     * @param Array  $options SOAP client options
+     * @param string $wsdl    WSDL url
+     * @param array  $options SOAP client options
      *
      * @return LunrSoapClient $self self reference
      */

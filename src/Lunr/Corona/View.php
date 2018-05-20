@@ -78,9 +78,9 @@ abstract class View
     /**
      * Return base_url or attach given path to base_url.
      *
-     * @param String $path Path that should be attached to base_url (optional)
+     * @param string $path Path that should be attached to base_url (optional)
      *
-     * @return String $return base_url (+ the given path, if given)
+     * @return string $return base_url (+ the given path, if given)
      */
     protected function base_url($path = '')
     {
@@ -90,10 +90,10 @@ abstract class View
     /**
      * Return path to statics or attach given path to it.
      *
-     * @param String $path Path that should be attached to the statics path
+     * @param string $path Path that should be attached to the statics path
      *                     (optional)
      *
-     * @return String $return path to statics (+ the given path, if given)
+     * @return string $return path to statics (+ the given path, if given)
      */
     protected function statics($path = '')
     {
@@ -119,9 +119,9 @@ abstract class View
     /**
      * Check whether the last error was fatal or not.
      *
-     * @param Array $error Value returned from error_get_last()
+     * @param array $error Value returned from error_get_last()
      *
-     * @return Boolean $return TRUE if error was fatal, FALSE otherwise
+     * @return boolean $return TRUE if error was fatal, FALSE otherwise
      */
     protected function is_fatal_error($error)
     {

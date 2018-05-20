@@ -127,7 +127,7 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the source for the email.
      *
-     * @param String $source The endpoint for the email
+     * @param string $source The endpoint for the email
      *
      * @return EmailDispatcher $self Self reference
      */
@@ -141,7 +141,7 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the endpoints for the email.
      *
-     * @param Array|String $endpoints The endpoint for the email
+     * @param array|string $endpoints The endpoint for the email
      *
      * @return EmailDispatcher $self Self reference
      */
@@ -162,7 +162,7 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the the payload to email.
      *
-     * @param String $payload The reference to the payload of the email
+     * @param string $payload The reference to the payload of the email
      *
      * @return EmailDispatcher $self Self reference
      */

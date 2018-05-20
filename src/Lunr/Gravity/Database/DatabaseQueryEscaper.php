@@ -58,8 +58,8 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
     /**
      * Allow value escapers to handle NULL values more gracefully.
      *
-     * @param String $name      Method name that was called
-     * @param Array  $arguments Arguments passed to the method
+     * @param string $name      Method name that was called
+     * @param array  $arguments Arguments passed to the method
      *
      * @return mixed $return Escaped value or NULL
      */
@@ -83,10 +83,10 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
     /**
      * Define and escape input as column.
      *
-     * @param String $name      Input
-     * @param String $collation Collation name
+     * @param string $name      Input
+     * @param string $collation Collation name
      *
-     * @return String $return Defined and escaped column name
+     * @return string $return Defined and escaped column name
      */
     public function column($name, $collation = '')
     {
@@ -96,10 +96,10 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
     /**
      * Define and escape input as a result column.
      *
-     * @param String $column Result column name
-     * @param String $alias  Alias
+     * @param string $column Result column name
+     * @param string $alias  Alias
      *
-     * @return String $return Defined and escaped result column
+     * @return string $return Defined and escaped result column
      */
     public function result_column($column, $alias = '')
     {
@@ -118,10 +118,10 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
     /**
      * Define and escape input as a result column and transform values to hexadecimal.
      *
-     * @param String $column Result column name
-     * @param String $alias  Alias
+     * @param string $column Result column name
+     * @param string $alias  Alias
      *
-     * @return String $return Defined and escaped result column
+     * @return string $return Defined and escaped result column
      */
     public function hex_result_column($column, $alias = '')
     {
@@ -134,10 +134,10 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
     /**
      * Define and escape input as table.
      *
-     * @param String $table Table name
-     * @param String $alias Alias
+     * @param string $table Table name
+     * @param string $alias Alias
      *
-     * @return String $return Defined and escaped table
+     * @return string $return Defined and escaped table
      */
     public function table($table, $alias = '')
     {
@@ -158,7 +158,7 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
      *
      * @param mixed $value Input to escape as integer
      *
-     * @return Integer Defined and escaped Integer value
+     * @return integer Defined and escaped Integer value
      */
     public function intvalue($value)
     {
@@ -170,7 +170,7 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
      *
      * @param mixed $value Input to escape as float
      *
-     * @return Integer Defined and escaped float value
+     * @return integer Defined and escaped float value
      */
     public function floatvalue($value)
     {
@@ -180,9 +180,9 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
     /**
     * Define input as a query within parentheses.
     *
-    * @param String $value Input
+    * @param string $value Input
     *
-    * @return String $return Defined within parentheses
+    * @return string $return Defined within parentheses
     */
     public function query_value($value)
     {
@@ -194,7 +194,7 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
      *
      * @param array $array_values Input
      *
-     * @return String $output Defined, escaped and within parentheses
+     * @return string $output Defined, escaped and within parentheses
      */
     public function list_value($array_values)
     {
@@ -210,9 +210,9 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
      * Define a special collation.
      *
      * @param mixed  $value     Input
-     * @param String $collation Collation name
+     * @param string $collation Collation name
      *
-     * @return String $return Value with collation definition.
+     * @return string $return Value with collation definition.
      */
     protected function collate($value, $collation)
     {
@@ -229,9 +229,9 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
     /**
      * Escape a location reference (database, table, column).
      *
-     * @param String $col Column
+     * @param string $col Column
      *
-     * @return String escaped column list
+     * @return string escaped column list
      */
     protected function escape_location_reference($col)
     {

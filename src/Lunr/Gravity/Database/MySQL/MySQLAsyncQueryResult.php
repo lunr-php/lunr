@@ -30,7 +30,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Constructor.
      *
-     * @param String $query  Executed query
+     * @param string $query  Executed query
      * @param MySQLi $mysqli Shared instance of the MySQLi class
      */
     public function __construct($query, $mysqli)
@@ -86,7 +86,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Check whether the query has failed or not.
      *
-     * @return Boolean $return TRUE if it failed, FALSE otherwise
+     * @return boolean $return TRUE if it failed, FALSE otherwise
      */
     public function has_failed()
     {
@@ -97,7 +97,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Get string description of the error, if there was one.
      *
-     * @return String $message Error Message
+     * @return string $message Error Message
      */
     public function error_message()
     {
@@ -108,7 +108,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Get numerical error code of the error, if there was one.
      *
-     * @return Integer $code Error Code
+     * @return integer $code Error Code
      */
     public function error_number()
     {
@@ -179,7 +179,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Get a specific column of the result set.
      *
-     * @param String $column Column or Alias name
+     * @param string $column Column or Alias name
      *
      * @return array $output Result column as array
      */
@@ -192,7 +192,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Get a specific column of the first row of the result set.
      *
-     * @param String $column Column or Alias name
+     * @param string $column Column or Alias name
      *
      * @return mixed $output NULL if it does not exist, the value otherwise
      */

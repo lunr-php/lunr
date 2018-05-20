@@ -71,7 +71,7 @@ abstract class User extends Api
     /**
      * Set the user ID or username.
      *
-     * @param String $id Facebook user ID or username
+     * @param string $id Facebook user ID or username
      *
      * @return void
      */
@@ -115,7 +115,7 @@ abstract class User extends Api
      *
      * @param string|array $permissions Permission string or set of permissions.
      *
-     * @return Boolean $return TRUE if permissions are granted, FALSE otherwise
+     * @return boolean $return TRUE if permissions are granted, FALSE otherwise
      */
     protected function is_permission_granted($permissions)
     {
@@ -138,10 +138,10 @@ abstract class User extends Api
     /**
      * Check whether access to a given info item is allowed.
      *
-     * @param String       $item       Info item identifier
-     * @param String|array $permission Permission string or set of permissions.
+     * @param string       $item       Info item identifier
+     * @param string|array $permission Permission string or set of permissions.
      *
-     * @return String $error Access Denied if permissions are not granted, Not Available otherwise
+     * @return string $error Access Denied if permissions are not granted, Not Available otherwise
      */
     protected function check_item_access($item, $permission)
     {

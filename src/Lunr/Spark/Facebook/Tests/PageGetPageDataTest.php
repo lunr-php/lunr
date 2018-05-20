@@ -41,7 +41,7 @@ class PageGetPageDataTest extends PageTest
     /**
      * Test that getting public page data returns the data if it is present.
      *
-     * @param String $field Field name
+     * @param string $field Field name
      *
      * @dataProvider publicFieldsProvider
      * @covers       Lunr\Spark\Facebook\Page::__call
@@ -56,7 +56,7 @@ class PageGetPageDataTest extends PageTest
     /**
      * Test that getting public page data returns NOT_AVAILABLE if it is not present.
      *
-     * @param String $field Field name
+     * @param string $field Field name
      *
      * @dataProvider publicFieldsProvider
      * @covers       Lunr\Spark\Facebook\Page::__call

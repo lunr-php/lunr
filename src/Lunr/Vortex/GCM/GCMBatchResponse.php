@@ -51,7 +51,7 @@ class GCMBatchResponse
      *
      * @param \Requests_Response       $response  Requests_Response object.
      * @param \Psr\Log\LoggerInterface $logger    Shared instance of a Logger.
-     * @param Array                    $endpoints The endpoints the message was sent to (in the same order as sent).
+     * @param array                    $endpoints The endpoints the message was sent to (in the same order as sent).
      */
     public function __construct($response, $logger, $endpoints)
     {
@@ -85,7 +85,7 @@ class GCMBatchResponse
     /**
      * Define the status result for each endpoint.
      *
-     * @param Array $endpoints The endpoints the message was sent to (in the same order as sent).
+     * @param array $endpoints The endpoints the message was sent to (in the same order as sent).
      *
      * @return void
      */
@@ -136,7 +136,7 @@ class GCMBatchResponse
     /**
      * Report an error with the push notification.
      *
-     * @param Array $endpoints The endpoints the message was sent to
+     * @param array $endpoints The endpoints the message was sent to
      *
      * @return void
      */
@@ -173,8 +173,8 @@ class GCMBatchResponse
     /**
      * Report an error with the push notification for one endpoint.
      *
-     * @param String $endpoint   Endpoint for which the push failed
-     * @param String $error_code Error responde code
+     * @param string $endpoint   Endpoint for which the push failed
+     * @param string $error_code Error responde code
      *
      * @return void
      */

@@ -76,8 +76,8 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
     /**
      * Test delete modes get uppercased properly.
      *
-     * @param String $value    Delete mode to set
-     * @param String $expected Expected built query part
+     * @param string $value    Delete mode to set
+     * @param string $expected Expected built query part
      *
      * @dataProvider expectedDeleteModesProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete_mode

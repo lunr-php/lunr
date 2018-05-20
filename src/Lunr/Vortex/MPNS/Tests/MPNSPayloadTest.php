@@ -56,8 +56,8 @@ class MPNSPayloadTest extends LunrBaseTest
     /**
      * Test escape_string() works correctly.
      *
-     * @param String $string   Unescaped base string
-     * @param String $expected Expected escaped string
+     * @param string $string   Unescaped base string
+     * @param string $expected Expected escaped string
      *
      * @dataProvider stringProvider
      * @covers       Lunr\Vortex\MPNS\MPNSPayload::escape_string

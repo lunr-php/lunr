@@ -55,10 +55,10 @@ class SQLite3QueryEscaper extends DatabaseQueryEscaper
      * Define and escape input as value.
      *
      * @param mixed  $value     Input
-     * @param String $collation Collation name
-     * @param String $charset   Unused with SQLite
+     * @param string $collation Collation name
+     * @param string $charset   Unused with SQLite
      *
-     * @return String $return Defined and escaped value
+     * @return string $return Defined and escaped value
      */
     public function value($value, $collation = '', $charset = '')
     {
@@ -69,10 +69,10 @@ class SQLite3QueryEscaper extends DatabaseQueryEscaper
      * Not supported by sqlite. Returns the same as value.
      *
      * @param mixed  $value     Input
-     * @param String $collation Collation name
-     * @param String $charset   Unused with SQLite
+     * @param string $collation Collation name
+     * @param string $charset   Unused with SQLite
      *
-     * @return String $return Defined, escaped and unhexed value
+     * @return string $return Defined, escaped and unhexed value
      */
     public function hexvalue($value, $collation = '', $charset = '')
     {
@@ -83,11 +83,11 @@ class SQLite3QueryEscaper extends DatabaseQueryEscaper
      * Define and escape input as a hexadecimal value.
      *
      * @param mixed  $value     Input
-     * @param String $match     Whether to match forward, backward or both
-     * @param String $collation Collation name
-     * @param String $charset   Unused with SQLite
+     * @param string $match     Whether to match forward, backward or both
+     * @param string $collation Collation name
+     * @param string $charset   Unused with SQLite
      *
-     * @return String $return Defined, escaped and unhexed value
+     * @return string $return Defined, escaped and unhexed value
      */
     public function likevalue($value, $match = 'both', $collation = '', $charset = '')
     {
@@ -111,9 +111,9 @@ class SQLite3QueryEscaper extends DatabaseQueryEscaper
     /**
      * Define and escape input as index hint.
      *
-     * @param String $keyword Whether to use INDEXED BY or NOT INDEXED the index/indices
+     * @param string $keyword Whether to use INDEXED BY or NOT INDEXED the index/indices
      * @param array  $indices Array of indices
-     * @param String $for     Unused with SQLite
+     * @param string $for     Unused with SQLite
      *
      * @return mixed $return NULL for invalid indices, escaped string otherwise.
      */

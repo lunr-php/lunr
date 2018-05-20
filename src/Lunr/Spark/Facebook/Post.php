@@ -44,8 +44,8 @@ class Post extends User
     /**
      * Retrieve user profile info.
      *
-     * @param String $name      Name of the field to get
-     * @param Array  $arguments Arguments passed on call (Ignored)
+     * @param string $name      Name of the field to get
+     * @param array  $arguments Arguments passed on call (Ignored)
      *
      * @return mixed $value Field value
      */
@@ -112,7 +112,7 @@ class Post extends User
      *
      * @param array   $post              Facebook post data
      * @param array   $permissions       Permissions of the user who fetched the post
-     * @param Boolean $used_access_token Whether an access token was used for fetching the post or not
+     * @param boolean $used_access_token Whether an access token was used for fetching the post or not
      *
      * @return Post $self Self Reference
      */

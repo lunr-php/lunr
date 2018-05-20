@@ -81,7 +81,7 @@ class MPNSResponse implements PushNotificationResponseInterface
     /**
      * Set response header information.
      *
-     * @param Array $headers Response headers
+     * @param array $headers Response headers
      *
      * @return void
      */
@@ -104,7 +104,7 @@ class MPNSResponse implements PushNotificationResponseInterface
     /**
      * Set notification status information.
      *
-     * @param String          $endpoint The notification endpoint that was used.
+     * @param string          $endpoint The notification endpoint that was used.
      * @param LoggerInterface $logger   Shared instance of a Logger.
      *
      * @return void

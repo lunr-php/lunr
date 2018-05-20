@@ -24,7 +24,7 @@ class ResponseGetTest extends ResponseTest
     /**
      * Test getting existing attributes via __get.
      *
-     * @param String $attr  Attribute name
+     * @param string $attr  Attribute name
      * @param mixed  $value Expected attribute value
      *
      * @dataProvider validResponseAttributesProvider
@@ -38,7 +38,7 @@ class ResponseGetTest extends ResponseTest
     /**
      * Test getting existing attributes via __get.
      *
-     * @param String $attr Attribute name
+     * @param string $attr Attribute name
      *
      * @dataProvider invalidResponseAttributesProvider
      * @covers       Lunr\Corona\Response::__get

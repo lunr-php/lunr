@@ -77,7 +77,7 @@ class Feed extends User
     /**
      * Set limit of posts to fetch from feed.
      *
-     * @param Integer $limit Limit of posts to fetch
+     * @param integer $limit Limit of posts to fetch
      *
      * @return void
      */
@@ -99,7 +99,7 @@ class Feed extends User
     /**
      * Fetch the page information from Facebook.
      *
-     * @param Boolean $userdata Whether to fetch from the user feed or not
+     * @param boolean $userdata Whether to fetch from the user feed or not
      *
      * @return void
      */
@@ -159,8 +159,8 @@ class Feed extends User
     /**
      * Fetch the resource information from Facebook.
      *
-     * @param String $url    API URL
-     * @param Array  $params Array of parameters for the API request
+     * @param string $url    API URL
+     * @param array  $params Array of parameters for the API request
      *
      * @return void
      */

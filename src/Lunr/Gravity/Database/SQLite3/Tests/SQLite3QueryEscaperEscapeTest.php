@@ -129,7 +129,7 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
     /**
      * Test escaping an index hint with valid keywords.
      *
-     * @param String $keyword Valid index keyword
+     * @param string $keyword Valid index keyword
      *
      * @dataProvider validIndexKeywordProvider
      * @depends      Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testEscapeLocationReference

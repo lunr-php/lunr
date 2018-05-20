@@ -71,7 +71,7 @@ class LunrCliParser implements CliParserInterface
      * Constructor.
      *
      * @param Console $console   Shared instance of the Console class
-     * @param String  $shortopts List of supported short arguments
+     * @param string  $shortopts List of supported short arguments
      * @param array   $longopts  List of supported long arguments (optional)
      */
     public function __construct($console, $shortopts, $longopts = '')
@@ -132,8 +132,8 @@ class LunrCliParser implements CliParserInterface
     /**
      * Check for command line arguments.
      *
-     * @param String  $opt      The command line argument
-     * @param Integer $index    The index of the argument within $this->args
+     * @param string  $opt      The command line argument
+     * @param integer $index    The index of the argument within $this->args
      * @param boolean $toplevel Whether we run it from the top or from
      *                          further down in the stack
      *
@@ -177,8 +177,8 @@ class LunrCliParser implements CliParserInterface
     /**
      * Check whether the given argument is a valid short option.
      *
-     * @param String  $opt   The command line argument
-     * @param Integer $index The index of the argument within $this->args
+     * @param string  $opt   The command line argument
+     * @param integer $index The index of the argument within $this->args
      *
      * @return boolean $return Success or Failure
      */
@@ -201,8 +201,8 @@ class LunrCliParser implements CliParserInterface
     /**
      * Check whether the given argument is a valid long option.
      *
-     * @param String  $opt   The command line argument
-     * @param Integer $index The index of the argument within $this->args
+     * @param string  $opt   The command line argument
+     * @param integer $index The index of the argument within $this->args
      *
      * @return boolean $return Success or Failure
      */
@@ -242,11 +242,11 @@ class LunrCliParser implements CliParserInterface
     /**
      * Check whether the given string is a valid argument.
      *
-     * @param String  $opt   The command line argument
-     * @param Integer $index The index of the argument within $this->args
-     * @param Integer $pos   Index of the last option character within the
+     * @param string  $opt   The command line argument
+     * @param integer $index The index of the argument within $this->args
+     * @param integer $pos   Index of the last option character within the
      *                       longopts or shortopts String
-     * @param String  $a     The option the argument belongs too
+     * @param string  $a     The option the argument belongs too
      *
      * @return boolean $return Success or Failure
      */

@@ -46,9 +46,9 @@ class Cache
     /**
      * Get cache item.
      *
-     * @param String $key Unique identifier for the data.
+     * @param string $key Unique identifier for the data.
      *
-     * @return mixed|bool FALSE if error, mixed data if successful.
+     * @return mixed|boolean FALSE if error, mixed data if successful.
      */
     public function get($key)
     {
@@ -70,11 +70,11 @@ class Cache
     /**
      * Set cache item.
      *
-     * @param String $key   Unique identifier for the data.
-     * @param Mixed  $value Data to cache.
-     * @param int    $ttl   Time To Live for cache item in seconds.
+     * @param string  $key   Unique identifier for the data.
+     * @param mixed   $value Data to cache.
+     * @param integer $ttl   Time To Live for cache item in seconds.
      *
-     * @return bool True if successful.
+     * @return boolean True if successful.
      */
     public function set($key, $value, $ttl = 600)
     {

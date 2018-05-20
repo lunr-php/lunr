@@ -62,7 +62,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
     /**
      * Test parsing valid short parameters.
      *
-     * @param String $shortopt Short options string
+     * @param string $shortopt Short options string
      * @param array  $params   Array of passed arguments
      * @param array  $ast      Array of expected parsed ast
      *
@@ -86,7 +86,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
     /**
      * Test parsing valid short parameters.
      *
-     * @param String $longopt Long options string
+     * @param string $longopt Long options string
      * @param array  $params  Array of passed arguments
      * @param array  $ast     Array of expected parsed ast
      *

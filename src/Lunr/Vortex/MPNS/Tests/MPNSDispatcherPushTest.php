@@ -126,7 +126,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
     /**
      * Test that pushing with a valid priority sets the X-NotificationClass header.
      *
-     * @param Integer $priority Valid MPNS Priority
+     * @param integer $priority Valid MPNS Priority
      *
      * @dataProvider validPriorityProvider
      * @covers       Lunr\Vortex\MPNS\MPNSDispatcher::push

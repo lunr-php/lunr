@@ -38,7 +38,7 @@ class WNSTilePayload extends WNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return String $return Payload
+     * @return string $return Payload
      */
     public function get_payload()
     {
@@ -73,9 +73,9 @@ class WNSTilePayload extends WNSPayload
     /**
      * Set text for the tile notification.
      *
-     * @param String[]|String $text Text on the tile
+     * @param String[]|string $text Text on the tile
      *
-     * @param int             $line The line on which to add the text
+     * @param integer         $line The line on which to add the text
      *
      * @return WNSTilePayload $self Self Reference
      */
@@ -98,9 +98,9 @@ class WNSTilePayload extends WNSPayload
     /**
      * Set image for the tile notification.
      *
-     * @param String[]|String $image Image on the tile
+     * @param String[]|string $image Image on the tile
      *
-     * @param int             $line  The line on which to add the text
+     * @param integer         $line  The line on which to add the text
      *
      * @return WNSTilePayload $self Self Reference
      */
@@ -123,7 +123,7 @@ class WNSTilePayload extends WNSPayload
     /**
      * Set template for the tile notification.
      *
-     * @param String[]|String $templates Template(s) for notification
+     * @param String[]|string $templates Template(s) for notification
      *
      *
      * @see https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.notifications.tiletemplatetype

@@ -102,7 +102,7 @@ class Authentication extends Api
     /**
      * Set URI to redirect to after a facebook request.
      *
-     * @param String $uri URI to redirect to
+     * @param string $uri URI to redirect to
      *
      * @return void
      */
@@ -114,7 +114,7 @@ class Authentication extends Api
     /**
      * Set additional requested permissions.
      *
-     * @param String|array $scope Comma separated list of additional permissions, or array
+     * @param string|array $scope Comma separated list of additional permissions, or array
      *
      * @return void
      */
@@ -133,9 +133,9 @@ class Authentication extends Api
     /**
      * Check the CSRF state against a stored state value.
      *
-     * @param String $stored_state Stored CSRF state
+     * @param string $stored_state Stored CSRF state
      *
-     * @return Boolean $return TRUE if state matches, FALSE otherwise
+     * @return boolean $return TRUE if state matches, FALSE otherwise
      */
     public function is_state_verified($stored_state)
     {
@@ -145,7 +145,7 @@ class Authentication extends Api
     /**
      * Get CSRF state value.
      *
-     * @return String $state CSRF state value
+     * @return string $state CSRF state value
      */
     public function get_state()
     {
@@ -155,7 +155,7 @@ class Authentication extends Api
     /**
      * Get authentication verification code.
      *
-     * @return String $code Authentication verification code.
+     * @return string $code Authentication verification code.
      */
     public function get_code()
     {
@@ -167,7 +167,7 @@ class Authentication extends Api
      *
      * Short-lived access tokens are usually valid for about 2 hours.
      *
-     * @return String $access_token Access token
+     * @return string $access_token Access token
      */
     public function get_temporary_access_token()
     {
@@ -196,7 +196,7 @@ class Authentication extends Api
     /**
      * Get an application access token.
      *
-     * @return String $access_token Access token
+     * @return string $access_token Access token
      */
     public function get_app_access_token()
     {
@@ -224,7 +224,7 @@ class Authentication extends Api
     /**
      * Get expiry time for the access token.
      *
-     * @return Integer $token_expires Expiry time for the access token.
+     * @return integer $token_expires Expiry time for the access token.
      */
     public function get_token_expires()
     {
@@ -234,7 +234,7 @@ class Authentication extends Api
     /**
      * Return login URL for facebook.
      *
-     * @return String $url Login URL
+     * @return string $url Login URL
      */
     public function get_login_url()
     {
@@ -255,7 +255,7 @@ class Authentication extends Api
     /**
      * Return logout URL for facebook.
      *
-     * @return String $url Logout URL
+     * @return string $url Logout URL
      */
     public function get_logout_url()
     {

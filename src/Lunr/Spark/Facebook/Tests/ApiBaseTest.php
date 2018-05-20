@@ -76,7 +76,7 @@ class ApiBaseTest extends ApiTest
     /**
      * Test that __get() gets existing credential values from the CAS.
      *
-     * @param String $key Credential key
+     * @param string $key Credential key
      *
      * @dataProvider generalGetKeyProvider
      * @covers       Lunr\Spark\Facebook\Api::__get
@@ -107,7 +107,7 @@ class ApiBaseTest extends ApiTest
     /**
      * Test that __set() sets general credential values in the CAS.
      *
-     * @param String $key Credential key
+     * @param string $key Credential key
      *
      * @dataProvider generalSetKeyProvider
      * @covers       Lunr\Spark\Facebook\Api::__set

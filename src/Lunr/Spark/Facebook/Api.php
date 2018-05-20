@@ -100,7 +100,7 @@ abstract class Api
     /**
      * Get access to shared credentials.
      *
-     * @param String $key Credentials key
+     * @param string $key Credentials key
      *
      * @return mixed $return Value of the chosen key
      */
@@ -121,8 +121,8 @@ abstract class Api
     /**
      * Set shared credentials.
      *
-     * @param String $key   Key name
-     * @param String $value Value to set
+     * @param string $key   Key name
+     * @param string $value Value to set
      *
      * @return void
      */
@@ -146,7 +146,7 @@ abstract class Api
     /**
      * Set the resource ID.
      *
-     * @param String $id Facebook resource ID
+     * @param string $id Facebook resource ID
      *
      * @return void
      */
@@ -158,7 +158,7 @@ abstract class Api
     /**
      * Specify the user profile fields that should be retrieved.
      *
-     * @param Array $fields Fields to retrieve
+     * @param array $fields Fields to retrieve
      *
      * @return void
      */
@@ -175,11 +175,11 @@ abstract class Api
     /**
      * Fetch and parse results as though they were a query string.
      *
-     * @param String $url    API URL
-     * @param Array  $params Array of parameters for the API request
-     * @param String $method Request method to use, either 'get' or 'post'
+     * @param string $url    API URL
+     * @param array  $params Array of parameters for the API request
+     * @param string $method Request method to use, either 'get' or 'post'
      *
-     * @return Array $parts Array of return values
+     * @return array $parts Array of return values
      */
     protected function get_url_results($url, $params = [], $method = 'get')
     {
@@ -219,11 +219,11 @@ abstract class Api
     /**
      * Fetch and parse results as though they were a query string.
      *
-     * @param String $url    API URL
-     * @param Array  $params Array of parameters for the API request
-     * @param String $method Request method to use, either 'get' or 'post'
+     * @param string $url    API URL
+     * @param array  $params Array of parameters for the API request
+     * @param string $method Request method to use, either 'get' or 'post'
      *
-     * @return Array $parts Array of return values
+     * @return array $parts Array of return values
      */
     protected function get_json_results($url, $params = [], $method = 'get')
     {
@@ -262,8 +262,8 @@ abstract class Api
     /**
      * Fetch the resource information from Facebook.
      *
-     * @param String $url    API URL
-     * @param Array  $params Array of parameters for the API request
+     * @param string $url    API URL
+     * @param array  $params Array of parameters for the API request
      *
      * @return void
      */

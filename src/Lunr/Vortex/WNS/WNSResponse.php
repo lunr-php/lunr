@@ -81,7 +81,7 @@ class WNSResponse
     /**
      * Set notification status information.
      *
-     * @param String          $endpoint The notification endpoint that was used.
+     * @param string          $endpoint The notification endpoint that was used.
      * @param LoggerInterface $logger   Shared instance of a Logger.
      *
      * @return void

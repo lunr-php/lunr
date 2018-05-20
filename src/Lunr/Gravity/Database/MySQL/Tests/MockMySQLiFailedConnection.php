@@ -48,7 +48,7 @@ class MockMySQLiFailedConnection
     /**
      * Forward non-mocked methods to the MySQLi class.
      *
-     * @param String $method    Method name
+     * @param string $method    Method name
      * @param array  $arguments Arguments to that method
      *
      * @return mixed $return Return value of the respective MySQLi method.
@@ -61,7 +61,7 @@ class MockMySQLiFailedConnection
     /**
      * Fake property access to the MySQLi class.
      *
-     * @param String $name Property name
+     * @param string $name Property name
      *
      * @return mixed $return Property value.
      */
@@ -87,12 +87,12 @@ class MockMySQLiFailedConnection
     /**
      * Fake a successful connection to the database server.
      *
-     * @param string $host     Hostname or IP address
-     * @param string $user     Username
-     * @param string $password Password
-     * @param string $database Database
-     * @param int    $port     Port
-     * @param string $socket   Socket
+     * @param string  $host     Hostname or IP address
+     * @param string  $user     Username
+     * @param string  $password Password
+     * @param string  $database Database
+     * @param integer $port     Port
+     * @param string  $socket   Socket
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
@@ -106,9 +106,9 @@ class MockMySQLiFailedConnection
     /**
      * Fake killing the connection.
      *
-     * @param Integer $thread_id The thread_id of the connection to kill.
+     * @param integer $thread_id The thread_id of the connection to kill.
      *
-     * @return Boolean $return TRUE if the thread_id matches the faked one, FALSE otherwise.
+     * @return boolean $return TRUE if the thread_id matches the faked one, FALSE otherwise.
      */
     public function kill($thread_id)
     {
@@ -139,7 +139,7 @@ class MockMySQLiFailedConnection
     /**
      * Fake failed query.
      *
-     * @return Boolean $return Whether query was successful or not.
+     * @return boolean $return Whether query was successful or not.
      */
     public function reap_async_query()
     {

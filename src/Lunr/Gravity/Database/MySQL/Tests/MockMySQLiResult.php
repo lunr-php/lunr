@@ -48,7 +48,7 @@ class MockMySQLiResult
     /**
      * Forward non-mocked methods to the MySQLi class.
      *
-     * @param String $method    Method name
+     * @param string $method    Method name
      * @param array  $arguments Arguments to that method
      *
      * @return mixed $return Return value of the respective MySQLi method.
@@ -61,7 +61,7 @@ class MockMySQLiResult
     /**
      * Fake property access to the MySQLi class.
      *
-     * @param String $name Property name
+     * @param string $name Property name
      *
      * @return mixed $return Property value.
      */

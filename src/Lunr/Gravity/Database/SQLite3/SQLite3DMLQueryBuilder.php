@@ -40,7 +40,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Construct and return a INSERT query.
      *
-     * @return String $query The constructed query string.
+     * @return string $query The constructed query string.
      */
     public function get_insert_query()
     {
@@ -69,7 +69,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Construct and return a REPLACE query.
      *
-     * @return String $query The constructed query string.
+     * @return string $query The constructed query string.
      */
     public function get_replace_query()
     {
@@ -97,7 +97,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Not supported by SQLite.
      *
-     * @param String $mode The delete mode you want to use
+     * @param string $mode The delete mode you want to use
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
@@ -109,7 +109,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define the mode of the INSERT clause.
      *
-     * @param String $mode The insert mode you want to use
+     * @param string $mode The insert mode you want to use
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
@@ -136,7 +136,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Not supported by sqlite.
      *
-     * @param String $mode The replace mode you want to use
+     * @param string $mode The replace mode you want to use
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
@@ -148,7 +148,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define the mode of the SELECT clause.
      *
-     * @param String $mode The select mode you want to use
+     * @param string $mode The select mode you want to use
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
@@ -172,7 +172,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define the mode of the UPDATE clause.
      *
-     * @param String $mode The update mode you want to use
+     * @param string $mode The update mode you want to use
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
@@ -198,9 +198,9 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause with REGEXP comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
@@ -214,9 +214,9 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define WHERE clause with the REGEXP condition of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
@@ -230,8 +230,8 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define GROUP BY clause of the SQL statement.
      *
-     * @param String  $expr  Expression to group by
-     * @param Boolean $order Not supported by SQLite
+     * @param string  $expr  Expression to group by
+     * @param boolean $order Not supported by SQLite
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
@@ -244,9 +244,9 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define HAVING clause with REGEXP comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
@@ -260,7 +260,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Not supported by SQLite.
      *
-     * @param String $mode The lock mode you want to use
+     * @param string $mode The lock mode you want to use
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */

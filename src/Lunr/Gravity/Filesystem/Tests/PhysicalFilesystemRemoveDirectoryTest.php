@@ -48,7 +48,7 @@ class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObje
      * Test rmdir() with an non-existant directory.
      *
      * @param mixed  $directory String or object directory value
-     * @param String $error     The respective to the input error message
+     * @param string $error     The respective to the input error message
      *
      * @dataProvider invalidFilepathValueProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::rmdir

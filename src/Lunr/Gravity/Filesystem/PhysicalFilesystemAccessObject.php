@@ -60,9 +60,9 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     /**
      * Get a list of all non-dot directories in a given directory.
      *
-     * @param String $directory Base directory
+     * @param string $directory Base directory
      *
-     * @return Array $contents List of directory in that directory
+     * @return array $contents List of directory in that directory
      */
     public function get_list_of_directories($directory)
     {
@@ -101,9 +101,9 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     /**
      * Get a list of all non-dot files in a given directory.
      *
-     * @param String $directory Base directory
+     * @param string $directory Base directory
      *
-     * @return Array $contents List of files in that directory
+     * @return array $contents List of files in that directory
      */
     public function get_list_of_files($directory)
     {
@@ -142,9 +142,9 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     /**
      * Get a listing of the contents of a given directory.
      *
-     * @param String $directory Base directory
+     * @param string $directory Base directory
      *
-     * @return Array $contents List of contents of that directory
+     * @return array $contents List of contents of that directory
      */
     public function get_directory_listing($directory)
     {
@@ -156,8 +156,8 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     /**
      * Find a file in a given directory.
      *
-     * @param String $needle   Filename to look for
-     * @param String $haystack Base directory to search in
+     * @param string $needle   Filename to look for
+     * @param string $haystack Base directory to search in
      *
      * @return mixed $return Path of the file if found,
      *                       FALSE on failure
@@ -206,8 +206,8 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     /**
      * Get a SplFileObject for a given path.
      *
-     * @param String $file Filepath
-     * @param String $mode The mode in which to open the file. Default: readonly
+     * @param string $file Filepath
+     * @param string $mode The mode in which to open the file. Default: readonly
      *
      * @return mixed $file SplFileObject instance for the path, FALSE on failure
      */
@@ -243,7 +243,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     /**
      * Get the contents of a given file.
      *
-     * @param String $file Filepath
+     * @param string $file Filepath
      *
      * @return mixed $contents Contents of the given file as String on success,
      *                         FALSE on failure
@@ -256,10 +256,10 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     /**
      * Write contents into file.
      *
-     * @param String  $file           Filepath
-     * @param String  $contents       Contents to write
-     * @param Boolean $append         Whether to append to an existing file or not
-     * @param Boolean $exclusive_lock Whether to acquire an exclusive write lock for the file or not
+     * @param string  $file           Filepath
+     * @param string  $contents       Contents to write
+     * @param boolean $append         Whether to append to an existing file or not
+     * @param boolean $exclusive_lock Whether to acquire an exclusive write lock for the file or not
      *
      * @return mixed $return Written bytes as integer on success,
      *                       FALSE on failure
@@ -284,9 +284,9 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     /**
      * Recursively removes a directory and its contents.
      *
-     * @param String $dir_path The directory path to be removed
+     * @param string $dir_path The directory path to be removed
      *
-     * @return Boolean TRUE when directory is removed and FALSE in a failure.
+     * @return boolean TRUE when directory is removed and FALSE in a failure.
      */
     public function rmdir($dir_path)
     {
@@ -326,12 +326,12 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     /**
      * Turns the values of an array into csv and writes them in a given file.
      *
-     * @param  String $file      The filepath to write the file
-     * @param  Array  $data      An array with the data to be turned into csv
-     * @param  String $delimiter The delimiter for the csv (optional)
-     * @param  String $enclosure The enclosure for the csv (optional)
+     * @param  string $file      The filepath to write the file
+     * @param  array  $data      An array with the data to be turned into csv
+     * @param  string $delimiter The delimiter for the csv (optional)
+     * @param  string $enclosure The enclosure for the csv (optional)
      *
-     * @return Boolean TRUE when file is created and FALSE in failure.
+     * @return boolean TRUE when file is created and FALSE in failure.
      */
     public function put_csv_file_content($file, $data, $delimiter = ',', $enclosure = '"')
     {
@@ -358,11 +358,11 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      *
      * This method is a wrapper of the php mkdir.
      *
-     * @param String  $pathname  The directory path/name
-     * @param Integer $mode      The access mode (0755 by default)
-     * @param Boolean $recursive Allows the creation of nested directories specified in the pathname
+     * @param string  $pathname  The directory path/name
+     * @param integer $mode      The access mode (0755 by default)
+     * @param boolean $recursive Allows the creation of nested directories specified in the pathname
      *
-     * @return Boolean TRUE when directory is created or FALSE in failure.
+     * @return boolean TRUE when directory is created or FALSE in failure.
      */
     public function mkdir($pathname, $mode = 0755, $recursive = FALSE)
     {

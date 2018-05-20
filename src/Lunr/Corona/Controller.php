@@ -55,7 +55,7 @@ abstract class Controller
     /**
      * Handle unimplemented calls.
      *
-     * @param String $name      Method name
+     * @param string $name      Method name
      * @param array  $arguments Arguments passed to the method
      *
      * @return void
@@ -68,8 +68,8 @@ abstract class Controller
     /**
      * Store result of the call in the response object.
      *
-     * @param Integer $code    Return Code
-     * @param String  $message Error Message
+     * @param integer $code    Return Code
+     * @param string  $message Error Message
      * @param mixed   $info    Additional error information
      *
      * @return void

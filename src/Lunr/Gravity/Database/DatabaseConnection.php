@@ -80,7 +80,7 @@ abstract class DatabaseConnection
     /**
      * Toggle readonly flag on the connection.
      *
-     * @param Boolean $switch Whether to make the connection readonly or not
+     * @param boolean $switch Whether to make the connection readonly or not
      *
      * @return void
      */
@@ -106,9 +106,9 @@ abstract class DatabaseConnection
     /**
      * Change the default database for the current connection.
      *
-     * @param String $db New default database
+     * @param string $db New default database
      *
-     * @return Boolean True on success, False on Failure
+     * @return boolean True on success, False on Failure
      */
     public abstract function change_database($db);
 
@@ -129,16 +129,16 @@ abstract class DatabaseConnection
     /**
      * Escape a string to be used in a SQL query.
      *
-     * @param String $string The string to escape
+     * @param string $string The string to escape
      *
-     * @return Mixed $return The escaped string on success, FALSE on error
+     * @return mixed $return The escaped string on success, FALSE on error
      */
     public abstract function escape_string($string);
 
     /**
      * Run a SQL query.
      *
-     * @param String $sql_query The SQL query to run on the database
+     * @param string $sql_query The SQL query to run on the database
      *
      * @return DatabaseQueryResultInterface $result Query Result
      */

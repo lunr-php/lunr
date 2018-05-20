@@ -72,8 +72,8 @@ class FrontController
     /**
      * Register a path for controller lookup
      *
-     * @param String $identifier Path identifier
-     * @param String $path       Path specification
+     * @param string $identifier Path identifier
+     * @param string $path       Path specification
      *
      * @return void
      */
@@ -85,7 +85,7 @@ class FrontController
     /**
      * Add a static routing rule for specific calls.
      *
-     * @param String $call  Request call identifier (either call or controller name)
+     * @param string $call  Request call identifier (either call or controller name)
      * @param mixed  $route Routing rule. Use NULL for blacklisting, an empty array for whitelisting
      *                      or an array of path identifiers to limit the lookup search to those paths.
      *
@@ -99,11 +99,11 @@ class FrontController
     /**
      * Get the controller responsible for the request.
      *
-     * @param String  $src       Project subfolder to look for controllers in.
-     * @param Array   $list      List of controller names
-     * @param Boolean $blacklist Whether to use the controller list as blacklist or whitelist
+     * @param string  $src       Project subfolder to look for controllers in.
+     * @param array   $list      List of controller names
+     * @param boolean $blacklist Whether to use the controller list as blacklist or whitelist
      *
-     * @return String $controller Fully qualified name of the responsible controller.
+     * @return string $controller Fully qualified name of the responsible controller.
      */
     public function get_controller($src, $list = [], $blacklist = TRUE)
     {
@@ -141,7 +141,7 @@ class FrontController
      *
      * @param string ...$paths Identifiers for the paths to use for the lookup
      *
-     * @return String $controller Fully qualified name of the responsible controller.
+     * @return string $controller Fully qualified name of the responsible controller.
      */
     public function lookup(...$paths)
     {
@@ -173,7 +173,7 @@ class FrontController
     /**
      * Find the controller name for the request made.
      *
-     * @return String $controller Fully qualified name of the responsible controller.
+     * @return string $controller Fully qualified name of the responsible controller.
      */
     public function route()
     {

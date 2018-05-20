@@ -167,7 +167,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Constructs the control XML of the PAP request.
      *
-     * @return String $xml The control XML populated with all relevant values
+     * @return string $xml The control XML populated with all relevant values
      */
     protected function construct_pap_control_xml()
     {
@@ -188,7 +188,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Constructs the full data of the PAP request.
      *
-     * @return String $data The PAP request data populated with all relevant values
+     * @return string $data The PAP request data populated with all relevant values
      */
     protected function construct_pap_data()
     {
@@ -215,7 +215,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the endpoint(s) for the push.
      *
-     * @param Array|String $endpoints The endpoint(s) for the push
+     * @param array|string $endpoints The endpoint(s) for the push
      *
      * @return PAPDispatcher $self Self reference
      */
@@ -236,7 +236,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the the payload to push.
      *
-     * @param String $payload The reference to the payload of the push
+     * @param string $payload The reference to the payload of the push
      *
      * @return PAPDispatcher $self Self reference
      */
@@ -250,7 +250,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the auth token for the http headers.
      *
-     * @param String $auth_token The auth token for the PAP push notifications
+     * @param string $auth_token The auth token for the PAP push notifications
      *
      * @return PAPDispatcher $self Self reference
      */
@@ -264,7 +264,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the password for the push service.
      *
-     * @param String $password The password of the push service
+     * @param string $password The password of the push service
      *
      * @return PAPDispatcher $self Self reference
      */
@@ -278,7 +278,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the content provider id for the push service.
      *
-     * @param String $cid The content provider id for the PAP push notifications
+     * @param string $cid The content provider id for the PAP push notifications
      *
      * @return PAPDispatcher $self Self reference
      */
@@ -292,7 +292,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Set the deliver-before timestamp for the push service.
      *
-     * @param String $timestamp The timestamp to set the deliver-before to
+     * @param string $timestamp The timestamp to set the deliver-before to
      *
      * @return PAPDispatcher $self Self reference
      */

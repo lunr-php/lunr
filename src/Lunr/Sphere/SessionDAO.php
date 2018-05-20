@@ -44,7 +44,7 @@ class SessionDAO extends DatabaseAccessObject
     /**
      * Read session data from the database.
      *
-     * @param String $id Session ID
+     * @param string $id Session ID
      *
      * @return mixed The Session Data on success, False on failure
      */
@@ -118,7 +118,7 @@ class SessionDAO extends DatabaseAccessObject
     /**
      * Remove a no-longer active session.
      *
-     * @param String $id Session ID
+     * @param string $id Session ID
      *
      * @return void
      */

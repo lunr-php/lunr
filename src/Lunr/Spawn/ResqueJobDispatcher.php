@@ -74,7 +74,7 @@ class ResqueJobDispatcher implements JobDispatcherInterface
      * It is possible to dispatch the same job into multiple queues, if
      * more than one queues are set.
      *
-     * @param String $job  The job to execute
+     * @param string $job  The job to execute
      * @param array  $args The arguments for the job execution
      *
      * @return void
@@ -90,7 +90,7 @@ class ResqueJobDispatcher implements JobDispatcherInterface
     /**
      * Returns the token of the last dispatched Resque job.
      *
-     * @return String $token The token of the last enqueued job,
+     * @return string $token The token of the last enqueued job,
      *                       NULL if unproper argument supplied
      */
     public function get_job_id()
@@ -131,7 +131,7 @@ class ResqueJobDispatcher implements JobDispatcherInterface
     /**
      * Sets whether the status of the dispatched job will be tracked.
      *
-     * @param Boolean $track_status The queue to set for this dispatcher
+     * @param boolean $track_status The queue to set for this dispatcher
      *
      * @return ResqueJobDispatcher $self Self-reference
      */

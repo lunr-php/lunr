@@ -163,7 +163,7 @@ class WNSDispatcherSetTest extends WNSDispatcherTest
     /**
      * Test that set_type() sets the type if it is valid.
      *
-     * @param Integer $type Valid WNS Type
+     * @param integer $type Valid WNS Type
      *
      * @dataProvider validTypeProvider
      * @covers       Lunr\Vortex\WNS\WNSDispatcher::set_type

@@ -38,7 +38,7 @@ class MockMySQLi
     /**
      * Fake property access to the MySQLi class.
      *
-     * @param String $name Property name
+     * @param string $name Property name
      *
      * @return mixed $return Property value.
      */
@@ -54,12 +54,12 @@ class MockMySQLi
     /**
      * Fake a successful connection to the database server.
      *
-     * @param string $host     Hostname or IP address
-     * @param string $user     Username
-     * @param string $password Password
-     * @param string $database Database
-     * @param int    $port     Port
-     * @param string $socket   Socket
+     * @param string  $host     Hostname or IP address
+     * @param string  $user     Username
+     * @param string  $password Password
+     * @param string  $database Database
+     * @param integer $port     Port
+     * @param string  $socket   Socket
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
@@ -103,8 +103,8 @@ class MockMySQLi
     /**
      * Used for setting mysqli options.
      *
-     * @param int   $key   Mysqli option key.
-     * @param mixed $value Mysqli option value.
+     * @param integer $key   Mysqli option key.
+     * @param mixed   $value Mysqli option value.
      *
      * @return boolean $return Always returns TRUE
      */

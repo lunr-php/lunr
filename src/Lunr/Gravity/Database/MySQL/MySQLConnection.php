@@ -263,9 +263,9 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Change the default database for the current connection.
      *
-     * @param String $db New default database
+     * @param string $db New default database
      *
-     * @return Boolean True on success, False on Failure
+     * @return boolean True on success, False on Failure
      */
     public function change_database($db)
     {
@@ -284,10 +284,10 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Set option for the current connection.
      *
-     * @param int   $key   Mysqli option key.
-     * @param mixed $value Mysqli option value.
+     * @param integer $key   Mysqli option key.
+     * @param mixed   $value Mysqli option value.
      *
-     * @return bool True on success, False on Failure
+     * @return boolean True on success, False on Failure
      */
     public function set_option($key, $value)
     {
@@ -304,7 +304,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Return a new instance of a QueryBuilder object.
      *
-     * @param Boolean $simple Whether to return a simple query builder or an advanced one.
+     * @param boolean $simple Whether to return a simple query builder or an advanced one.
      *
      * @return MySQLDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
      */
@@ -338,9 +338,9 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Escape a string to be used in a SQL query.
      *
-     * @param String $string The string to escape
+     * @param string $string The string to escape
      *
-     * @return Mixed $return The escaped string on success, FALSE on error
+     * @return mixed $return The escaped string on success, FALSE on error
      */
     public function escape_string($string)
     {
@@ -359,7 +359,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * When running the query on a replication setup, hint to run the next query on the master server.
      *
-     * @param String $style What hint style to use.
+     * @param string $style What hint style to use.
      *
      * @return MySQLConnection $self Self reference
      */
@@ -380,7 +380,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * When running the query on a replication setup, hint to run the next query on the slave server.
      *
-     * @param String $style What hint style to use.
+     * @param string $style What hint style to use.
      *
      * @return MySQLConnection $self Self reference
      */
@@ -401,7 +401,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Run a SQL query.
      *
-     * @param String $sql_query The SQL query to run on the database
+     * @param string $sql_query The SQL query to run on the database
      *
      * @return MySQLQueryResult $result Query Result
      */
@@ -425,7 +425,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Run an asynchronous SQL query.
      *
-     * @param String $sql_query The SQL query to run on the database
+     * @param string $sql_query The SQL query to run on the database
      *
      * @return MySQLAsyncQueryResult $result Query Result
      */
@@ -447,7 +447,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Begins a transaction.
      *
-     * @return Boolean
+     * @return boolean
      */
     public function begin_transaction()
     {
@@ -464,7 +464,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Commits a transaction.
      *
-     * @return Boolean
+     * @return boolean
      */
     public function commit()
     {
@@ -481,7 +481,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Rolls back a transaction.
      *
-     * @return Boolean
+     * @return boolean
      */
     public function rollback()
     {
@@ -498,7 +498,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Ends a transaction.
      *
-     * @return Boolean
+     * @return boolean
      */
     public function end_transaction()
     {

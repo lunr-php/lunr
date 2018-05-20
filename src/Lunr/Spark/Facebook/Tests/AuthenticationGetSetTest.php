@@ -72,7 +72,7 @@ class AuthenticationGetSetTest extends AuthenticationTest
      * Test that set_scope() sets the scope.
      *
      * @param mixed  $input    Input value
-     * @param String $expected Expected scope string
+     * @param string $expected Expected scope string
      *
      * @dataProvider scopeValueProvider
      * @covers       Lunr\Spark\Facebook\Authentication::set_code
@@ -123,8 +123,8 @@ class AuthenticationGetSetTest extends AuthenticationTest
     /**
      * Test is_state_verified().
      *
-     * @param String  $state State value
-     * @param Boolean $valid Whether state is expected valid or not
+     * @param string  $state State value
+     * @param boolean $valid Whether state is expected valid or not
      *
      * @dataProvider stateValueProvider
      * @covers       Lunr\Spark\Facebook\Authentication::is_state_verified

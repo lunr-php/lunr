@@ -275,7 +275,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
     /**
      * Test escaping an index hint with valid keywords.
      *
-     * @param String $keyword Valid index keyword
+     * @param string $keyword Valid index keyword
      *
      * @dataProvider validIndexKeywordProvider
      * @depends      Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testEscapeLocationReference
@@ -308,7 +308,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
     /**
      * Test escaping an index hint with valid use definition.
      *
-     * @param String $for Valid use definition
+     * @param string $for Valid use definition
      *
      * @dataProvider validIndexForProvider
      * @depends      Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testEscapeLocationReference

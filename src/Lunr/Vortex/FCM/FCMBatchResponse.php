@@ -26,7 +26,7 @@ class FCMBatchResponse extends GCMBatchResponse
      *
      * @param \Requests_Response       $response  Requests_Response object.
      * @param \Psr\Log\LoggerInterface $logger    Shared instance of a Logger.
-     * @param Array                    $endpoints The endpoints the message was sent to (in the same order as sent).
+     * @param array                    $endpoints The endpoints the message was sent to (in the same order as sent).
      */
     public function __construct($response, $logger, $endpoints)
     {

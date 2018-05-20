@@ -81,7 +81,7 @@ class DeliveryApi
     /**
      * Get access to shared credentials.
      *
-     * @param String $key Credentials key
+     * @param string $key Credentials key
      *
      * @return mixed $return Value of the chosen key
      */
@@ -99,8 +99,8 @@ class DeliveryApi
     /**
      * Set shared credentials.
      *
-     * @param String $key   Key name
-     * @param String $value Value to set
+     * @param string $key   Key name
+     * @param string $value Value to set
      *
      * @return void
      */
@@ -119,7 +119,7 @@ class DeliveryApi
     /**
      * Set contentful space ID.
      *
-     * @param String $space_id Content space ID
+     * @param string $space_id Content space ID
      *
      * @return DeliveryApi $self Self Reference
      */
@@ -133,10 +133,10 @@ class DeliveryApi
     /**
      * Fetch entries from Contentful.
      *
-     * @param String $type    Content type
-     * @param Array  $filters Content filters
+     * @param string $type    Content type
+     * @param array  $filters Content filters
      *
-     * @return Array $values Content Array
+     * @return array $values Content Array
      */
     public function get_entries($type, $filters = [])
     {
@@ -153,9 +153,9 @@ class DeliveryApi
     /**
      * Fetch assets from Contentful.
      *
-     * @param Array $filters Assets filters
+     * @param array $filters Assets filters
      *
-     * @return Array $values Content Array
+     * @return array $values Content Array
      */
     public function get_assets($filters = [])
     {
@@ -171,10 +171,10 @@ class DeliveryApi
     /**
      * Fetch and parse results as though they were a json string.
      *
-     * @param String $url    API URL
-     * @param Array  $params Array of parameters for the API request
+     * @param string $url    API URL
+     * @param array  $params Array of parameters for the API request
      *
-     * @return Array $parts Array of return values
+     * @return array $parts Array of return values
      */
     protected function get_json_results($url, $params = [])
     {

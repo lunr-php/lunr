@@ -68,7 +68,7 @@ class FCMDispatcher extends GCMDispatcher
      *
      * @param \Requests_Response       $http_response Requests_Response object.
      * @param \Psr\Log\LoggerInterface $logger        Shared instance of a Logger.
-     * @param Array                    $endpoints     The endpoints the message was sent to (in the same order as sent).
+     * @param array                    $endpoints     The endpoints the message was sent to (in the same order as sent).
      *
      * @return FCMBatchResponse
      */

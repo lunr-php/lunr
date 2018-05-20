@@ -34,7 +34,7 @@ class IniGetIntegerForShorthandBytesTest extends IniTest
     /**
      * Test get_integer_for_shorthand_bytes().
      *
-     * @param String  $string  Shorthand byte string
+     * @param string  $string  Shorthand byte string
      * @param integer $integer Integer bytes
      *
      * @dataProvider shorthandBytesProvider

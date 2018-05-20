@@ -107,7 +107,7 @@ class MPNSDispatcherSetTest extends MPNSDispatcherTest
     /**
      * Test that set_priority() sets the priority if it is valid.
      *
-     * @param Integer $priority Valid MPNS Priority
+     * @param integer $priority Valid MPNS Priority
      *
      * @dataProvider validPriorityProvider
      * @covers       Lunr\Vortex\MPNS\MPNSDispatcher::set_priority
@@ -144,7 +144,7 @@ class MPNSDispatcherSetTest extends MPNSDispatcherTest
     /**
      * Test that set_type() sets the type if it is valid.
      *
-     * @param Integer $type Valid MPNS Type
+     * @param integer $type Valid MPNS Type
      *
      * @dataProvider validTypeProvider
      * @covers       Lunr\Vortex\MPNS\MPNSDispatcher::set_type

@@ -46,8 +46,8 @@ class Tweet
     /**
      * Retrieve user profile info.
      *
-     * @param String $name      Name of the field to get
-     * @param Array  $arguments Arguments passed on call (Ignored)
+     * @param string $name      Name of the field to get
+     * @param array  $arguments Arguments passed on call (Ignored)
      *
      * @return mixed $value Field value
      */

@@ -53,7 +53,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Get an accessible ReflectionMethod.
      *
-     * @param String $method Method name
+     * @param string $method Method name
      *
      * @return ReflectionMethod $return The ReflectionMethod instance
      */
@@ -68,7 +68,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Set a value for a class property.
      *
-     * @param String $property Property name
+     * @param string $property Property name
      * @param mixed  $value    New value of the property
      *
      * @return void
@@ -82,7 +82,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Get an accessible ReflectionProperty.
      *
-     * @param String $property Property name
+     * @param string $property Property name
      *
      * @return ReflectionProperty $return The ReflectionProperty instance
      */
@@ -97,7 +97,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Get a value from a class property.
      *
-     * @param String $property Property name
+     * @param string $property Property name
      *
      * @return mixed $return Property value
      */
@@ -110,8 +110,8 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Mock a PHP function.
      *
-     * @param String $name Function name
-     * @param String $mock Replacement code for the function
+     * @param string $name Function name
+     * @param string $mock Replacement code for the function
      *
      * @return void
      */
@@ -130,8 +130,8 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Mock a PHP function with runkit.
      *
-     * @param String          $name Function name
-     * @param String|\Closure $mock Replacement code for the function
+     * @param string          $name Function name
+     * @param string|\Closure $mock Replacement code for the function
      *
      * @return void
      */
@@ -160,8 +160,8 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Mock a PHP function with uopz.
      *
-     * @param String          $name Function name
-     * @param String|callable $mock Replacement code for the function
+     * @param string          $name Function name
+     * @param string|callable $mock Replacement code for the function
      *
      * @return void
      */
@@ -188,7 +188,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Unmock a PHP function.
      *
-     * @param String $name Function name
+     * @param string $name Function name
      *
      * @return void
      */
@@ -207,7 +207,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Unmock a PHP function with runkit.
      *
-     * @param String $name Function name
+     * @param string $name Function name
      *
      * @return void
      */
@@ -225,7 +225,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Unmock a PHP function with uopz.
      *
-     * @param String $name Function name
+     * @param string $name Function name
      *
      * @return void
      */
@@ -244,10 +244,10 @@ abstract class LunrBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param Callable $method     Method defined in an array form
-     * @param String   $mock       Replacement code for the method
-     * @param String   $visibility Visibility of the redefined method
-     * @param String   $args       Comma-delimited list of arguments for the redefined method
+     * @param callable $method     Method defined in an array form
+     * @param string   $mock       Replacement code for the method
+     * @param string   $visibility Visibility of the redefined method
+     * @param string   $args       Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
@@ -269,10 +269,10 @@ abstract class LunrBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param Callable $method     Method defined in an array form
-     * @param String   $mock       Replacement code for the method
-     * @param String   $visibility Visibility of the redefined method
-     * @param String   $args       Comma-delimited list of arguments for the redefined method
+     * @param callable $method     Method defined in an array form
+     * @param string   $mock       Replacement code for the method
+     * @param string   $visibility Visibility of the redefined method
+     * @param string   $args       Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
@@ -313,9 +313,9 @@ abstract class LunrBaseTest extends TestCase
      *
      * Replace the code of a function of a specific class
      *
-     * @param Callable $method Method defined in an array form
-     * @param String   $mock   Replacement code for the method
-     * @param String   $args   Comma-delimited list of arguments for the redefined method
+     * @param callable $method Method defined in an array form
+     * @param string   $mock   Replacement code for the method
+     * @param string   $args   Comma-delimited list of arguments for the redefined method
      *
      * @return void
      */
@@ -348,7 +348,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Unmock a method.
      *
-     * @param Callable $method Method defined in an array form
+     * @param callable $method Method defined in an array form
      *
      * @return void
      */
@@ -367,7 +367,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Unmock a method with runkit.
      *
-     * @param Callable $method Method defined in an array form
+     * @param callable $method Method defined in an array form
      *
      * @return void
      */
@@ -388,7 +388,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Unmock a method with uopz.
      *
-     * @param Callable $method Method defined in an array form
+     * @param callable $method Method defined in an array form
      *
      * @return void
      */
@@ -446,7 +446,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Assert that a property value equals the expected value.
      *
-     * @param String $property Property name
+     * @param string $property Property name
      * @param mixed  $expected Expected value of the property
      *
      * @return void
@@ -460,7 +460,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Assert that a property value equals the expected value.
      *
-     * @param String $property Property name
+     * @param string $property Property name
      * @param mixed  $expected Expected value of the property
      *
      * @return void
@@ -474,7 +474,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Assert that a property value is empty.
      *
-     * @param String $property Property name
+     * @param string $property Property name
      *
      * @return void
      */
@@ -513,7 +513,7 @@ abstract class LunrBaseTest extends TestCase
     /**
      * Expect that the output generating by the tested method matches the content of the given file.
      *
-     * @param String $file Path to file to match against
+     * @param string $file Path to file to match against
      *
      * @return void
      */

@@ -26,8 +26,8 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
     /**
      * Test specifying the JOIN part of a query.
      *
-     * @param String $type Type of join to perform
-     * @param String $join The join operation to perform
+     * @param string $type Type of join to perform
+     * @param string $join The join operation to perform
      *
      * @dataProvider commonJoinTypeProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
@@ -46,8 +46,8 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
     /**
      * Test specifying the JOIN part of a query.
      *
-     * @param String $type Type of join to perform
-     * @param String $join The join operation to perform
+     * @param string $type Type of join to perform
+     * @param string $join The join operation to perform
      *
      * @dataProvider commonJoinTypeProvider
      * @depends      Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareValidIndexHints
@@ -70,8 +70,8 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
     /**
      * Test specifying the JOIN part of a query.
      *
-     * @param String $type Type of join to perform
-     * @param String $join The join operation to perform
+     * @param string $type Type of join to perform
+     * @param string $join The join operation to perform
      *
      * @dataProvider commonJoinTypeProvider
      * @depends      Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareValidIndexHints
@@ -93,8 +93,8 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
     /**
      * Test specifying the JOIN part of a query.
      *
-     * @param String $type Type of join to perform
-     * @param String $join The join operation to perform
+     * @param string $type Type of join to perform
+     * @param string $join The join operation to perform
      *
      * @dataProvider commonJoinTypeProvider
      * @depends      Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareValidIndexHints
@@ -116,8 +116,8 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
     /**
      * Test specifying the JOIN part of a query.
      *
-     * @param String $type Type of join to perform
-     * @param String $join The join operation to perform
+     * @param string $type Type of join to perform
+     * @param string $join The join operation to perform
      *
      * @dataProvider commonJoinTypeProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
@@ -137,8 +137,8 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
     /**
      * Test specifying the JOIN part of a query.
      *
-     * @param String $type Type of join to perform
-     * @param String $join The join operation to perform
+     * @param string $type Type of join to perform
+     * @param string $join The join operation to perform
      *
      * @dataProvider commonJoinTypeProvider
      * @depends      Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareValidIndexHints

@@ -44,7 +44,7 @@ class APNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return String $return APNSPayload
+     * @return string $return APNSPayload
      */
     public function get_payload()
     {
@@ -56,7 +56,7 @@ class APNSPayload
      *
      * Used to determine what type of icon to show on the appicon when the message arrives
      *
-     * @param Integer $badge The badge index
+     * @param integer $badge The badge index
      *
      * @return APNSPayload $self Self Reference
      */
@@ -70,7 +70,7 @@ class APNSPayload
     /**
      * Sets the payload sound.
      *
-     * @param String $sound The sound to set it to
+     * @param string $sound The sound to set it to
      *
      * @return APNSPayload $self Self Reference
      */
@@ -88,7 +88,7 @@ class APNSPayload
      * and it is named alert for sake of convention, as this is
      * the name of the key in the actual bytestream payload.
      *
-     * @param String $alert The actual message
+     * @param string $alert The actual message
      *
      * @return APNSPayload $self Self Reference
      */
@@ -102,8 +102,8 @@ class APNSPayload
     /**
      * Sets custom data in the payload.
      *
-     * @param String $key   The key of the custom property
-     * @param String $value The value of the custom property
+     * @param string $key   The key of the custom property
+     * @param string $value The value of the custom property
      *
      * @return APNSPayload $self Self Reference
      */

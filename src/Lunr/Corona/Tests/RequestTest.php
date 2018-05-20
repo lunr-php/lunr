@@ -101,7 +101,7 @@ abstract class RequestTest extends LunrBaseTest
     /**
      * Return sample request values.
      *
-     * @return Array $request Sample request values
+     * @return array $request Sample request values
      */
     protected function get_request_values()
     {

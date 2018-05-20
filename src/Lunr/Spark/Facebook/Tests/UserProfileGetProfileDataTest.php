@@ -41,7 +41,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
     /**
      * Test that getting public profile data returns the data if it is present.
      *
-     * @param String $field Field name
+     * @param string $field Field name
      *
      * @dataProvider publicFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
@@ -56,7 +56,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
     /**
      * Test that getting public profile data returns NOT_AVAILABLE if it is not present.
      *
-     * @param String $field Field name
+     * @param string $field Field name
      *
      * @dataProvider publicFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
@@ -69,7 +69,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
     /**
      * Test that getting profile data requiring an access token returns the data if it is present.
      *
-     * @param String $field Field name
+     * @param string $field Field name
      *
      * @dataProvider accessTokenFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
@@ -85,7 +85,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
     /**
      * Test that getting profile data requiring an access token returns NOT_AVAILABLE if it is not present.
      *
-     * @param String $field Field name
+     * @param string $field Field name
      *
      * @dataProvider accessTokenFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
@@ -100,7 +100,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
     /**
      * Test that getting profile data requiring an access token returns ACCESS_DENIED if no access token was used for the request.
      *
-     * @param String $field Field name
+     * @param string $field Field name
      *
      * @dataProvider accessTokenFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
@@ -120,8 +120,8 @@ class UserProfileGetProfileDataTest extends UserProfileTest
     /**
      * Test that getting profile data requiring permissions returns the data if it is present.
      *
-     * @param String $field      Field name
-     * @param String $permission Required permission
+     * @param string $field      Field name
+     * @param string $permission Required permission
      *
      * @dataProvider permissionFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
@@ -137,8 +137,8 @@ class UserProfileGetProfileDataTest extends UserProfileTest
     /**
      * Test that getting profile data requiring permissions returns NOT_AVAILABLE if it is not present.
      *
-     * @param String $field      Field name
-     * @param String $permission Required permission
+     * @param string $field      Field name
+     * @param string $permission Required permission
      *
      * @dataProvider permissionFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
@@ -153,8 +153,8 @@ class UserProfileGetProfileDataTest extends UserProfileTest
     /**
      * Test that getting profile data requiring permissions returns ACCESS_DENIED if permission is missing.
      *
-     * @param String $field      Field name
-     * @param String $permission Required permission
+     * @param string $field      Field name
+     * @param string $permission Required permission
      *
      * @dataProvider permissionFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
@@ -173,7 +173,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
     /**
      * Test that getting profile data specifically requested returns the data if it is present.
      *
-     * @param String $field Field name
+     * @param string $field Field name
      *
      * @dataProvider requestedFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
@@ -189,7 +189,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
     /**
      * Test that getting profile data specifically requested returns NOT_AVAILABLE if it is not present.
      *
-     * @param String $field Field name
+     * @param string $field Field name
      *
      * @dataProvider requestedFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
@@ -204,7 +204,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
     /**
      * Test that getting profile data specifically requested returns NOT_REQUESTED if it was not requested.
      *
-     * @param String $field Field name
+     * @param string $field Field name
      *
      * @dataProvider requestedFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call

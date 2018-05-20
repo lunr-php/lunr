@@ -45,7 +45,7 @@ class GCMPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return String $return GCMPayload
+     * @return string $return GCMPayload
      */
     public function get_payload()
     {
@@ -58,7 +58,7 @@ class GCMPayload
      * An arbitrary string that is used to collapse a group of alike messages
      * when the device is offline, so that only the last message gets sent to the client.
      *
-     * @param String $key The notification collapse key identifier
+     * @param string $key The notification collapse key identifier
      *
      * @return GCMPayload $self Self Reference
      */

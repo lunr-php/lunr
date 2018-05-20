@@ -22,40 +22,40 @@ interface QueryEscaperInterface
     /**
      * Define and escape input as column.
      *
-     * @param String $name      Input
-     * @param String $collation Collation name
+     * @param string $name      Input
+     * @param string $collation Collation name
      *
-     * @return String $return Defined and escaped column name
+     * @return string $return Defined and escaped column name
      */
     public function column($name, $collation = '');
 
     /**
      * Define and escape input as a result column.
      *
-     * @param String $column Result column name
-     * @param String $alias  Alias
+     * @param string $column Result column name
+     * @param string $alias  Alias
      *
-     * @return String $return Defined and escaped result column
+     * @return string $return Defined and escaped result column
      */
     public function result_column($column, $alias = '');
 
     /**
      * Define and escape input as a result column and transform values to hexadecimal.
      *
-     * @param String $column Result column name
-     * @param String $alias  Alias
+     * @param string $column Result column name
+     * @param string $alias  Alias
      *
-     * @return String $return Defined and escaped result column
+     * @return string $return Defined and escaped result column
      */
     public function hex_result_column($column, $alias = '');
 
     /**
      * Define and escape input as table.
      *
-     * @param String $table Table name
-     * @param String $alias Alias
+     * @param string $table Table name
+     * @param string $alias Alias
      *
-     * @return String $return Defined and escaped table
+     * @return string $return Defined and escaped table
      */
     public function table($table, $alias = '');
 
@@ -63,10 +63,10 @@ interface QueryEscaperInterface
      * Define and escape input as value.
      *
      * @param mixed  $value     Input
-     * @param String $collation Collation name
-     * @param String $charset   Charset name
+     * @param string $collation Collation name
+     * @param string $charset   Charset name
      *
-     * @return String $return Defined and escaped value
+     * @return string $return Defined and escaped value
      */
     public function value($value, $collation = '', $charset = '');
 
@@ -74,10 +74,10 @@ interface QueryEscaperInterface
      * Define and escape input as a hexadecimal value.
      *
      * @param mixed  $value     Input
-     * @param String $collation Collation name
-     * @param String $charset   Charset name
+     * @param string $collation Collation name
+     * @param string $charset   Charset name
      *
-     * @return String $return Defined, escaped and unhexed value
+     * @return string $return Defined, escaped and unhexed value
      */
     public function hexvalue($value, $collation = '', $charset = '');
 
@@ -85,11 +85,11 @@ interface QueryEscaperInterface
      * Define and escape input as a hexadecimal value.
      *
      * @param mixed  $value     Input
-     * @param String $match     Whether to match forward, backward or both
-     * @param String $collation Collation name
-     * @param String $charset   Charset name
+     * @param string $match     Whether to match forward, backward or both
+     * @param string $collation Collation name
+     * @param string $charset   Charset name
      *
-     * @return String $return Defined, escaped and unhexed value
+     * @return string $return Defined, escaped and unhexed value
      */
     public function likevalue($value, $match = 'both', $collation = '', $charset = '');
 
@@ -98,16 +98,16 @@ interface QueryEscaperInterface
      *
      * @param mixed $value Input to escape as integer
      *
-     * @return Integer Defined and escaped Integer value
+     * @return integer Defined and escaped Integer value
      */
     public function intvalue($value);
 
     /**
     * Define input as a query within parentheses.
     *
-    * @param String $value Input
+    * @param string $value Input
     *
-    * @return String $return Defined within parentheses
+    * @return string $return Defined within parentheses
     */
     public function query_value($value);
 
@@ -116,7 +116,7 @@ interface QueryEscaperInterface
     *
     * @param array $value Input
     *
-    * @return String $return Defined, escaped and within parentheses
+    * @return string $return Defined, escaped and within parentheses
     */
     public function list_value($value);
 

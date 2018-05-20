@@ -37,10 +37,10 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
     /**
      * Preparation work for the request tests.
      *
-     * @param String  $protocol  Protocol name
-     * @param String  $port      Port number
-     * @param Boolean $useragent Whether to include useragent information or not
-     * @param String  $key       Device useragent key
+     * @param string  $protocol  Protocol name
+     * @param string  $port      Port number
+     * @param boolean $useragent Whether to include useragent information or not
+     * @param string  $key       Device useragent key
      *
      * @return void
      */
@@ -103,9 +103,9 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
     /**
      * Preparation work for the request tests.
      *
-     * @param Boolean $controller Whether to set a controller value
-     * @param Boolean $method     Whether to set a method value
-     * @param Boolean $override   Whether to override default values or not
+     * @param boolean $controller Whether to set a controller value
+     * @param boolean $method     Whether to set a method value
+     * @param boolean $override   Whether to override default values or not
      *
      * @return void
      */
@@ -153,8 +153,8 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
     /**
      * Preparation work for the request tests.
      *
-     * @param Boolean $controller Whether to set a controller value
-     * @param Boolean $method     Whether to set a method value
+     * @param boolean $controller Whether to set a controller value
+     * @param boolean $method     Whether to set a method value
      *
      * @return void
      */

@@ -107,7 +107,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
      *
      * Pretend to be an Array.
      *
-     * @return String $return
+     * @return string $return
      */
     public function __toString()
     {
@@ -117,7 +117,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
     /**
      * Load a config file.
      *
-     * @param String $identifier Identifier string for the config file to load.
+     * @param string $identifier Identifier string for the config file to load.
      *                           e.g.: For conf.lunr.inc.php the identifier would be 'lunr'
      *
      * @return void
@@ -338,7 +338,7 @@ class Configuration implements ArrayAccess, Iterator, Countable
      *
      * (Inherited from Countable)
      *
-     * @return int $size Size of the config array
+     * @return integer $size Size of the config array
      */
     public function count()
     {

@@ -162,8 +162,8 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that prepare_index_hints prepares valid index hints correctly.
      *
-     * @param Array  $hints    Array of index hints
-     * @param String $expected Expected escaped string
+     * @param array  $hints    Array of index hints
+     * @param string $expected Expected escaped string
      *
      * @dataProvider validIndexHintProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::prepare_index_hints

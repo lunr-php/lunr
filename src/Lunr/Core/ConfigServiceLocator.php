@@ -71,10 +71,10 @@ class ConfigServiceLocator
     /**
      * Instantiate a new object by ID.
      *
-     * @param String $id        ID of the object to instantiate
-     * @param Array  $arguments Arguments passed on call (Ignored)
+     * @param string $id        ID of the object to instantiate
+     * @param array  $arguments Arguments passed on call (Ignored)
      *
-     * @return Mixed $return new Object, NULL if the ID is unknown.
+     * @return mixed $return new Object, NULL if the ID is unknown.
      */
     public function __call($id, $arguments)
     {
@@ -87,10 +87,10 @@ class ConfigServiceLocator
      * This only works with objects that are treated like singletons
      * and won't if the specified ID is already taken.
      *
-     * @param String $id     ID for the preloaded object
+     * @param string $id     ID for the preloaded object
      * @param mixed  $object Instance of the object to preload
      *
-     * @return Boolean $return TRUE if override successfully placed, FALSE otherwise
+     * @return boolean $return TRUE if override successfully placed, FALSE otherwise
      */
     public function override($id, $object)
     {
@@ -108,9 +108,9 @@ class ConfigServiceLocator
     /**
      * Locate an object by ID.
      *
-     * @param String $id ID of the object to locate.
+     * @param string $id ID of the object to locate.
      *
-     * @return Mixed $return new Object, NULL if the ID is unknown.
+     * @return mixed $return new Object, NULL if the ID is unknown.
      */
     protected function locate($id)
     {
@@ -142,7 +142,7 @@ class ConfigServiceLocator
     /**
      * Load recipe for instantiating a given ID.
      *
-     * @param String $id ID of the object to load the recipe for.
+     * @param string $id ID of the object to load the recipe for.
      *
      * @return void
      */
@@ -165,7 +165,7 @@ class ConfigServiceLocator
     /**
      * Check whether we need to do something special with a newly created object.
      *
-     * @param String $id       ID of the object instantiated
+     * @param string $id       ID of the object instantiated
      * @param mixed  $instance Newly created object instance
      *
      * @return mixed $instance The passed object instance.
@@ -193,7 +193,7 @@ class ConfigServiceLocator
     /**
      * Get a new object instance for a given ID.
      *
-     * @param String $id ID of the object to instantiate.
+     * @param string $id ID of the object to instantiate.
      *
      * @return mixed $return new Object on success, NULL on error.
      */

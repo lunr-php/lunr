@@ -237,7 +237,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Construct and return a SELECT query.
      *
-     * @return String $query The constructed query string.
+     * @return string $query The constructed query string.
      */
     public function get_select_query()
     {
@@ -266,7 +266,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Construct and return a DELETE query.
      *
-     * @return String $query The constructed query string.
+     * @return string $query The constructed query string.
      */
     public function get_delete_query()
     {
@@ -289,7 +289,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Construct and return a INSERT query.
      *
-     * @return String $query The constructed query string.
+     * @return string $query The constructed query string.
      */
     public function get_insert_query()
     {
@@ -327,7 +327,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Construct and return a REPLACE query.
      *
-     * @return String $query The constructed query string.
+     * @return string $query The constructed query string.
      */
     public function get_replace_query()
     {
@@ -365,7 +365,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Construct and return an UPDATE query.
      *
-     * @return String $query The constructed query string.
+     * @return string $query The constructed query string.
      */
     public function get_update_query()
     {
@@ -393,7 +393,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a SELECT clause.
      *
-     * @param String $select The columns to select
+     * @param string $select The columns to select
      *
      * @return void
      */
@@ -436,7 +436,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a UPDATE clause.
      *
-     * @param String $table_references The tables to update
+     * @param string $table_references The tables to update
      *
      * @return void
      */
@@ -453,7 +453,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a DELETE clause.
      *
-     * @param String $delete The tables to delete from
+     * @param string $delete The tables to delete from
      *
      * @return void
      */
@@ -470,7 +470,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define FROM clause of the SQL statement.
      *
-     * @param String $table       Table reference
+     * @param string $table       Table reference
      * @param array  $index_hints Array of Index Hints
      *
      * @return void
@@ -492,8 +492,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define JOIN clause of the SQL statement.
      *
-     * @param String $table_reference Table reference
-     * @param String $type            Type of JOIN operation to perform.
+     * @param string $table_reference Table reference
+     * @param string $type            Type of JOIN operation to perform.
      * @param array  $index_hints     Array of Index Hints
      *
      * @return void
@@ -522,7 +522,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define USING clause of the SQL statement.
      *
-     * @param String $column_list Column name to use.
+     * @param string $column_list Column name to use.
      *
      * @return void
      */
@@ -556,7 +556,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define INTO clause of the SQL statement.
      *
-     * @param String $table Table reference
+     * @param string $table Table reference
      *
      * @return void
      */
@@ -568,7 +568,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define SET clause of the SQL statement.
      *
-     * @param Array $set Array containing escaped key->value pairs to be set
+     * @param array $set Array containing escaped key->value pairs to be set
      *
      * @return void
      */
@@ -596,7 +596,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define Column names of the affected by Insert or Update SQL statement.
      *
-     * @param Array $keys Array containing escaped field names to be set
+     * @param array $keys Array containing escaped field names to be set
      *
      * @return void
      */
@@ -608,7 +608,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define Values for Insert or Update SQL statement.
      *
-     * @param Array $values Array containing escaped values to be set, can be either an
+     * @param array $values Array containing escaped values to be set, can be either an
      *                      array or an array of arrays
      *
      * @return void
@@ -647,7 +647,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a Select statement for Insert statement.
      *
-     * @param String $select SQL Select statement to be used in Insert
+     * @param string $select SQL Select statement to be used in Insert
      *
      * @return void
      */
@@ -715,8 +715,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a compound clause for the SQL statement.
      *
-     * @param String $sql_query Left expression
-     * @param String $base      Whether to construct UNION, EXCEPT or INTERSECT
+     * @param string $sql_query Left expression
+     * @param string $base      Whether to construct UNION, EXCEPT or INTERSECT
      *
      * @return void
      */
@@ -733,8 +733,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a ORDER BY clause of the SQL statement.
      *
-     * @param String  $expr Expression to order by
-     * @param Boolean $asc  Order ASCending/TRUE or DESCending/FALSE
+     * @param string  $expr Expression to order by
+     * @param boolean $asc  Order ASCending/TRUE or DESCending/FALSE
      *
      * @return void
      */
@@ -757,8 +757,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a LIMIT clause for the SQL statement.
      *
-     * @param Integer $amount The amount of elements to retrieve
-     * @param Integer $offset Start retrieving elements from a sepcific index
+     * @param integer $amount The amount of elements to retrieve
+     * @param integer $offset Start retrieving elements from a sepcific index
      *
      * @return void
      */
@@ -775,7 +775,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Set a logical connector.
      *
-     * @param String $connector Logical connector to set
+     * @param string $connector Logical connector to set
      *
      * @return void
      */
@@ -787,7 +787,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a GROUP BY clause of the SQL statement.
      *
-     * @param String $expr Expression to group by
+     * @param string $expr Expression to group by
      *
      * @return void
      */
@@ -810,7 +810,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param array $components Array of SQL query components to use to construct the query.
      *
-     * @return String $sql The constructed SQL query
+     * @return string $sql The constructed SQL query
      */
     protected function implode_query($components)
     {
@@ -847,7 +847,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param array $index_hints Array of Index Hints
      *
-     * @return String $hints Comma separated list of index hints.
+     * @return string $hints Comma separated list of index hints.
      */
     protected function prepare_index_hints($index_hints)
     {
@@ -867,7 +867,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Open the parentheses for the sql condition.
      *
-     * @param String $base String indication Statement to group
+     * @param string $base String indication Statement to group
      *
      * @return void
      */
@@ -908,7 +908,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Close the parentheses for the sql condition.
      *
-     * @param String $condition String indication Statement to group
+     * @param string $condition String indication Statement to group
      *
      * @return void
      */

@@ -49,10 +49,10 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * This checks against the German localized day names.
      *
-     * @param String $day           Day name to check against
-     * @param String $localized_day Day name to check
+     * @param string $day           Day name to check against
+     * @param string $localized_day Day name to check
      *
-     * @return Boolean $return TRUE on known values, FALSE on unknown values
+     * @return boolean $return TRUE on known values, FALSE on unknown values
      */
     protected function check_localized_day($day, $localized_day)
     {

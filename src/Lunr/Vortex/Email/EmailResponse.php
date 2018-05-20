@@ -39,7 +39,7 @@ class EmailResponse implements PushNotificationResponseInterface
      *
      * @param \PHPMailer\PHPMailer\PHPMailer $mail_transport Instance of the mail transport class.
      * @param \Psr\Log\LoggerInterface       $logger         Shared instance of a Logger.
-     * @param String                         $email          The email address that the message was sent to.
+     * @param string                         $email          The email address that the message was sent to.
      */
     public function __construct($mail_transport, $logger, $email)
     {

@@ -44,7 +44,7 @@ class PAPPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return String $return The PAP Payload
+     * @return string $return The PAP Payload
      */
     public function get_payload()
     {
@@ -56,8 +56,8 @@ class PAPPayload
      *
      * The each message item is represented by a key-value pair in the payload.
      *
-     * @param String $key   The key of the message item
-     * @param String $value The actual message item
+     * @param string $key   The key of the message item
+     * @param string $value The actual message item
      *
      * @return PAPPayload $self Self Reference
      */

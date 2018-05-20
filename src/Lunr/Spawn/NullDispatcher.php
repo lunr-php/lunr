@@ -38,7 +38,7 @@ class NullDispatcher implements JobDispatcherInterface
     /**
      * Dispatch a background job.
      *
-     * @param String $job  The job to execute
+     * @param string $job  The job to execute
      * @param array  $args The arguments for the job execution
      *
      * @return void
@@ -73,7 +73,7 @@ class NullDispatcher implements JobDispatcherInterface
     /**
      * Sets whether the status of the dispatched job will be tracked.
      *
-     * @param Boolean $track_status The queue to set for this dispatcher
+     * @param boolean $track_status The queue to set for this dispatcher
      *
      * @return NullDispatcher $self Self-reference
      */

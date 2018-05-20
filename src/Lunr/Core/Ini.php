@@ -28,7 +28,7 @@ class Ini
     /**
      * Constructor.
      *
-     * @param String $section Ini section to wrap
+     * @param string $section Ini section to wrap
      */
     public function __construct($section = NULL)
     {
@@ -83,7 +83,7 @@ class Ini
     /**
      * Convert a human readable memory limit string into an integer.
      *
-     * @param String $val Human readable memory limit
+     * @param string $val Human readable memory limit
      *
      * @return integer $val Integer memory limit in bytes
      */

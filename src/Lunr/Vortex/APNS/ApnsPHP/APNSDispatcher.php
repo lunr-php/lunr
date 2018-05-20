@@ -193,7 +193,7 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
     /**
      * Set the endpoint(s) for the push.
      *
-     * @param Array|String $endpoints The endpoint(s) for the push
+     * @param array|string $endpoints The endpoint(s) for the push
      *
      * @return GCMSDispatcher $self Self reference
      */

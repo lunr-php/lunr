@@ -172,7 +172,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      * Get specific column of query result.
      *
      * @param DatabaseQueryResultInterface $query  The result of the run query
-     * @param String                       $column The title of the requested column
+     * @param string                       $column The title of the requested column
      *
      * @return mixed $result FALSE on failure, array otherwise
      */
@@ -199,7 +199,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      * Get specific cell of the first row of the query result.
      *
      * @param DatabaseQueryResultInterface $query The result of the run query
-     * @param String                       $cell  The title of the requested cell
+     * @param string                       $cell  The title of the requested cell
      *
      * @return mixed $result FALSE on failure, mixed otherwise
      */
@@ -226,7 +226,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      * Retry executing the query in case of deadlock error.
      *
      * @param DatabaseQueryResultInterface $query       The result of the run query
-     * @param Integer                      $retry_count The max amount of re-executing the query
+     * @param integer                      $retry_count The max amount of re-executing the query
      *
      * @return mixed $result FALSE on failure, mixed otherwise
      */
@@ -251,7 +251,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      *
      * @param DatabaseQueryResultInterface $query The result of the run query
      *
-     * @return bool $result FALSE on failure, TRUE on success
+     * @return boolean $result FALSE on failure, TRUE on success
      */
     protected function result_boolean($query)
     {

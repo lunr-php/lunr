@@ -24,7 +24,7 @@ class APNSPayloadGetTest extends APNSPayloadTest
     /**
      * Test get_payload() with alert being present.
      *
-     * @param String $file       The path to the payload file
+     * @param string $file       The path to the payload file
      * @param array  $data_array The data to compare get_payload against
      *
      * @dataProvider payloadProvider

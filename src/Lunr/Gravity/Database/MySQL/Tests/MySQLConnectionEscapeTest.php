@@ -40,9 +40,9 @@ class MySQLConnectionEscapeTest extends MySQLConnectionTest
     /**
      * Test that escape_string() properly escapes the given string.
      *
-     * @param String $string       String to escape
-     * @param String $part_escaped Partially escaped string (as returned by mysqli_escape_string)
-     * @param String $escaped      Expected escaped string
+     * @param string $string       String to escape
+     * @param string $part_escaped Partially escaped string (as returned by mysqli_escape_string)
+     * @param string $escaped      Expected escaped string
      *
      * @dataProvider escapeStringProvider
      * @requires     extension mysqli

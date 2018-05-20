@@ -44,9 +44,9 @@ class CentralAuthenticationStore
     /**
      * Add an item to the data store.
      *
-     * @param String $module Module identifier (e.g. 'facebook')
-     * @param String $key    Identifier for the item (e.g. 'app_id')
-     * @param String $value  Item value
+     * @param string $module Module identifier (e.g. 'facebook')
+     * @param string $key    Identifier for the item (e.g. 'app_id')
+     * @param string $value  Item value
      *
      * @return void
      */
@@ -63,8 +63,8 @@ class CentralAuthenticationStore
     /**
      * Delete an item from the data store.
      *
-     * @param String $module Module identifier (e.g. 'facebook')
-     * @param String $key    Identifier for the item (e.g. 'app_id')
+     * @param string $module Module identifier (e.g. 'facebook')
+     * @param string $key    Identifier for the item (e.g. 'app_id')
      *
      * @return void
      */
@@ -79,8 +79,8 @@ class CentralAuthenticationStore
     /**
      * Get an item from the data store.
      *
-     * @param String $module Module identifier (e.g. 'facebook')
-     * @param String $key    Identifier for the item (e.g. 'app_id')
+     * @param string $module Module identifier (e.g. 'facebook')
+     * @param string $key    Identifier for the item (e.g. 'app_id')
      *
      * @return mixed $value Item value
      */

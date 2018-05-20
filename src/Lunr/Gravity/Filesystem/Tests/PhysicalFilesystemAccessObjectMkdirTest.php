@@ -81,7 +81,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
     /**
      * Test that mkdir() returns TRUE when creates a directory.
      *
-     * @param int $mode Valid mode value
+     * @param integer $mode Valid mode value
      *
      * @dataProvider validDirModeValues
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir

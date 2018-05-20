@@ -42,7 +42,7 @@ class APNSResponseGetStatusTest extends APNSResponseTest
     /**
      * Unit test data provider.
      *
-     * @return Array $data array of endpoints statuses / status result
+     * @return array $data array of endpoints statuses / status result
      */
     public function endpointDataProvider()
     {
@@ -89,8 +89,8 @@ class APNSResponseGetStatusTest extends APNSResponseTest
     /**
      * Test the get_status() behavior.
      *
-     * @param Array   $statuses Endpoints statuses
-     * @param Integer $status   Expected function result
+     * @param array   $statuses Endpoints statuses
+     * @param integer $status   Expected function result
      *
      * @dataProvider endpointDataProvider
      * @covers       Lunr\Vortex\APNS\ApnsPHP\APNSResponse::get_status

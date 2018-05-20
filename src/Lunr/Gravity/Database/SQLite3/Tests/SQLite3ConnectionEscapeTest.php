@@ -26,9 +26,9 @@ class SQLite3ConnectionEscapeTest extends SQLite3ConnectionTest
     /**
      * Test that escape_string() properly escapes the given string.
      *
-     * @param String $string       String to escape
-     * @param String $part_escaped Partially escaped string (as returned by escapeString)
-     * @param String $escaped      Expected escaped string
+     * @param string $string       String to escape
+     * @param string $part_escaped Partially escaped string (as returned by escapeString)
+     * @param string $escaped      Expected escaped string
      *
      * @dataProvider escapeStringProvider
      * @covers       Lunr\Gravity\Database\SQLite3\SQLite3Connection::escape_string

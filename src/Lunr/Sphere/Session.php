@@ -131,7 +131,7 @@ class Session
     /**
      * Get the current session ID.
      *
-     * @return String $session_id
+     * @return string $session_id
      */
     public function sessionId()
     {
@@ -158,7 +158,7 @@ class Session
     /**
      * Replace the current sessionid with a new one.
      *
-     * @return String $session_id
+     * @return string $session_id
      */
     public function regenerateId()
     {
@@ -169,9 +169,9 @@ class Session
     /**
      * Start a new session or continue an existing one.
      *
-     * @param String $id Predefined Session ID
+     * @param string $id Predefined Session ID
      *
-     * @return bool
+     * @return boolean
      */
     public function start($id = '')
     {
@@ -192,9 +192,9 @@ class Session
     /**
      * Resumes a previously-existing session.
      *
-     * @param String $id Predefined Session ID
+     * @param string $id Predefined Session ID
      *
-     * @return bool
+     * @return boolean
      */
     public function resume($id = '')
     {

@@ -48,8 +48,8 @@ class CompactJsonViewBaseTest extends CompactJsonViewTest
     /**
      * Test that prepare_data() does not modify the data.
      *
-     * @param Array $data     Data values
-     * @param Array $expected Modified data values
+     * @param array $data     Data values
+     * @param array $expected Modified data values
      *
      * @dataProvider dataProvider
      * @covers       Lunr\Corona\CompactJsonView::prepare_data

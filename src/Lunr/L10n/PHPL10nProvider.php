@@ -36,8 +36,8 @@ class PHPL10nProvider extends L10nProvider
     /**
      * Constructor.
      *
-     * @param String          $language POSIX locale definition
-     * @param String          $domain   Localization domain
+     * @param string          $language POSIX locale definition
+     * @param string          $domain   Localization domain
      * @param LoggerInterface $logger   Shared instance of a logger class
      */
     public function __construct($language, $domain, $logger)
@@ -61,7 +61,7 @@ class PHPL10nProvider extends L10nProvider
     /**
      * Initialization method for setting up the provider.
      *
-     * @param String $language POSIX locale definition
+     * @param string $language POSIX locale definition
      *
      * @return void
      */
@@ -86,10 +86,10 @@ class PHPL10nProvider extends L10nProvider
     /**
      * Return a translated string.
      *
-     * @param String $identifier Identifier for the requested string
-     * @param String $context    Context information for the requested string
+     * @param string $identifier Identifier for the requested string
+     * @param string $context    Context information for the requested string
      *
-     * @return String $string Translated string, identifier by default
+     * @return string $string Translated string, identifier by default
      */
     public function lang($identifier, $context = '')
     {
@@ -141,13 +141,13 @@ class PHPL10nProvider extends L10nProvider
     /**
      * Return a translated string, with proper singular/plural form.
      *
-     * @param String  $singular Identifier for the singular version of
+     * @param string  $singular Identifier for the singular version of
      *                          the string
-     * @param String  $plural   Identifier for the plural version of the string
-     * @param Integer $amount   The amount the translation should be based on
-     * @param String  $context  Context information fot the requested string
+     * @param string  $plural   Identifier for the plural version of the string
+     * @param integer $amount   The amount the translation should be based on
+     * @param string  $context  Context information fot the requested string
      *
-     * @return String $string Translated string, identifier by default
+     * @return string $string Translated string, identifier by default
      */
     public function nlang($singular, $plural, $amount, $context = '')
     {

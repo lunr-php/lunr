@@ -98,7 +98,7 @@ class PAPResponse implements PushNotificationResponseInterface
     /**
      * Helper function for extracting the error info from the PAP response XML.
      *
-     * @return Mixed $return FALSE in case the xml response is unparsable,
+     * @return mixed $return FALSE in case the xml response is unparsable,
      *                       void otherwise
      */
     private function parse_pap_response()
@@ -143,7 +143,7 @@ class PAPResponse implements PushNotificationResponseInterface
     /**
      * Set notification status information.
      *
-     * @param String          $endpoint The notification endpoint that was used.
+     * @param string          $endpoint The notification endpoint that was used.
      * @param LoggerInterface $logger   Shared instance of a Logger.
      *
      * @return void

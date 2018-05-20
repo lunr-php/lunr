@@ -41,7 +41,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a DELETE clause.
      *
-     * @param String $delete The tables to delete from
+     * @param string $delete The tables to delete from
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -54,7 +54,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define INTO clause of the SQL statement.
      *
-     * @param String $table Table reference
+     * @param string $table Table reference
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -67,7 +67,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a Select statement for Insert statement.
      *
-     * @param String $select SQL Select statement to be used in Insert
+     * @param string $select SQL Select statement to be used in Insert
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -80,7 +80,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define SET clause of the SQL statement.
      *
-     * @param Array $set Array containing escaped key->value pairs to be set
+     * @param array $set Array containing escaped key->value pairs to be set
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -93,7 +93,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define Column names of the affected by Insert or Update SQL statement.
      *
-     * @param Array $keys Array containing escaped field names to be set
+     * @param array $keys Array containing escaped field names to be set
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -106,7 +106,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define Values for Insert or Update SQL statement.
      *
-     * @param Array $values Array containing escaped values to be set
+     * @param array $values Array containing escaped values to be set
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -119,7 +119,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a SELECT clause.
      *
-     * @param String $select The column(s) to select
+     * @param string $select The column(s) to select
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -132,7 +132,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a UPDATE clause.
      *
-     * @param String $table_references The tables to update
+     * @param string $table_references The tables to update
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -145,7 +145,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define FROM clause of the SQL statement.
      *
-     * @param String $table_reference Table reference
+     * @param string $table_reference Table reference
      * @param array  $index_hints     Array of Index Hints
      *
      * @return SQLDMLQueryBuilder $self Self reference
@@ -159,8 +159,8 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define JOIN clause of the SQL statement.
      *
-     * @param String $table_reference Table reference
-     * @param String $type            Type of JOIN operation to perform.
+     * @param string $table_reference Table reference
+     * @param string $type            Type of JOIN operation to perform.
      * @param array  $index_hints     Array of Index Hints
      *
      * @return SQLDMLQueryBuilder $self Self reference
@@ -174,7 +174,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define USING part of the SQL statement.
      *
-     * @param String $column_list Column name to use.
+     * @param string $column_list Column name to use.
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -187,9 +187,9 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause of the SQL statement.
      *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
+     * @param string $left     Left expression
+     * @param string $right    Right expression
+     * @param string $operator Comparison operator
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -202,9 +202,9 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause with LIKE comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -218,9 +218,9 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause with IN comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -234,10 +234,10 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause with BETWEEN comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $lower  The lower bound of the between condition
-     * @param String $upper  The upper bound of the between condition
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $lower  The lower bound of the between condition
+     * @param string $upper  The upper bound of the between condition
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -252,8 +252,8 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define ON part of a JOIN clause with the NULL condition.
      *
-     * @param String $left   Left expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -289,9 +289,9 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define WHERE clause of the SQL statement.
      *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
+     * @param string $left     Left expression
+     * @param string $right    Right expression
+     * @param string $operator Comparison operator
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -304,9 +304,9 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define WHERE clause with LIKE comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -320,9 +320,9 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define WHERE clause with the IN condition of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -336,10 +336,10 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define WHERE clause with the BETWEEN condition of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $lower  The lower bound of the between condition
-     * @param String $upper  The upper bound of the between condition
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $lower  The lower bound of the between condition
+     * @param string $upper  The upper bound of the between condition
+     * @param string $negate Whether to negate the condition or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -354,8 +354,8 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define WHERE clause with the NULL condition.
      *
-     * @param String $left   Left expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -391,9 +391,9 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define HAVING clause of the SQL statement.
      *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
+     * @param string $left     Left expression
+     * @param string $right    Right expression
+     * @param string $operator Comparison operator
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -406,9 +406,9 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define HAVING clause with LIKE comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -422,9 +422,9 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define HAVING clause with IN comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -438,10 +438,10 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define HAVING clause with BETWEEN comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $lower  The lower bound of the between condition
-     * @param String $upper  The upper bound of the between condition
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $lower  The lower bound of the between condition
+     * @param string $upper  The upper bound of the between condition
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -456,8 +456,8 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define HAVING clause with the NULL condition.
      *
-     * @param String $left   Left expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -493,8 +493,8 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define ORDER BY clause in the SQL statement.
      *
-     * @param String  $expr Expression to order by
-     * @param Boolean $asc  Order ASCending/TRUE or DESCending/FALSE
+     * @param string  $expr Expression to order by
+     * @param boolean $asc  Order ASCending/TRUE or DESCending/FALSE
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -507,8 +507,8 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a LIMIT clause of the SQL statement.
      *
-     * @param Integer $amount The amount of elements to retrieve
-     * @param Integer $offset Start retrieving elements from a specific index
+     * @param integer $amount The amount of elements to retrieve
+     * @param integer $offset Start retrieving elements from a specific index
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -558,8 +558,8 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a WITH clause.
      *
-     * @param String $alias        The alias of the WITH statement
-     * @param String $sql_query    Sql query reference
+     * @param string $alias        The alias of the WITH statement
+     * @param string $sql_query    Sql query reference
      * @param array  $column_names An optional parameter to give the result columns a name
      *
      * @return $this SQLDMLQueryBuilder $self Self reference

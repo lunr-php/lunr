@@ -62,7 +62,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test specifying the UNION part of a query.
      *
-     * @param String $types Compound query operator
+     * @param string $types Compound query operator
      *
      * @dataProvider compoundQueryTypeProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_compound
@@ -217,8 +217,8 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
     * Test grouping condition start.
     *
-    * @param String $keyword   The expected statement keyword
-    * @param String $attribute The name of the property where the statement is stored
+    * @param string $keyword   The expected statement keyword
+    * @param string $attribute The name of the property where the statement is stored
     *
     * @dataProvider conditionalKeywordProvider
     * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
@@ -265,8 +265,8 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
     * Test grouping condition start.
     *
-    * @param String $keyword   The expected statement keyword
-    * @param String $attribute The name of the property where the statement is stored
+    * @param string $keyword   The expected statement keyword
+    * @param string $attribute The name of the property where the statement is stored
     *
     * @dataProvider conditionalKeywordProvider
     * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
@@ -285,8 +285,8 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
     * Test incremental grouping condition start.
     *
-    * @param String $keyword   The expected statement keyword
-    * @param String $attribute The name of the property where the statement is stored
+    * @param string $keyword   The expected statement keyword
+    * @param string $attribute The name of the property where the statement is stored
     *
     * @dataProvider conditionalKeywordProvider
     * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
@@ -303,8 +303,8 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
     * Test grouping condition start uses AND connector by default if there is already a condition.
     *
-    * @param String $keyword   The expected statement keyword
-    * @param String $attribute The name of the property where the statement is stored
+    * @param string $keyword   The expected statement keyword
+    * @param string $attribute The name of the property where the statement is stored
     *
     * @dataProvider conditionalKeywordProvider
     * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
@@ -322,8 +322,8 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test closing the parentheses for grouped condition.
      *
-     * @param String $keyword   The expected statement keyword
-     * @param String $attribute The name of the property where the statement is stored
+     * @param string $keyword   The expected statement keyword
+     * @param string $attribute The name of the property where the statement is stored
      *
      * @dataProvider conditionalKeywordProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_end

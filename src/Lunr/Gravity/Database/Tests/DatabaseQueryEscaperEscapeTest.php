@@ -28,8 +28,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test escaping column names.
      *
-     * @param String $col     Raw column name
-     * @param String $escaped Expected escaped column name
+     * @param string $col     Raw column name
+     * @param string $escaped Expected escaped column name
      *
      * @dataProvider columnNameProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::escape_location_reference
@@ -68,8 +68,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test column() with only a name value.
      *
-     * @param String $col     Raw column name
-     * @param String $escaped Expected escaped column name
+     * @param string $col     Raw column name
+     * @param string $escaped Expected escaped column name
      *
      * @dataProvider columnNameProvider
      * @depends      testCollateWithValueOnly
@@ -84,8 +84,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test column() with name and collation value.
      *
-     * @param String $col     Raw column name
-     * @param String $escaped Expected escaped column name
+     * @param string $col     Raw column name
+     * @param string $escaped Expected escaped column name
      *
      * @dataProvider columnNameProvider
      * @depends      testCollateWithCollation
@@ -102,8 +102,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test result_column() without alias.
      *
-     * @param String $col     Raw column name
-     * @param String $escaped Expected escaped column name
+     * @param string $col     Raw column name
+     * @param string $escaped Expected escaped column name
      *
      * @dataProvider columnNameProvider
      * @depends      testEscapeLocationReference
@@ -117,8 +117,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test result_column() with alias.
      *
-     * @param String $col     Raw column name
-     * @param String $escaped Expected escaped column name
+     * @param string $col     Raw column name
+     * @param string $escaped Expected escaped column name
      *
      * @dataProvider columnNameProvider
      * @depends      testEscapeLocationReference
@@ -142,8 +142,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test hex_result_column() without alias.
      *
-     * @param String $col     Raw column name
-     * @param String $escaped Expected escaped column name
+     * @param string $col     Raw column name
+     * @param string $escaped Expected escaped column name
      *
      * @dataProvider columnNameProvider
      * @depends      testEscapeLocationReference
@@ -159,8 +159,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test hex_result_column() with alias.
      *
-     * @param String $col     Raw column name
-     * @param String $escaped Expected escaped column name
+     * @param string $col     Raw column name
+     * @param string $escaped Expected escaped column name
      *
      * @dataProvider columnNameProvider
      * @depends      testEscapeLocationReference
@@ -177,8 +177,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test table() without alias.
      *
-     * @param String $table   Raw table name
-     * @param String $escaped Expected escaped table name
+     * @param string $table   Raw table name
+     * @param string $escaped Expected escaped table name
      *
      * @dataProvider tableNameProvider
      * @depends      testEscapeLocationReference
@@ -194,8 +194,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test table() with alias.
      *
-     * @param String $table   Raw table name
-     * @param String $escaped Expected escaped table name
+     * @param string $table   Raw table name
+     * @param string $escaped Expected escaped table name
      *
      * @dataProvider tableNameProvider
      * @depends      testEscapeLocationReference
@@ -213,7 +213,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * Test escaping an integer.
      *
      * @param mixed   $value    The input value to be escaped
-     * @param Integer $expected The expected escaped integer
+     * @param integer $expected The expected escaped integer
      *
      * @dataProvider expectedIntegerProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::intvalue
@@ -262,7 +262,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * Test escaping a float.
      *
      * @param mixed   $value    The input value to be escaped
-     * @param Integer $expected The expected escaped float
+     * @param integer $expected The expected escaped float
      *
      * @dataProvider expectedFloatProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::floatvalue

@@ -64,10 +64,10 @@ class DatabaseSessionHandler implements SessionHandlerInterface
      * Since we use a database to store the data, we
      * don't really need to do anything here.
      *
-     * @param String $path Path to store the session file
-     * @param String $name Session name
+     * @param string $path Path to store the session file
+     * @param string $name Session name
      *
-     * @return Boolean $return Returns always true
+     * @return boolean $return Returns always true
      */
     public function open($path, $name)
     {
@@ -80,7 +80,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface
      * Sine we do not use file for session dara storage
      * we don't need to do anything here.
      *
-     * @return Boolean $return Returns always true
+     * @return boolean $return Returns always true
      */
     public function close()
     {
@@ -90,7 +90,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface
     /**
      * Read session data from the database.
      *
-     * @param String $id Session ID
+     * @param string $id Session ID
      *
      * @return mixed $return Session data on success, False on failure
      */
@@ -102,10 +102,10 @@ class DatabaseSessionHandler implements SessionHandlerInterface
     /**
      * Save session data into the database.
      *
-     * @param String $id   Session ID
-     * @param String $data Session Data
+     * @param string $id   Session ID
+     * @param string $data Session Data
      *
-     * @return Boolean $return Returns always true
+     * @return boolean $return Returns always true
      */
     public function write($id, $data)
     {
@@ -116,9 +116,9 @@ class DatabaseSessionHandler implements SessionHandlerInterface
     /**
      * End currently active session.
      *
-     * @param String $id Session ID
+     * @param string $id Session ID
      *
-     * @return Boolean $return Returns always true
+     * @return boolean $return Returns always true
      */
     public function destroy($id)
     {
@@ -129,9 +129,9 @@ class DatabaseSessionHandler implements SessionHandlerInterface
     /**
      * Clean up expired sessions.
      *
-     * @param int $maxlifetime Sessions that have not updated for the last maxlifetime seconds will be removed.
+     * @param integer $maxlifetime Sessions that have not updated for the last maxlifetime seconds will be removed.
      *
-     * @return Boolean $return Returns always true
+     * @return boolean $return Returns always true
      */
     public function gc($maxlifetime)
     {

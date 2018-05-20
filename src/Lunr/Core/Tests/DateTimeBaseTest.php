@@ -98,8 +98,8 @@ class DateTimeBaseTest extends DateTimeTest
     /**
      * Test the static function sort_compare_datetime().
      *
-     * @param String $date1 Date/Time string
-     * @param String $date2 Date/Time string
+     * @param string $date1 Date/Time string
+     * @param string $date2 Date/Time string
      *
      * @dataProvider equalDatetimeProvider
      * @covers       Lunr\Core\DateTime::sort_compare_datetime
@@ -112,8 +112,8 @@ class DateTimeBaseTest extends DateTimeTest
     /**
      * Test the static function sort_compare_datetime().
      *
-     * @param String $date1 Date/Time string
-     * @param String $date2 Date/Time string
+     * @param string $date1 Date/Time string
+     * @param string $date2 Date/Time string
      *
      * @dataProvider inequalDatetimeProvider
      * @covers       Lunr\Core\DateTime::sort_compare_datetime
@@ -126,8 +126,8 @@ class DateTimeBaseTest extends DateTimeTest
     /**
      * Test the static function sort_compare_datetime().
      *
-     * @param String $date1 Date/Time string
-     * @param String $date2 Date/Time string
+     * @param string $date1 Date/Time string
+     * @param string $date2 Date/Time string
      *
      * @dataProvider inequalDatetimeProvider
      * @covers       Lunr\Core\DateTime::sort_compare_datetime

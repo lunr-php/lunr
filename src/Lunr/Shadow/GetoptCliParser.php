@@ -40,7 +40,7 @@ class GetoptCliParser implements CliParserInterface
     /**
      * Constructor.
      *
-     * @param String $shortopts List of supported short arguments
+     * @param string $shortopts List of supported short arguments
      * @param array  $longopts  List of supported long arguments (optional)
      */
     public function __construct($shortopts, $longopts = '')

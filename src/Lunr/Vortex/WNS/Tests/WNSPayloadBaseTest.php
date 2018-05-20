@@ -36,8 +36,8 @@ class WNSPayloadBaseTest extends WNSPayloadTest
     /**
      * Test escape_string() works correctly.
      *
-     * @param String $string   Unescaped base string
-     * @param String $expected Expected escaped string
+     * @param string $string   Unescaped base string
+     * @param string $expected Expected escaped string
      *
      * @dataProvider stringProvider
      * @covers       Lunr\Vortex\WNS\WNSPayload::escape_string

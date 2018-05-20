@@ -89,7 +89,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
     /**
      * Unit test data provider for internal error http codes.
      *
-     * @return Array $data http code
+     * @return array $data http code
      */
     public function internalErrorHTTPCodeDataProvider()
     {
@@ -106,7 +106,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
     /**
      * Test constructor behavior for error of push notification in case of internal error.
      *
-     * @param Integer $http_code HTTP code received
+     * @param integer $http_code HTTP code received
      *
      * @dataProvider internalErrorHTTPCodeDataProvider
      * @covers       Lunr\Vortex\GCM\GCMBatchResponse::__construct
@@ -137,7 +137,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
     /**
      * Unit test data provider for unknown error http codes.
      *
-     * @return Array $data http code
+     * @return array $data http code
      */
     public function unknownErrorHTTPCodeDataProvider()
     {
@@ -152,7 +152,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
     /**
      * Test constructor behavior for error of push notification in case of unknown error.
      *
-     * @param Integer $http_code HTTP code received
+     * @param integer $http_code HTTP code received
      *
      * @dataProvider unknownErrorHTTPCodeDataProvider
      * @covers       Lunr\Vortex\GCM\GCMBatchResponse::__construct

@@ -50,7 +50,7 @@ class Console
     /**
      * Print given message immediatly.
      *
-     * @param String $msg Message to print
+     * @param string $msg Message to print
      *
      * @return void
      */
@@ -62,7 +62,7 @@ class Console
     /**
      * Print given message immediatly and break the line afterwards.
      *
-     * @param String $msg Message to print
+     * @param string $msg Message to print
      *
      * @return void
      */
@@ -74,9 +74,9 @@ class Console
     /**
      * Generate a string to output.
      *
-     * @param String $msg Message to print
+     * @param string $msg Message to print
      *
-     * @return String $return Generated String
+     * @return string $return Generated String
      */
     private function build_cli_output($msg)
     {
@@ -86,7 +86,7 @@ class Console
     /**
      * Print status information ([ok] or [failed]).
      *
-     * @param Boolean $bool Whether to print a good or bad status
+     * @param boolean $bool Whether to print a good or bad status
      *
      * @return void
      */

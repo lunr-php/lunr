@@ -38,7 +38,7 @@ class MPNSTilePayload extends MPNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return String $return Payload
+     * @return string $return Payload
      */
     public function get_payload()
     {
@@ -92,7 +92,7 @@ class MPNSTilePayload extends MPNSPayload
     /**
      * Set title for the tile notification.
      *
-     * @param String $title Title
+     * @param string $title Title
      *
      * @return MPNSTilePayload $self Self Reference
      */
@@ -106,7 +106,7 @@ class MPNSTilePayload extends MPNSPayload
     /**
      * Set background image for the tile notification.
      *
-     * @param String $image Background Image
+     * @param string $image Background Image
      *
      * @return MPNSTilePayload $self Self Reference
      */
@@ -120,7 +120,7 @@ class MPNSTilePayload extends MPNSPayload
     /**
      * Set count for the tile notification.
      *
-     * @param String $count Count
+     * @param string $count Count
      *
      * @return MPNSTilePayload $self Self Reference
      */
@@ -134,7 +134,7 @@ class MPNSTilePayload extends MPNSPayload
     /**
      * Set back background image for the tile notification.
      *
-     * @param String $image Back Background Image
+     * @param string $image Back Background Image
      *
      * @return MPNSTilePayload $self Self Reference
      */
@@ -148,7 +148,7 @@ class MPNSTilePayload extends MPNSPayload
     /**
      * Set back title for the tile notification.
      *
-     * @param String $title Back Title
+     * @param string $title Back Title
      *
      * @return MPNSTilePayload $self Self Reference
      */
@@ -162,7 +162,7 @@ class MPNSTilePayload extends MPNSPayload
     /**
      * Set back content for the tile notification.
      *
-     * @param String $content Back Content
+     * @param string $content Back Content
      *
      * @return MPNSTilePayload $self Self Reference
      */
@@ -176,7 +176,7 @@ class MPNSTilePayload extends MPNSPayload
     /**
      * Set tile ID for the tile notification.
      *
-     * @param String $id Tile ID
+     * @param string $id Tile ID
      *
      * @return MPNSTilePayload $self Self Reference
      */

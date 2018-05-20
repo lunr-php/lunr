@@ -24,7 +24,7 @@ class ResponseSetTest extends ResponseTest
     /**
      * Test that setting data directly does not work.
      *
-     * @param String $attr Attribute name
+     * @param string $attr Attribute name
      *
      * @dataProvider invalidResponseAttributesProvider
      * @covers       Lunr\Corona\Response::__set

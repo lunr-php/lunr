@@ -29,9 +29,9 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
      * @param string             $user        Username
      * @param string             $password    Password
      * @param string             $database    Database
-     * @param int                $port        Port
+     * @param integer            $port        Port
      * @param string             $socket      Socket
-     * @param int                $mysql_flags Connection options
+     * @param integer            $mysql_flags Connection options
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
@@ -49,7 +49,7 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return int $return Fake thread ID
+     * @return integer $return Fake thread ID
      */
     public function getThreadId($connection)
     {
@@ -63,7 +63,7 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return int $return Fake number of affected rows
+     * @return integer $return Fake number of affected rows
      */
     public function getAffectedRows($connection)
     {

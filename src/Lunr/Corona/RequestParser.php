@@ -50,7 +50,7 @@ class RequestParser implements RequestParserInterface
     /**
      * Store request related information and remove it from super globals where necessary.
      *
-     * @return Array Parsed Request values
+     * @return array Parsed Request values
      */
     public function parse_request()
     {
@@ -92,7 +92,7 @@ class RequestParser implements RequestParserInterface
     /**
      * Parse $_POST values into local variable.
      *
-     * @return Array Parsed HTTP header values
+     * @return array Parsed HTTP header values
      */
     public function parse_server()
     {
@@ -102,7 +102,7 @@ class RequestParser implements RequestParserInterface
     /**
      * Parse $_POST values into local variable and reset it globally.
      *
-     * @return Array Parsed POST values
+     * @return array Parsed POST values
      */
     public function parse_post()
     {
@@ -112,7 +112,7 @@ class RequestParser implements RequestParserInterface
     /**
      * Parse $_FILES values into local variable and reset it globally.
      *
-     * @return Array Parsed FILES values
+     * @return array Parsed FILES values
      */
     public function parse_files()
     {
@@ -122,7 +122,7 @@ class RequestParser implements RequestParserInterface
     /**
      * Parse $_GET values into local variable and reset it globally.
      *
-     * @return Array Parsed GET values
+     * @return array Parsed GET values
      */
     public function parse_get()
     {
@@ -132,7 +132,7 @@ class RequestParser implements RequestParserInterface
     /**
      * Parse $_COOKIE values into local variable and reset it globally.
      *
-     * @return Array Parsed Cookie values
+     * @return array Parsed Cookie values
      */
     public function parse_cookie()
     {
@@ -142,7 +142,7 @@ class RequestParser implements RequestParserInterface
     /**
      * Parse php://stdin value.
      *
-     * @return String Parsed php://stdin value
+     * @return string Parsed php://stdin value
      */
     public function parse_raw_data()
     {
@@ -152,7 +152,7 @@ class RequestParser implements RequestParserInterface
     /**
      * Parse command line variables into local variable.
      *
-     * @return Array Parsed command line arguments
+     * @return array Parsed command line arguments
      */
     public function parse_command_line_arguments()
     {
@@ -162,9 +162,9 @@ class RequestParser implements RequestParserInterface
     /**
      * Negotiate & retrieve the client's prefered content type.
      *
-     * @param Array $supported Array containing the supported content types
+     * @param array $supported Array containing the supported content types
      *
-     * @return Mixed $return The best match of the prefered content types or NULL
+     * @return mixed $return The best match of the prefered content types or NULL
      *                       if there are no supported types or the header is not set
      */
     public function parse_accept_format($supported = [])
@@ -175,9 +175,9 @@ class RequestParser implements RequestParserInterface
     /**
      * Negotiate & retrieve the clients prefered language.
      *
-     * @param Array $supported Array containing the supported languages
+     * @param array $supported Array containing the supported languages
      *
-     * @return Mixed $return The best match of the prefered languages or NULL if
+     * @return mixed $return The best match of the prefered languages or NULL if
      *                       there are no supported languages or the header is not set
      */
     public function parse_accept_language($supported = [])
@@ -188,9 +188,9 @@ class RequestParser implements RequestParserInterface
     /**
      * Negotiate & retrieve the clients prefered charset.
      *
-     * @param Array $supported Array containing the supported charsets
+     * @param array $supported Array containing the supported charsets
      *
-     * @return Mixed $return The best match of the prefered charsets or NULL if
+     * @return mixed $return The best match of the prefered charsets or NULL if
      *                       there are no supported charsets or the header is not set
      */
     public function parse_accept_charset($supported = [])

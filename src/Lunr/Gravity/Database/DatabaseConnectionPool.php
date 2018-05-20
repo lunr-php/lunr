@@ -114,8 +114,8 @@ class DatabaseConnectionPool
     /**
      * Get a database connection.
      *
-     * @param Boolean $new Whether to get a new connection or not
-     * @param Boolean $ro  Whether to get a readonly connection or not
+     * @param boolean $new Whether to get a new connection or not
+     * @param boolean $ro  Whether to get a readonly connection or not
      *
      * @return DatabaseConnection $db A database connection
      */

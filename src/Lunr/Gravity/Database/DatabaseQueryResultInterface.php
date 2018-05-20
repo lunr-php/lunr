@@ -22,28 +22,28 @@ interface DatabaseQueryResultInterface
     /**
      * Check whether the query has failed or not.
      *
-     * @return Boolean $return TRUE if it failed, FALSE otherwise
+     * @return boolean $return TRUE if it failed, FALSE otherwise
      */
     public function has_failed();
 
     /**
      * Check whether the query has a deadlock or not.
      *
-     * @return Boolean $return TRUE if it failed, FALSE otherwise
+     * @return boolean $return TRUE if it failed, FALSE otherwise
      */
     public function has_deadlock();
 
     /**
      * Get string description of the error, if there was one.
      *
-     * @return String $message Error Message
+     * @return string $message Error Message
      */
     public function error_message();
 
     /**
      * Get numerical error code of the error, if there was one.
      *
-     * @return Integer $code Error Code
+     * @return integer $code Error Code
      */
     public function error_number();
 
@@ -58,7 +58,7 @@ interface DatabaseQueryResultInterface
     /**
      * Get the executed query.
      *
-     * @return String $query The executed query
+     * @return string $query The executed query
      */
     public function query();
 
@@ -72,7 +72,7 @@ interface DatabaseQueryResultInterface
     /**
      * Returns the number of rows in the query.
      *
-     * @return Integer $number Number of rows in the result set.
+     * @return integer $number Number of rows in the result set.
      */
     public function number_of_rows();
 
@@ -93,7 +93,7 @@ interface DatabaseQueryResultInterface
     /**
      * Get a specific column of the result set.
      *
-     * @param String $column Column or Alias name
+     * @param string $column Column or Alias name
      *
      * @return array $output Result column as array
      */
@@ -102,7 +102,7 @@ interface DatabaseQueryResultInterface
     /**
      * Get a specific column of the first row of the result set.
      *
-     * @param String $column Column or Alias name
+     * @param string $column Column or Alias name
      *
      * @return mixed $output NULL if it does not exist, the value otherwise
      */

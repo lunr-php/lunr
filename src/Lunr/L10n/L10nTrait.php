@@ -43,7 +43,7 @@ trait L10nTrait
     /**
      * Set the default language.
      *
-     * @param String $language POSIX locale definition
+     * @param string $language POSIX locale definition
      *
      * @return void
      */
@@ -65,7 +65,7 @@ trait L10nTrait
     /**
      * Set the location for language files.
      *
-     * @param String $location Path to locale files
+     * @param string $location Path to locale files
      *
      * @return void
      */

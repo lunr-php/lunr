@@ -92,7 +92,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     /**
      * Test specifying the Values part of a query.
      *
-     * @param Array $values Array of insert values
+     * @param array $values Array of insert values
      *
      * @dataProvider insertValuesProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values

@@ -22,7 +22,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define the mode of the DELETE clause.
      *
-     * @param String $mode The delete mode you want to use
+     * @param string $mode The delete mode you want to use
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -31,7 +31,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define a DELETE clause.
      *
-     * @param String $delete The table references to delete from
+     * @param string $delete The table references to delete from
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -40,7 +40,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define the mode of the INSERT clause.
      *
-     * @param String $mode The insert mode you want to use
+     * @param string $mode The insert mode you want to use
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -49,7 +49,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define the mode of the REPLACE clause.
      *
-     * @param String $mode The replace mode you want to use
+     * @param string $mode The replace mode you want to use
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -58,7 +58,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define INTO clause of the SQL statement.
      *
-     * @param String $table Table name
+     * @param string $table Table name
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -67,7 +67,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define a Select statement for Insert statement.
      *
-     * @param String $select SQL Select statement to be used in Insert
+     * @param string $select SQL Select statement to be used in Insert
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -76,7 +76,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define SET clause of the SQL statement.
      *
-     * @param Array $set Array containing escaped key->value pairs to be set
+     * @param array $set Array containing escaped key->value pairs to be set
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -85,7 +85,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define Column names of the affected by Insert or Update SQL statement.
      *
-     * @param Array $keys Array containing escaped field names to be set
+     * @param array $keys Array containing escaped field names to be set
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -94,7 +94,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define Values for Insert or Update SQL statement.
      *
-     * @param Array $values Array containing escaped values to be set
+     * @param array $values Array containing escaped values to be set
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -103,7 +103,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define the mode of the SELECT clause.
      *
-     * @param String $mode The select mode you want to use
+     * @param string $mode The select mode you want to use
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -112,7 +112,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define a SELECT clause.
      *
-     * @param String $select The columns to select
+     * @param string $select The columns to select
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -121,7 +121,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define FROM clause of the SQL statement.
      *
-     * @param String $table_reference Table name
+     * @param string $table_reference Table name
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -130,8 +130,8 @@ interface DMLQueryBuilderInterface
     /**
      * Define JOIN clause of the SQL statement.
      *
-     * @param String $table_reference Table reference to join with.
-     * @param String $type            Type of JOIN operation to perform.
+     * @param string $table_reference Table reference to join with.
+     * @param string $type            Type of JOIN operation to perform.
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -140,9 +140,9 @@ interface DMLQueryBuilderInterface
     /**
      * Define ON part of a JOIN clause of the SQL statement.
      *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
+     * @param string $left     Left expression
+     * @param string $right    Right expression
+     * @param string $operator Comparison operator
      *
      * @return DMLQueryBuilder $self Self reference
      */
@@ -151,9 +151,9 @@ interface DMLQueryBuilderInterface
     /**
      * Define ON part of a JOIN clause with LIKE comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -162,9 +162,9 @@ interface DMLQueryBuilderInterface
     /**
     * Define ON part of a JOIN clause with IN comparator of the SQL statement.
     *
-    * @param String $left   Left expression
-    * @param String $right  Right expression
-    * @param String $negate Whether to negate the comparison or not
+    * @param string $left   Left expression
+    * @param string $right  Right expression
+    * @param string $negate Whether to negate the comparison or not
     *
     * @return DMLQueryBuilderInterface $self Self reference
     */
@@ -173,10 +173,10 @@ interface DMLQueryBuilderInterface
     /**
      * Define ON part of a JOIN clause with BETWEEN comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $lower  The lower bound of the between condition
-     * @param String $upper  The upper bound of the between condition
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $lower  The lower bound of the between condition
+     * @param string $upper  The upper bound of the between condition
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -185,9 +185,9 @@ interface DMLQueryBuilderInterface
     /**
     * Define ON part of a JOIN clause with REGEXP comparator of the SQL statement.
     *
-    * @param String $left   Left expression
-    * @param String $right  Right expression
-    * @param String $negate Whether to negate the comparison or not
+    * @param string $left   Left expression
+    * @param string $right  Right expression
+    * @param string $negate Whether to negate the comparison or not
     *
     * @return DMLQueryBuilderInterface $self Self reference
     */
@@ -196,8 +196,8 @@ interface DMLQueryBuilderInterface
     /**
      * Define ON part of a JOIN clause with the NULL condition.
      *
-     * @param String $left   Left expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -206,9 +206,9 @@ interface DMLQueryBuilderInterface
     /**
      * Define WHERE clause of the SQL statement.
      *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
+     * @param string $left     Left expression
+     * @param string $right    Right expression
+     * @param string $operator Comparison operator
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -217,9 +217,9 @@ interface DMLQueryBuilderInterface
     /**
      * Define WHERE clause with LIKE comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -228,9 +228,9 @@ interface DMLQueryBuilderInterface
     /**
     * Define WHERE clause with the IN condition of the SQL statement.
     *
-    * @param String $left   Left expression
-    * @param String $right  Right expression
-    * @param String $negate Whether to negate the condition or not
+    * @param string $left   Left expression
+    * @param string $right  Right expression
+    * @param string $negate Whether to negate the condition or not
     *
     * @return DMLQueryBuilderInterface $self Self reference
     */
@@ -239,10 +239,10 @@ interface DMLQueryBuilderInterface
     /**
      * Define WHERE clause with the BETWEEN condition of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $lower  The lower bound of the between condition
-     * @param String $upper  The upper bound of the between condition
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $lower  The lower bound of the between condition
+     * @param string $upper  The upper bound of the between condition
+     * @param string $negate Whether to negate the condition or not
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -251,9 +251,9 @@ interface DMLQueryBuilderInterface
     /**
     * Define WHERE clause with the REGEXP condition of the SQL statement.
     *
-    * @param String $left   Left expression
-    * @param String $right  Right expression
-    * @param String $negate Whether to negate the condition or not
+    * @param string $left   Left expression
+    * @param string $right  Right expression
+    * @param string $negate Whether to negate the condition or not
     *
     * @return DMLQueryBuilderInterface $self Self reference
     */
@@ -262,8 +262,8 @@ interface DMLQueryBuilderInterface
     /**
      * Define WHERE clause with the NULL condition.
      *
-     * @param String $left   Left expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -272,7 +272,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define a GROUP BY clause of the SQL statement.
      *
-     * @param String $expr Expression to group by
+     * @param string $expr Expression to group by
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -281,9 +281,9 @@ interface DMLQueryBuilderInterface
     /**
      * Define HAVING clause of the SQL statement.
      *
-     * @param String $left     Left expression
-     * @param String $right    Right expression
-     * @param String $operator Comparison operator
+     * @param string $left     Left expression
+     * @param string $right    Right expression
+     * @param string $operator Comparison operator
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -292,9 +292,9 @@ interface DMLQueryBuilderInterface
     /**
      * Define HAVING clause with LIKE comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $right  Right expression
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $right  Right expression
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -303,9 +303,9 @@ interface DMLQueryBuilderInterface
     /**
     * Define HAVING clause with IN comparator of the SQL statement.
     *
-    * @param String $left   Left expression
-    * @param String $right  Right expression
-    * @param String $negate Whether to negate the comparison or not
+    * @param string $left   Left expression
+    * @param string $right  Right expression
+    * @param string $negate Whether to negate the comparison or not
     *
     * @return DMLQueryBuilderInterface $self Self reference
     */
@@ -314,10 +314,10 @@ interface DMLQueryBuilderInterface
     /**
      * Define HAVING clause with BETWEEN comparator of the SQL statement.
      *
-     * @param String $left   Left expression
-     * @param String $lower  The lower bound of the between condition
-     * @param String $upper  The upper bound of the between condition
-     * @param String $negate Whether to negate the comparison or not
+     * @param string $left   Left expression
+     * @param string $lower  The lower bound of the between condition
+     * @param string $upper  The upper bound of the between condition
+     * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -326,9 +326,9 @@ interface DMLQueryBuilderInterface
     /**
     * Define HAVING clause with REGEXP comparator of the SQL statement.
     *
-    * @param String $left   Left expression
-    * @param String $right  Right expression
-    * @param String $negate Whether to negate the comparison or not
+    * @param string $left   Left expression
+    * @param string $right  Right expression
+    * @param string $negate Whether to negate the comparison or not
     *
     * @return DMLQueryBuilderInterface $self Self reference
     */
@@ -337,8 +337,8 @@ interface DMLQueryBuilderInterface
     /**
      * Define HAVING clause with the NULL condition.
      *
-     * @param String $left   Left expression
-     * @param String $negate Whether to negate the condition or not
+     * @param string $left   Left expression
+     * @param string $negate Whether to negate the condition or not
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -347,8 +347,8 @@ interface DMLQueryBuilderInterface
     /**
      * Define a ORDER BY clause of the SQL statement.
      *
-     * @param String  $expr Expression to order by
-     * @param Boolean $asc  Order ASCending/TRUE or DESCending/FALSE
+     * @param string  $expr Expression to order by
+     * @param boolean $asc  Order ASCending/TRUE or DESCending/FALSE
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -357,8 +357,8 @@ interface DMLQueryBuilderInterface
     /**
      * Define a LIMIT clause of the SQL statement.
      *
-     * @param Integer $amount The amount of elements to retrieve
-     * @param Integer $offset Start retrieving elements from a specific index
+     * @param integer $amount The amount of elements to retrieve
+     * @param integer $offset Start retrieving elements from a specific index
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -377,7 +377,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define the lock mode for a transaction.
      *
-     * @param String $mode The lock mode you want to use
+     * @param string $mode The lock mode you want to use
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
@@ -400,8 +400,8 @@ interface DMLQueryBuilderInterface
     /**
      * Define a with clause.
      *
-     * @param String $alias        The alias of the WITH statement
-     * @param String $sql_query    Sql query reference
+     * @param string $alias        The alias of the WITH statement
+     * @param string $sql_query    Sql query reference
      * @param array  $column_names An optional parameter to give the result columns a name
      *
      * @return DMLQueryBuilderInterface $self Self reference

@@ -57,7 +57,7 @@ class DateTime
     /**
      * Set used Date/Time format.
      *
-     * @param String $format Date/Time format to use
+     * @param string $format Date/Time format to use
      *
      * @return DateTime $self Reference to the class instance.
      */
@@ -70,8 +70,8 @@ class DateTime
     /**
      * Set used POSIX locale format.
      *
-     * @param String $locale  POSIX locale to use
-     * @param String $charset Default charset to be used (optional, UTF-8 by default)
+     * @param string $locale  POSIX locale to use
+     * @param string $charset Default charset to be used (optional, UTF-8 by default)
      *
      * @return DateTime $self Reference to the class instance.
      */
@@ -90,7 +90,7 @@ class DateTime
     /**
      * Return today's date/time.
      *
-     * @return String Current Date/Time
+     * @return string Current Date/Time
      */
     public function today()
     {
@@ -100,7 +100,7 @@ class DateTime
     /**
      * Alias for today().
      *
-     * @return String Current Date/Time
+     * @return string Current Date/Time
      */
     public function now()
     {
@@ -110,7 +110,7 @@ class DateTime
     /**
      * Return yesterday's date.
      *
-     * @return String Tomorrow's date
+     * @return string Tomorrow's date
      */
     public function yesterday()
     {
@@ -120,7 +120,7 @@ class DateTime
     /**
      * Return tomorrow's date.
      *
-     * @return String Tomorrow's date
+     * @return string Tomorrow's date
      */
     public function tomorrow()
     {
@@ -130,9 +130,9 @@ class DateTime
     /**
      * Returns a MySQL compatible Date & Time definition.
      *
-     * @param Integer $timestamp PHP-like Unix Timestamp (optional)
+     * @param integer $timestamp PHP-like Unix Timestamp (optional)
      *
-     * @return String $datetime Date & Time as a string
+     * @return string $datetime Date & Time as a string
      */
     public function get_datetime($timestamp = 0)
     {
@@ -151,11 +151,11 @@ class DateTime
     /**
      * Return a delayed datetime string.
      *
-     * @param String  $delay     Definition for a timeframe
+     * @param string  $delay     Definition for a timeframe
      *                           ("+1 day", "-10 minutes")
-     * @param Integer $timestamp Base timestamp, now by default (optional)
+     * @param integer $timestamp Base timestamp, now by default (optional)
      *
-     * @return String $return DateTime definition, format YYYY-MM-DD HH:MM:SS
+     * @return string $return DateTime definition, format YYYY-MM-DD HH:MM:SS
      */
     public function get_delayed_datetime($delay, $timestamp = 0)
     {
@@ -174,11 +174,11 @@ class DateTime
     /**
      * Return a timestamp of a certain timeframe in the past/future.
      *
-     * @param String  $delay     Definition for a timeframe
+     * @param string  $delay     Definition for a timeframe
      *                           ("+1 day", "-10 minutes")
-     * @param Integer $timestamp Base timestamp, now by default (optional)
+     * @param integer $timestamp Base timestamp, now by default (optional)
      *
-     * @return Integer Delayed timestamp
+     * @return integer Delayed timestamp
      */
     public function get_delayed_timestamp($delay, $timestamp = 0)
     {
@@ -199,10 +199,10 @@ class DateTime
      *
      * This function can be used for PHP's sorting functions.
      *
-     * @param String $a DateTime String 1
-     * @param String $b DateTime String 2
+     * @param string $a DateTime String 1
+     * @param string $b DateTime String 2
      *
-     * @return Integer -1 if $a < $b, 1 otherwise
+     * @return integer -1 if $a < $b, 1 otherwise
      */
     public function sort_compare_datetime($a, $b)
     {
@@ -224,7 +224,7 @@ class DateTime
      *
      * @param mixed $value The input to check
      *
-     * @return Boolean $return TRUE if input is a valid date, FALSE otherwise.
+     * @return boolean $return TRUE if input is a valid date, FALSE otherwise.
      */
     public function is_date($value)
     {
@@ -257,7 +257,7 @@ class DateTime
      *
      * @param integer $value The input to check
      *
-     * @return Boolean $return TRUE if input is a valid date, FALSE otherwise.
+     * @return boolean $return TRUE if input is a valid date, FALSE otherwise.
      */
     public function is_leap_year($value)
     {
@@ -269,7 +269,7 @@ class DateTime
      *
      * @param mixed $value The input to check
      *
-     * @return Boolean $return TRUE if input is a valid time, FALSE otherwise.
+     * @return boolean $return TRUE if input is a valid time, FALSE otherwise.
      */
     public function is_time($value)
     {

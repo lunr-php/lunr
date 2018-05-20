@@ -85,9 +85,9 @@ class L10n
     /**
      * Convert a language (if supported) from ISO 639-1 to POSIX locale format.
      *
-     * @param String $language The language to convert on ISO 639-1 format
+     * @param string $language The language to convert on ISO 639-1 format
      *
-     * @return String $locale The POSIX locale that has been deemed most
+     * @return string $locale The POSIX locale that has been deemed most
      *                          appropriate or the default if not found
      */
     public function iso_to_posix($language)

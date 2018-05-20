@@ -50,7 +50,7 @@ class MPNSToastPayload extends MPNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return String $return Payload
+     * @return string $return Payload
      */
     public function get_payload()
     {
@@ -81,7 +81,7 @@ class MPNSToastPayload extends MPNSPayload
     /**
      * Set title for the toast notification.
      *
-     * @param String $title Title
+     * @param string $title Title
      *
      * @return MPNSToastPayload $self Self Reference
      */
@@ -95,7 +95,7 @@ class MPNSToastPayload extends MPNSPayload
     /**
      * Set message for the toast notification.
      *
-     * @param String $message Message
+     * @param string $message Message
      *
      * @return MPNSToastPayload $self Self Reference
      */
@@ -109,7 +109,7 @@ class MPNSToastPayload extends MPNSPayload
     /**
      * Set deeplink for the toast notification.
      *
-     * @param String $deeplink Deeplink
+     * @param string $deeplink Deeplink
      *
      * @return MPNSToastPayload $self Self Reference
      */

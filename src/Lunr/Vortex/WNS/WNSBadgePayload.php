@@ -38,7 +38,7 @@ class WNSBadgePayload extends WNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return String $return Payload
+     * @return string $return Payload
      */
     public function get_payload()
     {
