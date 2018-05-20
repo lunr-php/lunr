@@ -32,7 +32,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     {
         $method = $this->get_accessible_reflection_method('sql_set');
 
-        $method->invokeArgs($this->class, [[ 'column1' => 'value1' ]]);
+        $method->invokeArgs($this->class, [ [ 'column1' => 'value1' ] ]);
 
         $string = 'SET column1 = value1';
 
@@ -48,8 +48,8 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     {
         $method = $this->get_accessible_reflection_method('sql_set');
 
-        $method->invokeArgs($this->class, [[ 'column1' => 'value1' ]]);
-        $method->invokeArgs($this->class, [[ 'column2' => 'value2' ]]);
+        $method->invokeArgs($this->class, [ [ 'column1' => 'value1' ] ]);
+        $method->invokeArgs($this->class, [ [ 'column2' => 'value2' ] ]);
 
         $string = 'SET column1 = value1, column2 = value2';
 
@@ -65,8 +65,8 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     {
         $method = $this->get_accessible_reflection_method('sql_set');
 
-        $method->invokeArgs($this->class, [[ 'column1' => 'value1' ]]);
-        $method->invokeArgs($this->class, [[ 'column2' => NULL ]]);
+        $method->invokeArgs($this->class, [ [ 'column1' => 'value1' ] ]);
+        $method->invokeArgs($this->class, [ [ 'column2' => NULL ] ]);
 
         $string = 'SET column1 = value1, column2 = NULL';
 
@@ -117,7 +117,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     {
         $method = $this->get_accessible_reflection_method('sql_values');
 
-        $method->invokeArgs($this->class, [[ 'value1', 'value2', 'value3' ]]);
+        $method->invokeArgs($this->class, [ [ 'value1', 'value2', 'value3' ] ]);
 
         $values   = [];
         $values[] = [ 'value4', 'value5', 'value6' ];
@@ -139,7 +139,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     {
         $method = $this->get_accessible_reflection_method('sql_values');
 
-        $method->invokeArgs($this->class, [[ 'value1', NULL, 'value3' ]]);
+        $method->invokeArgs($this->class, [ [ 'value1', NULL, 'value3' ] ]);
 
         $string = 'VALUES (value1, NULL, value3)';
 
@@ -155,7 +155,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
     {
         $method = $this->get_accessible_reflection_method('sql_column_names');
 
-        $method->invokeArgs($this->class, [[ 'column1', 'column2', 'column3' ]]);
+        $method->invokeArgs($this->class, [ [ 'column1', 'column2', 'column3' ] ]);
 
         $string = '(column1, column2, column3)';
 

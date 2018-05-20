@@ -77,10 +77,10 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
 
         $this->escaper->expects($this->once())
                       ->method('list_value')
-                      ->with($this->equalTo(['val1', 'val2']))
+                      ->with($this->equalTo([ 'val1', 'val2' ]))
                       ->will($this->returnValue('("val1", "val2")'));
 
-        $this->class->on_in('left', ['val1', 'val2']);
+        $this->class->on_in('left', [ 'val1', 'val2' ]);
 
         $this->assertEquals('ON `left` IN ("val1", "val2")', $this->get_reflection_property_value('join'));
     }
@@ -216,10 +216,10 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
 
         $this->escaper->expects($this->once())
                       ->method('list_value')
-                      ->with($this->equalTo(['val1', 'val2']))
+                      ->with($this->equalTo([ 'val1', 'val2' ]))
                       ->will($this->returnValue('("val1", "val2")'));
 
-        $this->class->where_in('left', ['val1', 'val2']);
+        $this->class->where_in('left', [ 'val1', 'val2' ]);
 
         $this->assertEquals('WHERE `left` IN ("val1", "val2")', $this->get_reflection_property_value('where'));
     }
@@ -355,10 +355,10 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
 
         $this->escaper->expects($this->once())
                       ->method('list_value')
-                      ->with($this->equalTo(['val1', 'val2']))
+                      ->with($this->equalTo([ 'val1', 'val2' ]))
                       ->will($this->returnValue('("val1", "val2")'));
 
-        $this->class->having_in('left', ['val1', 'val2']);
+        $this->class->having_in('left', [ 'val1', 'val2' ]);
 
         $this->assertEquals('HAVING `left` IN ("val1", "val2")', $this->get_reflection_property_value('having'));
     }

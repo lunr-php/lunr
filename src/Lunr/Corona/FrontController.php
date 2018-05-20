@@ -206,7 +206,7 @@ class FrontController
      */
     public function dispatch($controller)
     {
-        call_user_func_array([$controller, $this->request->method], $this->request->params);
+        call_user_func_array([ $controller, $this->request->method ], $this->request->params);
     }
 
 }

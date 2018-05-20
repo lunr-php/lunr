@@ -36,7 +36,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $method = $this->get_accessible_reflection_method('load_recipe');
 
         $this->assertNotContains($filename, get_included_files());
-        $method->invokeArgs($this->class, ['nonexisting']);
+        $method->invokeArgs($this->class, [ 'nonexisting' ]);
         $this->assertNotContains($filename, get_included_files());
     }
 
@@ -55,7 +55,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $method = $this->get_accessible_reflection_method('load_recipe');
 
         $this->assertNotContains($filename, get_included_files());
-        $method->invokeArgs($this->class, ['valid']);
+        $method->invokeArgs($this->class, [ 'valid' ]);
         $this->assertContains($filename, get_included_files());
     }
 
@@ -70,7 +70,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $cache  = $this->get_accessible_reflection_property('cache');
 
         $this->assertArrayNotHasKey('valid', $cache->getValue($this->class));
-        $method->invokeArgs($this->class, ['valid']);
+        $method->invokeArgs($this->class, [ 'valid' ]);
         $this->assertArrayHasKey('valid', $cache->getValue($this->class));
     }
 
@@ -88,7 +88,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $cache  = $this->get_accessible_reflection_property('cache');
 
         $this->assertArrayNotHasKey($id, $cache->getValue($this->class));
-        $method->invokeArgs($this->class, ['valid']);
+        $method->invokeArgs($this->class, [ 'valid' ]);
         $this->assertArrayNotHasKey($id, $cache->getValue($this->class));
     }
 
@@ -101,7 +101,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
     {
         $method = $this->get_accessible_reflection_method('process_new_instance');
 
-        $return = $method->invokeArgs($this->class, ['id', 'instance']);
+        $return = $method->invokeArgs($this->class, [ 'id', 'instance' ]);
 
         $this->assertEquals('instance', $return);
     }
@@ -120,7 +120,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $this->set_reflection_property_value('cache', $recipe);
 
         $this->assertArrayNotHasKey('id', $registry->getValue($this->class));
-        $method->invokeArgs($this->class, ['id', 'instance']);
+        $method->invokeArgs($this->class, [ 'id', 'instance' ]);
         $this->assertArrayNotHasKey('id', $registry->getValue($this->class));
     }
 
@@ -138,7 +138,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $this->set_reflection_property_value('cache', $recipe);
 
         $this->assertArrayNotHasKey('id', $registry->getValue($this->class));
-        $method->invokeArgs($this->class, ['id', 'instance']);
+        $method->invokeArgs($this->class, [ 'id', 'instance' ]);
         $this->assertArrayNotHasKey('id', $registry->getValue($this->class));
     }
 
@@ -156,7 +156,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $this->set_reflection_property_value('cache', $recipe);
 
         $this->assertArrayNotHasKey('id', $registry->getValue($this->class));
-        $method->invokeArgs($this->class, ['id', 'instance']);
+        $method->invokeArgs($this->class, [ 'id', 'instance' ]);
         $this->assertArrayHasKey('id', $registry->getValue($this->class));
     }
 

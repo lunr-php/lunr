@@ -43,7 +43,7 @@ class WNSToastPayloadSetTest extends WNSToastPayloadTest
      */
     public function testSetTextArray()
     {
-        $this->class->set_text(['title', 'message']);
+        $this->class->set_text([ 'title', 'message' ]);
 
         $value = $this->get_reflection_property_value('elements');
 

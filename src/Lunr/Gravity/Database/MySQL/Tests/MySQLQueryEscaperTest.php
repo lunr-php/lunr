@@ -63,11 +63,11 @@ abstract class MySQLQueryEscaperTest extends LunrBaseTest
     public function invalidIndicesProvider()
     {
         $indices   = [];
-        $indices[] = [NULL];
-        $indices[] = [FALSE];
-        $indices[] = ['string'];
-        $indices[] = [new \stdClass()];
-        $indices[] = [[]];
+        $indices[] = [ NULL ];
+        $indices[] = [ FALSE ];
+        $indices[] = [ 'string' ];
+        $indices[] = [ new \stdClass() ];
+        $indices[] = [ [] ];
 
         return $indices;
     }
@@ -80,9 +80,9 @@ abstract class MySQLQueryEscaperTest extends LunrBaseTest
     public function validIndexKeywordProvider()
     {
         $keywords   = [];
-        $keywords[] = ['USE'];
-        $keywords[] = ['IGNORE'];
-        $keywords[] = ['FORCE'];
+        $keywords[] = [ 'USE' ];
+        $keywords[] = [ 'IGNORE' ];
+        $keywords[] = [ 'FORCE' ];
 
         return $keywords;
     }
@@ -95,10 +95,10 @@ abstract class MySQLQueryEscaperTest extends LunrBaseTest
     public function validIndexForProvider()
     {
         $for   = [];
-        $for[] = ['JOIN'];
-        $for[] = ['ORDER BY'];
-        $for[] = ['GROUP BY'];
-        $for[] = [''];
+        $for[] = [ 'JOIN' ];
+        $for[] = [ 'ORDER BY' ];
+        $for[] = [ 'GROUP BY' ];
+        $for[] = [ '' ];
 
         return $for;
     }

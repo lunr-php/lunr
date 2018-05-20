@@ -44,7 +44,7 @@ class ConfigurationConvertArrayToClassTest extends ConfigurationTest
     {
         $method = $this->configuration_reflection->getMethod('convert_array_to_class');
         $method->setAccessible(TRUE);
-        $this->assertEquals($input, $method->invokeArgs($this->configuration, [$input]));
+        $this->assertEquals($input, $method->invokeArgs($this->configuration, [ $input ]));
     }
 
     /**
@@ -56,7 +56,7 @@ class ConfigurationConvertArrayToClassTest extends ConfigurationTest
     {
         $method = $this->configuration_reflection->getMethod('convert_array_to_class');
         $method->setAccessible(TRUE);
-        $output = $method->invokeArgs($this->configuration, [[]]);
+        $output = $method->invokeArgs($this->configuration, [ [] ]);
 
         $this->assertInstanceOf('Lunr\Core\Configuration', $output);
 
@@ -84,7 +84,7 @@ class ConfigurationConvertArrayToClassTest extends ConfigurationTest
 
         $method = $this->configuration_reflection->getMethod('convert_array_to_class');
         $method->setAccessible(TRUE);
-        $output = $method->invokeArgs($this->configuration, [$input]);
+        $output = $method->invokeArgs($this->configuration, [ $input ]);
 
         $this->assertEquals($input, $output);
     }
@@ -105,7 +105,7 @@ class ConfigurationConvertArrayToClassTest extends ConfigurationTest
 
         $method = $this->configuration_reflection->getMethod('convert_array_to_class');
         $method->setAccessible(TRUE);
-        $output = $method->invokeArgs($this->configuration, [$config]);
+        $output = $method->invokeArgs($this->configuration, [ $config ]);
 
         $this->assertTrue(is_array($output));
 

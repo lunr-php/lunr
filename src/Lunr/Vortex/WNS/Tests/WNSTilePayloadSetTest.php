@@ -58,12 +58,12 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      */
     public function testSetTextArray()
     {
-        $this->class->set_text(['Hello', 'Text', 'Test']);
+        $this->class->set_text([ 'Hello', 'Text', 'Test' ]);
 
         $value = $this->get_reflection_property_value('elements');
 
         $this->assertArrayHasKey('text', $value);
-        $this->assertEquals(['Hello', 'Text', 'Test'], $value['text']);
+        $this->assertEquals([ 'Hello', 'Text', 'Test' ], $value['text']);
     }
 
     /**
@@ -113,12 +113,12 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      */
     public function testSetImageArray()
     {
-        $this->class->set_image(['Hello', 'Image', 'Test']);
+        $this->class->set_image([ 'Hello', 'Image', 'Test' ]);
 
         $value = $this->get_reflection_property_value('elements');
 
         $this->assertArrayHasKey('image', $value);
-        $this->assertEquals(['Hello', 'Image', 'Test'], $value['image']);
+        $this->assertEquals([ 'Hello', 'Image', 'Test' ], $value['image']);
     }
 
     /**
@@ -138,12 +138,12 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      */
     public function testSetTemplates()
     {
-        $this->class->set_templates(['HelloSQ', 'HelloW']);
+        $this->class->set_templates([ 'HelloSQ', 'HelloW' ]);
 
         $value = $this->get_reflection_property_value('elements');
 
         $this->assertArrayHasKey('templates', $value);
-        $this->assertEquals(['HelloSQ', 'HelloW'], $value['templates']);
+        $this->assertEquals([ 'HelloSQ', 'HelloW' ], $value['templates']);
     }
 
     /**

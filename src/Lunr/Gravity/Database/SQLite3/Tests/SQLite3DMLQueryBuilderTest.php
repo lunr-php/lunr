@@ -53,8 +53,8 @@ abstract class SQLite3DMLQueryBuilderTest extends LunrBaseTest
     public function selectModesDuplicatesProvider()
     {
         $modes   = [];
-        $modes[] = ['ALL'];
-        $modes[] = ['DISTINCT'];
+        $modes[] = [ 'ALL' ];
+        $modes[] = [ 'DISTINCT' ];
 
         return $modes;
     }
@@ -67,11 +67,11 @@ abstract class SQLite3DMLQueryBuilderTest extends LunrBaseTest
     public function modesProvider()
     {
         $modes   = [];
-        $modes[] = ['OR ROLLBACK'];
-        $modes[] = ['OR IGNORE'];
-        $modes[] = ['OR ABORT'];
-        $modes[] = ['OR REPLACE'];
-        $modes[] = ['OR FAIL'];
+        $modes[] = [ 'OR ROLLBACK' ];
+        $modes[] = [ 'OR IGNORE' ];
+        $modes[] = [ 'OR ABORT' ];
+        $modes[] = [ 'OR REPLACE' ];
+        $modes[] = [ 'OR FAIL' ];
 
         return $modes;
     }
@@ -84,11 +84,11 @@ abstract class SQLite3DMLQueryBuilderTest extends LunrBaseTest
     public function expectedModesProvider()
     {
         $expectedmodes   = [];
-        $expectedmodes[] = ['or rollback', 'OR ROLLBACK'];
-        $expectedmodes[] = ['or abort', 'OR ABORT'];
-        $expectedmodes[] = ['or ignore', 'OR IGNORE'];
-        $expectedmodes[] = ['or replace', 'OR REPLACE'];
-        $expectedmodes[] = ['or fail', 'OR FAIL'];
+        $expectedmodes[] = [ 'or rollback', 'OR ROLLBACK' ];
+        $expectedmodes[] = [ 'or abort', 'OR ABORT' ];
+        $expectedmodes[] = [ 'or ignore', 'OR IGNORE' ];
+        $expectedmodes[] = [ 'or replace', 'OR REPLACE' ];
+        $expectedmodes[] = [ 'or fail', 'OR FAIL' ];
 
         return $expectedmodes;
     }

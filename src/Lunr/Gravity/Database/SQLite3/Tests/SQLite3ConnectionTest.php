@@ -113,8 +113,8 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
                                 ->will($this->returnValue(TRUE));
 
         $map = [
-            ['file', '/tmp/test.db'],
-            ['driver', 'sqlite3'],
+            [ 'file', '/tmp/test.db' ],
+            [ 'driver', 'sqlite3' ],
         ];
 
         $this->sub_configuration->expects($this->atLeast(1))
@@ -151,7 +151,7 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
     public function escapeStringProvider()
     {
         $strings   = [];
-        $strings[] = ['Start', 'Start', 'Start'];
+        $strings[] = [ 'Start', 'Start', 'Start' ];
 
         return $strings;
     }

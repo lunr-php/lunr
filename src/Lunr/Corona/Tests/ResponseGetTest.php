@@ -55,7 +55,7 @@ class ResponseGetTest extends ResponseTest
      */
     public function testGetResponseDataWithExistingKey()
     {
-        $data = ['key' => 'value'];
+        $data = [ 'key' => 'value' ];
 
         $this->set_reflection_property_value('data', $data);
 
@@ -93,7 +93,7 @@ class ResponseGetTest extends ResponseTest
      */
     public function testGetExistingErrorMessage()
     {
-        $data = ['controller/method' => 'error message'];
+        $data = [ 'controller/method' => 'error message' ];
 
         $this->set_reflection_property_value('errmsg', $data);
 
@@ -117,7 +117,7 @@ class ResponseGetTest extends ResponseTest
      */
     public function testGetExistingErrorInfo()
     {
-        $data = ['controller/method' => 'error info'];
+        $data = [ 'controller/method' => 'error info' ];
 
         $this->set_reflection_property_value('errinfo', $data);
 
@@ -141,7 +141,7 @@ class ResponseGetTest extends ResponseTest
      */
     public function testGetExistingReturnCode()
     {
-        $data = ['controller/method' => 200];
+        $data = [ 'controller/method' => 200 ];
 
         $this->set_reflection_property_value('return_code', $data);
 
@@ -165,7 +165,7 @@ class ResponseGetTest extends ResponseTest
      */
     public function testGetReturnCodeWithoutIdentifier()
     {
-        $data = ['controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
+        $data = [ 'controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
 
         $this->set_reflection_property_value('return_code', $data);
 
@@ -179,7 +179,7 @@ class ResponseGetTest extends ResponseTest
      */
     public function testGetMaximumReturnCodeIdentifier()
     {
-        $data = ['controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
+        $data = [ 'controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
 
         $this->set_reflection_property_value('return_code', $data);
 
@@ -193,7 +193,7 @@ class ResponseGetTest extends ResponseTest
      */
     public function testGetAllReturnCodeIdentifiers()
     {
-        $data = ['controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
+        $data = [ 'controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
 
         $this->set_reflection_property_value('return_code', $data);
 

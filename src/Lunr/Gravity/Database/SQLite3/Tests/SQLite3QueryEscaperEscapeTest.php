@@ -137,7 +137,7 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      */
     public function testEscapingIndexHintWithValidKeyword($keyword)
     {
-        $indices = ['index', 'index'];
+        $indices = [ 'index', 'index' ];
 
         $value = $this->class->index_hint($keyword, $indices);
 
@@ -152,7 +152,7 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      */
     public function testEscapingIndexHintWithInvalidKeyword()
     {
-        $indices = ['index', 'index'];
+        $indices = [ 'index', 'index' ];
 
         $value = $this->class->index_hint('invalid', $indices);
 

@@ -42,7 +42,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
 
-        $this->assertNull($method->invokeArgs($this->pool, [TRUE, TRUE]));
+        $this->assertNull($method->invokeArgs($this->pool, [ TRUE, TRUE ]));
     }
 
     /**
@@ -55,7 +55,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
 
-        $this->assertNull($method->invokeArgs($this->pool, [TRUE, FALSE]));
+        $this->assertNull($method->invokeArgs($this->pool, [ TRUE, FALSE ]));
     }
 
     /**
@@ -68,7 +68,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
 
-        $this->assertNull($method->invokeArgs($this->pool, [FALSE, TRUE]));
+        $this->assertNull($method->invokeArgs($this->pool, [ FALSE, TRUE ]));
     }
 
     /**
@@ -81,7 +81,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
 
-        $this->assertNull($method->invokeArgs($this->pool, [FALSE, FALSE]));
+        $this->assertNull($method->invokeArgs($this->pool, [ FALSE, FALSE ]));
     }
 
     /**
@@ -99,7 +99,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
 
         $old = $property->getValue($this->pool);
 
-        $method->invokeArgs($this->pool, [TRUE, TRUE]);
+        $method->invokeArgs($this->pool, [ TRUE, TRUE ]);
 
         $new = $property->getValue($this->pool);
 
@@ -121,7 +121,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
 
         $old = $property->getValue($this->pool);
 
-        $method->invokeArgs($this->pool, [TRUE, FALSE]);
+        $method->invokeArgs($this->pool, [ TRUE, FALSE ]);
 
         $new = $property->getValue($this->pool);
 
@@ -143,7 +143,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
 
         $old = $property->getValue($this->pool);
 
-        $method->invokeArgs($this->pool, [FALSE, TRUE]);
+        $method->invokeArgs($this->pool, [ FALSE, TRUE ]);
 
         $new = $property->getValue($this->pool);
 
@@ -165,7 +165,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
 
         $old = $property->getValue($this->pool);
 
-        $method->invokeArgs($this->pool, [FALSE, FALSE]);
+        $method->invokeArgs($this->pool, [ FALSE, FALSE ]);
 
         $new = $property->getValue($this->pool);
 

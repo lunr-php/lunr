@@ -29,7 +29,7 @@ class WNSToastPayloadGetTest extends WNSToastPayloadTest
     public function testGetPayloadWithTitle()
     {
         $file     = TEST_STATICS . '/Vortex/wns/toast_title.xml';
-        $elements = [ 'text' => ['Title'] ];
+        $elements = [ 'text' => [ 'Title' ] ];
 
         $this->set_reflection_property_value('elements', $elements);
 
@@ -44,7 +44,7 @@ class WNSToastPayloadGetTest extends WNSToastPayloadTest
     public function testGetPayloadWithMessage()
     {
         $file     = TEST_STATICS . '/Vortex/wns/toast_message.xml';
-        $elements = [ 'text' => ['Message'] ];
+        $elements = [ 'text' => [ 'Message' ] ];
 
         $this->set_reflection_property_value('elements', $elements);
 
@@ -74,7 +74,7 @@ class WNSToastPayloadGetTest extends WNSToastPayloadTest
     public function testGetPayload()
     {
         $file     = TEST_STATICS . '/Vortex/wns/toast.xml';
-        $elements = [ 'text' => ['Title', 'Message', 'Hello'], 'template' => 'ToastText04', 'image' => 'image', 'launch' => 'Deeplink' ];
+        $elements = [ 'text' => [ 'Title', 'Message', 'Hello' ], 'template' => 'ToastText04', 'image' => 'image', 'launch' => 'Deeplink' ];
 
         $this->set_reflection_property_value('elements', $elements);
 

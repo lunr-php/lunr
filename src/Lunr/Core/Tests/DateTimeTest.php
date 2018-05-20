@@ -94,9 +94,9 @@ abstract class DateTimeTest extends LunrBaseTest
     public function validTimestampProvider()
     {
         $timestamps   = [];
-        $timestamps[] = [time()];
-        $timestamps[] = [strtotime('+30 minutes')];
-        $timestamps[] = [strtotime('+1 week')];
+        $timestamps[] = [ time() ];
+        $timestamps[] = [ strtotime('+30 minutes') ];
+        $timestamps[] = [ strtotime('+1 week') ];
 
         return $timestamps;
     }
@@ -109,9 +109,9 @@ abstract class DateTimeTest extends LunrBaseTest
     public function invalidTimestampProvider()
     {
         $timestamps   = [];
-        $timestamps[] = ['String'];
-        $timestamps[] = [FALSE];
-        $timestamps[] = [NULL];
+        $timestamps[] = [ 'String' ];
+        $timestamps[] = [ FALSE ];
+        $timestamps[] = [ NULL ];
 
         return $timestamps;
     }
@@ -124,11 +124,11 @@ abstract class DateTimeTest extends LunrBaseTest
     public function validDelayProvider()
     {
         $delay   = [];
-        $delay[] = ['+1 day'];
-        $delay[] = ['-1 week'];
-        $delay[] = ['+1 month'];
-        $delay[] = ['-1 year'];
-        $delay[] = ['2011-10-10'];
+        $delay[] = [ '+1 day' ];
+        $delay[] = [ '-1 week' ];
+        $delay[] = [ '+1 month' ];
+        $delay[] = [ '-1 year' ];
+        $delay[] = [ '2011-10-10' ];
 
         return $delay;
     }
@@ -141,10 +141,10 @@ abstract class DateTimeTest extends LunrBaseTest
     public function invalidDelayProvider()
     {
         $delay   = [];
-        $delay[] = [''];
-        $delay[] = ['String'];
-        $delay[] = [NULL];
-        $delay[] = [FALSE];
+        $delay[] = [ '' ];
+        $delay[] = [ 'String' ];
+        $delay[] = [ NULL ];
+        $delay[] = [ FALSE ];
 
         return $delay;
     }
@@ -157,8 +157,8 @@ abstract class DateTimeTest extends LunrBaseTest
     public function equalDatetimeProvider()
     {
         $datetimes   = [];
-        $datetimes[] = ['2010-02-02', '2010-02-02'];
-        $datetimes[] = ['13:20', '13:20'];
+        $datetimes[] = [ '2010-02-02', '2010-02-02' ];
+        $datetimes[] = [ '13:20', '13:20' ];
 
         return $datetimes;
     }
@@ -171,9 +171,9 @@ abstract class DateTimeTest extends LunrBaseTest
     public function inequalDatetimeProvider()
     {
         $datetimes   = [];
-        $datetimes[] = ['2010-02-02', '2010-02-03'];
-        $datetimes[] = ['10:20', '15:15'];
-        $datetimes[] = ['2010-02-02 13:10', '2010-02-02 15:10'];
+        $datetimes[] = [ '2010-02-02', '2010-02-03' ];
+        $datetimes[] = [ '10:20', '15:15' ];
+        $datetimes[] = [ '2010-02-02 13:10', '2010-02-02 15:10' ];
 
         return $datetimes;
     }
@@ -188,7 +188,7 @@ abstract class DateTimeTest extends LunrBaseTest
     public function datetimeFormatProvider()
     {
         $formats   = $this->invalidDatetimeFormatProvider();
-        $formats[] = ['%A'];
+        $formats[] = [ '%A' ];
 
         return $formats;
     }
@@ -203,11 +203,11 @@ abstract class DateTimeTest extends LunrBaseTest
     public function invalidDatetimeFormatProvider()
     {
         $formats   = [];
-        $formats[] = [''];
-        $formats[] = [10];
-        $formats[] = ['String'];
-        $formats[] = [FALSE];
-        $formats[] = [NULL];
+        $formats[] = [ '' ];
+        $formats[] = [ 10 ];
+        $formats[] = [ 'String' ];
+        $formats[] = [ FALSE ];
+        $formats[] = [ NULL ];
 
         return $formats;
     }
@@ -220,11 +220,11 @@ abstract class DateTimeTest extends LunrBaseTest
     public function invalidLocaleProvider()
     {
         $locales   = [];
-        $locales[] = [''];
-        $locales[] = [10];
-        $locales[] = ['String'];
-        $locales[] = [FALSE];
-        $locales[] = [NULL];
+        $locales[] = [ '' ];
+        $locales[] = [ 10 ];
+        $locales[] = [ 'String' ];
+        $locales[] = [ FALSE ];
+        $locales[] = [ NULL ];
 
         return $locales;
     }
@@ -237,11 +237,11 @@ abstract class DateTimeTest extends LunrBaseTest
     public function validTimeProvider()
     {
         $times   = [];
-        $times[] = ['23:30'];
-        $times[] = ['23:30:01'];
-        $times[] = ['23:30:21'];
-        $times[] = ['30:10'];
-        $times[] = ['124:10:23'];
+        $times[] = [ '23:30' ];
+        $times[] = [ '23:30:01' ];
+        $times[] = [ '23:30:21' ];
+        $times[] = [ '30:10' ];
+        $times[] = [ '124:10:23' ];
 
         return $times;
     }
@@ -254,11 +254,11 @@ abstract class DateTimeTest extends LunrBaseTest
     public function invalidTimeProvider()
     {
         $times   = [];
-        $times[] = ['23:20:67'];
-        $times[] = ['23:61'];
-        $times[] = ['30:61'];
-        $times[] = ['30:61:10'];
-        $times[] = ['1345:10'];
+        $times[] = [ '23:20:67' ];
+        $times[] = [ '23:61' ];
+        $times[] = [ '30:61' ];
+        $times[] = [ '30:61:10' ];
+        $times[] = [ '1345:10' ];
 
         return $times;
     }
@@ -271,8 +271,8 @@ abstract class DateTimeTest extends LunrBaseTest
     public function validLeapYearProvider()
     {
         $years   = [];
-        $years[] = [1996];
-        $years[] = [2000];
+        $years[] = [ 1996 ];
+        $years[] = [ 2000 ];
 
         return $years;
     }
@@ -285,9 +285,9 @@ abstract class DateTimeTest extends LunrBaseTest
     public function invalidLeapYearProvider()
     {
         $years   = [];
-        $years[] = [1998];
-        $years[] = [2001];
-        $years[] = [3000];
+        $years[] = [ 1998 ];
+        $years[] = [ 2001 ];
+        $years[] = [ 3000 ];
 
         return $years;
     }
@@ -300,11 +300,11 @@ abstract class DateTimeTest extends LunrBaseTest
     public function validDateProvider()
     {
         $dates   = [];
-        $dates[] = ['2010-02-10'];
-        $dates[] = ['1-01-02'];
-        $dates[] = ['2096-02-29'];
-        $dates[] = ['2011-01-31'];
-        $dates[] = ['2400-02-29'];
+        $dates[] = [ '2010-02-10' ];
+        $dates[] = [ '1-01-02' ];
+        $dates[] = [ '2096-02-29' ];
+        $dates[] = [ '2011-01-31' ];
+        $dates[] = [ '2400-02-29' ];
 
         return $dates;
     }
@@ -317,15 +317,15 @@ abstract class DateTimeTest extends LunrBaseTest
     public function invalidDateProvider()
     {
         $dates   = [];
-        $dates[] = ['string'];
-        $dates[] = ['1020367'];
-        $dates[] = [FALSE];
-        $dates[] = ['2010-02-30'];
-        $dates[] = ['2010-13-10'];
-        $dates[] = ['2011-04-31'];
-        $dates[] = ['2095-02-29'];
-        $dates[] = ['2100-02-29'];
-        $dates[] = ['2200-02-29'];
+        $dates[] = [ 'string' ];
+        $dates[] = [ '1020367' ];
+        $dates[] = [ FALSE ];
+        $dates[] = [ '2010-02-30' ];
+        $dates[] = [ '2010-13-10' ];
+        $dates[] = [ '2011-04-31' ];
+        $dates[] = [ '2095-02-29' ];
+        $dates[] = [ '2100-02-29' ];
+        $dates[] = [ '2200-02-29' ];
 
         return $dates;
     }

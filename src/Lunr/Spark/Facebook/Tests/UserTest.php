@@ -88,9 +88,9 @@ abstract class UserTest extends LunrBaseTest
     {
         $permissions   = [];
         $permissions[] = [ 'email' ];
-        $permissions[] = [[ 'email' ]];
-        $permissions[] = [[ 'user_likes', 'friends_likes' ]];
-        $permissions[] = [[ 'friends_likes', 'user_likes' ]];
+        $permissions[] = [ [ 'email' ] ];
+        $permissions[] = [ [ 'user_likes', 'friends_likes' ] ];
+        $permissions[] = [ [ 'friends_likes', 'user_likes' ] ];
 
         return $permissions;
     }
@@ -104,8 +104,8 @@ abstract class UserTest extends LunrBaseTest
     {
         $permissions   = [];
         $permissions[] = [ 'friends_likes', 'friends_likes' ];
-        $permissions[] = [[ 'friends_likes' ], 'friends_likes' ];
-        $permissions[] = [[ 'friends_likes', 'user_about_me' ], 'friends_likes or user_about_me' ];
+        $permissions[] = [ [ 'friends_likes' ], 'friends_likes' ];
+        $permissions[] = [ [ 'friends_likes', 'user_about_me' ], 'friends_likes or user_about_me' ];
 
         return $permissions;
     }

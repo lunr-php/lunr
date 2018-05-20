@@ -331,7 +331,7 @@ class FeedGetPreviousDataTest extends FeedTest
                    ->will($this->returnValue($this->response));
 
         $url    = 'https://graph.facebook.com/me/permissions';
-        $params = ['access_token' => 'Token'];
+        $params = [ 'access_token' => 'Token' ];
 
         $this->http->expects($this->at(1))
                    ->method('request')

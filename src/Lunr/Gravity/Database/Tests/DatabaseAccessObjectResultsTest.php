@@ -173,12 +173,12 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{query}; failed with error: {error}', ['query' => 'query', 'error' => 'message']);
+                     ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
 
         $method = $this->reflection_dao->getMethod('result_array');
         $method->setAccessible(TRUE);
 
-        $this->assertFalse($method->invokeArgs($this->dao, [&$query]));
+        $this->assertFalse($method->invokeArgs($this->dao, [ &$query ]));
     }
 
     /**
@@ -203,7 +203,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $method = $this->reflection_dao->getMethod('result_array');
         $method->setAccessible(TRUE);
 
-        $result = $method->invokeArgs($this->dao, [&$query]);
+        $result = $method->invokeArgs($this->dao, [ &$query ]);
 
         $this->assertInternalType('array', $result);
         $this->assertEmpty($result);
@@ -228,7 +228,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('number_of_rows')
               ->will($this->returnValue(1));
 
-        $query_result = [0 => ['key' => 'value']];
+        $query_result = [ 0 => [ 'key' => 'value' ] ];
 
         $query->expects($this->once())
               ->method('result_array')
@@ -237,7 +237,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $method = $this->reflection_dao->getMethod('result_array');
         $method->setAccessible(TRUE);
 
-        $result = $method->invokeArgs($this->dao, [&$query]);
+        $result = $method->invokeArgs($this->dao, [ &$query ]);
 
         $this->assertInternalType('array', $result);
         $this->assertEquals($query_result, $result);
@@ -268,12 +268,12 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{query}; failed with error: {error}', ['query' => 'query', 'error' => 'message']);
+                     ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
 
         $method = $this->reflection_dao->getMethod('result_row');
         $method->setAccessible(TRUE);
 
-        $this->assertFalse($method->invokeArgs($this->dao, [&$query]));
+        $this->assertFalse($method->invokeArgs($this->dao, [ &$query ]));
     }
 
     /**
@@ -298,7 +298,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $method = $this->reflection_dao->getMethod('result_row');
         $method->setAccessible(TRUE);
 
-        $result = $method->invokeArgs($this->dao, [&$query]);
+        $result = $method->invokeArgs($this->dao, [ &$query ]);
 
         $this->assertInternalType('array', $result);
         $this->assertEmpty($result);
@@ -323,7 +323,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('number_of_rows')
               ->will($this->returnValue(1));
 
-        $query_result = ['key' => 'value'];
+        $query_result = [ 'key' => 'value' ];
 
         $query->expects($this->once())
               ->method('result_row')
@@ -332,7 +332,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $method = $this->reflection_dao->getMethod('result_row');
         $method->setAccessible(TRUE);
 
-        $result = $method->invokeArgs($this->dao, [&$query]);
+        $result = $method->invokeArgs($this->dao, [ &$query ]);
 
         $this->assertInternalType('array', $result);
         $this->assertEquals($query_result, $result);
@@ -363,12 +363,12 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{query}; failed with error: {error}', ['query' => 'query', 'error' => 'message']);
+                     ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
 
         $method = $this->reflection_dao->getMethod('result_column');
         $method->setAccessible(TRUE);
 
-        $this->assertFalse($method->invokeArgs($this->dao, [&$query, 'col']));
+        $this->assertFalse($method->invokeArgs($this->dao, [ &$query, 'col' ]));
     }
 
     /**
@@ -393,7 +393,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $method = $this->reflection_dao->getMethod('result_column');
         $method->setAccessible(TRUE);
 
-        $result = $method->invokeArgs($this->dao, [&$query, 'col']);
+        $result = $method->invokeArgs($this->dao, [ &$query, 'col' ]);
 
         $this->assertInternalType('array', $result);
         $this->assertEmpty($result);
@@ -418,7 +418,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('number_of_rows')
               ->will($this->returnValue(1));
 
-        $query_result = [0 => 'value'];
+        $query_result = [ 0 => 'value' ];
 
         $query->expects($this->once())
               ->method('result_column')
@@ -427,7 +427,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $method = $this->reflection_dao->getMethod('result_column');
         $method->setAccessible(TRUE);
 
-        $result = $method->invokeArgs($this->dao, [&$query, 'col']);
+        $result = $method->invokeArgs($this->dao, [ &$query, 'col' ]);
 
         $this->assertInternalType('array', $result);
         $this->assertEquals($query_result, $result);
@@ -458,12 +458,12 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{query}; failed with error: {error}', ['query' => 'query', 'error' => 'message']);
+                     ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
 
         $method = $this->reflection_dao->getMethod('result_cell');
         $method->setAccessible(TRUE);
 
-        $this->assertFalse($method->invokeArgs($this->dao, [&$query, 'col']));
+        $this->assertFalse($method->invokeArgs($this->dao, [ &$query, 'col' ]));
     }
 
     /**
@@ -488,7 +488,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $method = $this->reflection_dao->getMethod('result_cell');
         $method->setAccessible(TRUE);
 
-        $result = $method->invokeArgs($this->dao, [&$query, 'col']);
+        $result = $method->invokeArgs($this->dao, [ &$query, 'col' ]);
 
         $this->assertEquals('', $result);
     }
@@ -521,7 +521,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $method = $this->reflection_dao->getMethod('result_cell');
         $method->setAccessible(TRUE);
 
-        $result = $method->invokeArgs($this->dao, [&$query, 'col']);
+        $result = $method->invokeArgs($this->dao, [ &$query, 'col' ]);
 
         $this->assertEquals($query_result, $result);
     }
@@ -544,7 +544,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $method = $this->reflection_dao->getMethod('result_retry');
         $method->setAccessible(TRUE);
 
-        $result = $method->invokeArgs($this->dao, [$query]);
+        $result = $method->invokeArgs($this->dao, [ $query ]);
 
         $this->assertSame($result, $query);
     }
@@ -576,7 +576,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $method = $this->reflection_dao->getMethod('result_retry');
         $method->setAccessible(TRUE);
 
-        $result = $method->invokeArgs($this->dao, [$query, 1]);
+        $result = $method->invokeArgs($this->dao, [ $query, 1 ]);
 
         $this->assertSame($result, $query);
     }
@@ -612,7 +612,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $method = $this->reflection_dao->getMethod('result_retry');
         $method->setAccessible(TRUE);
 
-        $result = $method->invokeArgs($this->dao, [$query, 2]);
+        $result = $method->invokeArgs($this->dao, [ $query, 2 ]);
 
         $this->assertSame($result, $query);
     }
@@ -642,12 +642,12 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $this->logger->expects($this->once())
             ->method('error')
-            ->with('{query}; failed with error: {error}', ['query' => 'query', 'error' => 'message']);
+            ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
 
         $method2 = $this->reflection_dao->getMethod('result_boolean');
         $method2->setAccessible(TRUE);
 
-        $this->assertFalse($method2->invokeArgs($this->dao, [&$query]));
+        $this->assertFalse($method2->invokeArgs($this->dao, [ &$query ]));
     }
 
     /**
@@ -668,7 +668,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $method2 = $this->reflection_dao->getMethod('result_boolean');
         $method2->setAccessible(TRUE);
 
-        $this->assertTrue($method2->invokeArgs($this->dao, [&$query]));
+        $this->assertTrue($method2->invokeArgs($this->dao, [ &$query ]));
     }
 
 }

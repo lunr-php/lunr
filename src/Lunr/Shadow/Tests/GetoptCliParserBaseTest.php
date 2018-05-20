@@ -35,7 +35,7 @@ class GetoptCliParserBaseTest extends GetoptCliParserTest
      */
     public function testLongOptsIsPassedCorrectly()
     {
-        $this->assertPropertyEquals('long', ['first', 'second:', 'third::']);
+        $this->assertPropertyEquals('long', [ 'first', 'second:', 'third::' ]);
     }
 
     /**

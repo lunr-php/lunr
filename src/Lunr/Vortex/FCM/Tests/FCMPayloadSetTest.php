@@ -28,12 +28,12 @@ class FCMPayloadSetTest extends FCMPayloadTest
      */
     public function testSetNotification()
     {
-        $this->class->set_notification(['key' => 'value']);
+        $this->class->set_notification([ 'key' => 'value' ]);
 
         $value = $this->get_reflection_property_value('elements');
 
         $this->assertArrayHasKey('notification', $value);
-        $this->assertEquals(['key' => 'value'], $value['notification']);
+        $this->assertEquals([ 'key' => 'value' ], $value['notification']);
     }
 
     /**

@@ -63,11 +63,11 @@ abstract class SQLite3QueryEscaperTest extends LunrBaseTest
     public function invalidIndicesProvider()
     {
         $indices   = [];
-        $indices[] = [NULL];
-        $indices[] = [FALSE];
-        $indices[] = ['string'];
-        $indices[] = [new \stdClass()];
-        $indices[] = [[]];
+        $indices[] = [ NULL ];
+        $indices[] = [ FALSE ];
+        $indices[] = [ 'string' ];
+        $indices[] = [ new \stdClass() ];
+        $indices[] = [ [] ];
 
         return $indices;
     }
@@ -80,7 +80,7 @@ abstract class SQLite3QueryEscaperTest extends LunrBaseTest
     public function validIndexKeywordProvider()
     {
         $keywords   = [];
-        $keywords[] = ['INDEXED BY'];
+        $keywords[] = [ 'INDEXED BY' ];
 
         return $keywords;
     }

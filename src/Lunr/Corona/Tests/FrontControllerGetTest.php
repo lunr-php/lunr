@@ -40,7 +40,7 @@ class FrontControllerGetTest extends FrontControllerTest
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->will($this->returnValue([$result]));
+                  ->will($this->returnValue([ $result ]));
 
         $value = $this->class->get_controller($dir);
 
@@ -136,7 +136,7 @@ class FrontControllerGetTest extends FrontControllerTest
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->will($this->returnValue([$result, 'nr2']));
+                  ->will($this->returnValue([ $result, 'nr2' ]));
 
         $value = $this->class->get_controller($dir);
 
@@ -206,7 +206,7 @@ class FrontControllerGetTest extends FrontControllerTest
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->will($this->returnValue([$result]));
+                  ->will($this->returnValue([ $result ]));
 
         $value = $this->class->get_controller($dir, [ 'function' ], FALSE);
 

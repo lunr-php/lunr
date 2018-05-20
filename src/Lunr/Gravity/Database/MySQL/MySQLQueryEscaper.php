@@ -128,8 +128,8 @@ class MySQLQueryEscaper extends DatabaseQueryEscaper
 
         $keyword = strtoupper($keyword);
 
-        $valid_keywords = ['USE', 'IGNORE', 'FORCE'];
-        $valid_for      = ['JOIN', 'ORDER BY', 'GROUP BY', ''];
+        $valid_keywords = [ 'USE', 'IGNORE', 'FORCE' ];
+        $valid_for      = [ 'JOIN', 'ORDER BY', 'GROUP BY', '' ];
 
         if (!in_array($keyword, $valid_keywords))
         {
@@ -141,7 +141,7 @@ class MySQLQueryEscaper extends DatabaseQueryEscaper
             $for = '';
         }
 
-        $indices = array_map([$this, 'escape_location_reference'], $indices);
+        $indices = array_map([ $this, 'escape_location_reference' ], $indices);
         $indices = implode(', ', $indices);
 
         if ($for === '')

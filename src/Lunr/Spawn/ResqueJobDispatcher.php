@@ -53,7 +53,7 @@ class ResqueJobDispatcher implements JobDispatcherInterface
     {
         $this->resque       = $resque;
         $this->token        = NULL;
-        $this->queue        = ['default_queue'];
+        $this->queue        = [ 'default_queue' ];
         $this->track_status = FALSE;
     }
 
@@ -111,7 +111,7 @@ class ResqueJobDispatcher implements JobDispatcherInterface
 
         if (is_string($queue))
         {
-            $this->queue = [$queue];
+            $this->queue = [ $queue ];
         }
         elseif (is_array($queue))
         {

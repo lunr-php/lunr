@@ -29,7 +29,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
      */
     public function testParseArgvWithNoArgumentsReturnsEmptyArray()
     {
-        $_SERVER['argv'] = ['script.php'];
+        $_SERVER['argv'] = [ 'script.php' ];
 
         $value = $this->class->parse();
 
@@ -47,7 +47,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
      */
     public function testParseArgvWithIncompleteArguments($param)
     {
-        $_SERVER['argv'] = ['script.php', $param];
+        $_SERVER['argv'] = [ 'script.php', $param ];
 
         $this->console->expects($this->once())
                       ->method('cli_println')

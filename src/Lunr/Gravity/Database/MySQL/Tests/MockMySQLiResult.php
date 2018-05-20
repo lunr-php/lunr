@@ -55,7 +55,7 @@ class MockMySQLiResult
      */
     public function __call($method, $arguments)
     {
-        return call_user_func_array([$this->mysqli_result, $method], $arguments);
+        return call_user_func_array([ $this->mysqli_result, $method ], $arguments);
     }
 
     /**

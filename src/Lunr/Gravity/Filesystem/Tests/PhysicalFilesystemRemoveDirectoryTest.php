@@ -75,7 +75,7 @@ class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObje
     {
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with('{message}', ['message' => 'Directory name must not be empty.']);
+                     ->with('{message}', [ 'message' => 'Directory name must not be empty.' ]);
 
         $this->assertFalse($this->class->rmdir($directory));
     }

@@ -37,7 +37,7 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
              ->method('warning')
              ->with($this->equalTo('Could not open the file: filepath'));
 
-        $this->assertFalse($this->class->put_csv_file_content('filepath', [['value1', 'value2']]));
+        $this->assertFalse($this->class->put_csv_file_content('filepath', [ [ 'value1', 'value2' ] ]));
 
         $this->unmock_function('fopen');
     }
@@ -54,7 +54,7 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
     {
         $filepath = TEST_STATICS . '/Gravity/folder2/test.csv';
 
-        $this->assertTrue($this->class->put_csv_file_content($filepath, [[$values]]));
+        $this->assertTrue($this->class->put_csv_file_content($filepath, [ [ $values ] ]));
         $this->assertStringMatchesFormatFile($filepath, "\n");
 
         unlink($filepath);
@@ -69,7 +69,7 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
     {
         $filepath = TEST_STATICS . '/Gravity/folder2/test.csv';
 
-        $this->assertTrue($this->class->put_csv_file_content($filepath, [['value1', 'value2']]));
+        $this->assertTrue($this->class->put_csv_file_content($filepath, [ [ 'value1', 'value2' ] ]));
         $this->assertStringMatchesFormatFile($filepath, "value1,value2\n");
 
         unlink($filepath);
@@ -84,7 +84,7 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
     {
         $filepath = TEST_STATICS . '/Gravity/folder2/test.csv';
 
-        $this->assertTrue($this->class->put_csv_file_content($filepath, [['value1', 'value2']], '-'));
+        $this->assertTrue($this->class->put_csv_file_content($filepath, [ [ 'value1', 'value2' ] ], '-'));
         $this->assertStringMatchesFormatFile($filepath, "value1-value2\n");
 
         unlink($filepath);

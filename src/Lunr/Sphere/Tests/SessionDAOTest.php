@@ -91,7 +91,7 @@ class SessionDAOTest extends LunrBaseTest
                          ->getMock();
 
         $this->query_builder = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder')
-                                    ->setConstructorArgs([$this->db])
+                                    ->setConstructorArgs([ $this->db ])
                                     ->getMock();
 
         $this->escaper = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper')

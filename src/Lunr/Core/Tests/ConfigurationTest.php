@@ -104,11 +104,11 @@ abstract class ConfigurationTest extends TestCase
     public function nonArrayValueProvider()
     {
         $values   = [];
-        $values[] = ['String'];
-        $values[] = [1];
-        $values[] = [NULL];
-        $values[] = [FALSE];
-        $values[] = [new stdClass()];
+        $values[] = [ 'String' ];
+        $values[] = [ 1 ];
+        $values[] = [ NULL ];
+        $values[] = [ FALSE ];
+        $values[] = [ new stdClass() ];
 
         return $values;
     }
@@ -121,7 +121,7 @@ abstract class ConfigurationTest extends TestCase
     public function existingConfigPairProvider()
     {
         $pairs   = [];
-        $pairs[] = ['test1', 'String'];
+        $pairs[] = [ 'test1', 'String' ];
 
         return $pairs;
     }
@@ -134,7 +134,7 @@ abstract class ConfigurationTest extends TestCase
     public function nonExistingConfigPairProvider()
     {
         $pairs   = [];
-        $pairs[] = ['test4', 'Value'];
+        $pairs[] = [ 'test4', 'Value' ];
 
         return $pairs;
     }

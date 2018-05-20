@@ -29,13 +29,13 @@ class LunrCliParserCheckOptionalArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentReturnsTrueForValidParameterWithOneArg()
     {
-        $this->set_reflection_property_value('args', ['test.php', '-c', 'arg']);
+        $this->set_reflection_property_value('args', [ 'test.php', '-c', 'arg' ]);
 
-        $this->set_reflection_property_value('ast', ['c' => []]);
+        $this->set_reflection_property_value('ast', [ 'c' => [] ]);
 
         $method = $this->get_accessible_reflection_method('check_argument');
 
-        $value = $method->invokeArgs($this->class, ['c', 1, 0, 'c;']);
+        $value = $method->invokeArgs($this->class, [ 'c', 1, 0, 'c;' ]);
 
         $this->assertTrue($value);
     }
@@ -47,13 +47,13 @@ class LunrCliParserCheckOptionalArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentReturnsTrueForValidParameterWithTwoArgs()
     {
-        $this->set_reflection_property_value('args', ['test.php', '-f', 'arg1', 'arg2']);
+        $this->set_reflection_property_value('args', [ 'test.php', '-f', 'arg1', 'arg2' ]);
 
-        $this->set_reflection_property_value('ast', ['f' => []]);
+        $this->set_reflection_property_value('ast', [ 'f' => [] ]);
 
         $method = $this->get_accessible_reflection_method('check_argument');
 
-        $value = $method->invokeArgs($this->class, ['f', 1, 0, 'f;;']);
+        $value = $method->invokeArgs($this->class, [ 'f', 1, 0, 'f;;' ]);
 
         $this->assertTrue($value);
     }
@@ -65,18 +65,18 @@ class LunrCliParserCheckOptionalArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentAppendsFirstArgumentToAst()
     {
-        $this->set_reflection_property_value('args', ['test.php', '-c', 'arg']);
+        $this->set_reflection_property_value('args', [ 'test.php', '-c', 'arg' ]);
 
-        $this->set_reflection_property_value('ast', ['c' => []]);
+        $this->set_reflection_property_value('ast', [ 'c' => [] ]);
 
         $method = $this->get_accessible_reflection_method('check_argument');
 
-        $method->invokeArgs($this->class, ['c', 1, 0, 'c;']);
+        $method->invokeArgs($this->class, [ 'c', 1, 0, 'c;' ]);
 
         $value = $this->get_reflection_property_value('ast');
 
         $this->assertCount(1, $value['c']);
-        $this->assertEquals(['arg'], $value['c']);
+        $this->assertEquals([ 'arg' ], $value['c']);
     }
 
     /**
@@ -86,18 +86,18 @@ class LunrCliParserCheckOptionalArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentAppendsSecondArgumentToAst()
     {
-        $this->set_reflection_property_value('args', ['test.php', '-f', 'arg1', 'arg2']);
+        $this->set_reflection_property_value('args', [ 'test.php', '-f', 'arg1', 'arg2' ]);
 
-        $this->set_reflection_property_value('ast', ['f' => []]);
+        $this->set_reflection_property_value('ast', [ 'f' => [] ]);
 
         $method = $this->get_accessible_reflection_method('check_argument');
 
-        $method->invokeArgs($this->class, ['f', 1, 0, 'f;;']);
+        $method->invokeArgs($this->class, [ 'f', 1, 0, 'f;;' ]);
 
         $value = $this->get_reflection_property_value('ast');
 
         $this->assertCount(2, $value['f']);
-        $this->assertEquals(['arg1', 'arg2'], $value['f']);
+        $this->assertEquals([ 'arg1', 'arg2' ], $value['f']);
     }
 
     /**
@@ -107,16 +107,16 @@ class LunrCliParserCheckOptionalArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentReturnsFalseForArgumentMissing()
     {
-        $this->set_reflection_property_value('args', ['test.php', '-b']);
+        $this->set_reflection_property_value('args', [ 'test.php', '-b' ]);
 
-        $this->set_reflection_property_value('ast', ['b' => []]);
+        $this->set_reflection_property_value('ast', [ 'b' => [] ]);
 
         $method = $this->get_accessible_reflection_method('check_argument');
 
         $this->console->expects($this->never())
                       ->method('cli_println');
 
-        $value = $method->invokeArgs($this->class, ['b', 1, 0, 'b;']);
+        $value = $method->invokeArgs($this->class, [ 'b', 1, 0, 'b;' ]);
 
         $this->assertFalse($value);
     }
@@ -128,16 +128,16 @@ class LunrCliParserCheckOptionalArgumentTest extends LunrCliParserTest
      */
     public function testCheckArgumentReturnsFalseForArgumentMissingWithAnotherParameterAfter()
     {
-        $this->set_reflection_property_value('args', ['test.php', '-b', '-c']);
+        $this->set_reflection_property_value('args', [ 'test.php', '-b', '-c' ]);
 
-        $this->set_reflection_property_value('ast', ['b' => []]);
+        $this->set_reflection_property_value('ast', [ 'b' => [] ]);
 
         $method = $this->get_accessible_reflection_method('check_argument');
 
         $this->console->expects($this->never())
                       ->method('cli_println');
 
-        $value = $method->invokeArgs($this->class, ['b', 1, 0, 'b;']);
+        $value = $method->invokeArgs($this->class, [ 'b', 1, 0, 'b;' ]);
 
         $this->assertFalse($value);
     }

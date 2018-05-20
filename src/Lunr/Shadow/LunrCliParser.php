@@ -256,7 +256,7 @@ class LunrCliParser implements CliParserInterface
 
         if ($pos + 1 < strlen($a))
         {
-            if (!in_array($a{$pos + 1}, [':', ';']))
+            if (!in_array($a{$pos + 1}, [ ':', ';' ]))
             {
                 return FALSE;
             }

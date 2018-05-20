@@ -62,7 +62,7 @@ abstract class MySQLConnectionTest extends LunrBaseTest
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = [
-            ['db', $this->sub_configuration],
+            [ 'db', $this->sub_configuration ],
         ];
 
         $this->configuration->expects($this->any())
@@ -88,7 +88,7 @@ abstract class MySQLConnectionTest extends LunrBaseTest
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = [
-            ['db', $this->sub_configuration],
+            [ 'db', $this->sub_configuration ],
         ];
 
         $this->configuration->expects($this->any())
@@ -96,11 +96,11 @@ abstract class MySQLConnectionTest extends LunrBaseTest
                             ->will($this->returnValueMap($map));
 
         $map = [
-            ['rw_host', 'rw_host'],
-            ['username', 'username'],
-            ['password', 'password'],
-            ['database', 'database'],
-            ['driver', 'mysql'],
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'driver', 'mysql' ],
         ];
 
         $this->sub_configuration->expects($this->any())
@@ -135,10 +135,10 @@ abstract class MySQLConnectionTest extends LunrBaseTest
     public function escapeStringProvider()
     {
         $strings   = [];
-        $strings[] = ["'--", "\'--", "\'--"];
-        $strings[] = ["\'--", "\\\'--", "\\\'--"];
-        $strings[] = ['70%', '70%', '70%'];
-        $strings[] = ['test_name', 'test_name', 'test_name'];
+        $strings[] = [ "'--", "\'--", "\'--" ];
+        $strings[] = [ "\'--", "\\\'--", "\\\'--" ];
+        $strings[] = [ '70%', '70%', '70%' ];
+        $strings[] = [ 'test_name', 'test_name', 'test_name' ];
 
         return $strings;
     }

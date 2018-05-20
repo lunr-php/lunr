@@ -33,7 +33,7 @@ class EmailPayloadSetTest extends EmailPayloadTest
         $value = $this->get_reflection_property_value('elements');
 
         $this->assertArrayHasKey('subject', $value);
-        $this->assertEquals(['subject' => 'subject'], $value);
+        $this->assertEquals([ 'subject' => 'subject' ], $value);
     }
 
     /**
@@ -58,7 +58,7 @@ class EmailPayloadSetTest extends EmailPayloadTest
         $value = $this->get_reflection_property_value('elements');
 
         $this->assertArrayHasKey('body', $value);
-        $this->assertEquals(['body' => 'body'], $value);
+        $this->assertEquals([ 'body' => 'body' ], $value);
     }
 
     /**

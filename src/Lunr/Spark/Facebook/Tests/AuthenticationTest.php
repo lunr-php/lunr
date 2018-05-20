@@ -129,7 +129,7 @@ abstract class AuthenticationTest extends LunrBaseTest
     {
         $values   = [];
         $values[] = [ 'email,various', 'email,various' ];
-        $values[] = [ [ 'email', 'various'], 'email,various' ];
+        $values[] = [ [ 'email', 'various' ], 'email,various' ];
 
         return $values;
     }

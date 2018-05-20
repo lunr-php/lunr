@@ -69,7 +69,7 @@ class ConsoleTest extends LunrBaseTest
         $method = $this->get_accessible_reflection_method('build_cli_output');
         $msg    = 'Test';
         $output = self::DATETIME_STRING . ': ' . $msg;
-        $this->assertEquals($output, $method->invokeArgs($this->class, [$msg]));
+        $this->assertEquals($output, $method->invokeArgs($this->class, [ $msg ]));
     }
 
     /**

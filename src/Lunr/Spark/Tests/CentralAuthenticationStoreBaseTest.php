@@ -67,7 +67,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      */
     public function testAddOverwritesOldValue()
     {
-        $this->set_reflection_property_value('store', [ 'module' => ['key' => 'value1'] ]);
+        $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value1' ] ]);
 
         $this->class->add('module', 'key', 'value');
 
@@ -84,7 +84,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      */
     public function testDeleteUnsetsExistingIndex()
     {
-        $this->set_reflection_property_value('store', [ 'module' => ['key' => 'value'] ]);
+        $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value' ] ]);
 
         $this->class->delete('module', 'key');
 
@@ -100,7 +100,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      */
     public function testDeleteDoesNothingWhenIndexDoesNotExist()
     {
-        $this->set_reflection_property_value('store', [ 'module' => ['key' => 'value'] ]);
+        $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value' ] ]);
 
         $before = $this->get_reflection_property_value('store');
 
@@ -128,7 +128,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      */
     public function testGetReturnsNullWhenIndexDoesNotExist()
     {
-        $this->set_reflection_property_value('store', [ 'module' => ['key' => 'value'] ]);
+        $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value' ] ]);
 
         $this->assertNull($this->class->get('module', 'key1'));
     }
@@ -140,7 +140,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      */
     public function testGetReturnsValueWhenIndexExists()
     {
-        $this->set_reflection_property_value('store', [ 'module' => ['key' => 'value'] ]);
+        $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value' ] ]);
 
         $this->assertEquals('value', $this->class->get('module', 'key'));
     }

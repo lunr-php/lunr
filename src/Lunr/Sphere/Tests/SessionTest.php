@@ -90,9 +90,9 @@ abstract class SessionTest extends LunrBaseTest
     public function invalidSessionHandlerProvider()
     {
         $handlers   = [];
-        $handlers[] = ['myHandler'];
-        $handlers[] = [144];
-        $handlers[] = [TRUE];
+        $handlers[] = [ 'myHandler' ];
+        $handlers[] = [ 144 ];
+        $handlers[] = [ TRUE ];
 
         return $handlers;
     }

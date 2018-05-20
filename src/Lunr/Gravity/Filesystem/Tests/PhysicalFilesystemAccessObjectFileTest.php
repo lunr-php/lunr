@@ -362,7 +362,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{message}', ['message' => "SplFileObject::__construct($filename)$message"]);
+                     ->with('{message}', [ 'message' => "SplFileObject::__construct($filename)$message" ]);
 
         $value = $this->class->get_file_object($file, $mode);
 
@@ -382,7 +382,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{message}', ['message' => $error]);
+                     ->with('{message}', [ 'message' => $error ]);
 
         $value = $this->class->get_file_object($file);
 
@@ -404,7 +404,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{message}', ['message' => $error]);
+                     ->with('{message}', [ 'message' => $error ]);
 
         $value = $this->class->get_file_object($file);
 
@@ -424,7 +424,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{message}', ['message' => $error]);
+                     ->with('{message}', [ 'message' => $error ]);
 
         $value = $this->class->get_file_object($file);
 
@@ -444,7 +444,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{message}', ['message' => $message]);
+                     ->with('{message}', [ 'message' => $message ]);
 
         $value = $this->class->get_file_object($file);
 

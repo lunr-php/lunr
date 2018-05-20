@@ -142,7 +142,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      */
     public function testOptionsIsSetCorrectly()
     {
-        $this->assertPropertyEquals('options', [ MYSQLI_OPT_INT_AND_FLOAT_NATIVE => TRUE]);
+        $this->assertPropertyEquals('options', [ MYSQLI_OPT_INT_AND_FLOAT_NATIVE => TRUE ]);
     }
 
     /**

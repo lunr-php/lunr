@@ -38,7 +38,7 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
                       ->method('cli_println')
                       ->with($this->equalTo('Invalid parameter given: ' . $param));
 
-        $value = $method->invokeArgs($this->class, [$param, 1]);
+        $value = $method->invokeArgs($this->class, [ $param, 1 ]);
 
         $this->assertFalse($value);
     }
@@ -59,7 +59,7 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
                       ->method('cli_println')
                       ->with($this->equalTo('Invalid parameter given: ' . $param));
 
-        $method->invokeArgs($this->class, [$param, 1]);
+        $method->invokeArgs($this->class, [ $param, 1 ]);
 
         $this->assertTrue($this->get_reflection_property_value('error'));
     }
@@ -73,9 +73,9 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
     {
         $method = $this->get_accessible_reflection_method('is_valid_long');
 
-        $this->set_reflection_property_value('long', ['first']);
+        $this->set_reflection_property_value('long', [ 'first' ]);
 
-        $method->invokeArgs($this->class, ['first', 1]);
+        $method->invokeArgs($this->class, [ 'first', 1 ]);
 
         $value = $this->get_reflection_property_value('ast');
 
@@ -93,9 +93,9 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
     {
         $method = $this->get_accessible_reflection_method('is_valid_long');
 
-        $this->set_reflection_property_value('long', ['first']);
+        $this->set_reflection_property_value('long', [ 'first' ]);
 
-        $value = $method->invokeArgs($this->class, ['first', 1]);
+        $value = $method->invokeArgs($this->class, [ 'first', 1 ]);
 
         $this->assertFalse($value);
     }
@@ -109,11 +109,11 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
     {
         $method = $this->get_accessible_reflection_method('is_valid_long');
 
-        $this->set_reflection_property_value('args', ['test.php', '--second', 'arg']);
+        $this->set_reflection_property_value('args', [ 'test.php', '--second', 'arg' ]);
 
-        $this->set_reflection_property_value('long', ['second:']);
+        $this->set_reflection_property_value('long', [ 'second:' ]);
 
-        $value = $method->invokeArgs($this->class, ['second', 1]);
+        $value = $method->invokeArgs($this->class, [ 'second', 1 ]);
 
         $this->assertTrue($value);
     }

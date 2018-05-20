@@ -31,7 +31,7 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
     {
         $method = $this->get_accessible_reflection_method('wrap_argument');
 
-        $value = $method->invokeArgs($this->class, [FALSE]);
+        $value = $method->invokeArgs($this->class, [ FALSE ]);
 
         $this->assertArrayEmpty($value);
     }
@@ -48,9 +48,9 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
     {
         $method = $this->get_accessible_reflection_method('wrap_argument');
 
-        $value = $method->invokeArgs($this->class, [$cli_value]);
+        $value = $method->invokeArgs($this->class, [ $cli_value ]);
 
-        $this->assertEquals([$cli_value], $value);
+        $this->assertEquals([ $cli_value ], $value);
     }
 
     /**
@@ -109,7 +109,7 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
         $value = $this->class->parse();
 
         $this->assertInternalType('array', $value);
-        $this->assertEquals(['a' => [], 'b' => ['arg']], $value);
+        $this->assertEquals([ 'a' => [], 'b' => [ 'arg' ] ], $value);
         $this->unmock_function('getopt');
     }
 

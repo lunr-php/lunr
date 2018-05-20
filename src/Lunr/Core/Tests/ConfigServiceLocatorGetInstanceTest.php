@@ -33,7 +33,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
 
         $method = $this->get_accessible_reflection_method('get_instance');
 
-        $this->assertNull($method->invokeArgs($this->class, ['controller']));
+        $this->assertNull($method->invokeArgs($this->class, [ 'controller' ]));
     }
 
     /**
@@ -48,7 +48,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
 
         $method = $this->get_accessible_reflection_method('get_instance');
 
-        $this->assertInstanceOf('stdClass', $method->invokeArgs($this->class, ['stdclass']));
+        $this->assertInstanceOf('stdClass', $method->invokeArgs($this->class, [ 'stdclass' ]));
     }
 
     /**
@@ -63,7 +63,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
 
         $method = $this->get_accessible_reflection_method('get_instance');
 
-        $this->assertNull($method->invokeArgs($this->class, ['request']));
+        $this->assertNull($method->invokeArgs($this->class, [ 'request' ]));
     }
 
     /**
@@ -78,7 +78,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
 
         $method = $this->get_accessible_reflection_method('get_instance');
 
-        $this->assertInstanceOf('Lunr\Core\DateTime', $method->invokeArgs($this->class, ['datetime']));
+        $this->assertInstanceOf('Lunr\Core\DateTime', $method->invokeArgs($this->class, [ 'datetime' ]));
     }
 
     /**
@@ -93,7 +93,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
 
         $method = $this->get_accessible_reflection_method('get_instance');
 
-        $this->assertInstanceOf('Lunr\Core\DateTime', $method->invokeArgs($this->class, ['datetime']));
+        $this->assertInstanceOf('Lunr\Core\DateTime', $method->invokeArgs($this->class, [ 'datetime' ]));
     }
 
     /**

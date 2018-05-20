@@ -40,8 +40,8 @@ class SessionDAOBaseTest extends SessionDAOTest
                  ->will($this->returnValue($this->query_result));
 
         $map_column = [
-            ['sessionID', '', 'sessionID'],
-            ['expires', '', 'expires'],
+            [ 'sessionID', '', 'sessionID' ],
+            [ 'expires', '', 'expires' ],
         ];
 
         $this->escaper->expects($this->once())
@@ -104,8 +104,8 @@ class SessionDAOBaseTest extends SessionDAOTest
                  ->will($this->returnValue($this->query_result));
 
         $map_column = [
-            ['sessionID', '', 'sessionID'],
-            ['expires', '', 'expires'],
+            [ 'sessionID', '', 'sessionID' ],
+            [ 'expires', '', 'expires' ],
         ];
 
         $this->escaper->expects($this->once())
@@ -248,14 +248,14 @@ class SessionDAOBaseTest extends SessionDAOTest
         $time = time();
 
         $map_column = [
-            ['sessionID', '', 'sessionID'],
-            ['sessionData', '', 'sessionData'],
-            ['expires', '', 'expires'],
+            [ 'sessionID', '', 'sessionID' ],
+            [ 'sessionData', '', 'sessionData' ],
+            [ 'expires', '', 'expires' ],
         ];
 
         $map_value = [
-            ['myId', '', '', 'myId'],
-            [base64_encode('myData'), '', '', base64_encode('myData')],
+            [ 'myId', '', '', 'myId' ],
+            [ base64_encode('myData'), '', '', base64_encode('myData') ],
         ];
 
         $this->escaper->expects($this->exactly(2))

@@ -55,7 +55,7 @@ class GCMBatchResponseGetStatusTest extends GCMBatchResponseTest
         $data = [];
 
         // return unknown status if no status set
-        $data[] = [ [], PushNotificationStatus::UNKNOWN  ];
+        $data[] = [ [], PushNotificationStatus::UNKNOWN ];
 
         // return unknown status if endpoint absent
         $data[] = [

@@ -88,7 +88,7 @@ abstract class GCMDispatcherTest extends LunrBaseTest
                    ->will($this->returnValue(500));
 
         $method = $this->get_accessible_reflection_method('get_batch_response');
-        $result = $method->invokeArgs($this->class, [$this->http, $this->logger, [ 'endpoint' ]]);
+        $result = $method->invokeArgs($this->class, [ $this->http, $this->logger, [ 'endpoint' ] ]);
 
         $this->assertInstanceOf('Lunr\Vortex\GCM\GCMBatchResponse', $result);
     }

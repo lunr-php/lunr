@@ -44,7 +44,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
     {
         $value = $this->get_reflection_property_value('queue');
 
-        $this->assertEquals(['default_queue'], $value);
+        $this->assertEquals([ 'default_queue' ], $value);
     }
 
     /**
@@ -119,7 +119,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
 
         $value = $this->get_reflection_property_value('queue');
 
-        $this->assertSame([$queue], $value);
+        $this->assertSame([ $queue ], $value);
     }
 
     /**
@@ -129,7 +129,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      */
     public function testSetQueueWithArray()
     {
-        $queue = ['queue'];
+        $queue = [ 'queue' ];
         $this->class->set_queue($queue);
 
         $value = $this->get_reflection_property_value('queue');

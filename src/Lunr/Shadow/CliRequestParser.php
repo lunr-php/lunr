@@ -135,7 +135,7 @@ class CliRequestParser implements RequestParserInterface
             $request['call'] = NULL;
         }
 
-        foreach (['params', 'param', 'p'] as $key)
+        foreach ([ 'params', 'param', 'p' ] as $key)
         {
             if (array_key_exists($key, $this->ast))
             {

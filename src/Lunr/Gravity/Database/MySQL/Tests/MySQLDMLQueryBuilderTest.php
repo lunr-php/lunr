@@ -78,9 +78,9 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     public function selectModesDuplicatesProvider()
     {
         $modes   = [];
-        $modes[] = ['ALL'];
-        $modes[] = ['DISTINCT'];
-        $modes[] = ['DISTINCTROW'];
+        $modes[] = [ 'ALL' ];
+        $modes[] = [ 'DISTINCT' ];
+        $modes[] = [ 'DISTINCTROW' ];
 
         return $modes;
     }
@@ -93,8 +93,8 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     public function selectModesCacheProvider()
     {
         $modes   = [];
-        $modes[] = ['SQL_CACHE'];
-        $modes[] = ['SQL_NO_CACHE'];
+        $modes[] = [ 'SQL_CACHE' ];
+        $modes[] = [ 'SQL_NO_CACHE' ];
 
         return $modes;
     }
@@ -107,12 +107,12 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     public function selectModesStandardProvider()
     {
         $modes   = [];
-        $modes[] = ['HIGH_PRIORITY'];
-        $modes[] = ['STRAIGHT_JOIN'];
-        $modes[] = ['SQL_BIG_RESULT'];
-        $modes[] = ['SQL_SMALL_RESULT'];
-        $modes[] = ['SQL_BUFFER_RESULT'];
-        $modes[] = ['SQL_CALC_FOUND_ROWS'];
+        $modes[] = [ 'HIGH_PRIORITY' ];
+        $modes[] = [ 'STRAIGHT_JOIN' ];
+        $modes[] = [ 'SQL_BIG_RESULT' ];
+        $modes[] = [ 'SQL_SMALL_RESULT' ];
+        $modes[] = [ 'SQL_BUFFER_RESULT' ];
+        $modes[] = [ 'SQL_CALC_FOUND_ROWS' ];
 
         return $modes;
     }
@@ -125,8 +125,8 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     public function updateModesStandardProvider()
     {
         $modes   = [];
-        $modes[] = ['LOW_PRIORITY'];
-        $modes[] = ['IGNORE'];
+        $modes[] = [ 'LOW_PRIORITY' ];
+        $modes[] = [ 'IGNORE' ];
 
         return $modes;
     }
@@ -139,8 +139,8 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     public function lockModesStandardProvider()
     {
         $modes   = [];
-        $modes[] = ['FOR UPDATE'];
-        $modes[] = ['LOCK IN SHARE MODE'];
+        $modes[] = [ 'FOR UPDATE' ];
+        $modes[] = [ 'LOCK IN SHARE MODE' ];
 
         return $modes;
     }
@@ -153,9 +153,9 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     public function deleteModesStandardProvider()
     {
         $modes   = [];
-        $modes[] = ['LOW_PRIORITY'];
-        $modes[] = ['QUICK'];
-        $modes[] = ['IGNORE'];
+        $modes[] = [ 'LOW_PRIORITY' ];
+        $modes[] = [ 'QUICK' ];
+        $modes[] = [ 'IGNORE' ];
 
         return $modes;
     }
@@ -168,9 +168,9 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     public function expectedDeleteModesProvider()
     {
         $expectedmodes   = [];
-        $expectedmodes[] = ['low_priority', 'LOW_PRIORITY'];
-        $expectedmodes[] = ['QuIcK', 'QUICK'];
-        $expectedmodes[] = ['IGNORE', 'IGNORE'];
+        $expectedmodes[] = [ 'low_priority', 'LOW_PRIORITY' ];
+        $expectedmodes[] = [ 'QuIcK', 'QUICK' ];
+        $expectedmodes[] = [ 'IGNORE', 'IGNORE' ];
 
         return $expectedmodes;
     }
@@ -183,10 +183,10 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     public function insertModesStandardProvider()
     {
         $modes   = [];
-        $modes[] = ['LOW_PRIORITY'];
-        $modes[] = ['DELAYED'];
-        $modes[] = ['HIGH_PRIORITY'];
-        $modes[] = ['IGNORE'];
+        $modes[] = [ 'LOW_PRIORITY' ];
+        $modes[] = [ 'DELAYED' ];
+        $modes[] = [ 'HIGH_PRIORITY' ];
+        $modes[] = [ 'IGNORE' ];
 
         return $modes;
     }
@@ -199,9 +199,9 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     public function expectedInsertModesProvider()
     {
         $expectedmodes   = [];
-        $expectedmodes[] = ['low_priority', 'LOW_PRIORITY'];
-        $expectedmodes[] = ['DeLayeD', 'DELAYED'];
-        $expectedmodes[] = ['IGNORE', 'IGNORE'];
+        $expectedmodes[] = [ 'low_priority', 'LOW_PRIORITY' ];
+        $expectedmodes[] = [ 'DeLayeD', 'DELAYED' ];
+        $expectedmodes[] = [ 'IGNORE', 'IGNORE' ];
 
         return $expectedmodes;
     }

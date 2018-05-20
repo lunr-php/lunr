@@ -46,7 +46,7 @@ class WNSPayloadBaseTest extends WNSPayloadTest
     {
         $method = $this->get_accessible_reflection_method('escape_string');
 
-        $this->assertEquals($expected, $method->invokeArgs($this->class, [$string]));
+        $this->assertEquals($expected, $method->invokeArgs($this->class, [ $string ]));
     }
 
 }

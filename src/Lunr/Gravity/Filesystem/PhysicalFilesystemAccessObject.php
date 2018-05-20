@@ -150,7 +150,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     {
         $raw_results = scandir($directory, SCANDIR_SORT_NONE);
 
-        return array_diff($raw_results, ['.', '..']);
+        return array_diff($raw_results, [ '.', '..' ]);
     }
 
     /**

@@ -53,12 +53,12 @@ class GCMPayloadSetTest extends GCMPayloadTest
      */
     public function testSetData()
     {
-        $this->class->set_data(['key' => 'value']);
+        $this->class->set_data([ 'key' => 'value' ]);
 
         $value = $this->get_reflection_property_value('elements');
 
         $this->assertArrayHasKey('data', $value);
-        $this->assertEquals(['key' => 'value'], $value['data']);
+        $this->assertEquals([ 'key' => 'value' ], $value['data']);
     }
 
     /**

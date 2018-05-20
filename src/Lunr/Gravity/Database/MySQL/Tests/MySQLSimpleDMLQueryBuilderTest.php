@@ -63,10 +63,10 @@ abstract class MySQLSimpleDMLQueryBuilderTest extends LunrBaseTest
     public function locationReferenceAliasProvider()
     {
         $values   = [];
-        $values[] = ['table AS t', TRUE, 'table', 't', 'table AS t'];
-        $values[] = ['table as t', TRUE, 'table', 't', 'table AS t'];
-        $values[] = ['column AS c', FALSE, 'column', 'c', 'column AS c'];
-        $values[] = ['column as c', FALSE, 'column', 'c', 'column AS c'];
+        $values[] = [ 'table AS t', TRUE, 'table', 't', 'table AS t' ];
+        $values[] = [ 'table as t', TRUE, 'table', 't', 'table AS t' ];
+        $values[] = [ 'column AS c', FALSE, 'column', 'c', 'column AS c' ];
+        $values[] = [ 'column as c', FALSE, 'column', 'c', 'column AS c' ];
 
         return $values;
     }
@@ -79,8 +79,8 @@ abstract class MySQLSimpleDMLQueryBuilderTest extends LunrBaseTest
     public function locationReferenceProvider()
     {
         $values   = [];
-        $values[] = ['table', TRUE, 'table'];
-        $values[] = ['column', FALSE, 'column'];
+        $values[] = [ 'table', TRUE, 'table' ];
+        $values[] = [ 'column', FALSE, 'column' ];
 
         return $values;
     }

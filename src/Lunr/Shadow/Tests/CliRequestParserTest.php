@@ -51,7 +51,7 @@ abstract class CliRequestParserTest extends LunrBaseTest
             'f'        => [ 'value for f' ],
             'w'        => [],
             'a'        => [],
-            'required' => [[ 'value1', 'value2', 'value3' ]],
+            'required' => [ [ 'value1', 'value2', 'value3' ] ],
             'optional' => [ 'optional value' ],
             'option'   => [],
         ];

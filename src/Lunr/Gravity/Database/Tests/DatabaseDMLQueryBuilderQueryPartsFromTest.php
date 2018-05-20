@@ -68,7 +68,7 @@ class DatabaseDMLQueryBuilderQueryPartsFromTest extends DatabaseDMLQueryBuilderT
     public function testFromWithMultipleIndexHints()
     {
         $method = $this->get_accessible_reflection_method('sql_from');
-        $hints  = ['index_hint', 'index_hint'];
+        $hints  = [ 'index_hint', 'index_hint' ];
 
         $method->invokeArgs($this->class, [ 'table', $hints ]);
 
@@ -87,7 +87,7 @@ class DatabaseDMLQueryBuilderQueryPartsFromTest extends DatabaseDMLQueryBuilderT
     public function testFromWithNullIndexHints()
     {
         $method = $this->get_accessible_reflection_method('sql_from');
-        $hints  = [NULL, NULL];
+        $hints  = [ NULL, NULL ];
 
         $method->invokeArgs($this->class, [ 'table', $hints ]);
 
@@ -123,7 +123,7 @@ class DatabaseDMLQueryBuilderQueryPartsFromTest extends DatabaseDMLQueryBuilderT
     public function testIncrementalFromWithIndices()
     {
         $method = $this->get_accessible_reflection_method('sql_from');
-        $hints  = ['index_hint'];
+        $hints  = [ 'index_hint' ];
 
         $method->invokeArgs($this->class, [ 'table', $hints ]);
         $method->invokeArgs($this->class, [ 'table', $hints ]);

@@ -72,15 +72,15 @@ class ResqueJobDispatcherTest extends LunrBaseTest
     public function invalidQueueProvider()
     {
         $queues   = [];
-        $queues[] = [0];
-        $queues[] = [1];
-        $queues[] = [TRUE];
-        $queues[] = [FALSE];
-        $queues[] = [NULL];
-        $queues[] = [25.89];
-        $queues[] = [[123]];
-        $queues[] = [[TRUE]];
-        $queues[] = [[NULL]];
+        $queues[] = [ 0 ];
+        $queues[] = [ 1 ];
+        $queues[] = [ TRUE ];
+        $queues[] = [ FALSE ];
+        $queues[] = [ NULL ];
+        $queues[] = [ 25.89 ];
+        $queues[] = [ [ 123 ] ];
+        $queues[] = [ [ TRUE ] ];
+        $queues[] = [ [ NULL ] ];
 
         return $queues;
     }
@@ -93,8 +93,8 @@ class ResqueJobDispatcherTest extends LunrBaseTest
     public function validTrackStatusProvider()
     {
         $statuses   = [];
-        $statuses[] = [TRUE];
-        $statuses[] = [FALSE];
+        $statuses[] = [ TRUE ];
+        $statuses[] = [ FALSE ];
 
         return $statuses;
     }
@@ -107,11 +107,11 @@ class ResqueJobDispatcherTest extends LunrBaseTest
     public function invalidTrackStatusProvider()
     {
         $statuses   = [];
-        $statuses[] = [0];
-        $statuses[] = [1];
-        $statuses[] = ['str'];
-        $statuses[] = [NULL];
-        $statuses[] = [25.89];
+        $statuses[] = [ 0 ];
+        $statuses[] = [ 1 ];
+        $statuses[] = [ 'str' ];
+        $statuses[] = [ NULL ];
+        $statuses[] = [ 25.89 ];
 
         return $statuses;
     }

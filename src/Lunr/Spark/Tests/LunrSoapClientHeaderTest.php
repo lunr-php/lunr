@@ -32,7 +32,7 @@ class LunrSoapClientHeaderTest extends LunrSoapClientTest
     {
         $namespace = 'ns';
         $name      = 'name';
-        $data      = ['data'];
+        $data      = [ 'data' ];
 
         $result = $this->class->create_header($namespace, $name, $data);
 
@@ -49,8 +49,8 @@ class LunrSoapClientHeaderTest extends LunrSoapClientTest
     public function testSetHeadersSetsHeaders()
     {
         $headers = [
-            new SoapHeader('ns1', 'name1', ['data1']),
-            new SoapHeader('ns2', 'name2', ['data2']),
+            new SoapHeader('ns1', 'name1', [ 'data1' ]),
+            new SoapHeader('ns2', 'name2', [ 'data2' ]),
         ];
 
         $this->class->set_headers($headers);

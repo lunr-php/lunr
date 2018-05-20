@@ -205,7 +205,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
 
         $configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $map = [[ 'db', $sub_configuration ]];
+        $map = [ [ 'db', $sub_configuration ] ];
 
         $configuration->expects($this->any())
                       ->method('offsetGet')
@@ -345,7 +345,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
         $this->class->set_option(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, FALSE);
         $this->class->set_option(MYSQLI_OPT_CONNECT_TIMEOUT, 42);
 
-        $this->assertPropertyEquals('options', [ MYSQLI_OPT_INT_AND_FLOAT_NATIVE => FALSE, MYSQLI_OPT_CONNECT_TIMEOUT => 42]);
+        $this->assertPropertyEquals('options', [ MYSQLI_OPT_INT_AND_FLOAT_NATIVE => FALSE, MYSQLI_OPT_CONNECT_TIMEOUT => 42 ]);
     }
 
 }

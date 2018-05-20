@@ -39,7 +39,7 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetGetDataNoKey()
     {
-        $this->assertEquals(['get_key' => 'get_value', 'get_second_key' => 'get_value'], $this->class->get_get_data());
+        $this->assertEquals([ 'get_key' => 'get_value', 'get_second_key' => 'get_value' ], $this->class->get_get_data());
     }
 
     /**
@@ -49,7 +49,7 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetGetDataWithMockValue()
     {
-        $this->set_reflection_property_value('mock', ['get' => ['get_key' => 'get_mock_value']]);
+        $this->set_reflection_property_value('mock', [ 'get' => [ 'get_key' => 'get_mock_value' ] ]);
 
         $this->assertEquals('get_mock_value', $this->class->get_get_data('get_key'));
     }
@@ -100,7 +100,7 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetPostDataNoKey()
     {
-        $this->assertEquals(['post_key' => 'post_value', 'post_second_key' => 'post_value'], $this->class->get_post_data());
+        $this->assertEquals([ 'post_key' => 'post_value', 'post_second_key' => 'post_value' ], $this->class->get_post_data());
     }
 
     /**

@@ -283,7 +283,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingIndexHintWithValidKeyword($keyword)
     {
-        $indices = ['index', 'index'];
+        $indices = [ 'index', 'index' ];
 
         $value = $this->class->index_hint($keyword, $indices);
 
@@ -298,7 +298,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingIndexHintWithInvalidKeyword()
     {
-        $indices = ['index', 'index'];
+        $indices = [ 'index', 'index' ];
 
         $value = $this->class->index_hint('invalid', $indices);
 
@@ -316,7 +316,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingIndexHintWithValidFor($for)
     {
-        $indices = ['index', 'index'];
+        $indices = [ 'index', 'index' ];
 
         $value = $this->class->index_hint('USE', $indices, $for);
 
@@ -338,7 +338,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingIndexHintWithInvalidFor()
     {
-        $indices = ['index', 'index'];
+        $indices = [ 'index', 'index' ];
 
         $value = $this->class->index_hint('invalid', $indices, 'invalid');
 

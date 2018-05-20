@@ -55,7 +55,7 @@ class SQLDMLQueryBuilderInsertTest extends SQLDMLQueryBuilderTest
      */
     public function testColumnNamesReturnsSelfReference()
     {
-        $return = $this->class->column_names(['column1']);
+        $return = $this->class->column_names([ 'column1' ]);
 
         $this->assertInstanceOf('Lunr\Gravity\Database\SQLDMLQueryBuilder', $return);
         $this->assertSame($this->class, $return);
@@ -68,7 +68,7 @@ class SQLDMLQueryBuilderInsertTest extends SQLDMLQueryBuilderTest
      */
     public function testValuesReturnsSelfReference()
     {
-        $return = $this->class->values(['value1']);
+        $return = $this->class->values([ 'value1' ]);
 
         $this->assertInstanceOf('Lunr\Gravity\Database\SQLDMLQueryBuilder', $return);
         $this->assertSame($this->class, $return);

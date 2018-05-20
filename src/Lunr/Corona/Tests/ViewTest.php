@@ -63,7 +63,7 @@ abstract class ViewTest extends LunrBaseTest
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = [
-            ['path', $this->sub_configuration],
+            [ 'path', $this->sub_configuration ],
         ];
 
         $this->configuration->expects($this->any())
@@ -76,7 +76,7 @@ abstract class ViewTest extends LunrBaseTest
 
         $this->class = $this->getMockBuilder('Lunr\Corona\View')
                            ->setConstructorArgs(
-                               [$this->request, $this->response, $this->configuration]
+                               [ $this->request, $this->response, $this->configuration ]
                              )
                            ->getMockForAbstractClass();
 

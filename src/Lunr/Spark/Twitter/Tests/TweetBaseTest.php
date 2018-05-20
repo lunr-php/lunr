@@ -36,9 +36,9 @@ class TweetBaseTest extends TweetTest
      */
     public function testSetData()
     {
-        $this->class->set_data(['test']);
+        $this->class->set_data([ 'test' ]);
 
-        $this->assertPropertyEquals('data', ['test']);
+        $this->assertPropertyEquals('data', [ 'test' ]);
     }
 
     /**
@@ -48,7 +48,7 @@ class TweetBaseTest extends TweetTest
      */
     public function testSetDataReturnsSelfReference()
     {
-        $this->assertSame($this->class, $this->class->set_data(['data']));
+        $this->assertSame($this->class, $this->class->set_data([ 'data' ]));
     }
 
 }

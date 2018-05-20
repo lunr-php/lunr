@@ -148,10 +148,10 @@ abstract class RequestTest extends LunrBaseTest
     public function validCliArgsValueProvider()
     {
         $values   = [];
-        $values[] = [[]];
-        $values[] = [[[ FALSE, FALSE ]]];
-        $values[] = [[ 'test' ]];
-        $values[] = [[ 'test', 'test1' ]];
+        $values[] = [ [] ];
+        $values[] = [ [ [ FALSE, FALSE ] ] ];
+        $values[] = [ [ 'test' ] ];
+        $values[] = [ [ 'test', 'test1' ] ];
 
         return $values;
     }
@@ -164,9 +164,9 @@ abstract class RequestTest extends LunrBaseTest
     public function cliArgsKeyProvider()
     {
         $values   = [];
-        $values[] = [[]];
-        $values[] = [[ 'a' ]];
-        $values[] = [[ 'a', 'b' ]];
+        $values[] = [ [] ];
+        $values[] = [ [ 'a' ] ];
+        $values[] = [ [ 'a', 'b' ] ];
 
         return $values;
     }

@@ -62,7 +62,7 @@ class Authentication extends Api
             ],
         ];
 
-        $params = ['grant_type' => 'client_credentials'];
+        $params = [ 'grant_type' => 'client_credentials' ];
 
         $url = Domain::API . 'oauth2/token';
 

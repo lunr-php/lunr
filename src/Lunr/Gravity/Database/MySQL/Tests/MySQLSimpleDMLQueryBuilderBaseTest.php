@@ -56,7 +56,7 @@ class MySQLSimpleDMLQueryBuilderBaseTest extends MySQLSimpleDMLQueryBuilderTest
 
         $method = $this->get_accessible_reflection_method('escape_alias');
 
-        $result = $method->invokeArgs($this->class, [$input, $type]);
+        $result = $method->invokeArgs($this->class, [ $input, $type ]);
 
         $this->assertEquals($result, $expected);
     }
@@ -82,7 +82,7 @@ class MySQLSimpleDMLQueryBuilderBaseTest extends MySQLSimpleDMLQueryBuilderTest
 
         $method = $this->get_accessible_reflection_method('escape_alias');
 
-        $result = $method->invokeArgs($this->class, [$input, $type]);
+        $result = $method->invokeArgs($this->class, [ $input, $type ]);
 
         $this->assertEquals($result, $expected);
     }

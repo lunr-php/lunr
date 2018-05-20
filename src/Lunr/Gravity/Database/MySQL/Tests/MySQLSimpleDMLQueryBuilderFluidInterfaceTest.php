@@ -108,7 +108,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      */
     public function testOnInReturnsSelf()
     {
-        $return = $this->class->on_in('col', ['val']);
+        $return = $this->class->on_in('col', [ 'val' ]);
         $this->assertSame($this->class, $return);
     }
 
@@ -163,7 +163,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      */
     public function testWhereInReturnsSelf()
     {
-        $return = $this->class->where_in('col', ['val']);
+        $return = $this->class->where_in('col', [ 'val' ]);
         $this->assertSame($this->class, $return);
     }
 
@@ -229,7 +229,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      */
     public function testHavingInReturnsSelf()
     {
-        $return = $this->class->having_in('col', ['val']);
+        $return = $this->class->having_in('col', [ 'val' ]);
         $this->assertSame($this->class, $return);
     }
 

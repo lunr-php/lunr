@@ -74,7 +74,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      */
     public function testFromWithIndexHints()
     {
-        $hints = ['index_hint'];
+        $hints = [ 'index_hint' ];
         $this->class->from('table', $hints);
         $value = $this->get_reflection_property_value('from');
 
@@ -145,7 +145,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      */
     public function testJoinWithIndexHints()
     {
-        $hints = ['index_hint'];
+        $hints = [ 'index_hint' ];
         $this->class->join('table', 'STRAIGHT', $hints);
         $value = $this->get_reflection_property_value('join');
 

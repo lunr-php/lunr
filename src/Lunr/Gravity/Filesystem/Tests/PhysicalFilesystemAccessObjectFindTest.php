@@ -53,7 +53,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{message}', ['message' => $error]
+                     ->with('{message}', [ 'message' => $error ]
                      );
 
         $value = $this->class->find_matches(NULL, $this->find_location);
@@ -72,7 +72,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{message}', ['message' => $error]
+                     ->with('{message}', [ 'message' => $error ]
                      );
 
         $value = $this->class->find_matches(new \stdClass(), $this->find_location);
@@ -182,7 +182,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     {
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with('{message}', ['message' => 'Directory name must not be empty.']);
+                     ->with('{message}', [ 'message' => 'Directory name must not be empty.' ]);
 
         $value = $this->class->find_matches('/^.+pattern/i', NULL);
 

@@ -101,7 +101,7 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
     public function invalidIndexHintProvider()
     {
         $hints   = [];
-        $hints[] = [[]];
+        $hints[] = [ [] ];
         $hints[] = [ NULL ];
         $hints[] = [ FALSE ];
         $hints[] = [ 1 ];
@@ -135,7 +135,7 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
     public function insertValuesProvider()
     {
         $values   = [];
-        $values[] = [ [[ 'value1', 'value2', 'value3' ]] ];
+        $values[] = [ [ [ 'value1', 'value2', 'value3' ] ] ];
         $values[] = [ [ 'value1', 'value2', 'value3' ] ];
         $values[] = [ [ 'key1' => 'value1', 'key2' => 'value2', 'key3' => 'value3' ] ];
 

@@ -102,7 +102,7 @@ class MPNSResponseSetTest extends MPNSResponseTest
     public function testStatusForSuccessRequestStatus()
     {
         $method = $this->get_accessible_reflection_method('set_status');
-        $method->invokeArgs($this->class, ['URL', $this->logger]);
+        $method->invokeArgs($this->class, [ 'URL', $this->logger ]);
 
         $this->logger->expects($this->never())
                      ->method('warning');
@@ -149,7 +149,7 @@ class MPNSResponseSetTest extends MPNSResponseTest
                      );
 
         $method = $this->get_accessible_reflection_method('set_status');
-        $method->invokeArgs($this->class, ['URL', $this->logger]);
+        $method->invokeArgs($this->class, [ 'URL', $this->logger ]);
 
         $this->assertEquals($expected, $this->get_reflection_property_value('status'));
     }

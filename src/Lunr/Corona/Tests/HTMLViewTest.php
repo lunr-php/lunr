@@ -59,7 +59,7 @@ abstract class HTMLViewTest extends LunrBaseTest
         $this->response = $this->getMockBuilder('Lunr\Corona\Response')->getMock();
 
         $this->class = $this->getMockBuilder('Lunr\Corona\HTMLView')
-                           ->setConstructorArgs([$this->request, $this->response, $this->configuration])
+                           ->setConstructorArgs([ $this->request, $this->response, $this->configuration ])
                            ->getMockForAbstractClass();
 
         $this->reflection = new ReflectionClass('Lunr\Corona\HTMLView');

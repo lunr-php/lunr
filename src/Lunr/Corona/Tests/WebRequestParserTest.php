@@ -71,15 +71,15 @@ abstract class WebRequestParserTest extends LunrBaseTest
     public function invalidSuperglobalValueProvider()
     {
         $values   = [];
-        $values[] = [ [], FALSE];
-        $values[] = [ 0, FALSE];
-        $values[] = [ 'String', FALSE];
-        $values[] = [ TRUE, FALSE];
+        $values[] = [ [], FALSE ];
+        $values[] = [ 0, FALSE ];
+        $values[] = [ 'String', FALSE ];
+        $values[] = [ TRUE, FALSE ];
         $values[] = [ NULL, FALSE ];
-        $values[] = [ [], TRUE];
-        $values[] = [ 0, TRUE];
-        $values[] = [ 'String', TRUE];
-        $values[] = [ TRUE, TRUE];
+        $values[] = [ [], TRUE ];
+        $values[] = [ 0, TRUE ];
+        $values[] = [ 'String', TRUE ];
+        $values[] = [ TRUE, TRUE ];
         $values[] = [ NULL, TRUE ];
 
         return $values;

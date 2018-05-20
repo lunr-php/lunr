@@ -67,7 +67,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
     {
         $output = [
             'message' => 'Something failed',
-            'sys'     => ['id' => 'Something'],
+            'sys'     => [ 'id' => 'Something' ],
         ];
 
         $this->http->expects($this->once())
@@ -152,7 +152,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
     {
         $output = [
             'message' => 'Something failed',
-            'sys'     => ['id' => 'Something'],
+            'sys'     => [ 'id' => 'Something' ],
         ];
 
         $this->http->expects($this->once())

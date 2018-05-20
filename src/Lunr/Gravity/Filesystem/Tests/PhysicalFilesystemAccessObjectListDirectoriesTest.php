@@ -124,7 +124,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
     {
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with('{message}', ['message' => 'Directory name must not be empty.']);
+                     ->with('{message}', [ 'message' => 'Directory name must not be empty.' ]);
 
         $value = $this->class->get_list_of_directories(NULL);
 

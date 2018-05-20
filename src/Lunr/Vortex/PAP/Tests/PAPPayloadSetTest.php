@@ -33,7 +33,7 @@ class PAPPayloadSetTest extends PAPPayloadTest
         $value = $this->get_reflection_property_value('data');
 
         $this->assertArrayHasKey('key', $value);
-        $this->assertEquals(['key' => 'value'], $value);
+        $this->assertEquals([ 'key' => 'value' ], $value);
     }
 
     /**

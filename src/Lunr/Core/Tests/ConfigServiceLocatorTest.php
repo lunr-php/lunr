@@ -62,10 +62,10 @@ abstract class ConfigServiceLocatorTest extends LunrBaseTest
     public function invalidRecipeProvider()
     {
         $ids   = [];
-        $ids[] = ['nonexisting'];
-        $ids[] = ['recipeidnotset'];
-        $ids[] = ['recipeidnotarray'];
-        $ids[] = ['recipeidparamsnotarray'];
+        $ids[] = [ 'nonexisting' ];
+        $ids[] = [ 'recipeidnotset' ];
+        $ids[] = [ 'recipeidnotarray' ];
+        $ids[] = [ 'recipeidparamsnotarray' ];
 
         return $ids;
     }

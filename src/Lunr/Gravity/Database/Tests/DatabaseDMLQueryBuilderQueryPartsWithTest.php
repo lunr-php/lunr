@@ -47,7 +47,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
         $this->set_reflection_property_value('with', 'WITH alias AS ( query )');
 
         $method = $this->get_accessible_reflection_method('sql_with');
-        $method->invokeArgs($this->class, [ 'alias2', 'query2']);
+        $method->invokeArgs($this->class, [ 'alias2', 'query2' ]);
 
         $string = 'WITH alias AS ( query ), alias2 AS ( query2 )';
 
@@ -63,7 +63,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
     {
         $method = $this->get_accessible_reflection_method('sql_with');
 
-        $column_names = ['column1', 'column2', 'column3'];
+        $column_names = [ 'column1', 'column2', 'column3' ];
 
         $method->invokeArgs($this->class, [ 'alias', 'query', $column_names ]);
 
@@ -83,7 +83,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
             ('with', 'WITH alias (column1, column2, column3) AS ( query )');
 
         $method = $this->get_accessible_reflection_method('sql_with');
-        $method->invokeArgs($this->class, [ 'alias2', 'query2']);
+        $method->invokeArgs($this->class, [ 'alias2', 'query2' ]);
 
         $string = 'WITH alias (column1, column2, column3) AS ( query ), alias2 AS ( query2 )';
 

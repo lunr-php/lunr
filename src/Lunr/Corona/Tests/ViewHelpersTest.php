@@ -40,7 +40,7 @@ class ViewHelpersTest extends ViewTest
 
         $method = $this->get_accessible_reflection_method('base_url');
 
-        $this->assertEquals($result, $method->invokeArgs($this->class, [$path]));
+        $this->assertEquals($result, $method->invokeArgs($this->class, [ $path ]));
     }
 
     /**
@@ -65,7 +65,7 @@ class ViewHelpersTest extends ViewTest
 
         $method = $this->get_accessible_reflection_method('statics');
 
-        $this->assertEquals($result, $method->invokeArgs($this->class, [$path]));
+        $this->assertEquals($result, $method->invokeArgs($this->class, [ $path ]));
     }
 
     /**

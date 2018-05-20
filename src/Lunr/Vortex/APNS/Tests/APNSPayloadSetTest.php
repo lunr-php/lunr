@@ -83,7 +83,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
         $value = $this->get_reflection_property_value('elements');
 
         $this->assertArrayHasKey('custom_data', $value);
-        $this->assertEquals(['key' => 'value'], $value['custom_data']);
+        $this->assertEquals([ 'key' => 'value' ], $value['custom_data']);
     }
 
     /**

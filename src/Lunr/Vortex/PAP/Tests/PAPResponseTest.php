@@ -68,7 +68,7 @@ abstract class PAPResponseTest extends LunrBaseTest
                      ->method('warning')
                      ->with(
                         $this->equalTo('Parsing response of push notification to {endpoint} failed: {error}'),
-                        $this->equalTo(['error' => 'Invalid document end', 'endpoint' => '12345679'])
+                        $this->equalTo([ 'error' => 'Invalid document end', 'endpoint' => '12345679' ])
                      );
 
         $this->class      = new PAPResponse($response, $this->logger, '12345679');

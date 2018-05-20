@@ -42,7 +42,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
                          ->getMockForAbstractClass();
 
         $this->class = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseQueryEscaper')
-                            ->setConstructorArgs([$this->db])
+                            ->setConstructorArgs([ $this->db ])
                             ->getMockForAbstractClass();
 
         $this->reflection = new ReflectionClass('Lunr\Gravity\Database\DatabaseQueryEscaper');
@@ -66,11 +66,11 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
     public function columnNameProvider()
     {
         $cols   = [];
-        $cols[] = ['*', '*'];
-        $cols[] = ['table.*', '`table`.*'];
-        $cols[] = ['col', '`col`'];
-        $cols[] = ['table.col', '`table`.`col`'];
-        $cols[] = ['db.table.col', '`db`.`table`.`col`'];
+        $cols[] = [ '*', '*' ];
+        $cols[] = [ 'table.*', '`table`.*' ];
+        $cols[] = [ 'col', '`col`' ];
+        $cols[] = [ 'table.col', '`table`.`col`' ];
+        $cols[] = [ 'db.table.col', '`db`.`table`.`col`' ];
 
         return $cols;
     }
@@ -83,8 +83,8 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
     public function tableNameProvider()
     {
         $cols   = [];
-        $cols[] = ['table', '`table`'];
-        $cols[] = ['db.table', '`db`.`table`'];
+        $cols[] = [ 'table', '`table`' ];
+        $cols[] = [ 'db.table', '`db`.`table`' ];
 
         return $cols;
     }
@@ -97,9 +97,9 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
     public function expectedIntegerProvider()
     {
         $expecteds   = [];
-        $expecteds[] = ['1', 1];
-        $expecteds[] = ['10', 10];
-        $expecteds[] = ['37', 37];
+        $expecteds[] = [ '1', 1 ];
+        $expecteds[] = [ '10', 10 ];
+        $expecteds[] = [ '37', 37 ];
 
         return $expecteds;
     }
@@ -112,8 +112,8 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
     public function expectedFloatProvider()
     {
         $expecteds   = [];
-        $expecteds[] = ['1.0', 1];
-        $expecteds[] = ['10.1', 10.1];
+        $expecteds[] = [ '1.0', 1 ];
+        $expecteds[] = [ '10.1', 10.1 ];
 
         return $expecteds;
     }
@@ -126,18 +126,18 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
     public function illegalIntegerProvider()
     {
         $illegals   = [];
-        $illegals[] = [3.3, 3];
+        $illegals[] = [ 3.3, 3 ];
 
-        $illegals[] = [NULL, 0];
+        $illegals[] = [ NULL, 0 ];
 
-        $illegals[] = [FALSE, 0];
-        $illegals[] = [TRUE, 1];
+        $illegals[] = [ FALSE, 0 ];
+        $illegals[] = [ TRUE, 1 ];
 
-        $illegals[] = ['value', 0];
-        $illegals[] = ['1x10', 1];
+        $illegals[] = [ 'value', 0 ];
+        $illegals[] = [ '1x10', 1 ];
 
-        $illegals[] = [[], 0];
-        $illegals[] = [['a', 'b'], 1];
+        $illegals[] = [ [], 0 ];
+        $illegals[] = [ [ 'a', 'b' ], 1 ];
 
         return $illegals;
     }
@@ -150,17 +150,17 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
     public function illegalFloatProvider()
     {
         $illegals   = [];
-        $illegals[] = ['3.3.3', 3.3];
+        $illegals[] = [ '3.3.3', 3.3 ];
 
-        $illegals[] = [NULL, 0];
+        $illegals[] = [ NULL, 0 ];
 
-        $illegals[] = [FALSE, 0];
-        $illegals[] = [TRUE, 1];
+        $illegals[] = [ FALSE, 0 ];
+        $illegals[] = [ TRUE, 1 ];
 
-        $illegals[] = ['value', 0];
+        $illegals[] = [ 'value', 0 ];
 
-        $illegals[] = [[], 0];
-        $illegals[] = [['a', 'b'], 1];
+        $illegals[] = [ [], 0 ];
+        $illegals[] = [ [ 'a', 'b' ], 1 ];
 
         return $illegals;
     }

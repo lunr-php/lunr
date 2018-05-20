@@ -163,7 +163,7 @@ class SearchApiTest extends SearchTest
     {
         $method = $this->get_accessible_reflection_method('classify');
 
-        $this->assertNull($method->invokeArgs($this->class, [[]]));
+        $this->assertNull($method->invokeArgs($this->class, [ [] ]));
     }
 
     /**
@@ -174,13 +174,13 @@ class SearchApiTest extends SearchTest
     public function testClassifyReturnsArrayOfTweetsOnSuccess()
     {
         $result = [
-            ['Foo' => 'Bar'],
-            ['Bar' => 'Foo'],
+            [ 'Foo' => 'Bar' ],
+            [ 'Bar' => 'Foo' ],
         ];
 
         $method = $this->get_accessible_reflection_method('classify');
 
-        $return = $method->invokeArgs($this->class, [$result]);
+        $return = $method->invokeArgs($this->class, [ $result ]);
 
         $this->assertCount(2, $return);
         $this->assertInstanceOf('Lunr\Spark\Twitter\Tweet', $return[0]);

@@ -51,10 +51,10 @@ class ResponseTest extends LunrBaseTest
     public function invalidReturnCodeProvider()
     {
         $codes   = [];
-        $codes[] = ['502'];
-        $codes[] = [4.5];
-        $codes[] = [TRUE];
-        $codes[] = [[]];
+        $codes[] = [ '502' ];
+        $codes[] = [ 4.5 ];
+        $codes[] = [ TRUE ];
+        $codes[] = [ [] ];
 
         return $codes;
     }
@@ -67,7 +67,7 @@ class ResponseTest extends LunrBaseTest
     public function validResponseAttributesProvider()
     {
         $attrs   = [];
-        $attrs[] = ['view', ''];
+        $attrs[] = [ 'view', '' ];
 
         return $attrs;
     }
@@ -80,10 +80,10 @@ class ResponseTest extends LunrBaseTest
     public function invalidResponseAttributesProvider()
     {
         $attrs   = [];
-        $attrs[] = ['data'];
-        $attrs[] = ['errmsg'];
-        $attrs[] = ['errinfo'];
-        $attrs[] = ['return_code'];
+        $attrs[] = [ 'data' ];
+        $attrs[] = [ 'errmsg' ];
+        $attrs[] = [ 'errinfo' ];
+        $attrs[] = [ 'return_code' ];
 
         return $attrs;
     }

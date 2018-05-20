@@ -91,7 +91,7 @@ class SessionBaseTest extends SessionTest
         $this->set_reflection_property_value('started', FALSE);
         $this->set_reflection_property_value('closed', TRUE);
 
-        $method->invokeArgs($this->class, ['key', 'value']);
+        $method->invokeArgs($this->class, [ 'key', 'value' ]);
 
         $this->assertArrayNotHasKey('key', $_SESSION);
     }
@@ -112,7 +112,7 @@ class SessionBaseTest extends SessionTest
         $this->set_reflection_property_value('started', FALSE);
         $this->set_reflection_property_value('closed', FALSE);
 
-        $method->invokeArgs($this->class, ['key', 'value']);
+        $method->invokeArgs($this->class, [ 'key', 'value' ]);
 
         $this->assertArrayNotHasKey('key', $_SESSION);
     }
@@ -133,7 +133,7 @@ class SessionBaseTest extends SessionTest
         $this->set_reflection_property_value('started', TRUE);
         $this->set_reflection_property_value('closed', TRUE);
 
-        $method->invokeArgs($this->class, ['key', 'value']);
+        $method->invokeArgs($this->class, [ 'key', 'value' ]);
 
         $this->assertArrayNotHasKey('key', $_SESSION);
     }
@@ -152,7 +152,7 @@ class SessionBaseTest extends SessionTest
         $this->set_reflection_property_value('started', TRUE);
         $this->set_reflection_property_value('closed', FALSE);
 
-        $method->invokeArgs($this->class, ['key', 'value']);
+        $method->invokeArgs($this->class, [ 'key', 'value' ]);
 
         $this->assertArrayHasKey('key', $_SESSION);
         $this->assertEquals($_SESSION['key'], 'value');
@@ -174,7 +174,7 @@ class SessionBaseTest extends SessionTest
 
         $_SESSION['key'] = 'value';
 
-        $method->invokeArgs($this->class, ['key']);
+        $method->invokeArgs($this->class, [ 'key' ]);
 
         $this->assertArrayHasKey('key', $_SESSION);
     }
@@ -195,7 +195,7 @@ class SessionBaseTest extends SessionTest
 
         $_SESSION['key'] = 'value';
 
-        $method->invokeArgs($this->class, ['key']);
+        $method->invokeArgs($this->class, [ 'key' ]);
 
         $this->assertArrayHasKey('key', $_SESSION);
     }
@@ -216,7 +216,7 @@ class SessionBaseTest extends SessionTest
 
         $_SESSION['key'] = 'value';
 
-        $method->invokeArgs($this->class, ['key']);
+        $method->invokeArgs($this->class, [ 'key' ]);
 
         $this->assertArrayHasKey('key', $_SESSION);
     }
@@ -238,7 +238,7 @@ class SessionBaseTest extends SessionTest
 
         $_SESSION['key'] = 'value';
 
-        $method->invokeArgs($this->class, ['key']);
+        $method->invokeArgs($this->class, [ 'key' ]);
 
         $this->assertArrayNotHasKey('key', $_SESSION);
     }
@@ -258,7 +258,7 @@ class SessionBaseTest extends SessionTest
 
         $_SESSION['key'] = 'value';
 
-        $this->assertNull($method->invokeArgs($this->class, ['key']));
+        $this->assertNull($method->invokeArgs($this->class, [ 'key' ]));
     }
 
     /**
@@ -272,7 +272,7 @@ class SessionBaseTest extends SessionTest
 
         $this->set_reflection_property_value('started', TRUE);
 
-        $this->assertNull($method->invokeArgs($this->class, ['key']));
+        $this->assertNull($method->invokeArgs($this->class, [ 'key' ]));
     }
 
     /**
@@ -290,7 +290,7 @@ class SessionBaseTest extends SessionTest
 
         $_SESSION['key'] = 'value';
 
-        $this->assertEquals('value', $method->invokeArgs($this->class, ['key']));
+        $this->assertEquals('value', $method->invokeArgs($this->class, [ 'key' ]));
     }
 
     /**

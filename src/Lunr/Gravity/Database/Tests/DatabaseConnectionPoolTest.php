@@ -68,7 +68,7 @@ abstract class DatabaseConnectionPoolTest extends TestCase
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = [
-            ['db', $this->sub_configuration],
+            [ 'db', $this->sub_configuration ],
         ];
 
         $this->configuration->expects($this->any())
@@ -94,7 +94,7 @@ abstract class DatabaseConnectionPoolTest extends TestCase
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = [
-            ['db', $this->sub_configuration],
+            [ 'db', $this->sub_configuration ],
         ];
 
         $this->configuration->expects($this->any())
@@ -102,11 +102,11 @@ abstract class DatabaseConnectionPoolTest extends TestCase
                       ->will($this->returnValueMap($map));
 
         $map = [
-            ['rw_host', 'rw_host'],
-            ['username', 'username'],
-            ['password', 'password'],
-            ['database', 'database'],
-            ['driver', 'unsupported'],
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'driver', 'unsupported' ],
         ];
 
         $this->sub_configuration->expects($this->any())
@@ -132,7 +132,7 @@ abstract class DatabaseConnectionPoolTest extends TestCase
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = [
-            ['db', $this->sub_configuration],
+            [ 'db', $this->sub_configuration ],
         ];
 
         $this->configuration->expects($this->any())
@@ -140,11 +140,11 @@ abstract class DatabaseConnectionPoolTest extends TestCase
                       ->will($this->returnValueMap($map));
 
         $map = [
-            ['rw_host', 'rw_host'],
-            ['username', 'username'],
-            ['password', 'password'],
-            ['database', 'database'],
-            ['driver', 'mysql'],
+            [ 'rw_host', 'rw_host' ],
+            [ 'username', 'username' ],
+            [ 'password', 'password' ],
+            [ 'database', 'database' ],
+            [ 'driver', 'mysql' ],
         ];
 
         $this->sub_configuration->expects($this->any())

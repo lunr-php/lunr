@@ -175,7 +175,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
 
         $method = $this->get_accessible_reflection_method('sql_group_by');
 
-        $method->invokeArgs($this->class, ['group2']);
+        $method->invokeArgs($this->class, [ 'group2' ]);
 
         $string = 'GROUP BY group1, group2';
 

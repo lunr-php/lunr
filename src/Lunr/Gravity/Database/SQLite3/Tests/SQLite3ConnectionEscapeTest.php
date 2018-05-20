@@ -35,7 +35,7 @@ class SQLite3ConnectionEscapeTest extends SQLite3ConnectionTest
      */
     public function testEscapeString($string, $part_escaped, $escaped)
     {
-        $method = [get_class($this->sqlite3), 'escapeString'];
+        $method = [ get_class($this->sqlite3), 'escapeString' ];
 
         $this->mock_method($method, 'return "' . $escaped . '";');
 

@@ -38,7 +38,7 @@ abstract class CacheHandlerTest extends LunrBaseTest
         $this->cache_pool = $this->getMockBuilder('\Psr\Cache\CacheItemPoolInterface')->getMock();
 
         $this->class = $this->getMockBuilder('Lunr\Cache\Cache')
-                            ->setConstructorArgs([$this->cache_pool])
+                            ->setConstructorArgs([ $this->cache_pool ])
                             ->getMockForAbstractClass();
 
         $this->reflection = new ReflectionClass('Lunr\Cache\Cache');

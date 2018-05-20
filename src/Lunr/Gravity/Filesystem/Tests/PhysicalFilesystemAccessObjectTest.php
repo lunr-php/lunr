@@ -71,8 +71,8 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     public function invalidNameProvider()
     {
         $names   = [];
-        $names[] = [NULL, 'SplFileObject::__construct(): Filename cannot be empty'];
-        $names[] = [new stdClass(), 'SplFileObject::__construct() expects parameter 1 to be a valid path, object given'];
+        $names[] = [ NULL, 'SplFileObject::__construct(): Filename cannot be empty' ];
+        $names[] = [ new stdClass(), 'SplFileObject::__construct() expects parameter 1 to be a valid path, object given' ];
 
         return $names;
     }
@@ -85,8 +85,8 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     public function booleanNameProvider()
     {
         $names   = [];
-        $names[] = [TRUE];
-        $names[] = [FALSE];
+        $names[] = [ TRUE ];
+        $names[] = [ FALSE ];
 
         return $names;
     }
@@ -99,10 +99,10 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     public function invalidModesProvider()
     {
         $modes   = [];
-        $modes[] = [NULL, ': failed to open stream: No such file or directory'];
-        $modes[] = [new stdClass(), ' expects parameter 2 to be string, object given'];
-        $modes[] = [TRUE, ': failed to open stream: No such file or directory'];
-        $modes[] = [FALSE, ': failed to open stream: No such file or directory'];
+        $modes[] = [ NULL, ': failed to open stream: No such file or directory' ];
+        $modes[] = [ new stdClass(), ' expects parameter 2 to be string, object given' ];
+        $modes[] = [ TRUE, ': failed to open stream: No such file or directory' ];
+        $modes[] = [ FALSE, ': failed to open stream: No such file or directory' ];
 
         return $modes;
     }
@@ -115,8 +115,8 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     public function emptyFilepathValueProvider()
     {
         $filepath   = [];
-        $filepath[] = [NULL];
-        $filepath[] = [FALSE];
+        $filepath[] = [ NULL ];
+        $filepath[] = [ FALSE ];
 
         return $filepath;
     }
@@ -129,9 +129,9 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     public function invalidFilepathValueProvider()
     {
         $filepath   = [];
-        $filepath[] = ['/tmp56474q', 'RecursiveDirectoryIterator::__construct(/tmp56474q): failed to open dir: No such file or directory'];
-        $filepath[] = ['/root', 'RecursiveDirectoryIterator::__construct(/root): failed to open dir: Permission denied'];
-        $filepath[] = [new stdClass(), 'RecursiveDirectoryIterator::__construct() expects parameter 1 to be string, object given'];
+        $filepath[] = [ '/tmp56474q', 'RecursiveDirectoryIterator::__construct(/tmp56474q): failed to open dir: No such file or directory' ];
+        $filepath[] = [ '/root', 'RecursiveDirectoryIterator::__construct(/root): failed to open dir: Permission denied' ];
+        $filepath[] = [ new stdClass(), 'RecursiveDirectoryIterator::__construct() expects parameter 1 to be string, object given' ];
 
         return $filepath;
     }

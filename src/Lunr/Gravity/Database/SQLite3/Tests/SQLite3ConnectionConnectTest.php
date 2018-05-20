@@ -118,7 +118,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
         $configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = [
-            ['db', $sub_configuration],
+            [ 'db', $sub_configuration ],
         ];
 
         $configuration->expects($this->any())
@@ -126,8 +126,8 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
                       ->will($this->returnValueMap($map));
 
         $map = [
-            ['file', '/tmp/test.db'],
-            ['driver', 'not_sqlite3'],
+            [ 'file', '/tmp/test.db' ],
+            [ 'driver', 'not_sqlite3' ],
         ];
 
         $sub_configuration->expects($this->any())
