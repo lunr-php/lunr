@@ -170,6 +170,8 @@
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectResultsTest.php</file>
             <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectBaseTest.php</file>
             <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectFileTest.php</file>
+            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectTmpTest.php</file>
+            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectRmTest.php</file>
             <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectListDirectoriesTest.php</file>
             <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectListFilesTest.php</file>
             <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectDirectoryTest.php</file>

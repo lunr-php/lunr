@@ -112,6 +112,24 @@ interface FilesystemAccessObjectInterface
      */
     public function mkdir($pathname, $mode = 0755, $recursive = FALSE);
 
+    /**
+     * Generate a temporary file and return the path.
+     *
+     * @param string|null $prefix The prefix to the temp file
+     *
+     * @return bool|string
+     */
+    public function get_tmp_file($prefix = NULL);
+
+    /**
+     * Remove a file.
+     *
+     * @param string $file Filepath
+     *
+     * @return bool
+     */
+    public function rm($file);
+
 }
 
 ?>

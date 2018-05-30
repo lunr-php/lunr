@@ -241,6 +241,31 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     }
 
     /**
+     * Generate a temporary file and return the path.
+     *
+     * @param string|null $prefix The prefix to the temp file
+     *
+     * @return bool|string
+     */
+    public function get_tmp_file($prefix = NULL)
+    {
+        $prefix = $prefix ?? uniqid();
+        return tempnam(sys_get_temp_dir(), $prefix);
+    }
+
+    /**
+     * Remove a file.
+     *
+     * @param string $file Filepath
+     *
+     * @return bool
+     */
+    public function rm($file)
+    {
+        return unlink($file);
+    }
+
+    /**
      * Get the contents of a given file.
      *
      * @param string $file Filepath
