@@ -283,9 +283,10 @@
             <file>../src/Lunr/Vortex/Email/Tests/EmailPayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailPayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailPayloadTest.php</file>
-            <file>../src/Lunr/Vortex/Email/Tests/EmailResponseErrorTest.php</file>
-            <file>../src/Lunr/Vortex/Email/Tests/EmailResponseSetTest.php</file>
-            <file>../src/Lunr/Vortex/Email/Tests/EmailResponseSuccessTest.php</file>
+            <file>../src/Lunr/Vortex/Email/Tests/EmailResponseTest.php</file>
+            <file>../src/Lunr/Vortex/Email/Tests/EmailResponseGetErrorStatusTest.php</file>
+            <file>../src/Lunr/Vortex/Email/Tests/EmailResponseGetSuccessStatusTest.php</file>
+            <file>../src/Lunr/Vortex/Email/Tests/EmailResponseGetUnknownStatusTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherBaseTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherSetTest.php</file>

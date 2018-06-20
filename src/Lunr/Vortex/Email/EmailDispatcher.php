@@ -13,13 +13,13 @@
 
 namespace Lunr\Vortex\Email;
 
-use Lunr\Vortex\PushNotificationDispatcherInterface;
+use Lunr\Vortex\PushNotificationMultiDispatcherInterface;
 use PHPMailer\PHPMailer\Exception as PHPMailerException;
 
 /**
  * Email Notification Dispatcher.
  */
-class EmailDispatcher implements PushNotificationDispatcherInterface
+class EmailDispatcher implements PushNotificationMultiDispatcherInterface
 {
     /**
      * Email Notification source.
@@ -47,8 +47,8 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
      */
     public function __construct($mail_transport, $logger)
     {
-        $this->source   = '';
-        $this->logger   = $logger;
+        $this->source = '';
+        $this->logger = $logger;
 
         $this->mail_transport = $mail_transport;
     }
@@ -83,29 +83,45 @@ class EmailDispatcher implements PushNotificationDispatcherInterface
      */
     public function push($payload, &$endpoints)
     {
+        $payload_array = json_decode($payload->get_payload(), TRUE);
+
         // PHPMailer is not reentrant, so we have to clone it before we can do endpoint specific configuration.
         $mail_transport = $this->clone_mail();
+        $mail_transport->setFrom($this->source);
+        $mail_transport->Subject = $payload_array['subject'];
+        $mail_transport->Body    = $payload_array['body'];
 
-        try
+        $mail_results = [];
+
+        foreach ($endpoints as $endpoint)
         {
-            $mail_transport->setFrom($this->source);
-            $mail_transport->addAddress($endpoints[0]);
+            try
+            {
+                $mail_transport->addAddress($endpoint);
 
-            $payload_array = json_decode($payload->get_payload(), TRUE);
+                $mail_transport->send();
 
-            $mail_transport->Subject = $payload_array['subject'];
-            $mail_transport->Body    = $payload_array['body'];
-
-            $mail_transport->send();
-
-            $res = new EmailResponse($mail_transport, $this->logger, $endpoints[0]);
+                $mail_results[$endpoint] = [
+                    'is_error'      => $mail_transport->isError(),
+                    'error_message' => $mail_transport->ErrorInfo,
+                ];
+            }
+            catch (PHPMailerException $e)
+            {
+                $mail_results[$endpoint] = [
+                    'is_error'      => $mail_transport->isError(),
+                    'error_message' => $mail_transport->ErrorInfo,
+                ];
+            }
+            finally
+            {
+                $mail_transport->clearAddresses();
+            }
         }
-        catch (PHPMailerException $e)
-        {
-            $res = new EmailResponse($mail_transport, $this->logger, $endpoints[0]);
-        }
 
-        return $res;
+        $response = new EmailResponse($mail_results, $this->logger);
+
+        return $response;
     }
 
     /**

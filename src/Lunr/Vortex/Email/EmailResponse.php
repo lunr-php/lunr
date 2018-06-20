@@ -7,6 +7,7 @@
  *
  * @package    Lunr\Vortex\Email
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
+ * @author     Koen Woortman <k.woortman@m2mobi.com
  * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
@@ -23,39 +24,29 @@ class EmailResponse implements PushNotificationResponseInterface
 {
 
     /**
-     * Delivery status.
-     * @var Integer
+     * Push notification statuses per endpoint.
+     * @var array
      */
-    private $status;
+    private $statuses;
 
     /**
-     * Push notification endpoint.
-     * @var String
+     * Shared instance of a Logger class.
+     * @var \Psr\Log\LoggerInterface
      */
-    private $endpoint;
+    private $logger;
 
     /**
      * Constructor.
      *
-     * @param \PHPMailer\PHPMailer\PHPMailer $mail_transport Instance of the mail transport class.
-     * @param \Psr\Log\LoggerInterface       $logger         Shared instance of a Logger.
-     * @param string                         $email          The email address that the message was sent to.
+     * @param array                    $mail_results Contains endpoints with corresponding PHPMailer results.
+     * @param \Psr\Log\LoggerInterface $logger       Shared instance of a Logger.
      */
-    public function __construct($mail_transport, $logger, $email)
+    public function __construct($mail_results, $logger)
     {
-        $this->endpoint = $email;
+        $this->logger   = $logger;
+        $this->statuses = [];
 
-        if ($mail_transport->isError() === FALSE)
-        {
-            $this->status = PushNotificationStatus::SUCCESS;
-        }
-        else
-        {
-            $this->status = PushNotificationStatus::ERROR;
-
-            $context = [ 'endpoint' => $email, 'message' => $mail_transport->ErrorInfo ];
-            $logger->warning('Sending email notification to {endpoint} failed: {message}', $context);
-        }
+        $this->handle_sent_notifications($mail_results);
     }
 
     /**
@@ -63,7 +54,8 @@ class EmailResponse implements PushNotificationResponseInterface
      */
     public function __destruct()
     {
-        unset($this->status);
+        unset($this->statuses);
+        unset($this->logger);
     }
 
     /**
@@ -75,12 +67,38 @@ class EmailResponse implements PushNotificationResponseInterface
      */
     public function get_status($endpoint)
     {
-        if ($endpoint != $this->endpoint)
+        if (!array_key_exists($endpoint, $this->statuses))
         {
             return PushNotificationStatus::UNKNOWN;
         }
 
-        return $this->status;
+        return $this->statuses[$endpoint];
+    }
+
+    /**
+     * Store the results per endpoint in the statuses property
+     *
+     * @param array $mail_results Array containing is_error and a possible error message per endpoint
+     *
+     * @return void
+     */
+    private function handle_sent_notifications($mail_results)
+    {
+        foreach ($mail_results as $endpoint => $result_array)
+        {
+            if ($result_array['is_error'] === FALSE)
+            {
+                $this->statuses[$endpoint] = PushNotificationStatus::SUCCESS;
+            }
+            else
+            {
+                $this->statuses[$endpoint] = PushNotificationStatus::ERROR;
+
+                $context = [ 'endpoint' => $endpoint, 'message' => $result_array['error_message'] ];
+
+                $this->logger->warning('Sending email notification to {endpoint} failed: {message}', $context);
+            }
+        }
     }
 
 }

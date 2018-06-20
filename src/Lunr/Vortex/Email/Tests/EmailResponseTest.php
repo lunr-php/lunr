@@ -14,13 +14,11 @@
 namespace Lunr\Vortex\Email\Tests;
 
 use Lunr\Vortex\Email\EmailResponse;
-use Lunr\Vortex\PushNotificationStatus;
 use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
- * This class contains common setup routines, providers
- * and shared attributes for testing the EmailResponse class.
+ * This class contains setup routines for testing the EmailResponse class.
  *
  * @covers Lunr\Vortex\Email\EmailResponse
  */
@@ -28,10 +26,35 @@ abstract class EmailResponseTest extends LunrBaseTest
 {
 
     /**
+     * Instance of the EmailResponse class.
+     * @var EmailResponse
+     */
+    protected $class;
+
+    /**
      * Mock instance of the Logger class.
      * @var LoggerInterface
      */
     protected $logger;
+
+    /**
+     * Instance of the ReflectionClass class.
+     * @var ReflectionClass
+     */
+    protected $reflection;
+
+    /**
+     * Testcase Constructor.
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+
+        $this->class      = new EmailResponse([], $this->logger);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\Email\EmailResponse');
+    }
 
     /**
      * Testcase Constructor.
@@ -50,14 +73,21 @@ abstract class EmailResponseTest extends LunrBaseTest
 
         $response->ErrorInfo = 'ErrorInfo';
 
-        $this->logger->expects($this->once())
-                     ->method('warning')
-                     ->with(
-                        $this->equalTo('Sending email notification to {endpoint} failed: {message}'),
-                        $this->equalTo([ 'endpoint' => '12345679', 'message' => 'ErrorInfo' ])
-                     );
+        $mail_results = [
+            'error-endpoint' => [
+                'is_error'      => $response->isError(),
+                'error_message' => $response->ErrorInfo
+            ]
+        ];
 
-        $this->class      = new EmailResponse($response, $this->logger, '12345679');
+        $this->logger->expects($this->once())
+             ->method('warning')
+             ->with(
+               $this->equalTo('Sending email notification to {endpoint} failed: {message}'),
+               $this->equalTo([ 'endpoint' => 'error-endpoint', 'message' => 'ErrorInfo' ])
+             );
+
+        $this->class      = new EmailResponse($mail_results, $this->logger);
         $this->reflection = new ReflectionClass('Lunr\Vortex\Email\EmailResponse');
     }
 
@@ -76,7 +106,14 @@ abstract class EmailResponseTest extends LunrBaseTest
                  ->method('isError')
                  ->will($this->returnValue(FALSE));
 
-        $this->class      = new EmailResponse($response, $this->logger, '12345679');
+        $mail_results = [
+            'success-endpoint' => [
+                'is_error'      => $response->isError(),
+                'error_message' => $response->ErrorInfo
+            ]
+        ];
+
+        $this->class      = new EmailResponse($mail_results, $this->logger);
         $this->reflection = new ReflectionClass('Lunr\Vortex\Email\EmailResponse');
     }
 
