@@ -316,6 +316,9 @@
             <file>../src/Lunr/Vortex/GCM/Tests/GCMResponseAddBatchResponseTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMResponseGetStatusTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadBaseTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadHasTopicTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadHasConditionTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadSetLowPriorityTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseBasePushErrorTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseBasePushSuccessTest.php</file>
