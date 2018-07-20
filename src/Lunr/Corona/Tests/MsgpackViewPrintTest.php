@@ -248,7 +248,9 @@ class MsgpackViewPrintTest extends MsgpackViewTest
         $this->assertInternalType('array', $headers);
         $this->assertNotEmpty($headers);
 
-        $this->assertEquals('Content-type: application/msgpack', $headers[0]);
+        $value = strpos($headers[0], 'X-Xdebug-Profile-Filename') !== FALSE ? $headers[1] : $headers[0];
+
+        $this->assertEquals('Content-type: application/msgpack', $value);
     }
 
 }
