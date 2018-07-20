@@ -29,12 +29,6 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
     use RequestParserDynamicRequestTestTrait;
 
     /**
-     * Runkit simulation code for getting the hostname.
-     * @var string
-     */
-    const GET_HOSTNAME = 'return "Lunr";';
-
-    /**
      * Preparation work for the request tests.
      *
      * @param string  $protocol  Protocol name
@@ -46,9 +40,15 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      */
     protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = '')
     {
+        if (!extension_loaded('uuid'))
+        {
+            $this->markTestSkipped('Extension uuid is required.');
+        }
+
         $_SERVER['SCRIPT_FILENAME'] = '/full/path/to/index.php';
 
-        $this->mock_function('gethostname', self::GET_HOSTNAME);
+        $this->mock_function('gethostname', function(){ return "Lunr"; });
+        $this->mock_function('uuid_create', function(){ return "962161b2-7a01-41f3-84c6-3834ad001adf"; });
 
         $this->configuration->expects($this->at(0))
                             ->method('offsetGet')
@@ -186,6 +186,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
     private function cleanup_request_test()
     {
         $this->unmock_function('gethostname');
+        $this->unmock_function('uuid_create');
     }
 
     /**

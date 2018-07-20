@@ -28,12 +28,6 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
     use RequestParserDynamicRequestTestTrait;
 
     /**
-     * Runkit simulation code for getting the hostname.
-     * @var string
-     */
-    const GET_HOSTNAME = 'return "Lunr";';
-
-    /**
      * Preparation work for the request tests.
      *
      * @param string  $protocol  Protocol name
@@ -45,7 +39,13 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      */
     protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = '')
     {
-        $this->mock_function('gethostname', self::GET_HOSTNAME);
+        if (!extension_loaded('uuid'))
+        {
+            $this->markTestSkipped('Extension uuid is required.');
+        }
+
+        $this->mock_function('gethostname', function(){ return "Lunr"; });
+        $this->mock_function('uuid_create', function(){ return "962161b2-7a01-41f3-84c6-3834ad001adf"; });
 
         $_SERVER['SCRIPT_NAME'] = '/path/to/index.php';
 
@@ -168,6 +168,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
     private function cleanup_request_test()
     {
         $this->unmock_function('gethostname');
+        $this->unmock_function('uuid_create');
     }
 
     /**
@@ -473,6 +474,27 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
         $this->assertInternalType('array', $request);
         $this->assertArrayHasKey('action', $request);
         $this->assertEquals(HttpMethod::POST, $request['action']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() sets default http method.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testParseRequestSetsRequestIdFromWebserver()
+    {
+        $this->prepare_request_test();
+        $this->prepare_request_data();
+
+        $_SERVER['REQUEST_ID'] = '962161b27a0141f384c63834ad001adf';
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('id', $request);
+        $this->assertEquals('962161b27a0141f384c63834ad001adf', $request['id']);
 
         $this->cleanup_request_test();
     }

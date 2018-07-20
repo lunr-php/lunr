@@ -68,6 +68,8 @@ class Request
      *
      *  'verbosity'  Logging verbosity
      *
+     *  'id'         Unique request ID
+     *
      * @var array
      */
     protected $request;

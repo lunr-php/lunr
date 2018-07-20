@@ -152,6 +152,15 @@ class WebRequestParser implements RequestParserInterface
         $request['call']       = NULL;
         $request['verbosity']  = LogLevel::WARNING;
 
+        if (array_key_exists('REQUEST_ID', $_SERVER))
+        {
+            $request['id'] = $_SERVER['REQUEST_ID'];
+        }
+        else
+        {
+            $request['id'] = uuid_create();
+        }
+
         if (!is_array($_GET) || empty($_GET))
         {
             if (isset($request['controller'], $request['method']) === TRUE)

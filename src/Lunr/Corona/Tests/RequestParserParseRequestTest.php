@@ -27,12 +27,6 @@ class RequestParserParseRequestTest extends RequestParserTest
     use RequestParserStaticRequestTestTrait;
 
     /**
-     * Runkit simulation code for getting the hostname.
-     * @var string
-     */
-    const GET_HOSTNAME = 'return "Lunr";';
-
-    /**
      * Preparation work for the request tests.
      *
      * @param string  $protocol  Protocol name
@@ -44,7 +38,13 @@ class RequestParserParseRequestTest extends RequestParserTest
      */
     protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = '')
     {
-        $this->mock_function('gethostname', self::GET_HOSTNAME);
+        if (!extension_loaded('uuid'))
+        {
+            $this->markTestSkipped('Extension uuid is required.');
+        }
+
+        $this->mock_function('gethostname', function(){ return "Lunr"; });
+        $this->mock_function('uuid_create', function(){ return "962161b2-7a01-41f3-84c6-3834ad001adf"; });
 
         $this->configuration->expects($this->at(0))
                             ->method('offsetGet')
@@ -122,6 +122,7 @@ class RequestParserParseRequestTest extends RequestParserTest
     private function cleanup_request_test()
     {
         $this->unmock_function('gethostname');
+        $this->unmock_function('uuid_create');
     }
 
     /**
