@@ -46,6 +46,23 @@ class ViewBaseTest extends ViewTest
         $this->assertPropertySame('configuration', $this->configuration);
     }
 
+    /**
+     * Test that the request ID header is set.
+     *
+     * @runInSeparateProcess
+     */
+    public function testRequestIdHeaderIsSet()
+    {
+        $headers = xdebug_get_headers();
+
+        $this->assertInternalType('array', $headers);
+        $this->assertNotEmpty($headers);
+
+        $value = strpos($headers[0], 'X-Xdebug-Profile-Filename') !== FALSE ? $headers[1] : $headers[0];
+
+        $this->assertEquals('X-Request-ID: 962161b27a0141f384c63834ad001adf', $value);
+    }
+
 }
 
 ?>

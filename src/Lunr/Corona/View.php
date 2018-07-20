@@ -49,6 +49,11 @@ abstract class View
         $this->request       = $request;
         $this->response      = $response;
         $this->configuration = $configuration;
+
+        if (!headers_sent())
+        {
+            header('X-Request-ID: ' . $request->id);
+        }
     }
 
     /**

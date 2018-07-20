@@ -70,12 +70,22 @@ abstract class ViewTest extends LunrBaseTest
                       ->method('offsetGet')
                       ->will($this->returnValueMap($map));
 
-        $this->request = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
+        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $this->response = $this->getMockBuilder('Lunr\Corona\Response')->getMock();
 
-        $this->class = $this->getMockBuilder('Lunr\Corona\View')
-                           ->setConstructorArgs(
+        if (!headers_sent())
+        {
+            $this->request->expects($this->once())
+                ->method('__get')
+                ->with('id')
+                ->willReturn('962161b27a0141f384c63834ad001adf');
+        }
+
+       $this->class = $this->getMockBuilder('Lunr\Corona\View')
+                            ->setConstructorArgs(
                                [ $this->request, $this->response, $this->configuration ]
                              )
                            ->getMockForAbstractClass();
