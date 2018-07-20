@@ -37,6 +37,16 @@ class RequestResultHandlerBaseTest extends RequestResultHandlerTest
         $this->assertPropertySame('response', $this->response);
     }
 
+    /**
+     * Test that __call() returns NULL.
+     *
+     * @covers Lunr\Corona\RequestResultHandler::__call
+     */
+    public function testCallIsVoid()
+    {
+        $this->assertNull($this->class->log_http_100());
+    }
+
 }
 
 ?>

@@ -56,6 +56,19 @@ class RequestResultHandler
     }
 
     /**
+     * Handle unimplemented calls.
+     *
+     * @param string $name      Method name
+     * @param array  $arguments Method arguments
+     *
+     * @return void
+     */
+    public function __call($name, $arguments)
+    {
+        // no-op
+    }
+
+    /**
      * Handle a request.
      *
      * @param callable $callable Request handler to call
@@ -74,6 +87,10 @@ class RequestResultHandler
         }
         catch(HttpException $e)
         {
+            $method = 'log_http_' . $e->getCode();
+
+            $this->$method($e);
+
             $this->set_result($e->getCode(), $e->getMessage(), $e->getAppCode());
         }
         catch(Throwable $e)
