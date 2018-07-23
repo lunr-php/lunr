@@ -26,13 +26,13 @@ class RequestResultHandler
      * Shared instance of the Request class.
      * @var Request
      */
-    private $request;
+    protected $request;
 
     /**
      * Shared instance of the Response class.
      * @var Response
      */
-    private $response;
+    protected $response;
 
     /**
      * Constructor.
