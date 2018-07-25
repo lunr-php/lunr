@@ -11,12 +11,12 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS\Tests;
+namespace Lunr\Vortex\APNS\libcapn\Tests;
 
 /**
  * This class contains test for the push() method of the APNSDispatcher class.
  *
- * @covers Lunr\Vortex\APNS\APNSDispatcher
+ * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher
  */
 class APNSDispatcherPushTest extends APNSDispatcherTest
 {
@@ -26,7 +26,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
     /**
      * Test that push() returns APNSResponseObject.
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::push
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::push
      */
     public function testPushReturnsAPNSResponseObject()
     {
@@ -41,7 +41,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
             $this->mock_function($function, self::APN_RETURN_TRUE);
         }
 
-        $this->assertInstanceOf('Lunr\Vortex\APNS\APNSResponse', $this->class->push());
+        $this->assertInstanceOf('Lunr\Vortex\APNS\libcapn\APNSResponse', $this->class->push());
         $this->assertTrue($this->get_reflection_property_value('setup'));
 
         foreach ($this->apn_functions as $function)
@@ -53,7 +53,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
     /**
      * Test that push() resets the properties after a push.
      *
-     * @covers Lunr\Vortex\APNS\APNSDispatcher::push
+     * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher::push
      */
     public function testPushResetsProperties()
     {

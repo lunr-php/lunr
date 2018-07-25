@@ -11,9 +11,9 @@
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\APNS\Tests;
+namespace Lunr\Vortex\APNS\libcapn\Tests;
 
-use Lunr\Vortex\APNS\APNSType;
+use Lunr\Vortex\APNS\libcapn\APNSType;
 use Lunr\Halo\PsrLoggerTestTrait;
 
 /**
