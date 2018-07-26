@@ -370,7 +370,6 @@
             <directory>../src/Lunr/</directory>
             <exclude>
                 <directory>../src/Lunr/Cache/Tests/</directory>
-                <directory>../src/Lunr/Halo/</directory>
                 <directory>../src/Lunr/Core/Tests/</directory>
                 <directory>../src/Lunr/Corona/Tests/</directory>
                 <directory>../src/Lunr/Corona/Exceptions/Tests/</directory>

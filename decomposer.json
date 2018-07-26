@@ -1,4 +1,12 @@
 {
+    "Lunr.Halo": {
+        "url": "https://github.com/M2mobi/lunr.halo.git",
+        "version": "0.5.0",
+        "psr4": {
+            "prefix": "Lunr\\Halo",
+            "search-path": "/src/Lunr/Halo/"
+        }
+    },
     "Psr-Log": {
         "url": "https://github.com/php-fig/log.git",
         "version": "1.0.2",
