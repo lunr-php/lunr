@@ -133,7 +133,6 @@ class DatabaseConnectionPool
                 break;
             default:
                 return NULL;
-                break;
         }
 
         if (($new === TRUE) || (count($this->$store) == 0))

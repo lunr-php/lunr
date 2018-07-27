@@ -70,7 +70,6 @@ class Tweet
             case 'id_str':
             case 'in_replay_to_screen_name':
             case 'in_replay_to_status_id':
-            case 'in_replay_to_status_id':
             case 'in_replay_to_status_id_str':
             case 'in_replay_to_user_id':
             case 'in_replay_to_user_id_str':

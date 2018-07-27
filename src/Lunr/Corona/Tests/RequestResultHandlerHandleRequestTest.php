@@ -77,7 +77,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::handle_request
      */
-    function testHandleRequestWithNonExistantController()
+    public function testHandleRequestWithNonExistantController()
     {
         $this->request->expects($this->at(0))
                       ->method('__get')

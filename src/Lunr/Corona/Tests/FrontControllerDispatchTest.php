@@ -78,7 +78,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::dispatch
      */
-    function testDispatchWithNonExistantController()
+    public function testDispatchWithNonExistantController()
     {
         $this->handler->expects($this->once())
                       ->method('handle_request')
