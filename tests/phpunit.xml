@@ -89,6 +89,7 @@
             <file>../src/Lunr/Corona/Exceptions/Tests/BadGatewayExceptionBaseTest.php</file>
             <file>../src/Lunr/Corona/Exceptions/Tests/BadRequestExceptionBaseTest.php</file>
             <file>../src/Lunr/Corona/Exceptions/Tests/BadRequestExceptionInputDataTest.php</file>
+            <file>../src/Lunr/Corona/Exceptions/Tests/ConflictExceptionBaseTest.php</file>
             <file>../src/Lunr/Corona/Exceptions/Tests/ForbiddenExceptionBaseTest.php</file>
             <file>../src/Lunr/Corona/Exceptions/Tests/MethodNotAllowedExceptionBaseTest.php</file>
             <file>../src/Lunr/Corona/Exceptions/Tests/NotFoundExceptionBaseTest.php</file>
