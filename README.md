@@ -21,6 +21,8 @@ Contributing
 Lunr is an Open Source, community-driven project. Join by contributing code or documentation.
 To do that, make your changes and upload them to our reviewboard at [reviews.lunr.nl][6]
 
+If you encounter any issues when using Lunr you can report them [on github][7]
+
 About Us
 --------
 
@@ -32,3 +34,4 @@ Lunr development is spearheaded by [M2mobi][1].
   [4]: https://groups.google.com/forum/#!forum/lunr-developers
   [5]: https://github.com/M2Mobi/lunr
   [6]: https://reviews.lunr.nl
+  [7]: https://github.com/M2Mobi/lunr/issues
