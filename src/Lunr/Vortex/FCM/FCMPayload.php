@@ -137,6 +137,34 @@ class FCMPayload extends GCMPayload
         return $this;
     }
 
+    /**
+     * Mark the notification as mutable.
+     *
+     * @param boolean $mutable Notification mutable_content value.
+     *
+     * @return FCMPayload $self Self Reference
+     */
+    public function set_mutable_content($mutable)
+    {
+        $this->elements['mutable_content'] = $mutable;
+
+        return $this;
+    }
+
+    /**
+     * Mark the notification priority.
+     *
+     * @param boolean $priority Notification priority value.
+     *
+     * @return FCMPayload $self Self Reference
+     */
+    public function set_priority($priority)
+    {
+        $this->elements['priority'] = $priority;
+
+        return $this;
+    }
+
 }
 
 ?>
