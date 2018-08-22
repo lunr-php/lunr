@@ -99,6 +99,7 @@
             <file>../src/Lunr/Corona/Exceptions/Tests/UnauthorizedExceptionBaseTest.php</file>
         </testsuite>
         <testsuite name="Gravity">
+            <file>../src/Lunr/Gravity/Database/Exceptions/Tests/QueryExceptionBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperEscapeTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperNullEscapeTest.php</file>
@@ -376,6 +377,7 @@
                 <directory>../src/Lunr/Feedback/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/Tests/</directory>
+                <directory>../src/Lunr/Gravity/Database/Exceptions/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/MySQL/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/SQLite3/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Filesystem/Tests/</directory>
