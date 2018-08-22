@@ -129,6 +129,10 @@ class DatabaseConnectionPool
                 $type  = 'Lunr\Gravity\Database\MySQL\MySQLConnection';
                 $extra = new MySQLi();
                 break;
+            case 'mariadb':
+                $type  = 'Lunr\Gravity\Database\MariaDB\MariaDBConnection';
+                $extra = new MySQLi();
+                break;
             default:
                 return NULL;
         }

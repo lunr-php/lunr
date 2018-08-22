@@ -158,6 +158,8 @@
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionEscapeTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionTransactionTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionMasterSlaveTest.php</file>
+            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBConnectionBaseTest.php</file>
+            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBSimpleDMLQueryBuilderBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/LunrSQLite3Test.php</file>
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionSetTest.php</file>
@@ -378,6 +380,7 @@
                 <directory>../src/Lunr/Gravity/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/Exceptions/Tests/</directory>
+                <directory>../src/Lunr/Gravity/Database/MariaDB/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/MySQL/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/SQLite3/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Filesystem/Tests/</directory>

@@ -13,7 +13,6 @@
 namespace Lunr\Gravity\Database\MySQL\Tests;
 
 use Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder;
-
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
@@ -39,22 +38,12 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     protected $builder_reflection;
 
     /**
-     * Mock instance of the MySQLConnection class.
-     * @var MySQLConnection
-     */
-    protected $db;
-
-    /**
      * TestCase Constructor.
      */
     public function setUp()
     {
-        $this->db = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLConnection')
-                         ->disableOriginalConstructor()
-                         ->getMock();
 
-        $this->builder = new MySQLDMLQueryBuilder($this->db);
-
+        $this->builder            = new MySQLDMLQueryBuilder();
         $this->builder_reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder');
     }
 
@@ -65,7 +54,6 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     {
         unset($this->builder);
         unset($this->builder_reflection);
-        unset($this->db);
     }
 
     /**
