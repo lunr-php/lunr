@@ -14,7 +14,6 @@
 namespace Lunr\Gravity\Database\MySQL\Tests;
 
 use Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder;
-use ReflectionClass;
 
 /**
  * This class contains basic tests for the MySQLSimpleDMLQueryBuilder class.
@@ -31,6 +30,15 @@ class MySQLSimpleDMLQueryBuilderBaseTest extends MySQLSimpleDMLQueryBuilderTest
     {
         $instance = 'Lunr\Gravity\Database\MySQL\MySQLQueryEscaper';
         $this->assertInstanceOf($instance, $this->get_reflection_property_value('escaper'));
+    }
+
+    /**
+     * Test if the query builder has been passed correctly.
+     */
+    public function testQuerybuilderPassedCorrectly()
+    {
+        $instance = 'Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder';
+        $this->assertInstanceOf($instance, $this->get_reflection_property_value('builder'));
     }
 
     /**

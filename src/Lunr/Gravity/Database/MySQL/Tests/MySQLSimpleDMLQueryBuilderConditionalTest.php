@@ -41,9 +41,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('right'))
                       ->will($this->returnValue('`right`'));
 
-        $this->class->on('left', 'right');
+        $this->builder->expects($this->once())
+                      ->method('on')
+                      ->with($this->equalTo('`left`'), $this->equalTo('`right`'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('ON `left` = `right`', $this->get_reflection_property_value('join'));
+        $this->class->on('left', 'right');
     }
 
     /**
@@ -58,9 +61,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('left'))
                       ->will($this->returnValue('`left`'));
 
-        $this->class->on_like('left', 'right');
+        $this->builder->expects($this->once())
+                      ->method('on_like')
+                      ->with($this->equalTo('`left`'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('ON `left` LIKE right', $this->get_reflection_property_value('join'));
+        $this->class->on_like('left', 'right');
     }
 
     /**
@@ -80,9 +86,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo([ 'val1', 'val2' ]))
                       ->will($this->returnValue('("val1", "val2")'));
 
-        $this->class->on_in('left', [ 'val1', 'val2' ]);
+        $this->builder->expects($this->once())
+                      ->method('on_in')
+                      ->with($this->equalTo('`left`'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('ON `left` IN ("val1", "val2")', $this->get_reflection_property_value('join'));
+        $this->class->on_in('left', [ 'val1', 'val2' ]);
     }
 
     /**
@@ -107,9 +116,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('b'))
                       ->will($this->returnValue('"b"'));
 
-        $this->class->on_between('left', 'a', 'b');
+        $this->builder->expects($this->once())
+                      ->method('on_between')
+                      ->with($this->equalTo('`left`'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('ON `left` BETWEEN "a" AND "b"', $this->get_reflection_property_value('join'));
+        $this->class->on_between('left', 'a', 'b');
     }
 
     /**
@@ -124,9 +136,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('left'))
                       ->will($this->returnValue('`left`'));
 
-        $this->class->on_regexp('left', 'right');
+        $this->builder->expects($this->once())
+                      ->method('on_regexp')
+                      ->with($this->equalTo('`left`'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('ON `left` REGEXP right', $this->get_reflection_property_value('join'));
+        $this->class->on_regexp('left', 'right');
     }
 
     /**
@@ -141,9 +156,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('left'))
                       ->will($this->returnValue('`left`'));
 
-        $this->class->on_null('left');
+        $this->builder->expects($this->once())
+                      ->method('on_null')
+                      ->with($this->equalTo('`left`'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('ON `left` IS NULL', $this->get_reflection_property_value('join'));
+        $this->class->on_null('left');
     }
 
     /**
@@ -158,9 +176,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('left'))
                       ->will($this->returnValue('`left`'));
 
-        $this->class->on_null('left', TRUE);
+        $this->builder->expects($this->once())
+                      ->method('on_null')
+                      ->with($this->equalTo('`left`'))
+                      ->will($this->returnValue($this->builder));
 
-        $this->assertEquals('ON `left` IS NOT NULL', $this->get_reflection_property_value('join'));
+        $this->class->on_null('left', TRUE);
     }
 
     /**
@@ -180,9 +201,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('right'))
                       ->will($this->returnValue('"right"'));
 
-        $this->class->where('left', 'right');
+        $this->builder->expects($this->once())
+                      ->method('where')
+                      ->with($this->equalTo('`left`'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('WHERE `left` = "right"', $this->get_reflection_property_value('where'));
+        $this->class->where('left', 'right');
     }
 
     /**
@@ -197,9 +221,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('left'))
                       ->will($this->returnValue('`left`'));
 
-        $this->class->where_like('left', 'right');
+        $this->builder->expects($this->once())
+                      ->method('where_like')
+                      ->with($this->equalTo('`left`'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('WHERE `left` LIKE right', $this->get_reflection_property_value('where'));
+        $this->class->where_like('left', 'right');
     }
 
     /**
@@ -219,9 +246,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo([ 'val1', 'val2' ]))
                       ->will($this->returnValue('("val1", "val2")'));
 
-        $this->class->where_in('left', [ 'val1', 'val2' ]);
+        $this->builder->expects($this->once())
+                      ->method('where_in')
+                      ->with($this->equalTo('`left`'), $this->equalTo('("val1", "val2")'), FALSE)
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('WHERE `left` IN ("val1", "val2")', $this->get_reflection_property_value('where'));
+        $this->class->where_in('left', [ 'val1', 'val2' ]);
     }
 
     /**
@@ -246,9 +276,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('b'))
                       ->will($this->returnValue('"b"'));
 
-        $this->class->where_between('left', 'a', 'b');
+        $this->builder->expects($this->once())
+                      ->method('where_between')
+                      ->with($this->equalTo('`left`'), $this->equalTo('"a"'), $this->equalTo('"b"'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('WHERE `left` BETWEEN "a" AND "b"', $this->get_reflection_property_value('where'));
+        $this->class->where_between('left', 'a', 'b');
     }
 
     /**
@@ -263,9 +296,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('left'))
                       ->will($this->returnValue('`left`'));
 
-        $this->class->where_regexp('left', 'right');
+        $this->builder->expects($this->once())
+                      ->method('where_regexp')
+                      ->with($this->equalTo('`left`'), $this->equalTo('right'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('WHERE `left` REGEXP right', $this->get_reflection_property_value('where'));
+        $this->class->where_regexp('left', 'right');
     }
 
     /**
@@ -280,9 +316,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('left'))
                       ->will($this->returnValue('`left`'));
 
-        $this->class->where_null('left');
+        $this->builder->expects($this->once())
+                      ->method('where_null')
+                      ->with($this->equalTo('`left`'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('WHERE `left` IS NULL', $this->get_reflection_property_value('where'));
+        $this->class->where_null('left');
     }
 
     /**
@@ -297,9 +336,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('left'))
                       ->will($this->returnValue('`left`'));
 
-        $this->class->where_null('left', TRUE);
+        $this->builder->expects($this->once())
+                      ->method('where_null')
+                      ->with($this->equalTo('`left`'), $this->equalTo(TRUE))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('WHERE `left` IS NOT NULL', $this->get_reflection_property_value('where'));
+        $this->class->where_null('left', TRUE);
     }
 
     /**
@@ -319,9 +361,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('right'))
                       ->will($this->returnValue('"right"'));
 
-        $this->class->having('left', 'right');
+        $this->builder->expects($this->once())
+                      ->method('having')
+                      ->with($this->equalTo('`left`'), $this->equalTo('"right"'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('HAVING `left` = "right"', $this->get_reflection_property_value('having'));
+        $this->class->having('left', 'right');
     }
 
     /**
@@ -336,9 +381,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('left'))
                       ->will($this->returnValue('`left`'));
 
-        $this->class->having_like('left', 'right');
+        $this->builder->expects($this->once())
+                      ->method('having_like')
+                      ->with($this->equalTo('`left`'), $this->equalTo('right'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('HAVING `left` LIKE right', $this->get_reflection_property_value('having'));
+        $this->class->having_like('left', 'right');
     }
 
     /**
@@ -358,9 +406,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo([ 'val1', 'val2' ]))
                       ->will($this->returnValue('("val1", "val2")'));
 
-        $this->class->having_in('left', [ 'val1', 'val2' ]);
+        $this->builder->expects($this->once())
+                      ->method('having_in')
+                      ->with($this->equalTo('`left`'), $this->equalTo('("val1", "val2")'), FALSE)
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('HAVING `left` IN ("val1", "val2")', $this->get_reflection_property_value('having'));
+        $this->class->having_in('left', [ 'val1', 'val2' ]);
     }
 
     /**
@@ -385,9 +436,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('b'))
                       ->will($this->returnValue('"b"'));
 
-        $this->class->having_between('left', 'a', 'b');
+        $this->builder->expects($this->once())
+                      ->method('having_between')
+                      ->with($this->equalTo('`left`'), $this->equalTo('"a"'), $this->equalTo('"b"'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('HAVING `left` BETWEEN "a" AND "b"', $this->get_reflection_property_value('having'));
+        $this->class->having_between('left', 'a', 'b');
     }
 
     /**
@@ -402,9 +456,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('left'))
                       ->will($this->returnValue('`left`'));
 
-        $this->class->having_regexp('left', 'right');
+        $this->builder->expects($this->once())
+                      ->method('having_regexp')
+                      ->with($this->equalTo('`left`'), $this->equalTo('right'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('HAVING `left` REGEXP right', $this->get_reflection_property_value('having'));
+        $this->class->having_regexp('left', 'right');
     }
 
     /**
@@ -419,9 +476,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('left'))
                       ->will($this->returnValue('`left`'));
 
-        $this->class->having_null('left');
+        $this->builder->expects($this->once())
+                      ->method('having_null')
+                      ->with($this->equalTo('`left`'), $this->equalTo(FALSE))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('HAVING `left` IS NULL', $this->get_reflection_property_value('having'));
+        $this->class->having_null('left');
     }
 
     /**
@@ -436,9 +496,12 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->with($this->equalTo('left'))
                       ->will($this->returnValue('`left`'));
 
-        $this->class->having_null('left', TRUE);
+        $this->builder->expects($this->once())
+                      ->method('having_null')
+                      ->with($this->equalTo('`left`'), $this->equalTo(TRUE))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('HAVING `left` IS NOT NULL', $this->get_reflection_property_value('having'));
+        $this->class->having_null('left', TRUE);
     }
 
 }

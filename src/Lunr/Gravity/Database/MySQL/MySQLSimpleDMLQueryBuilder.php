@@ -18,8 +18,14 @@ namespace Lunr\Gravity\Database\MySQL;
  * suitable for either MySQL or MariaDB, performing automatic escaping
  * of input values where appropriate.
  */
-class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
+class MySQLSimpleDMLQueryBuilder
 {
+
+    /**
+     * Instance of the MySQLDMLQueryBuilder class
+     * @var MySQLDMLQueryBuilder
+     */
+    protected $builder;
 
     /**
      * Instance of the MySQLQueryEscaper class.
@@ -30,12 +36,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Constructor.
      *
-     * @param MySQLQueryEscaper $escaper Instance of the MySQLQueryEscaper class.
+     * @param MySQLDMLQueryBuilder $builder Instance of the MySQLDMLQueryBuilder class
+     * @param MySQLQueryEscaper    $escaper Instance of the MySQLQueryEscaper class
      */
-    public function __construct($escaper)
+    public function __construct($builder, $escaper)
     {
-        parent::__construct();
-
+        $this->builder = $builder;
         $this->escaper = $escaper;
     }
 
@@ -44,9 +50,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function __destruct()
     {
+        unset($this->builder);
         unset($this->escaper);
-
-        parent::__destruct();
     }
 
     /**
@@ -59,7 +64,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     public function into($table)
     {
         $table = $this->escaper->table($table);
-        return parent::into($table);
+        return $this->builder->into($table);
     }
 
     /**
@@ -72,7 +77,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     public function column_names($keys)
     {
         $keys = array_map([ $this->escaper, 'column' ], $keys);
-        return parent::column_names($keys);
+        return $this->builder->column_names($keys);
     }
 
     /**
@@ -91,7 +96,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
             $tables .= $this->escape_alias($table, TRUE) . ', ';
         }
 
-        return parent::update(rtrim($tables, ', '));
+        return $this->builder->update(rtrim($tables, ', '));
     }
 
     /**
@@ -110,7 +115,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
             $columns .= $this->escape_alias($column, FALSE) . ', ';
         }
 
-        return parent::select(rtrim($columns, ', '));
+        return $this->builder->select(rtrim($columns, ', '));
     }
 
     /**
@@ -123,7 +128,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function from($table_reference, $index_hints = NULL)
     {
-        return parent::from($this->escape_alias($table_reference), $index_hints);
+        return $this->builder->from($this->escape_alias($table_reference), $index_hints);
     }
 
     /**
@@ -137,7 +142,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function join($table_reference, $type = 'INNER', $index_hints = NULL)
     {
-        return parent::join($this->escape_alias($table_reference), $type, $index_hints);
+        return $this->builder->join($this->escape_alias($table_reference), $type, $index_hints);
     }
 
     /**
@@ -156,7 +161,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
             $columns .= $this->escaper->column(trim($column)) . ', ';
         }
 
-        return parent::using(rtrim($columns, ', '));
+        return $this->builder->using(rtrim($columns, ', '));
     }
 
     /**
@@ -170,7 +175,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function on($left, $right, $operator = '=')
     {
-        return parent::on($this->escaper->column($left), $this->escaper->column($right), $operator);
+        return $this->builder->on($this->escaper->column($left), $this->escaper->column($right), $operator);
     }
 
     /**
@@ -184,7 +189,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function on_like($left, $right, $negate = FALSE)
     {
-        return parent::on_like($this->escaper->column($left), $right, $negate);
+        return $this->builder->on_like($this->escaper->column($left), $right, $negate);
     }
 
     /**
@@ -198,7 +203,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function on_in($left, $right, $negate = FALSE)
     {
-        return parent::on_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
+        return $this->builder->on_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
     }
 
     /**
@@ -217,7 +222,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
         $lower = $this->escaper->value($lower);
         $upper = $this->escaper->value($upper);
 
-        return parent::on_between($left, $lower, $upper, $negate);
+        return $this->builder->on_between($left, $lower, $upper, $negate);
     }
 
     /**
@@ -231,7 +236,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function on_regexp($left, $right, $negate = FALSE)
     {
-        return parent::on_regexp($this->escaper->column($left), $right, $negate);
+        return $this->builder->on_regexp($this->escaper->column($left), $right, $negate);
     }
 
     /**
@@ -244,7 +249,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function on_null($left, $negate = FALSE)
     {
-        return parent::on_null($this->escaper->column($left), $negate);
+        return $this->builder->on_null($this->escaper->column($left), $negate);
     }
 
     /**
@@ -258,7 +263,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function where($left, $right, $operator = '=')
     {
-        return parent::where($this->escaper->column($left), $this->escaper->value($right), $operator);
+        return $this->builder->where($this->escaper->column($left), $this->escaper->value($right), $operator);
     }
 
     /**
@@ -272,7 +277,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function where_like($left, $right, $negate = FALSE)
     {
-        return parent::where_like($this->escaper->column($left), $right, $negate);
+        return $this->builder->where_like($this->escaper->column($left), $right, $negate);
     }
 
     /**
@@ -286,7 +291,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function where_in($left, $right, $negate = FALSE)
     {
-        return parent::where_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
+        return $this->builder->where_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
     }
 
     /**
@@ -305,7 +310,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
         $lower = $this->escaper->value($lower);
         $upper = $this->escaper->value($upper);
 
-        return parent::where_between($left, $lower, $upper, $negate);
+        return $this->builder->where_between($left, $lower, $upper, $negate);
     }
 
     /**
@@ -319,7 +324,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function where_regexp($left, $right, $negate = FALSE)
     {
-        return parent::where_regexp($this->escaper->column($left), $right, $negate);
+        return $this->builder->where_regexp($this->escaper->column($left), $right, $negate);
     }
 
     /**
@@ -332,7 +337,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function where_null($left, $negate = FALSE)
     {
-        return parent::where_null($this->escaper->column($left), $negate);
+        return $this->builder->where_null($this->escaper->column($left), $negate);
     }
 
     /**
@@ -345,7 +350,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function group_by($expr, $order = NULL)
     {
-        return parent::group_by($this->escaper->column($expr), $order);
+        return $this->builder->group_by($this->escaper->column($expr), $order);
     }
 
     /**
@@ -359,7 +364,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function having($left, $right, $operator = '=')
     {
-        return parent::having($this->escaper->column($left), $this->escaper->value($right), $operator);
+        return $this->builder->having($this->escaper->column($left), $this->escaper->value($right), $operator);
     }
 
     /**
@@ -373,7 +378,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function having_like($left, $right, $negate = FALSE)
     {
-        return parent::having_like($this->escaper->column($left), $right, $negate);
+        return $this->builder->having_like($this->escaper->column($left), $right, $negate);
     }
 
     /**
@@ -387,7 +392,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function having_in($left, $right, $negate = FALSE)
     {
-        return parent::having_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
+        return $this->builder->having_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
     }
 
     /**
@@ -406,7 +411,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
         $lower = $this->escaper->value($lower);
         $upper = $this->escaper->value($upper);
 
-        return parent::having_between($left, $lower, $upper, $negate);
+        return $this->builder->having_between($left, $lower, $upper, $negate);
     }
 
     /**
@@ -420,7 +425,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function having_regexp($left, $right, $negate = FALSE)
     {
-        return parent::having_regexp($this->escaper->column($left), $right, $negate);
+        return $this->builder->having_regexp($this->escaper->column($left), $right, $negate);
     }
 
     /**
@@ -433,7 +438,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function having_null($left, $negate = FALSE)
     {
-        return parent::having_null($this->escaper->column($left), $negate);
+        return $this->builder->having_null($this->escaper->column($left), $negate);
     }
 
     /**
@@ -446,7 +451,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function order_by($expr, $asc = TRUE)
     {
-        return parent::order_by($this->escaper->column($expr), $asc);
+        return $this->builder->order_by($this->escaper->column($expr), $asc);
     }
 
     /**
@@ -459,7 +464,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function limit($amount, $offset = -1)
     {
-        return parent::limit($this->escaper->intvalue($amount), $this->escaper->intvalue($offset));
+        return $this->builder->limit($this->escaper->intvalue($amount), $this->escaper->intvalue($offset));
     }
 
     /**
@@ -472,7 +477,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function union($sql_query, $all = FALSE)
     {
-        return parent::union($this->escaper->query_value($sql_query), $all);
+        return $this->builder->union($this->escaper->query_value($sql_query), $all);
     }
 
     /**
