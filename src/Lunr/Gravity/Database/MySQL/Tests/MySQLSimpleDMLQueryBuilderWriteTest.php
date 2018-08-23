@@ -31,9 +31,12 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
                       ->with($this->equalTo('table'))
                       ->will($this->returnValue('`table`'));
 
-        $this->class->into('table');
+        $this->builder->expects($this->once())
+                      ->method('into')
+                      ->with($this->equalTo('`table`'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('INTO `table`', $this->get_reflection_property_value('into'));
+        $this->class->into('table');
     }
 
     /**
@@ -48,9 +51,12 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
                       ->with($this->equalTo('col'))
                       ->will($this->returnValue('`col`'));
 
-        $this->class->column_names([ 'col' ]);
+        $this->builder->expects($this->once())
+                      ->method('column_names')
+                      ->with($this->equalTo(['`col`']))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('(`col`)', $this->get_reflection_property_value('column_names'));
+        $this->class->column_names([ 'col' ]);
     }
 
     /**
@@ -70,9 +76,12 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
                       ->with($this->equalTo('col2'))
                       ->will($this->returnValue('`col2`'));
 
-        $this->class->column_names([ 'col1', 'col2' ]);
+        $this->builder->expects($this->once())
+                      ->method('column_names')
+                      ->with($this->equalTo(['`col1`', '`col2`']))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('(`col1`, `col2`)', $this->get_reflection_property_value('column_names'));
+        $this->class->column_names([ 'col1', 'col2' ]);
     }
 
     /**
@@ -87,9 +96,12 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
                       ->with($this->equalTo('table'))
                       ->will($this->returnValue('`table`'));
 
-        $this->class->update('table');
+        $this->builder->expects($this->once())
+                      ->method('update')
+                      ->with($this->equalTo('`table`'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('`table`', $this->get_reflection_property_value('update'));
+        $this->class->update('table');
     }
 
     /**
@@ -109,9 +121,12 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
                       ->with($this->equalTo(' table'))
                       ->will($this->returnValue('`table`'));
 
-        $this->class->update('table, table');
+        $this->builder->expects($this->once())
+                      ->method('update')
+                      ->with($this->equalTo('`table`, `table`'))
+                      ->will($this->returnSelf());
 
-        $this->assertEquals('`table`, `table`', $this->get_reflection_property_value('update'));
+        $this->class->update('table, table');
     }
 
 }

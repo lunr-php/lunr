@@ -11,13 +11,21 @@
 
 namespace Lunr\Gravity\Database\MySQL;
 
+use Lunr\Gravity\Database\DMLQueryBuilderInterface;
+
 /**
  * This is a SQL query builder class for generating queries
  * suitable for either MySQL or MariaDB, performing automatic escaping
  * of input values where appropriate.
  */
-class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
+class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
 {
+
+    /**
+     * Instance of the MySQLDMLQueryBuilder class
+     * @var MySQLDMLQueryBuilder
+     */
+    protected $builder;
 
     /**
      * Instance of the MySQLQueryEscaper class.
@@ -28,12 +36,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
     /**
      * Constructor.
      *
-     * @param MySQLQueryEscaper $escaper Instance of the MySQLQueryEscaper class.
+     * @param MySQLDMLQueryBuilder $builder Instance of the MySQLDMLQueryBuilder class
+     * @param MySQLQueryEscaper    $escaper Instance of the MySQLQueryEscaper class
      */
-    public function __construct($escaper)
+    public function __construct($builder, $escaper)
     {
-        parent::__construct();
-
+        $this->builder = $builder;
         $this->escaper = $escaper;
     }
 
@@ -42,9 +50,136 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function __destruct()
     {
+        unset($this->builder);
         unset($this->escaper);
+    }
 
-        parent::__destruct();
+    /**
+     * Construct and return a SELECT query.
+     *
+     * @return string $query The constructed query string.
+     */
+    public function get_select_query()
+    {
+        return $this->builder->get_select_query();
+    }
+
+    /**
+     * Construct and return a INSERT query.
+     *
+     * @return string $query The constructed query string.
+     */
+    public function get_insert_query()
+    {
+        return $this->builder->get_insert_query();
+    }
+
+    /**
+     * Construct and return an UPDATE query.
+     *
+     * @return string $query The constructed query string.
+     */
+    public function get_update_query()
+    {
+        return $this->builder->get_update_query();
+    }
+
+    /**
+     * Construct and return a DELETE query.
+     *
+     * @return string $query The constructed query string.
+     */
+    public function get_delete_query()
+    {
+        return $this->builder->get_delete_query();
+    }
+
+    /**
+     * Construct and return a REPLACE query.
+     *
+     * @return string $query The constructed query string.
+     */
+    public function get_replace_query()
+    {
+        return $this->builder->get_replace_query();
+    }
+
+    /**
+     * Define the mode of the SELECT clause.
+     *
+     * @param string $mode The select mode you want to use
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function select_mode($mode)
+    {
+        $this->builder->select_mode($mode);
+        return $this;
+    }
+
+    /**
+     * Define the mode of the INSERT clause.
+     *
+     * @param string $mode The insert mode you want to use
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function insert_mode($mode)
+    {
+        $this->builder->insert_mode($mode);
+        return $this;
+    }
+
+    /**
+     * Define the mode of the DELETE clause.
+     *
+     * @param string $mode The delete mode you want to use
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function delete_mode($mode)
+    {
+        $this->builder->delete_mode($mode);
+        return $this;
+    }
+
+    /**
+     * Define the mode of the REPLACE clause.
+     *
+     * @param string $mode The replace mode you want to use
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function replace_mode($mode)
+    {
+        $this->builder->replace_mode($mode);
+        return $this;
+    }
+
+    /**
+     * Define the lock mode for a transaction.
+     *
+     * @param string $mode The lock mode you want to use
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function lock_mode($mode)
+    {
+        $this->builder->lock_mode($mode);
+        return $this;
+    }
+
+    /**
+     * Define a DELETE clause.
+     *
+     * @param string $delete The table references to delete from
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function delete($delete)
+    {
+        $this->builder->delete($delete);
+        return $this;
     }
 
     /**
@@ -52,12 +187,27 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      *
      * @param string $table Table reference
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function into($table)
     {
         $table = $this->escaper->table($table);
-        return parent::into($table);
+        $this->builder->into($table);
+
+        return $this;
+    }
+
+    /**
+     * Define SET clause of the SQL statement.
+     *
+     * @param array $set Array containing escaped key->value pairs to be set
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function set($set)
+    {
+        $this->builder->set($set);
+        return $this;
     }
 
     /**
@@ -65,12 +215,40 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      *
      * @param array $keys Array containing escaped field names to be set
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function column_names($keys)
     {
         $keys = array_map([ $this->escaper, 'column' ], $keys);
-        return parent::column_names($keys);
+        $this->builder->column_names($keys);
+
+        return $this;
+    }
+
+    /**
+     * Define Values for Insert or Update SQL statement.
+     *
+     * @param array $values Array containing escaped values to be set
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function values($values)
+    {
+        $this->builder->values($values);
+        return $this;
+    }
+
+    /**
+     * Define a Select statement for Insert statement.
+     *
+     * @param string $select SQL Select statement to be used in Insert
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function select_statement($select)
+    {
+        $this->builder->select_statement($select);
+        return $this;
     }
 
     /**
@@ -78,7 +256,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      *
      * @param string $table_references The tables to update
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function update($table_references)
     {
@@ -89,7 +267,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
             $tables .= $this->escape_alias($table, TRUE) . ', ';
         }
 
-        return parent::update(rtrim($tables, ', '));
+        $this->builder->update(rtrim($tables, ', '));
+        return $this;
     }
 
     /**
@@ -97,7 +276,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      *
      * @param string $select The column(s) to select
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function select($select)
     {
@@ -108,7 +287,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
             $columns .= $this->escape_alias($column, FALSE) . ', ';
         }
 
-        return parent::select(rtrim($columns, ', '));
+        $this->builder->select(rtrim($columns, ', '));
+        return $this;
     }
 
     /**
@@ -117,11 +297,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $table_reference Table reference
      * @param array  $index_hints     Array of Index Hints
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function from($table_reference, $index_hints = NULL)
     {
-        return parent::from($this->escape_alias($table_reference), $index_hints);
+        $this->builder->from($this->escape_alias($table_reference), $index_hints);
+        return $this;
     }
 
     /**
@@ -131,11 +312,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $type            Type of JOIN operation to perform.
      * @param array  $index_hints     Array of Index Hints
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function join($table_reference, $type = 'INNER', $index_hints = NULL)
     {
-        return parent::join($this->escape_alias($table_reference), $type, $index_hints);
+        $this->builder->join($this->escape_alias($table_reference), $type, $index_hints);
+        return $this;
     }
 
     /**
@@ -143,7 +325,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      *
      * @param string $column_list Columns to use.
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function using($column_list)
     {
@@ -154,7 +336,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
             $columns .= $this->escaper->column(trim($column)) . ', ';
         }
 
-        return parent::using(rtrim($columns, ', '));
+        $this->builder->using(rtrim($columns, ', '));
+        return $this;
     }
 
     /**
@@ -164,11 +347,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $right    Right expression
      * @param string $operator Comparison operator
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function on($left, $right, $operator = '=')
     {
-        return parent::on($this->escaper->column($left), $this->escaper->column($right), $operator);
+        $this->builder->on($this->escaper->column($left), $this->escaper->column($right), $operator);
+        return $this;
     }
 
     /**
@@ -178,11 +362,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $right  Right expression
      * @param string $negate Whether to negate the comparison or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function on_like($left, $right, $negate = FALSE)
     {
-        return parent::on_like($this->escaper->column($left), $right, $negate);
+        $this->builder->on_like($this->escaper->column($left), $right, $negate);
+        return $this;
     }
 
     /**
@@ -192,11 +377,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $right  Right expression
      * @param string $negate Whether to negate the comparison or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function on_in($left, $right, $negate = FALSE)
     {
-        return parent::on_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
+        $this->builder->on_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
+        return $this;
     }
 
     /**
@@ -207,7 +393,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $upper  The upper bound of the between condition
      * @param string $negate Whether to negate the comparison or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function on_between($left, $lower, $upper, $negate = FALSE)
     {
@@ -215,7 +401,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
         $lower = $this->escaper->value($lower);
         $upper = $this->escaper->value($upper);
 
-        return parent::on_between($left, $lower, $upper, $negate);
+        $this->builder->on_between($left, $lower, $upper, $negate);
+        return $this;
     }
 
     /**
@@ -225,11 +412,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $right  Right expression
      * @param string $negate Whether to negate the comparison or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function on_regexp($left, $right, $negate = FALSE)
     {
-        return parent::on_regexp($this->escaper->column($left), $right, $negate);
+        $this->builder->on_regexp($this->escaper->column($left), $right, $negate);
+        return $this;
     }
 
     /**
@@ -238,11 +426,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $left   Left expression
      * @param string $negate Whether to negate the condition or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function on_null($left, $negate = FALSE)
     {
-        return parent::on_null($this->escaper->column($left), $negate);
+        $this->builder->on_null($this->escaper->column($left), $negate);
+        return $this;
     }
 
     /**
@@ -252,11 +441,34 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $right    Right expression
      * @param string $operator Comparison operator
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function where($left, $right, $operator = '=')
     {
-        return parent::where($this->escaper->column($left), $this->escaper->value($right), $operator);
+        $this->builder->where($this->escaper->column($left), $this->escaper->value($right), $operator);
+        return $this;
+    }
+
+    /**
+     * Open WHERE group.
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function start_where_group()
+    {
+        $this->builder->sql_group_start();
+        return $this;
+    }
+
+    /**
+     * Close WHERE group.
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function end_where_group()
+    {
+        $this->builder->sql_group_end();
+        return $this;
     }
 
     /**
@@ -266,11 +478,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $right  Right expression
      * @param string $negate Whether to negate the comparison or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function where_like($left, $right, $negate = FALSE)
     {
-        return parent::where_like($this->escaper->column($left), $right, $negate);
+        $this->builder->where_like($this->escaper->column($left), $right, $negate);
+        return $this;
     }
 
     /**
@@ -280,11 +493,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $right  Right expression
      * @param string $negate Whether to negate the condition or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function where_in($left, $right, $negate = FALSE)
     {
-        return parent::where_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
+        $this->builder->where_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
+        return $this;
     }
 
     /**
@@ -295,7 +509,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $upper  The upper bound of the between condition
      * @param string $negate Whether to negate the condition or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function where_between($left, $lower, $upper, $negate = FALSE)
     {
@@ -303,7 +517,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
         $lower = $this->escaper->value($lower);
         $upper = $this->escaper->value($upper);
 
-        return parent::where_between($left, $lower, $upper, $negate);
+        $this->builder->where_between($left, $lower, $upper, $negate);
+        return $this;
     }
 
     /**
@@ -313,11 +528,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $right  Right expression
      * @param string $negate Whether to negate the condition or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function where_regexp($left, $right, $negate = FALSE)
     {
-        return parent::where_regexp($this->escaper->column($left), $right, $negate);
+        $this->builder->where_regexp($this->escaper->column($left), $right, $negate);
+        return $this;
     }
 
     /**
@@ -326,11 +542,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $left   Left expression
      * @param string $negate Whether to negate the condition or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function where_null($left, $negate = FALSE)
     {
-        return parent::where_null($this->escaper->column($left), $negate);
+        $this->builder->where_null($this->escaper->column($left), $negate);
+        return $this;
     }
 
     /**
@@ -339,11 +556,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string  $expr  Expression to group by
      * @param boolean $order Order ASCending/TRUE or DESCending/FALSE, default no order/NULL
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function group_by($expr, $order = NULL)
     {
-        return parent::group_by($this->escaper->column($expr), $order);
+        $this->builder->group_by($this->escaper->column($expr), $order);
+        return $this;
     }
 
     /**
@@ -353,11 +571,34 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $right    Right expression
      * @param string $operator Comparison operator
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function having($left, $right, $operator = '=')
     {
-        return parent::having($this->escaper->column($left), $this->escaper->value($right), $operator);
+        $this->builder->having($this->escaper->column($left), $this->escaper->value($right), $operator);
+        return $this;
+    }
+
+    /**
+     * Set logical connector 'AND'.
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function sql_and()
+    {
+        $this->builder->sql_and();
+        return $this;
+    }
+
+    /**
+     * Set logical connector 'OR'.
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function sql_or()
+    {
+        $this->builder->sql_or();
+        return $this;
     }
 
     /**
@@ -367,11 +608,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $right  Right expression
      * @param string $negate Whether to negate the comparison or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function having_like($left, $right, $negate = FALSE)
     {
-        return parent::having_like($this->escaper->column($left), $right, $negate);
+        $this->builder->having_like($this->escaper->column($left), $right, $negate);
+        return $this;
     }
 
     /**
@@ -381,11 +623,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $right  Right expression
      * @param string $negate Whether to negate the comparison or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function having_in($left, $right, $negate = FALSE)
     {
-        return parent::having_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
+        $this->builder->having_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
+        return $this;
     }
 
     /**
@@ -396,7 +639,7 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $upper  The upper bound of the between condition
      * @param string $negate Whether to negate the comparison or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function having_between($left, $lower, $upper, $negate = FALSE)
     {
@@ -404,7 +647,8 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
         $lower = $this->escaper->value($lower);
         $upper = $this->escaper->value($upper);
 
-        return parent::having_between($left, $lower, $upper, $negate);
+        $this->builder->having_between($left, $lower, $upper, $negate);
+        return $this;
     }
 
     /**
@@ -414,11 +658,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $right  Right expression
      * @param string $negate Whether to negate the comparison or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function having_regexp($left, $right, $negate = FALSE)
     {
-        return parent::having_regexp($this->escaper->column($left), $right, $negate);
+        $this->builder->having_regexp($this->escaper->column($left), $right, $negate);
+        return $this;
     }
 
     /**
@@ -427,11 +672,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string $left   Left expression
      * @param string $negate Whether to negate the condition or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function having_null($left, $negate = FALSE)
     {
-        return parent::having_null($this->escaper->column($left), $negate);
+        $this->builder->having_null($this->escaper->column($left), $negate);
+        return $this;
     }
 
     /**
@@ -440,11 +686,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string  $expr Expression to order by
      * @param boolean $asc  Order ASCending/TRUE or DESCending/FALSE
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function order_by($expr, $asc = TRUE)
     {
-        return parent::order_by($this->escaper->column($expr), $asc);
+        $this->builder->order_by($this->escaper->column($expr), $asc);
+        return $this;
     }
 
     /**
@@ -453,11 +700,12 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param integer $amount The amount of elements to retrieve
      * @param integer $offset Start retrieving elements from a specific index
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function limit($amount, $offset = -1)
     {
-        return parent::limit($this->escaper->intvalue($amount), $this->escaper->intvalue($offset));
+        $this->builder->limit($this->escaper->intvalue($amount), $this->escaper->intvalue($offset));
+        return $this;
     }
 
     /**
@@ -466,11 +714,44 @@ class MySQLSimpleDMLQueryBuilder extends MySQLDMLQueryBuilder
      * @param string  $sql_query SQL query reference
      * @param boolean $all       True for ALL or False for empty (default).
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function union($sql_query, $all = FALSE)
     {
-        return parent::union($this->escaper->query_value($sql_query), $all);
+        $this->builder->union($this->escaper->query_value($sql_query), $all);
+        return $this;
+    }
+
+    /**
+     * Define a with clause.
+     *
+     * @param string $alias        The alias of the WITH statement
+     * @param string $sql_query    Sql query reference
+     * @param array  $column_names An optional parameter to give the result columns a name
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function with($alias, $sql_query, $column_names = NULL)
+    {
+        $this->builder->with($alias, $sql_query, $column_names);
+        return $this;
+    }
+
+    /**
+     * Define a recursive WITH clause.
+     *
+     * @param string  $alias           The alias of the WITH statement
+     * @param string  $anchor_query    The initial select statement
+     * @param string  $recursive_query The select statement that selects recursively out of the initial query
+     * @param boolean $union_all       True for UNION ALL false for UNION
+     * @param array   $column_names    An optional parameter to give the result columns a name
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function with_recursive($alias, $anchor_query, $recursive_query, $union_all = FALSE, $column_names = NULL)
+    {
+        $this->builder->with_recursive($alias, $anchor_query, $recursive_query, $union_all, $column_names);
+        return $this;
     }
 
     /**

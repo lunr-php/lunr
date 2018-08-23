@@ -29,17 +29,18 @@ class MySQLSimpleDMLQueryBuilderUsingTest extends MySQLSimpleDMLQueryBuilderTest
      */
     public function testUsing()
     {
-        $this->set_reflection_property_value('join', 'INNER JOIN `table2`');
-        $this->set_reflection_property_value('is_unfinished_join', TRUE);
-
         $this->escaper->expects($this->once())
-            ->method('column')
-            ->with($this->equalTo('column1'))
-            ->will($this->returnValue('`column1`'));
+             ->method('column')
+             ->with($this->equalTo('column1'))
+             ->will($this->returnValue('`column1`'));
 
+        $this->builder->expects($this->once())
+             ->method('using')
+             ->with($this->equalTo('`column1`'))
+             ->will($this->returnSelf());
+
+        $this->class->join('table2');
         $this->class->using('column1');
-
-        $this->assertEquals('INNER JOIN `table2` USING (`column1`)', $this->get_reflection_property_value('join'));
     }
 
     /**
@@ -49,17 +50,28 @@ class MySQLSimpleDMLQueryBuilderUsingTest extends MySQLSimpleDMLQueryBuilderTest
      */
     public function testUsingAddSecondColumn()
     {
-        $this->set_reflection_property_value('join', 'INNER JOIN `table2` USING (`column1`)');
-        $this->set_reflection_property_value('is_unfinished_join', FALSE);
+        $this->escaper->expects($this->once())
+             ->method('table')
+             ->with($this->equalTo('table2'))
+             ->will($this->returnValue('`table2`'));
 
-        $this->escaper->expects($this->at(0))
-            ->method('column')
-            ->with($this->equalTo('column2'))
-            ->will($this->returnValue('`column2`'));
+        $this->escaper->expects($this->at(1))
+             ->method('column')
+             ->with($this->equalTo('column1'))
+             ->will($this->returnValue('`column1`'));
 
+        $this->escaper->expects($this->at(2))
+             ->method('column')
+             ->with($this->equalTo('column2'))
+             ->will($this->returnValue('`column2`'));
+
+        $this->builder->expects($this->exactly(2))
+             ->method('using')
+             ->will($this->returnSelf());
+
+        $this->class->join('table2');
+        $this->class->using('column1');
         $this->class->using('column2');
-
-        $this->assertEquals('INNER JOIN `table2` USING (`column1`, `column2`)', $this->get_reflection_property_value('join'));
     }
 
     /**
@@ -69,22 +81,28 @@ class MySQLSimpleDMLQueryBuilderUsingTest extends MySQLSimpleDMLQueryBuilderTest
      */
     public function testUsingMultipleColumn()
     {
-        $this->set_reflection_property_value('join', 'INNER JOIN `table2`');
-        $this->set_reflection_property_value('is_unfinished_join', TRUE);
-
         $this->escaper->expects($this->at(0))
-            ->method('column')
-            ->with($this->equalTo('column1'))
-            ->will($this->returnValue('`column1`'));
+             ->method('table')
+             ->with($this->equalTo('table2'))
+             ->will($this->returnValue('`table2`'));
 
         $this->escaper->expects($this->at(1))
-            ->method('column')
-            ->with($this->equalTo('column2'))
-            ->will($this->returnValue('`column2`'));
+             ->method('column')
+             ->with($this->equalTo('column1'))
+             ->will($this->returnValue('`column1`'));
 
+        $this->escaper->expects($this->at(2))
+             ->method('column')
+             ->with($this->equalTo('column2'))
+             ->will($this->returnValue('`column2`'));
+
+        $this->builder->expects($this->once())
+             ->method('using')
+             ->with($this->equalTo('`column1`, `column2`'))
+             ->will($this->returnSelf());
+
+        $this->class->join('table2');
         $this->class->using('column1, column2');
-
-        $this->assertEquals('INNER JOIN `table2` USING (`column1`, `column2`)', $this->get_reflection_property_value('join'));
     }
 
 }

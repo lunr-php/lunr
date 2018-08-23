@@ -18,6 +18,41 @@ interface DMLQueryBuilderInterface
 {
 
     /**
+     * Construct and return a SELECT query.
+     *
+     * @return string $query The constructed query string.
+     */
+    public function get_select_query();
+
+    /**
+     * Construct and return a DELETE query.
+     *
+     * @return string $query The constructed query string.
+     */
+    public function get_delete_query();
+
+    /**
+     * Construct and return a INSERT query.
+     *
+     * @return string $query The constructed query string.
+     */
+    public function get_insert_query();
+
+    /**
+     * Construct and return a REPLACE query.
+     *
+     * @return string $query The constructed query string.
+     */
+    public function get_replace_query();
+
+    /**
+     * Construct and return an UPDATE query.
+     *
+     * @return string $query The constructed query string.
+     */
+    public function get_update_query();
+
+    /**
      * Define the mode of the DELETE clause.
      *
      * @param string $mode The delete mode you want to use
@@ -211,6 +246,20 @@ interface DMLQueryBuilderInterface
      * @return DMLQueryBuilderInterface $self Self reference
      */
     public function where($left, $right, $operator = '=');
+
+    /**
+     * Open WHERE group.
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function start_where_group();
+
+    /**
+     * Close WHERE group.
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function end_where_group();
 
     /**
      * Define WHERE clause with LIKE comparator of the SQL statement.
