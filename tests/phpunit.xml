@@ -159,6 +159,9 @@
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionTransactionTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionMasterSlaveTest.php</file>
             <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBConnectionBaseTest.php</file>
+            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBDMLQueryBuilderDeleteTest.php</file>
+            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBSimpleDMLQueryBuilderBaseTest.php</file>
+            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBSimpleDMLQueryBuilderDeleteTest.php</file>
             <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBSimpleDMLQueryBuilderBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/LunrSQLite3Test.php</file>
             <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionBaseTest.php</file>

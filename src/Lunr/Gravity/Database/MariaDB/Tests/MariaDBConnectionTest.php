@@ -99,3 +99,5 @@ class MariaDBConnectionTest extends TestCase
     }
 
 }
+
+?>

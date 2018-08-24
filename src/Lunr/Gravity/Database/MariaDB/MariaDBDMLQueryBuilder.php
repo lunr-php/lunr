@@ -37,4 +37,19 @@ class MariaDBDMLQueryBuilder extends MySQLDMLQueryBuilder
         parent::__destruct();
     }
 
+    /**
+     * Define which fields to return from a non SELECT query.
+     *
+     * @param string $fields Fields to return
+     *
+     * @return MariaDBDMLQueryBuilder $self Self reference
+     */
+    public function returning($fields)
+    {
+        $this->returning = 'RETURNING ' . $fields;
+        return $this;
+    }
+
 }
+
+?>

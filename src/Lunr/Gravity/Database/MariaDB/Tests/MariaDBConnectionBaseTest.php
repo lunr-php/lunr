@@ -50,3 +50,5 @@ class MariaDBConnectionBaseTest extends MariaDBConnectionTest
     }
 
 }
+
+?>

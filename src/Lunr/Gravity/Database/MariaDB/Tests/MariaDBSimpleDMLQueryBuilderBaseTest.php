@@ -32,7 +32,7 @@ class MariaDBSimpleDMLQueryBuilderBaseTest extends MariaDBSimpleDMLQueryBuilderT
     public function testBuilderIsPassedCorrectly()
     {
         $instance = 'Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder';
-        $this->assertInstanceOf($instance, $this->builder_reflection);
+        $this->assertInstanceOf($instance, $this->builder);
     }
 
     /**

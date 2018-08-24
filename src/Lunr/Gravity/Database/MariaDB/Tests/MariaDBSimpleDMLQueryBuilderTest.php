@@ -16,6 +16,7 @@ namespace Lunr\Gravity\Database\MariaDB\Tests;
 use ReflectionClass;
 use PHPUnit\Framework\TestCase;
 use Lunr\Gravity\Database\MySQL\MySQLQueryEscaper;
+use Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder;
 use Lunr\Gravity\Database\MariaDB\MariaDBSimpleDMLQueryBuilder;
 
 /**
@@ -28,44 +29,31 @@ abstract class MariaDBSimpleDMLQueryBuilderTest extends TestCase
 {
 
     /**
-     * Mock instance of the MySQLConnection class
-     * @var MySQLConnection
-     */
-    protected $db;
-
-    /**
-     * MySQL query escaper instance
+     * MySQL query escaper instance.
      * @var MySQLQueryEscaper
      */
     protected $escaper;
 
     /**
-     * Instance of the simple  query builder
+     * Instance of the simple  query builder.
      * @var MariaDBDMLQueryBuilder
      */
     protected $builder;
-
-    /**
-     * Reflection of the MariaDBSimpleQueryBuilder
-     * @var ReflectionClass
-     */
-    protected $reflection;
 
     /**
      * Testcase Constructor.
      */
     public function setUp()
     {
-        $this->db = $this->getMockBuilder('Lunr\Gravity\Database\MariaDB\MariaDBConnection')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $this->escaper = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
-        $this->builder_reflection = $this->getMockBuilder('Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder')
-                                         ->getMock();
+        $this->builder = $this->getMockBuilder('Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder')
+                              ->getMock();
 
-        $this->escaper    = new MySQLQueryEscaper($this->db);
-        $this->builder    = new MariaDBSimpleDMLQueryBuilder($this->builder_reflection, $this->escaper);
-        $this->reflection = new ReflectionClass($this->builder);
+        $this->class      = new MariaDBSimpleDMLQueryBuilder($this->builder, $this->escaper);
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\MariaDB\MariaDBSimpleDMLQueryBuilder');
     }
 
     /**
@@ -73,10 +61,10 @@ abstract class MariaDBSimpleDMLQueryBuilderTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->db);
         unset($this->escaper);
         unset($this->builder);
         unset($this->reflection);
+        unset($this->class);
     }
 
 }

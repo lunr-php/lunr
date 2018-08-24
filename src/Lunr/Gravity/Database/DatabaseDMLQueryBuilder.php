@@ -177,6 +177,12 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     protected $is_recursive;
 
     /**
+     * SQL Query part: returning clause
+     * @var String
+     */
+    protected $returning;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -206,6 +212,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         $this->join_type          = '';
         $this->with               = '';
         $this->is_recursive       = FALSE;
+        $this->returning          = '';
     }
 
     /**
@@ -238,6 +245,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         unset($this->join_type);
         unset($this->with);
         unset($this->is_recursive);
+        unset($this->returning);
     }
 
     /**
@@ -300,7 +308,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
         if (($this->delete == '') && ($this->join == ''))
         {
-            array_push($components, 'order_by', 'limit');
+            array_push($components, 'order_by', 'limit', 'returning');
         }
 
         return 'DELETE ' . $this->implode_query($components);

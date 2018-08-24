@@ -42,4 +42,30 @@ class MariaDBSimpleDMLQueryBuilder extends MySQLSimpleDMLQueryBuilder
         parent::__destruct();
     }
 
+    /**
+     * Define which columns to return from a non SELECT query.
+     *
+     * @param string $returning Columns to return
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function returning($returning)
+    {
+        $columns = '';
+        foreach (explode(',', $returning) as $column)
+        {
+            if ($columns !== '')
+            {
+                $columns .= ', ';
+            }
+
+            $columns .= $this->escape_alias($column, FALSE);
+        }
+
+        $this->builder->returning($columns);
+        return $this;
+    }
+
 }
+
+?>
