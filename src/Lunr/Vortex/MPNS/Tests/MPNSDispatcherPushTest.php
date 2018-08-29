@@ -30,7 +30,9 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushingTileSetsTargetHeader()
     {
-        $this->set_reflection_property_value('type', MPNSType::TILE);
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\MPNS\MPNSTilePayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $endpoints = [ 'endpoint' ];
 
@@ -59,7 +61,9 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushingToastSetsTargetHeader()
     {
-        $this->set_reflection_property_value('type', MPNSType::TOAST);
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\MPNS\MPNSToastPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $endpoints = [ 'endpoint' ];
 
@@ -88,8 +92,6 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushingRawDoesNotSetTargetHeader()
     {
-        $this->set_reflection_property_value('type', MPNSType::RAW);
-
         $endpoints = [ 'endpoint' ];
 
         $headers = [
@@ -235,8 +237,11 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushResetsPropertiesOnError()
     {
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\MPNS\MPNSToastPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
+
         $this->set_reflection_property_value('priority', MPNSPriority::TOAST_IMMEDIATELY);
-        $this->set_reflection_property_value('type', MPNSType::TOAST);
 
         $endpoints = [ 'endpoint' ];
 
@@ -259,7 +264,6 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
         $this->class->push($this->payload, $endpoints);
 
         $this->assertSame(0, $this->get_reflection_property_value('priority'));
-        $this->assertSame(MPNSType::RAW, $this->get_reflection_property_value('type'));
     }
 
     /**
@@ -269,8 +273,11 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushResetsPropertiesOnSuccess()
     {
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\MPNS\MPNSToastPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
+
         $this->set_reflection_property_value('priority', MPNSPriority::TOAST_IMMEDIATELY);
-        $this->set_reflection_property_value('type', MPNSType::TOAST);
 
         $endpoints = [ 'endpoint' ];
 
@@ -293,7 +300,6 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
         $this->class->push($this->payload, $endpoints);
 
         $this->assertSame(0, $this->get_reflection_property_value('priority'));
-        $this->assertSame(MPNSType::RAW, $this->get_reflection_property_value('type'));
     }
 
 }

@@ -59,43 +59,6 @@ class MPNSDispatcherSetTest extends MPNSDispatcherTest
         $this->assertEquals(0, $this->get_reflection_property_value('priority'));
     }
 
-    /**
-     * Test the fluid interface of set_type().
-     *
-     * @covers Lunr\Vortex\MPNS\MPNSDispatcher::set_type
-     */
-    public function testSetTypeReturnsSelfReference()
-    {
-        $this->assertEquals($this->class, $this->class->set_type(MPNSType::TILE));
-    }
-
-    /**
-     * Test that set_type() sets the type if it is valid.
-     *
-     * @param integer $type Valid MPNS Type
-     *
-     * @dataProvider validTypeProvider
-     * @covers       Lunr\Vortex\MPNS\MPNSDispatcher::set_type
-     */
-    public function testSetTypeSetsValidType($type)
-    {
-        $this->class->set_type($type);
-
-        $this->assertSame($type, $this->get_reflection_property_value('type'));
-    }
-
-    /**
-     * Test that set_type() ignores the type if it is invalid.
-     *
-     * @covers Lunr\Vortex\MPNS\MPNSDispatcher::set_type
-     */
-    public function testSetTypeDoesNotSetInvalidType()
-    {
-        $this->class->set_type('Android');
-
-        $this->assertEquals(MPNSType::RAW, $this->get_reflection_property_value('type'));
-    }
-
 }
 
 ?>

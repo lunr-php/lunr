@@ -77,7 +77,10 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushingTileSetsTargetHeader()
     {
-        $this->set_reflection_property_value('type', WNSType::TILE);
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\WNS\WNSTilePayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
+
         $this->set_reflection_property_value('oauth_token', '123456');
 
         $endpoints = [ 'endpoint' ];
@@ -109,7 +112,10 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushingToastSetsTargetHeader()
     {
-        $this->set_reflection_property_value('type', WNSType::TOAST);
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\WNS\WNSToastPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
+
         $this->set_reflection_property_value('oauth_token', '123456');
 
         $endpoints = [ 'endpoint' ];
@@ -241,7 +247,10 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushResetsPropertiesOnRequestFailure()
     {
-        $this->set_reflection_property_value('type', WNSType::TOAST);
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\WNS\WNSToastPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
+
         $this->set_reflection_property_value('oauth_token', '123456');
 
         $endpoints = [ 'endpoint' ];
@@ -271,7 +280,6 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
                      ->with($message, $context);
 
         $this->class->push($this->payload, $endpoints);
-
         $this->assertPropertySame('type', WNSType::RAW);
     }
 
@@ -282,7 +290,10 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      */
     public function testPushResetsProperties()
     {
-        $this->set_reflection_property_value('type', WNSType::TOAST);
+        $this->payload = $this->getMockBuilder('Lunr\Vortex\WNS\WNSToastPayload')
+                              ->disableOriginalConstructor()
+                              ->getMock();
+
         $this->set_reflection_property_value('oauth_token', '123456');
 
         $endpoints = [ 'endpoint' ];

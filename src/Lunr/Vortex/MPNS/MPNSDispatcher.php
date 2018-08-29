@@ -28,12 +28,6 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
     private $priority;
 
     /**
-     * Push notification type.
-     * @var String
-     */
-    private $type;
-
-    /**
      * Shared instance of the Requests_Session class.
      * @var \Requests_Session
      */
@@ -56,7 +50,6 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
         $this->priority = 0;
         $this->http     = $http;
         $this->logger   = $logger;
-        $this->type     = MPNSType::RAW;
     }
 
     /**
@@ -65,7 +58,6 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
     public function __destruct()
     {
         unset($this->priority);
-        unset($this->type);
         unset($this->http);
         unset($this->logger);
     }
@@ -80,14 +72,24 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
      */
     public function push($payload, &$endpoints)
     {
+        $type = MPNSType::RAW;
+        if ($payload instanceof MPNSToastPayload)
+        {
+            $type = MPNSTYPE::TOAST;
+        }
+        elseif ($payload instanceof MPNSTilePayload)
+        {
+            $type = MPNSTYPE::TILE;
+        }
+
         $headers = [
             'Content-Type' => 'text/xml',
             'Accept'       => 'application/*',
         ];
 
-        if (($this->type === MPNSType::TILE) || ($this->type === MPNSType::TOAST))
+        if (($type === MPNSType::TILE) || ($type === MPNSType::TOAST))
         {
-            $headers['X-WindowsPhone-Target'] = $this->type;
+            $headers['X-WindowsPhone-Target'] = $type;
         }
 
         if ($this->priority !== 0)
@@ -108,7 +110,6 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
         }
 
         $this->priority = 0;
-        $this->type     = MPNSType::RAW;
 
         return new MPNSResponse($response, $this->logger);
     }
@@ -125,23 +126,6 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
         if (in_array($priority, [ 1, 2, 3, 11, 12, 13, 21, 22, 23 ]))
         {
             $this->priority = $priority;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set the type for the push notification.
-     *
-     * @param string $type Type for the push notification.
-     *
-     * @return MPNSDispatcher $self Self reference
-     */
-    public function set_type($type)
-    {
-        if (in_array($type, [ MPNSType::TOAST, MPNSType::TILE, MPNSType::RAW ]))
-        {
-            $this->type = $type;
         }
 
         return $this;

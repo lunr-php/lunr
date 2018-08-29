@@ -118,6 +118,23 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
             return new WNSResponse($response, $this->logger);
         }
 
+        if ($payload instanceof WNSToastPayload)
+        {
+            $this->set_type(WNSType::TOAST);
+        }
+        elseif ($payload instanceof WNSTilePayload)
+        {
+            $this->set_type(WNSType::TILE);
+        }
+        elseif ($payload instanceof WNSBadgePayload)
+        {
+            $this->set_type(WNSType::BADGE);
+        }
+        else
+        {
+            $this->set_type(WNSType::RAW);
+        }
+
         $headers = [
             'X-WNS-Type'             => 'wns/' . $this->type,
             'Accept'                 => 'application/*',

@@ -41,14 +41,6 @@ class MPNSDispatcherBaseTest extends MPNSDispatcherTest
     }
 
     /**
-     * Test that the type is set to RAW by default.
-     */
-    public function testTypeIsSetToRaw()
-    {
-        $this->assertSame(MPNSType::RAW, $this->get_reflection_property_value('type'));
-    }
-
-    /**
      * Test get_new_response_object_for_failed_request().
      *
      * @covers Lunr\Vortex\MPNS\MPNSDispatcher::get_new_response_object_for_failed_request
