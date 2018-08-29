@@ -41,6 +41,10 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
                       ->willReturn('controller/method');
 
         $this->response->expects($this->at(0))
+                       ->method('get_return_code')
+                       ->willReturn(NULL);
+
+        $this->response->expects($this->at(1))
                        ->method('set_return_code')
                        ->with('controller/method', 200);
 
@@ -66,6 +70,10 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
                       ->willReturn('controller/method');
 
         $this->response->expects($this->at(0))
+                       ->method('get_return_code')
+                       ->willReturn(NULL);
+
+        $this->response->expects($this->at(1))
                        ->method('set_return_code')
                        ->with('controller/method', 200);
 
@@ -96,11 +104,11 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
 
         $this->response->expects($this->at(0))
                        ->method('set_return_code')
-                       ->with('controller/method', 200);
+                       ->with('controller/method', 500);
 
         $this->response->expects($this->at(1))
-                       ->method('set_return_code')
-                       ->with('controller/method', 500);
+                       ->method('get_return_code')
+                       ->willReturn(500);
 
         $message = "call_user_func_array() expects parameter 1 to be a valid callback, class 'String' not found";
 
@@ -138,11 +146,11 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
 
         $this->response->expects($this->at(0))
                        ->method('set_return_code')
-                       ->with('controller/method', 200);
+                       ->with('controller/method', 500);
 
         $this->response->expects($this->at(1))
-                       ->method('set_return_code')
-                       ->with('controller/method', 500);
+                       ->method('get_return_code')
+                       ->willReturn(500);
 
         $message = 'call_user_func_array() expects parameter 1 to be a valid callback, first array member is not a valid class name or object';
 
@@ -184,11 +192,11 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
 
         $this->response->expects($this->at(0))
                        ->method('set_return_code')
-                       ->with('controller/method', 200);
+                       ->with('controller/method', 400);
 
         $this->response->expects($this->at(1))
-                       ->method('set_return_code')
-                       ->with('controller/method', 400);
+                       ->method('get_return_code')
+                       ->willReturn(400);
 
         $message = 'Bad Request!';
 
@@ -230,11 +238,11 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
 
         $this->response->expects($this->at(0))
                        ->method('set_return_code')
-                       ->with('controller/method', 200);
+                       ->with('controller/method', 500);
 
         $this->response->expects($this->at(1))
-                       ->method('set_return_code')
-                       ->with('controller/method', 500);
+                       ->method('get_return_code')
+                       ->willReturn(500);
 
         $message = 'Error!';
 
@@ -276,11 +284,11 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
 
         $this->response->expects($this->at(0))
                        ->method('set_return_code')
-                       ->with('controller/method', 200);
+                       ->with('controller/method', 500);
 
         $this->response->expects($this->at(1))
-                       ->method('set_return_code')
-                       ->with('controller/method', 500);
+                       ->method('get_return_code')
+                       ->willReturn(500);
 
         $message = 'Fatal Error!';
 
@@ -310,6 +318,10 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
                       ->willReturn('controller/method');
 
         $this->response->expects($this->at(0))
+                       ->method('get_return_code')
+                       ->willReturn(NULL);
+
+        $this->response->expects($this->at(1))
                        ->method('set_return_code')
                        ->with('controller/method', 200);
 

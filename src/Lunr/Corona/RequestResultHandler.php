@@ -78,9 +78,6 @@ class RequestResultHandler
      */
     public function handle_request($callable, $params)
     {
-        // default to 200 and let the controller override it if necessary
-        $this->set_result(HttpCode::OK);
-
         try
         {
             call_user_func_array($callable, $params);
@@ -96,6 +93,12 @@ class RequestResultHandler
         catch(Throwable $e)
         {
             $this->set_result(HttpCode::INTERNAL_SERVER_ERROR, $e->getMessage());
+        }
+
+        // default to 200 if no result was set
+        if ($this->response->get_return_code() === NULL)
+        {
+            $this->set_result(HttpCode::OK);
         }
     }
 
