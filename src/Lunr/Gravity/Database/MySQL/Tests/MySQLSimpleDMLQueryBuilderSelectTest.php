@@ -36,12 +36,9 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
                       ->with($this->equalTo('col'))
                       ->will($this->returnValue('`col`'));
 
-        $this->builder->expects($this->once())
-                      ->method('select')
-                      ->with($this->equalTo('`col`'))
-                      ->will($this->returnSelf());
-
         $this->class->select('col');
+
+        $this->assertEquals('`col`', $this->get_reflection_property_value('select'));
     }
 
     /**
@@ -61,12 +58,9 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
                       ->with($this->equalTo(' col'))
                       ->will($this->returnValue('`col`'));
 
-        $this->builder->expects($this->once())
-                      ->method('select')
-                      ->with($this->equalTo('`col`, `col`'))
-                      ->willReturn($this->returnSelf());
-
         $this->class->select('col, col');
+
+        $this->assertEquals('`col`, `col`', $this->get_reflection_property_value('select'));
     }
 
     /**
@@ -81,12 +75,9 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
                       ->with($this->equalTo('table'))
                       ->will($this->returnValue('`table`'));
 
-        $this->builder->expects($this->once())
-                      ->method('from')
-                      ->with($this->equalTo('`table`'))
-                      ->will($this->returnSelf());
-
         $this->class->from('table');
+
+        $this->assertEquals('FROM `table`', $this->get_reflection_property_value('from'));
     }
 
     /**
@@ -101,12 +92,9 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
                       ->with($this->equalTo('table'))
                       ->will($this->returnValue('`table`'));
 
-        $this->builder->expects($this->once())
-                      ->method('join')
-                      ->with($this->equalTo('`table`'))
-                      ->will($this->returnSelf());
-
         $this->class->join('table');
+
+        $this->assertEquals('INNER JOIN `table`', $this->get_reflection_property_value('join'));
     }
 
     /**
@@ -121,12 +109,9 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
                       ->with($this->equalTo('col'))
                       ->will($this->returnValue('`col`'));
 
-        $this->builder->expects($this->once())
-                      ->method('group_by')
-                      ->with($this->equalTo('`col`'))
-                      ->will($this->returnSelf());
-
         $this->class->group_by('col');
+
+        $this->assertEquals('GROUP BY `col`', $this->get_reflection_property_value('group_by'));
     }
 
     /**
@@ -141,12 +126,9 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
                       ->with($this->equalTo('col'))
                       ->will($this->returnValue('`col`'));
 
-        $this->builder->expects($this->once())
-                      ->method('order_by')
-                      ->with($this->equalTo('`col`'), $this->equalTo(TRUE))
-                      ->will($this->returnSelf());
-
         $this->class->order_by('col');
+
+        $this->assertEquals('ORDER BY `col` ASC', $this->get_reflection_property_value('order_by'));
     }
 
     /**
@@ -166,12 +148,9 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
                       ->with($this->equalTo(-1))
                       ->will($this->returnValue(-1));
 
-        $this->builder->expects($this->once())
-                      ->method('limit')
-                      ->with($this->equalTo(10))
-                      ->will($this->returnSelf());
-
         $this->class->limit(10);
+
+        $this->assertEquals('LIMIT 10', $this->get_reflection_property_value('limit'));
     }
 
     /**
@@ -186,12 +165,9 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
                       ->with($this->equalTo('query'))
                       ->will($this->returnValue('(query)'));
 
-        $this->builder->expects($this->once())
-                      ->method('union')
-                      ->with($this->equalTo('(query)'))
-                      ->will($this->returnSelf());
-
         $this->class->union('query');
+
+        $this->assertEquals('UNION (query)', $this->get_reflection_property_value('compound'));
     }
 
      /**
@@ -206,12 +182,9 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
                       ->with($this->equalTo('query'))
                       ->will($this->returnValue('(query)'));
 
-        $this->builder->expects($this->once())
-                      ->method('union')
-                      ->with($this->equalTo('(query)', TRUE), $this->equalTo(TRUE))
-                      ->will($this->returnSelf());
-
         $this->class->union('query', TRUE);
+
+        $this->assertEquals('UNION ALL (query)', $this->get_reflection_property_value('compound'));
     }
 
 }

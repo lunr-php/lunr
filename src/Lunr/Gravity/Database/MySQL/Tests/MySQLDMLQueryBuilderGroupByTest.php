@@ -50,9 +50,11 @@ class MySQLDMLQueryBuilderGroupByTest extends MySQLDMLQueryBuilderTest
         $property->setAccessible(TRUE);
 
         $this->builder->group_by('group1', FALSE);
+
         $this->assertEquals('GROUP BY group1 DESC', $property->getValue($this->builder));
 
         $this->builder->group_by('group2', TRUE);
+
         $this->assertEquals('GROUP BY group1 DESC, group2 ASC', $property->getValue($this->builder));
     }
 

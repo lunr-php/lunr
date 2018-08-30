@@ -154,6 +154,8 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     {
         $value = $this->class->get_new_dml_query_builder_object();
 
+        $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseDMLQueryBuilder', $value);
+        $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder', $value);
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder', $value);
     }
 
