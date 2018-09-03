@@ -219,6 +219,11 @@ class Response
      */
     public function get_return_code($identifier = NULL)
     {
+        if (empty($this->return_code))
+        {
+            return NULL;
+        }
+
         if ($identifier === NULL)
         {
             $identifier = array_search(max($this->return_code), $this->return_code);
@@ -236,6 +241,11 @@ class Response
      */
     public function get_return_code_identifiers($max = FALSE)
     {
+        if (empty($this->return_code))
+        {
+            return [];
+        }
+
         return $max ? array_search(max($this->return_code), $this->return_code) : array_keys($this->return_code);
     }
 

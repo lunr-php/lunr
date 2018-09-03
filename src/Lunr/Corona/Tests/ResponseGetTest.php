@@ -133,6 +133,30 @@ class ResponseGetTest extends ResponseTest
     }
 
     /**
+     * Test getting return code without identifier with no code.
+     *
+     * @covers Lunr\Corona\Response::get_return_code
+     */
+    public function testGetReturnCodeWithoutIdentifierWithEmptyCodes()
+    {
+        $this->set_reflection_property_value('return_code', []);
+
+        $this->assertNull($this->class->get_return_code());
+    }
+
+    /**
+     * Test getting return code with no code.
+     *
+     * @covers Lunr\Corona\Response::get_return_code
+     */
+    public function testGetReturnCodeWithEmptyCodes()
+    {
+        $this->set_reflection_property_value('return_code', []);
+
+        $this->assertNull($this->class->get_return_code('controller/method'));
+    }
+
+    /**
      * Test getting existing return code.
      *
      * @covers Lunr\Corona\Response::get_return_code
@@ -168,6 +192,30 @@ class ResponseGetTest extends ResponseTest
         $this->set_reflection_property_value('return_code', $data);
 
         $this->assertSame(500, $this->class->get_return_code());
+    }
+
+    /**
+     * Test getting identifier of the highest return code with no code.
+     *
+     * @covers Lunr\Corona\Response::get_return_code_identifiers
+     */
+    public function testGetMaximumReturnCodeIdentifiersWithEmptyCodes()
+    {
+        $this->set_reflection_property_value('return_code', []);
+
+        $this->assertArrayEmpty($this->class->get_return_code_identifiers());
+    }
+
+    /**
+     * Test getting all return code identifiers with no code.
+     *
+     * @covers Lunr\Corona\Response::get_return_code_identifiers
+     */
+    public function testGetReturnCodeIdentifiersWithEmptyCodes()
+    {
+        $this->set_reflection_property_value('return_code', []);
+
+        $this->assertArrayEmpty($this->class->get_return_code_identifiers(TRUE));
     }
 
     /**
