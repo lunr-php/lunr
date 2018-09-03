@@ -5,8 +5,6 @@
  * session handler for PHP, using the database instead of
  * the local filesystem for session storage.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Sphere
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>

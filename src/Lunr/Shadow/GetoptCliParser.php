@@ -3,8 +3,6 @@
 /**
  * This file contains a getopt-based command line argument parser.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

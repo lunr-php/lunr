@@ -2,8 +2,6 @@
 /**
  * This file contains the DatabaseDMLQueryBuilderQueryPartsWithTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Gravity\Database
  * @author     Koen Hengsdijk
  * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands

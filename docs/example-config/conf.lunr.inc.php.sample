@@ -4,8 +4,6 @@
  * Basic Framework Configuration
  * This config file contains Framework relevant config keys.
  *
- * PHP Version 5.3
- *
  * @category   Config
  * @package    Core
  * @subpackage Config

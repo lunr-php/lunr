@@ -3,8 +3,6 @@
 /**
  * This file contains the AuthenticationApiTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Spark\Twitter
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>

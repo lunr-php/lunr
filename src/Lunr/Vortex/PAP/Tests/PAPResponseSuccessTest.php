@@ -3,8 +3,6 @@
 /**
  * This file contains the PAPResponseSuccessTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\PAP
  * @author     Leonidas Diaamntis <leonidas@m2mobi.com>
  * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands

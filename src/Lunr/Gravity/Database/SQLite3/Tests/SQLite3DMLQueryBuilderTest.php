@@ -3,8 +3,6 @@
 /**
  * This file contains the SQLite3DMLQueryBuilderTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Gravity\Database\SQLite3
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

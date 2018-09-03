@@ -3,8 +3,6 @@
 /**
  * This file contains the Resque job dispatcher.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Spawn
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands

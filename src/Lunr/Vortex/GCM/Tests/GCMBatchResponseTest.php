@@ -3,8 +3,6 @@
 /**
  * This file contains the GCMBatchResponseTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\GCM
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
  * @author     Dinos Theodorou <dinos@m2mobi.com>

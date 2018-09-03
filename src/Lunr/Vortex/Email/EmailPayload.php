@@ -3,8 +3,6 @@
 /**
  * This file contains functionality to generate Email Notification payloads.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\Email
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands

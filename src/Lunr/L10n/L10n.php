@@ -4,8 +4,6 @@
  * This file contains the Localization helper class. It includes functions to
  * handle language definition, get supported languages of a project, etc
  *
- * PHP Version 5.3
- *
  * @package    Lunr\L10n
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Julio Foulquié <julio@m2mobi.com>

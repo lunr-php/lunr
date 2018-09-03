@@ -4,8 +4,6 @@
  * This file contains the abstract definition for the
  * PHP array Localization Provider.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\L10n
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Jose Viso <jose@m2mobi.com>

@@ -4,8 +4,6 @@
  * This file contains Android Push Notification Service configuration
  * values.
  *
- * PHP Version 5.3
- *
  * @category   Config
  * @package    Core
  * @subpackage Config

@@ -3,8 +3,6 @@
 /**
  * This file contains the ConfigServiceLocatorTest class.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Core
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

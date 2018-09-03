@@ -3,8 +3,6 @@
 /**
  * This file contains functionality to dispatch Windows Push Notifications.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\WNS
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Sean Molenaar <sean@m2mobi.com>

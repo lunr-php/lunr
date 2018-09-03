@@ -3,8 +3,6 @@
 /**
  * This file contains an interface for command line argument parsers.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

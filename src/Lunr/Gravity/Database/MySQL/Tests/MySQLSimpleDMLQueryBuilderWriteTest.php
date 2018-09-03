@@ -3,8 +3,6 @@
 /**
  * This file contains the MySQLSimpleDMLQueryBuilderWriteTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Gravity\Database\MySQL
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands

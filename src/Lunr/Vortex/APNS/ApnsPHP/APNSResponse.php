@@ -3,8 +3,6 @@
 /**
  * This file contains an abstraction for the response from the APNS server.
  *
- * PHP Version 5.6
- *
  * @package    Lunr\Vortex\APNS\ApnsPHP
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
  * @copyright  2016-2018, M2Mobi BV, Amsterdam, The Netherlands

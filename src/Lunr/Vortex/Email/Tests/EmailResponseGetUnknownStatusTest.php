@@ -3,8 +3,6 @@
 /**
  * This file contains the EmailResponseGetUnknownStatusTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\Email
  * @author     Koen Woortman <k.woortman@m2mobi.com>
  * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands

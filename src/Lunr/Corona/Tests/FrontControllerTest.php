@@ -3,8 +3,6 @@
 /**
  * This file contains the FrontControllerTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>

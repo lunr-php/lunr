@@ -3,8 +3,6 @@
 /**
  * This file contains the LunrSoapClient class.
  *
- * PHP Version 5.6
- *
  * @package    Lunr\Spark
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

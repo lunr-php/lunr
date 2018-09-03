@@ -4,8 +4,6 @@
  * This file contains the class DateTime, which is a collection
  * of commonly used Date and Time methods.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Core
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Jose Viso <jose@m2mobi.com>

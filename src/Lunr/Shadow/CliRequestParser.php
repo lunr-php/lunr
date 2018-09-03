@@ -3,8 +3,6 @@
 /**
  * This file contains the cli request parser class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>

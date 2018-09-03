@@ -3,8 +3,6 @@
 /**
  * This file contains the GCMPayloadTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\GCM
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

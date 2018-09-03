@@ -3,8 +3,6 @@
 /**
  * This file contains the ForbiddenExceptionBaseTest class.
  *
- * PHP Version 7.0
- *
  * @package Lunr\Corona\Exceptions
  * @author  Heinz Wiesinger <heinz@m2mobi.com>
  */

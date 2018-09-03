@@ -3,8 +3,6 @@
 /**
  * This file contains the MsgpackViewBaseTest class.
  *
- * PHP Version 5.4
- *
  * @package   Lunr\Corona
  * @author    Patrick Valk <p.valk@m2mobi.com>
  * @copyright 2017-2018, M2Mobi BV, Amsterdam, The Netherlands

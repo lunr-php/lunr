@@ -3,8 +3,6 @@
 /**
  * Lunr wrapper around the SQLite3 class, that doesn't connect on construct.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Gravity\Database\SQLite3
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

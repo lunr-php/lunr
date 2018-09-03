@@ -3,8 +3,6 @@
 /**
  * This file contains functionality to dispatch Firebase Cloud Messaging Push Notifications.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\FCM
  * @author     Patrick Valk <p.valk@m2mobi.com>
  * @copyright  2017-2018, M2Mobi BV, Amsterdam, The Netherlands

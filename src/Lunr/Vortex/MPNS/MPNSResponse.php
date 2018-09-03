@@ -3,8 +3,6 @@
 /**
  * This file contains an abstraction for the response from the MPNS server.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\MPNS
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

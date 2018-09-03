@@ -3,8 +3,6 @@
 /**
  * This file contains an abstraction for the response from the PAP server.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\PAP
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>

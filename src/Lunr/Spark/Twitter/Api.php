@@ -3,8 +3,6 @@
 /**
  * This file contains low level API methods for Twitter.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Spark\Twitter
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

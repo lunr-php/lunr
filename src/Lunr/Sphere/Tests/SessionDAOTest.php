@@ -3,8 +3,6 @@
 /**
  * This file contains the SessionDAOTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Sphere
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands

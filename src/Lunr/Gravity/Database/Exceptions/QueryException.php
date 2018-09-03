@@ -2,8 +2,6 @@
 /**
  * This file contains the QueryException class.
  *
- * PHP Version 7.0
- *
  * @package   Lunr\Gravity\Database\Exceptions
  * @author    Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright 2018, M2Mobi BV, Amsterdam, The Netherlands

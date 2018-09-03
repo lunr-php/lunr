@@ -3,8 +3,6 @@
 /**
  * This file contains an abstract controller class.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2010-2018, M2Mobi BV, Amsterdam, The Netherlands

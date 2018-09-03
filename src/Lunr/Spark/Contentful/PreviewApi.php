@@ -3,8 +3,6 @@
 /**
  * This file contains low level Preview API methods for Contentful.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Spark\Contentful
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
  * @copyright  2015-2018, M2Mobi BV, Amsterdam, The Netherlands

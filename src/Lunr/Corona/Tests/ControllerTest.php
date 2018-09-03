@@ -3,8 +3,6 @@
 /**
  * This file contains the ControllerTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2018, M2Mobi BV, Amsterdam, The Netherlands

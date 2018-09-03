@@ -3,8 +3,6 @@
 /**
  * This file contains the Model interface.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Corona
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>

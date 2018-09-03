@@ -4,8 +4,6 @@
  * This file contains another implementation of a
  * command line argument parser, like getopt.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Shadow
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2009-2018, Heinz Wiesinger, Amsterdam, The Netherlands

@@ -3,8 +3,6 @@
 /**
  * This file contains the AuthenticationTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Spark\Facebook
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

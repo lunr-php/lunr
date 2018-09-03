@@ -3,8 +3,6 @@
 /**
  * This file contains the SQLite3ConnectionQueryTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Gravity\Database\SQLite3
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Ruben de Groot <r.degroot@m2mobi.com>

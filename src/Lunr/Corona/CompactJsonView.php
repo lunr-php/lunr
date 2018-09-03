@@ -3,8 +3,6 @@
 /**
  * This file contains the compact json view class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Corona
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands

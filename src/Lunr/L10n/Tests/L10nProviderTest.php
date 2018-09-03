@@ -3,8 +3,6 @@
 /**
  * This file contains the L10nProviderTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\L10n
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands

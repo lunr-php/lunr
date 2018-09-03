@@ -3,8 +3,6 @@
 /**
  * This file contains the QueryExceptionBaseTest class.
  *
- * PHP Version 7.0
- *
  * @package Lunr\Gravity\Database\Exceptions
  * @author  Heinz Wiesinger <heinz@m2mobi.com>
  */

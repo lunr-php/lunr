@@ -3,8 +3,6 @@
 /**
  * This file contains functionality to dispatch PAP Format Push Notifications.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\PAP
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>

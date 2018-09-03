@@ -5,8 +5,6 @@
  *
  * Set include path and initialize autoloader.
  *
- * PHP Version 5.4
- *
  * @category   Loaders
  * @package    Tests
  * @subpackage Tests

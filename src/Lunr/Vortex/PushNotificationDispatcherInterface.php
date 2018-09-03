@@ -4,8 +4,6 @@
  * This file contains the PushNotificationDispatcherInterface interface which
  * is the base of all push notifications.
  *
- * PHP Version 7.2
- *
  * @package    Lunr\Vortex
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>

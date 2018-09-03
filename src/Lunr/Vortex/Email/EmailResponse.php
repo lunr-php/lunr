@@ -3,8 +3,6 @@
 /**
  * This file contains an abstraction for the response from the Email service.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\Email
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @author     Koen Woortman <k.woortman@m2mobi.com

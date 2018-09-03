@@ -3,8 +3,6 @@
 /**
  * This file contains the ConflictExceptionBaseTest class.
  *
- * PHP Version 7.0
- *
  * @package Lunr\Corona\Exceptions
  * @author  Damien Tardy-Panis <damien@m2mobi.com>
  */

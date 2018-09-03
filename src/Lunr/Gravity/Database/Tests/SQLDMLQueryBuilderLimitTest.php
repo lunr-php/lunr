@@ -3,8 +3,6 @@
 /**
  * This file contains the SQLDMLQueryBuilderLimitTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Gravity\Database
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

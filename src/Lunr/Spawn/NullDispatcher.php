@@ -3,8 +3,6 @@
 /**
  * This file contains the Null job dispatcher.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Spawn
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands

@@ -6,8 +6,6 @@
  * is a class accessing a low-level localization
  * infrastructure.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\L10n
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2010-2018, M2Mobi BV, Amsterdam, The Netherlands

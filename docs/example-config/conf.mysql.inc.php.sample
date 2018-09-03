@@ -3,8 +3,6 @@
 /**
  * MySQL/MariaDB Constant Definitions
  *
- * PHP Version 5.3
- *
  * @category   Config
  * @package    Database
  * @subpackage Config

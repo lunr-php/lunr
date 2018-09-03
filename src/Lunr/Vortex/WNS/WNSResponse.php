@@ -3,8 +3,6 @@
 /**
  * This file contains an abstraction for the response from the WNS server.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\WNS
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Sean Molenaar <sean@m2mobi.com>

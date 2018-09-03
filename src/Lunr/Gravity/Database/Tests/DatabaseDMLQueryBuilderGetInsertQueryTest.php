@@ -3,8 +3,6 @@
 /**
  * This file contains the DatabaseDMLQueryBuilderGetInsertQueryTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Gravity\Database
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>

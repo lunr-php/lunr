@@ -3,8 +3,6 @@
 /**
  * This file contains the DatabaseDMLQueryBuilderQueryPartsUsingTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Gravity\Database
  * @author     Patrick Valk <p.valk@m2mobi.com>
  * @copyright  2016-2018, M2Mobi BV, Amsterdam, The Netherlands

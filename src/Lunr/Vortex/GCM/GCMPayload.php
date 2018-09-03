@@ -3,8 +3,6 @@
 /**
  * This file contains functionality to generate Google Cloud Messaging Push Notification payloads.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\GCM
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @author     Sean Molenaar <sean@m2mobi.com>

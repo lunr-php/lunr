@@ -3,8 +3,6 @@
 /**
  * This file contains the DatabaseDMLQueryBuilderQueryPartsInsertTest class.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Gravity\Database
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands

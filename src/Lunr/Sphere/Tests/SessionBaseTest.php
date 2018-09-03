@@ -2,8 +2,6 @@
 /**
  * This file contains the SessionBaseTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Sphere
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>

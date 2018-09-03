@@ -3,8 +3,6 @@
 /**
  * Abtract database connection class.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Gravity\Database
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands

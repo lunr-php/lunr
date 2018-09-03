@@ -3,8 +3,6 @@
 /**
  * Abtract database query builder class.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Gravity\Database
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>

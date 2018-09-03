@@ -2,8 +2,6 @@
 /**
  * This file contains the ForbiddenException class.
  *
- * PHP Version 7.0
- *
  * @package   Lunr\Corona\Exceptions
  * @author    Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright 2018, M2Mobi BV, Amsterdam, The Netherlands

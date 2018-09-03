@@ -3,8 +3,6 @@
 /**
  * This file contains the PAPDispatcherTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\PAP
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>

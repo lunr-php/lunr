@@ -3,8 +3,6 @@
 /**
  * This file contains a PHP session handling wrapper class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Sphere
  * @author     Felipe Martinez <felipe@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>

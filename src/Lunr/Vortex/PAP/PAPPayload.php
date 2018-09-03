@@ -3,8 +3,6 @@
 /**
  * This file contains functionality to generate PAP Format Push Notification payloads.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\PAP
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands

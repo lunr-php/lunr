@@ -3,8 +3,6 @@
 /**
  * This file contains an Cache class.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Cache
  * @author     Patrick Valk <p.valk@m2mobi.com>
  * @copyright  2017-2018, M2Mobi BV, Amsterdam, The Netherlands

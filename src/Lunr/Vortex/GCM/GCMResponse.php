@@ -3,8 +3,6 @@
 /**
  * This file contains an abstraction for the response from the GCM server.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\GCM
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @author     Damien Tardy-Panis <damien@m2mobi.com>

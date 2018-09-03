@@ -3,8 +3,6 @@
 /**
  * SQLite3 database query builder class.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Gravity\Database\SQLite3
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

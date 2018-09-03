@@ -3,8 +3,6 @@
 /**
  * This file contains Apple Push Notification Service stream status codes.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\APNS
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
  * @copyright  2016-2018, M2Mobi BV, Amsterdam, The Netherlands

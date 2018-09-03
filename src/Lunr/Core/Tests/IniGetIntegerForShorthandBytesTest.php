@@ -3,8 +3,6 @@
 /**
  * This file contains the IniGetIntegerForShorthandBytesTest class.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Core
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2016-2018, M2Mobi BV, Amsterdam, The Netherlands

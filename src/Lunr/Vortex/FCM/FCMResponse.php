@@ -3,8 +3,6 @@
 /**
  * This file contains an abstraction for the response from the FCM server.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\GCM
  * @author     Patrick Valk <p.valk@m2mobi.com>
  * @copyright  2017-2018, M2Mobi BV, Amsterdam, The Netherlands

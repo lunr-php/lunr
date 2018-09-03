@@ -3,8 +3,6 @@
 /**
  * Contains SQLite3QueryResultFreeTest class.
  *
- * PHP Version 5.6
- *
  * @package    Lunr\Gravity\Database\SQLite3
  * @author     Ruben de Groot <r.degroot@m2mobi.com>
  * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands

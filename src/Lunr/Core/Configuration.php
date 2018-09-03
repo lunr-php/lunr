@@ -5,8 +5,6 @@
  * holding all configuration values and managing
  * access to those values.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Core
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2011-2018, M2Mobi BV, Amsterdam, The Netherlands

@@ -3,8 +3,6 @@
 /**
  * This file contains the WebRequestParserParseServerTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Corona
  * @author     Sean Molenaar <sean@m2mobi.com>
  * @copyright  2015-2018, M2Mobi BV, Amsterdam, The Netherlands

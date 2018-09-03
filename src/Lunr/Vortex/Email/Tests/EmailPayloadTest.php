@@ -3,8 +3,6 @@
 /**
  * This file contains the EmailPayloadTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\Email
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands

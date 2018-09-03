@@ -3,8 +3,6 @@
 /**
  * This file contains the MySQLDMLQueryBuilderTest class.
  *
- * PHP Version 5.3
- *
  * @package    Lunr\Gravity\Database\MySQL
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Felipe Martinez <felipe@m2mobi.com>

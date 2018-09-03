@@ -3,8 +3,6 @@
 /**
  * This file contains the FCMBatchResponseBasePushErrorTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\FCM
  * @author     Patrick Valk <p.valk@m2mobi.com>
  * @copyright  2016, M2Mobi BV, Amsterdam, The Netherlands

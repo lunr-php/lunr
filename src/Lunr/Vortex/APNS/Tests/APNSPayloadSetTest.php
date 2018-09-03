@@ -3,8 +3,6 @@
 /**
  * This file contains the APNSPayloadSetTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Vortex\APNS
  * @author     Leonidas Diamantis <leonidas@m2mobi.com>
  * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands

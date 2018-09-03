@@ -3,8 +3,6 @@
 /**
  * This file contains the CliRequestParserParseServerTest class.
  *
- * PHP Version 5.4
- *
  * @package    Lunr\Shadow
  * @author     Sean Molenaar <sean@m2mobi.com>
  * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands
