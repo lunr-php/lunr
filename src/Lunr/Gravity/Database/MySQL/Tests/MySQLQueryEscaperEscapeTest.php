@@ -343,6 +343,34 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
         $this->assertEquals('USE INDEX (`index`, `index`)', $value);
     }
 
+    /**
+     * Test escaping a geometric value.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::geovalue
+     */
+    public function testEscapingGeoValueWithoutSrid()
+    {
+        $this->db->expects($this->once())
+                 ->method('escape_string')
+                 ->will($this->returnValue('value'));
+
+        $this->assertEquals("ST_GeomFromText('value')", $this->class->geovalue('value'));
+    }
+
+    /**
+     * Test escaping a geometric value with passing a SRID.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::geovalue
+     */
+    public function testEscapingGeoValueWithSrid()
+    {
+        $this->db->expects($this->once())
+                 ->method('escape_string')
+                 ->will($this->returnValue('value'));
+
+        $this->assertEquals("ST_GeomFromText('value', 5)", $this->class->geovalue('value', 5));
+    }
+
 }
 
 ?>

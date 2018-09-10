@@ -109,6 +109,28 @@ class MySQLQueryEscaper extends DatabaseQueryEscaper
     }
 
     /**
+     * Define and escape input as a geometry value.
+     *
+     * @param string       $value Well-Known Text (WKT) representation of a geometry shape.
+     * @param integer|null $srid  The Spatial Reference System ID for the geometry value.
+     *
+     * @return string $return Defined and escaped geometric value.
+     */
+    public function geovalue($value, $srid = NULL)
+    {
+        $args = [];
+
+        $args[] = $this->value($value);
+
+        if (!is_null($srid))
+        {
+            $args[] = intval($srid);
+        }
+
+        return 'ST_GeomFromText(' . join(', ', $args) . ')';
+    }
+
+    /**
      * Define and escape input as index hint.
      *
      * @param string $keyword Whether to USE, FORCE or IGNORE the index/indices
