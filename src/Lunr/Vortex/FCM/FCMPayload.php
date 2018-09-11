@@ -12,6 +12,7 @@
 namespace Lunr\Vortex\FCM;
 
 use Lunr\Vortex\GCM\GCMPayload;
+use ReflectionClass;
 
 /**
  * Google Cloud Messaging Push Notification Payload Generator.
@@ -152,13 +153,17 @@ class FCMPayload extends GCMPayload
     /**
      * Mark the notification priority.
      *
-     * @param boolean $priority Notification priority value.
+     * @param Lunr\Vortex\FCM\FCMPriority $priority Notification priority value.
      *
      * @return FCMPayload $self Self Reference
      */
     public function set_priority($priority)
     {
-        $this->elements['priority'] = $priority;
+        $mpns = new ReflectionClass('\Lunr\Vortex\FCM\FCMPriority');
+        if (in_array($priority, $mpns->getConstants()))
+        {
+            $this->elements['priority'] = $priority;
+        }
 
         return $this;
     }

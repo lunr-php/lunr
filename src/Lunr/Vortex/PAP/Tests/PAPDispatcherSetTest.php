@@ -91,30 +91,6 @@ class PAPDispatcherSetTest extends PAPDispatcherTest
         $this->assertEquals($this->class, $this->class->set_content_provider_id($cid));
     }
 
-    /**
-     * Test that set_deliver_before_timestamp() sets the deliverbefore.
-     *
-     * @covers Lunr\Vortex\PAP\PAPDispatcher::set_deliver_before_timestamp
-     */
-    public function testSetDeliverBeforeTimestampSetsDeliverBefore()
-    {
-        $deliverbefore = 'deliverbefore';
-        $this->class->set_deliver_before_timestamp($deliverbefore);
-
-        $this->assertPropertyEquals('deliverbefore', 'deliverbefore');
-    }
-
-    /**
-     * Test the fluid interface of set_deliver_before_timestamp().
-     *
-     * @covers Lunr\Vortex\PAP\PAPDispatcher::set_deliver_before_timestamp
-     */
-    public function testSetDeliverBeforeTimestampReturnsSelfReference()
-    {
-        $cid = 'cid';
-        $this->assertEquals($this->class, $this->class->set_deliver_before_timestamp($cid));
-    }
-
 }
 
 ?>

@@ -334,13 +334,14 @@
             <file>../src/Lunr/Vortex/FCM/Tests/FCMResponseBaseTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadTest.php</file>
+            <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadSetTest.php</file>
+            <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSTilePayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSTilePayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSResponseErrorTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSResponseSuccessTest.php</file>
-            <file>../src/Lunr/Vortex/MPNS/Tests/MPNSResponseSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSDispatcherBaseTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSDispatcherSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSDispatcherPushTest.php</file>

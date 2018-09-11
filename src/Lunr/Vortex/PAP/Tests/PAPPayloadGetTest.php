@@ -37,6 +37,18 @@ class PAPPayloadGetTest extends PAPPayloadTest
         $this->assertStringMatchesFormatFile($file, $this->class->get_payload());
     }
 
+    /**
+     * Test get_priority() with the priority being set.
+     *
+     * @covers Lunr\Vortex\PAP\PAPPayload::get_priority
+     */
+    public function testGetPriority()
+    {
+        $this->set_reflection_property_value('priority', 9000);
+
+        $this->assertEquals(9000, $this->class->get_priority());
+    }
+
 }
 
 ?>

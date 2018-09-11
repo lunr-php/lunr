@@ -51,6 +51,10 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
                    ->with('endpoint', $headers, 'payload')
                    ->willReturn($this->response);
 
+        $this->payload->expects($this->once())
+                   ->method('get_priority')
+                   ->willReturn(0);
+
         $this->class->push($this->payload, $endpoints);
     }
 
@@ -82,6 +86,10 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
                    ->with('endpoint', $headers, 'payload')
                    ->willReturn($this->response);
 
+        $this->payload->expects($this->once())
+                      ->method('get_priority')
+                      ->willReturn(0);
+
         $this->class->push($this->payload, $endpoints);
     }
 
@@ -108,6 +116,10 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
                    ->with('endpoint', $headers, 'payload')
                    ->willReturn($this->response);
 
+        $this->payload->expects($this->once())
+                      ->method('get_priority')
+                      ->willReturn(0);
+
         $this->class->push($this->payload, $endpoints);
     }
 
@@ -118,8 +130,6 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushingWithDefaultPriorityDoesNotSetPriorityHeader()
     {
-        $this->set_reflection_property_value('priority', 0);
-
         $endpoints = [ 'endpoint' ];
 
         $headers = [
@@ -136,6 +146,10 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
                    ->with('endpoint', $headers, 'payload')
                    ->willReturn($this->response);
 
+        $this->payload->expects($this->once())
+                      ->method('get_priority')
+                      ->willReturn(0);
+
         $this->class->push($this->payload, $endpoints);
     }
 
@@ -149,7 +163,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      */
     public function testPushingWithValidPrioritySetsPriorityHeader($priority)
     {
-        $this->set_reflection_property_value('priority', $priority);
+        $this->payload->set_priority($priority);
 
         $endpoints = [ 'endpoint' ];
 
@@ -167,6 +181,10 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
                    ->method('post')
                    ->with('endpoint', $headers, 'payload')
                    ->willReturn($this->response);
+
+        $this->payload->expects($this->any())
+                      ->method('get_priority')
+                      ->willReturn($priority);
 
         $this->class->push($this->payload, $endpoints);
     }
@@ -201,6 +219,10 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
                      ->method('warning')
                      ->with($message, $context);
 
+        $this->payload->expects($this->any())
+                      ->method('get_priority')
+                      ->willReturn(0);
+
         $this->assertInstanceOf('Lunr\Vortex\MPNS\MPNSResponse', $this->class->push($this->payload, $endpoints));
     }
 
@@ -227,6 +249,10 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
                    ->with('endpoint', $headers, 'payload')
                    ->willReturn($this->response);
 
+        $this->payload->expects($this->any())
+                      ->method('get_priority')
+                      ->willReturn(0);
+
         $this->assertInstanceOf('Lunr\Vortex\MPNS\MPNSResponse', $this->class->push($this->payload, $endpoints));
     }
 
@@ -241,7 +267,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
                               ->disableOriginalConstructor()
                               ->getMock();
 
-        $this->set_reflection_property_value('priority', MPNSPriority::TOAST_IMMEDIATELY);
+        $this->payload->set_priority(MPNSPriority::TOAST_IMMEDIATELY);
 
         $endpoints = [ 'endpoint' ];
 
@@ -261,9 +287,11 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
                    ->with('endpoint', $headers, 'payload')
                    ->will($this->throwException(new Requests_Exception('Network problem!', 'curlerror', NULL)));
 
-        $this->class->push($this->payload, $endpoints);
+        $this->payload->expects($this->any())
+                      ->method('get_priority')
+                      ->willReturn(2);
 
-        $this->assertSame(0, $this->get_reflection_property_value('priority'));
+        $this->class->push($this->payload, $endpoints);
     }
 
     /**
@@ -277,7 +305,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
                               ->disableOriginalConstructor()
                               ->getMock();
 
-        $this->set_reflection_property_value('priority', MPNSPriority::TOAST_IMMEDIATELY);
+        $this->payload->set_priority(MPNSPriority::TOAST_IMMEDIATELY);
 
         $endpoints = [ 'endpoint' ];
 
@@ -297,9 +325,11 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
                    ->with('endpoint', $headers, 'payload')
                    ->willReturn($this->response);
 
-        $this->class->push($this->payload, $endpoints);
+        $this->payload->expects($this->any())
+                      ->method('get_priority')
+                      ->willReturn(2);
 
-        $this->assertSame(0, $this->get_reflection_property_value('priority'));
+        $this->class->push($this->payload, $endpoints);
     }
 
 }

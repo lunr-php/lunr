@@ -18,6 +18,12 @@ class MPNSPriority
 {
 
     /**
+     * Initial priority.
+     * @var Integer
+     */
+    const DEFAULT = 0;
+
+    /**
      * Deliver Tile notification immediately.
      * @var Integer
      */

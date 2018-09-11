@@ -11,6 +11,8 @@
 
 namespace Lunr\Vortex\MPNS;
 
+use ReflectionClass;
+
 /**
  * Windows Phone Push Notification Payload Generator.
  */
@@ -22,6 +24,12 @@ abstract class MPNSPayload
      * @var array
      */
     protected $elements;
+
+    /**
+     * Priority of the payload.
+     * @var Integer
+     */
+    protected $priority = MPNSPriority::DEFAULT;
 
     /**
      * Constructor.
@@ -37,6 +45,7 @@ abstract class MPNSPayload
     public function __destruct()
     {
         unset($this->elements);
+        unset($this->priority);
     }
 
     /**
@@ -60,6 +69,34 @@ abstract class MPNSPayload
      * @return string $return Payload
      */
     public abstract function get_payload();
+
+    /**
+     * Mark the notification priority.
+     *
+     * @param Integer $priority Notification priority value.
+     *
+     * @return MPNSPayload $self Self Reference
+     */
+    public function set_priority($priority)
+    {
+        $mpns = new ReflectionClass('\Lunr\Vortex\MPNS\MPNSPriority');
+        if (in_array($priority, $mpns->getConstants()))
+        {
+            $this->priority = $priority;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the notification priority.
+     *
+     * @return mixed $return Notification priority.
+     */
+    public function get_priority()
+    {
+        return $this->priority;
+    }
 
 }
 

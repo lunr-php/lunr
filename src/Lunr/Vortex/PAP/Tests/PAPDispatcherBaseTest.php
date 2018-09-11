@@ -48,14 +48,6 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
     }
 
     /**
-     * Test that the deliver before timestamp is set to an empty string by default.
-     */
-    public function testDeliverBeforeIsEmptyString()
-    {
-        $this->assertPropertyEmpty('deliverbefore');
-    }
-
-    /**
      * Test that the push id is set to an empty string by default.
      */
     public function testPushIdIsEmptyString()
@@ -81,7 +73,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
         $method = $this->reflection->getMethod('construct_pap_control_xml');
         $method->setAccessible(TRUE);
 
-        $control_xml = $method->invokeArgs($this->class, [ 'endpoint' ]);
+        $control_xml = $method->invokeArgs($this->class, [ $this->payload, 'endpoint' ]);
 
         $xml_file = file_get_contents(TEST_STATICS . '/Vortex/pap/request_control_empty.xml');
 
@@ -96,13 +88,16 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
     public function testConstructControlXMLConstructsXMLCorrectly()
     {
         $this->set_reflection_property_value('auth_token', 'auth_token');
-        $this->set_reflection_property_value('deliverbefore', 'deliverbefore');
         $this->set_reflection_property_value('push_id', 'endpoint12345');
+
+        $this->payload->expects($this->once())
+                      ->method('get_priority')
+                      ->willReturn('deliverbefore');
 
         $method = $this->reflection->getMethod('construct_pap_control_xml');
         $method->setAccessible(TRUE);
 
-        $control_xml = $method->invokeArgs($this->class, [ 'endpoint' ]);
+        $control_xml = $method->invokeArgs($this->class, [ $this->payload, 'endpoint' ]);
 
         $xml_file = file_get_contents(TEST_STATICS . '/Vortex/pap/request_control.xml');
 
@@ -118,8 +113,11 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
     {
         $this->mock_function('microtime', 'return 12345;');
 
+        $this->payload->expects($this->once())
+                      ->method('get_priority')
+                      ->willReturn('deliverbefore');
+
         $this->set_reflection_property_value('auth_token', 'auth_token');
-        $this->set_reflection_property_value('deliverbefore', 'deliverbefore');
 
         $this->payload->expects($this->once())
                       ->method('get_payload')

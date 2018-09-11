@@ -34,8 +34,11 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('password', 'password');
         $this->set_reflection_property_value('cid', 'cid');
-        $this->set_reflection_property_value('deliverbefore', 'deliverbefore');
         $this->set_reflection_property_value('push_id', '12345');
+
+        $this->payload->expects($this->once())
+                      ->method('get_priority')
+                      ->willReturn('deliverbefore');
 
         $endpoints = [ 'endpoint' ];
 
@@ -89,8 +92,11 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('password', 'password');
         $this->set_reflection_property_value('cid', 'cid');
-        $this->set_reflection_property_value('deliverbefore', 'deliverbefore');
         $this->set_reflection_property_value('push_id', '12345');
+
+        $this->payload->expects($this->once())
+                      ->method('get_priority')
+                      ->willReturn('deliverbefore');
 
         $endpoints = [ 'endpoint' ];
 
@@ -140,8 +146,11 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('password', 'password');
         $this->set_reflection_property_value('cid', 'cid');
-        $this->set_reflection_property_value('deliverbefore', 'deliverbefore');
         $this->set_reflection_property_value('push_id', 'endpoint12345');
+
+        $this->payload->expects($this->once())
+                      ->method('get_priority')
+                      ->willReturn('deliverbefore');
 
         $endpoints = [ 'endpoint' ];
 
@@ -181,7 +190,6 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
         $this->class->push($this->payload, $endpoints);
 
         $this->assertPropertyEquals('push_id', '');
-        $this->assertPropertyEquals('deliverbefore', '');
 
         $this->unmock_function('microtime');
     }
@@ -198,8 +206,11 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('password', 'password');
         $this->set_reflection_property_value('cid', 'cid');
-        $this->set_reflection_property_value('deliverbefore', 'deliverbefore');
         $this->set_reflection_property_value('push_id', 'endpoint12345');
+
+        $this->payload->expects($this->once())
+                      ->method('get_priority')
+                      ->willReturn('deliverbefore');
 
         $endpoints = [ 'endpoint' ];
 
@@ -232,7 +243,6 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
         $this->class->push($this->payload, $endpoints);
 
         $this->assertPropertyEquals('push_id', '');
-        $this->assertPropertyEquals('deliverbefore', '');
 
         $this->unmock_function('microtime');
     }

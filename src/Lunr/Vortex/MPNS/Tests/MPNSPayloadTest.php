@@ -13,6 +13,7 @@ namespace Lunr\Vortex\MPNS\Tests;
 
 use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
+use Lunr\Vortex\MPNS\MPNSPriority;
 
 /**
  * This class contains common setup routines, providers
@@ -84,6 +85,28 @@ class MPNSPayloadTest extends LunrBaseTest
         $strings[] = [ '<&“string‘s“>', '&lt;&amp;&quot;string&apos;s&quot;&gt;' ];
 
         return $strings;
+    }
+
+    /**
+     * Unit test data provider for valid MPNS Priorities.
+     *
+     * @return array $priorities Array of MPNS priorities.
+     */
+    public function validPriorityProvider()
+    {
+        $priorities   = [];
+        $priorities[] = [ MPNSPriority::DEFAULT ];
+        $priorities[] = [ MPNSPriority::TILE_IMMEDIATELY ];
+        $priorities[] = [ MPNSPriority::TOAST_IMMEDIATELY ];
+        $priorities[] = [ MPNSPriority::RAW_IMMEDIATELY ];
+        $priorities[] = [ MPNSPriority::TILE_WAIT_450 ];
+        $priorities[] = [ MPNSPriority::TOAST_WAIT_450 ];
+        $priorities[] = [ MPNSPriority::RAW_WAIT_450 ];
+        $priorities[] = [ MPNSPriority::TILE_WAIT_900 ];
+        $priorities[] = [ MPNSPriority::TOAST_WAIT_900 ];
+        $priorities[] = [ MPNSPriority::RAW_WAIT_900 ];
+
+        return $priorities;
     }
 
 }

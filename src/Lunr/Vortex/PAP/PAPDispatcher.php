@@ -41,12 +41,6 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     private $cid;
 
     /**
-     * Push Notification deliver before timestamp.
-     * @var String
-     */
-    private $deliverbefore;
-
-    /**
      * Unique push identifier for each notification.
      * @var String
      */
@@ -81,7 +75,6 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
         $this->auth_token    = '';
         $this->password      = '';
         $this->cid           = '';
-        $this->deliverbefore = '';
         $this->push_id       = '';
         $this->http          = $http;
         $this->logger        = $logger;
@@ -95,7 +88,6 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
         unset($this->auth_token);
         unset($this->password);
         unset($this->cid);
-        unset($this->deliverbefore);
         unset($this->push_id);
         unset($this->http);
         unset($this->logger);
@@ -142,7 +134,6 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
         }
 
         $this->push_id       = '';
-        $this->deliverbefore = '';
 
         return new PAPResponse($response, $this->logger, $endpoints[0]);
     }
@@ -150,18 +141,19 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Constructs the control XML of the PAP request.
      *
+     * @param PAPPayload $payload  Payload object
      * @param string $endpoint Endpoint to send to
      *
      * @return String $xml The control XML populated with all relevant values
      */
-    protected function construct_pap_control_xml($endpoint)
+    protected function construct_pap_control_xml($payload, $endpoint)
     {
         // construct PAP control xml
         // @codingStandardsIgnoreStart
         $xml  = "<?xml version=\"1.0\"?>\n";
         $xml .= "<!DOCTYPE pap PUBLIC \"-//WAPFORUM//DTD PAP 2.1//EN\" \"http://www.openmobilealliance.org/tech/DTD/pap_2.1.dtd\">\n";
         $xml .= "<pap>\n";
-        $xml .= "<push-message push-id=\"{$this->push_id}\" source-reference=\"{$this->auth_token}\" deliver-before-timestamp=\"{$this->deliverbefore}\">\n";
+        $xml .= "<push-message push-id=\"{$this->push_id}\" source-reference=\"{$this->auth_token}\" deliver-before-timestamp=\"{$payload->get_priority()}\">\n";
         $xml .= "<address address-value=\"$endpoint\"/>\n";
         $xml .= "<quality-of-service delivery-method=\"unconfirmed\"/>\n";
         $xml .= "</push-message>\n</pap>\n";
@@ -189,7 +181,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
         // construct custom headers; inject control xml & payload
         $data  = '--' . self::PAP_BOUNDARY . "\r\n";
         $data .= "Content-Type: application/xml; charset=UTF-8\r\n\r\n";
-        $data .= $this->construct_pap_control_xml($endpoint) . "\r\n--";
+        $data .= $this->construct_pap_control_xml($payload, $endpoint) . "\r\n--";
         $data .= self::PAP_BOUNDARY . "\r\n";
         $data .= "Content-Type: text/plain\r\n";
         $data .= 'Push-Message-ID: ' . $this->push_id . "\r\n\r\n";
@@ -237,20 +229,6 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     public function set_content_provider_id($cid)
     {
         $this->cid = $cid;
-
-        return $this;
-    }
-
-    /**
-     * Set the deliver-before timestamp for the push service.
-     *
-     * @param string $timestamp The timestamp to set the deliver-before to
-     *
-     * @return PAPDispatcher $self Self reference
-     */
-    public function set_deliver_before_timestamp($timestamp)
-    {
-        $this->deliverbefore = $timestamp;
 
         return $this;
     }

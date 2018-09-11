@@ -22,12 +22,6 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
 {
 
     /**
-     * Delivery priority for the push notification.
-     * @var Integer
-     */
-    private $priority;
-
-    /**
      * Shared instance of the Requests_Session class.
      * @var \Requests_Session
      */
@@ -47,7 +41,6 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
      */
     public function __construct($http, $logger)
     {
-        $this->priority = 0;
         $this->http     = $http;
         $this->logger   = $logger;
     }
@@ -57,7 +50,6 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
      */
     public function __destruct()
     {
-        unset($this->priority);
         unset($this->http);
         unset($this->logger);
     }
@@ -92,9 +84,10 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
             $headers['X-WindowsPhone-Target'] = $type;
         }
 
-        if ($this->priority !== 0)
+        $priority = $payload->get_priority();
+        if ($priority !== 0)
         {
-            $headers['X-NotificationClass'] = $this->priority;
+            $headers['X-NotificationClass'] = $priority;
         }
 
         try
@@ -109,26 +102,7 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
             $this->logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
         }
 
-        $this->priority = 0;
-
         return new MPNSResponse($response, $this->logger);
-    }
-
-    /**
-     * Set the priority for the push notification.
-     *
-     * @param integer $priority Priority for the push notification.
-     *
-     * @return MPNSDispatcher $self Self reference
-     */
-    public function set_priority($priority)
-    {
-        if (in_array($priority, [ 1, 2, 3, 11, 12, 13, 21, 22, 23 ]))
-        {
-            $this->priority = $priority;
-        }
-
-        return $this;
     }
 
     /**

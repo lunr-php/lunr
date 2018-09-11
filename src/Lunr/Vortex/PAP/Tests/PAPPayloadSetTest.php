@@ -44,6 +44,30 @@ class PAPPayloadSetTest extends PAPPayloadTest
         $this->assertSame($this->class, $this->class->set_message_data('key', 'value'));
     }
 
+    /**
+     * Test that set_deliver_before_timestamp() sets the deliverbefore.
+     *
+     * @covers Lunr\Vortex\PAP\PAPPayload::set_priority
+     */
+    public function testSetPrioritySetsPriority()
+    {
+        $priority = 'priority';
+        $this->class->set_priority($priority);
+
+        $this->assertPropertyEquals('priority', 'priority');
+    }
+
+    /**
+     * Test the fluid interface of set_deliver_before_timestamp().
+     *
+     * @covers Lunr\Vortex\PAP\PAPPayload::set_priority
+     */
+    public function testSetPriorityReturnsSelfReference()
+    {
+        $cid = 'cid';
+        $this->assertEquals($this->class, $this->class->set_priority($cid));
+    }
+
 }
 
 ?>

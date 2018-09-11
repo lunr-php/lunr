@@ -25,14 +25,6 @@ class MPNSDispatcherBaseTest extends MPNSDispatcherTest
     use PsrLoggerTestTrait;
 
     /**
-     * Test that the priority is set to 0 by default.
-     */
-    public function testPriorityIsZero()
-    {
-        $this->assertSame(0, $this->get_reflection_property_value('priority'));
-    }
-
-    /**
      * Test that the passed Requests_Session object is set correctly.
      */
     public function testRequestsSessionIsSetCorrectly()

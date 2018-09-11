@@ -24,6 +24,12 @@ class PAPPayload
     protected $data;
 
     /**
+     * Push Notification deliver before timestamp.
+     * @var String
+     */
+    protected $priority = '';
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -64,6 +70,30 @@ class PAPPayload
         $this->data[$key] = $value;
 
         return $this;
+    }
+
+    /**
+     * Mark the notification priority.
+     *
+     * @param integer $priority The timestamp to set the deliver-before to.
+     *
+     * @return PAPPayload $self Self Reference
+     */
+    public function set_priority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get the notification priority.
+     *
+     * @return mixed $return Notification priority.
+     */
+    public function get_priority()
+    {
+        return $this->priority;
     }
 
 }

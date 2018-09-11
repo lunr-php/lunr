@@ -27,6 +27,14 @@ class PAPPayloadBaseTest extends PAPPayloadTest
         $this->assertArrayEmpty($this->get_reflection_property_value('data'));
     }
 
+    /**
+     * Test that the priority is set to an empty string by default.
+     */
+    public function testPriorityIsEmptyString()
+    {
+        $this->assertPropertyEmpty('priority');
+    }
+
 }
 
 ?>
