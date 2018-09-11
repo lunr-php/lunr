@@ -208,6 +208,62 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
     }
 
     /**
+     * Test start_where_group() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::start_where_group
+     */
+    public function testStartWhereGroup()
+    {
+        $this->builder->expects($this->once())
+                      ->method('sql_group_start')
+                      ->will($this->returnSelf());
+
+        $this->class->start_where_group();
+    }
+
+    /**
+     * Test end_where_group() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::end_where_group
+     */
+    public function testEndWhereGroup()
+    {
+        $this->builder->expects($this->once())
+                      ->method('sql_group_end')
+                      ->will($this->returnSelf());
+
+        $this->class->end_where_group();
+    }
+
+    /**
+     * Test sql_or() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::sql_or
+     */
+    public function testSqlOr()
+    {
+        $this->builder->expects($this->once())
+                      ->method('sql_or')
+                      ->will($this->returnSelf());
+
+        $this->class->sql_or();
+    }
+
+    /**
+     * Test sql_and() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::sql_and
+     */
+    public function testSqlAnd()
+    {
+        $this->builder->expects($this->once())
+                      ->method('sql_and')
+                      ->will($this->returnSelf());
+
+        $this->class->sql_and();
+    }
+
+    /**
      * Test where_like().
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_like

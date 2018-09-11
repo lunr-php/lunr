@@ -23,6 +23,35 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
 {
 
     /**
+     * Test get_insert_query() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::get_select_query
+     */
+    public function testGetSelectQuery()
+    {
+        $this->builder->expects($this->once())
+                      ->method('get_select_query')
+                      ->willReturn('');
+
+        $this->class->get_select_query();
+    }
+
+    /**
+     * Test select_mode() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::select_mode
+     */
+    public function testSelectMode()
+    {
+        $this->builder->expects($this->once())
+                      ->method('select_mode')
+                      ->with('ALL')
+                      ->will($this->returnSelf());
+
+        $this->class->select_mode('ALL');
+    }
+
+    /**
      * Test select() with one input column.
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::select

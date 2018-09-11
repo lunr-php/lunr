@@ -20,6 +20,107 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
 {
 
     /**
+     * Test get_insert_query() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::get_insert_query
+     */
+    public function testGetInsertQuery()
+    {
+        $this->builder->expects($this->once())
+                      ->method('get_insert_query')
+                      ->willReturn('');
+
+        $this->class->get_insert_query();
+    }
+
+    /**
+     * Test get_replace_query() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::get_replace_query
+     */
+    public function testGetReplaceQuery()
+    {
+        $this->builder->expects($this->once())
+                      ->method('get_replace_query')
+                      ->willReturn('');
+
+        $this->class->get_replace_query();
+    }
+
+    /**
+     * Test get_delete_query() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::get_delete_query
+     */
+    public function testGetDeleteQuery()
+    {
+        $this->builder->expects($this->once())
+                      ->method('get_delete_query')
+                      ->willReturn('');
+
+        $this->class->get_delete_query();
+    }
+
+    /**
+     * Test get_update_query() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::get_update_query
+     */
+    public function testGetUpdateQuery()
+    {
+        $this->builder->expects($this->once())
+                      ->method('get_update_query')
+                      ->willReturn('');
+
+        $this->class->get_update_query();
+    }
+
+    /**
+     * Test insert_mode() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::insert_mode
+     */
+    public function testInsertMode()
+    {
+        $this->builder->expects($this->once())
+                      ->method('insert_mode')
+                      ->with('DELAYED')
+                      ->will($this->returnSelf());
+
+        $this->class->insert_mode('DELAYED');
+    }
+
+    /**
+     * Test replace_mode() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::replace_mode
+     */
+    public function testReplaceMode()
+    {
+        $this->builder->expects($this->once())
+                      ->method('replace_mode')
+                      ->with('LOW_PRIORITY')
+                      ->will($this->returnSelf());
+
+        $this->class->replace_mode('LOW_PRIORITY');
+    }
+
+    /**
+     * Test delete_mode() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::delete_mode
+     */
+    public function testDeleteMode()
+    {
+        $this->builder->expects($this->once())
+                      ->method('delete_mode')
+                      ->with('QUICK')
+                      ->will($this->returnSelf());
+
+        $this->class->delete_mode('QUICK');
+    }
+
+    /**
      * Test into().
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::into
@@ -127,6 +228,112 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
                       ->will($this->returnSelf());
 
         $this->class->update('table, table');
+    }
+
+    /**
+     * Test delete() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::delete
+     */
+    public function testDelete()
+    {
+        $this->builder->expects($this->once())
+                      ->method('delete')
+                      ->with('')
+                      ->will($this->returnSelf());
+
+        $this->class->delete('');
+    }
+
+    /**
+     * Test SELECT statements in INSERT INTO statements
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::select_statement
+     */
+    public function testSelectStatementInInto()
+    {
+        $query = 'SELECT * from `test`';
+        $this->builder->expects($this->once())
+                      ->method('select_statement')
+                      ->with($query)
+                      ->will($this->returnSelf());
+
+        $this->class->select_statement($query);
+    }
+
+    /**
+     * Test lock_mode() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::lock_mode
+     */
+    public function testLockMode()
+    {
+        $this->builder->expects($this->once())
+                      ->method('lock_mode')
+                      ->with('')
+                      ->will($this->returnSelf());
+
+        $this->class->lock_mode('');
+    }
+
+    /**
+     * Test values() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::values
+     */
+    public function testValues()
+    {
+        $this->builder->expects($this->once())
+                      ->method('values')
+                      ->with('')
+                      ->will($this->returnSelf());
+
+        $this->class->values('');
+    }
+
+    /**
+     * Test set() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::set
+     */
+    public function testSetClause()
+    {
+        $this->builder->expects($this->once())
+                      ->method('set')
+                      ->with('')
+                      ->will($this->returnSelf());
+
+        $this->class->set('');
+    }
+
+    /**
+     * Test with() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::with
+     */
+    public function testWith()
+    {
+        $this->builder->expects($this->once())
+                      ->method('with')
+                      ->with('alias', 'query')
+                      ->will($this->returnSelf());
+
+        $this->class->with('alias', 'query');
+    }
+
+    /**
+     * Test with_recursive() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::with_recursive
+     */
+    public function testWithRecursive()
+    {
+        $this->builder->expects($this->once())
+                      ->method('with_recursive')
+                      ->with('alias', 'anchor_query', 'recursive_query')
+                      ->will($this->returnSelf());
+
+        $this->class->with_recursive('alias', 'anchor_query', 'recursive_query');
     }
 
 }
