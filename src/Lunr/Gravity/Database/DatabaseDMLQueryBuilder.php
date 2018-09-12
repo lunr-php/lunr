@@ -910,7 +910,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    public function sql_group_start($base = 'WHERE')
+    protected function sql_group_start($base = 'WHERE')
     {
         $condition = ($base === 'ON') ? 'join' : strtolower($base);
 
@@ -951,7 +951,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return void
      */
-    public function sql_group_end($condition = 'WHERE')
+    protected function sql_group_end($condition = 'WHERE')
     {
         $condition = ($condition === 'ON') ? 'join' : strtolower($condition);
 

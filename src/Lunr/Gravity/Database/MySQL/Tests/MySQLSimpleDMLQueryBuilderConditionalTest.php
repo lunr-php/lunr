@@ -215,7 +215,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
     public function testStartWhereGroup()
     {
         $this->builder->expects($this->once())
-                      ->method('sql_group_start')
+                      ->method('start_where_group')
                       ->will($this->returnSelf());
 
         $this->class->start_where_group();
@@ -229,7 +229,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
     public function testEndWhereGroup()
     {
         $this->builder->expects($this->once())
-                      ->method('sql_group_end')
+                      ->method('end_where_group')
                       ->will($this->returnSelf());
 
         $this->class->end_where_group();

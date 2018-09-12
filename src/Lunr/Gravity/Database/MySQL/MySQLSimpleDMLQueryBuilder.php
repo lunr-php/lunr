@@ -456,7 +456,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     public function start_where_group()
     {
-        $this->builder->sql_group_start();
+        $this->builder->start_where_group();
         return $this;
     }
 
@@ -467,7 +467,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     public function end_where_group()
     {
-        $this->builder->sql_group_end();
+        $this->builder->end_where_group();
         return $this;
     }
 
