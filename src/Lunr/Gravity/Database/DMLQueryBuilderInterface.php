@@ -237,6 +237,20 @@ interface DMLQueryBuilderInterface
     public function on_null($left, $negate = FALSE);
 
     /**
+     * Open ON group.
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function start_on_group();
+
+    /**
+     * Close ON group.
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function end_on_group();
+
+    /**
      * Define WHERE clause of the SQL statement.
      *
      * @param string $left     Left expression
@@ -366,7 +380,7 @@ interface DMLQueryBuilderInterface
      * @param string $upper  The upper bound of the between condition
      * @param string $negate Whether to negate the comparison or not
      *
-     * @return MySQLDMLQueryBuilder $self Self reference
+     * @return DMLQueryBuilderInterface $self Self reference
      */
     public function having_between($left, $lower, $upper, $negate = FALSE);
 
@@ -390,6 +404,20 @@ interface DMLQueryBuilderInterface
      * @return DMLQueryBuilderInterface $self Self reference
      */
     public function having_null($left, $negate = FALSE);
+
+    /**
+     * Open HAVING group.
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function start_having_group();
+
+    /**
+     * Close HAVING group.
+     *
+     * @return DMLQueryBuilderInterface $self Self reference
+     */
+    public function end_having_group();
 
     /**
      * Define a ORDER BY clause of the SQL statement.

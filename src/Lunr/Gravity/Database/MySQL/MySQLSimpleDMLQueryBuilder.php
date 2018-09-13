@@ -435,6 +435,28 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
     }
 
     /**
+     * Open ON group.
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function start_on_group()
+    {
+        $this->builder->start_on_group();
+        return $this;
+    }
+
+    /**
+     * Close ON group.
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function end_on_group()
+    {
+        $this->builder->end_on_group();
+        return $this;
+    }
+
+    /**
      * Define WHERE clause of the SQL statement.
      *
      * @param string $left     Left expression
@@ -677,6 +699,28 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
     public function having_null($left, $negate = FALSE)
     {
         $this->builder->having_null($this->escaper->column($left), $negate);
+        return $this;
+    }
+
+    /**
+     * Open having group.
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function start_having_group()
+    {
+        $this->builder->start_having_group();
+        return $this;
+    }
+
+    /**
+     * Close having group.
+     *
+     * @return MySQLSimpleDMLQueryBuilder $self Self reference
+     */
+    public function end_having_group()
+    {
+        $this->builder->end_having_group();
         return $this;
     }
 

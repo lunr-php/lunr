@@ -173,6 +173,62 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
     }
 
     /**
+     * Test the fluid interface of start_on_group().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::start_on_group
+     */
+    public function testStartOnGroupReturnsSelf()
+    {
+        $this->builder->expects($this->once())
+                      ->method('start_on_group')
+                      ->will($this->returnSelf());
+
+        $return = $this->class->start_on_group();
+    }
+
+    /**
+     * Test the fluid interface of end_on_group().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::end_on_group
+     */
+    public function testEndOnGroupReturnsSelf()
+    {
+        $this->builder->expects($this->once())
+                      ->method('end_on_group')
+                      ->will($this->returnSelf());
+
+        $return = $this->class->end_on_group();
+    }
+
+    /**
+     * Test the fluid interface of start_having_group().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::start_having_group
+     */
+    public function testStartHavingGroupReturnsSelf()
+    {
+        $this->builder->expects($this->once())
+                      ->method('start_having_group')
+                      ->will($this->returnSelf());
+
+        $return = $this->class->start_having_group();
+    }
+
+    /**
+     * Test the fluid interface of end_having_group().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::end_having_group
+     */
+    public function testEndHavingGroupReturnsSelf()
+    {
+        $this->builder->expects($this->once())
+                      ->method('end_having_group')
+                      ->will($this->returnSelf());
+
+        $return = $this->class->end_having_group();
+    }
+
+    /**
      * Test the fluid interface of where().
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where

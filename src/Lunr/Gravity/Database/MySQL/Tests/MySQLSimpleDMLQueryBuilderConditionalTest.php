@@ -143,6 +143,34 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
     }
 
     /**
+     * Test start_on_group().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::start_on_group
+     */
+    public function testStartOnGroupReturnsSelf()
+    {
+        $this->builder->expects($this->once())
+                      ->method('start_on_group')
+                      ->will($this->returnSelf());
+
+        $return = $this->class->start_on_group();
+    }
+
+    /**
+     * Test end_on_group().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::end_on_group
+     */
+    public function testEndOnGroupReturnsSelf()
+    {
+        $this->builder->expects($this->once())
+                      ->method('end_on_group')
+                      ->will($this->returnSelf());
+
+        $return = $this->class->end_on_group();
+    }
+
+    /**
      * Test on_null().
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_null
@@ -556,6 +584,34 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
                       ->will($this->returnSelf());
 
         $this->class->having_null('left', TRUE);
+    }
+
+        /**
+     * Test start_having_group().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::start_having_group
+     */
+    public function testStartHavingGroup()
+    {
+        $this->builder->expects($this->once())
+                      ->method('start_having_group')
+                      ->will($this->returnSelf());
+
+        $this->class->start_having_group();
+    }
+
+    /**
+     * Test end_having_group().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::end_having_group
+     */
+    public function testEndHavingGroup()
+    {
+        $this->builder->expects($this->once())
+                      ->method('end_having_group')
+                      ->will($this->returnSelf());
+
+        $this->class->end_having_group();
     }
 
 }
