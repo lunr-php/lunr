@@ -22,17 +22,20 @@ class MySQLConnectionEscapeTest extends MySQLConnectionTest
 {
 
     /**
-     * Test that escape_string() returns FALSE when there is no active connection.
+     * Test that escape_string() throws an exception when there is no active connection.
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::escape_string
      */
-    public function testEscapeStringReturnsFalseWhenNotConnected()
+    public function testEscapeStringThrowsExceptionWhenNotConnected()
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->class->escape_string('string'));
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
+
+        $this->class->escape_string('string');
     }
 
     /**

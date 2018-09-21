@@ -12,6 +12,7 @@
 namespace Lunr\Gravity\Database\MySQL;
 
 use Lunr\Gravity\Database\DatabaseConnection;
+use Lunr\Gravity\Database\Exceptions\ConnectionException;
 
 /**
  * MySQL/MariaDB database access class.
@@ -216,8 +217,7 @@ class MySQLConnection extends DatabaseConnection
 
         if ($this->configuration['db']['driver'] != 'mysql')
         {
-            $this->logger->error('Cannot connect to a non-mysql database connection!');
-            return;
+            throw new ConnectionException('Cannot connect to a non-mysql database connection!');
         }
 
         $host = ($this->readonly === TRUE) ? $this->ro_host : $this->rw_host;
@@ -238,6 +238,11 @@ class MySQLConnection extends DatabaseConnection
         {
             $this->mysqli->set_charset('utf8mb4');
             $this->connected = TRUE;
+        }
+
+        if ($this->connected === FALSE)
+        {
+            throw new ConnectionException('Could not establish connection to the database!');
         }
     }
 
@@ -269,14 +274,7 @@ class MySQLConnection extends DatabaseConnection
     {
         $this->connect();
 
-        if ($this->connected === TRUE)
-        {
-            return $this->mysqli->select_db($db);
-        }
-        else
-        {
-            return FALSE;
-        }
+        return $this->mysqli->select_db($db);
     }
 
     /**
@@ -339,20 +337,13 @@ class MySQLConnection extends DatabaseConnection
      *
      * @param string $string The string to escape
      *
-     * @return mixed $return The escaped string on success, FALSE on error
+     * @return mixed $return The escaped string
      */
     public function escape_string($string)
     {
         $this->connect();
 
-        if ($this->connected === TRUE)
-        {
-            return $this->mysqli->escape_string($string);
-        }
-        else
-        {
-            return FALSE;
-        }
+        return $this->mysqli->escape_string($string);
     }
 
     /**
@@ -411,14 +402,7 @@ class MySQLConnection extends DatabaseConnection
         $sql_query        = $this->query_hint . $sql_query;
         $this->query_hint = '';
 
-        if ($this->connected === TRUE)
-        {
-            return new MySQLQueryResult($sql_query, $this->mysqli->query($sql_query), $this->mysqli);
-        }
-        else
-        {
-            return new MySQLQueryResult($sql_query, FALSE, $this->mysqli);
-        }
+        return new MySQLQueryResult($sql_query, $this->mysqli->query($sql_query), $this->mysqli);
     }
 
     /**
@@ -435,10 +419,7 @@ class MySQLConnection extends DatabaseConnection
         $sql_query        = $this->query_hint . $sql_query;
         $this->query_hint = '';
 
-        if ($this->connected === TRUE)
-        {
-            $this->mysqli->query($sql_query, MYSQLI_ASYNC);
-        }
+        $this->mysqli->query($sql_query, MYSQLI_ASYNC);
 
         return new MySQLAsyncQueryResult($sql_query, $this->mysqli);
     }
@@ -452,12 +433,7 @@ class MySQLConnection extends DatabaseConnection
     {
         $this->connect();
 
-        if ($this->connected === TRUE)
-        {
-            return $this->mysqli->autocommit(FALSE);
-        }
-
-        return FALSE;
+        return $this->mysqli->autocommit(FALSE);
     }
 
     /**
@@ -469,12 +445,7 @@ class MySQLConnection extends DatabaseConnection
     {
         $this->connect();
 
-        if ($this->connected === TRUE)
-        {
-            return $this->mysqli->commit();
-        }
-
-        return FALSE;
+        return $this->mysqli->commit();
     }
 
     /**
@@ -486,12 +457,7 @@ class MySQLConnection extends DatabaseConnection
     {
         $this->connect();
 
-        if ($this->connected === TRUE)
-        {
-            return $this->mysqli->rollback();
-        }
-
-        return FALSE;
+        return $this->mysqli->rollback();
     }
 
     /**
@@ -503,12 +469,7 @@ class MySQLConnection extends DatabaseConnection
     {
         $this->connect();
 
-        if ($this->connected === TRUE)
-        {
-            return $this->mysqli->autocommit(TRUE);
-        }
-
-        return FALSE;
+        return $this->mysqli->autocommit(TRUE);
     }
 
 }

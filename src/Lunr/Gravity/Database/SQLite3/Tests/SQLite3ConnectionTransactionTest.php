@@ -45,7 +45,7 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::begin_transaction
      */
-    public function testBeginTransactionDoesNothingWhenNotConnected()
+    public function testBeginTransactionThrowsExceptionWhenNotConnected()
     {
         $this->set_reflection_property_value('connected', FALSE);
 
@@ -56,7 +56,10 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
         $this->sqlite3->expects($this->never())
                       ->method('exec');
 
-        $this->assertFalse($this->class->begin_transaction());
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
+
+        $this->class->begin_transaction();
     }
 
     /**
@@ -81,7 +84,7 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::commit
      */
-    public function testCommitDoesNothingWhenNotConnected()
+    public function testCommitThrowsExceptionWhenNotConnected()
     {
         $this->set_reflection_property_value('connected', FALSE);
 
@@ -92,7 +95,10 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
         $this->sqlite3->expects($this->never())
                       ->method('exec');
 
-        $this->assertFalse($this->class->commit());
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
+
+        $this->class->commit();
     }
 
     /**
@@ -117,7 +123,7 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::commit
      */
-    public function testRollbackDoesNothingWhenNotConnected()
+    public function testRollbackThrowsExceptionWhenNotConnected()
     {
         $this->set_reflection_property_value('connected', FALSE);
 
@@ -128,7 +134,10 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
         $this->sqlite3->expects($this->never())
                       ->method('exec');
 
-        $this->assertFalse($this->class->rollback());
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
+
+        $this->class->rollback();
     }
 
     /**
@@ -153,7 +162,7 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::end_transaction
      */
-    public function testEndTransactionDoesNothingWhenNotConnected()
+    public function testEndTransactionThrowsExceptionWhenNotConnected()
     {
         $this->set_reflection_property_value('connected', FALSE);
 
@@ -164,7 +173,10 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
         $this->sqlite3->expects($this->never())
                       ->method('exec');
 
-        $this->assertFalse($this->class->end_transaction());
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
+
+        $this->class->end_transaction();
     }
 
 }

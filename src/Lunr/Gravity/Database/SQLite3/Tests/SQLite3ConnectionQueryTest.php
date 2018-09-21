@@ -23,16 +23,16 @@ class SQLite3ConnectionQueryTest extends SQLite3ConnectionTest
 {
 
     /**
-     * Test that query() returns a QueryResult that indicates a failed query when not connected.
+     * Test that query() throws an exception when not connected.
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::query
      */
-    public function testQueryReturnsFailedQueryResultWhenNotConnected()
+    public function testQueryThrowsExceptionWhenNotConnected()
     {
-        $query = $this->class->query('query');
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
 
-        $this->assertInstanceOf('Lunr\Gravity\Database\SQLite3\SQLite3QueryResult', $query);
-        $this->assertTrue($query->has_failed());
+        $this->class->query('query');
     }
 
     /**

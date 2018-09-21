@@ -14,6 +14,7 @@
 namespace Lunr\Gravity\Database\SQLite3;
 
 use Lunr\Gravity\Database\DatabaseConnection;
+use Lunr\Gravity\Database\Exceptions\ConnectionException;
 
 /**
  * SQLite database access class.
@@ -86,8 +87,7 @@ class SQLite3Connection extends DatabaseConnection
 
         if ($this->configuration['db']['driver'] != 'sqlite3')
         {
-            $this->logger->error('Cannot connect to a non-sqlite3 database connection!');
-            return;
+            throw new ConnectionException('Cannot connect to a non-sqlite3 database connection!');
         }
 
         $flag = $this->readonly ? SQLITE3_OPEN_READONLY : SQLITE3_OPEN_READWRITE;
@@ -97,6 +97,11 @@ class SQLite3Connection extends DatabaseConnection
         if ($this->sqlite3->lastErrorCode() === 0)
         {
             $this->connected = TRUE;
+        }
+
+        if ($this->connected === FALSE)
+        {
+            throw new ConnectionException('Could not establish connection to the database!');
         }
     }
 
@@ -183,14 +188,7 @@ class SQLite3Connection extends DatabaseConnection
     {
         $this->connect();
 
-        if ($this->connected === TRUE)
-        {
-            return new SQLite3QueryResult($sql_query, $this->sqlite3->query($sql_query), $this->sqlite3);
-        }
-        else
-        {
-            return new SQLite3QueryResult($sql_query, FALSE, $this->sqlite3);
-        }
+        return new SQLite3QueryResult($sql_query, $this->sqlite3->query($sql_query), $this->sqlite3);
     }
 
     /**
@@ -202,12 +200,7 @@ class SQLite3Connection extends DatabaseConnection
     {
         $this->connect();
 
-        if ($this->connected === TRUE)
-        {
-            return $this->sqlite3->exec('BEGIN TRANSACTION');
-        }
-
-        return FALSE;
+        return $this->sqlite3->exec('BEGIN TRANSACTION');
     }
 
     /**
@@ -219,12 +212,7 @@ class SQLite3Connection extends DatabaseConnection
     {
         $this->connect();
 
-        if ($this->connected === TRUE)
-        {
-            return $this->sqlite3->exec('COMMIT TRANSACTION');
-        }
-
-        return FALSE;
+        return $this->sqlite3->exec('COMMIT TRANSACTION');
     }
 
     /**
@@ -236,12 +224,7 @@ class SQLite3Connection extends DatabaseConnection
     {
         $this->connect();
 
-        if ($this->connected === TRUE)
-        {
-            return $this->sqlite3->exec('ROLLBACK TRANSACTION');
-        }
-
-        return FALSE;
+        return $this->sqlite3->exec('ROLLBACK TRANSACTION');
     }
 
     /**
@@ -253,12 +236,7 @@ class SQLite3Connection extends DatabaseConnection
     {
         $this->connect();
 
-        if ($this->connected === TRUE)
-        {
-            return $this->sqlite3->exec('END TRANSACTION');
-        }
-
-        return FALSE;
+        return $this->sqlite3->exec('END TRANSACTION');
     }
 
 }

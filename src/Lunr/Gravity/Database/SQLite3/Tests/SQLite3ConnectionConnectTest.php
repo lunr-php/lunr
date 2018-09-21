@@ -82,9 +82,21 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
                       ->method('lastErrorCode')
                       ->will($this->returnValue(1));
 
-        $this->class->connect();
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
 
-        $this->assertFalse($this->get_reflection_property_value('connected'));
+        try
+        {
+            $this->class->connect();
+        }
+        catch (\Throwable $e)
+        {
+            throw $e;
+        }
+        finally
+        {
+            $this->assertFalse($this->get_reflection_property_value('connected'));
+        }
     }
 
     /**
@@ -105,11 +117,11 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
     }
 
     /**
-     * Test that connect() fails when the driver specified is not sqlite3.
+     * Test that connect() throws an exception when the driver specified is not sqlite3.
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::connect
      */
-    public function testConnectFailsWhenDriverIsNotSQLite3()
+    public function testConnectThrowsExceptionWhenDriverIsNotSQLite3()
     {
         $sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -134,9 +146,8 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
 
         $this->set_reflection_property_value('configuration', $configuration);
 
-        $this->logger->expects($this->once())
-                     ->method('error')
-                     ->with($this->equalTo('Cannot connect to a non-sqlite3 database connection!'));
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Cannot connect to a non-sqlite3 database connection!');
 
         $this->class->connect();
     }
@@ -200,11 +211,11 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
     }
 
     /**
-     * Test that change_database() returns FALSE when we couldn't connect.
+     * Test that change_database() throws an exception when we couldn't connect.
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::change_database
      */
-    public function testChangeDatabaseReturnsFalseWhenNotConnected()
+    public function testChangeDatabaseThrowsExceptionWhenNotConnected()
     {
         $this->set_reflection_property_value('connected', TRUE);
 
@@ -216,11 +227,21 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
                       ->method('lastErrorCode')
                       ->will($this->returnValue(1));
 
-        $return = $this->class->change_database('new_db');
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
 
-        $this->assertEquals('new_db', $this->get_reflection_property_value('db'));
-
-        $this->assertFalse($return);
+        try
+        {
+            $this->class->change_database('new_db');
+        }
+        catch(\Throwable $e)
+        {
+            throw $e;
+        }
+        finally
+        {
+            $this->assertEquals('new_db', $this->get_reflection_property_value('db'));
+        }
     }
 
 }

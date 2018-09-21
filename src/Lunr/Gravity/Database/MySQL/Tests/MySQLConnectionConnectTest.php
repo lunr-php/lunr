@@ -156,12 +156,24 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
         $mysqli->expects($this->any())
                ->method('options');
 
-        $this->class->connect();
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
 
-        $property = $this->reflection->getProperty('connected');
-        $property->setAccessible(TRUE);
+        try
+        {
+            $this->class->connect();
+        }
+        catch (\Throwable $e)
+        {
+            throw $e;
+        }
+        finally
+        {
+            $property = $this->reflection->getProperty('connected');
+            $property->setAccessible(TRUE);
 
-        $this->assertFalse($this->get_reflection_property_value('connected'));
+            $this->assertFalse($this->get_reflection_property_value('connected'));
+        }
     }
 
     /**
@@ -226,11 +238,11 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
 
         $this->set_reflection_property_value('configuration', $configuration);
 
-        $this->logger->expects($this->once())
-                     ->method('error');
-
         $this->mysqli->expects($this->any())
-               ->method('options');
+                     ->method('options');
+
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Cannot connect to a non-mysql database connection!');
 
         $this->class->connect();
     }
@@ -279,17 +291,20 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     }
 
     /**
-     * Test that change_database() returns FALSE when we couldn't connect.
+     * Test that change_database() throws an exception when we couldn't connect.
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::change_database
      */
-    public function testChangeDatabaseReturnsFalseWhenNotConnected()
+    public function testChangeDatabaseThrowsExceptionWhenNotConnected()
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->class->change_database('new_db'));
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
+
+        $this->class->change_database('new_db');
     }
 
     /**

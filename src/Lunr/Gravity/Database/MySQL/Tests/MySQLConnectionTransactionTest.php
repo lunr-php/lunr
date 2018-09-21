@@ -47,13 +47,16 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::begin_transaction
      */
-    public function testBeginTransactionDoesNothingWhenNotConnected()
+    public function testBeginTransactionThrowsExceptionWhenNotConnected()
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->class->begin_transaction());
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
+
+        $this->class->begin_transaction();
     }
 
     /**
@@ -81,13 +84,16 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::commit
      */
-    public function testCommitDoesNothingWhenNotConnected()
+    public function testCommitThrowsExceptionWhenNotConnected()
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->class->commit());
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
+
+        $this->class->commit();
     }
 
     /**
@@ -115,13 +121,16 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::commit
      */
-    public function testRollbackDoesNothingWhenNotConnected()
+    public function testRollbackThrowsExceptionWhenNotConnected()
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->class->rollback());
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
+
+        $this->class->rollback();
     }
 
     /**
@@ -149,13 +158,16 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::commit
      */
-    public function testEndTransactionDoesNothingWhenNotConnected()
+    public function testEndTransactionThrowsExceptionWhenNotConnected()
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $this->assertFalse($this->class->end_transaction());
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
+
+        $this->class->end_transaction();
     }
 
 }

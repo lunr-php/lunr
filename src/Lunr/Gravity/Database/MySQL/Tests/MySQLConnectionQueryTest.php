@@ -22,20 +22,20 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
 {
 
     /**
-     * Test that query() returns a QueryResult that indicates a failed query when not connected.
+     * Test that query() throws an exception when not connected.
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::query
      */
-    public function testQueryReturnsFailedQueryResultWhenNotConnected()
+    public function testQueryThrowsExceptionWhenNotConnected()
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $query = $this->class->query('query');
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
 
-        $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLQueryResult', $query);
-        $this->assertTrue($query->has_failed());
+        $this->class->query('query');
     }
 
     /**
@@ -112,20 +112,20 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
     }
 
     /**
-     * Test that async_query() returns an AsyncQueryResult that indicates a failed query when not connected.
+     * Test that async_query() throws an exception when not connected.
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::async_query
      */
-    public function testAsyncQueryReturnsFailedQueryResultWhenNotConnected()
+    public function testAsyncQueryThrowsExceptionWhenNotConnected()
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
 
-        $query = $this->class->async_query('query');
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database!');
 
-        $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLQueryResult', $query);
-        $this->assertTrue($query->has_failed());
+        $this->class->async_query('query');
     }
 
     /**
