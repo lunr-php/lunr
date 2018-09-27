@@ -12,6 +12,7 @@
 namespace Lunr\Gravity\Database;
 
 use Lunr\Gravity\DataAccessObjectInterface;
+use Lunr\Gravity\Database\Exceptions\QueryException;
 
 /**
  * This class provides a way to access databases.
@@ -33,7 +34,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
 
     /**
      * Shared instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
@@ -46,9 +47,9 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Constructor.
      *
-     * @param DatabaseConnection     $connection Shared instance of a database connection class
-     * @param LoggerInterface        $logger     Shared instance of a Logger class
-     * @param DatabaseConnectionPool $pool       Shared instance of a database connection pool, NULL by default
+     * @param DatabaseConnection       $connection Shared instance of a database connection class
+     * @param \Psr\Log\LoggerInterface $logger     Shared instance of a Logger class
+     * @param DatabaseConnectionPool   $pool       Shared instance of a database connection pool, NULL by default
      */
     public function __construct($connection, $logger, $pool = NULL)
     {
@@ -88,7 +89,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      * @param DatabaseQueryResultInterface $query  The result of the run query
      * @param string                       $column Column to use as index
      *
-     * @return mixed $result FALSE on failure, array otherwise
+     * @return array Indexed result array
      */
     protected function indexed_result_array($query, $column)
     {
@@ -96,7 +97,8 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         {
             $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
             $this->logger->error('{query}; failed with error: {error}', $context);
-            return FALSE;
+
+            throw new QueryException($query, 'Database query error!');
         }
 
         if ($query->number_of_rows() == 0)
@@ -119,7 +121,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      *
      * @param DatabaseQueryResultInterface $query The result of the run query
      *
-     * @return mixed $result FALSE on failure, array otherwise
+     * @return array Result array
      */
     protected function result_array($query)
     {
@@ -127,7 +129,8 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         {
             $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
             $this->logger->error('{query}; failed with error: {error}', $context);
-            return FALSE;
+
+            throw new QueryException($query, 'Database query error!');
         }
 
         if ($query->number_of_rows() == 0)
@@ -145,7 +148,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      *
      * @param DatabaseQueryResultInterface $query The result of the run query
      *
-     * @return mixed $result FALSE on failure, array otherwise
+     * @return array Result array
      */
     protected function result_row($query)
     {
@@ -153,7 +156,8 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         {
             $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
             $this->logger->error('{query}; failed with error: {error}', $context);
-            return FALSE;
+
+            throw new QueryException($query, 'Database query error!');
         }
 
         if ($query->number_of_rows() == 0)
@@ -172,7 +176,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      * @param DatabaseQueryResultInterface $query  The result of the run query
      * @param string                       $column The title of the requested column
      *
-     * @return mixed $result FALSE on failure, array otherwise
+     * @return array Result array
      */
     protected function result_column($query, $column)
     {
@@ -180,7 +184,8 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         {
             $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
             $this->logger->error('{query}; failed with error: {error}', $context);
-            return FALSE;
+
+            throw new QueryException($query, 'Database query error!');
         }
 
         if ($query->number_of_rows() == 0)
@@ -199,7 +204,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      * @param DatabaseQueryResultInterface $query The result of the run query
      * @param string                       $cell  The title of the requested cell
      *
-     * @return mixed $result FALSE on failure, mixed otherwise
+     * @return mixed Result value
      */
     protected function result_cell($query, $cell)
     {
@@ -207,7 +212,8 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         {
             $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
             $this->logger->error('{query}; failed with error: {error}', $context);
-            return FALSE;
+
+            throw new QueryException($query, 'Database query error!');
         }
 
         if ($query->number_of_rows() == 0)
@@ -226,7 +232,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      * @param DatabaseQueryResultInterface $query       The result of the run query
      * @param integer                      $retry_count The max amount of re-executing the query
      *
-     * @return mixed $result FALSE on failure, mixed otherwise
+     * @return mixed Result value
      */
     protected function result_retry($query, $retry_count = 5)
     {
@@ -249,18 +255,19 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      *
      * @param DatabaseQueryResultInterface $query The result of the run query
      *
-     * @return boolean $result FALSE on failure, TRUE on success
+     * @return boolean TRUE on success
      */
     protected function result_boolean($query)
     {
-        $result = $query->has_failed();
-        if ($result === TRUE)
+        if ($query->has_failed() === TRUE)
         {
             $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
             $this->logger->error('{query}; failed with error: {error}', $context);
+
+            throw new QueryException($query, 'Database query error!');
         }
 
-        return !$result;
+        return TRUE;
     }
 
 }

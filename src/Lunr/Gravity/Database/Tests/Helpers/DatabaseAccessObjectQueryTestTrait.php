@@ -105,6 +105,9 @@ trait DatabaseAccessObjectQueryTestTrait
         $this->result->expects($this->once())
                      ->method('has_failed')
                      ->will($this->returnValue(TRUE));
+
+        $this->expectException('Lunr\Gravity\Database\Exceptions\QueryException');
+        $this->expectExceptionMessage('Database query error!');
     }
 
     /**

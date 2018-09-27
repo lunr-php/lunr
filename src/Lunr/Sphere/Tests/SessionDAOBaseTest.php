@@ -83,7 +83,10 @@ class SessionDAOBaseTest extends SessionDAOTest
                            ->method('has_failed')
                            ->will($this->returnValue(TRUE));
 
-        $this->assertFalse($this->class->read_session_data('myId'));
+        $this->expectException('Lunr\Gravity\Database\Exceptions\QueryException');
+        $this->expectExceptionMessage('Database query error!');
+
+        $this->class->read_session_data('myId');
     }
 
     /**

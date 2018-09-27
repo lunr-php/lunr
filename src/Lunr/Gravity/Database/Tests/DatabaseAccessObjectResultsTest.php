@@ -32,11 +32,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
     }
 
     /**
-     * Test that indexed_result_array() returns FALSE if query failed.
+     * Test that indexed_result_array() throws an exception if query failed.
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::indexed_result_array
      */
-    public function testIndexedResultArrayReturnsFalseIfQueryFailed()
+    public function testIndexedResultArrayThrowsExceptionIfQueryFailed()
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -46,11 +46,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('has_failed')
               ->will($this->returnValue(TRUE));
 
-        $query->expects($this->once())
+        $query->expects($this->exactly(2))
               ->method('error_message')
               ->will($this->returnValue('message'));
 
-        $query->expects($this->once())
+        $query->expects($this->exactly(2))
               ->method('query')
               ->will($this->returnValue('query'));
 
@@ -58,10 +58,13 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
                      ->method('error')
                      ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
 
+        $this->expectException('Lunr\Gravity\Database\Exceptions\QueryException');
+        $this->expectExceptionMessage('Database query error!');
+
         $method = $this->reflection_dao->getMethod('indexed_result_array');
         $method->setAccessible(TRUE);
 
-        $this->assertFalse($method->invokeArgs($this->dao, [ &$query, 'key2' ]));
+        $method->invokeArgs($this->dao, [ &$query, 'key2' ]);
     }
 
     /**
@@ -147,11 +150,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
     }
 
     /**
-     * Test that result_array() returns FALSE if query failed.
+     * Test that result_array() throws an exception if query failed.
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_array
      */
-    public function testResultArrayReturnsFalseIfQueryFailed()
+    public function testResultArrayThrowsExceptionIfQueryFailed()
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -161,11 +164,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('has_failed')
               ->will($this->returnValue(TRUE));
 
-        $query->expects($this->once())
+        $query->expects($this->exactly(2))
               ->method('error_message')
               ->will($this->returnValue('message'));
 
-        $query->expects($this->once())
+        $query->expects($this->exactly(2))
               ->method('query')
               ->will($this->returnValue('query'));
 
@@ -173,10 +176,13 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
                      ->method('error')
                      ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
 
+        $this->expectException('Lunr\Gravity\Database\Exceptions\QueryException');
+        $this->expectExceptionMessage('Database query error!');
+
         $method = $this->reflection_dao->getMethod('result_array');
         $method->setAccessible(TRUE);
 
-        $this->assertFalse($method->invokeArgs($this->dao, [ &$query ]));
+        $method->invokeArgs($this->dao, [ &$query ]);
     }
 
     /**
@@ -242,11 +248,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
     }
 
     /**
-     * Test that result_row() returns FALSE if query failed.
+     * Test that result_row() throws an exception if query failed.
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_row
      */
-    public function testResultRowReturnsFalseIfQueryFailed()
+    public function testResultRowThrowsExceptionIfQueryFailed()
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -256,11 +262,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('has_failed')
               ->will($this->returnValue(TRUE));
 
-        $query->expects($this->once())
+        $query->expects($this->exactly(2))
               ->method('error_message')
               ->will($this->returnValue('message'));
 
-        $query->expects($this->once())
+        $query->expects($this->exactly(2))
               ->method('query')
               ->will($this->returnValue('query'));
 
@@ -268,10 +274,13 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
                      ->method('error')
                      ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
 
+        $this->expectException('Lunr\Gravity\Database\Exceptions\QueryException');
+        $this->expectExceptionMessage('Database query error!');
+
         $method = $this->reflection_dao->getMethod('result_row');
         $method->setAccessible(TRUE);
 
-        $this->assertFalse($method->invokeArgs($this->dao, [ &$query ]));
+        $method->invokeArgs($this->dao, [ &$query ]);
     }
 
     /**
@@ -337,11 +346,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
     }
 
     /**
-     * Test that result_column() returns FALSE if query failed.
+     * Test that result_column() throws an exception if query failed.
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_column
      */
-    public function testResultColumnReturnsFalseIfQueryFailed()
+    public function testResultColumnThrowsExceptionIfQueryFailed()
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -351,11 +360,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('has_failed')
               ->will($this->returnValue(TRUE));
 
-        $query->expects($this->once())
+        $query->expects($this->exactly(2))
               ->method('error_message')
               ->will($this->returnValue('message'));
 
-        $query->expects($this->once())
+        $query->expects($this->exactly(2))
               ->method('query')
               ->will($this->returnValue('query'));
 
@@ -363,10 +372,13 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
                      ->method('error')
                      ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
 
+        $this->expectException('Lunr\Gravity\Database\Exceptions\QueryException');
+        $this->expectExceptionMessage('Database query error!');
+
         $method = $this->reflection_dao->getMethod('result_column');
         $method->setAccessible(TRUE);
 
-        $this->assertFalse($method->invokeArgs($this->dao, [ &$query, 'col' ]));
+        $method->invokeArgs($this->dao, [ &$query, 'col' ]);
     }
 
     /**
@@ -432,11 +444,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
     }
 
     /**
-     * Test that result_cell() returns FALSE if query failed.
+     * Test that result_cell() throws an exception if query failed.
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_cell
      */
-    public function testResultCellReturnsFalseIfQueryFailed()
+    public function testResultCellThrowsExceptionIfQueryFailed()
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -446,11 +458,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('has_failed')
               ->will($this->returnValue(TRUE));
 
-        $query->expects($this->once())
+        $query->expects($this->exactly(2))
               ->method('error_message')
               ->will($this->returnValue('message'));
 
-        $query->expects($this->once())
+        $query->expects($this->exactly(2))
               ->method('query')
               ->will($this->returnValue('query'));
 
@@ -458,10 +470,13 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
                      ->method('error')
                      ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
 
+        $this->expectException('Lunr\Gravity\Database\Exceptions\QueryException');
+        $this->expectExceptionMessage('Database query error!');
+
         $method = $this->reflection_dao->getMethod('result_cell');
         $method->setAccessible(TRUE);
 
-        $this->assertFalse($method->invokeArgs($this->dao, [ &$query, 'col' ]));
+        $method->invokeArgs($this->dao, [ &$query, 'col' ]);
     }
 
     /**
@@ -616,7 +631,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
     }
 
     /**
-     * Test that result_boolean() returns FALSE on a failure.
+     * Test that result_boolean() throws an exception on a failure.
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_boolean
      */
@@ -630,11 +645,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
             ->method('has_failed')
             ->will($this->returnValue(TRUE));
 
-        $query->expects($this->once())
+        $query->expects($this->exactly(2))
             ->method('error_message')
             ->will($this->returnValue('message'));
 
-        $query->expects($this->once())
+        $query->expects($this->exactly(2))
             ->method('query')
             ->will($this->returnValue('query'));
 
@@ -642,10 +657,13 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
             ->method('error')
             ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
 
+        $this->expectException('Lunr\Gravity\Database\Exceptions\QueryException');
+        $this->expectExceptionMessage('Database query error!');
+
         $method2 = $this->reflection_dao->getMethod('result_boolean');
         $method2->setAccessible(TRUE);
 
-        $this->assertFalse($method2->invokeArgs($this->dao, [ &$query ]));
+        $method2->invokeArgs($this->dao, [ &$query ]);
     }
 
     /**
