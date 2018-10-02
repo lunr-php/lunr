@@ -51,6 +51,18 @@ class QueryException extends DatabaseException
     }
 
     /**
+     * Set a more specific error message for the exception.
+     *
+     * @param string $message Error message
+     *
+     * @return void
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+    }
+
+    /**
      * Gets the SQL query triggering the error.
      *
      * @return string SQL query

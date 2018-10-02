@@ -81,6 +81,19 @@ class QueryExceptionBaseTest extends QueryExceptionTest
         throw $this->class;
     }
 
+    /**
+     * Test that setMessage() changes the error message.
+     *
+     * @covers \Lunr\Gravity\Database\Exceptions\QueryException::setMessage
+     */
+    public function testSetMessage()
+    {
+        $this->class->setMessage('New error message!');
+
+        $this->expectExceptionMessage('New error message!');
+
+        throw $this->class;
+    }
 }
 
 ?>
