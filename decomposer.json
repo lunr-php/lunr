@@ -18,15 +18,15 @@
     },
     "ApnsPHP": {
         "url": "https://github.com/M2Mobi/apnsphp.git",
-        "version": "1.0.1.91",
-        "revision": "2f5965c37568a26084d7544947cc0883ad2dac0d",
+        "version": "1.0.1.92",
+        "revision": "5c5a6d65b1c88a2acb1cab32e5efda7f5bd5988c",
         "psr0": {
             "path": "/"
         }
     },
     "PHPMailer": {
         "url": "https://github.com/PHPMailer/PHPMailer.git",
-        "version": "6.0.2",
+        "version": "6.0.5",
         "psr4": {
             "prefix": "PHPMailer\\PHPMailer",
             "search-path": "/src/"
