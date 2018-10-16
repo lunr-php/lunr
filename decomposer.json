@@ -19,7 +19,7 @@
     "ApnsPHP": {
         "url": "https://github.com/M2Mobi/apnsphp.git",
         "version": "1.0.1.92",
-        "revision": "5c5a6d65b1c88a2acb1cab32e5efda7f5bd5988c",
+        "revision": "1.0.1.x",
         "psr0": {
             "path": "/"
         }
@@ -50,7 +50,7 @@
     "PHP-Resque": {
         "url": "https://github.com/M2Mobi/php-resque.git",
         "version": "1.2.92",
-        "revision": "981ef3da53f671c14f8fc61a233c3974f04128a9",
+        "revision": "1.2.x",
         "psr0": {
             "path": "/lib/"
         },
