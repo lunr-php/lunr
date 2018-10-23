@@ -40,17 +40,11 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      */
     public function testPushResetsProperties()
     {
-        if (defined('REFLECTION_BUG_72194') && REFLECTION_BUG_72194 === TRUE)
-        {
-            $this->markTestSkipped('Reflection can\'t handle this right now');
-            return;
-        }
-
         $endpoints = [];
 
         $this->class->push($this->payload, $endpoints);
 
-        $this->assertPropertySame('apns_message', NULL);
+        $this->assertPropertyUnset('apns_message');
     }
 
     /**

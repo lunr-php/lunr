@@ -28,13 +28,7 @@ class APNSDispatcherBaseTest extends APNSDispatcherTest
      */
     public function testAPNSMessageIsNull()
     {
-        if (defined('REFLECTION_BUG_72194') && REFLECTION_BUG_72194 === TRUE)
-        {
-            $this->markTestSkipped('Reflection can\'t handle this right now');
-            return;
-        }
-
-        $this->assertPropertyEmpty('apns_message');
+        $this->assertPropertyUnset('apns_message');
     }
 
 }
