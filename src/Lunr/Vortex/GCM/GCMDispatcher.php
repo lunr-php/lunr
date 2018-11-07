@@ -73,10 +73,10 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
      */
     public function __construct($http, $logger)
     {
-        $this->http   = $http;
-        $this->logger = $logger;
-
-        $this->reset();
+        $this->http       = $http;
+        $this->logger     = $logger;
+        $this->auth_token = '';
+        $this->priority   = 'normal';
     }
 
     /**
@@ -88,17 +88,6 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
         unset($this->priority);
         unset($this->http);
         unset($this->logger);
-    }
-
-    /**
-     * Reset the variable members of the class.
-     *
-     * @return void
-     */
-    protected function reset()
-    {
-        $this->auth_token = '';
-        $this->priority   = 'normal';
     }
 
     /**
@@ -147,8 +136,6 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
         }
 
         unset($batch);
-
-        $this->reset();
 
         return $gcm_response;
     }
