@@ -42,14 +42,6 @@ class GCMDispatcherBaseTest extends GCMDispatcherTest
     }
 
     /**
-     * Test that the priority is set to 'normal' by default.
-     */
-    public function testPriorityIsNormal()
-    {
-        $this->assertPropertyEquals('priority', 'normal');
-    }
-
-    /**
      * Test get_new_response_object_for_failed_request().
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::get_new_response_object_for_failed_request

@@ -20,11 +20,11 @@ class FCMPayloadBaseTest extends FCMPayloadTest
 {
 
     /**
-     * Test elements is initialized as an empty array.
+     * Test elements is initialized with high priority.
      */
-    public function testElementsIsInitializedAsEmptyArray()
+    public function testElementsIsInitializedWithHighPriority()
     {
-        $this->assertArrayEmpty($this->get_reflection_property_value('elements'));
+        $this->assertSame($this->get_reflection_property_value('elements'), ['priority' => 'high']);
     }
 
 }

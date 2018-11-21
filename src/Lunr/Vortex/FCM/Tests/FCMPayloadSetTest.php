@@ -51,7 +51,22 @@ class FCMPayloadSetTest extends FCMPayloadTest
      */
     public function testSetPriority()
     {
-        $this->class->set_priority('high');
+        $this->class->set_priority('normal');
+
+        $value = $this->get_reflection_property_value('elements');
+
+        $this->assertArrayHasKey('priority', $value);
+        $this->assertEquals('normal', $value['priority']);
+    }
+
+    /**
+     * Test set_priority() works correctly with an invalid priority.
+     *
+     * @covers \Lunr\Vortex\FCM\FCMPayload::set_priority
+     */
+    public function testSetPriorityInvalid()
+    {
+        $this->class->set_priority('cow');
 
         $value = $this->get_reflection_property_value('elements');
 
@@ -167,31 +182,6 @@ class FCMPayloadSetTest extends FCMPayloadTest
     public function testSetConditionReturnsSelfReference()
     {
         $this->assertSame($this->class, $this->class->set_condition('data'));
-    }
-
-    /**
-     * Test set_low_priority() works correctly.
-     *
-     * @covers \Lunr\Vortex\FCM\FCMPayload::set_low_priority
-     */
-    public function testSetLowPriority()
-    {
-        $this->class->set_low_priority(TRUE);
-
-        $value = $this->get_reflection_property_value('elements');
-
-        $this->assertArrayHasKey('priority', $value);
-        $this->assertEquals('normal', $value['priority']);
-    }
-
-    /**
-     * Test fluid interface of set_low_priority().
-     *
-     * @covers \Lunr\Vortex\FCM\FCMPayload::set_low_priority
-     */
-    public function testSetLowPriorityReturnsSelfReference()
-    {
-        $this->assertSame($this->class, $this->class->set_low_priority(TRUE));
     }
 
     /**

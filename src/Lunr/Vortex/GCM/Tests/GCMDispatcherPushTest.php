@@ -65,7 +65,6 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
                       ->willReturn('{"collapse_key":"abcde-12345"}');
 
         $this->set_reflection_property_value('auth_token', 'auth_token');
-        $this->set_reflection_property_value('priority', 'high');
 
         $response = $this->getMockBuilder('Requests_Response')->getMock();
 
@@ -76,7 +75,6 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $this->class->push($this->payload, $endpoints);
 
         $this->assertPropertyEquals('auth_token', 'auth_token');
-        $this->assertPropertyEquals('priority', 'high');
     }
 
     /**
@@ -94,7 +92,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         ];
 
         $url  = 'https://gcm-http.googleapis.com/gcm/send';
-        $post = '{"to":"endpoint","priority":"normal"}';
+        $post = '{"to":"endpoint"}';
 
         $this->http->expects($this->once())
                    ->method('post')
@@ -130,7 +128,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         ];
 
         $url  = 'https://gcm-http.googleapis.com/gcm/send';
-        $post = '{"to":"endpoint","priority":"normal"}';
+        $post = '{"to":"endpoint"}';
 
         $this->http->expects($this->once())
                    ->method('post')
@@ -163,7 +161,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         ];
 
         $url  = 'https://gcm-http.googleapis.com/gcm/send';
-        $post = '{"collapse_key":"abcde-12345","to":"endpoint","priority":"normal"}';
+        $post = '{"collapse_key":"abcde-12345","to":"endpoint"}';
 
         $this->http->expects($this->once())
                    ->method('post')
@@ -187,7 +185,6 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
                       ->willReturn('{"collapse_key":"abcde-12345"}');
 
         $this->set_reflection_property_value('auth_token', 'auth_token');
-        $this->set_reflection_property_value('priority', 'high');
 
         $response = $this->getMockBuilder('Requests_Response')->getMock();
 
@@ -197,7 +194,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         ];
 
         $url  = 'https://gcm-http.googleapis.com/gcm/send';
-        $post = '{"collapse_key":"abcde-12345","registration_ids":["endpoint1","endpoint2"],"priority":"high"}';
+        $post = '{"collapse_key":"abcde-12345","registration_ids":["endpoint1","endpoint2"]}';
 
         $this->http->expects($this->once())
                    ->method('post')
@@ -221,7 +218,6 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
                       ->willReturn('{"collapse_key":"abcde-12345"}');
 
         $this->set_reflection_property_value('auth_token', 'auth_token');
-        $this->set_reflection_property_value('priority', 'high');
 
         $response = $this->getMockBuilder('Requests_Response')->getMock();
 
@@ -234,21 +230,21 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
 
         $pos = 0;
 
-        $post = '{"collapse_key":"abcde-12345","registration_ids":["endpoint1","endpoint2"],"priority":"high"}';
+        $post = '{"collapse_key":"abcde-12345","registration_ids":["endpoint1","endpoint2"]}';
 
         $this->http->expects($this->at($pos++))
                    ->method('post')
                    ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
                    ->will($this->returnValue($response));
 
-        $post = '{"collapse_key":"abcde-12345","registration_ids":["endpoint3","endpoint4"],"priority":"high"}';
+        $post = '{"collapse_key":"abcde-12345","registration_ids":["endpoint3","endpoint4"]}';
 
         $this->http->expects($this->at($pos++))
                    ->method('post')
                    ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
                    ->will($this->returnValue($response));
 
-        $post = '{"collapse_key":"abcde-12345","to":"endpoint5","priority":"high"}';
+        $post = '{"collapse_key":"abcde-12345","to":"endpoint5"}';
 
         $this->http->expects($this->at($pos++))
                    ->method('post')

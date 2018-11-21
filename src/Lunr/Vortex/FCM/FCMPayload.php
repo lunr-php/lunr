@@ -26,6 +26,7 @@ class FCMPayload extends GCMPayload
     public function __construct()
     {
         parent::__construct();
+        $this->elements['priority'] = FCMPriority::HIGH;
     }
 
     /**
@@ -73,27 +74,9 @@ class FCMPayload extends GCMPayload
     }
 
     /**
-     * Sets the notification as low priority.
-     *
-     * Notifications are high priority by default on iOS and Android,
-     * this allows for lower priority.
-     *
-     * @param boolean $val A boolean indicating that all platforms should
-     *                     be send as low priority notifications.
-     *
-     * @return FCMPayload $self Self Reference
-     */
-    public function set_low_priority($val)
-    {
-        $this->elements['priority'] = $val ? 'normal' : 'high';
-
-        return $this;
-    }
-
-    /**
      * Sets the notification as providing content.
      *
-     * @param boolean $val boolean value for the "content_available" field.
+     * @param boolean $val Value for the "content_available" field.
      *
      * @return FCMPayload $self Self Reference
      */
@@ -159,8 +142,9 @@ class FCMPayload extends GCMPayload
      */
     public function set_priority($priority)
     {
-        $mpns = new ReflectionClass('\Lunr\Vortex\FCM\FCMPriority');
-        if (in_array($priority, $mpns->getConstants()))
+        $priority       = strtolower($priority);
+        $priority_class = new ReflectionClass('\Lunr\Vortex\FCM\FCMPriority');
+        if (in_array($priority, array_values($priority_class->getConstants())))
         {
             $this->elements['priority'] = $priority;
         }
