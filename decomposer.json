@@ -1,8 +1,7 @@
 {
     "Lunr.Halo": {
         "url": "https://github.com/M2mobi/lunr.halo.git",
-        "version": "0.6",
-        "revision": "master",
+        "version": "0.6.0",
         "psr4": {
             "prefix": "Lunr\\Halo",
             "search-path": "/src/Lunr/Halo/"
@@ -26,7 +25,7 @@
     },
     "PHPMailer": {
         "url": "https://github.com/PHPMailer/PHPMailer.git",
-        "version": "6.0.5",
+        "version": "6.0.6",
         "psr4": {
             "prefix": "PHPMailer\\PHPMailer",
             "search-path": "/src/"
