@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb23b4a0fa7da8618bbbc3af83f44698",
+    "content-hash": "aca4842c06b4dda0735c316a1cf01585",
     "packages": [
         {
             "name": "chrisboulton/php-resque",
@@ -147,7 +147,7 @@
         },
         {
             "name": "lunr/halo",
-            "version": "0.6.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/M2Mobi/lunr.halo.git",
@@ -185,7 +185,7 @@
                 "phpunit",
                 "unit tests"
             ],
-            "time": "2018-10-24T11:17:11+00:00"
+            "time": "2018-10-24 11:17:11"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -1789,7 +1789,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "chrisboulton/php-resque": 20,
-        "duccio/apns-php": 20
+        "duccio/apns-php": 20,
+        "lunr/halo": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
