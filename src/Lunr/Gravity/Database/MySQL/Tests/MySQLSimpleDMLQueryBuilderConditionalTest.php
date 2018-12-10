@@ -74,6 +74,16 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      */
     public function testOnIn()
     {
+        $this->escaper->expects($this->at(0))
+                      ->method('value')
+                      ->with($this->equalTo('val1'))
+                      ->will($this->returnValue('"val1"'));
+
+        $this->escaper->expects($this->at(1))
+                      ->method('value')
+                      ->with($this->equalTo('val2'))
+                      ->will($this->returnValue('"val2"'));
+
         $this->escaper->expects($this->once())
                       ->method('column')
                       ->with($this->equalTo('left'))
@@ -81,7 +91,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
 
         $this->escaper->expects($this->once())
                       ->method('list_value')
-                      ->with($this->equalTo([ 'val1', 'val2' ]))
+                      ->with($this->equalTo([ '"val1"', '"val2"' ]))
                       ->will($this->returnValue('("val1", "val2")'));
 
         $this->builder->expects($this->once())
@@ -318,6 +328,16 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      */
     public function testWhereIn()
     {
+        $this->escaper->expects($this->at(0))
+                      ->method('value')
+                      ->with($this->equalTo('val1'))
+                      ->will($this->returnValue('"val1"'));
+
+        $this->escaper->expects($this->at(1))
+                      ->method('value')
+                      ->with($this->equalTo('val2'))
+                      ->will($this->returnValue('"val2"'));
+
         $this->escaper->expects($this->once())
                       ->method('column')
                       ->with($this->equalTo('left'))
@@ -325,7 +345,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
 
         $this->escaper->expects($this->once())
                       ->method('list_value')
-                      ->with($this->equalTo([ 'val1', 'val2' ]))
+                      ->with($this->equalTo([ '"val1"', '"val2"' ]))
                       ->will($this->returnValue('("val1", "val2")'));
 
         $this->builder->expects($this->once())
@@ -478,6 +498,16 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      */
     public function testHavingIn()
     {
+        $this->escaper->expects($this->at(0))
+                      ->method('value')
+                      ->with($this->equalTo('val1'))
+                      ->will($this->returnValue('"val1"'));
+
+        $this->escaper->expects($this->at(1))
+                      ->method('value')
+                      ->with($this->equalTo('val2'))
+                      ->will($this->returnValue('"val2"'));
+
         $this->escaper->expects($this->once())
                       ->method('column')
                       ->with($this->equalTo('left'))
@@ -485,7 +515,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
 
         $this->escaper->expects($this->once())
                       ->method('list_value')
-                      ->with($this->equalTo([ 'val1', 'val2' ]))
+                      ->with($this->equalTo([ '"val1"', '"val2"' ]))
                       ->will($this->returnValue('("val1", "val2")'));
 
         $this->builder->expects($this->once())

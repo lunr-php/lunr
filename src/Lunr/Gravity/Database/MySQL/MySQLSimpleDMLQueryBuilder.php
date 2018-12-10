@@ -374,13 +374,15 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      * Define ON part of a JOIN clause with IN comparator of the SQL statement.
      *
      * @param string $left   Left expression
-     * @param string $right  Right expression
+     * @param array  $right  Right expression
      * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function on_in($left, $right, $negate = FALSE)
     {
+        $right = array_map([$this->escaper, 'value'], $right);
+
         $this->builder->on_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
         return $this;
     }
@@ -512,13 +514,15 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      * Define WHERE clause with the IN condition of the SQL statement.
      *
      * @param string $left   Left expression
-     * @param string $right  Right expression
+     * @param array  $right  Right expression
      * @param string $negate Whether to negate the condition or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function where_in($left, $right, $negate = FALSE)
     {
+        $right = array_map([$this->escaper, 'value'], $right);
+
         $this->builder->where_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
         return $this;
     }
@@ -642,13 +646,15 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      * Define HAVING clause with IN comparator of the SQL statement.
      *
      * @param string $left   Left expression
-     * @param string $right  Right expression
+     * @param array  $right  Right expression
      * @param string $negate Whether to negate the comparison or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
     public function having_in($left, $right, $negate = FALSE)
     {
+        $right = array_map([$this->escaper, 'value'], $right);
+
         $this->builder->having_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
         return $this;
     }
