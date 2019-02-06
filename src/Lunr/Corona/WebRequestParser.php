@@ -89,7 +89,7 @@ class WebRequestParser implements RequestParserInterface
             $request['action'] = HttpMethod::GET;
         }
 
-        $request['application_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']);
+        $request['application_path'] = dirname($_SERVER['SCRIPT_FILENAME']) . '/';
 
         $request['base_path'] = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
 
