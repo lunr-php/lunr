@@ -59,7 +59,9 @@ class DatabaseDMLQueryBuilderGetSelectQueryTest extends DatabaseDMLQueryBuilderT
         $this->set_reflection_property_value('select_mode', [ 'DISTINCT', 'SQL_CACHE' ]);
         $this->set_reflection_property_value('select', 'col');
 
-        $this->assertEquals('', $this->class->get_select_query());
+        $string = 'SELECT DISTINCT SQL_CACHE col';
+
+        $this->assertEquals($string, $this->class->get_select_query());
     }
 
     /**

@@ -255,11 +255,6 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     public function get_select_query()
     {
-        if ($this->from == '')
-        {
-            return '';
-        }
-
         $components = [];
 
         array_push($components, 'select_mode', 'select', 'from', 'join', 'where');
