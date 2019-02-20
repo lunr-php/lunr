@@ -49,14 +49,11 @@
     },
     "PHP-Resque": {
         "url": "https://github.com/M2Mobi/php-resque.git",
-        "version": "1.2.92",
-        "revision": "1.2.x",
+        "version": "1.3.4.90",
+        "revision": "1.3.4.x",
         "psr0": {
             "path": "/lib/"
-        },
-        "includes": [
-            "Credis-1.7"
-        ]
+        }
     },
     "Psr-Cache": {
         "url": "https://github.com/php-fig/cache.git",

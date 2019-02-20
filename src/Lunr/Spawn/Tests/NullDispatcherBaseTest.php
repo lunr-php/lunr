@@ -32,6 +32,30 @@ class NullDispatcherBaseTest extends NullDispatcherTest
     }
 
     /**
+     * Test that dispatch_in() returns null.
+     *
+     * @covers Lunr\Spawn\NullDispatcher::dispatch_in
+     */
+    public function testDispatchInReturnsNull()
+    {
+        $value = $this->class->dispatch_in(30, 'job', []);
+
+        $this->assertNull($value);
+    }
+
+    /**
+     * Test that dispatch_at() returns null.
+     *
+     * @covers Lunr\Spawn\NullDispatcher::dispatch_at
+     */
+    public function testDispatchAtReturnsNull()
+    {
+        $value = $this->class->dispatch_at(time(), 'job', []);
+
+        $this->assertNull($value);
+    }
+
+    /**
      * Test that get_job_id() returns null.
      *
      * @covers Lunr\Spawn\NullDispatcher::get_job_id

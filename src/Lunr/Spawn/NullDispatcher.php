@@ -47,6 +47,34 @@ class NullDispatcher implements JobDispatcherInterface
     }
 
     /**
+     * Dispatch a delayed job.
+     *
+     * @param integer $seconds Amount of seconds in the future
+     * @param string  $job     The job to execute
+     * @param array   $args    The arguments for the job execution
+     *
+     * @return void
+     */
+    public function dispatch_in($seconds, $job, $args = NULL)
+    {
+        // no-op
+    }
+
+    /**
+     * Dispatch a delayed job.
+     *
+     * @param DateTime|integer $time Timestamp or DateTime object of when the job should execute
+     * @param string           $job  The job to execute
+     * @param array            $args The arguments for the job execution
+     *
+     * @return void
+     */
+    public function dispatch_at($time, $job, $args = NULL)
+    {
+        // no-op
+    }
+
+    /**
      * Returns the job ID of the last background job dispatching, if any.
      *
      * @return void

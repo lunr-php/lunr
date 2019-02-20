@@ -28,6 +28,28 @@ interface JobDispatcherInterface
     public function dispatch($job, $args);
 
     /**
+     * Dispatch a delayed job.
+     *
+     * @param integer $seconds Amount of seconds in the future
+     * @param string  $job     The job to execute
+     * @param array   $args    The arguments for the job execution
+     *
+     * @return void
+     */
+    public function dispatch_in($seconds, $job, $args = NULL);
+
+    /**
+     * Dispatch a delayed job.
+     *
+     * @param DateTime|integer $time Timestamp or DateTime object of when the job should execute
+     * @param string           $job  The job to execute
+     * @param array            $args The arguments for the job execution
+     *
+     * @return void
+     */
+    public function dispatch_at($time, $job, $args = NULL);
+
+    /**
      * Returns the job ID of the last background job dispatchin, if any.
      *
      * @return string $result The result of the last dispatching if any

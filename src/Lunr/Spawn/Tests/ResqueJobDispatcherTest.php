@@ -42,14 +42,21 @@ class ResqueJobDispatcherTest extends LunrBaseTest
     protected $resque;
 
     /**
+     * The resque scheduler instance of this test case.
+     * @var ResqueScheduler
+     */
+    protected $scheduler;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp()
     {
-        $this->resque = $this->getMockBuilder('Resque')->getMock();
+        $this->resque    = $this->getMockBuilder('Resque')->getMock();
+        $this->scheduler = $this->getMockBuilder('ResqueScheduler')->getMock();
 
         $this->reflection = new ReflectionClass('Lunr\Spawn\ResqueJobDispatcher');
-        $this->class      = new ResqueJobDispatcher($this->resque);
+        $this->class      = new ResqueJobDispatcher($this->resque, $this->scheduler);
     }
 
     /**
@@ -60,6 +67,7 @@ class ResqueJobDispatcherTest extends LunrBaseTest
         unset($this->reflection);
         unset($this->class);
         unset($this->resque);
+        unset($this->scheduler);
     }
 
     /**

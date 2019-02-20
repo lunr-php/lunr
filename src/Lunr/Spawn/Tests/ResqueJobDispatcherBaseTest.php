@@ -70,24 +70,6 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
     }
 
     /**
-     * Test that dispatch() returns a string if queue is set.
-     *
-     * @covers Lunr\Spawn\ResqueJobDispatcher::dispatch
-     */
-    public function testDispatchUpdateToken()
-    {
-        $this->mock_method([ $this->resque, 'enqueue' ], 'return "TOKEN";');
-
-        $this->class->dispatch('job', []);
-
-        $value = $this->get_reflection_property_value('token');
-
-        $this->assertNotNull($value);
-
-        $this->unmock_method([ $this->resque, 'enqueue' ]);
-    }
-
-    /**
      * Tests that the get_job_id() method retrieves the token.
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::get_job_id

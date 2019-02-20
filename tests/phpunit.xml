@@ -285,6 +285,7 @@
         <testsuite name="Spawn">
             <file>../src/Lunr/Spawn/Tests/NullDispatcherBaseTest.php</file>
             <file>../src/Lunr/Spawn/Tests/ResqueJobDispatcherBaseTest.php</file>
+            <file>../src/Lunr/Spawn/Tests/ResqueJobDispatcherDispatchTest.php</file>
         </testsuite>
         <testsuite name="Sphere">
             <file>../src/Lunr/Sphere/Tests/SessionBaseTest.php</file>

@@ -4,6 +4,7 @@
  * This file contains the Resque job dispatcher.
  *
  * @package    Lunr\Spawn
+ * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Olivier Wizen <olivier@m2mobi.com>
  * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
@@ -18,11 +19,18 @@ use \Resque;
  */
 class ResqueJobDispatcher implements JobDispatcherInterface
 {
+
     /**
      * The Resque instance of this dispatcher.
      * @var Resque
      */
     protected $resque;
+
+    /**
+     * The ResqueScheduler instance of this dispatcher.
+     * @var ResqueScheduler
+     */
+    protected $scheduler;
 
     /**
      * The token of the last enqueued job.
@@ -45,11 +53,13 @@ class ResqueJobDispatcher implements JobDispatcherInterface
     /**
      * Constructor.
      *
-     * @param Resque $resque The Resque instance used by this dispatcher
+     * @param Resque          $resque    The Resque instance used by this dispatcher
+     * @param ResqueScheduler $scheduler The ResqueScheduler instance used by this dispatcher
      */
-    public function __construct($resque)
+    public function __construct($resque, $scheduler)
     {
         $this->resque       = $resque;
+        $this->scheduler    = $scheduler;
         $this->token        = NULL;
         $this->queue        = [ 'default_queue' ];
         $this->track_status = FALSE;
@@ -61,6 +71,7 @@ class ResqueJobDispatcher implements JobDispatcherInterface
     public function __destruct()
     {
         unset($this->resque);
+        unset($this->scheduler);
         unset($this->token);
         unset($this->queue);
         unset($this->track_status);
@@ -82,6 +93,46 @@ class ResqueJobDispatcher implements JobDispatcherInterface
         foreach ($this->queue as $queue)
         {
             $this->token = $this->resque->enqueue($queue, $job, $args, $this->track_status);
+        }
+    }
+
+    /**
+     * Enqueue a delayed job in php-resque.
+     *
+     * It is possible to dispatch the same job into multiple queues, if
+     * more than one queues are set.
+     *
+     * @param integer $seconds Amount of seconds in the future
+     * @param string  $job     The job to execute
+     * @param array   $args    The arguments for the job execution
+     *
+     * @return void
+     */
+    public function dispatch_in($seconds, $job, $args = NULL)
+    {
+        foreach ($this->queue as $queue)
+        {
+            $this->scheduler->enqueueIn($seconds, $queue, $job, $args);
+        }
+    }
+
+    /**
+     * Enqueue a delayed job in php-resque.
+     *
+     * It is possible to dispatch the same job into multiple queues, if
+     * more than one queues are set.
+     *
+     * @param DateTime|integer $time Timestamp or DateTime object of when the job should execute
+     * @param string           $job  The job to execute
+     * @param array            $args The arguments for the job execution
+     *
+     * @return void
+     */
+    public function dispatch_at($time, $job, $args = NULL)
+    {
+        foreach ($this->queue as $queue)
+        {
+            $this->scheduler->enqueueAt($time, $queue, $job, $args);
         }
     }
 
