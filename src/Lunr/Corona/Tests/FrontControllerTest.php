@@ -91,6 +91,22 @@ abstract class FrontControllerTest extends LunrBaseTest
         return $names;
     }
 
+    /**
+     * Unit test data provider for invalid controller names
+     *
+     * @return array $controller_names Array of invalid controller names
+     */
+    public function invalidControllerNameValues()
+    {
+        $controller_names   = [];
+        $controller_names[] = ['test+test'];
+        $controller_names[] = ['test test'];
+        $controller_names[] = ['test\test'];
+        $controller_names[] = ['test/test'];
+
+        return $controller_names;
+    }
+
 }
 
 ?>

@@ -130,6 +130,11 @@ class FrontController
             return '';
         }
 
+        if (!preg_match('([a-zA-Z0-9\-_])', $name))
+        {
+            return '';
+        }
+
         $matches = $this->fao->find_matches("/^.+\/$name.php/i", $src);
 
         if (empty($matches) === TRUE)
