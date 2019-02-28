@@ -44,7 +44,7 @@ class SessionDAO extends DatabaseAccessObject
      *
      * @param string $id Session ID
      *
-     * @return mixed The Session Data on success, False on failure
+     * @return string The Session Data
      */
     public function read_session_data($id)
     {
@@ -58,14 +58,7 @@ class SessionDAO extends DatabaseAccessObject
         $query  = $this->db->query($builder->get_select_query());
         $result = $this->result_cell($query, 'sessionData');
 
-        if ($result != FALSE)
-        {
-            return base64_decode($result);
-        }
-        else
-        {
-            return FALSE;
-        }
+        return base64_decode($result);
     }
 
     /**

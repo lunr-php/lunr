@@ -23,7 +23,7 @@ class SessionDAOBaseTest extends SessionDAOTest
 {
 
     /**
-     * Test that Read Session Data returns false if there is no session.
+     * Test that read_session_data() throws an exception if there is no session.
      *
      * @covers Lunr\Sphere\SessionDAO::read_session_data
      */
@@ -90,7 +90,7 @@ class SessionDAOBaseTest extends SessionDAOTest
     }
 
     /**
-     * Test that Read Session Data returns Session.
+     * Test that read_session_data() returns Session.
      *
      * @covers Lunr\Sphere\SessionDAO::read_session_data
      */
@@ -160,7 +160,7 @@ class SessionDAOBaseTest extends SessionDAOTest
     }
 
     /**
-     * Test that Write Session Data rollsback if there is no session.
+     * Test that write_session_data() rollsback if there is no session.
      *
      * @covers Lunr\Sphere\SessionDAO::write_session_data
      */
@@ -223,7 +223,7 @@ class SessionDAOBaseTest extends SessionDAOTest
     }
 
     /**
-     * Test that Write Session Data.
+     * Test that write_session_data().
      *
      * @covers Lunr\Sphere\SessionDAO::write_session_data
      */
@@ -320,7 +320,7 @@ class SessionDAOBaseTest extends SessionDAOTest
     }
 
     /**
-     * Test that Delete Session rollsback if there is no session.
+     * Test that delete_session() rollsback if there is no session.
      *
      * @covers Lunr\Sphere\SessionDAO::delete_session
      */
@@ -383,7 +383,7 @@ class SessionDAOBaseTest extends SessionDAOTest
     }
 
     /**
-     * Test that Delete Session rollsback if there is no session.
+     * Test that delete_session() rollsback if there is no session.
      *
      * @covers Lunr\Sphere\SessionDAO::delete_session
      */
@@ -446,7 +446,7 @@ class SessionDAOBaseTest extends SessionDAOTest
     }
 
     /**
-     * Test Delete Session.
+     * Test delete_session().
      *
      * @covers Lunr\Sphere\SessionDAO::delete_session
      */
@@ -511,7 +511,7 @@ class SessionDAOBaseTest extends SessionDAOTest
     }
 
     /**
-     * Test Session GC.
+     * Test session_gc().
      *
      * @covers Lunr\Sphere\SessionDAO::session_gc
      */
