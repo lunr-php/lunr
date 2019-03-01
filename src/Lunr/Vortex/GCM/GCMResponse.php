@@ -25,19 +25,19 @@ class GCMResponse
      * HTTP status code.
      * @var Integer
      */
-    private $http_code;
+    protected $http_code;
 
     /**
      * Delivery status.
      * @var Integer
      */
-    private $status;
+    protected $status;
 
     /**
      * The gcm response info.
      * @var String
      */
-    private $result;
+    protected $result;
 
     /**
      * Constructor.
@@ -82,7 +82,7 @@ class GCMResponse
      *
      * @return void
      */
-    private function set_status($endpoint, $logger)
+    protected function set_status($endpoint, $logger)
     {
         switch ($this->http_code)
         {
@@ -150,7 +150,7 @@ class GCMResponse
      *
      * @return array An array with the amount of errors and their information.
      */
-    private function parse_gcm_failures()
+    protected function parse_gcm_failures()
     {
         $results = json_decode($this->result, TRUE);
 

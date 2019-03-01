@@ -26,37 +26,37 @@ class GCMDispatcher implements PushNotificationDispatcherInterface
      * Push Notification endpoint.
      * @var String
      */
-    private $endpoint;
+    protected $endpoint;
 
     /**
      * Push Notification payload to send.
      * @var String
      */
-    private $payload;
+    protected $payload;
 
     /**
      * Push Notification authentication token.
      * @var String
      */
-    private $auth_token;
+    protected $auth_token;
 
     /**
      * Push Notification Priority
      * @var string
      */
-    private $priority;
+    protected $priority;
 
     /**
      * Shared instance of the Curl class.
      * @var Curl
      */
-    private $curl;
+    protected $curl;
 
     /**
      * Shared instance of a Logger class.
      * @var LoggerInterface
      */
-    private $logger;
+    protected $logger;
 
     /**
      * Url to send the GCM push notification to.

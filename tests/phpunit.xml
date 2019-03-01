@@ -130,7 +130,7 @@
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderInsertTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderUpdateTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderConditionTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderGroupByTest.php</file>	
+            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderGroupByTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderConditionalTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderSelectTest.php</file>
@@ -339,6 +339,16 @@
             <file>../src/Lunr/Vortex/GCM/Tests/GCMResponseErrorTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMResponseSetTest.php</file>
             <file>../src/Lunr/Vortex/GCM/Tests/GCMResponseSuccessTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherBaseTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherPushTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherSetTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadBaseTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadGetTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadSetTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMResponseErrorTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMResponseSetTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMResponseSuccessTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSToastPayloadGetTest.php</file>
