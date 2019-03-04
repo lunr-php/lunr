@@ -32,10 +32,22 @@ class BadRequestException extends HttpException
     protected $value;
 
     /**
+     * Report data
+     * @var string
+     */
+    protected $report;
+
+    /**
      * Whether input data was set or not.
      * @var boolean
      */
     protected $dataAvailable;
+
+    /**
+     * Whether a detailed input data report was set or not.
+     * @var boolean
+     */
+    protected $reportAvailable;
 
     /**
      * Constructor.
@@ -44,10 +56,12 @@ class BadRequestException extends HttpException
     {
         parent::__construct($message, HttpCode::BAD_REQUEST, $app_code, $previous);
 
-        $this->key   = NULL;
-        $this->value = NULL;
+        $this->key    = NULL;
+        $this->value  = NULL;
+        $this->report = NULL;
 
-        $this->dataAvailable = FALSE;
+        $this->dataAvailable   = FALSE;
+        $this->reportAvailable = FALSE;
     }
 
     /**
@@ -64,6 +78,52 @@ class BadRequestException extends HttpException
         $this->value = $value;
 
         $this->dataAvailable = TRUE;
+    }
+
+    /**
+     * Set report data about the bad request.
+     *
+     * @param string $data Report data
+     *
+     * @return void
+     */
+    public function setReport($data)
+    {
+        if (empty($data))
+        {
+            return;
+        }
+
+        $this->report = $data;
+
+        $this->reportAvailable = TRUE;
+    }
+
+    /**
+     * Set report data about the bad request.
+     *
+     * @param array $failures Failure messages per key
+     *
+     * @return void
+     */
+    public function setArrayReport($failures)
+    {
+        if (empty($failures))
+        {
+            return;
+        }
+
+        $this->report = '';
+
+        foreach ($failures as $key => $messages)
+        {
+            foreach ($messages as $message)
+            {
+                $this->report .= "$key: $message\n";
+            }
+        }
+
+        $this->reportAvailable = TRUE;
     }
 
     /**
@@ -87,6 +147,16 @@ class BadRequestException extends HttpException
     }
 
     /**
+     * Get the detailed input data report.
+     *
+     * @return string Detailed input data report
+     */
+    public function getReport()
+    {
+        return $this->report;
+    }
+
+    /**
      * Check whether input data was set or not.
      *
      * @return boolean Input data was set or not.
@@ -94,6 +164,16 @@ class BadRequestException extends HttpException
     public function isDataAvailable()
     {
         return $this->dataAvailable;
+    }
+
+    /**
+     * Check whether a detailed input data report was set or not.
+     *
+     * @return boolean Input data report was set or not.
+     */
+    public function isReportAvailable()
+    {
+        return $this->reportAvailable;
     }
 
 }

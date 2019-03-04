@@ -21,7 +21,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
 {
 
     /**
-     * Test that set_data() sets the data correctly.
+     * Test that setData() sets the data correctly.
      *
      * @covers Lunr\Corona\Exceptions\BadRequestException::setData
      */
@@ -32,6 +32,76 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
         $this->assertPropertyEquals('key', 'foo');
         $this->assertPropertyEquals('value', 'bar');
         $this->assertTrue($this->get_reflection_property_value('dataAvailable'));
+    }
+
+    /**
+     * Test that setReport() sets the report correctly.
+     *
+     * @covers Lunr\Corona\Exceptions\BadRequestException::setReport
+     */
+    public function testSetReportSetsReport()
+    {
+        $report = "Foo failed!\nBar failed!\n";
+
+        $this->class->setReport($report);
+
+        $this->assertPropertyEquals('report', $report);
+        $this->assertTrue($this->get_reflection_property_value('reportAvailable'));
+    }
+
+    /**
+     * Test that setReport() ignores an empty report.
+     *
+     * @covers Lunr\Corona\Exceptions\BadRequestException::setReport
+     */
+    public function testSetReportDoesNotSetEmptyReport()
+    {
+        $report = "";
+
+        $this->class->setReport($report);
+
+        $this->assertPropertyEquals('report', NULL);
+        $this->assertFalse($this->get_reflection_property_value('reportAvailable'));
+    }
+
+    /**
+     * Test that setArrayReport() sets the report correctly.
+     *
+     * @covers Lunr\Corona\Exceptions\BadRequestException::setArrayReport
+     */
+    public function testSetArrayReportSetsReport()
+    {
+        $failures = [
+            'key1' => [
+                'too long',
+                'too big',
+            ],
+            'key2' => [
+                'missing',
+            ],
+        ];
+
+        $report = "key1: too long\nkey1: too big\nkey2: missing\n";
+
+        $this->class->setArrayReport($failures);
+
+        $this->assertPropertyEquals('report', $report);
+        $this->assertTrue($this->get_reflection_property_value('reportAvailable'));
+    }
+
+    /**
+     * Test that setArrayReport() ignores an empty report.
+     *
+     * @covers Lunr\Corona\Exceptions\BadRequestException::setArrayReport
+     */
+    public function testSetArrayReportDoesNotSetEmptyReport()
+    {
+        $failures = [];
+
+        $this->class->setArrayReport($failures);
+
+        $this->assertPropertyEquals('report', NULL);
+        $this->assertFalse($this->get_reflection_property_value('reportAvailable'));
     }
 
     /**
@@ -59,6 +129,18 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
     }
 
     /**
+     * Test that getReport() returns the report.
+     *
+     * @covers Lunr\Corona\Exceptions\BadRequestException::getReport
+     */
+    public function testGetReport()
+    {
+        $this->set_reflection_property_value('report', 'baz');
+
+        $this->assertEquals('baz', $this->class->getReport());
+    }
+
+    /**
      * Test that isDataAvailable() returns whether input data was set.
      *
      * @covers Lunr\Corona\Exceptions\BadRequestException::isDataAvailable
@@ -70,6 +152,20 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
         $this->set_reflection_property_value('dataAvailable', TRUE);
 
         $this->assertTrue($this->class->isDataAvailable());
+    }
+
+    /**
+     * Test that isReportAvailable() returns whether a detailed report was set.
+     *
+     * @covers Lunr\Corona\Exceptions\BadRequestException::isReportAvailable
+     */
+    public function testIsReportAvailable()
+    {
+        $this->assertFalse($this->class->isReportAvailable());
+
+        $this->set_reflection_property_value('reportAvailable', TRUE);
+
+        $this->assertTrue($this->class->isReportAvailable());
     }
 
 }
