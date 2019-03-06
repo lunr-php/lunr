@@ -21,7 +21,7 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the MariaDBDMLQueryBuilder class.
  *
- * @covers Lunr\Gravity\Database\MySQL\MariaDBDMLQueryBuilder
+ * @covers \Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder
  */
 abstract class MariaDBDMLQueryBuilderTest extends TestCase
 {
@@ -42,8 +42,7 @@ abstract class MariaDBDMLQueryBuilderTest extends TestCase
      */
     public function setUp()
     {
-        $this->builder = new MariaDBDMLQueryBuilder();
-
+        $this->builder            = new MariaDBDMLQueryBuilder();
         $this->builder_reflection = new ReflectionClass('Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder');
     }
 
