@@ -160,7 +160,12 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
 
         try
         {
-            $http_response = $this->http->post(static::GOOGLE_SEND_URL, $headers, json_encode($tmp_payload));
+            $options = [
+                'timeout'         => 30, // timeout in seconds
+                'connect_timeout' => 30 // timeout in seconds
+            ];
+
+            $http_response = $this->http->post(static::GOOGLE_SEND_URL, $headers, json_encode($tmp_payload), $options);
         }
         catch (Requests_Exception $e)
         {

@@ -94,9 +94,14 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $url  = 'https://gcm-http.googleapis.com/gcm/send';
         $post = '{"to":"endpoint"}';
 
+        $options = [
+            'timeout'         => 30,
+            'connect_timeout' => 30
+        ];
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post), $this->equalTo($options))
                    ->will($this->throwException(new Requests_Exception('cURL error 10: Request error', 'curlerror', NULL)));
 
         $message = 'Dispatching GCM notification(s) failed: {message}';
@@ -130,9 +135,14 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $url  = 'https://gcm-http.googleapis.com/gcm/send';
         $post = '{"to":"endpoint"}';
 
+        $options = [
+            'timeout'         => 30,
+            'connect_timeout' => 30
+        ];
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post), $this->equalTo($options))
                    ->will($this->returnValue($response));
 
         $this->class->push($this->payload, $endpoints);
@@ -163,9 +173,14 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $url  = 'https://gcm-http.googleapis.com/gcm/send';
         $post = '{"collapse_key":"abcde-12345","to":"endpoint"}';
 
+        $options = [
+            'timeout'         => 30,
+            'connect_timeout' => 30
+        ];
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post), $this->equalTo($options))
                    ->will($this->returnValue($response));
 
         $this->class->push($this->payload, $endpoints);
@@ -196,9 +211,14 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $url  = 'https://gcm-http.googleapis.com/gcm/send';
         $post = '{"collapse_key":"abcde-12345","registration_ids":["endpoint1","endpoint2"]}';
 
+        $options = [
+            'timeout'         => 30,
+            'connect_timeout' => 30
+        ];
+
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post), $this->equalTo($options))
                    ->will($this->returnValue($response));
 
         $this->class->push($this->payload, $endpoints);
@@ -226,6 +246,11 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
             'Authorization' => 'key=auth_token',
         ];
 
+        $options = [
+            'timeout'         => 30,
+            'connect_timeout' => 30
+        ];
+
         $url = 'https://gcm-http.googleapis.com/gcm/send';
 
         $pos = 0;
@@ -234,21 +259,21 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
 
         $this->http->expects($this->at($pos++))
                    ->method('post')
-                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post), $this->equalTo($options))
                    ->will($this->returnValue($response));
 
         $post = '{"collapse_key":"abcde-12345","registration_ids":["endpoint3","endpoint4"]}';
 
         $this->http->expects($this->at($pos++))
                    ->method('post')
-                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post), $this->equalTo($options))
                    ->will($this->returnValue($response));
 
         $post = '{"collapse_key":"abcde-12345","to":"endpoint5"}';
 
         $this->http->expects($this->at($pos++))
                    ->method('post')
-                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post))
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post), $this->equalTo($options))
                    ->will($this->returnValue($response));
 
         $this->class->push($this->payload, $endpoints);
