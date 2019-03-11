@@ -12,6 +12,7 @@
 
 namespace Lunr\Vortex\GCM\Tests;
 
+use Lunr\Vortex\PushNotificationStatus;
 use Requests_Exception;
 
 /**
@@ -84,6 +85,8 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      */
     public function testPushWithFailedRequest()
     {
+        $this->mock_function('curl_errno', function (){ return 10; });
+
         $endpoints = [ 'endpoint' ];
 
         $headers = [
@@ -95,8 +98,8 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $post = '{"to":"endpoint"}';
 
         $options = [
-            'timeout'         => 30,
-            'connect_timeout' => 30
+            'timeout'         => 15,
+            'connect_timeout' => 15
         ];
 
         $this->http->expects($this->once())
@@ -114,6 +117,53 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $result = $this->class->push($this->payload, $endpoints);
 
         $this->assertInstanceOf('Lunr\Vortex\GCM\GCMResponse', $result);
+
+        $this->unmock_function('curl_errno');
+    }
+
+    /**
+     * Test that push() works as expected when the request failed.
+     *
+     * @covers Lunr\Vortex\GCM\GCMDispatcher::push
+     */
+    public function testPushWithTimeoutRequest()
+    {
+        $this->mock_function('curl_errno', function (){ return 28; });
+
+        $endpoints = [ 'endpoint' ];
+
+        $headers = [
+            'Content-Type'  => 'application/json',
+            'Authorization' => 'key=',
+        ];
+
+        $url  = 'https://gcm-http.googleapis.com/gcm/send';
+        $post = '{"to":"endpoint"}';
+
+        $options = [
+            'timeout'         => 15,
+            'connect_timeout' => 15
+        ];
+
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($post), $this->equalTo($options))
+                   ->will($this->throwException(new Requests_Exception('cURL error 28: Request timed out', 'curlerror', NULL)));
+
+        $message = 'Dispatching GCM notification(s) failed: {message}';
+        $context = [ 'message' => 'cURL error 28: Request timed out' ];
+
+        $this->logger->expects($this->at(0))
+                     ->method('warning')
+                     ->with($this->equalTo($message), $this->equalTo($context));
+
+        $result = $this->class->push($this->payload, $endpoints);
+
+        $this->assertInstanceOf('Lunr\Vortex\GCM\GCMResponse', $result);
+
+        $this->assertSame($result->get_status('endpoint'), PushNotificationStatus::TEMPORARY_ERROR);
+
+        $this->unmock_function('curl_errno');
     }
 
     /**
@@ -136,8 +186,8 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $post = '{"to":"endpoint"}';
 
         $options = [
-            'timeout'         => 30,
-            'connect_timeout' => 30
+            'timeout'         => 15,
+            'connect_timeout' => 15
         ];
 
         $this->http->expects($this->once())
@@ -174,8 +224,8 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $post = '{"collapse_key":"abcde-12345","to":"endpoint"}';
 
         $options = [
-            'timeout'         => 30,
-            'connect_timeout' => 30
+            'timeout'         => 15,
+            'connect_timeout' => 15
         ];
 
         $this->http->expects($this->once())
@@ -212,8 +262,8 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         $post = '{"collapse_key":"abcde-12345","registration_ids":["endpoint1","endpoint2"]}';
 
         $options = [
-            'timeout'         => 30,
-            'connect_timeout' => 30
+            'timeout'         => 15,
+            'connect_timeout' => 15
         ];
 
         $this->http->expects($this->once())
@@ -247,8 +297,8 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
         ];
 
         $options = [
-            'timeout'         => 30,
-            'connect_timeout' => 30
+            'timeout'         => 15,
+            'connect_timeout' => 15
         ];
 
         $url = 'https://gcm-http.googleapis.com/gcm/send';

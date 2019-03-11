@@ -161,8 +161,8 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
         try
         {
             $options = [
-                'timeout'         => 30, // timeout in seconds
-                'connect_timeout' => 30 // timeout in seconds
+                'timeout'         => 15, // timeout in seconds
+                'connect_timeout' => 15 // timeout in seconds
             ];
 
             $http_response = $this->http->post(static::GOOGLE_SEND_URL, $headers, json_encode($tmp_payload), $options);
@@ -174,6 +174,11 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
                 [ 'message' => $e->getMessage() ]
             );
             $http_response = $this->get_new_response_object_for_failed_request();
+
+            if ($e->getType() == 'curlerror' && curl_errno($e->getData()) == 28)
+            {
+                $http_response->status_code = 500;
+            }
         }
 
         $gcm_batch_response = $this->get_batch_response($http_response, $this->logger, $endpoints);
