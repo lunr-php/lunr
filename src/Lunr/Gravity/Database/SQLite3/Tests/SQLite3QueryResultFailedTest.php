@@ -22,7 +22,7 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
     /**
      * Override the default setUp with a setup with a failed query.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->setUpWithFailedQuery();
     }
@@ -30,7 +30,7 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
     /**
      * Test that the success flag is FALSE.
      */
-    public function testSuccessIsFalse()
+    public function testSuccessIsFalse(): void
     {
         $property = $this->get_accessible_reflection_property('success');
 
@@ -40,7 +40,7 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
     /**
      * Test that the result value is FALSE.
      */
-    public function testResultIsFalse()
+    public function testResultIsFalse(): void
     {
         $property = $this->get_accessible_reflection_property('result');
 
@@ -50,7 +50,7 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
     /**
      * Test that the freed flag is TRUE.
      */
-    public function testFreedIsTrue()
+    public function testFreedIsTrue(): void
     {
         $property = $this->get_accessible_reflection_property('freed');
 
@@ -62,7 +62,7 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::has_failed
      */
-    public function testHasFailedReturnsTrue()
+    public function testHasFailedReturnsTrue(): void
     {
         $this->assertTrue($this->class->has_failed());
     }
@@ -72,11 +72,11 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::error_message
      */
-    public function testErrorMessageIsString()
+    public function testErrorMessageIsString(): void
     {
         $property = $this->get_accessible_reflection_property('error_message');
 
-        $this->assertInternalType('string', $property->getValue($this->class));
+        $this->assertIsString($property->getValue($this->class));
     }
 
     /**
@@ -84,11 +84,11 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::error_number
      */
-    public function testErrorNumberIsNumber()
+    public function testErrorNumberIsNumber(): void
     {
         $property = $this->get_accessible_reflection_property('error_number');
 
-        $this->assertInternalType('int', $property->getValue($this->class));
+        $this->assertIsInt($property->getValue($this->class));
     }
 
     /**
@@ -96,7 +96,7 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::insert_id
      */
-    public function testInsertIDIsZero()
+    public function testInsertIDIsZero(): void
     {
         $property = $this->get_accessible_reflection_property('insert_id');
 
@@ -108,11 +108,11 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_array
      */
-    public function testResultArrayReturnsEmptyArray()
+    public function testResultArrayReturnsEmptyArray(): void
     {
         $value = $this->class->result_array();
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -121,11 +121,11 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_row
      */
-    public function testResultRowReturnsEmptyArray()
+    public function testResultRowReturnsEmptyArray(): void
     {
         $value = $this->class->result_row();
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -134,11 +134,11 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_column
      */
-    public function testResultColumnReturnsEmptyArray()
+    public function testResultColumnReturnsEmptyArray(): void
     {
         $value = $this->class->result_column('column');
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -147,7 +147,7 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_cell
      */
-    public function testResultCellReturnsNull()
+    public function testResultCellReturnsNull(): void
     {
         $this->assertNull($this->class->result_cell('cell'));
     }
@@ -157,7 +157,7 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::has_deadlock
      */
-    public function testHasDeadlockReturnsTrue()
+    public function testHasDeadlockReturnsTrue(): void
     {
         $this->set_reflection_property_value('error_number', 6);
 
@@ -169,7 +169,7 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::has_deadlock
      */
-    public function testHasDeadlockReturnsFalse()
+    public function testHasDeadlockReturnsFalse(): void
     {
         $this->set_reflection_property_value('error_number', 999);
 

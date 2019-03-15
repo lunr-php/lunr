@@ -26,7 +26,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
      */
-    public function testGetFileContentWithAccessibleFile()
+    public function testGetFileContentWithAccessibleFile(): void
     {
         $file = TEST_STATICS . '/Gravity/file1';
 
@@ -42,7 +42,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
      */
-    public function testGetFileContentWithInaccessibleFile()
+    public function testGetFileContentWithInaccessibleFile(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -67,7 +67,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
      */
-    public function testGetFileContentWithNonExistantFile()
+    public function testGetFileContentWithNonExistantFile(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -94,7 +94,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
      */
-    public function testGetFileContentOfDirectory()
+    public function testGetFileContentOfDirectory(): void
     {
         $file = sys_get_temp_dir();
 
@@ -111,7 +111,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * @dataProvider invalidNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
      */
-    public function testGetFileContentWithInvalidFilenames($file)
+    public function testGetFileContentWithInvalidFilenames($file): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -137,7 +137,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
      */
-    public function testGetFileContentWithBooleanFilenames($file)
+    public function testGetFileContentWithBooleanFilenames($file): void
     {
         $fetched = $this->class->get_file_content($file);
 
@@ -149,7 +149,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
-    public function testPutFileContentWithAccessibleFile()
+    public function testPutFileContentWithAccessibleFile(): void
     {
         $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
@@ -168,7 +168,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
-    public function testPutFileContentWithInaccessibleFile()
+    public function testPutFileContentWithInaccessibleFile(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -195,7 +195,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
-    public function testPutFileContentWithNonExistantFile()
+    public function testPutFileContentWithNonExistantFile(): void
     {
         $file = sys_get_temp_dir() . '/ab65cd89';
 
@@ -216,7 +216,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
-    public function testPutFileContentInDirectory()
+    public function testPutFileContentInDirectory(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -246,7 +246,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * @dataProvider invalidNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
-    public function testPutFileContentWithInvalidFilenames($file)
+    public function testPutFileContentWithInvalidFilenames($file): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -274,7 +274,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
-    public function testPutFileContentWithBooleanFilenames($file)
+    public function testPutFileContentWithBooleanFilenames($file): void
     {
         $content = "Content\n";
 
@@ -288,7 +288,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
-    public function testPutFileContentAppendsToFile()
+    public function testPutFileContentAppendsToFile(): void
     {
         $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
@@ -307,7 +307,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
-    public function testPutFileContentAcquiresExclusiveLock()
+    public function testPutFileContentAcquiresExclusiveLock(): void
     {
         $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
@@ -326,7 +326,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
      */
-    public function testPutFileContentAppendsToFileAndAcquiresExclusiveLock()
+    public function testPutFileContentAppendsToFileAndAcquiresExclusiveLock(): void
     {
         $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
@@ -345,7 +345,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
      */
-    public function testGetFileObjectForAccessibleFile()
+    public function testGetFileObjectForAccessibleFile(): void
     {
         $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
@@ -362,10 +362,12 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * @param mixed  $mode    Invalid mode
      * @param string $message Expected error message
      *
+     * @requires OS Linux
+     *
      * @dataProvider invalidModesProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
      */
-    public function testGetFileObjectForAccessibleFileWithInvalidMode($mode, $message)
+    public function testGetFileObjectForAccessibleFileWithInvalidMode($mode, $message): void
     {
         $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
@@ -387,7 +389,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
      */
-    public function testGetFileObjectForInaccessibleFile()
+    public function testGetFileObjectForInaccessibleFile(): void
     {
         $file = '/root/ab45cd89';
 
@@ -407,7 +409,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
      */
-    public function testGetFileObjectForNonExistantFile()
+    public function testGetFileObjectForNonExistantFile(): void
     {
         $file = sys_get_temp_dir() . '/ab65cd89';
 
@@ -429,7 +431,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
      */
-    public function testGetFileObjectOfDirectory()
+    public function testGetFileObjectOfDirectory(): void
     {
         $file = sys_get_temp_dir();
 
@@ -453,7 +455,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * @dataProvider invalidNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
      */
-    public function testGetFileObjectForInvalidFilenames($file, $message)
+    public function testGetFileObjectForInvalidFilenames($file, $message): void
     {
         $this->logger->expects($this->once())
                      ->method('error')
@@ -472,7 +474,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
      */
-    public function testGetFileObjectForBooleanFilenames($file)
+    public function testGetFileObjectForBooleanFilenames($file): void
     {
         $this->logger->expects($this->never())
                      ->method('error');

@@ -40,7 +40,7 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
 
         $this->builder            = new MySQLDMLQueryBuilder();
@@ -50,7 +50,7 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->builder);
         unset($this->builder_reflection);
@@ -61,7 +61,7 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      *
      * @return array $modes Array of select modes
      */
-    public function selectModesDuplicatesProvider()
+    public function selectModesDuplicatesProvider(): array
     {
         $modes   = [];
         $modes[] = [ 'ALL' ];
@@ -76,7 +76,7 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      *
      * @return array $modes Array of select modes
      */
-    public function selectModesCacheProvider()
+    public function selectModesCacheProvider(): array
     {
         $modes   = [];
         $modes[] = [ 'SQL_CACHE' ];
@@ -90,7 +90,7 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      *
      * @return array $modes Array of select modes
      */
-    public function selectModesStandardProvider()
+    public function selectModesStandardProvider(): array
     {
         $modes   = [];
         $modes[] = [ 'HIGH_PRIORITY' ];
@@ -108,7 +108,7 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      *
      * @return array $modes Array of select modes
      */
-    public function updateModesStandardProvider()
+    public function updateModesStandardProvider(): array
     {
         $modes   = [];
         $modes[] = [ 'LOW_PRIORITY' ];
@@ -122,7 +122,7 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      *
      * @return array $modes Array of lock modes
      */
-    public function lockModesStandardProvider()
+    public function lockModesStandardProvider(): array
     {
         $modes   = [];
         $modes[] = [ 'FOR UPDATE' ];
@@ -136,7 +136,7 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      *
      * @return array $modes Array of delete modes
      */
-    public function deleteModesStandardProvider()
+    public function deleteModesStandardProvider(): array
     {
         $modes   = [];
         $modes[] = [ 'LOW_PRIORITY' ];
@@ -151,7 +151,7 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      *
      * @return array $expectedmodes Array of delete modes and their expected result
      */
-    public function expectedDeleteModesProvider()
+    public function expectedDeleteModesProvider(): array
     {
         $expectedmodes   = [];
         $expectedmodes[] = [ 'low_priority', 'LOW_PRIORITY' ];
@@ -166,7 +166,7 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      *
      * @return array $modes Array of Insert modes
      */
-    public function insertModesStandardProvider()
+    public function insertModesStandardProvider(): array
     {
         $modes   = [];
         $modes[] = [ 'LOW_PRIORITY' ];
@@ -182,7 +182,7 @@ abstract class MySQLDMLQueryBuilderTest extends TestCase
      *
      * @return array $expectedmodes Array of insert modes and their expected result
      */
-    public function expectedInsertModesProvider()
+    public function expectedInsertModesProvider(): array
     {
         $expectedmodes   = [];
         $expectedmodes[] = [ 'low_priority', 'LOW_PRIORITY' ];

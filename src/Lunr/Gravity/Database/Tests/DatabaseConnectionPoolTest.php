@@ -59,7 +59,7 @@ abstract class DatabaseConnectionPoolTest extends TestCase
      *
      * @return void
      */
-    public function emptySetup()
+    public function emptySetup(): void
     {
         $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -85,7 +85,7 @@ abstract class DatabaseConnectionPoolTest extends TestCase
      *
      * @return void
      */
-    public function unsupportedSetup()
+    public function unsupportedSetup(): void
     {
         $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -123,7 +123,7 @@ abstract class DatabaseConnectionPoolTest extends TestCase
      *
      * @return void
      */
-    public function supportedSetup()
+    public function supportedSetup(): void
     {
         $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -159,7 +159,7 @@ abstract class DatabaseConnectionPoolTest extends TestCase
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->pool);
         unset($this->pool_reflection);

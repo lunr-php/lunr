@@ -25,7 +25,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that error message is empty on successful query.
      */
-    public function testErrorMessageIsEmpty()
+    public function testErrorMessageIsEmpty(): void
     {
         $property = $this->result_reflection->getProperty('error_message');
         $property->setAccessible(TRUE);
@@ -36,7 +36,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that error number is zero on successful query.
      */
-    public function testErrorNumberIsZero()
+    public function testErrorNumberIsZero(): void
     {
         $property = $this->result_reflection->getProperty('error_number');
         $property->setAccessible(TRUE);
@@ -47,7 +47,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that error number is zero on successful query.
      */
-    public function testInsertIDIsZero()
+    public function testInsertIDIsZero(): void
     {
         $property = $this->result_reflection->getProperty('insert_id');
         $property->setAccessible(TRUE);
@@ -58,7 +58,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that affected rows is a number on successful query.
      */
-    public function testAffectedRowsIsNumber()
+    public function testAffectedRowsIsNumber(): void
     {
         $property = $this->result_reflection->getProperty('affected_rows');
         $property->setAccessible(TRUE);
@@ -69,7 +69,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that number of rows is a number on successful query.
      */
-    public function testNumberOfRowsIsNumber()
+    public function testNumberOfRowsIsNumber(): void
     {
         $property = $this->result_reflection->getProperty('num_rows');
         $property->setAccessible(TRUE);
@@ -80,7 +80,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that error message is empty on successful query.
      */
-    public function testQueryIsPassedCorrectly()
+    public function testQueryIsPassedCorrectly(): void
     {
         $property = $this->result_reflection->getProperty('query');
         $property->setAccessible(TRUE);
@@ -91,7 +91,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that the mysqli class is passed by reference.
      */
-    public function testMysqliIsPassedByReference()
+    public function testMysqliIsPassedByReference(): void
     {
         $property = $this->result_reflection->getProperty('mysqli');
         $property->setAccessible(TRUE);
@@ -105,7 +105,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that the fetched flag is FALSE by default.
      */
-    public function testFetchedIsFalseByDefault()
+    public function testFetchedIsFalseByDefault(): void
     {
         $property = $this->result_reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
@@ -118,7 +118,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
-    public function testFetchResultDoesNotRefetchIfFetchedIsTrue()
+    public function testFetchResultDoesNotRefetchIfFetchedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
@@ -141,7 +141,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
-    public function testFetchResultStoresResult()
+    public function testFetchResultStoresResult(): void
     {
         $result = new MockMySQLiResult($this->getMockBuilder('mysqli_result')
                                             ->disableOriginalConstructor()
@@ -168,7 +168,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
-    public function testFetchResultSetsFetchedToTrue()
+    public function testFetchResultSetsFetchedToTrue(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -191,7 +191,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
-    public function testFetchedResultSetsSuccessTrueIfResultIsTrue()
+    public function testFetchedResultSetsSuccessTrueIfResultIsTrue(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -214,7 +214,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
-    public function testFetchedResultSetsSuccessFalseIfResultIsFalse()
+    public function testFetchedResultSetsSuccessFalseIfResultIsFalse(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -237,7 +237,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
-    public function testFetchedResultSetsSuccessTrueIfResultIsMysqliResult()
+    public function testFetchedResultSetsSuccessTrueIfResultIsMysqliResult(): void
     {
         $result = new MockMySQLiResult($this->getMockBuilder('mysqli_result')
                                             ->disableOriginalConstructor()
@@ -264,7 +264,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
-    public function testFetchResultSetsErrorMessage()
+    public function testFetchResultSetsErrorMessage(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -287,7 +287,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
-    public function testFetchResultSetsErrorNumber()
+    public function testFetchResultSetsErrorNumber(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -310,7 +310,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
-    public function testFetchResultSetsInsertID()
+    public function testFetchResultSetsInsertID(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -333,7 +333,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
-    public function testFetchResultSetsAffectedRows()
+    public function testFetchResultSetsAffectedRows(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -356,7 +356,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
-    public function testFetchResultSetsNumberOfRows()
+    public function testFetchResultSetsNumberOfRows(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')

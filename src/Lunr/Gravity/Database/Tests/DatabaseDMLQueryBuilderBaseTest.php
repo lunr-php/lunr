@@ -24,7 +24,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that select is an empty string by default.
      */
-    public function testSelectEmptyByDefault()
+    public function testSelectEmptyByDefault(): void
     {
         $this->assertPropertyEquals('select', '');
     }
@@ -32,7 +32,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that select_mode is an empty array by default.
      */
-    public function testSelectModeEmptyByDefault()
+    public function testSelectModeEmptyByDefault(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('select_mode'));
     }
@@ -40,7 +40,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that update is an empty string by default.
      */
-    public function testUpdateEmptyByDefault()
+    public function testUpdateEmptyByDefault(): void
     {
         $this->assertPropertyEquals('update', '');
     }
@@ -48,7 +48,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that update_mode is an empty array by default.
      */
-    public function testUpdateModeEmptyByDefault()
+    public function testUpdateModeEmptyByDefault(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('update_mode'));
     }
@@ -56,7 +56,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that delete is an empty string by default.
      */
-    public function testDeleteEmptyByDefault()
+    public function testDeleteEmptyByDefault(): void
     {
         $this->assertPropertyEquals('delete', '');
     }
@@ -64,7 +64,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that delete_mode is an empty array by default.
      */
-    public function testDeleteModeEmptyByDefault()
+    public function testDeleteModeEmptyByDefault(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('delete_mode'));
     }
@@ -72,7 +72,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that insert_mode is an empty array by default.
      */
-    public function testInsertModeEmptyByDefault()
+    public function testInsertModeEmptyByDefault(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('insert_mode'));
     }
@@ -80,7 +80,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that into is an empty string by default.
      */
-    public function testIntoEmptyByDefault()
+    public function testIntoEmptyByDefault(): void
     {
         $this->assertPropertyEquals('into', '');
     }
@@ -88,7 +88,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that set is an empty string by default.
      */
-    public function testSetEmptyByDefault()
+    public function testSetEmptyByDefault(): void
     {
         $this->assertPropertyEquals('set', '');
     }
@@ -96,7 +96,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that column_names is an empty string by default.
      */
-    public function testColumnNamesEmptyByDefault()
+    public function testColumnNamesEmptyByDefault(): void
     {
         $this->assertPropertyEquals('column_names', '');
     }
@@ -104,7 +104,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that values is an empty string by default.
      */
-    public function testValuesEmptyByDefault()
+    public function testValuesEmptyByDefault(): void
     {
         $this->assertPropertyEquals('values', '');
     }
@@ -120,7 +120,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that select_statement is an empty string by default.
      */
-    public function testSelectStatementEmptyByDefault()
+    public function testSelectStatementEmptyByDefault(): void
     {
         $this->assertPropertyEquals('select_statement', '');
     }
@@ -128,7 +128,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that from is an empty string by default.
      */
-    public function testFromEmptyByDefault()
+    public function testFromEmptyByDefault(): void
     {
         $this->assertPropertyEquals('from', '');
     }
@@ -136,7 +136,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that order_by is an empty string by default.
      */
-    public function testOrderByEmptyByDefault()
+    public function testOrderByEmptyByDefault(): void
     {
         $this->assertPropertyEquals('order_by', '');
     }
@@ -144,7 +144,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that group_by is an empty string by default.
      */
-    public function testGroupByEmptyByDefault()
+    public function testGroupByEmptyByDefault(): void
     {
         $this->assertPropertyEquals('group_by', '');
     }
@@ -152,7 +152,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that limit is an empty string by default.
      */
-    public function testLimitEmptyByDefault()
+    public function testLimitEmptyByDefault(): void
     {
         $this->assertPropertyEquals('limit', '');
     }
@@ -160,7 +160,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test that with is an empty string by default.
      */
-    public function testWithEmptyByDefault()
+    public function testWithEmptyByDefault(): void
     {
         $this->assertPropertyEquals('with', '');
     }
@@ -174,7 +174,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
      * @dataProvider validIndexHintProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::prepare_index_hints
      */
-    public function testPrepareValidIndexHints($hints, $expected)
+    public function testPrepareValidIndexHints($hints, $expected): void
     {
         $method = $this->get_accessible_reflection_method('prepare_index_hints');
 
@@ -189,7 +189,7 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
      * @dataProvider invalidIndexHintProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::prepare_index_hints
      */
-    public function testPrepareInvalidIndexHintsReturnsEmptyString($hints)
+    public function testPrepareInvalidIndexHintsReturnsEmptyString($hints): void
     {
         $method = $this->get_accessible_reflection_method('prepare_index_hints');
 

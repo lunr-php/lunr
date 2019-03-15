@@ -25,7 +25,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
      */
-    public function testNonRecursiveWithWithoutColumnNames()
+    public function testNonRecursiveWithWithoutColumnNames(): void
     {
         $method = $this->get_accessible_reflection_method('sql_with');
         $method->invokeArgs($this->class, [ 'alias', 'query' ]);
@@ -40,7 +40,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
      */
-    public function testMultipleNonRecursiveWithWithoutColumnNames()
+    public function testMultipleNonRecursiveWithWithoutColumnNames(): void
     {
         $this->set_reflection_property_value('with', 'alias AS ( query )');
 
@@ -57,7 +57,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
      */
-    public function testNonRecursiveWithIncludingColumnNames()
+    public function testNonRecursiveWithIncludingColumnNames(): void
     {
         $method = $this->get_accessible_reflection_method('sql_with');
 
@@ -75,7 +75,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
      */
-    public function testMultipleNonRecursiveWithIncludingColumnNames()
+    public function testMultipleNonRecursiveWithIncludingColumnNames(): void
     {
         $this->set_reflection_property_value
             ('with', 'alias (column1, column2, column3) AS ( query )');
@@ -93,7 +93,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
      */
-    public function testRecursiveWithWithoutColumnNames()
+    public function testRecursiveWithWithoutColumnNames(): void
     {
         $method = $this->get_accessible_reflection_method('sql_with');
         $method->invokeArgs($this->class, [ 'alias', 'anchor_query', 'recursive_query', 'UNION']);
@@ -108,7 +108,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
      */
-    public function testRecursiveWithWithColumnNames()
+    public function testRecursiveWithWithColumnNames(): void
     {
         $method = $this->get_accessible_reflection_method('sql_with');
 
@@ -126,7 +126,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
      */
-    public function testRecursiveWithAfterNonRecursiveQueryWithoutColumnNames()
+    public function testRecursiveWithAfterNonRecursiveQueryWithoutColumnNames(): void
     {
         $this->set_reflection_property_value
         ('with', 'alias AS ( query )');
@@ -145,7 +145,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
      */
-    public function testRecursiveWithAfterNonRecursiveQueryWithColumnNames()
+    public function testRecursiveWithAfterNonRecursiveQueryWithColumnNames(): void
     {
         $this->set_reflection_property_value
         ('with', 'alias (column1, column2, column3) AS ( query )');
@@ -167,7 +167,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
      */
-    public function testRecursiveWithAfterRecursiveQueryWithoutColumnNames()
+    public function testRecursiveWithAfterRecursiveQueryWithoutColumnNames(): void
     {
         $this->set_reflection_property_value
         ('with', 'alias AS ( anchor_query UNION recursive_query )');
@@ -186,7 +186,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
      */
-    public function testRecursiveWithAfterRecursiveQueryWithColumnNames()
+    public function testRecursiveWithAfterRecursiveQueryWithColumnNames(): void
     {
         $this->set_reflection_property_value
         ('with', 'alias (column1, column2, column3) AS ( anchor_query UNION recursive_query )');
@@ -208,7 +208,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
      */
-    public function testNonRecursiveWithAfterRecursiveQueryWithoutColumnNames()
+    public function testNonRecursiveWithAfterRecursiveQueryWithoutColumnNames(): void
     {
         $this->set_reflection_property_value
         ('with', 'alias AS ( anchor_query UNION recursive_query )');
@@ -227,7 +227,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_with
      */
-    public function testNonRecursiveWithAfterRecursiveQueryWithColumnNames()
+    public function testNonRecursiveWithAfterRecursiveQueryWithColumnNames(): void
     {
         $this->set_reflection_property_value
         ('with', 'alias (column1, column2, column3) AS ( anchor_query UNION recursive_query )');

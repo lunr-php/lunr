@@ -24,7 +24,7 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::run_on_master
      */
-    public function testRunOnMasterSetsCorrectQueryHint()
+    public function testRunOnMasterSetsCorrectQueryHint(): void
     {
         $this->class->run_on_master();
 
@@ -36,7 +36,7 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::run_on_slave
      */
-    public function testRunOnSlaveSetsCorrectQueryHint()
+    public function testRunOnSlaveSetsCorrectQueryHint(): void
     {
         $this->class->run_on_slave();
 
@@ -48,7 +48,7 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::run_on_master
      */
-    public function testRunOnMasterSetsCorrectQueryHintForMaxscale()
+    public function testRunOnMasterSetsCorrectQueryHintForMaxscale(): void
     {
         $this->class->run_on_master('maxscale');
 
@@ -60,7 +60,7 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::run_on_slave
      */
-    public function testRunOnSlaveSetsCorrectQueryHintForMaxscale()
+    public function testRunOnSlaveSetsCorrectQueryHintForMaxscale(): void
     {
         $this->class->run_on_slave('maxscale');
 
@@ -72,7 +72,7 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::run_on_master
      */
-    public function testRunOnMasterReturnsSelfReference()
+    public function testRunOnMasterReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->run_on_master());
     }
@@ -82,7 +82,7 @@ class MySQLConnectionMasterSlaveTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::run_on_slave
      */
-    public function testRunOnSlaveReturnsSelfReference()
+    public function testRunOnSlaveReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->run_on_slave());
     }

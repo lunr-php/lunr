@@ -28,7 +28,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::begin_transaction
      */
-    public function testBeginTransactionStartsTransactionWhenConnected()
+    public function testBeginTransactionStartsTransactionWhenConnected(): void
     {
         $property = $this->get_accessible_reflection_property('connected');
         $property->setValue($this->class, TRUE);
@@ -47,7 +47,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::begin_transaction
      */
-    public function testBeginTransactionThrowsExceptionWhenNotConnected()
+    public function testBeginTransactionThrowsExceptionWhenNotConnected(): void
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -65,7 +65,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::commit
      */
-    public function testCommitWhenConnected()
+    public function testCommitWhenConnected(): void
     {
         $property = $this->get_accessible_reflection_property('connected');
         $property->setValue($this->class, TRUE);
@@ -84,7 +84,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::commit
      */
-    public function testCommitThrowsExceptionWhenNotConnected()
+    public function testCommitThrowsExceptionWhenNotConnected(): void
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -102,7 +102,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::rollback
      */
-    public function testRollbackWhenConnected()
+    public function testRollbackWhenConnected(): void
     {
         $property = $this->get_accessible_reflection_property('connected');
         $property->setValue($this->class, TRUE);
@@ -121,7 +121,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::commit
      */
-    public function testRollbackThrowsExceptionWhenNotConnected()
+    public function testRollbackThrowsExceptionWhenNotConnected(): void
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -139,7 +139,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::rollback
      */
-    public function testEndTransactionWhenConnected()
+    public function testEndTransactionWhenConnected(): void
     {
         $property = $this->get_accessible_reflection_property('connected');
         $property->setValue($this->class, TRUE);
@@ -158,7 +158,7 @@ class MySQLConnectionTransactionTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::commit
      */
-    public function testEndTransactionThrowsExceptionWhenNotConnected()
+    public function testEndTransactionThrowsExceptionWhenNotConnected(): void
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 

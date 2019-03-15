@@ -43,7 +43,7 @@ abstract class MariaDBSimpleDMLQueryBuilderTest extends TestCase
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->escaper = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper')
                               ->disableOriginalConstructor()
@@ -59,7 +59,7 @@ abstract class MariaDBSimpleDMLQueryBuilderTest extends TestCase
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->escaper);
         unset($this->builder);

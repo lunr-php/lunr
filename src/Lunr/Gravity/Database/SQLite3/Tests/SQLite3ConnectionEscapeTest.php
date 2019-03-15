@@ -31,7 +31,7 @@ class SQLite3ConnectionEscapeTest extends SQLite3ConnectionTest
      * @dataProvider escapeStringProvider
      * @covers       Lunr\Gravity\Database\SQLite3\SQLite3Connection::escape_string
      */
-    public function testEscapeString($string, $part_escaped, $escaped)
+    public function testEscapeString($string, $part_escaped, $escaped): void
     {
         $method = [ get_class($this->sqlite3), 'escapeString' ];
 

@@ -26,7 +26,7 @@ class SQLite3DMLQueryBuilderQueryTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::get_insert_query
      */
-    public function testGetInsertQueryWithUndefinedInto()
+    public function testGetInsertQueryWithUndefinedInto(): void
     {
         $this->set_reflection_property_value('column_names', '(column1, column2)');
         $this->set_reflection_property_value('values', 'VALUES (1,2), (3,4)');
@@ -40,7 +40,7 @@ class SQLite3DMLQueryBuilderQueryTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::get_insert_query
      */
-    public function testGetInsertValuesQuery()
+    public function testGetInsertValuesQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('column_names', '(column1, column2)');
@@ -55,7 +55,7 @@ class SQLite3DMLQueryBuilderQueryTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::get_insert_query
      */
-    public function testGetInsertSelectQuery()
+    public function testGetInsertSelectQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('select_statement', 'SELECT column1, column2 FROM table');
@@ -69,7 +69,7 @@ class SQLite3DMLQueryBuilderQueryTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::get_insert_query
      */
-    public function testGetInsertSelectColumnsQuery()
+    public function testGetInsertSelectColumnsQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('column_names', '(column1, column2)');
@@ -84,7 +84,7 @@ class SQLite3DMLQueryBuilderQueryTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::get_replace_query
      */
-    public function testGetReplaceQueryWithUndefinedInto()
+    public function testGetReplaceQueryWithUndefinedInto(): void
     {
         $this->set_reflection_property_value('column_names', '(column1, column2)');
         $this->set_reflection_property_value('values', 'VALUES (1,2), (3,4)');
@@ -98,7 +98,7 @@ class SQLite3DMLQueryBuilderQueryTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::get_replace_query
      */
-    public function testGetReplaceValuesQuery()
+    public function testGetReplaceValuesQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('column_names', '(column1, column2)');
@@ -113,7 +113,7 @@ class SQLite3DMLQueryBuilderQueryTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::get_replace_query
      */
-    public function testGetReplaceSelectQuery()
+    public function testGetReplaceSelectQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('select_statement', 'SELECT column1, column2 FROM table');
@@ -127,7 +127,7 @@ class SQLite3DMLQueryBuilderQueryTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::get_replace_query
      */
-    public function testGetReplaceSelectColumnsQuery()
+    public function testGetReplaceSelectColumnsQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('column_names', '(column1, column2)');

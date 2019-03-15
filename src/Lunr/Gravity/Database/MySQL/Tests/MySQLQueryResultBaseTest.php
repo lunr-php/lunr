@@ -24,7 +24,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->successfulSetup();
     }
@@ -32,7 +32,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
     /**
      * Test that error message is empty on successful query.
      */
-    public function testErrorMessageIsEmpty()
+    public function testErrorMessageIsEmpty(): void
     {
         $property = $this->result_reflection->getProperty('error_message');
         $property->setAccessible(TRUE);
@@ -43,7 +43,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
     /**
      * Test that error number is zero on successful query.
      */
-    public function testErrorNumberIsZero()
+    public function testErrorNumberIsZero(): void
     {
         $property = $this->result_reflection->getProperty('error_number');
         $property->setAccessible(TRUE);
@@ -54,7 +54,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
     /**
      * Test that error number is zero on successful query.
      */
-    public function testInsertIDIsZero()
+    public function testInsertIDIsZero(): void
     {
         $property = $this->result_reflection->getProperty('insert_id');
         $property->setAccessible(TRUE);
@@ -65,7 +65,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
     /**
      * Test that affected rows is a number on successful query.
      */
-    public function testAffectedRowsIsNumber()
+    public function testAffectedRowsIsNumber(): void
     {
         $property = $this->result_reflection->getProperty('affected_rows');
         $property->setAccessible(TRUE);
@@ -76,7 +76,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
     /**
      * Test that number of rows is a number on successful query.
      */
-    public function testNumberOfRowsIsNumber()
+    public function testNumberOfRowsIsNumber(): void
     {
         $property = $this->result_reflection->getProperty('num_rows');
         $property->setAccessible(TRUE);
@@ -87,7 +87,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
     /**
      * Test that error message is empty on successful query.
      */
-    public function testQueryIsPassedCorrectly()
+    public function testQueryIsPassedCorrectly(): void
     {
         $property = $this->result_reflection->getProperty('query');
         $property->setAccessible(TRUE);
@@ -100,14 +100,14 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::affected_rows
      */
-    public function testAffectedRowsReturnsNumber()
+    public function testAffectedRowsReturnsNumber(): void
     {
         $class = $this->result_reflection->getProperty('affected_rows');
         $class->setAccessible(TRUE);
         $class->setValue($this->result, 10);
 
         $value = $this->result->affected_rows();
-        $this->assertInternalType('int', $value);
+        $this->assertIsInt($value);
         $this->assertEquals(10, $value);
     }
 
@@ -116,14 +116,14 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::number_of_rows
      */
-    public function testNumberOfRowsReturnsNumber()
+    public function testNumberOfRowsReturnsNumber(): void
     {
         $class = $this->result_reflection->getProperty('num_rows');
         $class->setAccessible(TRUE);
         $class->setValue($this->result, 10);
 
         $value = $this->result->number_of_rows();
-        $this->assertInternalType('int', $value);
+        $this->assertIsInt($value);
         $this->assertEquals(10, $value);
     }
 
@@ -132,14 +132,14 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::error_message
      */
-    public function testErrorMessageReturnsString()
+    public function testErrorMessageReturnsString(): void
     {
         $class = $this->result_reflection->getProperty('error_message');
         $class->setAccessible(TRUE);
         $class->setValue($this->result, '');
 
         $value = $this->result->error_message();
-        $this->assertInternalType('string', $value);
+        $this->assertIsString($value);
         $this->assertEquals('', $value);
     }
 
@@ -148,14 +148,14 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::error_number
      */
-    public function testErrorNumberReturnsNumber()
+    public function testErrorNumberReturnsNumber(): void
     {
         $class = $this->result_reflection->getProperty('error_number');
         $class->setAccessible(TRUE);
         $class->setValue($this->result, 0);
 
         $value = $this->result->error_number();
-        $this->assertInternalType('int', $value);
+        $this->assertIsInt($value);
         $this->assertEquals(0, $value);
     }
 
@@ -164,14 +164,14 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::insert_id
      */
-    public function testInsertIDReturnsNumber()
+    public function testInsertIDReturnsNumber(): void
     {
         $class = $this->result_reflection->getProperty('insert_id');
         $class->setAccessible(TRUE);
         $class->setValue($this->result, 0);
 
         $value = $this->result->insert_id();
-        $this->assertInternalType('int', $value);
+        $this->assertIsInt($value);
         $this->assertEquals(0, $value);
     }
 
@@ -180,21 +180,21 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::query
      */
-    public function testQueryReturnsString()
+    public function testQueryReturnsString(): void
     {
         $class = $this->result_reflection->getProperty('query');
         $class->setAccessible(TRUE);
         $class->setValue($this->result, 'SELECT * FROM table1');
 
         $value = $this->result->query();
-        $this->assertInternalType('string', $value);
+        $this->assertIsString($value);
         $this->assertEquals('SELECT * FROM table1', $value);
     }
 
     /**
      * Test that the mysqli class is passed by reference.
      */
-    public function testMysqliIsPassedByReference()
+    public function testMysqliIsPassedByReference(): void
     {
         $property = $this->result_reflection->getProperty('mysqli');
         $property->setAccessible(TRUE);

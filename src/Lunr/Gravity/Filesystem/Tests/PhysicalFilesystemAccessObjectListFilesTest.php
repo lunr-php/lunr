@@ -27,13 +27,13 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
      */
-    public function testGetListOfFilesInAccessibleDirectory()
+    public function testGetListOfFilesInAccessibleDirectory(): void
     {
         $expected = [ 'file1', 'file2', 'file3' ];
 
         $value = $this->class->get_list_of_files($this->find_location);
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
 
         sort($value);
 
@@ -43,9 +43,11 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
     /**
      * Test listing files in an inaccessible directory.
      *
+     * @requires OS Linux
+     *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
      */
-    public function testGetListOfFilesInInaccessibleDirectory()
+    public function testGetListOfFilesInInaccessibleDirectory(): void
     {
         $directory = '/root';
 
@@ -70,7 +72,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
      */
-    public function testGetListOfFilesInNonExistantDirectory()
+    public function testGetListOfFilesInNonExistantDirectory(): void
     {
         $directory = '/tmp56474q';
 
@@ -95,7 +97,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
      */
-    public function testGetListOfFilesInFile()
+    public function testGetListOfFilesInFile(): void
     {
         $directory = tempnam('/tmp', 'phpunit_');
 
@@ -122,7 +124,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
      */
-    public function testGetListOfFilesInNullDirectory()
+    public function testGetListOfFilesInNullDirectory(): void
     {
         $this->logger->expects($this->never())
                      ->method('error');
@@ -137,7 +139,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
      */
-    public function testGetListOfFilesInObjectDirectory()
+    public function testGetListOfFilesInObjectDirectory(): void
     {
         $directory = new \stdClass();
 
@@ -165,7 +167,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
      */
-    public function testGetListOfFilesInBooleanTrueDirectory($directory)
+    public function testGetListOfFilesInBooleanTrueDirectory($directory): void
     {
         $this->logger->expects($this->never())
                      ->method('error');

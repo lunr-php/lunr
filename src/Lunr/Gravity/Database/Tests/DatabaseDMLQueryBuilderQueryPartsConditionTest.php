@@ -24,7 +24,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_connector
      */
-    public function testConnector()
+    public function testConnector(): void
     {
         $method = $this->get_accessible_reflection_method('sql_connector');
 
@@ -42,7 +42,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      * @dataProvider ConditionalKeywordProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testConditionCreatesSimpleStatement($keyword, $attribute)
+    public function testConditionCreatesSimpleStatement($keyword, $attribute): void
     {
         $method = $this->get_accessible_reflection_method('sql_condition');
 
@@ -58,7 +58,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testConditionCreatesSimpleJoinStatement()
+    public function testConditionCreatesSimpleJoinStatement(): void
     {
         $method = $this->get_accessible_reflection_method('sql_condition');
 
@@ -77,7 +77,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testConditionCreatesGroupedJoinStatement()
+    public function testConditionCreatesGroupedJoinStatement(): void
     {
         $method = $this->get_accessible_reflection_method('sql_condition');
 
@@ -101,7 +101,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      * @dataProvider ConditionalKeywordProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testConditionWithNonDefaultOperator($keyword, $attribute)
+    public function testConditionWithNonDefaultOperator($keyword, $attribute): void
     {
         $method = $this->get_accessible_reflection_method('sql_condition');
 
@@ -121,7 +121,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      * @dataProvider ConditionalKeywordProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testConditionExtendingWithDefaultConnector($keyword, $attribute)
+    public function testConditionExtendingWithDefaultConnector($keyword, $attribute): void
     {
         $string = "$keyword a = b";
         $method = $this->get_accessible_reflection_method('sql_condition');
@@ -144,7 +144,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      * @dataProvider ConditionalKeywordProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testConditionExtendingWithSpecifiedConnector($keyword, $attribute)
+    public function testConditionExtendingWithSpecifiedConnector($keyword, $attribute): void
     {
         $string = "$keyword a = b";
 
@@ -169,7 +169,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      * @dataProvider conditionalKeywordProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testGroupedSQLCondition($keyword, $attribute)
+    public function testGroupedSQLCondition($keyword, $attribute): void
     {
         $method_cond = $this->get_accessible_reflection_method('sql_condition');
 
@@ -187,7 +187,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testWhereWithJoinTypeUsing()
+    public function testWhereWithJoinTypeUsing(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1` USING (column3)');
         $this->set_reflection_property_value('is_unfinished_join', FALSE);
@@ -206,7 +206,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testWhereWithJoinTypeOn()
+    public function testWhereWithJoinTypeOn(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`ON (`column2` = `column3`)');
         $this->set_reflection_property_value('is_unfinished_join', FALSE);
@@ -225,7 +225,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testWhereWithJoinTypeEmpty()
+    public function testWhereWithJoinTypeEmpty(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`ON (`column2` = `column3`)');
         $this->set_reflection_property_value('is_unfinished_join', FALSE);
@@ -244,7 +244,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testHavingWithJoinTypeUsing()
+    public function testHavingWithJoinTypeUsing(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1` USING (column3)');
         $this->set_reflection_property_value('is_unfinished_join', FALSE);
@@ -263,7 +263,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testHavingWithJoinTypeOn()
+    public function testHavingWithJoinTypeOn(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`ON (`column2` = `column3`)');
         $this->set_reflection_property_value('is_unfinished_join', FALSE);
@@ -282,7 +282,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testHavingWithJoinTypeEmpty()
+    public function testHavingWithJoinTypeEmpty(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`ON (`column2` = `column3`)');
         $this->set_reflection_property_value('is_unfinished_join', FALSE);
@@ -301,7 +301,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartOnGroupWithJoinTypeUsing()
+    public function testStartOnGroupWithJoinTypeUsing(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table2` USING (`column1`)');
         $this->set_reflection_property_value('join_type', 'using');
@@ -318,7 +318,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartOnGroupWithJoinTypeOn()
+    public function testStartOnGroupWithJoinTypeOn(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table2` USING (`column1`)');
         $this->set_reflection_property_value('join_type', 'on');
@@ -335,7 +335,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartOnGroupWithEmptyJoinType()
+    public function testStartOnGroupWithEmptyJoinType(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -354,7 +354,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartHavingGroupWithJoinTypeUsing()
+    public function testStartHavingGroupWithJoinTypeUsing(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1` USING (`column1`)');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -373,7 +373,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartHavingGroupWithJoinTypeOn()
+    public function testStartHavingGroupWithJoinTypeOn(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`ON (`column1` = `column2`)');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -392,7 +392,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartHavingGroupWithJoinTypeEmpty()
+    public function testStartHavingGroupWithJoinTypeEmpty(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`ON (`column1` = `column2`)');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -411,7 +411,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartHavingGroupWithJoinTypeEmptyDoesntchangeJoinType()
+    public function testStartHavingGroupWithJoinTypeEmptyDoesntchangeJoinType(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -429,7 +429,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartWhereGroupWithJoinTypeUsing()
+    public function testStartWhereGroupWithJoinTypeUsing(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1` USING (`column1`)');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -448,7 +448,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartWhereGroupWithJoinTypeOn()
+    public function testStartWhereGroupWithJoinTypeOn(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`ON (`column1` = `column2`)');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -467,7 +467,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartWhereGroupWithJoinTypeEmpty()
+    public function testStartWhereGroupWithJoinTypeEmpty(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`ON (`column1` = `column2`)');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -486,7 +486,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartWhereGroupWithJoinTypeEmptyDoesntchangeJoinType()
+    public function testStartWhereGroupWithJoinTypeEmptyDoesntchangeJoinType(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -504,7 +504,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartOnGroupSetsRightJoinType()
+    public function testStartOnGroupSetsRightJoinType(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1` USING (`column1`) INNER JOIN `table2`');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -522,7 +522,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartOnGroupReturnsOnWrongJoinType()
+    public function testStartOnGroupReturnsOnWrongJoinType(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1` USING (`column1`) INNER JOIN `table2`');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -541,7 +541,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testStartOnGroupJoinTypeDoesntChange()
+    public function testStartOnGroupJoinTypeDoesntChange(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1` USING (`column1`) INNER JOIN `table2`');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -559,7 +559,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_end
      */
-    public function testEndOnGroupWithJoinTypeEmpty()
+    public function testEndOnGroupWithJoinTypeEmpty(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -577,7 +577,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_end
      */
-    public function testEndOnGroupWithJoinTypeUsing()
+    public function testEndOnGroupWithJoinTypeUsing(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table2` USING (`column1`)');
         $this->set_reflection_property_value('join_type', 'using');
@@ -594,7 +594,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testOnWithJoinTypeUsing()
+    public function testOnWithJoinTypeUsing(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1` USING (`column1`)');
         $this->set_reflection_property_value('is_unfinished_join', FALSE);
@@ -613,7 +613,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testOnWithJoinTypeOn()
+    public function testOnWithJoinTypeOn(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`ON (`column1` = `column2`)');
         $this->set_reflection_property_value('is_unfinished_join', FALSE);
@@ -632,7 +632,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testOnWithJoinTypeEmpty()
+    public function testOnWithJoinTypeEmpty(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -651,7 +651,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testOnWithJoinTypeUsingDoesntChangeJoinType()
+    public function testOnWithJoinTypeUsingDoesntChangeJoinType(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1` USING (`column1`)');
         $this->set_reflection_property_value('is_unfinished_join', FALSE);
@@ -669,7 +669,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testOnSettingFinishedJoin()
+    public function testOnSettingFinishedJoin(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -687,7 +687,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testWhereSettingFinishedJoin()
+    public function testWhereSettingFinishedJoin(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -705,7 +705,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testHavingSettingFinishedJoin()
+    public function testHavingSettingFinishedJoin(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -723,7 +723,7 @@ class DatabaseDMLQueryBuilderQueryPartsConditionTest extends DatabaseDMLQueryBui
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_condition
      */
-    public function testOnSetRightJoinType()
+    public function testOnSetRightJoinType(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN `table1`');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);

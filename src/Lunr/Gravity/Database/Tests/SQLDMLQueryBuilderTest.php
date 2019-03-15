@@ -27,7 +27,7 @@ abstract class SQLDMLQueryBuilderTest extends LunrBaseTest
      /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class = $this->getMockBuilder('Lunr\Gravity\Database\SQLDMLQueryBuilder')
                             ->getMockForAbstractClass();
@@ -38,7 +38,7 @@ abstract class SQLDMLQueryBuilderTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);

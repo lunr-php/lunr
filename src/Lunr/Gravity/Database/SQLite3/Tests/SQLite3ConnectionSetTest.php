@@ -25,7 +25,7 @@ class SQLite3ConnectionSetTest extends SQLite3ConnectionTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->emptySetUp();
     }
@@ -35,7 +35,7 @@ class SQLite3ConnectionSetTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::set_configuration
      */
-    public function testSetConfigurationSetsDatabaseCorrectly()
+    public function testSetConfigurationSetsDatabaseCorrectly(): void
     {
 
         $this->configuration->expects($this->any())
@@ -57,7 +57,7 @@ class SQLite3ConnectionSetTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::set_configuration
      */
-    public function testSetConfigurationDoesNotSetDatabase()
+    public function testSetConfigurationDoesNotSetDatabase(): void
     {
 
         $this->configuration->expects($this->any())

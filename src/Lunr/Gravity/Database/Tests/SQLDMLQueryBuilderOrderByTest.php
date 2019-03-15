@@ -25,7 +25,7 @@ class SQLDMLQueryBuilderOrderByTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::order_by
      */
-    public function testOrderByWithDefaultOrder()
+    public function testOrderByWithDefaultOrder(): void
     {
         $this->class->order_by('col');
         $value = $this->get_reflection_property_value('order_by');
@@ -38,7 +38,7 @@ class SQLDMLQueryBuilderOrderByTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::order_by
      */
-    public function testOrderByWithCustomOrder()
+    public function testOrderByWithCustomOrder(): void
     {
         $this->class->order_by('col', FALSE);
         $value = $this->get_reflection_property_value('order_by');
@@ -51,7 +51,7 @@ class SQLDMLQueryBuilderOrderByTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::order_by
      */
-    public function testOrderByReturnsSelfReference()
+    public function testOrderByReturnsSelfReference(): void
     {
         $return = $this->class->order_by( 'col' );
 

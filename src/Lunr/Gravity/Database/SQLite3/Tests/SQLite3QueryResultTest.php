@@ -49,7 +49,7 @@ class SQLite3QueryResultTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUpWithResult()
+    public function setUpWithResult(): void
     {
         $this->sqlite3 = $this->getMockBuilder('Lunr\Gravity\Database\SQLite3\LunrSQLite3')->getMock();
 
@@ -69,7 +69,7 @@ class SQLite3QueryResultTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUpWithNoResult()
+    public function setUpWithNoResult(): void
     {
         $this->sqlite3 = $this->getMockBuilder('Lunr\Gravity\Database\SQLite3\LunrSQLite3')->getMock();
 
@@ -92,7 +92,7 @@ class SQLite3QueryResultTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUpWithFailedQuery()
+    public function setUpWithFailedQuery(): void
     {
         $this->sqlite3 = $this->getMockBuilder('Lunr\Gravity\Database\SQLite3\LunrSQLite3')->getMock();
 
@@ -111,7 +111,7 @@ class SQLite3QueryResultTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->sqlite3);
         unset($this->query);

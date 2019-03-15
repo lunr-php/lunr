@@ -27,7 +27,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::get_select_query
      */
-    public function testGetSelectQuery()
+    public function testGetSelectQuery(): void
     {
         $this->builder->expects($this->once())
                       ->method('get_select_query')
@@ -41,7 +41,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::select_mode
      */
-    public function testSelectMode()
+    public function testSelectMode(): void
     {
         $this->builder->expects($this->once())
                       ->method('select_mode')
@@ -56,7 +56,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::select
      */
-    public function testSelectWithOneColumn()
+    public function testSelectWithOneColumn(): void
     {
         $this->escaper->expects($this->once())
                       ->method('result_column')
@@ -76,7 +76,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::select
      */
-    public function testSelectWithMultipleColumns()
+    public function testSelectWithMultipleColumns(): void
     {
         $this->escaper->expects($this->at(0))
                       ->method('result_column')
@@ -101,7 +101,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::from
      */
-    public function testFrom()
+    public function testFrom(): void
     {
         $this->escaper->expects($this->once())
                       ->method('table')
@@ -121,7 +121,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::join
      */
-    public function testJoin()
+    public function testJoin(): void
     {
         $this->escaper->expects($this->once())
                       ->method('table')
@@ -141,7 +141,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::group_by
      */
-    public function testGroupBy()
+    public function testGroupBy(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -161,7 +161,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::order_by
      */
-    public function testOrderBy()
+    public function testOrderBy(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -181,7 +181,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::limit
      */
-    public function testLimit()
+    public function testLimit(): void
     {
         $this->escaper->expects($this->at(0))
                       ->method('intvalue')
@@ -206,7 +206,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::union
      */
-    public function testUnion()
+    public function testUnion(): void
     {
         $this->escaper->expects($this->once())
                       ->method('query_value')
@@ -226,7 +226,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::union
      */
-    public function testUnionAll()
+    public function testUnionAll(): void
     {
         $this->escaper->expects($this->once())
                       ->method('query_value')

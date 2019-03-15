@@ -32,7 +32,7 @@ abstract class MySQLQueryEscaperTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLConnection')
                          ->disableOriginalConstructor()
@@ -46,7 +46,7 @@ abstract class MySQLQueryEscaperTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->db);
         unset($this->class);
@@ -58,7 +58,7 @@ abstract class MySQLQueryEscaperTest extends LunrBaseTest
      *
      * @return array $indices Array of invalid indices
      */
-    public function invalidIndicesProvider()
+    public function invalidIndicesProvider(): array
     {
         $indices   = [];
         $indices[] = [ NULL ];
@@ -75,7 +75,7 @@ abstract class MySQLQueryEscaperTest extends LunrBaseTest
      *
      * @return array $keywords Array of valid index keywords.
      */
-    public function validIndexKeywordProvider()
+    public function validIndexKeywordProvider(): array
     {
         $keywords   = [];
         $keywords[] = [ 'USE' ];
@@ -90,7 +90,7 @@ abstract class MySQLQueryEscaperTest extends LunrBaseTest
      *
      * @return array $for Array of valid index use definitions.
      */
-    public function validIndexForProvider()
+    public function validIndexForProvider(): array
     {
         $for   = [];
         $for[] = [ 'JOIN' ];

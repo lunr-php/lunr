@@ -22,7 +22,7 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
     /**
      * Override the default setUp with a setup with no result.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->setUpWithNoResult();
     }
@@ -32,7 +32,7 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::error_message
      */
-    public function testErrorMessageIsEmpty()
+    public function testErrorMessageIsEmpty(): void
     {
         $property = $this->get_accessible_reflection_property('error_message');
         $this->assertSame('', $property->getValue($this->class));
@@ -43,7 +43,7 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::error_number
      */
-    public function testErrorNumberIsZero()
+    public function testErrorNumberIsZero(): void
     {
         $property = $this->get_accessible_reflection_property('error_number');
         $this->assertSame(0, $property->getValue($this->class));
@@ -54,7 +54,7 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::insert_id
      */
-    public function testInsertIDIsZero()
+    public function testInsertIDIsZero(): void
     {
         $property = $this->get_accessible_reflection_property('insert_id');
         $this->assertSame(0, $property->getValue($this->class));
@@ -65,10 +65,10 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::affected_rows
      */
-    public function testAffectedRowsIsNumber()
+    public function testAffectedRowsIsNumber(): void
     {
         $property = $this->get_accessible_reflection_property('affected_rows');
-        $this->assertInternalType('int', $property->getValue($this->class));
+        $this->assertIsInt($property->getValue($this->class));
     }
 
     /**
@@ -76,7 +76,7 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::query
      */
-    public function testQueryIsPassedCorrectly()
+    public function testQueryIsPassedCorrectly(): void
     {
         $property = $this->get_accessible_reflection_property('query');
         $this->assertSame($this->query, $property->getValue($this->class));
@@ -87,7 +87,7 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::affected_rows
      */
-    public function testAffectedRowsReturnsNumber()
+    public function testAffectedRowsReturnsNumber(): void
     {
         $this->set_reflection_property_value('affected_rows', 12);
         $this->assertSame(12, $this->class->affected_rows());
@@ -98,7 +98,7 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQlite3QueryResult::error_message
      */
-    public function testErrorMessageReturnsString()
+    public function testErrorMessageReturnsString(): void
     {
         $this->set_reflection_property_value('error_message', '');
         $this->assertSame('', $this->class->error_message());
@@ -109,7 +109,7 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQlite3QueryResult::error_number
      */
-    public function testErrorNumberReturnsNumber()
+    public function testErrorNumberReturnsNumber(): void
     {
         $this->set_reflection_property_value('error_number', 0);
         $this->assertSame(0, $this->class->error_number());
@@ -120,7 +120,7 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQlite3QueryResult::insert_id
      */
-    public function testInsertIDReturnsNumber()
+    public function testInsertIDReturnsNumber(): void
     {
         $this->set_reflection_property_value('insert_id', 0);
         $this->assertSame(0, $this->class->insert_id());
@@ -131,7 +131,7 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQlite3QueryResult::query
      */
-    public function testQueryReturnsString()
+    public function testQueryReturnsString(): void
     {
         $this->set_reflection_property_value('query', '');
         $this->assertSame('', $this->class->query());
@@ -140,7 +140,7 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
     /**
      * Test that the sqlite3 class is passed by reference.
      */
-    public function testSQLite3IsPassedByReference()
+    public function testSQLite3IsPassedByReference(): void
     {
         $property = $this->get_accessible_reflection_property('sqlite3');
 

@@ -26,7 +26,7 @@ class MySQLConnectionEscapeTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::escape_string
      */
-    public function testEscapeStringThrowsExceptionWhenNotConnected()
+    public function testEscapeStringThrowsExceptionWhenNotConnected(): void
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -49,7 +49,7 @@ class MySQLConnectionEscapeTest extends MySQLConnectionTest
      * @requires     extension mysqli
      * @covers       Lunr\Gravity\Database\MySQL\MySQLConnection::escape_string
      */
-    public function testEscapeString($string, $part_escaped, $escaped)
+    public function testEscapeString($string, $part_escaped, $escaped): void
     {
         $property = $this->get_accessible_reflection_property('connected');
         $property->setValue($this->class, TRUE);

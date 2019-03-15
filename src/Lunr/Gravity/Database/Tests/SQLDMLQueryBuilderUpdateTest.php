@@ -27,7 +27,7 @@ class SQLDMLQueryBuilderUpdateTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsUpdateTest::testIncrementalUpdate
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::update
      */
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $this->class->update('table');
         $value = $this->get_reflection_property_value('update');
@@ -40,7 +40,7 @@ class SQLDMLQueryBuilderUpdateTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::update
      */
-    public function testUpdateReturnsSelfReference()
+    public function testUpdateReturnsSelfReference(): void
     {
         $return = $this->class->update('table');
 
@@ -53,7 +53,7 @@ class SQLDMLQueryBuilderUpdateTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::set
      */
-    public function testSetReturnsSelfReference()
+    public function testSetReturnsSelfReference(): void
     {
         $return = $this->class->set([ 'column1' => 'value1' ]);
 

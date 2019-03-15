@@ -26,7 +26,7 @@ class DatabaseDMLQueryBuilderQueryPartsFromTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_from
      */
-    public function testFromWithoutIndexHints()
+    public function testFromWithoutIndexHints(): void
     {
         $method = $this->get_accessible_reflection_method('sql_from');
 
@@ -44,7 +44,7 @@ class DatabaseDMLQueryBuilderQueryPartsFromTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_from
      */
-    public function testFromWithSingleIndexHint()
+    public function testFromWithSingleIndexHint(): void
     {
         $method = $this->get_accessible_reflection_method('sql_from');
         $hints  = [ 'index_hint' ];
@@ -63,7 +63,7 @@ class DatabaseDMLQueryBuilderQueryPartsFromTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_from
      */
-    public function testFromWithMultipleIndexHints()
+    public function testFromWithMultipleIndexHints(): void
     {
         $method = $this->get_accessible_reflection_method('sql_from');
         $hints  = [ 'index_hint', 'index_hint' ];
@@ -82,7 +82,7 @@ class DatabaseDMLQueryBuilderQueryPartsFromTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_from
      */
-    public function testFromWithNullIndexHints()
+    public function testFromWithNullIndexHints(): void
     {
         $method = $this->get_accessible_reflection_method('sql_from');
         $hints  = [ NULL, NULL ];
@@ -99,7 +99,7 @@ class DatabaseDMLQueryBuilderQueryPartsFromTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_from
      */
-    public function testIncrementalFromWithoutIndices()
+    public function testIncrementalFromWithoutIndices(): void
     {
         $method = $this->get_accessible_reflection_method('sql_from');
 
@@ -118,7 +118,7 @@ class DatabaseDMLQueryBuilderQueryPartsFromTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_from
      */
-    public function testIncrementalFromWithIndices()
+    public function testIncrementalFromWithIndices(): void
     {
         $method = $this->get_accessible_reflection_method('sql_from');
         $hints  = [ 'index_hint' ];

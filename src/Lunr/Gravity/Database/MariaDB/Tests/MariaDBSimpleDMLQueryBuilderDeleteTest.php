@@ -29,7 +29,7 @@ class MariaDBSimpleDMLQueryBuilderDeleteTest extends MariaDBSimpleDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\MariaDB\MariaDBSimpleDMLQueryBuilder::returning
      */
-    public function testDeleteReturningSingleColumn()
+    public function testDeleteReturningSingleColumn(): void
     {
         $this->escaper->expects($this->once())
                       ->method('result_column')
@@ -49,7 +49,7 @@ class MariaDBSimpleDMLQueryBuilderDeleteTest extends MariaDBSimpleDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\MariaDB\MariaDBSimpleDMLQueryBuilder::returning
      */
-    public function testDeleteReturningMultipleColumns()
+    public function testDeleteReturningMultipleColumns(): void
     {
         $this->escaper->expects($this->exactly(2))
                       ->method('result_column')

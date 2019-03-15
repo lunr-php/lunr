@@ -31,7 +31,7 @@ class MariaDBDMLQueryBuilderDeleteTest extends MariaDBDMLQueryBuilderTest
      * @dataProvider expectedReturningDataProvider
      * @covers       Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder::returning
      */
-    public function testDeleteWithReturning($value, $expected)
+    public function testDeleteWithReturning($value, $expected): void
     {
         $property = $this->builder_reflection->getProperty('returning');
         $property->setAccessible(TRUE);
@@ -46,7 +46,7 @@ class MariaDBDMLQueryBuilderDeleteTest extends MariaDBDMLQueryBuilderTest
      *
      * @return array $expectedReturn
      */
-    public function expectedReturningDataProvider()
+    public function expectedReturningDataProvider(): array
     {
         $expected_return   = [];
         $expected_return[] = ['*', 'RETURNING *'];

@@ -25,7 +25,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->resultSetSetup();
     }
@@ -35,7 +35,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
      *
      * @requires extension mysqli
      */
-    public function testSuccessIsTrue()
+    public function testSuccessIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('success');
         $property->setAccessible(TRUE);
@@ -48,7 +48,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
      *
      * @requires extension mysqli
      */
-    public function testFreedIsFalse()
+    public function testFreedIsFalse(): void
     {
         $property = $this->result_reflection->getProperty('freed');
         $property->setAccessible(TRUE);
@@ -62,7 +62,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::has_failed
      */
-    public function testHasFailedReturnsFalse()
+    public function testHasFailedReturnsFalse(): void
     {
         $this->assertFalse($this->result->has_failed());
     }
@@ -73,14 +73,14 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::number_of_rows
      */
-    public function testNumberOfRowsReturnsNumber()
+    public function testNumberOfRowsReturnsNumber(): void
     {
         $class = $this->result_reflection->getProperty('num_rows');
         $class->setAccessible(TRUE);
         $class->setValue($this->result, 5);
 
         $value = $this->result->number_of_rows();
-        $this->assertInternalType('int', $value);
+        $this->assertIsInt($value);
         $this->assertEquals(5, $value);
     }
 
@@ -90,7 +90,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_array
      */
-    public function testResultArrayReturnsArray()
+    public function testResultArrayReturnsArray(): void
     {
         $result = [
             [
@@ -109,7 +109,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
 
         $value = $this->result->result_array();
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEquals($result, $value);
     }
 
@@ -119,7 +119,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_row
      */
-    public function testResultRowReturnsArray()
+    public function testResultRowReturnsArray(): void
     {
         $result = [ 'col1' => 'val1', 'col2' => 'val2' ];
         $this->query_result->expects($this->once())
@@ -128,7 +128,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
 
         $value = $this->result->result_row();
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEquals($result, $value);
     }
 
@@ -138,7 +138,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_column
      */
-    public function testResultColumnReturnsArray()
+    public function testResultColumnReturnsArray(): void
     {
         $this->query_result->expects($this->at(0))
                            ->method('fetch_assoc')
@@ -151,7 +151,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
                            ->will($this->returnValue(NULL));
         $value = $this->result->result_column('col1');
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEquals([ 'val1', 'val3' ], $value);
     }
 
@@ -161,7 +161,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_cell
      */
-    public function testResultCellReturnsValue()
+    public function testResultCellReturnsValue(): void
     {
         $this->query_result->expects($this->once())
                            ->method('fetch_assoc')
@@ -176,7 +176,7 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_cell
      */
-    public function testResultCellReturnsNullIfColumnDoesNotExist()
+    public function testResultCellReturnsNullIfColumnDoesNotExist(): void
     {
         $this->query_result->expects($this->once())
                            ->method('fetch_assoc')

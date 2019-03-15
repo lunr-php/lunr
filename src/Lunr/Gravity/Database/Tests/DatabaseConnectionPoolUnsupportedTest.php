@@ -25,7 +25,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->emptySetup();
     }
@@ -35,7 +35,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetNewAndReadonlyConnectionReturnsNull()
+    public function testGetNewAndReadonlyConnectionReturnsNull(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -48,7 +48,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetNewAndReadWriteConnectionReturnsNull()
+    public function testGetNewAndReadWriteConnectionReturnsNull(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -61,7 +61,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetReadonlyConnectionReturnsNull()
+    public function testGetReadonlyConnectionReturnsNull(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -74,7 +74,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetReadwriteConnectionReturnsNull()
+    public function testGetReadwriteConnectionReturnsNull(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -87,7 +87,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetNewAndReadonlyConnectionDoesNotAlterPool()
+    public function testGetNewAndReadonlyConnectionDoesNotAlterPool(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -109,7 +109,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetNewAndReadWriteConnectionDoesNotAlterPool()
+    public function testGetNewAndReadWriteConnectionDoesNotAlterPool(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -131,7 +131,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetReadonlyConnectionDoesNotAlterPool()
+    public function testGetReadonlyConnectionDoesNotAlterPool(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -153,7 +153,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetReadWriteConnectionDoesNotAlterPool()
+    public function testGetReadWriteConnectionDoesNotAlterPool(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -176,7 +176,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      * @depends testGetNewAndReadonlyConnectionReturnsNull
      * @covers  Lunr\Gravity\Database\DatabaseConnectionPool::get_new_ro_connection
      */
-    public function testGetNewRoConnectionReturnsNull()
+    public function testGetNewRoConnectionReturnsNull(): void
     {
         $this->assertNull($this->pool->get_new_ro_connection());
     }
@@ -187,7 +187,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      * @depends testGetNewAndReadWriteConnectionReturnsNull
      * @covers  Lunr\Gravity\Database\DatabaseConnectionPool::get_new_rw_connection
      */
-    public function testGetNewRwConnectionReturnsNull()
+    public function testGetNewRwConnectionReturnsNull(): void
     {
         $this->assertNull($this->pool->get_new_rw_connection());
     }
@@ -198,7 +198,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      * @depends testGetReadonlyConnectionReturnsNull
      * @covers  Lunr\Gravity\Database\DatabaseConnectionPool::get_ro_connection
      */
-    public function testGetRoConnectionReturnsNull()
+    public function testGetRoConnectionReturnsNull(): void
     {
         $this->assertNull($this->pool->get_ro_connection());
     }
@@ -209,7 +209,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      * @depends testGetReadwriteConnectionReturnsNull
      * @covers  Lunr\Gravity\Database\DatabaseConnectionPool::get_rw_connection
      */
-    public function testGetRwConnectionReturnsNull()
+    public function testGetRwConnectionReturnsNull(): void
     {
         $this->assertNull($this->pool->get_rw_connection());
     }
@@ -220,7 +220,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      * @depends testGetNewAndReadonlyConnectionDoesNotAlterPool
      * @covers  Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetNewRoConnectionDoesNotAlterPool()
+    public function testGetNewRoConnectionDoesNotAlterPool(): void
     {
         $property = $this->pool_reflection->getProperty('ro_pool');
         $property->setAccessible(TRUE);
@@ -240,7 +240,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      * @depends testGetNewAndReadWriteConnectionDoesNotAlterPool
      * @covers  Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetNewRwConnectionDoesNotAlterPool()
+    public function testGetNewRwConnectionDoesNotAlterPool(): void
     {
         $property = $this->pool_reflection->getProperty('ro_pool');
         $property->setAccessible(TRUE);
@@ -260,7 +260,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      * @depends testGetReadonlyConnectionDoesNotAlterPool
      * @covers  Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetRoConnectionDoesNotAlterPool()
+    public function testGetRoConnectionDoesNotAlterPool(): void
     {
         $property = $this->pool_reflection->getProperty('ro_pool');
         $property->setAccessible(TRUE);
@@ -280,7 +280,7 @@ class DatabaseConnectionPoolUnsupportedTest extends DatabaseConnectionPoolTest
      * @depends testGetReadWriteConnectionDoesNotAlterPool
      * @covers  Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetRwConnectionDoesNotAlterPool()
+    public function testGetRwConnectionDoesNotAlterPool(): void
     {
         $property = $this->pool_reflection->getProperty('ro_pool');
         $property->setAccessible(TRUE);

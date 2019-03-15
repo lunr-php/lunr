@@ -26,7 +26,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir
      */
-    public function testMkdirReturnsFalseWhenAccessModeIsString()
+    public function testMkdirReturnsFalseWhenAccessModeIsString(): void
     {
         $directory = TEST_STATICS . '/Gravity/test_directory';
 
@@ -42,10 +42,10 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
      *
      * @param mixed $mode Invalid mode value
      *
-     * @dataProvider invalidDirModeValues
+     * @dataProvider invalidDirModeValuesProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir
      */
-    public function testMkdirReturnsFalseWhenAccessModeIsInvalid($mode)
+    public function testMkdirReturnsFalseWhenAccessModeIsInvalid($mode): void
     {
         $directory = TEST_STATICS . '/Gravity/test_directory';
 
@@ -61,7 +61,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir
      */
-    public function testMkdirWhenFailsToCreateADirectory()
+    public function testMkdirWhenFailsToCreateADirectory(): void
     {
         $directory = TEST_STATICS . '/Gravity/test_directory';
 
@@ -81,10 +81,10 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
      *
      * @param integer $mode Valid mode value
      *
-     * @dataProvider validDirModeValues
+     * @dataProvider validDirModeValuesProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir
      */
-    public function testMkdirWhenCreatesADirectory($mode)
+    public function testMkdirWhenCreatesADirectory($mode): void
     {
         $directory = TEST_STATICS . '/Gravity/test_directory';
 
@@ -99,7 +99,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir
      */
-    public function testMkdirWhenCreatesADirectoryRecursively()
+    public function testMkdirWhenCreatesADirectoryRecursively(): void
     {
         $directory = TEST_STATICS . '/Gravity/test_directory/nested_dir';
 

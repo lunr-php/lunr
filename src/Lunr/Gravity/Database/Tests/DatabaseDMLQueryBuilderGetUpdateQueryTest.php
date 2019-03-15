@@ -27,7 +27,7 @@ class DatabaseDMLQueryBuilderGetUpdateQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateUpdateModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_update_query
      */
-    public function testGetUpdateQueryWithNoTable()
+    public function testGetUpdateQueryWithNoTable(): void
     {
         $this->set_reflection_property_value('update_mode', [ 'LOW_PRIORITY', 'IGNORE' ]);
         $this->set_reflection_property_value('set', 'SET col1 = val1, col2 = val2');
@@ -46,7 +46,7 @@ class DatabaseDMLQueryBuilderGetUpdateQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateUpdateModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_update_query
      */
-    public function testGetUpdateQueryForSingleTable()
+    public function testGetUpdateQueryForSingleTable(): void
     {
         $this->set_reflection_property_value('update', 'table1');
         $this->set_reflection_property_value('update_mode', [ 'LOW_PRIORITY', 'IGNORE' ]);
@@ -66,7 +66,7 @@ class DatabaseDMLQueryBuilderGetUpdateQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateUpdateModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_update_query
      */
-    public function testGetUpdateQueryForMultipleTables()
+    public function testGetUpdateQueryForMultipleTables(): void
     {
         $this->set_reflection_property_value('update', 'table1, table2');
         $this->set_reflection_property_value('update_mode', [ 'LOW_PRIORITY', 'IGNORE' ]);
@@ -86,7 +86,7 @@ class DatabaseDMLQueryBuilderGetUpdateQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateUpdateModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_update_query
      */
-    public function testGetUpdateQueryForMultipleTablesWithJoin()
+    public function testGetUpdateQueryForMultipleTablesWithJoin(): void
     {
         $this->set_reflection_property_value('update', 'table1');
         $this->set_reflection_property_value('join', 'INNER JOIN table2');

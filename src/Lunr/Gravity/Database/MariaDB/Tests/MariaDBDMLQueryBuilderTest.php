@@ -40,7 +40,7 @@ abstract class MariaDBDMLQueryBuilderTest extends TestCase
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->builder            = new MariaDBDMLQueryBuilder();
         $this->builder_reflection = new ReflectionClass('Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder');
@@ -49,7 +49,7 @@ abstract class MariaDBDMLQueryBuilderTest extends TestCase
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->builder);
         unset($this->builder_reflection);

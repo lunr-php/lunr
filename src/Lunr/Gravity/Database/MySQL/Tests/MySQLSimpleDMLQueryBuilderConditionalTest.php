@@ -27,7 +27,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on
      */
-    public function testOn()
+    public function testOn(): void
     {
         $this->escaper->expects($this->at(0))
                       ->method('column')
@@ -52,7 +52,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_like
      */
-    public function testOnLike()
+    public function testOnLike(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -72,7 +72,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_in
      */
-    public function testOnIn()
+    public function testOnIn(): void
     {
         $this->escaper->expects($this->at(0))
                       ->method('value')
@@ -107,7 +107,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_between
      */
-    public function testOnBetween()
+    public function testOnBetween(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -137,7 +137,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_regexp
      */
-    public function testOnRegexp()
+    public function testOnRegexp(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -157,7 +157,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::start_on_group
      */
-    public function testStartOnGroupReturnsSelf()
+    public function testStartOnGroupReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('start_on_group')
@@ -171,7 +171,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::end_on_group
      */
-    public function testEndOnGroupReturnsSelf()
+    public function testEndOnGroupReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('end_on_group')
@@ -185,7 +185,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_null
      */
-    public function testOnNull()
+    public function testOnNull(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -205,7 +205,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_null
      */
-    public function testOnNotNull()
+    public function testOnNotNull(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -225,7 +225,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where
      */
-    public function testWhere()
+    public function testWhere(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -250,7 +250,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::start_where_group
      */
-    public function testStartWhereGroup()
+    public function testStartWhereGroup(): void
     {
         $this->builder->expects($this->once())
                       ->method('start_where_group')
@@ -264,7 +264,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::end_where_group
      */
-    public function testEndWhereGroup()
+    public function testEndWhereGroup(): void
     {
         $this->builder->expects($this->once())
                       ->method('end_where_group')
@@ -278,7 +278,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::sql_or
      */
-    public function testSqlOr()
+    public function testSqlOr(): void
     {
         $this->builder->expects($this->once())
                       ->method('sql_or')
@@ -292,7 +292,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::sql_and
      */
-    public function testSqlAnd()
+    public function testSqlAnd(): void
     {
         $this->builder->expects($this->once())
                       ->method('sql_and')
@@ -306,7 +306,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_like
      */
-    public function testWhereLike()
+    public function testWhereLike(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -326,7 +326,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_in
      */
-    public function testWhereIn()
+    public function testWhereIn(): void
     {
         $this->escaper->expects($this->at(0))
                       ->method('value')
@@ -361,7 +361,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_between
      */
-    public function testWhereBetween()
+    public function testWhereBetween(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -391,7 +391,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_regexp
      */
-    public function testWhereRegexp()
+    public function testWhereRegexp(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -411,7 +411,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_null
      */
-    public function testWhereNull()
+    public function testWhereNull(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -431,7 +431,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_null
      */
-    public function testWhereNotNull()
+    public function testWhereNotNull(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -451,7 +451,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having
      */
-    public function testHaving()
+    public function testHaving(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -476,7 +476,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having_like
      */
-    public function testHavingLike()
+    public function testHavingLike(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -496,7 +496,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having_in
      */
-    public function testHavingIn()
+    public function testHavingIn(): void
     {
         $this->escaper->expects($this->at(0))
                       ->method('value')
@@ -531,7 +531,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having_between
      */
-    public function testHavingBetween()
+    public function testHavingBetween(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -561,7 +561,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having_regexp
      */
-    public function testHavingRegexp()
+    public function testHavingRegexp(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -581,7 +581,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having_null
      */
-    public function testHavingNull()
+    public function testHavingNull(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -601,7 +601,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having_null
      */
-    public function testHavingNotNull()
+    public function testHavingNotNull(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -621,7 +621,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::start_having_group
      */
-    public function testStartHavingGroup()
+    public function testStartHavingGroup(): void
     {
         $this->builder->expects($this->once())
                       ->method('start_having_group')
@@ -635,7 +635,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::end_having_group
      */
-    public function testEndHavingGroup()
+    public function testEndHavingGroup(): void
     {
         $this->builder->expects($this->once())
                       ->method('end_having_group')

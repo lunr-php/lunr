@@ -27,7 +27,7 @@ class MySQLDMLQueryBuilderGroupByTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::group_by
      */
-    public function testGroupByWithDefaultOrder()
+    public function testGroupByWithDefaultOrder(): void
     {
         $property = $this->builder_reflection->getProperty('group_by');
         $property->setAccessible(TRUE);
@@ -42,7 +42,7 @@ class MySQLDMLQueryBuilderGroupByTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::group_by
      */
-    public function testGroupByWithCustomOrder()
+    public function testGroupByWithCustomOrder(): void
     {
         $property = $this->builder_reflection->getProperty('group_by');
         $property->setAccessible(TRUE);
@@ -59,7 +59,7 @@ class MySQLDMLQueryBuilderGroupByTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::group_by
      */
-    public function testGroupByReturnsSelfReference()
+    public function testGroupByReturnsSelfReference(): void
     {
         $return = $this->builder->group_by('group1');
 

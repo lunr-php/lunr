@@ -29,7 +29,7 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->setUpNoPool();
     }
@@ -37,15 +37,18 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
     /**
      * Test that DatabaseConnection class is passed.
      */
-    public function testDatabaseConnectionIsPassed()
+    public function testDatabaseConnectionIsPassed(): void
     {
-        $this->assertPropertySame('db', $this->db);
+        $property = $this->reflection->getProperty('db');
+        $property->setAccessible(TRUE);
+
+        $this->assertSame($this->db, $property->getValue($this->class));
     }
 
     /**
      * Test that DatabaseConnection class is passed.
      */
-    public function testQueryEscaperIsStored()
+    public function testQueryEscaperIsStored(): void
     {
         $property = $this->reflection->getProperty('escaper');
         $property->setAccessible(TRUE);
@@ -56,7 +59,7 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
     /**
      * Test that $pool is NULL.
      */
-    public function testDatabaseConnectionPoolIsNull()
+    public function testDatabaseConnectionPoolIsNull(): void
     {
         $this->assertPropertySame('pool', NULL);
     }
@@ -66,7 +69,7 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::swap_connection
      */
-    public function testSwapConnectionSwapsConnection()
+    public function testSwapConnectionSwapsConnection(): void
     {
         $db = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLConnection')
                    ->disableOriginalConstructor()
@@ -87,7 +90,7 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::swap_connection
      */
-    public function testSwapConnectionSwapsQueryEscaper()
+    public function testSwapConnectionSwapsQueryEscaper(): void
     {
         $db = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLConnection')
                    ->disableOriginalConstructor()

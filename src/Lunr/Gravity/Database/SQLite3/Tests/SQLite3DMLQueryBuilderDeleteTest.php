@@ -27,12 +27,12 @@ class SQLite3DMLQueryBuilderDeleteTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::delete_mode
      */
-    public function testDeleteModeIgnoresUnknownValues()
+    public function testDeleteModeIgnoresUnknownValues(): void
     {
         $this->class->delete_mode('UNSUPPORTED');
         $value = $this->get_reflection_property_value('delete_mode');
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -41,7 +41,7 @@ class SQLite3DMLQueryBuilderDeleteTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::delete_mode
      */
-    public function testDeleteModeReturnsSelfReference()
+    public function testDeleteModeReturnsSelfReference(): void
     {
         $return = $this->class->delete_mode('IGNORE');
 

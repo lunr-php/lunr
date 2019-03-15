@@ -26,7 +26,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that the mysqli class was passed correctly.
      */
-    public function testMysqliPassed()
+    public function testMysqliPassed(): void
     {
         $this->assertPropertySame('mysqli', $this->mysqli);
     }
@@ -34,7 +34,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that rw_host is set correctly.
      */
-    public function testRWHostIsSetCorrectly()
+    public function testRWHostIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('rw_host', 'rw_host');
     }
@@ -42,7 +42,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that ro_host is set to rw_host.
      */
-    public function testROHostIsSetToRWHost()
+    public function testROHostIsSetToRWHost(): void
     {
         $this->assertPropertyEquals('ro_host', 'rw_host');
     }
@@ -50,7 +50,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that username is set correctly.
      */
-    public function testUsernameIsSetCorrectly()
+    public function testUsernameIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('user', 'username');
     }
@@ -58,7 +58,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that password is set correctly.
      */
-    public function testPasswordIsSetCorrectly()
+    public function testPasswordIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('pwd', 'password');
     }
@@ -66,7 +66,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that database is set correctly.
      */
-    public function testDatabaseIsSetCorrectly()
+    public function testDatabaseIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('db', 'database');
     }
@@ -74,7 +74,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that the value for port is taken from the php ini.
      */
-    public function testPortMatchesValueInPHPIni()
+    public function testPortMatchesValueInPHPIni(): void
     {
         $this->assertPropertyEquals('port', ini_get('mysqli.default_port'));
     }
@@ -82,7 +82,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that the value for socket is taken from the php ini.
      */
-    public function testSocketMatchesValueInPHPIni()
+    public function testSocketMatchesValueInPHPIni(): void
     {
         $this->assertPropertyEquals('socket', ini_get('mysqli.default_socket'));
     }
@@ -90,7 +90,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that database is set correctly.
      */
-    public function testQueryHintIsEmpty()
+    public function testQueryHintIsEmpty(): void
     {
         $this->assertPropertySame('query_hint', '');
     }
@@ -98,7 +98,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that ssl_key is set as NULL if not set in the configuration.
      */
-    public function testSSLKeyIsSetCorrectly()
+    public function testSSLKeyIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('ssl_key', NULL);
     }
@@ -106,7 +106,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that ssl_cert is set as NULL if not set in the configuration.
      */
-    public function testSSLCertIsSetCorrectly()
+    public function testSSLCertIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('ssl_cert', NULL);
     }
@@ -114,7 +114,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that ca_cert is set as NULL if not set in the configuration.
      */
-    public function testCACertIsSetCorrectly()
+    public function testCACertIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('ca_cert', NULL);
     }
@@ -122,7 +122,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that ca_path is set as NULL if not set in the configuration.
      */
-    public function testCAPathIsSetCorrectly()
+    public function testCAPathIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('ca_path', NULL);
     }
@@ -130,7 +130,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that cipher is set as NULL if not set in the configuration.
      */
-    public function testCipherIsSetCorrectly()
+    public function testCipherIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('cipher', NULL);
     }
@@ -138,7 +138,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
     /**
      * Test that options is set correctly.
      */
-    public function testOptionsIsSetCorrectly()
+    public function testOptionsIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('options', [ MYSQLI_OPT_INT_AND_FLOAT_NATIVE => TRUE ]);
     }
@@ -148,7 +148,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_new_dml_query_builder_object
      */
-    public function testGetNewDMLQueryBuilderObjectSimpleReturnsObject()
+    public function testGetNewDMLQueryBuilderObjectSimpleReturnsObject(): void
     {
         $value = $this->class->get_new_dml_query_builder_object();
 
@@ -160,7 +160,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_new_dml_query_builder_object
      */
-    public function testGetNewDMLQueryBuilderObjectReturnsObject()
+    public function testGetNewDMLQueryBuilderObjectReturnsObject(): void
     {
         $value = $this->class->get_new_dml_query_builder_object(FALSE);
 
@@ -174,7 +174,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_query_escaper_object
      */
-    public function testGetQueryEscaperObjectReturnsObject()
+    public function testGetQueryEscaperObjectReturnsObject(): void
     {
         $value = $this->class->get_query_escaper_object();
 
@@ -187,7 +187,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_query_escaper_object
      */
-    public function testGetQueryEscaperObjectCachesObject()
+    public function testGetQueryEscaperObjectCachesObject(): void
     {
         $property = $this->get_accessible_reflection_property('escaper');
         $this->assertNull($property->getValue($this->class));
@@ -203,7 +203,7 @@ class MySQLConnectionBaseTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::get_query_escaper_object
      */
-    public function testGetQueryEscaperObjectReturnsCachedObject()
+    public function testGetQueryEscaperObjectReturnsCachedObject(): void
     {
         $value1 = $this->class->get_query_escaper_object();
         $value2 = $this->class->get_query_escaper_object();

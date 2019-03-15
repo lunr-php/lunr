@@ -28,7 +28,7 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class = $this->getMockForAbstractClass('Lunr\Gravity\Database\DatabaseDMLQueryBuilder');
 
@@ -38,7 +38,7 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -49,7 +49,7 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
      *
      * @return array $variants Array of statement variants
      */
-    public function conditionalKeywordProvider()
+    public function conditionalKeywordProvider(): array
     {
         $variants   = [];
         $variants[] = [ 'WHERE', 'where' ];
@@ -64,7 +64,7 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
      *
      * @return array $variants Array of join types
      */
-    public function commonJoinTypeProvider()
+    public function commonJoinTypeProvider(): array
     {
         $types   = [];
         $types[] = [ '', 'JOIN' ];
@@ -80,7 +80,7 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
      *
      * @return array $hints Array of valid index hints and exptected prepared values
      */
-    public function validIndexHintProvider()
+    public function validIndexHintProvider(): array
     {
         $hints   = [];
         $hints[] = [ [ 'index_hint' ], ' index_hint' ];
@@ -96,7 +96,7 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
      *
      * @return array $hints Array of invalid index hints
      */
-    public function invalidIndexHintProvider()
+    public function invalidIndexHintProvider(): array
     {
         $hints   = [];
         $hints[] = [ [] ];
@@ -114,7 +114,7 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
     *
     * @return array $compound Array of compound types
     */
-    public function compoundQueryTypeProvider()
+    public function compoundQueryTypeProvider(): array
     {
         $types   = [];
         $types[] = [ 'UNION' ];
@@ -130,7 +130,7 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
      *
      * @return array $values Array of inital insert values.
      */
-    public function insertValuesProvider()
+    public function insertValuesProvider(): array
     {
         $values   = [];
         $values[] = [ [ [ 'value1', 'value2', 'value3' ] ] ];

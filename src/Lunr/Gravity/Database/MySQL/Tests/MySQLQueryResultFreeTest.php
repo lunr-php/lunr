@@ -25,7 +25,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->resultSetSetup();
     }
@@ -35,7 +35,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::free_result
      */
-    public function testFreeResultFreesIfFreedIsFalse()
+    public function testFreeResultFreesIfFreedIsFalse(): void
     {
         $this->query_result->expects($this->once())
                            ->method('free');
@@ -51,7 +51,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::free_result
      */
-    public function testFreeResultDoesNotFreeIfFreedIsTrue()
+    public function testFreeResultDoesNotFreeIfFreedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('freed');
         $property->setAccessible(TRUE);
@@ -73,7 +73,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_array
      */
-    public function testResultArrayFreesDataIfFreedIsFalse()
+    public function testResultArrayFreesDataIfFreedIsFalse(): void
     {
         $this->query_result->expects($this->once())
                            ->method('free');
@@ -86,7 +86,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_array
      */
-    public function testResultArrayDoesNotFreeDataIfFreedIsTrue()
+    public function testResultArrayDoesNotFreeDataIfFreedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('freed');
         $property->setAccessible(TRUE);
@@ -103,7 +103,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_row
      */
-    public function testResultRowFreesDataIfFreedIsFalse()
+    public function testResultRowFreesDataIfFreedIsFalse(): void
     {
         $this->query_result->expects($this->once())
                            ->method('free');
@@ -116,7 +116,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_row
      */
-    public function testResultRowDoesNotFreeDataIfFreedIsTrue()
+    public function testResultRowDoesNotFreeDataIfFreedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('freed');
         $property->setAccessible(TRUE);
@@ -133,7 +133,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_column
      */
-    public function testResultColumnFreesDataIfFreedIsFalse()
+    public function testResultColumnFreesDataIfFreedIsFalse(): void
     {
         $this->query_result->expects($this->once())
                            ->method('free');
@@ -146,7 +146,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_column
      */
-    public function testResultColumnDoesNotFreeDataIfFreedIsTrue()
+    public function testResultColumnDoesNotFreeDataIfFreedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('freed');
         $property->setAccessible(TRUE);
@@ -163,7 +163,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_cell
      */
-    public function testResultCellFreesDataIfFreedIsFalse()
+    public function testResultCellFreesDataIfFreedIsFalse(): void
     {
         $this->query_result->expects($this->once())
                            ->method('free');
@@ -176,7 +176,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_cell
      */
-    public function testResultCellDoesNotFreeDataIfFreedIsTrue()
+    public function testResultCellDoesNotFreeDataIfFreedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('freed');
         $property->setAccessible(TRUE);

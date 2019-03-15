@@ -26,7 +26,7 @@ class DatabaseDMLQueryBuilderQueryPartsDeleteTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_delete
      */
-    public function testInitialDelete()
+    public function testInitialDelete(): void
     {
         $method = $this->get_accessible_reflection_method('sql_delete');
 
@@ -42,7 +42,7 @@ class DatabaseDMLQueryBuilderQueryPartsDeleteTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_delete
      */
-    public function testIncrementalDelete()
+    public function testIncrementalDelete(): void
     {
         $method = $this->get_accessible_reflection_method('sql_delete');
 

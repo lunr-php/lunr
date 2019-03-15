@@ -30,7 +30,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
      * @dataProvider selectModesDuplicatesProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select_mode
      */
-    public function testSelectModeSetsDuplicatesCorrectly($mode)
+    public function testSelectModeSetsDuplicatesCorrectly($mode): void
     {
         $property = $this->builder_reflection->getProperty('select_mode');
         $property->setAccessible(TRUE);
@@ -50,7 +50,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
      * @dataProvider selectModesCacheProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select_mode
      */
-    public function testSelectModeSetsCacheCorrectly($mode)
+    public function testSelectModeSetsCacheCorrectly($mode): void
     {
         $property = $this->builder_reflection->getProperty('select_mode');
         $property->setAccessible(TRUE);
@@ -70,7 +70,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
      * @dataProvider selectModesStandardProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select_mode
      */
-    public function testSelectModeSetsStandardCorrectly($mode)
+    public function testSelectModeSetsStandardCorrectly($mode): void
     {
         $property = $this->builder_reflection->getProperty('select_mode');
         $property->setAccessible(TRUE);
@@ -85,7 +85,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select_mode
      */
-    public function testSelectModeSetsIgnoresUnknownValues()
+    public function testSelectModeSetsIgnoresUnknownValues(): void
     {
         $property = $this->builder_reflection->getProperty('select_mode');
         $property->setAccessible(TRUE);
@@ -94,7 +94,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
 
         $value = $property->getValue($this->builder);
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -106,7 +106,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
      * @dataProvider lockModesStandardProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::lock_mode
      */
-    public function testLockModeSetsStandardCorrectly($mode)
+    public function testLockModeSetsStandardCorrectly($mode): void
     {
         $property = $this->builder_reflection->getProperty('lock_mode');
         $property->setAccessible(TRUE);
@@ -121,7 +121,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::lock_mode
      */
-    public function testLockModeSetsIgnoresUnknownValues()
+    public function testLockModeSetsIgnoresUnknownValues(): void
     {
         $property = $this->builder_reflection->getProperty('lock_mode');
         $property->setAccessible(TRUE);
@@ -139,7 +139,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
      * @depends testSelectModeSetsDuplicatesCorrectly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select_mode
      */
-    public function testSelectModeAllowsOnlyOneDuplicateStatement()
+    public function testSelectModeAllowsOnlyOneDuplicateStatement(): void
     {
         $property = $this->builder_reflection->getProperty('select_mode');
         $property->setAccessible(TRUE);
@@ -159,7 +159,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
      * @depends testSelectModeSetsCacheCorrectly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select_mode
      */
-    public function testSelectModeAllowsOnlyOneCacheStatement()
+    public function testSelectModeAllowsOnlyOneCacheStatement(): void
     {
         $property = $this->builder_reflection->getProperty('select_mode');
         $property->setAccessible(TRUE);
@@ -178,7 +178,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::select_mode
      */
-    public function testSelectModeReturnsSelfReference()
+    public function testSelectModeReturnsSelfReference(): void
     {
         $return = $this->builder->select_mode('DISTINCT');
 

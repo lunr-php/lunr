@@ -26,7 +26,7 @@ class DatabaseConnectionPoolPublicTest extends DatabaseConnectionPoolTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->supportedSetup();
     }
@@ -36,7 +36,7 @@ class DatabaseConnectionPoolPublicTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_new_ro_connection
      */
-    public function testGetNewRoConnectionReturnsMysqlConnection()
+    public function testGetNewRoConnectionReturnsMysqlConnection(): void
     {
         $dbr = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLConnection');
 
@@ -54,7 +54,7 @@ class DatabaseConnectionPoolPublicTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_new_rw_connection
      */
-    public function testGetNewRwConnectionReturnsMysqlConnection()
+    public function testGetNewRwConnectionReturnsMysqlConnection(): void
     {
         $dbr = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLConnection');
 
@@ -72,7 +72,7 @@ class DatabaseConnectionPoolPublicTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_new_ro_connection
      */
-    public function testGetNewRoConnectionIncreasesPoolByOne()
+    public function testGetNewRoConnectionIncreasesPoolByOne(): void
     {
         $property = $this->pool_reflection->getProperty('ro_pool');
         $property->setAccessible(TRUE);
@@ -92,7 +92,7 @@ class DatabaseConnectionPoolPublicTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_new_rw_connection
      */
-    public function testGetNewRwConnectionIncreasesPoolByOne()
+    public function testGetNewRwConnectionIncreasesPoolByOne(): void
     {
         $property = $this->pool_reflection->getProperty('rw_pool');
         $property->setAccessible(TRUE);
@@ -112,7 +112,7 @@ class DatabaseConnectionPoolPublicTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_ro_connection
      */
-    public function testGetRoConnectionReturnsNewConnectionIfPoolEmpty()
+    public function testGetRoConnectionReturnsNewConnectionIfPoolEmpty(): void
     {
         $property = $this->pool_reflection->getProperty('ro_pool');
         $property->setAccessible(TRUE);
@@ -132,7 +132,7 @@ class DatabaseConnectionPoolPublicTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_rw_connection
      */
-    public function testGetRwConnectionReturnsNewConnectionIfPoolEmpty()
+    public function testGetRwConnectionReturnsNewConnectionIfPoolEmpty(): void
     {
         $property = $this->pool_reflection->getProperty('rw_pool');
         $property->setAccessible(TRUE);
@@ -152,7 +152,7 @@ class DatabaseConnectionPoolPublicTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_ro_connection
      */
-    public function testGetRoConnectionReturnsPooledConnection()
+    public function testGetRoConnectionReturnsPooledConnection(): void
     {
         $property = $this->pool_reflection->getProperty('ro_pool');
         $property->setAccessible(TRUE);
@@ -178,7 +178,7 @@ class DatabaseConnectionPoolPublicTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_rw_connection
      */
-    public function testGetRwConnectionReturnsPooledConnection()
+    public function testGetRwConnectionReturnsPooledConnection(): void
     {
         $property = $this->pool_reflection->getProperty('rw_pool');
         $property->setAccessible(TRUE);

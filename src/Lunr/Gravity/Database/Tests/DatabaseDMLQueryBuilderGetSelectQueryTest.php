@@ -28,7 +28,7 @@ class DatabaseDMLQueryBuilderGetSelectQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateSelectModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_select_query
      */
-    public function testGetSelectQuery()
+    public function testGetSelectQuery(): void
     {
         $this->set_reflection_property_value('from', 'FROM table');
         $this->set_reflection_property_value('select_mode', [ 'DISTINCT', 'SQL_CACHE' ]);
@@ -54,7 +54,7 @@ class DatabaseDMLQueryBuilderGetSelectQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateSelectModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_select_query
      */
-    public function testGetSelectQueryWithUndefinedFromClause()
+    public function testGetSelectQueryWithUndefinedFromClause(): void
     {
         $this->set_reflection_property_value('select_mode', [ 'DISTINCT', 'SQL_CACHE' ]);
         $this->set_reflection_property_value('select', 'col');
@@ -71,7 +71,7 @@ class DatabaseDMLQueryBuilderGetSelectQueryTest extends DatabaseDMLQueryBuilderT
     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateSelectModes
     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_select_query
     */
-    public function testGetSelectQueryWithCompoundConnector()
+    public function testGetSelectQueryWithCompoundConnector(): void
     {
         $this->set_reflection_property_value('from', 'FROM table');
         $this->set_reflection_property_value('select', 'col');
@@ -85,7 +85,7 @@ class DatabaseDMLQueryBuilderGetSelectQueryTest extends DatabaseDMLQueryBuilderT
     /**
      * Test getting a select query using with statement
      */
-    public function testGetSelectQueryUsingWith()
+    public function testGetSelectQueryUsingWith(): void
     {
 
         $this->set_reflection_property_value('with', 'alias AS ( query )');
@@ -100,7 +100,7 @@ class DatabaseDMLQueryBuilderGetSelectQueryTest extends DatabaseDMLQueryBuilderT
     /**
      * Test getting a select query using a recursive with statement
      */
-    public function testGetSelectQueryUsingRecursiveWith()
+    public function testGetSelectQueryUsingRecursiveWith(): void
     {
         $this->set_reflection_property_value('with', 'alias AS ( query )');
         $this->set_reflection_property_value('is_recursive', TRUE);

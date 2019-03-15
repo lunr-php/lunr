@@ -27,13 +27,13 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    public function testGetMatchesOfAccessibleDirectory()
+    public function testGetMatchesOfAccessibleDirectory(): void
     {
         $expected = [ $this->find_location . '/folder1/filepattern' ];
 
         $value = $this->class->find_matches('/^.+pattern/i', $this->find_location);
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
 
         sort($value);
 
@@ -45,7 +45,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    public function testGetMatchesOfAccessibleDirectoryWithNullNeedle()
+    public function testGetMatchesOfAccessibleDirectoryWithNullNeedle(): void
     {
         $error = 'RegexIterator::__construct(): Empty regular expression';
 
@@ -64,7 +64,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    public function testGetMatchesOfAccessibleDirectoryWithObjectNeedle()
+    public function testGetMatchesOfAccessibleDirectoryWithObjectNeedle(): void
     {
         $error = 'RegexIterator::__construct() expects parameter 2 to be string, object given';
 
@@ -86,7 +86,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    public function testGetMatchesOfAccessibleDirectoryWithBooleanNeedle($needle)
+    public function testGetMatchesOfAccessibleDirectoryWithBooleanNeedle($needle): void
     {
         $this->logger->expects($this->never())
                      ->method('error');
@@ -99,9 +99,11 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     /**
      * Test finding in an inaccessible directory.
      *
+     * @requires OS Linux
+     *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    public function testGetMatchesOfInaccessibleDirectory()
+    public function testGetMatchesOfInaccessibleDirectory(): void
     {
         $directory = '/root';
 
@@ -126,7 +128,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    public function testGetMatchesOfNonExistantDirectory()
+    public function testGetMatchesOfNonExistantDirectory(): void
     {
         $directory = '/tmp56474q';
 
@@ -151,7 +153,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    public function testGetFileMatchesInFile()
+    public function testGetFileMatchesInFile(): void
     {
         $directory = tempnam('/tmp', 'phpunit_');;
 
@@ -178,7 +180,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    public function testGetMatchesOfNullDirectory()
+    public function testGetMatchesOfNullDirectory(): void
     {
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -194,7 +196,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    public function testGetMatchesOfObjectDirectory()
+    public function testGetMatchesOfObjectDirectory(): void
     {
         $directory = new \stdClass();
 
@@ -222,7 +224,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
-    public function testGetMatchesOfBooleanDirectory($directory)
+    public function testGetMatchesOfBooleanDirectory($directory): void
     {
         $this->logger->expects($this->never())
                      ->method('error');

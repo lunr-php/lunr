@@ -26,7 +26,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_set
      */
-    public function testInitialSet()
+    public function testInitialSet(): void
     {
         $method = $this->get_accessible_reflection_method('sql_set');
 
@@ -42,7 +42,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_set
      */
-    public function testIncrementalSet()
+    public function testIncrementalSet(): void
     {
         $method = $this->get_accessible_reflection_method('sql_set');
 
@@ -59,7 +59,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_set
      */
-    public function testSetWithNullValue()
+    public function testSetWithNullValue(): void
     {
         $method = $this->get_accessible_reflection_method('sql_set');
 
@@ -76,7 +76,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
      */
-    public function testUndefinedValuesQueryPart()
+    public function testUndefinedValuesQueryPart(): void
     {
         $method = $this->get_accessible_reflection_method('sql_values');
 
@@ -95,7 +95,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      * @dataProvider insertValuesProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
      */
-    public function testInitialValuesQueryPart($values)
+    public function testInitialValuesQueryPart($values): void
     {
         $method = $this->get_accessible_reflection_method('sql_values');
 
@@ -111,7 +111,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
      */
-    public function testIncrementalValues()
+    public function testIncrementalValues(): void
     {
         $method = $this->get_accessible_reflection_method('sql_values');
 
@@ -133,7 +133,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_values
      */
-    public function testNullValues()
+    public function testNullValues(): void
     {
         $method = $this->get_accessible_reflection_method('sql_values');
 
@@ -149,7 +149,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_column_names
      */
-    public function testInitialColumnNames()
+    public function testInitialColumnNames(): void
     {
         $method = $this->get_accessible_reflection_method('sql_column_names');
 
@@ -165,7 +165,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_select_statement
      */
-    public function testInitialSelectStatement()
+    public function testInitialSelectStatement(): void
     {
         $method = $this->get_accessible_reflection_method('sql_select_statement');
 
@@ -181,7 +181,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_select_statement
      */
-    public function testInvalidSelectStatement()
+    public function testInvalidSelectStatement(): void
     {
         $method = $this->get_accessible_reflection_method('sql_select_statement');
 
@@ -197,7 +197,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_into
      */
-    public function testInitialInto()
+    public function testInitialInto(): void
     {
         $method = $this->get_accessible_reflection_method('sql_into');
 
@@ -213,7 +213,7 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_into
      */
-    public function testIncrementalInto()
+    public function testIncrementalInto(): void
     {
         $method = $this->get_accessible_reflection_method('sql_into');
 

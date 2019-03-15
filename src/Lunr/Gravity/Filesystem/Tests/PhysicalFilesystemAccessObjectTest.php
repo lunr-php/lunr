@@ -42,7 +42,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     /**
      * Test case constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->logger        = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->class         = new PhysicalFilesystemAccessObject($this->logger);
@@ -53,7 +53,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     /**
      * Test case destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -66,7 +66,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
      *
      * @return array $names Array of invalid names,
      */
-    public function invalidNameProvider()
+    public function invalidNameProvider(): array
     {
         $names   = [];
         $names[] = [ NULL, 'SplFileObject::__construct(): Filename cannot be empty' ];
@@ -80,7 +80,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
      *
      * @return array $names Array of boolean names,
      */
-    public function booleanNameProvider()
+    public function booleanNameProvider(): array
     {
         $names   = [];
         $names[] = [ TRUE ];
@@ -94,7 +94,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
      *
      * @return array $modes Array of invalid modes,
      */
-    public function invalidModesProvider()
+    public function invalidModesProvider(): array
     {
         $modes   = [];
         $modes[] = [ NULL, ': failed to open stream: No such file or directory' ];
@@ -110,7 +110,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
      *
      * @return array $filepath Array of invalid filepaths
      */
-    public function emptyFilepathValueProvider()
+    public function emptyFilepathValueProvider(): array
     {
         $filepath   = [];
         $filepath[] = [ NULL ];
@@ -124,7 +124,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
      *
      * @return array $filepath Array of invalid filepaths
      */
-    public function invalidFilepathValueProvider()
+    public function invalidFilepathValueProvider(): array
     {
         $filepath   = [];
         $filepath[] = [ '/tmp56474q', 'RecursiveDirectoryIterator::__construct(/tmp56474q): failed to open dir: No such file or directory' ];
@@ -139,7 +139,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
      *
      * @return array $values Array of invalid values
      */
-    public function invalidCSVArrayValues()
+    public function invalidCSVArrayValuesProvider(): array
     {
         $values   = [];
         $values[] = [ NULL ];
@@ -153,7 +153,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
      *
      * @return array $modes Array of invalid values
      */
-    public function invalidDirModeValues()
+    public function invalidDirModeValuesProvider(): array
     {
         $modes   = [];
         $modes[] = [ -1 ];
@@ -168,7 +168,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
      *
      * @return array $modes Array of valid values
      */
-    public function validDirModeValues()
+    public function validDirModeValuesProvider(): array
     {
         $modes   = [];
         $modes[] = [ 777 ];

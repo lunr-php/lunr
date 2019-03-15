@@ -27,7 +27,7 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper::value
      */
-    public function testEscapingValue()
+    public function testEscapingValue(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -42,7 +42,7 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper::hexvalue
      */
-    public function testEscapingHexValue()
+    public function testEscapingHexValue(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -57,7 +57,7 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper::likevalue
      */
-    public function testEscapingLikeValue()
+    public function testEscapingLikeValue(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -72,7 +72,7 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper::likevalue
      */
-    public function testEscapingLikeValueForward()
+    public function testEscapingLikeValueForward(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -87,7 +87,7 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper::likevalue
      */
-    public function testEscapingLikeValueBackward()
+    public function testEscapingLikeValueBackward(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -102,7 +102,7 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper::likevalue
      */
-    public function testEscapingLikeValueUnsupported()
+    public function testEscapingLikeValueUnsupported(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -119,7 +119,7 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      * @dataProvider invalidIndicesProvider
      * @covers       Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper::index_hint
      */
-    public function testEscapingIndexHintWithInvalidIndices($indices)
+    public function testEscapingIndexHintWithInvalidIndices($indices): void
     {
         $this->assertNull($this->class->index_hint('', '', $indices));
     }
@@ -133,7 +133,7 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      * @depends      Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper::index_hint
      */
-    public function testEscapingIndexHintWithValidKeyword($keyword)
+    public function testEscapingIndexHintWithValidKeyword($keyword): void
     {
         $indices = [ 'index', 'index' ];
 
@@ -148,7 +148,7 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testEscapeLocationReference
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3QueryEscaper::index_hint
      */
-    public function testEscapingIndexHintWithInvalidKeyword()
+    public function testEscapingIndexHintWithInvalidKeyword(): void
     {
         $indices = [ 'index', 'index' ];
 

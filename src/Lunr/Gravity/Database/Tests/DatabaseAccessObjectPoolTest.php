@@ -29,7 +29,7 @@ class DatabaseAccessObjectPoolTest extends DatabaseAccessObjectTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->setUpPool();
     }
@@ -37,7 +37,7 @@ class DatabaseAccessObjectPoolTest extends DatabaseAccessObjectTest
     /**
      * Test that DatabaseConnection class is passed.
      */
-    public function testDatabaseConnectionIsPassed()
+    public function testDatabaseConnectionIsPassed(): void
     {
         $this->assertPropertySame('db', $this->db);
     }
@@ -45,7 +45,7 @@ class DatabaseAccessObjectPoolTest extends DatabaseAccessObjectTest
     /**
      * Test that DatabaseConnection class is passed.
      */
-    public function testQueryEscaperIsStored()
+    public function testQueryEscaperIsStored(): void
     {
         $property = $this->reflection->getProperty('escaper');
         $property->setAccessible(TRUE);
@@ -56,7 +56,7 @@ class DatabaseAccessObjectPoolTest extends DatabaseAccessObjectTest
     /**
      * Test that DatabaseConnectionPool is passed.
      */
-    public function testDatabaseConnectionPoolIsPassed()
+    public function testDatabaseConnectionPoolIsPassed(): void
     {
         $this->assertPropertySame('pool', $this->pool);
     }

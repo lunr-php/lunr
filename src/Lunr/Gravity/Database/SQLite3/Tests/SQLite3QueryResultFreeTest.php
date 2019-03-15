@@ -22,7 +22,7 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTest
     /**
      * Override the default setUp with a setup with a result.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->setUpWithResult();
     }
@@ -32,7 +32,7 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::free_result
      */
-    public function testFreeResultFreesIfFreedIsFalse()
+    public function testFreeResultFreesIfFreedIsFalse(): void
     {
         $this->sqlite3_result->expects($this->once())
                              ->method('finalize');
@@ -46,7 +46,7 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::free_result
      */
-    public function testFreeResultDoesNotFreeIfFreedIsTrue()
+    public function testFreeResultDoesNotFreeIfFreedIsTrue(): void
     {
         $this->set_reflection_property_value('freed', TRUE);
 
@@ -64,7 +64,7 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_array
      */
-    public function testResultArrayFreesDataIfFreedIsFalse()
+    public function testResultArrayFreesDataIfFreedIsFalse(): void
     {
         $this->sqlite3_result->expects($this->once())
                              ->method('finalize');
@@ -77,7 +77,7 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_array
      */
-    public function testResultArrayDoesNotFreeDataIfFreedIsTrue()
+    public function testResultArrayDoesNotFreeDataIfFreedIsTrue(): void
     {
         $this->set_reflection_property_value('freed', TRUE);
 
@@ -92,7 +92,7 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_row
      */
-    public function testResultRowFreesDataIfFreedIsFalse()
+    public function testResultRowFreesDataIfFreedIsFalse(): void
     {
         $this->sqlite3_result->expects($this->once())
                              ->method('finalize');
@@ -105,7 +105,7 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_row
      */
-    public function testResultRowDoesNotFreeDataIfFreedIsTrue()
+    public function testResultRowDoesNotFreeDataIfFreedIsTrue(): void
     {
         $this->set_reflection_property_value('freed', TRUE);
 
@@ -120,7 +120,7 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_column
      */
-    public function testResultColumnFreesDataIfFreedIsFalse()
+    public function testResultColumnFreesDataIfFreedIsFalse(): void
     {
         $this->sqlite3_result->expects($this->once())
                              ->method('finalize');
@@ -133,7 +133,7 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_column
      */
-    public function testResultColumnDoesNotFreeDataIfFreedIsTrue()
+    public function testResultColumnDoesNotFreeDataIfFreedIsTrue(): void
     {
         $this->set_reflection_property_value('freed', TRUE);
 
@@ -148,7 +148,7 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_cell
      */
-    public function testResultCellFreesDataIfFreedIsFalse()
+    public function testResultCellFreesDataIfFreedIsFalse(): void
     {
         $this->sqlite3_result->expects($this->once())
                              ->method('finalize');
@@ -161,7 +161,7 @@ class SQLite3QueryResultFreeTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_cell
      */
-    public function testResultCellDoesNotFreeDataIfFreedIsTrue()
+    public function testResultCellDoesNotFreeDataIfFreedIsTrue(): void
     {
         $this->set_reflection_property_value('freed', TRUE);
 

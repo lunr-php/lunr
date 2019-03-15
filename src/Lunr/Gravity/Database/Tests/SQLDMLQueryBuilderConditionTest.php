@@ -25,7 +25,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::start_on_group
      */
-    public function testOpeningGroupOn()
+    public function testOpeningGroupOn(): void
     {
         $this->class->start_on_group();
         $this->assertPropertyEquals('join', '(');
@@ -36,7 +36,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::end_on_group
      */
-    public function testClosingGroupOn()
+    public function testClosingGroupOn(): void
     {
         $this->class->end_on_group();
         $this->assertPropertyEquals('join', ')');
@@ -48,7 +48,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::on
      */
-    public function testOnWithDefaultOperator()
+    public function testOnWithDefaultOperator(): void
     {
         $this->class->on('left', 'right');
         $this->assertPropertyEquals('join', 'ON left = right');
@@ -60,7 +60,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::on
      */
-    public function testOnWithCustomOperator()
+    public function testOnWithCustomOperator(): void
     {
         $this->class->on('left', 'right', '>');
         $this->assertPropertyEquals('join', 'ON left > right');
@@ -71,7 +71,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::on
      */
-    public function testOnReturnsSelfReference()
+    public function testOnReturnsSelfReference(): void
     {
         $return = $this->class->on('left', 'right');
 
@@ -85,7 +85,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::on_like
      */
-    public function testOnLike()
+    public function testOnLike(): void
     {
         $this->class->on_like('left', 'right');
         $this->assertPropertyEquals('join', 'ON left LIKE right');
@@ -97,7 +97,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::on_like
      */
-    public function testOnNotLike()
+    public function testOnNotLike(): void
     {
         $this->class->on_like('left', 'right', TRUE);
         $this->assertPropertyEquals('join', 'ON left NOT LIKE right');
@@ -108,7 +108,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::on_like
      */
-    public function testOnLikeReturnsSelfReference()
+    public function testOnLikeReturnsSelfReference(): void
     {
         $return = $this->class->on_like('left', 'right');
 
@@ -122,7 +122,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::on_in
      */
-    public function testOnIn()
+    public function testOnIn(): void
     {
         $this->class->on_in('left', 'right');
         $this->assertPropertyEquals('join', 'ON left IN right');
@@ -134,7 +134,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::on_in
      */
-    public function testOnNotIn()
+    public function testOnNotIn(): void
     {
         $this->class->on_in('left', 'right', TRUE);
         $this->assertPropertyEquals('join', 'ON left NOT IN right');
@@ -145,7 +145,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::on_in
      */
-    public function testOnInReturnsSelfReference()
+    public function testOnInReturnsSelfReference(): void
     {
         $return = $this->class->on_in('left', 'right');
 
@@ -159,7 +159,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::on_between
      */
-    public function testOnBetween()
+    public function testOnBetween(): void
     {
         $this->class->on_between('left', 'lower', 'upper');
         $this->assertPropertyEquals('join', 'ON left BETWEEN lower AND upper');
@@ -171,7 +171,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::on_between
      */
-    public function testOnNotBetween()
+    public function testOnNotBetween(): void
     {
         $this->class->on_between('left', 'lower', 'upper', TRUE);
         $this->assertPropertyEquals('join', 'ON left NOT BETWEEN lower AND upper');
@@ -182,7 +182,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::on_between
      */
-    public function testOnBetweenReturnsSelfReference()
+    public function testOnBetweenReturnsSelfReference(): void
     {
         $return = $this->class->on_between('left', 'lower', 'upper');
 
@@ -196,7 +196,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::on_null
      */
-    public function testOnNull()
+    public function testOnNull(): void
     {
         $this->class->on_null('left');
         $this->assertPropertyEquals('join', 'ON left IS NULL');
@@ -208,7 +208,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::on_null
      */
-    public function testOnNotNull()
+    public function testOnNotNull(): void
     {
         $this->class->on_null('left', TRUE);
         $this->assertPropertyEquals('join', 'ON left IS NOT NULL');
@@ -219,7 +219,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::on_null
      */
-    public function testOnNullReturnsSelfReference()
+    public function testOnNullReturnsSelfReference(): void
     {
         $return = $this->class->on_null('left');
 
@@ -232,7 +232,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::start_where_group
      */
-    public function testOpeningGroupWhere()
+    public function testOpeningGroupWhere(): void
     {
         $this->class->start_where_group();
         $this->assertPropertyEquals('where', '(');
@@ -243,7 +243,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::end_where_group
      */
-    public function testClosingGroupWhere()
+    public function testClosingGroupWhere(): void
     {
         $this->class->end_where_group();
         $this->assertPropertyEquals('where', ')');
@@ -255,7 +255,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::where
      */
-    public function testWhereWithDefaultOperator()
+    public function testWhereWithDefaultOperator(): void
     {
         $this->class->where('left', 'right');
         $this->assertPropertyEquals('where', 'WHERE left = right');
@@ -267,7 +267,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::where
      */
-    public function testWhereWithCustomOperator()
+    public function testWhereWithCustomOperator(): void
     {
         $this->class->where('left', 'right', '>');
         $this->assertPropertyEquals('where', 'WHERE left > right');
@@ -278,7 +278,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::where
      */
-    public function testWhereReturnsSelfReference()
+    public function testWhereReturnsSelfReference(): void
     {
         $return = $this->class->where('left', 'right');
 
@@ -292,7 +292,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::where_like
      */
-    public function testWhereLike()
+    public function testWhereLike(): void
     {
         $this->class->where_like('left', 'right');
         $this->assertPropertyEquals('where', 'WHERE left LIKE right');
@@ -304,7 +304,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::where_like
      */
-    public function testWhereNotLike()
+    public function testWhereNotLike(): void
     {
         $this->class->where_like('left', 'right', TRUE);
         $this->assertPropertyEquals('where', 'WHERE left NOT LIKE right');
@@ -315,7 +315,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::where_like
      */
-    public function testWhereLikeReturnsSelfReference()
+    public function testWhereLikeReturnsSelfReference(): void
     {
         $return = $this->class->where_like('left', 'right');
 
@@ -329,7 +329,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::where_in
      */
-    public function testWhereIn()
+    public function testWhereIn(): void
     {
         $this->class->where_in('left', 'right');
         $this->assertPropertyEquals('where', 'WHERE left IN right');
@@ -341,7 +341,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::where_in
      */
-    public function testWhereNotIn()
+    public function testWhereNotIn(): void
     {
         $this->class->where_in('left', 'right', TRUE);
         $this->assertPropertyEquals('where', 'WHERE left NOT IN right');
@@ -352,7 +352,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::where_in
      */
-    public function testWhereInReturnsSelfReference()
+    public function testWhereInReturnsSelfReference(): void
     {
         $return = $this->class->where_in('left', 'right');
 
@@ -366,7 +366,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::where_between
      */
-    public function testWhereBetween()
+    public function testWhereBetween(): void
     {
         $this->class->where_between('left', 'lower', 'upper');
         $this->assertPropertyEquals('where', 'WHERE left BETWEEN lower AND upper');
@@ -378,7 +378,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::where_between
      */
-    public function testWhereNotBetween()
+    public function testWhereNotBetween(): void
     {
         $this->class->where_between('left', 'lower', 'upper', TRUE);
         $this->assertPropertyEquals('where', 'WHERE left NOT BETWEEN lower AND upper');
@@ -389,7 +389,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::where_between
      */
-    public function testWhereBetweenReturnsSelfReference()
+    public function testWhereBetweenReturnsSelfReference(): void
     {
         $return = $this->class->where_between('left', 'lower', 'upper');
 
@@ -403,7 +403,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::where_null
      */
-    public function testWhereNull()
+    public function testWhereNull(): void
     {
         $this->class->where_null('left');
         $this->assertPropertyEquals('where', 'WHERE left IS NULL');
@@ -415,7 +415,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::where_null
      */
-    public function testWhereNotNull()
+    public function testWhereNotNull(): void
     {
         $this->class->where_null('left', TRUE);
         $this->assertPropertyEquals('where', 'WHERE left IS NOT NULL');
@@ -426,7 +426,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::where_null
      */
-    public function testWhereNullReturnsSelfReference()
+    public function testWhereNullReturnsSelfReference(): void
     {
         $return = $this->class->where_null('left');
 
@@ -439,7 +439,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::start_having_group
      */
-    public function testOpeningGroupHaving()
+    public function testOpeningGroupHaving(): void
     {
         $this->class->start_having_group();
         $this->assertPropertyEquals('having', '(');
@@ -450,7 +450,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::end_having_group
      */
-    public function testClosingGroupHaving()
+    public function testClosingGroupHaving(): void
     {
         $this->class->end_having_group();
         $this->assertPropertyEquals('having', ')');
@@ -462,7 +462,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::having
      */
-    public function testHavingWithDefaultOperator()
+    public function testHavingWithDefaultOperator(): void
     {
         $this->class->having('left', 'right');
         $this->assertPropertyEquals('having', 'HAVING left = right');
@@ -474,7 +474,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::having
      */
-    public function testHavingWithCustomOperator()
+    public function testHavingWithCustomOperator(): void
     {
         $this->class->having('left', 'right', '>');
         $this->assertPropertyEquals('having', 'HAVING left > right');
@@ -485,7 +485,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::having
      */
-    public function testHavingReturnsSelfReference()
+    public function testHavingReturnsSelfReference(): void
     {
         $return = $this->class->having('left', 'right');
 
@@ -499,7 +499,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::having_like
      */
-    public function testHavingLike()
+    public function testHavingLike(): void
     {
         $this->class->having_like('left', 'right');
         $this->assertPropertyEquals('having', 'HAVING left LIKE right');
@@ -511,7 +511,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::having_like
      */
-    public function testHavingNotLike()
+    public function testHavingNotLike(): void
     {
         $this->class->having_like('left', 'right', TRUE);
         $this->assertPropertyEquals('having', 'HAVING left NOT LIKE right');
@@ -522,7 +522,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::having_like
      */
-    public function testHavingLikeReturnsSelfReference()
+    public function testHavingLikeReturnsSelfReference(): void
     {
         $return = $this->class->having_like('left', 'right');
 
@@ -536,7 +536,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::having_in
      */
-    public function testHavingIn()
+    public function testHavingIn(): void
     {
         $this->class->having_in('left', 'right');
         $this->assertPropertyEquals('having', 'HAVING left IN right');
@@ -548,7 +548,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::having_in
      */
-    public function testHavingNotIn()
+    public function testHavingNotIn(): void
     {
         $this->class->having_in('left', 'right', TRUE);
         $this->assertPropertyEquals('having', 'HAVING left NOT IN right');
@@ -559,7 +559,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::having_in
      */
-    public function testHavingInReturnsSelfReference()
+    public function testHavingInReturnsSelfReference(): void
     {
         $return = $this->class->having_in('left', 'right');
 
@@ -573,7 +573,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::having_between
      */
-    public function testHavingBetween()
+    public function testHavingBetween(): void
     {
         $this->class->having_between('left', 'lower', 'upper');
         $this->assertPropertyEquals('having', 'HAVING left BETWEEN lower AND upper');
@@ -585,7 +585,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::having_between
      */
-    public function testHavingNotBetween()
+    public function testHavingNotBetween(): void
     {
         $this->class->having_between('left', 'lower', 'upper', TRUE);
         $this->assertPropertyEquals('having', 'HAVING left NOT BETWEEN lower AND upper');
@@ -596,7 +596,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::having_between
      */
-    public function testHavingBetweenReturnsSelfReference()
+    public function testHavingBetweenReturnsSelfReference(): void
     {
         $return = $this->class->having_between('left', 'lower', 'upper');
 
@@ -610,7 +610,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::having_null
      */
-    public function testHavingNull()
+    public function testHavingNull(): void
     {
         $this->class->having_null('left');
         $this->assertPropertyEquals('having', 'HAVING left IS NULL');
@@ -622,7 +622,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::having_null
      */
-    public function testHavingNotNull()
+    public function testHavingNotNull(): void
     {
         $this->class->having_null('left', TRUE);
         $this->assertPropertyEquals('having', 'HAVING left IS NOT NULL');
@@ -633,7 +633,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::having_null
      */
-    public function testHavingNullReturnsSelfReference()
+    public function testHavingNullReturnsSelfReference(): void
     {
         $return = $this->class->having_null('left');
 
@@ -646,7 +646,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::sql_and
      */
-    public function testSQLAnd()
+    public function testSQLAnd(): void
     {
         $this->class->sql_and();
         $this->assertPropertyEquals('connector', 'AND');
@@ -657,7 +657,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::sql_and
      */
-    public function testSQLAndReturnsSelfReference()
+    public function testSQLAndReturnsSelfReference(): void
     {
         $return = $this->class->sql_and();
 
@@ -670,7 +670,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::sql_or
      */
-    public function testSQLOr()
+    public function testSQLOr(): void
     {
         $this->class->sql_or();
         $this->assertPropertyEquals('connector', 'OR');
@@ -681,7 +681,7 @@ class SQLDMLQueryBuilderConditionTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::sql_or
      */
-    public function testSQLOrReturnsSelfReference()
+    public function testSQLOrReturnsSelfReference(): void
     {
         $return = $this->class->sql_or();
 

@@ -28,7 +28,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testIncrementalSelect
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::select
      */
-    public function testSelect()
+    public function testSelect(): void
     {
         $this->class->select('col');
         $value = $this->get_reflection_property_value('select');
@@ -41,7 +41,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::select
      */
-    public function testSelectReturnsSelfReference()
+    public function testSelectReturnsSelfReference(): void
     {
         $return = $this->class->select('col');
 
@@ -55,7 +55,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsFromTest::testFromWithoutIndexHints
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::from
      */
-    public function testFromWithoutIndexHints()
+    public function testFromWithoutIndexHints(): void
     {
         $this->class->from('table');
         $value = $this->get_reflection_property_value('from');
@@ -70,7 +70,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsFromTest::testFromWithMultipleIndexHints
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::from
      */
-    public function testFromWithIndexHints()
+    public function testFromWithIndexHints(): void
     {
         $hints = [ 'index_hint' ];
         $this->class->from('table', $hints);
@@ -84,7 +84,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::from
      */
-    public function testFromReturnsSelfReference()
+    public function testFromReturnsSelfReference(): void
     {
         $return = $this->class->from('table');
 
@@ -98,7 +98,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsJoinTest::testJoinWithoutIndexHints
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::join
      */
-    public function testJoinWithDefaultJoinType()
+    public function testJoinWithDefaultJoinType(): void
     {
         $this->class->join('table');
         $value = $this->get_reflection_property_value('join');
@@ -112,7 +112,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsJoinTest::testJoinWithoutIndexHints
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::join
      */
-    public function testJoinWithNonDefaultJoinType()
+    public function testJoinWithNonDefaultJoinType(): void
     {
         $this->class->join('table', 'STRAIGHT');
         $value = $this->get_reflection_property_value('join');
@@ -126,7 +126,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsJoinTest::testJoinWithoutIndexHints
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::join
      */
-    public function testJoinWithoutIndexHints()
+    public function testJoinWithoutIndexHints(): void
     {
         $this->class->join('table', 'STRAIGHT');
         $value = $this->get_reflection_property_value('join');
@@ -141,7 +141,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsJoinTest::testJoinWithMultipleIndexHints
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::join
      */
-    public function testJoinWithIndexHints()
+    public function testJoinWithIndexHints(): void
     {
         $hints = [ 'index_hint' ];
         $this->class->join('table', 'STRAIGHT', $hints);
@@ -155,7 +155,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::join
      */
-    public function testJoinReturnsSelfReference()
+    public function testJoinReturnsSelfReference(): void
     {
         $return = $this->class->join('table');
 
@@ -169,7 +169,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testCompoundQuery
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::union
      */
-    public function testUnion()
+    public function testUnion(): void
     {
         $return = $this->class->union('QUERY');
 
@@ -182,7 +182,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testCompoundQuery
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::union
      */
-    public function testUnionAll()
+    public function testUnionAll(): void
     {
         $return = $this->class->union('QUERY', TRUE);
 
@@ -194,7 +194,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::union
      */
-    public function testUnionReturnsSelfReference()
+    public function testUnionReturnsSelfReference(): void
     {
         $return = $this->class->union('QUERY');
 

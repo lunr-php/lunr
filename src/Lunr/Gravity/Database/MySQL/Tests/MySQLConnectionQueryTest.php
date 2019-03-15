@@ -26,7 +26,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::query
      */
-    public function testQueryThrowsExceptionWhenNotConnected()
+    public function testQueryThrowsExceptionWhenNotConnected(): void
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -44,7 +44,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::query
      */
-    public function testQueryReturnsQueryResultWhenConnected()
+    public function testQueryReturnsQueryResultWhenConnected(): void
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -67,7 +67,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::query
      */
-    public function testQueryPrependsQueryHintIfPresent()
+    public function testQueryPrependsQueryHintIfPresent(): void
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -91,7 +91,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::query
      */
-    public function testQueryResetsQueryHint()
+    public function testQueryResetsQueryHint(): void
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -116,7 +116,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::async_query
      */
-    public function testAsyncQueryThrowsExceptionWhenNotConnected()
+    public function testAsyncQueryThrowsExceptionWhenNotConnected(): void
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -134,7 +134,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::async_query
      */
-    public function testAsyncQueryReturnsQueryResultWhenConnected()
+    public function testAsyncQueryReturnsQueryResultWhenConnected(): void
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -164,7 +164,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::async_query
      */
-    public function testAsyncQueryPrependsQueryHintIfPresent()
+    public function testAsyncQueryPrependsQueryHintIfPresent(): void
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -187,7 +187,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::async_query
      */
-    public function testAsyncQueryResetsQueryHint()
+    public function testAsyncQueryResetsQueryHint(): void
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 

@@ -27,7 +27,7 @@ class SQLDMLQueryBuilderWithTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsWithTest::testNonRecursiveWithWithoutColumnNames
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::delete
      */
-    public function testWith()
+    public function testWith(): void
     {
         $this->class->with('alias', 'query');
         $value = $this->get_reflection_property_value('with');
@@ -40,7 +40,7 @@ class SQLDMLQueryBuilderWithTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::with
      */
-    public function testWithReturnsSelfReference()
+    public function testWithReturnsSelfReference(): void
     {
         $return = $this->class->with('alias', 'query');
 
@@ -54,7 +54,7 @@ class SQLDMLQueryBuilderWithTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsWithTest::testRecursiveWithWithoutColumnNames
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::delete
      */
-    public function testWith_recursive()
+    public function testWithRecursive(): void
     {
         $this->class->with_recursive('alias', 'anchor_query', 'recursive_query');
         $value = $this->get_reflection_property_value('with');
@@ -67,7 +67,7 @@ class SQLDMLQueryBuilderWithTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::with
      */
-    public function testWithRecursiveReturnsSelfReference()
+    public function testWithRecursiveReturnsSelfReference(): void
     {
         $return = $this->class->with_recursive('alias', 'anchor_query', 'recursive_query');
 

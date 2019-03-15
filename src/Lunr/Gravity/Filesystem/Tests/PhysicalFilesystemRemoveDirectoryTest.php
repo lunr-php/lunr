@@ -26,7 +26,7 @@ class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObje
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::rmdir
      */
-    public function testRemoveDirectory()
+    public function testRemoveDirectory(): void
     {
         $directory   = tempnam('/tmp', 'lunr_rmdir_');
         $directory_2 = $directory . '/directory2';
@@ -48,10 +48,12 @@ class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObje
      * @param mixed  $directory String or object directory value
      * @param string $error     The respective to the input error message
      *
+     * @requires OS Linux
+     *
      * @dataProvider invalidFilepathValueProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::rmdir
      */
-    public function testRemoveDirectoryWithInvalidDirectory($directory, $error)
+    public function testRemoveDirectoryWithInvalidDirectory($directory, $error): void
     {
         $this->logger->expects($this->once())
                      ->method('error')
@@ -69,7 +71,7 @@ class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObje
      * @dataProvider emptyFilepathValueProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::rmdir
      */
-    public function testRemoveDirectoryInEmptyDirectory($directory)
+    public function testRemoveDirectoryInEmptyDirectory($directory): void
     {
         $this->logger->expects($this->once())
                      ->method('warning')

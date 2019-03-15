@@ -27,7 +27,7 @@ class MySQLSimpleDMLQueryBuilderUsingTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::using
      */
-    public function testUsing()
+    public function testUsing(): void
     {
         $this->escaper->expects($this->once())
              ->method('column')
@@ -48,7 +48,7 @@ class MySQLSimpleDMLQueryBuilderUsingTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::using
      */
-    public function testUsingAddSecondColumn()
+    public function testUsingAddSecondColumn(): void
     {
         $this->escaper->expects($this->once())
              ->method('table')
@@ -79,7 +79,7 @@ class MySQLSimpleDMLQueryBuilderUsingTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::using
      */
-    public function testUsingMultipleColumn()
+    public function testUsingMultipleColumn(): void
     {
         $this->escaper->expects($this->at(0))
              ->method('table')

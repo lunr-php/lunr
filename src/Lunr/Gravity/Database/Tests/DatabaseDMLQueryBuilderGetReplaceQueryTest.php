@@ -26,7 +26,7 @@ class DatabaseDMLQueryBuilderGetReplaceQueryTest extends DatabaseDMLQueryBuilder
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_replace_query
      */
-    public function testGetReplaceQueryWithUndefinedInto()
+    public function testGetReplaceQueryWithUndefinedInto(): void
     {
         $this->set_reflection_property_value('column_names', '(column1, column2)');
         $this->set_reflection_property_value('values', 'VALUES (1,2), (3,4)');
@@ -42,7 +42,7 @@ class DatabaseDMLQueryBuilderGetReplaceQueryTest extends DatabaseDMLQueryBuilder
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_replace_query
      */
-    public function testGetReplaceValuesQuery()
+    public function testGetReplaceValuesQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('column_names', '(column1, column2)');
@@ -59,7 +59,7 @@ class DatabaseDMLQueryBuilderGetReplaceQueryTest extends DatabaseDMLQueryBuilder
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_replace_query
      */
-    public function testGetReplaceSetQuery()
+    public function testGetReplaceSetQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('set', 'SET column1 = 1');
@@ -75,7 +75,7 @@ class DatabaseDMLQueryBuilderGetReplaceQueryTest extends DatabaseDMLQueryBuilder
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_replace_query
      */
-    public function testGetReplaceSelectQuery()
+    public function testGetReplaceSelectQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('select_statement', 'SELECT column1, column2 FROM table');
@@ -91,7 +91,7 @@ class DatabaseDMLQueryBuilderGetReplaceQueryTest extends DatabaseDMLQueryBuilder
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_replace_query
      */
-    public function testGetReplaceSelectColumnsQuery()
+    public function testGetReplaceSelectColumnsQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('column_names', '(column1, column2)');
@@ -108,7 +108,7 @@ class DatabaseDMLQueryBuilderGetReplaceQueryTest extends DatabaseDMLQueryBuilder
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_replace_query
      */
-    public function testGetReplaceSelectInvalidInsertModeQuery()
+    public function testGetReplaceSelectInvalidInsertModeQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('column_names', '(column1, column2)');

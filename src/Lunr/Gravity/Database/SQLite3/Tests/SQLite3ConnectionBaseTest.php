@@ -25,7 +25,7 @@ class SQLite3ConnectionBaseTest extends SQLite3ConnectionTest
     /**
      * Test that the SQLite3 class was passed correctly.
      */
-    public function testSQLite3Passed()
+    public function testSQLite3Passed(): void
     {
         $value = $this->get_reflection_property_value('sqlite3');
 
@@ -35,7 +35,7 @@ class SQLite3ConnectionBaseTest extends SQLite3ConnectionTest
     /**
      * Test that database is set correctly.
      */
-    public function testDatabaseIsSetCorrectly()
+    public function testDatabaseIsSetCorrectly(): void
     {
         $this->assertEquals('/tmp/test.db', $this->get_reflection_property_value('db'));
     }
@@ -45,7 +45,7 @@ class SQLite3ConnectionBaseTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::get_new_dml_query_builder_object
      */
-    public function testGetNewDMLQueryBuilderObjectReturnsObject()
+    public function testGetNewDMLQueryBuilderObjectReturnsObject(): void
     {
         $value = $this->class->get_new_dml_query_builder_object();
 
@@ -58,7 +58,7 @@ class SQLite3ConnectionBaseTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::get_query_escaper_object
      */
-    public function testGetQueryEscaperObjectReturnsObject()
+    public function testGetQueryEscaperObjectReturnsObject(): void
     {
         $value = $this->class->get_query_escaper_object();
 
@@ -71,7 +71,7 @@ class SQLite3ConnectionBaseTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::get_query_escaper_object
      */
-    public function testGetQueryEscaperObjectCachesObject()
+    public function testGetQueryEscaperObjectCachesObject(): void
     {
         $property = $this->get_accessible_reflection_property('escaper');
         $this->assertNull($property->getValue($this->class));
@@ -87,7 +87,7 @@ class SQLite3ConnectionBaseTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::get_query_escaper_object
      */
-    public function testGetQueryEscaperObjectReturnsCachedObject()
+    public function testGetQueryEscaperObjectReturnsCachedObject(): void
     {
         $value1 = $this->class->get_query_escaper_object();
         $value2 = $this->class->get_query_escaper_object();

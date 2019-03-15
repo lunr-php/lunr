@@ -26,7 +26,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
     /**
      * Testcase constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->setUpNoPool();
     }
@@ -36,7 +36,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::indexed_result_array
      */
-    public function testIndexedResultArrayThrowsExceptionIfQueryFailed()
+    public function testIndexedResultArrayThrowsExceptionIfQueryFailed(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -71,7 +71,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::indexed_result_array
      */
-    public function testIndexedResultArrayReturnsEmptyArrayIfQueryHasNoResults()
+    public function testIndexedResultArrayReturnsEmptyArrayIfQueryHasNoResults(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -89,7 +89,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $result = $method->invokeArgs($this->class, [ &$query, 'key2' ]);
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertEmpty($result);
     }
 
@@ -98,7 +98,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::indexed_result_array
      */
-    public function testIndexedResultArrayReturnsArrayIfQueryHasResults()
+    public function testIndexedResultArrayReturnsArrayIfQueryHasResults(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -142,7 +142,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
             ],
         ];
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertEquals($indexed_result, $result);
     }
 
@@ -151,7 +151,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_array
      */
-    public function testResultArrayThrowsExceptionIfQueryFailed()
+    public function testResultArrayThrowsExceptionIfQueryFailed(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -186,7 +186,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_array
      */
-    public function testResultArrayReturnsEmptyArrayIfQueryHasNoResults()
+    public function testResultArrayReturnsEmptyArrayIfQueryHasNoResults(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -204,7 +204,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $result = $method->invokeArgs($this->class, [ &$query ]);
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertEmpty($result);
     }
 
@@ -213,7 +213,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_array
      */
-    public function testResultArrayReturnsArrayIfQueryHasResults()
+    public function testResultArrayReturnsArrayIfQueryHasResults(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -237,7 +237,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $result = $method->invokeArgs($this->class, [ &$query ]);
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertEquals($query_result, $result);
     }
 
@@ -246,7 +246,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_row
      */
-    public function testResultRowThrowsExceptionIfQueryFailed()
+    public function testResultRowThrowsExceptionIfQueryFailed(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -281,7 +281,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_row
      */
-    public function testResultRowReturnsEmptyArrayIfQueryHasNoResults()
+    public function testResultRowReturnsEmptyArrayIfQueryHasNoResults(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -299,7 +299,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $result = $method->invokeArgs($this->class, [ &$query ]);
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertEmpty($result);
     }
 
@@ -308,7 +308,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_row
      */
-    public function testResultRowReturnsArrayIfQueryHasResults()
+    public function testResultRowReturnsArrayIfQueryHasResults(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -332,7 +332,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $result = $method->invokeArgs($this->class, [ &$query ]);
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertEquals($query_result, $result);
     }
 
@@ -341,7 +341,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_column
      */
-    public function testResultColumnThrowsExceptionIfQueryFailed()
+    public function testResultColumnThrowsExceptionIfQueryFailed(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -376,7 +376,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_column
      */
-    public function testResultColumnReturnsEmptyArrayIfQueryHasNoResults()
+    public function testResultColumnReturnsEmptyArrayIfQueryHasNoResults(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -394,7 +394,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $result = $method->invokeArgs($this->class, [ &$query, 'col' ]);
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertEmpty($result);
     }
 
@@ -403,7 +403,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_column
      */
-    public function testResultColumnReturnsArrayIfQueryHasResults()
+    public function testResultColumnReturnsArrayIfQueryHasResults(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -427,7 +427,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $result = $method->invokeArgs($this->class, [ &$query, 'col' ]);
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertEquals($query_result, $result);
     }
 
@@ -436,7 +436,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_cell
      */
-    public function testResultCellThrowsExceptionIfQueryFailed()
+    public function testResultCellThrowsExceptionIfQueryFailed(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -471,7 +471,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_cell
      */
-    public function testResultCellReturnsEmptyStringIfQueryHasNoResults()
+    public function testResultCellReturnsEmptyStringIfQueryHasNoResults(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -497,7 +497,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_cell
      */
-    public function testResultCellReturnsValueIfQueryHasResults()
+    public function testResultCellReturnsValueIfQueryHasResults(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -529,7 +529,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_retry
      */
-    public function testResultRetryReturnsQueryInNoDeadlock()
+    public function testResultRetryReturnsQueryInNoDeadlock(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -551,7 +551,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_retry
      */
-    public function testResultRetryReExecutesQueryInDeadlock()
+    public function testResultRetryReExecutesQueryInDeadlock(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -582,7 +582,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_retry
      */
-    public function testResultRetryReExecutesQueryInDeadlockMoreThanOnce()
+    public function testResultRetryReExecutesQueryInDeadlockMoreThanOnce(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -617,7 +617,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_boolean
      */
-    public function testResultHasFailedTrueIfQueryFailed()
+    public function testResultHasFailedTrueIfQueryFailed(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
             ->disableOriginalConstructor()
@@ -652,7 +652,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_boolean
      */
-    public function testResultHasFailedFalseIfQuerySuccesfull()
+    public function testResultHasFailedFalseIfQuerySuccesfull(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
             ->disableOriginalConstructor()
@@ -674,7 +674,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::get_affected_rows
      */
-    public function testGetAffectedRowsThrowsExceptionIfQueryFailed()
+    public function testGetAffectedRowsThrowsExceptionIfQueryFailed(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -709,7 +709,7 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::get_affected_rows
      */
-    public function testGetAffectedRowsReturnsAffectedRowsOnSuccess()
+    public function testGetAffectedRowsReturnsAffectedRowsOnSuccess(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()

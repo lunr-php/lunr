@@ -27,7 +27,7 @@ class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::uuidvalue
      */
-    public function testEscapingUUIDValue()
+    public function testEscapingUUIDValue(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -42,7 +42,7 @@ class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithCollation
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::uuidvalue
      */
-    public function testEscapingUUIDValueWithCollation()
+    public function testEscapingUUIDValueWithCollation(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -59,7 +59,7 @@ class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::uuidvalue
      */
-    public function testEscapingUUIDValueWithCharset()
+    public function testEscapingUUIDValueWithCharset(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -74,7 +74,7 @@ class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithCollation
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::uuidvalue
      */
-    public function testEscapingUUIDValueWithCollationAndCharset()
+    public function testEscapingUUIDValueWithCollationAndCharset(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')

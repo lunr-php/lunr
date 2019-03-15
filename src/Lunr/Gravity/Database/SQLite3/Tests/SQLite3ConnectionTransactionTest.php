@@ -28,7 +28,7 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::begin_transaction
      */
-    public function testBeginTransactionStartsTransactionWhenConnected()
+    public function testBeginTransactionStartsTransactionWhenConnected(): void
     {
         $this->set_reflection_property_value('connected', TRUE);
 
@@ -45,7 +45,7 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::begin_transaction
      */
-    public function testBeginTransactionThrowsExceptionWhenNotConnected()
+    public function testBeginTransactionThrowsExceptionWhenNotConnected(): void
     {
         $this->set_reflection_property_value('connected', FALSE);
 
@@ -67,7 +67,7 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::commit
      */
-    public function testCommitWhenConnected()
+    public function testCommitWhenConnected(): void
     {
         $this->set_reflection_property_value('connected', TRUE);
 
@@ -84,7 +84,7 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::commit
      */
-    public function testCommitThrowsExceptionWhenNotConnected()
+    public function testCommitThrowsExceptionWhenNotConnected(): void
     {
         $this->set_reflection_property_value('connected', FALSE);
 
@@ -106,7 +106,7 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::rollback
      */
-    public function testRollbackWhenConnected()
+    public function testRollbackWhenConnected(): void
     {
         $this->set_reflection_property_value('connected', TRUE);
 
@@ -123,7 +123,7 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::commit
      */
-    public function testRollbackThrowsExceptionWhenNotConnected()
+    public function testRollbackThrowsExceptionWhenNotConnected(): void
     {
         $this->set_reflection_property_value('connected', FALSE);
 
@@ -145,7 +145,7 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::end_transaction
      */
-    public function testEndTransactionWhenConnected()
+    public function testEndTransactionWhenConnected(): void
     {
         $this->set_reflection_property_value('connected', TRUE);
 
@@ -162,7 +162,7 @@ class SQLite3ConnectionTransactionTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::end_transaction
      */
-    public function testEndTransactionThrowsExceptionWhenNotConnected()
+    public function testEndTransactionThrowsExceptionWhenNotConnected(): void
     {
         $this->set_reflection_property_value('connected', FALSE);
 

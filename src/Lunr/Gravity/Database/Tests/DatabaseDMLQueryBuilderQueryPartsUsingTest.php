@@ -24,7 +24,7 @@ class DatabaseDMLQueryBuilderQueryPartsUsingTest extends DatabaseDMLQueryBuilder
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_using
      */
-    public function testUsingWithJoinTypeEmpty()
+    public function testUsingWithJoinTypeEmpty(): void
     {
         $method = $this->get_accessible_reflection_method('sql_using');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -41,7 +41,7 @@ class DatabaseDMLQueryBuilderQueryPartsUsingTest extends DatabaseDMLQueryBuilder
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_using
      */
-    public function testUsingAppendsNewColumnithJoinTypeUsing()
+    public function testUsingAppendsNewColumnithJoinTypeUsing(): void
     {
         $method = $this->get_accessible_reflection_method('sql_using');
         $this->set_reflection_property_value('join', 'INNER JOIN `table2` USING (column1)');
@@ -60,7 +60,7 @@ class DatabaseDMLQueryBuilderQueryPartsUsingTest extends DatabaseDMLQueryBuilder
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_using
      */
-    public function testUsingJoinTypeStaysUsing()
+    public function testUsingJoinTypeStaysUsing(): void
     {
         $method = $this->get_accessible_reflection_method('sql_using');
         $this->set_reflection_property_value('join', 'INNER JOIN `table2` USING (column1)');
@@ -77,7 +77,7 @@ class DatabaseDMLQueryBuilderQueryPartsUsingTest extends DatabaseDMLQueryBuilder
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_using
      */
-    public function testUsingMultipleColumn()
+    public function testUsingMultipleColumn(): void
     {
         $method = $this->get_accessible_reflection_method('sql_using');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -94,7 +94,7 @@ class DatabaseDMLQueryBuilderQueryPartsUsingTest extends DatabaseDMLQueryBuilder
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_using
      */
-    public function testUsingWithJoinTypeOn()
+    public function testUsingWithJoinTypeOn(): void
     {
         $method = $this->get_accessible_reflection_method('sql_using');
 
@@ -112,7 +112,7 @@ class DatabaseDMLQueryBuilderQueryPartsUsingTest extends DatabaseDMLQueryBuilder
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_using
      */
-    public function testUsingFinishedJoin()
+    public function testUsingFinishedJoin(): void
     {
         $method = $this->get_accessible_reflection_method('sql_using');
 
@@ -129,7 +129,7 @@ class DatabaseDMLQueryBuilderQueryPartsUsingTest extends DatabaseDMLQueryBuilder
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_using
      */
-    public function testUsingSetCorrectJoinType()
+    public function testUsingSetCorrectJoinType(): void
     {
         $method = $this->get_accessible_reflection_method('sql_using');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -145,7 +145,7 @@ class DatabaseDMLQueryBuilderQueryPartsUsingTest extends DatabaseDMLQueryBuilder
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_using
      */
-    public function testUsingSetDoesntChangeJoinType()
+    public function testUsingSetDoesntChangeJoinType(): void
     {
         $method = $this->get_accessible_reflection_method('sql_using');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
@@ -161,7 +161,7 @@ class DatabaseDMLQueryBuilderQueryPartsUsingTest extends DatabaseDMLQueryBuilder
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_using
      */
-    public function testUsingReturnsIfWrongJoinType()
+    public function testUsingReturnsIfWrongJoinType(): void
     {
         $method = $this->get_accessible_reflection_method('sql_using');
         $this->set_reflection_property_value('is_unfinished_join', TRUE);

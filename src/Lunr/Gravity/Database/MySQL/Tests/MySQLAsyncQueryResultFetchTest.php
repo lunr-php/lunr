@@ -28,7 +28,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::has_failed
      */
-    public function testHasFailedFetchesDataIfFetchedIsFalse()
+    public function testHasFailedFetchesDataIfFetchedIsFalse(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -42,7 +42,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::has_failed
      */
-    public function testHasFailedDoesNotFetchDataIfFetchedIsTrue()
+    public function testHasFailedDoesNotFetchDataIfFetchedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
@@ -63,7 +63,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::affected_rows
      */
-    public function testAffectedRowsFetchesDataIfFetchedIsFalse()
+    public function testAffectedRowsFetchesDataIfFetchedIsFalse(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -77,7 +77,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::affected_rows
      */
-    public function testAffectedRowsDoesNotFetchDataIfFetchedIsTrue()
+    public function testAffectedRowsDoesNotFetchDataIfFetchedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
@@ -98,7 +98,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::number_of_rows
      */
-    public function testNumberOfRowsRowsFetchesDataIfFetchedIsFalse()
+    public function testNumberOfRowsRowsFetchesDataIfFetchedIsFalse(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -112,7 +112,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::number_of_rows
      */
-    public function testNumberOfRowsDoesNotFetchDataIfFetchedIsTrue()
+    public function testNumberOfRowsDoesNotFetchDataIfFetchedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
@@ -133,7 +133,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::error_message
      */
-    public function testErrorMessageFetchesDataIfFetchedIsFalse()
+    public function testErrorMessageFetchesDataIfFetchedIsFalse(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -147,7 +147,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::error_message
      */
-    public function testErrorMessageDoesNotFetchDataIfFetchedIsTrue()
+    public function testErrorMessageDoesNotFetchDataIfFetchedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
@@ -168,7 +168,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::error_message
      */
-    public function testErrorNumberFetchesDataIfFetchedIsFalse()
+    public function testErrorNumberFetchesDataIfFetchedIsFalse(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -182,7 +182,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::error_message
      */
-    public function testErrorNumberDoesNotFetchDataIfFetchedIsTrue()
+    public function testErrorNumberDoesNotFetchDataIfFetchedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
@@ -203,7 +203,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::error_message
      */
-    public function testInsertIDFetchesDataIfFetchedIsFalse()
+    public function testInsertIDFetchesDataIfFetchedIsFalse(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -217,7 +217,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::error_message
      */
-    public function testInsertIDDoesNotFetchDataIfFetchedIsTrue()
+    public function testInsertIDDoesNotFetchDataIfFetchedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
@@ -238,7 +238,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_array
      */
-    public function testResultArrayFetchesDataIfFetchedIsFalse()
+    public function testResultArrayFetchesDataIfFetchedIsFalse(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -252,7 +252,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_array
      */
-    public function testResultArrayDoesNotFetchDataIfFetchedIsTrue()
+    public function testResultArrayDoesNotFetchDataIfFetchedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
@@ -273,7 +273,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_row
      */
-    public function testResultRowFetchesDataIfFetchedIsFalse()
+    public function testResultRowFetchesDataIfFetchedIsFalse(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -287,7 +287,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_row
      */
-    public function testResultRowDoesNotFetchDataIfFetchedIsTrue()
+    public function testResultRowDoesNotFetchDataIfFetchedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
@@ -308,7 +308,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_column
      */
-    public function testResultColumnFetchesDataIfFetchedIsFalse()
+    public function testResultColumnFetchesDataIfFetchedIsFalse(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -322,7 +322,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_column
      */
-    public function testResultColumnDoesNotFetchDataIfFetchedIsTrue()
+    public function testResultColumnDoesNotFetchDataIfFetchedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
@@ -343,7 +343,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_cell
      */
-    public function testResultCellFetchesDataIfFetchedIsFalse()
+    public function testResultCellFetchesDataIfFetchedIsFalse(): void
     {
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
@@ -357,7 +357,7 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::result_cell
      */
-    public function testResultCellDoesNotFetchDataIfFetchedIsTrue()
+    public function testResultCellDoesNotFetchDataIfFetchedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('fetched');
         $property->setAccessible(TRUE);

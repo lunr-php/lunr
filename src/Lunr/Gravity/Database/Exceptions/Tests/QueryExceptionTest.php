@@ -30,7 +30,7 @@ abstract class QueryExceptionTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->result = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseQueryResultInterface')
                              ->disableOriginalConstructor()
@@ -55,7 +55,7 @@ abstract class QueryExceptionTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->result);
         unset($this->reflection);

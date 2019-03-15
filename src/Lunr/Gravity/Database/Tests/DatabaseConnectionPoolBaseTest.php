@@ -24,7 +24,7 @@ class DatabaseConnectionPoolBaseTest extends DatabaseConnectionPoolTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->emptySetup();
     }
@@ -32,7 +32,7 @@ class DatabaseConnectionPoolBaseTest extends DatabaseConnectionPoolTest
     /**
      * Test that the Configuration class was passed correctly.
      */
-    public function testConfigurationPassedByReference()
+    public function testConfigurationPassedByReference(): void
     {
         $property = $this->pool_reflection->getProperty('configuration');
         $property->setAccessible(TRUE);
@@ -46,7 +46,7 @@ class DatabaseConnectionPoolBaseTest extends DatabaseConnectionPoolTest
     /**
      * Test that the Logger class was passed correctly.
      */
-    public function testLoggerPassedByReference()
+    public function testLoggerPassedByReference(): void
     {
         $property = $this->pool_reflection->getProperty('logger');
         $property->setAccessible(TRUE);
@@ -60,28 +60,28 @@ class DatabaseConnectionPoolBaseTest extends DatabaseConnectionPoolTest
     /**
      * Test that the ro_pool was setup corectly.
      */
-    public function testReadonlyPoolSetupCorrectly()
+    public function testReadonlyPoolSetupCorrectly(): void
     {
         $property = $this->pool_reflection->getProperty('ro_pool');
         $property->setAccessible(TRUE);
 
         $value = $property->getValue($this->pool);
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
     /**
      * Test that the rw_pool was setup corectly.
      */
-    public function testReadWritePoolSetupCorrectly()
+    public function testReadWritePoolSetupCorrectly(): void
     {
         $property = $this->pool_reflection->getProperty('rw_pool');
         $property->setAccessible(TRUE);
 
         $value = $property->getValue($this->pool);
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 

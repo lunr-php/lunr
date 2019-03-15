@@ -25,7 +25,7 @@ class SQLDMLQueryBuilderInsertTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::select_statement
      */
-    public function testSelectStatementReturnsSelfReference()
+    public function testSelectStatementReturnsSelfReference(): void
     {
         $return = $this->class->select_statement('SELECT * FROM table');
 
@@ -38,7 +38,7 @@ class SQLDMLQueryBuilderInsertTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::into
      */
-    public function testIntoReturnsSelfReference()
+    public function testIntoReturnsSelfReference(): void
     {
         $return = $this->class->into('table');
 
@@ -51,7 +51,7 @@ class SQLDMLQueryBuilderInsertTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::column_names
      */
-    public function testColumnNamesReturnsSelfReference()
+    public function testColumnNamesReturnsSelfReference(): void
     {
         $return = $this->class->column_names([ 'column1' ]);
 
@@ -64,7 +64,7 @@ class SQLDMLQueryBuilderInsertTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::values
      */
-    public function testValuesReturnsSelfReference()
+    public function testValuesReturnsSelfReference(): void
     {
         $return = $this->class->values([ 'value1' ]);
 

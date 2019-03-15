@@ -28,7 +28,7 @@ class MariaDBConnectionBaseTest extends MariaDBConnectionTest
      *
      * @covers Lunr\Gravity\Database\MariaDB\MariaDBConnection::get_new_dml_query_builder_object
      */
-    public function testGetDMLQueryBuilder()
+    public function testGetDMLQueryBuilder(): void
     {
         $querybuilder = $this->class->get_new_dml_query_builder_object(FALSE);
 
@@ -41,7 +41,7 @@ class MariaDBConnectionBaseTest extends MariaDBConnectionTest
      *
      * @covers Lunr\Gravity\Database\MariaDB\MariaDBConnection::get_new_dml_query_builder_object
      */
-    public function testGetSimpleDMLQueryBuilder()
+    public function testGetSimpleDMLQueryBuilder(): void
     {
         $querybuilder = $this->class->get_new_dml_query_builder_object(TRUE);
 

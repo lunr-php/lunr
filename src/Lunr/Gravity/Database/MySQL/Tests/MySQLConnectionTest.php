@@ -53,7 +53,7 @@ abstract class MySQLConnectionTest extends LunrBaseTest
      *
      * @return void
      */
-    public function emptySetUp()
+    public function emptySetUp(): void
     {
         $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -79,7 +79,7 @@ abstract class MySQLConnectionTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -117,7 +117,7 @@ abstract class MySQLConnectionTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -130,7 +130,7 @@ abstract class MySQLConnectionTest extends LunrBaseTest
      *
      * @return array $strings Array of strings and their expected escaped value
      */
-    public function escapeStringProvider()
+    public function escapeStringProvider(): array
     {
         $strings   = [];
         $strings[] = [ "'--", "\'--", "\'--" ];

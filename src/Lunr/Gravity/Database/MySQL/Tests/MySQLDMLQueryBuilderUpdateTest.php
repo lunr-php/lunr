@@ -30,7 +30,7 @@ class MySQLDMLQueryBuilderUpdateTest extends MySQLDMLQueryBuilderTest
      * @dataProvider updateModesStandardProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::update_mode
      */
-    public function testUpdateModeSetsStandardCorrectly($mode)
+    public function testUpdateModeSetsStandardCorrectly($mode): void
     {
         $property = $this->builder_reflection->getProperty('update_mode');
         $property->setAccessible(TRUE);
@@ -46,7 +46,7 @@ class MySQLDMLQueryBuilderUpdateTest extends MySQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testUpdateModeEmptyByDefault
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::update_mode
      */
-    public function testUpdateModeIgnoresUnknownValues()
+    public function testUpdateModeIgnoresUnknownValues(): void
     {
         $property = $this->builder_reflection->getProperty('update_mode');
         $property->setAccessible(TRUE);
@@ -55,7 +55,7 @@ class MySQLDMLQueryBuilderUpdateTest extends MySQLDMLQueryBuilderTest
 
         $value = $property->getValue($this->builder);
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 

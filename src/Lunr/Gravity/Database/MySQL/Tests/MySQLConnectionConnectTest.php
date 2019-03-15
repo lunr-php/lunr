@@ -28,7 +28,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::connect
      */
-    public function testSuccessfulConnectReadonly()
+    public function testSuccessfulConnectReadonly(): void
     {
         $mysqli = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\Tests\MockMySQLi')
                        ->setMethods([ 'connect', 'ssl_set', 'set_charset' ])
@@ -66,7 +66,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::connect
      */
-    public function testSuccessfulConnectReadwrite()
+    public function testSuccessfulConnectReadwrite(): void
     {
         $mysqli = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\Tests\MockMySQLi')
                        ->setMethods([ 'connect', 'ssl_set', 'set_charset' ])
@@ -102,7 +102,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::connect
      */
-    public function testSuccessfulConnectReadwriteWithSSL()
+    public function testSuccessfulConnectReadwriteWithSSL(): void
     {
         $mysqli = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\Tests\MockMySQLi')
                        ->setMethods([ 'connect', 'ssl_set', 'set_charset' ])
@@ -144,7 +144,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::connect
      */
-    public function testFailedConnect()
+    public function testFailedConnect(): void
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -181,7 +181,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::connect
      */
-    public function testConnectDoesNotReconnectWhenAlreadyConnected()
+    public function testConnectDoesNotReconnectWhenAlreadyConnected(): void
     {
         $property = $this->get_accessible_reflection_property('connected');
         $property->setValue($this->class, TRUE);
@@ -209,7 +209,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::connect
      */
-    public function testConnectFailsWhenDriverIsNotMysql()
+    public function testConnectFailsWhenDriverIsNotMysql(): void
     {
         $sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -252,7 +252,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::disconnect
      */
-    public function testDisconnectDoesNotTryToDisconnectWhenNotConnected()
+    public function testDisconnectDoesNotTryToDisconnectWhenNotConnected(): void
     {
         $this->mysqli->expects($this->never())
                      ->method('kill');
@@ -270,7 +270,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::disconnect
      */
-    public function testDisconnect()
+    public function testDisconnect(): void
     {
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -295,7 +295,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::change_database
      */
-    public function testChangeDatabaseThrowsExceptionWhenNotConnected()
+    public function testChangeDatabaseThrowsExceptionWhenNotConnected(): void
     {
         $mysqli = new MockMySQLiFailedConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -313,7 +313,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::change_database
      */
-    public function testChangeDatabaseReturnsFalseWhenSelectDBFailed()
+    public function testChangeDatabaseReturnsFalseWhenSelectDBFailed(): void
     {
         $property = $this->get_accessible_reflection_property('connected');
         $property->setValue($this->class, TRUE);
@@ -333,7 +333,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::change_database
      */
-    public function testChangeDatabaseReturnsTrueWhenSelectDBWorked()
+    public function testChangeDatabaseReturnsTrueWhenSelectDBWorked(): void
     {
         $property = $this->get_accessible_reflection_property('connected');
         $property->setValue($this->class, TRUE);
@@ -353,7 +353,7 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::set_option
      */
-    public function testOptionsWorks()
+    public function testOptionsWorks(): void
     {
         $this->class->set_option(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, FALSE);
         $this->class->set_option(MYSQLI_OPT_CONNECT_TIMEOUT, 42);

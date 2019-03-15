@@ -24,7 +24,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::get_insert_query
      */
-    public function testGetInsertQuery()
+    public function testGetInsertQuery(): void
     {
         $this->builder->expects($this->once())
                       ->method('get_insert_query')
@@ -38,7 +38,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::get_replace_query
      */
-    public function testGetReplaceQuery()
+    public function testGetReplaceQuery(): void
     {
         $this->builder->expects($this->once())
                       ->method('get_replace_query')
@@ -52,7 +52,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::get_delete_query
      */
-    public function testGetDeleteQuery()
+    public function testGetDeleteQuery(): void
     {
         $this->builder->expects($this->once())
                       ->method('get_delete_query')
@@ -66,7 +66,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::get_update_query
      */
-    public function testGetUpdateQuery()
+    public function testGetUpdateQuery(): void
     {
         $this->builder->expects($this->once())
                       ->method('get_update_query')
@@ -80,7 +80,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::insert_mode
      */
-    public function testInsertMode()
+    public function testInsertMode(): void
     {
         $this->builder->expects($this->once())
                       ->method('insert_mode')
@@ -95,7 +95,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::replace_mode
      */
-    public function testReplaceMode()
+    public function testReplaceMode(): void
     {
         $this->builder->expects($this->once())
                       ->method('replace_mode')
@@ -125,7 +125,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::delete_mode
      */
-    public function testDeleteMode()
+    public function testDeleteMode(): void
     {
         $this->builder->expects($this->once())
                       ->method('delete_mode')
@@ -140,7 +140,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::into
      */
-    public function testInto()
+    public function testInto(): void
     {
         $this->escaper->expects($this->once())
                       ->method('table')
@@ -160,7 +160,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::column_names
      */
-    public function testColumnNamesWithOneColumn()
+    public function testColumnNamesWithOneColumn(): void
     {
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -180,7 +180,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::column_names
      */
-    public function testColumnNamesWithMultipleColumns()
+    public function testColumnNamesWithMultipleColumns(): void
     {
         $this->escaper->expects($this->at(0))
                       ->method('column')
@@ -205,7 +205,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::update
      */
-    public function testUpdateWithOneTable()
+    public function testUpdateWithOneTable(): void
     {
         $this->escaper->expects($this->once())
                       ->method('table')
@@ -225,7 +225,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::update
      */
-    public function testUpdateWithMultipleTables()
+    public function testUpdateWithMultipleTables(): void
     {
         $this->escaper->expects($this->at(0))
                       ->method('table')
@@ -250,7 +250,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::delete
      */
-    public function testDelete()
+    public function testDelete(): void
     {
         $this->builder->expects($this->once())
                       ->method('delete')
@@ -265,7 +265,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::select_statement
      */
-    public function testSelectStatementInInto()
+    public function testSelectStatementInInto(): void
     {
         $query = 'SELECT * from `test`';
         $this->builder->expects($this->once())
@@ -281,7 +281,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::lock_mode
      */
-    public function testLockMode()
+    public function testLockMode(): void
     {
         $this->builder->expects($this->once())
                       ->method('lock_mode')
@@ -296,7 +296,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::values
      */
-    public function testValues()
+    public function testValues(): void
     {
         $this->builder->expects($this->once())
                       ->method('values')
@@ -311,7 +311,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::set
      */
-    public function testSetClause()
+    public function testSetClause(): void
     {
         $this->builder->expects($this->once())
                       ->method('set')
@@ -326,7 +326,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::with
      */
-    public function testWith()
+    public function testWith(): void
     {
         $this->builder->expects($this->once())
                       ->method('with')
@@ -341,7 +341,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::with_recursive
      */
-    public function testWithRecursive()
+    public function testWithRecursive(): void
     {
         $this->builder->expects($this->once())
                       ->method('with_recursive')

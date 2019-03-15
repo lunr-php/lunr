@@ -27,7 +27,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::insert_mode
      */
-    public function testInsertModeReturnsSelfReference()
+    public function testInsertModeReturnsSelfReference(): void
     {
         $return = $this->builder->insert_mode('LOW_PRIORITY');
 
@@ -40,7 +40,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::replace_mode
      */
-    public function testReplaceModeReturnsSelfReference()
+    public function testReplaceModeReturnsSelfReference(): void
     {
         $return = $this->builder->replace_mode('LOW_PRIORITY');
 
@@ -56,7 +56,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
      * @dataProvider insertModesStandardProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::insert_mode
      */
-    public function testInsertModeSetsStandardCorrectly($mode)
+    public function testInsertModeSetsStandardCorrectly($mode): void
     {
         $property = $this->builder_reflection->getProperty('insert_mode');
         $property->setAccessible(TRUE);
@@ -71,7 +71,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::insert_mode
      */
-    public function testInsertModeSetsIgnoresUnknownValues()
+    public function testInsertModeSetsIgnoresUnknownValues(): void
     {
         $property = $this->builder_reflection->getProperty('insert_mode');
         $property->setAccessible(TRUE);
@@ -80,7 +80,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
 
         $value = $property->getValue($this->builder);
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -93,7 +93,7 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
      * @dataProvider expectedInsertModesProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::insert_mode
      */
-    public function testInsertModeCase($value, $expected)
+    public function testInsertModeCase($value, $expected): void
     {
         $property = $this->builder_reflection->getProperty('insert_mode');
         $property->setAccessible(TRUE);

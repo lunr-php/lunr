@@ -26,7 +26,7 @@ class DatabaseDMLQueryBuilderQueryPartsUpdateTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_update
      */
-    public function testInitialUpdate()
+    public function testInitialUpdate(): void
     {
         $method = $this->get_accessible_reflection_method('sql_update');
 
@@ -42,7 +42,7 @@ class DatabaseDMLQueryBuilderQueryPartsUpdateTest extends DatabaseDMLQueryBuilde
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_update
      */
-    public function testIncrementalUpdate()
+    public function testIncrementalUpdate(): void
     {
         $method = $this->get_accessible_reflection_method('sql_update');
 

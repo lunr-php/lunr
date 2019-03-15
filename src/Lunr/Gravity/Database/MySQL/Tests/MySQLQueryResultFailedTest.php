@@ -25,7 +25,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->failedSetup();
     }
@@ -33,7 +33,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
     /**
      * Test that the success flag is FALSE.
      */
-    public function testSuccessIsFalse()
+    public function testSuccessIsFalse(): void
     {
         $property = $this->result_reflection->getProperty('success');
         $property->setAccessible(TRUE);
@@ -44,7 +44,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
     /**
      * Test that the result value is FALSE.
      */
-    public function testResultIsFalse()
+    public function testResultIsFalse(): void
     {
         $property = $this->result_reflection->getProperty('result');
         $property->setAccessible(TRUE);
@@ -55,7 +55,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
     /**
      * Test that the freed flasg is TRUE.
      */
-    public function testFreedIsTrue()
+    public function testFreedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('freed');
         $property->setAccessible(TRUE);
@@ -68,7 +68,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::has_failed
      */
-    public function testHasFailedReturnsTrue()
+    public function testHasFailedReturnsTrue(): void
     {
         $this->assertTrue($this->result->has_failed());
     }
@@ -76,7 +76,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
     /**
      * Test that error message is a string on failed query.
      */
-    public function testErrorMessageIsString()
+    public function testErrorMessageIsString(): void
     {
         $property = $this->result_reflection->getProperty('error_message');
         $property->setAccessible(TRUE);
@@ -87,7 +87,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
     /**
      * Test that error number is a number on a failed query.
      */
-    public function testErrorNumberIsNumber()
+    public function testErrorNumberIsNumber(): void
     {
         $property = $this->result_reflection->getProperty('error_number');
         $property->setAccessible(TRUE);
@@ -98,7 +98,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
     /**
      * Test that error number is zero on successful query.
      */
-    public function testInsertIDIsZero()
+    public function testInsertIDIsZero(): void
     {
         $property = $this->result_reflection->getProperty('insert_id');
         $property->setAccessible(TRUE);
@@ -109,7 +109,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
     /**
      * Test that affected rows is a number on successful query.
      */
-    public function testAffectedRowsIsNumber()
+    public function testAffectedRowsIsNumber(): void
     {
         $property = $this->result_reflection->getProperty('affected_rows');
         $property->setAccessible(TRUE);
@@ -120,7 +120,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
     /**
      * Test that number of rows is a number on successful query.
      */
-    public function testNumberOfRowsIsNumber()
+    public function testNumberOfRowsIsNumber(): void
     {
         $property = $this->result_reflection->getProperty('num_rows');
         $property->setAccessible(TRUE);
@@ -133,14 +133,14 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::number_of_rows
      */
-    public function testNumberOfRowsReturnsNumber()
+    public function testNumberOfRowsReturnsNumber(): void
     {
         $class = $this->result_reflection->getProperty('num_rows');
         $class->setAccessible(TRUE);
         $class->setValue($this->result, 666);
 
         $value = $this->result->number_of_rows();
-        $this->assertInternalType('int', $value);
+        $this->assertIsInt($value);
         $this->assertEquals(666, $value);
     }
 
@@ -149,11 +149,11 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_array
      */
-    public function testResultArrayReturnsEmptyArray()
+    public function testResultArrayReturnsEmptyArray(): void
     {
         $value = $this->result->result_array();
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -162,11 +162,11 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_row
      */
-    public function testResultRowReturnsEmptyArray()
+    public function testResultRowReturnsEmptyArray(): void
     {
         $value = $this->result->result_row();
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -175,11 +175,11 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_column
      */
-    public function testResultColumnReturnsEmptyArray()
+    public function testResultColumnReturnsEmptyArray(): void
     {
         $value = $this->result->result_column('column');
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -188,7 +188,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_cell
      */
-    public function testResultCellReturnsNull()
+    public function testResultCellReturnsNull(): void
     {
         $this->assertNull($this->result->result_cell('cell'));
     }
@@ -198,7 +198,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::has_deadlock
      */
-    public function testHasDeadlockReturnsTrue()
+    public function testHasDeadlockReturnsTrue(): void
     {
         $property = $this->result_reflection->getProperty('error_number');
         $property->setAccessible(TRUE);
@@ -213,7 +213,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::has_deadlock
      */
-    public function testHasDeadlockReturnsFalse()
+    public function testHasDeadlockReturnsFalse(): void
     {
         $property = $this->result_reflection->getProperty('error_number');
         $property->setAccessible(TRUE);

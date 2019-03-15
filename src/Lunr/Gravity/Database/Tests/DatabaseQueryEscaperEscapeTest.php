@@ -32,7 +32,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @dataProvider columnNameProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::escape_location_reference
      */
-    public function testEscapeLocationReference($col, $escaped)
+    public function testEscapeLocationReference($col, $escaped): void
     {
         $method = $this->get_accessible_reflection_method('escape_location_reference');
         $this->assertEquals($escaped, $method->invokeArgs($this->class, [ $col ]));
@@ -43,7 +43,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      *
      * @covers Lunr\Gravity\Database\DatabaseQueryEscaper::collate
      */
-    public function testCollateWithValueOnly()
+    public function testCollateWithValueOnly(): void
     {
         $method = $this->get_accessible_reflection_method('collate');
         $this->assertEquals('value', $method->invokeArgs($this->class, [ 'value', '' ]));
@@ -54,7 +54,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      *
      * @covers Lunr\Gravity\Database\DatabaseQueryEscaper::collate
      */
-    public function testCollateWithCollation()
+    public function testCollateWithCollation(): void
     {
         $method = $this->get_accessible_reflection_method('collate');
 
@@ -74,7 +74,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @depends      testEscapeLocationReference
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::column
      */
-    public function testColumnWithoutCollation($col, $escaped)
+    public function testColumnWithoutCollation($col, $escaped): void
     {
         $this->assertEquals($escaped, $this->class->column($col));
     }
@@ -90,7 +90,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @depends      testEscapeLocationReference
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::column
      */
-    public function testColumnWithCollation($col, $escaped)
+    public function testColumnWithCollation($col, $escaped): void
     {
         $value = $this->class->column($col, 'utf8_general_ci');
 
@@ -107,7 +107,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @depends      testEscapeLocationReference
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::result_column
      */
-    public function testResultColumnWithoutAlias($col, $escaped)
+    public function testResultColumnWithoutAlias($col, $escaped): void
     {
         $this->assertEquals($escaped, $this->class->result_column($col));
     }
@@ -122,7 +122,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @depends      testEscapeLocationReference
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::result_column
      */
-    public function testResultColumnWithAlias($col, $escaped)
+    public function testResultColumnWithAlias($col, $escaped): void
     {
         $alias = 'alias';
         $value = $this->class->result_column($col, $alias);
@@ -147,7 +147,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @depends      testEscapeLocationReference
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::hex_result_column
      */
-    public function testHexResultColumnWithoutAlias($col, $escaped)
+    public function testHexResultColumnWithoutAlias($col, $escaped): void
     {
         $value = $this->class->hex_result_column($col);
 
@@ -164,7 +164,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @depends      testEscapeLocationReference
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::hex_result_column
      */
-    public function testHexResultColumnWithAlias($col, $escaped)
+    public function testHexResultColumnWithAlias($col, $escaped): void
     {
         $alias = 'alias';
         $value = $this->class->hex_result_column($col, $alias);
@@ -182,7 +182,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @depends      testEscapeLocationReference
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::table
      */
-    public function testTableWithoutAlias($table, $escaped)
+    public function testTableWithoutAlias($table, $escaped): void
     {
         $value = $this->class->table($table);
 
@@ -199,7 +199,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @depends      testEscapeLocationReference
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::table
      */
-    public function testTableWithAlias($table, $escaped)
+    public function testTableWithAlias($table, $escaped): void
     {
         $alias = 'alias';
         $value = $this->class->table($table, $alias);
@@ -216,7 +216,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @dataProvider expectedIntegerProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::intvalue
      */
-    public function testEscapeIntValue($value, $expected)
+    public function testEscapeIntValue($value, $expected): void
     {
         $this->assertEquals($expected, $this->class->intvalue($value));
     }
@@ -226,7 +226,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      *
      * @covers Lunr\Gravity\Database\DatabaseQueryEscaper::intvalue
      */
-    public function testEscapeObjectAsIntValue()
+    public function testEscapeObjectAsIntValue(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Notice'))
         {
@@ -251,7 +251,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @dataProvider illegalIntegerProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::intvalue
      */
-    public function testEscapeIllegalAsIntValue($value, $illegal)
+    public function testEscapeIllegalAsIntValue($value, $illegal): void
     {
         $this->assertEquals($illegal, $this->class->intvalue($value));
     }
@@ -265,7 +265,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @dataProvider expectedFloatProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::floatvalue
      */
-    public function testEscapeFloatValue($value, $expected)
+    public function testEscapeFloatValue($value, $expected): void
     {
         $this->assertEquals($expected, $this->class->floatvalue($value));
     }
@@ -275,7 +275,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      *
      * @covers Lunr\Gravity\Database\DatabaseQueryEscaper::floatvalue
      */
-    public function testEscapeObjectAsFloatValue()
+    public function testEscapeObjectAsFloatValue(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Notice'))
         {
@@ -300,7 +300,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @dataProvider illegalFloatProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::floatvalue
      */
-    public function testEscapeIllegalAsFloatValue($value, $illegal)
+    public function testEscapeIllegalAsFloatValue($value, $illegal): void
     {
         $this->assertEquals($illegal, $this->class->floatvalue($value));
     }
@@ -310,7 +310,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      *
      * @covers Lunr\Gravity\Database\DatabaseQueryEscaper::query_value
      */
-    public function testEscapeQueryValue()
+    public function testEscapeQueryValue(): void
     {
         $this->assertEquals('(value)', $this->class->query_value('value'));
     }
@@ -320,7 +320,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      *
      * @covers Lunr\Gravity\Database\DatabaseQueryEscaper::list_value
      */
-    public function testEscapeListValueSimpleArray()
+    public function testEscapeListValueSimpleArray(): void
     {
         $values = [ 'value1', 'value2' ];
         $this->assertEquals('(value1,value2)', $this->class->list_value($values));
@@ -331,7 +331,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      *
      * @covers Lunr\Gravity\Database\DatabaseQueryEscaper::list_value
      */
-    public function testEscapeListValueSimpleArrayOne()
+    public function testEscapeListValueSimpleArrayOne(): void
     {
         $values = [ 'value1' ];
         $this->assertEquals('(value1)', $this->class->list_value($values));
@@ -345,7 +345,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      * @dataProvider invalidListValueInputProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::list_value
      */
-    public function testEscapeListValueWithInvalidInput($value)
+    public function testEscapeListValueWithInvalidInput($value): void
     {
         $this->assertEquals('', $this->class->list_value($value));
     }

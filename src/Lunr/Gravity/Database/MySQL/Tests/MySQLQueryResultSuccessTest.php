@@ -25,7 +25,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->successfulSetup();
     }
@@ -33,7 +33,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
     /**
      * Test that the success flag is TRUE.
      */
-    public function testSuccessIsTrue()
+    public function testSuccessIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('success');
         $property->setAccessible(TRUE);
@@ -44,7 +44,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
     /**
      * Test that the result value is TRUE.
      */
-    public function testResultIsTrue()
+    public function testResultIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('result');
         $property->setAccessible(TRUE);
@@ -55,7 +55,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
     /**
      * Test that the freed flasg is TRUE.
      */
-    public function testFreedIsTrue()
+    public function testFreedIsTrue(): void
     {
         $property = $this->result_reflection->getProperty('freed');
         $property->setAccessible(TRUE);
@@ -68,7 +68,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::has_failed
      */
-    public function testHasFailedReturnsFalse()
+    public function testHasFailedReturnsFalse(): void
     {
         $this->assertFalse($this->result->has_failed());
     }
@@ -78,14 +78,14 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::number_of_rows
      */
-    public function testNumberOfRowsReturnsNumber()
+    public function testNumberOfRowsReturnsNumber(): void
     {
         $class = $this->result_reflection->getProperty('num_rows');
         $class->setAccessible(TRUE);
         $class->setValue($this->result, 10);
 
         $value = $this->result->number_of_rows();
-        $this->assertInternalType('int', $value);
+        $this->assertIsInt($value);
         $this->assertEquals(10, $value);
     }
 
@@ -94,11 +94,11 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_array
      */
-    public function testResultArrayReturnsEmptyArray()
+    public function testResultArrayReturnsEmptyArray(): void
     {
         $value = $this->result->result_array();
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -107,11 +107,11 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_row
      */
-    public function testResultRowReturnsEmptyArray()
+    public function testResultRowReturnsEmptyArray(): void
     {
         $value = $this->result->result_row();
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -120,11 +120,11 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_column
      */
-    public function testResultColumnReturnsEmptyArray()
+    public function testResultColumnReturnsEmptyArray(): void
     {
         $value = $this->result->result_column('column');
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -133,7 +133,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_cell
      */
-    public function testResultCellReturnsNull()
+    public function testResultCellReturnsNull(): void
     {
         $this->assertNull($this->result->result_cell('cell'));
     }

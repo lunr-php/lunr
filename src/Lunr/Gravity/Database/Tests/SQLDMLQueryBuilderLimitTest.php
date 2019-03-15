@@ -25,7 +25,7 @@ class SQLDMLQueryBuilderLimitTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::limit
      */
-    public function testLimitWithDefaultOffset()
+    public function testLimitWithDefaultOffset(): void
     {
         $this->class->limit(10);
         $value = $this->get_reflection_property_value('limit');
@@ -38,7 +38,7 @@ class SQLDMLQueryBuilderLimitTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::limit
      */
-    public function testLimitWithCustomOffset()
+    public function testLimitWithCustomOffset(): void
     {
         $this->class->limit(10, 20);
         $value = $this->get_reflection_property_value('limit');
@@ -51,7 +51,7 @@ class SQLDMLQueryBuilderLimitTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::limit
      */
-    public function testLimitReturnsSelfReference()
+    public function testLimitReturnsSelfReference(): void
     {
         $return = $this->class->limit(10);
 

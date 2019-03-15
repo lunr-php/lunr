@@ -26,7 +26,7 @@ class DatabaseDMLQueryBuilderGetInsertQueryTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_insert_query
      */
-    public function testGetInsertQueryWithUndefinedInto()
+    public function testGetInsertQueryWithUndefinedInto(): void
     {
         $this->set_reflection_property_value('column_names', '(column1, column2)');
         $this->set_reflection_property_value('values', 'VALUES (1,2), (3,4)');
@@ -42,7 +42,7 @@ class DatabaseDMLQueryBuilderGetInsertQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_insert_query
      */
-    public function testGetInsertValuesQuery()
+    public function testGetInsertValuesQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('column_names', '(column1, column2)');
@@ -59,7 +59,7 @@ class DatabaseDMLQueryBuilderGetInsertQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_insert_query
      */
-    public function testGetInsertSetQuery()
+    public function testGetInsertSetQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('set', 'SET column1 = 1');
@@ -75,7 +75,7 @@ class DatabaseDMLQueryBuilderGetInsertQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_insert_query
      */
-    public function testGetInsertSelectQuery()
+    public function testGetInsertSelectQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('select_statement', 'SELECT column1, column2 FROM table');
@@ -91,7 +91,7 @@ class DatabaseDMLQueryBuilderGetInsertQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_insert_query
      */
-    public function testGetInsertSelectColumnsQuery()
+    public function testGetInsertSelectColumnsQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('column_names', '(column1, column2)');
@@ -108,7 +108,7 @@ class DatabaseDMLQueryBuilderGetInsertQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_insert_query
      */
-    public function testGetInsertSelectInvalidInsertModeQuery()
+    public function testGetInsertSelectInvalidInsertModeQuery(): void
     {
         $this->set_reflection_property_value('into', 'INTO table');
         $this->set_reflection_property_value('column_names', '(column1, column2)');

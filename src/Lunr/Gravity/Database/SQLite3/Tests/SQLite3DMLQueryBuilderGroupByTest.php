@@ -27,7 +27,7 @@ class SQLite3DMLQueryBuilderGroupByTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::group_by
      */
-    public function testGroupByWithDefaultOrder()
+    public function testGroupByWithDefaultOrder(): void
     {
         $this->class->group_by('group1');
         $value = $this->get_reflection_property_value('group_by');
@@ -40,7 +40,7 @@ class SQLite3DMLQueryBuilderGroupByTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::group_by
      */
-    public function testGroupByIgnoresCustomOrder()
+    public function testGroupByIgnoresCustomOrder(): void
     {
         $this->class->group_by('group1', FALSE);
         $value = $this->get_reflection_property_value('group_by');
@@ -56,7 +56,7 @@ class SQLite3DMLQueryBuilderGroupByTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::group_by
      */
-    public function testGroupByReturnsSelfReference()
+    public function testGroupByReturnsSelfReference(): void
     {
         $return = $this->class->group_by('group1');
 

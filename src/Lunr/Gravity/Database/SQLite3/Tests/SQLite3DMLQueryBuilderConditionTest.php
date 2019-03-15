@@ -28,7 +28,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_regexp
      */
-    public function testOnRegexp()
+    public function testOnRegexp(): void
     {
         $this->class->on_regexp('left', 'right');
         $this->assertPropertyEquals('join', 'ON left REGEXP right');
@@ -40,7 +40,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_regexp
      */
-    public function testOnNotRegexp()
+    public function testOnNotRegexp(): void
     {
         $this->class->on_regexp('left', 'right', TRUE);
         $this->assertPropertyEquals('join', 'ON left NOT REGEXP right');
@@ -51,7 +51,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::on_regexp
      */
-    public function testOnRegexpReturnsSelfReference()
+    public function testOnRegexpReturnsSelfReference(): void
     {
         $return = $this->class->on_regexp('left', 'right');
 
@@ -65,7 +65,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_regexp
      */
-    public function testWhereRegexp()
+    public function testWhereRegexp(): void
     {
         $this->class->where_regexp('left', 'right');
         $this->assertPropertyEquals('where', 'WHERE left REGEXP right');
@@ -77,7 +77,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_regexp
      */
-    public function testWhereNotRegexp()
+    public function testWhereNotRegexp(): void
     {
         $this->class->where_regexp('left', 'right', TRUE);
         $this->assertPropertyEquals('where', 'WHERE left NOT REGEXP right');
@@ -88,7 +88,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::where_regexp
      */
-    public function testWhereRegexpReturnsSelfReference()
+    public function testWhereRegexpReturnsSelfReference(): void
     {
         $return = $this->class->where_regexp('left', 'right');
 
@@ -102,7 +102,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_regexp
      */
-    public function testHavingRegexp()
+    public function testHavingRegexp(): void
     {
         $this->class->having_regexp('left', 'right');
         $this->assertPropertyEquals('having', 'HAVING left REGEXP right');
@@ -114,7 +114,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_regexp
      */
-    public function testHavingNotRegexp()
+    public function testHavingNotRegexp(): void
     {
         $this->class->having_regexp('left', 'right', TRUE);
         $this->assertPropertyEquals('having', 'HAVING left NOT REGEXP right');
@@ -125,7 +125,7 @@ class SQLite3DMLQueryBuilderConditionTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::having_regexp
      */
-    public function testHavingRegexpReturnsSelfReference()
+    public function testHavingRegexpReturnsSelfReference(): void
     {
         $return = $this->class->having_regexp('left', 'right');
 

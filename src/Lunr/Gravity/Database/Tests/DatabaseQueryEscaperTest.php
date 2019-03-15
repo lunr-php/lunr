@@ -33,7 +33,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseConnection')
                          ->disableOriginalConstructor()
@@ -49,7 +49,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->db);
         unset($this->class);
@@ -61,7 +61,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
      *
      * @return array $cols Array of column names and expected escaped values.
      */
-    public function columnNameProvider()
+    public function columnNameProvider(): array
     {
         $cols   = [];
         $cols[] = [ '*', '*' ];
@@ -78,7 +78,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
      *
      * @return array $cols Array of table names and expected escaped values.
      */
-    public function tableNameProvider()
+    public function tableNameProvider(): array
     {
         $cols   = [];
         $cols[] = [ 'table', '`table`' ];
@@ -92,7 +92,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
      *
      *  @return array $expecteds array of value to be escaped and their result
      */
-    public function expectedIntegerProvider()
+    public function expectedIntegerProvider(): array
     {
         $expecteds   = [];
         $expecteds[] = [ '1', 1 ];
@@ -107,7 +107,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
      *
      *  @return array $expecteds array of value to be escaped and their result
      */
-    public function expectedFloatProvider()
+    public function expectedFloatProvider(): array
     {
         $expecteds   = [];
         $expecteds[] = [ '1.0', 1 ];
@@ -121,7 +121,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
      *
      *  @return array $illegals array of value to be escaped and their result
      */
-    public function illegalIntegerProvider()
+    public function illegalIntegerProvider(): array
     {
         $illegals   = [];
         $illegals[] = [ 3.3, 3 ];
@@ -145,7 +145,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
      *
      *  @return array $illegals array of value to be escaped and their result
      */
-    public function illegalFloatProvider()
+    public function illegalFloatProvider(): array
     {
         $illegals   = [];
         $illegals[] = [ '3.3.3', 3.3 ];
@@ -168,7 +168,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
      *
      * @return array $values Array of invalid values.
      */
-    public function invalidListValueInputProvider()
+    public function invalidListValueInputProvider(): array
     {
         $values   = [];
         $values[] = [ 0 ];

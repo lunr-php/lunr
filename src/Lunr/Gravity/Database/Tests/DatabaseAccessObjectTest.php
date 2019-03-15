@@ -46,7 +46,7 @@ abstract class DatabaseAccessObjectTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUpNoPool()
+    public function setUpNoPool(): void
     {
         $this->pool = NULL;
 
@@ -76,7 +76,7 @@ abstract class DatabaseAccessObjectTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUpPool()
+    public function setUpPool(): void
     {
         $this->pool = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseConnectionPool')
                            ->disableOriginalConstructor()
@@ -106,7 +106,7 @@ abstract class DatabaseAccessObjectTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->pool);
         unset($this->db);

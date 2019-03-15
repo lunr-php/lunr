@@ -24,7 +24,7 @@ class PhysicalFilesystemAccessObjectRmTest extends PhysicalFilesystemAccessObjec
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::rm
      */
-    public function testRmFails()
+    public function testRmFails(): void
     {
         $fetched = FALSE;
         try
@@ -47,7 +47,7 @@ class PhysicalFilesystemAccessObjectRmTest extends PhysicalFilesystemAccessObjec
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::rm
      */
-    public function testRmSucceeds()
+    public function testRmSucceeds(): void
     {
         $file = tempnam(sys_get_temp_dir(), 'test');
         $this->assertFileExists($file);

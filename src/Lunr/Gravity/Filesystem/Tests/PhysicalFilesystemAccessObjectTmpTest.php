@@ -24,7 +24,7 @@ class PhysicalFilesystemAccessObjectTmpTest extends PhysicalFilesystemAccessObje
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_tmp_file
      */
-    public function testGetTmpFileSucceedsWithoutPrefix()
+    public function testGetTmpFileSucceedsWithoutPrefix(): void
     {
         $fetched = $this->class->get_tmp_file();
 
@@ -36,7 +36,7 @@ class PhysicalFilesystemAccessObjectTmpTest extends PhysicalFilesystemAccessObje
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_tmp_file
      */
-    public function testGetTmpFileSucceedsWithPrefix()
+    public function testGetTmpFileSucceedsWithPrefix(): void
     {
         $fetched = $this->class->get_tmp_file('prefix');
 

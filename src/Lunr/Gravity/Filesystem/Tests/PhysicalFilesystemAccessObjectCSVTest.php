@@ -27,7 +27,7 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_csv_file_content
      */
-    public function testPutCSVFileContentCannotOpenFile()
+    public function testPutCSVFileContentCannotOpenFile(): void
     {
         $this->mock_function('fopen', 'return FALSE;');
 
@@ -45,10 +45,10 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
      *
      * @param mixed $values Invalid values
      *
-     * @dataProvider invalidCSVArrayValues
+     * @dataProvider invalidCSVArrayValuesProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_csv_file_content
      */
-    public function testPutCSVFileContentInInvalidArrayValues($values)
+    public function testPutCSVFileContentInInvalidArrayValues($values): void
     {
         $filepath = TEST_STATICS . '/Gravity/folder2/test.csv';
 
@@ -63,7 +63,7 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_csv_file_content
      */
-    public function testPutCSVFileContentSuccess()
+    public function testPutCSVFileContentSuccess(): void
     {
         $filepath = TEST_STATICS . '/Gravity/folder2/test.csv';
 
@@ -78,7 +78,7 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_csv_file_content
      */
-    public function testPutCSVFileContentSuccessCustomDelimeter()
+    public function testPutCSVFileContentSuccessCustomDelimeter(): void
     {
         $filepath = TEST_STATICS . '/Gravity/folder2/test.csv';
 

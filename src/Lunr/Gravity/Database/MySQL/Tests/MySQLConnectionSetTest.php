@@ -28,7 +28,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->emptySetUp();
 
@@ -51,7 +51,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsRWHostCorrectly()
+    public function testSetConfigurationSetsRWHostCorrectly(): void
     {
         $this->sub_configuration->expects($this->any())
                                 ->method('offsetGet')
@@ -71,7 +71,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsUsernameCorrectly()
+    public function testSetConfigurationSetsUsernameCorrectly(): void
     {
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
@@ -91,7 +91,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsPasswordCorrectly()
+    public function testSetConfigurationSetsPasswordCorrectly(): void
     {
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
@@ -111,7 +111,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsDatabaseCorrectly()
+    public function testSetConfigurationSetsDatabaseCorrectly(): void
     {
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
@@ -131,7 +131,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsROHostToRWHostIfItIsNotSet()
+    public function testSetConfigurationSetsROHostToRWHostIfItIsNotSet(): void
     {
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
@@ -151,7 +151,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsROHostToRWHostIfItIsEmpty()
+    public function testSetConfigurationSetsROHostToRWHostIfItIsEmpty(): void
     {
         $this->values_map[] = [ 'ro_host', '' ];
 
@@ -173,7 +173,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsROHostCorrectly()
+    public function testSetConfigurationSetsROHostCorrectly(): void
     {
         $this->values_map[] = [ 'ro_host', 'ro_host' ];
 
@@ -199,7 +199,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsPortToIniValueIfNotSet()
+    public function testSetConfigurationSetsPortToIniValueIfNotSet(): void
     {
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
@@ -219,7 +219,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsPortCorrectly()
+    public function testSetConfigurationSetsPortCorrectly(): void
     {
         $this->values_map[] = [ 'port', 'port' ];
 
@@ -241,7 +241,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsSocketToIniValueIfNotSet()
+    public function testSetConfigurationSetsSocketToIniValueIfNotSet(): void
     {
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
@@ -261,7 +261,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsSocketCorrectly()
+    public function testSetConfigurationSetsSocketCorrectly(): void
     {
         $this->values_map[] = [ 'socket', 'socket' ];
 
@@ -283,7 +283,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsSSLKeyCorrectly()
+    public function testSetConfigurationSetsSSLKeyCorrectly(): void
     {
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
@@ -303,7 +303,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsSSLCertCorrectly()
+    public function testSetConfigurationSetsSSLCertCorrectly(): void
     {
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
@@ -323,7 +323,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsCACertCorrectly()
+    public function testSetConfigurationSetsCACertCorrectly(): void
     {
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
@@ -343,7 +343,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsCAPathCorrectly()
+    public function testSetConfigurationSetsCAPathCorrectly(): void
     {
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')
@@ -363,7 +363,7 @@ class MySQLConnectionSetTest extends MySQLConnectionTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::set_configuration
      */
-    public function testSetConfigurationSetsCipherCorrectly()
+    public function testSetConfigurationSetsCipherCorrectly(): void
     {
         $this->sub_configuration->expects($this->any())
                       ->method('offsetGet')

@@ -29,7 +29,7 @@ class MariaDBSimpleDMLQueryBuilderBaseTest extends MariaDBSimpleDMLQueryBuilderT
     /**
      * Test the builder class is passed correctly.
      */
-    public function testBuilderIsPassedCorrectly()
+    public function testBuilderIsPassedCorrectly(): void
     {
         $instance = 'Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder';
         $this->assertInstanceOf($instance, $this->builder);
@@ -38,7 +38,7 @@ class MariaDBSimpleDMLQueryBuilderBaseTest extends MariaDBSimpleDMLQueryBuilderT
     /**
      * Test the QueryEscaper class is passed correctly.
      */
-    public function testEscaperIsPassedCorrectly()
+    public function testEscaperIsPassedCorrectly(): void
     {
         $instance = 'Lunr\Gravity\Database\MySQL\MySQLQueryEscaper';
         $this->assertInstanceOf($instance, $this->escaper);

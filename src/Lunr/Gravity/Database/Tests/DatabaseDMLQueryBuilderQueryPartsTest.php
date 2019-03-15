@@ -28,7 +28,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testSelectEmptyByDefault
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_select
      */
-    public function testInitialSelect()
+    public function testInitialSelect(): void
     {
         $method = $this->get_accessible_reflection_method('sql_select');
 
@@ -45,7 +45,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testSelectEmptyByDefault
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_select
      */
-    public function testIncrementalSelect()
+    public function testIncrementalSelect(): void
     {
         $method = $this->get_accessible_reflection_method('sql_select');
 
@@ -65,7 +65,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      * @dataProvider compoundQueryTypeProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_compound
      */
-    public function testCompoundQuery($types)
+    public function testCompoundQuery($types): void
     {
         $method = $this->get_accessible_reflection_method('sql_compound');
 
@@ -81,7 +81,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_compound
      */
-    public function testCompoundQueryWhenCompoundIsSet()
+    public function testCompoundQueryWhenCompoundIsSet(): void
     {
         $this->set_reflection_property_value('compound', 'QUERY');
 
@@ -97,7 +97,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_order_by
      */
-    public function testOrderByWithDefaultOrder()
+    public function testOrderByWithDefaultOrder(): void
     {
         $string = 'ORDER BY col1 ASC';
 
@@ -113,7 +113,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_order_by
      */
-    public function testOrderByWithCustomOrder()
+    public function testOrderByWithCustomOrder(): void
     {
         $string = 'ORDER BY col1 DESC';
 
@@ -129,7 +129,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_order_by
      */
-    public function testOrderByWithExtendedStatement()
+    public function testOrderByWithExtendedStatement(): void
     {
         $value = 'ORDER BY col1 DESC';
 
@@ -149,7 +149,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_by
      */
-    public function testGroupBy()
+    public function testGroupBy(): void
     {
         $string = 'GROUP BY group1';
 
@@ -165,7 +165,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_by
      */
-    public function testGroupByExtending()
+    public function testGroupByExtending(): void
     {
         $value = 'GROUP BY group1';
 
@@ -185,7 +185,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_limit
      */
-    public function testLimitWithDefaultOffset()
+    public function testLimitWithDefaultOffset(): void
     {
         $string = 'LIMIT 10';
 
@@ -201,7 +201,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_limit
      */
-    public function testLimitWithCustomOffset()
+    public function testLimitWithCustomOffset(): void
     {
         $string = 'LIMIT 10 OFFSET 20';
 
@@ -221,7 +221,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     * @dataProvider conditionalKeywordProvider
     * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
     */
-    public function testOpenGroup($keyword, $attribute)
+    public function testOpenGroup($keyword, $attribute): void
     {
         $method = $this->get_accessible_reflection_method('sql_group_start');
         $method->invokeArgs($this->class, [ $keyword ]);
@@ -234,7 +234,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     *
     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
     */
-    public function testOpenGroupIfJoin()
+    public function testOpenGroupIfJoin(): void
     {
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
 
@@ -250,7 +250,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
      */
-    public function testOpenGroupIfNaturalJoin()
+    public function testOpenGroupIfNaturalJoin(): void
     {
         $this->set_reflection_property_value('is_unfinished_join', FALSE);
 
@@ -269,7 +269,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     * @dataProvider conditionalKeywordProvider
     * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
     */
-    public function testOpenGroupWithConnector($keyword, $attribute)
+    public function testOpenGroupWithConnector($keyword, $attribute): void
     {
         $this->set_reflection_property_value('connector', 'OR');
 
@@ -289,7 +289,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     * @dataProvider conditionalKeywordProvider
     * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
     */
-    public function testIncrementalOpenGroup($keyword, $attribute)
+    public function testIncrementalOpenGroup($keyword, $attribute): void
     {
         $method = $this->get_accessible_reflection_method('sql_group_start');
         $method->invokeArgs($this->class, [ $keyword ]);
@@ -307,7 +307,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     * @dataProvider conditionalKeywordProvider
     * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_start
     */
-    public function testOpenGroupUsesDefaultConnector($keyword, $attribute)
+    public function testOpenGroupUsesDefaultConnector($keyword, $attribute): void
     {
         $this->set_reflection_property_value($attribute, 'Condition');
 
@@ -326,7 +326,7 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      * @dataProvider conditionalKeywordProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_group_end
      */
-    public function testCloseGroup($keyword, $attribute)
+    public function testCloseGroup($keyword, $attribute): void
     {
         $this->set_reflection_property_value($attribute, '');
 

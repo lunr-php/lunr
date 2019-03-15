@@ -28,7 +28,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::value
      */
-    public function testEscapingValue()
+    public function testEscapingValue(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -43,7 +43,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithCollation
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::value
      */
-    public function testEscapingValueWithCollation()
+    public function testEscapingValueWithCollation(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -58,7 +58,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::value
      */
-    public function testEscapingValueWithCharset()
+    public function testEscapingValueWithCharset(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -73,7 +73,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithCollation
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::value
      */
-    public function testEscapingValueWithCollationAndCharset()
+    public function testEscapingValueWithCollationAndCharset(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -90,7 +90,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::hexvalue
      */
-    public function testEscapingHexValue()
+    public function testEscapingHexValue(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -105,7 +105,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithCollation
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::hexvalue
      */
-    public function testEscapingHexValueWithCollation()
+    public function testEscapingHexValueWithCollation(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -122,7 +122,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::hexvalue
      */
-    public function testEscapingHexValueWithCharset()
+    public function testEscapingHexValueWithCharset(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -137,7 +137,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithCollation
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::hexvalue
      */
-    public function testEscapingHexValueWithCollationAndCharset()
+    public function testEscapingHexValueWithCollationAndCharset(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -154,7 +154,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::likevalue
      */
-    public function testEscapingLikeValue()
+    public function testEscapingLikeValue(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -169,7 +169,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithCollation
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::likevalue
      */
-    public function testEscapingLikeValueWithCollation()
+    public function testEscapingLikeValueWithCollation(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -186,7 +186,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::likevalue
      */
-    public function testEscapingLikeValueWithCharset()
+    public function testEscapingLikeValueWithCharset(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -201,7 +201,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithCollation
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::likevalue
      */
-    public function testEscapingLikeValueWithCollationAndCharset()
+    public function testEscapingLikeValueWithCollationAndCharset(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -218,7 +218,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::likevalue
      */
-    public function testEscapingLikeValueForward()
+    public function testEscapingLikeValueForward(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -233,7 +233,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::likevalue
      */
-    public function testEscapingLikeValueBackward()
+    public function testEscapingLikeValueBackward(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -248,7 +248,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testCollateWithValueOnly
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::likevalue
      */
-    public function testEscapingLikeValueUnsupported()
+    public function testEscapingLikeValueUnsupported(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -265,7 +265,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @dataProvider invalidIndicesProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::index_hint
      */
-    public function testEscapingIndexHintWithInvalidIndices($indices)
+    public function testEscapingIndexHintWithInvalidIndices($indices): void
     {
         $this->assertNull($this->class->index_hint('', '', $indices));
     }
@@ -279,7 +279,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends      Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::index_hint
      */
-    public function testEscapingIndexHintWithValidKeyword($keyword)
+    public function testEscapingIndexHintWithValidKeyword($keyword): void
     {
         $indices = [ 'index', 'index' ];
 
@@ -294,7 +294,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testEscapeLocationReference
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::index_hint
      */
-    public function testEscapingIndexHintWithInvalidKeyword()
+    public function testEscapingIndexHintWithInvalidKeyword(): void
     {
         $indices = [ 'index', 'index' ];
 
@@ -312,7 +312,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends      Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testEscapeLocationReference
      * @covers       Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::index_hint
      */
-    public function testEscapingIndexHintWithValidFor($for)
+    public function testEscapingIndexHintWithValidFor($for): void
     {
         $indices = [ 'index', 'index' ];
 
@@ -334,7 +334,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseQueryEscaperEscapeTest::testEscapeLocationReference
      * @covers  Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::index_hint
      */
-    public function testEscapingIndexHintWithInvalidFor()
+    public function testEscapingIndexHintWithInvalidFor(): void
     {
         $indices = [ 'index', 'index' ];
 
@@ -348,7 +348,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::geovalue
      */
-    public function testEscapingGeoValueWithoutSrid()
+    public function testEscapingGeoValueWithoutSrid(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')
@@ -362,7 +362,7 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLQueryEscaper::geovalue
      */
-    public function testEscapingGeoValueWithSrid()
+    public function testEscapingGeoValueWithSrid(): void
     {
         $this->db->expects($this->once())
                  ->method('escape_string')

@@ -26,7 +26,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         if (extension_loaded('sqlite3') === FALSE)
         {
@@ -40,7 +40,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
     }
@@ -48,7 +48,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Test that busyTimeout throws a warning because we are not yet connected.
      */
-    public function testBusyTimeoutThrowsWarning()
+    public function testBusyTimeoutThrowsWarning(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -67,7 +67,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Test that changes throws a warning because we are not yet connected.
      */
-    public function testChangesThrowsWarning()
+    public function testChangesThrowsWarning(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -86,7 +86,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Test that close does not throw a warning because we are not yet connected.
      */
-    public function testCloseDoesNotThrowWarning()
+    public function testCloseDoesNotThrowWarning(): void
     {
         $this->assertTrue($this->class->close());
     }
@@ -94,7 +94,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Test that escapeString does not throw a warning because we are not yet connected.
      */
-    public function testEscapeStringDoesNotThrowWarning()
+    public function testEscapeStringDoesNotThrowWarning(): void
     {
         $this->assertEquals("Don''t", $this->class->escapeString("Don't"));
     }
@@ -102,7 +102,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Test that exec throws a warning because we are not yet connected.
      */
-    public function testExecThrowsWarning()
+    public function testExecThrowsWarning(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -121,7 +121,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Test that lastErrorCode throws a warning because we are not yet connected.
      */
-    public function testLastErrorCodeThrowsWarning()
+    public function testLastErrorCodeThrowsWarning(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -140,7 +140,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Test that lastErrorMsg throws a warning because we are not yet connected.
      */
-    public function testLastErrorMsgThrowsWarning()
+    public function testLastErrorMsgThrowsWarning(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -159,7 +159,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Test that lastInsertRowID throws a warning because we are not yet connected.
      */
-    public function testLastInsertRowIDThrowsWarning()
+    public function testLastInsertRowIDThrowsWarning(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -178,7 +178,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Test that prepare throws a warning because we are not yet connected.
      */
-    public function testPrepareThrowsWarning()
+    public function testPrepareThrowsWarning(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -197,7 +197,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Test that query throws a warning because we are not yet connected.
      */
-    public function testQueryThrowsWarning()
+    public function testQueryThrowsWarning(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -216,7 +216,7 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Test that querySingle throws a warning because we are not yet connected.
      */
-    public function testQuerySingleThrowsWarning()
+    public function testQuerySingleThrowsWarning(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -235,9 +235,9 @@ class LunrSQLite3Test extends LunrBaseTest
     /**
      * Test that version does not throw a warning because we are not yet connected.
      */
-    public function testVersionDoesNotThrowWarning()
+    public function testVersionDoesNotThrowWarning(): void
     {
-        $this->assertInternalType('array', $this->class->version());
+        $this->assertIsArray($this->class->version());
     }
 
 }

@@ -28,7 +28,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::connect
      */
-    public function testSuccessfulConnectReadonly()
+    public function testSuccessfulConnectReadonly(): void
     {
         $this->set_reflection_property_value('readonly', TRUE);
 
@@ -50,7 +50,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::connect
      */
-    public function testSuccessfulConnectReadwrite()
+    public function testSuccessfulConnectReadwrite(): void
     {
         $this->sqlite3->expects($this->once())
                       ->method('open')
@@ -70,7 +70,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::connect
      */
-    public function testFailedConnect()
+    public function testFailedConnect(): void
     {
         $this->set_reflection_property_value('readonly', TRUE);
 
@@ -104,7 +104,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::connect
      */
-    public function testConnectDoesNotReconnectWhenAlreadyConnected()
+    public function testConnectDoesNotReconnectWhenAlreadyConnected(): void
     {
         $this->set_reflection_property_value('connected', TRUE);
 
@@ -157,7 +157,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::disconnect
      */
-    public function testDisconnectDoesNotTryToDisconnectWhenNotConnected()
+    public function testDisconnectDoesNotTryToDisconnectWhenNotConnected(): void
     {
         $this->set_reflection_property_value('connected', FALSE);
 
@@ -174,7 +174,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::disconnect
      */
-    public function testDisconnect()
+    public function testDisconnect(): void
     {
         $this->set_reflection_property_value('connected', TRUE);
 
@@ -191,7 +191,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::change_database
      */
-    public function testChangeDatabaseReturnsTrueWhenConnected()
+    public function testChangeDatabaseReturnsTrueWhenConnected(): void
     {
         $this->set_reflection_property_value('connected', TRUE);
 
@@ -215,7 +215,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::change_database
      */
-    public function testChangeDatabaseThrowsExceptionWhenNotConnected()
+    public function testChangeDatabaseThrowsExceptionWhenNotConnected(): void
     {
         $this->set_reflection_property_value('connected', TRUE);
 

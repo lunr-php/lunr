@@ -39,7 +39,7 @@ abstract class MySQLSimpleDMLQueryBuilderTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->escaper = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper')
                               ->disableOriginalConstructor()
@@ -55,7 +55,7 @@ abstract class MySQLSimpleDMLQueryBuilderTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->escaper);
         unset($this->class);
@@ -68,7 +68,7 @@ abstract class MySQLSimpleDMLQueryBuilderTest extends LunrBaseTest
      *
      * @return array $values Array of location reference values.
      */
-    public function locationReferenceAliasProvider()
+    public function locationReferenceAliasProvider(): array
     {
         $values   = [];
         $values[] = [ 'table AS t', TRUE, 'table', 't', 'table AS t' ];
@@ -84,7 +84,7 @@ abstract class MySQLSimpleDMLQueryBuilderTest extends LunrBaseTest
      *
      * @return array $values Array of location reference values.
      */
-    public function locationReferenceProvider()
+    public function locationReferenceProvider(): array
     {
         $values   = [];
         $values[] = [ 'table', TRUE, 'table' ];

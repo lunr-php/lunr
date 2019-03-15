@@ -27,7 +27,7 @@ class DatabaseDMLQueryBuilderGetDeleteQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateDeleteModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_delete_query
      */
-    public function testGetDeleteQuery()
+    public function testGetDeleteQuery(): void
     {
         $this->set_reflection_property_value('from', 'FROM table');
         $this->set_reflection_property_value('delete_mode', [ 'QUICK', 'IGNORE' ]);
@@ -45,7 +45,7 @@ class DatabaseDMLQueryBuilderGetDeleteQueryTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_delete_query
      */
-    public function testGetDeleteQueryWithUndefinedFrom()
+    public function testGetDeleteQueryWithUndefinedFrom(): void
     {
         $this->set_reflection_property_value('delete_mode', [ 'QUICK', 'IGNORE' ]);
         $this->set_reflection_property_value('delete', 'table.*');
@@ -61,7 +61,7 @@ class DatabaseDMLQueryBuilderGetDeleteQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateDeleteModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_delete_query
      */
-    public function testGetEmptyDeleteQuery()
+    public function testGetEmptyDeleteQuery(): void
     {
         $this->set_reflection_property_value('from', 'FROM table');
         $this->set_reflection_property_value('delete_mode', [ 'QUICK', 'IGNORE' ]);
@@ -77,7 +77,7 @@ class DatabaseDMLQueryBuilderGetDeleteQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateDeleteModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_delete_query
      */
-    public function testGetEmptyDeleteLimitOrderQuery()
+    public function testGetEmptyDeleteLimitOrderQuery(): void
     {
         $this->set_reflection_property_value('from', 'FROM table');
         $this->set_reflection_property_value('limit', 'LIMIT 10 OFFSET 0');
@@ -94,7 +94,7 @@ class DatabaseDMLQueryBuilderGetDeleteQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateDeleteModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_delete_query
      */
-    public function testGetDeleteLimitOrderQuery()
+    public function testGetDeleteLimitOrderQuery(): void
     {
         $this->set_reflection_property_value('delete', 'table.*');
         $this->set_reflection_property_value('from', 'FROM table');
@@ -112,7 +112,7 @@ class DatabaseDMLQueryBuilderGetDeleteQueryTest extends DatabaseDMLQueryBuilderT
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateDeleteModes
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_delete_query
      */
-    public function testGetDeleteLimitOrderQueryWithJoin()
+    public function testGetDeleteLimitOrderQueryWithJoin(): void
     {
         $this->set_reflection_property_value('join', 'INNER JOIN table1');
         $this->set_reflection_property_value('from', 'FROM table');

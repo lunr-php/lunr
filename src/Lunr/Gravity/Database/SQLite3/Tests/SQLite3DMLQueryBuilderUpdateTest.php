@@ -30,7 +30,7 @@ class SQLite3DMLQueryBuilderUpdateTest extends SQLite3DMLQueryBuilderTest
      * @dataProvider modesProvider
      * @covers       Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::update_mode
      */
-    public function testUpdateModeSetsStandardCorrectly($mode)
+    public function testUpdateModeSetsStandardCorrectly($mode): void
     {
         $this->class->update_mode($mode);
         $value = $this->get_reflection_property_value('update_mode');
@@ -45,12 +45,12 @@ class SQLite3DMLQueryBuilderUpdateTest extends SQLite3DMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testUpdateModeEmptyByDefault
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::update_mode
      */
-    public function testUpdateModeIgnoresUnknownValues()
+    public function testUpdateModeIgnoresUnknownValues(): void
     {
         $this->class->update_mode('UNSUPPORTED');
         $value = $this->get_reflection_property_value('update_mode');
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 

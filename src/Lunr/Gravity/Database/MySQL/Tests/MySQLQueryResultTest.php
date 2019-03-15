@@ -61,7 +61,7 @@ abstract class MySQLQueryResultTest extends TestCase
      *
      * @return void
      */
-    public function resultSetSetup()
+    public function resultSetSetup(): void
     {
         $this->mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
@@ -81,7 +81,7 @@ abstract class MySQLQueryResultTest extends TestCase
      *
      * @return void
      */
-    public function failedSetup()
+    public function failedSetup(): void
     {
         $this->query_result = FALSE;
 
@@ -99,7 +99,7 @@ abstract class MySQLQueryResultTest extends TestCase
      *
      * @return void
      */
-    public function successfulSetup()
+    public function successfulSetup(): void
     {
         $this->query_result = TRUE;
 
@@ -115,7 +115,7 @@ abstract class MySQLQueryResultTest extends TestCase
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->mysqli);
         unset($this->query_result);

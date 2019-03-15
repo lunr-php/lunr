@@ -24,7 +24,7 @@ class MySQLSimpleDMLQueryBuilderBaseTest extends MySQLSimpleDMLQueryBuilderTest
     /**
      * Test the QueryEscaper class is passed correctly.
      */
-    public function testEscaperIsPassedCorrectly()
+    public function testEscaperIsPassedCorrectly(): void
     {
         $instance = 'Lunr\Gravity\Database\MySQL\MySQLQueryEscaper';
         $this->assertInstanceOf($instance, $this->get_reflection_property_value('escaper'));
@@ -33,7 +33,7 @@ class MySQLSimpleDMLQueryBuilderBaseTest extends MySQLSimpleDMLQueryBuilderTest
     /**
      * Test if the query builder has been passed correctly.
      */
-    public function testQuerybuilderPassedCorrectly()
+    public function testQuerybuilderPassedCorrectly(): void
     {
         $instance = 'Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder';
         $this->assertInstanceOf($instance, $this->get_reflection_property_value('builder'));
@@ -51,7 +51,7 @@ class MySQLSimpleDMLQueryBuilderBaseTest extends MySQLSimpleDMLQueryBuilderTest
      * @dataProvider locationReferenceAliasProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::escape_alias
      */
-    public function testEscapeAliasWithAlias($input, $type, $name, $alias, $expected)
+    public function testEscapeAliasWithAlias($input, $type, $name, $alias, $expected): void
     {
         $method = $type ? 'table' : 'result_column';
 
@@ -77,7 +77,7 @@ class MySQLSimpleDMLQueryBuilderBaseTest extends MySQLSimpleDMLQueryBuilderTest
      * @dataProvider locationReferenceProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::escape_alias
      */
-    public function testEscapeAliasPlain($input, $type, $expected)
+    public function testEscapeAliasPlain($input, $type, $expected): void
     {
         $method = $type ? 'table' : 'result_column';
 

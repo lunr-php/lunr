@@ -28,13 +28,13 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
      */
-    public function testGetListingOfAccessibleDirectory()
+    public function testGetListingOfAccessibleDirectory(): void
     {
         $expected = [ 'file1', 'file2', 'file3', 'folder1', 'folder2' ];
 
         $value = $this->class->get_directory_listing($this->find_location);
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
 
         sort($value);
 
@@ -44,9 +44,11 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
     /**
      * Test listing  an inaccessible directory.
      *
+     * @requires OS Linux
+     *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
      */
-    public function testGetListingOfInaccessibleDirectory()
+    public function testGetListingOfInaccessibleDirectory(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -71,7 +73,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
      */
-    public function testGetListingOfNonExistantDirectory()
+    public function testGetListingOfNonExistantDirectory(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -96,7 +98,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
      *
      * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
      */
-    public function testGetListingOfFile()
+    public function testGetListingOfFile(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -133,7 +135,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
      * @dataProvider invalidNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
      */
-    public function testGetListingOfInvalidDirectory($directory)
+    public function testGetListingOfInvalidDirectory($directory): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -159,7 +161,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
      */
-    public function testGetListingOfBooleanDirectory($directory)
+    public function testGetListingOfBooleanDirectory($directory): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {

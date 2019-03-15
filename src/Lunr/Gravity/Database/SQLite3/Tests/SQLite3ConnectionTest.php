@@ -54,7 +54,7 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
      *
      * @return void
      */
-    public function emptySetUp()
+    public function emptySetUp(): void
     {
         if (extension_loaded('sqlite3') === FALSE)
         {
@@ -86,7 +86,7 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         if (extension_loaded('sqlite3') === FALSE)
         {
@@ -131,7 +131,7 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->logger);
         unset($this->sub_configuration);

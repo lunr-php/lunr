@@ -38,7 +38,7 @@ abstract class DatabaseConnectionTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -54,7 +54,7 @@ abstract class DatabaseConnectionTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->configuration);
         unset($this->logger);

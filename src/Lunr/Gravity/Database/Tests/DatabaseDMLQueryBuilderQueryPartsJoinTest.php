@@ -30,7 +30,7 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
      * @dataProvider commonJoinTypeProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
      */
-    public function testJoinWithoutIndexHints($type, $join)
+    public function testJoinWithoutIndexHints($type, $join): void
     {
         $method = $this->get_accessible_reflection_method('sql_join');
 
@@ -52,7 +52,7 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
      * @depends      Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
      */
-    public function testJoinWithSingleIndexHint($type, $join)
+    public function testJoinWithSingleIndexHint($type, $join): void
     {
         $method = $this->get_accessible_reflection_method('sql_join');
 
@@ -76,7 +76,7 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
      * @depends      Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
      */
-    public function testJoinWithMultipleIndexHints($type, $join)
+    public function testJoinWithMultipleIndexHints($type, $join): void
     {
         $method = $this->get_accessible_reflection_method('sql_join');
         $hints  = [ 'index_hint', 'index_hint' ];
@@ -99,7 +99,7 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
      * @depends      Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
      */
-    public function testJoinWithNULLIndexHints($type, $join)
+    public function testJoinWithNULLIndexHints($type, $join): void
     {
         $method = $this->get_accessible_reflection_method('sql_join');
         $hints  = [ NULL, NULL ];
@@ -120,7 +120,7 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
      * @dataProvider commonJoinTypeProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
      */
-    public function testIncrementalJoinWithoutIndexes($type, $join)
+    public function testIncrementalJoinWithoutIndexes($type, $join): void
     {
         $method = $this->get_accessible_reflection_method('sql_join');
 
@@ -143,7 +143,7 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
      * @depends      Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testPrepareInvalidIndexHintsReturnsEmptyString
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
      */
-    public function testIncrementalJoinWithIndexes($type, $join)
+    public function testIncrementalJoinWithIndexes($type, $join): void
     {
         $method = $this->get_accessible_reflection_method('sql_join');
         $hints  = [ 'index_hint' ];
@@ -161,7 +161,7 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
      */
-    public function testStraightJoin()
+    public function testStraightJoin(): void
     {
         $method = $this->get_accessible_reflection_method('sql_join');
 
@@ -177,7 +177,7 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
      */
-    public function testIncrementalStraightJoin()
+    public function testIncrementalStraightJoin(): void
     {
         $method = $this->get_accessible_reflection_method('sql_join');
 
@@ -195,7 +195,7 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
      */
-    public function testJoinSetsUnfinishedJoinWithNaturalJoin()
+    public function testJoinSetsUnfinishedJoinWithNaturalJoin(): void
     {
         $method = $this->get_accessible_reflection_method('sql_join');
 
@@ -210,7 +210,7 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
      */
-    public function testJoinSetsUnfinishedJoin()
+    public function testJoinSetsUnfinishedJoin(): void
     {
         $method = $this->get_accessible_reflection_method('sql_join');
 
@@ -224,7 +224,7 @@ class DatabaseDMLQueryBuilderQueryPartsJoinTest extends DatabaseDMLQueryBuilderT
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_join
      */
-    public function testJoinSetsJoinType()
+    public function testJoinSetsJoinType(): void
     {
         $this->set_reflection_property_value('join_type', 'on');
 

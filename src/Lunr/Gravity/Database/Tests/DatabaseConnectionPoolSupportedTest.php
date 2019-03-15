@@ -26,7 +26,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->supportedSetup();
     }
@@ -36,7 +36,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetNewAndReadonlyConnectionReturnsMysqlConnection()
+    public function testGetNewAndReadonlyConnectionReturnsMysqlConnection(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -57,7 +57,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetNewAndReadWriteConnectionReturnsMysqlConnection()
+    public function testGetNewAndReadWriteConnectionReturnsMysqlConnection(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -78,7 +78,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetNewAndReadonlyConnectionIncreasesPoolByOne()
+    public function testGetNewAndReadonlyConnectionIncreasesPoolByOne(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -101,7 +101,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetNewAndReadWriteConnectionIncreasesPoolByOne()
+    public function testGetNewAndReadWriteConnectionIncreasesPoolByOne(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -124,7 +124,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetReadonlyConnectionReturnsNewConnectionIfPoolEmpty()
+    public function testGetReadonlyConnectionReturnsNewConnectionIfPoolEmpty(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -147,7 +147,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetReadWriteConnectionReturnsNewConnectionIfPoolEmpty()
+    public function testGetReadWriteConnectionReturnsNewConnectionIfPoolEmpty(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -170,7 +170,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetReadonlyConnectionReturnsPooledConnection()
+    public function testGetReadonlyConnectionReturnsPooledConnection(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);
@@ -199,7 +199,7 @@ class DatabaseConnectionPoolSupportedTest extends DatabaseConnectionPoolTest
      *
      * @covers Lunr\Gravity\Database\DatabaseConnectionPool::get_connection
      */
-    public function testGetReadWriteConnectionReturnsPooledConnection()
+    public function testGetReadWriteConnectionReturnsPooledConnection(): void
     {
         $method = $this->pool_reflection->getMethod('get_connection');
         $method->setAccessible(TRUE);

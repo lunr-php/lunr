@@ -22,7 +22,7 @@ class DatabaseAccessObjectVerifyQuerySuccessTest extends DatabaseAccessObjectTes
     /**
      * Testcase constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->setUpNoPool();
     }
@@ -32,7 +32,7 @@ class DatabaseAccessObjectVerifyQuerySuccessTest extends DatabaseAccessObjectTes
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::verify_query_success
      */
-    public function testVerifyQuerySuccessDoesNotThrowExceptionOnQuerySuccess()
+    public function testVerifyQuerySuccessDoesNotThrowExceptionOnQuerySuccess(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -53,7 +53,7 @@ class DatabaseAccessObjectVerifyQuerySuccessTest extends DatabaseAccessObjectTes
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::verify_query_success
      */
-    public function testVerifyQuerySuccessThrowsQueryExceptionOnError()
+    public function testVerifyQuerySuccessThrowsQueryExceptionOnError(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -90,7 +90,7 @@ class DatabaseAccessObjectVerifyQuerySuccessTest extends DatabaseAccessObjectTes
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::verify_query_success
      */
-    public function testVerifyQuerySuccessThrowsDeadlockExceptionOnDeadlock()
+    public function testVerifyQuerySuccessThrowsDeadlockExceptionOnDeadlock(): void
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()

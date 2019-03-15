@@ -28,7 +28,7 @@ class DatabaseQueryEscaperNullEscapeTest extends DatabaseQueryEscaperTest
      *
      * @return array $escapers Valid value escapers
      */
-    public function validValueEscaperProvider()
+    public function validValueEscaperProvider(): array
     {
         $escapers   = [];
         $escapers[] = [
@@ -60,7 +60,7 @@ class DatabaseQueryEscaperNullEscapeTest extends DatabaseQueryEscaperTest
      *
      * @return array $escapers Invalid value escapers
      */
-    public function invalidValueEscaperProvider()
+    public function invalidValueEscaperProvider(): array
     {
         $escapers   = [];
         $escapers[] = [
@@ -85,7 +85,7 @@ class DatabaseQueryEscaperNullEscapeTest extends DatabaseQueryEscaperTest
      * @dataProvider validValueEscaperProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::__call
      */
-    public function testEscapeWithValidValueEscapers($name, $arguments, $expected)
+    public function testEscapeWithValidValueEscapers($name, $arguments, $expected): void
     {
         $method = 'null_or_' . $name;
 
@@ -103,7 +103,7 @@ class DatabaseQueryEscaperNullEscapeTest extends DatabaseQueryEscaperTest
      * @dataProvider invalidValueEscaperProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::__call
      */
-    public function testEscapeWithInvalidValueEscapers($name, $arguments)
+    public function testEscapeWithInvalidValueEscapers($name, $arguments): void
     {
         $method = 'null_or_' . $name;
 
@@ -120,7 +120,7 @@ class DatabaseQueryEscaperNullEscapeTest extends DatabaseQueryEscaperTest
      * @dataProvider validValueEscaperProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::__call
      */
-    public function testEscapeNull($name)
+    public function testEscapeNull($name): void
     {
         $method = 'null_or_' . $name;
 

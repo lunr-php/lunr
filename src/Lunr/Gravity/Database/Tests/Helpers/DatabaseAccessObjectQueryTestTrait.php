@@ -27,7 +27,7 @@ trait DatabaseAccessObjectQueryTestTrait
      *
      * @return void
      */
-    public function expectResultOnSuccess($data, $format = 'array')
+    public function expectResultOnSuccess($data, $format = 'array'): void
     {
         $mock = new FluidInterfaceMock();
 
@@ -61,7 +61,7 @@ trait DatabaseAccessObjectQueryTestTrait
      *
      * @return void
      */
-    public function expectNoResultsFound($format = 'array')
+    public function expectNoResultsFound($format = 'array'): void
     {
         $mock = new FluidInterfaceMock();
 
@@ -90,7 +90,7 @@ trait DatabaseAccessObjectQueryTestTrait
      *
      * @return void
      */
-    protected function expectQueryError()
+    protected function expectQueryError(): void
     {
         $mock = new FluidInterfaceMock();
 
@@ -115,7 +115,7 @@ trait DatabaseAccessObjectQueryTestTrait
      *
      * @return void
      */
-    protected function expectQuerySuccess()
+    protected function expectQuerySuccess(): void
     {
         $mock = new FluidInterfaceMock();
 

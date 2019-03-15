@@ -30,7 +30,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
      * @dataProvider selectModesDuplicatesProvider
      * @covers       Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::select_mode
      */
-    public function testSelectModeSetsDuplicatesCorrectly($mode)
+    public function testSelectModeSetsDuplicatesCorrectly($mode): void
     {
         $this->class->select_mode($mode);
         $modes = $this->get_reflection_property_value('select_mode');
@@ -43,13 +43,13 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::select_mode
      */
-    public function testSelectModeSetsIgnoresUnknownValues()
+    public function testSelectModeSetsIgnoresUnknownValues(): void
     {
         $this->class->select_mode('UNSUPPORTED');
 
         $modes = $this->get_reflection_property_value('select_mode');
 
-        $this->assertInternalType('array', $modes);
+        $this->assertIsArray($modes);
         $this->assertEmpty($modes);
     }
 
@@ -59,7 +59,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
      * @depends testSelectModeSetsDuplicatesCorrectly
      * @covers  Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::select_mode
      */
-    public function testSelectModeAllowsOnlyOneDuplicateStatement()
+    public function testSelectModeAllowsOnlyOneDuplicateStatement(): void
     {
         $this->class->select_mode('ALL');
         $this->class->select_mode('DISTINCT');
@@ -75,7 +75,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::select_mode
      */
-    public function testSelectModeReturnsSelfReference()
+    public function testSelectModeReturnsSelfReference(): void
     {
         $return = $this->class->select_mode('DISTINCT');
 
@@ -88,7 +88,7 @@ class SQLite3DMLQueryBuilderSelectTest extends SQLite3DMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3DMLQueryBuilder::lock_mode
      */
-    public function testLockModeReturnsSelfReference()
+    public function testLockModeReturnsSelfReference(): void
     {
         $return = $this->class->lock_mode('');
 

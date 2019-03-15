@@ -28,7 +28,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_regexp
      */
-    public function testOnRegexp()
+    public function testOnRegexp(): void
     {
         $property = $this->builder_reflection->getProperty('join');
         $property->setAccessible(TRUE);
@@ -44,7 +44,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_regexp
      */
-    public function testOnNotRegexp()
+    public function testOnNotRegexp(): void
     {
         $property = $this->builder_reflection->getProperty('join');
         $property->setAccessible(TRUE);
@@ -59,7 +59,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_regexp
      */
-    public function testOnRegexpReturnsSelfReference()
+    public function testOnRegexpReturnsSelfReference(): void
     {
         $return = $this->builder->on_regexp('left', 'right');
 
@@ -73,7 +73,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_regexp
      */
-    public function testWhereRegexp()
+    public function testWhereRegexp(): void
     {
         $property = $this->builder_reflection->getProperty('where');
         $property->setAccessible(TRUE);
@@ -89,7 +89,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_regexp
      */
-    public function testWhereNotRegexp()
+    public function testWhereNotRegexp(): void
     {
         $property = $this->builder_reflection->getProperty('where');
         $property->setAccessible(TRUE);
@@ -104,7 +104,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::where_regexp
      */
-    public function testWhereRegexpReturnsSelfReference()
+    public function testWhereRegexpReturnsSelfReference(): void
     {
         $return = $this->builder->where_regexp('left', 'right');
 
@@ -118,7 +118,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionCreatesSimpleStatement
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_regexp
      */
-    public function testHavingRegexp()
+    public function testHavingRegexp(): void
     {
         $property = $this->builder_reflection->getProperty('having');
         $property->setAccessible(TRUE);
@@ -134,7 +134,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsConditionTest::testConditionWithNonDefaultOperator
      * @covers  Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_regexp
      */
-    public function testHavingNotRegexp()
+    public function testHavingNotRegexp(): void
     {
         $property = $this->builder_reflection->getProperty('having');
         $property->setAccessible(TRUE);
@@ -149,7 +149,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::having_regexp
      */
-    public function testHavingRegexpReturnsSelfReference()
+    public function testHavingRegexpReturnsSelfReference(): void
     {
         $return = $this->builder->having_regexp('left', 'right');
 
@@ -162,7 +162,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::sql_xor
      */
-    public function testSQLXor()
+    public function testSQLXor(): void
     {
         $property = $this->builder_reflection->getProperty('connector');
         $property->setAccessible(TRUE);
@@ -177,7 +177,7 @@ class MySQLDMLQueryBuilderConditionTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::sql_xor
      */
-    public function testSQLXorReturnsSelfReference()
+    public function testSQLXorReturnsSelfReference(): void
     {
         $return = $this->builder->sql_xor();
 

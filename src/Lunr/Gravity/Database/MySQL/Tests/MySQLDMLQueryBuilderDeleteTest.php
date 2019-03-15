@@ -30,7 +30,7 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
      * @dataProvider deleteModesStandardProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete_mode
      */
-    public function testDeleteModeSetsStandardCorrectly($mode)
+    public function testDeleteModeSetsStandardCorrectly($mode): void
     {
         $property = $this->builder_reflection->getProperty('delete_mode');
         $property->setAccessible(TRUE);
@@ -45,7 +45,7 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete_mode
      */
-    public function testDeleteModeSetsIgnoresUnknownValues()
+    public function testDeleteModeSetsIgnoresUnknownValues(): void
     {
         $property = $this->builder_reflection->getProperty('delete_mode');
         $property->setAccessible(TRUE);
@@ -54,7 +54,7 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
 
         $value = $property->getValue($this->builder);
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEmpty($value);
     }
 
@@ -63,7 +63,7 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete_mode
      */
-    public function testDeleteModeReturnsSelfReference()
+    public function testDeleteModeReturnsSelfReference(): void
     {
         $return = $this->builder->delete_mode('IGNORE');
 
@@ -80,7 +80,7 @@ class MySQLDMLQueryBuilderDeleteTest extends MySQLDMLQueryBuilderTest
      * @dataProvider expectedDeleteModesProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::delete_mode
      */
-    public function testDeleteModeCase($value, $expected)
+    public function testDeleteModeCase($value, $expected): void
     {
         $property = $this->builder_reflection->getProperty('delete_mode');
         $property->setAccessible(TRUE);

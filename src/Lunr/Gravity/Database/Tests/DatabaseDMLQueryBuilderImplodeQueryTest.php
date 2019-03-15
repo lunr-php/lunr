@@ -26,7 +26,7 @@ class DatabaseDMLQueryBuilderImplodeQueryTest extends DatabaseDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::implode_query
      */
-    public function testImplodeQueryWithNoComponents()
+    public function testImplodeQueryWithNoComponents(): void
     {
         $method = $this->get_accessible_reflection_method('implode_query');
 
@@ -40,7 +40,7 @@ class DatabaseDMLQueryBuilderImplodeQueryTest extends DatabaseDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::implode_query
      */
-    public function testImplodeQueryWithNonExistingComponent()
+    public function testImplodeQueryWithNonExistingComponent(): void
     {
         $method = $this->get_accessible_reflection_method('implode_query');
 
@@ -54,7 +54,7 @@ class DatabaseDMLQueryBuilderImplodeQueryTest extends DatabaseDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::implode_query
      */
-    public function testImplodeQueryWithExistingEmptyComponents()
+    public function testImplodeQueryWithExistingEmptyComponents(): void
     {
         $method = $this->get_accessible_reflection_method('implode_query');
 
@@ -68,7 +68,7 @@ class DatabaseDMLQueryBuilderImplodeQueryTest extends DatabaseDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::implode_query
      */
-    public function testImplodeQueryWithEmptySelectComponent()
+    public function testImplodeQueryWithEmptySelectComponent(): void
     {
         $method = $this->get_accessible_reflection_method('implode_query');
 
@@ -84,7 +84,7 @@ class DatabaseDMLQueryBuilderImplodeQueryTest extends DatabaseDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::implode_query
      */
-    public function testImplodeQueryWithDuplicateSelectModes()
+    public function testImplodeQueryWithDuplicateSelectModes(): void
     {
         $method = $this->get_accessible_reflection_method('implode_query');
 
@@ -101,7 +101,7 @@ class DatabaseDMLQueryBuilderImplodeQueryTest extends DatabaseDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::implode_query
      */
-    public function testImplodeQueryWithDuplicateUpdateModes()
+    public function testImplodeQueryWithDuplicateUpdateModes(): void
     {
         $method = $this->get_accessible_reflection_method('implode_query');
 
@@ -118,7 +118,7 @@ class DatabaseDMLQueryBuilderImplodeQueryTest extends DatabaseDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::implode_query
      */
-    public function testImplodeQueryWithDuplicateDeleteModes()
+    public function testImplodeQueryWithDuplicateDeleteModes(): void
     {
         $method = $this->get_accessible_reflection_method('implode_query');
 
@@ -135,7 +135,7 @@ class DatabaseDMLQueryBuilderImplodeQueryTest extends DatabaseDMLQueryBuilderTes
      *
      * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::implode_query
      */
-    public function testImplodeQueryWithDuplicateInsertModes()
+    public function testImplodeQueryWithDuplicateInsertModes(): void
     {
         $method = $this->get_accessible_reflection_method('implode_query');
 

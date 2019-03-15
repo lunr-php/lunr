@@ -22,7 +22,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
     /**
      * Override the default setUp with a setup with a result.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->setUpWithResult();
     }
@@ -30,7 +30,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
     /**
      * Test that the success flag is TRUE.
      */
-    public function testSuccessIsTrue()
+    public function testSuccessIsTrue(): void
     {
         $this->get_accessible_reflection_property('success');
         $this->assertTrue($this->get_reflection_property_value('success'));
@@ -39,7 +39,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
     /**
      * Test that the freed flag is FALSE.
      */
-    public function testFreedIsFalse()
+    public function testFreedIsFalse(): void
     {
         $this->get_accessible_reflection_property('freed');
         $this->assertFalse($this->get_reflection_property_value('freed'));
@@ -50,7 +50,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::has_failed
      */
-    public function testHasFailedReturnsFalse()
+    public function testHasFailedReturnsFalse(): void
     {
         $this->assertFalse($this->class->has_failed());
     }
@@ -60,7 +60,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::affected_rows
      */
-    public function testAffectedRowsReturnsNumber()
+    public function testAffectedRowsReturnsNumber(): void
     {
         $this->set_reflection_property_value('affected_rows', 8);
         $this->assertSame(8, $this->class->affected_rows());
@@ -71,7 +71,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::number_of_rows
      */
-    public function testNumberOfRowsReturnsNumber()
+    public function testNumberOfRowsReturnsNumber(): void
     {
         $row = [ 'col1' => 'val1', 'col2' => 'val2' ];
 
@@ -80,7 +80,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
 
         $value = $this->class->number_of_rows();
 
-        $this->assertInternalType('int', $value);
+        $this->assertIsInt($value);
         $this->assertEquals(3, $value);
     }
 
@@ -89,7 +89,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_row
      */
-    public function testResultRowReturnsArray()
+    public function testResultRowReturnsArray(): void
     {
         $result = [ 'col1' => 'val1', 'col2' => 'val2' ];
 
@@ -99,7 +99,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
 
         $value = $this->class->result_row();
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEquals($result, $value);
     }
 
@@ -108,7 +108,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_array
      */
-    public function testResultArrayReturnsArray()
+    public function testResultArrayReturnsArray(): void
     {
         $result = [ 0 => [ 'col1' => 'val1', 'col2' => 'val2' ], 1 => [ 'col1' => 'val3', 'col2' => 'val4' ] ];
 
@@ -124,7 +124,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
 
         $value = $this->class->result_array();
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEquals($result, $value);
     }
 
@@ -133,7 +133,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_column
      */
-    public function testResultColumnReturnsArray()
+    public function testResultColumnReturnsArray(): void
     {
         $result = [ 'val1', 'val3' ];
 
@@ -149,7 +149,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
 
         $value = $this->class->result_column('col1');
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEquals($result, $value);
     }
 
@@ -158,7 +158,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_cell
      */
-    public function testResultCellReturnsValue()
+    public function testResultCellReturnsValue(): void
     {
         $this->sqlite3_result->expects($this->once())
                              ->method('fetchArray')
@@ -172,7 +172,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_cell
      */
-    public function testResultCellReturnsNullIfColumnDoesNotExist()
+    public function testResultCellReturnsNullIfColumnDoesNotExist(): void
     {
         $this->sqlite3_result->expects($this->once())
                              ->method('fetchArray')

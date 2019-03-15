@@ -27,7 +27,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::into
      */
-    public function testIntoReturnsSelf()
+    public function testIntoReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('into')
@@ -44,7 +44,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::column_names
      */
-    public function testColumnNamesReturnsSelf()
+    public function testColumnNamesReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('column_names')
@@ -61,7 +61,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::select
      */
-    public function testSelectReturnsSelf()
+    public function testSelectReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('select')
@@ -78,7 +78,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::from
      */
-    public function testFromReturnsSelf()
+    public function testFromReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('from')
@@ -95,7 +95,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::join
      */
-    public function testJoinReturnsSelf()
+    public function testJoinReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('join')
@@ -112,7 +112,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on
      */
-    public function testOnReturnsSelf()
+    public function testOnReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('on')
@@ -129,7 +129,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_like
      */
-    public function testOnLikeReturnsSelf()
+    public function testOnLikeReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('on_like')
@@ -146,7 +146,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_in
      */
-    public function testOnInReturnsSelf()
+    public function testOnInReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('on_in')
@@ -163,7 +163,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_between
      */
-    public function testOnBetweenReturnsSelf()
+    public function testOnBetweenReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('on_between')
@@ -180,7 +180,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_regexp
      */
-    public function testOnRegexpReturnsSelf()
+    public function testOnRegexpReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('on_regexp')
@@ -197,7 +197,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::start_on_group
      */
-    public function testStartOnGroupReturnsSelf()
+    public function testStartOnGroupReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('start_on_group')
@@ -213,7 +213,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::end_on_group
      */
-    public function testEndOnGroupReturnsSelf()
+    public function testEndOnGroupReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('end_on_group')
@@ -229,7 +229,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::start_having_group
      */
-    public function testStartHavingGroupReturnsSelf()
+    public function testStartHavingGroupReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('start_having_group')
@@ -245,7 +245,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::end_having_group
      */
-    public function testEndHavingGroupReturnsSelf()
+    public function testEndHavingGroupReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('end_having_group')
@@ -261,7 +261,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where
      */
-    public function testWhereReturnsSelf()
+    public function testWhereReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('where')
@@ -278,7 +278,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_like
      */
-    public function testWhereLikeReturnsSelf()
+    public function testWhereLikeReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('where_like')
@@ -295,7 +295,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_in
      */
-    public function testWhereInReturnsSelf()
+    public function testWhereInReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('where_in')
@@ -312,7 +312,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_between
      */
-    public function testWhereBetweenReturnsSelf()
+    public function testWhereBetweenReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('where_between')
@@ -329,7 +329,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::where_regexp
      */
-    public function testWhereRegexpReturnsSelf()
+    public function testWhereRegexpReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('where_regexp')
@@ -346,7 +346,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::group_by
      */
-    public function testGroupByReturnsSelf()
+    public function testGroupByReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('group_by')
@@ -363,7 +363,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having
      */
-    public function testHavingReturnsSelf()
+    public function testHavingReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('having')
@@ -380,7 +380,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having_like
      */
-    public function testHavingLikeReturnsSelf()
+    public function testHavingLikeReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('having_like')
@@ -397,7 +397,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having_in
      */
-    public function testHavingInReturnsSelf()
+    public function testHavingInReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('having_in')
@@ -414,7 +414,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having_between
      */
-    public function testHavingBetweenReturnsSelf()
+    public function testHavingBetweenReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('having_between')
@@ -431,7 +431,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::having_regexp
      */
-    public function testHavingRegexpReturnsSelf()
+    public function testHavingRegexpReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('having_regexp')
@@ -448,7 +448,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::order_by
      */
-    public function testOrderByReturnsSelf()
+    public function testOrderByReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('order_by')
@@ -465,7 +465,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::limit
      */
-    public function testLimitReturnsSelf()
+    public function testLimitReturnsSelf(): void
     {
         $this->builder->expects($this->once())
                       ->method('limit')

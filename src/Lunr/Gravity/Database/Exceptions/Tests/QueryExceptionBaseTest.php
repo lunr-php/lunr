@@ -20,7 +20,7 @@ class QueryExceptionBaseTest extends QueryExceptionTest
     /**
      * Test that the SQL query was set correctly.
      */
-    public function testSQLQuerySetCorrectly()
+    public function testSQLQuerySetCorrectly(): void
     {
         $this->assertPropertySame('query', 'SQL query');
     }
@@ -28,7 +28,7 @@ class QueryExceptionBaseTest extends QueryExceptionTest
     /**
      * Test that the database error code was set correctly.
      */
-    public function testDatabaseErrorCodeSetCorrectly()
+    public function testDatabaseErrorCodeSetCorrectly(): void
     {
         $this->assertPropertySame('database_error_code', 1024);
     }
@@ -36,7 +36,7 @@ class QueryExceptionBaseTest extends QueryExceptionTest
     /**
      * Test that the database error message was set correctly.
      */
-    public function testDatabaseErrorMessageSetCorrectly()
+    public function testDatabaseErrorMessageSetCorrectly(): void
     {
         $this->assertPropertySame('database_error_message', "There's an error in your query.");
     }
@@ -46,7 +46,7 @@ class QueryExceptionBaseTest extends QueryExceptionTest
      *
      * @covers \Lunr\Gravity\Database\Exceptions\QueryException::getQuery
      */
-    public function testGetQueryReturnsQuery()
+    public function testGetQueryReturnsQuery(): void
     {
         $this->assertSame('SQL query', $this->class->getQuery());
     }
@@ -56,7 +56,7 @@ class QueryExceptionBaseTest extends QueryExceptionTest
      *
      * @covers \Lunr\Gravity\Database\Exceptions\QueryException::getDatabaseErrorCode
      */
-    public function testGetDatabaseErrorCodeReturnsErrorCode()
+    public function testGetDatabaseErrorCodeReturnsErrorCode(): void
     {
         $this->assertSame(1024, $this->class->getDatabaseErrorCode());
     }
@@ -66,7 +66,7 @@ class QueryExceptionBaseTest extends QueryExceptionTest
      *
      * @covers \Lunr\Gravity\Database\Exceptions\QueryException::getDatabaseErrorMessage
      */
-    public function testGetDatabaseErrorMessageReturnsErrorMessage()
+    public function testGetDatabaseErrorMessageReturnsErrorMessage(): void
     {
         $this->assertSame("There's an error in your query.", $this->class->getDatabaseErrorMessage());
     }
@@ -74,7 +74,7 @@ class QueryExceptionBaseTest extends QueryExceptionTest
     /**
      * Test that the error message was passed correctly.
      */
-    public function testErrorMessagePassedCorrectly()
+    public function testErrorMessagePassedCorrectly(): void
     {
         $this->expectExceptionMessage('Exception Message');
 
@@ -86,7 +86,7 @@ class QueryExceptionBaseTest extends QueryExceptionTest
      *
      * @covers \Lunr\Gravity\Database\Exceptions\QueryException::setMessage
      */
-    public function testSetMessage()
+    public function testSetMessage(): void
     {
         $this->class->setMessage('New error message!');
 

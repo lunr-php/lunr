@@ -27,7 +27,7 @@ class SQLDMLQueryBuilderDeleteTest extends SQLDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsDeleteTest::testIncrementalDelete
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::delete
      */
-    public function testDelete()
+    public function testDelete(): void
     {
         $this->class->delete('table');
         $value = $this->get_reflection_property_value('delete');
@@ -40,7 +40,7 @@ class SQLDMLQueryBuilderDeleteTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::delete
      */
-    public function testDeleteReturnsSelfReference()
+    public function testDeleteReturnsSelfReference(): void
     {
         $return = $this->class->delete('table');
 

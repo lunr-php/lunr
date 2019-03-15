@@ -52,7 +52,7 @@ class MariaDBConnectionTest extends TestCase
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -90,7 +90,7 @@ class MariaDBConnectionTest extends TestCase
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);

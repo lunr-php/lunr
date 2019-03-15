@@ -24,7 +24,7 @@ class SQLDMLQueryBuilderUsingTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::using
      */
-    public function testUsing()
+    public function testUsing(): void
     {
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
 
@@ -40,7 +40,7 @@ class SQLDMLQueryBuilderUsingTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::using
      */
-    public function testUsingAddSecondColumn()
+    public function testUsingAddSecondColumn(): void
     {
         $this->set_reflection_property_value('join_type', 'using');
         $this->set_reflection_property_value('join', ' USING (column1)');
@@ -57,7 +57,7 @@ class SQLDMLQueryBuilderUsingTest extends SQLDMLQueryBuilderTest
      *
      * @covers Lunr\Gravity\Database\SQLDMLQueryBuilder::using
      */
-    public function testUsingMultipleColumn()
+    public function testUsingMultipleColumn(): void
     {
         $this->set_reflection_property_value('is_unfinished_join', TRUE);
 

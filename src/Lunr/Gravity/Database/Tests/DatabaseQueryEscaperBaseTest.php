@@ -26,7 +26,7 @@ class DatabaseQueryEscaperBaseTest extends DatabaseQueryEscaperTest
     /**
      * Test that DatabaseConnection class is passed.
      */
-    public function testDatabaseConnectionIsPassed()
+    public function testDatabaseConnectionIsPassed(): void
     {
         $this->assertSame($this->db, $this->get_reflection_property_value('db'));
     }
