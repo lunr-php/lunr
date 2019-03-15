@@ -26,7 +26,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      *
      * @covers Lunr\Core\DateTime::get_delayed_timestamp
      */
-    public function testGetDelayedTimestampWithCurrentTimestampAsBase()
+    public function testGetDelayedTimestampWithCurrentTimestampAsBase(): void
     {
         $this->assertEquals(strtotime('+1 day'), $this->class->get_delayed_timestamp('+1 day'));
     }
@@ -39,7 +39,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      * @dataProvider validTimestampProvider
      * @covers       Lunr\Core\DateTime::get_delayed_timestamp
      */
-    public function testGetDelayedTimestampWithCustomTimestampAsBase($base)
+    public function testGetDelayedTimestampWithCustomTimestampAsBase($base): void
     {
         $this->assertEquals(strtotime('+1 day', $base), $this->class->get_delayed_timestamp('+1 day', $base));
     }
@@ -52,7 +52,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      * @dataProvider invalidTimestampProvider
      * @covers       Lunr\Core\DateTime::get_delayed_timestamp
      */
-    public function testGetDelayedTimestampWithCustomInvalidTimestampAsBase($base)
+    public function testGetDelayedTimestampWithCustomInvalidTimestampAsBase($base): void
     {
         $this->assertFalse($this->class->get_delayed_timestamp('+1 day', $base));
     }
@@ -65,7 +65,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      * @dataProvider validDelayProvider
      * @covers       Lunr\Core\DateTime::get_delayed_timestamp
      */
-    public function testGetDelayedTimestampWithValidDelay($delay)
+    public function testGetDelayedTimestampWithValidDelay($delay): void
     {
         $this->assertEquals(strtotime($delay), $this->class->get_delayed_timestamp($delay));
     }
@@ -78,7 +78,7 @@ class DateTimeGetDelayedTimestampTest extends DateTimeTest
      * @dataProvider invalidDelayProvider
      * @covers       Lunr\Core\DateTime::get_delayed_timestamp
      */
-    public function testGetDelayedTimestampWithInvalidDelay($delay)
+    public function testGetDelayedTimestampWithInvalidDelay($delay): void
     {
         $this->assertFalse($this->class->get_delayed_timestamp($delay));
     }

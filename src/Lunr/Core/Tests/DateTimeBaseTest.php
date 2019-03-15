@@ -25,7 +25,7 @@ class DateTimeBaseTest extends DateTimeTest
     /**
      * Check that default DateTime format is as expected.
      */
-    public function testDefaultDatetimeFormat()
+    public function testDefaultDatetimeFormat(): void
     {
         $this->assertPropertyEquals('datetime_format', '%Y-%m-%d');
     }
@@ -38,7 +38,7 @@ class DateTimeBaseTest extends DateTimeTest
      * @dataProvider datetimeFormatProvider
      * @covers       Lunr\Core\DateTime::set_datetime_format
      */
-    public function testSetCustomDatetimeFormat($format)
+    public function testSetCustomDatetimeFormat($format): void
     {
         $this->class->set_datetime_format($format);
         $this->assertPropertyEquals('datetime_format', $format);
@@ -47,7 +47,7 @@ class DateTimeBaseTest extends DateTimeTest
     /**
      * Check that default Locale is as expected.
      */
-    public function testDefaultLocale()
+    public function testDefaultLocale(): void
     {
         $this->assertPropertyEquals('locale', 'en_US.UTF-8');
         $this->assertEquals('en_US.UTF-8', setlocale(LC_ALL, 0));
@@ -58,7 +58,7 @@ class DateTimeBaseTest extends DateTimeTest
      *
      * @covers Lunr\Core\DateTime::set_locale
      */
-    public function testSetCustomLocaleWithDefaultCharset()
+    public function testSetCustomLocaleWithDefaultCharset(): void
     {
         $this->class->set_locale('de_DE');
         $this->assertPropertyEquals('locale', 'de_DE.UTF-8');
@@ -70,7 +70,7 @@ class DateTimeBaseTest extends DateTimeTest
      *
      * @covers Lunr\Core\DateTime::set_locale
      */
-    public function testSetCustomLocaleWithCustomCharset()
+    public function testSetCustomLocaleWithCustomCharset(): void
     {
         $this->class->set_locale('de_DE', 'ISO-8859-1');
         $this->assertPropertyEquals('locale', 'de_DE.ISO-8859-1');
@@ -86,7 +86,7 @@ class DateTimeBaseTest extends DateTimeTest
      * @dataProvider invalidLocaleProvider
      * @covers       Lunr\Core\DateTime::set_locale
      */
-    public function testSetCustomInvalidLocaleWithDefaultCharset($value)
+    public function testSetCustomInvalidLocaleWithDefaultCharset($value): void
     {
         $this->class->set_locale($value);
         $this->assertPropertyEquals('locale', 'en_US.UTF-8');
@@ -102,7 +102,7 @@ class DateTimeBaseTest extends DateTimeTest
      * @dataProvider equalDatetimeProvider
      * @covers       Lunr\Core\DateTime::sort_compare_datetime
      */
-    public function testDatetimeIsEqual($date1, $date2)
+    public function testDatetimeIsEqual($date1, $date2): void
     {
         $this->assertEquals(0, $this->class->sort_compare_datetime($date1, $date2));
     }
@@ -116,7 +116,7 @@ class DateTimeBaseTest extends DateTimeTest
      * @dataProvider inequalDatetimeProvider
      * @covers       Lunr\Core\DateTime::sort_compare_datetime
      */
-    public function testDatetimeIsLower($date1, $date2)
+    public function testDatetimeIsLower($date1, $date2): void
     {
         $this->assertEquals(-1, $this->class->sort_compare_datetime($date1, $date2));
     }
@@ -130,7 +130,7 @@ class DateTimeBaseTest extends DateTimeTest
      * @dataProvider inequalDatetimeProvider
      * @covers       Lunr\Core\DateTime::sort_compare_datetime
      */
-    public function testDatetimeIsGreater($date1, $date2)
+    public function testDatetimeIsGreater($date1, $date2): void
     {
         $this->assertEquals(1, $this->class->sort_compare_datetime($date2, $date1));
     }

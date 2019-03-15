@@ -26,7 +26,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      *
      * @covers Lunr\Core\DateTime::get_datetime
      */
-    public function testGetDatetimeWithDefaultDatetimeFormat()
+    public function testGetDatetimeWithDefaultDatetimeFormat(): void
     {
         $this->assertEquals(strftime('%Y-%m-%d'), $this->class->get_datetime());
     }
@@ -37,7 +37,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @covers  Lunr\Core\DateTime::get_datetime
      */
-    public function testGetDatetimeWithCustomDatetimeFormat()
+    public function testGetDatetimeWithCustomDatetimeFormat(): void
     {
         $value = $this->class->set_datetime_format('%A. %d.%m.%Y')->get_datetime();
         $this->assertEquals(strftime('%A. %d.%m.%Y'), $value);
@@ -52,7 +52,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * @dataProvider invalidDatetimeFormatProvider
      * @covers       Lunr\Core\DateTime::get_datetime
      */
-    public function testGetDatetimeWithCustomInvalidDatetimeFormat($format)
+    public function testGetDatetimeWithCustomInvalidDatetimeFormat($format): void
     {
         $this->assertEquals($format, $this->class->set_datetime_format($format)->get_datetime());
     }
@@ -64,7 +64,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Core\DateTime::get_datetime
      */
-    public function testGetDatetimeWithLocalizedCustomDatetimeFormat()
+    public function testGetDatetimeWithLocalizedCustomDatetimeFormat(): void
     {
         $day           = strftime('%u');
         $localized_day = $this->class->set_datetime_format('%A')->set_locale('de_DE')->get_datetime();
@@ -79,7 +79,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * @dataProvider validTimestampProvider
      * @covers       Lunr\Core\DateTime::get_datetime
      */
-    public function testGetDatetimeWithCustomTimestampAsBase($timestamp)
+    public function testGetDatetimeWithCustomTimestampAsBase($timestamp): void
     {
         $this->assertEquals(strftime('%Y-%m-%d', $timestamp), $this->class->get_datetime($timestamp));
     }
@@ -92,7 +92,7 @@ class DateTimeGetDateTimeTest extends DateTimeTest
      * @dataProvider invalidTimestampProvider
      * @covers       Lunr\Core\DateTime::get_datetime
      */
-    public function testGetDatetimeWithCustomInvalidTimestampAsBase($timestamp)
+    public function testGetDatetimeWithCustomInvalidTimestampAsBase($timestamp): void
     {
         $this->assertFalse($this->class->get_datetime($timestamp));
     }

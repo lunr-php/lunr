@@ -24,7 +24,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::get_instance
      */
-    public function testGetInstanceReturnsNullForNonInstantiableClass()
+    public function testGetInstanceReturnsNullForNonInstantiableClass(): void
     {
         $cache = [ 'controller' => [ 'name' => 'Lunr\Corona\Controller' ] ];
         $this->set_reflection_property_value('cache', $cache);
@@ -39,7 +39,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::get_instance
      */
-    public function testGetInstanceReturnsInstanceForClassWithoutConstructor()
+    public function testGetInstanceReturnsInstanceForClassWithoutConstructor(): void
     {
         $cache = [ 'stdclass' => [ 'name' => 'stdClass' ] ];
         $this->set_reflection_property_value('cache', $cache);
@@ -54,7 +54,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::get_instance
      */
-    public function testGetInstanceReturnsNullForTooLittleNumberOfConstructorArguments()
+    public function testGetInstanceReturnsNullForTooLittleNumberOfConstructorArguments(): void
     {
         $cache = [ 'request' => [ 'name' => 'Lunr\Corona\Request', 'params' => [] ] ];
         $this->set_reflection_property_value('cache', $cache);
@@ -69,7 +69,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::get_instance
      */
-    public function testGetInstanceReturnsInstanceForConstructorWithArguments()
+    public function testGetInstanceReturnsInstanceForConstructorWithArguments(): void
     {
         $cache = [ 'datetime' => [ 'name' => 'Lunr\Core\DateTime', 'params' => [ 'config' ] ] ];
         $this->set_reflection_property_value('cache', $cache);
@@ -84,7 +84,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::get_instance
      */
-    public function testGetInstanceReturnsInstanceForConstructorWithoutArguments()
+    public function testGetInstanceReturnsInstanceForConstructorWithoutArguments(): void
     {
         $cache = [ 'datetime' => [ 'name' => 'Lunr\Core\DateTime', 'params' => [] ] ];
         $this->set_reflection_property_value('cache', $cache);
@@ -99,7 +99,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::get_parameters
      */
-    public function testGetParametersProcessesIDParameter()
+    public function testGetParametersProcessesIDParameter(): void
     {
         $params = [ 'config' ];
 
@@ -107,7 +107,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
 
         $return = $method->invokeArgs($this->class, [ $params ]);
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertInstanceOf('Lunr\Core\Configuration', $return[0]);
     }
 
@@ -116,7 +116,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::get_parameters
      */
-    public function testGetParametersProcessesNonIDParameter()
+    public function testGetParametersProcessesNonIDParameter(): void
     {
         $params = [ 'string' ];
 
@@ -124,7 +124,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
 
         $return = $method->invokeArgs($this->class, [ $params ]);
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertEquals('string', $return[0]);
     }
 
@@ -133,7 +133,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::get_parameters
      */
-    public function testGetParametersProcessesNonStringParameter()
+    public function testGetParametersProcessesNonStringParameter(): void
     {
         $params = [ [], 5, NULL ];
 
@@ -141,7 +141,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
 
         $return = $method->invokeArgs($this->class, [ $params ]);
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertSame([], $return[0]);
         $this->assertSame(5, $return[1]);
         $this->assertSame(NULL, $return[2]);
@@ -152,7 +152,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::get_parameters
      */
-    public function testGetParametersProcessesForcedNonIDParameter()
+    public function testGetParametersProcessesForcedNonIDParameter(): void
     {
         $params = [ '!string' ];
 
@@ -160,7 +160,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
 
         $return = $method->invokeArgs($this->class, [ $params ]);
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertEquals('string', $return[0]);
     }
 
@@ -169,7 +169,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::get_parameters
      */
-    public function testGetParametersProcessesMixedParameters()
+    public function testGetParametersProcessesMixedParameters(): void
     {
         $params = [ 'config', '!config', 'string' ];
 
@@ -177,7 +177,7 @@ class ConfigServiceLocatorGetInstanceTest extends ConfigServiceLocatorTest
 
         $return = $method->invokeArgs($this->class, [ $params ]);
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertInstanceOf('Lunr\Core\Configuration', $return[0]);
         $this->assertEquals('config', $return[1]);
         $this->assertEquals('string', $return[2]);

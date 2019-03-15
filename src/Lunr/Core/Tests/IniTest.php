@@ -29,7 +29,7 @@ abstract class IniTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUpMain()
+    public function setUpMain(): void
     {
         $this->class      = new Ini();
         $this->reflection = new ReflectionClass('Lunr\Core\Ini');
@@ -40,7 +40,7 @@ abstract class IniTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUpSection()
+    public function setUpSection(): void
     {
         $this->class      = new Ini('date');
         $this->reflection = new ReflectionClass('Lunr\Core\Ini');
@@ -49,7 +49,7 @@ abstract class IniTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->reflection);
         unset($this->class);
@@ -60,7 +60,7 @@ abstract class IniTest extends LunrBaseTest
      *
      * @return array $values shorthand byte strings.
      */
-    public function shorthandBytesProvider()
+    public function shorthandBytesProvider(): array
     {
         $values   = [];
         $values[] = [ '10', 10 ];

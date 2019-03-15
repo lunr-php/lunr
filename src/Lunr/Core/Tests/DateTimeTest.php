@@ -27,7 +27,7 @@ abstract class DateTimeTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new DateTime();
         $this->reflection = new ReflectionClass('Lunr\Core\DateTime');
@@ -36,7 +36,7 @@ abstract class DateTimeTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->reflection);
         unset($this->class);
@@ -52,7 +52,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return boolean $return TRUE on known values, FALSE on unknown values
      */
-    protected function check_localized_day($day, $localized_day)
+    protected function check_localized_day($day, $localized_day): bool
     {
         switch ($day)
         {
@@ -89,7 +89,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $timestamps Set of valid timestamps
      */
-    public function validTimestampProvider()
+    public function validTimestampProvider(): array
     {
         $timestamps   = [];
         $timestamps[] = [ time() ];
@@ -104,7 +104,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $timestamps Set of invalid timestamps
      */
-    public function invalidTimestampProvider()
+    public function invalidTimestampProvider(): array
     {
         $timestamps   = [];
         $timestamps[] = [ 'String' ];
@@ -119,7 +119,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $delay Set of valid delay specifiers
      */
-    public function validDelayProvider()
+    public function validDelayProvider(): array
     {
         $delay   = [];
         $delay[] = [ '+1 day' ];
@@ -136,7 +136,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $delay Set of invalid delay specifiers
      */
-    public function invalidDelayProvider()
+    public function invalidDelayProvider(): array
     {
         $delay   = [];
         $delay[] = [ '' ];
@@ -152,7 +152,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $delay Set of equal dates
      */
-    public function equalDatetimeProvider()
+    public function equalDatetimeProvider(): array
     {
         $datetimes   = [];
         $datetimes[] = [ '2010-02-02', '2010-02-02' ];
@@ -166,7 +166,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $delay Set of inequal dates
      */
-    public function inequalDatetimeProvider()
+    public function inequalDatetimeProvider(): array
     {
         $datetimes   = [];
         $datetimes[] = [ '2010-02-02', '2010-02-03' ];
@@ -183,7 +183,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $delay Set of datetime formats
      */
-    public function datetimeFormatProvider()
+    public function datetimeFormatProvider(): array
     {
         $formats   = $this->invalidDatetimeFormatProvider();
         $formats[] = [ '%A' ];
@@ -198,7 +198,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $delay Set of invalid datetime formats
      */
-    public function invalidDatetimeFormatProvider()
+    public function invalidDatetimeFormatProvider(): array
     {
         $formats   = [];
         $formats[] = [ '' ];
@@ -215,7 +215,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $delay Set of invalid POSIX locale definitions
      */
-    public function invalidLocaleProvider()
+    public function invalidLocaleProvider(): array
     {
         $locales   = [];
         $locales[] = [ '' ];
@@ -232,7 +232,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $times Set of valid time definitions
      */
-    public function validTimeProvider()
+    public function validTimeProvider(): array
     {
         $times   = [];
         $times[] = [ '23:30' ];
@@ -249,7 +249,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $times Set of invalid time definitions
      */
-    public function invalidTimeProvider()
+    public function invalidTimeProvider(): array
     {
         $times   = [];
         $times[] = [ '23:20:67' ];
@@ -266,7 +266,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $years Set of valid leap definitions
      */
-    public function validLeapYearProvider()
+    public function validLeapYearProvider(): array
     {
         $years   = [];
         $years[] = [ 1996 ];
@@ -280,7 +280,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $years Set of invalid leap definitions
      */
-    public function invalidLeapYearProvider()
+    public function invalidLeapYearProvider(): array
     {
         $years   = [];
         $years[] = [ 1998 ];
@@ -295,7 +295,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $dates Set of valid date definitions
      */
-    public function validDateProvider()
+    public function validDateProvider(): array
     {
         $dates   = [];
         $dates[] = [ '2010-02-10' ];
@@ -312,7 +312,7 @@ abstract class DateTimeTest extends LunrBaseTest
      *
      * @return array $dates Set of invalid date definitions
      */
-    public function invalidDateProvider()
+    public function invalidDateProvider(): array
     {
         $dates   = [];
         $dates[] = [ 'string' ];

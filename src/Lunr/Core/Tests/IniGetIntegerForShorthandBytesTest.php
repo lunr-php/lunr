@@ -24,7 +24,7 @@ class IniGetIntegerForShorthandBytesTest extends IniTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setupMain();
     }
@@ -38,7 +38,7 @@ class IniGetIntegerForShorthandBytesTest extends IniTest
      * @dataProvider shorthandBytesProvider
      * @covers       Lunr\Core\Ini::get_integer_for_shorthand_bytes
      */
-    public function testGetIntegerForShorthandBytes($string, $integer)
+    public function testGetIntegerForShorthandBytes($string, $integer): void
     {
         $this->assertSame($integer, $this->class->get_integer_for_shorthand_bytes($string));
     }

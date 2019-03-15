@@ -27,7 +27,7 @@ class DateTimeTomorrowTest extends DateTimeTest
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testDefaultDatetimeFormat
      * @covers  Lunr\Core\DateTime::tomorrow
      */
-    public function testTomorrowWithDefaultDatetimeFormat()
+    public function testTomorrowWithDefaultDatetimeFormat(): void
     {
         $this->assertEquals(strftime('%Y-%m-%d', strtotime('+1 day')), $this->class->tomorrow());
     }
@@ -38,7 +38,7 @@ class DateTimeTomorrowTest extends DateTimeTest
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @covers  Lunr\Core\DateTime::tomorrow
      */
-    public function testTomorrowWithCustomDatetimeFormat()
+    public function testTomorrowWithCustomDatetimeFormat(): void
     {
         $value = $this->class->set_datetime_format('%A. %d.%m.%Y')->tomorrow();
         $this->assertEquals(strftime('%A. %d.%m.%Y', strtotime('+1 day')), $value);
@@ -51,7 +51,7 @@ class DateTimeTomorrowTest extends DateTimeTest
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Core\DateTime::tomorrow
      */
-    public function testTomorrowWithLocalizedCustomDatetimeFormat()
+    public function testTomorrowWithLocalizedCustomDatetimeFormat(): void
     {
         $day           = strftime('%u', strtotime('+1 day'));
         $localized_day = $this->class->set_datetime_format('%A')->set_locale('de_DE')->tomorrow();
@@ -67,7 +67,7 @@ class DateTimeTomorrowTest extends DateTimeTest
      * @dataProvider invalidDatetimeFormatProvider
      * @covers       Lunr\Core\DateTime::tomorrow
      */
-    public function testTomorrowWithCustomInvalidDatetimeFormat($format)
+    public function testTomorrowWithCustomInvalidDatetimeFormat($format): void
     {
         $this->assertEquals($format, $this->class->set_datetime_format($format)->tomorrow());
     }

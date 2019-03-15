@@ -25,7 +25,7 @@ class IniMainTest extends IniTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setupMain();
     }
@@ -33,7 +33,7 @@ class IniMainTest extends IniTest
     /**
      * Verify that section is NULL for main ini configuration handling.
      */
-    public function testSectionIsNull()
+    public function testSectionIsNull(): void
     {
         $this->assertNull($this->get_reflection_property_value('section'));
     }
@@ -43,7 +43,7 @@ class IniMainTest extends IniTest
      *
      * @covers Lunr\Core\Ini::__set
      */
-    public function testSettingExistingKey()
+    public function testSettingExistingKey(): void
     {
         $limit = ini_get('memory_limit');
 
@@ -61,7 +61,7 @@ class IniMainTest extends IniTest
      *
      * @covers Lunr\Core\Ini::__set
      */
-    public function testSettintNonExistingKey()
+    public function testSettintNonExistingKey(): void
     {
         $this->class->memory_limiet = 100;
 
@@ -73,7 +73,7 @@ class IniMainTest extends IniTest
      *
      * @covers Lunr\Core\Ini::__get
      */
-    public function testGettingExistingKey()
+    public function testGettingExistingKey(): void
     {
         $this->assertEquals(ini_get('memory_limit'), $this->class->memory_limit);
     }
@@ -83,7 +83,7 @@ class IniMainTest extends IniTest
      *
      * @covers Lunr\Core\Ini::__get
      */
-    public function testGettingNonExistingKey()
+    public function testGettingNonExistingKey(): void
     {
         $this->assertFalse($this->class->memory_limiet);
     }
@@ -93,7 +93,7 @@ class IniMainTest extends IniTest
      *
      * @covers Lunr\Core\Ini::__unset
      */
-    public function testRestoringExistingKey()
+    public function testRestoringExistingKey(): void
     {
         $limit = ini_get('memory_limit');
 
@@ -113,7 +113,7 @@ class IniMainTest extends IniTest
      *
      * @covers Lunr\Core\Ini::__unset
      */
-    public function testRestoringNonExistingKey()
+    public function testRestoringNonExistingKey(): void
     {
         unset($this->class->memory_limiet);
 

@@ -22,7 +22,7 @@ class ConfigServiceLocatorBaseTest extends ConfigServiceLocatorTest
     /**
      * Test that the cache is initialized as empty array.
      */
-    public function testCacheIsEmptyArray()
+    public function testCacheIsEmptyArray(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('cache'));
     }
@@ -30,11 +30,11 @@ class ConfigServiceLocatorBaseTest extends ConfigServiceLocatorTest
     /**
      * Test that the registry is initialized correctly.
      */
-    public function testRegistryIsSetupCorrectly()
+    public function testRegistryIsSetupCorrectly(): void
     {
         $registry = $this->get_reflection_property_value('registry');
 
-        $this->assertInternalType('array', $registry);
+        $this->assertIsArray($registry);
         $this->assertCount(2, $registry);
         $this->assertArrayHasKey('config', $registry);
         $this->assertArrayHasKey('locator', $registry);
@@ -43,7 +43,7 @@ class ConfigServiceLocatorBaseTest extends ConfigServiceLocatorTest
     /**
      * Test that the Configuration class is passed correctly.
      */
-    public function testConfigurationIsPassedCorrectly()
+    public function testConfigurationIsPassedCorrectly(): void
     {
         $this->assertSame($this->configuration, $this->get_reflection_property_value('config'));
     }
@@ -53,7 +53,7 @@ class ConfigServiceLocatorBaseTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::override
      */
-    public function testOverrideWhenIDAlreadyTaken()
+    public function testOverrideWhenIDAlreadyTaken(): void
     {
         $registry = [ 'id' => 'Foo' ];
         $class    = new \stdClass();
@@ -76,7 +76,7 @@ class ConfigServiceLocatorBaseTest extends ConfigServiceLocatorTest
      * @dataProvider invalidObjectProvider
      * @covers       Lunr\Core\ConfigServiceLocator::override
      */
-    public function testOverrideWithInvalidObject($value)
+    public function testOverrideWithInvalidObject($value): void
     {
         $this->assertFalse($this->class->override('id', $value));
     }
@@ -86,7 +86,7 @@ class ConfigServiceLocatorBaseTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::override
      */
-    public function testSuccessfulOverride()
+    public function testSuccessfulOverride(): void
     {
         $class = new \stdClass();
 

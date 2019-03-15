@@ -30,7 +30,7 @@ class DateTimeGetDelayedDatetimeTest extends DateTimeTest
      * @dataProvider validTimestampProvider
      * @covers       Lunr\Core\DateTime::get_delayed_datetime
      */
-    public function testGetDelayedDatetimeWithCustomTimestampAsBase($timestamp)
+    public function testGetDelayedDatetimeWithCustomTimestampAsBase($timestamp): void
     {
         $value = $this->class->get_delayed_datetime('+1 day', $timestamp);
         $this->assertEquals(strftime('%Y-%m-%d', strtotime('+1 day', $timestamp)), $value);
@@ -44,7 +44,7 @@ class DateTimeGetDelayedDatetimeTest extends DateTimeTest
      * @dataProvider invalidTimestampProvider
      * @covers       Lunr\Core\DateTime::get_delayed_datetime
      */
-    public function testGetDelayedDatetimeWithCustomInvalidTimestampAsBase($timestamp)
+    public function testGetDelayedDatetimeWithCustomInvalidTimestampAsBase($timestamp): void
     {
         $this->assertFalse($this->class->get_delayed_datetime('+1 day', $timestamp));
     }
@@ -59,7 +59,7 @@ class DateTimeGetDelayedDatetimeTest extends DateTimeTest
      * @dataProvider validDelayProvider
      * @covers       Lunr\Core\DateTime::get_delayed_datetime
      */
-    public function testGetDelayedDatetimeWithValidDelay($delay)
+    public function testGetDelayedDatetimeWithValidDelay($delay): void
     {
         $this->assertEquals(strftime('%Y-%m-%d', strtotime($delay)), $this->class->get_delayed_datetime($delay));
     }
@@ -73,7 +73,7 @@ class DateTimeGetDelayedDatetimeTest extends DateTimeTest
      * @dataProvider invalidDelayProvider
      * @covers       Lunr\Core\DateTime::get_delayed_datetime
      */
-    public function testGetDelayedDatetimeWithInvalidDelay($delay)
+    public function testGetDelayedDatetimeWithInvalidDelay($delay): void
     {
         $this->assertFalse($this->class->get_delayed_datetime($delay));
     }

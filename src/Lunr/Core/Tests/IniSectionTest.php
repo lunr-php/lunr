@@ -25,7 +25,7 @@ class IniSectionTest extends IniTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setupSection();
     }
@@ -33,7 +33,7 @@ class IniSectionTest extends IniTest
     /**
      * Verify that section is NULL for main ini configuration handling.
      */
-    public function testSectionIsNotNull()
+    public function testSectionIsNotNull(): void
     {
         $this->assertEquals('date', $this->get_reflection_property_value('section'));
     }
@@ -43,7 +43,7 @@ class IniSectionTest extends IniTest
      *
      * @covers Lunr\Core\Ini::__set
      */
-    public function testSettingExistingKey()
+    public function testSettingExistingKey(): void
     {
         ini_set('date.timezone', 'Europe/Amsterdam');
 
@@ -59,7 +59,7 @@ class IniSectionTest extends IniTest
      *
      * @covers Lunr\Core\Ini::__set
      */
-    public function testSettintNonExistingKey()
+    public function testSettintNonExistingKey(): void
     {
         $this->class->memory_limit = 100;
 
@@ -71,7 +71,7 @@ class IniSectionTest extends IniTest
      *
      * @covers Lunr\Core\Ini::__get
      */
-    public function testGettingExistingKey()
+    public function testGettingExistingKey(): void
     {
         $this->assertEquals(ini_get('date.timezone'), $this->class->timezone);
     }
@@ -81,7 +81,7 @@ class IniSectionTest extends IniTest
      *
      * @covers Lunr\Core\Ini::__get
      */
-    public function testGettingNonExistingKey()
+    public function testGettingNonExistingKey(): void
     {
         $this->assertFalse($this->class->memory_limit);
     }
@@ -91,7 +91,7 @@ class IniSectionTest extends IniTest
      *
      * @covers Lunr\Core\Ini::__unset
      */
-    public function testRestoringExistingKey()
+    public function testRestoringExistingKey(): void
     {
         $zone = ini_get('date.timezone');
 
@@ -111,7 +111,7 @@ class IniSectionTest extends IniTest
      *
      * @covers Lunr\Core\Ini::__unset
      */
-    public function testRestoringNonExistingKey()
+    public function testRestoringNonExistingKey(): void
     {
         unset($this->class->memory_limit);
 

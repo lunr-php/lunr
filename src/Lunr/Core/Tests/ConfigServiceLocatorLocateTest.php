@@ -24,7 +24,7 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::locate
      */
-    public function testLocateReturnsInstanceFromRegistry()
+    public function testLocateReturnsInstanceFromRegistry(): void
     {
         $method = $this->get_accessible_reflection_method('locate');
 
@@ -36,7 +36,7 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::locate
      */
-    public function testLocateReinstantiatesInstanceFromCache()
+    public function testLocateReinstantiatesInstanceFromCache(): void
     {
         $cache = [ 'datetime' => [ 'name' => 'Lunr\Core\DateTime', 'params' => [ 'config' ] ] ];
         $this->set_reflection_property_value('cache', $cache);
@@ -51,7 +51,7 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::locate
      */
-    public function testLocateProcessesTotallyNewInstance()
+    public function testLocateProcessesTotallyNewInstance(): void
     {
         $method = $this->get_accessible_reflection_method('locate');
 
@@ -71,7 +71,7 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::locate
      */
-    public function testLocateReturnsTotallyNewInstance()
+    public function testLocateReturnsTotallyNewInstance(): void
     {
         $method = $this->get_accessible_reflection_method('locate');
 
@@ -83,7 +83,7 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::locate
      */
-    public function testLocateReturnsNullForUnknownID()
+    public function testLocateReturnsNullForUnknownID(): void
     {
         $method = $this->get_accessible_reflection_method('locate');
 
@@ -98,7 +98,7 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      * @dataProvider invalidIDProvider
      * @covers       Lunr\Core\ConfigServiceLocator::locate
      */
-    public function testLocateReturnsNullForNonStringID($id)
+    public function testLocateReturnsNullForNonStringID($id): void
     {
         $method = $this->get_accessible_reflection_method('locate');
 
@@ -110,7 +110,7 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::__call
      */
-    public function testMagicCallReturnsInstanceFromRegistry()
+    public function testMagicCallReturnsInstanceFromRegistry(): void
     {
         $this->assertInstanceOf('Lunr\Core\Configuration', $this->class->config());
     }
@@ -120,7 +120,7 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::__call
      */
-    public function testMagicCallReinstantiatesInstanceFromCache()
+    public function testMagicCallReinstantiatesInstanceFromCache(): void
     {
         $cache = [ 'datetime' => [ 'name' => 'Lunr\Core\DateTime', 'params' => [ 'config' ] ] ];
         $this->set_reflection_property_value('cache', $cache);
@@ -133,7 +133,7 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::__call
      */
-    public function testMagicCallProcessesTotallyNewInstance()
+    public function testMagicCallProcessesTotallyNewInstance(): void
     {
         $registry = $this->get_accessible_reflection_property('registry');
 
@@ -151,7 +151,7 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::__call
      */
-    public function testMagicCallReturnsTotallyNewInstance()
+    public function testMagicCallReturnsTotallyNewInstance(): void
     {
         $this->assertInstanceOf('Lunr\Core\DateTime', $this->class->datetime());
     }
@@ -161,7 +161,7 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::__call
      */
-    public function testMagicCallReturnsNullForUnknownID()
+    public function testMagicCallReturnsNullForUnknownID(): void
     {
         $this->assertNull($this->class->string());
     }

@@ -24,7 +24,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::load_recipe
      */
-    public function testLoadRecipeDoesNotIncludeNonExistingFile()
+    public function testLoadRecipeDoesNotIncludeNonExistingFile(): void
     {
         $filename = 'Core/locator/locate.nonexisting.inc.php';
 
@@ -43,7 +43,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::load_recipe
      */
-    public function testLoadRecipeIncludesExistingFile()
+    public function testLoadRecipeIncludesExistingFile(): void
     {
         $filename = 'Core/locator/locate.valid.inc.php';
 
@@ -62,7 +62,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::load_recipe
      */
-    public function testLoadRecipeCachesWithValidRecipies()
+    public function testLoadRecipeCachesWithValidRecipies(): void
     {
         $method = $this->get_accessible_reflection_method('load_recipe');
         $cache  = $this->get_accessible_reflection_property('cache');
@@ -80,7 +80,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      * @dataProvider invalidRecipeProvider
      * @covers       Lunr\Core\ConfigServiceLocator::load_recipe
      */
-    public function testLoadRecipeDoesNotCacheWithInvalidRecipes($id)
+    public function testLoadRecipeDoesNotCacheWithInvalidRecipes($id): void
     {
         $method = $this->get_accessible_reflection_method('load_recipe');
         $cache  = $this->get_accessible_reflection_property('cache');
@@ -95,7 +95,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::process_new_instance
      */
-    public function testProcessNewInstanceReturnsInstance()
+    public function testProcessNewInstanceReturnsInstance(): void
     {
         $method = $this->get_accessible_reflection_method('process_new_instance');
 
@@ -109,7 +109,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::process_new_instance
      */
-    public function testProcessNewInstanceDoesNotStoreNonSingletonsInRegistry()
+    public function testProcessNewInstanceDoesNotStoreNonSingletonsInRegistry(): void
     {
         $method   = $this->get_accessible_reflection_method('process_new_instance');
         $registry = $this->get_accessible_reflection_property('registry');
@@ -127,7 +127,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::process_new_instance
      */
-    public function testProcessNewInstanceDoesNotStoreInRegistryIfSingletonInfoMissing()
+    public function testProcessNewInstanceDoesNotStoreInRegistryIfSingletonInfoMissing(): void
     {
         $method   = $this->get_accessible_reflection_method('process_new_instance');
         $registry = $this->get_accessible_reflection_property('registry');
@@ -145,7 +145,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::process_new_instance
      */
-    public function testProcessNewInstanceStoresSingletonsInRegistry()
+    public function testProcessNewInstanceStoresSingletonsInRegistry(): void
     {
         $method   = $this->get_accessible_reflection_method('process_new_instance');
         $registry = $this->get_accessible_reflection_property('registry');
@@ -163,7 +163,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::process_new_instance
      */
-    public function testProcessNewInstanceCallsMethodsWithParams()
+    public function testProcessNewInstanceCallsMethodsWithParams(): void
     {
         $recipe = [
             'id' => [
@@ -201,7 +201,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::process_new_instance
      */
-    public function testProcessNewInstanceCallsMethodsWithNoParams()
+    public function testProcessNewInstanceCallsMethodsWithNoParams(): void
     {
         $recipe = [
             'id' => [
@@ -227,7 +227,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
      *
      * @covers Lunr\Core\ConfigServiceLocator::process_new_instance
      */
-    public function testProcessNewInstanceCallsMethodsWithLocatedParams()
+    public function testProcessNewInstanceCallsMethodsWithLocatedParams(): void
     {
         $recipe = [
             'id' => [

@@ -32,7 +32,7 @@ abstract class ConfigServiceLocatorTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -43,7 +43,7 @@ abstract class ConfigServiceLocatorTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         //unset doesn't call __destruct() for some reason
         $this->class->__destruct();
@@ -57,7 +57,7 @@ abstract class ConfigServiceLocatorTest extends LunrBaseTest
      *
      * @return array $ids Array of invalid recipe ids.
      */
-    public function invalidRecipeProvider()
+    public function invalidRecipeProvider(): array
     {
         $ids   = [];
         $ids[] = [ 'nonexisting' ];
@@ -73,7 +73,7 @@ abstract class ConfigServiceLocatorTest extends LunrBaseTest
      *
      * @return array $values Array of non-object values
      */
-    public function invalidObjectProvider()
+    public function invalidObjectProvider(): array
     {
         $values   = [];
         $values[] = [ 'String' ];
@@ -90,7 +90,7 @@ abstract class ConfigServiceLocatorTest extends LunrBaseTest
      *
      * @return array $values Array of invalid ID values
      */
-    public function invalidIDProvider()
+    public function invalidIDProvider(): array
     {
         $values   = [];
         $values[] = [ NULL ];

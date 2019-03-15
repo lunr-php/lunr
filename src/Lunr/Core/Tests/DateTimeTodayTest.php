@@ -27,7 +27,7 @@ class DateTimeTodayTest extends DateTimeTest
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testDefaultDatetimeFormat
      * @covers  Lunr\Core\DateTime::today
      */
-    public function testTodayWithDefaultDatetimeFormat()
+    public function testTodayWithDefaultDatetimeFormat(): void
     {
         $this->assertEquals(strftime('%Y-%m-%d'), $this->class->today());
     }
@@ -38,7 +38,7 @@ class DateTimeTodayTest extends DateTimeTest
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @covers  Lunr\Core\DateTime::today
      */
-    public function testTodayWithCustomDatetimeFormat()
+    public function testTodayWithCustomDatetimeFormat(): void
     {
         $this->assertEquals(strftime('%A. %d.%m.%Y'), $this->class->set_datetime_format('%A. %d.%m.%Y')->today());
     }
@@ -50,7 +50,7 @@ class DateTimeTodayTest extends DateTimeTest
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Core\DateTime::today
      */
-    public function testTodayWithLocalizedCustomDatetimeFormat()
+    public function testTodayWithLocalizedCustomDatetimeFormat(): void
     {
         $day           = strftime('%u');
         $localized_day = $this->class->set_datetime_format('%A')->set_locale('de_DE')->today();
@@ -66,7 +66,7 @@ class DateTimeTodayTest extends DateTimeTest
      * @dataProvider invalidDatetimeFormatProvider
      * @covers       Lunr\Core\DateTime::today
      */
-    public function testTodayWithCustomInvalidDatetimeFormat($format)
+    public function testTodayWithCustomInvalidDatetimeFormat($format): void
     {
         $this->assertEquals($format, $this->class->set_datetime_format($format)->today());
     }
@@ -77,7 +77,7 @@ class DateTimeTodayTest extends DateTimeTest
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testDefaultDatetimeFormat
      * @covers  Lunr\Core\DateTime::now
      */
-    public function testNowWithDefaultDatetimeFormat()
+    public function testNowWithDefaultDatetimeFormat(): void
     {
         $this->assertEquals(strftime('%Y-%m-%d'), $this->class->now());
     }
@@ -88,7 +88,7 @@ class DateTimeTodayTest extends DateTimeTest
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomDatetimeFormat
      * @covers  Lunr\Core\DateTime::now
      */
-    public function testNowWithCustomDatetimeFormat()
+    public function testNowWithCustomDatetimeFormat(): void
     {
         $this->assertEquals(strftime('%A. %d.%m.%Y'), $this->class->set_datetime_format('%A. %d.%m.%Y')->now());
     }
@@ -100,7 +100,7 @@ class DateTimeTodayTest extends DateTimeTest
      * @depends Lunr\Core\Tests\DateTimeBaseTest::testSetCustomLocaleWithDefaultCharset
      * @covers  Lunr\Core\DateTime::now
      */
-    public function testNowWithLocalizedCustomDatetimeFormat()
+    public function testNowWithLocalizedCustomDatetimeFormat(): void
     {
         $day           = strftime('%u');
         $localized_day = $this->class->set_datetime_format('%A')->set_locale('de_DE')->now();
@@ -116,7 +116,7 @@ class DateTimeTodayTest extends DateTimeTest
      * @dataProvider invalidDatetimeFormatProvider
      * @covers       Lunr\Core\DateTime::now
      */
-    public function testNowWithCustomInvalidDatetimeFormat($format)
+    public function testNowWithCustomInvalidDatetimeFormat($format): void
     {
         $this->assertEquals($format, $this->class->set_datetime_format($format)->now());
     }

@@ -29,7 +29,7 @@ class DateTimeVerifyTest extends DateTimeTest
      * @dataProvider validTimeProvider
      * @covers       Lunr\Core\DateTime::is_time
      */
-    public function testIsValidTime($time)
+    public function testIsValidTime($time): void
     {
         $this->assertTrue($this->class->is_time($time));
     }
@@ -42,7 +42,7 @@ class DateTimeVerifyTest extends DateTimeTest
      * @dataProvider invalidTimeProvider
      * @covers       Lunr\Core\DateTime::is_time
      */
-    public function testIsInvalidTime($time)
+    public function testIsInvalidTime($time): void
     {
         $this->assertFalse($this->class->is_time($time));
     }
@@ -55,7 +55,7 @@ class DateTimeVerifyTest extends DateTimeTest
      * @dataProvider validLeapYearProvider
      * @covers       Lunr\Core\DateTime::is_leap_year
      */
-    public function testIsValidLeapYear($year)
+    public function testIsValidLeapYear($year): void
     {
         $this->assertTrue($this->class->is_leap_year($year));
     }
@@ -68,7 +68,7 @@ class DateTimeVerifyTest extends DateTimeTest
      * @dataProvider invalidLeapYearProvider
      * @covers       Lunr\Core\DateTime::is_leap_year
      */
-    public function testIsInvalidLeapYear($year)
+    public function testIsInvalidLeapYear($year): void
     {
         $this->assertFalse($this->class->is_leap_year($year));
     }
@@ -83,7 +83,7 @@ class DateTimeVerifyTest extends DateTimeTest
      * @depends      testIsInvalidLeapYear
      * @covers       Lunr\Core\DateTime::is_date
      */
-    public function testIsValidDate($date)
+    public function testIsValidDate($date): void
     {
         $this->assertTrue($this->class->is_date($date));
     }
@@ -98,7 +98,7 @@ class DateTimeVerifyTest extends DateTimeTest
      * @depends      testIsInvalidLeapYear
      * @covers       Lunr\Core\DateTime::is_date
      */
-    public function testIsInvalidDate($date)
+    public function testIsInvalidDate($date): void
     {
         $this->assertFalse($this->class->is_date($date));
     }
