@@ -25,7 +25,7 @@ class EnvironmentTest extends TestCase
     /**
      * Test whether we have language files available.
      */
-    public function testL10nFiles()
+    public function testL10nFiles(): void
     {
         $file = TEST_STATICS . '/l10n/de_DE/LC_MESSAGES/Lunr.mo';
         if (!file_exists($file))

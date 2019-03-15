@@ -10,30 +10,26 @@
     }
   ],
   "require": {
-    "psr/log": "~1.0.2",
-    "chrisboulton/php-resque": "dev-master#981ef3da53f671c14f8fc61a233c3974f04128a9",
-    "duccio/apns-php": "dev-master#2f5965c37568a26084d7544947cc0883ad2dac0d",
-    "PHPMailer/PHPMailer": "~6.0.0",
-    "rmccue/Requests": "~1.7.0",
+    "psr/log": "~1.1.0",
+    "resque/php-resque": "dev-master#981ef3da53f671c14f8fc61a233c3974f04128a9",
+    "duccio/apns-php": "dev-master#5c5a6d65b1c88a2acb1cab32e5efda7f5bd5988c",
+    "phpmailer/phpmailer": "~6.0.0",
+    "rmccue/requests": "~1.7.0",
     "colinmollenhour/credis": "~1.7",
-    "php": "5.6.* || 7.*",
+    "php": ">=7.2",
     "psr/cache": "~1.0",
     "lunr/halo": "dev-master",
     "lunr/config": "dev-master"
   },
   "suggest": {
     "ext-http": "Needed for HTTP support in Corona, needed to get hostname in Shadow when parsing data",
-    "ext-apn": "Needed for push notification support in Vortex with PHP 5",
     "ext-msgpack": "Needed for msgpack support in Corona",
     "ext-gettext": "Needed for internationalization support in L10n",
-    "ext-mysqli": "Needed for MySQL/MariaDB support in Gravity (0.1)",
-    "ext-mysqlnd_ms": "Needed for MySQL load balancing Gravity (r335219) -> https://svn.php.net/viewvc/pecl/mysqlnd_ms/trunk/",
-    "ext-uopz": "Needed for unit tests on PHP 7 to mock internals",
-    "ext-runkit": "Needed for unit tests on PHP 5 to mock internals"
+    "ext-mysqli": "Needed for MySQL/MariaDB support in Gravity (0.1)"
   },
   "require-dev": {
-    "phpunit/phpunit": "~5.7",
-    "ext-xdebug": "~2.4"
+    "phpunit/phpunit": "~8.0",
+    "ext-xdebug": "~2.6"
   },
   "config": {
     "optimize-autoloader": true
