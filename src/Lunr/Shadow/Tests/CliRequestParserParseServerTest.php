@@ -25,7 +25,7 @@ class CliRequestParserParseServerTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_server
      */
-    public function testParseValidServerValues()
+    public function testParseValidServerValues(): void
     {
         $_SERVER['test1'] = 'value1';
         $_SERVER['test2'] = 'value2';
@@ -41,7 +41,7 @@ class CliRequestParserParseServerTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_server
      */
-    public function testServerIntactAfterParse()
+    public function testServerIntactAfterParse(): void
     {
         $_SERVER['test1'] = 'value1';
         $_SERVER['test2'] = 'value2';

@@ -25,7 +25,7 @@ class CliRequestParserParseSuperGlobalTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_super_global
      */
-    public function testParseInvalidSuperGlobalValues()
+    public function testParseInvalidSuperGlobalValues(): void
     {
         $method = $this->get_accessible_reflection_method('parse_super_global');
         $result = $method->invokeArgs($this->class, [ 'var' ]);
@@ -38,7 +38,7 @@ class CliRequestParserParseSuperGlobalTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_super_global
      */
-    public function testParseValidSuperGlobalValues()
+    public function testParseValidSuperGlobalValues(): void
     {
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
@@ -61,7 +61,7 @@ class CliRequestParserParseSuperGlobalTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_super_global
      */
-    public function testSuperGlobalEmptyAfterParse()
+    public function testSuperGlobalEmptyAfterParse(): void
     {
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
@@ -78,7 +78,7 @@ class CliRequestParserParseSuperGlobalTest extends CliRequestParserTest
 
         $after = $property->getValue($this->class);
 
-        $this->assertInternalType('array', $after);
+        $this->assertIsArray($after);
         $this->assertNotCount(0, $after);
         $this->assertArrayNotHasKey('var', $after);
     }

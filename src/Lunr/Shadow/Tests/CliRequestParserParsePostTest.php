@@ -25,7 +25,7 @@ class CliRequestParserParsePostTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_post
      */
-    public function testParseEmptySuperGlobalValues()
+    public function testParseEmptySuperGlobalValues(): void
     {
         $result = $this->class->parse_post();
 
@@ -37,7 +37,7 @@ class CliRequestParserParsePostTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_post
      */
-    public function testParseValidPostValues()
+    public function testParseValidPostValues(): void
     {
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
@@ -59,7 +59,7 @@ class CliRequestParserParsePostTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_post
      */
-    public function testPostEmptyAfterParse()
+    public function testPostEmptyAfterParse(): void
     {
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
@@ -75,7 +75,7 @@ class CliRequestParserParsePostTest extends CliRequestParserTest
 
         $after = $property->getValue($this->class);
 
-        $this->assertInternalType('array', $after);
+        $this->assertIsArray($after);
         $this->assertNotCount(0, $after);
         $this->assertArrayNotHasKey('post', $after);
     }

@@ -28,7 +28,7 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
      * @dataProvider invalidParameterProvider
      * @covers       Lunr\Shadow\LunrCliParser::is_valid_long
      */
-    public function testIsValidLongReturnsFalseForInvalidParameter($param)
+    public function testIsValidLongReturnsFalseForInvalidParameter($param): void
     {
         $method = $this->get_accessible_reflection_method('is_valid_long');
 
@@ -49,7 +49,7 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
      * @dataProvider invalidParameterProvider
      * @covers       Lunr\Shadow\LunrCliParser::is_valid_long
      */
-    public function testIsValidLongSetsErrorTrueForInvalidParameter($param)
+    public function testIsValidLongSetsErrorTrueForInvalidParameter($param): void
     {
         $method = $this->get_accessible_reflection_method('is_valid_long');
 
@@ -67,7 +67,7 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::is_valid_long
      */
-    public function testIsValidLongAddsValidParameterToAst()
+    public function testIsValidLongAddsValidParameterToAst(): void
     {
         $method = $this->get_accessible_reflection_method('is_valid_long');
 
@@ -87,7 +87,7 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
      * @depends Lunr\Shadow\Tests\LunrCliParserCheckArgumentTest::testCheckArgumentReturnsFalseForValidParameterWithoutArgs
      * @covers  Lunr\Shadow\LunrCliParser::is_valid_long
      */
-    public function testIsValidLongReturnsFalseForValidParameterWithoutArguments()
+    public function testIsValidLongReturnsFalseForValidParameterWithoutArguments(): void
     {
         $method = $this->get_accessible_reflection_method('is_valid_long');
 
@@ -103,7 +103,7 @@ class LunrCliParserValidLongTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::is_valid_long
      */
-    public function testIsValidLongReturnsTrueForValidParameterWithArguments()
+    public function testIsValidLongReturnsTrueForValidParameterWithArguments(): void
     {
         $method = $this->get_accessible_reflection_method('is_valid_long');
 

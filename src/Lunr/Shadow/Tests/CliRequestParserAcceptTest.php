@@ -30,7 +30,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @requires     function http\Header::negotiate
      * @covers       Lunr\Shadow\CliRequestParser::parse_accept_format
      */
-    public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value)
+    public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -61,7 +61,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @requires function http\Header::negotiate
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_format
      */
-    public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull()
+    public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull(): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -91,7 +91,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @requires function http\Header::negotiate
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_format
      */
-    public function testGetAcceptFormatReturnsNullWhenNotSpecified()
+    public function testGetAcceptFormatReturnsNullWhenNotSpecified(): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -124,7 +124,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @requires     function http\Header::negotiate
      * @covers       Lunr\Shadow\CliRequestParser::parse_accept_language
      */
-    public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value)
+    public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -154,7 +154,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @requires function http\Header::negotiate
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_language
      */
-    public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull()
+    public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull(): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -184,7 +184,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @requires function http\Header::negotiate
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_language
      */
-    public function testGetAcceptLanguageReturnsNullWhenNotSpecified()
+    public function testGetAcceptLanguageReturnsNullWhenNotSpecified(): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -217,7 +217,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @requires     function http\Header::negotiate
      * @covers       Lunr\Shadow\CliRequestParser::parse_accept_charset
      */
-    public function testGetAcceptCharsetWithValidSupportedCharsetsReturnsString($value)
+    public function testGetAcceptCharsetWithValidSupportedCharsetsReturnsString($value): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -247,7 +247,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @requires function http\Header::negotiate
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_charset
      */
-    public function testGetAcceptCharsetWithEmptySupportedCharsetsReturnsNull()
+    public function testGetAcceptCharsetWithEmptySupportedCharsetsReturnsNull(): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -277,7 +277,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
      * @requires function http\Header::negotiate
      * @covers   Lunr\Shadow\CliRequestParser::parse_accept_charset
      */
-    public function testGetAcceptCharsetReturnsNullWhenNotSpecified()
+    public function testGetAcceptCharsetReturnsNullWhenNotSpecified(): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);

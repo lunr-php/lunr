@@ -25,7 +25,7 @@ class CliRequestParserParseRawDataTest extends CliRequestParserTest
      *
      * @covers   Lunr\Shadow\CliRequestParser::parse_raw_data
      */
-    public function testParseRawData()
+    public function testParseRawData(): void
     {
         $this->mock_function('file_get_contents', 'return "raw";');
 

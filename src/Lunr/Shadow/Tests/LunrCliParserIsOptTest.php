@@ -25,7 +25,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::is_opt
      */
-    public function testIsOptPushesInitialArgumentIntoChecked()
+    public function testIsOptPushesInitialArgumentIntoChecked(): void
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 
@@ -39,7 +39,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::is_opt
      */
-    public function testIsOptPushesNonInitialArgumentAtTheEndOfChecked()
+    public function testIsOptPushesNonInitialArgumentAtTheEndOfChecked(): void
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 
@@ -58,7 +58,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      * @depends      Lunr\Shadow\Tests\LunrCliParserValidShortTest::testIsValidShortReturnsFalseForInvalidParameter
      * @covers       Lunr\Shadow\LunrCliParser::is_opt
      */
-    public function testIsOptReturnsFalseForInvalidParameter($param)
+    public function testIsOptReturnsFalseForInvalidParameter($param): void
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 
@@ -80,7 +80,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      * @depends      Lunr\Shadow\Tests\LunrCliParserValidShortTest::testIsValidShortSetsErrorTrueForInvalidParameter
      * @covers       Lunr\Shadow\LunrCliParser::is_opt
      */
-    public function testIsOptSetsErrorTrueForInvalidParameter($param)
+    public function testIsOptSetsErrorTrueForInvalidParameter($param): void
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 
@@ -98,7 +98,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::is_opt
      */
-    public function testIsOptWithSuperfluousToplevelArgument()
+    public function testIsOptWithSuperfluousToplevelArgument(): void
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 
@@ -117,7 +117,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      * @depends Lunr\Shadow\Tests\LunrCliParserValidShortTest::testIsValidShortReturnsFalseForValidParameterWithoutArguments
      * @covers  Lunr\Shadow\LunrCliParser::is_opt
      */
-    public function testIsOptReturnsFalseForValidShortParameterWithoutArguments()
+    public function testIsOptReturnsFalseForValidShortParameterWithoutArguments(): void
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 
@@ -132,7 +132,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      * @depends Lunr\Shadow\Tests\LunrCliParserValidLongTest::testIsValidLongReturnsFalseForValidParameterWithoutArguments
      * @covers  Lunr\Shadow\LunrCliParser::is_opt
      */
-    public function testIsOptReturnsFalseForValidLongParameterWithoutArguments()
+    public function testIsOptReturnsFalseForValidLongParameterWithoutArguments(): void
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 
@@ -147,7 +147,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      * @depends Lunr\Shadow\Tests\LunrCliParserValidShortTest::testIsValidShortReturnsTrueForValidParameterWithArguments
      * @covers  Lunr\Shadow\LunrCliParser::is_opt
      */
-    public function testIsOptReturnsTrueForValidShortParameterWithArguments()
+    public function testIsOptReturnsTrueForValidShortParameterWithArguments(): void
     {
         $this->set_reflection_property_value('args', [ 'test.php', '-b', 'arg' ]);
 
@@ -164,7 +164,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      * @depends Lunr\Shadow\Tests\LunrCliParserValidLongTest::testIsValidLongReturnsTrueForValidParameterWithArguments
      * @covers  Lunr\Shadow\LunrCliParser::is_opt
      */
-    public function testIsOptReturnsTrueForValidLongParameterWithArguments()
+    public function testIsOptReturnsTrueForValidLongParameterWithArguments(): void
     {
         $this->set_reflection_property_value('args', [ 'test.php', '--second', 'arg' ]);
 
@@ -180,7 +180,7 @@ class LunrCliParserIsOptTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::is_opt
      */
-    public function testIsOptReturnsFalseForArgument()
+    public function testIsOptReturnsFalseForArgument(): void
     {
         $method = $this->get_accessible_reflection_method('is_opt');
 

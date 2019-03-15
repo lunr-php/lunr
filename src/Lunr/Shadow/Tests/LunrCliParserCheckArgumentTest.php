@@ -25,7 +25,7 @@ class LunrCliParserCheckArgumentTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::check_argument
      */
-    public function testCheckArgumentReturnsFalseForValidParameterWithoutArgs()
+    public function testCheckArgumentReturnsFalseForValidParameterWithoutArgs(): void
     {
         $method = $this->get_accessible_reflection_method('check_argument');
 
@@ -39,7 +39,7 @@ class LunrCliParserCheckArgumentTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::check_argument
      */
-    public function testCheckArgumentReturnsTrueForSuperfluousArgument()
+    public function testCheckArgumentReturnsTrueForSuperfluousArgument(): void
     {
         $this->set_reflection_property_value('args', [ 'test.php', '-a', 'arg' ]);
 

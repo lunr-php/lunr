@@ -25,7 +25,7 @@ class CliRequestParserParseCommandLineArgumentsTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_command_line_arguments
      */
-    public function testParsingNoCommandLineArguments()
+    public function testParsingNoCommandLineArguments(): void
     {
         $this->set_reflection_property_value('ast', []);
         $this->assertArrayEmpty($this->class->parse_command_line_arguments());
@@ -36,7 +36,7 @@ class CliRequestParserParseCommandLineArgumentsTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_command_line_arguments
      */
-    public function testParsingNoNonRequestCommandLineArguments()
+    public function testParsingNoNonRequestCommandLineArguments(): void
     {
         $ast = [
             'controller'      => [ 'thecontroller' ],
@@ -64,7 +64,7 @@ class CliRequestParserParseCommandLineArgumentsTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_command_line_arguments
      */
-    public function testParseEmptySuperGlobalValues()
+    public function testParseEmptySuperGlobalValues(): void
     {
         $ast = [
             'controller'      => [ 'thecontroller' ],

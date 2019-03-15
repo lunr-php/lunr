@@ -25,7 +25,7 @@ class LunrCliParserCheckOptionalArgumentTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::check_argument
      */
-    public function testCheckArgumentReturnsTrueForValidParameterWithOneArg()
+    public function testCheckArgumentReturnsTrueForValidParameterWithOneArg(): void
     {
         $this->set_reflection_property_value('args', [ 'test.php', '-c', 'arg' ]);
 
@@ -43,7 +43,7 @@ class LunrCliParserCheckOptionalArgumentTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::check_argument
      */
-    public function testCheckArgumentReturnsTrueForValidParameterWithTwoArgs()
+    public function testCheckArgumentReturnsTrueForValidParameterWithTwoArgs(): void
     {
         $this->set_reflection_property_value('args', [ 'test.php', '-f', 'arg1', 'arg2' ]);
 
@@ -61,7 +61,7 @@ class LunrCliParserCheckOptionalArgumentTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::check_argument
      */
-    public function testCheckArgumentAppendsFirstArgumentToAst()
+    public function testCheckArgumentAppendsFirstArgumentToAst(): void
     {
         $this->set_reflection_property_value('args', [ 'test.php', '-c', 'arg' ]);
 
@@ -82,7 +82,7 @@ class LunrCliParserCheckOptionalArgumentTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::check_argument
      */
-    public function testCheckArgumentAppendsSecondArgumentToAst()
+    public function testCheckArgumentAppendsSecondArgumentToAst(): void
     {
         $this->set_reflection_property_value('args', [ 'test.php', '-f', 'arg1', 'arg2' ]);
 
@@ -103,7 +103,7 @@ class LunrCliParserCheckOptionalArgumentTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::check_argument
      */
-    public function testCheckArgumentReturnsFalseForArgumentMissing()
+    public function testCheckArgumentReturnsFalseForArgumentMissing(): void
     {
         $this->set_reflection_property_value('args', [ 'test.php', '-b' ]);
 
@@ -124,7 +124,7 @@ class LunrCliParserCheckOptionalArgumentTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::check_argument
      */
-    public function testCheckArgumentReturnsFalseForArgumentMissingWithAnotherParameterAfter()
+    public function testCheckArgumentReturnsFalseForArgumentMissingWithAnotherParameterAfter(): void
     {
         $this->set_reflection_property_value('args', [ 'test.php', '-b', '-c' ]);
 

@@ -25,7 +25,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::parse
      */
-    public function testParseArgvWithNoArgumentsReturnsEmptyArray()
+    public function testParseArgvWithNoArgumentsReturnsEmptyArray(): void
     {
         $_SERVER['argv'] = [ 'script.php' ];
 
@@ -43,7 +43,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
      * @depends      Lunr\Shadow\Tests\LunrCliParserIsOptTest::testIsOptReturnsFalseForInvalidParameter
      * @covers       Lunr\Shadow\LunrCliParser::parse
      */
-    public function testParseArgvWithIncompleteArguments($param)
+    public function testParseArgvWithIncompleteArguments($param): void
     {
         $_SERVER['argv'] = [ 'script.php', $param ];
 
@@ -67,7 +67,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
      * @dataProvider validShortParameterProvider
      * @covers       Lunr\Shadow\LunrCliParser::parse
      */
-    public function testParseValidShortParameters($shortopt, $params, $ast)
+    public function testParseValidShortParameters($shortopt, $params, $ast): void
     {
         $this->set_reflection_property_value('short', $shortopt);
 
@@ -91,7 +91,7 @@ class LunrCliParserParseTest extends LunrCliParserTest
      * @dataProvider validLongParameterProvider
      * @covers       Lunr\Shadow\LunrCliParser::parse
      */
-    public function testParseValidLongParameters($longopt, $params, $ast)
+    public function testParseValidLongParameters($longopt, $params, $ast): void
     {
         $this->set_reflection_property_value('long', $longopt);
 

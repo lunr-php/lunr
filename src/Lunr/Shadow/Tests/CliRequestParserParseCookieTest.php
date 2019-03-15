@@ -26,7 +26,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_cookie
      */
-    public function testParseEmptySuperGlobalValues()
+    public function testParseEmptySuperGlobalValues(): void
     {
         $result = $this->class->parse_cookie();
 
@@ -38,7 +38,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_cookie
      */
-    public function testParseValidCookieValues()
+    public function testParseValidCookieValues(): void
     {
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
@@ -60,7 +60,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_cookie
      */
-    public function testCookieEmptyAfterParse()
+    public function testCookieEmptyAfterParse(): void
     {
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
@@ -76,7 +76,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
 
         $after = $property->getValue($this->class);
 
-        $this->assertInternalType('array', $after);
+        $this->assertIsArray($after);
         $this->assertNotCount(0, $after);
         $this->assertArrayNotHasKey('cookie', $after);
     }
@@ -86,7 +86,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_cookie
      */
-    public function testSuperglobalCookieWithPHPSESSIDSet()
+    public function testSuperglobalCookieWithPHPSESSIDSet(): void
     {
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);

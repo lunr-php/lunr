@@ -25,7 +25,7 @@ class CliRequestParserParseFilesTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_files
      */
-    public function testParseEmptySuperGlobalValues()
+    public function testParseEmptySuperGlobalValues(): void
     {
         $result = $this->class->parse_files();
 

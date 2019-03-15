@@ -23,7 +23,7 @@ class GetoptCliParserBaseTest extends GetoptCliParserTest
     /**
      * Test that the short options string is passed correctly.
      */
-    public function testShortOptsIsPassedCorrectly()
+    public function testShortOptsIsPassedCorrectly(): void
     {
         $this->assertPropertyEquals('short', 'ab:c::');
     }
@@ -31,7 +31,7 @@ class GetoptCliParserBaseTest extends GetoptCliParserTest
     /**
      * Test that the long options string is passed correctly.
      */
-    public function testLongOptsIsPassedCorrectly()
+    public function testLongOptsIsPassedCorrectly(): void
     {
         $this->assertPropertyEquals('long', [ 'first', 'second:', 'third::' ]);
     }
@@ -39,7 +39,7 @@ class GetoptCliParserBaseTest extends GetoptCliParserTest
     /**
      * Test that error is set to FALSE by default.
      */
-    public function testErrorIsFalseByDefault()
+    public function testErrorIsFalseByDefault(): void
     {
         $this->assertFalse($this->get_reflection_property_value('error'));
     }
@@ -49,7 +49,7 @@ class GetoptCliParserBaseTest extends GetoptCliParserTest
      *
      * @covers Lunr\Shadow\GetoptCliParser::is_invalid_commandline
      */
-    public function testIsInvalidCommandLineReturnsError()
+    public function testIsInvalidCommandLineReturnsError(): void
     {
         $this->assertPropertyEquals('error', $this->class->is_invalid_commandline());
     }

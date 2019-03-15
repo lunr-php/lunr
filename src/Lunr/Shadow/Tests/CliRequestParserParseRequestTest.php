@@ -36,7 +36,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @return void
      */
-    protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = '')
+    protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = ''): void
     {
         if (!extension_loaded('uuid'))
         {
@@ -45,8 +45,8 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
 
         $_SERVER['SCRIPT_FILENAME'] = '/full/path/to/index.php';
 
-        $this->mock_function('gethostname', function(){ return "Lunr"; });
-        $this->mock_function('uuid_create', function(){ return "962161b2-7a01-41f3-84c6-3834ad001adf"; });
+        $this->mock_function('gethostname', function(){ return 'Lunr'; });
+        $this->mock_function('uuid_create', function(){ return '962161b2-7a01-41f3-84c6-3834ad001adf'; });
 
         $this->configuration->expects($this->at(0))
                             ->method('offsetGet')
@@ -107,7 +107,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @return void
      */
-    protected function prepare_request_data($controller = TRUE, $method = TRUE, $override = FALSE)
+    protected function prepare_request_data($controller = TRUE, $method = TRUE, $override = FALSE): void
     {
         if ($controller === TRUE)
         {
@@ -156,7 +156,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @return void
      */
-    protected function prepare_request_data_with_slashes($controller = TRUE, $method = TRUE)
+    protected function prepare_request_data_with_slashes($controller = TRUE, $method = TRUE): void
     {
         $property = $this->get_accessible_reflection_property('ast');
         $ast      = $property->getValue($this->class);
@@ -181,7 +181,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @return void
      */
-    private function cleanup_request_test()
+    private function cleanup_request_test(): void
     {
         $this->unmock_function('gethostname');
         $this->unmock_function('uuid_create');
@@ -192,7 +192,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @return array $base Array of base_url parameters and possible values
      */
-    public function baseurlProvider()
+    public function baseurlProvider(): array
     {
         $base   = [];
         $base[] = [ 'HTTPS', '443', 'https://www.domain.com/path/to/' ];
@@ -208,7 +208,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @return array $base Array of controller key names
      */
-    public function controllerKeyNameProvider()
+    public function controllerKeyNameProvider(): array
     {
         $value   = [];
         $value[] = [ 'controller' ];
@@ -222,7 +222,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @return array $base Array of method key names
      */
-    public function methodKeyNameProvider()
+    public function methodKeyNameProvider(): array
     {
         $value   = [];
         $value[] = [ 'method' ];
@@ -236,7 +236,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @return array $base Array of parameter key names
      */
-    public function paramsKeyNameProvider()
+    public function paramsKeyNameProvider(): array
     {
         $value   = [];
         $value[] = [ 'param' ];
@@ -251,7 +251,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @return array $base Array of verbosity key names
      */
-    public function verbosityProvider()
+    public function verbosityProvider(): array
     {
         $value   = [];
         $value[] = [ 'v', 1, LogLevel::NOTICE ];
@@ -269,7 +269,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @return array $keys Array of array keys.
      */
-    public function deviceUserAgentKeyProvider()
+    public function deviceUserAgentKeyProvider(): array
     {
         $keys   = [];
         $keys[] = [ 'device_useragent' ];
@@ -282,7 +282,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_request
      */
-    public function testParseRequestRemovesRequestDataFromAst()
+    public function testParseRequestRemovesRequestDataFromAst(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
@@ -291,7 +291,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
 
         $ast = $this->get_reflection_property_value('ast');
 
-        $this->assertInternalType('array', $ast);
+        $this->assertIsArray($ast);
         $this->assertCount(6, $ast);
         $this->assertArrayNotHasKey('controller', $ast);
         $this->assertArrayNotHasKey('c', $ast);
@@ -309,7 +309,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_request
      */
-    public function testParseRequestSetsHttpMethodWithLongOption()
+    public function testParseRequestSetsHttpMethodWithLongOption(): void
     {
         $this->prepare_request_test();
         $this->prepare_request_data();
@@ -322,7 +322,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('action', $request);
         $this->assertEquals(HttpMethod::POST, $request['action']);
 
@@ -334,7 +334,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      *
      * @covers Lunr\Shadow\CliRequestParser::parse_request
      */
-    public function testParseRequestSetsHttpMethodWithShortOption()
+    public function testParseRequestSetsHttpMethodWithShortOption(): void
     {
         $this->prepare_request_test();
         $this->prepare_request_data();
@@ -347,7 +347,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('action', $request);
         $this->assertEquals(HttpMethod::POST, $request['action']);
 
@@ -364,7 +364,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      * @dataProvider verbosityProvider
      * @covers       Lunr\Shadow\CliRequestParser::parse_request
      */
-    public function testParseRequestSetsVerbosityLevel($key, $amount, $level)
+    public function testParseRequestSetsVerbosityLevel($key, $amount, $level): void
     {
         $this->prepare_request_test();
         $this->prepare_request_data();
@@ -382,7 +382,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('verbosity', $request);
         $this->assertEquals($level, $request['verbosity']);
 

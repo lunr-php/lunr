@@ -33,7 +33,7 @@ class ConsoleTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $datetime = $this->getMockBuilder('Lunr\Core\DateTime')->getMock();
         $datetime->expects($this->once())
@@ -51,7 +51,7 @@ class ConsoleTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->reflection);
         unset($this->class);
@@ -62,7 +62,7 @@ class ConsoleTest extends LunrBaseTest
      *
      * @covers Lunr\Shadow\Console::build_cli_output
      */
-    public function testBuildCliOutput()
+    public function testBuildCliOutput(): void
     {
         $method = $this->get_accessible_reflection_method('build_cli_output');
         $msg    = 'Test';
@@ -75,7 +75,7 @@ class ConsoleTest extends LunrBaseTest
      *
      * @covers Lunr\Shadow\Console::cli_print
      */
-    public function testCliPrint()
+    public function testCliPrint(): void
     {
         $msg    = 'Test';
         $output = self::DATETIME_STRING . ': ' . $msg;
@@ -89,7 +89,7 @@ class ConsoleTest extends LunrBaseTest
      *
      * @covers Lunr\Shadow\Console::cli_println
      */
-    public function testCliPrintln()
+    public function testCliPrintln(): void
     {
         $msg    = 'Test';
         $output = self::DATETIME_STRING . ': ' . $msg . "\n";
@@ -103,7 +103,7 @@ class ConsoleTest extends LunrBaseTest
      *
      * @covers Lunr\Shadow\Console::cli_print_status
      */
-    public function testCliPrintStatusOK()
+    public function testCliPrintStatusOK(): void
     {
         $output = "[ok]\n";
 
@@ -116,7 +116,7 @@ class ConsoleTest extends LunrBaseTest
      *
      * @covers Lunr\Shadow\Console::cli_print_status
      */
-    public function testCliPrintStatusFailed()
+    public function testCliPrintStatusFailed(): void
     {
         $output = "[failed]\n";
 

@@ -25,7 +25,7 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
      *
      * @covers Lunr\Shadow\GetoptCliParser::wrap_argument
      */
-    public function testWrapArgumentReturnsEmptyArrayForFalse()
+    public function testWrapArgumentReturnsEmptyArrayForFalse(): void
     {
         $method = $this->get_accessible_reflection_method('wrap_argument');
 
@@ -42,7 +42,7 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
      * @dataProvider valueProvider
      * @covers       Lunr\Shadow\GetoptCliParser::wrap_argument
      */
-    public function testWrapArgumentReturnsValueWrappedInArray($cli_value)
+    public function testWrapArgumentReturnsValueWrappedInArray($cli_value): void
     {
         $method = $this->get_accessible_reflection_method('wrap_argument');
 
@@ -56,7 +56,7 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
      *
      * @covers Lunr\Shadow\GetoptCliParser::wrap_argument
      */
-    public function testWrapArgumentDoesNotRewrapArguments()
+    public function testWrapArgumentDoesNotRewrapArguments(): void
     {
         $method = $this->get_accessible_reflection_method('wrap_argument');
 
@@ -70,7 +70,7 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
      *
      * @covers   Lunr\Shadow\GetoptCliParser::parse
      */
-    public function testParseReturnsEmptyArrayOnError()
+    public function testParseReturnsEmptyArrayOnError(): void
     {
         $this->mock_function('getopt', self::PARSE_FAILS);
 
@@ -85,7 +85,7 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
      *
      * @covers   Lunr\Shadow\GetoptCliParser::parse
      */
-    public function testParseSetsErrorTrueOnError()
+    public function testParseSetsErrorTrueOnError(): void
     {
         $this->mock_function('getopt', self::PARSE_FAILS);
 
@@ -100,13 +100,13 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
      *
      * @covers   Lunr\Shadow\GetoptCliParser::parse
      */
-    public function testParseReturnsAstOnSuccess()
+    public function testParseReturnsAstOnSuccess(): void
     {
         $this->mock_function('getopt', self::PARSE_WORKS);
 
         $value = $this->class->parse();
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertEquals([ 'a' => [], 'b' => [ 'arg' ] ], $value);
         $this->unmock_function('getopt');
     }

@@ -23,7 +23,7 @@ class CliRequestParserBaseTest extends CliRequestParserTest
     /**
      * Test that the configuration class is set correctly.
      */
-    public function testConfigurationSetCorrectly()
+    public function testConfigurationSetCorrectly(): void
     {
         $this->assertPropertySame('config', $this->configuration);
     }
@@ -31,7 +31,7 @@ class CliRequestParserBaseTest extends CliRequestParserTest
     /**
      * Test that $ast is fetched correctly.
      */
-    public function testAstIsFetchedCorrectly()
+    public function testAstIsFetchedCorrectly(): void
     {
         $ast = $this->get_reflection_property_value('ast');
 

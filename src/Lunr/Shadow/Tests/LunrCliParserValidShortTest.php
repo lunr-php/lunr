@@ -28,7 +28,7 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
      * @dataProvider invalidParameterProvider
      * @covers       Lunr\Shadow\LunrCliParser::is_valid_short
      */
-    public function testIsValidShortReturnsFalseForInvalidParameter($param)
+    public function testIsValidShortReturnsFalseForInvalidParameter($param): void
     {
         $method = $this->get_accessible_reflection_method('is_valid_short');
 
@@ -49,7 +49,7 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
      * @dataProvider invalidParameterProvider
      * @covers       Lunr\Shadow\LunrCliParser::is_valid_short
      */
-    public function testIsValidShortSetsErrorTrueForInvalidParameter($param)
+    public function testIsValidShortSetsErrorTrueForInvalidParameter($param): void
     {
         $method = $this->get_accessible_reflection_method('is_valid_short');
 
@@ -67,7 +67,7 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::is_valid_short
      */
-    public function testIsValidShortAddsValidParameterToAst()
+    public function testIsValidShortAddsValidParameterToAst(): void
     {
         $method = $this->get_accessible_reflection_method('is_valid_short');
 
@@ -87,7 +87,7 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
      * @depends Lunr\Shadow\Tests\LunrCliParserCheckArgumentTest::testCheckArgumentReturnsFalseForValidParameterWithoutArgs
      * @covers  Lunr\Shadow\LunrCliParser::is_valid_short
      */
-    public function testIsValidShortReturnsFalseForValidParameterWithoutArguments()
+    public function testIsValidShortReturnsFalseForValidParameterWithoutArguments(): void
     {
         $method = $this->get_accessible_reflection_method('is_valid_short');
 
@@ -103,7 +103,7 @@ class LunrCliParserValidShortTest extends LunrCliParserTest
      *
      * @covers Lunr\Shadow\LunrCliParser::is_valid_short
      */
-    public function testIsValidShortReturnsTrueForValidParameterWithArguments()
+    public function testIsValidShortReturnsTrueForValidParameterWithArguments(): void
     {
         $method = $this->get_accessible_reflection_method('is_valid_short');
 
