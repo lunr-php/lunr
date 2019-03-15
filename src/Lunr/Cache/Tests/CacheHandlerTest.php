@@ -31,7 +31,7 @@ abstract class CacheHandlerTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->cache_pool = $this->getMockBuilder('\Psr\Cache\CacheItemPoolInterface')->getMock();
 
@@ -45,7 +45,7 @@ abstract class CacheHandlerTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->cache_pool);
         unset($this->class);

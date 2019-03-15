@@ -24,7 +24,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
      *
      * @covers Lunr\Cache\Cache::get
      */
-    public function testGetCallWithoutKey()
+    public function testGetCallWithoutKey(): void
     {
         $method = $this->get_accessible_reflection_method('get');
         $this->assertEquals(FALSE, $method->invoke($this->class, NULL));
@@ -35,7 +35,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
      *
      * @covers Lunr\Cache\Cache::get
      */
-    public function testGetCallWithMissData()
+    public function testGetCallWithMissData(): void
     {
         $key = 3;
 
@@ -61,7 +61,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
      *
      * @covers Lunr\Cache\Cache::get
      */
-    public function testGetCallWithHitData()
+    public function testGetCallWithHitData(): void
     {
         $key  = 3;
         $data = 42;
@@ -92,7 +92,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
      *
      * @covers Lunr\Cache\Cache::set
      */
-    public function testSetCallWithoutKey()
+    public function testSetCallWithoutKey(): void
     {
         $method = $this->get_accessible_reflection_method('set');
         $this->assertEquals(FALSE, $method->invoke($this->class, NULL, 3));
@@ -103,7 +103,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
      *
      * @covers Lunr\Cache\Cache::set
      */
-    public function testSetCallWithoutValue()
+    public function testSetCallWithoutValue(): void
     {
         $method = $this->get_accessible_reflection_method('set');
         $this->assertEquals(FALSE, $method->invoke($this->class, 42, NULL));
@@ -114,7 +114,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
      *
      * @covers Lunr\Cache\Cache::set
      */
-    public function testSetCall()
+    public function testSetCall(): void
     {
         $key  = 3;
         $data = 42;
@@ -149,7 +149,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
      *
      * @covers Lunr\Cache\Cache::set
      */
-    public function testSetCallWithCustomTTL()
+    public function testSetCallWithCustomTTL(): void
     {
         $key  = 3;
         $data = 42;

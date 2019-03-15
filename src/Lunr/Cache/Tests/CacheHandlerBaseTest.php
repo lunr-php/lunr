@@ -22,7 +22,7 @@ class CacheHandlerBaseTest extends CacheHandlerTest
     /**
      * Test that the Pool class is set correctly.
      */
-    public function testPoolSetCorrectly()
+    public function testPoolSetCorrectly(): void
     {
         $this->assertSame($this->cache_pool, $this->get_reflection_property_value('cache_pool'));
     }
