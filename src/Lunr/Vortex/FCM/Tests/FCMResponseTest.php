@@ -35,7 +35,7 @@ abstract class FCMResponseTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new FCMResponse();
         $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMResponse');
@@ -44,7 +44,7 @@ abstract class FCMResponseTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->batch_response);
         unset($this->class);

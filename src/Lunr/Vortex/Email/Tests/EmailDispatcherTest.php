@@ -44,7 +44,7 @@ abstract class EmailDispatcherTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->mail_transport = $this->getMockBuilder('PHPMailer\PHPMailer\PHPMailer')->getMock();
 
@@ -62,7 +62,7 @@ abstract class EmailDispatcherTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->logger);
         unset($this->mail_transport);

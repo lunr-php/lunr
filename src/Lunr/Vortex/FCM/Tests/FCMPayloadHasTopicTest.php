@@ -24,7 +24,7 @@ class FCMPayloadHasTopicTest extends FCMPayloadTest
      *
      * @covers Lunr\Vortex\FCM\FCMPayload::has_topic
      */
-    public function testWhenNoTopicIsSet()
+    public function testWhenNoTopicIsSet(): void
     {
         $this->assertFalse($this->class->has_topic());
     }
@@ -34,7 +34,7 @@ class FCMPayloadHasTopicTest extends FCMPayloadTest
      *
      * @covers Lunr\Vortex\FCM\FCMPayload::has_topic
      */
-    public function testWhenTopicIsSetCorrectly()
+    public function testWhenTopicIsSetCorrectly(): void
     {
         $this->class->set_topic('news');
 

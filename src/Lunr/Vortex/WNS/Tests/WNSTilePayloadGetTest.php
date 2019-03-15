@@ -24,7 +24,7 @@ class WNSTilePayloadGetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::get_payload
      */
-    public function testGetPayload()
+    public function testGetPayload(): void
     {
         $file     = TEST_STATICS . '/Vortex/wns/tile.xml';
         $elements = [ 'text' => [ 'Text' ], 'template' => [ 'TileSquare150x150Text04', 'TileWide310x150Text03' ], 'image' => [ 'image' ] ];
@@ -39,7 +39,7 @@ class WNSTilePayloadGetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::get_payload
      */
-    public function testGetPayloadWithoutImage()
+    public function testGetPayloadWithoutImage(): void
     {
         $file     = TEST_STATICS . '/Vortex/wns/tile_image.xml';
         $elements = [ 'text' => [ 'Text' ], 'template' => [ 'TileSquare150x150Text04', 'TileWide310x150Text03' ], 'image' => [] ];
@@ -54,7 +54,7 @@ class WNSTilePayloadGetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::get_payload
      */
-    public function testGetPayloadWithoutWideTemplate()
+    public function testGetPayloadWithoutWideTemplate(): void
     {
         $file     = TEST_STATICS . '/Vortex/wns/tile_square.xml';
         $elements = [ 'text' => [ 'Text' ], 'template' => [ 'TileSquare150x150Text04' ], 'image' => [] ];

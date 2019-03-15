@@ -36,7 +36,7 @@ abstract class MPNSResponseTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUpError()
+    public function setUpError(): void
     {
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
@@ -54,7 +54,7 @@ abstract class MPNSResponseTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUpSuccess()
+    public function setUpSuccess(): void
     {
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
@@ -77,7 +77,7 @@ abstract class MPNSResponseTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->logger);
         unset($this->class);
@@ -89,7 +89,7 @@ abstract class MPNSResponseTest extends LunrBaseTest
      *
      * @return array $statuses Array of special statuses
      */
-    public function specialStatusProvider()
+    public function specialStatusProvider(): array
     {
         $statuses   = [];
         $statuses[] = [ 400 ];
@@ -105,7 +105,7 @@ abstract class MPNSResponseTest extends LunrBaseTest
      *
      * @return array $requests Array of failed request info
      */
-    public function failedRequestProvider()
+    public function failedRequestProvider(): array
     {
         $requests   = [];
         $requests[] = [ 200, 'QueueFull', PushNotificationStatus::TEMPORARY_ERROR ];

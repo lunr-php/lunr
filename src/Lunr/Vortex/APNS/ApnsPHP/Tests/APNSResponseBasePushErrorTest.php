@@ -30,7 +30,7 @@ class APNSResponseBasePushErrorTest extends APNSResponseTest
      *
      * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
-    public function testPushErrorWithNoInvalidEndpoint()
+    public function testPushErrorWithNoInvalidEndpoint(): void
     {
         $endpoints         = [ 'endpoint1', 'endpoint2', 'endpoint3', 'endpoint4' ];
         $invalid_endpoints = [];
@@ -52,7 +52,7 @@ class APNSResponseBasePushErrorTest extends APNSResponseTest
      *
      * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
-    public function testPushErrorWithSomeInvalidEndpoints()
+    public function testPushErrorWithSomeInvalidEndpoints(): void
     {
         $endpoints         = [ 'endpoint1', 'endpoint2', 'endpoint3', 'endpoint4' ];
         $invalid_endpoints = [ 'endpoint2', 'endpoint4' ];

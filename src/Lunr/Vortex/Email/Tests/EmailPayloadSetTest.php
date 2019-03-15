@@ -24,7 +24,7 @@ class EmailPayloadSetTest extends EmailPayloadTest
      *
      * @covers Lunr\Vortex\Email\EmailPayload::set_subject
      */
-    public function testSetSubject()
+    public function testSetSubject(): void
     {
         $this->class->set_subject('subject');
 
@@ -39,7 +39,7 @@ class EmailPayloadSetTest extends EmailPayloadTest
      *
      * @covers Lunr\Vortex\Email\EmailPayload::set_subject
      */
-    public function testSetSubjectReturnsSelfReference()
+    public function testSetSubjectReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_subject('subject'));
     }
@@ -49,7 +49,7 @@ class EmailPayloadSetTest extends EmailPayloadTest
      *
      * @covers Lunr\Vortex\Email\EmailPayload::set_body
      */
-    public function testSetBody()
+    public function testSetBody(): void
     {
         $this->class->set_body('body');
 
@@ -64,7 +64,7 @@ class EmailPayloadSetTest extends EmailPayloadTest
      *
      * @covers Lunr\Vortex\Email\EmailPayload::set_body
      */
-    public function testSetBodyReturnsSelfReference()
+    public function testSetBodyReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_body('subject'));
     }

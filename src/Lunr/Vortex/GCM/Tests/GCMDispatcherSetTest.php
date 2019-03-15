@@ -24,7 +24,7 @@ class GCMDispatcherSetTest extends GCMDispatcherTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::set_auth_token
      */
-    public function testSetAuthTokenSetsPayload()
+    public function testSetAuthTokenSetsPayload(): void
     {
         $this->class->set_auth_token('auth_token');
 
@@ -36,7 +36,7 @@ class GCMDispatcherSetTest extends GCMDispatcherTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::set_auth_token
      */
-    public function testSetAuthTokenReturnsSelfReference()
+    public function testSetAuthTokenReturnsSelfReference(): void
     {
         $this->assertEquals($this->class, $this->class->set_auth_token('auth_token'));
     }

@@ -45,7 +45,7 @@ abstract class GCMDispatcherTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->http   = $this->getMockBuilder('Requests_Session')->getMock();
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
@@ -64,7 +64,7 @@ abstract class GCMDispatcherTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->logger);
         unset($this->payload);
@@ -77,7 +77,7 @@ abstract class GCMDispatcherTest extends LunrBaseTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::get_response
      */
-    public function testGetResponseReturnsGCMResponseObject()
+    public function testGetResponseReturnsGCMResponseObject(): void
     {
         $result = $this->class->get_response();
 
@@ -89,7 +89,7 @@ abstract class GCMDispatcherTest extends LunrBaseTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::get_batch_response
      */
-    public function testGetBatchResponseReturnsGCMBatchResponseObject()
+    public function testGetBatchResponseReturnsGCMBatchResponseObject(): void
     {
         $this->http->expects($this->at(0))
                    ->method('__get')

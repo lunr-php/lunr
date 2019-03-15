@@ -28,7 +28,7 @@ class GCMDispatcherBaseTest extends GCMDispatcherTest
     /**
      * Test that the passed Requests_Session object is set correctly.
      */
-    public function testRequestsSessionIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly(): void
     {
         $this->assertPropertySame('http', $this->http);
     }
@@ -36,7 +36,7 @@ class GCMDispatcherBaseTest extends GCMDispatcherTest
     /**
      * Test that the auth token is set to an empty string by default.
      */
-    public function testAuthTokenIsEmptyString()
+    public function testAuthTokenIsEmptyString(): void
     {
         $this->assertPropertyEquals('auth_token', '');
     }
@@ -46,7 +46,7 @@ class GCMDispatcherBaseTest extends GCMDispatcherTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::get_new_response_object_for_failed_request
      */
-    public function testGetNewResponseObjectForFailedRequest()
+    public function testGetNewResponseObjectForFailedRequest(): void
     {
         $method = $this->get_accessible_reflection_method('get_new_response_object_for_failed_request');
 

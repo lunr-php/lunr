@@ -28,7 +28,7 @@ class APNSPayloadGetTest extends APNSPayloadTest
      * @dataProvider payloadProvider
      * @covers       Lunr\Vortex\APNS\APNSPayload::get_payload
      */
-    public function testGetPayloadWithAlert($file, $data_array)
+    public function testGetPayloadWithAlert($file, $data_array): void
     {
         $file     = TEST_STATICS . $file;
         $elements = $data_array;

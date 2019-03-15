@@ -24,7 +24,7 @@ class WNSToastPayloadSetTest extends WNSToastPayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSToastPayload::set_text
      */
-    public function testSetTextFirstLine()
+    public function testSetTextFirstLine(): void
     {
         $this->class->set_text('&title');
 
@@ -39,7 +39,7 @@ class WNSToastPayloadSetTest extends WNSToastPayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSToastPayload::set_text
      */
-    public function testSetTextArray()
+    public function testSetTextArray(): void
     {
         $this->class->set_text([ 'title', 'message' ]);
 
@@ -55,7 +55,7 @@ class WNSToastPayloadSetTest extends WNSToastPayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSToastPayload::set_text
      */
-    public function testSetTextReturnsSelfReference()
+    public function testSetTextReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_text('title'));
     }
@@ -65,7 +65,7 @@ class WNSToastPayloadSetTest extends WNSToastPayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSToastPayload::set_text
      */
-    public function testSetTextMessage()
+    public function testSetTextMessage(): void
     {
         $this->class->set_text('&message', 1);
 
@@ -80,7 +80,7 @@ class WNSToastPayloadSetTest extends WNSToastPayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSToastPayload::set_launch
      */
-    public function testSetLaunchWithCorrectLink()
+    public function testSetLaunchWithCorrectLink(): void
     {
         $this->class->set_launch('/page&link');
 
@@ -95,7 +95,7 @@ class WNSToastPayloadSetTest extends WNSToastPayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSToastPayload::set_launch
      */
-    public function testSetLaunchReturnsSelfReference()
+    public function testSetLaunchReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_launch('link'));
     }
@@ -105,7 +105,7 @@ class WNSToastPayloadSetTest extends WNSToastPayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSToastPayload::set_template
      */
-    public function testSetTemplateWithCorrectLink()
+    public function testSetTemplateWithCorrectLink(): void
     {
         $this->class->set_template('ToastText04');
 
@@ -120,7 +120,7 @@ class WNSToastPayloadSetTest extends WNSToastPayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSToastPayload::set_template
      */
-    public function testSetTemplateReturnsSelfReference()
+    public function testSetTemplateReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_template('link'));
     }
@@ -130,7 +130,7 @@ class WNSToastPayloadSetTest extends WNSToastPayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSToastPayload::set_image
      */
-    public function testSetImage()
+    public function testSetImage(): void
     {
         $this->class->set_image('https://image.url/img.jpg');
 
@@ -145,7 +145,7 @@ class WNSToastPayloadSetTest extends WNSToastPayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSToastPayload::set_image
      */
-    public function testSetImageReturnsSelfReference()
+    public function testSetImageReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_image('image'));
     }

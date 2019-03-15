@@ -26,7 +26,7 @@ class EmailDispatcherBaseTest extends EmailDispatcherTest
     /**
      * Test that the source is set to an empty string by default.
      */
-    public function testSourceIsEmptyString()
+    public function testSourceIsEmptyString(): void
     {
         $this->assertPropertyEmpty('source');
     }
@@ -34,7 +34,7 @@ class EmailDispatcherBaseTest extends EmailDispatcherTest
     /**
      * Test that the passed Mail object is set correctly.
      */
-    public function testMailIsSetCorrectly()
+    public function testMailIsSetCorrectly(): void
     {
         $this->assertSame($this->mail_transport, $this->get_reflection_property_value('mail_transport'));
     }
@@ -44,7 +44,7 @@ class EmailDispatcherBaseTest extends EmailDispatcherTest
      *
      * @covers Lunr\Vortex\Email\EmailDispatcher::clone_mail
      */
-    public function testCloneMailReturnsClonedMailClass()
+    public function testCloneMailReturnsClonedMailClass(): void
     {
         $method = $this->get_accessible_reflection_method('clone_mail');
 

@@ -24,7 +24,7 @@ class EmailResponseGetErrorStatusTest extends EmailResponseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUpError();
     }
@@ -35,7 +35,7 @@ class EmailResponseGetErrorStatusTest extends EmailResponseTest
      *
      * @covers Lunr\Vortex\Email\EmailResponse::get_status
      */
-    public function testGetErrorStatusForEndpoint()
+    public function testGetErrorStatusForEndpoint(): void
     {
         $this->assertEquals(PushNotificationStatus::ERROR, $this->class->get_status('error-endpoint'));
     }

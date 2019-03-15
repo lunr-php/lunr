@@ -24,7 +24,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::get_payload
      */
-    public function testGetPayloadWithTitle()
+    public function testGetPayloadWithTitle(): void
     {
         $file     = TEST_STATICS . '/Vortex/mpns/tile_title.xml';
         $elements = [ 'title' => 'Title' ];
@@ -39,7 +39,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::get_payload
      */
-    public function testGetPayloadWithBackgroundImage()
+    public function testGetPayloadWithBackgroundImage(): void
     {
         $file     = TEST_STATICS . '/Vortex/mpns/tile_background_image.xml';
         $elements = [ 'background_image' => 'BgImage' ];
@@ -54,7 +54,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::get_payload
      */
-    public function testGetPayloadWithCount()
+    public function testGetPayloadWithCount(): void
     {
         $file     = TEST_STATICS . '/Vortex/mpns/tile_count.xml';
         $elements = [ 'count' => 'Count' ];
@@ -69,7 +69,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::get_payload
      */
-    public function testGetPayloadWithBackBackgroundImage()
+    public function testGetPayloadWithBackBackgroundImage(): void
     {
         $file     = TEST_STATICS . '/Vortex/mpns/tile_back_background_image.xml';
         $elements = [ 'back_background_image' => 'BkBgImage' ];
@@ -84,7 +84,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::get_payload
      */
-    public function testGetPayloadWithBackTitle()
+    public function testGetPayloadWithBackTitle(): void
     {
         $file     = TEST_STATICS . '/Vortex/mpns/tile_back_title.xml';
         $elements = [ 'back_title' => 'Back Title' ];
@@ -99,7 +99,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::get_payload
      */
-    public function testGetPayloadWithBackContent()
+    public function testGetPayloadWithBackContent(): void
     {
         $file     = TEST_STATICS . '/Vortex/mpns/tile_back_content.xml';
         $elements = [ 'back_content' => 'Back Content' ];
@@ -114,7 +114,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::get_payload
      */
-    public function testGetPayloadWithId()
+    public function testGetPayloadWithId(): void
     {
         $file     = TEST_STATICS . '/Vortex/mpns/tile.xml';
         $elements = [
@@ -136,7 +136,7 @@ class MPNSTilePayloadGetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::get_payload
      */
-    public function testGetPayloadWithoutId()
+    public function testGetPayloadWithoutId(): void
     {
         $file     = TEST_STATICS . '/Vortex/mpns/tile_id.xml';
         $elements = [

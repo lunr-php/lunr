@@ -27,7 +27,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
      *
      * @covers   Lunr\Vortex\PAP\PAPDispatcher::push
      */
-    public function testPushReturnsPAPResponseObjectOnRequestFailure()
+    public function testPushReturnsPAPResponseObjectOnRequestFailure(): void
     {
         $this->mock_function('microtime', 'return 12345;');
 
@@ -85,7 +85,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
      *
      * @covers   Lunr\Vortex\PAP\PAPDispatcher::push
      */
-    public function testPushReturnsPAPResponseObject()
+    public function testPushReturnsPAPResponseObject(): void
     {
         $this->mock_function('microtime', 'return 12345;');
 
@@ -139,7 +139,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
      *
      * @covers   Lunr\Vortex\PAP\PAPDispatcher::push
      */
-    public function testPushResetsPropertiesOnRequestFailure()
+    public function testPushResetsPropertiesOnRequestFailure(): void
     {
         $this->mock_function('microtime', 'return 12345;');
 
@@ -199,7 +199,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
      *
      * @covers   Lunr\Vortex\PAP\PAPDispatcher::push
      */
-    public function testPushResetsProperties()
+    public function testPushResetsProperties(): void
     {
         $this->mock_function('microtime', 'return 12345;');
 

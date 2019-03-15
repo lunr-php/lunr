@@ -24,7 +24,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
      *
      * @covers Lunr\Vortex\APNS\APNSPayload::set_alert
      */
-    public function testSetAlert()
+    public function testSetAlert(): void
     {
         $this->class->set_alert('test');
 
@@ -39,7 +39,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
      *
      * @covers Lunr\Vortex\APNS\APNSPayload::set_alert
      */
-    public function testSetAlertReturnsSelfReference()
+    public function testSetAlertReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_alert('alert'));
     }
@@ -49,7 +49,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
      *
      * @covers Lunr\Vortex\APNS\APNSPayload::set_sound
      */
-    public function testSetSound()
+    public function testSetSound(): void
     {
         $this->class->set_sound('test');
 
@@ -64,7 +64,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
      *
      * @covers Lunr\Vortex\APNS\APNSPayload::set_sound
      */
-    public function testSetSoundReturnsSelfReference()
+    public function testSetSoundReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_sound('sound'));
     }
@@ -74,7 +74,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
      *
      * @covers Lunr\Vortex\APNS\APNSPayload::set_custom_data
      */
-    public function testSetCustomData()
+    public function testSetCustomData(): void
     {
         $this->class->set_custom_data('key', 'value');
 
@@ -89,7 +89,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
      *
      * @covers Lunr\Vortex\APNS\APNSPayload::set_custom_data
      */
-    public function testSetCustomDataReturnsSelfReference()
+    public function testSetCustomDataReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_custom_data('key', 'value'));
     }
@@ -99,7 +99,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
      *
      * @covers Lunr\Vortex\APNS\APNSPayload::set_badge
      */
-    public function testSetBadge()
+    public function testSetBadge(): void
     {
         $this->class->set_badge(5);
 
@@ -114,7 +114,7 @@ class APNSPayloadSetTest extends APNSPayloadTest
      *
      * @covers Lunr\Vortex\APNS\APNSPayload::set_badge
      */
-    public function testSetBadgeReturnsSelfReference()
+    public function testSetBadgeReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_badge('badge'));
     }

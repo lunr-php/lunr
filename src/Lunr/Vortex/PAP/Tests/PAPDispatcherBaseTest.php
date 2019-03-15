@@ -26,7 +26,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
     /**
      * Test that the auth_token is set to an empty string by default.
      */
-    public function testAuthTokenIsEmptyString()
+    public function testAuthTokenIsEmptyString(): void
     {
         $this->assertPropertyEmpty('auth_token');
     }
@@ -34,7 +34,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
     /**
      * Test that the password is set to an empty string by default.
      */
-    public function testPasswordIsEmptyString()
+    public function testPasswordIsEmptyString(): void
     {
         $this->assertPropertyEmpty('password');
     }
@@ -42,7 +42,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
     /**
      * Test that the content provider id is set to an empty string by default.
      */
-    public function testCidIsEmptyString()
+    public function testCidIsEmptyString(): void
     {
         $this->assertPropertyEmpty('cid');
     }
@@ -50,7 +50,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
     /**
      * Test that the push id is set to an empty string by default.
      */
-    public function testPushIdIsEmptyString()
+    public function testPushIdIsEmptyString(): void
     {
         $this->assertPropertyEmpty('push_id');
     }
@@ -58,7 +58,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
     /**
      * Test that the passed Requests_Session object is set correctly.
      */
-    public function testRequestsSessionIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly(): void
     {
         $this->assertSame($this->http, $this->get_reflection_property_value('http'));
     }
@@ -68,7 +68,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
      *
      * @covers Lunr\Vortex\PAP\PAPDispatcher::construct_pap_control_xml
      */
-    public function testConstructControlXMLWithEmptyInputConstructsEmptyXML()
+    public function testConstructControlXMLWithEmptyInputConstructsEmptyXML(): void
     {
         $method = $this->reflection->getMethod('construct_pap_control_xml');
         $method->setAccessible(TRUE);
@@ -85,7 +85,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
      *
      * @covers Lunr\Vortex\PAP\PAPDispatcher::construct_pap_control_xml
      */
-    public function testConstructControlXMLConstructsXMLCorrectly()
+    public function testConstructControlXMLConstructsXMLCorrectly(): void
     {
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('push_id', 'endpoint12345');
@@ -109,7 +109,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
      *
      * @covers Lunr\Vortex\PAP\PAPDispatcher::construct_pap_data
      */
-    public function testConstructPAPDataConstructsHeadersCorrectly()
+    public function testConstructPAPDataConstructsHeadersCorrectly(): void
     {
         $this->mock_function('microtime', 'return 12345;');
 
@@ -140,7 +140,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
      *
      * @covers Lunr\Vortex\PAP\PAPDispatcher::get_new_response_object_for_failed_request
      */
-    public function testGetNewResponseObjectForFailedRequest()
+    public function testGetNewResponseObjectForFailedRequest(): void
     {
         $this->set_reflection_property_value('cid', 'papcid');
 

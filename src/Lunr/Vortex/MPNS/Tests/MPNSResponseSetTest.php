@@ -24,7 +24,7 @@ class MPNSResponseSetTest extends MPNSResponseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUpSuccess();
     }
@@ -34,7 +34,7 @@ class MPNSResponseSetTest extends MPNSResponseTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSResponse::set_headers
      */
-    public function testSetHeadersWithPreconditionFailedStatus()
+    public function testSetHeadersWithPreconditionFailedStatus(): void
     {
         $headers = [
             'Date'                     => '2013-07-05',
@@ -67,7 +67,7 @@ class MPNSResponseSetTest extends MPNSResponseTest
      * @dataProvider specialStatusProvider
      * @covers       Lunr\Vortex\MPNS\MPNSResponse::set_headers
      */
-    public function testSetHeadersWithSpecialStatusCodes($status)
+    public function testSetHeadersWithSpecialStatusCodes($status): void
     {
         $headers = [
             'Date'                     => '2013-07-05',
@@ -97,7 +97,7 @@ class MPNSResponseSetTest extends MPNSResponseTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSResponse::set_status
      */
-    public function testStatusForSuccessRequestStatus()
+    public function testStatusForSuccessRequestStatus(): void
     {
         $method = $this->get_accessible_reflection_method('set_status');
         $method->invokeArgs($this->class, [ 'URL', $this->logger ]);
@@ -118,7 +118,7 @@ class MPNSResponseSetTest extends MPNSResponseTest
      * @dataProvider failedRequestProvider
      * @covers       Lunr\Vortex\MPNS\MPNSResponse::set_status
      */
-    public function testSetStatusForNonSuccessRequestStatus($code, $nstatus, $expected)
+    public function testSetStatusForNonSuccessRequestStatus($code, $nstatus, $expected): void
     {
         $headers = [];
 

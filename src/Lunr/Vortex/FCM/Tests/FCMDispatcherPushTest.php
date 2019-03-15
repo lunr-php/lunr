@@ -24,7 +24,7 @@ class FCMDispatcherPushTest extends FCMDispatcherTest
      *
      * @covers Lunr\Vortex\FCM\FCMDispatcher::push
      */
-    public function testPushReturnsFCMResponseObject()
+    public function testPushReturnsFCMResponseObject(): void
     {
         $endpoints = [];
 
@@ -40,7 +40,7 @@ class FCMDispatcherPushTest extends FCMDispatcherTest
      *
      * @covers Lunr\Vortex\FCM\FCMDispatcher::push_batch
      */
-    public function testPushBatchReturnsFCMBatchResponseObject()
+    public function testPushBatchReturnsFCMBatchResponseObject(): void
     {
         $endpoints = [ 'endpoint' ];
 

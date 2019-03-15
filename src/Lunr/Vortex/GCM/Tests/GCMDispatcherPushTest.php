@@ -28,7 +28,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::push
      */
-    public function testPushReturnsGCMResponseObject()
+    public function testPushReturnsGCMResponseObject(): void
     {
         $endpoints = [];
 
@@ -42,7 +42,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::push
      */
-    public function testPushDoesNoRequestIfNoEndpoint()
+    public function testPushDoesNoRequestIfNoEndpoint(): void
     {
         $endpoints = [];
 
@@ -57,7 +57,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::push
      */
-    public function testPushResetsProperties()
+    public function testPushResetsProperties(): void
     {
         $endpoints = [ 'endpoint' ];
 
@@ -83,7 +83,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::push
      */
-    public function testPushWithFailedRequest()
+    public function testPushWithFailedRequest(): void
     {
         $this->mock_function('curl_errno', function (){ return 10; });
 
@@ -171,7 +171,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::push
      */
-    public function testPushRequestWithDefaultValues()
+    public function testPushRequestWithDefaultValues(): void
     {
         $endpoints = [ 'endpoint' ];
 
@@ -203,7 +203,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::push
      */
-    public function testPushRequestWithSingleEndpoint()
+    public function testPushRequestWithSingleEndpoint(): void
     {
         $endpoints = [ 'endpoint' ];
 
@@ -241,7 +241,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::push
      */
-    public function testPushRequestWithMultipleEndpointsOneBatch()
+    public function testPushRequestWithMultipleEndpointsOneBatch(): void
     {
         $endpoints = [ 'endpoint1', 'endpoint2' ];
 
@@ -279,7 +279,7 @@ class GCMDispatcherPushTest extends GCMDispatcherTest
      *
      * @covers Lunr\Vortex\GCM\GCMDispatcher::push
      */
-    public function testPushRequestWithMultipleEndpointsMultipleBatches()
+    public function testPushRequestWithMultipleEndpointsMultipleBatches(): void
     {
         $endpoints = [ 'endpoint1', 'endpoint2', 'endpoint3', 'endpoint4', 'endpoint5' ];
 

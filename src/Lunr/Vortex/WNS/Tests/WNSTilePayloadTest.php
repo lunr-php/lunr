@@ -27,7 +27,7 @@ abstract class WNSTilePayloadTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class = new WNSTilePayload();
 
@@ -37,7 +37,7 @@ abstract class WNSTilePayloadTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);

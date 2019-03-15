@@ -22,7 +22,7 @@ class PAPPayloadBaseTest extends PAPPayloadTest
     /**
      * Test elements is initialized as an empty array.
      */
-    public function testElementsIsInitializedAsEmptyArray()
+    public function testElementsIsInitializedAsEmptyArray(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('data'));
     }
@@ -30,7 +30,7 @@ class PAPPayloadBaseTest extends PAPPayloadTest
     /**
      * Test that the priority is set to an empty string by default.
      */
-    public function testPriorityIsEmptyString()
+    public function testPriorityIsEmptyString(): void
     {
         $this->assertPropertyEmpty('priority');
     }

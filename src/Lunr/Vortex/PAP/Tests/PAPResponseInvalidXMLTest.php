@@ -24,7 +24,7 @@ class PAPResponseInvalidXMLTest extends PAPResponseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUpInvalidXMLError();
     }
@@ -34,7 +34,7 @@ class PAPResponseInvalidXMLTest extends PAPResponseTest
      *
      * @return void
      */
-    public function testStatusForSuccessRequestStatusLogsErrorOnInvalidXMLResponse()
+    public function testStatusForSuccessRequestStatusLogsErrorOnInvalidXMLResponse(): void
     {
         $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response_invalid.xml');
 

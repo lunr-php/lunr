@@ -31,7 +31,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
      *
      * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
-    public function testPushErrorInvalidJSON()
+    public function testPushErrorInvalidJSON(): void
     {
         $http_code = 400;
         $content   = 'Field "collapse_key" must be a JSON string: 1463565451';
@@ -60,7 +60,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
      *
      * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
-    public function testPushErrorAuthenticationError()
+    public function testPushErrorAuthenticationError(): void
     {
         $http_code = 401;
         $content   = 'stuff';
@@ -89,7 +89,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
      *
      * @return array $data http code
      */
-    public function internalErrorHTTPCodeDataProvider()
+    public function internalErrorHTTPCodeDataProvider(): array
     {
         $data = [];
 
@@ -109,7 +109,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
      * @dataProvider internalErrorHTTPCodeDataProvider
      * @covers       Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
-    public function testPushErrorInternalError($http_code)
+    public function testPushErrorInternalError($http_code): void
     {
         $content = 'stuff';
 
@@ -137,7 +137,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
      *
      * @return array $data http code
      */
-    public function unknownErrorHTTPCodeDataProvider()
+    public function unknownErrorHTTPCodeDataProvider(): array
     {
         $data = [];
 
@@ -155,7 +155,7 @@ class GCMBatchResponseBasePushErrorTest extends GCMBatchResponseTest
      * @dataProvider unknownErrorHTTPCodeDataProvider
      * @covers       Lunr\Vortex\GCM\GCMBatchResponse::__construct
      */
-    public function testPushErrorUnknownError($http_code)
+    public function testPushErrorUnknownError($http_code): void
     {
         $content = 'stuff';
 

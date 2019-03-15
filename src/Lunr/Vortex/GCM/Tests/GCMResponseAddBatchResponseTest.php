@@ -26,7 +26,7 @@ class GCMResponseAddBatchResponseTest extends GCMResponseTest
      *
      * @covers  Lunr\Vortex\GCM\GCMResponse::add_batch_response
      */
-    public function testAddBatchResponseWithNoEndpointDoesNotModifyStatuses()
+    public function testAddBatchResponseWithNoEndpointDoesNotModifyStatuses(): void
     {
         $statuses = [
             'endpoint1' => PushNotificationStatus::ERROR,
@@ -45,7 +45,7 @@ class GCMResponseAddBatchResponseTest extends GCMResponseTest
      *
      * @covers  Lunr\Vortex\GCM\GCMResponse::add_batch_response
      */
-    public function testAddBatchResponseWithEndpointsAddStatus()
+    public function testAddBatchResponseWithEndpointsAddStatus(): void
     {
         $statuses = [
             'endpoint1' => PushNotificationStatus::ERROR,

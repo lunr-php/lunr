@@ -32,7 +32,7 @@ abstract class EmailPayloadTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $elements_array = [
             'subject' => 'value1',
@@ -50,7 +50,7 @@ abstract class EmailPayloadTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->payload);
         unset($this->class);

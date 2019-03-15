@@ -26,7 +26,7 @@ class WNSPayloadTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class = $this->getMockBuilder('Lunr\Vortex\WNS\WNSPayload')
                             ->getMockForAbstractClass();
@@ -37,7 +37,7 @@ class WNSPayloadTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -48,7 +48,7 @@ class WNSPayloadTest extends LunrBaseTest
      *
      * @return array $strings Array of strings
      */
-    public function stringProvider()
+    public function stringProvider(): array
     {
         $strings   = [];
         $strings[] = [ 'string', 'string' ];

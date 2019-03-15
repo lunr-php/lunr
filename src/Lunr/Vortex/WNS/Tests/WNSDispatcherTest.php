@@ -59,7 +59,7 @@ abstract class WNSDispatcherTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->http = $this->getMockBuilder('Requests_Session')->getMock();
 
@@ -83,7 +83,7 @@ abstract class WNSDispatcherTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -99,7 +99,7 @@ abstract class WNSDispatcherTest extends LunrBaseTest
      *
      * @return array $priorities Array of WNS priorities.
      */
-    public function validPriorityProvider()
+    public function validPriorityProvider(): array
     {
         $priorities   = [];
         $priorities[] = [ WNSPriority::TILE_IMMEDIATELY ];
@@ -120,7 +120,7 @@ abstract class WNSDispatcherTest extends LunrBaseTest
      *
      * @return array $types Array of WNS types.
      */
-    public function validTypeProvider()
+    public function validTypeProvider(): array
     {
         $types   = [];
         $types[] = [ WNSType::TILE ];

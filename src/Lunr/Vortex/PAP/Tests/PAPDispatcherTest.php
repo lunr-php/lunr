@@ -51,7 +51,7 @@ abstract class PAPDispatcherTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
         $this->response = $this->getMockBuilder('Requests_Response')->getMock();
@@ -69,7 +69,7 @@ abstract class PAPDispatcherTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->logger);
         unset($this->http);

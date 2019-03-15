@@ -30,7 +30,7 @@ class FCMBatchResponseBasePushErrorTest extends FCMBatchResponseTest
      *
      * @covers Lunr\Vortex\FCM\FCMBatchResponse::__construct
      */
-    public function testPushErrorInvalidJSON()
+    public function testPushErrorInvalidJSON(): void
     {
         $http_code = 400;
         $content   = 'Field "collapse_key" must be a JSON string: 1463565451';
@@ -59,7 +59,7 @@ class FCMBatchResponseBasePushErrorTest extends FCMBatchResponseTest
      *
      * @covers Lunr\Vortex\FCM\FCMBatchResponse::__construct
      */
-    public function testPushErrorAuthenticationError()
+    public function testPushErrorAuthenticationError(): void
     {
         $http_code = 401;
         $content   = 'stuff';
@@ -108,7 +108,7 @@ class FCMBatchResponseBasePushErrorTest extends FCMBatchResponseTest
      * @dataProvider internalErrorHTTPCodeDataProvider
      * @covers       Lunr\Vortex\FCM\FCMBatchResponse::__construct
      */
-    public function testPushErrorInternalError($http_code)
+    public function testPushErrorInternalError($http_code): void
     {
         $content = 'stuff';
 
@@ -154,7 +154,7 @@ class FCMBatchResponseBasePushErrorTest extends FCMBatchResponseTest
      * @dataProvider unknownErrorHTTPCodeDataProvider
      * @covers       Lunr\Vortex\FCM\FCMBatchResponse::__construct
      */
-    public function testPushErrorUnknownError($http_code)
+    public function testPushErrorUnknownError($http_code): void
     {
         $content = 'stuff';
 

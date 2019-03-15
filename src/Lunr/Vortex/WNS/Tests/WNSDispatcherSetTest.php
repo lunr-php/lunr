@@ -27,7 +27,7 @@ class WNSDispatcherSetTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::set_client_id
      */
-    public function testSetClientIDSetsClientID()
+    public function testSetClientIDSetsClientID(): void
     {
         $this->class->set_client_id('client_id');
 
@@ -39,7 +39,7 @@ class WNSDispatcherSetTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::set_client_id
      */
-    public function testSetClientIDReturnsSelfReference()
+    public function testSetClientIDReturnsSelfReference(): void
     {
         $this->assertEquals($this->class, $this->class->set_client_id('client_id'));
     }
@@ -49,7 +49,7 @@ class WNSDispatcherSetTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::set_client_secret
      */
-    public function testSetClientSecretSetsClientSecret()
+    public function testSetClientSecretSetsClientSecret(): void
     {
         $this->class->set_client_id('client_id');
 
@@ -61,7 +61,7 @@ class WNSDispatcherSetTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::set_client_secret
      */
-    public function testSetClientSecretReturnsSelfReference()
+    public function testSetClientSecretReturnsSelfReference(): void
     {
         $this->assertEquals($this->class, $this->class->set_client_secret('client_secret'));
     }
@@ -71,7 +71,7 @@ class WNSDispatcherSetTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::set_oauth_token
      */
-    public function testSetOauthTokenSetsOauthToken()
+    public function testSetOauthTokenSetsOauthToken(): void
     {
         $this->class->set_oauth_token('token');
 
@@ -83,7 +83,7 @@ class WNSDispatcherSetTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::set_type
      */
-    public function testSetTypeReturnsSelfReference()
+    public function testSetTypeReturnsSelfReference(): void
     {
         $this->assertEquals($this->class, $this->class->set_type(WNSType::TILE));
     }
@@ -96,7 +96,7 @@ class WNSDispatcherSetTest extends WNSDispatcherTest
      * @dataProvider validTypeProvider
      * @covers       Lunr\Vortex\WNS\WNSDispatcher::set_type
      */
-    public function testSetTypeSetsValidType($type)
+    public function testSetTypeSetsValidType($type): void
     {
         $this->class->set_type($type);
 
@@ -108,7 +108,7 @@ class WNSDispatcherSetTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::set_type
      */
-    public function testSetTypeDoesNotSetInvalidType()
+    public function testSetTypeDoesNotSetInvalidType(): void
     {
         $this->class->set_type('Android');
 

@@ -24,7 +24,7 @@ class WNSResponseSetTest extends WNSResponseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUpSuccess();
     }
@@ -34,7 +34,7 @@ class WNSResponseSetTest extends WNSResponseTest
      *
      * @covers Lunr\Vortex\WNS\WNSResponse::set_status
      */
-    public function testStatusForSuccessRequestStatus()
+    public function testStatusForSuccessRequestStatus(): void
     {
         $method = $this->get_accessible_reflection_method('set_status');
         $method->invokeArgs($this->class, [ 'URL', $this->logger ]);
@@ -55,7 +55,7 @@ class WNSResponseSetTest extends WNSResponseTest
      * @dataProvider failedRequestProvider
      * @covers       Lunr\Vortex\WNS\WNSResponse::set_status
      */
-    public function testSetStatusForNonSuccessRequestStatus($code, $nstatus, $expected)
+    public function testSetStatusForNonSuccessRequestStatus($code, $nstatus, $expected): void
     {
         $headers = [];
 

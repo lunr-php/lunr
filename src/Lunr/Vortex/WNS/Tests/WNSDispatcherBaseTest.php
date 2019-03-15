@@ -27,7 +27,7 @@ class WNSDispatcherBaseTest extends WNSDispatcherTest
     /**
      * Test that the passed Requesys_Session object is set correctly.
      */
-    public function testRequestsSessionIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly(): void
     {
         $this->assertSame($this->http, $this->get_reflection_property_value('http'));
     }
@@ -35,7 +35,7 @@ class WNSDispatcherBaseTest extends WNSDispatcherTest
     /**
      * Test that the type is set to RAW by default.
      */
-    public function testTypeIsSetToRaw()
+    public function testTypeIsSetToRaw(): void
     {
         $this->assertSame(WNSType::RAW, $this->get_reflection_property_value('type'));
     }
@@ -45,7 +45,7 @@ class WNSDispatcherBaseTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::get_new_response_object_for_failed_request
      */
-    public function testGetNewResponseObjectForFailedRequest()
+    public function testGetNewResponseObjectForFailedRequest(): void
     {
         $method = $this->get_accessible_reflection_method('get_new_response_object_for_failed_request');
 

@@ -24,7 +24,7 @@ class WNSBadgePayloadGetTest extends WNSBadgePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSBadgePayload::get_payload
      */
-    public function testGetPayload()
+    public function testGetPayload(): void
     {
         $file     = TEST_STATICS . '/Vortex/wns/badge.xml';
         $elements = [ 'value' => 2 ];

@@ -53,7 +53,7 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
@@ -71,7 +71,7 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -86,7 +86,7 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
      *
      * @return array $priorities Array of MPNS priorities.
      */
-    public function validPriorityProvider()
+    public function validPriorityProvider(): array
     {
         $priorities   = [];
         $priorities[] = [ MPNSPriority::TILE_IMMEDIATELY ];
@@ -107,7 +107,7 @@ abstract class MPNSDispatcherTest extends LunrBaseTest
      *
      * @return array $types Array of MPNS types.
      */
-    public function validTypeProvider()
+    public function validTypeProvider(): array
     {
         $types   = [];
         $types[] = [ MPNSType::TILE ];

@@ -24,7 +24,7 @@ class GCMPayloadGetTest extends GCMPayloadTest
      *
      * @covers Lunr\Vortex\GCM\GCMPayload::get_payload
      */
-    public function testGetPayloadWithCollapseKey()
+    public function testGetPayloadWithCollapseKey(): void
     {
         $file     = TEST_STATICS . '/Vortex/gcm/collapse_key.json';
         $elements = [ 'collapse_key' => 'test' ];
@@ -39,7 +39,7 @@ class GCMPayloadGetTest extends GCMPayloadTest
      *
      * @covers Lunr\Vortex\GCM\GCMPayload::get_payload
      */
-    public function testGetPayloadWithData()
+    public function testGetPayloadWithData(): void
     {
         $file     = TEST_STATICS . '/Vortex/gcm/data.json';
         $elements = [
@@ -59,7 +59,7 @@ class GCMPayloadGetTest extends GCMPayloadTest
      *
      * @covers Lunr\Vortex\GCM\GCMPayload::get_payload
      */
-    public function testGetPayloadWithTimeToLive()
+    public function testGetPayloadWithTimeToLive(): void
     {
         $file     = TEST_STATICS . '/Vortex/gcm/time_to_live.json';
         $elements = [ 'time_to_live' => 10 ];
@@ -74,7 +74,7 @@ class GCMPayloadGetTest extends GCMPayloadTest
      *
      * @covers Lunr\Vortex\GCM\GCMPayload::get_payload
      */
-    public function testGetPayload()
+    public function testGetPayload(): void
     {
         $file     = TEST_STATICS . '/Vortex/gcm/gcm.json';
         $elements = [

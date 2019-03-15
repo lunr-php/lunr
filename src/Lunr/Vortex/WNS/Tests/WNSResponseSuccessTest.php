@@ -24,7 +24,7 @@ class WNSResponseSuccessTest extends WNSResponseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUpSuccess();
     }
@@ -32,7 +32,7 @@ class WNSResponseSuccessTest extends WNSResponseTest
     /**
      * Test headers are set correctly.
      */
-    public function testHeadersIsSetCorrectly()
+    public function testHeadersIsSetCorrectly(): void
     {
         $headers = $this->get_reflection_property_value('headers');
 
@@ -46,7 +46,7 @@ class WNSResponseSuccessTest extends WNSResponseTest
     /**
      * Test that the status is set as success.
      */
-    public function testStatusIsSuccess()
+    public function testStatusIsSuccess(): void
     {
         $this->assertEquals(PushNotificationStatus::SUCCESS, $this->get_reflection_property_value('status'));
     }
@@ -54,7 +54,7 @@ class WNSResponseSuccessTest extends WNSResponseTest
     /**
      * Test that the endpoint is set correctly.
      */
-    public function testEndpointSetCorrectly()
+    public function testEndpointSetCorrectly(): void
     {
         $this->assertPropertySame('endpoint', 'http://localhost/');
     }
@@ -62,7 +62,7 @@ class WNSResponseSuccessTest extends WNSResponseTest
     /**
      * Test that the http code is set from the Response object.
      */
-    public function testHttpCodeIsSetCorrectly()
+    public function testHttpCodeIsSetCorrectly(): void
     {
         $this->assertEquals(200, $this->get_reflection_property_value('http_code'));
     }
@@ -72,7 +72,7 @@ class WNSResponseSuccessTest extends WNSResponseTest
      *
      * @covers Lunr\Vortex\WNS\WNSResponse::get_status
      */
-    public function testGetStatusReturnsStatusForCorrectEndpoint()
+    public function testGetStatusReturnsStatusForCorrectEndpoint(): void
     {
         $this->assertEquals($this->class->get_status('http://localhost/'), PushNotificationStatus::SUCCESS);
     }
@@ -82,7 +82,7 @@ class WNSResponseSuccessTest extends WNSResponseTest
      *
      * @covers Lunr\Vortex\WNS\WNSResponse::get_status
      */
-    public function testGetStatusReturnsUnknownStatusForIncorrectEndpoint()
+    public function testGetStatusReturnsUnknownStatusForIncorrectEndpoint(): void
     {
         $this->assertEquals($this->class->get_status('http://foo/'), PushNotificationStatus::UNKNOWN);
     }

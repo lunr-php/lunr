@@ -24,7 +24,7 @@ class EmailPayloadGetTest extends EmailPayloadTest
      *
      * @covers Lunr\Vortex\Email\EmailPayload::get_payload
      */
-    public function testGetPayload()
+    public function testGetPayload(): void
     {
         $file     = TEST_STATICS . '/Vortex/email/payload.json';
         $elements = [

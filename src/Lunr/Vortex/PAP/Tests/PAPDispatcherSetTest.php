@@ -24,7 +24,7 @@ class PAPDispatcherSetTest extends PAPDispatcherTest
      *
      * @covers Lunr\Vortex\PAP\PAPDispatcher::set_auth_token
      */
-    public function testSetAuthTokenSetsAuthToken()
+    public function testSetAuthTokenSetsAuthToken(): void
     {
         $auth_token = 'auth_token';
         $this->class->set_auth_token($auth_token);
@@ -37,7 +37,7 @@ class PAPDispatcherSetTest extends PAPDispatcherTest
      *
      * @covers Lunr\Vortex\PAP\PAPDispatcher::set_auth_token
      */
-    public function testSetAuthTokenReturnsSelfReference()
+    public function testSetAuthTokenReturnsSelfReference(): void
     {
         $auth_token = 'auth_token';
         $this->assertEquals($this->class, $this->class->set_auth_token($auth_token));
@@ -48,7 +48,7 @@ class PAPDispatcherSetTest extends PAPDispatcherTest
      *
      * @covers Lunr\Vortex\PAP\PAPDispatcher::set_password
      */
-    public function testSetPasswordSetsPassword()
+    public function testSetPasswordSetsPassword(): void
     {
         $password = 'password';
         $this->class->set_password($password);
@@ -61,7 +61,7 @@ class PAPDispatcherSetTest extends PAPDispatcherTest
      *
      * @covers Lunr\Vortex\PAP\PAPDispatcher::set_password
      */
-    public function testSetPasswordReturnsSelfReference()
+    public function testSetPasswordReturnsSelfReference(): void
     {
         $password = 'password';
         $this->assertEquals($this->class, $this->class->set_password($password));
@@ -72,7 +72,7 @@ class PAPDispatcherSetTest extends PAPDispatcherTest
      *
      * @covers Lunr\Vortex\PAP\PAPDispatcher::set_content_provider_id
      */
-    public function testSetContentProviderIdSetsCid()
+    public function testSetContentProviderIdSetsCid(): void
     {
         $cid = 'cid';
         $this->class->set_content_provider_id($cid);
@@ -85,7 +85,7 @@ class PAPDispatcherSetTest extends PAPDispatcherTest
      *
      * @covers Lunr\Vortex\PAP\PAPDispatcher::set_content_provider_id
      */
-    public function testSetContentProviderIdReturnsSelfReference()
+    public function testSetContentProviderIdReturnsSelfReference(): void
     {
         $cid = 'cid';
         $this->assertEquals($this->class, $this->class->set_content_provider_id($cid));

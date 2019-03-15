@@ -28,7 +28,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSDispatcher::push
      */
-    public function testPushingTileSetsTargetHeader()
+    public function testPushingTileSetsTargetHeader(): void
     {
         $this->payload = $this->getMockBuilder('Lunr\Vortex\MPNS\MPNSTilePayload')
                               ->disableOriginalConstructor()
@@ -63,7 +63,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSDispatcher::push
      */
-    public function testPushingToastSetsTargetHeader()
+    public function testPushingToastSetsTargetHeader(): void
     {
         $this->payload = $this->getMockBuilder('Lunr\Vortex\MPNS\MPNSToastPayload')
                               ->disableOriginalConstructor()
@@ -98,7 +98,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSDispatcher::push
      */
-    public function testPushingRawDoesNotSetTargetHeader()
+    public function testPushingRawDoesNotSetTargetHeader(): void
     {
         $endpoints = [ 'endpoint' ];
 
@@ -128,7 +128,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSDispatcher::push
      */
-    public function testPushingWithDefaultPriorityDoesNotSetPriorityHeader()
+    public function testPushingWithDefaultPriorityDoesNotSetPriorityHeader(): void
     {
         $endpoints = [ 'endpoint' ];
 
@@ -161,7 +161,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      * @dataProvider validPriorityProvider
      * @covers       Lunr\Vortex\MPNS\MPNSDispatcher::push
      */
-    public function testPushingWithValidPrioritySetsPriorityHeader($priority)
+    public function testPushingWithValidPrioritySetsPriorityHeader($priority): void
     {
         $this->payload->set_priority($priority);
 
@@ -194,7 +194,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSDispatcher::push
      */
-    public function testPushReturnsMPNSResponseObjectOnError()
+    public function testPushReturnsMPNSResponseObjectOnError(): void
     {
         $endpoints = [ 'endpoint' ];
 
@@ -231,7 +231,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSDispatcher::push
      */
-    public function testPushReturnsMPNSResponseObjectOnSuccess()
+    public function testPushReturnsMPNSResponseObjectOnSuccess(): void
     {
         $endpoints = [ 'endpoint' ];
 
@@ -261,7 +261,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSDispatcher::push
      */
-    public function testPushResetsPropertiesOnError()
+    public function testPushResetsPropertiesOnError(): void
     {
         $this->payload = $this->getMockBuilder('Lunr\Vortex\MPNS\MPNSToastPayload')
                               ->disableOriginalConstructor()
@@ -299,7 +299,7 @@ class MPNSDispatcherPushTest extends MPNSDispatcherTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSDispatcher::push
      */
-    public function testPushResetsPropertiesOnSuccess()
+    public function testPushResetsPropertiesOnSuccess(): void
     {
         $this->payload = $this->getMockBuilder('Lunr\Vortex\MPNS\MPNSToastPayload')
                               ->disableOriginalConstructor()

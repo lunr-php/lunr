@@ -24,7 +24,7 @@ class WNSBadgePayloadSetTest extends WNSBadgePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSBadgePayload::set_value
      */
-    public function testSetValue()
+    public function testSetValue(): void
     {
         $this->class->set_value(1);
 
@@ -39,7 +39,7 @@ class WNSBadgePayloadSetTest extends WNSBadgePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSBadgePayload::set_value
      */
-    public function testSetValueReturnsSelfReference()
+    public function testSetValueReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_value('text'));
     }

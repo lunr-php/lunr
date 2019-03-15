@@ -35,7 +35,7 @@ abstract class GCMResponseTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->batch_response = $this->getMockBuilder('Lunr\Vortex\GCM\GCMBatchResponse')
                                      ->disableOriginalConstructor()
@@ -48,7 +48,7 @@ abstract class GCMResponseTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->batch_response);
         unset($this->class);

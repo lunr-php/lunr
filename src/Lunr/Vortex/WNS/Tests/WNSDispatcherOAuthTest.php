@@ -27,7 +27,7 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
      *
      * @return void
      */
-    private function expectFromConfig($client_id, $client_secret)
+    private function expectFromConfig($client_id, $client_secret): void
     {
         $this->set_reflection_property_value('client_id', $client_id);
         $this->set_reflection_property_value('client_secret', $client_secret);
@@ -38,7 +38,7 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::get_oauth_token
      */
-    public function testGetOauthMakesCorrectRequest()
+    public function testGetOauthMakesCorrectRequest(): void
     {
         $request_post = [
             'grant_type'    => 'client_credentials',
@@ -68,7 +68,7 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::get_oauth_token
      */
-    public function testGetOauthRespondsFalseIfRequestError()
+    public function testGetOauthRespondsFalseIfRequestError(): void
     {
         $request_post = [
             'grant_type'    => 'client_credentials',
@@ -99,7 +99,7 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::get_oauth_token
      */
-    public function testGetOauthRespondsFalseIfInvalidJSON()
+    public function testGetOauthRespondsFalseIfInvalidJSON(): void
     {
         $request_post = [
             'grant_type'    => 'client_credentials',
@@ -133,7 +133,7 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::get_oauth_token
      */
-    public function testGetOauthRespondsFalseIfIncompleteJSON()
+    public function testGetOauthRespondsFalseIfIncompleteJSON(): void
     {
         $request_post = [
             'grant_type'    => 'client_credentials',
@@ -167,7 +167,7 @@ class WNSDispatcherOAuthTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::get_oauth_token
      */
-    public function testGetOauthRespondsCorrectly()
+    public function testGetOauthRespondsCorrectly(): void
     {
         $request_post = [
             'grant_type'    => 'client_credentials',

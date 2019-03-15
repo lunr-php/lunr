@@ -30,7 +30,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
      *
      * @covers Lunr\Vortex\FCM\FCMBatchResponse::__construct
      */
-    public function testPushSuccessWithMissingResults()
+    public function testPushSuccessWithMissingResults(): void
     {
         $content = file_get_contents(TEST_STATICS . '/Vortex/fcm/response_missing_results.json');
 
@@ -61,7 +61,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
      *
      * @covers Lunr\Vortex\FCM\FCMBatchResponse::__construct
      */
-    public function testPushSuccessWithSingleSuccess()
+    public function testPushSuccessWithSingleSuccess(): void
     {
         $content = file_get_contents(TEST_STATICS . '/Vortex/fcm/response_single_success.json');
 
@@ -88,7 +88,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
      *
      * @covers Lunr\Vortex\FCM\FCMBatchResponse::__construct
      */
-    public function testPushSuccessWithSingleError()
+    public function testPushSuccessWithSingleError(): void
     {
         $content = file_get_contents(TEST_STATICS . '/Vortex/fcm/response_single_error.json');
 
@@ -119,7 +119,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
      *
      * @covers Lunr\Vortex\FCM\FCMBatchResponse::__construct
      */
-    public function testPushSuccessWithMultipleSuccess()
+    public function testPushSuccessWithMultipleSuccess(): void
     {
         $content = file_get_contents(TEST_STATICS . '/Vortex/fcm/response_multiple_success.json');
 
@@ -150,7 +150,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
      *
      * @covers Lunr\Vortex\FCM\FCMBatchResponse::__construct
      */
-    public function testPushSuccessWithMultipleErrors()
+    public function testPushSuccessWithMultipleErrors(): void
     {
         $content = file_get_contents(TEST_STATICS . '/Vortex/fcm/response_multiple_error.json');
 
@@ -219,7 +219,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
      *
      * @covers Lunr\Vortex\FCM\FCMBatchResponse::__construct
      */
-    public function testPushSuccessWithMultipleMixedResults()
+    public function testPushSuccessWithMultipleMixedResults(): void
     {
         $content = file_get_contents(TEST_STATICS . '/Vortex/fcm/response_multiple_mixed.json');
 
@@ -263,7 +263,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
      *
      * @covers Lunr\Vortex\FCM\FCMBatchResponse::__construct
      */
-    public function testPushSuccessWithMoreEndpointsThanResults()
+    public function testPushSuccessWithMoreEndpointsThanResults(): void
     {
         $content = file_get_contents(TEST_STATICS . '/Vortex/fcm/response_multiple_success.json');
 
@@ -294,7 +294,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
      *
      * @covers Lunr\Vortex\FCM\FCMBatchResponse::__construct
      */
-    public function testPushSuccessWithLessEndpointsThanResults()
+    public function testPushSuccessWithLessEndpointsThanResults(): void
     {
         $content = file_get_contents(TEST_STATICS . '/Vortex/fcm/response_multiple_success.json');
 

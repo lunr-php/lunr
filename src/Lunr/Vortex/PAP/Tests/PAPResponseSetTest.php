@@ -24,7 +24,7 @@ class PAPResponseSetTest extends PAPResponseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUpSuccess();
     }
@@ -34,7 +34,7 @@ class PAPResponseSetTest extends PAPResponseTest
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::set_status
      */
-    public function testStatusForSuccessRequestStatus()
+    public function testStatusForSuccessRequestStatus(): void
     {
         $method = $this->get_accessible_reflection_method('set_status');
         $method->invokeArgs($this->class, [ 'URL', $this->logger ]);
@@ -54,7 +54,7 @@ class PAPResponseSetTest extends PAPResponseTest
      * @dataProvider failedRequestProvider
      * @covers       Lunr\Vortex\PAP\PAPResponse::set_status
      */
-    public function testSetStatusForNonSuccessRequestStatus($code, $expected)
+    public function testSetStatusForNonSuccessRequestStatus($code, $expected): void
     {
         $this->set_reflection_property_value('http_code', $code);
         $this->set_reflection_property_value('result', 'something');
@@ -86,7 +86,7 @@ class PAPResponseSetTest extends PAPResponseTest
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::set_status
      */
-    public function testStatusForSuccessRequestStatusLogsOneError()
+    public function testStatusForSuccessRequestStatusLogsOneError(): void
     {
         $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response_error.xml');
 
@@ -121,7 +121,7 @@ class PAPResponseSetTest extends PAPResponseTest
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::set_status
      */
-    public function testSetStatusWithInvalidEndpointsLogsError()
+    public function testSetStatusWithInvalidEndpointsLogsError(): void
     {
         $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response_error_invalid_endpoint.xml');
 
@@ -156,7 +156,7 @@ class PAPResponseSetTest extends PAPResponseTest
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::set_status
      */
-    public function testSetStatusLogsTemporaryError()
+    public function testSetStatusLogsTemporaryError(): void
     {
         $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response_error_temporary.xml');
 
@@ -191,7 +191,7 @@ class PAPResponseSetTest extends PAPResponseTest
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::set_status
      */
-    public function testSetStatusLogsUnknownError()
+    public function testSetStatusLogsUnknownError(): void
     {
         $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response_error_unknown.xml');
 
@@ -226,7 +226,7 @@ class PAPResponseSetTest extends PAPResponseTest
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::parse_pap_response
      */
-    public function testParsePAPResponseWithOneFailure()
+    public function testParsePAPResponseWithOneFailure(): void
     {
         $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response_error.xml');
 

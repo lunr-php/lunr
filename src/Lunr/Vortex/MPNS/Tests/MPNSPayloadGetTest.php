@@ -26,7 +26,7 @@ class MPNSPayloadGetTest extends MPNSPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSPayload::get_priority
      */
-    public function testSetPioritySetsValidPriority()
+    public function testSetPioritySetsValidPriority(): void
     {
         $this->assertEquals(MPNSPriority::DEFAULT, $this->class->get_priority());
     }

@@ -24,7 +24,7 @@ class PAPResponseSuccessTest extends PAPResponseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUpSuccess();
     }
@@ -32,7 +32,7 @@ class PAPResponseSuccessTest extends PAPResponseTest
     /**
      * Test that the status is set as error.
      */
-    public function testStatusIsError()
+    public function testStatusIsError(): void
     {
         $this->assertSame(PushNotificationStatus::SUCCESS, $this->get_reflection_property_value('status'));
     }
@@ -40,7 +40,7 @@ class PAPResponseSuccessTest extends PAPResponseTest
     /**
      * Test that the endpoint is set correctly.
      */
-    public function testEndpointSetCorrectly()
+    public function testEndpointSetCorrectly(): void
     {
         $this->assertPropertySame('endpoint', '12345679');
     }
@@ -48,7 +48,7 @@ class PAPResponseSuccessTest extends PAPResponseTest
     /**
      * Test that the http code is set from the Response object.
      */
-    public function testHttpCodeIsSetCorrectly()
+    public function testHttpCodeIsSetCorrectly(): void
     {
         $this->assertSame(200, $this->get_reflection_property_value('http_code'));
     }
@@ -58,7 +58,7 @@ class PAPResponseSuccessTest extends PAPResponseTest
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::parse_pap_response
      */
-    public function testParsePAPResponseWithoutFailure()
+    public function testParsePAPResponseWithoutFailure(): void
     {
         $file = file_get_contents(TEST_STATICS . '/Vortex/pap/response.xml');
 
@@ -76,7 +76,7 @@ class PAPResponseSuccessTest extends PAPResponseTest
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::get_status
      */
-    public function testGetStatusReturnsStatusForCorrectEndpoint()
+    public function testGetStatusReturnsStatusForCorrectEndpoint(): void
     {
         $this->assertEquals($this->class->get_status('12345679'), PushNotificationStatus::SUCCESS);
     }
@@ -86,7 +86,7 @@ class PAPResponseSuccessTest extends PAPResponseTest
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::get_status
      */
-    public function testGetStatusReturnsUnknownStatusForIncorrectEndpoint()
+    public function testGetStatusReturnsUnknownStatusForIncorrectEndpoint(): void
     {
         $this->assertEquals($this->class->get_status('abcdefghi'), PushNotificationStatus::UNKNOWN);
     }

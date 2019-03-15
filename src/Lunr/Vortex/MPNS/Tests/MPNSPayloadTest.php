@@ -27,7 +27,7 @@ class MPNSPayloadTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class = $this->getMockBuilder('Lunr\Vortex\MPNS\MPNSPayload')
                             ->getMockForAbstractClass();
@@ -38,7 +38,7 @@ class MPNSPayloadTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -47,7 +47,7 @@ class MPNSPayloadTest extends LunrBaseTest
     /**
      * Test elements is initialized as an empty array.
      */
-    public function testElementsIsInitializedAsEmptyArray()
+    public function testElementsIsInitializedAsEmptyArray(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('elements'));
     }
@@ -61,7 +61,7 @@ class MPNSPayloadTest extends LunrBaseTest
      * @dataProvider stringProvider
      * @covers       Lunr\Vortex\MPNS\MPNSPayload::escape_string
      */
-    public function testEscapeString($string, $expected)
+    public function testEscapeString($string, $expected): void
     {
         $method = $this->get_accessible_reflection_method('escape_string');
 
@@ -73,7 +73,7 @@ class MPNSPayloadTest extends LunrBaseTest
      *
      * @return array $strings Array of strings
      */
-    public function stringProvider()
+    public function stringProvider(): array
     {
         $strings   = [];
         $strings[] = [ 'string', 'string' ];
@@ -92,7 +92,7 @@ class MPNSPayloadTest extends LunrBaseTest
      *
      * @return array $priorities Array of MPNS priorities.
      */
-    public function validPriorityProvider()
+    public function validPriorityProvider(): array
     {
         $priorities   = [];
         $priorities[] = [ MPNSPriority::DEFAULT ];

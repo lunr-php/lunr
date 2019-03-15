@@ -24,7 +24,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_notification
      */
-    public function testSetNotification()
+    public function testSetNotification(): void
     {
         $this->class->set_notification([ 'key' => 'value' ]);
 
@@ -39,7 +39,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_notification
      */
-    public function testSetNotificationReturnsSelfReference()
+    public function testSetNotificationReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_notification('data'));
     }
@@ -49,7 +49,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_priority
      */
-    public function testSetPriority()
+    public function testSetPriority(): void
     {
         $this->class->set_priority('normal');
 
@@ -64,7 +64,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_priority
      */
-    public function testSetPriorityInvalid()
+    public function testSetPriorityInvalid(): void
     {
         $this->class->set_priority('cow');
 
@@ -79,7 +79,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_priority
      */
-    public function testSetPriorityReturnsSelfReference()
+    public function testSetPriorityReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_priority('high'));
     }
@@ -89,7 +89,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_mutable_content
      */
-    public function testSetMutableContent()
+    public function testSetMutableContent(): void
     {
         $this->class->set_mutable_content(TRUE);
 
@@ -104,7 +104,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_mutable_content
      */
-    public function testSetMutableContentReturnsSelfReference()
+    public function testSetMutableContentReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_mutable_content(TRUE));
     }
@@ -114,7 +114,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_data
      */
-    public function testSetData()
+    public function testSetData(): void
     {
         $this->class->set_data([ 'key' => 'value' ]);
 
@@ -129,7 +129,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_data
      */
-    public function testSetDataReturnsSelfReference()
+    public function testSetDataReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_data('data'));
     }
@@ -139,7 +139,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_topic
      */
-    public function testSetTopic()
+    public function testSetTopic(): void
     {
         $this->class->set_topic('News');
 
@@ -154,7 +154,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_topic
      */
-    public function testSetTopicReturnsSelfReference()
+    public function testSetTopicReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_topic('data'));
     }
@@ -164,7 +164,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_condition
      */
-    public function testSetCondition()
+    public function testSetCondition(): void
     {
         $this->class->set_condition("'TopicA' in topics && 'TopicB' in topics");
 
@@ -179,7 +179,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_condition
      */
-    public function testSetConditionReturnsSelfReference()
+    public function testSetConditionReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_condition('data'));
     }
@@ -189,7 +189,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_content_available
      */
-    public function testSetContentAvailable()
+    public function testSetContentAvailable(): void
     {
         $this->class->set_content_available(TRUE);
 
@@ -204,7 +204,7 @@ class FCMPayloadSetTest extends FCMPayloadTest
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_content_available
      */
-    public function testSetContentAvailableReturnsSelfReference()
+    public function testSetContentAvailableReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_content_available(TRUE));
     }

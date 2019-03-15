@@ -26,7 +26,7 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
      *
      * @covers Lunr\Vortex\Email\EmailDispatcher::push
      */
-    public function testPushReturnsEmailResponseObject()
+    public function testPushReturnsEmailResponseObject(): void
     {
         $endpoints = [ 'recipient@domain.com' ];
 
@@ -66,7 +66,7 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
      *
      * @covers Lunr\Vortex\Email\EmailDispatcher::push
      */
-    public function testPushReturnsEmailResponseObjectOnError()
+    public function testPushReturnsEmailResponseObjectOnError(): void
     {
         $endpoints = [ 'recipient@domain.com' ];
 
@@ -106,7 +106,7 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
      *
      * @covers Lunr\Vortex\Email\EmailDispatcher::push
      */
-    public function testPushResetsProperties()
+    public function testPushResetsProperties(): void
     {
         $endpoints = [ 'recipient@domain.com' ];
 

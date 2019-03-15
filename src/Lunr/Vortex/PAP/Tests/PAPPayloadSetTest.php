@@ -24,7 +24,7 @@ class PAPPayloadSetTest extends PAPPayloadTest
      *
      * @covers Lunr\Vortex\PAP\PAPPayload::set_message_data
      */
-    public function testSetMessageData()
+    public function testSetMessageData(): void
     {
         $this->class->set_message_data('key', 'value');
 
@@ -39,7 +39,7 @@ class PAPPayloadSetTest extends PAPPayloadTest
      *
      * @covers Lunr\Vortex\PAP\PAPPayload::set_message_data
      */
-    public function testSetMessageDataReturnsSelfReference()
+    public function testSetMessageDataReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_message_data('key', 'value'));
     }
@@ -49,7 +49,7 @@ class PAPPayloadSetTest extends PAPPayloadTest
      *
      * @covers Lunr\Vortex\PAP\PAPPayload::set_priority
      */
-    public function testSetPrioritySetsPriority()
+    public function testSetPrioritySetsPriority(): void
     {
         $priority = 'priority';
         $this->class->set_priority($priority);
@@ -62,7 +62,7 @@ class PAPPayloadSetTest extends PAPPayloadTest
      *
      * @covers Lunr\Vortex\PAP\PAPPayload::set_priority
      */
-    public function testSetPriorityReturnsSelfReference()
+    public function testSetPriorityReturnsSelfReference(): void
     {
         $cid = 'cid';
         $this->assertEquals($this->class, $this->class->set_priority($cid));

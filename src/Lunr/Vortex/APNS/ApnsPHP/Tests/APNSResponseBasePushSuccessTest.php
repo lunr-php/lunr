@@ -30,7 +30,7 @@ class APNSResponseBasePushSuccessTest extends APNSResponseTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSResponse::__construct
      */
-    public function testPushSuccessWithSingleSuccess()
+    public function testPushSuccessWithSingleSuccess(): void
     {
         $endpoints         = [ 'endpoint1' ];
         $invalid_endpoints = [];
@@ -48,7 +48,7 @@ class APNSResponseBasePushSuccessTest extends APNSResponseTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSResponse::__construct
      */
-    public function testPushSuccessWithSingleError()
+    public function testPushSuccessWithSingleError(): void
     {
         $endpoints         = [ 'endpoint1' ];
         $invalid_endpoints = [];
@@ -91,7 +91,7 @@ class APNSResponseBasePushSuccessTest extends APNSResponseTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSResponse::__construct
      */
-    public function testPushSuccessWithMultipleSuccess()
+    public function testPushSuccessWithMultipleSuccess(): void
     {
         $endpoints         = [ 'endpoint1', 'endpoint2', 'endpoint3' ];
         $invalid_endpoints = [];
@@ -113,7 +113,7 @@ class APNSResponseBasePushSuccessTest extends APNSResponseTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSResponse::__construct
      */
-    public function testPushSuccessWithMultipleErrors()
+    public function testPushSuccessWithMultipleErrors(): void
     {
         $endpoints         = [ 'endpoint1', 'endpoint2', 'endpoint3', 'endpoint4' ];
         $invalid_endpoints = [];
@@ -214,7 +214,7 @@ class APNSResponseBasePushSuccessTest extends APNSResponseTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSResponse::__construct
      */
-    public function testPushSuccessWithMultipleMixedResultsAndInvalidEndpoints()
+    public function testPushSuccessWithMultipleMixedResultsAndInvalidEndpoints(): void
     {
         $endpoints         = [ 'endpoint1', 'endpoint2', 'endpoint3', 'endpoint4', 'endpoint5' ];
         $invalid_endpoints = [ 'endpoint2', 'endpoint3' ];

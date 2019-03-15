@@ -32,7 +32,7 @@ class APNSPayloadTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $elements_array = [
             'alert'       => 'apnsmessage',
@@ -57,7 +57,7 @@ class APNSPayloadTest extends LunrBaseTest
      *
      * @return array $values Array of non-object values
      */
-    public function payloadProvider()
+    public function payloadProvider(): array
     {
         $values   = [];
         $values[] = [ '/Vortex/apns/libcapn/alert.json', [ 'alert' => 'apnsmessage' ] ];
@@ -79,7 +79,7 @@ class APNSPayloadTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->payload);
         unset($this->class);

@@ -24,7 +24,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_title
      */
-    public function testSetTitle()
+    public function testSetTitle(): void
     {
         $this->class->set_title('&title');
 
@@ -39,7 +39,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_title
      */
-    public function testSetTitleReturnsSelfReference()
+    public function testSetTitleReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_title('title'));
     }
@@ -49,7 +49,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_background_image
      */
-    public function testSetBackgroundImage()
+    public function testSetBackgroundImage(): void
     {
         $this->class->set_background_image('&image');
 
@@ -64,7 +64,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_background_image
      */
-    public function testSetBackgroundImageReturnsSelfReference()
+    public function testSetBackgroundImageReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_background_image('image'));
     }
@@ -74,7 +74,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_count
      */
-    public function testSetCount()
+    public function testSetCount(): void
     {
         $this->class->set_count('&count');
 
@@ -89,7 +89,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_count
      */
-    public function testSetCountReturnsSelfReference()
+    public function testSetCountReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_count('count'));
     }
@@ -99,7 +99,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_back_background_image
      */
-    public function testSetBackBackgroundImage()
+    public function testSetBackBackgroundImage(): void
     {
         $this->class->set_back_background_image('&image');
 
@@ -114,7 +114,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_back_background_image
      */
-    public function testSetBackBackgroundImageReturnsSelfReference()
+    public function testSetBackBackgroundImageReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_back_background_image('image'));
     }
@@ -124,7 +124,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_back_title
      */
-    public function testSetBackTitle()
+    public function testSetBackTitle(): void
     {
         $this->class->set_back_title('&title');
 
@@ -139,7 +139,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_back_title
      */
-    public function testSetBackTitleReturnsSelfReference()
+    public function testSetBackTitleReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_back_title('title'));
     }
@@ -149,7 +149,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_back_content
      */
-    public function testSetBackContent()
+    public function testSetBackContent(): void
     {
         $this->class->set_back_content('&content');
 
@@ -164,7 +164,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_back_content
      */
-    public function testSetBackContentReturnsSelfReference()
+    public function testSetBackContentReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_back_content('content'));
     }
@@ -174,7 +174,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_id
      */
-    public function testSetId()
+    public function testSetId(): void
     {
         $this->class->set_id('&id');
 
@@ -189,7 +189,7 @@ class MPNSTilePayloadSetTest extends MPNSTilePayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSTilePayload::set_id
      */
-    public function testSetIdReturnsSelfReference()
+    public function testSetIdReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_id('id'));
     }

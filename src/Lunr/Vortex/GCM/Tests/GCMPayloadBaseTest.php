@@ -22,7 +22,7 @@ class GCMPayloadBaseTest extends GCMPayloadTest
     /**
      * Test elements is initialized as an empty array.
      */
-    public function testElementsIsInitializedAsEmptyArray()
+    public function testElementsIsInitializedAsEmptyArray(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('elements'));
     }

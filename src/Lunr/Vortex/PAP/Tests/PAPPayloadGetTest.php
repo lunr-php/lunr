@@ -24,7 +24,7 @@ class PAPPayloadGetTest extends PAPPayloadTest
      *
      * @covers Lunr\Vortex\PAP\PAPPayload::get_payload
      */
-    public function testGetPayload()
+    public function testGetPayload(): void
     {
         $file     = TEST_STATICS . '/Vortex/pap/message.json';
         $elements = [
@@ -42,7 +42,7 @@ class PAPPayloadGetTest extends PAPPayloadTest
      *
      * @covers Lunr\Vortex\PAP\PAPPayload::get_priority
      */
-    public function testGetPriority()
+    public function testGetPriority(): void
     {
         $this->set_reflection_property_value('priority', 9000);
 

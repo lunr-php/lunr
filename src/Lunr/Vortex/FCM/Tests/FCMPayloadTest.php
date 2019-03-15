@@ -32,7 +32,7 @@ class FCMPayloadTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $elements_array = [
             'registration_ids' => [ 'one', 'two', 'three' ],
@@ -55,7 +55,7 @@ class FCMPayloadTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->payload);
         unset($this->class);

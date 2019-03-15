@@ -24,7 +24,7 @@ class PAPResponseErrorTest extends PAPResponseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUpError();
     }
@@ -32,7 +32,7 @@ class PAPResponseErrorTest extends PAPResponseTest
     /**
      * Test that the status is set as error.
      */
-    public function testStatusIsError()
+    public function testStatusIsError(): void
     {
         $this->assertPropertySame('status', PushNotificationStatus::ERROR);
     }
@@ -40,7 +40,7 @@ class PAPResponseErrorTest extends PAPResponseTest
     /**
      * Test that the endpoint is set correctly.
      */
-    public function testEndpointSetCorrectly()
+    public function testEndpointSetCorrectly(): void
     {
         $this->assertPropertySame('endpoint', '12345679');
     }
@@ -48,7 +48,7 @@ class PAPResponseErrorTest extends PAPResponseTest
     /**
      * Test that the http code is set from the Response object.
      */
-    public function testHttpCodeIsSetCorrectly()
+    public function testHttpCodeIsSetCorrectly(): void
     {
         $this->assertPropertySame('http_code', FALSE);
     }
@@ -58,7 +58,7 @@ class PAPResponseErrorTest extends PAPResponseTest
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::get_status
      */
-    public function testGetStatusReturnsStatusForCorrectEndpoint()
+    public function testGetStatusReturnsStatusForCorrectEndpoint(): void
     {
         $this->assertEquals($this->class->get_status('12345679'), PushNotificationStatus::ERROR);
     }
@@ -68,7 +68,7 @@ class PAPResponseErrorTest extends PAPResponseTest
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::get_status
      */
-    public function testGetStatusReturnsUnknownStatusForIncorrectEndpoint()
+    public function testGetStatusReturnsUnknownStatusForIncorrectEndpoint(): void
     {
         $this->assertEquals($this->class->get_status('abcdefghi'), PushNotificationStatus::UNKNOWN);
     }

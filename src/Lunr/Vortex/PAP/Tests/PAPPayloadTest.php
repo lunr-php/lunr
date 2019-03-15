@@ -32,7 +32,7 @@ abstract class PAPPayloadTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $elements_array = [
             'message' => [
@@ -52,7 +52,7 @@ abstract class PAPPayloadTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->payload);
         unset($this->class);

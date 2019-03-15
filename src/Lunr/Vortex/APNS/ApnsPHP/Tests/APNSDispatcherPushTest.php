@@ -24,7 +24,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher::push
      */
-    public function testPushReturnsAPNSResponseObject()
+    public function testPushReturnsAPNSResponseObject(): void
     {
         $endpoints = [];
 
@@ -38,7 +38,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher::push
      */
-    public function testPushResetsProperties()
+    public function testPushResetsProperties(): void
     {
         $endpoints = [];
 
@@ -52,7 +52,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher::push
      */
-    public function testPushWithNonJSONPayloadProceedsWithoutError()
+    public function testPushWithNonJSONPayloadProceedsWithoutError(): void
     {
         $endpoints = [];
 
@@ -70,7 +70,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher::push
      */
-    public function testPushConstructsCorrectPayload()
+    public function testPushConstructsCorrectPayload(): void
     {
         $endpoints = [];
 
@@ -107,7 +107,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher::push
      */
-    public function testPushLogPayloadBuildingBadgeError()
+    public function testPushLogPayloadBuildingBadgeError(): void
     {
         $endpoints = [];
 
@@ -134,7 +134,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher::push
      */
-    public function testPushLogPayloadBuildingCustomPropertyError()
+    public function testPushLogPayloadBuildingCustomPropertyError(): void
     {
         $endpoints = [];
 
@@ -161,7 +161,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher::push
      */
-    public function testPushAddAllEndpointsToMessage()
+    public function testPushAddAllEndpointsToMessage(): void
     {
         $endpoints = [ 'endpoint1', 'endpoint2' ];
 
@@ -177,7 +177,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher::push
      */
-    public function testPushLogInvalidEndpoints()
+    public function testPushLogInvalidEndpoints(): void
     {
         $endpoints = [ 'endpoint1', 'endpoint2', 'endpoint3' ];
 
@@ -214,7 +214,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher::push
      */
-    public function testPushLogFailedConnection()
+    public function testPushLogFailedConnection(): void
     {
         $endpoints = [];
 
@@ -239,7 +239,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher::push
      */
-    public function testPushLogFailedSending()
+    public function testPushLogFailedSending(): void
     {
         $endpoints = [];
 
@@ -264,7 +264,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
      *
      * @covers Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher::push
      */
-    public function testPushSuccess()
+    public function testPushSuccess(): void
     {
         $endpoints = [];
 

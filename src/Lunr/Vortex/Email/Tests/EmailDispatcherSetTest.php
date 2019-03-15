@@ -24,7 +24,7 @@ class EmailDispatcherSetTest extends EmailDispatcherTest
      *
      * @covers Lunr\Vortex\Email\EmailDispatcher::set_source
      */
-    public function testSetSourceSetsSource()
+    public function testSetSourceSetsSource(): void
     {
         $source = 'source';
         $this->class->set_source($source);
@@ -37,7 +37,7 @@ class EmailDispatcherSetTest extends EmailDispatcherTest
      *
      * @covers Lunr\Vortex\Email\EmailDispatcher::set_source
      */
-    public function testSetSourceReturnsSelfReference()
+    public function testSetSourceReturnsSelfReference(): void
     {
         $source = 'source';
         $this->assertEquals($this->class, $this->class->set_source($source));

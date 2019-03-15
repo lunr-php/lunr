@@ -24,7 +24,7 @@ class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSToastPayload::get_payload
      */
-    public function testGetPayloadWithTitle()
+    public function testGetPayloadWithTitle(): void
     {
         $file     = TEST_STATICS . '/Vortex/mpns/toast_title.xml';
         $elements = [ 'title' => 'Title' ];
@@ -39,7 +39,7 @@ class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSToastPayload::get_payload
      */
-    public function testGetPayloadWithMessage()
+    public function testGetPayloadWithMessage(): void
     {
         $file     = TEST_STATICS . '/Vortex/mpns/toast_message.xml';
         $elements = [ 'message' => 'Message' ];
@@ -54,7 +54,7 @@ class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSToastPayload::get_payload
      */
-    public function testGetPayloadWithDeeplink()
+    public function testGetPayloadWithDeeplink(): void
     {
         $file     = TEST_STATICS . '/Vortex/mpns/toast_deeplink.xml';
         $elements = [ 'deeplink' => 'Deeplink' ];
@@ -69,7 +69,7 @@ class MPNSToastPayloadGetTest extends MPNSToastPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSToastPayload::get_payload
      */
-    public function testGetPayload()
+    public function testGetPayload(): void
     {
         $file     = TEST_STATICS . '/Vortex/mpns/toast.xml';
         $elements = [ 'title' => 'Title', 'message' => 'Message', 'deeplink' => 'Deeplink' ];

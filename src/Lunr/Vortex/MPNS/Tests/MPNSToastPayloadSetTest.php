@@ -28,7 +28,7 @@ class MPNSToastPayloadSetTest extends MPNSToastPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSToastPayload::set_title
      */
-    public function testSetTitle()
+    public function testSetTitle(): void
     {
         $this->class->set_title('&title');
 
@@ -43,7 +43,7 @@ class MPNSToastPayloadSetTest extends MPNSToastPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSToastPayload::set_title
      */
-    public function testSetTitleReturnsSelfReference()
+    public function testSetTitleReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_title('title'));
     }
@@ -53,7 +53,7 @@ class MPNSToastPayloadSetTest extends MPNSToastPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSToastPayload::set_message
      */
-    public function testSetMessage()
+    public function testSetMessage(): void
     {
         $this->class->set_message('&message');
 
@@ -68,7 +68,7 @@ class MPNSToastPayloadSetTest extends MPNSToastPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSToastPayload::set_message
      */
-    public function testSetMessageReturnsSelfReference()
+    public function testSetMessageReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_message('message'));
     }
@@ -78,7 +78,7 @@ class MPNSToastPayloadSetTest extends MPNSToastPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSToastPayload::set_deeplink
      */
-    public function testSetDeeplinkWithCorrectLink()
+    public function testSetDeeplinkWithCorrectLink(): void
     {
         $this->class->set_deeplink('/page&link');
 
@@ -93,7 +93,7 @@ class MPNSToastPayloadSetTest extends MPNSToastPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSToastPayload::set_deeplink
      */
-    public function testSetDeeplinkWithTooLongLink()
+    public function testSetDeeplinkWithTooLongLink(): void
     {
         $string = '<&';
 
@@ -120,7 +120,7 @@ class MPNSToastPayloadSetTest extends MPNSToastPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSToastPayload::set_deeplink
      */
-    public function testSetDeeplinkReturnsSelfReference()
+    public function testSetDeeplinkReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_deeplink('link'));
     }

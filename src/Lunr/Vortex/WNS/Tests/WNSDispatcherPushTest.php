@@ -27,7 +27,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::push
      */
-    public function testPushingWithoutOauthReturnsWNSResponse()
+    public function testPushingWithoutOauthReturnsWNSResponse(): void
     {
         $endpoints = [ 'endpoint' ];
 
@@ -49,7 +49,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::push
      */
-    public function testPushWithoutOauthResetsProperties()
+    public function testPushWithoutOauthResetsProperties(): void
     {
         $this->set_reflection_property_value('type', WNSType::TOAST);
 
@@ -75,7 +75,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::push
      */
-    public function testPushingTileSetsTargetHeader()
+    public function testPushingTileSetsTargetHeader(): void
     {
         $this->payload = $this->getMockBuilder('Lunr\Vortex\WNS\WNSTilePayload')
                               ->disableOriginalConstructor()
@@ -110,7 +110,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::push
      */
-    public function testPushingToastSetsTargetHeader()
+    public function testPushingToastSetsTargetHeader(): void
     {
         $this->payload = $this->getMockBuilder('Lunr\Vortex\WNS\WNSToastPayload')
                               ->disableOriginalConstructor()
@@ -145,7 +145,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::push
      */
-    public function testPushingRawDoesNotSetTargetHeader()
+    public function testPushingRawDoesNotSetTargetHeader(): void
     {
         $this->set_reflection_property_value('oauth_token', '123456');
 
@@ -176,7 +176,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::push
      */
-    public function testPushReturnsWNSResponseObjectOnRequestFailure()
+    public function testPushReturnsWNSResponseObjectOnRequestFailure(): void
     {
         $this->set_reflection_property_value('oauth_token', '123456');
 
@@ -214,7 +214,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::push
      */
-    public function testPushReturnsWNSResponseObject()
+    public function testPushReturnsWNSResponseObject(): void
     {
         $this->set_reflection_property_value('oauth_token', '123456');
 
@@ -245,7 +245,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::push
      */
-    public function testPushResetsPropertiesOnRequestFailure()
+    public function testPushResetsPropertiesOnRequestFailure(): void
     {
         $this->payload = $this->getMockBuilder('Lunr\Vortex\WNS\WNSToastPayload')
                               ->disableOriginalConstructor()
@@ -288,7 +288,7 @@ class WNSDispatcherPushTest extends WNSDispatcherTest
      *
      * @covers Lunr\Vortex\WNS\WNSDispatcher::push
      */
-    public function testPushResetsProperties()
+    public function testPushResetsProperties(): void
     {
         $this->payload = $this->getMockBuilder('Lunr\Vortex\WNS\WNSToastPayload')
                               ->disableOriginalConstructor()

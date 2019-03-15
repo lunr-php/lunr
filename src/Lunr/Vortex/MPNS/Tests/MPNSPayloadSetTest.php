@@ -27,7 +27,7 @@ class MPNSPayloadSetTest extends MPNSPayloadTest
      * @dataProvider validPriorityProvider
      * @covers Lunr\Vortex\MPNS\MPNSPayload::set_priority
      */
-    public function testSetPioritySetsValidPriority($priority)
+    public function testSetPioritySetsValidPriority($priority): void
     {
         $this->class->set_priority($priority);
 
@@ -39,7 +39,7 @@ class MPNSPayloadSetTest extends MPNSPayloadTest
      *
      * @covers Lunr\Vortex\MPNS\MPNSPayload::set_priority
      */
-    public function testSetPriorityDoesNotSetInvalidPriority()
+    public function testSetPriorityDoesNotSetInvalidPriority(): void
     {
         $this->class->set_priority(9000);
 

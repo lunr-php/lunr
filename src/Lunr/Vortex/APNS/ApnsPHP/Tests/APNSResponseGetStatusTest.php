@@ -29,7 +29,7 @@ class APNSResponseGetStatusTest extends APNSResponseTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -42,7 +42,7 @@ class APNSResponseGetStatusTest extends APNSResponseTest
      *
      * @return array $data array of endpoints statuses / status result
      */
-    public function endpointDataProvider()
+    public function endpointDataProvider(): array
     {
         $data = [];
 
@@ -93,7 +93,7 @@ class APNSResponseGetStatusTest extends APNSResponseTest
      * @dataProvider endpointDataProvider
      * @covers       Lunr\Vortex\APNS\ApnsPHP\APNSResponse::get_status
      */
-    public function testGetStatus($statuses, $status)
+    public function testGetStatus($statuses, $status): void
     {
         $this->set_reflection_property_value('statuses', $statuses);
 

@@ -24,7 +24,7 @@ class GCMPayloadSetTest extends GCMPayloadTest
      *
      * @covers Lunr\Vortex\GCM\GCMPayload::set_collapse_key
      */
-    public function testSetCollapseKey()
+    public function testSetCollapseKey(): void
     {
         $this->class->set_collapse_key('test');
 
@@ -39,7 +39,7 @@ class GCMPayloadSetTest extends GCMPayloadTest
      *
      * @covers Lunr\Vortex\GCM\GCMPayload::set_collapse_key
      */
-    public function testSetCollapseKeyReturnsSelfReference()
+    public function testSetCollapseKeyReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_collapse_key('collapse_key'));
     }
@@ -49,7 +49,7 @@ class GCMPayloadSetTest extends GCMPayloadTest
      *
      * @covers Lunr\Vortex\GCM\GCMPayload::set_data
      */
-    public function testSetData()
+    public function testSetData(): void
     {
         $this->class->set_data([ 'key' => 'value' ]);
 
@@ -64,7 +64,7 @@ class GCMPayloadSetTest extends GCMPayloadTest
      *
      * @covers Lunr\Vortex\GCM\GCMPayload::set_data
      */
-    public function testSetDataReturnsSelfReference()
+    public function testSetDataReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_data('data'));
     }
@@ -74,7 +74,7 @@ class GCMPayloadSetTest extends GCMPayloadTest
      *
      * @covers Lunr\Vortex\GCM\GCMPayload::set_time_to_live
      */
-    public function testSetTimeToLive()
+    public function testSetTimeToLive(): void
     {
         $this->class->set_time_to_live(5);
 
@@ -89,7 +89,7 @@ class GCMPayloadSetTest extends GCMPayloadTest
      *
      * @covers Lunr\Vortex\GCM\GCMPayload::set_time_to_live
      */
-    public function testSetTimeToLiveReturnsSelfReference()
+    public function testSetTimeToLiveReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_time_to_live('time_to_live'));
     }

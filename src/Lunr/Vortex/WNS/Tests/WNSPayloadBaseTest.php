@@ -26,7 +26,7 @@ class WNSPayloadBaseTest extends WNSPayloadTest
     /**
      * Test elements is initialized as an empty array.
      */
-    public function testElementsIsInitializedAsEmptyArray()
+    public function testElementsIsInitializedAsEmptyArray(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('elements'));
     }
@@ -40,7 +40,7 @@ class WNSPayloadBaseTest extends WNSPayloadTest
      * @dataProvider stringProvider
      * @covers       Lunr\Vortex\WNS\WNSPayload::escape_string
      */
-    public function testEscapeString($string, $expected)
+    public function testEscapeString($string, $expected): void
     {
         $method = $this->get_accessible_reflection_method('escape_string');
 

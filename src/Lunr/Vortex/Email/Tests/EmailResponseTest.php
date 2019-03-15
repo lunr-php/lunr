@@ -46,7 +46,7 @@ abstract class EmailResponseTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
@@ -94,7 +94,7 @@ abstract class EmailResponseTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUpSuccess()
+    public function setUpSuccess(): void
     {
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
@@ -118,7 +118,7 @@ abstract class EmailResponseTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->logger);
         unset($this->class);

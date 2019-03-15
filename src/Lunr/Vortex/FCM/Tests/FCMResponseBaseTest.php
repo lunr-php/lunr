@@ -22,7 +22,7 @@ class FCMResponseBaseTest extends FCMResponseTest
     /**
      * Test statuses is initialized as an empty array.
      */
-    public function testStatusesIsInitializedAsEmptyArray()
+    public function testStatusesIsInitializedAsEmptyArray(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('statuses'));
     }

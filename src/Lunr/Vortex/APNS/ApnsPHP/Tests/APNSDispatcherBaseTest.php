@@ -26,7 +26,7 @@ class APNSDispatcherBaseTest extends APNSDispatcherTest
     /**
      * Test that the APNS message property is set to NULL.
      */
-    public function testAPNSMessageIsNull()
+    public function testAPNSMessageIsNull(): void
     {
         $this->assertPropertyUnset('apns_message');
     }

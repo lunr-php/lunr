@@ -26,7 +26,7 @@ class GCMResponseGetStatusTest extends GCMResponseTest
      *
      * @return array $data array of endpoints statuses / status result
      */
-    public function endpointDataProvider()
+    public function endpointDataProvider(): array
     {
         $data = [];
 
@@ -77,7 +77,7 @@ class GCMResponseGetStatusTest extends GCMResponseTest
      * @dataProvider endpointDataProvider
      * @covers       Lunr\Vortex\GCM\GCMResponse::get_status
      */
-    public function testGetStatus($statuses, $status)
+    public function testGetStatus($statuses, $status): void
     {
         $this->set_reflection_property_value('statuses', $statuses);
 

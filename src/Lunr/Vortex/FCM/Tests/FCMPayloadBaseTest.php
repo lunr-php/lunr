@@ -22,7 +22,7 @@ class FCMPayloadBaseTest extends FCMPayloadTest
     /**
      * Test elements is initialized with high priority.
      */
-    public function testElementsIsInitializedWithHighPriority()
+    public function testElementsIsInitializedWithHighPriority(): void
     {
         $this->assertSame($this->get_reflection_property_value('elements'), ['priority' => 'high']);
     }

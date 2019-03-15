@@ -24,7 +24,7 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::set_text
      */
-    public function testSetText()
+    public function testSetText(): void
     {
         $this->class->set_text('&text');
 
@@ -39,7 +39,7 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::set_text
      */
-    public function testSetTextLN()
+    public function testSetTextLN(): void
     {
         $this->class->set_text('&text', 1);
 
@@ -54,7 +54,7 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::set_text
      */
-    public function testSetTextArray()
+    public function testSetTextArray(): void
     {
         $this->class->set_text([ 'Hello', 'Text', 'Test' ]);
 
@@ -69,7 +69,7 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::set_text
      */
-    public function testSetTextReturnsSelfReference()
+    public function testSetTextReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_text('text'));
     }
@@ -79,7 +79,7 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::set_image
      */
-    public function testSetImage()
+    public function testSetImage(): void
     {
         $this->class->set_image('&image');
 
@@ -94,7 +94,7 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::set_image
      */
-    public function testSetImageLN()
+    public function testSetImageLN(): void
     {
         $this->class->set_image('&image', 1);
 
@@ -109,7 +109,7 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::set_image
      */
-    public function testSetImageArray()
+    public function testSetImageArray(): void
     {
         $this->class->set_image([ 'Hello', 'Image', 'Test' ]);
 
@@ -124,7 +124,7 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::set_image
      */
-    public function testSetImageReturnsSelfReference()
+    public function testSetImageReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_image('image'));
     }
@@ -134,7 +134,7 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::set_templates
      */
-    public function testSetTemplates()
+    public function testSetTemplates(): void
     {
         $this->class->set_templates([ 'HelloSQ', 'HelloW' ]);
 
@@ -149,7 +149,7 @@ class WNSTilePayloadSetTest extends WNSTilePayloadTest
      *
      * @covers Lunr\Vortex\WNS\WNSTilePayload::set_templates
      */
-    public function testSetTemplatesReturnsSelfReference()
+    public function testSetTemplatesReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_templates('template', 'template'));
     }

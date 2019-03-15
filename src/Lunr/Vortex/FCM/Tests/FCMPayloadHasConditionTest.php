@@ -24,7 +24,7 @@ class FCMPayloadHasConditionTest extends FCMPayloadTest
      *
      * @covers Lunr\Vortex\FCM\FCMPayload::has_condition
      */
-    public function testWhenNoConditionIsSet()
+    public function testWhenNoConditionIsSet(): void
     {
         $this->assertFalse($this->class->has_condition());
     }
@@ -34,7 +34,7 @@ class FCMPayloadHasConditionTest extends FCMPayloadTest
      *
      * @covers Lunr\Vortex\FCM\FCMPayload::has_condition
      */
-    public function testWhenConditionIsSetCorrectly()
+    public function testWhenConditionIsSetCorrectly(): void
     {
         $this->class->set_condition("'TopicA' in topics && 'TopicB' in topics");
 
