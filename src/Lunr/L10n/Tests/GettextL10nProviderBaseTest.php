@@ -27,7 +27,7 @@ class GettextL10nProviderBaseTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::init
      */
-    public function testInit()
+    public function testInit(): void
     {
         $current = textdomain(NULL);
         $locale  = setlocale(LC_MESSAGES, 0);

@@ -44,7 +44,7 @@ abstract class L10nTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->fao    = $this->getMockBuilder('Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface')->getMock();
@@ -59,7 +59,7 @@ abstract class L10nTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->logger);
         unset($this->fao);
@@ -73,7 +73,7 @@ abstract class L10nTest extends LunrBaseTest
      *
      * @return array $languages Array of supported languages
      */
-    public function supportedLanguagesProvider()
+    public function supportedLanguagesProvider(): array
     {
         $languages   = [];
         $languages[] = [ 'en', 'en_US' ];
@@ -87,7 +87,7 @@ abstract class L10nTest extends LunrBaseTest
      *
      * @return array $languages Array of unsupported languages
      */
-    public function unsupportedLanguagesProvider()
+    public function unsupportedLanguagesProvider(): array
     {
         $languages   = [];
         $languages[] = [ 'fr', 'fr_FR' ];

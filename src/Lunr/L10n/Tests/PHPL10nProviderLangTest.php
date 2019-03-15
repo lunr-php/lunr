@@ -27,7 +27,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::lang
      */
-    public function testLangWithoutContext()
+    public function testLangWithoutContext(): void
     {
         $this->assertEquals('Tisch', $this->class->lang('table'));
     }
@@ -37,7 +37,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      *
      * @covers Lunr\L10n\PHPL10nProvider::lang
      */
-    public function testLangUntranslatedWithoutContextReturnsIdentifier()
+    public function testLangUntranslatedWithoutContextReturnsIdentifier(): void
     {
         $this->assertEquals('chair', $this->class->lang('chair'));
     }
@@ -48,7 +48,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::lang
      */
-    public function testLangWithContext()
+    public function testLangWithContext(): void
     {
         $this->assertEquals('Bank', $this->class->lang('bank', 'finance'));
     }
@@ -58,7 +58,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      *
      * @covers Lunr\L10n\PHPL10nProvider::lang
      */
-    public function testLangUntranslatedWithContextReturnsIdentifier()
+    public function testLangUntranslatedWithContextReturnsIdentifier(): void
     {
         $this->assertEquals('chair', $this->class->lang('chair', 'kitchen'));
     }
@@ -69,7 +69,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::lang
      */
-    public function testLangWithSuperfluousContextReturnsIdentifier()
+    public function testLangWithSuperfluousContextReturnsIdentifier(): void
     {
         $this->assertEquals('table', $this->class->lang('table', 'kitchen'));
     }
@@ -80,7 +80,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::lang
      */
-    public function testLangWithContextMissingReturnsIdentifier()
+    public function testLangWithContextMissingReturnsIdentifier(): void
     {
         $this->assertEquals('bank', $this->class->lang('bank'));
     }
@@ -91,7 +91,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::lang
      */
-    public function testLangAccessingPluralWithSingularTranslatesSingular()
+    public function testLangAccessingPluralWithSingularTranslatesSingular(): void
     {
         $this->assertEquals('%d Mann', $this->class->lang('%d man'));
     }
@@ -102,7 +102,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::lang
      */
-    public function testLangAccessingPluralWithPluralReturnsIdentifier()
+    public function testLangAccessingPluralWithPluralReturnsIdentifier(): void
     {
         $this->assertEquals('%d men', $this->class->lang('%d men'));
     }
@@ -113,7 +113,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::lang
      */
-    public function testLangAccessingPluralWithSingularAndContextTranslatesSingular()
+    public function testLangAccessingPluralWithSingularAndContextTranslatesSingular(): void
     {
         $this->assertEquals('%d Ei', $this->class->lang('%d egg', 'food'));
     }
@@ -124,7 +124,7 @@ class PHPL10nProviderLangTest extends PHPL10nProviderTest
      * @depends Lunr\L10n\Tests\PHPL10nProviderBaseTest::testInitForNonDefaultLanguageSetsLangArray
      * @covers  Lunr\L10n\PHPL10nProvider::lang
      */
-    public function testLangAccessingPluralWithPluralAndContextReturnsIdentifier()
+    public function testLangAccessingPluralWithPluralAndContextReturnsIdentifier(): void
     {
         $this->assertEquals('%d eggs', $this->class->lang('%d eggs', 'food'));
     }

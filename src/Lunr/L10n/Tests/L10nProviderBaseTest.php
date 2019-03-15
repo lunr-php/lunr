@@ -26,7 +26,7 @@ class L10nProviderBaseTest extends L10nProviderTest
     /**
      * Test that the language is correctly stored in the object.
      */
-    public function testLanguageIsSetCorrectly()
+    public function testLanguageIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('language', self::LANGUAGE);
     }
@@ -34,7 +34,7 @@ class L10nProviderBaseTest extends L10nProviderTest
     /**
      * Test that the domain is correctly stored in the object.
      */
-    public function testDomainIsSetCorrectly()
+    public function testDomainIsSetCorrectly(): void
     {
         $this->assertPropertyEquals('domain', self::DOMAIN);
     }
@@ -42,7 +42,7 @@ class L10nProviderBaseTest extends L10nProviderTest
     /**
      * Test that the language is correctly stored in the object.
      */
-    public function testDefaultLanguageSetCorrectly()
+    public function testDefaultLanguageSetCorrectly(): void
     {
         $this->assertPropertyEquals('default_language', 'en_US');
     }
@@ -50,7 +50,7 @@ class L10nProviderBaseTest extends L10nProviderTest
     /**
      * Test that the language is correctly stored in the object.
      */
-    public function testLocaleLocationSetCorrectly()
+    public function testLocaleLocationSetCorrectly(): void
     {
         // /usr/bin/l10n by default
         $default_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
@@ -63,7 +63,7 @@ class L10nProviderBaseTest extends L10nProviderTest
      *
      * @covers Lunr\L10n\L10nProvider::get_language
      */
-    public function testGetLanguageReturnsLanguage()
+    public function testGetLanguageReturnsLanguage(): void
     {
         $this->assertEquals(self::LANGUAGE, $this->class->get_language());
     }

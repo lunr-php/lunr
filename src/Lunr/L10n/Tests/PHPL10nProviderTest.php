@@ -49,7 +49,7 @@ abstract class PHPL10nProviderTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
@@ -62,7 +62,7 @@ abstract class PHPL10nProviderTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);

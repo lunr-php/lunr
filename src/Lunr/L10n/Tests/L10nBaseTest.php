@@ -26,7 +26,7 @@ class L10nBaseTest extends L10nTest
     /**
      * Test that $languages is initially empty.
      */
-    public function testLanguagesEmpty()
+    public function testLanguagesEmpty(): void
     {
         $properties = $this->reflection->getStaticProperties();
         $languages  = $properties['languages'];
@@ -37,7 +37,7 @@ class L10nBaseTest extends L10nTest
     /**
      * Test that the FilesystemAccessObject class is passed correctly.
      */
-    public function testFAOIsPassedCorrectly()
+    public function testFAOIsPassedCorrectly(): void
     {
         $this->assertPropertySame('fao', $this->fao);
     }
@@ -45,7 +45,7 @@ class L10nBaseTest extends L10nTest
     /**
      * Test that the language is correctly stored in the object.
      */
-    public function testDefaultLanguageSetCorrectly()
+    public function testDefaultLanguageSetCorrectly(): void
     {
         $this->assertPropertyEquals('default_language', 'en_US');
     }
@@ -53,7 +53,7 @@ class L10nBaseTest extends L10nTest
     /**
      * Test that the language is correctly stored in the object.
      */
-    public function testLocaleLocationSetCorrectly()
+    public function testLocaleLocationSetCorrectly(): void
     {
         // /usr/bin/l10n by default
         $default_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
@@ -67,7 +67,7 @@ class L10nBaseTest extends L10nTest
      * @depends testLanguagesEmpty
      * @covers  Lunr\L10n\L10n::get_supported_languages
      */
-    public function testInitialGetSupportedLanguages()
+    public function testInitialGetSupportedLanguages(): void
     {
         $this->fao->expects($this->once())
                   ->method('get_list_of_directories')
@@ -84,7 +84,7 @@ class L10nBaseTest extends L10nTest
      *
      * @depends testInitialGetSupportedLanguages
      */
-    public function testLanguagesPopulated()
+    public function testLanguagesPopulated(): void
     {
         $properties = $this->reflection->getStaticProperties();
         $languages  = $properties['languages'];
@@ -98,7 +98,7 @@ class L10nBaseTest extends L10nTest
      * @depends testLanguagesPopulated
      * @covers  Lunr\L10n\L10n::get_supported_languages
      */
-    public function testCachedGetSupportedLanguages()
+    public function testCachedGetSupportedLanguages(): void
     {
         $this->fao->expects($this->never())
                   ->method('get_list_of_directories');
@@ -119,7 +119,7 @@ class L10nBaseTest extends L10nTest
      * @requires     extension intl
      * @covers       Lunr\L10n\L10n::iso_to_posix
      */
-    public function testIsoToPosixForSupportedLanguages($iso, $posix)
+    public function testIsoToPosixForSupportedLanguages($iso, $posix): void
     {
         $this->assertEquals($posix, $this->class->iso_to_posix($iso));
     }
@@ -134,7 +134,7 @@ class L10nBaseTest extends L10nTest
      * @requires     extension intl
      * @covers       Lunr\L10n\L10n::iso_to_posix
      */
-    public function testIsoToPosixForUnsupportedLanguages($iso)
+    public function testIsoToPosixForUnsupportedLanguages($iso): void
     {
         $this->assertEquals('en_US', $this->class->iso_to_posix($iso));
     }

@@ -29,7 +29,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangSingularWithoutContext()
+    public function testNlangSingularWithoutContext(): void
     {
         $this->assertEquals('%d Mann', $this->class->nlang('%d man', '%d men', 1));
     }
@@ -42,7 +42,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangPluralWithoutContext()
+    public function testNlangPluralWithoutContext(): void
     {
         $this->assertEquals('%d Männer', $this->class->nlang('%d man', '%d men', 2));
     }
@@ -54,7 +54,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangSingularUntranslatedWithoutContextReturnsSingular()
+    public function testNlangSingularUntranslatedWithoutContextReturnsSingular(): void
     {
         $this->assertEquals('chair', $this->class->nlang('chair', 'chairs', 1));
     }
@@ -66,7 +66,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangPluralUntranslatedWithoutContextReturnsPlural()
+    public function testNlangPluralUntranslatedWithoutContextReturnsPlural(): void
     {
         $this->assertEquals('chairs', $this->class->nlang('chair', 'chairs', 2));
     }
@@ -79,7 +79,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangSingularWithContext()
+    public function testNlangSingularWithContext(): void
     {
         $this->assertEquals('%d Ei', $this->class->nlang('%d egg', '%d eggs', 1, 'food'));
     }
@@ -92,7 +92,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangPluralWithContext()
+    public function testNlangPluralWithContext(): void
     {
         $this->assertEquals('%d Eier', $this->class->nlang('%d egg', '%d eggs', 2, 'food'));
     }
@@ -104,7 +104,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangUntranslatedSingularWithContextReturnsSingular()
+    public function testNlangUntranslatedSingularWithContextReturnsSingular(): void
     {
         $this->assertEquals('%d chair', $this->class->nlang('%d chair', '%d chairs', 1, 'kitchen'));
     }
@@ -116,7 +116,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangUntranslatedPluralWithContextReturnsPlural()
+    public function testNlangUntranslatedPluralWithContextReturnsPlural(): void
     {
         $this->assertEquals('%d chairs', $this->class->nlang('%d chair', '%d chairs', 2, 'kitchen'));
     }
@@ -128,7 +128,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangSingularWithSuperfluousContextReturnsSingular()
+    public function testNlangSingularWithSuperfluousContextReturnsSingular(): void
     {
         $this->assertEquals('%d man', $this->class->nlang('%d man', '%d men', 1, 'people'));
     }
@@ -140,7 +140,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangPluralWithSuperfluousContextReturnsPlural()
+    public function testNlangPluralWithSuperfluousContextReturnsPlural(): void
     {
         $this->assertEquals('%d men', $this->class->nlang('%d man', '%d men', 2, 'people'));
     }
@@ -152,7 +152,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangSingularWithContextMissingReturnsSingular()
+    public function testNlangSingularWithContextMissingReturnsSingular(): void
     {
         $this->assertEquals('%d egg', $this->class->nlang('%d egg', '%d eggs', 1));
     }
@@ -164,7 +164,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangPluralWithContextMissingReturnsPlural()
+    public function testNlangPluralWithContextMissingReturnsPlural(): void
     {
         $this->assertEquals('%d eggs', $this->class->nlang('%d egg', '%d eggs', 2));
     }
@@ -177,7 +177,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangSingularWithoutContextAndFakePluralTranslatesSingular()
+    public function testNlangSingularWithoutContextAndFakePluralTranslatesSingular(): void
     {
         $this->assertEquals('Tisch', $this->class->nlang('table', 'tables', 1));
     }
@@ -190,7 +190,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangPluralWithoutContextAndFakePluralTranslatesSingular()
+    public function testNlangPluralWithoutContextAndFakePluralTranslatesSingular(): void
     {
         $this->assertEquals('Tisch', $this->class->nlang('table', 'tables', 2));
     }
@@ -202,7 +202,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangPluralWithContextMissingAndFakePluralReturnsPlural()
+    public function testNlangPluralWithContextMissingAndFakePluralReturnsPlural(): void
     {
         $this->assertEquals('banks', $this->class->nlang('bank', 'banks', 2));
     }
@@ -215,7 +215,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangSingularWithContextAndFakePluralTranslatesSingular()
+    public function testNlangSingularWithContextAndFakePluralTranslatesSingular(): void
     {
         $this->assertEquals('Bank', $this->class->nlang('bank', 'banks', 1, 'finance'));
     }
@@ -228,7 +228,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangPluralWithContextAndFakePluralTranslatesSingular()
+    public function testNlangPluralWithContextAndFakePluralTranslatesSingular(): void
     {
         $this->assertEquals('Bank', $this->class->nlang('bank', 'banks', 2, 'finance'));
     }
@@ -238,7 +238,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @covers Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangWithoutContextAndTooLongIdentifierReturnsIdentifier()
+    public function testNlangWithoutContextAndTooLongIdentifierReturnsIdentifier(): void
     {
         $identifier = '';
         for ($i = 0; $i < 4102; $i++)
@@ -257,7 +257,7 @@ class GettextL10nProviderNlangTest extends GettextL10nProviderTest
      *
      * @covers Lunr\L10n\GettextL10nProvider::nlang
      */
-    public function testNlangWithContextAndTooLongIdentifierReturnsIdentifier()
+    public function testNlangWithContextAndTooLongIdentifierReturnsIdentifier(): void
     {
         $identifier = '';
         for ($i = 0; $i < 4096; $i++)

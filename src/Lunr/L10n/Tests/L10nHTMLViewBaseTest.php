@@ -24,7 +24,7 @@ class L10nHTMLViewBaseTest extends L10nHTMLViewTest
     /**
      * Test that the request class is set correctly.
      */
-    public function testRequestSetCorrectly()
+    public function testRequestSetCorrectly(): void
     {
         $this->assertPropertySame('request', $this->request);
     }
@@ -32,7 +32,7 @@ class L10nHTMLViewBaseTest extends L10nHTMLViewTest
     /**
      * Test that the response class is set correctly.
      */
-    public function testResponseSetCorrectly()
+    public function testResponseSetCorrectly(): void
     {
         $this->assertPropertySame('response', $this->response);
     }
@@ -40,7 +40,7 @@ class L10nHTMLViewBaseTest extends L10nHTMLViewTest
     /**
      * Test that the configuration class is set correctly.
      */
-    public function testConfigurationSetCorrectly()
+    public function testConfigurationSetCorrectly(): void
     {
         $this->assertPropertySame('configuration', $this->configuration);
     }

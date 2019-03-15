@@ -24,7 +24,7 @@ class L10nTraitBaseTest extends L10nTraitTest
      *
      * @covers Lunr\L10n\L10nTrait::set_default_language
      */
-    public function testSetValidDefaultLanguage()
+    public function testSetValidDefaultLanguage(): void
     {
         $this->class->set_default_language(self::LANGUAGE);
 
@@ -36,7 +36,7 @@ class L10nTraitBaseTest extends L10nTraitTest
      *
      * @covers Lunr\L10n\L10nTrait::set_default_language
      */
-    public function testSetInvalidDefaultLanguage()
+    public function testSetInvalidDefaultLanguage(): void
     {
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -52,7 +52,7 @@ class L10nTraitBaseTest extends L10nTraitTest
      *
      * @covers Lunr\L10n\L10nTrait::set_default_language
      */
-    public function testSetValidDefaultLanguageDoesNotAlterCurrentLocale()
+    public function testSetValidDefaultLanguageDoesNotAlterCurrentLocale(): void
     {
         $current = setlocale(LC_MESSAGES, 0);
 
@@ -66,7 +66,7 @@ class L10nTraitBaseTest extends L10nTraitTest
      *
      * @covers Lunr\L10n\L10nTrait::set_default_language
      */
-    public function testSetInvalidDefaultLanguageDoesNotAlterCurrentLocale()
+    public function testSetInvalidDefaultLanguageDoesNotAlterCurrentLocale(): void
     {
         $current = setlocale(LC_MESSAGES, 0);
 
@@ -84,7 +84,7 @@ class L10nTraitBaseTest extends L10nTraitTest
      *
      * @covers Lunr\L10n\L10nTrait::set_locales_location
      */
-    public function testSetValidLocalesLocation()
+    public function testSetValidLocalesLocation(): void
     {
         $location = TEST_STATICS . '/l10n';
 
@@ -98,7 +98,7 @@ class L10nTraitBaseTest extends L10nTraitTest
      *
      * @covers Lunr\L10n\L10nTrait::set_locales_location
      */
-    public function testSetInvalidLocalesLocation()
+    public function testSetInvalidLocalesLocation(): void
     {
         $location = TEST_STATICS . '/../l10n';
 

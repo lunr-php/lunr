@@ -38,7 +38,7 @@ class L10nTraitTest extends LunrBaseTest
     /**
      * Test case constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = $this->getObjectForTrait('Lunr\L10n\L10nTrait');
         $this->reflection = new ReflectionClass($this->class);
@@ -50,7 +50,7 @@ class L10nTraitTest extends LunrBaseTest
     /**
      * Test case destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);

@@ -29,7 +29,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::lang
      */
-    public function testLangWithoutContext()
+    public function testLangWithoutContext(): void
     {
         $this->assertEquals('Tisch', $this->class->lang('table'));
     }
@@ -41,7 +41,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::lang
      */
-    public function testLangUntranslatedWithoutContextReturnsIdentifier()
+    public function testLangUntranslatedWithoutContextReturnsIdentifier(): void
     {
         $this->assertEquals('chair', $this->class->lang('chair'));
     }
@@ -54,7 +54,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::lang
      */
-    public function testLangWithContext()
+    public function testLangWithContext(): void
     {
         $this->assertEquals('Bank', $this->class->lang('bank', 'finance'));
     }
@@ -66,7 +66,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::lang
      */
-    public function testLangUntranslatedWithContextReturnsIdentifier()
+    public function testLangUntranslatedWithContextReturnsIdentifier(): void
     {
         $this->assertEquals('chair', $this->class->lang('chair', 'kitchen'));
     }
@@ -78,7 +78,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::lang
      */
-    public function testLangWithSuperfluousContextReturnsIdentifier()
+    public function testLangWithSuperfluousContextReturnsIdentifier(): void
     {
         $this->assertEquals('table', $this->class->lang('table', 'kitchen'));
     }
@@ -90,7 +90,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::lang
      */
-    public function testLangWithContextMissingReturnsIdentifier()
+    public function testLangWithContextMissingReturnsIdentifier(): void
     {
         $this->assertEquals('bank', $this->class->lang('bank'));
     }
@@ -103,7 +103,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::lang
      */
-    public function testLangAccessingPluralWithSingularTranslatesSingular()
+    public function testLangAccessingPluralWithSingularTranslatesSingular(): void
     {
         $this->assertEquals('%d Mann', $this->class->lang('%d man'));
     }
@@ -115,7 +115,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::lang
      */
-    public function testLangAccessingPluralWithPluralReturnsIdentifier()
+    public function testLangAccessingPluralWithPluralReturnsIdentifier(): void
     {
         $this->assertEquals('%d men', $this->class->lang('%d men'));
     }
@@ -128,7 +128,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::lang
      */
-    public function testLangAccessingPluralWithSingularAndContextTranslatesSingular()
+    public function testLangAccessingPluralWithSingularAndContextTranslatesSingular(): void
     {
         $this->assertEquals('%d Ei', $this->class->lang('%d egg', 'food'));
     }
@@ -140,7 +140,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      * @requires extension gettext
      * @covers   Lunr\L10n\GettextL10nProvider::lang
      */
-    public function testLangAccessingPluralWithPluralAndContextReturnsIdentifier()
+    public function testLangAccessingPluralWithPluralAndContextReturnsIdentifier(): void
     {
         $this->assertEquals('%d eggs', $this->class->lang('%d eggs', 'food'));
     }
@@ -150,7 +150,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      *
      * @covers Lunr\L10n\GettextL10nProvider::lang
      */
-    public function testLangWithoutContextAndTooLongIdentifierReturnsIdentifier()
+    public function testLangWithoutContextAndTooLongIdentifierReturnsIdentifier(): void
     {
         $identifier = '';
         for ($i = 0; $i < 4102; $i++)
@@ -169,7 +169,7 @@ class GettextL10nProviderLangTest extends GettextL10nProviderTest
      *
      * @covers Lunr\L10n\GettextL10nProvider::lang
      */
-    public function testLangWithContextAndTooLongIdentifierReturnsIdentifier()
+    public function testLangWithContextAndTooLongIdentifierReturnsIdentifier(): void
     {
         $identifier = '';
         for ($i = 0; $i < 4096; $i++)

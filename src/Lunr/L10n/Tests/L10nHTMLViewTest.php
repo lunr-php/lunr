@@ -52,7 +52,7 @@ abstract class L10nHTMLViewTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -74,7 +74,7 @@ abstract class L10nHTMLViewTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->configuration);
         unset($this->request);
