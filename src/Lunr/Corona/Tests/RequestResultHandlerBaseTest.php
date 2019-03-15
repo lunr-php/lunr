@@ -26,7 +26,7 @@ class RequestResultHandlerBaseTest extends RequestResultHandlerTest
     /**
      * Test that the Request class was passed correctly.
      */
-    public function testRequestPassedCorrectly()
+    public function testRequestPassedCorrectly(): void
     {
         $this->assertPropertySame('request', $this->request);
     }
@@ -34,7 +34,7 @@ class RequestResultHandlerBaseTest extends RequestResultHandlerTest
     /**
      * Test that the Response class was passed correctly.
      */
-    public function testResponsePassedCorrectly()
+    public function testResponsePassedCorrectly(): void
     {
         $this->assertPropertySame('response', $this->response);
     }
@@ -44,7 +44,7 @@ class RequestResultHandlerBaseTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::__call
      */
-    public function testCallIsVoid()
+    public function testCallIsVoid(): void
     {
         $this->assertNull($this->class->log_http_100());
     }

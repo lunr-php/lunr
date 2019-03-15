@@ -28,7 +28,7 @@ class WebRequestParserParsePostTest extends WebRequestParserTest
      * @dataProvider invalidSuperglobalValueProvider
      * @covers       Lunr\Corona\WebRequestParser::parse_post
      */
-    public function testParseInvalidPostValuesReturnsEmptyArray($post)
+    public function testParseInvalidPostValuesReturnsEmptyArray($post): void
     {
         $_POST = $post;
 
@@ -48,7 +48,7 @@ class WebRequestParserParsePostTest extends WebRequestParserTest
     * @dataProvider invalidSuperglobalValueProvider
     * @covers       Lunr\Corona\WebRequestParser::parse_post
     */
-    public function testParseInvalidPostValuesResetsPost($post)
+    public function testParseInvalidPostValuesResetsPost($post): void
     {
         $_POST = $post;
 
@@ -62,7 +62,7 @@ class WebRequestParserParsePostTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_post
      */
-    public function testParseValidPostValues()
+    public function testParseValidPostValues(): void
     {
         $_POST['test1'] = 'value1';
         $_POST['test2'] = 'value2';
@@ -78,7 +78,7 @@ class WebRequestParserParsePostTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_post
      */
-    public function testPostEmptyAfterParse()
+    public function testPostEmptyAfterParse(): void
     {
         $_POST['test1'] = 'value1';
         $_POST['test2'] = 'value2';

@@ -48,7 +48,7 @@ abstract class HTMLViewTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -66,7 +66,7 @@ abstract class HTMLViewTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->configuration);
         unset($this->request);
@@ -80,7 +80,7 @@ abstract class HTMLViewTest extends LunrBaseTest
      *
      * @return array $values Set of test data.
      */
-    public function cssAlternateProvider()
+    public function cssAlternateProvider(): array
     {
         $values   = [];
         $values[] = [ 'row', 0, '', 'row_even' ];

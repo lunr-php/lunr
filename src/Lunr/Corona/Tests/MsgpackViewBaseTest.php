@@ -22,7 +22,7 @@ class MsgpackViewBaseTest extends MsgpackViewTest
     /**
      * Test that the Request class is passed correctly.
      */
-    public function testRequestIsPassedCorrectly()
+    public function testRequestIsPassedCorrectly(): void
     {
         $this->assertPropertySame('request', $this->request);
     }
@@ -30,7 +30,7 @@ class MsgpackViewBaseTest extends MsgpackViewTest
     /**
      * Test that the Response class is passed correctly.
      */
-    public function testResponseIsPassedCorrectly()
+    public function testResponseIsPassedCorrectly(): void
     {
         $this->assertPropertySame('response', $this->response);
     }
@@ -38,7 +38,7 @@ class MsgpackViewBaseTest extends MsgpackViewTest
     /**
      * Test that the Configuration class is passed correctly.
      */
-    public function testConfigurationIsPassedCorrectly()
+    public function testConfigurationIsPassedCorrectly(): void
     {
         $this->assertPropertySame('configuration', $this->configuration);
     }
@@ -48,7 +48,7 @@ class MsgpackViewBaseTest extends MsgpackViewTest
      *
      * @covers Lunr\Corona\MsgpackView::prepare_data
      */
-    public function testPrepareDataReturnsUnmodifiedData()
+    public function testPrepareDataReturnsUnmodifiedData(): void
     {
         $data = [ 'key' => 'value', 'key2' => NULL ];
 

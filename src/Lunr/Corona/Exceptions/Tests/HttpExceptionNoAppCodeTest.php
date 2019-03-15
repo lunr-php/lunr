@@ -20,7 +20,7 @@ class HttpExceptionNoAppCodeTest extends HttpExceptionTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUpNoAppCode();
     }
@@ -28,7 +28,7 @@ class HttpExceptionNoAppCodeTest extends HttpExceptionTest
     /**
      * Test that the error code was set correctly.
      */
-    public function testErrorCodeSetCorrectly()
+    public function testErrorCodeSetCorrectly(): void
     {
         $this->assertPropertySame('code', 400);
     }
@@ -36,7 +36,7 @@ class HttpExceptionNoAppCodeTest extends HttpExceptionTest
     /**
      * Test that the error code was set correctly.
      */
-    public function testApplicationErrorCodeSetCorrectly()
+    public function testApplicationErrorCodeSetCorrectly(): void
     {
         $this->assertPropertySame('app_code', $this->code);
     }
@@ -44,7 +44,7 @@ class HttpExceptionNoAppCodeTest extends HttpExceptionTest
     /**
      * Test that the error message was passed correctly.
      */
-    public function testErrorMessagePassedCorrectly()
+    public function testErrorMessagePassedCorrectly(): void
     {
         $this->expectExceptionMessage($this->message);
 
@@ -56,7 +56,7 @@ class HttpExceptionNoAppCodeTest extends HttpExceptionTest
      *
      * @covers Lunr\Corona\Exceptions\HttpException::getAppCode
      */
-    public function testGetAppCodeReturnsAppCode()
+    public function testGetAppCodeReturnsAppCode(): void
     {
         $this->assertSame($this->code, $this->class->getAppCode());
     }

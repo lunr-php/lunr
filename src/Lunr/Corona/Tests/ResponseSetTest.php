@@ -27,7 +27,7 @@ class ResponseSetTest extends ResponseTest
      * @dataProvider invalidResponseAttributesProvider
      * @covers       Lunr\Corona\Response::__set
      */
-    public function testSetInaccessibleAttributesDoesNotWork($attr)
+    public function testSetInaccessibleAttributesDoesNotWork($attr): void
     {
         $this->class->$attr = 'value';
 
@@ -39,7 +39,7 @@ class ResponseSetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::__set
      */
-    public function testSetView()
+    public function testSetView(): void
     {
         $this->class->view = 'TestView';
 
@@ -51,7 +51,7 @@ class ResponseSetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::add_response_data
      */
-    public function testAddResponseData()
+    public function testAddResponseData(): void
     {
         $this->class->add_response_data('key', 'value');
 
@@ -66,7 +66,7 @@ class ResponseSetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::set_error_message
      */
-    public function testSetErrorMessage()
+    public function testSetErrorMessage(): void
     {
         $this->class->set_error_message('ID', 'Message');
 
@@ -81,7 +81,7 @@ class ResponseSetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::set_error_info
      */
-    public function testSetErrorInformation()
+    public function testSetErrorInformation(): void
     {
         $this->class->set_error_info('ID', 'Info');
 
@@ -96,7 +96,7 @@ class ResponseSetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::set_return_code
      */
-    public function testSetValidReturnCode()
+    public function testSetValidReturnCode(): void
     {
         $this->class->set_return_code('ID', 503);
 
@@ -114,7 +114,7 @@ class ResponseSetTest extends ResponseTest
      * @dataProvider invalidReturnCodeProvider
      * @covers       Lunr\Corona\Response::set_return_code
      */
-    public function testSetInvalidReturnCode($code)
+    public function testSetInvalidReturnCode($code): void
     {
         $this->class->set_return_code('ID', $code);
 

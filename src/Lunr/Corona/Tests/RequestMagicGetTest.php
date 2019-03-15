@@ -28,7 +28,7 @@ class RequestMagicGetTest extends RequestTest
      * @dataProvider requestValueProvider
      * @covers       Lunr\Corona\Request::__get
      */
-    public function testMagicGetMethod($key, $value)
+    public function testMagicGetMethod($key, $value): void
     {
         $this->assertEquals($value, $this->class->$key);
     }
@@ -41,7 +41,7 @@ class RequestMagicGetTest extends RequestTest
      * @dataProvider requestValueProvider
      * @covers       Lunr\Corona\Request::__get
      */
-    public function testMagicGetWithMockedValue($key)
+    public function testMagicGetWithMockedValue($key): void
     {
         $this->set_reflection_property_value('mock', [ $key => 'mock' ]);
 
@@ -51,7 +51,7 @@ class RequestMagicGetTest extends RequestTest
     /**
      * Check that the magic get function returns NULL for invalid mock values.
      */
-    public function testMagicGetWithInvalidMockValue()
+    public function testMagicGetWithInvalidMockValue(): void
     {
         $this->set_reflection_property_value('mock', [ 'invalid' => 'mock' ]);
 
@@ -66,7 +66,7 @@ class RequestMagicGetTest extends RequestTest
      * @dataProvider unhandledMagicGetKeysProvider
      * @covers       Lunr\Corona\Request::__get
      */
-    public function testMagicGetIsNullForUnhandledKeys($key)
+    public function testMagicGetIsNullForUnhandledKeys($key): void
     {
         $this->assertNull($this->class->$key);
     }

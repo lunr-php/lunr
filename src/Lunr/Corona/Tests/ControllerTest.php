@@ -37,7 +37,7 @@ abstract class ControllerTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->response = $this->getMockBuilder('Lunr\Corona\Response')->getMock();
         $this->request  = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
@@ -52,7 +52,7 @@ abstract class ControllerTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->response);
         unset($this->request);

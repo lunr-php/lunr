@@ -42,7 +42,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      *
      * @covers   Lunr\Corona\JsonView::print_fatal_error
      */
-    public function testPrintFatalErrorPrintsNothingIfNoError()
+    public function testPrintFatalErrorPrintsNothingIfNoError(): void
     {
         $this->mock_function('error_get_last', self::NO_ERROR);
 
@@ -58,7 +58,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      *
      * @covers   Lunr\Corona\JsonView::print_fatal_error
      */
-    public function testPrintFatalErrorPrintsNothingIfErrorNotFatal()
+    public function testPrintFatalErrorPrintsNothingIfErrorNotFatal(): void
     {
         $this->mock_function('error_get_last', self::ERROR);
 
@@ -75,7 +75,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      * @requires PHP 5.5.12
      * @covers   Lunr\Corona\JsonView::print_fatal_error
      */
-    public function testPrintFatalErrorPrintsPrettyJson()
+    public function testPrintFatalErrorPrintsPrettyJson(): void
     {
         $this->mock_function('error_get_last', self::FATAL_ERROR);
         $this->mock_function('header', '');
@@ -98,7 +98,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      *
      * @covers   Lunr\Corona\JsonView::print_fatal_error
      */
-    public function testPrintFatalErrorForWebPrintsJson()
+    public function testPrintFatalErrorForWebPrintsJson(): void
     {
         $this->mock_function('error_get_last', self::FATAL_ERROR);
         $this->mock_function('header', '');

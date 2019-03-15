@@ -54,7 +54,7 @@ abstract class ViewTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -94,7 +94,7 @@ abstract class ViewTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->configuration);
         unset($this->request);
@@ -108,7 +108,7 @@ abstract class ViewTest extends LunrBaseTest
      *
      * @return array $values Set of test data.
      */
-    public function baseUrlProvider()
+    public function baseUrlProvider(): array
     {
         $values   = [];
         $values[] = [ 'http://www.example.org/', 'method/param', 'http://www.example.org/method/param' ];
@@ -121,7 +121,7 @@ abstract class ViewTest extends LunrBaseTest
      *
      * @return array $values Set of test data.
      */
-    public function staticsProvider()
+    public function staticsProvider(): array
     {
         $values   = [];
         $values[] = [ '/', 'statics', 'image/test.jpg', '/statics/image/test.jpg' ];
@@ -136,7 +136,7 @@ abstract class ViewTest extends LunrBaseTest
      *
      * @return array $values Array of mocked fatal error information.
      */
-    public function fatalErrorInfoProvider()
+    public function fatalErrorInfoProvider(): array
     {
         $values   = [];
         $values[] = [ [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ] ];
@@ -153,7 +153,7 @@ abstract class ViewTest extends LunrBaseTest
      *
      * @return array $values Array of non-fatal error information.
      */
-    public function errorInfoProvider()
+    public function errorInfoProvider(): array
     {
         $values   = [];
         $values[] = [ NULL ];

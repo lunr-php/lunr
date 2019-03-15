@@ -25,7 +25,7 @@ class WebRequestParserParseCommandLineArgumentsTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_command_line_arguments
      */
-    public function testParsingNoCommandLineArguments()
+    public function testParsingNoCommandLineArguments(): void
     {
         $this->assertArrayEmpty($this->class->parse_command_line_arguments());
     }

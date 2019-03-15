@@ -30,7 +30,7 @@ class ViewHelpersTest extends ViewTest
      * @dataProvider baseUrlProvider
      * @covers       Lunr\Corona\View::base_url
      */
-    public function testBaseUrl($baseurl, $path, $result)
+    public function testBaseUrl($baseurl, $path, $result): void
     {
         $this->request->expects($this->once())
                       ->method('__get')
@@ -52,7 +52,7 @@ class ViewHelpersTest extends ViewTest
      * @dataProvider staticsProvider
      * @covers       Lunr\Corona\View::statics
      */
-    public function testStatics($base, $statics, $path, $result)
+    public function testStatics($base, $statics, $path, $result): void
     {
         $this->request->expects($this->once())
                       ->method('__get')
@@ -74,7 +74,7 @@ class ViewHelpersTest extends ViewTest
      * @dataProvider fatalErrorInfoProvider
      * @covers       Lunr\Corona\View::is_fatal_error
      */
-    public function testIsFatalErrorReturnsTrueIfErrorIsFatal($error)
+    public function testIsFatalErrorReturnsTrueIfErrorIsFatal($error): void
     {
         $method = $this->get_accessible_reflection_method('is_fatal_error');
 
@@ -89,7 +89,7 @@ class ViewHelpersTest extends ViewTest
      * @dataProvider errorInfoProvider
      * @covers       Lunr\Corona\View::is_fatal_error
      */
-    public function testIsFatalErrorReturnsFalseIfErrorIsNotFatal($error)
+    public function testIsFatalErrorReturnsFalseIfErrorIsNotFatal($error): void
     {
         $method = $this->get_accessible_reflection_method('is_fatal_error');
 

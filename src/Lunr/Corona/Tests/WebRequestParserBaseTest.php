@@ -23,7 +23,7 @@ class WebRequestParserBaseTest extends WebRequestParserTest
     /**
      * Test that the configuration class is set correctly.
      */
-    public function testConfigurationSetCorrectly()
+    public function testConfigurationSetCorrectly(): void
     {
         $this->assertPropertySame('config', $this->configuration);
     }
@@ -31,7 +31,7 @@ class WebRequestParserBaseTest extends WebRequestParserTest
     /**
      * Test that the header class is set correctly.
      */
-    public function testHeaderSetCorrectly()
+    public function testHeaderSetCorrectly(): void
     {
         $this->assertPropertySame('header', $this->header);
     }
@@ -39,7 +39,7 @@ class WebRequestParserBaseTest extends WebRequestParserTest
     /**
      * Test that $request_parsed is FALSE by default.
      */
-    public function testRequestParsedIsFalseByDefault()
+    public function testRequestParsedIsFalseByDefault(): void
     {
         $this->assertFalse($this->get_reflection_property_value('request_parsed'));
     }

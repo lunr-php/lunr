@@ -25,7 +25,7 @@ class WebRequestParserParseRawDataTest extends WebRequestParserTest
      *
      * @covers   Lunr\Corona\WebRequestParser::parse_raw_data
      */
-    public function testParseRawData()
+    public function testParseRawData(): void
     {
         $this->mock_function('file_get_contents', 'return "raw";');
 

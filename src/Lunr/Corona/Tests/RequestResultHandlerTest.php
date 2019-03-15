@@ -45,7 +45,7 @@ abstract class RequestResultHandlerTest extends LunrBaseTest
     /**
      * Test case constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->request = $this->getMockBuilder('Lunr\Corona\Request')
                               ->disableOriginalConstructor()
@@ -66,7 +66,7 @@ abstract class RequestResultHandlerTest extends LunrBaseTest
     /**
      * Test case destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -80,7 +80,7 @@ abstract class RequestResultHandlerTest extends LunrBaseTest
      *
      * @return array $names Array of invalid names
      */
-    public function invalidControllerNameProvider()
+    public function invalidControllerNameProvider(): array
     {
         $names   = [];
         $names[] = [ NULL ];

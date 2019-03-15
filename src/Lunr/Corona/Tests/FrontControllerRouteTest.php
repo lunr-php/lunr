@@ -24,7 +24,7 @@ class FrontControllerRouteTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::route
      */
-    public function testRouteWithBlacklistedController()
+    public function testRouteWithBlacklistedController(): void
     {
         $this->set_reflection_property_value('routes', [ 'controller' => NULL ]);
 
@@ -48,7 +48,7 @@ class FrontControllerRouteTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::route
      */
-    public function testRouteWithBlacklistedCall()
+    public function testRouteWithBlacklistedCall(): void
     {
         $this->set_reflection_property_value('routes', [ 'controller/method' => NULL ]);
 
@@ -67,7 +67,7 @@ class FrontControllerRouteTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::route
      */
-    public function testRouteWithWhitelistedCall()
+    public function testRouteWithWhitelistedCall(): void
     {
         $this->set_reflection_property_value('routes', [ 'function' => NULL, 'function/bar' => [] ]);
         $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz' ]);
@@ -104,7 +104,7 @@ class FrontControllerRouteTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::route
      */
-    public function testRouteWithRestrictedController()
+    public function testRouteWithRestrictedController(): void
     {
         $this->set_reflection_property_value('routes', [ 'function' => [ 'live' ] ]);
         $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz' ]);
@@ -136,7 +136,7 @@ class FrontControllerRouteTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::route
      */
-    public function testRouteWithRestrictedCall()
+    public function testRouteWithRestrictedCall(): void
     {
         $this->set_reflection_property_value('routes', [ 'function/bar' => [ 'live' ] ]);
         $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz' ]);
@@ -168,7 +168,7 @@ class FrontControllerRouteTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::route
      */
-    public function testRouteWithNoRules()
+    public function testRouteWithNoRules(): void
     {
         $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz' ]);
 

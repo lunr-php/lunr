@@ -46,7 +46,7 @@ abstract class FrontControllerTest extends LunrBaseTest
     /**
      * Test case constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->request = $this->getMockBuilder('Lunr\Corona\Request')
                               ->disableOriginalConstructor()
@@ -66,7 +66,7 @@ abstract class FrontControllerTest extends LunrBaseTest
     /**
      * Test case destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -80,7 +80,7 @@ abstract class FrontControllerTest extends LunrBaseTest
      *
      * @return array $names Array of invalid names
      */
-    public function invalidControllerNameProvider()
+    public function invalidControllerNameProvider(): array
     {
         $names   = [];
         $names[] = [ NULL ];
@@ -96,7 +96,7 @@ abstract class FrontControllerTest extends LunrBaseTest
      *
      * @return array $controller_names Array of invalid controller names
      */
-    public function invalidControllerNameValues()
+    public function invalidControllerNameValuesProvider(): array
     {
         $controller_names   = [];
         $controller_names[] = [ 'test+test' ];

@@ -30,46 +30,46 @@ trait RequestParserDynamicRequestTestTrait
      *
      * @return void
      */
-    protected abstract function prepare_request_data_with_slashes($controller = TRUE, $method = TRUE);
+    protected abstract function prepare_request_data_with_slashes($controller = TRUE, $method = TRUE): void;
 
     /**
      * Unit Test Data Provider for possible controller key names.
      *
      * @return array $base Array of controller key names
      */
-    public abstract function controllerKeyNameProvider();
+    public abstract function controllerKeyNameProvider(): array;
 
     /**
      * Unit Test Data Provider for possible method key names.
      *
      * @return array $base Array of method key names
      */
-    public abstract function methodKeyNameProvider();
+    public abstract function methodKeyNameProvider(): array;
 
     /**
      * Unit Test Data Provider for possible parameter key names.
      *
      * @return array $base Array of parameter key names
      */
-    public abstract function paramsKeyNameProvider();
+    public abstract function paramsKeyNameProvider(): array;
 
     /**
      * Unit Test Data Provider for Device Useragent keys.
      *
      * @return array $keys Array of array keys.
      */
-    public abstract function deviceUserAgentKeyProvider();
+    public abstract function deviceUserAgentKeyProvider(): array;
 
     /**
      * Test that parse_request() unsets request data in the AST.
      */
-    public function testParseRequestSetsDefaultHttpAction()
+    public function testParseRequestSetsDefaultHttpAction(): void
     {
         $this->prepare_request_test('HTTP', '80');
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('action', $request);
         $this->assertEquals(HttpMethod::GET, $request['action']);
 
@@ -79,13 +79,13 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the useragent is stored correctly.
      */
-    public function testRequestUserAgent()
+    public function testRequestUserAgent(): void
     {
         $this->prepare_request_test('HTTP', '80', TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('useragent', $request);
         $this->assertEquals('UserAgent', $request['useragent']);
 
@@ -99,13 +99,13 @@ trait RequestParserDynamicRequestTestTrait
      *
      * @dataProvider deviceUserAgentKeyProvider
      */
-    public function testRequestDeviceUserAgent($key)
+    public function testRequestDeviceUserAgent($key): void
     {
         $this->prepare_request_test('HTTP', '80', TRUE, $key);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('device_useragent', $request);
         $this->assertEquals('Device UserAgent', $request['device_useragent']);
 
@@ -115,13 +115,13 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the verbosity is stored correctly.
      */
-    public function testRequestVerbosity()
+    public function testRequestVerbosity(): void
     {
         $this->prepare_request_test('HTTP', '80', TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('verbosity', $request);
         $this->assertEquals(LogLevel::WARNING, $request['verbosity']);
 
@@ -135,7 +135,7 @@ trait RequestParserDynamicRequestTestTrait
      *
      * @dataProvider controllerKeyNameProvider
      */
-    public function testRequestController($key)
+    public function testRequestController($key): void
     {
         $this->controller = $key;
 
@@ -144,7 +144,7 @@ trait RequestParserDynamicRequestTestTrait
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('controller', $request);
         $this->assertEquals('thecontroller', $request['controller']);
 
@@ -158,7 +158,7 @@ trait RequestParserDynamicRequestTestTrait
      *
      * @dataProvider methodKeyNameProvider
      */
-    public function testRequestMethod($key)
+    public function testRequestMethod($key): void
     {
         $this->method = $key;
 
@@ -167,7 +167,7 @@ trait RequestParserDynamicRequestTestTrait
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('method', $request);
         $this->assertEquals('themethod', $request['method']);
 
@@ -181,7 +181,7 @@ trait RequestParserDynamicRequestTestTrait
      *
      * @dataProvider paramsKeyNameProvider
      */
-    public function testRequestParams($key)
+    public function testRequestParams($key): void
     {
         $this->params = $key;
 
@@ -190,9 +190,9 @@ trait RequestParserDynamicRequestTestTrait
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('params', $request);
-        $this->assertInternalType('array', $request['params']);
+        $this->assertIsArray($request['params']);
         $this->assertCount(2, $request['params']);
         $this->assertEquals('parama', $request['params'][0]);
         $this->assertEquals('paramb', $request['params'][1]);
@@ -203,14 +203,14 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the default call value is stored correctly.
      */
-    public function testRequestCall()
+    public function testRequestCall(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('call', $request);
         $this->assertEquals('thecontroller/themethod', $request['call']);
 
@@ -220,14 +220,14 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the default call value is stored correctly.
      */
-    public function testRequestCallWithControllerUndefined()
+    public function testRequestCallWithControllerUndefined(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(FALSE, TRUE, TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('call', $request);
         $this->assertNull($request['call']);
 
@@ -237,14 +237,14 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the default call value is stored correctly.
      */
-    public function testRequestCallWithMethodUndefined()
+    public function testRequestCallWithMethodUndefined(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(TRUE, FALSE, TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('call', $request);
         $this->assertNull($request['call']);
 
@@ -258,7 +258,7 @@ trait RequestParserDynamicRequestTestTrait
      *
      * @dataProvider controllerKeyNameProvider
      */
-    public function testRequestControllerWithSlashes($key)
+    public function testRequestControllerWithSlashes($key): void
     {
         $this->controller = $key;
 
@@ -267,7 +267,7 @@ trait RequestParserDynamicRequestTestTrait
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('controller', $request);
         $this->assertEquals('thecontroller', $request['controller']);
 
@@ -281,7 +281,7 @@ trait RequestParserDynamicRequestTestTrait
      *
      * @dataProvider methodKeyNameProvider
      */
-    public function testRequestMethodWithSlashes($key)
+    public function testRequestMethodWithSlashes($key): void
     {
         $this->method = $key;
 
@@ -290,7 +290,7 @@ trait RequestParserDynamicRequestTestTrait
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('method', $request);
         $this->assertEquals('themethod', $request['method']);
 
@@ -304,7 +304,7 @@ trait RequestParserDynamicRequestTestTrait
      *
      * @dataProvider paramsKeyNameProvider
      */
-    public function testRequestParamsWithSlashes($key)
+    public function testRequestParamsWithSlashes($key): void
     {
         $this->params = $key;
 
@@ -313,9 +313,9 @@ trait RequestParserDynamicRequestTestTrait
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('params', $request);
-        $this->assertInternalType('array', $request['params']);
+        $this->assertIsArray($request['params']);
         $this->assertCount(2, $request['params']);
         $this->assertEquals('parama', $request['params'][0]);
         $this->assertEquals('paramb', $request['params'][1]);
@@ -326,14 +326,14 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Test that the default call value is stored correctly.
      */
-    public function testRequestCallWithSlashes()
+    public function testRequestCallWithSlashes(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data_with_slashes(TRUE, TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('call', $request);
         $this->assertEquals('thecontroller/themethod', $request['call']);
 

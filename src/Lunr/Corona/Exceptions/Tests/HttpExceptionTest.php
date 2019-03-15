@@ -48,7 +48,7 @@ abstract class HttpExceptionTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->message  = 'Http error!';
         $this->app_code = 9999;
@@ -65,7 +65,7 @@ abstract class HttpExceptionTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUpNoAppCode()
+    public function setUpNoAppCode(): void
     {
         $this->message  = 'Http error!';
         $this->app_code = 0;
@@ -80,7 +80,7 @@ abstract class HttpExceptionTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->code);
         unset($this->app_code);

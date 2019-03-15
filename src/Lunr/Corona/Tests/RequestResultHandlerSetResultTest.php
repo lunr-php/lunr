@@ -26,7 +26,7 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::set_result
      */
-    public function testSetResultReturnCode()
+    public function testSetResultReturnCode(): void
     {
         $this->request->expects($this->once())
                       ->method('__get')
@@ -47,7 +47,7 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::set_result
      */
-    public function testSetResultErrorMessageNull()
+    public function testSetResultErrorMessageNull(): void
     {
         $this->request->expects($this->once())
                       ->method('__get')
@@ -71,7 +71,7 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::set_result
      */
-    public function testSetResultErrorMessage()
+    public function testSetResultErrorMessage(): void
     {
         $this->request->expects($this->exactly(2))
                       ->method('__get')
@@ -96,7 +96,7 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::set_result
      */
-    public function testSetResultErrorInfoNull()
+    public function testSetResultErrorInfoNull(): void
     {
         $this->request->expects($this->once())
                       ->method('__get')
@@ -120,7 +120,7 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::set_result
      */
-    public function testSetResultErrorInfoNotNull()
+    public function testSetResultErrorInfoNotNull(): void
     {
         $this->request->expects($this->exactly(2))
                       ->method('__get')

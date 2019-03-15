@@ -22,7 +22,7 @@ class CompactJsonViewBaseTest extends CompactJsonViewTest
     /**
      * Test that the Request class is passed correctly.
      */
-    public function testRequestIsPassedCorrectly()
+    public function testRequestIsPassedCorrectly(): void
     {
         $this->assertPropertySame('request', $this->request);
     }
@@ -30,7 +30,7 @@ class CompactJsonViewBaseTest extends CompactJsonViewTest
     /**
      * Test that the Response class is passed correctly.
      */
-    public function testResponseIsPassedCorrectly()
+    public function testResponseIsPassedCorrectly(): void
     {
         $this->assertPropertySame('response', $this->response);
     }
@@ -38,7 +38,7 @@ class CompactJsonViewBaseTest extends CompactJsonViewTest
     /**
      * Test that the Configuration class is passed correctly.
      */
-    public function testConfigurationIsPassedCorrectly()
+    public function testConfigurationIsPassedCorrectly(): void
     {
         $this->assertPropertySame('configuration', $this->configuration);
     }
@@ -52,7 +52,7 @@ class CompactJsonViewBaseTest extends CompactJsonViewTest
      * @dataProvider dataProvider
      * @covers       Lunr\Corona\CompactJsonView::prepare_data
      */
-    public function testPrepareDataReturnsModifiedData($data, $expected)
+    public function testPrepareDataReturnsModifiedData($data, $expected): void
     {
         $method = $this->get_accessible_reflection_method('prepare_data');
 

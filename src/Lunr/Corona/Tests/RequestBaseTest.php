@@ -22,7 +22,7 @@ class RequestBaseTest extends RequestTest
     /**
      * Check that post values are set correctly.
      */
-    public function testPost()
+    public function testPost(): void
     {
         $this->assertEquals([ 'post_key' => 'post_value', 'post_second_key' => 'post_value' ], $this->get_reflection_property_value('post'));
     }
@@ -30,7 +30,7 @@ class RequestBaseTest extends RequestTest
     /**
      * Check that server values are set correctly.
      */
-    public function testServer()
+    public function testServer(): void
     {
         $server = [
             'server_key'      => 'server_value',
@@ -43,7 +43,7 @@ class RequestBaseTest extends RequestTest
     /**
      * Check that get values are set correctly.
      */
-    public function testGet()
+    public function testGet(): void
     {
         $this->assertEquals([ 'get_key' => 'get_value', 'get_second_key' => 'get_value' ], $this->get_reflection_property_value('get'));
     }
@@ -51,7 +51,7 @@ class RequestBaseTest extends RequestTest
     /**
      * Check that files values are set correctly.
      */
-    public function testFiles()
+    public function testFiles(): void
     {
         $this->assertEquals($this->files, $this->get_reflection_property_value('files'));
     }
@@ -59,7 +59,7 @@ class RequestBaseTest extends RequestTest
     /**
      * Check that cookie values are set correctly.
      */
-    public function testCookie()
+    public function testCookie(): void
     {
         $this->assertEquals([ 'cookie_key' => 'cookie_value' ], $this->get_reflection_property_value('cookie'));
     }
@@ -67,7 +67,7 @@ class RequestBaseTest extends RequestTest
     /**
      * Check that cli argument values are set correctly.
      */
-    public function testCliArgs()
+    public function testCliArgs(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('cli_args'));
     }
@@ -75,7 +75,7 @@ class RequestBaseTest extends RequestTest
     /**
      * Check that raw data is set correctly.
      */
-    public function testRawData()
+    public function testRawData(): void
     {
         $this->assertNull($this->get_reflection_property_value('raw_data'));
     }
@@ -88,7 +88,7 @@ class RequestBaseTest extends RequestTest
      *
      * @dataProvider requestValueProvider
      */
-    public function testRequestDefaultValues($key, $value)
+    public function testRequestDefaultValues($key, $value): void
     {
         $request = $this->get_reflection_property_value('request');
 

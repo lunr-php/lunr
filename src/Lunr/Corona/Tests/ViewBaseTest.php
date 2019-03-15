@@ -23,7 +23,7 @@ class ViewBaseTest extends ViewTest
     /**
      * Test that the request class is set correctly.
      */
-    public function testRequestSetCorrectly()
+    public function testRequestSetCorrectly(): void
     {
         $this->assertPropertySame('request', $this->request);
     }
@@ -31,7 +31,7 @@ class ViewBaseTest extends ViewTest
     /**
      * Test that the response class is set correctly.
      */
-    public function testResponseSetCorrectly()
+    public function testResponseSetCorrectly(): void
     {
         $this->assertPropertySame('response', $this->response);
     }
@@ -39,7 +39,7 @@ class ViewBaseTest extends ViewTest
     /**
      * Test that the configuration class is set correctly.
      */
-    public function testConfigurationSetCorrectly()
+    public function testConfigurationSetCorrectly(): void
     {
         $this->assertPropertySame('configuration', $this->configuration);
     }
@@ -49,11 +49,11 @@ class ViewBaseTest extends ViewTest
      *
      * @runInSeparateProcess
      */
-    public function testRequestIdHeaderIsSet()
+    public function testRequestIdHeaderIsSet(): void
     {
         $headers = xdebug_get_headers();
 
-        $this->assertInternalType('array', $headers);
+        $this->assertIsArray($headers);
         $this->assertNotEmpty($headers);
 
         $value = strpos($headers[0], 'X-Xdebug-Profile-Filename') !== FALSE ? $headers[1] : $headers[0];

@@ -25,7 +25,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
      *
      * @covers Lunr\Corona\HTMLView::include_stylesheets
      */
-    public function testIncluceStylesheetsWithNoStylesheets()
+    public function testIncluceStylesheetsWithNoStylesheets(): void
     {
         $this->set_reflection_property_value('stylesheets', []);
 
@@ -39,7 +39,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
      *
      * @covers   Lunr\Corona\HTMLView::include_stylesheets
      */
-    public function testIncludeStylesheetsWithOneStylesheet()
+    public function testIncludeStylesheetsWithOneStylesheet(): void
     {
         $this->set_reflection_property_value('stylesheets', [ 'style1.css' ]);
 
@@ -67,7 +67,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
      *
      * @covers   Lunr\Corona\HTMLView::include_stylesheets
      */
-    public function testIncludeStylesheetsWithMultipleStylesheets()
+    public function testIncludeStylesheetsWithMultipleStylesheets(): void
     {
         $this->set_reflection_property_value('stylesheets', [ 'style2.css', 'style1.css' ]);
 
@@ -105,7 +105,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
      *
      * @covers   Lunr\Corona\HTMLView::include_stylesheets
      */
-    public function testIncludeStylesheetsWithExternalStylesheets()
+    public function testIncludeStylesheetsWithExternalStylesheets(): void
     {
         $stylesheets = [
             'http://www.website.com/style3.css',
@@ -145,7 +145,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
      *
      * @covers   Lunr\Corona\HTMLView::include_stylesheets
      */
-    public function testIncludeStylesheetsWithMultipleStylesheetsSorted()
+    public function testIncludeStylesheetsWithMultipleStylesheetsSorted(): void
     {
         $this->set_reflection_property_value('stylesheets', [ 'style2.css', 'style1.css' ]);
 
@@ -183,7 +183,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
      *
      * @covers Lunr\Corona\HTMLView::include_stylesheets
      */
-    public function testIncluceJavascriptWithNoJSFiles()
+    public function testIncluceJavascriptWithNoJSFiles(): void
     {
         $this->set_reflection_property_value('javascript', []);
 
@@ -197,7 +197,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
      *
      * @covers   Lunr\Corona\HTMLView::include_javascript
      */
-    public function testIncludeJavascriptWithOneJSFile()
+    public function testIncludeJavascriptWithOneJSFile(): void
     {
         $this->set_reflection_property_value('javascript', [ 'script1.js' ]);
 
@@ -225,7 +225,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
      *
      * @covers   Lunr\Corona\HTMLView::include_javascript
      */
-    public function testIncludeJavascriptWithMultipleJSFiles()
+    public function testIncludeJavascriptWithMultipleJSFiles(): void
     {
         $this->set_reflection_property_value('javascript', [ 'script2.js', 'script1.js' ]);
 
@@ -263,7 +263,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
      *
      * @covers   Lunr\Corona\HTMLView::include_javascript
      */
-    public function testIncludeJavascriptWithExternalJSFiles()
+    public function testIncludeJavascriptWithExternalJSFiles(): void
     {
         $javascript = [
             'http://www.website.com/script3.js',
@@ -303,7 +303,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
      *
      * @covers   Lunr\Corona\HTMLView::include_javascript
      */
-    public function testIncludeJavascriptWithMultipleJSFilesSorted()
+    public function testIncludeJavascriptWithMultipleJSFilesSorted(): void
     {
         $this->set_reflection_property_value('javascript', [ 'script2.js', 'script1.js' ]);
 
@@ -347,7 +347,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
      * @dataProvider cssAlternateProvider
      * @covers       Lunr\Corona\HTMLView::css_alternate
      */
-    public function testCssAlternate($basename, $alternation_hint, $suffix, $result)
+    public function testCssAlternate($basename, $alternation_hint, $suffix, $result): void
     {
         $method = $this->get_accessible_reflection_method('css_alternate');
 

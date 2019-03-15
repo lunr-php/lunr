@@ -23,7 +23,7 @@ class BadRequestExceptionBaseTest extends HttpExceptionTest
     /**
      * Test that the error code was set correctly.
      */
-    public function testErrorCodeSetCorrectly()
+    public function testErrorCodeSetCorrectly(): void
     {
         $this->assertPropertySame('code', 400);
     }
@@ -31,7 +31,7 @@ class BadRequestExceptionBaseTest extends HttpExceptionTest
     /**
      * Test that the error code was set correctly.
      */
-    public function testApplicationErrorCodeSetCorrectly()
+    public function testApplicationErrorCodeSetCorrectly(): void
     {
         $this->assertPropertySame('app_code', $this->code);
     }
@@ -39,7 +39,7 @@ class BadRequestExceptionBaseTest extends HttpExceptionTest
     /**
      * Test that the input data key was set correctly.
      */
-    public function testInputDataKeyIsNull()
+    public function testInputDataKeyIsNull(): void
     {
         $this->assertNull($this->get_reflection_property_value('key'));
     }
@@ -47,7 +47,7 @@ class BadRequestExceptionBaseTest extends HttpExceptionTest
     /**
      * Test that the input data value was set correctly.
      */
-    public function testInputDataValueIsNull()
+    public function testInputDataValueIsNull(): void
     {
         $this->assertNull($this->get_reflection_property_value('value'));
     }
@@ -55,7 +55,7 @@ class BadRequestExceptionBaseTest extends HttpExceptionTest
     /**
      * Test that the input data flag was set correctly.
      */
-    public function testInputDataAvailableIsFalse()
+    public function testInputDataAvailableIsFalse(): void
     {
         $this->assertFalse($this->get_reflection_property_value('dataAvailable'));
     }
@@ -63,7 +63,7 @@ class BadRequestExceptionBaseTest extends HttpExceptionTest
     /**
      * Test that the error message was passed correctly.
      */
-    public function testErrorMessagePassedCorrectly()
+    public function testErrorMessagePassedCorrectly(): void
     {
         $this->expectExceptionMessage($this->message);
 

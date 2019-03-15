@@ -22,7 +22,7 @@ class ResponseBaseTest extends ResponseTest
     /**
      * Test that the data array is empty by default.
      */
-    public function testDataEmptyByDefault()
+    public function testDataEmptyByDefault(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('data'));
     }
@@ -30,7 +30,7 @@ class ResponseBaseTest extends ResponseTest
     /**
      * Test that there is no error message set by default.
      */
-    public function testErrorMessageEmptyByDefault()
+    public function testErrorMessageEmptyByDefault(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('errmsg'));
     }
@@ -38,7 +38,7 @@ class ResponseBaseTest extends ResponseTest
     /**
      * Test that there is no error information set by default.
      */
-    public function testErrorInfoEmptyByDefault()
+    public function testErrorInfoEmptyByDefault(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('errinfo'));
     }
@@ -46,7 +46,7 @@ class ResponseBaseTest extends ResponseTest
     /**
      * Test that the default return code is empty by default.
      */
-    public function testReturnCodeIsEmptyByDefault()
+    public function testReturnCodeIsEmptyByDefault(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('return_code'));
     }
@@ -54,7 +54,7 @@ class ResponseBaseTest extends ResponseTest
     /**
      * Test that there is no view set by default.
      */
-    public function testViewIsNotSetByDefault()
+    public function testViewIsNotSetByDefault(): void
     {
         $this->assertPropertyEquals('view', '');
     }

@@ -23,7 +23,7 @@ class RequestParserBaseTest extends RequestParserTest
     /**
      * Test that the configuration class is set correctly.
      */
-    public function testConfigurationSetCorrectly()
+    public function testConfigurationSetCorrectly(): void
     {
         $this->assertPropertySame('config', $this->configuration);
     }
@@ -33,7 +33,7 @@ class RequestParserBaseTest extends RequestParserTest
      *
      * @covers Lunr\Corona\RequestParser::parse_post
      */
-    public function testParsingNoPostValues()
+    public function testParsingNoPostValues(): void
     {
         $this->assertArrayEmpty($this->class->parse_post());
     }
@@ -43,7 +43,7 @@ class RequestParserBaseTest extends RequestParserTest
      *
      * @covers Lunr\Corona\RequestParser::parse_server
      */
-    public function testParsingNoServerValues()
+    public function testParsingNoServerValues(): void
     {
         $this->assertArrayEmpty($this->class->parse_server());
     }
@@ -53,7 +53,7 @@ class RequestParserBaseTest extends RequestParserTest
      *
      * @covers Lunr\Corona\RequestParser::parse_files
      */
-    public function testParsingNoFiles()
+    public function testParsingNoFiles(): void
     {
         $this->assertArrayEmpty($this->class->parse_files());
     }
@@ -63,7 +63,7 @@ class RequestParserBaseTest extends RequestParserTest
      *
      * @covers Lunr\Corona\RequestParser::parse_get
      */
-    public function testParsingNoGet()
+    public function testParsingNoGet(): void
     {
         $this->assertArrayEmpty($this->class->parse_get());
     }
@@ -73,7 +73,7 @@ class RequestParserBaseTest extends RequestParserTest
      *
      * @covers Lunr\Corona\RequestParser::parse_cookie
      */
-    public function testParsingNoCookie()
+    public function testParsingNoCookie(): void
     {
         $this->assertArrayEmpty($this->class->parse_cookie());
     }
@@ -83,7 +83,7 @@ class RequestParserBaseTest extends RequestParserTest
      *
      * @covers Lunr\Corona\RequestParser::parse_command_line_arguments
      */
-    public function testParsingNoCommandLineArguments()
+    public function testParsingNoCommandLineArguments(): void
     {
         $this->assertArrayEmpty($this->class->parse_command_line_arguments());
     }
@@ -93,7 +93,7 @@ class RequestParserBaseTest extends RequestParserTest
      *
      * @covers Lunr\Corona\RequestParser::parse_accept_format
      */
-    public function testParseAcceptFormatReturnsNull()
+    public function testParseAcceptFormatReturnsNull(): void
     {
         $this->assertNull($this->class->parse_accept_format());
     }
@@ -103,7 +103,7 @@ class RequestParserBaseTest extends RequestParserTest
      *
      * @covers Lunr\Corona\RequestParser::parse_accept_language
      */
-    public function testParseAcceptLanguageReturnsNull()
+    public function testParseAcceptLanguageReturnsNull(): void
     {
         $this->assertNull($this->class->parse_accept_language());
     }
@@ -113,7 +113,7 @@ class RequestParserBaseTest extends RequestParserTest
      *
      * @covers Lunr\Corona\RequestParser::parse_accept_charset
      */
-    public function testParseAcceptCharsetReturnsNull()
+    public function testParseAcceptCharsetReturnsNull(): void
     {
         $this->assertNull($this->class->parse_accept_charset());
     }
@@ -123,7 +123,7 @@ class RequestParserBaseTest extends RequestParserTest
      *
      * @covers   Lunr\Corona\RequestParser::parse_raw_data
      */
-    public function testParseRawData()
+    public function testParseRawData(): void
     {
         $this->mock_function('file_get_contents', 'return "raw";');
 

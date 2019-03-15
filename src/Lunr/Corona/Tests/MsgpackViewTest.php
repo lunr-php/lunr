@@ -45,7 +45,7 @@ abstract class MsgpackViewTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->response      = $this->getMockBuilder('Lunr\Corona\Response')->getMock();
         $this->request       = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
@@ -58,7 +58,7 @@ abstract class MsgpackViewTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->request);
         unset($this->response);
@@ -72,7 +72,7 @@ abstract class MsgpackViewTest extends LunrBaseTest
      *
      * @return array $info Array of non-integer error info values.
      */
-    public function invalidErrorInfoProvider()
+    public function invalidErrorInfoProvider(): array
     {
         $info   = [];
         $info[] = [ 'string' ];

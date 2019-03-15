@@ -32,7 +32,7 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
     * @dataProvider invalidSuperglobalValueProvider
     * @covers       Lunr\Corona\WebRequestParser::parse_super_global
     */
-    public function testParseInvalidSuperGlobalValuesResetsSuperGlobal($var, $reset)
+    public function testParseInvalidSuperGlobalValuesResetsSuperGlobal($var, $reset): void
     {
         $_VAR = $var;
 
@@ -53,7 +53,7 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_super_global
      */
-    public function testParseValidSuperGlobalValues()
+    public function testParseValidSuperGlobalValues(): void
     {
         $_VAR['test1'] = 'value1';
         $_VAR['test2'] = 'value2';
@@ -70,7 +70,7 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_super_global
      */
-    public function testSuperGlobalEmptyAfterParse()
+    public function testSuperGlobalEmptyAfterParse(): void
     {
         $_VAR['test1'] = 'value1';
         $_VAR['test2'] = 'value2';
@@ -86,7 +86,7 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_super_global
      */
-    public function testSuperGlobalNotEmptyAfterParse()
+    public function testSuperGlobalNotEmptyAfterParse(): void
     {
         $_VAR['test1'] = 'value1';
         $_VAR['test2'] = 'value2';

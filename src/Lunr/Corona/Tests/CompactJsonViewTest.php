@@ -45,7 +45,7 @@ abstract class CompactJsonViewTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->response      = $this->getMockBuilder('Lunr\Corona\Response')->getMock();
         $this->request       = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
@@ -58,7 +58,7 @@ abstract class CompactJsonViewTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->request);
         unset($this->response);
@@ -72,7 +72,7 @@ abstract class CompactJsonViewTest extends LunrBaseTest
      *
      * @return array $info Array of data values.
      */
-    public function dataProvider()
+    public function dataProvider(): array
     {
         $info   = [];
         $info[] = [ [ 'key1' => 'value', 'key2' => NULL ], [ 'key1' => 'value' ] ];

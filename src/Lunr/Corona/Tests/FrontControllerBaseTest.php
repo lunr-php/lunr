@@ -23,7 +23,7 @@ class FrontControllerBaseTest extends FrontControllerTest
     /**
      * Test that the Request class was passed correctly.
      */
-    public function testRequestPassedCorrectly()
+    public function testRequestPassedCorrectly(): void
     {
         $this->assertPropertySame('request', $this->request);
     }
@@ -31,7 +31,7 @@ class FrontControllerBaseTest extends FrontControllerTest
     /**
      * Test that the RequestResultHandler class was passed correctly.
      */
-    public function testRequestResultHandlerPassedCorrectly()
+    public function testRequestResultHandlerPassedCorrectly(): void
     {
         $this->assertPropertySame('handler', $this->handler);
     }
@@ -39,7 +39,7 @@ class FrontControllerBaseTest extends FrontControllerTest
     /**
      * Test that the FilesystemAccessObject class was passed correctly.
      */
-    public function testFAOPassedCorrectly()
+    public function testFAOPassedCorrectly(): void
     {
         $this->assertPropertySame('fao', $this->fao);
     }
@@ -49,7 +49,7 @@ class FrontControllerBaseTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::register_lookup_path
      */
-    public function testRegisterLookupPath()
+    public function testRegisterLookupPath(): void
     {
         $property = $this->get_accessible_reflection_property('paths');
 
@@ -69,7 +69,7 @@ class FrontControllerBaseTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::add_routing_rule
      */
-    public function testAddRoutingRuleWithoutRoute()
+    public function testAddRoutingRuleWithoutRoute(): void
     {
         $property = $this->get_accessible_reflection_property('routes');
 
@@ -89,7 +89,7 @@ class FrontControllerBaseTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::add_routing_rule
      */
-    public function testAddRoutingRuleWithRoute()
+    public function testAddRoutingRuleWithRoute(): void
     {
         $property = $this->get_accessible_reflection_property('routes');
 

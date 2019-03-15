@@ -28,7 +28,7 @@ class WebRequestParserParseGetTest extends WebRequestParserTest
      * @dataProvider invalidSuperglobalValueProvider
      * @covers       Lunr\Corona\WebRequestParser::parse_get
      */
-    public function testParseInvalidGetValuesReturnsEmptyArray($get)
+    public function testParseInvalidGetValuesReturnsEmptyArray($get): void
     {
         $_GET = $get;
 
@@ -48,7 +48,7 @@ class WebRequestParserParseGetTest extends WebRequestParserTest
     * @dataProvider invalidSuperglobalValueProvider
     * @covers       Lunr\Corona\WebRequestParser::parse_get
     */
-    public function testParseInvalidGetValuesResetsGet($get)
+    public function testParseInvalidGetValuesResetsGet($get): void
     {
         $_GET = $get;
 
@@ -62,7 +62,7 @@ class WebRequestParserParseGetTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_get
      */
-    public function testParseValidGetValues()
+    public function testParseValidGetValues(): void
     {
         $_GET['test1'] = 'value1';
         $_GET['test2'] = 'value2';
@@ -78,7 +78,7 @@ class WebRequestParserParseGetTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_get
      */
-    public function testGetEmptyAfterParse()
+    public function testGetEmptyAfterParse(): void
     {
         $_GET['test1'] = 'value1';
         $_GET['test2'] = 'value2';

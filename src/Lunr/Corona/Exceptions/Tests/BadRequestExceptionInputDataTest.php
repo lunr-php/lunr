@@ -25,7 +25,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
      *
      * @covers Lunr\Corona\Exceptions\BadRequestException::setData
      */
-    public function testSetDataSetsData()
+    public function testSetDataSetsData(): void
     {
         $this->class->setData('foo', 'bar');
 
@@ -39,7 +39,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
      *
      * @covers Lunr\Corona\Exceptions\BadRequestException::setReport
      */
-    public function testSetReportSetsReport()
+    public function testSetReportSetsReport(): void
     {
         $report = "Foo failed!\nBar failed!\n";
 
@@ -54,7 +54,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
      *
      * @covers Lunr\Corona\Exceptions\BadRequestException::setReport
      */
-    public function testSetReportDoesNotSetEmptyReport()
+    public function testSetReportDoesNotSetEmptyReport(): void
     {
         $report = "";
 
@@ -69,7 +69,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
      *
      * @covers Lunr\Corona\Exceptions\BadRequestException::setArrayReport
      */
-    public function testSetArrayReportSetsReport()
+    public function testSetArrayReportSetsReport(): void
     {
         $failures = [
             'key1' => [
@@ -94,7 +94,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
      *
      * @covers Lunr\Corona\Exceptions\BadRequestException::setArrayReport
      */
-    public function testSetArrayReportDoesNotSetEmptyReport()
+    public function testSetArrayReportDoesNotSetEmptyReport(): void
     {
         $failures = [];
 
@@ -109,7 +109,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
      *
      * @covers Lunr\Corona\Exceptions\BadRequestException::getDataKey
      */
-    public function testGetDataKey()
+    public function testGetDataKey(): void
     {
         $this->set_reflection_property_value('key', 'foo');
 
@@ -121,7 +121,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
      *
      * @covers Lunr\Corona\Exceptions\BadRequestException::getDataValue
      */
-    public function testGetDataValue()
+    public function testGetDataValue(): void
     {
         $this->set_reflection_property_value('value', 'bar');
 
@@ -133,7 +133,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
      *
      * @covers Lunr\Corona\Exceptions\BadRequestException::getReport
      */
-    public function testGetReport()
+    public function testGetReport(): void
     {
         $this->set_reflection_property_value('report', 'baz');
 
@@ -145,7 +145,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
      *
      * @covers Lunr\Corona\Exceptions\BadRequestException::isDataAvailable
      */
-    public function testIsDataAvailable()
+    public function testIsDataAvailable(): void
     {
         $this->assertFalse($this->class->isDataAvailable());
 
@@ -159,7 +159,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
      *
      * @covers Lunr\Corona\Exceptions\BadRequestException::isReportAvailable
      */
-    public function testIsReportAvailable()
+    public function testIsReportAvailable(): void
     {
         $this->assertFalse($this->class->isReportAvailable());
 

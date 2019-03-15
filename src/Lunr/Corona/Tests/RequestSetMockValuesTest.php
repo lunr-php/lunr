@@ -27,7 +27,7 @@ class RequestSetMockValuesTest extends RequestTest
      * @dataProvider invalidMockValueProvider
      * @covers       Lunr\Corona\Request::set_mock_values
      */
-    public function testSetMockValuesWithInvalidMockValue($value)
+    public function testSetMockValuesWithInvalidMockValue($value): void
     {
         $this->class->set_mock_values($value);
 
@@ -39,7 +39,7 @@ class RequestSetMockValuesTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::set_mock_values
      */
-    public function testSetMockValues()
+    public function testSetMockValues(): void
     {
         $mock = [ 'controller' => 'newcontroller' ];
 

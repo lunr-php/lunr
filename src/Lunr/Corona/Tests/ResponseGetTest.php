@@ -28,7 +28,7 @@ class ResponseGetTest extends ResponseTest
      * @dataProvider validResponseAttributesProvider
      * @covers       Lunr\Corona\Response::__get
      */
-    public function testGettingExistingAttributes($attr, $value)
+    public function testGettingExistingAttributes($attr, $value): void
     {
         $this->assertEquals($value, $this->class->$attr);
     }
@@ -41,7 +41,7 @@ class ResponseGetTest extends ResponseTest
      * @dataProvider invalidResponseAttributesProvider
      * @covers       Lunr\Corona\Response::__get
      */
-    public function testGettingInaccessibleAttributes($attr)
+    public function testGettingInaccessibleAttributes($attr): void
     {
         $this->assertNull($this->class->$attr);
     }
@@ -51,7 +51,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_response_data
      */
-    public function testGetResponseDataWithExistingKey()
+    public function testGetResponseDataWithExistingKey(): void
     {
         $data = [ 'key' => 'value' ];
 
@@ -65,7 +65,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_response_data
      */
-    public function testGetResponseDataWithNonExistingKey()
+    public function testGetResponseDataWithNonExistingKey(): void
     {
         $this->assertNull($this->class->get_response_data('non-existing'));
     }
@@ -75,7 +75,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_response_data
      */
-    public function testGetResponseDataWithoutKey()
+    public function testGetResponseDataWithoutKey(): void
     {
         $data = [ 'key1' => 'value1', 'key2' => 'value2' ];
 
@@ -89,7 +89,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_error_message
      */
-    public function testGetExistingErrorMessage()
+    public function testGetExistingErrorMessage(): void
     {
         $data = [ 'controller/method' => 'error message' ];
 
@@ -103,7 +103,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_error_message
      */
-    public function testGetNonExistantErrorMessage()
+    public function testGetNonExistantErrorMessage(): void
     {
         $this->assertNull($this->class->get_error_message('controller/method'));
     }
@@ -113,7 +113,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_error_info
      */
-    public function testGetExistingErrorInfo()
+    public function testGetExistingErrorInfo(): void
     {
         $data = [ 'controller/method' => 'error info' ];
 
@@ -127,7 +127,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_error_info
      */
-    public function testGetNonExistantErrorInfo()
+    public function testGetNonExistantErrorInfo(): void
     {
         $this->assertNull($this->class->get_error_info('controller/method'));
     }
@@ -137,7 +137,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_return_code
      */
-    public function testGetReturnCodeWithoutIdentifierWithEmptyCodes()
+    public function testGetReturnCodeWithoutIdentifierWithEmptyCodes(): void
     {
         $this->set_reflection_property_value('return_code', []);
 
@@ -149,7 +149,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_return_code
      */
-    public function testGetReturnCodeWithEmptyCodes()
+    public function testGetReturnCodeWithEmptyCodes(): void
     {
         $this->set_reflection_property_value('return_code', []);
 
@@ -161,7 +161,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_return_code
      */
-    public function testGetExistingReturnCode()
+    public function testGetExistingReturnCode(): void
     {
         $data = [ 'controller/method' => 200 ];
 
@@ -175,7 +175,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_return_code
      */
-    public function testGetNonExistantReturnCode()
+    public function testGetNonExistantReturnCode(): void
     {
         $this->assertNull($this->class->get_return_code('controller/method'));
     }
@@ -185,7 +185,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_return_code
      */
-    public function testGetReturnCodeWithoutIdentifier()
+    public function testGetReturnCodeWithoutIdentifier(): void
     {
         $data = [ 'controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
 
@@ -199,7 +199,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_return_code_identifiers
      */
-    public function testGetMaximumReturnCodeIdentifiersWithEmptyCodes()
+    public function testGetMaximumReturnCodeIdentifiersWithEmptyCodes(): void
     {
         $this->set_reflection_property_value('return_code', []);
 
@@ -211,7 +211,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_return_code_identifiers
      */
-    public function testGetReturnCodeIdentifiersWithEmptyCodes()
+    public function testGetReturnCodeIdentifiersWithEmptyCodes(): void
     {
         $this->set_reflection_property_value('return_code', []);
 
@@ -223,7 +223,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_return_code_identifiers
      */
-    public function testGetMaximumReturnCodeIdentifier()
+    public function testGetMaximumReturnCodeIdentifier(): void
     {
         $data = [ 'controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
 
@@ -237,7 +237,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_return_code_identifiers
      */
-    public function testGetAllReturnCodeIdentifiers()
+    public function testGetAllReturnCodeIdentifiers(): void
     {
         $data = [ 'controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
 

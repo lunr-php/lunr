@@ -44,7 +44,7 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
      *
      * @covers   Lunr\Corona\MsgpackView::print_fatal_error
      */
-    public function testPrintFatalErrorPrintsNothingIfNoError()
+    public function testPrintFatalErrorPrintsNothingIfNoError(): void
     {
         $this->mock_function('error_get_last', self::NO_ERROR);
 
@@ -62,7 +62,7 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
      *
      * @covers   Lunr\Corona\MsgpackView::print_fatal_error
      */
-    public function testPrintFatalErrorPrintsNothingIfErrorNotFatal()
+    public function testPrintFatalErrorPrintsNothingIfErrorNotFatal(): void
     {
         $this->mock_function('error_get_last', self::ERROR);
 
@@ -80,7 +80,7 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
      *
      * @covers   Lunr\Corona\MsgpackView::print_fatal_error
      */
-    public function testPrintFatalErrorPrintsMsgpack()
+    public function testPrintFatalErrorPrintsMsgpack(): void
     {
         $this->mock_function('error_get_last', self::FATAL_ERROR);
         $this->mock_function('header', '');

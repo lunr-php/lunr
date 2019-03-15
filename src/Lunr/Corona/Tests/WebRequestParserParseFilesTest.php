@@ -29,7 +29,7 @@ class WebRequestParserParseFilesTest extends WebRequestParserTest
      * @dataProvider invalidSuperglobalValueProvider
      * @covers       Lunr\Corona\WebRequestParser::parse_files
      */
-    public function testParseInvalidFilesValuesReturnsEmptyArray($files)
+    public function testParseInvalidFilesValuesReturnsEmptyArray($files): void
     {
         $_FILES = $files;
 
@@ -49,7 +49,7 @@ class WebRequestParserParseFilesTest extends WebRequestParserTest
     * @dataProvider invalidSuperglobalValueProvider
     * @covers       Lunr\Corona\WebRequestParser::parse_files
     */
-    public function testParseInvalidFilesValuesResetsFiles($files)
+    public function testParseInvalidFilesValuesResetsFiles($files): void
     {
         $_FILES = $files;
 
@@ -63,7 +63,7 @@ class WebRequestParserParseFilesTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_files
      */
-    public function testParseValidFilesValues()
+    public function testParseValidFilesValues(): void
     {
         $_FILES['test1'] = [
             'name'     => 'Name',
@@ -93,7 +93,7 @@ class WebRequestParserParseFilesTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_files
      */
-    public function testFilesEmptyAfterParse()
+    public function testFilesEmptyAfterParse(): void
     {
         $_FILES['test1'] = [
             'name'     => 'Name',

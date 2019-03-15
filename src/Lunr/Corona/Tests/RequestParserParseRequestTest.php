@@ -34,7 +34,7 @@ class RequestParserParseRequestTest extends RequestParserTest
      *
      * @return void
      */
-    protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = '')
+    protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = ''): void
     {
         if (!extension_loaded('uuid'))
         {
@@ -93,7 +93,7 @@ class RequestParserParseRequestTest extends RequestParserTest
      *
      * @return void
      */
-    protected function prepare_request_data($controller = TRUE, $method = TRUE, $override = FALSE)
+    protected function prepare_request_data($controller = TRUE, $method = TRUE, $override = FALSE): void
     {
         if ($controller === TRUE)
         {
@@ -117,7 +117,7 @@ class RequestParserParseRequestTest extends RequestParserTest
      *
      * @return void
      */
-    private function cleanup_request_test()
+    private function cleanup_request_test(): void
     {
         $this->unmock_function('gethostname');
         $this->unmock_function('uuid_create');
@@ -128,7 +128,7 @@ class RequestParserParseRequestTest extends RequestParserTest
      *
      * @return array $base Array of base_url parameters and possible values
      */
-    public function baseurlProvider()
+    public function baseurlProvider(): array
     {
         $base   = [];
         $base[] = [ 'HTTPS', '443', 'https://www.domain.com/path/to/' ];

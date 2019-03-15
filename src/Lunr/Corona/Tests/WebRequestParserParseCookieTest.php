@@ -29,7 +29,7 @@ class WebRequestParserParseCookieTest extends WebRequestParserTest
      * @dataProvider invalidSuperglobalValueProvider
      * @covers       Lunr\Corona\WebRequestParser::parse_cookie
      */
-    public function testParseInvalidCookieValuesReturnsEmptyArray($cookie)
+    public function testParseInvalidCookieValuesReturnsEmptyArray($cookie): void
     {
         $_COOKIE = $cookie;
 
@@ -49,7 +49,7 @@ class WebRequestParserParseCookieTest extends WebRequestParserTest
     * @dataProvider invalidSuperglobalValueProvider
     * @covers       Lunr\Corona\WebRequestParser::parse_cookie
     */
-    public function testParseInvalidCookieValuesResetsCookie($cookie)
+    public function testParseInvalidCookieValuesResetsCookie($cookie): void
     {
         $_COOKIE = $cookie;
 
@@ -63,7 +63,7 @@ class WebRequestParserParseCookieTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_cookie
      */
-    public function testParseValidCookieValues()
+    public function testParseValidCookieValues(): void
     {
         $_COOKIE['test1'] = 'value1';
         $_COOKIE['test2'] = 'value2';
@@ -79,7 +79,7 @@ class WebRequestParserParseCookieTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_cookie
      */
-    public function testCookieEmptyAfterParse()
+    public function testCookieEmptyAfterParse(): void
     {
         $_COOKIE['test1'] = 'value1';
         $_COOKIE['test2'] = 'value2';
@@ -94,7 +94,7 @@ class WebRequestParserParseCookieTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_cookie
      */
-    public function testSuperglobalCookieWithPHPSESSIDSet()
+    public function testSuperglobalCookieWithPHPSESSIDSet(): void
     {
         $_COOKIE['test1']     = 'value1';
         $_COOKIE['test2']     = 'value2';

@@ -31,7 +31,7 @@ class WebRequestParserParseServerTest extends WebRequestParserTest
     * @dataProvider invalidSuperglobalValueProvider
     * @covers       Lunr\Corona\WebRequestParser::parse_server
     */
-    public function testParseInvalidServerValuesIntactServer($server)
+    public function testParseInvalidServerValuesIntactServer($server): void
     {
         $backup = $_SERVER;
 
@@ -49,7 +49,7 @@ class WebRequestParserParseServerTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_server
      */
-    public function testParseValidServerValues()
+    public function testParseValidServerValues(): void
     {
         $_SERVER['test1'] = 'value1';
         $_SERVER['test2'] = 'value2';
@@ -65,7 +65,7 @@ class WebRequestParserParseServerTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_server
      */
-    public function testServerIntactAfterParse()
+    public function testServerIntactAfterParse(): void
     {
         $_SERVER['test1'] = 'value1';
         $_SERVER['test2'] = 'value2';

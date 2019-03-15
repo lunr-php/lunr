@@ -27,7 +27,7 @@ class RequestAddMockValuesTest extends RequestTest
      * @dataProvider invalidMockValueProvider
      * @covers       Lunr\Corona\Request::add_mock_values
      */
-    public function testAddMockValuesWithInvalidMockValue($value)
+    public function testAddMockValuesWithInvalidMockValue($value): void
     {
         $this->class->add_mock_values($value);
 
@@ -41,7 +41,7 @@ class RequestAddMockValuesTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::add_mock_values
      */
-    public function testAddMockValuesWithCurrentEmpty()
+    public function testAddMockValuesWithCurrentEmpty(): void
     {
         $mock = [ 'controller' => 'new_controller' ];
 
@@ -59,7 +59,7 @@ class RequestAddMockValuesTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::add_mock_values
      */
-    public function testAddMockValuesWithCurrentSet()
+    public function testAddMockValuesWithCurrentSet(): void
     {
         $current_mock = [
             'controller' => 'old_controller',

@@ -23,7 +23,7 @@ class InternalServerErrorExceptionBaseTest extends HttpExceptionTest
     /**
      * Test that the error code was set correctly.
      */
-    public function testErrorCodeSetCorrectly()
+    public function testErrorCodeSetCorrectly(): void
     {
         $this->assertPropertySame('code', 500);
     }
@@ -31,7 +31,7 @@ class InternalServerErrorExceptionBaseTest extends HttpExceptionTest
     /**
      * Test that the error code was set correctly.
      */
-    public function testApplicationErrorCodeSetCorrectly()
+    public function testApplicationErrorCodeSetCorrectly(): void
     {
         $this->assertPropertySame('app_code', $this->code);
     }
@@ -39,7 +39,7 @@ class InternalServerErrorExceptionBaseTest extends HttpExceptionTest
     /**
      * Test that the error message was passed correctly.
      */
-    public function testErrorMessagePassedCorrectly()
+    public function testErrorMessagePassedCorrectly(): void
     {
         $this->expectExceptionMessage($this->message);
 

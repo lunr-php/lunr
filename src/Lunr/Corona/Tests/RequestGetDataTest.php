@@ -25,7 +25,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_get_data
      */
-    public function testGetGetData()
+    public function testGetGetData(): void
     {
         $this->assertEquals('get_value', $this->class->get_get_data('get_key'));
     }
@@ -35,7 +35,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_get_data
      */
-    public function testGetGetDataNoKey()
+    public function testGetGetDataNoKey(): void
     {
         $this->assertEquals([ 'get_key' => 'get_value', 'get_second_key' => 'get_value' ], $this->class->get_get_data());
     }
@@ -45,7 +45,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_get_data
      */
-    public function testGetGetDataWithMockValue()
+    public function testGetGetDataWithMockValue(): void
     {
         $this->set_reflection_property_value('mock', [ 'get' => [ 'get_key' => 'get_mock_value' ] ]);
 
@@ -57,7 +57,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_get_data
      */
-    public function testGetGetDataWithMockValueNoKey()
+    public function testGetGetDataWithMockValueNoKey(): void
     {
         $this->set_reflection_property_value('mock', [ 'get' => [ 'get_key' => 'get_mock_value', 'mock_key' => 'get_mock_value' ] ]);
 
@@ -74,7 +74,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_get_data
      */
-    public function testGetGetDataWithInvalidMockValue()
+    public function testGetGetDataWithInvalidMockValue(): void
     {
         $this->set_reflection_property_value('mock', [ 'get' => [] ]);
 
@@ -86,7 +86,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_post_data
      */
-    public function testGetPostData()
+    public function testGetPostData(): void
     {
         $this->assertEquals('post_value', $this->class->get_post_data('post_key'));
     }
@@ -96,7 +96,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_post_data
      */
-    public function testGetPostDataNoKey()
+    public function testGetPostDataNoKey(): void
     {
         $this->assertEquals([ 'post_key' => 'post_value', 'post_second_key' => 'post_value' ], $this->class->get_post_data());
     }
@@ -106,7 +106,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_post_data
      */
-    public function testGetPostDataWithMockValue()
+    public function testGetPostDataWithMockValue(): void
     {
         $this->set_reflection_property_value('mock', [ 'post' => [ 'post_key' => 'post_mock_value' ] ]);
 
@@ -118,7 +118,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_post_data
      */
-    public function testGetPostDataWithMockValueNoKey()
+    public function testGetPostDataWithMockValueNoKey(): void
     {
         $this->set_reflection_property_value('mock', [ 'post' => [ 'post_key' => 'post_mock_value', 'mock_key' => 'post_mock_value' ] ]);
 
@@ -135,7 +135,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_post_data
      */
-    public function testGetPostDataWithInvalidMockValue()
+    public function testGetPostDataWithInvalidMockValue(): void
     {
         $this->set_reflection_property_value('mock', [ 'post' => [] ]);
 
@@ -147,7 +147,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_server_data
      */
-    public function testGetServerData()
+    public function testGetServerData(): void
     {
         $this->assertEquals('server_value', $this->class->get_server_data('server_key'));
     }
@@ -157,7 +157,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_http_header_data
      */
-    public function testGetHeaderData()
+    public function testGetHeaderData(): void
     {
         $this->assertEquals('HTTP_SERVER_VALUE', $this->class->get_http_header_data('server_key'));
     }
@@ -167,7 +167,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_files_data
      */
-    public function testGetFileData()
+    public function testGetFileData(): void
     {
         $this->assertEquals($this->files['image'], $this->class->get_files_data('image'));
     }
@@ -177,7 +177,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_cookie_data
      */
-    public function testGetCookieData()
+    public function testGetCookieData(): void
     {
         $this->assertEquals('cookie_value', $this->class->get_cookie_data('cookie_key'));
     }
@@ -190,7 +190,7 @@ class RequestGetDataTest extends RequestTest
      * @dataProvider cliArgsKeyProvider
      * @covers       Lunr\Corona\Request::get_all_options
      */
-    public function testGetAllOptionsReturnsArray($keys)
+    public function testGetAllOptionsReturnsArray($keys): void
     {
         $values = [];
         for ($i = 0; $i < count($keys); $i++)
@@ -213,7 +213,7 @@ class RequestGetDataTest extends RequestTest
      * @dataProvider validCliArgsValueProvider
      * @covers       Lunr\Corona\Request::get_option_data
      */
-    public function testGetOptionDataReturnsValueForValidKey($value)
+    public function testGetOptionDataReturnsValueForValidKey($value): void
     {
         $this->set_reflection_property_value('cli_args', [ 'a' => $value ]);
 
@@ -227,7 +227,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_option_data
      */
-    public function testGetOptionDataReturnsNullForInvalidKey()
+    public function testGetOptionDataReturnsNullForInvalidKey(): void
     {
         $ast = $this->get_reflection_property_value('cli_args');
 
@@ -243,7 +243,7 @@ class RequestGetDataTest extends RequestTest
      * @dataProvider contentTypeProvider
      * @covers       Lunr\Corona\Request::get_accept_format
      */
-    public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value)
+    public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value): void
     {
         $this->parser->expects($this->once())
                      ->method('parse_accept_format')
@@ -258,7 +258,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_accept_format
      */
-    public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull()
+    public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull(): void
     {
         $this->assertNull($this->class->get_accept_format([]));
     }
@@ -271,7 +271,7 @@ class RequestGetDataTest extends RequestTest
      * @dataProvider acceptLanguageProvider
      * @covers       Lunr\Corona\Request::get_accept_language
      */
-    public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value)
+    public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value): void
     {
         $this->parser->expects($this->once())
                      ->method('parse_accept_language')
@@ -286,7 +286,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_accept_language
      */
-    public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull()
+    public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull(): void
     {
         $this->assertNull($this->class->get_accept_language([]));
     }
@@ -299,7 +299,7 @@ class RequestGetDataTest extends RequestTest
      * @dataProvider acceptCharsetProvider
      * @covers       Lunr\Corona\Request::get_accept_charset
      */
-    public function testGetAcceptCharsetWithValidSupportedCharsetsReturnsString($value)
+    public function testGetAcceptCharsetWithValidSupportedCharsetsReturnsString($value): void
     {
         $this->parser->expects($this->once())
                      ->method('parse_accept_charset')
@@ -314,7 +314,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_accept_charset
      */
-    public function testGetAcceptCharsetWithEmptySupportedCharsetsReturnsNull()
+    public function testGetAcceptCharsetWithEmptySupportedCharsetsReturnsNull(): void
     {
         $this->assertNull($this->class->get_accept_charset([]));
     }
@@ -324,7 +324,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_raw_data
      */
-    public function testGetRawDataReturnsRawRequestData()
+    public function testGetRawDataReturnsRawRequestData(): void
     {
         $this->parser->expects($this->once())
                      ->method('parse_raw_data')
@@ -338,7 +338,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_raw_data
      */
-    public function testGetRawDataReturnsCachedRawRequestData()
+    public function testGetRawDataReturnsCachedRawRequestData(): void
     {
         $this->parser->expects($this->at(0))
                      ->method('parse_raw_data')
@@ -358,7 +358,7 @@ class RequestGetDataTest extends RequestTest
      *
      * @covers Lunr\Corona\Request::get_raw_data
      */
-    public function testGetRawDataReturnsUnCachedRawRequestData()
+    public function testGetRawDataReturnsUnCachedRawRequestData(): void
     {
         $this->parser->expects($this->at(0))
                      ->method('parse_raw_data')

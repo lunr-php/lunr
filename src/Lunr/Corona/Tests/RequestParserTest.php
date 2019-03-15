@@ -35,7 +35,7 @@ abstract class RequestParserTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
@@ -46,7 +46,7 @@ abstract class RequestParserTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -58,7 +58,7 @@ abstract class RequestParserTest extends LunrBaseTest
      *
      * @return array $cookie Set of invalid super global values
      */
-    public function invalidSuperglobalValueProvider()
+    public function invalidSuperglobalValueProvider(): array
     {
         $values   = [];
         $values[] = [ [] ];
@@ -75,7 +75,7 @@ abstract class RequestParserTest extends LunrBaseTest
      *
      * @return array $value Array of content type(s)
      */
-    public function contentTypeProvider()
+    public function contentTypeProvider(): array
     {
         $value   = [];
         $value[] = [ 'text/html' ];
@@ -88,7 +88,7 @@ abstract class RequestParserTest extends LunrBaseTest
      *
      * @return array $value Array of language(s)
      */
-    public function acceptLanguageProvider()
+    public function acceptLanguageProvider(): array
     {
         $value   = [];
         $value[] = [ 'en-US' ];
@@ -101,7 +101,7 @@ abstract class RequestParserTest extends LunrBaseTest
      *
      * @return array $value Array of charset(s)
      */
-    public function acceptCharsetProvider()
+    public function acceptCharsetProvider(): array
     {
         $value   = [];
         $value[] = [ 'utf-8' ];

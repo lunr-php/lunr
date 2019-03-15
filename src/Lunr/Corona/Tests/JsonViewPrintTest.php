@@ -28,7 +28,7 @@ class JsonViewPrintTest extends JsonViewTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -44,7 +44,7 @@ class JsonViewPrintTest extends JsonViewTest
      * @requires     PHP 5.5.12
      * @covers       Lunr\Corona\JsonView::print_page
      */
-    public function testPrintPagePrintsJsonWithCode($error_info)
+    public function testPrintPagePrintsJsonWithCode($error_info): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
@@ -90,7 +90,7 @@ class JsonViewPrintTest extends JsonViewTest
      * @requires PHP 5.5.12
      * @covers   Lunr\Corona\JsonView::print_page
      */
-    public function testPrintPagePrintsJsonWithoutMessage()
+    public function testPrintPagePrintsJsonWithoutMessage(): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
@@ -136,7 +136,7 @@ class JsonViewPrintTest extends JsonViewTest
      * @requires PHP 5.5.12
      * @covers   Lunr\Corona\JsonView::print_page
      */
-    public function testPrintPagePrintsJson()
+    public function testPrintPagePrintsJson(): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
@@ -181,7 +181,7 @@ class JsonViewPrintTest extends JsonViewTest
      *
      * @covers Lunr\Corona\JsonView::print_page
      */
-    public function testPrintPageForWebDoesNotPrettyPrint()
+    public function testPrintPageForWebDoesNotPrettyPrint(): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
@@ -227,7 +227,7 @@ class JsonViewPrintTest extends JsonViewTest
      * @requires PHP 5.5.12
      * @covers   Lunr\Corona\JsonView::print_page
      */
-    public function testPrintPageWithEmptyData()
+    public function testPrintPageWithEmptyData(): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
@@ -276,7 +276,7 @@ class JsonViewPrintTest extends JsonViewTest
      * @requires extension xdebug
      * @covers   Lunr\Corona\JsonView::print_page
      */
-    public function testPrintPageSetsContentType()
+    public function testPrintPageSetsContentType(): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
@@ -313,7 +313,7 @@ class JsonViewPrintTest extends JsonViewTest
 
         $headers = xdebug_get_headers();
 
-        $this->assertInternalType('array', $headers);
+        $this->assertIsArray($headers);
         $this->assertNotEmpty($headers);
 
         $value = strpos($headers[0], 'X-Xdebug-Profile-Filename') !== FALSE ? $headers[2] : $headers[1];

@@ -24,7 +24,7 @@ class FrontControllerLookupTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::lookup
      */
-    public function testVoidLookup()
+    public function testVoidLookup(): void
     {
         $this->set_reflection_property_value('paths', []);
 
@@ -41,7 +41,7 @@ class FrontControllerLookupTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::lookup
      */
-    public function testLookupWithoutPath()
+    public function testLookupWithoutPath(): void
     {
         $this->set_reflection_property_value('paths', []);
 
@@ -58,7 +58,7 @@ class FrontControllerLookupTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::lookup
      */
-    public function testLookupWithSinglePath()
+    public function testLookupWithSinglePath(): void
     {
         $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar' ]);
 
@@ -86,7 +86,7 @@ class FrontControllerLookupTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::lookup
      */
-    public function testLookupWithMultiplePaths()
+    public function testLookupWithMultiplePaths(): void
     {
         $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz', 'acc' => '/foo/bay' ]);
 
@@ -118,7 +118,7 @@ class FrontControllerLookupTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::lookup
      */
-    public function testLookupWithNonExistingPath()
+    public function testLookupWithNonExistingPath(): void
     {
         $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz', 'acc' => '/foo/bay' ]);
 
@@ -138,7 +138,7 @@ class FrontControllerLookupTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::lookup
      */
-    public function testLookupWithAllPaths()
+    public function testLookupWithAllPaths(): void
     {
         $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz' ]);
 
@@ -170,7 +170,7 @@ class FrontControllerLookupTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::lookup
      */
-    public function testLookupFails()
+    public function testLookupFails(): void
     {
         $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar' ]);
 

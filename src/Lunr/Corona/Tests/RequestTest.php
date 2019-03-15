@@ -50,7 +50,7 @@ abstract class RequestTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->parser = $this->getMockBuilder('Lunr\Corona\RequestParserInterface')->getMock();
 
@@ -89,7 +89,7 @@ abstract class RequestTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -101,7 +101,7 @@ abstract class RequestTest extends LunrBaseTest
      *
      * @return array $request Sample request values
      */
-    protected function get_request_values()
+    protected function get_request_values(): array
     {
         $request = [
             'protocol'         => 'https',
@@ -128,7 +128,7 @@ abstract class RequestTest extends LunrBaseTest
      *
      * @return array $values Set of request values
      */
-    public function requestValueProvider()
+    public function requestValueProvider(): array
     {
         $values = [];
 
@@ -145,7 +145,7 @@ abstract class RequestTest extends LunrBaseTest
      *
      * @return array $values Set of cli argument key value pair
      */
-    public function validCliArgsValueProvider()
+    public function validCliArgsValueProvider(): array
     {
         $values   = [];
         $values[] = [ [] ];
@@ -161,7 +161,7 @@ abstract class RequestTest extends LunrBaseTest
      *
      * @return array $values Set cli argument keys
      */
-    public function cliArgsKeyProvider()
+    public function cliArgsKeyProvider(): array
     {
         $values   = [];
         $values[] = [ [] ];
@@ -176,7 +176,7 @@ abstract class RequestTest extends LunrBaseTest
      *
      * @return array $cookie Set of invalid mock values
      */
-    public function invalidMockValueProvider()
+    public function invalidMockValueProvider(): array
     {
         $values   = [];
         $values[] = [ new \stdClass() ];
@@ -193,7 +193,7 @@ abstract class RequestTest extends LunrBaseTest
      *
      * @return array $keys Array of unhandled key values
      */
-    public function unhandledMagicGetKeysProvider()
+    public function unhandledMagicGetKeysProvider(): array
     {
         $keys   = [];
         $keys[] = [ 'Unhandled' ];
@@ -206,7 +206,7 @@ abstract class RequestTest extends LunrBaseTest
      *
      * @return array $value Array of content type(s)
      */
-    public function contentTypeProvider()
+    public function contentTypeProvider(): array
     {
         $value   = [];
         $value[] = [ 'text/html' ];
@@ -219,7 +219,7 @@ abstract class RequestTest extends LunrBaseTest
      *
      * @return array $value Array of language(s)
      */
-    public function acceptLanguageProvider()
+    public function acceptLanguageProvider(): array
     {
         $value   = [];
         $value[] = [ 'en-US' ];
@@ -232,7 +232,7 @@ abstract class RequestTest extends LunrBaseTest
      *
      * @return array $value Array of charset(s)
      */
-    public function acceptCharsetProvider()
+    public function acceptCharsetProvider(): array
     {
         $value   = [];
         $value[] = [ 'utf-8' ];

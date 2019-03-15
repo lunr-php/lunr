@@ -41,7 +41,7 @@ abstract class HttpExceptionTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         // Assumption: All HttpExceptions end in Exception.
         $name = str_replace('\\Tests\\', '\\', substr(static::class, 0, strrpos(static::class, 'Exception') + 9));
@@ -58,7 +58,7 @@ abstract class HttpExceptionTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->code);
         unset($this->message);

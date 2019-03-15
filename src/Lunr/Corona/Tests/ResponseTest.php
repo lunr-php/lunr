@@ -26,7 +26,7 @@ class ResponseTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new Response();
         $this->reflection = new ReflectionClass('Lunr\Corona\Response');
@@ -35,7 +35,7 @@ class ResponseTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -46,7 +46,7 @@ class ResponseTest extends LunrBaseTest
      *
      * @return array $codes Array of invalid return codes.
      */
-    public function invalidReturnCodeProvider()
+    public function invalidReturnCodeProvider(): array
     {
         $codes   = [];
         $codes[] = [ '502' ];
@@ -62,7 +62,7 @@ class ResponseTest extends LunrBaseTest
      *
      * @return array $attrs Array of attribute names and their default values.
      */
-    public function validResponseAttributesProvider()
+    public function validResponseAttributesProvider(): array
     {
         $attrs   = [];
         $attrs[] = [ 'view', '' ];
@@ -75,7 +75,7 @@ class ResponseTest extends LunrBaseTest
      *
      * @return array $attrs Array of attribute names.
      */
-    public function invalidResponseAttributesProvider()
+    public function invalidResponseAttributesProvider(): array
     {
         $attrs   = [];
         $attrs[] = [ 'data' ];

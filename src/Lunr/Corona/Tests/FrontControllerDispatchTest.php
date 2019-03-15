@@ -24,7 +24,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::dispatch
      */
-    public function testDispatchWithInstantiatedController()
+    public function testDispatchWithInstantiatedController(): void
     {
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')->getMock();
 
@@ -50,7 +50,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::dispatch
      */
-    public function testDispatchWithControllerAsString()
+    public function testDispatchWithControllerAsString(): void
     {
         $controller = 'Lunr\Corona\Tests\MockController';
 
@@ -76,7 +76,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::dispatch
      */
-    public function testDispatchWithNonExistantController()
+    public function testDispatchWithNonExistantController(): void
     {
         $this->handler->expects($this->once())
                       ->method('handle_request')
@@ -103,7 +103,7 @@ class FrontControllerDispatchTest extends FrontControllerTest
      * @dataProvider invalidControllerNameProvider
      * @covers       Lunr\Corona\FrontController::dispatch
      */
-    public function testDispatchWithInvalidControllerValues($value)
+    public function testDispatchWithInvalidControllerValues($value): void
     {
         $this->handler->expects($this->once())
                       ->method('handle_request')

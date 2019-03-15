@@ -35,7 +35,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @return void
      */
-    protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = '')
+    protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = ''): void
     {
         if (!extension_loaded('uuid'))
         {
@@ -96,7 +96,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @return void
      */
-    protected function prepare_request_data($controller = TRUE, $method = TRUE, $override = FALSE)
+    protected function prepare_request_data($controller = TRUE, $method = TRUE, $override = FALSE): void
     {
         $map = [];
 
@@ -142,7 +142,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @return void
      */
-    protected function prepare_request_data_with_slashes($controller = TRUE, $method = TRUE)
+    protected function prepare_request_data_with_slashes($controller = TRUE, $method = TRUE): void
     {
         if ($controller === TRUE)
         {
@@ -163,7 +163,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @return void
      */
-    private function cleanup_request_test()
+    private function cleanup_request_test(): void
     {
         $this->unmock_function('gethostname');
         $this->unmock_function('uuid_create');
@@ -174,7 +174,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @return array $base Array of base_url parameters and possible values
      */
-    public function baseurlProvider()
+    public function baseurlProvider(): array
     {
         $base   = [];
         $base[] = [ 'HTTPS', '443', 'https://www.domain.com/path/to/' ];
@@ -190,7 +190,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @return array $base Array of controller key names
      */
-    public function controllerKeyNameProvider()
+    public function controllerKeyNameProvider(): array
     {
         $value   = [];
         $value[] = [ 'controller' ];
@@ -203,7 +203,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @return array $base Array of method key names
      */
-    public function methodKeyNameProvider()
+    public function methodKeyNameProvider(): array
     {
         $value   = [];
         $value[] = [ 'method' ];
@@ -216,7 +216,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @return array $base Array of parameter key names
      */
-    public function paramsKeyNameProvider()
+    public function paramsKeyNameProvider(): array
     {
         $value   = [];
         $value[] = [ 'param' ];
@@ -229,7 +229,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @return array $keys Array of array keys.
      */
-    public function deviceUserAgentKeyProvider()
+    public function deviceUserAgentKeyProvider(): array
     {
         $keys   = [];
         $keys[] = [ 'HTTP_X_DEVICE_USER_AGENT' ];
@@ -248,14 +248,14 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestRemovesRequestDataFromGet()
+    public function testParseRequestRemovesRequestDataFromGet(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
 
         $this->class->parse_request();
 
-        $this->assertInternalType('array', $_GET);
+        $this->assertIsArray($_GET);
         $this->assertCount(1, $_GET);
         $this->assertArrayHasKey('data', $_GET);
         $this->assertEquals('value', $_GET['data']);
@@ -268,7 +268,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestSetsRequestParsedTrue()
+    public function testParseRequestSetsRequestParsedTrue(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
@@ -285,7 +285,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestReturnsEmptyArrayIfAlreadyParsed()
+    public function testParseRequestReturnsEmptyArrayIfAlreadyParsed(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
@@ -302,14 +302,14 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestForHttpRequest()
+    public function testParseRequestForHttpRequest(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('protocol', $request);
         $this->assertEquals('http', $request['protocol']);
 
@@ -321,14 +321,14 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestForHttpsRequest()
+    public function testParseRequestForHttpsRequest(): void
     {
         $this->prepare_request_test('HTTPS', '443');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('protocol', $request);
         $this->assertEquals('https', $request['protocol']);
 
@@ -340,14 +340,14 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestForProxiedHttpRequest()
+    public function testParseRequestForProxiedHttpRequest(): void
     {
         $this->prepare_request_test('PROXIED_HTTP', '80');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('protocol', $request);
         $this->assertEquals('http', $request['protocol']);
 
@@ -359,14 +359,14 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestForSSLterminationRequest()
+    public function testParseRequestForSSLterminationRequest(): void
     {
         $this->prepare_request_test('TERMINATED_HTTPS', '443');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('protocol', $request);
         $this->assertEquals('https', $request['protocol']);
 
@@ -378,14 +378,14 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestForProxiedHttpsRequest()
+    public function testParseRequestForProxiedHttpsRequest(): void
     {
         $this->prepare_request_test('MIXED_HTTPS', '443');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('protocol', $request);
         $this->assertEquals('https', $request['protocol']);
 
@@ -397,14 +397,14 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestForproxiedMixedHttpRequest()
+    public function testParseRequestForproxiedMixedHttpRequest(): void
     {
         $this->prepare_request_test('MIXED_HTTP', '443');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('protocol', $request);
         $this->assertEquals('http', $request['protocol']);
 
@@ -416,7 +416,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestSetsDomainFromHttpHost()
+    public function testParseRequestSetsDomainFromHttpHost(): void
     {
         $this->prepare_request_test();
         $this->prepare_request_data();
@@ -426,7 +426,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('base_url', $request);
         $this->assertEquals('http://www.http_post_domain.com/path/to/', $request['base_url']);
 
@@ -438,7 +438,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestSetsDomainFromServerNameIfHttpHostNotDefined()
+    public function testParseRequestSetsDomainFromServerNameIfHttpHostNotDefined(): void
     {
         $this->prepare_request_test();
         $this->prepare_request_data();
@@ -448,7 +448,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('base_url', $request);
         $this->assertEquals('http://www.server_name_domain.com/path/to/', $request['base_url']);
 
@@ -460,7 +460,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestSetsHttpMethod()
+    public function testParseRequestSetsHttpMethod(): void
     {
         $this->prepare_request_test();
         $this->prepare_request_data();
@@ -469,7 +469,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('action', $request);
         $this->assertEquals(HttpMethod::POST, $request['action']);
 
@@ -481,7 +481,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
-    public function testParseRequestSetsRequestIdFromWebserver()
+    public function testParseRequestSetsRequestIdFromWebserver(): void
     {
         $this->prepare_request_test();
         $this->prepare_request_data();
@@ -490,7 +490,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('id', $request);
         $this->assertEquals('962161b27a0141f384c63834ad001adf', $request['id']);
 

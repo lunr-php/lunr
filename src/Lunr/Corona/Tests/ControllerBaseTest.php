@@ -22,7 +22,7 @@ class ControllerBaseTest extends ControllerTest
     /**
      * Test that the response class is set correctly.
      */
-    public function testResponseSetCorrectly()
+    public function testResponseSetCorrectly(): void
     {
         $this->assertSame($this->response, $this->get_reflection_property_value('response'));
     }
@@ -30,7 +30,7 @@ class ControllerBaseTest extends ControllerTest
     /**
      * Test that the request class is set correctly.
      */
-    public function testRequestSetCorrectly()
+    public function testRequestSetCorrectly(): void
     {
         $this->assertSame($this->request, $this->get_reflection_property_value('request'));
     }

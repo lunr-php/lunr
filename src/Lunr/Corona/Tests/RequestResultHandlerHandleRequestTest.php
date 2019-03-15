@@ -29,7 +29,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::handle_request
      */
-    public function testHandleRequestWithInstantiatedController()
+    public function testHandleRequestWithInstantiatedController(): void
     {
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')->getMock();
 
@@ -58,7 +58,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::handle_request
      */
-    public function testHandleRequestWithControllerAsString()
+    public function testHandleRequestWithControllerAsString(): void
     {
         $controller = 'Lunr\Corona\Tests\MockController';
 
@@ -83,7 +83,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::handle_request
      */
-    public function testHandleRequestWithNonExistantController()
+    public function testHandleRequestWithNonExistantController(): void
     {
         $this->request->expects($this->at(0))
                       ->method('__get')
@@ -125,7 +125,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      * @dataProvider invalidControllerNameProvider
      * @covers       Lunr\Corona\RequestResultHandler::handle_request
      */
-    public function testHandleRequestWithInvalidControllerValues($value)
+    public function testHandleRequestWithInvalidControllerValues($value): void
     {
         $this->request->expects($this->at(0))
                       ->method('__get')
@@ -164,7 +164,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::handle_request
      */
-    public function testHandleRequestWithHttpException()
+    public function testHandleRequestWithHttpException(): void
     {
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')
                            ->getMock();
@@ -210,7 +210,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::handle_request
      */
-    public function testHandleRequestWithException()
+    public function testHandleRequestWithException(): void
     {
         $exception = new Exception("Error!");
 
@@ -262,7 +262,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::handle_request
      */
-    public function testHandleRequestWithError()
+    public function testHandleRequestWithError(): void
     {
         $exception = new Error("Fatal Error!");
 
@@ -314,7 +314,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      *
      * @covers Lunr\Corona\RequestResultHandler::handle_request
      */
-    public function testHandleRequestWithSuccess()
+    public function testHandleRequestWithSuccess(): void
     {
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')
                            ->getMock();

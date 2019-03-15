@@ -48,7 +48,7 @@ trait RequestParserStaticRequestTestTrait
      *
      * @return void
      */
-    protected abstract function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = '');
+    protected abstract function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = ''): void;
 
     /**
      * Preparation work for the request tests.
@@ -59,32 +59,32 @@ trait RequestParserStaticRequestTestTrait
      *
      * @return void
      */
-    protected abstract function prepare_request_data($controller = TRUE, $method = TRUE, $override = FALSE);
+    protected abstract function prepare_request_data($controller = TRUE, $method = TRUE, $override = FALSE): void;
 
     /**
      * Cleanup work for the request tests.
      *
      * @return void
      */
-    protected abstract function cleanup_request_test();
+    protected abstract function cleanup_request_test(): void;
 
     /**
      * Unit Test Data Provider for possible base_url values and parameters.
      *
      * @return array $base Array of base_url parameters and possible values
      */
-    public abstract function baseurlProvider();
+    public abstract function baseurlProvider(): array;
 
     /**
      * Test that parse_request() unsets request data in the AST.
      */
-    public function testParseRequestSetsDefaultHttpAction()
+    public function testParseRequestSetsDefaultHttpAction(): void
     {
         $this->prepare_request_test('HTTP', '80');
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('action', $request);
         $this->assertEquals(HttpMethod::GET, $request['action']);
 
@@ -94,13 +94,13 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the host is stored correctly.
      */
-    public function testRequestHost()
+    public function testRequestHost(): void
     {
         $this->prepare_request_test();
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('host', $request);
         $this->assertEquals('Lunr', $request['host']);
 
@@ -110,13 +110,13 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the sapi is stored correctly.
      */
-    public function testRequestSapi()
+    public function testRequestSapi(): void
     {
         $this->prepare_request_test();
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('sapi', $request);
         $this->assertEquals(PHP_SAPI, $request['sapi']);
 
@@ -126,13 +126,13 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the application_path is constructed and stored correctly.
      */
-    public function testApplicationPath()
+    public function testApplicationPath(): void
     {
         $this->prepare_request_test();
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('application_path', $request);
         $this->assertEquals('/full/path/to/', $request['application_path']);
 
@@ -142,13 +142,13 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the base_path is constructed and stored correctly.
      */
-    public function testRequestBasePath()
+    public function testRequestBasePath(): void
     {
         $this->prepare_request_test();
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('base_path', $request);
         $this->assertEquals('/path/to/', $request['base_path']);
 
@@ -158,13 +158,13 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the domain is stored correctly.
      */
-    public function testRequestDomain()
+    public function testRequestDomain(): void
     {
         $this->prepare_request_test();
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('domain', $request);
         $this->assertEquals('www.domain.com', $request['domain']);
 
@@ -179,13 +179,13 @@ trait RequestParserStaticRequestTestTrait
      *
      * @dataProvider baseurlProvider
      */
-    public function testRequestPort($protocol, $port)
+    public function testRequestPort($protocol, $port): void
     {
         $this->prepare_request_test($protocol, $port);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('port', $request);
         $this->assertEquals($port, $request['port']);
 
@@ -201,13 +201,13 @@ trait RequestParserStaticRequestTestTrait
      *
      * @dataProvider baseurlProvider
      */
-    public function testRequestBaseUrl($protocol, $port, $baseurl)
+    public function testRequestBaseUrl($protocol, $port, $baseurl): void
     {
         $this->prepare_request_test($protocol, $port);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('base_url', $request);
         $this->assertEquals($baseurl, $request['base_url']);
 
@@ -217,13 +217,13 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the useragent is stored correctly, when it is not present.
      */
-    public function testRequestNoUserAgent()
+    public function testRequestNoUserAgent(): void
     {
         $this->prepare_request_test();
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('useragent', $request);
         $this->assertNull($request['useragent']);
 
@@ -233,13 +233,13 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the device useragent is stored correctly, when it is not present.
      */
-    public function testRequestNoDeviceUserAgent()
+    public function testRequestNoDeviceUserAgent(): void
     {
         $this->prepare_request_test();
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('device_useragent', $request);
         $this->assertNull($request['device_useragent']);
 
@@ -249,13 +249,13 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the verbosity is stored correctly.
      */
-    public function testRequestVerbosity()
+    public function testRequestVerbosity(): void
     {
         $this->prepare_request_test('HTTP', '80', TRUE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('verbosity', $request);
         $this->assertEquals(LogLevel::WARNING, $request['verbosity']);
 
@@ -265,14 +265,14 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the default controller value is stored correctly.
      */
-    public function testRequestDefaultController()
+    public function testRequestDefaultController(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data();
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('controller', $request);
         $this->assertEquals('DefaultController', $request['controller']);
 
@@ -282,14 +282,14 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the default method value is stored correctly.
      */
-    public function testRequestDefaultMethod()
+    public function testRequestDefaultMethod(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data();
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('method', $request);
         $this->assertEquals('default_method', $request['method']);
 
@@ -299,14 +299,14 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the default params value is stored correctly.
      */
-    public function testRequestDefaultParams()
+    public function testRequestDefaultParams(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data();
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('params', $request);
         $this->assertArrayEmpty($request['params']);
 
@@ -316,14 +316,14 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the default call value is stored correctly.
      */
-    public function testRequestDefaultCall()
+    public function testRequestDefaultCall(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data();
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('call', $request);
         $this->assertEquals('DefaultController/default_method', $request['call']);
 
@@ -333,14 +333,14 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the default call value is stored correctly.
      */
-    public function testRequestDefaultCallWithControllerUndefined()
+    public function testRequestDefaultCallWithControllerUndefined(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(FALSE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('call', $request);
         $this->assertNull($request['call']);
 
@@ -350,14 +350,14 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that the default call value is stored correctly.
      */
-    public function testRequestDefaultCallWithMethodUndefined()
+    public function testRequestDefaultCallWithMethodUndefined(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(TRUE, FALSE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('call', $request);
         $this->assertNull($request['call']);
 
@@ -367,14 +367,14 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Test that a request ID is calculated.
      */
-    public function testRequestId()
+    public function testRequestId(): void
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(TRUE, FALSE);
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('id', $request);
         $this->assertEquals('962161b27a0141f384c63834ad001adf', $request['id']);
 

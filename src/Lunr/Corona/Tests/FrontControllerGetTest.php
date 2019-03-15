@@ -24,7 +24,7 @@ class FrontControllerGetTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::get_controller
      */
-    public function testGetControllerReturnsFQCNForExistingController()
+    public function testGetControllerReturnsFQCNForExistingController(): void
     {
         $dir    = __DIR__;
         $result = __DIR__ . '/Project/Package/FunctionController.php';
@@ -50,7 +50,7 @@ class FrontControllerGetTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::get_controller
      */
-    public function testGetControllerReturnsEmptyStringForNonExistingController()
+    public function testGetControllerReturnsEmptyStringForNonExistingController(): void
     {
         $dir = __DIR__;
 
@@ -74,7 +74,7 @@ class FrontControllerGetTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::get_controller
      */
-    public function testGetControllerReturnsEmptyStringIfFindFailed()
+    public function testGetControllerReturnsEmptyStringIfFindFailed(): void
     {
         $dir = __DIR__;
 
@@ -98,7 +98,7 @@ class FrontControllerGetTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::get_controller
      */
-    public function testGetControllerReturnsEmptyStringIfNoControllerInfoAvailable()
+    public function testGetControllerReturnsEmptyStringIfNoControllerInfoAvailable(): void
     {
         $dir = __DIR__;
 
@@ -120,7 +120,7 @@ class FrontControllerGetTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::get_controller
      */
-    public function testGetControllerReturnsFirstMatchIfMultipleFound()
+    public function testGetControllerReturnsFirstMatchIfMultipleFound(): void
     {
         $dir    = __DIR__;
         $result = __DIR__ . '/Project/Package/FunctionController.php';
@@ -146,7 +146,7 @@ class FrontControllerGetTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::get_controller
      */
-    public function testGetBlacklistedControllerReturnsEmptyString()
+    public function testGetBlacklistedControllerReturnsEmptyString(): void
     {
         $dir = __DIR__;
 
@@ -168,7 +168,7 @@ class FrontControllerGetTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::get_controller
      */
-    public function testGetNotWhitelistedControllerReturnsEmptyString()
+    public function testGetNotWhitelistedControllerReturnsEmptyString(): void
     {
         $dir = __DIR__;
 
@@ -190,7 +190,7 @@ class FrontControllerGetTest extends FrontControllerTest
      *
      * @covers Lunr\Corona\FrontController::get_controller
      */
-    public function testGetWhitelistedControllerReturnsFQCNForExistingController()
+    public function testGetWhitelistedControllerReturnsFQCNForExistingController(): void
     {
         $dir    = __DIR__;
         $result = __DIR__ . '/Project/Package/FunctionController.php';
@@ -214,10 +214,10 @@ class FrontControllerGetTest extends FrontControllerTest
     /**
      * Test that get_controller() returns '' for invalid controller.
      *
-     * @dataProvider invalidControllerNameValues
+     * @dataProvider invalidControllerNameValuesProvider
      * @covers Lunr\Corona\FrontController::get_controller
      */
-    public function testGetControllerReturnsDefault($controller_name)
+    public function testGetControllerReturnsDefault($controller_name): void
     {
         $dir = 'src';
 

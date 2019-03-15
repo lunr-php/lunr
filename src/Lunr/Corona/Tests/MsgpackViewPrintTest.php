@@ -28,7 +28,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -44,7 +44,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
      * @requires     extension msgpack
      * @covers       Lunr\Corona\MsgpackView::print_page
      */
-    public function testPrintPagePrintsmsgpackWithCode($error_info)
+    public function testPrintPagePrintsmsgpackWithCode($error_info): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
@@ -85,7 +85,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
      * @requires extension msgpack
      * @covers   Lunr\Corona\MsgpackView::print_page
      */
-    public function testPrintPagePrintsmsgpackWithoutMessage()
+    public function testPrintPagePrintsmsgpackWithoutMessage(): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
@@ -126,7 +126,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
      * @requires extension msgpack
      * @covers   Lunr\Corona\MsgpackView::print_page
      */
-    public function testPrintPagePrintsmsgpack()
+    public function testPrintPagePrintsmsgpack(): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
@@ -167,7 +167,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
      * @requires extension msgpack
      * @covers   Lunr\Corona\MsgpackView::print_page
      */
-    public function testPrintPageWithEmptyData()
+    public function testPrintPageWithEmptyData(): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
@@ -211,7 +211,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
      * @requires extension xdebug
      * @covers   Lunr\Corona\MsgpackView::print_page
      */
-    public function testPrintPageSetsContentType()
+    public function testPrintPageSetsContentType(): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
@@ -243,7 +243,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
 
         $headers = xdebug_get_headers();
 
-        $this->assertInternalType('array', $headers);
+        $this->assertIsArray($headers);
         $this->assertNotEmpty($headers);
 
         $value = strpos($headers[0], 'X-Xdebug-Profile-Filename') !== FALSE ? $headers[2] : $headers[1];

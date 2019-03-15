@@ -31,7 +31,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * @requires     function http\Header::negotiate
      * @covers       Lunr\Corona\WebRequestParser::parse_accept_format
      */
-    public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value)
+    public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -56,7 +56,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * @requires function http\Header::negotiate
      * @covers   Lunr\Corona\WebRequestParser::parse_accept_format
      */
-    public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull()
+    public function testGetAcceptFormatWithEmptySupportedFormatsReturnsNull(): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -81,7 +81,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * @requires function http\Header::negotiate
      * @covers   Lunr\Corona\WebRequestParser::parse_accept_format
      */
-    public function testGetAcceptFormatWithoutSupportedFormatsReturnsNull()
+    public function testGetAcceptFormatWithoutSupportedFormatsReturnsNull(): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -108,7 +108,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * @requires     function http\Header::negotiate
      * @covers       Lunr\Corona\WebRequestParser::parse_accept_language
      */
-    public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value)
+    public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -133,7 +133,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * @requires function http\Header::negotiate
      * @covers   Lunr\Corona\WebRequestParser::parse_accept_language
      */
-    public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull()
+    public function testGetAcceptLanguageWithEmptySupportedLanguagesReturnsNull(): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -158,7 +158,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * @requires function http\Header::negotiate
      * @covers   Lunr\Corona\WebRequestParser::parse_accept_language
      */
-    public function testGetAcceptLanguageWithoutSupportedLanguagesReturnsNull()
+    public function testGetAcceptLanguageWithoutSupportedLanguagesReturnsNull(): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -185,7 +185,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * @requires     function http\Header::negotiate
      * @covers       Lunr\Corona\WebRequestParser::parse_accept_charset
      */
-    public function testGetAcceptCharsetWithValidSupportedCharsetsReturnsString($value)
+    public function testGetAcceptCharsetWithValidSupportedCharsetsReturnsString($value): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -210,7 +210,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * @requires function http\Header::negotiate
      * @covers   Lunr\Corona\WebRequestParser::parse_accept_charset
      */
-    public function testGetAcceptCharsetWithEmptySupportedCharsetsReturnsNull()
+    public function testGetAcceptCharsetWithEmptySupportedCharsetsReturnsNull(): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
@@ -235,7 +235,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
      * @requires function http\Header::negotiate
      * @covers   Lunr\Corona\WebRequestParser::parse_accept_charset
      */
-    public function testGetAcceptCharsetWithoutSupportedCharsetsReturnsNull()
+    public function testGetAcceptCharsetWithoutSupportedCharsetsReturnsNull(): void
     {
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
