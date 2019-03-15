@@ -26,7 +26,7 @@ class PostGetPostDataTest extends PostTest
      *
      * @covers Lunr\Spark\Facebook\Post::__call
      */
-    public function testGetPostDataReturnsNotRequestedWhenUsingFields()
+    public function testGetPostDataReturnsNotRequestedWhenUsingFields(): void
     {
         $this->set_reflection_property_value('fields', [ 'foo' ]);
 
@@ -41,7 +41,7 @@ class PostGetPostDataTest extends PostTest
      * @dataProvider accessTokenFieldsProvider
      * @covers       Lunr\Spark\Facebook\Post::__call
      */
-    public function testGetAccessTokenPostDataReturnsDataIfPresent($field)
+    public function testGetAccessTokenPostDataReturnsDataIfPresent($field): void
     {
         $this->set_reflection_property_value('used_access_token', TRUE);
         $this->set_reflection_property_value('data', [ $field => 'Value' ]);
@@ -57,7 +57,7 @@ class PostGetPostDataTest extends PostTest
      * @dataProvider accessTokenFieldsProvider
      * @covers       Lunr\Spark\Facebook\Post::__call
      */
-    public function testGetAccessTokenPostDataReturnsNotAvailableIfNotPresent($field)
+    public function testGetAccessTokenPostDataReturnsNotAvailableIfNotPresent($field): void
     {
         $this->set_reflection_property_value('used_access_token', TRUE);
 
@@ -72,7 +72,7 @@ class PostGetPostDataTest extends PostTest
      * @dataProvider accessTokenFieldsProvider
      * @covers       Lunr\Spark\Facebook\Post::__call
      */
-    public function testGetAccessTokenPostDataReturnsAccessDeniedIfNoAccessTokenUsed($field)
+    public function testGetAccessTokenPostDataReturnsAccessDeniedIfNoAccessTokenUsed($field): void
     {
         $message = 'Access to "{field}" requires an access token.';
         $context = [ 'field' => $field ];
@@ -93,7 +93,7 @@ class PostGetPostDataTest extends PostTest
      * @dataProvider permissionFieldsProvider
      * @covers       Lunr\Spark\Facebook\Post::__call
      */
-    public function testGetPermissionPostDataReturnsDataIfPresent($field, $permission)
+    public function testGetPermissionPostDataReturnsDataIfPresent($field, $permission): void
     {
         $this->set_reflection_property_value('permissions', [ $permission => 1 ]);
         $this->set_reflection_property_value('data', [ $field => 'Value' ]);
@@ -110,7 +110,7 @@ class PostGetPostDataTest extends PostTest
      * @dataProvider permissionFieldsProvider
      * @covers       Lunr\Spark\Facebook\Post::__call
      */
-    public function testGetPermissionPostDataReturnsNotAvailableIfNotPresent($field, $permission)
+    public function testGetPermissionPostDataReturnsNotAvailableIfNotPresent($field, $permission): void
     {
         $this->set_reflection_property_value('permissions', [ $permission => 1 ]);
 
@@ -126,7 +126,7 @@ class PostGetPostDataTest extends PostTest
      * @dataProvider permissionFieldsProvider
      * @covers       Lunr\Spark\Facebook\Post::__call
      */
-    public function testGetPermissionPostDataReturnsAccessDeniedIfPermissionMissing($field, $permission)
+    public function testGetPermissionPostDataReturnsAccessDeniedIfPermissionMissing($field, $permission): void
     {
         $message = 'Access to "{field}" requires "{permission}" permission.';
 
@@ -142,7 +142,7 @@ class PostGetPostDataTest extends PostTest
      *
      * @covers Lunr\Spark\Facebook\Post::__call
      */
-    public function testGetPostDataReturnsUnknownFieldForUnknownFields()
+    public function testGetPostDataReturnsUnknownFieldForUnknownFields(): void
     {
         $this->assertSame(DataError::UNKNOWN_FIELD, $this->class->get_unknown_field());
     }

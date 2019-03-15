@@ -28,7 +28,7 @@ class UserPermissionsTest extends UserTest
      *
      * @covers Lunr\Spark\Facebook\User::get_permissions
      */
-    public function testGetPermissionsDoesNotGetPermissionsIfAccessTokenIsNull()
+    public function testGetPermissionsDoesNotGetPermissionsIfAccessTokenIsNull(): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -46,7 +46,7 @@ class UserPermissionsTest extends UserTest
      *
      * @covers Lunr\Spark\Facebook\User::get_permissions
      */
-    public function testGetPermissionsDoesNotGetPermissionsWithAnAppAccessToken()
+    public function testGetPermissionsDoesNotGetPermissionsWithAnAppAccessToken(): void
     {
         $this->cas->expects($this->exactly(2))
                   ->method('get')
@@ -64,7 +64,7 @@ class UserPermissionsTest extends UserTest
      *
      * @covers Lunr\Spark\Facebook\User::get_permissions
      */
-    public function testGetPermissionsSetsPermissionsOnSuccess()
+    public function testGetPermissionsSetsPermissionsOnSuccess(): void
     {
         $data = [
             'data' => [
@@ -102,7 +102,7 @@ class UserPermissionsTest extends UserTest
      *
      * @covers Lunr\Spark\Facebook\User::get_permissions
      */
-    public function testGetPermissionsSetsPermissionsEmptyOnError()
+    public function testGetPermissionsSetsPermissionsEmptyOnError(): void
     {
         $this->cas->expects($this->exactly(3))
                   ->method('get')
@@ -134,7 +134,7 @@ class UserPermissionsTest extends UserTest
      *
      * @covers Lunr\Spark\Facebook\User::get_permissions
      */
-    public function testGetPermissionsSetsPermissionsEmptyOnFailure()
+    public function testGetPermissionsSetsPermissionsEmptyOnFailure(): void
     {
         $this->cas->expects($this->exactly(3))
                   ->method('get')
@@ -163,7 +163,7 @@ class UserPermissionsTest extends UserTest
      * @dataProvider validPermissionsProvider
      * @covers       Lunr\Spark\Facebook\User::is_permission_granted
      */
-    public function testIsPermissionGrantedReturnsTrueIfPermissionsGranted($permissions)
+    public function testIsPermissionGrantedReturnsTrueIfPermissionsGranted($permissions): void
     {
         $granted = [ 'email' => 1, 'user_likes' => 1 ];
 
@@ -182,7 +182,7 @@ class UserPermissionsTest extends UserTest
      * @dataProvider invalidPermissionsProvider
      * @covers       Lunr\Spark\Facebook\User::is_permission_granted
      */
-    public function testIsPermissionGrantedReturnsFalseIfPermissionsNotGranted($permissions)
+    public function testIsPermissionGrantedReturnsFalseIfPermissionsNotGranted($permissions): void
     {
         $granted = [ 'email' => 1, 'user_likes' => 1 ];
 
@@ -201,7 +201,7 @@ class UserPermissionsTest extends UserTest
      * @dataProvider validPermissionsProvider
      * @covers       Lunr\Spark\Facebook\User::check_item_access
      */
-    public function testCheckItemAccessReturnsNotAvailableIfPermissionsGranted($permissions)
+    public function testCheckItemAccessReturnsNotAvailableIfPermissionsGranted($permissions): void
     {
         $granted = [ 'email' => 1, 'user_likes' => 1 ];
 
@@ -220,7 +220,7 @@ class UserPermissionsTest extends UserTest
      * @dataProvider invalidPermissionsProvider
      * @covers       Lunr\Spark\Facebook\User::check_item_access
      */
-    public function testCheckItemAccessReturnsAccessDeniedIfPermissionsNotGranted($permissions)
+    public function testCheckItemAccessReturnsAccessDeniedIfPermissionsNotGranted($permissions): void
     {
         $granted = [ 'email' => 1, 'user_likes' => 1 ];
 
@@ -240,7 +240,7 @@ class UserPermissionsTest extends UserTest
      * @dataProvider invalidPermissionsProvider
      * @covers       Lunr\Spark\Facebook\User::check_item_access
      */
-    public function testCheckItemAccessLogsWarningIfPermissionsNotGranted($permissions, $info)
+    public function testCheckItemAccessLogsWarningIfPermissionsNotGranted($permissions, $info): void
     {
         $granted = [ 'email' => 1, 'user_likes' => 1 ];
 

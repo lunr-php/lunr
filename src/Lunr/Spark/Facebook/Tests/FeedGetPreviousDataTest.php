@@ -27,7 +27,7 @@ class FeedGetPreviousDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_previous
      */
-    public function testGetPreviousUsesFieldsIfSet()
+    public function testGetPreviousUsesFieldsIfSet(): void
     {
         $this->set_reflection_property_value('id', 'resource');
         $this->set_reflection_property_value('fields', [ 'email', 'user_likes' ]);
@@ -60,7 +60,7 @@ class FeedGetPreviousDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_previous
      */
-    public function testGetPreviousDoesNotUseFieldsIfNotSet()
+    public function testGetPreviousDoesNotUseFieldsIfNotSet(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -91,7 +91,7 @@ class FeedGetPreviousDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_previous
      */
-    public function testGetPreviousUsesAccessTokenIfPresent()
+    public function testGetPreviousUsesAccessTokenIfPresent(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -134,7 +134,7 @@ class FeedGetPreviousDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_previous
      */
-    public function testGetPreviousWhenAccessTokenNotPresent()
+    public function testGetPreviousWhenAccessTokenNotPresent(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -165,7 +165,7 @@ class FeedGetPreviousDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_previous
      */
-    public function testGetPreviousSetsDataOnSuccessfulRequest()
+    public function testGetPreviousSetsDataOnSuccessfulRequest(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -198,7 +198,7 @@ class FeedGetPreviousDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_previous
      */
-    public function testGetPreviousSetsUserDataOnSuccessfulRequest()
+    public function testGetPreviousSetsUserDataOnSuccessfulRequest(): void
     {
         $this->set_reflection_property_value('fetched_user_data', TRUE);
 
@@ -231,7 +231,7 @@ class FeedGetPreviousDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_previous
      */
-    public function testGetPreviousSetsDataOnFailedRequest()
+    public function testGetPreviousSetsDataOnFailedRequest(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -261,7 +261,7 @@ class FeedGetPreviousDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_previous
      */
-    public function testGetPreviousSetsDataOnRequestError()
+    public function testGetPreviousSetsDataOnRequestError(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -297,7 +297,7 @@ class FeedGetPreviousDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_previous
      */
-    public function testGetPreviousFetchesPermissionsIfCheckPermissionsTrue()
+    public function testGetPreviousFetchesPermissionsIfCheckPermissionsTrue(): void
     {
         $this->set_reflection_property_value('id', 'resource');
         $this->set_reflection_property_value('check_permissions', TRUE);
@@ -349,7 +349,7 @@ class FeedGetPreviousDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_previous
      */
-    public function testGetPreviousDoesNotFetchPermissionsIfCheckPermissionsFalse()
+    public function testGetPreviousDoesNotFetchPermissionsIfCheckPermissionsFalse(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 

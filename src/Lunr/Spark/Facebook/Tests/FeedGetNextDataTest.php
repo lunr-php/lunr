@@ -27,7 +27,7 @@ class FeedGetNextDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_next
      */
-    public function testGetNextUsesFieldsIfSet()
+    public function testGetNextUsesFieldsIfSet(): void
     {
         $this->set_reflection_property_value('id', 'resource');
         $this->set_reflection_property_value('fields', [ 'email', 'user_likes' ]);
@@ -60,7 +60,7 @@ class FeedGetNextDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_next
      */
-    public function testGetNextDoesNotUseFieldsIfNotSet()
+    public function testGetNextDoesNotUseFieldsIfNotSet(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -91,7 +91,7 @@ class FeedGetNextDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_next
      */
-    public function testGetNextUsesAccessTokenIfPresent()
+    public function testGetNextUsesAccessTokenIfPresent(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -134,7 +134,7 @@ class FeedGetNextDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_next
      */
-    public function testGetNextWhenAccessTokenNotPresent()
+    public function testGetNextWhenAccessTokenNotPresent(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -165,7 +165,7 @@ class FeedGetNextDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_next
      */
-    public function testGetNextSetsDataOnSuccessfulRequest()
+    public function testGetNextSetsDataOnSuccessfulRequest(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -198,7 +198,7 @@ class FeedGetNextDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_next
      */
-    public function testGetNextSetsUserDataOnSuccessfulRequest()
+    public function testGetNextSetsUserDataOnSuccessfulRequest(): void
     {
         $this->set_reflection_property_value('fetched_user_data', TRUE);
 
@@ -231,7 +231,7 @@ class FeedGetNextDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_next
      */
-    public function testGetNextSetsDataOnFailedRequest()
+    public function testGetNextSetsDataOnFailedRequest(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -261,7 +261,7 @@ class FeedGetNextDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_next
      */
-    public function testGetNextSetsDataOnRequestError()
+    public function testGetNextSetsDataOnRequestError(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -297,7 +297,7 @@ class FeedGetNextDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_next
      */
-    public function testGetNextFetchesPermissionsIfCheckPermissionsTrue()
+    public function testGetNextFetchesPermissionsIfCheckPermissionsTrue(): void
     {
         $this->set_reflection_property_value('id', 'resource');
         $this->set_reflection_property_value('check_permissions', TRUE);
@@ -349,7 +349,7 @@ class FeedGetNextDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_next
      */
-    public function testGetNextDoesNotFetchPermissionsIfCheckPermissionsFalse()
+    public function testGetNextDoesNotFetchPermissionsIfCheckPermissionsFalse(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 

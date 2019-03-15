@@ -32,7 +32,7 @@ class SearchApiTest extends SearchTest
     /**
      * SearchApiTest constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -48,7 +48,7 @@ class SearchApiTest extends SearchTest
      *
      * @covers Lunr\Spark\Twitter\Search::search_tweets
      */
-    public function testSearchTweetsReturnsEmptyArrayOnError()
+    public function testSearchTweetsReturnsEmptyArrayOnError(): void
     {
         $url = 'https://api.twitter.com/1.1/search/tweets.json';
 
@@ -85,7 +85,7 @@ class SearchApiTest extends SearchTest
      *
      * @covers Lunr\Spark\Twitter\Search::search_tweets
      */
-    public function testSearchTweetsReturnsEmptyArrayOnFailure()
+    public function testSearchTweetsReturnsEmptyArrayOnFailure(): void
     {
         $url = 'https://api.twitter.com/1.1/search/tweets.json';
 
@@ -118,7 +118,7 @@ class SearchApiTest extends SearchTest
      *
      * @covers Lunr\Spark\Twitter\Search::search_tweets
      */
-    public function testSearchTweetsReturnsResultTweets()
+    public function testSearchTweetsReturnsResultTweets(): void
     {
         $url = 'https://api.twitter.com/1.1/search/tweets.json';
 
@@ -148,7 +148,7 @@ class SearchApiTest extends SearchTest
 
         $result = $this->class->search_tweets($params);
 
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertCount(1, $result);
     }
 
@@ -157,7 +157,7 @@ class SearchApiTest extends SearchTest
      *
      * @covers Lunr\Spark\Twitter\Search::classify
      */
-    public function testClassifyReturnsNullOnEmptyInput()
+    public function testClassifyReturnsNullOnEmptyInput(): void
     {
         $method = $this->get_accessible_reflection_method('classify');
 
@@ -169,7 +169,7 @@ class SearchApiTest extends SearchTest
      *
      * @covers Lunr\Spark\Twitter\Search::classify
      */
-    public function testClassifyReturnsArrayOfTweetsOnSuccess()
+    public function testClassifyReturnsArrayOfTweetsOnSuccess(): void
     {
         $result = [
             [ 'Foo' => 'Bar' ],

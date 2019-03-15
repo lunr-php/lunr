@@ -24,7 +24,7 @@ class LunrSoapClientInitTest extends LunrSoapClientTest
      *
      * @covers Lunr\Spark\LunrSoapClient::__construct
      */
-    public function testConstructConstructsEmptyClient()
+    public function testConstructConstructsEmptyClient(): void
     {
         $functions = $this->class->__getFunctions();
         $this->assertEmpty($functions);
@@ -35,7 +35,7 @@ class LunrSoapClientInitTest extends LunrSoapClientTest
      *
      * @covers Lunr\Spark\LunrSoapClient::init
      */
-    public function testInitConstructsClient()
+    public function testInitConstructsClient(): void
     {
         $wsdl = TEST_STATICS . '/Spark/hello.wsdl';
 
@@ -50,7 +50,7 @@ class LunrSoapClientInitTest extends LunrSoapClientTest
      *
      * @covers Lunr\Spark\LunrSoapClient::init
      */
-    public function testInitReturnsSelfReference()
+    public function testInitReturnsSelfReference(): void
     {
         $wsdl = TEST_STATICS . '/Spark/hello.wsdl';
 

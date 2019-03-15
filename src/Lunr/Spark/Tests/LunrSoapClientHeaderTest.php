@@ -26,7 +26,7 @@ class LunrSoapClientHeaderTest extends LunrSoapClientTest
      *
      * @covers Lunr\Spark\LunrSoapClient::create_header
      */
-    public function testCreateHeaderCreatesHeader()
+    public function testCreateHeaderCreatesHeader(): void
     {
         $namespace = 'ns';
         $name      = 'name';
@@ -44,7 +44,7 @@ class LunrSoapClientHeaderTest extends LunrSoapClientTest
      *
      * @covers Lunr\Spark\LunrSoapClient::set_headers
      */
-    public function testSetHeadersSetsHeaders()
+    public function testSetHeadersSetsHeaders(): void
     {
         $headers = [
             new SoapHeader('ns1', 'name1', [ 'data1' ]),
@@ -62,7 +62,7 @@ class LunrSoapClientHeaderTest extends LunrSoapClientTest
      *
      * @covers Lunr\Spark\LunrSoapClient::set_headers
      */
-    public function testSetHeadersReturnsSelfReference()
+    public function testSetHeadersReturnsSelfReference(): void
     {
         $value = $this->class->set_headers([]);
 

@@ -27,7 +27,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_entries
      */
-    public function testGetEntriesWithoutFiltersReturnsEmptyResultOnRequestError()
+    public function testGetEntriesWithoutFiltersReturnsEmptyResultOnRequestError(): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -51,7 +51,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
 
         $return = $this->class->get_entries('foo');
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertArrayHasKey('total', $return);
         $this->assertSame(0, $return['total']);
     }
@@ -61,7 +61,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_entries
      */
-    public function testGetEntriesWithFiltersReturnsEmptyResultOnRequestError()
+    public function testGetEntriesWithFiltersReturnsEmptyResultOnRequestError(): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -85,7 +85,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
 
         $return = $this->class->get_entries('foo', [ 'field.urlName[match]' => 'bar' ]);
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertArrayHasKey('total', $return);
         $this->assertSame(0, $return['total']);
     }
@@ -95,7 +95,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_entries
      */
-    public function testGetEntriesWithoutFiltersReturnsEmptyResultOnRequestFailure()
+    public function testGetEntriesWithoutFiltersReturnsEmptyResultOnRequestFailure(): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -115,7 +115,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
 
         $return = $this->class->get_entries('foo');
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertArrayHasKey('total', $return);
         $this->assertSame(0, $return['total']);
     }
@@ -125,7 +125,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_entries
      */
-    public function testGetEntriesWithFiltersReturnsEmptyResultOnRequestFailure()
+    public function testGetEntriesWithFiltersReturnsEmptyResultOnRequestFailure(): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -145,7 +145,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
 
         $return = $this->class->get_entries('foo', [ 'field.urlName[match]' => 'bar' ]);
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertArrayHasKey('total', $return);
         $this->assertSame(0, $return['total']);
     }
@@ -155,7 +155,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_entries
      */
-    public function testGetEntriesWithoutFiltersReturnsResultsOnSuccessfulRequest()
+    public function testGetEntriesWithoutFiltersReturnsResultsOnSuccessfulRequest(): void
     {
         $output = [
             'param1' => 1,
@@ -188,7 +188,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_entries
      */
-    public function testGetEntriesWithFiltersReturnsResultsOnSuccessfulRequest()
+    public function testGetEntriesWithFiltersReturnsResultsOnSuccessfulRequest(): void
     {
         $output = [
             'param1' => 1,

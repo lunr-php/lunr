@@ -50,7 +50,7 @@ abstract class UserTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->cas      = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
@@ -67,7 +67,7 @@ abstract class UserTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -82,7 +82,7 @@ abstract class UserTest extends LunrBaseTest
      *
      * @return array $permissions Array of permissions
      */
-    public function validPermissionsProvider()
+    public function validPermissionsProvider(): array
     {
         $permissions   = [];
         $permissions[] = [ 'email' ];
@@ -98,7 +98,7 @@ abstract class UserTest extends LunrBaseTest
      *
      * @return array $permissions Array of permissions
      */
-    public function invalidPermissionsProvider()
+    public function invalidPermissionsProvider(): array
     {
         $permissions   = [];
         $permissions[] = [ 'friends_likes', 'friends_likes' ];

@@ -27,7 +27,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_json_results
      */
-    public function testGetJsonResultsMakesGetRequestWithoutParams()
+    public function testGetJsonResultsMakesGetRequestWithoutParams(): void
     {
         $this->http->expects($this->once())
                    ->method('request')
@@ -44,7 +44,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_json_results
      */
-    public function testGetJsonResultsMakesGetRequestWithParams()
+    public function testGetJsonResultsMakesGetRequestWithParams(): void
     {
         $this->http->expects($this->once())
                    ->method('request')
@@ -61,7 +61,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_json_results
      */
-    public function testGetJsonResultsThrowsErrorIfRequestHadError()
+    public function testGetJsonResultsThrowsErrorIfRequestHadError(): void
     {
         $output = [
             'message' => 'Something failed',
@@ -97,7 +97,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_json_results
      */
-    public function testGetJsonResultsThrowsErrorIfRequestFailed()
+    public function testGetJsonResultsThrowsErrorIfRequestFailed(): void
     {
         $this->http->expects($this->once())
                    ->method('request')
@@ -123,7 +123,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_json_results
      */
-    public function testGetJsonResultsDoesNotThrowErrorIfRequestSuccessful()
+    public function testGetJsonResultsDoesNotThrowErrorIfRequestSuccessful(): void
     {
         $this->http->expects($this->once())
                    ->method('request')
@@ -146,7 +146,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_json_results
      */
-    public function testGetJsonResultsReturnsEmptyResultOnRequestError()
+    public function testGetJsonResultsReturnsEmptyResultOnRequestError(): void
     {
         $output = [
             'message' => 'Something failed',
@@ -170,7 +170,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
 
         $value = $method->invokeArgs($this->class, [ 'http://localhost' ]);
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertArrayHasKey('total', $value);
         $this->assertSame(0, $value['total']);
     }
@@ -180,7 +180,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_json_results
      */
-    public function testGetJsonResultsReturnsResultsOnSuccessfulRequest()
+    public function testGetJsonResultsReturnsResultsOnSuccessfulRequest(): void
     {
         $output = [
             'param1' => 1,

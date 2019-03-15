@@ -30,7 +30,7 @@ class ApiGetUrlResultsTest extends ApiTest
      * @dataProvider requestParamProvider
      * @covers       Lunr\Spark\Facebook\Api::get_url_results
      */
-    public function testGetJsonResultsCallsRequest(...$arguments)
+    public function testGetJsonResultsCallsRequest(...$arguments): void
     {
         $count = count($arguments);
 
@@ -65,7 +65,7 @@ class ApiGetUrlResultsTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::get_url_results
      */
-    public function testGetUrlResultsThrowsErrorIfRequestHadError()
+    public function testGetUrlResultsThrowsErrorIfRequestHadError(): void
     {
         $output = [
             'error' => [
@@ -106,7 +106,7 @@ class ApiGetUrlResultsTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::get_url_results
      */
-    public function testGetJsonResultsThrowsErrorIfRequestFailed()
+    public function testGetJsonResultsThrowsErrorIfRequestFailed(): void
     {
         $output = [
             'error' => [
@@ -142,7 +142,7 @@ class ApiGetUrlResultsTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::get_url_results
      */
-    public function testGetUrlResultsDoesNotThrowErrorIfRequestSuccessful()
+    public function testGetUrlResultsDoesNotThrowErrorIfRequestSuccessful(): void
     {
         $url = 'http://localhost';
 
@@ -169,7 +169,7 @@ class ApiGetUrlResultsTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::get_url_results
      */
-    public function testGetUrlResultsReturnsEmptyArrayOnRequestError()
+    public function testGetUrlResultsReturnsEmptyArrayOnRequestError(): void
     {
         $output = [
             'error' => [
@@ -204,7 +204,7 @@ class ApiGetUrlResultsTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::get_url_results
      */
-    public function testGetJsonResultsReturnsEmptyArrayOnRequestFailure()
+    public function testGetJsonResultsReturnsEmptyArrayOnRequestFailure(): void
     {
         $output = [
             'error' => [
@@ -234,7 +234,7 @@ class ApiGetUrlResultsTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::get_url_results
      */
-    public function testGetUrlResultsReturnsResultsOnSuccessfulRequest()
+    public function testGetUrlResultsReturnsResultsOnSuccessfulRequest(): void
     {
         $url = 'http://localhost';
 

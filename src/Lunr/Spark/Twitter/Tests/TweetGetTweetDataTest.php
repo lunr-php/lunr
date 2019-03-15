@@ -29,7 +29,7 @@ class TweetGetTweetDataTest extends TweetTest
      * @dataProvider tweetFieldsProvider
      * @covers       Lunr\Spark\Twitter\Tweet::__call
      */
-    public function testGetTweetDataReturnsDataIfPresent($field)
+    public function testGetTweetDataReturnsDataIfPresent($field): void
     {
         $this->set_reflection_property_value('data', [ $field => 'Value' ]);
 
@@ -44,7 +44,7 @@ class TweetGetTweetDataTest extends TweetTest
      * @dataProvider tweetFieldsProvider
      * @covers       Lunr\Spark\Twitter\Tweet::__call
      */
-    public function testGetTweetDataReturnsNotAvailableIfNotPresent($field)
+    public function testGetTweetDataReturnsNotAvailableIfNotPresent($field): void
     {
         $this->assertSame(DataError::NOT_AVAILABLE, $this->class->{'get_' . $field}());
     }
@@ -54,7 +54,7 @@ class TweetGetTweetDataTest extends TweetTest
      *
      * @covers Lunr\Spark\Twitter\Tweet::__call
      */
-    public function testGetTweetDataReturnsUnknownDataErrorInUnkownField()
+    public function testGetTweetDataReturnsUnknownDataErrorInUnkownField(): void
     {
         $this->assertSame(DataError::UNKNOWN_FIELD, $this->class->get_unkown());
     }

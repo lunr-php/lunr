@@ -26,7 +26,7 @@ class UserBaseTest extends UserTest
     /**
      * Test that the CentralAuthenticationStore class is passed correctly.
      */
-    public function testCasIsSetCorrectly()
+    public function testCasIsSetCorrectly(): void
     {
         $this->assertPropertySame('cas', $this->cas);
     }
@@ -34,7 +34,7 @@ class UserBaseTest extends UserTest
     /**
      * Test that the Requests_Session class is passed correctly.
      */
-    public function testRequestsSessionIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly(): void
     {
         $this->assertPropertySame('http', $this->http);
     }
@@ -42,7 +42,7 @@ class UserBaseTest extends UserTest
     /**
      * Test that the default profile ID is 'me'.
      */
-    public function testProfileIDIsMe()
+    public function testProfileIDIsMe(): void
     {
         $this->assertPropertyEquals('profile_id', 'me');
     }
@@ -50,7 +50,7 @@ class UserBaseTest extends UserTest
     /**
      * Test that by default permissions is an empty array.
      */
-    public function testPermissionsAreEmpty()
+    public function testPermissionsAreEmpty(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('permissions'));
     }
@@ -58,7 +58,7 @@ class UserBaseTest extends UserTest
     /**
      * Test that check_permissions is TRUE.
      */
-    public function testCheckPermissionsIsTrueByDefault()
+    public function testCheckPermissionsIsTrueByDefault(): void
     {
         $this->assertTrue($this->get_reflection_property_value('check_permissions'));
     }
@@ -68,7 +68,7 @@ class UserBaseTest extends UserTest
      *
      * @covers Lunr\Spark\Facebook\User::set_profile_id
      */
-    public function testSetProfileIdSetsProfileId()
+    public function testSetProfileIdSetsProfileId(): void
     {
         $this->class->set_profile_id('LunrUser');
 

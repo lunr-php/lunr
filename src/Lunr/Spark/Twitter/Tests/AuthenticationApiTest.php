@@ -37,7 +37,7 @@ class AuthenticationApiTest extends AuthenticationTest
     /**
      * AuthenticationApiTest constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -60,7 +60,7 @@ class AuthenticationApiTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Twitter\Authentication::get_bearer_token
      */
-    public function testGetBearerTokenReturnsErrorStringOnError()
+    public function testGetBearerTokenReturnsErrorStringOnError(): void
     {
         $url    = 'https://api.twitter.com/oauth2/token';
         $params = [ 'grant_type' => 'client_credentials' ];
@@ -100,7 +100,7 @@ class AuthenticationApiTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Twitter\Authentication::get_bearer_token
      */
-    public function testGetBearerTokenReturnsErrorStringOnFailure()
+    public function testGetBearerTokenReturnsErrorStringOnFailure(): void
     {
         $url    = 'https://api.twitter.com/oauth2/token';
         $params = [ 'grant_type' => 'client_credentials' ];
@@ -136,7 +136,7 @@ class AuthenticationApiTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Twitter\Authentication::get_bearer_token
      */
-    public function testGetBearerTokenStoresBearerTokenInCas()
+    public function testGetBearerTokenStoresBearerTokenInCas(): void
     {
         $url    = 'https://api.twitter.com/oauth2/token';
         $params = [ 'grant_type' => 'client_credentials' ];
@@ -179,7 +179,7 @@ class AuthenticationApiTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Twitter\Authentication::get_bearer_token
      */
-    public function testGetBearerTokenReturnsBearerToken()
+    public function testGetBearerTokenReturnsBearerToken(): void
     {
         $url    = 'https://api.twitter.com/oauth2/token';
         $params = [ 'grant_type' => 'client_credentials' ];

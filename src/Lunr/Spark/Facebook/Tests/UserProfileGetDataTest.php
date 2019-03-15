@@ -27,7 +27,7 @@ class UserProfileGetDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::get_data
      */
-    public function testGetDataSetsUsedAccessTokenTrueWhenUsingAccessToken()
+    public function testGetDataSetsUsedAccessTokenTrueWhenUsingAccessToken(): void
     {
         $this->cas->expects($this->at(0))
                   ->method('get')
@@ -58,7 +58,7 @@ class UserProfileGetDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::get_data
      */
-    public function testGetDataSetsUsedAccessTokenFalseWhenNotUsingAccessToken()
+    public function testGetDataSetsUsedAccessTokenFalseWhenNotUsingAccessToken(): void
     {
         $this->cas->expects($this->exactly(2))
                   ->method('get')
@@ -79,7 +79,7 @@ class UserProfileGetDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::get_data
      */
-    public function testGetDataUsesFieldsIfSet()
+    public function testGetDataUsesFieldsIfSet(): void
     {
         $this->set_reflection_property_value('fields', [ 'email', 'user_likes' ]);
 
@@ -104,7 +104,7 @@ class UserProfileGetDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::get_data
      */
-    public function testGetDataDoesNotUseFieldsIfNotSet()
+    public function testGetDataDoesNotUseFieldsIfNotSet(): void
     {
         $this->cas->expects($this->exactly(2))
                   ->method('get')
@@ -127,7 +127,7 @@ class UserProfileGetDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::get_data
      */
-    public function testGetDataUsesAccessTokenIfPresent()
+    public function testGetDataUsesAccessTokenIfPresent(): void
     {
         $this->cas->expects($this->at(0))
                   ->method('get')
@@ -163,7 +163,7 @@ class UserProfileGetDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::get_data
      */
-    public function testGetDataWhenAccessTokenNotPresent()
+    public function testGetDataWhenAccessTokenNotPresent(): void
     {
         $this->cas->expects($this->exactly(2))
                   ->method('get')
@@ -186,7 +186,7 @@ class UserProfileGetDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::get_data
      */
-    public function testGetDataSetsDataOnSuccessfulRequest()
+    public function testGetDataSetsDataOnSuccessfulRequest(): void
     {
         $data = [ 'name' => 'Foo' ];
 
@@ -216,7 +216,7 @@ class UserProfileGetDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::get_data
      */
-    public function testGetDataSetsDataOnFailedRequest()
+    public function testGetDataSetsDataOnFailedRequest(): void
     {
         $this->cas->expects($this->exactly(2))
                   ->method('get')
@@ -241,7 +241,7 @@ class UserProfileGetDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::get_data
      */
-    public function testGetDataSetsDataOnRequestError()
+    public function testGetDataSetsDataOnRequestError(): void
     {
         $this->cas->expects($this->exactly(2))
                   ->method('get')
@@ -272,7 +272,7 @@ class UserProfileGetDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::get_data
      */
-    public function testGetDataFetchesPermissions()
+    public function testGetDataFetchesPermissions(): void
     {
         $data = [
             'data' => [

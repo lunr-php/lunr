@@ -50,7 +50,7 @@ abstract class ApiTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->cas      = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
@@ -67,7 +67,7 @@ abstract class ApiTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -82,7 +82,7 @@ abstract class ApiTest extends LunrBaseTest
      *
      * @return array $keys Array of keys
      */
-    public function generalGetKeyProvider()
+    public function generalGetKeyProvider(): array
     {
         $keys   = [];
         $keys[] = [ 'app_id' ];
@@ -98,7 +98,7 @@ abstract class ApiTest extends LunrBaseTest
      *
      * @return array $keys Array of keys
      */
-    public function generalSetKeyProvider()
+    public function generalSetKeyProvider(): array
     {
         $keys   = [];
         $keys[] = [ 'app_id' ];
@@ -112,7 +112,7 @@ abstract class ApiTest extends LunrBaseTest
      *
      * @return array $values Array of non array values
      */
-    public function nonArrayProvider()
+    public function nonArrayProvider(): array
     {
         $values   = [];
         $values[] = [ 'string' ];
@@ -130,7 +130,7 @@ abstract class ApiTest extends LunrBaseTest
      *
      * @return array $methods Array of request parameters
      */
-    public function requestParamProvider()
+    public function requestParamProvider(): array
     {
         $args   = [];
         $args[] = [ 'http://localhost' ];

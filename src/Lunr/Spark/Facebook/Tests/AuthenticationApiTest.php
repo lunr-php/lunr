@@ -28,7 +28,7 @@ class AuthenticationApiTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_login_url
      */
-    public function testGetLoginUrlWithoutScope()
+    public function testGetLoginUrlWithoutScope(): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -47,7 +47,7 @@ class AuthenticationApiTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_login_url
      */
-    public function testGetLoginUrlWithScope()
+    public function testGetLoginUrlWithScope(): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -68,7 +68,7 @@ class AuthenticationApiTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_logout_url
      */
-    public function testGetLogoutUrl()
+    public function testGetLogoutUrl(): void
     {
         $this->cas->expects($this->once())
                   ->method('get')

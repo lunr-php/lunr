@@ -27,7 +27,7 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_app_access_token
      */
-    public function testGetAppAccessTokenReturnsEmptyStringOnError()
+    public function testGetAppAccessTokenReturnsEmptyStringOnError(): void
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
@@ -65,7 +65,7 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_app_access_token
      */
-    public function testGetAppAccessTokenReturnsEmptyStringOnFailure()
+    public function testGetAppAccessTokenReturnsEmptyStringOnFailure(): void
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
@@ -97,7 +97,7 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_app_access_token
      */
-    public function testGetAppAccessTokenStoresAccessTokenInCas()
+    public function testGetAppAccessTokenStoresAccessTokenInCas(): void
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
@@ -136,7 +136,7 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_app_access_token
      */
-    public function testGetAppAccessTokenStoresExpiryTime()
+    public function testGetAppAccessTokenStoresExpiryTime(): void
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
@@ -173,7 +173,7 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_app_access_token
      */
-    public function testGetAppAccessTokenReturnsAccessTokenOnSuccess()
+    public function testGetAppAccessTokenReturnsAccessTokenOnSuccess(): void
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [

@@ -26,7 +26,7 @@ class AuthenticationBaseTest extends AuthenticationTest
     /**
      * Test that the CentralAuthenticationStore class is passed correctly.
      */
-    public function testCasIsSetCorrectly()
+    public function testCasIsSetCorrectly(): void
     {
         $this->assertPropertySame('cas', $this->cas);
     }
@@ -34,7 +34,7 @@ class AuthenticationBaseTest extends AuthenticationTest
     /**
      * Test that the Requests_Session class is passed correctly.
      */
-    public function testRequestsSessionIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly(): void
     {
         $this->assertPropertySame('http', $this->http);
     }
@@ -42,7 +42,7 @@ class AuthenticationBaseTest extends AuthenticationTest
     /**
      * Test that state is fetched from the Request class.
      */
-    public function testStateIsFetchedFromRequest()
+    public function testStateIsFetchedFromRequest(): void
     {
         $this->assertPropertyEquals('state', 'String');
     }
@@ -50,7 +50,7 @@ class AuthenticationBaseTest extends AuthenticationTest
     /**
      * Test that code is fetched from the Request class.
      */
-    public function testCodeIsFetchedFromRequest()
+    public function testCodeIsFetchedFromRequest(): void
     {
         $this->assertPropertyEquals('code', 'String');
     }
@@ -58,7 +58,7 @@ class AuthenticationBaseTest extends AuthenticationTest
     /**
      * Test that the default redirect URI is set from Request class values.
      */
-    public function testRedirectUriIsSetFromRequest()
+    public function testRedirectUriIsSetFromRequest(): void
     {
         $this->assertPropertyEquals('redirect_uri', 'http://localhost/controller/method/');
     }
@@ -66,7 +66,7 @@ class AuthenticationBaseTest extends AuthenticationTest
     /**
      * Test that scope is NULL.
      */
-    public function testScopeIsNull()
+    public function testScopeIsNull(): void
     {
         $this->assertNull($this->get_reflection_property_value('scope'));
     }
@@ -74,7 +74,7 @@ class AuthenticationBaseTest extends AuthenticationTest
     /**
      * Test that token_expires is 0.
      */
-    public function testTokenExpiresIsZero()
+    public function testTokenExpiresIsZero(): void
     {
         $this->assertPropertySame('token_expires', 0);
     }

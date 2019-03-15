@@ -22,7 +22,7 @@ class TweetBaseTest extends TweetTest
     /**
      * Test that the data is initially empty.
      */
-    public function testDataIsSetCorrectly()
+    public function testDataIsSetCorrectly(): void
     {
         $this->assertPropertyEmpty('data');
     }
@@ -32,7 +32,7 @@ class TweetBaseTest extends TweetTest
      *
      * @covers Lunr\Spark\Twitter\Tweet::set_data
      */
-    public function testSetData()
+    public function testSetData(): void
     {
         $this->class->set_data([ 'test' ]);
 
@@ -44,7 +44,7 @@ class TweetBaseTest extends TweetTest
      *
      * @covers Lunr\Spark\Twitter\Tweet::set_data
      */
-    public function testSetDataReturnsSelfReference()
+    public function testSetDataReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_data([ 'data' ]));
     }

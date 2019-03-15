@@ -26,7 +26,7 @@ class PostBaseTest extends PostTest
     /**
      * Test that the CentralAuthenticationStore class is passed correctly.
      */
-    public function testCasIsSetCorrectly()
+    public function testCasIsSetCorrectly(): void
     {
         $this->assertPropertySame('cas', $this->cas);
     }
@@ -34,7 +34,7 @@ class PostBaseTest extends PostTest
     /**
      * Test that the Requests_Session class is passed correctly.
      */
-    public function testRequestsSessionIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly(): void
     {
         $this->assertPropertySame('http', $this->http);
     }

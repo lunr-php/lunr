@@ -27,7 +27,7 @@ class PageGetDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::get_data
      */
-    public function testGetDataDoesNotCallApiIfPageIDNotSet()
+    public function testGetDataDoesNotCallApiIfPageIDNotSet(): void
     {
         $this->cas->expects($this->never())
                   ->method('get');
@@ -43,7 +43,7 @@ class PageGetDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::get_data
      */
-    public function testGetDataUsesFieldsIfSet()
+    public function testGetDataUsesFieldsIfSet(): void
     {
         $this->set_reflection_property_value('id', 'page');
         $this->set_reflection_property_value('fields', [ 'email', 'user_likes' ]);
@@ -69,7 +69,7 @@ class PageGetDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::get_data
      */
-    public function testGetDataDoesNotUseFieldsIfNotSet()
+    public function testGetDataDoesNotUseFieldsIfNotSet(): void
     {
         $this->set_reflection_property_value('id', 'page');
 
@@ -94,7 +94,7 @@ class PageGetDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::get_data
      */
-    public function testGetDataUsesAccessTokenIfPresent()
+    public function testGetDataUsesAccessTokenIfPresent(): void
     {
         $this->set_reflection_property_value('id', 'page');
 
@@ -132,7 +132,7 @@ class PageGetDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::get_data
      */
-    public function testGetDataWhenAccessTokenNotPresent()
+    public function testGetDataWhenAccessTokenNotPresent(): void
     {
         $this->set_reflection_property_value('id', 'page');
 
@@ -157,7 +157,7 @@ class PageGetDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::get_data
      */
-    public function testGetDataSetsDataOnSuccessfulRequest()
+    public function testGetDataSetsDataOnSuccessfulRequest(): void
     {
         $this->set_reflection_property_value('id', 'page');
 
@@ -189,7 +189,7 @@ class PageGetDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::get_data
      */
-    public function testGetDataSetsDataOnFailedRequest()
+    public function testGetDataSetsDataOnFailedRequest(): void
     {
         $this->set_reflection_property_value('id', 'page');
 
@@ -216,7 +216,7 @@ class PageGetDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::get_data
      */
-    public function testGetDataSetsDataOnRequestError()
+    public function testGetDataSetsDataOnRequestError(): void
     {
         $this->set_reflection_property_value('id', 'page');
 
@@ -249,7 +249,7 @@ class PageGetDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::get_data
      */
-    public function testGetDataFetchesPermissionsIfCheckPermissionsTrue()
+    public function testGetDataFetchesPermissionsIfCheckPermissionsTrue(): void
     {
         $this->set_reflection_property_value('id', 'page');
         $this->set_reflection_property_value('check_permissions', TRUE);
@@ -299,7 +299,7 @@ class PageGetDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::get_data
      */
-    public function testGetDataDoesNotFetchPermissionsIfCheckPermissionsFalse()
+    public function testGetDataDoesNotFetchPermissionsIfCheckPermissionsFalse(): void
     {
         $this->set_reflection_property_value('id', 'page');
 

@@ -26,7 +26,7 @@ class PageBaseTest extends PageTest
     /**
      * Test that the CentralAuthenticationStore class is passed correctly.
      */
-    public function testCasIsSetCorrectly()
+    public function testCasIsSetCorrectly(): void
     {
         $this->assertPropertySame('cas', $this->cas);
     }
@@ -34,7 +34,7 @@ class PageBaseTest extends PageTest
     /**
      * Test that the Requests_Session class is passed correctly.
      */
-    public function testRequestsSessionIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly(): void
     {
         $this->assertPropertySame('http', $this->http);
     }
@@ -42,7 +42,7 @@ class PageBaseTest extends PageTest
     /**
      * Test that check_permissions is FALSE.
      */
-    public function testCheckPermissionsIsFalseByDefault()
+    public function testCheckPermissionsIsFalseByDefault(): void
     {
         $this->assertFalse($this->get_reflection_property_value('check_permissions'));
     }
@@ -52,7 +52,7 @@ class PageBaseTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::set_fields
      */
-    public function testSetFieldsWithArraySetsFields()
+    public function testSetFieldsWithArraySetsFields(): void
     {
         $fields = [ 'email', 'first_name' ];
 
@@ -69,7 +69,7 @@ class PageBaseTest extends PageTest
      * @dataProvider nonArrayProvider
      * @covers       Lunr\Spark\Facebook\Page::set_fields
      */
-    public function testSetFieldsWithNonArrayDoesNotSetFields($value)
+    public function testSetFieldsWithNonArrayDoesNotSetFields($value): void
     {
         $this->class->set_fields($value);
 
@@ -81,7 +81,7 @@ class PageBaseTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::set_fields
      */
-    public function testSetFieldsWithAccessTokenFieldSetsCheckPermissionsTrue()
+    public function testSetFieldsWithAccessTokenFieldSetsCheckPermissionsTrue(): void
     {
         $fields = [ 'email', 'first_name', 'access_token' ];
 
@@ -95,7 +95,7 @@ class PageBaseTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::set_fields
      */
-    public function testSetFieldsWithoutAccessTokenFieldSetsCheckPermissionsFalse()
+    public function testSetFieldsWithoutAccessTokenFieldSetsCheckPermissionsFalse(): void
     {
         $fields = [ 'email', 'first_name' ];
 

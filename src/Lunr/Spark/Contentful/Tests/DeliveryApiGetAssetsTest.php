@@ -27,7 +27,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
      *
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
-    public function testGetAssetsWithoutFiltersReturnsEmptyResultOnRequestError()
+    public function testGetAssetsWithoutFiltersReturnsEmptyResultOnRequestError(): void
     {
         $this->set_reflection_property_value('space', '5p4c31D');
 
@@ -53,7 +53,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $return = $this->class->get_assets();
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertArrayHasKey('total', $return);
         $this->assertSame(0, $return['total']);
     }
@@ -63,7 +63,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
      *
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
-    public function testGetAssetsWithFiltersReturnsEmptyResultOnRequestError()
+    public function testGetAssetsWithFiltersReturnsEmptyResultOnRequestError(): void
     {
         $this->set_reflection_property_value('space', '5p4c31D');
 
@@ -89,7 +89,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $return = $this->class->get_assets([ 'mimetype_group' => 'image' ]);
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertArrayHasKey('total', $return);
         $this->assertSame(0, $return['total']);
     }
@@ -99,7 +99,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
      *
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
-    public function testGetAssetsWithoutFiltersReturnsEmptyResultOnRequestFailure()
+    public function testGetAssetsWithoutFiltersReturnsEmptyResultOnRequestFailure(): void
     {
         $this->set_reflection_property_value('space', '5p4c31D');
 
@@ -121,7 +121,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $return = $this->class->get_assets();
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertArrayHasKey('total', $return);
         $this->assertSame(0, $return['total']);
     }
@@ -131,7 +131,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
      *
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
-    public function testGetAssetsWithFiltersReturnsEmptyResultOnRequestFailure()
+    public function testGetAssetsWithFiltersReturnsEmptyResultOnRequestFailure(): void
     {
         $this->set_reflection_property_value('space', '5p4c31D');
 
@@ -153,7 +153,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $return = $this->class->get_assets([ 'mimetype_group' => 'image' ]);
 
-        $this->assertInternalType('array', $return);
+        $this->assertIsArray($return);
         $this->assertArrayHasKey('total', $return);
         $this->assertSame(0, $return['total']);
     }
@@ -163,7 +163,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
      *
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
-    public function testGetAssetsWithoutFiltersReturnsResultsOnSuccessfulRequest()
+    public function testGetAssetsWithoutFiltersReturnsResultsOnSuccessfulRequest(): void
     {
         $this->set_reflection_property_value('space', '5p4c31D');
 
@@ -198,7 +198,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
      *
      * @covers   Lunr\Spark\Contentful\DeliveryApi::get_assets
      */
-    public function testGetAssetsWithFiltersReturnsResultsOnSuccessfulRequest()
+    public function testGetAssetsWithFiltersReturnsResultsOnSuccessfulRequest(): void
     {
         $this->set_reflection_property_value('space', '5p4c31D');
 

@@ -30,7 +30,7 @@ class ApiGetJsonResultsTest extends ApiTest
      * @dataProvider requestParamProvider
      * @covers       Lunr\Spark\Twitter\Api::get_json_results
      */
-    public function testGetJsonResultsCallsRequest(...$arguments)
+    public function testGetJsonResultsCallsRequest(...$arguments): void
     {
         $count = count($arguments);
 
@@ -71,7 +71,7 @@ class ApiGetJsonResultsTest extends ApiTest
      *
      * @covers Lunr\Spark\Twitter\Api::get_json_results
      */
-    public function testGetJsonResultsThrowsErrorIfRequestHadError()
+    public function testGetJsonResultsThrowsErrorIfRequestHadError(): void
     {
         $output = [
             'errors' => [
@@ -114,7 +114,7 @@ class ApiGetJsonResultsTest extends ApiTest
      *
      * @covers Lunr\Spark\Twitter\Api::get_json_results
      */
-    public function testGetJsonResultsThrowsErrorIfRequestFailed()
+    public function testGetJsonResultsThrowsErrorIfRequestFailed(): void
     {
         $url     = 'http://localhost';
         $options = [ 'verify' => TRUE ];
@@ -143,7 +143,7 @@ class ApiGetJsonResultsTest extends ApiTest
      *
      * @covers Lunr\Spark\Twitter\Api::get_json_results
      */
-    public function testGetJsonResultsDoesNotThrowErrorIfRequestSuccessful()
+    public function testGetJsonResultsDoesNotThrowErrorIfRequestSuccessful(): void
     {
         $url     = 'http://localhost';
         $options = [ 'verify' => TRUE ];
@@ -173,7 +173,7 @@ class ApiGetJsonResultsTest extends ApiTest
      *
      * @covers Lunr\Spark\Twitter\Api::get_json_results
      */
-    public function testGetJsonResultsReturnsEmptyArrayOnRequestError()
+    public function testGetJsonResultsReturnsEmptyArrayOnRequestError(): void
     {
         $output = [
             'errors' => [
@@ -216,7 +216,7 @@ class ApiGetJsonResultsTest extends ApiTest
      *
      * @covers Lunr\Spark\Twitter\Api::get_json_results
      */
-    public function testGetJsonResultsReturnsEmptyArrayIfRequestFailed()
+    public function testGetJsonResultsReturnsEmptyArrayIfRequestFailed(): void
     {
         $url     = 'http://localhost';
         $options = [ 'verify' => TRUE ];
@@ -245,7 +245,7 @@ class ApiGetJsonResultsTest extends ApiTest
      *
      * @covers Lunr\Spark\Twitter\Api::get_json_results
      */
-    public function testGetJsonResultsReturnsResultsOnSuccessfulRequest()
+    public function testGetJsonResultsReturnsResultsOnSuccessfulRequest(): void
     {
         $output = [
             'param1' => 1,

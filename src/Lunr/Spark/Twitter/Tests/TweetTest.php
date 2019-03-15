@@ -26,7 +26,7 @@ abstract class TweetTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new Tweet();
         $this->reflection = new ReflectionClass('Lunr\Spark\Twitter\Tweet');
@@ -35,7 +35,7 @@ abstract class TweetTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -46,7 +46,7 @@ abstract class TweetTest extends LunrBaseTest
      *
      * @return array $fields Array of fields.
      */
-    public function tweetFieldsProvider()
+    public function tweetFieldsProvider(): array
     {
         $fields   = [];
         $fields[] = [ 'annotations' ];

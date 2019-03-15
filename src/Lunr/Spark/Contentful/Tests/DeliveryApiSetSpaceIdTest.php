@@ -28,7 +28,7 @@ class DeliveryApiSetSpaceIdTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::set_space_id
      */
-    public function testSetSpaceIdSetsSpaceId()
+    public function testSetSpaceIdSetsSpaceId(): void
     {
         $this->class->set_space_id('space');
 
@@ -40,7 +40,7 @@ class DeliveryApiSetSpaceIdTest extends DeliveryApiTest
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::set_space_id
      */
-    public function testSetSpaceIdReturnsSelfReference()
+    public function testSetSpaceIdReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_space_id('space'));
     }

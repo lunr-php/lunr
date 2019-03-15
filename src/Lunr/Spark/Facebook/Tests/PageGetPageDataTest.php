@@ -29,7 +29,7 @@ class PageGetPageDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::__call
      */
-    public function testGetPageDataReturnsNotRequestedWhenUsingFields()
+    public function testGetPageDataReturnsNotRequestedWhenUsingFields(): void
     {
         $this->set_reflection_property_value('fields', [ 'foo' ]);
 
@@ -44,7 +44,7 @@ class PageGetPageDataTest extends PageTest
      * @dataProvider publicFieldsProvider
      * @covers       Lunr\Spark\Facebook\Page::__call
      */
-    public function testGetPageDataReturnsDataIfPresent($field)
+    public function testGetPageDataReturnsDataIfPresent($field): void
     {
         $this->set_reflection_property_value('data', [ $field => 'Value' ]);
 
@@ -59,7 +59,7 @@ class PageGetPageDataTest extends PageTest
      * @dataProvider publicFieldsProvider
      * @covers       Lunr\Spark\Facebook\Page::__call
      */
-    public function testGetPageDataReturnsNotAvailableIfNotPresent($field)
+    public function testGetPageDataReturnsNotAvailableIfNotPresent($field): void
     {
         $this->assertSame(DataError::NOT_AVAILABLE, $this->class->{'get_' . $field}());
     }
@@ -69,7 +69,7 @@ class PageGetPageDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::__call
      */
-    public function testGetPageAccessTokenReturnsDataIfPresent()
+    public function testGetPageAccessTokenReturnsDataIfPresent(): void
     {
         $this->set_reflection_property_value('fields', [ 'access_token' ]);
         $this->set_reflection_property_value('permissions', [ 'manage_pages' => 1 ]);
@@ -83,7 +83,7 @@ class PageGetPageDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::__call
      */
-    public function testGetPageAccessTokenReturnsNotAvailableIfNotPresent()
+    public function testGetPageAccessTokenReturnsNotAvailableIfNotPresent(): void
     {
         $this->set_reflection_property_value('fields', [ 'access_token' ]);
         $this->set_reflection_property_value('permissions', [ 'manage_pages' => 1 ]);
@@ -96,7 +96,7 @@ class PageGetPageDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::__call
      */
-    public function testGetPageAccessTokenReturnsAccessDeniedIfPermissionMissing()
+    public function testGetPageAccessTokenReturnsAccessDeniedIfPermissionMissing(): void
     {
         $this->set_reflection_property_value('fields', [ 'access_token' ]);
 
@@ -114,7 +114,7 @@ class PageGetPageDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::__call
      */
-    public function testGetPageAccessTokenReturnsNotRequestedIfNotRequested()
+    public function testGetPageAccessTokenReturnsNotRequestedIfNotRequested(): void
     {
         $message = 'Access to "{field}" needs to be requested specifically.';
         $context = [ 'field' => 'access_token' ];
@@ -131,7 +131,7 @@ class PageGetPageDataTest extends PageTest
      *
      * @covers Lunr\Spark\Facebook\Page::__call
      */
-    public function testGetPageDataReturnsUnknownFieldForUnknownFields()
+    public function testGetPageDataReturnsUnknownFieldForUnknownFields(): void
     {
         $this->assertSame(DataError::UNKNOWN_FIELD, $this->class->get_unknown_field());
     }

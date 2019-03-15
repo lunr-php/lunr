@@ -29,7 +29,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetProfileDataReturnsNotRequestedWhenUsingFields()
+    public function testGetProfileDataReturnsNotRequestedWhenUsingFields(): void
     {
         $this->set_reflection_property_value('fields', [ 'foo' ]);
 
@@ -44,7 +44,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      * @dataProvider publicFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetPublicProfileDataReturnsDataIfPresent($field)
+    public function testGetPublicProfileDataReturnsDataIfPresent($field): void
     {
         $this->set_reflection_property_value('data', [ $field => 'Value' ]);
 
@@ -59,7 +59,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      * @dataProvider publicFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetPublicProfileDataReturnsNotAvailableIfNotPresent($field)
+    public function testGetPublicProfileDataReturnsNotAvailableIfNotPresent($field): void
     {
         $this->assertSame(DataError::NOT_AVAILABLE, $this->class->{'get_' . $field}());
     }
@@ -72,7 +72,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      * @dataProvider accessTokenFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetAccessTokenProfileDataReturnsDataIfPresent($field)
+    public function testGetAccessTokenProfileDataReturnsDataIfPresent($field): void
     {
         $this->set_reflection_property_value('used_access_token', TRUE);
         $this->set_reflection_property_value('data', [ $field => 'Value' ]);
@@ -88,7 +88,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      * @dataProvider accessTokenFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetAccessTokenProfileDataReturnsNotAvailableIfNotPresent($field)
+    public function testGetAccessTokenProfileDataReturnsNotAvailableIfNotPresent($field): void
     {
         $this->set_reflection_property_value('used_access_token', TRUE);
 
@@ -103,7 +103,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      * @dataProvider accessTokenFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetAccessTokenProfileDataReturnsAccessDeniedIfNoAccessTokenUsed($field)
+    public function testGetAccessTokenProfileDataReturnsAccessDeniedIfNoAccessTokenUsed($field): void
     {
         $message = 'Access to "{field}" requires an access token.';
         $context = [ 'field' => $field ];
@@ -124,7 +124,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      * @dataProvider permissionFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetPermissionProfileDataReturnsDataIfPresent($field, $permission)
+    public function testGetPermissionProfileDataReturnsDataIfPresent($field, $permission): void
     {
         $this->set_reflection_property_value('permissions', [ $permission => 1 ]);
         $this->set_reflection_property_value('data', [ $field => 'Value' ]);
@@ -141,7 +141,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      * @dataProvider permissionFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetPermissionProfileDataReturnsNotAvailableIfNotPresent($field, $permission)
+    public function testGetPermissionProfileDataReturnsNotAvailableIfNotPresent($field, $permission): void
     {
         $this->set_reflection_property_value('permissions', [ $permission => 1 ]);
 
@@ -157,7 +157,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      * @dataProvider permissionFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetPermissionProfileDataReturnsAccessDeniedIfPermissionMissing($field, $permission)
+    public function testGetPermissionProfileDataReturnsAccessDeniedIfPermissionMissing($field, $permission): void
     {
         $message = 'Access to "{field}" requires "{permission}" permission.';
 
@@ -176,7 +176,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      * @dataProvider requestedFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetRequestedProfileDataReturnsDataIfPresent($field)
+    public function testGetRequestedProfileDataReturnsDataIfPresent($field): void
     {
         $this->set_reflection_property_value('fields', [ $field ]);
         $this->set_reflection_property_value('data', [ $field => 'Value' ]);
@@ -192,7 +192,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      * @dataProvider requestedFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetRequestedProfileDataReturnsNotAvailableIfNotPresent($field)
+    public function testGetRequestedProfileDataReturnsNotAvailableIfNotPresent($field): void
     {
         $this->set_reflection_property_value('fields', [ $field ]);
 
@@ -207,7 +207,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      * @dataProvider requestedFieldsProvider
      * @covers       Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetRequestedProfileDataReturnsNotRequestedIfNotRequested($field)
+    public function testGetRequestedProfileDataReturnsNotRequestedIfNotRequested($field): void
     {
         $message = 'Access to "{field}" needs to be requested specifically.';
         $context = [ 'field' => $field ];
@@ -224,7 +224,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetSecuritySettingsReturnsAccessDeniedIfRequestingForADifferentUser()
+    public function testGetSecuritySettingsReturnsAccessDeniedIfRequestingForADifferentUser(): void
     {
         $this->set_reflection_property_value('profile_id', 'random_user');
 
@@ -243,7 +243,7 @@ class UserProfileGetProfileDataTest extends UserProfileTest
      *
      * @covers Lunr\Spark\Facebook\UserProfile::__call
      */
-    public function testGetProfileDataReturnsUnknownFieldForUnknownFields()
+    public function testGetProfileDataReturnsUnknownFieldForUnknownFields(): void
     {
         $this->assertSame(DataError::UNKNOWN_FIELD, $this->class->get_unknown_field());
     }

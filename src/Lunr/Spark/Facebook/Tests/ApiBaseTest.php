@@ -26,7 +26,7 @@ class ApiBaseTest extends ApiTest
     /**
      * Test that the CentralAuthenticationStore class is passed correctly.
      */
-    public function testCasIsSetCorrectly()
+    public function testCasIsSetCorrectly(): void
     {
         $this->assertPropertySame('cas', $this->cas);
     }
@@ -34,7 +34,7 @@ class ApiBaseTest extends ApiTest
     /**
      * Test that the Requests_Session class is passed correctly.
      */
-    public function testRequestsSessionIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly(): void
     {
         $this->assertPropertySame('http', $this->http);
     }
@@ -42,7 +42,7 @@ class ApiBaseTest extends ApiTest
     /**
      * Test that fields is empty.
      */
-    public function testFieldsIsEmptyByDefault()
+    public function testFieldsIsEmptyByDefault(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('fields'));
     }
@@ -50,7 +50,7 @@ class ApiBaseTest extends ApiTest
     /**
      * Test that data is empty.
      */
-    public function testDataIsEmptyByDefault()
+    public function testDataIsEmptyByDefault(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('data'));
     }
@@ -58,7 +58,7 @@ class ApiBaseTest extends ApiTest
     /**
      * Test that used_access_token is FALSE.
      */
-    public function testUsedAccessTokenIsFalseByDefault()
+    public function testUsedAccessTokenIsFalseByDefault(): void
     {
         $this->assertFalse($this->get_reflection_property_value('used_access_token'));
     }
@@ -66,7 +66,7 @@ class ApiBaseTest extends ApiTest
     /**
      * Test that the default resource ID is an empty String.
      */
-    public function testIDIsEmptyString()
+    public function testIDIsEmptyString(): void
     {
         $this->assertPropertySame('id', '');
     }
@@ -79,7 +79,7 @@ class ApiBaseTest extends ApiTest
      * @dataProvider generalGetKeyProvider
      * @covers       Lunr\Spark\Facebook\Api::__get
      */
-    public function testGetExistingCredentials($key)
+    public function testGetExistingCredentials($key): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -94,7 +94,7 @@ class ApiBaseTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::__get
      */
-    public function testGetNonExistingCredentials()
+    public function testGetNonExistingCredentials(): void
     {
         $this->cas->expects($this->never())
                   ->method('get');
@@ -110,7 +110,7 @@ class ApiBaseTest extends ApiTest
      * @dataProvider generalSetKeyProvider
      * @covers       Lunr\Spark\Facebook\Api::__set
      */
-    public function testSetGeneralCredentials($key)
+    public function testSetGeneralCredentials($key): void
     {
         $this->cas->expects($this->once())
                   ->method('add')
@@ -124,7 +124,7 @@ class ApiBaseTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::__set
      */
-    public function testSetAccessTokenSetsAccessToken()
+    public function testSetAccessTokenSetsAccessToken(): void
     {
         $this->cas->expects($this->at(0))
                   ->method('add')
@@ -138,7 +138,7 @@ class ApiBaseTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::__set
      */
-    public function testSetAccessTokenSetsAppSecretProof()
+    public function testSetAccessTokenSetsAppSecretProof(): void
     {
         $proof = hash_hmac('sha256', 'value', 'app_secret');
 
@@ -159,7 +159,7 @@ class ApiBaseTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::__set
      */
-    public function testSetInvalidKeyDoesNotAlterCAS()
+    public function testSetInvalidKeyDoesNotAlterCAS(): void
     {
         $this->cas->expects($this->never())
                   ->method('add');
@@ -172,7 +172,7 @@ class ApiBaseTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::set_id
      */
-    public function testSetIdSetsResourceId()
+    public function testSetIdSetsResourceId(): void
     {
         $this->class->set_id('Lunr');
 
@@ -184,7 +184,7 @@ class ApiBaseTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::set_fields
      */
-    public function testSetFieldsWithArraySetsFields()
+    public function testSetFieldsWithArraySetsFields(): void
     {
         $fields = [ 'email', 'first_name' ];
 
@@ -201,7 +201,7 @@ class ApiBaseTest extends ApiTest
      * @dataProvider nonArrayProvider
      * @covers       Lunr\Spark\Facebook\Api::set_fields
      */
-    public function testSetFieldsWithNonArrayDoesNotSetFields($value)
+    public function testSetFieldsWithNonArrayDoesNotSetFields($value): void
     {
         $this->class->set_fields($value);
 

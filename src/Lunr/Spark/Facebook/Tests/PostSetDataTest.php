@@ -24,7 +24,7 @@ class PostSetDataTest extends PostTest
      *
      * @covers Lunr\Spark\Facebook\Post::set_data
      */
-    public function testSetDataReturnsSelfReference()
+    public function testSetDataReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_data([], [], TRUE));
     }
@@ -34,7 +34,7 @@ class PostSetDataTest extends PostTest
      *
      * @covers Lunr\Spark\Facebook\Post::set_data
      */
-    public function testSetDataSetsData()
+    public function testSetDataSetsData(): void
     {
         $data = [ 'id' => '123', 'name' => 'name' ];
 
@@ -48,7 +48,7 @@ class PostSetDataTest extends PostTest
      *
      * @covers Lunr\Spark\Facebook\Post::set_data
      */
-    public function testSetDataSetsPermissions()
+    public function testSetDataSetsPermissions(): void
     {
         $permissions = [ 'email', 'read_stream' ];
 
@@ -62,7 +62,7 @@ class PostSetDataTest extends PostTest
      *
      * @covers Lunr\Spark\Facebook\Post::set_data
      */
-    public function testSetDataSetsUsedAccessToken()
+    public function testSetDataSetsUsedAccessToken(): void
     {
         $this->class->set_data([], [], TRUE);
         $this->assertTrue($this->get_reflection_property_value('used_access_token'));
@@ -73,7 +73,7 @@ class PostSetDataTest extends PostTest
      *
      * @covers Lunr\Spark\Facebook\Post::set_data
      */
-    public function testSetDataUnsetsComments()
+    public function testSetDataUnsetsComments(): void
     {
         $data = [ 'id' => '123', 'comments' => [] ];
 
@@ -87,7 +87,7 @@ class PostSetDataTest extends PostTest
      *
      * @covers Lunr\Spark\Facebook\Post::set_data
      */
-    public function testSetDataUnsetsLikes()
+    public function testSetDataUnsetsLikes(): void
     {
         $data = [ 'id' => '123', 'likes' => [] ];
 

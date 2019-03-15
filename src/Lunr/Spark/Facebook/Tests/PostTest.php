@@ -44,7 +44,7 @@ abstract class PostTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->cas    = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
         $this->http   = $this->getMockBuilder('Requests_Session')->getMock();
@@ -60,7 +60,7 @@ abstract class PostTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -74,7 +74,7 @@ abstract class PostTest extends LunrBaseTest
      *
      * @return array $fields Array of fields.
      */
-    public function accessTokenFieldsProvider()
+    public function accessTokenFieldsProvider(): array
     {
         $fields   = [];
         $fields[] = [ 'id' ];
@@ -101,7 +101,7 @@ abstract class PostTest extends LunrBaseTest
      *
      * @return array $fields Array of fields.
      */
-    public function permissionFieldsProvider()
+    public function permissionFieldsProvider(): array
     {
         $fields   = [];
         $fields[] = [ 'privacy', 'read_stream' ];

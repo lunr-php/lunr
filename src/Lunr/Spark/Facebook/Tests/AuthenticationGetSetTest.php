@@ -26,7 +26,7 @@ class AuthenticationGetSetTest extends AuthenticationTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUpNull();
     }
@@ -34,11 +34,11 @@ class AuthenticationGetSetTest extends AuthenticationTest
     /**
      * Test that state is set to a generated string if fetched NULL from the Request class.
      */
-    public function testStateIsGeneratedIfRequestedNull()
+    public function testStateIsGeneratedIfRequestedNull(): void
     {
         $value = $this->get_reflection_property_value('state');
 
-        $this->assertInternaltype('string', $value);
+        $this->assertIsString($value);
         $this->assertNotEmpty($value);
     }
 
@@ -47,7 +47,7 @@ class AuthenticationGetSetTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::set_code
      */
-    public function testSetCodeSetsCode()
+    public function testSetCodeSetsCode(): void
     {
         $this->class->set_code('New Code');
 
@@ -59,7 +59,7 @@ class AuthenticationGetSetTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::set_redirect_uri
      */
-    public function testSetRedirectUriSetsUri()
+    public function testSetRedirectUriSetsUri(): void
     {
         $this->class->set_redirect_uri('http://example.com');
 
@@ -75,7 +75,7 @@ class AuthenticationGetSetTest extends AuthenticationTest
      * @dataProvider scopeValueProvider
      * @covers       Lunr\Spark\Facebook\Authentication::set_code
      */
-    public function testSetScopeSetsScope($input, $expected)
+    public function testSetScopeSetsScope($input, $expected): void
     {
         $this->class->set_scope($input);
 
@@ -87,7 +87,7 @@ class AuthenticationGetSetTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_state
      */
-    public function testGetStateGetsState()
+    public function testGetStateGetsState(): void
     {
         $this->set_reflection_property_value('state', 'My State');
 
@@ -99,7 +99,7 @@ class AuthenticationGetSetTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_code
      */
-    public function testGetCodeGetsCode()
+    public function testGetCodeGetsCode(): void
     {
         $this->set_reflection_property_value('code', 'My Code');
 
@@ -111,7 +111,7 @@ class AuthenticationGetSetTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_token_expires
      */
-    public function testGetTokenExpiresGetsTokenExpires()
+    public function testGetTokenExpiresGetsTokenExpires(): void
     {
         $this->set_reflection_property_value('token_expires', 123);
 
@@ -127,7 +127,7 @@ class AuthenticationGetSetTest extends AuthenticationTest
      * @dataProvider stateValueProvider
      * @covers       Lunr\Spark\Facebook\Authentication::is_state_verified
      */
-    public function testIsStateVerified($state, $valid)
+    public function testIsStateVerified($state, $valid): void
     {
         $this->set_reflection_property_value('state', 'valid');
 

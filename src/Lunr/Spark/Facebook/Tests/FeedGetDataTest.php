@@ -27,7 +27,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::fetch_data
      */
-    public function testFetchData()
+    public function testFetchData(): void
     {
         $this->cas->expects($this->any())
                   ->method('get')
@@ -66,7 +66,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataDoesNotCallApiIfResourceIDNotSetAndNotFetchingUserData()
+    public function testGetDataDoesNotCallApiIfResourceIDNotSetAndNotFetchingUserData(): void
     {
         $this->cas->expects($this->never())
                   ->method('get');
@@ -82,7 +82,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataUsesFieldsIfSet()
+    public function testGetDataUsesFieldsIfSet(): void
     {
         $this->set_reflection_property_value('id', 'resource');
         $this->set_reflection_property_value('fields', [ 'email', 'user_likes' ]);
@@ -114,7 +114,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataDoesNotUseFieldsIfNotSet()
+    public function testGetDataDoesNotUseFieldsIfNotSet(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -142,7 +142,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataUsesAccessTokenIfPresent()
+    public function testGetDataUsesAccessTokenIfPresent(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -184,7 +184,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataWhenAccessTokenNotPresent()
+    public function testGetDataWhenAccessTokenNotPresent(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -212,7 +212,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataSetsDataOnSuccessfulRequest()
+    public function testGetDataSetsDataOnSuccessfulRequest(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -242,7 +242,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataSetsUserDataOnSuccessfulRequest()
+    public function testGetDataSetsUserDataOnSuccessfulRequest(): void
     {
         $this->cas->expects($this->exactly(2))
                   ->method('get')
@@ -270,7 +270,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataSetsDataOnFailedRequest()
+    public function testGetDataSetsDataOnFailedRequest(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -297,7 +297,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataSetsDataOnRequestError()
+    public function testGetDataSetsDataOnRequestError(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -330,7 +330,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataFetchesPermissionsIfCheckPermissionsTrue()
+    public function testGetDataFetchesPermissionsIfCheckPermissionsTrue(): void
     {
         $this->set_reflection_property_value('id', 'resource');
         $this->set_reflection_property_value('check_permissions', TRUE);
@@ -381,7 +381,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataDoesNotFetchPermissionsIfCheckPermissionsFalse()
+    public function testGetDataDoesNotFetchPermissionsIfCheckPermissionsFalse(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 
@@ -414,7 +414,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataSetsFetchedUserDataTrueIfFetchingUserData()
+    public function testGetDataSetsFetchedUserDataTrueIfFetchingUserData(): void
     {
         $this->cas->expects($this->exactly(2))
                   ->method('get')
@@ -442,7 +442,7 @@ class FeedGetDataTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_data
      */
-    public function testGetDataSetsFetchedUserDataFalseIfFetchingResourceData()
+    public function testGetDataSetsFetchedUserDataFalseIfFetchingResourceData(): void
     {
         $this->set_reflection_property_value('id', 'resource');
 

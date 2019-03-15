@@ -26,7 +26,7 @@ class FeedClassifyTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::classify
      */
-    public function testClassifyResetsInformationIfDataKeyDoesNotExist()
+    public function testClassifyResetsInformationIfDataKeyDoesNotExist(): void
     {
         $this->set_reflection_property_value('data', [ 'id' => 'value' ]);
         $this->set_reflection_property_value('next', 10);
@@ -45,7 +45,7 @@ class FeedClassifyTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::classify
      */
-    public function testClassifySetsNextIfPresent()
+    public function testClassifySetsNextIfPresent(): void
     {
         $data = [
             'data'   => [],
@@ -65,7 +65,7 @@ class FeedClassifyTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::classify
      */
-    public function testClassifySetsPreviousIfPresent()
+    public function testClassifySetsPreviousIfPresent(): void
     {
         $data = [
             'data'   => [],
@@ -85,7 +85,7 @@ class FeedClassifyTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::classify
      */
-    public function testClassifyDoesNotTouchNextIfNotPresent()
+    public function testClassifyDoesNotTouchNextIfNotPresent(): void
     {
         $data = [
             'data'   => [],
@@ -105,7 +105,7 @@ class FeedClassifyTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::classify
      */
-    public function testClassifyDoesNotTouchPreviousIfNotPresent()
+    public function testClassifyDoesNotTouchPreviousIfNotPresent(): void
     {
         $data = [
             'data'   => [],
@@ -125,7 +125,7 @@ class FeedClassifyTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::classify
      */
-    public function testClassifyTransformsDataToArrayOfPosts()
+    public function testClassifyTransformsDataToArrayOfPosts(): void
     {
         $data = [
             'data' => [
@@ -142,7 +142,7 @@ class FeedClassifyTest extends FeedTest
 
         $value = $this->get_reflection_property_value('data');
 
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertCount(3, $value);
         $this->assertContainsOnlyInstancesOf('Lunr\Spark\Facebook\Post', $value);
     }
@@ -152,7 +152,7 @@ class FeedClassifyTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::classify
      */
-    public function testClassifyCreatesPostWithCorrectData()
+    public function testClassifyCreatesPostWithCorrectData(): void
     {
         $data = [
             'data' => [
@@ -180,7 +180,7 @@ class FeedClassifyTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::classify
      */
-    public function testClassifyCreatesPostWithCorrectPermissions()
+    public function testClassifyCreatesPostWithCorrectPermissions(): void
     {
         $data = [
             'data' => [
@@ -211,7 +211,7 @@ class FeedClassifyTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::classify
      */
-    public function testClassifyCreatesPostWithCorrectUsedAccessTokenFlag()
+    public function testClassifyCreatesPostWithCorrectUsedAccessTokenFlag(): void
     {
         $data = [
             'data' => [

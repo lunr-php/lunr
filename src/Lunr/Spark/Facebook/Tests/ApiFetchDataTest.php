@@ -27,7 +27,7 @@ class ApiFetchDataTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::fetch_data
      */
-    public function testFetchDataSetsUsedAccessTokenTrueWhenUsingAccessToken()
+    public function testFetchDataSetsUsedAccessTokenTrueWhenUsingAccessToken(): void
     {
         $this->cas->expects($this->at(0))
                   ->method('get')
@@ -59,7 +59,7 @@ class ApiFetchDataTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::fetch_data
      */
-    public function testFetchDataSetsUsedAccessTokenFalseWhenNotUsingAccessToken()
+    public function testFetchDataSetsUsedAccessTokenFalseWhenNotUsingAccessToken(): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -81,7 +81,7 @@ class ApiFetchDataTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::fetch_data
      */
-    public function testFetchDataUsesFieldsIfSet()
+    public function testFetchDataUsesFieldsIfSet(): void
     {
         $this->set_reflection_property_value('fields', [ 'email', 'user_likes' ]);
 
@@ -107,7 +107,7 @@ class ApiFetchDataTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::fetch_data
      */
-    public function testFetchDataDoesNotUseFieldsIfNotSet()
+    public function testFetchDataDoesNotUseFieldsIfNotSet(): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -130,7 +130,7 @@ class ApiFetchDataTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::fetch_data
      */
-    public function testFetchDataUsesAccessTokenIfPresent()
+    public function testFetchDataUsesAccessTokenIfPresent(): void
     {
         $this->cas->expects($this->at(0))
                   ->method('get')
@@ -167,7 +167,7 @@ class ApiFetchDataTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::fetch_data
      */
-    public function testFetchDataWhenAccessTokenNotPresent()
+    public function testFetchDataWhenAccessTokenNotPresent(): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -190,7 +190,7 @@ class ApiFetchDataTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::fetch_data
      */
-    public function testFetchDataSetsDataOnSuccessfulRequest()
+    public function testFetchDataSetsDataOnSuccessfulRequest(): void
     {
         $data = [ 'name' => 'Foo' ];
 
@@ -220,7 +220,7 @@ class ApiFetchDataTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::fetch_data
      */
-    public function testFetchDataSetsDataOnFailedRequest()
+    public function testFetchDataSetsDataOnFailedRequest(): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -245,7 +245,7 @@ class ApiFetchDataTest extends ApiTest
      *
      * @covers Lunr\Spark\Facebook\Api::fetch_data
      */
-    public function testFetchDataSetsDataOnRequestError()
+    public function testFetchDataSetsDataOnRequestError(): void
     {
         $output = [
             'error' => [

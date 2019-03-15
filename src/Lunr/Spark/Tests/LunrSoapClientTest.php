@@ -27,7 +27,7 @@ abstract class LunrSoapClientTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new LunrSoapClient();
         $this->reflection = new ReflectionClass('Lunr\Spark\LunrSoapClient');
@@ -36,7 +36,7 @@ abstract class LunrSoapClientTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
     }

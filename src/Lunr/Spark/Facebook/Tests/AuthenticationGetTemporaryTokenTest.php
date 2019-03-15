@@ -27,7 +27,7 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_temporary_access_token
      */
-    public function testGetTemporaryAccessTokenReturnsEmptyStringOnError()
+    public function testGetTemporaryAccessTokenReturnsEmptyStringOnError(): void
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
@@ -68,7 +68,7 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_temporary_access_token
      */
-    public function testGetTemporaryAccessTokenReturnsEmptyStringOnFailure()
+    public function testGetTemporaryAccessTokenReturnsEmptyStringOnFailure(): void
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
@@ -103,7 +103,7 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_temporary_access_token
      */
-    public function testGetTemporaryAccessTokenStoresAccessTokenInCas()
+    public function testGetTemporaryAccessTokenStoresAccessTokenInCas(): void
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
@@ -145,7 +145,7 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_temporary_access_token
      */
-    public function testGetTemporaryAccessTokenStoresExpiryTime()
+    public function testGetTemporaryAccessTokenStoresExpiryTime(): void
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [
@@ -185,7 +185,7 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
      *
      * @covers Lunr\Spark\Facebook\Authentication::get_temporary_access_token
      */
-    public function testGetTemporaryAccessTokenReturnsAccessTokenOnSuccess()
+    public function testGetTemporaryAccessTokenReturnsAccessTokenOnSuccess(): void
     {
         $url    = 'https://graph.facebook.com/oauth/access_token';
         $params = [

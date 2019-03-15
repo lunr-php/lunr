@@ -58,7 +58,7 @@ abstract class AuthenticationTest extends LunrBaseTest
      *
      * @return void
      */
-    public function setUpNull()
+    public function setUpNull(): void
     {
         $this->cas      = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
@@ -78,7 +78,7 @@ abstract class AuthenticationTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->cas      = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
@@ -107,7 +107,7 @@ abstract class AuthenticationTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -123,7 +123,7 @@ abstract class AuthenticationTest extends LunrBaseTest
      *
      * @return array $values Array of scope values
      */
-    public function scopeValueProvider()
+    public function scopeValueProvider(): array
     {
         $values   = [];
         $values[] = [ 'email,various', 'email,various' ];
@@ -137,7 +137,7 @@ abstract class AuthenticationTest extends LunrBaseTest
      *
      * @return array $values Array of state values.
      */
-    public function stateValueProvider()
+    public function stateValueProvider(): array
     {
         $values   = [];
         $values[] = [ 'valid', TRUE ];

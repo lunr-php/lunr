@@ -50,7 +50,7 @@ abstract class DeliveryApiTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->cas      = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
@@ -65,7 +65,7 @@ abstract class DeliveryApiTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -80,7 +80,7 @@ abstract class DeliveryApiTest extends LunrBaseTest
      *
      * @return array $keys Array of keys
      */
-    public function generalKeyProvider()
+    public function generalKeyProvider(): array
     {
         $keys   = [];
         $keys[] = [ 'access_token' ];
@@ -93,7 +93,7 @@ abstract class DeliveryApiTest extends LunrBaseTest
      *
      * @return array $methods Array of get methods
      */
-    public function getMethodProvider()
+    public function getMethodProvider(): array
     {
         $methods   = [];
         $methods[] = [ 'get' ];

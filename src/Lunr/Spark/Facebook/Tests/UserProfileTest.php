@@ -50,7 +50,7 @@ abstract class UserProfileTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->cas      = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
@@ -67,7 +67,7 @@ abstract class UserProfileTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -82,7 +82,7 @@ abstract class UserProfileTest extends LunrBaseTest
      *
      * @return array $fields Array of fields.
      */
-    public function publicFieldsProvider()
+    public function publicFieldsProvider(): array
     {
         $fields   = [];
         $fields[] = [ 'id' ];
@@ -103,7 +103,7 @@ abstract class UserProfileTest extends LunrBaseTest
      *
      * @return array $fields Array of fields.
      */
-    public function accessTokenFieldsProvider()
+    public function accessTokenFieldsProvider(): array
     {
         $fields   = [];
         $fields[] = [ 'age_range' ];
@@ -127,7 +127,7 @@ abstract class UserProfileTest extends LunrBaseTest
      *
      * @return array $fields Array of fields.
      */
-    public function permissionFieldsProvider()
+    public function permissionFieldsProvider(): array
     {
         $fields   = [];
         $fields[] = [ 'languages', 'user_likes' ];
@@ -171,7 +171,7 @@ abstract class UserProfileTest extends LunrBaseTest
      *
      * @return array $fields Array of fields.
      */
-    public function requestedFieldsProvider()
+    public function requestedFieldsProvider(): array
     {
         $fields   = [];
         $fields[] = [ 'security_settings' ];

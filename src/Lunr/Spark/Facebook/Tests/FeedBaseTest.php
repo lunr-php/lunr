@@ -26,7 +26,7 @@ class FeedBaseTest extends FeedTest
     /**
      * Test that the CentralAuthenticationStore class is passed correctly.
      */
-    public function testCasIsSetCorrectly()
+    public function testCasIsSetCorrectly(): void
     {
         $this->assertPropertySame('cas', $this->cas);
     }
@@ -34,7 +34,7 @@ class FeedBaseTest extends FeedTest
     /**
      * Test that the Requests_Session class is passed correctly.
      */
-    public function testRequestsSessionIsSetCorrectly()
+    public function testRequestsSessionIsSetCorrectly(): void
     {
         $this->assertPropertySame('http', $this->http);
     }
@@ -42,7 +42,7 @@ class FeedBaseTest extends FeedTest
     /**
      * Test that limit is initialized with 25.
      */
-    public function testLimitIsSetCorrect()
+    public function testLimitIsSetCorrect(): void
     {
         $this->assertPropertySame('limit', 25);
     }
@@ -50,7 +50,7 @@ class FeedBaseTest extends FeedTest
     /**
      * Test that next is initialized with 0.
      */
-    public function testNextIsSetToZero()
+    public function testNextIsSetToZero(): void
     {
         $this->assertPropertySame('next', 0);
     }
@@ -58,7 +58,7 @@ class FeedBaseTest extends FeedTest
     /**
      * Test that previous is initialized with 0.
      */
-    public function testPreviousIsSetToZero()
+    public function testPreviousIsSetToZero(): void
     {
         $this->assertPropertySame('previous', 0);
     }
@@ -66,7 +66,7 @@ class FeedBaseTest extends FeedTest
     /**
      * Test that fetched_user_data is initialized FALSE.
      */
-    public function testFetchedUserDataIsFalse()
+    public function testFetchedUserDataIsFalse(): void
     {
         $this->assertFalse($this->get_reflection_property_value('fetched_user_data'));
     }
@@ -76,7 +76,7 @@ class FeedBaseTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::set_limit
      */
-    public function testSetLimitSetsLimit()
+    public function testSetLimitSetsLimit(): void
     {
         $this->class->set_limit(100);
 
@@ -88,7 +88,7 @@ class FeedBaseTest extends FeedTest
      *
      * @covers Lunr\Spark\Facebook\Feed::get_posts
      */
-    public function testGetPostsGetsData()
+    public function testGetPostsGetsData(): void
     {
         $posts = [ [], [], [] ];
 

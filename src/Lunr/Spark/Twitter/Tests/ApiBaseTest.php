@@ -26,7 +26,7 @@ class ApiBaseTest extends ApiTest
     /**
      * Test that the CentralAuthenticationStore class is passed correctly.
      */
-    public function testCasIsSetCorrectly()
+    public function testCasIsSetCorrectly(): void
     {
         $this->assertPropertySame('cas', $this->cas);
     }
@@ -34,7 +34,7 @@ class ApiBaseTest extends ApiTest
     /**
      * Test that the Requests_Response class is passed correctly.
      */
-    public function testRequestsResponseIsSetCorrectly()
+    public function testRequestsResponseIsSetCorrectly(): void
     {
         $this->assertPropertySame('http', $this->http);
     }
@@ -47,7 +47,7 @@ class ApiBaseTest extends ApiTest
      * @dataProvider generalKeyProvider
      * @covers       Lunr\Spark\Twitter\Api::__get
      */
-    public function testGetExistingCredentials($key)
+    public function testGetExistingCredentials($key): void
     {
         $this->cas->expects($this->once())
                   ->method('get')
@@ -62,7 +62,7 @@ class ApiBaseTest extends ApiTest
      *
      * @covers Lunr\Spark\Twitter\Api::__get
      */
-    public function testGetNonExistingCredentials()
+    public function testGetNonExistingCredentials(): void
     {
         $this->cas->expects($this->never())
                   ->method('get');
@@ -78,7 +78,7 @@ class ApiBaseTest extends ApiTest
      * @dataProvider generalKeyProvider
      * @covers       Lunr\Spark\Twitter\Api::__set
      */
-    public function testSetGeneralCredentials($key)
+    public function testSetGeneralCredentials($key): void
     {
         $this->cas->expects($this->once())
                   ->method('add')
@@ -92,7 +92,7 @@ class ApiBaseTest extends ApiTest
      *
      * @covers Lunr\Spark\Twitter\Api::__set
      */
-    public function testSetInvalidKeyDoesNotAlterCAS()
+    public function testSetInvalidKeyDoesNotAlterCAS(): void
     {
         $this->cas->expects($this->never())
                   ->method('add');

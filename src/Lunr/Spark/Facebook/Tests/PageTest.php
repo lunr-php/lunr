@@ -50,7 +50,7 @@ abstract class PageTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->cas      = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
@@ -67,7 +67,7 @@ abstract class PageTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
@@ -82,7 +82,7 @@ abstract class PageTest extends LunrBaseTest
      *
      * @return array $fields Array of fields.
      */
-    public function publicFieldsProvider()
+    public function publicFieldsProvider(): array
     {
         $fields   = [];
         $fields[] = [ 'id' ];
@@ -112,7 +112,7 @@ abstract class PageTest extends LunrBaseTest
      *
      * @return array $values Array of non array values
      */
-    public function nonArrayProvider()
+    public function nonArrayProvider(): array
     {
         $values   = [];
         $values[] = [ 'string' ];

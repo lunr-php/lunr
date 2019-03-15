@@ -26,7 +26,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
     /**
      * Test that the store is an empty array by default.
      */
-    public function testStoreIsEmptyByDefault()
+    public function testStoreIsEmptyByDefault(): void
     {
         $this->assertArrayEmpty($this->get_reflection_property_value('store'));
     }
@@ -36,7 +36,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      *
      * @covers Lunr\Spark\CentralAuthenticationStore::add
      */
-    public function testAddCreatesModuleIndexIfNotExists()
+    public function testAddCreatesModuleIndexIfNotExists(): void
     {
         $this->class->add('module', 'key', 'value');
 
@@ -48,7 +48,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      *
      * @covers Lunr\Spark\CentralAuthenticationStore::add
      */
-    public function testAddAddsNewValue()
+    public function testAddAddsNewValue(): void
     {
         $this->class->add('module', 'key', 'value');
 
@@ -63,7 +63,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      *
      * @covers Lunr\Spark\CentralAuthenticationStore::add
      */
-    public function testAddOverwritesOldValue()
+    public function testAddOverwritesOldValue(): void
     {
         $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value1' ] ]);
 
@@ -80,7 +80,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      *
      * @covers Lunr\Spark\CentralAuthenticationStore::delete
      */
-    public function testDeleteUnsetsExistingIndex()
+    public function testDeleteUnsetsExistingIndex(): void
     {
         $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value' ] ]);
 
@@ -96,7 +96,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      *
      * @covers Lunr\Spark\CentralAuthenticationStore::delete
      */
-    public function testDeleteDoesNothingWhenIndexDoesNotExist()
+    public function testDeleteDoesNothingWhenIndexDoesNotExist(): void
     {
         $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value' ] ]);
 
@@ -114,7 +114,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      *
      * @covers Lunr\Spark\CentralAuthenticationStore::get
      */
-    public function testGetReturnsNullWhenModuleIndexDoesNotExist()
+    public function testGetReturnsNullWhenModuleIndexDoesNotExist(): void
     {
         $this->assertNull($this->class->get('module', 'key'));
     }
@@ -124,7 +124,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      *
      * @covers Lunr\Spark\CentralAuthenticationStore::get
      */
-    public function testGetReturnsNullWhenIndexDoesNotExist()
+    public function testGetReturnsNullWhenIndexDoesNotExist(): void
     {
         $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value' ] ]);
 
@@ -136,7 +136,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      *
      * @covers Lunr\Spark\CentralAuthenticationStore::get
      */
-    public function testGetReturnsValueWhenIndexExists()
+    public function testGetReturnsValueWhenIndexExists(): void
     {
         $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value' ] ]);
 
