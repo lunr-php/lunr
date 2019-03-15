@@ -22,7 +22,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that closed is initialized properly.
      */
-    public function testDefaultClosedValue()
+    public function testDefaultClosedValue(): void
     {
         $this->assertFalse($this->get_reflection_property_value('closed'));
     }
@@ -30,7 +30,7 @@ class SessionBaseTest extends SessionTest
     /**
      * Test that started is initialized properly.
      */
-    public function testDefaultStartedValue()
+    public function testDefaultStartedValue(): void
     {
         $this->assertFalse($this->get_reflection_property_value('started'));
     }
@@ -42,7 +42,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::setSessionHandler
      */
-    public function testSetSessionHandlerReturnsTrueWithSessionHandlerInterface()
+    public function testSetSessionHandlerReturnsTrueWithSessionHandlerInterface(): void
     {
         $handler = $this->getMockBuilder('\SessionHandlerInterface')->getMock();
 
@@ -57,7 +57,7 @@ class SessionBaseTest extends SessionTest
      * @dataProvider invalidSessionHandlerProvider
      * @covers       Lunr\Sphere\Session::setSessionHandler
      */
-    public function testSetSessionHandlerReturnsFalseWithInvalidData($handler)
+    public function testSetSessionHandlerReturnsFalseWithInvalidData($handler): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -80,7 +80,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::set
      */
-    public function testSetIsIgnoredWhenClosedAndNotStarted()
+    public function testSetIsIgnoredWhenClosedAndNotStarted(): void
     {
         $_SESSION = [];
 
@@ -101,7 +101,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::set
      */
-    public function testSetIsIgnoredWhenNotClosedAndNotStarted()
+    public function testSetIsIgnoredWhenNotClosedAndNotStarted(): void
     {
         $_SESSION = [];
 
@@ -122,7 +122,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::set
      */
-    public function testSetIsIgnoredWhenClosedAndStarted()
+    public function testSetIsIgnoredWhenClosedAndStarted(): void
     {
         $_SESSION = [];
 
@@ -143,7 +143,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::set
      */
-    public function testSetWorksWhenNotClosedAndStarted()
+    public function testSetWorksWhenNotClosedAndStarted(): void
     {
         $method = $this->get_accessible_reflection_method('set');
 
@@ -163,7 +163,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::delete
      */
-    public function testDeleteIsIgnoredWhenClosedAndNotStarted()
+    public function testDeleteIsIgnoredWhenClosedAndNotStarted(): void
     {
         $method = $this->get_accessible_reflection_method('delete');
 
@@ -184,7 +184,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::delete
      */
-    public function testDeleteIsIgnoredWhenNotClosedAndNotStarted()
+    public function testDeleteIsIgnoredWhenNotClosedAndNotStarted(): void
     {
         $method = $this->get_accessible_reflection_method('delete');
 
@@ -205,7 +205,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::delete
      */
-    public function testDeleteIsIgnoredWhenClosedAndStarted()
+    public function testDeleteIsIgnoredWhenClosedAndStarted(): void
     {
         $method = $this->get_accessible_reflection_method('delete');
 
@@ -226,7 +226,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::delete
      */
-    public function testDeleteWorksWhenNotClosedAndStarted()
+    public function testDeleteWorksWhenNotClosedAndStarted(): void
     {
         $_SESSION = [];
         $method   = $this->get_accessible_reflection_method('delete');
@@ -248,7 +248,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::get
      */
-    public function testGetReturnsNullWhenNotStarted()
+    public function testGetReturnsNullWhenNotStarted(): void
     {
         $method = $this->get_accessible_reflection_method('get');
 
@@ -264,7 +264,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::get
      */
-    public function testGetReturnsNullWhenNoKey()
+    public function testGetReturnsNullWhenNoKey(): void
     {
         $method = $this->get_accessible_reflection_method('get');
 
@@ -280,7 +280,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::get
      */
-    public function testGetWorksWhenStarted()
+    public function testGetWorksWhenStarted(): void
     {
         $method = $this->get_accessible_reflection_method('get');
 
@@ -296,7 +296,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers   Lunr\Sphere\Session::sessionId
      */
-    public function testGetSessionId()
+    public function testGetSessionId(): void
     {
         $this->mock_function('session_id', $this->generate_id_function);
         $this->assertEquals('myId', $this->class->sessionId());
@@ -308,7 +308,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers   Lunr\Sphere\Session::setSessionId
      */
-    public function testSetSessionId()
+    public function testSetSessionId(): void
     {
         $this->mock_function('session_id', $this->generate_id_function);
         $this->class->setSessionId('hello');
@@ -321,7 +321,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers   Lunr\Sphere\Session::regenerateId
      */
-    public function testGetNewSessionId()
+    public function testGetNewSessionId(): void
     {
         $this->mock_function('session_id', $this->generate_id_function);
         $this->mock_function('session_regenerate_id', self::FUNCTION_RETURN_TRUE);
@@ -341,7 +341,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers   Lunr\Sphere\Session::start
      */
-    public function testStart()
+    public function testStart(): void
     {
         $this->set_reflection_property_value('started', FALSE);
         $this->set_reflection_property_value('closed', TRUE);
@@ -360,7 +360,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers   \Lunr\Sphere\Session::resume
      */
-    public function testResume()
+    public function testResume(): void
     {
         $this->set_reflection_property_value('started', TRUE);
         $this->set_reflection_property_value('closed', FALSE);
@@ -376,7 +376,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers   \Lunr\Sphere\Session::resume
      */
-    public function testResumeWhenClosed()
+    public function testResumeWhenClosed(): void
     {
         $this->set_reflection_property_value('started', FALSE);
         $this->set_reflection_property_value('closed', TRUE);
@@ -397,7 +397,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::start
      */
-    public function testStartIfAlreadyStarted()
+    public function testStartIfAlreadyStarted(): void
     {
         $this->set_reflection_property_value('started', TRUE);
 
@@ -412,7 +412,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers   \Lunr\Sphere\Session::start
      */
-    public function testStartSetsId()
+    public function testStartSetsId(): void
     {
         $this->set_reflection_property_value('started', FALSE);
         $this->set_reflection_property_value('closed', TRUE);
@@ -434,7 +434,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers   Lunr\Sphere\Session::destroy
      */
-    public function testDestroyWorksWhenStarted()
+    public function testDestroyWorksWhenStarted(): void
     {
         $this->set_reflection_property_value('started', TRUE);
 
@@ -455,7 +455,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers Lunr\Sphere\Session::destroy
      */
-    public function testDestroyDoesNothingWhenNotStarted()
+    public function testDestroyDoesNothingWhenNotStarted(): void
     {
         $this->set_reflection_property_value('started', FALSE);
 
@@ -471,7 +471,7 @@ class SessionBaseTest extends SessionTest
      *
      * @covers   Lunr\Sphere\Session::close
      */
-    public function testCloseSetsParameters()
+    public function testCloseSetsParameters(): void
     {
         $this->set_reflection_property_value('started', TRUE);
         $this->set_reflection_property_value('closed', FALSE);

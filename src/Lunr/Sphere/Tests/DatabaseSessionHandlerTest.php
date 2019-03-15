@@ -35,7 +35,7 @@ abstract class DatabaseSessionHandlerTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->sdao = $this->getMockBuilder('Lunr\Sphere\SessionDAO')
                            ->disableOriginalConstructor()
@@ -48,7 +48,7 @@ abstract class DatabaseSessionHandlerTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->sdao);
         unset($this->reflection);

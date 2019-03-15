@@ -23,7 +23,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
     /**
      * Test that lifetime is initialized properly.
      */
-    public function testDefaultLifetimeValue()
+    public function testDefaultLifetimeValue(): void
     {
         $this->assertPropertyEquals('lifetime', ini_get('session.gc_maxlifetime'));
     }
@@ -33,7 +33,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
      *
      * @covers Lunr\Sphere\DatabaseSessionHandler::open
      */
-    public function testOpenPath()
+    public function testOpenPath(): void
     {
         $this->assertTrue($this->class->open('myPath', ''));
     }
@@ -43,7 +43,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
      *
      * @covers Lunr\Sphere\DatabaseSessionHandler::close
      */
-    public function testCloseReturnsTrue()
+    public function testCloseReturnsTrue(): void
     {
         $this->assertTrue($this->class->close());
     }
@@ -53,7 +53,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
      *
      * @covers Lunr\Sphere\DatabaseSessionHandler::read
      */
-    public function testReadReadsFromDatabase()
+    public function testReadReadsFromDatabase(): void
     {
         $this->sdao->expects($this->once())
                    ->method('read_session_data')
@@ -67,7 +67,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
      *
      * @covers Lunr\Sphere\DatabaseSessionHandler::write
      */
-    public function testWriteWritesInDatabase()
+    public function testWriteWritesInDatabase(): void
     {
         $this->sdao->expects($this->once())
                    ->method('write_session_data')
@@ -81,7 +81,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
      *
      * @covers Lunr\Sphere\DatabaseSessionHandler::destroy
      */
-    public function testDestroyDeletesSession()
+    public function testDestroyDeletesSession(): void
     {
         $this->sdao->expects($this->once())
                    ->method('delete_session')
@@ -95,7 +95,7 @@ class DatabaseSessionHandlerBaseTest extends DatabaseSessionHandlerTest
      *
      * @covers Lunr\Sphere\DatabaseSessionHandler::gc
      */
-    public function testGcCollectsSession()
+    public function testGcCollectsSession(): void
     {
         $this->sdao->expects($this->once())
                    ->method('session_gc')

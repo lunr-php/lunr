@@ -46,7 +46,7 @@ abstract class SessionTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->class      = new Session();
         $this->reflection = new ReflectionClass('Lunr\Sphere\Session');
@@ -74,7 +74,7 @@ abstract class SessionTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);

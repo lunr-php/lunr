@@ -27,7 +27,7 @@ class SessionDAOBaseTest extends SessionDAOTest
      *
      * @covers Lunr\Sphere\SessionDAO::read_session_data
      */
-    public function testReadSessionDataReturnsFalseIfSessionNotExists()
+    public function testReadSessionDataReturnsFalseIfSessionNotExists(): void
     {
         $this->db->expects($this->once())
                  ->method('get_new_dml_query_builder_object')
@@ -94,7 +94,7 @@ class SessionDAOBaseTest extends SessionDAOTest
      *
      * @covers Lunr\Sphere\SessionDAO::read_session_data
      */
-    public function testReadSessionDataReturnsSession()
+    public function testReadSessionDataReturnsSession(): void
     {
         $this->db->expects($this->once())
                  ->method('get_new_dml_query_builder_object')
@@ -164,7 +164,7 @@ class SessionDAOBaseTest extends SessionDAOTest
      *
      * @covers Lunr\Sphere\SessionDAO::write_session_data
      */
-    public function testWriteSessionDataRollsBackIfNoSession()
+    public function testWriteSessionDataRollsBackIfNoSession(): void
     {
         $this->db->expects($this->once())
                  ->method('get_new_dml_query_builder_object')
@@ -227,7 +227,7 @@ class SessionDAOBaseTest extends SessionDAOTest
      *
      * @covers Lunr\Sphere\SessionDAO::write_session_data
      */
-    public function testWriteSessionData()
+    public function testWriteSessionData(): void
     {
         $this->db->expects($this->exactly(2))
                  ->method('get_new_dml_query_builder_object')
@@ -324,7 +324,7 @@ class SessionDAOBaseTest extends SessionDAOTest
      *
      * @covers Lunr\Sphere\SessionDAO::delete_session
      */
-    public function testDeleteSessionRollsBackIfQueryFails()
+    public function testDeleteSessionRollsBackIfQueryFails(): void
     {
         $this->db->expects($this->once())
                  ->method('get_new_dml_query_builder_object')
@@ -387,7 +387,7 @@ class SessionDAOBaseTest extends SessionDAOTest
      *
      * @covers Lunr\Sphere\SessionDAO::delete_session
      */
-    public function testDeleteSessionRollsBackIfQueryHasNoResults()
+    public function testDeleteSessionRollsBackIfQueryHasNoResults(): void
     {
         $this->db->expects($this->once())
                  ->method('get_new_dml_query_builder_object')
@@ -450,7 +450,7 @@ class SessionDAOBaseTest extends SessionDAOTest
      *
      * @covers Lunr\Sphere\SessionDAO::delete_session
      */
-    public function testDeleteSession()
+    public function testDeleteSession(): void
     {
         $this->db->expects($this->exactly(2))
                  ->method('get_new_dml_query_builder_object')
@@ -515,7 +515,7 @@ class SessionDAOBaseTest extends SessionDAOTest
      *
      * @covers Lunr\Sphere\SessionDAO::session_gc
      */
-    public function testSessionGC()
+    public function testSessionGC(): void
     {
         $this->db->expects($this->once())
                  ->method('get_new_dml_query_builder_object')
