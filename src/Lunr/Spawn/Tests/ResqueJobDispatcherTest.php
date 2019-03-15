@@ -50,7 +50,7 @@ class ResqueJobDispatcherTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->resque    = $this->getMockBuilder('Resque')->getMock();
         $this->scheduler = $this->getMockBuilder('ResqueScheduler')->getMock();
@@ -62,7 +62,7 @@ class ResqueJobDispatcherTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->reflection);
         unset($this->class);
@@ -75,7 +75,7 @@ class ResqueJobDispatcherTest extends LunrBaseTest
      *
      * @return array $queues Array of invalid queue names
      */
-    public function invalidQueueProvider()
+    public function invalidQueueProvider(): array
     {
         $queues   = [];
         $queues[] = [ 0 ];
@@ -96,7 +96,7 @@ class ResqueJobDispatcherTest extends LunrBaseTest
      *
      * @return array $statuses Array of valid status names
      */
-    public function validTrackStatusProvider()
+    public function validTrackStatusProvider(): array
     {
         $statuses   = [];
         $statuses[] = [ TRUE ];
@@ -110,7 +110,7 @@ class ResqueJobDispatcherTest extends LunrBaseTest
      *
      * @return array $statuses Array of invalid status names
      */
-    public function invalidTrackStatusProvider()
+    public function invalidTrackStatusProvider(): array
     {
         $statuses   = [];
         $statuses[] = [ 0 ];

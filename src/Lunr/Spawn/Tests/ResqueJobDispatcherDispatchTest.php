@@ -26,7 +26,7 @@ class ResqueJobDispatcherDispatchTest extends ResqueJobDispatcherTest
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::dispatch
      */
-    public function testDispatchUpdateToken()
+    public function testDispatchUpdateToken(): void
     {
         $this->mock_method([ $this->resque, 'enqueue' ], 'return "TOKEN";');
 
@@ -44,7 +44,7 @@ class ResqueJobDispatcherDispatchTest extends ResqueJobDispatcherTest
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::dispatch_in
      */
-    public function testDispatchIn()
+    public function testDispatchIn(): void
     {
         $this->mock_method([ $this->scheduler, 'enqueueIn' ], 'return NULL;');
 
@@ -60,7 +60,7 @@ class ResqueJobDispatcherDispatchTest extends ResqueJobDispatcherTest
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::dispatch_in
      */
-    public function testDispatchAt()
+    public function testDispatchAt(): void
     {
         $this->mock_method([ $this->scheduler, 'enqueueAt' ], 'return NULL;');
 

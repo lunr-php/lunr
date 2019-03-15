@@ -24,7 +24,7 @@ class NullDispatcherBaseTest extends NullDispatcherTest
      *
      * @covers Lunr\Spawn\NullDispatcher::dispatch
      */
-    public function testDispatchReturnsNull()
+    public function testDispatchReturnsNull(): void
     {
         $value = $this->class->dispatch('job', []);
 
@@ -36,7 +36,7 @@ class NullDispatcherBaseTest extends NullDispatcherTest
      *
      * @covers Lunr\Spawn\NullDispatcher::dispatch_in
      */
-    public function testDispatchInReturnsNull()
+    public function testDispatchInReturnsNull(): void
     {
         $value = $this->class->dispatch_in(30, 'job', []);
 
@@ -48,7 +48,7 @@ class NullDispatcherBaseTest extends NullDispatcherTest
      *
      * @covers Lunr\Spawn\NullDispatcher::dispatch_at
      */
-    public function testDispatchAtReturnsNull()
+    public function testDispatchAtReturnsNull(): void
     {
         $value = $this->class->dispatch_at(time(), 'job', []);
 
@@ -60,7 +60,7 @@ class NullDispatcherBaseTest extends NullDispatcherTest
      *
      * @covers Lunr\Spawn\NullDispatcher::get_job_id
      */
-    public function testGetJobIdReturnsNull()
+    public function testGetJobIdReturnsNull(): void
     {
         $value = $this->class->get_job_id();
 
@@ -72,7 +72,7 @@ class NullDispatcherBaseTest extends NullDispatcherTest
      *
      * @covers Lunr\Spawn\NullDispatcher::set_queue
      */
-    public function testSetQueueReturnsSelfReference()
+    public function testSetQueueReturnsSelfReference(): void
     {
         $value = $this->class->set_queue('queue');
 
@@ -84,7 +84,7 @@ class NullDispatcherBaseTest extends NullDispatcherTest
      *
      * @covers Lunr\Spawn\NullDispatcher::set_track_status
      */
-    public function testSetTrackStatusReturnsSelfReference()
+    public function testSetTrackStatusReturnsSelfReference(): void
     {
         $value = $this->class->set_track_status(FALSE);
 

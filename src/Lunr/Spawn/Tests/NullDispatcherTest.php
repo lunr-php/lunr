@@ -38,7 +38,7 @@ abstract class NullDispatcherTest extends LunrBaseTest
     /**
      * TestCase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->reflection = new ReflectionClass('Lunr\Spawn\NullDispatcher');
         $this->class      = new NullDispatcher();
@@ -47,7 +47,7 @@ abstract class NullDispatcherTest extends LunrBaseTest
     /**
      * TestCase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->reflection);
         unset($this->class);

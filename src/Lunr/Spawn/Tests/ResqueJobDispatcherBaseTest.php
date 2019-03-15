@@ -26,7 +26,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::__construct
      */
-    public function testResqueInitsWithValue()
+    public function testResqueInitsWithValue(): void
     {
         $value = $this->get_reflection_property_value('resque');
 
@@ -38,7 +38,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::__construct
      */
-    public function testQueueInitsWithDefaultValue()
+    public function testQueueInitsWithDefaultValue(): void
     {
         $value = $this->get_reflection_property_value('queue');
 
@@ -50,7 +50,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::__construct
      */
-    public function testTrackStatusInitsWithDefaultValue()
+    public function testTrackStatusInitsWithDefaultValue(): void
     {
         $value = $this->get_reflection_property_value('track_status');
 
@@ -62,7 +62,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::__construct
      */
-    public function testTokenIsNullBydefault()
+    public function testTokenIsNullBydefault(): void
     {
         $value = $this->get_reflection_property_value('token');
 
@@ -74,7 +74,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::get_job_id
      */
-    public function testGetJobIdReturnsToken()
+    public function testGetJobIdReturnsToken(): void
     {
         $this->mock_method([ $this->resque, 'enqueue' ], 'return "TOKEN";');
 
@@ -92,7 +92,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::set_queue
      */
-    public function testSetQueueWithString()
+    public function testSetQueueWithString(): void
     {
         $queue = 'queue';
         $this->class->set_queue($queue);
@@ -107,7 +107,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::set_queue
      */
-    public function testSetQueueWithArray()
+    public function testSetQueueWithArray(): void
     {
         $queue = [ 'queue' ];
         $this->class->set_queue($queue);
@@ -125,7 +125,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      * @dataProvider invalidQueueProvider
      * @covers       Lunr\Spawn\ResqueJobDispatcher::set_queue
      */
-    public function testSetQueueWithInvalidValue($queue)
+    public function testSetQueueWithInvalidValue($queue): void
     {
         $this->class->set_queue($queue);
 
@@ -142,7 +142,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      * @dataProvider validTrackStatusProvider
      * @covers       Lunr\Spawn\ResqueJobDispatcher::set_track_status
      */
-    public function testSetTrackStatusWithValidValue($value)
+    public function testSetTrackStatusWithValidValue($value): void
     {
         $value = TRUE;
         $this->class->set_track_status($value);
@@ -160,7 +160,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      * @dataProvider invalidTrackStatusProvider
      * @covers       Lunr\Spawn\ResqueJobDispatcher::set_track_status
      */
-    public function testSetTrackStatusWithInvalidValue($value)
+    public function testSetTrackStatusWithInvalidValue($value): void
     {
         $this->class->set_track_status($value);
 
@@ -174,7 +174,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::set_queue
      */
-    public function testSetQueueReturnsSelfReference()
+    public function testSetQueueReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_queue('queue'));
     }
@@ -184,7 +184,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      *
      * @covers Lunr\Spawn\ResqueJobDispatcher::set_track_status
      */
-    public function testSetTrackStatusReturnsSelfReference()
+    public function testSetTrackStatusReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_track_status(TRUE));
     }
