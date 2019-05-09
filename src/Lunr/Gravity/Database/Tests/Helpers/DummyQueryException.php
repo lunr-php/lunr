@@ -10,6 +10,7 @@
 
 namespace Lunr\Gravity\Database\Tests\Helpers;
 
+use Lunr\Gravity\Database\Exceptions\DatabaseException;
 use Lunr\Gravity\Database\Exceptions\QueryException;
 
 /**
@@ -20,10 +21,13 @@ class DummyQueryException extends QueryException
 
     /**
      * Constructor.
+     *
+     * @param string $message The exception message
      */
-    public function __construct()
+    public function __construct($message = NULL)
     {
-        // empty constructor to override input values for testing.
+        // Skip over the parent constructor to avoid having to specify the QueryResult class
+        DatabaseException::__construct($message);
     }
 
 }
