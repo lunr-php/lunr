@@ -8,6 +8,15 @@
             "search-path": "/src/Lunr/Halo/"
         }
     },
+    "Lunr.Config": {
+        "url": "m2:mmw/lunr.config.git",
+        "version": "0.7",
+        "revision": "master",
+        "psr4": {
+            "prefix": "Lunr\\Core",
+            "search-path": "/src/Lunr/Core/"
+        }
+    },
     "Psr-Log": {
         "url": "https://github.com/php-fig/log.git",
         "version": "1.0.2",

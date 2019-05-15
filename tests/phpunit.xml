@@ -25,13 +25,6 @@
             <file>../src/Lunr/Core/Tests/DateTimeTomorrowTest.php</file>
             <file>../src/Lunr/Core/Tests/DateTimeYesterdayTest.php</file>
             <file>../src/Lunr/Core/Tests/DateTimeVerifyTest.php</file>
-            <file>../src/Lunr/Core/Tests/ConfigurationBaseTest.php</file>
-            <file>../src/Lunr/Core/Tests/ConfigurationConvertArrayToClassTest.php</file>
-            <file>../src/Lunr/Core/Tests/ConfigurationNonArrayConstructorTest.php</file>
-            <file>../src/Lunr/Core/Tests/ConfigurationArrayConstructorTest.php</file>
-            <file>../src/Lunr/Core/Tests/ConfigurationArrayAccessTest.php</file>
-            <file>../src/Lunr/Core/Tests/ConfigurationLoadFileTest.php</file>
-            <file>../src/Lunr/Core/Tests/ConfigurationArrayUsageTest.php</file>
             <file>../src/Lunr/Core/Tests/ConfigServiceLocatorBaseTest.php</file>
             <file>../src/Lunr/Core/Tests/ConfigServiceLocatorSupportTest.php</file>
             <file>../src/Lunr/Core/Tests/ConfigServiceLocatorGetInstanceTest.php</file>
