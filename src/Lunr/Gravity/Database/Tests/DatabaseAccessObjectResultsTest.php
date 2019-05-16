@@ -687,6 +687,67 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $this->assertTrue($method2->invokeArgs($this->dao, [ &$query ]));
     }
 
+    /**
+     * Test that get_affected_rows() throws an exception on a failure.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::get_affected_rows
+     */
+    public function testGetAffectedRowsThrowsExceptionIfQueryFailed()
+    {
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+                      ->disableOriginalConstructor()
+                      ->getMock();
+
+        $query->expects($this->once())
+              ->method('has_failed')
+              ->will($this->returnValue(TRUE));
+
+        $query->expects($this->exactly(2))
+              ->method('error_message')
+              ->will($this->returnValue('message'));
+
+        $query->expects($this->exactly(2))
+              ->method('query')
+              ->will($this->returnValue('query'));
+
+        $this->logger->expects($this->once())
+             ->method('error')
+             ->with('{query}; failed with error: {error}', [ 'query' => 'query', 'error' => 'message' ]);
+
+        $this->expectException('Lunr\Gravity\Database\Exceptions\QueryException');
+        $this->expectExceptionMessage('Database query error!');
+
+        $method2 = $this->reflection_dao->getMethod('get_affected_rows');
+        $method2->setAccessible(TRUE);
+
+        $method2->invokeArgs($this->dao, [ &$query ]);
+    }
+
+    /**
+     * Test that get_affected_rows() returns affected rows on succesfull execution.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::get_affected_rows
+     */
+    public function testGetAffectedRowsReturnsAffectedRowsOnSuccess()
+    {
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+                      ->disableOriginalConstructor()
+                      ->getMock();
+
+        $query->expects($this->once())
+              ->method('has_failed')
+              ->will($this->returnValue(FALSE));
+
+        $query->expects($this->once())
+              ->method('affected_rows')
+              ->will($this->returnValue(100));
+
+        $method2 = $this->reflection_dao->getMethod('get_affected_rows');
+        $method2->setAccessible(TRUE);
+
+        $this->assertSame(100, $method2->invokeArgs($this->dao, [ &$query ]));
+    }
+
 }
 
 ?>

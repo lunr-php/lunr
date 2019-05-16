@@ -84,6 +84,26 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     }
 
     /**
+     * Get affected rows of the run query.
+     *
+     * @param DatabaseQueryResultInterface $query The result of the run query
+     *
+     * @return mixed Number of affected rows in the result set
+     */
+    protected function get_affected_rows($query)
+    {
+        if ($query->has_failed())
+        {
+            $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
+            $this->logger->error('{query}; failed with error: {error}', $context);
+
+            throw new QueryException($query, 'Database query error!');
+        }
+
+        return $query->affected_rows();
+    }
+
+    /**
      * Get query result as an indexed array.
      *
      * @param DatabaseQueryResultInterface $query  The result of the run query
