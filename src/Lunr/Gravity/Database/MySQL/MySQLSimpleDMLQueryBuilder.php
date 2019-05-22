@@ -805,6 +805,17 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
     }
 
     /**
+     * Set ON DUPLICATE KEY UPDATE clause.
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function on_duplicate_key_update($set)
+    {
+        $this->builder->on_duplicate_key_update($set);
+        return $this;
+    }
+
+    /**
      * Escape a table reference.
      *
      * @param string  $location_reference A location reference

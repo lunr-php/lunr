@@ -120,6 +120,42 @@ class DatabaseDMLQueryBuilderGetInsertQueryTest extends DatabaseDMLQueryBuilderT
         $this->assertEquals($string, $this->class->get_insert_query());
     }
 
+    /**
+     * Test get insert query using column names, values and upsert.
+     *
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_insert_query
+     */
+    public function testGetInsertValuesUpsertQuery()
+    {
+        $this->set_reflection_property_value('into', 'INTO table');
+        $this->set_reflection_property_value('column_names', '(column1, column2)');
+        $this->set_reflection_property_value('values', 'VALUES (1,2), (3,4)');
+        $this->set_reflection_property_value('upsert', 'ON CONFLICT DO NOTHING');
+
+        $string = 'INSERT INTO table (column1, column2) VALUES (1,2), (3,4) ON CONFLICT DO NOTHING';
+
+        $this->assertEquals($string, $this->class->get_insert_query());
+    }
+
+    /**
+     * Test get insert query using SELECT with ColumnNames and upsert.
+     *
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_insert_query
+     */
+    public function testGetInsertSelectColumnsUpsertQuery()
+    {
+        $this->set_reflection_property_value('into', 'INTO table');
+        $this->set_reflection_property_value('column_names', '(column1, column2)');
+        $this->set_reflection_property_value('select_statement', 'SELECT column1, column2 FROM table');
+        $this->set_reflection_property_value('upsert', 'ON CONFLICT DO NOTHING');
+
+        $string = 'INSERT INTO table (column1, column2) SELECT column1, column2 FROM table ON CONFLICT DO NOTHING';
+
+        $this->assertEquals($string, $this->class->get_insert_query());
+    }
+
 }
 
 ?>

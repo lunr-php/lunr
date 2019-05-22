@@ -336,6 +336,21 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
         $this->class->with_recursive('alias', 'anchor_query', 'recursive_query');
     }
 
+    /**
+     * Test on_duplicate_key_update() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_duplicate_key_update
+     */
+    public function testOnDuplicateKeyUpdate()
+    {
+        $this->builder->expects($this->once())
+                      ->method('on_duplicate_key_update')
+                      ->with('col=col+1')
+                      ->will($this->returnSelf());
+
+        $this->class->on_duplicate_key_update('col=col+1');
+    }
+
 }
 
 ?>

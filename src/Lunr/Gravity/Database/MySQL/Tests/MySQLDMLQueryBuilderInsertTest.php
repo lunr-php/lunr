@@ -103,6 +103,24 @@ class MySQLDMLQueryBuilderInsertTest extends MySQLDMLQueryBuilderTest
         $this->assertContains($expected, $property->getValue($this->builder));
     }
 
+    /**
+     * Test specifying an ON DUPLICATE KEY UPDATE clause.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder::on_duplicate_key_update
+     */
+    public function testOnDuplicateKeyUpdate()
+    {
+        $property = $this->builder_reflection->getProperty('upsert');
+        $property->setAccessible(TRUE);
+
+        $return = $this->builder->on_duplicate_key_update('col=col+1');
+
+        $value = $property->getValue($this->builder);
+
+        $this->assertEquals('ON DUPLICATE KEY UPDATE col=col+1', $value);
+        $this->assertSame($this->builder, $return);
+    }
+
 }
 
 ?>

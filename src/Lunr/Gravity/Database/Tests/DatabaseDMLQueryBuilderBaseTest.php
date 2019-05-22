@@ -110,6 +110,14 @@ class DatabaseDMLQueryBuilderBaseTest extends DatabaseDMLQueryBuilderTest
     }
 
     /**
+     * Test that upsert is an empty string by default.
+     */
+    public function testUpsertEmptyByDefault()
+    {
+        $this->assertPropertyEquals('upsert', '');
+    }
+
+    /**
      * Test that select_statement is an empty string by default.
      */
     public function testSelectStatementEmptyByDefault()

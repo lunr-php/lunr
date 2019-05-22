@@ -423,6 +423,23 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
         $return = $this->class->limit(10);
     }
 
+    /**
+     * Test the fluid interface of on_duplicate_key_update().
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::on_duplicate_key_update
+     */
+    public function testOnDuplicateKeyUpdate()
+    {
+        $this->builder->expects($this->once())
+                      ->method('on_duplicate_key_update')
+                      ->with('col=col+1')
+                      ->will($this->returnSelf());
+
+        $return = $this->class->on_duplicate_key_update('col=col+1');
+
+        $this->assertSame($this->class, $return);
+    }
+
 }
 
 ?>

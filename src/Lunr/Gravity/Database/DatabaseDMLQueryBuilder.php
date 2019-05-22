@@ -22,7 +22,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
     /**
      * SQL Query part: SELECT clause
-     * @var String
+     * @var string
      */
     protected $select;
 
@@ -34,13 +34,13 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
     /**
      * SQL Query part: lock mode
-     * @var String
+     * @var string
      */
     protected $lock_mode;
 
     /**
      * SQL Query part: DELETE clause
-     * @var String
+     * @var string
      */
     protected $delete;
 
@@ -52,121 +52,127 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
     /**
      * SQL Query part: FROM clause
-     * @var String
+     * @var string
      */
     protected $from;
 
     /**
      * SQL Query part: INTO clause
-     * @var String
+     * @var string
      */
     protected $into;
 
     /**
      * SQL Query part: INSERT modes
-     * @var Array
+     * @var array
      */
     protected $insert_mode;
 
     /**
      * SQL Query part: UPDATE clause
-     * @var String
+     * @var string
      */
     protected $update;
 
     /**
      * SQL Query part: UPDATE modes
-     * @var Array
+     * @var array
      */
     protected $update_mode;
 
     /**
      * SQL Query part: SET clause
-     * @var String
+     * @var string
      */
     protected $set;
 
     /**
      * SQL Query part: Column names
-     * @var String
+     * @var string
      */
     protected $column_names;
 
     /**
      * SQL Query part: VALUES
-     * @var String
+     * @var string
      */
     protected $values;
 
     /**
+     * SQL Query part: UPSERT clause
+     * @var string
+     */
+    protected $upsert;
+
+    /**
      * SQL Query part: SELECT statement
-     * @var String
+     * @var string
      */
     protected $select_statement;
 
     /**
      * SQL Query part: JOIN clause
-     * @var String
+     * @var string
      */
     protected $join;
 
     /**
      * SQL Query part: WHERE clause
-     * @var String
+     * @var string
      */
     protected $where;
 
     /**
      * SQL Query part: GROUP BY clause
-     * @var String
+     * @var string
      */
     protected $group_by;
 
     /**
      * SQL Query part: HAVING clause
-     * @var String
+     * @var string
      */
     protected $having;
 
     /**
      * SQL Query part: ORDER BY clause
-     * @var String
+     * @var string
      */
     protected $order_by;
 
     /**
      * SQL Query part: LIMIT clause
-     * @var String
+     * @var string
      */
     protected $limit;
 
     /**
      * SQL Query part: WHERE clause
-     * @var String
+     * @var string
      */
     protected $compound;
 
     /**
      * SQL Query part: Logical connector of expressions
-     * @var String
+     * @var string
      */
     protected $connector;
 
     /**
      * SQL Query part: Boolean identifying if the join is not finished
-     * @var Boolean
+     * @var boolean
      */
     protected $is_unfinished_join;
 
     /**
      * SQL Query part: string identifying if the join type is type "using" or "on"
-     * @var String
+     * @var string
      */
     protected $join_type;
 
     /**
      * SQL Query part: String that contains the with query
-     * @var String
+     * @var string
      */
     protected $with;
 
@@ -178,7 +184,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
     /**
      * SQL Query part: returning clause
-     * @var String
+     * @var string
      */
     protected $returning;
 
@@ -206,6 +212,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         $this->set                = '';
         $this->column_names       = '';
         $this->values             = '';
+        $this->upsert             = '';
         $this->select_statement   = '';
         $this->compound           = '';
         $this->is_unfinished_join = FALSE;
@@ -240,6 +247,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         unset($this->set);
         unset($this->column_names);
         unset($this->values);
+        unset($this->upsert);
         unset($this->select_statement);
         unset($this->is_unfinished_join);
         unset($this->join_type);
@@ -343,6 +351,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             $components[] = 'column_names';
             $components[] = 'values';
         }
+
+        $components[] = 'upsert';
 
         return 'INSERT ' . $this->implode_query($components);
     }
@@ -684,6 +694,27 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         }
 
         $this->values = trim($this->values, ', ');
+    }
+
+    /**
+     * Define an Upsert clause for an Insert statement.
+     *
+     * @param string $key    Upsert keyword
+     * @param string $action Action to perform on conflict
+     * @param string $target Target to watch for conflicts
+     *
+     * @return void
+     */
+    protected function sql_upsert($key, $action, $target = NULL)
+    {
+        $this->upsert = $key . ' ';
+
+        if ($target !== NULL)
+        {
+            $this->upsert .= $target . ' ';
+        }
+
+        $this->upsert .= $action;
     }
 
     /**

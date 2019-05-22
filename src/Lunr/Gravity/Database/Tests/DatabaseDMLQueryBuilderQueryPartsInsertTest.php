@@ -225,5 +225,38 @@ class DatabaseDMLQueryBuilderQueryPartsInsertTest extends DatabaseDMLQueryBuilde
         $this->assertPropertyEquals('into', $string);
     }
 
+    /**
+     * Test specifying the UPSERT part of a query without target.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_upsert
+     */
+    public function testUpsertWithoutTarget()
+    {
+        $method = $this->get_accessible_reflection_method('sql_upsert');
+
+        $method->invokeArgs($this->class, [ 'ON CONFLICT', 'DO NOTHING' ]);
+
+        $string = 'ON CONFLICT DO NOTHING';
+
+        $this->assertPropertyEquals('upsert', $string);
+    }
+
+    /**
+     * Test specifying the UPSERT part of a query without target.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_upsert
+     */
+    public function testUpsertWithTarget()
+    {
+        $method = $this->get_accessible_reflection_method('sql_upsert');
+
+        $method->invokeArgs($this->class, [ 'ON CONFLICT', 'DO NOTHING', '(column)' ]);
+
+        $string = 'ON CONFLICT (column) DO NOTHING';
+
+        $this->assertPropertyEquals('upsert', $string);
+    }
+
 }
+
 ?>

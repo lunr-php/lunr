@@ -263,6 +263,17 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
         return $this;
     }
 
+    /**
+     * Set ON DUPLICATE KEY UPDATE clause.
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function on_duplicate_key_update($set)
+    {
+        $this->sql_upsert('ON DUPLICATE KEY UPDATE', $set);
+        return $this;
+    }
+
 }
 
 ?>
