@@ -360,7 +360,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $this->logger->expects($this->once())
                      ->method('error')
-                     ->with('{message}', [ 'message' => "SplFileObject::__construct($filename)$message" ]);
+                     ->with('{message}', $this->arrayHasKey('message'));
 
         $value = $this->class->get_file_object($file, $mode);
 
