@@ -82,6 +82,8 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $file = '/tmp/ab45cd89';
 
+        $this->assertFalse(file_exists($file));
+
         $fetched = $this->class->get_file_content($file);
 
         $this->assertFalse($fetched);
@@ -157,6 +159,8 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $this->assertFileEquals(TEST_STATICS . '/Gravity/file1', $file);
         $this->assertEquals(8, $written);
+
+        unlink($file);
     }
 
     /**
@@ -203,6 +207,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $this->assertFileEquals(TEST_STATICS . '/Gravity/file1', $file);
         $this->assertEquals(8, $written);
+
         unlink($file);
     }
 
@@ -293,6 +298,8 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
         $this->class->put_file_content($file, $content, TRUE);
 
         $this->assertFileEquals(TEST_STATICS . '/Gravity/file3', $file);
+
+        unlink($file);
     }
 
     /**
@@ -310,6 +317,8 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
         $this->class->put_file_content($file, $content, FALSE, TRUE);
 
         $this->assertFileEquals(TEST_STATICS . '/Gravity/file1', $file);
+
+        unlink($file);
     }
 
     /**
@@ -327,6 +336,8 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
         $this->class->put_file_content($file, $content, TRUE, TRUE);
 
         $this->assertFileEquals(TEST_STATICS . '/Gravity/file3', $file);
+
+        unlink($file);
     }
 
     /**
@@ -341,6 +352,8 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
         $value = $this->class->get_file_object($file);
 
         $this->assertInstanceOf('\SplFileObject', $value);
+
+        unlink($file);
     }
 
     /**
@@ -365,6 +378,8 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
         $value = $this->class->get_file_object($file, $mode);
 
         $this->assertFalse($value);
+
+        unlink($file);
     }
 
     /**

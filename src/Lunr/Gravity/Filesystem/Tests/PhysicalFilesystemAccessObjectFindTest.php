@@ -169,6 +169,8 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
         $value = $this->class->find_matches('/^.+pattern/i', $directory);
 
         $this->assertFalse($value);
+
+        unlink($directory);
     }
 
     /**

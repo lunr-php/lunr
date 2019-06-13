@@ -13,6 +13,7 @@
 namespace Lunr\Gravity\Filesystem\Tests;
 
 use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
+use Throwable;
 
 /**
  * This class contains tests for directory related methods in the PhysicalFilesystemAccessObject.
@@ -110,9 +111,18 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
 
         $directory = tempnam('/tmp', 'phpunit_');;
 
-        $value = $this->class->get_directory_listing($directory);
-
-        $this->assertArrayEmpty($value);
+        try
+        {
+            $value = $this->class->get_directory_listing($directory);
+        }
+        catch (Throwable $e)
+        {
+            throw $e;
+        }
+        finally
+        {
+            unlink($directory);
+        }
     }
 
     /**

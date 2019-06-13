@@ -111,6 +111,8 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
         $value = $this->class->get_list_of_directories($directory);
 
         $this->assertArrayEmpty($value);
+
+        unlink($directory);
     }
 
     /**
