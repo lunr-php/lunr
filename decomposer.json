@@ -9,7 +9,7 @@
         }
     },
     "Lunr.Config": {
-        "url": "m2:mmw/lunr.config.git",
+        "url": "https://github.com/M2mobi/lunr.config.git",
         "version": "0.7",
         "revision": "master",
         "psr4": {
