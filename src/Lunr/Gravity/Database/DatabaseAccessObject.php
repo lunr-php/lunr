@@ -12,6 +12,7 @@
 namespace Lunr\Gravity\Database;
 
 use Lunr\Gravity\DataAccessObjectInterface;
+use Lunr\Gravity\Database\Exceptions\DeadlockException;
 use Lunr\Gravity\Database\Exceptions\QueryException;
 
 /**
@@ -84,6 +85,33 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     }
 
     /**
+     * Handle database query errors.
+     *
+     * @param DatabaseQueryResultInterface $query The result of the run query
+     *
+     * @return void
+     */
+    protected function handle_query_failure($query)
+    {
+        if ($query->has_failed() !== TRUE)
+        {
+            return;
+        }
+
+        $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
+        $this->logger->error('{query}; failed with error: {error}', $context);
+
+        if ($query->has_deadlock() === TRUE)
+        {
+            throw new DeadlockException($query, 'Database query deadlock!');
+        }
+        else
+        {
+            throw new QueryException($query, 'Database query error!');
+        }
+    }
+
+    /**
      * Get affected rows of the run query.
      *
      * @param DatabaseQueryResultInterface $query The result of the run query
@@ -92,13 +120,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function get_affected_rows($query)
     {
-        if ($query->has_failed())
-        {
-            $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
-            $this->logger->error('{query}; failed with error: {error}', $context);
-
-            throw new QueryException($query, 'Database query error!');
-        }
+        $this->handle_query_failure($query);
 
         return $query->affected_rows();
     }
@@ -113,13 +135,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function indexed_result_array($query, $column)
     {
-        if ($query->has_failed() === TRUE)
-        {
-            $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
-            $this->logger->error('{query}; failed with error: {error}', $context);
-
-            throw new QueryException($query, 'Database query error!');
-        }
+        $this->handle_query_failure($query);
 
         if ($query->number_of_rows() == 0)
         {
@@ -145,13 +161,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function result_array($query)
     {
-        if ($query->has_failed() === TRUE)
-        {
-            $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
-            $this->logger->error('{query}; failed with error: {error}', $context);
-
-            throw new QueryException($query, 'Database query error!');
-        }
+        $this->handle_query_failure($query);
 
         if ($query->number_of_rows() == 0)
         {
@@ -172,13 +182,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function result_row($query)
     {
-        if ($query->has_failed() === TRUE)
-        {
-            $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
-            $this->logger->error('{query}; failed with error: {error}', $context);
-
-            throw new QueryException($query, 'Database query error!');
-        }
+        $this->handle_query_failure($query);
 
         if ($query->number_of_rows() == 0)
         {
@@ -200,13 +204,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function result_column($query, $column)
     {
-        if ($query->has_failed() === TRUE)
-        {
-            $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
-            $this->logger->error('{query}; failed with error: {error}', $context);
-
-            throw new QueryException($query, 'Database query error!');
-        }
+        $this->handle_query_failure($query);
 
         if ($query->number_of_rows() == 0)
         {
@@ -228,13 +226,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function result_cell($query, $cell)
     {
-        if ($query->has_failed() === TRUE)
-        {
-            $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
-            $this->logger->error('{query}; failed with error: {error}', $context);
-
-            throw new QueryException($query, 'Database query error!');
-        }
+        $this->handle_query_failure($query);
 
         if ($query->number_of_rows() == 0)
         {
@@ -256,7 +248,6 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function result_retry($query, $retry_count = 5)
     {
-
         for ($i = 0; $i < $retry_count; $i++)
         {
             if ($query->has_deadlock() === FALSE)
@@ -279,13 +270,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function result_boolean($query)
     {
-        if ($query->has_failed() === TRUE)
-        {
-            $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
-            $this->logger->error('{query}; failed with error: {error}', $context);
-
-            throw new QueryException($query, 'Database query error!');
-        }
+        $this->handle_query_failure($query);
 
         return TRUE;
     }

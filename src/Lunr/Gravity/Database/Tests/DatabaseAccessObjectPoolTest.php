@@ -12,6 +12,7 @@
 namespace Lunr\Gravity\Database\Tests;
 
 use Lunr\Gravity\Database\DatabaseAccessObject;
+use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
 
 /**
  * This class contains the tests for the DatabaseAccessObject class.
@@ -22,6 +23,8 @@ use Lunr\Gravity\Database\DatabaseAccessObject;
  */
 class DatabaseAccessObjectPoolTest extends DatabaseAccessObjectTest
 {
+
+    use PsrLoggerTestTrait;
 
     /**
      * Testcase Constructor.
@@ -36,10 +39,7 @@ class DatabaseAccessObjectPoolTest extends DatabaseAccessObjectTest
      */
     public function testDatabaseConnectionIsPassed()
     {
-        $property = $this->reflection_dao->getProperty('db');
-        $property->setAccessible(TRUE);
-
-        $this->assertSame($this->db, $property->getValue($this->dao));
+        $this->assertPropertySame('db', $this->db);
     }
 
     /**
@@ -47,21 +47,10 @@ class DatabaseAccessObjectPoolTest extends DatabaseAccessObjectTest
      */
     public function testQueryEscaperIsStored()
     {
-        $property = $this->reflection_dao->getProperty('escaper');
+        $property = $this->reflection->getProperty('escaper');
         $property->setAccessible(TRUE);
 
-        $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseQueryEscaper', $property->getValue($this->dao));
-    }
-
-    /**
-     * Test that Logger class is passed.
-     */
-    public function testLoggerIsPassed()
-    {
-        $property = $this->reflection_dao->getProperty('logger');
-        $property->setAccessible(TRUE);
-
-        $this->assertSame($this->logger, $property->getValue($this->dao));
+        $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseQueryEscaper', $property->getValue($this->class));
     }
 
     /**
@@ -69,10 +58,7 @@ class DatabaseAccessObjectPoolTest extends DatabaseAccessObjectTest
      */
     public function testDatabaseConnectionPoolIsPassed()
     {
-        $property = $this->reflection_dao->getProperty('pool');
-        $property->setAccessible(TRUE);
-
-        $this->assertSame($this->pool, $property->getValue($this->dao));
+        $this->assertPropertySame('pool', $this->pool);
     }
 
 }

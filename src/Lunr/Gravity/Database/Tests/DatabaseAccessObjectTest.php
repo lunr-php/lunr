@@ -12,7 +12,7 @@
 namespace Lunr\Gravity\Database\Tests;
 
 use Lunr\Gravity\Database\DatabaseAccessObject;
-use PHPUnit\Framework\TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -20,7 +20,7 @@ use ReflectionClass;
  *
  * @covers Lunr\Gravity\Database\DatabaseAccessObject
  */
-abstract class DatabaseAccessObjectTest extends TestCase
+abstract class DatabaseAccessObjectTest extends LunrBaseTest
 {
 
     /**
@@ -40,18 +40,6 @@ abstract class DatabaseAccessObjectTest extends TestCase
      * @var Logger
      */
     protected $logger;
-
-    /**
-     * Instance of the DatabaseAccessObject
-     * @var DatabaseAccessObject
-     */
-    protected $dao;
-
-    /**
-     * Reflection instance of the DatabaseAccessObject
-     * @var ReflectionClass
-     */
-    protected $reflection_dao;
 
     /**
      * Testcase Constructor.
@@ -76,11 +64,11 @@ abstract class DatabaseAccessObjectTest extends TestCase
                  ->method('get_query_escaper_object')
                  ->will($this->returnValue($escaper));
 
-        $this->dao = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseAccessObject')
-                          ->setConstructorArgs([ $this->db, $this->logger ])
-                          ->getMockForAbstractClass();
+        $this->class = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseAccessObject')
+                            ->setConstructorArgs([ $this->db, $this->logger ])
+                            ->getMockForAbstractClass();
 
-        $this->reflection_dao = new ReflectionClass('Lunr\Gravity\Database\DatabaseAccessObject');
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\DatabaseAccessObject');
     }
 
     /**
@@ -108,11 +96,11 @@ abstract class DatabaseAccessObjectTest extends TestCase
                  ->method('get_query_escaper_object')
                  ->will($this->returnValue($escaper));
 
-        $this->dao = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseAccessObject')
-                          ->setConstructorArgs([ $this->db, $this->logger, $this->pool ])
-                          ->getMockForAbstractClass();
+        $this->class = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseAccessObject')
+                            ->setConstructorArgs([ $this->db, $this->logger, $this->pool ])
+                            ->getMockForAbstractClass();
 
-        $this->reflection_dao = new ReflectionClass('Lunr\Gravity\Database\DatabaseAccessObject');
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\DatabaseAccessObject');
     }
 
     /**
@@ -123,8 +111,8 @@ abstract class DatabaseAccessObjectTest extends TestCase
         unset($this->pool);
         unset($this->db);
         unset($this->logger);
-        unset($this->dao);
-        unset($this->reflection_dao);
+        unset($this->class);
+        unset($this->reflection);
     }
 
 }

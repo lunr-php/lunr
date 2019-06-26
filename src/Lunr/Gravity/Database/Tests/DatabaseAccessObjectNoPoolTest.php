@@ -12,6 +12,7 @@
 namespace Lunr\Gravity\Database\Tests;
 
 use Lunr\Gravity\Database\DatabaseAccessObject;
+use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
 
 /**
  * This class contains the tests for the DatabaseAccessObject class.
@@ -22,6 +23,8 @@ use Lunr\Gravity\Database\DatabaseAccessObject;
  */
 class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
 {
+
+    use PsrLoggerTestTrait;
 
     /**
      * Testcase Constructor.
@@ -36,21 +39,7 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
      */
     public function testDatabaseConnectionIsPassed()
     {
-        $property = $this->reflection_dao->getProperty('db');
-        $property->setAccessible(TRUE);
-
-        $this->assertSame($this->db, $property->getValue($this->dao));
-    }
-
-    /**
-     * Test that Logger class is passed by reference.
-     */
-    public function testLoggerIsPassed()
-    {
-        $property = $this->reflection_dao->getProperty('logger');
-        $property->setAccessible(TRUE);
-
-        $this->assertSame($this->logger, $property->getValue($this->dao));
+        $this->assertPropertySame('db', $this->db);
     }
 
     /**
@@ -58,10 +47,10 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
      */
     public function testQueryEscaperIsStored()
     {
-        $property = $this->reflection_dao->getProperty('escaper');
+        $property = $this->reflection->getProperty('escaper');
         $property->setAccessible(TRUE);
 
-        $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseQueryEscaper', $property->getValue($this->dao));
+        $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseQueryEscaper', $property->getValue($this->class));
     }
 
     /**
@@ -69,10 +58,7 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
      */
     public function testDatabaseConnectionPoolIsNull()
     {
-        $property = $this->reflection_dao->getProperty('pool');
-        $property->setAccessible(TRUE);
-
-        $this->assertNull($property->getValue($this->dao));
+        $this->assertPropertySame('pool', NULL);
     }
 
     /**
@@ -86,14 +72,14 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
                    ->disableOriginalConstructor()
                    ->getMock();
 
-        $property = $this->reflection_dao->getProperty('db');
+        $property = $this->reflection->getProperty('db');
         $property->setAccessible(TRUE);
 
-        $this->assertNotSame($db, $property->getValue($this->dao));
+        $this->assertNotSame($db, $property->getValue($this->class));
 
-        $this->dao->swap_connection($db);
+        $this->class->swap_connection($db);
 
-        $this->assertSame($db, $property->getValue($this->dao));
+        $this->assertSame($db, $property->getValue($this->class));
     }
 
     /**
@@ -111,18 +97,18 @@ class DatabaseAccessObjectNoPoolTest extends DatabaseAccessObjectTest
                         ->disableOriginalConstructor()
                         ->getMock();
 
-        $property = $this->reflection_dao->getProperty('escaper');
+        $property = $this->reflection->getProperty('escaper');
         $property->setAccessible(TRUE);
 
-        $old = $property->getValue($this->dao);
+        $old = $property->getValue($this->class);
 
         $db->expects($this->once())
            ->method('get_query_escaper_object')
            ->will($this->returnValue($escaper));
 
-        $this->dao->swap_connection($db);
+        $this->class->swap_connection($db);
 
-        $new = $property->getValue($this->dao);
+        $new = $property->getValue($this->class);
 
         $this->assertNotSame($old, $new);
         $this->assertInstanceOf('Lunr\Gravity\Database\DatabaseQueryEscaper', $new);
