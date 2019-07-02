@@ -11,6 +11,8 @@
 
 namespace Lunr\Corona\Tests;
 
+use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
+
 /**
  * This class contains test methods for the RequestResultHandler class.
  *
@@ -18,6 +20,8 @@ namespace Lunr\Corona\Tests;
  */
 class RequestResultHandlerBaseTest extends RequestResultHandlerTest
 {
+
+    use PsrLoggerTestTrait;
 
     /**
      * Test that the Request class was passed correctly.

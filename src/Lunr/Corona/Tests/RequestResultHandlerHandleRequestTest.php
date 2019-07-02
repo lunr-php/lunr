@@ -212,12 +212,14 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      */
     public function testHandleRequestWithException()
     {
+        $exception = new Exception("Error!");
+
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')
                            ->getMock();
 
         $controller->expects($this->once())
                    ->method('foo')
-                   ->will($this->throwException(new Exception("Error!")));
+                   ->will($this->throwException($exception));
 
         $this->request->expects($this->at(0))
                       ->method('__get')
@@ -248,6 +250,10 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
                        ->method('set_error_message')
                        ->with('controller/method', $message);
 
+        $this->logger->expects($this->once())
+                     ->method('error')
+                     ->with($message, [ 'exception' => $exception ]);
+
         $this->class->handle_request([ $controller, 'foo' ], []);
     }
 
@@ -258,12 +264,14 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      */
     public function testHandleRequestWithError()
     {
+        $exception = new Error("Fatal Error!");
+
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')
                            ->getMock();
 
         $controller->expects($this->once())
                    ->method('foo')
-                   ->will($this->throwException(new Error("Fatal Error!")));
+                   ->will($this->throwException($exception));
 
         $this->request->expects($this->at(0))
                       ->method('__get')
@@ -293,6 +301,10 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
         $this->response->expects($this->once())
                        ->method('set_error_message')
                        ->with('controller/method', $message);
+
+        $this->logger->expects($this->once())
+                     ->method('error')
+                     ->with($message, [ 'exception' => $exception ]);
 
         $this->class->handle_request([ $controller, 'foo' ], []);
     }

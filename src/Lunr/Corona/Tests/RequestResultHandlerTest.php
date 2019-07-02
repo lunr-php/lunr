@@ -26,15 +26,21 @@ abstract class RequestResultHandlerTest extends LunrBaseTest
 
     /**
      * Mock instance of the Request class.
-     * @var Request
+     * @var \Lunr\Corona\Request
      */
     protected $request;
 
     /**
      * Mock instance of the Response class.
-     * @var Response
+     * @var \Lunr\Corona\Response
      */
     protected $response;
+
+    /**
+     * Mock instance of a Logger class.
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $logger;
 
     /**
      * Test case constructor.
@@ -49,12 +55,12 @@ abstract class RequestResultHandlerTest extends LunrBaseTest
                                ->disableOriginalConstructor()
                                ->getMock();
 
-        $this->class = new RequestResultHandler($this->request, $this->response);
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')
+                             ->getMock();
+
+        $this->class = new RequestResultHandler($this->request, $this->response, $this->logger);
 
         $this->reflection = new ReflectionClass($this->class);
-
-        $this->set_reflection_property_value('request', $this->request);
-        $this->set_reflection_property_value('response', $this->response);
     }
 
     /**
@@ -66,6 +72,7 @@ abstract class RequestResultHandlerTest extends LunrBaseTest
         unset($this->reflection);
         unset($this->request);
         unset($this->response);
+        unset($this->logger);
     }
 
     /**

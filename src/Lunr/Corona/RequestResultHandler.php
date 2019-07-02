@@ -33,15 +33,23 @@ class RequestResultHandler
     protected $response;
 
     /**
+     * Shared instance of a Logger class.
+     * @var \Psr\Log\LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * Constructor.
      *
-     * @param Request  $request  Instance of the Request class.
-     * @param Response $response Instance of the Response class.
+     * @param Request                  $request  Instance of the Request class.
+     * @param Response                 $response Instance of the Response class.
+     * @param \Psr\Log\LoggerInterface $logger   Instance of a Logger class.
      */
-    public function __construct($request, $response)
+    public function __construct($request, $response, $logger)
     {
         $this->request  = $request;
         $this->response = $response;
+        $this->logger   = $logger;
     }
 
     /**
@@ -51,6 +59,7 @@ class RequestResultHandler
     {
         unset($this->request);
         unset($this->response);
+        unset($this->logger);
     }
 
     /**
@@ -90,6 +99,7 @@ class RequestResultHandler
         }
         catch(Throwable $e)
         {
+            $this->logger->error($e->getMessage(), [ 'exception' => $e ]);
             $this->set_result(HttpCode::INTERNAL_SERVER_ERROR, $e->getMessage());
         }
 
