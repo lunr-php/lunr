@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the DatabaseAccessObjectHandleQueryFailureTest class.
+ * This file contains the DatabaseAccessObjectVerifyQuerySuccessTest class.
  *
  * @package    Lunr\Gravity\Database
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -11,14 +11,12 @@
 
 namespace Lunr\Gravity\Database\Tests;
 
-use Lunr\Gravity\Database\DatabaseAccessObject;
-
 /**
  * This class contains the tests for the DatabaseAccessObject class.
  *
  * @covers Lunr\Gravity\Database\DatabaseAccessObject
  */
-class DatabaseAccessObjectHandleQueryFailureTest extends DatabaseAccessObjectTest
+class DatabaseAccessObjectVerifyQuerySuccessTest extends DatabaseAccessObjectTest
 {
 
     /**
@@ -30,11 +28,11 @@ class DatabaseAccessObjectHandleQueryFailureTest extends DatabaseAccessObjectTes
     }
 
     /**
-     * Test that handle_query_failure() does not throw an exception if the query was successful.
+     * Test that verify_query_success() does not throw an exception if the query was successful.
      *
-     * @covers Lunr\Gravity\Database\DatabaseAccessObject::handle_query_failure
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::verify_query_success
      */
-    public function testHandleQueryFailureDoesNotThrowExceptionOnQuerySuccess()
+    public function testVerifyQuerySuccessDoesNotThrowExceptionOnQuerySuccess()
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -47,17 +45,15 @@ class DatabaseAccessObjectHandleQueryFailureTest extends DatabaseAccessObjectTes
         $query->expects($this->never())
               ->method('has_deadlock');
 
-        $method = $this->get_accessible_reflection_method('handle_query_failure');
-
-        $method->invokeArgs($this->class, [ &$query ]);
+        $this->class->verify_query_success($query);
     }
 
     /**
-     * Test that handle_query_failure() throws a QueryException in case of an error.
+     * Test that verify_query_success() throws a QueryException in case of an error.
      *
-     * @covers Lunr\Gravity\Database\DatabaseAccessObject::handle_query_failure
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::verify_query_success
      */
-    public function testHandleQueryFailureThrowsQueryExceptionOnError()
+    public function testVerifyQuerySuccessThrowsQueryExceptionOnError()
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -86,17 +82,15 @@ class DatabaseAccessObjectHandleQueryFailureTest extends DatabaseAccessObjectTes
         $this->expectException('Lunr\Gravity\Database\Exceptions\QueryException');
         $this->expectExceptionMessage('Database query error!');
 
-        $method = $this->get_accessible_reflection_method('handle_query_failure');
-
-        $method->invokeArgs($this->class, [ &$query ]);
+        $this->class->verify_query_success($query);
     }
 
     /**
-     * Test that handle_query_failure() throws a DeadlockException in case of a deadlock.
+     * Test that verify_query_success() throws a DeadlockException in case of a deadlock.
      *
-     * @covers Lunr\Gravity\Database\DatabaseAccessObject::handle_query_failure
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::verify_query_success
      */
-    public function testHandleQueryFailureThrowsDeadlockExceptionOnDeadlock()
+    public function testVerifyQuerySuccessThrowsDeadlockExceptionOnDeadlock()
     {
         $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
                       ->disableOriginalConstructor()
@@ -125,9 +119,7 @@ class DatabaseAccessObjectHandleQueryFailureTest extends DatabaseAccessObjectTes
         $this->expectException('Lunr\Gravity\Database\Exceptions\DeadlockException');
         $this->expectExceptionMessage('Database query deadlock!');
 
-        $method = $this->get_accessible_reflection_method('handle_query_failure');
-
-        $method->invokeArgs($this->class, [ &$query ]);
+        $this->class->verify_query_success($query);
     }
 
 }

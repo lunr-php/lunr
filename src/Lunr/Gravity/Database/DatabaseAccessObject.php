@@ -85,13 +85,13 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     }
 
     /**
-     * Handle database query errors.
+     * Throws an exception in case the query failed.
      *
      * @param DatabaseQueryResultInterface $query The result of the run query
      *
      * @return void
      */
-    protected function handle_query_failure($query)
+    public function verify_query_success($query)
     {
         if ($query->has_failed() !== TRUE)
         {
@@ -120,7 +120,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function get_affected_rows($query)
     {
-        $this->handle_query_failure($query);
+        $this->verify_query_success($query);
 
         return $query->affected_rows();
     }
@@ -135,7 +135,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function indexed_result_array($query, $column)
     {
-        $this->handle_query_failure($query);
+        $this->verify_query_success($query);
 
         if ($query->number_of_rows() == 0)
         {
@@ -161,7 +161,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function result_array($query)
     {
-        $this->handle_query_failure($query);
+        $this->verify_query_success($query);
 
         if ($query->number_of_rows() == 0)
         {
@@ -182,7 +182,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function result_row($query)
     {
-        $this->handle_query_failure($query);
+        $this->verify_query_success($query);
 
         if ($query->number_of_rows() == 0)
         {
@@ -204,7 +204,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function result_column($query, $column)
     {
-        $this->handle_query_failure($query);
+        $this->verify_query_success($query);
 
         if ($query->number_of_rows() == 0)
         {
@@ -226,7 +226,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function result_cell($query, $cell)
     {
-        $this->handle_query_failure($query);
+        $this->verify_query_success($query);
 
         if ($query->number_of_rows() == 0)
         {
@@ -270,7 +270,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     protected function result_boolean($query)
     {
-        $this->handle_query_failure($query);
+        $this->verify_query_success($query);
 
         return TRUE;
     }
