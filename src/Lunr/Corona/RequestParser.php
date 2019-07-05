@@ -84,7 +84,7 @@ class RequestParser implements RequestParserInterface
         $request['useragent']        = NULL;
         $request['verbosity']        = LogLevel::WARNING;
 
-        $request['id'] = uuid_create();
+        $request['id'] = str_replace('-', '', uuid_create());
 
         return $request;
     }

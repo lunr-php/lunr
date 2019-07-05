@@ -167,7 +167,7 @@ class CliRequestParser implements RequestParserInterface
             }
         }
 
-        $request['id'] = uuid_create();
+        $request['id'] = str_replace('-', '', uuid_create());
 
         return $request;
     }

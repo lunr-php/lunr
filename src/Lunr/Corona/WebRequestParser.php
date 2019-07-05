@@ -156,7 +156,7 @@ class WebRequestParser implements RequestParserInterface
         }
         else
         {
-            $request['id'] = uuid_create();
+            $request['id'] = str_replace('-', '', uuid_create());
         }
 
         if (!is_array($_GET) || empty($_GET))
