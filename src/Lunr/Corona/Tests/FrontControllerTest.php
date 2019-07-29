@@ -99,10 +99,11 @@ abstract class FrontControllerTest extends LunrBaseTest
     public function invalidControllerNameValues()
     {
         $controller_names   = [];
-        $controller_names[] = ['test+test'];
-        $controller_names[] = ['test test'];
-        $controller_names[] = ['test\test'];
-        $controller_names[] = ['test/test'];
+        $controller_names[] = [ 'test+test' ];
+        $controller_names[] = [ 'test test' ];
+        $controller_names[] = [ 'test\test' ];
+        $controller_names[] = [ 'test/test' ];
+        $controller_names[] = [ 'w00tw00t.at.blackhats.romanian.anti-sec:)controller' ];
 
         return $controller_names;
     }

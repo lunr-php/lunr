@@ -226,6 +226,9 @@ class FrontControllerGetTest extends FrontControllerTest
                       ->with('controller')
                       ->willReturn($controller_name);
 
+        $this->fao->expects($this->never())
+                  ->method('find_matches');
+
         $value = $this->class->get_controller($dir);
 
         $this->assertEquals('', $value);
