@@ -135,6 +135,7 @@ class FrontController
             return '';
         }
 
+        $name = str_replace('-', '', $name);
         $matches = $this->fao->find_matches("/^.+\/$name.php/i", $src);
 
         if (empty($matches) === TRUE)

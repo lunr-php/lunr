@@ -234,4 +234,30 @@ class FrontControllerGetTest extends FrontControllerTest
         $this->assertEquals('', $value);
     }
 
+    /**
+     * Test that get_controller() returns a FQCN for dashes in the controller
+     *
+     * @covers Lunr\Corona\FrontController::get_controller
+     */
+    public function testGetControllerForDashesInController()
+    {
+        $dir    = __DIR__;
+        $result = __DIR__ . '/Project/Package/AnonymousTapsController.php';
+        $fqcn   = 'Project\\Package\\AnonymousTapsController';
+
+        $this->request->expects($this->exactly(2))
+                      ->method('__get')
+                      ->with('controller')
+                      ->willReturn('anonymous-taps');
+
+        $this->fao->expects($this->once())
+                  ->method('find_matches')
+                  ->with('/^.+\/anonymoustapscontroller.php/i', $dir)
+                  ->willReturn([ $result ]);
+
+        $value = $this->class->get_controller($dir);
+
+        $this->assertEquals($fqcn, $value);
+    }
+
 }
