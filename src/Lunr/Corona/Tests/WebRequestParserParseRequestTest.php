@@ -497,6 +497,66 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
         $this->cleanup_request_test();
     }
 
+    /**
+     * Test that the bearer_token is NULL with non bearer authentication.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testRequestNonBearerAuthentication()
+    {
+        $this->prepare_request_test();
+
+        $_SERVER['HTTP_AUTHORIZATION'] = 'Token 123456789';
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('bearer_token', $request);
+        $this->assertNull($request['bearer_token']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that the bearer_token is NULL with non bearer authentication.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testRequestInvalidBearerAuthentication()
+    {
+        $this->prepare_request_test();
+
+        $_SERVER['HTTP_AUTHORIZATION'] = 'Bearer  123456789';
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('bearer_token', $request);
+        $this->assertNull($request['bearer_token']);
+
+        $this->cleanup_request_test();
+    }
+
+    /**
+     * Test that parse_request() sets the bearer_token.
+     *
+     * @covers Lunr\Corona\WebRequestParser::parse_request
+     */
+    public function testRequestBearerAuthentication()
+    {
+        $this->prepare_request_test();
+
+        $_SERVER['HTTP_AUTHORIZATION'] = 'Bearer 123456789';
+
+        $request = $this->class->parse_request();
+
+        $this->assertInternalType('array', $request);
+        $this->assertArrayHasKey('bearer_token', $request);
+        $this->assertSame('123456789', $request['bearer_token']);
+
+        $this->cleanup_request_test();
+    }
+
 }
 
 ?>

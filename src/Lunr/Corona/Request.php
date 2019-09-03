@@ -68,6 +68,8 @@ class Request
      *
      *  'id'         Unique request ID
      *
+     *  'bearer_token' An authorization token
+     *
      * @var array
      */
     protected $request;

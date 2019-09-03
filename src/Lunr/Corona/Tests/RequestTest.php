@@ -116,6 +116,8 @@ abstract class RequestTest extends LunrBaseTest
             'call'             => 'controller/method',
             'useragent'        => 'UserAgent',
             'device_useragent' => 'Device UserAgent',
+            'id'               => '962161b27a0141f384c63834ad001adf',
+            'bearer_token'     => '123456789',
         ];
 
         return $request;
