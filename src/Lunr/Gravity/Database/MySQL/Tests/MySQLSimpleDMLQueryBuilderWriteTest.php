@@ -106,6 +106,21 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
     }
 
     /**
+     * Test update_mode() gets called correctly.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::update_mode
+     */
+    public function testUpdateMode()
+    {
+        $this->builder->expects($this->once())
+                      ->method('update_mode')
+                      ->with('IGNORE')
+                      ->will($this->returnSelf());
+
+        $this->class->update_mode('IGNORE');
+    }
+
+    /**
      * Test delete_mode() gets called correctly.
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::delete_mode

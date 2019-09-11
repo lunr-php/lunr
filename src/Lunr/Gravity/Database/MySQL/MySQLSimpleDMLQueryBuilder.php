@@ -170,6 +170,19 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
     }
 
     /**
+     * Define the mode of the UPDATE clause.
+     *
+     * @param string $mode The update mode you want to use
+     *
+     * @return MySQLDMLQueryBuilder $self Self reference
+     */
+    public function update_mode($mode)
+    {
+        $this->builder->update_mode($mode);
+        return $this;
+    }
+
+    /**
      * Define a DELETE clause.
      *
      * @param string $delete The table references to delete from
