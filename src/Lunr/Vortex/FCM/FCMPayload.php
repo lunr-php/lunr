@@ -152,6 +152,21 @@ class FCMPayload extends GCMPayload
         return $this;
     }
 
+    /**
+     * Set additional FCM values in the 'fcm_options' key.
+     *
+     * @param string $key   Options key.
+     * @param string $value Options value.
+     *
+     * @return FCMPayload $self Self Reference
+     */
+    public function set_options($key, $value)
+    {
+        $this->elements['fcm_options'][$key] = $value;
+
+        return $this;
+    }
+
 }
 
 ?>

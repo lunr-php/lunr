@@ -209,6 +209,32 @@ class FCMPayloadSetTest extends FCMPayloadTest
         $this->assertSame($this->class, $this->class->set_content_available(TRUE));
     }
 
+    /**
+     * Test set_content_available() works correctly.
+     *
+     * @covers \Lunr\Vortex\FCM\FCMPayload::set_content_available
+     */
+    public function testSetOptions()
+    {
+        $this->class->set_options('analytics_label', 'fooBar');
+
+        $value = $this->get_reflection_property_value('elements');
+
+        $this->assertArrayHasKey('fcm_options', $value);
+        $this->assertArrayHasKey('analytics_label', $value['fcm_options']);
+        $this->assertEquals('fooBar', $value['fcm_options']['analytics_label']);
+    }
+
+    /**
+     * Test fluid interface of set_content_available().
+     *
+     * @covers \Lunr\Vortex\FCM\FCMPayload::set_content_available
+     */
+    public function testSetOptionsReturnsSelfReference()
+    {
+        $this->assertSame($this->class, $this->class->set_options('analytics_label', 'fooBar'));
+    }
+
 }
 
 ?>
