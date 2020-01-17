@@ -234,10 +234,32 @@ class PageGetDataTest extends PageTest
                    ->will($this->returnValue($this->response));
 
         $this->response->status_code = 400;
+        $this->response->url         = 'https://graph.facebook.com/page';
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
                        ->will($this->throwException(new Requests_Exception_HTTP_400('Not Found!')));
+
+        $body = [
+            'error' => [
+                'message' => 'Some error',
+                'code'    => 400,
+                'type'    => 'foo'
+            ],
+        ];
+
+        $this->response->body = json_encode($body);
+
+        $context = [
+            'message' => 'Some error',
+            'code'    => 400,
+            'type'    => 'foo',
+            'request' => 'https://graph.facebook.com/page',
+        ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with('Facebook API Request ({request}) failed, {type} ({code}): {message}', $context);
 
         $this->class->get_data();
 

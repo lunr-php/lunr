@@ -47,7 +47,26 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
                        ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
 
         $this->response->status_code = 400;
-        $this->response->body        = NULL;
+        $this->response->url         = 'https://cdn.contentful.com/spaces//entries';
+
+        $body = [
+            'message' => 'Some error',
+            'sys'     => [
+                'id' => 'Some ID',
+            ],
+        ];
+
+        $this->response->body = json_encode($body);
+
+        $context = [
+            'message' => 'Some error',
+            'request' => 'https://cdn.contentful.com/spaces//entries',
+            'id'      => 'Some ID',
+        ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with('Contentful API Request ({request}) failed with id "{id}": {message}', $context);
 
         $return = $this->class->get_entries('foo');
 
@@ -81,7 +100,26 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
                        ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
 
         $this->response->status_code = 400;
-        $this->response->body        = NULL;
+        $this->response->url         = 'https://cdn.contentful.com/spaces//entries';
+
+        $body = [
+            'message' => 'Some error',
+            'sys'     => [
+                'id' => 'Some ID',
+            ],
+        ];
+
+        $this->response->body = json_encode($body);
+
+        $context = [
+            'message' => 'Some error',
+            'request' => 'https://cdn.contentful.com/spaces//entries',
+            'id'      => 'Some ID',
+        ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with('Contentful API Request ({request}) failed with id "{id}": {message}', $context);
 
         $return = $this->class->get_entries('foo', [ 'field.urlName[match]' => 'bar' ]);
 
@@ -113,6 +151,17 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
         $this->response->expects($this->never())
                        ->method('throw_for_status');
 
+        $this->response->url = 'https://cdn.contentful.com/spaces//entries';
+
+        $context = [
+            'message' => 'cURL error 0001: Network error',
+            'request' => 'https://cdn.contentful.com/spaces//entries',
+        ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with('Contentful API Request ({request}) failed! {message}', $context);
+
         $return = $this->class->get_entries('foo');
 
         $this->assertIsArray($return);
@@ -142,6 +191,17 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
 
         $this->response->expects($this->never())
                        ->method('throw_for_status');
+
+        $this->response->url = 'https://cdn.contentful.com/spaces//entries';
+
+        $context = [
+            'message' => 'cURL error 0001: Network error',
+            'request' => 'https://cdn.contentful.com/spaces//entries',
+        ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with('Contentful API Request ({request}) failed! {message}', $context);
 
         $return = $this->class->get_entries('foo', [ 'field.urlName[match]' => 'bar' ]);
 

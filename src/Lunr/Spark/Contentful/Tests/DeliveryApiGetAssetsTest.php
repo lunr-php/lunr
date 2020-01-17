@@ -49,7 +49,26 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
                        ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
 
         $this->response->status_code = 400;
-        $this->response->body        = NULL;
+        $this->response->url         = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
+
+        $body = [
+            'message' => 'Some error',
+            'sys'     => [
+                'id' => 'Some ID',
+            ],
+        ];
+
+        $this->response->body = json_encode($body);
+
+        $context = [
+            'message' => 'Some error',
+            'request' => 'https://cdn.contentful.com/spaces/5p4c31D/assets',
+            'id'      => 'Some ID',
+        ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with('Contentful API Request ({request}) failed with id "{id}": {message}', $context);
 
         $return = $this->class->get_assets();
 
@@ -85,7 +104,26 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
                        ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
 
         $this->response->status_code = 400;
-        $this->response->body        = NULL;
+        $this->response->url         = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
+
+        $body = [
+            'message' => 'Some error',
+            'sys'     => [
+                'id' => 'Some ID',
+            ],
+        ];
+
+        $this->response->body = json_encode($body);
+
+        $context = [
+            'message' => 'Some error',
+            'request' => 'https://cdn.contentful.com/spaces/5p4c31D/assets',
+            'id'      => 'Some ID',
+        ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with('Contentful API Request ({request}) failed with id "{id}": {message}', $context);
 
         $return = $this->class->get_assets([ 'mimetype_group' => 'image' ]);
 
@@ -119,6 +157,17 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
         $this->response->expects($this->never())
                        ->method('throw_for_status');
 
+        $this->response->url = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
+
+        $context = [
+            'message' => 'cURL error 0001: Network error',
+            'request' => 'https://cdn.contentful.com/spaces/5p4c31D/assets',
+        ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with('Contentful API Request ({request}) failed! {message}', $context);
+
         $return = $this->class->get_assets();
 
         $this->assertIsArray($return);
@@ -150,6 +199,17 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $this->response->expects($this->never())
                        ->method('throw_for_status');
+
+        $this->response->url = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
+
+        $context = [
+            'message' => 'cURL error 0001: Network error',
+            'request' => 'https://cdn.contentful.com/spaces/5p4c31D/assets',
+        ];
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with('Contentful API Request ({request}) failed! {message}', $context);
 
         $return = $this->class->get_assets([ 'mimetype_group' => 'image' ]);
 
