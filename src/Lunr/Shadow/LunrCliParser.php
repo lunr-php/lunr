@@ -141,7 +141,7 @@ class LunrCliParser implements CliParserInterface
     {
         array_push($this->checked, $opt);
 
-        if (isset($opt{0}) && $opt{0} == '-')
+        if (isset($opt[0]) && $opt[0] == '-')
         {
             $param = substr($opt, 1);
 
@@ -150,7 +150,7 @@ class LunrCliParser implements CliParserInterface
                 return $this->is_valid_short($opt, $index);
             }
 
-            if (isset($param{0}) && $param{0} != '-')
+            if (isset($param[0]) && $param[0] != '-')
             {
                 return $this->is_valid_short($param, $index);
             }
@@ -217,7 +217,7 @@ class LunrCliParser implements CliParserInterface
                     $match = TRUE;
                     $args  = $key;
                 }
-                elseif ($arg{strlen($opt)} == ':' || $arg{strlen($opt)} == ';')
+                elseif ($arg[strlen($opt)] == ':' || $arg[strlen($opt)] == ';')
                 {
                     $match = TRUE;
                     $args  = $key;
@@ -254,16 +254,16 @@ class LunrCliParser implements CliParserInterface
 
         if ($pos + 1 < strlen($a))
         {
-            if (!in_array($a{$pos + 1}, [ ':', ';' ]))
+            if (!in_array($a[$pos + 1], [ ':', ';' ]))
             {
                 return FALSE;
             }
 
-            $type = $a{$pos + 1} == ':' ? ':' : ';';
+            $type = $a[$pos + 1] == ':' ? ':' : ';';
 
             if (count($this->args) > $next && strlen($this->args[$next]) != 0)
             {
-                if (!$this->is_opt($this->args[$next], $next) && $this->args[$next]{0} != '-')
+                if (!$this->is_opt($this->args[$next], $next) && $this->args[$next][0] != '-')
                 {
                     array_push($this->ast[$opt], $this->args[$next]);
 
@@ -272,7 +272,7 @@ class LunrCliParser implements CliParserInterface
                         return TRUE;
                     }
 
-                    if (($type == ':' && $a{$pos + 2} == ':') || $a{$pos + 2} == ';')
+                    if (($type == ':' && $a[$pos + 2] == ':') || $a[$pos + 2] == ';')
                     {
                         return $this->check_argument($opt, $next, $pos + 1, $a);
                     }
