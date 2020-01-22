@@ -62,11 +62,13 @@ abstract class PAPResponseTest extends LunrBaseTest
 
         $response->status_code = 200;
 
+        $error = PHP_VERSION_ID < 70400 ? 'Invalid document end' : 'no element found';
+
         $this->logger->expects($this->once())
                      ->method('warning')
                      ->with(
                         $this->equalTo('Parsing response of push notification to {endpoint} failed: {error}'),
-                        $this->equalTo([ 'error' => 'Invalid document end', 'endpoint' => '12345679' ])
+                        $this->equalTo([ 'error' => $error, 'endpoint' => '12345679' ])
                      );
 
         $this->class      = new PAPResponse($response, $this->logger, '12345679');
