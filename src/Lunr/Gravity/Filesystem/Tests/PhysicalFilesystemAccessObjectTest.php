@@ -129,7 +129,15 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
         $filepath   = [];
         $filepath[] = [ '/tmp56474q', 'RecursiveDirectoryIterator::__construct(/tmp56474q): failed to open dir: No such file or directory' ];
         $filepath[] = [ '/root', 'RecursiveDirectoryIterator::__construct(/root): failed to open dir: Permission denied' ];
-        $filepath[] = [ new stdClass(), 'RecursiveDirectoryIterator::__construct() expects parameter 1 to be string, object given' ];
+
+        if (PHP_VERSION_ID < 70400)
+        {
+            $filepath[] = [ new stdClass(), 'RecursiveDirectoryIterator::__construct() expects parameter 1 to be string, object given' ];
+        }
+        else
+        {
+            $filepath[] = [ new stdClass(), 'RecursiveDirectoryIterator::__construct() expects parameter 1 to be a valid path, object given' ];
+        }
 
         return $filepath;
     }

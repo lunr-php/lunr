@@ -98,6 +98,11 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = sys_get_temp_dir();
 
+        if (PHP_VERSION_ID > 70400)
+        {
+            $this->expectException('\PHPUnit\Framework\Error\Notice');
+        }
+
         $fetched = $this->class->get_file_content($file);
 
         $this->assertEquals('', $fetched);

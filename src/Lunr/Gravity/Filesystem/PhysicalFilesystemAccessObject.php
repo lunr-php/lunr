@@ -395,11 +395,6 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
             return FALSE;
         }
 
-        if (decoct(octdec(strval($mode))) != $mode && $mode > 0)
-        {
-            $mode = octdec((string) $mode);
-        }
-
         //this is the octal range (0000 - 2777 and 4000 - 4777) in decimal
         if (!(($mode >= 0 && $mode <= 1535) || ($mode >= 2048 && $mode <= 2559)))
         {
