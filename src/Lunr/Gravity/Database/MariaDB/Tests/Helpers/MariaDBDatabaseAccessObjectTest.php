@@ -53,7 +53,7 @@ abstract class MariaDBDatabaseAccessObjectTest extends LunrBaseTest
     /**
      * Testcase Constructor.
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = $this->getMockBuilder('Lunr\Gravity\Database\MariaDB\MariaDBConnection')
                          ->disableOriginalConstructor()
@@ -88,7 +88,7 @@ abstract class MariaDBDatabaseAccessObjectTest extends LunrBaseTest
     /**
      * Testcase Destructor.
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->class);
         unset($this->reflection);
