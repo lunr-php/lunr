@@ -19,7 +19,7 @@
     },
     "Psr-Log": {
         "url": "https://github.com/php-fig/log.git",
-        "version": "1.0.2",
+        "version": "1.1.2",
         "psr4": {
             "prefix": "Psr\\Log",
             "search-path": "/Psr/Log/"
@@ -27,7 +27,7 @@
     },
     "ApnsPHP": {
         "url": "https://github.com/M2Mobi/apnsphp.git",
-        "version": "1.0.1.92",
+        "version": "1.0.1.93",
         "revision": "1.0.1.x",
         "psr0": {
             "path": "/"
@@ -35,7 +35,7 @@
     },
     "PHPMailer": {
         "url": "https://github.com/PHPMailer/PHPMailer.git",
-        "version": "6.0.6",
+        "version": "6.1.4",
         "psr4": {
             "prefix": "PHPMailer\\PHPMailer",
             "search-path": "/src/"
@@ -50,16 +50,15 @@
     },
     "Credis": {
         "url": "https://github.com/colinmollenhour/credis.git",
-        "version": "1.7",
+        "version": "1.11.1",
         "target-dir": "/Credis",
         "psr0": {
             "path": "/"
         }
     },
     "PHP-Resque": {
-        "url": "https://github.com/M2Mobi/php-resque.git",
-        "version": "1.3.4.90",
-        "revision": "1.3.4.x",
+        "url": "https://github.com/resque/php-resque.git",
+        "version": "1.3.5-beta",
         "psr0": {
             "path": "/lib/"
         }
