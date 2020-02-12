@@ -288,7 +288,6 @@
             <file>../src/Lunr/Sphere/Tests/SessionDAOBaseTest.php</file>
         </testsuite>
         <testsuite name="Vortex">
-            <file>../src/Lunr/Vortex/APNS/Tests/APNSPayloadBaseTest.php</file>
             <file>../src/Lunr/Vortex/APNS/Tests/APNSPayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/APNS/Tests/APNSPayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/APNS/ApnsPHP/Tests/APNSResponseBasePushSuccessTest.php</file>
@@ -322,7 +321,6 @@
             <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadBaseTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadHasTopicTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadHasConditionTest.php</file>
-            <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadSetLowPriorityTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseBasePushErrorTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseBasePushSuccessTest.php</file>
@@ -338,7 +336,6 @@
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSResponseErrorTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSResponseSuccessTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSDispatcherBaseTest.php</file>
-            <file>../src/Lunr/Vortex/MPNS/Tests/MPNSDispatcherSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/WNS/Tests/WNSPayloadBaseTest.php</file>
             <file>../src/Lunr/Vortex/WNS/Tests/WNSToastPayloadSetTest.php</file>
