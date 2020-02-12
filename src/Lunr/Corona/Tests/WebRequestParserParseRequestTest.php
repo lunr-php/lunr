@@ -510,7 +510,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('bearer_token', $request);
         $this->assertNull($request['bearer_token']);
 
@@ -530,7 +530,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('bearer_token', $request);
         $this->assertNull($request['bearer_token']);
 
@@ -550,7 +550,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
 
         $request = $this->class->parse_request();
 
-        $this->assertInternalType('array', $request);
+        $this->assertIsArray($request);
         $this->assertArrayHasKey('bearer_token', $request);
         $this->assertSame('123456789', $request['bearer_token']);
 
