@@ -392,7 +392,8 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test getting a SplFileObject for an inaccessible file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
+     * @requires OS Linux
+     * @covers   Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
      */
     public function testGetFileObjectForInaccessibleFile(): void
     {

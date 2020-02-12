@@ -38,7 +38,7 @@ class MariaDBDMLQueryBuilderDeleteTest extends MariaDBDMLQueryBuilderTest
 
         $this->builder->returning($value);
 
-        $this->assertContains($expected, $property->getValue($this->builder));
+        $this->assertStringMatchesFormat($expected, $property->getValue($this->builder));
     }
 
     /**

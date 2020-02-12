@@ -113,7 +113,7 @@ class MySQLDMLQueryBuilderSelectTest extends MySQLDMLQueryBuilderTest
 
         $this->builder->lock_mode($mode);
 
-        $this->assertContains($mode, $property->getValue($this->builder));
+        $this->assertStringMatchesFormat($mode, $property->getValue($this->builder));
     }
 
     /**
