@@ -53,7 +53,7 @@ class Authentication extends Api
      * @param \Lunr\Spark\CentralAuthenticationStore $cas     Shared instance of the credentials store
      * @param \Psr\Log\LoggerInterface               $logger  Shared instance of a Logger class.
      * @param \Requests_Session                      $http    Shared instance of the Requests_Session class.
-     * @param \Lunr\Corona\RequestInterface          $request Shared instance of a Request class.
+     * @param \Lunr\Corona\Request                   $request Shared instance of a Request class.
      */
     public function __construct($cas, $logger, $http, $request)
     {

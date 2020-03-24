@@ -43,7 +43,7 @@ abstract class AuthenticationTest extends LunrBaseTest
 
     /**
      * Mock instance of the Request class.
-     * @var \Lunr\Corona\RequestInterface
+     * @var \Lunr\Corona\Request
      */
     protected $request;
 
@@ -63,8 +63,11 @@ abstract class AuthenticationTest extends LunrBaseTest
         $this->cas      = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
-        $this->request  = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
         $this->response = $this->getMockBuilder('Requests_Response')->getMock();
+
+        $this->request  = $this->getMockBuilder('Lunr\Corona\Request')
+                               ->disableOriginalConstructor()
+                               ->getMock();
 
         $this->request->expects($this->at(0))
                       ->method('get_get_data')
@@ -83,8 +86,11 @@ abstract class AuthenticationTest extends LunrBaseTest
         $this->cas      = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
         $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
-        $this->request  = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
         $this->response = $this->getMockBuilder('Requests_Response')->getMock();
+
+        $this->request  = $this->getMockBuilder('Lunr\Corona\Request')
+                               ->disableOriginalConstructor()
+                               ->getMock();
 
         $this->request->expects($this->at(0))
                       ->method('get_get_data')
