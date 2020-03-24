@@ -25,25 +25,25 @@ abstract class L10nHTMLViewTest extends LunrBaseTest
 
     /**
      * Mock instance of the request class.
-     * @var RequestInterface
+     * @var \Lunr\Corona\Request
      */
     protected $request;
 
     /**
      * Mock instance of the response class.
-     * @var Response
+     * @var \Lunr\Corona\Response
      */
     protected $response;
 
     /**
      * Mock instance of the configuration class.
-     * @var Configuration
+     * @var \Lunr\Core\Configuration
      */
     protected $configuration;
 
     /**
      * Mock instance of the l10nprovider class.
-     * @var L10nProvider
+     * @var \Lunr\L10n\L10nProvider
      */
     protected $l10nprovider;
 
@@ -56,7 +56,9 @@ abstract class L10nHTMLViewTest extends LunrBaseTest
     {
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->request = $this->getMockBuilder('Lunr\Core\RequestInterface')->getMock();
+        $this->request = $this->getMockBuilder('Lunr\Core\Request')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $this->response = $this->getMockBuilder('Lunr\Core\Response')->getMock();
 

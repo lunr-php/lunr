@@ -28,10 +28,10 @@ abstract class L10nHTMLView extends HTMLView
     /**
      * Constructor.
      *
-     * @param RequestInterface $request       Shared instance of the Request class
-     * @param Response         $response      Shared instance of the Response class
-     * @param Configuration    $configuration Shared instance of to the Configuration class
-     * @param L10nProvider     $l10nprovider  Shared instance of the L10nProvider class
+     * @param \Lunr\Corona\Request     $request       Shared instance of the Request class
+     * @param \Lunr\Corona\Response    $response      Shared instance of the Response class
+     * @param \Lunr\Core\Configuration $configuration Shared instance of the Configuration class
+     * @param L10nProvider             $l10nprovider  Shared instance of the L10nProvider class
      */
     public function __construct($request, $response, $configuration, $l10nprovider)
     {
