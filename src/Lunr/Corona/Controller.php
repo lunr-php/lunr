@@ -19,7 +19,7 @@ abstract class Controller
 
     /**
      * Shared instance of the Request class.
-     * @var RequestInterface
+     * @var Request
      */
     protected $request;
 
@@ -32,8 +32,8 @@ abstract class Controller
     /**
      * Constructor.
      *
-     * @param RequestInterface $request  Shared instance of the Request class
-     * @param Response         $response Shared instance of the Response class
+     * @param Request  $request  Shared instance of the Request class
+     * @param Response $response Shared instance of the Response class
      */
     public function __construct($request, $response)
     {

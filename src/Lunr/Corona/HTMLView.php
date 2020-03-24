@@ -33,9 +33,9 @@ abstract class HTMLView extends View
     /**
      * Constructor.
      *
-     * @param RequestInterface $request       Shared instance of the Request class
-     * @param Response         $response      Shared instance of the Response class
-     * @param Configuration    $configuration Shared instance of to the Configuration class
+     * @param Request       $request       Shared instance of the Request class
+     * @param Response      $response      Shared instance of the Response class
+     * @param Configuration $configuration Shared instance of the Configuration class
      */
     public function __construct($request, $response, $configuration)
     {

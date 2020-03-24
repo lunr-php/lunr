@@ -26,7 +26,7 @@ abstract class CompactJsonViewTest extends LunrBaseTest
 
     /**
      * Mock instance of the Request class.
-     * @var \Lunr\Corona\RequestInterface
+     * @var \Lunr\Corona\Request
      */
     protected $request;
 
@@ -48,8 +48,11 @@ abstract class CompactJsonViewTest extends LunrBaseTest
     public function setUp(): void
     {
         $this->response      = $this->getMockBuilder('Lunr\Corona\Response')->getMock();
-        $this->request       = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
+
+        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $this->class      = new CompactJsonView($this->request, $this->response, $this->configuration);
         $this->reflection = new ReflectionClass('Lunr\Corona\CompactJsonView');

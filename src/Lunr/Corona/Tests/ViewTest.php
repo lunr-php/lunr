@@ -27,25 +27,25 @@ abstract class ViewTest extends LunrBaseTest
 
     /**
      * Mock instance of the request class.
-     * @var RequestInterface
+     * @var \Lunr\Corona\Request
      */
     protected $request;
 
     /**
      * Mock instance of the response class.
-     * @var Response
+     * @var \Lunr\Corona\Response
      */
     protected $response;
 
     /**
      * Mock instance of the configuration class.
-     * @var Configuration
+     * @var \Lunr\Core\Configuration
      */
     protected $configuration;
 
     /**
      * Mock instance of the sub configuration class.
-     * @var Configuration
+     * @var \Lunr\Core\Configuration
      */
     protected $sub_configuration;
 

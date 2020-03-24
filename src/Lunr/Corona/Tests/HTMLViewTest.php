@@ -27,19 +27,19 @@ abstract class HTMLViewTest extends LunrBaseTest
 
     /**
      * Mock instance of the request class.
-     * @var RequestInterface
+     * @var \Lunr\Corona\Request
      */
     protected $request;
 
     /**
      * Mock instance of the response class.
-     * @var Response
+     * @var \Lunr\Corona\Response
      */
     protected $response;
 
     /**
      * Mock instance of the configuration class.
-     * @var Configuration
+     * @var \Lunr\Core\Configuration
      */
     protected $configuration;
 
@@ -52,7 +52,9 @@ abstract class HTMLViewTest extends LunrBaseTest
     {
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->request = $this->getMockBuilder('Lunr\Corona\RequestInterface')->getMock();
+        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
+                              ->disableOriginalConstructor()
+                              ->getMock();
 
         $this->response = $this->getMockBuilder('Lunr\Corona\Response')->getMock();
 
