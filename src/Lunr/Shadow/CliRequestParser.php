@@ -94,6 +94,7 @@ class CliRequestParser implements RequestParserInterface
 
         $request['device_useragent'] = NULL;
         $request['useragent']        = NULL;
+        $request['bearer_token']     = NULL;
 
         foreach ([ 'action', 'x' ] as $key)
         {
@@ -111,6 +112,11 @@ class CliRequestParser implements RequestParserInterface
         if (array_key_exists('useragent', $this->ast))
         {
             $request['useragent'] = $this->ast['useragent'][0];
+        }
+
+        if (array_key_exists('bearer-token', $this->ast))
+        {
+            $request['bearer_token'] = $this->ast['bearer-token'][0];
         }
 
         foreach ([ 'controller', 'method', 'c', 'm' ] as $key)
