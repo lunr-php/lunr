@@ -25,13 +25,13 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
 
     /**
      * Maximum number of endpoints allowed in one push.
-     * @var Integer
+     * @var integer
      */
     const BATCH_SIZE = 1000;
 
     /**
      * Push Notification authentication token.
-     * @var String
+     * @var string
      */
     protected $auth_token;
 
@@ -49,13 +49,13 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
 
     /**
      * Url to send the GCM push notification to.
-     * @var String
+     * @var string
      */
     const GOOGLE_SEND_URL = 'https://gcm-http.googleapis.com/gcm/send';
 
     /**
      * Service name.
-     * @var String
+     * @var string
      */
     const SERVICE_NAME = 'GCM';
 
@@ -112,7 +112,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
      * @param GCMPayload $payload   Payload object
      * @param array      $endpoints Endpoints to send to in this batch
      *
-     * @return GCMResponse $return Response object
+     * @return GCMResponse Response object
      */
     public function push($payload, &$endpoints)
     {
@@ -138,7 +138,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
      * @param GCMPayload $payload   Payload object
      * @param array      $endpoints Endpoints to send to in this batch
      *
-     * @return GCMBatchResponse $return Response object
+     * @return GCMBatchResponse Response object
      */
     protected function push_batch($payload, &$endpoints)
     {
@@ -191,7 +191,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
      *
      * @param string $auth_token The auth token for the gcm push notifications
      *
-     * @return GCMDispatcher $self Self reference
+     * @return GCMDispatcher Self reference
      */
     public function set_auth_token($auth_token)
     {
@@ -203,7 +203,7 @@ class GCMDispatcher implements PushNotificationMultiDispatcherInterface
     /**
      * Get a Requests_Response object for a failed request.
      *
-     * @return \Requests_Response $http_response New instance of a Requests_Response object.
+     * @return \Requests_Response New instance of a Requests_Response object.
      */
     protected function get_new_response_object_for_failed_request()
     {

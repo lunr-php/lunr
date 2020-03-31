@@ -19,14 +19,14 @@ class MPNSToastPayload extends MPNSPayload
 
     /**
      * Shared instance of a Logger.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
     /**
      * Constructor.
      *
-     * @param LoggerInterface $logger Shared instance of a logger
+     * @param \Psr\Log\LoggerInterface $logger Shared instance of a logger
      */
     public function __construct($logger)
     {
@@ -48,7 +48,7 @@ class MPNSToastPayload extends MPNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return string $return Payload
+     * @return string Payload
      */
     public function get_payload()
     {
@@ -81,7 +81,7 @@ class MPNSToastPayload extends MPNSPayload
      *
      * @param string $title Title
      *
-     * @return MPNSToastPayload $self Self Reference
+     * @return MPNSToastPayload Self Reference
      */
     public function set_title($title)
     {
@@ -95,7 +95,7 @@ class MPNSToastPayload extends MPNSPayload
      *
      * @param string $message Message
      *
-     * @return MPNSToastPayload $self Self Reference
+     * @return MPNSToastPayload Self Reference
      */
     public function set_message($message)
     {
@@ -109,7 +109,7 @@ class MPNSToastPayload extends MPNSPayload
      *
      * @param string $deeplink Deeplink
      *
-     * @return MPNSToastPayload $self Self Reference
+     * @return MPNSToastPayload Self Reference
      */
     public function set_deeplink($deeplink)
     {

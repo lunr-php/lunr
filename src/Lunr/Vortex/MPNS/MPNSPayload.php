@@ -27,7 +27,7 @@ abstract class MPNSPayload
 
     /**
      * Priority of the payload.
-     * @var Integer
+     * @var integer
      */
     protected $priority = MPNSPriority::DEFAULT;
 
@@ -53,7 +53,7 @@ abstract class MPNSPayload
      *
      * @param string $string String to escape
      *
-     * @return string $return Escaped string
+     * @return string Escaped string
      */
     protected function escape_string($string)
     {
@@ -66,7 +66,7 @@ abstract class MPNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return string $return Payload
+     * @return string Payload
      */
     public abstract function get_payload();
 
@@ -75,7 +75,7 @@ abstract class MPNSPayload
      *
      * @param Integer $priority Notification priority value.
      *
-     * @return MPNSPayload $self Self Reference
+     * @return MPNSPayload Self Reference
      */
     public function set_priority($priority)
     {
@@ -91,7 +91,7 @@ abstract class MPNSPayload
     /**
      * Get the notification priority.
      *
-     * @return mixed $return Notification priority.
+     * @return mixed Notification priority.
      */
     public function get_priority()
     {

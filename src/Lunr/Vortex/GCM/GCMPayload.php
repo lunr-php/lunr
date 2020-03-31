@@ -43,7 +43,7 @@ class GCMPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return string $return GCMPayload
+     * @return string GCMPayload
      */
     public function get_payload()
     {
@@ -58,7 +58,7 @@ class GCMPayload
      *
      * @param string $key The notification collapse key identifier
      *
-     * @return GCMPayload $self Self Reference
+     * @return GCMPayload Self Reference
      */
     public function set_collapse_key($key)
     {
@@ -74,7 +74,7 @@ class GCMPayload
      *
      * @param array $data The actual notification information
      *
-     * @return GCMPayload $self Self Reference
+     * @return GCMPayload Self Reference
      */
     public function set_data($data)
     {
@@ -91,7 +91,7 @@ class GCMPayload
      *
      * @param integer $ttl The time in seconds for the notification to stay alive
      *
-     * @return GCMPayload $self Self Reference
+     * @return GCMPayload Self Reference
      */
     public function set_time_to_live($ttl)
     {

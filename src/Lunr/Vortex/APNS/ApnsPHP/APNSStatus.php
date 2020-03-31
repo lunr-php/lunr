@@ -19,73 +19,73 @@ class APNSStatus
 
     /**
      * No error encountered.
-     * @var Integer
+     * @var integer
      */
     const SUCCESS = 0;
 
     /**
      * Processing error.
-     * @var Integer
+     * @var integer
      */
     const ERROR_PROCESSING = 1;
 
     /**
      * Missing device token error.
-     * @var Integer
+     * @var integer
      */
     const ERROR_MISSING_DEVICE_TOKEN = 2;
 
     /**
      * Missing topic error.
-     * @var Integer
+     * @var integer
      */
     const ERROR_TOPIC = 3;
 
     /**
      * Missing payload error.
-     * @var Integer
+     * @var integer
      */
     const ERROR_MISSING_PAYLOAD = 4;
 
     /**
      * Invalid token size error.
-     * @var Integer
+     * @var integer
      */
     const ERROR_INVALID_TOKEN_SIZE = 5;
 
     /**
      * Invalid topic size error.
-     * @var Integer
+     * @var integer
      */
     const ERROR_INVALID_TOPIC_SIZE = 6;
 
     /**
      * Invalid payload size error.
-     * @var Integer
+     * @var integer
      */
     const ERROR_INVALID_PAYLOAD_SIZE = 7;
 
     /**
      * Invalid token error.
-     * @var Integer
+     * @var integer
      */
     const ERROR_INVALID_TOKEN = 8;
 
     /**
      * Shutdown error.
-     * @var Integer
+     * @var integer
      */
     const ERROR_SHUTDOWN = 10;
 
     /**
      * Protocol error,
-     * @var Integer
+     * @var integer
      */
     const ERROR_PROTOCOL = 128;
 
     /**
      * Unknown error.
-     * @var Integer
+     * @var integer
      */
     const ERROR_UNKNOWN = 255;
 

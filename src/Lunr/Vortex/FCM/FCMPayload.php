@@ -40,7 +40,7 @@ class FCMPayload extends GCMPayload
     /**
      * Check whether a condition is set
      *
-     * @return boolean $return TRUE if condition is present.
+     * @return boolean TRUE if condition is present.
      */
     public function has_condition()
     {
@@ -50,7 +50,7 @@ class FCMPayload extends GCMPayload
     /**
      * Check whether a condition is set
      *
-     * @return boolean $return TRUE if condition is present.
+     * @return boolean TRUE if condition is present.
      */
     public function has_topic()
     {
@@ -64,7 +64,7 @@ class FCMPayload extends GCMPayload
      *
      * @param array $notification The actual notification information
      *
-     * @return FCMPayload $self Self Reference
+     * @return FCMPayload Self Reference
      */
     public function set_notification($notification)
     {
@@ -78,7 +78,7 @@ class FCMPayload extends GCMPayload
      *
      * @param boolean $val Value for the "content_available" field.
      *
-     * @return FCMPayload $self Self Reference
+     * @return FCMPayload Self Reference
      */
     public function set_content_available($val)
     {
@@ -92,7 +92,7 @@ class FCMPayload extends GCMPayload
      *
      * @param string $topic String of the topic name
      *
-     * @return FCMPayload $self Self Reference
+     * @return FCMPayload Self Reference
      */
     public function set_topic($topic)
     {
@@ -110,7 +110,7 @@ class FCMPayload extends GCMPayload
      *
      * @param string $condition Key-value pairs of payload data
      *
-     * @return FCMPayload $self Self Reference
+     * @return FCMPayload Self Reference
      */
     public function set_condition($condition)
     {
@@ -124,7 +124,7 @@ class FCMPayload extends GCMPayload
      *
      * @param boolean $mutable Notification mutable_content value.
      *
-     * @return FCMPayload $self Self Reference
+     * @return FCMPayload Self Reference
      */
     public function set_mutable_content($mutable)
     {
@@ -138,7 +138,7 @@ class FCMPayload extends GCMPayload
      *
      * @param Lunr\Vortex\FCM\FCMPriority $priority Notification priority value.
      *
-     * @return FCMPayload $self Self Reference
+     * @return FCMPayload Self Reference
      */
     public function set_priority($priority)
     {
@@ -158,7 +158,7 @@ class FCMPayload extends GCMPayload
      * @param string $key   Options key.
      * @param string $value Options value.
      *
-     * @return FCMPayload $self Self Reference
+     * @return FCMPayload Self Reference
      */
     public function set_options($key, $value)
     {

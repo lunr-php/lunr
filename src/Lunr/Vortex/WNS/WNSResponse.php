@@ -28,19 +28,19 @@ class WNSResponse
 
     /**
      * HTTP status code.
-     * @var Integer
+     * @var integer
      */
     private $http_code;
 
     /**
      * Delivery status.
-     * @var Integer
+     * @var integer
      */
     private $status;
 
     /**
      * Push notification endpoint.
-     * @var String
+     * @var string
      */
     private $endpoint;
 
@@ -79,8 +79,8 @@ class WNSResponse
     /**
      * Set notification status information.
      *
-     * @param string          $endpoint The notification endpoint that was used.
-     * @param LoggerInterface $logger   Shared instance of a Logger.
+     * @param string                   $endpoint The notification endpoint that was used.
+     * @param \Psr\Log\LoggerInterface $logger   Shared instance of a Logger.
      *
      * @return void
      */
@@ -146,7 +146,7 @@ class WNSResponse
      *
      * @param string $endpoint Endpoint
      *
-     * @return PushNotificationStatus $status Delivery status for the endpoint
+     * @return PushNotificationStatus Delivery status for the endpoint
      */
     public function get_status($endpoint)
     {

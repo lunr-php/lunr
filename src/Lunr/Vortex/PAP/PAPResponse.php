@@ -23,31 +23,31 @@ class PAPResponse implements PushNotificationResponseInterface
 
     /**
      * HTTP status code.
-     * @var Integer
+     * @var integer
      */
     private $http_code;
 
     /**
      * Delivery status.
-     * @var Integer
+     * @var integer
      */
     private $status;
 
     /**
      * The HTTP response.
-     * @var String
+     * @var string
      */
     private $result;
 
     /**
      * The PAP response info.
-     * @var Array
+     * @var array
      */
     private $pap_response;
 
     /**
      * Push notification endpoint.
-     * @var String
+     * @var string
      */
     private $endpoint;
 
@@ -96,8 +96,8 @@ class PAPResponse implements PushNotificationResponseInterface
     /**
      * Helper function for extracting the error info from the PAP response XML.
      *
-     * @return mixed $return FALSE in case the xml response is unparsable,
-     *                       void otherwise
+     * @return mixed FALSE in case the xml response is unparsable,
+     *               void otherwise
      */
     private function parse_pap_response()
     {
@@ -212,7 +212,7 @@ class PAPResponse implements PushNotificationResponseInterface
      *
      * @param string $endpoint Endpoint
      *
-     * @return PushNotificationStatus $status Delivery status for the endpoint
+     * @return PushNotificationStatus Delivery status for the endpoint
      */
     public function get_status($endpoint)
     {

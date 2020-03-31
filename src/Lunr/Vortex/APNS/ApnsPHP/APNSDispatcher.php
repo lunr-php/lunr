@@ -24,28 +24,28 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
 {
 
     /**
-     * Shared instance of ApnsPHP\Push.
-     * @var \ApnsPHP\Push
+     * Shared instance of ApnsPHP_Push.
+     * @var \ApnsPHP_Push
      */
     protected $apns_push;
 
     /**
      * Apns Message instance
-     * @var \ApnsPHP\Message
+     * @var \ApnsPHP_Message
      */
     protected $apns_message;
 
     /**
      * Shared instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
     /**
      * Constructor.
      *
-     * @param LoggerInterface $logger    Shared instance of a Logger.
-     * @param ApnsPHP\Push    $apns_push Apns Push instance.
+     * @param \Psr\Log\LoggerInterface $logger    Shared instance of a Logger.
+     * @param \ApnsPHP_Push            $apns_push Apns Push instance.
      */
     public function __construct($logger, $apns_push)
     {
@@ -80,7 +80,7 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
      *
      * @codeCoverageIgnore
      *
-     * @return ApnsPHP_Message
+     * @return \ApnsPHP_Message
      */
     protected function get_new_apns_message()
     {
@@ -93,7 +93,7 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
      * @param APNSPayload $payload   Payload object
      * @param array       $endpoints Endpoints to send to in this batch
      *
-     * @return APNSResponse $return Response object
+     * @return APNSResponse Response object
      */
     public function push($payload, &$endpoints)
     {

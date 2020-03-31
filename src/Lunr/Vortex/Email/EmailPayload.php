@@ -42,7 +42,7 @@ class EmailPayload
     /**
      * Construct the payload for the email notification.
      *
-     * @return string $return The Email Payload
+     * @return string The Email Payload
      */
     public function get_payload()
     {
@@ -54,7 +54,7 @@ class EmailPayload
      *
      * @param string $body The body of the email
      *
-     * @return EmailPayload $self Self Reference
+     * @return EmailPayload Self Reference
      */
     public function set_body($body)
     {
@@ -68,7 +68,7 @@ class EmailPayload
      *
      * @param string $subject The subject of the email
      *
-     * @return EmailPayload $self Self Reference
+     * @return EmailPayload Self Reference
      */
     public function set_subject($subject)
     {

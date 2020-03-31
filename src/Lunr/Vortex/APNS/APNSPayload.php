@@ -42,7 +42,7 @@ class APNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return string $return APNSPayload
+     * @return string APNSPayload
      */
     public function get_payload()
     {
@@ -56,7 +56,7 @@ class APNSPayload
      *
      * @param integer $badge The badge index
      *
-     * @return APNSPayload $self Self Reference
+     * @return APNSPayload Self Reference
      */
     public function set_badge($badge)
     {
@@ -70,7 +70,7 @@ class APNSPayload
      *
      * @param string $sound The sound to set it to
      *
-     * @return APNSPayload $self Self Reference
+     * @return APNSPayload Self Reference
      */
     public function set_sound($sound)
     {
@@ -88,7 +88,7 @@ class APNSPayload
      *
      * @param string $alert The actual message
      *
-     * @return APNSPayload $self Self Reference
+     * @return APNSPayload Self Reference
      */
     public function set_alert($alert)
     {
@@ -103,7 +103,7 @@ class APNSPayload
      * @param string $key   The key of the custom property
      * @param string $value The value of the custom property
      *
-     * @return APNSPayload $self Self Reference
+     * @return APNSPayload Self Reference
      */
     public function set_custom_data($key, $value)
     {

@@ -28,19 +28,19 @@ class MPNSResponse implements PushNotificationResponseInterface
 
     /**
      * HTTP status code.
-     * @var Integer
+     * @var integer
      */
     private $http_code;
 
     /**
      * Delivery status.
-     * @var Integer
+     * @var integer
      */
     private $status;
 
     /**
      * Push notification endpoint.
-     * @var String
+     * @var string
      */
     private $endpoint;
 
@@ -165,7 +165,7 @@ class MPNSResponse implements PushNotificationResponseInterface
      *
      * @param string $endpoint Endpoint
      *
-     * @return PushNotificationStatus $status Delivery status for the endpoint
+     * @return PushNotificationStatus Delivery status for the endpoint
      */
     public function get_status($endpoint)
     {

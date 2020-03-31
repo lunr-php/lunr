@@ -19,37 +19,37 @@ class PushNotificationStatus
 
     /**
      * Push notification status unknown.
-     * @var Integer
+     * @var integer
      */
     const UNKNOWN = 0;
 
     /**
      * Push notification delivered successfully.
-     * @var Integer
+     * @var integer
      */
     const SUCCESS = 1;
 
     /**
      * Push notification could not be delivered. Try again later.
-     * @var Integer
+     * @var integer
      */
     const TEMPORARY_ERROR = 2;
 
     /**
      * Push notification endpoint invalid.
-     * @var Integer
+     * @var integer
      */
     const INVALID_ENDPOINT = 3;
 
     /**
      * Push notification not delivered because of client misconfiguration.
-     * @var Integer
+     * @var integer
      */
     const CLIENT_ERROR = 4;
 
     /**
      * Push notification not delivered because of server error.
-     * @var Integer
+     * @var integer
      */
     const ERROR = 5;
 

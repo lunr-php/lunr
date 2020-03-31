@@ -36,7 +36,7 @@ class WNSBadgePayload extends WNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return string $return Payload
+     * @return string Payload
      */
     public function get_payload()
     {
@@ -56,7 +56,7 @@ class WNSBadgePayload extends WNSPayload
      *
      * @see https://msdn.microsoft.com/en-us/library/windows/apps/br212849.aspx
      *
-     * @return WNSBadgePayload $self Self Reference
+     * @return WNSBadgePayload Self Reference
      */
     public function set_value($value)
     {

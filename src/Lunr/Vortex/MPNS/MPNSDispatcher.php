@@ -60,7 +60,7 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
      * @param MPNSPayload $payload   Payload object
      * @param array       $endpoints Endpoints to send to in this batch
      *
-     * @return MPNSResponse $return Response object
+     * @return MPNSResponse Response object
      */
     public function push($payload, &$endpoints)
     {
@@ -110,7 +110,7 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
      *
      * @param string $endpoint Endpoint to send to
      *
-     * @return \Requests_Response $http_response New instance of a Requests_Response object.
+     * @return \Requests_Response New instance of a Requests_Response object.
      */
     protected function get_new_response_object_for_failed_request($endpoint)
     {

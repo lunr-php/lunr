@@ -24,25 +24,25 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
 
     /**
      * Push Notification authentication token.
-     * @var String
+     * @var string
      */
     private $auth_token;
 
     /**
      * Push Notification password.
-     * @var String
+     * @var string
      */
     private $password;
 
     /**
      * Push Notification content provider id.
-     * @var String
+     * @var string
      */
     private $cid;
 
     /**
      * Unique push identifier for each notification.
-     * @var String
+     * @var string
      */
     private $push_id;
 
@@ -60,7 +60,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
 
     /**
      * Boundary string for the PAP request.
-     * @var String
+     * @var string
      */
     const PAP_BOUNDARY = 'mPsbVQo0a68eIL3OAxnm';
 
@@ -99,7 +99,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
      * @param PAPPayload $payload   Payload object
      * @param array      $endpoints Endpoints to send to in this batch
      *
-     * @return PAPResponse $return Response object
+     * @return PAPResponse Response object
      */
     public function push($payload, &$endpoints)
     {
@@ -142,9 +142,9 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
      * Constructs the control XML of the PAP request.
      *
      * @param PAPPayload $payload  Payload object
-     * @param string $endpoint Endpoint to send to
+     * @param string     $endpoint Endpoint to send to
      *
-     * @return String $xml The control XML populated with all relevant values
+     * @return string The control XML populated with all relevant values
      */
     protected function construct_pap_control_xml($payload, $endpoint)
     {
@@ -168,7 +168,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
      * @param PAPPayload $payload  Payload object
      * @param string     $endpoint Endpoint to send to
      *
-     * @return String $data The PAP request data populated with all relevant values
+     * @return string The PAP request data populated with all relevant values
      */
     protected function construct_pap_data($payload, $endpoint)
     {
@@ -196,7 +196,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
      *
      * @param string $auth_token The auth token for the PAP push notifications
      *
-     * @return PAPDispatcher $self Self reference
+     * @return PAPDispatcher Self reference
      */
     public function set_auth_token($auth_token)
     {
@@ -210,7 +210,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
      *
      * @param string $password The password of the push service
      *
-     * @return PAPDispatcher $self Self reference
+     * @return PAPDispatcher Self reference
      */
     public function set_password($password)
     {
@@ -224,7 +224,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
      *
      * @param string $cid The content provider id for the PAP push notifications
      *
-     * @return PAPDispatcher $self Self reference
+     * @return PAPDispatcher Self reference
      */
     public function set_content_provider_id($cid)
     {
@@ -236,7 +236,7 @@ class PAPDispatcher implements PushNotificationDispatcherInterface
     /**
      * Get a Requests_Response object for a failed request.
      *
-     * @return \Requests_Response $http_response New instance of a Requests_Response object.
+     * @return \Requests_Response New instance of a Requests_Response object.
      */
     protected function get_new_response_object_for_failed_request()
     {

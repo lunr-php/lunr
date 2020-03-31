@@ -25,7 +25,7 @@ interface PushNotificationDispatcherInterface
      * @param object $payload   Payload object
      * @param array  $endpoints Endpoints to sent it to in this batch
      *
-     * @return PushNotificationResponseInterface $return Response object
+     * @return PushNotificationResponseInterface Response object
      */
     public function push($payload, &$endpoints);
 

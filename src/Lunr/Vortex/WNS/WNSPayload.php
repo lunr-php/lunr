@@ -44,7 +44,7 @@ abstract class WNSPayload
      *
      * @param string $string String to escape
      *
-     * @return string $return Escaped string
+     * @return string Escaped string
      */
     protected function escape_string($string)
     {
@@ -57,7 +57,7 @@ abstract class WNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return string $return Payload
+     * @return string Payload
      */
     public abstract function get_payload();
 

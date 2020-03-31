@@ -22,23 +22,23 @@ class APNSResponse implements PushNotificationResponseInterface
 
     /**
      * Shared instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 
     /**
      * The statuses per endpoint.
-     * @var Array
+     * @var array
      */
     protected $statuses;
 
     /**
      * Constructor.
      *
-     * @param LoggerInterface $logger            Shared instance of a Logger.
-     * @param array           $endpoints         The endpoints the message was sent to
-     * @param array           $invalid_endpoints List of invalid endpoints detected before the push.
-     * @param array           $errors            The errors response from the APNS Push.
+     * @param \Psr\Log\LoggerInterface $logger            Shared instance of a Logger.
+     * @param array                    $endpoints         The endpoints the message was sent to
+     * @param array                    $invalid_endpoints List of invalid endpoints detected before the push.
+     * @param array                    $errors            The errors response from the APNS Push.
      */
     public function __construct($logger, $endpoints, $invalid_endpoints, $errors)
     {
@@ -156,7 +156,7 @@ class APNSResponse implements PushNotificationResponseInterface
      *
      * @param string $endpoint Endpoint
      *
-     * @return PushNotificationStatus $status Delivery status for the endpoint
+     * @return PushNotificationStatus Delivery status for the endpoint
      */
     public function get_status($endpoint)
     {

@@ -36,7 +36,7 @@ class WNSToastPayload extends WNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return string $return Payload
+     * @return string Payload
      */
     public function get_payload()
     {
@@ -74,11 +74,11 @@ class WNSToastPayload extends WNSPayload
     /**
      * Set text for the toast notification.
      *
-     * @param String[]|string $text Message
+     * @param string[]|string $text Message
      *
      * @param integer         $line The line on which to add the text
      *
-     * @return \Lunr\Vortex\WNS\WNSToastPayload $self Self Reference
+     * @return \Lunr\Vortex\WNS\WNSToastPayload Self Reference
      */
     public function set_text($text, $line = 0)
     {
@@ -101,7 +101,7 @@ class WNSToastPayload extends WNSPayload
      *
      * @param string $launch Launch parameters for the app
      *
-     * @return WNSToastPayload $self Self Reference
+     * @return WNSToastPayload Self Reference
      */
     public function set_launch($launch)
     {
@@ -117,7 +117,7 @@ class WNSToastPayload extends WNSPayload
      *
      * @see https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.notifications.toasttemplatetype
      *
-     * @return WNSToastPayload $self Self Reference
+     * @return WNSToastPayload Self Reference
      */
     public function set_template($template)
     {
@@ -131,7 +131,7 @@ class WNSToastPayload extends WNSPayload
      *
      * @param string $image Image to display
      *
-     * @return WNSToastPayload $self Self Reference
+     * @return WNSToastPayload Self Reference
      */
     public function set_image($image)
     {

@@ -36,7 +36,7 @@ class MPNSTilePayload extends MPNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return string $return Payload
+     * @return string Payload
      */
     public function get_payload()
     {
@@ -92,7 +92,7 @@ class MPNSTilePayload extends MPNSPayload
      *
      * @param string $title Title
      *
-     * @return MPNSTilePayload $self Self Reference
+     * @return MPNSTilePayload Self Reference
      */
     public function set_title($title)
     {
@@ -106,7 +106,7 @@ class MPNSTilePayload extends MPNSPayload
      *
      * @param string $image Background Image
      *
-     * @return MPNSTilePayload $self Self Reference
+     * @return MPNSTilePayload Self Reference
      */
     public function set_background_image($image)
     {
@@ -120,7 +120,7 @@ class MPNSTilePayload extends MPNSPayload
      *
      * @param string $count Count
      *
-     * @return MPNSTilePayload $self Self Reference
+     * @return MPNSTilePayload Self Reference
      */
     public function set_count($count)
     {
@@ -134,7 +134,7 @@ class MPNSTilePayload extends MPNSPayload
      *
      * @param string $image Back Background Image
      *
-     * @return MPNSTilePayload $self Self Reference
+     * @return MPNSTilePayload Self Reference
      */
     public function set_back_background_image($image)
     {
@@ -148,7 +148,7 @@ class MPNSTilePayload extends MPNSPayload
      *
      * @param string $title Back Title
      *
-     * @return MPNSTilePayload $self Self Reference
+     * @return MPNSTilePayload Self Reference
      */
     public function set_back_title($title)
     {
@@ -162,7 +162,7 @@ class MPNSTilePayload extends MPNSPayload
      *
      * @param string $content Back Content
      *
-     * @return MPNSTilePayload $self Self Reference
+     * @return MPNSTilePayload Self Reference
      */
     public function set_back_content($content)
     {
@@ -176,7 +176,7 @@ class MPNSTilePayload extends MPNSPayload
      *
      * @param string $id Tile ID
      *
-     * @return MPNSTilePayload $self Self Reference
+     * @return MPNSTilePayload Self Reference
      */
     public function set_id($id)
     {

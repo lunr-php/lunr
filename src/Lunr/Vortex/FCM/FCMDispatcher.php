@@ -22,13 +22,13 @@ class FCMDispatcher extends GCMDispatcher
 
     /**
      * Url to send the FCM push notification to.
-     * @var String
+     * @var string
      */
     const GOOGLE_SEND_URL = 'https://fcm.googleapis.com/fcm/send';
 
     /**
      * Service name.
-     * @var String
+     * @var string
      */
     const SERVICE_NAME = 'FCM';
 

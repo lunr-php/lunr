@@ -25,7 +25,7 @@ class PAPPayload
 
     /**
      * Push Notification deliver before timestamp.
-     * @var String
+     * @var string
      */
     protected $priority = '';
 
@@ -48,7 +48,7 @@ class PAPPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return string $return The PAP Payload
+     * @return string The PAP Payload
      */
     public function get_payload()
     {
@@ -63,7 +63,7 @@ class PAPPayload
      * @param string $key   The key of the message item
      * @param string $value The actual message item
      *
-     * @return PAPPayload $self Self Reference
+     * @return PAPPayload Self Reference
      */
     public function set_message_data($key, $value)
     {
@@ -77,7 +77,7 @@ class PAPPayload
      *
      * @param integer $priority The timestamp to set the deliver-before to.
      *
-     * @return PAPPayload $self Self Reference
+     * @return PAPPayload Self Reference
      */
     public function set_priority($priority)
     {
@@ -89,7 +89,7 @@ class PAPPayload
     /**
      * Get the notification priority.
      *
-     * @return mixed $return Notification priority.
+     * @return mixed Notification priority.
      */
     public function get_priority()
     {

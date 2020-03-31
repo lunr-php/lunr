@@ -21,7 +21,7 @@ class EmailDispatcher implements PushNotificationMultiDispatcherInterface
 {
     /**
      * Email Notification source.
-     * @var String
+     * @var string
      */
     private $source;
 
@@ -64,7 +64,7 @@ class EmailDispatcher implements PushNotificationMultiDispatcherInterface
     /**
      * Get a cloned instance of the mail transport class.
      *
-     * @return \PHPMailer\PHPMailer\PHPMailer $mail_transport Cloned instance of the PHPMailer class
+     * @return \PHPMailer\PHPMailer\PHPMailer Cloned instance of the PHPMailer class
      */
     private function clone_mail()
     {
@@ -77,7 +77,7 @@ class EmailDispatcher implements PushNotificationMultiDispatcherInterface
      * @param EmailPayload $payload   Payload object
      * @param array        $endpoints Endpoints to send to in this batch
      *
-     * @return EmailResponse $return Response object
+     * @return EmailResponse Response object
      */
     public function push($payload, &$endpoints)
     {
@@ -127,7 +127,7 @@ class EmailDispatcher implements PushNotificationMultiDispatcherInterface
      *
      * @param string $source The endpoint for the email
      *
-     * @return EmailDispatcher $self Self reference
+     * @return EmailDispatcher Self reference
      */
     public function set_source($source)
     {

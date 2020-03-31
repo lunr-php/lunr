@@ -41,7 +41,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
 
     /**
      * Push notification type.
-     * @var String
+     * @var string
      */
     private $type;
 
@@ -104,7 +104,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
      * @param WNSPayload $payload   Payload object
      * @param array      $endpoints Endpoints to send to in this batch
      *
-     * @return WNSResponse $return Response object
+     * @return WNSResponse Response object
      */
     public function push($payload, &$endpoints)
     {
@@ -173,7 +173,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
      *
      * @param string $type Type for the push notification.
      *
-     * @return WNSDispatcher $self Self reference
+     * @return WNSDispatcher Self reference
      */
     public function set_type($type)
     {
@@ -190,7 +190,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
      *
      * @param string $client_id The client id from the Windows Dashboard
      *
-     * @return WNSDispatcher $self Self reference
+     * @return WNSDispatcher Self reference
      */
     public function set_client_id($client_id)
     {
@@ -203,7 +203,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
      *
      * @param string $client_secret The client secret from the Windows Dashboard
      *
-     * @return WNSDispatcher $self Self reference
+     * @return WNSDispatcher Self reference
      */
     public function set_client_secret($client_secret)
     {
@@ -271,7 +271,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
      *
      * @param string $endpoint Endpoint to send to
      *
-     * @return \Requests_Response $http_response New instance of a Requests_Response object.
+     * @return \Requests_Response New instance of a Requests_Response object.
      */
     protected function get_new_response_object_for_failed_request($endpoint)
     {

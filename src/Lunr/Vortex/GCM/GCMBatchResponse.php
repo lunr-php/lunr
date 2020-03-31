@@ -22,7 +22,7 @@ class GCMBatchResponse
 
     /**
      * Shared instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
@@ -34,13 +34,13 @@ class GCMBatchResponse
 
     /**
      * The response body content.
-     * @var String
+     * @var string
      */
     private $content;
 
     /**
      * The statuses per endpoint.
-     * @var Array
+     * @var array
      */
     private $statuses;
 
@@ -124,7 +124,7 @@ class GCMBatchResponse
      *
      * @param string $endpoint Endpoint
      *
-     * @return PushNotificationStatus $status Delivery status for the endpoint
+     * @return PushNotificationStatus Delivery status for the endpoint
      */
     public function get_status($endpoint)
     {
