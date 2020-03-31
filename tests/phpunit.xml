@@ -335,6 +335,7 @@
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSTilePayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSResponseErrorTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSResponseSuccessTest.php</file>
+            <file>../src/Lunr/Vortex/MPNS/Tests/MPNSResponseSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSDispatcherBaseTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/WNS/Tests/WNSPayloadBaseTest.php</file>
