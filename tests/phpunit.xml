@@ -306,25 +306,19 @@
             <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherBaseTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/Email/Tests/EmailDispatcherSetTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMDispatcherBaseTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMDispatcherPushTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMDispatcherSetTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMPayloadBaseTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMPayloadGetTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMPayloadSetTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMBatchResponseBasePushSuccessTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMBatchResponseBasePushErrorTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMBatchResponseGetStatusTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMResponseBaseTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMResponseAddBatchResponseTest.php</file>
-            <file>../src/Lunr/Vortex/GCM/Tests/GCMResponseGetStatusTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadBaseTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadHasTopicTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadHasConditionTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMPayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseBasePushErrorTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseBasePushSuccessTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMBatchResponseGetStatusTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMResponseBaseTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMResponseAddBatchResponseTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMResponseGetStatusTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherBaseTest.php</file>
+            <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherSetTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherPushTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadSetTest.php</file>
@@ -395,7 +389,6 @@
                 <directory>../src/Lunr/Vortex/APNS/ApnsPHP/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Email/Tests/</directory>
                 <directory>../src/Lunr/Vortex/FCM/Tests/</directory>
-                <directory>../src/Lunr/Vortex/GCM/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Email/Tests/</directory>
                 <directory>../src/Lunr/Vortex/MPNS/Tests/</directory>
                 <directory>../src/Lunr/Vortex/WNS/Tests/</directory>

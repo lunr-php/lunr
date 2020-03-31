@@ -37,6 +37,10 @@ abstract class FCMResponseTest extends LunrBaseTest
      */
     public function setUp(): void
     {
+        $this->batch_response = $this->getMockBuilder('Lunr\Vortex\FCM\FCMBatchResponse')
+                                     ->disableOriginalConstructor()
+                                     ->getMock();
+
         $this->class      = new FCMResponse();
         $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMResponse');
     }

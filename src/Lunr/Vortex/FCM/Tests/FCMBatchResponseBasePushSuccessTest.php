@@ -48,7 +48,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
         $statuses  = [ 'endpoint1' => PushNotificationStatus::UNKNOWN ];
 
         $this->class      = new FCMBatchResponse($this->response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -75,7 +75,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
         $statuses  = [ 'endpoint1' => PushNotificationStatus::SUCCESS ];
 
         $this->class      = new FCMBatchResponse($this->response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -106,7 +106,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
         $statuses  = [ 'endpoint1' => PushNotificationStatus::INVALID_ENDPOINT ];
 
         $this->class      = new FCMBatchResponse($this->response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -137,7 +137,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
         ];
 
         $this->class      = new FCMBatchResponse($this->response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -206,7 +206,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
         ];
 
         $this->class      = new FCMBatchResponse($this->response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -250,7 +250,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
                      );
 
         $this->class      = new FCMBatchResponse($this->response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -281,7 +281,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
         ];
 
         $this->class      = new FCMBatchResponse($this->response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);
@@ -308,7 +308,7 @@ class FCMBatchResponseBasePushSuccessTest extends FCMBatchResponseTest
         $statuses  = [ 'endpoint1' => PushNotificationStatus::SUCCESS ];
 
         $this->class      = new FCMBatchResponse($this->response, $this->logger, $endpoints);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger, $endpoints);
         $this->assertPropertyEquals('statuses', $statuses);

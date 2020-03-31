@@ -11,21 +11,27 @@
 
 namespace Lunr\Vortex\FCM;
 
-use Lunr\Vortex\GCM\GCMPayload;
 use ReflectionClass;
 
 /**
  * Google Cloud Messaging Push Notification Payload Generator.
  */
-class FCMPayload extends GCMPayload
+class FCMPayload
 {
+
+    /**
+     * Array of Push Notification elements.
+     * @var array
+     */
+    protected $elements;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        parent::__construct();
+        $this->elements = [];
+
         $this->elements['priority'] = FCMPriority::HIGH;
     }
 
@@ -34,7 +40,67 @@ class FCMPayload extends GCMPayload
      */
     public function __destruct()
     {
-        parent::__destruct();
+        unset($this->elements);
+    }
+
+    /**
+     * Construct the payload for the push notification.
+     *
+     * @return string FCMPayload
+     */
+    public function get_payload()
+    {
+        return json_encode($this->elements);
+    }
+
+    /**
+     * Sets the payload key collapse_key.
+     *
+     * An arbitrary string that is used to collapse a group of alike messages
+     * when the device is offline, so that only the last message gets sent to the client.
+     *
+     * @param string $key The notification collapse key identifier
+     *
+     * @return FCMPayload Self Reference
+     */
+    public function set_collapse_key($key)
+    {
+        $this->elements['collapse_key'] = $key;
+
+        return $this;
+    }
+
+    /**
+     * Sets the payload key data.
+     *
+     * The fields of data represent the key-value pairs of the message's payload data.
+     *
+     * @param array $data The actual notification information
+     *
+     * @return FCMPayload Self Reference
+     */
+    public function set_data($data)
+    {
+        $this->elements['data'] = $data;
+
+        return $this;
+    }
+
+    /**
+     * Sets the payload key time_to_live.
+     *
+     * It defines how long (in seconds) the message should be kept on GCM storage,
+     * if the device is offline.
+     *
+     * @param integer $ttl The time in seconds for the notification to stay alive
+     *
+     * @return FCMPayload Self Reference
+     */
+    public function set_time_to_live($ttl)
+    {
+        $this->elements['time_to_live'] = $ttl;
+
+        return $this;
     }
 
     /**

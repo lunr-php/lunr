@@ -46,7 +46,7 @@ class FCMBatchResponseBasePushErrorTest extends FCMBatchResponseTest
                      );
 
         $this->class      = new FCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ]);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger);
         $this->assertPropertyEquals('statuses', [ 'endpoint1' => PushNotificationStatus::ERROR ]);
@@ -75,7 +75,7 @@ class FCMBatchResponseBasePushErrorTest extends FCMBatchResponseTest
                      );
 
         $this->class      = new FCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ]);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger);
         $this->assertPropertyEquals('statuses', [ 'endpoint1' => PushNotificationStatus::ERROR ]);
@@ -123,7 +123,7 @@ class FCMBatchResponseBasePushErrorTest extends FCMBatchResponseTest
                      );
 
         $this->class      = new FCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ]);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger);
         $this->assertPropertyEquals('statuses', [ 'endpoint1' => PushNotificationStatus::TEMPORARY_ERROR ]);
@@ -169,7 +169,7 @@ class FCMBatchResponseBasePushErrorTest extends FCMBatchResponseTest
                      );
 
         $this->class      = new FCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ]);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
 
         $this->assertPropertySame('logger', $this->logger);
         $this->assertPropertyEquals('statuses', [ 'endpoint1' => PushNotificationStatus::UNKNOWN ]);

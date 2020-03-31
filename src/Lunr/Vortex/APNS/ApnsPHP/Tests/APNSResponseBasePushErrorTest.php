@@ -28,7 +28,7 @@ class APNSResponseBasePushErrorTest extends APNSResponseTest
     /**
      * Test constructor behavior for error of push notification with no invalid endpoint.
      *
-     * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
+     * @covers Lunr\Vortex\APNS\ApnsPHP\APNSResponse::__construct
      */
     public function testPushErrorWithNoInvalidEndpoint(): void
     {
@@ -50,7 +50,7 @@ class APNSResponseBasePushErrorTest extends APNSResponseTest
     /**
      * Test constructor behavior for error of push notification with some invalid endpoints.
      *
-     * @covers Lunr\Vortex\GCM\GCMBatchResponse::__construct
+     * @covers Lunr\Vortex\APNS\ApnsPHP\APNSResponse::__construct
      */
     public function testPushErrorWithSomeInvalidEndpoints(): void
     {

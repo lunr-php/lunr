@@ -20,6 +20,56 @@ class FCMPayloadSetTest extends FCMPayloadTest
 {
 
     /**
+     * Test set_collapse_key() works correctly.
+     *
+     * @covers Lunr\Vortex\FCM\FCMPayload::set_collapse_key
+     */
+    public function testSetCollapseKey(): void
+    {
+        $this->class->set_collapse_key('test');
+
+        $value = $this->get_reflection_property_value('elements');
+
+        $this->assertArrayHasKey('collapse_key', $value);
+        $this->assertEquals('test', $value['collapse_key']);
+    }
+
+    /**
+     * Test fluid interface of set_collapse_key().
+     *
+     * @covers Lunr\Vortex\FCM\FCMPayload::set_collapse_key
+     */
+    public function testSetCollapseKeyReturnsSelfReference(): void
+    {
+        $this->assertSame($this->class, $this->class->set_collapse_key('collapse_key'));
+    }
+
+    /**
+     * Test set_time_to_live() works correctly.
+     *
+     * @covers Lunr\Vortex\FCM\FCMPayload::set_time_to_live
+     */
+    public function testSetTimeToLive(): void
+    {
+        $this->class->set_time_to_live(5);
+
+        $value = $this->get_reflection_property_value('elements');
+
+        $this->assertArrayHasKey('time_to_live', $value);
+        $this->assertEquals(5, $value['time_to_live']);
+    }
+
+    /**
+     * Test fluid interface of set_time_to_live().
+     *
+     * @covers Lunr\Vortex\FCM\FCMPayload::set_time_to_live
+     */
+    public function testSetTimeToLiveReturnsSelfReference(): void
+    {
+        $this->assertSame($this->class, $this->class->set_time_to_live('time_to_live'));
+    }
+
+    /**
      * Test set_notification() works correctly.
      *
      * @covers \Lunr\Vortex\FCM\FCMPayload::set_notification

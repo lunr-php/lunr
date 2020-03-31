@@ -1,28 +1,28 @@
 <?php
 
 /**
- * This file contains the GCMDispatcherSetTest class.
+ * This file contains the FCMDispatcherSetTest class.
  *
- * @package    Lunr\Vortex\GCM
+ * @package    Lunr\Vortex\FCM
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\GCM\Tests;
+namespace Lunr\Vortex\FCM\Tests;
 
 /**
- * This class contains tests for the setters of the GCMDispatcher class.
+ * This class contains tests for the setters of the FCMDispatcher class.
  *
- * @covers Lunr\Vortex\GCM\GCMDispatcher
+ * @covers Lunr\Vortex\FCM\FCMDispatcher
  */
-class GCMDispatcherSetTest extends GCMDispatcherTest
+class FCMDispatcherSetTest extends FCMDispatcherTest
 {
 
     /**
      * Test that set_auth_token() sets the endpoint.
      *
-     * @covers Lunr\Vortex\GCM\GCMDispatcher::set_auth_token
+     * @covers Lunr\Vortex\FCM\FCMDispatcher::set_auth_token
      */
     public function testSetAuthTokenSetsPayload(): void
     {
@@ -34,7 +34,7 @@ class GCMDispatcherSetTest extends GCMDispatcherTest
     /**
      * Test the fluid interface of set_auth_token().
      *
-     * @covers Lunr\Vortex\GCM\GCMDispatcher::set_auth_token
+     * @covers Lunr\Vortex\FCM\FCMDispatcher::set_auth_token
      */
     public function testSetAuthTokenReturnsSelfReference(): void
     {

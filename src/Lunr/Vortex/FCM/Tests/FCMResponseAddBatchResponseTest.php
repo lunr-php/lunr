@@ -1,30 +1,30 @@
 <?php
 
 /**
- * This file contains the GCMResponseAddBatchResponseTest class.
+ * This file contains the FCMResponseAddBatchResponseTest class.
  *
- * @package    Lunr\Vortex\GCM
+ * @package    Lunr\Vortex\FCM
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\GCM\Tests;
+namespace Lunr\Vortex\FCM\Tests;
 
 use Lunr\Vortex\PushNotificationStatus;
 
 /**
- * This class contains tests for the add_batch_response function of the GCMResponse class.
+ * This class contains tests for the add_batch_response function of the FCMResponse class.
  *
- * @covers Lunr\Vortex\GCM\GCMResponse
+ * @covers Lunr\Vortex\FCM\FCMResponse
  */
-class GCMResponseAddBatchResponseTest extends GCMResponseTest
+class FCMResponseAddBatchResponseTest extends FCMResponseTest
 {
 
     /**
      * Test that add_batch_response() with no endpoint doesn't modify the statuses property.
      *
-     * @covers  Lunr\Vortex\GCM\GCMResponse::add_batch_response
+     * @covers  Lunr\Vortex\FCM\FCMResponse::add_batch_response
      */
     public function testAddBatchResponseWithNoEndpointDoesNotModifyStatuses(): void
     {
@@ -43,7 +43,7 @@ class GCMResponseAddBatchResponseTest extends GCMResponseTest
     /**
      * Test that add_batch_response() with endpoints add status for each of them.
      *
-     * @covers  Lunr\Vortex\GCM\GCMResponse::add_batch_response
+     * @covers  Lunr\Vortex\FCM\FCMResponse::add_batch_response
      */
     public function testAddBatchResponseWithEndpointsAddStatus(): void
     {

@@ -1,28 +1,28 @@
 <?php
 
 /**
- * This file contains the GCMBatchResponseGetStatusTest class.
+ * This file contains the FCMBatchResponseGetStatusTest class.
  *
- * @package    Lunr\Vortex\GCM
+ * @package    Lunr\Vortex\FCM
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2016-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\GCM\Tests;
+namespace Lunr\Vortex\FCM\Tests;
 
-use Lunr\Vortex\GCM\GCMBatchResponse;
+use Lunr\Vortex\FCM\FCMBatchResponse;
 use Lunr\Vortex\PushNotificationStatus;
 
 use ReflectionClass;
 
 /**
- * This class contains tests for the get_status function of the GCMBatchResponse class.
+ * This class contains tests for the get_status function of the FCMBatchResponse class.
  *
- * @covers Lunr\Vortex\GCM\GCMBatchResponse
+ * @covers Lunr\Vortex\FCM\FCMBatchResponse
  */
-class GCMBatchResponseGetStatusTest extends GCMBatchResponseTest
+class FCMBatchResponseGetStatusTest extends FCMBatchResponseTest
 {
 
     /**
@@ -39,8 +39,8 @@ class GCMBatchResponseGetStatusTest extends GCMBatchResponseTest
         $this->response->status_code = 200;
         $this->response->body        = $content;
 
-        $this->class      = new GCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ]);
-        $this->reflection = new ReflectionClass('Lunr\Vortex\GCM\GCMBatchResponse');
+        $this->class      = new FCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ]);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
     }
 
     /**
@@ -97,7 +97,7 @@ class GCMBatchResponseGetStatusTest extends GCMBatchResponseTest
      * @param integer $status   Expected function result
      *
      * @dataProvider endpointDataProvider
-     * @covers       Lunr\Vortex\GCM\GCMBatchResponse::get_status
+     * @covers       Lunr\Vortex\FCM\FCMBatchResponse::get_status
      */
     public function testGetStatus($statuses, $status): void
     {

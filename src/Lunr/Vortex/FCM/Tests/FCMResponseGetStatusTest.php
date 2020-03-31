@@ -1,24 +1,24 @@
 <?php
 
 /**
- * This file contains the GCMResponseGetStatusTest class.
+ * This file contains the FCMResponseGetStatusTest class.
  *
- * @package    Lunr\Vortex\GCM
+ * @package    Lunr\Vortex\FCM
  * @author     Damien Tardy-Panis <damien@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Vortex\GCM\Tests;
+namespace Lunr\Vortex\FCM\Tests;
 
 use Lunr\Vortex\PushNotificationStatus;
 
 /**
- * This class contains tests for the get_status function of the GCMResponse class.
+ * This class contains tests for the get_status function of the FCMResponse class.
  *
- * @covers Lunr\Vortex\GCM\GCMResponse
+ * @covers Lunr\Vortex\FCM\FCMResponse
  */
-class GCMResponseGetStatusTest extends GCMResponseTest
+class FCMResponseGetStatusTest extends FCMResponseTest
 {
 
     /**
@@ -75,7 +75,7 @@ class GCMResponseGetStatusTest extends GCMResponseTest
      * @param integer $status   Expected function result
      *
      * @dataProvider endpointDataProvider
-     * @covers       Lunr\Vortex\GCM\GCMResponse::get_status
+     * @covers       Lunr\Vortex\FCM\FCMResponse::get_status
      */
     public function testGetStatus($statuses, $status): void
     {
