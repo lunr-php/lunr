@@ -44,16 +44,24 @@ class FCMBatchResponse
     private $statuses;
 
     /**
+     * Raw payload that was sent to FCM.
+     * @var string
+     */
+    protected $payload;
+
+    /**
      * Constructor.
      *
      * @param \Requests_Response       $response  Requests_Response object.
      * @param \Psr\Log\LoggerInterface $logger    Shared instance of a Logger.
      * @param array                    $endpoints The endpoints the message was sent to (in the same order as sent).
+     * @param string                   $payload   Raw payload that was sent to FCM.
      */
-    public function __construct($response, $logger, $endpoints)
+    public function __construct($response, $logger, $endpoints, $payload)
     {
         $this->logger   = $logger;
         $this->statuses = [];
+        $this->payload  = $payload;
 
         $this->http_code = $response->status_code;
         $this->content   = $response->body;
@@ -77,6 +85,7 @@ class FCMBatchResponse
         unset($this->http_code);
         unset($this->content);
         unset($this->statuses);
+        unset($this->payload);
     }
 
     /**

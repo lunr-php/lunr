@@ -52,18 +52,26 @@ class PAPResponse implements PushNotificationResponseInterface
     private $endpoint;
 
     /**
+     * Raw payload that was sent to PAP.
+     * @var string
+     */
+    protected $payload;
+
+    /**
      * Constructor.
      *
      * @param \Requests_Response       $response  Requests_Response object.
      * @param \Psr\Log\LoggerInterface $logger    Shared instance of a Logger.
      * @param string                   $device_id The deviceID that the message was sent to.
+     * @param string                   $payload   Raw payload that was sent to PAP.
      */
-    public function __construct($response, $logger, $device_id)
+    public function __construct($response, $logger, $device_id, $payload)
     {
         $this->http_code    = $response->status_code;
         $this->result       = $response->body;
         $this->endpoint     = $device_id;
         $this->pap_response = [];
+        $this->payload      = $payload;
 
         if ($this->http_code === FALSE)
         {
@@ -91,6 +99,7 @@ class PAPResponse implements PushNotificationResponseInterface
         unset($this->status);
         unset($this->result);
         unset($this->pap_response);
+        unset($this->payload);
     }
 
     /**

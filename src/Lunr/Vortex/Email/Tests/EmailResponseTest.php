@@ -50,7 +50,7 @@ abstract class EmailResponseTest extends LunrBaseTest
     {
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $this->class      = new EmailResponse([], $this->logger);
+        $this->class      = new EmailResponse([], $this->logger, 'The email');
         $this->reflection = new ReflectionClass('Lunr\Vortex\Email\EmailResponse');
     }
 
@@ -85,7 +85,7 @@ abstract class EmailResponseTest extends LunrBaseTest
                $this->equalTo([ 'endpoint' => 'error-endpoint', 'message' => 'ErrorInfo' ])
              );
 
-        $this->class      = new EmailResponse($mail_results, $this->logger);
+        $this->class      = new EmailResponse($mail_results, $this->logger, 'The email');
         $this->reflection = new ReflectionClass('Lunr\Vortex\Email\EmailResponse');
     }
 
@@ -111,7 +111,7 @@ abstract class EmailResponseTest extends LunrBaseTest
             ]
         ];
 
-        $this->class      = new EmailResponse($mail_results, $this->logger);
+        $this->class      = new EmailResponse($mail_results, $this->logger, 'The email');
         $this->reflection = new ReflectionClass('Lunr\Vortex\Email\EmailResponse');
     }
 

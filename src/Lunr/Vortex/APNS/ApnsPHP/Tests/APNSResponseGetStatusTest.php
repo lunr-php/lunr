@@ -33,7 +33,7 @@ class APNSResponseGetStatusTest extends APNSResponseTest
     {
         parent::setUp();
 
-        $this->class      = new APNSResponse($this->logger, [], [], []);
+        $this->class      = new APNSResponse($this->logger, [], [], [], '{}');
         $this->reflection = new ReflectionClass('Lunr\Vortex\APNS\ApnsPHP\APNSResponse');
     }
 

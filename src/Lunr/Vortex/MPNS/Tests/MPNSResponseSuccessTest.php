@@ -56,7 +56,7 @@ class MPNSResponseSuccessTest extends MPNSResponseTest
     /**
      * Test that the endpoint is set correctly.
      */
-    public function testEndpointSetCorrectly(): void
+    public function testEndpointIsSetCorrectly(): void
     {
         $this->assertPropertySame('endpoint', 'http://localhost/');
     }
@@ -67,6 +67,14 @@ class MPNSResponseSuccessTest extends MPNSResponseTest
     public function testHttpCodeIsSetCorrectly(): void
     {
         $this->assertEquals(200, $this->get_reflection_property_value('http_code'));
+    }
+
+    /**
+     * Test that the payload is set correctly.
+     */
+    public function testPayloadIsSetCorrectly(): void
+    {
+        $this->assertPropertySame('payload', '<?xml version="1.0" encoding="utf-8"?>');
     }
 
     /**

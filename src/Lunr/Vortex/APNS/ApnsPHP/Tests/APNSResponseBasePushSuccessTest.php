@@ -37,7 +37,7 @@ class APNSResponseBasePushSuccessTest extends APNSResponseTest
         $errors            = [];
         $statuses          = [ 'endpoint1' => PushNotificationStatus::SUCCESS ];
 
-        $this->class      = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors);
+        $this->class      = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors, '{}');
         $this->reflection = new ReflectionClass('Lunr\Vortex\APNS\ApnsPHP\APNSResponse');
 
         $this->assertPropertyEquals('statuses', $statuses);
@@ -80,7 +80,7 @@ class APNSResponseBasePushSuccessTest extends APNSResponseTest
                         [ 'endpoint' => 'endpoint1', 'error' => 'Invalid token' ]
                      );
 
-        $this->class      = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors);
+        $this->class      = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors, '{}');
         $this->reflection = new ReflectionClass('Lunr\Vortex\APNS\ApnsPHP\APNSResponse');
 
         $this->assertPropertyEquals('statuses', $statuses);
@@ -102,7 +102,7 @@ class APNSResponseBasePushSuccessTest extends APNSResponseTest
             'endpoint3' => PushNotificationStatus::SUCCESS,
         ];
 
-        $this->class      = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors);
+        $this->class      = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors, '{}');
         $this->reflection = new ReflectionClass('Lunr\Vortex\APNS\ApnsPHP\APNSResponse');
 
         $this->assertPropertyEquals('statuses', $statuses);
@@ -203,7 +203,7 @@ class APNSResponseBasePushSuccessTest extends APNSResponseTest
                         ]
                      );
 
-        $this->class      = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors);
+        $this->class      = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors, '{}');
         $this->reflection = new ReflectionClass('Lunr\Vortex\APNS\ApnsPHP\APNSResponse');
 
         $this->assertPropertyEquals('statuses', $statuses);
@@ -252,7 +252,7 @@ class APNSResponseBasePushSuccessTest extends APNSResponseTest
                         [ 'endpoint' => 'endpoint4', 'error' => 'Processing error' ]
                      );
 
-        $this->class      = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors);
+        $this->class      = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors, '{}');
         $this->reflection = new ReflectionClass('Lunr\Vortex\APNS\ApnsPHP\APNSResponse');
 
         $this->assertPropertyEquals('statuses', $statuses);

@@ -45,7 +45,7 @@ abstract class MPNSResponseTest extends LunrBaseTest
         $response->status_code = FALSE;
         $response->url         = 'http://localhost/';
 
-        $this->class      = new MPNSResponse($response, $this->logger);
+        $this->class      = new MPNSResponse($response, $this->logger, '<?xml version="1.0" encoding="utf-8"?>');
         $this->reflection = new ReflectionClass('Lunr\Vortex\MPNS\MPNSResponse');
     }
 
@@ -70,7 +70,7 @@ abstract class MPNSResponseTest extends LunrBaseTest
         $response->status_code = 200;
         $response->url         = 'http://localhost/';
 
-        $this->class      = new MPNSResponse($response, $this->logger);
+        $this->class      = new MPNSResponse($response, $this->logger, '<?xml version="1.0" encoding="utf-8"?>');
         $this->reflection = new ReflectionClass('Lunr\Vortex\MPNS\MPNSResponse');
     }
 

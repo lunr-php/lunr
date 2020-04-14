@@ -115,7 +115,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
 
             $this->type = WNSType::RAW;
 
-            return new WNSResponse($response, $this->logger);
+            return new WNSResponse($response, $this->logger, NULL);
         }
 
         if ($payload instanceof WNSToastPayload)
@@ -151,9 +151,11 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
             $headers['Content-Type'] = 'text/xml';
         }
 
+        $raw_payload = $payload->get_payload();
+
         try
         {
-            $response = $this->http->post($endpoints[0], $headers, $payload->get_payload());
+            $response = $this->http->post($endpoints[0], $headers, $raw_payload);
         }
         catch (Requests_Exception $e)
         {
@@ -165,7 +167,7 @@ class WNSDispatcher implements PushNotificationDispatcherInterface
 
         $this->type = WNSType::RAW;
 
-        return new WNSResponse($response, $this->logger);
+        return new WNSResponse($response, $this->logger, $raw_payload);
     }
 
     /**

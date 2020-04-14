@@ -54,6 +54,14 @@ class PAPResponseSuccessTest extends PAPResponseTest
     }
 
     /**
+     * Test that the payload is set correctly.
+     */
+    public function testPayloadIsSetCorrectly(): void
+    {
+        $this->assertPropertySame('payload', '<?xml version="1.0"?>');
+    }
+
+    /**
      * Test parse_pap_response() parses a response without a failure.
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::parse_pap_response

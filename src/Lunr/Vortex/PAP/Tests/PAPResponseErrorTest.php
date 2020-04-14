@@ -54,6 +54,14 @@ class PAPResponseErrorTest extends PAPResponseTest
     }
 
     /**
+     * Test that the payload is set correctly.
+     */
+    public function testPayloadIsSetCorrectly(): void
+    {
+        $this->assertPropertySame('payload', '<?xml version="1.0"?>');
+    }
+
+    /**
      * Test that get_status() returns the dispatch status with correct endpoint.
      *
      * @covers Lunr\Vortex\PAP\PAPResponse::get_status

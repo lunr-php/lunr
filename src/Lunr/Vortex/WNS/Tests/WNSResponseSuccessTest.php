@@ -68,6 +68,14 @@ class WNSResponseSuccessTest extends WNSResponseTest
     }
 
     /**
+     * Test that the payload is set correctly.
+     */
+    public function testPayloadIsSetCorrectly(): void
+    {
+        $this->assertPropertySame('payload', '<?xml version="1.0" encoding="utf-8"?>');
+    }
+
+    /**
      * Test that get_status() returns the dispatch status with correct endpoint.
      *
      * @covers Lunr\Vortex\WNS\WNSResponse::get_status

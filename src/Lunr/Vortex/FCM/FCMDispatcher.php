@@ -96,12 +96,13 @@ class FCMDispatcher implements PushNotificationMultiDispatcherInterface
      * @param \Requests_Response       $http_response Requests_Response object.
      * @param \Psr\Log\LoggerInterface $logger        Shared instance of a Logger.
      * @param array                    $endpoints     The endpoints the message was sent to (in the same order as sent).
+     * @param string                   $payload       Raw payload that was sent to FCM.
      *
      * @return FCMBatchResponse
      */
-    public function get_batch_response($http_response, $logger, $endpoints)
+    public function get_batch_response($http_response, $logger, $endpoints, $payload)
     {
-        return new FCMBatchResponse($http_response, $logger, $endpoints);
+        return new FCMBatchResponse($http_response, $logger, $endpoints, $payload);
     }
 
     /**
@@ -179,7 +180,7 @@ class FCMDispatcher implements PushNotificationMultiDispatcherInterface
             }
         }
 
-        $gcm_batch_response = $this->get_batch_response($http_response, $this->logger, $endpoints);
+        $gcm_batch_response = $this->get_batch_response($http_response, $this->logger, $endpoints, json_encode($tmp_payload));
 
         return $gcm_batch_response;
     }

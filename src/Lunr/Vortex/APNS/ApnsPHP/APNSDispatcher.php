@@ -168,7 +168,7 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
         }
 
         // Return response
-        $response = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors);
+        $response = new APNSResponse($this->logger, $endpoints, $invalid_endpoints, $errors, (string) $this->apns_message);
 
         $this->reset();
 

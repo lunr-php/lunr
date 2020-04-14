@@ -117,7 +117,7 @@ class EmailDispatcher implements PushNotificationMultiDispatcherInterface
             }
         }
 
-        $response = new EmailResponse($mail_results, $this->logger);
+        $response = new EmailResponse($mail_results, $this->logger, $mail_transport->getSentMIMEMessage());
 
         return $response;
     }

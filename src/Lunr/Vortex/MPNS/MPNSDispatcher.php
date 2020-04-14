@@ -90,9 +90,11 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
             $headers['X-NotificationClass'] = $priority;
         }
 
+        $raw_payload = $payload->get_payload();
+
         try
         {
-            $response = $this->http->post($endpoints[0], $headers, $payload->get_payload());
+            $response = $this->http->post($endpoints[0], $headers, $raw_payload);
         }
         catch (Requests_Exception $e)
         {
@@ -102,7 +104,7 @@ class MPNSDispatcher implements PushNotificationDispatcherInterface
             $this->logger->warning('Dispatching push notification to {endpoint} failed: {error}', $context);
         }
 
-        return new MPNSResponse($response, $this->logger);
+        return new MPNSResponse($response, $this->logger, $raw_payload);
     }
 
     /**

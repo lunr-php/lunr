@@ -39,7 +39,7 @@ class FCMBatchResponseGetStatusTest extends FCMBatchResponseTest
         $this->response->status_code = 200;
         $this->response->body        = $content;
 
-        $this->class      = new FCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ]);
+        $this->class      = new FCMBatchResponse($this->response, $this->logger, [ 'endpoint1' ], '{}');
         $this->reflection = new ReflectionClass('Lunr\Vortex\FCM\FCMBatchResponse');
     }
 

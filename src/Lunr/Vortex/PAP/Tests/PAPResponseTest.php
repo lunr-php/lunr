@@ -45,7 +45,7 @@ abstract class PAPResponseTest extends LunrBaseTest
 
         $response->status_code = FALSE;
 
-        $this->class      = new PAPResponse($response, $this->logger, '12345679');
+        $this->class      = new PAPResponse($response, $this->logger, '12345679', '<?xml version="1.0"?>');
         $this->reflection = new ReflectionClass('Lunr\Vortex\PAP\PAPResponse');
     }
 
@@ -71,7 +71,7 @@ abstract class PAPResponseTest extends LunrBaseTest
                         $this->equalTo([ 'error' => $error, 'endpoint' => '12345679' ])
                      );
 
-        $this->class      = new PAPResponse($response, $this->logger, '12345679');
+        $this->class      = new PAPResponse($response, $this->logger, '12345679', '<?xml version="1.0"?>');
         $this->reflection = new ReflectionClass('Lunr\Vortex\PAP\PAPResponse');
     }
 
@@ -91,7 +91,7 @@ abstract class PAPResponseTest extends LunrBaseTest
         $response->status_code = 200;
         $response->body        = file_get_contents($file);
 
-        $this->class      = new PAPResponse($response, $this->logger, '12345679');
+        $this->class      = new PAPResponse($response, $this->logger, '12345679', '<?xml version="1.0"?>');
         $this->reflection = new ReflectionClass('Lunr\Vortex\PAP\PAPResponse');
     }
 

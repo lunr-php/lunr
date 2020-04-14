@@ -34,15 +34,23 @@ class EmailResponse implements PushNotificationResponseInterface
     private $logger;
 
     /**
+     * Raw payload that was sent out.
+     * @var string
+     */
+    protected $payload;
+
+    /**
      * Constructor.
      *
      * @param array                    $mail_results Contains endpoints with corresponding PHPMailer results.
      * @param \Psr\Log\LoggerInterface $logger       Shared instance of a Logger.
+     * @param string                   $payload      Raw payload that was sent out.
      */
-    public function __construct($mail_results, $logger)
+    public function __construct($mail_results, $logger, $payload)
     {
         $this->logger   = $logger;
         $this->statuses = [];
+        $this->payload  = $payload;
 
         $this->handle_sent_notifications($mail_results);
     }
@@ -54,6 +62,7 @@ class EmailResponse implements PushNotificationResponseInterface
     {
         unset($this->statuses);
         unset($this->logger);
+        unset($this->payload);
     }
 
     /**

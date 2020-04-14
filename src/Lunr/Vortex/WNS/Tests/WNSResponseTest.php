@@ -45,7 +45,7 @@ abstract class WNSResponseTest extends LunrBaseTest
         $response->status_code = FALSE;
         $response->url         = 'http://localhost/';
 
-        $this->class      = new WNSResponse($response, $this->logger);
+        $this->class      = new WNSResponse($response, $this->logger, '<?xml version="1.0" encoding="utf-8"?>');
         $this->reflection = new ReflectionClass('Lunr\Vortex\WNS\WNSResponse');
     }
 
@@ -71,7 +71,7 @@ abstract class WNSResponseTest extends LunrBaseTest
         $response->status_code = 200;
         $response->url         = 'http://localhost/';
 
-        $this->class      = new WNSResponse($response, $this->logger);
+        $this->class      = new WNSResponse($response, $this->logger, '<?xml version="1.0" encoding="utf-8"?>');
         $this->reflection = new ReflectionClass('Lunr\Vortex\WNS\WNSResponse');
     }
 
