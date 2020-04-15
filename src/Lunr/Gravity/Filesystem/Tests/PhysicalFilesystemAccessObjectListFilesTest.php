@@ -143,14 +143,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
     {
         $directory = new \stdClass();
 
-        if (PHP_VERSION_ID < 70400)
-        {
-            $error = 'DirectoryIterator::__construct() expects parameter 1 to be string, object given';
-        }
-        else
-        {
-            $error = 'DirectoryIterator::__construct() expects parameter 1 to be a valid path, object given';
-        }
+        $error = 'DirectoryIterator::__construct() expects parameter 1 to be a valid path, object given';
 
         $this->logger->expects($this->once())
                      ->method('error')

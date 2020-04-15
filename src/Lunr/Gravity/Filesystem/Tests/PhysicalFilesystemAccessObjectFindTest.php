@@ -200,14 +200,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     {
         $directory = new \stdClass();
 
-        if (PHP_VERSION_ID < 70400)
-        {
-            $error = 'RecursiveDirectoryIterator::__construct() expects parameter 1 to be string, object given';
-        }
-        else
-        {
-            $error = 'RecursiveDirectoryIterator::__construct() expects parameter 1 to be a valid path, object given';
-        }
+        $error = 'RecursiveDirectoryIterator::__construct() expects parameter 1 to be a valid path, object given';
 
         $this->logger->expects($this->once())
                      ->method('error')
