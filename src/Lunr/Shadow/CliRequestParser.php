@@ -104,9 +104,12 @@ class CliRequestParser implements RequestParserInterface
             }
         }
 
-        if (array_key_exists('device_useragent', $this->ast))
+        foreach ([ 'device_useragent', 'device-useragent' ] as $key)
         {
-            $request['device_useragent'] = $this->ast['device_useragent'][0];
+            if (array_key_exists($key, $this->ast))
+            {
+                $request['device_useragent'] = $this->ast[$key][0];
+            }
         }
 
         if (array_key_exists('useragent', $this->ast))

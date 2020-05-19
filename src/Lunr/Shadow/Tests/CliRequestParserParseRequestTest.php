@@ -273,6 +273,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
     {
         $keys   = [];
         $keys[] = [ 'device_useragent' ];
+        $keys[] = [ 'device-useragent' ];
 
         return $keys;
     }
