@@ -177,7 +177,7 @@ interface DMLQueryBuilderInterface
      * @param string $right    Right expression
      * @param string $operator Comparison operator
      *
-     * @return DMLQueryBuilder $self Self reference
+     * @return DMLQueryBuilderInterface $self Self reference
      */
     public function on($left, $right, $operator = '=');
 
