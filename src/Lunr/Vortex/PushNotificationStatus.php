@@ -53,6 +53,12 @@ class PushNotificationStatus
      */
     const ERROR = 5;
 
+    /**
+     * Push notification not processed by any dispatcher.
+     * @var integer
+     */
+    const NOT_HANDLED = 6;
+
 }
 
 ?>
