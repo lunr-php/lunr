@@ -74,23 +74,58 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
     {
         $endpoints = [];
 
-        $payload = '{"alert":"message","sound":"yo.mp3","yo":"he","badge":7,"custom_data":{"key1":"value1","key2":"value2"}}';
+        $payload = [
+            'title' => 'title',
+            'body' => 'message',
+            'thread_id' => '59ADAE4572BF42A682F46170DA5A74EC',
+            'sound' => 'yo.mp3',
+            'category' => 'messages_for_test',
+            'mutable_content' => TRUE,
+            'content_available' => TRUE,
+            'yo' => 'he',
+            'badge' => 7,
+            'custom_data' => [
+                'key1' => 'value1',
+                'key2' => 'value2'
+            ],
+        ];
 
         $this->payload->expects($this->once())
                       ->method('get_payload')
                       ->willReturn($payload);
 
-        $this->apns_message->expects($this->once())
+        $i = -1;
+        $this->apns_message->expects($this->at(++$i))
+                           ->method('setTitle')
+                           ->with($payload['title']);
+
+        $this->apns_message->expects($this->at(++$i))
                            ->method('setText')
-                           ->with('message');
+                           ->with($payload['body']);
 
-        $this->apns_message->expects($this->once())
+        $this->apns_message->expects($this->at(++$i))
+                           ->method('setThreadID')
+                           ->with($payload['thread_id']);
+
+        $this->apns_message->expects($this->at(++$i))
                            ->method('setSound')
-                           ->with('yo.mp3');
+                           ->with($payload['sound']);
 
-        $this->apns_message->expects($this->once())
+        $this->apns_message->expects($this->at(++$i))
+                           ->method('setCategory')
+                           ->with($payload['category']);
+
+        $this->apns_message->expects($this->at(++$i))
                            ->method('setBadge')
-                           ->with(7);
+                           ->with($payload['badge']);
+
+        $this->apns_message->expects($this->at(++$i))
+                           ->method('setContentAvailable')
+                           ->with(TRUE);
+
+        $this->apns_message->expects($this->at(++$i))
+                           ->method('setMutableContent')
+                           ->with(TRUE);
 
         $this->apns_message->expects($this->exactly(2))
                            ->method('setCustomProperty')
@@ -113,7 +148,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
 
         $this->payload->expects($this->once())
                       ->method('get_payload')
-                      ->willReturn('{"badge":"yo"}');
+                      ->willReturn(['badge' => 'yo']);
 
         $this->apns_message->expects($this->once())
                            ->method('setBadge')
@@ -140,7 +175,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
 
         $this->payload->expects($this->once())
                       ->method('get_payload')
-                      ->willReturn('{"custom_data":{"apns":"value1"}}');
+                      ->willReturn(['custom_data' => ['apns' => 'value1']]);
 
         $this->apns_message->expects($this->once())
                            ->method('setCustomProperty')

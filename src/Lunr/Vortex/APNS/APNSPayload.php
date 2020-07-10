@@ -42,17 +42,17 @@ class APNSPayload
     /**
      * Construct the payload for the push notification.
      *
-     * @return string APNSPayload
+     * @return array APNSPayload elements
      */
     public function get_payload()
     {
-        return json_encode($this->elements);
+        return $this->elements;
     }
 
     /**
      * Sets the payload badge index.
      *
-     * Used to determine what type of icon to show on the appicon when the message arrives
+     * Used to determine what type of icon to show on the app icon when the message arrives
      *
      * @param integer $badge The badge index
      *
@@ -80,6 +80,90 @@ class APNSPayload
     }
 
     /**
+     * Sets the payload thread_id.
+     *
+     * @param string $thread_id The thread_id to set it to
+     *
+     * @return APNSPayload Self Reference
+     */
+    public function set_thread_id($thread_id)
+    {
+        $this->elements['thread_id'] = $thread_id;
+
+        return $this;
+    }
+
+    /**
+     * Sets the payload category.
+     *
+     * @param string $category The category to set it to
+     *
+     * @return APNSPayload Self Reference
+     */
+    public function set_category($category)
+    {
+        $this->elements['category'] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Sets the payload content_available property.
+     *
+     * @param boolean $content_available If there is content available for download
+     *
+     * @return APNSPayload Self Reference
+     */
+    public function set_content_available($content_available)
+    {
+        $this->elements['content_available'] = $content_available;
+
+        return $this;
+    }
+
+    /**
+     * Sets the payload mutable_content property.
+     *
+     * @param boolean $mutable_content If the notification is mutable
+     *
+     * @return APNSPayload Self Reference
+     */
+    public function set_mutable_content($mutable_content)
+    {
+        $this->elements['mutable_content'] = $mutable_content;
+
+        return $this;
+    }
+
+    /**
+     * Sets the payload title.
+     *
+     * @param string $title The actual title
+     *
+     * @return APNSPayload Self Reference
+     */
+    public function set_title($title)
+    {
+        $this->elements['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Sets the payload body.
+     *
+     * @param string $body The actual message
+     *
+     * @return APNSPayload Self Reference
+     */
+    public function set_body($body)
+    {
+        $this->elements['body'] = $body;
+
+        return $this;
+    }
+
+    /**
      * Sets the payload alert.
      *
      * The alert key represents the actual message to be sent
@@ -88,13 +172,13 @@ class APNSPayload
      *
      * @param string $alert The actual message
      *
+     * @deprecated use set_body instead
+     *
      * @return APNSPayload Self Reference
      */
     public function set_alert($alert)
     {
-        $this->elements['alert'] = $alert;
-
-        return $this;
+        return $this->set_body($alert);
     }
 
     /**

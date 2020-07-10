@@ -19,14 +19,14 @@ use ReflectionClass;
  * This class contains common setup routines, providers
  * and shared attributes for testing the APNSDispatcher class.
  *
- * @covers Lunr\Vortex\APNS\libcapn\APNSDispatcher
+ * @covers Lunr\Vortex\APNS\ApnsPHP\APNSDispatcher
  */
 abstract class APNSDispatcherTest extends LunrBaseTest
 {
 
     /**
      * Mock instance of a Logger class.
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     protected $logger;
 

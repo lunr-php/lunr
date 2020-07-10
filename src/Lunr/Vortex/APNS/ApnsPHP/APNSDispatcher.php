@@ -78,8 +78,6 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
     /**
      * Return a new APNS message.
      *
-     * @codeCoverageIgnore
-     *
      * @return \ApnsPHP_Message
      */
     protected function get_new_apns_message()
@@ -98,30 +96,53 @@ class APNSDispatcher implements PushNotificationMultiDispatcherInterface
     public function push($payload, &$endpoints)
     {
         // Create message
-        $tmp_payload = json_decode($payload->get_payload(), TRUE);
+        $payload = $payload->get_payload();
 
         $this->apns_message = $this->get_new_apns_message();
 
         try
         {
-            if (!empty($tmp_payload['alert']))
+            if (isset($payload['title']))
             {
-                $this->apns_message->setText($tmp_payload['alert']);
+                $this->apns_message->setTitle($payload['title']);
+            }
+            if (isset($payload['body']))
+            {
+                $this->apns_message->setText($payload['body']);
+            }
+            if (isset($payload['thread_id']))
+            {
+                $this->apns_message->setThreadID($payload['thread_id']);
             }
 
-            if (!empty($tmp_payload['sound']))
+            if (isset($payload['sound']))
             {
-                $this->apns_message->setSound($tmp_payload['sound']);
+                $this->apns_message->setSound($payload['sound']);
             }
 
-            if (!empty($tmp_payload['badge']))
+            if (isset($payload['category']))
             {
-                $this->apns_message->setBadge($tmp_payload['badge']);
+                $this->apns_message->setCategory($payload['category']);
             }
 
-            if (!empty($tmp_payload['custom_data']))
+            if (isset($payload['badge']))
             {
-                foreach ($tmp_payload['custom_data'] as $key => $value)
+                $this->apns_message->setBadge($payload['badge']);
+            }
+
+            if (isset($payload['content_available']))
+            {
+                $this->apns_message->setContentAvailable($payload['content_available']);
+            }
+
+            if (isset($payload['mutable_content']))
+            {
+                $this->apns_message->setMutableContent($payload['mutable_content']);
+            }
+
+            if (isset($payload['custom_data']))
+            {
+                foreach ($payload['custom_data'] as $key => $value)
                 {
                     $this->apns_message->setCustomProperty($key, $value);
                 }

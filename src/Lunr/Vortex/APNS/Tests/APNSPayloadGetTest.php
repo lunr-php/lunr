@@ -35,7 +35,7 @@ class APNSPayloadGetTest extends APNSPayloadTest
 
         $this->set_reflection_property_value('elements', $elements);
 
-        $this->assertJsonStringEqualsJsonFile($file, $this->class->get_payload());
+        $this->assertJsonStringEqualsJsonFile($file, json_encode($this->class->get_payload()));
     }
 
 }
