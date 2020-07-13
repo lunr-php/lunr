@@ -320,6 +320,9 @@
             <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherBaseTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherSetTest.php</file>
             <file>../src/Lunr/Vortex/FCM/Tests/FCMDispatcherPushTest.php</file>
+            <file>../src/Lunr/Vortex/JPush/Tests/JPushPayloadBaseTest.php</file>
+            <file>../src/Lunr/Vortex/JPush/Tests/JPushPayloadGetTest.php</file>
+            <file>../src/Lunr/Vortex/JPush/Tests/JPushPayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadGetTest.php</file>
@@ -389,6 +392,7 @@
                 <directory>../src/Lunr/Vortex/APNS/ApnsPHP/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Email/Tests/</directory>
                 <directory>../src/Lunr/Vortex/FCM/Tests/</directory>
+                <directory>../src/Lunr/Vortex/JPush/Tests/</directory>
                 <directory>../src/Lunr/Vortex/Email/Tests/</directory>
                 <directory>../src/Lunr/Vortex/MPNS/Tests/</directory>
                 <directory>../src/Lunr/Vortex/WNS/Tests/</directory>
