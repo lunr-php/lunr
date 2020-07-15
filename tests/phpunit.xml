@@ -323,6 +323,13 @@
             <file>../src/Lunr/Vortex/JPush/Tests/JPushPayloadBaseTest.php</file>
             <file>../src/Lunr/Vortex/JPush/Tests/JPushPayloadGetTest.php</file>
             <file>../src/Lunr/Vortex/JPush/Tests/JPushPayloadSetTest.php</file>
+            <file>../src/Lunr/Vortex/JPush/Tests/JPushBatchResponseBasePushErrorTest.php</file>
+            <file>../src/Lunr/Vortex/JPush/Tests/JPushBatchResponseBasePushSuccessTest.php</file>
+            <file>../src/Lunr/Vortex/JPush/Tests/JPushBatchResponseGetStatusTest.php</file>
+            <file>../src/Lunr/Vortex/JPush/Tests/JPushBatchResponseSetStatusesTest.php</file>
+            <file>../src/Lunr/Vortex/JPush/Tests/JPushResponseBaseTest.php</file>
+            <file>../src/Lunr/Vortex/JPush/Tests/JPushResponseAddBatchResponseTest.php</file>
+            <file>../src/Lunr/Vortex/JPush/Tests/JPushResponseGetStatusTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadSetTest.php</file>
             <file>../src/Lunr/Vortex/MPNS/Tests/MPNSPayloadGetTest.php</file>
