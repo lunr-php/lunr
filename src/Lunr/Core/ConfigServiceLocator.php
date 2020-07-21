@@ -124,7 +124,7 @@ class ConfigServiceLocator
 
         if (isset($this->cache[$id]))
         {
-            return $this->get_instance($id);
+            return $this->process_new_instance($id, $this->get_instance($id));
         }
 
         $this->load_recipe($id);

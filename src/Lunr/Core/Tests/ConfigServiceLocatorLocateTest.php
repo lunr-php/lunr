@@ -47,6 +47,49 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
     }
 
     /**
+     * Test that locate() processes an object from the config cache.
+     *
+     * @covers Lunr\Core\ConfigServiceLocator::__call
+     */
+    public function testLocateProcessesInstanceFromCache(): void
+    {
+        $cache = [
+            'id' => [
+                'methods' => [
+                    [
+                        'name'   => 'test',
+                        'params' => [ 'param1' ],
+                    ],
+                    [
+                        'name'   => 'test',
+                        'params' => [ 'param2', 'param3' ],
+                    ],
+                ],
+            ],
+        ];
+
+        $this->set_reflection_property_value('cache', $cache);
+
+        $mock = $this->getMockBuilder('Lunr\Halo\CallbackMock')->getMock();
+
+        $mock->expects($this->at(0))
+             ->method('test')
+             ->with('param1');
+
+        $mock->expects($this->at(1))
+             ->method('test')
+             ->with('param2', 'param3');
+
+        $this->mock_method([ $this->class, 'get_instance' ], function() use ($mock) { return $mock; });
+
+        $method = $this->get_accessible_reflection_method('locate');
+
+        $method->invokeArgs($this->class, [ 'id' ]);
+
+        $this->unmock_method([ $this->class, 'get_instance' ]);
+    }
+
+    /**
      * Test that locate() processes a totally new object instance.
      *
      * @covers Lunr\Core\ConfigServiceLocator::locate
@@ -126,6 +169,47 @@ class ConfigServiceLocatorLocateTest extends ConfigServiceLocatorTest
         $this->set_reflection_property_value('cache', $cache);
 
         $this->assertInstanceOf('Lunr\Core\DateTime', $this->class->datetime());
+    }
+
+    /**
+     * Test that __call() processes an object from the config cache.
+     *
+     * @covers Lunr\Core\ConfigServiceLocator::__call
+     */
+    public function testMagicCallProcessesInstanceFromCache(): void
+    {
+        $cache = [
+            'id' => [
+                'methods' => [
+                    [
+                        'name'   => 'test',
+                        'params' => [ 'param1' ],
+                    ],
+                    [
+                        'name'   => 'test',
+                        'params' => [ 'param2', 'param3' ],
+                    ],
+                ],
+            ],
+        ];
+
+        $this->set_reflection_property_value('cache', $cache);
+
+        $mock = $this->getMockBuilder('Lunr\Halo\CallbackMock')->getMock();
+
+        $mock->expects($this->at(0))
+             ->method('test')
+             ->with('param1');
+
+        $mock->expects($this->at(1))
+             ->method('test')
+             ->with('param2', 'param3');
+
+        $this->mock_method([ $this->class, 'get_instance' ], function() use ($mock) { return $mock; });
+
+        $this->class->id();
+
+        $this->unmock_method([ $this->class, 'get_instance' ]);
     }
 
     /**
