@@ -184,6 +184,7 @@
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectPoolTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectResultsTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectVerifyQuerySuccessTest.php</file>
+            <file>../src/Lunr/Gravity/Database/Tests/TransactionalDatabaseAccessObjectCallsTest.php</file>
             <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectBaseTest.php</file>
             <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectFileTest.php</file>
             <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectTmpTest.php</file>
