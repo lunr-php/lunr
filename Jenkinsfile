@@ -51,6 +51,7 @@ pipeline {
                     md: { ant_sh('phpmd-ci') },
                     cpd: { ant_sh('phpcpd') },
                     cs: { ant_sh('phpcs') },
+                    stan: { ant_sh('phpstan-ci') },
                     loc: { ant_sh('phploc') }
                 )
             }
@@ -143,6 +144,17 @@ pipeline {
                             [
                                 $class: 'CheckStylePublisher',
                                 pattern: 'build/logs/checkstyle.xml',
+                                unstableTotalAll: '999',
+                                alwaysLinkToLastBuild: true,
+                                usePreviousBuildAsReference: false
+                            ]
+                        )
+                    },
+                    phpstan: {
+                        step(
+                            [
+                                $class: 'CheckStylePublisher',
+                                pattern: 'build/logs/phpstan.xml',
                                 unstableTotalAll: '999',
                                 alwaysLinkToLastBuild: true,
                                 usePreviousBuildAsReference: false

@@ -1,0 +1,22 @@
+parameters:
+    bootstrapFiles:
+        - ../decomposer.autoload.inc.php
+    excludes_analyse:
+        - ../src/*/Tests/*
+    ignoreErrors:
+        -
+            message: '#Variable \$(response|result) might not be defined.#'
+            paths:
+                - ../src/Lunr/Spark/Facebook/Api.php
+                - ../src/Lunr/Spark/Twitter/Api.php
+                - ../src/Lunr/Spark/Contentful/DeliveryApi.php
+                - ../src/Lunr/Vortex/JPush/JPushBatchResponse.php
+    universalObjectCratesClasses:
+        - Lunr\Corona\Request
+        - Lunr\Corona\FrontController
+        - Lunr\Spark\Contentful\DeliveryApi
+        - Lunr\Spark\Facebook\Api
+        - Lunr\Spark\Facebook\Authentication
+        - Lunr\Spark\Facebook\User
+        - Lunr\Spark\Twitter\Authentication
+        - Lunr\Spark\Twitter\Search
