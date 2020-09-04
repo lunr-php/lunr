@@ -49,6 +49,7 @@ pipeline {
                         reportName: 'PDepend Reports',
                         reportDir: 'build/pdepend',
                         reportFiles: '',
+                        alwaysLinkToLastBuild: true,
                         keepAll: true,
                         allowMissing: false
                     ])
