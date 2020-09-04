@@ -43,6 +43,17 @@ pipeline {
                 ant_sh('pdepend')
                 ant_sh('l10n')
             }
+            post {
+                success {
+                    publishHTML([
+                        reportName: 'PDepend Reports',
+                        reportDir: 'build/pdepend',
+                        reportFiles: '',
+                        keepAll: true,
+                        allowMissing: false
+                    ])
+                }
+            }
         }
 
         stage('Code inspection'){
@@ -55,6 +66,15 @@ pipeline {
                     loc: { ant_sh('phploc') }
                 )
             }
+            post {
+                always {
+                    recordIssues enabledForFailure: true, tool: pmdParser(pattern: 'build/logs/pmd.xml')
+                    recordIssues enabledForFailure: true, tool: cpd(pattern: 'build/logs/pmd-cpd.xml')
+                    recordIssues enabledForFailure: true, tool: phpStan(pattern: 'build/logs/phpstan.xml')
+                    recordIssues enabledForFailure: true, tool: checkStyle(pattern: 'build/logs/checkstyle.xml'),
+                                                          qualityGates: [[threshold: 999, type: 'TOTAL', unstable: true]]
+                }
+            }
         }
 
         stage('Unit tests'){
@@ -64,6 +84,23 @@ pipeline {
             post {
                 success {
                     junit 'build/logs/junit.xml'
+                    recordIssues enabledForFailure: true, tool: junitParser(pattern: 'build/logs/junit.xml')
+                    step([
+                        $class: 'CloverPublisher',
+                        cloverReportDir: 'build/logs',
+                        cloverReportFileName: 'clover.xml',
+                        healthyTarget: [methodCoverage: 70, conditionalCoverage: 80, statementCoverage: 80],
+                        unhealthyTarget: [methodCoverage: 50, conditionalCoverage: 60, statementCoverage: 60],
+                        failingTarget: [methodCoverage: 30, conditionalCoverage: 40, statementCoverage: 40]
+                    ])
+                    publishHTML([
+                        reportName: 'Coverage Reports',
+                        reportDir: 'build/coverage',
+                        reportFiles: 'index.html',
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        allowMissing: false
+                    ])
                 }
             }
         }
@@ -78,100 +115,12 @@ pipeline {
                 }
             }
         }
-
-        stage('Publishing Report'){
-            steps{
-                parallel (
-                    pdepend: {
-                        publishHTML(
-                            target: [
-                                reportName: 'PDepend Reports',
-                                reportDir: 'build/pdepend',
-                                reportFiles: '',
-                                keepAll: true
-                            ]
-                        )
-                    },
-                    clover:{
-                        step(
-                            [
-                                $class: 'CloverPublisher',
-                                cloverReportDir: 'build/logs',
-                                cloverReportFileName: 'clover.xml',
-                                healthyTarget: [methodCoverage: 70, conditionalCoverage: 80, statementCoverage: 80],
-                                unhealthyTarget: [methodCoverage: 50, conditionalCoverage: 60, statementCoverage: 60],
-                                failingTarget: [methodCoverage: 30, conditionalCoverage: 40, statementCoverage: 40]
-                            ]
-                        )
-                        publishHTML(
-                            target: [
-                                reportName: 'Coverage Reports',
-                                reportDir: 'build/coverage',
-                                reportFiles: 'index.html',
-                                alwaysLinkToLastBuild: true,
-                                keepAll: true
-                            ]
-                        )
-                    },
-                    pmd: {
-                        step(
-                            [
-                                $class: 'PmdPublisher',
-                                canComputeNew: false,
-                                defaultEncoding: '',
-                                pattern: 'build/logs/pmd.xml',
-                                alwaysLinkToLastBuild: true,
-                                healthy: '',
-                                unHealthy: ''
-                            ]
-                        )
-                    },
-                    pmdcpd: {
-                        step(
-                            [
-                                $class: 'DryPublisher',
-                                canComputeNew: false,
-                                defaultEncoding: '',
-                                pattern: 'build/logs/pmd-cpd.xml',
-                                alwaysLinkToLastBuild: true,
-                                healthy: '',
-                                unHealthy: ''
-                            ]
-                        )
-                    },
-                    checkstyle: {
-                        step(
-                            [
-                                $class: 'CheckStylePublisher',
-                                pattern: 'build/logs/checkstyle.xml',
-                                unstableTotalAll: '999',
-                                alwaysLinkToLastBuild: true,
-                                usePreviousBuildAsReference: false
-                            ]
-                        )
-                    },
-                    phpstan: {
-                        step(
-                            [
-                                $class: 'CheckStylePublisher',
-                                pattern: 'build/logs/phpstan.xml',
-                                unstableTotalAll: '999',
-                                alwaysLinkToLastBuild: true,
-                                usePreviousBuildAsReference: false
-                            ]
-                        )
-                    }
-                )
-            }
-            post {
-                success {
-                    deploy()
-                }
-            }
-        }
     }
 
     post {
+        success {
+            deploy()
+        }
         failure {
             emailext body: 'Please go to $BUILD_URL to see the result.',
                      recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class: 'CulpritsRecipientProvider']],
