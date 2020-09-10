@@ -1,4 +1,5 @@
 # Convert sonarqube's issues search api json to sonar-report.json
+# https://github.com/jenkinsci/violation-comments-to-stash-plugin/issues/69
 
 {
   "version": "7.6",
