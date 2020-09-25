@@ -98,7 +98,7 @@ class JPushPayload
      */
     public function set_title($message)
     {
-        return $this->set_notification_data('title', $message);
+        return $this->set_notification_data('title', $message, ['android']);
     }
 
     /**
@@ -176,7 +176,7 @@ class JPushPayload
         $priorities     = array_values($priority_class->getConstants());
         if (in_array($priority, $priorities, TRUE))
         {
-            $this->set_notification_data('priority', $priority);
+            $this->set_notification_data('priority', $priority, ['android']);
         }
 
         return $this;

@@ -28,7 +28,6 @@ class JPushPayloadBaseTest extends JPushPayloadTest
             'platform' => [ 'ios', 'android' ],
             'audience' => [],
             'notification' => [
-                'ios' => [ 'priority' => 2 ],
                 'android' => [ 'priority' => 2 ],
             ]
         ]);
