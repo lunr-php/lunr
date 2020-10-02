@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the DeliveryApiTest class.
+ * This file contains the ApiTest class.
  *
  * @package    Lunr\Spark\Contentful
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -11,16 +11,16 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
-use Lunr\Spark\Contentful\DeliveryApi;
+use Lunr\Spark\Contentful\Api;
 use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
- * This class contains the tests for the DeliveryApi.
+ * This class contains the tests for the Api.
  *
- * @covers Lunr\Spark\Contentful\DeliveryApi
+ * @covers Lunr\Spark\Contentful\Api
  */
-abstract class DeliveryApiTest extends LunrBaseTest
+abstract class ApiTest extends LunrBaseTest
 {
 
     /**
@@ -57,9 +57,9 @@ abstract class DeliveryApiTest extends LunrBaseTest
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->response = $this->getMockBuilder('Requests_Response')->getMock();
 
-        $this->class = new DeliveryApi($this->cas, $this->logger, $this->http);
+        $this->class = new Api($this->cas, $this->logger, $this->http);
 
-        $this->reflection = new ReflectionClass('Lunr\Spark\Contentful\DeliveryApi');
+        $this->reflection = new ReflectionClass('Lunr\Spark\Contentful\Api');
     }
 
     /**
@@ -73,6 +73,33 @@ abstract class DeliveryApiTest extends LunrBaseTest
         unset($this->http);
         unset($this->logger);
         unset($this->response);
+    }
+
+    /**
+     * Unit test data provider for general __get() __set() keys.
+     *
+     * @return array $keys Array of keys
+     */
+    public function generalKeyProvider(): array
+    {
+        $keys   = [];
+        $keys[] = [ 'access_token' ];
+
+        return $keys;
+    }
+
+    /**
+     * Unit test data provider for get methods.
+     *
+     * @return array $methods Array of get methods
+     */
+    public function getMethodProvider(): array
+    {
+        $methods   = [];
+        $methods[] = [ 'get' ];
+        $methods[] = [ 'GET' ];
+
+        return $methods;
     }
 
 }

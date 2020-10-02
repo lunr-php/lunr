@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the DeliveryApiBaseTest class.
+ * This file contains the ManagementApiBaseTest class.
  *
  * @package    Lunr\Spark\Contentful
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -14,11 +14,11 @@ namespace Lunr\Spark\Contentful\Tests;
 use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
 
 /**
- * This class contains the tests for the DeliveryApi.
+ * This class contains the tests for the ManagementApi.
  *
- * @covers Lunr\Spark\Contentful\DeliveryApi
+ * @covers Lunr\Spark\Contentful\ManagementApi
  */
-class DeliveryApiBaseTest extends DeliveryApiTest
+class ManagementApiBaseTest extends ManagementApiTest
 {
 
     use PsrLoggerTestTrait;

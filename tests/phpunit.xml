@@ -238,11 +238,18 @@
             <file>../src/Lunr/Spark/Tests/CentralAuthenticationStoreBaseTest.php</file>
             <file>../src/Lunr/Spark/Tests/LunrSoapClientInitTest.php</file>
             <file>../src/Lunr/Spark/Tests/LunrSoapClientHeaderTest.php</file>
+            <file>../src/Lunr/Spark/Contentful/Tests/ApiSetSpaceIdTest.php</file>
+            <file>../src/Lunr/Spark/Contentful/Tests/ApiBaseTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/DeliveryApiBaseTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/DeliveryApiGetJsonResultsTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/DeliveryApiGetEntriesTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/DeliveryApiGetAssetsTest.php</file>
-            <file>../src/Lunr/Spark/Contentful/Tests/DeliveryApiSetSpaceIdTest.php</file>
+            <file>../src/Lunr/Spark/Contentful/Tests/ManagementApiBaseTest.php</file>
+            <file>../src/Lunr/Spark/Contentful/Tests/ManagementApiCreateEntryTest.php</file>
+            <file>../src/Lunr/Spark/Contentful/Tests/ManagementApiGetEntryTest.php</file>
+            <file>../src/Lunr/Spark/Contentful/Tests/ManagementApiUpdateEntryTest.php</file>
+            <file>../src/Lunr/Spark/Contentful/Tests/ManagementApiPublishEntryTest.php</file>
+            <file>../src/Lunr/Spark/Contentful/Tests/ManagementApiUnpublishEntryTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/PreviewApiBaseTest.php</file>
             <file>../src/Lunr/Spark/Facebook/Tests/ApiBaseTest.php</file>
             <file>../src/Lunr/Spark/Facebook/Tests/ApiGetUrlResultsTest.php</file>

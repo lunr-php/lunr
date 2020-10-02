@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the DeliveryApiSetSpaceIdTest class.
+ * This file contains the ApiSetSpaceIdTest class.
  *
  * @package    Lunr\Spark\Contentful
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -11,22 +11,22 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
-use Lunr\Spark\Contentful\DeliveryApi;
+use Lunr\Spark\Contentful\Api;
 use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
- * This class contains the tests for the DeliveryApi.
+ * This class contains the tests for the Api.
  *
- * @covers Lunr\Spark\Contentful\DeliveryApi
+ * @covers Lunr\Spark\Contentful\Api
  */
-class DeliveryApiSetSpaceIdTest extends DeliveryApiTest
+class ApiSetSpaceIdTest extends DeliveryApiTest
 {
 
     /**
      * Test that set_space_id() sets the space ID correctly.
      *
-     * @covers Lunr\Spark\Contentful\DeliveryApi::set_space_id
+     * @covers Lunr\Spark\Contentful\Api::set_space_id
      */
     public function testSetSpaceIdSetsSpaceId(): void
     {
@@ -38,7 +38,7 @@ class DeliveryApiSetSpaceIdTest extends DeliveryApiTest
     /**
      * Test the fluid interface of set_space_id().
      *
-     * @covers Lunr\Spark\Contentful\DeliveryApi::set_space_id
+     * @covers Lunr\Spark\Contentful\Api::set_space_id
      */
     public function testSetSpaceIdReturnsSelfReference(): void
     {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the DeliveryApiTest class.
+ * This file contains the ManagementApiTest class.
  *
  * @package    Lunr\Spark\Contentful
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -11,16 +11,16 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
-use Lunr\Spark\Contentful\DeliveryApi;
+use Lunr\Spark\Contentful\ManagementApi;
 use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
- * This class contains the tests for the DeliveryApi.
+ * This class contains the tests for the ManagementApi.
  *
- * @covers Lunr\Spark\Contentful\DeliveryApi
+ * @covers Lunr\Spark\Contentful\ManagementApi
  */
-abstract class DeliveryApiTest extends LunrBaseTest
+abstract class ManagementApiTest extends LunrBaseTest
 {
 
     /**
@@ -57,9 +57,9 @@ abstract class DeliveryApiTest extends LunrBaseTest
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->response = $this->getMockBuilder('Requests_Response')->getMock();
 
-        $this->class = new DeliveryApi($this->cas, $this->logger, $this->http);
+        $this->class = new ManagementApi($this->cas, $this->logger, $this->http);
 
-        $this->reflection = new ReflectionClass('Lunr\Spark\Contentful\DeliveryApi');
+        $this->reflection = new ReflectionClass('Lunr\Spark\Contentful\ManagementApi');
     }
 
     /**
