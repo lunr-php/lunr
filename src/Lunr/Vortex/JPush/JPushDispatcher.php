@@ -152,7 +152,6 @@ class JPushDispatcher implements PushNotificationMultiDispatcherInterface
         try
         {
             $http_response = $this->http->post(static::JPUSH_SEND_URL, [], json_encode($tmp_payload), []);
-            $http_response->throw_for_status();
         }
         catch (Requests_Exception $e)
         {

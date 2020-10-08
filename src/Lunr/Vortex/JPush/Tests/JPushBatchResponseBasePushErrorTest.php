@@ -41,8 +41,35 @@ class JPushBatchResponseBasePushErrorTest extends JPushBatchResponseTest
         $this->logger->expects($this->once())
                      ->method('warning')
                      ->with(
-                         'Dispatching push notification failed: {error}',
-                         [ 'error' => "Invalid request" ]
+                         'Dispatching JPush notification failed: {error}',
+                         [ 'error' => 'Invalid request' ]
+                     );
+
+        $this->class      = new JPushBatchResponse($this->http, $this->logger, $this->response, [ 'endpoint1' ], []);
+        $this->reflection = new ReflectionClass('Lunr\Vortex\JPush\JPushBatchResponse');
+
+        $this->assertPropertySame('logger', $this->logger);
+        $this->assertPropertyEquals('statuses', [ 'endpoint1' => PushNotificationStatus::ERROR ]);
+    }
+
+    /**
+     * Test constructor behavior for error of push notification in case of invalid JSON.
+     *
+     * @covers \Lunr\Vortex\JPush\JPushBatchResponse::__construct
+     */
+    public function testPushErrorWithUpstreamMessage(): void
+    {
+        $http_code = 400;
+        $content   = '{"error": {"message": "Field \"collapse_key\" must be a JSON string: 1463565451"}}';
+
+        $this->response->status_code = $http_code;
+        $this->response->body        = $content;
+
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with(
+                         'Dispatching JPush notification failed: {error}',
+                         [ 'error' => 'Field "collapse_key" must be a JSON string: 1463565451' ]
                      );
 
         $this->class      = new JPushBatchResponse($this->http, $this->logger, $this->response, [ 'endpoint1' ], []);
@@ -68,7 +95,7 @@ class JPushBatchResponseBasePushErrorTest extends JPushBatchResponseTest
         $this->logger->expects($this->once())
                      ->method('warning')
                      ->with(
-                         'Dispatching push notification failed: {error}',
+                         'Dispatching JPush notification failed: {error}',
                          [ 'error' => 'Error with authentication' ]
                      );
 
@@ -95,7 +122,7 @@ class JPushBatchResponseBasePushErrorTest extends JPushBatchResponseTest
         $this->logger->expects($this->once())
                      ->method('warning')
                      ->with(
-                         'Dispatching push notification failed: {error}',
+                         'Dispatching JPush notification failed: {error}',
                          [ 'error' => 'Error with configuration' ]
                      );
 
@@ -141,7 +168,7 @@ class JPushBatchResponseBasePushErrorTest extends JPushBatchResponseTest
         $this->logger->expects($this->once())
                      ->method('warning')
                      ->with(
-                         'Dispatching push notification failed: {error}',
+                         'Dispatching JPush notification failed: {error}',
                          [ 'error' => 'Internal error' ]
                      );
 
@@ -185,7 +212,7 @@ class JPushBatchResponseBasePushErrorTest extends JPushBatchResponseTest
         $this->logger->expects($this->once())
                      ->method('warning')
                      ->with(
-                         'Dispatching push notification failed: {error}',
+                         'Dispatching JPush notification failed: {error}',
                          [ 'error' => 'Unknown error' ]
                      );
 
@@ -207,7 +234,7 @@ class JPushBatchResponseBasePushErrorTest extends JPushBatchResponseTest
         $this->logger->expects($this->once())
                      ->method('warning')
                      ->with(
-                         'Dispatching push notification failed: {error}',
+                         'Dispatching JPush notification failed: {error}',
                          [ 'error' => 'Unknown error' ]
                      );
 

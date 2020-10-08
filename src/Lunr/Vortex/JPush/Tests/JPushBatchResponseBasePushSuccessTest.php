@@ -40,7 +40,7 @@ class JPushBatchResponseBasePushSuccessTest extends JPushBatchResponseTest
         $this->logger->expects($this->once())
                      ->method('warning')
                      ->with(
-                         'Dispatching push notification failed: {error}',
+                         'Dispatching JPush notification failed: {error}',
                          [ 'error' => 'Unknown error' ]
                      );
 

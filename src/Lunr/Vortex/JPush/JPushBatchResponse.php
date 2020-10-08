@@ -175,29 +175,36 @@ class JPushBatchResponse
      */
     private function report_error(&$endpoints, $response)
     {
+        $upstream_msg = NULL;
+        if (!empty($response->body))
+        {
+            $body         = json_decode($response->body, TRUE);
+            $upstream_msg = $body['error']['message'] ?? NULL;
+        }
+
         switch ($response->status_code)
         {
             case 400:
-                $error_message = 'Invalid request';
+                $error_message = $upstream_msg ?? 'Invalid request';
                 $status        = PushNotificationStatus::ERROR;
                 break;
             case 401:
-                $error_message = 'Error with authentication';
+                $error_message = $upstream_msg ?? 'Error with authentication';
                 $status        = PushNotificationStatus::ERROR;
                 break;
             case 403:
-                $error_message = 'Error with configuration';
+                $error_message = $upstream_msg ?? 'Error with configuration';
                 $status        = PushNotificationStatus::ERROR;
                 break;
             default:
-                $error_message = 'Unknown error';
+                $error_message = $upstream_msg ?? 'Unknown error';
                 $status        = PushNotificationStatus::UNKNOWN;
                 break;
         }
 
         if ($response->status_code >= 500)
         {
-            $error_message = 'Internal error';
+            $error_message = $upstream_msg ?? 'Internal error';
             $status        = PushNotificationStatus::TEMPORARY_ERROR;
         }
 
@@ -207,7 +214,7 @@ class JPushBatchResponse
         }
 
         $context = [ 'error' => $error_message ];
-        $this->logger->warning('Dispatching push notification failed: {error}', $context);
+        $this->logger->warning('Dispatching JPush notification failed: {error}', $context);
     }
 
     /**

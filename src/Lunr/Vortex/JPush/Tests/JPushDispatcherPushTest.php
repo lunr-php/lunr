@@ -177,6 +177,45 @@ class JPushDispatcherPushTest extends JPushDispatcherTest
     }
 
     /**
+     * Test that push() works as expected when the request failed.
+     *
+     * @covers \Lunr\Vortex\JPush\JPushDispatcher::push
+     */
+    public function testPushWithFailureResponse()
+    {
+        $endpoints = [ 'endpoint' ];
+        $url       = 'https://api.jpush.cn/v3/push';
+        $post      = '{"alert":"hello","audience":{"registration_id":["endpoint"]}}';
+        $payload   = ['alert' => 'hello'];
+
+        $this->payload->expects($this->exactly(1))
+                      ->method('get_payload')
+                      ->willReturn($payload);
+
+        $response = $this->getMockBuilder('Requests_Response')->getMock();
+        $response->success = FALSE;
+        $response->status_code = 400;
+
+        $this->http->expects($this->once())
+                   ->method('post')
+                   ->with($url, [], $post, [])
+                   ->will($this->returnValue($response));
+
+        $message = 'Dispatching JPush notification failed: {error}';
+        $context = [ 'error' => 'Invalid request' ];
+
+        $this->logger->expects($this->exactly(1))
+                     ->method('warning')
+                     ->with($message, $context);
+
+        $result = $this->class->push($this->payload, $endpoints);
+
+        $this->assertInstanceOf('Lunr\Vortex\JPush\JPushResponse', $result);
+
+        $this->assertSame(PushNotificationStatus::ERROR, $result->get_status('endpoint'));
+    }
+
+    /**
      * Test that push() sends correct request with no properties set except the endpoint.
      *
      * @covers \Lunr\Vortex\JPush\JPushDispatcher::push
