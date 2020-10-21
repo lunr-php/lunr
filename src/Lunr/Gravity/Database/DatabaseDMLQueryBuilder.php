@@ -426,7 +426,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a SELECT clause.
      *
-     * @param string $select The columns to select
+     * @param string|null $select The columns to select
      *
      * @return void
      */
@@ -437,7 +437,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             $this->select .= ', ';
         }
 
-        $this->select .= $select;
+        $this->select .= $select ?? 'NULL';
     }
 
     /**

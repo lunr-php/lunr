@@ -145,7 +145,7 @@ interface DMLQueryBuilderInterface
     /**
      * Define a SELECT clause.
      *
-     * @param string $select The columns to select
+     * @param string|null $select The columns to select
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */

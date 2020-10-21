@@ -117,7 +117,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a SELECT clause.
      *
-     * @param string $select The column(s) to select
+     * @param string|null $select The column(s) to select
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */

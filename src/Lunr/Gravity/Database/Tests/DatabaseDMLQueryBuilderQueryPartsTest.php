@@ -45,6 +45,23 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testSelectEmptyByDefault
      * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_select
      */
+    public function testInitialSelectWithNull(): void
+    {
+        $method = $this->get_accessible_reflection_method('sql_select');
+
+        $method->invokeArgs($this->class, [ NULL ]);
+
+        $string = 'NULL';
+
+        $this->assertPropertyEquals('select', $string);
+    }
+
+    /**
+     * Test specifying the select part of a query.
+     *
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testSelectEmptyByDefault
+     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_select
+     */
     public function testIncrementalSelect(): void
     {
         $method = $this->get_accessible_reflection_method('sql_select');
@@ -53,6 +70,24 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
         $method->invokeArgs($this->class, [ 'col' ]);
 
         $string = 'col, col';
+
+        $this->assertPropertyEquals('select', $string);
+    }
+
+    /**
+     * Test specifying the select part of a query.
+     *
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderBaseTest::testSelectEmptyByDefault
+     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_select
+     */
+    public function testIncrementalSelectNull(): void
+    {
+        $method = $this->get_accessible_reflection_method('sql_select');
+
+        $method->invokeArgs($this->class, [ 'col' ]);
+        $method->invokeArgs($this->class, [ NULL ]);
+
+        $string = 'col, NULL';
 
         $this->assertPropertyEquals('select', $string);
     }
