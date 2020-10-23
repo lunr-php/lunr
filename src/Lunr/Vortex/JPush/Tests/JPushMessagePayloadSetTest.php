@@ -16,13 +16,13 @@ namespace Lunr\Vortex\JPush\Tests;
  *
  * @covers \Lunr\Vortex\JPush\JPushPayload
  */
-class JPushPayloadSetTest extends JPushPayloadTest
+class JPushMessagePayloadSetTest extends JPushMessagePayloadTest
 {
 
     /**
      * Test set_collapse_key() works correctly.
      *
-     * @covers Lunr\Vortex\JPush\JPushPayload::set_collapse_key
+     * @covers \Lunr\Vortex\JPush\JPushPayload::set_collapse_key
      */
     public function testSetCollapseKey(): void
     {
@@ -37,7 +37,7 @@ class JPushPayloadSetTest extends JPushPayloadTest
     /**
      * Test fluid interface of set_collapse_key().
      *
-     * @covers Lunr\Vortex\JPush\JPushPayload::set_collapse_key
+     * @covers \Lunr\Vortex\JPush\JPushPayload::set_collapse_key
      */
     public function testSetCollapseKeyReturnsSelfReference(): void
     {
@@ -47,7 +47,7 @@ class JPushPayloadSetTest extends JPushPayloadTest
     /**
      * Test set_time_to_live() works correctly.
      *
-     * @covers Lunr\Vortex\JPush\JPushPayload::set_time_to_live
+     * @covers \Lunr\Vortex\JPush\JPushPayload::set_time_to_live
      */
     public function testSetTimeToLive(): void
     {
@@ -62,76 +62,11 @@ class JPushPayloadSetTest extends JPushPayloadTest
     /**
      * Test fluid interface of set_time_to_live().
      *
-     * @covers Lunr\Vortex\JPush\JPushPayload::set_time_to_live
+     * @covers \Lunr\Vortex\JPush\JPushPayload::set_time_to_live
      */
     public function testSetTimeToLiveReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_time_to_live('time_to_live'));
-    }
-
-    /**
-     * Test set_priority() works correctly.
-     *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::set_priority
-     */
-    public function testSetPriority(): void
-    {
-        $this->class->set_priority(1);
-
-        $value = $this->get_reflection_property_value('elements');
-
-        $this->assertArrayHasKey('priority', $value['notification']['android']);
-        $this->assertEquals(1, $value['notification']['android']['priority']);
-    }
-
-    /**
-     * Test set_priority() works correctly with an invalid priority.
-     *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::set_priority
-     */
-    public function testSetPriorityInvalid(): void
-    {
-        $this->class->set_priority('cow');
-
-        $value = $this->get_reflection_property_value('elements');
-
-        $this->assertArrayHasKey('priority', $value['notification']['android']);
-        $this->assertEquals(2, $value['notification']['android']['priority']);
-    }
-
-    /**
-     * Test fluid interface of set_priority().
-     *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::set_priority
-     */
-    public function testSetPriorityReturnsSelfReference(): void
-    {
-        $this->assertSame($this->class, $this->class->set_priority('high'));
-    }
-
-    /**
-     * Test set_mutable_content() works correctly.
-     *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::set_mutable_content
-     */
-    public function testSetMutableContent(): void
-    {
-        $this->class->set_mutable_content(TRUE);
-
-        $value = $this->get_reflection_property_value('elements');
-
-        $this->assertArrayHasKey('mutable-content', $value['notification']['ios']);
-        $this->assertEquals(TRUE, $value['notification']['ios']['mutable-content']);
-    }
-
-    /**
-     * Test fluid interface of set_mutable_content().
-     *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::set_mutable_content
-     */
-    public function testSetMutableContentReturnsSelfReference(): void
-    {
-        $this->assertSame($this->class, $this->class->set_mutable_content(TRUE));
     }
 
     /**
@@ -147,6 +82,7 @@ class JPushPayloadSetTest extends JPushPayloadTest
 
         $this->assertArrayHasKey('extras', $value['notification']['android']);
         $this->assertEquals([ 'key' => 'value' ], $value['notification']['android']['extras']);
+        $this->assertEquals([ 'key' => 'value' ], $value['message']['extras']);
     }
 
     /**
@@ -157,31 +93,6 @@ class JPushPayloadSetTest extends JPushPayloadTest
     public function testSetDataReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_data('data'));
-    }
-
-    /**
-     * Test set_content_available() works correctly.
-     *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::set_content_available
-     */
-    public function testSetContentAvailable(): void
-    {
-        $this->class->set_content_available(TRUE);
-
-        $value = $this->get_reflection_property_value('elements');
-
-        $this->assertArrayHasKey('content-available', $value['notification']['ios']);
-        $this->assertEquals(TRUE, $value['notification']['ios']['content-available']);
-    }
-
-    /**
-     * Test fluid interface of set_content_available().
-     *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::set_content_available
-     */
-    public function testSetContentAvailableReturnsSelfReference(): void
-    {
-        $this->assertSame($this->class, $this->class->set_content_available(TRUE));
     }
 
     /**
@@ -222,6 +133,7 @@ class JPushPayloadSetTest extends JPushPayloadTest
 
         $this->assertArrayHasKey('alert', $value['notification']['android']);
         $this->assertEquals('BODY', $value['notification']['android']['alert']);
+        $this->assertEquals('BODY', $value['message']['msg_content']);
     }
 
     /**
@@ -247,6 +159,7 @@ class JPushPayloadSetTest extends JPushPayloadTest
 
         $this->assertArrayHasKey('title', $value['notification']['android']);
         $this->assertEquals('Title', $value['notification']['android']['title']);
+        $this->assertEquals('Title', $value['message']['title']);
     }
 
     /**
@@ -272,6 +185,7 @@ class JPushPayloadSetTest extends JPushPayloadTest
 
         $this->assertArrayHasKey('category', $value['notification']['android']);
         $this->assertEquals('cats', $value['notification']['android']['category']);
+        $this->assertEquals('cats', $value['message']['content_type']);
     }
 
     /**
@@ -285,34 +199,9 @@ class JPushPayloadSetTest extends JPushPayloadTest
     }
 
     /**
-     * Test set_sound() works correctly.
-     *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::set_sound
-     */
-    public function testSetSound(): void
-    {
-        $this->class->set_sound('sound');
-
-        $value = $this->get_reflection_property_value('elements');
-
-        $this->assertArrayHasKey('sound', $value['notification']['android']);
-        $this->assertEquals('sound', $value['notification']['android']['sound']);
-    }
-
-    /**
-     * Test fluid interface of set_sound().
-     *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::set_sound
-     */
-    public function testSetSoundReturnsSelfReference(): void
-    {
-        $this->assertSame($this->class, $this->class->set_sound('sound'));
-    }
-
-    /**
      * Test set_content_available() works correctly.
      *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::set_content_available
+     * @covers \Lunr\Vortex\JPush\JPushPayload::set_options
      */
     public function testSetOptions()
     {
@@ -328,7 +217,7 @@ class JPushPayloadSetTest extends JPushPayloadTest
     /**
      * Test fluid interface of set_content_available().
      *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::set_content_available
+     * @covers \Lunr\Vortex\JPush\JPushPayload::set_options
      */
     public function testSetOptionsReturnsSelfReference()
     {

@@ -16,20 +16,20 @@ namespace Lunr\Vortex\JPush\Tests;
  *
  * @covers \Lunr\Vortex\JPush\JPushNotificationPayload
  */
-class JPushPayloadBaseTest extends JPushPayloadTest
+class JPushNotificationPayloadBaseTest extends JPushNotificationPayloadTest
 {
 
     /**
-     * Test elements is initialized.
-     *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::__construct
+     * Test elements is initialized with high priority.
      */
-    public function testElementsIsInitialized(): void
+    public function testElementsIsInitializedWithHighPriority(): void
     {
         $this->assertPropertySame('elements', [
             'platform' => [ 'ios', 'android' ],
             'audience' => [],
-            'notification' => [],
+            'notification' => [
+                'android' => [ 'priority' => 2 ],
+            ],
             'message' => []
         ]);
     }

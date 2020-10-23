@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains functionality to generate JPush Notification payloads.
+ * This file contains functionality to generate JPush payloads.
  *
  * @package    Lunr\Vortex\JPush
  * @author     Sean Molenaar <s.molenaar@m2mobi.com>
@@ -11,12 +11,10 @@
 
 namespace Lunr\Vortex\JPush;
 
-use ReflectionClass;
-
 /**
- * JPush Notification Payload Generator.
+ * JPush Payload Generator.
  */
-class JPushPayload
+abstract class JPushPayload
 {
 
     /**
@@ -41,8 +39,7 @@ class JPushPayload
         $this->elements['platform']     = self::PLATFORMS;
         $this->elements['audience']     = [];
         $this->elements['notification'] = [];
-
-        $this->set_priority(JPushPriority::HIGH);
+        $this->elements['message'] = [];
     }
 
     /**
@@ -58,10 +55,7 @@ class JPushPayload
      *
      * @return array JPushPayload
      */
-    public function get_payload()
-    {
-        return $this->elements;
-    }
+    public abstract function get_payload();
 
     /**
      * Sets the notification identifier.
@@ -86,7 +80,8 @@ class JPushPayload
      */
     public function set_body($message)
     {
-        return $this->set_notification_data('alert', $message);
+        return $this->set_message_data('msg_content', $message)
+                    ->set_notification_data('alert', $message);
     }
 
     /**
@@ -98,7 +93,8 @@ class JPushPayload
      */
     public function set_title($message)
     {
-        return $this->set_notification_data('title', $message, ['android']);
+        return $this->set_message_data('title', $message)
+                    ->set_notification_data('title', $message, ['android']);
     }
 
     /**
@@ -112,7 +108,8 @@ class JPushPayload
      */
     public function set_data($data)
     {
-        return $this->set_notification_data('extras', $data);
+        return $this->set_message_data('extras', $data)
+                    ->set_notification_data('extras', $data);
     }
 
     /**
@@ -124,62 +121,8 @@ class JPushPayload
      */
     public function set_category($category)
     {
-        return $this->set_notification_data('category', $category);
-    }
-
-    /**
-     * Sets the payload sound data.
-     *
-     * @param string $sound The notification sound
-     *
-     * @return JPushPayload Self Reference
-     */
-    public function set_sound($sound)
-    {
-        return $this->set_notification_data('sound', $sound);
-    }
-
-    /**
-     * Sets the notification as providing content.
-     *
-     * @param boolean $val Value for the "content_available" field.
-     *
-     * @return JPushPayload Self Reference
-     */
-    public function set_content_available($val)
-    {
-        return $this->set_notification_data('content-available', $val, ['ios']);
-    }
-
-    /**
-     * Mark the notification as mutable.
-     *
-     * @param boolean $mutable Notification mutable_content value.
-     *
-     * @return JPushPayload Self Reference
-     */
-    public function set_mutable_content($mutable)
-    {
-        return $this->set_notification_data('mutable-content', $mutable, ['ios']);
-    }
-
-    /**
-     * Mark the notification priority.
-     *
-     * @param JPushPriority $priority Notification priority value.
-     *
-     * @return JPushPayload Self Reference
-     */
-    public function set_priority($priority)
-    {
-        $priority_class = new ReflectionClass('\Lunr\Vortex\JPush\JPushPriority');
-        $priorities     = array_values($priority_class->getConstants());
-        if (in_array($priority, $priorities, TRUE))
-        {
-            $this->set_notification_data('priority', $priority, ['android']);
-        }
-
-        return $this;
+        return $this->set_message_data('content_type', $category)
+                    ->set_notification_data('category', $category);
     }
 
     /**
@@ -245,12 +188,27 @@ class JPushPayload
      *
      * @return JPushPayload Self Reference
      */
-    public function set_notification_data($key, $value, $platforms = self::PLATFORMS)
+    protected function set_notification_data($key, $value, $platforms = self::PLATFORMS)
     {
         foreach ($platforms as $platform)
         {
             $this->elements['notification'][$platform][$key] = $value;
         }
+
+        return $this;
+    }
+
+    /**
+     * Set notification value for one or more platforms.
+     *
+     * @param string   $key       The key in the notification->platform object.
+     * @param mixed    $value     The value accompanying that key.
+     *
+     * @return JPushPayload Self Reference
+     */
+    protected function set_message_data($key, $value)
+    {
+        $this->elements['message'][$key] = $value;
 
         return $this;
     }

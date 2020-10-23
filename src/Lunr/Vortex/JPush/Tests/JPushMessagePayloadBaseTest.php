@@ -16,13 +16,13 @@ namespace Lunr\Vortex\JPush\Tests;
  *
  * @covers \Lunr\Vortex\JPush\JPushNotificationPayload
  */
-class JPushPayloadBaseTest extends JPushPayloadTest
+class JPushMessagePayloadBaseTest extends JPushMessagePayloadTest
 {
 
     /**
      * Test elements is initialized.
      *
-     * @covers \Lunr\Vortex\JPush\JPushPayload::__construct
+     * @covers \Lunr\Vortex\JPush\JPushMessagePayload::__construct
      */
     public function testElementsIsInitialized(): void
     {

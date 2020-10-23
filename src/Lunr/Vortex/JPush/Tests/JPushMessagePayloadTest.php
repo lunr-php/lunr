@@ -12,6 +12,8 @@
 namespace Lunr\Vortex\JPush\Tests;
 
 use Lunr\Halo\LunrBaseTest;
+use Lunr\Vortex\JPush\JPushMessagePayload;
+use Lunr\Vortex\JPush\JPushNotificationPayload;
 use Lunr\Vortex\JPush\JPushPayload;
 use ReflectionClass;
 
@@ -21,7 +23,7 @@ use ReflectionClass;
  *
  * @covers Lunr\Vortex\JPush\JPushPayload
  */
-class JPushPayloadTest extends LunrBaseTest
+class JPushMessagePayloadTest extends LunrBaseTest
 {
 
     /**
@@ -47,10 +49,9 @@ class JPushPayloadTest extends LunrBaseTest
 
         $this->payload = json_encode($elements_array);
 
-        $this->class = $this->getMockBuilder('Lunr\Vortex\JPush\JPushPayload')
-                            ->getMockForAbstractClass();
+        $this->class = new JPushMessagePayload();
 
-        $this->reflection = new ReflectionClass('Lunr\Vortex\JPush\JPushPayload');
+        $this->reflection = new ReflectionClass('Lunr\Vortex\JPush\JPushMessagePayload');
     }
 
     /**
