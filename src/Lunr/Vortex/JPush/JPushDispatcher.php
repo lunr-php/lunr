@@ -167,7 +167,7 @@ class JPushDispatcher implements PushNotificationMultiDispatcherInterface
             }
         }
 
-        return $this->get_batch_response($http_response, $endpoints, json_encode($tmp_payload));
+        return $this->get_batch_response($http_response, $endpoints, $tmp_payload);
     }
 
     /**
