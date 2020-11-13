@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the ApiSetSpaceIdTest class.
+ * This file contains the ApiSetTest class.
  *
  * @package    Lunr\Spark\Contentful
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
@@ -20,7 +20,7 @@ use ReflectionClass;
  *
  * @covers Lunr\Spark\Contentful\Api
  */
-class ApiSetSpaceIdTest extends DeliveryApiTest
+class ApiSetTest extends ApiTest
 {
 
     /**
@@ -43,6 +43,28 @@ class ApiSetSpaceIdTest extends DeliveryApiTest
     public function testSetSpaceIdReturnsSelfReference(): void
     {
         $this->assertSame($this->class, $this->class->set_space_id('space'));
+    }
+
+    /**
+     * Test that set_environment() sets the environment correctly.
+     *
+     * @covers Lunr\Spark\Contentful\Api::set_environment
+     */
+    public function testSetEnvironmentSetsEnvironment(): void
+    {
+        $this->class->set_environment('master');
+
+        $this->assertPropertyEquals('environment', 'master');
+    }
+
+    /**
+     * Test the fluid interface of set_environment().
+     *
+     * @covers Lunr\Spark\Contentful\Api::set_environment
+     */
+    public function testSetEnvironmentReturnsSelfReference(): void
+    {
+        $this->assertSame($this->class, $this->class->set_environment('master'));
     }
 
 }

@@ -34,7 +34,7 @@ class ManagementApiUpdateEntryTest extends ManagementApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $url     = 'https://api.contentful.com/spaces//entries/123456';
+        $url     = 'https://api.contentful.com/entries/123456';
         $headers = [
             'X-Contentful-Version' => 7,
             'Authorization'        => 'Bearer token',
@@ -74,7 +74,7 @@ class ManagementApiUpdateEntryTest extends ManagementApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $url     = 'https://api.contentful.com/spaces//entries/123456';
+        $url     = 'https://api.contentful.com/entries/123456';
         $headers = [
             'X-Contentful-Version' => 7,
             'Authorization'        => 'Bearer token',

@@ -34,7 +34,7 @@ class ManagementApiUnpublishEntryTest extends ManagementApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $url     = 'https://api.contentful.com/spaces//entries/123456/published';
+        $url     = 'https://api.contentful.com/entries/123456/published';
         $headers = [ 'Authorization' => 'Bearer token' ];
 
         $this->http->expects($this->once())
@@ -71,7 +71,7 @@ class ManagementApiUnpublishEntryTest extends ManagementApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $url     = 'https://api.contentful.com/spaces//entries/123456/published';
+        $url     = 'https://api.contentful.com/entries/123456/published';
         $headers = [ 'Authorization' => 'Bearer token' ];
 
         $this->http->expects($this->once())

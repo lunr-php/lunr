@@ -21,6 +21,12 @@ class Api
 {
 
     /**
+     * Contentful URL.
+     * @var String
+     */
+    const URL = 'https://www.contentful.com';
+
+    /**
      * Shared instance of the CentralAuthenticationStore
      * @var \Lunr\Spark\CentralAuthenticationStore
      */
@@ -45,6 +51,12 @@ class Api
     protected $space;
 
     /**
+     * Environment
+     * @var String
+     */
+    protected $environment;
+
+    /**
      * Constructor.
      *
      * @param \Lunr\Spark\CentralAuthenticationStore $cas    Shared instance of the credentials store
@@ -53,10 +65,11 @@ class Api
      */
     public function __construct($cas, $logger, $http)
     {
-        $this->cas    = $cas;
-        $this->logger = $logger;
-        $this->http   = $http;
-        $this->space  = '';
+        $this->cas         = $cas;
+        $this->logger      = $logger;
+        $this->http        = $http;
+        $this->space       = '';
+        $this->environment = '';
     }
 
     /**
@@ -68,6 +81,7 @@ class Api
         unset($this->logger);
         unset($this->http);
         unset($this->space);
+        unset($this->environment);
     }
 
     /**
@@ -120,6 +134,42 @@ class Api
         $this->space = $space_id;
 
         return $this;
+    }
+
+    /**
+     * Set contentful environment.
+     *
+     * @param string $environment Content environment
+     *
+     * @return Api $self Self Reference
+     */
+    public function set_environment($environment)
+    {
+        $this->environment = $environment;
+
+        return $this;
+    }
+
+    /**
+     * Get base URL
+     *
+     * @return string
+     */
+    protected function get_base_url()
+    {
+        $url = static::URL;
+
+        if (!empty($this->space))
+        {
+            $url .= '/spaces/' . $this->space;
+        }
+
+        if (!empty($this->environment))
+        {
+            $url .= '/environments/' . $this->environment;
+        }
+
+        return $url;
     }
 
 }

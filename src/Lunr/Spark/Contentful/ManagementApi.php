@@ -24,7 +24,7 @@ class ManagementApi extends Api
      * Content Management API URL.
      * @var String
      */
-    const URL = 'https://api.contentful.com/spaces/';
+    const URL = 'https://api.contentful.com';
 
     /**
      * Constructor.
@@ -57,7 +57,7 @@ class ManagementApi extends Api
     public function create_entry($type, $data)
     {
         return $this->get_json_results(
-            static::URL . $this->space . '/entries',
+            $this->get_base_url() . '/entries',
             [ 'X-Contentful-Content-Type' => $type ],
             json_encode($data),
             Requests::POST
@@ -74,7 +74,7 @@ class ManagementApi extends Api
     public function get_entry($id)
     {
         return $this->get_json_results(
-            static::URL . $this->space . '/entries/' . $id,
+            $this->get_base_url() . '/entries/' . $id,
             [],
             [],
             Requests::GET
@@ -93,7 +93,7 @@ class ManagementApi extends Api
     public function update_entry($id, $current_version, $data)
     {
         return $this->get_json_results(
-            static::URL . $this->space . '/entries/' . $id,
+            $this->get_base_url() . '/entries/' . $id,
             [ 'X-Contentful-Version' => $current_version ],
             json_encode($data),
             Requests::PUT
@@ -111,7 +111,7 @@ class ManagementApi extends Api
     public function publish_entry($id, $current_version)
     {
         return $this->get_json_results(
-            static::URL . $this->space . '/entries/' . $id . '/published',
+            $this->get_base_url() . '/entries/' . $id . '/published',
             [ 'X-Contentful-Version' => $current_version ],
             [],
             Requests::PUT
@@ -128,7 +128,7 @@ class ManagementApi extends Api
     public function unpublish_entry($id)
     {
         return $this->get_json_results(
-            static::URL . $this->space . '/entries/' . $id . '/published',
+            $this->get_base_url() . '/entries/' . $id . '/published',
             [],
             [],
             Requests::DELETE

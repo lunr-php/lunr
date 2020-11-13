@@ -34,7 +34,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $url    = 'https://cdn.contentful.com/spaces//entries';
+        $url    = 'https://cdn.contentful.com/entries';
         $params = [ 'access_token' => 'token', 'content_type' => 'foo' ];
 
         $this->http->expects($this->once())
@@ -47,7 +47,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
                        ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
 
         $this->response->status_code = 400;
-        $this->response->url         = 'https://cdn.contentful.com/spaces//entries';
+        $this->response->url         = 'https://cdn.contentful.com/entries';
 
         $body = [
             'message' => 'Some error',
@@ -60,7 +60,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
 
         $context = [
             'message' => 'Some error',
-            'request' => 'https://cdn.contentful.com/spaces//entries',
+            'request' => 'https://cdn.contentful.com/entries',
             'id'      => 'Some ID',
         ];
 
@@ -87,7 +87,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $url    = 'https://cdn.contentful.com/spaces//entries';
+        $url    = 'https://cdn.contentful.com/entries';
         $params = [ 'field.urlName[match]' => 'bar', 'access_token' => 'token', 'content_type' => 'foo' ];
 
         $this->http->expects($this->once())
@@ -100,7 +100,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
                        ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
 
         $this->response->status_code = 400;
-        $this->response->url         = 'https://cdn.contentful.com/spaces//entries';
+        $this->response->url         = 'https://cdn.contentful.com/entries';
 
         $body = [
             'message' => 'Some error',
@@ -113,7 +113,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
 
         $context = [
             'message' => 'Some error',
-            'request' => 'https://cdn.contentful.com/spaces//entries',
+            'request' => 'https://cdn.contentful.com/entries',
             'id'      => 'Some ID',
         ];
 
@@ -140,7 +140,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $url    = 'https://cdn.contentful.com/spaces//entries';
+        $url    = 'https://cdn.contentful.com/entries';
         $params = [ 'access_token' => 'token', 'content_type' => 'foo' ];
 
         $this->http->expects($this->once())
@@ -151,11 +151,11 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
         $this->response->expects($this->never())
                        ->method('throw_for_status');
 
-        $this->response->url = 'https://cdn.contentful.com/spaces//entries';
+        $this->response->url = 'https://cdn.contentful.com/entries';
 
         $context = [
             'message' => 'cURL error 0001: Network error',
-            'request' => 'https://cdn.contentful.com/spaces//entries',
+            'request' => 'https://cdn.contentful.com/entries',
         ];
 
         $this->logger->expects($this->once())
@@ -181,7 +181,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $url    = 'https://cdn.contentful.com/spaces//entries';
+        $url    = 'https://cdn.contentful.com/entries';
         $params = [ 'field.urlName[match]' => 'bar', 'access_token' => 'token', 'content_type' => 'foo' ];
 
         $this->http->expects($this->once())
@@ -192,11 +192,11 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
         $this->response->expects($this->never())
                        ->method('throw_for_status');
 
-        $this->response->url = 'https://cdn.contentful.com/spaces//entries';
+        $this->response->url = 'https://cdn.contentful.com/entries';
 
         $context = [
             'message' => 'cURL error 0001: Network error',
-            'request' => 'https://cdn.contentful.com/spaces//entries',
+            'request' => 'https://cdn.contentful.com/entries',
         ];
 
         $this->logger->expects($this->once())
@@ -227,7 +227,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $url    = 'https://cdn.contentful.com/spaces//entries';
+        $url    = 'https://cdn.contentful.com/entries';
         $params = [ 'access_token' => 'token', 'content_type' => 'foo' ];
 
         $this->http->expects($this->once())
@@ -260,7 +260,7 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
                   ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
                   ->will($this->returnValue('token'));
 
-        $url    = 'https://cdn.contentful.com/spaces//entries';
+        $url    = 'https://cdn.contentful.com/entries';
         $params = [ 'field.urlName[match]' => 'bar', 'access_token' => 'token', 'content_type' => 'foo' ];
 
         $this->http->expects($this->once())

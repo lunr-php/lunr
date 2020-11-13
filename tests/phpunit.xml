@@ -239,7 +239,8 @@
             <file>../src/Lunr/Spark/Tests/CentralAuthenticationStoreBaseTest.php</file>
             <file>../src/Lunr/Spark/Tests/LunrSoapClientInitTest.php</file>
             <file>../src/Lunr/Spark/Tests/LunrSoapClientHeaderTest.php</file>
-            <file>../src/Lunr/Spark/Contentful/Tests/ApiSetSpaceIdTest.php</file>
+            <file>../src/Lunr/Spark/Contentful/Tests/ApiSetTest.php</file>
+            <file>../src/Lunr/Spark/Contentful/Tests/ApiGetBaseUrlTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/ApiBaseTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/DeliveryApiBaseTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/DeliveryApiGetJsonResultsTest.php</file>

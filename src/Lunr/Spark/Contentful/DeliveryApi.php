@@ -24,7 +24,7 @@ class DeliveryApi extends Api
      * Content Delivery API URL.
      * @var String
      */
-    const URL = 'https://cdn.contentful.com/spaces/';
+    const URL = 'https://cdn.contentful.com';
 
     /**
      * Constructor.
@@ -59,7 +59,7 @@ class DeliveryApi extends Api
         $filters['access_token'] = $this->access_token;
         $filters['content_type'] = $type;
 
-        $url = static::URL . $this->space . '/entries';
+        $url = $this->get_base_url() . '/entries';
 
         $values = $this->get_json_results($url, $filters);
 
@@ -77,7 +77,7 @@ class DeliveryApi extends Api
     {
         $filters['access_token'] = $this->access_token;
 
-        $url = static::URL . $this->space . '/assets';
+        $url = $this->get_base_url() . '/assets';
 
         $values = $this->get_json_results($url, $filters);
 
