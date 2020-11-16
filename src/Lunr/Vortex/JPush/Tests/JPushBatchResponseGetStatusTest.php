@@ -101,7 +101,7 @@ class JPushBatchResponseGetStatusTest extends JPushBatchResponseTest
     public function testGetStatus($statuses, $status): void
     {
         $this->set_reflection_property_value('statuses', $statuses);
-        $this->set_reflection_property_value('message_id', 'fdshjdsfhjk');
+        $this->set_reflection_property_value('message_id', 1453658564165);
 
         $result = $this->class->get_status('endpoint_param');
 
@@ -116,18 +116,18 @@ class JPushBatchResponseGetStatusTest extends JPushBatchResponseTest
     public function testGetStatusWillFetchUpstreamFails(): void
     {
         $this->set_reflection_property_value('statuses', []);
-        $this->set_reflection_property_value('message_id', 'fdshjdsfhjk');
+        $this->set_reflection_property_value('message_id', 1453658564165);
 
         $report_response = $this->getMockBuilder('Requests_Response')->getMock();
 
-        $content = '{"msg_id": "fdshjdsfhjk"}';
+        $content = '{"msg_id": "1453658564165"}';
 
         $this->response->success = TRUE;
         $this->response->body    = $content;
 
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with('https://report.jpush.cn/v3/status/message', [], ['msg_id' => 'fdshjdsfhjk', 'registration_ids' => ['endpoint1']], [])
+                   ->with('https://report.jpush.cn/v3/status/message', [], '{"msg_id":1453658564165,"registration_ids":["endpoint1"]}', [])
                    ->will($this->returnValue($report_response));
 
         $report_response->expects($this->once())
@@ -147,11 +147,11 @@ class JPushBatchResponseGetStatusTest extends JPushBatchResponseTest
     public function testGetStatusWillFetchUpstreamSingle(): void
     {
         $this->set_reflection_property_value('statuses', []);
-        $this->set_reflection_property_value('message_id', 'fdshjdsfhjk');
+        $this->set_reflection_property_value('message_id', 1453658564165);
 
         $report_response = $this->getMockBuilder('Requests_Response')->getMock();
 
-        $content = '{"msg_id": "fdshjdsfhjk"}';
+        $content = '{"msg_id": "1453658564165"}';
 
         $this->response->success = TRUE;
         $this->response->body    = $content;
@@ -161,7 +161,7 @@ class JPushBatchResponseGetStatusTest extends JPushBatchResponseTest
 
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with('https://report.jpush.cn/v3/status/message', [], ['msg_id' => 'fdshjdsfhjk', 'registration_ids' => ['endpoint1']], [])
+                   ->with('https://report.jpush.cn/v3/status/message', [], '{"msg_id":1453658564165,"registration_ids":["endpoint1"]}', [])
                    ->will($this->returnValue($report_response));
 
         $report_response->expects($this->once())

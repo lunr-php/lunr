@@ -64,7 +64,7 @@ class JPushBatchResponseBasePushSuccessTest extends JPushBatchResponseTest
      */
     public function testPushSuccessWithSingleSuccess(): void
     {
-        $content = ['msg_id' => 'dasfjksjkf'];
+        $content = ['msg_id' => '121654513215'];
 
         $this->response->success     = TRUE;
         $this->response->body        = json_encode($content);
@@ -79,7 +79,7 @@ class JPushBatchResponseBasePushSuccessTest extends JPushBatchResponseTest
 
         $this->assertPropertySame('logger', $this->logger);
         $this->assertPropertyEquals('statuses', []);
-        $this->assertPropertyEquals('message_id', 'dasfjksjkf');
+        $this->assertPropertyEquals('message_id', 121654513215);
     }
 
     /**
@@ -89,7 +89,7 @@ class JPushBatchResponseBasePushSuccessTest extends JPushBatchResponseTest
      */
     public function testPushSuccessWithMultipleSuccess(): void
     {
-        $content = ['msg_id' => 'dasfjksjkf'];
+        $content = ['msg_id' => '121654513215'];
 
         $this->response->success     = TRUE;
         $this->response->body        = json_encode($content);
@@ -104,7 +104,7 @@ class JPushBatchResponseBasePushSuccessTest extends JPushBatchResponseTest
 
         $this->assertPropertySame('logger', $this->logger);
         $this->assertPropertyEquals('statuses', []);
-        $this->assertPropertyEquals('message_id', 'dasfjksjkf');
+        $this->assertPropertyEquals('message_id', 121654513215);
     }
 
 }

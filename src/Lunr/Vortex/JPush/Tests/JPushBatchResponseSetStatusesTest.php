@@ -12,7 +12,6 @@
 namespace Lunr\Vortex\JPush\Tests;
 
 use Lunr\Vortex\JPush\JPushBatchResponse;
-use Lunr\Vortex\PushNotificationStatus;
 
 use ReflectionClass;
 
@@ -49,19 +48,19 @@ class JPushBatchResponseSetStatusesTest extends JPushBatchResponseTest
      */
     public function testSetStatusesWillFetchUpstreamFails(): void
     {
-        $this->set_reflection_property_value('message_id', 'fdshjdsfhjk');
+        $this->set_reflection_property_value('message_id', 1453658564165);
         $this->set_reflection_property_value('endpoints', ['endpoint1']);
 
         $report_response = $this->getMockBuilder('Requests_Response')->getMock();
 
-        $content = '{"msg_id": "fdshjdsfhjk"}';
+        $content = '{"msg_id": "1453658564165"}';
 
         $this->response->success = TRUE;
         $this->response->body    = $content;
 
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with('https://report.jpush.cn/v3/status/message', [], ['msg_id' => 'fdshjdsfhjk', 'registration_ids' => ['endpoint1']], [])
+                   ->with('https://report.jpush.cn/v3/status/message', [], '{"msg_id":1453658564165,"registration_ids":["endpoint1"]}', [])
                    ->will($this->returnValue($report_response));
 
         $report_response->expects($this->once())
@@ -81,12 +80,12 @@ class JPushBatchResponseSetStatusesTest extends JPushBatchResponseTest
      */
     public function testSetStatusesWillFetchUpstreamSingle(): void
     {
-        $this->set_reflection_property_value('message_id', 'fdshjdsfhjk');
+        $this->set_reflection_property_value('message_id', 1453658564165);
         $this->set_reflection_property_value('endpoints', ['endpoint1']);
 
         $report_response = $this->getMockBuilder('Requests_Response')->getMock();
 
-        $content = '{"msg_id": "fdshjdsfhjk"}';
+        $content = '{"msg_id": "1453658564165"}';
 
         $this->response->success = TRUE;
         $this->response->body    = $content;
@@ -96,7 +95,7 @@ class JPushBatchResponseSetStatusesTest extends JPushBatchResponseTest
 
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with('https://report.jpush.cn/v3/status/message', [], ['msg_id' => 'fdshjdsfhjk', 'registration_ids' => ['endpoint1']], [])
+                   ->with('https://report.jpush.cn/v3/status/message', [], '{"msg_id":1453658564165,"registration_ids":["endpoint1"]}', [])
                    ->will($this->returnValue($report_response));
 
         $report_response->expects($this->once())
@@ -121,12 +120,12 @@ class JPushBatchResponseSetStatusesTest extends JPushBatchResponseTest
      */
     public function testSetStatusesWillFetchUpstreamSingleError($endpoint_return, $status, $message): void
     {
-        $this->set_reflection_property_value('message_id', 'fdshjdsfhjk');
+        $this->set_reflection_property_value('message_id', 1453658564165);
         $this->set_reflection_property_value('endpoints', ['endpoint1']);
 
         $report_response = $this->getMockBuilder('Requests_Response')->getMock();
 
-        $content = '{"msg_id": "fdshjdsfhjk"}';
+        $content = '{"msg_id": "1453658564165"}';
 
         $this->response->success = TRUE;
         $this->response->body    = $content;
@@ -136,7 +135,7 @@ class JPushBatchResponseSetStatusesTest extends JPushBatchResponseTest
 
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with('https://report.jpush.cn/v3/status/message', [], ['msg_id' => 'fdshjdsfhjk', 'registration_ids' => ['endpoint1']], [])
+                   ->with('https://report.jpush.cn/v3/status/message', [], '{"msg_id":1453658564165,"registration_ids":["endpoint1"]}', [])
                    ->will($this->returnValue($report_response));
 
         $report_response->expects($this->once())
@@ -161,12 +160,12 @@ class JPushBatchResponseSetStatusesTest extends JPushBatchResponseTest
     public function testSetStatusesWillFetchUpstreamMixedErrorSuccess(): void
     {
         $endpoints = ['endpoint1', 'endpoint2', 'endpoint3', 'endpoint4', 'endpoint5', 'endpoint6', 'endpoint7'];
-        $this->set_reflection_property_value('message_id', 'fdshjdsfhjk');
+        $this->set_reflection_property_value('message_id', 1453658564165);
         $this->set_reflection_property_value('endpoints', $endpoints);
 
         $report_response = $this->getMockBuilder('Requests_Response')->getMock();
 
-        $content = '{"msg_id": "fdshjdsfhjk"}';
+        $content = '{"msg_id": "1453658564165"}';
 
         $this->response->success = TRUE;
         $this->response->body    = $content;
@@ -177,36 +176,23 @@ class JPushBatchResponseSetStatusesTest extends JPushBatchResponseTest
 
         $this->http->expects($this->once())
                    ->method('post')
-                   ->with('https://report.jpush.cn/v3/status/message', [], ['msg_id' => 'fdshjdsfhjk', 'registration_ids' => $endpoints], [])
+                   ->with('https://report.jpush.cn/v3/status/message', [], '{"msg_id":1453658564165,"registration_ids":["endpoint1","endpoint2","endpoint3","endpoint4","endpoint5","endpoint6","endpoint7"]}', [])
                    ->will($this->returnValue($report_response));
 
         $report_response->expects($this->once())
                         ->method('throw_for_status');
 
         $log_message = 'Dispatching push notification failed for endpoint {endpoint}: {error}';
-        $this->logger->expects($this->at(0))
+        $this->logger->expects($this->exactly(6))
                      ->method('warning')
-                     ->with($log_message, ['endpoint' => 'endpoint1','error' => 'Not delivered']);
-
-        $this->logger->expects($this->at(1))
-                     ->method('warning')
-                     ->with($log_message, ['endpoint' => 'endpoint2','error' => 'Registration_id does not belong to the application']);
-
-        $this->logger->expects($this->at(2))
-                     ->method('warning')
-                     ->with($log_message, ['endpoint' => 'endpoint3','error' => 'Registration_id belongs to the application, but it is not the target of the message']);
-
-        $this->logger->expects($this->at(3))
-                     ->method('warning')
-                     ->with($log_message, ['endpoint' => 'endpoint4','error' => 'The system is abnormal']);
-
-        $this->logger->expects($this->at(4))
-                     ->method('warning')
-                     ->with($log_message, ['endpoint' => 'endpoint5','error' => 5]);
-
-        $this->logger->expects($this->at(5))
-                     ->method('warning')
-                     ->with($log_message, ['endpoint' => 'endpoint6','error' => 6]);
+                     ->withConsecutive(
+                         [$log_message, ['endpoint' => 'endpoint1','error' => 'Not delivered']],
+                         [$log_message, ['endpoint' => 'endpoint2','error' => 'Registration_id does not belong to the application']],
+                         [$log_message, ['endpoint' => 'endpoint3','error' => 'Registration_id belongs to the application, but it is not the target of the message']],
+                         [$log_message, ['endpoint' => 'endpoint4','error' => 'The system is abnormal']],
+                         [$log_message, ['endpoint' => 'endpoint5','error' => 5]],
+                         [$log_message, ['endpoint' => 'endpoint6','error' => 6]]
+                     );
 
         $method = $this->get_accessible_reflection_method('set_statuses');
         $result = $method->invokeArgs($this->class, []);
@@ -223,7 +209,7 @@ class JPushBatchResponseSetStatusesTest extends JPushBatchResponseTest
         ]);
     }
 
-    public function endpointErrorProvider()
+    public function endpointErrorProvider(): array
     {
         $return = [];
 

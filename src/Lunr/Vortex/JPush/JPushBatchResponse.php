@@ -93,7 +93,7 @@ class JPushBatchResponse
             return;
         }
 
-        $this->message_id = $json_content['msg_id'];
+        $this->message_id = (int) $json_content['msg_id'];
     }
 
     /**
@@ -124,7 +124,7 @@ class JPushBatchResponse
 
         try
         {
-            $response = $this->http->post(static::JPUSH_REPORT_URL, [], $payload, []);
+            $response = $this->http->post(static::JPUSH_REPORT_URL, [], json_encode($payload), []);
             $response->throw_for_status();
         }
         catch (Requests_Exception $e)

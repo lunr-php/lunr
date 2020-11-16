@@ -138,7 +138,7 @@ class JPushBatchResponseBasePushErrorTest extends JPushBatchResponseTest
      *
      * @return array $data http code
      */
-    public function internalErrorHTTPCodeDataProvider()
+    public function internalErrorHTTPCodeDataProvider(): array
     {
         $data = [];
 
@@ -184,7 +184,7 @@ class JPushBatchResponseBasePushErrorTest extends JPushBatchResponseTest
      *
      * @return array $data http code
      */
-    public function unknownErrorHTTPCodeDataProvider()
+    public function unknownErrorHTTPCodeDataProvider(): array
     {
         $data = [];
 
