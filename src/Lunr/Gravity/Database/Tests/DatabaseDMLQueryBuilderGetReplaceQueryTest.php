@@ -28,12 +28,13 @@ class DatabaseDMLQueryBuilderGetReplaceQueryTest extends DatabaseDMLQueryBuilder
      */
     public function testGetReplaceQueryWithUndefinedInto(): void
     {
+        $this->expectException('\Lunr\Gravity\Database\Exceptions\MissingTableReferenceException');
+        $this->expectExceptionMessage('No into() in replace query!');
+
         $this->set_reflection_property_value('column_names', '(column1, column2)');
         $this->set_reflection_property_value('values', 'VALUES (1,2), (3,4)');
 
-        $string = '';
-
-        $this->assertEquals($string, $this->class->get_replace_query());
+        $this->class->get_replace_query();
     }
 
     /**

@@ -47,12 +47,13 @@ class DatabaseDMLQueryBuilderGetDeleteQueryTest extends DatabaseDMLQueryBuilderT
      */
     public function testGetDeleteQueryWithUndefinedFrom(): void
     {
+        $this->expectException('\Lunr\Gravity\Database\Exceptions\MissingTableReferenceException');
+        $this->expectExceptionMessage('No from() in delete query!');
+
         $this->set_reflection_property_value('delete_mode', [ 'QUICK', 'IGNORE' ]);
         $this->set_reflection_property_value('delete', 'table.*');
 
-        $string = '';
-
-        $this->assertEquals($string, $this->class->get_delete_query());
+        $this->class->get_delete_query();
     }
 
     /**

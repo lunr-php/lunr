@@ -29,15 +29,16 @@ class DatabaseDMLQueryBuilderGetUpdateQueryTest extends DatabaseDMLQueryBuilderT
      */
     public function testGetUpdateQueryWithNoTable(): void
     {
+        $this->expectException('\Lunr\Gravity\Database\Exceptions\MissingTableReferenceException');
+        $this->expectExceptionMessage('No update() in update query!');
+
         $this->set_reflection_property_value('update_mode', [ 'LOW_PRIORITY', 'IGNORE' ]);
         $this->set_reflection_property_value('set', 'SET col1 = val1, col2 = val2');
         $this->set_reflection_property_value('where', 'WHERE 1 = 1');
         $this->set_reflection_property_value('order_by', 'ORDER BY col1');
         $this->set_reflection_property_value('limit', 'LIMIT 10');
 
-        $string = '';
-
-        $this->assertEquals($string, $this->class->get_update_query());
+        $this->class->get_update_query();
     }
 
     /**

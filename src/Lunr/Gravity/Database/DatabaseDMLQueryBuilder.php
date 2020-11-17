@@ -14,6 +14,8 @@
 
 namespace Lunr\Gravity\Database;
 
+use Lunr\Gravity\Database\Exceptions\MissingTableReferenceException;
+
 /**
  * This class defines abstract database query building.
  */
@@ -303,7 +305,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     {
         if ($this->from == '')
         {
-            return '';
+            throw new MissingTableReferenceException('No from() in delete query!');
         }
 
         $components = [];
@@ -326,7 +328,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     {
         if ($this->into == '')
         {
-            return '';
+            throw new MissingTableReferenceException('No into() in insert query!');
         }
 
         $components   = [];
@@ -366,7 +368,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     {
         if ($this->into == '')
         {
-            return '';
+            throw new MissingTableReferenceException('No into() in replace query!');
         }
 
         $valid = [ 'LOW_PRIORITY', 'DELAYED' ];
@@ -404,7 +406,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     {
         if ($this->update == '')
         {
-            return '';
+            throw new MissingTableReferenceException('No update() in update query!');
         }
 
         $valid = [ 'LOW_PRIORITY', 'IGNORE' ];
@@ -443,11 +445,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a WITH clause.
      *
-     * @param string $alias           The alias of the WITH statement
-     * @param string $sql_query       Sql query reference
-     * @param string $recursive_query The select statement that selects recursively out of the initial query
-     * @param string $union           The union part of a recursive query
-     * @param array  $column_names    An optional parameter to give the result columns a name
+     * @param string      $alias           The alias of the WITH statement
+     * @param string      $sql_query       Sql query reference
+     * @param string|null $recursive_query The select statement that selects recursively out of the initial query
+     * @param string|null $union           The union part of a recursive query
+     * @param array|null  $column_names    An optional parameter to give the result columns a name
      *
      * @return void
      */
@@ -522,8 +524,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define FROM clause of the SQL statement.
      *
-     * @param string $table       Table reference
-     * @param array  $index_hints Array of Index Hints
+     * @param string     $table       Table reference
+     * @param array|null $index_hints Array of Index Hints
      *
      * @return void
      */
@@ -544,9 +546,9 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define JOIN clause of the SQL statement.
      *
-     * @param string $table_reference Table reference
-     * @param string $type            Type of JOIN operation to perform.
-     * @param array  $index_hints     Array of Index Hints
+     * @param string     $table_reference Table reference
+     * @param string     $type            Type of JOIN operation to perform.
+     * @param array|null $index_hints     Array of Index Hints
      *
      * @return void
      */
@@ -699,9 +701,9 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define an Upsert clause for an Insert statement.
      *
-     * @param string $key    Upsert keyword
-     * @param string $action Action to perform on conflict
-     * @param string $target Target to watch for conflicts
+     * @param string      $key    Upsert keyword
+     * @param string      $action Action to perform on conflict
+     * @param string|null $target Target to watch for conflicts
      *
      * @return void
      */
