@@ -35,6 +35,9 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
         $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
         $this->expectExceptionMessage('Could not establish connection to the database!');
 
+        $this->logger->expects($this->never())
+                     ->method('debug');
+
         $this->class->query('query');
     }
 
@@ -54,6 +57,10 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
         $mysqli->expects($this->once())
                ->method('query')
                ->will($this->returnValue(TRUE));
+
+        $this->logger->expects($this->once())
+                     ->method('debug')
+                     ->with('query: {query}', ['query' => 'query']);
 
         $query = $this->class->query('query');
 
@@ -79,6 +86,10 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
                ->method('query')
                ->with($this->equalTo('/*hint*/query'))
                ->will($this->returnValue(TRUE));
+
+        $this->logger->expects($this->once())
+                     ->method('debug')
+                     ->with('query: {query}', ['query' => '/*hint*/query']);
 
         $query = $this->class->query('query');
 
@@ -106,6 +117,10 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
                ->with($this->equalTo('/*hint*/query'))
                ->will($this->returnValue(TRUE));
 
+        $this->logger->expects($this->once())
+                     ->method('debug')
+                     ->with('query: {query}', ['query' => '/*hint*/query']);
+
         $this->class->query('query');
 
         $this->assertSame('', $hint->getValue($this->class));
@@ -124,6 +139,9 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
 
         $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
         $this->expectExceptionMessage('Could not establish connection to the database!');
+
+        $this->logger->expects($this->never())
+                     ->method('debug');
 
         $this->class->async_query('query');
     }
@@ -149,6 +167,10 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
         $mysqli->expects($this->once())
                ->method('reap_async_query')
                ->will($this->returnValue(TRUE));
+
+        $this->logger->expects($this->once())
+                     ->method('debug')
+                     ->with('query: {query}', ['query' => 'query']);
 
         $query = $this->class->async_query('query');
 
@@ -176,6 +198,10 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
                ->method('query')
                ->with($this->equalTo('/*hint*/query'), $this->equalTo(MYSQLI_ASYNC));
 
+        $this->logger->expects($this->once())
+                     ->method('debug')
+                     ->with('query: {query}', ['query' => '/*hint*/query']);
+
         $query = $this->class->async_query('query');
 
         $this->assertEquals('/*hint*/query', $query->query());
@@ -200,6 +226,10 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
         $mysqli->expects($this->once())
                ->method('query')
                ->with($this->equalTo('/*hint*/query'), $this->equalTo(MYSQLI_ASYNC));
+
+        $this->logger->expects($this->once())
+                     ->method('debug')
+                     ->with('query: {query}', ['query' => '/*hint*/query']);
 
         $this->class->async_query('query');
 

@@ -12,6 +12,7 @@
 namespace Lunr\Gravity\Database\MySQL;
 
 use Lunr\Gravity\Database\DatabaseConnection;
+use Lunr\Gravity\Database\DMLQueryBuilderInterface;
 use Lunr\Gravity\Database\Exceptions\ConnectionException;
 
 /**
@@ -165,15 +166,15 @@ class MySQLConnection extends DatabaseConnection
      */
     private function set_configuration()
     {
-        $this->rw_host  = $this->configuration['db']['rw_host'];
-        $this->user     = $this->configuration['db']['username'];
-        $this->pwd      = $this->configuration['db']['password'];
-        $this->db       = $this->configuration['db']['database'];
-        $this->ssl_key  = $this->configuration['db']['ssl_key'];
-        $this->ssl_cert = $this->configuration['db']['ssl_cert'];
-        $this->ca_cert  = $this->configuration['db']['ca_cert'];
-        $this->ca_path  = $this->configuration['db']['ca_path'];
-        $this->cipher   = $this->configuration['db']['cipher'];
+        $this->rw_host     = $this->configuration['db']['rw_host'];
+        $this->user        = $this->configuration['db']['username'];
+        $this->pwd         = $this->configuration['db']['password'];
+        $this->db          = $this->configuration['db']['database'];
+        $this->ssl_key     = $this->configuration['db']['ssl_key'];
+        $this->ssl_cert    = $this->configuration['db']['ssl_cert'];
+        $this->ca_cert     = $this->configuration['db']['ca_cert'];
+        $this->ca_path     = $this->configuration['db']['ca_path'];
+        $this->cipher      = $this->configuration['db']['cipher'];
 
         if ($this->configuration['db']['ro_host'] != NULL)
         {
@@ -402,6 +403,8 @@ class MySQLConnection extends DatabaseConnection
         $sql_query        = $this->query_hint . $sql_query;
         $this->query_hint = '';
 
+        $this->logger->debug('query: {query}', ['query' => $sql_query]);
+
         return new MySQLQueryResult($sql_query, $this->mysqli->query($sql_query), $this->mysqli);
     }
 
@@ -418,6 +421,8 @@ class MySQLConnection extends DatabaseConnection
 
         $sql_query        = $this->query_hint . $sql_query;
         $this->query_hint = '';
+
+        $this->logger->debug('query: {query}', ['query' => $sql_query]);
 
         $this->mysqli->query($sql_query, MYSQLI_ASYNC);
 
