@@ -140,15 +140,14 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
      */
     public function testResultColumnReturnsArray(): void
     {
-        $this->query_result->expects($this->at(0))
+        $this->query_result->expects($this->exactly(3))
                            ->method('fetch_assoc')
-                           ->will($this->returnValue([ 'col1' => 'val1', 'col2' => 'val2' ]));
-        $this->query_result->expects($this->at(1))
-                           ->method('fetch_assoc')
-                           ->will($this->returnValue([ 'col1' => 'val3', 'col2' => 'val4' ]));
-        $this->query_result->expects($this->at(2))
-                           ->method('fetch_assoc')
-                           ->will($this->returnValue(NULL));
+                           ->willReturnOnConsecutiveCalls(
+                               [ 'col1' => 'val1', 'col2' => 'val2' ],
+                               [ 'col1' => 'val3', 'col2' => 'val4' ],
+                               NULL
+                           );
+
         $value = $this->result->result_column('col1');
 
         $this->assertIsArray($value);

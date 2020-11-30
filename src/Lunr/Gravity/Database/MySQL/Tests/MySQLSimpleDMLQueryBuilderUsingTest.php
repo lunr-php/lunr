@@ -55,15 +55,12 @@ class MySQLSimpleDMLQueryBuilderUsingTest extends MySQLSimpleDMLQueryBuilderTest
              ->with($this->equalTo('table2'))
              ->will($this->returnValue('`table2`'));
 
-        $this->escaper->expects($this->at(1))
+        $this->escaper->expects($this->exactly(2))
              ->method('column')
-             ->with($this->equalTo('column1'))
-             ->will($this->returnValue('`column1`'));
-
-        $this->escaper->expects($this->at(2))
-             ->method('column')
-             ->with($this->equalTo('column2'))
-             ->will($this->returnValue('`column2`'));
+             ->will($this->returnValueMap([
+                 ['column1', '', '`column1`'],
+                 ['column2', '', '`column2`'],
+             ]));
 
         $this->builder->expects($this->exactly(2))
              ->method('using')
@@ -81,20 +78,17 @@ class MySQLSimpleDMLQueryBuilderUsingTest extends MySQLSimpleDMLQueryBuilderTest
      */
     public function testUsingMultipleColumn(): void
     {
-        $this->escaper->expects($this->at(0))
+        $this->escaper->expects($this->exactly(1))
              ->method('table')
              ->with($this->equalTo('table2'))
              ->will($this->returnValue('`table2`'));
 
-        $this->escaper->expects($this->at(1))
+        $this->escaper->expects($this->exactly(2))
              ->method('column')
-             ->with($this->equalTo('column1'))
-             ->will($this->returnValue('`column1`'));
-
-        $this->escaper->expects($this->at(2))
-             ->method('column')
-             ->with($this->equalTo('column2'))
-             ->will($this->returnValue('`column2`'));
+             ->will($this->returnValueMap([
+                 ['column1', '', '`column1`'],
+                 ['column2', '', '`column2`'],
+             ]));
 
         $this->builder->expects($this->once())
              ->method('using')

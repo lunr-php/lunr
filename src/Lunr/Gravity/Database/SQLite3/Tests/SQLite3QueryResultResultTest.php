@@ -112,15 +112,9 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
     {
         $result = [ 0 => [ 'col1' => 'val1', 'col2' => 'val2' ], 1 => [ 'col1' => 'val3', 'col2' => 'val4' ] ];
 
-        $this->sqlite3_result->expects($this->at(0))
+        $this->sqlite3_result->expects($this->exactly(3))
                              ->method('fetchArray')
-                             ->will($this->returnValue($result[0]));
-        $this->sqlite3_result->expects($this->at(1))
-                             ->method('fetchArray')
-                             ->will($this->returnValue($result[1]));
-        $this->sqlite3_result->expects($this->at(2))
-                             ->method('fetchArray')
-                             ->will($this->returnValue(NULL));
+                             ->willReturnOnConsecutiveCalls($result[0], $result[1], NULL);
 
         $value = $this->class->result_array();
 
@@ -137,15 +131,13 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
     {
         $result = [ 'val1', 'val3' ];
 
-        $this->sqlite3_result->expects($this->at(0))
+        $this->sqlite3_result->expects($this->exactly(3))
                              ->method('fetchArray')
-                             ->will($this->returnValue([ 'col1' => 'val1', 'col2' => 'val2' ]));
-        $this->sqlite3_result->expects($this->at(1))
-                             ->method('fetchArray')
-                             ->will($this->returnValue([ 'col1' => 'val3', 'col2' => 'val4' ]));
-        $this->sqlite3_result->expects($this->at(2))
-                             ->method('fetchArray')
-                             ->will($this->returnValue(NULL));
+                             ->willReturnOnConsecutiveCalls(
+                                 [ 'col1' => 'val1', 'col2' => 'val2' ],
+                                 [ 'col1' => 'val3', 'col2' => 'val4' ],
+                                 NULL
+                             );
 
         $value = $this->class->result_column('col1');
 

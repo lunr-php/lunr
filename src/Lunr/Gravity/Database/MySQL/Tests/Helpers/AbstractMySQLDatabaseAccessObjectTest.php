@@ -12,6 +12,7 @@
 namespace Lunr\Gravity\Database\MySQL\Tests\Helpers;
 
 use Lunr\Halo\LunrBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;
 
 /**
@@ -22,7 +23,7 @@ abstract class AbstractMySQLDatabaseAccessObjectTest extends LunrBaseTest
 
     /**
      * Mock instance of the MySQLConnection class.
-     * @var \Lunr\Gravity\Database\MySQL\MySQLConnection
+     * @var \Lunr\Gravity\Database\MySQL\MySQLConnection|MockObject
      */
     protected $db;
 
@@ -34,13 +35,13 @@ abstract class AbstractMySQLDatabaseAccessObjectTest extends LunrBaseTest
 
     /**
      * Mock instance of the DMLQueryBuilder class
-     * @var \Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder
+     * @var \Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder|MockObject
      */
     protected $builder;
 
     /**
      * Mock instance of the QueryEscaper class
-     * @var \Lunr\Gravity\Database\MySQL\MySQLQueryEscaper
+     * @var \Lunr\Gravity\Database\MySQL\MySQLQueryEscaper|MockObject
      */
     protected $escaper;
 
@@ -73,7 +74,7 @@ abstract class AbstractMySQLDatabaseAccessObjectTest extends LunrBaseTest
 
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $this->db->expects($this->at(0))
+        $this->db->expects($this->exactly(1))
                  ->method('get_query_escaper_object')
                  ->will($this->returnValue($this->escaper));
 

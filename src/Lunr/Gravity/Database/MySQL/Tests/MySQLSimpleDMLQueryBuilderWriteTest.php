@@ -182,15 +182,12 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      */
     public function testColumnNamesWithMultipleColumns(): void
     {
-        $this->escaper->expects($this->at(0))
-                      ->method('column')
-                      ->with($this->equalTo('col1'))
-                      ->will($this->returnValue('`col1`'));
-
-        $this->escaper->expects($this->at(1))
-                      ->method('column')
-                      ->with($this->equalTo('col2'))
-                      ->will($this->returnValue('`col2`'));
+        $this->escaper->expects($this->exactly(2))
+             ->method('column')
+             ->will($this->returnValueMap([
+                 ['col1', '', '`col1`'],
+                 ['col2', '', '`col2`'],
+             ]));
 
         $this->builder->expects($this->once())
                       ->method('column_names')
@@ -227,14 +224,8 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
      */
     public function testUpdateWithMultipleTables(): void
     {
-        $this->escaper->expects($this->at(0))
+        $this->escaper->expects($this->exactly(2))
                       ->method('table')
-                      ->with($this->equalTo('table'))
-                      ->will($this->returnValue('`table`'));
-
-        $this->escaper->expects($this->at(1))
-                      ->method('table')
-                      ->with($this->equalTo(' table'))
                       ->will($this->returnValue('`table`'));
 
         $this->builder->expects($this->once())

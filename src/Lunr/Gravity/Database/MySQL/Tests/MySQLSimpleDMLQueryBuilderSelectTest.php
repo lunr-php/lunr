@@ -78,14 +78,9 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      */
     public function testSelectWithMultipleColumns(): void
     {
-        $this->escaper->expects($this->at(0))
+        $this->escaper->expects($this->exactly(2))
                       ->method('result_column')
-                      ->with($this->equalTo('col'))
-                      ->will($this->returnValue('`col`'));
-
-        $this->escaper->expects($this->at(1))
-                      ->method('result_column')
-                      ->with($this->equalTo(' col'))
+                      ->withConsecutive(['col'], [' col'])
                       ->will($this->returnValue('`col`'));
 
         $this->builder->expects($this->once())
@@ -183,15 +178,10 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
      */
     public function testLimit(): void
     {
-        $this->escaper->expects($this->at(0))
+        $this->escaper->expects($this->exactly(2))
                       ->method('intvalue')
-                      ->with($this->equalTo(10))
-                      ->will($this->returnValue(10));
-
-        $this->escaper->expects($this->at(1))
-                      ->method('intvalue')
-                      ->with($this->equalTo(-1))
-                      ->will($this->returnValue(-1));
+                      ->withConsecutive([10], [-1])
+                      ->will($this->returnArgument(0));
 
         $this->builder->expects($this->once())
                       ->method('limit')
