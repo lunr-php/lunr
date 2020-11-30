@@ -184,13 +184,12 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
 
         $mock = $this->getMockBuilder('Lunr\Halo\CallbackMock')->getMock();
 
-        $mock->expects($this->at(0))
+        $mock->expects($this->exactly(2))
              ->method('test')
-             ->with('param1');
-
-        $mock->expects($this->at(1))
-             ->method('test')
-             ->with('param2', 'param3');
+             ->withConsecutive(
+                 ['param1'],
+                 ['param2', 'param3']
+             );
 
         $method = $this->get_accessible_reflection_method('process_new_instance');
         $method->invokeArgs($this->class, [ 'id', $mock ]);
@@ -215,7 +214,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
 
         $mock = $this->getMockBuilder('Lunr\Halo\CallbackMock')->getMock();
 
-        $mock->expects($this->at(0))
+        $mock->expects($this->exactly(1))
              ->method('test');
 
         $method = $this->get_accessible_reflection_method('process_new_instance');
@@ -247,7 +246,7 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
 
         $mock = $this->getMockBuilder('Lunr\Halo\CallbackMock')->getMock();
 
-        $mock->expects($this->at(0))
+        $mock->expects($this->exactly(1))
              ->method('test')
              ->with($this->identicalTo($object1), 'param2');
 
