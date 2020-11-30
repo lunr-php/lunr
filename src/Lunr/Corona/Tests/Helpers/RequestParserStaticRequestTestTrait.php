@@ -38,6 +38,8 @@ trait RequestParserStaticRequestTestTrait
      */
     protected $params = 'param';
 
+    protected $mocked_calls = [];
+
     /**
      * Preparation work for the request tests.
      *
@@ -130,6 +132,10 @@ trait RequestParserStaticRequestTestTrait
     {
         $this->prepare_request_test();
 
+        $this->configuration->expects($this->atLeast(2))
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+
         $request = $this->class->parse_request();
 
         $this->assertIsArray($request);
@@ -146,6 +152,10 @@ trait RequestParserStaticRequestTestTrait
     {
         $this->prepare_request_test();
 
+        $this->configuration->expects($this->atLeast(2))
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+
         $request = $this->class->parse_request();
 
         $this->assertIsArray($request);
@@ -161,6 +171,10 @@ trait RequestParserStaticRequestTestTrait
     public function testRequestDomain(): void
     {
         $this->prepare_request_test();
+
+        $this->configuration->expects($this->atLeast(2))
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
 
         $request = $this->class->parse_request();
 
@@ -183,6 +197,10 @@ trait RequestParserStaticRequestTestTrait
     {
         $this->prepare_request_test($protocol, $port);
 
+        $this->configuration->expects($this->atLeast(2))
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+
         $request = $this->class->parse_request();
 
         $this->assertIsArray($request);
@@ -204,6 +222,10 @@ trait RequestParserStaticRequestTestTrait
     public function testRequestBaseUrl($protocol, $port, $baseurl): void
     {
         $this->prepare_request_test($protocol, $port);
+
+        $this->configuration->expects($this->atLeast(2))
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
 
         $request = $this->class->parse_request();
 
@@ -253,6 +275,10 @@ trait RequestParserStaticRequestTestTrait
     {
         $this->prepare_request_test('HTTP', '80', TRUE);
 
+        $this->configuration->expects($this->exactly(8))
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+
         $request = $this->class->parse_request();
 
         $this->assertIsArray($request);
@@ -270,6 +296,10 @@ trait RequestParserStaticRequestTestTrait
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data();
 
+        $this->configuration->expects($this->atLeast(2))
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+
         $request = $this->class->parse_request();
 
         $this->assertIsArray($request);
@@ -286,6 +316,10 @@ trait RequestParserStaticRequestTestTrait
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data();
+
+        $this->configuration->expects($this->atLeast(2))
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
 
         $request = $this->class->parse_request();
 
@@ -321,6 +355,10 @@ trait RequestParserStaticRequestTestTrait
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data();
 
+        $this->configuration->expects($this->atLeast(2))
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+
         $request = $this->class->parse_request();
 
         $this->assertIsArray($request);
@@ -336,7 +374,12 @@ trait RequestParserStaticRequestTestTrait
     public function testRequestDefaultCallWithControllerUndefined(): void
     {
         $this->prepare_request_test('HTTP', '80');
-        $this->prepare_request_data(FALSE);
+
+        unset($this->mocked_calls['default_controller']);
+
+        $this->configuration->expects($this->atLeast(2))
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
 
         $request = $this->class->parse_request();
 
@@ -353,7 +396,12 @@ trait RequestParserStaticRequestTestTrait
     public function testRequestDefaultCallWithMethodUndefined(): void
     {
         $this->prepare_request_test('HTTP', '80');
-        $this->prepare_request_data(TRUE, FALSE);
+
+        unset($this->mocked_calls['default_method']);
+
+        $this->configuration->expects($this->atLeast(2))
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
 
         $request = $this->class->parse_request();
 
@@ -371,6 +419,10 @@ trait RequestParserStaticRequestTestTrait
     {
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(TRUE, FALSE);
+
+        $this->configuration->expects($this->atLeast(2))
+                            ->method('offsetGet')
+                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
 
         $request = $this->class->parse_request();
 

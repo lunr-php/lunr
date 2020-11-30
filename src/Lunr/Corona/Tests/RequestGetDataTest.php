@@ -340,13 +340,9 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetRawDataReturnsCachedRawRequestData(): void
     {
-        $this->parser->expects($this->at(0))
+        $this->parser->expects($this->exactly(2))
                      ->method('parse_raw_data')
-                     ->will($this->returnValue('raw'));
-
-        $this->parser->expects($this->at(1))
-                     ->method('parse_raw_data')
-                     ->will($this->returnValue(''));
+                     ->willReturnOnConsecutiveCalls('raw', '');
 
         $this->assertEquals('raw', $this->class->get_raw_data());
         $this->assertEquals('raw', $this->class->get_raw_data());
@@ -360,13 +356,9 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetRawDataReturnsUnCachedRawRequestData(): void
     {
-        $this->parser->expects($this->at(0))
+        $this->parser->expects($this->exactly(2))
                      ->method('parse_raw_data')
-                     ->will($this->returnValue('raw'));
-
-        $this->parser->expects($this->at(1))
-                     ->method('parse_raw_data')
-                     ->will($this->returnValue('hello'));
+                     ->willReturnOnConsecutiveCalls('raw', 'hello');
 
         $this->assertEquals('raw', $this->class->get_raw_data());
         $this->assertEquals('raw', $this->get_reflection_property_value('raw_data'));

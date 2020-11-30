@@ -98,15 +98,13 @@ class FrontControllerLookupTest extends FrontControllerTest
                       ->with('controller')
                       ->will($this->returnValue('function'));
 
-        $this->fao->expects($this->at(0))
+        $this->fao->expects($this->exactly(2))
                   ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', '/foo/bar')
-                  ->will($this->returnValue([]));
-
-        $this->fao->expects($this->at(1))
-                  ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', '/foo/baz')
-                  ->will($this->returnValue([ $result ]));
+                  ->withConsecutive(
+                      ['/^.+\/functioncontroller.php/i', '/foo/bar'],
+                      ['/^.+\/functioncontroller.php/i', '/foo/baz']
+                  )
+                  ->willReturnOnConsecutiveCalls([], [ $result ]);
 
         $value = $this->class->lookup('test', 'live');
 
@@ -150,15 +148,14 @@ class FrontControllerLookupTest extends FrontControllerTest
                       ->with('controller')
                       ->will($this->returnValue('function'));
 
-        $this->fao->expects($this->at(0))
-                  ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', '/foo/bar')
-                  ->will($this->returnValue([]));
 
-        $this->fao->expects($this->at(1))
+        $this->fao->expects($this->exactly(2))
                   ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', '/foo/baz')
-                  ->will($this->returnValue([ $result ]));
+                  ->withConsecutive(
+                      ['/^.+\/functioncontroller.php/i', '/foo/bar'],
+                      ['/^.+\/functioncontroller.php/i', '/foo/baz']
+                  )
+                  ->willReturnOnConsecutiveCalls([], [ $result ]);
 
         $value = $this->class->lookup();
 

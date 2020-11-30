@@ -25,6 +25,12 @@ class RequestParserParseRequestTest extends RequestParserTest
     use RequestParserStaticRequestTestTrait;
 
     /**
+     * Mocked calls to Configuration
+     * @var array
+     */
+    protected $mocked_calls = [];
+
+    /**
      * Preparation work for the request tests.
      *
      * @param string  $protocol  Protocol name
@@ -44,31 +50,6 @@ class RequestParserParseRequestTest extends RequestParserTest
         $this->mock_function('gethostname', function(){ return "Lunr"; });
         $this->mock_function('uuid_create', function(){ return "962161b2-7a01-41f3-84c6-3834ad001adf"; });
 
-        $this->configuration->expects($this->at(0))
-                            ->method('offsetGet')
-                            ->with($this->equalTo('default_application_path'))
-                            ->will($this->returnValue('/full/path/to/'));
-
-        $this->configuration->expects($this->at(1))
-                            ->method('offsetGet')
-                            ->with($this->equalTo('default_webpath'))
-                            ->will($this->returnValue('/path/to/'));
-
-        $this->configuration->expects($this->at(2))
-                            ->method('offsetGet')
-                            ->with($this->equalTo('default_protocol'))
-                            ->will($this->returnValue(strtolower($protocol)));
-
-        $this->configuration->expects($this->at(3))
-                            ->method('offsetGet')
-                            ->with($this->equalTo('default_domain'))
-                            ->will($this->returnValue('www.domain.com'));
-
-        $this->configuration->expects($this->at(4))
-                            ->method('offsetGet')
-                            ->with($this->equalTo('default_port'))
-                            ->will($this->returnValue($port));
-
         if (($protocol == 'HTTPS' && $port == '443') || ($protocol == 'HTTP' && $port == '80'))
         {
             $url = strtolower($protocol) . '://www.domain.com/path/to/';
@@ -78,10 +59,16 @@ class RequestParserParseRequestTest extends RequestParserTest
             $url = strtolower($protocol) . '://www.domain.com:' . $port . '/path/to/';
         }
 
-        $this->configuration->expects($this->at(5))
-                            ->method('offsetGet')
-                            ->with($this->equalTo('default_url'))
-                            ->will($this->returnValue($url));
+        $this->mocked_calls = [
+            'default_application_path' => ['default_application_path', '/full/path/to/'],
+            'default_webpath'          => ['default_webpath', '/path/to/'],
+            'default_protocol'         => ['default_protocol', strtolower($protocol)],
+            'default_domain'           => ['default_domain', 'www.domain.com'],
+            'default_port'             => ['default_port', $port],
+            'default_url'              => ['default_url', $url],
+            'default_controller'       => ['default_controller', 'DefaultController'],
+            'default_method'           => ['default_method', 'default_method'],
+        ];
     }
 
     /**
@@ -95,21 +82,7 @@ class RequestParserParseRequestTest extends RequestParserTest
      */
     protected function prepare_request_data($controller = TRUE, $method = TRUE, $override = FALSE): void
     {
-        if ($controller === TRUE)
-        {
-            $this->configuration->expects($this->at(6))
-                                ->method('offsetGet')
-                                ->with($this->equalTo('default_controller'))
-                                ->will($this->returnValue('DefaultController'));
-        }
-
-        if ($method === TRUE)
-        {
-            $this->configuration->expects($this->at(7))
-                                ->method('offsetGet')
-                                ->with($this->equalTo('default_method'))
-                                ->will($this->returnValue('default_method'));
-        }
+        //NO-OP
     }
 
     /**

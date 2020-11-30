@@ -45,15 +45,12 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $method = $this->get_accessible_reflection_method('include_stylesheets');
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
-
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
+                      ->will($this->returnValueMap([
+                          ['application_path', '/full/path/to/'],
+                          ['base_path', '/to/'],
+                      ]));
 
         $this->mock_function('filemtime', function () {return 1438183002;});
 
@@ -73,25 +70,12 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $method = $this->get_accessible_reflection_method('include_stylesheets');
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(4))
                       ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
-
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
-
-        $this->request->expects($this->at(2))
-                      ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
-
-        $this->request->expects($this->at(3))
-                      ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
+                      ->will($this->returnValueMap([
+                          ['application_path', '/full/path/to/'],
+                          ['base_path', '/to/'],
+                      ]));
 
         $this->mock_function('filemtime', function () { return 1438183002;});
 
@@ -151,25 +135,12 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $method = $this->get_accessible_reflection_method('include_stylesheets');
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(4))
                       ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
-
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
-
-        $this->request->expects($this->at(2))
-                      ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
-
-        $this->request->expects($this->at(3))
-                      ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
+                      ->will($this->returnValueMap([
+                          ['application_path', '/full/path/to/'],
+                          ['base_path', '/to/'],
+                      ]));
 
         $this->mock_function('filemtime', function () {return 1438183002;});
 
@@ -203,15 +174,12 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $method = $this->get_accessible_reflection_method('include_javascript');
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
-
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
+                      ->will($this->returnValueMap([
+                          ['application_path', '/full/path/to/'],
+                          ['base_path', '/to/'],
+                      ]));
 
         $this->mock_function('filemtime', function () {return 1438183002;});
 
@@ -231,25 +199,12 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $method = $this->get_accessible_reflection_method('include_javascript');
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(4))
                       ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
-
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
-
-        $this->request->expects($this->at(2))
-                      ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
-
-        $this->request->expects($this->at(3))
-                      ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
+                      ->will($this->returnValueMap([
+                          ['application_path', '/full/path/to/'],
+                          ['base_path', '/to/'],
+                      ]));
 
         $this->mock_function('filemtime', function () {return 1438183002;});
 
@@ -309,25 +264,12 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $method = $this->get_accessible_reflection_method('include_javascript');
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(4))
                       ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
-
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
-
-        $this->request->expects($this->at(2))
-                      ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
-
-        $this->request->expects($this->at(3))
-                      ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
+                      ->will($this->returnValueMap([
+                          ['application_path', '/full/path/to/'],
+                          ['base_path', '/to/'],
+                      ]));
 
         $this->mock_function('filemtime', function () {return 1438183002;});
 

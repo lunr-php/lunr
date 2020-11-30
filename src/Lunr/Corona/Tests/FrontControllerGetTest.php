@@ -46,7 +46,7 @@ class FrontControllerGetTest extends FrontControllerTest
     }
 
     /**
-     * Test that get_controller() returns an emoty string if controller not found.
+     * Test that get_controller() returns an empty string if controller not found.
      *
      * @covers Lunr\Corona\FrontController::get_controller
      */
@@ -54,7 +54,7 @@ class FrontControllerGetTest extends FrontControllerTest
     {
         $dir = __DIR__;
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
                       ->will($this->returnValue('function'));
@@ -78,7 +78,7 @@ class FrontControllerGetTest extends FrontControllerTest
     {
         $dir = __DIR__;
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
                       ->will($this->returnValue('function'));
@@ -102,7 +102,7 @@ class FrontControllerGetTest extends FrontControllerTest
     {
         $dir = __DIR__;
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(1))
                       ->method('__get')
                       ->with('controller')
                       ->will($this->returnValue(NULL));

@@ -28,15 +28,12 @@ class FrontControllerRouteTest extends FrontControllerTest
     {
         $this->set_reflection_property_value('routes', [ 'controller' => NULL ]);
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->with($this->equalTo('call'))
-                      ->will($this->returnValue('controller/method'));
-
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with($this->equalTo('controller'))
-                      ->will($this->returnValue('controller'));
+                      ->will($this->returnValueMap([
+                          ['call', 'controller/method'],
+                          ['controller', 'controller'],
+                      ]));
 
         $value = $this->class->route();
 
@@ -84,15 +81,13 @@ class FrontControllerRouteTest extends FrontControllerTest
                       ->method('__get')
                       ->will($this->returnValueMap($map));
 
-        $this->fao->expects($this->at(0))
+        $this->fao->expects($this->exactly(2))
                   ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', '/foo/bar')
-                  ->will($this->returnValue([]));
-
-        $this->fao->expects($this->at(1))
-                  ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', '/foo/baz')
-                  ->will($this->returnValue([ $result ]));
+                  ->withConsecutive(
+                      ['/^.+\/functioncontroller.php/i', '/foo/bar'],
+                      ['/^.+\/functioncontroller.php/i', '/foo/baz']
+                  )
+                  ->willReturnOnConsecutiveCalls([], [ $result ]);
 
         $value = $this->class->route();
 
@@ -121,10 +116,13 @@ class FrontControllerRouteTest extends FrontControllerTest
                       ->method('__get')
                       ->will($this->returnValueMap($map));
 
-        $this->fao->expects($this->at(0))
+
+        $this->fao->expects($this->exactly(1))
                   ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', '/foo/baz')
-                  ->will($this->returnValue([ $result ]));
+                  ->withConsecutive(
+                      ['/^.+\/functioncontroller.php/i', '/foo/baz']
+                  )
+                  ->willReturnOnConsecutiveCalls([ $result ]);
 
         $value = $this->class->route();
 
@@ -153,10 +151,12 @@ class FrontControllerRouteTest extends FrontControllerTest
                       ->method('__get')
                       ->will($this->returnValueMap($map));
 
-        $this->fao->expects($this->at(0))
+        $this->fao->expects($this->exactly(1))
                   ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', '/foo/baz')
-                  ->will($this->returnValue([ $result ]));
+                  ->withConsecutive(
+                      ['/^.+\/functioncontroller.php/i', '/foo/baz']
+                  )
+                  ->willReturnOnConsecutiveCalls([ $result ]);
 
         $value = $this->class->route();
 
@@ -184,15 +184,13 @@ class FrontControllerRouteTest extends FrontControllerTest
                       ->method('__get')
                       ->will($this->returnValueMap($map));
 
-        $this->fao->expects($this->at(0))
+        $this->fao->expects($this->exactly(2))
                   ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', '/foo/bar')
-                  ->will($this->returnValue([]));
-
-        $this->fao->expects($this->at(1))
-                  ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', '/foo/baz')
-                  ->will($this->returnValue([ $result ]));
+                  ->withConsecutive(
+                      ['/^.+\/functioncontroller.php/i', '/foo/bar'],
+                      ['/^.+\/functioncontroller.php/i', '/foo/baz']
+                  )
+                  ->willReturnOnConsecutiveCalls([], [ $result ]);
 
         $value = $this->class->route();
 

@@ -32,15 +32,12 @@ class FrontControllerDispatchTest extends FrontControllerTest
                       ->method('handle_request')
                       ->with([ $controller, 'foo' ], [ 1, 2 ]);
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->with('method')
-                      ->willReturn('foo');
-
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('params')
-                      ->willReturn([ 1, 2 ]);
+                      ->will($this->returnValueMap([
+                          ['method', 'foo'],
+                          ['params', [ 1, 2 ]],
+                      ]));
 
         $this->class->dispatch($controller);
     }
@@ -58,15 +55,12 @@ class FrontControllerDispatchTest extends FrontControllerTest
                       ->method('handle_request')
                       ->with([ $controller, 'bar'], [ 1, 2 ]);
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->with('method')
-                      ->willReturn('bar');
-
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('params')
-                      ->willReturn([ 1, 2 ]);
+                      ->will($this->returnValueMap([
+                          ['method', 'bar'],
+                          ['params', [ 1, 2 ]],
+                      ]));
 
         $this->class->dispatch($controller);
     }
@@ -82,15 +76,12 @@ class FrontControllerDispatchTest extends FrontControllerTest
                       ->method('handle_request')
                       ->with([ 'String', 'bar' ], [ 1, 2 ]);
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->with('method')
-                      ->willReturn('bar');
-
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('params')
-                      ->willReturn([ 1, 2 ]);
+                      ->will($this->returnValueMap([
+                          ['method', 'bar'],
+                          ['params', [ 1, 2 ]],
+                      ]));
 
         $this->class->dispatch('String');
     }
@@ -109,15 +100,12 @@ class FrontControllerDispatchTest extends FrontControllerTest
                       ->method('handle_request')
                       ->with([ $value, 'bar' ], [ 1, 2 ]);
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->with('method')
-                      ->willReturn('bar');
-
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('params')
-                      ->willReturn([ 1, 2 ]);
+                      ->will($this->returnValueMap([
+                          ['method', 'bar'],
+                          ['params', [ 1, 2 ]],
+                      ]));
 
         $this->class->dispatch($value);
     }

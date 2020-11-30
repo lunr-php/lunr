@@ -47,6 +47,7 @@ class ViewBaseTest extends ViewTest
     /**
      * Test that the request ID header is set.
      *
+     * @requires extension xdebug
      * @runInSeparateProcess
      */
     public function testRequestIdHeaderIsSet(): void

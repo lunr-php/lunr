@@ -33,16 +33,16 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
     {
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')->getMock();
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(1))
                       ->method('__get')
                       ->with('call')
                       ->willReturn('controller/method');
 
-        $this->response->expects($this->at(0))
+        $this->response->expects($this->exactly(1))
                        ->method('get_return_code')
                        ->willReturn(NULL);
 
-        $this->response->expects($this->at(1))
+        $this->response->expects($this->exactly(1))
                        ->method('set_return_code')
                        ->with('controller/method', 200);
 
@@ -62,16 +62,16 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
     {
         $controller = 'Lunr\Corona\Tests\MockController';
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(1))
                       ->method('__get')
                       ->with('call')
                       ->willReturn('controller/method');
 
-        $this->response->expects($this->at(0))
+        $this->response->expects($this->exactly(1))
                        ->method('get_return_code')
                        ->willReturn(NULL);
 
-        $this->response->expects($this->at(1))
+        $this->response->expects($this->exactly(1))
                        ->method('set_return_code')
                        ->with('controller/method', 200);
 
@@ -85,26 +85,16 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      */
     public function testHandleRequestWithNonExistantController(): void
     {
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('call')
                       ->willReturn('controller/method');
 
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('call')
-                      ->willReturn('controller/method');
-
-        $this->request->expects($this->at(2))
-                      ->method('__get')
-                      ->with('call')
-                      ->willReturn('controller/method');
-
-        $this->response->expects($this->at(0))
+        $this->response->expects($this->exactly(1))
                        ->method('set_return_code')
                        ->with('controller/method', 500);
 
-        $this->response->expects($this->at(1))
+        $this->response->expects($this->exactly(1))
                        ->method('get_return_code')
                        ->willReturn(500);
 
@@ -127,26 +117,16 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      */
     public function testHandleRequestWithInvalidControllerValues($value): void
     {
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('call')
                       ->willReturn('controller/method');
 
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('call')
-                      ->willReturn('controller/method');
-
-        $this->request->expects($this->at(2))
-                      ->method('__get')
-                      ->with('call')
-                      ->willReturn('controller/method');
-
-        $this->response->expects($this->at(0))
+        $this->response->expects($this->exactly(1))
                        ->method('set_return_code')
                        ->with('controller/method', 500);
 
-        $this->response->expects($this->at(1))
+        $this->response->expects($this->exactly(1))
                        ->method('get_return_code')
                        ->willReturn(500);
 
@@ -173,26 +153,16 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
                    ->method('foo')
                    ->will($this->throwException(new BadRequestException("Bad Request!")));
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(3))
                       ->method('__get')
                       ->with('call')
                       ->willReturn('controller/method');
 
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('call')
-                      ->willReturn('controller/method');
-
-        $this->request->expects($this->at(2))
-                      ->method('__get')
-                      ->with('call')
-                      ->willReturn('controller/method');
-
-        $this->response->expects($this->at(0))
+        $this->response->expects($this->exactly(1))
                        ->method('set_return_code')
                        ->with('controller/method', 400);
 
-        $this->response->expects($this->at(1))
+        $this->response->expects($this->exactly(1))
                        ->method('get_return_code')
                        ->willReturn(400);
 
@@ -221,26 +191,16 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
                    ->method('foo')
                    ->will($this->throwException($exception));
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('call')
                       ->willReturn('controller/method');
 
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('call')
-                      ->willReturn('controller/method');
-
-        $this->request->expects($this->at(2))
-                      ->method('__get')
-                      ->with('call')
-                      ->willReturn('controller/method');
-
-        $this->response->expects($this->at(0))
+        $this->response->expects($this->exactly(1))
                        ->method('set_return_code')
                        ->with('controller/method', 500);
 
-        $this->response->expects($this->at(1))
+        $this->response->expects($this->exactly(1))
                        ->method('get_return_code')
                        ->willReturn(500);
 
@@ -273,26 +233,16 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
                    ->method('foo')
                    ->will($this->throwException($exception));
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('call')
                       ->willReturn('controller/method');
 
-        $this->request->expects($this->at(1))
-                      ->method('__get')
-                      ->with('call')
-                      ->willReturn('controller/method');
-
-        $this->request->expects($this->at(2))
-                      ->method('__get')
-                      ->with('call')
-                      ->willReturn('controller/method');
-
-        $this->response->expects($this->at(0))
+        $this->response->expects($this->exactly(1))
                        ->method('set_return_code')
                        ->with('controller/method', 500);
 
-        $this->response->expects($this->at(1))
+        $this->response->expects($this->exactly(1))
                        ->method('get_return_code')
                        ->willReturn(500);
 
@@ -322,16 +272,16 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
         $controller->expects($this->once())
                    ->method('foo');
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(1))
                       ->method('__get')
                       ->with('call')
                       ->willReturn('controller/method');
 
-        $this->response->expects($this->at(0))
+        $this->response->expects($this->exactly(1))
                        ->method('get_return_code')
                        ->willReturn(NULL);
 
-        $this->response->expects($this->at(1))
+        $this->response->expects($this->exactly(1))
                        ->method('set_return_code')
                        ->with('controller/method', 200);
 
