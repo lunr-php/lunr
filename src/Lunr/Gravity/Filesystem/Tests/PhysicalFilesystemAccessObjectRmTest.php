@@ -55,7 +55,7 @@ class PhysicalFilesystemAccessObjectRmTest extends PhysicalFilesystemAccessObjec
         $rm = $this->class->rm($file);
 
         $this->assertTrue($rm);
-        $this->assertFileNotExists($file);
+        $this->assertFileDoesNotExist($file);
     }
 
 }
