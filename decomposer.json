@@ -27,10 +27,26 @@
     },
     "ApnsPHP": {
         "url": "https://github.com/M2Mobi/apnsphp.git",
-        "version": "1.0.1.93",
-        "revision": "1.0.1.x",
+        "version": "2.0.0",
+        "revision": "2.0.0beta1",
         "psr0": {
             "path": "/"
+        }
+    },
+    "JWT": {
+        "url": "https://github.com/lcobucci/JWT.git",
+        "version": "3.4.2",
+        "psr4": {
+            "prefix": "Lcobucci\\JWT",
+            "search-path": "/src/"
+        }
+    },
+    "Clock": {
+        "url": "https://github.com/lcobucci/Clock.git",
+        "version": "2.0.0",
+        "psr4": {
+            "prefix": "Lcobucci\\Clock",
+            "search-path": "/src/"
         }
     },
     "PHPMailer": {
