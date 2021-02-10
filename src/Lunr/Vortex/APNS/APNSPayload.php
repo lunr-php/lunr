@@ -11,6 +11,8 @@
 
 namespace Lunr\Vortex\APNS;
 
+use \ReflectionClass;
+
 /**
  * Apple Push Notification Service Payload Generator.
  */
@@ -29,6 +31,8 @@ class APNSPayload
     public function __construct()
     {
         $this->elements = [];
+
+        $this->elements['priority'] = APNSPriority::HIGH;
     }
 
     /**
@@ -47,6 +51,58 @@ class APNSPayload
     public function get_payload()
     {
         return $this->elements;
+    }
+
+    /**
+     * Sets the payload key collapse_key.
+     *
+     * An arbitrary string that is used to collapse a group of alike messages
+     * when the device is offline, so that only the last message gets sent to the client.
+     *
+     * @param string $key The notification collapse key identifier
+     *
+     * @return APNSPayload Self Reference
+     */
+    public function set_collapse_key($key)
+    {
+        $this->elements['collapse_key'] = $key;
+
+        return $this;
+    }
+
+    /**
+     * Sets the payload key topic.
+     *
+     * An string that is used to identify the notification topic. This is usually the app bundle identifier.
+     *
+     * @param string $topic The notification topic identifier
+     *
+     * @return APNSPayload Self Reference
+     */
+    public function set_topic($topic)
+    {
+        $this->elements['topic'] = $topic;
+
+        return $this;
+    }
+
+    /**
+     * Mark the notification priority.
+     *
+     * @param \Lunr\Vortex\APNS\APNSPriority|int $priority Notification priority value.
+     *
+     * @return APNSPayload Self Reference
+     */
+    public function set_priority($priority)
+    {
+        $priority       = $priority;
+        $priority_class = new ReflectionClass('\Lunr\Vortex\APNS\APNSPriority');
+        if (in_array($priority, array_values($priority_class->getConstants())))
+        {
+            $this->elements['priority'] = $priority;
+        }
+
+        return $this;
     }
 
     /**
@@ -89,6 +145,20 @@ class APNSPayload
     public function set_thread_id($thread_id)
     {
         $this->elements['thread_id'] = $thread_id;
+
+        return $this;
+    }
+
+    /**
+     * Sets the payload identifier.
+     *
+     * @param string $identifier The identifier to set it to
+     *
+     * @return APNSPayload Self Reference
+     */
+    public function set_identifier($identifier)
+    {
+        $this->elements['identifier'] = $identifier;
 
         return $this;
     }

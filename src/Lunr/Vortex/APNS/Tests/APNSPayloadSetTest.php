@@ -234,6 +234,146 @@ class APNSPayloadSetTest extends APNSPayloadTest
         $this->assertSame($this->class, $this->class->set_badge('badge'));
     }
 
+    /**
+     * Test set_collapse_key() works correctly.
+     *
+     * @covers \Lunr\Vortex\APNS\APNSPayload::set_collapse_key
+     */
+    public function testCollapseKey(): void
+    {
+        $this->class->set_collapse_key('key');
+
+        $value = $this->get_reflection_property_value('elements');
+
+        $this->assertArrayHasKey('collapse_key', $value);
+        $this->assertEquals('key', $value['collapse_key']);
+    }
+
+    /**
+     * Test fluid interface of set_collapse_key().
+     *
+     * @covers \Lunr\Vortex\APNS\APNSPayload::set_collapse_key
+     */
+    public function testSetCollapseKeyReturnsSelfReference(): void
+    {
+        $this->assertSame($this->class, $this->class->set_collapse_key('badge'));
+    }
+
+    /**
+     * Test set_topic() works correctly.
+     *
+     * @covers \Lunr\Vortex\APNS\APNSPayload::set_topic
+     */
+    public function testTopic(): void
+    {
+        $this->class->set_topic('key');
+
+        $value = $this->get_reflection_property_value('elements');
+
+        $this->assertArrayHasKey('topic', $value);
+        $this->assertEquals('key', $value['topic']);
+    }
+
+    /**
+     * Test fluid interface of set_topic().
+     *
+     * @covers \Lunr\Vortex\APNS\APNSPayload::set_topic
+     */
+    public function testSetTopicReturnsSelfReference(): void
+    {
+        $this->assertSame($this->class, $this->class->set_topic('badge'));
+    }
+
+    /**
+     * Test set_priority() works correctly.
+     *
+     * @covers \Lunr\Vortex\APNS\APNSPayload::set_priority
+     */
+    public function testPriority(): void
+    {
+        $this->class->set_priority(5);
+
+        $value = $this->get_reflection_property_value('elements');
+
+        $this->assertArrayHasKey('priority', $value);
+        $this->assertEquals(5, $value['priority']);
+    }
+
+    /**
+     * Test set_priority() works correctly.
+     *
+     * @covers \Lunr\Vortex\APNS\APNSPayload::set_priority
+     */
+    public function testPriorityIgnoresWrongValues(): void
+    {
+        $this->class->set_priority(7);
+
+        $value = $this->get_reflection_property_value('elements');
+
+        $this->assertArrayHasKey('priority', $value);
+        $this->assertEquals(10, $value['priority']);
+    }
+
+    /**
+     * Test fluid interface of set_priority().
+     *
+     * @covers \Lunr\Vortex\APNS\APNSPayload::set_priority
+     */
+    public function testSetPriorityReturnsSelfReference(): void
+    {
+        $this->assertSame($this->class, $this->class->set_priority('badge'));
+    }
+
+    /**
+     * Test set_identifier() works correctly.
+     *
+     * @covers \Lunr\Vortex\APNS\APNSPayload::set_identifier
+     */
+    public function testIdentifier(): void
+    {
+        $this->class->set_identifier('key');
+
+        $value = $this->get_reflection_property_value('elements');
+
+        $this->assertArrayHasKey('identifier', $value);
+        $this->assertEquals('key', $value['identifier']);
+    }
+
+    /**
+     * Test fluid interface of set_identifier().
+     *
+     * @covers \Lunr\Vortex\APNS\APNSPayload::set_identifier
+     */
+    public function testSetIdentifierReturnsSelfReference(): void
+    {
+        $this->assertSame($this->class, $this->class->set_identifier('badge'));
+    }
+
+    /**
+     * Test set_mutable_content() works correctly.
+     *
+     * @covers \Lunr\Vortex\APNS\APNSPayload::set_mutable_content
+     */
+    public function testMutableContent(): void
+    {
+        $this->class->set_mutable_content(TRUE);
+
+        $value = $this->get_reflection_property_value('elements');
+
+        $this->assertArrayHasKey('mutable_content', $value);
+        $this->assertEquals(TRUE, $value['mutable_content']);
+    }
+
+    /**
+     * Test fluid interface of set_mutable_content().
+     *
+     * @covers \Lunr\Vortex\APNS\APNSPayload::set_mutable_content
+     */
+    public function testSetMutableContentReturnsSelfReference(): void
+    {
+        $this->assertSame($this->class, $this->class->set_mutable_content(TRUE));
+    }
+
 }
 
 ?>
