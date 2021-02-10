@@ -14,7 +14,7 @@ namespace Lunr\Vortex\APNS\ApnsPHP;
 /**
  * Apple Push Notification Service status codes.
  */
-class APNSStatus
+class APNSBinaryStatus
 {
 
     /**

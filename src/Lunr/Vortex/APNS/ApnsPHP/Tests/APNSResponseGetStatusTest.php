@@ -46,17 +46,15 @@ class APNSResponseGetStatusTest extends APNSResponseTest
     {
         $data = [];
 
-        // return unknown status if no status set
-        $data[] = [ [], PushNotificationStatus::UNKNOWN ];
+        $data['unknown status if no status set'] = [ [], PushNotificationStatus::UNKNOWN ];
 
-        // return unknown status if endpoint absent
-        $data[] = [
+        $data['unknown status if endpoint absent'] = [
             [
                 'endpoint1' => PushNotificationStatus::INVALID_ENDPOINT,
             ],
             PushNotificationStatus::UNKNOWN,
         ];
-        $data[] = [
+        $data['unknown status if endpoint absent, full set'] = [
             [
                 'endpoint1' => PushNotificationStatus::ERROR,
                 'endpoint2' => PushNotificationStatus::INVALID_ENDPOINT,
@@ -65,14 +63,13 @@ class APNSResponseGetStatusTest extends APNSResponseTest
             PushNotificationStatus::UNKNOWN,
         ];
 
-        // return endpoint own status if present
-        $data[] = [
+        $data['own status if present'] = [
             [
                 'endpoint_param' => PushNotificationStatus::INVALID_ENDPOINT,
             ],
             PushNotificationStatus::INVALID_ENDPOINT,
         ];
-        $data[] = [
+        $data['own status if present, full set'] = [
             [
                 'endpoint1'      => PushNotificationStatus::ERROR,
                 'endpoint_param' => PushNotificationStatus::SUCCESS,

@@ -82,6 +82,10 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
             'category' => 'messages_for_test',
             'mutable_content' => TRUE,
             'content_available' => TRUE,
+            'topic' => 'com.company.app',
+            'priority' => 5,
+            'collapse_key' => 'key',
+            'identifier' => 'identifier',
             'yo' => 'he',
             'badge' => 7,
             'custom_data' => [
@@ -94,36 +98,51 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
                       ->method('get_payload')
                       ->willReturn($payload);
 
-        $i = -1;
-        $this->apns_message->expects($this->at(++$i))
+        $this->apns_message->expects($this->exactly(1))
                            ->method('setTitle')
                            ->with($payload['title']);
 
-        $this->apns_message->expects($this->at(++$i))
+        $this->apns_message->expects($this->exactly(1))
                            ->method('setText')
                            ->with($payload['body']);
 
-        $this->apns_message->expects($this->at(++$i))
+        $this->apns_message->expects($this->exactly(1))
                            ->method('setThreadID')
                            ->with($payload['thread_id']);
 
-        $this->apns_message->expects($this->at(++$i))
+        $this->apns_message->expects($this->exactly(1))
+                           ->method('setTopic')
+                           ->with($payload['topic']);
+
+        $this->apns_message->expects($this->exactly(1))
+                           ->method('setPriority')
+                           ->with($payload['priority']);
+
+        $this->apns_message->expects($this->exactly(1))
+                           ->method('setCollapseId')
+                           ->with($payload['collapse_key']);
+
+        $this->apns_message->expects($this->exactly(1))
+                           ->method('setCustomIdentifier')
+                           ->with($payload['identifier']);
+
+        $this->apns_message->expects($this->exactly(1))
                            ->method('setSound')
                            ->with($payload['sound']);
 
-        $this->apns_message->expects($this->at(++$i))
+        $this->apns_message->expects($this->exactly(1))
                            ->method('setCategory')
                            ->with($payload['category']);
 
-        $this->apns_message->expects($this->at(++$i))
+        $this->apns_message->expects($this->exactly(1))
                            ->method('setBadge')
                            ->with($payload['badge']);
 
-        $this->apns_message->expects($this->at(++$i))
+        $this->apns_message->expects($this->exactly(1))
                            ->method('setContentAvailable')
                            ->with(TRUE);
 
-        $this->apns_message->expects($this->at(++$i))
+        $this->apns_message->expects($this->exactly(1))
                            ->method('setMutableContent')
                            ->with(TRUE);
 
@@ -218,19 +237,14 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
 
         $pos = 0;
 
-        $this->apns_message->expects($this->at($pos++))
+        $this->apns_message->expects($this->exactly(3))
                            ->method('addRecipient')
-                           ->with('endpoint1')
-                           ->will($this->throwException(new \ApnsPHP_Message_Exception('Invalid endpoint: endpoint1')));
-
-        $this->apns_message->expects($this->at($pos++))
-                           ->method('addRecipient')
-                           ->with('endpoint2');
-
-        $this->apns_message->expects($this->at($pos++))
-                           ->method('addRecipient')
-                           ->with('endpoint3')
-                           ->will($this->throwException(new \ApnsPHP_Message_Exception('Invalid endpoint: endpoint3')));
+                           ->withConsecutive(['endpoint1'], ['endpoint2'], ['endpoint3'])
+                           ->willReturnOnConsecutiveCalls(
+                               $this->throwException(new \ApnsPHP_Message_Exception('Invalid endpoint: endpoint1')),
+                               NULL,
+                               $this->throwException(new \ApnsPHP_Message_Exception('Invalid endpoint: endpoint3'))
+                           );
 
         $this->logger->expects($this->exactly(2))
                      ->method('warning')
@@ -305,17 +319,17 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
 
         $pos = 0;
 
-        $this->apns_push->expects($this->at($pos++))
+        $this->apns_push->expects($this->exactly(1))
                         ->method('add')
                         ->with($this->apns_message);
 
-        $this->apns_push->expects($this->at($pos++))
+        $this->apns_push->expects($this->exactly(1))
                         ->method('connect');
 
-        $this->apns_push->expects($this->at($pos++))
+        $this->apns_push->expects($this->exactly(1))
                         ->method('send');
 
-        $this->apns_push->expects($this->at($pos++))
+        $this->apns_push->expects($this->exactly(1))
                         ->method('disconnect');
 
         $error = [
@@ -325,7 +339,7 @@ class APNSDispatcherPushTest extends APNSDispatcherTest
             ],
         ];
 
-        $this->apns_push->expects($this->at($pos++))
+        $this->apns_push->expects($this->exactly(1))
                         ->method('getErrors')
                         ->willReturn($error);
 
