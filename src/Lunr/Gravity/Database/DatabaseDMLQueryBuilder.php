@@ -356,6 +356,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
         $components[] = 'upsert';
 
+        if ($this->returning != '')
+        {
+            $components[] = 'returning';
+        }
+
         return 'INSERT ' . $this->implode_query($components);
     }
 
