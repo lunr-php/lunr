@@ -55,6 +55,24 @@ class DatabaseDMLQueryBuilderGetReplaceQueryTest extends DatabaseDMLQueryBuilder
     }
 
     /**
+     * Test get replace...returning query using column names and values.
+     *
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes
+     * @covers  Lunr\Gravity\Database\DatabaseDMLQueryBuilder::get_replace_query
+     */
+    public function testGetReplaceReturningValuesQuery(): void
+    {
+        $this->set_reflection_property_value('into', 'INTO table');
+        $this->set_reflection_property_value('column_names', '(column1, column2)');
+        $this->set_reflection_property_value('values', 'VALUES (1,2), (3,4)');
+        $this->set_reflection_property_value('returning', 'RETURNING column1, column2');
+
+        $string = 'REPLACE INTO table (column1, column2) VALUES (1,2), (3,4) RETURNING column1, column2';
+
+        $this->assertEquals($string, $this->class->get_replace_query());
+    }
+
+    /**
      * Test get replace query using SET.
      *
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderImplodeQueryTest::testImplodeQueryWithDuplicateInsertModes

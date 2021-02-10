@@ -399,6 +399,11 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
             $components[] = 'values';
         }
 
+        if ($this->returning != '')
+        {
+            $components[] = 'returning';
+        }
+
         return 'REPLACE ' . $this->implode_query($components);
     }
 
