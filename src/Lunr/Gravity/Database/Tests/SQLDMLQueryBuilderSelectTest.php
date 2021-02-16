@@ -24,8 +24,8 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
     /**
      * Test specifying the SELECT part of a query.
      *
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testInitialSelect
-     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testIncrementalSelect
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsSelectTest::testInitialSelect
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsSelectTest::testIncrementalSelect
      * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::select
      */
     public function testSelect(): void

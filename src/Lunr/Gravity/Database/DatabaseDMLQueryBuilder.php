@@ -439,17 +439,24 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      * Define a SELECT clause.
      *
      * @param string|null $select The columns to select
+     * @param string      $base   Whether to construct SELECT or RETURNING
      *
      * @return void
      */
-    protected function sql_select($select)
+    protected function sql_select($select, $base = 'SELECT')
     {
-        if ($this->select != '')
+        $part = ($base == 'RETURNING') ? 'returning' : 'select';
+
+        if ($this->$part == '' && $base == 'RETURNING')
         {
-            $this->select .= ', ';
+            $this->$part = 'RETURNING ';
+        }
+        elseif ($this->$part != '')
+        {
+            $this->$part .= ', ';
         }
 
-        $this->select .= $select ?? 'NULL';
+        $this->$part .= $select ?? 'NULL';
     }
 
     /**

@@ -46,7 +46,7 @@ class MariaDBDMLQueryBuilder extends MySQLDMLQueryBuilder
      */
     public function returning($fields)
     {
-        $this->returning = 'RETURNING ' . $fields;
+        $this->sql_select($fields, 'RETURNING');
         return $this;
     }
 

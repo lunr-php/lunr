@@ -114,6 +114,7 @@
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetInsertQueryTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetReplaceQueryTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetUpdateQueryTest.php</file>
+            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsSelectTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsFromTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsJoinTest.php</file>
