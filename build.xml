@@ -23,11 +23,10 @@
     </target>
 
     <target name="parallelTasks"
-            description="Run the pdepend, phpmd, phpcpd, phpcs, phpdoc and phploc tasks in parallel using a maximum of 2 threads.">
+            description="Run the pdepend, phpcpd, phpcs, phpdoc and phploc tasks in parallel using a maximum of 2 threads.">
         <parallel threadCount="2">
             <sequential>
                 <antcall target="pdepend"/>
-                <antcall target="phpmd-ci"/>
             </sequential>
             <antcall target="phpcpd"/>
             <antcall target="phpcs"/>
@@ -44,30 +43,6 @@
             <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
             <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
             <arg path="${system}" />
-        </exec>
-    </target>
-
-    <target name="phpmd"
-            description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
-        <exec executable="phpmd">
-            <arg path="${system}" />
-            <arg value="text" />
-            <arg value="tests/phpmd.xml" />
-            <arg value="--suffixes" />
-            <arg value="php" />
-        </exec>
-    </target>
-
-    <target name="phpmd-ci"
-            description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
-        <exec executable="phpmd">
-            <arg path="${system}" />
-            <arg value="xml" />
-            <arg value="tests/phpmd.xml" />
-            <arg value="--reportfile" />
-            <arg value="${basedir}/build/logs/pmd.xml" />
-            <arg value="--suffixes" />
-            <arg value="php" />
         </exec>
     </target>
 

@@ -60,7 +60,6 @@ pipeline {
         stage('Code inspection'){
             steps{
                 parallel (
-                    md: { ant_sh('phpmd-ci') },
                     cpd: { ant_sh('phpcpd') },
                     cs: { ant_sh('phpcs') },
                     stan: { ant_sh('phpstan-ci') },
@@ -69,7 +68,6 @@ pipeline {
             }
             post {
                 always {
-                    recordIssues enabledForFailure: true, tool: pmdParser(pattern: 'build/logs/pmd.xml')
                     recordIssues enabledForFailure: true, tool: cpd(pattern: 'build/logs/pmd-cpd.xml')
                     recordIssues enabledForFailure: true, tool: phpStan(pattern: 'build/logs/phpstan.xml')
                     recordIssues enabledForFailure: true, tool: checkStyle(pattern: 'build/logs/checkstyle.xml'),
