@@ -29,7 +29,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
      */
     public function testPushReturnsPAPResponseObjectOnRequestFailure(): void
     {
-        $this->mock_function('microtime', 'return 12345;');
+        $this->mock_function('microtime', function () { return 12345;});
 
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('password', 'password');
@@ -87,7 +87,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
      */
     public function testPushReturnsPAPResponseObject(): void
     {
-        $this->mock_function('microtime', 'return 12345;');
+        $this->mock_function('microtime', function () { return 12345;});
 
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('password', 'password');
@@ -141,7 +141,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
      */
     public function testPushResetsPropertiesOnRequestFailure(): void
     {
-        $this->mock_function('microtime', 'return 12345;');
+        $this->mock_function('microtime', function () { return 12345;});
 
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('password', 'password');
@@ -201,7 +201,7 @@ class PAPDispatcherPushTest extends PAPDispatcherTest
      */
     public function testPushResetsProperties(): void
     {
-        $this->mock_function('microtime', 'return 12345;');
+        $this->mock_function('microtime', function () { return 12345;});
 
         $this->set_reflection_property_value('auth_token', 'auth_token');
         $this->set_reflection_property_value('password', 'password');

@@ -36,7 +36,7 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
 
         $this->set_reflection_property_value('source', 'sender@domain.com');
 
-        $this->mock_method([ $this->class, 'clone_mail' ], 'return $this->mail_transport;', 'private');
+        $this->mock_method([ $this->class, 'clone_mail' ], function () { return $this->mail_transport;}, 'private');
 
         $this->mail_transport->expects($this->once())
                              ->method('setFrom')
@@ -76,7 +76,7 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
 
         $this->set_reflection_property_value('source', 'sender@domain.com');
 
-        $this->mock_method([ $this->class, 'clone_mail' ], 'return $this->mail_transport;', 'private');
+        $this->mock_method([ $this->class, 'clone_mail' ], function (){return $this->mail_transport;}, 'private');
 
         $this->mail_transport->expects($this->once())
                              ->method('setFrom')
@@ -116,7 +116,7 @@ class EmailDispatcherPushTest extends EmailDispatcherTest
 
         $this->set_reflection_property_value('source', 'sender@domain.com');
 
-        $this->mock_method([ $this->class, 'clone_mail' ], 'return $this->mail_transport;', 'private');
+        $this->mock_method([ $this->class, 'clone_mail' ], function (){return $this->mail_transport;}, 'private');
 
         $this->mail_transport->expects($this->once())
                              ->method('send')

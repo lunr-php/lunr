@@ -66,7 +66,7 @@ class EmailDispatcher implements PushNotificationMultiDispatcherInterface
      *
      * @return \PHPMailer\PHPMailer\PHPMailer Cloned instance of the PHPMailer class
      */
-    private function clone_mail()
+    public function clone_mail()
     {
         return clone $this->mail_transport;
     }

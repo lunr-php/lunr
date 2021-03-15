@@ -111,7 +111,7 @@ class PAPDispatcherBaseTest extends PAPDispatcherTest
      */
     public function testConstructPAPDataConstructsHeadersCorrectly(): void
     {
-        $this->mock_function('microtime', 'return 12345;');
+        $this->mock_function('microtime', function () { return 12345;});
 
         $this->payload->expects($this->once())
                       ->method('get_priority')

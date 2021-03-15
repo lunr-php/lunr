@@ -24,22 +24,10 @@ abstract class EmailResponseTest extends LunrBaseTest
 {
 
     /**
-     * Instance of the EmailResponse class.
-     * @var EmailResponse
-     */
-    protected $class;
-
-    /**
      * Mock instance of the Logger class.
      * @var LoggerInterface
      */
     protected $logger;
-
-    /**
-     * Instance of the ReflectionClass class.
-     * @var ReflectionClass
-     */
-    protected $reflection;
 
     /**
      * Testcase Constructor.
