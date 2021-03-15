@@ -26,12 +26,6 @@ abstract class SessionTest extends LunrBaseTest
 {
 
     /**
-     * Runkit simulation code that returns true;
-     * @var string
-     */
-    const FUNCTION_RETURN_TRUE = 'return TRUE;';
-
-    /**
      * Runkit simulation code that returns id;
      * @var string
      */

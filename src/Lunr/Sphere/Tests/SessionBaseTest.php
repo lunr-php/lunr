@@ -324,7 +324,7 @@ class SessionBaseTest extends SessionTest
     public function testGetNewSessionId(): void
     {
         $this->mock_function('session_id', $this->generate_id_function);
-        $this->mock_function('session_regenerate_id', self::FUNCTION_RETURN_TRUE);
+        $this->mock_function('session_regenerate_id', function () {return TRUE;});
 
         $oldId = $this->class->sessionId();
 
@@ -346,7 +346,7 @@ class SessionBaseTest extends SessionTest
         $this->set_reflection_property_value('started', FALSE);
         $this->set_reflection_property_value('closed', TRUE);
 
-        $this->mock_function('session_start', self::FUNCTION_RETURN_TRUE);
+        $this->mock_function('session_start', function () {return TRUE;});
 
         $this->class->start();
 
@@ -381,7 +381,7 @@ class SessionBaseTest extends SessionTest
         $this->set_reflection_property_value('started', FALSE);
         $this->set_reflection_property_value('closed', TRUE);
 
-        $this->mock_function('session_start', self::FUNCTION_RETURN_TRUE);
+        $this->mock_function('session_start', function () {return TRUE;});
         $this->mock_function('session_id', $this->generate_id_function);
 
         $this->class->resume('2');
@@ -418,7 +418,7 @@ class SessionBaseTest extends SessionTest
         $this->set_reflection_property_value('closed', TRUE);
 
         $this->mock_function('session_id', $this->generate_id_function);
-        $this->mock_function('session_start', self::FUNCTION_RETURN_TRUE);
+        $this->mock_function('session_start', function () {return TRUE;});
 
         $this->class->start('newId');
 
@@ -440,7 +440,7 @@ class SessionBaseTest extends SessionTest
 
         $_SESSION['key'] = 'value';
 
-        $this->mock_function('session_destroy', self::FUNCTION_RETURN_TRUE);
+        $this->mock_function('session_destroy', function () {return TRUE;});
 
         $this->class->destroy();
 
@@ -476,7 +476,7 @@ class SessionBaseTest extends SessionTest
         $this->set_reflection_property_value('started', TRUE);
         $this->set_reflection_property_value('closed', FALSE);
 
-        $this->mock_function('session_write_close', self::FUNCTION_RETURN_TRUE);
+        $this->mock_function('session_write_close', function () {return TRUE;});
 
         $this->class->close();
 
