@@ -26,18 +26,6 @@ abstract class GetoptCliParserTest extends LunrBaseTest
 {
 
     /**
-     * Runkit simulation code for working getopt parsing.
-     * @var string
-     */
-    const PARSE_WORKS = 'return array("a" => FALSE, "b" => "arg");';
-
-    /**
-     * Runkit simulation code for failing getopt parsing.
-     * @var string
-     */
-    const PARSE_FAILS = 'return FALSE;';
-
-    /**
      * Test case constructor.
      */
     public function setUp(): void
