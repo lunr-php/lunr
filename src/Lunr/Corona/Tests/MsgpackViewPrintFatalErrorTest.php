@@ -20,24 +20,6 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
 {
 
     /**
-     * Runkit simulation code for no error.
-     * @var String
-     */
-    const NO_ERROR = 'return NULL;';
-
-    /**
-     * Runkit simulation code for non-fatal error.
-     * @var String
-     */
-    const ERROR = "return [ 'type' => 8, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ];";
-
-    /**
-     * Runkit simulation code for a fatal error.
-     * @var String
-     */
-    const FATAL_ERROR = "return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ];";
-
-    /**
      * Test that print_fatal_error() does not print an error page if there is no error.
      *
      * @requires extension msgpack
@@ -46,7 +28,7 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
      */
     public function testPrintFatalErrorPrintsNothingIfNoError(): void
     {
-        $this->mock_function('error_get_last', self::NO_ERROR);
+        $this->mock_function('error_get_last', fn() => NULL);
 
         $this->expectOutputString('');
 
@@ -64,7 +46,7 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
      */
     public function testPrintFatalErrorPrintsNothingIfErrorNotFatal(): void
     {
-        $this->mock_function('error_get_last', self::ERROR);
+        $this->mock_function('error_get_last', fn() => [ 'type' => 8, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]);
 
         $this->expectOutputString('');
 
@@ -82,7 +64,7 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
      */
     public function testPrintFatalErrorPrintsMsgpack(): void
     {
-        $this->mock_function('error_get_last', self::FATAL_ERROR);
+        $this->mock_function('error_get_last', fn() => [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]);
         $this->mock_function('header', '');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_error.msgpack');

@@ -125,7 +125,7 @@ class RequestParserBaseTest extends RequestParserTest
      */
     public function testParseRawData(): void
     {
-        $this->mock_function('file_get_contents', 'return "raw";');
+        $this->mock_function('file_get_contents', function (){return 'raw';});
 
         $result = $this->class->parse_raw_data();
 

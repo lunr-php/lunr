@@ -20,31 +20,13 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
 {
 
     /**
-     * Runkit simulation code for no error.
-     * @var String
-     */
-    const NO_ERROR = 'return NULL;';
-
-    /**
-     * Runkit simulation code for non-fatal error.
-     * @var String
-     */
-    const ERROR = "return [ 'type' => 8, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ];";
-
-    /**
-     * Runkit simulation code for a fatal error.
-     * @var String
-     */
-    const FATAL_ERROR = "return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ];";
-
-    /**
      * Test that print_fatal_error() does not print an error page if there is no error.
      *
      * @covers   Lunr\Corona\JsonView::print_fatal_error
      */
     public function testPrintFatalErrorPrintsNothingIfNoError(): void
     {
-        $this->mock_function('error_get_last', self::NO_ERROR);
+        $this->mock_function('error_get_last', function (){ return NULL;});
 
         $this->expectOutputString('');
 
@@ -60,7 +42,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      */
     public function testPrintFatalErrorPrintsNothingIfErrorNotFatal(): void
     {
-        $this->mock_function('error_get_last', self::ERROR);
+        $this->mock_function('error_get_last', function (){return [ 'type' => 8, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ];});
 
         $this->expectOutputString('');
 
@@ -77,8 +59,8 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      */
     public function testPrintFatalErrorPrintsPrettyJson(): void
     {
-        $this->mock_function('error_get_last', self::FATAL_ERROR);
-        $this->mock_function('header', '');
+        $this->mock_function('error_get_last', function (){ return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ];});
+        $this->mock_function('header', function (){});
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -100,8 +82,8 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      */
     public function testPrintFatalErrorForWebPrintsJson(): void
     {
-        $this->mock_function('error_get_last', self::FATAL_ERROR);
-        $this->mock_function('header', '');
+        $this->mock_function('error_get_last', function (){ return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ];});
+        $this->mock_function('header', function (){});
 
         $this->request->expects($this->once())
                       ->method('__get')
