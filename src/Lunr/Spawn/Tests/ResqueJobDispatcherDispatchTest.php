@@ -28,7 +28,7 @@ class ResqueJobDispatcherDispatchTest extends ResqueJobDispatcherTest
      */
     public function testDispatchUpdateToken(): void
     {
-        $this->mock_method([ $this->resque, 'enqueue' ], 'return "TOKEN";');
+        $this->mock_method([ $this->resque, 'enqueue' ], function () {return 'TOKEN';});
 
         $this->class->dispatch('job', []);
 
@@ -46,13 +46,13 @@ class ResqueJobDispatcherDispatchTest extends ResqueJobDispatcherTest
      */
     public function testDispatchIn(): void
     {
-        $this->mock_method([ $this->scheduler, 'enqueueIn' ], 'return NULL;');
+        $this->mock_method([ $this->scheduler, 'enqueueIn' ], function () {return NULL;});
 
         $value = $this->class->dispatch_in(30, 'job', []);
 
         $this->assertNull($value);
 
-        $this->unmock_method([ $this->resque, 'enqueueIn' ]);
+        $this->unmock_method([ $this->scheduler, 'enqueueIn' ]);
     }
 
     /**
@@ -62,13 +62,13 @@ class ResqueJobDispatcherDispatchTest extends ResqueJobDispatcherTest
      */
     public function testDispatchAt(): void
     {
-        $this->mock_method([ $this->scheduler, 'enqueueAt' ], 'return NULL;');
+        $this->mock_method([ $this->scheduler, 'enqueueAt' ], function () {return NULL;});
 
         $value = $this->class->dispatch_at(time(), 'job', []);
 
         $this->assertNull($value);
 
-        $this->unmock_method([ $this->resque, 'enqueueAt' ]);
+        $this->unmock_method([ $this->scheduler, 'enqueueAt' ]);
     }
 
 }

@@ -76,7 +76,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
      */
     public function testGetJobIdReturnsToken(): void
     {
-        $this->mock_method([ $this->resque, 'enqueue' ], 'return "TOKEN";');
+        $this->mock_method([ $this->resque, 'enqueue' ], function () {return 'TOKEN';});
 
         $this->class->dispatch('job', []);
 

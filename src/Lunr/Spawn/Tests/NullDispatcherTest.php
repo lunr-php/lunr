@@ -24,18 +24,6 @@ abstract class NullDispatcherTest extends LunrBaseTest
 {
 
     /**
-     * Instance of the LunrBaseTest class.
-     * @var NullDispatcher
-     */
-    protected $class;
-
-    /**
-     * Reflection instance of the LunrBaseTest class.
-     * @var ReflectionClass
-     */
-    protected $reflection;
-
-    /**
      * TestCase Constructor.
      */
     public function setUp(): void

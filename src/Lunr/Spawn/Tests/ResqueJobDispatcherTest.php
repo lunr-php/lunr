@@ -24,18 +24,6 @@ class ResqueJobDispatcherTest extends LunrBaseTest
 {
 
     /**
-     * Instance of the LunrBaseTest class.
-     * @var ResqueJobDispatcher
-     */
-    protected $class;
-
-    /**
-     * Reflection instance of the LunrBaseTest class.
-     * @var ReflectionClass
-     */
-    protected $reflection;
-
-    /**
      * The resque instance of this test case.
      * @var Resque
      */
