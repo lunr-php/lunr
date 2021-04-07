@@ -10,7 +10,6 @@ parameters:
                 - ../src/Lunr/Spark/Facebook/Api.php
                 - ../src/Lunr/Spark/Twitter/Api.php
                 - ../src/Lunr/Spark/Contentful/DeliveryApi.php
-                - ../src/Lunr/Vortex/JPush/JPushBatchResponse.php
     universalObjectCratesClasses:
         - Lunr\Corona\Request
         - Lunr\Corona\FrontController
