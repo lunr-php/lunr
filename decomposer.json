@@ -25,48 +25,16 @@
             "search-path": "/Psr/Log/"
         }
     },
-    "ApnsPHP": {
-        "url": "https://github.com/M2Mobi/apnsphp.git",
-        "version": "2.0.0",
-        "revision": "2.0.0beta1",
-        "psr0": {
-            "path": "/"
-        }
-    },
-    "JWT": {
-        "url": "https://github.com/lcobucci/JWT.git",
-        "version": "3.4.2",
-        "psr4": {
-            "prefix": "Lcobucci\\JWT",
-            "search-path": "/src/"
-        }
-    },
-    "Clock": {
-        "url": "https://github.com/lcobucci/Clock.git",
-        "version": "2.0.0",
-        "psr4": {
-            "prefix": "Lcobucci\\Clock",
-            "search-path": "/src/"
-        }
-    },
-    "PHPMailer": {
-        "url": "https://github.com/PHPMailer/PHPMailer.git",
-        "version": "6.1.6",
-        "psr4": {
-            "prefix": "PHPMailer\\PHPMailer",
-            "search-path": "/src/"
-        }
-    },
     "Requests": {
-        "url": "https://github.com/rmccue/Requests.git",
-        "version": "1.7.0",
+        "url": "https://github.com/WordPress/Requests.git",
+        "version": "1.8.0",
         "psr0": {
             "path": "/library/"
         }
     },
     "Credis": {
         "url": "https://github.com/colinmollenhour/credis.git",
-        "version": "1.11.1",
+        "version": "1.12.1",
         "target-dir": "/Credis",
         "psr0": {
             "path": "/"
