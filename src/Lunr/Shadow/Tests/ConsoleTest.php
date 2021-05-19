@@ -28,23 +28,23 @@ class ConsoleTest extends LunrBaseTest
      * DateTime string used for Console Output.
      * @var String
      */
-    const DATETIME_STRING = '2011-11-10 10:30:22';
+    const DATETIME_STRING = '2011-11-10 09:11:22';
+
+    /**
+     * Shared time for the test.
+     *
+     * @var \DateTimeImmutable
+     */
+    private $datetime;
 
     /**
      * TestCase Constructor.
      */
     public function setUp(): void
     {
-        $datetime = $this->getMockBuilder('Lunr\Core\DateTime')->getMock();
-        $datetime->expects($this->once())
-                 ->method('set_datetime_format')
-                 ->will($this->returnValue(TRUE));
-        $datetime->expects($this->any())
-                 ->method('get_datetime')
-                 ->will($this->returnValue(self::DATETIME_STRING));
-
-        $this->class = new Console($datetime);
-
+        $this->datetime   = $this->getMockBuilder('DateTime')
+                                 ->getMock();
+        $this->class      = new Console($this->datetime);
         $this->reflection = new ReflectionClass('Lunr\Shadow\Console');
     }
 
@@ -64,6 +64,14 @@ class ConsoleTest extends LunrBaseTest
      */
     public function testBuildCliOutput(): void
     {
+        $this->datetime->expects($this->once())
+                       ->method('setTimestamp')
+                       ->will($this->returnSelf());
+        $this->datetime->expects($this->once())
+                       ->method('format')
+                       ->with('Y-m-d H:m:s')
+                       ->will($this->returnValue(self::DATETIME_STRING));
+
         $method = $this->get_accessible_reflection_method('build_cli_output');
         $msg    = 'Test';
         $output = self::DATETIME_STRING . ': ' . $msg;
@@ -77,6 +85,14 @@ class ConsoleTest extends LunrBaseTest
      */
     public function testCliPrint(): void
     {
+        $this->datetime->expects($this->once())
+                       ->method('setTimestamp')
+                       ->will($this->returnSelf());
+        $this->datetime->expects($this->once())
+                       ->method('format')
+                       ->with('Y-m-d H:m:s')
+                       ->will($this->returnValue(self::DATETIME_STRING));
+
         $msg    = 'Test';
         $output = self::DATETIME_STRING . ': ' . $msg;
 
@@ -91,11 +107,43 @@ class ConsoleTest extends LunrBaseTest
      */
     public function testCliPrintln(): void
     {
+        $this->datetime->expects($this->once())
+                       ->method('setTimestamp')
+                       ->will($this->returnSelf());
+        $this->datetime->expects($this->once())
+                       ->method('format')
+                       ->with('Y-m-d H:m:s')
+                       ->will($this->returnValue(self::DATETIME_STRING));
+
         $msg    = 'Test';
         $output = self::DATETIME_STRING . ': ' . $msg . "\n";
 
         $this->expectOutputString($output);
         $this->class->cli_println($msg);
+    }
+
+    /**
+     * Test the output of a string with a linebreak at the end.
+     *
+     * @covers Lunr\Shadow\Console::cli_println
+     */
+    public function testCliPrintlnCustomFormat(): void
+    {
+        $this->datetime->expects($this->once())
+                       ->method('setTimestamp')
+                       ->will($this->returnSelf());
+        $this->datetime->expects($this->once())
+                       ->method('format')
+                       ->with('c')
+                       ->will($this->returnValue('2011-11-10T09:30:22+00:00'));
+
+        $class = new Console($this->datetime, 'c');
+
+        $msg    = 'Test';
+        $output = '2011-11-10T09:30:22+00:00: ' . $msg . "\n";
+
+        $this->expectOutputString($output);
+        $class->cli_println($msg);
     }
 
     /**

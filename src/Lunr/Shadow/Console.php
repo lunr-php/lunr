@@ -11,8 +11,10 @@
 
 namespace Lunr\Shadow;
 
+use DateTime;
+
 /**
- * The Console class provides function to immediatly
+ * The Console class provides function to immediately
  * output strings. Though this is certainly not a usecase
  * restricted to the console environment, this is where
  * it's primary usecase lies.
@@ -27,14 +29,20 @@ class Console
     private $datetime;
 
     /**
+     * DateTime format.
+     * @var string
+     */
+    private $time_format;
+
+    /**
      * Constructor.
      *
      * @param DateTime $datetime Instance of the DateTime class.
      */
-    public function __construct($datetime)
+    public function __construct($datetime, $time_format = 'Y-m-d H:m:s')
     {
-        $this->datetime = $datetime;
-        $this->datetime->set_datetime_format('%Y-%m-%d %H:%M:%S');
+        $this->datetime    = $datetime;
+        $this->time_format = $time_format;
     }
 
     /**
@@ -42,11 +50,12 @@ class Console
      */
     public function __destruct()
     {
+        unset($this->time_format);
         unset($this->datetime);
     }
 
     /**
-     * Print given message immediatly.
+     * Print given message immediately.
      *
      * @param string $msg Message to print
      *
@@ -58,7 +67,7 @@ class Console
     }
 
     /**
-     * Print given message immediatly and break the line afterwards.
+     * Print given message immediately and break the line afterwards.
      *
      * @param string $msg Message to print
      *
@@ -78,7 +87,9 @@ class Console
      */
     private function build_cli_output($msg)
     {
-        return $this->datetime->get_datetime() . ': ' . $msg;
+        $time_string = $this->datetime->setTimestamp(time())
+                                      ->format($this->time_format);
+        return $time_string . ': ' . $msg;
     }
 
     /**
