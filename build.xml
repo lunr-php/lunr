@@ -164,11 +164,26 @@
         <exec executable="support/gen_l10n.sh" />
     </target>
 
-     <target name="setup">
-         <exec executable="decomposer">
-             <arg value="install"/>
-         </exec>
-     </target>
+    <target name="dependencies">
+        <exec executable="decomposer">
+            <arg value="install"/>
+            <arg value="--no-dev" />
+        </exec>
+    </target>
+
+    <target name="dev-dependencies">
+        <exec executable="decomposer">
+            <arg value="install"/>
+        </exec>
+    </target>
+
+    <target name="setup"
+            description="Setup runtime environment"
+            depends="dependencies" />
+
+    <target name="dev-setup"
+            description="Setup runtime environment"
+            depends="clean,dev-dependencies" />
 
     <target name="build" depends="clean,setup,parallelTasks,phpunit,phpcb" />
 </project>
