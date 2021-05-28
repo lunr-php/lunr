@@ -405,7 +405,13 @@ class MySQLConnection extends DatabaseConnection
 
         $this->logger->debug('query: {query}', ['query' => $sql_query]);
 
-        return new MySQLQueryResult($sql_query, $this->mysqli->query($sql_query), $this->mysqli);
+        $query_start = microtime(TRUE);
+        $result      = $this->mysqli->query($sql_query);
+        $query_end   = microtime(TRUE);
+
+        $this->logger->debug('Query executed in ' . ($query_end - $query_start) . ' seconds');
+
+        return new MySQLQueryResult($sql_query, $result, $this->mysqli);
     }
 
     /**

@@ -58,11 +58,15 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
                ->method('query')
                ->will($this->returnValue(TRUE));
 
-        $this->logger->expects($this->once())
+        $this->mock_function('microtime', function () {return 1; });
+
+        $this->logger->expects($this->exactly(2))
                      ->method('debug')
-                     ->with('query: {query}', ['query' => 'query']);
+                     ->withConsecutive([ 'query: {query}', ['query' => 'query'] ], [ 'Query executed in 0 seconds' ]);
 
         $query = $this->class->query('query');
+
+        $this->unmock_function('microtime');
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLQueryResult', $query);
         $this->assertFalse($query->has_failed());
@@ -87,11 +91,15 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
                ->with($this->equalTo('/*hint*/query'))
                ->will($this->returnValue(TRUE));
 
-        $this->logger->expects($this->once())
+        $this->mock_function('microtime', function () {return 1; });
+
+        $this->logger->expects($this->exactly(2))
                      ->method('debug')
-                     ->with('query: {query}', ['query' => '/*hint*/query']);
+                     ->withConsecutive([ 'query: {query}', ['query' => '/*hint*/query'] ], [ 'Query executed in 0 seconds' ]);
 
         $query = $this->class->query('query');
+
+        $this->unmock_function('microtime');
 
         $this->assertEquals('/*hint*/query', $query->query());
     }
@@ -117,11 +125,15 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
                ->with($this->equalTo('/*hint*/query'))
                ->will($this->returnValue(TRUE));
 
-        $this->logger->expects($this->once())
+        $this->mock_function('microtime', function () {return 1; });
+
+        $this->logger->expects($this->exactly(2))
                      ->method('debug')
-                     ->with('query: {query}', ['query' => '/*hint*/query']);
+                     ->withConsecutive([ 'query: {query}', ['query' => '/*hint*/query'] ], [ 'Query executed in 0 seconds' ]);
 
         $this->class->query('query');
+
+        $this->unmock_function('microtime');
 
         $this->assertSame('', $hint->getValue($this->class));
     }
