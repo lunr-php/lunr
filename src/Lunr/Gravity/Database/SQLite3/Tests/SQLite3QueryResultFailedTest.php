@@ -155,7 +155,7 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
     /**
      * Test that the has_deadlock() method returns TRUE.
      *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::has_deadlock
+     * @covers \Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::has_deadlock
      */
     public function testHasDeadlockReturnsTrue(): void
     {
@@ -167,13 +167,37 @@ class SQLite3QueryResultFailedTest extends SQLite3QueryResultTest
     /**
      * Test that the has_deadlock() method returns FALSE.
      *
-     * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::has_deadlock
+     * @covers \Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::has_deadlock
      */
     public function testHasDeadlockReturnsFalse(): void
     {
         $this->set_reflection_property_value('error_number', 999);
 
         $this->assertFalse($this->class->has_deadlock());
+    }
+
+    /**
+     * Test that the has_lock_timeout() method returns TRUE.
+     *
+     * @covers \Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::has_lock_timeout
+     */
+    public function testLockTimeoutReturnsTrue(): void
+    {
+        $this->set_reflection_property_value('error_number', 5);
+
+        $this->assertTrue($this->class->has_lock_timeout());
+    }
+
+    /**
+     * Test that the has_lock_timeout() method returns FALSE.
+     *
+     * @covers \Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::has_lock_timeout
+     */
+    public function testLockTimeoutReturnsFalse(): void
+    {
+        $this->set_reflection_property_value('error_number', 999);
+
+        $this->assertFalse($this->class->has_lock_timeout());
     }
 
 }

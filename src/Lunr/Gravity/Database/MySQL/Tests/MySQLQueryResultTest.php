@@ -12,7 +12,7 @@
 namespace Lunr\Gravity\Database\MySQL\Tests;
 
 use Lunr\Gravity\Database\MySQL\MySQLQueryResult;
-use PHPUnit\Framework\TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 use mysqli;
 use mysqli_result;
@@ -23,7 +23,7 @@ use mysqli_result;
  *
  * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult
  */
-abstract class MySQLQueryResultTest extends TestCase
+abstract class MySQLQueryResultTest extends LunrBaseTest
 {
 
     /**

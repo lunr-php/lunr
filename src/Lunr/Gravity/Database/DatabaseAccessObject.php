@@ -13,6 +13,7 @@ namespace Lunr\Gravity\Database;
 
 use Lunr\Gravity\DataAccessObjectInterface;
 use Lunr\Gravity\Database\Exceptions\DeadlockException;
+use Lunr\Gravity\Database\Exceptions\LockTimeoutException;
 use Lunr\Gravity\Database\Exceptions\QueryException;
 
 /**
@@ -101,7 +102,11 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         $context = [ 'query' => $query->query(), 'error' => $query->error_message() ];
         $this->logger->error('{query}; failed with error: {error}', $context);
 
-        if ($query->has_deadlock() === TRUE)
+        if ($query->has_lock_timeout() === TRUE)
+        {
+            throw new LockTimeoutException($query, 'Database query lock timeout!');
+        }
+        elseif ($query->has_deadlock() === TRUE)
         {
             throw new DeadlockException($query, 'Database query deadlock!');
         }

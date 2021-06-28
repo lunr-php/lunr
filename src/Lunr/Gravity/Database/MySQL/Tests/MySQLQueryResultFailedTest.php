@@ -223,6 +223,36 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
         $this->assertFalse($this->result->has_deadlock());
     }
 
+    /**
+     * Test that the has_lock_timeout() method returns TRUE.
+     *
+     * @covers \Lunr\Gravity\Database\MySQL\MySQLQueryResult::has_lock_timeout
+     */
+    public function testLockTimeoutReturnsTrue(): void
+    {
+        $property = $this->result_reflection->getProperty('error_number');
+        $property->setAccessible(TRUE);
+
+        $property->setValue($this->result, 1205);
+
+        $this->assertTrue($this->result->has_lock_timeout());
+    }
+
+    /**
+     * Test that the has_lock_timeout() method returns FALSE.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::has_lock_timeout
+     */
+    public function testLockTimeoutReturnsFalse(): void
+    {
+        $property = $this->result_reflection->getProperty('error_number');
+        $property->setAccessible(TRUE);
+
+        $property->setValue($this->result, 999);
+
+        $this->assertFalse($this->result->has_lock_timeout());
+    }
+
 }
 
 ?>

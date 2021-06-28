@@ -32,6 +32,13 @@ interface DatabaseQueryResultInterface
     public function has_deadlock();
 
     /**
+     * Check whether the query has a lock timeout or not.
+     *
+     * @return boolean the timeout lock status for the query
+     */
+    public function has_lock_timeout();
+
+    /**
      * Get string description of the error, if there was one.
      *
      * @return string $message Error Message

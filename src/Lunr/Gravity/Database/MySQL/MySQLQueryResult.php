@@ -12,6 +12,7 @@
 namespace Lunr\Gravity\Database\MySQL;
 
 use Lunr\Gravity\Database\DatabaseQueryResultInterface;
+use MySQLi;
 use MySQLi_Result;
 
 /**
@@ -24,6 +25,12 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      * @var Integer
      */
     const DEADLOCK_ERR_CODE = 1213;
+
+    /**
+     * The MySQL error code for transaction lock timeout.
+     * @var Integer
+     */
+    const LOCK_TIMEOUT_ERR_CODE = 1205;
 
     /**
      * The query string that was executed.
@@ -169,6 +176,16 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     public function has_deadlock()
     {
         return ($this->error_number == self::DEADLOCK_ERR_CODE) ? TRUE : FALSE;
+    }
+
+    /**
+     * Check whether the query has a lock timeout or not.
+     *
+     * @return boolean the timeout lock status for the query
+     */
+    public function has_lock_timeout()
+    {
+        return $this->error_number == self::LOCK_TIMEOUT_ERR_CODE;
     }
 
     /**

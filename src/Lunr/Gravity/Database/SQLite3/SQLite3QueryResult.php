@@ -25,6 +25,12 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
      * The Sqlite3 error code for transaction deadlock.
      * @var Integer
      */
+    const LOCK_TIMEOUT_ERR_CODE = 5;
+
+    /**
+     * The Sqlite3 error code for transaction deadlock.
+     * @var Integer
+     */
     const DEADLOCK_ERR_CODE = 6;
 
     /**
@@ -150,7 +156,17 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
      */
     public function has_deadlock()
     {
-        return ($this->error_number == self::DEADLOCK_ERR_CODE);
+        return $this->error_number == self::DEADLOCK_ERR_CODE;
+    }
+
+    /**
+     * Check whether the query has a lock timeout or not.
+     *
+     * @return boolean the timeout lock status for the query
+     */
+    public function has_lock_timeout()
+    {
+        return $this->error_number == self::LOCK_TIMEOUT_ERR_CODE;
     }
 
     /**
