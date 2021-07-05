@@ -29,20 +29,9 @@ class ApiFetchDataTest extends ApiTest
      */
     public function testFetchDataSetsUsedAccessTokenTrueWhenUsingAccessToken(): void
     {
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
-
-        $this->cas->expects($this->at(2))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret_proof'))
-                  ->will($this->returnValue('Proof'));
+                  ->willReturnMap([['facebook', 'access_token', 'Token'], ['facebook', 'app_secret_proof', 'Proof']]);
 
         $this->http->expects($this->any())
                    ->method('request')
@@ -93,7 +82,7 @@ class ApiFetchDataTest extends ApiTest
         $url    = 'http://localhost';
         $params = [ 'fields' => 'email,user_likes' ];
 
-        $this->http->expects($this->at(0))
+        $this->http->expects($this->exactly(1))
                    ->method('request')
                    ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
@@ -116,7 +105,7 @@ class ApiFetchDataTest extends ApiTest
 
         $url = 'http://localhost';
 
-        $this->http->expects($this->at(0))
+        $this->http->expects($this->atLeastOnce())
                    ->method('request')
                    ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
@@ -132,20 +121,9 @@ class ApiFetchDataTest extends ApiTest
      */
     public function testFetchDataUsesAccessTokenIfPresent(): void
     {
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
-
-        $this->cas->expects($this->at(2))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret_proof'))
-                  ->will($this->returnValue('Proof'));
+                  ->willReturnMap([['facebook', 'access_token', 'Token'], ['facebook', 'app_secret_proof', 'Proof']]);
 
         $url    = 'http://localhost';
         $params = [
@@ -153,9 +131,9 @@ class ApiFetchDataTest extends ApiTest
             'appsecret_proof' => 'Proof',
         ];
 
-        $this->http->expects($this->at(0))
+        $this->http->expects($this->exactly(1))
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
+                   ->with($url, [], $params, 'GET')
                    ->will($this->returnValue($this->response));
 
         $method = $this->get_accessible_reflection_method('fetch_data');
@@ -176,7 +154,7 @@ class ApiFetchDataTest extends ApiTest
 
         $url = 'http://localhost';
 
-        $this->http->expects($this->at(0))
+        $this->http->expects($this->atLeastOnce())
                    ->method('request')
                    ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));
@@ -201,7 +179,7 @@ class ApiFetchDataTest extends ApiTest
 
         $url = 'http://localhost';
 
-        $this->http->expects($this->at(0))
+        $this->http->expects($this->atLeastOnce())
                    ->method('request')
                    ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
                    ->will($this->returnValue($this->response));

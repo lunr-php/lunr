@@ -65,20 +65,10 @@ class AuthenticationApiTest extends AuthenticationTest
         $url    = 'https://api.twitter.com/oauth2/token';
         $params = [ 'grant_type' => 'client_credentials' ];
 
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('user_agent'))
-                  ->will($this->returnValue('lunr.nl'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('consumer_key'))
-                  ->will($this->returnValue('Key'));
-
-        $this->cas->expects($this->at(2))
-                  ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('consumer_secret'))
-                  ->will($this->returnValue('Secret'));
+                  ->withConsecutive(['twitter', 'user_agent'], ['twitter', 'consumer_key'], ['twitter', 'consumer_secret'])
+                  ->willReturnOnConsecutiveCalls('lunr.nl', 'Key', 'Secret');
 
         $this->http->expects($this->once())
                    ->method('request')
@@ -105,20 +95,10 @@ class AuthenticationApiTest extends AuthenticationTest
         $url    = 'https://api.twitter.com/oauth2/token';
         $params = [ 'grant_type' => 'client_credentials' ];
 
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('user_agent'))
-                  ->will($this->returnValue('lunr.nl'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('consumer_key'))
-                  ->will($this->returnValue('Key'));
-
-        $this->cas->expects($this->at(2))
-                  ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('consumer_secret'))
-                  ->will($this->returnValue('Secret'));
+                  ->withConsecutive(['twitter', 'user_agent'], ['twitter', 'consumer_key'], ['twitter', 'consumer_secret'])
+                  ->willReturnOnConsecutiveCalls('lunr.nl', 'Key', 'Secret');
 
         $this->http->expects($this->once())
                    ->method('request')
@@ -141,20 +121,10 @@ class AuthenticationApiTest extends AuthenticationTest
         $url    = 'https://api.twitter.com/oauth2/token';
         $params = [ 'grant_type' => 'client_credentials' ];
 
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('user_agent'))
-                  ->will($this->returnValue('lunr.nl'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('consumer_key'))
-                  ->will($this->returnValue('Key'));
-
-        $this->cas->expects($this->at(2))
-                  ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('consumer_secret'))
-                  ->will($this->returnValue('Secret'));
+                  ->withConsecutive(['twitter', 'user_agent'], ['twitter', 'consumer_key'], ['twitter', 'consumer_secret'])
+                  ->willReturnOnConsecutiveCalls('lunr.nl', 'Key', 'Secret');
 
         $this->http->expects($this->once())
                    ->method('request')
@@ -184,20 +154,10 @@ class AuthenticationApiTest extends AuthenticationTest
         $url    = 'https://api.twitter.com/oauth2/token';
         $params = [ 'grant_type' => 'client_credentials' ];
 
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('user_agent'))
-                  ->will($this->returnValue('lunr.nl'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('consumer_key'))
-                  ->will($this->returnValue('Key'));
-
-        $this->cas->expects($this->at(2))
-                  ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('consumer_secret'))
-                  ->will($this->returnValue('Secret'));
+                  ->withConsecutive(['twitter', 'user_agent'], ['twitter', 'consumer_key'], ['twitter', 'consumer_secret'])
+                  ->willReturnOnConsecutiveCalls('lunr.nl', 'Key', 'Secret');
 
         $this->http->expects($this->once())
                    ->method('request')

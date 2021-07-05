@@ -29,20 +29,9 @@ class UserProfileGetDataTest extends UserProfileTest
      */
     public function testGetDataSetsUsedAccessTokenTrueWhenUsingAccessToken(): void
     {
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(6))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
-
-        $this->cas->expects($this->at(2))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret_proof'))
-                  ->will($this->returnValue('Proof'));
+                  ->willReturnMap([['facebook', 'access_token', 'Token'], ['facebook', 'app_secret_proof', 'Proof']]);
 
         $this->http->expects($this->any())
                    ->method('request')
@@ -129,30 +118,21 @@ class UserProfileGetDataTest extends UserProfileTest
      */
     public function testGetDataUsesAccessTokenIfPresent(): void
     {
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(6))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
+                  ->willReturnMap([['facebook', 'access_token', 'Token'], ['facebook', 'app_secret_proof', 'Proof']]);
 
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
-
-        $this->cas->expects($this->at(2))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret_proof'))
-                  ->will($this->returnValue('Proof'));
-
-        $url    = 'https://graph.facebook.com/me';
         $params = [
             'access_token'    => 'Token',
             'appsecret_proof' => 'Proof',
         ];
 
-        $this->http->expects($this->once())
+        $this->http->expects($this->exactly(2))
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
+                   ->withConsecutive(
+                       ['https://graph.facebook.com/me', [], $params, 'GET'],
+                       ['https://graph.facebook.com/me/permissions', [], ['access_token' => 'Token'], 'GET']
+                   )
                    ->will($this->returnValue($this->response));
 
         $this->class->get_data();
@@ -309,23 +289,17 @@ class UserProfileGetDataTest extends UserProfileTest
                   ->method('get')
                   ->will($this->onConsecutiveCalls('Token', 'Token', 'Proof', 'Token', 'Token', 'Token'));
 
-        $url    = 'https://graph.facebook.com/me';
         $params = [
             'access_token'    => 'Token',
             'appsecret_proof' => 'Proof',
         ];
 
-        $this->http->expects($this->at(0))
+        $this->http->expects($this->exactly(2))
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
-
-        $url    = 'https://graph.facebook.com/me/permissions';
-        $params = [ 'access_token' => 'Token' ];
-
-        $this->http->expects($this->at(1))
-                   ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
+                   ->withConsecutive(
+                       ['https://graph.facebook.com/me', [], $params, 'GET'],
+                       ['https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'Token' ], 'GET']
+                   )
                    ->will($this->returnValue($this->response));
 
         $this->response->status_code = 200;

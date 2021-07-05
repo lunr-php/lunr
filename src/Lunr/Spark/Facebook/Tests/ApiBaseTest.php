@@ -126,9 +126,9 @@ class ApiBaseTest extends ApiTest
      */
     public function testSetAccessTokenSetsAccessToken(): void
     {
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(2))
                   ->method('add')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'), $this->equalTo('value'));
+                  ->withConsecutive(['facebook', 'access_token', 'value'], ['facebook', 'app_secret_proof', '60171bc5120682242e965d963059fa40f43ae90ad05668dfc686e089f95b89aa']);
 
         $this->class->access_token = 'value';
     }
@@ -142,9 +142,9 @@ class ApiBaseTest extends ApiTest
     {
         $proof = hash_hmac('sha256', 'value', 'app_secret');
 
-        $this->cas->expects($this->at(2))
+        $this->cas->expects($this->exactly(2))
                   ->method('add')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret_proof'), $this->equalTo($proof));
+                  ->withConsecutive(['facebook', 'access_token', 'value'], ['facebook', 'app_secret_proof', $proof]);
 
         $this->cas->expects($this->once())
                   ->method('get')

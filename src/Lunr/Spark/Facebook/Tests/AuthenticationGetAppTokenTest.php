@@ -36,15 +36,9 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
             'grant_type'    => 'client_credentials',
         ];
 
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_id'))
-                  ->will($this->returnValue('Lunr'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret'))
-                  ->will($this->returnValue('Secret'));
+                  ->willReturnMap([['facebook', 'app_id', 'Lunr'], ['facebook', 'app_secret', 'Secret']]);
 
         $this->http->expects($this->once())
                    ->method('request')
@@ -96,15 +90,9 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
             'grant_type'    => 'client_credentials',
         ];
 
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_id'))
-                  ->will($this->returnValue('Lunr'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret'))
-                  ->will($this->returnValue('Secret'));
+                  ->willReturnMap([['facebook', 'app_id', 'Lunr'], ['facebook', 'app_secret', 'Secret']]);
 
         $this->http->expects($this->once())
                    ->method('request')
@@ -128,15 +116,9 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
             'grant_type'    => 'client_credentials',
         ];
 
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_id'))
-                  ->will($this->returnValue('Lunr'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret'))
-                  ->will($this->returnValue('Secret'));
+                  ->willReturnMap([['facebook', 'app_id', 'Lunr'], ['facebook', 'app_secret', 'Secret']]);
 
         $this->http->expects($this->once())
                    ->method('request')
@@ -146,9 +128,12 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
         $this->response->status_code = 200;
         $this->response->body        = 'access_token=Token';
 
-        $this->cas->expects($this->at(2))
+        $this->cas->expects($this->exactly(2))
                   ->method('add')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'), $this->equalTo('Token'));
+                  ->withConsecutive(
+                      ['facebook', 'access_token', 'Token'],
+                      ['facebook', 'app_secret_proof', 'bc383bf3bab04208b0e3ba7a71e40164cc2343b0314bcca0e85018c5dc852bfe']
+                  );
 
         $this->class->get_app_access_token();
     }
@@ -167,15 +152,9 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
             'grant_type'    => 'client_credentials',
         ];
 
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_id'))
-                  ->will($this->returnValue('Lunr'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret'))
-                  ->will($this->returnValue('Secret'));
+                  ->willReturnMap([['facebook', 'app_id', 'Lunr'], ['facebook', 'app_secret', 'Secret']]);
 
         $this->http->expects($this->once())
                    ->method('request')
@@ -204,15 +183,9 @@ class AuthenticationGetAppTokenTest extends AuthenticationTest
             'grant_type'    => 'client_credentials',
         ];
 
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_id'))
-                  ->will($this->returnValue('Lunr'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret'))
-                  ->will($this->returnValue('Secret'));
+                  ->willReturnMap([['facebook', 'app_id', 'Lunr'], ['facebook', 'app_secret', 'Secret']]);
 
         $this->http->expects($this->once())
                    ->method('request')

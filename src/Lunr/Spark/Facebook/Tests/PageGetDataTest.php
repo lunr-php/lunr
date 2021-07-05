@@ -97,21 +97,9 @@ class PageGetDataTest extends PageTest
     public function testGetDataUsesAccessTokenIfPresent(): void
     {
         $this->set_reflection_property_value('id', 'page');
-
-        $this->cas->expects($this->at(0))
+        $this->cas->expects($this->exactly(4))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
-
-        $this->cas->expects($this->at(1))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
-
-        $this->cas->expects($this->at(2))
-                  ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret_proof'))
-                  ->will($this->returnValue('Proof'));
+                  ->willReturnMap([['facebook', 'access_token', 'Token'], ['facebook', 'app_secret_proof', 'Proof']]);
 
         $url    = 'https://graph.facebook.com/page';
         $params = [
@@ -289,23 +277,17 @@ class PageGetDataTest extends PageTest
                   ->method('get')
                   ->will($this->onConsecutiveCalls('Token', 'Token', 'Proof', 'Token', 'Token', 'Token'));
 
-        $url    = 'https://graph.facebook.com/page';
         $params = [
             'access_token'    => 'Token',
             'appsecret_proof' => 'Proof',
         ];
 
-        $this->http->expects($this->at(0))
+        $this->http->expects($this->exactly(2))
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
-
-        $url    = 'https://graph.facebook.com/me/permissions';
-        $params = [ 'access_token' => 'Token' ];
-
-        $this->http->expects($this->at(1))
-                   ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
+                   ->withConsecutive(
+                       ['https://graph.facebook.com/page', [], $params, 'GET'],
+                       ['https://graph.facebook.com/me/permissions', [], ['access_token' => 'Token'], 'GET']
+                   )
                    ->will($this->returnValue($this->response));
 
         $this->response->status_code = 200;

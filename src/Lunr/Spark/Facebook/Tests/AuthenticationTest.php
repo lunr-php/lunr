@@ -69,10 +69,9 @@ abstract class AuthenticationTest extends LunrBaseTest
                                ->disableOriginalConstructor()
                                ->getMock();
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('get_get_data')
-                      ->with($this->equalTo('state'))
-                      ->will($this->returnValue(NULL));
+                      ->will($this->returnValueMap([['code', NULL], ['state', NULL]]));
 
         $this->class      = new Authentication($this->cas, $this->logger, $this->http, $this->request);
         $this->reflection = new ReflectionClass('Lunr\Spark\Facebook\Authentication');
@@ -92,15 +91,9 @@ abstract class AuthenticationTest extends LunrBaseTest
                                ->disableOriginalConstructor()
                                ->getMock();
 
-        $this->request->expects($this->at(0))
+        $this->request->expects($this->exactly(2))
                       ->method('get_get_data')
-                      ->with($this->equalTo('state'))
-                      ->will($this->returnValue('String'));
-
-        $this->request->expects($this->at(1))
-                      ->method('get_get_data')
-                      ->with($this->equalTo('code'))
-                      ->will($this->returnValue('String'));
+                      ->will($this->returnValueMap([['code', 'String'], ['state', 'String']]));
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
