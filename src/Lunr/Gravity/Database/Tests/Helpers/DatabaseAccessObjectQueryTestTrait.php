@@ -132,6 +132,32 @@ trait DatabaseAccessObjectQueryTestTrait
                      ->will($this->returnValue(FALSE));
     }
 
+    /**
+     * Expect that a query is successful, after a deadlock-caused retry.
+     *
+     * @return void
+     */
+    protected function expectQuerySuccessAfterRetry(): void
+    {
+        $mock = new FluidInterfaceMock();
+
+        $this->db->expects($this->atLeast(1))
+                 ->method('get_new_dml_query_builder_object')
+                 ->will($this->returnValue($mock));
+
+        $this->db->expects($this->exactly(2))
+                 ->method('query')
+                 ->will($this->returnValue($this->result));
+
+        $this->result->expects($this->once())
+                     ->method('has_failed')
+                     ->willReturnOnConsecutiveCalls(FALSE);
+
+        $this->result->expects($this->exactly(2))
+                     ->method('has_deadlock')
+                     ->willReturnOnConsecutiveCalls(TRUE, FALSE);
+    }
+
 }
 
 ?>
