@@ -537,7 +537,11 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
 
         $query->expects($this->once())
               ->method('has_deadlock')
-              ->will($this->returnValue(FALSE));
+              ->willReturn(FALSE);
+
+        $query->expects($this->once())
+              ->method('has_lock_timeout')
+              ->willReturn(FALSE);
 
         $method = $this->get_accessible_reflection_method('result_retry');
 
@@ -557,18 +561,53 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
                       ->disableOriginalConstructor()
                       ->getMock();
 
-        $query->expects($this->at(0))
+        $query->expects($this->once())
               ->method('has_deadlock')
-              ->will($this->returnValue(TRUE));
+              ->willReturn(TRUE);
 
-        $query->expects($this->at(1))
+        $query->expects($this->once())
               ->method('query')
-              ->will($this->returnValue('sql_query'));
+              ->willReturn('sql_query');
 
         $this->db->expects($this->once())
                  ->method('query')
                  ->with('sql_query')
-                 ->will($this->returnValue($query));
+                 ->willReturn($query);
+
+        $method = $this->get_accessible_reflection_method('result_retry');
+
+        $result = $method->invokeArgs($this->class, [ &$query, 1 ]);
+
+        $this->assertSame($result, $query);
+    }
+
+    /**
+     * Test that result_retry() re-executes the query if there is a lock wait timeout.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::result_retry
+     */
+    public function testResultRetryReExecutesQueryInLockTimeout(): void
+    {
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+                      ->disableOriginalConstructor()
+                      ->getMock();
+
+        $query->expects($this->once())
+              ->method('has_deadlock')
+              ->willReturn(FALSE);
+
+        $query->expects($this->once())
+              ->method('has_lock_timeout')
+              ->willReturn(TRUE);
+
+        $query->expects($this->once())
+              ->method('query')
+              ->willReturn('sql_query');
+
+        $this->db->expects($this->once())
+                 ->method('query')
+                 ->with('sql_query')
+                 ->willReturn($query);
 
         $method = $this->get_accessible_reflection_method('result_retry');
 
@@ -588,22 +627,22 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
                       ->disableOriginalConstructor()
                       ->getMock();
 
-        $query->expects($this->at(0))
+        $query->expects($this->exactly(2))
               ->method('has_deadlock')
-              ->will($this->returnValue(TRUE));
+              ->willReturnOnConsecutiveCalls(TRUE, FALSE);
 
-        $query->expects($this->at(1))
+        $query->expects($this->once())
+              ->method('has_lock_timeout')
+              ->willReturnOnConsecutiveCalls(FALSE);
+
+        $query->expects($this->once())
               ->method('query')
-              ->will($this->returnValue('sql_query'));
+              ->willReturn('sql_query');
 
         $this->db->expects($this->once())
                  ->method('query')
                  ->with('sql_query')
-                 ->will($this->returnValue($query));
-
-        $query->expects($this->at(2))
-              ->method('has_deadlock')
-              ->will($this->returnValue(FALSE));
+                 ->willReturn($query);
 
         $method = $this->get_accessible_reflection_method('result_retry');
 

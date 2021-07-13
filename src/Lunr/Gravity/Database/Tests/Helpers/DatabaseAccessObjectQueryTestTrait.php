@@ -106,6 +106,14 @@ trait DatabaseAccessObjectQueryTestTrait
                      ->method('has_failed')
                      ->will($this->returnValue(TRUE));
 
+        $this->result->expects($this->any())
+                     ->method('has_deadlock')
+                     ->will($this->returnValue(FALSE));
+
+        $this->result->expects($this->any())
+                     ->method('has_lock_timeout')
+                     ->will($this->returnValue(FALSE));
+
         $this->expectException('Lunr\Gravity\Database\Exceptions\QueryException');
         $this->expectExceptionMessage('Database query error!');
     }
@@ -129,6 +137,14 @@ trait DatabaseAccessObjectQueryTestTrait
 
         $this->result->expects($this->once())
                      ->method('has_failed')
+                     ->will($this->returnValue(FALSE));
+
+        $this->result->expects($this->any())
+                     ->method('has_deadlock')
+                     ->will($this->returnValue(FALSE));
+
+        $this->result->expects($this->any())
+                     ->method('has_lock_timeout')
                      ->will($this->returnValue(FALSE));
     }
 
@@ -156,6 +172,10 @@ trait DatabaseAccessObjectQueryTestTrait
         $this->result->expects($this->exactly(2))
                      ->method('has_deadlock')
                      ->willReturnOnConsecutiveCalls(TRUE, FALSE);
+
+        $this->result->expects($this->once())
+                     ->method('has_lock_timeout')
+                     ->willReturnOnConsecutiveCalls(FALSE);
     }
 
 }

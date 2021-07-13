@@ -255,7 +255,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     {
         for ($i = 0; $i < $retry_count; $i++)
         {
-            if ($query->has_deadlock() === FALSE)
+            if ($query->has_deadlock() === FALSE && $query->has_lock_timeout() === FALSE)
             {
                 return $query;
             }
