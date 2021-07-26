@@ -84,6 +84,7 @@ abstract class ApiTest extends LunrBaseTest
     {
         $keys   = [];
         $keys[] = [ 'access_token' ];
+        $keys[] = [ 'management_token' ];
 
         return $keys;
     }

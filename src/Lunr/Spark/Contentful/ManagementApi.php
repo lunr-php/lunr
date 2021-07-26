@@ -149,7 +149,7 @@ class ManagementApi extends Api
     {
         try
         {
-            $headers['Authorization'] = 'Bearer ' . $this->access_token;
+            $headers['Authorization'] = 'Bearer ' . $this->management_token;
 
             $response = $this->http->request($url, $headers, $data, $method);
 

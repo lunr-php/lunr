@@ -96,6 +96,7 @@ class Api
         switch ($key)
         {
             case 'access_token':
+            case 'management_token':
                 return $this->cas->get('contentful', $key);
             default:
                 return NULL;
@@ -115,6 +116,7 @@ class Api
         switch ($key)
         {
             case 'access_token':
+            case 'management_token':
                 $this->cas->add('contentful', $key, $value);
                 break;
             default:

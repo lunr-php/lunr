@@ -31,7 +31,7 @@ class ManagementApiPublishEntryTest extends ManagementApiTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
+                  ->with($this->equalTo('contentful'), $this->equalTo('management_token'))
                   ->will($this->returnValue('token'));
 
         $url     = 'https://api.contentful.com/entries/123456/published';
@@ -71,7 +71,7 @@ class ManagementApiPublishEntryTest extends ManagementApiTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
+                  ->with($this->equalTo('contentful'), $this->equalTo('management_token'))
                   ->will($this->returnValue('token'));
 
         $url     = 'https://api.contentful.com/entries/123456/published';
