@@ -140,6 +140,56 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
     }
 
     /**
+     * Test a successful readwrite connection with ssl.
+     *
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::connect
+     */
+    public function testSuccessfulReconnect(): void
+    {
+        $mysqli = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\Tests\MockMySQLi')
+                       ->setMethods([ 'connect', 'ssl_set', 'set_charset', 'kill', 'close' ])
+                       ->getMock();
+
+        $this->set_reflection_property_value('mysqli', $mysqli);
+
+        $port   = ini_get('mysqli.default_port');
+        $socket = ini_get('mysqli.default_socket');
+
+        $this->set_reflection_property_value('ssl_key', 'ssl_key');
+        $this->set_reflection_property_value('ssl_cert', 'ssl_cert');
+        $this->set_reflection_property_value('ca_cert', 'ca_cert');
+        $this->set_reflection_property_value('ca_path', 'ca_path');
+        $this->set_reflection_property_value('cipher', 'cipher');
+
+        $mysqli->expects($this->exactly(5))
+               ->method('connect')
+               ->with('rw_host', 'username', 'password', 'database', $port, $socket);
+
+        $mysqli->expects($this->exactly(5))
+               ->method('ssl_set')
+               ->with('ssl_key', 'ssl_cert', 'ca_cert', 'ca_path', 'cipher');
+
+        $mysqli->expects($this->exactly(4))
+               ->method('kill');
+
+        $mysqli->expects($this->exactly(4))
+               ->method('close');
+
+        $mysqli->expects($this->exactly(5))
+               ->method('set_charset')
+               ->willReturnOnConsecutiveCalls(FALSE, FALSE, FALSE, FALSE, TRUE);
+
+        $this->class->connect();
+
+        $property = $this->get_accessible_reflection_property('connected');
+
+        $this->assertTrue($property->getValue($this->class));
+
+        $property->setValue($this->class, FALSE);
+    }
+
+    /**
      * Test a failed connection attempt.
      *
      * @covers Lunr\Gravity\Database\MySQL\MySQLConnection::connect
@@ -158,6 +208,67 @@ class MySQLConnectionConnectTest extends MySQLConnectionTest
 
         $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
         $this->expectExceptionMessage('Could not establish connection to the database!');
+
+        try
+        {
+            $this->class->connect();
+        }
+        catch (\Throwable $e)
+        {
+            throw $e;
+        }
+        finally
+        {
+            $property = $this->reflection->getProperty('connected');
+            $property->setAccessible(TRUE);
+
+            $this->assertFalse($this->get_reflection_property_value('connected'));
+        }
+    }
+
+    /**
+     * Test a failed connection attempt.
+     *
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLConnection::connect
+     */
+    public function testUnsuccessfulReconnect(): void
+    {
+        $mysqli = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\Tests\MockMySQLi')
+                       ->setMethods([ 'connect', 'ssl_set', 'set_charset', 'kill', 'close' ])
+                       ->getMock();
+
+        $this->set_reflection_property_value('mysqli', $mysqli);
+
+        $port   = ini_get('mysqli.default_port');
+        $socket = ini_get('mysqli.default_socket');
+
+        $this->set_reflection_property_value('ssl_key', 'ssl_key');
+        $this->set_reflection_property_value('ssl_cert', 'ssl_cert');
+        $this->set_reflection_property_value('ca_cert', 'ca_cert');
+        $this->set_reflection_property_value('ca_path', 'ca_path');
+        $this->set_reflection_property_value('cipher', 'cipher');
+
+        $mysqli->expects($this->exactly(5))
+               ->method('connect')
+               ->with('rw_host', 'username', 'password', 'database', $port, $socket);
+
+        $mysqli->expects($this->exactly(5))
+               ->method('ssl_set')
+               ->with('ssl_key', 'ssl_cert', 'ca_cert', 'ca_path', 'cipher');
+
+        $mysqli->expects($this->exactly(5))
+               ->method('kill');
+
+        $mysqli->expects($this->exactly(5))
+               ->method('close');
+
+        $mysqli->expects($this->exactly(5))
+               ->method('set_charset')
+               ->willReturnOnConsecutiveCalls(FALSE, FALSE, FALSE, FALSE, FALSE);
+
+        $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
+        $this->expectExceptionMessage('Could not establish connection to the database! Exceeded reconnect count!');
 
         try
         {

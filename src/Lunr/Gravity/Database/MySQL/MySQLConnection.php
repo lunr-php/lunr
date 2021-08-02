@@ -112,6 +112,12 @@ class MySQLConnection extends DatabaseConnection
     protected $options;
 
     /**
+     * Limit how often we automatically reconnect after failing to set a charset.
+     * @var int
+     */
+    protected const RECONNECT_LIMIT = 4;
+
+    /**
      * Constructor.
      *
      * @param Configuration   $configuration Shared instance of the configuration class
@@ -207,9 +213,11 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Establishes a connection to the defined mysql-server.
      *
+     * @param int $reconnect_count How often we already tried to connect.
+     *
      * @return void
      */
-    public function connect()
+    public function connect($reconnect_count = 0)
     {
         if ($this->connected === TRUE)
         {
@@ -219,6 +227,11 @@ class MySQLConnection extends DatabaseConnection
         if ($this->configuration['db']['driver'] != 'mysql')
         {
             throw new ConnectionException('Cannot connect to a non-mysql database connection!');
+        }
+
+        if ($reconnect_count > static::RECONNECT_LIMIT)
+        {
+            throw new ConnectionException('Could not establish connection to the database! Exceeded reconnect count!');
         }
 
         $host = ($this->readonly === TRUE) ? $this->ro_host : $this->rw_host;
@@ -237,8 +250,14 @@ class MySQLConnection extends DatabaseConnection
 
         if ($this->mysqli->errno === 0)
         {
-            $this->mysqli->set_charset('utf8mb4');
             $this->connected = TRUE;
+
+            if ($this->mysqli->set_charset('utf8mb4') === FALSE)
+            {
+                // manual re-connect
+                $this->disconnect();
+                $this->connect(++$reconnect_count);
+            }
         }
 
         if ($this->connected === FALSE)
