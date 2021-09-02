@@ -39,7 +39,14 @@ class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObje
 
         $this->assertFileExists($directory);
         $this->assertTrue($this->class->rmdir($directory));
-        $this->assertFileDoesNotExist($directory);
+        if (method_exists($this, 'assertFileDoesNotExist'))
+        {
+            $this->assertFileDoesNotExist($directory);
+        }
+        else
+        {
+            $this->assertFileNotExists($directory);
+        }
     }
 
     /**
