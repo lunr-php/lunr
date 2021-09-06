@@ -17,6 +17,6 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
-[Jenkinsfile, *.xml, *.json]
+[Jenkinsfile, *.xml, *.json, *.neon.dist]
 indent_style = space
 indent_size = 4
