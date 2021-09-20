@@ -45,8 +45,8 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
 
         $_SERVER['SCRIPT_FILENAME'] = '/full/path/to/index.php';
 
-        $this->mock_function('gethostname', function(){ return 'Lunr'; });
-        $this->mock_function('uuid_create', function(){ return '962161b2-7a01-41f3-84c6-3834ad001adf'; });
+        $this->mock_function('gethostname', fn() => 'Lunr');
+        $this->mock_function('uuid_create', fn() => '962161b2-7a01-41f3-84c6-3834ad001adf');
 
         if (($protocol == 'HTTPS' && $port == '443') || ($protocol == 'HTTP' && $port == '80'))
         {

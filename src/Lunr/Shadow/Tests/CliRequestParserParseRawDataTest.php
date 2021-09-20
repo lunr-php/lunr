@@ -27,7 +27,7 @@ class CliRequestParserParseRawDataTest extends CliRequestParserTest
      */
     public function testParseRawData(): void
     {
-        $this->mock_function('file_get_contents', function (){return 'raw';});
+        $this->mock_function('file_get_contents', fn() => 'raw');
 
         $result = $this->class->parse_raw_data();
 
