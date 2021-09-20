@@ -47,8 +47,8 @@ class RequestParserParseRequestTest extends RequestParserTest
             $this->markTestSkipped('Extension uuid is required.');
         }
 
-        $this->mock_function('gethostname', function(){ return "Lunr"; });
-        $this->mock_function('uuid_create', function(){ return "962161b2-7a01-41f3-84c6-3834ad001adf"; });
+        $this->mock_function('gethostname', fn() => 'Lunr');
+        $this->mock_function('uuid_create', fn() => '962161b2-7a01-41f3-84c6-3834ad001adf');
 
         if (($protocol == 'HTTPS' && $port == '443') || ($protocol == 'HTTP' && $port == '80'))
         {
