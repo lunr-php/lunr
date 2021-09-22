@@ -73,7 +73,7 @@ abstract class MariaDBDatabaseAccessObjectTest extends LunrBaseTest
 
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $this->db->expects($this->at(0))
+        $this->db->expects($this->once())
                  ->method('get_query_escaper_object')
                  ->will($this->returnValue($this->escaper));
 
