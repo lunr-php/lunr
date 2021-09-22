@@ -34,10 +34,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testErrorMessageIsEmpty(): void
     {
-        $property = $this->result_reflection->getProperty('error_message');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('', $property->getValue($this->result));
+        $this->assertPropertyEquals('error_message', '');
     }
 
     /**
@@ -45,10 +42,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testErrorNumberIsZero(): void
     {
-        $property = $this->result_reflection->getProperty('error_number');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(0, $property->getValue($this->result));
+        $this->assertPropertyEquals('error_number', 0);
     }
 
     /**
@@ -56,10 +50,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testInsertIDIsZero(): void
     {
-        $property = $this->result_reflection->getProperty('insert_id');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(0, $property->getValue($this->result));
+        $this->assertPropertyEquals('insert_id', 0);
     }
 
     /**
@@ -67,10 +58,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testAffectedRowsIsNumber(): void
     {
-        $property = $this->result_reflection->getProperty('affected_rows');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(10, $property->getValue($this->result));
+        $this->assertPropertyEquals('affected_rows', 10);
     }
 
     /**
@@ -78,10 +66,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testNumberOfRowsIsNumber(): void
     {
-        $property = $this->result_reflection->getProperty('num_rows');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(10, $property->getValue($this->result));
+        $this->assertPropertyEquals('num_rows', 10);
     }
 
     /**
@@ -89,10 +74,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testQueryIsPassedCorrectly(): void
     {
-        $property = $this->result_reflection->getProperty('query');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals($this->query, $property->getValue($this->result));
+        $this->assertPropertyEquals('query', $this->query);
     }
 
     /**
@@ -102,11 +84,9 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testAffectedRowsReturnsNumber(): void
     {
-        $class = $this->result_reflection->getProperty('affected_rows');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->result, 10);
+        $this->set_reflection_property_value('affected_rows', 10);
 
-        $value = $this->result->affected_rows();
+        $value = $this->class->affected_rows();
         $this->assertIsInt($value);
         $this->assertEquals(10, $value);
     }
@@ -118,11 +98,9 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testNumberOfRowsReturnsNumber(): void
     {
-        $class = $this->result_reflection->getProperty('num_rows');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->result, 10);
+        $this->set_reflection_property_value('num_rows', 10);
 
-        $value = $this->result->number_of_rows();
+        $value = $this->class->number_of_rows();
         $this->assertIsInt($value);
         $this->assertEquals(10, $value);
     }
@@ -134,11 +112,9 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testErrorMessageReturnsString(): void
     {
-        $class = $this->result_reflection->getProperty('error_message');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->result, '');
+        $this->set_reflection_property_value('error_message', '');
 
-        $value = $this->result->error_message();
+        $value = $this->class->error_message();
         $this->assertIsString($value);
         $this->assertEquals('', $value);
     }
@@ -150,11 +126,9 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testErrorNumberReturnsNumber(): void
     {
-        $class = $this->result_reflection->getProperty('error_number');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->result, 0);
+        $this->set_reflection_property_value('error_number', 0);
 
-        $value = $this->result->error_number();
+        $value = $this->class->error_number();
         $this->assertIsInt($value);
         $this->assertEquals(0, $value);
     }
@@ -166,11 +140,9 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testInsertIDReturnsNumber(): void
     {
-        $class = $this->result_reflection->getProperty('insert_id');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->result, 0);
+        $this->set_reflection_property_value('insert_id', 0);
 
-        $value = $this->result->insert_id();
+        $value = $this->class->insert_id();
         $this->assertIsInt($value);
         $this->assertEquals(0, $value);
     }
@@ -182,11 +154,9 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testQueryReturnsString(): void
     {
-        $class = $this->result_reflection->getProperty('query');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->result, 'SELECT * FROM table1');
+        $this->set_reflection_property_value('query', 'SELECT * FROM table1');
 
-        $value = $this->result->query();
+        $value = $this->class->query();
         $this->assertIsString($value);
         $this->assertEquals('SELECT * FROM table1', $value);
     }
@@ -196,10 +166,7 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
      */
     public function testMysqliIsPassedByReference(): void
     {
-        $property = $this->result_reflection->getProperty('mysqli');
-        $property->setAccessible(TRUE);
-
-        $value = $property->getValue($this->result);
+        $value = $this->get_reflection_property_value('mysqli');
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\Tests\MockMySQLiSuccessfulConnection', $value);
         $this->assertSame($this->mysqli, $value);

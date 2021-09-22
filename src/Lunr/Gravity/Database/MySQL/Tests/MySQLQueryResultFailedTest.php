@@ -35,10 +35,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testSuccessIsFalse(): void
     {
-        $property = $this->result_reflection->getProperty('success');
-        $property->setAccessible(TRUE);
-
-        $this->assertFalse($property->getValue($this->result));
+        $this->assertFalse($this->get_reflection_property_value('success'));
     }
 
     /**
@@ -46,10 +43,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testResultIsFalse(): void
     {
-        $property = $this->result_reflection->getProperty('result');
-        $property->setAccessible(TRUE);
-
-        $this->assertFalse($property->getValue($this->result));
+        $this->assertFalse($this->get_reflection_property_value('result'));
     }
 
     /**
@@ -57,10 +51,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testFreedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('freed');
-        $property->setAccessible(TRUE);
-
-        $this->assertTrue($property->getValue($this->result));
+        $this->assertTrue($this->get_reflection_property_value('freed'));
     }
 
     /**
@@ -70,7 +61,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testHasFailedReturnsTrue(): void
     {
-        $this->assertTrue($this->result->has_failed());
+        $this->assertTrue($this->class->has_failed());
     }
 
     /**
@@ -78,10 +69,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testErrorMessageIsString(): void
     {
-        $property = $this->result_reflection->getProperty('error_message');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals('bad', $property->getValue($this->result));
+        $this->assertPropertyEquals('error_message', 'bad');
     }
 
     /**
@@ -89,10 +77,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testErrorNumberIsNumber(): void
     {
-        $property = $this->result_reflection->getProperty('error_number');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(666, $property->getValue($this->result));
+        $this->assertPropertyEquals('error_number', 666);
     }
 
     /**
@@ -100,10 +85,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testInsertIDIsZero(): void
     {
-        $property = $this->result_reflection->getProperty('insert_id');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(0, $property->getValue($this->result));
+        $this->assertPropertyEquals('insert_id', 0);
     }
 
     /**
@@ -111,10 +93,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testAffectedRowsIsNumber(): void
     {
-        $property = $this->result_reflection->getProperty('affected_rows');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(10, $property->getValue($this->result));
+        $this->assertPropertyEquals('affected_rows', 10);
     }
 
     /**
@@ -122,10 +101,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testNumberOfRowsIsNumber(): void
     {
-        $property = $this->result_reflection->getProperty('num_rows');
-        $property->setAccessible(TRUE);
-
-        $this->assertEquals(10, $property->getValue($this->result));
+        $this->assertPropertyEquals('num_rows', 10);
     }
 
     /**
@@ -135,11 +111,9 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testNumberOfRowsReturnsNumber(): void
     {
-        $class = $this->result_reflection->getProperty('num_rows');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->result, 666);
+        $this->set_reflection_property_value('num_rows', 666);
 
-        $value = $this->result->number_of_rows();
+        $value = $this->class->number_of_rows();
         $this->assertIsInt($value);
         $this->assertEquals(666, $value);
     }
@@ -151,10 +125,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testResultArrayReturnsEmptyArray(): void
     {
-        $value = $this->result->result_array();
-
-        $this->assertIsArray($value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($this->class->result_array());
     }
 
     /**
@@ -164,10 +135,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testResultRowReturnsEmptyArray(): void
     {
-        $value = $this->result->result_row();
-
-        $this->assertIsArray($value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($this->class->result_row());
     }
 
     /**
@@ -177,10 +145,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testResultColumnReturnsEmptyArray(): void
     {
-        $value = $this->result->result_column('column');
-
-        $this->assertIsArray($value);
-        $this->assertEmpty($value);
+        $this->assertArrayEmpty($this->class->result_column('column'));
     }
 
     /**
@@ -190,7 +155,7 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testResultCellReturnsNull(): void
     {
-        $this->assertNull($this->result->result_cell('cell'));
+        $this->assertNull($this->class->result_cell('cell'));
     }
 
     /**
@@ -200,12 +165,9 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testHasDeadlockReturnsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('error_number');
-        $property->setAccessible(TRUE);
+        $this->set_reflection_property_value('error_number', 1213);
 
-        $property->setValue($this->result, 1213);
-
-        $this->assertTrue($this->result->has_deadlock());
+        $this->assertTrue($this->class->has_deadlock());
     }
 
     /**
@@ -215,12 +177,9 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testHasDeadlockReturnsFalse(): void
     {
-        $property = $this->result_reflection->getProperty('error_number');
-        $property->setAccessible(TRUE);
+        $this->set_reflection_property_value('error_number', 999);
 
-        $property->setValue($this->result, 999);
-
-        $this->assertFalse($this->result->has_deadlock());
+        $this->assertFalse($this->class->has_deadlock());
     }
 
     /**
@@ -230,12 +189,9 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testLockTimeoutReturnsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('error_number');
-        $property->setAccessible(TRUE);
+        $this->set_reflection_property_value('error_number', 1205);
 
-        $property->setValue($this->result, 1205);
-
-        $this->assertTrue($this->result->has_lock_timeout());
+        $this->assertTrue($this->class->has_lock_timeout());
     }
 
     /**
@@ -245,12 +201,9 @@ class MySQLQueryResultFailedTest extends MySQLQueryResultTest
      */
     public function testLockTimeoutReturnsFalse(): void
     {
-        $property = $this->result_reflection->getProperty('error_number');
-        $property->setAccessible(TRUE);
+        $this->set_reflection_property_value('error_number', 999);
 
-        $property->setValue($this->result, 999);
-
-        $this->assertFalse($this->result->has_lock_timeout());
+        $this->assertFalse($this->class->has_lock_timeout());
     }
 
 }

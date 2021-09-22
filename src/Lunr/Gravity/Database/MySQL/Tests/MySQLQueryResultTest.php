@@ -27,18 +27,6 @@ abstract class MySQLQueryResultTest extends LunrBaseTest
 {
 
     /**
-     * Instance of the MySQLQueryResult class.
-     * @var MySQLQueryResult
-     */
-    protected $result;
-
-    /**
-     * Reflection instance of the MySQLQueryResult class.
-     * @var ReflectionClass
-     */
-    protected $result_reflection;
-
-    /**
      * Query result
      * @var mixed
      */
@@ -71,9 +59,9 @@ abstract class MySQLQueryResultTest extends LunrBaseTest
 
         $this->query = 'SELECT * FROM table';
 
-        $this->result = new MySQLQueryResult($this->query, $this->query_result, $this->mysqli);
+        $this->class = new MySQLQueryResult($this->query, $this->query_result, $this->mysqli);
 
-        $this->result_reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLQueryResult');
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLQueryResult');
     }
 
     /**
@@ -89,9 +77,9 @@ abstract class MySQLQueryResultTest extends LunrBaseTest
 
         $this->query = 'SELECT * FROM table';
 
-        $this->result = new MySQLQueryResult($this->query, $this->query_result, $this->mysqli);
+        $this->class = new MySQLQueryResult($this->query, $this->query_result, $this->mysqli);
 
-        $this->result_reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLQueryResult');
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLQueryResult');
     }
 
     /**
@@ -107,9 +95,9 @@ abstract class MySQLQueryResultTest extends LunrBaseTest
 
         $this->query = 'SELECT * FROM table';
 
-        $this->result = new MySQLQueryResult($this->query, $this->query_result, $this->mysqli);
+        $this->class = new MySQLQueryResult($this->query, $this->query_result, $this->mysqli);
 
-        $this->result_reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLQueryResult');
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLQueryResult');
     }
 
     /**
@@ -119,9 +107,9 @@ abstract class MySQLQueryResultTest extends LunrBaseTest
     {
         unset($this->mysqli);
         unset($this->query_result);
-        unset($this->result);
-        unset($this->result_reflection);
         unset($this->query);
+        unset($this->class);
+        unset($this->reflection);
     }
 
 }

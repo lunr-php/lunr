@@ -38,12 +38,11 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
     public function testFreeResultFreesIfFreedIsFalse(): void
     {
         $this->query_result->expects($this->once())
-                           ->method('free');
+                    ->method('free');
 
-        $method = $this->result_reflection->getMethod('free_result');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('free_result');
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
     }
 
     /**
@@ -53,19 +52,16 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      */
     public function testFreeResultDoesNotFreeIfFreedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('freed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $this->set_reflection_property_value('freed', TRUE);
 
         $this->query_result->expects($this->never())
-                           ->method('free');
+                    ->method('free');
 
-        $method = $this->result_reflection->getMethod('free_result');
-        $method->setAccessible(TRUE);
+        $method = $this->get_accessible_reflection_method('free_result');
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
 
-        $property->setValue($this->result, FALSE);
+        // $this->set_reflection_property_value('freed', FALSE);
     }
 
     /**
@@ -78,7 +74,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
         $this->query_result->expects($this->once())
                            ->method('free');
 
-        $this->result->result_array();
+        $this->class->result_array();
     }
 
     /**
@@ -88,14 +84,12 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      */
     public function testResultArrayDoesNotFreeDataIfFreedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('freed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $this->set_reflection_property_value('freed', TRUE);
 
         $this->query_result->expects($this->never())
                            ->method('free');
 
-        $this->result->result_array();
+        $this->class->result_array();
     }
 
     /**
@@ -108,7 +102,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
         $this->query_result->expects($this->once())
                            ->method('free');
 
-        $this->result->result_row();
+        $this->class->result_row();
     }
 
     /**
@@ -118,14 +112,12 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      */
     public function testResultRowDoesNotFreeDataIfFreedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('freed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $this->set_reflection_property_value('freed', TRUE);
 
         $this->query_result->expects($this->never())
                            ->method('free');
 
-        $this->result->result_row();
+        $this->class->result_row();
     }
 
     /**
@@ -138,7 +130,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
         $this->query_result->expects($this->once())
                            ->method('free');
 
-        $this->result->result_column('col');
+        $this->class->result_column('col');
     }
 
     /**
@@ -148,14 +140,12 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      */
     public function testResultColumnDoesNotFreeDataIfFreedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('freed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $this->set_reflection_property_value('freed', TRUE);
 
         $this->query_result->expects($this->never())
                            ->method('free');
 
-        $this->result->result_column('col');
+        $this->class->result_column('col');
     }
 
     /**
@@ -168,7 +158,7 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
         $this->query_result->expects($this->once())
                            ->method('free');
 
-        $this->result->result_cell('cell');
+        $this->class->result_cell('cell');
     }
 
     /**
@@ -178,14 +168,12 @@ class MySQLQueryResultFreeTest extends MySQLQueryResultTest
      */
     public function testResultCellDoesNotFreeDataIfFreedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('freed');
-        $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $this->set_reflection_property_value('freed', TRUE);
 
         $this->query_result->expects($this->never())
                            ->method('free');
 
-        $this->result->result_cell('cell');
+        $this->class->result_cell('cell');
     }
 
 }

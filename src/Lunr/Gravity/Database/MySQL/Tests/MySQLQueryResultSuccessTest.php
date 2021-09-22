@@ -35,10 +35,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      */
     public function testSuccessIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('success');
-        $property->setAccessible(TRUE);
-
-        $this->assertTrue($property->getValue($this->result));
+        $this->assertTrue($this->get_reflection_property_value('success'));
     }
 
     /**
@@ -46,10 +43,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      */
     public function testResultIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('result');
-        $property->setAccessible(TRUE);
-
-        $this->assertTrue($property->getValue($this->result));
+        $this->assertTrue($this->get_reflection_property_value('result'));
     }
 
     /**
@@ -57,10 +51,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      */
     public function testFreedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('freed');
-        $property->setAccessible(TRUE);
-
-        $this->assertTrue($property->getValue($this->result));
+        $this->assertTrue($this->get_reflection_property_value('freed'));
     }
 
     /**
@@ -70,7 +61,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      */
     public function testHasFailedReturnsFalse(): void
     {
-        $this->assertFalse($this->result->has_failed());
+        $this->assertFalse($this->class->has_failed());
     }
 
     /**
@@ -80,11 +71,9 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      */
     public function testNumberOfRowsReturnsNumber(): void
     {
-        $class = $this->result_reflection->getProperty('num_rows');
-        $class->setAccessible(TRUE);
-        $class->setValue($this->result, 10);
+        $this->set_reflection_property_value('num_rows', 10);
 
-        $value = $this->result->number_of_rows();
+        $value = $this->class->number_of_rows();
         $this->assertIsInt($value);
         $this->assertEquals(10, $value);
     }
@@ -96,7 +85,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      */
     public function testResultArrayReturnsEmptyArray(): void
     {
-        $value = $this->result->result_array();
+        $value = $this->class->result_array();
 
         $this->assertIsArray($value);
         $this->assertEmpty($value);
@@ -109,7 +98,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      */
     public function testResultRowReturnsEmptyArray(): void
     {
-        $value = $this->result->result_row();
+        $value = $this->class->result_row();
 
         $this->assertIsArray($value);
         $this->assertEmpty($value);
@@ -122,7 +111,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      */
     public function testResultColumnReturnsEmptyArray(): void
     {
-        $value = $this->result->result_column('column');
+        $value = $this->class->result_column('column');
 
         $this->assertIsArray($value);
         $this->assertEmpty($value);
@@ -135,7 +124,7 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      */
     public function testResultCellReturnsNull(): void
     {
-        $this->assertNull($this->result->result_cell('cell'));
+        $this->assertNull($this->class->result_cell('cell'));
     }
 
 }
