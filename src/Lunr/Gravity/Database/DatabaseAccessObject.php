@@ -94,6 +94,22 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      */
     public function verify_query_success($query)
     {
+        $warnings = $query->warnings();
+
+        if ($warnings !== NULL)
+        {
+            $warnings_string = '{query}; had {warning_count} warnings:';
+            $format_string   = "\n%s (%d): %s";
+
+            foreach ($warnings as $warning)
+            {
+                $warnings_string .= sprintf($format_string, $warning['sqlstate'], $warning['errno'], $warning['message']);
+            }
+
+            $context = [ 'query' => $query->query(), 'warning_count' => count($warnings) ];
+            $this->logger->warning($warnings_string, $context);
+        }
+
         if ($query->has_failed() !== TRUE)
         {
             return;

@@ -49,6 +49,64 @@ class DatabaseAccessObjectVerifyQuerySuccessTest extends DatabaseAccessObjectTes
     }
 
     /**
+     * Test that verify_query_success() logs no warnings if there are no warnings.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::verify_query_success
+     */
+    public function testVerifyQueryNotLogsWarningsIfNoWarnings(): void
+    {
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+                      ->disableOriginalConstructor()
+                      ->getMock();
+
+        $query->expects($this->once())
+              ->method('warnings')
+              ->willReturn(NULL);
+
+        $this->logger->expects($this->never())
+                     ->method('warning');
+
+        $this->class->verify_query_success($query);
+    }
+
+    /**
+     * Test that verify_query_success() logs warnings when there are any.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseAccessObject::verify_query_success
+     */
+    public function testVerifyQueryLogsWarnings(): void
+    {
+        $warnings = [
+            [
+                'message' => 'message1', 'sqlstate' => 'HY000', 'errno' => 1364
+            ],
+            [
+                'message' => 'message2', 'sqlstate' => 'HY000', 'errno' => 1364
+            ]
+        ];
+
+        $query = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLQueryResult')
+                      ->disableOriginalConstructor()
+                      ->getMock();
+
+        $query->expects($this->once())
+              ->method('warnings')
+              ->willReturn($warnings);
+
+        $query->expects($this->once())
+              ->method('query')
+              ->willReturn('query');
+
+        $context        = [ 'query' => 'query', 'warning_count' => 2 ];
+        $warning_string = "\nHY000 (1364): message1\nHY000 (1364): message2";
+        $this->logger->expects($this->once())
+                     ->method('warning')
+                     ->with('{query}; had {warning_count} warnings:' . $warning_string, $context);
+
+        $this->class->verify_query_success($query);
+    }
+
+    /**
      * Test that verify_query_success() throws a QueryException in case of an error.
      *
      * @covers Lunr\Gravity\Database\DatabaseAccessObject::verify_query_success
