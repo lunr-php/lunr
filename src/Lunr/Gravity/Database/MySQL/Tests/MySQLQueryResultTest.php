@@ -101,6 +101,26 @@ abstract class MySQLQueryResultTest extends LunrBaseTest
     }
 
     /**
+     * TestCase Constructor passing a MySQLi_result object with warnings.
+     *
+     * @return void
+     */
+    public function warningSetup(): void
+    {
+        $this->mysqli = new MockMySQLiSuccessfulWarningConnection($this->getMockBuilder('\mysqli')->getMock());
+
+        $this->query_result = new MockMySQLiResult($this->getMockBuilder('mysqli_result')
+                                                        ->disableOriginalConstructor()
+                                                        ->getMock());
+
+        $this->query = 'SELECT * FROM table';
+
+        $this->class = new MySQLQueryResult($this->query, $this->query_result, $this->mysqli);
+
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLQueryResult');
+    }
+
+    /**
      * TestCase Destructor.
      */
     public function tearDown(): void

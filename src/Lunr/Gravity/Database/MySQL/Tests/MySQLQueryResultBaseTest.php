@@ -46,6 +46,14 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
     }
 
     /**
+     * Test that warning is NULL on successful query.
+     */
+    public function testWarningsIsNull(): void
+    {
+        $this->assertNull($this->get_reflection_property_value('warnings'));
+    }
+
+    /**
      * Test that error number is zero on successful query.
      */
     public function testInsertIDIsZero(): void

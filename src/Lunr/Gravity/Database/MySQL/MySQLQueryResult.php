@@ -75,6 +75,12 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     protected $error_number;
 
     /**
+     * Warnings from Mysqli or NULL if no warnings
+     * @var ?array
+     */
+    protected $warnings;
+
+    /**
      * Autoincremented ID generated on last insert.
      * @var mixed
      */
@@ -124,6 +130,8 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
             $this->insert_id     = $mysqli->insert_id;
             $this->affected_rows = $mysqli->affected_rows;
             $this->num_rows      = is_object($this->result) ? $this->result->num_rows : $this->affected_rows;
+
+            $this->set_warnings();
         }
     }
 
@@ -142,6 +150,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
         unset($this->error_number);
         unset($this->insert_id);
         unset($this->query);
+        unset($this->warnings);
     }
 
     /**
@@ -206,6 +215,43 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     public function error_number()
     {
         return $this->error_number;
+    }
+
+    /**
+     * Get array of mysqli_warning, if there are any
+     *
+     * @return ?array $warnings If there are warnings it's an array of mysqli_warning
+     *                         otherwise its NULL
+     */
+    public function warnings()
+    {
+        return $this->warnings;
+    }
+
+    /**
+     * Set the warnings property
+     *
+     * @return void
+     */
+    protected function set_warnings()
+    {
+        $mysqli_warnings = $this->mysqli->get_warnings();
+
+        if ($mysqli_warnings == FALSE)
+        {
+            $this->warnings = NULL;
+            return;
+        }
+
+        do
+        {
+            $warning['message']  = $mysqli_warnings->message;
+            $warning['sqlstate'] = $mysqli_warnings->sqlstate;
+            $warning['errno']    = $mysqli_warnings->errno;
+
+            $this->warnings[] = $warning;
+        }
+        while ($mysqli_warnings->next());
     }
 
     /**

@@ -105,6 +105,7 @@
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultSuccessTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultResultTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultFreeTest.php</file>
+            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultWarningTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLAsyncQueryResultBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLAsyncQueryResultFetchTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderBaseTest.php</file>

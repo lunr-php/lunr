@@ -134,6 +134,16 @@ class MockMySQLiSuccessfulConnection
         return TRUE;
     }
 
+    /**
+     * Fake giving mysqli_warnings
+     *
+     * @return boolean $return False for no warnings on successfull query.
+     */
+    public function get_warnings()
+    {
+        return FALSE;
+    }
+
 }
 
 ?>
