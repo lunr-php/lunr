@@ -29,7 +29,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
      */
     public function testGetListOfDirectoriesInAccessibleDirectory(): void
     {
-        $expected = [ 'folder1', 'folder2' ];
+        $expected = [ 'Database', 'folder1', 'folder2' ];
 
         $value = $this->class->get_list_of_directories($this->find_location);
 

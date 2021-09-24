@@ -180,6 +180,25 @@ class MySQLQueryResultBaseTest extends MySQLQueryResultTest
         $this->assertSame($this->mysqli, $value);
     }
 
+    /**
+     * Test that canonical_query() returns a string.
+     *
+     * @covers Lunr\Gravity\Database\MySQL\MySQLQueryResult::canonical_query
+     */
+    public function testCanonicalQuery(): void
+    {
+        $this->set_reflection_property_value('query', 'SELECT * FROM table1 WHERE value="test"');
+
+        $value = $this->class->canonical_query();
+        $this->assertIsString($value);
+        $this->assertEquals('SELECT * FROM table1 WHERE value="?"', $value);
+
+        $this->set_reflection_property_value('canonical_query', 'SELECT * FROM table2 WHERE value=?');
+        $value = $this->class->canonical_query();
+        $this->assertIsString($value);
+        $this->assertEquals('SELECT * FROM table2 WHERE value=?', $value);
+    }
+
 }
 
 ?>

@@ -39,6 +39,12 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     protected $query;
 
     /**
+     * The canonicalized query string that was executed.
+     * @var String
+     */
+    protected $canonical_query;
+
+    /**
      * Return value from mysqli->query().
      * @var mixed
      */
@@ -119,9 +125,10 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
             $this->freed   = TRUE;
         }
 
-        $this->result = $result;
-        $this->mysqli = $mysqli;
-        $this->query  = $query;
+        $this->result          = $result;
+        $this->mysqli          = $mysqli;
+        $this->query           = $query;
+        $this->canonical_query = NULL;
 
         if ($async === FALSE)
         {
@@ -151,6 +158,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
         unset($this->insert_id);
         unset($this->query);
         unset($this->warnings);
+        unset($this->canonical_query);
     }
 
     /**
@@ -379,6 +387,23 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
         $this->free_result();
 
         return isset($line[$column]) ? $line[$column] : NULL;
+    }
+
+    /**
+     * Get the executed query canonicalized.
+     *
+     * @return string $canonicalized_query The executed query canonicalized
+     */
+    public function canonical_query(): string
+    {
+        if ($this->canonical_query !== NULL)
+        {
+            return $this->canonical_query;
+        }
+
+        $this->canonical_query = new MySQLCanonicalQuery($this->query());
+
+        return $this->canonical_query;
     }
 
 }
