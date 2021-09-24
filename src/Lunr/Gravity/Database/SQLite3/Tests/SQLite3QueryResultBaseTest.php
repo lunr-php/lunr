@@ -150,6 +150,14 @@ class SQLite3QueryResultBaseTest extends SQLite3QueryResultTest
         $this->assertSame($this->sqlite3, $value);
     }
 
+    /**
+     * Test that the warnings() method returns NULL.
+     */
+    public function testWarningsReturnsNull(): void
+    {
+        $this->assertNull($this->class->warnings());
+    }
+
 }
 
 ?>

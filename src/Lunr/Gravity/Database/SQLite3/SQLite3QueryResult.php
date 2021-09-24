@@ -200,6 +200,16 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
     }
 
     /**
+     * Gives NULL since there is no way to get warnings form SQLite3
+     *
+     * @return null NULL Returns NULL warnings
+     */
+    public function warnings()
+    {
+        return NULL;
+    }
+
+    /**
      * Get auto incremented ID generated on last insert.
      *
      * @return mixed $id If the number is greater than maximal int value it's a String

@@ -53,6 +53,14 @@ interface DatabaseQueryResultInterface
     public function error_number();
 
     /**
+     * Get array of mysqli_warning, if there are any
+     *
+     * @return ?array $warnings If there are warnings it's an array of mysqli_warning
+     *                          otherwise its NULL
+     */
+    public function warnings();
+
+    /**
      * Get autoincremented ID generated on last insert.
      *
      * @return mixed $id If the number is greater than maximal int value it's a String
