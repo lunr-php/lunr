@@ -108,15 +108,24 @@ pipeline {
             when {
                 branch 'master'
             }
+            environment {
+                ACCOUNT_KEY = null
+                PROJECT_SLUG = null
+            }
             steps{
+                script {
+                    ACCOUNT_KEY = GIT_URL.tokenize('/')[3]
+                    PROJECT_SLUG_W_GIT = GIT_URL.tokenize('/')[4]
+                    PROJECT_SLUG = PROJECT_SLUG_W_GIT.substring(0, PROJECT_SLUG_W_GIT.lastIndexOf('.'))
+                }
                 withSonarQubeEnv('M2mobi') {
                     sh """sonar-scanner \\
-                            -Dsonar.projectKey=php:${currentBuild.rawBuild.project.parent.displayName.toLowerCase()} \\
+                            -Dsonar.projectKey=${ACCOUNT_KEY}:backend:${PROJECT_SLUG} \\
                             -Dsonar.projectName=${currentBuild.rawBuild.project.parent.displayName.capitalize()} \\
                             -Dsonar.sources=src/ \\
                             -Dsonar.php.tests.reportPath=build/logs/junit.xml \\
                             -Dsonar.php.coverage.reportPaths=build/logs/clover.xml"""
-                    sh "./tests/get-sonar-report.sh php:${currentBuild.rawBuild.project.parent.displayName.toLowerCase()}"
+                    sh "./tests/get-sonar-report.sh ${ACCOUNT_KEY}:backend:${PROJECT_SLUG}"
                 }
             }
             post {
