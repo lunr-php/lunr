@@ -108,9 +108,9 @@ class Post extends User
     /**
      * Inject a previously fetched Facebook post.
      *
-     * @param array   $post              Facebook post data
-     * @param array   $permissions       Permissions of the user who fetched the post
-     * @param boolean $used_access_token Whether an access token was used for fetching the post or not
+     * @param array $post              Facebook post data
+     * @param array $permissions       Permissions of the user who fetched the post
+     * @param bool  $used_access_token Whether an access token was used for fetching the post or not
      *
      * @return Post $self Self Reference
      */

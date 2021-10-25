@@ -39,7 +39,7 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->willReturnMap([['facebook', 'app_id', 'Lunr'], ['facebook', 'app_secret', 'Secret']]);
+                  ->willReturnMap([[ 'facebook', 'app_id', 'Lunr' ], [ 'facebook', 'app_secret', 'Secret' ]]);
 
         $this->set_reflection_property_value('code', 'Code');
 
@@ -96,7 +96,7 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->willReturnMap([['facebook', 'app_id', 'Lunr'], ['facebook', 'app_secret', 'Secret']]);
+                  ->willReturnMap([[ 'facebook', 'app_id', 'Lunr' ], [ 'facebook', 'app_secret', 'Secret' ]]);
 
         $this->set_reflection_property_value('code', 'Code');
 
@@ -125,7 +125,7 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
 
         $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->willReturnMap([['facebook', 'app_id', 'Lunr'], ['facebook', 'app_secret', 'Secret']]);
+                  ->willReturnMap([[ 'facebook', 'app_id', 'Lunr' ], [ 'facebook', 'app_secret', 'Secret' ]]);
 
         $this->set_reflection_property_value('code', 'Code');
 
@@ -140,8 +140,8 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
         $this->cas->expects($this->exactly(2))
                   ->method('add')
                   ->withConsecutive(
-                      ['facebook', 'access_token', 'Token'],
-                      ['facebook', 'app_secret_proof', 'bc383bf3bab04208b0e3ba7a71e40164cc2343b0314bcca0e85018c5dc852bfe']
+                      [ 'facebook', 'access_token', 'Token' ],
+                      [ 'facebook', 'app_secret_proof', 'bc383bf3bab04208b0e3ba7a71e40164cc2343b0314bcca0e85018c5dc852bfe' ]
                   );
 
         $this->class->get_temporary_access_token();
@@ -164,7 +164,7 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
 
         $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->willReturnMap([['facebook', 'app_id', 'Lunr'], ['facebook', 'app_secret', 'Secret']]);
+                  ->willReturnMap([[ 'facebook', 'app_id', 'Lunr' ], [ 'facebook', 'app_secret', 'Secret' ]]);
 
         $this->set_reflection_property_value('code', 'Code');
 
@@ -198,7 +198,7 @@ class AuthenticationGetTemporaryTokenTest extends AuthenticationTest
 
         $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->willReturnMap([['facebook', 'app_id', 'Lunr'], ['facebook', 'app_secret', 'Secret']]);
+                  ->willReturnMap([[ 'facebook', 'app_id', 'Lunr' ], [ 'facebook', 'app_secret', 'Secret' ]]);
 
         $this->set_reflection_property_value('code', 'Code');
 

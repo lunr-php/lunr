@@ -31,7 +31,7 @@ class UserProfileGetDataTest extends UserProfileTest
     {
         $this->cas->expects($this->exactly(6))
                   ->method('get')
-                  ->willReturnMap([['facebook', 'access_token', 'Token'], ['facebook', 'app_secret_proof', 'Proof']]);
+                  ->willReturnMap([[ 'facebook', 'access_token', 'Token' ], [ 'facebook', 'app_secret_proof', 'Proof' ]]);
 
         $this->http->expects($this->any())
                    ->method('request')
@@ -120,7 +120,7 @@ class UserProfileGetDataTest extends UserProfileTest
     {
         $this->cas->expects($this->exactly(6))
                   ->method('get')
-                  ->willReturnMap([['facebook', 'access_token', 'Token'], ['facebook', 'app_secret_proof', 'Proof']]);
+                  ->willReturnMap([[ 'facebook', 'access_token', 'Token' ], [ 'facebook', 'app_secret_proof', 'Proof' ]]);
 
         $params = [
             'access_token'    => 'Token',
@@ -130,8 +130,8 @@ class UserProfileGetDataTest extends UserProfileTest
         $this->http->expects($this->exactly(2))
                    ->method('request')
                    ->withConsecutive(
-                       ['https://graph.facebook.com/me', [], $params, 'GET'],
-                       ['https://graph.facebook.com/me/permissions', [], ['access_token' => 'Token'], 'GET']
+                       [ 'https://graph.facebook.com/me', [], $params, 'GET' ],
+                       [ 'https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'Token' ], 'GET' ]
                    )
                    ->will($this->returnValue($this->response));
 
@@ -297,8 +297,8 @@ class UserProfileGetDataTest extends UserProfileTest
         $this->http->expects($this->exactly(2))
                    ->method('request')
                    ->withConsecutive(
-                       ['https://graph.facebook.com/me', [], $params, 'GET'],
-                       ['https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'Token' ], 'GET']
+                       [ 'https://graph.facebook.com/me', [], $params, 'GET' ],
+                       [ 'https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'Token' ], 'GET' ]
                    )
                    ->will($this->returnValue($this->response));
 

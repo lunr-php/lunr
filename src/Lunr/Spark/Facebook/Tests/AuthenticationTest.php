@@ -65,13 +65,13 @@ abstract class AuthenticationTest extends LunrBaseTest
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->response = $this->getMockBuilder('Requests_Response')->getMock();
 
-        $this->request  = $this->getMockBuilder('Lunr\Corona\Request')
+        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
                                ->disableOriginalConstructor()
                                ->getMock();
 
         $this->request->expects($this->exactly(2))
                       ->method('get_get_data')
-                      ->will($this->returnValueMap([['code', NULL], ['state', NULL]]));
+                      ->will($this->returnValueMap([[ 'code', NULL ], [ 'state', NULL ]]));
 
         $this->class      = new Authentication($this->cas, $this->logger, $this->http, $this->request);
         $this->reflection = new ReflectionClass('Lunr\Spark\Facebook\Authentication');
@@ -87,13 +87,13 @@ abstract class AuthenticationTest extends LunrBaseTest
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->response = $this->getMockBuilder('Requests_Response')->getMock();
 
-        $this->request  = $this->getMockBuilder('Lunr\Corona\Request')
+        $this->request = $this->getMockBuilder('Lunr\Corona\Request')
                                ->disableOriginalConstructor()
                                ->getMock();
 
         $this->request->expects($this->exactly(2))
                       ->method('get_get_data')
-                      ->will($this->returnValueMap([['code', 'String'], ['state', 'String']]));
+                      ->will($this->returnValueMap([[ 'code', 'String' ], [ 'state', 'String' ]]));
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')

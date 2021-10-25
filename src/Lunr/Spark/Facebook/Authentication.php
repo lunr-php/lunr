@@ -133,7 +133,7 @@ class Authentication extends Api
      *
      * @param string $stored_state Stored CSRF state
      *
-     * @return boolean $return TRUE if state matches, FALSE otherwise
+     * @return bool $return TRUE if state matches, FALSE otherwise
      */
     public function is_state_verified($stored_state)
     {
@@ -222,7 +222,7 @@ class Authentication extends Api
     /**
      * Get expiry time for the access token.
      *
-     * @return integer $token_expires Expiry time for the access token.
+     * @return int $token_expires Expiry time for the access token.
      */
     public function get_token_expires()
     {

@@ -97,7 +97,7 @@ class FeedGetPreviousDataTest extends FeedTest
 
         $this->cas->expects($this->exactly(6))
                   ->method('get')
-                  ->willReturnMap([['facebook', 'access_token', 'Token'], ['facebook', 'app_secret_proof', 'Proof']]);
+                  ->willReturnMap([[ 'facebook', 'access_token', 'Token' ], [ 'facebook', 'app_secret_proof', 'Proof' ]]);
 
         $params = [
             'limit'           => 25,
@@ -109,8 +109,8 @@ class FeedGetPreviousDataTest extends FeedTest
         $this->http->expects($this->exactly(2))
                    ->method('request')
                    ->withConsecutive(
-                       ['https://graph.facebook.com/resource/feed', [], $params, 'GET'],
-                       ['https://graph.facebook.com/me/permissions', [], ['access_token' => 'Token'], 'GET']
+                       [ 'https://graph.facebook.com/resource/feed', [], $params, 'GET' ],
+                       [ 'https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'Token' ], 'GET' ]
                    )
                    ->will($this->returnValue($this->response));
 
@@ -337,7 +337,7 @@ class FeedGetPreviousDataTest extends FeedTest
 
         $this->http->expects($this->exactly(2))
                    ->method('request')
-                   ->withConsecutive(['https://graph.facebook.com/resource/feed', [], $params, 'GET'], ['https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'Token' ], 'GET'])
+                   ->withConsecutive([ 'https://graph.facebook.com/resource/feed', [], $params, 'GET' ], [ 'https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'Token' ], 'GET' ])
                    ->will($this->returnValue($this->response));
 
         $this->response->status_code = 200;

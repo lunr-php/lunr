@@ -113,7 +113,7 @@ abstract class User extends Api
      *
      * @param string|array $permissions Permission string or set of permissions.
      *
-     * @return boolean $return TRUE if permissions are granted, FALSE otherwise
+     * @return bool $return TRUE if permissions are granted, FALSE otherwise
      */
     protected function is_permission_granted($permissions)
     {

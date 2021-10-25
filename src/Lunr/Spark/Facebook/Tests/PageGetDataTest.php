@@ -99,7 +99,7 @@ class PageGetDataTest extends PageTest
         $this->set_reflection_property_value('id', 'page');
         $this->cas->expects($this->exactly(4))
                   ->method('get')
-                  ->willReturnMap([['facebook', 'access_token', 'Token'], ['facebook', 'app_secret_proof', 'Proof']]);
+                  ->willReturnMap([[ 'facebook', 'access_token', 'Token' ], [ 'facebook', 'app_secret_proof', 'Proof' ]]);
 
         $url    = 'https://graph.facebook.com/page';
         $params = [
@@ -285,8 +285,8 @@ class PageGetDataTest extends PageTest
         $this->http->expects($this->exactly(2))
                    ->method('request')
                    ->withConsecutive(
-                       ['https://graph.facebook.com/page', [], $params, 'GET'],
-                       ['https://graph.facebook.com/me/permissions', [], ['access_token' => 'Token'], 'GET']
+                       [ 'https://graph.facebook.com/page', [], $params, 'GET' ],
+                       [ 'https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'Token' ], 'GET' ]
                    )
                    ->will($this->returnValue($this->response));
 

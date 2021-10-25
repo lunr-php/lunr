@@ -121,8 +121,8 @@ class AuthenticationGetSetTest extends AuthenticationTest
     /**
      * Test is_state_verified().
      *
-     * @param string  $state State value
-     * @param boolean $valid Whether state is expected valid or not
+     * @param string $state State value
+     * @param bool   $valid Whether state is expected valid or not
      *
      * @dataProvider stateValueProvider
      * @covers       Lunr\Spark\Facebook\Authentication::is_state_verified

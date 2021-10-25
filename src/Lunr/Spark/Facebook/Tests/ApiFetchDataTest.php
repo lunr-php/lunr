@@ -31,7 +31,7 @@ class ApiFetchDataTest extends ApiTest
     {
         $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->willReturnMap([['facebook', 'access_token', 'Token'], ['facebook', 'app_secret_proof', 'Proof']]);
+                  ->willReturnMap([[ 'facebook', 'access_token', 'Token' ], [ 'facebook', 'app_secret_proof', 'Proof' ]]);
 
         $this->http->expects($this->any())
                    ->method('request')
@@ -123,7 +123,7 @@ class ApiFetchDataTest extends ApiTest
     {
         $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->willReturnMap([['facebook', 'access_token', 'Token'], ['facebook', 'app_secret_proof', 'Proof']]);
+                  ->willReturnMap([[ 'facebook', 'access_token', 'Token' ], [ 'facebook', 'app_secret_proof', 'Proof' ]]);
 
         $url    = 'http://localhost';
         $params = [

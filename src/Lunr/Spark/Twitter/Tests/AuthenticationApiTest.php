@@ -67,7 +67,7 @@ class AuthenticationApiTest extends AuthenticationTest
 
         $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->withConsecutive(['twitter', 'user_agent'], ['twitter', 'consumer_key'], ['twitter', 'consumer_secret'])
+                  ->withConsecutive([ 'twitter', 'user_agent' ], [ 'twitter', 'consumer_key' ], [ 'twitter', 'consumer_secret' ])
                   ->willReturnOnConsecutiveCalls('lunr.nl', 'Key', 'Secret');
 
         $this->http->expects($this->once())
@@ -97,7 +97,7 @@ class AuthenticationApiTest extends AuthenticationTest
 
         $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->withConsecutive(['twitter', 'user_agent'], ['twitter', 'consumer_key'], ['twitter', 'consumer_secret'])
+                  ->withConsecutive([ 'twitter', 'user_agent' ], [ 'twitter', 'consumer_key' ], [ 'twitter', 'consumer_secret' ])
                   ->willReturnOnConsecutiveCalls('lunr.nl', 'Key', 'Secret');
 
         $this->http->expects($this->once())
@@ -123,7 +123,7 @@ class AuthenticationApiTest extends AuthenticationTest
 
         $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->withConsecutive(['twitter', 'user_agent'], ['twitter', 'consumer_key'], ['twitter', 'consumer_secret'])
+                  ->withConsecutive([ 'twitter', 'user_agent' ], [ 'twitter', 'consumer_key' ], [ 'twitter', 'consumer_secret' ])
                   ->willReturnOnConsecutiveCalls('lunr.nl', 'Key', 'Secret');
 
         $this->http->expects($this->once())
@@ -156,7 +156,7 @@ class AuthenticationApiTest extends AuthenticationTest
 
         $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->withConsecutive(['twitter', 'user_agent'], ['twitter', 'consumer_key'], ['twitter', 'consumer_secret'])
+                  ->withConsecutive([ 'twitter', 'user_agent' ], [ 'twitter', 'consumer_key' ], [ 'twitter', 'consumer_secret' ])
                   ->willReturnOnConsecutiveCalls('lunr.nl', 'Key', 'Secret');
 
         $this->http->expects($this->once())
