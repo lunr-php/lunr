@@ -48,8 +48,8 @@ class HTMLViewHelpersTest extends HTMLViewTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->will($this->returnValueMap([
-                          ['application_path', '/full/path/to/'],
-                          ['base_path', '/to/'],
+                          [ 'application_path', '/full/path/to/' ],
+                          [ 'base_path', '/to/' ],
                       ]));
 
         $this->mock_function('filemtime', function () {return 1438183002;});
@@ -73,8 +73,8 @@ class HTMLViewHelpersTest extends HTMLViewTest
         $this->request->expects($this->exactly(4))
                       ->method('__get')
                       ->will($this->returnValueMap([
-                          ['application_path', '/full/path/to/'],
-                          ['base_path', '/to/'],
+                          [ 'application_path', '/full/path/to/' ],
+                          [ 'base_path', '/to/' ],
                       ]));
 
         $this->mock_function('filemtime', function () { return 1438183002;});
@@ -138,8 +138,8 @@ class HTMLViewHelpersTest extends HTMLViewTest
         $this->request->expects($this->exactly(4))
                       ->method('__get')
                       ->will($this->returnValueMap([
-                          ['application_path', '/full/path/to/'],
-                          ['base_path', '/to/'],
+                          [ 'application_path', '/full/path/to/' ],
+                          [ 'base_path', '/to/' ],
                       ]));
 
         $this->mock_function('filemtime', function () {return 1438183002;});
@@ -177,8 +177,8 @@ class HTMLViewHelpersTest extends HTMLViewTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->will($this->returnValueMap([
-                          ['application_path', '/full/path/to/'],
-                          ['base_path', '/to/'],
+                          [ 'application_path', '/full/path/to/' ],
+                          [ 'base_path', '/to/' ],
                       ]));
 
         $this->mock_function('filemtime', function () {return 1438183002;});
@@ -202,8 +202,8 @@ class HTMLViewHelpersTest extends HTMLViewTest
         $this->request->expects($this->exactly(4))
                       ->method('__get')
                       ->will($this->returnValueMap([
-                          ['application_path', '/full/path/to/'],
-                          ['base_path', '/to/'],
+                          [ 'application_path', '/full/path/to/' ],
+                          [ 'base_path', '/to/' ],
                       ]));
 
         $this->mock_function('filemtime', function () {return 1438183002;});
@@ -267,8 +267,8 @@ class HTMLViewHelpersTest extends HTMLViewTest
         $this->request->expects($this->exactly(4))
                       ->method('__get')
                       ->will($this->returnValueMap([
-                          ['application_path', '/full/path/to/'],
-                          ['base_path', '/to/'],
+                          [ 'application_path', '/full/path/to/' ],
+                          [ 'base_path', '/to/' ],
                       ]));
 
         $this->mock_function('filemtime', function () {return 1438183002;});

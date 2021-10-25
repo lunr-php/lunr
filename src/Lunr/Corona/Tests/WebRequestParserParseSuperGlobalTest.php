@@ -26,8 +26,8 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
     * Checks whether the superglobal super global is reset to being empty after
     * passing invalid super global values in it.
     *
-    * @param mixed   $var   Invalid super global values
-    * @param boolean $reset Whether or not to reset the super global afterwards.
+    * @param mixed $var   Invalid super global values
+    * @param bool  $reset Whether or not to reset the super global afterwards.
     *
     * @dataProvider invalidSuperglobalValueProvider
     * @covers       Lunr\Corona\WebRequestParser::parse_super_global

@@ -35,8 +35,8 @@ class FrontControllerDispatchTest extends FrontControllerTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->will($this->returnValueMap([
-                          ['method', 'foo'],
-                          ['params', [ 1, 2 ]],
+                          [ 'method', 'foo' ],
+                          [ 'params', [ 1, 2 ]],
                       ]));
 
         $this->class->dispatch($controller);
@@ -53,13 +53,13 @@ class FrontControllerDispatchTest extends FrontControllerTest
 
         $this->handler->expects($this->once())
                       ->method('handle_request')
-                      ->with([ $controller, 'bar'], [ 1, 2 ]);
+                      ->with([ $controller, 'bar' ], [ 1, 2 ]);
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->will($this->returnValueMap([
-                          ['method', 'bar'],
-                          ['params', [ 1, 2 ]],
+                          [ 'method', 'bar' ],
+                          [ 'params', [ 1, 2 ]],
                       ]));
 
         $this->class->dispatch($controller);
@@ -79,8 +79,8 @@ class FrontControllerDispatchTest extends FrontControllerTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->will($this->returnValueMap([
-                          ['method', 'bar'],
-                          ['params', [ 1, 2 ]],
+                          [ 'method', 'bar' ],
+                          [ 'params', [ 1, 2 ]],
                       ]));
 
         $this->class->dispatch('String');
@@ -103,8 +103,8 @@ class FrontControllerDispatchTest extends FrontControllerTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->will($this->returnValueMap([
-                          ['method', 'bar'],
-                          ['params', [ 1, 2 ]],
+                          [ 'method', 'bar' ],
+                          [ 'params', [ 1, 2 ]],
                       ]));
 
         $this->class->dispatch($value);

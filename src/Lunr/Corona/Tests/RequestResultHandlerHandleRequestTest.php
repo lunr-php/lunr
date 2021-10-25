@@ -151,7 +151,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
 
         $controller->expects($this->once())
                    ->method('foo')
-                   ->will($this->throwException(new BadRequestException("Bad Request!")));
+                   ->will($this->throwException(new BadRequestException('Bad Request!')));
 
         $this->request->expects($this->exactly(3))
                       ->method('__get')
@@ -182,7 +182,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      */
     public function testHandleRequestWithException(): void
     {
-        $exception = new Exception("Error!");
+        $exception = new Exception('Error!');
 
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')
                            ->getMock();
@@ -224,7 +224,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      */
     public function testHandleRequestWithError(): void
     {
-        $exception = new Error("Fatal Error!");
+        $exception = new Error('Fatal Error!');
 
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')
                            ->getMock();

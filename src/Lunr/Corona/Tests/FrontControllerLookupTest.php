@@ -101,8 +101,8 @@ class FrontControllerLookupTest extends FrontControllerTest
         $this->fao->expects($this->exactly(2))
                   ->method('find_matches')
                   ->withConsecutive(
-                      ['/^.+\/functioncontroller.php/i', '/foo/bar'],
-                      ['/^.+\/functioncontroller.php/i', '/foo/baz']
+                      [ '/^.+\/functioncontroller.php/i', '/foo/bar' ],
+                      [ '/^.+\/functioncontroller.php/i', '/foo/baz' ]
                   )
                   ->willReturnOnConsecutiveCalls([], [ $result ]);
 
@@ -148,12 +148,11 @@ class FrontControllerLookupTest extends FrontControllerTest
                       ->with('controller')
                       ->will($this->returnValue('function'));
 
-
         $this->fao->expects($this->exactly(2))
                   ->method('find_matches')
                   ->withConsecutive(
-                      ['/^.+\/functioncontroller.php/i', '/foo/bar'],
-                      ['/^.+\/functioncontroller.php/i', '/foo/baz']
+                      [ '/^.+\/functioncontroller.php/i', '/foo/bar' ],
+                      [ '/^.+\/functioncontroller.php/i', '/foo/baz' ]
                   )
                   ->willReturnOnConsecutiveCalls([], [ $result ]);
 

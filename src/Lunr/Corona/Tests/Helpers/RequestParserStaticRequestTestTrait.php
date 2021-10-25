@@ -43,10 +43,10 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Preparation work for the request tests.
      *
-     * @param string  $protocol  Protocol name
-     * @param string  $port      Port number
-     * @param boolean $useragent Whether to include useragent information or not
-     * @param string  $key       Device useragent key
+     * @param string $protocol  Protocol name
+     * @param string $port      Port number
+     * @param bool   $useragent Whether to include useragent information or not
+     * @param string $key       Device useragent key
      *
      * @return void
      */
@@ -55,9 +55,9 @@ trait RequestParserStaticRequestTestTrait
     /**
      * Preparation work for the request tests.
      *
-     * @param boolean $controller Whether to set a controller value
-     * @param boolean $method     Whether to set a method value
-     * @param boolean $override   Whether to override default values or not
+     * @param bool $controller Whether to set a controller value
+     * @param bool $method     Whether to set a method value
+     * @param bool $override   Whether to override default values or not
      *
      * @return void
      */

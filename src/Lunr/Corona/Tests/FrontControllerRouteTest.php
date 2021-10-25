@@ -31,8 +31,8 @@ class FrontControllerRouteTest extends FrontControllerTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->will($this->returnValueMap([
-                          ['call', 'controller/method'],
-                          ['controller', 'controller'],
+                          [ 'call', 'controller/method' ],
+                          [ 'controller', 'controller' ],
                       ]));
 
         $value = $this->class->route();
@@ -84,8 +84,8 @@ class FrontControllerRouteTest extends FrontControllerTest
         $this->fao->expects($this->exactly(2))
                   ->method('find_matches')
                   ->withConsecutive(
-                      ['/^.+\/functioncontroller.php/i', '/foo/bar'],
-                      ['/^.+\/functioncontroller.php/i', '/foo/baz']
+                      [ '/^.+\/functioncontroller.php/i', '/foo/bar' ],
+                      [ '/^.+\/functioncontroller.php/i', '/foo/baz' ]
                   )
                   ->willReturnOnConsecutiveCalls([], [ $result ]);
 
@@ -116,11 +116,10 @@ class FrontControllerRouteTest extends FrontControllerTest
                       ->method('__get')
                       ->will($this->returnValueMap($map));
 
-
         $this->fao->expects($this->exactly(1))
                   ->method('find_matches')
                   ->withConsecutive(
-                      ['/^.+\/functioncontroller.php/i', '/foo/baz']
+                      [ '/^.+\/functioncontroller.php/i', '/foo/baz' ]
                   )
                   ->willReturnOnConsecutiveCalls([ $result ]);
 
@@ -154,7 +153,7 @@ class FrontControllerRouteTest extends FrontControllerTest
         $this->fao->expects($this->exactly(1))
                   ->method('find_matches')
                   ->withConsecutive(
-                      ['/^.+\/functioncontroller.php/i', '/foo/baz']
+                      [ '/^.+\/functioncontroller.php/i', '/foo/baz' ]
                   )
                   ->willReturnOnConsecutiveCalls([ $result ]);
 
@@ -187,8 +186,8 @@ class FrontControllerRouteTest extends FrontControllerTest
         $this->fao->expects($this->exactly(2))
                   ->method('find_matches')
                   ->withConsecutive(
-                      ['/^.+\/functioncontroller.php/i', '/foo/bar'],
-                      ['/^.+\/functioncontroller.php/i', '/foo/baz']
+                      [ '/^.+\/functioncontroller.php/i', '/foo/bar' ],
+                      [ '/^.+\/functioncontroller.php/i', '/foo/baz' ]
                   )
                   ->willReturnOnConsecutiveCalls([], [ $result ]);
 

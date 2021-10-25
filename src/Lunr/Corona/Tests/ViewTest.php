@@ -82,7 +82,7 @@ abstract class ViewTest extends LunrBaseTest
                 ->willReturn('962161b27a0141f384c63834ad001adf');
         }
 
-       $this->class = $this->getMockBuilder('Lunr\Corona\View')
+        $this->class = $this->getMockBuilder('Lunr\Corona\View')
                             ->setConstructorArgs(
                                [ $this->request, $this->response, $this->configuration ]
                              )

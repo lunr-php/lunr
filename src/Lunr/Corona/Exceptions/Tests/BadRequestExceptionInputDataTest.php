@@ -56,7 +56,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
      */
     public function testSetReportDoesNotSetEmptyReport(): void
     {
-        $report = "";
+        $report = '';
 
         $this->class->setReport($report);
 

@@ -154,8 +154,8 @@ class Response
     /**
      * Set a return code for the given call identifier.
      *
-     * @param string  $identifier Call identifier
-     * @param integer $value      Return code
+     * @param string $identifier Call identifier
+     * @param int    $value      Return code
      *
      * @return void
      */
@@ -235,7 +235,7 @@ class Response
     /**
      * Get the set of return code identifiers.
      *
-     * @param boolean $max Only return the identifier of the highest error code (FALSE by default)
+     * @param bool $max Only return the identifier of the highest error code (FALSE by default)
      *
      * @return string|array $return Requested set of identifiers.
      */

@@ -59,7 +59,7 @@ abstract class HTMLView extends View
     /**
      * Generate css include statements.
      *
-     * @param boolean $sort Whether to sort the list of css files or not
+     * @param bool $sort Whether to sort the list of css files or not
      *
      * @return string $links Generated html code for including css stylesheets
      */
@@ -88,7 +88,7 @@ abstract class HTMLView extends View
     /**
      * Generate javascript include statements.
      *
-     * @param boolean $sort Whether to sort the list of js files or not
+     * @param bool $sort Whether to sort the list of js files or not
      *
      * @return string $links Generated html code for including javascript
      */
@@ -129,12 +129,12 @@ abstract class HTMLView extends View
     /**
      * Return an alternating (eg. odd/even) CSS class name.
      *
-     * @param string  $basename         CSS base class name (without
-     *                                  ending underscore or suffix)
-     * @param integer $alternation_hint Integer counter indicating the
-     *                                  alternation state
-     * @param string  $suffix           An alternative suffix if you
-     *                                  don't want odd/even
+     * @param string $basename         CSS base class name (without
+     *                                 ending underscore or suffix)
+     * @param int    $alternation_hint Integer counter indicating the
+     *                                 alternation state
+     * @param string $suffix           An alternative suffix if you
+     *                                 don't want odd/even
      *
      * @return string $return The constructed CSS class name
      */

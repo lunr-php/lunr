@@ -89,7 +89,7 @@ class RequestResultHandler
         {
             call_user_func_array($callable, $params);
         }
-        catch(HttpException $e)
+        catch (HttpException $e)
         {
             $method = 'log_http_' . $e->getCode();
 
@@ -97,7 +97,7 @@ class RequestResultHandler
 
             $this->set_result($e->getCode(), $e->getMessage(), $e->getAppCode());
         }
-        catch(Throwable $e)
+        catch (Throwable $e)
         {
             $this->logger->error($e->getMessage(), [ 'exception' => $e ]);
             $this->set_result(HttpCode::INTERNAL_SERVER_ERROR, $e->getMessage());
@@ -113,9 +113,9 @@ class RequestResultHandler
     /**
      * Store result of the call in the response object.
      *
-     * @param integer $code    Return Code
-     * @param string  $message Error Message
-     * @param mixed   $info    Additional error information
+     * @param int    $code    Return Code
+     * @param string $message Error Message
+     * @param mixed  $info    Additional error information
      *
      * @return void
      */

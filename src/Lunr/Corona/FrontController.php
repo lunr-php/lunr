@@ -106,9 +106,9 @@ class FrontController
     /**
      * Get the controller responsible for the request.
      *
-     * @param string  $src       Project subfolder to look for controllers in.
-     * @param array   $list      List of controller names
-     * @param boolean $blacklist Whether to use the controller list as blacklist or whitelist
+     * @param string $src       Project subfolder to look for controllers in.
+     * @param array  $list      List of controller names
+     * @param bool   $blacklist Whether to use the controller list as blacklist or whitelist
      *
      * @return string $controller Fully qualified name of the responsible controller.
      */
@@ -135,7 +135,7 @@ class FrontController
             return '';
         }
 
-        $name = str_replace('-', '', $name);
+        $name    = str_replace('-', '', $name);
         $matches = $this->fao->find_matches("/^.+\/$name.php/i", $src);
 
         if (empty($matches) === TRUE)

@@ -209,8 +209,8 @@ class WebRequestParser implements RequestParserInterface
     /**
      * Parse super global variables.
      *
-     * @param array   $_VAR  Reference to a super global variable
-     * @param boolean $reset Whether to reset the super global variable
+     * @param array $_VAR  Reference to a super global variable
+     * @param bool  $reset Whether to reset the super global variable
      *
      * @return array $var Parsed variable
      */

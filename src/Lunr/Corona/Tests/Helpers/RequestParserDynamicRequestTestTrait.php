@@ -25,8 +25,8 @@ trait RequestParserDynamicRequestTestTrait
     /**
      * Preparation work for the request tests.
      *
-     * @param boolean $controller Whether to set a controller value
-     * @param boolean $method     Whether to set a method value
+     * @param bool $controller Whether to set a controller value
+     * @param bool $method     Whether to set a method value
      *
      * @return void
      */

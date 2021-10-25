@@ -43,6 +43,7 @@ class HttpException extends Exception
     {
         return $this->app_code;
     }
+
 }
 
 ?>

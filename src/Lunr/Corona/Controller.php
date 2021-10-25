@@ -66,9 +66,9 @@ abstract class Controller
     /**
      * Store result of the call in the response object.
      *
-     * @param integer $code    Return Code
-     * @param string  $message Error Message
-     * @param mixed   $info    Additional error information
+     * @param int    $code    Return Code
+     * @param string $message Error Message
+     * @param mixed  $info    Additional error information
      *
      * @return void
      */
