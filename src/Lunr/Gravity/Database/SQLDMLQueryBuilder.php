@@ -491,8 +491,8 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define ORDER BY clause in the SQL statement.
      *
-     * @param string  $expr Expression to order by
-     * @param boolean $asc  Order ASCending/TRUE or DESCending/FALSE
+     * @param string $expr Expression to order by
+     * @param bool   $asc  Order ASCending/TRUE or DESCending/FALSE
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -505,8 +505,8 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a LIMIT clause of the SQL statement.
      *
-     * @param integer $amount The amount of elements to retrieve
-     * @param integer $offset Start retrieving elements from a specific index
+     * @param int $amount The amount of elements to retrieve
+     * @param int $offset Start retrieving elements from a specific index
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -519,8 +519,8 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a UNION or UNION ALL clause of the SQL statement.
      *
-     * @param string  $sql_query SQL query reference
-     * @param boolean $all       True for ALL or False for empty (default).
+     * @param string $sql_query SQL query reference
+     * @param bool   $all       True for ALL or False for empty (default).
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -571,11 +571,11 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a recursive WITH clause.
      *
-     * @param string  $alias           The alias of the WITH statement
-     * @param string  $anchor_query    The initial select statement
-     * @param string  $recursive_query The select statement that selects recursively out of the initial query
-     * @param boolean $union_all       True for UNION ALL false for UNION
-     * @param array   $column_names    An optional parameter to give the result columns a name
+     * @param string $alias           The alias of the WITH statement
+     * @param string $anchor_query    The initial select statement
+     * @param string $recursive_query The select statement that selects recursively out of the initial query
+     * @param bool   $union_all       True for UNION ALL false for UNION
+     * @param array  $column_names    An optional parameter to give the result columns a name
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */

@@ -52,16 +52,16 @@ class MockMySQLi
     /**
      * Fake a successful connection to the database server.
      *
-     * @param string  $host     Hostname or IP address
-     * @param string  $user     Username
-     * @param string  $password Password
-     * @param string  $database Database
-     * @param integer $port     Port
-     * @param string  $socket   Socket
+     * @param string $host     Hostname or IP address
+     * @param string $user     Username
+     * @param string $password Password
+     * @param string $database Database
+     * @param int    $port     Port
+     * @param string $socket   Socket
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return boolean $return Whether the connection was successful or not.
+     * @return bool $return Whether the connection was successful or not.
      */
     public function connect($host, $user, $password, $database, $port, $socket)
     {
@@ -75,7 +75,7 @@ class MockMySQLi
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return boolean $return Whether setting the charset was successful or not.
+     * @return bool $return Whether setting the charset was successful or not.
      */
     public function set_charset($charset)
     {
@@ -91,7 +91,7 @@ class MockMySQLi
      * @param string $capath The pathname to a directory that contains trusted SSL CA certificates in PEM format.
      * @param string $cipher A list of allowable ciphers to use for SSL encryption.
      *
-     * @return boolean $return Always returns TRUE
+     * @return bool $return Always returns TRUE
      */
     public function ssl_set($key, $cert, $ca, $capath, $cipher)
     {
@@ -101,10 +101,10 @@ class MockMySQLi
     /**
      * Used for setting mysqli options.
      *
-     * @param integer $key   Mysqli option key.
-     * @param mixed   $value Mysqli option value.
+     * @param int   $key   Mysqli option key.
+     * @param mixed $value Mysqli option value.
      *
-     * @return boolean $return Always returns TRUE
+     * @return bool $return Always returns TRUE
      */
     public function options($key, $value)
     {

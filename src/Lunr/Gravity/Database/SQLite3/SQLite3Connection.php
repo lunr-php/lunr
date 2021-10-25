@@ -127,7 +127,7 @@ class SQLite3Connection extends DatabaseConnection
      *
      * @param string $db New default database
      *
-     * @return boolean True on success, False on Failure
+     * @return bool True on success, False on Failure
      */
     public function change_database($db)
     {
@@ -194,7 +194,7 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Begins a transaction.
      *
-     * @return boolean
+     * @return bool
      */
     public function begin_transaction()
     {
@@ -206,7 +206,7 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Commits a transaction.
      *
-     * @return boolean
+     * @return bool
      */
     public function commit()
     {
@@ -218,7 +218,7 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Rolls back a transaction.
      *
-     * @return boolean
+     * @return bool
      */
     public function rollback()
     {
@@ -230,7 +230,7 @@ class SQLite3Connection extends DatabaseConnection
     /**
      * Ends a transaction.
      *
-     * @return boolean
+     * @return bool
      */
     public function end_transaction()
     {

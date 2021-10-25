@@ -58,8 +58,8 @@ class MySQLSimpleDMLQueryBuilderUsingTest extends MySQLSimpleDMLQueryBuilderTest
         $this->escaper->expects($this->exactly(2))
              ->method('column')
              ->will($this->returnValueMap([
-                 ['column1', '', '`column1`'],
-                 ['column2', '', '`column2`'],
+                 [ 'column1', '', '`column1`' ],
+                 [ 'column2', '', '`column2`' ],
              ]));
 
         $this->builder->expects($this->exactly(2))
@@ -86,8 +86,8 @@ class MySQLSimpleDMLQueryBuilderUsingTest extends MySQLSimpleDMLQueryBuilderTest
         $this->escaper->expects($this->exactly(2))
              ->method('column')
              ->will($this->returnValueMap([
-                 ['column1', '', '`column1`'],
-                 ['column2', '', '`column2`'],
+                 [ 'column1', '', '`column1`' ],
+                 [ 'column2', '', '`column2`' ],
              ]));
 
         $this->builder->expects($this->once())

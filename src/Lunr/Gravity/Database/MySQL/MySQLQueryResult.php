@@ -107,10 +107,10 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     /**
      * Constructor.
      *
-     * @param string  $query  Executed query
-     * @param mixed   $result Query result
-     * @param MySQLi  $mysqli Shared instance of the MySQLi class
-     * @param boolean $async  Whether this query was run asynchronous or not
+     * @param string $query  Executed query
+     * @param mixed  $result Query result
+     * @param MySQLi $mysqli Shared instance of the MySQLi class
+     * @param bool   $async  Whether this query was run asynchronous or not
      */
     public function __construct($query, $result, $mysqli, $async = FALSE)
     {
@@ -178,7 +178,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     /**
      * Check whether the query has failed or not.
      *
-     * @return boolean $return TRUE if it failed, FALSE otherwise
+     * @return bool $return TRUE if it failed, FALSE otherwise
      */
     public function has_failed()
     {
@@ -188,7 +188,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     /**
      * Check whether the query has a deadlock or not.
      *
-     * @return boolean $return TRUE if it failed, FALSE otherwise
+     * @return bool $return TRUE if it failed, FALSE otherwise
      */
     public function has_deadlock()
     {
@@ -198,7 +198,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     /**
      * Check whether the query has a lock timeout or not.
      *
-     * @return boolean the timeout lock status for the query
+     * @return bool the timeout lock status for the query
      */
     public function has_lock_timeout()
     {
@@ -218,7 +218,7 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     /**
      * Get numerical error code of the error, if there was one.
      *
-     * @return integer $code Error Code
+     * @return int $code Error Code
      */
     public function error_number()
     {

@@ -85,16 +85,16 @@ class MockMySQLiFailedConnection
     /**
      * Fake a successful connection to the database server.
      *
-     * @param string  $host     Hostname or IP address
-     * @param string  $user     Username
-     * @param string  $password Password
-     * @param string  $database Database
-     * @param integer $port     Port
-     * @param string  $socket   Socket
+     * @param string $host     Hostname or IP address
+     * @param string $user     Username
+     * @param string $password Password
+     * @param string $database Database
+     * @param int    $port     Port
+     * @param string $socket   Socket
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return boolean $return Whether the connection was successful or not.
+     * @return bool $return Whether the connection was successful or not.
      */
     public function connect($host, $user, $password, $database, $port, $socket)
     {
@@ -104,9 +104,9 @@ class MockMySQLiFailedConnection
     /**
      * Fake killing the connection.
      *
-     * @param integer $thread_id The thread_id of the connection to kill.
+     * @param int $thread_id The thread_id of the connection to kill.
      *
-     * @return boolean $return TRUE if the thread_id matches the faked one, FALSE otherwise.
+     * @return bool $return TRUE if the thread_id matches the faked one, FALSE otherwise.
      */
     public function kill($thread_id)
     {
@@ -127,7 +127,7 @@ class MockMySQLiFailedConnection
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return boolean $return Whether setting the charset was successful or not.
+     * @return bool $return Whether setting the charset was successful or not.
      */
     public function set_charset($charset)
     {
@@ -137,7 +137,7 @@ class MockMySQLiFailedConnection
     /**
      * Fake failed query.
      *
-     * @return boolean $return Whether query was successful or not.
+     * @return bool $return Whether query was successful or not.
      */
     public function reap_async_query()
     {

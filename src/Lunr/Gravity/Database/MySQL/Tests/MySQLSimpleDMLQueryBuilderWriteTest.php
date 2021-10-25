@@ -169,7 +169,7 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
 
         $this->builder->expects($this->once())
                       ->method('column_names')
-                      ->with($this->equalTo(['`col`']))
+                      ->with($this->equalTo([ '`col`' ]))
                       ->will($this->returnSelf());
 
         $this->class->column_names([ 'col' ]);
@@ -185,13 +185,13 @@ class MySQLSimpleDMLQueryBuilderWriteTest extends MySQLSimpleDMLQueryBuilderTest
         $this->escaper->expects($this->exactly(2))
              ->method('column')
              ->will($this->returnValueMap([
-                 ['col1', '', '`col1`'],
-                 ['col2', '', '`col2`'],
+                 [ 'col1', '', '`col1`' ],
+                 [ 'col2', '', '`col2`' ],
              ]));
 
         $this->builder->expects($this->once())
                       ->method('column_names')
-                      ->with($this->equalTo(['`col1`', '`col2`']))
+                      ->with($this->equalTo([ '`col1`', '`col2`' ]))
                       ->will($this->returnSelf());
 
         $this->class->column_names([ 'col1', 'col2' ]);

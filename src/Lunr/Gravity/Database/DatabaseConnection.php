@@ -78,7 +78,7 @@ abstract class DatabaseConnection
     /**
      * Toggle readonly flag on the connection.
      *
-     * @param boolean $switch Whether to make the connection readonly or not
+     * @param bool $switch Whether to make the connection readonly or not
      *
      * @return void
      */
@@ -106,7 +106,7 @@ abstract class DatabaseConnection
      *
      * @param string $db New default database
      *
-     * @return boolean True on success, False on Failure
+     * @return bool True on success, False on Failure
      */
     public abstract function change_database($db);
 

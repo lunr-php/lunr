@@ -39,7 +39,6 @@ class PhysicalFilesystemAccessObjectRmTest extends PhysicalFilesystemAccessObjec
         {
             $this->assertFalse($fetched);
         }
-
     }
 
     /**

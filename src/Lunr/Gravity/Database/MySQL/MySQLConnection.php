@@ -172,15 +172,15 @@ class MySQLConnection extends DatabaseConnection
      */
     private function set_configuration()
     {
-        $this->rw_host     = $this->configuration['db']['rw_host'];
-        $this->user        = $this->configuration['db']['username'];
-        $this->pwd         = $this->configuration['db']['password'];
-        $this->db          = $this->configuration['db']['database'];
-        $this->ssl_key     = $this->configuration['db']['ssl_key'];
-        $this->ssl_cert    = $this->configuration['db']['ssl_cert'];
-        $this->ca_cert     = $this->configuration['db']['ca_cert'];
-        $this->ca_path     = $this->configuration['db']['ca_path'];
-        $this->cipher      = $this->configuration['db']['cipher'];
+        $this->rw_host  = $this->configuration['db']['rw_host'];
+        $this->user     = $this->configuration['db']['username'];
+        $this->pwd      = $this->configuration['db']['password'];
+        $this->db       = $this->configuration['db']['database'];
+        $this->ssl_key  = $this->configuration['db']['ssl_key'];
+        $this->ssl_cert = $this->configuration['db']['ssl_cert'];
+        $this->ca_cert  = $this->configuration['db']['ca_cert'];
+        $this->ca_path  = $this->configuration['db']['ca_path'];
+        $this->cipher   = $this->configuration['db']['cipher'];
 
         if ($this->configuration['db']['ro_host'] != NULL)
         {
@@ -288,7 +288,7 @@ class MySQLConnection extends DatabaseConnection
      *
      * @param string $db New default database
      *
-     * @return boolean True on success, False on Failure
+     * @return bool True on success, False on Failure
      */
     public function change_database($db)
     {
@@ -300,10 +300,10 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Set option for the current connection.
      *
-     * @param integer $key   Mysqli option key.
-     * @param mixed   $value Mysqli option value.
+     * @param int   $key   Mysqli option key.
+     * @param mixed $value Mysqli option value.
      *
-     * @return boolean True on success, False on Failure
+     * @return bool True on success, False on Failure
      */
     public function set_option($key, $value)
     {
@@ -320,7 +320,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Return a new instance of a QueryBuilder object.
      *
-     * @param boolean $simple Whether to return a simple query builder or an advanced one.
+     * @param bool $simple Whether to return a simple query builder or an advanced one.
      *
      * @return MySQLDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
      */
@@ -422,7 +422,7 @@ class MySQLConnection extends DatabaseConnection
         $sql_query        = $this->query_hint . $sql_query;
         $this->query_hint = '';
 
-        $this->logger->debug('query: {query}', ['query' => $sql_query]);
+        $this->logger->debug('query: {query}', [ 'query' => $sql_query ]);
 
         $query_start = microtime(TRUE);
         $result      = $this->mysqli->query($sql_query);
@@ -447,7 +447,7 @@ class MySQLConnection extends DatabaseConnection
         $sql_query        = $this->query_hint . $sql_query;
         $this->query_hint = '';
 
-        $this->logger->debug('query: {query}', ['query' => $sql_query]);
+        $this->logger->debug('query: {query}', [ 'query' => $sql_query ]);
 
         $this->mysqli->query($sql_query, MYSQLI_ASYNC);
 
@@ -457,7 +457,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Begins a transaction.
      *
-     * @return boolean
+     * @return bool
      */
     public function begin_transaction()
     {
@@ -469,7 +469,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Commits a transaction.
      *
-     * @return boolean
+     * @return bool
      */
     public function commit()
     {
@@ -481,7 +481,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Rolls back a transaction.
      *
-     * @return boolean
+     * @return bool
      */
     public function rollback()
     {
@@ -493,7 +493,7 @@ class MySQLConnection extends DatabaseConnection
     /**
      * Ends a transaction.
      *
-     * @return boolean
+     * @return bool
      */
     public function end_transaction()
     {

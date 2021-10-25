@@ -20,21 +20,21 @@ interface DatabaseQueryResultInterface
     /**
      * Check whether the query has failed or not.
      *
-     * @return boolean $return TRUE if it failed, FALSE otherwise
+     * @return bool $return TRUE if it failed, FALSE otherwise
      */
     public function has_failed();
 
     /**
      * Check whether the query has a deadlock or not.
      *
-     * @return boolean $return TRUE if it failed, FALSE otherwise
+     * @return bool $return TRUE if it failed, FALSE otherwise
      */
     public function has_deadlock();
 
     /**
      * Check whether the query has a lock timeout or not.
      *
-     * @return boolean the timeout lock status for the query
+     * @return bool the timeout lock status for the query
      */
     public function has_lock_timeout();
 
@@ -48,7 +48,7 @@ interface DatabaseQueryResultInterface
     /**
      * Get numerical error code of the error, if there was one.
      *
-     * @return integer $code Error Code
+     * @return int $code Error Code
      */
     public function error_number();
 
@@ -85,7 +85,7 @@ interface DatabaseQueryResultInterface
     /**
      * Returns the number of rows in the query.
      *
-     * @return integer $number Number of rows in the result set.
+     * @return int $number Number of rows in the result set.
      */
     public function number_of_rows();
 

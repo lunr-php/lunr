@@ -81,7 +81,7 @@ interface FilesystemAccessObjectInterface
      *
      * @param string $dir_path The directory path to be removed
      *
-     * @return boolean TRUE when directory is removed and FALSE in a failure.
+     * @return bool TRUE when directory is removed and FALSE in a failure.
      */
     public function rmdir($dir_path);
 
@@ -93,7 +93,7 @@ interface FilesystemAccessObjectInterface
      * @param  string $delimiter The delimiter for the csv (optional)
      * @param  string $enclosure The enclosure for the csv (option)
      *
-     * @return boolean TRUE when file is created and FALSE in failure.
+     * @return bool TRUE when file is created and FALSE in failure.
      */
     public function put_csv_file_content($file, $data, $delimiter = ',', $enclosure = '"');
 
@@ -102,11 +102,11 @@ interface FilesystemAccessObjectInterface
      *
      * This method is a wrapper of the php mkdir.
      *
-     * @param string  $pathname  The directory path/name
-     * @param integer $mode      The access mode (0755 by default)
-     * @param boolean $recursive Allows the creation of nested directories specified in the pathname
+     * @param string $pathname  The directory path/name
+     * @param int    $mode      The access mode (0755 by default)
+     * @param bool   $recursive Allows the creation of nested directories specified in the pathname
      *
-     * @return boolean TRUE when directory is created or FALSE in failure.
+     * @return bool TRUE when directory is created or FALSE in failure.
      */
     public function mkdir($pathname, $mode = 0755, $recursive = FALSE);
 

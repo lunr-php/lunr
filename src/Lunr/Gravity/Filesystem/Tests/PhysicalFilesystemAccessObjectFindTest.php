@@ -81,7 +81,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     /**
      * Test finding in an accessible directory with an boolean needle.
      *
-     * @param boolean $needle Boolean needle
+     * @param bool $needle Boolean needle
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
@@ -219,7 +219,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     /**
      * Test finding in an boolean directory.
      *
-     * @param boolean $directory Boolean directory value
+     * @param bool $directory Boolean directory value
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches

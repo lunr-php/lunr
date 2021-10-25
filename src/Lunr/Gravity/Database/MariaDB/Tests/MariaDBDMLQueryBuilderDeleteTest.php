@@ -49,9 +49,9 @@ class MariaDBDMLQueryBuilderDeleteTest extends MariaDBDMLQueryBuilderTest
     public function expectedReturningDataProvider(): array
     {
         $expected_return   = [];
-        $expected_return[] = ['*', 'RETURNING *'];
-        $expected_return[] = ['id, name', 'RETURNING id, name'];
-        $expected_return[] = ["'test'", "RETURNING 'test'"];
+        $expected_return[] = [ '*', 'RETURNING *' ];
+        $expected_return[] = [ 'id, name', 'RETURNING id, name' ];
+        $expected_return[] = [ "'test'", "RETURNING 'test'" ];
 
         return $expected_return;
     }

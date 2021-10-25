@@ -111,8 +111,8 @@ class MySQLQueryEscaper extends DatabaseQueryEscaper
     /**
      * Define and escape input as a geometry value.
      *
-     * @param string       $value Well-Known Text (WKT) representation of a geometry shape.
-     * @param integer|null $srid  The Spatial Reference System ID for the geometry value.
+     * @param string   $value Well-Known Text (WKT) representation of a geometry shape.
+     * @param int|null $srid  The Spatial Reference System ID for the geometry value.
      *
      * @return string $return Defined and escaped geometric value.
      */

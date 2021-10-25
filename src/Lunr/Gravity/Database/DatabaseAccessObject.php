@@ -263,7 +263,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      * Retry executing the query in case of deadlock error.
      *
      * @param DatabaseQueryResultInterface $query       The result of the run query
-     * @param integer                      $retry_count The max amount of re-executing the query
+     * @param int                          $retry_count The max amount of re-executing the query
      *
      * @return mixed Result value
      */
@@ -287,7 +287,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
      *
      * @param DatabaseQueryResultInterface $query The result of the run query
      *
-     * @return boolean TRUE on success
+     * @return bool TRUE on success
      */
     protected function result_boolean($query)
     {

@@ -228,8 +228,8 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define GROUP BY clause of the SQL statement.
      *
-     * @param string  $expr  Expression to group by
-     * @param boolean $order Not supported by SQLite
+     * @param string $expr  Expression to group by
+     * @param bool   $order Not supported by SQLite
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */

@@ -394,7 +394,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     public function on_in($left, $right, $negate = FALSE)
     {
-        $right = array_map([$this->escaper, 'value'], $right);
+        $right = array_map([ $this->escaper, 'value' ], $right);
 
         $this->builder->on_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
         return $this;
@@ -534,7 +534,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     public function where_in($left, $right, $negate = FALSE)
     {
-        $right = array_map([$this->escaper, 'value'], $right);
+        $right = array_map([ $this->escaper, 'value' ], $right);
 
         $this->builder->where_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
         return $this;
@@ -592,8 +592,8 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define GROUP BY clause of the SQL statement.
      *
-     * @param string  $expr  Expression to group by
-     * @param boolean $order Order ASCending/TRUE or DESCending/FALSE, default no order/NULL
+     * @param string $expr  Expression to group by
+     * @param bool   $order Order ASCending/TRUE or DESCending/FALSE, default no order/NULL
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -666,7 +666,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     public function having_in($left, $right, $negate = FALSE)
     {
-        $right = array_map([$this->escaper, 'value'], $right);
+        $right = array_map([ $this->escaper, 'value' ], $right);
 
         $this->builder->having_in($this->escaper->column($left), $this->escaper->list_value($right), $negate);
         return $this;
@@ -746,8 +746,8 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define ORDER BY clause in the SQL statement.
      *
-     * @param string  $expr Expression to order by
-     * @param boolean $asc  Order ASCending/TRUE or DESCending/FALSE
+     * @param string $expr Expression to order by
+     * @param bool   $asc  Order ASCending/TRUE or DESCending/FALSE
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -760,8 +760,8 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a LIMIT clause of the SQL statement.
      *
-     * @param integer $amount The amount of elements to retrieve
-     * @param integer $offset Start retrieving elements from a specific index
+     * @param int $amount The amount of elements to retrieve
+     * @param int $offset Start retrieving elements from a specific index
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -774,8 +774,8 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a UNION or UNION ALL clause of the SQL statement.
      *
-     * @param string  $sql_query SQL query reference
-     * @param boolean $all       True for ALL or False for empty (default).
+     * @param string $sql_query SQL query reference
+     * @param bool   $all       True for ALL or False for empty (default).
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -803,11 +803,11 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a recursive WITH clause.
      *
-     * @param string  $alias           The alias of the WITH statement
-     * @param string  $anchor_query    The initial select statement
-     * @param string  $recursive_query The select statement that selects recursively out of the initial query
-     * @param boolean $union_all       True for UNION ALL false for UNION
-     * @param array   $column_names    An optional parameter to give the result columns a name
+     * @param string $alias           The alias of the WITH statement
+     * @param string $anchor_query    The initial select statement
+     * @param string $recursive_query The select statement that selects recursively out of the initial query
+     * @param bool   $union_all       True for UNION ALL false for UNION
+     * @param array  $column_names    An optional parameter to give the result columns a name
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */
@@ -831,8 +831,8 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Escape a table reference.
      *
-     * @param string  $location_reference A location reference
-     * @param boolean $table              Whether to escape a table or a result_column
+     * @param string $location_reference A location reference
+     * @param bool   $table              Whether to escape a table or a result_column
      *
      * @return string $escaped Escaped location reference
      */

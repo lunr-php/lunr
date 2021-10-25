@@ -48,7 +48,7 @@ class MySQLSimpleDMLQueryBuilderFluidInterfaceTest extends MySQLSimpleDMLQueryBu
     {
         $this->builder->expects($this->once())
                       ->method('column_names')
-                      ->with($this->equalTo([0 => NULL]))
+                      ->with($this->equalTo([ 0 => NULL ]))
                       ->will($this->returnSelf());
 
         $return = $this->class->column_names([ 'col' ]);

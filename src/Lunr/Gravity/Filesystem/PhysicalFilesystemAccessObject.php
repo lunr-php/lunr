@@ -279,10 +279,10 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
     /**
      * Write contents into file.
      *
-     * @param string  $file           Filepath
-     * @param string  $contents       Contents to write
-     * @param boolean $append         Whether to append to an existing file or not
-     * @param boolean $exclusive_lock Whether to acquire an exclusive write lock for the file or not
+     * @param string $file           Filepath
+     * @param string $contents       Contents to write
+     * @param bool   $append         Whether to append to an existing file or not
+     * @param bool   $exclusive_lock Whether to acquire an exclusive write lock for the file or not
      *
      * @return mixed $return Written bytes as integer on success,
      *                       FALSE on failure
@@ -309,7 +309,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      *
      * @param string $dir_path The directory path to be removed
      *
-     * @return boolean TRUE when directory is removed and FALSE in a failure.
+     * @return bool TRUE when directory is removed and FALSE in a failure.
      */
     public function rmdir($dir_path)
     {
@@ -354,7 +354,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      * @param  string $delimiter The delimiter for the csv (optional)
      * @param  string $enclosure The enclosure for the csv (optional)
      *
-     * @return boolean TRUE when file is created and FALSE in failure.
+     * @return bool TRUE when file is created and FALSE in failure.
      */
     public function put_csv_file_content($file, $data, $delimiter = ',', $enclosure = '"')
     {
@@ -381,11 +381,11 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      *
      * This method is a wrapper of the php mkdir.
      *
-     * @param string  $pathname  The directory path/name
-     * @param integer $mode      The access mode (0755 by default)
-     * @param boolean $recursive Allows the creation of nested directories specified in the pathname
+     * @param string $pathname  The directory path/name
+     * @param int    $mode      The access mode (0755 by default)
+     * @param bool   $recursive Allows the creation of nested directories specified in the pathname
      *
-     * @return boolean TRUE when directory is created or FALSE in failure.
+     * @return bool TRUE when directory is created or FALSE in failure.
      */
     public function mkdir($pathname, $mode = 0755, $recursive = FALSE)
     {

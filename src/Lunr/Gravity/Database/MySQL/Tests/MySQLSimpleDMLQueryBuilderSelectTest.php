@@ -80,7 +80,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
     {
         $this->escaper->expects($this->exactly(2))
                       ->method('result_column')
-                      ->withConsecutive(['col'], [' col'])
+                      ->withConsecutive([ 'col' ], [ ' col' ])
                       ->will($this->returnValue('`col`'));
 
         $this->builder->expects($this->once())
@@ -180,7 +180,7 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
     {
         $this->escaper->expects($this->exactly(2))
                       ->method('intvalue')
-                      ->withConsecutive([10], [-1])
+                      ->withConsecutive([ 10 ], [ -1 ])
                       ->will($this->returnArgument(0));
 
         $this->builder->expects($this->once())

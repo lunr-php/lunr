@@ -84,7 +84,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Check whether the query has failed or not.
      *
-     * @return boolean $return TRUE if it failed, FALSE otherwise
+     * @return bool $return TRUE if it failed, FALSE otherwise
      */
     public function has_failed()
     {
@@ -106,7 +106,7 @@ class MySQLAsyncQueryResult extends MySQLQueryResult
     /**
      * Get numerical error code of the error, if there was one.
      *
-     * @return integer $code Error Code
+     * @return int $code Error Code
      */
     public function error_number()
     {

@@ -31,7 +31,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
     {
         $this->escaper->expects($this->exactly(2))
                       ->method('column')
-                      ->will($this->returnValueMap([['left', '', '`left`'], ['right', '', '`right`']]));
+                      ->will($this->returnValueMap([[ 'left', '', '`left`' ], [ 'right', '', '`right`' ]]));
 
         $this->builder->expects($this->once())
                       ->method('on')
@@ -71,8 +71,8 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
         $this->escaper->expects($this->exactly(2))
                       ->method('value')
                       ->will($this->returnValueMap([
-                          ['val1', '', '', '"val1"'],
-                          ['val2', '', '', '"val2"'],
+                          [ 'val1', '', '', '"val1"' ],
+                          [ 'val2', '', '', '"val2"' ],
                       ]));
 
         $this->escaper->expects($this->once())
@@ -107,7 +107,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
 
         $this->escaper->expects($this->exactly(2))
                       ->method('value')
-                      ->will($this->returnValueMap([['a', '"a"'], ['b', '"b"']]));
+                      ->will($this->returnValueMap([[ 'a', '"a"' ], [ 'b', '"b"' ]]));
 
         $this->builder->expects($this->once())
                       ->method('on_between')
@@ -315,7 +315,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
     {
         $this->escaper->expects($this->exactly(2))
                       ->method('value')
-                      ->will($this->returnValueMap([['val1', '', '', '"val1"'], ['val2', '', '', '"val2"']]));
+                      ->will($this->returnValueMap([[ 'val1', '', '', '"val1"' ], [ 'val2', '', '', '"val2"' ]]));
 
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -344,11 +344,11 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
     {
         $this->escaper->expects($this->exactly(1))
                       ->method('column')
-                      ->will($this->returnValueMap([['left', '', '`left`']]));
+                      ->will($this->returnValueMap([[ 'left', '', '`left`' ]]));
 
         $this->escaper->expects($this->exactly(2))
                       ->method('value')
-                      ->will($this->returnValueMap([['a', '', '', '"a"'], ['b', '', '', '"b"']]));
+                      ->will($this->returnValueMap([[ 'a', '', '', '"a"' ], [ 'b', '', '', '"b"' ]]));
 
         $this->builder->expects($this->once())
                       ->method('where_between')
@@ -472,7 +472,7 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
     {
         $this->escaper->expects($this->exactly(2))
                       ->method('value')
-                      ->will($this->returnValueMap([['val1', '', '', '"val1"'], ['val2', '', '', '"val2"']]));
+                      ->will($this->returnValueMap([[ 'val1', '', '', '"val1"' ], [ 'val2', '', '', '"val2"' ]]));
 
         $this->escaper->expects($this->once())
                       ->method('column')
@@ -507,8 +507,8 @@ class MySQLSimpleDMLQueryBuilderConditionalTest extends MySQLSimpleDMLQueryBuild
         $this->escaper->expects($this->exactly(2))
                       ->method('value')
                       ->will($this->returnValueMap([
-                          ['a', '', '', '"a"'],
-                          ['b', '', '', '"b"']
+                          [ 'a', '', '', '"a"' ],
+                          [ 'b', '', '', '"b"' ]
                       ]));
 
         $this->builder->expects($this->once())

@@ -96,7 +96,7 @@ interface QueryEscaperInterface
      *
      * @param mixed $value Input to escape as integer
      *
-     * @return integer Defined and escaped Integer value
+     * @return int Defined and escaped Integer value
      */
     public function intvalue($value);
 

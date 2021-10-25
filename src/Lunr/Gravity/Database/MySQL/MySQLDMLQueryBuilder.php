@@ -195,8 +195,8 @@ class MySQLDMLQueryBuilder extends SQLDMLQueryBuilder
     /**
      * Define GROUP BY clause of the SQL statement.
      *
-     * @param string  $expr  Expression to group by
-     * @param boolean $order Order ASCending/TRUE or DESCending/FALSE, default no order/NULL
+     * @param string $expr  Expression to group by
+     * @param bool   $order Order ASCending/TRUE or DESCending/FALSE, default no order/NULL
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */

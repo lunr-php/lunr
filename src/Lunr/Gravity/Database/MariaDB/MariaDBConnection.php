@@ -45,7 +45,7 @@ class MariaDBConnection extends MySQLConnection
     /**
      * Return a new instance of a QueryBuilder object.
      *
-     * @param boolean $simple Whether to return a simple query builder or an advanced one.
+     * @param bool $simple Whether to return a simple query builder or an advanced one.
      *
      * @return MySQLDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
      */

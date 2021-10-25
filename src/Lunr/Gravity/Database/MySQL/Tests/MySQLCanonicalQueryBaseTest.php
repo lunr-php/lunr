@@ -52,7 +52,7 @@ class MySQLCanonicalQueryBaseTest extends MySQLCanonicalQueryTest
     {
         $method = $this->get_accessible_reflection_method('remove_eol_blank_spaces');
 
-        $result = $method->invokeArgs($this->class, [$data]);
+        $result = $method->invokeArgs($this->class, [ $data ]);
         $this->assertEquals($expected, $result);
     }
 
@@ -98,8 +98,8 @@ class MySQLCanonicalQueryBaseTest extends MySQLCanonicalQueryTest
     /**
      * Test that jump_ignore() returns the index after positions to ignore or the same index case is not between ranges
      *
-     * @param array   $data     Data values
-     * @param integer $expected Modified values
+     * @param array $data     Data values
+     * @param int   $expected Modified values
      *
      * @dataProvider jumpIgnoreDataProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLCanonicalQuery::jump_ignore
@@ -111,7 +111,7 @@ class MySQLCanonicalQueryBaseTest extends MySQLCanonicalQueryTest
 
         $method = $this->get_accessible_reflection_method('jump_ignore');
 
-        $result = $method->invokeArgs($this->class, [$data[0]]);
+        $result = $method->invokeArgs($this->class, [ $data[0] ]);
 
         $this->assertEquals($expected, $result);
     }
@@ -169,20 +169,20 @@ class MySQLCanonicalQueryBaseTest extends MySQLCanonicalQueryTest
         $property->setValue($this->class, []);
 
         $method = $this->get_accessible_reflection_method('add_ignore_positions');
-        $method->invokeArgs($this->class, [[[40,50]]]);
-        $method->invokeArgs($this->class, [[[3,10],[25,30]]]);
+        $method->invokeArgs($this->class, [[[ 40,50 ]]]);
+        $method->invokeArgs($this->class, [[[ 3,10 ],[ 25,30 ]]]);
 
         $result = $property->getValue($this->class);
 
         $this->assertIsArray($result);
-        $this->assertEquals([[3,10],[25,30],[40,50]], $result);
+        $this->assertEquals([[ 3,10 ],[ 25,30 ],[ 40,50 ]], $result);
     }
 
     /**
      * Test that is_negative_number()
      *
-     * @param array   $data     Data values
-     * @param boolean $expected Modified data values
+     * @param array $data     Data values
+     * @param bool  $expected Modified data values
      *
      * @dataProvider isNegativeNumberDataProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLCanonicalQuery::is_negative_number
@@ -282,8 +282,8 @@ class MySQLCanonicalQueryBaseTest extends MySQLCanonicalQueryTest
     /**
      * Test that find_next() returns the index of the string provided,
      *
-     * @param array        $data     Data values
-     * @param integer|null $expected Modified data values
+     * @param array    $data     Data values
+     * @param int|null $expected Modified data values
      *
      * @dataProvider findNextDataProvider
      * @covers       Lunr\Gravity\Database\MySQL\MySQLCanonicalQuery::find_next
@@ -341,7 +341,7 @@ class MySQLCanonicalQueryBaseTest extends MySQLCanonicalQueryTest
 
         $method = $this->get_accessible_reflection_method('collapse_multirows');
 
-        $result = $method->invokeArgs($this->class, [$input]);
+        $result = $method->invokeArgs($this->class, [ $input ]);
 
         $this->assertEquals($output, $result);
     }

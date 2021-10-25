@@ -117,7 +117,6 @@ class TransactionalDatabaseAccessObjectCallsTest extends LunrBaseTest
         $this->class->end_transaction();
     }
 
-
 }
 
 ?>

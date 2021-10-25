@@ -272,7 +272,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
         $with_query = '';
 
-        if($this->with != '')
+        if ($this->with != '')
         {
             if ($this->is_recursive == TRUE)
             {
@@ -472,22 +472,22 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      */
     protected function sql_with($alias, $sql_query, $recursive_query = NULL, $union = NULL, $column_names = NULL)
     {
-        if($column_names !== NULL)
+        if ($column_names !== NULL)
         {
             $column_names = ' (' . implode(', ', $column_names) . ')';
         }
 
-        if($recursive_query != '' && $recursive_query !== NULL)
+        if ($recursive_query != '' && $recursive_query !== NULL)
         {
             $this->is_recursive = TRUE;
 
-            if(!is_null($union))
+            if (!is_null($union))
             {
                 $recursive_query = ' ' . $union . ' ' . $recursive_query;
             }
         }
 
-        if($this->with != '')
+        if ($this->with != '')
         {
             if ($recursive_query != '' && $recursive_query !== NULL)
             {
@@ -825,8 +825,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a ORDER BY clause of the SQL statement.
      *
-     * @param string  $expr Expression to order by
-     * @param boolean $asc  Order ASCending/TRUE or DESCending/FALSE
+     * @param string $expr Expression to order by
+     * @param bool   $asc  Order ASCending/TRUE or DESCending/FALSE
      *
      * @return void
      */
@@ -849,8 +849,8 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a LIMIT clause for the SQL statement.
      *
-     * @param integer $amount The amount of elements to retrieve
-     * @param integer $offset Start retrieving elements from a sepcific index
+     * @param int $amount The amount of elements to retrieve
+     * @param int $offset Start retrieving elements from a sepcific index
      *
      * @return void
      */

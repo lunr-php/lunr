@@ -96,7 +96,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
     public function testRecursiveWithWithoutColumnNames(): void
     {
         $method = $this->get_accessible_reflection_method('sql_with');
-        $method->invokeArgs($this->class, [ 'alias', 'anchor_query', 'recursive_query', 'UNION']);
+        $method->invokeArgs($this->class, [ 'alias', 'anchor_query', 'recursive_query', 'UNION' ]);
 
         $string = 'alias AS ( anchor_query UNION recursive_query )';
 
@@ -112,7 +112,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
     {
         $method = $this->get_accessible_reflection_method('sql_with');
 
-        $column_names = array('column1', 'column2', 'column3');
+        $column_names = [ 'column1', 'column2', 'column3' ];
 
         $method->invokeArgs($this->class, [ 'alias', 'anchor_query', 'recursive_query', 'UNION', $column_names ]);
 
@@ -150,7 +150,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
         $this->set_reflection_property_value
         ('with', 'alias (column1, column2, column3) AS ( query )');
 
-        $column_names = array('column1', 'column2', 'column3');
+        $column_names = [ 'column1', 'column2', 'column3' ];
 
         $method = $this->get_accessible_reflection_method('sql_with');
 
@@ -191,7 +191,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
         $this->set_reflection_property_value
         ('with', 'alias (column1, column2, column3) AS ( anchor_query UNION recursive_query )');
 
-        $column_names = array('column1', 'column2', 'column3');
+        $column_names = [ 'column1', 'column2', 'column3' ];
 
         $method = $this->get_accessible_reflection_method('sql_with');
 
@@ -234,7 +234,7 @@ class DatabaseDMLQueryBuilderQueryPartsWithTest extends DatabaseDMLQueryBuilderT
 
         $method = $this->get_accessible_reflection_method('sql_with');
 
-        $column_names = array('column1', 'column2', 'column3');
+        $column_names = [ 'column1', 'column2', 'column3' ];
 
         $method->invokeArgs($this->class, [ 'alias', 'query', '', '', $column_names ]);
 

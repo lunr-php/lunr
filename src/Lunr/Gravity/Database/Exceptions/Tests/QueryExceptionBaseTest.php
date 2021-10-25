@@ -94,6 +94,7 @@ class QueryExceptionBaseTest extends QueryExceptionTest
 
         throw $this->class;
     }
+
 }
 
 ?>

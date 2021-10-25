@@ -137,7 +137,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that get_file_content() with invalid file names.
      *
-     * @param boolean $file Boolean filename
+     * @param bool $file Boolean filename
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
@@ -274,7 +274,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() with boolean file names.
      *
-     * @param boolean $file Boolean filename
+     * @param bool $file Boolean filename
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
@@ -475,7 +475,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test getting a SplFileObject for boolean file names.
      *
-     * @param boolean $file Boolean filename
+     * @param bool $file Boolean filename
      *
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object

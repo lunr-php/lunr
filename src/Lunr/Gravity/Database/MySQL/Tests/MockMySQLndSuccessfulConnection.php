@@ -27,13 +27,13 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
      * @param string             $user        Username
      * @param string             $password    Password
      * @param string             $database    Database
-     * @param integer            $port        Port
+     * @param int                $port        Port
      * @param string             $socket      Socket
-     * @param integer            $mysql_flags Connection options
+     * @param int                $mysql_flags Connection options
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return boolean $return Whether the connection was successful or not.
+     * @return bool $return Whether the connection was successful or not.
      */
     public function connect($connection, $host, $user, $password, $database, $port, $socket, $mysql_flags)
     {
@@ -47,7 +47,7 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return integer $return Fake thread ID
+     * @return int $return Fake thread ID
      */
     public function getThreadId($connection)
     {
@@ -61,7 +61,7 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return integer $return Fake number of affected rows
+     * @return int $return Fake number of affected rows
      */
     public function getAffectedRows($connection)
     {
@@ -76,7 +76,7 @@ class MockMySQLndSuccessfulConnection extends MySQLndUhConnection
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      *
-     * @return boolean $return Whether setting the charset was successful or not.
+     * @return bool $return Whether setting the charset was successful or not.
      */
     public function setCharset($connection, $charset)
     {

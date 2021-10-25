@@ -210,8 +210,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test escaping an integer.
      *
-     * @param mixed   $value    The input value to be escaped
-     * @param integer $expected The expected escaped integer
+     * @param mixed $value    The input value to be escaped
+     * @param int   $expected The expected escaped integer
      *
      * @dataProvider expectedIntegerProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::intvalue
@@ -245,8 +245,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test escaping illegal value as integer.
      *
-     * @param mixed   $value   The input value to be escaped
-     * @param integer $illegal The illegal escaped integer
+     * @param mixed $value   The input value to be escaped
+     * @param int   $illegal The illegal escaped integer
      *
      * @dataProvider illegalIntegerProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::intvalue
@@ -259,8 +259,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test escaping a float.
      *
-     * @param mixed   $value    The input value to be escaped
-     * @param integer $expected The expected escaped float
+     * @param mixed $value    The input value to be escaped
+     * @param int   $expected The expected escaped float
      *
      * @dataProvider expectedFloatProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::floatvalue
@@ -294,8 +294,8 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     /**
      * Test escaping illegal value as float.
      *
-     * @param mixed   $value   The input value to be escaped
-     * @param integer $illegal The illegal escaped float
+     * @param mixed $value   The input value to be escaped
+     * @param int   $illegal The illegal escaped float
      *
      * @dataProvider illegalFloatProvider
      * @covers       Lunr\Gravity\Database\DatabaseQueryEscaper::floatvalue

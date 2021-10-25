@@ -62,7 +62,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
 
         $this->logger->expects($this->exactly(2))
                      ->method('debug')
-                     ->withConsecutive([ 'query: {query}', ['query' => 'query'] ], [ 'Query executed in 0 seconds' ]);
+                     ->withConsecutive([ 'query: {query}', [ 'query' => 'query' ] ], [ 'Query executed in 0 seconds' ]);
 
         $query = $this->class->query('query');
 
@@ -95,7 +95,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
 
         $this->logger->expects($this->exactly(2))
                      ->method('debug')
-                     ->withConsecutive([ 'query: {query}', ['query' => '/*hint*/query'] ], [ 'Query executed in 0 seconds' ]);
+                     ->withConsecutive([ 'query: {query}', [ 'query' => '/*hint*/query' ] ], [ 'Query executed in 0 seconds' ]);
 
         $query = $this->class->query('query');
 
@@ -129,7 +129,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
 
         $this->logger->expects($this->exactly(2))
                      ->method('debug')
-                     ->withConsecutive([ 'query: {query}', ['query' => '/*hint*/query'] ], [ 'Query executed in 0 seconds' ]);
+                     ->withConsecutive([ 'query: {query}', [ 'query' => '/*hint*/query' ] ], [ 'Query executed in 0 seconds' ]);
 
         $this->class->query('query');
 
@@ -182,7 +182,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
 
         $this->logger->expects($this->once())
                      ->method('debug')
-                     ->with('query: {query}', ['query' => 'query']);
+                     ->with('query: {query}', [ 'query' => 'query' ]);
 
         $query = $this->class->async_query('query');
 
@@ -212,7 +212,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
 
         $this->logger->expects($this->once())
                      ->method('debug')
-                     ->with('query: {query}', ['query' => '/*hint*/query']);
+                     ->with('query: {query}', [ 'query' => '/*hint*/query' ]);
 
         $query = $this->class->async_query('query');
 
@@ -241,7 +241,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
 
         $this->logger->expects($this->once())
                      ->method('debug')
-                     ->with('query: {query}', ['query' => '/*hint*/query']);
+                     ->with('query: {query}', [ 'query' => '/*hint*/query' ]);
 
         $this->class->async_query('query');
 

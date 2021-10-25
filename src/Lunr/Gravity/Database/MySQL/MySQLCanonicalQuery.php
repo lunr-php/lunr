@@ -98,11 +98,11 @@ class MySQLCanonicalQuery
     /**
      * Replaces text in between two strings
      *
-     * @param string  $string        Input string to replace
-     * @param string  $from          Input string to start replacing
-     * @param string  $to            Input string to end replacing
-     * @param string  $replace       Input string to replace with
-     * @param boolean $add_to_ignore Input bool to decide if add to ignore list
+     * @param string $string        Input string to replace
+     * @param string $from          Input string to start replacing
+     * @param string $to            Input string to end replacing
+     * @param string $replace       Input string to replace with
+     * @param bool   $add_to_ignore Input bool to decide if add to ignore list
      *
      * @return string $string The provided string replaced
      */
@@ -140,7 +140,7 @@ class MySQLCanonicalQuery
 
             if ($add_to_ignore === TRUE)
             {
-                $this->add_ignore_positions([[$start_pos, $start_pos + strlen($replace) - 1]]);
+                $this->add_ignore_positions([[ $start_pos, $start_pos + strlen($replace) - 1 ]]);
             }
 
             $offset = $start_pos + strlen($replace);
@@ -156,7 +156,7 @@ class MySQLCanonicalQuery
      * @param string      $string Input string to search
      * @param string      $from   Input string to search the start of range
      * @param string|null $to     Input string to search the end of range
-     * @param integer     $offset Input int index of where to start the search
+     * @param int         $offset Input int index of where to start the search
      *
      * @return array $positions All ranges between $to and $from,
      *               if can't find $to returns empty,
@@ -174,7 +174,7 @@ class MySQLCanonicalQuery
         $end       = strlen($string);
         while ($offset < $end)
         {
-            $tmp_position = [strpos($string, $from, $offset), NULL];
+            $tmp_position = [ strpos($string, $from, $offset), NULL ];
             if ($tmp_position[0] === FALSE)
             {
                 break;
@@ -243,9 +243,9 @@ class MySQLCanonicalQuery
     /**
      * Update all index ranges if start index
      *
-     * @param array   $positions Input array with ranges of indexes
-     * @param integer $start     Input integer to start the update
-     * @param integer $offset    Input integer with the amount to offset positions
+     * @param array $positions Input array with ranges of indexes
+     * @param int   $start     Input integer to start the update
+     * @param int   $offset    Input integer with the amount to offset positions
      *
      * @return array returns $positions updated
      */
@@ -263,10 +263,10 @@ class MySQLCanonicalQuery
     /**
      * Get the index position of the next digit from offset
      *
-     * @param string  $string Input string where to search for the next index position
-     * @param integer $offset Input integer where to start to search
+     * @param string $string Input string where to search for the next index position
+     * @param int    $offset Input integer where to start to search
      *
-     * @return integer|null return Index of the next digit, NULL if not found
+     * @return int|null return Index of the next digit, NULL if not found
      */
     private function find_digit(string $string, int $offset): ?int
     {
@@ -336,10 +336,10 @@ class MySQLCanonicalQuery
     /**
      * Check if number is a negation
      *
-     * @param string  $string Input string to check
-     * @param integer $i      Start index of the number position
+     * @param string $string Input string to check
+     * @param int    $i      Start index of the number position
      *
-     * @return boolean returns TRUE if finds the negation character and is not a subtraction, FALSE otherwise
+     * @return bool returns TRUE if finds the negation character and is not a subtraction, FALSE otherwise
      */
     private function is_negative_number(string $string, int $i): bool
     {
@@ -367,8 +367,8 @@ class MySQLCanonicalQuery
     /**
      * Check if digit is a number and get the position of last number digit
      *
-     * @param string  $string Input string to check
-     * @param integer $i      Start position of digit index
+     * @param string $string Input string to check
+     * @param int    $i      Start position of digit index
      *
      * @return array $return the last index of number and is number result
      */
@@ -428,15 +428,15 @@ class MySQLCanonicalQuery
             $i++;
         }
 
-        return [$is_number, --$i];
+        return [ $is_number, --$i ];
     }
 
     /**
      * Checks if index is in a position to ignore, and returns next position
      *
-     * @param integer $index Input integer to check if is between ranges
+     * @param int $index Input integer to check if is between ranges
      *
-     * @return integer returns the position after the range to ignore, if not in range returns the provided index
+     * @return int returns the position after the range to ignore, if not in range returns the provided index
      */
     private function jump_ignore(int $index): int
     {
@@ -473,7 +473,7 @@ class MySQLCanonicalQuery
             return $string;
         }
 
-        $first_row_position = $this->get_between_delimiter($string, '(', ')', $offset[0][1] + 1, [' ']);
+        $first_row_position = $this->get_between_delimiter($string, '(', ')', $offset[0][1] + 1, [ ' ' ]);
 
         if ($first_row_position === NULL)
         {
@@ -486,13 +486,13 @@ class MySQLCanonicalQuery
         $i          = $first_row_position[1] + 1;
         while ($i < $end)
         {
-            $next_row_start = $this->find_next($tmp_string, ',', $first_row_position[1] + 1, [' ']);
+            $next_row_start = $this->find_next($tmp_string, ',', $first_row_position[1] + 1, [ ' ' ]);
             if ($next_row_start === NULL)
             {
                 break;
             }
 
-            $row_position = $this->get_between_delimiter($tmp_string, '(', ')', $next_row_start + 1, [' ']);
+            $row_position = $this->get_between_delimiter($tmp_string, '(', ')', $next_row_start + 1, [ ' ' ]);
             if ($row_position === NULL)
             {
                 return $string;
@@ -517,11 +517,11 @@ class MySQLCanonicalQuery
     /**
      * Finds the next start and end index positions between two delimiters, ignoring delimiters in between
      *
-     * @param string  $string    Input string to search
-     * @param string  $start_del Input string with start delimiter
-     * @param string  $end_del   Input string with end delimiter
-     * @param integer $offset    Input int with index to start the search
-     * @param array   $ignore    Input array with chars to ignore until start position is found
+     * @param string $string    Input string to search
+     * @param string $start_del Input string with start delimiter
+     * @param string $end_del   Input string with end delimiter
+     * @param int    $offset    Input int with index to start the search
+     * @param array  $ignore    Input array with chars to ignore until start position is found
      *
      * @return array|null returns the range position of the start and end delimiters, if is not found returns null
      */
@@ -575,7 +575,7 @@ class MySQLCanonicalQuery
             return NULL;
         }
 
-        return [$delimiter_start_index, $delimiter_end_index];
+        return [ $delimiter_start_index, $delimiter_end_index ];
     }
 
     /**
@@ -583,10 +583,10 @@ class MySQLCanonicalQuery
      *
      * @param string     $string      Input string to search
      * @param string     $char        Input string with character to find
-     * @param integer    $offset      Input string start position
+     * @param int        $offset      Input string start position
      * @param array|null $ignore_char Input array with characters to ignore, if null ignores all chars
      *
-     * @return integer|null returns the index position of the value found, if not found returns null
+     * @return int|null returns the index position of the value found, if not found returns null
      */
     private function find_next(string $string, string $char, int $offset, ?array $ignore_char = NULL): ?int
     {

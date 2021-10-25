@@ -48,6 +48,7 @@ class PhysicalFilesystemAccessObjectTmpTest extends PhysicalFilesystemAccessObje
         {
             $this->assertRegExp('/prefix/', $fetched);
         }
+
         $this->assertFileExists($fetched);
     }
 

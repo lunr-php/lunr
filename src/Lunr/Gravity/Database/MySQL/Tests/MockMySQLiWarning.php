@@ -44,10 +44,10 @@ class MockMySQLiWarning
     /**
      * Constructor.
      *
-     * @param string                    $message      Message of the warning
-     * @param string                    $sqlstate     Sqlstate of the warning
-     * @param integer                   $errno        Error number of the warning
-     * @param MockMySQLiWarning|boolean $next_warning Next warning for the next() method
+     * @param string                 $message      Message of the warning
+     * @param string                 $sqlstate     Sqlstate of the warning
+     * @param int                    $errno        Error number of the warning
+     * @param MockMySQLiWarning|bool $next_warning Next warning for the next() method
      */
     public function __construct($message, $sqlstate, $errno, $next_warning)
     {
@@ -60,7 +60,7 @@ class MockMySQLiWarning
     /**
      * Mock of the next() method of mysqli_warning
      *
-     * @return boolean Returns TRUE if there is a next warning
+     * @return bool Returns TRUE if there is a next warning
      *                 Or FALSE if there is no next warning
      */
     public function next()

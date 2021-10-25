@@ -234,7 +234,7 @@ class SQLite3ConnectionConnectTest extends SQLite3ConnectionTest
         {
             $this->class->change_database('new_db');
         }
-        catch(\Throwable $e)
+        catch (\Throwable $e)
         {
             throw $e;
         }

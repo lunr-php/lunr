@@ -156,7 +156,7 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
      *
      * @param mixed $value Input to escape as integer
      *
-     * @return integer Defined and escaped Integer value
+     * @return int Defined and escaped Integer value
      */
     public function intvalue($value)
     {
@@ -168,7 +168,7 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
      *
      * @param mixed $value Input to escape as float
      *
-     * @return integer Defined and escaped float value
+     * @return int Defined and escaped float value
      */
     public function floatvalue($value)
     {
