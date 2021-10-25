@@ -84,7 +84,7 @@ class Console
     /**
      * Print status information ([ok] or [failed]).
      *
-     * @param boolean $bool Whether to print a good or bad status
+     * @param bool $bool Whether to print a good or bad status
      *
      * @return void
      */

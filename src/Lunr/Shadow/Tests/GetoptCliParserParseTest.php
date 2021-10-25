@@ -102,7 +102,7 @@ class GetoptCliParserParseTest extends GetoptCliParserTest
      */
     public function testParseReturnsAstOnSuccess(): void
     {
-        $this->mock_function('getopt', function (){ return ["a" => FALSE, "b" => "arg"]; });
+        $this->mock_function('getopt', function (){ return [ 'a' => FALSE, 'b' => 'arg' ]; });
 
         $value = $this->class->parse();
 

@@ -27,7 +27,7 @@ interface CliParserInterface
     /**
      * Check whether the parsed command line was valid or not.
      *
-     * @return boolean $invalid TRUE if the command line was invalid, FALSE otherwise
+     * @return bool $invalid TRUE if the command line was invalid, FALSE otherwise
      */
     public function is_invalid_commandline();
 

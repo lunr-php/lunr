@@ -81,7 +81,7 @@ class GetoptCliParser implements CliParserInterface
     /**
      * Parse error information.
      *
-     * @return boolean $error Whether there was a parse error or not
+     * @return bool $error Whether there was a parse error or not
      */
     public function is_invalid_commandline()
     {

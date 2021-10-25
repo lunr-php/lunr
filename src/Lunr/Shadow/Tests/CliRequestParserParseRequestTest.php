@@ -29,10 +29,10 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
     /**
      * Preparation work for the request tests.
      *
-     * @param string  $protocol  Protocol name
-     * @param string  $port      Port number
-     * @param boolean $useragent Whether to include useragent information or not
-     * @param string  $key       Device useragent key
+     * @param string $protocol  Protocol name
+     * @param string $port      Port number
+     * @param bool   $useragent Whether to include useragent information or not
+     * @param string $key       Device useragent key
      *
      * @return void
      */
@@ -73,23 +73,23 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
         }
 
         $this->mocked_calls = [
-            'default_application_path' => ['default_application_path', '/full/path/to/'],
-            'default_webpath'          => ['default_webpath', '/path/to/'],
-            'default_protocol'         => ['default_protocol', strtolower($protocol)],
-            'default_domain'           => ['default_domain', 'www.domain.com'],
-            'default_port'             => ['default_port', $port],
-            'default_url'              => ['default_url', $url],
-            'default_controller'       => ['default_controller', 'DefaultController'],
-            'default_method'           => ['default_method', 'default_method'],
+            'default_application_path' => [ 'default_application_path', '/full/path/to/' ],
+            'default_webpath'          => [ 'default_webpath', '/path/to/' ],
+            'default_protocol'         => [ 'default_protocol', strtolower($protocol) ],
+            'default_domain'           => [ 'default_domain', 'www.domain.com' ],
+            'default_port'             => [ 'default_port', $port ],
+            'default_url'              => [ 'default_url', $url ],
+            'default_controller'       => [ 'default_controller', 'DefaultController' ],
+            'default_method'           => [ 'default_method', 'default_method' ],
         ];
     }
 
     /**
      * Preparation work for the request tests.
      *
-     * @param boolean $controller Whether to set a controller value
-     * @param boolean $method     Whether to set a method value
-     * @param boolean $override   Whether to override default values or not
+     * @param bool $controller Whether to set a controller value
+     * @param bool $method     Whether to set a method value
+     * @param bool $override   Whether to override default values or not
      *
      * @return void
      */
@@ -121,8 +121,8 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
     /**
      * Preparation work for the request tests.
      *
-     * @param boolean $controller Whether to set a controller value
-     * @param boolean $method     Whether to set a method value
+     * @param bool $controller Whether to set a controller value
+     * @param bool $method     Whether to set a method value
      *
      * @return void
      */
@@ -329,7 +329,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      * Test that parse_request() sets default http method.
      *
      * @param string           $key    Verbosity key name
-     * @param integer          $amount Amount of verbosity parameters passed
+     * @param int              $amount Amount of verbosity parameters passed
      * @param Psr\Log\LogLevel $level  Parsed verbosity level
      *
      * @dataProvider verbosityProvider

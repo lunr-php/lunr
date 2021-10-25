@@ -120,7 +120,7 @@ class LunrCliParser implements CliParserInterface
     /**
      * Check whether the parsed command line was valid or not.
      *
-     * @return boolean $invalid TRUE if the command line was invalid, FALSE otherwise
+     * @return bool $invalid TRUE if the command line was invalid, FALSE otherwise
      */
     public function is_invalid_commandline()
     {
@@ -130,12 +130,12 @@ class LunrCliParser implements CliParserInterface
     /**
      * Check for command line arguments.
      *
-     * @param string  $opt      The command line argument
-     * @param integer $index    The index of the argument within $this->args
-     * @param boolean $toplevel Whether we run it from the top or from
-     *                          further down in the stack
+     * @param string $opt      The command line argument
+     * @param int    $index    The index of the argument within $this->args
+     * @param bool   $toplevel Whether we run it from the top or from
+     *                         further down in the stack
      *
-     * @return boolean $return Success or Failure
+     * @return bool $return Success or Failure
      */
     private function is_opt($opt, $index, $toplevel = FALSE)
     {
@@ -175,10 +175,10 @@ class LunrCliParser implements CliParserInterface
     /**
      * Check whether the given argument is a valid short option.
      *
-     * @param string  $opt   The command line argument
-     * @param integer $index The index of the argument within $this->args
+     * @param string $opt   The command line argument
+     * @param int    $index The index of the argument within $this->args
      *
-     * @return boolean $return Success or Failure
+     * @return bool $return Success or Failure
      */
     private function is_valid_short($opt, $index)
     {
@@ -199,10 +199,10 @@ class LunrCliParser implements CliParserInterface
     /**
      * Check whether the given argument is a valid long option.
      *
-     * @param string  $opt   The command line argument
-     * @param integer $index The index of the argument within $this->args
+     * @param string $opt   The command line argument
+     * @param int    $index The index of the argument within $this->args
      *
-     * @return boolean $return Success or Failure
+     * @return bool $return Success or Failure
      */
     private function is_valid_long($opt, $index)
     {
@@ -240,13 +240,13 @@ class LunrCliParser implements CliParserInterface
     /**
      * Check whether the given string is a valid argument.
      *
-     * @param string  $opt   The command line argument
-     * @param integer $index The index of the argument within $this->args
-     * @param integer $pos   Index of the last option character within the
-     *                       longopts or shortopts String
-     * @param string  $a     The option the argument belongs too
+     * @param string $opt   The command line argument
+     * @param int    $index The index of the argument within $this->args
+     * @param int    $pos   Index of the last option character within the
+     *                      longopts or shortopts String
+     * @param string $a     The option the argument belongs too
      *
-     * @return boolean $return Success or Failure
+     * @return bool $return Success or Failure
      */
     private function check_argument($opt, $index, $pos, $a)
     {
