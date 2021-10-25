@@ -24,7 +24,7 @@ class DateTimeGetDelayedDatetimeTest extends DateTimeTest
     /**
      * Test get_delayed_datetime() with the default datetime format and a custom timestamp as base.
      *
-     * @param integer $timestamp UNIX Timestamp
+     * @param int $timestamp UNIX Timestamp
      *
      * @depends      Lunr\Core\Tests\DateTimeGetDateTimeTest::testGetDatetimeWithCustomTimestampAsBase
      * @dataProvider validTimestampProvider

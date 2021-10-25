@@ -187,8 +187,8 @@ class ConfigServiceLocatorSupportTest extends ConfigServiceLocatorTest
         $mock->expects($this->exactly(2))
              ->method('test')
              ->withConsecutive(
-                 ['param1'],
-                 ['param2', 'param3']
+                 [ 'param1' ],
+                 [ 'param2', 'param3' ]
              );
 
         $method = $this->get_accessible_reflection_method('process_new_instance');

@@ -32,8 +32,8 @@ class IniGetIntegerForShorthandBytesTest extends IniTest
     /**
      * Test get_integer_for_shorthand_bytes().
      *
-     * @param string  $string  Shorthand byte string
-     * @param integer $integer Integer bytes
+     * @param string $string  Shorthand byte string
+     * @param int    $integer Integer bytes
      *
      * @dataProvider shorthandBytesProvider
      * @covers       Lunr\Core\Ini::get_integer_for_shorthand_bytes

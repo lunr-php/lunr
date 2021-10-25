@@ -128,7 +128,7 @@ class DateTime
     /**
      * Returns a MySQL compatible Date & Time definition.
      *
-     * @param integer $timestamp PHP-like Unix Timestamp (optional)
+     * @param int $timestamp PHP-like Unix Timestamp (optional)
      *
      * @return string $datetime Date & Time as a string
      */
@@ -149,9 +149,9 @@ class DateTime
     /**
      * Return a delayed datetime string.
      *
-     * @param string  $delay     Definition for a timeframe
-     *                           ("+1 day", "-10 minutes")
-     * @param integer $timestamp Base timestamp, now by default (optional)
+     * @param string $delay     Definition for a timeframe
+     *                          ("+1 day", "-10 minutes")
+     * @param int    $timestamp Base timestamp, now by default (optional)
      *
      * @return string $return DateTime definition, format YYYY-MM-DD HH:MM:SS
      */
@@ -172,9 +172,9 @@ class DateTime
     /**
      * Return a timestamp of a certain timeframe in the past/future.
      *
-     * @param string  $delay     Definition for a timeframe
-     *                           ("+1 day", "-10 minutes")
-     * @param integer $timestamp Base timestamp, now by default (optional)
+     * @param string $delay     Definition for a timeframe
+     *                          ("+1 day", "-10 minutes")
+     * @param int    $timestamp Base timestamp, now by default (optional)
      *
      * @return integer Delayed timestamp
      */
@@ -253,7 +253,7 @@ class DateTime
     /**
      * Check whether input is a leap year.
      *
-     * @param integer $value The input to check
+     * @param int $value The input to check
      *
      * @return boolean $return TRUE if input is a valid date, FALSE otherwise.
      */
