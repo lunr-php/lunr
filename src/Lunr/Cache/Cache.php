@@ -68,9 +68,9 @@ class Cache
     /**
      * Set cache item.
      *
-     * @param string  $key   Unique identifier for the data.
-     * @param mixed   $value Data to cache.
-     * @param integer $ttl   Time To Live for cache item in seconds.
+     * @param string $key   Unique identifier for the data.
+     * @param mixed  $value Data to cache.
+     * @param int    $ttl   Time To Live for cache item in seconds.
      *
      * @return boolean True if successful.
      */
