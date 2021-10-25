@@ -100,12 +100,12 @@ class GettextL10nProvider extends L10nProvider
     /**
      * Return a translated string, with proper singular/plural form.
      *
-     * @param string  $singular Identifier for the singular version of
-     *                          the string
-     * @param string  $plural   Identifier for the plural version of
-     *                          the string
-     * @param integer $amount   The amount the translation should be based on
-     * @param string  $context  Context information fot the requested string
+     * @param string $singular Identifier for the singular version of
+     *                         the string
+     * @param string $plural   Identifier for the plural version of
+     *                         the string
+     * @param int    $amount   The amount the translation should be based on
+     * @param string $context  Context information fot the requested string
      *
      * @return string $string Translated string, identifier by default
      */
