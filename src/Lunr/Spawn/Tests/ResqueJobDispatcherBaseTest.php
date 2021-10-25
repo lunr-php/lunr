@@ -137,7 +137,7 @@ class ResqueJobDispatcherBaseTest extends ResqueJobDispatcherTest
     /**
      * Tests that set_track_status() modifies the track status property with valid value.
      *
-     * @param boolean $value The value to test
+     * @param bool $value The value to test
      *
      * @dataProvider validTrackStatusProvider
      * @covers       Lunr\Spawn\ResqueJobDispatcher::set_track_status

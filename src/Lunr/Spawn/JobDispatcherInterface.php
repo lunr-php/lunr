@@ -30,9 +30,9 @@ interface JobDispatcherInterface
     /**
      * Dispatch a delayed job.
      *
-     * @param integer $seconds Amount of seconds in the future
-     * @param string  $job     The job to execute
-     * @param array   $args    The arguments for the job execution
+     * @param int    $seconds Amount of seconds in the future
+     * @param string $job     The job to execute
+     * @param array  $args    The arguments for the job execution
      *
      * @return void
      */
@@ -41,9 +41,9 @@ interface JobDispatcherInterface
     /**
      * Dispatch a delayed job.
      *
-     * @param DateTime|integer $time Timestamp or DateTime object of when the job should execute
-     * @param string           $job  The job to execute
-     * @param array            $args The arguments for the job execution
+     * @param DateTime|int $time Timestamp or DateTime object of when the job should execute
+     * @param string       $job  The job to execute
+     * @param array        $args The arguments for the job execution
      *
      * @return void
      */
@@ -68,7 +68,7 @@ interface JobDispatcherInterface
     /**
      * Sets whether the status of the dispatched job will be tracked.
      *
-     * @param boolean $track_status The queue to set for this dispatcher
+     * @param bool $track_status The queue to set for this dispatcher
      *
      * @return JobDispatcherInterface $self Self-reference
      */
