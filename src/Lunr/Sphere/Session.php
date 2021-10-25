@@ -68,7 +68,7 @@ class Session
      *
      * @param \SessionHandlerInterface $session_handler Session handler
      *
-     * @return boolean
+     * @return bool
      */
     public function setSessionHandler($session_handler)
     {
@@ -169,7 +169,7 @@ class Session
      *
      * @param string $id Predefined Session ID
      *
-     * @return boolean
+     * @return bool
      */
     public function start($id = '')
     {
@@ -192,7 +192,7 @@ class Session
      *
      * @param string $id Predefined Session ID
      *
-     * @return boolean
+     * @return bool
      */
     public function resume($id = '')
     {

@@ -65,7 +65,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface
      * @param string $path Path to store the session file
      * @param string $name Session name
      *
-     * @return boolean $return Returns always true
+     * @return bool $return Returns always true
      */
     public function open($path, $name)
     {
@@ -78,7 +78,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface
      * Sine we do not use file for session dara storage
      * we don't need to do anything here.
      *
-     * @return boolean $return Returns always true
+     * @return bool $return Returns always true
      */
     public function close()
     {
@@ -103,7 +103,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface
      * @param string $id   Session ID
      * @param string $data Session Data
      *
-     * @return boolean $return Returns always true
+     * @return bool $return Returns always true
      */
     public function write($id, $data)
     {
@@ -116,7 +116,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface
      *
      * @param string $id Session ID
      *
-     * @return boolean $return Returns always true
+     * @return bool $return Returns always true
      */
     public function destroy($id)
     {
@@ -127,9 +127,9 @@ class DatabaseSessionHandler implements SessionHandlerInterface
     /**
      * Clean up expired sessions.
      *
-     * @param integer $maxlifetime Sessions that have not updated for the last maxlifetime seconds will be removed.
+     * @param int $maxlifetime Sessions that have not updated for the last maxlifetime seconds will be removed.
      *
-     * @return boolean $return Returns always true
+     * @return bool $return Returns always true
      */
     public function gc($maxlifetime)
     {

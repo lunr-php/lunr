@@ -64,9 +64,9 @@ class SessionDAO extends DatabaseAccessObject
     /**
      * Save session data into the database.
      *
-     * @param string  $id           Session ID
-     * @param string  $session_data Session data
-     * @param integer $time         Expiration timestamp
+     * @param string $id           Session ID
+     * @param string $session_data Session data
+     * @param int    $time         Expiration timestamp
      *
      * @return void
      */
