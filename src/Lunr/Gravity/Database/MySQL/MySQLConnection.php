@@ -298,6 +298,16 @@ class MySQLConnection extends DatabaseConnection
     }
 
     /**
+     * Get the name of the database we're currently connected to.
+     *
+     * @return string Database name
+     */
+    public function get_database()
+    {
+        return $this->db;
+    }
+
+    /**
      * Set option for the current connection.
      *
      * @param int   $key   Mysqli option key.

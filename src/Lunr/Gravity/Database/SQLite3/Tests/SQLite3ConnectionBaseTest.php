@@ -96,6 +96,18 @@ class SQLite3ConnectionBaseTest extends SQLite3ConnectionTest
         $this->assertSame($value1, $value2);
     }
 
+    /**
+     * Test that get_database() returns the database name.
+     *
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3Connection::get_database
+     */
+    public function testGetDatabase(): void
+    {
+        $value = $this->class->get_database();
+
+        $this->assertSame('/tmp/test.db', $value);
+    }
+
 }
 
 ?>

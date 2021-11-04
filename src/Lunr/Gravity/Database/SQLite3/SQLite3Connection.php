@@ -141,6 +141,16 @@ class SQLite3Connection extends DatabaseConnection
     }
 
     /**
+     * Get the name of the database we're currently connected to.
+     *
+     * @return string Database name
+     */
+    public function get_database()
+    {
+        return $this->db;
+    }
+
+    /**
      * Return a new instance of a QueryBuilder object.
      *
      * @return SQLite3DMLQueryBuilder $builder New SQLite3DMLQueryBuilder object instance

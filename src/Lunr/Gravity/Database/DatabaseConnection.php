@@ -111,6 +111,13 @@ abstract class DatabaseConnection
     public abstract function change_database($db);
 
     /**
+     * Get the name of the database we're currently connected to.
+     *
+     * @return string Database name
+     */
+    public abstract function get_database();
+
+    /**
      * Return a new instance of a QueryBuilder object.
      *
      * @return DatabaseDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
