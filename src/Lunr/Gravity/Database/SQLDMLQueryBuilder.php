@@ -39,13 +39,13 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a DELETE clause.
      *
-     * @param string $delete The tables to delete from
+     * @param string $table_reference The tables to delete from
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
-    public function delete($delete = '')
+    public function delete($table_references = '')
     {
-        $this->sql_delete($delete);
+        $this->sql_delete($table_references);
         return $this;
     }
 

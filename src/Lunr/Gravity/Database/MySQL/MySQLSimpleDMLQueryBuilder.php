@@ -185,13 +185,20 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
     /**
      * Define a DELETE clause.
      *
-     * @param string $delete The table references to delete from
+     * @param string $table_references The table references to delete from
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
-    public function delete($delete)
+    public function delete($table_references)
     {
-        $this->builder->delete($delete);
+        $tables = '';
+
+        foreach (explode(',', $table_references) as $table)
+        {
+            $tables .= $this->escape_alias($table, TRUE) . ', ';
+        }
+
+        $this->builder->delete(rtrim($tables, ', '));
         return $this;
     }
 
