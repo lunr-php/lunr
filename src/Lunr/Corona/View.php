@@ -79,6 +79,15 @@ abstract class View
     abstract public function print_fatal_error();
 
     /**
+     * Build display for uncaught exception output.
+     *
+     * @param \Throwable $e Uncaught exception
+     *
+     * @return void
+     */
+    abstract public function print_exception($e);
+
+    /**
      * Return base_url or attach given path to base_url.
      *
      * @param string $path Path that should be attached to base_url (optional)

@@ -123,6 +123,36 @@ class JsonView extends View
         }
     }
 
+    /**
+     * Build display for uncaught exception output.
+     *
+     * @param \Throwable $e Uncaught exception
+     *
+     * @return void
+     */
+    public function print_exception($e)
+    {
+        $json = [];
+
+        $json['data']   = [];
+        $json['status'] = [];
+
+        $json['status']['code']    = 500;
+        $json['status']['message'] = sprintf('Uncaught Exception %s: "%s" at %s line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine());
+
+        header('Content-type: application/json');
+        http_response_code(500);
+
+        if ($this->request->sapi == 'cli')
+        {
+            echo json_encode($json, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_FORCE_OBJECT) . "\n";
+        }
+        else
+        {
+            echo json_encode($json, JSON_UNESCAPED_UNICODE | JSON_FORCE_OBJECT);
+        }
+    }
+
 }
 
 ?>

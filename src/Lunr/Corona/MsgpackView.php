@@ -113,6 +113,31 @@ class MsgpackView extends View
         echo str_replace(hex2bin('a8737464436c617373'), hex2bin('80'), msgpack_pack($msgpack));
     }
 
+    /**
+     * Build display for uncaught exception output.
+     *
+     * @param \Throwable $e Uncaught exception
+     *
+     * @return void
+     */
+    public function print_exception($e)
+    {
+        $msgpack = [];
+
+        $msgpack['data']   = new \stdClass();
+        $msgpack['status'] = [];
+
+        $msgpack['status']['code']    = 500;
+        $msgpack['status']['message'] = sprintf('Uncaught Exception %s: "%s" at %s line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine());
+
+        header('Content-type: application/msgpack');
+        http_response_code(500);
+
+        // replace StdClass `a8737464436c617373` with empty map msgpack code `80`
+        // because php cannot generate a real empty map data type, while we do want msgpack to have it.
+        echo str_replace(hex2bin('a8737464436c617373'), hex2bin('80'), msgpack_pack($msgpack));
+    }
+
 }
 
 ?>
