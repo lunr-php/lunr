@@ -310,18 +310,23 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
     /**
      * Get the entire result set as an array.
      *
+     * @param bool $associative TRUE for returning rows as associative arrays,
+     *                          FALSE for returning rows as enumerated arrays
+     *
      * @return array $output Result set as array
      */
-    public function result_array()
+    public function result_array($associative = TRUE)
     {
         $output = [];
+
+        $return_type = $associative ? MYSQLI_ASSOC : MYSQLI_NUM;
 
         if (!is_object($this->result))
         {
             return $output;
         }
 
-        $output = $this->result->fetch_all(MYSQLI_ASSOC);
+        $output = $this->result->fetch_all($return_type);
 
         $this->free_result();
 

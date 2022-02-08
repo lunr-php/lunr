@@ -92,9 +92,12 @@ interface DatabaseQueryResultInterface
     /**
      * Get the entire result set as an array.
      *
+     * @param bool $associative TRUE for returning rows as associative arrays,
+     *                          FALSE for returning rows as enumerated arrays
+     *
      * @return array $output Result set as array
      */
-    public function result_array();
+    public function result_array($associative);
 
     /**
      * Get the first row of the result set.

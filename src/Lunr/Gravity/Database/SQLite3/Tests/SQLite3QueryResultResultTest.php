@@ -104,19 +104,40 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
     }
 
     /**
-     * Test that result_array() returns an multidimensional array.
+     * Test that result_array() returns an multidimensional array when $associative is TRUE.
      *
      * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_array
      */
-    public function testResultArrayReturnsArray(): void
+    public function testResultArrayReturnsArrayWhenAssociativeIsTrue(): void
     {
         $result = [ 0 => [ 'col1' => 'val1', 'col2' => 'val2' ], 1 => [ 'col1' => 'val3', 'col2' => 'val4' ] ];
 
         $this->sqlite3_result->expects($this->exactly(3))
                              ->method('fetchArray')
+                             ->with(SQLITE3_ASSOC)
                              ->willReturnOnConsecutiveCalls($result[0], $result[1], NULL);
 
         $value = $this->class->result_array();
+
+        $this->assertIsArray($value);
+        $this->assertEquals($result, $value);
+    }
+
+    /**
+     * Test that result_array() returns an numeric array when $associative is FALSE.
+     *
+     * @covers Lunr\Gravity\Database\SQLite3\SQLite3QueryResult::result_array
+     */
+    public function testResultArrayReturnsArrayWhenAssociativeIsFalse(): void
+    {
+        $result = [ 0 => [ 'col1' => 'val1', 'col2' => 'val2' ], 1 => [ 'col1' => 'val3', 'col2' => 'val4' ] ];
+
+        $this->sqlite3_result->expects($this->exactly(3))
+                             ->method('fetchArray')
+                             ->with(SQLITE3_NUM)
+                             ->willReturnOnConsecutiveCalls($result[0], $result[1], NULL);
+
+        $value = $this->class->result_array(FALSE);
 
         $this->assertIsArray($value);
         $this->assertEquals($result, $value);

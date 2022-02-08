@@ -176,11 +176,13 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
     /**
      * Get query result as array.
      *
-     * @param DatabaseQueryResultInterface $query The result of the run query
+     * @param DatabaseQueryResultInterface $query       The result of the run query
+     * @param bool                         $associative TRUE for returning rows as associative arrays,
+     *                                                  FALSE for returning rows as enumerated arrays
      *
      * @return array Result array
      */
-    protected function result_array($query)
+    protected function result_array($query, $associative = TRUE)
     {
         $this->verify_query_success($query);
 
@@ -190,7 +192,7 @@ abstract class DatabaseAccessObject implements DataAccessObjectInterface
         }
         else
         {
-            return $query->result_array();
+            return $query->result_array($associative);
         }
     }
 

@@ -77,12 +77,12 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
     }
 
     /**
-     * Test that result_array() returns an multidimensional array.
+     * Test that result_array() returns an multidimensional array when $associative is TRUE.
      *
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_array
      */
-    public function testResultArrayReturnsArray(): void
+    public function testResultArrayReturnsArrayWhenAssociativeIsTrue(): void
     {
         $result = [
             [
@@ -97,9 +97,38 @@ class MySQLQueryResultResultTest extends MySQLQueryResultTest
 
         $this->query_result->expects($this->once())
                            ->method('fetch_all')
+                           ->with(MYSQLI_ASSOC)
                            ->willReturn($result);
 
         $value = $this->class->result_array();
+
+        $this->assertIsArray($value);
+        $this->assertEquals($result, $value);
+    }
+
+    /**
+     * Test that result_array() returns an numeric array when $associative is FALSE.
+     *
+     * @requires extension mysqli
+     * @covers   Lunr\Gravity\Database\MySQL\MySQLQueryResult::result_array
+     */
+    public function testResultArrayReturnsArrayWhenAssociativeIsFalse(): void
+    {
+        $result = [
+            [
+                'val1', 'val2',
+            ],
+            [
+                'val3', 'val4',
+            ],
+        ];
+
+        $this->query_result->expects($this->once())
+                           ->method('fetch_all')
+                           ->with(MYSQLI_NUM)
+                           ->willReturn($result);
+
+        $value = $this->class->result_array(FALSE);
 
         $this->assertIsArray($value);
         $this->assertEquals($result, $value);
