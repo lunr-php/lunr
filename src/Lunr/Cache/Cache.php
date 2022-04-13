@@ -46,13 +46,13 @@ class Cache
      *
      * @param string $key Unique identifier for the data.
      *
-     * @return mixed|boolean FALSE if error, mixed data if successful.
+     * @return mixed NULL if error, mixed data if successful.
      */
     public function get($key)
     {
         if (empty($key))
         {
-            return FALSE;
+            return NULL;
         }
 
         $item = $this->cache_pool->getItem($key);
@@ -62,7 +62,7 @@ class Cache
             return $item->get();
         }
 
-        return FALSE;
+        return NULL;
     }
 
     /**

@@ -27,7 +27,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
     public function testGetCallWithoutKey(): void
     {
         $method = $this->get_accessible_reflection_method('get');
-        $this->assertEquals(FALSE, $method->invoke($this->class, NULL));
+        $this->assertNull($method->invoke($this->class, NULL));
     }
 
     /**
@@ -53,7 +53,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
               ->will($this->returnValue($item));
 
         $method = $this->get_accessible_reflection_method('get');
-        $this->assertEquals(FALSE, $method->invoke($this->class, $key));
+        $this->assertNull($method->invoke($this->class, $key));
     }
 
     /**
@@ -95,7 +95,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
     public function testSetCallWithoutKey(): void
     {
         $method = $this->get_accessible_reflection_method('set');
-        $this->assertEquals(FALSE, $method->invoke($this->class, NULL, 3));
+        $this->assertFalse($method->invoke($this->class, NULL, 3));
     }
 
     /**
@@ -106,7 +106,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
     public function testSetCallWithoutValue(): void
     {
         $method = $this->get_accessible_reflection_method('set');
-        $this->assertEquals(FALSE, $method->invoke($this->class, 42, NULL));
+        $this->assertFalse($method->invoke($this->class, 42, NULL));
     }
 
     /**
@@ -141,7 +141,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
                          ->with($item);
 
         $method = $this->get_accessible_reflection_method('set');
-        $this->assertEquals(TRUE, $method->invoke($this->class, $key, $data));
+        $this->assertTrue($method->invoke($this->class, $key, $data));
     }
 
     /**
@@ -177,7 +177,7 @@ class CacheHandlerDataTest extends CacheHandlerTest
                          ->with($item);
 
         $method = $this->get_accessible_reflection_method('set');
-        $this->assertEquals(TRUE, $method->invoke($this->class, $key, $data, $ttl));
+        $this->assertTrue($method->invoke($this->class, $key, $data, $ttl));
     }
 
 }
