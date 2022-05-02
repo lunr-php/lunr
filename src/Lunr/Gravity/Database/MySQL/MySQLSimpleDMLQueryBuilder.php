@@ -782,13 +782,13 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      * Define a UNION or UNION ALL clause of the SQL statement.
      *
      * @param string $sql_query SQL query reference
-     * @param bool   $all       True for ALL or False for empty (default).
+     * @param string $type      Type of UNION operation to perform.
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
-    public function union($sql_query, $all = FALSE)
+    public function union($sql_query, $type = NULL)
     {
-        $this->builder->union($this->escaper->query_value($sql_query), $all);
+        $this->builder->union($this->escaper->query_value($sql_query), $type);
         return $this;
     }
 

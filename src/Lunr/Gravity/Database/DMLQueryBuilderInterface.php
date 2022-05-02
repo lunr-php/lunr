@@ -443,11 +443,11 @@ interface DMLQueryBuilderInterface
      * Define a UNION or UNION ALL clause of the SQL statement.
      *
      * @param string $sql_query SQL query reference
-     * @param bool   $all       True for ALL or False for empty (default).
+     * @param string $type      Type of UNION operation to perform.
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
-    public function union($sql_query, $all = FALSE);
+    public function union($sql_query, $type);
 
     /**
      * Define the lock mode for a transaction.

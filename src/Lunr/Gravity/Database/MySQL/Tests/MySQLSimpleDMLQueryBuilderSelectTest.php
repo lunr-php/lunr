@@ -193,42 +193,22 @@ class MySQLSimpleDMLQueryBuilderSelectTest extends MySQLSimpleDMLQueryBuilderTes
 
     /**
      * Test union().
-     *
+     * @dataProvider unionOperatorProvider
      * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::union
      */
-    public function testUnion(): void
+    public function testUnion($operators): void
     {
         $this->escaper->expects($this->once())
                       ->method('query_value')
-                      ->with($this->equalTo('query'))
-                      ->will($this->returnValue('(query)'));
+                      ->with('query')
+                      ->willReturn('(query)');
 
         $this->builder->expects($this->once())
                       ->method('union')
-                      ->with($this->equalTo('(query)'))
-                      ->will($this->returnSelf());
+                      ->with('(query)', $operators)
+                      ->willReturnSelf();
 
-        $this->class->union('query');
-    }
-
-     /**
-     * Test union() all.
-     *
-     * @covers Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder::union
-     */
-    public function testUnionAll(): void
-    {
-        $this->escaper->expects($this->once())
-                      ->method('query_value')
-                      ->with($this->equalTo('query'))
-                      ->will($this->returnValue('(query)'));
-
-        $this->builder->expects($this->once())
-                      ->method('union')
-                      ->with($this->equalTo('(query)', TRUE), $this->equalTo(TRUE))
-                      ->will($this->returnSelf());
-
-        $this->class->union('query', TRUE);
+        $this->class->union('query', $operators);
     }
 
 }

@@ -25,16 +25,36 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test specifying the UNION part of a query.
      *
-     * @param string $types Compound query operator
+     * @param string $types     Compound query operator
      *
-     * @dataProvider compoundQueryTypeProvider
+     * @dataProvider compoundQueryTypeAndOperatorProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_compound
      */
-    public function testCompoundQuery($types): void
+    public function testCompoundQuery($types, $operator = NULL): void
     {
         $method = $this->get_accessible_reflection_method('sql_compound');
 
-        $method->invokeArgs($this->class, [ '(sql query)', $types ]);
+        $method->invokeArgs($this->class, [ '(sql query)', $types, $operator ]);
+
+        ($operator === NULL) ? $string = $types . ' (sql query)'
+                             : $string = $types . " " . $operator . ' (sql query)';
+
+        $this->assertPropertyEquals('compound', $string);
+    }
+
+    /**
+     * Test specifying the UNION part of a query with invalid parameters.
+     *
+     * @param string $types     Compound query operator
+     *
+     * @dataProvider compoundQueryInvalidTypeAndOperatorProvider
+     * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_compound
+     */
+    public function testCompoundQueryUnsupportedOperators($types, $operator): void
+    {
+        $method = $this->get_accessible_reflection_method('sql_compound');
+
+        $method->invokeArgs($this->class, [ '(sql query)', $types, $operator ]);
 
         $string = $types . ' (sql query)';
 

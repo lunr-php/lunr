@@ -517,17 +517,16 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     }
 
     /**
-     * Define a UNION or UNION ALL clause of the SQL statement.
-     *
-     * @param string $sql_query SQL query reference
-     * @param bool   $all       True for ALL or False for empty (default).
-     *
-     * @return SQLDMLQueryBuilder $self Self reference
-     */
-    public function union($sql_query, $all = FALSE)
+    * Define a UNION, UNION DISTINCT or UNION ALL clause of the SQL statement.
+    *
+    * @param string $sql_query SQL query reference
+    * @param string $operator  UNION operation to perform
+    *
+    * @return SQLDMLQueryBuilder $self Self reference
+    */
+    public function union($sql_query, $operator = NULL)
     {
-        $base = ($all === TRUE) ? 'UNION ALL' : 'UNION';
-        $this->sql_compound($sql_query, $base);
+        $this->sql_compound($sql_query, 'UNION', strtoupper($operator));
         return $this;
     }
 

@@ -808,15 +808,24 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
      * Define a compound clause for the SQL statement.
      *
      * @param string $sql_query Left expression
-     * @param string $base      Whether to construct UNION, EXCEPT or INTERSECT
+     * @param string $type      Whether to construct UNION, EXCEPT or INTERSECT
+     * @param mixed  $operator  Whether to add ALL, DISTINCT or default
      *
      * @return void
      */
-    protected function sql_compound($sql_query, $base)
+    protected function sql_compound($sql_query, $type, $operator = NULL)
     {
         if ($this->compound != '')
         {
             $this->compound .= ' ';
+        }
+        if($operator === 'ALL' || $operator === 'DISTINCT')
+        {
+            $base = $type . " " . $operator;
+        }
+        else
+        {
+            $base = $type;
         }
 
         $this->compound .= $base . ' ' . $sql_query;

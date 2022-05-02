@@ -114,13 +114,28 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
     *
     * @return array $compound Array of compound types
     */
-    public function compoundQueryTypeProvider(): array
+    public function compoundQueryTypeAndOperatorProvider(): array
     {
         $types   = [];
         $types[] = [ 'UNION' ];
-        $types[] = [ 'UNION ALL' ];
-        $types[] = [ 'EXCEPT' ];
-        $types[] = [ 'INTERSECT' ];
+        $types[] = [ 'UNION','ALL' ];
+        $types[] = [ 'UNION','DISTINCT' ];
+
+        return $types;
+    }
+
+    /**
+    * Unit test data provider for common compound queries.
+    *
+    * @return array $compound Array of compound types
+    */
+    public function compoundQueryInvalidTypeAndOperatorProvider(): array
+    {
+        $types   = [];
+        $types[] = [ 'UNION','Some Operator' ];
+        $types[] = [ 'UNION', 0 ];
+        $types[] = [ 'UNION', FALSE ];
+        $types[] = [ 'UNION', TRUE ];
 
         return $types;
     }

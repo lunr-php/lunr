@@ -177,6 +177,19 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
     }
 
     /**
+     * Test specifying a UNION DISTINCT statement.
+     *
+     * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testCompoundQuery
+     * @covers  Lunr\Gravity\Database\SQLDMLQueryBuilder::union
+     */
+    public function testUnionDistinct(): void
+    {
+        $return = $this->class->union('QUERY', 'DISTINCT');
+
+        $this->assertPropertyEquals('compound', 'UNION DISTINCT QUERY');
+    }
+
+    /**
      * Test specifying a UNION ALL statement.
      *
      * @depends Lunr\Gravity\Database\Tests\DatabaseDMLQueryBuilderQueryPartsTest::testCompoundQuery
@@ -184,7 +197,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      */
     public function testUnionAll(): void
     {
-        $return = $this->class->union('QUERY', TRUE);
+        $return = $this->class->union('QUERY', 'ALL');
 
         $this->assertPropertyEquals('compound', 'UNION ALL QUERY');
     }
