@@ -118,8 +118,14 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
     {
         $types   = [];
         $types[] = [ 'UNION' ];
-        $types[] = [ 'UNION','ALL' ];
-        $types[] = [ 'UNION','DISTINCT' ];
+        $types[] = [ 'UNION', 'ALL' ];
+        $types[] = [ 'UNION', 'DISTINCT' ];
+        $types[] = [ 'INTERSECT' ];
+        $types[] = [ 'INTERSECT', 'ALL' ];
+        $types[] = [ 'INTERSECT', 'DISTINCT' ];
+        $types[] = [ 'EXCEPT' ];
+        $types[] = [ 'EXCEPT', 'ALL' ];
+        $types[] = [ 'EXCEPT', 'DISTINCT' ];
 
         return $types;
     }
@@ -132,10 +138,18 @@ abstract class DatabaseDMLQueryBuilderTest extends LunrBaseTest
     public function compoundQueryInvalidTypeAndOperatorProvider(): array
     {
         $types   = [];
-        $types[] = [ 'UNION','Some Operator' ];
+        $types[] = [ 'UNION', 'Some Operator' ];
         $types[] = [ 'UNION', 0 ];
         $types[] = [ 'UNION', FALSE ];
         $types[] = [ 'UNION', TRUE ];
+        $types[] = [ 'INTERSECT', 'Some Operator' ];
+        $types[] = [ 'INTERSECT', 0 ];
+        $types[] = [ 'INTERSECT', FALSE ];
+        $types[] = [ 'INTERSECT', TRUE ];
+        $types[] = [ 'EXCEPT', 'Some Operator' ];
+        $types[] = [ 'EXCEPT', 0 ];
+        $types[] = [ 'EXCEPT', FALSE ];
+        $types[] = [ 'EXCEPT', TRUE ];
 
         return $types;
     }

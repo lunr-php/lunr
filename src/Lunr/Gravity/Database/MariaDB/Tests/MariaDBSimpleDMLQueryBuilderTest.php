@@ -67,6 +67,23 @@ abstract class MariaDBSimpleDMLQueryBuilderTest extends TestCase
         unset($this->class);
     }
 
+    /**
+    * Unit test data provider for tested union operators.
+    *
+    * @return array $compound operators for union query
+    */
+    public function compoundOperatorProvider(): array
+    {
+        $operators   = [];
+        $operators[] = [ NULL ];
+        $operators[] = [ 'ALL' ];
+        $operators[] = [ 'DISTINCT' ];
+        $operators[] = [ TRUE ];
+        $operators[] = [ FALSE ];
+
+        return $operators;
+    }
+
 }
 
 ?>

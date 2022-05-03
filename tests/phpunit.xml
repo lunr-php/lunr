@@ -157,6 +157,8 @@
             <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionMasterSlaveTest.php</file>
             <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBConnectionBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBDMLQueryBuilderDeleteTest.php</file>
+            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBDMLQueryBuilderSelectTest.php</file>
+            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBSimpleDMLQueryBuilderSelectTest.php</file>
             <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBSimpleDMLQueryBuilderBaseTest.php</file>
             <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBSimpleDMLQueryBuilderDeleteTest.php</file>
             <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBSimpleDMLQueryBuilderBaseTest.php</file>

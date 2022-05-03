@@ -267,6 +267,44 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
         return $this;
     }
 
+    /**
+     * Define a EXCEPT, EXCEPT ALL or EXCEPT DISTINCT clause of the SQL statement.
+     *
+     * @param string $sql_query SQL query reference
+     * @param string $operator  EXCEPT operation to perform
+     *
+     * @return SQLite3DMLQueryBuilder $self Self reference
+     */
+    public function except($sql_query, $operator = NULL)
+    {
+        if (strtoupper($operator) !== 'DISTINCT')
+        {
+            $operator = NULL;
+        }
+
+        $this->sql_compound($sql_query, 'EXCEPT', $operator);
+        return $this;
+    }
+
+    /**
+     * Define a INTERSECT, INTERSECT ALL or INTERSECT DISTINCT clause of the SQL statement.
+     *
+     * @param string $sql_query SQL query reference
+     * @param string $operator  INTERSECT operation to perform
+     *
+     * @return SQLite3DMLQueryBuilder $self Self reference
+     */
+    public function intersect($sql_query, $operator = NULL)
+    {
+        if (strtoupper($operator) !== 'DISTINCT')
+        {
+            $operator = NULL;
+        }
+
+        $this->sql_compound($sql_query, 'INTERSECT', $operator);
+        return $this;
+    }
+
 }
 
 ?>

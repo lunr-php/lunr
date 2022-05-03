@@ -36,8 +36,14 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
 
         $method->invokeArgs($this->class, [ '(sql query)', $types, $operator ]);
 
-        ($operator === NULL) ? $string = $types . ' (sql query)'
-                             : $string = $types . " " . $operator . ' (sql query)';
+        if($operator === NULL)
+        {
+            $string = $types . ' (sql query)';
+        }
+        else
+        {
+            $string = $types . " " . $operator . ' (sql query)';
+        }
 
         $this->assertPropertyEquals('compound', $string);
     }
@@ -75,6 +81,38 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
         $method->invokeArgs($this->class, [ '(sql query)', 'UNION' ]);
 
         $this->assertPropertyEquals('compound', 'QUERY UNION (sql query)');
+    }
+
+    /**
+     * Test specifying the EXCEPT part of a query, when compound is set.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_compound
+     */
+    public function testCompoundQueryWhenCompoundIsSetWithExcept(): void
+    {
+        $this->set_reflection_property_value('compound', 'QUERY');
+
+        $method = $this->get_accessible_reflection_method('sql_compound');
+
+        $method->invokeArgs($this->class, [ '(sql query)', 'EXCEPT' ]);
+
+        $this->assertPropertyEquals('compound', 'QUERY EXCEPT (sql query)');
+    }
+
+    /**
+     * Test specifying the INTERSECT part of a query, when compound is set.
+     *
+     * @covers Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_compound
+     */
+    public function testCompoundQueryWhenCompoundIsSetWithIntersect(): void
+    {
+        $this->set_reflection_property_value('compound', 'QUERY');
+
+        $method = $this->get_accessible_reflection_method('sql_compound');
+
+        $method->invokeArgs($this->class, [ '(sql query)', 'INTERSECT' ]);
+
+        $this->assertPropertyEquals('compound', 'QUERY INTERSECT (sql query)');
     }
 
     /**

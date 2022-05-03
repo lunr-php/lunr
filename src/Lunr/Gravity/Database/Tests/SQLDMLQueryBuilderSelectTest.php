@@ -171,7 +171,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      */
     public function testUnion(): void
     {
-        $return = $this->class->union('QUERY');
+        $this->class->union('QUERY');
 
         $this->assertPropertyEquals('compound', 'UNION QUERY');
     }
@@ -184,7 +184,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      */
     public function testUnionDistinct(): void
     {
-        $return = $this->class->union('QUERY', 'DISTINCT');
+        $this->class->union('QUERY', 'DISTINCT');
 
         $this->assertPropertyEquals('compound', 'UNION DISTINCT QUERY');
     }
@@ -197,7 +197,7 @@ class SQLDMLQueryBuilderSelectTest extends SQLDMLQueryBuilderTest
      */
     public function testUnionAll(): void
     {
-        $return = $this->class->union('QUERY', 'ALL');
+        $this->class->union('QUERY', 'ALL');
 
         $this->assertPropertyEquals('compound', 'UNION ALL QUERY');
     }
