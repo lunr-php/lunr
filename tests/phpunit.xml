@@ -74,6 +74,8 @@
             <file>../src/Lunr/Corona/Tests/MsgpackViewPrintTest.php</file>
             <file>../src/Lunr/Corona/Tests/MsgpackViewPrintFatalErrorTest.php</file>
             <file>../src/Lunr/Corona/Tests/MsgpackViewPrintExceptionTest.php</file>
+            <file>../src/Lunr/Corona/Tests/ModelBaseTest.php</file>
+            <file>../src/Lunr/Corona/Tests/ModelCacheTest.php</file>
             <file>../src/Lunr/Corona/Exceptions/Tests/HttpExceptionBaseTest.php</file>
             <file>../src/Lunr/Corona/Exceptions/Tests/HttpExceptionNoAppCodeTest.php</file>
             <file>../src/Lunr/Corona/Exceptions/Tests/BadGatewayExceptionBaseTest.php</file>
