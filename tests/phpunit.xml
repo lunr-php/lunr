@@ -9,6 +9,7 @@
             verbose="true">
     <php>
         <ini name="zend.enable_gc" value="1" />
+        <env name="LANGUAGE" value="" force="true" />
     </php>
     <testsuites>
         <testsuite name="Cache">
