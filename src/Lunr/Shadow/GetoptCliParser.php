@@ -41,7 +41,7 @@ class GetoptCliParser implements CliParserInterface
      * @param string $shortopts List of supported short arguments
      * @param array  $longopts  List of supported long arguments (optional)
      */
-    public function __construct($shortopts, $longopts = '')
+    public function __construct(string $shortopts, array $longopts = [])
     {
         $this->short = $shortopts;
         $this->long  = $longopts;
@@ -61,9 +61,9 @@ class GetoptCliParser implements CliParserInterface
     /**
      * Parse command line arguments.
      *
-     * @return array $ast The ast of the parsed arguments
+     * @return array The ast of the parsed arguments
      */
-    public function parse()
+    public function parse(): array
     {
         $raw = getopt($this->short, $this->long);
 
@@ -81,9 +81,9 @@ class GetoptCliParser implements CliParserInterface
     /**
      * Parse error information.
      *
-     * @return bool $error Whether there was a parse error or not
+     * @return bool Whether there was a parse error or not
      */
-    public function is_invalid_commandline()
+    public function is_invalid_commandline(): bool
     {
         return $this->error;
     }
@@ -93,9 +93,9 @@ class GetoptCliParser implements CliParserInterface
      *
      * @param mixed $value Parsed command line argument
      *
-     * @return array $return Wrapped argument
+     * @return array Wrapped argument
      */
-    protected function wrap_argument($value)
+    protected function wrap_argument($value): array
     {
         if ($value === FALSE)
         {

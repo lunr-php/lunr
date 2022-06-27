@@ -72,7 +72,7 @@ class LunrCliParser implements CliParserInterface
      * @param string  $shortopts List of supported short arguments
      * @param array   $longopts  List of supported long arguments (optional)
      */
-    public function __construct($console, $shortopts, $longopts = '')
+    public function __construct(Console $console, string $shortopts, array $longopts = [])
     {
         $this->short   = $shortopts;
         $this->long    = $longopts;
@@ -100,9 +100,9 @@ class LunrCliParser implements CliParserInterface
     /**
      * Parse command line parameters.
      *
-     * @return array $ast Array of parameters and their arguments
+     * @return array Array of parameters and their arguments
      */
-    public function parse()
+    public function parse(): array
     {
         $this->args = $_SERVER['argv'];
 
@@ -120,9 +120,9 @@ class LunrCliParser implements CliParserInterface
     /**
      * Check whether the parsed command line was valid or not.
      *
-     * @return bool $invalid TRUE if the command line was invalid, FALSE otherwise
+     * @return bool TRUE if the command line was invalid, FALSE otherwise
      */
-    public function is_invalid_commandline()
+    public function is_invalid_commandline(): bool
     {
         return $this->error;
     }
@@ -135,9 +135,9 @@ class LunrCliParser implements CliParserInterface
      * @param bool   $toplevel Whether we run it from the top or from
      *                         further down in the stack
      *
-     * @return bool $return Success or Failure
+     * @return bool Success or Failure
      */
-    private function is_opt($opt, $index, $toplevel = FALSE)
+    private function is_opt(string $opt, int $index, bool $toplevel = FALSE): bool
     {
         array_push($this->checked, $opt);
 
@@ -178,9 +178,9 @@ class LunrCliParser implements CliParserInterface
      * @param string $opt   The command line argument
      * @param int    $index The index of the argument within $this->args
      *
-     * @return bool $return Success or Failure
+     * @return bool Success or Failure
      */
-    private function is_valid_short($opt, $index)
+    private function is_valid_short(string $opt, int $index): bool
     {
         $pos = strpos($this->short, $opt);
 
@@ -202,9 +202,9 @@ class LunrCliParser implements CliParserInterface
      * @param string $opt   The command line argument
      * @param int    $index The index of the argument within $this->args
      *
-     * @return bool $return Success or Failure
+     * @return bool Success or Failure
      */
-    private function is_valid_long($opt, $index)
+    private function is_valid_long(string $opt, int $index): bool
     {
         $match = FALSE;
 
@@ -246,9 +246,9 @@ class LunrCliParser implements CliParserInterface
      *                      longopts or shortopts String
      * @param string $a     The option the argument belongs too
      *
-     * @return bool $return Success or Failure
+     * @return bool Success or Failure
      */
-    private function check_argument($opt, $index, $pos, $a)
+    private function check_argument(string $opt, int $index, int $pos, string $a): bool
     {
         $next = $index + 1;
 
