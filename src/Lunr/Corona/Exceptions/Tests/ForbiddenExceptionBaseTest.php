@@ -37,6 +37,22 @@ class ForbiddenExceptionBaseTest extends HttpExceptionTest
     }
 
     /**
+     * Test that the input data key was set correctly.
+     */
+    public function testInputDataKeyIsNull(): void
+    {
+        $this->assertNull($this->get_reflection_property_value('key'));
+    }
+
+    /**
+     * Test that the input data value was set correctly.
+     */
+    public function testInputDataValueIsNull(): void
+    {
+        $this->assertNull($this->get_reflection_property_value('value'));
+    }
+
+    /**
      * Test that the error message was passed correctly.
      */
     public function testErrorMessagePassedCorrectly(): void
