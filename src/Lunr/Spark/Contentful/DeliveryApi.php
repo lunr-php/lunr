@@ -24,7 +24,7 @@ class DeliveryApi extends Api
      * Content Delivery API URL.
      * @var String
      */
-    const URL = 'https://cdn.contentful.com';
+    protected const URL = 'https://cdn.contentful.com';
 
     /**
      * Constructor.

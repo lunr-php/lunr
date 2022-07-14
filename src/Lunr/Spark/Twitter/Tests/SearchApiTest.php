@@ -62,20 +62,20 @@ class SearchApiTest extends SearchTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('bearer_token'))
-                  ->will($this->returnValue('BEARER TOKEN'));
+                  ->with('twitter', 'bearer_token')
+                  ->willReturn('BEARER TOKEN');
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('GET'), $this->equalTo($options))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, $this->headers, $params, 'GET', $options)
+                   ->willReturn($this->response);
 
         $this->response->status_code = 400;
         $this->response->body        = '{"errors":[{"message":"Test twitter error","code":34}]}';
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400('Invalid Input!')));
+                       ->willThrowException(new Requests_Exception_HTTP_400('Invalid Input!'));
 
         $this->assertArrayEmpty($this->class->search_tweets($params));
     }
@@ -99,13 +99,13 @@ class SearchApiTest extends SearchTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('bearer_token'))
-                  ->will($this->returnValue('BEARER TOKEN'));
+                  ->with('twitter', 'bearer_token')
+                  ->willReturn('BEARER TOKEN');
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('GET'), $this->equalTo($options))
-                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+                   ->with($url, $this->headers, $params, 'GET', $options)
+                   ->willThrowException(new Requests_Exception('Network error!', 'curlerror', NULL));
 
         $this->response->expects($this->never())
                        ->method('throw_for_status');
@@ -132,13 +132,13 @@ class SearchApiTest extends SearchTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo('bearer_token'))
-                  ->will($this->returnValue('BEARER TOKEN'));
+                  ->with('twitter', 'bearer_token')
+                  ->willReturn('BEARER TOKEN');
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('GET'), $this->equalTo($options))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, $this->headers, $params, 'GET', $options)
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{"statuses":[{"tweet":"Not a real tweet property and value"}]}';

@@ -21,24 +21,24 @@ class DataError
      * Unknown data field.
      * @var String
      */
-    const UNKNOWN_FIELD = 'E0';
+    public const UNKNOWN_FIELD = 'E0';
 
     /**
      * Field data is not available.
      * @var String
      */
-    const NOT_AVAILABLE = 'E1';
+    public const NOT_AVAILABLE = 'E1';
 
     /**
      * Field data was not requested.
      * @var String
      */
-    const NOT_REQUESTED = 'E2';
+    public const NOT_REQUESTED = 'E2';
 
     /**
      * Access to field data denied.
      * @var String
      */
-    const ACCESS_DENIED = 'E3';
+    public const ACCESS_DENIED = 'E3';
 
 }

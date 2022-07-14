@@ -104,7 +104,7 @@ class PageGetPageDataTest extends PageTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo($message));
+                     ->with($message);
 
         $this->assertSame(DataError::ACCESS_DENIED, $this->class->get_access_token());
     }
@@ -121,7 +121,7 @@ class PageGetPageDataTest extends PageTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo($message), $this->equalTo($context));
+                     ->with($message, $context);
 
         $this->assertSame(DataError::NOT_REQUESTED, $this->class->get_access_token());
     }

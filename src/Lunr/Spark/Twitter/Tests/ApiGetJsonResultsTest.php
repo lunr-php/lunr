@@ -58,8 +58,8 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo($headers), $this->equalTo($params), $this->equalTo($http_method_upper), $this->equalTo($options))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, $headers, $params, $http_method_upper, $options)
+                   ->willReturn($this->response);
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -87,8 +87,8 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'), $this->equalTo($options))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], [], $this->equalTo('GET'), $this->equalTo($options))
+                   ->willReturn($this->response);
 
         $this->response->status_code = 400;
         $this->response->body        = json_encode($output);
@@ -121,7 +121,7 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'), $this->equalTo($options))
+                   ->with($url, [], [], $this->equalTo('GET'), $this->equalTo($options))
                    ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
 
         $this->response->expects($this->never())
@@ -150,8 +150,8 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'), $this->equalTo($options))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], [], $this->equalTo('GET'), $this->equalTo($options))
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{}';
@@ -189,8 +189,8 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'), $this->equalTo($options))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], [], $this->equalTo('GET'), $this->equalTo($options))
+                   ->willReturn($this->response);
 
         $this->response->status_code = 400;
         $this->response->body        = json_encode($output);
@@ -223,7 +223,7 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'), $this->equalTo($options))
+                   ->with($url, [], [], $this->equalTo('GET'), $this->equalTo($options))
                    ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
 
         $this->response->expects($this->never())
@@ -257,8 +257,8 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'), $this->equalTo($options))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], [], $this->equalTo('GET'), $this->equalTo($options))
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = json_encode($output);

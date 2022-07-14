@@ -51,8 +51,8 @@ class ApiBaseTest extends ApiTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('twitter'), $this->equalTo($key))
-                  ->will($this->returnValue('value'));
+                  ->with('twitter', $this->equalTo($key))
+                  ->willReturn('value');
 
         $this->assertEquals('value', $this->class->{$key});
     }
@@ -82,7 +82,7 @@ class ApiBaseTest extends ApiTest
     {
         $this->cas->expects($this->once())
                   ->method('add')
-                  ->with($this->equalTo('twitter'), $this->equalTo($key), $this->equalTo('value'));
+                  ->with('twitter', $this->equalTo($key), $this->equalTo('value'));
 
         $this->class->{$key} = 'value';
     }

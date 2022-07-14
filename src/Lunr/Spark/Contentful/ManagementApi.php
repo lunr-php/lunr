@@ -24,7 +24,7 @@ class ManagementApi extends Api
      * Content Management API URL.
      * @var String
      */
-    const URL = 'https://api.contentful.com';
+    protected const URL = 'https://api.contentful.com';
 
     /**
      * Constructor.

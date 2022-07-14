@@ -31,23 +31,23 @@ class ManagementApiCreateEntryTest extends ManagementApiTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('contentful'), $this->equalTo('management_token'))
-                  ->will($this->returnValue('token'));
+                  ->with('contentful', 'management_token')
+                  ->willReturn('Token');
 
         $url     = 'https://api.contentful.com/entries';
         $headers = [
             'X-Contentful-Content-Type' => 'airport',
-            'Authorization'             => 'Bearer token',
+            'Authorization'             => 'Bearer Token',
         ];
 
         $this->http->expects($this->once())
                    ->method('request')
                    ->with($url, $headers, '{"name":"yo"}', Requests::POST)
-                   ->will($this->returnValue($this->response));
+                   ->willReturn($this->response);
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400('Bad request', $this->response)));
+                       ->willThrowException(new Requests_Exception_HTTP_400('Bad request', $this->response));
 
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -71,19 +71,19 @@ class ManagementApiCreateEntryTest extends ManagementApiTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('contentful'), $this->equalTo('management_token'))
-                  ->will($this->returnValue('token'));
+                  ->with('contentful', 'management_token')
+                  ->willReturn('Token');
 
         $url     = 'https://api.contentful.com/entries';
         $headers = [
             'X-Contentful-Content-Type' => 'airport',
-            'Authorization'             => 'Bearer token',
+            'Authorization'             => 'Bearer Token',
         ];
 
         $this->http->expects($this->once())
                    ->method('request')
                    ->with($url, $headers, '{"name":"yo"}', Requests::POST)
-                   ->will($this->returnValue($this->response));
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
 

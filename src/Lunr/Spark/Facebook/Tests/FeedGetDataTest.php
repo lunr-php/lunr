@@ -31,7 +31,7 @@ class FeedGetDataTest extends FeedTest
     {
         $this->cas->expects($this->any())
                   ->method('get')
-                  ->will($this->returnArgument(0));
+                  ->willReturnArgument(0);
 
         $params = [
             'access_token'    => 'facebook',
@@ -40,8 +40,11 @@ class FeedGetDataTest extends FeedTest
 
         $this->http->expects($this->exactly(2))
                    ->method('request')
-                   ->withConsecutive([ 'http://localhost', [], $params, 'GET' ], [ 'https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'facebook' ], 'GET' ])
-                   ->will($this->returnValue($this->response));
+                   ->withConsecutive(
+                    [ 'http://localhost', [], $params, 'GET' ],
+                    [ 'https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'facebook' ], 'GET' ]
+                    )
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{ "data": [ { "id":"1" } ] }';
@@ -80,8 +83,8 @@ class FeedGetDataTest extends FeedTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/resource/feed';
         $params = [
@@ -91,8 +94,8 @@ class FeedGetDataTest extends FeedTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{ "data": [ { "id":"1" } ] }';
@@ -111,16 +114,16 @@ class FeedGetDataTest extends FeedTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/resource/feed';
         $params = [ 'limit' => 25 ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{ "data": [ { "id":"1" } ] }';
@@ -152,7 +155,7 @@ class FeedGetDataTest extends FeedTest
                        [ 'https://graph.facebook.com/resource/feed', [], $params, 'GET' ],
                        [ 'https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'Token' ], 'GET' ]
                    )
-                   ->will($this->returnValue($this->response));
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{ "data": [ { "id":"1" } ] }';
@@ -171,16 +174,16 @@ class FeedGetDataTest extends FeedTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/resource/feed';
         $params = [ 'limit' => 25 ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{ "data": [ { "id":"1" } ] }';
@@ -199,16 +202,16 @@ class FeedGetDataTest extends FeedTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/resource/feed';
         $params = [ 'limit' => 25 ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{ "data": [ { "id":"1" } ] }';
@@ -227,16 +230,16 @@ class FeedGetDataTest extends FeedTest
     {
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/me/feed';
         $params = [ 'limit' => 25 ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{ "data": [ { "id":"1" } ] }';
@@ -257,16 +260,16 @@ class FeedGetDataTest extends FeedTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/resource/feed';
         $params = [ 'limit' => 25 ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+                   ->with($url, [], $params, 'GET')
+                   ->willThrowException(new Requests_Exception('Network error!', 'curlerror', NULL));
 
         $this->class->get_data();
 
@@ -284,23 +287,23 @@ class FeedGetDataTest extends FeedTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/resource/feed';
         $params = [ 'limit' => 25 ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 400;
         $this->response->url         = 'https://graph.facebook.com/resource/feed';
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400('Not Found!')));
+                       ->willThrowException(new Requests_Exception_HTTP_400('Not Found!'));
 
         $body = [
             'error' => [
@@ -349,7 +352,7 @@ class FeedGetDataTest extends FeedTest
 
         $this->cas->expects($this->exactly(6))
                   ->method('get')
-                  ->will($this->onConsecutiveCalls('Token', 'Token', 'Proof', 'Token', 'Token', 'Token'));
+                  ->willReturnOnConsecutiveCalls('Token', 'Token', 'Proof', 'Token', 'Token', 'Token');
 
         $params = [
             'access_token'    => 'Token',
@@ -363,7 +366,7 @@ class FeedGetDataTest extends FeedTest
                        [ 'https://graph.facebook.com/resource/feed', [], $params, 'GET' ],
                        [ 'https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'Token' ], 'GET' ]
                    )
-                   ->will($this->returnValue($this->response));
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = json_encode($data);
@@ -384,7 +387,7 @@ class FeedGetDataTest extends FeedTest
 
         $this->cas->expects($this->exactly(4))
                   ->method('get')
-                  ->will($this->onConsecutiveCalls('Token', 'Token', 'Proof'));
+                  ->willReturnOnConsecutiveCalls('Token', 'Token', 'Proof');
 
         $url    = 'https://graph.facebook.com/resource/feed';
         $params = [
@@ -395,8 +398,8 @@ class FeedGetDataTest extends FeedTest
 
         $this->http->expects($this->exactly(1))
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = json_encode([]);
@@ -415,16 +418,16 @@ class FeedGetDataTest extends FeedTest
     {
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/me/feed';
         $params = [ 'limit' => 25 ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{ "data": [ { "id":"1" } ] }';
@@ -445,16 +448,16 @@ class FeedGetDataTest extends FeedTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/resource/feed';
         $params = [ 'limit' => 25 ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{ "data": [ { "id":"1" } ] }';

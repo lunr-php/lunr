@@ -52,8 +52,8 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo($http_method_upper))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, $http_method_upper)
+                   ->willReturn($this->response);
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -79,8 +79,8 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], [], 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 400;
         $this->response->body        = json_encode($output);
@@ -88,13 +88,13 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400('Not Found!')));
+                       ->willThrowException(new Requests_Exception_HTTP_400('Not Found!'));
 
         $context = [ 'message' => 'Message', 'code' => 'Code', 'type' => 'Type', 'request' => 'http://localhost/url/' ];
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo('Facebook API Request ({request}) failed, {type} ({code}): {message}'), $this->equalTo($context));
+                     ->with('Facebook API Request ({request}) failed, {type} ({code}): {message}', $context);
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -108,20 +108,12 @@ class ApiGetJsonResultsTest extends ApiTest
      */
     public function testGetJsonResultsThrowsErrorIfRequestFailed(): void
     {
-        $output = [
-            'error' => [
-                'message' => 'Message',
-                'code'    => 'Code',
-                'type'    => 'Type',
-            ],
-        ];
-
         $url = 'http://localhost';
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
-                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+                   ->with($url, [], [], 'GET')
+                   ->willThrowException(new Requests_Exception('Network error!', 'curlerror', NULL));
 
         $this->response->expects($this->never())
                        ->method('throw_for_status');
@@ -130,7 +122,7 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo('Facebook API Request ({request}) failed: {message}'), $this->equalTo($context));
+                     ->with('Facebook API Request ({request}) failed: {message}', $context);
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -148,8 +140,8 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], [], 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{}';
@@ -184,8 +176,8 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], [], 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 400;
         $this->response->body        = json_encode($output);
@@ -193,7 +185,7 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400('Not Found!')));
+                       ->willThrowException(new Requests_Exception_HTTP_400('Not Found!'));
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -207,20 +199,12 @@ class ApiGetJsonResultsTest extends ApiTest
      */
     public function testGetJsonResultsReturnsEmptyArrayOnRequestFailure(): void
     {
-        $output = [
-            'error' => [
-                'message' => 'Message',
-                'code'    => 'Code',
-                'type'    => 'Type',
-            ],
-        ];
-
         $url = 'http://localhost';
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
-                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+                   ->with($url, [], [], 'GET')
+                   ->willThrowException(new Requests_Exception('Network error!', 'curlerror', NULL));
 
         $this->response->expects($this->never())
                        ->method('throw_for_status');
@@ -246,8 +230,8 @@ class ApiGetJsonResultsTest extends ApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], [], 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = json_encode($output);

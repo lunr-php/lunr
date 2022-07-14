@@ -31,8 +31,8 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
     {
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([]))
-                   ->will($this->returnValue($this->response));
+                   ->with('http://localhost', [], [])
+                   ->willReturn($this->response);
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -48,8 +48,8 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
     {
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([ 'param1' => 1, 'param2' => 2 ]))
-                   ->will($this->returnValue($this->response));
+                   ->with('http://localhost', [], [ 'param1' => 1, 'param2' => 2 ])
+                   ->willReturn($this->response);
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -70,12 +70,12 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([]))
-                   ->will($this->returnValue($this->response));
+                   ->with('http://localhost', [], [])
+                   ->willReturn($this->response);
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
+                       ->willThrowException(new Requests_Exception_HTTP_400(NULL, $this->response));
 
         $this->response->status_code = 400;
         $this->response->body        = json_encode($output);
@@ -85,7 +85,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo('Contentful API Request ({request}) failed with id "{id}": {message}'), $this->equalTo($context));
+                     ->with('Contentful API Request ({request}) failed with id "{id}": {message}', $context);
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -101,8 +101,8 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
     {
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([]))
-                   ->will($this->throwException(new Requests_Exception('cURL error 0001: Network error', 'curlerror', NULL)));
+                   ->with('http://localhost', [], [])
+                   ->willThrowException(new Requests_Exception('cURL error 0001: Network error', 'curlerror', NULL));
 
         $this->response->expects($this->never())
                        ->method('throw_for_status');
@@ -111,7 +111,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo('Contentful API Request ({request}) failed! {message}'), $this->equalTo($context));
+                     ->with('Contentful API Request ({request}) failed! {message}', $context);
 
         $method = $this->get_accessible_reflection_method('get_json_results');
 
@@ -127,8 +127,8 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
     {
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([]))
-                   ->will($this->returnValue($this->response));
+                   ->with('http://localhost', [], [])
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{}';
@@ -155,12 +155,12 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([]))
-                   ->will($this->returnValue($this->response));
+                   ->with('http://localhost', [], [])
+                   ->willReturn($this->response);
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
+                       ->willThrowException(new Requests_Exception_HTTP_400(NULL, $this->response));
 
         $this->response->status_code = 400;
         $this->response->body        = json_encode($output);
@@ -189,8 +189,8 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo('http://localhost'), $this->equalTo([]), $this->equalTo([]))
-                   ->will($this->returnValue($this->response));
+                   ->with('http://localhost', [], [])
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = json_encode($output);

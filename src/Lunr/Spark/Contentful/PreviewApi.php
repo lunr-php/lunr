@@ -21,7 +21,7 @@ class PreviewApi extends DeliveryApi
      * Content Preview API URL.
      * @var String
      */
-    const URL = 'https://preview.contentful.com';
+    protected const URL = 'https://preview.contentful.com';
 
     /**
      * Constructor.

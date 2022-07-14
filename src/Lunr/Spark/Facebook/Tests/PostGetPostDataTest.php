@@ -79,7 +79,7 @@ class PostGetPostDataTest extends PostTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo($message), $this->equalTo($context));
+                     ->with($message, $context);
 
         $this->assertSame(DataError::ACCESS_DENIED, $this->class->{'get_' . $field}());
     }
@@ -132,7 +132,7 @@ class PostGetPostDataTest extends PostTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo($message));
+                     ->with($message);
 
         $this->assertSame(DataError::ACCESS_DENIED, $this->class->{'get_' . $field}());
     }

@@ -35,7 +35,7 @@ class ApiFetchDataTest extends ApiTest
 
         $this->http->expects($this->any())
                    ->method('request')
-                   ->will($this->returnValue($this->response));
+                   ->willReturn($this->response);
 
         $method = $this->get_accessible_reflection_method('fetch_data');
         $method->invokeArgs($this->class, [ 'http://localhost' ]);
@@ -52,12 +52,12 @@ class ApiFetchDataTest extends ApiTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $this->http->expects($this->any())
                    ->method('request')
-                   ->will($this->returnValue($this->response));
+                   ->willReturn($this->response);
 
         $method = $this->get_accessible_reflection_method('fetch_data');
         $method->invokeArgs($this->class, [ 'http://localhost' ]);
@@ -76,16 +76,16 @@ class ApiFetchDataTest extends ApiTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'http://localhost';
         $params = [ 'fields' => 'email,user_likes' ];
 
         $this->http->expects($this->exactly(1))
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $method = $this->get_accessible_reflection_method('fetch_data');
         $method->invokeArgs($this->class, [ 'http://localhost' ]);
@@ -100,15 +100,15 @@ class ApiFetchDataTest extends ApiTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url = 'http://localhost';
 
         $this->http->expects($this->atLeastOnce())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], [], 'GET')
+                   ->willReturn($this->response);
 
         $method = $this->get_accessible_reflection_method('fetch_data');
         $method->invokeArgs($this->class, [ 'http://localhost' ]);
@@ -134,7 +134,7 @@ class ApiFetchDataTest extends ApiTest
         $this->http->expects($this->exactly(1))
                    ->method('request')
                    ->with($url, [], $params, 'GET')
-                   ->will($this->returnValue($this->response));
+                   ->willReturn($this->response);
 
         $method = $this->get_accessible_reflection_method('fetch_data');
         $method->invokeArgs($this->class, [ 'http://localhost' ]);
@@ -149,15 +149,15 @@ class ApiFetchDataTest extends ApiTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url = 'http://localhost';
 
         $this->http->expects($this->atLeastOnce())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], [], 'GET')
+                   ->willReturn($this->response);
 
         $method = $this->get_accessible_reflection_method('fetch_data');
         $method->invokeArgs($this->class, [ 'http://localhost' ]);
@@ -174,15 +174,15 @@ class ApiFetchDataTest extends ApiTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url = 'http://localhost';
 
         $this->http->expects($this->atLeastOnce())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], [], 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = json_encode($data);
@@ -202,15 +202,15 @@ class ApiFetchDataTest extends ApiTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url = 'http://localhost';
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
-                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+                   ->with($url, [], [], 'GET')
+                   ->willThrowException(new Requests_Exception('Network error!', 'curlerror', NULL));
 
         $method = $this->get_accessible_reflection_method('fetch_data');
         $method->invokeArgs($this->class, [ 'http://localhost' ]);
@@ -235,15 +235,15 @@ class ApiFetchDataTest extends ApiTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url = 'http://localhost';
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo([]), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], [], 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 400;
         $this->response->body        = json_encode($output);
@@ -251,7 +251,7 @@ class ApiFetchDataTest extends ApiTest
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400('Not Found!')));
+                       ->willThrowException(new Requests_Exception_HTTP_400('Not Found!'));
 
         $method = $this->get_accessible_reflection_method('fetch_data');
         $method->invokeArgs($this->class, [ 'http://localhost' ]);

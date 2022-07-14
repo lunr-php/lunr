@@ -50,16 +50,16 @@ class PageGetDataTest extends PageTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/page';
         $params = [ 'fields' => 'email,user_likes' ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->class->get_data();
     }
@@ -75,16 +75,16 @@ class PageGetDataTest extends PageTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/page';
         $params = [];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->class->get_data();
     }
@@ -109,8 +109,8 @@ class PageGetDataTest extends PageTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->class->get_data();
     }
@@ -126,16 +126,16 @@ class PageGetDataTest extends PageTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/page';
         $params = [];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->class->get_data();
     }
@@ -153,16 +153,16 @@ class PageGetDataTest extends PageTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/page';
         $params = [];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = json_encode($data);
@@ -183,16 +183,16 @@ class PageGetDataTest extends PageTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/page';
         $params = [];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+                   ->with($url, [], $params, 'GET')
+                   ->willThrowException(new Requests_Exception('Network error!', 'curlerror', NULL));
 
         $this->class->get_data();
 
@@ -210,23 +210,23 @@ class PageGetDataTest extends PageTest
 
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $url    = 'https://graph.facebook.com/page';
         $params = [];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 400;
         $this->response->url         = 'https://graph.facebook.com/page';
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400('Not Found!')));
+                       ->willThrowException(new Requests_Exception_HTTP_400('Not Found!'));
 
         $body = [
             'error' => [
@@ -275,7 +275,7 @@ class PageGetDataTest extends PageTest
 
         $this->cas->expects($this->exactly(6))
                   ->method('get')
-                  ->will($this->onConsecutiveCalls('Token', 'Token', 'Proof', 'Token', 'Token', 'Token'));
+                  ->willReturnOnConsecutiveCalls('Token', 'Token', 'Proof', 'Token', 'Token', 'Token');
 
         $params = [
             'access_token'    => 'Token',
@@ -288,7 +288,7 @@ class PageGetDataTest extends PageTest
                        [ 'https://graph.facebook.com/page', [], $params, 'GET' ],
                        [ 'https://graph.facebook.com/me/permissions', [], [ 'access_token' => 'Token' ], 'GET' ]
                    )
-                   ->will($this->returnValue($this->response));
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = json_encode($data);
@@ -309,7 +309,7 @@ class PageGetDataTest extends PageTest
 
         $this->cas->expects($this->exactly(4))
                   ->method('get')
-                  ->will($this->onConsecutiveCalls('Token', 'Token', 'Proof'));
+                  ->willReturnOnConsecutiveCalls('Token', 'Token', 'Proof');
 
         $url    = 'https://graph.facebook.com/page';
         $params = [
@@ -319,8 +319,8 @@ class PageGetDataTest extends PageTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = json_encode([]);

@@ -33,20 +33,20 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('token'));
+                  ->with('contentful', 'access_token')
+                  ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
         $params = [ 'access_token' => 'token' ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params)
+                   ->willReturn($this->response);
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
+                       ->willThrowException(new Requests_Exception_HTTP_400(NULL, $this->response));
 
         $this->response->status_code = 400;
         $this->response->url         = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
@@ -88,20 +88,20 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('token'));
+                  ->with('contentful', 'access_token')
+                  ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
         $params = [ 'mimetype_group' => 'image', 'access_token' => 'token' ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params)
+                   ->willReturn($this->response);
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400(NULL, $this->response)));
+                       ->willThrowException(new Requests_Exception_HTTP_400(NULL, $this->response));
 
         $this->response->status_code = 400;
         $this->response->url         = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
@@ -143,16 +143,16 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('token'));
+                  ->with('contentful', 'access_token')
+                  ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
         $params = [ 'access_token' => 'token' ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params))
-                   ->will($this->throwException(new Requests_Exception('cURL error 0001: Network error', 'curlerror', NULL)));
+                   ->with($url, [], $params)
+                   ->willThrowException(new Requests_Exception('cURL error 0001: Network error', 'curlerror', NULL));
 
         $this->response->expects($this->never())
                        ->method('throw_for_status');
@@ -186,16 +186,16 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('token'));
+                  ->with('contentful', 'access_token')
+                  ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
         $params = [ 'mimetype_group' => 'image', 'access_token' => 'token' ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params))
-                   ->will($this->throwException(new Requests_Exception('cURL error 0001: Network error', 'curlerror', NULL)));
+                   ->with($url, [], $params)
+                   ->willThrowException(new Requests_Exception('cURL error 0001: Network error', 'curlerror', NULL));
 
         $this->response->expects($this->never())
                        ->method('throw_for_status');
@@ -234,16 +234,16 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('token'));
+                  ->with('contentful', 'access_token')
+                  ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
         $params = [ 'access_token' => 'token' ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params)
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = json_encode($output);
@@ -269,16 +269,16 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('contentful'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('token'));
+                  ->with('contentful', 'access_token')
+                  ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
         $params = [ 'mimetype_group' => 'image', 'access_token' => 'token' ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params)
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = json_encode($output);

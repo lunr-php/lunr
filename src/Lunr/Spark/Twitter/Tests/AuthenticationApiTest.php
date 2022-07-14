@@ -72,15 +72,15 @@ class AuthenticationApiTest extends AuthenticationTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('POST'), $this->equalTo($this->options))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, $this->headers, $params, 'POST', $this->options)
+                   ->willReturn($this->response);
 
         $this->response->status_code = 400;
         $this->response->body        = '{"errors":[{"message":"Test twitter error","code":34}]}';
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400('Invalid Input!')));
+                       ->willThrowException(new Requests_Exception_HTTP_400('Invalid Input!'));
 
         $this->assertSame('', $this->class->get_bearer_token());
     }
@@ -102,8 +102,8 @@ class AuthenticationApiTest extends AuthenticationTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('POST'), $this->equalTo($this->options))
-                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+                   ->with($url, $this->headers, $params, 'POST', $this->options)
+                   ->willThrowException(new Requests_Exception('Network error!', 'curlerror', NULL));
 
         $this->response->expects($this->never())
                        ->method('throw_for_status');
@@ -128,8 +128,8 @@ class AuthenticationApiTest extends AuthenticationTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('POST'), $this->equalTo($this->options))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, $this->headers, $params, 'POST', $this->options)
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{"token_type":"bearer","access_token":"TOKEN"}';
@@ -139,7 +139,7 @@ class AuthenticationApiTest extends AuthenticationTest
 
         $this->cas->expects($this->once())
                   ->method('add')
-                  ->with($this->equalTo('twitter'), $this->equalTo('bearer_token'), $this->equalTo('TOKEN'));
+                  ->with('twitter', 'bearer_token', 'TOKEN');
 
         $this->assertEquals('TOKEN', $this->class->get_bearer_token());
     }
@@ -161,8 +161,8 @@ class AuthenticationApiTest extends AuthenticationTest
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo($this->headers), $this->equalTo($params), $this->equalTo('POST'), $this->equalTo($this->options))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, $this->headers, $params, 'POST', $this->options)
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = '{"token_type":"bearer","access_token":"TOKEN"}';
@@ -172,7 +172,7 @@ class AuthenticationApiTest extends AuthenticationTest
 
         $this->cas->expects($this->once())
                   ->method('add')
-                  ->with($this->equalTo('twitter'), $this->equalTo('bearer_token'), $this->equalTo('TOKEN'));
+                  ->with('twitter', 'bearer_token', 'TOKEN');
 
         $this->assertEquals('TOKEN', $this->class->get_bearer_token());
     }

@@ -24,7 +24,7 @@ class Api
      * Contentful URL.
      * @var String
      */
-    const URL = 'https://www.contentful.com';
+    protected const URL = 'https://www.contentful.com';
 
     /**
      * Shared instance of the CentralAuthenticationStore

@@ -32,8 +32,8 @@ class UserPermissionsTest extends UserTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue(NULL));
+                  ->with('facebook', 'access_token')
+                  ->willReturn(NULL);
 
         $method = $this->get_accessible_reflection_method('get_permissions');
         $method->invoke($this->class);
@@ -50,8 +50,8 @@ class UserPermissionsTest extends UserTest
     {
         $this->cas->expects($this->exactly(2))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('App|Only'));
+                  ->with('facebook', 'access_token')
+                  ->willReturn('App|Only');
 
         $method = $this->get_accessible_reflection_method('get_permissions');
         $method->invoke($this->class);
@@ -77,16 +77,16 @@ class UserPermissionsTest extends UserTest
 
         $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
+                  ->with('facebook', 'access_token')
+                  ->willReturn('Token');
 
         $url    = 'https://graph.facebook.com/me/permissions';
         $params = [ 'access_token' => 'Token' ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 200;
         $this->response->body        = json_encode($data);
@@ -106,23 +106,23 @@ class UserPermissionsTest extends UserTest
     {
         $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
+                  ->with('facebook', 'access_token')
+                  ->willReturn('Token');
 
         $url    = 'https://graph.facebook.com/me/permissions';
         $params = [ 'access_token' => 'Token' ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->returnValue($this->response));
+                   ->with($url, [], $params, 'GET')
+                   ->willReturn($this->response);
 
         $this->response->status_code = 400;
         $this->response->url         = 'https://graph.facebook.com/me/permissions';
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->will($this->throwException(new Requests_Exception_HTTP_400('Not Found!')));
+                       ->willThrowException(new Requests_Exception_HTTP_400('Not Found!'));
 
         $body = [
             'error' => [
@@ -160,16 +160,16 @@ class UserPermissionsTest extends UserTest
     {
         $this->cas->expects($this->exactly(3))
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
+                  ->with('facebook', 'access_token')
+                  ->willReturn('Token');
 
         $url    = 'https://graph.facebook.com/me/permissions';
         $params = [ 'access_token' => 'Token' ];
 
         $this->http->expects($this->once())
                    ->method('request')
-                   ->with($this->equalTo($url), $this->equalTo([]), $this->equalTo($params), $this->equalTo('GET'))
-                   ->will($this->throwException(new Requests_Exception('Network error!', 'curlerror', NULL)));
+                   ->with($url, [], $params, 'GET')
+                   ->willThrowException(new Requests_Exception('Network error!', 'curlerror', NULL));
 
         $method = $this->get_accessible_reflection_method('get_permissions');
         $method->invoke($this->class);
@@ -272,7 +272,7 @@ class UserPermissionsTest extends UserTest
 
         $this->logger->expects($this->once())
                      ->method('warning')
-                     ->with($this->equalTo('Access to "{field}" requires "{permission}" permission.'), $this->equalTo($context));
+                     ->with('Access to "{field}" requires "{permission}" permission.', $context);
 
         $method = $this->get_accessible_reflection_method('check_item_access');
 

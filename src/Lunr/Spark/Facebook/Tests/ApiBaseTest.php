@@ -83,8 +83,8 @@ class ApiBaseTest extends ApiTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo($key))
-                  ->will($this->returnValue('value'));
+                  ->with('facebook', $key)
+                  ->willReturn('value');
 
         $this->assertEquals('value', $this->class->{$key});
     }
@@ -114,7 +114,7 @@ class ApiBaseTest extends ApiTest
     {
         $this->cas->expects($this->once())
                   ->method('add')
-                  ->with($this->equalTo('facebook'), $this->equalTo($key), $this->equalTo('value'));
+                  ->with('facebook', $key, 'value');
 
         $this->class->{$key} = 'value';
     }
@@ -128,7 +128,10 @@ class ApiBaseTest extends ApiTest
     {
         $this->cas->expects($this->exactly(2))
                   ->method('add')
-                  ->withConsecutive([ 'facebook', 'access_token', 'value' ], [ 'facebook', 'app_secret_proof', '60171bc5120682242e965d963059fa40f43ae90ad05668dfc686e089f95b89aa' ]);
+                  ->withConsecutive(
+                    [ 'facebook', 'access_token', 'value' ],
+                    [ 'facebook', 'app_secret_proof', '60171bc5120682242e965d963059fa40f43ae90ad05668dfc686e089f95b89aa' ]
+                );
 
         $this->class->access_token = 'value';
     }
@@ -148,8 +151,8 @@ class ApiBaseTest extends ApiTest
 
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_secret'))
-                  ->will($this->returnValue('app_secret'));
+                  ->with('facebook', 'app_secret')
+                  ->willReturn('app_secret');
 
         $this->class->access_token = 'value';
     }

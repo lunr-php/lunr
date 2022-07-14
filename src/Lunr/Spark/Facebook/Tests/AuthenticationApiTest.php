@@ -32,8 +32,8 @@ class AuthenticationApiTest extends AuthenticationTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_id'))
-                  ->will($this->returnValue('Lunr'));
+                  ->with('facebook', 'app_id')
+                  ->willReturn('Lunr');
 
         $this->set_reflection_property_value('state', 'State');
 
@@ -51,8 +51,8 @@ class AuthenticationApiTest extends AuthenticationTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('app_id'))
-                  ->will($this->returnValue('Lunr'));
+                  ->with('facebook', 'app_id')
+                  ->willReturn('Lunr');
 
         $this->set_reflection_property_value('state', 'State');
         $this->set_reflection_property_value('scope', 'email');
@@ -72,8 +72,8 @@ class AuthenticationApiTest extends AuthenticationTest
     {
         $this->cas->expects($this->once())
                   ->method('get')
-                  ->with($this->equalTo('facebook'), $this->equalTo('access_token'))
-                  ->will($this->returnValue('Token'));
+                  ->with('facebook', 'access_token')
+                  ->willReturn('Token');
 
         $url    = 'https://www.facebook.com/logout.php?';
         $params = 'next=http%3A%2F%2Flocalhost%2Fcontroller%2Fmethod%2F&access_token=Token';

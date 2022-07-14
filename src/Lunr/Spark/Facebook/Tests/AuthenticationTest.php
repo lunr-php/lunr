@@ -71,7 +71,7 @@ abstract class AuthenticationTest extends LunrBaseTest
 
         $this->request->expects($this->exactly(2))
                       ->method('get_get_data')
-                      ->will($this->returnValueMap([[ 'code', NULL ], [ 'state', NULL ]]));
+                      ->willReturnMap([[ 'code', NULL ], [ 'state', NULL ]]);
 
         $this->class      = new Authentication($this->cas, $this->logger, $this->http, $this->request);
         $this->reflection = new ReflectionClass('Lunr\Spark\Facebook\Authentication');
@@ -93,11 +93,11 @@ abstract class AuthenticationTest extends LunrBaseTest
 
         $this->request->expects($this->exactly(2))
                       ->method('get_get_data')
-                      ->will($this->returnValueMap([[ 'code', 'String' ], [ 'state', 'String' ]]));
+                      ->willReturnMap([[ 'code', 'String' ], [ 'state', 'String' ]]);
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->will($this->onConsecutiveCalls('http://localhost/', 'controller/method/'));
+                      ->willReturnOnConsecutiveCalls('http://localhost/', 'controller/method/');
 
         $this->class      = new Authentication($this->cas, $this->logger, $this->http, $this->request);
         $this->reflection = new ReflectionClass('Lunr\Spark\Facebook\Authentication');
