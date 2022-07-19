@@ -32,7 +32,7 @@ jobs:
         run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
 
       - name: Install dependencies
-        run: composer install
+        run: composer update
 
       - name: Install GNU gettext
         run: sudo apt install gettext language-pack-de language-pack-nl
@@ -95,7 +95,7 @@ jobs:
           extensions: uopz
 
       - name: Install dependencies
-        run: composer install
+        run: composer update
 
       - name: Run PHPStan
         run: phpstan analyze src -l2 --configuration tests/phpstan.neon.dist
