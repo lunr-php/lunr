@@ -25,13 +25,13 @@ class SQLite3QueryResult implements DatabaseQueryResultInterface
      * The Sqlite3 error code for transaction deadlock.
      * @var Integer
      */
-    const LOCK_TIMEOUT_ERR_CODE = 5;
+    private const LOCK_TIMEOUT_ERR_CODE = 5;
 
     /**
      * The Sqlite3 error code for transaction deadlock.
      * @var Integer
      */
-    const DEADLOCK_ERR_CODE = 6;
+    private const DEADLOCK_ERR_CODE = 6;
 
     /**
      * The query string that was executed.

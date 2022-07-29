@@ -24,13 +24,13 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
      * The MySQL error code for transaction deadlock.
      * @var Integer
      */
-    const DEADLOCK_ERR_CODE = 1213;
+    private const DEADLOCK_ERR_CODE = 1213;
 
     /**
      * The MySQL error code for transaction lock timeout.
      * @var Integer
      */
-    const LOCK_TIMEOUT_ERR_CODE = 1205;
+    private const LOCK_TIMEOUT_ERR_CODE = 1205;
 
     /**
      * The query string that was executed.

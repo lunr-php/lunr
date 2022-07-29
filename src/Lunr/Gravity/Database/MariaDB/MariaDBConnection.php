@@ -15,6 +15,9 @@ namespace Lunr\Gravity\Database\MariaDB;
 
 use Lunr\Gravity\Database\MySQL\MySQLConnection;
 use Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder;
+use \Lunr\Core\Configuration;
+use \Psr\Log\LoggerInterface;
+use mysqli;
 
 /**
 * MariaDB database access class.

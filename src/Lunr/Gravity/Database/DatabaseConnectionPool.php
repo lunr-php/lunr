@@ -12,6 +12,8 @@
 namespace Lunr\Gravity\Database;
 
 use MySQLi;
+use \Lunr\Core\Configuration;
+use \Psr\Log\LoggerInterface;
 
 /**
  * This class implements a simple database connection pool.

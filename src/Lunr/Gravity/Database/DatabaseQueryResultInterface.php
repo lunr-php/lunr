@@ -97,7 +97,7 @@ interface DatabaseQueryResultInterface
      *
      * @return array $output Result set as array
      */
-    public function result_array($associative);
+    public function result_array($associative = TRUE);
 
     /**
      * Get the first row of the result set.

@@ -162,7 +162,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
     /**
      * SQL Query part: Boolean identifying if the join is not finished
-     * @var boolean
+     * @var bool
      */
     protected $is_unfinished_join;
 
@@ -180,7 +180,7 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
 
     /**
      * Whether a recursive with statement is used or not
-     * @var boolean
+     * @var bool
      */
     protected $is_recursive;
 
@@ -819,9 +819,10 @@ abstract class DatabaseDMLQueryBuilder implements DMLQueryBuilderInterface
         {
             $this->compound .= ' ';
         }
-        if($operator === 'ALL' || $operator === 'DISTINCT')
+
+        if ($operator === 'ALL' || $operator === 'DISTINCT')
         {
-            $base = $type . " " . $operator;
+            $base = $type . ' ' . $operator;
         }
         else
         {

@@ -25,7 +25,8 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test specifying the UNION part of a query.
      *
-     * @param string $types     Compound query operator
+     * @param string      $types    Compound query operator
+     * @param string|null $operator Compound query operator
      *
      * @dataProvider compoundQueryTypeAndOperatorProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_compound
@@ -36,13 +37,13 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
 
         $method->invokeArgs($this->class, [ '(sql query)', $types, $operator ]);
 
-        if($operator === NULL)
+        if ($operator === NULL)
         {
             $string = $types . ' (sql query)';
         }
         else
         {
-            $string = $types . " " . $operator . ' (sql query)';
+            $string = $types . ' ' . $operator . ' (sql query)';
         }
 
         $this->assertPropertyEquals('compound', $string);
@@ -51,7 +52,8 @@ class DatabaseDMLQueryBuilderQueryPartsTest extends DatabaseDMLQueryBuilderTest
     /**
      * Test specifying the UNION part of a query with invalid parameters.
      *
-     * @param string $types     Compound query operator
+     * @param string          $types    Compound query operator
+     * @param string|int|bool $operator Compound query operator
      *
      * @dataProvider compoundQueryInvalidTypeAndOperatorProvider
      * @covers       Lunr\Gravity\Database\DatabaseDMLQueryBuilder::sql_compound

@@ -380,7 +380,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -395,7 +395,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param string $left   Left expression
      * @param array  $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -413,7 +413,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      * @param string $left   Left expression
      * @param string $lower  The lower bound of the between condition
      * @param string $upper  The upper bound of the between condition
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -432,7 +432,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -446,7 +446,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      * Define ON part of a JOIN clause with the NULL condition.
      *
      * @param string $left   Left expression
-     * @param string $negate Whether to negate the condition or not
+     * @param bool   $negate Whether to negate the condition or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -520,7 +520,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -535,7 +535,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param string $left   Left expression
      * @param array  $right  Right expression
-     * @param string $negate Whether to negate the condition or not
+     * @param bool   $negate Whether to negate the condition or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -553,7 +553,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      * @param string $left   Left expression
      * @param string $lower  The lower bound of the between condition
      * @param string $upper  The upper bound of the between condition
-     * @param string $negate Whether to negate the condition or not
+     * @param bool   $negate Whether to negate the condition or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -572,7 +572,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the condition or not
+     * @param bool   $negate Whether to negate the condition or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -586,7 +586,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      * Define WHERE clause with the NULL condition.
      *
      * @param string $left   Left expression
-     * @param string $negate Whether to negate the condition or not
+     * @param bool   $negate Whether to negate the condition or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -652,7 +652,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -667,7 +667,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param string $left   Left expression
      * @param array  $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -685,7 +685,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      * @param string $left   Left expression
      * @param string $lower  The lower bound of the between condition
      * @param string $upper  The upper bound of the between condition
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -704,7 +704,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -718,7 +718,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      * Define HAVING clause with the NULL condition.
      *
      * @param string $left   Left expression
-     * @param string $negate Whether to negate the condition or not
+     * @param bool   $negate Whether to negate the condition or not
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
@@ -826,6 +826,8 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
 
     /**
      * Set ON DUPLICATE KEY UPDATE clause.
+     *
+     * @param string $set Action to perform on conflict
      *
      * @return MySQLDMLQueryBuilder $self Self reference
      */

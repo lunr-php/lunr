@@ -3,8 +3,10 @@
 /**
  * This file contains the QueryExceptionTest class.
  *
- * @package Lunr\Gravity\Database\Exceptions
- * @author  Heinz Wiesinger <heinz@m2mobi.com>
+ * @package   Lunr\Gravity\Database\Exceptions
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2019-2022, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Gravity\Database\Exceptions\Tests;

@@ -22,6 +22,8 @@ class MariaDBSimpleDMLQueryBuilderSelectTest extends MariaDBSimpleDMLQueryBuilde
     /**
      * Test intersect().
      *
+     * @param mixed $operators Operators to test
+     *
      * @dataProvider compoundOperatorProvider
      * @covers Lunr\Gravity\Database\MariaDB\MariaDBSimpleDMLQueryBuilder::intersect
      */
@@ -42,6 +44,8 @@ class MariaDBSimpleDMLQueryBuilderSelectTest extends MariaDBSimpleDMLQueryBuilde
 
     /**
      * Test except().
+     *
+     * @param mixed $operators Operators to test
      *
      * @dataProvider compoundOperatorProvider
      * @covers Lunr\Gravity\Database\MariaDB\MariaDBSimpleDMLQueryBuilder::except

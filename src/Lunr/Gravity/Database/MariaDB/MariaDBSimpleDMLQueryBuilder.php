@@ -14,6 +14,7 @@
 namespace Lunr\Gravity\Database\MariaDB;
 
 use Lunr\Gravity\Database\MySQL\MySQLSimpleDMLQueryBuilder;
+use Lunr\Gravity\Database\MySQL\MySQLQueryEscaper;
 
 /**
  * This is a SQL query builder class for generating queries
@@ -79,7 +80,6 @@ class MariaDBSimpleDMLQueryBuilder extends MySQLSimpleDMLQueryBuilder
         $this->builder->intersect($this->escaper->query_value($sql_query), $type);
         return $this;
     }
-
 
     /**
      * Define a EXCEPT, EXCEPT DISTINCT or EXCEPT ALL clause of the SQL statement.

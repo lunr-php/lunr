@@ -39,7 +39,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     /**
      * Define a DELETE clause.
      *
-     * @param string $table_reference The tables to delete from
+     * @param string $table_references The tables to delete from
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -202,7 +202,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -218,7 +218,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -235,7 +235,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      * @param string $left   Left expression
      * @param string $lower  The lower bound of the between condition
      * @param string $upper  The upper bound of the between condition
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -251,7 +251,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      * Define ON part of a JOIN clause with the NULL condition.
      *
      * @param string $left   Left expression
-     * @param string $negate Whether to negate the condition or not
+     * @param bool   $negate Whether to negate the condition or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -304,7 +304,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -320,7 +320,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the condition or not
+     * @param bool   $negate Whether to negate the condition or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -337,7 +337,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      * @param string $left   Left expression
      * @param string $lower  The lower bound of the between condition
      * @param string $upper  The upper bound of the between condition
-     * @param string $negate Whether to negate the condition or not
+     * @param bool   $negate Whether to negate the condition or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -353,7 +353,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      * Define WHERE clause with the NULL condition.
      *
      * @param string $left   Left expression
-     * @param string $negate Whether to negate the condition or not
+     * @param bool   $negate Whether to negate the condition or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -406,7 +406,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -422,7 +422,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      *
      * @param string $left   Left expression
      * @param string $right  Right expression
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -439,7 +439,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      * @param string $left   Left expression
      * @param string $lower  The lower bound of the between condition
      * @param string $upper  The upper bound of the between condition
-     * @param string $negate Whether to negate the comparison or not
+     * @param bool   $negate Whether to negate the comparison or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
@@ -455,7 +455,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
      * Define HAVING clause with the NULL condition.
      *
      * @param string $left   Left expression
-     * @param string $negate Whether to negate the condition or not
+     * @param bool   $negate Whether to negate the condition or not
      *
      * @return SQLDMLQueryBuilder $self Self reference
      */
