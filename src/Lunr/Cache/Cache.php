@@ -72,7 +72,7 @@ class Cache
      * @param mixed  $value Data to cache.
      * @param int    $ttl   Time To Live for cache item in seconds.
      *
-     * @return boolean True if successful.
+     * @return bool True if successful.
      */
     public function set($key, $value, $ttl = 600)
     {
