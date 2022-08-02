@@ -31,7 +31,7 @@ class GetoptCliParser implements CliParserInterface
 
     /**
      * Whether there has been a parse error or not
-     * @var boolean
+     * @var bool
      */
     private $error;
 

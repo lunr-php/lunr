@@ -37,7 +37,8 @@ class Console
     /**
      * Constructor.
      *
-     * @param DateTime $datetime Instance of the DateTime class.
+     * @param DateTime $datetime    Instance of the DateTime class.
+     * @param string   $time_format Datetime pattern
      */
     public function __construct($datetime, $time_format = 'Y-m-d H:m:s')
     {

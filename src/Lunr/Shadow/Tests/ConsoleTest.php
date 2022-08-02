@@ -28,7 +28,7 @@ class ConsoleTest extends LunrBaseTest
      * DateTime string used for Console Output.
      * @var String
      */
-    const DATETIME_STRING = '2011-11-10 09:11:22';
+    private const DATETIME_STRING = '2011-11-10 09:11:22';
 
     /**
      * Shared time for the test.
