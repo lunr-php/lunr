@@ -50,7 +50,7 @@ abstract class DateTimeTest extends LunrBaseTest
      * @param string $day           Day name to check against
      * @param string $localized_day Day name to check
      *
-     * @return boolean $return TRUE on known values, FALSE on unknown values
+     * @return bool $return TRUE on known values, FALSE on unknown values
      */
     protected function check_localized_day($day, $localized_day): bool
     {

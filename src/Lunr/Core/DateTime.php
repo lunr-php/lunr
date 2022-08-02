@@ -176,7 +176,7 @@ class DateTime
      *                          ("+1 day", "-10 minutes")
      * @param int    $timestamp Base timestamp, now by default (optional)
      *
-     * @return integer Delayed timestamp
+     * @return int Delayed timestamp
      */
     public function get_delayed_timestamp($delay, $timestamp = 0)
     {
@@ -200,7 +200,7 @@ class DateTime
      * @param string $a DateTime String 1
      * @param string $b DateTime String 2
      *
-     * @return integer -1 if $a < $b, 1 otherwise
+     * @return int -1 if $a < $b, 1 otherwise
      */
     public function sort_compare_datetime($a, $b)
     {
@@ -222,7 +222,7 @@ class DateTime
      *
      * @param mixed $value The input to check
      *
-     * @return boolean $return TRUE if input is a valid date, FALSE otherwise.
+     * @return bool $return TRUE if input is a valid date, FALSE otherwise.
      */
     public function is_date($value)
     {
@@ -255,7 +255,7 @@ class DateTime
      *
      * @param int $value The input to check
      *
-     * @return boolean $return TRUE if input is a valid date, FALSE otherwise.
+     * @return bool $return TRUE if input is a valid date, FALSE otherwise.
      */
     public function is_leap_year($value)
     {
@@ -267,7 +267,7 @@ class DateTime
      *
      * @param mixed $value The input to check
      *
-     * @return boolean $return TRUE if input is a valid time, FALSE otherwise.
+     * @return bool $return TRUE if input is a valid time, FALSE otherwise.
      */
     public function is_time($value)
     {

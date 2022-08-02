@@ -83,7 +83,7 @@ class Ini
      *
      * @param string $val Human readable memory limit
      *
-     * @return integer $val Integer memory limit in bytes
+     * @return int $val Integer memory limit in bytes
      */
     public function get_integer_for_shorthand_bytes($val)
     {
