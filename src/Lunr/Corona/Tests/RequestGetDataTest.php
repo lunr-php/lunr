@@ -238,19 +238,19 @@ class RequestGetDataTest extends RequestTest
     /**
      * Test that get_accept_format() returns content type when called with a valid set of supported formats.
      *
-     * @param string $value The expected value
+     * @param array $value The expected value
      *
      * @dataProvider contentTypeProvider
      * @covers       Lunr\Corona\Request::get_accept_format
      */
-    public function testGetAcceptFormatWithValidSupportedFormatsReturnsString($value): void
+    public function testGetAcceptFormatWithValidSupportedFormatsReturnsString(array $value): void
     {
         $this->parser->expects($this->once())
                      ->method('parse_accept_format')
                      ->with($this->equalTo($value))
                      ->will($this->returnValue('text/html'));
 
-        $this->assertEquals($value, $this->class->get_accept_format($value));
+        $this->assertEquals($value[0], $this->class->get_accept_format($value));
     }
 
     /**
@@ -266,19 +266,19 @@ class RequestGetDataTest extends RequestTest
     /**
      * Test that get_accept_language() returns content type when called with a valid set of supported languages.
      *
-     * @param string $value The expected value
+     * @param array $value The expected value
      *
      * @dataProvider acceptLanguageProvider
      * @covers       Lunr\Corona\Request::get_accept_language
      */
-    public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString($value): void
+    public function testGetAcceptLanguageWithValidSupportedLanguagesReturnsString(array $value): void
     {
         $this->parser->expects($this->once())
                      ->method('parse_accept_language')
                      ->with($this->equalTo($value))
                      ->will($this->returnValue('en-US'));
 
-        $this->assertEquals($value, $this->class->get_accept_language($value));
+        $this->assertEquals($value[0], $this->class->get_accept_language($value));
     }
 
     /**
@@ -294,19 +294,19 @@ class RequestGetDataTest extends RequestTest
     /**
      * Test that get_accept_charset() returns content type when called with a valid set of supported charsets.
      *
-     * @param string $value The expected value
+     * @param array $value The expected value
      *
      * @dataProvider acceptCharsetProvider
      * @covers       Lunr\Corona\Request::get_accept_charset
      */
-    public function testGetAcceptCharsetWithValidSupportedCharsetsReturnsString($value): void
+    public function testGetAcceptCharsetWithValidSupportedCharsetsReturnsString(array $value): void
     {
         $this->parser->expects($this->once())
                      ->method('parse_accept_charset')
                      ->with($this->equalTo($value))
                      ->will($this->returnValue('utf-8'));
 
-        $this->assertEquals($value, $this->class->get_accept_charset($value));
+        $this->assertEquals($value[0], $this->class->get_accept_charset($value));
     }
 
     /**

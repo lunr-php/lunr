@@ -20,23 +20,6 @@ class RequestAddMockValuesTest extends RequestTest
 {
 
     /**
-     * Check that add_mock_values() does not add values if they are not within an array.
-     *
-     * @param mixed $value Invalid mock value
-     *
-     * @dataProvider invalidMockValueProvider
-     * @covers       Lunr\Corona\Request::add_mock_values
-     */
-    public function testAddMockValuesWithInvalidMockValue($value): void
-    {
-        $this->class->add_mock_values($value);
-
-        $mock_result = $this->get_reflection_property_value('mock');
-
-        $this->assertArrayEmpty($mock_result);
-    }
-
-    /**
      * Test add_mock_values() adds values correctly when current mock values are empty.
      *
      * @covers Lunr\Corona\Request::add_mock_values

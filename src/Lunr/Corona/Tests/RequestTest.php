@@ -209,7 +209,7 @@ abstract class RequestTest extends LunrBaseTest
     public function contentTypeProvider(): array
     {
         $value   = [];
-        $value[] = [ 'text/html' ];
+        $value[] = [[ 'text/html' ]];
 
         return $value;
     }
@@ -222,7 +222,7 @@ abstract class RequestTest extends LunrBaseTest
     public function acceptLanguageProvider(): array
     {
         $value   = [];
-        $value[] = [ 'en-US' ];
+        $value[] = [[ 'en-US' ]];
 
         return $value;
     }
@@ -235,7 +235,7 @@ abstract class RequestTest extends LunrBaseTest
     public function acceptCharsetProvider(): array
     {
         $value   = [];
-        $value[] = [ 'utf-8' ];
+        $value[] = [[ 'utf-8' ]];
 
         return $value;
     }

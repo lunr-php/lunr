@@ -16,67 +16,61 @@ namespace Lunr\Corona;
  * Request abstraction class.
  * Manages access to $_POST, $_GET values, as well as
  * the request URL parameters
+ *
+ * @property-read string $action           The HTTP method used for the request
+ * @property-read string $protocol         The protocol used for the request
+ * @property-read string $domain           The domain used for the request
+ * @property-read string $port             The port used for the request
+ * @property-read string $base_url         All of the above combined
+ * @property-read string $device_useragent The device specific user agent sent with the request
+ * @property-read string $useragent        The user agent sent with the request
+ * @property-read string $sapi             The PHP SAPI invoking the code
+ * @property-read string $host             The hostname of the server the script is running on
+ * @property-read string $controller       The controller requested
+ * @property-read string $method           The method requested of that controller
+ * @property-read array  $params           The parameters for that method
+ * @property-read string $call             The call identifier, combining controller and method
+ * @property-read string $verbosity        Logging verbosity
+ * @property-read string $id               Unique request ID
+ * @property-read string $bearer_token     An authorization token
  */
 class Request
 {
 
     /**
      * Stored $_POST values
-     * @var array
+     * @var array<string,mixed>
      */
     protected $post;
 
     /**
      * Stored $_GET values
-     * @var array
+     * @var array<string,mixed>
      */
     protected $get;
 
     /**
      * Stored $_COOKIE values
-     * @var array
+     * @var array<string,mixed>
      */
     protected $cookie;
 
     /**
      * Stored $_SERVER values
-     * @var array
+     * @var array<string,mixed>
      */
     protected $server;
 
     /**
-     * Request parameters:
-     *  'action'     The HTTP method used for the request
-     *  'protocol'   The protocol used for the request
-     *  'domain'     The domain used for the request
-     *  'port'       The port used for the request
-     *  'base_path'  The path on the server to the application
-     *  'base_url'   All of the above combined
+     * Request property data
      *
-     *  'device_useragent' The device specific user agent sent with the request
-     *  'useragent'        The user agent sent with the request
-     *
-     *  'sapi'       The PHP SAPI invoking the code
-     *  'host'       The hostname of the server the script is running on
-     *
-     *  'controller' The controller requested
-     *  'method'     The method requested of that controller
-     *  'params'     The parameters for that method
-     *  'call'       The call identifier, combining controller and method
-     *
-     *  'verbosity'  Logging verbosity
-     *
-     *  'id'         Unique request ID
-     *
-     *  'bearer_token' An authorization token
-     *
-     * @var array
+     * @var array<string, mixed>
      */
     protected $request;
 
     /**
      * Stored $_FILES values
-     * @var array
+     * @var array<string,array<string,mixed>>
      */
     protected $files;
 
@@ -88,7 +82,7 @@ class Request
 
     /**
      * Stored command line arguments
-     * @var array
+     * @var array<string,string|null>
      */
     protected $cli_args;
 
@@ -100,7 +94,7 @@ class Request
 
     /**
      * The request values to mock.
-     * @var array
+     * @var array<string,mixed>
      */
     private $mock;
 
@@ -150,7 +144,7 @@ class Request
      *
      * @return mixed $return Value of the chosen attribute
      */
-    public function __get($name)
+    public function __get(string $name)
     {
         if (array_key_exists($name, $this->request))
         {
@@ -177,13 +171,8 @@ class Request
      *
      * @return void
      */
-    public function set_mock_values($values)
+    public function set_mock_values(array $values): void
     {
-        if (!is_array($values))
-        {
-            return;
-        }
-
         $this->mock = $values;
     }
 
@@ -195,13 +184,8 @@ class Request
      *
      * @return void
      */
-    public function add_mock_values($values)
+    public function add_mock_values(array $values): void
     {
-        if (!is_array($values))
-        {
-            return;
-        }
-
         foreach ($values as $key => $value)
         {
             $this->mock[$key] = $value;
@@ -211,11 +195,11 @@ class Request
     /**
      * Returns a CLI option array of value(s).
      *
-     * @param mixed $key Key for the value to retrieve
+     * @param string $key Key for the value to retrieve
      *
      * @return mixed $return The value of the key or NULL if not found
      */
-    public function get_option_data($key)
+    public function get_option_data(string $key)
     {
         if (array_key_exists($key, $this->cli_args))
         {
@@ -230,46 +214,46 @@ class Request
      *
      * @return array $return The option and the arguments of the request
      */
-    public function get_all_options()
+    public function get_all_options(): array
     {
         return array_keys($this->cli_args);
     }
 
     /**
-     * Negotiate & retrieve the client's prefered content type.
+     * Negotiate & retrieve the client's preferred content type.
      *
      * @param array $supported Array containing the supported content types
      *
-     * @return mixed $return The best match of the prefered content types or NULL
+     * @return string|null $return The best match of the preferred content types or NULL
      *                       if there are no supported types or the header is not set
      */
-    public function get_accept_format($supported = [])
+    public function get_accept_format(array $supported = []): ?string
     {
         return $this->parser->parse_accept_format($supported);
     }
 
     /**
-     * Negotiate & retrieve the clients prefered language.
+     * Negotiate & retrieve the clients preferred language.
      *
      * @param array $supported Array containing the supported languages
      *
-     * @return mixed $return The best match of the prefered languages or NULL if
+     * @return string|null $return The best match of the preferred languages or NULL if
      *                       there are no supported languages or the header is not set
      */
-    public function get_accept_language($supported = [])
+    public function get_accept_language(array $supported = []): ?string
     {
         return $this->parser->parse_accept_language($supported);
     }
 
     /**
-     * Negotiate & retrieve the clients prefered charset.
+     * Negotiate & retrieve the clients preferred charset.
      *
      * @param array $supported Array containing the supported charsets
      *
-     * @return mixed $return The best match of the prefered charsets or NULL if
+     * @return string|null $return The best match of the preferred charsets or NULL if
      *                       there are no supported charsets or the header is not set
      */
-    public function get_accept_charset($supported = [])
+    public function get_accept_charset(array $supported = []): ?string
     {
         return $this->parser->parse_accept_charset($supported);
     }
@@ -281,7 +265,7 @@ class Request
      *
      * @return mixed The value of the key, all GET values if no key is provided or NULL if not found.
      */
-    public function get_get_data($key = NULL)
+    public function get_get_data(?string $key = NULL)
     {
         if ($key === NULL)
         {
@@ -298,7 +282,7 @@ class Request
             return $this->mock['get'][$key];
         }
 
-        return isset($this->get[$key]) ? $this->get[$key] : NULL;
+        return $this->get[$key] ?? NULL;
     }
 
     /**
@@ -308,7 +292,7 @@ class Request
      *
      * @return mixed The value of the key, all POST values if no key is provided or NULL if not found.
      */
-    public function get_post_data($key = NULL)
+    public function get_post_data(?string $key = NULL)
     {
         if ($key === NULL)
         {
@@ -325,44 +309,44 @@ class Request
             return $this->mock['post'][$key];
         }
 
-        return isset($this->post[$key]) ? $this->post[$key] : NULL;
+        return $this->post[$key] ?? NULL;
     }
 
     /**
      * Retrieve a stored SERVER value.
      *
-     * @param mixed $key Key for the value to retrieve
+     * @param string $key Key for the value to retrieve
      *
      * @return mixed $return The value of the key or NULL if not found
      */
-    public function get_server_data($key)
+    public function get_server_data(string $key)
     {
-        return isset($this->server[$key]) ? $this->server[$key] : NULL;
+        return $this->server[$key] ?? NULL;
     }
 
     /**
      * Retrieve a stored HTTP Header from the SERVER value.
      *
-     * @param mixed $key Key for the value to retrieve
+     * @param string $key Key for the value to retrieve
      *
      * @return mixed $return The value of the key or NULL if not found
      */
-    public function get_http_header_data($key)
+    public function get_http_header_data(string $key)
     {
         $http_key = 'HTTP_' . strtoupper(str_replace('-', '_', $key));
-        return isset($this->server[$http_key]) ? $this->server[$http_key] : NULL;
+        return $this->server[$http_key] ?? NULL;
     }
 
     /**
      * Retrieve a stored COOKIE value.
      *
-     * @param mixed $key Key for the value to retrieve
+     * @param string $key Key for the value to retrieve
      *
      * @return mixed $return The value of the key or NULL if not found
      */
-    public function get_cookie_data($key)
+    public function get_cookie_data(string $key)
     {
-        return isset($this->cookie[$key]) ? $this->cookie[$key] : NULL;
+        return $this->cookie[$key] ?? NULL;
     }
 
     /**
@@ -370,11 +354,11 @@ class Request
      *
      * @param mixed $key Key for the value to retrieve
      *
-     * @return mixed $return The value of the key or NULL if not found
+     * @return array|null $return The value of the key or NULL if not found
      */
-    public function get_files_data($key)
+    public function get_files_data(string $key): ?array
     {
-        return isset($this->files[$key]) ? $this->files[$key] : NULL;
+        return $this->files[$key] ?? NULL;
     }
 
     /**
@@ -382,7 +366,7 @@ class Request
      *
      * @return string $return The raw request data as string
      */
-    public function get_raw_data()
+    public function get_raw_data(): string
     {
         $input = $this->parser->parse_raw_data();
         if (!empty($input))

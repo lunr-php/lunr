@@ -20,21 +20,6 @@ class RequestSetMockValuesTest extends RequestTest
 {
 
     /**
-     * Check that set_mock_values() does not set values if they are not within an array.
-     *
-     * @param mixed $value Invalid mock value
-     *
-     * @dataProvider invalidMockValueProvider
-     * @covers       Lunr\Corona\Request::set_mock_values
-     */
-    public function testSetMockValuesWithInvalidMockValue($value): void
-    {
-        $this->class->set_mock_values($value);
-
-        $this->assertArrayEmpty($this->get_reflection_property_value('mock'));
-    }
-
-    /**
      * Test set_mock_values() sets values correctly.
      *
      * @covers Lunr\Corona\Request::set_mock_values
