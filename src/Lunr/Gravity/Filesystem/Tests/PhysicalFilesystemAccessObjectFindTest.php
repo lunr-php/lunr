@@ -41,44 +41,6 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     }
 
     /**
-     * Test finding in an accessible directory with a NULL needle.
-     *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
-     */
-    public function testGetMatchesOfAccessibleDirectoryWithNullNeedle(): void
-    {
-        $error = 'RegexIterator::__construct(): Empty regular expression';
-
-        $this->logger->expects($this->once())
-                     ->method('error')
-                     ->with('{message}', [ 'message' => $error ]
-                     );
-
-        $value = $this->class->find_matches(NULL, $this->find_location);
-
-        $this->assertFalse($value);
-    }
-
-    /**
-     * Test finding in an accessible directory with an object needle.
-     *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
-     */
-    public function testGetMatchesOfAccessibleDirectoryWithObjectNeedle(): void
-    {
-        $error = 'RegexIterator::__construct() expects parameter 2 to be string, object given';
-
-        $this->logger->expects($this->once())
-                     ->method('error')
-                     ->with('{message}', [ 'message' => $error ]
-                     );
-
-        $value = $this->class->find_matches(new \stdClass(), $this->find_location);
-
-        $this->assertFalse($value);
-    }
-
-    /**
      * Test finding in an accessible directory with an boolean needle.
      *
      * @param bool $needle Boolean needle
@@ -93,7 +55,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
 
         $value = $this->class->find_matches($needle, $this->find_location);
 
-        $this->assertArrayEmpty($value);
+        $this->assertFalse($value);
     }
 
     /**
@@ -176,47 +138,6 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     }
 
     /**
-     * Test finding in an invalid directory.
-     *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
-     */
-    public function testGetMatchesOfNullDirectory(): void
-    {
-        $this->logger->expects($this->once())
-                     ->method('warning')
-                     ->with('{message}', [ 'message' => 'Directory name must not be empty.' ]);
-
-        $value = $this->class->find_matches('/^.+pattern/i', NULL);
-
-        $this->assertArrayEmpty($value);
-    }
-
-    /**
-     * Test finding in an invalid directory.
-     *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
-     */
-    public function testGetMatchesOfObjectDirectory(): void
-    {
-        $directory = new \stdClass();
-
-        $error = 'RecursiveDirectoryIterator::__construct() expects parameter 1 to be a valid path, object given';
-
-        $this->logger->expects($this->once())
-                     ->method('error')
-                     ->with("Couldn't open directory '{directory}': {message}",
-                        [
-                            'message'   => $error,
-                            'directory' => $directory,
-                        ]
-                     );
-
-        $value = $this->class->find_matches('/^.+pattern/i', $directory);
-
-        $this->assertFalse($value);
-    }
-
-    /**
      * Test finding in an boolean directory.
      *
      * @param bool $directory Boolean directory value
@@ -229,7 +150,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
         $this->logger->expects($this->never())
                      ->method('error');
 
-        $value = $this->class->find_matches('/^.+pattern/i', NULL);
+        $value = $this->class->find_matches('/^.+pattern/i', $directory);
 
         $this->assertArrayEmpty($value);
     }

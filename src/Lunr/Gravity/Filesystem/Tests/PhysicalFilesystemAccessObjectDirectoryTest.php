@@ -128,32 +128,6 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
     }
 
     /**
-     * Test listing an invalid directory.
-     *
-     * @param mixed $directory Invalid directory value
-     *
-     * @dataProvider invalidNameProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
-     */
-    public function testGetListingOfInvalidDirectory($directory): void
-    {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
-        {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
-        }
-        else
-        {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
-        }
-
-        $value = $this->class->get_directory_listing($directory);
-
-        $this->assertArrayEmpty($value);
-    }
-
-    /**
      * Test listing an boolean directory.
      *
      * @param bool $directory Boolean directory value

@@ -111,32 +111,6 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that get_file_content() with invalid file names.
      *
-     * @param mixed $file Invalid filename
-     *
-     * @dataProvider invalidNameProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
-     */
-    public function testGetFileContentWithInvalidFilenames($file): void
-    {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
-        {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
-        }
-        else
-        {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
-        }
-
-        $fetched = $this->class->get_file_content($file);
-
-        $this->assertFalse($fetched);
-    }
-
-    /**
-     * Test that get_file_content() with invalid file names.
-     *
      * @param bool $file Boolean filename
      *
      * @dataProvider booleanNameProvider
@@ -235,34 +209,6 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
         }
 
         $file = '/tmp';
-
-        $content = "Content\n";
-
-        $written = $this->class->put_file_content($file, $content);
-
-        $this->assertFalse($written);
-    }
-
-    /**
-     * Test that put_file_content() with invalid file names.
-     *
-     * @param mixed $file Invalid filename
-     *
-     * @dataProvider invalidNameProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
-     */
-    public function testPutFileContentWithInvalidFilenames($file): void
-    {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
-        {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
-        }
-        else
-        {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
-        }
 
         $content = "Content\n";
 
@@ -446,26 +392,6 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with('{message}', [ 'message' => $error ]);
-
-        $value = $this->class->get_file_object($file);
-
-        $this->assertFalse($value);
-    }
-
-    /**
-     * Test getting a SplFileObject for invalid file names.
-     *
-     * @param mixed  $file    Invalid filename
-     * @param string $message Expected error message
-     *
-     * @dataProvider invalidNameProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
-     */
-    public function testGetFileObjectForInvalidFilenames($file, $message): void
-    {
-        $this->logger->expects($this->once())
-                     ->method('error')
-                     ->with('{message}', [ 'message' => $message ]);
 
         $value = $this->class->get_file_object($file);
 

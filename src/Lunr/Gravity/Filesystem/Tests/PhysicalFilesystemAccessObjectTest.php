@@ -62,20 +62,6 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     }
 
     /**
-     * Unit test data provider for invalid file or directory names.
-     *
-     * @return array $names Array of invalid names,
-     */
-    public function invalidNameProvider(): array
-    {
-        $names   = [];
-        $names[] = [ NULL, 'SplFileObject::__construct(): Filename cannot be empty' ];
-        $names[] = [ new stdClass(), 'SplFileObject::__construct() expects parameter 1 to be a valid path, object given' ];
-
-        return $names;
-    }
-
-    /**
      * Unit test data provider for boolean file or directory names.
      *
      * @return array $names Array of boolean names,
@@ -83,7 +69,6 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     public function booleanNameProvider(): array
     {
         $names   = [];
-        $names[] = [ TRUE ];
         $names[] = [ FALSE ];
 
         return $names;
@@ -97,8 +82,6 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     public function invalidModesProvider(): array
     {
         $modes   = [];
-        $modes[] = [ NULL, ': failed to open stream: No such file or directory' ];
-        $modes[] = [ new stdClass(), ' expects parameter 2 to be string, object given' ];
         $modes[] = [ TRUE, ': failed to open stream: No such file or directory' ];
         $modes[] = [ FALSE, ': failed to open stream: No such file or directory' ];
 
@@ -113,7 +96,6 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     public function emptyFilepathValueProvider(): array
     {
         $filepath   = [];
-        $filepath[] = [ NULL ];
         $filepath[] = [ FALSE ];
 
         return $filepath;
@@ -129,7 +111,6 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
         $filepath   = [];
         $filepath[] = [ '/tmp56474q', 'RecursiveDirectoryIterator::__construct(/tmp56474q): failed to open dir: No such file or directory' ];
         $filepath[] = [ '/root', 'RecursiveDirectoryIterator::__construct(/root): failed to open dir: Permission denied' ];
-        $filepath[] = [ new stdClass(), 'RecursiveDirectoryIterator::__construct() expects parameter 1 to be a valid path, object given' ];
 
         return $filepath;
     }

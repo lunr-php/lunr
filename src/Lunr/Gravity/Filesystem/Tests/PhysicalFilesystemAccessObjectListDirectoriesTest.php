@@ -118,47 +118,6 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
     }
 
     /**
-     * Test listing directories in an invalid directory.
-     *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_directories
-     */
-    public function testGetListOfDirectoriesInNullDirectory(): void
-    {
-        $this->logger->expects($this->once())
-                     ->method('warning')
-                     ->with('{message}', [ 'message' => 'Directory name must not be empty.' ]);
-
-        $value = $this->class->get_list_of_directories(NULL);
-
-        $this->assertArrayEmpty($value);
-    }
-
-    /**
-     * Test listing directories in an invalid directory.
-     *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_directories
-     */
-    public function testGetListOfDirectoriesInObjectDirectory(): void
-    {
-        $directory = new \stdClass();
-
-        $error = 'DirectoryIterator::__construct() expects parameter 1 to be a valid path, object given';
-
-        $this->logger->expects($this->once())
-                     ->method('error')
-                     ->with("Couldn't open directory '{directory}': {message}",
-                        [
-                            'message'   => $error,
-                            'directory' => $directory,
-                        ]
-                     );
-
-        $value = $this->class->get_list_of_directories($directory);
-
-        $this->assertArrayEmpty($value);
-    }
-
-    /**
      * Test listing directories in an boolean directory.
      *
      * @param bool $directory Boolean directory value

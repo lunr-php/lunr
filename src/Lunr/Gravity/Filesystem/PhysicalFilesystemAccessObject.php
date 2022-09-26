@@ -62,14 +62,9 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      *
      * @return array $contents List of directory in that directory
      */
-    public function get_list_of_directories($directory)
+    public function get_list_of_directories(string $directory)
     {
         $directories = [];
-
-        if (is_bool($directory))
-        {
-            return $directories;
-        }
 
         try
         {
@@ -103,14 +98,9 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      *
      * @return array $contents List of files in that directory
      */
-    public function get_list_of_files($directory)
+    public function get_list_of_files(string $directory)
     {
         $files = [];
-
-        if (is_bool($directory))
-        {
-            return $files;
-        }
 
         try
         {
@@ -144,7 +134,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      *
      * @return array $contents List of contents of that directory
      */
-    public function get_directory_listing($directory)
+    public function get_directory_listing(string $directory)
     {
         $raw_results = scandir($directory, SCANDIR_SORT_NONE);
 
@@ -160,11 +150,11 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      * @return mixed $return Path of the file if found,
      *                       FALSE on failure
      */
-    public function find_matches($needle, $haystack)
+    public function find_matches(string $needle, string $haystack)
     {
-        if (is_bool($needle) || is_bool($haystack))
+        if ($needle === '')
         {
-            return [];
+            return FALSE;
         }
 
         try
@@ -209,11 +199,16 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      *
      * @return mixed $file SplFileObject instance for the path, FALSE on failure
      */
-    public function get_file_object($file, $mode = 'r')
+    public function get_file_object(string $file, string $mode = 'r')
     {
+        if ($file === '')
+        {
+            return FALSE;
+        }
+
         try
         {
-            return is_bool($file) ? FALSE : new SplFileObject($file, $mode);
+            return new SplFileObject($file, $mode);
         }
         catch (RuntimeException $runtime)
         {
@@ -245,7 +240,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      *
      * @return bool|string
      */
-    public function get_tmp_file($prefix = NULL)
+    public function get_tmp_file(?string $prefix = NULL)
     {
         $prefix = $prefix ?? uniqid();
         return tempnam(sys_get_temp_dir(), $prefix);
@@ -258,7 +253,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      *
      * @return bool
      */
-    public function rm($file)
+    public function rm(string $file)
     {
         return unlink($file);
     }
@@ -271,9 +266,14 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      * @return mixed $contents Contents of the given file as String on success,
      *                         FALSE on failure
      */
-    public function get_file_content($file)
+    public function get_file_content(string $file)
     {
-        return is_bool($file) ? FALSE : file_get_contents($file);
+        if ($file === '')
+        {
+            return FALSE;
+        }
+
+        return file_get_contents($file);
     }
 
     /**
@@ -287,8 +287,13 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      * @return mixed $return Written bytes as integer on success,
      *                       FALSE on failure
      */
-    public function put_file_content($file, $contents, $append = FALSE, $exclusive_lock = FALSE)
+    public function put_file_content(string $file, string $contents, bool $append = FALSE, bool $exclusive_lock = FALSE)
     {
+        if ($file === '')
+        {
+            return FALSE;
+        }
+
         $flags = 0;
 
         if ($append === TRUE)
@@ -301,7 +306,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
             $flags = $flags | LOCK_EX;
         }
 
-        return is_bool($file) ? FALSE : file_put_contents($file, $contents, $flags);
+        return file_put_contents($file, $contents, $flags);
     }
 
     /**
@@ -311,7 +316,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      *
      * @return bool TRUE when directory is removed and FALSE in a failure.
      */
-    public function rmdir($dir_path)
+    public function rmdir(string $dir_path)
     {
         try
         {
@@ -356,7 +361,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      *
      * @return bool TRUE when file is created and FALSE in failure.
      */
-    public function put_csv_file_content($file, $data, $delimiter = ',', $enclosure = '"')
+    public function put_csv_file_content(string $file, $data, string $delimiter = ',', string $enclosure = '"')
     {
         $fp = fopen($file, 'w');
 
@@ -387,7 +392,7 @@ class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, Files
      *
      * @return bool TRUE when directory is created or FALSE in failure.
      */
-    public function mkdir($pathname, $mode = 0755, $recursive = FALSE)
+    public function mkdir(string $pathname, $mode = 0755, bool $recursive = FALSE)
     {
         if (is_string($mode))
         {
