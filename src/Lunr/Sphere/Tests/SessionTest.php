@@ -74,21 +74,6 @@ abstract class SessionTest extends LunrBaseTest
         unset($this->reflection);
     }
 
-    /**
-     * Unit Test Data Provider for invalid SessionHandlers.
-     *
-     * @return array $handlers Set of invalid session handlers
-     */
-    public function invalidSessionHandlerProvider()
-    {
-        $handlers   = [];
-        $handlers[] = [ 'myHandler' ];
-        $handlers[] = [ 144 ];
-        $handlers[] = [ TRUE ];
-
-        return $handlers;
-    }
-
 }
 
 ?>

@@ -50,30 +50,6 @@ class SessionBaseTest extends SessionTest
     }
 
     /**
-     * Test that setSessionHandler returns false when receives invalid data.
-     *
-     * @param mixed $handler Invalid Session handler
-     *
-     * @dataProvider invalidSessionHandlerProvider
-     * @covers       Lunr\Sphere\Session::setSessionHandler
-     */
-    public function testSetSessionHandlerReturnsFalseWithInvalidData($handler): void
-    {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
-        {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
-        }
-        else
-        {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
-        }
-
-        $this->assertFalse($this->class->setSessionHandler($handler));
-    }
-
-    /**
      * Test that set doesn't do anything when closed and not started.
      *
      * @backupGlobals enabled

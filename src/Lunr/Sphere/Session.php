@@ -13,6 +13,8 @@
 
 namespace Lunr\Sphere;
 
+use SessionHandlerInterface;
+
 /**
  * Session Wrapper Class
  */
@@ -66,11 +68,11 @@ class Session
     /**
      * Set SessionHandler.
      *
-     * @param \SessionHandlerInterface $session_handler Session handler
+     * @param SessionHandlerInterface $session_handler Session handler
      *
      * @return bool
      */
-    public function setSessionHandler($session_handler)
+    public function setSessionHandler(SessionHandlerInterface $session_handler)
     {
         return session_set_save_handler($session_handler, TRUE);
     }
