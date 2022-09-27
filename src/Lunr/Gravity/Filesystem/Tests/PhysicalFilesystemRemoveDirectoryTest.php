@@ -75,6 +75,7 @@ class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObje
      *
      * @param mixed $directory NULL or FALSE directory value
      *
+     * @requires     PHP < 8
      * @dataProvider emptyFilepathValueProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::rmdir
      */

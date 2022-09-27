@@ -124,6 +124,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      *
      * @param bool $directory Boolean directory value
      *
+     * @requires     PHP < 8
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
      */

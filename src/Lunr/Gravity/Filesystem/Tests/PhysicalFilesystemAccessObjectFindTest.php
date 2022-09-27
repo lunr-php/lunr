@@ -142,6 +142,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      *
      * @param bool $directory Boolean directory value
      *
+     * @requires     PHP < 8
      * @dataProvider booleanNameProvider
      * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
      */
