@@ -98,7 +98,16 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
                        ->method('get_return_code')
                        ->willReturn(500);
 
-        $message = "call_user_func_array() expects parameter 1 to be a valid callback, class 'String' not found";
+        if (PHP_VERSION_ID > 80000)
+        {
+            $message  = 'call_user_func_array(): Argument #1 ($callback) must be a valid callback, ';
+            $message .= 'class "String" not found';
+        }
+        else
+        {
+            $message  = "call_user_func_array() expects parameter 1 to be a valid callback, ";
+            $message .= "class 'String' not found";
+        }
 
         $this->response->expects($this->once())
                        ->method('set_error_message')
@@ -130,7 +139,16 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
                        ->method('get_return_code')
                        ->willReturn(500);
 
-        $message = 'call_user_func_array() expects parameter 1 to be a valid callback, first array member is not a valid class name or object';
+        if (PHP_VERSION_ID > 80000)
+        {
+            $message  = 'call_user_func_array(): Argument #1 ($callback) must be a valid callback, ';
+            $message .= 'first array member is not a valid class name or object';
+        }
+        else
+        {
+            $message  = 'call_user_func_array() expects parameter 1 to be a valid callback, ';
+            $message .= 'first array member is not a valid class name or object';
+        }
 
         $this->response->expects($this->once())
                        ->method('set_error_message')
