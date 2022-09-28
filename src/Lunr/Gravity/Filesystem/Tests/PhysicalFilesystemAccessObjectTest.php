@@ -110,7 +110,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     {
         $filepath   = [];
 
-        if (PHP_VERSION_ID > 80000)
+        if (PHP_VERSION_ID >= 80000)
         {
             $filepath[] = [ '/tmp56474q', 'RecursiveDirectoryIterator::__construct(/tmp56474q): Failed to open directory: No such file or directory' ];
             $filepath[] = [ '/root', 'RecursiveDirectoryIterator::__construct(/root): Failed to open directory: Permission denied' ];

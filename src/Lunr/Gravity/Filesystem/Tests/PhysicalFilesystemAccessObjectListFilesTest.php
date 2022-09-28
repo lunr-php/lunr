@@ -51,7 +51,14 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
     {
         $directory = '/root';
 
-        $error = "DirectoryIterator::__construct($directory): failed to open dir: Permission denied";
+        if (PHP_VERSION_ID >= 80000)
+        {
+            $error = "DirectoryIterator::__construct($directory): Failed to open directory: Permission denied";
+        }
+        else
+        {
+            $error = "DirectoryIterator::__construct($directory): failed to open dir: Permission denied";
+        }
 
         $this->logger->expects($this->once())
                      ->method('error')
@@ -76,7 +83,14 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
     {
         $directory = '/tmp56474q';
 
-        $error = "DirectoryIterator::__construct($directory): failed to open dir: No such file or directory";
+        if (PHP_VERSION_ID >= 80000)
+        {
+            $error = "DirectoryIterator::__construct($directory): Failed to open directory: No such file or directory";
+        }
+        else
+        {
+            $error = "DirectoryIterator::__construct($directory): failed to open dir: No such file or directory";
+        }
 
         $this->logger->expects($this->once())
                      ->method('error')
@@ -101,7 +115,14 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
     {
         $directory = tempnam('/tmp', 'phpunit_');
 
-        $error = "DirectoryIterator::__construct($directory): failed to open dir: Not a directory";
+        if (PHP_VERSION_ID >= 80000)
+        {
+            $error = "DirectoryIterator::__construct($directory): Failed to open directory: Not a directory";
+        }
+        else
+        {
+            $error = "DirectoryIterator::__construct($directory): failed to open dir: Not a directory";
+        }
 
         $this->logger->expects($this->once())
                      ->method('error')

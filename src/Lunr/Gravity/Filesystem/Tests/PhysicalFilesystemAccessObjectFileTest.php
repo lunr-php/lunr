@@ -345,7 +345,14 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = '/root/ab45cd89';
 
-        $error = "SplFileObject::__construct($file): failed to open stream: Permission denied";
+        if (PHP_VERSION_ID >= 80000)
+        {
+            $error = "SplFileObject::__construct($file): Failed to open stream: Permission denied";
+        }
+        else
+        {
+            $error = "SplFileObject::__construct($file): failed to open stream: Permission denied";
+        }
 
         $this->logger->expects($this->once())
                      ->method('error')
@@ -365,7 +372,14 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = sys_get_temp_dir() . '/ab65cd89';
 
-        $error = "SplFileObject::__construct($file): failed to open stream: No such file or directory";
+        if (PHP_VERSION_ID >= 80000)
+        {
+            $error = "SplFileObject::__construct($file): Failed to open stream: No such file or directory";
+        }
+        else
+        {
+            $error = "SplFileObject::__construct($file): failed to open stream: No such file or directory";
+        }
 
         $this->assertFalse(file_exists($file));
 

@@ -51,7 +51,14 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
     {
         $directory = '/root';
 
-        $error = "DirectoryIterator::__construct($directory): failed to open dir: Permission denied";
+        if (PHP_VERSION_ID >= 80000)
+        {
+            $error = "DirectoryIterator::__construct($directory): Failed to open directory: Permission denied";
+        }
+        else
+        {
+            $error = "DirectoryIterator::__construct($directory): failed to open dir: Permission denied";
+        }
 
         $this->logger->expects($this->once())
                      ->method('error')
@@ -76,7 +83,14 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
     {
         $directory = '/tmp56474q';
 
-        $error = "DirectoryIterator::__construct($directory): failed to open dir: No such file or directory";
+        if (PHP_VERSION_ID >= 80000)
+        {
+            $error = "DirectoryIterator::__construct($directory): Failed to open directory: No such file or directory";
+        }
+        else
+        {
+            $error = "DirectoryIterator::__construct($directory): failed to open dir: No such file or directory";
+        }
 
         $this->logger->expects($this->once())
                      ->method('error')
@@ -101,11 +115,20 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
     {
         $directory = tempnam('/tmp', 'phpunit_');;
 
+        if (PHP_VERSION_ID >= 80000)
+        {
+            $error = "DirectoryIterator::__construct($directory): Failed to open directory: Not a directory";
+        }
+        else
+        {
+            $error = "DirectoryIterator::__construct($directory): failed to open dir: Not a directory";
+        }
+
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with("Couldn't open directory '{directory}': {message}",
                         [
-                            'message'   => "DirectoryIterator::__construct($directory): failed to open dir: Not a directory",
+                            'message'   => $error,
                             'directory' => $directory,
                         ]
                      );
