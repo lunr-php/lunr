@@ -228,16 +228,17 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      */
     public function testEscapeObjectAsIntValue(): void
     {
-        if (class_exists('\PHPUnit\Framework\Error\Notice'))
+        if (PHP_VERSION_ID >= 80000)
         {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Notice');
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
         }
         else
         {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Notice');
+            $this->expectException('\PHPUnit\Framework\Error\Notice');
         }
+
+        $message = 'Object of class ' . get_class($this->class) . ' could not be converted to int';
+        $this->expectExceptionMessage($message);
 
         $this->assertEquals(0, $this->class->intvalue($this->class));
     }
@@ -277,16 +278,17 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
      */
     public function testEscapeObjectAsFloatValue(): void
     {
-        if (class_exists('\PHPUnit\Framework\Error\Notice'))
+        if (PHP_VERSION_ID >= 80000)
         {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Notice');
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
         }
         else
         {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Notice');
+            $this->expectException('\PHPUnit\Framework\Error\Notice');
         }
+
+        $message = 'Object of class ' . get_class($this->class) . ' could not be converted to float';
+        $this->expectExceptionMessage($message);
 
         $this->assertEquals(0, $this->class->floatvalue($this->class));
     }
