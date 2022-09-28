@@ -50,15 +50,15 @@ class LunrSQLite3Test extends LunrBaseTest
      */
     public function testBusyTimeoutThrowsWarning(): void
     {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        if (PHP_VERSION_ID > 80000)
         {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectException('\Error');
+            $this->expectExceptionMessage('The SQLite3 object has not been correctly initialised or is already closed');
         }
         else
         {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectExceptionMessage('SQLite3::busyTimeout(): The SQLite3 object has not been correctly initialised');
         }
 
         $this->assertFALSE($this->class->busyTimeout(1000));
@@ -69,15 +69,15 @@ class LunrSQLite3Test extends LunrBaseTest
      */
     public function testChangesThrowsWarning(): void
     {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        if (PHP_VERSION_ID > 80000)
         {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectException('\Error');
+            $this->expectExceptionMessage('The SQLite3 object has not been correctly initialised or is already closed');
         }
         else
         {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectExceptionMessage('SQLite3::changes(): The SQLite3 object has not been correctly initialised');
         }
 
         $this->assertEquals(0, $this->class->changes());
@@ -104,15 +104,15 @@ class LunrSQLite3Test extends LunrBaseTest
      */
     public function testExecThrowsWarning(): void
     {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        if (PHP_VERSION_ID > 80000)
         {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectException('\Error');
+            $this->expectExceptionMessage('The SQLite3 object has not been correctly initialised or is already closed');
         }
         else
         {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectExceptionMessage('SQLite3::exec(): The SQLite3 object has not been correctly initialised');
         }
 
         $this->assertFalse($this->class->exec('Test'));
@@ -123,15 +123,15 @@ class LunrSQLite3Test extends LunrBaseTest
      */
     public function testLastErrorCodeThrowsWarning(): void
     {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        if (PHP_VERSION_ID > 80000)
         {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectException('\Error');
+            $this->expectExceptionMessage('The SQLite3 object has not been correctly initialised or is already closed');
         }
         else
         {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectExceptionMessage('SQLite3::lastErrorCode(): The SQLite3 object has not been correctly initialised');
         }
 
         $this->assertEquals(0, $this->class->lastErrorCode());
@@ -142,15 +142,15 @@ class LunrSQLite3Test extends LunrBaseTest
      */
     public function testLastErrorMsgThrowsWarning(): void
     {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        if (PHP_VERSION_ID > 80000)
         {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectException('\Error');
+            $this->expectExceptionMessage('The SQLite3 object has not been correctly initialised or is already closed');
         }
         else
         {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectExceptionMessage('SQLite3::lastErrorMsg(): The SQLite3 object has not been correctly initialised');
         }
 
         $this->assertEquals(0, $this->class->lastErrorMsg());
@@ -161,15 +161,15 @@ class LunrSQLite3Test extends LunrBaseTest
      */
     public function testLastInsertRowIDThrowsWarning(): void
     {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        if (PHP_VERSION_ID > 80000)
         {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectException('\Error');
+            $this->expectExceptionMessage('The SQLite3 object has not been correctly initialised or is already closed');
         }
         else
         {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectExceptionMessage('SQLite3::lastInsertRowID(): The SQLite3 object has not been correctly initialised');
         }
 
         $this->assertEquals(0, $this->class->lastInsertRowID());
@@ -180,15 +180,15 @@ class LunrSQLite3Test extends LunrBaseTest
      */
     public function testPrepareThrowsWarning(): void
     {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        if (PHP_VERSION_ID > 80000)
         {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectException('\Error');
+            $this->expectExceptionMessage('The SQLite3 object has not been correctly initialised or is already closed');
         }
         else
         {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectExceptionMessage('SQLite3::prepare(): The SQLite3 object has not been correctly initialised');
         }
 
         $this->assertFalse($this->class->prepare('Test'));
@@ -199,15 +199,15 @@ class LunrSQLite3Test extends LunrBaseTest
      */
     public function testQueryThrowsWarning(): void
     {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        if (PHP_VERSION_ID > 80000)
         {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectException('\Error');
+            $this->expectExceptionMessage('The SQLite3 object has not been correctly initialised or is already closed');
         }
         else
         {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectExceptionMessage('SQLite3::query(): The SQLite3 object has not been correctly initialised');
         }
 
         $this->assertFalse($this->class->query('Test'));
@@ -218,15 +218,15 @@ class LunrSQLite3Test extends LunrBaseTest
      */
     public function testQuerySingleThrowsWarning(): void
     {
-        if (class_exists('\PHPUnit\Framework\Error\Warning'))
+        if (PHP_VERSION_ID > 80000)
         {
-            // PHPUnit 6
-            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectException('\Error');
+            $this->expectExceptionMessage('The SQLite3 object has not been correctly initialised or is already closed');
         }
         else
         {
-            // PHPUnit 5
-            $this->expectException('\PHPUnit_Framework_Error_Warning');
+            $this->expectException('\PHPUnit\Framework\Error\Warning');
+            $this->expectExceptionMessage('SQLite3::querySingle(): The SQLite3 object has not been correctly initialised');
         }
 
         $this->assertFalse($this->class->querySingle('Test'));

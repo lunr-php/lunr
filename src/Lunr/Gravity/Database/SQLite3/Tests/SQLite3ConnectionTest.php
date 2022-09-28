@@ -38,6 +38,12 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
     protected $sqlite3;
 
     /**
+     * Mock instance of the SQLite3Result class.
+     * @var SQLite3Result
+     */
+    protected $sqlite3_result;
+
+    /**
      * Mock instance of the Configuration class.
      * @var Configuration
      */
@@ -77,6 +83,10 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->sqlite3 = $this->getMockBuilder('Lunr\Gravity\Database\SQLite3\LunrSQLite3')->getMock();
+
+        $this->sqlite3_result = $this->getMockBuilder('SQLite3Result')
+                                     ->disableOriginalConstructor()
+                                     ->getMock();
 
         $this->class = new SQLite3Connection($this->configuration, $this->logger, $this->sqlite3);
 
@@ -123,6 +133,10 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
 
         $this->sqlite3 = $this->getMockBuilder('Lunr\Gravity\Database\SQLite3\LunrSQLite3')->getMock();
 
+        $this->sqlite3_result = $this->getMockBuilder('SQLite3Result')
+                                     ->disableOriginalConstructor()
+                                     ->getMock();
+
         $this->class = new SQLite3Connection($this->configuration, $this->logger, $this->sqlite3);
 
         $this->reflection = new ReflectionClass('Lunr\Gravity\Database\SQLite3\SQLite3Connection');
@@ -137,6 +151,7 @@ abstract class SQLite3ConnectionTest extends LunrBaseTest
         unset($this->sub_configuration);
         unset($this->configuration);
         unset($this->sqlite3);
+        unset($this->sqlite3_result);
         unset($this->class);
         unset($this->reflection);
     }

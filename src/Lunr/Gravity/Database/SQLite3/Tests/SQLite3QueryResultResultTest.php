@@ -115,7 +115,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
         $this->sqlite3_result->expects($this->exactly(3))
                              ->method('fetchArray')
                              ->with(SQLITE3_ASSOC)
-                             ->willReturnOnConsecutiveCalls($result[0], $result[1], NULL);
+                             ->willReturnOnConsecutiveCalls($result[0], $result[1], FALSE);
 
         $value = $this->class->result_array();
 
@@ -135,7 +135,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
         $this->sqlite3_result->expects($this->exactly(3))
                              ->method('fetchArray')
                              ->with(SQLITE3_NUM)
-                             ->willReturnOnConsecutiveCalls($result[0], $result[1], NULL);
+                             ->willReturnOnConsecutiveCalls($result[0], $result[1], FALSE);
 
         $value = $this->class->result_array(FALSE);
 
@@ -157,7 +157,7 @@ class SQLite3QueryResultResultTest extends SQLite3QueryResultTest
                              ->willReturnOnConsecutiveCalls(
                                  [ 'col1' => 'val1', 'col2' => 'val2' ],
                                  [ 'col1' => 'val3', 'col2' => 'val4' ],
-                                 NULL
+                                 FALSE
                              );
 
         $value = $this->class->result_column('col1');

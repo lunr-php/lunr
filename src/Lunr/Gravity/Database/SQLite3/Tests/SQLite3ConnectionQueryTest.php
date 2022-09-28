@@ -29,6 +29,13 @@ class SQLite3ConnectionQueryTest extends SQLite3ConnectionTest
      */
     public function testQueryThrowsExceptionWhenNotConnected(): void
     {
+        $this->sqlite3->expects($this->once())
+                      ->method('open');
+
+        $this->sqlite3->expects($this->once())
+                      ->method('lastErrorCode')
+                      ->willReturn(1);
+
         $this->expectException('Lunr\Gravity\Database\Exceptions\ConnectionException');
         $this->expectExceptionMessage('Could not establish connection to the database!');
 
@@ -46,7 +53,7 @@ class SQLite3ConnectionQueryTest extends SQLite3ConnectionTest
 
         $this->sqlite3->expects($this->once())
                       ->method('query')
-                      ->will($this->returnValue(TRUE));
+                      ->will($this->returnValue($this->sqlite3_result));
 
         $query = $this->class->query('query');
 
