@@ -79,6 +79,29 @@ class Model
         return TRUE;
     }
 
+    /**
+     * Get an item from the cache or seed the cache if no item is present.
+     *
+     * @param string   $id       ID of the item
+     * @param callable $callable The callable to seed the cache with
+     * @param array    $args     Arguments to the callback
+     *
+     * @return mixed Cache or Callable return
+     */
+    protected function cache_if_needed(string $id, callable $callable, array $args = [])
+    {
+        $item = $this->cache->getItem($id);
+        if ($item->isHit())
+        {
+            return $item->get();
+        }
+
+        $value = call_user_func_array($callable, $args);
+        $this->set_in_cache($id, $value);
+
+        return $value;
+    }
+
 }
 
 ?>

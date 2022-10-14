@@ -124,6 +124,109 @@ class ModelCacheTest extends ModelTest
         $this->assertTrue($result);
     }
 
+    /**
+     * Test that cache_if_needed() returns the cache item if one is found.
+     *
+     * @covers \Lunr\Corona\Model::cache_if_needed
+     */
+    public function testCacheIfNeededReturnsFromCacheIfFound()
+    {
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('foo')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('isHit')
+                   ->willReturn(TRUE);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('bar');
+
+        $method = $this->get_accessible_reflection_method('cache_if_needed');
+
+        $result = $method->invokeArgs($this->class, [ 'foo', fn () => 'test' ]);
+
+        $this->assertEquals('bar', $result);
+    }
+
+    /**
+     * Test that cache_if_needed() returns the cache item if one is found.
+     *
+     * @covers \Lunr\Corona\Model::cache_if_needed
+     */
+    public function testCacheIfNeededCachesWhenNeeded()
+    {
+        $this->cache->expects($this->exactly(2))
+                    ->method('getItem')
+                    ->with('foo')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('isHit')
+                   ->willReturn(FALSE);
+
+        $this->item->expects($this->never())
+                   ->method('get');
+
+        $this->item->expects($this->once())
+                   ->method('expiresAfter')
+                   ->with(600);
+
+        $this->item->expects($this->once())
+                   ->method('set')
+                   ->with('test');
+
+        $this->cache->expects($this->once())
+                    ->method('save')
+                    ->with($this->item);
+
+        $method = $this->get_accessible_reflection_method('cache_if_needed');
+
+        $result = $method->invokeArgs($this->class, [ 'foo', fn () => 'test' ]);
+
+        $this->assertEquals('test', $result);
+    }
+
+    /**
+     * Test that cache_if_needed() returns the cache item if one is found.
+     *
+     * @covers \Lunr\Corona\Model::cache_if_needed
+     */
+    public function testCacheIfNeededCachesWhenNeededWithArgs()
+    {
+        $this->cache->expects($this->exactly(2))
+                    ->method('getItem')
+                    ->with('foo')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('isHit')
+                   ->willReturn(FALSE);
+
+        $this->item->expects($this->never())
+                   ->method('get');
+
+        $this->item->expects($this->once())
+                   ->method('expiresAfter')
+                   ->with(600);
+
+        $this->item->expects($this->once())
+                   ->method('set')
+                   ->with('test param');
+
+        $this->cache->expects($this->once())
+                    ->method('save')
+                    ->with($this->item);
+
+        $method = $this->get_accessible_reflection_method('cache_if_needed');
+
+        $result = $method->invokeArgs($this->class, [ 'foo', fn ($param) => 'test ' . $param, ['param'] ]);
+
+        $this->assertEquals('test param', $result);
+    }
+
 }
 
 ?>
