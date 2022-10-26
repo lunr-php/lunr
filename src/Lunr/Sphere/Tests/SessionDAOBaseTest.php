@@ -83,6 +83,26 @@ class SessionDAOBaseTest extends SessionDAOTest
                            ->method('has_failed')
                            ->will($this->returnValue(TRUE));
 
+        $this->query_result->expects($this->once())
+                           ->method('has_lock_timeout')
+                           ->will($this->returnValue(FALSE));
+
+        $this->query_result->expects($this->once())
+                           ->method('has_deadlock')
+                           ->will($this->returnValue(FALSE));
+
+        $this->query_result->expects($this->exactly(2))
+                           ->method('query')
+                           ->will($this->returnValue('QUERY'));
+
+        $this->query_result->expects($this->exactly(2))
+                           ->method('error_message')
+                           ->will($this->returnValue('Some Error!'));
+
+        $this->query_result->expects($this->exactly(1))
+                           ->method('error_number')
+                           ->will($this->returnValue(1));
+
         $this->expectException('Lunr\Gravity\Database\Exceptions\QueryException');
         $this->expectExceptionMessage('Database query error!');
 

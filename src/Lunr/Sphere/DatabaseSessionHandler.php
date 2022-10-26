@@ -67,7 +67,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface
      *
      * @return bool $return Returns always true
      */
-    public function open($path, $name)
+    public function open($path, $name): bool
     {
         return TRUE;
     }
@@ -80,7 +80,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface
      *
      * @return bool $return Returns always true
      */
-    public function close()
+    public function close(): bool
     {
         return TRUE;
     }
@@ -92,6 +92,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface
      *
      * @return mixed $return Session data on success, False on failure
      */
+    #[\ReturnTypeWillChange]
     public function read($id)
     {
         return $this->sdao->read_session_data($id);
@@ -105,7 +106,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface
      *
      * @return bool $return Returns always true
      */
-    public function write($id, $data)
+    public function write($id, $data): bool
     {
         $this->sdao->write_session_data($id, $data, time() + $this->lifetime);
         return TRUE;
@@ -118,7 +119,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface
      *
      * @return bool $return Returns always true
      */
-    public function destroy($id)
+    public function destroy($id): bool
     {
         $this->sdao->delete_session($id);
         return TRUE;
@@ -131,6 +132,7 @@ class DatabaseSessionHandler implements SessionHandlerInterface
      *
      * @return bool $return Returns always true
      */
+    #[\ReturnTypeWillChange]
     public function gc($maxlifetime)
     {
         $this->sdao->session_gc($maxlifetime);
