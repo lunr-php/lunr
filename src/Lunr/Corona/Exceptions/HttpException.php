@@ -10,7 +10,7 @@
 
 namespace Lunr\Corona\Exceptions;
 
-use \Exception;
+use Exception;
 
 /**
  * Exception for an HTTP result.
@@ -22,7 +22,7 @@ class HttpException extends Exception
      * Application error code.
      * @var int
      */
-    protected $app_code;
+    protected int $app_code;
 
     /**
      * Constructor.
@@ -32,9 +32,9 @@ class HttpException extends Exception
      * @param int            $app_code Application error code
      * @param Exception|null $previous The previously thrown exception
      */
-    public function __construct($message = NULL, $code = 0, $app_code = 0, Exception $previous = NULL)
+    public function __construct(?string $message = NULL, int $code = 0, int $app_code = 0, Exception $previous = NULL)
     {
-        parent::__construct($message, $code, $previous);
+        parent::__construct($message ?? '', $code, $previous);
 
         $this->app_code = $app_code !== 0 ? $app_code : $code;
     }
@@ -44,7 +44,7 @@ class HttpException extends Exception
      *
      * @return int application error code
      */
-    final public function getAppCode()
+    final public function getAppCode(): int
     {
         return $this->app_code;
     }

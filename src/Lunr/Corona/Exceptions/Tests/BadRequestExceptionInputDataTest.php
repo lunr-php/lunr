@@ -32,7 +32,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
 
         $this->assertPropertyEquals('key', 'foo');
         $this->assertPropertyEquals('value', 'bar');
-        $this->assertTrue($this->get_reflection_property_value('dataAvailable'));
+        $this->assertTrue($this->class->isDataAvailable());
     }
 
     /**
@@ -47,7 +47,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
         $this->class->setReport($report);
 
         $this->assertPropertyEquals('report', $report);
-        $this->assertTrue($this->get_reflection_property_value('reportAvailable'));
+        $this->assertTrue($this->class->isReportAvailable());
     }
 
     /**
@@ -61,8 +61,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
 
         $this->class->setReport($report);
 
-        $this->assertPropertyEquals('report', NULL);
-        $this->assertFalse($this->get_reflection_property_value('reportAvailable'));
+        $this->assertFalse($this->class->isReportAvailable());
     }
 
     /**
@@ -87,7 +86,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
         $this->class->setArrayReport($failures);
 
         $this->assertPropertyEquals('report', $report);
-        $this->assertTrue($this->get_reflection_property_value('reportAvailable'));
+        $this->assertTrue($this->class->isReportAvailable());
     }
 
     /**
@@ -101,8 +100,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
 
         $this->class->setArrayReport($failures);
 
-        $this->assertPropertyEquals('report', NULL);
-        $this->assertFalse($this->get_reflection_property_value('reportAvailable'));
+        $this->assertFalse($this->class->isReportAvailable());
     }
 
     /**
@@ -150,7 +148,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
     {
         $this->assertFalse($this->class->isDataAvailable());
 
-        $this->set_reflection_property_value('dataAvailable', TRUE);
+        $this->set_reflection_property_value('key', '');
 
         $this->assertTrue($this->class->isDataAvailable());
     }
@@ -164,7 +162,7 @@ class BadRequestExceptionInputDataTest extends HttpExceptionTest
     {
         $this->assertFalse($this->class->isReportAvailable());
 
-        $this->set_reflection_property_value('reportAvailable', TRUE);
+        $this->set_reflection_property_value('report', '');
 
         $this->assertTrue($this->class->isReportAvailable());
     }

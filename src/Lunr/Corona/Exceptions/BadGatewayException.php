@@ -10,8 +10,8 @@
 
 namespace Lunr\Corona\Exceptions;
 
-use \Lunr\Corona\HttpCode;
-use \Exception;
+use Lunr\Corona\HttpCode;
+use Exception;
 
 /**
  * Exception for the BadGateway HTTP error (502).
@@ -26,7 +26,7 @@ class BadGatewayException extends HttpException
      * @param int            $app_code Application error code
      * @param Exception|null $previous The previously thrown exception
      */
-    public function __construct($message = NULL, $app_code = 0, Exception $previous = NULL)
+    public function __construct(?string $message = NULL, int $app_code = 0, Exception $previous = NULL)
     {
         parent::__construct($message, HttpCode::BAD_GATEWAY, $app_code, $previous);
     }

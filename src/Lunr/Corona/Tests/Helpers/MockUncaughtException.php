@@ -10,7 +10,7 @@
 
 namespace Lunr\Corona\Tests\Helpers;
 
-use \Exception;
+use Exception;
 
 /**
  * Mock uncaught exception.
@@ -25,9 +25,9 @@ class MockUncaughtException extends Exception
      * @param int            $code     The exception code
      * @param Exception|null $previous The previously thrown exception
      */
-    public function __construct($message = NULL, $code = 0, Exception $previous = NULL)
+    public function __construct(?string $message = NULL, int $code = 0, Exception $previous = NULL)
     {
-        parent::__construct($message, $code, $previous);
+        parent::__construct($message ?? '', $code, $previous);
     }
 
     /**
@@ -37,7 +37,7 @@ class MockUncaughtException extends Exception
      *
      * @return void
      */
-    public function setFile($file)
+    public function setFile(string $file): void
     {
         $this->file = $file;
     }
@@ -49,7 +49,7 @@ class MockUncaughtException extends Exception
      *
      * @return void
      */
-    public function setLine($line)
+    public function setLine(int $line): void
     {
         $this->line = $line;
     }
