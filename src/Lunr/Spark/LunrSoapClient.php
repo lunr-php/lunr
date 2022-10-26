@@ -24,7 +24,7 @@ class LunrSoapClient extends SoapClient
      * Headers set for the next request.
      * @var array
      */
-    protected $headers;
+    protected array $headers;
 
     /**
      * Constructor.
@@ -50,7 +50,7 @@ class LunrSoapClient extends SoapClient
      *
      * @return LunrSoapClient Self reference
      */
-    public function init($wsdl, $options)
+    public function init(string $wsdl, array $options): self
     {
         parent::__construct($wsdl, $options);
         return $this;
@@ -63,9 +63,9 @@ class LunrSoapClient extends SoapClient
      * @param string $name      Header name
      * @param array  $data      Header data
      *
-     * @return SoapHeader header created
+     * @return SoapHeader Header created
      */
-    public function create_header($namespace, $name, $data)
+    public function create_header(string $namespace, string $name, array $data): SoapHeader
     {
         return new SoapHeader($namespace, $name, $data);
     }
@@ -75,7 +75,7 @@ class LunrSoapClient extends SoapClient
      *
      * @param array|SoapHeader|null $headers Headers to set
      *
-     * @return LunrSoapClient Self reference
+     * @return static Self reference
      */
     public function set_headers($headers = NULL)
     {
@@ -103,7 +103,7 @@ class LunrSoapClient extends SoapClient
      *
      * @return array Array of SoapHeader classes for the next request
      */
-    public function get_headers()
+    public function get_headers(): array
     {
         return $this->headers;
     }
@@ -117,18 +117,19 @@ class LunrSoapClient extends SoapClient
      * soapaction is unknown, uri differs from the default or when sending
      * and/or receiving SOAP Headers.
      *
-     * @param string $function_name The name of the SOAP function to call.
-     * @param array  $arguments     An array of the arguments to pass to the function.
-     * @param array  $options       An associative array of options to pass to the client.
-     * @param mixed  $input_headers An array of headers to be sent along with the SOAP request.
-     * @param array $output_headers If supplied, this array will be filled with the headers from the SOAP response.
+     * @param string     $name          The name of the SOAP function to call.
+     * @param array      $arguments     An array of the arguments to pass to the function.
+     * @param array|null $options       An associative array of options to pass to the client.
+     * @param mixed|null $inputHeaders  An array of headers to be sent along with the SOAP request.
+     * @param array|null $outputHeaders If supplied, this array will be filled with the headers from the SOAP response.
      *
      * @return mixed Single value or array of values
      **/
-    public function __soapCall($name, $args, $options = NULL, $inputHeaders = NULL, &$outputHeaders = NULL)
+    #[\ReturnTypeWillChange]
+    public function __soapCall($name, $arguments, $options = NULL, $inputHeaders = NULL, &$outputHeaders = NULL)
     {
         $this->headers = [];
-        return parent::__soapCall($name, $args, $options, $inputHeaders, $outputHeaders);
+        return parent::__soapCall($name, $arguments, $options, $inputHeaders, $outputHeaders);
     }
 
 }

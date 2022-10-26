@@ -40,25 +40,25 @@ abstract class Api
 
     /**
      * Requested fields of the profile.
-     * @var Array
+     * @var array
      */
     protected $fields;
 
     /**
      * Facebook resource identifier
-     * @var String
+     * @var string
      */
     protected $id;
 
     /**
      * Returned data.
-     * @var Array
+     * @var array
      */
     protected $data;
 
     /**
      * Boolean flag whether an access token was used for the request.
-     * @var Boolean
+     * @var bool
      */
     protected $used_access_token;
 
@@ -102,7 +102,7 @@ abstract class Api
      *
      * @return mixed $return Value of the chosen key
      */
-    public function __get($key)
+    public function __get(string $key)
     {
         switch ($key)
         {
@@ -120,11 +120,11 @@ abstract class Api
      * Set shared credentials.
      *
      * @param string $key   Key name
-     * @param string $value Value to set
+     * @param mixed $value Value to set
      *
      * @return void
      */
-    public function __set($key, $value)
+    public function __set(string $key, $value)
     {
         switch ($key)
         {
