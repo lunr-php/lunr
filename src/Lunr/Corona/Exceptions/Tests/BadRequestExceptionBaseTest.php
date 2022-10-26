@@ -38,14 +38,6 @@ class BadRequestExceptionBaseTest extends HttpExceptionTest
     }
 
     /**
-     * Test that the input data key was set correctly.
-     */
-    public function testInputDataKeyIsNull(): void
-    {
-        $this->assertNull($this->get_reflection_property_value('key'));
-    }
-
-    /**
      * Test that the input data value was set correctly.
      */
     public function testInputDataValueIsNull(): void
@@ -56,9 +48,9 @@ class BadRequestExceptionBaseTest extends HttpExceptionTest
     /**
      * Test that the input data flag was set correctly.
      */
-    public function testInputDataAvailableIsFalse(): void
+    public function testDefaultDataAvailableIsFalse(): void
     {
-        $this->assertFalse($this->get_reflection_property_value('dataAvailable'));
+        $this->assertFalse($this->class->isDataAvailable());
     }
 
     /**

@@ -10,8 +10,8 @@
 
 namespace Lunr\Corona\Exceptions;
 
-use \Lunr\Corona\HttpCode;
-use \Exception;
+use Lunr\Corona\HttpCode;
+use Exception;
 
 /**
  * Exception for the Bad Request HTTP error (400).
@@ -23,7 +23,7 @@ class BadRequestException extends HttpException
      * Input data key.
      * @var string
      */
-    protected $key;
+    protected string $key;
 
     /**
      * Input data value
@@ -35,19 +35,7 @@ class BadRequestException extends HttpException
      * Report data
      * @var string
      */
-    protected $report;
-
-    /**
-     * Whether input data was set or not.
-     * @var bool
-     */
-    protected $dataAvailable;
-
-    /**
-     * Whether a detailed input data report was set or not.
-     * @var bool
-     */
-    protected $reportAvailable;
+    protected string $report;
 
     /**
      * Constructor.
@@ -56,16 +44,9 @@ class BadRequestException extends HttpException
      * @param int            $app_code Application error code
      * @param Exception|null $previous The previously thrown exception
      */
-    public function __construct($message = NULL, $app_code = 0, Exception $previous = NULL)
+    public function __construct(?string $message = NULL, int $app_code = 0, Exception $previous = NULL)
     {
         parent::__construct($message, HttpCode::BAD_REQUEST, $app_code, $previous);
-
-        $this->key    = NULL;
-        $this->value  = NULL;
-        $this->report = NULL;
-
-        $this->dataAvailable   = FALSE;
-        $this->reportAvailable = FALSE;
     }
 
     /**
@@ -76,12 +57,10 @@ class BadRequestException extends HttpException
      *
      * @return void
      */
-    public function setData($key, $value)
+    public function setData(string $key, $value): void
     {
         $this->key   = $key;
         $this->value = $value;
-
-        $this->dataAvailable = TRUE;
     }
 
     /**
@@ -91,16 +70,14 @@ class BadRequestException extends HttpException
      *
      * @return void
      */
-    public function setReport($data)
+    public function setReport(string $data): void
     {
-        if (empty($data))
+        if ($data === '')
         {
             return;
         }
 
         $this->report = $data;
-
-        $this->reportAvailable = TRUE;
     }
 
     /**
@@ -110,9 +87,9 @@ class BadRequestException extends HttpException
      *
      * @return void
      */
-    public function setArrayReport($failures)
+    public function setArrayReport(array $failures): void
     {
-        if (empty($failures))
+        if ($failures === [])
         {
             return;
         }
@@ -126,16 +103,14 @@ class BadRequestException extends HttpException
                 $this->report .= "$key: $message\n";
             }
         }
-
-        $this->reportAvailable = TRUE;
     }
 
     /**
      * Get the input data key.
      *
-     * @return string Input data key
+     * @return string|null Input data key
      */
-    public function getDataKey()
+    public function getDataKey(): ?string
     {
         return $this->key;
     }
@@ -143,7 +118,7 @@ class BadRequestException extends HttpException
     /**
      * Get the input data value.
      *
-     * @return string Input data value
+     * @return mixed Input data value
      */
     public function getDataValue()
     {
@@ -155,7 +130,7 @@ class BadRequestException extends HttpException
      *
      * @return string Detailed input data report
      */
-    public function getReport()
+    public function getReport(): ?string
     {
         return $this->report;
     }
@@ -165,9 +140,9 @@ class BadRequestException extends HttpException
      *
      * @return bool Input data was set or not.
      */
-    public function isDataAvailable()
+    public function isDataAvailable(): bool
     {
-        return $this->dataAvailable;
+        return isset($this->key);
     }
 
     /**
@@ -175,9 +150,9 @@ class BadRequestException extends HttpException
      *
      * @return bool Input data report was set or not.
      */
-    public function isReportAvailable()
+    public function isReportAvailable(): bool
     {
-        return $this->reportAvailable;
+        return isset($this->report);
     }
 
 }
