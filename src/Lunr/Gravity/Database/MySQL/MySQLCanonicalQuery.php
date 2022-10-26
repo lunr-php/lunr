@@ -525,7 +525,7 @@ class MySQLCanonicalQuery
      *
      * @return array|null returns the range position of the start and end delimiters, if is not found returns null
      */
-    private function get_between_delimiter(string $string, string $start_del, string $end_del, int $offset = 0, array $ignore): ?array
+    private function get_between_delimiter(string $string, string $start_del, string $end_del, int $offset = 0, array $ignore = []): ?array
     {
         $end                   = strlen($string);
         $delimiter_start_index = NULL;

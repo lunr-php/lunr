@@ -10,6 +10,8 @@
 
 namespace Lunr\Gravity\Database\Exceptions;
 
+use Lunr\Gravity\Database\DatabaseQueryResultInterface;
+
 /**
  * Exception for a database query error.
  */
@@ -20,27 +22,27 @@ class QueryException extends DatabaseException
      * SQL query triggering the error.
      * @var string
      */
-    private $query;
+    private string $query;
 
     /**
      * Numerical error code for the error from the database system.
      * @var int
      */
-    private $database_error_code;
+    private int $database_error_code;
 
     /**
      * Error message from the database system.
      * @var string
      */
-    private $database_error_message;
+    private string $database_error_message;
 
     /**
      * Constructor.
      *
-     * @param \Lunr\Gravity\Database\DatabaseQueryResultInterface $query_result The query result class
-     * @param string                                              $message      The exception message
+     * @param DatabaseQueryResultInterface $query_result The query result class
+     * @param string                       $message      The exception message
      */
-    public function __construct($query_result, $message = NULL)
+    public function __construct(DatabaseQueryResultInterface $query_result, string $message = 'Query Exception!')
     {
         $this->query = $query_result->query();
 
@@ -57,7 +59,7 @@ class QueryException extends DatabaseException
      *
      * @return void
      */
-    public function setMessage($message)
+    public function setMessage(string $message): void
     {
         $this->message = $message;
     }
@@ -67,7 +69,7 @@ class QueryException extends DatabaseException
      *
      * @return string SQL query
      */
-    final public function getQuery()
+    final public function getQuery(): string
     {
         return $this->query;
     }
@@ -77,7 +79,7 @@ class QueryException extends DatabaseException
      *
      * @return int Error code
      */
-    final public function getDatabaseErrorCode()
+    final public function getDatabaseErrorCode(): int
     {
         return $this->database_error_code;
     }
@@ -87,7 +89,7 @@ class QueryException extends DatabaseException
      *
      * @return string Error message
      */
-    final public function getDatabaseErrorMessage()
+    final public function getDatabaseErrorMessage(): string
     {
         return $this->database_error_message;
     }

@@ -129,6 +129,10 @@ class DatabaseAccessObjectVerifyQuerySuccessTest extends DatabaseAccessObjectTes
               ->method('error_message')
               ->will($this->returnValue('message'));
 
+        $query->expects($this->exactly(1))
+              ->method('error_number')
+              ->will($this->returnValue(1));
+
         $query->expects($this->exactly(2))
               ->method('query')
               ->will($this->returnValue('query'));
@@ -165,6 +169,10 @@ class DatabaseAccessObjectVerifyQuerySuccessTest extends DatabaseAccessObjectTes
         $query->expects($this->exactly(2))
               ->method('error_message')
               ->will($this->returnValue('message'));
+
+        $query->expects($this->exactly(1))
+              ->method('error_number')
+              ->will($this->returnValue(1));
 
         $query->expects($this->exactly(2))
               ->method('query')

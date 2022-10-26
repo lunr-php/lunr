@@ -786,7 +786,7 @@ class MySQLSimpleDMLQueryBuilder implements DMLQueryBuilderInterface
      *
      * @return MySQLSimpleDMLQueryBuilder $self Self reference
      */
-    public function union($sql_query, $type = NULL)
+    public function union(string $sql_query, string $type = '')
     {
         $this->builder->union($this->escaper->query_value($sql_query), $type);
         return $this;

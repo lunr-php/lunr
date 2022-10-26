@@ -46,6 +46,10 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('has_failed')
               ->will($this->returnValue(TRUE));
 
+        $query->expects($this->exactly(1))
+              ->method('error_number')
+              ->will($this->returnValue(1));
+
         $query->expects($this->exactly(2))
               ->method('error_message')
               ->will($this->returnValue('message'));
@@ -165,6 +169,10 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('error_message')
               ->will($this->returnValue('message'));
 
+        $query->expects($this->exactly(1))
+              ->method('error_number')
+              ->will($this->returnValue(1));
+
         $query->expects($this->exactly(2))
               ->method('query')
               ->will($this->returnValue('query'));
@@ -259,6 +267,10 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $query->expects($this->exactly(2))
               ->method('error_message')
               ->will($this->returnValue('message'));
+
+        $query->expects($this->exactly(1))
+              ->method('error_number')
+              ->will($this->returnValue(1));
 
         $query->expects($this->exactly(2))
               ->method('query')
@@ -355,6 +367,10 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
               ->method('error_message')
               ->will($this->returnValue('message'));
 
+        $query->expects($this->exactly(1))
+              ->method('error_number')
+              ->will($this->returnValue(1));
+
         $query->expects($this->exactly(2))
               ->method('query')
               ->will($this->returnValue('query'));
@@ -449,6 +465,10 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $query->expects($this->exactly(2))
               ->method('error_message')
               ->will($this->returnValue('message'));
+
+        $query->expects($this->exactly(1))
+              ->method('error_number')
+              ->will($this->returnValue(1));
 
         $query->expects($this->exactly(2))
               ->method('query')
@@ -670,6 +690,10 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
             ->method('error_message')
             ->will($this->returnValue('message'));
 
+        $query->expects($this->exactly(1))
+              ->method('error_number')
+              ->will($this->returnValue(1));
+
         $query->expects($this->exactly(2))
             ->method('query')
             ->will($this->returnValue('query'));
@@ -726,6 +750,10 @@ class DatabaseAccessObjectResultsTest extends DatabaseAccessObjectTest
         $query->expects($this->exactly(2))
               ->method('error_message')
               ->will($this->returnValue('message'));
+
+        $query->expects($this->exactly(1))
+              ->method('error_number')
+              ->will($this->returnValue(1));
 
         $query->expects($this->exactly(2))
               ->method('query')
