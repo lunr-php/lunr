@@ -10,8 +10,9 @@
 
 namespace Lunr\Corona\Exceptions;
 
-use \Lunr\Corona\HttpCode;
-use \Exception;
+use Exception;
+use Lunr\Corona\HttpCode;
+use Throwable;
 
 /**
  * Exception for the Unprocessable Entity HTTP error (422).
@@ -26,7 +27,7 @@ class UnprocessableEntityException extends HttpException
      * @param int            $app_code The Exception code.
      * @param Exception|null $previous The previous exception used for the exception chaining.
      */
-    public function __construct($message = NULL, $app_code = 0, Exception $previous = NULL)
+    public function __construct(?string $message = NULL, int $app_code = 0, Exception $previous = NULL)
     {
         parent::__construct($message, HttpCode::UNPROCESSABLE_ENTITY, $app_code, $previous);
     }

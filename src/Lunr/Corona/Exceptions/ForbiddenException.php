@@ -10,8 +10,8 @@
 
 namespace Lunr\Corona\Exceptions;
 
-use \Lunr\Corona\HttpCode;
-use \Exception;
+use Lunr\Corona\HttpCode;
+use Exception;
 
 /**
  * Exception for the Forbidden HTTP error (403).
@@ -23,7 +23,7 @@ class ForbiddenException extends HttpException
      * Input data key.
      * @var string
      */
-    protected $key;
+    protected string $key;
 
     /**
      * Input data value
@@ -38,12 +38,9 @@ class ForbiddenException extends HttpException
      * @param int            $app_code Application error code
      * @param Exception|null $previous The previously thrown exception
      */
-    public function __construct($message = NULL, $app_code = 0, Exception $previous = NULL)
+    public function __construct(?string $message = NULL, int $app_code = 0, Exception $previous = NULL)
     {
         parent::__construct($message, HttpCode::FORBIDDEN, $app_code, $previous);
-
-        $this->key   = NULL;
-        $this->value = NULL;
     }
 
     /**
@@ -54,7 +51,7 @@ class ForbiddenException extends HttpException
      *
      * @return void
      */
-    public function setData(string $key, $value)
+    public function setData(string $key, $value): void
     {
         $this->key   = $key;
         $this->value = $value;
@@ -87,7 +84,7 @@ class ForbiddenException extends HttpException
      */
     public function isDataAvailable(): bool
     {
-        return $this->key !== NULL;
+        return isset($this->key);
     }
 
 }
