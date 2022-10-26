@@ -524,7 +524,7 @@ abstract class SQLDMLQueryBuilder extends DatabaseDMLQueryBuilder
     *
     * @return SQLDMLQueryBuilder $self Self reference
     */
-    public function union($sql_query, $operator = NULL)
+    public function union(string $sql_query, string $operator = '')
     {
         $this->sql_compound($sql_query, 'UNION', strtoupper($operator));
         return $this;

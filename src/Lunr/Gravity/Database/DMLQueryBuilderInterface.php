@@ -447,7 +447,7 @@ interface DMLQueryBuilderInterface
      *
      * @return DMLQueryBuilderInterface $self Self reference
      */
-    public function union($sql_query, $type);
+    public function union(string $sql_query, string $type);
 
     /**
      * Define the lock mode for a transaction.

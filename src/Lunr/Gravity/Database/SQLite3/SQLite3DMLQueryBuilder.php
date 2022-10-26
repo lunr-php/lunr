@@ -275,7 +275,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
-    public function except($sql_query, $operator = NULL)
+    public function except(string $sql_query, string $operator = '')
     {
         if (strtoupper($operator) !== 'DISTINCT')
         {
@@ -294,7 +294,7 @@ class SQLite3DMLQueryBuilder extends SQLDMLQueryBuilder
      *
      * @return SQLite3DMLQueryBuilder $self Self reference
      */
-    public function intersect($sql_query, $operator = NULL)
+    public function intersect(string $sql_query, string $operator = '')
     {
         if (strtoupper($operator) !== 'DISTINCT')
         {

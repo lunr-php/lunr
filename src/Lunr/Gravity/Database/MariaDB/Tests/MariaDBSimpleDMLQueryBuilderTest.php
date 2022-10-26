@@ -75,7 +75,7 @@ abstract class MariaDBSimpleDMLQueryBuilderTest extends TestCase
     public function compoundOperatorProvider(): array
     {
         $operators   = [];
-        $operators[] = [ NULL ];
+        $operators[] = [ '' ];
         $operators[] = [ 'ALL' ];
         $operators[] = [ 'DISTINCT' ];
         $operators[] = [ TRUE ];

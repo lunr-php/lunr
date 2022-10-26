@@ -58,7 +58,7 @@ class MariaDBDMLQueryBuilder extends MySQLDMLQueryBuilder
      *
      * @return MariaDBDMLQueryBuilder $self Self reference
      */
-    public function except($sql_query, $operator = NULL)
+    public function except(string $sql_query, string $operator = '')
     {
         $this->sql_compound($sql_query, 'EXCEPT', strtoupper($operator));
         return $this;
@@ -72,7 +72,7 @@ class MariaDBDMLQueryBuilder extends MySQLDMLQueryBuilder
      *
      * @return MariaDBDMLQueryBuilder $self Self reference
      */
-    public function intersect($sql_query, $operator = NULL)
+    public function intersect(string $sql_query, string $operator = '')
     {
         $this->sql_compound($sql_query, 'INTERSECT', strtoupper($operator));
         return $this;

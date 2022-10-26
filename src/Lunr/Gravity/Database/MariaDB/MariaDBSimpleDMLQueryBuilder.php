@@ -75,7 +75,7 @@ class MariaDBSimpleDMLQueryBuilder extends MySQLSimpleDMLQueryBuilder
      *
      * @return MariaDBSimpleDMLQueryBuilder $self Self reference
      */
-    public function intersect($sql_query, $type = NULL)
+    public function intersect(string $sql_query, string $type = '')
     {
         $this->builder->intersect($this->escaper->query_value($sql_query), $type);
         return $this;

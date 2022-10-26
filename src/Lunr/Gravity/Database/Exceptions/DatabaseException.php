@@ -10,7 +10,8 @@
 
 namespace Lunr\Gravity\Database\Exceptions;
 
-use \Exception;
+use Exception;
+use Throwable;
 
 /**
  * Exception for a database error.

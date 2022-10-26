@@ -101,7 +101,7 @@ abstract class MySQLSimpleDMLQueryBuilderTest extends LunrBaseTest
     public function unionOperatorProvider(): array
     {
         $operators   = [];
-        $operators[] = [ NULL ];
+        $operators[] = [ '' ];
         $operators[] = [ 'ALL' ];
         $operators[] = [ 'DISTINCT' ];
         $operators[] = [ TRUE ];

@@ -24,7 +24,7 @@ class DummyDeadlockException extends DeadlockException
      *
      * @param string $message The exception message
      */
-    public function __construct($message = NULL)
+    public function __construct(string $message = 'Dummy Deadlock!')
     {
         // Skip over the parent constructor to avoid having to specify the QueryResult class
         DatabaseException::__construct($message);
