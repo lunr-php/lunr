@@ -15,6 +15,10 @@ use Lunr\Gravity\Database\DatabaseQueryEscaper;
 
 /**
  * This class provides MySQL specific escaping methods for SQL query parts.
+ *
+ * @method string|null null_or_hexvalue($value)  Same as $this::hexvalue() but allowed to return null
+ * @method string|null null_or_uuidvalue($value) Same as $this::uuidvalue() but allowed to return null
+ * @method string|null null_or_geovalue($value)  Same as $this::geovalue() but allowed to return null
  */
 class MySQLQueryEscaper extends DatabaseQueryEscaper
 {

@@ -80,14 +80,14 @@ interface QueryEscaperInterface
     public function hexvalue($value, $collation = '', $charset = '');
 
     /**
-     * Define and escape input as a hexadecimal value.
+     * Define and escape input as a value in a LIKE expression.
      *
      * @param mixed  $value     Input
-     * @param string $match     Whether to match forward, backward or both
+     * @param string $match     Whether to match forward, backward or both. Defaults to both
      * @param string $collation Collation name
      * @param string $charset   Charset name
      *
-     * @return string $return Defined, escaped and unhexed value
+     * @return string $return Defined, escaped and wildcarded value
      */
     public function likevalue($value, $match = 'both', $collation = '', $charset = '');
 

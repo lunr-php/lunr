@@ -13,6 +13,13 @@ namespace Lunr\Gravity\Database;
 
 /**
  * This class provides common escaping methods for SQL query parts.
+ *
+ * @method int|null    null_or_intvalue($value)    Same as $this::intvalue() but allowed to return null
+ * @method float|null  null_or_floatvalue($value)  Same as $this::floatvalue() but allowed to return null
+ * @method string|null null_or_value($value)       Same as $this::value() but allowed to return null
+ * @method string|null null_or_likevalue($value)   Same as $this::likevalue() but allowed to return null
+ * @method string|null null_or_query_value($value) Same as $this::queryvalue() but allowed to return null
+ * @method string|null null_or_list_value($value)  Same as $this::list_value() but allowed to return null
  */
 abstract class DatabaseQueryEscaper implements QueryEscaperInterface
 {
@@ -152,6 +159,17 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
     }
 
     /**
+     * Define and escape input as value.
+     *
+     * @param mixed  $value     Input
+     * @param string $collation Collation name
+     * @param string $charset   Charset name
+     *
+     * @return string Defined and escaped value
+     */
+    public abstract function value($value, $collation = '', $charset = '');
+
+    /**
      * Define and escape input as integer value.
      *
      * @param mixed $value Input to escape as integer
@@ -168,7 +186,7 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
      *
      * @param mixed $value Input to escape as float
      *
-     * @return int Defined and escaped float value
+     * @return float Defined and escaped float value
      */
     public function floatvalue($value)
     {
