@@ -11,6 +11,8 @@
 
 namespace Lunr\Corona;
 
+use Psr\Cache\CacheItemPoolInterface;
+
 /**
  * Base Model class
  */
@@ -18,17 +20,17 @@ class Model
 {
 
     /**
-     * Shared instance of the cache Pool class.
-     * @var \Psr\Cache\CacheItemPoolInterface
+     * Shared instance of the cache Pool class or null.
+     * @var CacheItemPoolInterface|null
      */
     protected $cache;
 
     /**
      * Constructor.
      *
-     * @param \Psr\Cache\CacheItemPoolInterface $cache Shared instance of the PSR-6 cache Pool class.
+     * @param CacheItemPoolInterface|null $cache Shared instance of the PSR-6 cache Pool class.
      */
-    public function __construct($cache)
+    public function __construct(?CacheItemPoolInterface $cache = NULL)
     {
         $this->cache = $cache;
     }
@@ -90,6 +92,11 @@ class Model
      */
     protected function cache_if_needed(string $id, callable $callable, array $args = [])
     {
+        if ($this->cache === NULL)
+        {
+            return call_user_func_array($callable, $args);
+        }
+
         $item = $this->cache->getItem($id);
         if ($item->isHit())
         {

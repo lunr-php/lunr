@@ -129,6 +129,28 @@ class ModelCacheTest extends ModelTest
      *
      * @covers \Lunr\Corona\Model::cache_if_needed
      */
+    public function testCacheIfNeededReturnsWithoutCache()
+    {
+        $this->set_reflection_property_value('cache', NULL);
+
+        $this->cache->expects($this->never())
+                    ->method('getItem');
+
+        $this->item->expects($this->never())
+                   ->method('isHit');
+
+        $method = $this->get_accessible_reflection_method('cache_if_needed');
+
+        $result = $method->invokeArgs($this->class, [ 'foo', fn ($param) => 'test ' . $param, ['param'] ]);
+
+        $this->assertEquals('test param', $result);
+    }
+
+    /**
+     * Test that cache_if_needed() returns the cache item if one is found.
+     *
+     * @covers \Lunr\Corona\Model::cache_if_needed
+     */
     public function testCacheIfNeededReturnsFromCacheIfFound()
     {
         $this->cache->expects($this->once())
