@@ -34,13 +34,13 @@ abstract class GettextL10nProviderTest extends LunrBaseTest
      * The language used for testing.
      * @var String
      */
-    const LANGUAGE = 'de_DE';
+    protected const LANGUAGE = 'de_DE';
 
     /**
      * The domain used for testing.
      * @var String
      */
-    const DOMAIN = 'Lunr';
+    protected const DOMAIN = 'Lunr';
 
     /**
      * TestCase Constructor.

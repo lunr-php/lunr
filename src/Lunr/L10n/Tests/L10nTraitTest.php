@@ -33,7 +33,7 @@ class L10nTraitTest extends LunrBaseTest
      * The language used for testing.
      * @var String
      */
-    const LANGUAGE = 'de_DE';
+    protected const LANGUAGE = 'de_DE';
 
     /**
      * Test case constructor.

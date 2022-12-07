@@ -13,6 +13,8 @@
 
 namespace Lunr\L10n;
 
+use Psr\Log\LoggerInterface;
+
 /**
  * PHP (array) Localization Provider class
  */
@@ -27,7 +29,7 @@ class PHPL10nProvider extends L10nProvider
 
     /**
      * Whether the lang_array was initialized already or not.
-     * @var Boolean
+     * @var bool
      */
     private $initialized;
 

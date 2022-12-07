@@ -12,6 +12,9 @@
 namespace Lunr\L10n;
 
 use Lunr\Corona\HTMLView;
+use Lunr\Corona\Request;
+use Lunr\Corona\Response;
+use Lunr\Core\Configuration;
 
 /**
  * View class used by the Website
@@ -28,10 +31,10 @@ abstract class L10nHTMLView extends HTMLView
     /**
      * Constructor.
      *
-     * @param \Lunr\Corona\Request     $request       Shared instance of the Request class
-     * @param \Lunr\Corona\Response    $response      Shared instance of the Response class
-     * @param \Lunr\Core\Configuration $configuration Shared instance of the Configuration class
-     * @param L10nProvider             $l10nprovider  Shared instance of the L10nProvider class
+     * @param Request       $request       Shared instance of the Request class
+     * @param Response      $response      Shared instance of the Response class
+     * @param Configuration $configuration Shared instance of the Configuration class
+     * @param L10nProvider  $l10nprovider  Shared instance of the L10nProvider class
      */
     public function __construct($request, $response, $configuration, $l10nprovider)
     {

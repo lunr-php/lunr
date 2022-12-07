@@ -12,6 +12,8 @@
 
 namespace Lunr\L10n;
 
+use Psr\Log\LoggerInterface;
+
 /**
  * Gettext Localization Provider class
  */
@@ -20,9 +22,9 @@ class GettextL10nProvider extends L10nProvider
 
     /**
      * Define gettext msgid size limit
-     * @var Integer
+     * @var int
      */
-    const GETTEXT_MAX_MSGID_LENGTH = 4096;
+    private const GETTEXT_MAX_MSGID_LENGTH = 4096;
 
     /**
      * Constructor.

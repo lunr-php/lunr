@@ -14,6 +14,8 @@
 
 namespace Lunr\L10n;
 
+use Psr\Log\LoggerInterface;
+
 /**
  * Abstract Localization Provider class
  */
