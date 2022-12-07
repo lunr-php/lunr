@@ -3,10 +3,10 @@
 /**
  * This file contains the FrontControllerGetTest class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2013-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -33,12 +33,12 @@ class FrontControllerGetTest extends FrontControllerTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
-                      ->will($this->returnValue('function'));
+                      ->willReturn('function');
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->will($this->returnValue([ $result ]));
+                  ->willReturn([ $result ]);
 
         $value = $this->class->get_controller($dir);
 
@@ -57,12 +57,12 @@ class FrontControllerGetTest extends FrontControllerTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
-                      ->will($this->returnValue('function'));
+                      ->willReturn('function');
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->will($this->returnValue([]));
+                  ->willReturn([]);
 
         $value = $this->class->get_controller($dir);
 
@@ -81,12 +81,12 @@ class FrontControllerGetTest extends FrontControllerTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
-                      ->will($this->returnValue('function'));
+                      ->willReturn('function');
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->will($this->returnValue(FALSE));
+                  ->willReturn(FALSE);
 
         $value = $this->class->get_controller($dir);
 
@@ -105,7 +105,7 @@ class FrontControllerGetTest extends FrontControllerTest
         $this->request->expects($this->exactly(1))
                       ->method('__get')
                       ->with('controller')
-                      ->will($this->returnValue(NULL));
+                      ->willReturn(NULL);
 
         $this->fao->expects($this->never())
                   ->method('find_matches');
@@ -129,12 +129,12 @@ class FrontControllerGetTest extends FrontControllerTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
-                      ->will($this->returnValue('function'));
+                      ->willReturn('function');
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->will($this->returnValue([ $result, 'nr2' ]));
+                  ->willReturn([ $result, 'nr2' ]);
 
         $value = $this->class->get_controller($dir);
 
@@ -153,7 +153,7 @@ class FrontControllerGetTest extends FrontControllerTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
-                      ->will($this->returnValue('function'));
+                      ->willReturn('function');
 
         $this->fao->expects($this->never())
                   ->method('find_matches');
@@ -175,7 +175,7 @@ class FrontControllerGetTest extends FrontControllerTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
-                      ->will($this->returnValue('function'));
+                      ->willReturn('function');
 
         $this->fao->expects($this->never())
                   ->method('find_matches');
@@ -199,12 +199,12 @@ class FrontControllerGetTest extends FrontControllerTest
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
-                      ->will($this->returnValue('function'));
+                      ->willReturn('function');
 
         $this->fao->expects($this->once())
                   ->method('find_matches')
                   ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->will($this->returnValue([ $result ]));
+                  ->willReturn([ $result ]);
 
         $value = $this->class->get_controller($dir, [ 'function' ], FALSE);
 
@@ -213,6 +213,8 @@ class FrontControllerGetTest extends FrontControllerTest
 
     /**
      * Test that get_controller() returns '' for invalid controller.
+     *
+     * @param array $controller_name Invalid controller names
      *
      * @dataProvider invalidControllerNameValuesProvider
      * @covers Lunr\Corona\FrontController::get_controller

@@ -30,12 +30,12 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
     {
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('call'))
+                      ->with('call')
                       ->willReturn('controller/method');
 
         $this->response->expects($this->once())
                        ->method('set_return_code')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(HttpCode::NOT_IMPLEMENTED));
+                       ->with('controller/method', HttpCode::NOT_IMPLEMENTED);
 
         $method = $this->get_accessible_reflection_method('set_result');
 
@@ -51,12 +51,12 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
     {
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('call'))
+                      ->with('call')
                       ->willReturn('controller/method');
 
         $this->response->expects($this->once())
                        ->method('set_return_code')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(HttpCode::NOT_IMPLEMENTED));
+                       ->with('controller/method', HttpCode::NOT_IMPLEMENTED);
 
         $this->response->expects($this->never())
                        ->method('set_error_message');
@@ -75,16 +75,16 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
     {
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->with($this->equalTo('call'))
+                      ->with('call')
                       ->willReturn('controller/method');
 
         $this->response->expects($this->once())
                        ->method('set_return_code')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(HttpCode::NOT_IMPLEMENTED));
+                       ->with('controller/method', HttpCode::NOT_IMPLEMENTED);
 
         $this->response->expects($this->once())
                        ->method('set_error_message')
-                       ->with($this->equalTo('controller/method'), $this->equalTo('errmsg'));
+                       ->with('controller/method', 'errmsg');
 
         $method = $this->get_accessible_reflection_method('set_result');
 
@@ -100,12 +100,12 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
     {
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('call'))
-                      ->will($this->returnValue('controller/method'));
+                      ->with('call')
+                      ->willReturn('controller/method');
 
         $this->response->expects($this->once())
                        ->method('set_return_code')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(HttpCode::NOT_IMPLEMENTED));
+                       ->with('controller/method', HttpCode::NOT_IMPLEMENTED);
 
         $this->response->expects($this->never())
                        ->method('set_error_info');
@@ -124,16 +124,16 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
     {
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->with($this->equalTo('call'))
-                      ->will($this->returnValue('controller/method'));
+                      ->with('call')
+                      ->willReturn('controller/method');
 
         $this->response->expects($this->once())
                        ->method('set_return_code')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(HttpCode::NOT_IMPLEMENTED));
+                       ->with('controller/method', HttpCode::NOT_IMPLEMENTED);
 
         $this->response->expects($this->once())
                        ->method('set_error_info')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(9999));
+                       ->with('controller/method', 9999);
 
         $method = $this->get_accessible_reflection_method('set_result');
 

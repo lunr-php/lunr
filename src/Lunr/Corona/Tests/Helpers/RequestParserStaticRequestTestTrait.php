@@ -3,10 +3,10 @@
 /**
  * This file contains the RequestParserStaticRequestTestTrait.
  *
- * @package    Lunr\Halo
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Halo
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2014-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests\Helpers;
@@ -134,7 +134,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+                            ->willReturnMap(array_values($this->mocked_calls));
 
         $request = $this->class->parse_request();
 
@@ -154,7 +154,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+                            ->willReturnMap(array_values($this->mocked_calls));
 
         $request = $this->class->parse_request();
 
@@ -174,7 +174,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+                            ->willReturnMap(array_values($this->mocked_calls));
 
         $request = $this->class->parse_request();
 
@@ -199,7 +199,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+                            ->willReturnMap(array_values($this->mocked_calls));
 
         $request = $this->class->parse_request();
 
@@ -225,7 +225,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+                            ->willReturnMap(array_values($this->mocked_calls));
 
         $request = $this->class->parse_request();
 
@@ -277,7 +277,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->exactly(8))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+                            ->willReturnMap(array_values($this->mocked_calls));
 
         $request = $this->class->parse_request();
 
@@ -298,7 +298,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+                            ->willReturnMap(array_values($this->mocked_calls));
 
         $request = $this->class->parse_request();
 
@@ -319,7 +319,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+                            ->willReturnMap(array_values($this->mocked_calls));
 
         $request = $this->class->parse_request();
 
@@ -357,7 +357,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+                            ->willReturnMap(array_values($this->mocked_calls));
 
         $request = $this->class->parse_request();
 
@@ -379,7 +379,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+                            ->willReturnMap(array_values($this->mocked_calls));
 
         $request = $this->class->parse_request();
 
@@ -401,7 +401,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+                            ->willReturnMap(array_values($this->mocked_calls));
 
         $request = $this->class->parse_request();
 
@@ -422,7 +422,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->will($this->returnValueMap(array_values($this->mocked_calls)));
+                            ->willReturnMap(array_values($this->mocked_calls));
 
         $request = $this->class->parse_request();
 

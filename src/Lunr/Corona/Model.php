@@ -3,10 +3,10 @@
 /**
  * This file contains the Model interface.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2022, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2022, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona;
@@ -62,7 +62,7 @@ class Model
      * @param mixed  $value Data to cache.
      * @param int    $ttl   Time To Live for cache item in seconds.
      *
-     * @return boolean True if successful, FALSE when value is NULL.
+     * @return bool True if successful, FALSE when value is NULL.
      */
     protected function set_in_cache(string $key, $value, int $ttl = 600): bool
     {

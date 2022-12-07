@@ -3,10 +3,10 @@
 /**
  * This file contains the JsonViewPrintTest class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2013-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -48,32 +48,32 @@ class JsonViewPrintTest extends JsonViewTest
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
-                       ->with($this->equalTo(TRUE))
-                       ->will($this->returnValue('id'));
+                       ->with(TRUE)
+                       ->willReturn('id');
 
         $this->response->expects($this->once())
                        ->method('get_error_info')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(NULL));
+                       ->with('id')
+                       ->willReturn(NULL);
 
         $this->response->expects($this->once())
                        ->method('get_error_message')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue('Message'));
+                       ->with('id')
+                       ->willReturn('Message');
 
         $this->response->expects($this->once())
                        ->method('get_return_code')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(404));
+                       ->with('id')
+                       ->willReturn(404);
 
         $this->response->expects($this->once())
                        ->method('get_response_data')
-                       ->will($this->returnValue($this->json));
+                       ->willReturn($this->json);
 
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('sapi'))
-                      ->will($this->returnValue('cli'));
+                      ->with('sapi')
+                      ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_code.json');
 
@@ -94,32 +94,32 @@ class JsonViewPrintTest extends JsonViewTest
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
-                       ->with($this->equalTo(TRUE))
-                       ->will($this->returnValue('id'));
+                       ->with(TRUE)
+                       ->willReturn('id');
 
         $this->response->expects($this->once())
                        ->method('get_error_info')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(NULL));
+                       ->with('id')
+                       ->willReturn(NULL);
 
         $this->response->expects($this->once())
                        ->method('get_error_message')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(NULL));
+                       ->with('id')
+                       ->willReturn(NULL);
 
         $this->response->expects($this->once())
                        ->method('get_return_code')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(404));
+                       ->with('id')
+                       ->willReturn(404);
 
         $this->response->expects($this->once())
                        ->method('get_response_data')
-                       ->will($this->returnValue($this->json));
+                       ->willReturn($this->json);
 
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('sapi'))
-                      ->will($this->returnValue('cli'));
+                      ->with('sapi')
+                      ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_empty_message.json');
 
@@ -140,32 +140,32 @@ class JsonViewPrintTest extends JsonViewTest
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
-                       ->with($this->equalTo(TRUE))
-                       ->will($this->returnValue('id'));
+                       ->with(TRUE)
+                       ->willReturn('id');
 
         $this->response->expects($this->once())
                        ->method('get_error_info')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(4040));
+                       ->with('id')
+                       ->willReturn(4040);
 
         $this->response->expects($this->once())
                        ->method('get_error_message')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue('Message'));
+                       ->with('id')
+                       ->willReturn('Message');
 
         $this->response->expects($this->once())
                        ->method('get_return_code')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(404));
+                       ->with('id')
+                       ->willReturn(404);
 
         $this->response->expects($this->once())
                        ->method('get_response_data')
-                       ->will($this->returnValue($this->json));
+                       ->willReturn($this->json);
 
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('sapi'))
-                      ->will($this->returnValue('cli'));
+                      ->with('sapi')
+                      ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_complete.json');
 
@@ -185,32 +185,32 @@ class JsonViewPrintTest extends JsonViewTest
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
-                       ->with($this->equalTo(TRUE))
-                       ->will($this->returnValue('id'));
+                       ->with(TRUE)
+                       ->willReturn('id');
 
         $this->response->expects($this->once())
                        ->method('get_error_info')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(4040));
+                       ->with('id')
+                       ->willReturn(4040);
 
         $this->response->expects($this->once())
                        ->method('get_error_message')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue('Message'));
+                       ->with('id')
+                       ->willReturn('Message');
 
         $this->response->expects($this->once())
                        ->method('get_return_code')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(404));
+                       ->with('id')
+                       ->willReturn(404);
 
         $this->response->expects($this->once())
                        ->method('get_response_data')
-                       ->will($this->returnValue($this->json));
+                       ->willReturn($this->json);
 
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('sapi'))
-                      ->will($this->returnValue('web'));
+                      ->with('sapi')
+                      ->willReturn('web');
 
         $this->expectOutputString('{"data":{"a":100,"b":{"z":true},"c":[null],"d":{},"e":"みんな"},"status":{"code":4040,"message":"Message"}}');
 
@@ -231,32 +231,32 @@ class JsonViewPrintTest extends JsonViewTest
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
-                       ->with($this->equalTo(TRUE))
-                       ->will($this->returnValue('id'));
+                       ->with(TRUE)
+                       ->willReturn('id');
 
         $this->response->expects($this->once())
                        ->method('get_error_info')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(4040));
+                       ->with('id')
+                       ->willReturn(4040);
 
         $this->response->expects($this->once())
                        ->method('get_error_message')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue('Message'));
+                       ->with('id')
+                       ->willReturn('Message');
 
         $this->response->expects($this->once())
                        ->method('get_return_code')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(404));
+                       ->with('id')
+                       ->willReturn(404);
 
         $this->response->expects($this->once())
                        ->method('get_response_data')
-                       ->will($this->returnValue([]));
+                       ->willReturn([]);
 
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('sapi'))
-                      ->will($this->returnValue('cli'));
+                      ->with('sapi')
+                      ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_empty_data.json');
 
@@ -280,32 +280,32 @@ class JsonViewPrintTest extends JsonViewTest
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
-                       ->with($this->equalTo(TRUE))
-                       ->will($this->returnValue('id'));
+                       ->with(TRUE)
+                       ->willReturn('id');
 
         $this->response->expects($this->once())
                        ->method('get_error_info')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(4040));
+                       ->with('id')
+                       ->willReturn(4040);
 
         $this->response->expects($this->once())
                        ->method('get_error_message')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue('Message'));
+                       ->with('id')
+                       ->willReturn('Message');
 
         $this->response->expects($this->once())
                        ->method('get_return_code')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(404));
+                       ->with('id')
+                       ->willReturn(404);
 
         $this->response->expects($this->once())
                        ->method('get_response_data')
-                       ->will($this->returnValue($this->json));
+                       ->willReturn($this->json);
 
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('sapi'))
-                      ->will($this->returnValue('cli'));
+                      ->with('sapi')
+                      ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_complete.json');
 

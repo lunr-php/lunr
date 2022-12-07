@@ -3,11 +3,11 @@
 /**
  * This file contains the RequestGetDataTest class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @copyright  2011-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @author    Leonidas Diamantis <leonidas@m2mobi.com>
+ * @copyright 2011-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -247,8 +247,8 @@ class RequestGetDataTest extends RequestTest
     {
         $this->parser->expects($this->once())
                      ->method('parse_accept_format')
-                     ->with($this->equalTo($value))
-                     ->will($this->returnValue('text/html'));
+                     ->with($value)
+                     ->willReturn('text/html');
 
         $this->assertEquals($value[0], $this->class->get_accept_format($value));
     }
@@ -275,8 +275,8 @@ class RequestGetDataTest extends RequestTest
     {
         $this->parser->expects($this->once())
                      ->method('parse_accept_language')
-                     ->with($this->equalTo($value))
-                     ->will($this->returnValue('en-US'));
+                     ->with($value)
+                     ->willReturn('en-US');
 
         $this->assertEquals($value[0], $this->class->get_accept_language($value));
     }
@@ -303,8 +303,8 @@ class RequestGetDataTest extends RequestTest
     {
         $this->parser->expects($this->once())
                      ->method('parse_accept_charset')
-                     ->with($this->equalTo($value))
-                     ->will($this->returnValue('utf-8'));
+                     ->with($value)
+                     ->willReturn('utf-8');
 
         $this->assertEquals($value[0], $this->class->get_accept_charset($value));
     }
@@ -328,7 +328,7 @@ class RequestGetDataTest extends RequestTest
     {
         $this->parser->expects($this->once())
                      ->method('parse_raw_data')
-                     ->will($this->returnValue('raw'));
+                     ->willReturn('raw');
 
         $this->assertEquals('raw', $this->class->get_raw_data());
     }

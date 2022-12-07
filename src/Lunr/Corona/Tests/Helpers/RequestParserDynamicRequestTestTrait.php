@@ -3,10 +3,10 @@
 /**
  * This file contains the RequestParserDynamicRequestTestTrait.
  *
- * @package    Lunr\Halo
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Halo
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2014-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests\Helpers;

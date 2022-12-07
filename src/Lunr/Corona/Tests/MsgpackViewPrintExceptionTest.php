@@ -16,7 +16,7 @@ use \Lunr\Corona\Tests\Helpers\MockUncaughtException;
 /**
  * This class contains tests for the MsgpackView class.
  *
- * @covers     Lunr\Corona\MsgpackView
+ * @covers Lunr\Corona\MsgpackView
  */
 class MsgpackViewPrintExceptionTest extends MsgpackViewTest
 {
@@ -42,7 +42,6 @@ class MsgpackViewPrintExceptionTest extends MsgpackViewTest
 
         $this->unmock_function('header');
     }
-
 
 }
 

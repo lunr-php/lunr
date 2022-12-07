@@ -3,10 +3,10 @@
 /**
  * This file contains the WebRequestParserParseRequestTest class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2014-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -112,7 +112,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
 
         $this->configuration->expects($this->any())
                             ->method('offsetGet')
-                            ->will($this->returnValueMap($map));
+                            ->willReturnMap($map);
 
         if ($override === FALSE)
         {

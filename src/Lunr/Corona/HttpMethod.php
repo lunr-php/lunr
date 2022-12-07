@@ -3,10 +3,10 @@
 /**
  * This file contains http methods.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2017-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2017-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona;
@@ -27,7 +27,7 @@ class HttpMethod
      *
      * @var String
      */
-    const GET = 'GET';
+    public const GET = 'GET';
 
     /**
      * HEAD method.
@@ -39,7 +39,7 @@ class HttpMethod
      *
      * @var String
      */
-    const HEAD = 'HEAD';
+    public const HEAD = 'HEAD';
 
     /**
      * POST method.
@@ -51,7 +51,7 @@ class HttpMethod
      *
      * @var String
      */
-    const POST = 'POST';
+    public const POST = 'POST';
 
     /**
      * PUT method.
@@ -63,7 +63,7 @@ class HttpMethod
      *
      * @var String
      */
-    const PUT = 'PUT';
+    public const PUT = 'PUT';
 
     /**
      * DELETE method.
@@ -75,7 +75,7 @@ class HttpMethod
      *
      * @var String
      */
-    const DELETE = 'DELETE';
+    public const DELETE = 'DELETE';
 
     /**
      * CONNECT method.
@@ -87,7 +87,7 @@ class HttpMethod
      *
      * @var String
      */
-    const CONNECT = 'CONNECT';
+    public const CONNECT = 'CONNECT';
 
     /**
      * OPTIONS method.
@@ -99,7 +99,7 @@ class HttpMethod
      *
      * @var String
      */
-    const OPTIONS = 'OPTIONS';
+    public const OPTIONS = 'OPTIONS';
 
     /**
      * TRACE method.
@@ -111,7 +111,7 @@ class HttpMethod
      *
      * @var String
      */
-    const TRACE = 'TRACE';
+    public const TRACE = 'TRACE';
 
     /**
      * PATCH method.
@@ -123,7 +123,7 @@ class HttpMethod
      *
      * @var String
      */
-    const PATCH = 'PATCH';
+    public const PATCH = 'PATCH';
 
 }
 

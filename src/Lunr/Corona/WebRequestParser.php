@@ -3,16 +3,18 @@
 /**
  * This file contains the web request parser class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @copyright  2011-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @author    Leonidas Diamantis <leonidas@m2mobi.com>
+ * @copyright 2011-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona;
 
 use Psr\Log\LogLevel;
+use Lunr\Core\Configuration;
+use http\Header;
 
 /**
  * Web Request Parser.
@@ -30,21 +32,21 @@ class WebRequestParser implements RequestParserInterface
 
     /**
      * Shared instance of the Header class.
-     * @var \http\Header
+     * @var Header
      */
     protected $header;
 
     /**
      * Whether the request was parsed already or not,
-     * @var Boolean
+     * @var bool
      */
     protected $request_parsed;
 
     /**
      * Constructor.
      *
-     * @param \Lunr\Core\Configuration $configuration Shared instance of the Configuration class
-     * @param \http\Header             $header        Shared instance of the Header class
+     * @param Configuration $configuration Shared instance of the Configuration class
+     * @param Header        $header        Shared instance of the Header class
      */
     public function __construct($configuration, $header)
     {

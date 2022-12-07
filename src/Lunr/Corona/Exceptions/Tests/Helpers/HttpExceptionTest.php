@@ -3,8 +3,10 @@
 /**
  * This file contains the HttpExceptionTest class.
  *
- * @package Lunr\Corona\Exceptions
- * @author  Heinz Wiesinger <heinz@m2mobi.com>
+ * @package   Lunr\Corona\Exceptions
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2018-2022, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Exceptions\Tests\Helpers;

@@ -3,11 +3,11 @@
 /**
  * This file contains the HTMLViewHelpersTest class.
  *
- * @package    Lunr\Corona
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Dinos Theodorou <dinos@m2mobi.com>
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2012-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -47,10 +47,10 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->will($this->returnValueMap([
+                      ->willReturnMap([
                           [ 'application_path', '/full/path/to/' ],
                           [ 'base_path', '/to/' ],
-                      ]));
+                      ]);
 
         $this->mock_function('filemtime', function () {return 1438183002;});
 
@@ -72,10 +72,10 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $this->request->expects($this->exactly(4))
                       ->method('__get')
-                      ->will($this->returnValueMap([
+                      ->willReturnMap([
                           [ 'application_path', '/full/path/to/' ],
                           [ 'base_path', '/to/' ],
-                      ]));
+                      ]);
 
         $this->mock_function('filemtime', function () { return 1438183002;});
 
@@ -103,23 +103,23 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $this->request->expects($this->never())
                       ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
+                      ->with('application_path')
+                      ->willReturn('/full/path/to/');
 
         $this->request->expects($this->never())
                       ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
+                      ->with('base_path')
+                      ->willReturn('/to/');
 
         $this->request->expects($this->never())
                       ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
+                      ->with('application_path')
+                      ->willReturn('/full/path/to/');
 
         $this->request->expects($this->never())
                       ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
+                      ->with('base_path')
+                      ->willReturn('/to/');
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/stylesheet_external.html', $method->invoke($this->class));
     }
@@ -137,10 +137,10 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $this->request->expects($this->exactly(4))
                       ->method('__get')
-                      ->will($this->returnValueMap([
+                      ->willReturnMap([
                           [ 'application_path', '/full/path/to/' ],
                           [ 'base_path', '/to/' ],
-                      ]));
+                      ]);
 
         $this->mock_function('filemtime', function () {return 1438183002;});
 
@@ -176,10 +176,10 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->will($this->returnValueMap([
+                      ->willReturnMap([
                           [ 'application_path', '/full/path/to/' ],
                           [ 'base_path', '/to/' ],
-                      ]));
+                      ]);
 
         $this->mock_function('filemtime', function () {return 1438183002;});
 
@@ -201,10 +201,10 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $this->request->expects($this->exactly(4))
                       ->method('__get')
-                      ->will($this->returnValueMap([
+                      ->willReturnMap([
                           [ 'application_path', '/full/path/to/' ],
                           [ 'base_path', '/to/' ],
-                      ]));
+                      ]);
 
         $this->mock_function('filemtime', function () {return 1438183002;});
 
@@ -232,23 +232,23 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $this->request->expects($this->never())
                       ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
+                      ->with('application_path')
+                      ->willReturn('/full/path/to/');
 
         $this->request->expects($this->never())
                       ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
+                      ->with('base_path')
+                      ->willReturn('/to/');
 
         $this->request->expects($this->never())
                       ->method('__get')
-                      ->with($this->equalTo('application_path'))
-                      ->will($this->returnValue('/full/path/to/'));
+                      ->with('application_path')
+                      ->willReturn('/full/path/to/');
 
         $this->request->expects($this->never())
                       ->method('__get')
-                      ->with($this->equalTo('base_path'))
-                      ->will($this->returnValue('/to/'));
+                      ->with('base_path')
+                      ->willReturn('/to/');
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/javascript_external.html', $method->invoke($this->class));
     }
@@ -266,10 +266,10 @@ class HTMLViewHelpersTest extends HTMLViewTest
 
         $this->request->expects($this->exactly(4))
                       ->method('__get')
-                      ->will($this->returnValueMap([
+                      ->willReturnMap([
                           [ 'application_path', '/full/path/to/' ],
                           [ 'base_path', '/to/' ],
-                      ]));
+                      ]);
 
         $this->mock_function('filemtime', function () {return 1438183002;});
 

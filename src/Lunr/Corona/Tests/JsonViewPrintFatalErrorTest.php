@@ -3,10 +3,10 @@
 /**
  * This file contains the JsonViewPrintFatalErrorTest class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2013-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -64,8 +64,8 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
 
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('sapi'))
-                      ->will($this->returnValue('cli'));
+                      ->with('sapi')
+                      ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_error.json');
 
@@ -87,8 +87,8 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
 
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('sapi'))
-                      ->will($this->returnValue('web'));
+                      ->with('sapi')
+                      ->willReturn('web');
 
         $this->expectOutputString('{"data":{},"status":{"code":500,"message":"Message in index.php on line 2"}}');
 

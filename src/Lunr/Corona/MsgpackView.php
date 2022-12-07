@@ -11,6 +11,8 @@
 
 namespace Lunr\Corona;
 
+use Lunr\Core\Configuration;
+
 /**
  * View class for displaying msgpack return values.
  */

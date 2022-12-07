@@ -3,11 +3,11 @@
 /**
  * This file contains the ViewHelpersTest class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Andrea Nigido <andrea@m2mobi.com>
- * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @author    Andrea Nigido <andrea@m2mobi.com>
+ * @copyright 2012-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -34,7 +34,7 @@ class ViewHelpersTest extends ViewTest
     {
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->will($this->returnValue($baseurl));
+                      ->willReturn($baseurl);
 
         $method = $this->get_accessible_reflection_method('base_url');
 
@@ -56,10 +56,10 @@ class ViewHelpersTest extends ViewTest
     {
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->will($this->returnValue($base));
+                      ->willReturn($base);
         $this->sub_configuration->expects($this->once())
                                 ->method('offsetGet')
-                                ->will($this->returnValue($statics));
+                                ->willReturn($statics);
 
         $method = $this->get_accessible_reflection_method('statics');
 

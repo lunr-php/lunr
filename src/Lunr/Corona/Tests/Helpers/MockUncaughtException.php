@@ -21,9 +21,9 @@ class MockUncaughtException extends Exception
     /**
      * Constructor.
      *
-     * @param ?string    $message  The exception message
-     * @param int        $code     The exception code
-     * @param \Exception $previous The previously thrown exception
+     * @param string|null    $message  The exception message
+     * @param int            $code     The exception code
+     * @param Exception|null $previous The previously thrown exception
      */
     public function __construct($message = NULL, $code = 0, Exception $previous = NULL)
     {

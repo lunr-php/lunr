@@ -3,15 +3,16 @@
 /**
  * This file contains the request parser class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2014-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona;
 
 use Psr\Log\LogLevel;
+use Lunr\Core\Configuration;
 
 /**
  * Request Parser.
@@ -23,14 +24,14 @@ class RequestParser implements RequestParserInterface
 
     /**
      * Shared instance of the Configuration class.
-     * @var \Lunr\Core\Configuration
+     * @var Configuration
      */
     protected $config;
 
     /**
      * Constructor.
      *
-     * @param \Lunr\Core\Configuration $configuration Shared instance of the Configuration class
+     * @param Configuration $configuration Shared instance of the Configuration class
      */
     public function __construct($configuration)
     {

@@ -3,14 +3,16 @@
 /**
  * This file contains a html view class.
  *
- * @package    Lunr\Corona
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2010-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Dinos Theodorou <dinos@m2mobi.com>
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2010-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona;
+
+use Lunr\Core\Configuration;
 
 /**
  * View class used by the Website
@@ -119,7 +121,7 @@ abstract class HTMLView extends View
      *
      * @param string $uri A URI
      *
-     * @return boolean if the URI is external or not
+     * @return bool if the URI is external or not
      */
     private function is_external($uri)
     {

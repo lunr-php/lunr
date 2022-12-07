@@ -3,11 +3,11 @@
 /**
  * This file contains the WebRequestParserAcceptTest class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @author    Leonidas Diamantis <leonidas@m2mobi.com>
+ * @copyright 2014-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -40,8 +40,8 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
 
         $this->header->expects($this->once())
                      ->method('negotiate')
-                     ->with($this->equalTo($value))
-                     ->will($this->returnValue('text/html'));
+                     ->with($value)
+                     ->willReturn('text/html');
 
         $this->assertEquals($value, $this->class->parse_accept_format($value));
 
@@ -65,8 +65,8 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
 
         $this->header->expects($this->once())
                      ->method('negotiate')
-                     ->with($this->equalTo([]))
-                     ->will($this->returnValue(NULL));
+                     ->with([])
+                     ->willReturn(NULL);
 
         $this->assertNull($this->class->parse_accept_format([]));
 
@@ -90,7 +90,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
 
         $this->header->expects($this->never())
                      ->method('negotiate')
-                     ->with($this->equalTo([]));
+                     ->with([]);
 
         $this->assertNull($this->class->parse_accept_format([]));
 
@@ -117,8 +117,8 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
 
         $this->header->expects($this->once())
                      ->method('negotiate')
-                     ->with($this->equalTo($value))
-                     ->will($this->returnValue('en-US'));
+                     ->with($value)
+                     ->willReturn('en-US');
 
         $this->assertEquals($value, $this->class->parse_accept_language($value));
 
@@ -142,8 +142,8 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
 
         $this->header->expects($this->once())
                      ->method('negotiate')
-                     ->with($this->equalTo([]))
-                     ->will($this->returnValue(NULL));
+                     ->with([])
+                     ->willReturn(NULL);
 
         $this->assertNull($this->class->parse_accept_language([]));
 
@@ -167,7 +167,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
 
         $this->header->expects($this->never())
                      ->method('negotiate')
-                     ->with($this->equalTo([]));
+                     ->with([]);
 
         $this->assertNull($this->class->parse_accept_language([]));
 
@@ -194,8 +194,8 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
 
         $this->header->expects($this->once())
                      ->method('negotiate')
-                     ->with($this->equalTo($value))
-                     ->will($this->returnValue('utf-8'));
+                     ->with($value)
+                     ->willReturn('utf-8');
 
         $this->assertEquals($value, $this->class->parse_accept_charset($value));
 
@@ -219,8 +219,8 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
 
         $this->header->expects($this->once())
                      ->method('negotiate')
-                     ->with($this->equalTo([]))
-                     ->will($this->returnValue(NULL));
+                     ->with([])
+                     ->willReturn(NULL);
 
         $this->assertNull($this->class->parse_accept_charset([]));
 
@@ -244,7 +244,7 @@ class WebRequestParserAcceptTest extends WebRequestParserTest
 
         $this->header->expects($this->never())
                      ->method('negotiate')
-                     ->with($this->equalTo([]));
+                     ->with([]);
 
         $this->assertNull($this->class->parse_accept_charset([]));
 

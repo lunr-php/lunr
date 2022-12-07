@@ -3,13 +3,15 @@
 /**
  * This file contains the FrontController class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2013-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona;
+
+use Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface;
 
 /**
  * Controller class
@@ -31,7 +33,7 @@ class FrontController
 
     /**
      * Instance of the FilesystemAccessObject class.
-     * @var \Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface
+     * @var FilesystemAccessObjectInterface
      */
     protected $fao;
 
@@ -50,9 +52,9 @@ class FrontController
     /**
      * Constructor.
      *
-     * @param Request                                                  $request Instance of the Request class.
-     * @param RequestResultHandler                                     $handler Instance of the RequestResultHandler class.
-     * @param \Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface $fao     Instance of the FilesystemAccessObject class.
+     * @param Request                         $request Instance of the Request class.
+     * @param RequestResultHandler            $handler Instance of the RequestResultHandler class.
+     * @param FilesystemAccessObjectInterface $fao     Instance of the FilesystemAccessObject class.
      */
     public function __construct($request, $handler, $fao)
     {

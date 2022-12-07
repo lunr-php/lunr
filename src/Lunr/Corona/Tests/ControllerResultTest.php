@@ -3,10 +3,10 @@
 /**
  * This file contains the ControllerResultTest class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2011-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2011-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -30,16 +30,16 @@ class ControllerResultTest extends ControllerTest
     {
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->with($this->equalTo('call'))
-                      ->will($this->returnValue('controller/method'));
+                      ->with('call')
+                      ->willReturn('controller/method');
 
         $this->response->expects($this->once())
                        ->method('set_error_message')
-                       ->with($this->equalTo('controller/method'), $this->equalTo('Not implemented!'));
+                       ->with('controller/method', 'Not implemented!');
 
         $this->response->expects($this->once())
                        ->method('set_return_code')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(HttpCode::NOT_IMPLEMENTED));
+                       ->with('controller/method', HttpCode::NOT_IMPLEMENTED);
 
         $this->class->unimplemented();
     }
@@ -53,12 +53,12 @@ class ControllerResultTest extends ControllerTest
     {
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('call'))
-                      ->will($this->returnValue('controller/method'));
+                      ->with('call')
+                      ->willReturn('controller/method');
 
         $this->response->expects($this->once())
                        ->method('set_return_code')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(HttpCode::NOT_IMPLEMENTED));
+                       ->with('controller/method', HttpCode::NOT_IMPLEMENTED);
 
         $method = $this->get_accessible_reflection_method('set_result');
 
@@ -74,12 +74,12 @@ class ControllerResultTest extends ControllerTest
     {
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('call'))
-                      ->will($this->returnValue('controller/method'));
+                      ->with('call')
+                      ->willReturn('controller/method');
 
         $this->response->expects($this->once())
                        ->method('set_return_code')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(HttpCode::NOT_IMPLEMENTED));
+                       ->with('controller/method', HttpCode::NOT_IMPLEMENTED);
 
         $this->response->expects($this->never())
                        ->method('set_error_message');
@@ -98,16 +98,16 @@ class ControllerResultTest extends ControllerTest
     {
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->with($this->equalTo('call'))
-                      ->will($this->returnValue('controller/method'));
+                      ->with('call')
+                      ->willReturn('controller/method');
 
         $this->response->expects($this->once())
                        ->method('set_return_code')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(HttpCode::NOT_IMPLEMENTED));
+                       ->with('controller/method', HttpCode::NOT_IMPLEMENTED);
 
         $this->response->expects($this->once())
                        ->method('set_error_message')
-                       ->with($this->equalTo('controller/method'), $this->equalTo('errmsg'));
+                       ->with('controller/method', 'errmsg');
 
         $method = $this->get_accessible_reflection_method('set_result');
 
@@ -123,12 +123,12 @@ class ControllerResultTest extends ControllerTest
     {
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('call'))
-                      ->will($this->returnValue('controller/method'));
+                      ->with('call')
+                      ->willReturn('controller/method');
 
         $this->response->expects($this->once())
                        ->method('set_return_code')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(HttpCode::NOT_IMPLEMENTED));
+                       ->with('controller/method', HttpCode::NOT_IMPLEMENTED);
 
         $this->response->expects($this->never())
                        ->method('set_error_info');
@@ -147,16 +147,16 @@ class ControllerResultTest extends ControllerTest
     {
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->with($this->equalTo('call'))
-                      ->will($this->returnValue('controller/method'));
+                      ->with('call')
+                      ->willReturn('controller/method');
 
         $this->response->expects($this->once())
                        ->method('set_return_code')
-                       ->with($this->equalTo('controller/method'), $this->equalTo(HttpCode::NOT_IMPLEMENTED));
+                       ->with('controller/method', HttpCode::NOT_IMPLEMENTED);
 
         $this->response->expects($this->once())
                        ->method('set_error_info')
-                       ->with($this->equalTo('controller/method'), $this->equalTo('errinfo'));
+                       ->with('controller/method', 'errinfo');
 
         $method = $this->get_accessible_reflection_method('set_result');
 

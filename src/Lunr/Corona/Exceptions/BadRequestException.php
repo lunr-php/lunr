@@ -39,18 +39,22 @@ class BadRequestException extends HttpException
 
     /**
      * Whether input data was set or not.
-     * @var boolean
+     * @var bool
      */
     protected $dataAvailable;
 
     /**
      * Whether a detailed input data report was set or not.
-     * @var boolean
+     * @var bool
      */
     protected $reportAvailable;
 
     /**
      * Constructor.
+     *
+     * @param string|null    $message  Error message
+     * @param int            $app_code Application error code
+     * @param Exception|null $previous The previously thrown exception
      */
     public function __construct($message = NULL, $app_code = 0, Exception $previous = NULL)
     {
@@ -159,7 +163,7 @@ class BadRequestException extends HttpException
     /**
      * Check whether input data was set or not.
      *
-     * @return boolean Input data was set or not.
+     * @return bool Input data was set or not.
      */
     public function isDataAvailable()
     {
@@ -169,7 +173,7 @@ class BadRequestException extends HttpException
     /**
      * Check whether a detailed input data report was set or not.
      *
-     * @return boolean Input data report was set or not.
+     * @return bool Input data report was set or not.
      */
     public function isReportAvailable()
     {

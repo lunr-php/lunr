@@ -3,10 +3,10 @@
 /**
  * This file contains the JsonViewPrintExceptionTest class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2022, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2022, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -38,8 +38,8 @@ class JsonViewPrintExceptionTest extends JsonViewTest
 
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('sapi'))
-                      ->will($this->returnValue('cli'));
+                      ->with('sapi')
+                      ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_exception.json');
 
@@ -64,8 +64,8 @@ class JsonViewPrintExceptionTest extends JsonViewTest
 
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('sapi'))
-                      ->will($this->returnValue('web'));
+                      ->with('sapi')
+                      ->willReturn('web');
 
         $message  = '{"data":{},"status":{"code":500,"message":"Uncaught Exception ';
         $message .= 'Lunr\\\\Corona\\\\Tests\\\\Helpers\\\\MockUncaughtException';

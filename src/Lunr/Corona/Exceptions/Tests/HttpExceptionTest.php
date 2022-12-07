@@ -3,8 +3,10 @@
 /**
  * This file contains the HttpExceptionTest class.
  *
- * @package Lunr\Corona\Exceptions
- * @author  Heinz Wiesinger <heinz@m2mobi.com>
+ * @package   Lunr\Corona\Exceptions
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2018-2022, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Exceptions\Tests;
@@ -17,6 +19,8 @@ use ReflectionClass;
 /**
  * This class contains common setup routines, providers
  * and shared attributes for testing the HttpException class.
+ *
+ * @covers Lunr\Corona\Exceptions\HttpException
  */
 abstract class HttpExceptionTest extends LunrBaseTest
 {

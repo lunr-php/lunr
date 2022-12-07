@@ -3,11 +3,11 @@
 /**
  * This file contains the RequestTest class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Leonidas Diamantis <leonidas@m2mobi.com>
- * @copyright  2011-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @author    Leonidas Diamantis <leonidas@m2mobi.com>
+ * @copyright 2011-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -56,31 +56,31 @@ abstract class RequestTest extends LunrBaseTest
 
         $this->parser->expects($this->once())
                      ->method('parse_request')
-                     ->will($this->returnValue($this->get_request_values()));
+                     ->willReturn($this->get_request_values());
 
         $this->parser->expects($this->once())
                      ->method('parse_post')
-                     ->will($this->returnValue([ 'post_key' => 'post_value', 'post_second_key' => 'post_value' ]));
+                     ->willReturn([ 'post_key' => 'post_value', 'post_second_key' => 'post_value' ]);
 
         $this->parser->expects($this->once())
                      ->method('parse_get')
-                     ->will($this->returnValue([ 'get_key' => 'get_value', 'get_second_key' => 'get_value' ]));
+                     ->willReturn([ 'get_key' => 'get_value', 'get_second_key' => 'get_value' ]);
 
         $this->parser->expects($this->once())
                      ->method('parse_cookie')
-                     ->will($this->returnValue([ 'cookie_key' => 'cookie_value' ]));
+                     ->willReturn([ 'cookie_key' => 'cookie_value' ]);
 
         $this->parser->expects($this->once())
                      ->method('parse_server')
-                     ->will($this->returnValue([ 'server_key' => 'server_value', 'HTTP_SERVER_KEY' => 'HTTP_SERVER_VALUE' ]));
+                     ->willReturn([ 'server_key' => 'server_value', 'HTTP_SERVER_KEY' => 'HTTP_SERVER_VALUE' ]);
 
         $this->parser->expects($this->once())
                      ->method('parse_files')
-                     ->will($this->returnValue($this->files));
+                     ->willReturn($this->files);
 
         $this->parser->expects($this->once())
                      ->method('parse_command_line_arguments')
-                     ->will($this->returnValue([]));
+                     ->willReturn([]);
 
         $this->class      = new Request($this->parser);
         $this->reflection = new ReflectionClass('Lunr\Corona\Request');

@@ -3,11 +3,11 @@
 /**
  * This file contains the HTMLViewTest class.
  *
- * @package    Lunr\Corona
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Dinos Theodorou <dinos@m2mobi.com>
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2013-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;

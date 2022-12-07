@@ -3,10 +3,10 @@
 /**
  * This file contains the FrontControllerDispatchTest class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2013-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -34,10 +34,10 @@ class FrontControllerDispatchTest extends FrontControllerTest
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->will($this->returnValueMap([
+                      ->willReturnMap([
                           [ 'method', 'foo' ],
                           [ 'params', [ 1, 2 ]],
-                      ]));
+                      ]);
 
         $this->class->dispatch($controller);
     }
@@ -57,10 +57,10 @@ class FrontControllerDispatchTest extends FrontControllerTest
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->will($this->returnValueMap([
+                      ->willReturnMap([
                           [ 'method', 'bar' ],
                           [ 'params', [ 1, 2 ]],
-                      ]));
+                      ]);
 
         $this->class->dispatch($controller);
     }
@@ -78,10 +78,10 @@ class FrontControllerDispatchTest extends FrontControllerTest
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->will($this->returnValueMap([
+                      ->willReturnMap([
                           [ 'method', 'bar' ],
                           [ 'params', [ 1, 2 ]],
-                      ]));
+                      ]);
 
         $this->class->dispatch('String');
     }
@@ -102,10 +102,10 @@ class FrontControllerDispatchTest extends FrontControllerTest
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->will($this->returnValueMap([
+                      ->willReturnMap([
                           [ 'method', 'bar' ],
                           [ 'params', [ 1, 2 ]],
-                      ]));
+                      ]);
 
         $this->class->dispatch($value);
     }

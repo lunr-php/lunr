@@ -3,10 +3,10 @@
 /**
  * This file contains the FrontControllerRouteTest class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2015-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2015-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Tests;
@@ -30,10 +30,10 @@ class FrontControllerRouteTest extends FrontControllerTest
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
-                      ->will($this->returnValueMap([
+                      ->willReturnMap([
                           [ 'call', 'controller/method' ],
                           [ 'controller', 'controller' ],
-                      ]));
+                      ]);
 
         $value = $this->class->route();
 
@@ -51,8 +51,8 @@ class FrontControllerRouteTest extends FrontControllerTest
 
         $this->request->expects($this->once())
                       ->method('__get')
-                      ->with($this->equalTo('call'))
-                      ->will($this->returnValue('controller/method'));
+                      ->with('call')
+                      ->willReturn('controller/method');
 
         $value = $this->class->route();
 
@@ -79,7 +79,7 @@ class FrontControllerRouteTest extends FrontControllerTest
 
         $this->request->expects($this->exactly(5))
                       ->method('__get')
-                      ->will($this->returnValueMap($map));
+                      ->willReturnMap($map);
 
         $this->fao->expects($this->exactly(2))
                   ->method('find_matches')
@@ -114,7 +114,7 @@ class FrontControllerRouteTest extends FrontControllerTest
 
         $this->request->expects($this->exactly(4))
                       ->method('__get')
-                      ->will($this->returnValueMap($map));
+                      ->willReturnMap($map);
 
         $this->fao->expects($this->exactly(1))
                   ->method('find_matches')
@@ -148,7 +148,7 @@ class FrontControllerRouteTest extends FrontControllerTest
 
         $this->request->expects($this->exactly(3))
                       ->method('__get')
-                      ->will($this->returnValueMap($map));
+                      ->willReturnMap($map);
 
         $this->fao->expects($this->exactly(1))
                   ->method('find_matches')
@@ -181,7 +181,7 @@ class FrontControllerRouteTest extends FrontControllerTest
 
         $this->request->expects($this->exactly(6))
                       ->method('__get')
-                      ->will($this->returnValueMap($map));
+                      ->willReturnMap($map);
 
         $this->fao->expects($this->exactly(2))
                   ->method('find_matches')

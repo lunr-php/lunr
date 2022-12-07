@@ -48,27 +48,27 @@ class MsgpackViewPrintTest extends MsgpackViewTest
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
-                       ->with($this->equalTo(TRUE))
-                       ->will($this->returnValue('id'));
+                       ->with(TRUE)
+                       ->willReturn('id');
 
         $this->response->expects($this->once())
                        ->method('get_error_info')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(NULL));
+                       ->with('id')
+                       ->willReturn(NULL);
 
         $this->response->expects($this->once())
                        ->method('get_error_message')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue('Message'));
+                       ->with('id')
+                       ->willReturn('Message');
 
         $this->response->expects($this->once())
                        ->method('get_return_code')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(404));
+                       ->with('id')
+                       ->willReturn(404);
 
         $this->response->expects($this->once())
                        ->method('get_response_data')
-                       ->will($this->returnValue($this->msgpack));
+                       ->willReturn($this->msgpack);
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_code.msgpack');
 
@@ -89,27 +89,27 @@ class MsgpackViewPrintTest extends MsgpackViewTest
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
-                       ->with($this->equalTo(TRUE))
-                       ->will($this->returnValue('id'));
+                       ->with(TRUE)
+                       ->willReturn('id');
 
         $this->response->expects($this->once())
                        ->method('get_error_info')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(NULL));
+                       ->with('id')
+                       ->willReturn(NULL);
 
         $this->response->expects($this->once())
                        ->method('get_error_message')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(NULL));
+                       ->with('id')
+                       ->willReturn(NULL);
 
         $this->response->expects($this->once())
                        ->method('get_return_code')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(404));
+                       ->with('id')
+                       ->willReturn(404);
 
         $this->response->expects($this->once())
                        ->method('get_response_data')
-                       ->will($this->returnValue($this->msgpack));
+                       ->willReturn($this->msgpack);
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_empty_message.msgpack');
 
@@ -130,27 +130,27 @@ class MsgpackViewPrintTest extends MsgpackViewTest
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
-                       ->with($this->equalTo(TRUE))
-                       ->will($this->returnValue('id'));
+                       ->with(TRUE)
+                       ->willReturn('id');
 
         $this->response->expects($this->once())
                        ->method('get_error_info')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(4040));
+                       ->with('id')
+                       ->willReturn(4040);
 
         $this->response->expects($this->once())
                        ->method('get_error_message')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue('Message'));
+                       ->with('id')
+                       ->willReturn('Message');
 
         $this->response->expects($this->once())
                        ->method('get_return_code')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(404));
+                       ->with('id')
+                       ->willReturn(404);
 
         $this->response->expects($this->once())
                        ->method('get_response_data')
-                       ->will($this->returnValue($this->msgpack));
+                       ->willReturn($this->msgpack);
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_complete.msgpack');
 
@@ -171,27 +171,27 @@ class MsgpackViewPrintTest extends MsgpackViewTest
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
-                       ->with($this->equalTo(TRUE))
-                       ->will($this->returnValue('id'));
+                       ->with(TRUE)
+                       ->willReturn('id');
 
         $this->response->expects($this->once())
                        ->method('get_error_info')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(4040));
+                       ->with('id')
+                       ->willReturn(4040);
 
         $this->response->expects($this->once())
                        ->method('get_error_message')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue('Message'));
+                       ->with('id')
+                       ->willReturn('Message');
 
         $this->response->expects($this->once())
                        ->method('get_return_code')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(404));
+                       ->with('id')
+                       ->willReturn(404);
 
         $this->response->expects($this->once())
                        ->method('get_response_data')
-                       ->will($this->returnValue([]));
+                       ->willReturn([]);
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_empty_data.msgpack');
 
@@ -215,27 +215,27 @@ class MsgpackViewPrintTest extends MsgpackViewTest
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')
-                       ->with($this->equalTo(TRUE))
-                       ->will($this->returnValue('id'));
+                       ->with(TRUE)
+                       ->willReturn('id');
 
         $this->response->expects($this->once())
                        ->method('get_error_info')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(4040));
+                       ->with('id')
+                       ->willReturn(4040);
 
         $this->response->expects($this->once())
                        ->method('get_error_message')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue('Message'));
+                       ->with('id')
+                       ->willReturn('Message');
 
         $this->response->expects($this->once())
                        ->method('get_return_code')
-                       ->with($this->equalTo('id'))
-                       ->will($this->returnValue(404));
+                       ->with('id')
+                       ->willReturn(404);
 
         $this->response->expects($this->once())
                        ->method('get_response_data')
-                       ->will($this->returnValue($this->msgpack));
+                       ->willReturn($this->msgpack);
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_complete.msgpack');
 

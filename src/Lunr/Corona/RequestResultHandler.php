@@ -11,8 +11,9 @@
 
 namespace Lunr\Corona;
 
-use \Lunr\Corona\Exceptions\HttpException;
-use \Throwable;
+use Lunr\Corona\Exceptions\HttpException;
+use Throwable;
+use Psr\Log\LoggerInterface;
 
 /**
  * RequestResultHandler.
@@ -34,7 +35,7 @@ class RequestResultHandler
 
     /**
      * Shared instance of a Logger class.
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -43,7 +44,7 @@ class RequestResultHandler
      *
      * @param Request                  $request  Instance of the Request class.
      * @param Response                 $response Instance of the Response class.
-     * @param \Psr\Log\LoggerInterface $logger   Instance of a Logger class.
+     * @param LoggerInterface $logger   Instance of a Logger class.
      */
     public function __construct($request, $response, $logger)
     {

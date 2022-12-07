@@ -3,14 +3,15 @@
 /**
  * This file contains the ConflictExceptionBaseTest class.
  *
- * @package Lunr\Corona\Exceptions
- * @author  Damien Tardy-Panis <damien@m2mobi.com>
+ * @package   Lunr\Corona\Exceptions
+ * @author    Damien Tardy-Panis <damien@m2mobi.com>
+ * @copyright 2018-2022, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Lunr\Corona\Exceptions\Tests\Helpers\HttpExceptionTest;
-use Exception;
 
 /**
  * This class contains tests for the ConflictException class.

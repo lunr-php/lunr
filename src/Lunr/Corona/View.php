@@ -3,13 +3,15 @@
 /**
  * This file contains a view class.
  *
- * @package    Lunr\Corona
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2010-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * @package   Lunr\Corona
+ * @author    Heinz Wiesinger <heinz@m2mobi.com>
+ * @copyright 2010-2018, M2Mobi BV, Amsterdam, The Netherlands
+ * @license   http://lunr.nl/LICENSE MIT License
  */
 
 namespace Lunr\Corona;
+
+use Lunr\Core\Configuration;
 
 /**
  * View class used by the Website
@@ -133,7 +135,7 @@ abstract class View
      *
      * @param array $error Value returned from error_get_last()
      *
-     * @return boolean $return TRUE if error was fatal, FALSE otherwise
+     * @return bool $return TRUE if error was fatal, FALSE otherwise
      */
     protected function is_fatal_error($error)
     {
