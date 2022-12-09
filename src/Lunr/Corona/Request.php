@@ -114,7 +114,7 @@ class Request
         $this->cookie   = $parser->parse_cookie();
         $this->files    = $parser->parse_files();
         $this->cli_args = $parser->parse_command_line_arguments();
-        $this->raw_data = NULL;
+        $this->raw_data = '';
 
         $this->mock = [];
     }
@@ -369,7 +369,8 @@ class Request
     public function get_raw_data(): string
     {
         $input = $this->parser->parse_raw_data();
-        if (!empty($input))
+
+        if ($input !== FALSE)
         {
             $this->raw_data = $input;
         }

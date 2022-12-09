@@ -77,7 +77,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testRawData(): void
     {
-        $this->assertNull($this->get_reflection_property_value('raw_data'));
+        $this->assertSame('', $this->get_reflection_property_value('raw_data'));
     }
 
     /**

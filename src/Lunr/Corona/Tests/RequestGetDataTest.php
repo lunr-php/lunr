@@ -334,7 +334,7 @@ class RequestGetDataTest extends RequestTest
     }
 
     /**
-     * Test that get_raw_data() returns cached raw request data if parsing it is empty.
+     * Test that get_raw_data() returns cached raw request data if parsing it is FALSE.
      *
      * @covers Lunr\Corona\Request::get_raw_data
      */
@@ -342,7 +342,7 @@ class RequestGetDataTest extends RequestTest
     {
         $this->parser->expects($this->exactly(2))
                      ->method('parse_raw_data')
-                     ->willReturnOnConsecutiveCalls('raw', '');
+                     ->willReturnOnConsecutiveCalls('raw', FALSE);
 
         $this->assertEquals('raw', $this->class->get_raw_data());
         $this->assertEquals('raw', $this->class->get_raw_data());
