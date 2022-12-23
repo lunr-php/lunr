@@ -114,8 +114,8 @@ pipeline {
             }
             steps{
                 script {
-                    ACCOUNT_KEY = GIT_URL.tokenize('/')[3]
-                    PROJECT_SLUG_W_GIT = GIT_URL.tokenize('/')[4]
+                    ACCOUNT_KEY = GIT_URL.tokenize('/')[2]
+                    PROJECT_SLUG_W_GIT = GIT_URL.tokenize('/')[3]
                     PROJECT_SLUG = PROJECT_SLUG_W_GIT.substring(0, PROJECT_SLUG_W_GIT.lastIndexOf('.'))
                 }
                 withSonarQubeEnv('M2mobi') {
