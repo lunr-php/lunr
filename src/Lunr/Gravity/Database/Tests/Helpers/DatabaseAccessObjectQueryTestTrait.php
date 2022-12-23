@@ -106,6 +106,18 @@ trait DatabaseAccessObjectQueryTestTrait
                      ->method('has_failed')
                      ->will($this->returnValue(TRUE));
 
+        $this->result->expects($this->once())
+                     ->method('error_number')
+                     ->will($this->returnValue(1));
+
+        $this->result->expects($this->exactly(2))
+                     ->method('error_message')
+                     ->will($this->returnValue('Error!'));
+
+        $this->result->expects($this->exactly(2))
+                     ->method('query')
+                     ->will($this->returnValue('QUERY;'));
+
         $this->result->expects($this->any())
                      ->method('has_deadlock')
                      ->will($this->returnValue(FALSE));
