@@ -138,6 +138,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that fetch_result() stores the result correctly.
      *
+     * @requires PHP < 8.1
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
@@ -234,6 +235,7 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
     /**
      * Test that fetch_result() sets the success flag to TRUE if the result is of type MySQLi_Result.
      *
+     * @requires PHP < 8.1
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
