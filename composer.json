@@ -6,8 +6,8 @@
     "colinmollenhour/credis": "~1.12",
     "php": ">=7.4",
     "psr/cache": "~1.0",
-    "lunr/halo": "dev-master",
-    "lunr/config": "dev-master"
+    "lunr/halo": "~0.7.0",
+    "lunr/config": "~0.7.0"
   },
   "suggest": {
     "ext-http": "Needed for HTTP support in Corona, needed to get hostname in Shadow when parsing data",
