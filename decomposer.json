@@ -1,6 +1,6 @@
 {
     "Lunr.Halo": {
-        "url": "https://github.com/M2mobi/lunr.halo.git",
+        "url": "https://github.com/lunr-php/lunr.halo.git",
         "version": "0.7",
         "revision": "master",
         "psr4": {
@@ -9,7 +9,7 @@
         }
     },
     "Lunr.Config": {
-        "url": "https://github.com/M2mobi/lunr.config.git",
+        "url": "https://github.com/lunr-php/lunr.config.git",
         "version": "0.7",
         "revision": "master",
         "psr4": {
