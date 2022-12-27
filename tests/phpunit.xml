@@ -262,14 +262,6 @@
             <file>../src/Lunr/Spark/Contentful/Tests/ManagementApiPublishEntryTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/ManagementApiUnpublishEntryTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/PreviewApiBaseTest.php</file>
-            <file>../src/Lunr/Spark/Twitter/Tests/ApiBaseTest.php</file>
-            <file>../src/Lunr/Spark/Twitter/Tests/ApiGetJsonResultsTest.php</file>
-            <file>../src/Lunr/Spark/Twitter/Tests/AuthenticationApiTest.php</file>
-            <file>../src/Lunr/Spark/Twitter/Tests/AuthenticationBaseTest.php</file>
-            <file>../src/Lunr/Spark/Twitter/Tests/SearchApiTest.php</file>
-            <file>../src/Lunr/Spark/Twitter/Tests/SearchBaseTest.php</file>
-            <file>../src/Lunr/Spark/Twitter/Tests/TweetBaseTest.php</file>
-            <file>../src/Lunr/Spark/Twitter/Tests/TweetGetTweetDataTest.php</file>
         </testsuite>
         <testsuite name="Spawn">
             <file>../src/Lunr/Spawn/Tests/NullDispatcherBaseTest.php</file>
@@ -302,7 +294,6 @@
                 <directory>../src/Lunr/Shadow/Tests/</directory>
                 <directory>../src/Lunr/Spark/Tests/</directory>
                 <directory>../src/Lunr/Spark/Contentful/Tests/</directory>
-                <directory>../src/Lunr/Spark/Twitter/Tests/</directory>
                 <directory>../src/Lunr/Spawn/Tests/</directory>
                 <directory>../src/Lunr/Sphere/Tests/</directory>
             </exclude>

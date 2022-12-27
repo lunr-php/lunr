@@ -7,11 +7,8 @@ parameters:
         -
             message: '#Variable \$(response|result) might not be defined.#'
             paths:
-                - ../src/Lunr/Spark/Twitter/Api.php
                 - ../src/Lunr/Spark/Contentful/DeliveryApi.php
     universalObjectCratesClasses:
         - Lunr\Corona\Request
         - Lunr\Corona\FrontController
         - Lunr\Spark\Contentful\DeliveryApi
-        - Lunr\Spark\Twitter\Authentication
-        - Lunr\Spark\Twitter\Search
