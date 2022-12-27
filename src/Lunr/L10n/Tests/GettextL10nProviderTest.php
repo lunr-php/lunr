@@ -13,6 +13,7 @@ namespace Lunr\L10n\Tests;
 
 use Lunr\L10n\GettextL10nProvider;
 use Lunr\Halo\LunrBaseTest;
+use Psr\Log\LoggerInterface;
 use ReflectionClass;
 
 /**
@@ -32,15 +33,27 @@ abstract class GettextL10nProviderTest extends LunrBaseTest
 
     /**
      * The language used for testing.
-     * @var String
+     * @var string
      */
     protected const LANGUAGE = 'de_DE';
 
     /**
      * The domain used for testing.
-     * @var String
+     * @var string
      */
     protected const DOMAIN = 'Lunr';
+
+    /**
+     * Base locale value.
+     * @var string
+     */
+    private $base_locale;
+
+    /**
+     * Base domain value.
+     * @var string
+     */
+    private $base_domain;
 
     /**
      * TestCase Constructor.
@@ -48,6 +61,9 @@ abstract class GettextL10nProviderTest extends LunrBaseTest
     public function setUp(): void
     {
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+
+        $this->base_locale = setlocale(LC_MESSAGES, 0);
+        $this->base_domain = textdomain(NULL);
 
         $this->class = new GettextL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger);
         $this->class->set_default_language('nl_NL');
@@ -61,9 +77,14 @@ abstract class GettextL10nProviderTest extends LunrBaseTest
      */
     public function tearDown(): void
     {
+        setlocale(LC_MESSAGES, $this->base_locale);
+        textdomain($this->base_domain);
+
         unset($this->class);
         unset($this->reflection);
         unset($this->logger);
+        unset($this->base_locale);
+        unset($this->base_domain);
     }
 
 }

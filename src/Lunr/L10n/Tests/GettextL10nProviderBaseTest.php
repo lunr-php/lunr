@@ -29,18 +29,12 @@ class GettextL10nProviderBaseTest extends GettextL10nProviderTest
      */
     public function testInit(): void
     {
-        $current = textdomain(NULL);
-        $locale  = setlocale(LC_MESSAGES, 0);
-
         $method = $this->get_accessible_reflection_method('init');
 
         $method->invokeArgs($this->class, [ self::LANGUAGE ]);
 
         $this->assertEquals(self::LANGUAGE, setlocale(LC_MESSAGES, 0));
         $this->assertEquals(self::DOMAIN, textdomain(NULL));
-
-        textdomain($current);
-        setlocale(LC_MESSAGES, $locale);
     }
 
 }
