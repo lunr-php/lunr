@@ -12,11 +12,6 @@
         <env name="LANGUAGE" value="" force="true" />
     </php>
     <testsuites>
-        <testsuite name="Cache">
-            <file>../src/Lunr/Cache/Tests/CacheHandlerTest.php</file>
-            <file>../src/Lunr/Cache/Tests/CacheHandlerBaseTest.php</file>
-            <file>../src/Lunr/Cache/Tests/CacheHandlerDataTest.php</file>
-        </testsuite>
         <testsuite name="Core">
             <file>../src/Lunr/Core/Tests/DateTimeBaseTest.php</file>
             <file>../src/Lunr/Core/Tests/DateTimeGetDateTimeTest.php</file>
