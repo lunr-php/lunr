@@ -3,21 +3,21 @@
 /**
  * This file contains the PhysicalFilesystemAccessObjectFindTest class.
  *
- * @package    Lunr\Gravity\Filesystem
+ * @package    Lunr\Ray
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Gravity\Filesystem\Tests;
+namespace Lunr\Ray\Tests;
 
-use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
+use Lunr\Ray\PhysicalFilesystemAccessObject;
 
 /**
  * This class contains tests for finding files in directories.
  *
- * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
+ * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
 class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObjectTest
 {
@@ -25,7 +25,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     /**
      * Test finding in an accessible directory.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::find_matches
      */
     public function testGetMatchesOfAccessibleDirectory(): void
     {
@@ -46,7 +46,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      * @param bool $needle Boolean needle
      *
      * @dataProvider booleanNameProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::find_matches
      */
     public function testGetMatchesOfAccessibleDirectoryWithBooleanNeedle($needle): void
     {
@@ -63,7 +63,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      *
      * @requires OS Linux
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::find_matches
      */
     public function testGetMatchesOfInaccessibleDirectory(): void
     {
@@ -95,7 +95,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     /**
      * Test finding in an non-existant directory.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::find_matches
      */
     public function testGetMatchesOfNonExistantDirectory(): void
     {
@@ -127,7 +127,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     /**
      * Test finding in a file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::find_matches
      */
     public function testGetFileMatchesInFile(): void
     {
@@ -165,7 +165,7 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
      *
      * @requires     PHP < 8
      * @dataProvider booleanNameProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::find_matches
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::find_matches
      */
     public function testGetMatchesOfBooleanDirectory($directory): void
     {

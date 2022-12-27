@@ -3,20 +3,20 @@
 /**
  * This file contains the PhysicalFilesystemAccessObjectMkdirTest class.
  *
- * @package    Lunr\Gravity\Filesystem
+ * @package    Lunr\Ray
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Gravity\Filesystem\Tests;
+namespace Lunr\Ray\Tests;
 
-use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
+use Lunr\Ray\PhysicalFilesystemAccessObject;
 
 /**
  * This class contains tests for creating a directory.
  *
- * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
+ * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
 class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessObjectTest
 {
@@ -24,7 +24,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
     /**
      * Test that mkdir() returns FALSE when access mode is a string.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::mkdir
      */
     public function testMkdirReturnsFalseWhenAccessModeIsString(): void
     {
@@ -43,7 +43,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
      * @param mixed $mode Invalid mode value
      *
      * @dataProvider invalidDirModeValuesProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::mkdir
      */
     public function testMkdirReturnsFalseWhenAccessModeIsInvalid($mode): void
     {
@@ -59,7 +59,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
     /**
      * Test that mkdir() returns FALSE when fails to create a directory.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::mkdir
      */
     public function testMkdirWhenFailsToCreateADirectory(): void
     {
@@ -82,7 +82,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
      * @param int $mode Valid mode value
      *
      * @dataProvider validDirModeValuesProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::mkdir
      */
     public function testMkdirWhenCreatesADirectory($mode): void
     {
@@ -97,7 +97,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
     /**
      * Test that mkdir() returns TRUE when creates more than one nested directories.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::mkdir
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::mkdir
      */
     public function testMkdirWhenCreatesADirectoryRecursively(): void
     {

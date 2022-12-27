@@ -182,17 +182,6 @@
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectResultsTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectVerifyQuerySuccessTest.php</file>
             <file>../src/Lunr/Gravity/Database/Tests/TransactionalDatabaseAccessObjectCallsTest.php</file>
-            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectFileTest.php</file>
-            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectTmpTest.php</file>
-            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectRmTest.php</file>
-            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectListDirectoriesTest.php</file>
-            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectListFilesTest.php</file>
-            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectDirectoryTest.php</file>
-            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectFindTest.php</file>
-            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemRemoveDirectoryTest.php</file>
-            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectCSVTest.php</file>
-            <file>../src/Lunr/Gravity/Filesystem/Tests/PhysicalFilesystemAccessObjectMkdirTest.php</file>
         </testsuite>
         <testsuite name="L10n">
             <file>../tests/system/EnvironmentTest.php</file>
@@ -202,10 +191,23 @@
             <file>../src/Lunr/L10n/Tests/L10nProviderBaseTest.php</file>
             <file>../src/Lunr/L10n/Tests/GettextL10nProviderBaseTest.php</file>
             <file>../src/Lunr/L10n/Tests/GettextL10nProviderLangTest.php</file>
-            <file>../src/Lunr/L10n/Tests/GettextL10nProviderNlangTest.php</file>
+<!--            <file>../src/Lunr/L10n/Tests/GettextL10nProviderNlangTest.php</file>
             <file>../src/Lunr/L10n/Tests/PHPL10nProviderBaseTest.php</file>
             <file>../src/Lunr/L10n/Tests/PHPL10nProviderLangTest.php</file>
-            <file>../src/Lunr/L10n/Tests/PHPL10nProviderNlangTest.php</file>
+            <file>../src/Lunr/L10n/Tests/PHPL10nProviderNlangTest.php</file>-->
+        </testsuite>
+        <testsuite name="Ray">
+            <file>../src/Lunr/Ray/Tests/PhysicalFilesystemAccessObjectBaseTest.php</file>
+            <file>../src/Lunr/Ray/Tests/PhysicalFilesystemAccessObjectFileTest.php</file>
+            <file>../src/Lunr/Ray/Tests/PhysicalFilesystemAccessObjectTmpTest.php</file>
+            <file>../src/Lunr/Ray/Tests/PhysicalFilesystemAccessObjectRmTest.php</file>
+            <file>../src/Lunr/Ray/Tests/PhysicalFilesystemAccessObjectListDirectoriesTest.php</file>
+            <file>../src/Lunr/Ray/Tests/PhysicalFilesystemAccessObjectListFilesTest.php</file>
+            <file>../src/Lunr/Ray/Tests/PhysicalFilesystemAccessObjectDirectoryTest.php</file>
+            <file>../src/Lunr/Ray/Tests/PhysicalFilesystemAccessObjectFindTest.php</file>
+            <file>../src/Lunr/Ray/Tests/PhysicalFilesystemRemoveDirectoryTest.php</file>
+            <file>../src/Lunr/Ray/Tests/PhysicalFilesystemAccessObjectCSVTest.php</file>
+            <file>../src/Lunr/Ray/Tests/PhysicalFilesystemAccessObjectMkdirTest.php</file>
         </testsuite>
         <testsuite name="Shadow">
             <file>../src/Lunr/Shadow/Tests/ConsoleTest.php</file>
@@ -276,8 +278,8 @@
                 <directory>../src/Lunr/Gravity/Database/MariaDB/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/MySQL/Tests/</directory>
                 <directory>../src/Lunr/Gravity/Database/SQLite3/Tests/</directory>
-                <directory>../src/Lunr/Gravity/Filesystem/Tests/</directory>
                 <directory>../src/Lunr/L10n/Tests/</directory>
+                <directory>../src/Lunr/Ray/Tests/</directory>
                 <directory>../src/Lunr/Shadow/Tests/</directory>
                 <directory>../src/Lunr/Spark/Tests/</directory>
                 <directory>../src/Lunr/Spark/Contentful/Tests/</directory>

@@ -3,22 +3,22 @@
 /**
  * This file contains the PhysicalFilesystemAccessObjectDirectoryTest class.
  *
- * @package    Lunr\Gravity\Filesystem
+ * @package    Lunr\Ray
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Gravity\Filesystem\Tests;
+namespace Lunr\Ray\Tests;
 
-use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
+use Lunr\Ray\PhysicalFilesystemAccessObject;
 use Throwable;
 
 /**
  * This class contains tests for directory related methods in the PhysicalFilesystemAccessObject.
  *
- * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
+ * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
 class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAccessObjectTest
 {
@@ -26,11 +26,11 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
     /**
      * Test listing an accessible directory.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_directory_listing
      */
     public function testGetListingOfAccessibleDirectory(): void
     {
-        $expected = [ 'Database', 'file1', 'file2', 'file3', 'folder1', 'folder2' ];
+        $expected = [ 'file1', 'file2', 'file3', 'folder1', 'folder2' ];
 
         $value = $this->class->get_directory_listing($this->find_location);
 
@@ -46,7 +46,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
      *
      * @requires OS Linux
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_directory_listing
      */
     public function testGetListingOfInaccessibleDirectory(): void
     {
@@ -71,7 +71,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
     /**
      * Test listing an non-existant directory.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_directory_listing
      */
     public function testGetListingOfNonExistantDirectory(): void
     {
@@ -96,7 +96,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
     /**
      * Test listing a file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_directory_listing
      */
     public function testGetListingOfFile(): void
     {
@@ -134,7 +134,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
      *
      * @requires     PHP < 8
      * @dataProvider booleanNameProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_directory_listing
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::get_directory_listing
      */
     public function testGetListingOfBooleanDirectory($directory): void
     {

@@ -3,16 +3,16 @@
 /**
  * This file contains the PhysicalFilesystemAccessObjectTest class.
  *
- * @package    Lunr\Gravity\Filesystem
+ * @package    Lunr\Ray
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Gravity\Filesystem\Tests;
+namespace Lunr\Ray\Tests;
 
-use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
+use Lunr\Ray\PhysicalFilesystemAccessObject;
 use Psr\Log\LoggerInterface;
 use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
@@ -22,7 +22,7 @@ use stdClass;
  * This class contains common constructors/destructors and data providers
  * for testing the PhysicalFilesystemAccessObject class.
  *
- * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
+ * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
 abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
 {
@@ -46,8 +46,8 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     {
         $this->logger        = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->class         = new PhysicalFilesystemAccessObject($this->logger);
-        $this->reflection    = new ReflectionClass('Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject');
-        $this->find_location = TEST_STATICS . '/Gravity';
+        $this->reflection    = new ReflectionClass('Lunr\Ray\PhysicalFilesystemAccessObject');
+        $this->find_location = TEST_STATICS . '/Ray';
     }
 
     /**

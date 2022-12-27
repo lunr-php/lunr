@@ -11,7 +11,7 @@
 
 namespace Lunr\Corona;
 
-use Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface;
+use Lunr\Ray\FilesystemAccessObjectInterface;
 
 /**
  * Controller class

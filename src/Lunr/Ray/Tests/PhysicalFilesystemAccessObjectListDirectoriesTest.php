@@ -3,21 +3,21 @@
 /**
  * This file contains the PhysicalFilesystemAccessObjectListDirectoriesTest class.
  *
- * @package    Lunr\Gravity\Filesystem
+ * @package    Lunr\Ray
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Gravity\Filesystem\Tests;
+namespace Lunr\Ray\Tests;
 
-use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
+use Lunr\Ray\PhysicalFilesystemAccessObject;
 
 /**
  * This class contains tests for directory related methods in the PhysicalFilesystemAccessObject.
  *
- * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
+ * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
 class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesystemAccessObjectTest
 {
@@ -25,11 +25,11 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
     /**
      * Test listing directories in an accessible directory.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_directories
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_list_of_directories
      */
     public function testGetListOfDirectoriesInAccessibleDirectory(): void
     {
-        $expected = [ 'Database', 'folder1', 'folder2' ];
+        $expected = [ 'folder1', 'folder2' ];
 
         $value = $this->class->get_list_of_directories($this->find_location);
 
@@ -45,7 +45,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
      *
      * @requires OS Linux
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_directories
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_list_of_directories
      */
     public function testGetListOfDirectoriesInInaccessibleDirectory(): void
     {
@@ -77,7 +77,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
     /**
      * Test listing directories in an non-existant directory.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_directories
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_list_of_directories
      */
     public function testGetListOfDirectoriesInNonExistantDirectory(): void
     {
@@ -109,7 +109,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
     /**
      * Test listing directories in a file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_directories
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_list_of_directories
      */
     public function testGetListOfDirectoriesInFile(): void
     {
@@ -147,7 +147,7 @@ class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesyst
      *
      * @requires     PHP < 8
      * @dataProvider booleanNameProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_directories
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::get_list_of_directories
      */
     public function testGetListOfDirectoriesInBooleanDirectory($directory): void
     {

@@ -3,21 +3,21 @@
 /**
  * This file contains the PhysicalFilesystemAccessObjectCSVTest class.
  *
- * @package    Lunr\Gravity\Filesystem
+ * @package    Lunr\Ray
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Gravity\Filesystem\Tests;
+namespace Lunr\Ray\Tests;
 
-use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
+use Lunr\Ray\PhysicalFilesystemAccessObject;
 use stdClass;
 
 /**
  * This class contains tests for the put_csv_file_content method in the PhysicalFilesystemAccessObject.
  *
- * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
+ * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
 class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObjectTest
 {
@@ -25,7 +25,7 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
     /**
      * Test that put_csv_file_content() logs a warning when cannot open the given file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_csv_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::put_csv_file_content
      */
     public function testPutCSVFileContentCannotOpenFile(): void
     {
@@ -46,11 +46,11 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
      * @param mixed $values Invalid values
      *
      * @dataProvider invalidCSVArrayValuesProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_csv_file_content
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::put_csv_file_content
      */
     public function testPutCSVFileContentInInvalidArrayValues($values): void
     {
-        $filepath = TEST_STATICS . '/Gravity/folder2/test.csv';
+        $filepath = TEST_STATICS . '/Ray/folder2/test.csv';
 
         $this->assertTrue($this->class->put_csv_file_content($filepath, [ [ $values ] ]));
         $this->assertStringMatchesFormatFile($filepath, "\n");
@@ -61,11 +61,11 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
     /**
      * Test that put_csv_file_content() returns TRUE in success.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_csv_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::put_csv_file_content
      */
     public function testPutCSVFileContentSuccess(): void
     {
-        $filepath = TEST_STATICS . '/Gravity/folder2/test.csv';
+        $filepath = TEST_STATICS . '/Ray/folder2/test.csv';
 
         $this->assertTrue($this->class->put_csv_file_content($filepath, [ [ 'value1', 'value2' ] ]));
         $this->assertStringMatchesFormatFile($filepath, "value1,value2\n");
@@ -76,11 +76,11 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
     /**
      * Test that put_csv_file_content() returns TRUE in success with enclosure and delimeter.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_csv_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::put_csv_file_content
      */
     public function testPutCSVFileContentSuccessCustomDelimeter(): void
     {
-        $filepath = TEST_STATICS . '/Gravity/folder2/test.csv';
+        $filepath = TEST_STATICS . '/Ray/folder2/test.csv';
 
         $this->assertTrue($this->class->put_csv_file_content($filepath, [ [ 'value1', 'value2' ] ], '-'));
         $this->assertStringMatchesFormatFile($filepath, "value1-value2\n");

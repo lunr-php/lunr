@@ -3,20 +3,20 @@
 /**
  * This file contains the PhysicalFilesystemAccessObjectFileTest class.
  *
- * @package    Lunr\Gravity\Filesystem
+ * @package    Lunr\Ray
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Gravity\Filesystem\Tests;
+namespace Lunr\Ray\Tests;
 
-use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
+use Lunr\Ray\PhysicalFilesystemAccessObject;
 
 /**
  * This class contains tests for file related methods in the PhysicalFilesystemAccessObject.
  *
- * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
+ * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
 class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObjectTest
 {
@@ -24,11 +24,11 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that get_file_content() gets contents of an accessible file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_file_content
      */
     public function testGetFileContentWithAccessibleFile(): void
     {
-        $file = TEST_STATICS . '/Gravity/file1';
+        $file = TEST_STATICS . '/Ray/file1';
 
         $content = "Content\n";
 
@@ -40,7 +40,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that get_file_content() does not get contents of an inaccessible file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_file_content
      */
     public function testGetFileContentWithInaccessibleFile(): void
     {
@@ -65,7 +65,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that get_file_content() does not get contents of a non-existant file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_file_content
      */
     public function testGetFileContentWithNonExistantFile(): void
     {
@@ -92,7 +92,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that get_file_content() does not get contents of a directory.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_file_content
      */
     public function testGetFileContentOfDirectory(): void
     {
@@ -114,7 +114,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * @param bool $file Boolean filename
      *
      * @dataProvider booleanNameProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_content
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::get_file_content
      */
     public function testGetFileContentWithBooleanFilenames($file): void
     {
@@ -126,7 +126,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() puts contents in an accessible file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentWithAccessibleFile(): void
     {
@@ -136,7 +136,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $written = $this->class->put_file_content($file, $content);
 
-        $this->assertFileEquals(TEST_STATICS . '/Gravity/file1', $file);
+        $this->assertFileEquals(TEST_STATICS . '/Ray/file1', $file);
         $this->assertEquals(8, $written);
 
         unlink($file);
@@ -145,7 +145,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() does not put contents in an inaccessible file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentWithInaccessibleFile(): void
     {
@@ -172,7 +172,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() puts contents in a non-existant file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentWithNonExistantFile(): void
     {
@@ -184,7 +184,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
 
         $written = $this->class->put_file_content($file, $content);
 
-        $this->assertFileEquals(TEST_STATICS . '/Gravity/file1', $file);
+        $this->assertFileEquals(TEST_STATICS . '/Ray/file1', $file);
         $this->assertEquals(8, $written);
 
         unlink($file);
@@ -193,7 +193,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() does not put contents in a directory.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentInDirectory(): void
     {
@@ -223,7 +223,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * @param bool $file Boolean filename
      *
      * @dataProvider booleanNameProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentWithBooleanFilenames($file): void
     {
@@ -237,7 +237,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() appends the content to the file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentAppendsToFile(): void
     {
@@ -248,7 +248,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
         $this->class->put_file_content($file, $content);
         $this->class->put_file_content($file, $content, TRUE);
 
-        $this->assertFileEquals(TEST_STATICS . '/Gravity/file3', $file);
+        $this->assertFileEquals(TEST_STATICS . '/Ray/file3', $file);
 
         unlink($file);
     }
@@ -256,7 +256,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() acquires an exclusive lock to the file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentAcquiresExclusiveLock(): void
     {
@@ -267,7 +267,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
         $this->class->put_file_content($file, $content);
         $this->class->put_file_content($file, $content, FALSE, TRUE);
 
-        $this->assertFileEquals(TEST_STATICS . '/Gravity/file1', $file);
+        $this->assertFileEquals(TEST_STATICS . '/Ray/file1', $file);
 
         unlink($file);
     }
@@ -275,7 +275,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test that put_file_content() appends the content to the file and acquires an exclusive lock.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::put_file_content
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::put_file_content
      */
     public function testPutFileContentAppendsToFileAndAcquiresExclusiveLock(): void
     {
@@ -286,7 +286,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
         $this->class->put_file_content($file, $content);
         $this->class->put_file_content($file, $content, TRUE, TRUE);
 
-        $this->assertFileEquals(TEST_STATICS . '/Gravity/file3', $file);
+        $this->assertFileEquals(TEST_STATICS . '/Ray/file3', $file);
 
         unlink($file);
     }
@@ -294,7 +294,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test getting a SplFileObject for an accessible file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_file_object
      */
     public function testGetFileObjectForAccessibleFile(): void
     {
@@ -316,7 +316,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * @requires OS Linux
      *
      * @dataProvider invalidModesProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::get_file_object
      */
     public function testGetFileObjectForAccessibleFileWithInvalidMode($mode, $message): void
     {
@@ -339,7 +339,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * Test getting a SplFileObject for an inaccessible file.
      *
      * @requires OS Linux
-     * @covers   Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
+     * @covers   Lunr\Ray\PhysicalFilesystemAccessObject::get_file_object
      */
     public function testGetFileObjectForInaccessibleFile(): void
     {
@@ -366,7 +366,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test getting a SplFileObject for a non-existant file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_file_object
      */
     public function testGetFileObjectForNonExistantFile(): void
     {
@@ -395,7 +395,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     /**
      * Test getting a SplFileObject for a directory.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_file_object
      */
     public function testGetFileObjectOfDirectory(): void
     {
@@ -418,7 +418,7 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
      * @param bool $file Boolean filename
      *
      * @dataProvider booleanNameProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_file_object
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::get_file_object
      */
     public function testGetFileObjectForBooleanFilenames($file): void
     {

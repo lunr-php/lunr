@@ -3,21 +3,21 @@
 /**
  * This file contains the PhysicalFilesystemAccessObjectListFilesTest class.
  *
- * @package    Lunr\Gravity\Filesystem
+ * @package    Lunr\Ray
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @author     Andrea Nigido <andrea@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Gravity\Filesystem\Tests;
+namespace Lunr\Ray\Tests;
 
-use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
+use Lunr\Ray\PhysicalFilesystemAccessObject;
 
 /**
  * This class contains tests for directory related methods in the PhysicalFilesystemAccessObject.
  *
- * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
+ * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
 class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAccessObjectTest
 {
@@ -25,7 +25,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
     /**
      * Test listing files in an accessible directory.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_list_of_files
      */
     public function testGetListOfFilesInAccessibleDirectory(): void
     {
@@ -45,7 +45,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      *
      * @requires OS Linux
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_list_of_files
      */
     public function testGetListOfFilesInInaccessibleDirectory(): void
     {
@@ -77,7 +77,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
     /**
      * Test listing files in an non-existant directory.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_list_of_files
      */
     public function testGetListOfFilesInNonExistantDirectory(): void
     {
@@ -109,7 +109,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
     /**
      * Test listing files in a file.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_list_of_files
      */
     public function testGetListOfFilesInFile(): void
     {
@@ -147,7 +147,7 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
      *
      * @requires     PHP < 8
      * @dataProvider booleanNameProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::get_list_of_files
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::get_list_of_files
      */
     public function testGetListOfFilesInBooleanTrueDirectory($directory): void
     {

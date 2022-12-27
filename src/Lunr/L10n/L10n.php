@@ -14,7 +14,7 @@
 namespace Lunr\L10n;
 
 use Psr\Log\LoggerInterface;
-use Lunr\Gravity\Filesystem\FilesystemAccessObjectInterface;
+use Lunr\Ray\FilesystemAccessObjectInterface;
 /**
  * Localization support class
  */

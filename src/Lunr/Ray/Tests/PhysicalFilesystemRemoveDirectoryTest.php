@@ -3,20 +3,20 @@
 /**
  * This file contains the PhysicalFilesystemRemoveDirectoryTest class.
  *
- * @package    Lunr\Gravity\Filesystem
+ * @package    Lunr\Ray
  * @author     Dinos Theodorou <dinos@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Gravity\Filesystem\Tests;
+namespace Lunr\Ray\Tests;
 
-use Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject;
+use Lunr\Ray\PhysicalFilesystemAccessObject;
 
 /**
  * This class contains tests for removing a directory recursively.
  *
- * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject
+ * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
 class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObjectTest
 {
@@ -24,7 +24,7 @@ class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObje
     /**
      * Test that rmdir() removes the given directory and its contents.
      *
-     * @covers Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::rmdir
+     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::rmdir
      */
     public function testRemoveDirectory(): void
     {
@@ -58,7 +58,7 @@ class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObje
      * @requires OS Linux
      *
      * @dataProvider invalidFilepathValueProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::rmdir
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::rmdir
      */
     public function testRemoveDirectoryWithInvalidDirectory($directory, $error): void
     {
@@ -77,7 +77,7 @@ class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObje
      *
      * @requires     PHP < 8
      * @dataProvider emptyFilepathValueProvider
-     * @covers       Lunr\Gravity\Filesystem\PhysicalFilesystemAccessObject::rmdir
+     * @covers       Lunr\Ray\PhysicalFilesystemAccessObject::rmdir
      */
     public function testRemoveDirectoryInEmptyDirectory($directory): void
     {

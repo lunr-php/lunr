@@ -3,13 +3,13 @@
 /**
  * Filesystem Access Object interface.
  *
- * @package    Lunr\Gravity\Filesystem
+ * @package    Lunr\Ray
  * @author     Heinz Wiesinger <heinz@m2mobi.com>
  * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
  * @license    http://lunr.nl/LICENSE MIT License
  */
 
-namespace Lunr\Gravity\Filesystem;
+namespace Lunr\Ray;
 
 /**
  * Filesystem Access Object interface.
