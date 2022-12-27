@@ -13,14 +13,6 @@
     </php>
     <testsuites>
         <testsuite name="Core">
-            <file>../src/Lunr/Core/Tests/DateTimeBaseTest.php</file>
-            <file>../src/Lunr/Core/Tests/DateTimeGetDateTimeTest.php</file>
-            <file>../src/Lunr/Core/Tests/DateTimeGetDelayedDatetimeTest.php</file>
-            <file>../src/Lunr/Core/Tests/DateTimeGetDelayedTimestampTest.php</file>
-            <file>../src/Lunr/Core/Tests/DateTimeTodayTest.php</file>
-            <file>../src/Lunr/Core/Tests/DateTimeTomorrowTest.php</file>
-            <file>../src/Lunr/Core/Tests/DateTimeYesterdayTest.php</file>
-            <file>../src/Lunr/Core/Tests/DateTimeVerifyTest.php</file>
             <file>../src/Lunr/Core/Tests/IniMainTest.php</file>
             <file>../src/Lunr/Core/Tests/IniSectionTest.php</file>
             <file>../src/Lunr/Core/Tests/IniGetIntegerForShorthandBytesTest.php</file>
