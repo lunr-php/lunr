@@ -262,31 +262,6 @@
             <file>../src/Lunr/Spark/Contentful/Tests/ManagementApiPublishEntryTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/ManagementApiUnpublishEntryTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/PreviewApiBaseTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/ApiBaseTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/ApiGetUrlResultsTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/ApiGetJsonResultsTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/ApiFetchDataTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/AuthenticationBaseTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/AuthenticationGetSetTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/AuthenticationApiTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/AuthenticationGetTemporaryTokenTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/AuthenticationGetAppTokenTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/UserBaseTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/UserPermissionsTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/UserProfileBaseTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/UserProfileGetDataTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/UserProfileGetProfileDataTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/PageBaseTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/PageGetDataTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/PageGetPageDataTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/PostBaseTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/PostSetDataTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/PostGetPostDataTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/FeedBaseTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/FeedClassifyTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/FeedGetDataTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/FeedGetNextDataTest.php</file>
-            <file>../src/Lunr/Spark/Facebook/Tests/FeedGetPreviousDataTest.php</file>
             <file>../src/Lunr/Spark/Twitter/Tests/ApiBaseTest.php</file>
             <file>../src/Lunr/Spark/Twitter/Tests/ApiGetJsonResultsTest.php</file>
             <file>../src/Lunr/Spark/Twitter/Tests/AuthenticationApiTest.php</file>
@@ -327,7 +302,6 @@
                 <directory>../src/Lunr/Shadow/Tests/</directory>
                 <directory>../src/Lunr/Spark/Tests/</directory>
                 <directory>../src/Lunr/Spark/Contentful/Tests/</directory>
-                <directory>../src/Lunr/Spark/Facebook/Tests/</directory>
                 <directory>../src/Lunr/Spark/Twitter/Tests/</directory>
                 <directory>../src/Lunr/Spawn/Tests/</directory>
                 <directory>../src/Lunr/Sphere/Tests/</directory>
