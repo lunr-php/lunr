@@ -27,9 +27,10 @@
     },
     "Requests": {
         "url": "https://github.com/WordPress/Requests.git",
-        "version": "1.8.0",
-        "psr0": {
-            "path": "/library/"
+        "version": "2.0.5",
+        "psr4": {
+            "prefix": "WpOrg\\Requests",
+            "search-path": "/src/"
         }
     },
     "Credis": {

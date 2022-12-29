@@ -11,8 +11,9 @@
 
 namespace Lunr\Spark\Contentful;
 
-use Requests_Exception;
-use Requests_Exception_HTTP;
+use Lunr\Spark\CentralAuthenticationStore;
+use Psr\Log\LoggerInterface;
+use WpOrg\Requests\Session;
 
 /**
  * Low level Contentful API methods for Spark
@@ -22,46 +23,46 @@ class Api
 
     /**
      * Contentful URL.
-     * @var String
+     * @var string
      */
     protected const URL = 'https://www.contentful.com';
 
     /**
      * Shared instance of the CentralAuthenticationStore
-     * @var \Lunr\Spark\CentralAuthenticationStore
+     * @var CentralAuthenticationStore
      */
     protected $cas;
 
     /**
      * Shared instance of a Logger class.
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
     protected $logger;
 
     /**
-     * Shared instance of the Requests_Session class.
-     * @var \Requests_Session
+     * Shared instance of the Requests\Session class.
+     * @var Session
      */
     protected $http;
 
     /**
      * Space ID
-     * @var String
+     * @var string
      */
     protected $space;
 
     /**
      * Environment
-     * @var String
+     * @var string
      */
     protected $environment;
 
     /**
      * Constructor.
      *
-     * @param \Lunr\Spark\CentralAuthenticationStore $cas    Shared instance of the credentials store
-     * @param \Psr\Log\LoggerInterface               $logger Shared instance of a Logger class.
-     * @param \Requests_Session                      $http   Shared instance of the Requests_Session class.
+     * @param CentralAuthenticationStore $cas    Shared instance of the credentials store
+     * @param LoggerInterface            $logger Shared instance of a Logger class.
+     * @param Session                    $http   Shared instance of the Requests\Session class.
      */
     public function __construct($cas, $logger, $http)
     {

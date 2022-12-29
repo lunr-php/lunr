@@ -11,8 +11,8 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
-use Requests_Exception_HTTP_400;
-use Requests;
+use WpOrg\Requests\Exception\Http\Status400 as RequestsExceptionHTTP400;
+use WpOrg\Requests\Requests;
 
 /**
  * This class contains the tests for the ManagementApi.
@@ -47,7 +47,7 @@ class ManagementApiUpdateEntryTest extends ManagementApiTest
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->willThrowException(new Requests_Exception_HTTP_400('Bad request', $this->response));
+                       ->willThrowException(new RequestsExceptionHTTP400('Bad request', $this->response));
 
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -56,7 +56,7 @@ class ManagementApiUpdateEntryTest extends ManagementApiTest
                          [ 'message' => '400 Bad request', 'request' => $url ]
                      );
 
-        $this->expectException('Requests_Exception_HTTP_400');
+        $this->expectException('WpOrg\Requests\Exception\Http\Status400');
         $this->expectExceptionMessage('Bad request');
 
         $this->class->update_entry('123456', 7, [ 'name' => 'yo' ]);

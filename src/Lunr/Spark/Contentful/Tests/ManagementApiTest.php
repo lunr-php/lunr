@@ -11,8 +11,12 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
+use Lunr\Spark\CentralAuthenticationStore;
 use Lunr\Spark\Contentful\ManagementApi;
 use Lunr\Halo\LunrBaseTest;
+use Psr\Log\LoggerInterface;
+use WpOrg\Requests\Response;
+use WpOrg\Requests\Session;
 use ReflectionClass;
 
 /**
@@ -30,20 +34,20 @@ abstract class ManagementApiTest extends LunrBaseTest
     protected $cas;
 
     /**
-     * Mock instance of the Requests_Session class.
-     * @var \Requests_Session
+     * Mock instance of the Requests\Session class.
+     * @var Session
      */
     protected $http;
 
     /**
      * Mock instance of the Logger class
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
     protected $logger;
 
     /**
-     * Mock instance of the Requests_Response class.
-     * @var \Requests_Response
+     * Mock instance of the Requests\Response class.
+     * @var Response
      */
     protected $response;
 
@@ -53,9 +57,9 @@ abstract class ManagementApiTest extends LunrBaseTest
     public function setUp(): void
     {
         $this->cas      = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
-        $this->http     = $this->getMockBuilder('Requests_Session')->getMock();
+        $this->http     = $this->getMockBuilder('WpOrg\Requests\Session')->getMock();
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
-        $this->response = $this->getMockBuilder('Requests_Response')->getMock();
+        $this->response = $this->getMockBuilder('WpOrg\Requests\Response')->getMock();
 
         $this->class = new ManagementApi($this->cas, $this->logger, $this->http);
 

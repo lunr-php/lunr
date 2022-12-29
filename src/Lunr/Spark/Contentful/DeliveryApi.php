@@ -11,8 +11,12 @@
 
 namespace Lunr\Spark\Contentful;
 
-use Requests_Exception;
-use Requests_Exception_HTTP;
+use Lunr\Spark\CentralAuthenticationStore;
+use Psr\Log\LoggerInterface;
+use WpOrg\Requests\Exception as RequestsException;
+use WpOrg\Requests\Exception\HTTP as RequestsExceptionHTTP;
+use WpOrg\Requests\Response;
+use WpOrg\Requests\Session;
 
 /**
  * Low level Contentful API methods for Spark
@@ -22,16 +26,16 @@ class DeliveryApi extends Api
 
     /**
      * Content Delivery API URL.
-     * @var String
+     * @var string
      */
     protected const URL = 'https://cdn.contentful.com';
 
     /**
      * Constructor.
      *
-     * @param \Lunr\Spark\CentralAuthenticationStore $cas    Shared instance of the credentials store
-     * @param \Psr\Log\LoggerInterface               $logger Shared instance of a Logger class.
-     * @param \Requests_Session                      $http   Shared instance of the Requests_Session class.
+     * @param CentralAuthenticationStore $cas    Shared instance of the credentials store
+     * @param LoggerInterface            $logger Shared instance of a Logger class.
+     * @param Session                    $http   Shared instance of the Requests\Session class.
      */
     public function __construct($cas, $logger, $http)
     {
@@ -102,14 +106,14 @@ class DeliveryApi extends Api
 
             $response->throw_for_status();
         }
-        catch (Requests_Exception_HTTP $e)
+        catch (RequestsExceptionHTTP $e)
         {
             $context = [ 'message' => $result['message'], 'request' => $response->url, 'id' => $result['sys']['id'] ];
             $this->logger->warning('Contentful API Request ({request}) failed with id "{id}": {message}', $context);
 
             $result['total'] = 0;
         }
-        catch (Requests_Exception $e)
+        catch (RequestsException $e)
         {
             $context = [ 'message' => $e->getMessage(), 'request' => $url ];
             $this->logger->warning('Contentful API Request ({request}) failed! {message}', $context);

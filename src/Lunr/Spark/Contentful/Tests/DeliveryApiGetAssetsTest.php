@@ -11,8 +11,8 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
-use Requests_Exception_HTTP_400;
-use Requests_Exception;
+use WpOrg\Requests\Exception\Http\Status400 as RequestsExceptionHTTP400;
+use WpOrg\Requests\Exception as RequestsException;
 
 /**
  * This class contains the tests for the DeliveryApi.
@@ -46,7 +46,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->willThrowException(new Requests_Exception_HTTP_400(NULL, $this->response));
+                       ->willThrowException(new RequestsExceptionHTTP400(NULL, $this->response));
 
         $this->response->status_code = 400;
         $this->response->url         = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
@@ -101,7 +101,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
 
         $this->response->expects($this->once())
                        ->method('throw_for_status')
-                       ->willThrowException(new Requests_Exception_HTTP_400(NULL, $this->response));
+                       ->willThrowException(new RequestsExceptionHTTP400(NULL, $this->response));
 
         $this->response->status_code = 400;
         $this->response->url         = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
@@ -152,7 +152,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
         $this->http->expects($this->once())
                    ->method('request')
                    ->with($url, [], $params)
-                   ->willThrowException(new Requests_Exception('cURL error 0001: Network error', 'curlerror', NULL));
+                   ->willThrowException(new RequestsException('cURL error 0001: Network error', 'curlerror', NULL));
 
         $this->response->expects($this->never())
                        ->method('throw_for_status');
@@ -195,7 +195,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
         $this->http->expects($this->once())
                    ->method('request')
                    ->with($url, [], $params)
-                   ->willThrowException(new Requests_Exception('cURL error 0001: Network error', 'curlerror', NULL));
+                   ->willThrowException(new RequestsException('cURL error 0001: Network error', 'curlerror', NULL));
 
         $this->response->expects($this->never())
                        ->method('throw_for_status');
