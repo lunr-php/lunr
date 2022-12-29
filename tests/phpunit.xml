@@ -191,10 +191,10 @@
             <file>../src/Lunr/L10n/Tests/L10nProviderBaseTest.php</file>
             <file>../src/Lunr/L10n/Tests/GettextL10nProviderBaseTest.php</file>
             <file>../src/Lunr/L10n/Tests/GettextL10nProviderLangTest.php</file>
-<!--            <file>../src/Lunr/L10n/Tests/GettextL10nProviderNlangTest.php</file>
+            <file>../src/Lunr/L10n/Tests/GettextL10nProviderNlangTest.php</file>
             <file>../src/Lunr/L10n/Tests/PHPL10nProviderBaseTest.php</file>
             <file>../src/Lunr/L10n/Tests/PHPL10nProviderLangTest.php</file>
-            <file>../src/Lunr/L10n/Tests/PHPL10nProviderNlangTest.php</file>-->
+            <file>../src/Lunr/L10n/Tests/PHPL10nProviderNlangTest.php</file>
         </testsuite>
         <testsuite name="Ray">
             <file>../src/Lunr/Ray/Tests/PhysicalFilesystemAccessObjectBaseTest.php</file>
