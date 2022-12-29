@@ -4,55 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4cb5aa89ba71d581dd1d682187237e21",
+    "content-hash": "1f29668cef5890009e8fee4c145d593e",
     "packages": [
-        {
-            "name": "colinmollenhour/credis",
-            "version": "v1.14.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/colinmollenhour/credis.git",
-                "reference": "dccc8a46586475075fbb012d8bd523b8a938c2dc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/colinmollenhour/credis/zipball/dccc8a46586475075fbb012d8bd523b8a938c2dc",
-                "reference": "dccc8a46586475075fbb012d8bd523b8a938c2dc",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.0"
-            },
-            "suggest": {
-                "ext-redis": "Improved performance for communicating with redis"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "Client.php",
-                    "Cluster.php",
-                    "Sentinel.php",
-                    "Module.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Colin Mollenhour",
-                    "email": "colin@mollenhour.com"
-                }
-            ],
-            "description": "Credis is a lightweight interface to the Redis key-value store which wraps the phpredis library when available for better performance.",
-            "homepage": "https://github.com/colinmollenhour/credis",
-            "support": {
-                "issues": "https://github.com/colinmollenhour/credis/issues",
-                "source": "https://github.com/colinmollenhour/credis/tree/v1.14.0"
-            },
-            "time": "2022-11-09T01:18:39+00:00"
-        },
         {
             "name": "lunr/config",
             "version": "dev-master",
@@ -241,89 +194,6 @@
                 "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
             "time": "2021-05-03T11:20:27+00:00"
-        },
-        {
-            "name": "resque/php-resque",
-            "version": "v1.3.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/resque/php-resque.git",
-                "reference": "fe41c04763699b1318d97ed14cc78583e9380161"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/resque/php-resque/zipball/fe41c04763699b1318d97ed14cc78583e9380161",
-                "reference": "fe41c04763699b1318d97ed14cc78583e9380161",
-                "shasum": ""
-            },
-            "require": {
-                "colinmollenhour/credis": "~1.7",
-                "php": ">=5.6.0",
-                "psr/log": "~1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7"
-            },
-            "suggest": {
-                "ext-pcntl": "REQUIRED for forking processes on platforms that support it (so anything but Windows).",
-                "ext-proctitle": "Allows php-resque to rename the title of UNIX processes to show the status of a worker.",
-                "ext-redis": "Native PHP extension for Redis connectivity. Credis will automatically utilize when available."
-            },
-            "bin": [
-                "bin/resque",
-                "bin/resque-scheduler"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Resque": "lib",
-                    "ResqueScheduler": "lib"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dan Hunsaker",
-                    "email": "danhunsaker+resque@gmail.com",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Rajib Ahmed",
-                    "homepage": "https://github.com/rajibahmed",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Steve Klabnik",
-                    "email": "steve@steveklabnik.com",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Chris Boulton",
-                    "email": "chris@bigcommerce.com",
-                    "role": "Creator"
-                }
-            ],
-            "description": "Redis backed library for creating background jobs and processing them later. Based on resque for Ruby.",
-            "homepage": "http://www.github.com/resque/php-resque/",
-            "keywords": [
-                "background",
-                "job",
-                "redis",
-                "resque"
-            ],
-            "support": {
-                "issues": "https://github.com/resque/php-resque/issues",
-                "source": "https://github.com/resque/php-resque/tree/v1.3.6"
-            },
-            "time": "2020-04-16T16:39:50+00:00"
         },
         {
             "name": "rmccue/requests",

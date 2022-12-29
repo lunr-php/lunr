@@ -252,11 +252,6 @@
             <file>../src/Lunr/Spark/Contentful/Tests/ManagementApiUnpublishEntryTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/PreviewApiBaseTest.php</file>
         </testsuite>
-        <testsuite name="Spawn">
-            <file>../src/Lunr/Spawn/Tests/NullDispatcherBaseTest.php</file>
-            <file>../src/Lunr/Spawn/Tests/ResqueJobDispatcherBaseTest.php</file>
-            <file>../src/Lunr/Spawn/Tests/ResqueJobDispatcherDispatchTest.php</file>
-        </testsuite>
         <testsuite name="Sphere">
             <file>../src/Lunr/Sphere/Tests/SessionBaseTest.php</file>
             <file>../src/Lunr/Sphere/Tests/DatabaseSessionHandlerBaseTest.php</file>
@@ -283,7 +278,6 @@
                 <directory>../src/Lunr/Shadow/Tests/</directory>
                 <directory>../src/Lunr/Spark/Tests/</directory>
                 <directory>../src/Lunr/Spark/Contentful/Tests/</directory>
-                <directory>../src/Lunr/Spawn/Tests/</directory>
                 <directory>../src/Lunr/Sphere/Tests/</directory>
             </exclude>
         </whitelist>

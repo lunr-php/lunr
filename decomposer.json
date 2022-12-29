@@ -33,21 +33,6 @@
             "search-path": "/src/"
         }
     },
-    "Credis": {
-        "url": "https://github.com/colinmollenhour/credis.git",
-        "version": "1.12.1",
-        "target-dir": "/Credis",
-        "psr0": {
-            "path": "/"
-        }
-    },
-    "PHP-Resque": {
-        "url": "https://github.com/resque/php-resque.git",
-        "version": "1.3.6",
-        "psr0": {
-            "path": "/lib/"
-        }
-    },
     "Psr-Cache": {
         "url": "https://github.com/php-fig/cache.git",
         "version": "1.0.1",
