@@ -27,10 +27,10 @@ class MariaDBDMLQueryBuilderSelectTest extends MariaDBDMLQueryBuilderTest
      */
     public function testIfExceptReturnsSelfReference(): void
     {
-        $return = $this->builder->except('query');
+        $return = $this->class->except('query');
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder', $return);
-        $this->assertSame($this->builder, $return);
+        $this->assertSame($this->class, $return);
     }
 
     /**
@@ -40,10 +40,10 @@ class MariaDBDMLQueryBuilderSelectTest extends MariaDBDMLQueryBuilderTest
      */
     public function testIfIntersectReturnsSelfReference(): void
     {
-        $return = $this->builder->intersect('query');
+        $return = $this->class->intersect('query');
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder', $return);
-        $this->assertSame($this->builder, $return);
+        $this->assertSame($this->class, $return);
     }
 
     /**
@@ -53,11 +53,11 @@ class MariaDBDMLQueryBuilderSelectTest extends MariaDBDMLQueryBuilderTest
      */
     public function testIntersectDefaults()
     {
-        $this->builder->intersect('query', 'random_string');
-        $return = $this->builder_reflection->getProperty('compound');
+        $this->class->intersect('query', 'random_string');
+        $return = $this->reflection->getProperty('compound');
         $return->setAccessible(TRUE);
 
-        $actual = $return->getValue($this->builder);
+        $actual = $return->getValue($this->class);
         $this->assertEquals('INTERSECT query', $actual);
     }
 
@@ -68,11 +68,11 @@ class MariaDBDMLQueryBuilderSelectTest extends MariaDBDMLQueryBuilderTest
      */
     public function testIntersectDistinct()
     {
-        $this->builder->intersect('query', 'distinct');
-        $return = $this->builder_reflection->getProperty('compound');
+        $this->class->intersect('query', 'distinct');
+        $return = $this->reflection->getProperty('compound');
         $return->setAccessible(TRUE);
 
-        $actual = $return->getValue($this->builder);
+        $actual = $return->getValue($this->class);
         $this->assertEquals('INTERSECT DISTINCT query', $actual);
     }
 
@@ -83,11 +83,11 @@ class MariaDBDMLQueryBuilderSelectTest extends MariaDBDMLQueryBuilderTest
      */
     public function testIntersectAll()
     {
-        $this->builder->intersect('query', 'all');
-        $return = $this->builder_reflection->getProperty('compound');
+        $this->class->intersect('query', 'all');
+        $return = $this->reflection->getProperty('compound');
         $return->setAccessible(TRUE);
 
-        $actual = $return->getValue($this->builder);
+        $actual = $return->getValue($this->class);
         $this->assertEquals('INTERSECT ALL query', $actual);
     }
 
@@ -98,11 +98,11 @@ class MariaDBDMLQueryBuilderSelectTest extends MariaDBDMLQueryBuilderTest
      */
     public function testExceptDefaults()
     {
-        $this->builder->except('query', 'random_string');
-        $return = $this->builder_reflection->getProperty('compound');
+        $this->class->except('query', 'random_string');
+        $return = $this->reflection->getProperty('compound');
         $return->setAccessible(TRUE);
 
-        $actual = $return->getValue($this->builder);
+        $actual = $return->getValue($this->class);
         $this->assertEquals('EXCEPT query', $actual);
     }
 
@@ -113,11 +113,11 @@ class MariaDBDMLQueryBuilderSelectTest extends MariaDBDMLQueryBuilderTest
      */
     public function testExceptDistinct()
     {
-        $this->builder->except('query', 'DISTINCT');
-        $return = $this->builder_reflection->getProperty('compound');
+        $this->class->except('query', 'DISTINCT');
+        $return = $this->reflection->getProperty('compound');
         $return->setAccessible(TRUE);
 
-        $actual = $return->getValue($this->builder);
+        $actual = $return->getValue($this->class);
         $this->assertEquals('EXCEPT DISTINCT query', $actual);
     }
 
@@ -128,11 +128,11 @@ class MariaDBDMLQueryBuilderSelectTest extends MariaDBDMLQueryBuilderTest
      */
     public function testExceptAll()
     {
-        $this->builder->except('query', 'all');
-        $return = $this->builder_reflection->getProperty('compound');
+        $this->class->except('query', 'all');
+        $return = $this->reflection->getProperty('compound');
         $return->setAccessible(TRUE);
 
-        $actual = $return->getValue($this->builder);
+        $actual = $return->getValue($this->class);
         $this->assertEquals('EXCEPT ALL query', $actual);
     }
 

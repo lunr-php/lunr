@@ -14,7 +14,7 @@
 namespace Lunr\Gravity\Database\MariaDB\Tests;
 
 use Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder;
-use PHPUnit\Framework\TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -23,36 +23,16 @@ use ReflectionClass;
  *
  * @covers \Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder
  */
-abstract class MariaDBDMLQueryBuilderTest extends TestCase
+abstract class MariaDBDMLQueryBuilderTest extends LunrBaseTest
 {
-    /**
-     * Instance of the MariaDBDMLQueryBuilder class.
-     * @var MariaDBDMLQueryBuilder
-     */
-    protected $builder;
-
-    /**
-     * Reflection class of the MariaDBDMLQueryBuilder.
-     * @var ReflectionClass
-     */
-    protected $builder_reflection;
 
     /**
      * TestCase Constructor.
      */
     public function setUp(): void
     {
-        $this->builder            = new MariaDBDMLQueryBuilder();
-        $this->builder_reflection = new ReflectionClass('Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder');
-    }
-
-    /**
-     * TestCase Destructor.
-     */
-    public function tearDown(): void
-    {
-        unset($this->builder);
-        unset($this->builder_reflection);
+        $this->class      = new MariaDBDMLQueryBuilder();
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder');
     }
 
 }
