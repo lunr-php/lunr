@@ -14,7 +14,7 @@
 namespace Lunr\Gravity\Database\MariaDB\Tests;
 
 use Lunr\Gravity\Database\MariaDB\MariaDBConnection;
-use PHPUnit\Framework\TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 
 /**
@@ -22,7 +22,7 @@ use ReflectionClass;
  *
  * @covers Lunr\Gravity\Database\MariaDB\MariaDBConnection
  */
-class MariaDBConnectionTest extends TestCase
+class MariaDBConnectionTest extends LunrBaseTest
 {
 
     /**
@@ -92,10 +92,10 @@ class MariaDBConnectionTest extends TestCase
      */
     public function tearDown(): void
     {
-        unset($this->class);
-        unset($this->reflection);
         unset($this->configuration);
         unset($this->logger);
+
+        parent::tearDown();
     }
 
 }

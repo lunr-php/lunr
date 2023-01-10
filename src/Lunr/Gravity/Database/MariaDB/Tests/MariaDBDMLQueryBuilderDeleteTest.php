@@ -33,12 +33,12 @@ class MariaDBDMLQueryBuilderDeleteTest extends MariaDBDMLQueryBuilderTest
      */
     public function testDeleteWithReturning($value, $expected): void
     {
-        $property = $this->builder_reflection->getProperty('returning');
+        $property = $this->reflection->getProperty('returning');
         $property->setAccessible(TRUE);
 
-        $this->builder->returning($value);
+        $this->class->returning($value);
 
-        $this->assertStringMatchesFormat($expected, $property->getValue($this->builder));
+        $this->assertStringMatchesFormat($expected, $property->getValue($this->class));
     }
 
     /**

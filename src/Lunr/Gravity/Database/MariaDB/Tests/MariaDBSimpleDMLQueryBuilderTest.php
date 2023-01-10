@@ -14,10 +14,10 @@
 namespace Lunr\Gravity\Database\MariaDB\Tests;
 
 use ReflectionClass;
-use PHPUnit\Framework\TestCase;
 use Lunr\Gravity\Database\MySQL\MySQLQueryEscaper;
 use Lunr\Gravity\Database\MariaDB\MariaDBDMLQueryBuilder;
 use Lunr\Gravity\Database\MariaDB\MariaDBSimpleDMLQueryBuilder;
+use Lunr\Halo\LunrBaseTest;
 
 /**
  * This class contains common setup routines, providers
@@ -25,7 +25,7 @@ use Lunr\Gravity\Database\MariaDB\MariaDBSimpleDMLQueryBuilder;
  *
  * @covers Lunr\Gravity\Database\MariaDB\MMariaDBSimpleDMLQueryBuilder
  */
-abstract class MariaDBSimpleDMLQueryBuilderTest extends TestCase
+abstract class MariaDBSimpleDMLQueryBuilderTest extends LunrBaseTest
 {
 
     /**
@@ -63,8 +63,8 @@ abstract class MariaDBSimpleDMLQueryBuilderTest extends TestCase
     {
         unset($this->escaper);
         unset($this->builder);
-        unset($this->reflection);
-        unset($this->class);
+
+        parent::tearDown();
     }
 
     /**
