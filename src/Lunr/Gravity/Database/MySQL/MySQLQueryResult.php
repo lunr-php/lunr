@@ -135,8 +135,8 @@ class MySQLQueryResult implements DatabaseQueryResultInterface
             $this->error_message = $mysqli->error;
             $this->error_number  = $mysqli->errno;
             $this->insert_id     = $mysqli->insert_id;
-            $this->affected_rows = $mysqli->affected_rows;
-            $this->num_rows      = is_object($this->result) ? $this->result->num_rows : $this->affected_rows;
+            $this->affected_rows = mysqli_affected_rows($mysqli);
+            $this->num_rows      = is_object($this->result) ? mysqli_num_rows($result) : $this->affected_rows;
 
             $this->set_warnings();
         }

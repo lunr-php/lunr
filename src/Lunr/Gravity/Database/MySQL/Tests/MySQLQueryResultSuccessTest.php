@@ -27,7 +27,11 @@ class MySQLQueryResultSuccessTest extends MySQLQueryResultTest
      */
     public function setUp(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 10);
+
         $this->successfulSetup();
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**

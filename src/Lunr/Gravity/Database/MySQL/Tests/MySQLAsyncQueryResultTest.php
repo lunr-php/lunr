@@ -12,7 +12,7 @@
 namespace Lunr\Gravity\Database\MySQL\Tests;
 
 use Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult;
-use PHPUnit\Framework\TestCase;
+use Lunr\Halo\LunrBaseTest;
 use ReflectionClass;
 use mysqli;
 
@@ -22,20 +22,8 @@ use mysqli;
  *
  * @covers Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult
  */
-abstract class MySQLAsyncQueryResultTest extends TestCase
+abstract class MySQLAsyncQueryResultTest extends LunrBaseTest
 {
-
-    /**
-     * Instance of the MySQLQueryResult class.
-     * @var MySQLAsyncQueryResult
-     */
-    protected $result;
-
-    /**
-     * Reflection instance of the MySQLQueryResult class.
-     * @var ReflectionClass
-     */
-    protected $result_reflection;
 
     /**
      * Mock instance of the mysqli class.
@@ -58,9 +46,9 @@ abstract class MySQLAsyncQueryResultTest extends TestCase
 
         $this->query = 'SELECT * FROM table';
 
-        $this->result = new MySQLAsyncQueryResult($this->query, $this->mysqli);
+        $this->class = new MySQLAsyncQueryResult($this->query, $this->mysqli);
 
-        $this->result_reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult');
+        $this->reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult');
     }
 
     /**
@@ -69,8 +57,8 @@ abstract class MySQLAsyncQueryResultTest extends TestCase
     public function tearDown(): void
     {
         unset($this->mysqli);
-        unset($this->result);
-        unset($this->result_reflection);
+        unset($this->class);
+        unset($this->reflection);
         unset($this->query);
     }
 

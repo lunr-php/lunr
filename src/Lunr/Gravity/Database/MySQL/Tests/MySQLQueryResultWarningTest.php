@@ -25,7 +25,13 @@ class MySQLQueryResultWarningTest extends MySQLQueryResultTest
      */
     public function setUp(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 10);
+        $this->mock_function('mysqli_num_rows', fn() => 10);
+
         $this->warningSetup();
+
+        $this->unmock_function('mysqli_affected_rows');
+        $this->unmock_function('mysqli_num_rows');
     }
 
     /**

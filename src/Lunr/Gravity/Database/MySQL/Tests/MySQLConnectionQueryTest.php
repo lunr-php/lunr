@@ -58,6 +58,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
                ->method('query')
                ->will($this->returnValue(TRUE));
 
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
         $this->mock_function('microtime', function () {return 1; });
 
         $this->logger->expects($this->exactly(2))
@@ -66,6 +67,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
 
         $query = $this->class->query('query');
 
+        $this->unmock_function('mysqli_affected_rows');
         $this->unmock_function('microtime');
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\MySQLQueryResult', $query);
@@ -91,6 +93,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
                ->with($this->equalTo('/*hint*/query'))
                ->will($this->returnValue(TRUE));
 
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
         $this->mock_function('microtime', function () {return 1; });
 
         $this->logger->expects($this->exactly(2))
@@ -99,6 +102,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
 
         $query = $this->class->query('query');
 
+        $this->unmock_function('mysqli_affected_rows');
         $this->unmock_function('microtime');
 
         $this->assertEquals('/*hint*/query', $query->query());
@@ -125,6 +129,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
                ->with($this->equalTo('/*hint*/query'))
                ->will($this->returnValue(TRUE));
 
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
         $this->mock_function('microtime', function () {return 1; });
 
         $this->logger->expects($this->exactly(2))
@@ -133,6 +138,7 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
 
         $this->class->query('query');
 
+        $this->unmock_function('mysqli_affected_rows');
         $this->unmock_function('microtime');
 
         $this->assertSame('', $hint->getValue($this->class));
@@ -166,6 +172,8 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
      */
     public function testAsyncQueryReturnsQueryResultWhenConnected(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $mysqli = new MockMySQLiSuccessfulConnection($this->getMockBuilder('\mysqli')->getMock());
 
         $this->set_reflection_property_value('mysqli', $mysqli);
@@ -190,6 +198,8 @@ class MySQLConnectionQueryTest extends MySQLConnectionTest
         $this->assertFalse($query->has_failed());
 
         $property->setValue($this->class, FALSE);
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**

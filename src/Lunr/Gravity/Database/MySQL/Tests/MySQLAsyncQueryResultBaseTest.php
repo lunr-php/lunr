@@ -27,10 +27,10 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testErrorMessageIsEmpty(): void
     {
-        $property = $this->result_reflection->getProperty('error_message');
+        $property = $this->reflection->getProperty('error_message');
         $property->setAccessible(TRUE);
 
-        $this->assertNull($property->getValue($this->result));
+        $this->assertNull($property->getValue($this->class));
     }
 
     /**
@@ -38,10 +38,10 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testErrorNumberIsZero(): void
     {
-        $property = $this->result_reflection->getProperty('error_number');
+        $property = $this->reflection->getProperty('error_number');
         $property->setAccessible(TRUE);
 
-        $this->assertNull($property->getValue($this->result));
+        $this->assertNull($property->getValue($this->class));
     }
 
     /**
@@ -49,10 +49,10 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testInsertIDIsZero(): void
     {
-        $property = $this->result_reflection->getProperty('insert_id');
+        $property = $this->reflection->getProperty('insert_id');
         $property->setAccessible(TRUE);
 
-        $this->assertNull($property->getValue($this->result));
+        $this->assertNull($property->getValue($this->class));
     }
 
     /**
@@ -60,10 +60,10 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testAffectedRowsIsNumber(): void
     {
-        $property = $this->result_reflection->getProperty('affected_rows');
+        $property = $this->reflection->getProperty('affected_rows');
         $property->setAccessible(TRUE);
 
-        $this->assertNull($property->getValue($this->result));
+        $this->assertNull($property->getValue($this->class));
     }
 
     /**
@@ -71,10 +71,10 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testNumberOfRowsIsNumber(): void
     {
-        $property = $this->result_reflection->getProperty('num_rows');
+        $property = $this->reflection->getProperty('num_rows');
         $property->setAccessible(TRUE);
 
-        $this->assertNull($property->getValue($this->result));
+        $this->assertNull($property->getValue($this->class));
     }
 
     /**
@@ -82,10 +82,10 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testQueryIsPassedCorrectly(): void
     {
-        $property = $this->result_reflection->getProperty('query');
+        $property = $this->reflection->getProperty('query');
         $property->setAccessible(TRUE);
 
-        $this->assertEquals($this->query, $property->getValue($this->result));
+        $this->assertEquals($this->query, $property->getValue($this->class));
     }
 
     /**
@@ -93,10 +93,10 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testMysqliIsPassedByReference(): void
     {
-        $property = $this->result_reflection->getProperty('mysqli');
+        $property = $this->reflection->getProperty('mysqli');
         $property->setAccessible(TRUE);
 
-        $value = $property->getValue($this->result);
+        $value = $property->getValue($this->class);
 
         $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\Tests\MockMySQLiSuccessfulConnection', $value);
         $this->assertSame($this->mysqli, $value);
@@ -107,10 +107,10 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testFetchedIsFalseByDefault(): void
     {
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
 
-        $this->assertFalse($property->getValue($this->result));
+        $this->assertFalse($property->getValue($this->class));
     }
 
     /**
@@ -120,47 +120,52 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testFetchResultDoesNotRefetchIfFetchedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query');
 
-        $method = $this->result_reflection->getMethod('fetch_result');
+        $method = $this->reflection->getMethod('fetch_result');
         $method->setAccessible(TRUE);
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
 
-        $this->assertTrue($property->getValue($this->result));
+        $this->assertTrue($property->getValue($this->class));
     }
 
     /**
      * Test that fetch_result() stores the result correctly.
      *
-     * @requires PHP < 8.1
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
     public function testFetchResultStoresResult(): void
     {
-        $result = new MockMySQLiResult($this->getMockBuilder('mysqli_result')
-                                            ->disableOriginalConstructor()
-                                            ->getMock());
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+        $this->mock_function('mysqli_num_rows', fn() => 0);
+
+        $result = $this->getMockBuilder('mysqli_result')
+                       ->disableOriginalConstructor()
+                       ->getMock();
 
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue($result));
 
-        $method = $this->result_reflection->getMethod('fetch_result');
+        $method = $this->reflection->getMethod('fetch_result');
         $method->setAccessible(TRUE);
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
 
-        $property = $this->result_reflection->getProperty('result');
+        $property = $this->reflection->getProperty('result');
         $property->setAccessible(TRUE);
 
-        $this->assertInstanceOf('Lunr\Gravity\Database\MySQL\Tests\MockMySQLiResult', $property->getValue($this->result));
+        $this->assertInstanceOf('mysqli_result', $property->getValue($this->class));
+
+        $this->unmock_function('mysqli_affected_rows');
+        $this->unmock_function('mysqli_num_rows');
     }
 
     /**
@@ -171,19 +176,23 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testFetchResultSetsFetchedToTrue(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $method = $this->result_reflection->getMethod('fetch_result');
+        $method = $this->reflection->getMethod('fetch_result');
         $method->setAccessible(TRUE);
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
 
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
 
-        $this->assertTrue($property->getValue($this->result));
+        $this->assertTrue($property->getValue($this->class));
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -194,19 +203,23 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testFetchedResultSetsSuccessTrueIfResultIsTrue(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(TRUE));
 
-        $method = $this->result_reflection->getMethod('fetch_result');
+        $method = $this->reflection->getMethod('fetch_result');
         $method->setAccessible(TRUE);
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
 
-        $property = $this->result_reflection->getProperty('success');
+        $property = $this->reflection->getProperty('success');
         $property->setAccessible(TRUE);
 
-        $this->assertTrue($property->getValue($this->result));
+        $this->assertTrue($property->getValue($this->class));
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -217,47 +230,56 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testFetchedResultSetsSuccessFalseIfResultIsFalse(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $method = $this->result_reflection->getMethod('fetch_result');
+        $method = $this->reflection->getMethod('fetch_result');
         $method->setAccessible(TRUE);
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
 
-        $property = $this->result_reflection->getProperty('success');
+        $property = $this->reflection->getProperty('success');
         $property->setAccessible(TRUE);
 
-        $this->assertFalse($property->getValue($this->result));
+        $this->assertFalse($property->getValue($this->class));
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
      * Test that fetch_result() sets the success flag to TRUE if the result is of type MySQLi_Result.
      *
-     * @requires PHP < 8.1
      * @requires extension mysqli
      * @covers   Lunr\Gravity\Database\MySQL\MySQLAsyncQueryResult::fetch_result
      */
     public function testFetchedResultSetsSuccessTrueIfResultIsMysqliResult(): void
     {
-        $result = new MockMySQLiResult($this->getMockBuilder('mysqli_result')
-                                            ->disableOriginalConstructor()
-                                            ->getMock());
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+        $this->mock_function('mysqli_num_rows', fn() => 0);
+
+        $result = $this->getMockBuilder('mysqli_result')
+                       ->disableOriginalConstructor()
+                       ->getMock();
 
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue($result));
 
-        $method = $this->result_reflection->getMethod('fetch_result');
+        $method = $this->reflection->getMethod('fetch_result');
         $method->setAccessible(TRUE);
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
 
-        $property = $this->result_reflection->getProperty('success');
+        $property = $this->reflection->getProperty('success');
         $property->setAccessible(TRUE);
 
-        $this->assertTrue($property->getValue($this->result));
+        $this->assertTrue($property->getValue($this->class));
+
+        $this->unmock_function('mysqli_affected_rows');
+        $this->unmock_function('mysqli_num_rows');
     }
 
     /**
@@ -268,19 +290,23 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testFetchResultSetsErrorMessage(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $method = $this->result_reflection->getMethod('fetch_result');
+        $method = $this->reflection->getMethod('fetch_result');
         $method->setAccessible(TRUE);
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
 
-        $property = $this->result_reflection->getProperty('error_message');
+        $property = $this->reflection->getProperty('error_message');
         $property->setAccessible(TRUE);
 
-        $this->assertEquals('', $property->getValue($this->result));
+        $this->assertEquals('', $property->getValue($this->class));
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -291,19 +317,23 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testFetchResultSetsErrorNumber(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $method = $this->result_reflection->getMethod('fetch_result');
+        $method = $this->reflection->getMethod('fetch_result');
         $method->setAccessible(TRUE);
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
 
-        $property = $this->result_reflection->getProperty('error_number');
+        $property = $this->reflection->getProperty('error_number');
         $property->setAccessible(TRUE);
 
-        $this->assertEquals(0, $property->getValue($this->result));
+        $this->assertEquals(0, $property->getValue($this->class));
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -314,19 +344,23 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testFetchResultSetsInsertID(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $method = $this->result_reflection->getMethod('fetch_result');
+        $method = $this->reflection->getMethod('fetch_result');
         $method->setAccessible(TRUE);
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
 
-        $property = $this->result_reflection->getProperty('insert_id');
+        $property = $this->reflection->getProperty('insert_id');
         $property->setAccessible(TRUE);
 
-        $this->assertEquals(0, $property->getValue($this->result));
+        $this->assertEquals(0, $property->getValue($this->class));
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -337,19 +371,23 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testFetchResultSetsAffectedRows(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 10);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $method = $this->result_reflection->getMethod('fetch_result');
+        $method = $this->reflection->getMethod('fetch_result');
         $method->setAccessible(TRUE);
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
 
-        $property = $this->result_reflection->getProperty('affected_rows');
+        $property = $this->reflection->getProperty('affected_rows');
         $property->setAccessible(TRUE);
 
-        $this->assertEquals(10, $property->getValue($this->result));
+        $this->assertEquals(10, $property->getValue($this->class));
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -360,19 +398,23 @@ class MySQLAsyncQueryResultBaseTest extends MySQLAsyncQueryResultTest
      */
     public function testFetchResultSetsNumberOfRows(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 10);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $method = $this->result_reflection->getMethod('fetch_result');
+        $method = $this->reflection->getMethod('fetch_result');
         $method->setAccessible(TRUE);
 
-        $method->invoke($this->result);
+        $method->invoke($this->class);
 
-        $property = $this->result_reflection->getProperty('num_rows');
+        $property = $this->reflection->getProperty('num_rows');
         $property->setAccessible(TRUE);
 
-        $this->assertEquals(10, $property->getValue($this->result));
+        $this->assertEquals(10, $property->getValue($this->class));
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
 }

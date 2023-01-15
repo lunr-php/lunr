@@ -30,11 +30,15 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testHasFailedFetchesDataIfFetchedIsFalse(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->has_failed();
+        $this->class->has_failed();
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -44,17 +48,17 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testHasFailedDoesNotFetchDataIfFetchedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->has_failed();
+        $this->class->has_failed();
 
-        $property->setValue($this->result, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -65,11 +69,15 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testAffectedRowsFetchesDataIfFetchedIsFalse(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->affected_rows();
+        $this->class->affected_rows();
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -79,17 +87,17 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testAffectedRowsDoesNotFetchDataIfFetchedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->affected_rows();
+        $this->class->affected_rows();
 
-        $property->setValue($this->result, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -100,11 +108,15 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testNumberOfRowsRowsFetchesDataIfFetchedIsFalse(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->number_of_rows();
+        $this->class->number_of_rows();
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -114,17 +126,17 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testNumberOfRowsDoesNotFetchDataIfFetchedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->number_of_rows();
+        $this->class->number_of_rows();
 
-        $property->setValue($this->result, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -135,11 +147,15 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testErrorMessageFetchesDataIfFetchedIsFalse(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->error_message();
+        $this->class->error_message();
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -149,17 +165,17 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testErrorMessageDoesNotFetchDataIfFetchedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->error_message();
+        $this->class->error_message();
 
-        $property->setValue($this->result, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -170,11 +186,15 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testErrorNumberFetchesDataIfFetchedIsFalse(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->error_number();
+        $this->class->error_number();
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -184,17 +204,17 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testErrorNumberDoesNotFetchDataIfFetchedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->error_number();
+        $this->class->error_number();
 
-        $property->setValue($this->result, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -205,11 +225,15 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testInsertIDFetchesDataIfFetchedIsFalse(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->insert_id();
+        $this->class->insert_id();
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -219,17 +243,17 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testInsertIDDoesNotFetchDataIfFetchedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->insert_id();
+        $this->class->insert_id();
 
-        $property->setValue($this->result, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -240,11 +264,15 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testResultArrayFetchesDataIfFetchedIsFalse(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->result_array();
+        $this->class->result_array();
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -254,17 +282,17 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testResultArrayDoesNotFetchDataIfFetchedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->result_array();
+        $this->class->result_array();
 
-        $property->setValue($this->result, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -275,11 +303,15 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testResultRowFetchesDataIfFetchedIsFalse(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->result_row();
+        $this->class->result_row();
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -289,17 +321,17 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testResultRowDoesNotFetchDataIfFetchedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->result_row();
+        $this->class->result_row();
 
-        $property->setValue($this->result, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -310,11 +342,15 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testResultColumnFetchesDataIfFetchedIsFalse(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->result_column('col');
+        $this->class->result_column('col');
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -324,17 +360,17 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testResultColumnDoesNotFetchDataIfFetchedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->result_column('col');
+        $this->class->result_column('col');
 
-        $property->setValue($this->result, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
     /**
@@ -345,11 +381,15 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testResultCellFetchesDataIfFetchedIsFalse(): void
     {
+        $this->mock_function('mysqli_affected_rows', fn() => 0);
+
         $this->mysqli->expects($this->once())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->result_cell('cell');
+        $this->class->result_cell('cell');
+
+        $this->unmock_function('mysqli_affected_rows');
     }
 
     /**
@@ -359,17 +399,17 @@ class MySQLAsyncQueryResultFetchTest extends MySQLAsyncQueryResultTest
      */
     public function testResultCellDoesNotFetchDataIfFetchedIsTrue(): void
     {
-        $property = $this->result_reflection->getProperty('fetched');
+        $property = $this->reflection->getProperty('fetched');
         $property->setAccessible(TRUE);
-        $property->setValue($this->result, TRUE);
+        $property->setValue($this->class, TRUE);
 
         $this->mysqli->expects($this->never())
                      ->method('reap_async_query')
                      ->will($this->returnValue(FALSE));
 
-        $this->result->result_cell('cell');
+        $this->class->result_cell('cell');
 
-        $property->setValue($this->result, FALSE);
+        $property->setValue($this->class, FALSE);
     }
 
 }
