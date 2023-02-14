@@ -253,22 +253,15 @@
             <file>../src/Lunr/Spark/Contentful/Tests/ManagementApiUnpublishEntryTest.php</file>
             <file>../src/Lunr/Spark/Contentful/Tests/PreviewApiBaseTest.php</file>
         </testsuite>
-        <testsuite name="Sphere">
-            <file>../src/Lunr/Sphere/Tests/SessionBaseTest.php</file>
-            <file>../src/Lunr/Sphere/Tests/DatabaseSessionHandlerBaseTest.php</file>
-            <file>../src/Lunr/Sphere/Tests/SessionDAOBaseTest.php</file>
-        </testsuite>
     </testsuites>
     <coverage>
         <include>
             <directory>../src/Lunr/</directory>
         </include>
         <exclude>
-            <directory>../src/Lunr/Cache/Tests/</directory>
             <directory>../src/Lunr/Core/Tests/</directory>
             <directory>../src/Lunr/Corona/Tests/</directory>
             <directory>../src/Lunr/Corona/Exceptions/Tests/</directory>
-            <directory>../src/Lunr/Feedback/Tests/</directory>
             <directory>../src/Lunr/Gravity/Tests/</directory>
             <directory>../src/Lunr/Gravity/Database/Tests/</directory>
             <directory>../src/Lunr/Gravity/Database/Exceptions/Tests/</directory>
@@ -280,7 +273,6 @@
             <directory>../src/Lunr/Shadow/Tests/</directory>
             <directory>../src/Lunr/Spark/Tests/</directory>
             <directory>../src/Lunr/Spark/Contentful/Tests/</directory>
-            <directory>../src/Lunr/Sphere/Tests/</directory>
         </exclude>
         <report>
             <clover outputFile="../build/logs/clover.xml"/>
