@@ -35,7 +35,6 @@ class SQLite3DMLQueryBuilderUpdateTest extends SQLite3DMLQueryBuilderTest
         $this->class->update_mode($mode);
         $value = $this->get_reflection_property_value('update_mode');
 
-        $mode = $mode;
         $this->assertContains($mode, $value);
     }
 
