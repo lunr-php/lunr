@@ -26,9 +26,9 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
 
     /**
      * Instance of the Database Connection.
-     * @var DatabaseConnection
+     * @var DatabaseStringEscaperInterface
      */
-    protected $db;
+    protected $escaper;
 
     /**
      * The left identifier delimiter.
@@ -45,11 +45,11 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
     /**
      * Constructor.
      *
-     * @param DatabaseConnection $db Instance of the DatabaseConnection class.
+     * @param DatabaseStringEscaperInterface $escaper Instance of a class implementing the DatabaseStringEscaperInterface.
      */
-    public function __construct($db)
+    public function __construct($escaper)
     {
-        $this->db = $db;
+        $this->escaper = $escaper;
     }
 
     /**
@@ -57,7 +57,7 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
      */
     public function __destruct()
     {
-        unset($this->db);
+        unset($this->escaper);
     }
 
     /**

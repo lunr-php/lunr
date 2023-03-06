@@ -30,9 +30,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingValue(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('\'value\'', $this->class->value('value'));
     }
@@ -45,9 +45,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingValueWithCollation(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('\'value\' COLLATE utf8_general_ci', $this->class->value('value', 'utf8_general_ci'));
     }
@@ -60,9 +60,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingValueWithCharset(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('ascii \'value\'', $this->class->value('value', '', 'ascii'));
     }
@@ -75,9 +75,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingValueWithCollationAndCharset(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $string = 'ascii \'value\' COLLATE utf8_general_ci';
 
@@ -92,9 +92,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingHexValue(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('UNHEX(\'value\')', $this->class->hexvalue('value'));
     }
@@ -107,9 +107,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingHexValueWithCollation(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $string = 'UNHEX(\'value\') COLLATE utf8_general_ci';
 
@@ -124,9 +124,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingHexValueWithCharset(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('ascii UNHEX(\'value\')', $this->class->hexvalue('value', '', 'ascii'));
     }
@@ -139,9 +139,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingHexValueWithCollationAndCharset(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $string = 'ascii UNHEX(\'value\') COLLATE utf8_general_ci';
 
@@ -156,9 +156,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingLikeValue(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('\'%value%\'', $this->class->likevalue('value'));
     }
@@ -171,9 +171,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingLikeValueWithCollation(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $string = '\'%value%\' COLLATE utf8_general_ci';
 
@@ -188,9 +188,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingLikeValueWithCharset(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('ascii \'%value%\'', $this->class->likevalue('value', 'both', '', 'ascii'));
     }
@@ -203,9 +203,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingLikeValueWithCollationAndCharset(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $string = 'ascii \'%value%\' COLLATE utf8_general_ci';
 
@@ -220,9 +220,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingLikeValueForward(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('\'value%\'', $this->class->likevalue('value', 'forward'));
     }
@@ -235,9 +235,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingLikeValueBackward(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('\'%value\'', $this->class->likevalue('value', 'backward'));
     }
@@ -250,9 +250,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingLikeValueUnsupported(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('\'%value%\'', $this->class->likevalue('value', 'unsupported'));
     }
@@ -350,9 +350,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingGeoValueWithoutSrid(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals("ST_GeomFromText('value')", $this->class->geovalue('value'));
     }
@@ -364,9 +364,9 @@ class MySQLQueryEscaperEscapeTest extends MySQLQueryEscaperTest
      */
     public function testEscapingGeoValueWithSrid(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals("ST_GeomFromText('value', 5)", $this->class->geovalue('value', 5));
     }

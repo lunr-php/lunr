@@ -24,21 +24,20 @@ abstract class MySQLQueryEscaperTest extends LunrBaseTest
 {
 
     /**
-     * Mock instance of the MySQLConnection class.
-     * @var MySQLConnection
+     * Mock instance of a class implementing the DatabaseStringEscaperInterface.
+     * @var DatabaseStringEscaperInterface
      */
-    protected $db;
+    protected $escaper;
 
     /**
      * Testcase Constructor.
      */
     public function setUp(): void
     {
-        $this->db = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLConnection')
-                         ->disableOriginalConstructor()
-                         ->getMock();
+        $this->escaper = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseStringEscaperInterface')
+                              ->getMock();
 
-        $this->class = new MySQLQueryEscaper($this->db);
+        $this->class = new MySQLQueryEscaper($this->escaper);
 
         $this->reflection = new ReflectionClass('Lunr\Gravity\Database\MySQL\MySQLQueryEscaper');
     }
@@ -48,7 +47,7 @@ abstract class MySQLQueryEscaperTest extends LunrBaseTest
      */
     public function tearDown(): void
     {
-        unset($this->db);
+        unset($this->escaper);
         unset($this->class);
         unset($this->reflection);
     }

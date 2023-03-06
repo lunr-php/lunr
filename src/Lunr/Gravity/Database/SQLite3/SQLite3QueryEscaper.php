@@ -34,11 +34,11 @@ class SQLite3QueryEscaper extends DatabaseQueryEscaper
     /**
      * Constructor.
      *
-     * @param SQLite3Connection $db Instance of the SQLite3Connection class.
+     * @param DatabaseStringEscaperInterface $escaper Instance of a class implementing the DatabaseStringEscaperInterface.
      */
-    public function __construct($db)
+    public function __construct($escaper)
     {
-        parent::__construct($db);
+        parent::__construct($escaper);
     }
 
     /**
@@ -60,7 +60,7 @@ class SQLite3QueryEscaper extends DatabaseQueryEscaper
      */
     public function value($value, $collation = '', $charset = '')
     {
-        return trim($this->collate('\'' . $this->db->escape_string($value) . '\'', $collation));
+        return trim($this->collate('\'' . $this->escaper->escape_string($value) . '\'', $collation));
     }
 
     /**
@@ -92,14 +92,14 @@ class SQLite3QueryEscaper extends DatabaseQueryEscaper
         switch ($match)
         {
             case 'forward':
-                $string = '\'' . $this->db->escape_string($value) . '%\'';
+                $string = '\'' . $this->escaper->escape_string($value) . '%\'';
                 break;
             case 'backward':
-                $string = '\'%' . $this->db->escape_string($value) . '\'';
+                $string = '\'%' . $this->escaper->escape_string($value) . '\'';
                 break;
             case 'both':
             default:
-                $string = '\'%' . $this->db->escape_string($value) . '%\'';
+                $string = '\'%' . $this->escaper->escape_string($value) . '%\'';
                 break;
         }
 
