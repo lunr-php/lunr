@@ -2,10 +2,8 @@
 /**
  * This file contains the MockUncaughtException class.
  *
- * @package   Lunr\Corona\Exceptions
- * @author    Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright 2022, M2Mobi BV, Amsterdam, The Netherlands
- * @license   http://lunr.nl/LICENSE MIT License
+ * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\Corona\Tests\Helpers;

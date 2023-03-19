@@ -3,11 +3,9 @@
 /**
  * This file contains the web request parser class.
  *
- * @package   Lunr\Corona
- * @author    Heinz Wiesinger <heinz@m2mobi.com>
- * @author    Leonidas Diamantis <leonidas@m2mobi.com>
- * @copyright 2011-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license   http://lunr.nl/LICENSE MIT License
+ * SPDX-FileCopyrightText: Copyright 2011 M2mobi B.V., Amsterdam, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\Corona;
