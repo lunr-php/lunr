@@ -3,10 +3,9 @@
 /**
  * This file contains the Ini class, an object wrapper around php.ini handling.
  *
- * @package    Lunr\Core
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2016-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * SPDX-FileCopyrightText: Copyright 2016 M2mobi B.V., Amsterdam, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\Core;
