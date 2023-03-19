@@ -3,10 +3,9 @@
 /**
  * This file contains the PhysicalFilesystemAccessObjectCSVTest class.
  *
- * @package    Lunr\Ray
- * @author     Dinos Theodorou <dinos@m2mobi.com>
- * @copyright  2014-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * SPDX-FileCopyrightText: Copyright 2014 M2mobi B.V., Amsterdam, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\Ray\Tests;
