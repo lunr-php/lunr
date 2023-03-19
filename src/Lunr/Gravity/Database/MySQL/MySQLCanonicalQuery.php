@@ -3,10 +3,9 @@
 /**
  * MySQL canonical query class.
  *
- * @package    Lunr\Gravity\Database\MySQL
- * @author     David Mendes <d.mendes@m2mobi.com>
- * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * SPDX-FileCopyrightText: Copyright 2021 M2mobi B.V., Amsterdam, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\Gravity\Database\MySQL;

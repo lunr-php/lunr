@@ -2,10 +2,9 @@
 /**
  * This file contains the DatabaseDMLQueryBuilderQueryPartsWithTest class.
  *
- * @package    Lunr\Gravity\Database
- * @author     Koen Hengsdijk
- * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * SPDX-FileCopyrightText: Copyright 2012 M2mobi B.V., Amsterdam, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\Gravity\Database\Tests;

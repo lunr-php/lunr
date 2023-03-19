@@ -2,10 +2,9 @@
 /**
  * This file contains the DatabaseAccessObject for transactional access.
  *
- * @package   Skysail\Gravity\Database
- * @author    Sean Molenaar <s.molenaar@m2mobi.com>
- * @copyright 2020-2022, M2Mobi BV, Amsterdam, The Netherlands
- * @license   http://lunr.nl/LICENSE MIT License
+ * SPDX-FileCopyrightText: Copyright 2020 M2mobi B.V., Amsterdam, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\Gravity\Database;
