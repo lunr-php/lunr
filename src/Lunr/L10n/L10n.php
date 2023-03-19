@@ -4,11 +4,9 @@
  * This file contains the Localization helper class. It includes functions to
  * handle language definition, get supported languages of a project, etc
  *
- * @package    Lunr\L10n
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @author     Julio Foulquié <julio@m2mobi.com>
- * @copyright  2010-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * SPDX-FileCopyrightText: Copyright 2010 M2mobi B.V., Amsterdam, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\L10n;

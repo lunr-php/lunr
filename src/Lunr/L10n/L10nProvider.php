@@ -6,10 +6,9 @@
  * is a class accessing a low-level localization
  * infrastructure.
  *
- * @package    Lunr\L10n
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2010-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * SPDX-FileCopyrightText: Copyright 2010 M2mobi B.V., Amsterdam, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\L10n;

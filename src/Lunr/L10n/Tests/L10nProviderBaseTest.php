@@ -3,10 +3,9 @@
 /**
  * This file contains the L10nProviderBaseTest class.
  *
- * @package    Lunr\L10n
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2012-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * SPDX-FileCopyrightText: Copyright 2012 M2mobi B.V., Amsterdam, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\L10n\Tests;
