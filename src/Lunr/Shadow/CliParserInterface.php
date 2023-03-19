@@ -3,10 +3,9 @@
 /**
  * This file contains an interface for command line argument parsers.
  *
- * @package    Lunr\Shadow
- * @author     Heinz Wiesinger <heinz@m2mobi.com>
- * @copyright  2013-2018, M2Mobi BV, Amsterdam, The Netherlands
- * @license    http://lunr.nl/LICENSE MIT License
+ * SPDX-FileCopyrightText: Copyright 2013 M2mobi B.V., Amsterdam, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\Shadow;
