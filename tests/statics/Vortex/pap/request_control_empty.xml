@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<!DOCTYPE pap PUBLIC "-//WAPFORUM//DTD PAP 2.1//EN" "http://www.openmobilealliance.org/tech/DTD/pap_2.1.dtd">
-<pap>
-<push-message push-id="" source-reference="" deliver-before-timestamp="">
-<address address-value="endpoint"/>
-<quality-of-service delivery-method="unconfirmed"/>
-</push-message>
-</pap>

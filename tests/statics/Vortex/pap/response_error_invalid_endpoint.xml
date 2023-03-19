@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<!DOCTYPE pap PUBLIC "-//WAPFORUM//DTD PAP 2.1//EN" "http://www.openmobilealliance.org/tech/DTD/pap_2.1.dtd">
-<pap>
-    <badmessage-response code="2002" desc="The specified PIN is not recognized" bad-message-fragment="The specified PIN is not recognized."/>
-</pap>

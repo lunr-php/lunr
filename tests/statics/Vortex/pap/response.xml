@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<!DOCTYPE pap PUBLIC "-//WAPFORUM//DTD PAP 2.1//EN" "http://www.openmobilealliance.org/tech/DTD/pap_2.1.dtd">
-<pap>
-    <push-response push-id="12345" sender-address="URL" sender-name="RIM Push-Data Service" reply-time="2014-03-07T12:58:03Z">
-        <response-result code="1001" desc="The request has been accepted for processing."></response-result>
-    </push-response>
-</pap>

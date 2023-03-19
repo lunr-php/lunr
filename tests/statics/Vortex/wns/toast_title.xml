@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<toast >
-<visual>
-<binding template="ToastText01">
-<text id="1">Title</text>
-</binding>
-</visual>
-</toast>

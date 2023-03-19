@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<!DOCTYPE pap PUBLIC "-//WAPFORUM//DTD PAP 2.1//EN" "http://www.openmobilealliance.org/tech/DTD/pap_2.1.dtd">
-<pap>
-    <badmessage-response code="4001" desc="The server is busy" bad-message-fragment="The server is busy"/>
-</pap>

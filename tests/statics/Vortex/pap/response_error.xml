@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<!DOCTYPE pap PUBLIC "-//WAPFORUM//DTD PAP 2.1//EN" "http://www.openmobilealliance.org/tech/DTD/pap_2.1.dtd">
-<pap>
-    <badmessage-response code="2000" desc="Invalid or missing attribute address-value" bad-message-fragment="Invalid or missing attribute address-value"/>
-</pap>
