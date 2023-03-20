@@ -8,14 +8,12 @@ jobs:
     name: "PHP-${{ matrix.php-versions }}: PHPUnit"
     strategy:
       matrix:
-        php-versions: ['7.4']
+        php-versions: ['7.4', '8.0', '8.1']
         experimental: [false]
         include:
-          - php-versions: 8.0
-            experimental: true
-          - php-versions: 8.1
-            experimental: true
           - php-versions: 8.2
+            experimental: true
+          - php-versions: 8.3
             experimental: true
     steps:
       - name: Checkout
