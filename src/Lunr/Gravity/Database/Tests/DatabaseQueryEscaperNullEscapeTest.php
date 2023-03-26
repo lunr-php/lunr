@@ -49,7 +49,7 @@ class DatabaseQueryEscaperNullEscapeTest extends DatabaseQueryEscaperTest
         $escapers[] = [
             'list_value',
             [ 'A', 'B', 'C' ],
-            '(A,B,C)',
+            '(A, B, C)',
         ];
 
         return $escapers;

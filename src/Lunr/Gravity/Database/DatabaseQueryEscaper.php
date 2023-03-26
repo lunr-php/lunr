@@ -219,7 +219,7 @@ abstract class DatabaseQueryEscaper implements QueryEscaperInterface
             return '';
         }
 
-        return '(' . implode(',', $array_values) . ')';
+        return '(' . implode(', ', $array_values) . ')';
     }
 
     /**
