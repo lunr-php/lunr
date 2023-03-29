@@ -28,9 +28,9 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      */
     public function testEscapingValue(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('\'value\'', $this->class->value('value'));
     }
@@ -43,9 +43,9 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      */
     public function testEscapingHexValue(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('\'value\'', $this->class->hexvalue('value'));
     }
@@ -58,9 +58,9 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      */
     public function testEscapingLikeValue(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('\'%value%\'', $this->class->likevalue('value'));
     }
@@ -73,9 +73,9 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      */
     public function testEscapingLikeValueForward(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('\'value%\'', $this->class->likevalue('value', 'forward'));
     }
@@ -88,9 +88,9 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      */
     public function testEscapingLikeValueBackward(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('\'%value\'', $this->class->likevalue('value', 'backward'));
     }
@@ -103,9 +103,9 @@ class SQLite3QueryEscaperEscapeTest extends SQLite3QueryEscaperTest
      */
     public function testEscapingLikeValueUnsupported(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals('\'%value%\'', $this->class->likevalue('value', 'unsupported'));
     }

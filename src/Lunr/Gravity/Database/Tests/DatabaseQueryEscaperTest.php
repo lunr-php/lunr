@@ -24,22 +24,21 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
 {
 
     /**
-     * Mock instance of the DatabaseConnection class.
-     * @var DatabaseConnection
+     * Mock instance of a class implementing the DatabaseStringEscaperInterface.
+     * @var DatabaseStringEscaperInterface
      */
-    protected $db;
+    protected $escaper;
 
     /**
      * Testcase Constructor.
      */
     public function setUp(): void
     {
-        $this->db = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseConnection')
-                         ->disableOriginalConstructor()
-                         ->getMockForAbstractClass();
+        $this->escaper = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseStringEscaperInterface')
+                              ->getMock();
 
         $this->class = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseQueryEscaper')
-                            ->setConstructorArgs([ $this->db ])
+                            ->setConstructorArgs([ $this->escaper ])
                             ->getMockForAbstractClass();
 
         $this->reflection = new ReflectionClass('Lunr\Gravity\Database\DatabaseQueryEscaper');
@@ -50,7 +49,7 @@ abstract class DatabaseQueryEscaperTest extends LunrBaseTest
      */
     public function tearDown(): void
     {
-        unset($this->db);
+        unset($this->escaper);
         unset($this->class);
         unset($this->reflection);
     }

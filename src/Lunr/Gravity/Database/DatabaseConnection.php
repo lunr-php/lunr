@@ -16,7 +16,7 @@ use \Psr\Log\LoggerInterface;
 /**
  * This class defines abstract database access.
  */
-abstract class DatabaseConnection
+abstract class DatabaseConnection implements DatabaseStringEscaperInterface
 {
 
     /**

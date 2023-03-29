@@ -28,9 +28,9 @@ class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
      */
     public function testEscapingUUIDValue(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals("UNHEX(REPLACE('value','-',''))", $this->class->uuidvalue('value'));
     }
@@ -43,9 +43,9 @@ class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
      */
     public function testEscapingUUIDValueWithCollation(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $string = "UNHEX(REPLACE('value','-','')) COLLATE utf8_general_ci";
 
@@ -60,9 +60,9 @@ class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
      */
     public function testEscapingUUIDValueWithCharset(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $this->assertEquals("ascii UNHEX(REPLACE('value','-',''))", $this->class->uuidvalue('value', '', 'ascii'));
     }
@@ -75,9 +75,9 @@ class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
      */
     public function testEscapingUUIDValueWithCollationAndCharset(): void
     {
-        $this->db->expects($this->once())
-                 ->method('escape_string')
-                 ->will($this->returnValue('value'));
+        $this->escaper->expects($this->once())
+                      ->method('escape_string')
+                      ->will($this->returnValue('value'));
 
         $string = "ascii UNHEX(REPLACE('value','-','')) COLLATE utf8_general_ci";
 

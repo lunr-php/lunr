@@ -25,11 +25,11 @@ class MySQLQueryEscaper extends DatabaseQueryEscaper
     /**
      * Constructor.
      *
-     * @param MySQLConnection $db Instance of the MySQLConnection class.
+     * @param DatabaseStringEscaperInterface $escaper Instance of a class implementing the DatabaseStringEscaperInterface.
      */
-    public function __construct($db)
+    public function __construct($escaper)
     {
-        parent::__construct($db);
+        parent::__construct($escaper);
     }
 
     /**
@@ -51,7 +51,7 @@ class MySQLQueryEscaper extends DatabaseQueryEscaper
      */
     public function value($value, $collation = '', $charset = '')
     {
-        return trim($charset . ' ' . $this->collate('\'' . $this->db->escape_string($value) . '\'', $collation));
+        return trim($charset . ' ' . $this->collate('\'' . $this->escaper->escape_string($value) . '\'', $collation));
     }
 
     /**
@@ -65,7 +65,7 @@ class MySQLQueryEscaper extends DatabaseQueryEscaper
      */
     public function hexvalue($value, $collation = '', $charset = '')
     {
-        return trim($charset . ' ' . $this->collate('UNHEX(\'' . $this->db->escape_string($value) . '\')', $collation));
+        return trim($charset . ' ' . $this->collate('UNHEX(\'' . $this->escaper->escape_string($value) . '\')', $collation));
     }
 
     /**
@@ -79,7 +79,7 @@ class MySQLQueryEscaper extends DatabaseQueryEscaper
      */
     public function uuidvalue($value, $collation = '', $charset = '')
     {
-        return trim($charset . ' ' . $this->collate('UNHEX(REPLACE(\'' . $this->db->escape_string($value) . '\',\'-\',\'\'))', $collation));
+        return trim($charset . ' ' . $this->collate('UNHEX(REPLACE(\'' . $this->escaper->escape_string($value) . '\',\'-\',\'\'))', $collation));
     }
 
     /**
@@ -97,14 +97,14 @@ class MySQLQueryEscaper extends DatabaseQueryEscaper
         switch ($match)
         {
             case 'forward':
-                $string = '\'' . $this->db->escape_string($value) . '%\'';
+                $string = '\'' . $this->escaper->escape_string($value) . '%\'';
                 break;
             case 'backward':
-                $string = '\'%' . $this->db->escape_string($value) . '\'';
+                $string = '\'%' . $this->escaper->escape_string($value) . '\'';
                 break;
             case 'both':
             default:
-                $string = '\'%' . $this->db->escape_string($value) . '%\'';
+                $string = '\'%' . $this->escaper->escape_string($value) . '%\'';
                 break;
         }
 
