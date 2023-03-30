@@ -10,6 +10,8 @@
 
 namespace Lunr\Gravity\Database\MySQL\Tests\Helpers;
 
+use Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder;
+use Lunr\Gravity\Database\MySQL\MySQLQueryEscaper;
 use Lunr\Halo\LunrBaseTest;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;
@@ -39,10 +41,22 @@ abstract class AbstractMySQLDatabaseAccessObjectTest extends LunrBaseTest
     protected $builder;
 
     /**
+     * Real instance of the DMLQueryBuilder class
+     * @var \Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder
+     */
+    protected $real_builder;
+
+    /**
      * Mock instance of the QueryEscaper class
      * @var \Lunr\Gravity\Database\MySQL\MySQLQueryEscaper|MockObject
      */
     protected $escaper;
+
+    /**
+     * Real instance of the QueryEscaper class
+     * @var \Lunr\Gravity\Database\MySQL\MySQLQueryEscaper
+     */
+    protected $real_escaper;
 
     /**
      * Mock instance of the QueryResult class
@@ -55,6 +69,16 @@ abstract class AbstractMySQLDatabaseAccessObjectTest extends LunrBaseTest
      */
     public function setUp(): void
     {
+        $mock_escaper = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseEscaperInterface')
+                             ->getMock();
+
+        $mock_escaper->expects($this->any())
+                     ->method('escape_string')
+                     ->willReturnArgument(0);
+
+        $this->real_builder = new MySQLDMLQueryBuilder();
+        $this->real_escaper = new MySQLQueryEscaper($mock_escaper);
+
         $this->db = $this->getMockBuilder('Lunr\Gravity\Database\MySQL\MySQLConnection')
                          ->disableOriginalConstructor()
                          ->getMock();
@@ -99,6 +123,8 @@ abstract class AbstractMySQLDatabaseAccessObjectTest extends LunrBaseTest
         unset($this->builder);
         unset($this->escaper);
         unset($this->result);
+        unset($this->real_escaper);
+        unset($this->real_builder);
     }
 
 }
