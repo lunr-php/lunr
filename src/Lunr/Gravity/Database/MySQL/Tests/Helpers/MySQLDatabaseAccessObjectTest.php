@@ -69,7 +69,7 @@ abstract class MySQLDatabaseAccessObjectTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $mock_escaper = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseEscaperInterface')
+        $mock_escaper = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseStringEscaperInterface')
                              ->getMock();
 
         $mock_escaper->expects($this->any())
