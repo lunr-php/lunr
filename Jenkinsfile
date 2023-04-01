@@ -1,4 +1,11 @@
 #!groovy
+
+/*
+ * SPDX-FileCopyrightText: Copyright 2016 M2mobi B.V., Amsterdam, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-License-Identifier: CC0-1.0
+ */
+
 def ant_sh(String stage){
     sh "/bin/ant ${stage}"
 }

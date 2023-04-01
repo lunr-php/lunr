@@ -1,4 +1,7 @@
 #!/bin/bash
+# SPDX-FileCopyrightText: Copyright 2020 M2mobi B.V., Amsterdam, The Netherlands
+# SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+# SPDX-License-Identifier: MIT
 
 SONAR_TMP=$(mktemp -d -t sonar-XXXXXXXXXX)
 PROJECT="$1"

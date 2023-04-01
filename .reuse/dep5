@@ -1,0 +1,50 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Lunr
+Upstream-Contact: Heinz Wiesinger <pprkut@liwjatan.org>
+Source: https://github.com/lunr-php/lunr
+
+Files: .git_commit_template
+Copyright: 2011 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: CC0-1.0
+
+Files: composer.json
+Copyright: 2017 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: CC0-1.0
+
+Files: decomposer.json
+Copyright: 2017 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: CC0-1.0
+
+Files: README.md
+Copyright: 2017 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: CC0-1.0
+
+Files: tests/statics/Corona/*
+Copyright: 2013 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: MIT
+
+Files: tests/statics/Gravity/*
+Copyright: 2021 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: MIT
+
+Files: tests/statics/Ray/*
+Copyright: 2013 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: MIT
+
+Files: tests/statics/Spark/*
+Copyright: 2015 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: MIT
+
+Files: tests/statics/l10n/*
+Copyright: 2012 M2mobi B.V., Amsterdam, The Netherlands
+           2022 Move Agency Group B.V., Zwolle, The Netherlands
+License: CC0-1.0
+

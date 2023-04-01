@@ -1,5 +1,7 @@
 # Convert sonarqube's issues search api json to sonar-report.json
 # https://github.com/jenkinsci/violation-comments-to-stash-plugin/issues/69
+# SPDX-FileCopyrightText: Copyright 2020 Jorge Robins <Jorge@JorgeRobins.co.uk>
+# SPDX-License-Identifier: MIT
 
 {
   "version": "7.6",
