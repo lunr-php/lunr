@@ -324,7 +324,7 @@ class DatabaseQueryEscaperEscapeTest extends DatabaseQueryEscaperTest
     public function testEscapeListValueSimpleArray(): void
     {
         $values = [ 'value1', 'value2' ];
-        $this->assertEquals('(value1,value2)', $this->class->list_value($values));
+        $this->assertEquals('(value1, value2)', $this->class->list_value($values));
     }
 
     /**

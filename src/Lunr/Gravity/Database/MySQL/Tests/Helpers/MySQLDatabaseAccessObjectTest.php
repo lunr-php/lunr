@@ -12,13 +12,13 @@ namespace Lunr\Gravity\Database\MySQL\Tests\Helpers;
 
 use Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder;
 use Lunr\Gravity\Database\MySQL\MySQLQueryEscaper;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Gravity\Database\Tests\Helpers\DatabaseAccessObjectBaseTest;
 use ReflectionClass;
 
 /**
  * This class contains setup and tear down methods for DAOs using MySQL access.
  */
-abstract class MySQLDatabaseAccessObjectTest extends LunrBaseTest
+abstract class MySQLDatabaseAccessObjectTest extends DatabaseAccessObjectBaseTest
 {
 
     /**
@@ -68,7 +68,7 @@ abstract class MySQLDatabaseAccessObjectTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $mock_escaper = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseEscaperInterface')
+        $mock_escaper = $this->getMockBuilder('Lunr\Gravity\Database\DatabaseStringEscaperInterface')
                              ->getMock();
 
         $mock_escaper->expects($this->any())
