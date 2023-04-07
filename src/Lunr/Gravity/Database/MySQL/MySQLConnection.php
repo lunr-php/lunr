@@ -11,7 +11,6 @@
 namespace Lunr\Gravity\Database\MySQL;
 
 use Lunr\Gravity\Database\DatabaseConnection;
-use Lunr\Gravity\Database\DMLQueryBuilderInterface;
 use Lunr\Gravity\Database\Exceptions\ConnectionException;
 
 /**
@@ -331,7 +330,7 @@ class MySQLConnection extends DatabaseConnection
      *
      * @param bool $simple Whether to return a simple query builder or an advanced one.
      *
-     * @return MySQLDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
+     * @return MySQLDMLQueryBuilder|MySQLSimpleDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
      */
     public function get_new_dml_query_builder_object($simple = TRUE)
     {

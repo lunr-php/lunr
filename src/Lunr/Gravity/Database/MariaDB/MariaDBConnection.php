@@ -11,7 +11,6 @@
 namespace Lunr\Gravity\Database\MariaDB;
 
 use Lunr\Gravity\Database\MySQL\MySQLConnection;
-use Lunr\Gravity\Database\MySQL\MySQLDMLQueryBuilder;
 use \Lunr\Core\Configuration;
 use \Psr\Log\LoggerInterface;
 use mysqli;
@@ -47,7 +46,7 @@ class MariaDBConnection extends MySQLConnection
      *
      * @param bool $simple Whether to return a simple query builder or an advanced one.
      *
-     * @return MySQLDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
+     * @return MariaDBDMLQueryBuilder|MariaDBSimpleDMLQueryBuilder $builder New DatabaseDMLQueryBuilder object instance
      */
     public function get_new_dml_query_builder_object($simple = TRUE)
     {
