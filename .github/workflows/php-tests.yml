@@ -67,7 +67,7 @@ jobs:
       - name: Codestyle checkout
         uses: actions/checkout@v3
         with:
-            repository: 'M2Mobi/lunr-coding-standard'
+            repository: 'lunr-php/lunr-coding-standard'
 
             # Relative path under $GITHUB_WORKSPACE to place the repository
             path: 'codestyle'
