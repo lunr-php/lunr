@@ -17,6 +17,15 @@
             "search-path": "/src/Lunr/Core/"
         }
     },
+    "Lunr.CliParser": {
+        "url": "https://github.com/lunr-php/lunr.cliparser.git",
+        "version": "0.8",
+        "revision": "master",
+        "psr4": {
+            "prefix": "Lunr\\Shadow",
+            "search-path": "/src/Lunr/Shadow/"
+        }
+    },
     "Psr-Log": {
         "url": "https://github.com/php-fig/log.git",
         "version": "1.1.4",

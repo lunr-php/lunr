@@ -215,16 +215,6 @@
         </testsuite>
         <testsuite name="Shadow">
             <file>../src/Lunr/Shadow/Tests/ConsoleTest.php</file>
-            <file>../src/Lunr/Shadow/Tests/LunrCliParserBaseTest.php</file>
-            <file>../src/Lunr/Shadow/Tests/LunrCliParserCheckArgumentTest.php</file>
-            <file>../src/Lunr/Shadow/Tests/LunrCliParserCheckObligatoryArgumentTest.php</file>
-            <file>../src/Lunr/Shadow/Tests/LunrCliParserCheckOptionalArgumentTest.php</file>
-            <file>../src/Lunr/Shadow/Tests/LunrCliParserValidShortTest.php</file>
-            <file>../src/Lunr/Shadow/Tests/LunrCliParserValidLongTest.php</file>
-            <file>../src/Lunr/Shadow/Tests/LunrCliParserIsOptTest.php</file>
-            <file>../src/Lunr/Shadow/Tests/LunrCliParserParseTest.php</file>
-            <file>../src/Lunr/Shadow/Tests/GetoptCliParserBaseTest.php</file>
-            <file>../src/Lunr/Shadow/Tests/GetoptCliParserParseTest.php</file>
             <file>../src/Lunr/Shadow/Tests/CliRequestParserBaseTest.php</file>
             <file>../src/Lunr/Shadow/Tests/CliRequestParserParseRequestTest.php</file>
             <file>../src/Lunr/Shadow/Tests/CliRequestParserParseSuperGlobalTest.php</file>
