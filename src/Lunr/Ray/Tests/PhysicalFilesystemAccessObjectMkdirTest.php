@@ -27,7 +27,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
      */
     public function testMkdirReturnsFalseWhenAccessModeIsString(): void
     {
-        $directory = TEST_STATICS . '/Gravity/test_directory';
+        $directory = TEST_STATICS . '/Ray/test_directory';
 
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -46,7 +46,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
      */
     public function testMkdirReturnsFalseWhenAccessModeIsInvalid($mode): void
     {
-        $directory = TEST_STATICS . '/Gravity/test_directory';
+        $directory = TEST_STATICS . '/Ray/test_directory';
 
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -62,7 +62,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
      */
     public function testMkdirWhenFailsToCreateADirectory(): void
     {
-        $directory = TEST_STATICS . '/Gravity/test_directory';
+        $directory = TEST_STATICS . '/Ray/test_directory';
 
         $this->mock_function('mkdir', function (){return FALSE;});
 
@@ -85,7 +85,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
      */
     public function testMkdirWhenCreatesADirectory($mode): void
     {
-        $directory = TEST_STATICS . '/Gravity/test_directory';
+        $directory = TEST_STATICS . '/Ray/test_directory';
 
         $this->assertTrue($this->class->mkdir($directory, $mode));
         $this->assertFileExists($directory);
@@ -100,13 +100,13 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
      */
     public function testMkdirWhenCreatesADirectoryRecursively(): void
     {
-        $directory = TEST_STATICS . '/Gravity/test_directory/nested_dir';
+        $directory = TEST_STATICS . '/Ray/test_directory/nested_dir';
 
         $this->assertTrue($this->class->mkdir($directory, 0777, TRUE));
         $this->assertFileExists($directory);
 
         rmdir($directory);
-        rmdir(TEST_STATICS . '/Gravity/test_directory');
+        rmdir(TEST_STATICS . '/Ray/test_directory');
     }
 
 }
