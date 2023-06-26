@@ -10,7 +10,6 @@
 
 namespace Lunr\Ray;
 
-use Lunr\Gravity\DataAccessObjectInterface;
 use DirectoryIterator;
 use RegexIterator;
 use UnexpectedValueException;
@@ -27,7 +26,7 @@ use TypeError;
 /**
  * Class to access a physical filesystem.
  */
-class PhysicalFilesystemAccessObject implements DataAccessObjectInterface, FilesystemAccessObjectInterface
+class PhysicalFilesystemAccessObject implements FilesystemAccessObjectInterface
 {
 
     /**
