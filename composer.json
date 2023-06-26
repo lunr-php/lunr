@@ -12,7 +12,6 @@
     "ext-http": "Needed for HTTP support in Corona, needed to get hostname in Shadow when parsing data",
     "ext-msgpack": "Needed for msgpack support in Corona",
     "ext-gettext": "Needed for internationalization support in L10n",
-    "ext-mysqli": "Needed for MySQL/MariaDB support in Gravity (0.1)",
     "ext-uuid": "Needed for setting unique request IDs in Corona/Shadow"
   },
   "require-dev": {

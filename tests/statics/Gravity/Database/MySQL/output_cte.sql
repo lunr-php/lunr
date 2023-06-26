@@ -1,1 +1,0 @@
-WITH `teste` AS ( SELECT `c`.`language` as `lang`, RAND() as `num` FROM `table1` as `c` LEFT JOIN `table2` as `fb` ON `c`.`id`=`fb`.`id` WHERE COALESCE(NULL,?) = ? AND `c`.`id` = ? GROUP BY `lang` ORDER BY `num` DESC LIMIT ? OFFSET ? ) SELECT `table1`.* FROM `table1` JOIN `teste`;

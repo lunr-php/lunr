@@ -86,107 +86,6 @@
             <file>../src/Lunr/Corona/Exceptions/Tests/UnauthorizedExceptionBaseTest.php</file>
             <file>../src/Lunr/Corona/Exceptions/Tests/UnprocessableEntityExceptionBaseTest.php</file>
         </testsuite>
-        <testsuite name="Gravity">
-            <file>../src/Lunr/Gravity/Database/Exceptions/Tests/QueryExceptionBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperEscapeTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseQueryEscaperNullEscapeTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryEscaperEscapeTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryEscaperEscapeUUIDValueTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3QueryEscaperEscapeTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultFailedTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultSuccessTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultResultTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultFreeTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLQueryResultWarningTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLAsyncQueryResultBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLAsyncQueryResultFetchTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderImplodeQueryTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetSelectQueryTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetDeleteQueryTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetInsertQueryTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetReplaceQueryTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderGetUpdateQueryTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsSelectTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsFromTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsJoinTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsConditionTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsDeleteTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsInsertTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsUpdateTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsUsingTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseDMLQueryBuilderQueryPartsWithTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderSelectTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderInsertTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderUpdateTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderDeleteTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderConditionTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderOrderByTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderLimitTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderUsingTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/SQLDMLQueryBuilderWithTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderSelectTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderDeleteTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderInsertTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderUpdateTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderConditionTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLDMLQueryBuilderGroupByTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderConditionalTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderSelectTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderWriteTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderFluidInterfaceTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderUsingTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLCanonicalQueryBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLSimpleDMLQueryBuilderDeleteTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseConnectionBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionSetTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionConnectTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionQueryTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionEscapeTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionTransactionTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MySQL/Tests/MySQLConnectionMasterSlaveTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBConnectionBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBDMLQueryBuilderDeleteTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBDMLQueryBuilderSelectTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBSimpleDMLQueryBuilderSelectTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBSimpleDMLQueryBuilderBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBSimpleDMLQueryBuilderDeleteTest.php</file>
-            <file>../src/Lunr/Gravity/Database/MariaDB/Tests/MariaDBSimpleDMLQueryBuilderBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/LunrSQLite3Test.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionSetTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionConnectTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionEscapeTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionTransactionTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3ConnectionQueryTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderConditionTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderGroupByTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderSelectTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderDeleteTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderInsertTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderQueryTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3DMLQueryBuilderUpdateTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3QueryResultResultTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3QueryResultNoResultTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3QueryResultFreeTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3QueryResultFailedTest.php</file>
-            <file>../src/Lunr/Gravity/Database/SQLite3/Tests/SQLite3QueryResultBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolBaseTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolEmptyTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolUnsupportedTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolSupportedTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseConnectionPoolPublicTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectNoPoolTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectPoolTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectResultsTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/DatabaseAccessObjectVerifyQuerySuccessTest.php</file>
-            <file>../src/Lunr/Gravity/Database/Tests/TransactionalDatabaseAccessObjectCallsTest.php</file>
-        </testsuite>
         <testsuite name="L10n">
             <file>../tests/system/EnvironmentTest.php</file>
             <file>../src/Lunr/L10n/Tests/L10nHTMLViewBaseTest.php</file>
@@ -254,12 +153,6 @@
             <directory>../src/Lunr/Core/Tests/</directory>
             <directory>../src/Lunr/Corona/Tests/</directory>
             <directory>../src/Lunr/Corona/Exceptions/Tests/</directory>
-            <directory>../src/Lunr/Gravity/Tests/</directory>
-            <directory>../src/Lunr/Gravity/Database/Tests/</directory>
-            <directory>../src/Lunr/Gravity/Database/Exceptions/Tests/</directory>
-            <directory>../src/Lunr/Gravity/Database/MariaDB/Tests/</directory>
-            <directory>../src/Lunr/Gravity/Database/MySQL/Tests/</directory>
-            <directory>../src/Lunr/Gravity/Database/SQLite3/Tests/</directory>
             <directory>../src/Lunr/L10n/Tests/</directory>
             <directory>../src/Lunr/Ray/Tests/</directory>
             <directory>../src/Lunr/Shadow/Tests/</directory>

@@ -1,1 +1,0 @@
-SELECT `c`.`identifier`,`c`.`language`,`c`.`language`,`fb`.`identifier`,COALESCE(NULL,?) as "?" from `table` as `c` left join `bookmarks` fb on `c`.`identifier` = `fb`.`identifier` where `c`.`identifier` = "?";
