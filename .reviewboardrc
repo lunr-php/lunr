@@ -8,7 +8,7 @@
 REPOSITORY = "Lunr"
 
 # ReviewBoard Server URL
-REVIEWBOARD_URL = "http://reviews.lunr.nl"
+REVIEWBOARD_URL = "https://reviews.lunr.nl"
 
 # Review Group
 TARGET_GROUPS = "lunr"
