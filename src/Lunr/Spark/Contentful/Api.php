@@ -16,6 +16,9 @@ use WpOrg\Requests\Session;
 
 /**
  * Low level Contentful API methods for Spark
+ *
+ * @property string $access_token     The access token for Contentful
+ * @property string $management_token The management token for Contentful
  */
 class Api
 {

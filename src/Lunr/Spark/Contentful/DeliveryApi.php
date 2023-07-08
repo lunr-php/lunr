@@ -13,7 +13,7 @@ namespace Lunr\Spark\Contentful;
 use Lunr\Spark\CentralAuthenticationStore;
 use Psr\Log\LoggerInterface;
 use WpOrg\Requests\Exception as RequestsException;
-use WpOrg\Requests\Exception\HTTP as RequestsExceptionHTTP;
+use WpOrg\Requests\Exception\Http as RequestsExceptionHTTP;
 use WpOrg\Requests\Response;
 use WpOrg\Requests\Session;
 
