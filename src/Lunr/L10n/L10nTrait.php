@@ -23,13 +23,13 @@ trait L10nTrait
 
     /**
      * Default language.
-     * @var String
+     * @var string
      */
     protected $default_language;
 
     /**
      * Locales location.
-     * @var String
+     * @var string
      */
     protected $locales_location;
 

@@ -12,6 +12,7 @@ namespace Lunr\L10n\Tests;
 
 use Lunr\L10n\L10nTrait;
 use Lunr\Halo\LunrBaseTest;
+use Psr\Log\LoggerInterface;
 use ReflectionClass;
 
 /**
@@ -30,7 +31,7 @@ class L10nTraitTest extends LunrBaseTest
 
     /**
      * The language used for testing.
-     * @var String
+     * @var string
      */
     protected const LANGUAGE = 'de_DE';
 

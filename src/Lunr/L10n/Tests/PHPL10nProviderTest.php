@@ -12,6 +12,7 @@ namespace Lunr\L10n\Tests;
 
 use Lunr\L10n\PHPL10nProvider;
 use Lunr\Halo\LunrBaseTest;
+use Psr\Log\LoggerInterface;
 use ReflectionClass;
 
 /**
@@ -31,13 +32,13 @@ abstract class PHPL10nProviderTest extends LunrBaseTest
 
     /**
      * The language used for testing.
-     * @var String
+     * @var string
      */
     protected const LANGUAGE = 'de_DE';
 
     /**
      * The domain used for testing.
-     * @var String
+     * @var string
      */
     private const DOMAIN = 'Lunr';
 

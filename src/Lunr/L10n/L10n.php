@@ -30,7 +30,7 @@ class L10n
 
     /**
      * Static list of supported languages
-     * @var array
+     * @var array|null
      */
     private static $languages;
 
@@ -68,7 +68,7 @@ class L10n
      */
     public function get_supported_languages()
     {
-        if (isset(self::$languages))
+        if (self::$languages !== NULL)
         {
             return self::$languages;
         }

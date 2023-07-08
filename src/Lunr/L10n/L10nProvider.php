@@ -25,13 +25,13 @@ abstract class L10nProvider
 
     /**
      * The language the provider has been initialized with
-     * @var String
+     * @var string
      */
     protected $language;
 
     /**
      * Localization domain.
-     * @var String
+     * @var string
      */
     protected $domain;
 
