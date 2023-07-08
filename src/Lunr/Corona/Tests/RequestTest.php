@@ -31,7 +31,7 @@ abstract class RequestTest extends LunrBaseTest
 
     /**
      * Mocked file upload data.
-     * @var Array
+     * @var array
      */
     protected $files = [
         'image' => [

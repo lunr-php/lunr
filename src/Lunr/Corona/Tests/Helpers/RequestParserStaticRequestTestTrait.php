@@ -21,19 +21,19 @@ trait RequestParserStaticRequestTestTrait
 
     /**
      * Parameter key name for the controller.
-     * @var String
+     * @var string
      */
     protected $controller = 'controller';
 
     /**
      * Parameter key name for the method.
-     * @var String
+     * @var string
      */
     protected $method = 'method';
 
     /**
      * Parameter key name for the parameters.
-     * @var String
+     * @var string
      */
     protected $params = 'param';
 

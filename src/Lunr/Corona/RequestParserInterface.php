@@ -62,7 +62,7 @@ interface RequestParserInterface
     /**
      * Parse php://input values into local variable.
      *
-     * @return array Parsed php://input values
+     * @return string Parsed php://input values
      */
     public function parse_raw_data();
 

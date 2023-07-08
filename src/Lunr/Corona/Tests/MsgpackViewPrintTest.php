@@ -20,7 +20,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
 
     /**
      * MSGPACK return value;
-     * @var Array
+     * @var array
      */
     private $msgpack;
 

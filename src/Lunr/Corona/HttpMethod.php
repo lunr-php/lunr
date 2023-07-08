@@ -24,7 +24,7 @@ class HttpMethod
      * Safe:              yes
      * Idempotent:        yes
      *
-     * @var String
+     * @var string
      */
     public const GET = 'GET';
 
@@ -36,7 +36,7 @@ class HttpMethod
      * Safe:              yes
      * Idempotent:        yes
      *
-     * @var String
+     * @var string
      */
     public const HEAD = 'HEAD';
 
@@ -48,7 +48,7 @@ class HttpMethod
      * Safe:              no
      * Idempotent:        no
      *
-     * @var String
+     * @var string
      */
     public const POST = 'POST';
 
@@ -60,7 +60,7 @@ class HttpMethod
      * Safe:              no
      * Idempotent:        yes
      *
-     * @var String
+     * @var string
      */
     public const PUT = 'PUT';
 
@@ -72,7 +72,7 @@ class HttpMethod
      * Safe:              no
      * Idempotent:        yes
      *
-     * @var String
+     * @var string
      */
     public const DELETE = 'DELETE';
 
@@ -84,7 +84,7 @@ class HttpMethod
      * Safe:              no
      * Idempotent:        no
      *
-     * @var String
+     * @var string
      */
     public const CONNECT = 'CONNECT';
 
@@ -96,7 +96,7 @@ class HttpMethod
      * Safe:              yes
      * Idempotent:        yes
      *
-     * @var String
+     * @var string
      */
     public const OPTIONS = 'OPTIONS';
 
@@ -108,7 +108,7 @@ class HttpMethod
      * Safe:              yes
      * Idempotent:        yes
      *
-     * @var String
+     * @var string
      */
     public const TRACE = 'TRACE';
 
@@ -120,7 +120,7 @@ class HttpMethod
      * Safe:              no
      * Idempotent:        no
      *
-     * @var String
+     * @var string
      */
     public const PATCH = 'PATCH';
 

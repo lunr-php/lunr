@@ -22,7 +22,7 @@ class MethodNotAllowedException extends HttpException
     /**
      * Constructor.
      *
-     * @param string|null    $message  Error message
+     * @param string         $message  Error message
      * @param int            $app_code Application error code
      * @param Exception|null $previous The previously thrown exception
      */

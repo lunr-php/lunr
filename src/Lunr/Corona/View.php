@@ -132,7 +132,7 @@ abstract class View
     /**
      * Check whether the last error was fatal or not.
      *
-     * @param array $error Value returned from error_get_last()
+     * @param array|null $error Value returned from error_get_last()
      *
      * @return bool $return TRUE if error was fatal, FALSE otherwise
      */

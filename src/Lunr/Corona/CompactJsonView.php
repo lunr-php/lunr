@@ -10,6 +10,8 @@
 
 namespace Lunr\Corona;
 
+use Lunr\Core\Configuration;
+
 /**
  * View class for displaying JSON return values, excluding NULL values.
  */

@@ -43,7 +43,7 @@ class Response
 
     /**
      * The selected view to display the data.
-     * @var String
+     * @var string
      */
     private $view;
 

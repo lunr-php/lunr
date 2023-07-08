@@ -38,13 +38,13 @@ class FrontController
 
     /**
      * Registered lookup paths.
-     * @var Array
+     * @var array
      */
     protected $paths;
 
     /**
      * Registered routing rules.
-     * @var Array
+     * @var array
      */
     protected $routes;
 

@@ -20,7 +20,7 @@ class JsonViewPrintTest extends JsonViewTest
 
     /**
      * JSON return value;
-     * @var Array
+     * @var array
      */
     private $json;
 
