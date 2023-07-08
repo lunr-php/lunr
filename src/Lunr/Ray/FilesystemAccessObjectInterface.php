@@ -107,7 +107,7 @@ interface FilesystemAccessObjectInterface
      *
      * @return bool TRUE when directory is created or FALSE in failure.
      */
-    public function mkdir(string $pathname, $mode = 0755, bool $recursive = FALSE);
+    public function mkdir(string $pathname, int $mode = 0755, bool $recursive = FALSE);
 
     /**
      * Generate a temporary file and return the path.

@@ -33,7 +33,7 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
 
     /**
      * Location used for file finding tests.
-     * @var String
+     * @var string
      */
     protected $find_location;
 

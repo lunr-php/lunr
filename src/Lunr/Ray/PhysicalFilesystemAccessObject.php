@@ -10,6 +10,7 @@
 
 namespace Lunr\Ray;
 
+use Psr\Log\LoggerInterface;
 use DirectoryIterator;
 use RegexIterator;
 use UnexpectedValueException;
@@ -222,13 +223,6 @@ class PhysicalFilesystemAccessObject implements FilesystemAccessObjectInterface
 
             return FALSE;
         }
-        catch (TypeError $e)
-        {
-            $context = [ 'message' => $e->getMessage() ];
-            $this->logger->error('{message}', $context);
-
-            return FALSE;
-        }
     }
 
     /**
@@ -390,14 +384,8 @@ class PhysicalFilesystemAccessObject implements FilesystemAccessObjectInterface
      *
      * @return bool TRUE when directory is created or FALSE in failure.
      */
-    public function mkdir(string $pathname, $mode = 0755, bool $recursive = FALSE)
+    public function mkdir(string $pathname, int $mode = 0755, bool $recursive = FALSE)
     {
-        if (is_string($mode))
-        {
-            $this->logger->warning('String representation of access mode is not supported. Please, try using an integer.');
-            return FALSE;
-        }
-
         //this is the octal range (0000 - 2777 and 4000 - 4777) in decimal
         if (!(($mode >= 0 && $mode <= 1535) || ($mode >= 2048 && $mode <= 2559)))
         {

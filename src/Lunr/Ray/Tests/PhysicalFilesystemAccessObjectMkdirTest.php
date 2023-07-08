@@ -21,22 +21,6 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
 {
 
     /**
-     * Test that mkdir() returns FALSE when access mode is a string.
-     *
-     * @covers Lunr\Ray\PhysicalFilesystemAccessObject::mkdir
-     */
-    public function testMkdirReturnsFalseWhenAccessModeIsString(): void
-    {
-        $directory = TEST_STATICS . '/Ray/test_directory';
-
-        $this->logger->expects($this->once())
-                     ->method('warning')
-                     ->with($this->EqualTo('String representation of access mode is not supported. Please, try using an integer.'));
-
-        $this->assertFalse($this->class->mkdir($directory, '0777'));
-    }
-
-    /**
      * Test that mkdir() returns FALSE when access mode is invalid.
      *
      * @param mixed $mode Invalid mode value
