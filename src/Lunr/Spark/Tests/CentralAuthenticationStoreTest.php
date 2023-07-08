@@ -42,3 +42,5 @@ abstract class CentralAuthenticationStoreTest extends LunrBaseTest
     }
 
 }
+
+?>

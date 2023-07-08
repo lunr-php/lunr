@@ -41,3 +41,5 @@ abstract class LunrSoapClientTest extends LunrBaseTest
     }
 
 }
+
+?>
