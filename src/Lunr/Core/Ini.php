@@ -18,14 +18,14 @@ class Ini
 
     /**
      * php.ini section
-     * @var String
+     * @var string|null
      */
     protected $section;
 
     /**
      * Constructor.
      *
-     * @param string $section Ini section to wrap
+     * @param string|null $section Ini section to wrap
      */
     public function __construct($section = NULL)
     {
