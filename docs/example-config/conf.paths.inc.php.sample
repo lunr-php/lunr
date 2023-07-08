@@ -17,19 +17,19 @@
 
 /**
  * The path of the called script (with ending slash)
- * @global String $config['base_path']
+ * @global string $config['base_path']
  */
 $config['base_path'] = '';
 
 /**
  * The protocol used by the request (HTTP|HTTPS)
- * @global String $config['protocol']
+ * @global string $config['protocol']
  */
 $config['protocol'] = '';
 
 /**
  * The fully qualified domain name used for the call
- * @global String $config['base_url']
+ * @global string $config['base_url']
  */
 $config['base_url'] = '';
 
@@ -57,31 +57,31 @@ else
 /**
  * Directory containing static files (javascript, css, images, etc)
  * (no leading slash!)
- * @global String $config['path']['statics']
+ * @global string $config['path']['statics']
  */
 $config['path']['statics'] = 'statics';
 
 /**
  * Array of logfile paths
- * @global Array $config['log']
+ * @global array $config['log']
  */
 $config['log'] = array();
 
 /**
  * Default path to invalid input logs
- * @global String $config['log']['invalid_input']
+ * @global string $config['log']['invalid_input']
  */
 $config['log']['invalid_input'] = '/var/log/httpd/';
 
 /**
  * Default path to performance logs
- * @global String $config['log']['performance']
+ * @global string $config['log']['performance']
  */
 $config['log']['performance'] = '/var/log/httpd/';
 
 /**
  * Default path for cli errors (STDERR)
- * @global String $config['log']['cli']
+ * @global string $config['log']['cli']
  */
 $config['log']['cli'] = '/var/log/httpd';
 

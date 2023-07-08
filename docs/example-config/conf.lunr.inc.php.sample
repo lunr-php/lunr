@@ -17,50 +17,50 @@ $config['lunr']['version'] = "0.1";
 
 /**
  * Array of path definitions
- * @global Array $config['path']
+ * @global array $config['path']
  */
 $config['path'] = array();
 
 /**
  * Path to the Lunr Framework Code
- * @global String $config['path']['system']
+ * @global string $config['path']['system']
  */
 $config['path']['system'] = '/usr/local/share/Lunr-' . $config['lunr']['version'];
 
 /**
  * Scripts controller lookup path
- * @global String $config['path']['controllers']
+ * @global string $config['path']['controllers']
  */
 $config['path']['controllers'] = 'application/controllers/';
 
 /**
  * Whether to enforce the defined protocol for each call
  * (where defined) or not.
- * @global Boolean $config['protocol_enforce']
+ * @global bool $config['protocol_enforce']
  */
 $config['protocol_enforce'] = FALSE;
 
 /**
  * Whether to collect SQL query statistics or not.
- * @global Boolean $config['query_stats']
+ * @global bool $config['query_stats']
  */
 $config['query_stats'] = FALSE;
 
 /**
  * Default protocol for web queries
- * @global String $config['default_protocol']
+ * @global string $config['default_protocol']
  */
 $config['default_protocol'] = 'http';
 
 /**
  * Default URL for web queries
- * @global String $config['default_url']
+ * @global string $config['default_url']
  */
 $config['default_url'] = 'http://www.example.org/';
 
 /**
  * Default sub-path for web queries
- * @global String $config['default_webpath']
+ * @global string $config['default_webpath']
  */
 $config['default_webpath'] = '/';
 
