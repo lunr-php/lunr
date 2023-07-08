@@ -83,7 +83,7 @@ jobs:
 
   phpstan:
     runs-on: ubuntu-latest
-    continue-on-error: true
+    continue-on-error: false
     name: "PHPStan"
     steps:
       - name: Checkout
@@ -100,4 +100,4 @@ jobs:
         run: composer update
 
       - name: Run PHPStan
-        run: phpstan analyze src -l2 --configuration tests/phpstan.neon.dist
+        run: phpstan analyze src -l4 --configuration tests/phpstan.neon.dist

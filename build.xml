@@ -116,7 +116,7 @@
             <arg value="-c" />
             <arg value="${basedir}/tests/phpstan.neon.dist" />
             <arg value="--level" />
-            <arg value="2" />
+            <arg value="4" />
             <arg value="--no-progress" />
             <arg value="--no-interaction" />
             <arg value="--xdebug" />
@@ -131,7 +131,7 @@
             <arg value="-c" />
             <arg value="${basedir}/tests/phpstan.neon.dist" />
             <arg value="--level" />
-            <arg value="2" />
+            <arg value="4" />
             <arg value="--error-format" />
             <arg value="checkstyle" />
             <arg value="--no-progress" />
