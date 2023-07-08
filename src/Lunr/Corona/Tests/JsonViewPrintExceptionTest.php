@@ -9,7 +9,7 @@
 
 namespace Lunr\Corona\Tests;
 
-use \Lunr\Corona\Tests\Helpers\MockUncaughtException;
+use Lunr\Corona\Tests\Helpers\MockUncaughtException;
 
 /**
  * This class contains tests for the JsonView class.

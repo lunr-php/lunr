@@ -166,7 +166,7 @@ class FrontControllerLookupTest extends FrontControllerTest
     {
         $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar' ]);
 
-        $dir    = '/foo/bar';
+        $dir = '/foo/bar';
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
@@ -184,3 +184,5 @@ class FrontControllerLookupTest extends FrontControllerTest
     }
 
 }
+
+?>

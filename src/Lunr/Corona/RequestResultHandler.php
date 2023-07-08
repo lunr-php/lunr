@@ -41,8 +41,8 @@ class RequestResultHandler
     /**
      * Constructor.
      *
-     * @param Request                  $request  Instance of the Request class.
-     * @param Response                 $response Instance of the Response class.
+     * @param Request         $request  Instance of the Request class.
+     * @param Response        $response Instance of the Response class.
      * @param LoggerInterface $logger   Instance of a Logger class.
      */
     public function __construct($request, $response, $logger)

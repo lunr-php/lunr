@@ -139,7 +139,7 @@ class ModelCacheTest extends ModelTest
 
         $method = $this->get_accessible_reflection_method('cache_if_needed');
 
-        $result = $method->invokeArgs($this->class, [ 'foo', fn ($param) => 'test ' . $param, ['param'] ]);
+        $result = $method->invokeArgs($this->class, [ 'foo', fn ($param) => 'test ' . $param, [ 'param' ] ]);
 
         $this->assertEquals('test param', $result);
     }
@@ -242,7 +242,7 @@ class ModelCacheTest extends ModelTest
 
         $method = $this->get_accessible_reflection_method('cache_if_needed');
 
-        $result = $method->invokeArgs($this->class, [ 'foo', fn ($param) => 'test ' . $param, ['param'] ]);
+        $result = $method->invokeArgs($this->class, [ 'foo', fn ($param) => 'test ' . $param, [ 'param' ] ]);
 
         $this->assertEquals('test param', $result);
     }

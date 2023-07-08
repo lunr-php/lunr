@@ -350,7 +350,7 @@ class Request
     /**
      * Retrieve a stored FILE value.
      *
-     * @param mixed $key Key for the value to retrieve
+     * @param string $key Key for the value to retrieve
      *
      * @return array|null $return The value of the key or NULL if not found
      */

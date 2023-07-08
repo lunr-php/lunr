@@ -129,7 +129,13 @@ class MsgpackView extends View
         $msgpack['status'] = [];
 
         $msgpack['status']['code']    = 500;
-        $msgpack['status']['message'] = sprintf('Uncaught Exception %s: "%s" at %s line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine());
+        $msgpack['status']['message'] = sprintf(
+            'Uncaught Exception %s: "%s" at %s line %s',
+            get_class($e),
+            $e->getMessage(),
+            $e->getFile(),
+            $e->getLine(),
+        );
 
         header('Content-type: application/msgpack');
         http_response_code(500);

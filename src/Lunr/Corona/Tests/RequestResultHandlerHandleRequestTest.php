@@ -104,7 +104,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
         }
         else
         {
-            $message  = "call_user_func_array() expects parameter 1 to be a valid callback, ";
+            $message  = 'call_user_func_array() expects parameter 1 to be a valid callback, ';
             $message .= "class 'String' not found";
         }
 

@@ -262,3 +262,5 @@ class FrontControllerGetTest extends FrontControllerTest
     }
 
 }
+
+?>

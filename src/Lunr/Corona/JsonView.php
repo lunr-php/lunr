@@ -139,7 +139,13 @@ class JsonView extends View
         $json['status'] = [];
 
         $json['status']['code']    = 500;
-        $json['status']['message'] = sprintf('Uncaught Exception %s: "%s" at %s line %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine());
+        $json['status']['message'] = sprintf(
+            'Uncaught Exception %s: "%s" at %s line %s',
+            get_class($e),
+            $e->getMessage(),
+            $e->getFile(),
+            $e->getLine(),
+        );
 
         header('Content-type: application/json');
         http_response_code(500);
