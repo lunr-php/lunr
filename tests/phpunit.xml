@@ -214,7 +214,6 @@
             <file>../src/Lunr/Ray/Tests/PhysicalFilesystemAccessObjectMkdirTest.php</file>
         </testsuite>
         <testsuite name="Shadow">
-            <file>../src/Lunr/Shadow/Tests/ConsoleTest.php</file>
             <file>../src/Lunr/Shadow/Tests/CliRequestParserBaseTest.php</file>
             <file>../src/Lunr/Shadow/Tests/CliRequestParserParseRequestTest.php</file>
             <file>../src/Lunr/Shadow/Tests/CliRequestParserParseSuperGlobalTest.php</file>
