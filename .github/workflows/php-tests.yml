@@ -12,7 +12,7 @@ jobs:
     name: "PHP-${{ matrix.php-versions }}: PHPUnit"
     strategy:
       matrix:
-        php-versions: ['7.4', '8.0', '8.1']
+        php-versions: ['8.1']
         experimental: [false]
         include:
           - php-versions: 8.2
@@ -75,7 +75,7 @@ jobs:
       - name: Setup PHPCS
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.1'
           tools: cs2pr, phpcs
 
       - name: Run PHPCS
@@ -92,7 +92,7 @@ jobs:
       - name: Setup PHPStan
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.1'
           tools: phpstan
           extensions: uopz
 
