@@ -32,7 +32,7 @@ class JsonViewPrintExceptionTest extends JsonViewTest
         $exception->setFile('index.php');
         $exception->setLine(100);
 
-        $this->mock_function('header', function (){});
+        $this->mock_function('header', function () {});
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -58,7 +58,7 @@ class JsonViewPrintExceptionTest extends JsonViewTest
         $exception->setFile('index.php');
         $exception->setLine(100);
 
-        $this->mock_function('header', function (){});
+        $this->mock_function('header', function () {});
 
         $this->request->expects($this->once())
                       ->method('__get')

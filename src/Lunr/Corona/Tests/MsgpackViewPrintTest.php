@@ -71,7 +71,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_code.msgpack');
 
-        $this->mock_function('header', function (){});
+        $this->mock_function('header', function () {});
 
         $this->class->print_page();
 
@@ -112,7 +112,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_empty_message.msgpack');
 
-        $this->mock_function('header', function (){});
+        $this->mock_function('header', function () {});
 
         $this->class->print_page();
 
@@ -153,7 +153,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_complete.msgpack');
 
-        $this->mock_function('header', function (){});
+        $this->mock_function('header', function () {});
 
         $this->class->print_page();
 
@@ -194,7 +194,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_empty_data.msgpack');
 
-        $this->mock_function('header', function (){});
+        $this->mock_function('header', function () {});
 
         $this->class->print_page();
 

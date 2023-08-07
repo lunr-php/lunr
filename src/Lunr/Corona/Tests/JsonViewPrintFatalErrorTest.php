@@ -25,7 +25,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      */
     public function testPrintFatalErrorPrintsNothingIfNoError(): void
     {
-        $this->mock_function('error_get_last', function (){ return NULL;});
+        $this->mock_function('error_get_last', function () { return NULL; });
 
         $this->expectOutputString('');
 
@@ -41,7 +41,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      */
     public function testPrintFatalErrorPrintsNothingIfErrorNotFatal(): void
     {
-        $this->mock_function('error_get_last', function (){return [ 'type' => 8, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ];});
+        $this->mock_function('error_get_last', function () { return [ 'type' => 8, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]; });
 
         $this->expectOutputString('');
 
@@ -58,8 +58,8 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      */
     public function testPrintFatalErrorPrintsPrettyJson(): void
     {
-        $this->mock_function('error_get_last', function (){ return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ];});
-        $this->mock_function('header', function (){});
+        $this->mock_function('error_get_last', function () { return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]; });
+        $this->mock_function('header', function () {});
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -81,8 +81,8 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      */
     public function testPrintFatalErrorForWebPrintsJson(): void
     {
-        $this->mock_function('error_get_last', function (){ return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ];});
-        $this->mock_function('header', function (){});
+        $this->mock_function('error_get_last', function () { return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]; });
+        $this->mock_function('header', function () {});
 
         $this->request->expects($this->once())
                       ->method('__get')

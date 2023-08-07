@@ -64,7 +64,7 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
     public function testPrintFatalErrorPrintsMsgpack(): void
     {
         $this->mock_function('error_get_last', fn() => [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]);
-        $this->mock_function('header', function (){});
+        $this->mock_function('header', function () {});
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_error.msgpack');
 

@@ -50,7 +50,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
                           [ 'base_path', '/to/' ],
                       ]);
 
-        $this->mock_function('filemtime', function () {return 1438183002;});
+        $this->mock_function('filemtime', function () { return 1438183002; });
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/stylesheet_1.html', $method->invoke($this->class));
 
@@ -75,7 +75,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
                           [ 'base_path', '/to/' ],
                       ]);
 
-        $this->mock_function('filemtime', function () { return 1438183002;});
+        $this->mock_function('filemtime', function () { return 1438183002; });
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/stylesheet_2.html', $method->invoke($this->class));
 
@@ -140,7 +140,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
                           [ 'base_path', '/to/' ],
                       ]);
 
-        $this->mock_function('filemtime', function () {return 1438183002;});
+        $this->mock_function('filemtime', function () { return 1438183002; });
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/stylesheet_3.html', $method->invokeArgs($this->class, [ TRUE ]));
 
@@ -179,7 +179,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
                           [ 'base_path', '/to/' ],
                       ]);
 
-        $this->mock_function('filemtime', function () {return 1438183002;});
+        $this->mock_function('filemtime', function () { return 1438183002; });
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/javascript_1.html', $method->invoke($this->class));
 
@@ -204,7 +204,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
                           [ 'base_path', '/to/' ],
                       ]);
 
-        $this->mock_function('filemtime', function () {return 1438183002;});
+        $this->mock_function('filemtime', function () { return 1438183002; });
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/javascript_2.html', $method->invoke($this->class));
 
@@ -269,7 +269,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
                           [ 'base_path', '/to/' ],
                       ]);
 
-        $this->mock_function('filemtime', function () {return 1438183002;});
+        $this->mock_function('filemtime', function () { return 1438183002; });
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/javascript_3.html', $method->invokeArgs($this->class, [ TRUE ]));
 

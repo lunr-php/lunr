@@ -122,7 +122,7 @@ class JsonViewPrintTest extends JsonViewTest
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_empty_message.json');
 
-        $this->mock_function('header', function (){});
+        $this->mock_function('header', function () {});
 
         $this->class->print_page();
 
@@ -168,7 +168,7 @@ class JsonViewPrintTest extends JsonViewTest
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_complete.json');
 
-        $this->mock_function('header', function (){});
+        $this->mock_function('header', function () {});
 
         $this->class->print_page();
 
@@ -213,7 +213,7 @@ class JsonViewPrintTest extends JsonViewTest
 
         $this->expectOutputString('{"data":{"a":100,"b":{"z":true},"c":[null],"d":{},"e":"みんな"},"status":{"code":4040,"message":"Message"}}');
 
-        $this->mock_function('header', function (){});
+        $this->mock_function('header', function () {});
 
         $this->class->print_page();
 
@@ -259,7 +259,7 @@ class JsonViewPrintTest extends JsonViewTest
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_empty_data.json');
 
-        $this->mock_function('header', function (){});
+        $this->mock_function('header', function () {});
 
         $this->class->print_page();
 

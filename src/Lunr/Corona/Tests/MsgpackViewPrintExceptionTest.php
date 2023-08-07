@@ -32,7 +32,7 @@ class MsgpackViewPrintExceptionTest extends MsgpackViewTest
         $exception->setFile('index.php');
         $exception->setLine(100);
 
-        $this->mock_function('header', function (){});
+        $this->mock_function('header', function () {});
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_exception.msgpack');
 
