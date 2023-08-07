@@ -28,7 +28,7 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
      */
     public function testPutCSVFileContentCannotOpenFile(): void
     {
-        $this->mock_function('fopen', function (){return FALSE;});
+        $this->mock_function('fopen', function () { return FALSE; });
 
         $this->logger->expects($this->once())
              ->method('warning')

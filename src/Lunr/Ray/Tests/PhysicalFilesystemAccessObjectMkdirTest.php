@@ -48,7 +48,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
     {
         $directory = TEST_STATICS . '/Ray/test_directory';
 
-        $this->mock_function('mkdir', function (){return FALSE;});
+        $this->mock_function('mkdir', function () { return FALSE; });
 
         $this->logger->expects($this->once())
                      ->method('warning')
