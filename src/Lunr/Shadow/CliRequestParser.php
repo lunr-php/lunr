@@ -144,7 +144,7 @@ class CliRequestParser implements RequestParserInterface
         {
             if (array_key_exists($key, $this->ast))
             {
-                $request['params'] = array_map(function ($val){ return trim($val, '/'); }, $this->ast[$key]);
+                $request['params'] = array_map(function ($val) { return trim($val, '/'); }, $this->ast[$key]);
                 unset($this->ast[$key]);
             }
         }
