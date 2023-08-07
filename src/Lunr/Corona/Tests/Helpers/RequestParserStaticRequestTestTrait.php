@@ -49,7 +49,7 @@ trait RequestParserStaticRequestTestTrait
      *
      * @return void
      */
-    protected abstract function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = ''): void;
+    abstract protected function prepare_request_test($protocol = 'HTTP', $port = '80', $useragent = FALSE, $key = ''): void;
 
     /**
      * Preparation work for the request tests.
@@ -60,21 +60,21 @@ trait RequestParserStaticRequestTestTrait
      *
      * @return void
      */
-    protected abstract function prepare_request_data($controller = TRUE, $method = TRUE, $override = FALSE): void;
+    abstract protected function prepare_request_data($controller = TRUE, $method = TRUE, $override = FALSE): void;
 
     /**
      * Cleanup work for the request tests.
      *
      * @return void
      */
-    protected abstract function cleanup_request_test(): void;
+    abstract protected function cleanup_request_test(): void;
 
     /**
      * Unit Test Data Provider for possible base_url values and parameters.
      *
      * @return array $base Array of base_url parameters and possible values
      */
-    public abstract function baseurlProvider(): array;
+    abstract public function baseurlProvider(): array;
 
     /**
      * Test that parse_request() unsets request data in the AST.
