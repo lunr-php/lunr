@@ -16,10 +16,13 @@ charset = utf-8
 indent_style = space
 indent_size = 4
 
-[*.sh]
+[{*.sh,*.bash}]
 indent_style = space
 indent_size = 2
 
-[{Jenkinsfile,*.xml,*.json,*.neon.dist}]
+[{*.md,*.txt}]
+indent_style = space
+
+[{Jenkinsfile,*.xml,*.json,*.neon.dist,*.jq,*.yml}]
 indent_style = space
 indent_size = 4
