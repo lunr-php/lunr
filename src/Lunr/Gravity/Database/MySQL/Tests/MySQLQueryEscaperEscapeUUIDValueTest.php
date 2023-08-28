@@ -33,7 +33,7 @@ class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
                       ->method('escape_string')
                       ->will($this->returnValue('value'));
 
-        $this->assertEquals("UNHEX(REPLACE('value','-',''))", $this->class->uuidvalue('value'));
+        $this->assertEquals("UNHEX(REPLACE('value', '-', ''))", $this->class->uuidvalue('value'));
     }
 
     /**
@@ -48,7 +48,7 @@ class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
                       ->method('escape_string')
                       ->will($this->returnValue('value'));
 
-        $string = "UNHEX(REPLACE('value','-','')) COLLATE utf8_general_ci";
+        $string = "UNHEX(REPLACE('value', '-', '')) COLLATE utf8_general_ci";
 
         $this->assertEquals($string, $this->class->uuidvalue('value', 'utf8_general_ci'));
     }
@@ -65,7 +65,7 @@ class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
                       ->method('escape_string')
                       ->will($this->returnValue('value'));
 
-        $this->assertEquals("ascii UNHEX(REPLACE('value','-',''))", $this->class->uuidvalue('value', '', 'ascii'));
+        $this->assertEquals("ascii UNHEX(REPLACE('value', '-', ''))", $this->class->uuidvalue('value', '', 'ascii'));
     }
 
     /**
@@ -80,7 +80,7 @@ class MySQLQueryEscaperEscapeUUIDValueTest extends MySQLQueryEscaperTest
                       ->method('escape_string')
                       ->will($this->returnValue('value'));
 
-        $string = "ascii UNHEX(REPLACE('value','-','')) COLLATE utf8_general_ci";
+        $string = "ascii UNHEX(REPLACE('value', '-', '')) COLLATE utf8_general_ci";
 
         $this->assertEquals($string, $this->class->uuidvalue('value', 'utf8_general_ci', 'ascii'));
     }

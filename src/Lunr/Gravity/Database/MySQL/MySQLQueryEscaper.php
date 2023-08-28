@@ -80,7 +80,7 @@ class MySQLQueryEscaper extends DatabaseQueryEscaper
      */
     public function uuidvalue($value, $collation = '', $charset = '')
     {
-        return trim($charset . ' ' . $this->collate('UNHEX(REPLACE(\'' . $this->escaper->escape_string($value) . '\',\'-\',\'\'))', $collation));
+        return trim($charset . ' ' . $this->collate('UNHEX(REPLACE(\'' . $this->escaper->escape_string($value) . '\', \'-\', \'\'))', $collation));
     }
 
     /**
