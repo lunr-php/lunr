@@ -4,9 +4,9 @@
     "rmccue/requests": "~2.0",
     "php": ">=8.1",
     "psr/cache": "~1.0",
-    "lunr/halo": "~0.8.0",
-    "lunr/config": "~0.8.0",
-    "lunr/cliparser": "~0.8.0"
+    "lunr/halo": "dev-master",
+    "lunr/config": "dev-master",
+    "lunr/cliparser": "dev-master"
   },
   "suggest": {
     "ext-http": "Needed for HTTP support in Corona, needed to get hostname in Shadow when parsing data",
