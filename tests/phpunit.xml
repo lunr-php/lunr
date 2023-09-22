@@ -35,6 +35,7 @@
             <file>../src/Lunr/Corona/Tests/RequestBaseTest.php</file>
             <file>../src/Lunr/Corona/Tests/RequestMagicGetTest.php</file>
             <file>../src/Lunr/Corona/Tests/RequestGetDataTest.php</file>
+            <file>../src/Lunr/Corona/Tests/RequestGetDataFromWrappersTest.php</file>
             <file>../src/Lunr/Corona/Tests/RequestSetMockValuesTest.php</file>
             <file>../src/Lunr/Corona/Tests/RequestAddMockValuesTest.php</file>
             <file>../src/Lunr/Corona/Tests/ResponseBaseTest.php</file>

@@ -10,6 +10,8 @@
 
 namespace Lunr\Corona\Tests;
 
+use Lunr\Corona\RequestData;
+
 /**
  * Tests for getting stored superglobal values.
  *
@@ -21,39 +23,39 @@ class RequestGetDataTest extends RequestTest
     /**
      * Test getting GET data returns get value if no mock value.
      *
-     * @covers Lunr\Corona\Request::get_get_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetGetData(): void
     {
-        $this->assertEquals('get_value', $this->class->get_get_data('get_key'));
+        $this->assertEquals('get_value', $this->class->get_data('get_key', RequestData::Get));
     }
 
     /**
      * Test getting GET data returns get values if no mock values.
      *
-     * @covers Lunr\Corona\Request::get_get_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetGetDataNoKey(): void
     {
-        $this->assertEquals([ 'get_key' => 'get_value', 'get_second_key' => 'get_value' ], $this->class->get_get_data());
+        $this->assertEquals([ 'get_key' => 'get_value', 'get_second_key' => 'get_value' ], $this->class->get_data(type: RequestData::Get));
     }
 
     /**
      * Test getting GET data returns mock value if present.
      *
-     * @covers Lunr\Corona\Request::get_get_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetGetDataWithMockValue(): void
     {
         $this->set_reflection_property_value('mock', [ 'get' => [ 'get_key' => 'get_mock_value' ] ]);
 
-        $this->assertEquals('get_mock_value', $this->class->get_get_data('get_key'));
+        $this->assertEquals('get_mock_value', $this->class->get_data('get_key', RequestData::Get));
     }
 
     /**
      * Test getting GET data returns mock values if present.
      *
-     * @covers Lunr\Corona\Request::get_get_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetGetDataWithMockValueNoKey(): void
     {
@@ -64,57 +66,57 @@ class RequestGetDataTest extends RequestTest
             'get_second_key' => 'get_value',
             'mock_key'       => 'get_mock_value',
         ];
-        $this->assertEquals($expects, $this->class->get_get_data());
+        $this->assertEquals($expects, $this->class->get_data(type: RequestData::Get));
     }
 
     /**
      * Test getting GET data returns get value if empty mock value.
      *
-     * @covers Lunr\Corona\Request::get_get_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetGetDataWithInvalidMockValue(): void
     {
         $this->set_reflection_property_value('mock', [ 'get' => [] ]);
 
-        $this->assertEquals('get_value', $this->class->get_get_data('get_key'));
+        $this->assertEquals('get_value', $this->class->get_data('get_key', RequestData::Get));
     }
 
     /**
      * Test getting POST data returns post value if no mock value.
      *
-     * @covers Lunr\Corona\Request::get_post_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetPostData(): void
     {
-        $this->assertEquals('post_value', $this->class->get_post_data('post_key'));
+        $this->assertEquals('post_value', $this->class->get_data('post_key', RequestData::Post));
     }
 
     /**
      * Test getting POST data returns get values if no mock values.
      *
-     * @covers Lunr\Corona\Request::get_post_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetPostDataNoKey(): void
     {
-        $this->assertEquals([ 'post_key' => 'post_value', 'post_second_key' => 'post_value' ], $this->class->get_post_data());
+        $this->assertEquals([ 'post_key' => 'post_value', 'post_second_key' => 'post_value' ], $this->class->get_data(type: RequestData::Post));
     }
 
     /**
      * Test getting POST data returns mock value if present.
      *
-     * @covers Lunr\Corona\Request::get_post_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetPostDataWithMockValue(): void
     {
         $this->set_reflection_property_value('mock', [ 'post' => [ 'post_key' => 'post_mock_value' ] ]);
 
-        $this->assertEquals('post_mock_value', $this->class->get_post_data('post_key'));
+        $this->assertEquals('post_mock_value', $this->class->get_data('post_key', RequestData::Post));
     }
 
     /**
      * Test getting POST data returns mock values if present.
      *
-     * @covers Lunr\Corona\Request::get_post_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetPostDataWithMockValueNoKey(): void
     {
@@ -125,68 +127,68 @@ class RequestGetDataTest extends RequestTest
             'post_second_key' => 'post_value',
             'mock_key'        => 'post_mock_value',
         ];
-        $this->assertEquals($expects, $this->class->get_post_data());
+        $this->assertEquals($expects, $this->class->get_data(type: RequestData::Post));
     }
 
     /**
      * Test getting POST data returns post value if empty mock value.
      *
-     * @covers Lunr\Corona\Request::get_post_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetPostDataWithInvalidMockValue(): void
     {
         $this->set_reflection_property_value('mock', [ 'post' => [] ]);
 
-        $this->assertEquals('post_value', $this->class->get_post_data('post_key'));
+        $this->assertEquals('post_value', $this->class->get_data('post_key', RequestData::Post));
     }
 
     /**
      * Test getting SERVER data.
      *
-     * @covers Lunr\Corona\Request::get_server_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetServerData(): void
     {
-        $this->assertEquals('server_value', $this->class->get_server_data('server_key'));
+        $this->assertEquals('server_value', $this->class->get_data('server_key', RequestData::Server));
     }
 
     /**
      * Test getting HTTP Header data.
      *
-     * @covers Lunr\Corona\Request::get_http_header_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetHeaderData(): void
     {
-        $this->assertEquals('HTTP_SERVER_VALUE', $this->class->get_http_header_data('server_key'));
+        $this->assertEquals('HTTP_SERVER_VALUE', $this->class->get_data('server_key', RequestData::Header));
     }
 
     /**
      * Test getting FILES data.
      *
-     * @covers Lunr\Corona\Request::get_files_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetFileData(): void
     {
-        $this->assertEquals($this->files['image'], $this->class->get_files_data('image'));
+        $this->assertEquals($this->files['image'], $this->class->get_data('image', RequestData::Upload));
     }
 
     /**
      * Test getting COOKIE data.
      *
-     * @covers Lunr\Corona\Request::get_cookie_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetCookieData(): void
     {
-        $this->assertEquals('cookie_value', $this->class->get_cookie_data('cookie_key'));
+        $this->assertEquals('cookie_value', $this->class->get_data('cookie_key', RequestData::Cookie));
     }
 
     /**
-     * Tests that get_all_options() returns the ast property.
+     * Tests that get_data() returns the ast property.
      *
      * @param array $keys The array of keys to test
      *
      * @dataProvider cliArgsKeyProvider
-     * @covers       Lunr\Corona\Request::get_all_options
+     * @covers       Lunr\Corona\Request::get_data
      */
     public function testGetAllOptionsReturnsArray($keys): void
     {
@@ -196,41 +198,47 @@ class RequestGetDataTest extends RequestTest
             $values[] = 'value';
         }
 
-        $this->set_reflection_property_value('cli_args', array_combine($keys, $values));
+        $class = $this->reflection->newInstanceWithoutConstructor();
 
-        $return = $this->class->get_all_options();
+        $this->reflection->getProperty('cli_args')
+                         ->setValue($class, array_combine($keys, $values));
+
+        $return = $class->get_data(type: RequestData::CliOption);
 
         $this->assertEquals($keys, $return);
     }
 
     /**
-     * Tests that get_option_data() returns a value for a proper key.
+     * Tests that get_data() returns a value for a proper key.
      *
      * @param array $value The expected value to test
      *
      * @dataProvider validCliArgsValueProvider
-     * @covers       Lunr\Corona\Request::get_option_data
+     * @covers       Lunr\Corona\Request::get_data
      */
     public function testGetOptionDataReturnsValueForValidKey($value): void
     {
-        $this->set_reflection_property_value('cli_args', [ 'a' => $value ]);
+        $class = $this->reflection->newInstanceWithoutConstructor();
 
-        $result = $this->class->get_option_data('a');
+        $this->reflection->getProperty('cli_args')
+                         ->setValue($class, [ 'a' => $value ]);
+
+        $result = $class->get_data('a', RequestData::CliArgument);
 
         $this->assertEquals($value, $result);
     }
 
     /**
-     * Tests that get_option_data() returns NULL for invalid key.
+     * Tests that get_data() returns NULL for invalid key.
      *
-     * @covers Lunr\Corona\Request::get_option_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetOptionDataReturnsNullForInvalidKey(): void
     {
         $ast = $this->get_reflection_property_value('cli_args');
 
         $this->assertArrayNotHasKey('foo', $ast);
-        $this->assertNull($this->class->get_option_data('foo'));
+        $this->assertNull($this->class->get_data('foo', RequestData::CliArgument));
     }
 
     /**
@@ -318,9 +326,9 @@ class RequestGetDataTest extends RequestTest
     }
 
     /**
-     * Test that get_raw_data() returns raw request data.
+     * Test that get_data() returns raw request data.
      *
-     * @covers Lunr\Corona\Request::get_raw_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetRawDataReturnsRawRequestData(): void
     {
@@ -328,13 +336,13 @@ class RequestGetDataTest extends RequestTest
                      ->method('parse_raw_data')
                      ->willReturn('raw');
 
-        $this->assertEquals('raw', $this->class->get_raw_data());
+        $this->assertEquals('raw', $this->class->get_data(type: RequestData::Raw));
     }
 
     /**
-     * Test that get_raw_data() returns cached raw request data if parsing it is FALSE.
+     * Test that get_data() returns cached raw request data if parsing it is FALSE.
      *
-     * @covers Lunr\Corona\Request::get_raw_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetRawDataReturnsCachedRawRequestData(): void
     {
@@ -342,15 +350,15 @@ class RequestGetDataTest extends RequestTest
                      ->method('parse_raw_data')
                      ->willReturnOnConsecutiveCalls('raw', FALSE);
 
-        $this->assertEquals('raw', $this->class->get_raw_data());
-        $this->assertEquals('raw', $this->class->get_raw_data());
+        $this->assertEquals('raw', $this->class->get_data(type: RequestData::Raw));
+        $this->assertEquals('raw', $this->class->get_data(type: RequestData::Raw));
         $this->assertEquals('raw', $this->get_reflection_property_value('raw_data'));
     }
 
     /**
-     * Test that get_raw_data() returns no cached raw request data if parsing it is not empty.
+     * Test that get_data() returns no cached raw request data if parsing it is not empty.
      *
-     * @covers Lunr\Corona\Request::get_raw_data
+     * @covers Lunr\Corona\Request::get_data
      */
     public function testGetRawDataReturnsUnCachedRawRequestData(): void
     {
@@ -358,9 +366,9 @@ class RequestGetDataTest extends RequestTest
                      ->method('parse_raw_data')
                      ->willReturnOnConsecutiveCalls('raw', 'hello');
 
-        $this->assertEquals('raw', $this->class->get_raw_data());
+        $this->assertEquals('raw', $this->class->get_data(type: RequestData::Raw));
         $this->assertEquals('raw', $this->get_reflection_property_value('raw_data'));
-        $this->assertEquals('hello', $this->class->get_raw_data());
+        $this->assertEquals('hello', $this->class->get_data(type: RequestData::Raw));
         $this->assertEquals('hello', $this->get_reflection_property_value('raw_data'));
     }
 

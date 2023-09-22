@@ -39,50 +39,50 @@ class Request
      * Stored $_POST values
      * @var array<string,mixed>
      */
-    protected $post;
+    protected readonly array $post;
 
     /**
      * Stored $_GET values
      * @var array<string,mixed>
      */
-    protected $get;
+    protected readonly array $get;
 
     /**
      * Stored $_COOKIE values
      * @var array<string,mixed>
      */
-    protected $cookie;
+    protected readonly array $cookie;
 
     /**
      * Stored $_SERVER values
      * @var array<string,mixed>
      */
-    protected $server;
+    protected readonly array $server;
 
     /**
      * Request property data
      *
      * @var array<string, mixed>
      */
-    protected $request;
+    protected readonly array $request;
 
     /**
      * Stored $_FILES values
      * @var array<string,array<string,mixed>>
      */
-    protected $files;
+    protected readonly array $files;
 
     /**
      * Stored php://input values
      * @var string
      */
-    protected $raw_data;
+    protected string $raw_data;
 
     /**
      * Stored command line arguments
      * @var array<string,string|null>
      */
-    protected $cli_args;
+    protected readonly array $cli_args;
 
     /**
      * Shared instance of the request parser.
@@ -122,15 +122,8 @@ class Request
      */
     public function __destruct()
     {
-        unset($this->post);
-        unset($this->get);
-        unset($this->server);
-        unset($this->cookie);
-        unset($this->request);
-        unset($this->files);
         unset($this->parser);
         unset($this->mock);
-        unset($this->raw_data);
     }
 
     /**
@@ -197,14 +190,9 @@ class Request
      *
      * @return mixed $return The value of the key or NULL if not found
      */
-    public function get_option_data(string $key)
+    public function get_option_data(string $key): mixed
     {
-        if (array_key_exists($key, $this->cli_args))
-        {
-            return $this->cli_args[$key];
-        }
-
-        return NULL;
+        return $this->get_data($key, RequestData::CliArgument);
     }
 
     /**
@@ -214,7 +202,7 @@ class Request
      */
     public function get_all_options(): array
     {
-        return array_keys($this->cli_args);
+        return $this->get_data(type: RequestData::CliOption);
     }
 
     /**
@@ -263,24 +251,9 @@ class Request
      *
      * @return mixed The value of the key, all GET values if no key is provided or NULL if not found.
      */
-    public function get_get_data(?string $key = NULL)
+    public function get_get_data(?string $key = NULL): mixed
     {
-        if ($key === NULL)
-        {
-            if (!array_key_exists('get', $this->mock))
-            {
-                return $this->get;
-            }
-
-            return array_merge($this->get, $this->mock['get']);
-        }
-
-        if (array_key_exists('get', $this->mock) && array_key_exists($key, $this->mock['get']))
-        {
-            return $this->mock['get'][$key];
-        }
-
-        return $this->get[$key] ?? NULL;
+        return $this->get_data($key, RequestData::Get);
     }
 
     /**
@@ -290,24 +263,9 @@ class Request
      *
      * @return mixed The value of the key, all POST values if no key is provided or NULL if not found.
      */
-    public function get_post_data(?string $key = NULL)
+    public function get_post_data(?string $key = NULL): mixed
     {
-        if ($key === NULL)
-        {
-            if (!array_key_exists('post', $this->mock))
-            {
-                return $this->post;
-            }
-
-            return array_merge($this->post, $this->mock['post']);
-        }
-
-        if (array_key_exists('post', $this->mock) && array_key_exists($key, $this->mock['post']))
-        {
-            return $this->mock['post'][$key];
-        }
-
-        return $this->post[$key] ?? NULL;
+        return $this->get_data($key, RequestData::Post);
     }
 
     /**
@@ -317,9 +275,9 @@ class Request
      *
      * @return mixed $return The value of the key or NULL if not found
      */
-    public function get_server_data(string $key)
+    public function get_server_data(string $key): mixed
     {
-        return $this->server[$key] ?? NULL;
+        return $this->get_data($key, RequestData::Server);
     }
 
     /**
@@ -329,10 +287,9 @@ class Request
      *
      * @return mixed $return The value of the key or NULL if not found
      */
-    public function get_http_header_data(string $key)
+    public function get_http_header_data(string $key): mixed
     {
-        $http_key = 'HTTP_' . strtoupper(str_replace('-', '_', $key));
-        return $this->server[$http_key] ?? NULL;
+        return $this->get_data($key, RequestData::Header);
     }
 
     /**
@@ -342,9 +299,9 @@ class Request
      *
      * @return mixed $return The value of the key or NULL if not found
      */
-    public function get_cookie_data(string $key)
+    public function get_cookie_data(string $key): mixed
     {
-        return $this->cookie[$key] ?? NULL;
+        return $this->get_data($key, RequestData::Cookie);
     }
 
     /**
@@ -356,7 +313,7 @@ class Request
      */
     public function get_files_data(string $key): ?array
     {
-        return $this->files[$key] ?? NULL;
+        return $this->get_data($key, RequestData::Upload);
     }
 
     /**
@@ -366,14 +323,71 @@ class Request
      */
     public function get_raw_data(): string
     {
-        $input = $this->parser->parse_raw_data();
+        return $this->get_data(type: RequestData::Raw);
+    }
 
-        if ($input !== FALSE)
+    /**
+     * Retrieve request data.
+     *
+     * @param string|null $key  Key for the value to retrieve
+     * @param RequestData $type Type of the request data
+     *
+     * @return ($type is RequestData::CliOption ? array :
+     *         ($type is RequestData::Raw ? string :
+     *         ($type is RequestData::Upload ? array|null : mixed))) Request data value
+     */
+    public function get_data(?string $key = NULL, RequestData $type = RequestData::Get): mixed
+    {
+        $property = $type->value;
+
+        switch ($type)
         {
-            $this->raw_data = $input;
-        }
+            case RequestData::Get:
+            case RequestData::Post:
+                if ($key === NULL)
+                {
+                    if (!array_key_exists($property, $this->mock))
+                    {
+                        return $this->$property;
+                    }
 
-        return $this->raw_data;
+                    return array_merge($this->$property, $this->mock[$property]);
+                }
+
+                if (array_key_exists($property, $this->mock) && array_key_exists($key, $this->mock[$property]))
+                {
+                    return $this->mock[$property][$key];
+                }
+
+                return $this->$property[$key] ?? NULL;
+            case RequestData::Cookie:
+            case RequestData::Upload:
+            case RequestData::Server:
+                return $this->$property[$key] ?? NULL;
+            case RequestData::Header:
+                $http_key = 'HTTP_' . strtoupper(str_replace('-', '_', $key));
+                return $this->server[$http_key] ?? NULL;
+            case RequestData::Raw:
+                $input = $this->parser->parse_raw_data();
+
+                if ($input !== FALSE)
+                {
+                    $this->raw_data = $input;
+                }
+
+                return $this->raw_data;
+            case RequestData::CliArgument:
+                if ($key === NULL)
+                {
+                    return $this->cli_args;
+                }
+
+                return $this->cli_args[$key] ?? NULL;
+            case RequestData::CliOption:
+                return array_keys($this->cli_args);
+            default:
+                return NULL;
+        }
     }
 
 }
