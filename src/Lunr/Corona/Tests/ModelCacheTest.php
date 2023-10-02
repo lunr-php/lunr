@@ -247,6 +247,23 @@ class ModelCacheTest extends ModelTest
         $this->assertEquals('test param', $result);
     }
 
+    /**
+     * Test that delete_from_cache() deletes value from cache.
+     *
+     * @covers \Lunr\Corona\Model::delete_from_cache
+     */
+    public function testDeleteFromCache()
+    {
+        $this->cache->expects($this->once())
+                    ->method('deleteItem')
+                    ->with('foo')
+                    ->willReturn(TRUE);
+
+        $method = $this->get_accessible_reflection_method('delete_from_cache');
+
+        $method->invokeArgs($this->class, [ 'foo' ]);
+    }
+
 }
 
 ?>

@@ -107,6 +107,18 @@ class Model
         return $value;
     }
 
+    /**
+     * Delete cache item.
+     *
+     * @param string $key Unique identifier for the data.
+     *
+     * @return bool True if the item was successfully removed. False if there was an error.
+     */
+    protected function delete_from_cache(string $key): bool
+    {
+        return $this->cache->deleteItem($key);
+    }
+
 }
 
 ?>
