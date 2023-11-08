@@ -24,14 +24,21 @@ abstract class IniTest extends LunrBaseTest
 {
 
     /**
+     * Instance of the tested class.
+     * @var Ini
+     */
+    protected Ini $class;
+
+    /**
      * TestCase Constructor.
      *
      * @return void
      */
     public function setUpMain(): void
     {
-        $this->class      = new Ini();
-        $this->reflection = new ReflectionClass('Lunr\Core\Ini');
+        $this->class = new Ini();
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -41,8 +48,9 @@ abstract class IniTest extends LunrBaseTest
      */
     public function setUpSection(): void
     {
-        $this->class      = new Ini('date');
-        $this->reflection = new ReflectionClass('Lunr\Core\Ini');
+        $this->class = new Ini('date');
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -50,8 +58,9 @@ abstract class IniTest extends LunrBaseTest
      */
     public function tearDown(): void
     {
-        unset($this->reflection);
         unset($this->class);
+
+        parent::tearDown();
     }
 
     /**
