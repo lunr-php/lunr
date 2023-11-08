@@ -10,14 +10,12 @@
 
 namespace Lunr\Corona\Exceptions\Tests;
 
-use Lunr\Corona\Exceptions\Tests\Helpers\HttpExceptionTest;
-
 /**
  * This class contains tests for the InternalServerErrorException class.
  *
  * @covers Lunr\Corona\Exceptions\InternalServerErrorException
  */
-class InternalServerErrorExceptionBaseTest extends HttpExceptionTest
+class InternalServerErrorExceptionBaseTest extends InternalServerErrorExceptionTest
 {
 
     /**

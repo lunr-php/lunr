@@ -23,12 +23,19 @@ class ResponseTest extends LunrBaseTest
 {
 
     /**
+     * Instance of the tested class.
+     * @var Response
+     */
+    protected Response $class;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp(): void
     {
-        $this->class      = new Response();
-        $this->reflection = new ReflectionClass('Lunr\Corona\Response');
+        $this->class = new Response();
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -37,7 +44,8 @@ class ResponseTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->reflection);
+
+        parent::tearDown();
     }
 
     /**

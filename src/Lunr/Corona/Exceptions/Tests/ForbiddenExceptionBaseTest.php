@@ -10,14 +10,12 @@
 
 namespace Lunr\Corona\Exceptions\Tests;
 
-use Lunr\Corona\Exceptions\Tests\Helpers\HttpExceptionTest;
-
 /**
  * This class contains tests for the ForbiddenException class.
  *
  * @covers Lunr\Corona\Exceptions\ForbiddenException
  */
-class ForbiddenExceptionBaseTest extends HttpExceptionTest
+class ForbiddenExceptionBaseTest extends ForbiddenExceptionTest
 {
 
     /**

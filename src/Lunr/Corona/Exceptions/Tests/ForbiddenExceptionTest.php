@@ -1,24 +1,25 @@
 <?php
 
 /**
- * This file contains the HttpExceptionTest class.
+ * This file contains the ForbiddenExceptionTest class.
  *
- * SPDX-FileCopyrightText: Copyright 2018 M2mobi B.V., Amsterdam, The Netherlands
- * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
  */
 
-namespace Lunr\Corona\Exceptions\Tests\Helpers;
+namespace Lunr\Corona\Exceptions\Tests;
 
+use Lunr\Corona\Exceptions\ForbiddenException;
 use Lunr\Halo\LunrBaseTest;
 use Exception;
-use ReflectionClass;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the HttpException class.
+ * and shared attributes for testing the ForbiddenException class.
+ *
+ * @covers Lunr\Corona\Exceptions\ForbiddenException
  */
-abstract class HttpExceptionTest extends LunrBaseTest
+abstract class ForbiddenExceptionTest extends LunrBaseTest
 {
 
     /**
@@ -40,20 +41,24 @@ abstract class HttpExceptionTest extends LunrBaseTest
     protected $code;
 
     /**
+     * Instance of the tested class.
+     * @var ForbiddenException
+     */
+    protected ForbiddenException $class;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp(): void
     {
-        // Assumption: All HttpExceptions end in Exception.
-        $name = str_replace('\\Tests\\', '\\', substr(static::class, 0, strrpos(static::class, 'Exception') + 9));
-
         $this->message = 'Http error!';
         $this->code    = 9999;
 
-        $this->previous = new $name();
+        $this->previous = new Exception();
 
-        $this->reflection = new ReflectionClass($name);
-        $this->class      = new $name($this->message, $this->code, $this->previous);
+        $this->class = new ForbiddenException($this->message, $this->code, $this->previous);
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -64,8 +69,9 @@ abstract class HttpExceptionTest extends LunrBaseTest
         unset($this->code);
         unset($this->message);
         unset($this->previous);
-        unset($this->reflection);
         unset($this->class);
+
+        parent::tearDown();
     }
 
 }

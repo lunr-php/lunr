@@ -10,14 +10,12 @@
 
 namespace Lunr\Corona\Exceptions\Tests;
 
-use Lunr\Corona\Exceptions\Tests\Helpers\HttpExceptionTest;
-
 /**
  * This class contains tests for the ConflictException class.
  *
  * @covers Lunr\Corona\Exceptions\ConflictException
  */
-class ConflictExceptionBaseTest extends HttpExceptionTest
+class ConflictExceptionBaseTest extends ConflictExceptionTest
 {
 
     /**

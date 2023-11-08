@@ -42,6 +42,12 @@ abstract class FrontControllerTest extends LunrBaseTest
     protected $fao;
 
     /**
+     * Instance of the tested class.
+     * @var FrontController
+     */
+    protected FrontController $class;
+
+    /**
      * Test case constructor.
      */
     public function setUp(): void
@@ -58,7 +64,7 @@ abstract class FrontControllerTest extends LunrBaseTest
 
         $this->class = new FrontController($this->request, $this->handler, $this->fao);
 
-        $this->reflection = new ReflectionClass('Lunr\Corona\FrontController');
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -67,10 +73,11 @@ abstract class FrontControllerTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->reflection);
         unset($this->request);
         unset($this->handler);
         unset($this->fao);
+
+        parent::tearDown();
     }
 
     /**

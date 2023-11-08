@@ -10,14 +10,12 @@
 
 namespace Lunr\Corona\Exceptions\Tests;
 
-use Lunr\Corona\Exceptions\Tests\Helpers\HttpExceptionTest;
-
 /**
  * This class contains tests for the UnauthorizedException class.
  *
  * @covers Lunr\Corona\Exceptions\UnauthorizedException
  */
-class UnauthorizedExceptionBaseTest extends HttpExceptionTest
+class UnauthorizedExceptionBaseTest extends UnauthorizedExceptionTest
 {
 
     /**

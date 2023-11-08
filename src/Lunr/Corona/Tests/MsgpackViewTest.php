@@ -42,6 +42,12 @@ abstract class MsgpackViewTest extends LunrBaseTest
     protected $configuration;
 
     /**
+     * Instance of the tested class.
+     * @var MsgpackView
+     */
+    protected MsgpackView $class;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp(): void
@@ -53,8 +59,9 @@ abstract class MsgpackViewTest extends LunrBaseTest
                               ->disableOriginalConstructor()
                               ->getMock();
 
-        $this->class      = new MsgpackView($this->request, $this->response, $this->configuration);
-        $this->reflection = new ReflectionClass('Lunr\Corona\MsgpackView');
+        $this->class = new MsgpackView($this->request, $this->response, $this->configuration);
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -66,7 +73,8 @@ abstract class MsgpackViewTest extends LunrBaseTest
         unset($this->response);
         unset($this->configuration);
         unset($this->class);
-        unset($this->reflection);
+
+        parent::tearDown();
     }
 
     /**

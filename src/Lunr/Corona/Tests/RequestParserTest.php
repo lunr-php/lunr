@@ -30,6 +30,12 @@ abstract class RequestParserTest extends LunrBaseTest
     protected $configuration;
 
     /**
+     * Instance of the tested class.
+     * @var RequestParser
+     */
+    protected RequestParser $class;
+
+    /**
      * Shared TestCase Constructor code.
      *
      * @return void
@@ -38,8 +44,9 @@ abstract class RequestParserTest extends LunrBaseTest
     {
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
-        $this->class      = new RequestParser($this->configuration);
-        $this->reflection = new ReflectionClass('Lunr\Corona\RequestParser');
+        $this->class = new RequestParser($this->configuration);
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -48,8 +55,9 @@ abstract class RequestParserTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->reflection);
         unset($this->configuration);
+
+        parent::tearDown();
     }
 
     /**

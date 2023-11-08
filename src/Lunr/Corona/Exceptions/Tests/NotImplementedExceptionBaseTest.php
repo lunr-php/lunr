@@ -10,14 +10,12 @@
 
 namespace Lunr\Corona\Exceptions\Tests;
 
-use Lunr\Corona\Exceptions\Tests\Helpers\HttpExceptionTest;
-
 /**
  * This class contains tests for the NotImplementedException class.
  *
  * @covers Lunr\Corona\Exceptions\NotImplementedException
  */
-class NotImplementedExceptionBaseTest extends HttpExceptionTest
+class NotImplementedExceptionBaseTest extends NotImplementedExceptionTest
 {
 
     /**

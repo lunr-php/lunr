@@ -42,6 +42,12 @@ abstract class RequestResultHandlerTest extends LunrBaseTest
     protected $logger;
 
     /**
+     * Instance of the tested class.
+     * @var RequestResultHandler
+     */
+    protected RequestResultHandler $class;
+
+    /**
      * Test case constructor.
      */
     public function setUp(): void
@@ -59,7 +65,7 @@ abstract class RequestResultHandlerTest extends LunrBaseTest
 
         $this->class = new RequestResultHandler($this->request, $this->response, $this->logger);
 
-        $this->reflection = new ReflectionClass($this->class);
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -68,10 +74,11 @@ abstract class RequestResultHandlerTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->reflection);
         unset($this->request);
         unset($this->response);
         unset($this->logger);
+
+        parent::tearDown();
     }
 
     /**

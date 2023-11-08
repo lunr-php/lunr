@@ -10,14 +10,12 @@
 
 namespace Lunr\Corona\Exceptions\Tests;
 
-use Lunr\Corona\Exceptions\Tests\Helpers\HttpExceptionTest;
-
 /**
  * This class contains tests for the FailedDependencyException class.
  *
  * @covers Lunr\Corona\Exceptions\FailedDependencyException
  */
-class FailedDependencyExceptionBaseTest extends HttpExceptionTest
+class FailedDependencyExceptionBaseTest extends FailedDependencyExceptionTest
 {
 
     /**

@@ -10,14 +10,12 @@
 
 namespace Lunr\Corona\Exceptions\Tests;
 
-use Lunr\Corona\Exceptions\Tests\Helpers\HttpExceptionTest;
-
 /**
  * This class contains tests for the NotFoundException class.
  *
  * @covers Lunr\Corona\Exceptions\NotFoundException
  */
-class NotFoundExceptionBaseTest extends HttpExceptionTest
+class NotFoundExceptionBaseTest extends NotFoundExceptionTest
 {
 
     /**

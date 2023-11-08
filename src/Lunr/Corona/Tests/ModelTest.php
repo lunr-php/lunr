@@ -34,6 +34,12 @@ abstract class ModelTest extends LunrBaseTest
     protected $item;
 
     /**
+     * Instance of the tested class.
+     * @var Model
+     */
+    protected Model $class;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp(): void
@@ -46,7 +52,7 @@ abstract class ModelTest extends LunrBaseTest
 
         $this->class = new Model($this->cache);
 
-        $this->reflection = new ReflectionClass('Lunr\Corona\Model');
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -57,7 +63,8 @@ abstract class ModelTest extends LunrBaseTest
         unset($this->cache);
         unset($this->item);
         unset($this->class);
-        unset($this->reflection);
+
+        parent::tearDown();
     }
 
 }

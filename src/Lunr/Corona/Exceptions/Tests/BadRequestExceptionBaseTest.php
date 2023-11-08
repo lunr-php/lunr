@@ -10,14 +10,12 @@
 
 namespace Lunr\Corona\Exceptions\Tests;
 
-use Lunr\Corona\Exceptions\Tests\Helpers\HttpExceptionTest;
-
 /**
  * This class contains tests for the BadRequestException class.
  *
  * @covers Lunr\Corona\Exceptions\BadRequestException
  */
-class BadRequestExceptionBaseTest extends HttpExceptionTest
+class BadRequestExceptionBaseTest extends BadRequestExceptionTest
 {
 
     /**

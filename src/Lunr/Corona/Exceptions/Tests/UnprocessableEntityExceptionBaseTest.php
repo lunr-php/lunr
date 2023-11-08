@@ -10,14 +10,12 @@
 
 namespace Lunr\Corona\Exceptions\Tests;
 
-use Lunr\Corona\Exceptions\Tests\Helpers\HttpExceptionTest;
-
 /**
  * This class contains tests for the UnprocessableEntityException class.
  *
  * @covers Lunr\Corona\Exceptions\UnprocessableEntityException
  */
-class UnprocessableEntityExceptionBaseTest extends HttpExceptionTest
+class UnprocessableEntityExceptionBaseTest extends UnprocessableEntityExceptionTest
 {
 
     /**

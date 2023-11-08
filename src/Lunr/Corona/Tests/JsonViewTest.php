@@ -42,6 +42,12 @@ abstract class JsonViewTest extends LunrBaseTest
     protected $configuration;
 
     /**
+     * Instance of the tested class.
+     * @var JsonView
+     */
+    protected JsonView $class;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp(): void
@@ -53,8 +59,9 @@ abstract class JsonViewTest extends LunrBaseTest
                               ->disableOriginalConstructor()
                               ->getMock();
 
-        $this->class      = new JsonView($this->request, $this->response, $this->configuration);
-        $this->reflection = new ReflectionClass('Lunr\Corona\JsonView');
+        $this->class = new JsonView($this->request, $this->response, $this->configuration);
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -66,7 +73,8 @@ abstract class JsonViewTest extends LunrBaseTest
         unset($this->response);
         unset($this->configuration);
         unset($this->class);
-        unset($this->reflection);
+
+        parent::tearDown();
     }
 
     /**

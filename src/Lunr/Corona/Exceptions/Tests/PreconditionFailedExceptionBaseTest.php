@@ -10,14 +10,12 @@
 
 namespace Lunr\Corona\Exceptions\Tests;
 
-use Lunr\Corona\Exceptions\Tests\Helpers\HttpExceptionTest;
-
 /**
  * This class contains tests for the PreconditionFailedException class.
  *
  * @covers Lunr\Corona\Exceptions\PreconditionFailedException
  */
-class PreconditionFailedExceptionBaseTest extends HttpExceptionTest
+class PreconditionFailedExceptionBaseTest extends PreconditionFailedExceptionTest
 {
 
     /**

@@ -30,6 +30,12 @@ abstract class RequestTest extends LunrBaseTest
     protected $parser;
 
     /**
+     * Instance of the tested class.
+     * @var Request
+     */
+    protected Request $class;
+
+    /**
      * Mocked file upload data.
      * @var array
      */
@@ -80,8 +86,9 @@ abstract class RequestTest extends LunrBaseTest
                      ->method('parse_command_line_arguments')
                      ->willReturn([]);
 
-        $this->class      = new Request($this->parser);
-        $this->reflection = new ReflectionClass('Lunr\Corona\Request');
+        $this->class = new Request($this->parser);
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -90,8 +97,9 @@ abstract class RequestTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->reflection);
         unset($this->parser);
+
+        parent::tearDown();
     }
 
     /**

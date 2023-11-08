@@ -49,6 +49,12 @@ abstract class HttpExceptionTest extends LunrBaseTest
     protected $code;
 
     /**
+     * Instance of the tested class.
+     * @var HttpException
+     */
+    protected HttpException $class;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp(): void
@@ -59,8 +65,9 @@ abstract class HttpExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class      = new HttpException($this->message, $this->code, $this->app_code, $this->previous);
-        $this->reflection = new ReflectionClass('Lunr\Corona\Exceptions\HttpException');
+        $this->class = new HttpException($this->message, $this->code, $this->app_code, $this->previous);
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -76,8 +83,9 @@ abstract class HttpExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class      = new HttpException($this->message, $this->code, $this->app_code, $this->previous);
-        $this->reflection = new ReflectionClass('Lunr\Corona\Exceptions\HttpException');
+        $this->class = new HttpException($this->message, $this->code, $this->app_code, $this->previous);
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -89,8 +97,9 @@ abstract class HttpExceptionTest extends LunrBaseTest
         unset($this->app_code);
         unset($this->message);
         unset($this->previous);
-        unset($this->reflection);
         unset($this->class);
+
+        parent::tearDown();
     }
 
 }

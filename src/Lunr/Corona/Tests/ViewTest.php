@@ -12,6 +12,8 @@ namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\View;
 use Lunr\Halo\LunrBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use ReflectionClass;
 
 /**
@@ -46,6 +48,12 @@ abstract class ViewTest extends LunrBaseTest
      * @var \Lunr\Core\Configuration
      */
     protected $sub_configuration;
+
+    /**
+     * Instance of the tested class.
+     * @var View&MockObject&Stub
+     */
+    protected View&MockObject&Stub $class;
 
     /**
      * TestCase Constructor.
@@ -86,7 +94,7 @@ abstract class ViewTest extends LunrBaseTest
                              )
                            ->getMockForAbstractClass();
 
-        $this->reflection = new ReflectionClass('Lunr\Corona\View');
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -97,8 +105,9 @@ abstract class ViewTest extends LunrBaseTest
         unset($this->configuration);
         unset($this->request);
         unset($this->response);
-        unset($this->reflection);
         unset($this->class);
+
+        parent::tearDown();
     }
 
     /**
