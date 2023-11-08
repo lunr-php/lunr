@@ -36,6 +36,12 @@ abstract class CliRequestParserTest extends LunrBaseTest
     protected $header;
 
     /**
+     * Instance of the tested class.
+     * @var CliRequestParser
+     */
+    protected CliRequestParser $class;
+
+    /**
      * Shared TestCase Constructor code.
      *
      * @return void
@@ -61,8 +67,9 @@ abstract class CliRequestParserTest extends LunrBaseTest
 
         $this->header = $this->getMockBuilder('http\Header')->getMock();
 
-        $this->class      = new CliRequestParser($this->configuration, $parser, $this->header);
-        $this->reflection = new ReflectionClass('Lunr\Shadow\CliRequestParser');
+        $this->class = new CliRequestParser($this->configuration, $parser, $this->header);
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -71,9 +78,10 @@ abstract class CliRequestParserTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->reflection);
         unset($this->configuration);
         unset($this->header);
+
+        parent::tearDown();
     }
 
     /**
