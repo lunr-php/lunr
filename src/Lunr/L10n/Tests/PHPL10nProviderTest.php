@@ -31,6 +31,12 @@ abstract class PHPL10nProviderTest extends LunrBaseTest
     protected $logger;
 
     /**
+     * Instance of the tested class.
+     * @var PHPL10nProvider
+     */
+    protected PHPL10nProvider $class;
+
+    /**
      * The language used for testing.
      * @var string
      */
@@ -53,10 +59,10 @@ abstract class PHPL10nProviderTest extends LunrBaseTest
     {
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $this->reflection = new ReflectionClass('Lunr\L10n\PHPL10nProvider');
-
         $this->class = new PHPL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger);
         $this->class->set_locales_location(TEST_STATICS . '/l10n');
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -65,8 +71,9 @@ abstract class PHPL10nProviderTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->reflection);
         unset($this->logger);
+
+        parent::tearDown();
     }
 
 }

@@ -31,6 +31,12 @@ abstract class GettextL10nProviderTest extends LunrBaseTest
     protected $logger;
 
     /**
+     * Instance of the tested class.
+     * @var GettextL10nProvider
+     */
+    protected GettextL10nProvider $class;
+
+    /**
      * The language used for testing.
      * @var string
      */
@@ -68,7 +74,7 @@ abstract class GettextL10nProviderTest extends LunrBaseTest
         $this->class->set_default_language('nl_NL');
         $this->class->set_locales_location(TEST_STATICS . '/l10n');
 
-        $this->reflection = new ReflectionClass('Lunr\L10n\GettextL10nProvider');
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -80,10 +86,11 @@ abstract class GettextL10nProviderTest extends LunrBaseTest
         textdomain($this->base_domain);
 
         unset($this->class);
-        unset($this->reflection);
         unset($this->logger);
         unset($this->base_locale);
         unset($this->base_domain);
+
+        parent::tearDown();
     }
 
 }

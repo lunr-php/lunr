@@ -12,6 +12,8 @@ namespace Lunr\L10n\Tests;
 
 use Lunr\L10n\L10nHTMLView;
 use Lunr\Halo\LunrBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use ReflectionClass;
 
 /**
@@ -47,6 +49,12 @@ abstract class L10nHTMLViewTest extends LunrBaseTest
     protected $l10nprovider;
 
     /**
+     * Instance of the tested class.
+     * @var L10nHTMLView&MockObject&Stub
+     */
+    protected L10nHTMLView&MockObject&Stub $class;
+
+    /**
      * TestCase Constructor.
      *
      * @return void
@@ -69,7 +77,7 @@ abstract class L10nHTMLViewTest extends LunrBaseTest
                             ->setConstructorArgs([ $this->request, $this->response, $this->configuration, $this->l10nprovider ])
                             ->getMockForAbstractClass();
 
-        $this->reflection = new ReflectionClass('Lunr\L10n\L10nHTMLView');
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -82,7 +90,8 @@ abstract class L10nHTMLViewTest extends LunrBaseTest
         unset($this->response);
         unset($this->l10nprovider);
         unset($this->class);
-        unset($this->reflection);
+
+        parent::tearDown();
     }
 
 }

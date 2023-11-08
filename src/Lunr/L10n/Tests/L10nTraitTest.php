@@ -36,13 +36,20 @@ class L10nTraitTest extends LunrBaseTest
     protected const LANGUAGE = 'de_DE';
 
     /**
+     * Instance of the tested class.
+     * @var object
+     */
+    protected object $class;
+
+    /**
      * Test case constructor.
      */
     public function setUp(): void
     {
-        $this->class      = $this->getObjectForTrait('Lunr\L10n\L10nTrait');
-        $this->reflection = new ReflectionClass($this->class);
-        $this->logger     = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+        $this->class  = $this->getObjectForTrait('Lunr\L10n\L10nTrait');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+
+        parent::baseSetUp($this->class);
 
         $this->set_reflection_property_value('logger', $this->logger);
     }
@@ -53,8 +60,9 @@ class L10nTraitTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->reflection);
         unset($this->logger);
+
+        parent::tearDown();
     }
 
 }

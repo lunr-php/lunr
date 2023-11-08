@@ -41,6 +41,12 @@ abstract class L10nTest extends LunrBaseTest
     protected $languages;
 
     /**
+     * Instance of the tested class.
+     * @var L10n
+     */
+    protected L10n $class;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp(): void
@@ -50,9 +56,9 @@ abstract class L10nTest extends LunrBaseTest
 
         $this->class = new L10n($this->logger, $this->fao);
 
-        $this->reflection = new ReflectionClass('Lunr\L10n\L10n');
-
         $this->languages = [ 'de_DE', 'en_US', 'nl_NL' ];
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -63,8 +69,9 @@ abstract class L10nTest extends LunrBaseTest
         unset($this->logger);
         unset($this->fao);
         unset($this->class);
-        unset($this->reflection);
         unset($this->languages);
+
+        parent::tearDown();
     }
 
     /**

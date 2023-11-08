@@ -12,6 +12,8 @@ namespace Lunr\L10n\Tests;
 
 use Lunr\L10n\L10nProvider;
 use Lunr\Halo\LunrBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use Psr\Log\LoggerInterface;
 use ReflectionClass;
 
@@ -28,6 +30,12 @@ abstract class L10nProviderTest extends LunrBaseTest
      * @var LoggerInterface
      */
     protected $logger;
+
+    /**
+     * Instance of the tested class.
+     * @var L10nProvider&MockObject&Stub
+     */
+    protected L10nProvider&MockObject&Stub $class;
 
     /**
      * The language used for testing.
@@ -52,7 +60,7 @@ abstract class L10nProviderTest extends LunrBaseTest
                             ->setConstructorArgs([ self::LANGUAGE, self::DOMAIN, $this->logger ])
                             ->getMockForAbstractClass();
 
-        $this->reflection = new ReflectionClass('Lunr\L10n\L10nProvider');
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -61,8 +69,9 @@ abstract class L10nProviderTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->reflection);
         unset($this->logger);
+
+        parent::tearDown();
     }
 
 }
