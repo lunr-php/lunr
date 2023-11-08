@@ -38,14 +38,21 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     protected $find_location;
 
     /**
+     * Instance of the tested class.
+     * @var PhysicalFilesystemAccessObject
+     */
+    protected PhysicalFilesystemAccessObject $class;
+
+    /**
      * Test case constructor.
      */
     public function setUp(): void
     {
         $this->logger        = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->class         = new PhysicalFilesystemAccessObject($this->logger);
-        $this->reflection    = new ReflectionClass('Lunr\Ray\PhysicalFilesystemAccessObject');
         $this->find_location = TEST_STATICS . '/Ray';
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -54,9 +61,10 @@ abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->reflection);
         unset($this->logger);
         unset($this->find_location);
+
+        parent::tearDown();
     }
 
     /**
