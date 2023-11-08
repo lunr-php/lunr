@@ -24,12 +24,19 @@ abstract class CentralAuthenticationStoreTest extends LunrBaseTest
 {
 
     /**
+     * Instance of the tested class.
+     * @var CentralAuthenticationStore
+     */
+    protected CentralAuthenticationStore $class;
+
+    /**
      * Testcase Constructor.
      */
     public function setUp(): void
     {
-        $this->class      = new CentralAuthenticationStore();
-        $this->reflection = new ReflectionClass('Lunr\Spark\CentralAuthenticationStore');
+        $this->class = new CentralAuthenticationStore();
+
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -38,7 +45,8 @@ abstract class CentralAuthenticationStoreTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->reflection);
+
+        parent::tearDown();
     }
 
 }

@@ -24,12 +24,19 @@ abstract class LunrSoapClientTest extends LunrBaseTest
 {
 
     /**
+     * Instance of the tested class.
+     * @var LunrSoapClient
+     */
+    protected LunrSoapClient $class;
+
+    /**
      * Testcase Constructor.
      */
     public function setUp(): void
     {
-        $this->class      = new LunrSoapClient();
-        $this->reflection = new ReflectionClass('Lunr\Spark\LunrSoapClient');
+        $this->class = new LunrSoapClient();
+
+        parent::baseSetUp($this->class);
     }
 
     /**

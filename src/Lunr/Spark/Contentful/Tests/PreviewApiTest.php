@@ -51,6 +51,12 @@ abstract class PreviewApiTest extends LunrBaseTest
     protected $response;
 
     /**
+     * Instance of the tested class.
+     * @var PreviewApi
+     */
+    protected PreviewApi $class;
+
+    /**
      * Testcase Constructor.
      */
     public function setUp(): void
@@ -62,7 +68,7 @@ abstract class PreviewApiTest extends LunrBaseTest
 
         $this->class = new PreviewApi($this->cas, $this->logger, $this->http);
 
-        $this->reflection = new ReflectionClass('Lunr\Spark\Contentful\PreviewApi');
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -71,11 +77,12 @@ abstract class PreviewApiTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->reflection);
         unset($this->cas);
         unset($this->http);
         unset($this->logger);
         unset($this->response);
+
+        parent::tearDown();
     }
 
 }
