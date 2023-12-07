@@ -28,10 +28,14 @@ class ManagementApiPublishEntryTest extends ManagementApiTest
      */
     public function testPublishEntryOnRequestError(): void
     {
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'management_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.management_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url     = 'https://api.contentful.com/entries/123456/published';
         $headers = [
@@ -68,10 +72,14 @@ class ManagementApiPublishEntryTest extends ManagementApiTest
      */
     public function testPublishEntryOnSuccessfulRequest(): void
     {
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'management_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.management_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url     = 'https://api.contentful.com/entries/123456/published';
         $headers = [

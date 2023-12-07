@@ -23,11 +23,11 @@ class ApiBaseTest extends ApiTest
     use PsrLoggerTestTrait;
 
     /**
-     * Test that the CentralAuthenticationStore class is passed correctly.
+     * Test that the credentials cache is passed correctly.
      */
-    public function testCasIsSetCorrectly(): void
+    public function testCacheIsSetCorrectly(): void
     {
-        $this->assertPropertySame('cas', $this->cas);
+        $this->assertPropertySame('cache', $this->cache);
     }
 
     /**
@@ -39,7 +39,7 @@ class ApiBaseTest extends ApiTest
     }
 
     /**
-     * Test that __get() gets existing credential values from the CAS.
+     * Test that __get() gets existing credential values from the credentials cache.
      *
      * @param string $key Credential key
      *
@@ -48,10 +48,14 @@ class ApiBaseTest extends ApiTest
      */
     public function testGetExistingCredentials($key): void
     {
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', $this->equalTo($key))
-                  ->willReturn('value');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.' . $key)
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('value');
 
         $this->assertEquals('value', $this->class->{$key});
     }
@@ -63,14 +67,14 @@ class ApiBaseTest extends ApiTest
      */
     public function testGetNonExistingCredentials(): void
     {
-        $this->cas->expects($this->never())
-                  ->method('get');
+        $this->cache->expects($this->never())
+                    ->method('getItem');
 
         $this->assertNull($this->class->invalid);
     }
 
     /**
-     * Test that __set() sets general credential values in the CAS.
+     * Test that __set() sets general credential values in the credentials cache.
      *
      * @param string $key Credential key
      *
@@ -79,22 +83,38 @@ class ApiBaseTest extends ApiTest
      */
     public function testSetGeneralCredentials($key): void
     {
-        $this->cas->expects($this->once())
-                  ->method('add')
-                  ->with('contentful', $key, 'value');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.' . $key)
+                    ->willReturn($this->item);
+
+        $this->cache->expects($this->once())
+                    ->method('save')
+                    ->with($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('expiresAfter')
+                   ->with(600);
+
+        $this->item->expects($this->once())
+                   ->method('set')
+                   ->with('value');
 
         $this->class->{$key} = 'value';
     }
 
     /**
-     * Test that setting an invalid key does not touch the CAS.
+     * Test that setting an invalid key does not touch the credentials cache.
      *
      * @covers Lunr\Spark\Contentful\Api::__set
      */
-    public function testSetInvalidKeyDoesNotAlterCAS(): void
+    public function testSetInvalidKeyDoesNotAlterCredentialsCache(): void
     {
-        $this->cas->expects($this->never())
-                  ->method('add');
+        $this->cache->expects($this->never())
+                    ->method('getItem');
+
+        $this->cache->expects($this->never())
+                    ->method('save');
 
         $this->class->invalid = 'value';
     }

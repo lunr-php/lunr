@@ -28,10 +28,14 @@ class ManagementApiUnpublishEntryTest extends ManagementApiTest
      */
     public function testUnpublishEntryOnRequestError(): void
     {
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'management_token')
-                  ->willReturn('Token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.management_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('Token');
 
         $url     = 'https://api.contentful.com/entries/123456/published';
         $headers = [ 'Authorization' => 'Bearer Token' ];
@@ -65,10 +69,14 @@ class ManagementApiUnpublishEntryTest extends ManagementApiTest
      */
     public function testUnpublishEntryOnSuccessfulRequest(): void
     {
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'management_token')
-                  ->willReturn('Token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.management_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('Token');
 
         $url     = 'https://api.contentful.com/entries/123456/published';
         $headers = [ 'Authorization' => 'Bearer Token' ];

@@ -10,7 +10,7 @@
 
 namespace Lunr\Spark\Contentful;
 
-use Lunr\Spark\CentralAuthenticationStore;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
 use WpOrg\Requests\Session;
 
@@ -30,10 +30,10 @@ class Api
     protected const URL = 'https://www.contentful.com';
 
     /**
-     * Shared instance of the CentralAuthenticationStore
-     * @var CentralAuthenticationStore
+     * Shared instance of the credentials cache
+     * @var CacheItemPoolInterface
      */
-    protected $cas;
+    protected $cache;
 
     /**
      * Shared instance of a Logger class.
@@ -62,13 +62,13 @@ class Api
     /**
      * Constructor.
      *
-     * @param CentralAuthenticationStore $cas    Shared instance of the credentials store
-     * @param LoggerInterface            $logger Shared instance of a Logger class.
-     * @param Session                    $http   Shared instance of the Requests\Session class.
+     * @param CacheItemPoolInterface $cache  Shared instance of the credentials cache
+     * @param LoggerInterface        $logger Shared instance of a Logger class.
+     * @param Session                $http   Shared instance of the Requests\Session class.
      */
-    public function __construct($cas, $logger, $http)
+    public function __construct($cache, $logger, $http)
     {
-        $this->cas         = $cas;
+        $this->cache       = $cache;
         $this->logger      = $logger;
         $this->http        = $http;
         $this->space       = '';
@@ -80,7 +80,7 @@ class Api
      */
     public function __destruct()
     {
-        unset($this->cas);
+        unset($this->cache);
         unset($this->logger);
         unset($this->http);
         unset($this->space);
@@ -100,7 +100,7 @@ class Api
         {
             case 'access_token':
             case 'management_token':
-                return $this->cas->get('contentful', $key);
+                return $this->cache->getItem('contentful.' . $key)->get();
             default:
                 return NULL;
         }
@@ -120,7 +120,12 @@ class Api
         {
             case 'access_token':
             case 'management_token':
-                $this->cas->add('contentful', $key, $value);
+                $item = $this->cache->getItem('contentful.' . $key);
+
+                $item->expiresAfter(600);
+                $item->set($value);
+
+                $this->cache->save($item);
                 break;
             default:
                 break;

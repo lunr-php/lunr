@@ -28,10 +28,14 @@ class ManagementApiGetEntryTest extends ManagementApiTest
      */
     public function testGetEntryOnRequestError(): void
     {
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'management_token')
-                  ->willReturn('Token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.management_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('Token');
 
         $url     = 'https://api.contentful.com/entries/123456';
         $headers = [ 'Authorization' => 'Bearer Token' ];
@@ -65,10 +69,14 @@ class ManagementApiGetEntryTest extends ManagementApiTest
      */
     public function testGetEntryOnSuccessfulRequest(): void
     {
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'management_token')
-                  ->willReturn('Token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.management_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('Token');
 
         $url     = 'https://api.contentful.com/entries/123456';
         $headers = [ 'Authorization' => 'Bearer Token' ];

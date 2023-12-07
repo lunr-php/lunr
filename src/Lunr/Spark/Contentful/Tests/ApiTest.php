@@ -10,7 +10,8 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
-use Lunr\Spark\CentralAuthenticationStore;
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\Cache\CacheItemInterface;
 use Lunr\Spark\Contentful\Api;
 use Lunr\Halo\LunrBaseTest;
 use Psr\Log\LoggerInterface;
@@ -27,10 +28,16 @@ abstract class ApiTest extends LunrBaseTest
 {
 
     /**
-     * Mock instance of the CentralAuthenticationStore class.
-     * @var CentralAuthenticationStore
+     * Mock instance of the credentials cache.
+     * @var CacheItemPoolInterface
      */
-    protected $cas;
+    protected $cache;
+
+    /**
+     * Shared instance of the cache item class.
+     * @var CacheItemInterface
+     */
+    protected $item;
 
     /**
      * Mock instance of the Requests\Session class.
@@ -61,12 +68,13 @@ abstract class ApiTest extends LunrBaseTest
      */
     public function setUp(): void
     {
-        $this->cas      = $this->getMockBuilder('Lunr\Spark\CentralAuthenticationStore')->getMock();
+        $this->cache    = $this->getMockBuilder(CacheItemPoolInterface::class)->getMock();
+        $this->item     = $this->getMockBuilder(CacheItemInterface::class)->getMock();
         $this->http     = $this->getMockBuilder('WpOrg\Requests\Session')->getMock();
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->response = $this->getMockBuilder('WpOrg\Requests\Response')->getMock();
 
-        $this->class = new Api($this->cas, $this->logger, $this->http);
+        $this->class = new Api($this->cache, $this->logger, $this->http);
 
         parent::baseSetUp($this->class);
     }
@@ -77,7 +85,8 @@ abstract class ApiTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->class);
-        unset($this->cas);
+        unset($this->item);
+        unset($this->cache);
         unset($this->http);
         unset($this->logger);
         unset($this->response);

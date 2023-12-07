@@ -30,10 +30,14 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
     {
         $this->set_reflection_property_value('space', '5p4c31D');
 
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'access_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.access_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
         $params = [ 'access_token' => 'token' ];
@@ -85,10 +89,14 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
     {
         $this->set_reflection_property_value('space', '5p4c31D');
 
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'access_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.access_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
         $params = [ 'mimetype_group' => 'image', 'access_token' => 'token' ];
@@ -140,10 +148,14 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
     {
         $this->set_reflection_property_value('space', '5p4c31D');
 
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'access_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.access_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
         $params = [ 'access_token' => 'token' ];
@@ -183,10 +195,14 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
     {
         $this->set_reflection_property_value('space', '5p4c31D');
 
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'access_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.access_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
         $params = [ 'mimetype_group' => 'image', 'access_token' => 'token' ];
@@ -231,10 +247,14 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
             'param2' => 2,
         ];
 
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'access_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.access_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
         $params = [ 'access_token' => 'token' ];
@@ -266,10 +286,14 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
             'param2' => 2,
         ];
 
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'access_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.access_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/spaces/5p4c31D/assets';
         $params = [ 'mimetype_group' => 'image', 'access_token' => 'token' ];

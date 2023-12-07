@@ -10,7 +10,7 @@
 
 namespace Lunr\Spark\Contentful;
 
-use Lunr\Spark\CentralAuthenticationStore;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
 use WpOrg\Requests\Exception as RequestsException;
 use WpOrg\Requests\Exception\Http as RequestsExceptionHTTP;
@@ -32,13 +32,13 @@ class DeliveryApi extends Api
     /**
      * Constructor.
      *
-     * @param CentralAuthenticationStore $cas    Shared instance of the credentials store
-     * @param LoggerInterface            $logger Shared instance of a Logger class.
-     * @param Session                    $http   Shared instance of the Requests\Session class.
+     * @param CacheItemPoolInterface $cache  Shared instance of the credentials cache
+     * @param LoggerInterface        $logger Shared instance of a Logger class.
+     * @param Session                $http   Shared instance of the Requests\Session class.
      */
-    public function __construct($cas, $logger, $http)
+    public function __construct($cache, $logger, $http)
     {
-        parent::__construct($cas, $logger, $http);
+        parent::__construct($cache, $logger, $http);
     }
 
     /**

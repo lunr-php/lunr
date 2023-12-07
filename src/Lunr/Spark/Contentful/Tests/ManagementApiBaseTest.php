@@ -23,11 +23,11 @@ class ManagementApiBaseTest extends ManagementApiTest
     use PsrLoggerTestTrait;
 
     /**
-     * Test that the CentralAuthenticationStore class is passed correctly.
+     * Test that the credentials cache is passed correctly.
      */
-    public function testCasIsSetCorrectly(): void
+    public function testCacheIsSetCorrectly(): void
     {
-        $this->assertPropertySame('cas', $this->cas);
+        $this->assertPropertySame('cache', $this->cache);
     }
 
     /**

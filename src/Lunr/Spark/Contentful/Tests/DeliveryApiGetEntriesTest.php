@@ -28,10 +28,14 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
      */
     public function testGetEntriesWithoutFiltersReturnsEmptyResultOnRequestError(): void
     {
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'access_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.access_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/entries';
         $params = [ 'access_token' => 'token', 'content_type' => 'foo' ];
@@ -81,10 +85,14 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
      */
     public function testGetEntriesWithFiltersReturnsEmptyResultOnRequestError(): void
     {
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'access_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.access_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/entries';
         $params = [ 'field.urlName[match]' => 'bar', 'access_token' => 'token', 'content_type' => 'foo' ];
@@ -134,10 +142,14 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
      */
     public function testGetEntriesWithoutFiltersReturnsEmptyResultOnRequestFailure(): void
     {
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'access_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.access_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/entries';
         $params = [ 'access_token' => 'token', 'content_type' => 'foo' ];
@@ -175,10 +187,14 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
      */
     public function testGetEntriesWithFiltersReturnsEmptyResultOnRequestFailure(): void
     {
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'access_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.access_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/entries';
         $params = [ 'field.urlName[match]' => 'bar', 'access_token' => 'token', 'content_type' => 'foo' ];
@@ -221,10 +237,14 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
             'param2' => 2,
         ];
 
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'access_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.access_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/entries';
         $params = [ 'access_token' => 'token', 'content_type' => 'foo' ];
@@ -254,10 +274,14 @@ class DeliveryApiGetEntriesTest extends DeliveryApiTest
             'param2' => 2,
         ];
 
-        $this->cas->expects($this->once())
-                  ->method('get')
-                  ->with('contentful', 'access_token')
-                  ->willReturn('token');
+        $this->cache->expects($this->once())
+                    ->method('getItem')
+                    ->with('contentful.access_token')
+                    ->willReturn($this->item);
+
+        $this->item->expects($this->once())
+                   ->method('get')
+                   ->willReturn('token');
 
         $url    = 'https://cdn.contentful.com/entries';
         $params = [ 'field.urlName[match]' => 'bar', 'access_token' => 'token', 'content_type' => 'foo' ];
