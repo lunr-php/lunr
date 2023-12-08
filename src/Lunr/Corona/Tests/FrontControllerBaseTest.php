@@ -35,14 +35,6 @@ class FrontControllerBaseTest extends FrontControllerTest
     }
 
     /**
-     * Test that the FilesystemAccessObject class was passed correctly.
-     */
-    public function testFAOPassedCorrectly(): void
-    {
-        $this->assertPropertySame('fao', $this->fao);
-    }
-
-    /**
      * Test that register_lookup_path() registers the passed path
      *
      * @covers Lunr\Corona\FrontController::register_lookup_path

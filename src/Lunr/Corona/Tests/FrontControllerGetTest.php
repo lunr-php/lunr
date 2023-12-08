@@ -25,19 +25,13 @@ class FrontControllerGetTest extends FrontControllerTest
      */
     public function testGetControllerReturnsFQCNForExistingController(): void
     {
-        $dir    = __DIR__;
-        $result = __DIR__ . '/Project/Package/FunctionController.php';
-        $fqcn   = 'Project\\Package\\FunctionController';
+        $dir  = TEST_STATICS . '/Corona/';
+        $fqcn = 'Project\\Package1\\FunctionController';
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
                       ->willReturn('function');
-
-        $this->fao->expects($this->once())
-                  ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->willReturn([ $result ]);
 
         $value = $this->class->get_controller($dir);
 
@@ -51,41 +45,12 @@ class FrontControllerGetTest extends FrontControllerTest
      */
     public function testGetControllerReturnsEmptyStringForNonExistingController(): void
     {
-        $dir = __DIR__;
+        $dir = TEST_STATICS . '/Corona/';
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
-                      ->willReturn('function');
-
-        $this->fao->expects($this->once())
-                  ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->willReturn([]);
-
-        $value = $this->class->get_controller($dir);
-
-        $this->assertEquals('', $value);
-    }
-
-    /**
-     * Test that get_controller() returns an empty string if finding caused error.
-     *
-     * @covers Lunr\Corona\FrontController::get_controller
-     */
-    public function testGetControllerReturnsEmptyStringIfFindFailed(): void
-    {
-        $dir = __DIR__;
-
-        $this->request->expects($this->exactly(2))
-                      ->method('__get')
-                      ->with('controller')
-                      ->willReturn('function');
-
-        $this->fao->expects($this->once())
-                  ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->willReturn(FALSE);
+                      ->willReturn('method');
 
         $value = $this->class->get_controller($dir);
 
@@ -99,15 +64,12 @@ class FrontControllerGetTest extends FrontControllerTest
      */
     public function testGetControllerReturnsEmptyStringIfNoControllerInfoAvailable(): void
     {
-        $dir = __DIR__;
+        $dir = TEST_STATICS . '/Corona/';
 
         $this->request->expects($this->exactly(1))
                       ->method('__get')
                       ->with('controller')
                       ->willReturn(NULL);
-
-        $this->fao->expects($this->never())
-                  ->method('find_matches');
 
         $value = $this->class->get_controller($dir);
 
@@ -121,19 +83,13 @@ class FrontControllerGetTest extends FrontControllerTest
      */
     public function testGetControllerReturnsFirstMatchIfMultipleFound(): void
     {
-        $dir    = __DIR__;
-        $result = __DIR__ . '/Project/Package/FunctionController.php';
-        $fqcn   = 'Project\\Package\\FunctionController';
+        $dir  = TEST_STATICS . '/Corona/';
+        $fqcn = 'Project\\Package2\\FooController';
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
-                      ->willReturn('function');
-
-        $this->fao->expects($this->once())
-                  ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->willReturn([ $result, 'nr2' ]);
+                      ->willReturn('foo');
 
         $value = $this->class->get_controller($dir);
 
@@ -147,15 +103,12 @@ class FrontControllerGetTest extends FrontControllerTest
      */
     public function testGetBlacklistedControllerReturnsEmptyString(): void
     {
-        $dir = __DIR__;
+        $dir = TEST_STATICS . '/Corona/';
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
                       ->willReturn('function');
-
-        $this->fao->expects($this->never())
-                  ->method('find_matches');
 
         $value = $this->class->get_controller($dir, [ 'function' ]);
 
@@ -169,15 +122,12 @@ class FrontControllerGetTest extends FrontControllerTest
      */
     public function testGetNotWhitelistedControllerReturnsEmptyString(): void
     {
-        $dir = __DIR__;
+        $dir = TEST_STATICS . '/Corona/';
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
                       ->willReturn('function');
-
-        $this->fao->expects($this->never())
-                  ->method('find_matches');
 
         $value = $this->class->get_controller($dir, [], FALSE);
 
@@ -191,19 +141,13 @@ class FrontControllerGetTest extends FrontControllerTest
      */
     public function testGetWhitelistedControllerReturnsFQCNForExistingController(): void
     {
-        $dir    = __DIR__;
-        $result = __DIR__ . '/Project/Package/FunctionController.php';
-        $fqcn   = 'Project\\Package\\FunctionController';
+        $dir  = TEST_STATICS . '/Corona/';
+        $fqcn = 'Project\\Package1\\FunctionController';
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
                       ->willReturn('function');
-
-        $this->fao->expects($this->once())
-                  ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->willReturn([ $result ]);
 
         $value = $this->class->get_controller($dir, [ 'function' ], FALSE);
 
@@ -227,9 +171,6 @@ class FrontControllerGetTest extends FrontControllerTest
                       ->with('controller')
                       ->willReturn($controller_name);
 
-        $this->fao->expects($this->never())
-                  ->method('find_matches');
-
         $value = $this->class->get_controller($dir);
 
         $this->assertEquals('', $value);
@@ -242,19 +183,13 @@ class FrontControllerGetTest extends FrontControllerTest
      */
     public function testGetControllerForDashesInController()
     {
-        $dir    = __DIR__;
-        $result = __DIR__ . '/Project/Package/AnonymousTapsController.php';
-        $fqcn   = 'Project\\Package\\AnonymousTapsController';
+        $dir  = TEST_STATICS . '/Corona/';
+        $fqcn = 'Project\\Package1\\AnonymousTapsController';
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
                       ->willReturn('anonymous-taps');
-
-        $this->fao->expects($this->once())
-                  ->method('find_matches')
-                  ->with('/^.+\/anonymoustapscontroller.php/i', $dir)
-                  ->willReturn([ $result ]);
 
         $value = $this->class->get_controller($dir);
 

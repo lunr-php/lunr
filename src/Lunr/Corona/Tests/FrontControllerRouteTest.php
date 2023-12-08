@@ -65,28 +65,25 @@ class FrontControllerRouteTest extends FrontControllerTest
      */
     public function testRouteWithWhitelistedCall(): void
     {
+        $paths = [
+            'live' => TEST_STATICS . '/../../src/Lunr/Corona/',
+            'acc'  => TEST_STATICS . '/../../support/',
+            'test' => TEST_STATICS . '/Corona/',
+        ];
+
         $this->set_reflection_property_value('routes', [ 'function' => NULL, 'function/bar' => [] ]);
-        $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz' ]);
+        $this->set_reflection_property_value('paths', $paths);
 
         $map = [
             [ 'call', 'function/bar' ],
             [ 'controller', 'function' ],
         ];
 
-        $result = '/foo/baz/Project/Package/FunctionController.php';
-        $fqcn   = 'Project\\Package\\FunctionController';
+        $fqcn = 'Project\\Package1\\FunctionController';
 
-        $this->request->expects($this->exactly(5))
+        $this->request->expects($this->exactly(7))
                       ->method('__get')
                       ->willReturnMap($map);
-
-        $this->fao->expects($this->exactly(2))
-                  ->method('find_matches')
-                  ->withConsecutive(
-                      [ '/^.+\/functioncontroller.php/i', '/foo/bar' ],
-                      [ '/^.+\/functioncontroller.php/i', '/foo/baz' ]
-                  )
-                  ->willReturnOnConsecutiveCalls([], [ $result ]);
 
         $value = $this->class->route();
 
@@ -100,27 +97,25 @@ class FrontControllerRouteTest extends FrontControllerTest
      */
     public function testRouteWithRestrictedController(): void
     {
-        $this->set_reflection_property_value('routes', [ 'function' => [ 'live' ] ]);
-        $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz' ]);
-
-        $map = [
-            [ 'call', 'function/bar' ],
-            [ 'controller', 'function' ],
+        $paths = [
+            'live' => TEST_STATICS . '/../../src/Lunr/Corona/',
+            'acc'  => TEST_STATICS . '/../../support/',
+            'test' => TEST_STATICS . '/Corona/',
         ];
 
-        $result = '/foo/baz/Project/Package/FunctionController.php';
-        $fqcn   = 'Project\\Package\\FunctionController';
+        $this->set_reflection_property_value('routes', [ 'front' => [ 'live' ] ]);
+        $this->set_reflection_property_value('paths', $paths);
+
+        $map = [
+            [ 'call', 'front/bar' ],
+            [ 'controller', 'front' ],
+        ];
+
+        $fqcn = 'FrontController';
 
         $this->request->expects($this->exactly(4))
                       ->method('__get')
                       ->willReturnMap($map);
-
-        $this->fao->expects($this->exactly(1))
-                  ->method('find_matches')
-                  ->withConsecutive(
-                      [ '/^.+\/functioncontroller.php/i', '/foo/baz' ]
-                  )
-                  ->willReturnOnConsecutiveCalls([ $result ]);
 
         $value = $this->class->route();
 
@@ -134,27 +129,25 @@ class FrontControllerRouteTest extends FrontControllerTest
      */
     public function testRouteWithRestrictedCall(): void
     {
-        $this->set_reflection_property_value('routes', [ 'function/bar' => [ 'live' ] ]);
-        $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz' ]);
-
-        $map = [
-            [ 'call', 'function/bar' ],
-            [ 'controller', 'function' ],
+        $paths = [
+            'live' => TEST_STATICS . '/../../src/Lunr/Corona/',
+            'acc'  => TEST_STATICS . '/../../support/',
+            'test' => TEST_STATICS . '/Corona/',
         ];
 
-        $result = '/foo/baz/Project/Package/FunctionController.php';
-        $fqcn   = 'Project\\Package\\FunctionController';
+        $this->set_reflection_property_value('routes', [ 'front/bar' => [ 'live' ] ]);
+        $this->set_reflection_property_value('paths', $paths);
+
+        $map = [
+            [ 'call', 'front/bar' ],
+            [ 'controller', 'front' ],
+        ];
+
+        $fqcn = 'FrontController';
 
         $this->request->expects($this->exactly(3))
                       ->method('__get')
                       ->willReturnMap($map);
-
-        $this->fao->expects($this->exactly(1))
-                  ->method('find_matches')
-                  ->withConsecutive(
-                      [ '/^.+\/functioncontroller.php/i', '/foo/baz' ]
-                  )
-                  ->willReturnOnConsecutiveCalls([ $result ]);
 
         $value = $this->class->route();
 
@@ -168,27 +161,24 @@ class FrontControllerRouteTest extends FrontControllerTest
      */
     public function testRouteWithNoRules(): void
     {
-        $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz' ]);
+        $paths = [
+            'live' => TEST_STATICS . '/../../src/Lunr/Corona/',
+            'acc'  => TEST_STATICS . '/../../support/',
+            'test' => TEST_STATICS . '/Corona/',
+        ];
+
+        $this->set_reflection_property_value('paths', $paths);
 
         $map = [
             [ 'call', 'function/bar' ],
             [ 'controller', 'function' ],
         ];
 
-        $result = '/foo/baz/Project/Package/FunctionController.php';
-        $fqcn   = 'Project\\Package\\FunctionController';
+        $fqcn = 'Project\\Package1\\FunctionController';
 
-        $this->request->expects($this->exactly(6))
+        $this->request->expects($this->exactly(8))
                       ->method('__get')
                       ->willReturnMap($map);
-
-        $this->fao->expects($this->exactly(2))
-                  ->method('find_matches')
-                  ->withConsecutive(
-                      [ '/^.+\/functioncontroller.php/i', '/foo/bar' ],
-                      [ '/^.+\/functioncontroller.php/i', '/foo/baz' ]
-                  )
-                  ->willReturnOnConsecutiveCalls([], [ $result ]);
 
         $value = $this->class->route();
 

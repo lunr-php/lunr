@@ -36,12 +36,6 @@ abstract class FrontControllerTest extends LunrBaseTest
     protected $handler;
 
     /**
-     * Mock instance of a FilesystemAccessObject class.
-     * @var \Lunr\Ray\FilesystemAccessObjectInterface
-     */
-    protected $fao;
-
-    /**
      * Instance of the tested class.
      * @var FrontController
      */
@@ -60,9 +54,7 @@ abstract class FrontControllerTest extends LunrBaseTest
                               ->disableOriginalConstructor()
                               ->getMock();
 
-        $this->fao = $this->getMockBuilder('Lunr\Ray\FilesystemAccessObjectInterface')->getMock();
-
-        $this->class = new FrontController($this->request, $this->handler, $this->fao);
+        $this->class = new FrontController($this->request, $this->handler);
 
         parent::baseSetUp($this->class);
     }
@@ -75,7 +67,6 @@ abstract class FrontControllerTest extends LunrBaseTest
         unset($this->class);
         unset($this->request);
         unset($this->handler);
-        unset($this->fao);
 
         parent::tearDown();
     }

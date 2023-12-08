@@ -27,9 +27,6 @@ class FrontControllerLookupTest extends FrontControllerTest
     {
         $this->set_reflection_property_value('paths', []);
 
-        $this->fao->expects($this->never())
-                  ->method('find_matches');
-
         $value = $this->class->lookup();
 
         $this->assertEquals('', $value);
@@ -44,9 +41,6 @@ class FrontControllerLookupTest extends FrontControllerTest
     {
         $this->set_reflection_property_value('paths', []);
 
-        $this->fao->expects($this->never())
-                  ->method('find_matches');
-
         $value = $this->class->lookup('test');
 
         $this->assertEquals('', $value);
@@ -59,21 +53,14 @@ class FrontControllerLookupTest extends FrontControllerTest
      */
     public function testLookupWithSinglePath(): void
     {
-        $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar' ]);
+        $this->set_reflection_property_value('paths', [ 'test' => TEST_STATICS . '/Corona/' ]);
 
-        $dir    = '/foo/bar';
-        $result = '/foo/bar/Project/Package/FunctionController.php';
-        $fqcn   = 'Project\\Package\\FunctionController';
+        $fqcn = 'Project\\Package1\\FunctionController';
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
                       ->willReturn('function');
-
-        $this->fao->expects($this->once())
-                  ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->willReturn([ $result ]);
 
         $value = $this->class->lookup('test');
 
@@ -87,25 +74,22 @@ class FrontControllerLookupTest extends FrontControllerTest
      */
     public function testLookupWithMultiplePaths(): void
     {
-        $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz', 'acc' => '/foo/bay' ]);
+        $paths = [
+            'live' => TEST_STATICS . '/../../src/Lunr/Corona/',
+            'acc'  => TEST_STATICS . '/../../support/',
+            'test' => TEST_STATICS . '/Corona/',
+        ];
 
-        $result = '/foo/baz/Project/Package/FunctionController.php';
-        $fqcn   = 'Project\\Package\\FunctionController';
+        $this->set_reflection_property_value('paths', $paths);
+
+        $fqcn = 'Project\\Package1\\FunctionController';
 
         $this->request->expects($this->exactly(4))
                       ->method('__get')
                       ->with('controller')
                       ->willReturn('function');
 
-        $this->fao->expects($this->exactly(2))
-                  ->method('find_matches')
-                  ->withConsecutive(
-                      [ '/^.+\/functioncontroller.php/i', '/foo/bar' ],
-                      [ '/^.+\/functioncontroller.php/i', '/foo/baz' ]
-                  )
-                  ->willReturnOnConsecutiveCalls([], [ $result ]);
-
-        $value = $this->class->lookup('test', 'live');
+        $value = $this->class->lookup('live', 'test');
 
         $this->assertEquals($fqcn, $value);
     }
@@ -117,10 +101,13 @@ class FrontControllerLookupTest extends FrontControllerTest
      */
     public function testLookupWithNonExistingPath(): void
     {
-        $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz', 'acc' => '/foo/bay' ]);
+        $paths = [
+            'live' => TEST_STATICS . '/../../src/Lunr/Corona/',
+            'acc'  => TEST_STATICS . '/../../support/',
+            'test' => TEST_STATICS . '/Corona/',
+        ];
 
-        $this->fao->expects($this->never())
-                  ->method('find_matches');
+        $this->set_reflection_property_value('paths', $paths);
 
         $value = $this->class->lookup('prod');
 
@@ -134,23 +121,20 @@ class FrontControllerLookupTest extends FrontControllerTest
      */
     public function testLookupWithAllPaths(): void
     {
-        $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar', 'live' => '/foo/baz' ]);
+        $paths = [
+            'live' => TEST_STATICS . '/../../src/Lunr/Corona/',
+            'acc'  => TEST_STATICS . '/../../support/',
+            'test' => TEST_STATICS . '/Corona/',
+        ];
 
-        $result = '/foo/baz/Project/Package/FunctionController.php';
-        $fqcn   = 'Project\\Package\\FunctionController';
+        $this->set_reflection_property_value('paths', $paths);
 
-        $this->request->expects($this->exactly(4))
+        $fqcn = 'Project\\Package1\\FunctionController';
+
+        $this->request->expects($this->exactly(6))
                       ->method('__get')
                       ->with('controller')
                       ->willReturn('function');
-
-        $this->fao->expects($this->exactly(2))
-                  ->method('find_matches')
-                  ->withConsecutive(
-                      [ '/^.+\/functioncontroller.php/i', '/foo/bar' ],
-                      [ '/^.+\/functioncontroller.php/i', '/foo/baz' ]
-                  )
-                  ->willReturnOnConsecutiveCalls([], [ $result ]);
 
         $value = $this->class->lookup();
 
@@ -164,19 +148,12 @@ class FrontControllerLookupTest extends FrontControllerTest
      */
     public function testLookupFails(): void
     {
-        $this->set_reflection_property_value('paths', [ 'test' => '/foo/bar' ]);
-
-        $dir = '/foo/bar';
+        $this->set_reflection_property_value('paths', [ 'test' => TEST_STATICS . '/Corona/' ]);
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
-                      ->willReturn('function');
-
-        $this->fao->expects($this->once())
-                  ->method('find_matches')
-                  ->with('/^.+\/functioncontroller.php/i', $dir)
-                  ->willReturn([]);
+                      ->willReturn('bar');
 
         $value = $this->class->lookup('test');
 

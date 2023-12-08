@@ -10,7 +10,10 @@
 
 namespace Lunr\Corona;
 
-use Lunr\Ray\FilesystemAccessObjectInterface;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RecursiveRegexIterator;
+use RegexIterator;
 
 /**
  * Controller class
@@ -31,12 +34,6 @@ class FrontController
     protected $handler;
 
     /**
-     * Instance of the FilesystemAccessObject class.
-     * @var FilesystemAccessObjectInterface
-     */
-    protected $fao;
-
-    /**
      * Registered lookup paths.
      * @var array
      */
@@ -51,15 +48,13 @@ class FrontController
     /**
      * Constructor.
      *
-     * @param Request                         $request Instance of the Request class.
-     * @param RequestResultHandler            $handler Instance of the RequestResultHandler class.
-     * @param FilesystemAccessObjectInterface $fao     Instance of the FilesystemAccessObject class.
+     * @param Request              $request Instance of the Request class.
+     * @param RequestResultHandler $handler Instance of the RequestResultHandler class.
      */
-    public function __construct($request, $handler, $fao)
+    public function __construct($request, $handler)
     {
         $this->request = $request;
         $this->handler = $handler;
-        $this->fao     = $fao;
 
         $this->paths  = [];
         $this->routes = [];
@@ -72,7 +67,6 @@ class FrontController
     {
         unset($this->request);
         unset($this->handler);
-        unset($this->fao);
         unset($this->paths);
         unset($this->routes);
     }
@@ -113,7 +107,7 @@ class FrontController
      *
      * @return string $controller Fully qualified name of the responsible controller.
      */
-    public function get_controller($src, $list = [], $blacklist = TRUE)
+    public function get_controller(string $src, array $list = [], bool $blacklist = TRUE): string
     {
         $name = $this->request->controller . 'controller';
 
@@ -136,8 +130,13 @@ class FrontController
             return '';
         }
 
-        $name    = str_replace('-', '', $name);
-        $matches = $this->fao->find_matches("/^.+\/$name.php/i", $src);
+        $name = str_replace('-', '', $name);
+
+        $directory  = new RecursiveDirectoryIterator($src);
+        $iterator   = new RecursiveIteratorIterator($directory);
+        $candidates = new RegexIterator($iterator, "/^.+\/$name.php/i", RecursiveRegexIterator::GET_MATCH);
+
+        $matches = array_keys(iterator_to_array($candidates));
 
         if (empty($matches) === TRUE)
         {
