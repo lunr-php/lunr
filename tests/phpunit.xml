@@ -91,7 +91,6 @@
         </testsuite>
         <testsuite name="L10n">
             <file>../tests/system/EnvironmentTest.php</file>
-            <file>../src/Lunr/L10n/Tests/L10nHTMLViewBaseTest.php</file>
             <file>../src/Lunr/L10n/Tests/L10nTraitBaseTest.php</file>
             <file>../src/Lunr/L10n/Tests/L10nBaseTest.php</file>
             <file>../src/Lunr/L10n/Tests/L10nProviderBaseTest.php</file>
