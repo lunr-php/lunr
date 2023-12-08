@@ -12,19 +12,12 @@
 namespace Lunr\L10n;
 
 use Psr\Log\LoggerInterface;
-use Lunr\Ray\FilesystemAccessObjectInterface;
 
 /**
  * Localization support class
  */
 class L10n extends AbstractL10n
 {
-
-    /**
-     * Shared instance of a FilesystemAccessObject class.
-     * @var FilesystemAccessObjectInterface
-     */
-    private $fao;
 
     /**
      * Static list of supported languages
@@ -35,14 +28,12 @@ class L10n extends AbstractL10n
     /**
      * Constructor.
      *
-     * @param LoggerInterface                 $logger Shared instance of a Logger class.
-     * @param FilesystemAccessObjectInterface $fao    Shared instance of a FilesystemAccessObject class.
+     * @param LoggerInterface $logger           Shared instance of a Logger class.
+     * @param string          $locales_location Location of translation files
      */
-    public function __construct($logger, $fao)
+    public function __construct($logger, $locales_location)
     {
-        parent::__construct($logger);
-
-        $this->fao = $fao;
+        parent::__construct($logger, $locales_location);
     }
 
     /**
@@ -50,8 +41,6 @@ class L10n extends AbstractL10n
      */
     public function __destruct()
     {
-        unset($this->fao);
-
         parent::__destruct();
     }
 
@@ -70,10 +59,15 @@ class L10n extends AbstractL10n
             return self::$languages;
         }
 
-        self::$languages = $this->fao->get_list_of_directories($this->locales_location);
+        self::$languages = [ $this->default_language ];
 
-        self::$languages[] = $this->default_language;
-        self::$languages   = array_unique(self::$languages);
+        foreach ($this->locales_iterator as $file)
+        {
+            if (!$file->isDot() && $file->isDir() && $this->locales_iterator->getFilename() != $this->default_language)
+            {
+                self::$languages[] = $this->locales_iterator->getFilename();
+            }
+        }
 
         return self::$languages;
     }

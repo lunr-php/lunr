@@ -11,6 +11,7 @@
 namespace Lunr\L10n\Tests;
 
 use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
+use Throwable;
 
 /**
  * This class contains test methods for the L10n class.
@@ -35,10 +36,7 @@ class AbstractL10nBaseTest extends AbstractL10nTest
      */
     public function testLocaleLocationSetCorrectly(): void
     {
-        // /usr/bin/l10n by default
-        $default_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
-
-        $this->assertPropertyEquals('locales_location', $default_location);
+        $this->assertPropertyEquals('locales_location', TEST_STATICS . '/l10n/');
     }
 
     /**
@@ -122,18 +120,21 @@ class AbstractL10nBaseTest extends AbstractL10nTest
      */
     public function testSetInvalidLocalesLocation(): void
     {
-        // /usr/bin/l10n by default
-        $default_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
-
         $location = TEST_STATICS . '/../l10n';
 
-        $this->logger->expects($this->once())
-                     ->method('warning')
-                     ->with('Invalid locales location: ' . $location);
+        $this->expectException('UnexpectedValueException');
+        $this->expectExceptionMessage('Failed to open directory');
 
-        $this->class->set_locales_location($location);
+        try
+        {
+            $this->class->set_locales_location($location);
+        }
+        catch (Throwable $e)
+        {
+            $this->assertEquals(TEST_STATICS . '/l10n/', $this->get_reflection_property_value('locales_location'));
 
-        $this->assertEquals($default_location, $this->get_reflection_property_value('locales_location'));
+            throw $e;
+        }
     }
 
 }

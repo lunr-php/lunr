@@ -70,7 +70,7 @@ abstract class GettextL10nProviderTest extends LunrBaseTest
         $this->base_locale = setlocale(LC_MESSAGES, 0);
         $this->base_domain = textdomain(NULL);
 
-        $this->class = new GettextL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger);
+        $this->class = new GettextL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger, TEST_STATICS . '/l10n/');
         $this->class->set_default_language('nl_NL');
         $this->class->set_locales_location(TEST_STATICS . '/l10n');
 

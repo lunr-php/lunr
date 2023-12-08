@@ -34,14 +34,6 @@ class L10nBaseTest extends L10nTest
     }
 
     /**
-     * Test that the FilesystemAccessObject class is passed correctly.
-     */
-    public function testFAOIsPassedCorrectly(): void
-    {
-        $this->assertPropertySame('fao', $this->fao);
-    }
-
-    /**
      * Test that the language is correctly stored in the object.
      */
     public function testDefaultLanguageSetCorrectly(): void
@@ -54,10 +46,7 @@ class L10nBaseTest extends L10nTest
      */
     public function testLocaleLocationSetCorrectly(): void
     {
-        // /usr/bin/l10n by default
-        $default_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
-
-        $this->assertPropertyEquals('locales_location', $default_location);
+        $this->assertPropertyEquals('locales_location', TEST_STATICS . '/l10n/');
     }
 
     /**
@@ -68,11 +57,6 @@ class L10nBaseTest extends L10nTest
      */
     public function testInitialGetSupportedLanguages(): void
     {
-        $this->fao->expects($this->once())
-                  ->method('get_list_of_directories')
-                  ->with(dirname($_SERVER['PHP_SELF']) . '/l10n')
-                  ->willReturn([ 'de_DE', 'nl_NL' ]);
-
         $languages = $this->class->get_supported_languages();
         sort($languages);
         $this->assertEquals($this->languages, $languages);
@@ -99,8 +83,7 @@ class L10nBaseTest extends L10nTest
      */
     public function testCachedGetSupportedLanguages(): void
     {
-        $this->fao->expects($this->never())
-                  ->method('get_list_of_directories');
+        $this->set_reflection_property_value('languages', [ 'de_DE', 'en_US', 'nl_NL' ]);
 
         $languages = $this->class->get_supported_languages();
         sort($languages);

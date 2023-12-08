@@ -51,10 +51,7 @@ class L10nProviderBaseTest extends L10nProviderTest
      */
     public function testLocaleLocationSetCorrectly(): void
     {
-        // /usr/bin/l10n by default
-        $default_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
-
-        $this->assertPropertyEquals('locales_location', $default_location);
+        $this->assertPropertyEquals('locales_location', TEST_STATICS . '/l10n/');
     }
 
     /**

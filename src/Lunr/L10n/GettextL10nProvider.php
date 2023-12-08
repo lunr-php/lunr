@@ -28,13 +28,14 @@ class GettextL10nProvider extends L10nProvider
     /**
      * Constructor.
      *
-     * @param string          $language POSIX locale definition
-     * @param string          $domain   Localization domain
-     * @param LoggerInterface $logger   Shared instance of a logger class
+     * @param string          $language         POSIX locale definition
+     * @param string          $domain           Localization domain
+     * @param LoggerInterface $logger           Shared instance of a logger class
+     * @param string          $locales_location Location of translation files
      */
-    public function __construct($language, $domain, $logger)
+    public function __construct($language, $domain, $logger, $locales_location)
     {
-        parent::__construct($language, $domain, $logger);
+        parent::__construct($language, $domain, $logger, $locales_location);
     }
 
     /**

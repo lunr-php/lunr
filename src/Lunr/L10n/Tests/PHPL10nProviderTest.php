@@ -59,7 +59,7 @@ abstract class PHPL10nProviderTest extends LunrBaseTest
     {
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
-        $this->class = new PHPL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger);
+        $this->class = new PHPL10nProvider(self::LANGUAGE, self::DOMAIN, $this->logger, TEST_STATICS . '/l10n/');
         $this->class->set_locales_location(TEST_STATICS . '/l10n');
 
         parent::baseSetUp($this->class);

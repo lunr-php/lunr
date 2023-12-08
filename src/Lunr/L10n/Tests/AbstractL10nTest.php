@@ -49,7 +49,7 @@ class AbstractL10nTest extends LunrBaseTest
         $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
         $this->class = $this->getMockBuilder('Lunr\L10n\AbstractL10n')
-                            ->setConstructorArgs([ $this->logger ])
+                            ->setConstructorArgs([ $this->logger, TEST_STATICS . '/l10n/' ])
                             ->getMockForAbstractClass();
 
         parent::baseSetUp($this->class);
