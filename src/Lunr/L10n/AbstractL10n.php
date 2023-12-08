@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 /**
  * Localization support trait.
  */
-trait L10nTrait
+abstract class AbstractL10n
 {
 
     /**
@@ -38,6 +38,29 @@ trait L10nTrait
      * @var LoggerInterface
      */
     protected $logger;
+
+    /**
+     * Constructor.
+     *
+     * @param LoggerInterface $logger Shared instance of a Logger class.
+     */
+    public function __construct($logger)
+    {
+        $this->logger = $logger;
+
+        $this->default_language = 'en_US';
+        $this->locales_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
+    }
+
+    /**
+     * Destructor.
+     */
+    public function __destruct()
+    {
+        unset($this->logger);
+        unset($this->default_language);
+        unset($this->locales_location);
+    }
 
     /**
      * Set the default language.

@@ -17,10 +17,8 @@ use Lunr\Ray\FilesystemAccessObjectInterface;
 /**
  * Localization support class
  */
-class L10n
+class L10n extends AbstractL10n
 {
-
-    use L10nTrait;
 
     /**
      * Shared instance of a FilesystemAccessObject class.
@@ -42,11 +40,9 @@ class L10n
      */
     public function __construct($logger, $fao)
     {
-        $this->logger = $logger;
-        $this->fao    = $fao;
+        parent::__construct($logger);
 
-        $this->default_language = 'en_US';
-        $this->locales_location = dirname($_SERVER['PHP_SELF']) . '/l10n';
+        $this->fao = $fao;
     }
 
     /**
@@ -54,8 +50,9 @@ class L10n
      */
     public function __destruct()
     {
-        unset($this->logger);
         unset($this->fao);
+
+        parent::__destruct();
     }
 
     /**
