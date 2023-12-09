@@ -33,6 +33,7 @@ class JsonViewPrintExceptionTest extends JsonViewTest
         $exception->setLine(100);
 
         $this->mock_function('header', function () {});
+        $this->mock_function('http_response_code', function () {});
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -44,12 +45,13 @@ class JsonViewPrintExceptionTest extends JsonViewTest
         $this->class->print_exception($exception);
 
         $this->unmock_function('header');
+        $this->unmock_function('http_response_code');
     }
 
     /**
      * Test that print_exception() prints a json object if there is an exception.
      *
-     * @covers   Lunr\Corona\JsonView::print_exception
+     * @covers Lunr\Corona\JsonView::print_exception
      */
     public function testPrintExceptionForWebPrintsJson(): void
     {
@@ -59,6 +61,7 @@ class JsonViewPrintExceptionTest extends JsonViewTest
         $exception->setLine(100);
 
         $this->mock_function('header', function () {});
+        $this->mock_function('http_response_code', function () {});
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -74,6 +77,7 @@ class JsonViewPrintExceptionTest extends JsonViewTest
         $this->class->print_exception($exception);
 
         $this->unmock_function('header');
+        $this->unmock_function('http_response_code');
     }
 
 }

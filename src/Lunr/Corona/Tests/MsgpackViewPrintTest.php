@@ -72,10 +72,12 @@ class MsgpackViewPrintTest extends MsgpackViewTest
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_code.msgpack');
 
         $this->mock_function('header', function () {});
+        $this->mock_function('http_response_code', function () {});
 
         $this->class->print_page();
 
         $this->unmock_function('header');
+        $this->unmock_function('http_response_code');
     }
 
     /**
@@ -113,10 +115,12 @@ class MsgpackViewPrintTest extends MsgpackViewTest
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_empty_message.msgpack');
 
         $this->mock_function('header', function () {});
+        $this->mock_function('http_response_code', function () {});
 
         $this->class->print_page();
 
         $this->unmock_function('header');
+        $this->unmock_function('http_response_code');
     }
 
     /**
@@ -154,10 +158,12 @@ class MsgpackViewPrintTest extends MsgpackViewTest
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_complete.msgpack');
 
         $this->mock_function('header', function () {});
+        $this->mock_function('http_response_code', function () {});
 
         $this->class->print_page();
 
         $this->unmock_function('header');
+        $this->unmock_function('http_response_code');
     }
 
     /**
@@ -195,10 +201,12 @@ class MsgpackViewPrintTest extends MsgpackViewTest
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_empty_data.msgpack');
 
         $this->mock_function('header', function () {});
+        $this->mock_function('http_response_code', function () {});
 
         $this->class->print_page();
 
         $this->unmock_function('header');
+        $this->unmock_function('http_response_code');
     }
 
     /**
