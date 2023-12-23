@@ -48,6 +48,12 @@ abstract class ClientDataHttpExceptionTest extends LunrBaseTest
     protected $code;
 
     /**
+     * Instance of the tested class.
+     * @var ClientDataHttpException
+     */
+    protected ClientDataHttpException $class;
+
+    /**
      * TestCase Constructor.
      */
     public function setUp(): void
@@ -62,7 +68,7 @@ abstract class ClientDataHttpExceptionTest extends LunrBaseTest
                             ->setConstructorArgs([ $this->message, $this->code, $this->app_code, $this->previous ])
                             ->getMockForAbstractClass();
 
-        $this->reflection = new ReflectionClass(ClientDataHttpException::class);
+        parent::baseSetUp($this->class);
     }
 
     /**
@@ -74,8 +80,9 @@ abstract class ClientDataHttpExceptionTest extends LunrBaseTest
         unset($this->app_code);
         unset($this->message);
         unset($this->previous);
-        unset($this->reflection);
         unset($this->class);
+
+        parent::tearDown();
     }
 
 }
