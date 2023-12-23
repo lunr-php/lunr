@@ -6,98 +6,13 @@ name: PHP Tests
 on: [push, pull_request]
 
 jobs:
-  phpunit:
-    runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental }}
-    name: "PHP-${{ matrix.php-versions }}: PHPUnit"
-    strategy:
-      matrix:
-        php-versions: ['8.1']
-        experimental: [false]
-        include:
-          - php-versions: 8.2
-            experimental: true
-          - php-versions: 8.3
-            experimental: true
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-versions }}
-          tools: phpunit:9.5.x
-          extensions: http, msgpack, gettext, mysqli, uopz, xdebug, uuid
-
-      - name: Setup problem matchers for PHP
-        run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-
-      - name: Install dependencies
-        run: composer update
-
-      - name: Install GNU gettext
-        run: sudo apt install gettext language-pack-de language-pack-nl
-
-      - name: Generate German locale
-        run: sudo locale-gen de_DE
-
-      - name: Generate Dutch locale
-        run: sudo locale-gen nl_NL
-
-      - name: Generate localization files
-        run: support/gen_l10n.sh
-
-      - name: Run PHPunit
-        run: phpunit --configuration tests/phpunit.xml --coverage-clover=coverage.xml
-
-      - name: Collect code coverage
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./coverage.xml
-
-  phpcs:
-    runs-on: ubuntu-latest
-    continue-on-error: false
-    name: "PHPCS"
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Codestyle checkout
-        uses: actions/checkout@v3
-        with:
-            repository: 'lunr-php/lunr-coding-standard'
-
-            # Relative path under $GITHUB_WORKSPACE to place the repository
-            path: 'codestyle'
-
-      - name: Setup PHPCS
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
-          tools: cs2pr, phpcs
-
-      - name: Run PHPCS
-        run: phpcs -q --report=checkstyle src --standard=$GITHUB_WORKSPACE/codestyle/Lunr | cs2pr
-
-  phpstan:
-    runs-on: ubuntu-latest
-    continue-on-error: false
-    name: "PHPStan"
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup PHPStan
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
-          tools: phpstan
-          extensions: uopz
-
-      - name: Install dependencies
-        run: composer update
-
-      - name: Run PHPStan
-        run: phpstan analyze src -l4 --configuration tests/phpstan.neon.dist
+  php-tests:
+    uses: lunr-php/actions-templates/.github/workflows/php-composer-l10n.yml@master
+    with:
+      phpstan-level: 4
+      allow-style-failures: false
+      allow-phpstan-failures: false
+      phpcs-whitelist: index.php.sample tests/phan.config.php tests/phpstan.autoload.inc.php tests/test.bootstrap.inc.php
+      php-extensions: http, msgpack, gettext, uopz, xdebug, uuid
+      stable-php-versions: '["8.1"]'
+      experimental-php-versions: '["8.2","8.3"]'

@@ -80,3 +80,5 @@ return [
         'PhanTypeObjectUnsetDeclaredProperty',
     ],
 ];
+
+?>
