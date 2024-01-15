@@ -14,6 +14,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RecursiveRegexIterator;
 use RegexIterator;
+use RuntimeException;
 
 /**
  * Controller class
@@ -141,6 +142,11 @@ class FrontController
         if (empty($matches) === TRUE)
         {
             return '';
+        }
+
+        if (count($matches) > 1)
+        {
+            throw new RuntimeException('Found multiple matching controllers!');
         }
 
         $search  = [ '.php', $src, '/' ];

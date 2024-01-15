@@ -10,6 +10,8 @@
 
 namespace Lunr\Corona\Tests;
 
+use RuntimeException;
+
 /**
  * This class contains tests for getting controllers from the FrontController class.
  *
@@ -77,23 +79,23 @@ class FrontControllerGetTest extends FrontControllerTest
     }
 
     /**
-     * Test that get_controller() returns the first result if more than one exists.
+     * Test that get_controller() throws an exception if more than one exists.
      *
      * @covers Lunr\Corona\FrontController::get_controller
      */
-    public function testGetControllerReturnsFirstMatchIfMultipleFound(): void
+    public function testGetControllerThrowsExceptionIfMultipleFound(): void
     {
-        $dir  = TEST_STATICS . '/Corona/';
-        $fqcn = 'Project\\Package2\\FooController';
+        $dir = TEST_STATICS . '/Corona/';
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
                       ->willReturn('foo');
 
-        $value = $this->class->get_controller($dir);
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Found multiple matching controllers!');
 
-        $this->assertEquals($fqcn, $value);
+        $this->class->get_controller($dir);
     }
 
     /**
