@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
+# SPDX-License-Identifier: CC0-1.0
+
+name: General Tests
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  reuse:
+    uses: lunr-php/actions-templates/.github/workflows/reuse.yml@master
