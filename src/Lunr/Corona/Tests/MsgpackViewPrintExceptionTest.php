@@ -33,12 +33,14 @@ class MsgpackViewPrintExceptionTest extends MsgpackViewTest
         $exception->setLine(100);
 
         $this->mock_function('header', function () {});
+        $this->mock_function('http_response_code', function () {});
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_exception.msgpack');
 
         $this->class->print_exception($exception);
 
         $this->unmock_function('header');
+        $this->unmock_function('http_response_code');
     }
 
 }

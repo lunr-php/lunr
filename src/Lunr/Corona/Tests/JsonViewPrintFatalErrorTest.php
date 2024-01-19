@@ -13,7 +13,7 @@ namespace Lunr\Corona\Tests;
 /**
  * This class contains tests for the JsonView class.
  *
- * @covers     Lunr\Corona\JsonView
+ * @covers Lunr\Corona\JsonView
  */
 class JsonViewPrintFatalErrorTest extends JsonViewTest
 {
@@ -21,7 +21,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
     /**
      * Test that print_fatal_error() does not print an error page if there is no error.
      *
-     * @covers   Lunr\Corona\JsonView::print_fatal_error
+     * @covers Lunr\Corona\JsonView::print_fatal_error
      */
     public function testPrintFatalErrorPrintsNothingIfNoError(): void
     {
@@ -37,7 +37,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
     /**
      * Test that print_fatal_error() does not print an error page if there is no fatal error.
      *
-     * @covers   Lunr\Corona\JsonView::print_fatal_error
+     * @covers Lunr\Corona\JsonView::print_fatal_error
      */
     public function testPrintFatalErrorPrintsNothingIfErrorNotFatal(): void
     {
@@ -60,6 +60,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
     {
         $this->mock_function('error_get_last', function () { return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]; });
         $this->mock_function('header', function () {});
+        $this->mock_function('http_response_code', function () {});
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -72,17 +73,19 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
 
         $this->unmock_function('error_get_last');
         $this->unmock_function('header');
+        $this->unmock_function('http_response_code');
     }
 
     /**
      * Test that print_fatal_error() does prints a json object if there is a fatal error.
      *
-     * @covers   Lunr\Corona\JsonView::print_fatal_error
+     * @covers Lunr\Corona\JsonView::print_fatal_error
      */
     public function testPrintFatalErrorForWebPrintsJson(): void
     {
         $this->mock_function('error_get_last', function () { return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]; });
         $this->mock_function('header', function () {});
+        $this->mock_function('http_response_code', function () {});
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -95,6 +98,7 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
 
         $this->unmock_function('error_get_last');
         $this->unmock_function('header');
+        $this->unmock_function('http_response_code');
     }
 
 }
