@@ -39,62 +39,62 @@ class Request
      * Stored $_POST values
      * @var array<string,mixed>
      */
-    protected $post;
+    protected readonly array $post;
 
     /**
      * Stored $_GET values
      * @var array<string,mixed>
      */
-    protected $get;
+    protected readonly array $get;
 
     /**
      * Stored $_COOKIE values
      * @var array<string,mixed>
      */
-    protected $cookie;
+    protected readonly array $cookie;
 
     /**
      * Stored $_SERVER values
      * @var array<string,mixed>
      */
-    protected $server;
+    protected readonly array $server;
 
     /**
      * Request property data
      *
      * @var array<string, mixed>
      */
-    protected $request;
+    protected readonly array $request;
 
     /**
      * Stored $_FILES values
      * @var array<string,array<string,mixed>>
      */
-    protected $files;
+    protected readonly array $files;
 
     /**
      * Stored php://input values
      * @var string
      */
-    protected $raw_data;
+    protected string $raw_data;
 
     /**
      * Stored command line arguments
      * @var array<string,string|null>
      */
-    protected $cli_args;
+    protected readonly array $cli_args;
 
     /**
      * Shared instance of the request parser.
      * @var RequestParserInterface
      */
-    protected $parser;
+    protected readonly RequestParserInterface $parser;
 
     /**
      * The request values to mock.
      * @var array<string,mixed>
      */
-    private $mock;
+    private array $mock;
 
     /**
      * Constructor.
@@ -122,15 +122,8 @@ class Request
      */
     public function __destruct()
     {
-        unset($this->post);
-        unset($this->get);
-        unset($this->server);
-        unset($this->cookie);
-        unset($this->request);
-        unset($this->files);
-        unset($this->parser);
-        unset($this->mock);
-        unset($this->raw_data);
+        // Intentionally not unsetting $this->mock and $this->raw_data, since
+        // that may break access to mocked request values during PHP shutdown.
     }
 
     /**

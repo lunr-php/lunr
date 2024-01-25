@@ -196,9 +196,12 @@ class RequestGetDataTest extends RequestTest
             $values[] = 'value';
         }
 
-        $this->set_reflection_property_value('cli_args', array_combine($keys, $values));
+        $class = $this->reflection->newInstanceWithoutConstructor();
 
-        $return = $this->class->get_all_options();
+        $this->reflection->getProperty('cli_args')
+                         ->setValue($class, array_combine($keys, $values));
+
+        $return = $class->get_all_options();
 
         $this->assertEquals($keys, $return);
     }
@@ -213,9 +216,12 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetOptionDataReturnsValueForValidKey($value): void
     {
-        $this->set_reflection_property_value('cli_args', [ 'a' => $value ]);
+        $class = $this->reflection->newInstanceWithoutConstructor();
 
-        $result = $this->class->get_option_data('a');
+        $this->reflection->getProperty('cli_args')
+                         ->setValue($class, [ 'a' => $value ]);
+
+        $result = $class->get_option_data('a');
 
         $this->assertEquals($value, $result);
     }
