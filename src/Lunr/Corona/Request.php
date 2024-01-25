@@ -88,13 +88,13 @@ class Request
      * Shared instance of the request parser.
      * @var RequestParserInterface
      */
-    protected $parser;
+    protected readonly RequestParserInterface $parser;
 
     /**
      * The request values to mock.
      * @var array<string,mixed>
      */
-    private $mock;
+    private array $mock;
 
     /**
      * Constructor.
@@ -122,8 +122,8 @@ class Request
      */
     public function __destruct()
     {
-        unset($this->parser);
-        unset($this->mock);
+        // Intentionally not unsetting $this->mock and $this->raw_data, since
+        // that may break access to mocked request values during PHP shutdown.
     }
 
     /**
