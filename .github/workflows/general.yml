@@ -7,3 +7,7 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   reuse:
     uses: lunr-php/actions-templates/.github/workflows/reuse.yml@master
+  typos:
+    uses: lunr-php/actions-templates/.github/workflows/typos.yml@master
+    with:
+      config: tests/typos.toml
