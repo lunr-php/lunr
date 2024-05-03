@@ -49,7 +49,7 @@ class PhysicalFilesystemRemoveDirectoryTest extends PhysicalFilesystemAccessObje
     }
 
     /**
-     * Test rmdir() with an non-existant directory.
+     * Test rmdir() with an non-existent directory.
      *
      * @param mixed  $directory String or object directory value
      * @param string $error     The respective to the input error message

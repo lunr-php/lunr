@@ -108,7 +108,7 @@ class PHPL10nProvider extends L10nProvider
 
         if ($context == '')
         {
-            //Check if the key have context asociated in the array
+            //Check if the key have context associated in the array
             if (is_array($this->lang_array[$identifier]))
             {
                 foreach ($this->lang_array[$identifier] as $value)
@@ -144,7 +144,7 @@ class PHPL10nProvider extends L10nProvider
      *                         the string
      * @param string $plural   Identifier for the plural version of the string
      * @param int    $amount   The amount the translation should be based on
-     * @param string $context  Context information fot the requested string
+     * @param string $context  Context information for the requested string
      *
      * @return string $string Translated string, identifier by default
      */

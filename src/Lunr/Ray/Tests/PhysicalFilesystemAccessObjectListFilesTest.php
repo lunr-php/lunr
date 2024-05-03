@@ -73,11 +73,11 @@ class PhysicalFilesystemAccessObjectListFilesTest extends PhysicalFilesystemAcce
     }
 
     /**
-     * Test listing files in an non-existant directory.
+     * Test listing files in an non-existent directory.
      *
      * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_list_of_files
      */
-    public function testGetListOfFilesInNonExistantDirectory(): void
+    public function testGetListOfFilesInNonExistentDirectory(): void
     {
         $directory = '/tmp56474q';
 

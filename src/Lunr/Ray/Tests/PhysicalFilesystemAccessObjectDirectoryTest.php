@@ -67,11 +67,11 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
     }
 
     /**
-     * Test listing an non-existant directory.
+     * Test listing an non-existent directory.
      *
      * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_directory_listing
      */
-    public function testGetListingOfNonExistantDirectory(): void
+    public function testGetListingOfNonExistentDirectory(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {

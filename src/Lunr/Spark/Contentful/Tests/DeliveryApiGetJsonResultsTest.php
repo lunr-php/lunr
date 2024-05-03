@@ -22,7 +22,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
 {
 
     /**
-     * Test that get_josn_results() does a correct get_request without params.
+     * Test that get_json_results() does a correct get_request without params.
      *
      * @covers Lunr\Spark\Contentful\DeliveryApi::get_json_results
      */

@@ -70,7 +70,7 @@ class ApiGetBaseUrlTest extends ApiTest
      *
      * @covers Lunr\Spark\Contentful\Api::get_base_url
      */
-    public function testGetBaseUrlWithAllValuse(): void
+    public function testGetBaseUrlWithAllValues(): void
     {
         $this->set_reflection_property_value('space', '5p4c31D');
         $this->set_reflection_property_value('environment', 'master');

@@ -65,11 +65,11 @@ class FrontControllerDispatchTest extends FrontControllerTest
     }
 
     /**
-     * Test that dispatch behaves well with a non-existant controller.
+     * Test that dispatch behaves well with a non-existent controller.
      *
      * @covers Lunr\Corona\FrontController::dispatch
      */
-    public function testDispatchWithNonExistantController(): void
+    public function testDispatchWithNonExistentController(): void
     {
         $this->handler->expects($this->once())
                       ->method('handle_request')

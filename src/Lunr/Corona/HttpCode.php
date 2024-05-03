@@ -299,7 +299,7 @@ class HttpCode
     // Server Error
 
     /**
-     * Unexpected condition occured, preventing successful fulfillment.
+     * Unexpected condition occurred, preventing successful fulfillment.
      * @var int
      */
     public const INTERNAL_SERVER_ERROR = 500;

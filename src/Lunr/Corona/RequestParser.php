@@ -160,11 +160,11 @@ class RequestParser implements RequestParserInterface
     }
 
     /**
-     * Negotiate & retrieve the client's prefered content type.
+     * Negotiate & retrieve the client's preferred content type.
      *
      * @param array $supported Array containing the supported content types
      *
-     * @return mixed $return The best match of the prefered content types or NULL
+     * @return mixed $return The best match of the preferred content types or NULL
      *                       if there are no supported types or the header is not set
      */
     public function parse_accept_format($supported = [])
@@ -173,11 +173,11 @@ class RequestParser implements RequestParserInterface
     }
 
     /**
-     * Negotiate & retrieve the clients prefered language.
+     * Negotiate & retrieve the clients preferred language.
      *
      * @param array $supported Array containing the supported languages
      *
-     * @return mixed $return The best match of the prefered languages or NULL if
+     * @return mixed $return The best match of the preferred languages or NULL if
      *                       there are no supported languages or the header is not set
      */
     public function parse_accept_language($supported = [])
@@ -186,11 +186,11 @@ class RequestParser implements RequestParserInterface
     }
 
     /**
-     * Negotiate & retrieve the clients prefered charset.
+     * Negotiate & retrieve the clients preferred charset.
      *
      * @param array $supported Array containing the supported charsets
      *
-     * @return mixed $return The best match of the prefered charsets or NULL if
+     * @return mixed $return The best match of the preferred charsets or NULL if
      *                       there are no supported charsets or the header is not set
      */
     public function parse_accept_charset($supported = [])

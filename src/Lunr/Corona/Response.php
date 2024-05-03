@@ -11,7 +11,7 @@
 namespace Lunr\Corona;
 
 /**
- * Respone abstraction class.
+ * Response abstraction class.
  * Transport of data between Model/Controller and View
  */
 class Response

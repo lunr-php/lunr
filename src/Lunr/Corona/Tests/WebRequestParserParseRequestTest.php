@@ -280,7 +280,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
     }
 
     /**
-     * Test that parse_request() returns an ampty array if the data has already been parsed.
+     * Test that parse_request() returns an empty array if the data has already been parsed.
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */

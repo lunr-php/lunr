@@ -62,11 +62,11 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     }
 
     /**
-     * Test that get_file_content() does not get contents of a non-existant file.
+     * Test that get_file_content() does not get contents of a non-existent file.
      *
      * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_file_content
      */
-    public function testGetFileContentWithNonExistantFile(): void
+    public function testGetFileContentWithNonExistentFile(): void
     {
         if (class_exists('\PHPUnit\Framework\Error\Warning'))
         {
@@ -169,11 +169,11 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     }
 
     /**
-     * Test that put_file_content() puts contents in a non-existant file.
+     * Test that put_file_content() puts contents in a non-existent file.
      *
      * @covers Lunr\Ray\PhysicalFilesystemAccessObject::put_file_content
      */
-    public function testPutFileContentWithNonExistantFile(): void
+    public function testPutFileContentWithNonExistentFile(): void
     {
         $file = sys_get_temp_dir() . '/ab65cd89';
 
@@ -363,11 +363,11 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     }
 
     /**
-     * Test getting a SplFileObject for a non-existant file.
+     * Test getting a SplFileObject for a non-existent file.
      *
      * @covers Lunr\Ray\PhysicalFilesystemAccessObject::get_file_object
      */
-    public function testGetFileObjectForNonExistantFile(): void
+    public function testGetFileObjectForNonExistentFile(): void
     {
         $file = sys_get_temp_dir() . '/ab65cd89';
 

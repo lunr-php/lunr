@@ -102,7 +102,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_error_message
      */
-    public function testGetNonExistantErrorMessage(): void
+    public function testGetNonExistentErrorMessage(): void
     {
         $this->assertNull($this->class->get_error_message('controller/method'));
     }
@@ -126,7 +126,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_error_info
      */
-    public function testGetNonExistantErrorInfo(): void
+    public function testGetNonExistentErrorInfo(): void
     {
         $this->assertNull($this->class->get_error_info('controller/method'));
     }
@@ -174,7 +174,7 @@ class ResponseGetTest extends ResponseTest
      *
      * @covers Lunr\Corona\Response::get_return_code
      */
-    public function testGetNonExistantReturnCode(): void
+    public function testGetNonExistentReturnCode(): void
     {
         $this->assertNull($this->class->get_return_code('controller/method'));
     }

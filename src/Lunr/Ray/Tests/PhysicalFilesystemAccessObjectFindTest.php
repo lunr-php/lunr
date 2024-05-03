@@ -91,11 +91,11 @@ class PhysicalFilesystemAccessObjectFindTest extends PhysicalFilesystemAccessObj
     }
 
     /**
-     * Test finding in an non-existant directory.
+     * Test finding in an non-existent directory.
      *
      * @covers Lunr\Ray\PhysicalFilesystemAccessObject::find_matches
      */
-    public function testGetMatchesOfNonExistantDirectory(): void
+    public function testGetMatchesOfNonExistentDirectory(): void
     {
         $directory = '/tmp56474q';
 

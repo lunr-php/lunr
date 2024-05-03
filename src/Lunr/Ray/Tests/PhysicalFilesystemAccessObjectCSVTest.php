@@ -73,11 +73,11 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
     }
 
     /**
-     * Test that put_csv_file_content() returns TRUE in success with enclosure and delimeter.
+     * Test that put_csv_file_content() returns TRUE in success with enclosure and delimiter.
      *
      * @covers Lunr\Ray\PhysicalFilesystemAccessObject::put_csv_file_content
      */
-    public function testPutCSVFileContentSuccessCustomDelimeter(): void
+    public function testPutCSVFileContentSuccessCustomDelimiter(): void
     {
         $filepath = TEST_STATICS . '/Ray/folder2/test.csv';
 

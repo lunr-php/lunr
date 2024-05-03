@@ -64,7 +64,7 @@ class GettextL10nProvider extends L10nProvider
      * Return a translated string.
      *
      * @param string $identifier Identifier for the requested string
-     * @param string $context    Context information fot the requested string
+     * @param string $context    Context information for the requested string
      *
      * @return string $string Translated string, identifier by default
      */
@@ -107,7 +107,7 @@ class GettextL10nProvider extends L10nProvider
      * @param string $plural   Identifier for the plural version of
      *                         the string
      * @param int    $amount   The amount the translation should be based on
-     * @param string $context  Context information fot the requested string
+     * @param string $context  Context information for the requested string
      *
      * @return string $string Translated string, identifier by default
      */
