@@ -12,6 +12,8 @@ namespace Lunr\Spark;
 
 /**
  * Central Authentication Data Store for Spark modules.
+ *
+ * @deprecated Use `Psr\Cache\CacheItemPoolInterface` instead
  */
 class CentralAuthenticationStore
 {
