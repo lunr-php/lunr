@@ -19,7 +19,7 @@ use ReflectionClass;
  *
  * @covers     Lunr\Corona\Response
  */
-class ResponseTest extends LunrBaseTest
+abstract class ResponseTest extends LunrBaseTest
 {
 
     /**

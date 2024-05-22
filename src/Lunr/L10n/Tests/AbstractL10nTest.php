@@ -20,7 +20,7 @@ use ReflectionClass;
  *
  * @covers Lunr\L10n\AbstractL10n
  */
-class AbstractL10nTest extends LunrBaseTest
+abstract class AbstractL10nTest extends LunrBaseTest
 {
 
     /**
