@@ -4,7 +4,6 @@
     "rmccue/requests": "~2.0",
     "php": ">=8.1",
     "psr/cache": "~1.0",
-    "lunr/halo": "~0.9.0",
     "lunr/config": "~0.9.0",
     "lunr/cliparser": "~0.9.0"
   },
@@ -15,6 +14,7 @@
     "ext-uuid": "Needed for setting unique request IDs in Corona/Shadow"
   },
   "require-dev": {
+    "lunr/halo": "~0.9.0",
     "phpunit/phpunit": ">=9.0 <9.6",
     "ext-xdebug": "~3.1"
   },
