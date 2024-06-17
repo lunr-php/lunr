@@ -29,15 +29,15 @@
     },
     "Psr-Log": {
         "url": "https://github.com/php-fig/log.git",
-        "version": "1.1.4",
+        "version": "3.0.0",
         "psr4": {
             "prefix": "Psr\\Log",
-            "search-path": "/Psr/Log/"
+            "search-path": "/src/"
         }
     },
     "Requests": {
         "url": "https://github.com/WordPress/Requests.git",
-        "version": "2.0.5",
+        "version": "2.0.11",
         "psr4": {
             "prefix": "WpOrg\\Requests",
             "search-path": "/src/"
@@ -45,7 +45,7 @@
     },
     "Psr-Cache": {
         "url": "https://github.com/php-fig/cache.git",
-        "version": "1.0.1",
+        "version": "3.0.0",
         "psr4": {
             "prefix": "Psr\\Cache",
             "search-path": "/src/"
