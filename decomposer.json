@@ -6,7 +6,8 @@
         "psr4": {
             "prefix": "Lunr\\Halo",
             "search-path": "/src/Lunr/Halo/"
-        }
+        },
+        "development-only": true
     },
     "Lunr.Config": {
         "url": "https://github.com/lunr-php/lunr.config.git",
