@@ -20,13 +20,13 @@ abstract class Controller
      * Shared instance of the Request class.
      * @var Request
      */
-    protected $request;
+    protected readonly Request $request;
 
     /**
      * Shared instance of the Response class.
      * @var Response
      */
-    protected $response;
+    protected readonly Response $response;
 
     /**
      * Constructor.
@@ -45,19 +45,18 @@ abstract class Controller
      */
     public function __destruct()
     {
-        unset($this->response);
-        unset($this->request);
+        // no-op
     }
 
     /**
      * Handle unimplemented calls.
      *
-     * @param string $name      Method name
-     * @param array  $arguments Arguments passed to the method
+     * @param string  $name      Method name
+     * @param mixed[] $arguments Arguments passed to the method
      *
      * @return void
      */
-    public function __call($name, $arguments)
+    public function __call(string $name, array $arguments): void
     {
         $this->set_result(HttpCode::NOT_IMPLEMENTED, 'Not implemented!');
     }
@@ -65,13 +64,13 @@ abstract class Controller
     /**
      * Store result of the call in the response object.
      *
-     * @param int    $code    Return Code
-     * @param string $message Error Message
-     * @param mixed  $info    Additional error information
+     * @param int         $code    Return Code
+     * @param string|null $message Error Message
+     * @param mixed       $info    Additional error information
      *
      * @return void
      */
-    protected function set_result($code, $message = NULL, $info = NULL)
+    protected function set_result(int $code, ?string $message = NULL, mixed $info = NULL)
     {
         $this->response->set_return_code($this->request->call, $code);
 

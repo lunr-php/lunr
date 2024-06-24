@@ -30,7 +30,9 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
      */
     public function testHandleRequestWithInstantiatedController(): void
     {
-        $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')->getMock();
+        $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')
+                           ->disableOriginalConstructor()
+                           ->getMock();
 
         $this->request->expects($this->exactly(1))
                       ->method('__get')
@@ -164,6 +166,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
     public function testHandleRequestWithHttpException(): void
     {
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')
+                           ->disableOriginalConstructor()
                            ->getMock();
 
         $controller->expects($this->once())
@@ -202,6 +205,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
         $exception = new Exception('Error!');
 
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')
+                           ->disableOriginalConstructor()
                            ->getMock();
 
         $controller->expects($this->once())
@@ -244,6 +248,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
         $exception = new Error('Fatal Error!');
 
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')
+                           ->disableOriginalConstructor()
                            ->getMock();
 
         $controller->expects($this->once())
@@ -284,6 +289,7 @@ class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
     public function testHandleRequestWithSuccess(): void
     {
         $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')
+                           ->disableOriginalConstructor()
                            ->getMock();
 
         $controller->expects($this->once())

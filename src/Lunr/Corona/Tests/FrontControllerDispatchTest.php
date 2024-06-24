@@ -25,7 +25,9 @@ class FrontControllerDispatchTest extends FrontControllerTest
      */
     public function testDispatchWithInstantiatedController(): void
     {
-        $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')->getMock();
+        $controller = $this->getMockBuilder('Lunr\Corona\Tests\MockController')
+                           ->disableOriginalConstructor()
+                           ->getMock();
 
         $this->handler->expects($this->once())
                       ->method('handle_request')

@@ -21,10 +21,13 @@ class MockController extends Controller
 
     /**
      * Constructor.
+     *
+     * @param Request  $request  Shared instance of the Request class
+     * @param Response $response Shared instance of the Response class
      */
-    public function __construct()
+    public function __construct($request, $response)
     {
-        parent::__construct(NULL, NULL);
+        parent::__construct($request, $response);
     }
 
     /**
