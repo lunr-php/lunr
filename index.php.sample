@@ -50,12 +50,10 @@
     // Include system config files
     require_once 'conf.paths.inc.php';
     require_once 'system/config/conf.database.inc.php';
-    require_once 'system/config/conf.l10n.inc.php';
 
     // Include application config files
     require_once("conf.application.inc.php");
     require_once("config/conf.database.inc.php");
-    require_once("config/conf.l10n.inc.php");
 
     // If no controller is specified set it to the default controller,
     // similar for the method. This allows for a default Homepage

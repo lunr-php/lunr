@@ -67,7 +67,7 @@ class FrontControllerRouteTest extends FrontControllerTest
     {
         $paths = [
             'live' => TEST_STATICS . '/../../src/Lunr/Corona/',
-            'acc'  => TEST_STATICS . '/../../support/',
+            'acc'  => TEST_STATICS . '/../../LICENSES/',
             'test' => TEST_STATICS . '/Corona/',
         ];
 
@@ -99,7 +99,7 @@ class FrontControllerRouteTest extends FrontControllerTest
     {
         $paths = [
             'live' => TEST_STATICS . '/../../src/Lunr/Corona/',
-            'acc'  => TEST_STATICS . '/../../support/',
+            'acc'  => TEST_STATICS . '/../../LICENSES/',
             'test' => TEST_STATICS . '/Corona/',
         ];
 
@@ -131,7 +131,7 @@ class FrontControllerRouteTest extends FrontControllerTest
     {
         $paths = [
             'live' => TEST_STATICS . '/../../src/Lunr/Corona/',
-            'acc'  => TEST_STATICS . '/../../support/',
+            'acc'  => TEST_STATICS . '/../../LICENSES/',
             'test' => TEST_STATICS . '/Corona/',
         ];
 
@@ -163,7 +163,7 @@ class FrontControllerRouteTest extends FrontControllerTest
     {
         $paths = [
             'live' => TEST_STATICS . '/../../src/Lunr/Corona/',
-            'acc'  => TEST_STATICS . '/../../support/',
+            'acc'  => TEST_STATICS . '/../../LICENSES/',
             'test' => TEST_STATICS . '/Corona/',
         ];
 

@@ -7,12 +7,12 @@ on: [push, pull_request]
 
 jobs:
   php-tests:
-    uses: lunr-php/actions-templates/.github/workflows/php-composer-l10n.yml@master
+    uses: lunr-php/actions-templates/.github/workflows/php-composer.yml@master
     with:
       phpstan-level: 4
       allow-style-failures: false
       allow-phpstan-failures: false
       phpcs-whitelist: index.php.sample tests/phan.config.php tests/phpstan.autoload.inc.php tests/test.bootstrap.inc.php
-      php-extensions: http, msgpack, gettext, uopz, xdebug, uuid
+      php-extensions: http, msgpack, uopz, xdebug, uuid
       stable-php-versions: '["8.1"]'
       experimental-php-versions: '["8.2","8.3"]'

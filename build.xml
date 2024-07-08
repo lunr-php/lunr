@@ -12,9 +12,6 @@
             description="Cleanup and create build directories">
         <delete dir="${basedir}/build" />
         <delete dir="${basedir}/tmp" />
-        <delete>
-            <fileset dir="tests/statics/l10n" includes="**/*.mo"/>
-        </delete>
 
         <mkdir dir="${basedir}/build/api" />
         <mkdir dir="${basedir}/build/code-browser" />
@@ -35,7 +32,6 @@
             <antcall target="phpcs"/>
             <antcall target="phpstan-ci"/>
             <antcall target="phploc"/>
-            <antcall target="l10n"/>
         </parallel>
     </target>
 
@@ -162,11 +158,6 @@
             <arg value="--no-progress-bar" />
             <arg value="--analyze-twice" />
         </exec>
-    </target>
-
-    <target name="l10n"
-            description="Generate gettext language files">
-        <exec executable="support/gen_l10n.sh" />
     </target>
 
     <target name="dependencies">

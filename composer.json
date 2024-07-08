@@ -10,7 +10,6 @@
   "suggest": {
     "ext-http": "Needed for HTTP support in Corona, needed to get hostname in Shadow when parsing data",
     "ext-msgpack": "Needed for msgpack support in Corona",
-    "ext-gettext": "Needed for internationalization support in L10n",
     "ext-uuid": "Needed for setting unique request IDs in Corona/Shadow"
   },
   "require-dev": {
