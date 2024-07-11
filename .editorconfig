@@ -23,6 +23,6 @@ indent_size = 2
 [{*.md,*.txt}]
 indent_style = space
 
-[{Jenkinsfile,*.xml,*.json,*.neon.dist,*.jq,*.yml}]
+[{*.xml,*.json,*.neon.dist,*.jq,*.yml}]
 indent_style = space
 indent_size = 4
