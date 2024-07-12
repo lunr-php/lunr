@@ -25,9 +25,9 @@ abstract class ClientDataHttpException extends HttpException
 
     /**
      * Input data value
-     * @var mixed
+     * @var null|scalar
      */
-    protected $value;
+    protected null|string|int|float|bool $value;
 
     /**
      * Report data
@@ -51,12 +51,12 @@ abstract class ClientDataHttpException extends HttpException
     /**
      * Set input data that caused the request.
      *
-     * @param string $key   Key/URL parameter name
-     * @param mixed  $value Input value
+     * @param string      $key   Key/URL parameter name
+     * @param null|scalar $value Input value
      *
      * @return void
      */
-    public function setData(string $key, $value): void
+    public function setData(string $key, null|string|int|float|bool $value): void
     {
         $this->key   = $key;
         $this->value = $value;
@@ -117,9 +117,9 @@ abstract class ClientDataHttpException extends HttpException
     /**
      * Get the input data value.
      *
-     * @return mixed Input data value
+     * @return null|scalar Input data value
      */
-    public function getDataValue()
+    public function getDataValue(): null|string|int|float|bool
     {
         return $this->value;
     }

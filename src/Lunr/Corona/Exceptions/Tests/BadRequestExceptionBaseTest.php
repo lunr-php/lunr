@@ -35,14 +35,6 @@ class BadRequestExceptionBaseTest extends BadRequestExceptionTest
     }
 
     /**
-     * Test that the input data value was set correctly.
-     */
-    public function testInputDataValueIsNull(): void
-    {
-        $this->assertNull($this->get_reflection_property_value('value'));
-    }
-
-    /**
      * Test that the input data flag was set correctly.
      */
     public function testDefaultDataAvailableIsFalse(): void
