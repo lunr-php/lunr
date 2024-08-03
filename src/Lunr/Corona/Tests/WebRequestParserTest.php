@@ -10,9 +10,10 @@
 
 namespace Lunr\Corona\Tests;
 
+use http\Header;
+use Lunr\Core\Configuration;
 use Lunr\Corona\WebRequestParser;
 use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
 
 /**
  * This class contains common setup routines, providers
@@ -25,13 +26,13 @@ abstract class WebRequestParserTest extends LunrBaseTest
 
     /**
      * Mock of the Configuration class.
-     * @var \Lunr\Core\Configuration
+     * @var Configuration
      */
     protected $configuration;
 
     /**
      * Mock instance of the Header class
-     * @var \http\Header
+     * @var Header
      */
     protected $header;
 

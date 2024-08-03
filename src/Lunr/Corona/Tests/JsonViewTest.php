@@ -10,9 +10,11 @@
 
 namespace Lunr\Corona\Tests;
 
+use Lunr\Core\Configuration;
 use Lunr\Corona\JsonView;
+use Lunr\Corona\Request;
+use Lunr\Corona\Response;
 use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
 
 /**
  * This class contains common setup routines, providers
@@ -25,19 +27,19 @@ abstract class JsonViewTest extends LunrBaseTest
 
     /**
      * Mock instance of the Request class.
-     * @var \Lunr\Corona\Request
+     * @var Request
      */
     protected $request;
 
     /**
      * Mock instance of the Response class.
-     * @var \Lunr\Corona\Response
+     * @var Response
      */
     protected $response;
 
     /**
      * Mock instance of the Configuration class.
-     * @var \Lunr\Core\Configuration
+     * @var Configuration
      */
     protected $configuration;
 

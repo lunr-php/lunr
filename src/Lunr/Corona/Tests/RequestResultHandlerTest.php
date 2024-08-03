@@ -10,9 +10,11 @@
 
 namespace Lunr\Corona\Tests;
 
+use Lunr\Corona\Request;
 use Lunr\Corona\RequestResultHandler;
+use Lunr\Corona\Response;
 use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use Psr\Log\LoggerInterface;
 
 /**
  * This class contains common setup routines, providers
@@ -25,19 +27,19 @@ abstract class RequestResultHandlerTest extends LunrBaseTest
 
     /**
      * Mock instance of the Request class.
-     * @var \Lunr\Corona\Request
+     * @var Request
      */
     protected $request;
 
     /**
      * Mock instance of the Response class.
-     * @var \Lunr\Corona\Response
+     * @var Response
      */
     protected $response;
 
     /**
      * Mock instance of a Logger class.
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
     protected $logger;
 

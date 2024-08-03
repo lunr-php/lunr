@@ -11,8 +11,9 @@
 namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\Request;
+use Lunr\Corona\RequestParserInterface;
 use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use stdClass;
 
 /**
  * This class contains common setup routines, providers
@@ -25,7 +26,7 @@ abstract class RequestTest extends LunrBaseTest
 
     /**
      * Mock of the Request Parser class.
-     * @var \Lunr\Corona\RequestParserInterface
+     * @var RequestParserInterface
      */
     protected $parser;
 
@@ -185,7 +186,7 @@ abstract class RequestTest extends LunrBaseTest
     public function invalidMockValueProvider(): array
     {
         $values   = [];
-        $values[] = [ new \stdClass() ];
+        $values[] = [ new stdClass() ];
         $values[] = [ 0 ];
         $values[] = [ 'String' ];
         $values[] = [ TRUE ];

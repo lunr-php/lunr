@@ -10,8 +10,8 @@
 
 namespace Lunr\Corona;
 
-use Psr\Log\LogLevel;
 use Lunr\Core\Configuration;
+use Psr\Log\LogLevel;
 
 /**
  * Request Parser.

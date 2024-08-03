@@ -10,9 +10,9 @@
 
 namespace Lunr\Corona;
 
-use Psr\Log\LogLevel;
-use Lunr\Core\Configuration;
 use http\Header;
+use Lunr\Core\Configuration;
+use Psr\Log\LogLevel;
 
 /**
  * Web Request Parser.
@@ -24,7 +24,7 @@ class WebRequestParser implements RequestParserInterface
 
     /**
      * Shared instance of the Configuration class.
-     * @var \Lunr\Core\Configuration
+     * @var Configuration
      */
     protected $config;
 

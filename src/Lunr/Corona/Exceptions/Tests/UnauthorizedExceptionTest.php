@@ -9,9 +9,9 @@
 
 namespace Lunr\Corona\Exceptions\Tests;
 
+use Exception;
 use Lunr\Corona\Exceptions\UnauthorizedException;
 use Lunr\Halo\LunrBaseTest;
-use Exception;
 
 /**
  * This class contains common setup routines, providers
@@ -24,7 +24,7 @@ abstract class UnauthorizedExceptionTest extends LunrBaseTest
 
     /**
      * Previous exception.
-     * @var \Exception
+     * @var Exception
      */
     protected $previous;
 

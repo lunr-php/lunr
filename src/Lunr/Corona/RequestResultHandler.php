@@ -11,8 +11,8 @@
 namespace Lunr\Corona;
 
 use Lunr\Corona\Exceptions\HttpException;
-use Throwable;
 use Psr\Log\LoggerInterface;
+use Throwable;
 
 /**
  * RequestResultHandler.

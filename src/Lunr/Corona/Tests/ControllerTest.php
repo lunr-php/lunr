@@ -11,10 +11,11 @@
 namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\Controller;
+use Lunr\Corona\Request;
+use Lunr\Corona\Response;
 use Lunr\Halo\LunrBaseTest;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
-use ReflectionClass;
 
 /**
  * This class contains test methods for the Controller class.
@@ -26,13 +27,13 @@ abstract class ControllerTest extends LunrBaseTest
 
     /**
      * Mock instance of the response class.
-     * @var \Lunr\Corona\Response
+     * @var Response
      */
     protected $response;
 
     /**
      * Mock instance of the request class.
-     * @var \Lunr\Corona\Request
+     * @var Request
      */
     protected $request;
 

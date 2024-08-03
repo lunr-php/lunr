@@ -10,10 +10,9 @@
 
 namespace Lunr\Corona\Tests;
 
-use Lunr\Corona\HttpCode;
-use Lunr\Corona\Exceptions\BadRequestException;
-use Exception;
 use Error;
+use Exception;
+use Lunr\Corona\Exceptions\BadRequestException;
 
 /**
  * This class contains test methods for the RequestResultHandler class.

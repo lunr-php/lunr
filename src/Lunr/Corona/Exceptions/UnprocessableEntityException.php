@@ -12,7 +12,6 @@ namespace Lunr\Corona\Exceptions;
 
 use Exception;
 use Lunr\Corona\HttpCode;
-use Throwable;
 
 /**
  * Exception for the Unprocessable Entity HTTP error (422).

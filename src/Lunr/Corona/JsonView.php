@@ -11,6 +11,8 @@
 namespace Lunr\Corona;
 
 use Lunr\Core\Configuration;
+use stdClass;
+use Throwable;
 
 /**
  * View class for displaying JSON return values.
@@ -73,7 +75,7 @@ class JsonView extends View
 
         if ($json['data'] === [])
         {
-            $json['data'] = new \stdClass();
+            $json['data'] = new stdClass();
         }
 
         header('Content-type: application/json');
@@ -127,7 +129,7 @@ class JsonView extends View
     /**
      * Build display for uncaught exception output.
      *
-     * @param \Throwable $e Uncaught exception
+     * @param Throwable $e Uncaught exception
      *
      * @return void
      */

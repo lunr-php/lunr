@@ -10,8 +10,8 @@
 
 namespace Lunr\Corona\Exceptions;
 
-use Lunr\Corona\HttpCode;
 use Exception;
+use Lunr\Corona\HttpCode;
 
 /**
  * Exception for the Failed Dependency HTTP error (424).
