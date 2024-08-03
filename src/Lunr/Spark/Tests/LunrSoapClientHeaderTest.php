@@ -11,7 +11,6 @@
 namespace Lunr\Spark\Tests;
 
 use SoapHeader;
-use SoapFault;
 
 /**
  * This class contains tests for the header functions of the LunrSoapClient class.

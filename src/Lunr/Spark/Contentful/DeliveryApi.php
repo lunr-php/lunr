@@ -14,7 +14,6 @@ use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
 use WpOrg\Requests\Exception as RequestsException;
 use WpOrg\Requests\Exception\Http as RequestsExceptionHTTP;
-use WpOrg\Requests\Response;
 use WpOrg\Requests\Session;
 
 /**
