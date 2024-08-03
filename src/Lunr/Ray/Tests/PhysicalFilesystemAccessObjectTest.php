@@ -10,11 +10,9 @@
 
 namespace Lunr\Ray\Tests;
 
+use Lunr\Halo\LunrBaseTest;
 use Lunr\Ray\PhysicalFilesystemAccessObject;
 use Psr\Log\LoggerInterface;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
-use stdClass;
 
 /**
  * This class contains common constructors/destructors and data providers

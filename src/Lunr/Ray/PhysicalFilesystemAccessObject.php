@@ -10,19 +10,19 @@
 
 namespace Lunr\Ray;
 
-use Psr\Log\LoggerInterface;
 use DirectoryIterator;
-use RegexIterator;
-use UnexpectedValueException;
+use FilesystemIterator;
 use InvalidArgumentException;
-use RuntimeException;
 use LogicException;
+use Psr\Log\LoggerInterface;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RecursiveRegexIterator;
+use RegexIterator;
+use RuntimeException;
 use SplFileObject;
-use FilesystemIterator;
 use TypeError;
+use UnexpectedValueException;
 
 /**
  * Class to access a physical filesystem.

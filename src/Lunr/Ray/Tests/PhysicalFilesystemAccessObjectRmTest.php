@@ -10,6 +10,8 @@
 
 namespace Lunr\Ray\Tests;
 
+use Throwable;
+
 /**
  * This class contains tests for file related methods in the PhysicalFilesystemAccessObject.
  *
@@ -30,7 +32,7 @@ class PhysicalFilesystemAccessObjectRmTest extends PhysicalFilesystemAccessObjec
         {
             $fetched = $this->class->rm('/root/tmp');
         }
-        catch (\Throwable $notice)
+        catch (Throwable $notice)
         {
             //NO-OP
         }
