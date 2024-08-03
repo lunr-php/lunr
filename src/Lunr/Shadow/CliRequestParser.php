@@ -10,8 +10,10 @@
 
 namespace Lunr\Shadow;
 
-use Lunr\Corona\RequestParserInterface;
+use http\Header;
+use Lunr\Core\Configuration;
 use Lunr\Corona\HttpMethod;
+use Lunr\Corona\RequestParserInterface;
 use Psr\Log\LogLevel;
 
 /**
@@ -24,13 +26,13 @@ class CliRequestParser implements RequestParserInterface
 
     /**
      * Shared instance of the Configuration class.
-     * @var \Lunr\Core\Configuration
+     * @var Configuration
      */
     protected $config;
 
     /**
      * Shared instance of the Header class.
-     * @var \http\Header
+     * @var Header
      */
     protected $header;
 
@@ -43,9 +45,9 @@ class CliRequestParser implements RequestParserInterface
     /**
      * Constructor.
      *
-     * @param \Lunr\Core\Configuration        $configuration Shared instance of the Configuration class
-     * @param \Lunr\Shadow\CliParserInterface $parser        The CliParser of this request
-     * @param \http\Header                    $header        Shared instance of the Header class
+     * @param Configuration      $configuration Shared instance of the Configuration class
+     * @param CliParserInterface $parser        The CliParser of this request
+     * @param Header             $header        Shared instance of the Header class
      */
     public function __construct($configuration, $parser, $header)
     {
