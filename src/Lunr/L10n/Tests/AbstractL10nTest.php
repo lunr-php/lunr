@@ -10,10 +10,8 @@
 
 namespace Lunr\L10n\Tests;
 
-use Lunr\L10n\AbstractL10n;
 use Lunr\Halo\LunrBaseTest;
 use Psr\Log\LoggerInterface;
-use ReflectionClass;
 
 /**
  * This class contains test methods for the L10n class.

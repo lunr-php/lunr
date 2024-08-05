@@ -10,8 +10,6 @@
 
 namespace Lunr\L10n\Tests;
 
-use Lunr\L10n\GettextL10nProvider;
-
 /**
  * This class contains the tests for the constructor and init function.
  *

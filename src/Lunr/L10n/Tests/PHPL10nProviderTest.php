@@ -10,10 +10,9 @@
 
 namespace Lunr\L10n\Tests;
 
-use Lunr\L10n\PHPL10nProvider;
 use Lunr\Halo\LunrBaseTest;
+use Lunr\L10n\PHPL10nProvider;
 use Psr\Log\LoggerInterface;
-use ReflectionClass;
 
 /**
  * This class contains common setup routines, providers

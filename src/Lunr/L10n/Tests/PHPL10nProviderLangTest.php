@@ -10,8 +10,6 @@
 
 namespace Lunr\L10n\Tests;
 
-use Lunr\L10n\PHPL10nProvider;
-
 /**
  * This class contains the tests for the lang function.
  *

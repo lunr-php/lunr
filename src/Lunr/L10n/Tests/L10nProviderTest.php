@@ -10,12 +10,11 @@
 
 namespace Lunr\L10n\Tests;
 
-use Lunr\L10n\L10nProvider;
 use Lunr\Halo\LunrBaseTest;
+use Lunr\L10n\L10nProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use Psr\Log\LoggerInterface;
-use ReflectionClass;
 
 /**
  * This class contains test methods for the abstract L10nProvider class.
