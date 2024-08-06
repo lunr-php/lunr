@@ -10,8 +10,8 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
-use WpOrg\Requests\Exception\Http\Status400 as RequestsExceptionHTTP400;
 use WpOrg\Requests\Exception as RequestsException;
+use WpOrg\Requests\Exception\Http\Status400 as RequestsExceptionHTTP400;
 
 /**
  * This class contains the tests for the DeliveryApi.

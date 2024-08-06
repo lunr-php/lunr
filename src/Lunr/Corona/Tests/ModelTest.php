@@ -9,9 +9,10 @@
 
 namespace Lunr\Corona\Tests;
 
-use Lunr\Halo\LunrBaseTest;
 use Lunr\Corona\Model;
-use ReflectionClass;
+use Lunr\Halo\LunrBaseTest;
+use Psr\Cache\CacheItemInterface;
+use Psr\Cache\CacheItemPoolInterface;
 
 /**
  * This class contains test methods for the Model class.
@@ -23,13 +24,13 @@ abstract class ModelTest extends LunrBaseTest
 
     /**
      * Shared instance of the cache pool class.
-     * @var \Psr\Cache\CacheItemPoolInterface
+     * @var CacheItemPoolInterface
      */
     protected $cache;
 
     /**
      * Shared instance of the cache item class.
-     * @var \Psr\Cache\CacheItemInterface
+     * @var CacheItemInterface
      */
     protected $item;
 

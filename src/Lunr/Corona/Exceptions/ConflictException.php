@@ -10,8 +10,8 @@
 
 namespace Lunr\Corona\Exceptions;
 
-use Lunr\Corona\HttpCode;
 use Exception;
+use Lunr\Corona\HttpCode;
 
 /**
  * Exception for the Conflict HTTP error (409).

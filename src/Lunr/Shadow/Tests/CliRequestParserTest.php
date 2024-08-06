@@ -10,9 +10,9 @@
 
 namespace Lunr\Shadow\Tests;
 
-use Lunr\Shadow\CliRequestParser;
+use http\Header;
 use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use Lunr\Shadow\CliRequestParser;
 
 /**
  * This class contains common setup routines, providers
@@ -31,7 +31,7 @@ abstract class CliRequestParserTest extends LunrBaseTest
 
     /**
      * Mock instance of the Header class
-     * @var \http\Header
+     * @var Header
      */
     protected $header;
 

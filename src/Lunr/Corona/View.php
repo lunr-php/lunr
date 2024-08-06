@@ -11,6 +11,7 @@
 namespace Lunr\Corona;
 
 use Lunr\Core\Configuration;
+use Throwable;
 
 /**
  * View class used by the Website
@@ -82,7 +83,7 @@ abstract class View
     /**
      * Build display for uncaught exception output.
      *
-     * @param \Throwable $e Uncaught exception
+     * @param Throwable $e Uncaught exception
      *
      * @return void
      */

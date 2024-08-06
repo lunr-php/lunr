@@ -10,9 +10,8 @@
 
 namespace Lunr\Spark\Tests;
 
-use Lunr\Spark\LunrSoapClient;
 use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
+use Lunr\Spark\LunrSoapClient;
 
 /**
  * This class contains common setup routines, providers

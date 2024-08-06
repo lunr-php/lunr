@@ -10,10 +10,6 @@
 
 namespace Lunr\Spark\Tests;
 
-use Lunr\Spark\CentralAuthenticationStore;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
-
 /**
  * This class contains tests for the CentralAuthenticationStore class.
  *

@@ -11,6 +11,8 @@
 namespace Lunr\Corona;
 
 use Lunr\Core\Configuration;
+use stdClass;
+use Throwable;
 
 /**
  * View class for displaying msgpack return values.
@@ -73,7 +75,7 @@ class MsgpackView extends View
 
         if ($msgpack['data'] === [])
         {
-            $msgpack['data'] = new \stdClass();
+            $msgpack['data'] = new stdClass();
         }
 
         header('Content-type: application/msgpack');
@@ -100,7 +102,7 @@ class MsgpackView extends View
 
         $msgpack = [];
 
-        $msgpack['data']   = new \stdClass();
+        $msgpack['data']   = new stdClass();
         $msgpack['status'] = [];
 
         $msgpack['status']['code']    = 500;
@@ -117,7 +119,7 @@ class MsgpackView extends View
     /**
      * Build display for uncaught exception output.
      *
-     * @param \Throwable $e Uncaught exception
+     * @param Throwable $e Uncaught exception
      *
      * @return void
      */
@@ -125,7 +127,7 @@ class MsgpackView extends View
     {
         $msgpack = [];
 
-        $msgpack['data']   = new \stdClass();
+        $msgpack['data']   = new stdClass();
         $msgpack['status'] = [];
 
         $msgpack['status']['code']    = 500;

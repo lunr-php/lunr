@@ -10,7 +10,6 @@
 
 namespace Lunr\Ray\Tests;
 
-use Lunr\Ray\PhysicalFilesystemAccessObject;
 use Throwable;
 
 /**

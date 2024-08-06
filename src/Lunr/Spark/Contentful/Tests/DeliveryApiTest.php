@@ -10,14 +10,13 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
-use Psr\Cache\CacheItemPoolInterface;
-use Psr\Cache\CacheItemInterface;
-use Lunr\Spark\Contentful\DeliveryApi;
 use Lunr\Halo\LunrBaseTest;
+use Lunr\Spark\Contentful\DeliveryApi;
+use Psr\Cache\CacheItemInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
 use WpOrg\Requests\Response;
 use WpOrg\Requests\Session;
-use ReflectionClass;
 
 /**
  * This class contains the tests for the DeliveryApi.

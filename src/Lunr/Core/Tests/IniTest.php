@@ -12,7 +12,6 @@ namespace Lunr\Core\Tests;
 
 use Lunr\Core\Ini;
 use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
 
 /**
  * This class contains common setup routines, providers

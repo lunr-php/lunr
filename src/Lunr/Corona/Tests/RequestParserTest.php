@@ -12,7 +12,6 @@ namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\RequestParser;
 use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
 
 /**
  * This class contains common setup routines, providers

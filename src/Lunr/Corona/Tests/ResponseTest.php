@@ -12,7 +12,6 @@ namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\Response;
 use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
 
 /**
  * This class contains test methods for the Response class.

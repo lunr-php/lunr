@@ -10,6 +10,8 @@
 
 namespace Lunr\Corona\Tests;
 
+use stdClass;
+
 /**
  * This class contains tests for the JsonView class.
  *
@@ -31,7 +33,7 @@ class JsonViewPrintTest extends JsonViewTest
     {
         parent::setUp();
 
-        $this->json = [ 'a' => 100, 'b' => [ 'z' => TRUE ], 'c' => [ NULL ], 'd' => new \stdClass(), 'e' => 'みんな' ];
+        $this->json = [ 'a' => 100, 'b' => [ 'z' => TRUE ], 'c' => [ NULL ], 'd' => new stdClass(), 'e' => 'みんな' ];
     }
 
     /**

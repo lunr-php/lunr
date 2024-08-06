@@ -12,7 +12,6 @@ namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\FrontController;
 use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
 
 /**
  * This class contains common setup routines, providers

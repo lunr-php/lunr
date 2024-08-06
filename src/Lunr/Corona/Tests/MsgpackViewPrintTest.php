@@ -10,6 +10,8 @@
 
 namespace Lunr\Corona\Tests;
 
+use stdClass;
+
 /**
  * This class contains tests for the MsgpackView class.
  *
@@ -31,7 +33,7 @@ class MsgpackViewPrintTest extends MsgpackViewTest
     {
         parent::setUp();
 
-        $this->msgpack = [ 'a' => 100, 'b' => [ 'z' => TRUE ], 'c' => [ NULL ], 'd' => new \stdClass(), 'e' => 'カワイイ' ];
+        $this->msgpack = [ 'a' => 100, 'b' => [ 'z' => TRUE ], 'c' => [ NULL ], 'd' => new stdClass(), 'e' => 'カワイイ' ];
     }
 
     /**

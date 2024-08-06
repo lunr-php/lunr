@@ -10,11 +10,13 @@
 
 namespace Lunr\Corona\Tests;
 
+use Lunr\Core\Configuration;
+use Lunr\Corona\Request;
+use Lunr\Corona\Response;
 use Lunr\Corona\View;
 use Lunr\Halo\LunrBaseTest;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
-use ReflectionClass;
 
 /**
  * This class tests the setup of the view class,
@@ -27,25 +29,25 @@ abstract class ViewTest extends LunrBaseTest
 
     /**
      * Mock instance of the request class.
-     * @var \Lunr\Corona\Request
+     * @var Request
      */
     protected $request;
 
     /**
      * Mock instance of the response class.
-     * @var \Lunr\Corona\Response
+     * @var Response
      */
     protected $response;
 
     /**
      * Mock instance of the configuration class.
-     * @var \Lunr\Core\Configuration
+     * @var Configuration
      */
     protected $configuration;
 
     /**
      * Mock instance of the sub configuration class.
-     * @var \Lunr\Core\Configuration
+     * @var Configuration
      */
     protected $sub_configuration;
 

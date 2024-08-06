@@ -10,10 +10,9 @@
 
 namespace Lunr\Corona\Exceptions\Tests;
 
+use Exception;
 use Lunr\Corona\Exceptions\HttpException;
 use Lunr\Halo\LunrBaseTest;
-use Exception;
-use ReflectionClass;
 
 /**
  * This class contains common setup routines, providers
@@ -26,7 +25,7 @@ abstract class HttpExceptionTest extends LunrBaseTest
 
     /**
      * Previous exception.
-     * @var \Exception
+     * @var Exception
      */
     protected $previous;
 

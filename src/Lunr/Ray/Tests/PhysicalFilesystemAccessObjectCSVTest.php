@@ -10,9 +10,6 @@
 
 namespace Lunr\Ray\Tests;
 
-use Lunr\Ray\PhysicalFilesystemAccessObject;
-use stdClass;
-
 /**
  * This class contains tests for the put_csv_file_content method in the PhysicalFilesystemAccessObject.
  *

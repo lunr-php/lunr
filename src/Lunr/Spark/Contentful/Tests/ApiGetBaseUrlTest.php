@@ -10,10 +10,6 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
-use Lunr\Spark\Contentful\Api;
-use Lunr\Halo\LunrBaseTest;
-use ReflectionClass;
-
 /**
  * This class contains the tests for the Api.
  *

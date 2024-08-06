@@ -10,8 +10,6 @@
 
 namespace Lunr\Ray\Tests;
 
-use Lunr\Ray\PhysicalFilesystemAccessObject;
-
 /**
  * This class contains tests for creating a directory.
  *
