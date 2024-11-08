@@ -33,7 +33,7 @@ class PreviewApi extends DeliveryApi
      * @param LoggerInterface        $logger Shared instance of a Logger class.
      * @param Session                $http   Shared instance of the Requests\Session class.
      */
-    public function __construct($cache, $logger, $http)
+    public function __construct(CacheItemPoolInterface $cache, LoggerInterface $logger, Session $http)
     {
         parent::__construct($cache, $logger, $http);
     }

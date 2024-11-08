@@ -33,31 +33,31 @@ class Api
      * Shared instance of the credentials cache
      * @var CacheItemPoolInterface
      */
-    protected $cache;
+    protected readonly CacheItemPoolInterface $cache;
 
     /**
      * Shared instance of a Logger class.
      * @var LoggerInterface
      */
-    protected $logger;
+    protected readonly LoggerInterface $logger;
 
     /**
      * Shared instance of the Requests\Session class.
      * @var Session
      */
-    protected $http;
+    protected readonly Session $http;
 
     /**
      * Space ID
      * @var string
      */
-    protected $space;
+    protected string $space;
 
     /**
      * Environment
      * @var string
      */
-    protected $environment;
+    protected string $environment;
 
     /**
      * Constructor.
@@ -66,7 +66,7 @@ class Api
      * @param LoggerInterface        $logger Shared instance of a Logger class.
      * @param Session                $http   Shared instance of the Requests\Session class.
      */
-    public function __construct($cache, $logger, $http)
+    public function __construct(CacheItemPoolInterface $cache, LoggerInterface $logger, Session $http)
     {
         $this->cache       = $cache;
         $this->logger      = $logger;
@@ -80,9 +80,6 @@ class Api
      */
     public function __destruct()
     {
-        unset($this->cache);
-        unset($this->logger);
-        unset($this->http);
         unset($this->space);
         unset($this->environment);
     }
@@ -92,9 +89,9 @@ class Api
      *
      * @param string $key Credentials key
      *
-     * @return mixed $return Value of the chosen key
+     * @return string|null Value of the chosen key
      */
-    public function __get($key)
+    public function __get(string $key): ?string
     {
         switch ($key)
         {
@@ -114,7 +111,7 @@ class Api
      *
      * @return void
      */
-    public function __set($key, $value)
+    public function __set(string $key, string $value): void
     {
         switch ($key)
         {
@@ -137,9 +134,9 @@ class Api
      *
      * @param string $space_id Content space ID
      *
-     * @return Api $self Self Reference
+     * @return static $self Self Reference
      */
-    public function set_space_id($space_id)
+    public function set_space_id(string $space_id): static
     {
         $this->space = $space_id;
 
@@ -151,9 +148,9 @@ class Api
      *
      * @param string $environment Content environment
      *
-     * @return Api $self Self Reference
+     * @return static $self Self Reference
      */
-    public function set_environment($environment)
+    public function set_environment(string $environment): static
     {
         $this->environment = $environment;
 
@@ -165,7 +162,7 @@ class Api
      *
      * @return string
      */
-    protected function get_base_url()
+    protected function get_base_url(): string
     {
         $url = static::URL;
 

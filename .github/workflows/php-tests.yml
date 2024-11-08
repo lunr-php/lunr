@@ -9,7 +9,7 @@ jobs:
   php-tests:
     uses: lunr-php/actions-templates/.github/workflows/php-composer.yml@master
     with:
-      phpstan-level: 4
+      phpstan-level: 5
       allow-style-failures: false
       allow-phpstan-failures: false
       phpcs-whitelist: index.php.sample tests/phan.config.php tests/phpstan.autoload.inc.php tests/test.bootstrap.inc.php
