@@ -35,7 +35,7 @@ class DeliveryApi extends Api
      * @param LoggerInterface        $logger Shared instance of a Logger class.
      * @param Session                $http   Shared instance of the Requests\Session class.
      */
-    public function __construct($cache, $logger, $http)
+    public function __construct(CacheItemPoolInterface $cache, LoggerInterface $logger, Session $http)
     {
         parent::__construct($cache, $logger, $http);
     }
@@ -56,7 +56,7 @@ class DeliveryApi extends Api
      *
      * @return array $values Content Array
      */
-    public function get_entries($type, $filters = [])
+    public function get_entries(string $type, array $filters = [])
     {
         $filters['access_token'] = $this->access_token;
         $filters['content_type'] = $type;
@@ -75,7 +75,7 @@ class DeliveryApi extends Api
      *
      * @return array $values Content Array
      */
-    public function get_assets($filters = [])
+    public function get_assets(array $filters = [])
     {
         $filters['access_token'] = $this->access_token;
 
@@ -94,7 +94,7 @@ class DeliveryApi extends Api
      *
      * @return array $parts Array of return values
      */
-    protected function get_json_results($url, $params = [])
+    protected function get_json_results(string $url, array $params = [])
     {
         try
         {

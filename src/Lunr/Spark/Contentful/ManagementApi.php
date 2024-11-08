@@ -35,7 +35,7 @@ class ManagementApi extends Api
      * @param LoggerInterface        $logger Shared instance of a Logger class.
      * @param Session                $http   Shared instance of the Requests\Session class.
      */
-    public function __construct($cache, $logger, $http)
+    public function __construct(CacheItemPoolInterface $cache, LoggerInterface $logger, Session $http)
     {
         parent::__construct($cache, $logger, $http);
     }
@@ -56,7 +56,7 @@ class ManagementApi extends Api
      *
      * @return array $entry Entry
      */
-    public function create_entry($type, $data)
+    public function create_entry(string $type, array $data)
     {
         return $this->get_json_results(
             $this->get_base_url() . '/entries',
@@ -73,7 +73,7 @@ class ManagementApi extends Api
      *
      * @return array $entry Entry
      */
-    public function get_entry($id)
+    public function get_entry(string $id)
     {
         return $this->get_json_results(
             $this->get_base_url() . '/entries/' . $id,
@@ -92,7 +92,7 @@ class ManagementApi extends Api
      *
      * @return array $entry Entry
      */
-    public function update_entry($id, $current_version, $data)
+    public function update_entry(string $id, string $current_version, array $data)
     {
         return $this->get_json_results(
             $this->get_base_url() . '/entries/' . $id,
@@ -110,7 +110,7 @@ class ManagementApi extends Api
      *
      * @return array $entry Entry
      */
-    public function publish_entry($id, $current_version)
+    public function publish_entry(string $id, string $current_version)
     {
         return $this->get_json_results(
             $this->get_base_url() . '/entries/' . $id . '/published',
@@ -127,7 +127,7 @@ class ManagementApi extends Api
      *
      * @return array $entry Entry
      */
-    public function unpublish_entry($id)
+    public function unpublish_entry(string $id)
     {
         return $this->get_json_results(
             $this->get_base_url() . '/entries/' . $id . '/published',
@@ -140,14 +140,14 @@ class ManagementApi extends Api
     /**
      * Fetch and parse results as though they were a json string.
      *
-     * @param string $url     API URL
-     * @param array  $headers Array of headers for the API request
-     * @param array  $data    Data for the API request
-     * @param string $method  HTTP method
+     * @param string       $url     API URL
+     * @param array        $headers Array of headers for the API request
+     * @param array|string $data    Data for the API request
+     * @param string       $method  HTTP method
      *
      * @return array $parts Array of return values
      */
-    protected function get_json_results($url, $headers = [], $data = [], $method = Requests::GET)
+    protected function get_json_results(string $url, array $headers = [], array|string $data = [], string $method = Requests::GET)
     {
         try
         {
