@@ -150,7 +150,7 @@ class WebRequestParser implements RequestParserInterface
             $matches = [];
             if (preg_match('/^Bearer ([^ ]+)$/', $_SERVER['HTTP_AUTHORIZATION'], $matches) === 1)
             {
-                $request['bearer_token'] = $matches[1] ?? NULL;
+                $request['bearer_token'] = $matches[1];
             }
         }
 
