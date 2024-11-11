@@ -20,13 +20,13 @@ abstract class HTMLView extends View
 
     /**
      * List of javascript files to include.
-     * @var array;
+     * @var array
      */
     protected $javascript;
 
     /**
      * List of stylesheets to include.
-     * @var array;
+     * @var array
      */
     protected $stylesheets;
 
