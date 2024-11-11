@@ -170,7 +170,7 @@ class WebRequestParser implements RequestParserInterface
             $request['id'] = str_replace('-', '', uuid_create());
         }
 
-        if (!is_array($_GET) || empty($_GET))
+        if (empty($_GET))
         {
             if (isset($request['controller'], $request['method']) === TRUE)
             {
@@ -209,7 +209,7 @@ class WebRequestParser implements RequestParserInterface
     /**
      * Parse super global variables.
      *
-     * @param array $_VAR  Reference to a super global variable
+     * @param mixed $_VAR  Reference to a super global variable
      * @param bool  $reset Whether to reset the super global variable
      *
      * @return array $var Parsed variable
@@ -280,7 +280,7 @@ class WebRequestParser implements RequestParserInterface
     /**
      * Parse php://input value.
      *
-     * @return string Parsed php://input value
+     * @return string|false Parsed php://input value
      */
     public function parse_raw_data()
     {
