@@ -154,7 +154,7 @@ class Response
      * Set a return code for the given call identifier.
      *
      * @param string $identifier Call identifier
-     * @param int    $value      Return code
+     * @param mixed  $value      Return code
      *
      * @return void
      */

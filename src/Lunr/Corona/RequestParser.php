@@ -142,7 +142,7 @@ class RequestParser implements RequestParserInterface
     /**
      * Parse php://stdin value.
      *
-     * @return string Parsed php://stdin value
+     * @return string|false Parsed php://stdin value
      */
     public function parse_raw_data()
     {
