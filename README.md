@@ -12,16 +12,14 @@ Installation
 Community
 ---------
 
-* [Join the Lunr usergroup][3] or dive right into development with the [developer group][4].
-* Follow us on [GitHub][5].
+* Follow us on [GitHub][3].
 
 Contributing
 ------------
 
 Lunr is an Open Source, community-driven project. Join by contributing code or documentation.
-To do that, make your changes and upload them to our reviewboard at [reviews.lunr.nl][6]
 
-If you encounter any issues when using Lunr you can report them [on github][7]
+If you encounter any issues when using Lunr you can report them [on github][4]
 
 About Us
 --------
@@ -30,8 +28,5 @@ Lunr development is spearheaded by [Move][1].
 
   [1]: https://moveagency.com
   [2]: https://semver.org
-  [3]: https://groups.google.com/forum/#!forum/lunr-users
-  [4]: https://groups.google.com/forum/#!forum/lunr-developers
-  [5]: https://github.com/lunr-php/lunr
-  [6]: https://reviews.lunr.nl
-  [7]: https://github.com/lunr-php/lunr/issues
+  [3]: https://github.com/lunr-php/lunr
+  [4]: https://github.com/lunr-php/lunr/issues
