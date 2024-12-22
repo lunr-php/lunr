@@ -10,6 +10,9 @@
 
 namespace Lunr\Corona;
 
+use BackedEnum;
+use RuntimeException;
+
 /**
  * Request abstraction class.
  * Manages access to $_POST, $_GET values, as well as
@@ -64,7 +67,7 @@ class Request
      *
      * @var array<string, mixed>
      */
-    protected readonly array $request;
+    protected array $request;
 
     /**
      * Stored $_FILES values
@@ -91,6 +94,12 @@ class Request
     protected readonly RequestParserInterface $parser;
 
     /**
+     * Set of registered request value parsers.
+     * @var array<class-string,RequestValueParserInterface>
+     */
+    protected array $parsers;
+
+    /**
      * The request values to mock.
      * @var array<string,mixed>
      */
@@ -103,7 +112,8 @@ class Request
      */
     public function __construct($parser)
     {
-        $this->parser = $parser;
+        $this->parser  = $parser;
+        $this->parsers = [];
 
         $this->request  = $parser->parse_request();
         $this->server   = $parser->parse_server();
@@ -122,8 +132,8 @@ class Request
      */
     public function __destruct()
     {
-        // Intentionally not unsetting $this->mock and $this->raw_data, since
-        // that may break access to mocked request values during PHP shutdown.
+        // Intentionally not unsetting request value properties, since
+        // that may break access to them during PHP shutdown.
     }
 
     /**
@@ -152,6 +162,47 @@ class Request
         {
             return NULL;
         }
+    }
+
+    /**
+     * Get a request value.
+     *
+     * @param BackedEnum&RequestValueInterface $key The identifier/name of the request value to get
+     *
+     * @return scalar The requested value
+     */
+    public function get(BackedEnum&RequestValueInterface $key): bool|float|int|string|null
+    {
+        if (array_key_exists($key->value, $this->mock))
+        {
+            return $this->mock[$key->value];
+        }
+
+        if (array_key_exists($key->value, $this->request))
+        {
+            return $this->request[$key->value];
+        }
+
+        if (!isset($this->parsers[$key::class]))
+        {
+            throw new RuntimeException('No parser registered for requested value ("' . $key->value . '")!');
+        }
+
+        $this->request[$key->value] = $this->parsers[$key::class]->get($key);
+
+        return $this->request[$key->value];
+    }
+
+    /**
+     * Register a request value parser.
+     *
+     * @param RequestValueParserInterface $parser A request value parser
+     *
+     * @return void
+     */
+    public function register_parser(RequestValueParserInterface $parser): void
+    {
+        $this->parsers[$parser->get_request_value_type()] = $parser;
     }
 
     /**

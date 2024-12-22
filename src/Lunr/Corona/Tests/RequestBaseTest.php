@@ -10,6 +10,8 @@
 
 namespace Lunr\Corona\Tests;
 
+use Lunr\Corona\RequestValueParserInterface;
+
 /**
  * Basic tests for the case of empty superglobals.
  *
@@ -93,6 +95,29 @@ class RequestBaseTest extends RequestTest
 
         $this->assertArrayHasKey($key, $request);
         $this->assertEquals($value, $request[$key]);
+    }
+
+    /**
+     * Test that register_parser() registers a parser.
+     *
+     * @covers Lunr\Corona\Request::register_parser
+     */
+    public function testRegisterParser(): void
+    {
+        $parser = $this->getMockBuilder(RequestValueParserInterface::class)
+                       ->getMock();
+
+        $parser->expects($this->once())
+               ->method('get_request_value_type')
+               ->willReturn('Lunr\Corona\Parser\Foo\Foo');
+
+        $this->class->register_parser($parser);
+
+        $parsers = $this->get_reflection_property_value('parsers');
+
+        $this->assertCount(1, $parsers);
+        $this->assertArrayHasKey('Lunr\Corona\Parser\Foo\Foo', $parsers);
+        $this->assertEquals($parser, $parsers['Lunr\Corona\Parser\Foo\Foo']);
     }
 
 }
