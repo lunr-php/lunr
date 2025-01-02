@@ -32,7 +32,7 @@ class HttpException extends Exception
      * @param int            $app_code Application error code
      * @param Exception|null $previous The previously thrown exception
      */
-    public function __construct(?string $message = NULL, int $code = 0, int $app_code = 0, Exception $previous = NULL)
+    public function __construct(?string $message = NULL, int $code = 0, int $app_code = 0, ?Exception $previous = NULL)
     {
         parent::__construct($message ?? '', $code, $previous);
 
