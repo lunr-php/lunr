@@ -12,6 +12,7 @@ jobs:
       phpstan-level: 5
       allow-style-failures: false
       allow-phpstan-failures: false
+      codestyle-branch: '0.10.1'
       phpcs-whitelist: index.php.sample tests/phan.config.php tests/phpstan.autoload.inc.php tests/test.bootstrap.inc.php
       php-extensions: http, msgpack, uopz, xdebug, uuid
       stable-php-versions: '["8.1"]'
