@@ -359,28 +359,6 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
         $this->cleanup_request_test();
     }
 
-    /**
-     * Test that the authentication bearer token is stored correctly.
-     */
-    public function testRequestWithPassedBearerToken(): void
-    {
-        $this->prepare_request_test();
-
-        $ast = $this->get_reflection_property_value('ast');
-
-        $ast['bearer-token'] = [ 'a1b2c3d4' ];
-
-        $this->set_reflection_property_value('ast', $ast);
-
-        $request = $this->class->parse_request();
-
-        $this->assertIsArray($request);
-        $this->assertArrayHasKey('bearer_token', $request);
-        $this->assertSame('a1b2c3d4', $request['bearer_token']);
-
-        $this->cleanup_request_test();
-    }
-
 }
 
 ?>

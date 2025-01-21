@@ -22,6 +22,7 @@
         <testsuite name="Corona">
             <directory>../src/Lunr/Corona/Tests/</directory>
             <directory>../src/Lunr/Corona/Exceptions/Tests/</directory>
+            <directory>../src/Lunr/Corona/Parsers/BearerToken/Tests/</directory>
         </testsuite>
         <testsuite name="Ray">
             <directory>../src/Lunr/Ray/Tests/</directory>
@@ -42,6 +43,7 @@
             <directory>../src/Lunr/Core/Tests/</directory>
             <directory>../src/Lunr/Corona/Tests/</directory>
             <directory>../src/Lunr/Corona/Exceptions/Tests/</directory>
+            <directory>../src/Lunr/Corona/Parsers/BearerToken/Tests/</directory>
             <directory>../src/Lunr/Ray/Tests/</directory>
             <directory>../src/Lunr/Shadow/Tests/</directory>
             <directory>../src/Lunr/Spark/Tests/</directory>

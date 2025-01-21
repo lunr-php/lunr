@@ -143,17 +143,6 @@ class WebRequestParser implements RequestParserInterface
             $request['useragent'] = $_SERVER['HTTP_USER_AGENT'];
         }
 
-        $request['bearer_token'] = NULL;
-
-        if (array_key_exists('HTTP_AUTHORIZATION', $_SERVER))
-        {
-            $matches = [];
-            if (preg_match('/^Bearer ([^ ]+)$/', $_SERVER['HTTP_AUTHORIZATION'], $matches) === 1)
-            {
-                $request['bearer_token'] = $matches[1];
-            }
-        }
-
         // Preset with default values:
         $request['controller'] = $this->config['default_controller'];
         $request['method']     = $this->config['default_method'];

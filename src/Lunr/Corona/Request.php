@@ -33,7 +33,6 @@ use RuntimeException;
  * @property-read string $call             The call identifier, combining controller and method
  * @property-read string $verbosity        Logging verbosity
  * @property-read string $id               Unique request ID
- * @property-read string $bearer_token     An authorization token
  */
 class Request
 {
