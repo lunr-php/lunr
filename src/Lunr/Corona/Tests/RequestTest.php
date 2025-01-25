@@ -110,7 +110,7 @@ abstract class RequestTest extends LunrBaseTest
      */
     protected function get_request_values(): array
     {
-        $request = [
+        return [
             'protocol'         => 'https',
             'domain'           => 'www.domain.com',
             'port'             => '443',
@@ -126,8 +126,6 @@ abstract class RequestTest extends LunrBaseTest
             'id'               => '962161b27a0141f384c63834ad001adf',
             'bearer_token'     => '123456789',
         ];
-
-        return $request;
     }
 
     /**

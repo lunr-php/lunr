@@ -63,9 +63,7 @@ class DeliveryApi extends Api
 
         $url = $this->get_base_url() . '/entries';
 
-        $values = $this->get_json_results($url, $filters);
-
-        return $values;
+        return $this->get_json_results($url, $filters);
     }
 
     /**
@@ -81,9 +79,7 @@ class DeliveryApi extends Api
 
         $url = $this->get_base_url() . '/assets';
 
-        $values = $this->get_json_results($url, $filters);
-
-        return $values;
+        return $this->get_json_results($url, $filters);
     }
 
     /**

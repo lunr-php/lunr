@@ -112,7 +112,7 @@ class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAcce
 
         try
         {
-            $value = $this->class->get_directory_listing($directory);
+            $this->class->get_directory_listing($directory);
         }
         catch (Throwable $e)
         {
