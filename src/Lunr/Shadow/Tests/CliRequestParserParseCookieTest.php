@@ -70,7 +70,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
 
         $property->setValue($this->class, $ast);
 
-        $result = $this->class->parse_cookie();
+        $this->class->parse_cookie();
 
         $after = $property->getValue($this->class);
 

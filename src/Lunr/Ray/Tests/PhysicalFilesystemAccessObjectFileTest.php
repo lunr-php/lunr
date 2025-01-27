@@ -319,8 +319,6 @@ class PhysicalFilesystemAccessObjectFileTest extends PhysicalFilesystemAccessObj
     {
         $file = tempnam(sys_get_temp_dir(), 'phpunit_');
 
-        $filename = is_object($mode) ? '' : $file;
-
         $this->logger->expects($this->once())
                      ->method('error')
                      ->with('{message}', $this->arrayHasKey('message'));

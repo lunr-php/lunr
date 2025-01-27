@@ -70,7 +70,7 @@ class CliRequestParserParseGetTest extends CliRequestParserTest
 
         $property->setValue($this->class, $ast);
 
-        $result = $this->class->parse_get();
+        $this->class->parse_get();
 
         $after = $property->getValue($this->class);
 
