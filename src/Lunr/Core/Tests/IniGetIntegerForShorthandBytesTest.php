@@ -15,7 +15,7 @@ namespace Lunr\Core\Tests;
  *
  * @covers Lunr\Core\Ini
  */
-class IniGetIntegerForShorthandBytesTest extends IniTest
+class IniGetIntegerForShorthandBytesTest extends IniTestCase
 {
 
     /**

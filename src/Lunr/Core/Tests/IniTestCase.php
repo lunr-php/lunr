@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the IniTest class.
+ * This file contains the IniTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2016 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -11,7 +11,7 @@
 namespace Lunr\Core\Tests;
 
 use Lunr\Core\Ini;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
@@ -19,7 +19,7 @@ use Lunr\Halo\LunrBaseTest;
  *
  * @covers Lunr\Core\Ini
  */
-abstract class IniTest extends LunrBaseTest
+abstract class IniTestCase extends LunrBaseTestCase
 {
 
     /**

@@ -16,7 +16,7 @@ namespace Lunr\Core\Tests;
  *
  * @covers Lunr\Core\Ini
  */
-class IniSectionTest extends IniTest
+class IniSectionTest extends IniTestCase
 {
 
     /**
@@ -34,7 +34,7 @@ class IniSectionTest extends IniTest
      */
     public function testSectionIsNotNull(): void
     {
-        $this->assertEquals('date', $this->get_reflection_property_value('section'));
+        $this->assertEquals('date', $this->getReflectionPropertyValue('section'));
     }
 
     /**
