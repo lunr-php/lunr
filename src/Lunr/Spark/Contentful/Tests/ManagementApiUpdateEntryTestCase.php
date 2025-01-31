@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the ManagementApiUpdateEntryTest class.
+ * This file contains the ManagementApiUpdateEntryTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2015 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -18,7 +18,7 @@ use WpOrg\Requests\Requests;
  *
  * @covers Lunr\Spark\Contentful\ManagementApi
  */
-class ManagementApiUpdateEntryTest extends ManagementApiTest
+class ManagementApiUpdateEntryTestCase extends ManagementApiTest
 {
 
     /**

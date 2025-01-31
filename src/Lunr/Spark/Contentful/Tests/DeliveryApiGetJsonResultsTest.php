@@ -18,7 +18,7 @@ use WpOrg\Requests\Exception\Http\Status400 as RequestsExceptionHTTP400;
  *
  * @covers Lunr\Spark\Contentful\DeliveryApi
  */
-class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
+class DeliveryApiGetJsonResultsTest extends DeliveryApiTestCase
 {
 
     /**
@@ -33,7 +33,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
                    ->with('http://localhost', [], [])
                    ->willReturn($this->response);
 
-        $method = $this->get_accessible_reflection_method('get_json_results');
+        $method = $this->getReflectionMethod('get_json_results');
 
         $method->invokeArgs($this->class, [ 'http://localhost', [] ]);
     }
@@ -50,7 +50,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
                    ->with('http://localhost', [], [ 'param1' => 1, 'param2' => 2 ])
                    ->willReturn($this->response);
 
-        $method = $this->get_accessible_reflection_method('get_json_results');
+        $method = $this->getReflectionMethod('get_json_results');
 
         $method->invokeArgs($this->class, [ 'http://localhost', [ 'param1' => 1, 'param2' => 2 ] ]);
     }
@@ -86,7 +86,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
                      ->method('warning')
                      ->with('Contentful API Request ({request}) failed with id "{id}": {message}', $context);
 
-        $method = $this->get_accessible_reflection_method('get_json_results');
+        $method = $this->getReflectionMethod('get_json_results');
 
         $method->invokeArgs($this->class, [ 'http://localhost' ]);
     }
@@ -112,7 +112,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
                      ->method('warning')
                      ->with('Contentful API Request ({request}) failed! {message}', $context);
 
-        $method = $this->get_accessible_reflection_method('get_json_results');
+        $method = $this->getReflectionMethod('get_json_results');
 
         $method->invokeArgs($this->class, [ 'http://localhost' ]);
     }
@@ -135,7 +135,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
         $this->logger->expects($this->never())
                      ->method('error');
 
-        $method = $this->get_accessible_reflection_method('get_json_results');
+        $method = $this->getReflectionMethod('get_json_results');
 
         $method->invokeArgs($this->class, [ 'http://localhost' ]);
     }
@@ -165,7 +165,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
         $this->response->body        = json_encode($output);
         $this->response->url         = 'http://localhost/url';
 
-        $method = $this->get_accessible_reflection_method('get_json_results');
+        $method = $this->getReflectionMethod('get_json_results');
 
         $value = $method->invokeArgs($this->class, [ 'http://localhost' ]);
 
@@ -194,7 +194,7 @@ class DeliveryApiGetJsonResultsTest extends DeliveryApiTest
         $this->response->status_code = 200;
         $this->response->body        = json_encode($output);
 
-        $method = $this->get_accessible_reflection_method('get_json_results');
+        $method = $this->getReflectionMethod('get_json_results');
 
         $this->assertEquals([ 'param1' => 1, 'param2' => 2 ], $method->invokeArgs($this->class, [ 'http://localhost' ]));
     }

@@ -15,7 +15,7 @@ namespace Lunr\Spark\Contentful\Tests;
  *
  * @covers Lunr\Spark\Contentful\Api
  */
-class ApiSetTest extends ApiTest
+class ApiSetTest extends ApiTestCase
 {
 
     /**

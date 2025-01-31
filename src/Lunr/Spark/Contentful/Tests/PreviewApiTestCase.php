@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the ManagementApiTest class.
+ * This file contains the PreviewApiTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2015 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -10,8 +10,8 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
-use Lunr\Halo\LunrBaseTest;
-use Lunr\Spark\Contentful\ManagementApi;
+use Lunr\Halo\LunrBaseTestCase;
+use Lunr\Spark\Contentful\PreviewApi;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
@@ -19,11 +19,11 @@ use WpOrg\Requests\Response;
 use WpOrg\Requests\Session;
 
 /**
- * This class contains the tests for the ManagementApi.
+ * This class contains the tests for the PreviewApi.
  *
- * @covers Lunr\Spark\Contentful\ManagementApi
+ * @covers Lunr\Spark\Contentful\PreviewApi
  */
-abstract class ManagementApiTest extends LunrBaseTest
+abstract class PreviewApiTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -58,9 +58,9 @@ abstract class ManagementApiTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var ManagementApi
+     * @var PreviewApi
      */
-    protected ManagementApi $class;
+    protected PreviewApi $class;
 
     /**
      * Testcase Constructor.
@@ -73,7 +73,7 @@ abstract class ManagementApiTest extends LunrBaseTest
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->response = $this->getMockBuilder('WpOrg\Requests\Response')->getMock();
 
-        $this->class = new ManagementApi($this->cache, $this->logger, $this->http);
+        $this->class = new PreviewApi($this->cache, $this->logger, $this->http);
 
         parent::baseSetUp($this->class);
     }

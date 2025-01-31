@@ -18,7 +18,7 @@ use WpOrg\Requests\Requests;
  *
  * @covers Lunr\Spark\Contentful\ManagementApi
  */
-class ManagementApiCreateEntryTest extends ManagementApiTest
+class ManagementApiCreateEntryTest extends ManagementApiTestCase
 {
 
     /**

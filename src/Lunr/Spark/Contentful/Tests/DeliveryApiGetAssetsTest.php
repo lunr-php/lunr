@@ -18,7 +18,7 @@ use WpOrg\Requests\Exception\Http\Status400 as RequestsExceptionHTTP400;
  *
  * @covers Lunr\Spark\Contentful\DeliveryApi
  */
-class DeliveryApiGetAssetsTest extends DeliveryApiTest
+class DeliveryApiGetAssetsTest extends DeliveryApiTestCase
 {
 
     /**
@@ -28,7 +28,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
      */
     public function testGetAssetsWithoutFiltersReturnsEmptyResultOnRequestError(): void
     {
-        $this->set_reflection_property_value('space', '5p4c31D');
+        $this->setReflectionPropertyValue('space', '5p4c31D');
 
         $this->cache->expects($this->once())
                     ->method('getItem')
@@ -87,7 +87,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
      */
     public function testGetAssetsWithFiltersReturnsEmptyResultOnRequestError(): void
     {
-        $this->set_reflection_property_value('space', '5p4c31D');
+        $this->setReflectionPropertyValue('space', '5p4c31D');
 
         $this->cache->expects($this->once())
                     ->method('getItem')
@@ -146,7 +146,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
      */
     public function testGetAssetsWithoutFiltersReturnsEmptyResultOnRequestFailure(): void
     {
-        $this->set_reflection_property_value('space', '5p4c31D');
+        $this->setReflectionPropertyValue('space', '5p4c31D');
 
         $this->cache->expects($this->once())
                     ->method('getItem')
@@ -193,7 +193,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
      */
     public function testGetAssetsWithFiltersReturnsEmptyResultOnRequestFailure(): void
     {
-        $this->set_reflection_property_value('space', '5p4c31D');
+        $this->setReflectionPropertyValue('space', '5p4c31D');
 
         $this->cache->expects($this->once())
                     ->method('getItem')
@@ -240,7 +240,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
      */
     public function testGetAssetsWithoutFiltersReturnsResultsOnSuccessfulRequest(): void
     {
-        $this->set_reflection_property_value('space', '5p4c31D');
+        $this->setReflectionPropertyValue('space', '5p4c31D');
 
         $output = [
             'param1' => 1,
@@ -279,7 +279,7 @@ class DeliveryApiGetAssetsTest extends DeliveryApiTest
      */
     public function testGetAssetsWithFiltersReturnsResultsOnSuccessfulRequest(): void
     {
-        $this->set_reflection_property_value('space', '5p4c31D');
+        $this->setReflectionPropertyValue('space', '5p4c31D');
 
         $output = [
             'param1' => 1,

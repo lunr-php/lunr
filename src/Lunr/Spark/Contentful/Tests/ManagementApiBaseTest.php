@@ -17,7 +17,7 @@ use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
  *
  * @covers Lunr\Spark\Contentful\ManagementApi
  */
-class ManagementApiBaseTest extends ManagementApiTest
+class ManagementApiBaseTest extends ManagementApiTestCase
 {
 
     use PsrLoggerTestTrait;

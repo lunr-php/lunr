@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the LunrSoapClientTest class.
+ * This file contains the LunrSoapClientTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2013 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -10,7 +10,7 @@
 
 namespace Lunr\Spark\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use Lunr\Spark\LunrSoapClient;
 
 /**
@@ -19,7 +19,7 @@ use Lunr\Spark\LunrSoapClient;
  *
  * @covers Lunr\Spark\LunrSoapClient
  */
-abstract class LunrSoapClientTest extends LunrBaseTest
+abstract class LunrSoapClientTestCase extends LunrBaseTestCase
 {
 
     /**

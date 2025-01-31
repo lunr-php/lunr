@@ -17,7 +17,7 @@ use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
  *
  * @covers Lunr\Spark\Contentful\DeliveryApi
  */
-class DeliveryApiBaseTest extends DeliveryApiTest
+class DeliveryApiBaseTest extends DeliveryApiTestCase
 {
 
     use PsrLoggerTestTrait;

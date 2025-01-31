@@ -15,7 +15,7 @@ namespace Lunr\Spark\Tests;
  *
  * @covers Lunr\Spark\CentralAuthenticationStore
  */
-class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
+class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTestCase
 {
 
     /**
@@ -23,7 +23,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      */
     public function testStoreIsEmptyByDefault(): void
     {
-        $this->assertArrayEmpty($this->get_reflection_property_value('store'));
+        $this->assertArrayEmpty($this->getReflectionPropertyValue('store'));
     }
 
     /**
@@ -35,7 +35,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
     {
         $this->class->add('module', 'key', 'value');
 
-        $this->assertArrayHasKey('module', $this->get_reflection_property_value('store'));
+        $this->assertArrayHasKey('module', $this->getReflectionPropertyValue('store'));
     }
 
     /**
@@ -47,7 +47,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
     {
         $this->class->add('module', 'key', 'value');
 
-        $module = $this->get_reflection_property_value('store')['module'];
+        $module = $this->getReflectionPropertyValue('store')['module'];
 
         $this->assertArrayHasKey('key', $module);
         $this->assertEquals('value', $module['key']);
@@ -60,11 +60,11 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      */
     public function testAddOverwritesOldValue(): void
     {
-        $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value1' ] ]);
+        $this->setReflectionPropertyValue('store', [ 'module' => [ 'key' => 'value1' ] ]);
 
         $this->class->add('module', 'key', 'value');
 
-        $module = $this->get_reflection_property_value('store')['module'];
+        $module = $this->getReflectionPropertyValue('store')['module'];
 
         $this->assertArrayHasKey('key', $module);
         $this->assertEquals('value', $module['key']);
@@ -77,11 +77,11 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      */
     public function testDeleteUnsetsExistingIndex(): void
     {
-        $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value' ] ]);
+        $this->setReflectionPropertyValue('store', [ 'module' => [ 'key' => 'value' ] ]);
 
         $this->class->delete('module', 'key');
 
-        $module = $this->get_reflection_property_value('store')['module'];
+        $module = $this->getReflectionPropertyValue('store')['module'];
 
         $this->assertArrayEmpty($module);
     }
@@ -93,13 +93,13 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      */
     public function testDeleteDoesNothingWhenIndexDoesNotExist(): void
     {
-        $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value' ] ]);
+        $this->setReflectionPropertyValue('store', [ 'module' => [ 'key' => 'value' ] ]);
 
-        $before = $this->get_reflection_property_value('store');
+        $before = $this->getReflectionPropertyValue('store');
 
         $this->class->delete('module', 'key1');
 
-        $after = $this->get_reflection_property_value('store');
+        $after = $this->getReflectionPropertyValue('store');
 
         $this->assertSame($before, $after);
     }
@@ -121,7 +121,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      */
     public function testGetReturnsNullWhenIndexDoesNotExist(): void
     {
-        $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value' ] ]);
+        $this->setReflectionPropertyValue('store', [ 'module' => [ 'key' => 'value' ] ]);
 
         $this->assertNull($this->class->get('module', 'key1'));
     }
@@ -133,7 +133,7 @@ class CentralAuthenticationStoreBaseTest extends CentralAuthenticationStoreTest
      */
     public function testGetReturnsValueWhenIndexExists(): void
     {
-        $this->set_reflection_property_value('store', [ 'module' => [ 'key' => 'value' ] ]);
+        $this->setReflectionPropertyValue('store', [ 'module' => [ 'key' => 'value' ] ]);
 
         $this->assertEquals('value', $this->class->get('module', 'key'));
     }

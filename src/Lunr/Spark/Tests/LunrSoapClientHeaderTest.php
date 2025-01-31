@@ -17,7 +17,7 @@ use SoapHeader;
  *
  * @covers Lunr\Spark\LunrSoapClient
  */
-class LunrSoapClientHeaderTest extends LunrSoapClientTest
+class LunrSoapClientHeaderTest extends LunrSoapClientTestCase
 {
 
     /**

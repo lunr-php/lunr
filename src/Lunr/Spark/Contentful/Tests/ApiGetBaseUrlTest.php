@@ -15,7 +15,7 @@ namespace Lunr\Spark\Contentful\Tests;
  *
  * @covers Lunr\Spark\Contentful\Api
  */
-class ApiGetBaseUrlTest extends ApiTest
+class ApiGetBaseUrlTest extends ApiTestCase
 {
 
     /**
@@ -25,7 +25,7 @@ class ApiGetBaseUrlTest extends ApiTest
      */
     public function testGetBaseUrlWithoutValues(): void
     {
-        $method = $this->get_accessible_reflection_method('get_base_url');
+        $method = $this->getReflectionMethod('get_base_url');
         $result = $method->invoke($this->class);
 
         $this->assertSame('https://www.contentful.com', $result);
@@ -38,9 +38,9 @@ class ApiGetBaseUrlTest extends ApiTest
      */
     public function testGetBaseUrlWithOnlySpace(): void
     {
-        $this->set_reflection_property_value('space', '5p4c31D');
+        $this->setReflectionPropertyValue('space', '5p4c31D');
 
-        $method = $this->get_accessible_reflection_method('get_base_url');
+        $method = $this->getReflectionMethod('get_base_url');
         $result = $method->invoke($this->class);
 
         $this->assertSame('https://www.contentful.com/spaces/5p4c31D', $result);
@@ -53,9 +53,9 @@ class ApiGetBaseUrlTest extends ApiTest
      */
     public function testGetBaseUrlWithOnlyEnvironment(): void
     {
-        $this->set_reflection_property_value('environment', 'master');
+        $this->setReflectionPropertyValue('environment', 'master');
 
-        $method = $this->get_accessible_reflection_method('get_base_url');
+        $method = $this->getReflectionMethod('get_base_url');
         $result = $method->invoke($this->class);
 
         $this->assertSame('https://www.contentful.com/environments/master', $result);
@@ -68,10 +68,10 @@ class ApiGetBaseUrlTest extends ApiTest
      */
     public function testGetBaseUrlWithAllValues(): void
     {
-        $this->set_reflection_property_value('space', '5p4c31D');
-        $this->set_reflection_property_value('environment', 'master');
+        $this->setReflectionPropertyValue('space', '5p4c31D');
+        $this->setReflectionPropertyValue('environment', 'master');
 
-        $method = $this->get_accessible_reflection_method('get_base_url');
+        $method = $this->getReflectionMethod('get_base_url');
         $result = $method->invoke($this->class);
 
         $this->assertSame('https://www.contentful.com/spaces/5p4c31D/environments/master', $result);

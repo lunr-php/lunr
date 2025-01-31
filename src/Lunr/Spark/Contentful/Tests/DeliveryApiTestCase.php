@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the ApiTest class.
+ * This file contains the DeliveryApiTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2015 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -10,8 +10,8 @@
 
 namespace Lunr\Spark\Contentful\Tests;
 
-use Lunr\Halo\LunrBaseTest;
-use Lunr\Spark\Contentful\Api;
+use Lunr\Halo\LunrBaseTestCase;
+use Lunr\Spark\Contentful\DeliveryApi;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
@@ -19,11 +19,11 @@ use WpOrg\Requests\Response;
 use WpOrg\Requests\Session;
 
 /**
- * This class contains the tests for the Api.
+ * This class contains the tests for the DeliveryApi.
  *
- * @covers Lunr\Spark\Contentful\Api
+ * @covers Lunr\Spark\Contentful\DeliveryApi
  */
-abstract class ApiTest extends LunrBaseTest
+abstract class DeliveryApiTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -58,9 +58,9 @@ abstract class ApiTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var Api
+     * @var DeliveryApi
      */
-    protected Api $class;
+    protected DeliveryApi $class;
 
     /**
      * Testcase Constructor.
@@ -73,7 +73,7 @@ abstract class ApiTest extends LunrBaseTest
         $this->logger   = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
         $this->response = $this->getMockBuilder('WpOrg\Requests\Response')->getMock();
 
-        $this->class = new Api($this->cache, $this->logger, $this->http);
+        $this->class = new DeliveryApi($this->cache, $this->logger, $this->http);
 
         parent::baseSetUp($this->class);
     }
@@ -91,34 +91,6 @@ abstract class ApiTest extends LunrBaseTest
         unset($this->response);
 
         parent::tearDown();
-    }
-
-    /**
-     * Unit test data provider for general __get() __set() keys.
-     *
-     * @return array $keys Array of keys
-     */
-    public function generalKeyProvider(): array
-    {
-        $keys   = [];
-        $keys[] = [ 'access_token' ];
-        $keys[] = [ 'management_token' ];
-
-        return $keys;
-    }
-
-    /**
-     * Unit test data provider for get methods.
-     *
-     * @return array $methods Array of get methods
-     */
-    public function getMethodProvider(): array
-    {
-        $methods   = [];
-        $methods[] = [ 'get' ];
-        $methods[] = [ 'GET' ];
-
-        return $methods;
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the CentralAuthenticationStoreTest class.
+ * This file contains the CentralAuthenticationStoreTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2013 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -10,7 +10,7 @@
 
 namespace Lunr\Spark\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use Lunr\Spark\CentralAuthenticationStore;
 
 /**
@@ -19,7 +19,7 @@ use Lunr\Spark\CentralAuthenticationStore;
  *
  * @covers Lunr\Spark\CentralAuthenticationStore
  */
-abstract class CentralAuthenticationStoreTest extends LunrBaseTest
+abstract class CentralAuthenticationStoreTestCase extends LunrBaseTestCase
 {
 
     /**

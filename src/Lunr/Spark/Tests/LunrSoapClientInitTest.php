@@ -15,7 +15,7 @@ namespace Lunr\Spark\Tests;
  *
  * @covers Lunr\Spark\LunrSoapClient
  */
-class LunrSoapClientInitTest extends LunrSoapClientTest
+class LunrSoapClientInitTest extends LunrSoapClientTestCase
 {
 
     /**

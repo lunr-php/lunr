@@ -18,7 +18,7 @@ use WpOrg\Requests\Exception\Http\Status400 as RequestsExceptionHTTP400;
  *
  * @covers Lunr\Spark\Contentful\DeliveryApi
  */
-class DeliveryApiGetEntriesTest extends DeliveryApiTest
+class DeliveryApiGetEntriesTest extends DeliveryApiTestCase
 {
 
     /**

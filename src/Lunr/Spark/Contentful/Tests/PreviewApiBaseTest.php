@@ -17,7 +17,7 @@ use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
  *
  * @covers Lunr\Spark\Contentful\PreviewApi
  */
-class PreviewApiBaseTest extends PreviewApiTest
+class PreviewApiBaseTest extends PreviewApiTestCase
 {
 
     use PsrLoggerTestTrait;
