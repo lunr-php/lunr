@@ -17,7 +17,7 @@ use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
  *
  * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
-class PhysicalFilesystemAccessObjectBaseTest extends PhysicalFilesystemAccessObjectTest
+class PhysicalFilesystemAccessObjectBaseTest extends PhysicalFilesystemAccessObjectTestCase
 {
 
     use PsrLoggerTestTrait;

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the PhysicalFilesystemAccessObjectTest class.
+ * This file contains the PhysicalFilesystemAccessObjectTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2013 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -10,7 +10,7 @@
 
 namespace Lunr\Ray\Tests;
 
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use Lunr\Ray\PhysicalFilesystemAccessObject;
 use Psr\Log\LoggerInterface;
 
@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
  *
  * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
-abstract class PhysicalFilesystemAccessObjectTest extends LunrBaseTest
+abstract class PhysicalFilesystemAccessObjectTestCase extends LunrBaseTestCase
 {
 
     /**

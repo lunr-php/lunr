@@ -15,7 +15,7 @@ namespace Lunr\Ray\Tests;
  *
  * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
-class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesystemAccessObjectTest
+class PhysicalFilesystemAccessObjectListDirectoriesTest extends PhysicalFilesystemAccessObjectTestCase
 {
 
     /**

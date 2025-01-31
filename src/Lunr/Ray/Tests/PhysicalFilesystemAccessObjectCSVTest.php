@@ -15,7 +15,7 @@ namespace Lunr\Ray\Tests;
  *
  * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
-class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObjectTest
+class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObjectTestCase
 {
 
     /**
@@ -25,7 +25,7 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
      */
     public function testPutCSVFileContentCannotOpenFile(): void
     {
-        $this->mock_function('fopen', function () { return FALSE; });
+        $this->mockFunction('fopen', function () { return FALSE; });
 
         $this->logger->expects($this->once())
              ->method('warning')
@@ -33,7 +33,7 @@ class PhysicalFilesystemAccessObjectCSVTest extends PhysicalFilesystemAccessObje
 
         $this->assertFalse($this->class->put_csv_file_content('filepath', [ [ 'value1', 'value2' ] ]));
 
-        $this->unmock_function('fopen');
+        $this->unmockFunction('fopen');
     }
 
     /**

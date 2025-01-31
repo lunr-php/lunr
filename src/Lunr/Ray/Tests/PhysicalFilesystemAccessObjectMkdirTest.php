@@ -15,7 +15,7 @@ namespace Lunr\Ray\Tests;
  *
  * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
-class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessObjectTest
+class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessObjectTestCase
 {
 
     /**
@@ -46,7 +46,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
     {
         $directory = TEST_STATICS . '/Ray/test_directory';
 
-        $this->mock_function('mkdir', function () { return FALSE; });
+        $this->mockFunction('mkdir', function () { return FALSE; });
 
         $this->logger->expects($this->once())
                      ->method('warning')
@@ -54,7 +54,7 @@ class PhysicalFilesystemAccessObjectMkdirTest extends PhysicalFilesystemAccessOb
 
         $this->assertFalse($this->class->mkdir($directory));
 
-        $this->unmock_function('mkdir');
+        $this->unmockFunction('mkdir');
     }
 
     /**

@@ -17,7 +17,7 @@ use Throwable;
  *
  * @covers Lunr\Ray\PhysicalFilesystemAccessObject
  */
-class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAccessObjectTest
+class PhysicalFilesystemAccessObjectDirectoryTest extends PhysicalFilesystemAccessObjectTestCase
 {
 
     /**
