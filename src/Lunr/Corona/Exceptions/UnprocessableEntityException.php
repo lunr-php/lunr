@@ -23,12 +23,12 @@ class UnprocessableEntityException extends HttpException
      * Constructor.
      *
      * @param string|null    $message  The Exception message to throw.
-     * @param int            $app_code The Exception code.
+     * @param int            $appCode  The Exception code.
      * @param Exception|null $previous The previous exception used for the exception chaining.
      */
-    public function __construct(?string $message = NULL, int $app_code = 0, ?Exception $previous = NULL)
+    public function __construct(?string $message = NULL, int $appCode = 0, ?Exception $previous = NULL)
     {
-        parent::__construct($message, HttpCode::UNPROCESSABLE_ENTITY, $app_code, $previous);
+        parent::__construct($message, HttpCode::UNPROCESSABLE_ENTITY, $appCode, $previous);
     }
 
 }

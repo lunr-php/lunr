@@ -198,7 +198,7 @@ class RequestGetDataFromWrappersTest extends RequestTestCase
 
         $class = $this->reflection->newInstanceWithoutConstructor();
 
-        $this->reflection->getProperty('cli_args')
+        $this->reflection->getProperty('cliArgs')
                          ->setValue($class, array_combine($keys, $values));
 
         $return = $class->get_all_options();
@@ -218,7 +218,7 @@ class RequestGetDataFromWrappersTest extends RequestTestCase
     {
         $class = $this->reflection->newInstanceWithoutConstructor();
 
-        $this->reflection->getProperty('cli_args')
+        $this->reflection->getProperty('cliArgs')
                          ->setValue($class, [ 'a' => $value ]);
 
         $result = $class->get_option_data('a');
@@ -233,7 +233,7 @@ class RequestGetDataFromWrappersTest extends RequestTestCase
      */
     public function testGetOptionDataReturnsNullForInvalidKey(): void
     {
-        $ast = $this->getReflectionPropertyValue('cli_args');
+        $ast = $this->getReflectionPropertyValue('cliArgs');
 
         $this->assertArrayNotHasKey('foo', $ast);
         $this->assertNull($this->class->get_option_data('foo'));
@@ -266,7 +266,7 @@ class RequestGetDataFromWrappersTest extends RequestTestCase
 
         $this->assertEquals('raw', $this->class->get_raw_data());
         $this->assertEquals('raw', $this->class->get_raw_data());
-        $this->assertEquals('raw', $this->getReflectionPropertyValue('raw_data'));
+        $this->assertEquals('raw', $this->getReflectionPropertyValue('rawData'));
     }
 
     /**
@@ -281,9 +281,9 @@ class RequestGetDataFromWrappersTest extends RequestTestCase
                      ->willReturnOnConsecutiveCalls('raw', 'hello');
 
         $this->assertEquals('raw', $this->class->get_raw_data());
-        $this->assertEquals('raw', $this->getReflectionPropertyValue('raw_data'));
+        $this->assertEquals('raw', $this->getReflectionPropertyValue('rawData'));
         $this->assertEquals('hello', $this->class->get_raw_data());
-        $this->assertEquals('hello', $this->getReflectionPropertyValue('raw_data'));
+        $this->assertEquals('hello', $this->getReflectionPropertyValue('rawData'));
     }
 
 }

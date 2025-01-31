@@ -159,19 +159,19 @@ class FrontControllerGetTest extends FrontControllerTestCase
     /**
      * Test that get_controller() returns '' for invalid controller.
      *
-     * @param array $controller_name Invalid controller names
+     * @param array $controllerName Invalid controller names
      *
      * @dataProvider invalidControllerNameValuesProvider
      * @covers Lunr\Corona\FrontController::get_controller
      */
-    public function testGetControllerReturnsDefault($controller_name): void
+    public function testGetControllerReturnsDefault($controllerName): void
     {
         $dir = 'src';
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
                       ->with('controller')
-                      ->willReturn($controller_name);
+                      ->willReturn($controllerName);
 
         $value = $this->class->get_controller($dir);
 

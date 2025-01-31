@@ -90,12 +90,12 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTestCase
         $_VAR['test1'] = 'value1';
         $_VAR['test2'] = 'value2';
 
-        $_VAR_REF = $_VAR;
+        $_EXP = $_VAR;
 
         $method = $this->getReflectionMethod('parse_super_global');
-        $method->invokeArgs($this->class, [ & $_VAR_REF, FALSE ]);
+        $method->invokeArgs($this->class, [ & $_EXP, FALSE ]);
 
-        $this->assertEquals($_VAR, $_VAR_REF);
+        $this->assertEquals($_VAR, $_EXP);
     }
 
 }

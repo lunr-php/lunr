@@ -49,7 +49,7 @@ abstract class ViewTestCase extends LunrBaseTestCase
      * Mock instance of the sub configuration class.
      * @var Configuration
      */
-    protected $sub_configuration;
+    protected $subConfiguration;
 
     /**
      * Instance of the tested class.
@@ -64,12 +64,12 @@ abstract class ViewTestCase extends LunrBaseTestCase
      */
     public function setUp(): void
     {
-        $this->sub_configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
+        $this->subConfiguration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
 
         $map = [
-            [ 'path', $this->sub_configuration ],
+            [ 'path', $this->subConfiguration ],
         ];
 
         $this->configuration->expects($this->any())

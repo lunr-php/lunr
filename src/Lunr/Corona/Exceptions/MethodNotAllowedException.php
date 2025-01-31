@@ -23,16 +23,16 @@ class MethodNotAllowedException extends HttpException
      * Constructor.
      *
      * @param string         $message  Error message
-     * @param int            $app_code Application error code
+     * @param int            $appCode  Application error code
      * @param Exception|null $previous The previously thrown exception
      */
     public function __construct(
         string $message = 'The used HTTP method is not supported for this resource!',
-        int $app_code = 0,
+        int $appCode = 0,
         ?Exception $previous = NULL
     )
     {
-        parent::__construct($message, HttpCode::METHOD_NOT_ALLOWED, $app_code, $previous);
+        parent::__construct($message, HttpCode::METHOD_NOT_ALLOWED, $appCode, $previous);
     }
 
 }

@@ -129,20 +129,20 @@ abstract class HTMLView extends View
     /**
      * Return an alternating (eg. odd/even) CSS class name.
      *
-     * @param string $basename         CSS base class name (without
-     *                                 ending underscore or suffix)
-     * @param int    $alternation_hint Integer counter indicating the
-     *                                 alternation state
-     * @param string $suffix           An alternative suffix if you
-     *                                 don't want odd/even
+     * @param string $basename        CSS base class name (without
+     *                                ending underscore or suffix)
+     * @param int    $alternationHint Integer counter indicating the
+     *                                alternation state
+     * @param string $suffix          An alternative suffix if you
+     *                                don't want odd/even
      *
      * @return string $return The constructed CSS class name
      */
-    protected function css_alternate($basename, $alternation_hint, $suffix = '')
+    protected function css_alternate($basename, $alternationHint, $suffix = '')
     {
         if ($suffix == '')
         {
-            if ($alternation_hint % 2 == 0)
+            if ($alternationHint % 2 == 0)
             {
                 $basename .= '_even';
             }

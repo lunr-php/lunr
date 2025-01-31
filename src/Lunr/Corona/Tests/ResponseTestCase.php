@@ -87,7 +87,7 @@ abstract class ResponseTestCase extends LunrBaseTestCase
         $attrs[] = [ 'data' ];
         $attrs[] = [ 'errmsg' ];
         $attrs[] = [ 'errinfo' ];
-        $attrs[] = [ 'return_code' ];
+        $attrs[] = [ 'returnCode' ];
 
         return $attrs;
     }

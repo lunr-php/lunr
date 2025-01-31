@@ -78,13 +78,13 @@ class Request
      * Stored php://input values
      * @var string
      */
-    protected string $raw_data;
+    protected string $rawData;
 
     /**
      * Stored command line arguments
      * @var array<string,string|null>
      */
-    protected readonly array $cli_args;
+    protected readonly array $cliArgs;
 
     /**
      * Shared instance of the request parser.
@@ -114,14 +114,14 @@ class Request
         $this->parser  = $parser;
         $this->parsers = [];
 
-        $this->request  = $parser->parse_request();
-        $this->server   = $parser->parse_server();
-        $this->post     = $parser->parse_post();
-        $this->get      = $parser->parse_get();
-        $this->cookie   = $parser->parse_cookie();
-        $this->files    = $parser->parse_files();
-        $this->cli_args = $parser->parse_command_line_arguments();
-        $this->raw_data = '';
+        $this->request = $parser->parse_request();
+        $this->server  = $parser->parse_server();
+        $this->post    = $parser->parse_post();
+        $this->get     = $parser->parse_get();
+        $this->cookie  = $parser->parse_cookie();
+        $this->files   = $parser->parse_files();
+        $this->cliArgs = $parser->parse_command_line_arguments();
+        $this->rawData = '';
 
         $this->mock = [];
     }
@@ -415,26 +415,26 @@ class Request
             case RequestData::Server:
                 return $this->$property[$key] ?? NULL;
             case RequestData::Header:
-                $http_key = 'HTTP_' . strtoupper(str_replace('-', '_', $key));
-                return $this->server[$http_key] ?? NULL;
+                $httpKey = 'HTTP_' . strtoupper(str_replace('-', '_', $key));
+                return $this->server[$httpKey] ?? NULL;
             case RequestData::Raw:
                 $input = $this->parser->parse_raw_data();
 
                 if ($input !== FALSE)
                 {
-                    $this->raw_data = $input;
+                    $this->rawData = $input;
                 }
 
-                return $this->raw_data;
+                return $this->rawData;
             case RequestData::CliArgument:
                 if ($key === NULL)
                 {
-                    return $this->cli_args;
+                    return $this->cliArgs;
                 }
 
-                return $this->cli_args[$key] ?? NULL;
+                return $this->cliArgs[$key] ?? NULL;
             case RequestData::CliOption:
-                return array_keys($this->cli_args);
+                return array_keys($this->cliArgs);
             default:
                 return NULL;
         }

@@ -31,7 +31,7 @@ class HttpExceptionBaseTest extends HttpExceptionTestCase
      */
     public function testApplicationErrorCodeSetCorrectly(): void
     {
-        $this->assertPropertySame('app_code', $this->app_code);
+        $this->assertPropertySame('appCode', $this->appCode);
     }
 
     /**
@@ -51,7 +51,7 @@ class HttpExceptionBaseTest extends HttpExceptionTestCase
      */
     public function testGetAppCodeReturnsAppCode(): void
     {
-        $this->assertSame($this->app_code, $this->class->getAppCode());
+        $this->assertSame($this->appCode, $this->class->getAppCode());
     }
 
 }

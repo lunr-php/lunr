@@ -47,7 +47,7 @@ class ResponseBaseTest extends ResponseTestCase
      */
     public function testReturnCodeIsEmptyByDefault(): void
     {
-        $this->assertArrayEmpty($this->getReflectionPropertyValue('return_code'));
+        $this->assertArrayEmpty($this->getReflectionPropertyValue('returnCode'));
     }
 
     /**

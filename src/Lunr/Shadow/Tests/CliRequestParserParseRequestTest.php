@@ -71,7 +71,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTestCase
             $property->setValue($this->class, $ast);
         }
 
-        $this->mocked_calls = [
+        $this->mockedCalls = [
             'default_application_path' => [ 'default_application_path', '/full/path/to/' ],
             'default_webpath'          => [ 'default_webpath', '/path/to/' ],
             'default_protocol'         => [ 'default_protocol', strtolower($protocol) ],

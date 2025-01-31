@@ -38,7 +38,7 @@ class WebRequestParser implements RequestParserInterface
      * Whether the request was parsed already or not,
      * @var bool
      */
-    protected $request_parsed;
+    protected $requestParsed;
 
     /**
      * Constructor.
@@ -48,9 +48,9 @@ class WebRequestParser implements RequestParserInterface
      */
     public function __construct($configuration, $header)
     {
-        $this->config         = $configuration;
-        $this->header         = $header;
-        $this->request_parsed = FALSE;
+        $this->config        = $configuration;
+        $this->header        = $header;
+        $this->requestParsed = FALSE;
     }
 
     /**
@@ -60,7 +60,7 @@ class WebRequestParser implements RequestParserInterface
     {
         unset($this->config);
         unset($this->header);
-        unset($this->request_parsed);
+        unset($this->requestParsed);
     }
 
     /**
@@ -70,7 +70,7 @@ class WebRequestParser implements RequestParserInterface
      */
     public function parse_request()
     {
-        if ($this->request_parsed === TRUE)
+        if ($this->requestParsed === TRUE)
         {
             return [];
         }
@@ -166,7 +166,7 @@ class WebRequestParser implements RequestParserInterface
                 $request['call'] = $request['controller'] . '/' . $request['method'];
             }
 
-            $this->request_parsed = TRUE;
+            $this->requestParsed = TRUE;
 
             return $request;
         }
@@ -190,7 +190,7 @@ class WebRequestParser implements RequestParserInterface
             $request['call'] = $request['controller'] . '/' . $request['method'];
         }
 
-        $this->request_parsed = TRUE;
+        $this->requestParsed = TRUE;
 
         return $request;
     }

@@ -39,13 +39,13 @@ class JsonViewPrintTest extends JsonViewTestCase
     /**
      * Test that print_page() prints JSON with the response code as error info.
      *
-     * @param mixed $error_info Non-integer error info value
+     * @param mixed $errorInfo Non-integer error info value
      *
      * @dataProvider invalidErrorInfoProvider
      * @requires     PHP 5.5.12
      * @covers       Lunr\Corona\JsonView::print_page
      */
-    public function testPrintPagePrintsJsonWithCode($error_info): void
+    public function testPrintPagePrintsJsonWithCode($errorInfo): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')

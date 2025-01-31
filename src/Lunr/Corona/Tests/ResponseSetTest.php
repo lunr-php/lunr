@@ -99,7 +99,7 @@ class ResponseSetTest extends ResponseTestCase
     {
         $this->class->set_return_code('ID', 503);
 
-        $value = $this->getReflectionPropertyValue('return_code');
+        $value = $this->getReflectionPropertyValue('returnCode');
 
         $this->assertArrayHasKey('ID', $value);
         $this->assertSame(503, $value['ID']);
@@ -117,7 +117,7 @@ class ResponseSetTest extends ResponseTestCase
     {
         $this->class->set_return_code('ID', $code);
 
-        $this->assertArrayEmpty($this->getReflectionPropertyValue('return_code'));
+        $this->assertArrayEmpty($this->getReflectionPropertyValue('returnCode'));
     }
 
 }

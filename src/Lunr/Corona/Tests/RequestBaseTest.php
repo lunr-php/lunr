@@ -70,7 +70,7 @@ class RequestBaseTest extends RequestTestCase
      */
     public function testCliArgs(): void
     {
-        $this->assertArrayEmpty($this->getReflectionPropertyValue('cli_args'));
+        $this->assertArrayEmpty($this->getReflectionPropertyValue('cliArgs'));
     }
 
     /**
@@ -78,7 +78,7 @@ class RequestBaseTest extends RequestTestCase
      */
     public function testRawData(): void
     {
-        $this->assertSame('', $this->getReflectionPropertyValue('raw_data'));
+        $this->assertSame('', $this->getReflectionPropertyValue('rawData'));
     }
 
     /**

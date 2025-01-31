@@ -40,7 +40,7 @@ class WebRequestParserBaseTest extends WebRequestParserTestCase
      */
     public function testRequestParsedIsFalseByDefault(): void
     {
-        $this->assertFalse($this->getReflectionPropertyValue('request_parsed'));
+        $this->assertFalse($this->getReflectionPropertyValue('requestParsed'));
     }
 
 }

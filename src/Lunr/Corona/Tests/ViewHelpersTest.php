@@ -55,9 +55,10 @@ class ViewHelpersTest extends ViewTestCase
         $this->request->expects($this->once())
                       ->method('__get')
                       ->willReturn($base);
-        $this->sub_configuration->expects($this->once())
-                                ->method('offsetGet')
-                                ->willReturn($statics);
+
+        $this->subConfiguration->expects($this->once())
+                               ->method('offsetGet')
+                               ->willReturn($statics);
 
         $method = $this->getReflectionMethod('statics');
 

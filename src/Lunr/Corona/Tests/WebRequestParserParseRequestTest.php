@@ -263,7 +263,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTestCase
     }
 
     /**
-     * Test that parse_request() sets $request_parsed to TRUE.
+     * Test that parse_request() sets $requestParsed to TRUE.
      *
      * @covers Lunr\Corona\WebRequestParser::parse_request
      */
@@ -274,7 +274,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTestCase
 
         $this->class->parse_request();
 
-        $this->assertTrue($this->getReflectionPropertyValue('request_parsed'));
+        $this->assertTrue($this->getReflectionPropertyValue('requestParsed'));
 
         $this->cleanup_request_test();
     }
@@ -289,7 +289,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTestCase
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
 
-        $this->setReflectionPropertyValue('request_parsed', TRUE);
+        $this->setReflectionPropertyValue('requestParsed', TRUE);
 
         $this->assertArrayEmpty($this->class->parse_request());
 

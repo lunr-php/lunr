@@ -38,7 +38,7 @@ abstract class ClientDataHttpExceptionTestCase extends LunrBaseTestCase
      * Application error code.
      * @var int
      */
-    protected $app_code;
+    protected $appCode;
 
     /**
      * HTTP error code.
@@ -57,14 +57,14 @@ abstract class ClientDataHttpExceptionTestCase extends LunrBaseTestCase
      */
     public function setUp(): void
     {
-        $this->message  = 'Http error!';
-        $this->app_code = 9999;
-        $this->code     = 400;
+        $this->message = 'Http error!';
+        $this->appCode = 9999;
+        $this->code    = 400;
 
         $this->previous = new Exception();
 
         $this->class = $this->getMockBuilder(ClientDataHttpException::class)
-                            ->setConstructorArgs([ $this->message, $this->code, $this->app_code, $this->previous ])
+                            ->setConstructorArgs([ $this->message, $this->code, $this->appCode, $this->previous ])
                             ->getMockForAbstractClass();
 
         parent::baseSetUp($this->class);
@@ -76,7 +76,7 @@ abstract class ClientDataHttpExceptionTestCase extends LunrBaseTestCase
     public function tearDown(): void
     {
         unset($this->code);
-        unset($this->app_code);
+        unset($this->appCode);
         unset($this->message);
         unset($this->previous);
         unset($this->class);

@@ -27,7 +27,7 @@ class RequestParserParseRequestTest extends RequestParserTestCase
      * Mocked calls to Configuration
      * @var array
      */
-    protected $mocked_calls = [];
+    protected $mockedCalls = [];
 
     /**
      * Preparation work for the request tests.
@@ -58,7 +58,7 @@ class RequestParserParseRequestTest extends RequestParserTestCase
             $url = strtolower($protocol) . '://www.domain.com:' . $port . '/path/to/';
         }
 
-        $this->mocked_calls = [
+        $this->mockedCalls = [
             'default_application_path' => [ 'default_application_path', '/full/path/to/' ],
             'default_webpath'          => [ 'default_webpath', '/path/to/' ],
             'default_protocol'         => [ 'default_protocol', strtolower($protocol) ],

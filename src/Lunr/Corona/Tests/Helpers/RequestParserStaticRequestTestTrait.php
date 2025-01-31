@@ -37,7 +37,7 @@ trait RequestParserStaticRequestTestTrait
      */
     protected $params = 'param';
 
-    protected $mocked_calls = [];
+    protected $mockedCalls = [];
 
     /**
      * Preparation work for the request tests.
@@ -133,7 +133,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mocked_calls));
+                            ->willReturnMap(array_values($this->mockedCalls));
 
         $request = $this->class->parse_request();
 
@@ -153,7 +153,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mocked_calls));
+                            ->willReturnMap(array_values($this->mockedCalls));
 
         $request = $this->class->parse_request();
 
@@ -173,7 +173,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mocked_calls));
+                            ->willReturnMap(array_values($this->mockedCalls));
 
         $request = $this->class->parse_request();
 
@@ -198,7 +198,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mocked_calls));
+                            ->willReturnMap(array_values($this->mockedCalls));
 
         $request = $this->class->parse_request();
 
@@ -224,7 +224,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mocked_calls));
+                            ->willReturnMap(array_values($this->mockedCalls));
 
         $request = $this->class->parse_request();
 
@@ -276,7 +276,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->exactly(8))
                             ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mocked_calls));
+                            ->willReturnMap(array_values($this->mockedCalls));
 
         $request = $this->class->parse_request();
 
@@ -297,7 +297,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mocked_calls));
+                            ->willReturnMap(array_values($this->mockedCalls));
 
         $request = $this->class->parse_request();
 
@@ -318,7 +318,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mocked_calls));
+                            ->willReturnMap(array_values($this->mockedCalls));
 
         $request = $this->class->parse_request();
 
@@ -356,7 +356,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mocked_calls));
+                            ->willReturnMap(array_values($this->mockedCalls));
 
         $request = $this->class->parse_request();
 
@@ -374,11 +374,11 @@ trait RequestParserStaticRequestTestTrait
     {
         $this->prepare_request_test('HTTP', '80');
 
-        unset($this->mocked_calls['default_controller']);
+        unset($this->mockedCalls['default_controller']);
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mocked_calls));
+                            ->willReturnMap(array_values($this->mockedCalls));
 
         $request = $this->class->parse_request();
 
@@ -396,11 +396,11 @@ trait RequestParserStaticRequestTestTrait
     {
         $this->prepare_request_test('HTTP', '80');
 
-        unset($this->mocked_calls['default_method']);
+        unset($this->mockedCalls['default_method']);
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mocked_calls));
+                            ->willReturnMap(array_values($this->mockedCalls));
 
         $request = $this->class->parse_request();
 
@@ -421,7 +421,7 @@ trait RequestParserStaticRequestTestTrait
 
         $this->configuration->expects($this->atLeast(2))
                             ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mocked_calls));
+                            ->willReturnMap(array_values($this->mockedCalls));
 
         $request = $this->class->parse_request();
 

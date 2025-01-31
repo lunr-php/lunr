@@ -27,7 +27,7 @@ class Response
      * Return code
      * @var array
      */
-    private $return_code;
+    private $returnCode;
 
     /**
      * Error message
@@ -52,11 +52,11 @@ class Response
      */
     public function __construct()
     {
-        $this->data        = [];
-        $this->errmsg      = [];
-        $this->return_code = [];
-        $this->errinfo     = [];
-        $this->view        = '';
+        $this->data       = [];
+        $this->errmsg     = [];
+        $this->returnCode = [];
+        $this->errinfo    = [];
+        $this->view       = '';
     }
 
     /**
@@ -66,7 +66,7 @@ class Response
     {
         unset($this->data);
         unset($this->errmsg);
-        unset($this->return_code);
+        unset($this->returnCode);
         unset($this->errinfo);
         unset($this->view);
     }
@@ -162,7 +162,7 @@ class Response
     {
         if (is_int($value) === TRUE)
         {
-            $this->return_code[$identifier] = $value;
+            $this->returnCode[$identifier] = $value;
         }
     }
 
@@ -218,17 +218,17 @@ class Response
      */
     public function get_return_code($identifier = NULL)
     {
-        if (empty($this->return_code))
+        if (empty($this->returnCode))
         {
             return NULL;
         }
 
         if ($identifier === NULL)
         {
-            $identifier = array_search(max($this->return_code), $this->return_code);
+            $identifier = array_search(max($this->returnCode), $this->returnCode);
         }
 
-        return isset($this->return_code[$identifier]) ? $this->return_code[$identifier] : NULL;
+        return isset($this->returnCode[$identifier]) ? $this->returnCode[$identifier] : NULL;
     }
 
     /**
@@ -240,12 +240,12 @@ class Response
      */
     public function get_return_code_identifiers($max = FALSE)
     {
-        if (empty($this->return_code))
+        if (empty($this->returnCode))
         {
             return [];
         }
 
-        return $max ? array_search(max($this->return_code), $this->return_code) : array_keys($this->return_code);
+        return $max ? array_search(max($this->returnCode), $this->returnCode) : array_keys($this->returnCode);
     }
 
 }

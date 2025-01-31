@@ -279,19 +279,19 @@ class HTMLViewHelpersTest extends HTMLViewTestCase
     /**
      * Tests the css_alternate method of the View class.
      *
-     * @param string $basename         CSS rule basename
-     * @param string $alternation_hint Hint on whether to use 'even' or 'odd'
-     * @param string $suffix           Custom suffix instead of 'even' or 'odd'
-     * @param string $result           Expected combined result
+     * @param string $basename        CSS rule basename
+     * @param string $alternationHint Hint on whether to use 'even' or 'odd'
+     * @param string $suffix          Custom suffix instead of 'even' or 'odd'
+     * @param string $result          Expected combined result
      *
      * @dataProvider cssAlternateProvider
      * @covers       Lunr\Corona\HTMLView::css_alternate
      */
-    public function testCssAlternate($basename, $alternation_hint, $suffix, $result): void
+    public function testCssAlternate($basename, $alternationHint, $suffix, $result): void
     {
         $method = $this->getReflectionMethod('css_alternate');
 
-        $this->assertEquals($result, $method->invokeArgs($this->class, [ $basename, $alternation_hint, $suffix ]));
+        $this->assertEquals($result, $method->invokeArgs($this->class, [ $basename, $alternationHint, $suffix ]));
     }
 
 }

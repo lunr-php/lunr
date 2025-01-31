@@ -39,13 +39,13 @@ class MsgpackViewPrintTest extends MsgpackViewTestCase
     /**
      * Test that print_page() prints MSGPACK with the response code as error info.
      *
-     * @param mixed $error_info Non-integer error info value
+     * @param mixed $errorInfo Non-integer error info value
      *
      * @dataProvider invalidErrorInfoProvider
      * @requires     extension msgpack
      * @covers       Lunr\Corona\MsgpackView::print_page
      */
-    public function testPrintPagePrintsmsgpackWithCode($error_info): void
+    public function testPrintPagePrintsmsgpackWithCode($errorInfo): void
     {
         $this->response->expects($this->once())
                        ->method('get_return_code_identifiers')

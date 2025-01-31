@@ -30,7 +30,7 @@ class TemporarilyDisabledExceptionBaseTest extends TemporarilyDisabledExceptionT
      */
     public function testApplicationErrorCodeSetCorrectly(): void
     {
-        $this->assertPropertySame('app_code', $this->code);
+        $this->assertPropertySame('appCode', $this->code);
     }
 
     /**

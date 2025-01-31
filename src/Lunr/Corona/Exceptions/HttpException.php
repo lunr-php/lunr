@@ -22,21 +22,21 @@ class HttpException extends Exception
      * Application error code.
      * @var int
      */
-    protected int $app_code;
+    protected int $appCode;
 
     /**
      * Constructor.
      *
      * @param string|null    $message  Error message
      * @param int            $code     Http code
-     * @param int            $app_code Application error code
+     * @param int            $appCode  Application error code
      * @param Exception|null $previous The previously thrown exception
      */
-    public function __construct(?string $message = NULL, int $code = 0, int $app_code = 0, ?Exception $previous = NULL)
+    public function __construct(?string $message = NULL, int $code = 0, int $appCode = 0, ?Exception $previous = NULL)
     {
         parent::__construct($message ?? '', $code, $previous);
 
-        $this->app_code = $app_code !== 0 ? $app_code : $code;
+        $this->appCode = $appCode !== 0 ? $appCode : $code;
     }
 
     /**
@@ -46,7 +46,7 @@ class HttpException extends Exception
      */
     final public function getAppCode(): int
     {
-        return $this->app_code;
+        return $this->appCode;
     }
 
 }
