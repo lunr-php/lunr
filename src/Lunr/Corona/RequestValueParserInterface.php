@@ -22,7 +22,7 @@ interface RequestValueParserInterface
      *
      * @return class-string The FQDN of the type enum the parser handles
      */
-    public function get_request_value_type(): string;
+    public function getRequestValueType(): string;
 
     /**
      * Get a request value.

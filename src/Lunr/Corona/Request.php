@@ -201,7 +201,7 @@ class Request
      */
     public function registerParser(RequestValueParserInterface $parser): void
     {
-        $this->parsers[$parser->get_request_value_type()] = $parser;
+        $this->parsers[$parser->getRequestValueType()] = $parser;
     }
 
     /**

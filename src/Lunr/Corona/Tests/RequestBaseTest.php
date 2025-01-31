@@ -108,7 +108,7 @@ class RequestBaseTest extends RequestTestCase
                        ->getMock();
 
         $parser->expects($this->once())
-               ->method('get_request_value_type')
+               ->method('getRequestValueType')
                ->willReturn('Lunr\Corona\Parser\Foo\Foo');
 
         $this->class->registerParser($parser);

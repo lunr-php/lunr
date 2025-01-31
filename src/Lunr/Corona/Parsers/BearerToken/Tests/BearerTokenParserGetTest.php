@@ -22,13 +22,13 @@ class BearerTokenParserGetTest extends BearerTokenParserTestCase
 {
 
     /**
-     * Test that get_request_value_type() returns the correct type.
+     * Test that getRequestValueType() returns the correct type.
      *
-     * @covers Lunr\Corona\Parsers\BearerToken\BearerTokenParser::get_request_value_type
+     * @covers Lunr\Corona\Parsers\BearerToken\BearerTokenParser::getRequestValueType
      */
     public function testGetRequestValueType()
     {
-        $this->assertEquals(BearerTokenValue::class, $this->class->get_request_value_type());
+        $this->assertEquals(BearerTokenValue::class, $this->class->getRequestValueType());
     }
 
     /**
