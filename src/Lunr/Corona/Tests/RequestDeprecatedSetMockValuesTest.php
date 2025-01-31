@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the RequestSetMockValuesTest class.
+ * This file contains the RequestDeprecatedSetMockValuesTest class.
  *
  * SPDX-FileCopyrightText: Copyright 2014 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -15,19 +15,19 @@ namespace Lunr\Corona\Tests;
  *
  * @covers Lunr\Corona\Request
  */
-class RequestSetMockValuesTest extends RequestTestCase
+class RequestDeprecatedSetMockValuesTest extends RequestTestCase
 {
 
     /**
-     * Test setMockValues() sets values correctly.
+     * Test set_mock_values() sets values correctly.
      *
-     * @covers Lunr\Corona\Request::setMockValues
+     * @covers Lunr\Corona\Request::set_mock_values
      */
     public function testSetMockValues(): void
     {
         $mock = [ 'controller' => 'newcontroller' ];
 
-        $this->class->setMockValues($mock);
+        $this->class->set_mock_values($mock);
 
         $this->assertEquals($mock, $this->getReflectionPropertyValue('mock'));
     }

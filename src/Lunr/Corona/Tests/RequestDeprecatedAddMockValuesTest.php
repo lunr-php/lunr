@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the RequestAddMockValuesTest class.
+ * This file contains the RequestDeprecatedAddMockValuesTest class.
  *
  * SPDX-FileCopyrightText: Copyright 2014 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -11,17 +11,17 @@
 namespace Lunr\Corona\Tests;
 
 /**
- * Tests for the addMockValues function.
+ * Tests for the add_mock_values function.
  *
  * @covers Lunr\Corona\Request
  */
-class RequestAddMockValuesTest extends RequestTestCase
+class RequestDeprecatedAddMockValuesTest extends RequestTestCase
 {
 
     /**
-     * Test addMockValues() adds values correctly when current mock values are empty.
+     * Test add_mock_values() adds values correctly when current mock values are empty.
      *
-     * @covers Lunr\Corona\Request::addMockValues
+     * @covers Lunr\Corona\Request::add_mock_values
      */
     public function testAddMockValuesWithCurrentEmpty(): void
     {
@@ -29,7 +29,7 @@ class RequestAddMockValuesTest extends RequestTestCase
 
         $this->setReflectionPropertyValue('mock', []);
 
-        $this->class->addMockValues($mock);
+        $this->class->add_mock_values($mock);
 
         $mockResult = $this->getReflectionPropertyValue('mock');
 
@@ -37,9 +37,9 @@ class RequestAddMockValuesTest extends RequestTestCase
     }
 
     /**
-     * Test addMockValues() adds values correctly when current mock values are set.
+     * Test add_mock_values() adds values correctly when current mock values are set.
      *
-     * @covers Lunr\Corona\Request::addMockValues
+     * @covers Lunr\Corona\Request::add_mock_values
      */
     public function testAddMockValuesWithCurrentSet(): void
     {
@@ -57,7 +57,7 @@ class RequestAddMockValuesTest extends RequestTestCase
 
         $this->setReflectionPropertyValue('mock', $currentMock);
 
-        $this->class->addMockValues($mock);
+        $this->class->add_mock_values($mock);
 
         $mockResult = $this->getReflectionPropertyValue('mock');
 

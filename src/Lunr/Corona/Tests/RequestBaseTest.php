@@ -98,9 +98,9 @@ class RequestBaseTest extends RequestTestCase
     }
 
     /**
-     * Test that register_parser() registers a parser.
+     * Test that registerParser() registers a parser.
      *
-     * @covers Lunr\Corona\Request::register_parser
+     * @covers Lunr\Corona\Request::registerParser
      */
     public function testRegisterParser(): void
     {
@@ -111,7 +111,7 @@ class RequestBaseTest extends RequestTestCase
                ->method('get_request_value_type')
                ->willReturn('Lunr\Corona\Parser\Foo\Foo');
 
-        $this->class->register_parser($parser);
+        $this->class->registerParser($parser);
 
         $parsers = $this->getReflectionPropertyValue('parsers');
 

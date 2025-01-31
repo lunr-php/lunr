@@ -199,9 +199,24 @@ class Request
      *
      * @return void
      */
-    public function register_parser(RequestValueParserInterface $parser): void
+    public function registerParser(RequestValueParserInterface $parser): void
     {
         $this->parsers[$parser->get_request_value_type()] = $parser;
+    }
+
+    /**
+     * Override request values detected from the request parser.
+     * Replace all previous mock values.
+     *
+     * @deprecated Use setMockValues() instead
+     *
+     * @param array $values Array of key value pairs holding mocked request values
+     *
+     * @return void
+     */
+    public function set_mock_values(array $values): void
+    {
+        $this->setMockValues($values);
     }
 
     /**
@@ -212,9 +227,24 @@ class Request
      *
      * @return void
      */
-    public function set_mock_values(array $values): void
+    public function setMockValues(array $values): void
     {
         $this->mock = $values;
+    }
+
+    /**
+     * Override request values detected from the request parser.
+     * Keep previous mock values and replace individual keys.
+     *
+     * @deprecated Use addMockValues() instead
+     *
+     * @param array $values Array of key value pairs holding mocked request values
+     *
+     * @return void
+     */
+    public function add_mock_values(array $values): void
+    {
+        $this->addMockValues($values);
     }
 
     /**
@@ -225,7 +255,7 @@ class Request
      *
      * @return void
      */
-    public function add_mock_values(array $values): void
+    public function addMockValues(array $values): void
     {
         foreach ($values as $key => $value)
         {
@@ -236,13 +266,27 @@ class Request
     /**
      * Returns a CLI option array of value(s).
      *
+     * @deprecated Use getOptionData() instead
+     *
      * @param string $key Key for the value to retrieve
      *
      * @return mixed $return The value of the key or NULL if not found
      */
     public function get_option_data(string $key): mixed
     {
-        return $this->get_data($key, RequestData::CliArgument);
+        return $this->getOptionData($key);
+    }
+
+    /**
+     * Returns a CLI option array of value(s).
+     *
+     * @param string $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function getOptionData(string $key): mixed
+    {
+        return $this->getData($key, RequestData::CliArgument);
     }
 
     /**
@@ -252,7 +296,34 @@ class Request
      */
     public function get_all_options(): array
     {
-        return $this->get_data(type: RequestData::CliOption);
+        return $this->getAllOptions();
+    }
+
+    /**
+     * Returns all CLI options.
+     *
+     * @deprecated Use getAllOptions() instead
+     *
+     * @return array $return The option and the arguments of the request
+     */
+    public function getAllOptions(): array
+    {
+        return $this->getData(type: RequestData::CliOption);
+    }
+
+    /**
+     * Negotiate & retrieve the client's preferred content type.
+     *
+     * @deprecated Use getAcceptFormat() instead
+     *
+     * @param array $supported Array containing the supported content types
+     *
+     * @return string|null $return The best match of the preferred content types or NULL
+     *                       if there are no supported types or the header is not set
+     */
+    public function get_accept_format(array $supported = []): ?string
+    {
+        return $this->getAcceptFormat($supported);
     }
 
     /**
@@ -263,9 +334,24 @@ class Request
      * @return string|null $return The best match of the preferred content types or NULL
      *                       if there are no supported types or the header is not set
      */
-    public function get_accept_format(array $supported = []): ?string
+    public function getAcceptFormat(array $supported = []): ?string
     {
         return $this->parser->parse_accept_format($supported);
+    }
+
+    /**
+     * Negotiate & retrieve the clients preferred language.
+     *
+     * @deprecated Use getAcceptLanguage() instead
+     *
+     * @param array $supported Array containing the supported languages
+     *
+     * @return string|null $return The best match of the preferred languages or NULL if
+     *                       there are no supported languages or the header is not set
+     */
+    public function get_accept_language(array $supported = []): ?string
+    {
+        return $this->getAcceptLanguage($supported);
     }
 
     /**
@@ -276,7 +362,7 @@ class Request
      * @return string|null $return The best match of the preferred languages or NULL if
      *                       there are no supported languages or the header is not set
      */
-    public function get_accept_language(array $supported = []): ?string
+    public function getAcceptLanguage(array $supported = []): ?string
     {
         return $this->parser->parse_accept_language($supported);
     }
@@ -291,7 +377,36 @@ class Request
      */
     public function get_accept_charset(array $supported = []): ?string
     {
+        return $this->getAcceptCharset($supported);
+    }
+
+    /**
+     * Negotiate & retrieve the clients preferred charset.
+     *
+     * @deprecated Use getAcceptCharset() instead
+     *
+     * @param array $supported Array containing the supported charsets
+     *
+     * @return string|null $return The best match of the preferred charsets or NULL if
+     *                       there are no supported charsets or the header is not set
+     */
+    public function getAcceptCharset(array $supported = []): ?string
+    {
         return $this->parser->parse_accept_charset($supported);
+    }
+
+    /**
+     * Retrieve a stored GET value.
+     *
+     * @deprecated Use getGetData() instead
+     *
+     * @param string|null $key Key for the value to retrieve
+     *
+     * @return mixed The value of the key, all GET values if no key is provided or NULL if not found.
+     */
+    public function get_get_data(?string $key = NULL): mixed
+    {
+        return $this->getGetData($key);
     }
 
     /**
@@ -301,9 +416,23 @@ class Request
      *
      * @return mixed The value of the key, all GET values if no key is provided or NULL if not found.
      */
-    public function get_get_data(?string $key = NULL): mixed
+    public function getGetData(?string $key = NULL): mixed
     {
-        return $this->get_data($key, RequestData::Get);
+        return $this->getData($key, RequestData::Get);
+    }
+
+    /**
+     * Retrieve a stored POST value.
+     *
+     * @deprecated Use getPostData() instead
+     *
+     * @param string|null $key Key for the value to retrieve
+     *
+     * @return mixed The value of the key, all POST values if no key is provided or NULL if not found.
+     */
+    public function get_post_data(?string $key = NULL): mixed
+    {
+        return $this->getPostData($key);
     }
 
     /**
@@ -313,9 +442,23 @@ class Request
      *
      * @return mixed The value of the key, all POST values if no key is provided or NULL if not found.
      */
-    public function get_post_data(?string $key = NULL): mixed
+    public function getPostData(?string $key = NULL): mixed
     {
-        return $this->get_data($key, RequestData::Post);
+        return $this->getData($key, RequestData::Post);
+    }
+
+    /**
+     * Retrieve a stored SERVER value.
+     *
+     * @deprecated Use getServerData() instead
+     *
+     * @param string $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function get_server_data(string $key): mixed
+    {
+        return $this->getServerData($key);
     }
 
     /**
@@ -325,9 +468,23 @@ class Request
      *
      * @return mixed $return The value of the key or NULL if not found
      */
-    public function get_server_data(string $key): mixed
+    public function getServerData(string $key): mixed
     {
-        return $this->get_data($key, RequestData::Server);
+        return $this->getData($key, RequestData::Server);
+    }
+
+    /**
+     * Retrieve a stored HTTP Header from the SERVER value.
+     *
+     * @deprecated Use getHttpHeaderData() instead
+     *
+     * @param string $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function get_http_header_data(string $key): mixed
+    {
+        return $this->getHttpHeaderData($key);
     }
 
     /**
@@ -337,9 +494,23 @@ class Request
      *
      * @return mixed $return The value of the key or NULL if not found
      */
-    public function get_http_header_data(string $key): mixed
+    public function getHttpHeaderData(string $key): mixed
     {
-        return $this->get_data($key, RequestData::Header);
+        return $this->getData($key, RequestData::Header);
+    }
+
+    /**
+     * Retrieve a stored COOKIE value.
+     *
+     * @deprecated Use getCookieData() instead
+     *
+     * @param string $key Key for the value to retrieve
+     *
+     * @return mixed $return The value of the key or NULL if not found
+     */
+    public function get_cookie_data(string $key): mixed
+    {
+        return $this->getCookieData($key);
     }
 
     /**
@@ -349,9 +520,23 @@ class Request
      *
      * @return mixed $return The value of the key or NULL if not found
      */
-    public function get_cookie_data(string $key): mixed
+    public function getCookieData(string $key): mixed
     {
-        return $this->get_data($key, RequestData::Cookie);
+        return $this->getData($key, RequestData::Cookie);
+    }
+
+    /**
+     * Retrieve a stored FILE value.
+     *
+     * @deprecated Use getFilesData() instead
+     *
+     * @param string $key Key for the value to retrieve
+     *
+     * @return array|null $return The value of the key or NULL if not found
+     */
+    public function get_files_data(string $key): ?array
+    {
+        return $this->getFilesData($key);
     }
 
     /**
@@ -361,9 +546,21 @@ class Request
      *
      * @return array|null $return The value of the key or NULL if not found
      */
-    public function get_files_data(string $key): ?array
+    public function getFilesData(string $key): ?array
     {
-        return $this->get_data($key, RequestData::Upload);
+        return $this->getData($key, RequestData::Upload);
+    }
+
+    /**
+     * Retrieve raw request data.
+     *
+     * @deprecated Use getRawData() instead
+     *
+     * @return string $return The raw request data as string
+     */
+    public function get_raw_data(): string
+    {
+        return $this->getRawData();
     }
 
     /**
@@ -371,9 +568,26 @@ class Request
      *
      * @return string $return The raw request data as string
      */
-    public function get_raw_data(): string
+    public function getRawData(): string
     {
-        return $this->get_data(type: RequestData::Raw);
+        return $this->getData(type: RequestData::Raw);
+    }
+
+    /**
+     * Retrieve request data.
+     *
+     * @deprecated Use getData() instead
+     *
+     * @param string|null $key  Key for the value to retrieve
+     * @param RequestData $type Type of the request data
+     *
+     * @return ($type is RequestData::CliOption ? array :
+     *         ($type is RequestData::Raw ? string :
+     *         ($type is RequestData::Upload ? array|null : mixed))) Request data value
+     */
+    public function get_data(?string $key = NULL, RequestData $type = RequestData::Get): mixed
+    {
+        return $this->getData($key, $type);
     }
 
     /**
@@ -386,7 +600,7 @@ class Request
      *         ($type is RequestData::Raw ? string :
      *         ($type is RequestData::Upload ? array|null : mixed))) Request data value
      */
-    public function get_data(?string $key = NULL, RequestData $type = RequestData::Get): mixed
+    public function getData(?string $key = NULL, RequestData $type = RequestData::Get): mixed
     {
         $property = $type->value;
 

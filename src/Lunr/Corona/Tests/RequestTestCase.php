@@ -61,7 +61,7 @@ abstract class RequestTestCase extends LunrBaseTestCase
 
         $this->parser->expects($this->once())
                      ->method('parse_request')
-                     ->willReturn($this->get_request_values());
+                     ->willReturn($this->getRequestValues());
 
         $this->parser->expects($this->once())
                      ->method('parse_post')
@@ -108,7 +108,7 @@ abstract class RequestTestCase extends LunrBaseTestCase
      *
      * @return array $request Sample request values
      */
-    protected function get_request_values(): array
+    protected function getRequestValues(): array
     {
         return [
             'protocol'         => 'https',
@@ -137,7 +137,7 @@ abstract class RequestTestCase extends LunrBaseTestCase
     {
         $values = [];
 
-        foreach ($this->get_request_values() as $key => $value)
+        foreach ($this->getRequestValues() as $key => $value)
         {
             $values[] = [ $key, $value ];
         }
