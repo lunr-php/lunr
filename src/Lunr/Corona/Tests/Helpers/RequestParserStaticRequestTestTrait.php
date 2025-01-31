@@ -411,27 +411,6 @@ trait RequestParserStaticRequestTestTrait
         $this->cleanup_request_test();
     }
 
-    /**
-     * Test that a request ID is calculated.
-     */
-    public function testRequestId(): void
-    {
-        $this->prepare_request_test('HTTP', '80');
-        $this->prepare_request_data(TRUE, FALSE);
-
-        $this->configuration->expects($this->atLeast(2))
-                            ->method('offsetGet')
-                            ->willReturnMap(array_values($this->mockedCalls));
-
-        $request = $this->class->parse_request();
-
-        $this->assertIsArray($request);
-        $this->assertArrayHasKey('id', $request);
-        $this->assertEquals('962161b27a0141f384c63834ad001adf', $request['id']);
-
-        $this->cleanup_request_test();
-    }
-
 }
 
 ?>

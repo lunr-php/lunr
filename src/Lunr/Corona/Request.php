@@ -32,7 +32,6 @@ use RuntimeException;
  * @property-read array  $params           The parameters for that method
  * @property-read string $call             The call identifier, combining controller and method
  * @property-read string $verbosity        Logging verbosity
- * @property-read string $id               Unique request ID
  */
 class Request
 {

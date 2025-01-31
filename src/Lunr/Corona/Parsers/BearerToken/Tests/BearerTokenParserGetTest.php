@@ -16,7 +16,8 @@ use RuntimeException;
 /**
  * This class contains test methods for the BearerTokenParser class.
  *
- * @covers Lunr\Corona\Parsers\BearerToken\BearerTokenParser
+ * @backupGlobals enabled
+ * @covers        Lunr\Corona\Parsers\BearerToken\BearerTokenParser
  */
 class BearerTokenParserGetTest extends BearerTokenParserTestCase
 {
