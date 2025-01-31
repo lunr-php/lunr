@@ -19,7 +19,7 @@ use Lunr\Corona\Tests\Helpers\RequestParserDynamicRequestTestTrait;
  * @covers        Lunr\Corona\WebRequestParser
  * @backupGlobals enabled
  */
-class WebRequestParserParseRequestTest extends WebRequestParserTest
+class WebRequestParserParseRequestTest extends WebRequestParserTestCase
 {
 
     use RequestParserDynamicRequestTestTrait;
@@ -41,8 +41,8 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
             $this->markTestSkipped('Extension uuid is required.');
         }
 
-        $this->mock_function('gethostname', fn() => 'Lunr');
-        $this->mock_function('uuid_create', fn() => '962161b2-7a01-41f3-84c6-3834ad001adf');
+        $this->mockFunction('gethostname', fn() => 'Lunr');
+        $this->mockFunction('uuid_create', fn() => '962161b2-7a01-41f3-84c6-3834ad001adf');
 
         $_SERVER['SCRIPT_NAME'] = '/path/to/index.php';
 
@@ -164,8 +164,8 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
      */
     private function cleanup_request_test(): void
     {
-        $this->unmock_function('gethostname');
-        $this->unmock_function('uuid_create');
+        $this->unmockFunction('gethostname');
+        $this->unmockFunction('uuid_create');
     }
 
     /**
@@ -274,7 +274,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
 
         $this->class->parse_request();
 
-        $this->assertTrue($this->get_reflection_property_value('request_parsed'));
+        $this->assertTrue($this->getReflectionPropertyValue('request_parsed'));
 
         $this->cleanup_request_test();
     }
@@ -289,7 +289,7 @@ class WebRequestParserParseRequestTest extends WebRequestParserTest
         $this->prepare_request_test('HTTP', '80');
         $this->prepare_request_data(TRUE, TRUE, TRUE);
 
-        $this->set_reflection_property_value('request_parsed', TRUE);
+        $this->setReflectionPropertyValue('request_parsed', TRUE);
 
         $this->assertArrayEmpty($this->class->parse_request());
 

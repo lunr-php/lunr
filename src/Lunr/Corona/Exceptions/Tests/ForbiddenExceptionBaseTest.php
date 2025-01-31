@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\ForbiddenException
  */
-class ForbiddenExceptionBaseTest extends ForbiddenExceptionTest
+class ForbiddenExceptionBaseTest extends ForbiddenExceptionTestCase
 {
 
     /**

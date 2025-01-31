@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers Lunr\Corona\JsonView
  */
-class JsonViewPrintFatalErrorTest extends JsonViewTest
+class JsonViewPrintFatalErrorTest extends JsonViewTestCase
 {
 
     /**
@@ -25,13 +25,13 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      */
     public function testPrintFatalErrorPrintsNothingIfNoError(): void
     {
-        $this->mock_function('error_get_last', function () { return NULL; });
+        $this->mockFunction('error_get_last', function () { return NULL; });
 
         $this->expectOutputString('');
 
         $this->class->print_fatal_error();
 
-        $this->unmock_function('error_get_last');
+        $this->unmockFunction('error_get_last');
     }
 
     /**
@@ -41,13 +41,13 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      */
     public function testPrintFatalErrorPrintsNothingIfErrorNotFatal(): void
     {
-        $this->mock_function('error_get_last', function () { return [ 'type' => 8, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]; });
+        $this->mockFunction('error_get_last', function () { return [ 'type' => 8, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]; });
 
         $this->expectOutputString('');
 
         $this->class->print_fatal_error();
 
-        $this->unmock_function('error_get_last');
+        $this->unmockFunction('error_get_last');
     }
 
     /**
@@ -58,9 +58,9 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      */
     public function testPrintFatalErrorPrintsPrettyJson(): void
     {
-        $this->mock_function('error_get_last', function () { return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]; });
-        $this->mock_function('header', function () {});
-        $this->mock_function('http_response_code', function () {});
+        $this->mockFunction('error_get_last', function () { return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]; });
+        $this->mockFunction('header', function () {});
+        $this->mockFunction('http_response_code', function () {});
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -71,9 +71,9 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
 
         $this->class->print_fatal_error();
 
-        $this->unmock_function('error_get_last');
-        $this->unmock_function('header');
-        $this->unmock_function('http_response_code');
+        $this->unmockFunction('error_get_last');
+        $this->unmockFunction('header');
+        $this->unmockFunction('http_response_code');
     }
 
     /**
@@ -83,9 +83,9 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
      */
     public function testPrintFatalErrorForWebPrintsJson(): void
     {
-        $this->mock_function('error_get_last', function () { return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]; });
-        $this->mock_function('header', function () {});
-        $this->mock_function('http_response_code', function () {});
+        $this->mockFunction('error_get_last', function () { return [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]; });
+        $this->mockFunction('header', function () {});
+        $this->mockFunction('http_response_code', function () {});
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -96,9 +96,9 @@ class JsonViewPrintFatalErrorTest extends JsonViewTest
 
         $this->class->print_fatal_error();
 
-        $this->unmock_function('error_get_last');
-        $this->unmock_function('header');
-        $this->unmock_function('http_response_code');
+        $this->unmockFunction('error_get_last');
+        $this->unmockFunction('header');
+        $this->unmockFunction('http_response_code');
     }
 
 }

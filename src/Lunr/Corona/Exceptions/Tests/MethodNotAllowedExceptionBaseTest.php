@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\MethodNotAllowedException
  */
-class MethodNotAllowedExceptionBaseTest extends MethodNotAllowedExceptionTest
+class MethodNotAllowedExceptionBaseTest extends MethodNotAllowedExceptionTestCase
 {
 
     /**

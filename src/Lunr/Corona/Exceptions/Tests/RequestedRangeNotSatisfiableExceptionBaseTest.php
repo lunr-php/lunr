@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\RequestedRangeNotSatisfiableException
  */
-class RequestedRangeNotSatisfiableExceptionBaseTest extends RequestedRangeNotSatisfiableExceptionTest
+class RequestedRangeNotSatisfiableExceptionBaseTest extends RequestedRangeNotSatisfiableExceptionTestCase
 {
 
     /**

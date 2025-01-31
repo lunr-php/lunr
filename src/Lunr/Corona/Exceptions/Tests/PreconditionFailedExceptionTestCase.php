@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the InternalServerErrorExceptionTest class.
+ * This file contains the PreconditionFailedExceptionTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
@@ -10,16 +10,16 @@
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
-use Lunr\Corona\Exceptions\InternalServerErrorException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Corona\Exceptions\PreconditionFailedException;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the InternalServerErrorException class.
+ * and shared attributes for testing the PreconditionFailedException class.
  *
- * @covers Lunr\Corona\Exceptions\InternalServerErrorException
+ * @covers Lunr\Corona\Exceptions\PreconditionFailedException
  */
-abstract class InternalServerErrorExceptionTest extends LunrBaseTest
+abstract class PreconditionFailedExceptionTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -42,9 +42,9 @@ abstract class InternalServerErrorExceptionTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var InternalServerErrorException
+     * @var PreconditionFailedException
      */
-    protected InternalServerErrorException $class;
+    protected PreconditionFailedException $class;
 
     /**
      * TestCase Constructor.
@@ -56,7 +56,7 @@ abstract class InternalServerErrorExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class = new InternalServerErrorException($this->message, $this->code, $this->previous);
+        $this->class = new PreconditionFailedException($this->message, $this->code, $this->previous);
 
         parent::baseSetUp($this->class);
     }

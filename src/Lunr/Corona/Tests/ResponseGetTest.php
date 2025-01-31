@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\Response
  */
-class ResponseGetTest extends ResponseTest
+class ResponseGetTest extends ResponseTestCase
 {
 
     /**
@@ -54,7 +54,7 @@ class ResponseGetTest extends ResponseTest
     {
         $data = [ 'key' => 'value' ];
 
-        $this->set_reflection_property_value('data', $data);
+        $this->setReflectionPropertyValue('data', $data);
 
         $this->assertEquals('value', $this->class->get_response_data('key'));
     }
@@ -78,7 +78,7 @@ class ResponseGetTest extends ResponseTest
     {
         $data = [ 'key1' => 'value1', 'key2' => 'value2' ];
 
-        $this->set_reflection_property_value('data', $data);
+        $this->setReflectionPropertyValue('data', $data);
 
         $this->assertEquals($data, $this->class->get_response_data());
     }
@@ -92,7 +92,7 @@ class ResponseGetTest extends ResponseTest
     {
         $data = [ 'controller/method' => 'error message' ];
 
-        $this->set_reflection_property_value('errmsg', $data);
+        $this->setReflectionPropertyValue('errmsg', $data);
 
         $this->assertEquals('error message', $this->class->get_error_message('controller/method'));
     }
@@ -116,7 +116,7 @@ class ResponseGetTest extends ResponseTest
     {
         $data = [ 'controller/method' => 'error info' ];
 
-        $this->set_reflection_property_value('errinfo', $data);
+        $this->setReflectionPropertyValue('errinfo', $data);
 
         $this->assertEquals('error info', $this->class->get_error_info('controller/method'));
     }
@@ -138,7 +138,7 @@ class ResponseGetTest extends ResponseTest
      */
     public function testGetReturnCodeWithoutIdentifierWithEmptyCodes(): void
     {
-        $this->set_reflection_property_value('return_code', []);
+        $this->setReflectionPropertyValue('return_code', []);
 
         $this->assertNull($this->class->get_return_code());
     }
@@ -150,7 +150,7 @@ class ResponseGetTest extends ResponseTest
      */
     public function testGetReturnCodeWithEmptyCodes(): void
     {
-        $this->set_reflection_property_value('return_code', []);
+        $this->setReflectionPropertyValue('return_code', []);
 
         $this->assertNull($this->class->get_return_code('controller/method'));
     }
@@ -164,7 +164,7 @@ class ResponseGetTest extends ResponseTest
     {
         $data = [ 'controller/method' => 200 ];
 
-        $this->set_reflection_property_value('return_code', $data);
+        $this->setReflectionPropertyValue('return_code', $data);
 
         $this->assertSame(200, $this->class->get_return_code('controller/method'));
     }
@@ -188,7 +188,7 @@ class ResponseGetTest extends ResponseTest
     {
         $data = [ 'controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
 
-        $this->set_reflection_property_value('return_code', $data);
+        $this->setReflectionPropertyValue('return_code', $data);
 
         $this->assertSame(500, $this->class->get_return_code());
     }
@@ -200,7 +200,7 @@ class ResponseGetTest extends ResponseTest
      */
     public function testGetMaximumReturnCodeIdentifiersWithEmptyCodes(): void
     {
-        $this->set_reflection_property_value('return_code', []);
+        $this->setReflectionPropertyValue('return_code', []);
 
         $this->assertArrayEmpty($this->class->get_return_code_identifiers());
     }
@@ -212,7 +212,7 @@ class ResponseGetTest extends ResponseTest
      */
     public function testGetReturnCodeIdentifiersWithEmptyCodes(): void
     {
-        $this->set_reflection_property_value('return_code', []);
+        $this->setReflectionPropertyValue('return_code', []);
 
         $this->assertArrayEmpty($this->class->get_return_code_identifiers(TRUE));
     }
@@ -226,7 +226,7 @@ class ResponseGetTest extends ResponseTest
     {
         $data = [ 'controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
 
-        $this->set_reflection_property_value('return_code', $data);
+        $this->setReflectionPropertyValue('return_code', $data);
 
         $this->assertEquals('ID3', $this->class->get_return_code_identifiers(TRUE));
     }
@@ -240,7 +240,7 @@ class ResponseGetTest extends ResponseTest
     {
         $data = [ 'controller/method' => 200, 'ID' => 300, 'ID3' => 500 ];
 
-        $this->set_reflection_property_value('return_code', $data);
+        $this->setReflectionPropertyValue('return_code', $data);
 
         $this->assertSame([ 'controller/method', 'ID', 'ID3' ], $this->class->get_return_code_identifiers());
     }

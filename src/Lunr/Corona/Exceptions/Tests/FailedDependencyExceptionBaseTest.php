@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\FailedDependencyException
  */
-class FailedDependencyExceptionBaseTest extends FailedDependencyExceptionTest
+class FailedDependencyExceptionBaseTest extends FailedDependencyExceptionTestCase
 {
 
     /**

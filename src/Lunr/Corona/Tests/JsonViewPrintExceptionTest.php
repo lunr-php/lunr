@@ -16,7 +16,7 @@ use Lunr\Corona\Tests\Helpers\MockUncaughtException;
  *
  * @covers Lunr\Corona\JsonView
  */
-class JsonViewPrintExceptionTest extends JsonViewTest
+class JsonViewPrintExceptionTest extends JsonViewTestCase
 {
 
     /**
@@ -32,8 +32,8 @@ class JsonViewPrintExceptionTest extends JsonViewTest
         $exception->setFile('index.php');
         $exception->setLine(100);
 
-        $this->mock_function('header', function () {});
-        $this->mock_function('http_response_code', function () {});
+        $this->mockFunction('header', function () {});
+        $this->mockFunction('http_response_code', function () {});
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -44,8 +44,8 @@ class JsonViewPrintExceptionTest extends JsonViewTest
 
         $this->class->print_exception($exception);
 
-        $this->unmock_function('header');
-        $this->unmock_function('http_response_code');
+        $this->unmockFunction('header');
+        $this->unmockFunction('http_response_code');
     }
 
     /**
@@ -60,8 +60,8 @@ class JsonViewPrintExceptionTest extends JsonViewTest
         $exception->setFile('index.php');
         $exception->setLine(100);
 
-        $this->mock_function('header', function () {});
-        $this->mock_function('http_response_code', function () {});
+        $this->mockFunction('header', function () {});
+        $this->mockFunction('http_response_code', function () {});
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -76,8 +76,8 @@ class JsonViewPrintExceptionTest extends JsonViewTest
 
         $this->class->print_exception($exception);
 
-        $this->unmock_function('header');
-        $this->unmock_function('http_response_code');
+        $this->unmockFunction('header');
+        $this->unmockFunction('http_response_code');
     }
 
 }

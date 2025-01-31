@@ -18,7 +18,7 @@ use Lunr\Corona\Tests\Helpers\RequestParserStaticRequestTestTrait;
  * @covers        Lunr\Corona\RequestParser
  * @backupGlobals enabled
  */
-class RequestParserParseRequestTest extends RequestParserTest
+class RequestParserParseRequestTest extends RequestParserTestCase
 {
 
     use RequestParserStaticRequestTestTrait;
@@ -46,8 +46,8 @@ class RequestParserParseRequestTest extends RequestParserTest
             $this->markTestSkipped('Extension uuid is required.');
         }
 
-        $this->mock_function('gethostname', fn() => 'Lunr');
-        $this->mock_function('uuid_create', fn() => '962161b2-7a01-41f3-84c6-3834ad001adf');
+        $this->mockFunction('gethostname', fn() => 'Lunr');
+        $this->mockFunction('uuid_create', fn() => '962161b2-7a01-41f3-84c6-3834ad001adf');
 
         if (($protocol == 'HTTPS' && $port == '443') || ($protocol == 'HTTP' && $port == '80'))
         {
@@ -91,8 +91,8 @@ class RequestParserParseRequestTest extends RequestParserTest
      */
     private function cleanup_request_test(): void
     {
-        $this->unmock_function('gethostname');
-        $this->unmock_function('uuid_create');
+        $this->unmockFunction('gethostname');
+        $this->unmockFunction('uuid_create');
     }
 
     /**

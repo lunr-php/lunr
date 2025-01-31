@@ -14,7 +14,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\ClientDataHttpException
  */
-class ClientDataHttpExceptionBaseTest extends ClientDataHttpExceptionTest
+class ClientDataHttpExceptionBaseTest extends ClientDataHttpExceptionTestCase
 {
 
     /**

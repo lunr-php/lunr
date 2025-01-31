@@ -18,7 +18,7 @@ use RuntimeException;
  *
  * @covers Lunr\Corona\Request
  */
-class RequestGetValueTest extends RequestTest
+class RequestGetValueTest extends RequestTestCase
 {
 
     /**
@@ -32,7 +32,7 @@ class RequestGetValueTest extends RequestTest
             'foo' => 'bar',
         ];
 
-        $this->set_reflection_property_value('request', $cache);
+        $this->setReflectionPropertyValue('request', $cache);
 
         $value = $this->class->get(MockRequestValue::Foo);
 
@@ -54,8 +54,8 @@ class RequestGetValueTest extends RequestTest
             'foo' => 'baz',
         ];
 
-        $this->set_reflection_property_value('request', $cache);
-        $this->set_reflection_property_value('mock', $mock);
+        $this->setReflectionPropertyValue('request', $cache);
+        $this->setReflectionPropertyValue('mock', $mock);
 
         $value = $this->class->get(MockRequestValue::Foo);
 
@@ -89,7 +89,7 @@ class RequestGetValueTest extends RequestTest
             MockRequestValue::class => $parser,
         ];
 
-        $this->set_reflection_property_value('parsers', $parsers);
+        $this->setReflectionPropertyValue('parsers', $parsers);
 
         $parser->expects($this->once())
                ->method('get')

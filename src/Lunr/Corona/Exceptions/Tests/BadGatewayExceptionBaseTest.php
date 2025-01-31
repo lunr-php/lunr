@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\BadGatewayException
  */
-class BadGatewayExceptionBaseTest extends BadGatewayExceptionTest
+class BadGatewayExceptionBaseTest extends BadGatewayExceptionTestCase
 {
 
     /**

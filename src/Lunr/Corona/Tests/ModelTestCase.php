@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the ModelTest class.
+ * This file contains the ModelTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
@@ -10,7 +10,7 @@
 namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\Model;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -19,7 +19,7 @@ use Psr\Cache\CacheItemPoolInterface;
  *
  * @covers Lunr\Corona\Model
  */
-abstract class ModelTest extends LunrBaseTest
+abstract class ModelTestCase extends LunrBaseTestCase
 {
 
     /**

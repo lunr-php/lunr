@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the ViewTest class.
+ * This file contains the ViewTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2012 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -14,7 +14,7 @@ use Lunr\Core\Configuration;
 use Lunr\Corona\Request;
 use Lunr\Corona\Response;
 use Lunr\Corona\View;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 
@@ -24,7 +24,7 @@ use PHPUnit\Framework\MockObject\Stub;
  *
  * @covers     Lunr\Corona\View
  */
-abstract class ViewTest extends LunrBaseTest
+abstract class ViewTestCase extends LunrBaseTestCase
 {
 
     /**

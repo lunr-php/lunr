@@ -19,7 +19,7 @@ use RuntimeException;
  *
  * @covers Lunr\Corona\Parsers\BearerToken\BearerTokenCliParser
  */
-class BearerTokenCliParserGetTest extends BearerTokenCliParserTest
+class BearerTokenCliParserGetTest extends BearerTokenCliParserTestCase
 {
 
     /**
@@ -54,7 +54,7 @@ class BearerTokenCliParserGetTest extends BearerTokenCliParserTest
     {
         $token = '123456789';
 
-        $this->set_reflection_property_value('bearerToken', $token);
+        $this->setReflectionPropertyValue('bearerToken', $token);
 
         $value = $this->class->get(BearerTokenValue::BearerToken);
 
@@ -74,7 +74,7 @@ class BearerTokenCliParserGetTest extends BearerTokenCliParserTest
 
         $this->assertNull($value);
 
-        $property = $this->get_reflection_property('bearerToken');
+        $property = $this->getReflectionProperty('bearerToken');
 
         $this->assertNull($property->getValue($class));
     }

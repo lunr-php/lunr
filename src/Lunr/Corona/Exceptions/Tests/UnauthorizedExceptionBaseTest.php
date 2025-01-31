@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\UnauthorizedException
  */
-class UnauthorizedExceptionBaseTest extends UnauthorizedExceptionTest
+class UnauthorizedExceptionBaseTest extends UnauthorizedExceptionTestCase
 {
 
     /**

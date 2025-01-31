@@ -14,7 +14,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\ForbiddenException
  */
-class ForbiddenExceptionInputDataTest extends ForbiddenExceptionTest
+class ForbiddenExceptionInputDataTest extends ForbiddenExceptionTestCase
 {
 
     /**
@@ -105,7 +105,7 @@ class ForbiddenExceptionInputDataTest extends ForbiddenExceptionTest
      */
     public function testGetDataKey(): void
     {
-        $this->set_reflection_property_value('key', 'foo');
+        $this->setReflectionPropertyValue('key', 'foo');
 
         $this->assertEquals('foo', $this->class->getDataKey());
     }
@@ -117,7 +117,7 @@ class ForbiddenExceptionInputDataTest extends ForbiddenExceptionTest
      */
     public function testGetDataValue(): void
     {
-        $this->set_reflection_property_value('value', 'bar');
+        $this->setReflectionPropertyValue('value', 'bar');
 
         $this->assertEquals('bar', $this->class->getDataValue());
     }
@@ -129,7 +129,7 @@ class ForbiddenExceptionInputDataTest extends ForbiddenExceptionTest
      */
     public function testGetReport(): void
     {
-        $this->set_reflection_property_value('report', 'baz');
+        $this->setReflectionPropertyValue('report', 'baz');
 
         $this->assertEquals('baz', $this->class->getReport());
     }
@@ -143,7 +143,7 @@ class ForbiddenExceptionInputDataTest extends ForbiddenExceptionTest
     {
         $this->assertFalse($this->class->isDataAvailable());
 
-        $this->set_reflection_property_value('key', 'foo');
+        $this->setReflectionPropertyValue('key', 'foo');
 
         $this->assertTrue($this->class->isDataAvailable());
     }
@@ -157,7 +157,7 @@ class ForbiddenExceptionInputDataTest extends ForbiddenExceptionTest
     {
         $this->assertFalse($this->class->isReportAvailable());
 
-        $this->set_reflection_property_value('report', '');
+        $this->setReflectionPropertyValue('report', '');
 
         $this->assertTrue($this->class->isReportAvailable());
     }

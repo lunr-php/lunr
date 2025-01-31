@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the FailedDependencyExceptionTest class.
+ * This file contains the BadRequestExceptionTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
@@ -10,16 +10,16 @@
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
-use Lunr\Corona\Exceptions\FailedDependencyException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Corona\Exceptions\BadRequestException;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the FailedDependencyException class.
+ * and shared attributes for testing the BadRequestException class.
  *
- * @covers Lunr\Corona\Exceptions\FailedDependencyException
+ * @covers Lunr\Corona\Exceptions\BadRequestException
  */
-abstract class FailedDependencyExceptionTest extends LunrBaseTest
+abstract class BadRequestExceptionTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -42,9 +42,9 @@ abstract class FailedDependencyExceptionTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var FailedDependencyException
+     * @var BadRequestException
      */
-    protected FailedDependencyException $class;
+    protected BadRequestException $class;
 
     /**
      * TestCase Constructor.
@@ -56,7 +56,7 @@ abstract class FailedDependencyExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class = new FailedDependencyException($this->message, $this->code, $this->previous);
+        $this->class = new BadRequestException($this->message, $this->code, $this->previous);
 
         parent::baseSetUp($this->class);
     }

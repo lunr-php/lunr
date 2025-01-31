@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\Request
  */
-class RequestMagicGetTest extends RequestTest
+class RequestMagicGetTest extends RequestTestCase
 {
 
     /**
@@ -42,7 +42,7 @@ class RequestMagicGetTest extends RequestTest
      */
     public function testMagicGetWithMockedValue($key): void
     {
-        $this->set_reflection_property_value('mock', [ $key => 'mock' ]);
+        $this->setReflectionPropertyValue('mock', [ $key => 'mock' ]);
 
         $this->assertEquals('mock', $this->class->$key);
     }
@@ -52,7 +52,7 @@ class RequestMagicGetTest extends RequestTest
      */
     public function testMagicGetWithInvalidMockValue(): void
     {
-        $this->set_reflection_property_value('mock', [ 'invalid' => 'mock' ]);
+        $this->setReflectionPropertyValue('mock', [ 'invalid' => 'mock' ]);
 
         $this->assertNull($this->class->invalid);
     }

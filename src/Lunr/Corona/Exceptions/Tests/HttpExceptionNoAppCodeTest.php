@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\HttpException
  */
-class HttpExceptionNoAppCodeTest extends HttpExceptionTest
+class HttpExceptionNoAppCodeTest extends HttpExceptionTestCase
 {
 
     /**

@@ -1,25 +1,25 @@
 <?php
 
 /**
- * This file contains the TemporarilyDisabledExceptionTest class.
+ * This file contains the BadGatewayExceptionTestCase class.
  *
- * SPDX-FileCopyrightText: Copyright 2024 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
-use Lunr\Corona\Exceptions\TemporarilyDisabledException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Corona\Exceptions\BadGatewayException;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the TemporarilyDisabledException class.
+ * and shared attributes for testing the BadGatewayException class.
  *
- * @covers Lunr\Corona\Exceptions\TemporarilyDisabledException
+ * @covers Lunr\Corona\Exceptions\BadGatewayException
  */
-abstract class TemporarilyDisabledExceptionTest extends LunrBaseTest
+abstract class BadGatewayExceptionTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -42,9 +42,9 @@ abstract class TemporarilyDisabledExceptionTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var TemporarilyDisabledException
+     * @var BadGatewayException
      */
-    protected TemporarilyDisabledException $class;
+    protected BadGatewayException $class;
 
     /**
      * TestCase Constructor.
@@ -56,7 +56,7 @@ abstract class TemporarilyDisabledExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class = new TemporarilyDisabledException($this->message, $this->code, $this->previous);
+        $this->class = new BadGatewayException($this->message, $this->code, $this->previous);
 
         parent::baseSetUp($this->class);
     }

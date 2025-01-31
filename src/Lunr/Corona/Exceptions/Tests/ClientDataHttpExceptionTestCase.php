@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the MethodNotAllowedExceptionTest class.
+ * This file contains the ClientDataHttpExceptionTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
@@ -10,16 +10,16 @@
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
-use Lunr\Corona\Exceptions\MethodNotAllowedException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Corona\Exceptions\ClientDataHttpException;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the MethodNotAllowedException class.
+ * and shared attributes for testing the HttpException class.
  *
- * @covers Lunr\Corona\Exceptions\MethodNotAllowedException
+ * @covers Lunr\Corona\Exceptions\HttpException
  */
-abstract class MethodNotAllowedExceptionTest extends LunrBaseTest
+abstract class ClientDataHttpExceptionTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -38,25 +38,34 @@ abstract class MethodNotAllowedExceptionTest extends LunrBaseTest
      * Application error code.
      * @var int
      */
+    protected $app_code;
+
+    /**
+     * HTTP error code.
+     * @var int
+     */
     protected $code;
 
     /**
      * Instance of the tested class.
-     * @var MethodNotAllowedException
+     * @var ClientDataHttpException
      */
-    protected MethodNotAllowedException $class;
+    protected ClientDataHttpException $class;
 
     /**
      * TestCase Constructor.
      */
     public function setUp(): void
     {
-        $this->message = 'Http error!';
-        $this->code    = 9999;
+        $this->message  = 'Http error!';
+        $this->app_code = 9999;
+        $this->code     = 400;
 
         $this->previous = new Exception();
 
-        $this->class = new MethodNotAllowedException($this->message, $this->code, $this->previous);
+        $this->class = $this->getMockBuilder(ClientDataHttpException::class)
+                            ->setConstructorArgs([ $this->message, $this->code, $this->app_code, $this->previous ])
+                            ->getMockForAbstractClass();
 
         parent::baseSetUp($this->class);
     }
@@ -67,6 +76,7 @@ abstract class MethodNotAllowedExceptionTest extends LunrBaseTest
     public function tearDown(): void
     {
         unset($this->code);
+        unset($this->app_code);
         unset($this->message);
         unset($this->previous);
         unset($this->class);

@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\MsgpackView
  */
-class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
+class MsgpackViewPrintFatalErrorTest extends MsgpackViewTestCase
 {
 
     /**
@@ -27,13 +27,13 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
      */
     public function testPrintFatalErrorPrintsNothingIfNoError(): void
     {
-        $this->mock_function('error_get_last', fn() => NULL);
+        $this->mockFunction('error_get_last', fn() => NULL);
 
         $this->expectOutputString('');
 
         $this->class->print_fatal_error();
 
-        $this->unmock_function('error_get_last');
+        $this->unmockFunction('error_get_last');
     }
 
     /**
@@ -45,13 +45,13 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
      */
     public function testPrintFatalErrorPrintsNothingIfErrorNotFatal(): void
     {
-        $this->mock_function('error_get_last', fn() => [ 'type' => 8, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]);
+        $this->mockFunction('error_get_last', fn() => [ 'type' => 8, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]);
 
         $this->expectOutputString('');
 
         $this->class->print_fatal_error();
 
-        $this->unmock_function('error_get_last');
+        $this->unmockFunction('error_get_last');
     }
 
     /**
@@ -63,17 +63,17 @@ class MsgpackViewPrintFatalErrorTest extends MsgpackViewTest
      */
     public function testPrintFatalErrorPrintsMsgpack(): void
     {
-        $this->mock_function('error_get_last', fn() => [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]);
-        $this->mock_function('header', function () {});
-        $this->mock_function('http_response_code', function () {});
+        $this->mockFunction('error_get_last', fn() => [ 'type' => 1, 'message' => 'Message', 'file' => 'index.php', 'line' => 2 ]);
+        $this->mockFunction('header', function () {});
+        $this->mockFunction('http_response_code', function () {});
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_error.msgpack');
 
         $this->class->print_fatal_error();
 
-        $this->unmock_function('error_get_last');
-        $this->unmock_function('header');
-        $this->unmock_function('http_response_code');
+        $this->unmockFunction('error_get_last');
+        $this->unmockFunction('header');
+        $this->unmockFunction('http_response_code');
     }
 
 }

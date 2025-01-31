@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers Lunr\Corona\FrontController
  */
-class FrontControllerRouteTest extends FrontControllerTest
+class FrontControllerRouteTest extends FrontControllerTestCase
 {
 
     /**
@@ -25,7 +25,7 @@ class FrontControllerRouteTest extends FrontControllerTest
      */
     public function testRouteWithBlacklistedController(): void
     {
-        $this->set_reflection_property_value('routes', [ 'controller' => NULL ]);
+        $this->setReflectionPropertyValue('routes', [ 'controller' => NULL ]);
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
@@ -46,7 +46,7 @@ class FrontControllerRouteTest extends FrontControllerTest
      */
     public function testRouteWithBlacklistedCall(): void
     {
-        $this->set_reflection_property_value('routes', [ 'controller/method' => NULL ]);
+        $this->setReflectionPropertyValue('routes', [ 'controller/method' => NULL ]);
 
         $this->request->expects($this->once())
                       ->method('__get')
@@ -71,8 +71,8 @@ class FrontControllerRouteTest extends FrontControllerTest
             'test' => TEST_STATICS . '/Corona/',
         ];
 
-        $this->set_reflection_property_value('routes', [ 'function' => NULL, 'function/bar' => [] ]);
-        $this->set_reflection_property_value('paths', $paths);
+        $this->setReflectionPropertyValue('routes', [ 'function' => NULL, 'function/bar' => [] ]);
+        $this->setReflectionPropertyValue('paths', $paths);
 
         $map = [
             [ 'call', 'function/bar' ],
@@ -103,8 +103,8 @@ class FrontControllerRouteTest extends FrontControllerTest
             'test' => TEST_STATICS . '/Corona/',
         ];
 
-        $this->set_reflection_property_value('routes', [ 'front' => [ 'live' ] ]);
-        $this->set_reflection_property_value('paths', $paths);
+        $this->setReflectionPropertyValue('routes', [ 'front' => [ 'live' ] ]);
+        $this->setReflectionPropertyValue('paths', $paths);
 
         $map = [
             [ 'call', 'front/bar' ],
@@ -135,8 +135,8 @@ class FrontControllerRouteTest extends FrontControllerTest
             'test' => TEST_STATICS . '/Corona/',
         ];
 
-        $this->set_reflection_property_value('routes', [ 'front/bar' => [ 'live' ] ]);
-        $this->set_reflection_property_value('paths', $paths);
+        $this->setReflectionPropertyValue('routes', [ 'front/bar' => [ 'live' ] ]);
+        $this->setReflectionPropertyValue('paths', $paths);
 
         $map = [
             [ 'call', 'front/bar' ],
@@ -167,7 +167,7 @@ class FrontControllerRouteTest extends FrontControllerTest
             'test' => TEST_STATICS . '/Corona/',
         ];
 
-        $this->set_reflection_property_value('paths', $paths);
+        $this->setReflectionPropertyValue('paths', $paths);
 
         $map = [
             [ 'call', 'function/bar' ],

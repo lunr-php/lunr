@@ -16,7 +16,7 @@ namespace Lunr\Corona\Tests;
  * @covers        Lunr\Corona\WebRequestParser
  * @backupGlobals enabled
  */
-class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
+class WebRequestParserParseSuperGlobalTest extends WebRequestParserTestCase
 {
 
     /**
@@ -35,7 +35,7 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
     {
         $_VAR = $var;
 
-        $method = $this->get_accessible_reflection_method('parse_super_global');
+        $method = $this->getReflectionMethod('parse_super_global');
         $method->invokeArgs($this->class, [ & $_VAR, $reset ]);
         if ($reset)
         {
@@ -58,7 +58,7 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
         $_VAR['test2'] = 'value2';
         $cache         = $_VAR;
 
-        $method = $this->get_accessible_reflection_method('parse_super_global');
+        $method = $this->getReflectionMethod('parse_super_global');
         $result = $method->invokeArgs($this->class, [ & $_VAR ]);
 
         $this->assertEquals($cache, $result);
@@ -74,7 +74,7 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
         $_VAR['test1'] = 'value1';
         $_VAR['test2'] = 'value2';
 
-        $method = $this->get_accessible_reflection_method('parse_super_global');
+        $method = $this->getReflectionMethod('parse_super_global');
         $method->invokeArgs($this->class, [ & $_VAR ]);
 
         $this->assertArrayEmpty($_VAR);
@@ -92,7 +92,7 @@ class WebRequestParserParseSuperGlobalTest extends WebRequestParserTest
 
         $_VAR_REF = $_VAR;
 
-        $method = $this->get_accessible_reflection_method('parse_super_global');
+        $method = $this->getReflectionMethod('parse_super_global');
         $method->invokeArgs($this->class, [ & $_VAR_REF, FALSE ]);
 
         $this->assertEquals($_VAR, $_VAR_REF);

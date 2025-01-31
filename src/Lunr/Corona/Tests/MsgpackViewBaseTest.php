@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\MsgpackView
  */
-class MsgpackViewBaseTest extends MsgpackViewTest
+class MsgpackViewBaseTest extends MsgpackViewTestCase
 {
 
     /**
@@ -51,7 +51,7 @@ class MsgpackViewBaseTest extends MsgpackViewTest
     {
         $data = [ 'key' => 'value', 'key2' => NULL ];
 
-        $method = $this->get_accessible_reflection_method('prepare_data');
+        $method = $this->getReflectionMethod('prepare_data');
 
         $this->assertSame($data, $method->invokeArgs($this->class, [ $data ]));
     }

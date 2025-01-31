@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the ResponseTest class.
+ * This file contains the ResponseTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2011 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -11,14 +11,14 @@
 namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\Response;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains test methods for the Response class.
  *
  * @covers     Lunr\Corona\Response
  */
-abstract class ResponseTest extends LunrBaseTest
+abstract class ResponseTestCase extends LunrBaseTestCase
 {
 
     /**

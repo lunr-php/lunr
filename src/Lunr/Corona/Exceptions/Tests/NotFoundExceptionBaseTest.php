@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\NotFoundException
  */
-class NotFoundExceptionBaseTest extends NotFoundExceptionTest
+class NotFoundExceptionBaseTest extends NotFoundExceptionTestCase
 {
 
     /**

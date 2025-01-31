@@ -1,25 +1,25 @@
 <?php
 
 /**
- * This file contains the BadRequestExceptionTest class.
+ * This file contains the TemporarilyDisabledExceptionTestCase class.
  *
- * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2024 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
  */
 
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
-use Lunr\Corona\Exceptions\BadRequestException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Corona\Exceptions\TemporarilyDisabledException;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the BadRequestException class.
+ * and shared attributes for testing the TemporarilyDisabledException class.
  *
- * @covers Lunr\Corona\Exceptions\BadRequestException
+ * @covers Lunr\Corona\Exceptions\TemporarilyDisabledException
  */
-abstract class BadRequestExceptionTest extends LunrBaseTest
+abstract class TemporarilyDisabledExceptionTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -42,9 +42,9 @@ abstract class BadRequestExceptionTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var BadRequestException
+     * @var TemporarilyDisabledException
      */
-    protected BadRequestException $class;
+    protected TemporarilyDisabledException $class;
 
     /**
      * TestCase Constructor.
@@ -56,7 +56,7 @@ abstract class BadRequestExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class = new BadRequestException($this->message, $this->code, $this->previous);
+        $this->class = new TemporarilyDisabledException($this->message, $this->code, $this->previous);
 
         parent::baseSetUp($this->class);
     }

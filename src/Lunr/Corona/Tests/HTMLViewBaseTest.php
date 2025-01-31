@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\HTMLView
  */
-class HTMLViewBaseTest extends HTMLViewTest
+class HTMLViewBaseTest extends HTMLViewTestCase
 {
 
     /**
@@ -47,7 +47,7 @@ class HTMLViewBaseTest extends HTMLViewTest
      */
     public function testJavascriptEmpty(): void
     {
-        $property = $this->get_reflection_property_value('javascript');
+        $property = $this->getReflectionPropertyValue('javascript');
         $this->assertArrayEmpty($property);
     }
 
@@ -56,7 +56,7 @@ class HTMLViewBaseTest extends HTMLViewTest
      */
     public function testStylesheetEmpty(): void
     {
-        $property = $this->get_reflection_property_value('stylesheets');
+        $property = $this->getReflectionPropertyValue('stylesheets');
         $this->assertArrayEmpty($property);
     }
 

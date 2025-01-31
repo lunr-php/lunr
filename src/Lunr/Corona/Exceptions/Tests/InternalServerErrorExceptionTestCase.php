@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the UnprocessableEntityExceptionTest class.
+ * This file contains the InternalServerErrorExceptionTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
@@ -10,16 +10,16 @@
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
-use Lunr\Corona\Exceptions\UnprocessableEntityException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Corona\Exceptions\InternalServerErrorException;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the UnprocessableEntityException class.
+ * and shared attributes for testing the InternalServerErrorException class.
  *
- * @covers Lunr\Corona\Exceptions\UnprocessableEntityException
+ * @covers Lunr\Corona\Exceptions\InternalServerErrorException
  */
-abstract class UnprocessableEntityExceptionTest extends LunrBaseTest
+abstract class InternalServerErrorExceptionTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -42,9 +42,9 @@ abstract class UnprocessableEntityExceptionTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var UnprocessableEntityException
+     * @var InternalServerErrorException
      */
-    protected UnprocessableEntityException $class;
+    protected InternalServerErrorException $class;
 
     /**
      * TestCase Constructor.
@@ -56,7 +56,7 @@ abstract class UnprocessableEntityExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class = new UnprocessableEntityException($this->message, $this->code, $this->previous);
+        $this->class = new InternalServerErrorException($this->message, $this->code, $this->previous);
 
         parent::baseSetUp($this->class);
     }

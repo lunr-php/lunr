@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the UnauthorizedExceptionTest class.
+ * This file contains the FailedDependencyExceptionTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
@@ -10,16 +10,16 @@
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
-use Lunr\Corona\Exceptions\UnauthorizedException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Corona\Exceptions\FailedDependencyException;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the UnauthorizedException class.
+ * and shared attributes for testing the FailedDependencyException class.
  *
- * @covers Lunr\Corona\Exceptions\UnauthorizedException
+ * @covers Lunr\Corona\Exceptions\FailedDependencyException
  */
-abstract class UnauthorizedExceptionTest extends LunrBaseTest
+abstract class FailedDependencyExceptionTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -42,9 +42,9 @@ abstract class UnauthorizedExceptionTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var UnauthorizedException
+     * @var FailedDependencyException
      */
-    protected UnauthorizedException $class;
+    protected FailedDependencyException $class;
 
     /**
      * TestCase Constructor.
@@ -56,7 +56,7 @@ abstract class UnauthorizedExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class = new UnauthorizedException($this->message, $this->code, $this->previous);
+        $this->class = new FailedDependencyException($this->message, $this->code, $this->previous);
 
         parent::baseSetUp($this->class);
     }

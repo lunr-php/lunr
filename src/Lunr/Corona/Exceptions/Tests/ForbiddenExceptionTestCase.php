@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the RequestedRangeNotSatisfiableExceptionTest class.
+ * This file contains the ForbiddenExceptionTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
@@ -10,16 +10,16 @@
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
-use Lunr\Corona\Exceptions\RequestedRangeNotSatisfiableException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Corona\Exceptions\ForbiddenException;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the RequestedRangeNotSatisfiableException class.
+ * and shared attributes for testing the ForbiddenException class.
  *
- * @covers Lunr\Corona\Exceptions\RequestedRangeNotSatisfiableException
+ * @covers Lunr\Corona\Exceptions\ForbiddenException
  */
-abstract class RequestedRangeNotSatisfiableExceptionTest extends LunrBaseTest
+abstract class ForbiddenExceptionTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -42,9 +42,9 @@ abstract class RequestedRangeNotSatisfiableExceptionTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var RequestedRangeNotSatisfiableException
+     * @var ForbiddenException
      */
-    protected RequestedRangeNotSatisfiableException $class;
+    protected ForbiddenException $class;
 
     /**
      * TestCase Constructor.
@@ -56,7 +56,7 @@ abstract class RequestedRangeNotSatisfiableExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class = new RequestedRangeNotSatisfiableException($this->message, $this->code, $this->previous);
+        $this->class = new ForbiddenException($this->message, $this->code, $this->previous);
 
         parent::baseSetUp($this->class);
     }

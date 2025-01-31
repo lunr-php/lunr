@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\UnprocessableEntityException
  */
-class UnprocessableEntityExceptionBaseTest extends UnprocessableEntityExceptionTest
+class UnprocessableEntityExceptionBaseTest extends UnprocessableEntityExceptionTestCase
 {
 
     /**

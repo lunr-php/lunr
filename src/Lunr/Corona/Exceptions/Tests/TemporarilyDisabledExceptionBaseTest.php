@@ -14,7 +14,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\TemporarilyDisabledException
  */
-class TemporarilyDisabledExceptionBaseTest extends TemporarilyDisabledExceptionTest
+class TemporarilyDisabledExceptionBaseTest extends TemporarilyDisabledExceptionTestCase
 {
 
     /**

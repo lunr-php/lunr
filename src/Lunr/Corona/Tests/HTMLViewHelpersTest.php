@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\HTMLView
  */
-class HTMLViewHelpersTest extends HTMLViewTest
+class HTMLViewHelpersTest extends HTMLViewTestCase
 {
 
     /**
@@ -25,9 +25,9 @@ class HTMLViewHelpersTest extends HTMLViewTest
      */
     public function testIncluceStylesheetsWithNoStylesheets(): void
     {
-        $this->set_reflection_property_value('stylesheets', []);
+        $this->setReflectionPropertyValue('stylesheets', []);
 
-        $method = $this->get_accessible_reflection_method('include_stylesheets');
+        $method = $this->getReflectionMethod('include_stylesheets');
 
         $this->assertSame('', $method->invoke($this->class));
     }
@@ -39,9 +39,9 @@ class HTMLViewHelpersTest extends HTMLViewTest
      */
     public function testIncludeStylesheetsWithOneStylesheet(): void
     {
-        $this->set_reflection_property_value('stylesheets', [ 'style1.css' ]);
+        $this->setReflectionPropertyValue('stylesheets', [ 'style1.css' ]);
 
-        $method = $this->get_accessible_reflection_method('include_stylesheets');
+        $method = $this->getReflectionMethod('include_stylesheets');
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
@@ -50,11 +50,11 @@ class HTMLViewHelpersTest extends HTMLViewTest
                           [ 'base_path', '/to/' ],
                       ]);
 
-        $this->mock_function('filemtime', function () { return 1438183002; });
+        $this->mockFunction('filemtime', function () { return 1438183002; });
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/stylesheet_1.html', $method->invoke($this->class));
 
-        $this->unmock_function('filemtime');
+        $this->unmockFunction('filemtime');
     }
 
     /**
@@ -64,9 +64,9 @@ class HTMLViewHelpersTest extends HTMLViewTest
      */
     public function testIncludeStylesheetsWithMultipleStylesheets(): void
     {
-        $this->set_reflection_property_value('stylesheets', [ 'style2.css', 'style1.css' ]);
+        $this->setReflectionPropertyValue('stylesheets', [ 'style2.css', 'style1.css' ]);
 
-        $method = $this->get_accessible_reflection_method('include_stylesheets');
+        $method = $this->getReflectionMethod('include_stylesheets');
 
         $this->request->expects($this->exactly(4))
                       ->method('__get')
@@ -75,11 +75,11 @@ class HTMLViewHelpersTest extends HTMLViewTest
                           [ 'base_path', '/to/' ],
                       ]);
 
-        $this->mock_function('filemtime', function () { return 1438183002; });
+        $this->mockFunction('filemtime', function () { return 1438183002; });
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/stylesheet_2.html', $method->invoke($this->class));
 
-        $this->unmock_function('filemtime');
+        $this->unmockFunction('filemtime');
     }
 
     /**
@@ -95,9 +95,9 @@ class HTMLViewHelpersTest extends HTMLViewTest
             '//www.website.com/style1.css',
         ];
 
-        $this->set_reflection_property_value('stylesheets', $stylesheets);
+        $this->setReflectionPropertyValue('stylesheets', $stylesheets);
 
-        $method = $this->get_accessible_reflection_method('include_stylesheets');
+        $method = $this->getReflectionMethod('include_stylesheets');
 
         $this->request->expects($this->never())
                       ->method('__get')
@@ -129,9 +129,9 @@ class HTMLViewHelpersTest extends HTMLViewTest
      */
     public function testIncludeStylesheetsWithMultipleStylesheetsSorted(): void
     {
-        $this->set_reflection_property_value('stylesheets', [ 'style2.css', 'style1.css' ]);
+        $this->setReflectionPropertyValue('stylesheets', [ 'style2.css', 'style1.css' ]);
 
-        $method = $this->get_accessible_reflection_method('include_stylesheets');
+        $method = $this->getReflectionMethod('include_stylesheets');
 
         $this->request->expects($this->exactly(4))
                       ->method('__get')
@@ -140,11 +140,11 @@ class HTMLViewHelpersTest extends HTMLViewTest
                           [ 'base_path', '/to/' ],
                       ]);
 
-        $this->mock_function('filemtime', function () { return 1438183002; });
+        $this->mockFunction('filemtime', function () { return 1438183002; });
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/stylesheet_3.html', $method->invokeArgs($this->class, [ TRUE ]));
 
-        $this->unmock_function('filemtime');
+        $this->unmockFunction('filemtime');
     }
 
     /**
@@ -154,9 +154,9 @@ class HTMLViewHelpersTest extends HTMLViewTest
      */
     public function testIncluceJavascriptWithNoJSFiles(): void
     {
-        $this->set_reflection_property_value('javascript', []);
+        $this->setReflectionPropertyValue('javascript', []);
 
-        $method = $this->get_accessible_reflection_method('include_javascript');
+        $method = $this->getReflectionMethod('include_javascript');
 
         $this->assertSame('', $method->invoke($this->class));
     }
@@ -168,9 +168,9 @@ class HTMLViewHelpersTest extends HTMLViewTest
      */
     public function testIncludeJavascriptWithOneJSFile(): void
     {
-        $this->set_reflection_property_value('javascript', [ 'script1.js' ]);
+        $this->setReflectionPropertyValue('javascript', [ 'script1.js' ]);
 
-        $method = $this->get_accessible_reflection_method('include_javascript');
+        $method = $this->getReflectionMethod('include_javascript');
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')
@@ -179,11 +179,11 @@ class HTMLViewHelpersTest extends HTMLViewTest
                           [ 'base_path', '/to/' ],
                       ]);
 
-        $this->mock_function('filemtime', function () { return 1438183002; });
+        $this->mockFunction('filemtime', function () { return 1438183002; });
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/javascript_1.html', $method->invoke($this->class));
 
-        $this->unmock_function('filemtime');
+        $this->unmockFunction('filemtime');
     }
 
     /**
@@ -193,9 +193,9 @@ class HTMLViewHelpersTest extends HTMLViewTest
      */
     public function testIncludeJavascriptWithMultipleJSFiles(): void
     {
-        $this->set_reflection_property_value('javascript', [ 'script2.js', 'script1.js' ]);
+        $this->setReflectionPropertyValue('javascript', [ 'script2.js', 'script1.js' ]);
 
-        $method = $this->get_accessible_reflection_method('include_javascript');
+        $method = $this->getReflectionMethod('include_javascript');
 
         $this->request->expects($this->exactly(4))
                       ->method('__get')
@@ -204,11 +204,11 @@ class HTMLViewHelpersTest extends HTMLViewTest
                           [ 'base_path', '/to/' ],
                       ]);
 
-        $this->mock_function('filemtime', function () { return 1438183002; });
+        $this->mockFunction('filemtime', function () { return 1438183002; });
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/javascript_2.html', $method->invoke($this->class));
 
-        $this->unmock_function('filemtime');
+        $this->unmockFunction('filemtime');
     }
 
     /**
@@ -224,9 +224,9 @@ class HTMLViewHelpersTest extends HTMLViewTest
             '//www.website.com/script1.js',
         ];
 
-        $this->set_reflection_property_value('javascript', $javascript);
+        $this->setReflectionPropertyValue('javascript', $javascript);
 
-        $method = $this->get_accessible_reflection_method('include_javascript');
+        $method = $this->getReflectionMethod('include_javascript');
 
         $this->request->expects($this->never())
                       ->method('__get')
@@ -258,9 +258,9 @@ class HTMLViewHelpersTest extends HTMLViewTest
      */
     public function testIncludeJavascriptWithMultipleJSFilesSorted(): void
     {
-        $this->set_reflection_property_value('javascript', [ 'script2.js', 'script1.js' ]);
+        $this->setReflectionPropertyValue('javascript', [ 'script2.js', 'script1.js' ]);
 
-        $method = $this->get_accessible_reflection_method('include_javascript');
+        $method = $this->getReflectionMethod('include_javascript');
 
         $this->request->expects($this->exactly(4))
                       ->method('__get')
@@ -269,11 +269,11 @@ class HTMLViewHelpersTest extends HTMLViewTest
                           [ 'base_path', '/to/' ],
                       ]);
 
-        $this->mock_function('filemtime', function () { return 1438183002; });
+        $this->mockFunction('filemtime', function () { return 1438183002; });
 
         $this->assertStringEqualsFile(TEST_STATICS . '/Corona/javascript_3.html', $method->invokeArgs($this->class, [ TRUE ]));
 
-        $this->unmock_function('filemtime');
+        $this->unmockFunction('filemtime');
     }
 
     /**
@@ -289,7 +289,7 @@ class HTMLViewHelpersTest extends HTMLViewTest
      */
     public function testCssAlternate($basename, $alternation_hint, $suffix, $result): void
     {
-        $method = $this->get_accessible_reflection_method('css_alternate');
+        $method = $this->getReflectionMethod('css_alternate');
 
         $this->assertEquals($result, $method->invokeArgs($this->class, [ $basename, $alternation_hint, $suffix ]));
     }

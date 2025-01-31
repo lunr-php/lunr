@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\PreconditionFailedException
  */
-class PreconditionFailedExceptionBaseTest extends PreconditionFailedExceptionTest
+class PreconditionFailedExceptionBaseTest extends PreconditionFailedExceptionTestCase
 {
 
     /**

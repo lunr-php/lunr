@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the ForbiddenExceptionTest class.
+ * This file contains the UnprocessableEntityExceptionTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
@@ -10,16 +10,16 @@
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
-use Lunr\Corona\Exceptions\ForbiddenException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Corona\Exceptions\UnprocessableEntityException;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the ForbiddenException class.
+ * and shared attributes for testing the UnprocessableEntityException class.
  *
- * @covers Lunr\Corona\Exceptions\ForbiddenException
+ * @covers Lunr\Corona\Exceptions\UnprocessableEntityException
  */
-abstract class ForbiddenExceptionTest extends LunrBaseTest
+abstract class UnprocessableEntityExceptionTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -42,9 +42,9 @@ abstract class ForbiddenExceptionTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var ForbiddenException
+     * @var UnprocessableEntityException
      */
-    protected ForbiddenException $class;
+    protected UnprocessableEntityException $class;
 
     /**
      * TestCase Constructor.
@@ -56,7 +56,7 @@ abstract class ForbiddenExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class = new ForbiddenException($this->message, $this->code, $this->previous);
+        $this->class = new UnprocessableEntityException($this->message, $this->code, $this->previous);
 
         parent::baseSetUp($this->class);
     }

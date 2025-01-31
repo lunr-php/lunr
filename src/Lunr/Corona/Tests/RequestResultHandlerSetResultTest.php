@@ -17,7 +17,7 @@ use Lunr\Corona\HttpCode;
  *
  * @covers Lunr\Corona\RequestResultHandler
  */
-class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
+class RequestResultHandlerSetResultTest extends RequestResultHandlerTestCase
 {
 
     /**
@@ -36,7 +36,7 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
                        ->method('set_return_code')
                        ->with('controller/method', HttpCode::NOT_IMPLEMENTED);
 
-        $method = $this->get_accessible_reflection_method('set_result');
+        $method = $this->getReflectionMethod('set_result');
 
         $method->invokeArgs($this->class, [ HttpCode::NOT_IMPLEMENTED ]);
     }
@@ -60,7 +60,7 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
         $this->response->expects($this->never())
                        ->method('set_error_message');
 
-        $method = $this->get_accessible_reflection_method('set_result');
+        $method = $this->getReflectionMethod('set_result');
 
         $method->invokeArgs($this->class, [ HttpCode::NOT_IMPLEMENTED ]);
     }
@@ -85,7 +85,7 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
                        ->method('set_error_message')
                        ->with('controller/method', 'errmsg');
 
-        $method = $this->get_accessible_reflection_method('set_result');
+        $method = $this->getReflectionMethod('set_result');
 
         $method->invokeArgs($this->class, [ HttpCode::NOT_IMPLEMENTED, 'errmsg' ]);
     }
@@ -109,7 +109,7 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
         $this->response->expects($this->never())
                        ->method('set_error_info');
 
-        $method = $this->get_accessible_reflection_method('set_result');
+        $method = $this->getReflectionMethod('set_result');
 
         $method->invokeArgs($this->class, [ HttpCode::NOT_IMPLEMENTED ]);
     }
@@ -134,7 +134,7 @@ class RequestResultHandlerSetResultTest extends RequestResultHandlerTest
                        ->method('set_error_info')
                        ->with('controller/method', 9999);
 
-        $method = $this->get_accessible_reflection_method('set_result');
+        $method = $this->getReflectionMethod('set_result');
 
         $method->invokeArgs($this->class, [ HttpCode::NOT_IMPLEMENTED, NULL, 9999 ]);
     }

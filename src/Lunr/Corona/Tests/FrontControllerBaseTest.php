@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers Lunr\Corona\FrontController
  */
-class FrontControllerBaseTest extends FrontControllerTest
+class FrontControllerBaseTest extends FrontControllerTestCase
 {
 
     /**
@@ -41,7 +41,7 @@ class FrontControllerBaseTest extends FrontControllerTest
      */
     public function testRegisterLookupPath(): void
     {
-        $property = $this->get_accessible_reflection_property('paths');
+        $property = $this->getReflectionProperty('paths');
 
         $this->assertArrayEmpty($property->getValue($this->class));
 
@@ -61,7 +61,7 @@ class FrontControllerBaseTest extends FrontControllerTest
      */
     public function testAddRoutingRuleWithoutRoute(): void
     {
-        $property = $this->get_accessible_reflection_property('routes');
+        $property = $this->getReflectionProperty('routes');
 
         $this->assertArrayEmpty($property->getValue($this->class));
 
@@ -81,7 +81,7 @@ class FrontControllerBaseTest extends FrontControllerTest
      */
     public function testAddRoutingRuleWithRoute(): void
     {
-        $property = $this->get_accessible_reflection_property('routes');
+        $property = $this->getReflectionProperty('routes');
 
         $this->assertArrayEmpty($property->getValue($this->class));
 

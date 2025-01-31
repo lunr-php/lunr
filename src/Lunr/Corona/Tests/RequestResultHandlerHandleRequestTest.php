@@ -19,7 +19,7 @@ use Lunr\Corona\Exceptions\BadRequestException;
  *
  * @covers Lunr\Corona\RequestResultHandler
  */
-class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTest
+class RequestResultHandlerHandleRequestTest extends RequestResultHandlerTestCase
 {
 
     /**

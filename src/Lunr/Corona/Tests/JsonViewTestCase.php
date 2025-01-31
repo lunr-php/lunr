@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This file contains the MsgpackViewTest class.
+ * This file contains the JsonViewTestCase class.
  *
- * SPDX-FileCopyrightText: Copyright 2017 M2mobi B.V., Amsterdam, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2013 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
  */
@@ -11,18 +11,18 @@
 namespace Lunr\Corona\Tests;
 
 use Lunr\Core\Configuration;
-use Lunr\Corona\MsgpackView;
+use Lunr\Corona\JsonView;
 use Lunr\Corona\Request;
 use Lunr\Corona\Response;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the MsgpackView class.
+ * and shared attributes for testing the JsonView class.
  *
- * @covers     Lunr\Corona\MsgpackView
+ * @covers     Lunr\Corona\JsonView
  */
-abstract class MsgpackViewTest extends LunrBaseTest
+abstract class JsonViewTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -45,9 +45,9 @@ abstract class MsgpackViewTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var MsgpackView
+     * @var JsonView
      */
-    protected MsgpackView $class;
+    protected JsonView $class;
 
     /**
      * TestCase Constructor.
@@ -61,7 +61,7 @@ abstract class MsgpackViewTest extends LunrBaseTest
                               ->disableOriginalConstructor()
                               ->getMock();
 
-        $this->class = new MsgpackView($this->request, $this->response, $this->configuration);
+        $this->class = new JsonView($this->request, $this->response, $this->configuration);
 
         parent::baseSetUp($this->class);
     }

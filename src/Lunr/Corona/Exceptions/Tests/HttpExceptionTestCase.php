@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the HttpExceptionTest class.
+ * This file contains the HttpExceptionTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2018 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -12,7 +12,7 @@ namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
 use Lunr\Corona\Exceptions\HttpException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
@@ -20,7 +20,7 @@ use Lunr\Halo\LunrBaseTest;
  *
  * @covers Lunr\Corona\Exceptions\HttpException
  */
-abstract class HttpExceptionTest extends LunrBaseTest
+abstract class HttpExceptionTestCase extends LunrBaseTestCase
 {
 
     /**

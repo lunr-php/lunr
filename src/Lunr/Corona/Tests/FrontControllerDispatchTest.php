@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\FrontController
  */
-class FrontControllerDispatchTest extends FrontControllerTest
+class FrontControllerDispatchTest extends FrontControllerTestCase
 {
 
     /**

@@ -14,7 +14,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\ClientDataHttpException
  */
-class ClientDataHttpExceptionInputDataTest extends ClientDataHttpExceptionTest
+class ClientDataHttpExceptionInputDataTest extends ClientDataHttpExceptionTestCase
 {
 
     /**
@@ -106,7 +106,7 @@ class ClientDataHttpExceptionInputDataTest extends ClientDataHttpExceptionTest
      */
     public function testGetDataKey(): void
     {
-        $this->set_reflection_property_value('key', 'foo');
+        $this->setReflectionPropertyValue('key', 'foo');
 
         $this->assertEquals('foo', $this->class->getDataKey());
     }
@@ -118,7 +118,7 @@ class ClientDataHttpExceptionInputDataTest extends ClientDataHttpExceptionTest
      */
     public function testGetDataValue(): void
     {
-        $this->set_reflection_property_value('value', 'bar');
+        $this->setReflectionPropertyValue('value', 'bar');
 
         $this->assertEquals('bar', $this->class->getDataValue());
     }
@@ -130,7 +130,7 @@ class ClientDataHttpExceptionInputDataTest extends ClientDataHttpExceptionTest
      */
     public function testGetReport(): void
     {
-        $this->set_reflection_property_value('report', 'baz');
+        $this->setReflectionPropertyValue('report', 'baz');
 
         $this->assertEquals('baz', $this->class->getReport());
     }
@@ -144,7 +144,7 @@ class ClientDataHttpExceptionInputDataTest extends ClientDataHttpExceptionTest
     {
         $this->assertFalse($this->class->isDataAvailable());
 
-        $this->set_reflection_property_value('key', '');
+        $this->setReflectionPropertyValue('key', '');
 
         $this->assertTrue($this->class->isDataAvailable());
     }
@@ -158,7 +158,7 @@ class ClientDataHttpExceptionInputDataTest extends ClientDataHttpExceptionTest
     {
         $this->assertFalse($this->class->isReportAvailable());
 
-        $this->set_reflection_property_value('report', '');
+        $this->setReflectionPropertyValue('report', '');
 
         $this->assertTrue($this->class->isReportAvailable());
     }

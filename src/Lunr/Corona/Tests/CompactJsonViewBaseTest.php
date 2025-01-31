@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\CompactJsonView
  */
-class CompactJsonViewBaseTest extends CompactJsonViewTest
+class CompactJsonViewBaseTest extends CompactJsonViewTestCase
 {
 
     /**
@@ -53,7 +53,7 @@ class CompactJsonViewBaseTest extends CompactJsonViewTest
      */
     public function testPrepareDataReturnsModifiedData($data, $expected): void
     {
-        $method = $this->get_accessible_reflection_method('prepare_data');
+        $method = $this->getReflectionMethod('prepare_data');
 
         $this->assertSame($expected, $method->invokeArgs($this->class, [ $data ]));
     }

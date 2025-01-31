@@ -16,7 +16,7 @@ use Lunr\Corona\Tests\Helpers\MockUncaughtException;
  *
  * @covers Lunr\Corona\MsgpackView
  */
-class MsgpackViewPrintExceptionTest extends MsgpackViewTest
+class MsgpackViewPrintExceptionTest extends MsgpackViewTestCase
 {
 
     /**
@@ -32,15 +32,15 @@ class MsgpackViewPrintExceptionTest extends MsgpackViewTest
         $exception->setFile('index.php');
         $exception->setLine(100);
 
-        $this->mock_function('header', function () {});
-        $this->mock_function('http_response_code', function () {});
+        $this->mockFunction('header', function () {});
+        $this->mockFunction('http_response_code', function () {});
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/msgpack_exception.msgpack');
 
         $this->class->print_exception($exception);
 
-        $this->unmock_function('header');
-        $this->unmock_function('http_response_code');
+        $this->unmockFunction('header');
+        $this->unmockFunction('http_response_code');
     }
 
 }

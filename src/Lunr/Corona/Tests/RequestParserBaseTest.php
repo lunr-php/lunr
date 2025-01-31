@@ -16,7 +16,7 @@ namespace Lunr\Corona\Tests;
  * @covers        Lunr\Corona\RequestParser
  * @backupGlobals enabled
  */
-class RequestParserBaseTest extends RequestParserTest
+class RequestParserBaseTest extends RequestParserTestCase
 {
 
     /**
@@ -124,13 +124,13 @@ class RequestParserBaseTest extends RequestParserTest
      */
     public function testParseRawData(): void
     {
-        $this->mock_function('file_get_contents', function () { return 'raw'; });
+        $this->mockFunction('file_get_contents', function () { return 'raw'; });
 
         $result = $this->class->parse_raw_data();
 
         $this->assertEquals('raw', $result);
 
-        $this->unmock_function('file_get_contents');
+        $this->unmockFunction('file_get_contents');
     }
 
 }

@@ -16,7 +16,7 @@ namespace Lunr\Corona\Tests;
  * @covers        Lunr\Corona\WebRequestParser
  * @backupGlobals enabled
  */
-class WebRequestParserBaseTest extends WebRequestParserTest
+class WebRequestParserBaseTest extends WebRequestParserTestCase
 {
 
     /**
@@ -40,7 +40,7 @@ class WebRequestParserBaseTest extends WebRequestParserTest
      */
     public function testRequestParsedIsFalseByDefault(): void
     {
-        $this->assertFalse($this->get_reflection_property_value('request_parsed'));
+        $this->assertFalse($this->getReflectionPropertyValue('request_parsed'));
     }
 
 }

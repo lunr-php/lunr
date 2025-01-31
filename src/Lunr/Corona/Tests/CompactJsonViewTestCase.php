@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the CompactJsonViewTest class.
+ * This file contains the CompactJsonViewTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2013 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -14,7 +14,7 @@ use Lunr\Core\Configuration;
 use Lunr\Corona\CompactJsonView;
 use Lunr\Corona\Request;
 use Lunr\Corona\Response;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
@@ -22,7 +22,7 @@ use Lunr\Halo\LunrBaseTest;
  *
  * @covers     Lunr\Corona\CompactJsonView
  */
-abstract class CompactJsonViewTest extends LunrBaseTest
+abstract class CompactJsonViewTestCase extends LunrBaseTestCase
 {
 
     /**

@@ -14,7 +14,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers Lunr\Corona\Model
  */
-class ModelBaseTest extends ModelTest
+class ModelBaseTest extends ModelTestCase
 {
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the RequestParserTest class.
+ * This file contains the WebRequestParserTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2014 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -10,16 +10,18 @@
 
 namespace Lunr\Corona\Tests;
 
-use Lunr\Corona\RequestParser;
-use Lunr\Halo\LunrBaseTest;
+use http\Header;
+use Lunr\Core\Configuration;
+use Lunr\Corona\WebRequestParser;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the RequestParser class.
+ * and shared attributes for testing the WebRequestParser class.
  *
- * @covers     Lunr\Corona\RequestParser
+ * @covers     Lunr\Corona\WebRequestParser
  */
-abstract class RequestParserTest extends LunrBaseTest
+abstract class WebRequestParserTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -29,10 +31,16 @@ abstract class RequestParserTest extends LunrBaseTest
     protected $configuration;
 
     /**
-     * Instance of the tested class.
-     * @var RequestParser
+     * Mock instance of the Header class
+     * @var Header
      */
-    protected RequestParser $class;
+    protected $header;
+
+    /**
+     * Instance of the tested class.
+     * @var WebRequestParser
+     */
+    protected WebRequestParser $class;
 
     /**
      * Shared TestCase Constructor code.
@@ -42,8 +50,9 @@ abstract class RequestParserTest extends LunrBaseTest
     public function setUp(): void
     {
         $this->configuration = $this->getMockBuilder('Lunr\Core\Configuration')->getMock();
+        $this->header        = $this->getMockBuilder('http\Header')->getMock();
 
-        $this->class = new RequestParser($this->configuration);
+        $this->class = new WebRequestParser($this->configuration, $this->header);
 
         parent::baseSetUp($this->class);
     }
@@ -55,6 +64,7 @@ abstract class RequestParserTest extends LunrBaseTest
     {
         unset($this->class);
         unset($this->configuration);
+        unset($this->header);
 
         parent::tearDown();
     }
@@ -67,11 +77,16 @@ abstract class RequestParserTest extends LunrBaseTest
     public function invalidSuperglobalValueProvider(): array
     {
         $values   = [];
-        $values[] = [ [] ];
-        $values[] = [ 0 ];
-        $values[] = [ 'String' ];
-        $values[] = [ TRUE ];
-        $values[] = [ NULL ];
+        $values[] = [ [], FALSE ];
+        $values[] = [ 0, FALSE ];
+        $values[] = [ 'String', FALSE ];
+        $values[] = [ TRUE, FALSE ];
+        $values[] = [ NULL, FALSE ];
+        $values[] = [ [], TRUE ];
+        $values[] = [ 0, TRUE ];
+        $values[] = [ 'String', TRUE ];
+        $values[] = [ TRUE, TRUE ];
+        $values[] = [ NULL, TRUE ];
 
         return $values;
     }

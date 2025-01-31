@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers Lunr\Corona\FrontController
  */
-class FrontControllerLookupTest extends FrontControllerTest
+class FrontControllerLookupTest extends FrontControllerTestCase
 {
 
     /**
@@ -25,7 +25,7 @@ class FrontControllerLookupTest extends FrontControllerTest
      */
     public function testVoidLookup(): void
     {
-        $this->set_reflection_property_value('paths', []);
+        $this->setReflectionPropertyValue('paths', []);
 
         $value = $this->class->lookup();
 
@@ -39,7 +39,7 @@ class FrontControllerLookupTest extends FrontControllerTest
      */
     public function testLookupWithoutPath(): void
     {
-        $this->set_reflection_property_value('paths', []);
+        $this->setReflectionPropertyValue('paths', []);
 
         $value = $this->class->lookup('test');
 
@@ -53,7 +53,7 @@ class FrontControllerLookupTest extends FrontControllerTest
      */
     public function testLookupWithSinglePath(): void
     {
-        $this->set_reflection_property_value('paths', [ 'test' => TEST_STATICS . '/Corona/' ]);
+        $this->setReflectionPropertyValue('paths', [ 'test' => TEST_STATICS . '/Corona/' ]);
 
         $fqcn = 'Project\\Package1\\FunctionController';
 
@@ -80,7 +80,7 @@ class FrontControllerLookupTest extends FrontControllerTest
             'test' => TEST_STATICS . '/Corona/',
         ];
 
-        $this->set_reflection_property_value('paths', $paths);
+        $this->setReflectionPropertyValue('paths', $paths);
 
         $fqcn = 'Project\\Package1\\FunctionController';
 
@@ -107,7 +107,7 @@ class FrontControllerLookupTest extends FrontControllerTest
             'test' => TEST_STATICS . '/Corona/',
         ];
 
-        $this->set_reflection_property_value('paths', $paths);
+        $this->setReflectionPropertyValue('paths', $paths);
 
         $value = $this->class->lookup('prod');
 
@@ -127,7 +127,7 @@ class FrontControllerLookupTest extends FrontControllerTest
             'test' => TEST_STATICS . '/Corona/',
         ];
 
-        $this->set_reflection_property_value('paths', $paths);
+        $this->setReflectionPropertyValue('paths', $paths);
 
         $fqcn = 'Project\\Package1\\FunctionController';
 
@@ -148,7 +148,7 @@ class FrontControllerLookupTest extends FrontControllerTest
      */
     public function testLookupFails(): void
     {
-        $this->set_reflection_property_value('paths', [ 'test' => TEST_STATICS . '/Corona/' ]);
+        $this->setReflectionPropertyValue('paths', [ 'test' => TEST_STATICS . '/Corona/' ]);
 
         $this->request->expects($this->exactly(2))
                       ->method('__get')

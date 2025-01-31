@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\Request
  */
-class RequestSetMockValuesTest extends RequestTest
+class RequestSetMockValuesTest extends RequestTestCase
 {
 
     /**
@@ -29,7 +29,7 @@ class RequestSetMockValuesTest extends RequestTest
 
         $this->class->set_mock_values($mock);
 
-        $this->assertEquals($mock, $this->get_reflection_property_value('mock'));
+        $this->assertEquals($mock, $this->getReflectionPropertyValue('mock'));
     }
 
 }

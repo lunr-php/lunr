@@ -14,7 +14,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers Lunr\Corona\Model
  */
-class ModelCacheTest extends ModelTest
+class ModelCacheTest extends ModelTestCase
 {
 
     /**
@@ -33,7 +33,7 @@ class ModelCacheTest extends ModelTest
                    ->method('get')
                    ->willReturn('bar');
 
-        $method = $this->get_accessible_reflection_method('get_from_cache');
+        $method = $this->getReflectionMethod('get_from_cache');
 
         $result = $method->invokeArgs($this->class, [ 'foo' ]);
 
@@ -53,7 +53,7 @@ class ModelCacheTest extends ModelTest
         $this->cache->expects($this->never())
                     ->method('save');
 
-        $method = $this->get_accessible_reflection_method('set_in_cache');
+        $method = $this->getReflectionMethod('set_in_cache');
 
         $result = $method->invokeArgs($this->class, [ 'foo', NULL ]);
 
@@ -84,7 +84,7 @@ class ModelCacheTest extends ModelTest
                    ->method('set')
                    ->with('bar');
 
-        $method = $this->get_accessible_reflection_method('set_in_cache');
+        $method = $this->getReflectionMethod('set_in_cache');
 
         $result = $method->invokeArgs($this->class, [ 'foo', 'bar' ]);
 
@@ -115,7 +115,7 @@ class ModelCacheTest extends ModelTest
                    ->method('set')
                    ->with('bar');
 
-        $method = $this->get_accessible_reflection_method('set_in_cache');
+        $method = $this->getReflectionMethod('set_in_cache');
 
         $result = $method->invokeArgs($this->class, [ 'foo', 'bar', 300 ]);
 
@@ -129,7 +129,7 @@ class ModelCacheTest extends ModelTest
      */
     public function testCacheIfNeededReturnsWithoutCache()
     {
-        $this->set_reflection_property_value('cache', NULL);
+        $this->setReflectionPropertyValue('cache', NULL);
 
         $this->cache->expects($this->never())
                     ->method('getItem');
@@ -137,7 +137,7 @@ class ModelCacheTest extends ModelTest
         $this->item->expects($this->never())
                    ->method('isHit');
 
-        $method = $this->get_accessible_reflection_method('cache_if_needed');
+        $method = $this->getReflectionMethod('cache_if_needed');
 
         $result = $method->invokeArgs($this->class, [ 'foo', fn($param) => 'test ' . $param, [ 'param' ] ]);
 
@@ -164,7 +164,7 @@ class ModelCacheTest extends ModelTest
                    ->method('get')
                    ->willReturn('bar');
 
-        $method = $this->get_accessible_reflection_method('cache_if_needed');
+        $method = $this->getReflectionMethod('cache_if_needed');
 
         $result = $method->invokeArgs($this->class, [ 'foo', fn() => 'test' ]);
 
@@ -202,7 +202,7 @@ class ModelCacheTest extends ModelTest
                     ->method('save')
                     ->with($this->item);
 
-        $method = $this->get_accessible_reflection_method('cache_if_needed');
+        $method = $this->getReflectionMethod('cache_if_needed');
 
         $result = $method->invokeArgs($this->class, [ 'foo', fn() => 'test' ]);
 
@@ -240,7 +240,7 @@ class ModelCacheTest extends ModelTest
                     ->method('save')
                     ->with($this->item);
 
-        $method = $this->get_accessible_reflection_method('cache_if_needed');
+        $method = $this->getReflectionMethod('cache_if_needed');
 
         $result = $method->invokeArgs($this->class, [ 'foo', fn($param) => 'test ' . $param, [ 'param' ] ]);
 
@@ -259,7 +259,7 @@ class ModelCacheTest extends ModelTest
                     ->with('foo')
                     ->willReturn(TRUE);
 
-        $method = $this->get_accessible_reflection_method('delete_from_cache');
+        $method = $this->getReflectionMethod('delete_from_cache');
 
         $method->invokeArgs($this->class, [ 'foo' ]);
     }

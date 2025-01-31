@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\Response
  */
-class ResponseSetTest extends ResponseTest
+class ResponseSetTest extends ResponseTestCase
 {
 
     /**
@@ -30,7 +30,7 @@ class ResponseSetTest extends ResponseTest
     {
         $this->class->$attr = 'value';
 
-        $this->assertArrayEmpty($this->get_reflection_property_value($attr));
+        $this->assertArrayEmpty($this->getReflectionPropertyValue($attr));
     }
 
     /**
@@ -42,7 +42,7 @@ class ResponseSetTest extends ResponseTest
     {
         $this->class->view = 'TestView';
 
-        $this->assertEquals('TestView', $this->get_reflection_property_value('view'));
+        $this->assertEquals('TestView', $this->getReflectionPropertyValue('view'));
     }
 
     /**
@@ -54,7 +54,7 @@ class ResponseSetTest extends ResponseTest
     {
         $this->class->add_response_data('key', 'value');
 
-        $value = $this->get_reflection_property_value('data');
+        $value = $this->getReflectionPropertyValue('data');
 
         $this->assertArrayHasKey('key', $value);
         $this->assertEquals('value', $value['key']);
@@ -69,7 +69,7 @@ class ResponseSetTest extends ResponseTest
     {
         $this->class->set_error_message('ID', 'Message');
 
-        $value = $this->get_reflection_property_value('errmsg');
+        $value = $this->getReflectionPropertyValue('errmsg');
 
         $this->assertArrayHasKey('ID', $value);
         $this->assertEquals('Message', $value['ID']);
@@ -84,7 +84,7 @@ class ResponseSetTest extends ResponseTest
     {
         $this->class->set_error_info('ID', 'Info');
 
-        $value = $this->get_reflection_property_value('errinfo');
+        $value = $this->getReflectionPropertyValue('errinfo');
 
         $this->assertArrayHasKey('ID', $value);
         $this->assertEquals('Info', $value['ID']);
@@ -99,7 +99,7 @@ class ResponseSetTest extends ResponseTest
     {
         $this->class->set_return_code('ID', 503);
 
-        $value = $this->get_reflection_property_value('return_code');
+        $value = $this->getReflectionPropertyValue('return_code');
 
         $this->assertArrayHasKey('ID', $value);
         $this->assertSame(503, $value['ID']);
@@ -117,7 +117,7 @@ class ResponseSetTest extends ResponseTest
     {
         $this->class->set_return_code('ID', $code);
 
-        $this->assertArrayEmpty($this->get_reflection_property_value('return_code'));
+        $this->assertArrayEmpty($this->getReflectionPropertyValue('return_code'));
     }
 
 }

@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\InternalServerErrorException
  */
-class InternalServerErrorExceptionBaseTest extends InternalServerErrorExceptionTest
+class InternalServerErrorExceptionBaseTest extends InternalServerErrorExceptionTestCase
 {
 
     /**

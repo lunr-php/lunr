@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\BadRequestException
  */
-class BadRequestExceptionBaseTest extends BadRequestExceptionTest
+class BadRequestExceptionBaseTest extends BadRequestExceptionTestCase
 {
 
     /**

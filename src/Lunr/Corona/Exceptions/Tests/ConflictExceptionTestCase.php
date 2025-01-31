@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the NotFoundExceptionTest class.
+ * This file contains the ConflictExceptionTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
@@ -10,16 +10,16 @@
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
-use Lunr\Corona\Exceptions\NotFoundException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Corona\Exceptions\ConflictException;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the NotFoundException class.
+ * and shared attributes for testing the ConflictException class.
  *
- * @covers Lunr\Corona\Exceptions\NotFoundException
+ * @covers Lunr\Corona\Exceptions\ConflictException
  */
-abstract class NotFoundExceptionTest extends LunrBaseTest
+abstract class ConflictExceptionTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -42,9 +42,9 @@ abstract class NotFoundExceptionTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var NotFoundException
+     * @var ConflictException
      */
-    protected NotFoundException $class;
+    protected ConflictException $class;
 
     /**
      * TestCase Constructor.
@@ -56,7 +56,7 @@ abstract class NotFoundExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class = new NotFoundException($this->message, $this->code, $this->previous);
+        $this->class = new ConflictException($this->message, $this->code, $this->previous);
 
         parent::baseSetUp($this->class);
     }

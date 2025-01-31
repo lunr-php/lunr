@@ -17,7 +17,7 @@ use Lunr\Halo\PropertyTraits\PsrLoggerTestTrait;
  *
  * @covers Lunr\Corona\RequestResultHandler
  */
-class RequestResultHandlerBaseTest extends RequestResultHandlerTest
+class RequestResultHandlerBaseTest extends RequestResultHandlerTestCase
 {
 
     use PsrLoggerTestTrait;

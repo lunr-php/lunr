@@ -15,7 +15,7 @@ namespace Lunr\Corona\Exceptions\Tests;
  *
  * @covers Lunr\Corona\Exceptions\ConflictException
  */
-class ConflictExceptionBaseTest extends ConflictExceptionTest
+class ConflictExceptionBaseTest extends ConflictExceptionTestCase
 {
 
     /**

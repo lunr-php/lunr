@@ -17,7 +17,7 @@ use Lunr\Corona\RequestData;
  *
  * @covers     Lunr\Corona\Request
  */
-class RequestGetDataTest extends RequestTest
+class RequestGetDataTest extends RequestTestCase
 {
 
     /**
@@ -47,7 +47,7 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetGetDataWithMockValue(): void
     {
-        $this->set_reflection_property_value('mock', [ 'get' => [ 'get_key' => 'get_mock_value' ] ]);
+        $this->setReflectionPropertyValue('mock', [ 'get' => [ 'get_key' => 'get_mock_value' ] ]);
 
         $this->assertEquals('get_mock_value', $this->class->get_data('get_key', RequestData::Get));
     }
@@ -59,7 +59,7 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetGetDataWithMockValueNoKey(): void
     {
-        $this->set_reflection_property_value('mock', [ 'get' => [ 'get_key' => 'get_mock_value', 'mock_key' => 'get_mock_value' ] ]);
+        $this->setReflectionPropertyValue('mock', [ 'get' => [ 'get_key' => 'get_mock_value', 'mock_key' => 'get_mock_value' ] ]);
 
         $expects = [
             'get_key'        => 'get_mock_value',
@@ -76,7 +76,7 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetGetDataWithInvalidMockValue(): void
     {
-        $this->set_reflection_property_value('mock', [ 'get' => [] ]);
+        $this->setReflectionPropertyValue('mock', [ 'get' => [] ]);
 
         $this->assertEquals('get_value', $this->class->get_data('get_key', RequestData::Get));
     }
@@ -108,7 +108,7 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetPostDataWithMockValue(): void
     {
-        $this->set_reflection_property_value('mock', [ 'post' => [ 'post_key' => 'post_mock_value' ] ]);
+        $this->setReflectionPropertyValue('mock', [ 'post' => [ 'post_key' => 'post_mock_value' ] ]);
 
         $this->assertEquals('post_mock_value', $this->class->get_data('post_key', RequestData::Post));
     }
@@ -120,7 +120,7 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetPostDataWithMockValueNoKey(): void
     {
-        $this->set_reflection_property_value('mock', [ 'post' => [ 'post_key' => 'post_mock_value', 'mock_key' => 'post_mock_value' ] ]);
+        $this->setReflectionPropertyValue('mock', [ 'post' => [ 'post_key' => 'post_mock_value', 'mock_key' => 'post_mock_value' ] ]);
 
         $expects = [
             'post_key'        => 'post_mock_value',
@@ -137,7 +137,7 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetPostDataWithInvalidMockValue(): void
     {
-        $this->set_reflection_property_value('mock', [ 'post' => [] ]);
+        $this->setReflectionPropertyValue('mock', [ 'post' => [] ]);
 
         $this->assertEquals('post_value', $this->class->get_data('post_key', RequestData::Post));
     }
@@ -235,7 +235,7 @@ class RequestGetDataTest extends RequestTest
      */
     public function testGetOptionDataReturnsNullForInvalidKey(): void
     {
-        $ast = $this->get_reflection_property_value('cli_args');
+        $ast = $this->getReflectionPropertyValue('cli_args');
 
         $this->assertArrayNotHasKey('foo', $ast);
         $this->assertNull($this->class->get_data('foo', RequestData::CliArgument));
@@ -352,7 +352,7 @@ class RequestGetDataTest extends RequestTest
 
         $this->assertEquals('raw', $this->class->get_data(type: RequestData::Raw));
         $this->assertEquals('raw', $this->class->get_data(type: RequestData::Raw));
-        $this->assertEquals('raw', $this->get_reflection_property_value('raw_data'));
+        $this->assertEquals('raw', $this->getReflectionPropertyValue('raw_data'));
     }
 
     /**
@@ -367,9 +367,9 @@ class RequestGetDataTest extends RequestTest
                      ->willReturnOnConsecutiveCalls('raw', 'hello');
 
         $this->assertEquals('raw', $this->class->get_data(type: RequestData::Raw));
-        $this->assertEquals('raw', $this->get_reflection_property_value('raw_data'));
+        $this->assertEquals('raw', $this->getReflectionPropertyValue('raw_data'));
         $this->assertEquals('hello', $this->class->get_data(type: RequestData::Raw));
-        $this->assertEquals('hello', $this->get_reflection_property_value('raw_data'));
+        $this->assertEquals('hello', $this->getReflectionPropertyValue('raw_data'));
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the BearerTokenCliParserTest class.
+ * This file contains the BearerTokenCliParserTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2025 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
@@ -10,14 +10,14 @@
 namespace Lunr\Corona\Parsers\BearerToken\Tests;
 
 use Lunr\Corona\Parsers\BearerToken\BearerTokenCliParser;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains test methods for the BearerTokenCliParser class.
  *
  * @covers Lunr\Corona\Parsers\BearerToken\BearerTokenCliParser
  */
-abstract class BearerTokenCliParserTest extends LunrBaseTest
+abstract class BearerTokenCliParserTestCase extends LunrBaseTestCase
 {
 
     /**

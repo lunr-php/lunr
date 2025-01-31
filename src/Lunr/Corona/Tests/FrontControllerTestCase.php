@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the FrontControllerTest class.
+ * This file contains the FrontControllerTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2013 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -11,7 +11,7 @@
 namespace Lunr\Corona\Tests;
 
 use Lunr\Corona\FrontController;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
@@ -19,7 +19,7 @@ use Lunr\Halo\LunrBaseTest;
  *
  * @covers     Lunr\Corona\FrontController
  */
-abstract class FrontControllerTest extends LunrBaseTest
+abstract class FrontControllerTestCase extends LunrBaseTestCase
 {
 
     /**

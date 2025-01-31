@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the BadGatewayExceptionTest class.
+ * This file contains the RequestedRangeNotSatisfiableExceptionTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
@@ -10,16 +10,16 @@
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
-use Lunr\Corona\Exceptions\BadGatewayException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Corona\Exceptions\RequestedRangeNotSatisfiableException;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the BadGatewayException class.
+ * and shared attributes for testing the RequestedRangeNotSatisfiableException class.
  *
- * @covers Lunr\Corona\Exceptions\BadGatewayException
+ * @covers Lunr\Corona\Exceptions\RequestedRangeNotSatisfiableException
  */
-abstract class BadGatewayExceptionTest extends LunrBaseTest
+abstract class RequestedRangeNotSatisfiableExceptionTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -42,9 +42,9 @@ abstract class BadGatewayExceptionTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var BadGatewayException
+     * @var RequestedRangeNotSatisfiableException
      */
-    protected BadGatewayException $class;
+    protected RequestedRangeNotSatisfiableException $class;
 
     /**
      * TestCase Constructor.
@@ -56,7 +56,7 @@ abstract class BadGatewayExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class = new BadGatewayException($this->message, $this->code, $this->previous);
+        $this->class = new RequestedRangeNotSatisfiableException($this->message, $this->code, $this->previous);
 
         parent::baseSetUp($this->class);
     }

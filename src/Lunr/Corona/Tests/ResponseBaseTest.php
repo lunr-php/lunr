@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\Response
  */
-class ResponseBaseTest extends ResponseTest
+class ResponseBaseTest extends ResponseTestCase
 {
 
     /**
@@ -23,7 +23,7 @@ class ResponseBaseTest extends ResponseTest
      */
     public function testDataEmptyByDefault(): void
     {
-        $this->assertArrayEmpty($this->get_reflection_property_value('data'));
+        $this->assertArrayEmpty($this->getReflectionPropertyValue('data'));
     }
 
     /**
@@ -31,7 +31,7 @@ class ResponseBaseTest extends ResponseTest
      */
     public function testErrorMessageEmptyByDefault(): void
     {
-        $this->assertArrayEmpty($this->get_reflection_property_value('errmsg'));
+        $this->assertArrayEmpty($this->getReflectionPropertyValue('errmsg'));
     }
 
     /**
@@ -39,7 +39,7 @@ class ResponseBaseTest extends ResponseTest
      */
     public function testErrorInfoEmptyByDefault(): void
     {
-        $this->assertArrayEmpty($this->get_reflection_property_value('errinfo'));
+        $this->assertArrayEmpty($this->getReflectionPropertyValue('errinfo'));
     }
 
     /**
@@ -47,7 +47,7 @@ class ResponseBaseTest extends ResponseTest
      */
     public function testReturnCodeIsEmptyByDefault(): void
     {
-        $this->assertArrayEmpty($this->get_reflection_property_value('return_code'));
+        $this->assertArrayEmpty($this->getReflectionPropertyValue('return_code'));
     }
 
     /**

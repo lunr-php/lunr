@@ -16,7 +16,7 @@ namespace Lunr\Corona\Tests;
  * @covers        Lunr\Corona\WebRequestParser
  * @backupGlobals enabled
  */
-class WebRequestParserParsePostTest extends WebRequestParserTest
+class WebRequestParserParsePostTest extends WebRequestParserTestCase
 {
 
     /**

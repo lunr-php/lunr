@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\View
  */
-class ViewBaseTest extends ViewTest
+class ViewBaseTest extends ViewTestCase
 {
 
     /**

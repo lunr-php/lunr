@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the NotImplementedExceptionTest class.
+ * This file contains the UnauthorizedExceptionTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2023 Move Agency Group B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
@@ -10,16 +10,16 @@
 namespace Lunr\Corona\Exceptions\Tests;
 
 use Exception;
-use Lunr\Corona\Exceptions\NotImplementedException;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Corona\Exceptions\UnauthorizedException;
+use Lunr\Halo\LunrBaseTestCase;
 
 /**
  * This class contains common setup routines, providers
- * and shared attributes for testing the NotImplementedException class.
+ * and shared attributes for testing the UnauthorizedException class.
  *
- * @covers Lunr\Corona\Exceptions\NotImplementedException
+ * @covers Lunr\Corona\Exceptions\UnauthorizedException
  */
-abstract class NotImplementedExceptionTest extends LunrBaseTest
+abstract class UnauthorizedExceptionTestCase extends LunrBaseTestCase
 {
 
     /**
@@ -42,9 +42,9 @@ abstract class NotImplementedExceptionTest extends LunrBaseTest
 
     /**
      * Instance of the tested class.
-     * @var NotImplementedException
+     * @var UnauthorizedException
      */
-    protected NotImplementedException $class;
+    protected UnauthorizedException $class;
 
     /**
      * TestCase Constructor.
@@ -56,7 +56,7 @@ abstract class NotImplementedExceptionTest extends LunrBaseTest
 
         $this->previous = new Exception();
 
-        $this->class = new NotImplementedException($this->message, $this->code, $this->previous);
+        $this->class = new UnauthorizedException($this->message, $this->code, $this->previous);
 
         parent::baseSetUp($this->class);
     }

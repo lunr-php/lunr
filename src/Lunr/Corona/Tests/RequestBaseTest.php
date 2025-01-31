@@ -17,7 +17,7 @@ use Lunr\Corona\RequestValueParserInterface;
  *
  * @covers     Lunr\Corona\Request
  */
-class RequestBaseTest extends RequestTest
+class RequestBaseTest extends RequestTestCase
 {
 
     /**
@@ -25,7 +25,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testPost(): void
     {
-        $this->assertEquals([ 'post_key' => 'post_value', 'post_second_key' => 'post_value' ], $this->get_reflection_property_value('post'));
+        $this->assertEquals([ 'post_key' => 'post_value', 'post_second_key' => 'post_value' ], $this->getReflectionPropertyValue('post'));
     }
 
     /**
@@ -38,7 +38,7 @@ class RequestBaseTest extends RequestTest
             'HTTP_SERVER_KEY' => 'HTTP_SERVER_VALUE',
         ];
 
-        $this->assertEquals($server, $this->get_reflection_property_value('server'));
+        $this->assertEquals($server, $this->getReflectionPropertyValue('server'));
     }
 
     /**
@@ -46,7 +46,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testGet(): void
     {
-        $this->assertEquals([ 'get_key' => 'get_value', 'get_second_key' => 'get_value' ], $this->get_reflection_property_value('get'));
+        $this->assertEquals([ 'get_key' => 'get_value', 'get_second_key' => 'get_value' ], $this->getReflectionPropertyValue('get'));
     }
 
     /**
@@ -54,7 +54,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testFiles(): void
     {
-        $this->assertEquals($this->files, $this->get_reflection_property_value('files'));
+        $this->assertEquals($this->files, $this->getReflectionPropertyValue('files'));
     }
 
     /**
@@ -62,7 +62,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testCookie(): void
     {
-        $this->assertEquals([ 'cookie_key' => 'cookie_value' ], $this->get_reflection_property_value('cookie'));
+        $this->assertEquals([ 'cookie_key' => 'cookie_value' ], $this->getReflectionPropertyValue('cookie'));
     }
 
     /**
@@ -70,7 +70,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testCliArgs(): void
     {
-        $this->assertArrayEmpty($this->get_reflection_property_value('cli_args'));
+        $this->assertArrayEmpty($this->getReflectionPropertyValue('cli_args'));
     }
 
     /**
@@ -78,7 +78,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testRawData(): void
     {
-        $this->assertSame('', $this->get_reflection_property_value('raw_data'));
+        $this->assertSame('', $this->getReflectionPropertyValue('raw_data'));
     }
 
     /**
@@ -91,7 +91,7 @@ class RequestBaseTest extends RequestTest
      */
     public function testRequestDefaultValues($key, $value): void
     {
-        $request = $this->get_reflection_property_value('request');
+        $request = $this->getReflectionPropertyValue('request');
 
         $this->assertArrayHasKey($key, $request);
         $this->assertEquals($value, $request[$key]);
@@ -113,7 +113,7 @@ class RequestBaseTest extends RequestTest
 
         $this->class->register_parser($parser);
 
-        $parsers = $this->get_reflection_property_value('parsers');
+        $parsers = $this->getReflectionPropertyValue('parsers');
 
         $this->assertCount(1, $parsers);
         $this->assertArrayHasKey('Lunr\Corona\Parser\Foo\Foo', $parsers);

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the RequestResultHandlerTest class.
+ * This file contains the RequestResultHandlerTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2018 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -13,7 +13,7 @@ namespace Lunr\Corona\Tests;
 use Lunr\Corona\Request;
 use Lunr\Corona\RequestResultHandler;
 use Lunr\Corona\Response;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
  *
  * @covers     Lunr\Corona\RequestResultHandlerTrait
  */
-abstract class RequestResultHandlerTest extends LunrBaseTest
+abstract class RequestResultHandlerTestCase extends LunrBaseTestCase
 {
 
     /**

@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\View
  */
-class ViewHelpersTest extends ViewTest
+class ViewHelpersTest extends ViewTestCase
 {
 
     /**
@@ -34,7 +34,7 @@ class ViewHelpersTest extends ViewTest
                       ->method('__get')
                       ->willReturn($baseurl);
 
-        $method = $this->get_accessible_reflection_method('base_url');
+        $method = $this->getReflectionMethod('base_url');
 
         $this->assertEquals($result, $method->invokeArgs($this->class, [ $path ]));
     }
@@ -59,7 +59,7 @@ class ViewHelpersTest extends ViewTest
                                 ->method('offsetGet')
                                 ->willReturn($statics);
 
-        $method = $this->get_accessible_reflection_method('statics');
+        $method = $this->getReflectionMethod('statics');
 
         $this->assertEquals($result, $method->invokeArgs($this->class, [ $path ]));
     }
@@ -74,7 +74,7 @@ class ViewHelpersTest extends ViewTest
      */
     public function testIsFatalErrorReturnsTrueIfErrorIsFatal($error): void
     {
-        $method = $this->get_accessible_reflection_method('is_fatal_error');
+        $method = $this->getReflectionMethod('is_fatal_error');
 
         $this->assertTrue($method->invokeArgs($this->class, [ $error ]));
     }
@@ -89,7 +89,7 @@ class ViewHelpersTest extends ViewTest
      */
     public function testIsFatalErrorReturnsFalseIfErrorIsNotFatal($error): void
     {
-        $method = $this->get_accessible_reflection_method('is_fatal_error');
+        $method = $this->getReflectionMethod('is_fatal_error');
 
         $this->assertFalse($method->invokeArgs($this->class, [ $error ]));
     }

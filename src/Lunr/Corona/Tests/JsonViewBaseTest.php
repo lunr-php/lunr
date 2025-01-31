@@ -15,7 +15,7 @@ namespace Lunr\Corona\Tests;
  *
  * @covers     Lunr\Corona\JsonView
  */
-class JsonViewBaseTest extends JsonViewTest
+class JsonViewBaseTest extends JsonViewTestCase
 {
 
     /**
@@ -51,7 +51,7 @@ class JsonViewBaseTest extends JsonViewTest
     {
         $data = [ 'key' => 'value', 'key2' => NULL ];
 
-        $method = $this->get_accessible_reflection_method('prepare_data');
+        $method = $this->getReflectionMethod('prepare_data');
 
         $this->assertSame($data, $method->invokeArgs($this->class, [ $data ]));
     }

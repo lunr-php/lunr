@@ -17,7 +17,7 @@ use RuntimeException;
  *
  * @covers     Lunr\Corona\FrontController
  */
-class FrontControllerGetTest extends FrontControllerTest
+class FrontControllerGetTest extends FrontControllerTestCase
 {
 
     /**
