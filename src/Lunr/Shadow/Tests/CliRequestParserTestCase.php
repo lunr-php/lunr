@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the CliRequestParserTest class.
+ * This file contains the CliRequestParserTestCase class.
  *
  * SPDX-FileCopyrightText: Copyright 2014 M2mobi B.V., Amsterdam, The Netherlands
  * SPDX-FileCopyrightText: Copyright 2022 Move Agency Group B.V., Zwolle, The Netherlands
@@ -11,7 +11,7 @@
 namespace Lunr\Shadow\Tests;
 
 use http\Header;
-use Lunr\Halo\LunrBaseTest;
+use Lunr\Halo\LunrBaseTestCase;
 use Lunr\Shadow\CliRequestParser;
 
 /**
@@ -20,7 +20,7 @@ use Lunr\Shadow\CliRequestParser;
  *
  * @covers Lunr\Shadow\CliRequestParser
  */
-abstract class CliRequestParserTest extends LunrBaseTest
+abstract class CliRequestParserTestCase extends LunrBaseTestCase
 {
 
     /**

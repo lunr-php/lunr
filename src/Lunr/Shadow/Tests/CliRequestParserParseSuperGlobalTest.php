@@ -16,7 +16,7 @@ namespace Lunr\Shadow\Tests;
  * @covers        Lunr\Shadow\CliRequestParser
  * @backupGlobals enabled
  */
-class CliRequestParserParseSuperGlobalTest extends CliRequestParserTest
+class CliRequestParserParseSuperGlobalTest extends CliRequestParserTestCase
 {
 
     /**
@@ -26,7 +26,7 @@ class CliRequestParserParseSuperGlobalTest extends CliRequestParserTest
      */
     public function testParseInvalidSuperGlobalValues(): void
     {
-        $method = $this->get_accessible_reflection_method('parse_super_global');
+        $method = $this->getReflectionMethod('parse_super_global');
         $result = $method->invokeArgs($this->class, [ 'var' ]);
 
         $this->assertArrayEmpty($result);
@@ -39,7 +39,7 @@ class CliRequestParserParseSuperGlobalTest extends CliRequestParserTest
      */
     public function testParseValidSuperGlobalValues(): void
     {
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         $ast['var'] = [ 'test1=value1&test2=value2' ];
@@ -49,7 +49,7 @@ class CliRequestParserParseSuperGlobalTest extends CliRequestParserTest
 
         $property->setValue($this->class, $ast);
 
-        $method = $this->get_accessible_reflection_method('parse_super_global');
+        $method = $this->getReflectionMethod('parse_super_global');
         $result = $method->invokeArgs($this->class, [ 'var' ]);
 
         $this->assertEquals($_VAR, $result);
@@ -62,7 +62,7 @@ class CliRequestParserParseSuperGlobalTest extends CliRequestParserTest
      */
     public function testSuperGlobalEmptyAfterParse(): void
     {
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         $ast['var'] = [ 'test1=value1&test2=value2' ];
@@ -72,7 +72,7 @@ class CliRequestParserParseSuperGlobalTest extends CliRequestParserTest
 
         $property->setValue($this->class, $ast);
 
-        $method = $this->get_accessible_reflection_method('parse_super_global');
+        $method = $this->getReflectionMethod('parse_super_global');
         $method->invokeArgs($this->class, [ 'var' ]);
 
         $after = $property->getValue($this->class);

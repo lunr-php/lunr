@@ -16,7 +16,7 @@ namespace Lunr\Shadow\Tests;
  * @covers        Lunr\Shadow\CliRequestParser
  * @backupGlobals enabled
  */
-class CliRequestParserParseFilesTest extends CliRequestParserTest
+class CliRequestParserParseFilesTest extends CliRequestParserTestCase
 {
 
     /**

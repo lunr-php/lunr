@@ -15,7 +15,7 @@ namespace Lunr\Shadow\Tests;
  *
  * @covers Lunr\Shadow\CliRequestParser
  */
-class CliRequestParserAcceptTest extends CliRequestParserTest
+class CliRequestParserAcceptTest extends CliRequestParserTestCase
 {
 
     /**
@@ -33,7 +33,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
 
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $old      = $property->getValue($this->class);
         $new      = $old;
 
@@ -64,7 +64,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
 
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         $ast['accept-format'] = [ 'accept_value' ];
@@ -94,7 +94,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
 
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         unset($ast['accept-format']);
@@ -127,7 +127,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
 
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         $ast['accept-language'] = [ 'accept_language_value' ];
@@ -157,7 +157,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
 
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         $ast['accept-language'] = [ 'accept_language_value' ];
@@ -187,7 +187,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
 
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         unset($ast['accept-language']);
@@ -220,7 +220,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
 
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         $ast['accept-charset'] = [ 'accept_charset_value' ];
@@ -250,7 +250,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
 
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         $ast['accept-charset'] = [ 'accept_charset_value' ];
@@ -280,7 +280,7 @@ class CliRequestParserAcceptTest extends CliRequestParserTest
         $this->assertNull($this->header->name);
         $this->assertNull($this->header->value);
 
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         unset($ast['accept-charset']);

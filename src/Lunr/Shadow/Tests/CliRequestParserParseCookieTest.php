@@ -16,7 +16,7 @@ namespace Lunr\Shadow\Tests;
  * @covers        Lunr\Shadow\CliRequestParser
  * @backupGlobals enabled
  */
-class CliRequestParserParseCookieTest extends CliRequestParserTest
+class CliRequestParserParseCookieTest extends CliRequestParserTestCase
 {
 
     /**
@@ -38,7 +38,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
      */
     public function testParseValidCookieValues(): void
     {
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         $ast['cookie'] = [ 'test1=value1&test2=value2' ];
@@ -60,7 +60,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
      */
     public function testCookieEmptyAfterParse(): void
     {
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         $ast['cookie'] = [ 'test1=value1&test2=value2' ];
@@ -86,7 +86,7 @@ class CliRequestParserParseCookieTest extends CliRequestParserTest
      */
     public function testSuperglobalCookieWithPHPSESSIDSet(): void
     {
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         $ast['cookie'] = [ 'test1=value1&test2=value2&PHPSESSID=value3' ];

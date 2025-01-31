@@ -16,7 +16,7 @@ namespace Lunr\Shadow\Tests;
  * @covers        Lunr\Shadow\CliRequestParser
  * @backupGlobals enabled
  */
-class CliRequestParserParseGetTest extends CliRequestParserTest
+class CliRequestParserParseGetTest extends CliRequestParserTestCase
 {
 
     /**
@@ -38,7 +38,7 @@ class CliRequestParserParseGetTest extends CliRequestParserTest
      */
     public function testParseValidGetValues(): void
     {
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         $ast['get'] = [ 'test1=value1&test2=value2' ];
@@ -60,7 +60,7 @@ class CliRequestParserParseGetTest extends CliRequestParserTest
      */
     public function testGetEmptyAfterParse(): void
     {
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         $ast['get'] = [ 'test1=value1&test2=value2' ];

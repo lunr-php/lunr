@@ -16,7 +16,7 @@ namespace Lunr\Shadow\Tests;
  * @covers        Lunr\Shadow\CliRequestParser
  * @backupGlobals enabled
  */
-class CliRequestParserParseCommandLineArgumentsTest extends CliRequestParserTest
+class CliRequestParserParseCommandLineArgumentsTest extends CliRequestParserTestCase
 {
 
     /**
@@ -26,7 +26,7 @@ class CliRequestParserParseCommandLineArgumentsTest extends CliRequestParserTest
      */
     public function testParsingNoCommandLineArguments(): void
     {
-        $this->set_reflection_property_value('ast', []);
+        $this->setReflectionPropertyValue('ast', []);
         $this->assertArrayEmpty($this->class->parse_command_line_arguments());
     }
 
@@ -54,7 +54,7 @@ class CliRequestParserParseCommandLineArgumentsTest extends CliRequestParserTest
             'accept-charset'  => [ 'charset' ],
         ];
 
-        $this->set_reflection_property_value('ast', $ast);
+        $this->setReflectionPropertyValue('ast', $ast);
         $this->assertArrayEmpty($this->class->parse_command_line_arguments());
     }
 
@@ -84,7 +84,7 @@ class CliRequestParserParseCommandLineArgumentsTest extends CliRequestParserTest
             'g'               => [ 'value2' ],
         ];
 
-        $this->set_reflection_property_value('ast', $ast);
+        $this->setReflectionPropertyValue('ast', $ast);
 
         $result = $this->class->parse_command_line_arguments();
 

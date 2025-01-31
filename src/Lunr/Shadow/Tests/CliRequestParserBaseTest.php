@@ -16,7 +16,7 @@ namespace Lunr\Shadow\Tests;
  * @covers        Lunr\Shadow\CliRequestParser
  * @backupGlobals enabled
  */
-class CliRequestParserBaseTest extends CliRequestParserTest
+class CliRequestParserBaseTest extends CliRequestParserTestCase
 {
 
     /**
@@ -32,7 +32,7 @@ class CliRequestParserBaseTest extends CliRequestParserTest
      */
     public function testAstIsFetchedCorrectly(): void
     {
-        $ast = $this->get_reflection_property_value('ast');
+        $ast = $this->getReflectionPropertyValue('ast');
 
         $this->assertArrayNotEmpty($ast);
         $this->assertCount(6, $ast);

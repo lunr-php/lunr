@@ -20,7 +20,7 @@ use Psr\Log\LogLevel;
  * @covers        Lunr\Shadow\CliRequestParser
  * @backupGlobals enabled
  */
-class CliRequestParserParseRequestTest extends CliRequestParserTest
+class CliRequestParserParseRequestTest extends CliRequestParserTestCase
 {
 
     use RequestParserDynamicRequestTestTrait;
@@ -44,8 +44,8 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
 
         $_SERVER['SCRIPT_FILENAME'] = '/full/path/to/index.php';
 
-        $this->mock_function('gethostname', fn() => 'Lunr');
-        $this->mock_function('uuid_create', fn() => '962161b2-7a01-41f3-84c6-3834ad001adf');
+        $this->mockFunction('gethostname', fn() => 'Lunr');
+        $this->mockFunction('uuid_create', fn() => '962161b2-7a01-41f3-84c6-3834ad001adf');
 
         if (($protocol == 'HTTPS' && $port == '443') || ($protocol == 'HTTP' && $port == '80'))
         {
@@ -58,7 +58,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
 
         if ($useragent === TRUE)
         {
-            $property = $this->get_accessible_reflection_property('ast');
+            $property = $this->getReflectionProperty('ast');
             $ast      = $property->getValue($this->class);
 
             $ast['useragent'] = [ 'UserAgent' ];
@@ -99,7 +99,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
             return;
         }
 
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         if ($controller === TRUE)
@@ -127,7 +127,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      */
     protected function prepare_request_data_with_slashes($controller = TRUE, $method = TRUE): void
     {
-        $property = $this->get_accessible_reflection_property('ast');
+        $property = $this->getReflectionProperty('ast');
         $ast      = $property->getValue($this->class);
 
         if ($controller === TRUE)
@@ -152,8 +152,8 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
      */
     private function cleanup_request_test(): void
     {
-        $this->unmock_function('gethostname');
-        $this->unmock_function('uuid_create');
+        $this->unmockFunction('gethostname');
+        $this->unmockFunction('uuid_create');
     }
 
     /**
@@ -259,7 +259,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
 
         $this->class->parse_request();
 
-        $ast = $this->get_reflection_property_value('ast');
+        $ast = $this->getReflectionPropertyValue('ast');
 
         $this->assertIsArray($ast);
         $this->assertCount(6, $ast);
@@ -284,11 +284,11 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
         $this->prepare_request_test();
         $this->prepare_request_data();
 
-        $ast = $this->get_reflection_property_value('ast');
+        $ast = $this->getReflectionPropertyValue('ast');
 
         $ast['action'] = [ 'POST' ];
 
-        $this->set_reflection_property_value('ast', $ast);
+        $this->setReflectionPropertyValue('ast', $ast);
 
         $request = $this->class->parse_request();
 
@@ -309,11 +309,11 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
         $this->prepare_request_test();
         $this->prepare_request_data();
 
-        $ast = $this->get_reflection_property_value('ast');
+        $ast = $this->getReflectionPropertyValue('ast');
 
         $ast['x'] = [ 'POST' ];
 
-        $this->set_reflection_property_value('ast', $ast);
+        $this->setReflectionPropertyValue('ast', $ast);
 
         $request = $this->class->parse_request();
 
@@ -339,7 +339,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
         $this->prepare_request_test();
         $this->prepare_request_data();
 
-        $ast = $this->get_reflection_property_value('ast');
+        $ast = $this->getReflectionPropertyValue('ast');
 
         $ast[$key] = [];
 
@@ -348,7 +348,7 @@ class CliRequestParserParseRequestTest extends CliRequestParserTest
             $ast[$key][] = FALSE;
         }
 
-        $this->set_reflection_property_value('ast', $ast);
+        $this->setReflectionPropertyValue('ast', $ast);
 
         $request = $this->class->parse_request();
 
