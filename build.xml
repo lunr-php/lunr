@@ -108,14 +108,10 @@
             description="Analyse code with PHPStan">
         <exec executable="phpstan">
             <arg value="analyse" />
-            <arg path="${basedir}/src" />
             <arg value="-c" />
             <arg value="${basedir}/tests/phpstan.neon.dist" />
-            <arg value="--level" />
-            <arg value="4" />
             <arg value="--no-progress" />
             <arg value="--no-interaction" />
-            <arg value="--xdebug" />
         </exec>
     </target>
 
@@ -123,16 +119,12 @@
             description="Analyse code with PHPStan">
         <exec executable="phpstan" output="${basedir}/build/logs/phpstan.xml">
             <arg value="analyse" />
-            <arg path="${basedir}/src" />
             <arg value="-c" />
             <arg value="${basedir}/tests/phpstan.neon.dist" />
-            <arg value="--level" />
-            <arg value="4" />
             <arg value="--error-format" />
             <arg value="checkstyle" />
             <arg value="--no-progress" />
             <arg value="--no-interaction" />
-            <arg value="--xdebug" />
         </exec>
     </target>
 

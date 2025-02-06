@@ -3,6 +3,9 @@
 # SPDX-License-Identifier: CC0-1.0
 
 parameters:
+    level: 5
+    paths:
+        - ../src
     bootstrapFiles:
         - phpstan.autoload.inc.php
     excludePaths:
