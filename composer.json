@@ -13,7 +13,7 @@
     "ext-uuid": "Needed for setting unique request IDs in Corona/Shadow"
   },
   "require-dev": {
-    "lunr/halo": "dev-master",
+    "lunr/halo": "~0.10.0",
     "phpunit/phpunit": ">=9.0 <9.6",
     "ext-xdebug": "~3.1"
   },
