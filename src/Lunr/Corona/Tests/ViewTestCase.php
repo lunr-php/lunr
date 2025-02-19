@@ -11,6 +11,7 @@
 namespace Lunr\Corona\Tests;
 
 use Lunr\Core\Configuration;
+use Lunr\Corona\Parsers\TracingInfo\TracingInfoValue;
 use Lunr\Corona\Request;
 use Lunr\Corona\Response;
 use Lunr\Corona\View;
@@ -85,9 +86,9 @@ abstract class ViewTestCase extends LunrBaseTestCase
         if (!headers_sent())
         {
             $this->request->expects($this->once())
-                ->method('__get')
-                ->with('id')
-                ->willReturn('962161b27a0141f384c63834ad001adf');
+                          ->method('get')
+                          ->with(TracingInfoValue::TraceID)
+                          ->willReturn('962161b27a0141f384c63834ad001adf');
         }
 
         $this->class = $this->getMockBuilder('Lunr\Corona\View')

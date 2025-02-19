@@ -11,6 +11,7 @@
 namespace Lunr\Corona;
 
 use Lunr\Core\Configuration;
+use Lunr\Corona\Parsers\TracingInfo\TracingInfoValue;
 use Throwable;
 
 /**
@@ -52,7 +53,7 @@ abstract class View
 
         if (!headers_sent())
         {
-            header('X-Request-ID: ' . $request->id);
+            header('X-Request-ID: ' . $request->get(TracingInfoValue::TraceID));
         }
     }
 
