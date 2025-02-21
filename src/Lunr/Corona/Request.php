@@ -11,6 +11,8 @@
 namespace Lunr\Corona;
 
 use BackedEnum;
+use Lunr\Corona\Parsers\TracingInfo\TracingInfoValue;
+use Lunr\Ticks\TracingInfoInterface;
 use RuntimeException;
 
 /**
@@ -33,7 +35,7 @@ use RuntimeException;
  * @property-read string $call             The call identifier, combining controller and method
  * @property-read string $verbosity        Logging verbosity
  */
-class Request
+class Request implements TracingInfoInterface
 {
 
     /**
@@ -160,6 +162,36 @@ class Request
         {
             return NULL;
         }
+    }
+
+    /**
+     * Get trace ID the event belongs to.
+     *
+     * @return string|null Trace ID
+     */
+    public function getTraceId(): ?string
+    {
+        return $this->get(TracingInfoValue::TraceID);
+    }
+
+    /**
+     * Get span ID the event belongs to.
+     *
+     * @return string|null Span ID
+     */
+    public function getSpanId(): ?string
+    {
+        return $this->get(TracingInfoValue::SpanID);
+    }
+
+    /**
+     * Get span ID of the parent the event belongs to.
+     *
+     * @return string|null Parent span ID
+     */
+    public function getParentSpanId(): ?string
+    {
+        return $this->get(TracingInfoValue::ParentSpanID);
     }
 
     /**
