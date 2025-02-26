@@ -75,7 +75,6 @@ class CliRequestParser implements RequestParserInterface
     {
         $request = [];
 
-        $request['sapi'] = PHP_SAPI;
         $request['host'] = gethostname();
 
         $request['application_path'] = dirname($_SERVER['SCRIPT_FILENAME']) . '/';
