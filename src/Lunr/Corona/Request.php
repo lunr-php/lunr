@@ -27,7 +27,6 @@ use RuntimeException;
  * @property-read string $base_url         All of the above combined
  * @property-read string $device_useragent The device specific user agent sent with the request
  * @property-read string $useragent        The user agent sent with the request
- * @property-read string $sapi             The PHP SAPI invoking the code
  * @property-read string $host             The hostname of the server the script is running on
  * @property-read string $controller       The controller requested
  * @property-read string $method           The method requested of that controller

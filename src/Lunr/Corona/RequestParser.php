@@ -54,7 +54,6 @@ class RequestParser implements RequestParserInterface
     {
         $request = [];
 
-        $request['sapi'] = PHP_SAPI;
         $request['host'] = gethostname();
 
         $request['application_path'] = $this->config['default_application_path'];

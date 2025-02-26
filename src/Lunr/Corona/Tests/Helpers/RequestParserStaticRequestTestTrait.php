@@ -109,22 +109,6 @@ trait RequestParserStaticRequestTestTrait
     }
 
     /**
-     * Test that the sapi is stored correctly.
-     */
-    public function testRequestSapi(): void
-    {
-        $this->prepare_request_test();
-
-        $request = $this->class->parse_request();
-
-        $this->assertIsArray($request);
-        $this->assertArrayHasKey('sapi', $request);
-        $this->assertEquals(PHP_SAPI, $request['sapi']);
-
-        $this->cleanup_request_test();
-    }
-
-    /**
      * Test that the application_path is constructed and stored correctly.
      */
     public function testApplicationPath(): void
