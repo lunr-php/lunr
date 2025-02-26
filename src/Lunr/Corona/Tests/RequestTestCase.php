@@ -116,7 +116,6 @@ abstract class RequestTestCase extends LunrBaseTestCase
             'port'             => '443',
             'base_path'        => '/path/to/',
             'base_url'         => 'https://www.domain.com/path/to/',
-            'sapi'             => 'cli',
             'controller'       => 'controller',
             'method'           => 'method',
             'params'           => [ 'param1', 'param2' ],
