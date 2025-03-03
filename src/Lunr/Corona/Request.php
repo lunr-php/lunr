@@ -95,7 +95,7 @@ class Request implements TracingInfoInterface
 
     /**
      * Set of registered request value parsers.
-     * @var array<class-string,RequestValueParserInterface>
+     * @var array<class-string,RequestValueParserInterface|RequestEnumValueParserInterface>
      */
     protected array $parsers;
 
@@ -221,6 +221,28 @@ class Request implements TracingInfoInterface
         $this->request[$key->value] = $this->parsers[$key::class]->get($key);
 
         return $this->request[$key->value];
+    }
+
+    /**
+     * Get a request value as enum.
+     *
+     * @param BackedEnum&RequestEnumValueInterface $key The identifier/name of the request value to get
+     *
+     * @return BackedEnum|null The requested value
+     */
+    public function getAsEnum(BackedEnum&RequestEnumValueInterface $key): ?BackedEnum
+    {
+        if (!isset($this->parsers[$key::class]))
+        {
+            throw new RuntimeException('No parser registered for requested value ("' . $key->value . '")!');
+        }
+
+        if (!$this->parsers[$key::class] instanceof RequestEnumValueParserInterface)
+        {
+            throw new RuntimeException($key::class . ' is not a valid parser for enum request values!');
+        }
+
+        return $this->parsers[$key::class]->getAsEnum($key);
     }
 
     /**
