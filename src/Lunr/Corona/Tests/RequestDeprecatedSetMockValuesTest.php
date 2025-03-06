@@ -29,7 +29,7 @@ class RequestDeprecatedSetMockValuesTest extends RequestTestCase
 
         $this->class->set_mock_values($mock);
 
-        $this->assertEquals($mock, $this->getReflectionPropertyValue('mock'));
+        $this->assertEquals([ $mock ], $this->getReflectionPropertyValue('mock'));
     }
 
 }

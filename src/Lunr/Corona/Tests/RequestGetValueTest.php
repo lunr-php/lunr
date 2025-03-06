@@ -56,7 +56,7 @@ class RequestGetValueTest extends RequestTestCase
         ];
 
         $this->setReflectionPropertyValue('request', $cache);
-        $this->setReflectionPropertyValue('mock', $mock);
+        $this->setReflectionPropertyValue('mock', [ $mock ]);
 
         $value = $this->class->get(MockRequestValue::Foo);
 
@@ -140,7 +140,7 @@ class RequestGetValueTest extends RequestTestCase
         ];
 
         $this->setReflectionPropertyValue('request', $cache);
-        $this->setReflectionPropertyValue('mock', $mock);
+        $this->setReflectionPropertyValue('mock', [ $mock ]);
 
         $value = $this->class->getTraceId();
 
@@ -213,7 +213,7 @@ class RequestGetValueTest extends RequestTestCase
         ];
 
         $this->setReflectionPropertyValue('request', $cache);
-        $this->setReflectionPropertyValue('mock', $mock);
+        $this->setReflectionPropertyValue('mock', [ $mock ]);
 
         $value = $this->class->getSpanId();
 
@@ -286,7 +286,7 @@ class RequestGetValueTest extends RequestTestCase
         ];
 
         $this->setReflectionPropertyValue('request', $cache);
-        $this->setReflectionPropertyValue('mock', $mock);
+        $this->setReflectionPropertyValue('mock', [ $mock ]);
 
         $value = $this->class->getParentSpanId();
 

@@ -33,7 +33,7 @@ class RequestAddMockValuesTest extends RequestTestCase
 
         $mockResult = $this->getReflectionPropertyValue('mock');
 
-        $this->assertEquals($mock, $mockResult);
+        $this->assertEquals([ $mock ], $mockResult);
     }
 
     /**
@@ -44,15 +44,19 @@ class RequestAddMockValuesTest extends RequestTestCase
     public function testAddMockValuesWithCurrentSet(): void
     {
         $currentMock = [
-            'controller' => 'old_controller',
-            'method'     => 'call',
+            [
+                'controller' => 'old_controller',
+                'method'     => 'call',
+            ],
         ];
 
         $mock = [ 'controller' => 'new_controller' ];
 
         $expectedMock = [
-            'controller' => 'new_controller',
-            'method'     => 'call',
+            [
+                'controller' => 'new_controller',
+                'method'     => 'call',
+            ],
         ];
 
         $this->setReflectionPropertyValue('mock', $currentMock);

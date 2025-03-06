@@ -29,7 +29,7 @@ class RequestSetMockValuesTest extends RequestTestCase
 
         $this->class->setMockValues($mock);
 
-        $this->assertEquals($mock, $this->getReflectionPropertyValue('mock'));
+        $this->assertEquals([ $mock ], $this->getReflectionPropertyValue('mock'));
     }
 
 }

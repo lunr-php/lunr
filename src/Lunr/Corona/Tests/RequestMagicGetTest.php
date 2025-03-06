@@ -42,7 +42,7 @@ class RequestMagicGetTest extends RequestTestCase
      */
     public function testMagicGetWithMockedValue($key): void
     {
-        $this->setReflectionPropertyValue('mock', [ $key => 'mock' ]);
+        $this->setReflectionPropertyValue('mock', [[ $key => 'mock' ]]);
 
         $this->assertEquals('mock', $this->class->$key);
     }
@@ -52,7 +52,7 @@ class RequestMagicGetTest extends RequestTestCase
      */
     public function testMagicGetWithInvalidMockValue(): void
     {
-        $this->setReflectionPropertyValue('mock', [ 'invalid' => 'mock' ]);
+        $this->setReflectionPropertyValue('mock', [[ 'invalid' => 'mock' ]]);
 
         $this->assertNull($this->class->invalid);
     }

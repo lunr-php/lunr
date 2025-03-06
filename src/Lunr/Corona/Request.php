@@ -100,7 +100,7 @@ class Request implements TracingInfoInterface
 
     /**
      * The request values to mock.
-     * @var array<string,mixed>
+     * @var list<array<string,mixed>>
      */
     private array $mock;
 
@@ -148,9 +148,9 @@ class Request implements TracingInfoInterface
     {
         if (array_key_exists($name, $this->request))
         {
-            if (array_key_exists($name, $this->mock))
+            if (!empty($this->mock) && array_key_exists($name, $this->mock[0]))
             {
-                return $this->mock[$name];
+                return $this->mock[0][$name];
             }
             else
             {
@@ -202,9 +202,9 @@ class Request implements TracingInfoInterface
      */
     public function get(BackedEnum&RequestValueInterface $key): bool|float|int|string|null
     {
-        if (array_key_exists($key->value, $this->mock))
+        if (!empty($this->mock) && array_key_exists($key->value, $this->mock[0]))
         {
-            return $this->mock[$key->value];
+            return $this->mock[0][$key->value];
         }
 
         if (array_key_exists($key->value, $this->request))
@@ -281,7 +281,7 @@ class Request implements TracingInfoInterface
      */
     public function setMockValues(array $values): void
     {
-        $this->mock = $values;
+        array_unshift($this->mock, $values);
     }
 
     /**
@@ -309,9 +309,15 @@ class Request implements TracingInfoInterface
      */
     public function addMockValues(array $values): void
     {
+        if (empty($this->mock))
+        {
+            $this->setMockValues($values);
+            return;
+        }
+
         foreach ($values as $key => $value)
         {
-            $this->mock[$key] = $value;
+            $this->mock[0][$key] = $value;
         }
     }
 
