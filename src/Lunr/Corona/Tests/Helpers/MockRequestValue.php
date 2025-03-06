@@ -9,12 +9,12 @@
 
 namespace Lunr\Corona\Tests\Helpers;
 
-use Lunr\Corona\RequestValueInterface;
+use Lunr\Corona\RequestEnumValueInterface;
 
 /**
  * Request Data Enums
  */
-enum MockRequestValue: string implements RequestValueInterface
+enum MockRequestValue: string implements RequestEnumValueInterface
 {
 
     /**
