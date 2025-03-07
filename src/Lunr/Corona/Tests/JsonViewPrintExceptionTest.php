@@ -9,6 +9,7 @@
 
 namespace Lunr\Corona\Tests;
 
+use Lunr\Corona\Parsers\Sapi\SapiValue;
 use Lunr\Corona\Tests\Helpers\MockUncaughtException;
 
 /**
@@ -36,8 +37,8 @@ class JsonViewPrintExceptionTest extends JsonViewTestCase
         $this->mockFunction('http_response_code', function () {});
 
         $this->request->expects($this->once())
-                      ->method('__get')
-                      ->with('sapi')
+                      ->method('get')
+                      ->with(SapiValue::Sapi)
                       ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_exception.json');
@@ -64,8 +65,8 @@ class JsonViewPrintExceptionTest extends JsonViewTestCase
         $this->mockFunction('http_response_code', function () {});
 
         $this->request->expects($this->once())
-                      ->method('__get')
-                      ->with('sapi')
+                      ->method('get')
+                      ->with(SapiValue::Sapi)
                       ->willReturn('web');
 
         $message  = '{"data":{},"status":{"code":500,"message":"Uncaught Exception ';

@@ -11,6 +11,7 @@
 namespace Lunr\Corona;
 
 use Lunr\Core\Configuration;
+use Lunr\Corona\Parsers\Sapi\SapiValue;
 use stdClass;
 use Throwable;
 
@@ -81,7 +82,7 @@ class JsonView extends View
         header('Content-type: application/json');
         http_response_code($code);
 
-        if ($this->request->sapi == 'cli')
+        if ($this->request->get(SapiValue::Sapi) == 'cli')
         {
             echo json_encode($json, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . "\n";
         }
@@ -116,7 +117,7 @@ class JsonView extends View
         header('Content-type: application/json');
         http_response_code(500);
 
-        if ($this->request->sapi == 'cli')
+        if ($this->request->get(SapiValue::Sapi) == 'cli')
         {
             echo json_encode($json, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_FORCE_OBJECT) . "\n";
         }
@@ -152,7 +153,7 @@ class JsonView extends View
         header('Content-type: application/json');
         http_response_code(500);
 
-        if ($this->request->sapi == 'cli')
+        if ($this->request->get(SapiValue::Sapi) == 'cli')
         {
             echo json_encode($json, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_FORCE_OBJECT) . "\n";
         }

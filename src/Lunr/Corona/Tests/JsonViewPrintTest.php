@@ -10,6 +10,7 @@
 
 namespace Lunr\Corona\Tests;
 
+use Lunr\Corona\Parsers\Sapi\SapiValue;
 use stdClass;
 
 /**
@@ -72,8 +73,8 @@ class JsonViewPrintTest extends JsonViewTestCase
                        ->willReturn($this->json);
 
         $this->request->expects($this->once())
-                      ->method('__get')
-                      ->with('sapi')
+                      ->method('get')
+                      ->with(SapiValue::Sapi)
                       ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_code.json');
@@ -120,8 +121,8 @@ class JsonViewPrintTest extends JsonViewTestCase
                        ->willReturn($this->json);
 
         $this->request->expects($this->once())
-                      ->method('__get')
-                      ->with('sapi')
+                      ->method('get')
+                      ->with(SapiValue::Sapi)
                       ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_empty_message.json');
@@ -168,8 +169,8 @@ class JsonViewPrintTest extends JsonViewTestCase
                        ->willReturn($this->json);
 
         $this->request->expects($this->once())
-                      ->method('__get')
-                      ->with('sapi')
+                      ->method('get')
+                      ->with(SapiValue::Sapi)
                       ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_complete.json');
@@ -215,8 +216,8 @@ class JsonViewPrintTest extends JsonViewTestCase
                        ->willReturn($this->json);
 
         $this->request->expects($this->once())
-                      ->method('__get')
-                      ->with('sapi')
+                      ->method('get')
+                      ->with(SapiValue::Sapi)
                       ->willReturn('web');
 
         $this->expectOutputString('{"data":{"a":100,"b":{"z":true},"c":[null],"d":{},"e":"みんな"},"status":{"code":4040,"message":"Message"}}');
@@ -263,8 +264,8 @@ class JsonViewPrintTest extends JsonViewTestCase
                        ->willReturn([]);
 
         $this->request->expects($this->once())
-                      ->method('__get')
-                      ->with('sapi')
+                      ->method('get')
+                      ->with(SapiValue::Sapi)
                       ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_empty_data.json');
@@ -314,8 +315,8 @@ class JsonViewPrintTest extends JsonViewTestCase
                        ->willReturn($this->json);
 
         $this->request->expects($this->once())
-                      ->method('__get')
-                      ->with('sapi')
+                      ->method('get')
+                      ->with(SapiValue::Sapi)
                       ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_complete.json');
