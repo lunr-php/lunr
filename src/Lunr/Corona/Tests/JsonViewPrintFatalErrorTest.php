@@ -10,6 +10,8 @@
 
 namespace Lunr\Corona\Tests;
 
+use Lunr\Corona\Parsers\Sapi\SapiValue;
+
 /**
  * This class contains tests for the JsonView class.
  *
@@ -63,8 +65,8 @@ class JsonViewPrintFatalErrorTest extends JsonViewTestCase
         $this->mockFunction('http_response_code', function () {});
 
         $this->request->expects($this->once())
-                      ->method('__get')
-                      ->with('sapi')
+                      ->method('get')
+                      ->with(SapiValue::Sapi)
                       ->willReturn('cli');
 
         $this->expectOutputMatchesFile(TEST_STATICS . '/Corona/json_error.json');
@@ -88,8 +90,8 @@ class JsonViewPrintFatalErrorTest extends JsonViewTestCase
         $this->mockFunction('http_response_code', function () {});
 
         $this->request->expects($this->once())
-                      ->method('__get')
-                      ->with('sapi')
+                      ->method('get')
+                      ->with(SapiValue::Sapi)
                       ->willReturn('web');
 
         $this->expectOutputString('{"data":{},"status":{"code":500,"message":"Message in index.php on line 2"}}');
