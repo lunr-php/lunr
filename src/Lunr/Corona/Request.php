@@ -12,6 +12,7 @@ namespace Lunr\Corona;
 
 use BackedEnum;
 use Lunr\Corona\Parsers\TracingInfo\TracingInfoValue;
+use Lunr\Ticks\TracingControllerInterface;
 use Lunr\Ticks\TracingInfoInterface;
 use RuntimeException;
 
@@ -34,7 +35,7 @@ use RuntimeException;
  * @property-read string $call             The call identifier, combining controller and method
  * @property-read string $verbosity        Logging verbosity
  */
-class Request implements TracingInfoInterface
+class Request implements TracingControllerInterface, TracingInfoInterface
 {
 
     /**
@@ -105,11 +106,18 @@ class Request implements TracingInfoInterface
     private array $mock;
 
     /**
+     * Whether to generate UUIDs as hex string or real UUIDs.
+     * @var bool
+     */
+    protected readonly bool $uuidAsHexString;
+
+    /**
      * Constructor.
      *
-     * @param RequestParserInterface $parser Shared instance of a Request Parser class
+     * @param RequestParserInterface $parser          Shared instance of a Request Parser class
+     * @param bool                   $uuidAsHexString Whether to generate UUIDs as hex string or real UUIDs
      */
-    public function __construct($parser)
+    public function __construct($parser, $uuidAsHexString = TRUE)
     {
         $this->parser  = $parser;
         $this->parsers = [];
@@ -124,6 +132,8 @@ class Request implements TracingInfoInterface
         $this->rawData = '';
 
         $this->mock = [];
+
+        $this->uuidAsHexString = $uuidAsHexString;
     }
 
     /**
@@ -254,6 +264,41 @@ class Request implements TracingInfoInterface
     public function registerParser(RequestValueParserInterface $parser): void
     {
         $this->parsers[$parser->getRequestValueType()] = $parser;
+    }
+
+    /**
+     * Start a new child span.
+     *
+     * @return void
+     */
+    public function startChildSpan(): void
+    {
+        $requestValues = [];
+
+        $requestValues[TracingInfoValue::ParentSpanID->value] = $this->get(TracingInfoValue::SpanID);
+        $requestValues[TracingInfoValue::SpanID->value]       = uuid_create();
+
+        if ($this->uuidAsHexString)
+        {
+            $requestValues[TracingInfoValue::SpanID->value] = str_replace('-', '', $requestValues[TracingInfoValue::SpanID->value]);
+        }
+
+        if (!empty($this->mock))
+        {
+            $this->setMockValues($this->mock[0]);
+        }
+
+        $this->addMockValues($requestValues);
+    }
+
+    /**
+     * Stop the current child span, returning to the scope of the parent.
+     *
+     * @return void
+     */
+    public function stopChildSpan(): void
+    {
+        array_shift($this->mock);
     }
 
     /**
