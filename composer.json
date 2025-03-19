@@ -4,9 +4,9 @@
     "rmccue/requests": "~2.0",
     "php": ">=8.1",
     "psr/cache": ">=1.0",
-    "lunr/config": "dev-master",
-    "lunr/cliparser": "dev-master",
-    "lunr/ticks": "dev-master"
+    "lunr/config": "~0.11.0",
+    "lunr/cliparser": "~0.11.0",
+    "lunr/ticks": "~0.11.0"
   },
   "suggest": {
     "ext-http": "Needed for HTTP support in Corona, needed to get hostname in Shadow when parsing data",
@@ -14,7 +14,7 @@
     "ext-uuid": "Needed for setting unique request IDs in Corona/Shadow"
   },
   "require-dev": {
-    "lunr/halo": "dev-master",
+    "lunr/halo": "~0.11.0",
     "phpunit/phpunit": ">=9.0 <9.6",
     "ext-xdebug": "~3.1"
   },

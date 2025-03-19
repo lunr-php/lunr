@@ -2,7 +2,6 @@
     "Lunr.Halo": {
         "url": "https://github.com/lunr-php/lunr.halo.git",
         "version": "0.11.0",
-        "revision": "master",
         "psr4": {
             "prefix": "Lunr\\Halo",
             "search-path": "/src/Lunr/Halo/"
@@ -12,7 +11,6 @@
     "Lunr.Config": {
         "url": "https://github.com/lunr-php/lunr.config.git",
         "version": "0.11.0",
-        "revision": "master",
         "psr4": {
             "prefix": "Lunr\\Core",
             "search-path": "/src/Lunr/Core/"
@@ -21,7 +19,6 @@
     "Lunr.CliParser": {
         "url": "https://github.com/lunr-php/lunr.cliparser.git",
         "version": "0.11.0",
-        "revision": "master",
         "psr4": {
             "prefix": "Lunr\\Shadow",
             "search-path": "/src/Lunr/Shadow/"
@@ -30,7 +27,6 @@
     "Lunr.Ticks": {
         "url": "https://github.com/lunr-php/lunr.ticks.git",
         "version": "0.11.0",
-        "revision": "master",
         "psr4": {
             "prefix": "Lunr\\Ticks",
             "search-path": "/src/Lunr/Ticks/"
