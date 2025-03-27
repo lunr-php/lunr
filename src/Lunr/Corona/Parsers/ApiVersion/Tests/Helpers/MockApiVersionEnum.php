@@ -1,13 +1,13 @@
 <?php
 
 /**
- * This file contains a mock request value enum.
+ * This file contains a mock API version enum.
  *
- * SPDX-FileCopyrightText: Copyright 2024 Move Agency Group B.V., Zwolle, The Netherlands
+ * SPDX-FileCopyrightText: Copyright 2025 Framna Netherlands B.V., Zwolle, The Netherlands
  * SPDX-License-Identifier: MIT
  */
 
-namespace Lunr\Corona\Tests\Helpers;
+namespace Lunr\Corona\Parsers\ApiVersion\Tests\Helpers;
 
 use BackedEnum;
 use Lunr\Corona\ParsedEnumValueInterface;
@@ -15,13 +15,13 @@ use Lunr\Corona\ParsedEnumValueInterface;
 /**
  * Request Data Enums
  */
-enum MockRequestValueEnum: string implements ParsedEnumValueInterface
+enum MockApiVersionEnum: int implements ParsedEnumValueInterface
 {
 
     /**
      * Mock value.
      */
-    case Bar = 'bar';
+    case MOCK_1 = 1;
 
     /**
      * Map scalar to an enum instance or NULL.

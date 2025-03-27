@@ -26,7 +26,7 @@ interface ParsedEnumValueInterface
      *
      * @return BackedEnum|null The requested value
      */
-    public function tryFromRequestValue(int|string|null $value): ?BackedEnum;
+    public static function tryFromRequestValue(int|string|null $value): ?BackedEnum;
 
 }
 
