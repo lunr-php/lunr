@@ -321,6 +321,24 @@ class RequestGetValueTest extends RequestTestCase
         $this->assertEquals($id, $value);
     }
 
+    /**
+     * Test getSpanSpecificTags().
+     *
+     * @covers Lunr\Corona\Request::getSpanSpecificTags
+     */
+    public function testGetSpanSpecificTags()
+    {
+        $expected = [
+            'controller' => 'controller',
+            'method'     => 'method',
+            'call'       => 'controller/method',
+        ];
+
+        $value = $this->class->getSpanSpecificTags();
+
+        $this->assertEquals($expected, $value);
+    }
+
 }
 
 ?>

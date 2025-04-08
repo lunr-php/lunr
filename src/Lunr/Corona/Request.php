@@ -12,6 +12,7 @@ namespace Lunr\Corona;
 
 use BackedEnum;
 use Lunr\Corona\Parsers\TracingInfo\TracingInfoValue;
+use Lunr\Ticks\EventLogging\EventInterface;
 use Lunr\Ticks\TracingControllerInterface;
 use Lunr\Ticks\TracingInfoInterface;
 use RuntimeException;
@@ -20,6 +21,8 @@ use RuntimeException;
  * Request abstraction class.
  * Manages access to $_POST, $_GET values, as well as
  * the request URL parameters
+ *
+ * @phpstan-import-type Tags from EventInterface
  *
  * @property-read string $action           The HTTP method used for the request
  * @property-read string $protocol         The protocol used for the request
@@ -201,6 +204,20 @@ class Request implements TracingControllerInterface, TracingInfoInterface
     public function getParentSpanId(): ?string
     {
         return $this->get(TracingInfoValue::ParentSpanID);
+    }
+
+    /**
+     * Get tags that are specific to the current span.
+     *
+     * @return Tags Indexed metadata about the current span
+     */
+    public function getSpanSpecificTags(): array
+    {
+        return [
+            'controller' => $this->controller,
+            'method'     => $this->method,
+            'call'       => $this->call,
+        ];
     }
 
     /**
