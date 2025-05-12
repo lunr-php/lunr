@@ -12,14 +12,8 @@ parameters:
         - ../src/*/Tests/*
     ignoreErrors:
         -
-            identifier: property.uninitializedReadonly
-        -
-            identifier: property.readOnlyAssignNotInConstructor
-        -
             message: '#Variable \$(response|result) might not be defined.#'
             paths:
                 - ../src/Lunr/Spark/Contentful/DeliveryApi.php
     universalObjectCratesClasses:
-        - Lunr\Corona\Request
-        - Lunr\Corona\FrontController
         - Lunr\Spark\Contentful\DeliveryApi

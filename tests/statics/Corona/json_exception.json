@@ -1,7 +1,0 @@
-{
-    "data": {},
-    "status": {
-        "code": 500,
-        "message": "Uncaught Exception Lunr\\Corona\\Tests\\Helpers\\MockUncaughtException: \"Message\" at index.php line 100"
-    }
-}

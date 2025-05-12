@@ -3,15 +3,7 @@
     "psr/log": ">=1.1",
     "rmccue/requests": "~2.0",
     "php": ">=8.1",
-    "psr/cache": ">=1.0",
-    "lunr/config": "dev-master",
-    "lunr/cliparser": "dev-master",
-    "lunr/ticks": "dev-master"
-  },
-  "suggest": {
-    "ext-http": "Needed for HTTP support in Corona, needed to get hostname in Shadow when parsing data",
-    "ext-msgpack": "Needed for msgpack support in Corona",
-    "ext-uuid": "Needed for setting unique request IDs in Corona/Shadow"
+    "psr/cache": ">=1.0"
   },
   "require-dev": {
     "lunr/halo": "dev-master",
