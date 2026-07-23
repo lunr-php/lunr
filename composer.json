@@ -6,7 +6,7 @@
     "psr/cache": ">=1.0"
   },
   "require-dev": {
-    "lunr/halo": "dev-master",
+    "lunr/halo": "~0.11.0",
     "phpunit/phpunit": ">=9.0 <9.6",
     "ext-xdebug": "~3.1"
   },

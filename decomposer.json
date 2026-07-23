@@ -1,8 +1,7 @@
 {
     "Lunr.Halo": {
         "url": "https://github.com/lunr-php/lunr.halo.git",
-        "version": "0.12.0",
-        "revision": "master",
+        "version": "0.11.0",
         "psr4": {
             "prefix": "Lunr\\Halo",
             "search-path": "/src/Lunr/Halo/"
