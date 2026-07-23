@@ -6,8 +6,8 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   reuse:
-    uses: lunr-php/actions-templates/.github/workflows/reuse.yml@master
+    uses: lunr-php/actions-templates/.github/workflows/reuse.yml@9386864834d8121190171c18f44927a0492af392 # 0.11.0
   typos:
-    uses: lunr-php/actions-templates/.github/workflows/typos.yml@master
+    uses: lunr-php/actions-templates/.github/workflows/typos.yml@9386864834d8121190171c18f44927a0492af392 # 0.11.0
     with:
       config: tests/typos.toml

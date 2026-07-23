@@ -7,7 +7,7 @@ on: [push, pull_request]
 
 jobs:
   php-tests:
-    uses: lunr-php/actions-templates/.github/workflows/php-composer.yml@master
+    uses: lunr-php/actions-templates/.github/workflows/php-composer.yml@9386864834d8121190171c18f44927a0492af392 # 0.11.0
     with:
       phpstan-level: 5
       allow-style-failures: false
